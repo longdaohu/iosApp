@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilePickerViewController">
+            <connections>
+                <outlet property="_noDataView" destination="rdI-IA-k9a" id="9vC-rB-v55"/>
+                <outlet property="_tableView" destination="w3g-rg-cDO" id="QUz-3H-nzw"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="w3g-rg-cDO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <animations/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="gvt-v1-pjE"/>
+                        <outlet property="delegate" destination="-1" id="d8E-zb-3d9"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdI-IA-k9a">
+                    <rect key="frame" x="30" y="201" width="260" height="168"/>
+                    <subviews>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="P8A-Ng-XAO">
+                            <rect key="frame" x="0.0" y="0.0" width="260" height="136"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duang!你的个人申请资料似乎没有完成哦~请移步电脑登陆www.myoffer.cn完善资料。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="pXg-49-vdD">
+                            <rect key="frame" x="0.0" y="136" width="260" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="260" id="G9R-HE-6Yq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="pXg-49-vdD" secondAttribute="trailing" id="3B6-ki-yK8"/>
+                        <constraint firstItem="P8A-Ng-XAO" firstAttribute="leading" secondItem="rdI-IA-k9a" secondAttribute="leading" id="79g-Ex-zeT"/>
+                        <constraint firstItem="pXg-49-vdD" firstAttribute="top" secondItem="P8A-Ng-XAO" secondAttribute="bottom" id="Bd1-uw-WWT"/>
+                        <constraint firstAttribute="trailing" secondItem="P8A-Ng-XAO" secondAttribute="trailing" id="W9f-GH-ajP"/>
+                        <constraint firstAttribute="bottom" secondItem="pXg-49-vdD" secondAttribute="bottom" id="eEP-qW-413"/>
+                        <constraint firstItem="pXg-49-vdD" firstAttribute="leading" secondItem="rdI-IA-k9a" secondAttribute="leading" id="lkQ-Su-rk6"/>
+                        <constraint firstItem="P8A-Ng-XAO" firstAttribute="top" secondItem="rdI-IA-k9a" secondAttribute="top" id="rjX-2M-XuN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="w3g-rg-cDO" secondAttribute="bottom" id="7ds-39-BpI"/>
+                <constraint firstAttribute="centerY" secondItem="rdI-IA-k9a" secondAttribute="centerY" id="8Gd-th-kOY"/>
+                <constraint firstItem="w3g-rg-cDO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="F1z-bl-NbS"/>
+                <constraint firstAttribute="centerX" secondItem="rdI-IA-k9a" secondAttribute="centerX" id="Rxz-15-Lr5"/>
+                <constraint firstAttribute="trailing" secondItem="w3g-rg-cDO" secondAttribute="trailing" id="hwO-pa-qCH"/>
+                <constraint firstItem="w3g-rg-cDO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vzm-wM-J8M"/>
+            </constraints>
+            <point key="canvasLocation" x="492" y="370"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="nodocuments" width="171" height="136"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

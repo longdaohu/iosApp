@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DiscoverViewController">
+            <connections>
+                <outlet property="_searchBar" destination="iVs-AA-TnX" id="VgN-5k-Dar"/>
+                <outlet property="_searchBarTextField" destination="eR2-F2-zsM" id="hHH-RN-tP0"/>
+                <outlet property="_searchBarTextFieldWidth" destination="3H5-iV-o1z" id="jqX-IN-nQw"/>
+                <outlet property="_searchBarWidth" destination="UqA-Wv-acl" id="WhS-24-oyN"/>
+                <outlet property="tableView" destination="iar-zp-alJ" id="QP5-gr-fX0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iar-zp-alJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Apu-p2-qUH"/>
+                        <outlet property="delegate" destination="-1" id="QHy-pL-BB3"/>
+                    </connections>
+                </tableView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVs-AA-TnX">
+                    <rect key="frame" x="40" y="40" width="231" height="45"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="你想去哪里读书？想读什么？" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-F2-zsM">
+                            <rect key="frame" x="35" y="0.0" width="160" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="3H5-iV-o1z"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjO-BF-jEY" customClass="KDEasyTouchButton">
+                            <rect key="frame" x="0.0" y="0.0" width="231" height="45"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="searchButtonPressed" destination="-1" eventType="touchUpInside" id="Ewl-MY-v3D"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4O8-WI-13E">
+                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="4O8-WI-13E" secondAttribute="height" multiplier="1:1" id="VGv-6R-Wye"/>
+                            </constraints>
+                            <state key="normal" image="discover_icon_search">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="eR2-F2-zsM" secondAttribute="bottom" id="0aQ-Xc-nhg"/>
+                        <constraint firstItem="WjO-BF-jEY" firstAttribute="top" secondItem="iVs-AA-TnX" secondAttribute="top" id="AEn-Mx-ubx"/>
+                        <constraint firstItem="4O8-WI-13E" firstAttribute="top" secondItem="iVs-AA-TnX" secondAttribute="top" id="E8l-dO-PYG"/>
+                        <constraint firstItem="4O8-WI-13E" firstAttribute="leading" secondItem="iVs-AA-TnX" secondAttribute="leading" id="KNR-pJ-iOY"/>
+                        <constraint firstAttribute="width" constant="231" id="UqA-Wv-acl"/>
+                        <constraint firstItem="eR2-F2-zsM" firstAttribute="leading" secondItem="iVs-AA-TnX" secondAttribute="leading" constant="35" id="bQ0-0s-hnM"/>
+                        <constraint firstItem="WjO-BF-jEY" firstAttribute="leading" secondItem="iVs-AA-TnX" secondAttribute="leading" id="fen-vP-OEx"/>
+                        <constraint firstAttribute="height" constant="45" id="jr0-m3-ZbK"/>
+                        <constraint firstItem="eR2-F2-zsM" firstAttribute="top" secondItem="iVs-AA-TnX" secondAttribute="top" id="m8i-Gl-Bcv"/>
+                        <constraint firstAttribute="trailing" secondItem="WjO-BF-jEY" secondAttribute="trailing" id="rjG-pW-wdB"/>
+                        <constraint firstAttribute="bottom" secondItem="4O8-WI-13E" secondAttribute="bottom" id="vtU-54-l5u"/>
+                        <constraint firstAttribute="bottom" secondItem="WjO-BF-jEY" secondAttribute="bottom" id="xkD-hK-4tI"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iar-zp-alJ" secondAttribute="trailing" id="CoI-f2-J0Q"/>
+                <constraint firstItem="iar-zp-alJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O7E-vB-clq"/>
+                <constraint firstAttribute="bottom" secondItem="iar-zp-alJ" secondAttribute="bottom" id="RwP-jI-LM2"/>
+                <constraint firstItem="iVs-AA-TnX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="hRY-gp-4bp"/>
+                <constraint firstItem="iar-zp-alJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oMw-Zm-gbq"/>
+                <constraint firstItem="iVs-AA-TnX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="pgU-DP-YZ8"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="518" y="425"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="discover_icon_search" width="25" height="25"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

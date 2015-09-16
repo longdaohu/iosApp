@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.20" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeViewController">
+            <connections>
+                <outlet property="_avatarImageView" destination="82n-Ws-a4x" id="o5i-A9-OQb"/>
+                <outlet property="_coverImageView" destination="OYO-Do-22U" id="3EC-Xl-CgQ"/>
+                <outlet property="_logoutButton" destination="vTV-r4-4wX" id="ilg-5e-bcO"/>
+                <outlet property="_usernameLabel" destination="laq-em-IiA" id="swF-4f-rM3"/>
+                <outlet property="tableView" destination="6yb-Ec-fNY" id="zTh-pG-Zd6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-Uc-b74">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OYO-Do-22U">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                            <animations/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="82n-Ws-a4x">
+                            <rect key="frame" x="118" y="78" width="84" height="84"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="84" id="LA1-3i-qAI"/>
+                                <constraint firstAttribute="width" constant="84" id="PGl-NW-sYl"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laq-em-IiA">
+                            <rect key="frame" x="120" y="180" width="79" height="20.5"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="OYO-Do-22U" firstAttribute="top" secondItem="DvV-Uc-b74" secondAttribute="top" id="19k-3f-BOv"/>
+                        <constraint firstAttribute="centerY" secondItem="82n-Ws-a4x" secondAttribute="centerY" id="FaZ-sj-EN6"/>
+                        <constraint firstAttribute="trailing" secondItem="OYO-Do-22U" secondAttribute="trailing" id="TLS-eY-c6H"/>
+                        <constraint firstAttribute="height" constant="240" id="TgU-nk-bTB"/>
+                        <constraint firstAttribute="bottom" secondItem="OYO-Do-22U" secondAttribute="bottom" id="TwC-DP-eLd"/>
+                        <constraint firstItem="OYO-Do-22U" firstAttribute="leading" secondItem="DvV-Uc-b74" secondAttribute="leading" id="YA0-bk-bCl"/>
+                        <constraint firstAttribute="centerX" secondItem="laq-em-IiA" secondAttribute="centerX" id="bbE-yx-5ah"/>
+                        <constraint firstItem="laq-em-IiA" firstAttribute="top" secondItem="82n-Ws-a4x" secondAttribute="bottom" constant="18" id="gF9-zy-Fri"/>
+                        <constraint firstAttribute="centerX" secondItem="82n-Ws-a4x" secondAttribute="centerX" id="uiT-ln-ljp"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6yb-Ec-fNY">
+                    <rect key="frame" x="0.0" y="240" width="320" height="328"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="mx3-Be-3jG">
+                        <rect key="frame" x="0.0" y="258" width="320" height="70"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTV-r4-4wX" customClass="DoneButton">
+                                <rect key="frame" x="25" y="15" width="270" height="40"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="BML-fF-dR1"/>
+                                    <constraint firstAttribute="height" constant="40" id="Kr1-xf-Gv9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="退出登录">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout" destination="-1" eventType="touchUpInside" id="lXv-Wd-885"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="vTV-r4-4wX" secondAttribute="centerY" id="DHX-HC-mF9"/>
+                            <constraint firstAttribute="centerX" secondItem="vTV-r4-4wX" secondAttribute="centerX" id="NfT-VK-wxz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="FEb-Mf-iGk"/>
+                        <outlet property="delegate" destination="-1" id="eGt-s9-Fcl"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6yb-Ec-fNY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6ib-zO-egh"/>
+                <constraint firstAttribute="trailing" secondItem="6yb-Ec-fNY" secondAttribute="trailing" id="CgS-7N-S0q"/>
+                <constraint firstItem="6yb-Ec-fNY" firstAttribute="top" secondItem="DvV-Uc-b74" secondAttribute="bottom" id="ME2-02-yhn"/>
+                <constraint firstItem="DvV-Uc-b74" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="NRp-Ii-ElJ"/>
+                <constraint firstAttribute="trailing" secondItem="DvV-Uc-b74" secondAttribute="trailing" id="Ovf-fC-YYb"/>
+                <constraint firstAttribute="bottom" secondItem="6yb-Ec-fNY" secondAttribute="bottom" id="jXR-bv-3Rf"/>
+                <constraint firstItem="DvV-Uc-b74" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mag-ms-M89"/>
+            </constraints>
+            <point key="canvasLocation" x="518" y="377"/>
+        </view>
+    </objects>
+</document>
