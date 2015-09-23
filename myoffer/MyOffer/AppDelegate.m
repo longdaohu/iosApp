@@ -17,9 +17,12 @@
 #import "LoginAndRegisterViewController.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
+#import "NewVersionView.h"
 
-@interface AppDelegate () {
+@interface AppDelegate ()
+{
     NSString *_accessToken;
+    NewVersionView *_notiView;
 }
 
 @end
@@ -42,6 +45,7 @@ static AppDelegate *__sharedDelegate;
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
+    [self compareVersionWithAPPStoreVersion];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -74,6 +78,7 @@ static AppDelegate *__sharedDelegate;
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
+
         IntroViewController *vc = [[IntroViewController alloc] init];
         [tabBarController presentViewController:vc animated:NO completion:nil];
         
@@ -82,6 +87,9 @@ static AppDelegate *__sharedDelegate;
     
     return YES;
 }
+
+
+
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
     LoginAndRegisterViewController *vc = [[LoginAndRegisterViewController alloc] init];
@@ -134,6 +142,56 @@ static AppDelegate *__sharedDelegate;
     if (KDUtilIsStringValid(savedToken)) {
         _accessToken = savedToken;
     }
+}
+
+
+//该方法用于当前用户使用版本与APPstore上的版本对比，当前版本小于APPstore的版本时强制更新
+-(void)compareVersionWithAPPStoreVersion
+{
+
+    // 1. APPSTROE上应用对应的URL
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"];
+    
+    // 2. 由session发起任务
+    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        // 反序列化
+        id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+        
+        NSArray *infoArray = [result objectForKey:@"results"];
+        NSDictionary *infoDic = infoArray.firstObject;
+        NSString *appStoreVersion = [infoDic objectForKey:@"version"];
+        NSString *appStoreNum =  [appStoreVersion  stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+        
+        // 在主线程显示相应效果
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSDictionary *infoPlistDic  =[[NSBundle mainBundle] infoDictionary];
+            NSString *currentVersion = [infoPlistDic objectForKey:@"CFBundleShortVersionString"];
+            NSString *currentNum  = [currentVersion  stringByReplacingOccurrencesOfString:@"." withString:@""];
+
+            
+            if ([currentNum integerValue] - [appStoreNum integerValue] < 0)
+            {
+        
+                NewVersionView *notiView = [[NSBundle mainBundle] loadNibNamed:@"NewVersionView" owner:nil options:nil].lastObject;
+                notiView.frame = CGRectMake(0.5*(APPSIZE.width - 250), 200, 250, 150);
+                notiView.layer.cornerRadius = 10;
+                notiView.clipsToBounds = YES;
+
+                UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
+                backView.backgroundColor =[UIColor blackColor];
+                backView.alpha = 0.3;
+
+                [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:backView];
+                [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:notiView];
+            }
+
+        });
+        
+    }] resume];
+
 }
 
 @end

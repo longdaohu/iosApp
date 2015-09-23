@@ -4,7 +4,7 @@
 //
 //  Created by Blankwonder on 6/10/15.
 //  Copyright (c) 2015 UVIC. All rights reserved.
-//
+//  查询结果页面   搜索结果页面
 
 #import "SearchResultViewController.h"
 #import "SearchResultCell.h"
@@ -18,16 +18,20 @@
     
     NSInteger _allResultCount;
     UIView *_loadMoreIndicatorView;
-    BOOL _shouldShowLoadMoreIndicator;
+    UIView *_loadingBackView; //在加载数据时的遮罩
+     BOOL _shouldShowLoadMoreIndicator;
     int _nextPage;
     BOOL _loading;
 }
+
 
 @end
 
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 @implementation SearchResultViewController
+
+
 
 - (instancetype)initWithSearchText:(NSString *)text orderBy:(NSString *)orderBy {
     return [self initWithSearchText:text key:@"text" orderBy:orderBy];
@@ -40,7 +44,7 @@
         _fieldKey = key;
         _orderBy = orderBy;
         self.title = text;
-        
+ 
         self.hidesBottomBarWhenPushed = YES;
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -70,6 +74,8 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
         
+
+        
         _result = [NSMutableArray array];
         _resultIDSet = [NSMutableSet set];
     }
@@ -80,6 +86,7 @@
     [super viewDidLoad];
     
     {
+        
         UIView *loadMoreIndicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
         UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [indicatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -142,7 +149,13 @@
     _orderBy = _availableOrderKey[index];
     _descending = descending;
     
+    //在加载时，给filterView工具栏添加上一层遮罩，在加载结束时移除
+    _loadingBackView  =[[UIView alloc] initWithFrame:filterView.bounds];
+    _loadingBackView.backgroundColor =[UIColor clearColor];
+    [self.view addSubview:_loadingBackView];
+    
     [self reloadDataWithPageIndex:0 refresh:true];
+    
 }
 
 - (void)reloadDataWithPageIndex:(int)page refresh:(BOOL)refresh {
@@ -172,8 +185,10 @@
          _nextPage = page + 1;
          
          if(refresh) {
+            // NSLog(@"_result_result_result%ld",_result.count);
              [_resultIDSet removeAllObjects];
              [_result removeAllObjects];
+             
          }
          
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -182,6 +197,7 @@
              if (![_resultIDSet containsObject:uid]) {
                  [_resultIDSet addObject:uid];
                  [_result addObject:obj];
+               //  NSLog(@"new_resultnew_resultnew_result====%ld",_result.count);
              }
          }];
          
@@ -193,6 +209,10 @@
          }
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
+       
+         //在加载结束时移除 _loadingBackView
+         [_loadingBackView removeFromSuperview];
+         _loadingBackView = nil;
          
          [_tableView reloadData];
          _loading = NO;
@@ -202,11 +222,16 @@
      }];
 }
 
+
 - (void)setShouldShowLoadMoreIndicator:(BOOL)shouldShowLoadMoreIndicator {
     _shouldShowLoadMoreIndicator = shouldShowLoadMoreIndicator;
+  //  NSLog(@" shouldShowLoadMoreIndicator  %d",shouldShowLoadMoreIndicator);
+    
     if (shouldShowLoadMoreIndicator) {
         [_tableView setTableFooterView:_loadMoreIndicatorView];
+        
     } else {
+        
         [_tableView setTableFooterView:nil];
     }
 }

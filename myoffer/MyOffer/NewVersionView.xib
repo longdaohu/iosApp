@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Z21-1I-Afi" customClass="NewVersionView">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gba-YO-ugU" userLabel="温馨提示">
+                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="hf1-67-QiD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲！myOffer版本已更新，请升级后再用吧!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewd-0Z-iXs">
+                    <rect key="frame" x="10" y="40" width="230" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="bwx-VI-Hpc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jR-sx-XeD">
+                    <rect key="frame" x="0.0" y="100" width="250" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="CYU-ey-cT4"/>
+                    </constraints>
+                    <state key="normal" title="好">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onclick:" destination="Z21-1I-Afi" eventType="touchUpInside" id="KeQ-Hd-7i6"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2UC-Ua-hyJ" userLabel="lineView">
+                    <rect key="frame" x="0.0" y="100" width="250" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="0jR-sx-XeD" firstAttribute="leading" secondItem="Z21-1I-Afi" secondAttribute="leading" id="4gh-tL-6GF"/>
+                <constraint firstAttribute="trailing" secondItem="0jR-sx-XeD" secondAttribute="trailing" id="5BC-F3-BO0"/>
+                <constraint firstAttribute="bottom" secondItem="0jR-sx-XeD" secondAttribute="bottom" id="EKP-1i-HGi"/>
+                <constraint firstItem="Gba-YO-ugU" firstAttribute="top" secondItem="Z21-1I-Afi" secondAttribute="top" id="QnR-mr-Q2a"/>
+                <constraint firstItem="ewd-0Z-iXs" firstAttribute="leading" secondItem="Z21-1I-Afi" secondAttribute="leading" constant="10" id="Yrk-k0-ydW"/>
+                <constraint firstAttribute="trailing" secondItem="ewd-0Z-iXs" secondAttribute="trailing" constant="10" id="aTP-To-jmF"/>
+                <constraint firstItem="Gba-YO-ugU" firstAttribute="leading" secondItem="Z21-1I-Afi" secondAttribute="leading" id="fkR-Wb-uKK"/>
+                <constraint firstItem="ewd-0Z-iXs" firstAttribute="top" secondItem="Z21-1I-Afi" secondAttribute="top" constant="40" id="krR-hM-QS1"/>
+                <constraint firstAttribute="trailing" secondItem="Gba-YO-ugU" secondAttribute="trailing" id="stn-nb-HTQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="499" y="335"/>
+        </view>
+    </objects>
+</document>

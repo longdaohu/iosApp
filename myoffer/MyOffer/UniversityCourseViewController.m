@@ -4,18 +4,22 @@
 //
 //  Created by Blankwonder on 6/17/15.
 //
-//
+//  课程列表页面
 
 #import "UniversityCourseViewController.h"
 #import "UniversityCourseCell.h"
 
 @interface UniversityCourseViewController () {
-    NSArray *_result;
+   // NSArray *_result;
+    
+    NSMutableArray *_result;
     NSArray *_subjectOptions, *_levelOptions, *_levelKeyOptions;
     
     NSMutableSet *_selectedIDs, *_newSelectedIDs;
     
     NSMutableDictionary *_resquestParameters;
+    int _nextPage;
+    BOOL _endPage;
 }
 
 @end
@@ -57,8 +61,10 @@
          [subjectOptions insertObject:@"全部" atIndex:0];
          
          _subjectOptions = subjectOptions;
-         _levelOptions = @[@"全部", @"本科", @"研究生"];
-         _levelKeyOptions = @[@"All", @"Undergraduate", @"Graduate"];
+          _levelOptions = @[@"全部", @"本科", @"硕士"];
+       // _levelKeyOptions = @[@"All", @"Undergraduate", @"Graduate"];
+        _levelKeyOptions = @[@"All", @"本科", @"硕士"];
+        
          _filterView.items = @[@"专业方向", @"学位类型"];
      }];
     
@@ -66,6 +72,8 @@
 }
 
 - (void)reloadData {
+    
+    
     [self
      startAPIRequestWithSelector:@"GET api/university/:id/courses"
      parameters:_resquestParameters
@@ -77,8 +85,22 @@
                 [_selectedIDs addObject:info[@"_id"]];
             }
         }
-        
-        _result = response[@"courses"];
+         
+         
+      //  _result = response[@"courses"];
+          _result = [response[@"courses"] mutableCopy];
+         
+         if (_result.count<40) {
+             _endPage = YES;
+         }
+         else
+         {
+             _endPage = NO;
+         }
+         
+    //     NSLog(@"reloadData   _result= %ld ------",_result.count);
+
+
         [_tableView reloadData];
     }];
 }
@@ -100,8 +122,64 @@
     
     [self configureCellSelectionView:cell id:info[@"_id"]];
     
+    
+    if (indexPath.row == _result.count-1 && !_endPage) {
+      
+        
+        _nextPage = ++_nextPage;
+        
+        [_resquestParameters setValue:@(_nextPage) forKey:@"page"];
+        
+        [self loadMoreData];
+     }
+    
+    
     return cell;
 }
+
+-(void)loadMoreData
+{
+    //_resquestParameters = [@{@":id": _universityID, @"page": @(_nextPage), @"size": @40} mutableCopy];
+    
+    [self
+     startAPIRequestWithSelector:@"GET api/university/:id/courses"
+     parameters:_resquestParameters
+     success:^(NSInteger statusCode, id response) {
+         for (NSDictionary *info in response[@"courses"]) {
+             BOOL applied = [info[@"applied"] boolValue];
+             
+             if (applied)  {
+                 [_selectedIDs addObject:info[@"_id"]];
+             }
+         }
+         NSArray  *moreResultArray = response[@"courses"];
+         
+  
+             for (NSDictionary *test in moreResultArray) {
+                 [_result addObject:test];
+
+                 
+             }
+         if (moreResultArray.count >= 40) {
+             
+             _endPage = NO;
+         }
+      
+         if (moreResultArray.count < 40) {
+            
+             _endPage = YES;
+         }
+         
+         
+      //   NSLog(@"testetwetwetewtewerw = %ld ---- more = %ld",_result.count,moreResultArray.count);
+
+         [_tableView reloadData];
+     }];
+
+    
+
+}
+
 
 - (void)configureCellSelectionView:(UniversityCourseCell *)cell id:(NSString *)id {
     if ([_selectedIDs containsObject:id]) {
@@ -126,7 +204,6 @@
     if ([_selectedIDs containsObject:id]) {
         return;
     }
-    
     if ([_newSelectedIDs containsObject:id]) {
         [_newSelectedIDs removeObject:id];
     } else {
@@ -161,18 +238,34 @@
 }
 
 - (NSArray *)filterView:(FilterView *)filterView subtypesForItemAtIndex:(NSInteger)index {
+    
+    
+   
     return index == 0 ? _subjectOptions : _levelOptions;
+    
+    
+    
 }
 
 - (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index subtypeIndex:(NSInteger)subtypeIndex {
+   
+    
     NSString *key = index == 0 ? @"area" : @"level";
+    
+    [_resquestParameters setValue:@0 forKey:@"page"];
+    _nextPage = 0;
+    
     if (subtypeIndex != 0) {
         _resquestParameters[key] = index == 0 ? _subjectOptions[subtypeIndex] : _levelKeyOptions[subtypeIndex];
     } else {
         [_resquestParameters removeObjectForKey:key];
     }
+    
+    [_result removeAllObjects];
+    
     [self reloadData];
 }
+
 
 
 @end

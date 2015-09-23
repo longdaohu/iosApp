@@ -95,6 +95,9 @@
 		46F659D71B23FC9900D50E1B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F659D51B23FC9900D50E1B /* MeViewController.m */; };
 		46F659D81B23FC9900D50E1B /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F659D61B23FC9900D50E1B /* MeViewController.xib */; };
 		46FA14771B2B3F0C0036D29C /* ActionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FA14761B2B3F0C0036D29C /* ActionTableViewController.m */; };
+		AEC5C79E1BAAA259009CC7CE /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */; };
+		AEDEAF931BAFCDA500B81DCA /* NewVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDEAF921BAFCDA500B81DCA /* NewVersionView.m */; };
+		AEDEAF951BAFCE2800B81DCA /* NewVersionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEDEAF941BAFCE2800B81DCA /* NewVersionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,6 +252,10 @@
 		46F659D61B23FC9900D50E1B /* MeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		46FA14751B2B3F0C0036D29C /* ActionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTableViewController.h; sourceTree = "<group>"; };
 		46FA14761B2B3F0C0036D29C /* ActionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTableViewController.m; sourceTree = "<group>"; };
+		AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		AEDEAF911BAFCDA500B81DCA /* NewVersionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewVersionView.h; sourceTree = "<group>"; };
+		AEDEAF921BAFCDA500B81DCA /* NewVersionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewVersionView.m; sourceTree = "<group>"; };
+		AEDEAF941BAFCE2800B81DCA /* NewVersionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewVersionView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +325,7 @@
 		463E3A4B1B230EDC00E0BAF8 /* MyOffer */ = {
 			isa = PBXGroup;
 			children = (
+				AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */,
 				46038F221B2E7A0F0064678D /* NSString+MD5.h */,
 				46038F231B2E7A0F0064678D /* NSString+MD5.m */,
 				46B8E8761B2C664C00A11170 /* login_background.jpg */,
@@ -533,6 +541,9 @@
 				46645D1C1B2AF14D005B5B12 /* LogoView.m */,
 				464ED9C01B4135590063C1CA /* DoneButton.h */,
 				464ED9C11B4135590063C1CA /* DoneButton.m */,
+				AEDEAF911BAFCDA500B81DCA /* NewVersionView.h */,
+				AEDEAF921BAFCDA500B81DCA /* NewVersionView.m */,
+				AEDEAF941BAFCE2800B81DCA /* NewVersionView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -630,6 +641,7 @@
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				46B8E8731B2C65B800A11170 /* LoginAndRegisterViewController.xib in Resources */,
 				4638E3CB1B393A9A00439E33 /* FilePickerViewController.xib in Resources */,
+				AEDEAF951BAFCE2800B81DCA /* NewVersionView.xib in Resources */,
 				46206AFA1B314DFC00B6E492 /* UniversityCourseCell.xib in Resources */,
 				46F659C91B23FC2000D50E1B /* DiscoverViewController.xib in Resources */,
 				4672B5CC1B3567EF005CC394 /* ApplyViewController.xib in Resources */,
@@ -678,6 +690,7 @@
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				46304BA81B273F6D00766335 /* UINavigationController+NavigationHelper.m in Sources */,
 				46038F241B2E7A0F0064678D /* NSString+MD5.m in Sources */,
+				AEDEAF931BAFCDA500B81DCA /* NewVersionView.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
 				4655B2281B281577001024F2 /* SearchRecommandCell.m in Sources */,
 				46F659CD1B23FC5800D50E1B /* CategoryViewController.m in Sources */,
@@ -693,6 +706,7 @@
 				4655B22D1B281E13001024F2 /* SearchResultViewController.m in Sources */,
 				46DD1EE51B30482700E3BFEA /* ProfileViewController.m in Sources */,
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
+				AEC5C79E1BAAA259009CC7CE /* Foundation+Log.m in Sources */,
 				469C8FD21B25B577000A6E85 /* BaseViewController.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
 				464ED9C21B4135590063C1CA /* DoneButton.m in Sources */,
