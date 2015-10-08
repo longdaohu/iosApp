@@ -12,8 +12,10 @@
 #import "FXBlurView.h"
 #import "FavoriteViewController.h"
 #import "ApplyViewController.h"
-#import "AboutViewController.h"
-#import "FeedbackViewController.h"
+#import "SetViewController.h"
+#import "ApplySubmitViewController.h"
+#import "MyOfferViewController.h"
+#import "ApplyMatialViewController.h"
 
 @interface MeViewController () <UIImagePickerControllerDelegate> {
 }
@@ -24,7 +26,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    //设置按钮
+    //    UIButton *setButton =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    //    [setButton setTitle:@"设置" forState:UIControlStateNormal];
+    //    [setButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    //    [setButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting_39"] style:UIBarButtonItemStylePlain target:self action:@selector(settingButtonPressed:)];
+    
+    
+    
     _avatarImageView.layer.cornerRadius = _avatarImageView.bounds.size.width / 2.0f;
     _avatarImageView.layer.masksToBounds = YES;
     _avatarImageView.layer.borderWidth = 2;
@@ -61,7 +73,7 @@
         }];
         [as showInView:[weakSelf view]];
     }];
-
+    
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.textLabel.text = text;
@@ -71,40 +83,38 @@
         return cell;
     };
     
-    self.cells = @[@[newCell(@"个人信息", [UIImage imageNamed:@"me_profile"],
-                             ^{
-                                 RequireLogin
-                                 ProfileViewController *vc = [[ProfileViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             }),
-                     newCell(@"我的关注院校", [UIImage imageNamed:@"me_like"],
-                             ^{
-                                 RequireLogin
-                                 FavoriteViewController *vc = [[FavoriteViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             }),
-                     newCell(@"我的申请意向", [UIImage imageNamed:@"me_list"],
-                             ^{
-                                 RequireLogin
-                                 
-                                 ApplyViewController *vc = [[ApplyViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             }),
-                     newCell(@"用户反馈", [UIImage imageNamed:@"me_feedback"],
-                             ^{
-                                 FeedbackViewController *vc = [[FeedbackViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             }),
-                     newCell(@"关于", [UIImage imageNamed:@"me_about"],
-                             ^{
-                                 AboutViewController *vc = [[AboutViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             })]];
+    self.cells = @[@[ newCell(@"我的申请意向", [UIImage imageNamed:@"list_39"],
+                              ^{
+                                  RequireLogin
+                                  
+                                  ApplyViewController *vc = [[ApplyViewController alloc] init];
+                                  [self.navigationController pushViewController:vc animated:YES];
+                              }),
+                      newCell(@"申请状态", [UIImage imageNamed:@"status_39"],
+                              ^{
+                                  RequireLogin
+                                  ApplySubmitViewController *vc = [[ApplySubmitViewController alloc] initWithNibName:@"ApplySubmitViewController" bundle:nil];
+                                  vc.hidesBottomBarWhenPushed = YES;
+                                  [self.navigationController pushViewController:vc animated:YES];
+                              }),
+                      newCell(@"申请材料", [UIImage imageNamed:@"materials_39"],
+                              ^{
+                                  RequireLogin
+                                  ApplyMatialViewController *vc = [[ApplyMatialViewController alloc] initWithNibName:@"ApplyMatialViewController" bundle:nil];
+                                  vc.hidesBottomBarWhenPushed = YES;
+                                  [self.navigationController pushViewController:vc animated:YES];
+                              }),
+                      newCell(@"已完成申请", [UIImage imageNamed:@"myoffer_39"],
+                              ^{
+                                  RequireLogin
+                                  MyOfferViewController *vc = [[MyOfferViewController alloc] initWithNibName:@"MyOfferViewController" bundle:nil];
+                                  vc.hidesBottomBarWhenPushed = YES;
+                                  [self.navigationController pushViewController:vc animated:YES];
+                              })] ];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
     
     [self reconfigure];
 }
@@ -140,7 +150,7 @@
     image = [image KD_imageByCroppedToSquare:600];
     
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-        
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/m/api/account/portrait"]];
     [request setHTTPMethod:@"POST"];
     
@@ -176,5 +186,12 @@
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
 }
 
+
+-(void)settingButtonPressed:(UIButton *)sender
+{
+    SetViewController *setVC =[[SetViewController alloc] initWithNibName:@"SetViewController" bundle:nil];
+    setVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:setVC animated:YES];
+}
 
 @end

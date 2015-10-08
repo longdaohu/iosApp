@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  MyOffer
+
+  Created by xuewuguojie on 15/10/8.
+  Copyright © 2015年 UVIC. All rights reserved.
+*/
+"buttonInfo" ="切换语言";
+"DiscoverTitle" = "发现";
+"CategoryTitle" = "分类";
+"EvaluateTitle" = "评估";
+"MeViewControllerTitle" = "我";

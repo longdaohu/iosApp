@@ -66,8 +66,6 @@
 		46645D1D1B2AF14D005B5B12 /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46645D1C1B2AF14D005B5B12 /* LogoView.m */; };
 		466CA9A31B3A570800CF5EF0 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 466CA9A11B3A570800CF5EF0 /* FeedbackViewController.m */; };
 		466CA9A41B3A570800CF5EF0 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 466CA9A21B3A570800CF5EF0 /* FeedbackViewController.xib */; };
-		4672B5CB1B3567EF005CC394 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4672B5C91B3567EF005CC394 /* ApplyViewController.m */; };
-		4672B5CC1B3567EF005CC394 /* ApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4672B5CA1B3567EF005CC394 /* ApplyViewController.xib */; };
 		4689D9751B25348D0024FB1A /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4689D9731B25348D0024FB1A /* DiscoveryCell.m */; };
 		4689D9761B25348D0024FB1A /* DiscoveryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4689D9741B25348D0024FB1A /* DiscoveryCell.xib */; };
 		468DBFBF1B2EA106004AC562 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 468DBFBE1B2EA106004AC562 /* IntroViewController.m */; };
@@ -93,6 +91,16 @@
 		46F659D71B23FC9900D50E1B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F659D51B23FC9900D50E1B /* MeViewController.m */; };
 		46F659D81B23FC9900D50E1B /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F659D61B23FC9900D50E1B /* MeViewController.xib */; };
 		46FA14771B2B3F0C0036D29C /* ActionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FA14761B2B3F0C0036D29C /* ActionTableViewController.m */; };
+		AE91DDB91BC6992D00FB32C6 /* ChangeLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91DDB71BC6992D00FB32C6 /* ChangeLanguageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AE91DDBA1BC6992D00FB32C6 /* ChangeLanguageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE91DDB81BC6992D00FB32C6 /* ChangeLanguageViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC11BC6994000FB32C6 /* MyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91DDBC1BC6994000FB32C6 /* MyOfferViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC21BC6994000FB32C6 /* MyOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE91DDBD1BC6994000FB32C6 /* MyOfferViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC31BC6994000FB32C6 /* ApplyMatialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91DDBF1BC6994000FB32C6 /* ApplyMatialViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC41BC6994000FB32C6 /* ApplyMatialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE91DDC01BC6994000FB32C6 /* ApplyMatialViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC81BC699C100FB32C6 /* ApplySubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE91DDC61BC699C100FB32C6 /* ApplySubmitViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AE91DDC91BC699C100FB32C6 /* ApplySubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE91DDC71BC699C100FB32C6 /* ApplySubmitViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		AEA488611BC67317008EB14E /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4885F1BC67317008EB14E /* ApplyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AEA488621BC67317008EB14E /* ApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA488601BC67317008EB14E /* ApplyViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		AEC5C79E1BAAA259009CC7CE /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */; };
 		AEDEAF931BAFCDA500B81DCA /* NewVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDEAF921BAFCDA500B81DCA /* NewVersionView.m */; };
 		AEDEAF951BAFCE2800B81DCA /* NewVersionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEDEAF941BAFCE2800B81DCA /* NewVersionView.xib */; };
@@ -102,8 +110,9 @@
 		AEF1BAE41BC6110E008860F6 /* UniversityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF1BAE21BC6110E008860F6 /* UniversityDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AEF1BAE51BC6110E008860F6 /* UniversityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BAE31BC6110E008860F6 /* UniversityDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BAEA1BC61A77008860F6 /* InfoPlist.strings */; };
-		AEF1BAED1BC61A98008860F6 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BAEF1BC61A98008860F6 /* Localization.strings */; };
 		AEF1BB4A1BC622D7008860F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BB4C1BC622D7008860F6 /* Localizable.strings */; };
+		AEF1BB5A1BC661B8008860F6 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF1BB581BC661B8008860F6 /* SetViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AEF1BB5B1BC661B8008860F6 /* SetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BB591BC661B8008860F6 /* SetViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,9 +222,6 @@
 		466CA9A01B3A570800CF5EF0 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		466CA9A11B3A570800CF5EF0 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		466CA9A21B3A570800CF5EF0 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
-		4672B5C81B3567EF005CC394 /* ApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyViewController.h; sourceTree = "<group>"; };
-		4672B5C91B3567EF005CC394 /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
-		4672B5CA1B3567EF005CC394 /* ApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyViewController.xib; sourceTree = "<group>"; };
 		4689D9721B25348D0024FB1A /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
 		4689D9731B25348D0024FB1A /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		4689D9741B25348D0024FB1A /* DiscoveryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryCell.xib; sourceTree = "<group>"; };
@@ -255,6 +261,21 @@
 		46F659D61B23FC9900D50E1B /* MeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		46FA14751B2B3F0C0036D29C /* ActionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTableViewController.h; sourceTree = "<group>"; };
 		46FA14761B2B3F0C0036D29C /* ActionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTableViewController.m; sourceTree = "<group>"; };
+		AE91DDB61BC6992D00FB32C6 /* ChangeLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLanguageViewController.h; sourceTree = "<group>"; };
+		AE91DDB71BC6992D00FB32C6 /* ChangeLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLanguageViewController.m; sourceTree = "<group>"; };
+		AE91DDB81BC6992D00FB32C6 /* ChangeLanguageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeLanguageViewController.xib; sourceTree = "<group>"; };
+		AE91DDBB1BC6994000FB32C6 /* MyOfferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferViewController.h; sourceTree = "<group>"; };
+		AE91DDBC1BC6994000FB32C6 /* MyOfferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferViewController.m; sourceTree = "<group>"; };
+		AE91DDBD1BC6994000FB32C6 /* MyOfferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOfferViewController.xib; sourceTree = "<group>"; };
+		AE91DDBE1BC6994000FB32C6 /* ApplyMatialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMatialViewController.h; sourceTree = "<group>"; };
+		AE91DDBF1BC6994000FB32C6 /* ApplyMatialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMatialViewController.m; sourceTree = "<group>"; };
+		AE91DDC01BC6994000FB32C6 /* ApplyMatialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyMatialViewController.xib; sourceTree = "<group>"; };
+		AE91DDC51BC699C100FB32C6 /* ApplySubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySubmitViewController.h; sourceTree = "<group>"; };
+		AE91DDC61BC699C100FB32C6 /* ApplySubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySubmitViewController.m; sourceTree = "<group>"; };
+		AE91DDC71BC699C100FB32C6 /* ApplySubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplySubmitViewController.xib; sourceTree = "<group>"; };
+		AEA4885E1BC67317008EB14E /* ApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyViewController.h; sourceTree = "<group>"; };
+		AEA4885F1BC67317008EB14E /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
+		AEA488601BC67317008EB14E /* ApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyViewController.xib; sourceTree = "<group>"; };
 		AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
 		AEDEAF911BAFCDA500B81DCA /* NewVersionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewVersionView.h; sourceTree = "<group>"; };
 		AEDEAF921BAFCDA500B81DCA /* NewVersionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewVersionView.m; sourceTree = "<group>"; };
@@ -267,11 +288,12 @@
 		AEF1BAE21BC6110E008860F6 /* UniversityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityDetailViewController.m; sourceTree = "<group>"; };
 		AEF1BAE31BC6110E008860F6 /* UniversityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversityDetailViewController.xib; sourceTree = "<group>"; };
 		AEF1BAE91BC61A77008860F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AEF1BAEE1BC61A98008860F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		AEF1BAF01BC61AC7008860F6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		AEF1BAF11BC61AC8008860F6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localization.strings"; sourceTree = "<group>"; };
 		AEF1BB4B1BC622D7008860F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEF1BB4D1BC622D8008860F6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AEF1BB571BC661B8008860F6 /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		AEF1BB581BC661B8008860F6 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		AEF1BB591BC661B8008860F6 /* SetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,9 +312,12 @@
 		46118BB21B344855003F10AB /* Apply */ = {
 			isa = PBXGroup;
 			children = (
-				4672B5C81B3567EF005CC394 /* ApplyViewController.h */,
-				4672B5C91B3567EF005CC394 /* ApplyViewController.m */,
-				4672B5CA1B3567EF005CC394 /* ApplyViewController.xib */,
+				AEA4885E1BC67317008EB14E /* ApplyViewController.h */,
+				AEA4885F1BC67317008EB14E /* ApplyViewController.m */,
+				AEA488601BC67317008EB14E /* ApplyViewController.xib */,
+				AE91DDC51BC699C100FB32C6 /* ApplySubmitViewController.h */,
+				AE91DDC61BC699C100FB32C6 /* ApplySubmitViewController.m */,
+				AE91DDC71BC699C100FB32C6 /* ApplySubmitViewController.xib */,
 				461BEF9F1B37EC0F0037A3F6 /* AgreementViewController.h */,
 				461BEFA01B37EC0F0037A3F6 /* AgreementViewController.m */,
 				461BEFA11B37EC0F0037A3F6 /* AgreementViewController.xib */,
@@ -366,7 +391,6 @@
 			children = (
 				463E3AC01B2310B000E0BAF8 /* PrefixHeader.pch */,
 				AEF1BAEA1BC61A77008860F6 /* InfoPlist.strings */,
-				AEF1BAEF1BC61A98008860F6 /* Localization.strings */,
 				463E3A4D1B230EDC00E0BAF8 /* Info.plist */,
 				463E3A4E1B230EDC00E0BAF8 /* main.m */,
 				46B8E8781B2C667A00A11170 /* LaunchScreen.xib */,
@@ -536,12 +560,24 @@
 				46F659D41B23FC9900D50E1B /* MeViewController.h */,
 				46F659D51B23FC9900D50E1B /* MeViewController.m */,
 				46F659D61B23FC9900D50E1B /* MeViewController.xib */,
+				AEF1BB571BC661B8008860F6 /* SetViewController.h */,
+				AEF1BB581BC661B8008860F6 /* SetViewController.m */,
+				AEF1BB591BC661B8008860F6 /* SetViewController.xib */,
 				4638E3CC1B39533900439E33 /* AboutViewController.h */,
 				4638E3CD1B39533900439E33 /* AboutViewController.m */,
 				4638E3CE1B39533900439E33 /* AboutViewController.xib */,
 				466CA9A01B3A570800CF5EF0 /* FeedbackViewController.h */,
 				466CA9A11B3A570800CF5EF0 /* FeedbackViewController.m */,
 				466CA9A21B3A570800CF5EF0 /* FeedbackViewController.xib */,
+				AE91DDB61BC6992D00FB32C6 /* ChangeLanguageViewController.h */,
+				AE91DDB71BC6992D00FB32C6 /* ChangeLanguageViewController.m */,
+				AE91DDB81BC6992D00FB32C6 /* ChangeLanguageViewController.xib */,
+				AE91DDBB1BC6994000FB32C6 /* MyOfferViewController.h */,
+				AE91DDBC1BC6994000FB32C6 /* MyOfferViewController.m */,
+				AE91DDBD1BC6994000FB32C6 /* MyOfferViewController.xib */,
+				AE91DDBE1BC6994000FB32C6 /* ApplyMatialViewController.h */,
+				AE91DDBF1BC6994000FB32C6 /* ApplyMatialViewController.m */,
+				AE91DDC01BC6994000FB32C6 /* ApplyMatialViewController.xib */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -655,28 +691,32 @@
 				466CA9A41B3A570800CF5EF0 /* FeedbackViewController.xib in Resources */,
 				4689D9761B25348D0024FB1A /* DiscoveryCell.xib in Resources */,
 				4648ECB91B2B0A5A00144996 /* UK.jpg in Resources */,
+				AE91DDC91BC699C100FB32C6 /* ApplySubmitViewController.xib in Resources */,
 				461BEFA31B37EC0F0037A3F6 /* AgreementViewController.xib in Resources */,
-				AEF1BAED1BC61A98008860F6 /* Localization.strings in Resources */,
 				46F659D31B23FC7000D50E1B /* EvaluateViewController.xib in Resources */,
 				4655B2241B27EFD8001024F2 /* SearchViewController.xib in Resources */,
 				4655B2291B281577001024F2 /* SearchRecommandCell.xib in Resources */,
 				4638E3D01B39533900439E33 /* AboutViewController.xib in Resources */,
 				AEF1BAE01BC61026008860F6 /* UniversityMapsViewController.xib in Resources */,
 				AEF1BB4A1BC622D7008860F6 /* Localizable.strings in Resources */,
+				AE91DDBA1BC6992D00FB32C6 /* ChangeLanguageViewController.xib in Resources */,
+				AE91DDC41BC6994000FB32C6 /* ApplyMatialViewController.xib in Resources */,
 				46F659D81B23FC9900D50E1B /* MeViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				46B8E8731B2C65B800A11170 /* LoginAndRegisterViewController.xib in Resources */,
 				4638E3CB1B393A9A00439E33 /* FilePickerViewController.xib in Resources */,
+				AEA488621BC67317008EB14E /* ApplyViewController.xib in Resources */,
 				AEDEAF951BAFCE2800B81DCA /* NewVersionView.xib in Resources */,
 				46206AFA1B314DFC00B6E492 /* UniversityCourseCell.xib in Resources */,
 				AEF1BADB1BC61005008860F6 /* mapShow.html in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				46F659C91B23FC2000D50E1B /* DiscoverViewController.xib in Resources */,
-				4672B5CC1B3567EF005CC394 /* ApplyViewController.xib in Resources */,
 				468DBFC11B2EA26A004AC562 /* IntroViewController.xib in Resources */,
 				46B8E8771B2C664C00A11170 /* login_background.jpg in Resources */,
+				AEF1BB5B1BC661B8008860F6 /* SetViewController.xib in Resources */,
 				4655B22E1B281E13001024F2 /* SearchResultViewController.xib in Resources */,
 				46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */,
+				AE91DDC21BC6994000FB32C6 /* MyOfferViewController.xib in Resources */,
 				4638E3D51B39874300439E33 /* ChangePasswordViewController.xib in Resources */,
 				4655B2331B281FB0001024F2 /* SearchResultCell.xib in Resources */,
 				46F659CE1B23FC5800D50E1B /* CategoryViewController.xib in Resources */,
@@ -696,6 +736,7 @@
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,
 				46F659C81B23FC2000D50E1B /* DiscoverViewController.m in Sources */,
 				463E3AA61B23105F00E0BAF8 /* KDActionSheet.m in Sources */,
+				AE91DDC31BC6994000FB32C6 /* ApplyMatialViewController.m in Sources */,
 				469C8FCF1B25B4CF000A6E85 /* APIClient+Interface.m in Sources */,
 				4689D9751B25348D0024FB1A /* DiscoveryCell.m in Sources */,
 				468DBFBF1B2EA106004AC562 /* IntroViewController.m in Sources */,
@@ -710,19 +751,23 @@
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
 				46FA14771B2B3F0C0036D29C /* ActionTableViewController.m in Sources */,
+				AE91DDB91BC6992D00FB32C6 /* ChangeLanguageViewController.m in Sources */,
 				461BEF9E1B37EB170037A3F6 /* UserDefaults.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
 				4638E3D41B39874300439E33 /* ChangePasswordViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				4649DFAD1B3E85F600E1332C /* TextFieldViewController.m in Sources */,
+				AEF1BB5A1BC661B8008860F6 /* SetViewController.m in Sources */,
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				46304BA81B273F6D00766335 /* UINavigationController+NavigationHelper.m in Sources */,
 				46038F241B2E7A0F0064678D /* NSString+MD5.m in Sources */,
 				AEDEAF931BAFCDA500B81DCA /* NewVersionView.m in Sources */,
+				AEA488611BC67317008EB14E /* ApplyViewController.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
 				4655B2281B281577001024F2 /* SearchRecommandCell.m in Sources */,
+				AE91DDC11BC6994000FB32C6 /* MyOfferViewController.m in Sources */,
 				46F659CD1B23FC5800D50E1B /* CategoryViewController.m in Sources */,
 				463E3A4F1B230EDC00E0BAF8 /* main.m in Sources */,
 				469A9F4A1B380D8C0029F682 /* SubmitViewController.m in Sources */,
@@ -747,13 +792,13 @@
 				46206AFC1B318C6700B6E492 /* FavoriteViewController.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,
-				4672B5CB1B3567EF005CC394 /* ApplyViewController.m in Sources */,
 				4638E3CF1B39533900439E33 /* AboutViewController.m in Sources */,
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,
 				46F659D71B23FC9900D50E1B /* MeViewController.m in Sources */,
 				463E3AB91B23105F00E0BAF8 /* NSDate+KDUtilities.m in Sources */,
+				AE91DDC81BC699C100FB32C6 /* ApplySubmitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,15 +812,6 @@
 				AEF1BAF01BC61AC7008860F6 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AEF1BAEF1BC61A98008860F6 /* Localization.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AEF1BAEE1BC61A98008860F6 /* en */,
-				AEF1BAF11BC61AC8008860F6 /* zh-Hans */,
-			);
-			name = Localization.strings;
 			sourceTree = "<group>";
 		};
 		AEF1BB4C1BC622D7008860F6 /* Localizable.strings */ = {
