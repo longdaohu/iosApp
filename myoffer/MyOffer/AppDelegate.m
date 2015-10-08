@@ -53,7 +53,7 @@ static AppDelegate *__sharedDelegate;
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
-    dvc.title = @"发现";
+    dvc.title = NSLocalizedString(@"DiscoverTitle", @"发现"); // @"发现";
     dvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
     CategoryViewController *cvc = [[CategoryViewController alloc] init];
     cvc.title = @"分类";

@@ -9,9 +9,12 @@
 #import "UniversityDetailViewController.h"
 #import "UniversityCourseViewController.h"
 #import "EvaluateViewController.h"
+#import "UniversityMapsViewController.h"
 
 @interface UniversityDetailViewController () {
     BOOL _isLiked;
+    NSDictionary *_resultResponse;
+
 }
 
 @end
@@ -46,26 +49,25 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
-
-- (void)reloadData {
+ - (void)reloadData {
     [self
      startAPIRequestWithSelector:kAPISelectorUniversityInfo
      parameters:@{@":id": _universityID}
      showHUD:YES errorAlertDismissAction:^{
          [self.navigationController popViewControllerAnimated:YES];
      } success:^(NSInteger statusCode, NSDictionary *response) {
+       
+         _resultResponse = response;
          _scrollView.hidden = NO;
          _descLabel.text = response[@"introduction"];
          
          _chineseNameLabel.text = response[@"name"];
          _englishNameLabel.text = response[@"official_name"];
          _setupYearLabel.text = [NSString stringWithFormat:@"%@年", response[@"found"]];
-         
         _locationLabel.text = [NSString stringWithFormat:@"%@ | %@ | %@", response[@"country"], response[@"state"], response[@"city"]];
          _rankingLabel.text = [NSString stringWithFormat:@"TIMES本国排名：%@\nQS世界排名：%@", [response[@"ranking_ti"] intValue] == 99999 ? @"暂无排名" : response[@"ranking_ti"], [response[@"ranking_qs"] intValue] == 99999 ? @"暂无排名" : response[@"ranking_qs"]];
         
         [_logoView.logoImageView KD_setImageWithURL:response[@"logo"]];
-        
         _bannerView.views = [response[@"m_images"] KD_arrayUsingMapEnumerateBlock:^id(id obj, NSUInteger idx) {
             UIImageView *imageView = [[UIImageView alloc] init];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -163,5 +165,17 @@
     
     [self presentViewController:nvc animated:YES completion:^{}];
 }
+
+- (IBAction)goToMapView:(UIButton *)sender {
+    
+   
+    UniversityMapsViewController *mapsView = [[UniversityMapsViewController alloc] initWithNibName:@"UniversityMapsViewController" bundle:[NSBundle mainBundle]];
+  
+    mapsView.UniversityInfoDic = _resultResponse;
+
+    [self.navigationController pushViewController:mapsView animated:YES];
+}
+
+
 
 @end

@@ -54,8 +54,8 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
                                @(systemInfo.machine), [[UIDevice currentDevice] systemVersion]];
         
         configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
-                                                @"Accept-Charset": @"UTF-8"};
-        
+                                                @"Accept-Charset": @"UTF-8",
+                                                @"user-language": @"zh-cn"};
         _URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }
     
