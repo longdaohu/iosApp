@@ -9,6 +9,9 @@
 #import "AboutViewController.h"
 
 @interface AboutViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *engTextView;
+
+
 
 @end
 
@@ -18,7 +21,7 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
-        self.title = @"关于";
+
     }
     return self;
 }
@@ -26,11 +29,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+ 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _textView.textContainerInset = UIEdgeInsetsMake(15, 15, 15, 15);
+    
+    self.title = GDLocalizedString(@"Setting-004");//@"关于";
+
+    
+ 
+    
 }
 
 @end
