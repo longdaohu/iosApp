@@ -50,19 +50,21 @@ static AppDelegate *__sharedDelegate;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    //初始化语言文件
+    [InternationalControl initUserLanguage];
     
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
-    dvc.title = NSLocalizedString(@"DiscoverTitle", @"发现"); // @"发现";
+    dvc.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
     dvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
     CategoryViewController *cvc = [[CategoryViewController alloc] init];
-    cvc.title = @"分类";
+    cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
     cvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_category"];
     EvaluateViewController *evc = [[EvaluateViewController alloc] init];
-    evc.title = @"评估";
+    evc.title = GDLocalizedString(@"EvaluateTitle");//@"评估";
     evc.tabBarItem.image = [UIImage imageNamed:@"tabbar_evaluate"];
     MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];
-    mvc.title = @"我";
+    mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"我";
     mvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_me"];
     
     tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:dvc],

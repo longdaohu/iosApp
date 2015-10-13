@@ -9,6 +9,7 @@
 #import "MyOfferViewController.h"
 
 @interface MyOfferViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *notiLabel;
 
 @end
 
@@ -19,6 +20,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"myOffer";
 
+    self.notiLabel.text = GDLocalizedString(@"myOffer-001");
 }
 
 - (void)didReceiveMemoryWarning {

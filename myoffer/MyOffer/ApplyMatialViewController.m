@@ -9,6 +9,7 @@
 #import "ApplyMatialViewController.h"
 
 @interface ApplyMatialViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *notiLabel;
 
 @end
 
@@ -17,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"我的申请材料";
+    self.title = GDLocalizedString(@"ApplyMater-001");  // Apply Materianls  @"我的申请材料"
+    
+    self.notiLabel.text =  GDLocalizedString(@"ApplyMater-002");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,14 +28,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

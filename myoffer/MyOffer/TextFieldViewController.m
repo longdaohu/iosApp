@@ -28,7 +28,6 @@
     _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 
     self.tableView.rowHeight = 44;
-
     UITextField *textField = [[UITextField alloc] init];
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.returnKeyType = UIReturnKeyDone;

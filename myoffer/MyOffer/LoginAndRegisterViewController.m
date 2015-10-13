@@ -14,23 +14,45 @@
     int _verifyCodeColdDownCount;
 }
 
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *loginPageBtn;
+
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *ForgetPasswdTF;
+
 @end
+
+
 
 @implementation LoginAndRegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    _phoneTextField.placeholder = GDLocalizedString(@"LoginVC-006");
+    _verifyCodeTextField.placeholder = GDLocalizedString(@"LoginVC-007");
+    _passwordTextField.placeholder = GDLocalizedString(@"LoginVC-005");
+    _passwordConfirmTextField.placeholder = GDLocalizedString(@"LoginVC-009");
+    _loginPhoneTextField.placeholder = GDLocalizedString(@"LoginVC-004");
+    _loginPasswordTextField .placeholder = GDLocalizedString(@"LoginVC-0011");
+    [self.loginPageBtn setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
+    [self.ForgetPasswdTF setTitle:GDLocalizedString(@"LoginVC-003") forState:UIControlStateNormal];
+    [_loginButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
+    [_registerButton  setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
+    [_registerConfirmButton  setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
+    [_resetPasswordButton  setTitle:GDLocalizedString(@"LoginVC-0012") forState:UIControlStateNormal];
+    
+    
+    
     _loginButton.layer.cornerRadius = 2;
     _loginButton.adjustAllRectWhenHighlighted = YES;
     _loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     _loginButton.layer.borderWidth = 2;
-    
+
     _blurView.dynamic = NO;
     [_blurView setTintColor:nil];
     [_blurView setIterations:3];
     [_blurView setBlurRadius:10];
     
+    [_sendVerifyCodeButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
+
     _sendVerifyCodeButton.layer.cornerRadius = 2;
     _sendVerifyCodeButton.layer.borderWidth = 2;
     _sendVerifyCodeButton.layer.borderColor = _sendVerifyCodeButton.currentTitleColor.CGColor;
@@ -61,24 +83,27 @@
     _passwordConfirmTextField.text = @"";
 }
 
+
+
 - (BOOL)verifyRegisterFields {
     if (_phoneTextField.text.length != 11) {
-        [KDAlertView showMessage:@"请输入 11 位的手机号" cancelButtonTitle:@"好的"];
+        //@"请输入 11 位的手机号"   @"请输入验证码"  @"请输入密码"   //   @"两次输入的密码不一致"
+        [KDAlertView showMessage: GDLocalizedString(@"LoginVC-006") cancelButtonTitle: GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return NO;
     }
     
     if (_verifyCodeTextField.text.length == 0) {
-        [KDAlertView showMessage:@"请输入验证码" cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage: GDLocalizedString(@"LoginVC-007")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return NO;
     }
     
     if (_passwordTextField.text.length == 0) {
-        [KDAlertView showMessage:@"请输入密码" cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage: GDLocalizedString(@"LoginVC-0011") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return NO;
     }
-    
+ 
     if (![_passwordTextField.text isEqualToString:_passwordConfirmTextField.text]) {
-        [KDAlertView showMessage:@"两次输入的密码不一致" cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage:GDLocalizedString(@"ChPasswd-004")   cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return NO;
     }
     
@@ -190,9 +215,11 @@
     [UIView commitAnimations];
 }
 
-- (IBAction)sendVerifyCode {
+
+  - (IBAction)sendVerifyCode {
     if (_phoneTextField.text.length != 11) {
-        [KDAlertView showMessage:@"请输入 11 位的手机号" cancelButtonTitle:@"好的"];
+        // @"请输入 11 位的手机号"
+        [KDAlertView showMessage: GDLocalizedString(@"LoginVC-006")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode parameters:@{@"code_type": _registerConfirmButton.hidden ? @"reset" : @"register", @"phonenumber": _phoneTextField.text, @"target": _phoneTextField.text} success:^(NSInteger statusCode, NSDictionary *response) {
@@ -201,15 +228,15 @@
         [self verifyCodeColdDownTimer];
     }];
 }
-
+//@"获取验证码"   
 - (void)verifyCodeColdDownTimer {
     _verifyCodeColdDownCount--;
     if (_verifyCodeColdDownCount > 0) {
         _sendVerifyCodeButton.enabled = NO;
-        [_sendVerifyCodeButton setTitle:[NSString stringWithFormat:@"请等待%d秒", _verifyCodeColdDownCount] forState:UIControlStateNormal];
+        [_sendVerifyCodeButton setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), _verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
     } else {
         _sendVerifyCodeButton.enabled = YES;
-        [_sendVerifyCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_sendVerifyCodeButton setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
         [_verifyCodeColdDownTimer invalidate];
         _verifyCodeColdDownTimer = nil;
     }
@@ -236,14 +263,17 @@
      }];
 }
 
+
+
+//@"请输入密码"   @"请输入手机号或邮箱"
 - (IBAction)loginConfirm {
     if (_loginPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:@"请输入密码" cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage:GDLocalizedString(@"LoginVC-005") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     
     if (_loginPhoneTextField.text.length == 0) {
-        [KDAlertView showMessage:@"请输入手机号或邮箱" cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage:GDLocalizedString(@"LoginVC-004")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     

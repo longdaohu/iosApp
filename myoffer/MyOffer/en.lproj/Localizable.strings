@@ -2,11 +2,209 @@
   Localizable.strings
   MyOffer
 
-  Created by xuewuguojie on 15/10/8.
+  Created by xuewuguojie on 15/10/11.
   Copyright © 2015年 UVIC. All rights reserved.
 */
+"ch_Language" ="en";
 "buttonInfo" ="change Language";
-"DiscoverTitle" = "Discover";
-"CategoryTitle" = "Category";
+"DiscoverTitle" = "Expore";
+"CategoryTitle" = " Uni Finder";
 "EvaluateTitle" = "Evaluate";
 "MeViewControllerTitle" = "Me";
+"Discover_search" = "Which uni do you want to go?";
+"Category-button001" = "Recommend";
+"Category-button002" = "Location";
+"Category-button003" = "Subjects";
+"Category-button004" = "Rankings";
+"Evaluate-001" = "Evaluate";
+"Evaluate-002" = "Education";
+"Evaluate-009" = "Please enter graduated or current Uni";
+"Evaluate-003" = "Current field of study";
+"Evaluate-0010" = "Please select your field of study";
+"Evaluate-004" = "Grade";
+"Evaluate-0011" = "Please enter your GPA";
+"Evaluate-005" = "Overall IELTS score";
+"Evaluate-0012" = "Please enter your Overall IELTS score";
+"Evaluate-006" = "The lowest IELTS score";
+"Evaluate-0013" = "Please enter your lowest band score";
+"Evaluate-007" = "Expected field of study";
+"Evaluate-0014" = "Please select expected field of study";
+"Evaluate-0015" = "Your will get the success rate when you browse the Uni page";
+"Evaluate-0016" = "OK";
+"Evaluate-0017" = "Save";
+//我的页面
+"Me-001" = "Application List";
+"Me-002" = "Application Status";
+"Me-003" = "Apply Materianls";
+"Me-004" = "Sign Out";
+"Me-005" = "LoginOrRegister";
+"Me-006" = "Confirm Logout";
+"Me-007" = "Cancel";
+"Me-008" = "Change Avatar";
+"Me-009" = "Photograph";
+"Me-0010" = "Select From phone Album";
+
+//我的设置页面
+"Setting-000" = "Setting";
+"Setting-001" = "Personal Information";
+"Setting-002" = "My Favourite Uni";
+"Setting-003" = "FeedBack";
+"Setting-004" = "About";
+"Setting-005" = "Language";
+
+//我的设置 - 个人信息页面
+"Person-001" = "Account";
+"Person-002" = "Password";
+"Person-003" = "Mobile phone";
+"Person-004" = "Email";
+"Person-005" = "Change display name";
+"Person-006" = "Change password";
+"Person-007" = "Unbound Mobile phone";
+"Person-008" = "Unbound Email";
+//我的设置 - 用户反馈页面
+"FeedBack-001" = "Submit";
+//我的设置 - 修改密码页面
+"ChPasswd-001" = "Please enter your Old password";
+"ChPasswd-002" = "Please enter your New password";
+"ChPasswd-003" = "Please enter your New password again";
+"ChPasswd-004" = "Inconsistent password";
+//搜索 —— 页面
+"SearchVC-hot" = "Hot Search";
+//搜索结果  —— 页面
+"SearchResultVC-001" = "TIMES Ranking";
+"SearchResultVC-002" = "Letter_Rank";
+//学校详情  —— 页面
+"UniversityDetail-001" = "Uni Profile";
+"UniversityDetail-002" = "TIMES Ranking";
+"UniversityDetail-003" = "QS World Ranking";
+"UniversityDetail-004" = "Established Time";
+"UniversityDetail-005" = "Location";
+"UniversityDetail-006" = "Rankings";
+"UniversityDetail-007" = "Brief Introduction";
+"UniversityDetail-008" = "Gallery";
+"UniversityDetail-009" = "See All Courses";
+"UniversityDetail-0010" = "NO Ranking";
+"UniversityDetail-0011" = "Acceptance rate";
+"UniversityDetail-0012" = "Added favourite";
+"UniversityDetail-0013" = "Canceled favourite";
+"UniversityDetail-0014" = "Success rate";
+
+
+//分类  页面
+"CategoryVC-ENG001" = "England";
+"CategoryVC-ENG002" = "Scotland";
+"CategoryVC-ENG003" = "Northern Ireland";
+"CategoryVC-ENG004" = "Welsh";
+"CategoryVC-AUSTR001" = "Western Australia";
+"CategoryVC-AUSTR002" = "South Australia";
+"CategoryVC-AUSTR003" = "Tasmania";
+"CategoryVC-AUSTR004" = "New South Wales";
+"CategoryVC-AUSTR005" = "the State of Victoria";
+"CategoryVC-AUSTR006" = "Australian Capital Territory";
+"CategoryVC-AUSTR007" = "QLD(Queensland)";
+//已提交申请  页面
+"ApplicationStutasVC-001" = "Ranking";
+//申请意向
+"ApplicationList-001" = "Please select at least one course!";
+"ApplicationList-002" = "Your application can not exceed 6！";
+"ApplicationList-003" = "Selected";
+"ApplicationList-004" = "Total";
+"ApplicationList-005" = "Submit";
+//申请时提交个人资料
+"ApplicationProfile-001" = "Personal Information";
+"ApplicationProfile-002" = "Applying to Uni";
+"ApplicationProfile-003" = "Expected country";
+"ApplicationProfile-004" = "Expected time to go";
+"ApplicationProfile-005" = "Expected field of study";
+"ApplicationProfile-006" = "Personal information";
+"ApplicationProfile-007" = "Education background";
+"ApplicationProfile-008" = "Average score";
+"ApplicationProfile-009" = "IELTS score";
+"ApplicationProfile-0010" = "Finished";
+"ApplicationProfile-0011" = "Not Finish";
+"ApplicationProfile-0012" = "Proceed my application";
+"ApplicationProfile-0013" = "Basic information";
+"ApplicationProfile-0014" = "Can't be empty";
+"ApplicationProfile-0015" = "Seccess";
+"ApplicationProfile-0016" = "The early of filling in your personal detail is crucial to your application. myOffer team will make sure you're on the right track We will review as soon as possible.Just chill and relax";
+
+//选择国家页面
+"ExpectedCountry-001" = "Country name can not be empty";
+"ExpectedCountry-002" = "Country or region";
+"ExpectedCountry-003" = "Please enter a country or region name";
+//选择出国时间页面
+"ExpectedTime-001" = "Time can not be empty";
+"ExpectedTime-002" = "Please enter Expected time to go";
+//选择期望专业
+"ExpectedSubject-001" = "field of study can not be empty";
+"ExpectedSubject-002" = "Please enter field of study";
+
+//课程详情
+"UniCourseDe-001" = "Courses";
+"UniCourseDe-002" = "ALL";
+"UniCourseDe-003" = "Bachelor";
+"UniCourseDe-004" = "Master";
+"UniCourseDe-005" = "Subjects";
+"UniCourseDe-006" = "Degrees";
+"UniCourseDe-007" = "Added";
+"UniCourseDe-008" = "You have not selected any courses yet！";
+"UniCourseDe-009" = "Add to List";
+//注册登录页面
+"LoginVC-001" = "SIGN IN";
+"LoginVC-002" = "SIGN UP NOW";
+"LoginVC-003" = "forgot password?";
+"LoginVC-004" = "Enter mobil phone or email";
+"LoginVC-005" = "Enter password";
+//注册
+"LoginVC-006" = "Mobil phone";
+"LoginVC-007" = "Activate code";
+"LoginVC-008" = "Get code";
+"LoginVC-009" = "Enter password again";
+"LoginVC-0010" = "by joining myOffer,you agree to the General of Use";
+"LoginVC-0011" = "Enter password";
+"LoginVC-0012" = "Reset password";
+"LoginVC-0013" = "wait";
+"LoginVC-0014" = "S";
+//语言设置页面
+"LanguageVC-001" = "Language Setting";
+"LanguageVC-002" = "warning";
+"LanguageVC-003" = "Please select the language and then submit";
+"LanguageVC-004" = "Do you need to switch to the English environment? Please click the Save button to restart myOffer! ";
+"LanguageVC-005" = "Do you need to switch to the Chinese environment? Please click the Save button to restart myOffer! ";
+//已提交材料
+"ApplyMater-001" = "Apply Materianls";
+"ApplyMater-002" = "Opps! You have not finished your application materials  Please log on www.myoffer.cn to fill out and proceed";
+
+ //雅思成绩
+"YASI-001" = "IELTS can not be empty";
+"YASI-002" = "IELTS Average score can not be empty";
+"YASI-003" = "Please choose IELTS score";
+"YASI-004" = "Please choose IELTS average";
+"YASI-005" = "IELTS score";
+"YASI-006" = "IELTS average";
+//成绩平均分
+"AVGscore-001" = "The average can not be empty";
+"AVGscore-002" = "Average Score";
+//用户名称及手机号
+"UserName-001" = "Last Name can not be empty";
+"UserName-002" = "First Name can not be empty";
+"UserName-003" = "User Info";
+"UserName-004" = "Last Name";
+"UserName-005" = "First Name";
+
+//计划出国时间 请选择计划出国时间
+"ExpectTime-001" = "Expected Time";
+//希望就读专业
+"ExpectStudy-001" = "Expected Study";
+//教育背景
+"UniversityBG-001" = "University";
+"UniversityBG-002" = "Grade";
+"UniversityBG-003" = "Subject";
+"UniversityBG-004" = "Education";
+//申请状态
+"ApplySummit-001" = "Auditing";
+"myOffer-001" = "Opps! No data";
+
+
+
+

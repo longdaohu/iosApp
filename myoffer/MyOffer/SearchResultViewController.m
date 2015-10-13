@@ -124,7 +124,7 @@
     if (_orderBy) {
         _filterViewHeight.constant = 0;
     } else {
-        _filterView.items = @[@"TIMES排名", @"按字母排序"];
+        _filterView.items =@[GDLocalizedString(@"SearchResultVC-001"),GDLocalizedString(@"SearchResultVC-002")];  //@[@"TIMES排名", @"按字母排序"];
     }
     
     NSUInteger orderIndex = [_availableOrderKey indexOfObject:_orderBy];
@@ -185,8 +185,7 @@
          _nextPage = page + 1;
          
          if(refresh) {
-            // NSLog(@"_result_result_result%ld",_result.count);
-             [_resultIDSet removeAllObjects];
+              [_resultIDSet removeAllObjects];
              [_result removeAllObjects];
              
          }
@@ -197,8 +196,7 @@
              if (![_resultIDSet containsObject:uid]) {
                  [_resultIDSet addObject:uid];
                  [_result addObject:obj];
-               //  NSLog(@"new_resultnew_resultnew_result====%ld",_result.count);
-             }
+              }
          }];
          
          _allResultCount = [response[@"count"] integerValue];
@@ -225,8 +223,7 @@
 
 - (void)setShouldShowLoadMoreIndicator:(BOOL)shouldShowLoadMoreIndicator {
     _shouldShowLoadMoreIndicator = shouldShowLoadMoreIndicator;
-  //  NSLog(@" shouldShowLoadMoreIndicator  %d",shouldShowLoadMoreIndicator);
-    
+     
     if (shouldShowLoadMoreIndicator) {
         [_tableView setTableFooterView:_loadMoreIndicatorView];
         

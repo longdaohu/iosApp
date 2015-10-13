@@ -14,6 +14,7 @@
 #import "AboutViewController.h"
 #import "FeedbackViewController.h"
 #import "ChangeLanguageViewController.h"
+#import "EngAboutViewController.h"
 
 
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -27,9 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+ 
+    NSString *settingString = GDLocalizedString(@"Setting-000");//@"设置"
 
-    
-    self.title = @"设置";
+    self.title = settingString;
     
     self.setTableView.tableFooterView = [[UIView alloc] init];
     
@@ -42,37 +44,52 @@
         
         return cell;
     };
+    NSString *personInfoString = GDLocalizedString(@"Setting-001");//个人信息
+    NSString *uniString = GDLocalizedString(@"Setting-002");//我的关注院校
+    NSString *feedBackString = GDLocalizedString(@"Setting-003");//用户反馈
+    NSString *aboutString = GDLocalizedString(@"Setting-004");//关于
+    NSString *useLanString = GDLocalizedString(@"Setting-005");//切换语言
     
-    self.cells = @[@[newCell(@"个人信息", [UIImage imageNamed:@"me_profile"],
+    self.cells = @[@[newCell(personInfoString, [UIImage imageNamed:@"me_profile"],
                              ^{
                                  RequireLogin
                                  ProfileViewController *vc = [[ProfileViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
-                     newCell(@"我的关注院校", [UIImage imageNamed:@"me_like"],
+                     newCell(uniString, [UIImage imageNamed:@"me_like"],
                              ^{
                                  RequireLogin
                                  FavoriteViewController *vc = [[FavoriteViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
-                    newCell(@"用户反馈", [UIImage imageNamed:@"me_feedback"],
+                    newCell(feedBackString, [UIImage imageNamed:@"me_feedback"],
                              ^{
                                  RequireLogin
                                  FeedbackViewController *vc = [[FeedbackViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
-                     newCell(@"关于", [UIImage imageNamed:@"me_about"],
+                     newCell(aboutString, [UIImage imageNamed:@"me_about"],
                              ^{
-                                 AboutViewController *vc = [[AboutViewController alloc] init];
-                                 [self.navigationController pushViewController:vc animated:YES];
+                                 
+                                 NSString *lang =  [InternationalControl userLanguage];
+                                 if ([lang containsString:@"en"]) {
+                                     NSLog(@"sdfsfasfasfasfsa");
+                                   
+                                     EngAboutViewController *xengAbout =[[EngAboutViewController alloc] initWithNibName:@"EngAboutViewController" bundle:nil];
+                                     [self.navigationController pushViewController:xengAbout animated:YES];
+                                     
+                                 }else {
+                                     
+                                     AboutViewController *vc = [[AboutViewController alloc] init];
+                                     [self.navigationController pushViewController:vc animated:YES];
+                                 }
+                              
                              }),
-                       newCell(@"切换语言", [UIImage imageNamed:@"language_39"],
+                       newCell(useLanString, [UIImage imageNamed:@"language_39"],
                        ^{
                            ChangeLanguageViewController *vc = [[ChangeLanguageViewController alloc] initWithNibName:@"ChangeLanguageViewController" bundle:nil];
                            [self.navigationController pushViewController:vc animated:YES];
                        })]];
-    
-
 }
 
 @end

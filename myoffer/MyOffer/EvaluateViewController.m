@@ -15,18 +15,24 @@
     UITextField *_universityTextField, *_subjectTextField, *_scoreTextField, *_IELTSTextField, *_IELTSMinTextField, *_applySubjectTextField;
     UIPickerView *_subjectPickerView, *_applySubjectPickerView;
     NSArray *_subjects;
+    IBOutlet KDEasyTouchButton *_saveButton;
+    
 }
 
+
 @end
+
 
 @implementation EvaluateViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [_saveButton  setTitle:GDLocalizedString(@"Evaluate-0017") forState:UIControlStateNormal];
+    
+    
     _tableView.contentInset = UIEdgeInsetsMake(-10, 0, 50, 0);
-    self.navigationItem.title = @"在线评估";
-    _titles = @[@"毕业院校", @"在读专业", @"平均分", @"雅思平均分数", @"雅思最低分数", @"申请专业"];
+    self.navigationItem.title = GDLocalizedString(@"Evaluate-001");
+    _titles = @[GDLocalizedString(@"Evaluate-002"), GDLocalizedString(@"Evaluate-003"),GDLocalizedString(@"Evaluate-004"), GDLocalizedString(@"Evaluate-005"), GDLocalizedString(@"Evaluate-006"), GDLocalizedString(@"Evaluate-007")];
     
     UITableViewCell *(^newCell)(NSString *placeholder, UITextField **textFieldPtr) = ^UITableViewCell*(NSString *placeholder, UITextField **textFieldPtr) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -45,14 +51,16 @@
         return cell;
     };
     
+    
+
     UITextField *universityTextField, *subjectTextField, *scoreTextField, *IELTSTextField, *IELTSMinTextField, *applySubjectTextField;
     
-    _cells = @[newCell(@"请输入在读或毕业院校", &universityTextField),
-               newCell(@"请选择在读专业",& subjectTextField),
-               newCell(@"请输入平均分", &scoreTextField),
-               newCell(@"请输入雅思平均分数", &IELTSTextField),
-               newCell(@"请输入雅思最低分数", &IELTSMinTextField),
-               newCell(@"请选择申请专业", &applySubjectTextField)];
+    _cells = @[newCell( GDLocalizedString(@"Evaluate-009"), &universityTextField),
+               newCell( GDLocalizedString(@"Evaluate-0010"),& subjectTextField),
+               newCell( GDLocalizedString(@"Evaluate-0011"), &scoreTextField),
+               newCell( GDLocalizedString(@"Evaluate-0012"), &IELTSTextField),
+               newCell( GDLocalizedString(@"Evaluate-0013"), &IELTSMinTextField),
+               newCell( GDLocalizedString(@"Evaluate-0014"), &applySubjectTextField)];
     
     [(UITableViewCell *)_cells[1] setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [(UITableViewCell *)_cells[5] setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
@@ -94,9 +102,22 @@
                                                object:nil];
     self.tapToEndEditing = YES;
     
+    
+    
+    NSString  *lan = [InternationalControl userLanguage];
+    if ( [lan containsString:@"en"]) {
+        
+        lan = @"en";
+    }
+    else
+    {
+        lan = @"zh-cn";
+
+    }
+    
+    
     [self
-     startAPIRequestWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang": @"zh-cn"}
+     startAPIRequestWithSelector:kAPISelectorSubjects parameters:@{@":lang": lan }
      success:^(NSInteger statusCode, NSArray *response) {
          _subjects = [response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx) {
              return obj[@"name"];
@@ -221,7 +242,7 @@
     
     for (UITextField *t in textField) {
         if (t.text.length == 0) {
-            [KDAlertView showMessage:t.placeholder cancelButtonTitle:@"好的"];
+            [KDAlertView showMessage:t.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
             return;
         }
     }
@@ -238,7 +259,7 @@
          if (self.dismissCompletion) {
              [self dismiss];
          } else{
-             [KDAlertView showMessage:@"重新查看大学列表会有惊喜哟！" cancelButtonTitle:@"好的"];
+             [KDAlertView showMessage:GDLocalizedString(@"Evaluate-0015") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
          }
          
      }];

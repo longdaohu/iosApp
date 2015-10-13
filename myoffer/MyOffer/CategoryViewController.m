@@ -17,6 +17,7 @@
     NSArray *_items;
     NSArray *_specialitys;
 }
+@property (weak, nonatomic) IBOutlet UISearchBar *UniSearchBar;
 
 @end
 
@@ -27,6 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
@@ -34,12 +38,25 @@
 
     for (UIButton *button in _buttons) {
         [button setBackgroundImage:[UIImage KD_imageWithColor:[UIColor whiteColor]] forState:UIControlStateSelected];
-        
         [button setTitleColor:[UIColor KD_colorWithCode:0xff868686] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor KD_colorWithCode:0xff2dccf7] forState:UIControlStateSelected];
 
         [button setImage:[button.currentImage KD_imageWithMaskColor:[UIColor KD_colorWithCode:0xff2dccf7]] forState:UIControlStateSelected];
     }
+    //设置中英按钮
+    
+    UIButton *Button001 = _buttons[0];
+    [Button001 setTitle:GDLocalizedString(@"Category-button001") forState:UIControlStateNormal];
+    UIButton *Button002 = _buttons[1];
+    [Button002 setTitle:GDLocalizedString(@"Category-button002") forState:UIControlStateNormal];
+    UIButton *Button003 = _buttons[2];
+    [Button003 setTitle:GDLocalizedString(@"Category-button003") forState:UIControlStateNormal];
+    UIButton *Button004 = _buttons[3];
+    [Button004 setTitle:GDLocalizedString(@"Category-button004") forState:UIControlStateNormal];
+    
+    self.UniSearchBar.placeholder = GDLocalizedString(@"Discover_search");
+    
+    
     
     [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
     
@@ -75,16 +92,25 @@
             }
         }];
     } else if (_categoryIndex == 1) {
-        _items = @[@[@"英格兰", @"苏格兰", @"北爱尔兰", @"威尔士"],
-                   @[@"西澳洲", @"南澳州", @"塔斯马尼亚州", @"新南威尔士州", @"昆士兰州", @"维多利亚州",@"澳大利亚首都领地"]];
+        
+        
+        NSArray *Englandes = @[GDLocalizedString(@"CategoryVC-ENG001"),GDLocalizedString(@"CategoryVC-ENG002"),GDLocalizedString(@"CategoryVC-ENG003"),GDLocalizedString(@"CategoryVC-ENG004")];
+        
+        NSArray *Austes =@[GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
+      //  _items = @[@[@"英格兰", @"苏格兰", @"北爱尔兰", @"威尔士"],
+      //             @[@"西澳洲", @"南澳州", @"塔斯马尼亚州", @"新南威尔士州", @"昆士兰州", @"维多利亚州",@"澳大利亚首都领地"]];
+        
+        _items = @[Englandes,Austes];
+        
         _tableView.rowHeight = 44;
         [_tableView reloadData];
     }  else if (_categoryIndex == 2) {
         _items = nil;
         _tableView.rowHeight = 44;
         [_tableView reloadData];
-
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang": @"zh-cn"} success:^(NSInteger statusCode, NSDictionary *response) {
+        
+        // GDLocalizedString(@"ch_Language")    @"zh-cn"
+        [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":GDLocalizedString(@"ch_Language")} success:^(NSInteger statusCode, NSDictionary *response) {
             if (_categoryIndex == 2) {
                 _specialitys = (id)response;
                 
@@ -96,6 +122,7 @@
             }
         }];
     } else {
+        
         _items = @[@[@"TIMES排名", @"QS世界大学排名"]];
         _tableView.rowHeight = 44;
         [_tableView reloadData];

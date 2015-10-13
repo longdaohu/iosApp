@@ -9,6 +9,7 @@
 #import "FeedbackViewController.h"
 
 @interface FeedbackViewController ()
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *sendButton;
 
 @end
 
@@ -18,7 +19,9 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
-        self.title = @"用户反馈";
+        self.title = GDLocalizedString(@"Setting-003");//@"用户反馈";
+        
+        [self.sendButton setTitle:GDLocalizedString(@"FeedBack-001") forState:UIControlStateNormal];
     }
     return self;
 }

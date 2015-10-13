@@ -26,16 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [_logoutButton setTitle:GDLocalizedString(@"Me-004") forState:UIControlStateNormal];
+   
     //设置按钮
-    //    UIButton *setButton =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    //    [setButton setTitle:@"设置" forState:UIControlStateNormal];
-    //    [setButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    //    [setButton addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:setButton];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting_39"] style:UIBarButtonItemStylePlain target:self action:@selector(settingButtonPressed:)];
-    
-    
     
     _avatarImageView.layer.cornerRadius = _avatarImageView.bounds.size.width / 2.0f;
     _avatarImageView.layer.masksToBounds = YES;
@@ -47,15 +42,15 @@
     KDUtilDefineWeakSelfRef
     [_avatarImageView KD_addTapAction:^(UIView *view) {
         RequireLogin
-        
-        KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:@"更换头像"
-                                               cancelButtonTitle:@"取消"
+        //"Me-008" = "Change Avatar";  @"更换头像"  @"取消"
+        KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:GDLocalizedString(@"Me-008")
+                                               cancelButtonTitle:GDLocalizedString(@"Me-007")
                                                     cancelAction:nil
                                           destructiveButtonTitle:nil
                                                destructiveAction:nil];
-        
+        //GDLocalizedString(@"Me-009")  @"拍照"  @"从手机相册选择"
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [as addButtonWithTitle:@"拍照" action:^{
+            [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = weakSelf;
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -64,12 +59,12 @@
                 [self presentViewController:imagePicker animated:YES completion:^{}];
             }];
         }
-        [as addButtonWithTitle:@"从手机相册选择" action:^{
+        [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.delegate = weakSelf;
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             imagePicker.allowsEditing = YES;
-            [self presentViewController:imagePicker animated:YES completion:^{}];
+            [self presentViewController:imagePicker animated:YES completion:^{}];   
         }];
         [as showInView:[weakSelf view]];
     }];
@@ -83,28 +78,33 @@
         return cell;
     };
     
-    self.cells = @[@[ newCell(@"我的申请意向", [UIImage imageNamed:@"list_39"],
+    NSString *list = GDLocalizedString(@"Me-001");//"我的申请意向";
+    NSString *status = GDLocalizedString(@"Me-002");//"申请状态";
+    NSString *material = GDLocalizedString(@"Me-003");//"申请材料";
+    
+    
+    self.cells = @[@[ newCell(list, [UIImage imageNamed:@"list_39"],
                               ^{
                                   RequireLogin
                                   
                                   ApplyViewController *vc = [[ApplyViewController alloc] init];
                                   [self.navigationController pushViewController:vc animated:YES];
                               }),
-                      newCell(@"申请状态", [UIImage imageNamed:@"status_39"],
+                      newCell(status, [UIImage imageNamed:@"status_39"],
                               ^{
                                   RequireLogin
                                   ApplySubmitViewController *vc = [[ApplySubmitViewController alloc] initWithNibName:@"ApplySubmitViewController" bundle:nil];
                                   vc.hidesBottomBarWhenPushed = YES;
                                   [self.navigationController pushViewController:vc animated:YES];
                               }),
-                      newCell(@"申请材料", [UIImage imageNamed:@"materials_39"],
+                      newCell(material, [UIImage imageNamed:@"materials_39"],
                               ^{
                                   RequireLogin
                                   ApplyMatialViewController *vc = [[ApplyMatialViewController alloc] initWithNibName:@"ApplyMatialViewController" bundle:nil];
                                   vc.hidesBottomBarWhenPushed = YES;
                                   [self.navigationController pushViewController:vc animated:YES];
                               }),
-                      newCell(@"已完成申请", [UIImage imageNamed:@"myoffer_39"],
+                      newCell(@"myOffer", [UIImage imageNamed:@"myoffer_39"],
                               ^{
                                   RequireLogin
                                   MyOfferViewController *vc = [[MyOfferViewController alloc] initWithNibName:@"MyOfferViewController" bundle:nil];
@@ -132,12 +132,13 @@
     } else {
         _logoutButton.hidden = YES;
         _avatarImageView.image = [UIImage imageNamed:@"default_avatar"];
-        _usernameLabel.text = @"点击登录或注册";
+        _usernameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
     }
 }
-
 - (IBAction)logout {
-    KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:nil cancelButtonTitle:@"取消" cancelAction:nil destructiveButtonTitle:@"确认注销" destructiveAction:^{
+    NSString *cancelString = GDLocalizedString(@"Me-007"); //取消
+    NSString *commintString = GDLocalizedString(@"Me-006"); //@"确认注销"
+    KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:nil cancelButtonTitle:cancelString cancelAction:nil destructiveButtonTitle:commintString destructiveAction:^{
         [[AppDelegate sharedDelegate] logout];
         [self reconfigure];
     }];
@@ -193,5 +194,6 @@
     setVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setVC animated:YES];
 }
+
 
 @end

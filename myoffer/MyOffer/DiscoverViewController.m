@@ -27,10 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _searchBarTextField.placeholder = GDLocalizedString(@"Discover_search");
+    
     self.view.backgroundColor = [UIColor redColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController.tabBar.frame.size.height, 0);
-    
 //    _searchBar.layer.borderWidth = 2;
 //    _searchBar.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
     _searchBar.layer.masksToBounds = NO;
@@ -41,15 +43,18 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
         _items = (id)response;
+        
+        
         [self.tableView reloadData];
         
         NSMutableArray *cells = [NSMutableArray array];
         [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+          
             DiscoveryCell *cell = [[NSBundle mainBundle] loadNibNamed:kCellIdentifier owner:nil options:nil].firstObject;
             [cells addObject:cell];
             
-            [cell KD_setFrameSizeWidth:KDUtilScreenWidth()];
-            [cell KD_setFrameSizeHeight:100];
+//            [cell KD_setFrameSizeWidth:KDUtilScreenWidth()];
+//            [cell KD_setFrameSizeHeight:100];
             
             cell.backgroundImageView.image = nil;
             [[KDImageCache sharedInstance]
@@ -119,7 +124,6 @@
             animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
             
             [_searchBar.layer addAnimation:animation forKey:@"animation"];
-
         }
     } else {
         _searchBar.layer.cornerRadius = expanded ? 5 : 45.0 / 2.0;

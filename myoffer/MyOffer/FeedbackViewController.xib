@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="_bottomMargin" destination="8ol-Xe-U2O" id="pgL-La-Ihd"/>
                 <outlet property="_textView" destination="4Hg-vZ-WsV" id="LiL-Vk-sS4"/>
+                <outlet property="sendButton" destination="6E7-9X-6ew" id="ztQ-5S-hl5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,7 +28,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E7-9X-6ew" customClass="DoneButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E7-9X-6ew" customClass="KDEasyTouchButton">
                             <rect key="frame" x="20" y="508" width="280" height="40"/>
                             <animations/>
                             <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>

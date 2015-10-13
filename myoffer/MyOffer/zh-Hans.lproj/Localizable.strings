@@ -2,11 +2,267 @@
   Localizable.strings
   MyOffer
 
-  Created by xuewuguojie on 15/10/8.
+  Created by xuewuguojie on 15/10/11.
   Copyright © 2015年 UVIC. All rights reserved.
 */
+"ch_Language" ="zh-cn";
+
 "buttonInfo" ="切换语言";
+
 "DiscoverTitle" = "发现";
+
 "CategoryTitle" = "分类";
+
 "EvaluateTitle" = "评估";
+
 "MeViewControllerTitle" = "我";
+
+"Discover_search" = "你想去哪里读书？想读什么？";
+
+"Category-button001" = "推荐院校";
+
+"Category-button002" = "地理位置";
+
+"Category-button003" = "学科专业";
+
+"Category-button004" = "学科专业";
+
+"Evaluate-001" = "在线评估";
+
+"Evaluate-002" = "毕业院校";
+
+"Evaluate-003" = "在读专业";
+
+"Evaluate-004" = "平均分";
+
+"Evaluate-005" = "雅思平均分数";
+
+"Evaluate-006" = "雅思最低分数";
+
+"Evaluate-007" = "申请专业";
+
+"Evaluate-009" = "请输入在读或毕业院校";
+
+"Evaluate-0010" = "请选择在读专业";
+
+"Evaluate-0011" = "请输入平均分";
+
+"Evaluate-0012" = "请输入雅思平均分数";
+
+"Evaluate-0013" = "请输入雅思最低分数";
+
+"Evaluate-0014" = "请选择申请专业";
+
+"Evaluate-0015" = "重新查看大学列表会有惊喜哟！";
+
+"Evaluate-0016" = "好的";
+
+"Evaluate-0017" = "保存";
+
+//我的页面
+
+"Me-001" = "我的申请意向";
+
+"Me-002" = "申请状态";
+
+"Me-003" = "申请材料";
+
+"Me-004" = "退出登录";
+
+"Me-005" = "点击登录或注册";
+
+"Me-006" = "确认注销";
+
+"Me-007" = "取消";
+"Me-008" = "更换头像";
+"Me-009" = "拍照";
+"Me-0010" = "从手机相册选择";
+
+
+//我的设置页面
+
+"Setting-000" = "设置";
+
+"Setting-001" = "个人信息";
+
+"Setting-002" = "我关注的院校";
+
+"Setting-003" = "用户反馈";
+
+"Setting-004" = "关于";
+
+"Setting-005" = "切换语言";
+//我的设置 - 个人信息页面
+
+"Person-001" = "用户名";
+
+"Person-002" = "密码";
+
+"Person-003" = "手机号";
+
+"Person-004" = "邮箱";
+
+"Person-005" = "修改用户名";
+
+"Person-006" = "修改密码";
+
+"Person-007" = "未绑定手机号";
+
+"Person-008" = "未绑定邮箱";
+
+//我的设置 - 用户反馈页面
+
+"FeedBack-001" = "发送";
+
+//我的设置 - 修改密码页面
+
+"ChPasswd-001" = "请输入旧密码";
+
+"ChPasswd-002" = "请输入新密码";
+
+"ChPasswd-003" = "请再次输入新密码";
+
+"ChPasswd-004" = "两次输入的密码不一致";
+//搜索 —— 页面
+"SearchVC-hot" = "热门搜索";
+//搜索结果  —— 页面
+"SearchResultVC-001" = "TIMES排名";
+"SearchResultVC-002" = "按字母排序";
+//学校详情  —— 页面
+"UniversityDetail-001" = "学校详情";
+"UniversityDetail-002" = "TIMES本国排名";
+"UniversityDetail-003" = "QS世界排名";
+"UniversityDetail-004" = "建校时期";
+"UniversityDetail-005" = "所在地";
+"UniversityDetail-006" = "大学排名";
+"UniversityDetail-007" = "学校简介";
+"UniversityDetail-008" = "照片展示";
+"UniversityDetail-009" = "查看所有专业课程";
+"UniversityDetail-0010" = "暂无排名";
+"UniversityDetail-0011" = "平均录取率";
+"UniversityDetail-0012" = "关注成功";
+"UniversityDetail-0013" = "取消成功";
+"UniversityDetail-0014" = "我的成功率";
+
+
+ //分类  页面
+"CategoryVC-ENG001" = "英格兰";
+"CategoryVC-ENG002" = "苏格兰";
+"CategoryVC-ENG003" = "北爱尔兰";
+"CategoryVC-ENG004" = "威尔士";
+
+"CategoryVC-AUSTR001" = "西澳洲";
+"CategoryVC-AUSTR002" = "南澳州";
+"CategoryVC-AUSTR003" = "塔斯马尼亚州";
+"CategoryVC-AUSTR004" = "新南威尔士州";
+"CategoryVC-AUSTR005" = "维多利亚州";
+"CategoryVC-AUSTR006" = "澳大利亚首都领地";
+"CategoryVC-AUSTR007" = "昆士兰州";
+//已提交申请  页面
+"ApplicationStutasVC-001" = "综合排名";
+//申请意向
+"ApplicationList-001" = "请至少选择一门课程!";
+"ApplicationList-002" = "您提交审核的申请不能超过6个！";
+"ApplicationList-003" = "已选择";
+"ApplicationList-004" = "共";
+"ApplicationList-005" = "立即申请";
+//申请时提交个人资料
+"ApplicationProfile-001" = "个人资料";
+"ApplicationProfile-002" = "请选择您的留学意向";
+"ApplicationProfile-003" = "想去的国家或地区";
+"ApplicationProfile-004" = "计划出国的时间";
+"ApplicationProfile-005" = "希望就读的专业";
+"ApplicationProfile-006" = "姓名";
+"ApplicationProfile-007" = "就读院校";
+"ApplicationProfile-008" = "GPA（平均成绩）";
+"ApplicationProfile-009" = "雅思成绩";
+"ApplicationProfile-0010" = "已完成";
+"ApplicationProfile-0011" = "未完成";
+"ApplicationProfile-0012" = "提交审核";
+"ApplicationProfile-0013" = "请填写您的基本资料";
+"ApplicationProfile-0014" = "不能为空";
+"ApplicationProfile-0015" = "加入成功";
+"ApplicationProfile-0016" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";
+
+//选择国家页面
+"ExpectedCountry-001" = "国家名称不能为空";
+"ExpectedCountry-002" = "国家或地区";
+"ExpectedCountry-003" = "请输入国家或地区名称";
+//选择出国时间页面
+"ExpectedTime-001" = "计划时间不能为空";
+"ExpectedTime-002" = "计划出国时间";
+"ExpectedTime-003" = "请选择计划出国时间";
+//选择出国时间页面
+"ExpectedSubject-001" = "期望学习专业不能为空";
+"ExpectedSubject-002" = "希望就读专业";
+"ExpectedSubject-003" = "请选择希望就读专业";
+
+//课程详情
+"UniCourseDe-001" = "课程详情";
+"UniCourseDe-002" = "全部";
+"UniCourseDe-003" = "本科";
+"UniCourseDe-004" = "硕士";
+"UniCourseDe-005" = "专业方向";
+"UniCourseDe-006" = "学位类型";
+"UniCourseDe-007" = "已添加";
+"UniCourseDe-008" = "您尚未选择任何课程！";
+"UniCourseDe-009" = "加入申请意向";
+//注册登录页面
+"LoginVC-001" = "登录"; 
+"LoginVC-002" = "注册";
+"LoginVC-003" = "忘记密码";
+"LoginVC-004" = "请输入手机号或邮箱";
+"LoginVC-005" = "请输入密码";
+//注册
+"LoginVC-006" = "请输入11位手机号码";
+"LoginVC-007" = "请输入验证码";
+"LoginVC-008" = "获取验证码";
+"LoginVC-009" = "请再次输入密码";
+"LoginVC-0010" = "注册即表示同意 myOffer用户协议";
+"LoginVC-0011" = "请输入密码";
+"LoginVC-0012" = "重置密码";
+"LoginVC-0013" = "请等待";
+"LoginVC-0014" = "秒";
+//语言设置页面
+"LanguageVC-001" = "语言设置";
+"LanguageVC-002" = "提示";
+"LanguageVC-003" = "请选择语言后再提交";
+"LanguageVC-004" = "您是否需要切换成英文环境？请点击保存按钮,重新启动myOffer! ";
+"LanguageVC-005" = "您是否需要切换成中文环境？请点击保存按钮,重新启动myOffer! ";
+//已提交材料
+"ApplyMater-001" = "我的申请材料";
+"ApplyMater-002" = "Duang!您的个人申请资料似乎没有完成哦~请移步电脑登陆www.myoffer.cn完善资料";
+
+//雅思成绩
+"YASI-001" = "雅思最低分不能为空";
+"YASI-002" = "雅思平均分不能为空";
+"YASI-003" = "请选择雅思最低分";
+"YASI-004" = "请选择雅思平均分";
+"YASI-005" = "雅思最低分";
+"YASI-006" = "雅思平均分";
+
+//成绩平均分
+"AVGscore-001" = "平均分不能为空";
+"AVGscore-002" = "平均分";
+
+
+//用户名字 手机号
+"UserName-001" = "姓不能为空";
+"UserName-002" = "名字不能为空";
+"UserName-003" = "姓名";
+"UserName-004" = "请输入您的姓";
+"UserName-005" = "请输入您的名字";
+
+//计划出国时间 请选择计划出国时间
+"ExpectTime-001" = "希望出国时间";
+//希望就读专业
+"ExpectStudy-001" = "希望就读专业";
+//教育背景
+"UniversityBG-001" = "就读院校";
+"UniversityBG-002" = "就读年级";
+"UniversityBG-003" = "就读专业";
+"UniversityBG-004" = "教育背景";
+//申请状态
+"ApplySummit-001" = "正在审核";
+"myOffer-001" = "Duang!您的个人申请还没有通过";
+

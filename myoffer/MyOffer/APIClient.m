@@ -18,7 +18,8 @@ NSString * const kAPIClientErrorDomain = @"kAPIClientErrorDomain";
 
 @end
 
-static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
+//static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
+static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
 
 @implementation APIClient
 
@@ -53,13 +54,24 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         NSString *userAgent = [NSString stringWithFormat:@"%@/%@ %@/%@", bundleName, version,
                                @(systemInfo.machine), [[UIDevice currentDevice] systemVersion]];
         
-        configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
-                                                @"Accept-Charset": @"UTF-8",
-                                                @"user-language": @"zh-cn"};
+        
+         NSString  *lan = [InternationalControl userLanguage];
+        if ( [lan containsString:@"en"]) {
+             configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
+                                                    @"Accept-Charset": @"UTF-8",
+                                                    @"user-language": @"en"
+                                                    };
+        }
+        else
+          {
+               configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
+                                                      @"Accept-Charset": @"UTF-8"
+                                                      };
+         }
+    
         _URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }
-    
-    return self;
+      return self;
 }
 
 - (NSURLSessionDataTask *)startTaskWithRequest:(NSURLRequest *)request
@@ -130,6 +142,8 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
                           expectedStatusCodes:(NSArray *)expectedStatusCode
                                       success:(APIClientSuccessBlock)success
                                       failure:(APIClientFailureBlock)failure {
+    
+    
     __block NSString *newPath = path;
     if ([parameters isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *newParameters = [NSMutableDictionary dictionary];
@@ -143,6 +157,8 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         
         parameters = newParameters;
     }
+    
+    
     
     NSURL *url = [NSURL URLWithString:newPath relativeToURL:_endPoint];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];

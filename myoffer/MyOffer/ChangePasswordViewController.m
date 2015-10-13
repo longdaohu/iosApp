@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"修改密码";
+    self.title = GDLocalizedString(@"Person-006" );//@"修改密码";
     _tableView.rowHeight = 44;
     
     NSMutableArray *cells = [NSMutableArray array];
@@ -33,7 +33,7 @@
         _oldPasswordTextField.delegate = self;
         _oldPasswordTextField.enablesReturnKeyAutomatically = YES;
         _oldPasswordTextField.secureTextEntry = YES;
-        _oldPasswordTextField.placeholder = @"请输入旧密码";
+        _oldPasswordTextField.placeholder = GDLocalizedString(@"ChPasswd-001"); //@"请输入旧密码";
         [cell addSubview:_oldPasswordTextField];
         [cells addObject:cell];
     }
@@ -45,7 +45,7 @@
         _newPasswordTextField.delegate = self;
         _newPasswordTextField.enablesReturnKeyAutomatically = YES;
         _newPasswordTextField.secureTextEntry = YES;
-        _newPasswordTextField.placeholder = @"请输入新密码";
+        _newPasswordTextField.placeholder =  GDLocalizedString(@"ChPasswd-002");// @"请输入新密码";
         [cell addSubview:_newPasswordTextField];
         [cells addObject:cell];
     }
@@ -57,14 +57,15 @@
         _confirmPasswordTextField.delegate = self;
         _confirmPasswordTextField.enablesReturnKeyAutomatically = YES;
         _confirmPasswordTextField.secureTextEntry = YES;
-        _confirmPasswordTextField.placeholder = @"请再次输入新密码";
+        _confirmPasswordTextField.placeholder = GDLocalizedString(@"ChPasswd-003");//@"请再次输入新密码";
         [cell addSubview:_confirmPasswordTextField];
         [cells addObject:cell];
     }
     
     _cells = cells;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -93,21 +94,22 @@
 
 - (void)done {
     if (_oldPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:_oldPasswordTextField.placeholder cancelButtonTitle:@"好的"];
+        
+        [KDAlertView showMessage:_oldPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")]; //@"好的"];
         return;
     }
     if (_newPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:_newPasswordTextField.placeholder cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage:_newPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     if (_confirmPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:_confirmPasswordTextField.placeholder cancelButtonTitle:@"好的"];
+        [KDAlertView showMessage:_confirmPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     
     if (![_newPasswordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
-        [KDAlertView showMessage:@"两次输入的密码不一致" cancelButtonTitle:@"好的"];
-        return;
+        [KDAlertView showMessage:GDLocalizedString(@"ChPasswd-004")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
+        return;//@"两次输入的密码不一致"
     }
     
     [self startAPIRequestWithSelector:kAPISelectorUpdateAccountInfo

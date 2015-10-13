@@ -14,12 +14,13 @@
     [self configureWithInfo:info ranking:@"ranking_ti"];
 }
 
-- (void)configureWithInfo:(NSDictionary *)info ranking:(NSString *)ranking {
-    self.titleLabel.text = info[@"name"];
-    self.subtitleLabel.text = info[@"official_name"];
+- (void)configureWithInfo:(NSDictionary *)universityInfo ranking:(NSString *)ranking {
+  
+    self.titleLabel.text = universityInfo[@"name"];
+    self.subtitleLabel.text = universityInfo[@"official_name"];
 
-    self.descriptionLabel.text = [NSString stringWithFormat:@"所在地：%@ - %@\n综合排名：%@", info[@"country"], info[@"state"], [info[ranking] intValue] == 99999 ? @"暂无排名" : info[ranking]];
-    [self.logoView.logoImageView KD_setImageWithURL:info[@"logo"]];
+    self.descriptionLabel.text = [NSString stringWithFormat:@"%@：%@ - %@\n%@：%@", GDLocalizedString(@"UniversityDetail-005"), universityInfo[@"country"], universityInfo[@"state"], GDLocalizedString(@"ApplicationStutasVC-001"),[universityInfo[ranking] intValue] == 99999 ? @"暂无排名" : universityInfo[ranking]];
+    [self.logoView.logoImageView KD_setImageWithURL:universityInfo[@"logo"]];
 }
 
 @end

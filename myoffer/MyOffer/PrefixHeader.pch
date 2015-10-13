@@ -8,8 +8,8 @@
 
 #ifndef MyOffer_PrefixHeader_pch
 #define MyOffer_PrefixHeader_pch
-
-
+#define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
+#define APPSIZE  [UIScreen mainScreen].bounds.size
 #import "KDActionSheet.h"
 #import "KDAlertView.h"
 #import "KDColorHelper.h"
@@ -37,7 +37,7 @@
 #import "UINavigationController+NavigationHelper.h"
 #import "LogoView.h"
 #import "SearchResultViewController.h" 
-#define APPSIZE  [UIScreen mainScreen].bounds.size
+#import "InternationalControl.h"
 
 
 #endif

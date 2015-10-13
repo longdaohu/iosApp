@@ -7,6 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UniversityDetailViewController">
             <connections>
+                <outlet property="BrifIInfoLabel" destination="x11-lE-WQP" id="cs5-yQ-b5d"/>
+                <outlet property="BuildTimeLabel" destination="1Yo-Lk-FCU" id="wDP-Le-f9M"/>
+                <outlet property="GalPhotoLabel" destination="pW1-gx-iHI" id="zIF-D1-qfT"/>
+                <outlet property="LocationLabel" destination="aak-Kh-fRF" id="YfB-12-kdC"/>
+                <outlet property="ShowCourseSBtn" destination="DHj-Ge-lYk" id="ZxS-n7-giV"/>
+                <outlet property="UniRankLabel" destination="vrY-71-tse" id="TRq-Se-fjX"/>
                 <outlet property="_bannerView" destination="qNU-q2-p7i" id="L4y-Wt-gTQ"/>
                 <outlet property="_chineseNameLabel" destination="Zhf-l2-UcS" id="Mnz-Cm-7PD"/>
                 <outlet property="_descLabel" destination="23O-0U-iXb" id="9Sm-0e-06A"/>

@@ -250,8 +250,8 @@
         return;
     }
     
-    NSMutableArray *datas = [NSMutableArray array];
     
+    NSMutableArray *datas = [NSMutableArray array];
     __block int index = 0;
     [_info enumerateObjectsUsingBlock:^(id uobj, NSUInteger idx, BOOL *stop) {
         [uobj[@"applies"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

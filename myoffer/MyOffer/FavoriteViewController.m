@@ -4,7 +4,7 @@
 //
 //  Created by Blankwonder on 6/17/15.
 //
-//
+//  我的关注院校
 
 #import "FavoriteViewController.h"
 #import "SearchResultCell.h"
@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的关注院校";
+    self.title = GDLocalizedString(@"Setting-002"); //@"我的关注院校";
 
     [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
 }
@@ -65,6 +65,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     SearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     
     [cell configureWithInfo:_result[indexPath.row]];

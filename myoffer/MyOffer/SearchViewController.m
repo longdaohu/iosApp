@@ -13,6 +13,7 @@
 @interface SearchViewController () {
     NSArray *_recommandWords;
 }
+@property (weak, nonatomic) IBOutlet UILabel *searchLabel;
 
 @end
 
@@ -22,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.searchLabel.text = GDLocalizedString(@"SearchVC-hot"); // 热门搜索
     
     [_recommandCollectionView registerNib:[UINib nibWithNibName:kCollectionCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCollectionCellIdentifier];
 

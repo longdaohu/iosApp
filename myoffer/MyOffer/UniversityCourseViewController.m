@@ -6,6 +6,8 @@
 //
 //  课程列表页面
 
+
+
 #import "UniversityCourseViewController.h"
 #import "UniversityCourseCell.h"
 
@@ -21,6 +23,9 @@
     int _nextPage;
     BOOL _endPage;
 }
+ @property (weak, nonatomic) IBOutlet KDEasyTouchButton *summitBtn;
+
+
 
 @end
 
@@ -40,39 +45,55 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
         
-        self.title = @"课程详情";
+        self.title = GDLocalizedString(@"UniCourseDe-001"); //@"课程详情";
     }
     return self;
 }
-
-- (void)viewDidLoad {
+ - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self.summitBtn setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
     [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+    
+    NSString *lan =[InternationalControl userLanguage];
+    NSString *localLan = nil;
+    if ([lan containsString:@"en"]) {
+        
+        localLan = @"en";
+        
+    }else
+    {
+        localLan = @"zh-cn";
+    }
     
     [self
      startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang": @"zh-cn"}
+     parameters:@{@":lang": localLan}
      success:^(NSInteger statusCode, NSArray *response) {
+        
+         //专业类型数组
          NSMutableArray *subjectOptions = [[response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx) {
+           
              return obj[@"name"];
          }] mutableCopy];
+
          
-         [subjectOptions insertObject:@"全部" atIndex:0];
+         [subjectOptions insertObject:GDLocalizedString(@"UniCourseDe-002")  atIndex:0];//@"全部" atIndex:0];
          
          _subjectOptions = subjectOptions;
-          _levelOptions = @[@"全部", @"本科", @"硕士"];
-       // _levelKeyOptions = @[@"All", @"Undergraduate", @"Graduate"];
-        _levelKeyOptions = @[@"All", @"本科", @"硕士"];
         
-         _filterView.items = @[@"专业方向", @"学位类型"];
-     }];
+         _levelOptions = @[GDLocalizedString(@"UniCourseDe-002"),GDLocalizedString(@"UniCourseDe-003"),GDLocalizedString(@"UniCourseDe-004")];   //@[@"全部", @"本科", @"硕士"];
+         //  _levelKeyOptions = @[@"All", @"Undergraduate", @"Graduate"];
+         //   _levelKeyOptions = @[@"All", @"本科", @"硕士"];
+        
+         _filterView.items = @[GDLocalizedString(@"UniCourseDe-005"),GDLocalizedString(@"UniCourseDe-006")]; // @[@"专业方向", @"学位类型"];
+         
+   
+      }];
     
     [self reloadData];
 }
 
 - (void)reloadData {
-    
     
     [self
      startAPIRequestWithSelector:@"GET api/university/:id/courses"
@@ -86,9 +107,7 @@
             }
         }
          
-         
-      //  _result = response[@"courses"];
-          _result = [response[@"courses"] mutableCopy];
+           _result = [response[@"courses"] mutableCopy];
          
          if (_result.count<40) {
              _endPage = YES;
@@ -98,10 +117,7 @@
              _endPage = NO;
          }
          
-    //     NSLog(@"reloadData   _result= %ld ------",_result.count);
-
-
-        [_tableView reloadData];
+          [_tableView reloadData];
     }];
 }
 
@@ -115,13 +131,14 @@
     UniversityCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     
     cell.titleLabel.text = info[@"name"];
-    cell.subtitleLabel.text = info[@"official_name"];
     
-    cell.detailLabel1.text = [NSString stringWithFormat:@"学位类型：%@", info[@"level"]];
-    cell.detailLabel2.text = [NSString stringWithFormat:@"专业方向：%@", [info[@"areas"] componentsJoinedByString:@","]];
+    cell.subtitleLabel.text = info[@"official_name"];
+    //  "专业方向";   "学位类型";
+    NSLog(@"cell.detailLabel1cell.detailLabel1 = %@ ",info[@"level"]);
+    cell.detailLabel1.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),info[@"level"]];
+    cell.detailLabel2.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-005"), [info[@"areas"] componentsJoinedByString:@","]];
     
     [self configureCellSelectionView:cell id:info[@"_id"]];
-    
     
     if (indexPath.row == _result.count-1 && !_endPage) {
       
@@ -139,8 +156,8 @@
 
 -(void)loadMoreData
 {
+  
     //_resquestParameters = [@{@":id": _universityID, @"page": @(_nextPage), @"size": @40} mutableCopy];
-    
     [self
      startAPIRequestWithSelector:@"GET api/university/:id/courses"
      parameters:_resquestParameters
@@ -170,10 +187,7 @@
              _endPage = YES;
          }
          
-         
-      //   NSLog(@"testetwetwetewtewerw = %ld ---- more = %ld",_result.count,moreResultArray.count);
-
-         [_tableView reloadData];
+          [_tableView reloadData];
      }];
 
     
@@ -182,8 +196,8 @@
 
 
 - (void)configureCellSelectionView:(UniversityCourseCell *)cell id:(NSString *)id {
-    if ([_selectedIDs containsObject:id]) {
-        [cell.selectionView setTitle:@"已添加" forState:UIControlStateNormal];
+    if ([_selectedIDs containsObject:id]) {// @"已添加"
+        [cell.selectionView setTitle:GDLocalizedString(@"UniCourseDe-007")  forState:UIControlStateNormal];
         [cell.selectionView setImage:nil forState:UIControlStateNormal];
     } else if ([_newSelectedIDs containsObject:id]) {
         [cell.selectionView setTitle:nil forState:UIControlStateNormal];
@@ -212,14 +226,15 @@
     
     UniversityCourseCell *cell = (UniversityCourseCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self configureCellSelectionView:cell id:id];
-    
-    _selectedCountLabel.text = [NSString stringWithFormat:@"已选择：%d个", (int)_newSelectedIDs.count];
+    //已选择:
+    _selectedCountLabel.text = [NSString stringWithFormat:@"%@：%d", GDLocalizedString(@"ApplicationList-003"),(int)_newSelectedIDs.count];
 }
 
 
 - (IBAction)addSelectedCourse {
     if (_newSelectedIDs.count == 0) {
-        [KDAlertView showMessage:@"你尚未选择任何课程" cancelButtonTitle:@"好的"];
+        //@"你尚未选择任何课程"  
+        [KDAlertView showMessage: GDLocalizedString(@"UniCourseDe-008")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")]; //@"好的"];
         return;
     }
     
@@ -229,7 +244,7 @@
      success:^(NSInteger statusCode, id response) {
          KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
          [hud applySuccessStyle];
-         [hud setLabelText:@"加入成功"];
+         [hud setLabelText:GDLocalizedString(@"ApplicationProfile-0015")];//@"加入成功"];
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
              [self dismiss];
@@ -238,13 +253,8 @@
 }
 
 - (NSArray *)filterView:(FilterView *)filterView subtypesForItemAtIndex:(NSInteger)index {
-    
-    
    
     return index == 0 ? _subjectOptions : _levelOptions;
-    
-    
-    
 }
 
 - (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index subtypeIndex:(NSInteger)subtypeIndex {
@@ -256,7 +266,7 @@
     _nextPage = 0;
     
     if (subtypeIndex != 0) {
-        _resquestParameters[key] = index == 0 ? _subjectOptions[subtypeIndex] : _levelKeyOptions[subtypeIndex];
+        _resquestParameters[key] = index == 0 ? _subjectOptions[subtypeIndex] : _levelOptions[subtypeIndex];
     } else {
         [_resquestParameters removeObjectForKey:key];
     }
