@@ -8,28 +8,28 @@
 
 #import "PersonSectionView.h"
 @interface PersonSectionView ()
-@property (weak, nonatomic) IBOutlet UIView *xxxV;
-@property (weak, nonatomic) IBOutlet UIProgressView *xxxProv;
+@property (weak, nonatomic) IBOutlet UIImageView *secionIcon;
 
 @end
 
 @implementation PersonSectionView
--(void)awakeFromNib
-{
-    self.xxxV.clipsToBounds = YES;
-    self.xxxV.layer.cornerRadius = 10;
-    
-    
 
+
+-(void)setSectionNumber:(NSInteger )sectionNumber{
+    _sectionNumber = sectionNumber;
+    
+    if (sectionNumber ==0 ) {
+        
+        
+       self.sectionTitleLabel.text =  GDLocalizedString(@"ApplicationProfile-002");//@"请您选择你的留学意向";
+        
+        [self.secionIcon  setImage:[UIImage imageNamed:@"uni-list"]];
+        
+    }else
+    {
+        self.sectionTitleLabel.text =   GDLocalizedString(@"ApplicationProfile-0013");// @"请填写您的背景资料";
+         [self.secionIcon  setImage:[UIImage imageNamed:@"world_map"]];
+
+    }
 }
-
--(void)setProgressValue:(CGFloat)ProgressValue
-{
-    _ProgressValue = ProgressValue;
-    
-    
-    self.xxxProv.progress = ProgressValue;
-    
-}
-
 @end

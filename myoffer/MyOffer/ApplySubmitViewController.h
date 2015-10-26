@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ApplySubmitViewController : BaseViewController
-
+@property(nonatomic,copy)NSString *from;
 @end

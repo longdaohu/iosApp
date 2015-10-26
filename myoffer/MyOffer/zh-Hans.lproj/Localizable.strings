@@ -25,7 +25,9 @@
 
 "Category-button003" = "学科专业";
 
-"Category-button004" = "学科专业";
+"Category-button004" = "大学排名";
+
+//评估页面
 
 "Evaluate-001" = "在线评估";
 
@@ -58,6 +60,9 @@
 "Evaluate-0016" = "好的";
 
 "Evaluate-0017" = "保存";
+"Evaluate-University" = "毕业院校";
+"Evaluate-Done" = "完成";
+
 
 //我的页面
 
@@ -106,6 +111,8 @@
 
 "Person-006" = "修改密码";
 
+"Person-passwd" = "密码长度不小于6个字符";
+
 "Person-007" = "未绑定手机号";
 
 "Person-008" = "未绑定邮箱";
@@ -113,6 +120,7 @@
 //我的设置 - 用户反馈页面
 
 "FeedBack-001" = "发送";
+"FeedBack-002" = "发送";
 
 //我的设置 - 修改密码页面
 
@@ -139,11 +147,13 @@
 "UniversityDetail-008" = "照片展示";
 "UniversityDetail-009" = "查看所有专业课程";
 "UniversityDetail-0010" = "暂无排名";
+"UniversityDetail-noRank" = "暂无排名";
 "UniversityDetail-0011" = "平均录取率";
 "UniversityDetail-0012" = "关注成功";
 "UniversityDetail-0013" = "取消成功";
 "UniversityDetail-0014" = "我的成功率";
-
+"UniversityDetail-testRate" = "测测我的入学成功率";
+"UniversityDetail-operating" = "计算中...";
 
  //分类  页面
 "CategoryVC-ENG001" = "英格兰";
@@ -158,24 +168,37 @@
 "CategoryVC-AUSTR005" = "维多利亚州";
 "CategoryVC-AUSTR006" = "澳大利亚首都领地";
 "CategoryVC-AUSTR007" = "昆士兰州";
-//已提交申请  页面
+
+"CategoryVC-times" = "TIMES排名";
+"CategoryVC-world" = "QS世界大学排名";
+ //已提交申请  页面
 "ApplicationStutasVC-001" = "综合排名";
+"ApplicationStutasVC-noData" = "Duang!您还没有提交申请！";
 //申请意向
 "ApplicationList-001" = "请至少选择一门课程!";
 "ApplicationList-002" = "您提交审核的申请不能超过6个！";
 "ApplicationList-003" = "已选择";
 "ApplicationList-004" = "共";
 "ApplicationList-005" = "立即申请";
+"ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。如有疑问请联系客服人员。";
+"ApplicationList-noData" = "Duang!请添加您的意向学校吧！";
+
 //申请时提交个人资料
 "ApplicationProfile-001" = "个人资料";
 "ApplicationProfile-002" = "请选择您的留学意向";
-"ApplicationProfile-003" = "想去的国家或地区";
-"ApplicationProfile-004" = "计划出国的时间";
-"ApplicationProfile-005" = "希望就读的专业";
+"ApplicationProfile-003" = "请输入想去的国家";
+"ApplicationProfile-004" = "请选择计划出国的时间";
+"ApplicationProfile-005" = "请选择希望就读的专业";
 "ApplicationProfile-006" = "姓名";
-"ApplicationProfile-007" = "就读院校";
-"ApplicationProfile-008" = "GPA（平均成绩）";
-"ApplicationProfile-009" = "雅思成绩";
+"ApplicationProfile-firstName" = "请输入您的名";
+"ApplicationProfile-lastName" = "请输入您的姓";
+"ApplicationProfile-phone" = "请输入您的手机号码";
+"ApplicationProfile-007" = "请输入就读或毕业院校";
+"ApplicationProfile-grade" = "请选择年级";
+"ApplicationProfile-field" = "请选择就读专业";
+"ApplicationProfile-008" = "请输入GPA（平均成绩）";
+"ApplicationProfile-009" = "请选择您的雅思平均成绩";
+"ApplicationProfile-lowScore" = "请选择您的雅思最低成绩";
 "ApplicationProfile-0010" = "已完成";
 "ApplicationProfile-0011" = "未完成";
 "ApplicationProfile-0012" = "提交审核";
@@ -212,10 +235,13 @@
 "LoginVC-002" = "注册";
 "LoginVC-003" = "忘记密码";
 "LoginVC-004" = "请输入手机号或邮箱";
-"LoginVC-005" = "请输入密码";
+"LoginVC-005" = "请输入新密码";
 //注册
-"LoginVC-006" = "请输入11位手机号码";
-"LoginVC-007" = "请输入验证码";
+"LoginVC-006" = "请输入手机号码";
+"LoginVC-phoneEG" = "请输入手机号码 :7xxx";
+"LoginVC-PhoneNumberError" = "请输入正确的手机号码";
+"LoginVC-EnglandNumberError" = "请输入正确的手机号码,如:7xxx";
+ "LoginVC-007" = "请输入验证码";
 "LoginVC-008" = "获取验证码";
 "LoginVC-009" = "请再次输入密码";
 "LoginVC-0010" = "注册即表示同意 myOffer用户协议";
@@ -223,6 +249,22 @@
 "LoginVC-0012" = "重置密码";
 "LoginVC-0013" = "请等待";
 "LoginVC-0014" = "秒";
+"LoginVC-icon" = "logo_CN";
+"LoginVC-moreOption" = "第三方登录";
+"LoginVC-china" = "中国+86";
+"LoginVC-chinese" = "中国";
+"LoginVC-england" = "英国";
+"LoginVC-english" = "英国+44";
+
+//登录绑定页面
+"bangdingVC-title" = "微信登录";
+"bangdingVC-login" = "立即进入";
+"bangdingVC-bangding" = "绑定myOffer账号";
+"bangdingVC-noti" = "如果您已注册，请绑定myOffer账号";
+"bangdingVC-hello" = "您好，微信用户";
+
+
+
 //语言设置页面
 "LanguageVC-001" = "语言设置";
 "LanguageVC-002" = "提示";
@@ -242,8 +284,8 @@
 "YASI-006" = "雅思平均分";
 
 //成绩平均分
-"AVGscore-001" = "平均分不能为空";
-"AVGscore-002" = "平均分";
+"AVGscore-001" = "GPA（平均成绩）不能为空";
+"AVGscore-002" = "GPA（平均成绩）";
 
 
 //用户名字 手机号
@@ -264,5 +306,25 @@
 "UniversityBG-004" = "教育背景";
 //申请状态
 "ApplySummit-001" = "正在审核";
-"myOffer-001" = "Duang!您的个人申请还没有通过";
+"myOffer-001" = "Duang!还没有数据哦";
+//侧边菜单
+"Left-Home" = "主页";
+"Left-Applycation" = "我的申请";
+"Left-Set" = "设置";
+"Left-Logout" = "注销";
+
+//网络请求方法提示
+"NetRequest-connectError" = "网络请求失败，请检查网络连接后重试。";
+"NetRequest-ErrorTitle" = "错误";
+"NetRequest-OK" = "好的";
+"NetRequest-SeverError" = "服务器错误";
+"NetRequest-SeverReturnError" = "服务器返回结果解析出错";
+
+//协议页面
+"Potocol-Commit" = "我已阅读，同意";
+"Potocol-Cancel" = "取消";
+//关注院校页面
+"Favorite-NOTI" = "Duang!请添加您关注的院校吧！";
+
+
 

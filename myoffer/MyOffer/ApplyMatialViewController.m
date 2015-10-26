@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = GDLocalizedString(@"ApplyMater-001");  // Apply Materianls  @"我的申请材料"
     
-    self.notiLabel.text =  GDLocalizedString(@"ApplyMater-002");
+    self.notiLabel.text =  GDLocalizedString(@"myOffer-001");
 }
 
 - (void)didReceiveMemoryWarning {

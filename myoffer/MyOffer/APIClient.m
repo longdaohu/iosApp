@@ -18,8 +18,8 @@ NSString * const kAPIClientErrorDomain = @"kAPIClientErrorDomain";
 
 @end
 
-//static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
-static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
+static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
+//static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
 
 @implementation APIClient
 

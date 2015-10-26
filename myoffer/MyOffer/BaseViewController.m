@@ -55,7 +55,8 @@
                  success(statusCode, response);
              }
              @catch (NSException *exception) {
-                 [KDAlertView showMessage:@"服务器返回结果解析出错" cancelButtonTitle:@"好的"];
+                 //@"服务器返回结果解析出错"
+                 [KDAlertView showMessage:GDLocalizedString(@"NetRequest-SeverReturnError") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];
              }
          }
      } failure:^(NSInteger statusCode, NSError *error) {
@@ -149,12 +150,12 @@
 - (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action {
     NSString *errorMessage;
     if (error.domain == kAPIClientErrorDomain) {
-        errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"服务器错误 %d", (int)error.code];
+        errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"%@ %d",GDLocalizedString(@"NetRequest-SeverError") ,(int)error.code];//服务器错误
     } else {
-        errorMessage = @"网络请求失败，请检查网络连接后重试。";
+        errorMessage = GDLocalizedString(@"NetRequest-connectError");//@"网络请求失败，请检查网络连接后重试。";
     }
     
-    NSString *errorTitle = @"错误";
+    NSString *errorTitle =GDLocalizedString(@"NetRequest-ErrorTitle") ;//@"错误";
     
     if ([[KDAlertView presentingAlertView].title isEqualToString:errorTitle] &&
         [[KDAlertView presentingAlertView].message isEqualToString:errorMessage]) {
@@ -162,7 +163,7 @@
         return;
     }
     
-    KDAlertView *av = [[KDAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"好的" cancelAction:^(KDAlertView *av){
+    KDAlertView *av = [[KDAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:GDLocalizedString(@"NetRequest-OK") cancelAction:^(KDAlertView *av){
             if (action) {
                 action();
             }

@@ -23,14 +23,13 @@
     int _nextPage;
     BOOL _loading;
 }
-
+@property(nonatomic,strong)KDProgressHUD *progressHub;
 
 @end
 
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 @implementation SearchResultViewController
-
 
 
 - (instancetype)initWithSearchText:(NSString *)text orderBy:(NSString *)orderBy {
@@ -126,8 +125,7 @@
     } else {
         _filterView.items =@[GDLocalizedString(@"SearchResultVC-001"),GDLocalizedString(@"SearchResultVC-002")];  //@[@"TIMES排名", @"按字母排序"];
     }
-    
-    NSUInteger orderIndex = [_availableOrderKey indexOfObject:_orderBy];
+     NSUInteger orderIndex = [_availableOrderKey indexOfObject:_orderBy];
     if (orderIndex != NSNotFound) {
         _filterView.selectedIndex = orderIndex;
     }
@@ -152,6 +150,10 @@
     //在加载时，给filterView工具栏添加上一层遮罩，在加载结束时移除
     _loadingBackView  =[[UIView alloc] initWithFrame:filterView.bounds];
     _loadingBackView.backgroundColor =[UIColor clearColor];
+    KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+    [hud hideAnimated:YES afterDelay:1];
+    self.progressHub = hud;
+ 
     [self.view addSubview:_loadingBackView];
     
     [self reloadDataWithPageIndex:0 refresh:true];
@@ -189,8 +191,7 @@
              [_result removeAllObjects];
              
          }
-         
-         [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              NSString *uid = obj[@"_id"];
              
              if (![_resultIDSet containsObject:uid]) {
@@ -198,8 +199,7 @@
                  [_result addObject:obj];
               }
          }];
-         
-         _allResultCount = [response[@"count"] integerValue];
+          _allResultCount = [response[@"count"] integerValue];
          
          if (_result.count == 0) {
              _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -207,10 +207,11 @@
          }
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
-       
+        
          //在加载结束时移除 _loadingBackView
          [_loadingBackView removeFromSuperview];
          _loadingBackView = nil;
+          [self.progressHub removeFromSuperViewOnHide];
          
          [_tableView reloadData];
          _loading = NO;
@@ -258,3 +259,5 @@
 }
 
 @end
+
+

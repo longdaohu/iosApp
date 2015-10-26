@@ -10,8 +10,6 @@
 
 @interface PersonSectionView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *sectionTitleLabel;
-@property(nonatomic,assign)CGFloat ProgressValue;
- //@property (weak, nonatomic) IBOutlet UIView *ResultProcessView;
-
+@property(nonatomic,assign)NSInteger sectionNumber;
 
 @end

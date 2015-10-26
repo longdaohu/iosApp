@@ -56,7 +56,7 @@
                                 <action selector="addSelectedCourse" destination="-1" eventType="touchUpInside" id="832-Ei-cBs"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选择：0个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVk-kG-BEQ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="已选择：0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVk-kG-BEQ">
                             <rect key="frame" x="15" y="0.0" width="74" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>

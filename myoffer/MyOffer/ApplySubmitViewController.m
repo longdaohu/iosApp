@@ -15,6 +15,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *submittedTableView;
 @property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UILabel *noDataLabel;
 
 @end
 
@@ -29,24 +30,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.title = GDLocalizedString(@"Me-002");//"申请状态";//@"已提交申请";
+     self.noDataLabel.text =GDLocalizedString(@"ApplicationStutasVC-noData");
      self.automaticallyAdjustsScrollViewInsets = NO;
      self.submittedTableView.tableFooterView = [[UIView alloc] init];
-    
      [self reloadData];
+     if (self.from.length) {
+        //左侧菜单按钮
+        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BurgerMenu_39"] style:UIBarButtonItemStylePlain target:self action:@selector(showLeftMenu:)];
+    }
 }
-
-
-- (void)reloadData {
+//打开左侧菜单
+-(void)showLeftMenu:(UIBarButtonItem *)barButton
+{
+    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    YRSideViewController *sideViewController=[delegate sideViewController];
+    [sideViewController showLeftViewController:true];
+}
+ - (void)reloadData {
    
     
     [self startAPIRequestWithSelector:@"GET api/account/checklist" parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSLog(@"%@",response[@"records"]);
-        
-      
-       
-        NSArray *items = response[@"records"];
-        
+         NSArray *items = response[@"records"];
         
         if (items.count == 0) {
             self.noDataView.hidden = NO;
@@ -68,11 +73,11 @@
             NSDictionary *courseInfo = [obj valueForKey:@"course"];
              NSString *coreName =  [courseInfo  valueForKey:@"official_name"];
 
-            UITableViewCell *xcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-             xcell.textLabel.text = coreName;
-             xcell.textLabel.font = [UIFont systemFontOfSize:14];
-             xcell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-            xcell.detailTextLabel.text = GDLocalizedString(@"ApplySummit-001");// @"正在审核";
+             UITableViewCell *xcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+            UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, APPSIZE.width - 90 , xcell.contentView.frame.size.height)];
+            [xcell.contentView addSubview:contentLabel];
+             contentLabel.text = coreName;
+            xcell.detailTextLabel.text = obj[@"state"];//GDLocalizedString(@"ApplySummit-001");// @"正在审核";
             NSMutableArray *cells = [NSMutableArray arrayWithObject:cell];
             [cells addObject:xcell];
             return cells;

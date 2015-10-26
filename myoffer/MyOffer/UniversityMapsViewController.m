@@ -32,7 +32,6 @@
 
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
-    
     KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
     [hud hideAnimated:YES afterDelay:2];
     self.hud = hud;
@@ -59,6 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 @end
+
+
+

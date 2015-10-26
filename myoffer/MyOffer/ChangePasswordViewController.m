@@ -98,16 +98,14 @@
         [KDAlertView showMessage:_oldPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")]; //@"好的"];
         return;
     }
-    if (_newPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:_newPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
-        return;
-    }
-    if (_confirmPasswordTextField.text.length == 0) {
-        [KDAlertView showMessage:_confirmPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
+   
+     if(_newPasswordTextField.text.length < 6 )
+    {   //@"密码长度不小于6个字符"
+        [KDAlertView showMessage:GDLocalizedString(@"Person-passwd") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     
-    if (![_newPasswordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
+     if (![_newPasswordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
         [KDAlertView showMessage:GDLocalizedString(@"ChPasswd-004")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
         return;//@"两次输入的密码不一致"
     }

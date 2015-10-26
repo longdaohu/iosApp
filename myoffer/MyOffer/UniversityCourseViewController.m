@@ -52,22 +52,15 @@
  - (void)viewDidLoad {
     [super viewDidLoad];
     [self.summitBtn setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
+     _selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
+     
     [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
     
-    NSString *lan =[InternationalControl userLanguage];
-    NSString *localLan = nil;
-    if ([lan containsString:@"en"]) {
-        
-        localLan = @"en";
-        
-    }else
-    {
-        localLan = @"zh-cn";
-    }
-    
+
+     
     [self
      startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang": localLan}
+     parameters:@{@":lang": GDLocalizedString(@"ch_Language")}
      success:^(NSInteger statusCode, NSArray *response) {
         
          //专业类型数组
@@ -134,8 +127,7 @@
     
     cell.subtitleLabel.text = info[@"official_name"];
     //  "专业方向";   "学位类型";
-    NSLog(@"cell.detailLabel1cell.detailLabel1 = %@ ",info[@"level"]);
-    cell.detailLabel1.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),info[@"level"]];
+     cell.detailLabel1.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),info[@"level"]];
     cell.detailLabel2.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-005"), [info[@"areas"] componentsJoinedByString:@","]];
     
     [self configureCellSelectionView:cell id:info[@"_id"]];

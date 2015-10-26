@@ -132,7 +132,7 @@
 
 - (IBAction)searchButtonPressed {
     SearchViewController *vc = [[SearchViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    XWGJNavigationController *nvc = [[XWGJNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion:nil];
 }
 

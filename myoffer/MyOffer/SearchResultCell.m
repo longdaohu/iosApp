@@ -19,8 +19,8 @@
     self.titleLabel.text = universityInfo[@"name"];
     self.subtitleLabel.text = universityInfo[@"official_name"];
 
-    self.descriptionLabel.text = [NSString stringWithFormat:@"%@：%@ - %@\n%@：%@", GDLocalizedString(@"UniversityDetail-005"), universityInfo[@"country"], universityInfo[@"state"], GDLocalizedString(@"ApplicationStutasVC-001"),[universityInfo[ranking] intValue] == 99999 ? @"暂无排名" : universityInfo[ranking]];
-    [self.logoView.logoImageView KD_setImageWithURL:universityInfo[@"logo"]];
+    self.descriptionLabel.text = [NSString stringWithFormat:@"%@：%@ - %@\n%@：%@", GDLocalizedString(@"UniversityDetail-005"), universityInfo[@"country"], universityInfo[@"state"], GDLocalizedString(@"ApplicationStutasVC-001"),[universityInfo[ranking] intValue] == 99999 ?GDLocalizedString(@"UniversityDetail-noRank") : universityInfo[ranking]];
+     [self.logoView.logoImageView KD_setImageWithURL:universityInfo[@"logo"]];
 }
 
 @end

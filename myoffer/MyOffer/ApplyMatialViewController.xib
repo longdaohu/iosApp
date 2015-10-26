@@ -49,6 +49,7 @@
                 <constraint firstItem="v9E-Wp-dcb" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="iX4-bx-aoh"/>
                 <constraint firstItem="v9E-Wp-dcb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vPn-7S-i81"/>
             </constraints>
+            <point key="canvasLocation" x="146" y="356"/>
         </view>
     </objects>
     <resources>

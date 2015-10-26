@@ -122,9 +122,11 @@
             }
         }];
     } else {
+          NSString *rankT = GDLocalizedString(@"CategoryVC-times");
+          NSString *rankQS = GDLocalizedString(@"CategoryVC-world");
+        _items = @[@[rankT, rankQS]];
+         _tableView.rowHeight = 44;
         
-        _items = @[@[@"TIMES排名", @"QS世界大学排名"]];
-        _tableView.rowHeight = 44;
         [_tableView reloadData];
 
     }

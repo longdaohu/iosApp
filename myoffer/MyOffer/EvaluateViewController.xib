@@ -7,9 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EvaluateViewController">
             <connections>
-                <outlet property="_saveButton" destination="oK4-kN-hvC" id="XTG-Yt-jTX"/>
                 <outlet property="_tableView" destination="kEs-Ob-YMp" id="wv2-RE-s94"/>
                 <outlet property="_toolbar" destination="f5T-Or-xrp" id="lGN-mL-KXd"/>
+                <outlet property="saveButton" destination="oK4-kN-hvC" id="ITw-3K-Sv6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

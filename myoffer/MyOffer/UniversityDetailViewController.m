@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *GalPhotoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *BrifIInfoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *ShowCourseSBtn;
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *EvaluationBtn;
 
 
 
@@ -41,6 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.EvaluationBtn setTitle:GDLocalizedString(@"UniversityDetail-testRate") forState:UIControlStateNormal];
+    self.EvaluationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.BuildTimeLabel.text = GDLocalizedString(@"UniversityDetail-004"); //"建校时期";
     self.LocationLabel.text = GDLocalizedString(@"UniversityDetail-005"); //"所在地";
     self.UniRankLabel.text = GDLocalizedString(@"UniversityDetail-006"); //"大学排名";
@@ -48,12 +51,10 @@
     self.GalPhotoLabel.text = GDLocalizedString(@"UniversityDetail-008"); //"照片展示";
     [self.ShowCourseSBtn setTitle:GDLocalizedString(@"UniversityDetail-009")  forState:UIControlStateNormal] ; //"查看所有专业课程";
     self.title = GDLocalizedString(@"UniversityDetail-001"); //@"学校详情";
-    
-    _evaluationButton.layer.cornerRadius = 2;
+     _evaluationButton.layer.cornerRadius = 2;
     _evaluationButton.adjustAllRectWhenHighlighted = YES;
     _evaluationButton.layer.borderColor = [_evaluationButton currentTitleColor].CGColor;
     _evaluationButton.layer.borderWidth = 2;
-    
     _scrollView.hidden = YES;
     [self reloadData];
 }
@@ -81,8 +82,8 @@
          NSString *rank = GDLocalizedString(@"UniversityDetail-002");
          NSString *QSrank = GDLocalizedString(@"UniversityDetail-003");
          NSString *NOrank = GDLocalizedString(@"UniversityDetail-0010");
-        _locationLabel.text = [NSString stringWithFormat:@"%@ | %@ | %@", response[@"country"], response[@"state"], response[@"city"]];
-         _rankingLabel.text = [NSString stringWithFormat:@"%@：%@\n%@：%@",rank,QSrank,[response[@"ranking_ti"] intValue] == 99999 ? NOrank : response[@"ranking_ti"], [response[@"ranking_qs"] intValue] == 99999 ? NOrank : response[@"ranking_qs"]];
+         _locationLabel.text = [NSString stringWithFormat:@"%@ | %@ | %@", response[@"country"], response[@"state"], response[@"city"]];
+         _rankingLabel.text = [NSString stringWithFormat:@"%@：%@\n%@：%@",rank,[response[@"ranking_ti"] intValue] == 99999 ? NOrank : response[@"ranking_ti"], QSrank,[response[@"ranking_qs"] intValue] == 99999 ? NOrank : response[@"ranking_qs"]];
         
         [_logoView.logoImageView KD_setImageWithURL:response[@"logo"]];
         _bannerView.views = [response[@"m_images"] KD_arrayUsingMapEnumerateBlock:^id(id obj, NSUInteger idx) {
@@ -102,7 +103,7 @@
             
             float my = [response[@"evaluation"] floatValue];
             if(my == -1) {
-                _mySuccessLabel.text = @"计算中...";
+                _mySuccessLabel.text =GDLocalizedString(@"UniversityDetail-operating");//@"计算中...";
                 _mySuccessProgressView.progress = 0.0f;
                 
                 [self startAPIRequestWithSelector:kAPISelectorEvaluate
@@ -166,7 +167,7 @@
 }
 
 - (IBAction)viewAllCourses {
-    UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
+     UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

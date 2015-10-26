@@ -10,7 +10,10 @@
 #import "SearchResultCell.h"
 #import "AgreementViewController.h"
 #import "SubmitViewController.h"
-#import "PersonInfoViewController.h"
+//#import "PersonInfoViewController.h"
+#import "ApplySectionView.h"
+#import "UniversityCourseViewController.h"
+#import "CommitInfoViewController.h"
 
 @interface ApplyViewController () {
     NSArray *_waitingCells;
@@ -23,7 +26,8 @@
 @property(nonatomic,assign)int totalCount;//所有学校的专业ID数组
 @property(nonatomic,strong)NSMutableArray  *courseSelecteds; //已选中课程ID数组
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *submitBtn;
-
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UILabel *noDataLabel;
 
 @end
 
@@ -34,6 +38,7 @@
 -(void)getcourseidGroups
 {
     _idGroups = [NSMutableArray array];
+    self.totalCount = 0;
     
     for (NSDictionary *universityInfo in self.responds) {
         
@@ -52,7 +57,6 @@
     }
 }
 
-
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -63,34 +67,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-005") forState:UIControlStateNormal];
+    self.noDataLabel.text = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
     
-    [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-005") forState:UIControlStateNormal];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
+     self.automaticallyAdjustsScrollViewInsets = NO;
     if ([_waitingTableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [_waitingTableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
     _waitingTableView.tableFooterView = [[UIView alloc] init];
-
-    self.title = GDLocalizedString(@"Me-001");// @"申请意向";
+     self.title = GDLocalizedString(@"Me-001");// @"申请意向";
     self.courseSelecteds = [NSMutableArray array];
-    [self reloadData];
-}
+    
+    [self startAPIRequestWithSelector:@"GET api/account/applicationliststate" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
+        
+        NSInteger state = [response[@"state"] integerValue];
+         if (state == 0) {
+             UILabel *notiLabel =[[UILabel alloc] initWithFrame:CGRectMake(0, APPSIZE.height - 50, APPSIZE.width, 50)];
+            notiLabel.numberOfLines = 0;
+            notiLabel.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
+            notiLabel.textColor =[UIColor whiteColor];
+            notiLabel.text = GDLocalizedString(@"ApplicationList-noti"); //@"您已提交申请，如需要重新提交，请与客服人员联系！";
+            notiLabel.adjustsFontSizeToFitWidth = YES;
+            self.submitBtn.enabled = NO;
+            [self.view addSubview:notiLabel];
+        }
+     }];
+ }
+
+
 - (void)reloadData {
     
-    [self startAPIRequestWithSelector:@"GET api/account/applies" parameters:nil success:^(NSInteger statusCode, NSArray *response) {
-        
-        self.responds = response ;
-        
-        
+         [self startAPIRequestWithSelector:@"GET api/account/applies" parameters:nil success:^(NSInteger statusCode, NSArray *response) {
+         self.responds = response ;
+          self.noDataView.hidden = NO;
+         if(self.responds.count)
+         {
+             self.noDataView.hidden = YES;
+         }
          [self getcourseidGroups];
-
-
-        
-        [self configureSelectedCoursedID:[self.courseSelecteds copy]];
-        
-        [_waitingTableView reloadData];
+         [self configureSelectedCoursedID:[self.courseSelecteds copy]];
+         [_waitingTableView reloadData];
     }];
     
 }
@@ -99,6 +116,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+       [self reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -155,18 +174,19 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    SearchResultCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SearchResultCell class]) owner:nil options:nil][0];
-   
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+ 
 
+    __weak typeof(self)weakSelf = self;
+    ApplySectionView *sectionView =[[NSBundle mainBundle] loadNibNamed:@"ApplySectionView" owner:nil options:nil].lastObject;
+    sectionView.sectionInfo = self.responds[section];
+    NSString *universityID = sectionView.sectionInfo[@"_id"];
+    sectionView.actionBlock = ^{
+       
+         UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:universityID];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
     
-    [cell configureWithInfo:self.responds[section]];
-    
-    
-    return cell;
+    return sectionView;
 }
 
 
@@ -249,7 +269,7 @@
     
     
 //    NSSet *selectedIDSet = [NSSet setWithArray:];
-    PersonInfoViewController *vc = [[PersonInfoViewController alloc] initWithApplyInfo:self.responds selectedIDs:[self.courseSelecteds copy]];
+    CommitInfoViewController *vc = [[CommitInfoViewController alloc] initWithApplyInfo:self.responds selectedIDs:[self.courseSelecteds copy]];
     [self.navigationController pushViewController:vc animated:YES];
     
     

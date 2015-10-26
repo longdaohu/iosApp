@@ -15,10 +15,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="179" translatesAutoresizingMaskIntoConstraints="NO" id="kgh-Cv-OUI">
-                        <rect key="frame" x="93" y="49" width="194" height="40"/>
+                        <rect key="frame" x="93" y="49" width="227" height="40"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="FWM-mV-Lg9"/>
+                            <constraint firstAttribute="width" constant="227" id="7bf-Z2-Y2K"/>
+                            <constraint firstAttribute="height" constant="40" id="LNg-i1-hB9"/>
                         </constraints>
                         <string key="text">地址：
 排名：</string>
@@ -52,7 +53,7 @@
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="kgh-Cv-OUI" secondAttribute="bottom" constant="10" id="0Is-Km-tHi"/>
+                    <constraint firstItem="kgh-Cv-OUI" firstAttribute="top" secondItem="pr2-nN-T3l" secondAttribute="bottom" id="7g4-Yp-tXz"/>
                     <constraint firstItem="pr2-nN-T3l" firstAttribute="top" secondItem="nZt-D1-TnL" secondAttribute="bottom" id="Fml-zp-hWk"/>
                     <constraint firstAttribute="centerY" secondItem="hAp-zJ-Ef4" secondAttribute="centerY" id="MCT-9v-dCv"/>
                     <constraint firstItem="nZt-D1-TnL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="MOW-wv-JHy"/>
@@ -60,8 +61,7 @@
                     <constraint firstItem="hAp-zJ-Ef4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Ogu-mZ-O87"/>
                     <constraint firstItem="pr2-nN-T3l" firstAttribute="leading" secondItem="hAp-zJ-Ef4" secondAttribute="trailing" constant="8" id="UOP-e9-JQQ"/>
                     <constraint firstItem="nZt-D1-TnL" firstAttribute="leading" secondItem="hAp-zJ-Ef4" secondAttribute="trailing" constant="8" id="kNe-4v-0Ea"/>
-                    <constraint firstAttribute="trailing" secondItem="kgh-Cv-OUI" secondAttribute="trailing" id="nJC-VB-7Q5"/>
-                    <constraint firstItem="kgh-Cv-OUI" firstAttribute="leading" secondItem="hAp-zJ-Ef4" secondAttribute="trailing" constant="8" id="rwp-ao-F1K"/>
+                    <constraint firstItem="kgh-Cv-OUI" firstAttribute="leading" secondItem="hAp-zJ-Ef4" secondAttribute="trailing" constant="8" id="uSC-G6-ayc"/>
                     <constraint firstAttribute="trailing" secondItem="nZt-D1-TnL" secondAttribute="trailing" id="uUU-nH-FdQ"/>
                 </constraints>
             </tableViewCellContentView>

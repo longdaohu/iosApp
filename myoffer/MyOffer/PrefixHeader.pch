@@ -10,6 +10,8 @@
 #define MyOffer_PrefixHeader_pch
 #define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
 #define APPSIZE  [UIScreen mainScreen].bounds.size
+#define MAINCOLOR  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
+
 #import "KDActionSheet.h"
 #import "KDAlertView.h"
 #import "KDColorHelper.h"
@@ -38,6 +40,7 @@
 #import "LogoView.h"
 #import "SearchResultViewController.h" 
 #import "InternationalControl.h"
+#import "XWGJNavigationController.h"
 
 
 #endif

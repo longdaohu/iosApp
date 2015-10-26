@@ -31,7 +31,7 @@
     
     self.footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 80)];
     KDEasyTouchButton *saveBtn =[[KDEasyTouchButton alloc] initWithFrame:CGRectMake( 0.5 *(APPSIZE.width - 270), 20, 270, 40)];
-    saveBtn.backgroundColor =[UIColor colorWithRed:229.0/255 green:12.0/255 blue:105.0/255 alpha:1];
+    saveBtn.backgroundColor =MAINCOLOR;//[UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1];
     [saveBtn addTarget:self action:@selector(changeAPPLanguage:) forControlEvents:UIControlEventTouchUpInside];
     [saveBtn setTitle:GDLocalizedString(@"Evaluate-0017")  forState:UIControlStateNormal];
       [self.footView addSubview:saveBtn];
@@ -43,7 +43,6 @@
     self.languageTableView.tableFooterView = self.footView;
 
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

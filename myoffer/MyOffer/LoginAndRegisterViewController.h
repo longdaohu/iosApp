@@ -23,7 +23,8 @@
     IBOutlet UITextField *_loginPhoneTextField, *_loginPasswordTextField;
     
     IBOutlet UILabel *_registerLabel;
-}
+ }
+@property (weak, nonatomic) IBOutlet UIButton *protocalButton;
 
 - (IBAction)login;
 - (IBAction)register;

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ApplySubmitViewController">
             <connections>
+                <outlet property="noDataLabel" destination="8eg-Sk-vn9" id="Uot-I3-Nvr"/>
                 <outlet property="noDataView" destination="ASN-4P-COk" id="E2s-xb-cs5"/>
                 <outlet property="submittedTableView" destination="Vvq-sk-OJr" id="upA-ZW-JOW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

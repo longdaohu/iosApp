@@ -9,6 +9,7 @@
 #import "AgreementViewController.h"
 
 @interface AgreementViewController ()
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *commitBtn;
 
 @end
 
@@ -17,9 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/docs/zh-cn/web-agreement.html"]]];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+ 
+    [self.commitBtn setTitle:GDLocalizedString(@"Potocol-Commit") forState:UIControlStateNormal]; //同意按钮
+    NSString *RequestString = [NSString stringWithFormat:@"http://www.myoffer.cn/docs/%@/web-agreement.html",GDLocalizedString(@"ch_Language")];//zh-cn
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
+    //取消按钮
+   UIBarButtonItem *leftButton =[[UIBarButtonItem alloc] initWithTitle:GDLocalizedString(@"Potocol-Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
 - (void)cancel {

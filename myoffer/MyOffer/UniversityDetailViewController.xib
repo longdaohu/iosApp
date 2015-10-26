@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="BrifIInfoLabel" destination="x11-lE-WQP" id="cs5-yQ-b5d"/>
                 <outlet property="BuildTimeLabel" destination="1Yo-Lk-FCU" id="wDP-Le-f9M"/>
+                <outlet property="EvaluationBtn" destination="ger-v5-rGc" id="8gI-g4-VOT"/>
                 <outlet property="GalPhotoLabel" destination="pW1-gx-iHI" id="zIF-D1-qfT"/>
                 <outlet property="LocationLabel" destination="aak-Kh-fRF" id="YfB-12-kdC"/>
                 <outlet property="ShowCourseSBtn" destination="DHj-Ge-lYk" id="ZxS-n7-giV"/>

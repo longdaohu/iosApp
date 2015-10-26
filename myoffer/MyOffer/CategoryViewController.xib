@@ -161,7 +161,13 @@
             </constraints>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="518" y="425"/>
+            <point key="canvasLocation" x="318" y="415"/>
+        </view>
+        <view contentMode="scaleToFill" id="Ctb-iP-QPP">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="722" y="441"/>
         </view>
     </objects>
     <resources>

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AgreementViewController">
             <connections>
                 <outlet property="_webView" destination="ANP-mM-mqc" id="x9c-8R-avy"/>
+                <outlet property="commitBtn" destination="OEh-D3-Wub" id="cYC-Qo-tKL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-mM-mqc">
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-mM-mqc">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +50,7 @@
                 <constraint firstItem="ANP-mM-mqc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nWH-xT-rzi"/>
                 <constraint firstAttribute="bottom" secondItem="OEh-D3-Wub" secondAttribute="bottom" id="yDr-9F-b1y"/>
             </constraints>
-            <point key="canvasLocation" x="492" y="321"/>
+            <point key="canvasLocation" x="373" y="326"/>
         </view>
     </objects>
 </document>

@@ -16,12 +16,15 @@
 "Category-button002" = "Location";
 "Category-button003" = "Subjects";
 "Category-button004" = "Rankings";
+//提示相关用语
+"Noti-hao" = "OK";
+//评估页面
 "Evaluate-001" = "Evaluate";
 "Evaluate-002" = "Education";
 "Evaluate-009" = "Please enter graduated or current Uni";
 "Evaluate-003" = "Current field of study";
 "Evaluate-0010" = "Please select your field of study";
-"Evaluate-004" = "Grade";
+"Evaluate-004" = "GPA";
 "Evaluate-0011" = "Please enter your GPA";
 "Evaluate-005" = "Overall IELTS score";
 "Evaluate-0012" = "Please enter your Overall IELTS score";
@@ -32,6 +35,8 @@
 "Evaluate-0015" = "Your will get the success rate when you browse the Uni page";
 "Evaluate-0016" = "OK";
 "Evaluate-0017" = "Save";
+"Evaluate-University" = "University";
+"Evaluate-Done" = "Done";
 //我的页面
 "Me-001" = "Application List";
 "Me-002" = "Application Status";
@@ -59,10 +64,12 @@
 "Person-004" = "Email";
 "Person-005" = "Change display name";
 "Person-006" = "Change password";
+"Person-passwd" = "Password length is not less than 6 characters";
 "Person-007" = "Unbound Mobile phone";
 "Person-008" = "Unbound Email";
 //我的设置 - 用户反馈页面
 "FeedBack-001" = "Submit";
+"FeedBack-002" = "Submit";
 //我的设置 - 修改密码页面
 "ChPasswd-001" = "Please enter your Old password";
 "ChPasswd-002" = "Please enter your New password";
@@ -84,10 +91,13 @@
 "UniversityDetail-008" = "Gallery";
 "UniversityDetail-009" = "See All Courses";
 "UniversityDetail-0010" = "NO Ranking";
+"UniversityDetail-noRank" = "NO Ranking";
 "UniversityDetail-0011" = "Acceptance rate";
 "UniversityDetail-0012" = "Added favourite";
 "UniversityDetail-0013" = "Canceled favourite";
 "UniversityDetail-0014" = "Success rate";
+"UniversityDetail-testRate" = "Click here to check success rate";
+"UniversityDetail-operating" = "Operating...";
 
 
 //分类  页面
@@ -102,24 +112,38 @@
 "CategoryVC-AUSTR005" = "the State of Victoria";
 "CategoryVC-AUSTR006" = "Australian Capital Territory";
 "CategoryVC-AUSTR007" = "QLD(Queensland)";
+
+"CategoryVC-times" = "TIMES ranking";
+"CategoryVC-world" = "QS world ranking";
 //已提交申请  页面
 "ApplicationStutasVC-001" = "Ranking";
+"ApplicationStutasVC-noData" = "Opps! No Data！";
+
 //申请意向
 "ApplicationList-001" = "Please select at least one course!";
 "ApplicationList-002" = "Your application can not exceed 6！";
 "ApplicationList-003" = "Selected";
 "ApplicationList-004" = "Total";
 "ApplicationList-005" = "Submit";
+"ApplicationList-noti" = "You have submit your application,please contact myOffer team should there be any enquiries about your apllication.";
+"ApplicationList-noData" = "Opps! NoData!";
+
 //申请时提交个人资料
 "ApplicationProfile-001" = "Personal Information";
 "ApplicationProfile-002" = "Applying to Uni";
-"ApplicationProfile-003" = "Expected country";
-"ApplicationProfile-004" = "Expected time to go";
-"ApplicationProfile-005" = "Expected field of study";
+"ApplicationProfile-003" = "Please enter your expected country";
+"ApplicationProfile-004" = "Please enter your expected time to go";
+"ApplicationProfile-005" = "Please enter your expected field of study";
 "ApplicationProfile-006" = "Personal information";
-"ApplicationProfile-007" = "Education background";
-"ApplicationProfile-008" = "Average score";
-"ApplicationProfile-009" = "IELTS score";
+"ApplicationProfile-firstName" = "Please enter your first name";
+"ApplicationProfile-lastName" =  "Please enter your last name";
+"ApplicationProfile-phone" = "Please enter your contact phone number";
+"ApplicationProfile-007" = "Please enter graduated or current Uni";
+"ApplicationProfile-grade" = "Please select your current level of study";
+"ApplicationProfile-field" = "Please select your current field of study";
+"ApplicationProfile-008" = "Please enter your GPA";
+"ApplicationProfile-009" = "Please select overall  IELTS score";
+"ApplicationProfile-lowScore" = "Please select your lowest IELTS band score";
 "ApplicationProfile-0010" = "Finished";
 "ApplicationProfile-0011" = "Not Finish";
 "ApplicationProfile-0012" = "Proceed my application";
@@ -157,6 +181,9 @@
 "LoginVC-005" = "Enter password";
 //注册
 "LoginVC-006" = "Mobil phone";
+"LoginVC-phoneEG" = "Mobil phone e.g:7xxx";
+"LoginVC-PhoneNumberError" = "The phone number you entered is not valid";
+"LoginVC-EnglandNumberError" = "Please Enter your Phone number,e.g:7xxx";
 "LoginVC-007" = "Activate code";
 "LoginVC-008" = "Get code";
 "LoginVC-009" = "Enter password again";
@@ -165,6 +192,22 @@
 "LoginVC-0012" = "Reset password";
 "LoginVC-0013" = "wait";
 "LoginVC-0014" = "S";
+"LoginVC-icon" = "logo_EN";
+"LoginVC-moreOption" = "More Options";
+"LoginVC-china" = "China+86";
+"LoginVC-english" = "UK + 44";
+"LoginVC-chinese" = "China";
+"LoginVC-england" = "UK";
+
+
+//登录绑定页面
+"bangdingVC-title" = "wechat Login";
+"bangdingVC-login" = "Enter now";
+"bangdingVC-bangding" = "Bind myOffer account";
+"bangdingVC-noti" = "If you have signed up, please bind a myOffer account";
+"bangdingVC-hello" = "Hello，wechat user";
+
+
 //语言设置页面
 "LanguageVC-001" = "Language Setting";
 "LanguageVC-002" = "warning";
@@ -184,7 +227,7 @@
 "YASI-006" = "IELTS average";
 //成绩平均分
 "AVGscore-001" = "The average can not be empty";
-"AVGscore-002" = "Average Score";
+"AVGscore-002" = "GPA";
 //用户名称及手机号
 "UserName-001" = "Last Name can not be empty";
 "UserName-002" = "First Name can not be empty";
@@ -203,8 +246,25 @@
 "UniversityBG-004" = "Education";
 //申请状态
 "ApplySummit-001" = "Auditing";
-"myOffer-001" = "Opps! No data";
+"myOffer-001" = "Opps! No Data";
 
+//侧边菜单
+"Left-Home" = "Home";
+"Left-Applycation" = "My Applications";
+"Left-Set" = "Setting";
+"Left-Logout" = "Log Out";
 
+//网络请求方法提示
+"NetRequest-connectError" = "No connection, please check your network";
+"NetRequest-ErrorTitle" = "Error";
+"NetRequest-OK" = "OK";
+"NetRequest-SeverError" = "The Server error";
+"NetRequest-SeverReturnError" = "The Server error";
 
+//协议页面
+"Potocol-Commit" = "I have read and agree";
+"Potocol-Cancel" = "Cancel";
+
+//关注院校页面
+"Favorite-NOTI" = "Opps! No Data";
 

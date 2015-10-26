@@ -10,6 +10,7 @@
 
 @interface EngAboutViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *aboutTextView;
+@property (weak, nonatomic) IBOutlet UITextView *cnAboutTextField;
 
 @end
 
@@ -18,17 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"About";//@"关于";
+    self.title = GDLocalizedString(@"Setting-004");//@"About";//@"关于";
     self.aboutTextView.textContainerInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    
+    NSString *lang =[InternationalControl userLanguage];
+    if ([lang containsString:@"en"]) {
+        self.cnAboutTextField.alpha = 0;
+    }
+    else{
+        self.aboutTextView.alpha = 0;
+    }
+    
  }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-
+ 
 }
-
 
 
 @end

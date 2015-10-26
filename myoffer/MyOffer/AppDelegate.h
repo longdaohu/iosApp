@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XWGJTabBarController.h"
+#import "YRSideViewController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 + (instancetype)sharedDelegate;
 
 @property (strong, nonatomic) UIWindow *window;
-@property (readonly) UITabBarController *tabBarController;
-
+//@property (readonly) UITabBarController *tabBarController;
+@property (strong,nonatomic) XWGJTabBarController *xtabBarController;
+@property (strong,nonatomic) YRSideViewController *sideViewController;
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated;
 
 - (BOOL)isLogin;

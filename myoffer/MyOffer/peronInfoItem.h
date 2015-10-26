@@ -10,5 +10,6 @@
 
 @interface peronInfoItem : NSObject
 @property(nonatomic,copy)NSString *itemTitle;
-@property(nonatomic,assign)BOOL isFinsh;
+@property(nonatomic,copy)NSString *placeholder;
+@property(nonatomic,assign)BOOL  isAccessory;
 @end

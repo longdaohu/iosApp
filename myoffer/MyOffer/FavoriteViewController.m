@@ -12,6 +12,8 @@
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate> {
     NSArray *_result;
 }
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UILabel *notiLabel;
 
 @end
 
@@ -27,21 +29,24 @@
     return self;
 }
 
-- (void)loadView {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.rowHeight = 100;
-    self.view = _tableView;
-}
+//- (void)loadView {
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+//    _tableView.delegate = self;
+//    _tableView.dataSource = self;
+//    _tableView.rowHeight = 100;
+//    self.view = _tableView;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = GDLocalizedString(@"Setting-002"); //@"我的关注院校";
-
-    [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
-}
+     self.notiLabel.text =GDLocalizedString(@"Favorite-NOTI");//Duang!请添加您关注的院校吧！
+    self.FavoriteTableView.rowHeight = 100;
+     self.FavoriteTableView.tableFooterView =[[UIView alloc] init];
+     [self.FavoriteTableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+   
+ }
 
 - (void)reloadData {
     [self
@@ -49,7 +54,9 @@
      parameters:@{}
      success:^(NSInteger statusCode, id response) {
          _result = response;
-         [_tableView reloadData];
+         
+         self.noDataView.hidden = _result.count ? YES : NO;
+         [self.FavoriteTableView reloadData];
      }];
 }
 
@@ -58,6 +65,9 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
     [self reloadData];
+    
+    
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

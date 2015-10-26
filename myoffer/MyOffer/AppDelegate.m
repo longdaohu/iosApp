@@ -18,6 +18,9 @@
 #import "IntroViewController.h"
 #import "UserDefaults.h"
 #import "NewVersionView.h"
+#import "LeftViewController.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
 
 @interface AppDelegate ()
 {
@@ -45,47 +48,38 @@ static AppDelegate *__sharedDelegate;
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
-    [self compareVersionWithAPPStoreVersion];
+    //[self compareVersionWithAPPStoreVersion];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
     //初始化语言文件
     [InternationalControl initUserLanguage];
+ 
+
+    XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
+    self.xtabBarController = mainTabBarController;
+    LeftViewController *leftViewController=[[LeftViewController alloc]initWithNibName:nil bundle:nil];
+    _sideViewController=[[YRSideViewController alloc]initWithNibName:nil bundle:nil];
+    _sideViewController.rootViewController=mainTabBarController;
+    _sideViewController.leftViewController=leftViewController;
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
-    dvc.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
-    dvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
-    CategoryViewController *cvc = [[CategoryViewController alloc] init];
-    cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
-    cvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_category"];
-    EvaluateViewController *evc = [[EvaluateViewController alloc] init];
-    evc.title = GDLocalizedString(@"EvaluateTitle");//@"评估";
-    evc.tabBarItem.image = [UIImage imageNamed:@"tabbar_evaluate"];
-    MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];
-    mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"我";
-    mvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_me"];
-    
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:dvc],
-                                         [[UINavigationController alloc] initWithRootViewController:cvc],
-                                         [[UINavigationController alloc] initWithRootViewController:evc],
-                                         [[UINavigationController alloc] initWithRootViewController:mvc]];
-    
-    _tabBarController = tabBarController;
-    self.window.rootViewController = tabBarController;
-    
-    [self.window makeKeyAndVisible];
-    
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    self.window.rootViewController = _sideViewController;
+     [self.window makeKeyAndVisible];
+     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
 
         IntroViewController *vc = [[IntroViewController alloc] init];
-        [tabBarController presentViewController:vc animated:NO completion:nil];
-        
+        [self.xtabBarController presentViewController:vc animated:NO completion:nil];
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }
+    
+    //在AppDelegate内设置友盟AppKey
+    [UMSocialData setAppKey:@"5606655f67e58e9f00004355"];
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" url:@"http://www.myoffer.cn/"];
+
     
     return YES;
 }
@@ -95,7 +89,8 @@ static AppDelegate *__sharedDelegate;
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
     LoginAndRegisterViewController *vc = [[LoginAndRegisterViewController alloc] init];
-    [self.window.rootViewController presentViewController:vc animated:YES completion:^{}];
+    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
+    [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -195,5 +190,15 @@ static AppDelegate *__sharedDelegate;
     }] resume];
 
 }
-
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
 @end

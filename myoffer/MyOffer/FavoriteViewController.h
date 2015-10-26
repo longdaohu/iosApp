@@ -11,6 +11,8 @@
 @interface FavoriteViewController : BaseViewController {
     UITableView *_tableView;
 }
+@property (weak, nonatomic) IBOutlet UITableView *FavoriteTableView;
+
 
 - (void)reloadData;
 

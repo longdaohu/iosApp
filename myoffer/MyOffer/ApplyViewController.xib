@@ -11,6 +11,8 @@
                 <outlet property="_selectCountLabel" destination="xma-Zp-4hY" id="IRI-y7-yBc"/>
                 <outlet property="_waitingTableView" destination="aig-AU-l6r" id="O4h-ZG-KvW"/>
                 <outlet property="_waitingView" destination="i5M-Pr-FkT" id="Xjs-rL-GhJ"/>
+                <outlet property="noDataLabel" destination="yBr-be-ylP" id="Cid-0i-pQG"/>
+                <outlet property="noDataView" destination="JGl-ra-A3b" id="obQ-gi-Tn9"/>
                 <outlet property="submitBtn" destination="1rP-vW-A8A" id="WLr-y9-QpU"/>
                 <outlet property="view" destination="Gra-jT-75j" id="9rg-in-pZt"/>
             </connections>
@@ -33,6 +35,33 @@
                                 <outlet property="delegate" destination="-1" id="1pp-98-VT5"/>
                             </connections>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-ra-A3b" userLabel="noDataView">
+                            <rect key="frame" x="30" y="176" width="260" height="152"/>
+                            <subviews>
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="jDw-30-GMo">
+                                    <rect key="frame" x="0.0" y="0.0" width="260" height="136"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duang!请添加您的意向学校吧！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="yBr-be-ylP">
+                                    <rect key="frame" x="0.0" y="136" width="260" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="260" id="cv9-B0-XcW"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="jDw-30-GMo" secondAttribute="trailing" id="2wk-mH-v9g"/>
+                                <constraint firstItem="jDw-30-GMo" firstAttribute="top" secondItem="JGl-ra-A3b" secondAttribute="top" id="58g-bm-cNW"/>
+                                <constraint firstItem="jDw-30-GMo" firstAttribute="leading" secondItem="JGl-ra-A3b" secondAttribute="leading" id="DdJ-rC-je6"/>
+                                <constraint firstItem="yBr-be-ylP" firstAttribute="leading" secondItem="JGl-ra-A3b" secondAttribute="leading" id="FKd-YC-yrl"/>
+                                <constraint firstAttribute="bottom" secondItem="yBr-be-ylP" secondAttribute="bottom" id="JOn-cu-vLy"/>
+                                <constraint firstItem="yBr-be-ylP" firstAttribute="top" secondItem="jDw-30-GMo" secondAttribute="bottom" id="Xs3-jb-GtY"/>
+                                <constraint firstAttribute="trailing" secondItem="yBr-be-ylP" secondAttribute="trailing" id="iPj-rq-v3J"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVk-0U-C6A">
                             <rect key="frame" x="0.0" y="454" width="320" height="50"/>
                             <subviews>
@@ -97,7 +126,9 @@
                         <constraint firstAttribute="trailing" secondItem="aig-AU-l6r" secondAttribute="trailing" id="QhR-uN-V3N"/>
                         <constraint firstItem="aig-AU-l6r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fJK-R9-vzo"/>
                         <constraint firstAttribute="bottom" secondItem="IVk-0U-C6A" secondAttribute="bottom" id="hhk-o8-wYv"/>
+                        <constraint firstItem="JGl-ra-A3b" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nSK-nB-c0d"/>
                         <constraint firstItem="aig-AU-l6r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nzc-0R-Bsd"/>
+                        <constraint firstItem="JGl-ra-A3b" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="rGN-Cf-a0t"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGb-7R-Gvu">
@@ -121,10 +152,12 @@
                 <constraint firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="xnJ-8P-2Yq"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="322" y="313"/>
         </view>
     </objects>
     <resources>
         <image name="check-icons" width="27" height="27"/>
         <image name="check-icons-yes" width="27" height="27"/>
+        <image name="nodocuments" width="171" height="136"/>
     </resources>
 </document>

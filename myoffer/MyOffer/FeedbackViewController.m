@@ -19,16 +19,16 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
-        self.title = GDLocalizedString(@"Setting-003");//@"用户反馈";
         
-        [self.sendButton setTitle:GDLocalizedString(@"FeedBack-001") forState:UIControlStateNormal];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = GDLocalizedString(@"Setting-003");//@"用户反馈";
+    [self.sendButton setTitle:GDLocalizedString(@"FeedBack-002") forState:UIControlStateNormal];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
