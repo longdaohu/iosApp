@@ -5,7 +5,7 @@
 //  Created by Blankwonder on 6/23/15.
 //  Copyright (c) 2015 UVIC. All rights reserved.
 //
-
+#import "ProfileViewController.h"
 #import "ChangePasswordViewController.h"
 
 @interface ChangePasswordViewController () <UITextFieldDelegate> {
@@ -17,47 +17,58 @@
 @end
 
 @implementation ChangePasswordViewController
+-(UITableViewCell *)cellDefault
+{
+    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+}
+
+-(UITextField *)textFieldCreateWithPlacehodler:(NSString *)placeholder
+{
+    UITextField *cellTextField = [[UITextField alloc] init];
+    [cellTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    cellTextField.delegate = self;
+    cellTextField.enablesReturnKeyAutomatically = YES;
+    cellTextField.placeholder = placeholder;
+    return cellTextField;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = GDLocalizedString(@"Person-006" );//@"修改密码";
+    if (self.newpasswd) {
+        
+        self.title = GDLocalizedString(@"Person-SetPasswd");//@"设置密码";
+
+    }
+    
     _tableView.rowHeight = 44;
     
     NSMutableArray *cells = [NSMutableArray array];
     
-    {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        _oldPasswordTextField = [[UITextField alloc] init];
+
+    if (!self.newpasswd) {
+        UITableViewCell *cell = [self cellDefault];
+        _oldPasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-001")];
         _oldPasswordTextField.returnKeyType = UIReturnKeyNext;
-        _oldPasswordTextField.delegate = self;
-        _oldPasswordTextField.enablesReturnKeyAutomatically = YES;
         _oldPasswordTextField.secureTextEntry = YES;
-        _oldPasswordTextField.placeholder = GDLocalizedString(@"ChPasswd-001"); //@"请输入旧密码";
         [cell addSubview:_oldPasswordTextField];
         [cells addObject:cell];
     }
     
     {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        _newPasswordTextField = [[UITextField alloc] init];
+        UITableViewCell *cell = [self cellDefault];
+        _newPasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-002")];
         _newPasswordTextField.returnKeyType = UIReturnKeyNext;
-        _newPasswordTextField.delegate = self;
-        _newPasswordTextField.enablesReturnKeyAutomatically = YES;
-        _newPasswordTextField.secureTextEntry = YES;
-        _newPasswordTextField.placeholder =  GDLocalizedString(@"ChPasswd-002");// @"请输入新密码";
-        [cell addSubview:_newPasswordTextField];
+           _newPasswordTextField.secureTextEntry = YES;
+         [cell addSubview:_newPasswordTextField];
         [cells addObject:cell];
     }
     
     {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        _confirmPasswordTextField = [[UITextField alloc] init];
+        UITableViewCell *cell = [self cellDefault];
+        _confirmPasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-003")];
         _confirmPasswordTextField.returnKeyType = UIReturnKeyDone;
-        _confirmPasswordTextField.delegate = self;
-        _confirmPasswordTextField.enablesReturnKeyAutomatically = YES;
         _confirmPasswordTextField.secureTextEntry = YES;
-        _confirmPasswordTextField.placeholder = GDLocalizedString(@"ChPasswd-003");//@"请再次输入新密码";
         [cell addSubview:_confirmPasswordTextField];
         [cells addObject:cell];
     }
@@ -70,7 +81,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_oldPasswordTextField becomeFirstResponder];
+    
+    if (self.newpasswd) {
+        
+        [_newPasswordTextField becomeFirstResponder];
+        
+    }else{
+        
+        [_oldPasswordTextField becomeFirstResponder];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,13 +112,13 @@
 }
 
 - (void)done {
-    if (_oldPasswordTextField.text.length == 0) {
+    
+    if (_oldPasswordTextField.text.length == 0 &&!self.newpasswd) {
         
         [KDAlertView showMessage:_oldPasswordTextField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")]; //@"好的"];
         return;
     }
-   
-     if(_newPasswordTextField.text.length < 6 )
+     if(_newPasswordTextField.text.length < 6  || _newPasswordTextField.text.length > 15)
     {   //@"密码长度不小于6个字符"
         [KDAlertView showMessage:GDLocalizedString(@"Person-passwd") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
@@ -110,19 +129,24 @@
         return;//@"两次输入的密码不一致"
     }
     
+    NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];
+    
+    if (!self.newpasswd) {
+        [infoParameters setValue:_oldPasswordTextField.text forKey:@"old_password"];
+    }
+    [infoParameters setValue:_newPasswordTextField.text forKey:@"new_password"];
+
+
     [self startAPIRequestWithSelector:kAPISelectorUpdateAccountInfo
-                           parameters:@{@"accountInfo":@{@"old_password":_oldPasswordTextField.text,
-                                                         @"new_password": _newPasswordTextField.text}}
+                           parameters:@{@"accountInfo":infoParameters}
                               success:^(NSInteger statusCode, id response) {
                                   KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-                                  
                                   [hud applySuccessStyle];
                                   [hud hideAnimated:YES afterDelay:2];
                                   [hud setHiddenBlock:^(KDProgressHUD *hud) {
                                       [self dismiss];
                                   }];
-        
-    }];
+     }];
 }
 
 - (void)viewDidLayoutSubviews {

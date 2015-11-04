@@ -11,13 +11,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-82-YO7">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-82-YO7">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <animations/>
                 </imageView>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-vy-t1E">
-                    <rect key="frame" x="90" y="232" width="196" height="104"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logoforapp" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-vy-t1E">
+                    <rect key="frame" x="88" y="218" width="200" height="131"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="131" id="bS0-QE-XuL"/>
+                        <constraint firstAttribute="width" constant="200" id="kkB-lv-vx9"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <animations/>
@@ -32,11 +36,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="404" y="445"/>
+            <point key="canvasLocation" x="403.5" y="444.5"/>
         </view>
     </objects>
     <resources>
-        <image name="login_background.jpg" width="750" height="1330"/>
-        <image name="logo" width="196" height="104"/>
+        <image name="appbg.jpg" width="750" height="1334"/>
+        <image name="logoforapp" width="343" height="145"/>
     </resources>
 </document>

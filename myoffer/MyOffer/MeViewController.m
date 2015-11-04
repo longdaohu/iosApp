@@ -101,9 +101,6 @@
 
 
 
-
-
-
 //打开左侧菜单
 -(void)showLeftMenu:(UIBarButtonItem *)barButton
 {

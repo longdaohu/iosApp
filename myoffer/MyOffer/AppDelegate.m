@@ -14,19 +14,19 @@
 #import "CategoryViewController.h"
 #import "EvaluateViewController.h"
 #import "MeViewController.h"
-#import "LoginAndRegisterViewController.h"
+//#import "LoginAndRegisterViewController.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
-#import "NewVersionView.h"
-#import "LeftViewController.h"
+ #import "LeftViewController.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
+#import "NewLoginRegisterViewController.h"
+#import "UMSocialSinaSSOHandler.h"
 
 @interface AppDelegate ()
 {
     NSString *_accessToken;
-    NewVersionView *_notiView;
-}
+ }
 
 @end
 
@@ -48,7 +48,6 @@ static AppDelegate *__sharedDelegate;
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
-    //[self compareVersionWithAPPStoreVersion];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -75,23 +74,24 @@ static AppDelegate *__sharedDelegate;
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }
     
+    
     //在AppDelegate内设置友盟AppKey
     [UMSocialData setAppKey:@"5606655f67e58e9f00004355"];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" url:@"http://www.myoffer.cn/"];
+    //打开新浪微博的SSO开关，设置新浪微博回调地址
+    [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 
-    
     return YES;
 }
 
-
-
-
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
-    LoginAndRegisterViewController *vc = [[LoginAndRegisterViewController alloc] init];
+//   LoginAndRegisterViewController *vc = [[LoginAndRegisterViewController alloc] init];
+    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -141,55 +141,6 @@ static AppDelegate *__sharedDelegate;
     }
 }
 
-
-//该方法用于当前用户使用版本与APPstore上的版本对比，当前版本小于APPstore的版本时强制更新
--(void)compareVersionWithAPPStoreVersion
-{
-
-    // 1. APPSTROE上应用对应的URL
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"];
-    
-    // 2. 由session发起任务
-    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        // 反序列化
-        id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        
-        NSArray *infoArray = [result objectForKey:@"results"];
-        NSDictionary *infoDic = infoArray.firstObject;
-        NSString *appStoreVersion = [infoDic objectForKey:@"version"];
-        NSString *appStoreNum =  [appStoreVersion  stringByReplacingOccurrencesOfString:@"." withString:@""];
-
-        
-        // 在主线程显示相应效果
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSDictionary *infoPlistDic  =[[NSBundle mainBundle] infoDictionary];
-            NSString *currentVersion = [infoPlistDic objectForKey:@"CFBundleShortVersionString"];
-            NSString *currentNum  = [currentVersion  stringByReplacingOccurrencesOfString:@"." withString:@""];
-
-            
-            if ([currentNum integerValue] - [appStoreNum integerValue] < 0)
-            {
-        
-                NewVersionView *notiView = [[NSBundle mainBundle] loadNibNamed:@"NewVersionView" owner:nil options:nil].lastObject;
-                notiView.frame = CGRectMake(0.5*(APPSIZE.width - 250), 200, 250, 150);
-                notiView.layer.cornerRadius = 10;
-                notiView.clipsToBounds = YES;
-
-                UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
-                backView.backgroundColor =[UIColor blackColor];
-                backView.alpha = 0.3;
-
-                [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:backView];
-                [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:notiView];
-            }
-
-        });
-        
-    }] resume];
-
-}
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return  [UMSocialSnsService handleOpenURL:url];

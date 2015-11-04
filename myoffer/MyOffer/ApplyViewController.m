@@ -10,7 +10,6 @@
 #import "SearchResultCell.h"
 #import "AgreementViewController.h"
 #import "SubmitViewController.h"
-//#import "PersonInfoViewController.h"
 #import "ApplySectionView.h"
 #import "UniversityCourseViewController.h"
 #import "CommitInfoViewController.h"
@@ -100,13 +99,15 @@
     
          [self startAPIRequestWithSelector:@"GET api/account/applies" parameters:nil success:^(NSInteger statusCode, NSArray *response) {
          self.responds = response ;
-          self.noDataView.hidden = NO;
-         if(self.responds.count)
+
+         if(self.responds.count == 0)
          {
-             self.noDataView.hidden = YES;
+             self.noDataView.hidden = NO;
          }
+             
          [self getcourseidGroups];
          [self configureSelectedCoursedID:[self.courseSelecteds copy]];
+             
          [_waitingTableView reloadData];
     }];
     
@@ -115,6 +116,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
        [self reloadData];

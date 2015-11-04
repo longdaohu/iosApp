@@ -29,7 +29,7 @@
                 <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ASN-4P-COk" userLabel="noDataView">
                     <rect key="frame" x="170" y="216" width="260" height="168"/>
                     <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="zB0-eO-fKB">
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="zB0-eO-fKB">
                             <rect key="frame" x="0.0" y="0.0" width="260" height="136"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Duang!您的还没有提交申请！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="8eg-Sk-vn9">

@@ -2,23 +2,7 @@
 //  CommitInfoViewController.m
 //  MyOffer
 //
-//  Created by xuewuguojie on 15/10/14.
-//  Copyright © 2015年 UVIC. All rights reserved.
-/*    "ApplicationProfile-002" = "请选择您的留学意向";
- "ApplicationProfile-003" = "想去的国家或地区";
- "ApplicationProfile-004" = "计划出国的时间";
- "ApplicationProfile-005" = "希望就读的专业";
- "ApplicationProfile-006" = "姓名";
- "ApplicationProfile-007" = "就读院校";
- "ApplicationProfile-008" = "GPA（平均成绩）";
- "ApplicationProfile-009" = "雅思成绩";
- "ApplicationProfile-0010" = "已完成";
- "ApplicationProfile-0011" = "未完成";
- "ApplicationProfile-0012" = "提交审核";
- "ApplicationProfile-0013" = "请填写您的基本资料";
- "ApplicationProfile-0014" = "不能为空";
- "ApplicationProfile-0015" = "加入成功";
- "ApplicationProfile-0016" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";*/
+
 #import "peronInfoItem.h"
 #import "CommitInfoViewController.h"
 #import "CommitTableViewCell.h"
@@ -177,7 +161,6 @@
             self.gradelist=  @[@"本科毕业已工作",@"本科大四",@"本科大三",@"本科大二",@"本科大一",@"大专毕业三年以上",@"大专毕业三年以下",@"大专大三",@"大专大二",@"大专大一",@"高三毕业已工作",@"高三",@"高二",@"高一",@"初三",@"初二",@"初一"];
 
         }
-       
         
         [_gradePicker selectRow:1 inComponent:0 animated:YES];
     }
@@ -202,7 +185,6 @@
                 countryCell.contentTextF.text = des_country;
             }
             
-            
             NSString *target_date = [response valueForKey:@"target_date"];
             CommitTableViewCell *dateCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
             dateCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -214,8 +196,7 @@
                 dateCell.contentTextF.text = target_date;
             }
            
-            
-            NSString *apply = [response valueForKey:@"apply"];
+             NSString *apply = [response valueForKey:@"apply"];
             CommitTableViewCell *applyCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
             applyCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             applyCell.contentTextF.inputView = self.ApplySubjectPicker;
@@ -566,8 +547,7 @@
              [hud hideAnimated:YES afterDelay:2];
              [hud setHiddenBlock:^(KDProgressHUD *hud) {
                  [self.navigationController popToRootViewControllerAnimated:YES];
-                 
-                 //[self dismiss];
+                  //[self dismiss];
              }];
          }];
        }];

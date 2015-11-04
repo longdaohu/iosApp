@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
  
     [self.commitBtn setTitle:GDLocalizedString(@"Potocol-Commit") forState:UIControlStateNormal]; //同意按钮
     NSString *RequestString = [NSString stringWithFormat:@"http://www.myoffer.cn/docs/%@/web-agreement.html",GDLocalizedString(@"ch_Language")];//zh-cn
@@ -32,5 +31,12 @@
     self.dismissCompletion = nil;
     [self dismiss];
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
 
 @end

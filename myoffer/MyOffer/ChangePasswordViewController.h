@@ -11,5 +11,6 @@
 @interface ChangePasswordViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *_tableView;
 }
+@property(nonatomic,copy)NSString *newpasswd;
 
 @end

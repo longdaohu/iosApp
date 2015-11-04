@@ -35,7 +35,7 @@
                                 <outlet property="delegate" destination="-1" id="1pp-98-VT5"/>
                             </connections>
                         </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-ra-A3b" userLabel="noDataView">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-ra-A3b" userLabel="noDataView">
                             <rect key="frame" x="30" y="176" width="260" height="152"/>
                             <subviews>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="jDw-30-GMo">

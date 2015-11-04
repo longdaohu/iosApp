@@ -107,6 +107,9 @@ typedef NS_ENUM(NSUInteger,pickeTag)
 -(void)createTableCellData
 {
     
+
+    
+    
 //    _titles = @[@"毕业院校", @"在读专业", @"平均分", @"雅思平均分数", @"雅思最低分数", @"申请专业"];
      _titles = @[GDLocalizedString(@"Evaluate-002"), GDLocalizedString(@"Evaluate-003"),GDLocalizedString(@"Evaluate-004"), GDLocalizedString(@"Evaluate-005"), GDLocalizedString(@"Evaluate-006"), GDLocalizedString(@"Evaluate-007")];
   
@@ -168,18 +171,17 @@ typedef NS_ENUM(NSUInteger,pickeTag)
                                                object:nil];
     self.tapToEndEditing = YES;
 
-    [self
-     startAPIRequestWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang":GDLocalizedString(@"ch_Language")}
-     success:^(NSInteger statusCode, NSArray *response) {
-         _subjects = [response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                      {
-                          return obj[@"name"];
-                      }];
-         
-         //         [_subjectPickerView reloadAllComponents];
-         //         [_applySubjectPickerView reloadAllComponents];
-     }];
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":GDLocalizedString(@"ch_Language")} success:^(NSInteger statusCode, NSArray * response) {
+        
+       
+        _subjects = [response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                     {
+                         return obj[@"name"];
+                         
+                     }];
+ 
+    }];
+ 
 }
 
 - (void)viewDidLoad {
@@ -193,6 +195,9 @@ typedef NS_ENUM(NSUInteger,pickeTag)
     //    self.navigationItem.title = @"在线评估";
       self.navigationItem.title = GDLocalizedString(@"Evaluate-001");
     
+    
+    
+   
 }
 //用于网络请求
 -(void)requestDataSource

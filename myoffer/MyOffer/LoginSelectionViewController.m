@@ -23,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIView *bindView;
 @property (weak, nonatomic) IBOutlet UITextField *passwdFT;
 @property (weak, nonatomic) IBOutlet UITextField *phoneFT;
-@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
+//@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *bangButton;
 @property (weak, nonatomic) IBOutlet UILabel *notiLabel;
 @property (weak, nonatomic) IBOutlet UILabel *helloLabel;
@@ -31,32 +31,54 @@
 @end
 
 @implementation LoginSelectionViewController
+-(void)changeLanguage
+{
+    
+    NSString *pingtai =  self.parameter[@"provider"];
+    if ([pingtai isEqual:@"weibo"]) {
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //登录绑定页面
-     self.title = GDLocalizedString(@"bangdingVC-title");//@"微信登录";
+        self.title = GDLocalizedString(@"bangdingVC-helloWB");//@"微信登录";
+        self.helloLabel.text = GDLocalizedString(@"bangdingVC-weiboTitle");//@"您好，微信用户";
+    }
+    else
+    {
+        self.title = GDLocalizedString(@"bangdingVC-title");//@"微信登录";
+        self.helloLabel.text = GDLocalizedString(@"bangdingVC-hello");//@"您好，微信用户";
+    }
     [self.loginButton setTitle:GDLocalizedString(@"bangdingVC-login") forState:UIControlStateNormal]; //@"进入myOffer"
     [self.bangButton setTitle:GDLocalizedString(@"bangdingVC-bangding")forState:UIControlStateNormal];//@"绑定myOffer账号"
-    self.notiLabel.text =GDLocalizedString(@"bangdingVC-noti");//@"如果您已注册，请绑定myOffer账号";
+     self.notiLabel.text =GDLocalizedString(@"bangdingVC-noti");//@"如果您已注册，请绑定myOffer账号";
+
+}
+
+-(void)makeUI
+{
     self.notiLabel.adjustsFontSizeToFitWidth = YES;
-     self.helloLabel.text = GDLocalizedString(@"bangdingVC-hello");//@"您好，微信用户";
     self.loginButton.layer.cornerRadius = 2;
     self.loginButton.adjustAllRectWhenHighlighted = YES;
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 2;
-    self.bindView.frame = CGRectMake(0, APPSIZE.height-180, APPSIZE.width, 180);
+    self.bindView.frame = CGRectMake(0, APPSIZE.height-200, APPSIZE.width, 200);
     [self.view addSubview:self.bindView];
     self.bindView.alpha = 0;
-     //用于背景图片虚化
-    self.blurView.dynamic =  NO;
-    [self.blurView setTintColor:nil];
-    [self.blurView setIterations:3];
-    [self.blurView setBlurRadius:10];
-    self.blurView.alpha = 0;
+    
     self.passwdFT.delegate = self;
     self.phoneFT.delegate = self;
- }
+    
+    //用于背景图片虚化
+    //    self.blurView.dynamic =  NO;
+    //    [self.blurView setTintColor:nil];
+    //    [self.blurView setIterations:3];
+    //    [self.blurView setBlurRadius:10];
+    //    self.blurView.alpha = 0;
+    
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //登录绑定页面
+    [self changeLanguage];
+    [self makeUI];
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -67,10 +89,10 @@
 
 - (IBAction)bangDing:(UIButton *)sender {
     //用于显示背景模糊效果
-      self.blurView.alpha = 1;
-      [UIView animateWithDuration:1 animations:^{
+//      self.blurView.alpha = 1;
+      [UIView animateWithDuration:0.5 animations:^{
         CGRect  frame =self.bindView.frame;
-        frame.origin.y = 170;
+        frame.origin.y = 200;
         self.bindView.frame = frame;
         self.bindView.alpha = 1;
     }];
@@ -96,14 +118,14 @@
 }
 -(void)commitBangding
 {
-    
+   
         if (self.phoneFT.text.length == 0) {
-            [KDAlertView showMessage:self.phoneFT.placeholder cancelButtonTitle:GDLocalizedString(@"Noti-hao")];//@"好的"];
+            [KDAlertView showMessage:self.phoneFT.placeholder cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];//@"好的"];
             return;
         }
     
         if (self.passwdFT.text.length == 0) {
-            [KDAlertView showMessage:self.passwdFT.placeholder cancelButtonTitle:GDLocalizedString(@"Noti-hao")];//@"好的"];
+            [KDAlertView showMessage:self.passwdFT.placeholder cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];// Noti-hao@"好的"];
             return;
         }
         //  1、 先用填填写的账号登录
@@ -113,8 +135,7 @@
          success:^(NSInteger statusCode, NSDictionary *response) {
               [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
               [self gotoBangDing:response[@"access_token"]];
-
-          }];
+           }];
 }
 //2、已有账号登录情况下，再绑定WEIXIN账号
 -(void)gotoBangDing:(NSString *)token

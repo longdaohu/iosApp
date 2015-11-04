@@ -9,6 +9,8 @@
 #import "ProfileViewController.h"
 #import "TextFieldViewController.h"
 #import "ChangePasswordViewController.h"
+#import "BindEmailViewController.h"
+#import "BindPhoneViewController.h"
 
 @interface ProfileViewController ()
 
@@ -52,7 +54,7 @@
         usernameCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
          [usernameCell setAction:^{
             TextFieldViewController *vc = [[TextFieldViewController alloc] init];
-            vc.title = GDLocalizedString(@"Person-005"); //@"修改用户名"; // Change display name
+            vc.title = GDLocalizedString(@"Person-005"); //@"修改用户名";
              [vc setViewDidLoadAction:^(TextFieldViewController *vc) {
                 vc.textField.text = response[@"accountInfo"][@"displayname"];
             }];
@@ -81,21 +83,50 @@
         passwordCell.textLabel.text =GDLocalizedString(@"Person-002"); // @"密码";
         passwordCell.detailTextLabel.text = GDLocalizedString(@"Person-006");// @"修改密码";  Change password
         passwordCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
         [passwordCell setAction:^{
-            ChangePasswordViewController *vc = [[ChangePasswordViewController alloc] init];
+            
+            if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+                ChangePasswordViewController *vc = [[ChangePasswordViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+              }
+            else{
+                UIAlertView  *aler  = [[UIAlertView alloc] initWithTitle:@"请先绑定手机号或Email" message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                [aler show];
+                
+            }
+        }];
+         
+        ActionTableViewCell *phonenumberCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        phonenumberCell.textLabel.text =  GDLocalizedString(@"Person-003"); //@"手机号";
+        phonenumberCell.detailTextLabel.text = response[@"accountInfo"][@"phonenumber"] ?: GDLocalizedString(@"Person-007");//@"未绑定手机号";
+        phonenumberCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            [phonenumberCell setAction:^{
+                BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
+                if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+                    vc.phoneNumber = @"phoneNumber";
+                }
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+        
+        
+        ActionTableViewCell *emailCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        emailCell.textLabel.text =GDLocalizedString(@"Person-004");//  @"邮箱";
+        emailCell.detailTextLabel.text = response[@"accountInfo"][@"email"] ?: GDLocalizedString(@"Person-008"); //@"未绑定邮箱";
+        emailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        [emailCell setAction:^{
+          
+            BindEmailViewController *vc = [[BindEmailViewController alloc] init];
+            if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+                vc.Email = @"Email";
+            }
             [self.navigationController pushViewController:vc animated:YES];
         }];
         
-        ActionTableViewCell *phonenumberCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-         phonenumberCell.textLabel.text =  GDLocalizedString(@"Person-003"); //@"手机号";
-        phonenumberCell.detailTextLabel.text = response[@"accountInfo"][@"phonenumber"] ?: GDLocalizedString(@"Person-007");//@"未绑定手机号";
-         ActionTableViewCell *emailCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-        emailCell.textLabel.text =GDLocalizedString(@"Person-004");//  @"邮箱";
-        emailCell.detailTextLabel.text = response[@"accountInfo"][@"email"] ?: GDLocalizedString(@"Person-008"); //@"未绑定邮箱";
          self.cells = @[@[usernameCell], @[passwordCell], @[phonenumberCell], @[emailCell]];
-        [self.tableView reloadData];
+        
+         [self.tableView reloadData];
     }];
+    
 
 }
 

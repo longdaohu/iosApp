@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UK.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Czd-4t-5f2">
-                    <rect key="frame" x="74" y="40" width="80" height="80"/>
+                    <rect key="frame" x="74" y="30" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="9gC-xo-hY1"/>
                         <constraint firstAttribute="width" constant="80" id="NW1-a2-R2R"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击登录或注册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvg-Xe-y3S">
-                    <rect key="frame" x="24" y="130" width="180" height="30"/>
+                    <rect key="frame" x="24" y="120" width="180" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="180" id="WTp-Rr-Gc7"/>
                         <constraint firstAttribute="height" constant="30" id="rRu-1N-qCb"/>
@@ -33,7 +33,7 @@
             <constraints>
                 <constraint firstItem="xvg-Xe-y3S" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-20" id="4RF-X7-TVk"/>
                 <constraint firstItem="Czd-4t-5f2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-20" id="Csw-tf-fqY"/>
-                <constraint firstItem="Czd-4t-5f2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Enl-pb-noo"/>
+                <constraint firstItem="Czd-4t-5f2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-10" id="Enl-pb-noo"/>
                 <constraint firstItem="xvg-Xe-y3S" firstAttribute="top" secondItem="Czd-4t-5f2" secondAttribute="bottom" constant="10" id="IAb-sC-5CG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

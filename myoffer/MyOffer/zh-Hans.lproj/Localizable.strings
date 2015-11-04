@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  MyOffer
-
-  Created by xuewuguojie on 15/10/11.
-  Copyright © 2015年 UVIC. All rights reserved.
-*/
+/*
+ Localizable.strings
+ MyOffer
+ 
+ Created by xuewuguojie on 15/10/11.
+ Copyright © 2015年 UVIC. All rights reserved.
+ */
 "ch_Language" ="zh-cn";
 
 "buttonInfo" ="切换语言";
@@ -35,7 +35,7 @@
 
 "Evaluate-003" = "在读专业";
 
-"Evaluate-004" = "平均分";
+"Evaluate-004" = "GPA（平均成绩）";
 
 "Evaluate-005" = "雅思平均分数";
 
@@ -110,8 +110,9 @@
 "Person-005" = "修改用户名";
 
 "Person-006" = "修改密码";
+"Person-SetPasswd" = "设置密码";
 
-"Person-passwd" = "密码长度不小于6个字符";
+"Person-passwd" = "密码长度6-15个字符";
 
 "Person-007" = "未绑定手机号";
 
@@ -125,7 +126,7 @@
 //我的设置 - 修改密码页面
 
 "ChPasswd-001" = "请输入旧密码";
-
+"ChPasswd-loginPasswd" = "请输入登录密码";
 "ChPasswd-002" = "请输入新密码";
 
 "ChPasswd-003" = "请再次输入新密码";
@@ -155,7 +156,7 @@
 "UniversityDetail-testRate" = "测测我的入学成功率";
 "UniversityDetail-operating" = "计算中...";
 
- //分类  页面
+//分类  页面
 "CategoryVC-ENG001" = "英格兰";
 "CategoryVC-ENG002" = "苏格兰";
 "CategoryVC-ENG003" = "北爱尔兰";
@@ -171,7 +172,7 @@
 
 "CategoryVC-times" = "TIMES排名";
 "CategoryVC-world" = "QS世界大学排名";
- //已提交申请  页面
+//已提交申请  页面
 "ApplicationStutasVC-001" = "综合排名";
 "ApplicationStutasVC-noData" = "Duang!您还没有提交申请！";
 //申请意向
@@ -231,30 +232,36 @@
 "UniCourseDe-008" = "您尚未选择任何课程！";
 "UniCourseDe-009" = "加入申请意向";
 //注册登录页面
-"LoginVC-001" = "登录"; 
+"LoginVC-001" = "登录";
 "LoginVC-002" = "注册";
 "LoginVC-003" = "忘记密码";
-"LoginVC-004" = "请输入手机号或邮箱";
+"LoginVC-OR" = "或者";
+"LoginVC-004" = "请输入手机号码或邮箱";
 "LoginVC-005" = "请输入新密码";
 //注册
 "LoginVC-006" = "请输入手机号码";
 "LoginVC-phoneEG" = "请输入手机号码 :7xxx";
 "LoginVC-PhoneNumberError" = "请输入正确的手机号码";
 "LoginVC-EnglandNumberError" = "请输入正确的手机号码,如:7xxx";
- "LoginVC-007" = "请输入验证码";
+"LoginVC-007" = "请输入验证码";
 "LoginVC-008" = "获取验证码";
 "LoginVC-009" = "请再次输入密码";
-"LoginVC-0010" = "注册即表示同意 myOffer用户协议";
+"LoginVC-0010" = "注册即表示同意《myOffer用户协议》";
+"LoginVC-keyWord" = "《myOffer用户协议》";
 "LoginVC-0011" = "请输入密码";
 "LoginVC-0012" = "重置密码";
 "LoginVC-0013" = "请等待";
 "LoginVC-0014" = "秒";
 "LoginVC-icon" = "logo_CN";
 "LoginVC-moreOption" = "第三方登录";
-"LoginVC-china" = "中国+86";
+"LoginVC-china" = "中国(+86)";
 "LoginVC-chinese" = "中国";
 "LoginVC-england" = "英国";
-"LoginVC-english" = "英国+44";
+"LoginVC-english" = "英国(+44)";
+"LoginVC-welcome" = "欢迎！";
+"LoginVC-welDetail" = "走进myOffer！开启梦想大学申请之旅！";
+"LoginVC-welImage" = "wel_CN.png";
+
 
 //登录绑定页面
 "bangdingVC-title" = "微信登录";
@@ -262,6 +269,8 @@
 "bangdingVC-bangding" = "绑定myOffer账号";
 "bangdingVC-noti" = "如果您已注册，请绑定myOffer账号";
 "bangdingVC-hello" = "您好，微信用户";
+"bangdingVC-helloWB" = "您好，微博用户";
+"bangdingVC-weiboTitle" = "微博登录";
 
 
 
@@ -325,6 +334,11 @@
 "Potocol-Cancel" = "取消";
 //关注院校页面
 "Favorite-NOTI" = "Duang!请添加您关注的院校吧！";
-
-
+//绑定手机或邮件页面
+"Bind-phoneNoti" = "手机号绑定成功，如需使用手机号登录，请设置密码。";
+"Bind-mailNoti" = "Email绑定成功，如需使用Email登录，请设置密码。";
+"Bind-phoneTitle" = "绑定手机";
+"Bind-EmailTitle" = "绑定邮箱";
+"Bind-email" = "请输入邮箱";
+"Bind-emailError" = "Email格式错误！";
 
