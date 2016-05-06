@@ -28,27 +28,28 @@
         
         
         self.footerButton =[[UIButton alloc] init];
-        [self.footerButton setTitle:@"查看更多" forState:UIControlStateNormal];
+        [self.footerButton setTitle:GDLocalizedString(@"SearchResult_more") forState:UIControlStateNormal];
         [self.footerButton addTarget:self action:@selector(moreSubjectPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.footerButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
+        [self.footerButton setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        self.footerButton.titleLabel.font =[UIFont systemFontOfSize:15];
         self.footerButton.layer.cornerRadius = 5;
-        self.footerButton.layer.borderWidth = 2;
-        self.footerButton.layer.borderColor = MAINCOLOR.CGColor;
+        self.footerButton.layer.borderWidth = 1;
+        self.footerButton.layer.borderColor = XCOLOR_RED.CGColor;
         [self addSubview:self.footerButton];
         
      }
     return self;
 }
 
--(void)setUniversityInfo:(NSDictionary *)universityInfo
+-(void)setUniObj:(UniversityObj *)uniObj
 {
-    _universityInfo = universityInfo;
+    _uniObj = uniObj;
     
 }
 -(void)moreSubjectPressed:(UIButton *)sender
 {
     if (self.actionBlock) {
-        self.actionBlock(self.universityInfo[@"_id"]);
+        self.actionBlock(self.uniObj.universityID);
     }
 }
 

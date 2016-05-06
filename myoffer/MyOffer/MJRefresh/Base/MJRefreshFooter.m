@@ -71,4 +71,5 @@
 {
     self.state = MJRefreshStateIdle;
 }
+
 @end

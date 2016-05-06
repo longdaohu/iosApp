@@ -10,6 +10,7 @@
 
 #import "APIClient.h"
 #import "APIClient+Interface.h"
+#import "Reachability.h"
 
 @interface BaseViewController : UIViewController
 
@@ -44,13 +45,17 @@
 - (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action;
 
 @property (nonatomic) BOOL tapToEndEditing;
+ @property (nonatomic,assign) BOOL newWorkReach;
+@property (nonatomic, strong) Reachability *conn;
 
 - (IBAction)endEditing;
 
 - (IBAction)dismiss;
 
 @property (copy, nonatomic) void (^dismissCompletion)(BaseViewController *vc);
--(BOOL)checkWhenUserLogOut;
+- (BOOL)checkWhenUserLogOut;
+- (BOOL)checkNetWorkReaching;
+- (BOOL)checkNetworkState;
 
 
 @end

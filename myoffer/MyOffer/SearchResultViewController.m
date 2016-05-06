@@ -7,10 +7,14 @@
 //  查询结果页面   搜索结果页面
 
 #import "SearchResultViewController.h"
-#import "SearchResultCell.h"
+#import "NewSearchResultCell.h"
+#import "UniversityObj.h"
+#import "UniversityFrameObj.h"
+#import "XWGJnodataView.h"
+
 
 @interface SearchResultViewController () {
-    NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state;
+    NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state, *_city;
     BOOL _descending;
     NSMutableArray *_result;
     NSMutableSet *_resultIDSet;
@@ -22,17 +26,39 @@
      BOOL _shouldShowLoadMoreIndicator;
     int _nextPage;
     BOOL _loading;
+    BOOL _Autralia;
 }
 @property(nonatomic,strong)KDProgressHUD *progressHub;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)XWGJnodataView *noDataView;
 
 @end
 
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 @implementation SearchResultViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page搜索结果"];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page搜索结果"];
+    
+}
 
 - (instancetype)initWithSearchText:(NSString *)text orderBy:(NSString *)orderBy {
+    
     return [self initWithSearchText:text key:@"text" orderBy:orderBy];
 }
 
@@ -43,11 +69,9 @@
         _fieldKey = key;
         _orderBy = orderBy;
         self.title = text;
- 
         self.hidesBottomBarWhenPushed = YES;
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
-        
         _result = [NSMutableArray array];
         _resultIDSet = [NSMutableSet set];
     }
@@ -64,16 +88,17 @@
             _subject = value;
         } else if([key  isEqual: @"country"]) {
             _country = value;
+            _descending = [value containsString:GDLocalizedString(@"CategoryVC-AU")]? YES : NO;
         } else if([key  isEqual: @"state"]) {
             _state = value;
+        }else if([key  isEqual: @"city"]) {
+            _city = value;
         }
-        
         self.title = value;
         self.hidesBottomBarWhenPushed = YES;
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
         
-
         
         _result = [NSMutableArray array];
         _resultIDSet = [NSMutableSet set];
@@ -81,7 +106,20 @@
     return self;
 }
 
+-(XWGJnodataView *)noDataView
+{
+    if (!_noDataView) {
+        
+        _noDataView =[XWGJnodataView noDataView];
+        _noDataView.hidden = YES;
+        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
+    }
+    
+    return _noDataView;
+}
+
 - (void)viewDidLoad {
+  
     [super viewDidLoad];
     
     {
@@ -116,7 +154,6 @@
         _loadMoreIndicatorView = loadMoreIndicatorView;
     }
     
-    [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
     
     _availableOrderKey = @[@"ranking_ti", @"name"];
     
@@ -144,6 +181,7 @@
 }
 
 - (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index descending:(BOOL)descending {
+
     _orderBy = _availableOrderKey[index];
     _descending = descending;
     
@@ -161,7 +199,10 @@
 }
 
 - (void)reloadDataWithPageIndex:(int)page refresh:(BOOL)refresh {
+    
     _loading = YES;
+ 
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{_fieldKey: _text ?: [NSNull null],
                                  @"page": @(page),
                                  @"size": @40,
@@ -174,6 +215,8 @@
         [parameters setValue:@[@{@"name": @"country", @"value": _country}] forKey:@"filters"];
     } else if(_state) {
         [parameters setValue:@[@{@"name": @"state", @"value": _state}] forKey:@"filters"];
+    }else if(_city) {
+        [parameters setValue:@[@{@"name": @"city", @"value": _city}] forKey:@"filters"];
     }
     
     [self
@@ -196,7 +239,12 @@
              
              if (![_resultIDSet containsObject:uid]) {
                  [_resultIDSet addObject:uid];
-                 [_result addObject:obj];
+                
+                 UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
+                 UniversityFrameObj *uniFrame = [[UniversityFrameObj alloc] init];
+                 uniFrame.uniObj = uni;
+                 
+                 [_result addObject:uniFrame];
               }
          }];
           _allResultCount = [response[@"count"] integerValue];
@@ -218,6 +266,8 @@
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          _loading = NO;
          self.shouldShowLoadMoreIndicator = NO;
+         self.noDataView.hidden = NO;
+         
      }];
 }
 
@@ -234,28 +284,48 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    
+    return University_HEIGHT;
+    
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return _result.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+   
+ 
+    NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
+    cell.optionOrderBy = _orderBy;
+    UniversityFrameObj  *uniFrame = _result[indexPath.row];
+    UniversityObj *uni =uniFrame.uniObj;
+    cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
+    cell.uni_Frame = uniFrame;
     
-    [cell configureWithInfo:_result[indexPath.row] ranking:[_orderBy isEqual: @"ranking_qs"] ? _orderBy : @"ranking_ti"];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-      NSDictionary *info = _result[indexPath.row];
-     [self.navigationController pushUniversityViewControllerWithID:info[@"_id"] animated:YES];
+    
+    UniversityFrameObj *uniFrame =  _result[indexPath.row];
+    UniversityObj *uniObj = uniFrame.uniObj;
+    [self.navigationController pushUniversityViewControllerWithID:uniObj.universityID animated:YES];
 }
+
+
+
+
+
 
 @end
 

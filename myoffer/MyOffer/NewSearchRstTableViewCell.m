@@ -30,7 +30,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.TitleLabel =[[UILabel alloc] init];
-        self.LevelLabel.font = [UIFont systemFontOfSize:14];
+        self.TitleLabel.font = [UIFont systemFontOfSize:14];
+        self.TitleLabel.numberOfLines = 0;
+        self.TitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.TitleLabel];
         
         self.LevelLabel = [[UILabel alloc] init];
@@ -47,26 +49,40 @@
     return self;
 }
 
+
 -(void)setItemInfo:(NSDictionary *)itemInfo
 {
     _itemInfo = itemInfo;
  
+    //富文本处理
+//    NSRange keyRange = [itemInfo[@"official_name"] rangeOfString:self.keyWord];
+//    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:itemInfo[@"official_name"]];
+//    [AttributedStr addAttribute:NSForegroundColorAttributeName  value:MAINCOLOR   range:keyRange];
+//    self.TitleLabel.attributedText =  AttributedStr ;
     self.TitleLabel.text = itemInfo[@"official_name"];
     self.LevelLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),itemInfo[@"level"]];
-    self.AreaLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-005"),[itemInfo[@"areas"] componentsJoinedByString:@","]];
-    
+
+    NSMutableString *areaStr =[NSMutableString stringWithFormat:@"%@: ",GDLocalizedString(@"UniCourseDe-005")];
+ 
+   
+    for (NSString *item in itemInfo[@"areas"] ) {
+       
+         [areaStr appendFormat:@" %@ ",item];
+    }
+     self.AreaLabel.text = [NSString stringWithFormat:@"%@",areaStr];
 }
 
+ 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     
     CGFloat leftMargin = 15;
-    CGFloat topMargin = 10;
+    CGFloat topMargin = 0;
     CGFloat Tx = leftMargin;
     CGFloat Ty = topMargin;
     CGFloat Tw = APPSIZE.width - leftMargin;
-    CGFloat Th = 25;
+    CGFloat Th = 40;
     self.TitleLabel.frame = CGRectMake(Tx, Ty, Tw, Th);
     
     CGFloat Lx = leftMargin;
@@ -85,9 +101,6 @@
     
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

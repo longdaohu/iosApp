@@ -235,13 +235,16 @@ static char __KDImageCacheAssociatedOperation;
     UIImageView *weakself = self;
     
     [[KDImageCache sharedInstance] loadImageWithURL:imageURL completion:^(UIImage *image, NSString *imageURL) {
+   
+        
         if (weakself && objc_getAssociatedObject(weakself, &__KDImageCacheAssociatedOperation) == imageURL) {
             objc_setAssociatedObject(weakself,
                                      &__KDImageCacheAssociatedOperation,
                                      nil,
                                      OBJC_ASSOCIATION_RETAIN);
             
-            if (image) {
+        
+             if (image) {
                 if (weakself.layer.shouldRasterize) {
                     CGFloat scale = weakself.layer.rasterizationScale;
                     [weakself setImage:image];

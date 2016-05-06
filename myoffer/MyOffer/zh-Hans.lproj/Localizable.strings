@@ -9,15 +9,12 @@
 
 "buttonInfo" ="切换语言";
 
-"DiscoverTitle" = "发现院校";
 
 "CategoryTitle" = "分类搜索";
 
 "EvaluateTitle" = "评估";
 
 "MeViewControllerTitle" = "申请中心";
-
-"Discover_search" = "你想去哪里读书？想读什么？";
 
 "Category-button001" = "推荐院校";
 
@@ -26,9 +23,22 @@
 "Category-button003" = "学科专业";
 
 "Category-button004" = "大学排名";
+"Category-AU" = "AU.jpg";
+"Category-UK" = "UK.jpg";
+
+//首页
+"Discover_search" = "你想去哪里读书？想读什么？";
+"DiscoverTitle" = "发现院校";
+"Discover_more" = "更多";
+"Discover_woyao" = "我要留学";
+"Discover_xiaobai" = "留学小白";
+"Discover_zhinengpipei" = "智能匹配";
+"Discover_QQ" = "在线客服";
+"Discover_mudidi" = "留学目的地";
+"Discover_hotUni" = "热门院校";
+"Discover_news" = "热门阅读";
 
 //评估页面
-
 "Evaluate-001" = "在线评估";
 "Evaluate-002" = "最近就读学校";
 "Evaluate-004" = "GPA（平均成绩）";
@@ -62,23 +72,22 @@
 "Evaluate-match" = "所匹配院校";
 "Evaluate-noData" = "抱歉，没有符合条件的院校！";
 "Evaluate-dangwei" = "所";
+"Evaluate-pipei" = "点击立刻匹配";
+
 
 //我的页面
-
 "Me-001" = "申请意向";
-
 "Me-002" = "审核状态";
-
 "Me-003" = "申请材料";
-
 "Me-004" = "退出登录";
-
 "Me-005" = "点击登录或注册";
 "Me-006" = "确认登出";
 "Me-007" = "取消";
 "Me-008" = "更换头像";
 "Me-009" = "拍照";
 "Me-0010" = "从手机相册选择";
+"Me-QQService" = "联系客服前请先下载QQ，是否需要下载QQ？";
+"Me-QQDownload" = "下载";
 
 //申请中心页面
 "center-application" = "申请意向";
@@ -123,7 +132,7 @@
 "Person-006" = "修改密码";
 "Person-SetPasswd" = "设置密码";
 
-"Person-passwd" = "密码长度6-15个字符";
+"Person-passwd" = "密码长度6-16个字符";
 
 "Person-007" = "未绑定手机号";
 
@@ -144,10 +153,31 @@
 "ChPasswd-004" = "两次输入的密码不一致";
 //搜索 —— 页面
 "SearchVC-hot" = "热门搜索";
+"SearchVC-history" = "历史搜索";
 //搜索结果  —— 页面
 "SearchResultVC-001" = "TIMES排名";
 "SearchResultVC-rank" = "按TIMES综合排名";
 "SearchResultVC-002" = "按字母排序";
+"SearchRank_Country" = "本国排名";
+"SearchRank_World" = "世界排名";
+"SearchResult_Country" = "国家:";
+"SearchResult_State" = "地区:";
+"SearchResult_city" = "城市:";
+"SearchResult_subjectArea" = "学科领域:";
+"SearchResult_subject" = "专业方向:";
+"SearchResult_All" = "全部";
+"SearchResult_clear" = "清空选项";
+"SearchResult_commit" = "确认";
+"SearchResult_more" = "查看更多课程";
+"SearchResult_filter" = "筛选";
+"SearchResult_worldRank" = "世界排名";
+"SearchResult_noRank" = "暂无排名";
+"SearchResult_worldxxxRank" = "世界排名";
+"SearchResult_countryxxxRank" = "本国排名";
+"SearchResult_university" = "所学校";
+
+
+
 //学校详情  —— 页面
 "UniversityDetail-001" = "学校详情";
 "UniversityDetail-002" = "TIMES本国排名";
@@ -184,6 +214,31 @@
 "CategoryVC-AUSTR006" = "澳大利亚首都领地";
 "CategoryVC-AUSTR007" = "昆士兰州";
 
+"CategorySub-art" = "艺术与设计";
+"CategorySub-finance" = "经济与金融";
+"CategorySub-social" = "社会科学";
+"CategorySub-engineer" = "工程学";
+"CategorySub-education" = "教育学";
+"CategorySub-medicine" = "医学";
+"CategorySub-business" = "商科";
+"CategorySub-farm" = "农学";
+"CategorySub-humanity" = "人文科学";
+"CategorySub-science" = "理学";
+"Categoryrank-en" = "TIMES+英国大学排名";
+"Categoryrank-au" = "Australia+澳大利亚大学排名";
+"Categoryrank-qs" = "QS世界排名";
+"CategoryNew-country" = "国家";
+"CategoryNew-region" = "地区";
+"CategoryNew-major" = "专业";
+"CategoryNew-rank" = "排名";
+"CategoryNew-hotUK" = "英国热门留学城市";
+"CategoryNew-hotAU" = "澳大利亚热门留学城市";
+"CategoryNew-oneStar" = "1星院校";
+"CategoryNew-twoStar" = "2星院校";
+"CategoryNew-threeStar" = "3星院校";
+"CategoryNew-fourStar" = "4星院校";
+"CategoryNew-fiveStar" = "5星院校";
+
 "CategoryVC-times" = "TIMES排名";
 "CategoryVC-world" = "QS世界大学排名";
 //已提交申请  页面
@@ -195,6 +250,7 @@
 "ApplicationList-003" = "已选择";
 "ApplicationList-004" = "共";
 "ApplicationList-005" = "立即申请";
+"ApplicationList-commit" = "立即申请";
 "ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。如有疑问请联系客服人员。";
 "ApplicationList-noData" = "Duang!请添加您的意向学校吧！";
 "ApplicationList-Edit" = "编辑";
@@ -227,6 +283,32 @@
 "ApplicationProfile-0014" = "不能为空";
 "ApplicationProfile-0015" = "加入成功";
 "ApplicationProfile-0016" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";
+"ApplicationProfile-footer" = "已确认材料的正确性（申请材料和选校方案）并同意《myOffer服务协议书》";
+"ApplicationProfile-keyword" = "《myOffer服务协议书》";
+
+"TiJiao-Title" = "个人资料";
+"TiJiao-JiBen" = "基本信息";
+"TiJiao-LastName" = "姓";
+"TiJiao-FirstName" = "名";
+"TiJiao-Phone" = "手机号码";
+"TiJiao-YiXiang" = "留学意向";
+"TiJiao-Country" = "想去的国家";
+"TiJiao-Time" = "计划出国时间";
+"TiJiao-ApplySubject" = "希望就读专业";
+"TiJiao-Beijing" = "背景资料";
+"TiJiao-University" = "最近就读学校";
+"TiJiao-Subjecting" = "就读专业";
+"TiJiao-GPA" = "GPA(平均成绩)";
+"TiJiao-Grade" = "就读年级";
+"TiJiao-Average" = "雅思平均分";
+"TiJiao-Low" = "雅思最低分";
+"TiJiao-Finished" = "已完成";
+"TiJiao-UnFinish" = "未完成";
+"TiJiao-Commit" = "提交审核";
+"TiJiao-Empty" = "不能为空";
+"TiJiao-Succeed" = "加入成功";
+"TiJiao-Summary" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";
+
 
 //选择国家页面
 "ExpectedCountry-001" = "国家名称不能为空";
@@ -264,6 +346,7 @@
 "LoginVC-PhoneNumberError" = "请输入正确的手机号码";
 "LoginVC-EnglandNumberError" = "请输入正确的手机号码,如:7xxx";
 "LoginVC-007" = "请输入验证码";
+"LoginVC-VerificationCode" = "验证码";
 "LoginVC-008" = "获取验证码";
 "LoginVC-009" = "请再次输入密码";
 "LoginVC-0010" = "注册即表示同意《myOffer用户协议》";
@@ -286,6 +369,7 @@
 //登录绑定页面
 
 "bangdingVC-login" = "立即进入";
+"bangdingVC-bindBtn" = "绑定";
 "bangdingVC-bangding" = "绑定myOffer账号";
 "bangdingVC-noti" = "如果您已注册，请绑定myOffer账号";
 "bangdingVC-hello" = "您好，微信用户";
@@ -294,6 +378,7 @@
 "bangdingVC-title" = "微信登录";
 "bangdingVC-QQtitle" = "QQ登录";
 "bangdingVC-helloQQ" = "您好，QQ用户";
+"bangdingVC-profile" = "请补充完整资料";
 
 
 
@@ -346,12 +431,23 @@
 "Left-Logout" = "登出";
 "Left-helpCenter" = "帮助中心";
 "Left-help" = "帮助";
+"Left-noti" = "通知";
+"Left-message" = "通知详情";
+"Left-noNoti" = "没有通知消息哦！";
+
 //网络请求方法提示
 "NetRequest-connectError" = "网络请求失败，请检查网络连接后重试。";
 "NetRequest-ErrorTitle" = "错误";
+"NetRequest-noNetWork" = "请确认你的网络是否连接？";
 "NetRequest-OK" = "好的";
 "NetRequest-SeverError" = "服务器错误";
 "NetRequest-SeverReturnError" = "服务器返回结果解析出错";
+"Refresh-up" = "上拉加载更多";
+"Refresh-release" = "松开立即加载更多";
+"Refresh-loading" = "正在加载更多的数据...";
+"Refresh-down" = "下拉可以刷新";
+"Refresh-open" = "松开立即刷新";
+"Refresh-fresh" = "正在刷新数据中...";
 
 //协议页面
 "Potocol-Commit" = "我已阅读，同意";
@@ -363,6 +459,43 @@
 "Bind-mailNoti" = "Email绑定成功，如需使用Email登录，请设置密码。";
 "Bind-phoneTitle" = "绑定手机";
 "Bind-EmailTitle" = "绑定邮箱";
+"Bind-changePhoneTitle" = "修改绑定";
+"Bind-changeEmailTitle" = "修改绑定";
 "Bind-email" = "请输入邮箱";
 "Bind-emailError" = "Email格式错误！";
+//关于
+"About_title" = "关于";
+"About_profile" = "myOffer ®是全球留学生的在线“留学+”服务生态圈平台，一个跨境的全球留学生服务生态圈。";
+"About_download" = "喜欢我们";
+"About_share" = "分享我们";
+"About_home" = "官方网站";
+"About_weibo" = "官方微博";
+"About_weixin" = "官方微信";
+"About_contect" = "联系我们";
+"About_phoneCN" = "中国支持中心";
+"About_phoneEN" = "伦敦全球中心";
+"About_Logo" = "About_myOfferCN";
+"About_shareTitle" = "分享";
+"About_shareweixin" = "微信";
+"About_sharefrend" = "朋友圈";
+"About_shareZoom" = "QQ空间";
+"About_shareWeibo" = "微博";
+"About_shareCopy" = "复制";
+"About_shareMore" = "更多";
+"About_AlerCopy" = "留学帝公众号已复制，打开微信搜索公众号关注哦！";
+"About_CopySusess" = "复制成功";
+"About_shareContent" = "跨境的全球留学生服务生态圈——myOffer";
+"About_shareSummary" = "myOffer您的一站式智能留学申请平台，为您提供最佳的留学方案。";
+
+
+//我要留学
+"WoYaoLiuXue_tryInTel" = "已注册？试试智能选学校神器。";
+"WoYaoLiuXue_title" = "我要留学";
+"WoYaoLiuXue_Request" = "我要留学";
+"WoYaoLiuXue_FillInfor" = "填写您的留学意向，我们安排专业顾问人员为您定制留学方案，也可拨打客服电话：4000 666 522";
+"WoYaoLiuXue_Match" = "智能匹配";
+"WoYaoLiuXue_aler" = "资深顾问将在1-3个工作日与你取得联系，请注意接听来电：0731-85271XX";
+"WoYaoLiuXue_home" = "返回主页";
+"WoYaoLiuXue_submit" = "提交成功";
+
 

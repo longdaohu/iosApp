@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UniversityObj.h"
 @interface NewSearchRstTableViewCell : UITableViewCell
 @property(nonatomic,strong)NSDictionary *itemInfo;
+@property(nonatomic,strong)NSString *keyWord;
+
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

@@ -30,7 +30,7 @@
     _pageControl = [[UIPageControl alloc] init];
     _pageControl.userInteractionEnabled = NO;
     _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    _pageControl.currentPageIndicatorTintColor = MAINCOLOR;
+    _pageControl.currentPageIndicatorTintColor = XCOLOR_RED;
     _pageControlBottomInset = 10.0f;
     
     [self addSubview:_scrollView];

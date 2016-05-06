@@ -20,7 +20,6 @@
 
 
 
-
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
                 expectedStatusCodes:(NSArray *)expectedStatusCode
@@ -34,8 +33,10 @@
     }
     
     if (!_requestHUD && showHUD) {
+
         _requestHUD = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-    }
+        
+     }
         
     NSArray *comps = [selector componentsSeparatedByString:@" "];
     NSString *method = comps[0];
@@ -194,6 +195,7 @@
 }
 
 - (void)endEditing {
+    
     [self.view endEditing:NO];
 }
 
@@ -244,5 +246,80 @@
     return isLogin;
     
 }
+
+-(void)viewDidLoad
+{
+
+    [super viewDidLoad];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:kReachabilityChangedNotification object:nil];
+    
+    self.conn = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    
+    [self.conn startNotifier];
+    
+    self.view.backgroundColor = BACKGROUDCOLOR;
+}
+
+- (void)networkStateChange
+{
+    [self checkNetWorkReaching];
+}
+
+
+-(BOOL)checkNetWorkReaching
+{
+   /*
+    struct sockaddr_in zeroAddress;
+    bzero(&zeroAddress, sizeof(zeroAddress));
+    zeroAddress.sin_len = sizeof(zeroAddress);
+    zeroAddress.sin_family = AF_INET;
+    
+    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
+    SCNetworkReachabilityFlags flags;
+    
+    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
+    CFRelease(defaultRouteReachability);
+    
+    if (!didRetrieveFlags) {
+        
+        self.newWorkReach = NO;
+        return NO;
+    }
+    
+    BOOL isReachable = flags & kSCNetworkFlagsReachable;
+    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
+    
+    self.newWorkReach = (isReachable && !needsConnection);
+
+    return (isReachable && !needsConnection) ? YES : NO;
+*/
+    NetworkStatus status = [self.conn currentReachabilityStatus];
+    KDClassLog(@"网络联接-----  %d",status == NotReachable ? NO : YES);
+    return status == NotReachable ? NO : YES;
+ 
+}
+
+
+- (BOOL)checkNetworkState
+{
+
+    if (![self checkNetWorkReaching]) {
+        
+        [KDAlertView showMessage:GDLocalizedString(@"NetRequest-noNetWork")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
+        
+     }
+
+    return [self checkNetWorkReaching];
+}
+
+- (void)dealloc
+{
+    [self.conn stopNotifier];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end

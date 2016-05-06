@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface XWGJTabBarController : UITabBarController
-
+@property(nonatomic,strong)UIImage *navImage;
 @end

@@ -35,6 +35,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
 }
 
 - (instancetype)init {
+    
     self = [super init];
     
     if (self) {
@@ -49,6 +50,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
         
         struct utsname systemInfo;
+        
         uname(&systemInfo);
         
         NSString *userAgent = [NSString stringWithFormat:@"%@/%@ %@/%@", bundleName, version,
@@ -69,8 +71,11 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
                                                       };
          }
     
+        
         _URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }
+    
+    
       return self;
 }
 
@@ -81,6 +86,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     if (!expectedStatusCode) {
         expectedStatusCode = @[@(200)];
     }
+  
     
     if (!success) success = ^(NSInteger statusCode , NSDictionary *response) {};
     if (!failure) failure = ^(NSInteger statusCode , NSError *error) {};
@@ -96,6 +102,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         }
         
         if (data && data.length < 1000) {
+            
             KDClassLog(@"Response body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         }
         
@@ -130,7 +137,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     
     [task resume];
     
-    KDClassLog(@"Request started: %@ ---  %@", request.HTTPMethod, request.URL.absoluteString);
+       KDClassLog(@"Request started: %@ ---  %@", request.HTTPMethod, request.URL.absoluteString);
     if (request.HTTPBody) {
         KDClassLog(@"Request body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     }
@@ -144,7 +151,6 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
                           expectedStatusCodes:(NSArray *)expectedStatusCode
                                       success:(APIClientSuccessBlock)success
                                       failure:(APIClientFailureBlock)failure {
-    
     
     __block NSString *newPath = path;
     if ([parameters isKindOfClass:[NSDictionary class]]) {
@@ -161,7 +167,8 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     }
     
     
-    NSURL *url = [NSURL URLWithString:newPath relativeToURL:_endPoint];
+    NSURL *url =[newPath containsString:@"tips.json"]?[NSURL URLWithString:newPath]:[NSURL URLWithString:newPath relativeToURL:_endPoint];
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
     request.timeoutInterval = 15;
@@ -193,6 +200,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         }
         
         [request setHTTPBody:data];
+        
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
     
@@ -200,9 +208,12 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     if ([[AppDelegate sharedDelegate] isLogin]) {
         
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    }
+        
+     }
  
+    
     return [self startTaskWithRequest:request expectedStatusCodes:expectedStatusCode success:success failure:failure];
+    
 }
 
 - (NSString *)encodedString:(id)obj {

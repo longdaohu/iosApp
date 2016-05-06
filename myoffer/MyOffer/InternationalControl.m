@@ -61,7 +61,6 @@ static NSBundle *bundle = nil;
       }
 
     
-    
 }
 
 +(void)setUserlanguage:(NSString *)language{

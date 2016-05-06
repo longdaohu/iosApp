@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 UVIC. All rights reserved.
 //
 
+#define ADKEY @"ADedddddeddd"
+
 #import "DiscoverViewController.h"
 #import "DiscoveryCell.h"
 #import "SearchViewController.h"
@@ -16,72 +18,23 @@
 @interface DiscoverViewController  (){
     BOOL _searchBarExpanded;
     CGFloat _dragStartContentOffsetY;
-    
-    NSMutableArray *_items;
-    
+    NSArray *_items;
     NSMutableArray *_cells;
 }
 @property(nonatomic,assign) NSInteger count;
 @property(nonatomic,strong)MJRefreshGifHeader *header;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+
+
+
 @end
 
 #define kCellIdentifier NSStringFromClass([DiscoveryCell class])
 
 @implementation DiscoverViewController
 
--(void)getSelectionSourse
-{
-    
-    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
 
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-    
-        [ud setValue:response forKey:@"Grade_CN"];
- 
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-  
-            [ud setValue:response forKey:@"Grade_EN"];
-        
-     }];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        [ud setValue:response forKey:@"Subject_CN"];
-        
- 
-    }];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Subject_EN"];
-        
 
-    }];
-    
-   
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_EN"];
-        
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_CN"];
- 
-        
-     }];
-    
-    [ud synchronize];
-
-    
-}
 
 -(void)makeUI
 {
@@ -111,58 +64,103 @@
     }
 
     NSMutableArray *nomalImages = [NSMutableArray array];
+    
     [nomalImages addObject:[UIImage imageNamed:@"Pre-comp 1_0000"]];
-    
-    //    // 设置普通状态的动画图片
+    // 设置普通状态的动画图片
     [header setImages:nomalImages forState:MJRefreshStateIdle];
-    
-    //    // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
+    // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
     [header setImages:refreshingImages duration:0.1  forState:MJRefreshStatePulling];
-    //    // 设置正在刷新状态的动画图片
+    // 设置正在刷新状态的动画图片
     [header setImages:refreshingImages duration:0.1 forState:MJRefreshStateRefreshing];
-//    // 设置header
+    // 设置header
     self.tableView.mj_header = header;
     
+    
 }
+
+
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    
     [self makeUI];
-   
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"ADed"]){
-        
-        [self advanceSupportWithDuration:180];
-    }
     
     [self getSelectionSourse];
+    
     [self firstTimeLoadData];
+    
     [self getAppReport];
-  
+    
+      //--判断用户是否完成任务--
+     if(![[NSUserDefaults standardUserDefaults] boolForKey:ADKEY]){
+         
+        [self advanceSupportWithDuration:180];
+     }
+    
+ 
+    
 }
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page发现院校"];
+    
+}
+
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page发现院校"];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    self.tabBarController.tabBar.hidden = NO;
+    
+    [self setSearchBarExpanded:YES animated:NO];
+
+    [self UserLanguage];
+}
+
+
+//--用户语言环境通知服务器----
+-(void)UserLanguage
+{
+     if ([[AppDelegate sharedDelegate] isLogin]) {
+        
+         NSString *lang =USER_EN?@"en":@"zh-cn";
+        [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
+            
+        }];
+    }
+}
+
+//请求数据源
 -(void)getDataSource:(BOOL)refresh
 {
- 
-    __weak typeof(self)weakSelf = self;
+     XJHUtilDefineWeakSelfRef
     [self startAPIRequestWithSelector:kAPISelectorHomepage
                            parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-
                            
                            } additionalSuccessAction:^(NSInteger statusCode, id response) {
                            
-                               if (refresh) {
-                                   [_items removeAllObjects];
-                                   [_cells removeAllObjects];
-                                   [_tableView reloadData];
-
-                                   [weakSelf.header endRefreshing];
-                                   
-                               }
-                               NSArray *responseArray = (id)response;
                                
-                               _items = [responseArray mutableCopy];
+                               NSArray *responseArray = (id)response;
+
+                               _items = responseArray;
                                
                                [_tableView reloadData];
-                             
+                               
+                               [weakSelf.header endRefreshing];
                                
                            } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
 
@@ -173,29 +171,28 @@
 
 }
 
+//第一次网络请求（有缓存）
 -(void)firstTimeLoadData
 {
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
+         [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
             NSArray *responseArray = (id)response;
     
-            _items = [responseArray mutableCopy];
-    
+             _items = responseArray;
+ 
             [_tableView reloadData];
-    
          }];
-
+    
 }
 
+//请求新数据
 -(void)xloadNewData
 {
     [[KDImageCache sharedInstance] cleanAllDiskCache];
+    
      [self getDataSource:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (void)setSearchBarExpanded:(BOOL)expanded animated:(BOOL)animated {
     if (_searchBarExpanded == expanded) return;
@@ -220,6 +217,7 @@
     }
     
     if (!expanded) {
+        
         [_searchBarTextField resignFirstResponder];
     }
     
@@ -250,11 +248,13 @@
     }
 }
 
+//点击搜索按钮
 - (IBAction)searchButtonPressed {
     
     SearchViewController *searchVC = [[SearchViewController alloc] init];
     XWGJNavigationController *nav = [[XWGJNavigationController alloc] initWithRootViewController:searchVC];
     [self presentViewController:nav animated:YES completion:nil];
+    
     
 }
 
@@ -262,8 +262,6 @@
 {
     self.header.gifView.transform = CGAffineTransformMakeScale(0.2, 0.2);
 }
-
- 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
@@ -285,12 +283,7 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
 
-    [self setSearchBarExpanded:YES animated:NO];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -302,7 +295,10 @@
     
     DiscoveryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscoveryCell"];
     if(!cell)
-    cell = [[NSBundle mainBundle] loadNibNamed:kCellIdentifier owner:nil options:nil].firstObject;
+    {
+        cell = [[NSBundle mainBundle] loadNibNamed:kCellIdentifier owner:nil options:nil].firstObject;
+
+    }
     
     NSDictionary *info = _items[indexPath.row];
     
@@ -326,22 +322,28 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     NSDictionary *info = _items[indexPath.row];
     
     if (info[@"university"]) {
+        
         [self.navigationController pushUniversityViewControllerWithID:info[@"university"] animated:YES];
+        
     } else if (info[@"search"])  {
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithSearchText:info[@"search"] orderBy:nil];
+        
+        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithSearchText:info[@"search"] orderBy:RANKTI];
+        
         [self.navigationController pushViewController:vc animated:YES];
 
     }
 }
 
 
-//推广接口，用户是否在使用myoffer
+//---推广接口，用户是否在使用myoffer---
 -(void)advanceSupportWithDuration:(int)durationTime
 {
-    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+     NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     NSString *secret = @"s9xyfjwilruwefnxdkjvhxck3sxceikrbzbde";
     
@@ -352,28 +354,34 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(durationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+      
         [self startAPIRequestWithSelector:path  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
             
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
             
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ADed"];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ADKEY];
+   
             
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
             
-            if (self.count++ < 3) {
-                
-                [self advanceSupportWithDuration:20];
-            }
-        }];
+ 
+                  [self advanceSupportWithDuration:20];
+         }];
+        
         
     });
     
 }
 
+
+
+
+
+//--应用监听，用户登录立即发送提醒给服务器--
 -(void)getAppReport
 {
+      NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
-     NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
      NSString  *path = [NSString stringWithFormat:@"GET /api/app/report?_id=%@",adId];
 
     [self startAPIRequestWithSelector:path  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
@@ -388,5 +396,63 @@
 
 }
 
+
+//--提前加载数据，存储在本地，下次调用--
+-(void)getSelectionSourse
+{
+    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        
+        [ud setValue:response forKey:@"Grade_CN"];
+        
+    }];
+    
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Grade_EN"];
+        
+    }];
+    
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        [ud setValue:response forKey:@"Subject_CN"];
+        
+        
+    }];
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Subject_EN"];
+        
+    }];
+    
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Country_EN"];
+        
+    }];
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Country_CN"];
+        
+    }];
+    
+    
+    [ud synchronize];
+    
+}
+
+ 
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end

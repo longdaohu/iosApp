@@ -34,5 +34,6 @@ extern UIView *KDUtilFindViewInSuperViews(UIView *view, Class viewClass);
 
 extern NSNumber *KDUtilIntegerValueNumberGuard(id obj);
 extern NSString *KDUtilStringGuard(id obj);
+extern CGFloat KDUtilSize(CGFloat obj);
 
 extern BOOL KDUtilIsDeviceJailbroken();

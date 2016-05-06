@@ -107,10 +107,15 @@
 {
     [super prepare];
     
+
+    
     // 初始化文字
-    [self setTitle:MJRefreshHeaderIdleText forState:MJRefreshStateIdle];
-    [self setTitle:MJRefreshHeaderPullingText forState:MJRefreshStatePulling];
-    [self setTitle:MJRefreshHeaderRefreshingText forState:MJRefreshStateRefreshing];
+//    [self setTitle:MJRefreshHeaderIdleText forState:MJRefreshStateIdle];
+//    [self setTitle:MJRefreshHeaderPullingText forState:MJRefreshStatePulling];
+//    [self setTitle:MJRefreshHeaderRefreshingText forState:MJRefreshStateRefreshing];
+    [self setTitle:GDLocalizedString(@"Refresh-down") forState:MJRefreshStateIdle];
+    [self setTitle:GDLocalizedString(@"Refresh-open") forState:MJRefreshStatePulling];
+    [self setTitle:GDLocalizedString(@"Refresh-fresh") forState:MJRefreshStateRefreshing];
 }
 
 - (void)placeSubviews

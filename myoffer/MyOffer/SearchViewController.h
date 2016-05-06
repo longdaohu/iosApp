@@ -8,11 +8,10 @@
 
 #import "BaseViewController.h"
 
-@interface SearchViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout> {
-    IBOutlet UICollectionView *_recommandCollectionView;
+@interface SearchViewController : BaseViewController <UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate> {
     IBOutlet UISearchBar *_searchBar;
 }
-
 @property (nonatomic) NSString *searchTextPlaceholder;
+
 
 @end

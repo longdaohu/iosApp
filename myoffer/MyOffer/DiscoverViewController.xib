@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DiscoverViewController">
@@ -43,11 +43,10 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
-                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="你想去哪里读书？想读什么？" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlK-9z-S8R">
-                                    <rect key="frame" x="35" y="0.0" width="160" height="44"/>
+                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="你想去哪里读书？想读什么？" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlK-9z-S8R">
+                                    <rect key="frame" x="35" y="0.0" width="197" height="44"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="160" id="EUh-OT-Z0m"/>
-                                        <constraint firstAttribute="height" constant="44" id="Ncb-ek-3wW"/>
+                                        <constraint firstAttribute="height" constant="44" id="0zT-JN-sFA"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -67,13 +66,14 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="jlJ-OI-zDY" secondAttribute="bottom" id="0Yf-ri-v86"/>
                                 <constraint firstAttribute="height" constant="44" id="2BV-an-i6q"/>
+                                <constraint firstItem="rlK-9z-S8R" firstAttribute="top" secondItem="DYf-Vx-0BS" secondAttribute="top" id="3Gk-1B-Dee"/>
                                 <constraint firstItem="WDd-Z1-nA4" firstAttribute="top" secondItem="DYf-Vx-0BS" secondAttribute="top" id="7Rp-QW-37M"/>
-                                <constraint firstAttribute="bottom" secondItem="rlK-9z-S8R" secondAttribute="bottom" id="DK7-nK-Sie"/>
                                 <constraint firstAttribute="trailing" secondItem="jlJ-OI-zDY" secondAttribute="trailing" id="Roz-62-4F8"/>
                                 <constraint firstItem="jlJ-OI-zDY" firstAttribute="top" secondItem="DYf-Vx-0BS" secondAttribute="top" id="Wjr-b0-KAP"/>
-                                <constraint firstItem="rlK-9z-S8R" firstAttribute="leading" secondItem="DYf-Vx-0BS" secondAttribute="leading" constant="35" id="cxA-eM-Yx6"/>
+                                <constraint firstItem="rlK-9z-S8R" firstAttribute="leading" secondItem="DYf-Vx-0BS" secondAttribute="leading" constant="35" id="hF0-8f-adO"/>
                                 <constraint firstItem="WDd-Z1-nA4" firstAttribute="leading" secondItem="DYf-Vx-0BS" secondAttribute="leading" id="p06-qi-yNG"/>
                                 <constraint firstItem="jlJ-OI-zDY" firstAttribute="leading" secondItem="DYf-Vx-0BS" secondAttribute="leading" id="sZi-AL-lmx"/>
+                                <constraint firstAttribute="trailing" secondItem="rlK-9z-S8R" secondAttribute="trailing" id="vwR-I0-CMt"/>
                             </constraints>
                         </view>
                     </subviews>

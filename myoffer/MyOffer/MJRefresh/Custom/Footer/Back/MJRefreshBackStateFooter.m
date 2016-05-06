@@ -52,10 +52,20 @@
 {
     [super prepare];
     
+    /*
+     "Refresh-up" = "上拉加载更多";
+     "Refresh-release" = "松开立即加载更多";
+     "Refresh-loading" = "正在加载更多的数据...";
+     NSString *const MJRefreshBackFooterIdleText = @"上拉加载更多";
+     NSString *const MJRefreshBackFooterPullingText = @"松开立即加载更多";
+     NSString *const MJRefreshBackFooterRefreshingText = @"正在加载更多的数据...";
+     NSString *const MJRefreshBackFooterNoMoreDataText = @"已经全部加载完毕";
+     */
+    
     // 初始化文字
-    [self setTitle:MJRefreshBackFooterIdleText forState:MJRefreshStateIdle];
-    [self setTitle:MJRefreshBackFooterPullingText forState:MJRefreshStatePulling];
-    [self setTitle:MJRefreshBackFooterRefreshingText forState:MJRefreshStateRefreshing];
+    [self setTitle:GDLocalizedString(@"Refresh-up") forState:MJRefreshStateIdle];
+    [self setTitle:GDLocalizedString(@"Refresh-release") forState:MJRefreshStatePulling];
+    [self setTitle:GDLocalizedString(@"Refresh-loading") forState:MJRefreshStateRefreshing];
     [self setTitle:MJRefreshBackFooterNoMoreDataText forState:MJRefreshStateNoMoreData];
 }
 

@@ -72,6 +72,20 @@ extern NSNumber *KDUtilIntegerValueNumberGuard(id obj) {
     return nil;
 }
 
+extern CGFloat KDUtilSize(CGFloat obj){
+   
+    if (320 == XScreenWidth) {
+        
+        return obj;
+    }else if (XScreenWidth > 400){
+    
+        return obj + 1.5;
+    }else{
+        return obj + 0.75;
+    }
+}
+
+
 extern NSString *KDUtilStringGuard(id obj) {
     if (!obj) return nil;
     if ([obj isKindOfClass:[NSString class]]) {

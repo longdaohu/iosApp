@@ -25,4 +25,3 @@
 @end
 
 
-#define RequireLogin if (![AppDelegate sharedDelegate].isLogin) { [[AppDelegate sharedDelegate] presentLoginAndRegisterViewControllerAnimated:YES]; return;}
