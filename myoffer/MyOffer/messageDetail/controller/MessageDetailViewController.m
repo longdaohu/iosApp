@@ -553,27 +553,19 @@
                 }else{
                     
                     
-                    XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
-                    if (!cell) {
-                        cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
-                    }
-                    cell.messageFrame = self.Messages[indexPath.row];
+                XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
+                cell.messageFrame = self.Messages[indexPath.row];
                     
-                    return cell;
-
+                return cell;
                 }
                 
             }else{
                 
                 
-                XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
-                if (!cell) {
-                    cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
-                }
+                XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
                 cell.messageFrame = self.Messages[indexPath.row];
                 
                 return cell;
-                
             }
             
         }
@@ -594,10 +586,8 @@
         switch (indexPath.section) {
             case 1:
             {
-               
                  UniversityObj  *uni = self.Universities[indexPath.row];
                 [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
-
             
             }
                 break;
