@@ -43,6 +43,8 @@
         cell =[[XWGJMessageDetailContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
         
     }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
     return cell;
 }
 

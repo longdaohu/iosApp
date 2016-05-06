@@ -57,46 +57,10 @@ static AppDelegate *__sharedDelegate;
     [InternationalControl initUserLanguage];
  
     
-    //控制器初始化
-    XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
-    self.mainTabBarController = mainTabBarController;
-    XWGJLeftMenuViewController *leftMenuViewController = [[XWGJLeftMenuViewController alloc] init];
-    leftMenuViewController.contentViewController = mainTabBarController;
-    
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
-                                                                    leftMenuViewController:leftMenuViewController
-                                                                   rightMenuViewController:nil];
-//  sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
-    sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
-//    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
-    sideMenuViewController.delegate = self;
-    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
-    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
-    sideMenuViewController.contentViewShadowOpacity = 0.6;
-    sideMenuViewController.contentViewShadowRadius = 12;
-    sideMenuViewController.contentViewShadowEnabled = YES;
-    self.window.rootViewController = sideMenuViewController;
-    [self.window makeKeyAndVisible];
-    
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
+    [self makeRootController];
     
     
-   //产品引导页面
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
-    if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
-
-         IntroViewController *vc = [[IntroViewController alloc] init];
-        
-         [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
-        
-        [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
-    }
-
-    
-    
-    
-    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];
+    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
     
     [self umeng];//友盟
     
@@ -104,8 +68,7 @@ static AppDelegate *__sharedDelegate;
     
     // Required
     [APService setupWithOption:launchOptions];
-    
-  
+   
     NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfox) {
 
@@ -118,6 +81,47 @@ static AppDelegate *__sharedDelegate;
     return YES;
 }
 
+- (void)makeRootController
+{
+    //控制器初始化
+    XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
+    self.mainTabBarController = mainTabBarController;
+    XWGJLeftMenuViewController *leftMenuViewController = [[XWGJLeftMenuViewController alloc] init];
+    leftMenuViewController.contentViewController = mainTabBarController;
+    
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
+                                                                    leftMenuViewController:leftMenuViewController
+                                                                   rightMenuViewController:nil];
+    //  sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
+    sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
+    //    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    sideMenuViewController.delegate = self;
+    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
+    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
+    sideMenuViewController.contentViewShadowOpacity = 0.6;
+    sideMenuViewController.contentViewShadowRadius = 12;
+    sideMenuViewController.contentViewShadowEnabled = YES;
+    self.window.rootViewController = sideMenuViewController;
+    [self.window makeKeyAndVisible];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    
+    
+    //产品引导页面
+    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    
+    if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
+        
+        IntroViewController *vc = [[IntroViewController alloc] init];
+        
+        [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
+        
+        [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
+    }
+    
+
+}
 -(void)Jpush //极光推送
 {
     // Required

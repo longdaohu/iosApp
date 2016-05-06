@@ -7,7 +7,6 @@
 //
 
 #define ZangFontSize 15
-
 #import "XWGJMessageTableViewCell.h"
 #import "MessageDetailViewController.h"
 #import "XWGJMessageDetailFrame.h"
@@ -120,8 +119,8 @@
         CGFloat Sw = 35;
         CGFloat Sh = 40;
         CGFloat Sx = _RightView.frame.size.width - Sw;
-         self.shareBtn = [[UIButton alloc] initWithFrame:CGRectMake( Sx, Sy, Sw, Sh)];
-         [self.shareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+        self.shareBtn = [[UIButton alloc] initWithFrame:CGRectMake( Sx, Sy, Sw, Sh)];
+        [self.shareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
         [self.shareBtn  setImage:[UIImage imageNamed:@"nav_shareNomal"] forState:UIControlStateNormal];
         [self.shareBtn  setImage:[UIImage imageNamed:@"nav_shareHightLight"] forState:UIControlStateHighlighted];
         [_RightView addSubview:self.shareBtn];
@@ -148,10 +147,19 @@
      self.noDataView =[XWGJnodataView noDataView];
      self.noDataView.hidden = YES;
      self.noDataView.contentLabel.text = @"网络请求失败，请稍候再试!";
-    [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
+     [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
     
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
+    
+    if (self.navigationBgImage) {
+        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
+        self.navImageView.clipsToBounds = YES;
+        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.navImageView.image = self.navigationBgImage;
+        [self.view addSubview:self.navImageView];
+        
+    }
 
 }
 -(void)makeWebView
@@ -173,8 +181,7 @@
         [self.webView sizeToFit];
         NSString *RequestString =[NSString stringWithFormat:@"http://www.myoffer.cn/api/article/%@/detail",self.NO_ID];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
-    
-    }
+     }
     
    
 }
@@ -186,22 +193,14 @@
     self.tableView.delegate =self;
     self.tableView.hidden = YES;
     self.tableView.sectionFooterHeight = 0;
-    self.tableView.backgroundColor = [UIColor clearColor];
+//    self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     
 }
 
 -(void)makeUI
 {
-    if (self.navigationBgImage) {
-        
-        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-        self.navImageView.clipsToBounds = YES;
-        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.navImageView.image = self.navigationBgImage;
-        [self.view addSubview:self.navImageView];
-        
-    }
+
     
     
     [self makeTableView];

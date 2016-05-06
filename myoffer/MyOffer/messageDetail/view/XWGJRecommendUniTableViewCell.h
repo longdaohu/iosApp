@@ -10,9 +10,8 @@
 @class UniversityObj;
 typedef void(^RecommendSectionViewBlock)(UIButton *sender);
 @interface XWGJRecommendUniTableViewCell : UITableViewCell
-//@property(nonatomic,strong)NSDictionary *UniversityInfo;  //传入学校信息字典
 @property(nonatomic,strong)UniversityObj *uni;
-+(instancetype)CreateCellWithTableView:(UITableView *)tableView;
 @property(nonatomic,copy)RecommendSectionViewBlock ActionBlock;
++(instancetype)CreateCellWithTableView:(UITableView *)tableView;
 
 @end

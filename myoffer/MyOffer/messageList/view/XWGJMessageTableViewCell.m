@@ -25,6 +25,19 @@
 
 @implementation XWGJMessageTableViewCell
 
++(instancetype)cellWithTableView:(UITableView *)tableView
+{
+    
+    XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
+    if (!cell) {
+        
+        cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
+    }
+
+    return cell;
+}
+
+
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self   =  [super initWithStyle:style reuseIdentifier:reuseIdentifier];

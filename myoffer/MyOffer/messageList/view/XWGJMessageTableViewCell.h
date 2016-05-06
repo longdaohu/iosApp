@@ -10,5 +10,6 @@
 @class XWGJMessageFrame;
 @interface XWGJMessageTableViewCell : UITableViewCell
 @property(nonatomic,strong)XWGJMessageFrame *messageFrame;
++(instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

@@ -20,7 +20,7 @@
         self.LeftBtn.hidden = YES;
         
         self.RightBtn =[self makeButtonWithImageName:@"search-no-result"  andTitle:GDLocalizedString(@"Discover_search")];
-        self.RightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        self.RightBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0, 0, 0);
         self.layer.cornerRadius = 5;
         self.backgroundColor = XCOLOR_WHITE;
         
