@@ -92,7 +92,7 @@
 		567145271CBA8C6B002A02BF /* XWGJMessageDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5671450A1CBA8C6B002A02BF /* XWGJMessageDetailContentCell.m */; };
 		567145281CBA8C6B002A02BF /* XWGJMessageSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5671450C1CBA8C6B002A02BF /* XWGJMessageSectionView.m */; };
 		567145291CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5671450E1CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.m */; };
-		5671452A1CBA8C6B002A02BF /* XWGJShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 567145101CBA8C6B002A02BF /* XWGJShareButton.m */; };
+		5671452A1CBA8C6B002A02BF /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 567145101CBA8C6B002A02BF /* ShareButton.m */; };
 		5671452B1CBA8C6B002A02BF /* XWGJShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567145121CBA8C6B002A02BF /* XWGJShareView.m */; };
 		5671452C1CBA8C6B002A02BF /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567145161CBA8C6B002A02BF /* MessageViewController.m */; };
 		5671452D1CBA8C6B002A02BF /* XWGJMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 567145191CBA8C6B002A02BF /* XWGJMessage.m */; };
@@ -543,8 +543,8 @@
 		5671450C1CBA8C6B002A02BF /* XWGJMessageSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageSectionView.m; sourceTree = "<group>"; };
 		5671450D1CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJRecommendUniTableViewCell.h; sourceTree = "<group>"; };
 		5671450E1CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJRecommendUniTableViewCell.m; sourceTree = "<group>"; };
-		5671450F1CBA8C6B002A02BF /* XWGJShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJShareButton.h; sourceTree = "<group>"; };
-		567145101CBA8C6B002A02BF /* XWGJShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJShareButton.m; sourceTree = "<group>"; };
+		5671450F1CBA8C6B002A02BF /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
+		567145101CBA8C6B002A02BF /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareButton.m; sourceTree = "<group>"; };
 		567145111CBA8C6B002A02BF /* XWGJShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJShareView.h; sourceTree = "<group>"; };
 		567145121CBA8C6B002A02BF /* XWGJShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJShareView.m; sourceTree = "<group>"; };
 		567145151CBA8C6B002A02BF /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -1567,8 +1567,8 @@
 				5671450C1CBA8C6B002A02BF /* XWGJMessageSectionView.m */,
 				5671450D1CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.h */,
 				5671450E1CBA8C6B002A02BF /* XWGJRecommendUniTableViewCell.m */,
-				5671450F1CBA8C6B002A02BF /* XWGJShareButton.h */,
-				567145101CBA8C6B002A02BF /* XWGJShareButton.m */,
+				5671450F1CBA8C6B002A02BF /* ShareButton.h */,
+				567145101CBA8C6B002A02BF /* ShareButton.m */,
 				567145111CBA8C6B002A02BF /* XWGJShareView.h */,
 				567145121CBA8C6B002A02BF /* XWGJShareView.m */,
 			);
@@ -3123,7 +3123,7 @@
 				567145A01CBA9106002A02BF /* XWGJNoti.m in Sources */,
 				567145CC1CBA914C002A02BF /* XWGJAboutViewController.m in Sources */,
 				AE79E4451C8E7A7E008059D9 /* SDWebImageDownloaderOperation.m in Sources */,
-				5671452A1CBA8C6B002A02BF /* XWGJShareButton.m in Sources */,
+				5671452A1CBA8C6B002A02BF /* ShareButton.m in Sources */,
 				AEFED7C31C0D345E009CF046 /* MJRefreshStateHeader.m in Sources */,
 				567145D31CBA914C002A02BF /* ChangePasswordViewController.m in Sources */,
 				AE79E4431C8E7A7E008059D9 /* SDWebImageDecoder.m in Sources */,

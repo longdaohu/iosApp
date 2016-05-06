@@ -45,8 +45,6 @@
 @property(nonatomic,strong)KDProgressHUD *hud;
 //分享
 @property(nonatomic,strong)XWGJShareView *ShareView;
-//遮盖
-@property(nonatomic,strong)UIView *CoverView;
 //无数据提示框
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 //导航栏下图片
@@ -72,27 +70,10 @@
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:@"page资讯详情"];
-    self.CoverView.hidden = YES;
     
 }
 
-//分享出现时的遮盖
--(UIView *)CoverView
-{
-    if (!_CoverView) {
-        
-        _CoverView =[[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-        [[UIApplication sharedApplication].windows.lastObject addSubview:_CoverView];
-        
-        _CoverView.backgroundColor = [UIColor clearColor];
-        UIButton *cover =[[UIButton alloc] initWithFrame:_CoverView.frame];
-        [cover addTarget:self action:@selector(RemoveCover) forControlEvents:UIControlEventTouchDown];
-        cover.alpha = 0.3;
-        cover.backgroundColor =[UIColor blackColor];
-        [_CoverView addSubview:cover];
-    }
-    return _CoverView;
-}
+
 
 //自定义导航栏右侧按钮
 -(UIView *)RightView
@@ -667,49 +648,6 @@
     
 }
 
-//点击分享按钮
--(void)share
-{
-    [self shareViewUp:YES];
-}
-
-//分享面板出现隐藏
--(void)shareViewUp:(BOOL)up
-{
-    XJHUtilDefineWeakSelfRef
-    
-     CGFloat Fy = up ? APPSIZE.height - APPSIZE.width + 20 : APPSIZE.height;
-    
-    __block CGRect  NewRect = self.ShareView.frame;
-    
-    NewRect.origin.y = Fy;
-    
-    if (up) {
-        
-        self.CoverView.hidden = NO;
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            
-               weakSelf.ShareView.frame = NewRect;
-            
-        }];
-        
-    }else{
-        
-       [UIView animateWithDuration:0.25 animations:^{
-           
-           weakSelf.ShareView.frame = NewRect;
-           
-       } completion:^(BOOL finished) {
-           
-           weakSelf.CoverView.hidden = YES;
-           
-       }];
-    
-    }
-    
-    
-}
 
 
 
@@ -719,13 +657,19 @@
     return YES;
 }
 
-//分享功能面版
--(XWGJShareView *)ShareView
+
+//点击分享按钮
+-(void)share
 {
+    [self.ShareView ShareButtonClickAndViewHiden:NO];
+}
+
+//分享功能面版
+-(XWGJShareView *)ShareView{
+ 
     if (!_ShareView) {
         XJHUtilDefineWeakSelfRef
-        
-        _ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, APPSIZE.height, APPSIZE.width, APPSIZE.width)];
+        _ShareView = [XWGJShareView shareView];
         
         _ShareView.ShareBlock = ^(UIButton *sender){
             
@@ -735,30 +679,25 @@
             UIImage *shareImage = [UIImage imageWithData:ImageData];
             NSString *shareTitle = weakSelf.ArticleInfo[@"title"];
             NSString *shareContent = weakSelf.ArticleInfo[@"summary"];
-            
+
              switch (sender.tag) {
                 case 0:
                 {
- 
+
                     [UMSocialData defaultData].extConfig.wechatSessionData.title =  shareTitle;
-                    
                     [UMSocialData defaultData].extConfig.wechatSessionData.url = shareURL;
-                    
-                     [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];        //设置分享内容和回调对象
+                    [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];        //设置分享内容和回调对象
                     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-                 
+
                 }
                     break;
-                    
-                 
+
+
                 case 1:  //朋友圈
                 {
-                    
-                     [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-                    
-                     [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
-                    
-                    
+
+                    [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
+                    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
                     [[UMSocialControllerService defaultControllerService] setShareText:shareContent  shareImage:shareImage socialUIDelegate:weakSelf];        //设置分享内容和回调对象
                     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
 
@@ -767,55 +706,49 @@
 
                 case 2:
                 {
-                    
-                    
+
+
                     [UMSocialData defaultData].extConfig.qqData.url = shareURL;
                     [UMSocialData defaultData].extConfig.qqData.title = shareTitle;
                     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
-                    
-                    
                     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
                         if (response.responseCode == UMSResponseCodeSuccess) {
-                            
+
 //                                                        NSLog(@"QQ分享成功！");
                         }
                     }];
-                    
-                    
+
+
                 }
                     break;
-                    
+
                 case 3:
                 {
-                    
-                     [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
+
+                    [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
                     [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-                    
                     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
                         if (response.responseCode == UMSResponseCodeSuccess) {
-                            
+
                         }
                     }];
                 }
                     break;
-                    
+
                 case 4:
                 {
-                    
+
                     NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareTitle,shareURL];
-                    
                     [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:weakSelf];        //设置分享内容和回调对象
-                    
                     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-                    
-                    
+
+
                 }
                     break;
                 case 5:
                 {
-                   
+
                     NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
-                    
                     [UMSocialSnsService presentSnsIconSheetView:weakSelf
                                                          appKey:@"5668ea43e0f55af981002131"
                                                       shareText:shareTEXT
@@ -824,41 +757,31 @@
                                                        delegate:weakSelf];
                 }
                     break;
-                    
-                    
-                    
+
+
+
                 case 6:
                 {
                     UIPasteboard *pab = [UIPasteboard generalPasteboard];
-                    
                     NSString *string = shareURL;
-                    
                     [pab setString:string];
-                    
                     [KDAlertView showMessage:@"复制成功" cancelButtonTitle:@"好的"];
-                    
+
                 }
                     break;
-                    
+
                 case 7:
-                {
-                     NSString *textToShare =  shareTitle;
-                  
+                {//更多
+                    NSString *textToShare =  shareTitle;
                     UIImage *imageToShare = shareImage;
-                    
                     NSURL *urlToShare = [NSURL URLWithString:shareURL];
-                    
                     NSArray *activityItems = @[textToShare, imageToShare, urlToShare];
-                    //更多
                     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
                     NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
                                                     UIActivityTypePostToFacebook,
                                                     UIActivityTypePostToWeibo,
                                                     UIActivityTypePostToTencentWeibo];
                     controller.excludedActivityTypes = excludedActivities;
-                    
-                    
-                    
                     [weakSelf presentViewController:controller animated:YES completion:nil];
                 }
                     
@@ -867,21 +790,12 @@
                 default:
                     break;
             }
-            
-            [weakSelf shareViewUp:NO];
-
+  
         };
- 
-        [self.CoverView addSubview:_ShareView];
         
     }
     return _ShareView;
-}
-
-//移除遮盖
--(void)RemoveCover{
     
-    [self shareViewUp:NO];
 }
 
 

@@ -10,4 +10,8 @@
 typedef void(^ActionBlock)(UIButton *);
 @interface XWGJShareView : UIView
 @property(nonatomic,copy)ActionBlock ShareBlock;
+
++ (instancetype)shareView;
+-(void)ShareButtonClickAndViewHiden:(BOOL)Hiden;
+
 @end

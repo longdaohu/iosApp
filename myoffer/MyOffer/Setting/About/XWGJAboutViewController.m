@@ -16,7 +16,6 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *abountArray;         //关于数据源
 @property(nonatomic,strong)XWGJShareView *ShareView;       //分享View
-@property(nonatomic,strong)UIView *CoverView;            //遮盖
 @property(nonatomic,strong)UIWebView *webView;           //用于打电话
 @property(nonatomic,strong)UILabel *CompanyLab;          //公司信息Label
 
@@ -38,9 +37,7 @@
 {
     [super viewWillDisappear:animated];
     
-    self.CoverView.hidden = YES;
-    
-    [MobClick endLogPageView:@"page关于"];
+     [MobClick endLogPageView:@"page关于"];
     
 }
 
@@ -66,24 +63,6 @@
         
     }
     return _abountArray;
-}
-
-//分享出现时的遮盖
--(UIView *)CoverView
-{
-    if (!_CoverView) {
-        
-        _CoverView =[[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-        [[UIApplication sharedApplication].windows.lastObject addSubview:_CoverView];
-        
-        _CoverView.backgroundColor = [UIColor clearColor];
-        UIButton *cover =[[UIButton alloc] initWithFrame:_CoverView.frame];
-        [cover addTarget:self action:@selector(RemoveCover) forControlEvents:UIControlEventTouchDown];
-        cover.alpha = 0.3;
-        cover.backgroundColor =[UIColor blackColor];
-        [_CoverView addSubview:cover];
-    }
-    return _CoverView;
 }
 
 
@@ -256,61 +235,19 @@
     
 }
 
-//移除遮盖
--(void)RemoveCover{
-    
-    [self shareViewUp:NO];
-}
 
-
-//分享按钮
+//点击分享按钮
 -(void)share
 {
-    [self shareViewUp:YES];
-}
-
-//分享面板出现隐藏
--(void)shareViewUp:(BOOL)up
-{
-    XJHUtilDefineWeakSelfRef
-    CGFloat Fy = up ? APPSIZE.height - APPSIZE.width + 20 : APPSIZE.height;
-    
-    __block CGRect  NewRect = self.ShareView.frame;
-    
-    NewRect.origin.y = Fy;
-    
-    if (up) {
-        
-        self.CoverView.hidden = NO;
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            
-            weakSelf.ShareView.frame = NewRect;
-            
-        }];
-        
-    }else{
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            
-            weakSelf.ShareView.frame = NewRect;
-            
-        } completion:^(BOOL finished) {
-            
-            weakSelf.CoverView.hidden = YES;
-            
-        }];
-    }
+    [self.ShareView ShareButtonClickAndViewHiden:NO];
 }
 
 //分享功能面版
--(XWGJShareView *)ShareView
-{
+-(XWGJShareView *)ShareView{
+    
     if (!_ShareView) {
-        
         XJHUtilDefineWeakSelfRef
-        
-        _ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, APPSIZE.height, APPSIZE.width, APPSIZE.width)];
+        _ShareView = [XWGJShareView shareView];
         
         _ShareView.ShareBlock = ^(UIButton *sender){
             UIImage *shareImage = [UIImage imageNamed:@"shareMyOffer"];
@@ -334,7 +271,7 @@
                     
                 case 1:  //朋友圈
                 {
-
+                    
                     [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
                     
                     [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
@@ -378,9 +315,9 @@
                 case 4: //微博
                 {
                     NSString *title =   [NSString stringWithFormat:@"%@（来自@myOffer学无国界）",shareTitle];
-                  
+                    
                     UIImage *shareImage = [UIImage imageNamed:@"share_market.jpg"];
-
+                    
                     NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",title,shareURL];
                     
                     [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:weakSelf];        //设置分享内容和回调对象
@@ -426,7 +363,7 @@
                     NSURL *urlToShare = [NSURL URLWithString:shareURL];
                     
                     NSArray *activityItems = @[textToShare, imageToShare, urlToShare];
-                   
+                    
                     UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
                     NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
                                                     UIActivityTypePostToFacebook,
@@ -445,15 +382,16 @@
                     break;
             }
             
-            [weakSelf shareViewUp:NO];
             
         };
-        
-        [self.CoverView addSubview:_ShareView];
+
         
     }
     return _ShareView;
+    
 }
+
+
 //友盟分享回调方法
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
 {
