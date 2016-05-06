@@ -4,7 +4,7 @@
 //
 //  Created by Blankwonder on 6/22/15.
 //  Copyright (c) 2015 UVIC. All rights reserved.
-//
+// 查看协议
 
 #import "AgreementViewController.h"
 

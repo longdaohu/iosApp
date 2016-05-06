@@ -20,8 +20,6 @@
 @implementation EvaluateSearchCollegeViewController
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 

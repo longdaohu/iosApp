@@ -7,10 +7,10 @@
  */
 "ch_Language" ="en";
 "buttonInfo" ="change Language";
-"DiscoverTitle" = "Expore";
+"DiscoverTitle" = "Discover";
 "CategoryTitle" = " Uni Finder";
 "EvaluateTitle" = "Evaluate";
-"MeViewControllerTitle" = "Me";
+"MeViewControllerTitle" = "Application";
 "Discover_search" = "Which uni do you want to go?";
 "Category-button001" = "Recommend";
 "Category-button002" = "Location";
@@ -20,9 +20,9 @@
 "Noti-hao" = "OK";
 //评估页面
 "Evaluate-001" = "Evaluate";
-"Evaluate-002" = "Education";
+"Evaluate-002" = "Current or graduated university";
 "Evaluate-009" = "Please enter graduated or current Uni";
-"Evaluate-003" = "Current field of study";
+"Evaluate-003" = "Current subject area";
 "Evaluate-0010" = "Please select your field of study";
 "Evaluate-004" = "GPA";
 "Evaluate-0011" = "Please enter your GPA";
@@ -37,6 +37,22 @@
 "Evaluate-0017" = "Save";
 "Evaluate-University" = "University";
 "Evaluate-Done" = "Done";
+"Evaluate-inteligent" = "Uni Match";
+"Evaluate-commitButton" = "Get my result";
+"Evaluate-AD" = "myOffer@ provides you with recomended universities and courses,and allows you to choose 6 universities to apply. we are powered by real-time evolving big data technology(REBAT) and Two-Class Boosted Decision Tree(TBDT).";
+"Evaluate-Beijin" = "EDUCATION BACKGROUND";
+"Evaluate-Yixiang" = "STUDY PLAN";
+"Evaluate-gradeNoti" = "During July to sept, please select the level you are going to study";
+"Evaluate-commitNoti" = "Please select at least one university!";
+"Evaluate-commitAlert" = "Please select No more than 6 university";
+"Evaluate-Dream" = "Dream";
+"Evaluate-Middle" = "Core";
+"Evaluate-Secure" = "Secure";
+"Evaluate-PieLabel" = "we suggest you pick less than 2 as your target";
+"Evaluate-match" = "matched unis";
+"Evaluate-noData" = "Sorry, we couldn’t find any unis that matched your background.";
+"Evaluate-dangwei" = "";
+
 //我的页面
 "Me-001" = "Application List";
 "Me-002" = "Application Status";
@@ -48,6 +64,21 @@
 "Me-008" = "Change Avatar";
 "Me-009" = "Photograph";
 "Me-0010" = "Select From phone Album";
+
+//申请中心页面
+"center-application" = "My applications";
+"center-appDetail" = "Select six universitys for one time submission";
+"center-status" = "Application status";
+"center-statusDetail" = "Transparent process available any time";
+"center-document" = "Applying documents";
+"center-documentDetail" = "Upload all your documents here in one place";
+"center-myoffer" = "My Offer";
+"center-myofferDetail" = "Your offers are waiting for you here";
+"center-match" = "Uni Match";
+"center-Favourite" = "Favourite Uni";
+"center-matchImage" = "center_ban_EN.jpg";
+"center-statusImage" = "center_ban02_EN.jpg";
+
 
 //我的设置页面
 "Setting-000" = "Setting";
@@ -81,6 +112,7 @@
 "SearchVC-hot" = "Hot Search";
 //搜索结果  —— 页面
 "SearchResultVC-001" = "TIMES Ranking";
+"SearchResultVC-rank" = "TIMES Ranking";
 "SearchResultVC-002" = "Letter_Rank";
 //学校详情  —— 页面
 "UniversityDetail-001" = "Uni Profile";
@@ -100,6 +132,7 @@
 "UniversityDetail-0014" = "Success rate";
 "UniversityDetail-testRate" = "Click here to check success rate";
 "UniversityDetail-operating" = "Operating...";
+"UniversityDetail-year" = "";
 
 
 //分类  页面
@@ -114,7 +147,8 @@
 "CategoryVC-AUSTR005" = "the State of Victoria";
 "CategoryVC-AUSTR006" = "Australian Capital Territory";
 "CategoryVC-AUSTR007" = "QLD(Queensland)";
-
+"CategoryVC-UK" = "United Kingdom";
+"CategoryVC-AU" = "Australia";
 "CategoryVC-times" = "TIMES ranking";
 "CategoryVC-world" = "QS world ranking";
 //已提交申请  页面
@@ -129,6 +163,12 @@
 "ApplicationList-005" = "Submit";
 "ApplicationList-noti" = "You have submit your application,please contact myOffer team should there be any enquiries about your apllication.";
 "ApplicationList-noData" = "Opps! NoData!";
+"ApplicationList-Edit" = "Edit";
+"ApplicationList-Delete" = "Delete";
+"ApplicationList-please" = "Please select unis or courses!";
+"ApplicationList-comfig" = "confirm?";
+"ApplicationList-login" = "Please Log in! ";
+
 
 //申请时提交个人资料
 "ApplicationProfile-001" = "Personal Information";
@@ -156,14 +196,16 @@
 
 //选择国家页面
 "ExpectedCountry-001" = "Country name can not be empty";
-"ExpectedCountry-002" = "Country or region";
+"ExpectedCountry-002" = "Desired country";
 "ExpectedCountry-003" = "Please enter a country or region name";
 //选择出国时间页面
 "ExpectedTime-001" = "Time can not be empty";
-"ExpectedTime-002" = "Please enter Expected time to go";
+"ExpectedTime-002" = "Expected time to go";
+"ExpectedTime-003" = "Please enter Expected time to go";
 //选择期望专业
 "ExpectedSubject-001" = "field of study can not be empty";
-"ExpectedSubject-002" = "Please enter field of study";
+"ExpectedSubject-002" = "Expected subject area";
+"ExpectedSubject-003" = "Please enter field of study";
 
 //课程详情
 "UniCourseDe-001" = "Courses";
@@ -211,10 +253,11 @@
 "bangdingVC-login" = "Enter now";
 "bangdingVC-bangding" = "Bind myOffer account";
 "bangdingVC-noti" = "If you have signed up, please bind a myOffer account";
-"bangdingVC-hello" = "Hello，wechat user";
-"bangdingVC-helloWB" = "Hello，weibo user";
+"bangdingVC-hello" = "Hello, wechat user";
+"bangdingVC-helloWB" = "Hello, weibo user";
 "bangdingVC-weiboTitle" = "weibo Login";
-
+"bangdingVC-QQtitle" = "QQ Login";
+"bangdingVC-helloQQ" = "Hello, QQ user";
 
 //语言设置页面
 "LanguageVC-001" = "Language Setting";
@@ -261,7 +304,8 @@
 "Left-Applycation" = "My Applications";
 "Left-Set" = "Setting";
 "Left-Logout" = "Log Out";
-
+"Left-helpCenter" = "Help Center";
+"Left-help" = "Help";
 //网络请求方法提示
 "NetRequest-connectError" = "No connection, please check your network";
 "NetRequest-ErrorTitle" = "Error";

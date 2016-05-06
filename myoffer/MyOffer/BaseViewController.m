@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "KDProgressHUD.h"
 #import "NSString+MD5.h"
+#import "NewLoginRegisterViewController.h"
 
 @implementation BaseViewController {
     NSMutableArray *_APIRequestTasks;
@@ -16,6 +17,9 @@
     
     UITapGestureRecognizer *_endEditingTapGestureRecognizer;
 }
+
+
+
 
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
@@ -71,8 +75,10 @@
              [[AppDelegate sharedDelegate] presentLoginAndRegisterViewControllerAnimated:YES];
          } else {
              if (showErrorAlert && error.code != kCFURLErrorCancelled) {
+                 
                  [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
-             }
+
+              }
          }
          
          if (failure) failure(statusCode, error);
@@ -150,8 +156,10 @@
 - (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action {
     NSString *errorMessage;
     if (error.domain == kAPIClientErrorDomain) {
+        
         errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"%@ %d",GDLocalizedString(@"NetRequest-SeverError") ,(int)error.code];//服务器错误
-    } else {
+
+     } else {
         errorMessage = GDLocalizedString(@"NetRequest-connectError");//@"网络请求失败，请检查网络连接后重试。";
     }
     
@@ -215,6 +223,26 @@
         [task cancel];
     }
     [_APIRequestTasks removeAllObjects];
+}
+
+-(BOOL)checkWhenUserLogOut
+{
+    
+    BOOL isLogin = [[AppDelegate sharedDelegate] isLogin];
+    
+    if(!isLogin) {
+        
+        NewLoginRegisterViewController *loginVC =[[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
+        
+        XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+        
+    }
+    return isLogin;
+    
 }
 
 @end

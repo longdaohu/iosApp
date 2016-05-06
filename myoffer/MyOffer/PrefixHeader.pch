@@ -11,6 +11,9 @@
 #define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
 #define APPSIZE  [UIScreen mainScreen].bounds.size
 #define MAINCOLOR  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
+#define XUBACKGROUNDCOLOR  [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1]
+#define XJHUtilDefineWeakSelfRef  __weak typeof(self) weakSelf  =self;
+
 
 #import "KDActionSheet.h"
 #import "KDAlertView.h"
@@ -41,6 +44,10 @@
 #import "SearchResultViewController.h" 
 #import "InternationalControl.h"
 #import "XWGJNavigationController.h"
+#import "RESideMenu.h"
+#import "MJRefresh.h"
+#import "MobClickSocialAnalytics.h"
+#import "MobClick.h"
 
 
 #endif

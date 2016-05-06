@@ -21,6 +21,8 @@
     // Do any additional setup after loading the view from its nib.
     self.title = GDLocalizedString(@"Setting-004");//@"About";//@"关于";
     self.aboutTextView.textContainerInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    self.aboutTextView.editable = NO;
+    self.cnAboutTextField.editable = NO;
     
     NSString *lang =[InternationalControl userLanguage];
     if ([lang containsString:@"en"]) {

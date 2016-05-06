@@ -194,10 +194,10 @@
     } else if ([_newSelectedIDs containsObject:id]) {
         [cell.selectionView setTitle:nil forState:UIControlStateNormal];
         [cell.selectionView setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateNormal];
-    } else {
+      } else {
         [cell.selectionView setTitle:nil forState:UIControlStateNormal];
         [cell.selectionView setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
-    }
+     }
     
 }
 
@@ -224,9 +224,17 @@
 
 
 - (IBAction)addSelectedCourse {
+    
+    if (![self  checkWhenUserLogOut]) {
+        
+        return;
+    }
+    
+    
     if (_newSelectedIDs.count == 0) {
         //@"你尚未选择任何课程"  
         [KDAlertView showMessage: GDLocalizedString(@"UniCourseDe-008")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")]; //@"好的"];
+        
         return;
     }
     

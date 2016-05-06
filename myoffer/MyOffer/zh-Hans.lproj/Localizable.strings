@@ -9,13 +9,13 @@
 
 "buttonInfo" ="切换语言";
 
-"DiscoverTitle" = "发现";
+"DiscoverTitle" = "发现院校";
 
-"CategoryTitle" = "分类";
+"CategoryTitle" = "分类搜索";
 
 "EvaluateTitle" = "评估";
 
-"MeViewControllerTitle" = "我";
+"MeViewControllerTitle" = "申请中心";
 
 "Discover_search" = "你想去哪里读书？想读什么？";
 
@@ -30,58 +30,69 @@
 //评估页面
 
 "Evaluate-001" = "在线评估";
-
-"Evaluate-002" = "毕业院校";
-
-"Evaluate-003" = "在读专业";
-
+"Evaluate-002" = "最近就读学校";
 "Evaluate-004" = "GPA（平均成绩）";
-
 "Evaluate-005" = "雅思平均分数";
-
 "Evaluate-006" = "雅思最低分数";
-
 "Evaluate-007" = "申请专业";
-
-"Evaluate-009" = "请输入在读或毕业院校";
-
-"Evaluate-0010" = "请选择在读专业";
-
-"Evaluate-0011" = "请输入平均分";
-
-"Evaluate-0012" = "请输入雅思平均分数";
-
-"Evaluate-0013" = "请输入雅思最低分数";
-
+"Evaluate-003" = "就读专业";
+"Evaluate-009" = "请输入最近就读学校";
+"Evaluate-0010" = "请选择就读专业";
+"Evaluate-0011" = "请输入GPA（平均成绩）";
+"Evaluate-0012" = "请选择雅思平均分数";
+"Evaluate-0013" = "请选择雅思最低分数";
 "Evaluate-0014" = "请选择申请专业";
-
 "Evaluate-0015" = "重新查看大学列表会有惊喜哟！";
-
 "Evaluate-0016" = "好的";
-
 "Evaluate-0017" = "保存";
 "Evaluate-University" = "毕业院校";
 "Evaluate-Done" = "完成";
-
+"Evaluate-inteligent" = "智能匹配";
+"Evaluate-commitButton" = "获取智能匹配结果";
+"Evaluate-AD" = "您的资料将基于myOffer独家REBAT(Real-time Evolving Big Data Technology)技术分析，通过TBD(Two-Class Boosted Decision Tree)算法为您制定推荐院校方案。";
+"Evaluate-Beijin" = "背景资料";
+"Evaluate-Yixiang" = "留学意向";
+"Evaluate-gradeNoti" = "如果在暑假（7月1日-9月1日）请填写将就读的年级";
+"Evaluate-commitNoti" = "请至少选择一个学校";
+"Evaluate-commitAlert" = "最多不超过6个学校";
+"Evaluate-Dream" = "冲刺";
+"Evaluate-Middle" = "核心";
+"Evaluate-Secure" = "保底";
+"Evaluate-PieLabel" = "申请成功就赚了，申请一下试试吧！";
+"Evaluate-match" = "所匹配院校";
+"Evaluate-noData" = "抱歉，没有符合条件的院校！";
+"Evaluate-dangwei" = "所";
 
 //我的页面
 
-"Me-001" = "我的申请意向";
+"Me-001" = "申请意向";
 
-"Me-002" = "申请状态";
+"Me-002" = "审核状态";
 
 "Me-003" = "申请材料";
 
 "Me-004" = "退出登录";
 
 "Me-005" = "点击登录或注册";
-
-"Me-006" = "确认注销";
-
+"Me-006" = "确认登出";
 "Me-007" = "取消";
 "Me-008" = "更换头像";
 "Me-009" = "拍照";
 "Me-0010" = "从手机相册选择";
+
+//申请中心页面
+"center-application" = "申请意向";
+"center-appDetail" = "就是任性，6家名校一键申请";
+"center-status" = "审核状态";
+"center-statusDetail" = "顾问把关，制定高效申请方案";
+"center-document" = "申请材料";
+"center-documentDetail" = "材料备好，意向院校一网打尽";
+"center-myoffer" = "我的 Offer";
+"center-myofferDetail" = "Offer到手，我的未来我做主";
+"center-match" = "智能匹配";
+"center-Favourite" = "收藏院校";
+"center-matchImage" = "center_ban_CN.jpg";
+"center-statusImage" = "center_ban02_CN.jpg";
 
 
 //我的设置页面
@@ -90,7 +101,7 @@
 
 "Setting-001" = "个人信息";
 
-"Setting-002" = "我关注的院校";
+"Setting-002" = "收藏院校";
 
 "Setting-003" = "用户反馈";
 
@@ -128,7 +139,6 @@
 "ChPasswd-001" = "请输入旧密码";
 "ChPasswd-loginPasswd" = "请输入登录密码";
 "ChPasswd-002" = "请输入新密码";
-
 "ChPasswd-003" = "请再次输入新密码";
 
 "ChPasswd-004" = "两次输入的密码不一致";
@@ -136,6 +146,7 @@
 "SearchVC-hot" = "热门搜索";
 //搜索结果  —— 页面
 "SearchResultVC-001" = "TIMES排名";
+"SearchResultVC-rank" = "按TIMES综合排名";
 "SearchResultVC-002" = "按字母排序";
 //学校详情  —— 页面
 "UniversityDetail-001" = "学校详情";
@@ -155,12 +166,15 @@
 "UniversityDetail-0014" = "我的成功率";
 "UniversityDetail-testRate" = "测测我的入学成功率";
 "UniversityDetail-operating" = "计算中...";
+"UniversityDetail-year" = "年";
 
 //分类  页面
 "CategoryVC-ENG001" = "英格兰";
 "CategoryVC-ENG002" = "苏格兰";
 "CategoryVC-ENG003" = "北爱尔兰";
 "CategoryVC-ENG004" = "威尔士";
+"CategoryVC-UK" = "英国";
+"CategoryVC-AU" = "澳大利亚";
 
 "CategoryVC-AUSTR001" = "西澳洲";
 "CategoryVC-AUSTR002" = "南澳州";
@@ -183,6 +197,12 @@
 "ApplicationList-005" = "立即申请";
 "ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。如有疑问请联系客服人员。";
 "ApplicationList-noData" = "Duang!请添加您的意向学校吧！";
+"ApplicationList-Edit" = "编辑";
+"ApplicationList-Delete" = "删除";
+"ApplicationList-please" = "请选择学校或专业后再提交删除！";
+"ApplicationList-comfig" = "是否确认删除?";
+"ApplicationList-login" = "您还没有登录哦！";
+
 
 //申请时提交个人资料
 "ApplicationProfile-001" = "个人资料";
@@ -210,7 +230,7 @@
 
 //选择国家页面
 "ExpectedCountry-001" = "国家名称不能为空";
-"ExpectedCountry-002" = "国家或地区";
+"ExpectedCountry-002" = "想去的国家";
 "ExpectedCountry-003" = "请输入国家或地区名称";
 //选择出国时间页面
 "ExpectedTime-001" = "计划时间不能为空";
@@ -264,13 +284,16 @@
 
 
 //登录绑定页面
-"bangdingVC-title" = "微信登录";
+
 "bangdingVC-login" = "立即进入";
 "bangdingVC-bangding" = "绑定myOffer账号";
 "bangdingVC-noti" = "如果您已注册，请绑定myOffer账号";
 "bangdingVC-hello" = "您好，微信用户";
 "bangdingVC-helloWB" = "您好，微博用户";
 "bangdingVC-weiboTitle" = "微博登录";
+"bangdingVC-title" = "微信登录";
+"bangdingVC-QQtitle" = "QQ登录";
+"bangdingVC-helloQQ" = "您好，QQ用户";
 
 
 
@@ -320,8 +343,9 @@
 "Left-Home" = "主页";
 "Left-Applycation" = "我的申请";
 "Left-Set" = "设置";
-"Left-Logout" = "注销";
-
+"Left-Logout" = "登出";
+"Left-helpCenter" = "帮助中心";
+"Left-help" = "帮助";
 //网络请求方法提示
 "NetRequest-connectError" = "网络请求失败，请检查网络连接后重试。";
 "NetRequest-ErrorTitle" = "错误";

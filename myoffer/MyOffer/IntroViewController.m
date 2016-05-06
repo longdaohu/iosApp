@@ -9,8 +9,10 @@
 #import "IntroViewController.h"
 #import "KDBannerView.h"
 
-@interface IntroViewController () {
+@interface IntroViewController ()<KDBannerViewDelegate>
+{
 }
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *EnterButton;
 
 @end
 
@@ -20,15 +22,29 @@
     [super viewDidLoad];
 
     _bannerView.pageControlBottomInset = 15.0f;
-    _bannerView.views = @[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro_1"]],
-                          [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro_2"]],
-                          [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro_3"]],
-                          [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"intro_4"]]];
+//    _bannerView.delegate = self;
+    _bannerView.views = @[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"into001"]],
+                          [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"into002"]],
+                          [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"into003"]]];
     
     for (UIImageView *view in _bannerView.views) {
         view.contentMode = UIViewContentModeScaleAspectFill;
     }
 }
+
+- (void)bannerView:(KDBannerView *)bannerView atIndex:(int)index
+{
+    if (index == _bannerView.views.count - 1) {
+        
+        self.EnterButton.hidden = NO;
+    }
+    else
+    {
+        self.EnterButton.hidden = YES;
+    }
+   
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

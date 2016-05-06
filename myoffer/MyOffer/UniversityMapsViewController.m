@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view from its nib.
     
    
-    
+    self.title =self.UniversityInfoDic[@"name"];
     NSString *path =[[NSBundle mainBundle] pathForResource:@"mapShow.html" ofType:nil];
     NSURL *url =[NSURL URLWithString:path];
     NSURLRequest *requestx =[[NSURLRequest alloc] initWithURL:url];

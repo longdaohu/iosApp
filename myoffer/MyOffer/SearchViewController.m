@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "SearchRecommandCell.h"
 #import "SearchResultViewController.h"
+#import "NewSearchRstViewController.h"
 
 @interface SearchViewController () {
     NSArray *_recommandWords;
@@ -64,7 +65,9 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
     [self dismissViewControllerAnimated:YES completion:^{}];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -94,7 +97,7 @@
 }
 
 - (void)startSearchWithText:(NSString *)text {
-    SearchResultViewController *vc = [[SearchResultViewController alloc] initWithSearchText:text orderBy:nil];
+    NewSearchRstViewController *vc = [[NewSearchRstViewController alloc] initWithSearchText:text orderBy:nil];
     [self.navigationController pushViewController:vc animated:YES];    
 }
 

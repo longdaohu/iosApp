@@ -29,7 +29,8 @@
     _scrollView.bounces = NO;
     _pageControl = [[UIPageControl alloc] init];
     _pageControl.userInteractionEnabled = NO;
-    
+    _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    _pageControl.currentPageIndicatorTintColor = MAINCOLOR;
     _pageControlBottomInset = 10.0f;
     
     [self addSubview:_scrollView];
@@ -105,7 +106,17 @@
     CGFloat pageWidth = scrollView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     _pageControl.currentPage = page;
-}
+    
+    //徐金辉根据引导页面的需求修改
+//          NSLog(@"++++++----- %d",page);
+    
+         if ([self.delegate respondsToSelector:@selector(bannerView:atIndex:)]) {
+            
+            [self.delegate bannerView:self atIndex:page];
+         }
+    
+    
+ }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [_timer invalidate];

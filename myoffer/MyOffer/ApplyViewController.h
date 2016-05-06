@@ -16,8 +16,8 @@
     IBOutlet UILabel *_selectCountLabel;
 }
 - (IBAction)applyButtonPressed;
-
-
+@property(nonatomic,assign)BOOL isLeftMenu;
+@property(nonatomic,assign)BOOL isApplied;
 
 
 @end

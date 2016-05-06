@@ -13,7 +13,7 @@
 #import "LoginSelectionViewController.h"
 #import "UMSocial.h"
 
-@interface NewLoginRegisterViewController ()<UIPickerViewDataSource,UIPickerViewDelegate>
+@interface NewLoginRegisterViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet FXBlurView *LoginBlurView;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *backButton;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *DismissButton;
@@ -84,8 +84,35 @@
     self.FocusMV.image =[UIImage imageNamed:@"Triangle"];
     [self.ButtonView addSubview:self.FocusMV];
     self.FocusMV.center = CGPointMake(self.LoginSelectButton.center.x, 38);
+    
+    self.LoginPhoneNumberTextF.returnKeyType = UIReturnKeyNext;
+    self.RegisterPasswdTextF.returnKeyType = UIReturnKeyNext;
+    self.LoginPhoneNumberTextF.delegate = self;
+    self.LoginPasswdTextF.delegate = self;
+    self.RegisterPasswdTextF.delegate = self;
+    self.RegisterRepwdTextF.delegate = self;
 }
 
+#pragma mark
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.LoginPhoneNumberTextF) {
+        
+        [self.LoginPasswdTextF becomeFirstResponder];
+        
+    }else if (textField == self.LoginPasswdTextF)
+    {
+        [self LoginButtonCommit:nil];
+    }else if (textField == self.RegisterPasswdTextF)
+    {
+        [self.RegisterRepwdTextF becomeFirstResponder];
+    }else if (textField == self.RegisterRepwdTextF)
+    {
+        [self RegisterButtonCommitPressed:nil];
+    }
+    
+    return YES;
+}
 
 -(UIPickerView *)AreaPicker
 {
@@ -132,6 +159,33 @@
      [AtributeStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NotiRangne];
      [self.ServiceButton setAttributedTitle: AtributeStr forState:UIControlStateNormal];
  }
+//QQ登录
+- (IBAction)QQLoginButtonPressed:(id)sender {
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQzone];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        //          获取微博用户名、uid、token等
+         if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQzone];
+             //            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+             NSMutableDictionary *weixinInfo =[NSMutableDictionary dictionary];
+            
+            [weixinInfo setValue:snsAccount.usid forKey:@"user_id"];
+            
+            [weixinInfo setValue:@"qq" forKey:@"provider"];
+            
+            [weixinInfo setValue:snsAccount.accessToken forKey:@"token"];
+            
+            [self  loginWithParameters:weixinInfo];
+            
+        }});
+    
+}
+
+//微博登录
 - (IBAction)weiboLoginButtonPressed:(id)sender {
    
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
@@ -270,7 +324,7 @@
         return;
     }
     if (self.LoginPasswdTextF.text.length == 0) {
-        [KDAlertView showMessage:GDLocalizedString(@"LoginVC-005") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
+        [KDAlertView showMessage:GDLocalizedString(@"LoginVC-0011") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];//@"好的"];
         return;
     }
     [self
@@ -279,10 +333,13 @@
      success:^(NSInteger statusCode, NSDictionary *response) {
          KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
          [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+         [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
          [hud applySuccessStyle];
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
-             [self dismiss];
+             
+               [self whenUserLoginDismiss];
+             
          }];
      }];
 
@@ -310,6 +367,8 @@
     });
 
 }
+
+//第三方登录传参并登录
 -(void)loginWithParameters:(NSMutableDictionary *)weixinInfo
 {
     [self  startAPIRequestWithSelector:@"POST api/account/login" parameters:weixinInfo success:^(NSInteger statusCode, NSDictionary *response) {
@@ -322,8 +381,11 @@
         else if([response[@"role"] isEqualToString:@"user"])
         {
             [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }
+            
+            [MobClick profileSignInWithPUID:response[@"access_token"] provider:[weixinInfo valueForKey:@"provider"]];/*友盟统计记录用户账号*/
+            
+            [self whenUserLoginDismiss];
+         }
     }];
 }
 
@@ -498,7 +560,31 @@
 }
 
 
+-(void)whenUserLoginDismiss
+{
+    //用于判断用户是否改变
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSString *displayname =[ud valueForKey:@"userDisplayName"];
+    if (![displayname isEqualToString: self.LoginPhoneNumberTextF.text] ) {
+        
+        [ud setValue:@"changeYES" forKey:@"userChange"];
+        
+     }else{
+        
+        [ud setValue:@"changeNO" forKey:@"userChange"];
+         
+    }
+    [ud  setValue:self.LoginPhoneNumberTextF.text  forKey:@"userDisplayName"];
+    
+    [ud synchronize];
+    
+     [self dismiss];
+}
+
 KDUtilRemoveNotificationCenterObserverDealloc
 
 
+
 @end
+
+

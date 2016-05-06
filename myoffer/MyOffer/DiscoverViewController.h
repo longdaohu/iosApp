@@ -10,6 +10,7 @@
 
 @interface DiscoverViewController : BaseViewController  <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UIView *_searchBar;
+    
     IBOutlet NSLayoutConstraint *_searchBarWidth, *_searchBarTextFieldWidth;
     IBOutlet UITextField *_searchBarTextField;
 }

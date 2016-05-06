@@ -11,14 +11,18 @@
 @class KDBannerView;
 
 @protocol KDBannerViewDelegate <NSObject>
+
+
 @optional
 - (void)bannerView:(KDBannerView *)bannerView didTapView:(UIView *)view atIndex:(NSInteger)index;
+- (void)bannerView:(KDBannerView *)bannerView atIndex:(int)index;
+
 
 @end
 
 @interface KDBannerView : UIView
-
-@property (weak, nonatomic) IBOutlet id<KDBannerViewDelegate> delegate;
+//@property (weak, nonatomic) IBOutlet id<KDBannerViewDelegate> delegate;
+@property (weak, nonatomic)id<KDBannerViewDelegate> delegate;
 
 @property (nonatomic) NSTimeInterval autoScrollDuration;
 @property (nonatomic) CGFloat pageControlBottomInset;

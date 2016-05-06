@@ -7,7 +7,7 @@
 //
 #import "BindPhoneViewController.h"
 #import "ChangePasswordViewController.h"
-@interface BindPhoneViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate> {
+@interface BindPhoneViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate> {
     NSArray *_cells;
     UITextField *_AreaCodeTextField, *_PhoneTextField, *_VertificationTextField, *_PasswordTextField;
 }
@@ -40,7 +40,7 @@
     UITextField *cellTextField = [[UITextField alloc] init];
     [cellTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
     cellTextField.delegate = self;
-    cellTextField.enablesReturnKeyAutomatically = YES;
+//    cellTextField.enablesReturnKeyAutomatically = YES;
     cellTextField.placeholder = placeholder;
     return cellTextField;
 }
@@ -81,7 +81,7 @@
         UITableViewCell *cell = [self cellDefault];
         _VertificationTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-007")];
         _VertificationTextField.keyboardType = UIKeyboardTypeNumberPad;
-          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(_tableView.frame.size.width - 120, 0, 100, 44)];
+          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(APPSIZE.width - 120, 0, 100, 44)];
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
         [self.VertificationButton addTarget:self action:@selector(SendVertificationCode:) forControlEvents:UIControlEventTouchUpInside];
         [self.VertificationButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
@@ -94,8 +94,8 @@
         UITableViewCell *cell = [self cellDefault];
         _PasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-loginPasswd")];
         _PasswordTextField.frame = CGRectMake(20, 11, _tableView.frame.size.width - 20 * 2.0f, _tableView.rowHeight - 11 * 2.0f);
-        _PasswordTextField.returnKeyType = UIReturnKeyNext;
-         _PasswordTextField.keyboardType = UIKeyboardTypeDefault;
+        _PasswordTextField.returnKeyType = UIReturnKeyDone;
+//         _PasswordTextField.keyboardType = UIKeyboardTypeDefault;
         [cell addSubview:_PasswordTextField];
         [cells addObject:cell];
     }
@@ -206,9 +206,24 @@
         [alertCtrl addAction:okAction];
         
         [self presentViewController:alertCtrl animated:YES completion:nil];
+    }else{
+        UIAlertView  *alert =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"Bind-mailNoti") delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel")  otherButtonTitles:GDLocalizedString(@"Person-SetPasswd"), nil];
+        [alert show];
     }
-    
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        
+        ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
+        passwordVC.newpasswd = @"newPasswd";
+        [self.navigationController pushViewController:passwordVC animated:YES];
+        
+    }
+}
+
+
+
 -(BOOL)checkPhoneTextField
 {
     //"LoginVC-chinese" = "中国";
@@ -306,6 +321,20 @@
     
 }
 
+#pragma mark UItextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    
+    if (textField == _PasswordTextField)
+    {
+        [self done];
+    }
+    
+    return YES;
+}
+
+
+KDUtilRemoveNotificationCenterObserverDealloc
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

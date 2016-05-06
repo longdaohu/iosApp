@@ -253,9 +253,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *info = _result[indexPath.row];
-
-    [self.navigationController pushUniversityViewControllerWithID:info[@"_id"] animated:YES];
+      NSDictionary *info = _result[indexPath.row];
+     [self.navigationController pushUniversityViewControllerWithID:info[@"_id"] animated:YES];
 }
 
 @end

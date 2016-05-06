@@ -14,16 +14,17 @@
 #import "CategoryViewController.h"
 #import "EvaluateViewController.h"
 #import "MeViewController.h"
-//#import "LoginAndRegisterViewController.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
- #import "LeftViewController.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "NewLoginRegisterViewController.h"
 #import "UMSocialSinaSSOHandler.h"
+#import "UMSocialQQHandler.h"
+#import "DEMOLeftMenuViewController.h"
 
-@interface AppDelegate ()
+
+@interface AppDelegate ()<RESideMenuDelegate>
 {
     NSString *_accessToken;
  }
@@ -57,14 +58,23 @@ static AppDelegate *__sharedDelegate;
  
 
     XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
-    self.xtabBarController = mainTabBarController;
-    LeftViewController *leftViewController=[[LeftViewController alloc]initWithNibName:nil bundle:nil];
-    _sideViewController=[[YRSideViewController alloc]initWithNibName:nil bundle:nil];
-    _sideViewController.rootViewController=mainTabBarController;
-    _sideViewController.leftViewController=leftViewController;
     
-    self.window.rootViewController = _sideViewController;
-     [self.window makeKeyAndVisible];
+    DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
+    
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
+                                                                    leftMenuViewController:leftMenuViewController
+                                                                   rightMenuViewController:nil];
+//    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
+    sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
+    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    sideMenuViewController.delegate = self;
+    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
+    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
+    sideMenuViewController.contentViewShadowOpacity = 0.6;
+    sideMenuViewController.contentViewShadowRadius = 12;
+    sideMenuViewController.contentViewShadowEnabled = YES;
+    self.window.rootViewController = sideMenuViewController;
+    [self.window makeKeyAndVisible];
      NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
@@ -74,15 +84,33 @@ static AppDelegate *__sharedDelegate;
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }
     
+    [self umeng];
     
+    return YES;
+}
+
+
+-(void)umeng
+{
+    
+    
+    // 5606655f67e58e9f00004355
     //在AppDelegate内设置友盟AppKey
-    [UMSocialData setAppKey:@"5606655f67e58e9f00004355"];
+    [UMSocialData setAppKey:@"5668ea43e0f55af981002131"];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" url:@"http://www.myoffer.cn/"];
     //打开新浪微博的SSO开关，设置新浪微博回调地址
     [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    //设置QQ登录
+    [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
+    
+    //友盟统计
+    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick setLogEnabled:YES];
+    [MobClick setEncryptEnabled:YES];
 
-    return YES;
 }
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
@@ -130,6 +158,8 @@ static AppDelegate *__sharedDelegate;
 }
 
 - (NSString *)accessToken {
+    
+
     return _accessToken;
 }
 
@@ -137,8 +167,9 @@ static AppDelegate *__sharedDelegate;
     NSString *savedToken = [[NSString alloc] initWithData:[Keychain keychainItemDataWithIdentifier:@"token"] encoding:NSUTF8StringEncoding];
 
     if (KDUtilIsStringValid(savedToken)) {
-        _accessToken = savedToken;
-    }
+        
+          _accessToken = savedToken;
+       }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
@@ -152,4 +183,28 @@ static AppDelegate *__sharedDelegate;
 {
     return  [UMSocialSnsService handleOpenURL:url];
 }
+
+
+#pragma mark RESideMenu Delegate
+
+- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
+{
+    //    NSLog(@"willShowMenuViewController: %@", NSStringFromClass([menuViewController class]));
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController
+{
+    //    NSLog(@"didShowMenuViewController: %@", NSStringFromClass([menuViewController class]));
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController
+{
+    //    NSLog(@"willHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+}
+
+- (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController
+{
+    //    NSLog(@"didHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+}
+
 @end

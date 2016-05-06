@@ -107,10 +107,7 @@ typedef NS_ENUM(NSUInteger,pickeTag)
 -(void)createTableCellData
 {
     
-
-    
-    
-//    _titles = @[@"毕业院校", @"在读专业", @"平均分", @"雅思平均分数", @"雅思最低分数", @"申请专业"];
+ //    _titles = @[@"毕业院校", @"在读专业", @"平均分", @"雅思平均分数", @"雅思最低分数", @"申请专业"];
      _titles = @[GDLocalizedString(@"Evaluate-002"), GDLocalizedString(@"Evaluate-003"),GDLocalizedString(@"Evaluate-004"), GDLocalizedString(@"Evaluate-005"), GDLocalizedString(@"Evaluate-006"), GDLocalizedString(@"Evaluate-007")];
   
     UITableViewCell *(^newCell)(NSString *placeholder, UITextField **textFieldPtr) = ^UITableViewCell*(NSString *placeholder, UITextField **textFieldPtr) {
@@ -145,10 +142,7 @@ typedef NS_ENUM(NSUInteger,pickeTag)
     _scoreTextField = scoreTextField;
     _IELTSTextField = IELTSTextField;
     _IELTSMinTextField = IELTSMinTextField;
-    
     _applySubjectTextField = applySubjectTextField;
-    
-    
     _IELTSMinTextField.inputView = self.IELSTminiPickerView;
     _IELTSTextField.inputView = self.IELSTaveragePickerView;
     _subjectTextField.inputView = self.XsubjectPickerView;
@@ -195,8 +189,6 @@ typedef NS_ENUM(NSUInteger,pickeTag)
     //    self.navigationItem.title = @"在线评估";
       self.navigationItem.title = GDLocalizedString(@"Evaluate-001");
     
-    
-    
    
 }
 //用于网络请求
@@ -205,12 +197,12 @@ typedef NS_ENUM(NSUInteger,pickeTag)
     if ([AppDelegate sharedDelegate].isLogin) {
         [self startAPIRequestUsingCacheWithSelector:@"GET api/account/evaluate" parameters:nil success:^(NSInteger statusCode, id response) {
             
+            
             NSString *IELTSTstring = KDUtilStringGuard(response[@"ielts_avg"]);
             _IELTSTextField.text = IELTSTstring;
             if (IELTSTstring.length == 1) {
                 _IELTSTextField.text = [NSString stringWithFormat:@"%@.0",IELTSTstring];
             }
-            
             
             NSString *ministring = KDUtilStringGuard(response[@"ielts_low"]);
             _IELTSMinTextField.text = ministring;
@@ -219,7 +211,6 @@ typedef NS_ENUM(NSUInteger,pickeTag)
                 _IELTSMinTextField.text = [NSString stringWithFormat:@"%@.0",ministring];
             }
             
-            
             _scoreTextField.text = KDUtilStringGuard(response[@"score"]);
             _subjectTextField.text = response[@"subject"];
             _universityTextField.text = response[@"university"];
@@ -227,6 +218,7 @@ typedef NS_ENUM(NSUInteger,pickeTag)
         }];
     }
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -427,8 +419,7 @@ typedef NS_ENUM(NSUInteger,pickeTag)
          } else{
 //             [KDAlertView showMessage:@"重新查看大学列表会有惊喜哟！" cancelButtonTitle:@"好的"];
              [KDAlertView showMessage:GDLocalizedString(@"Evaluate-0015") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
-
-         }
+          }
          
      }];
 }
@@ -463,6 +454,8 @@ typedef NS_ENUM(NSUInteger,pickeTag)
         }
     }
 }
+
+KDUtilRemoveNotificationCenterObserverDealloc
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

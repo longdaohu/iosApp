@@ -106,8 +106,10 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         if (JSONError) {
             KDClassLog(@"Error occurred when json serializating: %@", JSONError);
             KDClassLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+
             dispatch_async( dispatch_get_main_queue(),^{
-                failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain code:kAPIClientErrorDomainCodeJSONDeserializatingError userInfo:nil]);
+                
+                    failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain code:kAPIClientErrorDomainCodeJSONDeserializatingError userInfo:nil]);
             });
             return;
         }
@@ -128,7 +130,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     
     [task resume];
     
-    KDClassLog(@"Request started: %@ %@", request.HTTPMethod, request.URL.absoluteString);
+    KDClassLog(@"Request started: %@ ---  %@", request.HTTPMethod, request.URL.absoluteString);
     if (request.HTTPBody) {
         KDClassLog(@"Request body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     }
@@ -157,7 +159,6 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         
         parameters = newParameters;
     }
-    
     
     
     NSURL *url = [NSURL URLWithString:newPath relativeToURL:_endPoint];
@@ -197,6 +198,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     
     
     if ([[AppDelegate sharedDelegate] isLogin]) {
+        
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     }
  

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ActionTableViewCell : UITableViewCell
+@property(nonatomic,strong)UILabel *countLabel;
 @property (nonatomic, copy) void (^action)();
 @end
 

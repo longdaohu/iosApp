@@ -16,13 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9E-Wp-dcb" userLabel="noDataView">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v9E-Wp-dcb" userLabel="noDataView">
                     <rect key="frame" x="170" y="216" width="260" height="168"/>
                     <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="jiT-hZ-T6C">
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="nodocuments" translatesAutoresizingMaskIntoConstraints="NO" id="jiT-hZ-T6C">
                             <rect key="frame" x="0.0" y="0.0" width="260" height="136"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duang!您的个人申请资料似乎没有完成哦~请移步电脑登陆www.myoffer.cn完善资料" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="muA-ib-j0h">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Duang!您的个人申请资料似乎没有完成哦~请移步电脑登陆www.myoffer.cn完善资料" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="muA-ib-j0h">
                             <rect key="frame" x="0.0" y="136" width="260" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="260" id="Vvw-32-S6V"/>

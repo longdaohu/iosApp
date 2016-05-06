@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewLoginRegisterViewController">
@@ -604,27 +604,39 @@
                             </constraints>
                         </view>
                         <button opaque="NO" tag="13" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71I-AZ-SOv" userLabel="weixinButton" customClass="KDEasyTouchButton">
-                            <rect key="frame" x="100" y="30" width="40" height="40"/>
+                            <rect key="frame" x="80" y="30" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="4lR-hZ-n2k"/>
                                 <constraint firstAttribute="width" constant="40" id="b6Z-Ca-hSf"/>
                             </constraints>
                             <state key="normal" image="wechat_icon"/>
-                            <state key="highlighted" image="wechat_high.png"/>
+                            <state key="highlighted" image="wechat_icon_high"/>
                             <connections>
                                 <action selector="weixinButtonPressed:" destination="-1" eventType="touchUpInside" id="Jgr-sq-XSh"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nF-th-giw" userLabel="weiboButton" customClass="KDEasyTouchButton">
-                            <rect key="frame" x="180" y="30" width="40" height="40"/>
+                            <rect key="frame" x="200" y="30" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Kja-na-ji0"/>
                                 <constraint firstAttribute="width" constant="40" id="KxJ-yP-6Qa"/>
                             </constraints>
                             <state key="normal" image="weibo_icon"/>
-                            <state key="highlighted" image="sina2.png"/>
+                            <state key="highlighted" image="weibo_icon_high"/>
                             <connections>
                                 <action selector="weiboLoginButtonPressed:" destination="-1" eventType="touchUpInside" id="pW6-kR-9jH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-xI-zhA">
+                            <rect key="frame" x="140" y="30" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="1dh-vp-596"/>
+                                <constraint firstAttribute="width" constant="40" id="JAQ-5w-RfT"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="qq_icon"/>
+                            <state key="highlighted" image="qq_icon_high"/>
+                            <connections>
+                                <action selector="QQLoginButtonPressed:" destination="-1" eventType="touchUpInside" id="14k-AD-F27"/>
                             </connections>
                         </button>
                     </subviews>
@@ -632,11 +644,13 @@
                         <constraint firstItem="J1O-Oh-Tgu" firstAttribute="leading" secondItem="jWm-ZB-dsz" secondAttribute="leading" id="5h1-nP-owE"/>
                         <constraint firstItem="6nF-th-giw" firstAttribute="top" secondItem="J1O-Oh-Tgu" secondAttribute="bottom" constant="10" id="JeZ-fp-dCw"/>
                         <constraint firstAttribute="height" constant="80" id="Q8z-GX-Yrt"/>
-                        <constraint firstItem="71I-AZ-SOv" firstAttribute="centerX" secondItem="jWm-ZB-dsz" secondAttribute="centerX" constant="-40" id="Syl-m9-mKM"/>
+                        <constraint firstItem="71I-AZ-SOv" firstAttribute="centerX" secondItem="jWm-ZB-dsz" secondAttribute="centerX" constant="-60" id="Syl-m9-mKM"/>
+                        <constraint firstItem="SVb-xI-zhA" firstAttribute="top" secondItem="71I-AZ-SOv" secondAttribute="top" id="VWj-PC-EDR"/>
                         <constraint firstAttribute="trailing" secondItem="J1O-Oh-Tgu" secondAttribute="trailing" id="W2k-2D-DeS"/>
                         <constraint firstItem="71I-AZ-SOv" firstAttribute="top" secondItem="J1O-Oh-Tgu" secondAttribute="bottom" constant="10" id="XmW-Bl-avw"/>
+                        <constraint firstItem="SVb-xI-zhA" firstAttribute="centerX" secondItem="jWm-ZB-dsz" secondAttribute="centerX" id="bxG-vh-8zb"/>
                         <constraint firstItem="J1O-Oh-Tgu" firstAttribute="top" secondItem="jWm-ZB-dsz" secondAttribute="top" id="eCk-S2-hxZ"/>
-                        <constraint firstItem="6nF-th-giw" firstAttribute="centerX" secondItem="jWm-ZB-dsz" secondAttribute="centerX" constant="40" id="rqY-IE-pS3"/>
+                        <constraint firstItem="6nF-th-giw" firstAttribute="centerX" secondItem="jWm-ZB-dsz" secondAttribute="centerX" constant="60" id="rqY-IE-pS3"/>
                     </constraints>
                 </view>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPF-z4-pmg">
@@ -683,11 +697,13 @@
         <image name="location" width="31" height="45"/>
         <image name="logoforapp" width="343" height="145"/>
         <image name="password" width="40" height="47"/>
-        <image name="sina2.png" width="50" height="50"/>
+        <image name="qq_icon" width="80" height="80"/>
+        <image name="qq_icon_high" width="80" height="80"/>
         <image name="username_icon" width="45" height="45"/>
-        <image name="wechat_high.png" width="50" height="50"/>
         <image name="wechat_icon" width="80" height="80"/>
+        <image name="wechat_icon_high" width="80" height="80"/>
         <image name="weibo_icon" width="80" height="80"/>
+        <image name="weibo_icon_high" width="80" height="80"/>
         <image name="wel_CN.png" width="502" height="114"/>
     </resources>
 </document>

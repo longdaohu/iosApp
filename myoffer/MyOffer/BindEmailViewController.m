@@ -9,7 +9,7 @@
 #import "BindEmailViewController.h"
 #import "ChangePasswordViewController.h"
 
-@interface BindEmailViewController ()<UITextFieldDelegate> {
+@interface BindEmailViewController ()<UITextFieldDelegate,UIAlertViewDelegate> {
     NSArray *_cells;
     UITextField *_EmailTextField, *_VertificationTextField,*_PasswordTextField;
 }
@@ -24,35 +24,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-     self.title = GDLocalizedString(@"Bind-EmailTitle");//@"绑定邮箱";
-    
-    _tableView.rowHeight = 44;
+    [self makeUI];
+}
 
+-(void)makeUI
+{
+    
+    self.title = GDLocalizedString(@"Bind-EmailTitle");//@"绑定邮箱";
+
+    _tableView.rowHeight = 44;
+    
     NSMutableArray *cells = [NSMutableArray array];
     
     {
-         UITableViewCell *cell = [self cellDefault];
+        UITableViewCell *cell = [self cellDefault];
         _EmailTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"Bind-email")];
         _EmailTextField.returnKeyType = UIReturnKeyNext;
         [cell addSubview:_EmailTextField];
         [cells addObject:cell];
     }
     
-      {
-          UITableViewCell *cell = [self cellDefault];
-          _VertificationTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-007")];
-         _VertificationTextField.returnKeyType = UIReturnKeyNext;
-         if (!self.Email)
-         {
-             _VertificationTextField.returnKeyType = UIReturnKeyDone;
-         }
+    {
+        UITableViewCell *cell = [self cellDefault];
+        _VertificationTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-007")];
+        _VertificationTextField.returnKeyType = UIReturnKeyNext;
+        if (!self.Email)
+        {
+            _VertificationTextField.returnKeyType = UIReturnKeyDone;
+        }
         self.VertificationButton =[[UIButton alloc] init];
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008")forState:UIControlStateNormal];
         [self.VertificationButton addTarget:self action:@selector(SendVertificationCode:) forControlEvents:UIControlEventTouchUpInside];
         [self.VertificationButton setTitleColor:MAINCOLOR forState:UIControlStateNormal];
-         [cell addSubview:self.VertificationButton];
-         [cell addSubview:_VertificationTextField];
-         [cells addObject:cell];
+        [cell addSubview:self.VertificationButton];
+        [cell addSubview:_VertificationTextField];
+        [cells addObject:cell];
     }
     
     if (self.Email.length){
@@ -61,19 +67,18 @@
         _PasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-loginPasswd")];
         _PasswordTextField.frame = CGRectMake(20, 11, _tableView.frame.size.width - 20 * 2.0f, _tableView.rowHeight - 11 * 2.0f);
         _PasswordTextField.returnKeyType = UIReturnKeyDone;
-//        _PasswordTextField.keyboardType = UIKeyboardTypeDefault;
         _PasswordTextField.secureTextEntry = YES;
         [cell addSubview:_PasswordTextField];
         [cells addObject:cell];
     }
     
-   
+    
     _cells = cells;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    
 
 }
-
 -(UITableViewCell *)cellDefault
 {
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -84,7 +89,7 @@
     UITextField *cellTextField = [[UITextField alloc] init];
     [cellTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
     cellTextField.delegate = self;
-    cellTextField.enablesReturnKeyAutomatically = YES;
+//    cellTextField.enablesReturnKeyAutomatically = YES;
     cellTextField.placeholder = placeholder;
     return cellTextField;
 }
@@ -104,6 +109,8 @@
     return _cells[indexPath.row];
 }
 
+
+#pragma mark  UITextFieldDelege
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
   
     if (textField == _EmailTextField) {
@@ -201,7 +208,6 @@
         }];
  
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:GDLocalizedString(@"Person-SetPasswd") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
             ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
             passwordVC.newpasswd = @"newPasswd";
             [self.navigationController pushViewController:passwordVC animated:YES];
@@ -212,8 +218,22 @@
         [alertCtrl addAction:okAction];
         
         [self presentViewController:alertCtrl animated:YES completion:nil];
+    }else{
+        UIAlertView  *alert =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"Bind-mailNoti") delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel")  otherButtonTitles:GDLocalizedString(@"Person-SetPasswd"), nil];
+        [alert show];
     }
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        
+        ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
+        passwordVC.newpasswd = @"newPasswd";
+        [self.navigationController pushViewController:passwordVC animated:YES];
+        
+    }
+}
+
 
 -(void)SendVertificationCode:(UIButton *)sender
 {
@@ -270,12 +290,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+KDUtilRemoveNotificationCenterObserverDealloc
 
 @end
 

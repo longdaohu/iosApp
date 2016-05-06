@@ -27,11 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    //左侧菜单按钮
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BurgerMenu_39"] style:UIBarButtonItemStylePlain target:self action:@selector(showLeftMenu:)];
+
     self.title = GDLocalizedString(@"Setting-000");//@"设置"
      self.setTableView.tableFooterView = [[UIView alloc] init];
-    
     
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -60,7 +58,6 @@
                              }),
                      newCell(aboutString, [UIImage imageNamed:@"me_about"],
                              ^{
-                                 
                              EngAboutViewController *xengAbout =[[EngAboutViewController alloc] initWithNibName:@"EngAboutViewController" bundle:nil];
                              [self.navigationController pushViewController:xengAbout animated:YES];
                                
@@ -72,13 +69,6 @@
                        })]];
 }
 
-//打开左侧菜单
--(void)showLeftMenu:(UIBarButtonItem *)barButton
-{
-    AppDelegate *delegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-    YRSideViewController *sideViewController=[delegate sideViewController];
-    [sideViewController showLeftViewController:true];
-}
 
 
 @end

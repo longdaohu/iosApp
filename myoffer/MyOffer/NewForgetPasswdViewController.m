@@ -8,7 +8,7 @@
 
 #import "NewForgetPasswdViewController.h"
 
-@interface NewForgetPasswdViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface NewForgetPasswdViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>
  @property (weak, nonatomic) IBOutlet UITextField *AreaTextF;
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPhoneTextF;
 @property (weak, nonatomic) IBOutlet UITextField *VeritficationTextF;
@@ -34,12 +34,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self makeUI];
+    [self ChangLanguageView];
+    
+    
+    
+}
+-(void)makeUI
+{
     self.AreaTextF.inputView = self.piker;
     self.commitButton.backgroundColor =MAINCOLOR;
     self.commitButton.layer.cornerRadius =2;
     self.VerifycationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [self ChangLanguageView];
     
+    self.RegisterPasswdTextF.delegate =self;
+    self.RepasswdTextF.delegate =self;
+    self.RegisterPasswdTextF.returnKeyType = UIReturnKeyNext;
+}
+
+#pragma mark   UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.RegisterPasswdTextF) {
+        
+        [self.RepasswdTextF becomeFirstResponder];
+        
+    }else if (textField == self.RepasswdTextF)
+    {
+        [self commitButtonPressed:nil];
+    }
+    
+    return YES;
 }
 
 -(void)ChangLanguageView
@@ -54,7 +79,6 @@
         self.AreaTextF.text = GDLocalizedString(@"LoginVC-english");
         
     }
-    
     self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");// "请输入11位手机号码";
     self.VeritficationTextF.placeholder = GDLocalizedString(@"LoginVC-007");//"请输入验证码";
     self.RegisterPasswdTextF.placeholder = GDLocalizedString(@"LoginVC-005");//"请输入新密码";
@@ -212,7 +236,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
     
 }
 

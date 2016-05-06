@@ -23,4 +23,5 @@
      [self.logoView.logoImageView KD_setImageWithURL:universityInfo[@"logo"]];
 }
 
+
 @end

@@ -48,7 +48,9 @@
 - (IBAction)endEditing;
 
 - (IBAction)dismiss;
+
 @property (copy, nonatomic) void (^dismissCompletion)(BaseViewController *vc);
+-(BOOL)checkWhenUserLogOut;
 
 
 @end

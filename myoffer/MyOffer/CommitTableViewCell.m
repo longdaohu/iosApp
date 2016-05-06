@@ -41,7 +41,6 @@
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-   // NSLog(@"==========%@",item.itemTitle);
     
    
 }

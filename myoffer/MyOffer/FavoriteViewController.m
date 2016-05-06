@@ -36,16 +36,18 @@
 //    _tableView.rowHeight = 100;
 //    self.view = _tableView;
 //}
+-(void)makeUI
+{
+    self.title = GDLocalizedString(@"Setting-002"); //@"我的关注院校";
+    self.notiLabel.text =GDLocalizedString(@"Favorite-NOTI");//Duang!请添加您关注的院校吧！
+    self.FavoriteTableView.rowHeight = 100;
+    [self.FavoriteTableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+    self.FavoriteTableView.backgroundColor = XUBACKGROUNDCOLOR;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = GDLocalizedString(@"Setting-002"); //@"我的关注院校";
-     self.notiLabel.text =GDLocalizedString(@"Favorite-NOTI");//Duang!请添加您关注的院校吧！
-    self.FavoriteTableView.rowHeight = 100;
-     self.FavoriteTableView.tableFooterView =[[UIView alloc] init];
-     [self.FavoriteTableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
-   
+    [self makeUI];
  }
 
 - (void)reloadData {
@@ -63,11 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
-    [self reloadData];
-    
-    
-
+     [self reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

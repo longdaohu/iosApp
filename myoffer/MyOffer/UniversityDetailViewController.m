@@ -42,6 +42,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self makeUI];
+    [self reloadData];
+}
+
+-(void)makeUI
+{
     [self.EvaluationBtn setTitle:GDLocalizedString(@"UniversityDetail-testRate") forState:UIControlStateNormal];
     self.EvaluationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.BuildTimeLabel.text = GDLocalizedString(@"UniversityDetail-004"); //"建校时期";
@@ -51,12 +57,13 @@
     self.GalPhotoLabel.text = GDLocalizedString(@"UniversityDetail-008"); //"照片展示";
     [self.ShowCourseSBtn setTitle:GDLocalizedString(@"UniversityDetail-009")  forState:UIControlStateNormal] ; //"查看所有专业课程";
     self.title = GDLocalizedString(@"UniversityDetail-001"); //@"学校详情";
-     _evaluationButton.layer.cornerRadius = 2;
+    _evaluationButton.layer.cornerRadius = 2;
     _evaluationButton.adjustAllRectWhenHighlighted = YES;
     _evaluationButton.layer.borderColor = [_evaluationButton currentTitleColor].CGColor;
     _evaluationButton.layer.borderWidth = 2;
     _scrollView.hidden = YES;
-    [self reloadData];
+    
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +71,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
  - (void)reloadData {
-    [self
+   
+     [self
      startAPIRequestWithSelector:kAPISelectorUniversityInfo
      parameters:@{@":id": _universityID}
      showHUD:YES errorAlertDismissAction:^{
@@ -73,11 +81,13 @@
        
          _resultResponse = response;
          _scrollView.hidden = NO;
+         
          _descLabel.text = response[@"introduction"];
          
-         _chineseNameLabel.text = response[@"name"];
+          _chineseNameLabel.text = response[@"name"];
+       
          _englishNameLabel.text = response[@"official_name"];
-         _setupYearLabel.text = [NSString stringWithFormat:@"%@年", response[@"found"]];
+         _setupYearLabel.text = [NSString stringWithFormat:@"%@%@", response[@"found"],GDLocalizedString(@"UniversityDetail-year")];
          
          NSString *rank = GDLocalizedString(@"UniversityDetail-002");
          NSString *QSrank = GDLocalizedString(@"UniversityDetail-003");
@@ -94,9 +104,14 @@
             return imageView;
         }];
          
+    
+         
+         if ([AppDelegate sharedDelegate].isLogin) {
+
+         
         _isLiked = [response[@"favorited"] boolValue];
         
-        if (response[@"evaluation"]) {
+        if (response[@"evaluation"] ) {
             float success = [response[@"success_rate"] floatValue];
             _successLabel.text = [NSString stringWithFormat:@"%@：%.0f%%",GDLocalizedString(@"UniversityDetail-0011"),success];
             _successProgressView.progress = success / 100.0f;
@@ -119,21 +134,41 @@
                 _mySuccessLabel.text = [NSString stringWithFormat:@"%@：%.1f%%",GDLocalizedString(@"UniversityDetail-0014"), my];
                 _mySuccessProgressView.progress = my / 100.0f;
             }
-            
-            _evaluationButton.hidden = YES;
-            _progressContainer.hidden = NO;
+            [self aboutHiden:YES];
+//            _evaluationButton.hidden = YES;
+//            _progressContainer.hidden = NO;
         } else {
-            _evaluationButton.hidden = NO;
-            _progressContainer.hidden = YES;
+//            _evaluationButton.hidden = NO;
+//            _progressContainer.hidden = YES;
+            [self aboutHiden:NO];
         }
+             
+    }else
+    {
+        [self aboutHiden:NO];
+//        _evaluationButton.hidden = NO;
+//        _progressContainer.hidden = YES;
+    }
         
         [self configureLikeButton];
     }];
 
 }
 
+-(void)aboutHiden:(BOOL)ishiden;
+{
+    _evaluationButton.hidden = ishiden;
+    _progressContainer.hidden = !ishiden;
+}
 - (void)toggleLike {
-    RequireLogin
+    
+    
+ 
+    if (![self  checkWhenUserLogOut]) {
+        
+        return;
+    }
+    
     _isLiked = !_isLiked;
     [self configureLikeButton];
     if (_isLiked) {
@@ -156,14 +191,21 @@
 
 - (void)configureLikeButton {
     if (_isLiked) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_like_selected"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLike)];
+        UIImage *selectedImage=[UIImage imageNamed: @"nav_like_selected"];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLike)];
     } else {
+        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_like"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLike)];
     }
 }
 
+
+
 - (void)viewDidLayoutSubviews {
+    
+
     _descLabel.preferredMaxLayoutWidth = _descLabel.frame.size.width;
+    
 }
 
 - (IBAction)viewAllCourses {
@@ -172,7 +214,12 @@
 }
 
 - (IBAction)evaluationButtonPressed {
-    RequireLogin
+ 
+    
+    if (![self  checkWhenUserLogOut]) {
+        
+        return;
+    }
     
     EvaluateViewController *vc = [[EvaluateViewController alloc] init];
     
@@ -180,9 +227,8 @@
         [self reloadData];
     }];
     
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     
-    [self presentViewController:nvc animated:YES completion:^{}];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)goToMapView:(UIButton *)sender {

@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^sectionBlock)();
+typedef void(^sectionBlock)(UIButton *);
 @interface ApplySectionView : UIView
+@property (weak, nonatomic) IBOutlet UIView *sectionContentView;
 @property(nonatomic,strong)NSDictionary *sectionInfo;
+@property(nonatomic,assign)BOOL isEdit;
 @property(nonatomic,copy)sectionBlock actionBlock;
+@property(nonatomic,assign)BOOL isSelected;
+
 @end

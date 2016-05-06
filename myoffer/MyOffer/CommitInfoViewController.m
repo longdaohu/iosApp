@@ -1,12 +1,15 @@
 //
 //  CommitInfoViewController.m
 //  MyOffer
-//
+//  申请意向提交审核
 
 #import "peronInfoItem.h"
 #import "CommitInfoViewController.h"
 #import "CommitTableViewCell.h"
 #import "PersonSectionView.h"
+#import "CountryItem.h"
+#import "GradeItem.h"
+#import "SubjectItem.h"
 
 @interface CommitInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *infoTableView;
@@ -34,12 +37,20 @@
 @property(nonatomic,strong)UIPickerView *SubjectPickerView;
 @property(nonatomic,strong)UIPickerView *ApplySubjectPicker;
 @property(nonatomic,strong)NSArray *PlanTimes;
-@property(nonatomic,strong)NSArray *gradelist;
+//@property(nonatomic,strong)NSArray *gradelist;
 @property(nonatomic,strong)NSArray *IELSTminiScores;
 @property(nonatomic,strong)NSArray *IELSTaverageScores;
-@property(nonatomic,strong)NSArray *subjects;
+//@property(nonatomic,strong)NSArray *subjects;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *commitButtonPressed;
-
+@property(nonatomic,strong)NSArray *countryItems_EN;
+@property(nonatomic,strong)NSArray *countryItems_CN;
+@property(nonatomic,strong)NSArray *countryItems;
+@property(nonatomic,strong)NSArray *gradeItems;
+@property(nonatomic,strong)NSArray *gradeItems_EN;
+@property(nonatomic,strong)NSArray *gradeItems_CN;
+@property(nonatomic,strong)NSArray *subjectItems;
+@property(nonatomic,strong)NSArray *subjectItems_CN;
+@property(nonatomic,strong)NSArray *subjectItems_EN;
 @end
 
 @implementation CommitInfoViewController
@@ -64,16 +75,16 @@
     
     _IELSTaverageScores = _IELSTminiScores;
   
-    [self
-     startAPIRequestWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang":GDLocalizedString(@"ch_Language")}
-     success:^(NSInteger statusCode, NSArray *response) {
-         _subjects = [response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                      {
-                          return obj[@"name"];
-                      }];
-         [self.SubjectPickerView reloadAllComponents];
-     }];
+//    [self
+//     startAPIRequestWithSelector:kAPISelectorSubjects
+//     parameters:@{@":lang":GDLocalizedString(@"ch_Language")}
+//     success:^(NSInteger statusCode, NSArray *response) {
+//         _subjects = [response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+//                      {
+//                          return obj[@"name"];
+//                      }];
+//         [self.SubjectPickerView reloadAllComponents];
+//     }];
     
     
 }
@@ -151,16 +162,6 @@
         _gradePicker.delegate = self;
         _gradePicker.dataSource = self;
         //默认显示数组中index = 2的数据
-       
-        NSString *lang = [InternationalControl userLanguage];
-        if ([lang containsString:@"en"]) {
-              self.gradelist=  @[@"Grade 4,undergraduate",@"Grade 3,undergraduate",@"Grade 2,undergraduate",@"Grade 1,undergraduate",@"Grade 3,senior middle school",@"Grade 2,senior middle school",@"Grade 1,senior middle school",@"Grade 3,junior middle school",@"Grade 2,senior middle school",@"Grade 1,senior middle school",@"Master graduate",@"Current Master student ",@"Bachelor graduate"];
-        }
-        else
-        {
-            self.gradelist=  @[@"本科毕业已工作",@"本科大四",@"本科大三",@"本科大二",@"本科大一",@"大专毕业三年以上",@"大专毕业三年以下",@"大专大三",@"大专大二",@"大专大一",@"高三毕业已工作",@"高三",@"高二",@"高一",@"初三",@"初二",@"初一"];
-
-        }
         
         [_gradePicker selectRow:1 inComponent:0 animated:YES];
     }
@@ -169,19 +170,224 @@
 
 
 
+-(void)getSelectionResourse
+{
+    
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSArray *countryResponse_CN  = [ud valueForKey:@"Country_CN"];
+    NSArray *countryResponse_EN  = [ud valueForKey:@"Country_EN"];
+    
+    self.countryItems_CN = [countryResponse_CN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                            {
+                                CountryItem *item = [CountryItem CountryWithDictionary:obj];
+                                return item;
+                            }];
+    
+    
+    self.countryItems_EN = [countryResponse_EN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                            {
+                                CountryItem *item = [CountryItem CountryWithDictionary:obj];
+                                return item;
+                            }];
+    
+
+
+    NSArray *response_CN  = [ud valueForKey:@"Grade_CN"];
+    NSArray *response_EN  = [ud valueForKey:@"Grade_EN"];
+    self.gradeItems_CN = [response_CN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                          {
+                              GradeItem *item = [GradeItem gradeWithDictionary:obj];
+                              return item;
+                          }];
+    
+    self.gradeItems_EN = [response_EN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                          {
+                              GradeItem *item = [GradeItem gradeWithDictionary:obj];
+                              return item;
+                          }];
+    
+    NSArray *SubjectResponse_CN  = [ud valueForKey:@"Subject_CN"];
+    NSArray *SubjectResponse_EN  = [ud valueForKey:@"Subject_EN"];
+    
+    self.subjectItems_CN = [SubjectResponse_CN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                            {
+                                SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
+                                return item;
+                            }];
+    self.subjectItems_EN = [SubjectResponse_EN KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                            {
+                                SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
+                                return item;
+                                 }];
+                      
+    if ([[InternationalControl userLanguage] containsString:@"en"]) {
+        
+        self.countryItems = [self.countryItems_EN copy];
+        self.gradeItems = [self.gradeItems_EN copy];
+        self.subjectItems = [self.subjectItems_EN copy];
+        
+    }else{
+        
+        self.countryItems = [self.countryItems_CN copy];
+        self.gradeItems = [self.gradeItems_CN copy];
+        self.subjectItems = [self.subjectItems_CN copy];
+
+    }
+    
+}
+
+//用于判断提交过来的字符串是否是数字
+-(BOOL)validateNumberString:(NSString *)preString
+{
+    NSString *Regex = @"[0-9]+";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", Regex];
+    return [predicate evaluateWithObject:preString];
+}
+
+-(NSString *)getCountryLocalString:(NSString *)country
+{
+    NSArray *countryIDs_CN = [self.countryItems_CN valueForKeyPath:@"CountryName"];
+    NSArray *countryIDs_EN = [self.countryItems_EN valueForKeyPath:@"CountryName"];
+    NSInteger cindex = 0;
+    NSString *countryName;
+    if ([self validateNumberString:country]) {
+        
+        NSArray *countryIDs = [self.countryItems_CN valueForKeyPath:@"NOid"];
+        NSString *des_countryStr = country;
+        NSNumber *des_country =  [NSNumber numberWithInt:des_countryStr.intValue];
+        cindex = [countryIDs indexOfObject: des_country];
+        CountryItem *cItem = [self.countryItems objectAtIndex:cindex];
+        
+        countryName= cItem.CountryName;
+        
+        
+    }else{
+        
+        if ([countryIDs_CN containsObject:country]) {
+            
+            cindex = [countryIDs_CN indexOfObject:country];
+            
+        }else if([countryIDs_EN containsObject:country])
+        {
+            cindex = [countryIDs_EN indexOfObject:country];
+            
+        }else
+        {
+            cindex = 0;
+        }
+        
+        CountryItem *cItem = [self.countryItems objectAtIndex:cindex];
+        countryName= cItem.CountryName;
+    }
+    
+    return countryName;
+}
+
+-(NSInteger)getArrayIndex:(NSArray *)dataArray withdataIDString:(NSString *)dataID
+{
+    
+    NSArray *DataIDs = [dataArray valueForKeyPath:@"NOid"];
+    
+    NSInteger index  =  [DataIDs indexOfObject: [NSNumber numberWithInt:dataID.intValue]];
+    
+    return index;
+    
+}
+
+-(NSString *)getSubjectLocalString:(NSString *)subject
+{
+    NSArray *subjectIDs_CN = [self.subjectItems_CN valueForKeyPath:@"subjectName"];
+    NSArray *subjectIDs_EN = [self.subjectItems_EN valueForKeyPath:@"subjectName"];
+    NSInteger insindex = 0;
+    NSString *subjectName;
+    if ([self validateNumberString:subject]) {
+        
+        insindex = [self getArrayIndex:self.subjectItems_CN withdataIDString:subject];
+        SubjectItem *insItem = [self.subjectItems objectAtIndex:insindex];
+        subjectName = insItem.subjectName;
+        
+    }else
+    {
+        
+        if ([subjectIDs_CN  containsObject:subject]) {
+            
+            insindex = [subjectIDs_CN indexOfObject:subject];
+            
+        }else if([subjectIDs_EN containsObject:subject])
+        {
+            insindex = [subjectIDs_EN indexOfObject:subject];
+            
+        }else
+        {
+            insindex = 0;
+        }
+        
+        SubjectItem *insItem = [self.subjectItems objectAtIndex:insindex];
+        subjectName = insItem.subjectName;
+    }
+    
+
+    
+    return subjectName;
+}
+
+
+-(NSString *)getGradeLocalString:(NSString *)grade{
+    NSArray *gradeIDs_CN = [self.gradeItems_CN valueForKeyPath:@"gradeName"];
+    NSArray *gradeIDs_EN = [self.gradeItems_EN valueForKeyPath:@"gradeName"];
+    NSInteger gindex = 0;
+    NSString *gradeName;
+    if ([self validateNumberString:grade]) {
+        
+        gindex = [self getArrayIndex:self.gradeItems_CN withdataIDString:grade];
+        
+        GradeItem *gItem = [self.gradeItems objectAtIndex:gindex];
+        
+          gradeName = gItem.gradeName;
+        
+    }else
+    {
+        
+        if ([self.gradeItems_CN  containsObject:grade]) {
+            
+            gindex = [gradeIDs_CN indexOfObject:grade];
+            
+        }else if([gradeIDs_EN containsObject:grade])
+        {
+            gindex = [gradeIDs_EN indexOfObject:grade];
+            
+        }else
+        {
+            gindex = 0;
+        }
+        
+        GradeItem *gItem = [self.gradeItems objectAtIndex:gindex];
+         gradeName = gItem.gradeName;
+    }
+    return gradeName;
+
+}
 -(NSArray *)PersonInfoGroups
 {
     if (!_PersonInfoGroups) {
         
-        
         [self startAPIRequestWithSelector:@"GET api/account/applicationdata" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
              self.userInfo   = response;
-             NSString *des_country = [response valueForKey:@"des_country"];
+            
+            
+             NSString *des_country = response[@"des_country"];
+            
+            if (des_country.length) {
+                des_country = [self getCountryLocalString:des_country];
+             }
+            
              CommitTableViewCell *countryCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
-            countryCell.contentTextF.inputAccessoryView = self.toolBar;
+             countryCell.contentTextF.inputAccessoryView = self.toolBar;
             self.countryTextF = countryCell.contentTextF;
+            
             countryCell.contentTextF.placeholder = GDLocalizedString(@"ApplicationProfile-003"); //@"您想去的国家或地区";
             if (des_country.length != 0) {
+                
                 countryCell.contentTextF.text = des_country;
             }
             
@@ -197,6 +403,11 @@
             }
            
              NSString *apply = [response valueForKey:@"apply"];
+            if (apply.length) {
+                apply = [self getSubjectLocalString:apply];
+            }
+            
+            
             CommitTableViewCell *applyCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
             applyCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             applyCell.contentTextF.inputView = self.ApplySubjectPicker;
@@ -251,7 +462,11 @@
                 universityCell.contentTextF.text = university;
             }
         
-            NSString *grade = [response valueForKey:@"grade"];
+             NSString *grade = [response valueForKey:@"grade"];
+            if (grade.length) {
+                grade = [self getGradeLocalString:grade];
+            }
+           
             CommitTableViewCell *gradeCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
             gradeCell.contentTextF.inputAccessoryView = self.toolBar;
             gradeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -261,7 +476,12 @@
             if (grade.length != 0) {
                 gradeCell.contentTextF.text = grade;
             }
-              NSString *subject = [response valueForKey:@"subject"];
+            
+            NSString *subject = [response valueForKey:@"subject"];
+
+            if (subject.length) {
+                subject = [self getSubjectLocalString:subject];
+            }
             
             CommitTableViewCell *subjectCell = [[NSBundle mainBundle] loadNibNamed:@"CommitTableViewCell" owner:nil options:nil].lastObject;
             subjectCell.contentTextF.inputAccessoryView = self.toolBar;
@@ -311,7 +531,7 @@
                 lowCell.contentTextF.text = ielts_lowStr;
             }
           
-            NSArray *group002 = @[firstCell,lastCell,phonenumberCell,universityCell,gradeCell,subjectCell,scoreCell,avgCell,lowCell];
+            NSArray *group002 = @[lastCell,firstCell,phonenumberCell,universityCell,gradeCell,subjectCell,scoreCell,avgCell,lowCell];
             
             _PersonInfoGroups =  @[group001,group002];
             
@@ -326,7 +546,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self pickDataSourse];
-    
+    [self getSelectionResourse];
    [ self.commitButtonPressed setTitle:GDLocalizedString(@"ApplicationProfile-0012") forState:UIControlStateNormal];
     //申请时提交个人资料]
     self.title = GDLocalizedString(@"ApplicationProfile-001");
@@ -456,11 +676,11 @@
         return self.IELSTaverageScores.count;
     }else if (pickerView.tag ==113 || pickerView.tag ==114)
     {
-        return self.subjects.count;
+        return self.subjectItems.count;
     }
     else
     {
-        return self.gradelist.count;
+        return self.gradeItems.count;
     }
 }
 
@@ -478,10 +698,10 @@
         return self.IELSTaverageScores[row];
     }else if(pickerView.tag == 113  ||pickerView.tag == 114)
     {
-        return self.subjects[row];
+        return [self.subjectItems[row] subjectName];
     }
     else{
-        return  self.gradelist[row];
+        return  [self.gradeItems[row] gradeName];
     }
     
 }
@@ -500,14 +720,14 @@
     {
         self.AVGTextF.text =   self.IELSTaverageScores[row];
     }else if(pickerView.tag ==113){
-        self.subjectTextF.text = self.subjects[row];
+        self.subjectTextF.text = [self.subjectItems[row] subjectName];
         
     }else if(pickerView.tag == 114)
     {
-        self.ApplySubjectTextF.text =  self.subjects[row];
+        self.ApplySubjectTextF.text =  [self.subjectItems[row] subjectName];
     }else
     {
-        self.GradeTextF.text =self.gradelist[row];
+        self.GradeTextF.text = [self.gradeItems[row] gradeName];
     }
 }
 
@@ -553,6 +773,8 @@
        }];
     
 }
+
+KDUtilRemoveNotificationCenterObserverDealloc
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

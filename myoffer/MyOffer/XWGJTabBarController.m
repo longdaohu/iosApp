@@ -11,7 +11,7 @@
 #import "EvaluateViewController.h"
 #import "MeViewController.h"
 #import "DiscoverViewController.h"
-
+#import "IntelligentViewController.h"
 @interface XWGJTabBarController ()
 
 @end
@@ -24,25 +24,39 @@
     
     DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
     dvc.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
-    dvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
     CategoryViewController *cvc = [[CategoryViewController alloc] init];
     cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
-    cvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_category"];
-    EvaluateViewController *evc = [[EvaluateViewController alloc] init];
-    evc.title = GDLocalizedString(@"EvaluateTitle");//@"评估";
-    evc.tabBarItem.image = [UIImage imageNamed:@"tabbar_evaluate"];
+//    EvaluateViewController *evc = [[EvaluateViewController alloc] init];
+//    IntelligentViewController *evc = [[IntelligentViewController alloc] init];
+//    evc.title = GDLocalizedString(@"EvaluateTitle");//@"评估";
+//    evc.tabBarItem.image = [UIImage imageNamed:@"tabbar_evaluate"];
     MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];
     mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"我";
-    mvc.tabBarItem.image = [UIImage imageNamed:@"tabbar_me"];
     
     self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:dvc],
                                          [[XWGJNavigationController alloc] initWithRootViewController:cvc],
-                                         [[XWGJNavigationController alloc] initWithRootViewController:evc],
+//                                         [[XWGJNavigationController alloc] initWithRootViewController:evc],
                                          [[XWGJNavigationController alloc] initWithRootViewController:mvc]];
     
- 
-    
+
+    [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
+    [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
+    [self tabbaritem:2 nomalImage:@"center_nomal" selectImage:@"center_select"];
+
+    self.tabBar.tintColor = [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1];
 }
+
+-(void)tabbaritem:(NSInteger)index nomalImage:(NSString *)nomalName  selectImage:(NSString *)selectName
+{
+    UITabBar *tabBar = self.tabBar;
+    UITabBarItem *item = [tabBar.items objectAtIndex:index];
+    UIImage *NomalImage = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
+    UIImage *SelectImage = [UIImage imageNamed:selectName];//@"catigory_select"];
+    item.image  =[NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item.selectedImage = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -33,18 +33,22 @@
 @implementation LoginSelectionViewController
 -(void)changeLanguage
 {
-    
-    NSString *pingtai =  self.parameter[@"provider"];
-    if ([pingtai isEqual:@"weibo"]) {
 
-        self.title = GDLocalizedString(@"bangdingVC-helloWB");//@"微信登录";
-        self.helloLabel.text = GDLocalizedString(@"bangdingVC-weiboTitle");//@"您好，微信用户";
+    NSString *pingtai =  self.parameter[@"provider"];
+    if ([pingtai isEqualToString:@"qq"]) {
+        self.title = GDLocalizedString(@"bangdingVC-QQtitle");
+        self.helloLabel.text = GDLocalizedString(@"bangdingVC-helloQQ");
+    }else if ([pingtai isEqualToString:@"weibo"]) {
+
+        self.title = GDLocalizedString(@"bangdingVC-weiboTitle");//@"微信登录";
+        self.helloLabel.text = GDLocalizedString(@"bangdingVC-helloWB");//@"您好，微信用户";
     }
     else
     {
         self.title = GDLocalizedString(@"bangdingVC-title");//@"微信登录";
         self.helloLabel.text = GDLocalizedString(@"bangdingVC-hello");//@"您好，微信用户";
     }
+    
     [self.loginButton setTitle:GDLocalizedString(@"bangdingVC-login") forState:UIControlStateNormal]; //@"进入myOffer"
     [self.bangButton setTitle:GDLocalizedString(@"bangdingVC-bangding")forState:UIControlStateNormal];//@"绑定myOffer账号"
      self.notiLabel.text =GDLocalizedString(@"bangdingVC-noti");//@"如果您已注册，请绑定myOffer账号";
@@ -98,7 +102,7 @@
     }];
 }
 
-//微信直接登录
+//直接创建新用户登录
 - (IBAction)weiZhuChe:(UIButton *)sender {
  
     NSString  *testPath =  @"POST api/account/oauth/newandlogin";
@@ -106,7 +110,8 @@
   [self  startAPIRequestUsingCacheWithSelector:testPath parameters:self.parameter success:^(NSInteger statusCode, id response) {
                NSString *token = [response valueForKey:@"access_token"];
               [[AppDelegate sharedDelegate] loginWithAccessToken:token];
-              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+              [self  whenUserLoginDismiss];
+      
     }];
     
 }
@@ -136,6 +141,7 @@
               [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
               [self gotoBangDing:response[@"access_token"]];
            }];
+    
 }
 //2、已有账号登录情况下，再绑定WEIXIN账号
 -(void)gotoBangDing:(NSString *)token
@@ -147,7 +153,9 @@
                  [hud applySuccessStyle];
                  [hud hideAnimated:YES afterDelay:2];
                  [hud setHiddenBlock:^(KDProgressHUD *hud) {
-                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                     
+                     [self whenUserLoginDismiss];
+                     
                  }];
      }];
  }
@@ -163,6 +171,28 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+  //用于判断用户是否改变
+-(void)whenUserLoginDismiss
+{
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSString *displayname =[ud valueForKey:@"userDisplayName"];
+    if (![displayname isEqualToString: self.phoneFT.text] ) {
+        
+        [ud setValue:@"changeYES" forKey:@"userChange"];
+        
+    }else{
+        
+        [ud setValue:@"changeNO" forKey:@"userChange"];
+        
+    }
+    
+    [ud  setValue:self.phoneFT.text  forKey:@"userDisplayName"];
+    
+    [ud synchronize];
+    
+     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
  @end

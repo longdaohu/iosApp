@@ -7,16 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ActionTableViewController.h"
 
-@interface MeViewController : ActionTableViewController {
-    IBOutlet UIImageView *_avatarImageView;
-    IBOutlet UILabel *_usernameLabel;
-    IBOutlet UIButton *_logoutButton;
-    IBOutlet UIImageView *_coverImageView;
+@interface MeViewController : BaseViewController {
+
 }
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *OptionButton;
 
-- (IBAction)logout;
 
 
 @end

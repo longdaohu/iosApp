@@ -27,7 +27,7 @@
     UITextField *cellTextField = [[UITextField alloc] init];
     [cellTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
     cellTextField.delegate = self;
-    cellTextField.enablesReturnKeyAutomatically = YES;
+//    cellTextField.enablesReturnKeyAutomatically = YES;
     cellTextField.placeholder = placeholder;
     return cellTextField;
 }
@@ -59,7 +59,7 @@
         UITableViewCell *cell = [self cellDefault];
         _newPasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-002")];
         _newPasswordTextField.returnKeyType = UIReturnKeyNext;
-           _newPasswordTextField.secureTextEntry = YES;
+        _newPasswordTextField.secureTextEntry = YES;
          [cell addSubview:_newPasswordTextField];
         [cells addObject:cell];
     }
@@ -100,15 +100,20 @@
     return _cells[indexPath.row];
 }
 
+#pragma mark UItextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
+    
     if (textField == _oldPasswordTextField) {
         [_newPasswordTextField becomeFirstResponder];
-    } else if (textField == _newPasswordTextField) {
+    }else if(textField == _newPasswordTextField) {
         [_confirmPasswordTextField becomeFirstResponder];
-    } else {
-        [self done];
+    }else if(textField == _confirmPasswordTextField)
+    {
+      [self done];
     }
-    return YES;
+    
+       return YES;
 }
 
 - (void)done {
@@ -157,5 +162,5 @@
     _confirmPasswordTextField.frame = CGRectMake(xInset, yInset, _tableView.frame.size.width - xInset * 2.0f, _tableView.rowHeight - yInset * 2.0f);
 }
 
-
+KDUtilRemoveNotificationCenterObserverDealloc
 @end
