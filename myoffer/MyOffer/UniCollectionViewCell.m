@@ -38,6 +38,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor =  BACKGROUDCOLOR;
+        
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = XCOLOR_WHITE;
         self.bgView.layer.cornerRadius = 5;

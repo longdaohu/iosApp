@@ -7,6 +7,7 @@
 //
 #import "ShareButton.h"
 #import "XWGJShareView.h"
+#import "FXBlurView.h"
 @interface XWGJShareView ()
 
 //@property(nonatomic,strong)UIImageView *bgImageView;
@@ -50,14 +51,13 @@
         
         
         self.bgView =[[UIView alloc] init];
-        self.bgView.backgroundColor =[UIColor whiteColor];
+        self.bgView.backgroundColor =[UIColor colorWithWhite:1 alpha:0.96];
         [self addSubview:self.bgView];
         CGFloat bgX = 0;
         CGFloat bgY = XScreenHeight;
         CGFloat bgW = XScreenWidth;
         CGFloat bgH = XScreenWidth;
         self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-        
         
         
         self.TitleLab = [[UILabel alloc] init];

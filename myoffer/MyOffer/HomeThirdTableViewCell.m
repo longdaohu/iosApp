@@ -62,8 +62,7 @@
     flowlayout.minimumLineSpacing = 0;
     // 设置item列与列之间的间隙
 //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-    
-    flowlayout.sectionInset = UIEdgeInsetsMake(ITEM_MARGIN, ITEM_MARGIN, ITEM_MARGIN, ITEM_MARGIN);
+     flowlayout.sectionInset = UIEdgeInsetsMake(ITEM_MARGIN, ITEM_MARGIN, ITEM_MARGIN, 0);
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, heigh) collectionViewLayout:flowlayout];
@@ -73,7 +72,7 @@
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.dataSource = self;
     collectionView.delegate = self;
-    collectionView.backgroundColor = XCOLOR_CLEAR;
+    collectionView.backgroundColor = BACKGROUDCOLOR;
     [self.CollectionView registerClass:[UniCollectionViewCell class] forCellWithReuseIdentifier:identify];
     [self.contentView  addSubview:self.CollectionView];
     
@@ -83,7 +82,6 @@
 -(void)setUniFrames:(NSArray *)uniFrames
 {
     _uniFrames = uniFrames;
-    
     
     [self.CollectionView reloadData];
 
@@ -111,13 +109,15 @@ static NSString *identify = @"three";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UniCollectionViewCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
-   
+     UniCollectionViewCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
+    
      cell.uniFrame = self.uniFrames[indexPath.row];
     
     return cell;
     
 }
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     
@@ -126,9 +126,8 @@ static NSString *identify = @"three";
     if ([self.delegate respondsToSelector:@selector(HomeThirdTableViewCell: andDictionary:)]) {
         
         HotUniversityFrame *uniFrame =  self.uniFrames[indexPath.row];
-
+        
         [self.delegate HomeThirdTableViewCell:self andDictionary:uniFrame.universityDic];
-       
      }
     
 }

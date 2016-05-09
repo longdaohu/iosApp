@@ -42,6 +42,7 @@
          [self.moreBtn addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.moreBtn];
         
+        
     }
     return self;
 }

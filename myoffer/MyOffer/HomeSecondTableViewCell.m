@@ -69,7 +69,7 @@
      self.CollectionView.dataSource = self;
      self.CollectionView.delegate = self;
      [self.CollectionView registerClass:[SecondCollectionViewCell class] forCellWithReuseIdentifier:identify];
-     self.CollectionView.backgroundColor = XCOLOR_CLEAR;
+     self.CollectionView.backgroundColor = BACKGROUDCOLOR;
     
     [self.contentView  addSubview:self.CollectionView];
     

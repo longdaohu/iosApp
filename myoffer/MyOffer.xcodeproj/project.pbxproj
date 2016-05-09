@@ -329,10 +329,6 @@
 		AEFED7B41C0D345E009CF046 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED7881C0D345E009CF046 /* MJRefreshComponent.m */; };
 		AEFED7B51C0D345E009CF046 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED78A1C0D345E009CF046 /* MJRefreshFooter.m */; };
 		AEFED7B61C0D345E009CF046 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED78C1C0D345E009CF046 /* MJRefreshHeader.m */; };
-		AEFED7B71C0D345E009CF046 /* test1.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFED78D1C0D345E009CF046 /* test1.png */; };
-		AEFED7B81C0D345E009CF046 /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFED78E1C0D345E009CF046 /* test2.png */; };
-		AEFED7B91C0D345E009CF046 /* test3.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFED78F1C0D345E009CF046 /* test3.png */; };
-		AEFED7BA1C0D345E009CF046 /* test4.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFED7901C0D345E009CF046 /* test4.png */; };
 		AEFED7BB1C0D345E009CF046 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED7951C0D345E009CF046 /* MJRefreshAutoGifFooter.m */; };
 		AEFED7BC1C0D345E009CF046 /* MJRefreshAutoNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED7971C0D345E009CF046 /* MJRefreshAutoNormalFooter.m */; };
 		AEFED7BD1C0D345E009CF046 /* MJRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFED7991C0D345E009CF046 /* MJRefreshAutoStateFooter.m */; };
@@ -961,10 +957,6 @@
 		AEFED78A1C0D345E009CF046 /* MJRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooter.m; sourceTree = "<group>"; };
 		AEFED78B1C0D345E009CF046 /* MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeader.h; sourceTree = "<group>"; };
 		AEFED78C1C0D345E009CF046 /* MJRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeader.m; sourceTree = "<group>"; };
-		AEFED78D1C0D345E009CF046 /* test1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test1.png; sourceTree = "<group>"; };
-		AEFED78E1C0D345E009CF046 /* test2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2.png; sourceTree = "<group>"; };
-		AEFED78F1C0D345E009CF046 /* test3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test3.png; sourceTree = "<group>"; };
-		AEFED7901C0D345E009CF046 /* test4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test4.png; sourceTree = "<group>"; };
 		AEFED7941C0D345E009CF046 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
 		AEFED7951C0D345E009CF046 /* MJRefreshAutoGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoGifFooter.m; sourceTree = "<group>"; };
 		AEFED7961C0D345E009CF046 /* MJRefreshAutoNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoNormalFooter.h; sourceTree = "<group>"; };
@@ -2664,10 +2656,6 @@
 				AEFED78B1C0D345E009CF046 /* MJRefreshHeader.h */,
 				AEFED78C1C0D345E009CF046 /* MJRefreshHeader.m */,
 				AEFED7C91C0D4F34009CF046 /* Pre-comp */,
-				AEFED78D1C0D345E009CF046 /* test1.png */,
-				AEFED78E1C0D345E009CF046 /* test2.png */,
-				AEFED78F1C0D345E009CF046 /* test3.png */,
-				AEFED7901C0D345E009CF046 /* test4.png */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2844,7 +2832,6 @@
 				AEFED7F11C0D4F34009CF046 /* Pre-comp 1_0006.png in Resources */,
 				567144D31CBA88CD002A02BF /* ApplyViewController.xib in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
-				AEFED7BA1C0D345E009CF046 /* test4.png in Resources */,
 				4689D9761B25348D0024FB1A /* DiscoveryCell.xib in Resources */,
 				567146031CBA9340002A02BF /* ResultTableViewCell.xib in Resources */,
 				AEFED7ED1C0D4F34009CF046 /* Pre-comp 1_0002.png in Resources */,
@@ -2886,7 +2873,6 @@
 				567146221CBA9395002A02BF /* NewForgetPasswdViewController.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEFED8091C0D4F34009CF046 /* Pre-comp 1_00030.png in Resources */,
-				AEFED7B81C0D345E009CF046 /* test2.png in Resources */,
 				AEF421031BD4988B00CFB45E /* UMShareEditViewController.xib in Resources */,
 				AEFA1F691C5A2FC7004002BD /* share_market.jpg in Resources */,
 				AE567B021C903C9300552E7A /* AU_en.jpg in Resources */,
@@ -2931,7 +2917,6 @@
 				567145641CBA8D29002A02BF /* XWGJCityCollectionViewCell.xib in Resources */,
 				AEFED80A1C0D4F34009CF046 /* Pre-comp 1_00031.png in Resources */,
 				AE567B041C903C9300552E7A /* AU.jpg in Resources */,
-				AEFED7B71C0D345E009CF046 /* test1.png in Resources */,
 				AEFED7F61C0D4F34009CF046 /* Pre-comp 1_00011.png in Resources */,
 				567145691CBA8D29002A02BF /* XWGJSubjectCollectionViewCell.xib in Resources */,
 				AEFED7F91C0D4F34009CF046 /* Pre-comp 1_00014.png in Resources */,
@@ -2940,7 +2925,6 @@
 				AE567B011C903C9300552E7A /* UK.jpg in Resources */,
 				AEF421041BD4988B00CFB45E /* UMShareEditViewControlleriPad.xib in Resources */,
 				AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */,
-				AEFED7B91C0D345E009CF046 /* test3.png in Resources */,
 				AEFED8071C0D4F34009CF046 /* Pre-comp 1_00028.png in Resources */,
 				5671459D1CBA9106002A02BF /* HelpViewController.xib in Resources */,
 				567146241CBA9395002A02BF /* IntroViewController.xib in Resources */,

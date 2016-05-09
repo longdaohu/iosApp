@@ -21,7 +21,7 @@
 {
     if (!_gifView) { 
         UIImageView *gifView = [[UIImageView alloc] init];
-
+//        gifView.backgroundColor = [UIColor colorWithRed:0.1 green:0.5 blue:0.6 alpha:0.6];
         [self addSubview:_gifView = gifView];
     } 
     return _gifView; 
@@ -53,8 +53,9 @@
     
     /* 根据图片设置控件的高度 */ 
     UIImage *image = [images firstObject]; 
-    if (image.size.height > self.mj_h) { 
-        self.mj_h = image.size.height; 
+    if (image.size.height > self.mj_h) {
+        
+        self.mj_h = image.size.height * 0.7;
     } 
 }
 
@@ -88,8 +89,9 @@
         
          self.gifView.contentMode = UIViewContentModeCenter;
     } else {
-        self.gifView.contentMode = UIViewContentModeBottom;
-        self.gifView.mj_w = self.mj_w * 0.5 ;
+        self.gifView.contentMode = UIViewContentModeCenter;
+        
+        self.gifView.mj_w = self.mj_w * 0.5;//控制小mo所在位置
     }
 }
 

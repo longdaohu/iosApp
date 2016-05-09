@@ -276,12 +276,16 @@
 {
 
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
-    self.TableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
     [self.view addSubview:self.TableView];
     self.TableView.sectionFooterHeight = 0;
     self.TableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    self.TableView.backgroundColor = BACKGROUDCOLOR;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     
     [self makeTableHeader];
 
@@ -324,8 +328,10 @@
     // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
 //    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
     self.fresh_Header = header;
-    
+    self.fresh_Header.gifView.transform = CGAffineTransformMakeScale(0.2, 0.2);
+
     NSMutableArray *refreshingImages = [NSMutableArray array];
     for (int i = 0; i<=10; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Pre-comp 1_000%d", i]];
@@ -333,7 +339,6 @@
     }
     
     NSMutableArray *nomalImages = [NSMutableArray array];
-    
     [nomalImages addObject:[UIImage imageNamed:@"Pre-comp 1_0000"]];
     // 设置普通状态的动画图片
     [header setImages:nomalImages forState:MJRefreshStateIdle];
@@ -377,6 +382,7 @@
 }
 
 #pragma mark ———————— UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
      CGFloat contant = XScreenHeight * 0.6 * 0.5 + 20 -22 - scrollView.contentOffset.y;
@@ -400,7 +406,12 @@
           [self searchViewWithAnimation:NO];
 
         }
+    }
     
+    
+    if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
+        CGFloat Gscale =0.2 + 0.5 * ABS(scrollView.contentOffset.y)/ 100.0;
+        self.fresh_Header.gifView.transform = CGAffineTransformMakeScale(Gscale, Gscale);
     }
     
 }
@@ -798,7 +809,7 @@
 {
     if ([[AppDelegate sharedDelegate] isLogin]) {
         
-        NSString *lang =USER_EN?@"en":@"zh-cn";
+        NSString *lang =USER_EN ? @"en":@"zh-cn";
         [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
             
         }];
@@ -819,7 +830,6 @@
     NSString  *path = [NSString stringWithFormat:@"GET /api/youqian/finish?idfa=%@&signature=%@",adId,signature];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
         
         
     });
