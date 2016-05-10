@@ -36,6 +36,7 @@
 //**号背景
 @property(nonatomic,strong) UIView *StarBackgroud;
 
+@property(nonatomic,strong) UITapGestureRecognizer *tap;
 
 @end
 
@@ -61,7 +62,7 @@
         
         self.CancelButton = [[UIButton alloc] init];
         [self.CancelButton setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
-        self.CancelButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -8);
+//        self.CancelButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -17);
         self.CancelButton.tag = 11;
         [self.CancelButton addTarget:self action:@selector(sectionViewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.CancelButton];
@@ -119,6 +120,11 @@
         [self.SectionBackgroud addSubview:self.AddButton];
         
         self.contentView.backgroundColor =[UIColor whiteColor];
+        
+        
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        self.tap  = tap;
+        [self.SectionBackgroud addGestureRecognizer:tap];
 
     }
     
@@ -212,13 +218,31 @@
 {
    
     if (sender.tag == 11) {
+        
         NSString *imageName = self.isSelected ? @"check-icons":@"check-icons-yes";
+       
         [self.CancelButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         
         self.isSelected = !self.isSelected ;
     }
+    
     if (self.actionBlock) {
+        
         self.actionBlock(sender);
+        
+    }
+    
+}
+
+-(void)tap:(UITapGestureRecognizer *)tap
+{
+    
+    if (self.isEdit) {
+        [self sectionViewButtonPressed:self.CancelButton];
+        
+    }else{
+        [self sectionViewButtonPressed:self.AddButton];
+
     }
     
 }

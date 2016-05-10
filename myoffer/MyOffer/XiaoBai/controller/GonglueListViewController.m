@@ -253,6 +253,8 @@
          self.FlexibleImageView.center = self.oldFlexibleViewCenter;
         
     }else{
+        
+        
     
        [UIView animateWithDuration:0.25 animations:^{
            

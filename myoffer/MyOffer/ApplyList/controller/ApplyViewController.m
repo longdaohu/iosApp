@@ -12,6 +12,7 @@
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameApplyObj.h"
+#import "ApplyTableViewCell.h"
 
 @interface ApplyViewController ()<UIAlertViewDelegate>
 {
@@ -369,45 +370,66 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"applyCell"];
+//    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"applyCell"];
+//    
+//    if (!cell) {
+//        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"applyCell"];
+//        cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//        [(UIImageView *)cell.accessoryView setContentMode:UIViewContentModeCenter];
+//        cell.textLabel.numberOfLines = 2;
+//        cell.textLabel.font =FontWithSize(KDUtilSize(UNIVERISITYTITLEFONT));
+//        
+//    }
+
     
-    if (!cell) {
-        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"applyCell"];
-        cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        [(UIImageView *)cell.accessoryView setContentMode:UIViewContentModeCenter];
-        cell.textLabel.numberOfLines = 2;
-        cell.textLabel.font =FontWithSize(KDUtilSize(UNIVERISITYTITLEFONT));
-        
-    }
+//    ApplySection *sectionM = self.sectionGroups[indexPath.section];
+//    Applycourse *subject = sectionM.subjects[indexPath.row];
+//
+//    
+//    if ([self.courseSelecteds  containsObject:subject.courseID]) {
+//        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons-yes"]];
+//    }
+//    else
+//    {
+//        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons"]];
+//    }
+    
+    
+//     cell.textLabel.text =  subject.official_name;
+    
+//    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")]) {
+//        
+//        [(UIImageView *)cell.accessoryView setImage:nil];
+//        
+//        if ([self.cancelCourseList containsObject:subject.courseID]){
+//            
+//            cell.imageView.image = [UIImage imageNamed:@"check-icons-yes"];
+//            
+//        }else{
+//            
+//            cell.imageView.image = [UIImage imageNamed:@"check-icons"];
+//            
+//        }
+//        
+//    }else{
+//        
+//        cell.imageView.image = nil;
+//        
+//    }
     
     ApplySection *sectionM = self.sectionGroups[indexPath.section];
     Applycourse *subject = sectionM.subjects[indexPath.row];
-    if ([self.courseSelecteds  containsObject:subject.courseID]) {
-        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons-yes"]];
-    }
-    else
-    {
-        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons"]];
-    }
+    ApplyTableViewCell *cell =[ApplyTableViewCell cellWithTableView:tableView];
+   
+    cell.title =  subject.official_name;
+    cell.containt_select = [self.courseSelecteds  containsObject:subject.courseID];
     
-    cell.textLabel.text =  subject.official_name;
+    BOOL edit =  [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
+    cell.Edit = edit;
     
-    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")]) {
+    if (edit) {
         
-        [(UIImageView *)cell.accessoryView setImage:nil];
-        
-        if ([self.cancelCourseList containsObject:subject.courseID]){
-            
-            cell.imageView.image = [UIImage imageNamed:@"check-icons-yes"];
-            
-        }else{
-            cell.imageView.image = [UIImage imageNamed:@"check-icons"];
-        }
-        
-    }else{
-        
-        cell.imageView.image = nil;
-        
+        cell.containt = [self.cancelCourseList containsObject:subject.courseID];
     }
     
     return cell;
@@ -442,12 +464,15 @@
             
             if (![weakSelf checkNetworkState]) {
                 
+                
                 return;
             }
-            
+
             
             UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:universityID];
+            
             [weakSelf.navigationController pushViewController:vc animated:YES];
+            
             
         }else{
             
@@ -532,17 +557,17 @@
         }
         
         
-        UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+        ApplyTableViewCell *cell =(ApplyTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         
         if ([self.cancelCourseList containsObject:subject.courseID]) {
             
             [self.cancelCourseList removeObject:subject.courseID];
             
-            cell.imageView.image = [UIImage imageNamed:@"check-icons"];
+            cell.iconView.image = [UIImage imageNamed:@"check-icons"];
         }else{
             
             [self.cancelCourseList addObject:subject.courseID];
-            cell.imageView.image = [UIImage imageNamed:@"check-icons-yes"];
+            cell.iconView.image = [UIImage imageNamed:@"check-icons-yes"];
         }
         
         

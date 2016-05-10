@@ -13,6 +13,9 @@
     UIView *_subtypeMenuView;
 }
 
+
+
+
 - (void)setItems:(NSArray *)items {
     _items = [items copy];
     
@@ -65,7 +68,9 @@
 
 - (void)layoutSubviews {
     CGFloat itemWidth = ceilf(self.frame.size.width / _items.count);
+    
     CGFloat height = self.frame.size.height;
+    
     
     [_labels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger idx, BOOL *stop) {
         label.frame = CGRectMake(itemWidth * idx, 0, itemWidth, height);
@@ -83,21 +88,33 @@
     [_lines enumerateObjectsUsingBlock:^(UIView *line, NSUInteger idx, BOOL *stop) {
         line.frame = CGRectMake(itemWidth * (idx + 1), 0, 0.5, height);
     }];
+    
+    
+    
 }
 
 - (void)configureIcon {
     [_icons enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
         NSArray *subtypes;
+        
         if ([self.delegate respondsToSelector:@selector(filterView:subtypesForItemAtIndex:)]) {
+            
             subtypes = [self.delegate filterView:self subtypesForItemAtIndex:idx];
+            
         }
         
         if (subtypes.count > 0) {
+            
             obj.image = [UIImage imageNamed:@"sort-arrows-subtype"];
+            
         } else {
+            
             if (idx == _selectedIndex) {
+            
                 obj.image = _descending ? [UIImage imageNamed:@"sort-arrows-down"] : [UIImage imageNamed:@"sort-arrows-up"];
+            
             } else {
+                
                 obj.image = [UIImage imageNamed:@"sort-arrows-none"];
             }
         }

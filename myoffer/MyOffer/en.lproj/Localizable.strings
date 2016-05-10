@@ -61,6 +61,9 @@
 "Evaluate-Middle" = "Core";
 "Evaluate-Secure" = "Secure";
 "Evaluate-PieLabel" = "we suggest you pick less than 2 as your target";
+"Evaluate-PieDream_chongChi" = "We suggest you pick less than 2 as your target.";
+"Evaluate-PieCore_heXin" = "We suggest you choose 2-3 as your focus.";
+"Evaluate-PieSecure_baoDi" = "We strongly recommend you choose at least 1-2 for safe admission.";
 "Evaluate-match" = "matched unis";
 "Evaluate-noData" = "Sorry, we couldn’t find any unis that matched your background.";
 "Evaluate-dangwei" = "";

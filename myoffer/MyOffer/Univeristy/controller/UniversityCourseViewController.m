@@ -23,6 +23,7 @@
     int _nextPage;
     BOOL _endPage;
 }
+
  @property (weak, nonatomic) IBOutlet KDEasyTouchButton *summitBtn;
 
 @end
@@ -72,7 +73,7 @@
      _selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
      
     [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
-    
+     _tableView.tableFooterView =[[UIView alloc] init];
      
     [self
      startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects

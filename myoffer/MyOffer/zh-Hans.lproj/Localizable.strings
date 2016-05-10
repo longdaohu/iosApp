@@ -68,7 +68,9 @@
 "Evaluate-Dream" = "冲刺";
 "Evaluate-Middle" = "核心";
 "Evaluate-Secure" = "保底";
-"Evaluate-PieLabel" = "申请成功就赚了，申请一下试试吧！";
+"Evaluate-PieDream_chongChi" = "申请成功就赚了，选2所试试。";
+"Evaluate-PieCore_heXin" = "最适合你的学校，请至少重点考虑2-3所学校。";
+"Evaluate-PieSecure_baoDi" = "申请成功率较高的学校，建议至少选择1-2所。";
 "Evaluate-match" = "所匹配院校";
 "Evaluate-noData" = "抱歉，没有符合条件的院校！";
 "Evaluate-dangwei" = "所";
@@ -482,7 +484,7 @@
 "About_shareWeibo" = "微博";
 "About_shareCopy" = "复制";
 "About_shareMore" = "更多";
-"About_AlerCopy" = "留学帝公众号已复制，打开微信搜索公众号关注哦！";
+"About_AlerCopy" = "myOffer公众号已复制，打开微信搜索公众号关注哦！";
 "About_CopySusess" = "复制成功";
 "About_shareContent" = "跨境的全球留学生服务生态圈——myOffer";
 "About_shareSummary" = "myOffer您的一站式智能留学申请平台，为您提供最佳的留学方案。";

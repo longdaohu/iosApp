@@ -88,7 +88,7 @@
 {
     
     XJHUtilDefineWeakSelfRef
-    [self startAPIRequestUsingCacheWithSelector:@"GET api/hotcities" parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSMutableArray *countryM  =[NSMutableArray array];
  

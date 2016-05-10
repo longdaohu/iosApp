@@ -210,7 +210,7 @@
                 
                 UIPasteboard *pab = [UIPasteboard generalPasteboard];
                 
-                NSString *string = @"ukyingwen";
+                NSString *string = @"myoffer4u";
                 
                 [pab setString:string];
                 

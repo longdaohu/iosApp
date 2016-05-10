@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSArray *items;
 
 @property (nonatomic) NSInteger selectedIndex;
+@property (nonatomic,strong) UIButton *cover;
 @property (nonatomic) BOOL descending;
 
 @property (weak) IBOutlet id <FilterViewDelegate> delegate;
@@ -24,8 +25,7 @@
 @protocol FilterViewDelegate <NSObject>
 @optional
 - (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index descending:(BOOL)descending;
-
 - (NSArray *)filterView:(FilterView *)filterView subtypesForItemAtIndex:(NSInteger)index;
 - (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index subtypeIndex:(NSInteger)subtypeIndex;
 
-@end
+@end 

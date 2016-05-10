@@ -80,22 +80,22 @@ typedef enum {
     if (!LOGIN) {
 
         self.phoneNumber = Failure;
-
         self.isClicked = NO;
+        
+    }else{
+    
+        [self getYourPhoneNumber:NO];
+        
+        if (self.isClicked) {
+            
+            [self LiuxueButtonClick];
+            
+        }
+
+    
     }
     
-    if(LOGIN) {
-        
-          [self getYourPhoneNumber:NO];
-        
-     }
-    
-    if (LOGIN && self.isClicked) {
-        
-        [self LiuxueButtonClick];
-        
-    }
-    
+  
     
     [MobClick beginLogPageView:@"page我要留学"];
 
@@ -110,8 +110,6 @@ typedef enum {
     [MobClick endLogPageView:@"page我要留学"];
     
 }
-
-
 
 
 -(UIPickerView *)PickerViewWithTag:(PickerViewType)type
@@ -198,23 +196,13 @@ typedef enum {
     return _sucessView;
 }
 
-//提交成功提示框
--(void)sucessViewUp
-{
-   [UIView animateWithDuration:0.25 animations:^{
-        CGRect newRect = self.sucessView.frame;
-       newRect.origin.y = 0;
-       self.sucessView.frame = newRect;
-   }];
-    
-}
+
 
 - (void)viewDidLoad {
   
     [super viewDidLoad];
     
     self.title = GDLocalizedString(@"WoYaoLiuXue_title");
-
     
     [self makeTableView];
     
@@ -255,11 +243,14 @@ typedef enum {
             if (self.phoneNumber.length>0) {
                 
                 [self sendLiuxueRequest];
+                
             }else{
+                
                 [self PhoneViewHiden:NO];
                 
             }
          }
+        
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         self.phoneNumber = Failure;
@@ -287,7 +278,7 @@ typedef enum {
     
 }
 
-
+//键盘处理通知
 -(void)addNotificationCenter
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -338,7 +329,6 @@ typedef enum {
 }
 
 #pragma mark —————— UITableViewDataSource,UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
     return 30;
@@ -404,6 +394,7 @@ typedef enum {
         AlerMessage(message);
         
         return NO;
+    
     }else if (!self.grade)
     {
         NSString *message = [NSString stringWithFormat:@"%@%@",self.sectionTitles[1],GDLocalizedString(@"TiJiao-Empty")];
@@ -411,6 +402,7 @@ typedef enum {
         
         return NO;
     }
+
     else if (!self.ApplySubject)
     {
         NSString *message = [NSString stringWithFormat:@"%@%@",self.sectionTitles[2],GDLocalizedString(@"TiJiao-Empty")];
@@ -425,6 +417,18 @@ typedef enum {
     
 }
 
+//提交成功提示框
+-(void)sucessViewUp
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        CGRect newRect = self.sucessView.frame;
+        newRect.origin.y = 0;
+        self.sucessView.frame = newRect;
+    }];
+    
+}
+
+
 #pragma mark —————————— XliuxueFooterViewDelegate
 -(void)liuxueFooterView:(XliuxueFooterView *)footerView didClick:(UIButton *)sender{
  
@@ -434,7 +438,6 @@ typedef enum {
         InteProfileViewController *pipei =[[InteProfileViewController alloc] init];
         pipei.isComeBack = YES;
         [self.navigationController pushViewController:pipei animated:YES];
-  
         
     }else{
         
@@ -444,8 +447,7 @@ typedef enum {
 -(void)LiuxueButtonClick
 {
     
-    
-    if (![self checkFillInformation]) {
+     if (![self checkFillInformation]) {
         
         return;
     }
@@ -530,6 +532,7 @@ typedef enum {
 {
     
     NSInteger newSection = indexPath.section + 1;
+    
     if (10  == sender.tag || 3 == newSection) {
         
         [self.view endEditing:YES];

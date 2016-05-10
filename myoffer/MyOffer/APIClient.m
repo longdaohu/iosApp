@@ -131,7 +131,11 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
         }
         
         dispatch_async( dispatch_get_main_queue(),^{
+            
             success(response.statusCode, result);
+            
+ 
+            
         });
     }];
     

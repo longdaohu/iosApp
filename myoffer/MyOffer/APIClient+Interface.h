@@ -34,7 +34,8 @@
 #define kAPISelectorApplicationStatus @"GET api/account/applicationliststateraw"
 #define kAPISelectorApplicationList @"GET api/account/applies"
 #define kAPISelectorWoYaoLiuXue @"POST api/fastpass"
-#define kAPISelectorWsdfsue @"POST api/fastpasfafdsafafsafgdfgfdgdgdsafss"
+#define kAPISelectorCatigoryHotCities @"GET api/hotcities"
+#define kAPISelectorMessageDetail @"GET api/article/"
 
 
 //留学资讯推荐

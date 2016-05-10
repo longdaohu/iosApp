@@ -37,6 +37,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *upHeaderView;
 @property(nonatomic,assign)SortType universitySortType;
 @property(nonatomic, strong) NSMutableArray  *slices;
+@property(nonatomic, strong)NSArray  *subtitleArr;
 @property(nonatomic, strong) NSMutableArray    *sliceColors;
 @property(nonatomic, strong) NSMutableArray    *sliceTitleS;
 @property(nonatomic, strong) NSMutableArray    *sliceAngles;
@@ -89,6 +90,13 @@ typedef enum {
     return _sliceAngles;
 }
 
+-(NSArray *)subtitleArr
+{
+    if (!_subtitleArr) {
+        _subtitleArr = @[GDLocalizedString(@"Evaluate-PieDream_chongChi"),GDLocalizedString(@"Evaluate-PieCore_heXin"),GDLocalizedString(@"Evaluate-PieSecure_baoDi")];
+    }
+    return _subtitleArr;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -140,7 +148,7 @@ typedef enum {
     
      [self.commitButton setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
      self.NewSelectLabel.text =[NSString stringWithFormat:@"%@ ：0",GDLocalizedString(@"ApplicationList-003")];
-     self.pieSelectLabel.text =GDLocalizedString(@"Evaluate-PieLabel");
+    self.pieSelectLabel.text = self.subtitleArr[0];
      self.title = GDLocalizedString(@"Evaluate-inteligent");
      self.NoDataLabel.text = GDLocalizedString(@"Evaluate-noData");
     
@@ -542,22 +550,8 @@ typedef enum {
     
    [self makeCurrentLabel:[NSString stringWithFormat:@"%lu",(unsigned long)self.resultList.count] currentItem:self.sliceTitleS[index]];
 
-    NSString *lang =[InternationalControl userLanguage];
-    if ([lang containsString:@"en"]) {
+      self.pieSelectLabel.text = self.subtitleArr[index];
         
-        switch (index) {
-            case 1:
-                self.pieSelectLabel.text = @"we suggest you pick less than 2 as your target";
-                break;
-            case 0:
-                self.pieSelectLabel.text = @"we suggest you choose 2-3 as your focus";
-                break;
-            default:
-                self.pieSelectLabel.text = @"we strongly recommend you choose at least 2 for safe admission";
-                break;
-        }
-    }
-    
         
         __block  CGFloat turnAngle = 0;
         
@@ -619,6 +613,7 @@ typedef enum {
             
             for (CATextLayer *textLayer in layer.sublayers) {
                 [UIView animateWithDuration:3 animations:^{
+                    
                     textLayer.transform=CATransform3DRotate(textLayer.transform, -turnAngle, 0, 0,1);
                 }];
             }

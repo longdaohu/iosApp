@@ -660,8 +660,7 @@
 
 -(void)QQservice
 {
-    
-    //跳转到QQ客服聊天页面
+     //跳转到QQ客服聊天页面
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
@@ -732,8 +731,8 @@
     
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+      
         [ud setValue:response forKey:@"Subject_CN"];
-        
         
     }];
     

@@ -130,22 +130,34 @@
 {
     _contentOffsetY = contentOffsetY;
     
- 
+    
+
     if (contentOffsetY <= 0) {
         
+ 
             self.headerTitleLab.frame = self.headerTitleLabFrame;
+    }else{
+    
+        
+        if (self.HeaderHeight - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
+            
+            CGRect NewRect = self.headerTitleLabFrame;
+            
+            NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
+            
+            self.headerTitleLab.frame = NewRect;
+            
+        }
+        
+        
     }
     
     
-    if (self.HeaderHeight - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
+    
+    
         
-        CGRect NewRect = self.headerTitleLabFrame;
-        
-        NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
-        
-        self.headerTitleLab.frame = NewRect;
-
-    }
+    
+    
     
 }
 

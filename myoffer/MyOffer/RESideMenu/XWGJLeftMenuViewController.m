@@ -75,6 +75,7 @@
         //请求头像信息
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
             
+ 
             self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
             [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
@@ -278,7 +279,6 @@
 -(void)caseHelp
 {
  
-
     [self.sideMenuViewController hideMenuViewController];
 
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
@@ -287,7 +287,6 @@
 
     [nav pushViewController:help animated:NO];
     
-
     
 }
 

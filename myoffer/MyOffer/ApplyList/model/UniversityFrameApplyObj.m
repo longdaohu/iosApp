@@ -15,10 +15,10 @@
 {
     _uniObj = uniObj;
     
-    CGFloat cancelx = 5;
+    CGFloat cancelx = ITEM_MARGIN;
     CGFloat cancely = 0;
     CGFloat cancelh = University_HEIGHT;
-    CGFloat cancelw = 40;
+    CGFloat cancelw = 34;
     self.CancelButtonFrame = CGRectMake(cancelx, cancely, cancelw, cancelh);
     
     CGFloat sectionBgx = 0;

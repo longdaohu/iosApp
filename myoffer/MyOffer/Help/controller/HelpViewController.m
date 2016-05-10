@@ -10,7 +10,6 @@
 #import "DetailWebViewController.h"
 
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate>
-
 @property(nonatomic,strong)UITableView *helpTableView;
 @property(nonatomic,strong)NSArray *helpItems;
 

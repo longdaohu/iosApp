@@ -60,7 +60,7 @@ static AppDelegate *__sharedDelegate;
     [self makeRootController];
     
     
-    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
+//    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
     
     [self umeng];//友盟
     

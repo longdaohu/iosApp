@@ -126,13 +126,13 @@
     
     [self.progress hideAnimated:YES];
     
-    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
   
      NSString *pathURL = request.URL.absoluteString;
+    
      if ([pathURL containsString:@"jump/0"]) {
          ApplyStatusViewController *status =[[ApplyStatusViewController alloc] init];
         [self.navigationController pushViewController:status animated:YES];

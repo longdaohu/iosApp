@@ -197,7 +197,7 @@
     
     self.MessageDetailFrame  = [[XWGJMessageDetailFrame alloc] init];
     
-    NSString *path = [NSString stringWithFormat:@"GET api/article/%@",self.NO_ID];
+    NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorMessageDetail,self.NO_ID];
     
     XJHUtilDefineWeakSelfRef
     

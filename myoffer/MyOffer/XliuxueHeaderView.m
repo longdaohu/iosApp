@@ -48,7 +48,6 @@
     _title = title;
     
     self.titleLab.text = title;
-
     
     CGFloat iconx = 0;
     CGFloat icony = 0;

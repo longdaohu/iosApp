@@ -46,7 +46,6 @@
     [super viewDidLoad];
 
     self.title = self.path ?@"" :self.advertise_title;
-    
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
     NSString *RequestString =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
     [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
@@ -70,14 +69,14 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    [self.hud hideAnimated:YES afterDelay:0.1];
+    [self.hud hideAnimated:YES];
 
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     
     [KDAlertView showMessage:GDLocalizedString(@"NetRequest-connectError") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
-    [self.hud hideAnimated:YES afterDelay:0.1];
+    [self.hud hideAnimated:YES];
     
 }
 
