@@ -10,8 +10,6 @@
 #import "FilterView.h"
 @interface UniversityCourseViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *_tableView;
-    IBOutlet FilterView *_filterView;
-    
     IBOutlet UILabel *_selectedCountLabel;
 }
 

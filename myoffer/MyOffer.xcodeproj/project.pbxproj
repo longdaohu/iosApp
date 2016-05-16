@@ -249,6 +249,8 @@
 		AE79E44C1C8E7A7E008059D9 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E43A1C8E7A7E008059D9 /* UIImageView+HighlightedWebCache.m */; };
 		AE79E44D1C8E7A7E008059D9 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E43C1C8E7A7E008059D9 /* UIImageView+WebCache.m */; };
 		AE79E44E1C8E7A7E008059D9 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E43E1C8E7A7E008059D9 /* UIView+WebCacheOperation.m */; };
+		AE7DA79F1CE5D6F9002254CD /* FilerButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7DA79C1CE5D6F9002254CD /* FilerButtonItem.m */; };
+		AE7DA7A01CE5D6F9002254CD /* XuFilerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */; };
 		AE82E26B1CBBA48200DC752E /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */; };
 		AEB41CC21CE0899000B4F9CD /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */; };
 		AEB9CA7A1C215EBB00DCC422 /* FiltContent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA771C215EBB00DCC422 /* FiltContent.m */; };
@@ -818,6 +820,10 @@
 		AE79E43C1C8E7A7E008059D9 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		AE79E43D1C8E7A7E008059D9 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		AE79E43E1C8E7A7E008059D9 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		AE7DA79B1CE5D6F9002254CD /* FilerButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilerButtonItem.h; sourceTree = "<group>"; };
+		AE7DA79C1CE5D6F9002254CD /* FilerButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilerButtonItem.m; sourceTree = "<group>"; };
+		AE7DA79D1CE5D6F9002254CD /* XuFilerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XuFilerView.h; sourceTree = "<group>"; };
+		AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XuFilerView.m; sourceTree = "<group>"; };
 		AE82E2691CBBA48200DC752E /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
 		AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUniversityFrame.m; sourceTree = "<group>"; };
 		AEB41CC01CE0899000B4F9CD /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
@@ -1718,6 +1724,10 @@
 		567145771CBA904A002A02BF /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AE7DA79B1CE5D6F9002254CD /* FilerButtonItem.h */,
+				AE7DA79C1CE5D6F9002254CD /* FilerButtonItem.m */,
+				AE7DA79D1CE5D6F9002254CD /* XuFilerView.h */,
+				AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */,
 				567145781CBA904A002A02BF /* UniversityCourseCell.h */,
 				567145791CBA904A002A02BF /* UniversityCourseCell.m */,
 				5671457A1CBA904A002A02BF /* UniversityCourseCell.xib */,
@@ -3067,6 +3077,7 @@
 				AE79E4491C8E7A7E008059D9 /* UIImage+GIF.m in Sources */,
 				560881001C1F212300DCB54B /* searchToolView.m in Sources */,
 				AE005C191C9A527E0076F85E /* CountryState.m in Sources */,
+				AE7DA79F1CE5D6F9002254CD /* FilerButtonItem.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
 				567145601CBA8D28002A02BF /* XWGJBanView.m in Sources */,
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
@@ -3143,6 +3154,7 @@
 				AE79E44B1C8E7A7E008059D9 /* UIImage+WebP.m in Sources */,
 				567144F41CBA8988002A02BF /* FavoriteViewController.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
+				AE7DA7A01CE5D6F9002254CD /* XuFilerView.m in Sources */,
 				AE0096901C9BD87500461544 /* HomeViewContViewController.m in Sources */,
 				AE6F971E1CCF3CA000FB0FEF /* TiJiaoFooterView.m in Sources */,
 				AE0232211C56017400C7BEF4 /* YYBannerView.m in Sources */,

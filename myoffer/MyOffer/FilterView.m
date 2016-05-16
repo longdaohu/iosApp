@@ -13,11 +13,20 @@
     UIView *_subtypeMenuView;
 }
 
-
-
+-(UIButton *)cover
+{
+    if (!_cover) {
+        
+        _cover =[[UIButton alloc] init];
+        
+    }
+    return _cover;
+}
 
 - (void)setItems:(NSArray *)items {
     _items = [items copy];
+    
+
     
     _selectedIndex = -1;
     
@@ -67,6 +76,11 @@
 }
 
 - (void)layoutSubviews {
+   
+    
+    [super layoutSubviews];
+    
+    
     CGFloat itemWidth = ceilf(self.frame.size.width / _items.count);
     
     CGFloat height = self.frame.size.height;
@@ -94,6 +108,7 @@
 }
 
 - (void)configureIcon {
+    
     [_icons enumerateObjectsUsingBlock:^(UIImageView *obj, NSUInteger idx, BOOL *stop) {
         NSArray *subtypes;
         
@@ -164,6 +179,13 @@
 }
 
 - (void)showSubtypeMenuForItemAtIndex:(NSInteger)index subtypes:(NSArray *)subtypes {
+ 
+    
+    self.subtypeMenuPresentingView.layer.borderColor = [UIColor redColor].CGColor;
+    self.subtypeMenuPresentingView.layer.borderWidth = 1;
+    
+    
+    
     NSAssert(_subtypeMenuView == nil, @"Already has a menu view");
     
     CGRect buttonFrame = [_buttons[index] frame];
@@ -181,7 +203,7 @@
     
     UIView *view = [[UIView alloc] initWithFrame:frame];
     view.backgroundColor = self.backgroundColor;
-    view.layer.borderColor = [UIColor KD_colorWithCode:0xffd6d6d6].CGColor;
+    view.layer.borderColor =XCOLOR_RED.CGColor;//[UIColor KD_colorWithCode:0xffd6d6d6].CGColor;
     view.layer.borderWidth = 0.5;
 
     [targetView addSubview:view];
@@ -192,7 +214,8 @@
         
         [button setTitle:obj forState:UIControlStateNormal];
         [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [button setTitleColor:[UIColor KD_colorWithCode:0xff6C6C6C] forState:UIControlStateNormal];
+//        [button setTitleColor:[UIColor KD_colorWithCode:0xff6C6C6C] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         button.adjustAllRectWhenHighlighted = YES;
         
         [view addSubview:button];
@@ -205,10 +228,12 @@
     }];
     view.alpha = 0;
     
-    _subtypeMenuView = view;
+     _subtypeMenuView = view;
     
     [UIView animateWithDuration:0.3 animations:^{
+        
         view.alpha = 1.0;
+        
     }];
 }
 
@@ -221,12 +246,15 @@
 }
 
 - (void)dismissSubtypeMenu {
+    
     UIView *menu = _subtypeMenuView;
     _subtypeMenuView = nil;
     [UIView animateWithDuration:0.3 animations:^{
         menu.alpha = 0;
     } completion:^(BOOL finished) {
+        
         [menu removeFromSuperview];
+        
     }];
 }
 

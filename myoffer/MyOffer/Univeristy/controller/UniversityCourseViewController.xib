@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UniversityCourseViewController">
             <connections>
-                <outlet property="_filterView" destination="ivV-6L-o39" id="oZ0-nA-rpc"/>
                 <outlet property="_selectedCountLabel" destination="aVk-kG-BEQ" id="anR-eu-eTZ"/>
                 <outlet property="_tableView" destination="Cyr-Q7-kZP" id="0Wj-tz-ohj"/>
                 <outlet property="summitBtn" destination="xif-ak-0bn" id="u1h-WI-biP"/>
@@ -33,10 +32,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="cc5-ah-sX2"/>
                     </constraints>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="6bM-mN-CG7"/>
-                        <outlet property="subtypeMenuPresentingView" destination="i5M-Pr-FkT" id="6bN-66-NyM"/>
-                    </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HyU-W6-vDh">
                     <rect key="frame" x="0.0" y="518" width="320" height="50"/>

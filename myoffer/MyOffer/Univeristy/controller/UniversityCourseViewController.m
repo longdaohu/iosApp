@@ -10,8 +10,9 @@
 
 #import "UniversityCourseViewController.h"
 #import "UniversityCourseCell.h"
-
-@interface UniversityCourseViewController () {
+#import "XuFilerView.h"
+#import "XWGJnodataView.h"
+@interface UniversityCourseViewController ()<XuFilerViewDelegate> {
    // NSArray *_result;
     
     NSMutableArray *_result;
@@ -25,11 +26,13 @@
 }
 
  @property (weak, nonatomic) IBOutlet KDEasyTouchButton *summitBtn;
+@property(nonatomic,strong)XuFilerView *filer;
+@property(nonatomic,strong)NSArray *groups;
+@property(nonatomic,strong)XWGJnodataView *NoDataView;
 
 @end
 
 #define kCellIdentifier NSStringFromClass([UniversityCourseCell class])
-
 @implementation UniversityCourseViewController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -66,36 +69,76 @@
     }
     return self;
 }
- - (void)viewDidLoad {
-    [super viewDidLoad];
-  
-    [self.summitBtn setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
-     _selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
-     
-    [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
-     _tableView.tableFooterView =[[UIView alloc] init];
-     
-    [self
-     startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects
-     parameters:@{@":lang": GDLocalizedString(@"ch_Language")}
-     success:^(NSInteger statusCode, NSArray *response) {
-        
-         //专业类型数组
-         NSMutableArray *subjectOptions = [[response KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx) {
-           
-             return obj[@"name"];
-         }] mutableCopy];
 
-          [subjectOptions insertObject:GDLocalizedString(@"UniCourseDe-002")  atIndex:0];//@"全部"
-          _subjectOptions = subjectOptions;
-          _levelOptions = @[GDLocalizedString(@"UniCourseDe-002"),GDLocalizedString(@"UniCourseDe-003"),GDLocalizedString(@"UniCourseDe-004")];
-         //  _levelKeyOptions = @[@"All", @"Undergraduate", @"Graduate"];
-         //   _levelKeyOptions = @[@"All", @"本科", @"硕士"];
-         _filterView.items = @[GDLocalizedString(@"UniCourseDe-005"),GDLocalizedString(@"UniCourseDe-006")]; // @[@"专业方向", @"学位类型"];
-         
-   
-      }];
+-(NSArray *)groups
+{
+    if (!_groups) {
+        
+        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+        NSString *subjectKey = USER_EN ? @"Subject_EN":@"Subject_CN";
+        NSArray *subjectes = [ud valueForKey:subjectKey];
+        NSMutableArray  *temps = [[subjectes valueForKeyPath:@"name"] mutableCopy];
+        [temps insertObject:GDLocalizedString(@"UniCourseDe-002")  atIndex:0];
+         NSArray *subjectArr = [temps copy];
+        
+        NSArray *rightArr = @[GDLocalizedString(@"UniCourseDe-002"),GDLocalizedString(@"UniCourseDe-003"),GDLocalizedString(@"UniCourseDe-004")];
+
+        _groups = @[subjectArr ,rightArr];
+    }
+    return _groups;
+}
+
+
+-(XWGJnodataView *)NoDataView
+{
+    if (!_NoDataView) {
+        
+        _NoDataView =[XWGJnodataView noDataView];
+        _NoDataView.hidden = YES;
+        _NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noData");
+        [self.view insertSubview:_NoDataView aboveSubview:_tableView];
+    }
     
+    return _NoDataView;
+}
+
+
+-(void)makeUI
+{
+   
+    [self.summitBtn setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
+    _selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
+    
+    [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+    _tableView.tableFooterView =[[UIView alloc] init];
+    
+    [self makeTopView];
+    
+}
+
+-(void)makeTopView
+{
+  
+    XuFilerView *filer =[[XuFilerView alloc] init];
+    self.filer = filer;
+    filer.delegate = self;
+    filer.view.frame = CGRectMake(0, 0, XScreenWidth, 0);
+    filer.filerRect = CGRectMake(0, 0, XScreenWidth, 0);
+    filer.groups = self.groups;
+    
+    [self.view addSubview:filer.view];
+
+}
+
+
+ - (void)viewDidLoad {
+   
+     [super viewDidLoad];
+   
+     
+     [self makeUI];
+     
+     
     [self reloadData];
 }
 
@@ -116,12 +159,16 @@
            _result = [response[@"courses"] mutableCopy];
          
          if (_result.count<40) {
+             
              _endPage = YES;
          }
          else
          {
              _endPage = NO;
          }
+         
+         
+          self.NoDataView.hidden = !(_result.count == 0);
          
           [_tableView reloadData];
     }];
@@ -150,11 +197,7 @@
     UniversityCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.info =  info;
     
-//     cell.title =  info[@"official_name"];
-//    
-//    //  "专业方向";   "学位类型";
-//     cell.detailLabel1.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),info[@"level"]];
-//     cell.detailLabel2.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-005"), [info[@"areas"] componentsJoinedByString:@","]];
+ 
     
     [self configureCellSelectionView:cell id:info[@"_id"]];
     
@@ -174,8 +217,7 @@
 -(void)loadMoreData
 {
   
-    //_resquestParameters = [@{@":id": _universityID, @"page": @(_nextPage), @"size": @40} mutableCopy];
-    [self
+     [self
      startAPIRequestWithSelector:@"GET api/university/:id/courses"
      parameters:_resquestParameters
      success:^(NSInteger statusCode, id response) {
@@ -207,8 +249,7 @@
           [_tableView reloadData];
      }];
 
-    
-
+ 
 }
 
 
@@ -278,29 +319,38 @@
     
 }
 
-- (NSArray *)filterView:(FilterView *)filterView subtypesForItemAtIndex:(NSInteger)index {
-   
-    return index == 0 ? _subjectOptions : _levelOptions;
-}
 
-- (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index subtypeIndex:(NSInteger)subtypeIndex {
-   
+
+-(void)filerViewItemClick:(FilerButtonItem *)sender
+{
     
-    NSString *key = index == 0 ? @"area" : @"level";
+    
+    NSString *key = sender.tag == 11 ? @"level": @"area";
     
     [_resquestParameters setValue:@0 forKey:@"page"];
+    
+    
     _nextPage = 0;
     
-    if (subtypeIndex != 0) {
-        _resquestParameters[key] = index == 0 ? _subjectOptions[subtypeIndex] : _levelOptions[subtypeIndex];
-    } else {
+    
+    
+    if ([sender.titleLab.text isEqualToString:self.groups[0][0]] || [sender.titleLab.text isEqualToString:self.groups[1][0]]) {
+        
         [_resquestParameters removeObjectForKey:key];
+        
+    } else {
+        
+        _resquestParameters[key] =  sender.titleLab.text;
+        
     }
+    
     
     [_result removeAllObjects];
     
     [self reloadData];
+    
 }
+
 
 
 @end

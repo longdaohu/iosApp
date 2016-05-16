@@ -14,11 +14,11 @@
 @property (copy, nonatomic) NSArray *items;
 
 @property (nonatomic) NSInteger selectedIndex;
-@property (nonatomic,strong) UIButton *cover;
 @property (nonatomic) BOOL descending;
 
 @property (weak) IBOutlet id <FilterViewDelegate> delegate;
 @property (weak) IBOutlet UIView *subtypeMenuPresentingView;
+@property(nonatomic,strong)UIButton *cover;
 
 @end
 

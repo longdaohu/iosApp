@@ -7,9 +7,10 @@
 //
 
 #import "UniversityDetailViewController.h"
-#import "UniversityCourseViewController.h"
 #import "InteProfileViewController.h"
 #import "UniversityMapsViewController.h"
+#import "UniversityCourseViewController.h"
+
 
 @interface UniversityDetailViewController () {
     BOOL _isLiked;
