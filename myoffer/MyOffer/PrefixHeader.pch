@@ -49,7 +49,9 @@
 #define tabBarSelectIndex  @"tabBarSelectIndex"
 #define KEY_COUNTRY  @"country"
 #define KEY_STATE  @"state"
+#define KEY_CITY  @"city"
 #define KEY_AREA  @"area"
+#define KEY_SUBJECT  @"subject"
 #define FontWithSize(size)  [UIFont systemFontOfSize:size]
 #define FONTSIZE(size)   XScreenWidth > 375 ? size + 1 :size
 #define University_HEIGHT  100 + (XScreenWidth - 320) * 0.1

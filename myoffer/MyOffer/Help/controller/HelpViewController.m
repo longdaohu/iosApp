@@ -11,20 +11,20 @@
 
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *helpTableView;
-@property(nonatomic,strong)NSArray *helpItems;
+@property(nonatomic,strong)NSArray *helpList;
 
 
 @end
 
 @implementation HelpViewController
 
--(NSArray *)helpItems
+-(NSArray *)helpList
 {
-    if (!_helpItems) {
+    if (!_helpList) {
         
-        _helpItems = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
+        _helpList = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
     }
-    return _helpItems;
+    return _helpList;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -68,14 +68,14 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.helpItems.count;
+    return self.helpList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.helpItems[indexPath.row];
+    cell.textLabel.text = self.helpList[indexPath.row];
     return cell;
 }
 

@@ -11,59 +11,39 @@
 
 @implementation FiltContent
 
--(instancetype)initItemWithTitle:(NSString *)titleName andDetailTitle:(NSString *)detailName anditems:(NSArray *)items
-{
-    self = [super init];
-    if (self) {
-        self.titleName =titleName;
-        self.detailTitleName = detailName;
-        self.buttonArray = [items mutableCopy];
-        [self getContentHigh:items];
-         self.cellHiden = NO;
-    }
-    return self;
 
-}
 
 +(instancetype)createItemWithTitle:(NSString *)titleName andDetailTitle:(NSString *)detailName anditems:(NSArray *)items
 {
-    return [[self alloc] initItemWithTitle:titleName andDetailTitle:detailName anditems:items];
+    return [[self alloc] initItemWithLogoName:nil titleName:titleName andDetailTitleName:detailName anditems:items];
 }
 
 
--(void)getContentHigh:(NSArray *)items;
++(instancetype)filterItemWithLogoName:(NSString *)logoName titleName:(NSString *)title detailTitleName:(NSString *)detailTitle anditems:(NSArray *)items
 {
-    //第一个 label的起点
-    CGSize startSize = CGSizeMake(0, 10);
-    //间距
-    CGFloat padding = 10.0;
-    
-    CGFloat MAXWidth = [UIScreen  mainScreen].bounds.size.width - 30;
-    
-    for (int i = 0; i < items.count; i ++) {
-      
-         CGFloat keyWordWidth = [items[i] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:18]].width +15;
-        
-        if (keyWordWidth > MAXWidth) {
-            
-            keyWordWidth = MAXWidth;
-        }
-        if (MAXWidth - startSize.width < keyWordWidth) {
-            
-            startSize.height += 35.0;
-            
-            startSize.width = 0;
-        }
-        
-        //起点 增加
-        startSize.width += keyWordWidth + padding;
-    }
-
-        
-     self.contentheigh = startSize.height +35;
-
+    return [[self alloc] initItemWithLogoName:logoName titleName:title andDetailTitleName:detailTitle anditems:items];
 }
 
- 
+
+-(instancetype)initItemWithLogoName:(NSString *)logo  titleName:(NSString *)title andDetailTitleName:(NSString *)detailtitle anditems:(NSArray *)items
+{
+    
+    self = [super init];
+    if (self) {
+        
+        
+        self.logoName = logo;
+        self.titleName = title;
+        self.detailTitleName = detailtitle;
+        self.buttonArray = items;
+        
+        
+    }
+    return self;
+}
+
+
+
+
 
 @end

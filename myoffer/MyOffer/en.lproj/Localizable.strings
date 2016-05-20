@@ -16,7 +16,7 @@
 "Category-button004" = "Rankings";
 "Category-AU" = "AU_en.jpg";
 "Category-UK" = "UK_en.jpg";
-
+"University-hot" = "hot_en";
 //首页
 "Discover_search" = "Search university/subject";
 "DiscoverTitle" = "Discover";
@@ -66,6 +66,7 @@
 "Evaluate-PieSecure_baoDi" = "We strongly recommend you choose at least 1-2 for safe admission.";
 "Evaluate-match" = "matched unis";
 "Evaluate-noData" = "Sorry, we couldn’t find any unis that matched your background.";
+"Evaluate-noDataSubject" = "Sorry, we couldn’t find any subject that matched";
 "Evaluate-dangwei" = "";
 "Evaluate-pipei" = "Start Matching uni";
 

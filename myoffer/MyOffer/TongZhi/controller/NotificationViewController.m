@@ -13,8 +13,8 @@
 #import "XWGJNoti.h"
 
 @interface NotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UITableView *ListTableView;
-@property(nonatomic,strong)NSMutableArray *NotiList;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSMutableArray *results;
 @property(nonatomic,strong)MJRefreshNormalHeader *mj_header;
 @property(nonatomic,assign)int nextPage;
 @property(nonatomic,strong)XWGJnodataView *NDataView;
@@ -24,29 +24,15 @@
 
 @implementation NotificationViewController
 
--(NSMutableArray *)NotiList
-{
-    if (!_NotiList) {
-        
-        _NotiList = [NSMutableArray array];
-    }
-    return _NotiList;
-}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
    
     self.navigationController.navigationBarHidden = NO;
-    
-    if (self.NotiList.count) {
-        
-        [self.ListTableView reloadData];
-
-    }
-    
+  
     [MobClick beginLogPageView:@"page通知中心"];
-
     
 }
 
@@ -61,31 +47,45 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     [self makeUI];
-    [self getDataSourse:0];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
-
+-(NSMutableArray *)results
+{
+    if (!_results) {
+        
+        _results = [NSMutableArray array];
+    }
+    return _results;
+}
 
 -(void)makeTableView
 {
-    self.ListTableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.ListTableView.contentInset =  UIEdgeInsetsMake(0, 0, 64, 0);
-    self.ListTableView.dataSource = self;
-    self.ListTableView.delegate = self;
-    self.ListTableView.rowHeight = 100;
-    self.ListTableView.tableFooterView =[[UIView alloc] init];
-    self.ListTableView.backgroundColor = BACKGROUDCOLOR;
-    [self.view addSubview:self.ListTableView];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 64, 0);
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.rowHeight = KDUtilSize(100);
+    self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.backgroundColor = BACKGROUDCOLOR;
+    [self.view addSubview:self.tableView];
     
     
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;
-    self.ListTableView.mj_header = mj_header;
+    self.tableView.mj_header = mj_header;
     self.mj_header = mj_header;
-    self.ListTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
+}
+
+-(MJRefreshBackNormalFooter *)makeMJ_footer{
+
+    return [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 
@@ -93,11 +93,10 @@
 {
     self.title = GDLocalizedString(@"Left-noti");
     self.nextPage = 0;
-    
     self.NDataView =[XWGJnodataView noDataView];
     self.NDataView.hidden = YES;
     self.NDataView.contentLabel.text = GDLocalizedString(@"Left-noNoti");
-    [self.view insertSubview:self.NDataView  aboveSubview:self.ListTableView];
+    [self.view insertSubview:self.NDataView  aboveSubview:self.tableView];
 
 }
 
@@ -107,6 +106,7 @@
 {
     
     [self makeTableView];
+    
     [self makeOtherView];
     
 }
@@ -131,11 +131,10 @@
  
           self.nextPage +=1;
          
-         if ([self.ListTableView.mj_header isRefreshing]) {
+         if ([self.tableView.mj_header isRefreshing]) {
              
-             [self.NotiList removeAllObjects];
+             [self.results removeAllObjects];
              
-             [self.ListTableView reloadData];
          }
          
 
@@ -144,39 +143,31 @@
              
              XWGJNoti *noti = [XWGJNoti notiCreateWithDic:info];
              
-             [self.NotiList addObject:noti];
+             [self.results addObject:noti];
              
          }
          
+         [self.tableView.mj_header endRefreshing];
          
-         [self.ListTableView.mj_header endRefreshing];
+         [self.tableView.mj_footer endRefreshing];
          
-         [self.ListTableView.mj_footer endRefreshing];
-         
-         
-         
-         
-         if (PageSize > [response[@"messages"] count]) {
-             
-             [self.ListTableView.mj_footer endRefreshingWithNoMoreData];
-             
-         }
+          self.tableView.mj_footer = PageSize > [response[@"messages"] count] ? nil : [self makeMJ_footer];
          
          
-         if ([response[@"messages"] count] == 0 && self.NotiList.count == 0) {
+         if ([response[@"messages"] count] == 0 && self.results.count == 0) {
              
              self.NDataView.hidden = NO;
-          
+             
              return ;
          }
          
-          [self.ListTableView reloadData];
+          [self.tableView reloadData];
          
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         [self.ListTableView.mj_header endRefreshing];
-         [self.ListTableView.mj_footer endRefreshing];
+         [self.tableView.mj_header endRefreshing];
+         [self.tableView.mj_footer endRefreshing];
          
          self.NDataView.hidden = NO;
          self.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
@@ -187,6 +178,7 @@
 -(void)loadNewData{
     
      self.nextPage = 0;
+    
     [self getDataSourse:0];
 }
 
@@ -200,7 +192,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return self.NotiList.count;
+    return self.results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -208,20 +200,23 @@
     
     NotiTableViewCell *cell = [NotiTableViewCell cellWithTableView:tableView];
     
-    cell.noti = self.NotiList[indexPath.row];
+    cell.noti = self.results[indexPath.row];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-     XWGJNoti *noti  = self.NotiList[indexPath.row];
+     XWGJNoti *noti  = self.results[indexPath.row];
     
     noti.state = @"Read";
     
-     DetailWebViewController *detailVC =[[DetailWebViewController alloc] init];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    DetailWebViewController *detailVC =[[DetailWebViewController alloc] init];
     
     detailVC.notiID = noti.NO_id;
     
@@ -239,7 +234,7 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        XWGJNoti *noti  = self.NotiList[indexPath.row];
+        XWGJNoti *noti  = self.results[indexPath.row];
         
         NSString *path = [NSString stringWithFormat:@"DELETE api/account/message/%@",noti.NO_id];
         
@@ -247,11 +242,11 @@
                                parameters:nil
                                 success:^(NSInteger statusCode, id response) {
                                       
-            [self.NotiList removeObjectAtIndex:indexPath.row];
+            [self.results removeObjectAtIndex:indexPath.row];
                                       
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                     
-             self.NDataView.hidden = self.NotiList.count == 0 ? NO : YES;
+             self.NDataView.hidden = self.results.count == 0 ? NO : YES;
                                       
       }];
         

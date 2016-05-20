@@ -26,3 +26,5 @@ DerivedData
 #Pods/
 
 myoffer/MyOffer/APIClient+Interface.h
+
+myoffer/MyOffer/FiltContent.h

@@ -14,8 +14,8 @@
 {
     if (self = [super init]) {
         
-        self.subjectID = (NSString *)dict[@"id"];
-        self.subjectName = dict[@"name"];
+        self.areaID = (NSString *)dict[@"id"];
+        self.areaName = dict[@"name"];
         NSMutableArray *itemArray = [NSMutableArray array];
         for (NSDictionary *courseInfo in dict[@"subjects"]) {
             FilterItem *item = [FilterItem FilterItemWithDictionary:courseInfo];
@@ -33,6 +33,11 @@
 }
 
 
- 
+
 
 @end
+
+
+
+ 
+

@@ -114,6 +114,7 @@
     if (section == 0) {
         
         return nil;
+        
     }else{
         
         XWGJMessageSectionView *MSView =[[XWGJMessageSectionView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 50)];
@@ -155,6 +156,7 @@
     if(0 == indexPath.section){
         
         if (indexPath.row == 0 || indexPath.row ==1) {
+            
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }

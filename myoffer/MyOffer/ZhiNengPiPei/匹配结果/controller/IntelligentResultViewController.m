@@ -490,6 +490,8 @@ typedef enum {
 //        return;
 //    }
     
+    
+    
     [self
      startAPIRequestWithSelector:@"POST api/account/apply"
      parameters:@{@"uid": self.NewSelectUniversityIDs}

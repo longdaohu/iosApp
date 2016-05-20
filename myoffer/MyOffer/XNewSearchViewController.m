@@ -19,7 +19,7 @@
 #import "CountryState.h"
 #import "FiltContent.h"
 #import "searchToolView.h"
-#include "OptionItem.h" 
+#include "OptionItem.h"
 #import "RankTypeTableViewCell.h"
 #import "FilterSection.h"
 #import "FilterTableViewCell.h"
@@ -28,6 +28,7 @@
 #import "UniversityCourseViewController.h"
 #import "searchSectionFootView.h"
 #import "UniversityFrameObj.h"
+#import "FilterContentFrame.h"
 
 @interface XNewSearchViewController ()<UITableViewDataSource,UITableViewDelegate,BottomBackgroudViewDelegate,FilterTableViewCellDelegate>
 //判断是否是澳大利亚国家，是否需要带星号
@@ -40,17 +41,6 @@
 @property(nonatomic,copy)NSString *SearchValue;
 //本国或世界排名
 @property(nonatomic,copy)NSString *RankType;
-@property(nonatomic,assign)NSInteger SelectIndex_area;
-@property(nonatomic,assign)NSInteger SelectIndex_city;
-@property(nonatomic,assign)NSInteger SelectIndex_state;
-@property(nonatomic,assign)NSInteger SelectIndex_country;
-@property(nonatomic,assign)NSInteger SelectIndex_subJect;
-//搜索科目、专业、城市、国家、地区参数
-@property(nonatomic,copy)NSString *area;
-@property(nonatomic,copy)NSString *city;
-@property(nonatomic,copy)NSString *state;
-@property(nonatomic,copy)NSString *country;
-@property(nonatomic,copy)NSString *subJect;
 //保存最后一次搜索科目、专业、城市、国家、地区参数
 @property(nonatomic,copy)NSString *Pre_area;
 @property(nonatomic,copy)NSString *Pre_city;
@@ -72,7 +62,7 @@
 //筛选数据数组
 @property(nonatomic,strong)NSMutableArray *FiltItems;
 //筛选科目名称数组
-@property(nonatomic,strong)NSArray *areas;
+@property(nonatomic,strong)NSArray *areaNameArr;
 //筛选国家名称数组
 @property(nonatomic,strong)NSArray *countryNameArr;
 //英国地区数组
@@ -80,7 +70,7 @@
 //澳大利亚地区数组
 @property(nonatomic,strong)NSArray *states_AU;
 //科目专业字典（包含二级科目数据）数组
-@property(nonatomic,strong)NSArray *subjectInfores;
+@property(nonatomic,strong)NSArray *filterAreas;
 //用于判断用户是否放弃筛选，保持原有搜索参数
 @property(nonatomic,copy)NSString *status;
 //国家及国家二三级数据数组
@@ -99,7 +89,8 @@
 @property(nonatomic,strong)BottomBackgroudView *bottomToolView;
 //没有数据提示View
 @property(nonatomic,strong)XWGJnodataView *NoDataView;
-
+//筛选参数
+@property(nonatomic,strong)NSMutableDictionary *filerParameters;
 
 @end
 
@@ -110,7 +101,7 @@
     
     [MobClick beginLogPageView:@"page搜索结果"];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-
+    
 }
 
 
@@ -157,15 +148,21 @@
         
         if([key  isEqualToString: KEY_AREA]) {
             
-            self.area = value;
+            
+            [self.filerParameters  setValue:value forKey:KEY_AREA];
             
         } else if([key  isEqualToString: KEY_COUNTRY]) {
             
             
         } else if([key  isEqualToString: KEY_STATE]) {
             
-            self.state = value;
             
+            [self.filerParameters  setValue:value forKey:KEY_STATE];
+            self.selectRankTypeIndex = 1;
+            
+        }else if([key  isEqualToString: KEY_CITY]) {
+            
+            [self.filerParameters  setValue:value forKey:KEY_CITY];
             self.selectRankTypeIndex = 1;
         }
         
@@ -174,6 +171,14 @@
 }
 
 
+-(NSMutableDictionary *)filerParameters
+{
+    if (!_filerParameters) {
+        
+        _filerParameters =[NSMutableDictionary dictionary];
+    }
+    return   _filerParameters;
+}
 
 -(NSMutableArray *)UniversityList
 {
@@ -194,13 +199,13 @@
 }
 
 
--(NSArray *)subjectInfores{
+-(NSArray *)filterAreas{
     
-    if (!_subjectInfores) {
+    if (!_filterAreas) {
         
         //从本地存储数据中加载科目专业数据
-         NSString *keyWord  = USER_EN ? @"Subject_EN" :@"Subject_CN";
-         NSArray *values = [[NSUserDefaults standardUserDefaults] valueForKey:keyWord];
+        NSString *keyWord  = USER_EN ? @"Subject_EN" :@"Subject_CN";
+        NSArray *values = [[NSUserDefaults standardUserDefaults] valueForKey:keyWord];
         
         NSMutableArray *temps = [NSMutableArray array];
         
@@ -211,19 +216,21 @@
             [temps addObject:filtSection];
         }
         
-        _subjectInfores = [temps copy];
+        _filterAreas = [temps copy];
         
     }
-    return _subjectInfores;
+    return _filterAreas;
 }
 
--(NSArray *)areas
+
+
+-(NSArray *)areaNameArr
 {
-    if (!_areas) {
-                 //从本地存储数据中加载科目名称数据
-        _areas = [self.subjectInfores valueForKeyPath:@"subjectName"];
+    if (!_areaNameArr) {
+        //从本地存储数据中加载科目名称数据
+        _areaNameArr = [self.filterAreas valueForKeyPath:@"areaName"];
     }
-    return _areas;
+    return _areaNameArr;
 }
 
 
@@ -233,89 +240,112 @@
     if (!_FiltItems) {
         //选项数据
         
+        
+        NSMutableArray *temps =[NSMutableArray arrayWithCapacity:5];
+        
         FiltContent  *fileritemCountry =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_Country") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: [self.CountriesArray valueForKey:@"countryName"]];
+        FilterContentFrame *country = [[FilterContentFrame alloc] init];
+        country.content = fileritemCountry;
+        [temps addObject:country];
         
+        NSArray *stateArray = nil;
         if (self.CoreCountry) {
-            //如果用户选择地区进搜索页，则隐藏国家cell
-            fileritemCountry.cellHiden = YES;
+            
+            country.cellState = 2;
+            
+            stateArray = [self makeCurrentStateWithCountry:self.CoreCountry];
         }
         
+        FiltContent  *fileritemState =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_State") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: stateArray];
+        FilterContentFrame *state = [[FilterContentFrame alloc] init];
+        state.content = fileritemState;
+        [temps addObject:state];
         
+        
+        
+        NSArray *currentCityArr = nil;
         if (self.CoreState) {
-        //如果用户选择地区进搜索页，则隐藏国家cell
-             fileritemCountry.cellHiden = YES;
+            
+            state.cellState = 2;
+            
+            CountryState  * currentState =[self makeCurrentCityWithState:self.CoreState country:self.CoreCountry];
+            
+            currentCityArr = currentState.cities;
         }
         
-        NSArray *stateArr = nil;
-        if (self.CoreCountry) {
-              stateArr = [self.CoreCountry isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? [self.states_AU valueForKeyPath:@"stateName"]:[self.states_UK valueForKeyPath:@"stateName"];
-         }
         
-        FiltContent  *fileritemState =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_State") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: stateArr];
-        fileritemState.cellHiden = self.CoreCountry ? NO :YES;
+        FiltContent  *fileritemCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems:currentCityArr];
+        FilterContentFrame *city = [[FilterContentFrame alloc] init];
+        city.content = fileritemCity;
+        [temps addObject:city];
+        if (self.Corecity) {
+            
+            country.cellState = 2;
+            state.cellState = 2;
+            city.cellState = 2;
+            
+        }
         
         
+        FiltContent *fileritemArea =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subjectArea")  andDetailTitle:GDLocalizedString(@"SearchResult_All")anditems: [self.filterAreas valueForKeyPath:@"areaName"]];
+        FilterContentFrame *area = [[FilterContentFrame alloc] init];
+        area.content = fileritemArea;
+        [temps addObject:area];
         
-        FiltContent  *fileritemCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: nil];
-        fileritemCity.cellHiden = YES;
-        
-        
-        FiltContent *fileritemArea =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subjectArea")  andDetailTitle:GDLocalizedString(@"SearchResult_All")anditems: self.areas];
-        
-        NSArray *subjectes = nil;
+        NSArray *subjectArray = nil;
         if (self.CoreArea) {
-            //如果用户选择专业进搜索页面，则隐藏一级科目CEll,出现对应二级科目专业
-            fileritemArea.cellHiden = YES;
-            NSInteger index = [self.areas indexOfObject:self.CoreArea];
-            FilterSection *filtSection = self.subjectInfores[index];
-            subjectes = [filtSection.subjectArray valueForKeyPath:@"courseName"];
+            
+            area.cellState = 2;
+            
+            subjectArray =[self makeCurrentSubjectWithArea:self.CoreArea];
         }
         
-        FiltContent *fileritemSubject =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subject") andDetailTitle:GDLocalizedString(@"SearchResult_All")  anditems:subjectes];
-        fileritemSubject.cellHiden = YES;
-        if (self.CoreArea) {
-            fileritemSubject.cellHiden = NO;
-        }
+        FiltContent *fileritemSubject =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subject") andDetailTitle:GDLocalizedString(@"SearchResult_All")  anditems:subjectArray];
+        FilterContentFrame *subject = [[FilterContentFrame alloc] init];
+        subject.content = fileritemSubject;
+        [temps addObject:subject];
         
         
-        if (!self.CoreState) {
-            NSArray *temps = @[fileritemCountry,fileritemState,fileritemCity,fileritemArea,fileritemSubject];
-            _FiltItems = [temps mutableCopy];
-            
-        }else{
-            
-            //如果用户选择地区进搜索页面，筛选tableView，出现相应地区选项所有城市
-            NSArray *UK = [self.states_UK valueForKeyPath:@"stateName"];
-            NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
-            
-            NSArray *cities;
-            if ([UK containsObject:self.CoreState]) {
-                
-                NSInteger index = [UK indexOfObject:self.state];
-                 CountryState *state = self.states_UK[index];
-                cities = state.cities;
-                
-            }else{
-                
-                NSInteger index = [AU indexOfObject:self.state];
-                CountryState *state = self.states_AU[index];
-                cities = state.cities;
-             }
-            
-            FiltContent  *CoreCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: cities];
-            CoreCity.cellHiden = cities.count == 0 ? YES : NO;
-            
-            NSArray *temps = @[fileritemCountry,fileritemState,CoreCity,fileritemArea,fileritemSubject];
-            
-            _FiltItems = [temps mutableCopy];
-            
-            _coreFiltItems = [temps mutableCopy];
-
-            
-        }
+        _FiltItems = [temps mutableCopy];
         
     }
     return _FiltItems;
+}
+
+
+
+
+//获取当前国家地区数组
+-(NSArray *)makeCurrentStateWithCountry:(NSString *)countryName
+{
+    
+    NSInteger  countryIndex = [self.countryNameArr indexOfObject:countryName];
+    XUCountry *country  =  self.CountriesArray[countryIndex];
+    return [country.states valueForKeyPath:@"stateName"];
+    
+}
+//获取当前国家地区
+-(CountryState *)makeCurrentCityWithState:(NSString *)stateName  country:(NSString *)CountryName;
+{
+    
+    
+    NSInteger  countryIndex = [self.countryNameArr indexOfObject:CountryName];
+    XUCountry *country  =  self.CountriesArray[countryIndex];
+    NSArray *stateNameArr = [country.states valueForKeyPath:@"stateName"];
+    
+    NSInteger  stateIndex =  [stateNameArr indexOfObject: stateName];
+    
+    return country.states[stateIndex];
+}
+
+
+//获取当前科目数组
+-(NSArray *)makeCurrentSubjectWithArea:(NSString *)AreaName
+{
+    NSInteger  areaIndex = [self.areaNameArr indexOfObject:AreaName];
+    FilterSection *area  =  self.filterAreas[areaIndex];
+    
+    return [area.subjectArray valueForKeyPath:@"subjectName"];
 }
 
 
@@ -326,23 +356,24 @@
     [super viewDidLoad];
     
     //判断是否是澳大利亚国家选项
-    if (self.state.length > 0 ) {
+    NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
+    
+    if (para_state.length > 0 ) {
         
-        [self checkIsStar:self.state];
+        [self checkIsStar:para_state];
         
     }
-    if (self.country.length > 0 ) {
+    NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+    if (country.length > 0 ) {
         
-        [self checkIsStar:self.country];
+        [self checkIsStar:country];
         
     }
     
-    [self makeOther];
     
     [self makeUI];
     
     [self makeData:0];
-    
     
 }
 
@@ -395,10 +426,11 @@
     //这个好像不需要，暂时先放着
     NSInteger index_AU =[self.countryNameArr  indexOfObject:GDLocalizedString(@"CategoryVC-AU")];
     
-    if (self.country.length) {
+    NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+    if (country.length) {
         
         //如果self.country 存在，判断是不是澳大利亚
-        if ([self.country isEqualToString:self.countryNameArr[index_AU]]) {
+        if ([country isEqualToString:self.countryNameArr[index_AU]]) {
             
             self.IsStar = YES;
             
@@ -417,11 +449,13 @@
         }
     }
     
-    if (self.state.length) {
+    NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
+    
+    if (para_state.length) {
         
         NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
         
-        if ([AU containsObject:self.state]) {
+        if ([AU containsObject:para_state]) {
             
             self.IsStar = YES;
             
@@ -441,11 +475,14 @@
         }
     }
     
-    if (self.city.length) {
+    
+    NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
+    
+    if (para_city.length) {
         
         for (CountryState *state in self.states_AU) {
             
-            if ([state.cities  containsObject: self.city]) {
+            if ([state.cities  containsObject:para_city]) {
                 
                 self.IsStar = YES;
                 
@@ -496,7 +533,7 @@
             return;
         }
     }
-
+    
     
     if (self.Pre_state.length) {
         
@@ -558,16 +595,6 @@
     
 }
 
--(void)makeOther
-{
-    //初始化
-    self.SelectIndex_country = DefaultNumber;
-    self.SelectIndex_state = DefaultNumber;
-    self.SelectIndex_area = DefaultNumber;
-    self.SelectIndex_subJect = DefaultNumber;
-    self.SelectIndex_city = DefaultNumber;
-    
-}
 
 //用于显示表头搜索结果数量
 -(void)fixHeaderTitleLabelWithCount:(NSString *)countStr
@@ -579,6 +606,8 @@
     [AttributedStr addAttribute:NSForegroundColorAttributeName  value:XCOLOR_RED   range:keyRange];
     self.headerTitleLabel.attributedText =  AttributedStr ;
 }
+
+
 
 //搜索结果tableView
 -(void)makeResultTableView
@@ -597,21 +626,12 @@
     self.ResultTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
     
-}
-
--(XWGJnodataView *)NoDataView
-{
-    if (!_NoDataView) {
-        
-        _NoDataView =[XWGJnodataView noDataView];
-        _NoDataView.hidden = YES;
-        _NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noData");
-        [self.view insertSubview:_NoDataView aboveSubview:self.ToolView];
-    }
+    self.NoDataView =[XWGJnodataView noDataView];
+    self.NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noData");
+    self.NoDataView.hidden = YES;
+    [self.view addSubview:self.NoDataView];
     
-    return _NoDataView;
 }
-
 //排名tableView
 -(void)makeRankTypeTableView
 {
@@ -729,54 +749,54 @@
     
     if ([self.status isEqualToString:StatusYes]) {
         
-         KDClassLog(@"----filtersM----if--------");
+        KDClassLog(@"----filtersM----if--------");
         
         NSMutableArray *filtersM =[NSMutableArray array];
         
         if (self.Pre_area.length) {
             
-            [filtersM addObject:@{@"name": @"area", @"value": self.Pre_area}];
+            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.Pre_area}];
             
         }
         
         if(self.Pre_country.length) {
             
-            [filtersM addObject:@{@"name": @"country", @"value": self.Pre_country}];
+            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.Pre_country}];
         }
         
         
         if(self.Pre_state.length) {
             
-            [filtersM addObject:@{@"name": @"state", @"value": self.Pre_state}];
+            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.Pre_state}];
             
         }
         
         if (self.Pre_city.length) {
             
-            [filtersM addObject:@{@"name": @"city", @"value": self.Pre_city}];
+            [filtersM addObject:@{@"name": KEY_CITY, @"value": self.Pre_city}];
             
         }
         
         
         if (self.Pre_subJect.length) {
             
-            [filtersM addObject:@{@"name": @"subject", @"value": self.Pre_subJect}];
+            [filtersM addObject:@{@"name": KEY_SUBJECT, @"value": self.Pre_subJect}];
         }
         
         
         if(self.CoreCountry) {
             
-            [filtersM addObject:@{@"name": @"country", @"value": self.CoreCountry}];
+            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.CoreCountry}];
         }
         
         if (self.CoreState) {
             
-            [filtersM addObject:@{@"name": @"state", @"value": self.CoreState}];
+            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.CoreState}];
         }
         
         if (self.CoreArea) {
             
-            [filtersM addObject:@{@"name": @"area", @"value": self.CoreArea}];
+            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.CoreArea}];
             
         }
         
@@ -795,61 +815,67 @@
         
         NSMutableArray *filtersM =[NSMutableArray array];
         
-        if (self.area.length) {
+        NSString *parameter_area =[self.filerParameters valueForKey:KEY_AREA];
+        if (parameter_area.length) {
             
-            [filtersM addObject:@{@"name": @"area", @"value": self.area}];
+            [filtersM addObject:@{@"name": KEY_AREA, @"value": parameter_area}];
             
-            self.Pre_area = self.area;
+            self.Pre_area = parameter_area;
         }
         if (self.CoreArea) {
             
-            [filtersM addObject:@{@"name": @"area", @"value": self.CoreArea}];
+            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.CoreArea}];
             self.Pre_area = self.CoreArea;
             
         }
-        
-        if(self.country.length) {
+        NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+        if(country.length) {
             
-            [filtersM addObject:@{@"name": @"country", @"value": self.country}];
-            self.Pre_country = self.country;
+            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": country}];
+            
+            self.Pre_country = country;
         }
         
         if(self.CoreCountry.length) {
             
-            [filtersM addObject:@{@"name": @"country", @"value": self.CoreCountry}];
+            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.CoreCountry}];
             self.Pre_country = self.CoreCountry;
         }
-
+        
         
         if (self.CoreState) {
             
-            [filtersM addObject:@{@"name": @"state", @"value": self.CoreState}];
+            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.CoreState}];
             self.Pre_state = self.CoreState;
         }
         
         
+        NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
         
-        if(self.state.length) {
+        if(para_state.length) {
             
-            [filtersM addObject:@{@"name": @"state", @"value": self.state}];
-            self.Pre_state = self.state;
-            
-        }
-        
-        if (self.city.length) {
-            
-            [filtersM addObject:@{@"name": @"city", @"value": self.city}];
-            self.Pre_city = self.city;
+            [filtersM addObject:@{@"name": KEY_STATE, @"value": para_state}];
+            self.Pre_state = para_state;
             
         }
         
+        NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
         
-        if (self.subJect.length) {
+        if (para_city.length) {
             
-            [filtersM addObject:@{@"name": @"subject", @"value": self.subJect}];
-            self.Pre_subJect = self.subJect;
+            [filtersM addObject:@{@"name": KEY_CITY, @"value": para_city}];
+            self.Pre_city = para_city;
+            
         }
         
+        
+        NSString *parameter_subject = [self.filerParameters valueForKey:KEY_SUBJECT];
+        
+        if (parameter_subject.length) {
+            
+            [filtersM addObject:@{@"name": KEY_SUBJECT, @"value": parameter_subject}];
+            self.Pre_subJect = parameter_subject;
+        }
         
         
         [parameters setValue:filtersM forKey:@"filters"];
@@ -885,56 +911,52 @@
              [self.UniversityList addObject:uniFrame];
              
          }];
-
+         
          
          [self.ResultTableView reloadData];
          
          //每一次重新请求时，回到tableView顶部
          if (page == 0) {
-
-              [self.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-
-          }
- 
+             
+             [self.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+             
+         }
+         
          
          self.NextPage = page + 1; //加载下一页PageNumber
-
+         
          //数据请求为0是显示或隐藏关于控件
          self.NoDataView.hidden = self.UniversityList.count == 0 ? NO : YES;
          
          
          //筛选时先删除optionTabel的数据源，重新添加数据源
-              [self.RankTypeList removeAllObjects];
-             for (NSString *typeName in response[@"rankTypes"]) {
-                 
-                 OptionItem *Option_item = [OptionItem CreateOpitonItemWithRank:typeName];
-                 NSString *QSRank = [GDLocalizedString(@"SearchRank_World") lowercaseString];
-                 if([typeName isEqualToString:QSRank])
-                 {
-                     [self.RankTypeList insertObject:Option_item atIndex:0];
-                     
-                 }else{
-                     [self.RankTypeList addObject:Option_item];
-                     
-                 }
-                 
-                 CGRect newRect = self.RankTypeTableView.frame;
-                 newRect.size.height = self.RankTypeList.count * 44;
-                 self.RankTypeTableView.frame = newRect;
-             }
-
-
+         [self.RankTypeList removeAllObjects];
          
+         
+         for (NSString *typeName in response[@"rankTypes"]) {
+             OptionItem *Option_item = [OptionItem CreateOpitonItemWithRank:typeName];
+             NSString *QSRank = [GDLocalizedString(@"SearchRank_World") lowercaseString];
+             if([typeName isEqualToString:QSRank])
+             {
+                 [self.RankTypeList insertObject:Option_item atIndex:0];
+                 
+             }else{
+                 [self.RankTypeList addObject:Option_item];
+                 
+             }
+             
+             CGRect newRect = self.RankTypeTableView.frame;
+             newRect.size.height = self.RankTypeList.count * 44;
+             self.RankTypeTableView.frame = newRect;
+         }
          
          
          //显示ToolView左侧按钮Title
-         NSInteger index = [self.RankType isEqualToString:RANKTI] ? 1 : 0;
+         int index = [self.RankType isEqualToString:RANKTI] ? 1 : 0;
          OptionItem *rank = self.RankTypeList[index];
          [self.ToolView.leftButton setTitle:rank.RankTypeName forState:UIControlStateNormal];
          //记住是第几个排序
          self.selectRankTypeIndex = index;
-         
-         
          
          //  加载更多是否显示
          if ([response[@"universities"] count] < PageSize) {
@@ -956,11 +978,8 @@
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
          self.status = StatusYes;
-
-         [self.ResultTableView.mj_footer endRefreshing];
          
-         self.NoDataView.hidden = NO;
-         self.NoDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
+         [self.ResultTableView.mj_footer endRefreshing];
          
      }];
     
@@ -1047,17 +1066,8 @@
 {
     if (tableView == self.FilterTableView) {
         
-        FiltContent *fileritem = self.FiltItems[indexPath.row];
-        
-        if (fileritem.cellHiden ) {
-            
-            return 0;
-            
-        }else{
-            
-            return fileritem.contentheigh + 30;
-            
-        }
+        FilterContentFrame *item = self.FiltItems[indexPath.row];
+        return item.cellHeigh;
         
     }else if (tableView == self.RankTypeTableView) {
         
@@ -1148,57 +1158,26 @@
         FilterTableViewCell *Fcell =[[FilterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         Fcell.delegate = self;
         Fcell.indexPath = indexPath;
-        FiltContent *fileritem = self.FiltItems[indexPath.row];
         switch (indexPath.row) {
             case 0:
-            {
-                if (DefaultNumber != self.SelectIndex_country) {
-                    
-                    Fcell.selectButtonTag =  self.SelectIndex_country;
-                }
-            }
+                Fcell.selectItem =[self.filerParameters valueForKey:KEY_COUNTRY];
                 break;
             case 1:
-            {
-                if (DefaultNumber != self.SelectIndex_state) {
-                    
-                    Fcell.selectButtonTag = self.SelectIndex_state;
-                }
-            }
+                Fcell.selectItem =[self.filerParameters valueForKey:KEY_STATE];
                 break;
             case 2:
-            {
-                if (DefaultNumber != self.SelectIndex_city) {
-                    
-                    Fcell.selectButtonTag = self.SelectIndex_city;
-                }
-            }
+                Fcell.selectItem =[self.filerParameters valueForKey:KEY_CITY];
                 break;
             case 3:
-            {
-                
-                if (DefaultNumber != self.SelectIndex_area) {
-                    
-                    Fcell.selectButtonTag = self.SelectIndex_area;
-                }
-            }
+                Fcell.selectItem =[self.filerParameters valueForKey:KEY_AREA];
                 break;
             case 4:
-            {
-                
-                if (DefaultNumber != self.SelectIndex_subJect) {
-                    
-                    Fcell.selectButtonTag = self.SelectIndex_subJect;
-                }
-            }
+                Fcell.selectItem =[self.filerParameters valueForKey:KEY_SUBJECT];
                 break;
-                
             default:
-                
                 break;
         }
-        
-        Fcell.fileritem = fileritem.cellHiden ? nil:fileritem;
+        Fcell.filterFrame = self.FiltItems[indexPath.row];
         
         return Fcell;
         
@@ -1252,8 +1231,7 @@
     
     if (tableView == self.RankTypeTableView) {
         
-        
-        //        UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+        self.ToolView.LeftView.image = [UIImage imageNamed:@"arrow_down"];
         
         if (self.selectRankTypeIndex != indexPath.row) {
             
@@ -1267,13 +1245,11 @@
             lastCell.accessoryMV.image = nil;
             self.selectRankTypeIndex = indexPath.row;
             
-            
-            
             UIButton *leftButton = self.ToolView.subviews[0];
             [leftButton setTitle:Rcell.TitleLab.text  forState:UIControlStateNormal];
             
             OptionItem *option_item = self.RankTypeList[indexPath.row];
-             //记住当前排序方式
+            //记住当前排序方式
             self.RankType = option_item.RankType;
             
             if (self.UniversityList.count == 0) {
@@ -1303,12 +1279,16 @@
         //移除选项列表
         [self FiltbackViewDown:NO];
         
-        if (self.country.length == 0 &&self.state.length == 0 &&self.city.length == 0 &&self.CoreState == 0) {
+        NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+        NSString *state = [self.filerParameters valueForKey:KEY_STATE];
+        NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
+        
+        if (country.length == 0 &&state.length == 0 &&para_city.length == 0 &&self.CoreState == 0) {
             
             //如果国家、地区选项为空时排序方式设置为 RANKQS
             self.RankType = RANKQS;
         }
-  
+        
         
         //清空上一次的数据，重新加载
         [self.UniversityList removeAllObjects];
@@ -1321,12 +1301,11 @@
     }else{
         
         //清空参数选项数据
-        self.country = @"";
-        self.subJect = @"";
-        self.state = @"";
-        self.area = @"";
-        self.city = @"";
-        [self makeOther];
+        [self.filerParameters removeObjectForKey:KEY_COUNTRY];
+        [self.filerParameters removeObjectForKey:KEY_STATE];
+        [self.filerParameters removeObjectForKey:KEY_CITY];
+        [self.filerParameters removeObjectForKey:KEY_AREA];
+        [self.filerParameters removeObjectForKey:KEY_SUBJECT];
         [self.FiltItems removeAllObjects];
         self.FiltItems = [self.coreFiltItems mutableCopy];
         [self.FilterTableView reloadData];
@@ -1345,58 +1324,69 @@
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
     
-    KDClassLog(@"---FilterTableViewCellDelegate-------%d--%d--",sender.tag,indexPath.row);
+    
+    FilterContentFrame  *filterFrame = self.FiltItems[indexPath.row];
+    
+    if (sender.tag == 999) {
+        
+        if (filterFrame.cellState == 1) {
+            filterFrame.cellState = 0;
+        }else if(filterFrame.cellState == 0){
+            filterFrame.cellState = 1;
+        }else{
+            
+        }
+        
+        [self.FilterTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        return ;
+        
+    }
+    
+    
+    
     
     switch (indexPath.row) {
         case 0:
         {
+            NSString *para_country = [self.filerParameters valueForKey:KEY_COUNTRY];
+            BOOL Equal = [para_country isEqualToString:sender.currentTitle];
             
-            BOOL Equal = [self.country isEqualToString:sender.currentTitle];
+            [self.filerParameters removeObjectForKey:KEY_STATE];
+            [self.filerParameters removeObjectForKey:KEY_CITY];
             
-            
-            if (!Equal) {
+            if (Equal) {
                 
-                self.country = sender.currentTitle;
+                [self.filerParameters removeObjectForKey:KEY_COUNTRY];
                 
-                XUCountry *Country =   self.CountriesArray[sender.tag];
-                NSArray *states = [Country.states valueForKeyPath:@"stateName"];
-                FiltContent *fileriteState =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_State")  andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems:states];
-                //给对应国家的地区选项添加数据
-                [self FilterTableViewReloadWithIndex:indexPath.row + 1 andfiltItem:fileriteState];
+                FilterContentFrame  *stateFilterFrame = self.FiltItems[indexPath.row + 1];
+                stateFilterFrame.cellState =  2;
                 
                 
-                self.state = @""; //当点击国家选项时，地区选项工清空
-                self.city = @""; //当点击国家选项时，地区选项工清空
+            }else{
                 
-                self.SelectIndex_country = sender.tag;
-                
-                self.SelectIndex_state = DefaultNumber;
-                
-                FiltContent *Fcity = self.FiltItems[2];
-                
-                Fcity.cellHiden = YES;
+                [self.filerParameters  setValue:sender.currentTitle forKey:KEY_COUNTRY];
                 
                 
-                [self.FilterTableView reloadData];
+                NSArray *states = [self makeCurrentStateWithCountry:sender.currentTitle];
                 
-            }else {
+                FilterContentFrame  *stateFilterFrame = self.FiltItems[indexPath.row + 1];
+                stateFilterFrame.items =  states;
+                stateFilterFrame.cellState =  0;
                 
-                self.country = @"";
-                self.SelectIndex_country = DefaultNumber;
-                
-                self.state = @"";
-                self.SelectIndex_state = DefaultNumber;
-                FiltContent *fileriteState = self.FiltItems[1];
-                fileriteState.cellHiden = YES;
-                
-                
-                self.city = @"";
-                self.SelectIndex_city = DefaultNumber;
-                FiltContent *fileriteCity = self.FiltItems[2];
-                fileriteCity.cellHiden = YES;
-                [self.FilterTableView reloadData];
+                FiltContent *stateFiltItem = stateFilterFrame.content;
+                stateFiltItem.buttonArray = states;
                 
             }
+            
+            
+            NSIndexPath *stateIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
+            
+            
+            FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 2];
+            cityFilterFrame.cellState =  2;
+            NSIndexPath *cityIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section];
+            [self.FilterTableView reloadRowsAtIndexPaths:@[cityIndexPath,stateIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             
         }
@@ -1405,60 +1395,54 @@
         case 1:
         {
             
+            NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
+            BOOL Equal = [para_state isEqualToString:sender.currentTitle];
             
-            BOOL Equal = [self.state isEqualToString:sender.currentTitle];
+            [self.filerParameters removeObjectForKey:KEY_CITY];
             
-            if (!Equal) {
+            if (Equal) {
                 
-                self.state = sender.currentTitle;
-                self.SelectIndex_state = sender.tag;
-                self.SelectIndex_city = DefaultNumber;
-                self.city = @"";
+                [self.filerParameters removeObjectForKey:KEY_STATE];
                 
-                NSArray *UK = [self.states_UK valueForKeyPath:@"stateName"];
-                NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
+                FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 1];
+                cityFilterFrame.cellState =  2;
                 
-                if ([AU containsObject:self.state]) {
-                    
-                    NSInteger index = [AU indexOfObject:self.state];
-                    CountryState *state = self.states_AU[index];
-                    FiltContent  *fileritemCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: state.cities];
-                    fileritemCity.cellHiden = state.cities.count == 0 ? YES : NO;
-                    [self FilterTableViewReloadWithIndex:2 andfiltItem:fileritemCity];
-                    
-                    
-                }else if([UK containsObject:self.state]){
-                    
-                    NSInteger index = [UK indexOfObject:self.state];
-                    CountryState *state = self.states_UK[index];
-                    FiltContent  *fileritemCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: state.cities];
-                    fileritemCity.cellHiden = state.cities.count == 0 ? YES : NO;
-                    [self FilterTableViewReloadWithIndex:2 andfiltItem:fileritemCity];
-                    
-                }
+                
                 
             }else{
                 
-                self.state = @"";
-                self.SelectIndex_state = DefaultNumber;
+                [self.filerParameters  setValue:sender.currentTitle forKey:KEY_STATE];
                 
-                self.city = @"";
-                self.SelectIndex_city = DefaultNumber;
-                FiltContent  *fileritemCity = self.FiltItems[2];
-                fileritemCity.cellHiden = YES;
-                [self.FilterTableView reloadData];
+                NSString *countryName = self.CoreCountry ? self.CoreCountry :[self.filerParameters valueForKey:KEY_COUNTRY];
+                
+                CountryState *state =[self makeCurrentCityWithState:sender.currentTitle country:countryName];
+                
+                FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 1];
+                cityFilterFrame.items =  state.cities;
+                cityFilterFrame.cellState =  0;
+                
+                FiltContent *cityFiltItem = cityFilterFrame.content;
+                cityFiltItem.buttonArray = state.cities;
+                
             }
             
+            NSIndexPath *cityIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
+            [self.FilterTableView reloadRowsAtIndexPaths:@[cityIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
             break;
             
         case 2:
         {
             
-            self.city =  [self.city isEqualToString:sender.currentTitle] ? @"" : sender.currentTitle;
+            NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
+            BOOL Equal = [para_city isEqualToString:sender.currentTitle];
             
-            //是否记住已选择项
-            self.SelectIndex_city = self.city.length > 0 ? sender.tag : DefaultNumber;
+            if (Equal) {
+                
+                [self.filerParameters removeObjectForKey:KEY_CITY];
+            }else{
+                [self.filerParameters  setValue:sender.currentTitle forKey:KEY_CITY];
+            }
             
         }
             break;
@@ -1466,41 +1450,36 @@
         case 3:
         {
             
-            BOOL Equal =  [self.area isEqualToString:sender.currentTitle];
+            NSString *para_area = [self.filerParameters valueForKey:KEY_AREA];
+            BOOL Equal = [para_area isEqualToString:sender.currentTitle];
             
+            [self.filerParameters removeObjectForKey:KEY_SUBJECT];
             
-            if (!Equal) {
+            if (Equal) {
                 
-                self.area =   sender.currentTitle;
-                
-                FilterSection *filtSection = self.subjectInfores[sender.tag];
-                
-                NSArray *Subjectes = [filtSection.subjectArray valueForKeyPath:@"courseName"];
-                FiltContent *fileritemSubject =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subject") andDetailTitle:GDLocalizedString(@"SearchResult_All")  anditems:Subjectes];
-                
-                [self FilterTableViewReloadWithIndex:indexPath.row + 1 andfiltItem:fileritemSubject];
-                
-                self.subJect = @""; //当点击科目选项时，专业选项清空
-                
-                self.SelectIndex_area = sender.tag;
-                
-                self.SelectIndex_subJect = DefaultNumber;
-                
-            }else {
-                
-                self.area = @"";
-                self.SelectIndex_area = DefaultNumber;
+                [self.filerParameters removeObjectForKey:KEY_AREA];
+                FilterContentFrame  *subjectFilterFrame = self.FiltItems[indexPath.row + 1];
+                subjectFilterFrame.cellState =  2;
                 
                 
-                self.subJect = @"";
-                self.SelectIndex_subJect = DefaultNumber;
-                FiltContent *fileritemSubject = self.FiltItems[4];
-                fileritemSubject.cellHiden = YES;
-                [self.FilterTableView reloadData];
+            }else{
                 
+                [self.filerParameters  setValue:sender.currentTitle forKey:KEY_AREA];
+                
+                
+                NSArray *subjectes = [self makeCurrentSubjectWithArea:sender.currentTitle];
+                
+                FilterContentFrame  *subjectFilterFrame = self.FiltItems[indexPath.row + 1];
+                subjectFilterFrame.items =  subjectes;
+                subjectFilterFrame.cellState =  0;
+                
+                FiltContent *subjectFiltItem = subjectFilterFrame.content;
+                subjectFiltItem.buttonArray = subjectes;
                 
             }
             
+            NSIndexPath *subjectIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
+            [self.FilterTableView reloadRowsAtIndexPaths:@[subjectIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             
         }
@@ -1508,9 +1487,19 @@
             
         case 4:{
             
-            self.subJect =  [self.subJect isEqualToString:sender.currentTitle] ? @"" : sender.currentTitle;
-            //是否记住已选择项
-            self.SelectIndex_subJect = self.subJect.length > 0 ? sender.tag : DefaultNumber;
+            
+            NSString *parameter_subject = [self.filerParameters valueForKey:KEY_SUBJECT];
+            BOOL Equal = [parameter_subject isEqualToString:sender.currentTitle];
+            
+            if (Equal) {
+                
+                [self.filerParameters removeObjectForKey:KEY_SUBJECT];
+                
+            }else{
+                
+                [self.filerParameters  setValue:sender.currentTitle forKey:KEY_SUBJECT];
+                
+            }
             
         }
             break;
@@ -1519,14 +1508,11 @@
     }
     
 }
-
 //移除黑色Cover
 -(void)coverButtonClickRemoveOptionView:(UIButton *)sender
 {
     
     [self rankTypeViewDown:NO];
-     self.ToolView.leftButton.selected = NO;
-
     
 }
 
@@ -1537,8 +1523,8 @@
     
     if (down) {
         //当学校数组数量为0时，不显示排列选择表单
-         self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
-         self.cover.alpha = 0.5;
+        self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
+        self.cover.alpha = 0.5;
         [UIView animateWithDuration:0.25 animations:^{
             
             CGRect newRect = self.RankTypeTableView.frame;

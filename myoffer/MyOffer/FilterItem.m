@@ -12,17 +12,18 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict
 {
     if (self = [super init]) {
-         self.courseName = dict[@"name"];
-        self.courseID = (NSString *)dict[@"id"];
+        self.subjectName = dict[@"name"];
+        self.subjectID = (NSString *)dict[@"id"];
         
     }
     return self;
 }
+
+
 + (instancetype)FilterItemWithDictionary:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
-
 }
 
- 
+
 @end

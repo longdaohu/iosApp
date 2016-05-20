@@ -6,12 +6,13 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 
 @interface FilterSection : NSObject
 @property(nonatomic,strong)NSArray *subjectArray;
-@property(nonatomic,copy)NSString *subjectID;
-@property(nonatomic,copy)NSString *subjectName;
+@property(nonatomic,copy)NSString *areaID;
+@property(nonatomic,copy)NSString *areaName;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 + (instancetype)FilterSectionWithDictionary:(NSDictionary *)dict;

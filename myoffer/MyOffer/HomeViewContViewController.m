@@ -27,6 +27,8 @@
 #import "XXiaobaiViewController.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
+#import "XNewSearchViewController.h"
+
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeHeaderViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -579,9 +581,11 @@
     if (0 == indexPath.section) {
         
         NSDictionary *info = self.hotCity_Arr[indexPath.row];
-        
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithSearchText:info[@"search"] orderBy:RANKTI];
-        
+        NSString *searchValue = info[@"search"];
+        XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
+                                                                                  value:searchValue
+                                                                                orderBy:RANKTI];
+        vc.Corecity = searchValue;
         [self.navigationController pushViewController:vc animated:YES];
     }
     

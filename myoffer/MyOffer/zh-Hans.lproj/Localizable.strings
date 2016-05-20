@@ -25,8 +25,8 @@
 "Category-button004" = "大学排名";
 "Category-AU" = "AU.jpg";
 "Category-UK" = "UK.jpg";
-
-//首页
+"University-hot" = "hot_cn";
+  //首页
 "Discover_search" = "你想去哪里读书？想读什么？";
 "DiscoverTitle" = "发现院校";
 "Discover_more" = "更多";
@@ -73,6 +73,7 @@
 "Evaluate-PieSecure_baoDi" = "申请成功率较高的学校，建议至少选择1-2所。";
 "Evaluate-match" = "所匹配院校";
 "Evaluate-noData" = "抱歉，没有符合条件的院校！";
+"Evaluate-noDataSubject" = "抱歉，没有符合条件的专业！";
 "Evaluate-dangwei" = "所";
 "Evaluate-pipei" = "点击立刻匹配";
 
@@ -233,8 +234,8 @@
 "CategoryNew-region" = "地区";
 "CategoryNew-major" = "专业";
 "CategoryNew-rank" = "排名";
-"CategoryNew-hotUK" = "英国热门留学城市";
-"CategoryNew-hotAU" = "澳大利亚热门留学城市";
+"CategoryNew-hotUK" = "英国热门城市";
+"CategoryNew-hotAU" = "澳洲热门城市";
 "CategoryNew-oneStar" = "1星院校";
 "CategoryNew-twoStar" = "2星院校";
 "CategoryNew-threeStar" = "3星院校";

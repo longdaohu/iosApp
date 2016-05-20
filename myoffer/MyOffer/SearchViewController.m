@@ -10,9 +10,12 @@
 #import "SearchResultViewController.h"
 #import "FiltContent.h"
 #import "SearchViewCell.h"
+#import "FilterContentFrame.h"
+#import "FilterTableViewCell.h"
+#import "FilterContentFrame.h"
 
-@interface SearchViewController ()  {
- }
+@interface SearchViewController ()<FilterTableViewCellDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *searchLabel;
 @property (strong, nonatomic) IBOutlet UIView *HotSearchView;
 @property(nonatomic,strong)NSMutableArray *FiltItems;
@@ -47,9 +50,10 @@
     
 }
 
- 
 
- -(void)makeUI
+
+
+-(void)makeUI
 {
     if (self.searchTextPlaceholder) {
         _searchBar.text = self.searchTextPlaceholder;
@@ -65,48 +69,54 @@
     
     //用于修改searchBar子控件【取消】按钮名称
     for (UIView *view in [[_searchBar.subviews lastObject] subviews]) {
-         if ([view isKindOfClass:[UIButton class]]) {
+        if ([view isKindOfClass:[UIButton class]]) {
             UIButton *cancelBtn = (UIButton *)view;
             [cancelBtn setTitle:GDLocalizedString(@"Potocol-Cancel") forState:UIControlStateNormal];
             [cancelBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
         }
     }
- }
+}
 
 
 -(NSMutableArray *)FiltItems
 {
     if (!_FiltItems) {
-         _FiltItems = [NSMutableArray array];
-     }
+        _FiltItems = [NSMutableArray array];
+    }
     return _FiltItems;
 }
 
 
 -(void)getCurrentSearchDaraSourse
 {
-      //请求推荐数据
-      [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
-
-          if (self.hotArray.count ==0) {
+    //请求推荐数据
+    [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        if (self.hotArray.count ==0) {
+            
             self.hotArray = [response copy];
-            FiltContent  *fileritem002 =[FiltContent createItemWithTitle:GDLocalizedString(@ "SearchVC-hot") andDetailTitle:@"search_historyHot" anditems: self.hotArray];
-            [self.FiltItems addObject:fileritem002];
+            
+            FiltContent  *fileritem002 = [FiltContent filterItemWithLogoName:@"search_historyHot"  titleName:GDLocalizedString(@ "SearchVC-hot") detailTitleName:@"" anditems:self.hotArray];
+            FilterContentFrame *recommand = [[FilterContentFrame alloc] init];
+            recommand.content = fileritem002;
+            
+            [self.FiltItems addObject:recommand];
+            
             [self.FilterTableView reloadData];
         }
         
     }];
     
     
-    if (![[AppDelegate sharedDelegate] isLogin])
+    if (!LOGIN)
     {
         return;
     }
-
-     //请求历史数据
+    
+    //请求历史数据
     [self startAPIRequestWithSelector:kAPISelectorhistorySearch parameters:nil success:^(NSInteger statusCode, id response) {
         
-
+        
         NSMutableArray *historyes = [NSMutableArray array];
         for (NSDictionary *historyInfo in response) {
             
@@ -117,17 +127,20 @@
             
             self.historyArray = [historyes copy];
             
-            FiltContent  *fileritem001 =[FiltContent createItemWithTitle:GDLocalizedString(@ "SearchVC-history")  andDetailTitle:@"search_history" anditems: self.historyArray];
+            FiltContent  *fileritem001 = [FiltContent filterItemWithLogoName:@"search_history"   titleName:GDLocalizedString(@ "SearchVC-history") detailTitleName:@""  anditems: self.historyArray];
             
-//            [self.FiltItems insertObject:fileritem001 atIndex:0];
-            [self.FiltItems addObject:fileritem001];
-
+            
+            FilterContentFrame *histroy = [[FilterContentFrame alloc] init];
+            histroy.content = fileritem001;
+            
+            [self.FiltItems addObject:histroy];
+            
             [self.FilterTableView reloadData];
             
         }
         
     }];
-  
+    
 }
 
 
@@ -136,7 +149,6 @@
     [super viewDidLoad];
     [self makeUI];
     [self getCurrentSearchDaraSourse];
-
     
 }
 
@@ -149,7 +161,7 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-  
+    
     [searchBar resignFirstResponder];
     
     if (searchBar.text.length > 0) {
@@ -162,7 +174,7 @@
     
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:text orderBy:RANKQS];
     
-    [self.navigationController pushViewController:vc animated:YES];    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -171,54 +183,57 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-       FiltContent *fileritem = self.FiltItems[indexPath.row];
+    FilterContentFrame *fileritem = self.FiltItems[indexPath.row];
     
-        return fileritem.contentheigh + 45;
- 
-   
+    return fileritem.cellHeigh;
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-         return   self.FiltItems.count;
+    return   self.FiltItems.count;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-    XJHUtilDefineWeakSelfRef;
-    SearchViewCell *cell =[[SearchViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-  
-    cell.actionBlock = ^(UIButton *sender){
-     
-       XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANKQS];
-        
-       [weakSelf.navigationController pushViewController:vc animated:YES];
-
-   };
     
-        cell.fileritem = self.FiltItems[indexPath.row];;
-  
+    
+    FilterTableViewCell *cell =[FilterTableViewCell cellInitWithTableView:tableView];
+    cell.upButton.hidden = YES;
+    cell.delegate = self;
+    cell.indexPath = indexPath;
+    cell.filterFrame = self.FiltItems[indexPath.row];
+    
     return cell;
+}
+
+#pragma mark —————————— FilterTableViewCellDelegate
+-(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
+{
+    
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANKQS];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 
 #pragma mark ———— UIScrollViewDelegate
 -(void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-     [_searchBar resignFirstResponder];
-     //用于修改searchBar 失焦时，取消辽钮仍然可用
+    [_searchBar resignFirstResponder];
+    //用于修改searchBar 失焦时，取消辽钮仍然可用
     for (UIView *view in [[_searchBar.subviews lastObject] subviews]) {
         if ([view isKindOfClass:[UIButton class]]) {
-         
+            
             UIButton *cancelBtn = (UIButton *)view;
-           
+            
             cancelBtn.enabled = YES;
         }
     }
-
-}
     
- 
+}
+
+
 
 @end
 

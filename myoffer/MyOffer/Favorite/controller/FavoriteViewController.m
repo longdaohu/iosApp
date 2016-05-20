@@ -61,6 +61,7 @@
     self.FavoriteTableView.dataSource = self;
     self.FavoriteTableView.delegate = self;
     [self.view  addSubview:self.FavoriteTableView];
+    self.FavoriteTableView.backgroundColor = BACKGROUDCOLOR;
     self.FavoriteTableView.tableFooterView = [[UIView alloc] init];
     
 }
@@ -80,6 +81,8 @@
     [self.view insertSubview:self.noDataView aboveSubview:self.FavoriteTableView];
     
 }
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];

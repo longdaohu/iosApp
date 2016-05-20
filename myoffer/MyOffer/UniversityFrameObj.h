@@ -19,6 +19,7 @@
 @property(nonatomic,assign)CGRect  SubTitleFrame;
 //地理位置
 @property(nonatomic,assign)CGRect  LocalFrame;
+//地理位置图标
 @property(nonatomic,assign)CGRect  LocalMVFrame;
 //排名
 @property(nonatomic,assign)CGRect  RankFrame;
@@ -26,6 +27,7 @@
 @property(nonatomic,assign)CGRect  starBgFrame;
 //推荐图标
 @property(nonatomic,assign)CGRect  RecomandFrame;
+//**图标数组
 @property(nonatomic,strong)NSArray *starFrames;
 
 

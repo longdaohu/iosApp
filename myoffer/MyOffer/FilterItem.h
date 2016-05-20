@@ -6,12 +6,13 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 
 @interface FilterItem : NSObject
-@property(nonatomic,copy)NSString *courseName;
-@property(nonatomic,copy)NSString *courseID;
 
+@property(nonatomic,copy)NSString *subjectName;
+@property(nonatomic,copy)NSString *subjectID;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 + (instancetype)FilterItemWithDictionary:(NSDictionary *)dict;
 @end

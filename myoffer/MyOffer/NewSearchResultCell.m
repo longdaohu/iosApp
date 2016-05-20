@@ -16,6 +16,7 @@
 @interface NewSearchResultCell()
   //LOGO图片
 @property(nonatomic,strong)LogoView *LogoMView;
+@property(nonatomic,strong)UIImageView *hotView;
  //学校名称
 @property(nonatomic,strong)UILabel *titleLabel;
 //主要显示英文学校名称
@@ -23,7 +24,7 @@
  //地理位置
 @property(nonatomic,strong)UILabel *rankLabel;
 //地理图标
-@property(nonatomic,strong)UIView *LocalMV;
+@property(nonatomic,strong)UIImageView *LocalMV;
 //地理位置
 @property(nonatomic,strong)UITextField *LocalTF;
  //用于显示 星号图标
@@ -57,8 +58,9 @@
         
         self.LogoMView =[[LogoView alloc] init];
         [self addSubview:self.LogoMView];
+        
   
-         self.titleLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYTITLEFONT) andTextColor:XCOLOR_BLACK];
+        self.titleLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYTITLEFONT) andTextColor:XCOLOR_BLACK];
         self.titleLabel.hidden = USER_EN ? YES : NO;
         
         CGFloat  subFontSize  = USER_EN ? KDUtilSize(UNIVERISITYTITLEFONT) : KDUtilSize(UNIVERISITYSUBTITLEFONT);
@@ -68,13 +70,12 @@
         self.subTitleLabel.clipsToBounds = YES;
  
         
-        self.LocalMV =[[UIView alloc] init];
-        UIImageView *left =[[UIImageView alloc] init];
-        left.image = [UIImage imageNamed:@"anchor"];
-        left.contentMode = UIViewContentModeScaleAspectFit;
-        [self.LocalMV addSubview:left];
+        self.LocalMV  =[[UIImageView alloc] init];
+        self.LocalMV.image = [UIImage imageNamed:@"anchor"];
+        self.LocalMV.contentMode = UIViewContentModeScaleAspectFit;
         
         self.LocalTF = [[UITextField alloc] init];
+        self.LocalTF.contentVerticalAlignment =UIControlContentVerticalAlignmentBottom;
         self.LocalTF.textColor = XCOLOR_DARKGRAY;
         self.LocalTF.font = FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT));
         self.LocalTF.leftViewMode = UITextFieldViewModeAlways;
@@ -83,7 +84,6 @@
         [self addSubview:self.LocalTF];
         
         self.rankLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYLOCALFONT)  andTextColor:XCOLOR_DARKGRAY];
-
         
         self.starBackground =[[UIView alloc] init];
         [self addSubview:self.starBackground];
@@ -91,13 +91,18 @@
         for (NSInteger i = 0; i<5; i++) {
             UIImageView *mv =[[UIImageView alloc] init];
             mv.image = [UIImage imageNamed:@"star"];
-            mv.contentMode = UIViewContentModeScaleAspectFit;
+            mv.contentMode = UIViewContentModeScaleAspectFill;
             [self.starBackground addSubview:mv];
         }
         
         
         self.optionOrderBy =  RANKTI ;
         self.contentView.backgroundColor  = [UIColor whiteColor];
+        
+        
+        self.hotView =[[UIImageView alloc] init];
+        self.hotView.contentMode =UIViewContentModeScaleAspectFit;
+        [self addSubview:self.hotView];
     }
     
     return self;
@@ -133,11 +138,16 @@
     self.LocalTF.text = uni_Frame.uniObj.LocalPlaceName;
     
     self.rankLabel.frame = uni_Frame.RankFrame;
-     self.starBackground.hidden = !self.isStart;
+    self.starBackground.hidden = !self.isStart;
+    
+    self.hotView.image = uni_Frame.uniObj.isHot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
     
     if (self.isStart) {
         
         self.starBackground.frame = uni_Frame.starBgFrame;
+        CGPoint center = self.starBackground.center;
+        center.y = self.rankLabel.center.y;
+        self.starBackground.center = center;
         self.rankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         NSInteger  StarCount  = uniObj.RANKTIName.integerValue;
         for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
@@ -182,14 +192,22 @@
 {
     [super layoutSubviews];
     
-    if (self.LocalTF.text) {
-        CGFloat Leftx = 0;
-        CGFloat Lefty = 0;
-        CGFloat Lefth = CGRectGetHeight(self.rankLabel.frame);
-        CGFloat Leftw = Lefth;
-        UIImageView *item = (UIImageView *)self.LocalMV.subviews.firstObject;
-        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
-    }
+//    if (self.LocalTF.text) {
+//        
+//        CGFloat Leftx = 0;
+//        CGFloat Lefty = 0;
+//        CGFloat Lefth = CGRectGetHeight(self.rankLabel.frame);
+//        CGFloat Leftw = Lefth;
+//        UIImageView *item = (UIImageView *)self.LocalMV.subviews.firstObject;
+//        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
+//    }
+//    
+    
+    CGFloat hotX = XScreenWidth - 50;
+    CGFloat hotY = 0;
+    CGFloat hotW = 50;
+    CGFloat hotH = 50;
+    self.hotView.frame = CGRectMake(hotX, hotY, hotW, hotH);
     
 }
 

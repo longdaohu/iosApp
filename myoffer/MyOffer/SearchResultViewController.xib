@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchResultViewController">
             <connections>
-                <outlet property="_filterView" destination="J6e-UJ-Xkl" id="uUZ-O6-8oC"/>
-                <outlet property="_filterViewHeight" destination="5db-kl-z8H" id="R5q-z8-EUe"/>
                 <outlet property="_noResultView" destination="1mO-GA-Gbh" id="6bK-be-V4R"/>
                 <outlet property="_tableView" destination="qGS-hw-8Jm" id="4fm-qx-b1w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -19,21 +17,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6e-UJ-Xkl" customClass="FilterView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="5db-kl-z8H"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="xGS-B3-CFr"/>
-                    </connections>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mO-GA-Gbh">
                     <rect key="frame" x="40" y="219" width="240" height="180"/>
                     <subviews>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="search-no-result" translatesAutoresizingMaskIntoConstraints="NO" id="wg4-xv-Aae">
-                            <rect key="frame" x="52" y="0.0" width="136" height="136"/>
+                            <rect key="frame" x="110" y="0.0" width="20" height="20"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抱歉，没有找到符合条件的学校" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6K-wy-YRD">
                             <rect key="frame" x="0.0" y="162" width="240" height="18"/>
@@ -53,9 +41,9 @@
                         <constraint firstAttribute="trailing" secondItem="j6K-wy-YRD" secondAttribute="trailing" id="vud-GQ-MNs"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qGS-hw-8Jm">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="qGS-hw-8Jm">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="mo4-ze-UaG"/>
                         <outlet property="delegate" destination="-1" id="Jdh-Xa-DZX"/>
@@ -64,20 +52,17 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="J6e-UJ-Xkl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8iZ-Q4-eGy"/>
-                <constraint firstItem="J6e-UJ-Xkl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Gbo-lC-rqe"/>
-                <constraint firstItem="qGS-hw-8Jm" firstAttribute="top" secondItem="J6e-UJ-Xkl" secondAttribute="bottom" constant="-40" id="Gkg-Q7-yr9"/>
-                <constraint firstAttribute="trailing" secondItem="J6e-UJ-Xkl" secondAttribute="trailing" id="KhM-tz-AH1"/>
                 <constraint firstAttribute="bottom" secondItem="qGS-hw-8Jm" secondAttribute="bottom" id="Lpd-zA-6bp"/>
                 <constraint firstItem="qGS-hw-8Jm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="P15-Ow-pVK"/>
                 <constraint firstAttribute="trailing" secondItem="qGS-hw-8Jm" secondAttribute="trailing" id="UcL-ZT-ysk"/>
                 <constraint firstItem="1mO-GA-Gbh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XTr-DW-gM4"/>
                 <constraint firstItem="1mO-GA-Gbh" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="25" id="agX-rh-5bt"/>
+                <constraint firstItem="qGS-hw-8Jm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cVU-rh-E5Y"/>
             </constraints>
             <point key="canvasLocation" x="520" y="334"/>
         </view>
     </objects>
     <resources>
-        <image name="search-no-result" width="136" height="136"/>
+        <image name="search-no-result" width="20" height="20"/>
     </resources>
 </document>

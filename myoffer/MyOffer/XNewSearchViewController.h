@@ -13,6 +13,8 @@
 @property(nonatomic,copy)NSString *CoreCountry;
 //原始地区参数
 @property(nonatomic,copy)NSString *CoreState;
+//原始城市参数
+@property(nonatomic,copy)NSString *Corecity;
 //原始科目参数
 @property(nonatomic,copy)NSString *CoreArea;
 - (instancetype)initWithSearchText:(NSString *)text orderBy:(NSString *)orderBy;

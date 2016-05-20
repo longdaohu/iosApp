@@ -11,12 +11,12 @@
 
 @interface SearchResultViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *_tableView;
-    IBOutlet FilterView *_filterView;
     
-    IBOutlet NSLayoutConstraint *_filterViewHeight;
     
     IBOutlet UIView *_noResultView;
+
 }
+@property(nonatomic,assign)BOOL xby;
 
 - (instancetype)initWithFilter:(NSString *)key value:(NSString *)value orderBy:(NSString *)orderBy;
 - (instancetype)initWithSearchText:(NSString *)text key:(NSString *)key orderBy:(NSString *)orderBy;

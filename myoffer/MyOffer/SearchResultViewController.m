@@ -22,8 +22,7 @@
     
     NSInteger _allResultCount;
     UIView *_loadMoreIndicatorView;
-    UIView *_loadingBackView; //在加载数据时的遮罩
-     BOOL _shouldShowLoadMoreIndicator;
+    BOOL _shouldShowLoadMoreIndicator;
     int _nextPage;
     BOOL _loading;
     BOOL _Autralia;
@@ -81,6 +80,8 @@
 - (instancetype)initWithFilter:(NSString *)key value:(NSString *)value orderBy:(NSString *)orderBy {
     self = [self init];
     if (self) {
+       
+
         _text = @"";
         _fieldKey = @"text";
         _orderBy = orderBy;
@@ -88,7 +89,6 @@
             _subject = value;
         } else if([key  isEqual: @"country"]) {
             _country = value;
-            _descending = [value containsString:GDLocalizedString(@"CategoryVC-AU")]? YES : NO;
         } else if([key  isEqual: @"state"]) {
             _state = value;
         }else if([key  isEqual: @"city"]) {
@@ -118,9 +118,22 @@
     return _noDataView;
 }
 
+-(void)checkCity
+{
+    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
+    
+    
+    NSLog(@"%@", counries);
+
+    
+}
+
+
 - (void)viewDidLoad {
   
     [super viewDidLoad];
+    
+    [self checkCity];
     
     {
         
@@ -157,17 +170,13 @@
     
     _availableOrderKey = @[@"ranking_ti", @"name"];
     
-    if (_orderBy) {
-        _filterViewHeight.constant = 0;
-    } else {
-        _filterView.items =@[GDLocalizedString(@"SearchResultVC-001"),GDLocalizedString(@"SearchResultVC-002")];  //@[@"TIMES排名", @"按字母排序"];
-    }
-     NSUInteger orderIndex = [_availableOrderKey indexOfObject:_orderBy];
-    if (orderIndex != NSNotFound) {
-        _filterView.selectedIndex = orderIndex;
-    }
+ 
     
     [self reloadDataWithPageIndex:0 refresh:false];
+    
+    _tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
+
+
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -180,28 +189,13 @@
     }
 }
 
-- (void)filterView:(FilterView *)filterView didSelectItemAtIndex:(NSInteger)index descending:(BOOL)descending {
-
-    _orderBy = _availableOrderKey[index];
-    _descending = descending;
-    
-    //在加载时，给filterView工具栏添加上一层遮罩，在加载结束时移除
-    _loadingBackView  =[[UIView alloc] initWithFrame:filterView.bounds];
-    _loadingBackView.backgroundColor =[UIColor clearColor];
-    KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-    [hud hideAnimated:YES afterDelay:1];
-    self.progressHub = hud;
  
-    [self.view addSubview:_loadingBackView];
-    
-    [self reloadDataWithPageIndex:0 refresh:true];
-    
-}
 
 - (void)reloadDataWithPageIndex:(int)page refresh:(BOOL)refresh {
     
     _loading = YES;
  
+    _descending = self.xby;
 
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{_fieldKey: _text ?: [NSNull null],
                                  @"page": @(page),
@@ -256,9 +250,7 @@
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
         
-         //在加载结束时移除 _loadingBackView
-         [_loadingBackView removeFromSuperview];
-         _loadingBackView = nil;
+  
           [self.progressHub removeFromSuperViewOnHide];
          
          [_tableView reloadData];
@@ -276,6 +268,7 @@
     _shouldShowLoadMoreIndicator = shouldShowLoadMoreIndicator;
      
     if (shouldShowLoadMoreIndicator) {
+        
         [_tableView setTableFooterView:_loadMoreIndicatorView];
         
     } else {

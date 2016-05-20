@@ -111,24 +111,24 @@
     
     return cell;
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     NSString *key = indexPath.row == 0 ?KEY_COUNTRY: KEY_STATE;
     NSString *searchValue = indexPath.row == 0 ? self.countryName : self.states[indexPath.row];
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:key
-                                                                                  value:searchValue
-                                                                                orderBy:RANKTI];
-
+                                                                              value:searchValue
+                                                                            orderBy:RANKTI];
+    
     if ( 0 == indexPath.row) {
         
         vc.CoreCountry =  self.countryName;
         
     }else{
-    
+        
+        vc.CoreCountry =  self.countryName;
         vc.CoreState = self.states[indexPath.row];
-
+        
     }
     
     [self.navigationController pushViewController:vc animated:YES];

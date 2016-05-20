@@ -233,6 +233,11 @@
 		AE70314D1CC8A589003AE852 /* GongLueListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE70314C1CC8A589003AE852 /* GongLueListCell.m */; };
 		AE7031521CC8AC54003AE852 /* GongLueListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7031511CC8AC54003AE852 /* GongLueListHeaderView.m */; };
 		AE713EAC1CC7365500E5A085 /* GonglueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE713EAB1CC7365400E5A085 /* GonglueListViewController.m */; };
+		AE778B591CEEB779007120B8 /* FiltContent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE778B581CEEB779007120B8 /* FiltContent.m */; };
+		AE778B5C1CEEB7C7007120B8 /* FilterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE778B5B1CEEB7C7007120B8 /* FilterTableViewCell.m */; };
+		AE778B621CEEC16C007120B8 /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE778B611CEEC16C007120B8 /* FilterItem.m */; };
+		AE778B651CEEC4ED007120B8 /* FilterSection.m in Sources */ = {isa = PBXBuildFile; fileRef = AE778B641CEEC4ED007120B8 /* FilterSection.m */; };
+		AE778B6F1CEF1DB2007120B8 /* FilterContentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE778B6E1CEF1DB2007120B8 /* FilterContentFrame.m */; };
 		AE79E43F1C8E7A7E008059D9 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E41F1C8E7A7E008059D9 /* MKAnnotationView+WebCache.m */; };
 		AE79E4401C8E7A7E008059D9 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E4211C8E7A7E008059D9 /* NSData+ImageContentType.m */; };
 		AE79E4411C8E7A7E008059D9 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79E4231C8E7A7E008059D9 /* SDImageCache.m */; };
@@ -253,11 +258,7 @@
 		AE7DA7A01CE5D6F9002254CD /* XuFilerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */; };
 		AE82E26B1CBBA48200DC752E /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */; };
 		AEB41CC21CE0899000B4F9CD /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */; };
-		AEB9CA7A1C215EBB00DCC422 /* FiltContent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA771C215EBB00DCC422 /* FiltContent.m */; };
-		AEB9CA7B1C215EBB00DCC422 /* FilterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA791C215EBB00DCC422 /* FilterTableViewCell.m */; };
 		AEB9CA7E1C2166A700DCC422 /* BottomBackgroudView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA7D1C2166A700DCC422 /* BottomBackgroudView.m */; };
-		AEB9CA811C2179B100DCC422 /* FilterSection.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA801C2179B100DCC422 /* FilterSection.m */; };
-		AEB9CA841C217BDE00DCC422 /* FilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA831C217BDE00DCC422 /* FilterItem.m */; };
 		AEBF39A41C23B4940068DB08 /* OptionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF39A31C23B4940068DB08 /* OptionItem.m */; };
 		AEC5C79E1BAAA259009CC7CE /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
@@ -787,6 +788,16 @@
 		AE7031511CC8AC54003AE852 /* GongLueListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueListHeaderView.m; sourceTree = "<group>"; };
 		AE713EAA1CC7365400E5A085 /* GonglueListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueListViewController.h; sourceTree = "<group>"; };
 		AE713EAB1CC7365400E5A085 /* GonglueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueListViewController.m; sourceTree = "<group>"; };
+		AE778B571CEEB779007120B8 /* FiltContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltContent.h; sourceTree = "<group>"; };
+		AE778B581CEEB779007120B8 /* FiltContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltContent.m; sourceTree = "<group>"; };
+		AE778B5A1CEEB7C7007120B8 /* FilterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTableViewCell.h; sourceTree = "<group>"; };
+		AE778B5B1CEEB7C7007120B8 /* FilterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterTableViewCell.m; sourceTree = "<group>"; };
+		AE778B601CEEC16C007120B8 /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
+		AE778B611CEEC16C007120B8 /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
+		AE778B631CEEC4ED007120B8 /* FilterSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSection.h; sourceTree = "<group>"; };
+		AE778B641CEEC4ED007120B8 /* FilterSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSection.m; sourceTree = "<group>"; };
+		AE778B6D1CEF1DB2007120B8 /* FilterContentFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterContentFrame.h; sourceTree = "<group>"; };
+		AE778B6E1CEF1DB2007120B8 /* FilterContentFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterContentFrame.m; sourceTree = "<group>"; };
 		AE79E41E1C8E7A7E008059D9 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		AE79E41F1C8E7A7E008059D9 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		AE79E4201C8E7A7E008059D9 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -828,16 +839,8 @@
 		AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUniversityFrame.m; sourceTree = "<group>"; };
 		AEB41CC01CE0899000B4F9CD /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
 		AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyTableViewCell.m; sourceTree = "<group>"; };
-		AEB9CA761C215EBB00DCC422 /* FiltContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltContent.h; sourceTree = "<group>"; };
-		AEB9CA771C215EBB00DCC422 /* FiltContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltContent.m; sourceTree = "<group>"; };
-		AEB9CA781C215EBB00DCC422 /* FilterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTableViewCell.h; sourceTree = "<group>"; };
-		AEB9CA791C215EBB00DCC422 /* FilterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterTableViewCell.m; sourceTree = "<group>"; };
 		AEB9CA7C1C2166A700DCC422 /* BottomBackgroudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomBackgroudView.h; sourceTree = "<group>"; };
 		AEB9CA7D1C2166A700DCC422 /* BottomBackgroudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomBackgroudView.m; sourceTree = "<group>"; };
-		AEB9CA7F1C2179B100DCC422 /* FilterSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSection.h; sourceTree = "<group>"; };
-		AEB9CA801C2179B100DCC422 /* FilterSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSection.m; sourceTree = "<group>"; };
-		AEB9CA821C217BDE00DCC422 /* FilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterItem.h; sourceTree = "<group>"; };
-		AEB9CA831C217BDE00DCC422 /* FilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterItem.m; sourceTree = "<group>"; };
 		AEBF39A21C23B4940068DB08 /* OptionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionItem.h; sourceTree = "<group>"; };
 		AEBF39A31C23B4940068DB08 /* OptionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionItem.m; sourceTree = "<group>"; };
 		AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
@@ -2084,12 +2087,14 @@
 				56F4BADE1CAFC6C000B94A7E /* UniversityFrameObj.m */,
 				56753AE81C23155300FE3A78 /* UniversityObj.h */,
 				56753AE91C23155300FE3A78 /* UniversityObj.m */,
-				AEB9CA761C215EBB00DCC422 /* FiltContent.h */,
-				AEB9CA771C215EBB00DCC422 /* FiltContent.m */,
-				AEB9CA7F1C2179B100DCC422 /* FilterSection.h */,
-				AEB9CA801C2179B100DCC422 /* FilterSection.m */,
-				AEB9CA821C217BDE00DCC422 /* FilterItem.h */,
-				AEB9CA831C217BDE00DCC422 /* FilterItem.m */,
+				AE778B6D1CEF1DB2007120B8 /* FilterContentFrame.h */,
+				AE778B6E1CEF1DB2007120B8 /* FilterContentFrame.m */,
+				AE778B571CEEB779007120B8 /* FiltContent.h */,
+				AE778B581CEEB779007120B8 /* FiltContent.m */,
+				AE778B631CEEC4ED007120B8 /* FilterSection.h */,
+				AE778B641CEEC4ED007120B8 /* FilterSection.m */,
+				AE778B601CEEC16C007120B8 /* FilterItem.h */,
+				AE778B611CEEC16C007120B8 /* FilterItem.m */,
 				AEBF39A21C23B4940068DB08 /* OptionItem.h */,
 				AEBF39A31C23B4940068DB08 /* OptionItem.m */,
 				AE0321741C28E4DC00DC27B9 /* XUCountry.h */,
@@ -2338,6 +2343,8 @@
 		AEB9CA751C215E9E00DCC422 /* filerView */ = {
 			isa = PBXGroup;
 			children = (
+				AE778B5A1CEEB7C7007120B8 /* FilterTableViewCell.h */,
+				AE778B5B1CEEB7C7007120B8 /* FilterTableViewCell.m */,
 				AEF7A8E81C979BF100636C39 /* XSearchSectionHeaderView.h */,
 				AEF7A8E91C979BF100636C39 /* XSearchSectionHeaderView.m */,
 				AEF7A8EC1C97A44600636C39 /* RankTypeTableViewCell.h */,
@@ -2345,8 +2352,6 @@
 				AEF7A8EE1C97A44600636C39 /* RankTypeTableViewCell.xib */,
 				AEF6053E1C22B963004772BE /* SearchViewCell.h */,
 				AEF6053F1C22B963004772BE /* SearchViewCell.m */,
-				AEB9CA781C215EBB00DCC422 /* FilterTableViewCell.h */,
-				AEB9CA791C215EBB00DCC422 /* FilterTableViewCell.m */,
 				AEB9CA7C1C2166A700DCC422 /* BottomBackgroudView.h */,
 				AEB9CA7D1C2166A700DCC422 /* BottomBackgroudView.m */,
 				560880FE1C1F212300DCB54B /* searchToolView.h */,
@@ -2958,6 +2963,7 @@
 			files = (
 				463E3AAF1B23105F00E0BAF8 /* KDLogger.m in Sources */,
 				AEFECA841C9FFD2100B52CB2 /* UniCollectionViewCell.m in Sources */,
+				AE778B591CEEB779007120B8 /* FiltContent.m in Sources */,
 				AEFED7BE1C0D345E009CF046 /* MJRefreshBackGifFooter.m in Sources */,
 				AEFED7BB1C0D345E009CF046 /* MJRefreshAutoGifFooter.m in Sources */,
 				567144DC1CBA88CD002A02BF /* XWGJApplyStatusView.m in Sources */,
@@ -3012,6 +3018,7 @@
 				AE0232241C56019800C7BEF4 /* YYSingleNewsBO.m in Sources */,
 				4655B2231B27EFD8001024F2 /* SearchViewController.m in Sources */,
 				567146001CBA9340002A02BF /* IntelligentResultViewController.m in Sources */,
+				AE778B651CEEC4ED007120B8 /* FilterSection.m in Sources */,
 				AE0059761CAA8BCE0003A490 /* XLiuxueViewController.m in Sources */,
 				567145661CBA8D29002A02BF /* XWGJRankTableViewCell.m in Sources */,
 				56C087731CA79A0400B45A67 /* SecondCollectionViewCell.m in Sources */,
@@ -3039,8 +3046,8 @@
 				AEFED7C01C0D345E009CF046 /* MJRefreshBackStateFooter.m in Sources */,
 				567144D21CBA88CD002A02BF /* ApplyViewController.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
+				AE778B5C1CEEB7C7007120B8 /* FilterTableViewCell.m in Sources */,
 				567145581CBA8D28002A02BF /* NewSearchResultViewController.m in Sources */,
-				AEB9CA841C217BDE00DCC422 /* FilterItem.m in Sources */,
 				AEFED7C51C0D345E009CF046 /* MJRefreshConst.m in Sources */,
 				AE02321B1C56003500C7BEF4 /* UIView+Extension.m in Sources */,
 				46FA14771B2B3F0C0036D29C /* ActionTableViewController.m in Sources */,
@@ -3169,15 +3176,14 @@
 				AE6AC3DB1CBF32C2009FC12F /* XUToolbar.m in Sources */,
 				46645D1D1B2AF14D005B5B12 /* LogoView.m in Sources */,
 				5671459F1CBA9106002A02BF /* NotificationViewController.m in Sources */,
-				AEB9CA7B1C215EBB00DCC422 /* FilterTableViewCell.m in Sources */,
 				AEF605401C22B963004772BE /* SearchViewCell.m in Sources */,
 				567144DB1CBA88CD002A02BF /* XWGJApplyStatusTableViewCell.m in Sources */,
 				462D46671B353A0F00BC7861 /* FXBlurView.m in Sources */,
 				AE0321761C28E4DC00DC27B9 /* XUCountry.m in Sources */,
 				AE79E4461C8E7A7E008059D9 /* SDWebImageManager.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
+				AE778B6F1CEF1DB2007120B8 /* FilterContentFrame.m in Sources */,
 				567145C91CBA914C002A02BF /* XWGJAaboutHeader.m in Sources */,
-				AEB9CA7A1C215EBB00DCC422 /* FiltContent.m in Sources */,
 				567145631CBA8D28002A02BF /* XWGJCityCollectionViewCell.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,
 				AEEE1E961C1E6FD600FCCFAE /* searchSectionHeadView.m in Sources */,
@@ -3185,10 +3191,10 @@
 				AE29BD8B1CC5DE5E008B37C5 /* XXiaobaiViewController.m in Sources */,
 				567145681CBA8D29002A02BF /* XWGJSubjectCollectionViewCell.m in Sources */,
 				AE02877A1C3D1ADD0062BC54 /* NewSearchResultCell.m in Sources */,
-				AEB9CA811C2179B100DCC422 /* FilterSection.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,
 				463E3AB91B23105F00E0BAF8 /* NSDate+KDUtilities.m in Sources */,
+				AE778B621CEEC16C007120B8 /* FilterItem.m in Sources */,
 				567144E11CBA8920002A02BF /* XWGJnodataView.m in Sources */,
 				567145311CBA8C6B002A02BF /* XWGJMessageTableViewCell.m in Sources */,
 				5671457B1CBA904A002A02BF /* UniversityCourseViewController.m in Sources */,

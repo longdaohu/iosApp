@@ -403,8 +403,8 @@ static NSString *cityIdentify = @"cityCell";
         XWGJHotCity *city = country.HotCities[indexPath.row];
         
         SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"city" value:city.cityName orderBy:RANKTI];
-        
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.xby = indexPath.section == 0 ? NO : YES;
+         [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

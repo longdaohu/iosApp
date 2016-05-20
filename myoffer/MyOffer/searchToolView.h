@@ -11,4 +11,6 @@ typedef void(^toolViewBlock)(UIButton *);
 @interface searchToolView : UIView
 @property(nonatomic,copy)toolViewBlock actionBlock;
 @property(nonatomic,strong)XUButton *leftButton;
+@property(nonatomic,strong)UIImageView *LeftView;
+
 @end

@@ -34,7 +34,7 @@
     
     self.view.clipsToBounds = YES;
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.9];
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
  
     [self makeUI];
     
