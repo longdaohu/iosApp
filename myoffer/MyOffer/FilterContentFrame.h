@@ -5,6 +5,11 @@
 //  Created by sara on 16/5/19.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
+typedef enum {
+    XcellStateRealHeight = 0,
+    XcellStateBaseHeight,
+    XcellStateHeightZero
+} XcellState;
 
 #import <Foundation/Foundation.h>
 #import "FiltContent.h"
@@ -17,7 +22,7 @@
 @property(nonatomic,assign)CGRect bgFrame;
 @property(nonatomic,strong)NSArray *itemFrames;
 @property(nonatomic,assign)CGFloat cellHeigh;
-@property(nonatomic,assign)NSInteger cellState;
+@property(nonatomic,assign)XcellState cellState;
 @property(nonatomic,strong)NSArray *items;
 
 @property(nonatomic,strong)FiltContent *content;

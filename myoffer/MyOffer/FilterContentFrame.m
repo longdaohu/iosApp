@@ -6,6 +6,8 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
+
+
 #import "FilterContentFrame.h"
 
 @interface FilterContentFrame ()
@@ -61,23 +63,23 @@
 
 
 
--(void)setCellState:(NSInteger)cellState
+-(void)setCellState:(XcellState)cellState
 {
     _cellState = cellState;
     
     switch (cellState) {
-        case 0:
-        {
+        case XcellStateRealHeight:
+        {    //状态为0时，cell显示原始高度
             self.cellHeigh = self.originCellHeight;
         }
             break;
-        case 1:
-        {
+        case XcellStateBaseHeight:
+        {   //状态为1时，cell显示高度50
             self.cellHeigh = 50;
         }
             break;
-        case 2:
-        {
+        case XcellStateHeightZero:
+        { //状态为2时，cell显示高度为0
             self.cellHeigh = 0;
         }
             break;

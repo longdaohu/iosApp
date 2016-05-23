@@ -6,10 +6,17 @@
 //  Created by xuewuguojie on 16/3/14.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
+
+typedef enum {
+    XReLoadStateNothing,
+    XReLoadStateYes,
+    XReLoadStateNo
+} XReLoadState;
+
 #define FILTERBACKORGIN_Y   (APPSIZE.height - 64)
 #define PageSize 20
-#define StatusYes @"yes"
-#define StatusNo @"no"
+//#define StatusYes @"yes"
+//#define StatusNo @"no"
 #import "XNewSearchViewController.h"
 #import "NewSearchResultCell.h"
 #import "searchSectionHeadView.h"
@@ -72,7 +79,8 @@
 //科目专业字典（包含二级科目数据）数组
 @property(nonatomic,strong)NSArray *filterAreas;
 //用于判断用户是否放弃筛选，保持原有搜索参数
-@property(nonatomic,copy)NSString *status;
+//@property(nonatomic,copy)NSString *status;
+@property(nonatomic,assign)XReLoadState ReloadStatus;
 //国家及国家二三级数据数组
 @property(nonatomic,strong)NSArray *CountriesArray;
 //搜索结果tableView
@@ -89,7 +97,7 @@
 @property(nonatomic,strong)BottomBackgroudView *bottomToolView;
 //没有数据提示View
 @property(nonatomic,strong)XWGJnodataView *NoDataView;
-//筛选参数
+//用于保存筛选参数
 @property(nonatomic,strong)NSMutableDictionary *filerParameters;
 
 @end
@@ -251,7 +259,7 @@
         NSArray *stateArray = nil;
         if (self.CoreCountry) {
             
-            country.cellState = 2;
+            country.cellState = XcellStateHeightZero;
             
             stateArray = [self makeCurrentStateWithCountry:self.CoreCountry];
         }
@@ -266,7 +274,7 @@
         NSArray *currentCityArr = nil;
         if (self.CoreState) {
             
-            state.cellState = 2;
+            state.cellState = XcellStateHeightZero;
             
             CountryState  * currentState =[self makeCurrentCityWithState:self.CoreState country:self.CoreCountry];
             
@@ -280,9 +288,9 @@
         [temps addObject:city];
         if (self.Corecity) {
             
-            country.cellState = 2;
-            state.cellState = 2;
-            city.cellState = 2;
+            country.cellState = XcellStateHeightZero;
+            state.cellState = XcellStateHeightZero;
+            city.cellState = XcellStateHeightZero;
             
         }
         
@@ -295,7 +303,7 @@
         NSArray *subjectArray = nil;
         if (self.CoreArea) {
             
-            area.cellState = 2;
+            area.cellState = XcellStateHeightZero;
             
             subjectArray =[self makeCurrentSubjectWithArea:self.CoreArea];
         }
@@ -723,8 +731,10 @@
 #pragma mark ———————————— 网络数据请求
 -(void)makeData:(NSInteger)page{
     
+    
+
     //通过判断是不是澳大利亚城市正序或倒序
-    if ([self.status isEqualToString:StatusYes]) {
+    if (XReLoadStateYes == self.ReloadStatus) {
         
         KDClassLog(@"--------checkIsStar_Pre------if---");
         
@@ -747,7 +757,7 @@
                                                                                        @"desc": desc,
                                                                                        @"order": self.RankType}];
     
-    if ([self.status isEqualToString:StatusYes]) {
+    if (XReLoadStateYes == self.ReloadStatus) {
         
         KDClassLog(@"----filtersM----if--------");
         
@@ -893,7 +903,7 @@
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
          
-         self.status = StatusYes;
+         self.ReloadStatus = XReLoadStateYes;
          
          if (page == 0) {
              
@@ -977,7 +987,7 @@
          
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         self.status = StatusYes;
+         self.ReloadStatus = XReLoadStateYes;
          
          [self.ResultTableView.mj_footer endRefreshing];
          
@@ -1189,18 +1199,13 @@
         RankTypeTableViewCell *cell =[RankTypeTableViewCell cellInitWithTableView:tableView];
         
         cell.title =  option_item.RankTypeShowName;
+
         
-        
-        if (self.selectRankTypeIndex == indexPath.row) {
-            
-            cell.TitleLab.textColor = XCOLOR_RED;
-            
-            cell.accessoryMV.image = [UIImage imageNamed:@"check-icons-yes"];
-            
-        }else{
-            
-            cell.accessoryMV.image = nil;
-        }
+        UIImage *accessoryImage = indexPath.row == self.selectRankTypeIndex ? [UIImage imageNamed:@"check-icons-yes"] : [UIImage imageNamed:@""];
+        cell.accessoryMV.image = accessoryImage;
+        UIColor *textColor = indexPath.row == self.selectRankTypeIndex ? XCOLOR_RED : XCOLOR_BLACK;
+        cell.TitleLab.textColor = textColor;
+
         
         
         return cell;
@@ -1283,7 +1288,8 @@
         NSString *state = [self.filerParameters valueForKey:KEY_STATE];
         NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
         
-        if (country.length == 0 &&state.length == 0 &&para_city.length == 0 &&self.CoreState == 0) {
+        
+        if (country.length == 0 && state.length == 0 &&para_city.length == 0 && self.CoreState.length == 0) {
             
             //如果国家、地区选项为空时排序方式设置为 RANKQS
             self.RankType = RANKQS;
@@ -1293,7 +1299,7 @@
         //清空上一次的数据，重新加载
         [self.UniversityList removeAllObjects];
         
-        self.status = StatusNo;
+        self.ReloadStatus = XReLoadStateNo;
         
         [self makeData:0];
         
@@ -1301,24 +1307,14 @@
     }else{
         
         //清空参数选项数据
-        [self.filerParameters removeObjectForKey:KEY_COUNTRY];
-        [self.filerParameters removeObjectForKey:KEY_STATE];
-        [self.filerParameters removeObjectForKey:KEY_CITY];
-        [self.filerParameters removeObjectForKey:KEY_AREA];
-        [self.filerParameters removeObjectForKey:KEY_SUBJECT];
+        [self.filerParameters removeAllObjects];
         [self.FiltItems removeAllObjects];
-        self.FiltItems = [self.coreFiltItems mutableCopy];
+         self.FiltItems = [self.coreFiltItems mutableCopy];
         [self.FilterTableView reloadData];
     }
     
 }
 
-//用于FilterTableView局部刷新
--(void)FilterTableViewReloadWithIndex:(NSInteger)index andfiltItem:(FiltContent *)filtItem
-{
-    [self.FiltItems replaceObjectAtIndex:index withObject:filtItem];
-    [self.FilterTableView reloadData];
-}
 
 #pragma mark —————————— FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
@@ -1329,10 +1325,10 @@
     
     if (sender.tag == 999) {
         
-        if (filterFrame.cellState == 1) {
-            filterFrame.cellState = 0;
-        }else if(filterFrame.cellState == 0){
-            filterFrame.cellState = 1;
+        if (filterFrame.cellState == XcellStateBaseHeight) {
+            filterFrame.cellState = XcellStateRealHeight;
+        }else if(filterFrame.cellState == XcellStateRealHeight){
+            filterFrame.cellState = XcellStateBaseHeight;
         }else{
             
         }
@@ -1344,35 +1340,33 @@
     }
     
     
-    
-    
     switch (indexPath.row) {
         case 0:
         {
             NSString *para_country = [self.filerParameters valueForKey:KEY_COUNTRY];
             BOOL Equal = [para_country isEqualToString:sender.currentTitle];
             
+            //当用户选择或取消国家时，移除state 、city 参数
             [self.filerParameters removeObjectForKey:KEY_STATE];
             [self.filerParameters removeObjectForKey:KEY_CITY];
             
             if (Equal) {
                 
                 [self.filerParameters removeObjectForKey:KEY_COUNTRY];
-                
                 FilterContentFrame  *stateFilterFrame = self.FiltItems[indexPath.row + 1];
-                stateFilterFrame.cellState =  2;
+                stateFilterFrame.cellState =  XcellStateHeightZero;
                 
                 
             }else{
                 
                 [self.filerParameters  setValue:sender.currentTitle forKey:KEY_COUNTRY];
                 
-                
+                //得到对应国家的state数组
                 NSArray *states = [self makeCurrentStateWithCountry:sender.currentTitle];
                 
                 FilterContentFrame  *stateFilterFrame = self.FiltItems[indexPath.row + 1];
                 stateFilterFrame.items =  states;
-                stateFilterFrame.cellState =  0;
+                stateFilterFrame.cellState =  XcellStateRealHeight;
                 
                 FiltContent *stateFiltItem = stateFilterFrame.content;
                 stateFiltItem.buttonArray = states;
@@ -1382,9 +1376,8 @@
             
             NSIndexPath *stateIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
             
-            
             FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 2];
-            cityFilterFrame.cellState =  2;
+            cityFilterFrame.cellState =  XcellStateHeightZero;
             NSIndexPath *cityIndexPath =[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section];
             [self.FilterTableView reloadRowsAtIndexPaths:@[cityIndexPath,stateIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -1405,7 +1398,7 @@
                 [self.filerParameters removeObjectForKey:KEY_STATE];
                 
                 FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 1];
-                cityFilterFrame.cellState =  2;
+                cityFilterFrame.cellState =  XcellStateHeightZero;
                 
                 
                 
@@ -1419,7 +1412,7 @@
                 
                 FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 1];
                 cityFilterFrame.items =  state.cities;
-                cityFilterFrame.cellState =  0;
+                cityFilterFrame.cellState =  XcellStateRealHeight;
                 
                 FiltContent *cityFiltItem = cityFilterFrame.content;
                 cityFiltItem.buttonArray = state.cities;
@@ -1459,7 +1452,7 @@
                 
                 [self.filerParameters removeObjectForKey:KEY_AREA];
                 FilterContentFrame  *subjectFilterFrame = self.FiltItems[indexPath.row + 1];
-                subjectFilterFrame.cellState =  2;
+                subjectFilterFrame.cellState =  XcellStateHeightZero;
                 
                 
             }else{
@@ -1471,7 +1464,7 @@
                 
                 FilterContentFrame  *subjectFilterFrame = self.FiltItems[indexPath.row + 1];
                 subjectFilterFrame.items =  subjectes;
-                subjectFilterFrame.cellState =  0;
+                subjectFilterFrame.cellState =  XcellStateRealHeight;
                 
                 FiltContent *subjectFiltItem = subjectFilterFrame.content;
                 subjectFiltItem.buttonArray = subjectes;
@@ -1525,6 +1518,7 @@
         //当学校数组数量为0时，不显示排列选择表单
         self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
         self.cover.alpha = 0.5;
+      
         [UIView animateWithDuration:0.25 animations:^{
             
             CGRect newRect = self.RankTypeTableView.frame;
@@ -1538,6 +1532,7 @@
         
         
         [UIView animateWithDuration:0.25 animations:^{
+           
             self.cover.alpha = 0;
             CGRect newRect = self.RankTypeTableView.frame;
             newRect.origin.y = -88;
@@ -1549,8 +1544,10 @@
             
         }];
         
-        
     }
+    
+    
+    
 }
 
 
@@ -1560,6 +1557,7 @@
     
     XJHUtilDefineWeakSelfRef;
     __block CGRect newRect  = self.FiltbackView.frame;
+    
     
     if (!down) {
         
