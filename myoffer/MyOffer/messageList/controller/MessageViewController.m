@@ -600,7 +600,8 @@
     detail.hidesBottomBarWhenPushed = YES;
     detail.NO_ID = messageFrame.Message.messageID;
     [self.navigationController pushViewController:detail animated:YES];
-
+    
+ 
 }
 
 -(void)ShowLeftMenu

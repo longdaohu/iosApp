@@ -8,11 +8,16 @@
 
 #import "AdvertiseViewController.h"
 #import <WebKit/WebKit.h>
+#import "NewSearchResultViewController.h"
+#import "XLiuxueViewController.h"
+#import "InteProfileViewController.h"
+
 
 @interface AdvertiseViewController ()<UIWebViewDelegate,WKNavigationDelegate>
 @property(nonatomic,strong)UIWebView *web;
 @property(nonatomic,strong)KDProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
+@property(nonatomic,strong)NSString  *URLpath;
 
 @end
 
@@ -47,8 +52,8 @@
 
     self.title = self.path ?@"" :self.advertise_title;
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
-    NSString *RequestString =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
-    [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
+    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
+    [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.URLpath]]];
     [self.web_wk sizeToFit];
 
     [self.view addSubview:self.web_wk];
@@ -77,6 +82,56 @@
     
     [KDAlertView showMessage:GDLocalizedString(@"NetRequest-connectError") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
     [self.hud hideAnimated:YES];
+    
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    
+    
+     NSString *absoluteString = navigationAction.request.URL.absoluteString;
+   
+    
+    if ([absoluteString hasSuffix:@"/evaluate"]) {
+        
+        [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+        decisionHandler(WKNavigationActionPolicyCancel);
+  
+    }else if([absoluteString hasSuffix:@"/rank"]){
+        
+        
+            NSString *country = [self.URLpath hasSuffix:@"au"] ? @"澳大利亚":@"英国";
+        
+           if([self.URLpath hasSuffix:@"au"])
+           {
+               NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
+               newVc.title  = country;
+               [self.navigationController pushViewController:newVc animated:YES];
+               
+           }else{
+           
+               SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
+                vc.title  =  country;
+               [self.navigationController pushViewController:vc animated:YES];
+           }
+
+ 
+        decisionHandler(WKNavigationActionPolicyCancel);
+
+    }else if([absoluteString hasSuffix:@"/intention"]){
+        
+        [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
+
+        decisionHandler(WKNavigationActionPolicyCancel);
+    
+    }else{
+      
+         decisionHandler(WKNavigationActionPolicyAllow);
+
+    }
+    
+    
+    
     
 }
 

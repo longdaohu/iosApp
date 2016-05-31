@@ -42,9 +42,7 @@
 
 -(void)FilterResultCommit:(UIButton *)sender
 {
-//    if (self.actionBlock) {
-//        self.actionBlock(sender);
-//    }
+ 
     
     if ([self.delegate respondsToSelector:@selector(BottomBackgroudView:andButtonItem:)]) {
         

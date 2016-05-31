@@ -234,8 +234,8 @@
 "CategoryNew-region" = "地区";
 "CategoryNew-major" = "专业";
 "CategoryNew-rank" = "排名";
-"CategoryNew-hotUK" = "英国热门城市";
-"CategoryNew-hotAU" = "澳洲热门城市";
+"CategoryNew-hotUK" = "英国热门留学城市";
+"CategoryNew-hotAU" = "澳洲热门留学城市";
 "CategoryNew-oneStar" = "1星院校";
 "CategoryNew-twoStar" = "2星院校";
 "CategoryNew-threeStar" = "3星院校";
@@ -451,6 +451,7 @@
 "Refresh-down" = "下拉可以刷新";
 "Refresh-open" = "松开立即刷新";
 "Refresh-fresh" = "正在刷新数据中...";
+"Refresh-all" = "已经全部加载完毕";
 
 //协议页面
 "Potocol-Commit" = "我已阅读，同意";

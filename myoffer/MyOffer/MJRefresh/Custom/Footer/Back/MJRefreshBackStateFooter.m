@@ -66,7 +66,7 @@
     [self setTitle:GDLocalizedString(@"Refresh-up") forState:MJRefreshStateIdle];
     [self setTitle:GDLocalizedString(@"Refresh-release") forState:MJRefreshStatePulling];
     [self setTitle:GDLocalizedString(@"Refresh-loading") forState:MJRefreshStateRefreshing];
-    [self setTitle:MJRefreshBackFooterNoMoreDataText forState:MJRefreshStateNoMoreData];
+    [self setTitle:GDLocalizedString(@"Refresh-all") forState:MJRefreshStateNoMoreData];
 }
 
 - (void)placeSubviews

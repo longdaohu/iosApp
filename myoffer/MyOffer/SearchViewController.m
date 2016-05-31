@@ -7,9 +7,7 @@
 //
 #import "XNewSearchViewController.h"
 #import "SearchViewController.h"
-#import "SearchResultViewController.h"
 #import "FiltContent.h"
-#import "SearchViewCell.h"
 #import "FilterContentFrame.h"
 #import "FilterTableViewCell.h"
 #import "FilterContentFrame.h"

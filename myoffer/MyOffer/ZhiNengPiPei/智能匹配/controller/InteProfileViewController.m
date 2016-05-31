@@ -14,6 +14,7 @@
 #import "InputAccessoryToolBar.h"
 #import "AdvertiView.h"
 #import "XWGJSummaryView.h"
+#import "EvaluateSearchCollegeViewController.h"
 
 typedef enum {
     countryPikerType = 109,
@@ -26,7 +27,7 @@ typedef enum {
 } pikerType;
 
 
-@interface InteProfileViewController ()<InputAccessoryToolBarDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface InteProfileViewController ()<InputAccessoryToolBarDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XprofileTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *profileTabelView;
 @property(nonatomic,strong)NSDictionary *response;
 @property(nonatomic,strong)UIPickerView *timePiker;
@@ -78,7 +79,6 @@ typedef enum {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [MobClick beginLogPageView:@"page智能匹配"];
-    
 }
 
 -(NSArray *)timeItems
@@ -292,6 +292,7 @@ typedef enum {
     self.bottomView.backgroundColor = XCOLOR_RED;
     [self.bottomView addTarget:self action:@selector(commitButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView setTitle:GDLocalizedString(@"Evaluate-commitButton") forState:UIControlStateNormal];
+    self.bottomView.titleLabel.font = FontWithSize(16);
     [self.view addSubview:self.bottomView];
 }
 
@@ -410,6 +411,8 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XprofileTableViewCell *cell = [[NSBundle mainBundle] loadNibNamed:@"XprofileTableViewCell" owner:self options:nil].lastObject;
+    cell.delegate = self;
+    
     cell.countryTF.inputAccessoryView = self.toolView;
     cell.timeTF.inputAccessoryView = self.toolView;
     cell.applySubjectTF.inputAccessoryView = self.toolView;
@@ -433,13 +436,7 @@ typedef enum {
     self.timeTF =  cell.timeTF;
     NSString *target_time = self.response[@"target_date"];
     NSInteger TimeIndex = 0;
-//    if (target_time.integerValue < 2020 && target_time.integerValue > 2015) {
-//        
-//        TimeIndex = [self.timeItems indexOfObject:target_time];
-//        
-//        self.timeTF.text = self.timeItems[TimeIndex];
-//
-//    }
+
     if([self.timeItems containsObject:target_time])
     {
         TimeIndex = [self.timeItems indexOfObject:target_time];
@@ -976,7 +973,19 @@ typedef enum {
         }
     }
 }
+#pragma mark ————  XprofileTableViewCellDelegate
+-(void)XprofileTableViewCell:(XprofileTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender{
 
+    EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] initWithNibName:@"EvaluateSearchCollegeViewController" bundle:nil];
+   
+    search.valueBlock = ^(NSString *value){
+    
+        tableViewCell.universityTF.text = value;
+        
+    };
+    
+    [self.navigationController pushViewController:search animated:YES];
+}
 
 KDUtilRemoveNotificationCenterObserverDealloc
 

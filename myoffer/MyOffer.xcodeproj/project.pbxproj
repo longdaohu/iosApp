@@ -257,6 +257,9 @@
 		AE7DA79F1CE5D6F9002254CD /* FilerButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7DA79C1CE5D6F9002254CD /* FilerButtonItem.m */; };
 		AE7DA7A01CE5D6F9002254CD /* XuFilerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */; };
 		AE82E26B1CBBA48200DC752E /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */; };
+		AE8E1ADD1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E1ADB1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.m */; };
+		AE8E1ADE1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E1ADC1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib */; };
+		AE8E1AE01CFD79FC00D8D816 /* collegelist in Resources */ = {isa = PBXBuildFile; fileRef = AE8E1ADF1CFD79FC00D8D816 /* collegelist */; };
 		AEB41CC21CE0899000B4F9CD /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */; };
 		AEB9CA7E1C2166A700DCC422 /* BottomBackgroudView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9CA7D1C2166A700DCC422 /* BottomBackgroudView.m */; };
 		AEBF39A41C23B4940068DB08 /* OptionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBF39A31C23B4940068DB08 /* OptionItem.m */; };
@@ -837,6 +840,10 @@
 		AE7DA79E1CE5D6F9002254CD /* XuFilerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XuFilerView.m; sourceTree = "<group>"; };
 		AE82E2691CBBA48200DC752E /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
 		AE82E26A1CBBA48200DC752E /* HotUniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUniversityFrame.m; sourceTree = "<group>"; };
+		AE8E1ADA1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSearchCollegeViewController.h; sourceTree = "<group>"; };
+		AE8E1ADB1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateSearchCollegeViewController.m; sourceTree = "<group>"; };
+		AE8E1ADC1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluateSearchCollegeViewController.xib; sourceTree = "<group>"; };
+		AE8E1ADF1CFD79FC00D8D816 /* collegelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = collegelist; sourceTree = "<group>"; };
 		AEB41CC01CE0899000B4F9CD /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
 		AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyTableViewCell.m; sourceTree = "<group>"; };
 		AEB9CA7C1C2166A700DCC422 /* BottomBackgroudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomBackgroudView.h; sourceTree = "<group>"; };
@@ -1988,8 +1995,12 @@
 		567145ED1CBA9340002A02BF /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE8E1ADF1CFD79FC00D8D816 /* collegelist */,
 				567145EE1CBA9340002A02BF /* InteProfileViewController.h */,
 				567145EF1CBA9340002A02BF /* InteProfileViewController.m */,
+				AE8E1ADA1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.h */,
+				AE8E1ADB1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.m */,
+				AE8E1ADC1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2891,6 +2902,7 @@
 				AEF56BE01C57787300C36142 /* PlaceHolderImage.png in Resources */,
 				567145CE1CBA914C002A02BF /* BindEmailViewController.xib in Resources */,
 				567146221CBA9395002A02BF /* NewForgetPasswdViewController.xib in Resources */,
+				AE8E1AE01CFD79FC00D8D816 /* collegelist in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEFED8091C0D4F34009CF046 /* Pre-comp 1_00030.png in Resources */,
 				AEF421031BD4988B00CFB45E /* UMShareEditViewController.xib in Resources */,
@@ -2908,6 +2920,7 @@
 				5671457E1CBA904A002A02BF /* UniversityDetailViewController.xib in Resources */,
 				AEFED7FE1C0D4F34009CF046 /* Pre-comp 1_00019.png in Resources */,
 				46F659C91B23FC2000D50E1B /* DiscoverViewController.xib in Resources */,
+				AE8E1ADE1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib in Resources */,
 				565A48981CB2BF0800788E13 /* SearchResultViewController.xib in Resources */,
 				567145DA1CBA914C002A02BF /* SetViewController.xib in Resources */,
 				AEFED7FB1C0D4F34009CF046 /* Pre-comp 1_00016.png in Resources */,
@@ -3184,6 +3197,7 @@
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AE778B6F1CEF1DB2007120B8 /* FilterContentFrame.m in Sources */,
 				567145C91CBA914C002A02BF /* XWGJAaboutHeader.m in Sources */,
+				AE8E1ADD1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.m in Sources */,
 				567145631CBA8D28002A02BF /* XWGJCityCollectionViewCell.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,
 				AEEE1E961C1E6FD600FCCFAE /* searchSectionHeadView.m in Sources */,

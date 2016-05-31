@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class XprofileTableViewCell;
+@protocol XprofileTableViewCellDelegate  <NSObject>
+-(void)XprofileTableViewCell:(XprofileTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender;
+
+@end
 @interface XprofileTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITextField *countryTF;
 @property (weak, nonatomic) IBOutlet UITextField *timeTF;
@@ -18,6 +23,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *gradeTF;
 @property (weak, nonatomic) IBOutlet UITextField *avgTF;
 @property (weak, nonatomic) IBOutlet UITextField *lowTF;
-
+@property(nonatomic,weak)id<XprofileTableViewCellDelegate>delegate;
 
 @end

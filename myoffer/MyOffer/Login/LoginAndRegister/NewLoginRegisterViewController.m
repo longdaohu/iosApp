@@ -80,6 +80,7 @@
 @property(nonatomic,strong)UIButton *cover;
 //手机号码编辑框
 @property(nonatomic,strong)YourPhoneView *PhoneView;
+@property (weak, nonatomic) IBOutlet UIImageView *arrow_right;
 
 @end
 
@@ -108,6 +109,16 @@
     
 }
 
+-(void)RegisterAreaTextfieldArrow
+{
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
+    }];
+    
+}
+
 
 
 //用于添加控件、设置控件相关属性
@@ -118,7 +129,8 @@
      self.xLoginView.frame =CGRectMake(0, 40, APPSIZE.width, APPSIZE.height*2/3 - 40);
     [self.xLoginRegistView addSubview:self.xLoginView];
      self.RegisterAreaTextF.inputView = self.AreaPicker;
-    
+    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
+    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidEnd];
     _LoginBlurView.dynamic = NO;
     [_LoginBlurView setTintColor:nil];
     [_LoginBlurView setIterations:3];
@@ -156,6 +168,7 @@
 -(NSArray *)Areas
 {
     if (!_Areas) {
+        
          _Areas = @[GDLocalizedString(@"LoginVC-china"),GDLocalizedString(@"LoginVC-english")];
      }
     return _Areas;

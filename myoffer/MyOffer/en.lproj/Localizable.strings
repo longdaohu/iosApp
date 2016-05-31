@@ -149,8 +149,8 @@
 "SearchResult_filter" = "Filter";
 "SearchResult_worldRank" = "World ranking";
 "SearchResult_noRank" = "NO Rank";
-"SearchResult_worldxxxRank" = "QS ranking";
-"SearchResult_countryxxxRank" = "Local ranking";
+"SearchResult_worldxxxRank" = "world ranking";
+"SearchResult_countryxxxRank" = "country ranking";
 "SearchResult_university" = "Universities";
 
 //学校详情  —— 页面
@@ -422,6 +422,7 @@
 "Refresh-down" = "Pull down Refreshing";
 "Refresh-open" = "Release Refreshing";
 "Refresh-fresh" = "Loading...";
+"Refresh-all" = "no more data";
 
 //协议页面
 "Potocol-Commit" = "I have read and agree";

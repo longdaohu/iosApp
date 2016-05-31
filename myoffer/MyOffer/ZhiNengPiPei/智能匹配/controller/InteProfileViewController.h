@@ -11,4 +11,7 @@
 @interface InteProfileViewController : BaseViewController
 @property(nonatomic,assign)BOOL isComeBack;
 @property(nonatomic,strong)UIImage *navigationBgImage;
+
+
+
 @end

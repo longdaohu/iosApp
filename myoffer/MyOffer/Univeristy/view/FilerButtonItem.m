@@ -80,7 +80,7 @@
 -(void)transformButton:(UIButton *)sender
 {
    
-     self.titleLab.textColor =  sender.selected ? [UIColor redColor] : [UIColor blackColor];
+     self.titleLab.textColor =  sender.selected ? XCOLOR_RED : [UIColor blackColor];
     
     [UIView animateWithDuration:0.2 animations:^{
         

@@ -14,7 +14,6 @@
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 
-
 @interface DiscoverViewController  (){
     BOOL _searchBarExpanded;
     CGFloat _dragStartContentOffsetY;
@@ -152,7 +151,7 @@
                            parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
                            
                            } additionalSuccessAction:^(NSInteger statusCode, id response) {
-                           
+  
                                
                                NSArray *responseArray = (id)response;
 
@@ -178,10 +177,9 @@
             NSArray *responseArray = (id)response;
     
              _items = responseArray;
- 
+
             [_tableView reloadData];
          }];
-    
 }
 
 //请求新数据
@@ -331,11 +329,15 @@
         
     } else if (info[@"search"])  {
         
+        
         SearchResultViewController *vc = [[SearchResultViewController alloc] initWithSearchText:info[@"search"] orderBy:RANKTI];
         
         [self.navigationController pushViewController:vc animated:YES];
 
     }
+    
+    
+
 }
 
 

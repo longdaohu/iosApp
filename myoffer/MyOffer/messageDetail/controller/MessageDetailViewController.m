@@ -7,9 +7,9 @@
 //
 
 #define ZangFontSize 15
-#import "XWGJMessageTableViewCell.h"
 #import "MessageDetailViewController.h"
 #import "XWGJMessageDetailFrame.h"
+#import "XWGJMessageTableViewCell.h"
 #import "XWGJMessageDetailContentCell.h"
 #import "XWGJRecommendUniTableViewCell.h"
 #import "UniversityDetailViewController.h"
@@ -151,6 +151,7 @@
         NSString *RequestString =[NSString stringWithFormat:@"http://www.myoffer.cn/api/article/%@/detail",self.NO_ID];
         [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
         self.web_wk.scrollView.scrollEnabled = NO;
+        self.web_wk.userInteractionEnabled = NO;
         [self.web_wk sizeToFit];
         self.web_wk.navigationDelegate = self;
         
@@ -159,6 +160,7 @@
         self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, APPSIZE.width, 1)];
         self.webView.delegate = self;
         self.webView.scrollView.scrollEnabled = NO;
+        self.webView.userInteractionEnabled = NO;
         [self.webView sizeToFit];
         NSString *RequestString =[NSString stringWithFormat:@"http://www.myoffer.cn/api/article/%@/detail",self.NO_ID];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
@@ -372,6 +374,8 @@
     
     NSString *URLstr = [NSString stringWithFormat:@"%@",url];
     
+    
+    
     if ([URLstr containsString:@"api/article"]) {
         
         return YES;
@@ -382,6 +386,9 @@
         return NO;
         
     }
+    
+ 
+
     
 }
 

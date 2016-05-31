@@ -48,13 +48,13 @@
     [self.view addSubview:self.bgView];
     
     
-    FilerButtonItem *leftButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth * 0.5, BGHEIGHT)];
+    FilerButtonItem *leftButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 0, XScreenWidth * 0.5, BGHEIGHT)];
     leftButton.delegate = self;
     self.leftButton = leftButton;
     self.leftButton.tag = 10;
     [self.bgView addSubview:self.leftButton];
     
-    self.rightButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 0, XScreenWidth * 0.5, BGHEIGHT)];
+    self.rightButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth * 0.5, BGHEIGHT)];
     self.rightButton .delegate = self;
     self.rightButton.tag = 11;
     [self.bgView addSubview:self.rightButton];
@@ -71,12 +71,12 @@
 
 -(void)makeTableView
 {
-    self.leftTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
+    self.leftTableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
     self.leftTableView.delegate = self;
     self.leftTableView.dataSource = self;
     [self.view addSubview:self.leftTableView];
     
-    self.rightTableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
+    self.rightTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
     self.rightTableView.delegate = self;
     self.rightTableView.dataSource = self;
     [self.view addSubview:self.rightTableView];
@@ -270,7 +270,7 @@
     
     FilerButtonItem *sender =   tableView == self.leftTableView ? self.leftButton : self.rightButton;
     
-    UIColor  *color=   [cell.textLabel.text isEqualToString:sender.title] ? [UIColor redColor] : [UIColor blackColor];
+    UIColor  *color=   [cell.textLabel.text isEqualToString:sender.title] ? XCOLOR_RED : [UIColor blackColor];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = color;
     
@@ -314,7 +314,7 @@
     
     
      UITableViewCell *currentCell =[tableView cellForRowAtIndexPath:indexPath];
-     currentCell.textLabel.textColor = [UIColor redColor];
+     currentCell.textLabel.textColor = XCOLOR_RED;
     
     
      FilerButtonItem *sender =   LEFT_SELECTED ? self.leftButton : self.rightButton;

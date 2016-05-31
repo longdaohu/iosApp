@@ -9,14 +9,14 @@
 
 typedef enum {
     XReLoadStateNothing,
-    XReLoadStateYes,
-    XReLoadStateNo
+    XReLoadStateFail,
+    XReLoadStateNomal
 } XReLoadState;
+//筛选参数提交状态  nomal - 确认   fail - 清空，或提交失败、或不提交   nothing - 不做任何操作、默认
 
 #define FILTERBACKORGIN_Y   (APPSIZE.height - 64)
 #define PageSize 20
-//#define StatusYes @"yes"
-//#define StatusNo @"no"
+
 #import "XNewSearchViewController.h"
 #import "NewSearchResultCell.h"
 #import "searchSectionHeadView.h"
@@ -48,12 +48,6 @@ typedef enum {
 @property(nonatomic,copy)NSString *SearchValue;
 //本国或世界排名
 @property(nonatomic,copy)NSString *RankType;
-//保存最后一次搜索科目、专业、城市、国家、地区参数
-@property(nonatomic,copy)NSString *Pre_area;
-@property(nonatomic,copy)NSString *Pre_city;
-@property(nonatomic,copy)NSString *Pre_state;
-@property(nonatomic,copy)NSString *Pre_country;
-@property(nonatomic,copy)NSString *Pre_subJect;
 //顶部筛选工具条
 @property(nonatomic,strong)searchToolView *ToolView;
 //排名tableView出现时蒙版背景
@@ -99,6 +93,10 @@ typedef enum {
 @property(nonatomic,strong)XWGJnodataView *NoDataView;
 //用于保存筛选参数
 @property(nonatomic,strong)NSMutableDictionary *filerParameters;
+//用于保存最后一次提交筛选参数
+@property(nonatomic,strong)NSMutableDictionary *lastFilerParameters;
+//用于保存原始筛选参数，当在删除手动选项参数时，返回原始参数
+@property(nonatomic,strong)NSDictionary *oldFilerParameters;
 
 @end
 
@@ -156,11 +154,11 @@ typedef enum {
         
         if([key  isEqualToString: KEY_AREA]) {
             
-            
             [self.filerParameters  setValue:value forKey:KEY_AREA];
             
         } else if([key  isEqualToString: KEY_COUNTRY]) {
             
+            [self.filerParameters  setValue:value forKey:KEY_COUNTRY];
             
         } else if([key  isEqualToString: KEY_STATE]) {
             
@@ -171,6 +169,7 @@ typedef enum {
         }else if([key  isEqualToString: KEY_CITY]) {
             
             [self.filerParameters  setValue:value forKey:KEY_CITY];
+            
             self.selectRankTypeIndex = 1;
         }
         
@@ -186,6 +185,15 @@ typedef enum {
         _filerParameters =[NSMutableDictionary dictionary];
     }
     return   _filerParameters;
+}
+
+-(NSMutableDictionary *)lastFilerParameters
+{
+    if (!_lastFilerParameters) {
+        
+        _lastFilerParameters =[NSMutableDictionary dictionary];
+    }
+    return   _lastFilerParameters;
 }
 
 -(NSMutableArray *)UniversityList
@@ -364,25 +372,26 @@ typedef enum {
     [super viewDidLoad];
     
     //判断是否是澳大利亚国家选项
-    NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
-    
-    if (para_state.length > 0 ) {
-        
-        [self checkIsStar:para_state];
-        
-    }
-    NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
-    if (country.length > 0 ) {
-        
-        [self checkIsStar:country];
-        
-    }
+//    NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
+//    
+//    if (para_state.length > 0 ) {
+//        
+//        [self checkIsStar:para_state];
+//        
+//    }
+//    NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+//    if (country.length > 0 ) {
+//        
+//        [self checkIsStar:country];
+//        
+//    }
     
     
     [self makeUI];
     
     [self makeData:0];
     
+     self.oldFilerParameters =[self.filerParameters copy];
 }
 
 /**
@@ -416,29 +425,26 @@ typedef enum {
     return _CountriesArray;
 }
 
+
+
 /**
  * 判断是不是澳大利亚国家
- */
--(void)checkIsStar:(NSString *)StateName
+ *  parameters 用于不同条件下参数判断
+*/
+-(void)checkIsStar:(NSDictionary *)parameters
 {
-    
     self.IsStar = NO;
     
     if ([self.RankType isEqualToString:RANKQS]) {
         
-        self.IsStar = NO;
-        
         return;
     }
+   
     
-    //这个好像不需要，暂时先放着
-    NSInteger index_AU =[self.countryNameArr  indexOfObject:GDLocalizedString(@"CategoryVC-AU")];
-    
-    NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
+    NSString *country =[parameters valueForKey:KEY_COUNTRY];
     if (country.length) {
         
-        //如果self.country 存在，判断是不是澳大利亚
-        if ([country isEqualToString:self.countryNameArr[index_AU]]) {
+        if ([country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]) {
             
             self.IsStar = YES;
             
@@ -446,145 +452,36 @@ typedef enum {
         }
     }
     
-    if (self.CoreCountry.length) {
-        
-        //如果self.country 存在，判断是不是澳大利亚
-        if ([self.CoreCountry isEqualToString:self.countryNameArr[index_AU]]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
     
-    NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
-    
-    if (para_state.length) {
+    NSString *state =[parameters valueForKey:KEY_STATE];
+    if (state.length) {
         
         NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
         
-        if ([AU containsObject:para_state]) {
+        if ([AU containsObject:state]) {
             
             self.IsStar = YES;
             
             return;
         }
     }
+
     
-    if (self.CoreState.length) {
-        
-        NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
-        
-        if ([AU containsObject:self.CoreState]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
-    
-    
-    NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
-    
-    if (para_city.length) {
-        
+    NSString *city =[parameters valueForKey:KEY_CITY];
+    if (city.length) {
         for (CountryState *state in self.states_AU) {
-            
-            if ([state.cities  containsObject:para_city]) {
+            if ([state.cities  containsObject: city]) {
                 
                 self.IsStar = YES;
                 
                 return;
                 
-            }else {
-                
-                self.IsStar = NO;
             }
         }
         
     }
-    
-}
 
-
--(void)checkIsStar_Pre
-{
     
-    self.IsStar = NO;
-    
-    if ([self.RankType isEqualToString:RANKQS]) {
-        
-        self.IsStar = NO;
-        
-        return;
-    }
-    
-    NSInteger index_AU =[self.countryNameArr  indexOfObject:GDLocalizedString(@"CategoryVC-AU")];
-    
-    if (self.Pre_country.length) {
-        
-        if ([self.Pre_country isEqualToString:self.countryNameArr[index_AU]]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
-    
-    if (self.CoreCountry.length) {
-        
-        //如果self.country 存在，判断是不是澳大利亚
-        if ([self.CoreCountry isEqualToString:self.countryNameArr[index_AU]]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
-    
-    
-    if (self.Pre_state.length) {
-        
-        NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
-        
-        if ([AU containsObject:self.Pre_state]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
-    
-    if (self.CoreState.length) {
-        
-        NSArray *AU = [self.states_AU valueForKeyPath:@"stateName"];
-        
-        if ([AU containsObject:self.CoreState]) {
-            
-            self.IsStar = YES;
-            
-            return;
-        }
-    }
-    
-    
-    if (self.Pre_city.length) {
-        
-        for (CountryState *state in self.states_AU) {
-            
-            if ([state.cities  containsObject: self.Pre_city]) {
-                
-                self.IsStar = YES;
-                
-                return;
-                
-            }else {
-                
-                self.IsStar = NO;
-            }
-        }
-        
-    }
     
 }
 
@@ -684,7 +581,6 @@ typedef enum {
             //用于实现 筛选页面的出现、隐藏
             [weakSelf FiltbackViewDown:self.FiltbackView.alpha == 0];
             
-            
         }else{
             
             [weakSelf FiltbackViewDown:NO];
@@ -732,21 +628,20 @@ typedef enum {
 -(void)makeData:(NSInteger)page{
     
     
-
+ 
     //通过判断是不是澳大利亚城市正序或倒序
-    if (XReLoadStateYes == self.ReloadStatus) {
+    if (XReLoadStateFail == self.ReloadStatus) {
         
-        KDClassLog(@"--------checkIsStar_Pre------if---");
         
-        [self checkIsStar_Pre];
+        [self checkIsStar:self.lastFilerParameters];
         
     }else{
         
-        KDClassLog(@"--------checkIsStar----else-----");
         
-        [self checkIsStar:self.RankType];
+        [self checkIsStar:self.filerParameters];
         
     }
+    
     
     
     NSNumber *desc = self.IsStar? @1:@0;
@@ -757,138 +652,31 @@ typedef enum {
                                                                                        @"desc": desc,
                                                                                        @"order": self.RankType}];
     
-    if (XReLoadStateYes == self.ReloadStatus) {
-        
-        KDClassLog(@"----filtersM----if--------");
-        
-        NSMutableArray *filtersM =[NSMutableArray array];
-        
-        if (self.Pre_area.length) {
-            
-            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.Pre_area}];
-            
-        }
-        
-        if(self.Pre_country.length) {
-            
-            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.Pre_country}];
-        }
+ 
+    if (XReLoadStateFail == self.ReloadStatus) {
+        //网络请求失败，使用最后一次请求参数，再次请求
         
         
-        if(self.Pre_state.length) {
-            
-            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.Pre_state}];
-            
-        }
+ 
         
-        if (self.Pre_city.length) {
-            
-            [filtersM addObject:@{@"name": KEY_CITY, @"value": self.Pre_city}];
-            
-        }
+        NSArray *filtes = [self getParameterArrayWithDictionary:self.lastFilerParameters];
+
         
-        
-        if (self.Pre_subJect.length) {
-            
-            [filtersM addObject:@{@"name": KEY_SUBJECT, @"value": self.Pre_subJect}];
-        }
-        
-        
-        if(self.CoreCountry) {
-            
-            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.CoreCountry}];
-        }
-        
-        if (self.CoreState) {
-            
-            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.CoreState}];
-        }
-        
-        if (self.CoreArea) {
-            
-            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.CoreArea}];
-            
-        }
-        
-        [parameters setValue:filtersM forKey:@"filters"];
-        
+        [parameters setValue:filtes forKey:@"filters"];
         
         
     }else{
+ 
         
-        KDClassLog(@"----filtersM----else--------");
-        self.Pre_area =@"";
-        self.Pre_subJect =@"";
-        self.Pre_city =@"";
-        self.Pre_state =@"";
-        self.Pre_country =@"";
+        [self.lastFilerParameters removeAllObjects];
+       
+ 
         
-        NSMutableArray *filtersM =[NSMutableArray array];
+        NSArray *filtes = [self getParameterArrayWithDictionary:self.filerParameters];
         
-        NSString *parameter_area =[self.filerParameters valueForKey:KEY_AREA];
-        if (parameter_area.length) {
-            
-            [filtersM addObject:@{@"name": KEY_AREA, @"value": parameter_area}];
-            
-            self.Pre_area = parameter_area;
-        }
-        if (self.CoreArea) {
-            
-            [filtersM addObject:@{@"name": KEY_AREA, @"value": self.CoreArea}];
-            self.Pre_area = self.CoreArea;
-            
-        }
-        NSString *country =[self.filerParameters valueForKey:KEY_COUNTRY];
-        if(country.length) {
-            
-            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": country}];
-            
-            self.Pre_country = country;
-        }
+        self.lastFilerParameters = [self.filerParameters mutableCopy];
         
-        if(self.CoreCountry.length) {
-            
-            [filtersM addObject:@{@"name": KEY_COUNTRY, @"value": self.CoreCountry}];
-            self.Pre_country = self.CoreCountry;
-        }
-        
-        
-        if (self.CoreState) {
-            
-            [filtersM addObject:@{@"name": KEY_STATE, @"value": self.CoreState}];
-            self.Pre_state = self.CoreState;
-        }
-        
-        
-        NSString *para_state = [self.filerParameters valueForKey:KEY_STATE];
-        
-        if(para_state.length) {
-            
-            [filtersM addObject:@{@"name": KEY_STATE, @"value": para_state}];
-            self.Pre_state = para_state;
-            
-        }
-        
-        NSString *para_city = [self.filerParameters valueForKey:KEY_CITY];
-        
-        if (para_city.length) {
-            
-            [filtersM addObject:@{@"name": KEY_CITY, @"value": para_city}];
-            self.Pre_city = para_city;
-            
-        }
-        
-        
-        NSString *parameter_subject = [self.filerParameters valueForKey:KEY_SUBJECT];
-        
-        if (parameter_subject.length) {
-            
-            [filtersM addObject:@{@"name": KEY_SUBJECT, @"value": parameter_subject}];
-            self.Pre_subJect = parameter_subject;
-        }
-        
-        
-        [parameters setValue:filtersM forKey:@"filters"];
+        [parameters setValue:filtes forKey:@"filters"];
         
     }
     
@@ -903,7 +691,7 @@ typedef enum {
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
          
-         self.ReloadStatus = XReLoadStateYes;
+         self.ReloadStatus = XReLoadStateFail;
          
          if (page == 0) {
              
@@ -987,11 +775,46 @@ typedef enum {
          
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         self.ReloadStatus = XReLoadStateYes;
+         self.ReloadStatus = XReLoadStateFail;
          
          [self.ResultTableView.mj_footer endRefreshing];
          
      }];
+}
+//用于网络请求  根据筛选参数字典得到相着参数数组
+-(NSArray *)getParameterArrayWithDictionary:(NSDictionary *)parameters
+{
+    
+    NSMutableArray *temps =[NSMutableArray array];
+    NSString *parameter_area =[parameters valueForKey:KEY_AREA];
+    if (parameter_area.length) {
+        [temps addObject:@{@"name": KEY_AREA, @"value": parameter_area}];
+    }
+    
+    NSString *parameter_subject = [parameters valueForKey:KEY_SUBJECT];
+    if (parameter_subject.length) {
+        [temps addObject:@{@"name": KEY_SUBJECT, @"value": parameter_subject}];
+    }
+    
+    
+    NSString *country =[parameters valueForKey:KEY_COUNTRY];
+    if(country.length) {
+        [temps addObject:@{@"name": KEY_COUNTRY, @"value": country}];
+    }
+    
+    
+    NSString *para_state = [parameters valueForKey:KEY_STATE];
+    
+    if(para_state.length) {
+        [temps addObject:@{@"name": KEY_STATE, @"value": para_state}];
+    }
+    
+    NSString *para_city = [parameters valueForKey:KEY_CITY];
+    if (para_city.length) {
+        [temps addObject:@{@"name": KEY_CITY, @"value": para_city}];
+    }
+    
+    return [temps copy];
     
 }
 
@@ -1201,7 +1024,7 @@ typedef enum {
         cell.title =  option_item.RankTypeShowName;
 
         
-        UIImage *accessoryImage = indexPath.row == self.selectRankTypeIndex ? [UIImage imageNamed:@"check-icons-yes"] : [UIImage imageNamed:@""];
+        UIImage *accessoryImage = indexPath.row == self.selectRankTypeIndex ? [UIImage imageNamed:@"check-icons-yes"] : nil;
         cell.accessoryMV.image = accessoryImage;
         UIColor *textColor = indexPath.row == self.selectRankTypeIndex ? XCOLOR_RED : XCOLOR_BLACK;
         cell.TitleLab.textColor = textColor;
@@ -1299,19 +1122,23 @@ typedef enum {
         //清空上一次的数据，重新加载
         [self.UniversityList removeAllObjects];
         
-        self.ReloadStatus = XReLoadStateNo;
+        self.ReloadStatus = XReLoadStateNomal;
         
         [self makeData:0];
+        
+        self.ToolView.rightButton.selected = NO;
         
         
     }else{
         
         //清空参数选项数据
         [self.filerParameters removeAllObjects];
+        self.filerParameters = [self.oldFilerParameters mutableCopy];
         [self.FiltItems removeAllObjects];
          self.FiltItems = [self.coreFiltItems mutableCopy];
         [self.FilterTableView reloadData];
     }
+    
     
 }
 
@@ -1504,6 +1331,9 @@ typedef enum {
 //移除黑色Cover
 -(void)coverButtonClickRemoveOptionView:(UIButton *)sender
 {
+    
+    self.ToolView.leftButton.selected = NO;
+    self.ToolView.rightButton.selected = NO;
     
     [self rankTypeViewDown:NO];
     

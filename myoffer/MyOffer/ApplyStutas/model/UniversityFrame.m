@@ -45,40 +45,40 @@
     
     
     NSString *local = uniObj.countryName;
-    CGSize  localSize = [local KD_sizeWithAttributeFont: FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
-    CGFloat Rankx = subx;
-    CGFloat Rankw = subw;
-    CGFloat Rankh = localSize.height;
-    CGFloat Ranky = CGRectGetMaxY(self.LogoFrame) - Rankh + 3;
-    self.RankFrame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
+    CGSize  localSize = [local KD_sizeWithAttributeFont: FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT + 1))];
     
-    CGFloat locMVx = subx;
-    CGFloat locMVh = Rankh;
+    
+    CGFloat locMVx = 0;
+    CGFloat locMVh = localSize.height;
     CGFloat locMVw = locMVh + 5;
-    CGFloat localMargin = 5;
+    CGFloat localMargin = KDUtilSize(0);
     
     if (USER_EN) {
         
         localMargin = localMargin + (XScreenWidth - 320) * 0.06;
     }
-    CGFloat locMVy = CGRectGetMinY(self.RankFrame) - locMVh - localMargin;
+    CGFloat locMVy = 0;
     self.LocalMVFrame = CGRectMake(locMVx, locMVy, locMVw, locMVh);
     
     
-    CGFloat localy = CGRectGetMinY(self.RankFrame) - Rankh - localMargin;
-    CGFloat localx = Rankx;
+    CGFloat localy = CGRectGetMaxY(self.LogoFrame) - localSize.height + 3;
+    CGFloat localx = subx;
     CGFloat localw = XScreenWidth - localx;
-    CGFloat localh = Rankh;
+    CGFloat localh = localSize.height;
     self.LocalFrame = CGRectMake(localx, localy + 2, localw, localh);
-
+    
+    
+    CGFloat Rankx = subx;
+    CGFloat Rankw = subw;
+    CGFloat Rankh = localSize.height;
+    CGFloat Ranky = localy - Rankh - localMargin;
+    self.RankFrame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
     
     
     NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
     CGSize rankSize = [rankIT KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
-    self.starBgFrame = CGRectMake(self.SubTitleFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 20);
-    
+    self.starBgFrame = CGRectMake(self.SubTitleFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
     NSMutableArray *temps =[NSMutableArray array];
-    
     for (NSInteger i =0; i < 5; i++) {
         
         NSString *x = [NSString stringWithFormat:@"%ld", (long)(20 * i)];

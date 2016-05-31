@@ -25,7 +25,7 @@
     
     CGFloat logoX = 15;
     CGFloat logoY = 15;
-    CGFloat logoW = content.logoName.length > 0 ? 40 : 0;
+    CGFloat logoW = content.logoName.length > 0 ? 30 : 0;
     CGFloat logoH = titleSize.height;
     self.logoFrame = CGRectMake(logoX, logoY, logoW, logoH);
     

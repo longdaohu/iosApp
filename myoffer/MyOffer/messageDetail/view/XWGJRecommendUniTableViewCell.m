@@ -210,20 +210,44 @@
     self.subTitleLabel.frame = CGRectMake(subx, suby, subw, subh);
     
     
-    if (self.rankLabel.text) {
+    
+    NSString *local = self.rankLabel.text;
+    CGSize  localSize = [local KD_sizeWithAttributeFont: FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT + 1))];
+    
+    
+    CGFloat locMVx = subx;
+    CGFloat locMVh = localSize.height;
+    CGFloat locMVw = locMVh + 5;
+    CGFloat localMargin = KDUtilSize(0);
+    CGFloat localy = CGRectGetMaxY(self.LogoMView.frame) - localSize.height + 3;
+    self.Anchor.frame = CGRectMake(locMVx, localy, locMVw, locMVh);
+
+    CGFloat localx = CGRectGetMaxX(self.Anchor.frame) + 3;
+    CGFloat localw = XScreenWidth - localx;
+    CGFloat localh = localSize.height;
+    self.LocalLabel.frame = CGRectMake(localx, localy + 2, localw, localh);
+
+    
+    
+    
+    CGFloat Rankx = subx;
+    CGFloat Rankw = subw;
+    CGFloat Rankh = localSize.height;
+    CGFloat Ranky = localy - Rankh - localMargin;
+    self.rankLabel.frame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
+    
+    
+    NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+    CGSize rankSize = [rankIT KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
+    self.starBackground.frame = CGRectMake(self.subTitleLabel.frame.origin.x + rankSize.width , self.rankLabel.frame.origin.y, 100, 15);
+    
+    if (!self.isStart) {
         
-        CGFloat Rankx = subx;
-        CGFloat Rankw = subw;
-        CGSize  rankSize = [self.rankLabel.text KD_sizeWithAttributeFont: FontWithSize(UNIVERISITYRANKFONT)];
-        CGFloat Rankh = rankSize.height;
-        CGFloat Ranky = CGRectGetMaxY(self.LogoMView.frame) - Rankh + 3;
-        
-  
-        if (!self.isStart) {
-            
-            self.rankLabel.frame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
-            
-        }else{
+        self.rankLabel.frame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
+
+    }else{
+    
+        for (NSInteger i =0; i < 5; i++) {
             
             NSString *rank  = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
             
@@ -232,31 +256,24 @@
             self.rankLabel.frame = CGRectMake(Rankx, Ranky, rankSize.width, Rankh);
             
             self.starBackground.frame = CGRectMake(CGRectGetMaxX(self.rankLabel.frame), Ranky,100,20);
+            CGPoint bgCenter = self.starBackground.center;
+            bgCenter.y = self.rankLabel.center.y;
+            self.starBackground.center = bgCenter;
             
             for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
                 
                 UIImageView *imageV = (UIImageView *)self.starBackground.subviews[i];
                 
-                imageV.frame = CGRectMake(20*i, 3, 15, 15);
+                imageV.frame = CGRectMake(20*i, 0, 15, 15);
             }
         }
+
         
-    }
+
+        }
     
     
-    
-    CGFloat Anchorx = Tx;
-    CGFloat Anchorw = UNIVERSITY_LOCALHIGH;
-    CGFloat Anchorh = UNIVERSITY_LOCALHIGH;
-    CGFloat Anchory = CGRectGetMinY(self.rankLabel.frame) - UNIVERSITY_LOCALHIGH - 2;
-    self.Anchor.frame = CGRectMake(Anchorx, Anchory, Anchorw, Anchorh);
-    
-    CGFloat LOx = CGRectGetMaxX(self.Anchor.frame) + 5;
-    CGFloat LOy = Anchory +2;
-    CGFloat LOw = Tw;
-    CGFloat LOh = UNIVERSITY_LOCALHIGH;
-    self.LocalLabel.frame = CGRectMake(LOx,LOy,LOw, LOh);
-    
+ 
     
     CGFloat addx = XScreenWidth - (65 + KDUtilSize(0) * 6);
     CGFloat addw = 60;
@@ -275,3 +292,10 @@
 
 
 @end
+
+/*
+ 
+ 
+
+ 
+ */

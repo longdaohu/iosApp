@@ -12,9 +12,7 @@ typedef enum {
 
 #import "searchToolView.h"
 @interface searchToolView ()
-@property(nonatomic,strong)UIButton *rightButton;
 @property(nonatomic,strong)UIButton *lastButton;
-@property(nonatomic,assign)BOOL leftButtonSelected;
 
 @end
 @implementation searchToolView
@@ -26,11 +24,7 @@ typedef enum {
         self.backgroundColor = [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1];
         
         self.leftButton =[self createButton:leftType andButtonTitleColor:XCOLOR_RED andButtonTitle:GDLocalizedString(@"SearchResult_worldxxxRank")];
-        [self.leftButton setTitleColor:XCOLOR_RED   forState:UIControlStateNormal];
-        //        [self.leftButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
-        //        self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -188);
         self.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
-        self.leftButtonSelected = NO;
         
         self.LeftView = [[UIImageView alloc] init];
         self.LeftView.contentMode = UIViewContentModeCenter;
@@ -40,6 +34,7 @@ typedef enum {
         
         self.rightButton =[self createButton:rightType andButtonTitleColor:[UIColor blackColor] andButtonTitle:GDLocalizedString(@"SearchResult_filter")];
         [self.rightButton setImage:[UIImage imageNamed:@"filter_nomal"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"filter_high"] forState:UIControlStateSelected];
         self.rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     }
     
@@ -56,6 +51,7 @@ typedef enum {
     [sender setTitle:titleName forState:UIControlStateNormal];
     
     [sender setTitleColor:[UIColor blackColor]   forState:UIControlStateNormal];
+    [sender setTitleColor:XCOLOR_RED   forState:UIControlStateSelected];
     
     [self addSubview:sender];
     
@@ -67,37 +63,22 @@ typedef enum {
     
     if (sender == self.rightButton) {
         
-        
-        [self.rightButton setTitleColor:XCOLOR_RED  forState:UIControlStateNormal];
-        
-        [self.rightButton setImage:[UIImage imageNamed:@"filter_high"] forState:UIControlStateNormal];
-        
-        self.leftButtonSelected = NO;
-        
-        [self.leftButton setTitleColor:[UIColor blackColor]   forState:UIControlStateNormal];
-        
+        self.rightButton.selected = !self.rightButton.selected;
+        self.leftButton.selected  = NO;
         self.LeftView.image = [UIImage imageNamed:@"arrow_down"];
-        
         
     }
     
     if(sender == self.leftButton)
     {
         
-        self.leftButtonSelected =  !self.leftButtonSelected;
+         self.leftButton.selected = !self.leftButton.selected;
+        self.rightButton.selected = NO;
+
         
-        
-        UIImage *leftImage =  self.leftButtonSelected ? [UIImage imageNamed:@"arrow_up"] : [UIImage imageNamed:@"arrow_down"];
+        UIImage *leftImage =  self.leftButton.selected ? [UIImage imageNamed:@"arrow_up"] : [UIImage imageNamed:@"arrow_down"];
         self.LeftView.image = leftImage;
         
-        
-        //        [self.leftButton setImage:leftImage forState:UIControlStateNormal];
-        
-        [self.leftButton setTitleColor:XCOLOR_RED   forState:UIControlStateNormal];
-        
-        [self.rightButton setTitleColor:[UIColor blackColor]  forState:UIControlStateNormal];
-        
-        [self.rightButton setImage:[UIImage imageNamed:@"filter_nomal"] forState:UIControlStateNormal];
     }
     
     if (self.actionBlock) {

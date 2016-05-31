@@ -39,7 +39,7 @@
     if (self) {
         
         self.logoView =[[UIImageView alloc] init];
-        self.logoView.contentMode = UIViewContentModeScaleAspectFit;
+        self.logoView.contentMode = UIViewContentModeLeft;
         [self addSubview:self.logoView];
         
         
@@ -225,12 +225,12 @@
     
     if (filterFrame.cellState == 1) {
         
-        [self.upButton setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateNormal];
+        [self.upButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
     }
     
     if (filterFrame.cellState == 0) {
         
-        [self.upButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
+        [self.upButton setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateNormal];
     }
     
     for (int index = 0; index < filterFrame.itemFrames.count; index++) {

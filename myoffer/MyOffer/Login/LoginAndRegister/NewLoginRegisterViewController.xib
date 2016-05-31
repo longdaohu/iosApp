@@ -26,6 +26,7 @@
                 <outlet property="ServiceButton" destination="9Dy-IY-Qff" id="Mch-mp-gqm"/>
                 <outlet property="SignUpselectButton" destination="XM8-dn-T1f" id="aWR-cq-H2a"/>
                 <outlet property="VertifButton" destination="M6R-dn-ALX" id="rWV-1X-l7X"/>
+                <outlet property="arrow_right" destination="eXt-CU-opF" id="fB8-tb-siV"/>
                 <outlet property="backButton" destination="g0t-mA-W8p" id="bxS-TF-4fh"/>
                 <outlet property="commitLoginButton" destination="nPF-z4-pmg" id="2c1-Qf-uhC"/>
                 <outlet property="logoMV" destination="8GQ-Cu-tbh" id="RvP-R8-qrP"/>
@@ -148,7 +149,7 @@
                 <constraint firstItem="9bo-dL-22P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yeS-fk-xjg"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="89" y="310"/>
+            <point key="canvasLocation" x="279" y="311"/>
         </view>
         <view contentMode="scaleToFill" id="0PA-h7-MFc">
             <rect key="frame" x="0.0" y="0.0" width="346" height="539"/>
@@ -214,6 +215,13 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" translatesAutoresizingMaskIntoConstraints="NO" id="eXt-CU-opF">
+                                    <rect key="frame" x="313" y="15" width="18" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="18" id="uVe-qN-YPq"/>
+                                        <constraint firstAttribute="height" constant="14" id="ytZ-9e-knx"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -223,7 +231,9 @@
                                 <constraint firstItem="wXY-nd-MZz" firstAttribute="top" secondItem="arN-4g-0Yg" secondAttribute="top" id="EBH-GZ-UEZ"/>
                                 <constraint firstItem="cfc-Q6-ed3" firstAttribute="leading" secondItem="arN-4g-0Yg" secondAttribute="leading" constant="15" id="FV9-oP-YKV"/>
                                 <constraint firstItem="EnU-6M-jnw" firstAttribute="top" secondItem="arN-4g-0Yg" secondAttribute="top" constant="9" id="Kzk-cn-Mjj"/>
+                                <constraint firstItem="eXt-CU-opF" firstAttribute="top" secondItem="arN-4g-0Yg" secondAttribute="top" constant="15" id="TyP-vo-xkV"/>
                                 <constraint firstItem="EnU-6M-jnw" firstAttribute="leading" secondItem="arN-4g-0Yg" secondAttribute="leading" constant="15" id="XjY-cm-kZf"/>
+                                <constraint firstAttribute="trailing" secondItem="eXt-CU-opF" secondAttribute="trailing" constant="15" id="Xu0-ax-vhr"/>
                                 <constraint firstAttribute="height" constant="44" id="YSo-Rx-hW8"/>
                                 <constraint firstItem="cfc-Q6-ed3" firstAttribute="top" secondItem="wXY-nd-MZz" secondAttribute="bottom" id="dQ1-f3-HFX"/>
                                 <constraint firstAttribute="trailing" secondItem="wXY-nd-MZz" secondAttribute="trailing" constant="15" id="eMC-mz-tbU"/>
@@ -692,6 +702,7 @@
     <resources>
         <image name="Vertification_icon" width="34" height="46"/>
         <image name="appbg.jpg" width="750" height="1334"/>
+        <image name="arrow_down" width="12" height="12"/>
         <image name="back_button" width="21" height="21"/>
         <image name="close_button" width="23" height="23"/>
         <image name="location" width="31" height="45"/>

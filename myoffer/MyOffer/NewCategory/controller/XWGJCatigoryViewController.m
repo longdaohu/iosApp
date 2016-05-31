@@ -398,13 +398,17 @@ static NSString *cityIdentify = @"cityCell";
         
     }else {
         
-        XWGJLXCountry *country = self.countryes[indexPath.section];
         
+        
+        XWGJLXCountry *country = self.countryes[indexPath.section];
         XWGJHotCity *city = country.HotCities[indexPath.row];
         
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"city" value:city.cityName orderBy:RANKTI];
-        vc.xby = indexPath.section == 0 ? NO : YES;
-         [self.navigationController pushViewController:vc animated:YES];
+        XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
+                                                                                  value:city.cityName
+                                                                                orderBy:RANKTI];
+        vc.Corecity = city.cityName;
+        [self.navigationController pushViewController:vc animated:YES];
+  
     }
     
 }

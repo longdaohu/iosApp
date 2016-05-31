@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *gradeNotiLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
+@property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 
 
 @end
@@ -38,6 +39,7 @@
     self.lowTF.placeholder = GDLocalizedString(@"Evaluate-0013");
     self.subjectedTF.placeholder = GDLocalizedString(@"Evaluate-0010");
      self.applySubjectTF.placeholder =  GDLocalizedString(@"Evaluate-0014");
+//    self.universityTF.enabled = NO;
     
     self.contentView.backgroundColor =  BACKGROUDCOLOR;
     [self addRightViewWithTextField:self.countryTF];
@@ -72,6 +74,11 @@
     self.lowLabel.text = GDLocalizedString(@"Evaluate-006");
     self.averageLabel.text =  GDLocalizedString(@"Evaluate-005");
     self.universityLabel.text = GDLocalizedString(@"Evaluate-002");
+    
+    self.searchBtn.layer.cornerRadius = 4;
+    self.searchBtn.backgroundColor = XCOLOR_RED;
+    self.searchBtn.titleLabel.font = FontWithSize(16);
+    self.searchBtn.hidden = USER_EN;
     
 }
 
@@ -109,6 +116,15 @@
         textField.text  = [textField.text intValue] <= 100 ? textField.text :@"100" ;
     }
 }
+
+- (IBAction)searchUniversity:(UIButton *)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(XprofileTableViewCell:WithButtonItem:)]) {
+        [self.delegate XprofileTableViewCell:self WithButtonItem:sender];
+    }
+    
+}
+
 
 
 @end
