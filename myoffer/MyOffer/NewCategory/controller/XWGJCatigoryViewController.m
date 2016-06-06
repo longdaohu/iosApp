@@ -396,13 +396,37 @@ static NSString *cityIdentify = @"cityCell";
         
          [self.navigationController pushViewController:vc animated:YES];
         
+        NSString *item;
+        if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-art")]) {
+            item = @"catigory_subjectArt";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-finance")]) {
+            item = @"catigory_subjectFinance";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-social")]) {
+            item = @"catigory_subjectSocial";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-humanity")]) {
+            item = @"catigory_subjectHumanity";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-engineer")]) {
+            item = @"catigory_subjectEngineer";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-education")]) {
+            item = @"catigory_subjectEducation";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-medicine")]) {
+            item = @"catigory_subjectMedicine";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-business")]) {
+            item = @"catigory_subjectBusiness";
+        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-farm")]) {
+            item = @"catigory_subjectFarm";
+        }else{
+            item = @"catigory_subjectScience";
+        }
+        [MobClick event:item];
+        
     }else {
         
         
+        [MobClick event:indexPath.section == 0 ? @"catigory_hotUK":@"catigory_hotAU"];
         
         XWGJLXCountry *country = self.countryes[indexPath.section];
         XWGJHotCity *city = country.HotCities[indexPath.row];
-        
         XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                                   value:city.cityName
                                                                                 orderBy:RANKTI];
@@ -437,6 +461,8 @@ static NSString *cityIdentify = @"cityCell";
     
     if (1 == indexPath.row) {
         
+       [MobClick event:@"catigory_rankAU"];
+        
         NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
      
         newVc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
@@ -445,6 +471,8 @@ static NSString *cityIdentify = @"cityCell";
         
     }else{
     
+        [MobClick event:indexPath.row ? @"catigory_rankUK" : @"catigory_rankWorld"];
+
         SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
         
         vc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;

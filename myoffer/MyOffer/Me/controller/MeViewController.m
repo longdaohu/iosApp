@@ -194,13 +194,13 @@ typedef enum {
                        
                        newCell(list, [UIImage imageNamed:@"center_yixiang"],
                                ^{
-                                   
+                                   [MobClick event: @"apply_applyItem"];
                                    [weakSelf ApplyListView];
                                }),
                        newCell(status,[UIImage imageNamed:@"center_status"],
                                ^{
-                                   
-                                   [weakSelf ApplyStatusView];
+                                   [MobClick event: @"apply_applyStutasItem"];
+                                    [weakSelf ApplyStatusView];
                                    
                                }),
                        
@@ -287,6 +287,9 @@ typedef enum {
     sectionView.PipeiCount = self.recommendationsCount;
     sectionView.sectionBlock =^(UIButton *sender)
     {
+        
+        [MobClick event:sender.tag == 11 ? @"apply_like" : @"apply_pipei"];
+        
          if (sender.tag == 11) {
             RequireLogin
             FavoriteViewController *vc = [[FavoriteViewController alloc] init];
@@ -348,6 +351,7 @@ typedef enum {
 //表头图片不同状态下跳转方式
 -(void)OptionButtonPressed:(UIButton *)optionButton
 {
+    [MobClick event:@"apply_topStutas"];
      switch (optionButton.tag) {
         case OptionButtonTypeZineng:
              [self inteligentOption];

@@ -70,6 +70,8 @@
         usernameCell.detailTextLabel.text = response[@"accountInfo"][@"displayname"];
         usernameCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
          [usernameCell setAction:^{
+             
+             [MobClick event:@"userNameItemClick"];
             TextFieldViewController *vc = [[TextFieldViewController alloc] init];
             vc.title = GDLocalizedString(@"Person-005"); //@"修改用户名";
              [vc setViewDidLoadAction:^(TextFieldViewController *vc) {
@@ -92,6 +94,8 @@
         passwordCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [passwordCell setAction:^{
             
+            [MobClick event:@"changePasswdItemClick"];
+            
             if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
                 ChangePasswordViewController *vc = [[ChangePasswordViewController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
@@ -108,6 +112,9 @@
         phonenumberCell.detailTextLabel.text = response[@"accountInfo"][@"phonenumber"] ?: GDLocalizedString(@"Person-007");//@"未绑定手机号";
         phonenumberCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [phonenumberCell setAction:^{
+              
+                [MobClick event:@"changePhoneItemClick"];
+
                 BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
                  vc.title = response[@"accountInfo"][@"phonenumber"]?GDLocalizedString(@"Bind-changePhoneTitle"): GDLocalizedString(@"Bind-phoneTitle");
 
@@ -123,6 +130,8 @@
         emailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [emailCell setAction:^{
           
+            [MobClick event:@"changeEmailItemClick"];
+
             BindEmailViewController *vc = [[BindEmailViewController alloc] init];
             
             vc.title = response[@"accountInfo"][@"email"]?GDLocalizedString(@"Bind-changeEmailTitle"):GDLocalizedString(@"Bind-EmailTitle");

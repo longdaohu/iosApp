@@ -181,6 +181,8 @@
     KDUtilDefineWeakSelfRef
     [self.headerView.iconImageView KD_addTapAction:^(UIView *view) {
         
+        [MobClick event:@"UserIconClick"];
+
         if(![[AppDelegate sharedDelegate] isLogin])
         {
             [self.sideMenuViewController hideMenuViewController];
@@ -246,7 +248,7 @@
 
 -(void)caseApply
 {
- 
+     [MobClick event:@"myApply"];
     [self.sideMenuViewController hideMenuViewController];
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
     
@@ -292,6 +294,8 @@
 
 -(void)caseNotication
 {
+    [MobClick event:@"notificationItemClick"];
+
     [self.sideMenuViewController hideMenuViewController];
     
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;

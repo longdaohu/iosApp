@@ -358,6 +358,8 @@
     XJHUtilDefineWeakSelfRef
     self.searchView.actionBlock = ^{
         
+         [MobClick event:@"home_shearchItemClick"];
+        
         [weakSelf presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
     };
     [self.view addSubview: self.searchView];
@@ -454,7 +456,7 @@
     [self.TableHeaderView addSubview:self.autoLoopView];
     
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
-        
+      [MobClick event:@"home_advertisementClick"];
         AdvertiseViewController *detail =[[AdvertiseViewController alloc] init];
         detail.advertise_title = weakSelf.advertise_Arr[StatusBarBannerNews.index][@"title"];
         detail.StatusBarBannerNews = StatusBarBannerNews;
@@ -578,7 +580,20 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
     if (0 == indexPath.section) {
+        
+        NSString *item;
+        if (indexPath.row == 0) {
+            
+            item = @"home_LondonItemClick";
+        }else{
+            
+            item = indexPath.row == 1? @"home_SydneyItemClick":@"home_ManchesterItemClick";
+        }
+        
+         [MobClick event:item];
+        
         
         NSDictionary *info = self.hotCity_Arr[indexPath.row];
         NSString *searchValue = info[@"search"];
@@ -650,6 +665,8 @@
 #pragma mark —————— HomeSecondTableViewCellDelegate
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
+    
+    [MobClick event:@"home_newsItem"];
     MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
     detail.NO_ID = response[@"_id"];
     [self.navigationController pushViewController:detail animated:YES];
@@ -659,12 +676,15 @@
 #pragma mark —————— HomeThirdTableViewCellDelegate
 -(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
+     [MobClick event:@"home_universityItem"];
+    
      [self.navigationController pushUniversityViewControllerWithID:response[@"_id"] animated:YES];
 }
 
 -(void)QQservice
 {
-     //跳转到QQ客服聊天页面
+    [MobClick event:@"apply_QQservice"];
+      //跳转到QQ客服聊天页面
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];

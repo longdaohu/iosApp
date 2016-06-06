@@ -76,10 +76,12 @@
 {
     UITabBar *tabBar = self.tabBar;
     UITabBarItem *item = [tabBar.items objectAtIndex:index];
+    item.tag = index;
     UIImage *NomalImage = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
     UIImage *SelectImage = [UIImage imageNamed:selectName];//@"catigory_select"];
     item.image  =[NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.selectedImage = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item.titlePositionAdjustment = UIOffsetMake(0, -2);
 }
 
 
@@ -194,6 +196,26 @@
     
 }
 
+#pragma mark ——  UITabBarDelegate
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+  
+    if (USER_EN)
+     return;
+    
+    NSString *itemName;
+    if (item.tag == 0) {
+        itemName = @"tabItem_home";
+    }else if (item.tag == 1) {
+        itemName = @"tabItem_catigory";
+    }else if (item.tag == 2) {
+        itemName = @"tabItem_news";
+    }{
+        itemName = @"tabItem_applyCenter";
+    }
+    [MobClick event:itemName];
+    
+}
 
 
 

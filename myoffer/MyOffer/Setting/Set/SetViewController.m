@@ -71,6 +71,7 @@
                              }),
                      newCell(useLanString, [UIImage imageNamed:@"language_39"],
                              ^{
+                                 [MobClick event:@"changeUserLanguage"];
                                  ChangeLanguageViewController *vc = [[ChangeLanguageViewController alloc] initWithNibName:@"ChangeLanguageViewController" bundle:nil];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
@@ -78,12 +79,13 @@
                     newCell(feedBackString, [UIImage imageNamed:@"me_feedback"],
                              ^{
                                  RequireLogin
+                                 [MobClick event:@"changeUserFeedback"];
                                  FeedbackViewController *vc = [[FeedbackViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
                      newCell(aboutString, [UIImage imageNamed:@"me_about"],
                              ^{
-                                 
+                                [MobClick event:@"aboutItemClick"];
                                 XWGJAboutViewController *About =[[XWGJAboutViewController alloc] init];
                              [self.navigationController pushViewController:About animated:YES];
                                

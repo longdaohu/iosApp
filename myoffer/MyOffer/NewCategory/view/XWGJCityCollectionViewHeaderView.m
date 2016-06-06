@@ -52,6 +52,10 @@
 
 -(void)click:(UIButton *)sender
 {
+    
+    NSString *item = sender.tag == 0 ? @"catigory_UKItemClick":@"catigory_AUItemClick";
+    [MobClick event:item];
+    
     if (self.actionBlock) {
         
         self.actionBlock(sender);

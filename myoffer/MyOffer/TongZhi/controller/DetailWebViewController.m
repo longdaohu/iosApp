@@ -94,7 +94,6 @@
         NSString *lan = !USER_EN ? @"":@"en";
         [request addValue:lan forHTTPHeaderField:@"user-language"];
         [self.Web loadRequest:request];
-
         
     }else if(self.path){
     
@@ -120,11 +119,11 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //重写网页方法，监听网页链接
-    NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
+     NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
  
      [webView stringByEvaluatingJavaScriptFromString:jumpF];
     
-    [self.progress hideAnimated:YES];
+     [self.progress hideAnimated:YES];
     
 }
 
@@ -134,10 +133,10 @@
      NSString *pathURL = request.URL.absoluteString;
     
      if ([pathURL containsString:@"jump/0"]) {
+         
          ApplyStatusViewController *status =[[ApplyStatusViewController alloc] init];
         [self.navigationController pushViewController:status animated:YES];
-        
-    }
+     }
     
     return YES;
 }

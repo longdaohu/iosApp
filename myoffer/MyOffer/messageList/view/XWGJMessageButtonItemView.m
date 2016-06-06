@@ -134,6 +134,23 @@
 -(void)tap:(UIButton *)sender
 {
     
+    NSString *item;
+    if (sender.tag == 0) {
+        item = @"news_lift";
+    }else if (sender.tag == 1) {
+        item = @"news_apply";
+    }else if (sender.tag == 2) {
+        item = @"news_fee";
+    }else if (sender.tag == 3) {
+        item = @"news_kaoshi";
+    }else if (sender.tag == 4) {
+        item = @"news_news";
+    }else{
+        item = @"news_visa";
+    }
+    [MobClick event:item];
+    
+    
     if (sender.tag != self.LastIndex) {
         
         UIButton *item =(UIButton *)self.bgView.subviews[self.LastIndex];

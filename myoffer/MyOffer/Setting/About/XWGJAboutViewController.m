@@ -181,6 +181,7 @@
         switch (indexPath.row) {
             case 0: //喜欢
             {
+                [MobClick event:@"about_likeItemClick"];
                 NSString *appid = @"1016290891";
                 
                 NSString *str = [NSString stringWithFormat:
@@ -193,22 +194,26 @@
                 break;
             case 1:   //分享
             {
+                [MobClick event:@"about_shareItemClick"];
                  [self share];
             }
                 break;
             case 2:    //打开官网
             {
+                [MobClick event:@"about_webItemClick"];
                 NSURL *url = [NSURL URLWithString:@"http://www.myoffer.cn"];
                 [[UIApplication sharedApplication] openURL:url];
             }
                 break;
             case 3:    //打开weibo
             {
+                [MobClick event:@"about_weiboItemClick"];
                 NSURL *url = [NSURL URLWithString:@"http://weibo.com/u/5479612029?topnav=1&wvr=6&topsug=1"];
                 [[UIApplication sharedApplication] openURL:url];
             }
                 break;
             default:{  //复制微信账号
+                [MobClick event:@"about_weixinItemClick"];
                 
                 UIPasteboard *pab = [UIPasteboard generalPasteboard];
                 
