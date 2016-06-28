@@ -1,0 +1,16 @@
+//
+//  OrderDetailFooterView.h
+//  myOffer
+//
+//  Created by xuewuguojie on 16/6/21.
+//  Copyright © 2016年 UVIC. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+typedef void(^OrderDetailFooterViewBlock)(UIButton *sender);
+@interface OrderDetailFooterView : UIView
+@property(nonatomic,copy)OrderDetailFooterViewBlock actionBlock;
+@property(nonatomic,strong)NSDictionary *orderDict;
+@property(nonatomic,assign)CGFloat headHeight;
+@end

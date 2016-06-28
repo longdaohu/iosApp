@@ -57,6 +57,7 @@
         [self.SendCodeBtn  setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
 
         self.LineThree = [self makeLine];
+        
 
         self.CancelBtn =[self makeButtonWithTitle:GDLocalizedString(@"Potocol-Cancel")  andTag:11 andBackgroudColor:XCOLOR_LIGHTGRAY andTitleFontSize:15];
        
@@ -119,7 +120,7 @@
     CGFloat bgx = 20;
     CGFloat bgy = 0;
     CGFloat bgw = XScreenWidth - 40;
-    CGFloat bgh = 260;
+    CGFloat bgh = self.bounds.size.height;
     self.bgView.frame = CGRectMake(bgx, bgy, bgw, bgh);
     
     
@@ -184,9 +185,6 @@
     CGFloat submith = cancelh;
     CGFloat submitx = CGRectGetMaxX(self.CancelBtn.frame) +10;
     self.CommitBtn.frame = CGRectMake(submitx, submity, submitw, submith);
-    
-    
-    
     
     
 }

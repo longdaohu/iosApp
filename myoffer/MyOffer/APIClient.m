@@ -18,8 +18,8 @@ NSString * const kAPIClientErrorDomain = @"kAPIClientErrorDomain";
 
 @end
 
-static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
-//static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
+//static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
+static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
 
 @implementation APIClient
 
@@ -28,6 +28,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     __strong static id sharedInstance = nil;
     
     dispatch_once(&pred, ^{
+        
         sharedInstance = [[APIClient alloc] init];
     });
     
@@ -86,7 +87,7 @@ static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
     if (!expectedStatusCode) {
         expectedStatusCode = @[@(200)];
     }
-  
+
     
     if (!success) success = ^(NSInteger statusCode , NSDictionary *response) {};
     if (!failure) failure = ^(NSInteger statusCode , NSError *error) {};

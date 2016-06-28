@@ -33,6 +33,8 @@
 @property(nonatomic,strong)NSTimer *verifyCodeColdDownTimer;
 //直接进入编辑框 ———— 倒计时
 @property(nonatomic,assign)int verifyCodeColdDownCount;
+//记住新创建用户返回数据
+@property(nonatomic,strong)NSDictionary *LoginResponse;
 
 @end
 
@@ -54,9 +56,11 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     [MobClick beginLogPageView:@"page三方登录绑定账号"];
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
  
 }
-
 
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -65,8 +69,8 @@
     
     [MobClick endLogPageView:@"page三方登录绑定账号"];
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
-
 
 
 
@@ -147,12 +151,15 @@
 {
     self.BindItemBtn.layer.cornerRadius = 2;
     self.myOfferItemBtn.layer.cornerRadius = 2;
+    self.myOfferItemBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
+    self.myOfferItemBtn.layer.borderWidth = 1;
     
     self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-    [self.cover addTarget:self action:@selector(removeCover) forControlEvents:UIControlEventTouchUpInside];
     self.cover.backgroundColor = XCOLOR_BLACK;
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(back)];
    
 }
 -(void)makeBindView
@@ -176,22 +183,30 @@
     if (10 == sender.tag) {
         //绑定已有账户
         [self bindViewHiden:NO];
- 
-    }else{
+       
+        return;
+    }
     
+    
+    // 直接创建新用户登录
+    if (LOGIN) {
         
-        //直接创建新用户登录
+        [self LoginSuccessWithResponse:self.LoginResponse];
+        
+    }else{
+  
         [self  startAPIRequestUsingCacheWithSelector:kAPISelectorNewAndLogin parameters:self.parameter success:^(NSInteger statusCode, id response) {
-            
+         
+            self.LoginResponse = (NSDictionary *)response;
+          
             [self LoginSuccessWithResponse:response];
             
         }];
         
     }
-    
-    
 }
 
+// 直接创建新用户登录
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
     
@@ -204,27 +219,33 @@
     [MobClick event:@"otherUserLogin"];
     
     [MobClick event:@"other_Register"];
-
     
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
     
     if (!phone) {
         
-         self.cover.enabled = NO;
+         [self PhoneViewHiden:NO anddismiss:NO];
         
-        [self PhoneViewHiden:NO];
-        
-    }else{
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        
-    }
+     }else{
+         
+         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+         
+     }
     
     
 }
--(void)PhoneViewHiden:(BOOL)hiden
+//填写用户资料的显示或隐藏
+-(void)PhoneViewHiden:(BOOL)hiden anddismiss:(BOOL)dismiss
 {
+    
+    if (dismiss) {
+        
+        [self back];
+        
+        return;
+    }
+    
  
     [self.view endEditing:YES];
     
@@ -236,15 +257,15 @@
         
         self.PhoneView.frame = frame;
         
-        self.cover.alpha = hiden ? 0 : 0.5;
+        self.cover.alpha = hiden ? 0 : 0.7;
         
     } completion:^(BOOL finished) {
         
-        if (hiden) {
-            
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }
-        
+//        if (hiden && dismiss) {
+//            
+//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//            
+//        }
     }];
     
 }
@@ -254,8 +275,8 @@
 -(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
 {
     if (11 == sender.tag) {
-        
-         [self PhoneViewHiden:YES];
+        //如果点击取消
+        [self PhoneViewHiden:NO anddismiss:YES];
         
     }else if(10 == sender.tag)
     {
@@ -269,6 +290,7 @@
     }
     
 }
+
 #pragma mark 提交验证码
 -(void)CommitVerifyCode
 {
@@ -279,23 +301,22 @@
     }
     
     if (self.PhoneView.VerifyTF.text.length==0) {
-        
         AlerMessage(GDLocalizedString(@"LoginVC-007"));
-         return ;
+        return ;
     }
     
+
     
     NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];
     [infoParameters setValue:self.PhoneView.countryCode.text forKey:@"mobile_code"];
     [infoParameters setValue:self.PhoneView.PhoneTF.text forKey:@"phonenumber"];
     [infoParameters setValue:@{@"code":self.PhoneView.VerifyTF.text} forKey:@"vcode"];
     
-    
     [self startAPIRequestWithSelector:@"POST api/account/updatephonenumber"
                            parameters:@{@"accountInfo":infoParameters}
                               success:^(NSInteger statusCode, id response) {
                                   
-                                  [self PhoneViewHiden:YES];
+                                  [self PhoneViewHiden:YES anddismiss:YES];
                                   
                               }];
     
@@ -314,17 +335,19 @@
     }
     
     NSString *AreaNumber =  [ self.PhoneView.countryCode.text containsString:@"44"] ? @"44":@"86";
-    NSString *phoneNumber = self.PhoneView.PhoneTF.text;
  
+    NSString *phoneNumber = self.PhoneView.PhoneTF.text;
     
     self.PhoneView.SendCodeBtn.enabled = NO;
 
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"phone", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": AreaNumber}   expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDown) userInfo:nil repeats:YES];
+      
         self.verifyCodeColdDownCount = 60;
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+      
         self.PhoneView.SendCodeBtn.enabled = YES;
         
     }];
@@ -335,12 +358,19 @@
 - (void)runVerifyCodeColdDown {
     
     self.verifyCodeColdDownCount--;
+    
     if (self.verifyCodeColdDownCount > 0) {
+       
         [self.PhoneView.SendCodeBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
+   
     } else {
+     
         self.PhoneView.SendCodeBtn.enabled = YES;
+       
         [self.PhoneView.SendCodeBtn setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
+       
         [self.verifyCodeColdDownTimer invalidate];
+       
         _verifyCodeColdDownTimer = nil;
     }
 }
@@ -354,10 +384,12 @@
         AlerMessage(GDLocalizedString(@"LoginVC-PhoneNumberError"));
         
         return NO;
+        
     }else if ([self.PhoneView.countryCode.text containsString:@"44"] && self.PhoneView.PhoneTF.text.length != 10) {
         //"英国";
         AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError") );
-         return NO;
+      
+        return NO;
         
     }else{
         
@@ -372,7 +404,7 @@
     
     if (11 == sender.tag) {
         
-        [self commitBangding];
+         [self commitBangding];
         
     }else{
         
@@ -386,11 +418,14 @@
 {
     
     if (self.BindView.Bind_PhoneFT.text.length == 0) {
-        AlerMessage(self.BindView.Bind_PhoneFT.placeholder );
+        
+         AlerMessage(self.BindView.Bind_PhoneFT.placeholder );
+        
          return;
     }
     
     if (self.BindView.Bind_PastWordFT.text.length == 0) {
+     
         AlerMessage(self.BindView.Bind_PastWordFT.placeholder);
 
          return;
@@ -406,7 +441,6 @@
          [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
          
          [self gotoBangDing:response[@"access_token"]];
-         
          
          [MobClick event:@"other_Register"];
 
@@ -434,22 +468,25 @@
 }
 
 
--(void)removeCover
-{
-    [self bindViewHiden:YES];
-}
 //隐藏绑定View
 -(void)bindViewHiden:(BOOL)Hiden
 {
      [self.view endEditing:YES];
     
-      [UIView animateWithDuration:0.25 animations:^{
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
         CGRect newFrame = self.BindView.frame;
         newFrame.origin.y = Hiden ?  XScreenHeight : CGRectGetMaxY(self.HelloLab.frame) + 40;
         self.BindView.frame = newFrame;
-         self.cover.alpha = Hiden ? 0 : 0.5;
-
-     }];
+        self.cover.alpha = Hiden ? 0 : 0.7;
+        
+    } completion:^(BOOL finished) {
+        
+        self.BindView.Bind_PhoneFT.text = @"";
+        self.BindView.Bind_PastWordFT.text =  @"";
+        
+    }];
     
 }
 
@@ -468,6 +505,7 @@
 }
 
 - (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
+  
     NSDictionary* userInfo = [aNotification userInfo];
     NSTimeInterval animationDuration;
     UIViewAnimationCurve animationCurve;
@@ -483,13 +521,15 @@
     
     UIView  *moveView  = self.PhoneView.frame.origin.y < XScreenHeight ? self.PhoneView : self.BindView;
     
+//    NSLog(@"-------- %lf   %lf",CGRectGetMaxY(moveView.frame),(XScreenHeight - keyboardEndFrame.size.height));
+    
     if (up) {
         
-        moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f);
+          moveView.center = CGPointMake(XScreenWidth / 2.0f, (XScreenHeight - keyboardEndFrame.size.height) / 2.0f);
         
     } else {
         
-        moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, APPSIZE.height*2/3);
+        moveView.center = CGPointMake(XScreenWidth / 2.0f, XScreenHeight*2/3);
     }
     
     [self.view layoutIfNeeded];
@@ -522,12 +562,39 @@
 }
 
 
+-(void)back{
+
+    if(LOGIN){
+        
+        [[AppDelegate sharedDelegate] logout];
+        
+        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
+        
+        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+        
+        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
+         
+            [self.navigationController popViewControllerAnimated:YES];
+            
+         }];
+        
+        
+    }else{
+        
+  
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+
+}
+
 -(void)dealloc
 {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
      KDClassLog(@"LoginSelectionViewController  dealloc");
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

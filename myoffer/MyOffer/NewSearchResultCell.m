@@ -173,16 +173,10 @@
         
     }else{
         
-        
-//        if ([self.RANKTYPE isEqualToString:RANKTI]) {
-        
             NSString   *rankStr01 = uniObj.RANKTIName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
             self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
-//        }else{
-//            NSString   *rankStr02 = uniObj.rankName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.rankName;
-//            self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_World"), rankStr02];
-//        }
+ 
     }
     
 }
@@ -192,16 +186,7 @@
 {
     [super layoutSubviews];
     
-//    if (self.LocalTF.text) {
-//        
-//        CGFloat Leftx = 0;
-//        CGFloat Lefty = 0;
-//        CGFloat Lefth = CGRectGetHeight(self.rankLabel.frame);
-//        CGFloat Leftw = Lefth;
-//        UIImageView *item = (UIImageView *)self.LocalMV.subviews.firstObject;
-//        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
-//    }
-//    
+ 
     
     CGFloat hotX = XScreenWidth - 50;
     CGFloat hotY = 0;

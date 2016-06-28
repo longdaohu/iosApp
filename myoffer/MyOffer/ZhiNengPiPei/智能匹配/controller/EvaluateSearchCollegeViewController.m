@@ -20,6 +20,10 @@
 @implementation EvaluateSearchCollegeViewController
 
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.searchTextField becomeFirstResponder];
+}
 
 
 - (void)viewDidLoad {
@@ -35,7 +39,6 @@
     UIBarButtonItem *rightCommitButton =[[UIBarButtonItem alloc] initWithTitle:GDLocalizedString(@"Evaluate-Done") style:UIBarButtonItemStylePlain target:self action:@selector(commitInput)];
     self.navigationItem.rightBarButtonItem = rightCommitButton;
     
-    [self.searchTextField becomeFirstResponder];
     [self.searchTextField addTarget:self action:@selector(searchCollegeWithKeyValue:) forControlEvents:UIControlEventEditingChanged];
     
     

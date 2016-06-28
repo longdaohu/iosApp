@@ -13,6 +13,7 @@
 @property(nonatomic,strong)UIImageView *iconView;
 //标题
 @property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UITextView *titleView;
 @end
 
 @implementation XliuxueHeaderView
@@ -33,10 +34,17 @@
         self.iconView.image = [UIImage imageNamed:@"woYaoLiuXue.jpg"];
         [self addSubview:self.iconView];
         
-        self.titleLab =[UILabel labelWithFontsize:FONTSIZE(15)  TextColor:XCOLOR_RED TextAlignment:NSTextAlignmentLeft];
-        self.titleLab.numberOfLines = 0;
-        self.titleLab.lineBreakMode = NSLineBreakByCharWrapping;
-         [self addSubview:self.titleLab];
+        
+        UITextView *titleView =[[UITextView alloc] init];
+        titleView.scrollEnabled = NO;
+        titleView.editable = NO;
+        titleView.textColor =XCOLOR_RED;
+        titleView.font =FontWithSize(FONTSIZE(15));
+        titleView.textAlignment = NSTextAlignmentLeft;
+        titleView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        titleView.dataDetectorTypes = UIDataDetectorTypeAll;
+        [self addSubview:titleView];
+        self.titleView = titleView;
         
     }
     return self;
@@ -57,14 +65,15 @@
 
     
     CGFloat titlex = ITEM_MARGIN;
-    CGFloat titley = CGRectGetMaxY(self.iconView.frame) + ITEM_MARGIN ;
+    CGFloat titley = CGRectGetMaxY(self.iconView.frame) + ITEM_MARGIN;
     CGFloat titlew = XScreenWidth - 2*titlex;
     CGFloat titleHeight = [self stringHightWithTitle:title andFontSize:FONTSIZE(15)];
-    self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleHeight);
     
-    self.Height = CGRectGetMaxY(self.titleLab.frame) + 20;
-
-}
+    self.titleView.text = title;
+    self.titleView.frame = CGRectMake(titlex, titley, titlew, titleHeight);
+    self.Height = CGRectGetMaxY(self.titleView.frame) + ITEM_MARGIN;
+    
+ }
 
 
 

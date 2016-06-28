@@ -83,7 +83,10 @@
     
     [super viewDidLoad];
      
+  
     [self makeUI];
+    
+    
     
     if (self.notiID) {
         
@@ -101,7 +104,7 @@
         
     }else{
        
-        NSString *urlPath =[NSString stringWithFormat:@"http://www.myoffer.cn/faq#index=%ld",(long)self.index];
+         NSString *urlPath =[NSString stringWithFormat:@"http://www.myoffer.cn/faq#index=%ld",(long)self.index];
         [self.Web loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlPath]]];
 
      }
@@ -130,6 +133,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
   
+    
      NSString *pathURL = request.URL.absoluteString;
     
      if ([pathURL containsString:@"jump/0"]) {

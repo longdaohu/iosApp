@@ -1334,7 +1334,8 @@ typedef enum {
     
     self.ToolView.leftButton.selected = NO;
     self.ToolView.rightButton.selected = NO;
-    
+    self.ToolView.LeftView.image = [UIImage imageNamed:@"arrow_down"];
+
     [self rankTypeViewDown:NO];
     
 }

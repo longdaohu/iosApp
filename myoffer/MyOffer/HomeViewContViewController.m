@@ -28,7 +28,7 @@
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "XNewSearchViewController.h"
-
+#import "ServiceMallViewController.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeHeaderViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -73,6 +73,9 @@
     
     [self checkZhiNengPiPei];
     
+    //判断用户是否登录且登录用户手机号码是否为空，如果为空用户退出登录；
+    [self userInformation];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -109,7 +112,14 @@
         [self advanceSupportWithDuration:180];
     }
     
+//        [self payWeixin];
+    
+    
+    
+    
 }
+
+
 
 
 -(NSMutableArray *)hotCity_Arr
@@ -271,8 +281,7 @@
     
     [self checkAPPVersion];
     
- 
-}
+ }
 
 -(void)makeHomeTableView
 {
@@ -358,9 +367,11 @@
     XJHUtilDefineWeakSelfRef
     self.searchView.actionBlock = ^{
         
-         [MobClick event:@"home_shearchItemClick"];
         
-        [weakSelf presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+ 
+         [MobClick event:@"home_shearchItemClick"];
+
+         [weakSelf presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
     };
     [self.view addSubview: self.searchView];
     
@@ -638,12 +649,10 @@
          case 2:{
              
              [MobClick event:@"PiPei"];
+             RequireLogin
              if (self.recommendationsCount > 0 && LOGIN) {
-                 
                  [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
-
              }else{
-                 
                   [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
              }
            
@@ -652,7 +661,7 @@
          case 3:
          {
              [MobClick event:@"KeFu"];
-             [self QQservice];
+             [self liuxueService];
          }
             break;
         default:
@@ -681,44 +690,17 @@
      [self.navigationController pushUniversityViewControllerWithID:response[@"_id"] animated:YES];
 }
 
--(void)QQservice
+-(void)liuxueService
 {
-    [MobClick event:@"apply_QQservice"];
-      //跳转到QQ客服聊天页面
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate = self;
-        [webView loadRequest:request];
-        [self.view addSubview:webView];
-        
-    }else{
-        
-        UIAlertView *aler =[[UIAlertView alloc] initWithTitle:GDLocalizedString(@"Me-QQService") message:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel") otherButtonTitles:GDLocalizedString(@"Me-QQDownload"),nil];
-        aler.tag = 1000;
-        [aler show];
-    }
+    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+    
 }
 
 #pragma mark  ————————————  UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   
-    if (alertView.tag == 1000) {
-        
-        if (buttonIndex) { //跳转到QQ下载页面
-            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-            NSURL *url = [NSURL URLWithString:@"http://appstore.com/qq"];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            webView.delegate = self;
-            [webView loadRequest:request];
-            [self.view addSubview:webView];
-        }
-
-    }else{
-        
-        if (buttonIndex) { //跳转到appstore下载页面
+         if (buttonIndex) { //跳转到appstore下载页面
          
             NSString *appid = @"1016290891";
             
@@ -727,9 +709,7 @@
                              @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid];
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-        }
-     
-    }
+     }
     
 }
 
@@ -895,6 +875,46 @@
     }];
     
 }
+
+ 
+//请求用户信息
+-(void)userInformation
+{
+    if (!LOGIN) return;
+    
+    [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        NSString *phone = response[@"accountInfo"][@"phonenumber"];
+        
+        if (0 == phone.length) {
+            
+            [self backAndLogout];
+        }
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        
+    }];
+}
+
+//退出登录
+-(void)backAndLogout{
+    
+    if(LOGIN){
+        
+        [[AppDelegate sharedDelegate] logout];
+        
+        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
+        
+        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+        
+        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
+            
+        }];
+    }
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {

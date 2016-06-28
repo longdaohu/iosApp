@@ -25,6 +25,7 @@ typedef enum {
 #import "InteProfileViewController.h"
 #import "MessageViewController.h"
 #import "XWGJCatigoryViewController.h"
+#import "OrderViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UIAlertViewDelegate>  {
 }
@@ -288,15 +289,30 @@ typedef enum {
     sectionView.sectionBlock =^(UIButton *sender)
     {
         
-        [MobClick event:sender.tag == 11 ? @"apply_like" : @"apply_pipei"];
-        
-         if (sender.tag == 11) {
-            RequireLogin
-            FavoriteViewController *vc = [[FavoriteViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else {
-            [self inteligentOption];
+        switch (sender.superview.tag) {
+            case 1:
+            {
+                [MobClick event:@"apply_pipei"];
+
+                [self inteligentOption];
+
+            }
+                break;
+            case 2:
+            {
+                RequireLogin
+                [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
+                [MobClick event:@"apply_like"];
+              }
+                break;
+            default:{
+            
+                 [self.navigationController pushViewController:[[OrderViewController alloc] init] animated:YES];
+            }
+                break;
         }
+    
+        
     };
     return sectionView;
 }

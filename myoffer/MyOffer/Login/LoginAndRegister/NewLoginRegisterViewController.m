@@ -92,10 +92,10 @@
  
     [MobClick beginLogPageView:@"page登录页面"];
 
-    if ([[AppDelegate sharedDelegate] isLogin]) {
-        //用于判断用户第三方登录第一次登录时，按返回键返回时是否已登录成功，如果已登录成功则进入首页
-        [self dismiss];
-    }
+//    if ([[AppDelegate sharedDelegate] isLogin]) {
+//        //用于判断用户第三方登录第一次登录时，按返回键返回时是否已登录成功，如果已登录成功则进入首页
+//        [self dismiss];
+//    }
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
@@ -113,8 +113,7 @@
 {
     
     [UIView animateWithDuration:0.25 animations:^{
-        
-        self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
+         self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
     }];
     
 }
@@ -178,12 +177,11 @@
 -(UIPickerView *)AreaPicker
 {
     if (!_AreaPicker) {
+      
         _AreaPicker =[[UIPickerView alloc] init];
         _AreaPicker.delegate =self;
         _AreaPicker.dataSource =self;
-        
-        NSUInteger row = USER_EN ? 1 : 0;
-        
+         NSUInteger row = USER_EN ? 1 : 0;
         [_AreaPicker selectRow:row inComponent:0 animated:YES];
         
     }
@@ -301,58 +299,74 @@
 
 - (IBAction)changeLoginView:(UIButton *)sender {
   
-    
-    [self.view endEditing:YES];
-    self.xRegisterView.hidden = YES;
-     self.xLoginView.hidden = NO;
-    [UIView animateWithDuration:0.01 animations:^{
-        self.FocusMV.center = CGPointMake(sender.center.x, 38);
-
-    }];
+     [self LoginView:NO withSender:sender];
 
  }
 - (IBAction)changeRegisterView:(UIButton *)sender {
-    [self.view endEditing:YES];
-
-     self.xRegisterView.hidden = NO;
-    self.xLoginView.hidden = YES;
-    [UIView animateWithDuration:0.01 animations:^{
-        self.FocusMV.center = CGPointMake(sender.center.x,38);
-    }];
+   
+    [self LoginView:YES withSender:sender];
 }
 
-//跳转登录页面按钮
-- (IBAction)LoginButtonPressed:(UIButton *)sender {
-        CGRect NewRect = self.xLoginRegistView.frame;
-        NewRect.origin.y = APPSIZE.height / 3;
-        NewRect.size.width = APPSIZE.width;
-        NewRect.size.height = APPSIZE.height - APPSIZE.height/3;
-            [UIView animateWithDuration:0.5 animations:^{
-             self.LoginBlurView.alpha = 1;
-              self.backButton.alpha = 1;
-              self.xLoginRegistView.frame = NewRect;
-         }];
-     self.xRegisterView.hidden = YES;
+//注册登录页面显示、隐藏
+-(void)LoginView:(BOOL)hiden withSender:(UIButton *)sender
+{
     
-    self.FocusMV.center = CGPointMake(APPSIZE.width*0.25,38);
-
-}
-
-//跳转注册页面按钮
-- (IBAction)RegisterButtonPress:(UIButton *)sender {
-
-    CGRect NewRect = self.xLoginRegistView.frame;
-    NewRect.origin.y = APPSIZE.height / 3;
-    NewRect.size.width = APPSIZE.width;
-    NewRect.size.height = APPSIZE.height - APPSIZE.height/3;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.LoginBlurView.alpha = 1;
-        self.backButton.alpha = 1;
-        self.xLoginRegistView.frame = NewRect;
+   [self.view endEditing:YES];
+    
+    self.xRegisterView.hidden = !hiden;
+    self.xLoginView.hidden = hiden;
+    
+    [UIView animateWithDuration:0.01 animations:^{
+    
+        self.FocusMV.center = CGPointMake(sender.center.x, 38);
+        
     }];
-    self.xLoginView.hidden = YES;
-    self.FocusMV.center = CGPointMake(APPSIZE.width*0.75,38);
+
 }
+
+-(void)LoginViewShow:(BOOL)show sender:(UIButton *)sender
+{
+   
+    CGRect NewRect = self.xLoginRegistView.frame;
+    NewRect.origin.y = show ? XScreenHeight / 3 : XScreenHeight;
+    NewRect.size.width = XScreenWidth;
+    NewRect.size.height = 2 * XScreenHeight/3;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        self.LoginBlurView.alpha = show ? 1 : 0;
+        self.backButton.alpha = show ? 1 : 0;
+        self.xLoginRegistView.frame = NewRect;
+        
+    }];
+    
+  
+    if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
+        
+        self.xLoginView.hidden = YES;
+        self.FocusMV.center = CGPointMake(APPSIZE.width*0.75,38);
+        
+    }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
+        
+        self.xRegisterView.hidden = YES;
+        self.FocusMV.center = CGPointMake(APPSIZE.width*0.25,38);
+        
+    }else{
+        
+        self.xLoginView.hidden = NO;
+        self.xRegisterView.hidden = NO;
+        
+    }
+ 
+}
+
+//跳转登录页面按钮   //跳转注册页面按钮
+- (IBAction)LoginButtonPressed:(UIButton *)sender {
+    
+      [self LoginViewShow:YES sender:sender];
+  
+}
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -389,11 +403,11 @@
          [self LoginSuccessWithResponse:response];
   
      }];
-    
-    
-
+  
 }
 
+
+//正常（非第三方）登录成功相关处理
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
@@ -404,9 +418,12 @@
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
     
-    if (!phone) {
-        [self fillUserPhoneNumber];
+    if (phone.length == 0) {
+        
+        [self coverShow:YES];
+        
     }else{
+        
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
         [hud applySuccessStyle];
         [hud hideAnimated:YES afterDelay:2];
@@ -428,67 +445,45 @@
 
 }
 
-// 点击微信登录
-- (IBAction)weixinButtonPressed:(id)sender {
+#pragma mark ———————— 第三方登录
+- (IBAction)otherLogin:(UIButton *)sender
+{
     
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    NSString *shareplatform;
+    NSString *platformName;
+    if ( 999 == sender.tag) {
+     
+        shareplatform = UMShareToSina;
+        platformName = @"weibo";
+        
+    }else if ( 998 == sender.tag) {
+        
+        shareplatform = UMShareToQzone;
+        platformName = @"qq";
+
+    }else {
+
+        shareplatform = UMShareToWechatSession;
+        platformName = @"wechat";
+
+    }
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
+    
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
             NSMutableDictionary *weixinInfo =[NSMutableDictionary dictionary];
             [weixinInfo setValue:snsAccount.usid forKey:@"user_id"];
-            [weixinInfo setValue:@"wechat" forKey:@"provider"];
+            [weixinInfo setValue:platformName forKey:@"provider"];
             [weixinInfo setValue:snsAccount.accessToken forKey:@"token"];
             [self  loginWithParameters:weixinInfo];
         }
     });
-
-}
-
-//QQ登录
-- (IBAction)QQLoginButtonPressed:(id)sender {
     
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQzone];
-    
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        //          获取微博用户名、uid、token等
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQzone];
-            //            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            NSMutableDictionary *QQInfo =[NSMutableDictionary dictionary];
-            
-            [QQInfo setValue:snsAccount.usid forKey:@"user_id"];
-            
-            [QQInfo setValue:@"qq" forKey:@"provider"];
-            
-            [QQInfo setValue:snsAccount.accessToken forKey:@"token"];
-            
-            [self  loginWithParameters:QQInfo];
-            
-        }});
-    
-}
-
-//微博登录
-- (IBAction)weiboLoginButtonPressed:(id)sender {
-    
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-    
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-            
-            NSMutableDictionary *weiboInfo =[NSMutableDictionary dictionary];
-            [weiboInfo setValue:snsAccount.usid forKey:@"user_id"];
-            [weiboInfo setValue:@"weibo" forKey:@"provider"];
-            [weiboInfo setValue:snsAccount.accessToken forKey:@"token"];
-            [self  loginWithParameters:weiboInfo];
-            
-        }});
+ 
 }
 
 
@@ -508,7 +503,8 @@
             
             [self OtherLoginSuccessWithResponse:response andUserInfo:userInfo];
             
-          }
+        }
+        
     }];
 }
 
@@ -526,15 +522,15 @@
     
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
+    
     if (!phone) {
         
-        [self fillUserPhoneNumber];
+        [self coverShow:YES];
         
     }else{
         
         [self dismiss];
-
-    }
+     }
 
 }
 
@@ -561,18 +557,11 @@
         return ;
     }
     
-    NSString *AreaNumber = @"86";
-    if([ self.RegisterAreaTextF.text containsString:GDLocalizedString(@"LoginVC-england")])//@"英国"])
-    {
-       AreaNumber = @"44";
-    }
-    NSString *phoneNumber = self.RegisterPhoneTextF.text;
-    
-    
-    
- 
+     NSString *AreaNumber = [self.RegisterAreaTextF.text containsString:@"44"] ?@"44" : @"86";
+     NSString *phoneNumber = self.RegisterPhoneTextF.text;
     
      self.VertifButton.enabled = NO;
+    
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"register", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": AreaNumber}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDownTimer) userInfo:nil repeats:YES];
@@ -615,6 +604,7 @@
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:@{@"mobile_code":AreaNumber,@"username":self.RegisterPhoneTextF.text, @"password":self.RegisterPasswdTextF.text, @"vcode": @{@"code":self.RegisterVerTextF.text}}
      success:^(NSInteger statusCode, NSDictionary *response) {
+       
          KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
          
          [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
@@ -677,19 +667,8 @@
 
 //返回注册登录第一页
 - (IBAction)backButtonPressed:(KDEasyTouchButton *)sender {
-    
-    CGRect NewRect = self.xLoginRegistView.frame;
-    NewRect.origin.y = APPSIZE.height;
-     [UIView animateWithDuration:0.5 animations:^{
-      
-        self.LoginBlurView.alpha = 0;
-        self.backButton.alpha = 0;
-        self.xLoginRegistView.frame = NewRect;
-         
-     }];
-    
-    self.xLoginView.hidden = NO;
-    self.xRegisterView.hidden = NO;
+  
+    [self LoginViewShow:NO sender:sender];
     
 }
 //退出登录页面
@@ -704,6 +683,7 @@
       DetailWebViewController  *service =[[DetailWebViewController alloc] init];
       service.path =  [NSString stringWithFormat:@"http://www.myoffer.cn/docs/%@/web-agreement.html",GDLocalizedString(@"ch_Language")];
       [self.navigationController pushViewController:service animated:YES];
+    
 }
 
 #pragma  Mark  —————————— UIPickerViewDataSource, UIPickerViewDelegate
@@ -802,7 +782,6 @@
     if (!_cover) {
         
         _cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-        [_cover addTarget:self action:@selector(coverHidenYES) forControlEvents:UIControlEventTouchUpInside];
         _cover.backgroundColor = XCOLOR_BLACK;
         _cover.alpha = 0;
         
@@ -815,20 +794,13 @@
 #pragma mark ————————  YourPhoneViewDelegate
 -(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
 {
-    
     if (11 == sender.tag) {
-        
-        [self coverHidenYES];
-        
-    }else if(10 == sender.tag)
-    {
-        
+        [self backAndLogout];
+        [self coverShow:NO];
+    }else if(10 == sender.tag){
         [self sendVerifyCode];
-        
     }else{
-        
         [self CommitVerifyCode];
-        
     }
     
 }
@@ -861,7 +833,7 @@
                            parameters:@{@"accountInfo":infoParameters}
                               success:^(NSInteger statusCode, id response) {
                                   
-                                  [self coverHidenYES];
+                                  [self dismiss];
                                   
                               }];
     
@@ -879,7 +851,6 @@
         
         return ;
     }
-    
     
     
     self.PhoneView.SendCodeBtn.enabled = NO;
@@ -905,7 +876,6 @@
     
     self.verifyCodeColdDownCount--;
     if (self.verifyCodeColdDownCount > 0) {
-//        self.PhoneView.SendCodeBtn.enabled = NO;
         [self.PhoneView.SendCodeBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
     } else {
         
@@ -936,54 +906,57 @@
 }
 
 
-#pragma mark 取消遮盖
--(void)coverHidenYES
-{
-    [self coverHidenYESAndDismiss:YES];
-    
-}
 
--(void)coverHidenYESAndDismiss:(BOOL)miss
+//手机号码编辑框出现隐藏
+-(void)coverShow:(BOOL)show
 {
-    [self.view endEditing:YES];
+    if (show) {
+        self.coverView.hidden = NO;
+    }else{
+        [self.view endEditing:YES];
+     }
+    
+    CGFloat coverAlpha = show ? 0.5 : 0;
+    CGFloat phoneViewAlpha = show ? 1 : 0;
+    CGRect  NewFrame =self.PhoneView.frame;
+    NewFrame.origin.y = show ? 100 + (XScreenWidth - 320)* 0.6 : XScreenHeight;
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        self.cover.alpha = 0;
-        CGRect  frame =self.PhoneView.frame;
-        frame.origin.y = XScreenHeight;
-        self.PhoneView.frame = frame;
-        self.PhoneView.alpha = 0;
+        self.cover.alpha = coverAlpha;
+        self.PhoneView.alpha =phoneViewAlpha;
+        self.PhoneView.frame = NewFrame;
         
     } completion:^(BOOL finished) {
         
-        self.coverView.hidden = YES;
-        
-        if (miss) {
+        if (!show) {
             
-            [self dismiss];
-        }
-        
-    }];
-}
-
-//出现手机号码编辑框
--(void)fillUserPhoneNumber
-{
-    self.coverView.hidden = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        self.cover.alpha = 0.5;
-        CGRect  frame =self.PhoneView.frame;
-        frame.origin.y = 100 + (XScreenWidth - 320)* 0.6;
-        self.PhoneView.frame = frame;
-        self.PhoneView.alpha = 1;
-        
-    } completion:^(BOOL finished) {
-        
+            self.coverView.hidden = YES;
+         }
         
     }];
     
+}
+
+
+-(void)backAndLogout{
+    
+    if(LOGIN){
+        
+        [[AppDelegate sharedDelegate] logout];
+        
+        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
+        
+        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+        
+        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }];
+    }
+    
+        
 }
 
 

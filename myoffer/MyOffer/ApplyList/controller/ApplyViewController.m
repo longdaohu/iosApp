@@ -163,7 +163,6 @@
 {
     
     
-    
     self.NDataView =[XWGJnodataView noDataView];
     self.NDataView.hidden = YES;
     self.NDataView.contentLabel.text = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
@@ -370,52 +369,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"applyCell"];
-//    
-//    if (!cell) {
-//        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"applyCell"];
-//        cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-//        [(UIImageView *)cell.accessoryView setContentMode:UIViewContentModeCenter];
-//        cell.textLabel.numberOfLines = 2;
-//        cell.textLabel.font =FontWithSize(KDUtilSize(UNIVERISITYTITLEFONT));
-//        
-//    }
-
-    
-//    ApplySection *sectionM = self.sectionGroups[indexPath.section];
-//    Applycourse *subject = sectionM.subjects[indexPath.row];
-//
-//    
-//    if ([self.courseSelecteds  containsObject:subject.courseID]) {
-//        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons-yes"]];
-//    }
-//    else
-//    {
-//        [(UIImageView *)cell.accessoryView setImage:[UIImage imageNamed:@"check-icons"]];
-//    }
-    
-    
-//     cell.textLabel.text =  subject.official_name;
-    
-//    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")]) {
-//        
-//        [(UIImageView *)cell.accessoryView setImage:nil];
-//        
-//        if ([self.cancelCourseList containsObject:subject.courseID]){
-//            
-//            cell.imageView.image = [UIImage imageNamed:@"check-icons-yes"];
-//            
-//        }else{
-//            
-//            cell.imageView.image = [UIImage imageNamed:@"check-icons"];
-//            
-//        }
-//        
-//    }else{
-//        
-//        cell.imageView.image = nil;
-//        
-//    }
+ 
     
     ApplySection *sectionM = self.sectionGroups[indexPath.section];
     Applycourse *subject = sectionM.subjects[indexPath.row];

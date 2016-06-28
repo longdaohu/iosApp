@@ -21,6 +21,8 @@
 - (void)loginWithAccessToken:(NSString *)token;
 - (void)logout;
 - (NSString *)accessToken;
+- (void)updateUmeng;
+-(void)umeng;
 
 @end
 

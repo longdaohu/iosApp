@@ -23,8 +23,10 @@
 #import "APService.h"
 #import "NotificationViewController.h"
 #import "RNCachingURLProtocol.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 
-@interface AppDelegate ()<RESideMenuDelegate>
+@interface AppDelegate ()<RESideMenuDelegate,WXApiDelegate>
 {
     NSString *_accessToken;
  }
@@ -65,17 +67,17 @@ static AppDelegate *__sharedDelegate;
     [self umeng];//友盟
     
     [self Jpush];//极光
-    
-    // Required
+    //极光
     [APService setupWithOption:launchOptions];
-   
-    NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+     NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfox) {
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfox];
         
          [self applicationBadgeNumber];
     }
+ 
+    
  
     
     return YES;
@@ -92,7 +94,6 @@ static AppDelegate *__sharedDelegate;
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
-    //  sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
     sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
     //    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
@@ -167,11 +168,33 @@ static AppDelegate *__sharedDelegate;
     [MobClick setLogEnabled:YES];
     [MobClick setEncryptEnabled:YES];
     [MobClick setLogEnabled:YES];
+   
+     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
 
- 
-  
 }
 
+-(void)updateUmeng
+{
+    // 5606655f67e58e9f00004355
+    //在AppDelegate内设置友盟AppKey
+    [UMSocialData setAppKey:@"5668ea43e0f55af981002131"];
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:@"wx3b0cb66502388846" appSecret:@"5e410534cd1657326777084f1a7a3181" url:@"http://www.myoffer.cn/"];
+    //打开新浪微博的SSO开关，设置新浪微博回调地址
+    [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    
+    //设置QQ登录
+    [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
+    //友盟统计
+    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick setLogEnabled:YES];
+    [MobClick setEncryptEnabled:YES];
+    [MobClick setLogEnabled:YES];
+    
+    [WXApi registerApp:@"wx3b0cb66502388846" withDescription:@"demo 2.0"];
+ }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
@@ -219,7 +242,6 @@ static AppDelegate *__sharedDelegate;
 
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
-//   LoginAndRegisterViewController *vc = [[LoginAndRegisterViewController alloc] init];
     NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
@@ -282,29 +304,137 @@ static AppDelegate *__sharedDelegate;
        }
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return  [UMSocialSnsService handleOpenURL:url];
+
+#pragma mark 微信回调的代理方法
+-(void)onReq:(BaseReq*)req{
+
+    NSLog(@"onReq 微信  %@",[req class]);
+
 }
+
+
+- (void)onResp:(BaseResp *)resp {
+    
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+     
+        NSString *errcode = [NSString stringWithFormat:@"%d",response.errCode];
+        [[NSNotificationCenter  defaultCenter] postNotificationName:@"wxpay" object:errcode];
+        switch (response.errCode) {
+          
+            case WXSuccess:
+                NSLog(@"微信回调的代理方法 suceess %d",response.errCode);
+
+                break;
+            default:
+                NSLog(@"微信回调的代理方法 failed %d",response.errCode);
+                break;
+        }
+    }
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    
+    NSLog(@"application handleOpenURL------- %@",url.absoluteString);
+
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+
+- (BOOL)applicationOpenURL:(NSURL *)url
+{
+    
+    NSLog(@"aapplicationOpenURL------- %@",url.absoluteString);
+    if([[url absoluteString] rangeOfString:@"wx3b0cb66502388846://pay"].location == 0) //你的微信开发者appid
+        return [WXApi handleOpenURL:url delegate:self];
+    else
+        return [UMSocialSnsService handleOpenURL:url wxApiDelegate:self];
+}
+
+//
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    
+//    NSLog(@"application openURL:(NSURL *)url sourceApplication------- %@",url.absoluteString);
+//    
+//    return [WXApi handleOpenURL:url delegate:self];
+//}
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL result = [UMSocialSnsService handleOpenURL:url];
-    if (result == FALSE) {
-        //调用其他SDK，例如支付宝SDK等
+   
+//    NSLog(@"   以后使用新API接口   ");
+    NSLog(@"openURL  application------- %@",url.absoluteString);
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"   跳转支付宝钱包进行支付 result = %@",resultDic);
+        }];
+        
+        return YES;
+        
+    }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
+        
+        
+        return [WXApi handleOpenURL:url delegate:self];
+        
+        
+    }else{
+        
+        BOOL result = [UMSocialSnsService handleOpenURL:url];
+        if (result == FALSE) {
+            //调用其他SDK，例如支付宝SDK等
+            
+        }
+        return result;
+        
     }
-    return result;
+
+  
+}
+//
+//// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    
+    
+//    NSLog(@"    NOTE: 9.0以后使用新API接口   ");
+    NSLog(@"openURL  application 9.0以后------- %@",url.absoluteString);
+
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            
+             NSLog(@"NOTE: 9.0 跳转支付宝钱包进行支付 result = %@",resultDic);
+            [[NSNotificationCenter  defaultCenter] postNotificationName:@"alipay" object:resultDic[@"resultStatus"]];
+            
+        }];
+        
+         return YES;
+
+    }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
+      
+        
+        return [WXApi handleOpenURL:url delegate:self];
+        
+     
+    }else{
+    
+        BOOL result = [UMSocialSnsService handleOpenURL:url];
+        if (result == FALSE) {
+            //调用其他SDK，例如支付宝SDK等
+            
+            
+        }
+        return result;
+
+    }
 }
 
 
 
-//- (BOOL)application:(UIApplication *)application
-//            openURL:(NSURL *)url
-//  sourceApplication:(NSString *)sourceApplication
-//         annotation:(id)annotation
-//{
-//    return  [UMSocialSnsService handleOpenURL:url];
-//}
+
 
 
 #pragma mark RESideMenu Delegate
@@ -327,5 +457,10 @@ static AppDelegate *__sharedDelegate;
 {
     //    NSLog(@"didHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
 }
+
+
+
+
+
 
 @end

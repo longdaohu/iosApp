@@ -73,7 +73,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="RegisterButtonPress:" destination="-1" eventType="touchUpInside" id="4My-O3-wA5"/>
+                        <action selector="LoginButtonPressed:" destination="-1" eventType="touchUpInside" id="77g-JK-rpd"/>
                     </connections>
                 </button>
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-BH-wpr" customClass="FXBlurView">
@@ -613,7 +613,7 @@
                                 <constraint firstAttribute="height" constant="20" id="yUp-bB-clD"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" tag="13" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71I-AZ-SOv" userLabel="weixinButton" customClass="KDEasyTouchButton">
+                        <button opaque="NO" tag="997" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71I-AZ-SOv" userLabel="weixinButton" customClass="KDEasyTouchButton">
                             <rect key="frame" x="80" y="30" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="4lR-hZ-n2k"/>
@@ -622,10 +622,10 @@
                             <state key="normal" image="wechat_icon"/>
                             <state key="highlighted" image="wechat_icon_high"/>
                             <connections>
-                                <action selector="weixinButtonPressed:" destination="-1" eventType="touchUpInside" id="Jgr-sq-XSh"/>
+                                <action selector="otherLogin:" destination="-1" eventType="touchUpInside" id="VTm-pV-QpB"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nF-th-giw" userLabel="weiboButton" customClass="KDEasyTouchButton">
+                        <button opaque="NO" tag="999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nF-th-giw" userLabel="weiboButton" customClass="KDEasyTouchButton">
                             <rect key="frame" x="200" y="30" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Kja-na-ji0"/>
@@ -634,10 +634,10 @@
                             <state key="normal" image="weibo_icon"/>
                             <state key="highlighted" image="weibo_icon_high"/>
                             <connections>
-                                <action selector="weiboLoginButtonPressed:" destination="-1" eventType="touchUpInside" id="pW6-kR-9jH"/>
+                                <action selector="otherLogin:" destination="-1" eventType="touchUpInside" id="pbd-aD-JVp"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-xI-zhA">
+                        <button opaque="NO" tag="998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVb-xI-zhA">
                             <rect key="frame" x="140" y="30" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="1dh-vp-596"/>
@@ -646,7 +646,7 @@
                             <state key="normal" title="Button" image="qq_icon"/>
                             <state key="highlighted" image="qq_icon_high"/>
                             <connections>
-                                <action selector="QQLoginButtonPressed:" destination="-1" eventType="touchUpInside" id="14k-AD-F27"/>
+                                <action selector="otherLogin:" destination="-1" eventType="touchUpInside" id="DCC-gl-ACn"/>
                             </connections>
                         </button>
                     </subviews>

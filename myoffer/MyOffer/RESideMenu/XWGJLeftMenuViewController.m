@@ -16,13 +16,13 @@
 #import "NotificationViewController.h"
 #import "ApplyStatusViewController.h"
 #import "DetailWebViewController.h"
+#import "OrderViewController.h"
 
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property(nonatomic,strong)leftHeadView *headerView;
 @property(nonatomic,strong)UIView *footerView;
-@property(nonatomic,strong)UIButton *LogOutButton;
 @property(nonatomic,copy)NSString *Applystate;
 @property(nonatomic,strong)UIImageView *newsTag;  //是否有新通知图标
 @property(nonatomic,strong)NSArray *cellImages;
@@ -36,7 +36,7 @@
 {
     if (!_cellImages) {
         
-        _cellImages = @[@"menu_application",@"menu_messages",@"menu_setting",@"help",@"logout"];
+        _cellImages = @[@"menu_application",@"menu_service",@"menu_messages",@"menu_setting",@"help",@"logout"];
      }
     return _cellImages;
 }
@@ -45,7 +45,7 @@
 {
     if (!_cellTitles) {
         
-        _cellTitles = @[GDLocalizedString(@"Left-Applycation"),GDLocalizedString(@"Left-noti"),GDLocalizedString(@ "Left-Set"),GDLocalizedString(@ "Left-helpCenter"),GDLocalizedString(@ "Left-Logout")];
+        _cellTitles = @[GDLocalizedString(@"Left-Applycation"),@"订单中心",GDLocalizedString(@"Left-noti"),GDLocalizedString(@ "Left-Set"),GDLocalizedString(@ "Left-helpCenter"),GDLocalizedString(@ "Left-Logout")];
 
     }
     return _cellTitles;
@@ -95,7 +95,7 @@
            self.newsTag.hidden = [countstr containsString:@"0"];
  
         [self.tableView reloadData];
-            
+    
         }];
         
           /** state     状态有4个值
@@ -220,13 +220,11 @@
 
 -(void)makeUI
 {
-    
     self.view.backgroundColor =[UIColor clearColor];
     
     [self makeTableView];
     
     [self makeTableHeaderView];
-    
 }
 
 
@@ -292,6 +290,23 @@
     
 }
 
+-(void)caseOrderList
+{
+    if (![self checkWhenUserLogOut]) {
+        
+        return;
+    }
+    
+    [self.sideMenuViewController hideMenuViewController];
+    
+    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+    
+     OrderViewController *notiVC = [[OrderViewController alloc] init];
+    
+    [nav pushViewController:notiVC animated:NO];
+    
+}
+
 -(void)caseNotication
 {
     [MobClick event:@"notificationItemClick"];
@@ -319,12 +334,15 @@
             [self caseApply];
             break;
         case 1:
-            [self caseNotication];
+            [self caseOrderList];
             break;
         case 2:
-            [self caseSetting];
+            [self caseNotication];
             break;
         case 3:
+            [self caseSetting];
+            break;
+        case 4:
             [self caseHelp];
             break;
         default:
@@ -384,7 +402,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    if (indexPath.row == 1) {
+    if (indexPath.row == 2) {
         
          [cell.contentView addSubview:self.newsTag];
     }

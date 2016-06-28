@@ -34,7 +34,7 @@
         self.LineOne =[self makeLine];
         
         self.Bind_PastWordFT =[self makeTextFieldWithPlaceholder:GDLocalizedString(@"LoginVC-0011")];
-
+        self.Bind_PastWordFT.secureTextEntry = YES;
         
         self.LineTwo =[self makeLine];
    

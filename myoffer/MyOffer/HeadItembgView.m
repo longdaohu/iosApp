@@ -21,7 +21,7 @@
 -(NSArray *)itemImages
 {
     if (!_itemImages) {
-        _itemImages =@[@"home_wo",@"home_xiaobai",@"Home_pipei",@"Home_service"];
+        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"home_Mall"];
     }
     return _itemImages;
 }
@@ -29,7 +29,8 @@
 -(NSArray *)itemTitles
 {
     if (!_itemTitles) {
-        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),GDLocalizedString(@"Discover_QQ")];
+        
+        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"增值服务"];
     }
     return _itemTitles;
 }

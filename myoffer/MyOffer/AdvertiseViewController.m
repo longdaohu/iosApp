@@ -14,7 +14,6 @@
 
 
 @interface AdvertiseViewController ()<UIWebViewDelegate,WKNavigationDelegate>
-@property(nonatomic,strong)UIWebView *web;
 @property(nonatomic,strong)KDProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 @property(nonatomic,strong)NSString  *URLpath;
@@ -125,13 +124,8 @@
         decisionHandler(WKNavigationActionPolicyCancel);
     
     }else{
-      
          decisionHandler(WKNavigationActionPolicyAllow);
-
     }
-    
-    
-    
     
 }
 

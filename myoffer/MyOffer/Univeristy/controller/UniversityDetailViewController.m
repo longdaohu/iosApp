@@ -37,6 +37,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
     [MobClick beginLogPageView:@"page学校详情"];
+
+    [self reloadData];
     
 }
 
@@ -65,7 +67,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self makeUI];
-    [self reloadData];
 }
 
 -(void)makeUI
@@ -168,16 +169,10 @@
             
             float my = [response[@"evaluation"] floatValue];
             
-            
             if(my == -1) {
                 
-                
                 _mySuccessLabel.text =GDLocalizedString(@"UniversityDetail-operating");//@"计算中...";
-                
-                
                 _mySuccessProgressView.progress = 0.0f;
-                
-                
                 [self startAPIRequestWithSelector:kAPISelectorEvaluate
                                        parameters:@{@":id": _universityID}
                                           success:^(NSInteger statusCode, NSDictionary *response) {
@@ -185,7 +180,6 @@
                                               _mySuccessLabel.text = [NSString stringWithFormat:@"%@: %.1f%%",GDLocalizedString(@"UniversityDetail-0014"), my];
                                               _mySuccessProgressView.progress = my / 100.0f;
                                           }];
-                
             }
             else {
                 //我的成功率
@@ -193,19 +187,15 @@
                 _mySuccessProgressView.progress = my / 100.0f;
             }
             [self aboutHiden:YES];
-//            _evaluationButton.hidden = YES;
-//            _progressContainer.hidden = NO;
+            
         } else {
-//            _evaluationButton.hidden = NO;
-//            _progressContainer.hidden = YES;
+            
             [self aboutHiden:NO];
         }
              
     }else
     {
         [self aboutHiden:NO];
-//        _evaluationButton.hidden = NO;
-//        _progressContainer.hidden = YES;
     }
         
         [self configureLikeButton];

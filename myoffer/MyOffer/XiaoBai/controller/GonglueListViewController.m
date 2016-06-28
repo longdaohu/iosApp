@@ -78,11 +78,9 @@
 -(void)checkZhiNengPiPei{
     
     if (LOGIN) {
-        
-        //判断是否有智能匹配数据或收藏学校
+         //判断是否有智能匹配数据或收藏学校
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            
-            self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+             self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
             
         }];
     }
@@ -144,7 +142,6 @@
     self.headerHeight = header.HeaderHeight;
     self.headerView = header;
     self.TableView.tableHeaderView = header;
-
     
 }
 
@@ -198,6 +195,8 @@
     }
     
     if ([message[@"_id"] isEqualToString:@"recommendations"]) {
+        
+        RequireLogin
         
         if (self.recommendationsCount > 0) {
             

@@ -382,15 +382,14 @@ typedef enum {
 //用于网络数据请求
 -(void)requestDataSource{
 
+    
     if ([AppDelegate sharedDelegate].isLogin) {
         
         [self startAPIRequestWithSelector:@"GET api/account/evaluate"  parameters:nil success:^(NSInteger statusCode, id response) {
             
               self.response = response;
             
-            
-            
-             [self.profileTabelView reloadData];
+              [self.profileTabelView reloadData];
             
         }];
     }

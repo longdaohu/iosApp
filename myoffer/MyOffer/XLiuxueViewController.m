@@ -91,11 +91,9 @@ typedef enum {
             [self LiuxueButtonClick];
             
         }
-
-    
+     
     }
     
-  
     
     [MobClick beginLogPageView:@"page我要留学"];
 
@@ -204,6 +202,8 @@ typedef enum {
     
     self.title = GDLocalizedString(@"WoYaoLiuXue_title");
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self makeTableView];
     
     [self getSelectionResourse];
@@ -217,13 +217,13 @@ typedef enum {
 -(void)makePhoneView
 {
     self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-    [self.cover addTarget:self action:@selector(removeCover) forControlEvents:UIControlEventTouchUpInside];
+//    [self.cover addTarget:self action:@selector(removeCover) forControlEvents:UIControlEventTouchUpInside];
     self.cover.backgroundColor = XCOLOR_BLACK;
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
     
     
-    self.PhoneView =[[YourPhoneView alloc] initWithFrame:CGRectMake(0, XScreenHeight,XScreenWidth, 260)];
+    self.PhoneView =[[YourPhoneView alloc] initWithFrame:CGRectMake(0, XScreenHeight,XScreenWidth, 300)];
     self.PhoneView.countryCode.inputView = self.countryCodePicker;
     self.PhoneView.delegate = self;
     [self.view addSubview:self.PhoneView];
@@ -664,10 +664,10 @@ typedef enum {
 }
 
 
--(void)removeCover{
-
-    [self PhoneViewHiden:YES];
-}
+//-(void)removeCover{
+//
+//    [self PhoneViewHiden:YES];
+//}
 
 
 -(void)PhoneViewHiden:(BOOL)hiden
