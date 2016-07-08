@@ -106,6 +106,8 @@
      success:^(NSInteger statusCode, id response) {
          
          NSArray *universities = (NSArray *)response;
+         
+         NSLog(@" account/favorites----- %@",response);
  
          NSMutableArray *temp = [NSMutableArray array];
          

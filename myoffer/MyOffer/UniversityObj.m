@@ -18,7 +18,7 @@
         self.in_cart = info[@"in_cart"];
         self.titleName = info[@"name"];
         self.subTitleName = info[@"official_name"];
-                self.countryName  =[info[@"country"] containsString:@"ingdom"] ? @"UK" : info[@"country"];
+        self.countryName  =[info[@"country"] containsString:@"ingdom"] ? @"UK" : info[@"country"];
         self.stateName  =  info[@"state"];
         self.cityName  =  info[@"city"];
         self.LocalPlaceName =[NSString stringWithFormat:@"%@-%@-%@",self.countryName, info[@"state"],info[@"city"]];

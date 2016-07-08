@@ -121,6 +121,7 @@
 {
   
     XuFilerView *filer =[[XuFilerView alloc] init];
+    [self addChildViewController:filer];
     self.filer = filer;
     filer.delegate = self;
     filer.view.frame = CGRectMake(0, 0, XScreenWidth, 0);

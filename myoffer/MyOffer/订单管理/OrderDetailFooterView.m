@@ -41,17 +41,17 @@
         self.orderRecordLab.text = @"状态记录";
         
         
-        self.NoOneRecordLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
+        self.NoOneRecordLab =[UILabel labelWithFontsize:KDUtilSize(12.5)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.NoOneRecordLab];
  
         
-        self.NoTwoRecordLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
+        self.NoTwoRecordLab =[UILabel labelWithFontsize:KDUtilSize(12.5)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.NoTwoRecordLab];
         
         
-        self.orderPriceLab =[UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_RED TextAlignment:NSTextAlignmentRight];
+        self.orderPriceLab =[UILabel labelWithFontsize:KDUtilSize(20)  TextColor:XCOLOR_RED TextAlignment:NSTextAlignmentRight];
         [self.bgView addSubview:self.orderPriceLab];
-        self.orderPriceLab.textColor = [UIColor brownColor];
+        self.orderPriceLab.textColor = [UIColor colorWithRed:156.0/255 green:132.0/255 blue:63.0/255 alpha:1];
         
         self.payTimeLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.payTimeLab];
@@ -93,12 +93,13 @@
 -(void)setOrderDict:(NSDictionary *)orderDict{
 
     _orderDict = orderDict;
-     
-    NSString *payStr = [NSString stringWithFormat:@"￥%@",orderDict[@"total_fee"]];
-    NSMutableAttributedString *attribStr = [[NSMutableAttributedString alloc] initWithString:payStr];
-    [attribStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_RED range:NSMakeRange(1, payStr.length - 1)];
-    self.orderPriceLab.attributedText = attribStr;
     
+//    NSLog(@" ---xxxxx--- %@",orderDict);
+    NSString *payStr = [NSString stringWithFormat:@"￥%@元",orderDict[@"total_fee"]];
+    NSMutableAttributedString *attribStr = [[NSMutableAttributedString alloc] initWithString:payStr];
+    [attribStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_BLACK range:NSMakeRange(1, payStr.length - 1)];
+    [attribStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:KDUtilSize(13)] range:NSMakeRange(payStr.length - 1, 1)];
+    self.orderPriceLab.attributedText = attribStr;
     [self statusWithTag:orderDict[@"status"]];
     
     CGFloat recordX = 10;
@@ -163,18 +164,26 @@
     
     
     self.headHeight = CGRectGetMaxY(self.bgView.frame);
+ 
     
     NSArray *logs =orderDict[@"logs"];
     NSDictionary *log  = logs[0];
     NSString *create_at =[self makeTime:log[@"create_at"] andStatus:@"创建订单："];
     self.NoOneRecordLab.text = create_at;
 
+    
     if ([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]) {
         
         NSArray *trades =orderDict[@"trades"];
         NSDictionary *trade  = trades[0];
-  
-         self.NoTwoRecordLab.text = [self makeTime:trade[@"create_at"] andStatus:@"完成订单："];
+    
+        NSString *temp;
+        NSString *payTime = [self makeTime:trade[@"create_at"] andStatus:@"完成订单："];
+        if([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]){
+            NSString *system = [trade[@"system"] isEqualToString:@"wechat_pay"] ? @"使用微信支付成功":@"使用支付宝支付成功";
+            temp = [NSString stringWithFormat:@"%@ %@",payTime,system];
+        }
+         self.NoTwoRecordLab.text =  temp;
         
     }else  if ([orderDict[@"status"] isEqualToString:@"ORDER_PAY_PENDING"]) {
       
@@ -192,20 +201,19 @@
         
         NSDate *currentDate = [NSDate date];
         NSDate *currentLocaleDate = [self localDate:currentDate];
-        
-        CGFloat len =[endLocalDate timeIntervalSinceDate:currentLocaleDate];
-        
- 
+        CGFloat len =[endLocalDate timeIntervalSinceDate:currentLocaleDate] - 30;
+  
         
         NSInteger hour = (NSInteger)len / 3600;
         NSInteger min =  (NSInteger)len%3600/60;
-        NSInteger second =  (NSInteger)len % 60;
-        self.TimeLab.text =[NSString stringWithFormat:@"%ld小时%ld分%ld秒",hour,min,second];
+//        NSInteger second =  (NSInteger)len % 60;
+        self.TimeLab.text = (min <= 9 && hour <=0)? @"订单即将关闭，请尽快完成支付！":[NSString stringWithFormat:@"%ld小时%ld分",(long)hour,(long)min];
         
     }else  if ([orderDict[@"status"] isEqualToString:@"ORDER_CLOSED"]) {
-        
-          NSDictionary *log2  = logs[1];
-         self.NoTwoRecordLab.text =[self makeTime:log2[@"create_at"] andStatus:@"关闭订单："];
+ 
+          NSDictionary *log1  = logs[1];
+          NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。":@"支付超时，订单关闭。";
+          self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"] andStatus:@"关闭订单："],operator];
 
     }else {
         
@@ -230,9 +238,7 @@
     
     
     NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
-    
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
     NSDate *currentDate=[formatter dateFromString: dateString];
     
     NSDate *currentLocalDate=[self localDate:currentDate];

@@ -11,13 +11,13 @@
 #import "NewSearchResultViewController.h"
 #import "XLiuxueViewController.h"
 #import "InteProfileViewController.h"
-
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @interface AdvertiseViewController ()<UIWebViewDelegate,WKNavigationDelegate>
 @property(nonatomic,strong)KDProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 @property(nonatomic,strong)NSString  *URLpath;
-
+@property(nonatomic,strong)JSContext *context;
 @end
 
 @implementation AdvertiseViewController
@@ -49,12 +49,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = self.path ?@"" :self.advertise_title;
+    self.title = self.path ? @"" :self.advertise_title;
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
     self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
     [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.URLpath]]];
     [self.web_wk sizeToFit];
-
     [self.view addSubview:self.web_wk];
     self.web_wk.navigationDelegate = self;
     
@@ -65,7 +64,7 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+     self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
      [self.hud removeFromSuperViewOnHide];
     
 }
@@ -73,8 +72,18 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
+    
+//    JSContext *context=[webView  valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//    self.context = context;
+//    
+//    self.context[@"showLogin"] = ^() {
+//        //这里 获取程序中的登录状态
+//    //   BOOL needLogin = [ApplicationDelegate showLoginToBackHere];
+//
+//    };
+    
+    
     [self.hud hideAnimated:YES];
-
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
@@ -89,7 +98,6 @@
     
     
      NSString *absoluteString = navigationAction.request.URL.absoluteString;
-   
     
     if ([absoluteString hasSuffix:@"/evaluate"]) {
         
@@ -114,7 +122,6 @@
                [self.navigationController pushViewController:vc animated:YES];
            }
 
- 
         decisionHandler(WKNavigationActionPolicyCancel);
 
     }else if([absoluteString hasSuffix:@"/intention"]){
@@ -124,6 +131,7 @@
         decisionHandler(WKNavigationActionPolicyCancel);
     
     }else{
+        
          decisionHandler(WKNavigationActionPolicyAllow);
     }
     

@@ -61,7 +61,7 @@
     NSString *personInfoString = GDLocalizedString(@"Setting-001");//个人信息
     NSString *feedBackString = GDLocalizedString(@"Setting-003");//用户反馈
     NSString *aboutString = GDLocalizedString(@"Setting-004");//关于
-    NSString *useLanString = GDLocalizedString(@"Setting-005");//切换语言
+//    NSString *useLanString = GDLocalizedString(@"Setting-005");//切换语言
     
     self.cells = @[@[newCell(personInfoString, [UIImage imageNamed:@"me_profile"],
                              ^{
@@ -69,13 +69,13 @@
                                  ProfileViewController *vc = [[ProfileViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }),
-                     newCell(useLanString, [UIImage imageNamed:@"language_39"],
-                             ^{
-                                 [MobClick event:@"changeUserLanguage"];
-                                 ChangeLanguageViewController *vc = [[ChangeLanguageViewController alloc] initWithNibName:@"ChangeLanguageViewController" bundle:nil];
-                                 [self.navigationController pushViewController:vc animated:YES];
-                             }),
-                     
+//                     newCell(useLanString, [UIImage imageNamed:@"language_39"],
+//                             ^{
+//                                 [MobClick event:@"changeUserLanguage"];
+//                                 ChangeLanguageViewController *vc = [[ChangeLanguageViewController alloc] initWithNibName:@"ChangeLanguageViewController" bundle:nil];
+//                                 [self.navigationController pushViewController:vc animated:YES];
+//                             }),
+//                     
                     newCell(feedBackString, [UIImage imageNamed:@"me_feedback"],
                              ^{
                                  RequireLogin

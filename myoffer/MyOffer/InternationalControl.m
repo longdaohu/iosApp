@@ -32,10 +32,10 @@ static NSBundle *bundle = nil;
         
         //获取系统当前语言版本(中文zh-Hans,英文en    zh-cn)
         
-        NSArray* languages = [def objectForKey:@"AppleLanguages"];
+//        NSArray* languages = [def objectForKey:@"AppleLanguages"];
         
         
-        NSString *current = [languages objectAtIndex:0];
+        NSString *current =  @"zh-cn";//[languages objectAtIndex:0];
         
         useLanguage = current ;//
  
@@ -49,14 +49,13 @@ static NSBundle *bundle = nil;
     
     if ( [useLanguage containsString:@"en"]) {
        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"en.lproj" ofType:nil];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"en.lproj" ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"zh-Hans.lproj" ofType:nil];
         
         bundle = [NSBundle bundleWithPath:path];//生成bundle
-    }
-      else
-      {
+    } else{
+    
           NSString *path = [[NSBundle mainBundle] pathForResource:@"zh-Hans.lproj" ofType:nil];
-          
           bundle = [NSBundle bundleWithPath:path];//生成bundle
       }
 
@@ -73,7 +72,8 @@ static NSBundle *bundle = nil;
     bundle = [NSBundle bundleWithPath:path];
     
     //2.持久化
-    [def setValue:language forKey:@"userLanguage"];
+        [def setValue:@"zh-cn" forKey:@"userLanguage"];
+    //    [def setValue:language forKey:@"userLanguage"];
     
     [def synchronize];
 }
@@ -84,8 +84,6 @@ static NSBundle *bundle = nil;
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     
     NSString *language = [def valueForKey:@"userLanguage"];
-    
-  //  NSLog(@"language = %@",language);
     
     return language;
 }

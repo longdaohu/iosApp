@@ -7,7 +7,7 @@
 //
 
 #import "OrderViewController.h"
-#import "OrderTableViewCell.h"
+#import "OrderCell.h"
 #import "PayOrderViewController.h"
 #import "OrderDetailViewController.h"
 #import "OrderItem.h"
@@ -25,10 +25,15 @@
 @implementation OrderViewController
 
 
--(void)viewWillAppear:(BOOL)animated{
-    
-    [super viewWillAppear:animated];
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    [MobClick beginLogPageView:@"page订单中心"];
+    
     self.navigationController.navigationBarHidden = NO;
     
     if (self.refresh) {
@@ -36,6 +41,14 @@
         [self loadNewData];
     }
     
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page订单中心"];
     
 }
 
@@ -43,9 +56,18 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self makeUI];
-    [self makeTableView];
-    [self makeDataSourse:self.nextPage];
+    
+    
+     if (![self checkNetWorkReaching]) {
+        
+         self.nodataView.hidden = NO;
+         return ;
+    }
+    
+     [self.tableView.mj_header beginRefreshing];
+    
     
 }
 
@@ -61,6 +83,7 @@
     return _nodataView;
 }
 
+
 -(NSMutableArray *)orderGroup{
     
     if (!_orderGroup) {
@@ -74,44 +97,53 @@
 -(void)makeDataSourse:(NSInteger)page{
 
     
-    NSString *path =[NSString stringWithFormat:@"GET api/account/order?page=%ld&size=10",page];
+    NSString *path =[NSString stringWithFormat:@"GET api/account/order?page=%ld&size=10",(long)page];
 
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+ 
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         if ( 200 == statusCode && 0 == page) {
             
+             self.nextPage =0;
             [self.orderGroup removeAllObjects];
             
         }
-        self.nextPage = (0 == page)? 1 : self.nextPage++;
-
         
-          for (NSDictionary *dict in  response[@"orders"]) {
+        self.nextPage += 1;
+        
+        
+        for (NSDictionary *dict in  response[@"orders"]) {
             
-             OrderItem *order = [OrderItem  orderWithDictionary:dict];
-             [self.orderGroup addObject:order];
-          }
+            OrderItem *order = [OrderItem  orderWithDictionary:dict];
+            [self.orderGroup addObject:order];
+        }
         
         
         [self.tableView.mj_header endRefreshing];
-
         [self.tableView.mj_footer endRefreshing];
-        
         self.tableView.mj_footer = 10 > [response[@"orders"] count] ? nil : [self makeMJ_footer];
-        
         
         [self.tableView reloadData];
         
         self.nodataView.hidden = self.orderGroup.count > 0;
-
+        self.nodataView.contentLabel.text = @"还没有购买服务！！！";
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
     }];
+
 
 }
 
 -(void)loadNewData{
     
     [self makeDataSourse:0];
+    
 }
+
 -(void)loadMoreData{
     
     [self makeDataSourse:self.nextPage];
@@ -120,8 +152,11 @@
 
 -(void)makeUI
 {
-     self.title = @"订单中心";
- 
+    
+    self.title = @"订单中心";
+    [self makeTableView];
+
+    
 }
 
 -(void)makeTableView
@@ -162,7 +197,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
  
-    OrderTableViewCell *cell =[OrderTableViewCell cellWithTableView:tableView indexPath:indexPath];
+    OrderCell *cell =[OrderCell cellWithTableView:tableView indexPath:indexPath];
   
     cell.order = self.orderGroup[indexPath.section];
     
@@ -184,7 +219,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return University_HEIGHT;
+    return University_HEIGHT + 15;
 }
 
 #pragma mark ----- OrderTableViewCellDelegate
@@ -209,8 +244,7 @@
             PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
             pay.order  =  self.orderGroup[indexPath.section];
             pay.actionBlock = ^(BOOL isSuccess){
-                
-                OrderItem *order = self.orderGroup[indexPath.section];
+                 OrderItem *order = self.orderGroup[indexPath.section];
                 
                 if (isSuccess) {
                     
@@ -218,18 +252,14 @@
                     
                     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 }
-                
-            };
-
+             };
             
             [self.navigationController pushViewController:pay  animated:YES];
-            
-         }
+          }
             break;
             
         default:
         {
-
             OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
             detail.order  =  self.orderGroup[indexPath.section];
             detail.actionBlock = ^(BOOL isSuccess){
@@ -269,8 +299,6 @@
     }];
     
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

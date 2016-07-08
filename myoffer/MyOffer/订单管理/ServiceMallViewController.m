@@ -23,19 +23,24 @@
 @implementation ServiceMallViewController
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"page订单列表"];
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-    
+    [MobClick beginLogPageView:@"page订单列表"];
+
     if (self.refresh) {
         
         [self.Web reload];
     }
-    
-  
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +53,12 @@
 -(void)makeUI
 {
     
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"myoffer/1.2.9", @"UserAgent", nil];
+    NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
+    bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *userAgent = [NSString stringWithFormat:@"%@%@",bundleName,version];
+    
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
     self.title = @"服务";
@@ -56,12 +66,12 @@
     [self.view addSubview:self.Web];
     self.Web.delegate = self;
     
-    NSString *path = @"http://www.myofferdemo.com/service.html/";
+    NSString *path =[NSString stringWithFormat:@"%@service.html/",DOMAINURL];
+
     NSURL    *url =[NSURL URLWithString:path];
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:url];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    NSString *lan = !USER_EN ? @"":@"en";
-    [request addValue:lan forHTTPHeaderField:@"user-language"];
+
 
     [self.Web loadRequest:request];
     
@@ -78,8 +88,8 @@
 #pragma mark ——————  WKWebViewDeleage
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-//    self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self.progress setRemoveFromSuperViewOnHide:YES];
+     self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.progress setRemoveFromSuperViewOnHide:YES];
     
 }
 
@@ -90,9 +100,7 @@
      NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
     [webView stringByEvaluatingJavaScriptFromString:jumpF];
     
-//    [self.progress hideAnimated:YES];
-    
-  
+    [self.progress hideAnimated:YES];
     
 }
 
@@ -146,12 +154,11 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
 {
     
-//    [self.progress hideAnimated:YES];
-//    KDProgressHUD *xhud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-//    xhud.labelText = @"加载失败";
-//    [xhud hideAnimated:YES afterDelay:1];
-//    [xhud removeFromSuperViewOnHide];
-    
+    [self.progress hideAnimated:YES];
+//    KDProgressHUD *failHud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+//    failHud.labelText = @"加载失败";
+//    [failHud hideAnimated:YES afterDelay:1];
+//    [failHud removeFromSuperViewOnHide];
 
 }
 

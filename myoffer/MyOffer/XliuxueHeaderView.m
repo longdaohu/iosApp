@@ -39,6 +39,7 @@
         titleView.scrollEnabled = NO;
         titleView.editable = NO;
         titleView.textColor =XCOLOR_RED;
+        titleView.backgroundColor = [UIColor clearColor];
         titleView.font =FontWithSize(FONTSIZE(15));
         titleView.textAlignment = NSTextAlignmentLeft;
         titleView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);

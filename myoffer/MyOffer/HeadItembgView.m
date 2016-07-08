@@ -30,7 +30,7 @@
 {
     if (!_itemTitles) {
         
-        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"增值服务"];
+        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"留学服务"];
     }
     return _itemTitles;
 }

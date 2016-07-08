@@ -82,15 +82,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-     
-  
+   
     [self makeUI];
     
-    
-    
     if (self.notiID) {
-        
-        NSString *path = [NSString stringWithFormat:@"http://www.myoffer.cn/account/message/%@?client=app",self.notiID];
+
+        NSString *path = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,self.notiID];
         NSURL    *url =[NSURL URLWithString:path];
         NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:url];
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
@@ -104,7 +101,7 @@
         
     }else{
        
-         NSString *urlPath =[NSString stringWithFormat:@"http://www.myoffer.cn/faq#index=%ld",(long)self.index];
+         NSString *urlPath =[NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)self.index];
         [self.Web loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlPath]]];
 
      }
@@ -122,7 +119,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //重写网页方法，监听网页链接
-     NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
+    NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
  
      [webView stringByEvaluatingJavaScriptFromString:jumpF];
     

@@ -25,17 +25,12 @@ typedef enum {
 #import "InteProfileViewController.h"
 #import "MessageViewController.h"
 #import "XWGJCatigoryViewController.h"
-#import "OrderViewController.h"
+#import "ServiceMallViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UIAlertViewDelegate>  {
 }
 @property (strong, nonatomic) IBOutlet UIView *headView;
-//智能匹配学校数量
-@property(nonatomic,assign)int  recommendationsCount;
-//得到offer数量
-@property(nonatomic,assign)int  offersCount;
-//收藏学校数量
-@property(nonatomic,assign)int  favoritesCount;
+@property(nonatomic,strong)NSDictionary  *myCountResponse;
 //cell数组
 @property(nonatomic,strong)NSArray *cells;
 //cellDetailtext数组
@@ -66,9 +61,10 @@ typedef enum {
         //判断是否有智能匹配数据或收藏学校
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             
-            weakSelf.recommendationsCount = [response[@"recommendationsCount"] intValue];
-            weakSelf.offersCount =  [response[@"offersCount"] intValue];
-            weakSelf.favoritesCount = [response[@"favoritesCount"] intValue];
+//            weakSelf.recommendationsCount = [response[@"recommendationsCount"] intValue];
+//            weakSelf.offersCount =  [response[@"offersCount"] intValue];
+//            weakSelf.favoritesCount = [response[@"favoritesCount"] intValue];
+            weakSelf.myCountResponse = response;
             [weakSelf.tableView reloadData];
          }];
         
@@ -97,9 +93,9 @@ typedef enum {
      }else{
         
          [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-         self.recommendationsCount = 0;
-         self.offersCount = 0;
-         self.favoritesCount = 0;
+//         self.recommendationsCount = 0;
+//         self.offersCount = 0;
+//         self.favoritesCount = 0;
          [self.tableView reloadData];
          self.NotiNewView.image = nil;
      }
@@ -252,7 +248,7 @@ typedef enum {
 -(void)inteligentOption
 {
     RequireLogin
-    if (self.recommendationsCount > 0 ) {
+    if ((NSInteger)self.myCountResponse[@"recommendationsCount"] > 0 ) {
         
         IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
@@ -284,8 +280,9 @@ typedef enum {
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     centerSectionView  *sectionView =  [[centerSectionView alloc] init];
-    sectionView.FavoriteCount = self.favoritesCount;
-    sectionView.PipeiCount = self.recommendationsCount;
+//    sectionView.FavoriteCount = self.favoritesCount;
+//    sectionView.PipeiCount = self.recommendationsCount;
+    sectionView.response = self.myCountResponse;
     sectionView.sectionBlock =^(UIButton *sender)
     {
         
@@ -307,7 +304,7 @@ typedef enum {
                 break;
             default:{
             
-                 [self.navigationController pushViewController:[[OrderViewController alloc] init] animated:YES];
+                 [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
             }
                 break;
         }
@@ -339,8 +336,10 @@ typedef enum {
     
     cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
     
+    
     if ([cell.textLabel.text containsString:@"ffer"]) {
-        NSString *countString = self.offersCount != 0 ?[NSString stringWithFormat:@"%d",self.offersCount]:@"";
+        
+        NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
         cell.countLabel.text = countString;
     }
     return cell;

@@ -9,7 +9,7 @@
 #import "OrderDetailViewController.h"
 #import "OrderDetailHeaderView.h"
 #import "OrderDetailFooterView.h"
-#import "OrderDetailTableViewCell.h"
+#import "OrderDetailCell.h"
 #import "OrderServiceItem.h"
 #import "OrderItem.h"
 #import "PayOrderViewController.h"
@@ -31,16 +31,22 @@
 @implementation OrderDetailViewController
 
 
-
-- (void)viewDidLoad {
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
     
-    [super viewDidLoad];
-  
-    [self makeDataSourse];
+    [MobClick endLogPageView:@"page订单详情"];
     
-    [self makeUI];
+    
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page订单详情"];
+    
+}
 
 -(NSMutableArray *)rightItems{
     
@@ -50,19 +56,29 @@
         
     }
     return  _rightItems;
-
+    
 }
 
 -(NSMutableArray *)leftItems{
- 
+    
     if (!_leftItems) {
         
         _leftItems =[NSMutableArray array];
- 
+        
     }
     return  _leftItems;
 }
 
+
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+  
+    [self makeDataSourse];
+    
+    [self makeUI];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -77,45 +93,7 @@
     
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
     
-            
-            NSArray *SKUs = response[@"SKUs"];
-            NSDictionary *SKU = SKUs[0];
-          
-            [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                NSDictionary *temp = (NSDictionary *)obj;
-            
-                OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-
-                item.name = temp[@"name"];
-
-                [temp[@"oversea"] integerValue] == 0 ? [weakSelf.leftItems addObject:item] :  [weakSelf.rightItems addObject:item];
-                
-                
-            }];
-         
-            
-            if (weakSelf.leftItems.count >  weakSelf.rightItems.count){
-                
-                for (NSInteger index = self.rightItems.count; index < weakSelf.leftItems.count; index ++ ) {
-                    
-                    OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-                    
-                    item.name = @"";
-                    
-                    [weakSelf.rightItems addObject:item];
-                }
-                
-            }else{
-                
-                for (NSInteger index = self.leftItems.count; index < weakSelf.rightItems.count; index ++ ) {
-                    OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-                    item.name = @"";
-                    [weakSelf.leftItems addObject:item];
-                }
-                
-            }
-   
+            [weakSelf makeOrderWithResponse:response];
             
             [weakSelf makeTableViewFooterView:response];
 
@@ -125,6 +103,47 @@
   
         }];
     
+}
+
+
+-(void)makeOrderWithResponse:(NSDictionary *)response
+{
+    NSArray *SKUs = response[@"SKUs"];
+    NSDictionary *SKU = SKUs[0];
+    
+    [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSDictionary *temp = (NSDictionary *)obj;
+        
+        OrderServiceItem  *item = [[OrderServiceItem alloc] init];
+        
+        item.name = temp[@"name"];
+        
+        [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
+        
+        
+    }];
+    
+    
+    if (self.leftItems.count > self.rightItems.count){
+        
+        for (NSInteger index = self.rightItems.count; index < self.leftItems.count; index ++ ) {
+            
+            OrderServiceItem  *item = [[OrderServiceItem alloc] init];
+            item.name = @"";
+            [self.rightItems addObject:item];
+        }
+        
+    }else{
+        
+        for (NSInteger index = self.leftItems.count; index < self.rightItems.count; index ++ ) {
+            OrderServiceItem  *item = [[OrderServiceItem alloc] init];
+            item.name = @"";
+            [self.leftItems addObject:item];
+        }
+        
+    }
+
 }
 
 
@@ -167,7 +186,6 @@
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem  alloc] initWithCustomView:self.rightLab];
     
     self.backBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-
      self.navigationItem.leftBarButtonItem = self.backBtn;
     
 }
@@ -180,11 +198,10 @@
     header.order = self.order;
     header.frame = CGRectMake(0, 0, XScreenWidth, header.headHeight);
     header.actionBlock = ^(UIButton *sender){
-         weakSelf.isTableViewSelected = sender.selected;
+          weakSelf.isTableViewSelected = sender.selected;
          [weakSelf.tableView reloadData];
      };
     self.tableView.tableHeaderView = header;
-    
 }
 
 
@@ -216,13 +233,15 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight -64) style:UITableViewStylePlain];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight -64) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = BACKGROUDCOLOR;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.separatorStyle= UITableViewCellSeparatorStyleNone;
+
+    self.tableView.sectionHeaderHeight = 0;
     [self.view addSubview:self.tableView];
-    
 }
 
 
@@ -231,9 +250,18 @@
 {
     OrderServiceItem  *left = self.leftItems[indexPath.row];
     OrderServiceItem  *right = self.rightItems[indexPath.row];
-    
     return   left.cellHeight > right.cellHeight ? left.cellHeight : right.cellHeight;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return self.isTableViewSelected ? 15 : 0.1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return  self.isTableViewSelected ? 0 : self.leftItems.count;
@@ -241,9 +269,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    OrderDetailTableViewCell *cell =[OrderDetailTableViewCell cellWithTableView:tableView];
-    UIColor *cellColor =  indexPath.row % 2 ?BACKGROUDCOLOR  :  XCOLOR_WHITE;
-    cell.contentView.backgroundColor = cellColor;
+    OrderDetailCell *cell =[OrderDetailCell cellWithTableView:tableView indexPath:indexPath];
     cell.leftItem = self.leftItems[indexPath.row];
     cell.rightItem = self.rightItems[indexPath.row];
     
@@ -292,16 +318,12 @@
         }
         
          [self.navigationController popToViewController:child animated:YES];
-
-        NSLog(@"-if------------ %ld",self.navigationController.childViewControllers.count);
-
+  
         
     }else{
     
         [self.navigationController popViewControllerAnimated:YES];
-        
-        NSLog(@"-else------------ %ld",self.navigationController.childViewControllers.count);
-
+ 
     }
     
 }

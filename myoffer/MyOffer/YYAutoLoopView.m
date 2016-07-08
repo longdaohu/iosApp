@@ -185,10 +185,13 @@
     [scrollView setContentOffset:CGPointMake(CGRectGetWidth(scrollView.bounds), 0) animated:YES];
 }
 
-#pragma mark - Setter //tips：切勿反复调用该setter方法
 
-- (void)setBanners:(NSArray *)banners {
+
+#pragma mark - Setter //tips：切勿反复调用该setter方法
+- (void)setBanners:(NSMutableArray *)banners {
+   
     if (_isHasBanners) {
+  
         return;
     }
     _banners = banners;

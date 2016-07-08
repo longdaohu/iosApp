@@ -5,22 +5,23 @@
 //  Created by xuewuguojie on 16/6/22.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
-#import "OrderDetailTableViewCell.h"
-@interface OrderDetailTableViewCell ()
+#import "OrderDetailCell.h"
+@interface OrderDetailCell ()
 @property(nonatomic,strong)UILabel *leftLab;
 @property(nonatomic,strong)UILabel *righttLab;
 @end
-@implementation OrderDetailTableViewCell
-
-+(instancetype)cellWithTableView:(UITableView *)tableView
+@implementation OrderDetailCell
++(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    OrderDetailTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"orderDetail"];
+    OrderDetailCell *cell =[tableView dequeueReusableCellWithIdentifier:@"orderDetail"];
     
     if (!cell) {
         
-        cell =[[OrderDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"orderDetail"];
+        cell =[[OrderDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"orderDetail"];
     }
     
+    UIColor *cellColor =  indexPath.row % 2 ?BACKGROUDCOLOR  :  XCOLOR_WHITE;
+    cell.contentView.backgroundColor = cellColor;
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -41,6 +42,7 @@
         [self.contentView addSubview:self.righttLab];
         
     }
+    
     return self;
 }
 

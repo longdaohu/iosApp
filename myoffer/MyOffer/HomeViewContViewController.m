@@ -69,7 +69,7 @@
     
     [MobClick beginLogPageView:@"page新版首页"];
     
-    [self UserLanguage];
+//    [self UserLanguage];  //ENGLISH  设置环境
     
     [self checkZhiNengPiPei];
     
@@ -103,7 +103,6 @@
     
     [self makeUI];
     
-    
     [self getAppReport];
     
     //--判断用户是否完成任务--
@@ -111,16 +110,8 @@
         
         [self advanceSupportWithDuration:180];
     }
-    
-//        [self payWeixin];
-    
-    
-    
-    
+ 
 }
-
-
-
 
 -(NSMutableArray *)hotCity_Arr
 {
@@ -148,6 +139,7 @@
     }
     return _recommends;
 }
+
 -(NSMutableArray *)advertise_Arr
 {
     if (!_advertise_Arr) {
@@ -212,14 +204,15 @@
         if (refresh) {
             
             [self.advertise_Arr removeAllObjects];
+            
         }
         
         NSMutableArray *items = [NSMutableArray array];
         
-        
         weakSelf.advertise_Arr = [(NSArray *)response mutableCopy];
         
         for (NSInteger i = 0; i < weakSelf.advertise_Arr.count; i++) {
+            
             NSDictionary *obj = weakSelf.advertise_Arr[i];
             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
             new.message = obj;
@@ -228,15 +221,13 @@
             [items addObject:new];
         }
         
-        weakSelf.autoLoopView.banners = [items copy];
-        
+         weakSelf.autoLoopView.banners = [items mutableCopy];
+       
         self.autoLoopView.userInteractionEnabled = self.advertise_Arr.count > 0 ? YES : NO;
-
         
         [self.TableView.mj_header endRefreshing];
         
         [self.TableView reloadData];
-
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -317,7 +308,6 @@
     self.TableView.tableHeaderView = self.TableHeaderView;
  
 }
-
 
 //页面刷新
 -(void)refresh
@@ -423,7 +413,6 @@
         }
     }
     
-    
     if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
         CGFloat Gscale =0.2 + 0.5 * ABS(scrollView.contentOffset.y)/ 100.0;
         self.fresh_Header.gifView.transform = CGAffineTransformMakeScale(Gscale, Gscale);
@@ -467,7 +456,8 @@
     [self.TableHeaderView addSubview:self.autoLoopView];
     
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
-      [MobClick event:@"home_advertisementClick"];
+   
+        [MobClick event:@"home_advertisementClick"];
         AdvertiseViewController *detail =[[AdvertiseViewController alloc] init];
         detail.advertise_title = weakSelf.advertise_Arr[StatusBarBannerNews.index][@"title"];
         detail.StatusBarBannerNews = StatusBarBannerNews;
@@ -655,7 +645,6 @@
              }else{
                   [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
              }
-           
          }
             break;
          case 3:
@@ -727,18 +716,18 @@
     }];
     
     
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Grade_EN"];
-        
-    }];
-    
-    
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
       
         [ud setValue:response forKey:@"Subject_CN"];
         
     }];
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Country_CN"];
+        
+    }];
+    
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
         
@@ -752,12 +741,12 @@
         [ud setValue:response forKey:@"Country_EN"];
         
     }];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_CN"];
-        
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+
+        [ud setValue:response forKey:@"Grade_EN"];
+
     }];
+ 
     
     
     [ud synchronize];
@@ -806,18 +795,18 @@
 }
 
 
-
+//ENGLISH  设置环境
 //--用户语言环境通知服务器----
--(void)UserLanguage
-{
-    if ([[AppDelegate sharedDelegate] isLogin]) {
-        
-        NSString *lang =USER_EN ? @"en":@"zh-cn";
-        [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
-            
-        }];
-    }
-}
+//-(void)UserLanguage
+//{
+//    if ([[AppDelegate sharedDelegate] isLogin]) {
+//        
+//        NSString *lang =USER_EN ? @"en":@"zh-cn";
+//        [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
+//            
+//        }];
+//    }
+//}
 
 //---推广接口，用户是否在使用myoffer---
 -(void)advanceSupportWithDuration:(int)durationTime

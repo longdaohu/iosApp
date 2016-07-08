@@ -17,8 +17,21 @@
 
 @implementation SeviceDetailViewController
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"page服务套餐详情"];
+    
+}
 
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"page订单套餐详情"];
+    
+}
 
 - (void)viewDidLoad {
     

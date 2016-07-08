@@ -12,7 +12,7 @@
 
 @interface XuFilerView ()<UITableViewDelegate,UITableViewDataSource,FilerButtonItemDelegate>
 @property(nonatomic,strong)UIView *bgView;
-@property(nonatomic,strong)UIView *line;
+@property(nonatomic,strong)UIView *centerLine;
 @property(nonatomic,strong)FilerButtonItem *leftButton;
 @property(nonatomic,strong)FilerButtonItem *rightButton;
 @property(nonatomic,strong)UIButton *lastButton;
@@ -60,9 +60,9 @@
     [self.bgView addSubview:self.rightButton];
     
     
-    self.line =[[UIView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 10, 1, 20)];
-    self.line.backgroundColor =[UIColor darkGrayColor];
-    [self.bgView addSubview:self.line];
+    self.centerLine =[[UIView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 10, 1, 20)];
+    self.centerLine.backgroundColor =[UIColor lightGrayColor];
+    [self.bgView addSubview:self.centerLine];
     
     
     [self makeTableView];

@@ -25,14 +25,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        
-
         self.bgView = [[UIView alloc] init];
         self.bgView.backgroundColor = XCOLOR_WHITE;
         [self addSubview:self.bgView];
         self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
         self.bgView.layer.shadowOpacity = 0.2;
         self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [self.bgView addGestureRecognizer:tap];
         
 
         self.orderTitleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
@@ -58,6 +59,13 @@
         
     }
     return self;
+}
+
+-(void)tap{
+
+    self.selected = !self.selected;
+    
+    [self onclick:self.orderDetailBtn];
 }
 
 -(void)onclick:(UIButton *)sender
@@ -98,19 +106,19 @@
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     
     
-    CGFloat detailX = XScreenWidth - self.orderDetailBtn.bounds.size.width - 10;
+    CGFloat detailX = XScreenWidth - CGRectGetMaxX(self.orderTitleLab.frame);
     CGFloat detailY = titleY;
-    CGFloat detailW = XScreenWidth - detailX -10;
+    CGFloat detailW = XScreenWidth - detailX - 10;
     CGFloat detailH = titleH;
     self.orderDetailBtn.frame = CGRectMake(detailX, detailY, detailW, detailH);
     
     CGFloat bgX = 0;
-    CGFloat bgY = 10;
+    CGFloat bgY = 15;
     CGFloat bgW = XScreenWidth;
     CGFloat bgH = CGRectGetMaxY(self.orderNoLab.frame) + 10;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     self.headHeight = CGRectGetMaxY(self.bgView.frame);
-    
+
     
 }
 

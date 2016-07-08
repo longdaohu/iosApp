@@ -19,7 +19,8 @@ NSString * const kAPIClientErrorDomain = @"kAPIClientErrorDomain";
 @end
 
 //static NSString * const kAPIEndPoint = @"http://www.myoffer.cn/";
-static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
+//static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
+static NSString * const kAPIEndPoint = DOMAINURL;
 
 @implementation APIClient
 
@@ -57,21 +58,22 @@ static NSString * const kAPIEndPoint = @"http://www.myofferdemo.com/";
         NSString *userAgent = [NSString stringWithFormat:@"%@/%@ %@/%@", bundleName, version,
                                @(systemInfo.machine), [[UIDevice currentDevice] systemVersion]];
         
-        
-         NSString  *lan = [InternationalControl userLanguage];
-        if ( [lan containsString:@"en"]) {
-             configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
-                                                    @"Accept-Charset": @"UTF-8",
-                                                    @"user-language": @"en"
-                                                    };
-        }
-        else
-          {
+//ENGLISH  设置环境
+//         NSString  *lan = [InternationalControl userLanguage];
+//        if ( [lan containsString:@"en"]) {
+//             configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
+//                                                    @"Accept-Charset": @"UTF-8",
+//                                                    @"user-language": @"en"
+//                                                    };
+//        }
+//        else
+//          {
                configuration.HTTPAdditionalHeaders = @{@"User-Agent": userAgent,
-                                                      @"Accept-Charset": @"UTF-8"
+                                                       @"Accept-Charset": @"UTF-8"
                                                       };
-         }
+//         }
     
+ 
         
         _URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }

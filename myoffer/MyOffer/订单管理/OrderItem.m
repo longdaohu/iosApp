@@ -34,6 +34,7 @@
         self.create_at = orderDict[@"create_at"];
         self.status = orderDict[@"status"];
         [self statusWithTag:self.status];
+        
     }
     
     return self;
@@ -64,6 +65,7 @@
         self.status_order = @"已付款";
         self.status_pay = @"已退款";
     }
+    
 }
 
 

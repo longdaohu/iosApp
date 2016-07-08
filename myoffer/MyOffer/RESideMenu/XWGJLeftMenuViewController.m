@@ -17,65 +17,44 @@
 #import "ApplyStatusViewController.h"
 #import "DetailWebViewController.h"
 #import "OrderViewController.h"
+#import "MenuCell.h"
+#import "MenuItem.h"
 
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property(nonatomic,strong)leftHeadView *headerView;
-@property(nonatomic,strong)UIView *footerView;
-@property(nonatomic,copy)NSString *Applystate;
-@property(nonatomic,strong)UIImageView *newsTag;  //是否有新通知图标
-@property(nonatomic,strong)NSArray *cellImages;
-@property(nonatomic,strong)NSArray *cellTitles;
-
+@property(nonatomic,copy)NSString *Applystate;  //检查申请进程，判断我的申请跳转页面
+@property(nonatomic,strong)NSArray *menuItems;
 @end
 
 @implementation XWGJLeftMenuViewController
+-(NSArray *)menuItems{
 
--(NSArray *)cellImages
-{
-    if (!_cellImages) {
+    if (!_menuItems) {
         
-        _cellImages = @[@"menu_application",@"menu_service",@"menu_messages",@"menu_setting",@"help",@"logout"];
-     }
-    return _cellImages;
-}
-
--(NSArray *)cellTitles
-{
-    if (!_cellTitles) {
-        
-        _cellTitles = @[GDLocalizedString(@"Left-Applycation"),@"订单中心",GDLocalizedString(@"Left-noti"),GDLocalizedString(@ "Left-Set"),GDLocalizedString(@ "Left-helpCenter"),GDLocalizedString(@ "Left-Logout")];
-
+        MenuItem *apply =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application"];
+        MenuItem *offer =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service"];
+        MenuItem *noti =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages"];
+        MenuItem *set =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting"];
+        MenuItem *help =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help"];
+        MenuItem *logout =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout"];
+        _menuItems = @[apply,offer,noti,set,help,logout];
     }
-    return _cellTitles;
+    return _menuItems;
 }
 
-
--(UIImageView *)newsTag{
-
-    if (!_newsTag) {
-        
-        _newsTag =[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width*0.8 - 70, 20 , 10, 10)];
-        
-        _newsTag.image =[UIImage imageNamed:@"message_dot"];
-        
-        _newsTag.hidden = YES;
-    }
-    return _newsTag;
-}
 
 /**
  *获取数据源
  */
 - (void)getDataSource {
     
-     if([AppDelegate sharedDelegate].isLogin) {
+     if(LOGIN) {
          self.headerView.userNameLabel.text = nil;
         //请求头像信息
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
             
- 
             self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
             [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
@@ -90,11 +69,11 @@
         //检查是否有未读通知信息
       [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil success:^(NSInteger statusCode, id response) {
           
-          NSString *countstr = [NSString stringWithFormat:@"%@",response[@"has_new_message"]];
+           NSString *countstr = [NSString stringWithFormat:@"%@",response[@"has_new_message"]];
+            MenuItem *item = self.menuItems[2];
+          item.newMessage = [countstr containsString:@"1"];
           
-           self.newsTag.hidden = [countstr containsString:@"0"];
- 
-        [self.tableView reloadData];
+          [self.tableView reloadData];
     
         }];
         
@@ -109,6 +88,7 @@
                         self.Applystate = response[@"state"];
                     }];
          
+         
     }
     
     
@@ -120,9 +100,8 @@
     
     [MobClick beginLogPageView:@"page左侧菜单"];
 
-    if([[AppDelegate sharedDelegate] isLogin])
+    if(LOGIN)
     {
-        
         [self  getDataSource];
         
     }else{
@@ -148,17 +127,26 @@
 {
     [super viewDidLoad];
     
-   
     [self makeUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(push:) name:@"push" object:nil];
     
 }
 
+-(void)makeUI
+{
+    self.view.backgroundColor =[UIColor clearColor];
+    
+    [self makeTableView];
+    
+    [self makeTableHeaderView];
+}
+
+
 -(void)makeTableView
 {
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*0.8, self.view.frame.size.height)];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*0.8, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -218,112 +206,98 @@
 
 }
 
--(void)makeUI
+
+
+-(void)pushViewController:(UIViewController *)vc
 {
-    self.view.backgroundColor =[UIColor clearColor];
     
-    [self makeTableView];
+    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
     
-    [self makeTableHeaderView];
+    [nav pushViewController:vc animated:NO];
+    
 }
 
-
-
-//获取TabBarController 子控制器导航栏
--(UINavigationController *)CurrentNavigation
-{
-    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-    NSString *index = [ud valueForKey:tabBarSelectIndex];
-    
-    XWGJTabBarController *tab =  [[XWGJTabBarController alloc] init];
-    [self.sideMenuViewController setxContentViewController:tab animated:YES];
-    [self.sideMenuViewController hideMenuViewController];
-    tab.selectedIndex = index.integerValue;
-    UINavigationController *nav  =  tab.viewControllers[index.integerValue];
-    
-    return nav;
-}
 
 -(void)caseApply
 {
-     [MobClick event:@"myApply"];
+    
     [self.sideMenuViewController hideMenuViewController];
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+
+    
+    [MobClick event:@"myApply"];
     
     if (![self checkWhenUserLogOut]) {
         
         return;
     }
-    
+
     if ([self.Applystate containsString:@"1"] || !self.Applystate) {
-        ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
+ 
+        [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
 
-        [nav pushViewController:apply animated:NO];
-    }else{
-        ApplyStatusViewController *stateVC = [[ApplyStatusViewController alloc] init];
-
-        [nav pushViewController:stateVC animated:NO];
+     }else{
+         
+         [self pushViewController:[[ApplyStatusViewController alloc] init]];
     }
     
-    
 }
+
+
 -(void)caseSetting
 {
     [self.sideMenuViewController hideMenuViewController];
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-    SetViewController *set = [[SetViewController alloc] initWithNibName:@"SetViewController" bundle:nil];
-    [nav pushViewController:set animated:NO];
+
+    
+    [self pushViewController:[[SetViewController alloc] initWithNibName:@"SetViewController" bundle:nil]];
     
 }
 
 -(void)caseHelp
 {
- 
     [self.sideMenuViewController hideMenuViewController];
 
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-    
-    HelpViewController *help =[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-
-    [nav pushViewController:help animated:NO];
-    
+    [self pushViewController:[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil]];
     
 }
 
 -(void)caseOrderList
 {
+    [self.sideMenuViewController hideMenuViewController];
+
     if (![self checkWhenUserLogOut]) {
         
         return;
     }
     
-    [self.sideMenuViewController hideMenuViewController];
-    
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-    
-     OrderViewController *notiVC = [[OrderViewController alloc] init];
-    
-    [nav pushViewController:notiVC animated:NO];
+    [self pushViewController:[[OrderViewController alloc] init]];
     
 }
+
 
 -(void)caseNotication
 {
     [MobClick event:@"notificationItemClick"];
 
     [self.sideMenuViewController hideMenuViewController];
-    
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-    
+
     if (![self checkWhenUserLogOut]) {
         
         return;
     }
-    NotificationViewController *notiVC = [[NotificationViewController alloc] init];
-
-    [nav pushViewController:notiVC animated:NO];
+    [self pushViewController:[[NotificationViewController alloc] init]];
     
 }
+
+
+//注销
+- (void)xlogout{
+    
+    UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
+    [sheet showInView:self.view];
+    
+}
+
+
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -351,7 +325,7 @@
     }
 }
 
-#pragma mark UITableView Datasource
+#pragma mark ------------- UITableView Datasource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -359,71 +333,30 @@
     return 50;
  }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    if (![AppDelegate sharedDelegate].isLogin)
+   
+    if (!LOGIN)
     {
-        return self.cellImages.count-1;
+        return self.menuItems.count - 1;
         
     }else{
     
-        return self.cellImages.count;
+        return self.menuItems.count;
     }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"MenuLeft";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:20];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        
-        
-        UIView *lineView2 =[[UIView alloc] initWithFrame:CGRectMake(35,49, cell.contentView.frame.size.width, 1)];
-        lineView2.backgroundColor =[UIColor blackColor];
-        UIView *lineView1 =[[UIView alloc] initWithFrame:CGRectMake(35,50, cell.contentView.frame.size.width
-                                                                    , 1)];
-        lineView1.backgroundColor =[UIColor darkGrayColor];
-        
-        [cell.contentView addSubview:lineView1];
-        
-        [cell.contentView addSubview:lineView2];
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    if (indexPath.row == 2) {
-        
-         [cell.contentView addSubview:self.newsTag];
-    }
-  
-     cell.textLabel.text = self.cellTitles[indexPath.row];
-    
-     cell.imageView.image = [UIImage imageNamed:self.cellImages[indexPath.row]];
+    MenuCell *cell = [MenuCell cellWithTableView:tableView indexPath:indexPath];
+    cell.item = self.menuItems[indexPath.row];
     
     return cell;
 }
 
-
-
-//注销
-- (void)xlogout{
-    
-     UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
-    
-    [sheet showInView:self.view];
- 
-}
 
 
 #pragma mark -----UIActonSheetDelegate
@@ -432,26 +365,22 @@
     
     if (0 == buttonIndex) {
         
-        if ([AppDelegate sharedDelegate].isLogin) {
+        if (LOGIN) {
             [[AppDelegate sharedDelegate] logout];
             [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
             self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar"];
             
-            self.newsTag.hidden = YES;
-            
+            MenuItem *item = self.menuItems[2];
+            item.newMessage = NO;
             [self.tableView reloadData];
             
             [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
-            
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
                 
             }];
         }
-        
     }
-    
-    
 }
 
 #pragma mark -----UIImagePickerControlleDelegate
@@ -494,15 +423,17 @@
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
 }
 
+
+
+
 //接到通知判断页面跳转
 -(void)push:(NSNotification *)noti
 {
+
     NSDictionary *userInfo = noti.userInfo;
-    
     NSInteger View_Id = [noti.userInfo[@"view_id"] integerValue];
    
     [self dismiss];
-    
     
     [self.sideMenuViewController hideMenuViewController];
     
@@ -525,7 +456,7 @@
                 return;
             }
             
-             NotificationViewController *notiVC = [[NotificationViewController alloc] init];
+            NotificationViewController *notiVC = [[NotificationViewController alloc] init];
             notiVC.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:notiVC animated:NO];
             

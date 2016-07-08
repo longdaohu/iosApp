@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @class OrderItem;
-@class OrderTableViewCell;
+@class OrderCell;
 
 @protocol OrderTableViewCellDelegate <NSObject>
 -(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender;
 @end
 
-@interface OrderTableViewCell : UITableViewCell
+@interface OrderCell : UITableViewCell
 @property(nonatomic,assign)BOOL cellEdit;
 @property(nonatomic,strong)OrderItem *order;
 @property(nonatomic,weak)id <OrderTableViewCellDelegate>delegate;

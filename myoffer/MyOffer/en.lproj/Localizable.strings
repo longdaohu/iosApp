@@ -5,471 +5,501 @@
  Created by xuewuguojie on 15/10/11.
  Copyright © 2015年 UVIC. All rights reserved.
  */
-"ch_Language" ="en";
-"buttonInfo" ="change Language";
-"CategoryTitle" = " Uni Finder";
-"EvaluateTitle" = "Evaluate";
-"MeViewControllerTitle" = "Application";
-"Category-button001" = "Recommend";
-"Category-button002" = "Location";
-"Category-button003" = "Subjects";
-"Category-button004" = "Rankings";
-"Category-AU" = "AU_en.jpg";
-"Category-UK" = "UK_en.jpg";
-"University-hot" = "hot_en";
-//首页
-"Discover_search" = "Search university/subject";
-"DiscoverTitle" = "Discover";
-"Discover_more" = "See all";
-"Discover_woyao" = "Enquiry";
-"Discover_xiaobai" = "Newbie";
-"Discover_zhinengpipei" = "Uni Match";
-"Discover_QQ" = "Chat Now";
-"Discover_mudidi" = "Popular cities to study aboard";
-"Discover_hotUni" = "Popular Universities";
-"Discover_news" = "Popular articles";
-//提示相关用语
-"Noti-hao" = "OK";
+"ch_Language" ="zh-cn";
+
+"buttonInfo" ="切换语言";
+
+
+"CategoryTitle" = "分类搜索";
+
+"EvaluateTitle" = "评估";
+
+"MeViewControllerTitle" = "申请中心";
+
+"Category-button001" = "推荐院校";
+
+"Category-button002" = "地理位置";
+
+"Category-button003" = "学科专业";
+
+"Category-button004" = "大学排名";
+"Category-AU" = "AU.jpg";
+"Category-UK" = "UK.jpg";
+"University-hot" = "hot_cn";
+  //首页
+"Discover_search" = "你想去哪里读书？想读什么？";
+"DiscoverTitle" = "发现院校";
+"Discover_more" = "更多";
+"Discover_woyao" = "我要留学";
+"Discover_xiaobai" = "留学小白";
+"Discover_zhinengpipei" = "智能匹配";
+"Discover_QQ" = "在线客服";
+"Discover_mudidi" = "留学目的地";
+"Discover_hotUni" = "热门院校";
+"Discover_news" = "热门阅读";
+
 //评估页面
-"Evaluate-001" = "Evaluate";
-"Evaluate-002" = "Current or graduated university";
-"Evaluate-009" = "Please enter graduated or current Uni";
-"Evaluate-003" = "Current subject area";
-"Evaluate-0010" = "Please select your field of study";
-"Evaluate-004" = "GPA";
-"Evaluate-0011" = "Please enter your GPA";
-"Evaluate-005" = "Overall IELTS score";
-"Evaluate-0012" = "Please enter your Overall IELTS score";
-"Evaluate-006" = "The lowest IELTS score";
-"Evaluate-0013" = "Please enter your lowest band score";
-"Evaluate-007" = "Expected field of study";
-"Evaluate-0014" = "Please select expected field of study";
-"Evaluate-0015" = "Your will get the success rate when you browse the Uni page";
-"Evaluate-0016" = "OK";
-"Evaluate-0017" = "Save";
-"Evaluate-University" = "University";
-"Evaluate-Done" = "Done";
-"Evaluate-inteligent" = "Uni Match";
-"Evaluate-commitButton" = "Get my result";
-"Evaluate-AD" = "myOffer@ provides you with recomended universities and courses,and allows you to choose 6 universities to apply. we are powered by real-time evolving big data technology(REBAT) and Two-Class Boosted Decision Tree(TBDT).";
-"Evaluate-Beijin" = "EDUCATION BACKGROUND";
-"Evaluate-Yixiang" = "STUDY PLAN";
-"Evaluate-gradeNoti" = "During July to sept, please select the level you are going to study";
-"Evaluate-commitNoti" = "Please select at least one university!";
-"Evaluate-commitAlert" = "Please select No more than 6 university";
-"Evaluate-Dream" = "Dream";
-"Evaluate-Middle" = "Core";
-"Evaluate-Secure" = "Secure";
-"Evaluate-PieLabel" = "we suggest you pick less than 2 as your target";
-"Evaluate-PieDream_chongChi" = "We suggest you pick less than 2 as your target.";
-"Evaluate-PieCore_heXin" = "We suggest you choose 2-3 as your focus.";
-"Evaluate-PieSecure_baoDi" = "We strongly recommend you choose at least 1-2 for safe admission.";
-"Evaluate-match" = "matched unis";
-"Evaluate-noData" = "Sorry, we couldn’t find any unis that matched your background.";
-"Evaluate-noDataSubject" = "Sorry, we couldn’t find any subject that matched";
-"Evaluate-dangwei" = "";
-"Evaluate-pipei" = "Start Matching uni";
+"Evaluate-001" = "在线评估";
+"Evaluate-002" = "最近就读学校";
+"Evaluate-004" = "GPA（平均成绩）";
+"Evaluate-005" = "雅思平均分数";
+"Evaluate-006" = "雅思最低分数";
+"Evaluate-007" = "申请专业";
+"Evaluate-003" = "就读专业";
+"Evaluate-009" = "请输入最近就读学校";
+"Evaluate-0010" = "请选择就读专业";
+"Evaluate-0011" = "请输入GPA（平均成绩）";
+"Evaluate-0012" = "请选择雅思平均分数";
+"Evaluate-0013" = "请选择雅思最低分数";
+"Evaluate-0014" = "请选择申请专业";
+"Evaluate-0015" = "重新查看大学列表会有惊喜哟！";
+"Evaluate-0016" = "好的";
+"Evaluate-0017" = "保存";
+"Evaluate-University" = "毕业院校";
+"Evaluate-Done" = "完成";
+"Evaluate-inteligent" = "智能匹配";
+"Evaluate-commitButton" = "获取智能匹配结果";
+"Evaluate-AD" = "您的资料将基于myOffer独家REBAT(Real-time Evolving Big Data Technology)技术分析，通过TBD(Two-Class Boosted Decision Tree)算法为您制定推荐院校方案。";
+"Evaluate-Beijin" = "背景资料";
+"Evaluate-Yixiang" = "留学意向";
+"Evaluate-gradeNoti" = "如果在暑假（7月1日-9月1日）请填写将就读的年级";
+"Evaluate-commitNoti" = "请至少选择一个学校";
+"Evaluate-commitAlert" = "最多不超过6个学校";
+"Evaluate-Dream" = "冲刺";
+"Evaluate-Middle" = "核心";
+"Evaluate-Secure" = "保底";
+"Evaluate-PieDream_chongChi" = "申请成功就赚了，选2所试试。";
+"Evaluate-PieCore_heXin" = "最适合你的学校，请至少重点考虑2-3所学校。";
+"Evaluate-PieSecure_baoDi" = "申请成功率较高的学校，建议至少选择1-2所。";
+"Evaluate-match" = "所匹配院校";
+"Evaluate-noData" = "抱歉，没有符合条件的院校！";
+"Evaluate-noDataSubject" = "抱歉，没有符合条件的专业！";
+"Evaluate-dangwei" = "所";
+"Evaluate-pipei" = "点击立刻匹配";
 
 
 //我的页面
-"Me-001" = "Application List";
-"Me-002" = "Application Status";
-"Me-003" = "Apply Materianls";
-"Me-004" = "Sign Out";
-"Me-005" = "Login Or Register";
-"Me-006" = "Confirm Logout";
-"Me-007" = "Cancel";
-"Me-008" = "Change Avatar";
-"Me-009" = "Photograph";
-"Me-0010" = "Select From phone Album";
-"Me-QQService" = "QQ needs to be installed in order to talk with myOffer team, please click ok to download QQ.";
-"Me-QQDownload" = "OK";
+"Me-001" = "申请意向";
+"Me-002" = "审核状态";
+"Me-003" = "申请材料";
+"Me-004" = "退出登录";
+"Me-005" = "点击登录或注册";
+"Me-006" = "确认登出";
+"Me-007" = "取消";
+"Me-008" = "更换头像";
+"Me-009" = "拍照";
+"Me-0010" = "从手机相册选择";
+"Me-QQService" = "联系客服前请先下载QQ，是否需要下载QQ？";
+"Me-QQDownload" = "下载";
 
 //申请中心页面
-"center-application" = "My applications";
-"center-appDetail" = "Select six universitys for one time submission";
-"center-status" = "Application status";
-"center-statusDetail" = "Transparent process available any time";
-"center-document" = "Applying documents";
-"center-documentDetail" = "Upload all your documents here in one place";
-"center-myoffer" = "My Offer";
-"center-myofferDetail" = "Your offers are waiting for you here";
-"center-match" = "Uni Match";
-"center-Favourite" = "Favourite Uni";
-"center-matchImage" = "center_ban_EN.jpg";
-"center-statusImage" = "center_ban02_EN.jpg";
+"center-application" = "申请意向";
+"center-appDetail" = "就是任性，6家名校一键申请";
+"center-status" = "审核状态";
+"center-statusDetail" = "顾问把关，制定高效申请方案";
+"center-document" = "申请材料";
+"center-documentDetail" = "材料备好，意向院校一网打尽";
+"center-myoffer" = "我的 Offer";
+"center-myofferDetail" = "Offer到手，我的未来我做主";
+"center-match" = "智能匹配";
+"center-Favourite" = "收藏院校";
+"center-matchImage" = "center_ban_CN.jpg";
+"center-statusImage" = "center_ban02_CN.jpg";
 
 
 //我的设置页面
-"Setting-000" = "Setting";
-"Setting-001" = "Personal Information";
-"Setting-002" = "My Favourite Uni";
-"Setting-003" = "FeedBack";
-"Setting-004" = "About";
-"Setting-005" = "Language";
 
+"Setting-000" = "设置";
+
+"Setting-001" = "个人信息";
+
+"Setting-002" = "收藏院校";
+
+"Setting-003" = "用户反馈";
+
+"Setting-004" = "关于";
+
+"Setting-005" = "切换语言";
 //我的设置 - 个人信息页面
-"Person-001" = "Account";
-"Person-002" = "Password";
-"Person-003" = "Mobile phone";
-"Person-004" = "Email";
-"Person-005" = "Change display name";
-"Person-006" = "Change password";
-"Person-SetPasswd" = "Set password";
-"Person-passwd" = "Password length is 6 - 16 characters";
-"Person-007" = "Unbound Mobile phone";
-"Person-008" = "Unbound Email";
+
+"Person-001" = "用户名";
+
+"Person-002" = "密码";
+
+"Person-003" = "手机号";
+
+"Person-004" = "邮箱";
+
+"Person-005" = "修改用户名";
+
+"Person-006" = "修改密码";
+"Person-SetPasswd" = "设置密码";
+
+"Person-passwd" = "密码长度6-16个字符";
+
+"Person-007" = "未绑定手机号";
+
+"Person-008" = "未绑定邮箱";
+
 //我的设置 - 用户反馈页面
-"FeedBack-001" = "Submit";
-"FeedBack-002" = "Submit";
+
+"FeedBack-001" = "发送";
+"FeedBack-002" = "发送";
+
 //我的设置 - 修改密码页面
-"ChPasswd-001" = "Please enter your Old password";
-"ChPasswd-002" = "Please enter your New password";
-"ChPasswd-003" = "Please enter your New password again";
-"ChPasswd-004" = "Inconsistent password";
-"ChPasswd-loginPasswd" = "Please enter your password";
+
+"ChPasswd-001" = "请输入旧密码";
+"ChPasswd-loginPasswd" = "请输入登录密码";
+"ChPasswd-002" = "请输入新密码";
+"ChPasswd-003" = "请再次输入新密码";
+
+"ChPasswd-004" = "两次输入的密码不一致";
 //搜索 —— 页面
-"SearchVC-hot" = "Hot Search";
-"SearchVC-history" = "History Search";
+"SearchVC-hot" = "热门搜索";
+"SearchVC-history" = "历史搜索";
 //搜索结果  —— 页面
-"SearchResultVC-001" = "TIMES Ranking";
-"SearchResultVC-rank" = "TIMES Ranking";
-"SearchResultVC-002" = "Letter_Rank";
-"SearchRank_Country" = "Country ranking";
-"SearchRank_World" = "World ranking";
-"SearchResult_Country" = "Country:";
-"SearchResult_State" = "State:";
-"SearchResult_city" = "City:";
-"SearchResult_subjectArea" = "Area:";
-"SearchResult_subject" = "Subject:";
-"SearchResult_All" = "All";
-"SearchResult_clear" = "Clear all";
-"SearchResult_commit" = "Confirm";
-"SearchResult_more" = "More";
-"SearchResult_filter" = "Filter";
-"SearchResult_worldRank" = "World ranking";
-"SearchResult_noRank" = "NO Rank";
-"SearchResult_worldxxxRank" = "world ranking";
-"SearchResult_countryxxxRank" = "country ranking";
-"SearchResult_university" = "Universities";
+"SearchResultVC-001" = "TIMES排名";
+"SearchResultVC-rank" = "按TIMES综合排名";
+"SearchResultVC-002" = "按字母排序";
+"SearchRank_Country" = "本国排名";
+"SearchRank_World" = "世界排名";
+"SearchResult_Country" = "国家:";
+"SearchResult_State" = "地区:";
+"SearchResult_city" = "城市:";
+"SearchResult_subjectArea" = "学科领域:";
+"SearchResult_subject" = "专业方向:";
+"SearchResult_All" = "全部";
+"SearchResult_clear" = "清空选项";
+"SearchResult_commit" = "确认";
+"SearchResult_more" = "查看更多课程";
+"SearchResult_filter" = "筛选";
+"SearchResult_worldRank" = "世界排名";
+"SearchResult_noRank" = "暂无排名";
+"SearchResult_worldxxxRank" = "世界排名";
+"SearchResult_countryxxxRank" = "本国排名";
+"SearchResult_university" = "所学校";
+
+
 
 //学校详情  —— 页面
-"UniversityDetail-001" = "Uni Profile";
-"UniversityDetail-002" = "TIMES Ranking";
-"UniversityDetail-003" = "QS World Ranking";
-"UniversityDetail-004" = "Established Time";
-"UniversityDetail-005" = "Location";
-"UniversityDetail-006" = "Rankings";
-"UniversityDetail-007" = "Brief Introduction";
-"UniversityDetail-008" = "Gallery";
-"UniversityDetail-009" = "See All Courses";
-"UniversityDetail-0010" = "NO Ranking";
-"UniversityDetail-noRank" = "NO Ranking";
-"UniversityDetail-0011" = "Acceptance rate";
-"UniversityDetail-0012" = "Added favourite";
-"UniversityDetail-0013" = "Canceled favourite";
-"UniversityDetail-0014" = "Success rate";
-"UniversityDetail-testRate" = "Click here to check success rate";
-"UniversityDetail-operating" = "Operating...";
-"UniversityDetail-year" = "";
-
+"UniversityDetail-001" = "学校详情";
+"UniversityDetail-002" = "TIMES本国排名";
+"UniversityDetail-003" = "QS世界排名";
+"UniversityDetail-004" = "建校时期";
+"UniversityDetail-005" = "所在地";
+"UniversityDetail-006" = "大学排名";
+"UniversityDetail-007" = "学校简介";
+"UniversityDetail-008" = "照片展示";
+"UniversityDetail-009" = "查看所有专业课程";
+"UniversityDetail-0010" = "暂无排名";
+"UniversityDetail-noRank" = "暂无排名";
+"UniversityDetail-0011" = "平均录取率";
+"UniversityDetail-0012" = "关注成功";
+"UniversityDetail-0013" = "取消成功";
+"UniversityDetail-0014" = "我的成功率";
+"UniversityDetail-testRate" = "测测我的入学成功率";
+"UniversityDetail-operating" = "计算中...";
+"UniversityDetail-year" = "年";
 
 //分类  页面
-"CategoryVC-ENG001" = "England";
-"CategoryVC-ENG002" = "Scotland";
-"CategoryVC-ENG003" = "Northern Ireland";
-"CategoryVC-ENG004" = "Wales";
-"CategoryVC-AUSTR001" = "Western Australia";
-"CategoryVC-AUSTR002" = "South Australia";
-"CategoryVC-AUSTR003" = "Tasmania";
-"CategoryVC-AUSTR004" = "New South Wales";
-"CategoryVC-AUSTR005" = "Victoria";
-"CategoryVC-AUSTR006" = "Australian Capital Territory";
-"CategoryVC-AUSTR007" = "Queensland";
-"CategoryVC-UK" = "United Kingdom";
-"CategoryVC-AU" = "Australia";
-"CategoryVC-times" = "TIMES ranking";
-"CategoryVC-world" = "QS world ranking";
+"CategoryVC-ENG001" = "英格兰";
+"CategoryVC-ENG002" = "苏格兰";
+"CategoryVC-ENG003" = "北爱尔兰";
+"CategoryVC-ENG004" = "威尔士";
+"CategoryVC-UK" = "英国";
+"CategoryVC-AU" = "澳大利亚";
 
+"CategoryVC-AUSTR001" = "西澳洲";
+"CategoryVC-AUSTR002" = "南澳州";
+"CategoryVC-AUSTR003" = "塔斯马尼亚州";
+"CategoryVC-AUSTR004" = "新南威尔士州";
+"CategoryVC-AUSTR005" = "维多利亚州";
+"CategoryVC-AUSTR006" = "澳大利亚首都领地";
+"CategoryVC-AUSTR007" = "昆士兰州";
 
-"CategorySub-farm" = "Agronomy";
-"CategorySub-art" = "Art and design";
-"CategorySub-finance" = "Economics and Finance";
-"CategorySub-social" = "Social science";
-"CategorySub-engineer" = "Engineering";
-"CategorySub-education" = "Education";
-"CategorySub-medicine" = "Medicine";
-"CategorySub-business" = "Business";
-"CategorySub-humanity" = "The humanities";
-"CategorySub-science" = "Science";
-"Categoryrank-en" = "TIMES University Rankings";
-"Categoryrank-au" = "Australian University Rankings";
-"Categoryrank-qs" = "QS World University Rankings";
+"CategorySub-art" = "艺术与设计";
+"CategorySub-finance" = "经济与金融";
+"CategorySub-social" = "社会科学";
+"CategorySub-engineer" = "工程学";
+"CategorySub-education" = "教育学";
+"CategorySub-medicine" = "医学";
+"CategorySub-business" = "商科";
+"CategorySub-farm" = "农学";
+"CategorySub-humanity" = "人文科学";
+"CategorySub-science" = "理学";
+"Categoryrank-en" = "TIMES+英国大学排名";
+"Categoryrank-au" = "Australia+澳大利亚大学排名";
+"Categoryrank-qs" = "QS世界排名";
+"CategoryNew-country" = "国家";
+"CategoryNew-region" = "地区";
+"CategoryNew-major" = "专业";
+"CategoryNew-rank" = "排名";
+"CategoryNew-hotUK" = "英国热门留学城市";
+"CategoryNew-hotAU" = "澳洲热门留学城市";
+"CategoryNew-oneStar" = "1星院校";
+"CategoryNew-twoStar" = "2星院校";
+"CategoryNew-threeStar" = "3星院校";
+"CategoryNew-fourStar" = "4星院校";
+"CategoryNew-fiveStar" = "5星院校";
 
-"CategoryNew-country" = "Country";
-"CategoryNew-region" = "Location";
-"CategoryNew-major" = "Subject";
-"CategoryNew-rank" = "Ranking";
-"CategoryNew-hotUK" = "Popular cities to study aboard in the UK";
-"CategoryNew-hotAU" = "Popular cities to study aboard in Australia";
-
-"CategoryNew-oneStar" = "The one-star university";
-"CategoryNew-twoStar" = "The two-star university";
-"CategoryNew-threeStar" = "The three-star university";
-"CategoryNew-fourStar" = "The four-star university";
-"CategoryNew-fiveStar" = "The five-star university";
-
-
+"CategoryVC-times" = "TIMES排名";
+"CategoryVC-world" = "QS世界大学排名";
 //已提交申请  页面
-"ApplicationStutasVC-001" = "Ranking";
-"ApplicationStutasVC-noData" = "Opps! No Data！";
-
+"ApplicationStutasVC-001" = "综合排名";
+"ApplicationStutasVC-noData" = "Duang!您还没有提交申请！";
 //申请意向
-"ApplicationList-001" = "Please select at least one course!";
-"ApplicationList-002" = "Your application can not exceed 6！";
-"ApplicationList-003" = "Selected";
-"ApplicationList-004" = "Total";
-"ApplicationList-005" = "Submit";
-"ApplicationList-commit" = "Apply now";
-"ApplicationList-noti" = "You have submit your application,please contact myOffer team should there be any enquiries about your apllication.";
-"ApplicationList-noData" = "Opps! NoData!";
-"ApplicationList-Edit" = "Edit";
-"ApplicationList-Delete" = "Delete";
-"ApplicationList-please" = "Please select unis or courses!";
-"ApplicationList-comfig" = "confirm?";
-"ApplicationList-login" = "Please Log in! ";
+"ApplicationList-001" = "请至少选择一门课程!";
+"ApplicationList-002" = "您提交审核的申请不能超过6个！";
+"ApplicationList-003" = "已选择";
+"ApplicationList-004" = "共";
+"ApplicationList-005" = "立即申请";
+"ApplicationList-commit" = "立即申请";
+"ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。如有疑问请联系客服人员。";
+"ApplicationList-noData" = "Duang!请添加您的意向学校吧！";
+"ApplicationList-Edit" = "编辑";
+"ApplicationList-Delete" = "删除";
+"ApplicationList-please" = "请选择学校或专业后再提交删除！";
+"ApplicationList-comfig" = "是否确认删除?";
+"ApplicationList-login" = "您还没有登录哦！";
 
 
 //申请时提交个人资料
-"ApplicationProfile-001" = "Personal Information";
-"ApplicationProfile-002" = "Applying to Uni";
-"ApplicationProfile-003" = "Please enter your expected country";
-"ApplicationProfile-004" = "Please enter your expected time to go";
-"ApplicationProfile-005" = "Please enter your expected field of study";
-"ApplicationProfile-006" = "Personal information";
-"ApplicationProfile-firstName" = "Please enter your first name";
-"ApplicationProfile-lastName" =  "Please enter your last name";
-"ApplicationProfile-phone" = "Please enter your contact phone number";
-"ApplicationProfile-007" = "Please enter graduated or current Uni";
-"ApplicationProfile-grade" = "Please select your current level of study";
-"ApplicationProfile-field" = "Please select your current field of study";
-"ApplicationProfile-008" = "Please enter your GPA";
-"ApplicationProfile-009" = "Please select overall  IELTS score";
-"ApplicationProfile-lowScore" = "Please select your lowest IELTS band score";
-"ApplicationProfile-0010" = "Finished";
-"ApplicationProfile-0011" = "Not Finish";
-"ApplicationProfile-0012" = "Proceed my application";
-"ApplicationProfile-0013" = "Basic information";
-"ApplicationProfile-0014" = "Can't be empty";
-"ApplicationProfile-0015" = "Seccess";
-"ApplicationProfile-0016" = "The early of filling in your personal detail is crucial to your application. myOffer team will make sure you're on the right track We will review as soon as possible.Just chill and relax";
-"ApplicationProfile-footer" = "By checking this box, I confirm that to the genuine of applying materials and agree myOffer terms of services.";
-"ApplicationProfile-keyword" = "myOffer terms of services";
+"ApplicationProfile-001" = "个人资料";
+"ApplicationProfile-002" = "请选择您的留学意向";
+"ApplicationProfile-003" = "请输入想去的国家";
+"ApplicationProfile-004" = "请选择计划出国的时间";
+"ApplicationProfile-005" = "请选择希望就读的专业";
+"ApplicationProfile-006" = "姓名";
+"ApplicationProfile-firstName" = "请输入您的名";
+"ApplicationProfile-lastName" = "请输入您的姓";
+"ApplicationProfile-phone" = "请输入您的手机号码";
+"ApplicationProfile-007" = "请输入就读或毕业院校";
+"ApplicationProfile-grade" = "请选择年级";
+"ApplicationProfile-field" = "请选择就读专业";
+"ApplicationProfile-008" = "请输入GPA（平均成绩）";
+"ApplicationProfile-009" = "请选择您的雅思平均成绩";
+"ApplicationProfile-lowScore" = "请选择您的雅思最低成绩";
+"ApplicationProfile-0010" = "已完成";
+"ApplicationProfile-0011" = "未完成";
+"ApplicationProfile-0012" = "提交审核";
+"ApplicationProfile-0013" = "请填写您的基本资料";
+"ApplicationProfile-0014" = "不能为空";
+"ApplicationProfile-0015" = "加入成功";
+"ApplicationProfile-0016" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";
+"ApplicationProfile-footer" = "已确认材料的正确性（申请材料和选校方案）并同意《myOffer服务协议书》";
+"ApplicationProfile-keyword" = "《myOffer服务协议书》";
 
+"TiJiao-Title" = "个人资料";
+"TiJiao-JiBen" = "基本信息";
+"TiJiao-LastName" = "姓";
+"TiJiao-FirstName" = "名";
+"TiJiao-Phone" = "手机号码";
+"TiJiao-YiXiang" = "留学意向";
+"TiJiao-Country" = "想去的国家";
+"TiJiao-Time" = "计划出国时间";
+"TiJiao-ApplySubject" = "希望就读专业";
+"TiJiao-Beijing" = "背景资料";
+"TiJiao-University" = "最近就读学校";
+"TiJiao-Subjecting" = "就读专业";
+"TiJiao-GPA" = "GPA(平均成绩)";
+"TiJiao-Grade" = "就读年级";
+"TiJiao-Average" = "雅思平均分";
+"TiJiao-Low" = "雅思最低分";
+"TiJiao-Finished" = "已完成";
+"TiJiao-UnFinish" = "未完成";
+"TiJiao-Commit" = "提交审核";
+"TiJiao-Empty" = "不能为空";
+"TiJiao-Succeed" = "加入成功";
+"TiJiao-Summary" = "亲，你离成功申请只差填写基本资料哦。剩下的由myOffer选校专家帮你制定属于你的绝佳留学方案。";
 
-"TiJiao-Title" = "Personal Information";
-"TiJiao-JiBen" = "Personal Information";
-"TiJiao-LastName" = "Last name";
-"TiJiao-FirstName" = "First name";
-"TiJiao-Phone" = "Phone No.";
-"TiJiao-YiXiang" = "Study Plan";
-"TiJiao-Country" = "Desired country";
-"TiJiao-Time" = "Expected Time to go";
-"TiJiao-ApplySubject" = "Expected subject area";
-"TiJiao-Beijing" = "Educational Background";
-"TiJiao-University" = "Current or graduated university";
-"TiJiao-Subjecting" = "Subject area";
-"TiJiao-GPA" = "GPA";
-"TiJiao-Grade" = "Grade";
-"TiJiao-Average" = "Overall IELTS score";
-"TiJiao-Low" = "The Lowest IELTS score";
-"TiJiao-Finished" = "Finished";
-"TiJiao-UnFinish" = "Not Finish";
-"TiJiao-Commit" = "Submit";
-"TiJiao-Empty" =  "Can't be empty";
-"TiJiao-Succeed" = "Seccess";
-"TiJiao-Summary" = "The early of filling in your personal detail is crucial to your application. myOffer team will make sure you're on the right track We will review as soon as possible.Just chill and relax";
 
 //选择国家页面
-"ExpectedCountry-001" = "Country name can not be empty";
-"ExpectedCountry-002" = "Desired country";
-"ExpectedCountry-003" = "Please enter a country or region name";
+"ExpectedCountry-001" = "国家名称不能为空";
+"ExpectedCountry-002" = "想去的国家";
+"ExpectedCountry-003" = "请输入国家或地区名称";
 //选择出国时间页面
-"ExpectedTime-001" = "Time can not be empty";
-"ExpectedTime-002" = "Expected time to go";
-"ExpectedTime-003" = "Please enter Expected time to go";
-//选择期望专业
-"ExpectedSubject-001" = "field of study can not be empty";
-"ExpectedSubject-002" = "Expected subject area";
-"ExpectedSubject-003" = "Please enter field of study";
+"ExpectedTime-001" = "计划时间不能为空";
+"ExpectedTime-002" = "计划出国时间";
+"ExpectedTime-003" = "请选择计划出国时间";
+//选择出国时间页面
+"ExpectedSubject-001" = "期望学习专业不能为空";
+"ExpectedSubject-002" = "希望就读专业";
+"ExpectedSubject-003" = "请选择希望就读专业";
 
 //课程详情
-"UniCourseDe-001" = "Courses";
-"UniCourseDe-002" = "ALL";
-"UniCourseDe-003" = "Bachelor";
-"UniCourseDe-004" = "Master";
-"UniCourseDe-005" = "Subjects";
-"UniCourseDe-006" = "Degrees";
-"UniCourseDe-007" = "Added";
-"UniCourseDe-008" = "You have not selected any courses yet！";
-"UniCourseDe-009" = "Add to List";
+"UniCourseDe-001" = "课程详情";
+"UniCourseDe-002" = "全部";
+"UniCourseDe-003" = "本科";
+"UniCourseDe-004" = "硕士";
+"UniCourseDe-005" = "专业方向";
+"UniCourseDe-006" = "学位类型";
+"UniCourseDe-007" = "已添加";
+"UniCourseDe-008" = "您尚未选择任何课程！";
+"UniCourseDe-009" = "加入申请意向";
 //注册登录页面
-"LoginVC-001" = "LOG IN";
-"LoginVC-002" = "SIGN UP";
-"LoginVC-003" = "Forgot password?";
-"LoginVC-OR" = "OR";
-"LoginVC-004" = "Enter mobil phone or email";
-"LoginVC-005" = "Enter password";
+"LoginVC-001" = "登录";
+"LoginVC-002" = "注册";
+"LoginVC-003" = "忘记密码";
+"LoginVC-OR" = "或者";
+"LoginVC-004" = "请输入手机号码或邮箱";
+"LoginVC-005" = "请输入新密码";
 //注册
-"LoginVC-006" = "Mobil phone";
-"LoginVC-phoneEG" = "Mobil phone e.g:7xxx";
-"LoginVC-PhoneNumberError" = "The phone number you entered is not valid";
-"LoginVC-EnglandNumberError" = "Please Enter your Phone number,e.g:7xxx";
-"LoginVC-007" = "Vertification code";
-"LoginVC-VerificationCode" = "Vertification code";
-"LoginVC-008" = "Send Code";
-"LoginVC-009" = "Enter password again";
-"LoginVC-0010" = "By signing up,I agree to  myOffer's Teams of Service ";
-"LoginVC-keyWord" = "myOffer's Teams of Service";
-"LoginVC-0011" = "Enter password";
-"LoginVC-0012" = "Reset password";
-"LoginVC-0013" = "Send Again ";
-"LoginVC-0014" = "s";
-"LoginVC-icon" = "logo_EN";
-"LoginVC-moreOption" = "More Options";
-"LoginVC-china" = "China+86";
-"LoginVC-english" = "UK + 44";
-"LoginVC-chinese" = "China";
-"LoginVC-england" = "UK";
-"LoginVC-welcome" = "Welcome";
-"LoginVC-welDetail" = "Start your university aplication Now on myOffer!";
-"LoginVC-welImage" = "wel_EN.png";
+"LoginVC-006" = "请输入手机号码";
+"LoginVC-phoneEG" = "请输入手机号码 :7xxx";
+"LoginVC-PhoneNumberError" = "请输入正确的手机号码";
+"LoginVC-EnglandNumberError" = "请输入正确的手机号码,如:7xxx";
+"LoginVC-007" = "请输入验证码";
+"LoginVC-VerificationCode" = "验证码";
+"LoginVC-008" = "获取验证码";
+"LoginVC-009" = "请再次输入密码";
+"LoginVC-0010" = "注册即表示同意《myOffer用户协议》";
+"LoginVC-keyWord" = "《myOffer用户协议》";
+"LoginVC-0011" = "请输入密码";
+"LoginVC-0012" = "重置密码";
+"LoginVC-0013" = "请等待";
+"LoginVC-0014" = "秒";
+"LoginVC-icon" = "logo_CN";
+"LoginVC-moreOption" = "第三方登录";
+"LoginVC-china" = "中国(+86)";
+"LoginVC-chinese" = "中国";
+"LoginVC-england" = "英国";
+"LoginVC-english" = "英国(+44)";
+"LoginVC-welcome" = "欢迎！";
+"LoginVC-welDetail" = "走进myOffer！开启梦想大学申请之旅！";
+"LoginVC-welImage" = "wel_CN.png";
+
 
 //登录绑定页面
-"bangdingVC-title" = "wechat Login";
-"bangdingVC-login" = "Enter now";
-"bangdingVC-bindBtn" = "Submit";
-"bangdingVC-bangding" = "Bind myOffer account";
-"bangdingVC-noti" = "If you have signed up, please bind a myOffer account";
-"bangdingVC-hello" = "Hello, wechat user";
-"bangdingVC-helloWB" = "Hello, weibo user";
-"bangdingVC-weiboTitle" = "weibo Login";
-"bangdingVC-QQtitle" = "QQ Login";
-"bangdingVC-helloQQ" = "Hello, QQ user";
-"bangdingVC-profile" = "Perfection Profile";
+
+"bangdingVC-login" = "立即进入";
+"bangdingVC-bindBtn" = "绑定";
+"bangdingVC-bangding" = "绑定myOffer账号";
+"bangdingVC-noti" = "如果您已注册，请绑定myOffer账号";
+"bangdingVC-hello" = "您好，微信用户";
+"bangdingVC-helloWB" = "您好，微博用户";
+"bangdingVC-weiboTitle" = "微博登录";
+"bangdingVC-title" = "微信登录";
+"bangdingVC-QQtitle" = "QQ登录";
+"bangdingVC-helloQQ" = "您好，QQ用户";
+"bangdingVC-profile" = "请补充完整资料";
+
+
 
 //语言设置页面
-"LanguageVC-001" = "Language Setting";
-"LanguageVC-002" = "warning";
-"LanguageVC-003" = "Please select the language and then submit";
-"LanguageVC-004" = "Do you need to switch to the English environment? Please click the Save button to restart myOffer! ";
-"LanguageVC-005" = "Do you need to switch to the Chinese environment? Please click the Save button to restart myOffer! ";
+"LanguageVC-001" = "语言设置";
+"LanguageVC-002" = "提示";
+"LanguageVC-003" = "请选择语言后再提交";
+"LanguageVC-004" = "您是否需要切换成英文环境？请点击保存按钮,重新启动myOffer! ";
+"LanguageVC-005" = "您是否需要切换成中文环境？请点击保存按钮,重新启动myOffer! ";
 //已提交材料
-"ApplyMater-001" = "Apply Materianls";
-"ApplyMater-002" = "Opps! You have not finished your application materials  Please log on www.myoffer.cn to fill out and proceed";
+"ApplyMater-001" = "我的申请材料";
+"ApplyMater-002" = "Duang!您的个人申请资料似乎没有完成哦~请移步电脑登陆www.myoffer.cn完善资料";
 
 //雅思成绩
-"YASI-001" = "IELTS can not be empty";
-"YASI-002" = "IELTS Average score can not be empty";
-"YASI-003" = "Please choose IELTS score";
-"YASI-004" = "Please choose IELTS average";
-"YASI-005" = "IELTS score";
-"YASI-006" = "IELTS average";
+"YASI-001" = "雅思最低分不能为空";
+"YASI-002" = "雅思平均分不能为空";
+"YASI-003" = "请选择雅思最低分";
+"YASI-004" = "请选择雅思平均分";
+"YASI-005" = "雅思最低分";
+"YASI-006" = "雅思平均分";
+
 //成绩平均分
-"AVGscore-001" = "The average can not be empty";
-"AVGscore-002" = "GPA";
-//用户名称及手机号
-"UserName-001" = "Last Name can not be empty";
-"UserName-002" = "First Name can not be empty";
-"UserName-003" = "User Info";
-"UserName-004" = "Last Name";
-"UserName-005" = "First Name";
+"AVGscore-001" = "GPA（平均成绩）不能为空";
+"AVGscore-002" = "GPA（平均成绩）";
+
+
+//用户名字 手机号
+"UserName-001" = "姓不能为空";
+"UserName-002" = "名字不能为空";
+"UserName-003" = "姓名";
+"UserName-004" = "请输入您的姓";
+"UserName-005" = "请输入您的名字";
 
 //计划出国时间 请选择计划出国时间
-"ExpectTime-001" = "Expected Time";
+"ExpectTime-001" = "希望出国时间";
 //希望就读专业
-"ExpectStudy-001" = "Expected Study";
+"ExpectStudy-001" = "希望就读专业";
 //教育背景
-"UniversityBG-001" = "University";
-"UniversityBG-002" = "Grade";
-"UniversityBG-003" = "Subject";
-"UniversityBG-004" = "Education";
+"UniversityBG-001" = "就读院校";
+"UniversityBG-002" = "就读年级";
+"UniversityBG-003" = "就读专业";
+"UniversityBG-004" = "教育背景";
 //申请状态
-"ApplySummit-001" = "Auditing";
-"myOffer-001" = "Opps! No Data";
-
+"ApplySummit-001" = "正在审核";
+"myOffer-001" = "Duang!还没有数据哦";
 //侧边菜单
-"Left-Home" = "Home";
-"Left-Applycation" = "My Applications";
-"Left-Set" = "Setting";
-"Left-Logout" = "Log Out";
-"Left-helpCenter" = "Help Center";
-"Left-help" = "Help";
-"Left-noti" = "Notification";
-"Left-noNoti" = "No notification message!";
-"Left-message" = "Message";
+"Left-Home" = "主页";
+"Left-Applycation" = "我的申请";
+"Left-Set" = "设置";
+"Left-Logout" = "登出";
+"Left-helpCenter" = "帮助中心";
+"Left-help" = "帮助";
+"Left-noti" = "通知";
+"Left-message" = "通知详情";
+"Left-noNoti" = "没有通知消息哦！";
 
 //网络请求方法提示
-"NetRequest-connectError" = "No connection, please check your network";
-"NetRequest-ErrorTitle" = "Error";
-"NetRequest-noNetWork"  = "Make sure your network is connected.";
-"NetRequest-OK" = "OK";
-"NetRequest-SeverError" = "The Server error";
-"NetRequest-SeverReturnError" = "The Server error";
-"Refresh-up" = "Load more data";
-"Refresh-release" = "Load more data";
-"Refresh-loading" = "Loading...";
-"Refresh-down" = "Pull down Refreshing";
-"Refresh-open" = "Release Refreshing";
-"Refresh-fresh" = "Loading...";
-"Refresh-all" = "no more data";
+"NetRequest-connectError" = "网络请求失败，请检查网络连接后重试。";
+"NetRequest-ErrorTitle" = "错误";
+"NetRequest-noNetWork" = "请确认你的网络是否连接？";
+"NetRequest-OK" = "好的";
+"NetRequest-SeverError" = "服务器错误";
+"NetRequest-SeverReturnError" = "服务器返回结果解析出错";
+"Refresh-up" = "上拉加载更多";
+"Refresh-release" = "松开立即加载更多";
+"Refresh-loading" = "正在加载更多的数据...";
+"Refresh-down" = "下拉可以刷新";
+"Refresh-open" = "松开立即刷新";
+"Refresh-fresh" = "正在刷新数据中...";
+"Refresh-all" = "已经全部加载完毕";
 
 //协议页面
-"Potocol-Commit" = "I have read and agree";
-"Potocol-Cancel" = "Cancel";
-
+"Potocol-Commit" = "我已阅读，同意";
+"Potocol-Cancel" = "取消";
 //关注院校页面
-"Favorite-NOTI" = "Opps! No Data";
-
+"Favorite-NOTI" = "Duang!请添加您关注的院校吧！";
 //绑定手机或邮件页面
-"Bind-phoneNoti" = "Verify successfully. If you use phone number as your log in account, please set up  password. ";
-"Bind-mailNoti" = "Verify successfully. If you use Email as your log in account, please set up  password. ";
-"Bind-phoneTitle" = "Mobil Phone";
-"Bind-EmailTitle" = "Email";
-"Bind-changePhoneTitle" = "Change Mobil Phone";
-"Bind-changeEmailTitle" = "Change Email";
-"Bind-email" = "Enter Email";
-"Bind-emailError" = "incorrect email format";
+"Bind-phoneNoti" = "手机号绑定成功，如需使用手机号登录，请设置密码。";
+"Bind-mailNoti" = "Email绑定成功，如需使用Email登录，请设置密码。";
+"Bind-phoneTitle" = "绑定手机";
+"Bind-EmailTitle" = "绑定邮箱";
+"Bind-changePhoneTitle" = "修改绑定";
+"Bind-changeEmailTitle" = "修改绑定";
+"Bind-email" = "请输入邮箱";
+"Bind-emailError" = "Email格式错误！";
 //关于
-"About_title" = "About myOffer@";
-"About_profile" = "myOffer ® is a global platform for international students studying abroad";
-"About_download" = "I like myOffer";
-"About_share" = "Share myOffer";
-"About_home" = "Visit myOffer";
-"About_weibo" = "Follow weibo";
-"About_weixin" = "Follow wechat";
-"About_contect" = "Contact Us";
-"About_phoneCN" = "China Support Centre";
-"About_phoneEN" = "London Headquarters";
-"About_Logo" = "About_myOfferEN";
-"About_shareTitle" = "Share";
-"About_shareweixin" = "wechat";
-"About_sharefrend" = "Timeline";
-"About_shareZoom" = "Qzone";
-"About_shareWeibo" = "weibo";
-"About_shareCopy" = "Copy";
-"About_shareMore" = "More";
-"About_AlerCopy" = "successfully copied, simply go to Wechat and paste to search";
-"About_CopySusess" = "Copy successfully";
-"About_shareContent" = "myOffer is a global platform for international students studying abroad.";
-"About_shareSummary" = "myOffer provides a seamless experience for international students who want to apply UK and Australia university.";
+"About_title" = "关于";
+"About_profile" = "myOffer ®是全球留学生的在线“留学+”服务生态圈平台，一个跨境的全球留学生服务生态圈。";
+"About_download" = "喜欢我们";
+"About_share" = "分享我们";
+"About_home" = "官方网站";
+"About_weibo" = "官方微博";
+"About_weixin" = "官方微信";
+"About_contect" = "联系我们";
+"About_phoneCN" = "中国支持中心";
+"About_phoneEN" = "伦敦全球中心";
+"About_Logo" = "About_myOfferCN";
+"About_shareTitle" = "分享";
+"About_shareweixin" = "微信";
+"About_sharefrend" = "朋友圈";
+"About_shareZoom" = "QQ空间";
+"About_shareWeibo" = "微博";
+"About_shareCopy" = "复制";
+"About_shareMore" = "更多";
+"About_AlerCopy" = "myOffer公众号已复制，打开微信搜索公众号关注哦！";
+"About_CopySusess" = "复制成功";
+"About_shareContent" = "跨境的全球留学生服务生态圈——myOffer";
+"About_shareSummary" = "myOffer您的一站式智能留学申请平台，为您提供最佳的留学方案。";
+
 
 //我要留学
-"WoYaoLiuXue_tryInTel" = "Already registered? Try our Intelligent Uni Match(IUM). ";
-"WoYaoLiuXue_Request" = "Send Request";
-"WoYaoLiuXue_title" = "Free Consultation";
-"WoYaoLiuXue_FillInfor" = "Please fill in the form. Our consultants will get back to you with a study plan asap. Or contact us through: 4000 666 522";
-"WoYaoLiuXue_Match" = "Start matching";
-"WoYaoLiuXue_aler" = "Successful! myOffer® experienced mentor will contact you as soon as possible, our number：0731-855271XX";
-"WoYaoLiuXue_home" = "back to home page";
-"WoYaoLiuXue_submit" = "Successful!";
+"WoYaoLiuXue_tryInTel" = "已注册？试试智能选学校神器。";
+"WoYaoLiuXue_title" = "我要留学";
+"WoYaoLiuXue_Request" = "我要留学";
+"WoYaoLiuXue_FillInfor" = "填写您的留学意向，我们将安排专业顾问人员为您定制留学方案，也可拨打客服电话：4000 666 522";
+"WoYaoLiuXue_Match" = "智能匹配";
+"WoYaoLiuXue_aler" = "资深顾问将在1-3个工作日与你取得联系，请注意接听来电：0731-855271XX";
+"WoYaoLiuXue_home" = "返回主页";
+"WoYaoLiuXue_submit" = "提交成功";
+
+

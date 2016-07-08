@@ -632,6 +632,7 @@
 
 -(void)popBackRootViewController
 {
+    
     if (self.isFromMessage) {
         
         [self.navigationController popViewControllerAnimated:YES];

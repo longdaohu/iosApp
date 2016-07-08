@@ -143,12 +143,15 @@
     }
 
 }
+
+
+
 -(void)makeWebView
 {
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 1)];
-        NSString *RequestString =[NSString stringWithFormat:@"http://www.myoffer.cn/api/article/%@/detail",self.NO_ID];
+        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
         [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
         self.web_wk.scrollView.scrollEnabled = NO;
         self.web_wk.userInteractionEnabled = NO;
@@ -162,7 +165,7 @@
         self.webView.scrollView.scrollEnabled = NO;
         self.webView.userInteractionEnabled = NO;
         [self.webView sizeToFit];
-        NSString *RequestString =[NSString stringWithFormat:@"http://www.myoffer.cn/api/article/%@/detail",self.NO_ID];
+        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
      }
     

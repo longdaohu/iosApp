@@ -266,6 +266,7 @@ static AppDelegate *__sharedDelegate;
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -364,12 +365,11 @@ static AppDelegate *__sharedDelegate;
 {
    
 //    NSLog(@"   以后使用新API接口   ");
-    NSLog(@"openURL  application------- %@",url.absoluteString);
     
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"   跳转支付宝钱包进行支付 result = %@",resultDic);
+//            NSLog(@"   跳转支付宝钱包进行支付 result = %@",resultDic);
         }];
         
         return YES;
@@ -400,8 +400,7 @@ static AppDelegate *__sharedDelegate;
     
     
 //    NSLog(@"    NOTE: 9.0以后使用新API接口   ");
-    NSLog(@"openURL  application 9.0以后------- %@",url.absoluteString);
-
+ 
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {

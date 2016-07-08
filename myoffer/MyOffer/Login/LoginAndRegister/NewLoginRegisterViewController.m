@@ -420,6 +420,8 @@
     
     if (phone.length == 0) {
         
+        [self.view endEditing:YES];
+        
         [self coverShow:YES];
         
     }else{
@@ -928,6 +930,9 @@
         self.PhoneView.frame = NewFrame;
         
     } completion:^(BOOL finished) {
+        
+        self.PhoneView.PhoneTF.text = @"";
+        self.PhoneView.VerifyTF.text = @"";
         
         if (!show) {
             

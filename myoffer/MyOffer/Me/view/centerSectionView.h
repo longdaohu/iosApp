@@ -10,7 +10,5 @@
 typedef void(^centerSectionViewBlock)(UIButton *sender);
 @interface centerSectionView : UIView
 @property(nonatomic,copy)centerSectionViewBlock sectionBlock;
-@property(nonatomic,assign)NSInteger FavoriteCount;   
-@property(nonatomic,assign)NSInteger PipeiCount;
-@property(nonatomic,strong)NSArray *items;
+@property(nonatomic,strong)NSDictionary *response;
 @end

@@ -12,11 +12,13 @@
 @interface centerSectionView()
 @property(nonatomic,strong)NSArray *lines;
 @property(nonatomic,strong)UIView *topLine;
- @end
+@property(nonatomic,strong)NSArray *items;
+
+@end
+
+
 
 @implementation centerSectionView
-
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -44,7 +46,7 @@
                 self.sectionBlock(sender);
             }
         };
-        CenterSectionItem *service  =[CenterSectionItem viewWithIcon:@"center_service" title:@"增值服务" subtitle:@"基本免费包"];
+        CenterSectionItem *service  =[CenterSectionItem viewWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐"];
         service.tag = 3;
         service.actionBlack = ^(UIButton *sender){
             
@@ -113,100 +115,24 @@
 
 }
 
-//-(instancetype)initWithFrame:(CGRect)frame
-//{
-//    if (self = [super initWithFrame:frame]) {
-//        
-//        self.ButtonBackgroundView = [[UIView alloc] init];
-//        self.ButtonBackgroundView.backgroundColor  = [UIColor whiteColor];
-//        [self addSubview:self.ButtonBackgroundView];
-//        
-//        self.CenterLine =[[UIView alloc] init];
-//        self.CenterLine.backgroundColor = BACKGROUDCOLOR;
-//        [self.ButtonBackgroundView addSubview:self.CenterLine];
-//        
-//        self.LeftBtn = [self addButtonWithImage:@"center_pipei" andButtonTag:10];
-//        [self.ButtonBackgroundView addSubview:self.LeftBtn];
-//        
-//        self.RightBtn = [self addButtonWithImage:@"center_Favor" andButtonTag:11];
-//        [self.ButtonBackgroundView addSubview:self.RightBtn];
-//        
-//    }
-//    return self;
-//}
-//
-//
-//
-//
-////生成Button快捷方式
-//-(UIButton *)addButtonWithImage:(NSString *)imageName andButtonTag:(NSInteger)tag;
-//{
-//    UIButton *sender =[[UIButton alloc] init];
-//    sender.titleEdgeInsets = UIEdgeInsetsMake(-8, 15, 0, 0);
-//    [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [sender.titleLabel setFont:[UIFont systemFontOfSize:18]];
-//    sender.tag = tag;
-//    sender.titleLabel.numberOfLines = 0;
-//    sender.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [sender setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-//    [sender  addTarget:self action:@selector(centerSectionViewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    return sender;
-//}
-//
--(void)setPipeiCount:(NSInteger)PipeiCount
-{
-    _PipeiCount = PipeiCount;
+
+-(void)setResponse:(NSDictionary *)response{
+
+    _response = response;
+    
+    if(!response)  return;
     
     CenterSectionItem *pipei  = self.items[0];
-    pipei.count =  [NSString stringWithFormat:@"%ld",PipeiCount];
-    
-}
+    pipei.count =  [NSString stringWithFormat:@"%@  所",response[@"recommendationsCount"]];
 
--(void)setFavoriteCount:(NSInteger)FavoriteCount
-{
-    _FavoriteCount = FavoriteCount;
     CenterSectionItem *favor  = self.items[1];
-    favor.count =  [NSString stringWithFormat:@"%ld ",FavoriteCount];
+    favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
+
+    CenterSectionItem *service  = self.items[2];
+    service.count =   [NSString stringWithFormat:@"%@",response[@"paid_service_description"]];
+
     
 }
-//
-//-(void)AttributetitleWithCount:(NSString *)countStr andtitle:(NSString *)titleStr andButton:(UIButton *)sender
-//{
-//    //富文本处理
-//    NSRange keyRange = [titleStr rangeOfString:countStr];
-//    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:titleStr];
-//    [AttributedStr addAttribute:NSForegroundColorAttributeName  value:[UIColor darkGrayColor]   range:keyRange];
-//    [AttributedStr addAttribute:NSFontAttributeName  value:[UIFont systemFontOfSize:15.0]   range:keyRange];
-//    [AttributedStr addAttribute:NSBaselineOffsetAttributeName   value:@(-8)   range:keyRange];
-//    [sender setAttributedTitle:AttributedStr forState:UIControlStateNormal];
-//}
-//
-//-(void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    
-//    CGFloat SX = 0;
-//    CGFloat SY = 1;
-//    CGFloat SW = APPSIZE.width;
-//    CGFloat SH = self.frame.size.height - 10;
-//    self.ButtonBackgroundView.frame = CGRectMake(SX, SY, SW, SH);
-//    
-//    self.CenterLine.frame = CGRectMake(SW*0.5 - 0.5, 10 , 1, SH - 20 );
-//    
-//    self.LeftBtn.frame = CGRectMake(0, 0, SW*0.5 - 0.5 , SH);
-//    
-//    self.RightBtn.frame = CGRectMake(SW*0.5+ 0.5  , 0, SW*0.5 , SH);
-//    
-//}
-//
-//- (void)centerSectionViewButtonPressed:(UIButton *)sender {
-//    
-//    if (self.sectionBlock) {
-//        
-//        self.sectionBlock(sender);
-//    }
-//}
 
 
 @end

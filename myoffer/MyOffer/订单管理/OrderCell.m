@@ -6,8 +6,8 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 #import "OrderItem.h"
-#import "OrderTableViewCell.h"
-@interface OrderTableViewCell ()
+#import "OrderCell.h"
+@interface OrderCell ()
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UILabel *orderTitleLab;
 @property(nonatomic,strong)UILabel *orderStatusLab;
@@ -20,25 +20,23 @@
 
 @end
 
-@implementation OrderTableViewCell
+@implementation OrderCell
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 +(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    OrderTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"order"];
+    OrderCell *cell =[tableView dequeueReusableCellWithIdentifier:@"order"];
     
     if (!cell) {
         
-        cell =[[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"order"];
+        cell =[[OrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"order"];
     }
     
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
-    
     cell.indexPath = indexPath;
     
     return cell;
@@ -74,16 +72,13 @@
         
         
         self.orderStatusLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentRight];
-        self.orderStatusLab.text = @"待支付";
         [self.bgView addSubview:self.orderStatusLab];
         
         self.orderNoLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
-        self.orderNoLab.text = @"订单号：1243454353534";
         [self.bgView addSubview:self.orderNoLab];
         
         self.orderPriceLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.orderPriceLab];
-        self.orderPriceLab.text = @"价格：1000";
         
         self.cancelBtn = [[UIButton alloc] init];
         [self.cancelBtn setTitle:@"取消订单"  forState:UIControlStateNormal];
@@ -125,15 +120,14 @@
     
      NSDictionary *sku = [order.SKUs firstObject];
     self.orderTitleLab.text = sku[@"name"] ;
-    self.orderNoLab.text =   order.orderId;
-    self.orderPriceLab.text =  order.total_fee;
+    self.orderNoLab.text = [NSString stringWithFormat:@"订单号：%@",order.orderId];
+    self.orderPriceLab.text = [NSString stringWithFormat:@"价格：%@",order.total_fee];
     
     self.cancelBtn.hidden = order.cancelBtn_hiden;
     self.payBtn.enabled = order.cancelBtn_hiden ?  NO :  YES;
     self.payBtn.backgroundColor = self.payBtn.enabled ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
     self.orderStatusLab.text =  order.status_order;
     [self.payBtn setTitle: order.status_pay forState:UIControlStateNormal];
-    
     
 }
 
@@ -154,14 +148,6 @@
     CGFloat bgW = XScreenWidth;
     CGFloat bgH = editH;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-//    CGRect newRect = self.bgView.frame;
-//    newRect.origin.x = self.cellEdit ? 40 : 0;
-//    [UIView animateWithDuration:0.2 animations:^{
-//        
-//        self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-//        
-//    }];
- 
     
     CGFloat titleX = 15;
     CGFloat titleY = 10;
@@ -209,16 +195,14 @@
 }
 
 
-
-
 -(void)onclick:(UIButton *)sender
 {
-    
     
     if ([self.delegate respondsToSelector:@selector(cellIndexPath:sender:)]) {
         
         [self.delegate cellIndexPath:self.indexPath sender:sender];
     }
+    
 }
 
 -(void)tap{

@@ -13,6 +13,7 @@ typedef void(^OrderDetailHeaderViewBlock)(UIButton *sender);
 @interface OrderDetailHeaderView : UIView
 @property(nonatomic,copy)OrderDetailHeaderViewBlock actionBlock;
 @property(nonatomic,strong)OrderItem *order;
+@property(nonatomic,assign)BOOL selected;
 @property(nonatomic,assign)CGFloat headHeight;
 
 @end

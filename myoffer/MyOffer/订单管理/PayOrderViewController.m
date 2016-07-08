@@ -19,6 +19,9 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)NSDictionary *tempDic;
+@property(nonatomic,copy)NSString *payStyle;
+@property(nonatomic,assign)BOOL payEnd;
+@property(nonatomic,strong)UIAlertView *alert;
 @end
 
 @implementation PayOrderViewController
@@ -29,6 +32,16 @@
     
     [[AppDelegate sharedDelegate] umeng];
 
+    [MobClick endLogPageView:@"page订单支付"];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page订单支付"];
+    
 }
 
 
@@ -36,43 +49,52 @@
     
     [super viewDidLoad];
     
-    
     [self makeUI];
-    [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(AliPayResult:) name:@"alipay" object:nil];
-    [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(weixinPayResult:) name:@"wxpay" object:nil];
     
-    
+    [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(payResult:) name:@"alipay" object:nil];
+    [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(payResult:) name:@"wxpay" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pay:)
+                                                 name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+
 }
 
--(void)weixinPayResult:(NSNotification *)notification
-{
-    
+-(void)payResult:(NSNotification *)notification{
+
     NSString *BackResult = (NSString *)notification.object;
-     NSString *title = [BackResult isEqualToString:@"0"] ? @"支付成功" : @"支付失败";
+    BOOL result = ([BackResult isEqualToString:@"0"] ||  [BackResult isEqualToString:@"9000"]);
+    self.payEnd = result;
+    NSString *title = result ? @"支付成功" : @"支付失败";
     [self showAler:title];
+
 }
-
-
--(void)AliPayResult:(NSNotification *)notification
-{
-    NSString *BackResult = (NSString *)notification.object;
-    NSString *title = [BackResult isEqualToString:@"9000"] ? @"支付成功" : @"支付失败";
-    [self showAler:title];
-}
-
-
 
 
 -(void)showAler:(NSString *)title
 {
-    UIAlertView *aler =[[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
-    [aler show];
+     UIAlertView *alert =[[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
+     self.alert = alert;
+     [alert show];
+
 }
+
+
 #pragma mark —————— UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    
+ 
+    
+    if(alertView.tag == 900 && buttonIndex == 1)
+    {
+        
+        NSString * URLString = @"https://itunes.apple.com/cn/app/wei-xin/id414478124?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+        
+        return;
+    }
+    
     if ([alertView.title isEqualToString:@"支付成功"]) {
-        OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
+         OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
          detail.order  =  self.order;
         [self.navigationController pushViewController:detail  animated:YES];
     }
@@ -83,13 +105,18 @@
 {
     if (!_items) {
         
-        _items = @[@"支付宝",@"微信支付"];
+        NSDictionary *ali =@{@"name":@"支付宝",@"icon":@"alipay"};
+        NSDictionary *weixin =@{@"name":@"微信支付",@"icon":@"weixin"};
+        
+        _items = @[ ali,weixin];
     }
     return _items;
 }
 
+
 -(void)makeUI{
     
+    self.title = @"支付方式";
     [self makeTableView];
     
 }
@@ -98,6 +125,7 @@
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = BACKGROUDCOLOR;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -136,8 +164,9 @@ static NSString *identify = @"pay";
         cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    cell.imageView.image =[UIImage imageNamed:@"about_weibo"];
-    cell.textLabel.text = self.items[indexPath.row];
+    NSDictionary *item = self.items[indexPath.row];
+    cell.imageView.image =  [UIImage imageNamed:item[@"icon"]];
+    cell.textLabel.text = item[@"name"];
     return cell;
 }
 
@@ -158,12 +187,40 @@ static NSString *identify = @"pay";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RequireLogin
-    indexPath.row == 0 ? [self sendAliPay] :[self payWeixin];
+    
+    
+    NSDictionary *item = self.items[indexPath.row];
+    
+    if ([item[@"name"] isEqualToString:@"支付宝"]) {
+        
+           [self sendAliPay];
+        
+    }else{
+    
+        
+            [self payWeixin];
+            
+    
+        
+    }
+
+
 }
 
 
 -(void)payWeixin
 {
+    
+    if (![WXApi isWXAppInstalled]){
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示信息" message:@"您还没有安装微信客户端!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"跳转微信", nil];
+        alert.tag = 900;
+        [alert show];
+        
+        return;
+    }
+    
+    
     
     [[AppDelegate sharedDelegate] updateUmeng];
     
@@ -171,7 +228,9 @@ static NSString *identify = @"pay";
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
+        self.payStyle = @"微信";
          NSDictionary *dict = response[@"paramsObj"];
+        
         if(dict != nil){
             
             NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
@@ -190,7 +249,7 @@ static NSString *identify = @"pay";
             
         }else{
             
-            NSLog(@"服务器返回错误");
+//            NSLog(@"服务器返回错误 %@",dict);
         }
         
     }];
@@ -202,18 +261,66 @@ static NSString *identify = @"pay";
 -(void)sendAliPay
 {
     
-     NSString *path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
-     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        NSString *appScheme = @"alipayMy0ffer767577465";
-        NSString *params = [response valueForKey:@"params"];
-       [[AlipaySDK defaultService] payOrder:params fromScheme:appScheme callback:^(NSDictionary *resultDic) {
- 
-       }];
-        
-    }];
-    
+        NSString *path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
+            
+        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+                    
+                    self.payStyle = @"支付宝";
+                    NSString *appScheme = @"My0ffer767577465";
+                    NSString *params = [response valueForKey:@"params"];
+                  
+                    [[AlipaySDK defaultService] payOrder:params fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                        
+                        
+                        [self pay:nil];
+                        
+                    }];
+                    
+                }];
 }
+
+
+-(void)pay:(NSNotification *)noti
+{
+    
+    if (self.payEnd) {
+        
+        return;
+    }
+    
+    if ([self.payStyle isEqualToString:@"支付宝"]) {
+        
+        NSString *path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
+        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
+            
+            if (endStr.boolValue && !self.alert.visible) {
+                
+                [self showAler:@"支付成功"];
+            }
+            
+        }];
+        
+    }else if([self.payStyle isEqualToString:@"微信"]){
+        
+        NSString *path =[NSString stringWithFormat:@"GET api/account/wechatpayapp?is_ios=1&order_id=%@",self.order.orderId];
+        
+        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
+            if (endStr.boolValue && !self.alert.visible) {
+                
+                [self showAler:@"支付成功"];
+            }
+        }];
+        
+    }
+
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -221,7 +328,8 @@ static NSString *identify = @"pay";
 
 -(void)dealloc{
     
-    NSLog(@"PayOrderViewController  dealloc");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+     NSLog(@"PayOrderViewController  dealloc");
     
 }
 

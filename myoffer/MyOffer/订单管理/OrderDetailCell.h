@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderServiceItem.h"
-@interface OrderDetailTableViewCell : UITableViewCell
-+(instancetype)cellWithTableView:(UITableView *)tableView;
+@interface OrderDetailCell : UITableViewCell
++(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @property(nonatomic,strong)OrderServiceItem *leftItem;
 @property(nonatomic,strong)OrderServiceItem *rightItem;
 @end

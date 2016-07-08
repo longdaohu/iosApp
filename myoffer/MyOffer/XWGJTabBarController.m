@@ -32,21 +32,21 @@
     MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];
     mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"申请中心";
     
-    if (USER_EN) {
-        
-        DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
-        dvc.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
-
-        self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:dvc],
-                                 [[XWGJNavigationController alloc] initWithRootViewController:cvc],
-                                 [[XWGJNavigationController alloc] initWithRootViewController:mvc]
-                                 ];
-        
-        
-        [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
-        [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
-        [self tabbaritem:2 nomalImage:@"center_nomal" selectImage:@"center_select"];
-    }else {
+//    if (USER_EN) {
+//        
+//        DiscoverViewController *dvc = [[DiscoverViewController alloc] init];
+//        dvc.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
+//
+//        self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:dvc],
+//                                 [[XWGJNavigationController alloc] initWithRootViewController:cvc],
+//                                 [[XWGJNavigationController alloc] initWithRootViewController:mvc]
+//                                 ];
+//        
+//        
+//        [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
+//        [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
+//        [self tabbaritem:2 nomalImage:@"center_nomal" selectImage:@"center_select"];
+//    }else {
     
         MessageViewController *msvc = [[MessageViewController alloc] init];
         msvc.title = @"资讯宝典";
@@ -65,7 +65,7 @@
         [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
         [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
     
-    }
+//    }
     
 
 

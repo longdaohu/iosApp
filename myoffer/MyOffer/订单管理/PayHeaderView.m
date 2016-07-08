@@ -19,7 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *payLab;
 @property (weak, nonatomic) IBOutlet UILabel *payCountLab;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UIView *upView;
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
+
 
 @end
 
@@ -28,16 +29,20 @@
 
 -(void)awakeFromNib{
 
+    self.bgView.backgroundColor = BACKGROUDCOLOR;
     self.bgView.layer.cornerRadius = 5;
-    self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
-    self.bgView.layer.shadowOpacity = 0.2;
-    self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
+    self.bgView.layer.masksToBounds = YES;
+
+
     self.backgroundColor = BACKGROUDCOLOR;
+
+    self.shadowView.layer.cornerRadius = 5;
+        self.shadowView.layer.shadowColor = XCOLOR_BLACK.CGColor;
+        self.shadowView.layer.shadowOpacity = 0.1;
+        self.shadowView.layer.shadowOffset = CGSizeMake(1, 1);
+
     
-    self.upView.layer.cornerRadius = 5;
-    self.upView.layer.shadowColor = XCOLOR_BLACK.CGColor;
-    self.upView.layer.shadowOpacity = 0.2;
-    self.upView.layer.shadowOffset = CGSizeMake(0, 0);
+    
     
 }
 

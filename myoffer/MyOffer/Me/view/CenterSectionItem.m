@@ -77,7 +77,7 @@
 {
     _count = count;
     
-    self.countLab.text = [NSString stringWithFormat:@"%@ 所",count];
+    self.countLab.text = [NSString stringWithFormat:@"%@",count];
     
 }
 
