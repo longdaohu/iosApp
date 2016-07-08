@@ -120,6 +120,7 @@
 
     _response = response;
     
+    
     if(!response)  return;
     
     CenterSectionItem *pipei  = self.items[0];
@@ -129,7 +130,7 @@
     favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
 
     CenterSectionItem *service  = self.items[2];
-    service.count =   [NSString stringWithFormat:@"%@",response[@"paid_service_description"]];
+    service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
 
     
 }

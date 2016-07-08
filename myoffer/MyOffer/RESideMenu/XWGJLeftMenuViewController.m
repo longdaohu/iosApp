@@ -379,6 +379,7 @@
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
                 
             }];
+            
         }
     }
 }

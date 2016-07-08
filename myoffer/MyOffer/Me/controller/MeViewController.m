@@ -57,13 +57,8 @@ typedef enum {
             
         }];
         
-        
         //判断是否有智能匹配数据或收藏学校
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            
-//            weakSelf.recommendationsCount = [response[@"recommendationsCount"] intValue];
-//            weakSelf.offersCount =  [response[@"offersCount"] intValue];
-//            weakSelf.favoritesCount = [response[@"favoritesCount"] intValue];
             weakSelf.myCountResponse = response;
             [weakSelf.tableView reloadData];
          }];
@@ -77,27 +72,19 @@ typedef enum {
          */
         [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
             NSString *state = response[@"state"];
-             if (![state containsString:@"1"]) {
-                
-                [weakSelf matchImageName:GDLocalizedString(@"center-statusImage") withOptionButtonTag:OptionButtonTypeZhuangTai];
-               
-               }
-            else
-            {
-                [weakSelf matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-                
-            }
+            NSString *imageName = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
+            OptionButtonType type =   [state containsString:@"1"] ? OptionButtonTypeZineng :OptionButtonTypeZhuangTai;
+            [weakSelf matchImageName:imageName withOptionButtonTag:type];
             
         }];
 
      }else{
         
          [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-//         self.recommendationsCount = 0;
-//         self.offersCount = 0;
-//         self.favoritesCount = 0;
-         [self.tableView reloadData];
          self.NotiNewView.image = nil;
+         self.myCountResponse = nil;
+         [self.tableView reloadData];
+
      }
 }
 //用于设置tabelHeaderView图片
