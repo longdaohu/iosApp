@@ -329,7 +329,7 @@ static NSString *identify = @"pay";
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-     NSLog(@"PayOrderViewController  dealloc");
+     KDClassLog(@"PayOrderViewController  dealloc");
     
 }
 

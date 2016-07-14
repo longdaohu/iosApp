@@ -277,7 +277,6 @@ typedef enum {
             case 1:
             {
                 [MobClick event:@"apply_pipei"];
-
                 [self inteligentOption];
 
             }
@@ -290,7 +289,8 @@ typedef enum {
               }
                 break;
             default:{
-            
+                
+                 [MobClick event:@"home_mall"];
                  [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
             }
                 break;
@@ -370,9 +370,10 @@ KDUtilRemoveNotificationCenterObserverDealloc
 
 -(void)QQservice
 {
- 
+    
       //跳转到QQ客服聊天页面
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
+        [MobClick event:@"KeFu"];
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];

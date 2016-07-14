@@ -210,6 +210,6 @@
         </view>
     </objects>
     <resources>
-        <image name="clock" width="65" height="65"/>
+        <image name="clock" width="60" height="60"/>
     </resources>
 </document>

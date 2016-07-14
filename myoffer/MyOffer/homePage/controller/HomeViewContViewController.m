@@ -649,7 +649,7 @@
             break;
          case 3:
          {
-             [MobClick event:@"KeFu"];
+             [MobClick event:@"home_mall"];
              [self liuxueService];
          }
             break;

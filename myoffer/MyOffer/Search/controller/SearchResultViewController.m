@@ -122,10 +122,7 @@
 {
     NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
     
-    
-    NSLog(@"%@", counries);
-
-    
+     
 }
 
 

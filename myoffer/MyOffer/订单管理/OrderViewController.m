@@ -307,7 +307,7 @@
 
 -(void)dealloc{
     
-    NSLog(@"OrderViewController  dealloc");
+    KDClassLog(@"OrderViewController  dealloc");
     
 }
 

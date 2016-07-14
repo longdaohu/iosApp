@@ -107,8 +107,7 @@
          
          NSArray *universities = (NSArray *)response;
          
-         NSLog(@" account/favorites----- %@",response);
- 
+  
          NSMutableArray *temp = [NSMutableArray array];
          
          [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

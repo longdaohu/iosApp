@@ -309,7 +309,7 @@ static AppDelegate *__sharedDelegate;
 #pragma mark 微信回调的代理方法
 -(void)onReq:(BaseReq*)req{
 
-    NSLog(@"onReq 微信  %@",[req class]);
+    KDClassLog(@"onReq 微信  %@",[req class]);
 
 }
 
@@ -324,11 +324,11 @@ static AppDelegate *__sharedDelegate;
         switch (response.errCode) {
           
             case WXSuccess:
-                NSLog(@"微信回调的代理方法 suceess %d",response.errCode);
+                KDClassLog(@"微信回调的代理方法 suceess %d",response.errCode);
 
                 break;
             default:
-                NSLog(@"微信回调的代理方法 failed %d",response.errCode);
+                KDClassLog(@"微信回调的代理方法 failed %d",response.errCode);
                 break;
         }
     }
@@ -336,7 +336,7 @@ static AppDelegate *__sharedDelegate;
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     
-    NSLog(@"application handleOpenURL------- %@",url.absoluteString);
+    KDClassLog(@"application handleOpenURL------- %@",url.absoluteString);
 
     return  [WXApi handleOpenURL:url delegate:self];
 }
@@ -345,7 +345,7 @@ static AppDelegate *__sharedDelegate;
 - (BOOL)applicationOpenURL:(NSURL *)url
 {
     
-    NSLog(@"aapplicationOpenURL------- %@",url.absoluteString);
+    KDClassLog(@"aapplicationOpenURL------- %@",url.absoluteString);
     if([[url absoluteString] rangeOfString:@"wx3b0cb66502388846://pay"].location == 0) //你的微信开发者appid
         return [WXApi handleOpenURL:url delegate:self];
     else
@@ -405,7 +405,7 @@ static AppDelegate *__sharedDelegate;
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             
-             NSLog(@"NOTE: 9.0 跳转支付宝钱包进行支付 result = %@",resultDic);
+             KDClassLog(@"NOTE: 9.0 跳转支付宝钱包进行支付 result = %@",resultDic);
             [[NSNotificationCenter  defaultCenter] postNotificationName:@"alipay" object:resultDic[@"resultStatus"]];
             
         }];

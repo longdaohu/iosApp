@@ -165,7 +165,7 @@
 
 -(void)dealloc{
 
-    NSLog(@"ServiceMallViewController  dealloc");
+    KDClassLog(@"ServiceMallViewController  dealloc");
 }
 
 

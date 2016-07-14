@@ -406,7 +406,7 @@
     if(response.responseCode == UMSResponseCodeSuccess)
     {
         //得到分享到的微博平台名
-        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+        KDClassLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
 }
 
