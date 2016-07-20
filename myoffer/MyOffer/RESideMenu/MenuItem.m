@@ -10,22 +10,26 @@
 
 @implementation MenuItem
 
-+(instancetype)menuItemInitWithName:(NSString *)name icon:(NSString *)icon
-{
-    
-    return [[self alloc] initWithName:name icon:icon];
-}
+ 
 
--(instancetype)initWithName:(NSString *)name icon:(NSString *)icon
+-(instancetype)initWithName:(NSString *)name icon:(NSString *)icon  count:(NSString *)messageCount
 {
     self =[super init];
     if (self) {
         self.name = name;
         self.icon = icon;
-        self.newMessage = NO;
-    }
+        self.messageCount = messageCount;
+     }
     return self;
 }
+
+
++(instancetype)menuItemInitWithName:(NSString *)name icon:(NSString *)icon  count:(NSString *)messageCount
+{
+    
+    return [[self alloc] initWithName:name icon:icon count:messageCount];
+}
+
 
 
 @end

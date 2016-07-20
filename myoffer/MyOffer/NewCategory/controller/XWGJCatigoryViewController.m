@@ -43,6 +43,8 @@
 @property(nonatomic,strong)XWGJBanView  *bg_SelectView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *countryes;
+//是否有新消息图标
+@property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
 @end
 
@@ -57,6 +59,8 @@
     
     [self getHotCitySource];
     
+
+    
 }
 
 
@@ -67,6 +71,8 @@
     self.tabBarController.tabBar.hidden = NO;
     
     [MobClick beginLogPageView:@"page分类搜索"];
+    
+    [self leftViewMessage];
 
 }
 
@@ -78,8 +84,6 @@
     [MobClick endLogPageView:@"page分类搜索"];
     
 }
-
-
 
 
 
@@ -268,19 +272,21 @@
     
     [self makeBanView];
     
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftViewMessage:) name:@"newMessage" object:nil];
+
 }
 
 
 -(void)makeOtherUI
 {
     
-    //自定义导航栏左侧按钮
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,40, 40)];
-    rightButton.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
-    [rightButton setImage:[UIImage imageNamed:@"menu_white"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(showLeftMenu:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    XJHUtilDefineWeakSelfRef
+    self.leftView =[LeftBarButtonItemView leftView];
+    self.leftView.actionBlock = ^(UIButton *sender){
+        [weakSelf showLeftMenu];
+    };
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
     
 }
@@ -523,22 +529,7 @@ static NSString *cityIdentify = @"cityCell";
         UIButton *lastBtn = self.bg_SelectView.lastBtn;
         
         if (sender != lastBtn) {
-            
-//            sender.enabled = NO;
-//            
-//            lastBtn.enabled = YES;
-//            
-//            self.bg_SelectView.lastBtn = sender;
-//            
-//            CGRect NewRect = self.bg_SelectView.FocusView.frame;
-//            
-//            NewRect.origin.x = ITEM_MARGIN + sender.tag * NewRect.size.width;
-//            
-//            [UIView animateWithDuration:0.5 animations:^{
-//                
-//                self.bg_SelectView.FocusView.frame = NewRect;
-//                
-//            }];
+  
             
             [self.bg_SelectView selectBtnClick:sender];
         }
@@ -550,7 +541,7 @@ static NSString *cityIdentify = @"cityCell";
 }
 
 //打开左侧菜单
--(void)showLeftMenu:(UIBarButtonItem *)barButton
+-(void)showLeftMenu
 {
     [self.sideMenuViewController presentLeftMenuViewController];
     
@@ -562,6 +553,44 @@ static NSString *cityIdentify = @"cityCell";
     XWGJNavigationController *nav = [[XWGJNavigationController alloc] initWithRootViewController:searchVC];
     [self presentViewController:nav animated:YES completion:nil];
 }
+
+
+
+-(void)leftViewMessage:(NSNotification *)noti{
+    
+    NSString *object = (NSString *)noti.object;
+    if (1 == object.integerValue) {
+        [self leftViewMessage];
+    }
+}
+
+-(void)leftViewMessage{
+    
+   if (LOGIN && [self checkNetWorkReaching]) {
+    
+        XJHUtilDefineWeakSelfRef
+       
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            
+            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count  = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud synchronize];
+
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+        }];
+       
+       
+    }else{
+        
+        self.leftView.countStr = @"0";
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -49,6 +49,8 @@
 @property(nonatomic,strong)XUToolbar *myToolbar;
 //无数据提示框
 @property(nonatomic,strong)XWGJNODATASHOWView *NODATA;
+//是否有新消息图标
+@property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
 
 @end
@@ -65,6 +67,8 @@
     self.tabBarController.tabBar.hidden = NO;
     
     [MobClick beginLogPageView:@"page资讯宝典"];
+    
+    [self leftViewMessage];
     
 }
 
@@ -204,13 +208,14 @@
     self.StatusBarBan.backgroundColor = XCOLOR_LIGHTBLUE;
     [self.view addSubview:self.StatusBarBan];
  
+    XJHUtilDefineWeakSelfRef
+    self.leftView =[LeftBarButtonItemView leftView];
+    self.leftView.actionBlock = ^(UIButton *sender){
+        [weakSelf showLeftMenu];
+    };
     
-    //自定义导航栏左侧按钮
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,40, 40)];
-    rightButton.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
-    [rightButton setImage:[UIImage imageNamed:@"menu_white"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(ShowLeftMenu) forControlEvents:UIControlEventTouchUpInside];
-     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc] initWithCustomView:rightButton];
+     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+ 
     UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.myToolbar.items= @[leftItem,flexItem];
 }
@@ -604,7 +609,7 @@
  
 }
 
--(void)ShowLeftMenu
+-(void)showLeftMenu
 {
 
     [self.sideMenuViewController presentLeftMenuViewController];
@@ -624,6 +629,32 @@
 {
      [self getDataSource:self.currentIndex andFresh:YES];
 }
+-(void)leftViewMessage{
+    
+    if (LOGIN && [self checkNetWorkReaching]) {
+        
+        XJHUtilDefineWeakSelfRef
+        
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
+            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count  = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud synchronize];
+
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+
+        }];
+        
+    }else{
+        
+        self.leftView.countStr = @"0";
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

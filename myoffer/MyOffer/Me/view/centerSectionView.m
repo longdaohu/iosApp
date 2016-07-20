@@ -7,6 +7,7 @@
 //
 
 
+
 #import "centerSectionView.h"
 #include "CenterSectionItem.h"
 @interface centerSectionView()
@@ -28,31 +29,31 @@
         self.backgroundColor =XCOLOR_WHITE;
         
         CenterSectionItem *pipei  =[CenterSectionItem viewWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所"];
-        pipei.tag = 1;
+        pipei.tag = centerItemTypepipei;
         pipei.actionBlack = ^(UIButton *sender){
             
             if (self.sectionBlock) {
         
-                self.sectionBlock(sender);
+                self.sectionBlock(centerItemTypepipei);
             }
         };
         
         CenterSectionItem *favor  =[CenterSectionItem viewWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所"];
-        favor.tag = 2;
+        favor.tag = centerItemTypefavor;
         favor.actionBlack = ^(UIButton *sender){
          
             if (self.sectionBlock) {
                 
-                self.sectionBlock(sender);
+                self.sectionBlock(centerItemTypefavor);
             }
         };
         CenterSectionItem *service  =[CenterSectionItem viewWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐"];
-        service.tag = 3;
+        service.tag = centerItemTypeservice;
         service.actionBlack = ^(UIButton *sender){
             
             if (self.sectionBlock) {
                 
-                self.sectionBlock(sender);
+                self.sectionBlock(centerItemTypeservice);
             }
         };
         

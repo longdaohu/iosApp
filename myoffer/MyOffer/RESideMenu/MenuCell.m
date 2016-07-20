@@ -9,17 +9,13 @@
 #import "MenuCell.h"
 
 @interface MenuCell ()
-@property(nonatomic,strong)UIImageView *accessoryIconView;
+@property(nonatomic,strong)UILabel *countLab;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 @end
 
 
 @implementation MenuCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -65,10 +61,16 @@ static NSString *cellIdentifier = @"menu";
         [self.contentView addSubview:lineView2];
         
         
-        self.accessoryIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_dot"]];
-        self.accessoryIconView.frame =CGRectMake(XScreenWidth*0.8 - 70, 20 , 10, 10);
-        [self.contentView addSubview:self.accessoryIconView];
-   
+        
+        self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(XScreenWidth*0.8 - 70, 0.5*(self.bounds.size.height - 18), 18, 18)];
+        self.countLab.layer.cornerRadius = 9;
+        self.countLab.layer.masksToBounds = YES;
+        self.countLab.backgroundColor =[UIColor redColor];
+        self.countLab.textColor = [UIColor whiteColor];
+        self.countLab.textAlignment =NSTextAlignmentCenter;
+        self.countLab.font = [UIFont systemFontOfSize:13];
+        self.countLab.hidden = YES;
+        [self.contentView addSubview:self.countLab];
         
     }
     return self;
@@ -80,9 +82,25 @@ static NSString *cellIdentifier = @"menu";
     _item =item;
     
     self.textLabel.text = item.name;
+    
     self.imageView.image =[UIImage imageNamed:item.icon];
-    self.accessoryIconView.hidden = !item.newMessage;
+    
+    self.countLab.hidden = item.messageCount.integerValue == 0;
+    
+    self.countLab.text = item.messageCount.integerValue  >= 100 ? @"99+": item.messageCount;
+
+    if (self.countLab.text.length > 1) {
+        
+        CGSize countSize = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
+        CGRect newRect = self.countLab.frame;
+        newRect.size.width = countSize.width + 8;
+        self.countLab.frame = newRect;
+        
+    }
 }
+
+
+
 
 
 @end

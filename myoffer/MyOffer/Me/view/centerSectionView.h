@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^centerSectionViewBlock)(UIButton *sender);
+typedef enum {
+    centerItemTypepipei,
+    centerItemTypefavor,
+    centerItemTypeservice
+}centerItemType;//表头按钮选项
+
+typedef void(^centerSectionViewBlock)(centerItemType type);
+
 @interface centerSectionView : UIView
 @property(nonatomic,copy)centerSectionViewBlock sectionBlock;
 @property(nonatomic,strong)NSDictionary *response;

@@ -29,6 +29,12 @@
 #import "NSString+MD5.h"
 #import "XNewSearchViewController.h"
 #import "ServiceMallViewController.h"
+#import "XUToolbar.h"
+
+typedef enum {
+    HomePageClickItemTypeNoClick,
+    HomePageClickItemTypePipei
+}HomePageClickItemType;
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeHeaderViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -52,6 +58,12 @@
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //下拉
 @property(nonatomic,strong)MJRefreshGifHeader *fresh_Header;
+//自定义ToolBar
+@property(nonatomic,strong)XUToolbar *myToolbar;
+//自定义导航栏LeftBarButtonItem
+@property(nonatomic,strong)LeftBarButtonItemView *leftView;
+//已选择服务项
+@property(nonatomic,assign)HomePageClickItemType clickType;
 
 @end
 
@@ -62,21 +74,33 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+ 
+    [self presentViewWillAppear];
+    
+}
+
+//页面出现时预加载功能
+-(void)presentViewWillAppear{
+    
+    [MobClick beginLogPageView:@"page新版首页"];
     
     self.tabBarController.tabBar.hidden = NO;
     
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     
-    [MobClick beginLogPageView:@"page新版首页"];
-    
-//    [self UserLanguage];  //ENGLISH  设置环境
+    //    [self UserLanguage];  //ENGLISH  设置环境
     
     [self checkZhiNengPiPei];
     
-    //判断用户是否登录且登录用户手机号码是否为空，如果为空用户退出登录；
     [self userInformation];
     
+    [self leftViewMessage];
+    
+    [self userDidClickItem];
+    
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -153,12 +177,9 @@
 -(void)checkZhiNengPiPei{
  
     if (LOGIN) {
-        
         //判断是否有智能匹配数据或收藏学校
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            
             self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
-            
         }];
     }
 }
@@ -265,14 +286,41 @@
     return _SectionTitles;
 }
 
+-(XUToolbar *)myToolbar
+{
+    if (!_myToolbar) {
+        
+        _myToolbar =[XUToolbar toolBar];
+        [self.view addSubview:_myToolbar];
+    }
+    return _myToolbar;
+}
+
 
 -(void)makeUI
 {
+    
     [self makeHomeTableView];
     
     [self checkAPPVersion];
     
- }
+    [self makeLeftBarButtonItemView];
+    
+}
+
+
+-(void)makeLeftBarButtonItemView{
+
+    XJHUtilDefineWeakSelfRef
+    self.leftView =[LeftBarButtonItemView leftView];
+    self.leftView.actionBlock = ^(UIButton *sender){
+        [weakSelf openLeftMenu];
+    };
+    
+    UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+    UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    self.myToolbar.items= @[leftItem,flexItem];
+}
 
 -(void)makeHomeTableView
 {
@@ -287,7 +335,6 @@
     self.TableView.backgroundColor = BACKGROUDCOLOR;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     
     [self makeTableHeader];
 
@@ -302,9 +349,8 @@
 -(void)makeTableHeader
 {
     
-    self.TableHeaderView =[[HomeHeaderView alloc] init];
+    self.TableHeaderView =[HomeHeaderView headerView];
     self.TableHeaderView.delegate = self;
-    self.TableHeaderView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight * 0.6);
     self.TableView.tableHeaderView = self.TableHeaderView;
  
 }
@@ -356,62 +402,20 @@
     self.searchView = [HomeSearchView View];
     XJHUtilDefineWeakSelfRef
     self.searchView.actionBlock = ^{
-        
-        
- 
-         [MobClick event:@"home_shearchItemClick"];
-
-         [weakSelf presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+        [weakSelf CaseSearchPage];
     };
     [self.view addSubview: self.searchView];
     
-    CGFloat searchX = 20;
-    CGFloat searchH = 44;
-    CGFloat searchW = XScreenWidth - 40;
-    CGFloat searchY = XScreenHeight * 0.6 * 0.5 + 20 -22;
-    self.searchView.frame =CGRectMake(searchX,searchY,searchW, searchH);
-    
 }
 
--(void)searchViewWithAnimation:(BOOL)animated
-{
-    self.searchView.LeftBtn.hidden = animated;
-    self.searchView.RightBtn.hidden = !animated;
-    [UIView animateWithDuration:0.25 animations:^{
-        CGRect newRect = self.searchView.frame;
-        newRect.size.width = animated ? XScreenWidth - 40 : 44;
-        self.searchView.frame = newRect;
-        self.searchView.layer.cornerRadius = animated ? 5.0f : 22.0f;
-    }];
-    
-}
+
 
 #pragma mark ———————— UIScrollViewDelegate
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-     CGFloat contant = XScreenHeight * 0.6 * 0.5 + 20 -22 - scrollView.contentOffset.y;
+     self.myToolbar.top = 20 - scrollView.contentOffset.y;
     
-    if (contant > 20) {
-    
-        CGRect newRect = self.searchView.frame;
-        newRect.origin.y = contant;
-        self.searchView.frame = newRect;
-     
-          [self searchViewWithAnimation:YES];
-        
-    }else{
-        
-        CGRect newRect = self.searchView.frame;
-        newRect.origin.y = 20;
-        self.searchView.frame = newRect;
-        
-        if (self.searchView.frame.origin.y == 20) {
-            
-          [self searchViewWithAnimation:NO];
-
-        }
-    }
+    [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:scrollView.contentOffset.y];
     
     if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
         CGFloat Gscale =0.2 + 0.5 * ABS(scrollView.contentOffset.y)/ 100.0;
@@ -457,12 +461,7 @@
     
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
    
-        [MobClick event:@"home_advertisementClick"];
-        AdvertiseViewController *detail =[[AdvertiseViewController alloc] init];
-        detail.advertise_title = weakSelf.advertise_Arr[StatusBarBannerNews.index][@"title"];
-        detail.StatusBarBannerNews = StatusBarBannerNews;
-        [weakSelf.navigationController pushViewController:detail animated:YES];
-        
+        [weakSelf CaseLandingPageWithBan:StatusBarBannerNews];
     };
     
 }
@@ -584,25 +583,8 @@
     
     if (0 == indexPath.section) {
         
-        NSString *item;
-        if (indexPath.row == 0) {
-            
-            item = @"home_LondonItemClick";
-        }else{
-            
-            item = indexPath.row == 1? @"home_SydneyItemClick":@"home_ManchesterItemClick";
-        }
-        
-         [MobClick event:item];
-        
-        
-        NSDictionary *info = self.hotCity_Arr[indexPath.row];
-        NSString *searchValue = info[@"search"];
-        XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
-                                                                                  value:searchValue
-                                                                                orderBy:RANKTI];
-        vc.Corecity = searchValue;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self CaseSearchResultWithindexPath:indexPath];
+
     }
     
     
@@ -612,7 +594,6 @@
 -(void)HomeHeaderView:(HomeHeaderView *)itemView WithItemtap:(UIButton *)sender
 {
    
-    
     NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
     if (counries.count == 0) {
          //用于防止用户第一次加载备用数据失败
@@ -623,82 +604,44 @@
     
      switch (sender.tag) {
          case 0:
-         {
-             [MobClick event:@"WoYaoLiuXue"];
-             [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
-         }
+             [self CaseWoyaoliuXue];
             break;
         case 1:
-         {
-             [MobClick event:@"XiaoBai"];
-             [self.navigationController pushViewController:[[XXiaobaiViewController alloc] init] animated:YES];
-             
-         }
-            
+             [self CaseLiuXueXiaoBai];
             break;
-         case 2:{
-             
-             [MobClick event:@"PiPei"];
-             RequireLogin
-             if (self.recommendationsCount > 0 && LOGIN) {
-                 [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
-             }else{
-                  [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
-             }
-         }
+         case 2:
+             [self CasePipeiWithItemType:HomePageClickItemTypePipei];
             break;
          case 3:
-         {
-             [MobClick event:@"home_mall"];
-             [self liuxueService];
-         }
-            break;
+             [self CaseServerMall];
+             break;
         default:
-            [self openLeftMenu];
             break;
     }
-    
 }
 
 #pragma mark —————— HomeSecondTableViewCellDelegate
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
-    
     [MobClick event:@"home_newsItem"];
     MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
     detail.NO_ID = response[@"_id"];
     [self.navigationController pushViewController:detail animated:YES];
 }
 
-
 #pragma mark —————— HomeThirdTableViewCellDelegate
 -(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
      [MobClick event:@"home_universityItem"];
-    
      [self.navigationController pushUniversityViewControllerWithID:response[@"_id"] animated:YES];
-}
-
--(void)liuxueService
-{
-    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
-    
 }
 
 #pragma mark  ————————————  UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  
-         if (buttonIndex) { //跳转到appstore下载页面
-         
-            NSString *appid = @"1016290891";
-            
-            NSString *str = [NSString stringWithFormat:
-                             
-                             @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid];
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-     }
+     if (buttonIndex) {
+              [self CaseAppstore];
+          }
     
 }
 
@@ -746,7 +689,7 @@
         [ud setValue:response forKey:@"Grade_EN"];
 
     }];
- 
+  
     
     
     [ud synchronize];
@@ -866,7 +809,7 @@
 }
 
  
-//请求用户信息
+//请求用户信息      //判断用户是否登录且登录用户手机号码是否为空，如果为空用户退出登录；
 -(void)userInformation
 {
     if (!LOGIN) return;
@@ -902,6 +845,146 @@
         }];
     }
     
+}
+
+//导航栏leftBarbuttonItem
+-(void)leftViewMessage{
+    
+    if (LOGIN && [self checkNetWorkReaching]) {
+        
+        XJHUtilDefineWeakSelfRef
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count  = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud synchronize];
+
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+        }];
+        
+    }else{
+        
+        self.leftView.countStr = @"0";
+    }
+    
+}
+
+
+//跳转我要留学
+-(void)CaseWoyaoliuXue
+{
+    [MobClick event:@"WoYaoLiuXue"];
+    [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
+}
+
+//跳转留学小白
+-(void)CaseLiuXueXiaoBai
+{
+    [MobClick event:@"XiaoBai"];
+    [self.navigationController pushViewController:[[XXiaobaiViewController alloc] init] animated:YES];
+}
+
+//跳转智能匹配
+-(void)CasePipeiWithItemType:(HomePageClickItemType)type
+{
+    self.clickType = LOGIN ? HomePageClickItemTypeNoClick : type;
+    
+    RequireLogin
+    
+    switch (type) {
+        case HomePageClickItemTypePipei:
+        {
+            [MobClick event:@"PiPei"];
+            UIViewController *vc =  self.recommendationsCount > 0 ?  [[IntelligentResultViewController alloc] init] : [[InteProfileViewController alloc] init];
+            [self.navigationController pushViewController:vc  animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+
+}
+//跳转服务包
+-(void)CaseServerMall{
+
+    [MobClick event:@"home_mall"];
+    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+}
+
+//跳转搜索功能
+-(void)CaseSearchPage
+{
+    [MobClick event:@"home_shearchItemClick"];
+    [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+}
+
+//跳转LandingPage
+-(void)CaseLandingPageWithBan:(YYSingleNewsBO *)item
+{
+    [MobClick event:@"home_advertisementClick"];
+    AdvertiseViewController *detail =[[AdvertiseViewController alloc] init];
+    detail.advertise_title = self.advertise_Arr[item.index][@"title"];
+    detail.StatusBarBannerNews = item;
+    [self.navigationController pushViewController:detail animated:YES];
+
+}
+
+//跳转LandingPage
+-(void)CaseSearchResultWithindexPath:(NSIndexPath *)indexPath{
+
+    NSString *item;
+    switch (indexPath.row) {
+        case 0:
+            item = @"home_LondonItemClick";
+            break;
+        case 1:
+            item = @"home_SydneyItemClick";
+            break;
+        default:
+            item = @"home_ManchesterItemClick";
+            break;
+    }
+    [MobClick event:item];
+    
+    
+    NSDictionary *info = self.hotCity_Arr[indexPath.row];
+    NSString *searchValue = info[@"search"];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
+                                                                              value:searchValue
+                                                                            orderBy:RANKTI];
+    vc.Corecity = searchValue;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+//判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
+-(void)userDidClickItem
+{
+    if (LOGIN) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self CasePipeiWithItemType:self.clickType];
+
+        });
+    }
+}
+
+//跳转到appstore下载页面
+-(void)CaseAppstore
+{
+    NSString *appid = @"1016290891";
+    
+    NSString *str = [NSString stringWithFormat:
+                     
+                     @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
 

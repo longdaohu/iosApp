@@ -11,6 +11,7 @@
 @interface MenuItem : NSObject
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *icon;
-@property(nonatomic,assign)BOOL newMessage;
-+(instancetype)menuItemInitWithName:(NSString *)name icon:(NSString *)icon;
+@property(nonatomic,copy)NSString *messageCount;
++(instancetype)menuItemInitWithName:(NSString *)name icon:(NSString *)icon count:(NSString *)messageCount;
+
 @end

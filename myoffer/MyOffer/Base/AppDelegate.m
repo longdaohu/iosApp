@@ -274,6 +274,7 @@ static AppDelegate *__sharedDelegate;
 }
 
 - (BOOL)isLogin {
+    
     return _accessToken != nil;
 }
 
@@ -282,6 +283,8 @@ static AppDelegate *__sharedDelegate;
     _accessToken = token;
     
     [Keychain writeKeychainWithIdentifier:@"token" data:[token dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [[NSNotificationCenter  defaultCenter] postNotificationName:@"newMessage" object:[NSString stringWithFormat:@"%ld",self.mainTabBarController.selectedIndex]];
     
 }
 

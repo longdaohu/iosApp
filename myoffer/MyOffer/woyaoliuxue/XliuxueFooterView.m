@@ -29,7 +29,8 @@ typedef enum {
 
 +(instancetype)footerView
 {
-    return [[XliuxueFooterView alloc] init];
+ 
+    return [[XliuxueFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 240)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

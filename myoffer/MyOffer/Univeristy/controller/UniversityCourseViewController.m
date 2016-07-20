@@ -293,11 +293,8 @@
 
 - (IBAction)addSelectedCourse {
     
-    if (![self  checkWhenUserLogOut]) {
-        
-        return;
-    }
-    
+ 
+    RequireLogin
     
     if (_newSelectedIDs.count == 0) {
         //@"你尚未选择任何课程"  

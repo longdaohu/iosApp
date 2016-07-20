@@ -13,5 +13,6 @@ typedef void(^HomeSearchBlock)();
 @property(nonatomic,strong)UIButton *LeftBtn;
 @property(nonatomic,strong)UIButton *RightBtn;
 +(instancetype)View;
+-(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contentOffsetY;
 
 @end

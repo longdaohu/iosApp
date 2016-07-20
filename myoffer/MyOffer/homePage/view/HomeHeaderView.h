@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
+
 @class HeadItembgView;
 @class HomeHeaderView;
 @protocol HomeHeaderViewDelegate  <NSObject>
@@ -18,6 +19,6 @@
 @interface HomeHeaderView : UIView
 @property(nonatomic,strong)UIView *upView;
 @property(nonatomic,weak)id<HomeHeaderViewDelegate> delegate;
-
++(instancetype)headerView;
 
 @end

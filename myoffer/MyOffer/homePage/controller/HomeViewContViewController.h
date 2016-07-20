@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface HomeViewContViewController : BaseViewController
+-(void)leftViewMessage;
 
 @end

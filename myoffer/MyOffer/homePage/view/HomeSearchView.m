@@ -52,7 +52,11 @@
 
 +(instancetype)View
 {
-    return [[self alloc] init];
+    CGFloat searchX = 20;
+    CGFloat searchH = 44;
+    CGFloat searchW = XScreenWidth - 40;
+    CGFloat searchY = XScreenHeight * 0.6 * 0.5 + 20 -22;
+    return [[self alloc] initWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
 }
 
 
@@ -73,4 +77,43 @@
     
     
 }
+
+-(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contentOffsetY;
+{
+
+    CGFloat contant = XScreenHeight * 0.6 * 0.5 + 20 -22 - contentOffsetY;
+    
+    if (contant > 20) {
+        
+        self.top = contant;
+        [self searchViewWithAnimation:YES];
+        
+    }else{
+        
+        
+        self.top = 20;
+        
+        if (self.frame.origin.y == 20) {
+            
+            [self  searchViewWithAnimation:NO];
+        }
+    }
+    
+}
+
+
+-(void)searchViewWithAnimation:(BOOL)animated
+{
+    self.LeftBtn.hidden = animated;
+    self.RightBtn.hidden = !animated;
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.width = animated ? (XScreenWidth - 40) : 44;
+        
+        self.layer.cornerRadius = animated ? 5.0f : 22.0f;
+    }];
+    
+}
+
+
 @end

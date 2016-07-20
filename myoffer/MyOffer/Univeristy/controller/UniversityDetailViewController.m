@@ -212,10 +212,7 @@
     
     
  
-    if (![self  checkWhenUserLogOut]) {
-        
-        return;
-    }
+      RequireLogin
     
      if (!_isLiked) {
         [self startAPIRequestWithSelector:@"GET api/account/favorite/:id" parameters:@{@":id": _universityID} success:^(NSInteger statusCode, id response) {
@@ -270,11 +267,8 @@
 - (IBAction)evaluationButtonPressed {
  
     
-    if (![self  checkWhenUserLogOut]) {
-        
-        return;
-    }
-    
+ 
+    RequireLogin
     
     InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
     

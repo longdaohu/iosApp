@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface XWGJCatigoryViewController : BaseViewController
-
+-(void)leftViewMessage;
 @end

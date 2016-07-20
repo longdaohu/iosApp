@@ -76,28 +76,29 @@ typedef enum {
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
+    [MobClick beginLogPageView:@"page我要留学"];
+    
+    [self presentViewWillAppear];
+}
+
+-(void)presentViewWillAppear
+{
     
     if (!LOGIN) {
-
+        
         self.phoneNumber = Failure;
         self.isClicked = NO;
         
     }else{
-    
+        
         [self getYourPhoneNumber:NO];
         
         if (self.isClicked) {
             
             [self LiuxueButtonClick];
-            
         }
-     
+        
     }
-    
-    
-    [MobClick beginLogPageView:@"page我要留学"];
-
-    
 }
 
 
@@ -297,9 +298,8 @@ typedef enum {
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.sectionFooterHeight = 5+(XScreenWidth - 320)* 0.1;
+    self.tableView.sectionFooterHeight = 5 + (XScreenWidth - 320)* 0.1;
     [self.view  addSubview:self.tableView];
-
     
     [self makeHeaderView];
     
@@ -313,14 +313,12 @@ typedef enum {
 {
     XliuxueFooterView *footerView =[XliuxueFooterView footerView];
     footerView.delegate = self;
-    footerView.frame = CGRectMake(0, 0, XScreenWidth, 240);
     self.tableView.tableFooterView = footerView;
 
 }
 
 -(void)makeHeaderView
 {
-    
     XliuxueHeaderView *headerView =[XliuxueHeaderView headView];
     headerView.title = GDLocalizedString(@"WoYaoLiuXue_FillInfor");
     headerView.frame = CGRectMake(0, 0,XScreenWidth,headerView.Height);
@@ -342,7 +340,7 @@ typedef enum {
  
     sectionView.titleLab.text = self.sectionTitles[section];
     
-     return sectionView;
+    return sectionView;
 }
 
 

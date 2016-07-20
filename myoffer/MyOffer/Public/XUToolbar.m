@@ -22,6 +22,11 @@
     return self;
 }
 
++(instancetype)toolBar{
+    
+   return [[self alloc] initWithFrame:CGRectMake(0, 20, XScreenWidth, 44)];
+}
+
 
 
 // Only override drawRect: if you perform custom drawing.

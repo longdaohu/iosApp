@@ -19,42 +19,82 @@
 #import "OrderViewController.h"
 #import "MenuCell.h"
 #import "MenuItem.h"
+#import "MeViewController.h"
+#import "HomeViewContViewController.h"
+#import "MessageViewController.h"
+#import "XWGJCatigoryViewController.h"
 
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property(nonatomic,strong)leftHeadView *headerView;
 @property(nonatomic,copy)NSString *Applystate;  //检查申请进程，判断我的申请跳转页面
-@property(nonatomic,strong)NSArray *menuItems;
+@property(nonatomic,strong)NSMutableArray *menuItems;
 @end
 
 @implementation XWGJLeftMenuViewController
--(NSArray *)menuItems{
+
+
+-(NSMutableArray *)menuItems{
 
     if (!_menuItems) {
         
-        MenuItem *apply =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application"];
-        MenuItem *offer =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service"];
-        MenuItem *noti =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages"];
-        MenuItem *set =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting"];
-        MenuItem *help =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help"];
-        MenuItem *logout =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout"];
-        _menuItems = @[apply,offer,noti,set,help,logout];
+        _menuItems =[NSMutableArray array];
+        
     }
     return _menuItems;
 }
 
 
+-(void)makeCellItems{
+    
+    [self.menuItems removeAllObjects];
+    
+    MenuItem *apply =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application" count:@"0"];
+    MenuItem *set =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting" count:@"0"];
+    MenuItem *help =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help" count:@"0"];
+    MenuItem *logout =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout" count:@"0"];
+    
+    if (LOGIN) {
+        
+        NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+        NSString *message_count  =  [ud valueForKey:@"message_count"];
+        NSString *order_count  =  [ud valueForKey:@"order_count"];
+        
+        MenuItem *orderCount =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
+        MenuItem *messageCount =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
+        
+        NSArray *temps = @[apply,orderCount,messageCount,set,help,logout];
+        self.menuItems = [temps mutableCopy];
+        
+    }else{
+        
+        MenuItem *offer =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:@"0"];
+        MenuItem *noti =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:@"0"];
+        
+        NSArray *temps = @[apply,offer,noti,set,help,logout];
+        self.menuItems = [temps mutableCopy];
+    }
+    
+    
+    [self.tableView reloadData];
+
+}
+
 /**
  *获取数据源
  */
-- (void)getDataSource {
+- (void)makeDataSource {
     
+    
+    [self makeCellItems];
+    
+ 
      if(LOGIN) {
-         self.headerView.userNameLabel.text = nil;
+         
+        self.headerView.userNameLabel.text = nil;
         //请求头像信息
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
-            
             self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
             [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
@@ -65,19 +105,7 @@
             
             return;
         }
-        
-        //检查是否有未读通知信息
-      [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil success:^(NSInteger statusCode, id response) {
-          
-           NSString *countstr = [NSString stringWithFormat:@"%@",response[@"has_new_message"]];
-            MenuItem *item = self.menuItems[2];
-          item.newMessage = [countstr containsString:@"1"];
-          
-          [self.tableView reloadData];
-    
-        }];
-        
-          /** state     状态有4个值
+           /** state     状态有4个值
           *  【 pending  ——审核中
           *  【 PushBack ——退回
           *  【 Approved ——审核通过
@@ -88,8 +116,11 @@
                         self.Applystate = response[@"state"];
                     }];
          
-         
-    }
+     }else{
+      
+         self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
+         self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
+     }
     
     
     
@@ -99,16 +130,10 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page左侧菜单"];
+    
+    [self  makeDataSource];
+        
 
-    if(LOGIN)
-    {
-        [self  getDataSource];
-        
-    }else{
-        
-        self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
-        self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
-     }
 }
 
 
@@ -210,9 +235,7 @@
 
 -(void)pushViewController:(UIViewController *)vc
 {
-    
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-    
     [nav pushViewController:vc animated:NO];
     
 }
@@ -226,11 +249,8 @@
     
     [MobClick event:@"myApply"];
     
-    if (![self checkWhenUserLogOut]) {
-        
-        return;
-    }
-
+     RequireLogin
+    
     if ([self.Applystate containsString:@"1"] || !self.Applystate) {
  
         [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
@@ -245,10 +265,9 @@
 
 -(void)caseSetting
 {
-    [self.sideMenuViewController hideMenuViewController];
+     [self.sideMenuViewController hideMenuViewController];
 
-    
-    [self pushViewController:[[SetViewController alloc] initWithNibName:@"SetViewController" bundle:nil]];
+     [self pushViewController:[[SetViewController alloc] initWithNibName:@"SetViewController" bundle:nil]];
     
 }
 
@@ -264,10 +283,7 @@
 {
     [self.sideMenuViewController hideMenuViewController];
 
-    if (![self checkWhenUserLogOut]) {
-        
-        return;
-    }
+    RequireLogin
     
     [self pushViewController:[[OrderViewController alloc] init]];
     
@@ -280,10 +296,8 @@
 
     [self.sideMenuViewController hideMenuViewController];
 
-    if (![self checkWhenUserLogOut]) {
-        
-        return;
-    }
+    RequireLogin
+  
     [self pushViewController:[[NotificationViewController alloc] init]];
     
 }
@@ -292,11 +306,11 @@
 //注销
 - (void)xlogout{
     
+
     UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
     [sheet showInView:self.view];
     
 }
-
 
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -337,14 +351,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
    
-    if (!LOGIN)
-    {
-        return self.menuItems.count - 1;
-        
-    }else{
-    
-        return self.menuItems.count;
-    }
+    return  LOGIN ? self.menuItems.count :self.menuItems.count - 1;
     
 }
 
@@ -365,23 +372,50 @@
     
     if (0 == buttonIndex) {
         
-        if (LOGIN) {
+      
             [[AppDelegate sharedDelegate] logout];
             [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
             self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar"];
-            
-            MenuItem *item = self.menuItems[2];
-            item.newMessage = NO;
-            [self.tableView reloadData];
-            
             [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
-                
             }];
+  
+  
+       [self makeCellItems];
+        
+        UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+       
+        switch (self.contentViewController.selectedIndex) {
+            case 3:
+            {
+                MeViewController *vc =nav.childViewControllers[0];
+                [vc leftViewMessage];
+            }
+                break;
+            case 2:
+            {
+                MessageViewController *vc =nav.childViewControllers[0];
+                [vc leftViewMessage];
+            }
+                break;
+            case 1:
+            {
+                XWGJCatigoryViewController  *vc =nav.childViewControllers[0];
+                [vc leftViewMessage];
+            }
+                break;
+            default:{
             
+                HomeViewContViewController *vc =nav.childViewControllers[0];
+                [vc leftViewMessage];
+            }
+                break;
+                
+
         }
     }
+    
 }
 
 #pragma mark -----UIImagePickerControlleDelegate
@@ -444,40 +478,28 @@
     
     switch (View_Id) {
         case 0:
-
             [self caseApply];
-
              break;
             
         case 1:{
-         
             
-            if (![self checkWhenUserLogOut]) {
-                
-                return;
-            }
-            
+            RequireLogin
+     
             NotificationViewController *notiVC = [[NotificationViewController alloc] init];
             notiVC.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:notiVC animated:NO];
             
-            
             DetailWebViewController *detailVC =[[DetailWebViewController alloc] init];
             detailVC.notiID =userInfo[@"message_id"];
             [notiVC.navigationController pushViewController:detailVC  animated:YES];
-
         
         }
             break;
             
         case 2:{
             
-            
-            if (![self checkWhenUserLogOut]) {
-                
-                return;
-            }
-
+            RequireLogin
+     
             ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
             apply.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:apply animated:NO];
@@ -485,7 +507,6 @@
         }
             break;
         case 3:{
-            
             
             if (!USER_EN) {
 

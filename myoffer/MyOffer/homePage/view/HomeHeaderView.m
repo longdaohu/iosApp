@@ -21,8 +21,7 @@
 @property (strong, nonatomic)UIImage *navigationBgImage;
 //button背景
 @property(nonatomic,strong)HeadItembgView *buttonsBgView;
-//自定义ToolBar
-@property(nonatomic,strong)XUToolbar *myToolbar;
+
 @end
 
 @implementation HomeHeaderView
@@ -51,23 +50,16 @@
         self.buttonsBgView =[[HeadItembgView alloc] init];
         self.buttonsBgView.delegate = self;
         [self.upView addSubview:self.buttonsBgView];
-        
-  
-       
-        self.myToolbar =[[XUToolbar  alloc] init];
-        [self.upView addSubview:_myToolbar];
-        UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,40, 40)];
-        leftButton.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
-        [leftButton setImage:[UIImage imageNamed:@"menu_white"] forState:UIControlStateNormal];
-        [leftButton addTarget:self action:@selector(openLeftMemu:) forControlEvents:UIControlEventTouchUpInside];
-        leftButton.tag = 99;
-        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-        UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        self.myToolbar.items= @[leftItem,flexItem];
-
+ 
         
     }
     return self;
+}
+
++(instancetype)headerView{
+
+    return [[self alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight * 0.6)];
+
 }
 
 
@@ -92,12 +84,6 @@
     self.upView.frame = CGRectMake(0, 0, XScreenWidth,upHeight);
     self.upViewBackgroudView.frame = self.upView.frame;
   
- 
-    CGFloat topBarX = 0;
-    CGFloat topBarY = 20;
-    CGFloat topBarW = XScreenWidth;
-    CGFloat topBarH = 44;
-    self.myToolbar.frame = CGRectMake(topBarX, topBarY, topBarW, topBarH);
     
     CGFloat Logox = 0;
     CGFloat Logoy = 30;

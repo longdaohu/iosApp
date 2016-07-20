@@ -12,6 +12,18 @@ typedef enum {
     OptionButtonTypeZhuangTai
 }OptionButtonType;//表头按钮选项
 
+typedef enum {
+    CenterClickItemTypeNoClick,
+    CenterClickItemTypePipei,
+    CenterClickItemTypeFavor,
+    CenterClickItemTypeServiceMall,
+    CenterClickItemTypeApplyList,
+    CenterClickItemTypeApplyStatus,
+    CenterClickItemTypeApplyMatial,
+    CenterClickItemTypeMyoffer
+}CenterClickItemType;
+
+
 #import "MeViewController.h"
 #import "ProfileViewController.h"
 #import "FXBlurView.h"
@@ -27,41 +39,93 @@ typedef enum {
 #import "XWGJCatigoryViewController.h"
 #import "ServiceMallViewController.h"
 
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UIAlertViewDelegate>  {
-}
+
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIWebViewDelegate>
+//表头
 @property (strong, nonatomic) IBOutlet UIView *headView;
+//表头图片
+@property (weak, nonatomic) IBOutlet UIImageView *centerHeader;
 @property(nonatomic,strong)NSDictionary  *myCountResponse;
 //cell数组
 @property(nonatomic,strong)NSArray *cells;
 //cellDetailtext数组
 @property(nonatomic,strong)NSArray *CelldDetailes;
 //是否有新消息图标
-@property(nonatomic,strong)UIImageView *NotiNewView;
-//表头图片
-@property (weak, nonatomic) IBOutlet UIImageView *centerHeader;
+@property(nonatomic,strong)LeftBarButtonItemView *leftView;
+//已选择服务项
+@property(nonatomic,assign)CenterClickItemType clickType;
+
 @end
+
 @implementation MeViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page申请中心"];
+    
+    [self presentViewWillAppear];
+    
+}
+
+//页面出现时预加载功能
+-(void)presentViewWillAppear{
+
+    [self getRequestCenterSourse];
+    
+     [self leftViewMessage];
+    
+    [self userDidClickItem];
+    
+     self.tabBarController.tabBar.hidden = NO;
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page申请中心"];
+    
+}
+
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    [self makeUI];
+}
+
+
+-(void)makeUI
+{
+    
+    [self makeHeaderView];
+    
+    [self makeNavigationView];
+    
+    [self makeCellArray];
+    
+    [self makeOther];
+    
+}
 
 
 -(void)getRequestCenterSourse
 {
-  
-     XJHUtilDefineWeakSelfRef;
+    XJHUtilDefineWeakSelfRef;
     
     //查看是否有新通知消息
-    if ([AppDelegate sharedDelegate].isLogin && [self checkNetWorkReaching]) {
-        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-             self.NotiNewView.image = [response[@"has_new_message"] integerValue] == 0 ?nil:[UIImage imageNamed:@"message_dot"];
-            
-        }];
+    if (LOGIN && [self checkNetWorkReaching]) {
         
         //判断是否有智能匹配数据或收藏学校
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             weakSelf.myCountResponse = response;
             [weakSelf.tableView reloadData];
-         }];
+        }];
         
         //判断显示图片
         /**     state     状态有4个值
@@ -77,73 +141,28 @@ typedef enum {
             [weakSelf matchImageName:imageName withOptionButtonTag:type];
             
         }];
-
-     }else{
         
-         [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-         self.NotiNewView.image = nil;
-         self.myCountResponse = nil;
-         [self.tableView reloadData];
-
-     }
+    }else{
+        
+        [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
+        self.myCountResponse = nil;
+        [self.tableView reloadData];
+        
+    }
+    
 }
 //用于设置tabelHeaderView图片
 -(void)matchImageName:(NSString *)imageName withOptionButtonTag:(OptionButtonType)tag
 {
     self.centerHeader.image = [UIImage imageNamed:imageName];
-    
     self.OptionButton.tag = tag;
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    [self getRequestCenterSourse];
-    
-    self.tabBarController.tabBar.hidden = NO;
+-(void)makeOther{
 
-    [MobClick beginLogPageView:@"page申请中心"];
-    
-}
- 
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:@"page申请中心"];
-    
-}
-
-
-
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    [self makeUI];
-}
-
--(void)makeUI
-{
-    
-    self.tableView.rowHeight = 55;
-    
-    [self makeHeaderView];
-    
     [self.OptionButton addTarget:self action:@selector(OptionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self makeNavigationView];
-    
-    [self makeCellArray];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRequestCenterSourse) name:@"requestCenter" object:nil];
-    
 }
 
 -(void)makeCellArray
@@ -162,7 +181,6 @@ typedef enum {
     };
     
     XJHUtilDefineWeakSelfRef
-    
     NSString *list = GDLocalizedString(@"center-application");
     NSString *listSub = GDLocalizedString(@"center-appDetail");
     NSString *status = GDLocalizedString(@"center-status");
@@ -171,56 +189,43 @@ typedef enum {
     NSString *materialSub = GDLocalizedString(@"center-documentDetail" );
     NSString *myoffer = GDLocalizedString(@"center-myoffer" );
     NSString *myofferSub = GDLocalizedString(@"center-myofferDetail" );
-    
     self.CelldDetailes =@[listSub,statusSub,materialSub,myofferSub];
-    
     self.cells = @[@[
-                       
                        newCell(list, [UIImage imageNamed:@"center_yixiang"],
                                ^{
-                                   [MobClick event: @"apply_applyItem"];
-                                   [weakSelf ApplyListView];
+                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyList];
                                }),
                        newCell(status,[UIImage imageNamed:@"center_status"],
                                ^{
-                                   [MobClick event: @"apply_applyStutasItem"];
-                                    [weakSelf ApplyStatusView];
-                                   
+                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
                                }),
                        
                        newCell(material,[UIImage imageNamed:@"center_matial"],
                                ^{
-                                   RequireLogin
-                                   ApplyMatialViewController *vc = [[ApplyMatialViewController alloc] init];
-                                   [weakSelf.navigationController pushViewController:vc animated:YES];
+                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyMatial];
                                }),
                        
                        newCell(myoffer, [UIImage imageNamed:@"center_myoffer"],
                                ^{
-                                   RequireLogin
-                                   MyOfferViewController *vc = [[MyOfferViewController alloc] init];
-                                   [weakSelf.navigationController pushViewController:vc animated:YES];
+                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeMyoffer];
+                                   
                                })] ];
 
 }
 
 -(void)makeNavigationView
 {
-    //自定义导航栏左侧按钮
-    UIView *rightView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,40, 40)];
-    [rightView addSubview:rightButton];
-    rightButton.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
-//    [rightButton setTintAdjustmentMode:UIViewTintAdjustmentModeAutomatic];
-    [rightButton setImage:[UIImage imageNamed:@"menu_white"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(showLeftMenu:) forControlEvents:UIControlEventTouchUpInside];
-    //用于显示按钮左上角红点标签
-    self.NotiNewView =[[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 10, 10)];
-    [rightView addSubview:self.NotiNewView];
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:rightView];
-    
+ 
+    XJHUtilDefineWeakSelfRef
+    self.leftView =[LeftBarButtonItemView leftView];
+    self.leftView.actionBlock = ^(UIButton *sender){
+        [weakSelf showLeftMenu];
+    };
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
+    
 }
+
 -(void)makeHeaderView
 {
     self.centerHeader.image =[UIImage imageNamed:@"PlaceHolderImage"];
@@ -231,81 +236,70 @@ typedef enum {
 }
 
 
-//智能匹配跳转选项
--(void)inteligentOption
+//判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
+-(void)userDidClickItem
 {
-    RequireLogin
-    if ((NSInteger)self.myCountResponse[@"recommendationsCount"] > 0 ) {
+    if (LOGIN) {
         
-        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else
-    {
-        InteProfileViewController *vc =[[InteProfileViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self centerPageClickWithItemType:self.clickType];
         
     }
 }
+//实现不同选项跳转
+-(void)centerPageClickWithItemType:(CenterClickItemType)type
+{
 
-//跳转申请状态
--(void)ApplyStatusView
-{
-        RequireLogin
-        ApplyStatusViewController *vc = [[ApplyStatusViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-}
-//跳转申请列表
--(void)ApplyListView
-{
-        RequireLogin
-        ApplyViewController *vc = [[ApplyViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+    self.clickType = LOGIN ? CenterClickItemTypeNoClick : type;
+    
+    RequireLogin
+    
+    switch (type) {
+        case CenterClickItemTypePipei:
+            [self CasePipei];
+            break;
+        case CenterClickItemTypeFavor:
+            [self CaseFavoriteUniversity];
+            break;
+        case CenterClickItemTypeApplyList:
+            [self CaseApplyListView];
+            break;
+        case CenterClickItemTypeApplyStatus:
+            [self CaseApplyStatusView];
+            break;
+        case CenterClickItemTypeApplyMatial:
+            [self CaseApplyMatial];
+            break;
+        case CenterClickItemTypeMyoffer:
+            [self CaseMyoffer];
+            break;
+        default:
+            break;
+    }
 }
 
 //分区头
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     centerSectionView  *sectionView =  [[centerSectionView alloc] init];
-//    sectionView.FavoriteCount = self.favoritesCount;
-//    sectionView.PipeiCount = self.recommendationsCount;
     sectionView.response = self.myCountResponse;
-    sectionView.sectionBlock =^(UIButton *sender)
-    {
-        
-        switch (sender.superview.tag) {
-            case 1:
-            {
-                [MobClick event:@"apply_pipei"];
-                [self inteligentOption];
-
-            }
+    sectionView.sectionBlock = ^(centerItemType type){
+        switch (type) {
+            case centerItemTypepipei:
+                [self centerPageClickWithItemType:CenterClickItemTypePipei];
                 break;
-            case 2:
-            {
-                RequireLogin
-                [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
-                [MobClick event:@"apply_like"];
-              }
+            case centerItemTypefavor:
+                [self centerPageClickWithItemType:CenterClickItemTypeFavor];
                 break;
-            default:{
-                
-                 [MobClick event:@"home_mall"];
-                 [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
-            }
+            default:
+                [self CaseServiceSelection];
                 break;
         }
-    
         
     };
     return sectionView;
 }
 
 #pragma mark —————— UITableViewDelegate  UITableViewDataSoure
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return  80 * APPSIZE.width/320;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -319,13 +313,9 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-     ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
-    
+    ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
     cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
-    
-    
     if ([cell.textLabel.text containsString:@"ffer"]) {
-        
         NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
         cell.countLabel.text = countString;
     }
@@ -341,37 +331,55 @@ typedef enum {
     if (cell.action) cell.action();
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return  80 * APPSIZE.width/320;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 55;
+}
+
+#pragma mark  ————————————  UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+     if (buttonIndex) { //跳转到QQ下载页面
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+        NSURL *url = [NSURL URLWithString:@"http://appstore.com/qq"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        webView.delegate = self;
+        [webView loadRequest:request];
+        [self.view addSubview:webView];
+     }
+}
 
 //打开左侧菜单
--(void)showLeftMenu:(UIBarButtonItem *)barButton
+-(void)showLeftMenu
 {
     [self.sideMenuViewController presentLeftMenuViewController];
     
 }
 
-
 //表头图片不同状态下跳转方式
 -(void)OptionButtonPressed:(UIButton *)optionButton
 {
     [MobClick event:@"apply_topStutas"];
-     switch (optionButton.tag) {
+    RequireLogin
+    switch (optionButton.tag) {
         case OptionButtonTypeZineng:
-             [self inteligentOption];
+            [self centerPageClickWithItemType:CenterClickItemTypePipei];
             break;
         default:
-            [self ApplyStatusView];
+            [self centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
             break;
     }
 }
 
 
-KDUtilRemoveNotificationCenterObserverDealloc
-
-
+//跳转到QQ客服聊天页面
 -(void)QQservice
 {
-    
-      //跳转到QQ客服聊天页面
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
         [MobClick event:@"KeFu"];
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -388,18 +396,98 @@ KDUtilRemoveNotificationCenterObserverDealloc
     }
 }
 
-#pragma mark  ————————————  UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-     if (buttonIndex) { //跳转到QQ下载页面
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url = [NSURL URLWithString:@"http://appstore.com/qq"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate = self;
-        [webView loadRequest:request];
-        [self.view addSubview:webView];
-     }
+//导航栏leftBarButtonItem
+-(void)leftViewMessage{
+
+    if (LOGIN && [self checkNetWorkReaching]) {
+        
+        XJHUtilDefineWeakSelfRef
+        
+     [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+         
+         NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+         NSInteger message_count  = [response[@"message_count"] integerValue];
+         NSInteger order_count  = [response[@"order_count"] integerValue];
+         [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
+         [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+         [ud synchronize];
+         
+         weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+       }];
+      
+    }else{
+     
+          self.leftView.countStr = @"0";
+    }
 }
 
 
+//智能匹配跳转选项
+-(void)CasePipei
+{
+    [MobClick event:@"apply_pipei"];
+    
+    if ((NSInteger)self.myCountResponse[@"recommendationsCount"] > 0 ) {
+        
+        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        InteProfileViewController *vc =[[InteProfileViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+}
+
+//跳转申请状态
+-(void)CaseApplyStatusView
+{
+    [MobClick event: @"apply_applyStutasItem"];
+    ApplyStatusViewController *vc = [[ApplyStatusViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+//跳转申请列表
+-(void)CaseApplyListView
+{
+    
+    [MobClick event: @"apply_applyItem"];
+    ApplyViewController *vc = [[ApplyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//跳转申请材料
+-(void)CaseApplyMatial{
+    
+    ApplyMatialViewController *vc = [[ApplyMatialViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+//跳转申请MYOFFER
+-(void)CaseMyoffer{
+    
+    
+    MyOfferViewController *vc = [[MyOfferViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//跳转收藏
+-(void)CaseFavoriteUniversity{
+    
+    
+    [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
+    [MobClick event:@"apply_like"];
+    
+}
+
+//跳转服务包
+-(void)CaseServiceSelection{
+    
+    [MobClick event:@"home_mall"];
+    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+}
+
+
+
+KDUtilRemoveNotificationCenterObserverDealloc
 @end
