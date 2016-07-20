@@ -118,19 +118,19 @@
     return _noDataView;
 }
 
--(void)checkCity
-{
-    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
-    
-     
-}
+//-(void)checkCity
+//{
+//    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
+//    
+//     
+//}
 
 
 - (void)viewDidLoad {
   
     [super viewDidLoad];
     
-    [self checkCity];
+//    [self checkCity];
     
     {
         

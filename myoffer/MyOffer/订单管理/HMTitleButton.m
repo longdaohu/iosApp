@@ -56,8 +56,9 @@
 {
     [super setTitle:title forState:state];
     
-    // 1.计算文字的尺寸
-    CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
+    // 1.计算文字的尺寸     CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
+
+    CGSize titleSize = [title KD_sizeWithAttributeFont:self.titleLabel.font];
     
     // 2.计算按钮的宽度
     CGRect newRect = self.frame;

@@ -271,7 +271,6 @@ typedef enum {
         }
         
         self.recommends = [(NSArray *)response mutableCopy];
-        
         [self.TableView reloadData];
     }];
    
@@ -439,7 +438,6 @@ typedef enum {
         }
         
         self.hotCity_Arr = [[temps subarrayWithRange:range] mutableCopy];
- 
         
         [self.TableView reloadData];
         
@@ -494,18 +492,21 @@ typedef enum {
     switch (indexPath.section) {
         case 0:
             return XScreenWidth *0.4;
-
-            break;
+             break;
         case 1:
-             return  2 * XScreenWidth *0.4;
+        {
+            
+             return  (NSInteger)ceilf(self.recommends.count * 0.5) * XScreenWidth * 0.4;
+
+        }
              break;
         default:
         {
             if (self.uniFrames.count > 0) {
              HotUniversityFrame *uniFrame = self.uniFrames[0];
             return uniFrame.cellHeight;
-
-            }else
+                
+             }else
             {
                 return 0;
              }
@@ -639,9 +640,11 @@ typedef enum {
 #pragma mark  ————————————  UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-     if (buttonIndex) {
-              [self CaseAppstore];
-          }
+     if (buttonIndex){
+       
+         [self CaseAppstore];
+         
+    }
     
 }
 
@@ -689,8 +692,6 @@ typedef enum {
         [ud setValue:response forKey:@"Grade_EN"];
 
     }];
-  
-    
     
     [ud synchronize];
     

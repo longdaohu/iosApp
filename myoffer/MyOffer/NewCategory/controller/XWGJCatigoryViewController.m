@@ -118,7 +118,7 @@
         XWGJRank *rank_en = [XWGJRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:@"ranking_ti"];
         XWGJRank *rank_au = [XWGJRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:@"ranking_ti"];
         XWGJRank *rank_qs = [XWGJRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:@"ranking_qs"];
-         _RankList = @[rank_en,rank_au,rank_qs];
+        _RankList = @[rank_en,rank_au,rank_qs];
         
     }
     return _RankList;

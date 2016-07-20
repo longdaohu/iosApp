@@ -2531,18 +2531,18 @@
 				AE7BAF6B1D2FBF5200DF2B96 /* HeadItem.m */,
 				AE7BAF6C1D2FBF5200DF2B96 /* HeadItembgView.h */,
 				AE7BAF6D1D2FBF5200DF2B96 /* HeadItembgView.m */,
-				AE7BAF6E1D2FBF5200DF2B96 /* HomeFirstTableViewCell.h */,
-				AE7BAF6F1D2FBF5200DF2B96 /* HomeFirstTableViewCell.m */,
 				AE7BAF701D2FBF5200DF2B96 /* HomeHeaderView.h */,
 				AE7BAF711D2FBF5200DF2B96 /* HomeHeaderView.m */,
 				AE7BAF721D2FBF5200DF2B96 /* HomeSearchView.h */,
 				AE7BAF731D2FBF5200DF2B96 /* HomeSearchView.m */,
+				AE7BAF6E1D2FBF5200DF2B96 /* HomeFirstTableViewCell.h */,
+				AE7BAF6F1D2FBF5200DF2B96 /* HomeFirstTableViewCell.m */,
 				AE7BAF741D2FBF5200DF2B96 /* HomeSecondTableViewCell.h */,
 				AE7BAF751D2FBF5200DF2B96 /* HomeSecondTableViewCell.m */,
-				AE7BAF761D2FBF5200DF2B96 /* HomeSectionHeaderView.h */,
-				AE7BAF771D2FBF5200DF2B96 /* HomeSectionHeaderView.m */,
 				AE7BAF781D2FBF5200DF2B96 /* HomeThirdTableViewCell.h */,
 				AE7BAF791D2FBF5200DF2B96 /* HomeThirdTableViewCell.m */,
+				AE7BAF761D2FBF5200DF2B96 /* HomeSectionHeaderView.h */,
+				AE7BAF771D2FBF5200DF2B96 /* HomeSectionHeaderView.m */,
 				AE7BAF7A1D2FBF5200DF2B96 /* SecondCollectionViewCell.h */,
 				AE7BAF7B1D2FBF5200DF2B96 /* SecondCollectionViewCell.m */,
 				AE7BAF7C1D2FBF5200DF2B96 /* UniCollectionViewCell.h */,
@@ -3479,13 +3479,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
-					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3502,7 +3501,6 @@
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/JPush",
 					"$(SRCROOT)/JPush",
 				);
@@ -3526,13 +3524,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
-					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3549,7 +3546,6 @@
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/JPush",
 					"$(SRCROOT)/JPush",
 				);
