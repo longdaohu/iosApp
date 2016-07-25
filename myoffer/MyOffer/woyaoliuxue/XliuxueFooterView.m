@@ -8,13 +8,6 @@
 
 #import "XliuxueFooterView.h"
 
-typedef enum {
-    buttonTypePipei = 1,
-    buttonTypeLiuxue
-} buttonType;
-
-
-
 @interface XliuxueFooterView ()
 //我要留学
 @property(nonatomic,strong)UIButton *submitBtn;
@@ -38,8 +31,8 @@ typedef enum {
     self = [super initWithFrame:frame];
     if (self) {
     
-        self.submitBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Request") andTag:buttonTypeLiuxue andBackgroudColor:XCOLOR_RED andTextColor:XCOLOR_WHITE];
-        self.pipeiBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Match")  andTag:buttonTypePipei andBackgroudColor:XCOLOR_WHITE andTextColor:XCOLOR_RED];
+        self.submitBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Request") andTag:1 andBackgroudColor:XCOLOR_RED andTextColor:XCOLOR_WHITE];
+        self.pipeiBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Match")  andTag:2 andBackgroudColor:XCOLOR_WHITE andTextColor:XCOLOR_RED];
         self.pipeiBtn.backgroundColor = XCOLOR_WHITE;
       
         self.pipeiLab =[self makeLabelWithTextFontSize:FONTSIZE(15)];
@@ -50,7 +43,7 @@ typedef enum {
 }
 
 
--(UIButton *)makeButtonWithTitle:(NSString *)title andTag:(buttonType)type  andBackgroudColor:(UIColor *)bgColor andTextColor:(UIColor *)textColor{
+-(UIButton *)makeButtonWithTitle:(NSString *)title andTag:(FooterButtonType)type  andBackgroudColor:(UIColor *)bgColor andTextColor:(UIColor *)textColor{
     
     UIButton *sender =  [[UIButton alloc] init];
     [sender setTitle:title forState:UIControlStateNormal];
@@ -79,7 +72,8 @@ typedef enum {
 -(void)click:(UIButton *)sender
 {
      if ([self.delegate respondsToSelector:@selector(liuxueFooterView:didClick:)]) {
-        [self.delegate liuxueFooterView:self didClick:sender];
+         FooterButtonType type = (sender.tag == 2) ? FooterButtonTypePipei : FooterButtonTypeLiuxue;
+        [self.delegate liuxueFooterView:self didClick:type];
     }
 }
 

@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef enum {
+    FooterButtonTypePipei,
+    FooterButtonTypeLiuxue
+} FooterButtonType;
+
+
+
 @class XliuxueFooterView;
 @protocol XliuxueFooterViewDelegate <NSObject>
--(void)liuxueFooterView:(XliuxueFooterView *)footerView didClick:(UIButton *)sender;
+-(void)liuxueFooterView:(XliuxueFooterView *)footerView didClick:(FooterButtonType)type;
 
 @end
 

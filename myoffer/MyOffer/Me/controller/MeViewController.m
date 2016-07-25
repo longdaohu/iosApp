@@ -241,9 +241,13 @@ typedef enum {
 {
     if (LOGIN) {
         
-        [self centerPageClickWithItemType:self.clickType];
-        
-    }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self centerPageClickWithItemType:self.clickType];
+
+        });
+
+     }
 }
 //实现不同选项跳转
 -(void)centerPageClickWithItemType:(CenterClickItemType)type

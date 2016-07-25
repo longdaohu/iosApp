@@ -14,8 +14,7 @@
 -(void)XliuxueTableViewCell:(XliuxueTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath didClick:(UIBarButtonItem *)sender;
 
 @end
-
-
+ 
 @interface XliuxueTableViewCell : UITableViewCell 
 @property(nonatomic,strong)XTextField  *titleTF;
 @property(nonatomic,strong)NSIndexPath *indexPath;

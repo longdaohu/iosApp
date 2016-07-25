@@ -808,7 +808,7 @@
 }
 
 
-#pragma mark 提交验证码
+// 提交验证码
 -(void)CommitVerifyCode
 {
     
@@ -840,9 +840,6 @@
                               }];
     
 }
-
- 
-
 
 
 // 发送验证码
@@ -943,7 +940,7 @@
     
 }
 
-
+//退出登录
 -(void)backAndLogout{
     
     if(LOGIN){

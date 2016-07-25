@@ -1,13 +1,14 @@
 //
-//  Xliuxue_ SuccessView.m
+//  XliuxueSuccessView.m
 //  myOffer
 //
-//  Created by xuewuguojie on 16/4/8.
+//  Created by xuewuguojie on 16/7/25.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "Xliuxue_ SuccessView.h"
-@interface Xliuxue__SuccessView ()
+#import "XliuxueSuccessView.h"
+
+@interface XliuxueSuccessView ()
 //背景View
 @property(nonatomic,strong)UIView  *bgView;
 //图片
@@ -24,11 +25,11 @@
 @end
 
 
-@implementation Xliuxue__SuccessView
+@implementation XliuxueSuccessView
 
 +(instancetype)successView
 {
-    return [[Xliuxue__SuccessView alloc] init];
+    return [[XliuxueSuccessView alloc] init];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -55,10 +56,10 @@
         self.gouView.image =[UIImage imageNamed:@"gou_white"];
         [self.bgView addSubview:self.gouView];
         
-         self.succeseLab =[UILabel labelWithFontsize:20.0f  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
-         self.succeseLab.text = GDLocalizedString(@"WoYaoLiuXue_submit");
-         [self.bgView addSubview:self.succeseLab];
- 
+        self.succeseLab =[UILabel labelWithFontsize:20.0f  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+        self.succeseLab.text = GDLocalizedString(@"WoYaoLiuXue_submit");
+        [self.bgView addSubview:self.succeseLab];
+        
         self.alerLab =[UILabel labelWithFontsize:16.0f  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         self.alerLab.numberOfLines = 0;
         self.alerLab.text =  GDLocalizedString(@"WoYaoLiuXue_aler");
@@ -72,16 +73,17 @@
         self.OKButton.layer.borderWidth = 1;
         self.OKButton.layer.borderColor = XCOLOR_WHITE.CGColor;
         [self addSubview:self.OKButton];
-        [self.OKButton  addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
+        [self.OKButton  addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         
         
     }
     return self;
 }
 
--(void)tap
+-(void)back
 {
     if (self.actionBlock) {
+        
         self.actionBlock();
     }
 }
@@ -93,7 +95,7 @@
     
     
     self.gradientLayer.frame = self.frame;
-
+    
     
     CGFloat bgX = 0;
     CGFloat bgY = XScreenHeight * 0.2 ;
@@ -127,11 +129,11 @@
                                                          context:NULL].size;
         alerH = LabSize.height;
     }
-
-    self.alerLab.frame =CGRectMake(alerX, alerY, alerW, alerH);
-
     
-
+    self.alerLab.frame =CGRectMake(alerX, alerY, alerW, alerH);
+    
+    
+    
     CGFloat okH = 40;
     CGFloat okX = 20;
     CGFloat okW = XScreenWidth - 2 * okX;

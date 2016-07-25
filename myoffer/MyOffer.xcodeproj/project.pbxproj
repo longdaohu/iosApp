@@ -174,7 +174,6 @@
 		AE1BD0701D2296940083D351 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1BD06F1D2296940083D351 /* MenuCell.m */; };
 		AE1D00A81D2FC9D7005E2DEF /* AdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D009A1D2FC9D7005E2DEF /* AdvertiseViewController.m */; };
 		AE1D00A91D2FC9D7005E2DEF /* XliusectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D009D1D2FC9D7005E2DEF /* XliusectionView.m */; };
-		AE1D00AA1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D009F1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.m */; };
 		AE1D00AB1D2FC9D7005E2DEF /* XliuxueFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D00A11D2FC9D7005E2DEF /* XliuxueFooterView.m */; };
 		AE1D00AC1D2FC9D7005E2DEF /* XliuxueHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D00A31D2FC9D7005E2DEF /* XliuxueHeaderView.m */; };
 		AE1D00AD1D2FC9D7005E2DEF /* XliuxueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D00A51D2FC9D7005E2DEF /* XliuxueTableViewCell.m */; };
@@ -225,6 +224,7 @@
 		AE29BD8C1CC5DE5E008B37C5 /* XGongLueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE29BD881CC5DE5E008B37C5 /* XGongLueTableViewCell.m */; };
 		AE29BD8D1CC5DE5E008B37C5 /* XTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE29BD8A1CC5DE5E008B37C5 /* XTopToolView.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
+		AE49EF331D45FA2B005A590C /* XliuxueSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE49EF321D45FA2B005A590C /* XliuxueSuccessView.m */; };
 		AE567B011C903C9300552E7A /* UK.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE567AFD1C903C9300552E7A /* UK.jpg */; };
 		AE567B021C903C9300552E7A /* AU_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE567AFE1C903C9300552E7A /* AU_en.jpg */; };
 		AE567B031C903C9300552E7A /* UK_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE567AFF1C903C9300552E7A /* UK_en.jpg */; };
@@ -706,8 +706,6 @@
 		AE1D009A1D2FC9D7005E2DEF /* AdvertiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiseViewController.m; sourceTree = "<group>"; };
 		AE1D009C1D2FC9D7005E2DEF /* XliusectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliusectionView.h; sourceTree = "<group>"; };
 		AE1D009D1D2FC9D7005E2DEF /* XliusectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliusectionView.m; sourceTree = "<group>"; };
-		AE1D009E1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Xliuxue_ SuccessView.h"; sourceTree = "<group>"; };
-		AE1D009F1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Xliuxue_ SuccessView.m"; sourceTree = "<group>"; };
 		AE1D00A01D2FC9D7005E2DEF /* XliuxueFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueFooterView.h; sourceTree = "<group>"; };
 		AE1D00A11D2FC9D7005E2DEF /* XliuxueFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueFooterView.m; sourceTree = "<group>"; };
 		AE1D00A21D2FC9D7005E2DEF /* XliuxueHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueHeaderView.h; sourceTree = "<group>"; };
@@ -803,6 +801,8 @@
 		AE29BD8A1CC5DE5E008B37C5 /* XTopToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTopToolView.m; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		AE49EF311D45FA2A005A590C /* XliuxueSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueSuccessView.h; sourceTree = "<group>"; };
+		AE49EF321D45FA2B005A590C /* XliuxueSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueSuccessView.m; sourceTree = "<group>"; };
 		AE567AFD1C903C9300552E7A /* UK.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK.jpg; sourceTree = "<group>"; };
 		AE567AFE1C903C9300552E7A /* AU_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AU_en.jpg; sourceTree = "<group>"; };
 		AE567AFF1C903C9300552E7A /* UK_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK_en.jpg; sourceTree = "<group>"; };
@@ -2233,8 +2233,8 @@
 			children = (
 				AE1D009C1D2FC9D7005E2DEF /* XliusectionView.h */,
 				AE1D009D1D2FC9D7005E2DEF /* XliusectionView.m */,
-				AE1D009E1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.h */,
-				AE1D009F1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.m */,
+				AE49EF311D45FA2A005A590C /* XliuxueSuccessView.h */,
+				AE49EF321D45FA2B005A590C /* XliuxueSuccessView.m */,
 				AE1D00A01D2FC9D7005E2DEF /* XliuxueFooterView.h */,
 				AE1D00A11D2FC9D7005E2DEF /* XliuxueFooterView.m */,
 				AE1D00A21D2FC9D7005E2DEF /* XliuxueHeaderView.h */,
@@ -3122,6 +3122,7 @@
 				567145CD1CBA914C002A02BF /* BindEmailViewController.m in Sources */,
 				567145591CBA8D28002A02BF /* XWGJCatigoryViewController.m in Sources */,
 				567146251CBA9395002A02BF /* LoginSelectViewController.m in Sources */,
+				AE49EF331D45FA2B005A590C /* XliuxueSuccessView.m in Sources */,
 				567146051CBA9340002A02BF /* CountryItem.m in Sources */,
 				46F659C81B23FC2000D50E1B /* DiscoverViewController.m in Sources */,
 				AE772C141D18DCD400C86314 /* PaySectionHeaderView.m in Sources */,
@@ -3318,7 +3319,6 @@
 				AE1D00F81D2FCBF6005E2DEF /* searchToolView.m in Sources */,
 				AE1D00E61D2FCBF6005E2DEF /* XNewSearchViewController.m in Sources */,
 				AE6CC1BB1D1BB75E00BC8807 /* HMTitleButton.m in Sources */,
-				AE1D00AA1D2FC9D7005E2DEF /* Xliuxue_ SuccessView.m in Sources */,
 				567144D41CBA88CD002A02BF /* UniversityFrameApplyObj.m in Sources */,
 				AE1BD0701D2296940083D351 /* MenuCell.m in Sources */,
 				464ED9C21B4135590063C1CA /* DoneButton.m in Sources */,
