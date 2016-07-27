@@ -36,9 +36,8 @@
 @property(nonatomic,strong)NSArray *helpItems;
 //申请攻略 数组
 @property(nonatomic,strong)NSArray *gonglueItems;
-
+//无数据提示
 @property(nonatomic,strong)XWGJNODATASHOWView *noDataView;
-
 
 @end
 

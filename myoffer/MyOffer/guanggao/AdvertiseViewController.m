@@ -73,8 +73,8 @@
     
     self.title = self.path ? @"" :self.advertise_title;
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
-//    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
-    self.URLpath = @"http://www.myofferdemo.com/demo/appJump";
+    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
+//    self.URLpath = @"http://www.myofferdemo.com/demo/appJump";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.URLpath]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     [self.web_wk loadRequest:request];
@@ -127,7 +127,7 @@
             
         }else if([absoluteString hasSuffix:@"/rank"]){
             
-            NSString *country = [self.URLpath hasSuffix:@"au"] ? @"澳大利亚排名":@"英国排名";
+            NSString *country = [self.URLpath hasSuffix:@"au"] ? @"澳大利亚":@"英国";
             
             if([self.URLpath hasSuffix:@"au"])
             {
@@ -155,7 +155,6 @@
 
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
 
-//    KDClassLog(@"---- %@----------",responseJSON);
     
     switch ([responseJSON[@"page"] integerValue]) {
         case 0:
@@ -203,11 +202,11 @@
     
     if([dict[@"state"] containsString:@"au"])
     {
-        [self AUWithCountryType:@"澳大利亚大学排名"];
+        [self AUWithCountryType:@"澳大利亚"];
         
     }else if([dict[@"state"] containsString:@"uk"]){
         
-        [self UKWithCountryType:@"英国大学排名" orderBy:RANKTI];
+        [self UKWithCountryType:@"英国" orderBy:RANKTI];
     
     }else{
         
@@ -216,17 +215,21 @@
 }
 -(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:rankType];
-    vc.title  = country;
+    vc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 -(void)AUWithCountryType:(NSString *)country{
+    
     NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
-    newVc.title  = country;
+     newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:newVc animated:YES];
 }
 
 //客服
 -(void)caseQQserver{
+    
+    
 }
 //我要留学
 -(void)caseWoyaoluxue{

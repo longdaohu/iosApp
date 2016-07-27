@@ -137,6 +137,7 @@ typedef enum {
     }
     return _countryPicker;
 }
+
 -(UIPickerView *)countryCodePicker
 {
     if (!_countryCodePicker) {
@@ -192,7 +193,7 @@ typedef enum {
     if (!_sucessView) {
         
         XJHUtilDefineWeakSelfRef
-        _sucessView = [[XliuxueSuccessView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
+        _sucessView = [XliuxueSuccessView successView];
         _sucessView.actionBlock = ^{
             
               [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -344,8 +345,6 @@ typedef enum {
 {
     XliusectionView *sectionView =[XliusectionView sectionView];
    
-    sectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0);
- 
     sectionView.titleLab.text = self.sectionTitles[section];
     
     return sectionView;
@@ -427,9 +426,9 @@ typedef enum {
 -(void)sucessViewUp
 {
     [UIView animateWithDuration:0.25 animations:^{
-        CGRect newRect = self.sucessView.frame;
-        newRect.origin.y = 0;
-        self.sucessView.frame = newRect;
+        
+        self.sucessView.top = 0;
+
     }];
     
 }

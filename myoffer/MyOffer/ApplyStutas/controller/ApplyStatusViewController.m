@@ -171,7 +171,6 @@
 }
 
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  
     return self.ApplyRecordGroups.count;

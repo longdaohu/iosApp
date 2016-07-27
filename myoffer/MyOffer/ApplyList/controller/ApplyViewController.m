@@ -53,7 +53,15 @@
     [MobClick beginLogPageView:@"page申请意向"];
 
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+ 
     
+    [self presentViewWillAppear];
+
+    
+}
+
+-(void)presentViewWillAppear{
+
     if (![self checkNetworkState]) {
         
         self.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
@@ -62,7 +70,7 @@
         return;
     }
     
-    if ([[AppDelegate sharedDelegate] isLogin]) {
+    if (LOGIN) {
         
         [self RequestDataSourse];
         
@@ -76,8 +84,6 @@
     [self checkApplyStatus];
     
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -161,7 +167,6 @@
 
 -(void)makeUI
 {
-    
     
     self.NDataView =[XWGJnodataView noDataView];
     self.NDataView.hidden = YES;

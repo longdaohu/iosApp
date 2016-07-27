@@ -29,7 +29,7 @@
 
 +(instancetype)successView
 {
-    return [[XliuxueSuccessView alloc] init];
+    return [[XliuxueSuccessView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

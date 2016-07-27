@@ -62,7 +62,7 @@ static NSString *cellIdentifier = @"menu";
         
         
         
-        self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(XScreenWidth*0.8 - 70, 0.5*(self.bounds.size.height - 18), 18, 18)];
+        self.countLab =[[UILabel alloc] init];
         self.countLab.layer.cornerRadius = 9;
         self.countLab.layer.masksToBounds = YES;
         self.countLab.backgroundColor =[UIColor redColor];
@@ -88,15 +88,18 @@ static NSString *cellIdentifier = @"menu";
     self.countLab.hidden = item.messageCount.integerValue == 0;
     
     self.countLab.text = item.messageCount.integerValue  >= 100 ? @"99+": item.messageCount;
-
+    
+    CGFloat countw  = 18;
     if (self.countLab.text.length > 1) {
         
         CGSize countSize = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
-        CGRect newRect = self.countLab.frame;
-        newRect.size.width = countSize.width + 8;
-        self.countLab.frame = newRect;
-        
-    }
+        countw = countSize.width  + 8;
+     }
+    
+    CGFloat countx  = XScreenWidth * 0.8 - 70;
+    CGFloat county  = 0.5 * (self.bounds.size.height - 18);
+    CGFloat counth  = 18;
+    self.countLab.frame =  CGRectMake(countx,county,countw,counth);
 }
 
 

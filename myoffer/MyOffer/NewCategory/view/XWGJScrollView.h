@@ -10,4 +10,5 @@
 
 @interface XWGJScrollView : UIScrollView
 
++(instancetype)view;
 @end

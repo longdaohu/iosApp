@@ -12,7 +12,7 @@
 
 +(instancetype)sectionView
 {
-    return [[XliusectionView alloc] init];
+    return [[XliusectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 0)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

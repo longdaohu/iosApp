@@ -11,6 +11,30 @@
 @implementation XWGJScrollView
 
 
++(instancetype)view{
+
+    XWGJScrollView *scrollView = [[self alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64)];
+    
+    scrollView.contentSize = CGSizeMake(3*XScreenWidth, XScreenHeight);
+    scrollView.pagingEnabled = YES;
+    scrollView.alwaysBounceHorizontal = YES;
+    scrollView.directionalLockEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    
+    return scrollView;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        
+    }
+    return self;
+}
+
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     CGPoint velocity = [(UIPanGestureRecognizer *)gestureRecognizer velocityInView:self];

@@ -58,7 +58,6 @@
     [self makeUI];
     
     [self getHotCitySource];
-    
 
     
 }
@@ -149,13 +148,8 @@
 
 -(void)makeBaseScorller
 {
-    self.baseScroller = [[XWGJScrollView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64)];
-    self.baseScroller.contentSize = CGSizeMake(3*XScreenWidth, XScreenHeight);
-    self.baseScroller.pagingEnabled = YES;
+    self.baseScroller = [XWGJScrollView view];
     self.baseScroller.delegate = self;
-    self.baseScroller.alwaysBounceHorizontal = YES;
-    self.baseScroller.directionalLockEnabled = YES;
-    self.baseScroller.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:self.baseScroller];
 }
 
@@ -191,10 +185,10 @@
     XJHUtilDefineWeakSelfRef
     
     self.cityHeaderView.actionBlock = ^(UIButton *sender){
-         XWGJStateViewController *STATE = [[XWGJStateViewController alloc] init];
-        STATE.countryName = sender.tag == 0 ? GDLocalizedString(@"CategoryVC-UK"):GDLocalizedString(@"CategoryVC-AU");
-        [weakSelf.navigationController pushViewController:STATE animated:YES];
+        
+        [weakSelf CaseStateWithSender:sender];
     };
+    
     
     [self.City_CollectView addSubview:self.cityHeaderView];
   
@@ -272,7 +266,6 @@
     
     [self makeBanView];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftViewMessage:) name:@"newMessage" object:nil];
 
 }
 
@@ -324,7 +317,6 @@
 
 
 #pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
     NSInteger setionNumber = collectionView == self.Sub_CollectView ? 1 : self.countryes.count;
@@ -394,51 +386,11 @@ static NSString *cityIdentify = @"cityCell";
     
     if (collectionView == self.Sub_CollectView) {
         
-         XWGJCatigorySubject *subject = self.SubjectList[indexPath.row];
-        
-         XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANKQS];
-        
-         vc.CoreArea = subject.TitleName;
-        
-         [self.navigationController pushViewController:vc animated:YES];
-        
-        NSString *item;
-        if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-art")]) {
-            item = @"catigory_subjectArt";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-finance")]) {
-            item = @"catigory_subjectFinance";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-social")]) {
-            item = @"catigory_subjectSocial";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-humanity")]) {
-            item = @"catigory_subjectHumanity";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-engineer")]) {
-            item = @"catigory_subjectEngineer";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-education")]) {
-            item = @"catigory_subjectEducation";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-medicine")]) {
-            item = @"catigory_subjectMedicine";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-business")]) {
-            item = @"catigory_subjectBusiness";
-        }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-farm")]) {
-            item = @"catigory_subjectFarm";
-        }else{
-            item = @"catigory_subjectScience";
-        }
-        [MobClick event:item];
+        [self CaseSubjectWithIndexPath:indexPath];
         
     }else {
         
-        
-        [MobClick event:indexPath.section == 0 ? @"catigory_hotUK":@"catigory_hotAU"];
-        
-        XWGJLXCountry *country = self.countryes[indexPath.section];
-        XWGJHotCity *city = country.HotCities[indexPath.row];
-        XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
-                                                                                  value:city.cityName
-                                                                                orderBy:RANKTI];
-        vc.Corecity = city.cityName;
-        [self.navigationController pushViewController:vc animated:YES];
-  
+        [self CaseHotCityWithIndexPath:indexPath];
     }
     
 }
@@ -467,24 +419,12 @@ static NSString *cityIdentify = @"cityCell";
     
     if (1 == indexPath.row) {
         
-       [MobClick event:@"catigory_rankAU"];
-        
-        NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
-     
-        newVc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
-        
-        [self.navigationController pushViewController:newVc animated:YES];
+        [self CaseAUwith:rank];
         
     }else{
-    
+        
         [MobClick event:indexPath.row ? @"catigory_rankUK" : @"catigory_rankWorld"];
-
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
-        
-        vc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
-        
-        [self.navigationController pushViewController:vc animated:YES];
-    
+        [self CaseUK:rank];
     }
     
 }
@@ -540,6 +480,41 @@ static NSString *cityIdentify = @"cityCell";
     }
 }
 
+-(void)leftViewMessage:(NSNotification *)noti{
+    
+    NSString *object = (NSString *)noti.object;
+    if (1 == object.integerValue) {
+        [self leftViewMessage];
+    }
+}
+
+//导航栏 leftBarButtonItem
+-(void)leftViewMessage{
+    
+   if (LOGIN && [self checkNetWorkReaching]) {
+    
+        XJHUtilDefineWeakSelfRef
+       
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count  = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud synchronize];
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+        }];
+       
+       
+    }else{
+        
+        self.leftView.countStr = @"0";
+    }
+    
+}
+
 //打开左侧菜单
 -(void)showLeftMenu
 {
@@ -555,41 +530,88 @@ static NSString *cityIdentify = @"cityCell";
 }
 
 
-
--(void)leftViewMessage:(NSNotification *)noti{
+//英国、世界排名
+-(void)CaseUK:(XWGJRank *)rank
+{
+     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
     
-    NSString *object = (NSString *)noti.object;
-    if (1 == object.integerValue) {
-        [self leftViewMessage];
-    }
+    vc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
--(void)leftViewMessage{
+//澳大利亚排名
+-(void)CaseAUwith:(XWGJRank *)rank
+{
+    [MobClick event:@"catigory_rankAU"];
     
-   if (LOGIN && [self checkNetWorkReaching]) {
+    NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
     
-        XJHUtilDefineWeakSelfRef
-       
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            
-            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
-            NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count  = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
-            [ud synchronize];
+    newVc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
+    
+    [self.navigationController pushViewController:newVc animated:YES];
+    
+}
 
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-        }];
-       
-       
+//英国、澳大利亚地区列表
+-(void)CaseStateWithSender:(UIButton *)sender
+{
+    XWGJStateViewController *STATE = [[XWGJStateViewController alloc] init];
+    STATE.countryName = sender.tag == 0 ? GDLocalizedString(@"CategoryVC-UK"):GDLocalizedString(@"CategoryVC-AU");
+    [self.navigationController pushViewController:STATE animated:YES];
+}
+
+//热门留学城市
+-(void)CaseHotCityWithIndexPath:(NSIndexPath *)indexPath
+{
+    [MobClick event:indexPath.section == 0 ? @"catigory_hotUK":@"catigory_hotAU"];
+    
+    XWGJLXCountry *country = self.countryes[indexPath.section];
+    XWGJHotCity *city = country.HotCities[indexPath.row];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
+                                                                              value:city.cityName
+                                                                            orderBy:RANKTI];
+    vc.Corecity = city.cityName;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//留学专业
+-(void)CaseSubjectWithIndexPath:(NSIndexPath *)indexPath{
+
+    XWGJCatigorySubject *subject = self.SubjectList[indexPath.row];
+    
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANKQS];
+    
+    vc.CoreArea = subject.TitleName;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSString *item;
+    if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-art")]) {
+        item = @"catigory_subjectArt";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-finance")]) {
+        item = @"catigory_subjectFinance";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-social")]) {
+        item = @"catigory_subjectSocial";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-humanity")]) {
+        item = @"catigory_subjectHumanity";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-engineer")]) {
+        item = @"catigory_subjectEngineer";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-education")]) {
+        item = @"catigory_subjectEducation";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-medicine")]) {
+        item = @"catigory_subjectMedicine";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-business")]) {
+        item = @"catigory_subjectBusiness";
+    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-farm")]) {
+        item = @"catigory_subjectFarm";
     }else{
-        
-        self.leftView.countStr = @"0";
+        item = @"catigory_subjectScience";
     }
-    
+    [MobClick event:item];
 }
+
 
 
 - (void)didReceiveMemoryWarning {
