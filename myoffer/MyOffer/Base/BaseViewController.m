@@ -90,11 +90,15 @@
 - (void)startAPIRequestUsingCacheWithSelector:(NSString *)selector
                                    parameters:(NSDictionary *)parameters
                                       success:(APIClientSuccessBlock)success{
+    
     NSString *key = [NSString stringWithFormat:@"%@\n%@", selector, parameters.KD_JSONString];
+    
     key = [key KD_MD5];
     
     id cachedResult = [KDStroageHelper dataFromLibraryWithIdentifier:key].KD_JSONObject;
+    
     if (cachedResult) {
+    
         success(-1, cachedResult);
     }
     

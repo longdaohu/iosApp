@@ -419,10 +419,16 @@ typedef enum {
          weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
        }];
       
-    }else{
-     
-          self.leftView.countStr = @"0";
     }
+    
+    if (!LOGIN) {
+        
+        self.leftView.countStr = @"0";
+        [self matchImageName:GDLocalizedString(@"center-matchImage")  withOptionButtonTag:OptionButtonTypeZineng];
+        self.myCountResponse = nil;
+        [self.tableView reloadData];
+    }
+    
 }
 
 
@@ -431,7 +437,7 @@ typedef enum {
 {
     [MobClick event:@"apply_pipei"];
     
-    if ((NSInteger)self.myCountResponse[@"recommendationsCount"] > 0 ) {
+    if ([self.myCountResponse[@"recommendationsCount"] integerValue] > 0 ) {
         
         IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];

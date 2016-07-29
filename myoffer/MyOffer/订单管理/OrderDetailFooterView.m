@@ -89,16 +89,16 @@
     return self;
 }
 
- 
+
 -(void)setOrderDict:(NSDictionary *)orderDict{
 
     _orderDict = orderDict;
     
-//    NSLog(@" ---xxxxx--- %@",orderDict);
     NSString *payStr = [NSString stringWithFormat:@"￥%@元",orderDict[@"total_fee"]];
     NSMutableAttributedString *attribStr = [[NSMutableAttributedString alloc] initWithString:payStr];
     [attribStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_BLACK range:NSMakeRange(1, payStr.length - 1)];
     [attribStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:KDUtilSize(13)] range:NSMakeRange(payStr.length - 1, 1)];
+    [attribStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica-Bold" size:KDUtilSize(16)] range:NSMakeRange(0, 1)];
     self.orderPriceLab.attributedText = attribStr;
     [self statusWithTag:orderDict[@"status"]];
     

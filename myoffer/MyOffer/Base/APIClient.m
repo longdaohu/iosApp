@@ -73,7 +73,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                                       };
 //         }
     
- 
+
         _URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }
     
@@ -95,6 +95,8 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     
     NSURLSessionDataTask * task = [_URLSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *_response, NSError *error) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)_response;
+        
+
         if (error) {
             KDClassLog(@"Request failed: %@", error);
             dispatch_async( dispatch_get_main_queue(),^{
@@ -135,8 +137,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         dispatch_async( dispatch_get_main_queue(),^{
             
             success(response.statusCode, result);
-            
- 
+  
             
         });
     }];
@@ -147,6 +148,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     if (request.HTTPBody) {
         KDClassLog(@"Request body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     }
+    
     
     return task;
 }
@@ -159,12 +161,23 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                       failure:(APIClientFailureBlock)failure {
     
     __block NSString *newPath = path;
+
+
     if ([parameters isKindOfClass:[NSDictionary class]]) {
+        
         NSMutableDictionary *newParameters = [NSMutableDictionary dictionary];
+    
+
         [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
-            if ([key hasPrefix:@":"]) {
+            
+             if ([key hasPrefix:@":"]) {
+                 
+ 
                 newPath = [path stringByReplacingOccurrencesOfString:key withString:[self encodedString:obj]];
+
+
             } else {
+                
                 newParameters[key] = obj;
             }
         }];
@@ -172,6 +185,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         parameters = newParameters;
     }
     
+
     
     NSURL *url =[newPath containsString:@"tips.json"]?[NSURL URLWithString:newPath]:[NSURL URLWithString:newPath relativeToURL:_endPoint];
     
@@ -217,7 +231,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
      }
  
-    
+ 
     return [self startTaskWithRequest:request expectedStatusCodes:expectedStatusCode success:success failure:failure];
     
 }
@@ -230,12 +244,14 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                                                                      NULL,
                                                                                      (CFStringRef)obj,
                                                                                      NULL,
-                                                                                     (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                      (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                      kCFStringEncodingUTF8 ));
     } else {
         [NSException raise:NSInternalInconsistencyException format:@"Unknown value type"];
         return nil;
     }
 }
+
+
 
 @end

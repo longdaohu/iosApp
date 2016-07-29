@@ -867,9 +867,12 @@ typedef enum {
             weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
         }];
         
-    }else{
-        
+    }
+    
+    if(!LOGIN){
+    
         self.leftView.countStr = @"0";
+
     }
     
 }

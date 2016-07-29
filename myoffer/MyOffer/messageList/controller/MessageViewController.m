@@ -648,9 +648,12 @@
 
         }];
         
-    }else{
+    }
+    
+    if(!LOGIN){
         
         self.leftView.countStr = @"0";
+        
     }
     
 }

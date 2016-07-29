@@ -8,7 +8,7 @@
 
 #import "FeedbackViewController.h"
 
-@interface FeedbackViewController ()
+@interface FeedbackViewController ()<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *sendButton;
 
 @end
@@ -76,10 +76,12 @@
     self.textView.layer.masksToBounds = YES;
     self.textView.font =[UIFont systemFontOfSize:15];
     [self.view addSubview:self.textView];
+    self.textView.delegate = self;
 }
 
 
 - (IBAction)send {
+    
     [self startAPIRequestWithSelector:@"POST api/app/feedback" parameters:@{@"content": _textView.text} success:^(NSInteger statusCode, id response) {
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
         [hud applySuccessStyle];
@@ -129,4 +131,15 @@
 
 KDUtilRemoveNotificationCenterObserverDealloc
 
+
+- (void)textViewDidChange:(UITextView *)textView{
+
+    if (textView.text.length > 300) {
+        
+        textView.text = [textView.text substringWithRange:NSMakeRange(0, 300)];
+        
+        AlerMessage(@"反馈意见长度不超过300个字！");
+    }
+ 
+}
 @end

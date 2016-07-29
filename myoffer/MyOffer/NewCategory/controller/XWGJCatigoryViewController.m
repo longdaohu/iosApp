@@ -508,9 +508,12 @@ static NSString *cityIdentify = @"cityCell";
         }];
        
        
-    }else{
+    }
+    
+    if(!LOGIN){
         
         self.leftView.countStr = @"0";
+        
     }
     
 }

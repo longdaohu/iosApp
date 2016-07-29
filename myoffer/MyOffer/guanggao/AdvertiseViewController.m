@@ -215,7 +215,7 @@
 }
 -(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:rankType];
-    vc.title  = [NSString stringWithFormat:@"%@大学排名",country];
+    vc.title  = [country isEqualToString:@"英国"]?[NSString stringWithFormat:@"%@大学排名",country] : country;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -224,6 +224,7 @@
     NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
      newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:newVc animated:YES];
+    
 }
 
 //客服
@@ -231,6 +232,7 @@
     
     
 }
+
 //我要留学
 -(void)caseWoyaoluxue{
     [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
