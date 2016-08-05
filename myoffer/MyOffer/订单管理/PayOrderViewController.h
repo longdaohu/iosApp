@@ -10,9 +10,9 @@
 typedef void(^PayOrderViewControllerBlock)(BOOL);
 @class OrderItem;
 @interface PayOrderViewController : BaseViewController
-//@property(nonatomic,copy)NSDictionary *orderDict;
 @property(nonatomic,strong)OrderItem *order;
 @property(nonatomic,copy)PayOrderViewControllerBlock actionBlock;
 @property(nonatomic,strong)NSDictionary *orderDict;
+
 
 @end

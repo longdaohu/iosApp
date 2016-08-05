@@ -18,6 +18,7 @@
 #import "XWGJSummaryView.h"
 #import "TiJiaoFooterView.h"
 #import "AdvertiseViewController.h"
+#import "UpgradeViewController.h"
 
 typedef enum {
     PickerViewTypeCountry = 109,
@@ -52,18 +53,32 @@ typedef enum {
 @property(nonatomic,strong)NSArray *countryItems;
 @property(nonatomic,strong)NSArray *ApplyItems;
 @property(nonatomic,strong)NSArray *IELSTScores;
-//提交申请按钮
-@property(nonatomic,strong)KDEasyTouchButton *commitBtn;
+@property(nonatomic,strong)KDEasyTouchButton *commitBtn;    //提交申请按钮
+@property(nonatomic,strong)UpgradeViewController *upgateVC; //升级VC
+
 @end
 
 @implementation XWGJTiJiaoViewController
 
+
+-(UpgradeViewController *)upgateVC{
+
+    if (!_upgateVC) {
+        
+        _upgateVC            =[[UpgradeViewController alloc] init];
+        _upgateVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
+        [self.view addSubview:_upgateVC.view];
+        
+    }
+    return _upgateVC;
+}
+
 -(UIPickerView *)PickerViewWithTag:(PickerViewType)type
 {
     UIPickerView *picker = [[UIPickerView alloc] init];
-    picker.dataSource = self;
-    picker.delegate = self;
-    picker.tag = type;
+    picker.dataSource    = self;
+    picker.delegate      = self;
+    picker.tag           = type;
     return picker;
 }
 
@@ -212,13 +227,23 @@ typedef enum {
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [self addChildViewController:self.upgateVC];
+    
+    //加载用户已购买套餐数据
+    [self startAPIRequestWithSelector:@"GET /api/account/sp" parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        self.upgateVC.serviceResponse = response;
+        
+    }];
+
 }
 -(void)makeComitButton
 {
     KDEasyTouchButton *commit = [[KDEasyTouchButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TableView.frame), XScreenWidth, 50)];
-    self.commitBtn = commit;
-    commit.backgroundColor = XCOLOR_LIGHTGRAY;
-    commit.enabled = NO;
+    self.commitBtn            = commit;
+    commit.backgroundColor    = XCOLOR_LIGHTGRAY;
+    commit.enabled            = NO;
     [commit setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
     [commit setTitle:GDLocalizedString(@"TiJiao-Commit") forState:UIControlStateNormal];
     [commit addTarget:self action:@selector(commitUserInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -228,12 +253,12 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 114) style:UITableViewStyleGrouped];
-    self.TableView.dataSource =self;
-    self.TableView.delegate =self;
+    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 114) style:UITableViewStyleGrouped];
+    self.TableView.dataSource  = self;
+    self.TableView.delegate    = self;
     [self.view addSubview:self.TableView];
     self.TableView.backgroundColor =[UIColor clearColor];
-    self.TableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.TableView.allowsSelection = NO;
     
 }
@@ -241,19 +266,19 @@ typedef enum {
 //添加表头
 -(void)makeHeaderView
 {
-    XWGJSummaryView *headerView=[[XWGJSummaryView alloc] init];
-    headerView.summary = GDLocalizedString(@"ApplicationProfile-0016");
-    headerView.frame = CGRectMake(0, 0, 0, CGRectGetMaxY(headerView.summaryLab.frame));
+    XWGJSummaryView *headerView    = [[XWGJSummaryView alloc] init];
+    headerView.summary             = GDLocalizedString(@"ApplicationProfile-0016");
+    headerView.frame               = CGRectMake(0, 0, 0, CGRectGetMaxY(headerView.summaryLab.frame));
     self.TableView.tableHeaderView = headerView;
 }
 
 -(void)makeFooterView
 {
     
-    TiJiaoFooterView *footerView =[[TiJiaoFooterView alloc] init];
-    footerView.title = GDLocalizedString(@"ApplicationProfile-footer");
-    footerView.frame = CGRectMake(0, 0, XScreenWidth, CGRectGetMaxY(footerView.descriptionBtn.frame) + 50);
-    footerView.delegate = self;
+    TiJiaoFooterView *footerView   = [[TiJiaoFooterView alloc] init];
+    footerView.title               = GDLocalizedString(@"ApplicationProfile-footer");
+    footerView.frame               = CGRectMake(0, 0, XScreenWidth, CGRectGetMaxY(footerView.descriptionBtn.frame) + 50);
+    footerView.delegate            = self;
     self.TableView.tableFooterView = footerView;
     
 }
@@ -267,77 +292,69 @@ typedef enum {
         __block XWGJPeronInfoItem *phoneItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Phone")  andAccessroy:NO];
 
         __block XWGJPeronInfoItem *countryItem = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Country") andAccessroy:YES];
-        __block XWGJPeronInfoItem *timeItem = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Time")  andAccessroy:YES];
-        __block  XWGJPeronInfoItem *applyItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-ApplySubject")  andAccessroy:YES];
+        __block XWGJPeronInfoItem *timeItem    = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Time")  andAccessroy:YES];
+        __block  XWGJPeronInfoItem *applyItem  = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-ApplySubject")  andAccessroy:YES];
        
         __block XWGJPeronInfoItem *universityItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-University")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *subjectItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Subjecting")  andAccessroy:YES];
-        __block  XWGJPeronInfoItem *GPAItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-GPA")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *gradeItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Grade")  andAccessroy:YES];
-        __block   XWGJPeronInfoItem *avgItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Average")  andAccessroy:YES];
-        __block XWGJPeronInfoItem *lowItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Low")  andAccessroy:YES];
+        __block XWGJPeronInfoItem *subjectItem    = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Subjecting")  andAccessroy:YES];
+        __block  XWGJPeronInfoItem *GPAItem       = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-GPA")  andAccessroy:NO];
+        __block XWGJPeronInfoItem *gradeItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Grade")  andAccessroy:YES];
+        __block   XWGJPeronInfoItem *avgItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Average")  andAccessroy:YES];
+        __block XWGJPeronInfoItem *lowItem        = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Low")  andAccessroy:YES];
        
-        NSArray *FirstSections = @[LastItem,FirstItem,phoneItem];
-        XWGJTJSectionGroup *JBgroup =[XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-JiBen") andSecitonIcon:@"TJ_JiBeng" andContensArray:FirstSections];
+        NSArray *FirstSections      =  @[LastItem,FirstItem,phoneItem];
+        XWGJTJSectionGroup *JBgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-JiBen") andSecitonIcon:@"TJ_JiBeng" andContensArray:FirstSections];
         
         
-        NSArray *SecondSetions = @[countryItem,timeItem,applyItem];
-        XWGJTJSectionGroup *YXgroup =[XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-YiXiang") andSecitonIcon:@"TJ_YiXiang" andContensArray:SecondSetions];
+        NSArray *SecondSetions      = @[countryItem,timeItem,applyItem];
+        XWGJTJSectionGroup *YXgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-YiXiang") andSecitonIcon:@"TJ_YiXiang" andContensArray:SecondSetions];
 
         
-        NSArray *ThirdSetions = @[universityItem,subjectItem,GPAItem,gradeItem,avgItem,lowItem];
-        XWGJTJSectionGroup *BJgroup =[XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-Beijing") andSecitonIcon:@"TJ_BeiJin" andContensArray:ThirdSetions];
+        NSArray *ThirdSetions       =  @[universityItem,subjectItem,GPAItem,gradeItem,avgItem,lowItem];
+        XWGJTJSectionGroup *BJgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-Beijing") andSecitonIcon:@"TJ_BeiJin" andContensArray:ThirdSetions];
 
-        _Groups = @[JBgroup ,YXgroup,BJgroup];
+        _Groups                     = @[JBgroup ,YXgroup,BJgroup];
         
         
         XJHUtilDefineWeakSelfRef
         [self startAPIRequestWithSelector:@"GET api/account/applicationdata" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             
             weakSelf.userInfo   = response;
+            LastItem.itemName   = response[@"last_name"];
+            FirstItem.itemName  = response[@"first_name"];
+            phoneItem.itemName  = response[@"phonenumber"];
             
-            LastItem.itemName = response[@"last_name"];
-            FirstItem.itemName = response[@"first_name"];
-            phoneItem.itemName = response[@"phonenumber"];
-            
-           
             NSString *des_country = [NSString stringWithFormat:@"%@",response[@"des_country"]];
-            NSString *country = [des_country containsString:@"null"]?@"":des_country;
-            countryItem.itemName = !country.length?@"":[self getCountryLocalString:country];
-            
+            NSString *country     = [des_country containsString:@"null"]?@"":des_country;
+            countryItem.itemName  = !country.length?@"":[self getCountryLocalString:country];
             
             
             NSString *target_time = response[@"target_date"];
-            NSInteger TimeIndex = 0;
+            NSInteger TimeIndex   = 0;
             
             if([self.ApplyTimes containsObject:target_time])
             {
-                TimeIndex = [self.ApplyTimes indexOfObject:target_time];
+                TimeIndex         = [self.ApplyTimes indexOfObject:target_time];
                 timeItem.itemName = target_time;
             }
 
             [self.TimePicker selectRow:TimeIndex inComponent:0 animated:YES];
             
             
-            applyItem.itemName = !response[@"apply"]?@"":[self getApplySubjectLocalString:response[@"apply"]];;
-            
-            
-            universityItem.itemName = response[@"university"];
-            
-            subjectItem.itemName =  !response[@"subject"]?@"":[self getInSubjectLocalString:response[@"subject"]];
+            applyItem.itemName      = !response[@"apply"]?@"":[self getApplySubjectLocalString:response[@"apply"]];;
+            universityItem.itemName =  response[@"university"];
+            subjectItem.itemName    =  !response[@"subject"]?@"":[self getInSubjectLocalString:response[@"subject"]];
  
             
             
-            NSString *GPA = [NSString stringWithFormat:@"%@",response[@"score"]];
-            GPAItem.itemName = [GPA containsString:@"null"]?@"":GPA;
-            
-            NSString *grade =[NSString stringWithFormat:@"%@",response[@"grade"]];
+            NSString *GPA      = [NSString stringWithFormat:@"%@",response[@"score"]];
+            GPAItem.itemName   = [GPA containsString:@"null"]?@"":GPA;
+            NSString *grade    = [NSString stringWithFormat:@"%@",response[@"grade"]];
             NSString *gradeStr = [grade containsString:@"null"]?@"":grade;
             gradeItem.itemName = gradeStr.length == 0 ? @"":[self getGradeLocalString:gradeStr];
-            
-            NSString *avg =[NSString stringWithFormat:@"%@",response[@"ielts_avg"]];
-            NSString *avgStr = [avg containsString:@"null"]?@"":avg;
-            avgItem.itemName = avgStr.length == 0 ? @"" : avgStr;
+            NSString *avg      = [NSString stringWithFormat:@"%@",response[@"ielts_avg"]];
+            NSString *avgStr   = [avg containsString:@"null"]?@"":avg;
+            avgItem.itemName   = avgStr.length == 0 ? @"" : avgStr;
               if (avgStr.length) {
                   
                 NSInteger avgIndex = [self.IELSTScores containsObject:avgStr]?[self.IELSTScores indexOfObject:avgStr]:0;
@@ -345,7 +362,7 @@ typedef enum {
                 [self.AVGPicker selectRow:avgIndex inComponent:0 animated:YES];
             }
             
-            NSString *Low =[NSString stringWithFormat:@"%@",response[@"ielts_low"]];
+            NSString *Low    = [NSString stringWithFormat:@"%@",response[@"ielts_low"]];
             NSString *LowStr = [Low containsString:@"null"]?@"":Low;
             lowItem.itemName =   LowStr.length == 0 ? @"" : LowStr;
             if (LowStr.length) {
@@ -367,8 +384,7 @@ typedef enum {
 -(void)getSelectionResourse
 {
     
-    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-    
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSArray *countryItems_CN = [[ud valueForKey:@"Country_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
                             {
                                 CountryItem *item = [CountryItem CountryWithDictionary:obj];
@@ -383,7 +399,6 @@ typedef enum {
                             }];
     self.countryItems_CE = @[countryItems_CN,countryItems_EN];
     
-    
  
     
     NSArray *subjectItems_CN = [[ud valueForKey:@"Subject_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
@@ -397,7 +412,7 @@ typedef enum {
                                 return item;
                             }];
     
-    self.subjectItems_CE = @[subjectItems_CN,subjectItems_EN];
+    self.subjectItems_CE     = @[subjectItems_CN,subjectItems_EN];
 
     
  
@@ -419,14 +434,14 @@ typedef enum {
     if (USER_EN) {
         
         self.countryItems = self.countryItems_CE[1];
-        self.ApplyItems = self.subjectItems_CE[1];
-        self.gradeItems = self.gradeItems_CE[1];
+        self.ApplyItems   = self.subjectItems_CE[1];
+        self.gradeItems   = self.gradeItems_CE[1];
         
     }else{
         
         self.countryItems = self.countryItems_CE[0];
-        self.ApplyItems = self.subjectItems_CE[0];
-        self.gradeItems = self.gradeItems_CE[0];
+        self.ApplyItems   = self.subjectItems_CE[0];
+        self.gradeItems   = self.gradeItems_CE[0];
     }
     
 }
@@ -480,7 +495,7 @@ typedef enum {
         
         NSArray *ItemIDs = [items valueForKeyPath:@"NOid"];
         
-        Index = [ItemIDs containsObject:ItemName]?[ItemIDs indexOfObject: ItemName]:0;
+        Index            = [ItemIDs containsObject:ItemName]?[ItemIDs indexOfObject: ItemName]:0;
         
     }else{
         
@@ -489,15 +504,15 @@ typedef enum {
         
         if ([IDs_CNs  containsObject:ItemName]) {
             
-            Index = [IDs_CNs indexOfObject:ItemName];
+            Index   = [IDs_CNs indexOfObject:ItemName];
             
         }else if([IDs_ENs containsObject:ItemName])
         {
-            Index= [IDs_ENs indexOfObject:ItemName];
+            Index   = [IDs_ENs indexOfObject:ItemName];
             
         }else
         {
-            Index = 0;
+            Index   = 0;
         }
     }
     
@@ -513,7 +528,7 @@ typedef enum {
 
     [self.GradePicker selectRow:gindex inComponent:0 animated:YES];
     
-    GradeItem *item = [self.gradeItems objectAtIndex:gindex];
+    GradeItem *item  = [self.gradeItems objectAtIndex:gindex];
     
     return item.gradeName;
 }
@@ -705,7 +720,6 @@ typedef enum {
             
             break;
         default:
-            //            return  self.gradeItems.count;
             return self.countryItems.count;
             break;
     }
@@ -727,7 +741,7 @@ typedef enum {
             break;
         case PickerViewTypeApply:case PickerViewTypeSubject:{
             
-             SubjectItem *item = self.ApplyItems[row];
+            SubjectItem *item = self.ApplyItems[row];
             return   item.subjectName;
         }
             break;
@@ -753,7 +767,7 @@ typedef enum {
           switch (pickerView.tag) {
             case PickerViewTypeCountry:{
                 
-                 CountryItem *item =  self.countryItems[row];
+                 CountryItem *item          =  self.countryItems[row];
                  Editingcell.ContentTF.text = item.CountryName;
                 
               }
@@ -765,17 +779,17 @@ typedef enum {
                   break;
               case PickerViewTypeApply:case PickerViewTypeSubject:{
                   
-                  SubjectItem *item =  self.ApplyItems[row];
+                  SubjectItem *item          =  self.ApplyItems[row];
                   Editingcell.ContentTF.text = item.subjectName;
               }
                   break;
               case PickerViewTypeGrade:{
-                  GradeItem *item =  self.gradeItems[row];
+                  GradeItem *item            =  self.gradeItems[row];
                   Editingcell.ContentTF.text =  item.gradeName;
               }
                   break;
             default:{
-                Editingcell.ContentTF.text = self.IELSTScores[row];
+                Editingcell.ContentTF.text   = self.IELSTScores[row];
             }
                 break;
         }
@@ -789,9 +803,9 @@ typedef enum {
 
     
     XWGJTJSectionGroup *group =  self.Groups[indexPath.section];
-    NSArray *cellItems = group.cellItems;
-    XWGJPeronInfoItem *item = cellItems[indexPath.row];
-    item.itemName = textField.text;
+    NSArray *cellItems        = group.cellItems;
+    XWGJPeronInfoItem *item   = cellItems[indexPath.row];
+    item.itemName             = textField.text;
     
 }
 
@@ -840,9 +854,9 @@ typedef enum {
 {
     
         XWGJTJSectionGroup *group =  self.Groups[indexPath.section];
-        NSArray *cellItems = group.cellItems;
-        XWGJPeronInfoItem *item = cellItems[indexPath.row];
-        item.itemName = textField.text;
+        NSArray *cellItems        = group.cellItems;
+        XWGJPeronInfoItem *item   = cellItems[indexPath.row];
+        item.itemName             = textField.text;
   
 }
 
@@ -853,11 +867,11 @@ typedef enum {
     
     self.editingCell = cell;
     
-    self.EditingIndexPath = indexPath;
+    self.EditingIndexPath     = indexPath;
     
     XWGJTJSectionGroup *group = self.Groups[indexPath.section];
     
-    XWGJPeronInfoItem *item = group.cellItems[indexPath.row];
+    XWGJPeronInfoItem *item   = group.cellItems[indexPath.row];
     
     if (item.itemName.length != 0) {
         
@@ -871,16 +885,16 @@ typedef enum {
             {
                     CountryItem *countryItem = self.countryItems[0];
                     
-                    textField.text = countryItem.CountryName;
+                    textField.text           = countryItem.CountryName;
                     
-                    item.itemName = textField.text;
+                    item.itemName            = textField.text;
                 
             }
                 break;
             case 1:
             {
                  textField.text = self.ApplyTimes[0];
-                 item.itemName = textField.text;
+                 item.itemName  = textField.text;
                 
             }
                 break;
@@ -888,8 +902,8 @@ typedef enum {
             default:
             {
                 SubjectItem *applyItem = self.ApplyItems[0];
-                textField.text = applyItem.subjectName;
-                item.itemName = textField.text;
+                textField.text         = applyItem.subjectName;
+                item.itemName          = textField.text;
             
             }
                 break;
@@ -902,23 +916,23 @@ typedef enum {
             case 1:
             {
                 SubjectItem *applyItem = self.ApplyItems[0];
-                textField.text = applyItem.subjectName;
-                item.itemName = textField.text;
+                textField.text         = applyItem.subjectName;
+                item.itemName          = textField.text;
                 
             }
                 break;
             case 3:
             {
                 GradeItem *gradeItem = self.gradeItems[0];
-                textField.text = gradeItem.gradeName;
-                item.itemName = textField.text;
+                textField.text       = gradeItem.gradeName;
+                item.itemName        = textField.text;
                 
             }
                 break;
                 case 4:case 5:
             {
                 textField.text = self.IELSTScores[0];
-                item.itemName = textField.text;
+                item.itemName  = textField.text;
             }
                 break;
             default:
@@ -940,14 +954,15 @@ typedef enum {
         
     }
     
-    NSInteger row = indexPath.row + 1 ;
+    
+    NSInteger row     = indexPath.row + 1 ;
     NSInteger section = indexPath.section;
     
     if (indexPath.section == 1) {
         
         if (row > 2) {
             
-            row = 0;
+            row     = 0;
             
             section = indexPath.section + 1;
         }
@@ -978,23 +993,14 @@ typedef enum {
     
     if (10 ==sender.tag) {
         
-        sender.selected = !sender.selected;
-        if (sender.selected == YES) {
-            
-            self.commitBtn.enabled = YES;
-            self.commitBtn.backgroundColor = XCOLOR_RED;
-
-        }else{
-        
-            self.commitBtn.enabled = NO;
-            self.commitBtn.backgroundColor = XCOLOR_LIGHTGRAY;
-        }
-        
+        sender.selected                = !sender.selected;
+        self.commitBtn.enabled         =  sender.selected;
+        self.commitBtn.backgroundColor = sender.selected  ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
         
     }else{
         
-        AdvertiseViewController *adver =[[AdvertiseViewController alloc] init];
-        adver.path = @"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf";
+        AdvertiseViewController *adver = [[AdvertiseViewController alloc] init];
+        adver.path                     = @"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf";
         [self.navigationController pushViewController:adver animated:YES];
     
     }
@@ -1029,9 +1035,9 @@ typedef enum {
     
     UIEdgeInsets insets = self.TableView.contentInset;
     if (up) {
-        insets.bottom = keyboardEndFrame.size.height;
+        insets.bottom   = keyboardEndFrame.size.height;
     } else {
-        insets.bottom = 50;
+        insets.bottom   = 50;
     }
     
     self.TableView.contentInset = insets;
@@ -1041,11 +1047,12 @@ typedef enum {
     [UIView commitAnimations];
 }
 
+
+//提交用户申请资料
 -(void)commitUserInfo
 {
     RequireLogin
-    
- 
+   
     for (XWGJTJSectionGroup *group in self.Groups) {
         
         for (XWGJPeronInfoItem *item  in group.cellItems) {
@@ -1058,9 +1065,9 @@ typedef enum {
         }
     }
     
-    XWGJTJSectionGroup *FirstGroup = self.Groups[0];
+    XWGJTJSectionGroup *FirstGroup  = self.Groups[0];
     XWGJTJSectionGroup *SecondGroup = self.Groups[1];
-    XWGJTJSectionGroup *ThirdGroup = self.Groups[2];
+    XWGJTJSectionGroup *ThirdGroup  = self.Groups[2];
     
     
     NSDictionary *parameters =  @{@"des_country":[SecondGroup.cellItems[0] itemName],
@@ -1079,24 +1086,50 @@ typedef enum {
                                   @"ielts_low":[ThirdGroup.cellItems[5] itemName]
                                   };
     
+    XJHUtilDefineWeakSelfRef
     
     [self startAPIRequestWithSelector: @"POST api/account/applicationdata" parameters:@{@"applicationData":parameters} success:^(NSInteger statusCode, id response) {
         
-        [self
+        [weakSelf
          startAPIRequestWithSelector:@"POST /api/account/checkin"
          parameters:@{@"courseIds": self.selectedCoursesIDs}
          success:^(NSInteger statusCode, id response) {
-             KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-             [hud applySuccessStyle];
-             [hud setLabelText: GDLocalizedString(@"WoYaoLiuXue_submit")];//@"提交成功"];
-             [hud hideAnimated:YES afterDelay:2];
-             [hud setHiddenBlock:^(KDProgressHUD *hud) {
-                 [self.navigationController popToRootViewControllerAnimated:YES];
-                 //[self dismiss];
-             }];
+//             KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+//             [hud applySuccessStyle];
+//             [hud setLabelText: GDLocalizedString(@"WoYaoLiuXue_submit")];//@"提交成功"];
+//             [hud hideAnimated:YES afterDelay:2];
+//             [hud setHiddenBlock:^(KDProgressHUD *hud) {
+//                 
+//                 [self.navigationController popToRootViewControllerAnimated:YES];
+//                 //[self dismiss];
+//             }];
+             
+             [weakSelf updateView];
+
+             
          }];
     }];
   
+   
+  
+}
+
+//申请成功提示页
+-(void)updateView{
+
+     [UIView animateWithDuration:0.25 animations:^{
+         self.upgateVC.view.top = 0;
+    }];
+    
+    self.title = @"申请信息";
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+}
+
+//返回
+-(void)back{
+
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //KDUtilRemoveNotificationCenterObserverDealloc
@@ -1112,5 +1145,8 @@ typedef enum {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 @end

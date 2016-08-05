@@ -629,6 +629,7 @@
 {
      [self getDataSource:self.currentIndex andFresh:YES];
 }
+//左侧导航item
 -(void)leftViewMessage{
     
     if (LOGIN && [self checkNetWorkReaching]) {

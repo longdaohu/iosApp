@@ -73,8 +73,9 @@
     
     self.title = self.path ? @"" :self.advertise_title;
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
-    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
-//    self.URLpath = @"http://www.myofferdemo.com/demo/appJump";
+//    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
+//        self.URLpath = @"http://www.myofferdemo.com/demo/appJump";
+        self.URLpath = @"http://www.myofferdemo.com/superMentor.html";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.URLpath]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     [self.web_wk loadRequest:request];
@@ -118,6 +119,7 @@
         NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
         [self pageWithResponse:responseJSON];
         decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else{
         
         if ([absoluteString hasSuffix:@"/evaluate"]) {
@@ -183,6 +185,9 @@
             break;
         case 9:
             [self caseSearchUniversityWithdict:responseJSON];
+            break;
+        case 10:
+            [self caseVedioWithdict:responseJSON];
             break;
         default:
             break;
@@ -259,7 +264,13 @@
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANKQS];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+//查看YOUKU视频
+-(void)caseVedioWithdict:(NSDictionary *)response{
+  
+     NSDictionary *dict =  response[@"args"];
+     NSString *path = [dict[@"url"] length] > 0 ? dict[@"url"]: @"http://www.myoffer.cn/";
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
+}
 
 
 -(void)dealloc

@@ -54,9 +54,7 @@
 
     [self.navigationController setNavigationBarHidden:NO animated:animated];
  
-    
     [self presentViewWillAppear];
-
     
 }
 
@@ -85,6 +83,8 @@
     
 }
 
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -111,7 +111,6 @@
     [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil success:^(NSInteger statusCode, NSArray *response) {
         
         weakSelf.responds = [response mutableCopy];
-        
         
         if(response.count == 0)
         {

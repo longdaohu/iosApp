@@ -121,7 +121,6 @@
         
         [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
         
-        
     }];
     
     
@@ -277,7 +276,7 @@
 }
 
 
-
+//取消订单
 -(void)cancelOrder{
     
  
@@ -298,26 +297,33 @@
     
 }
 
-
+//返回
 -(void)back{
    
     if (self.navigationController.childViewControllers.count > 3) {
         
         UIViewController *child = self.navigationController.childViewControllers[1];
+       
         if ([child isKindOfClass:[ServiceMallViewController class]]) {
             
             ServiceMallViewController *mall =(ServiceMallViewController *)child;
             mall.refresh = YES;
-
-        }
-       
-        if ([child isKindOfClass:[OrderViewController class]]) {
             
+            [self.navigationController popToViewController:mall animated:YES];
+
+
+        } else if([child isKindOfClass:[OrderViewController class]]){
+        
             OrderViewController *orderList =(OrderViewController *)child;
             orderList.refresh = YES;
-        }
+            [self.navigationController popToViewController:orderList animated:YES];
+            
+
+        }else{
         
-         [self.navigationController popToViewController:child animated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }
   
         
     }else{

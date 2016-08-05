@@ -495,11 +495,11 @@ static NSString *cityIdentify = @"cityCell";
     
         XJHUtilDefineWeakSelfRef
        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+       [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+           
+            NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
             NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count  = [response[@"order_count"] integerValue];
+            NSInteger order_count    = [response[@"order_count"] integerValue];
             [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
             [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
             [ud synchronize];

@@ -22,13 +22,13 @@
         [self.iconView addTarget:self action:@selector(left:) forControlEvents:UIControlEventTouchDown];
         
         self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(16, 0, 18, 18)];
-        self.countLab.layer.cornerRadius = 9;
-        self.countLab.layer.masksToBounds = YES;
-        self.countLab.backgroundColor =[UIColor redColor];
-        self.countLab.textColor = [UIColor whiteColor];
-        self.countLab.textAlignment =NSTextAlignmentCenter;
-        self.countLab.font = [UIFont systemFontOfSize:13];
-        self.countLab.hidden = YES;
+        self.countLab.layer.cornerRadius   = 9;
+        self.countLab.layer.masksToBounds  = YES;
+        self.countLab.backgroundColor = [UIColor redColor];
+        self.countLab.textColor       = [UIColor whiteColor];
+        self.countLab.textAlignment   = NSTextAlignmentCenter;
+        self.countLab.font            = [UIFont systemFontOfSize:13];
+        self.countLab.hidden          = YES;
         [self addSubview:self.countLab];
         
     }
@@ -47,16 +47,14 @@
     _countStr = countStr;
     
     self.countLab.hidden = countStr.integerValue == 0;
-    
-    self.countLab.text = countStr.length >= 3 ? @"99+": countStr;
+    self.countLab.text   = countStr.length >= 3 ? @"99+": countStr;
     
     if (self.countLab.text.length > 1) {
-        
-        CGSize countSize = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
-        CGRect newRect = self.countLab.frame;
-        newRect.size.width = countSize.width + 8;
-        self.countLab.frame = newRect;
-
+        CGSize countSize    = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
+        self.countLab.width = countSize.width + 8;
+    }else{
+        self.countLab.width = 18;
+    
     }
     
 }

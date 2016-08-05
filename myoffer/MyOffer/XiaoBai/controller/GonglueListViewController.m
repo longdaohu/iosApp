@@ -25,7 +25,7 @@
 //弹性图片
 @property(nonatomic,strong)UIImageView *FlexibleImageView;
 //弹性图片初始Rect
-@property(nonatomic,assign)CGRect  oldFlexibleViewRect;
+@property(nonatomic,assign)CGRect   oldFlexibleViewRect;
 //弹性图片初始Center
 @property(nonatomic,assign)CGPoint  oldFlexibleViewCenter;
 //用于判断用户是否已登录且有推荐院校数据

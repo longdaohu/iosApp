@@ -122,8 +122,9 @@ typedef enum {
     if (LOGIN && [self checkNetWorkReaching]) {
         
         //判断是否有智能匹配数据或收藏学校
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            weakSelf.myCountResponse = response;
+        [self startAPIRequestWithSelector:kAPISelectorRequestCenter parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+
+             weakSelf.myCountResponse = response;
             [weakSelf.tableView reloadData];
         }];
         
@@ -134,9 +135,9 @@ typedef enum {
          *  【 Approved ——审核通过
          *  【 -1       ——没有申请过
          */
-        [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
-            NSString *state = response[@"state"];
-            NSString *imageName = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
+        [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            NSString *state       = response[@"state"];
+            NSString *imageName   = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
             OptionButtonType type =   [state containsString:@"1"] ? OptionButtonTypeZineng :OptionButtonTypeZhuangTai;
             [weakSelf matchImageName:imageName withOptionButtonTag:type];
             
@@ -155,7 +156,7 @@ typedef enum {
 -(void)matchImageName:(NSString *)imageName withOptionButtonTag:(OptionButtonType)tag
 {
     self.centerHeader.image = [UIImage imageNamed:imageName];
-    self.OptionButton.tag = tag;
+    self.OptionButton.tag   = tag;
 }
 
 
@@ -171,11 +172,11 @@ typedef enum {
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.detailTextLabel.textColor =[UIColor darkGrayColor];
-        cell.countLabel =[[UILabel alloc] initWithFrame:CGRectMake(APPSIZE.width - 40,12,30, 30)];
+        cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(APPSIZE.width - 40,12,30, 30)];
         [cell.contentView addSubview:cell.countLabel];
-        cell.textLabel.text = text;
-        cell.imageView.image = icon;
-        cell.action = action;
+        cell.textLabel.text   = text;
+        cell.imageView.image  = icon;
+        cell.action           = action;
         
         return cell;
     };
@@ -221,8 +222,8 @@ typedef enum {
     self.leftView.actionBlock = ^(UIButton *sender){
         [weakSelf showLeftMenu];
     };
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-    self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
+    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     
 }
 
@@ -284,9 +285,10 @@ typedef enum {
 //分区头
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    centerSectionView  *sectionView =  [[centerSectionView alloc] init];
-    sectionView.response = self.myCountResponse;
-    sectionView.sectionBlock = ^(centerItemType type){
+    centerSectionView *sectionView =  [[centerSectionView alloc] init];
+    
+    sectionView.response           =  self.myCountResponse;
+    sectionView.sectionBlock       =  ^(centerItemType type){
         switch (type) {
             case centerItemTypepipei:
                 [self centerPageClickWithItemType:CenterClickItemTypePipei];
@@ -321,7 +323,7 @@ typedef enum {
     cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
     if ([cell.textLabel.text containsString:@"ffer"]) {
         NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
-        cell.countLabel.text = countString;
+        cell.countLabel.text  = countString;
     }
     return cell;
 }
@@ -349,8 +351,8 @@ typedef enum {
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
      if (buttonIndex) { //跳转到QQ下载页面
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url = [NSURL URLWithString:@"http://appstore.com/qq"];
+        UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
+        NSURL *url            = [NSURL URLWithString:@"http://appstore.com/qq"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         webView.delegate = self;
         [webView loadRequest:request];
@@ -387,7 +389,7 @@ typedef enum {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
         [MobClick event:@"KeFu"];
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
+        NSURL *url         = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         webView.delegate = self;
         [webView loadRequest:request];
@@ -407,25 +409,26 @@ typedef enum {
         
         XJHUtilDefineWeakSelfRef
         
+        
      [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
          
-         NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
+         NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
          NSInteger message_count  = [response[@"message_count"] integerValue];
-         NSInteger order_count  = [response[@"order_count"] integerValue];
-         [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
-         [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+         NSInteger order_count    = [response[@"order_count"] integerValue];
+         [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+         [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
          [ud synchronize];
          
-         weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+         weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
        }];
       
     }
     
     if (!LOGIN) {
         
-        self.leftView.countStr = @"0";
+        self.leftView.countStr  = @"0";
         [self matchImageName:GDLocalizedString(@"center-matchImage")  withOptionButtonTag:OptionButtonTypeZineng];
-        self.myCountResponse = nil;
+        self.myCountResponse    = nil;
         [self.tableView reloadData];
     }
     

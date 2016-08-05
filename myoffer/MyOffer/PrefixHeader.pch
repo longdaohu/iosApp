@@ -40,6 +40,7 @@
 #define BACKGROUDCOLOR  [UIColor colorWithRed:245.0/255 green:244.0/255 blue:249.0/255 alpha:1]
 #define XCOLOR_RED  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
 #define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]
+#define XCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define XFONTNAME  @"HelveticaNeue-Light"
 #define XScreenWidth [UIScreen mainScreen].bounds.size.width
 #define XScreenHeight [UIScreen mainScreen].bounds.size.height

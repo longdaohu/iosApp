@@ -196,18 +196,13 @@ static NSString *identify = @"pay";
            [self sendAliPay];
         
     }else{
-    
-        
             [self payWeixin];
-            
-    
-        
-    }
+     }
 
 
 }
 
-
+//微信支付
 -(void)payWeixin
 {
     
@@ -257,7 +252,7 @@ static NSString *identify = @"pay";
 }
 
 
-
+//支付宝支付
 -(void)sendAliPay
 {
     

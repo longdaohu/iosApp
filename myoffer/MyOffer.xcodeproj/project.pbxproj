@@ -299,6 +299,8 @@
 		AE8E1ADE1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E1ADC1CFD79F500D8D816 /* EvaluateSearchCollegeViewController.xib */; };
 		AE8E1AE01CFD79FC00D8D816 /* collegelist in Resources */ = {isa = PBXBuildFile; fileRef = AE8E1ADF1CFD79FC00D8D816 /* collegelist */; };
 		AE996FF91D3CB9CB0029712A /* LeftBarButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE996FF81D3CB9CB0029712A /* LeftBarButtonItemView.m */; };
+		AE9C978C1D4EFEAD003782F9 /* UpgradeTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9C978B1D4EFEAD003782F9 /* UpgradeTipsView.m */; };
+		AE9FC5B41D4B391100428020 /* ServiceItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9FC5B31D4B391100428020 /* ServiceItemView.m */; };
 		AEB41CC21CE0899000B4F9CD /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */; };
 		AEC5C79E1BAAA259009CC7CE /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
@@ -941,6 +943,10 @@
 		AE8E1ADF1CFD79FC00D8D816 /* collegelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = collegelist; sourceTree = "<group>"; };
 		AE996FF71D3CB9CB0029712A /* LeftBarButtonItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftBarButtonItemView.h; sourceTree = "<group>"; };
 		AE996FF81D3CB9CB0029712A /* LeftBarButtonItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftBarButtonItemView.m; sourceTree = "<group>"; };
+		AE9C978A1D4EFEAD003782F9 /* UpgradeTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeTipsView.h; sourceTree = "<group>"; };
+		AE9C978B1D4EFEAD003782F9 /* UpgradeTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeTipsView.m; sourceTree = "<group>"; };
+		AE9FC5B21D4B391100428020 /* ServiceItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemView.h; sourceTree = "<group>"; };
+		AE9FC5B31D4B391100428020 /* ServiceItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemView.m; sourceTree = "<group>"; };
 		AEB41CC01CE0899000B4F9CD /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
 		AEB41CC11CE0899000B4F9CD /* ApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyTableViewCell.m; sourceTree = "<group>"; };
 		AEC5C79D1BAAA259009CC7CE /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
@@ -1389,6 +1395,10 @@
 				5671448A1CBA88CD002A02BF /* XWGJTiJiaoViewController.m */,
 				AE64D5301D37462300BF2D20 /* UpgradeViewController.h */,
 				AE64D5311D37462300BF2D20 /* UpgradeViewController.m */,
+				AE9FC5B21D4B391100428020 /* ServiceItemView.h */,
+				AE9FC5B31D4B391100428020 /* ServiceItemView.m */,
+				AE9C978A1D4EFEAD003782F9 /* UpgradeTipsView.h */,
+				AE9C978B1D4EFEAD003782F9 /* UpgradeTipsView.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3257,6 +3267,7 @@
 				567144C61CBA88CD002A02BF /* Applycourse.m in Sources */,
 				5671459C1CBA9106002A02BF /* HelpViewController.m in Sources */,
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
+				AE9C978C1D4EFEAD003782F9 /* UpgradeTipsView.m in Sources */,
 				567144D51CBA88CD002A02BF /* ApplySectionHeaderView.m in Sources */,
 				AE7BAF5F1D2FBBA800DF2B96 /* UserDefaults.m in Sources */,
 				AE1D010C1D2FCC5D005E2DEF /* UILabel+extention.m in Sources */,
@@ -3266,6 +3277,7 @@
 				AE79E4421C8E7A7E008059D9 /* SDWebImageCompat.m in Sources */,
 				5671455D1CBA8D28002A02BF /* XWGJLXCountry.m in Sources */,
 				567144F61CBA8988002A02BF /* MeViewController.m in Sources */,
+				AE9FC5B41D4B391100428020 /* ServiceItemView.m in Sources */,
 				567145A01CBA9106002A02BF /* XWGJNoti.m in Sources */,
 				567145CC1CBA914C002A02BF /* XWGJAboutViewController.m in Sources */,
 				AE79E4451C8E7A7E008059D9 /* SDWebImageDownloaderOperation.m in Sources */,
