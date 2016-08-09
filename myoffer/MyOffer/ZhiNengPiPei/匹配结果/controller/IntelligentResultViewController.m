@@ -628,6 +628,7 @@ typedef enum {
 
 }
 
+//返回上级页面
 -(void)popBack
 {
     if (self.isComeBack || self.navigationBgImage) {

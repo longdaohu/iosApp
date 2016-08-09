@@ -11,6 +11,10 @@
 #import "UniversityMapsViewController.h"
 #import "UniversityCourseViewController.h"
 
+typedef enum {
+    DetailClickedTypeNoClick,
+    DetailClickedTypeFavor
+}DetailClickedType;
 
 @interface UniversityDetailViewController () {
     BOOL _isLiked;
@@ -24,8 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *BrifIInfoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *ShowCourseSBtn;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *EvaluationBtn;
-
-
+@property(nonatomic,assign)DetailClickedType detailType;
 
 @end
 
@@ -40,6 +43,23 @@
 
     [self reloadData];
     
+    [self userDidClickItem];
+    
+ 
+}
+
+
+//判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
+-(void)userDidClickItem
+{
+    if (LOGIN) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+                  [self detailPageClickWithItemType:self.detailType];
+        });
+        
+    }
 }
 
 
@@ -208,39 +228,11 @@
     _evaluationButton.hidden = ishiden;
     _progressContainer.hidden = !ishiden;
 }
-- (void)toggleLike {
-    
-    
- 
-      RequireLogin
-    
-     if (!_isLiked) {
-        [self startAPIRequestWithSelector:@"GET api/account/favorite/:id" parameters:@{@":id": _universityID} success:^(NSInteger statusCode, id response) {
-            KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-            [hud applySuccessStyle];
-            [hud setLabelText:GDLocalizedString(@"UniversityDetail-0012")];//@"关注成功"];
-             _isLiked = !_isLiked;
-            [self configureLikeButton];
-            [hud hideAnimated:YES afterDelay:1];
-        }];
-        
-    } else {
-        
-        [self startAPIRequestWithSelector:@"GET api/account/unFavorite/:id" parameters:@{@":id": _universityID} success:^(NSInteger statusCode, id response) {
-            KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-            [hud applySuccessStyle];
-            [hud setLabelText:GDLocalizedString(@"UniversityDetail-0013")];//@"取消成功"];
-          
-            _isLiked = !_isLiked;
-            [self configureLikeButton];
-            
-            [hud hideAnimated:YES afterDelay:1];
 
-        }];
-    }
-}
+
 
 - (void)configureLikeButton {
+    
     if (_isLiked) {
         UIImage *selectedImage=[UIImage imageNamed: @"nav_likePress"];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLike)];
@@ -254,51 +246,106 @@
 
 - (void)viewDidLayoutSubviews {
     
-
-    _descLabel.preferredMaxLayoutWidth = _descLabel.frame.size.width;
+     _descLabel.preferredMaxLayoutWidth = _descLabel.frame.size.width;
     
 }
 
+//课程详情
 - (IBAction)viewAllCourses {
      UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
+//智能匹配
 - (IBAction)evaluationButtonPressed {
- 
+  
+     [self CasePipei];
     
- 
-    RequireLogin
-    
-    InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
+//地图页面
 - (IBAction)goToMapView:(UIButton *)sender {
     
    
     UniversityMapsViewController *mapsView = [[UniversityMapsViewController alloc] initWithNibName:@"UniversityMapsViewController" bundle:[NSBundle mainBundle]];
   
-    mapsView.UniversityInfoDic = _resultResponse;
+    mapsView.UniversityInfoDic             = _resultResponse;
 
     [self.navigationController pushViewController:mapsView animated:YES];
 }
 
+//返回上级页面
 -(void)popBack
 {
-
     if(self.actionBlock)
     {
-        BOOL fresh   =  self.firstLike == _isLiked ? NO : YES;
+        BOOL fresh         =  self.firstLike == _isLiked ? NO : YES;
         NSString *freshStr = [NSString stringWithFormat:@"%d",fresh];
-        
-         self.actionBlock(freshStr);
+        self.actionBlock(freshStr);
     }
-    
     
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//是否收收藏
+- (void)toggleLike {
+    
+    [self detailPageClickWithItemType:DetailClickedTypeFavor];
+    
+}
 
+//页面跳转
+-(void)detailPageClickWithItemType:(DetailClickedType)type
+{
+    self.detailType = LOGIN ? DetailClickedTypeNoClick : type;
+    
+    RequireLogin
+    
+    switch (type) {
+        case DetailClickedTypeFavor:
+            [self CaseFavoriteUniversity];
+            break;
+        default:
+            break;
+    }
+}
+
+//智能匹配
+-(void)CasePipei{
+
+        RequireLogin
+        InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+}
+
+//收藏
+-(void)CaseFavoriteUniversity{
+    
+     if (!_isLiked) {
+        [self startAPIRequestWithSelector:@"GET api/account/favorite/:id" parameters:@{@":id": _universityID} success:^(NSInteger statusCode, id response) {
+            KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+            [hud applySuccessStyle];
+            [hud setLabelText:GDLocalizedString(@"UniversityDetail-0012")];//@"关注成功"];
+            _isLiked = !_isLiked;
+            [self configureLikeButton];
+            [hud hideAnimated:YES afterDelay:1];
+        }];
+        
+    } else {
+        
+        [self startAPIRequestWithSelector:@"GET api/account/unFavorite/:id" parameters:@{@":id": _universityID} success:^(NSInteger statusCode, id response) {
+            KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+            [hud applySuccessStyle];
+            [hud setLabelText:GDLocalizedString(@"UniversityDetail-0013")];//@"取消成功"];
+            
+            _isLiked = !_isLiked;
+            [self configureLikeButton];
+            
+            [hud hideAnimated:YES afterDelay:1];
+            
+        }];
+    }
+
+}
 @end

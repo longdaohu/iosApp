@@ -40,7 +40,7 @@
     if (self) {
         
         self.contentView.backgroundColor = XCOLOR_CLEAR;
-        self.backgroundColor = XCOLOR_CLEAR;
+        self.backgroundColor             = XCOLOR_CLEAR;
         
         [self makeCollectView];
         
@@ -68,12 +68,12 @@
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, heigh) collectionViewLayout:flowlayout];
 
-    self.CollectionView = collectionView;
-    collectionView.showsVerticalScrollIndicator = NO;
+    self.CollectionView                           = collectionView;
+    collectionView.showsVerticalScrollIndicator   = NO;
     collectionView.showsHorizontalScrollIndicator = NO;
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.backgroundColor = BACKGROUDCOLOR;
+    collectionView.dataSource                     = self;
+    collectionView.delegate                       = self;
+    collectionView.backgroundColor                = BACKGROUDCOLOR;
     [self.CollectionView registerClass:[UniCollectionViewCell class] forCellWithReuseIdentifier:identify];
     [self.contentView  addSubview:self.CollectionView];
     

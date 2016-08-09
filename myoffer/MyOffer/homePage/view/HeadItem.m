@@ -22,8 +22,8 @@
           [self.IconBtn addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.IconBtn];
         
-        self.titleLab =[[UILabel alloc] init];
-        self.titleLab.textColor =XCOLOR_WHITE;
+        self.titleLab               = [[UILabel alloc] init];
+        self.titleLab.textColor     = XCOLOR_WHITE;
         self.titleLab.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.titleLab];
     }
@@ -32,8 +32,7 @@
 
 -(void)setTitle:(NSString *)title
 {
-    _title = title;
-    
+    _title             = title;
     self.titleLab.text = title;
     
 }
@@ -48,8 +47,7 @@
 
 -(void)setIconTag:(NSInteger)iconTag
 {
-    _iconTag = iconTag;
-    
+    _iconTag         = iconTag;
     self.IconBtn.tag = iconTag;
 }
 
@@ -67,11 +65,10 @@
     
     CGFloat tx = 0;
     CGFloat ty = CGRectGetMaxY(self.IconBtn.frame) - KDUtilSize(0) * 3;
- 
     CGFloat tw = self.bounds.size.width;
     CGFloat th = self.bounds.size.height - ih - KDUtilSize(0) * 5;
     self.titleLab.frame = CGRectMake(tx, ty, tw, th);
-    self.titleLab.font = [UIFont systemFontOfSize:0.30 * th];
+    self.titleLab.font  = [UIFont systemFontOfSize:0.30 * th];
     
 }
 

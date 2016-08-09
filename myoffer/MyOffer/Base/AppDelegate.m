@@ -442,7 +442,10 @@ static AppDelegate *__sharedDelegate;
 #pragma mark RESideMenu Delegate
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
-    //    NSLog(@"willShowMenuViewController: %@", NSStringFromClass([menuViewController class]));
+
+    [self.mainTabBarController contentViewIsOpen:YES];
+//    NSLog(@"willShowMenuViewController: %@ ", NSStringFromClass([menuViewController class]));
+    
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController
@@ -452,7 +455,9 @@ static AppDelegate *__sharedDelegate;
 
 - (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController
 {
-    //    NSLog(@"willHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+
+       [self.mainTabBarController contentViewIsOpen:NO];
+//        NSLog(@"willHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController

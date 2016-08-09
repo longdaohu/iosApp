@@ -249,6 +249,7 @@
     [self.conn startNotifier];
     
     self.view.backgroundColor = BACKGROUDCOLOR;
+    
 }
 
 - (void)networkStateChange
@@ -279,6 +280,15 @@
     return [self checkNetWorkReaching];
 }
 
+
+//登录页面
+-(void)loginView{
+
+    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
+    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:^{}];
+
+}
 
 
 - (void)dealloc

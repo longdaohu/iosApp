@@ -8,7 +8,14 @@
 
 #import "BaseViewController.h"
 
+typedef enum {
+    HomePageClickItemTypeNoClick,
+    HomePageClickItemTypePipei
+}HomePageClickItemType;
 @interface HomeViewContViewController : BaseViewController
+//已选择服务项
+@property(nonatomic,assign)HomePageClickItemType clickType;
+
 -(void)leftViewMessage;
 
 @end

@@ -53,9 +53,7 @@
         [self.orderDetailBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView  addSubview:self.orderDetailBtn];
         [self.orderDetailBtn setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
-        
-        
-        
+ 
         
     }
     return self;
@@ -84,9 +82,9 @@
     
     _order = order;
     
-    NSDictionary *sku = [order.SKUs firstObject];
-    self.orderTitleLab.text = sku[@"name"] ;
-    self.orderNoLab.text = [NSString stringWithFormat:@"订单号 ： %@",order.orderId];
+    NSDictionary *sku       = [order.SKUs firstObject];
+    self.orderTitleLab.text = [NSString stringWithFormat:@"*%@",sku[@"name"]];
+    self.orderNoLab.text    = [NSString stringWithFormat:@"订单号 ： %@",order.orderId];
  
     
     CGSize orderSize =[self.orderTitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
@@ -94,7 +92,7 @@
     CGFloat titleX = 10;
     CGFloat titleY = 10;
     CGFloat titleW = sku[@"name"] ? orderSize.width :XScreenWidth - 120;
-    titleW = titleW > XScreenWidth - 120 ? XScreenWidth - 120 : titleW;
+    titleW         = titleW > XScreenWidth - 120 ? XScreenWidth - 120 : titleW;
     CGFloat titleH = orderSize.height;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     

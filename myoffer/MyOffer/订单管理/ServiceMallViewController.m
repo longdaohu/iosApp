@@ -57,7 +57,6 @@
     bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *userAgent = [NSString stringWithFormat:@"%@%@",bundleName,version];
-    
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     

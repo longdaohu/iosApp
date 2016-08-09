@@ -10,6 +10,7 @@
 
 @interface OrderDetailFooterView ()
 @property(nonatomic,strong)UIView *bgView;
+@property(nonatomic,strong)UILabel *orderDescriptionLab;
 @property(nonatomic,strong)UILabel *orderRecordLab;
 @property(nonatomic,strong)UILabel *NoOneRecordLab;
 @property(nonatomic,strong)UILabel *NoTwoRecordLab;
@@ -35,6 +36,10 @@
         self.bgView.layer.shadowOpacity = 0.2;
         self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
         
+        
+        self.orderDescriptionLab =[UILabel labelWithFontsize:KDUtilSize(12.5)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
+        [self.bgView addSubview:self.orderDescriptionLab];
+        self.orderDescriptionLab.numberOfLines = 2;
         
         self.orderRecordLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.orderRecordLab];
@@ -102,8 +107,19 @@
     self.orderPriceLab.attributedText = attribStr;
     [self statusWithTag:orderDict[@"status"]];
     
+    NSString *description  = [NSString stringWithFormat:@"* %@",[orderDict[@"SKUs"][0] valueForKey:@"description"]];
+    CGSize descriptionSize = [description KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(12.5)]];
+    
+    CGFloat descriptionX = 10;
+    CGFloat descriptionY = 10;
+    CGFloat descriptionW = XScreenWidth - descriptionX * 2;
+    CGFloat descriptionH = descriptionSize.width > descriptionW ? descriptionSize.height * 2 + 5 : descriptionSize.height;
+    self.orderDescriptionLab.frame = CGRectMake(descriptionX, descriptionY, descriptionW, descriptionH);
+    self.orderDescriptionLab.text  = description;
+    
+    
     CGFloat recordX = 10;
-    CGFloat recordY = 10;
+    CGFloat recordY = CGRectGetMaxY(self.orderDescriptionLab.frame)  + 10;
     CGFloat recordW = XScreenWidth;
     CGFloat recordH = 20;
     self.orderRecordLab.frame = CGRectMake(recordX, recordY, recordW, recordH);

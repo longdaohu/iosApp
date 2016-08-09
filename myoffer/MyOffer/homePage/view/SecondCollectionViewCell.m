@@ -71,11 +71,11 @@
     
     if (self.titleLab.text) {
         
-        CGFloat titlex = 10;
-        CGFloat titlew = self.bounds.size.width - 2 * ITEM_MARGIN;
-        CGSize  titleSize = [self.titleLab.text KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(15))];
-        CGFloat titleh =  titleSize.width > titlew  ? titleSize.height * 2 :titleSize.width;
-        CGFloat titley = self.bounds.size.height - titleh - 10;
+        CGFloat titlex      = 10;
+        CGFloat titlew      = self.bounds.size.width - 2 * ITEM_MARGIN;
+        CGSize  titleSize   = [self.titleLab.text KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(15))];
+        CGFloat titleh      =  titleSize.width > titlew  ? titleSize.height * 2 :titleSize.width;
+        CGFloat titley      = self.bounds.size.height - titleh - 10;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
         
      }

@@ -334,9 +334,9 @@ static NSString *subjectIdentify = @"subjectCell";
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     GonglueListViewController  *list =[[GonglueListViewController alloc] init];
-     list.navigationBgImage = self.navigationBgImage;
-     list.gonglue = self.gonglueItems[indexPath.row];
+     GonglueListViewController  *list = [[GonglueListViewController alloc] init];
+     list.navigationBgImage           =  self.navigationBgImage;
+     list.gonglue                     =  self.gonglueItems[indexPath.row];
      [self.navigationController pushViewController:list  animated:YES];
 }
 

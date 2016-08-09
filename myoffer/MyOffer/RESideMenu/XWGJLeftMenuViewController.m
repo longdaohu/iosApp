@@ -50,30 +50,29 @@
     
     [self.menuItems removeAllObjects];
     
-    MenuItem *apply =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application" count:@"0"];
-    MenuItem *set =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting" count:@"0"];
-    MenuItem *help =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help" count:@"0"];
-    MenuItem *logout =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout" count:@"0"];
+    MenuItem *apply  = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application" count:@"0"];
+    MenuItem *set    = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting" count:@"0"];
+    MenuItem *help   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help" count:@"0"];
+    MenuItem *logout = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout" count:@"0"];
     
     if (LOGIN) {
         
-        NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
-        NSString *message_count  =  [ud valueForKey:@"message_count"];
-        NSString *order_count  =  [ud valueForKey:@"order_count"];
+        NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+        NSString *message_count  = [ud valueForKey:@"message_count"];
+        NSString *order_count    = [ud valueForKey:@"order_count"];
         
-        MenuItem *orderCount =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
-        MenuItem *messageCount =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
+        MenuItem *orderCount   = [MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
+        MenuItem *messageCount = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
         
         NSArray *temps = @[apply,orderCount,messageCount,set,help,logout];
         self.menuItems = [temps mutableCopy];
         
     }else{
         
-        MenuItem *offer =[MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:@"0"];
-        MenuItem *noti =[MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:@"0"];
-        
-        NSArray *temps = @[apply,offer,noti,set,help,logout];
-        self.menuItems = [temps mutableCopy];
+        MenuItem *offer = [MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:@"0"];
+        MenuItem *noti  = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:@"0"];
+        NSArray *temps  = @[apply,offer,noti,set,help,logout];
+        self.menuItems  = [temps mutableCopy];
     }
     
     
@@ -99,7 +98,7 @@
             self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
             [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
         }];
-        
+         
         //检查网络是否连接，如果没有连接，不再往下执行代码
         if (![self checkNetWorkReaching]) {
             
@@ -112,9 +111,11 @@
           *  【 -1       ——表示没有申请过
           *   检查申请进程，判断我的申请跳转页面
           */
-        [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil success:^(NSInteger statusCode, id response) {
-                        self.Applystate = response[@"state"];
-                    }];
+         [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+         
+             self.Applystate = response[@"state"];
+         }];
+   
          
      }else{
       

@@ -60,24 +60,24 @@
 
 -(void)makeTableView
 {
-    self.TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 20) style:UITableViewStyleGrouped];
-    self.TableView.dataSource =self;
-    self.TableView.delegate = self;
+    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 20) style:UITableViewStyleGrouped];
+    self.TableView.dataSource      = self;
+    self.TableView.delegate        = self;
     self.TableView.backgroundColor = BACKGROUDCOLOR;
     [self.view addSubview:self.TableView];
     
     //上拉刷新
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    MJRefreshNormalHeader *header      = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
-    self.TableView.mj_header = header;
+    self.TableView.mj_header           = header;
 
 }
 
 -(void)makeNodataView
 {
-    self.noDataView =[XWGJnodataView noDataView];
+    self.noDataView                   = [XWGJnodataView noDataView];
     self.noDataView.contentLabel.text = GDLocalizedString(@"ApplicationStutasVC-noData");
-    self.noDataView.hidden = YES;
+    self.noDataView.hidden            = YES;
     [self.view insertSubview:self.noDataView aboveSubview:self.TableView];
     
 }

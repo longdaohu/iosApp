@@ -85,8 +85,8 @@
     
     CGFloat collectionx  = 0;
     CGFloat collectiony  = 0;
-    CGFloat collectionw =  XScreenWidth;
-    CGFloat collectionh = column *  XScreenWidth * 0.4;
+    CGFloat collectionw  =  XScreenWidth;
+    CGFloat collectionh  = column *  XScreenWidth * 0.4;
     self.CollectionView.frame =  CGRectMake(collectionx,collectiony,collectionw,collectionh);
     
     CGFloat width =  0.5*(XScreenWidth - 3 * ITEM_MARGIN);

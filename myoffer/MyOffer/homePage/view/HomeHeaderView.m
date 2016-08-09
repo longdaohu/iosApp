@@ -36,18 +36,18 @@
         [self addSubview:self.upView];
         
  
-        self.upViewBackgroudView =[[UIImageView alloc] init];
-        self.upViewBackgroudView.image = self.navigationBgImage;
-        self.upViewBackgroudView.contentMode =UIViewContentModeScaleToFill;
+        self.upViewBackgroudView             = [[UIImageView alloc] init];
+        self.upViewBackgroudView.image       = self.navigationBgImage;
+        self.upViewBackgroudView.contentMode = UIViewContentModeScaleToFill;
         [self.upView addSubview:self.upViewBackgroudView];
         
         
-        self.Logo =[[UIImageView alloc] init];
-        self.Logo.image =[UIImage imageNamed:@"logo white"];
-        self.Logo.contentMode =UIViewContentModeScaleAspectFit;
+        self.Logo             = [[UIImageView alloc] init];
+        self.Logo.image       = [UIImage imageNamed:@"logo white"];
+        self.Logo.contentMode = UIViewContentModeScaleAspectFit;
         [self.upView addSubview:self.Logo];
         
-        self.buttonsBgView =[[HeadItembgView alloc] init];
+        self.buttonsBgView = [[HeadItembgView alloc] init];
         self.buttonsBgView.delegate = self;
         [self.upView addSubview:self.buttonsBgView];
  
@@ -67,8 +67,8 @@
 {
     if (!_navigationBgImage) {
         
-        NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:NAV_PNG];
-        _navigationBgImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+        NSString *path     = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:NAV_PNG];
+        _navigationBgImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
         
     }
     return _navigationBgImage;
@@ -80,15 +80,15 @@
     [super layoutSubviews];
     
     CGFloat BoundHeight = self.bounds.size.height;
-    CGFloat upHeight = BoundHeight *0.5 + 20;
-    self.upView.frame = CGRectMake(0, 0, XScreenWidth,upHeight);
+    CGFloat upHeight    = BoundHeight *0.5 + 20;
+    self.upView.frame   = CGRectMake(0, 0, XScreenWidth,upHeight);
     self.upViewBackgroudView.frame = self.upView.frame;
   
     
-    CGFloat Logox = 0;
-    CGFloat Logoy = 30;
-    CGFloat Logow = XScreenWidth;
-    CGFloat Logoh = upHeight * 0.2 ;
+    CGFloat Logox   = 0;
+    CGFloat Logoy   = 30;
+    CGFloat Logow   = XScreenWidth;
+    CGFloat Logoh   = upHeight * 0.2 ;
     self.Logo.frame = CGRectMake(Logox, Logoy, Logow, Logoh);
     
     CGFloat IBx = 0;

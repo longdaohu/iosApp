@@ -43,6 +43,14 @@
 
 -(void)makeUI
 {
+    
+    NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
+    bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *userAgent = [NSString stringWithFormat:@"%@%@",bundleName,version];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+    
     self.title = @"服务详情";
     self.Web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
     [self.view addSubview:self.Web];

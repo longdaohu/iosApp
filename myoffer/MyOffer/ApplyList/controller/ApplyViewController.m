@@ -13,6 +13,8 @@
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameApplyObj.h"
 #import "ApplyTableViewCell.h"
+#define SECTIONFOOTERHEIGHT  10
+
 
 @interface ApplyViewController ()<UIAlertViewDelegate>
 {
@@ -21,8 +23,8 @@
     NSMutableSet *_selectedIDs;
     NSArray *_courseInfos;
 }
-@property(nonatomic,strong)NSMutableArray *responds; //请求得到数据数组
-@property(nonatomic,strong)NSMutableArray *idGroups; //所有学校的专业ID数组
+@property(nonatomic,strong)NSMutableArray *responds;            //请求得到数据数组
+@property(nonatomic,strong)NSMutableArray *idGroups;             //所有学校的专业ID数组
 @property(nonatomic,strong)NSMutableArray  *courseSelecteds;     //已选中课程ID数组
 @property(nonatomic,strong)NSMutableArray *cancelCourseList;     //提交删除的课程ID数组
 @property(nonatomic,strong)NSMutableArray *cancelUniversityList; //提交删除的学校ID数组
@@ -37,6 +39,7 @@
 
 @implementation ApplyViewController
 - (instancetype)init {
+    
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
@@ -58,6 +61,7 @@
     
 }
 
+//viewWillAppear状态页面数据调整
 -(void)presentViewWillAppear{
 
     if (![self checkNetworkState]) {
@@ -112,33 +116,45 @@
         
         weakSelf.responds = [response mutableCopy];
         
-        if(response.count == 0)
-        {
-            weakSelf.NDataView.hidden = NO;
-            
-            weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
-            
-            return ;
-        }
+        [weakSelf UIWithArray:response];
         
-        [weakSelf getcourseidGroups];
-        
-        NSMutableArray *sectionM = [NSMutableArray array];
-        
-        for (NSDictionary *sectionInfo in response) {
-            
-            ApplySection *sectionModal = [ApplySection applySectionWithDictionary:sectionInfo];
-            
-            [sectionM addObject:sectionModal];
-        }
-        weakSelf.sectionGroups = [sectionM mutableCopy];
-        
-        [weakSelf configureSelectedCoursedID:[self.courseSelecteds copy]];
-        
-        [_waitingTableView reloadData];
     }];
     
 }
+
+//根据网络请求刷新页面
+-(void)UIWithArray:(NSArray *)response{
+
+    if(response.count == 0)
+    {
+        self.NDataView.hidden = NO;
+        
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        
+        self.submitBtn.enabled = NO;
+        
+        return ;
+    }
+    
+    
+    [self getcourseidGroups];
+    
+    NSMutableArray *sectionM = [NSMutableArray array];
+    
+    for (NSDictionary *sectionInfo in response) {
+        
+        ApplySection *sectionModal = [ApplySection applySectionWithDictionary:sectionInfo];
+        
+        [sectionM addObject:sectionModal];
+    }
+    self.sectionGroups = [sectionM mutableCopy];
+    
+    [self configureSelectedCoursedID:[self.courseSelecteds copy]];
+    
+    [_waitingTableView reloadData];
+    
+}
+
 
 //如果用户已经申请过，在提交按钮上添加一个遮盖
 /*     state     状态有4个值
@@ -182,8 +198,8 @@
 -(void)makeOther
 {
     _selectCountLabel.text = [NSString stringWithFormat:@"%@ : ",GDLocalizedString(@"ApplicationList-003")];
-    self.AlertLab.text = GDLocalizedString(@"ApplicationList-noti");
-    self.title = GDLocalizedString(@"Me-001");
+    self.AlertLab.text     = GDLocalizedString(@"ApplicationList-noti");
+    self.title             = GDLocalizedString(@"Me-001");
     [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-commit") forState:UIControlStateNormal];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -193,20 +209,22 @@
         
     }
     
-    _waitingTableView.tableFooterView = [[UIView alloc] init];
-    _waitingTableView.sectionFooterHeight = 10;
+    _waitingTableView.tableFooterView     = [[UIView alloc] init];
+    _waitingTableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
 }
 
 
 -(void)makeButtonItem
 {
-    UIBarButtonItem  *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
-    self.navigationItem.leftBarButtonItem =leftItem;
+    UIBarButtonItem  *leftItem             = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
+    self.navigationItem.leftBarButtonItem  = leftItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:GDLocalizedString(@"ApplicationList-Edit") style:UIBarButtonItemStylePlain target:self action:@selector(EditClick:)];
 }
+
+
 -(void)makeCancelBottonButtonView
 {
-    self.cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,APPSIZE.height - 64,APPSIZE.width, 50)];
+    self.cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,APPSIZE.height - 64,XScreenWidth, 50)];
     [self.cancelBottomButton setTitle:GDLocalizedString(@"ApplicationList-Delete")  forState:UIControlStateNormal];
     [self.cancelBottomButton addTarget:self action:@selector(commitCancelList:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelBottomButton.backgroundColor = XCOLOR_RED;
@@ -214,62 +232,16 @@
 }
 
 
-//编辑按钮方法
--(void)EditClick:(UIBarButtonItem *)sender
-{
-    NSString *cancelTitle =  GDLocalizedString(@"Me-007");
-    NSString *editTitle = GDLocalizedString(@"ApplicationList-Edit");
-    if ([sender.title isEqualToString:editTitle] ) {
-        
-        sender.title = cancelTitle;
-        self.rightButtonTitle = sender.title;
-        [self bottomUp:NO];
-        
-    }else{
-        sender.title = editTitle;
-        self.rightButtonTitle =  sender.title;
-        [self.cancelCourseList removeAllObjects];
-        [self.cancelUniversityList removeAllObjects];
-        [self.cancelSetions removeAllObjects];
-        [self.cancelindexPathes removeAllObjects];
-        [self bottomUp:YES];
-        
-    }
-    [_waitingTableView reloadData];
-    [self.courseSelecteds removeAllObjects];
-    [self configureSelectedCoursedID:self.courseSelecteds];
-    
-}
-//用于控制删除按钮出现隐藏
--(void)bottomUp:(BOOL)up
-{
-    float distance = up ? 50.0:-50.0;
-    [UIView animateWithDuration:0.2 animations:^{
-        CGPoint center = self.cancelBottomButton.center;
-        center.y += distance;
-        self.cancelBottomButton.center = center;
-        self.bottomView.hidden = !up;
-    }];
-}
 
-//提交删除按钮
--(void)commitCancelList:(UIButton *)sender
-{
-    if (self.cancelCourseList.count == 0 && self.cancelUniversityList.count == 0) {
-        AlerMessage(GDLocalizedString(@"ApplicationList-please"));
- 
-    }else{
-        UIAlertView *aler =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"ApplicationList-comfig") delegate:self cancelButtonTitle:GDLocalizedString(@"NetRequest-OK") otherButtonTitles:GDLocalizedString(@"Potocol-Cancel"), nil];
-        [aler show];
-    }
-}
 
 #pragma mark —— UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
+        
         return;
     }
+    
     if (self.cancelCourseList.count > 0) {
         
         [self commitCancelselectCell];
@@ -277,12 +249,14 @@
         
     }else{
         
-        if (self.cancelSetions > 0) {
+        if (self.cancelSetions.count > 0) {
             
             [self commitCancelSectionView];
         }
     }
     
+    
+
 }
 //用于删除cell,先删除cell再删除sectionHeader
 -(void)commitCancelselectCell
@@ -303,11 +277,12 @@
                                   
                                   
                                   [weakSelf.cancelindexPathes removeAllObjects];
-                                  [weakSelf.cancelCourseList removeAllObjects];
+                                  [weakSelf.cancelCourseList  removeAllObjects];
                                   
                                   if (weakSelf.cancelSetions > 0) {
                                       
                                       [weakSelf commitCancelSectionView];
+                                      
                                   }else{
                                       
                                       [_waitingTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:sortArray] withRowAnimation:UITableViewRowAnimationFade];
@@ -327,20 +302,20 @@
                                   NSArray *newArray = [weakSelf  sortArray:weakSelf.cancelSetions];
                                   
                                   for (NSString *section in newArray) {
+                                      
                                       [weakSelf.sectionGroups removeObjectAtIndex:section.integerValue];
                                   }
                                   
                                   [weakSelf.cancelUniversityList removeAllObjects];
                                   [weakSelf.cancelSetions removeAllObjects];
-                                  
                                   [_waitingTableView reloadData];
                                   
-                                  weakSelf.NDataView.hidden = weakSelf.sectionGroups.count == 0 ?NO:YES;
+                                  weakSelf.NDataView.hidden  = weakSelf.sectionGroups.count  > 0;
+                                  weakSelf.submitBtn.enabled = weakSelf.sectionGroups.count  > 0;
                                   
                                   if (weakSelf.sectionGroups.count == 0) {
                                       
                                       [weakSelf bottomUp:YES];
-                                      
                                       weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
                                       
                                   }
@@ -617,15 +592,12 @@
     }
     
     
-    XWGJTiJiaoViewController *vc =[[XWGJTiJiaoViewController alloc] init];
-    vc.selectedCoursesIDs = [self.courseSelecteds copy];
-    
+    XWGJTiJiaoViewController *vc = [[XWGJTiJiaoViewController alloc] init];
+    vc.selectedCoursesIDs        =  [self.courseSelecteds copy];
     
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-
 
 
 - (void)configureSelectedCoursedID:(NSArray *)selectedIDs {
@@ -634,6 +606,78 @@
 }
 
 
+-(NSMutableArray *)sectionGroups
+{
+    if (!_sectionGroups) {
+        _sectionGroups = [NSMutableArray array];
+    }
+    return _sectionGroups;
+}
+
+-(NSMutableArray *)cancelSetions
+{
+    if (!_cancelSetions) {
+        _cancelSetions = [NSMutableArray array];
+    }
+    return _cancelSetions;
+}
+
+-(NSMutableArray *)cancelindexPathes
+{
+    if (!_cancelindexPathes) {
+        _cancelindexPathes = [NSMutableArray array];
+    }
+    return _cancelindexPathes;
+}
+
+-(NSMutableArray *)courseSelecteds
+{
+    if (!_courseSelecteds) {
+        _courseSelecteds = [NSMutableArray array];
+    }
+    return _courseSelecteds;
+}
+
+-(NSMutableArray *)cancelCourseList
+{
+    if (!_cancelCourseList) {
+        _cancelCourseList = [NSMutableArray array];
+    }
+    return _cancelCourseList;
+}
+
+-(NSMutableArray *)cancelUniversityList
+{
+    if (!_cancelUniversityList) {
+        _cancelUniversityList = [NSMutableArray array];
+    }
+    return _cancelUniversityList;
+}
+
+//分区的ID，分别放在不同的数组下
+-(void)getcourseidGroups
+{
+    _idGroups = [NSMutableArray array];
+    
+    
+    for (NSDictionary *universityInfo in self.responds) {
+        
+        NSArray  *applies     = [universityInfo valueForKey:@"applies"];
+        
+        NSMutableArray *group = [NSMutableArray array];
+        
+        for (NSDictionary *courseInfo in applies) {
+            
+            [group addObject:courseInfo[@"_id"]];
+            
+        }
+        
+        [_idGroups addObject:group];
+    }
+}
+
+
+//返回上级页面
 -(void)popBackRootViewController
 {
     
@@ -648,74 +692,59 @@
     }
 }
 
--(NSMutableArray *)sectionGroups
+//用于控制删除按钮出现隐藏
+-(void)bottomUp:(BOOL)up
 {
-    if (!_sectionGroups) {
-        _sectionGroups =[NSMutableArray array];
-    }
-    return _sectionGroups;
-}
-
--(NSMutableArray *)cancelSetions
-{
-    if (!_cancelSetions) {
-        _cancelSetions =[NSMutableArray array];
-    }
-    return _cancelSetions;
-}
-
--(NSMutableArray *)cancelindexPathes
-{
-    if (!_cancelindexPathes) {
-        _cancelindexPathes =[NSMutableArray array];
-    }
-    return _cancelindexPathes;
-}
-
--(NSMutableArray *)courseSelecteds
-{
-    if (!_courseSelecteds) {
-        _courseSelecteds =[NSMutableArray array];
-    }
-    return _courseSelecteds;
-}
-
--(NSMutableArray *)cancelCourseList
-{
-    if (!_cancelCourseList) {
-        _cancelCourseList =[NSMutableArray array];
-    }
-    return _cancelCourseList;
-}
-
--(NSMutableArray *)cancelUniversityList
-{
-    if (!_cancelUniversityList) {
-        _cancelUniversityList =[NSMutableArray array];
-    }
-    return _cancelUniversityList;
-}
-
-//分区的ID，分别放在不同的数组下
--(void)getcourseidGroups
-{
-    _idGroups = [NSMutableArray array];
+    float distance = up ? 50.0 : -50.0;
     
+    [UIView animateWithDuration:0.25 animations:^{
     
-    for (NSDictionary *universityInfo in self.responds) {
+        CGPoint center = self.cancelBottomButton.center;
+        center.y += distance;
+        self.cancelBottomButton.center = center;
+        self.bottomView.hidden = !up;
+    }];
+}
+
+//提交删除按钮
+-(void)commitCancelList:(UIButton *)sender
+{
+    if (self.cancelCourseList.count == 0 && self.cancelUniversityList.count == 0) {
         
-        NSArray  *applies   = [universityInfo valueForKey:@"applies"];
+        AlerMessage(GDLocalizedString(@"ApplicationList-please"));
         
-        NSMutableArray *group = [NSMutableArray array];
-        
-        for (NSDictionary *courseInfo in applies) {
-            
-            [group addObject:courseInfo[@"_id"]];
-            
-        }
-        
-        [_idGroups addObject:group];
+    }else{
+        UIAlertView *aler =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"ApplicationList-comfig") delegate:self cancelButtonTitle:GDLocalizedString(@"NetRequest-OK") otherButtonTitles:GDLocalizedString(@"Potocol-Cancel"), nil];
+        [aler show];
     }
+}
+
+
+//编辑按钮方法
+-(void)EditClick:(UIBarButtonItem *)sender
+{
+    NSString *cancelTitle =  GDLocalizedString(@"Me-007");
+    NSString *editTitle = GDLocalizedString(@"ApplicationList-Edit");
+    if ([sender.title isEqualToString:editTitle] ) {
+        
+        sender.title = cancelTitle;
+        self.rightButtonTitle = sender.title;
+        [self bottomUp:NO];
+        
+    }else{
+        sender.title = editTitle;
+        self.rightButtonTitle =  sender.title;
+        [self.cancelCourseList removeAllObjects];
+        [self.cancelUniversityList removeAllObjects];
+        [self.cancelSetions removeAllObjects];
+        [self.cancelindexPathes removeAllObjects];
+        [self bottomUp:YES];
+        
+    }
+    [_waitingTableView reloadData];
+    [self.courseSelecteds removeAllObjects];
+    [self configureSelectedCoursedID:self.courseSelecteds];
+    
 }
 
 

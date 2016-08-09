@@ -104,7 +104,7 @@
 
 -(void)searchViewWithAnimation:(BOOL)animated
 {
-    self.LeftBtn.hidden = animated;
+    self.LeftBtn.hidden  = animated;
     self.RightBtn.hidden = !animated;
     [UIView animateWithDuration:0.25 animations:^{
         

@@ -53,5 +53,6 @@
 @property (copy, nonatomic) void (^dismissCompletion)(BaseViewController *vc);
 - (BOOL)checkNetWorkReaching;
 - (BOOL)checkNetworkState;
+- (void)loginView;
 
 @end

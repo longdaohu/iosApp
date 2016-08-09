@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YYSingleNewsBO.h"
-@interface AdvertiseViewController : UIViewController
+@interface AdvertiseViewController : BaseViewController
 @property(nonatomic,copy)NSString *path;
 @property(nonatomic,copy)NSString *advertise_title;
 @property(nonatomic,strong)YYSingleNewsBO *StatusBarBannerNews;

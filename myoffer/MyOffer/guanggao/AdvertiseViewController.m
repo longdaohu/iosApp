@@ -73,9 +73,9 @@
     
     self.title = self.path ? @"" :self.advertise_title;
     self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
-//    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
+    self.URLpath =self.path ? self.path : [NSString stringWithFormat:@"%@",self.StatusBarBannerNews.message_url];
 //        self.URLpath = @"http://www.myofferdemo.com/demo/appJump";
-        self.URLpath = @"http://www.myofferdemo.com/superMentor.html";
+//        self.URLpath = @"http://www.myofferdemo.com/superMentor.html";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.URLpath]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     [self.web_wk loadRequest:request];

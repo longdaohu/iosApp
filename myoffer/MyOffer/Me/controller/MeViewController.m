@@ -12,16 +12,6 @@ typedef enum {
     OptionButtonTypeZhuangTai
 }OptionButtonType;//表头按钮选项
 
-typedef enum {
-    CenterClickItemTypeNoClick,
-    CenterClickItemTypePipei,
-    CenterClickItemTypeFavor,
-    CenterClickItemTypeServiceMall,
-    CenterClickItemTypeApplyList,
-    CenterClickItemTypeApplyStatus,
-    CenterClickItemTypeApplyMatial,
-    CenterClickItemTypeMyoffer
-}CenterClickItemType;
 
 
 #import "MeViewController.h"
@@ -52,8 +42,7 @@ typedef enum {
 @property(nonatomic,strong)NSArray *CelldDetailes;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
-//已选择服务项
-@property(nonatomic,assign)CenterClickItemType clickType;
+
 
 @end
 
@@ -72,11 +61,11 @@ typedef enum {
 //页面出现时预加载功能
 -(void)presentViewWillAppear{
 
-    [self getRequestCenterSourse];
+     [self getRequestCenterSourse];
     
      [self leftViewMessage];
     
-    [self userDidClickItem];
+     [self userDidClickItem];
     
      self.tabBarController.tabBar.hidden = NO;
 
@@ -146,7 +135,7 @@ typedef enum {
     }else{
         
         [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-        self.myCountResponse = nil;
+         self.myCountResponse = nil;
         [self.tableView reloadData];
         
     }
@@ -182,14 +171,14 @@ typedef enum {
     };
     
     XJHUtilDefineWeakSelfRef
-    NSString *list = GDLocalizedString(@"center-application");
-    NSString *listSub = GDLocalizedString(@"center-appDetail");
-    NSString *status = GDLocalizedString(@"center-status");
-    NSString *statusSub = GDLocalizedString(@"center-statusDetail");
-    NSString *material = GDLocalizedString(@"center-document" );
+    NSString *list        = GDLocalizedString(@"center-application");
+    NSString *listSub     = GDLocalizedString(@"center-appDetail");
+    NSString *status      = GDLocalizedString(@"center-status");
+    NSString *statusSub   = GDLocalizedString(@"center-statusDetail");
+    NSString *material    = GDLocalizedString(@"center-document" );
     NSString *materialSub = GDLocalizedString(@"center-documentDetail" );
-    NSString *myoffer = GDLocalizedString(@"center-myoffer" );
-    NSString *myofferSub = GDLocalizedString(@"center-myofferDetail" );
+    NSString *myoffer     = GDLocalizedString(@"center-myoffer" );
+    NSString *myofferSub  = GDLocalizedString(@"center-myofferDetail" );
     self.CelldDetailes =@[listSub,statusSub,materialSub,myofferSub];
     self.cells = @[@[
                        newCell(list, [UIImage imageNamed:@"center_yixiang"],
@@ -214,11 +203,12 @@ typedef enum {
 
 }
 
+
 -(void)makeNavigationView
 {
  
     XJHUtilDefineWeakSelfRef
-    self.leftView =[LeftBarButtonItemView leftView];
+    self.leftView             = [LeftBarButtonItemView leftView];
     self.leftView.actionBlock = ^(UIButton *sender){
         [weakSelf showLeftMenu];
     };
@@ -247,7 +237,6 @@ typedef enum {
             [self centerPageClickWithItemType:self.clickType];
 
         });
-
      }
 }
 //实现不同选项跳转
@@ -354,7 +343,7 @@ typedef enum {
         UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
         NSURL *url            = [NSURL URLWithString:@"http://appstore.com/qq"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate = self;
+        webView.delegate      = self;
         [webView loadRequest:request];
         [self.view addSubview:webView];
      }
@@ -478,7 +467,6 @@ typedef enum {
 }
 //跳转申请MYOFFER
 -(void)CaseMyoffer{
-    
     
     MyOfferViewController *vc = [[MyOfferViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

@@ -37,7 +37,6 @@
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -67,10 +66,10 @@
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, 64, 0);
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.rowHeight = KDUtilSize(100);
+    self.tableView.contentInset    =  UIEdgeInsetsMake(0, 0, 64, 0);
+    self.tableView.dataSource      = self;
+    self.tableView.delegate        = self;
+    self.tableView.rowHeight       = KDUtilSize(100);
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.backgroundColor = BACKGROUDCOLOR;
     [self.view addSubview:self.tableView];
@@ -91,9 +90,9 @@
 
 -(void)makeOtherView
 {
-    self.title = GDLocalizedString(@"Left-noti");
-    self.nextPage = 0;
-    self.NDataView =[XWGJnodataView noDataView];
+    self.title            = GDLocalizedString(@"Left-noti");
+    self.nextPage         = 0;
+    self.NDataView        = [XWGJnodataView noDataView];
     self.NDataView.hidden = YES;
     self.NDataView.contentLabel.text = GDLocalizedString(@"Left-noNoti");
     [self.view insertSubview:self.NDataView  aboveSubview:self.tableView];
@@ -104,11 +103,8 @@
 
 -(void)makeUI
 {
-    
     [self makeTableView];
-    
     [self makeOtherView];
-    
 }
 
 
@@ -174,7 +170,7 @@
          
      }];
 }
-
+//加载新数据
 -(void)loadNewData{
     
      self.nextPage = 0;
@@ -182,13 +178,14 @@
     [self getDataSourse:0];
 }
 
-
+//加载更多数据
 -(void)loadMoreData
 {
     
      [self getDataSourse:self.nextPage];
     
 }
+#pragma mark  UITableViewDelegate UITableViewData
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     

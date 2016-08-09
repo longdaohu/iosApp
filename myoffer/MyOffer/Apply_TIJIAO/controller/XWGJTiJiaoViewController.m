@@ -31,7 +31,6 @@ typedef enum {
 }PickerViewType;//表头按钮选项
 
 
-
 @interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate,TiJiaoFooterViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
 @property(nonatomic,strong)NSArray *Groups;
@@ -184,19 +183,16 @@ typedef enum {
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:@"page提交申请"];
-    
+     [super viewWillAppear:animated];
+     [MobClick beginLogPageView:@"page提交申请"];
 }
 
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:@"page提交申请"];
+     [super viewWillDisappear:animated];
+     [MobClick endLogPageView:@"page提交申请"];
     
 }
 
@@ -238,6 +234,7 @@ typedef enum {
     }];
 
 }
+
 -(void)makeComitButton
 {
     KDEasyTouchButton *commit = [[KDEasyTouchButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TableView.frame), XScreenWidth, 50)];
@@ -272,6 +269,7 @@ typedef enum {
     self.TableView.tableHeaderView = headerView;
 }
 
+//添加表尾
 -(void)makeFooterView
 {
     
@@ -485,8 +483,6 @@ typedef enum {
 }
 
 
-
-
 -(NSInteger)getIndexWithTextFieldName:(NSString *)ItemName andItems:(NSArray *)items andGroups:(NSArray *)groupCEs andKeyWord:(NSString *)key
 {
     NSInteger Index = 0;
@@ -684,7 +680,6 @@ typedef enum {
 }
 
 #pragma mark ----UIPickerViewDataSource, UIPickerViewDelegate
-
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
     return 1;
@@ -967,7 +962,6 @@ typedef enum {
             section = indexPath.section + 1;
         }
         
-        
     }else{
         
         if (row > 5) {
@@ -981,7 +975,7 @@ typedef enum {
         
     }
 
-    NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:row inSection:section];
+    NSIndexPath *nextIndex             = [NSIndexPath indexPathForRow:row inSection:section];
     XWGJYiXiangTableViewCell *nextCell = [self.TableView cellForRowAtIndexPath:nextIndex];
     [nextCell.ContentTF becomeFirstResponder];
 
@@ -991,7 +985,7 @@ typedef enum {
 -(void)TiJiaoFooterView:(TiJiaoFooterView *)footerView didClick:(UIButton *)sender{
     
     
-    if (10 ==sender.tag) {
+    if (10 == sender.tag) {
         
         sender.selected                = !sender.selected;
         self.commitBtn.enabled         =  sender.selected;
@@ -1051,6 +1045,11 @@ typedef enum {
 //提交用户申请资料
 -(void)commitUserInfo
 {
+    
+    
+    
+ 
+
     RequireLogin
    
     for (XWGJTJSectionGroup *group in self.Groups) {
@@ -1088,6 +1087,8 @@ typedef enum {
     
     XJHUtilDefineWeakSelfRef
     
+    
+    
     [self startAPIRequestWithSelector: @"POST api/account/applicationdata" parameters:@{@"applicationData":parameters} success:^(NSInteger statusCode, id response) {
         
         [weakSelf
@@ -1110,7 +1111,7 @@ typedef enum {
          }];
     }];
   
-   
+  
   
 }
 
@@ -1132,7 +1133,7 @@ typedef enum {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-//KDUtilRemoveNotificationCenterObserverDealloc
+
 
 - (void)dealloc{
     

@@ -31,10 +31,7 @@
 #import "ServiceMallViewController.h"
 #import "XUToolbar.h"
 
-typedef enum {
-    HomePageClickItemTypeNoClick,
-    HomePageClickItemTypePipei
-}HomePageClickItemType;
+
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeHeaderViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -62,8 +59,7 @@ typedef enum {
 @property(nonatomic,strong)XUToolbar *myToolbar;
 //自定义导航栏LeftBarButtonItem
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
-//已选择服务项
-@property(nonatomic,assign)HomePageClickItemType clickType;
+
 
 @end
 

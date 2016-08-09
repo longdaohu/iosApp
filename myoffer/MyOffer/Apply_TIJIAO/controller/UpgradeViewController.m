@@ -52,13 +52,10 @@ typedef enum {
 
 -(void)setServiceResponse:(NSDictionary *)serviceResponse{
 
-
-    
-    _serviceResponse = serviceResponse;
+     _serviceResponse = serviceResponse;
     
     BOOL serviceB = [serviceResponse[@"paid_sku_name"] containsString:@"DIY升级免费服务包"];
     BOOL serviceC =  [serviceResponse[@"paid_sku_name"] containsString:@"VIP尊享增值服务包"];
- 
     
     //10、根据用户已购买套餐调整页面元素
     if (serviceB) {
@@ -75,11 +72,7 @@ typedef enum {
         
     }
  
- 
 }
-
-
-
 
 
 -(void)makeUI{
@@ -197,7 +190,24 @@ typedef enum {
     self.payBtn.frame = CGRectMake(payX, popY, popW, popH);
     self.payBtn.enabled = NO;
     
- 
+// 
+//    BOOL serviceB = [self.serviceResponse[@"paid_sku_name"] containsString:@"DIY升级免费服务包"];
+//    BOOL serviceC =  [self.serviceResponse[@"paid_sku_name"] containsString:@"VIP尊享增值服务包"];
+    
+    //10、根据用户已购买套餐调整页面元素
+//    if (serviceB) {
+//        
+//        [self serviceContainB:self.serviceResponse];
+//        
+//    }else if(serviceC){
+//        
+//        [self serviceContainC:self.serviceResponse];
+//        
+//    }else{
+//        
+//        [self serviceContainA:self.serviceResponse];
+//     }
+    
 }
 
 
@@ -206,7 +216,6 @@ typedef enum {
 -(void)serviceContainA:(NSDictionary *)response{
 
     BOOL Iphone5 = XScreenHeight <= 568.0 ;
-
     self.BServiceView.serviceDict = response[@"SKUs"][0];
     self.CServiceView.serviceDict = response[@"SKUs"][1];
 

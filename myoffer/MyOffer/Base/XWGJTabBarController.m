@@ -74,13 +74,13 @@
 
 -(void)tabbaritem:(NSInteger)index nomalImage:(NSString *)nomalName  selectImage:(NSString *)selectName
 {
-    UITabBar *tabBar = self.tabBar;
-    UITabBarItem *item = [tabBar.items objectAtIndex:index];
-    item.tag = index;
-    UIImage *NomalImage = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
+    UITabBar *tabBar     = self.tabBar;
+    UITabBarItem *item   = [tabBar.items objectAtIndex:index];
+    item.tag             = index;
+    UIImage *NomalImage  = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
     UIImage *SelectImage = [UIImage imageNamed:selectName];//@"catigory_select"];
-    item.image  =[NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item.selectedImage = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item.image           = [NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item.selectedImage   = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.titlePositionAdjustment = UIOffsetMake(0, -2);
 }
 
@@ -93,18 +93,18 @@
 
 -(void)makeNavImage
 {
-    NSString *homePath = NSHomeDirectory();
-    NSString *documentPath = [homePath stringByAppendingPathComponent:@"Documents"];
+    NSString *homePath        = NSHomeDirectory();
+    NSString *documentPath    = [homePath stringByAppendingPathComponent:@"Documents"];
     NSFileManager *fileManger = [NSFileManager defaultManager];
-    NSArray *fileItems = [fileManger contentsOfDirectoryAtPath:documentPath error:nil];
+    NSArray *fileItems        = [fileManger contentsOfDirectoryAtPath:documentPath error:nil];
     
     if (![fileItems containsObject:@"nav"]) {
         
-        CGFloat navHeight = 124;
-        UIView *navView =[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, navHeight)];
+        CGFloat navHeight         = 124;
+        UIView *navView           = [[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, navHeight)];
         CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.frame = navView.bounds;
-        gradient.colors = [NSArray arrayWithObjects:
+        gradient.frame            = navView.bounds;
+        gradient.colors           = [NSArray arrayWithObjects:
                            (id)[UIColor colorWithRed:45/255.0 green:195/255.0 blue:228/255.0 alpha:1].CGColor,
                            (id)[UIColor colorWithRed:154/255.0 green:65/255.0 blue:147/255.0 alpha:1].CGColor,
                            nil];
@@ -116,27 +116,27 @@
         [self writeToFileWithImage:self.navImage fileName:@"nav"];
 
       
-        NSMutableArray *temps =[NSMutableArray array];
-        CGFloat leftMargin = 10;
-        CGFloat btnw = (XScreenWidth - leftMargin *2)/3;
-        CGFloat btnh = TOP_HIGHT;
-        CGFloat btny = navHeight - btnh - 10;
-        for (NSInteger index = 0; index < 3; index++){
+        NSMutableArray *temps = [NSMutableArray array];
+        CGFloat leftMargin    = 10;
+        CGFloat btnw          = (XScreenWidth - leftMargin *2)/3;
+        CGFloat btnh          = TOP_HIGHT;
+        CGFloat btny          = navHeight - btnh - 10;
+        for (NSInteger index  = 0; index < 3; index++){
             
             CGFloat btnx = btnw * index + leftMargin;
-            UIButton *sender =[[UIButton alloc] initWithFrame:CGRectMake(btnx, btny ,btnw, btnh)];
+            UIButton *sender  = [[UIButton alloc] initWithFrame:CGRectMake(btnx, btny ,btnw, btnh)];
             [navView addSubview:sender];
-            sender.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
-            sender.layer.cornerRadius = 17;
+            sender.layer.borderColor   = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+            sender.layer.cornerRadius  = 17;
             sender.layer.masksToBounds = YES;
-            sender.tag = index;
+            sender.tag                 = index;
             [sender setBackgroundImage:[self makeNewImageWithRect:sender.frame] forState:UIControlStateNormal];
-            UIImage *senderImage  =[self getItemImageFromView:sender];
+            UIImage *senderImage       = [self getItemImageFromView:sender];
             [temps addObject:senderImage];
           }
         
         NSData *senderItemData = [NSKeyedArchiver archivedDataWithRootObject:[temps copy]];
-        NSString *item_path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"items"];
+        NSString *item_path    = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"items"];
         [senderItemData writeToFile:item_path atomically:YES];
         
     }
@@ -170,7 +170,6 @@
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
     UIGraphicsEndImageContext();
     
     return image;
@@ -185,7 +184,7 @@
     //转化为位图
     CGImageRef temImg = self.navImage.CGImage;
     //根据范围截图
-    temImg=CGImageCreateWithImageInRect(temImg, clipRect);
+    temImg = CGImageCreateWithImageInRect(temImg, clipRect);
     
     //得到新的图片
     UIImage *newImage = [UIImage imageWithCGImage:temImg];
@@ -217,6 +216,31 @@
     
 }
 
+
+-(void)contentViewIsOpen:(BOOL)open
+{
+    
+    XWGJNavigationController *nav =  (XWGJNavigationController *)self.selectedViewController;
+    switch (self.selectedIndex) {
+        case 0:{
+            HomeViewContViewController *home = ( HomeViewContViewController *)nav.viewControllers[0];
+            home.clickType = HomePageClickItemTypeNoClick;
+        }
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:{
+            MeViewController *me = ( MeViewController *)nav.viewControllers[0];
+            me.clickType = CenterClickItemTypeNoClick;
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
 
 
 @end

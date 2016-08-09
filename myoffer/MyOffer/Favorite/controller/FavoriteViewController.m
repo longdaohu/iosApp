@@ -57,7 +57,7 @@
 
 -(void)makeTableView
 {
-    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64) style:UITableViewStylePlain];
+    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64) style:UITableViewStyleGrouped];
     self.FavoriteTableView.dataSource = self;
     self.FavoriteTableView.delegate = self;
     [self.view  addSubview:self.FavoriteTableView];
@@ -70,8 +70,7 @@
 -(void)makeOtherView{
 
     self.title = GDLocalizedString(@"Setting-002");
-    self.FavoriteTableView.rowHeight = University_HEIGHT;
-}
+ }
 
 -(void)makeNodataView
 {
@@ -134,16 +133,31 @@
 
 #pragma mark ———————— UITableViewDataSource, UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+
+    return 0.01;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return University_HEIGHT;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return self.Result.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.Result.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
   
-    UniversityFrameObj *uniFrame = self.Result[indexPath.row];
+    UniversityFrameObj *uniFrame = self.Result[indexPath.section];
     UniversityObj *uni =uniFrame.uniObj;
     cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
@@ -157,6 +171,7 @@
     UniversityFrameObj *uniFrame = self.Result[indexPath.row];
     UniversityObj *uni =uniFrame.uniObj;
     [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
+    
 }
 
 

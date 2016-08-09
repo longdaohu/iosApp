@@ -43,10 +43,10 @@
     if (self) {
         
         for (int i = 0 ;i < 4 ; i++) {
-            HeadItem *item =[[HeadItem alloc] init];
-            item.iconTag = i;
-            item.title = self.itemTitles[i];
-            item.icon = self.itemImages[i];
+            HeadItem *item = [[HeadItem alloc] init];
+            item.iconTag   = i;
+            item.title     = self.itemTitles[i];
+            item.icon      = self.itemImages[i];
             
             item.actionBlock = ^(UIButton *sender){
                 
@@ -75,8 +75,8 @@
         
         HeadItem *item = (HeadItem *)self.subviews[i];
          
-         CGFloat x = 20 + i * (20 + itemW);
-         CGFloat y = 0;
+         CGFloat x  = 20 + i * (20 + itemW);
+         CGFloat y  = 0;
          item.frame = CGRectMake(x, y, itemW, itemH);
       }
    

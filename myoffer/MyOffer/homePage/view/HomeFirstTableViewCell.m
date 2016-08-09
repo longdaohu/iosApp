@@ -36,13 +36,13 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.IconView = [[UIImageView alloc] init];
-        self.IconView.layer.cornerRadius = 5;
+        self.IconView                     = [[UIImageView alloc] init];
+        self.IconView.layer.cornerRadius  = 5;
         self.IconView.layer.masksToBounds = YES;
-        self.IconView.contentMode = UIViewContentModeScaleAspectFill;
+        self.IconView.contentMode         = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.IconView];
         
-        self.contentView.backgroundColor = BACKGROUDCOLOR;
+        self.contentView.backgroundColor  = BACKGROUDCOLOR;
         
     }
     return self;

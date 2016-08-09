@@ -58,7 +58,7 @@
 #define University_HEIGHT  100 + (XScreenWidth - 320) * 0.1
 #define USER_EN [[InternationalControl userLanguage] containsString:@"en"]
 #define LOGIN [[AppDelegate sharedDelegate] isLogin]
-#define RequireLogin if (![AppDelegate sharedDelegate].isLogin) { [[AppDelegate sharedDelegate] presentLoginAndRegisterViewControllerAnimated:YES]; return;}
+#define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
 #define DOMAINURL  @"http://www.myofferdemo.com/"
