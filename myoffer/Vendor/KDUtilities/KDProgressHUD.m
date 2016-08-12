@@ -50,14 +50,14 @@
 - (void)setProgress:(float)newProgress {
     // Update display ony if showing the determinate progress view
     if (mode == KDXProgressHUDModeDeterminate) {
-        [(MBRoundProgressView *)_indicatorView setProgress:newProgress];
+        [(KBRoundProgressView *)_indicatorView setProgress:newProgress];
         [self setNeedsDisplay];
     }
 }
 
 - (float)progress {
     if (mode == KDXProgressHUDModeDeterminate) {
-        return [(MBRoundProgressView *)_indicatorView progress];
+        return [(KBRoundProgressView *)_indicatorView progress];
     } else {
         return 0;
     }
@@ -75,7 +75,7 @@
     }
 	
     if (mode == KDXProgressHUDModeDeterminate) {
-        _indicatorView = [[MBRoundProgressView alloc] init];
+        _indicatorView = [[KBRoundProgressView alloc] init];
     } else if (mode == KDXProgressHUDModeCustomView && _customView) {
         _indicatorView = _customView;
     } else {
@@ -420,7 +420,7 @@
 
 @end
 
-@implementation MBRoundProgressView
+@implementation KBRoundProgressView
 
 #pragma mark -
 #pragma mark Accessors

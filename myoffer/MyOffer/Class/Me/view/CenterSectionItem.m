@@ -35,9 +35,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        UIButton *touchBtn =[[UIButton alloc] init];
+        UIButton *touchBtn = [[UIButton alloc] init];
+        self.touchBtn      = touchBtn;
         [touchBtn setBackgroundImage:[UIImage KD_imageWithColor:[UIColor colorWithWhite:1 alpha:0.9]] forState:UIControlStateHighlighted];
-        self.touchBtn = touchBtn;
         [touchBtn addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:touchBtn];
 
@@ -47,13 +47,13 @@
         [self addSubview:iconView];
         
 
-        UILabel *titleLab =[UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
-        self.titleLab = titleLab;
+        UILabel *titleLab = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
+        self.titleLab     = titleLab;
         [self addSubview:titleLab];
         
 
-        UILabel *countLab =[UILabel labelWithFontsize:KDUtilSize(12) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
-        self.countLab = countLab;
+        UILabel *countLab = [UILabel labelWithFontsize:KDUtilSize(12) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
+        self.countLab     = countLab;
         [self addSubview:countLab];
         
         
@@ -87,7 +87,7 @@
     [super layoutSubviews];
     
     CGFloat countHeight = self.bounds.size.height;
-    CGFloat countWidth = self.bounds.size.width;
+    CGFloat countWidth  = self.bounds.size.width;
     
     CGFloat iconX = 0;
     CGFloat iconY = countHeight * 0.15;

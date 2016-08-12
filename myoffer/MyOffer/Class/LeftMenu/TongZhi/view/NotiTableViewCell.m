@@ -7,7 +7,8 @@
 //
 
 #import "NotiTableViewCell.h"
-#import "XWGJNoti.h"
+#import "NotiItem.h"
+
 @interface NotiTableViewCell ()
 @property(nonatomic,strong)UIImageView *logoView;
 @property(nonatomic,strong)UILabel *titleLab;
@@ -60,18 +61,16 @@
     return self;
 }
 
--(void)setNoti:(XWGJNoti *)noti
+-(void)setNoti:(NotiItem *)noti
 {
     _noti  = noti;
     
-    self.titleLab.text = noti.category;
-    self.subTitleLab.text = noti.summary;
-    self.timeLab.text =  noti.create_at;
-    
-    NSString *imageName =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
-    self.logoView.image = [UIImage imageNamed:imageName];
-    
-    UIImage *newImage = noti.state?nil:[UIImage imageNamed:@"message_dot"];
+    self.titleLab.text      = noti.category;
+    self.subTitleLab.text   = noti.summary;
+    self.timeLab.text       = noti.create_at;
+    NSString *imageName     =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
+    self.logoView.image     = [UIImage imageNamed:imageName];
+    UIImage *newImage       = noti.state.length ? nil:[UIImage imageNamed:@"message_dot"];
     self.NewImageView.image = newImage;
     
 }

@@ -231,10 +231,10 @@
              if (![_resultIDSet containsObject:uid]) {
                  [_resultIDSet addObject:uid];
                 
-                 UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
-                 UniversityFrameObj *uniFrame = [[UniversityFrameObj alloc] init];
-                 uniFrame.uniObj = uni;
-                 
+                 UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:obj];
+
+                 UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
+
                  [_result addObject:uniFrame];
               }
          }];

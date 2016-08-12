@@ -10,6 +10,7 @@
 #import "InteProfileViewController.h"
 #import "UniversityMapsViewController.h"
 #import "UniversityCourseViewController.h"
+#import "UniversityCourseListViewController.h"
 
 typedef enum {
     DetailClickedTypeNoClick,
@@ -252,7 +253,8 @@ typedef enum {
 
 //课程详情
 - (IBAction)viewAllCourses {
-     UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
+//    UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
+    UniversityCourseListViewController *vc = [[UniversityCourseListViewController alloc] initWithUniversityID:_universityID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

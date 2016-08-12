@@ -9,10 +9,11 @@
 
 
 #import "centerSectionView.h"
-#include "CenterSectionItem.h"
+#import "CenterSectionItem.h"
 @interface centerSectionView()
+//分隔线
 @property(nonatomic,strong)NSArray *lines;
-@property(nonatomic,strong)UIView *topLine;
+//选项数组
 @property(nonatomic,strong)NSArray *items;
 
 @end
@@ -20,6 +21,13 @@
 
 
 @implementation centerSectionView
++(instancetype)centerSectionViewWithResponse:(NSDictionary * )response{
+
+    centerSectionView *sectionView =  [[centerSectionView alloc] init];
+    sectionView.response           =  response;
+    
+    return sectionView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -28,8 +36,8 @@
         
         self.backgroundColor =XCOLOR_WHITE;
         
-        CenterSectionItem *pipei  =[CenterSectionItem viewWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所"];
-        pipei.tag = centerItemTypepipei;
+        CenterSectionItem *pipei  = [CenterSectionItem viewWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所"];
+        pipei.tag                 = centerItemTypepipei;
         pipei.actionBlack = ^(UIButton *sender){
             
             if (self.sectionBlock) {
@@ -38,8 +46,8 @@
             }
         };
         
-        CenterSectionItem *favor  =[CenterSectionItem viewWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所"];
-        favor.tag = centerItemTypefavor;
+        CenterSectionItem *favor  = [CenterSectionItem viewWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所"];
+        favor.tag                 = centerItemTypefavor;
         favor.actionBlack = ^(UIButton *sender){
          
             if (self.sectionBlock) {
@@ -47,8 +55,8 @@
                 self.sectionBlock(centerItemTypefavor);
             }
         };
-        CenterSectionItem *service  =[CenterSectionItem viewWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐"];
-        service.tag = centerItemTypeservice;
+        CenterSectionItem *service  = [CenterSectionItem viewWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐"];
+        service.tag                 = centerItemTypeservice;
         service.actionBlack = ^(UIButton *sender){
             
             if (self.sectionBlock) {
@@ -62,10 +70,10 @@
         [self addSubview:service];
         self.items = @[pipei,favor,service];
         
-        UIView *lineOne =[[UIView alloc] init];
-        UIView *lineTwo =[[UIView alloc] init];
-        UIView *lineTop =[[UIView alloc] init];
-        self.lines = @[lineOne,lineTwo,lineTop];
+        UIView *lineOne = [[UIView alloc] init];
+        UIView *lineTwo = [[UIView alloc] init];
+        UIView *lineTop = [[UIView alloc] init];
+        self.lines      = @[lineOne,lineTwo,lineTop];
         for (UIView *line in self.lines) {
             [self addSubview:line];
             line.backgroundColor = XCOLOR_LIGHTGRAY;
@@ -112,8 +120,7 @@
     
     UIView *top =self.lines[2];
     top.frame = CGRectMake(0, 0, XScreenWidth, lineW);
-    
-
+ 
 }
 
 
@@ -132,7 +139,6 @@
 
     CenterSectionItem *service  = self.items[2];
     service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
-
     
 }
 

@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@class XWGJMessage;
+@class NewsItem;
 @interface XWGJMessageFrame : NSObject
-@property(nonatomic,strong)XWGJMessage *Message;
+@property(nonatomic,strong)NewsItem *News;
 @property(nonatomic,assign)CGRect LogoFrame;
 @property(nonatomic,assign)CGRect TitleFrame;
 @property(nonatomic,assign)CGRect FocusFrame;
 @property(nonatomic,assign)CGRect TimeFrame;
-
++(instancetype)messageFrameWithMessage:(NewsItem *)message;
 @end

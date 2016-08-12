@@ -188,10 +188,10 @@
 -(UniversityFrameObj *)makeUniversityFrameWithDictionary:(NSDictionary *)uniInfor
 {
     UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:uniInfor];
-    UniversityFrameObj *uni_Frame =[[UniversityFrameObj alloc] init];
-    uni_Frame.uniObj = uniObj;
     
-    return uni_Frame;
+    UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
+
+    return uniFrame;
 }
 
 -(void)makeTableView

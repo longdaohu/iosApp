@@ -15,11 +15,13 @@
 #import "XWGJApplyRecordGroup.h"
 #import "XSearchSectionHeaderView.h"
 
+#define STATUSPAGE @"page申请状态"
+
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *TableView;
 //没有数据时显示
 @property (strong, nonatomic) XWGJnodataView *noDataView;
- //申请记录数组
+//申请记录数组
 @property(nonatomic,strong)NSArray *ApplyRecordGroups;
 
 
@@ -31,7 +33,7 @@
 {
     [super viewWillAppear:animated];
     
-    [MobClick beginLogPageView:@"page申请状态"];
+    [MobClick beginLogPageView:STATUSPAGE];
 
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
@@ -41,7 +43,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page申请状态"];
+    [MobClick endLogPageView:STATUSPAGE];
     
 }
 
@@ -83,16 +85,11 @@
     
     if (self.isBackRootViewController) {
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
-
     }
 
     
 }
 
--(void)loadNewData
-{
-     [self RequestDataSourse:YES];
-}
 
 
 - (void)viewDidLoad {
@@ -102,6 +99,12 @@
     [self makeUI];
     
     [self RequestDataSourse:NO];
+}
+
+//加载新数据
+-(void)loadNewData{
+    
+    [self RequestDataSourse:YES];
 }
 
 
@@ -124,18 +127,20 @@
     XJHUtilDefineWeakSelfRef
     [self startAPIRequestWithSelector:@"GET api/account/checklist" parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSArray *records = response[@"records"];
-        
+        NSArray *records       = response[@"records"];
         NSMutableArray *groups = [NSMutableArray array];
+        
          for (NSDictionary *record in records) {
+             
              XWGJApplyRecordGroup *group =[XWGJApplyRecordGroup ApplyRecourseGroupWithDictionary:record];
+             
              [groups addObject:group];
+             
         }
  
         weakSelf.ApplyRecordGroups = [groups copy];
         
         [weakSelf.TableView reloadData];
-        
         
         weakSelf.noDataView.hidden = records.count == 0 ? NO : YES;
 
@@ -149,7 +154,7 @@
 }
 
 
-#pragma mark ————UItableDelegate uitabledatasourse
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
  - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  University_HEIGHT;
@@ -166,15 +171,13 @@
 {
     XSearchSectionHeaderView *sectionHeader =[XSearchSectionHeaderView SectionHeaderViewWithTableView:tableView];
     sectionHeader.RecommendMV.hidden = YES;
-    XWGJApplyRecordGroup *group = self.ApplyRecordGroups[section];
-    UniversityObj *uni =group.universityFrame.uniObj;
-     sectionHeader.IsStar = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
-    sectionHeader.RANKTYPE = RANKTI;
+    XWGJApplyRecordGroup *group      = self.ApplyRecordGroups[section];
+    UniversityObj *uni      = group.universityFrame.uniObj;
+    sectionHeader.IsStar    = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
+    sectionHeader.RANKTYPE  = RANKTI;
     sectionHeader.uni_Frame = group.universityFrame;
-
     
     return sectionHeader;
-
 }
 
 
@@ -203,6 +206,8 @@
     
 }
 
+
+//返回RootViewController
 -(void)popBack{
 
     [self.navigationController popToRootViewControllerAnimated:YES];

@@ -18,8 +18,10 @@
     }
     return self;
 }
+
 + (instancetype)CreateCategoryItemWithTitle:(NSString *)titleName andLastPage:(NSInteger)page
 {
     return [[self alloc] initCategoryItemWithTitle:titleName andLastPage:page];
 }
+
 @end

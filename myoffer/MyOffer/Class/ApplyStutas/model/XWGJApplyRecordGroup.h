@@ -16,7 +16,6 @@
 @property(nonatomic,strong)XWGJApplyRecord *record;
 
 +(instancetype)ApplyRecourseGroupWithDictionary:(NSDictionary *)recordDic;
--(instancetype)initWithDictionary:(NSDictionary *)recordDic;
 
 
 @end

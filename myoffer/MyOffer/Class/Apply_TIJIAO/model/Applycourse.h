@@ -13,7 +13,6 @@
 @property(nonatomic,copy)NSString *courseName;
 @property(nonatomic,copy)NSString *courseID;
  
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
 + (instancetype)applyCourseWithDictionary:(NSDictionary *)dict;
 
 @end

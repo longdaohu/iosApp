@@ -24,8 +24,7 @@ typedef enum {
 @property(nonatomic,assign)CGFloat cellHeigh;
 @property(nonatomic,assign)XcellState cellState;
 @property(nonatomic,strong)NSArray *items;
-
 @property(nonatomic,strong)FiltContent *content;
-
++(instancetype)FilterContentFrameWithContent:(FiltContent *)content;
 
 @end

@@ -56,11 +56,11 @@
         [self addSubview:self.TitleLabel];
         self.TitleLabel.hidden = USER_EN ? YES : NO;
  
-        CGFloat  subFontSize  = USER_EN? KDUtilSize(UNIVERISITYTITLEFONT) : KDUtilSize(UNIVERISITYSUBTITLEFONT);
-        self.SubTitleLabel =[self getLabelWithFontSize:subFontSize  andTextColor:XCOLOR_BLACK];
+        CGFloat  subFontSize              = USER_EN? KDUtilSize(UNIVERISITYTITLEFONT) : KDUtilSize(UNIVERISITYSUBTITLEFONT);
+        self.SubTitleLabel                = [self getLabelWithFontSize:subFontSize  andTextColor:XCOLOR_BLACK];
          self.SubTitleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-        self.SubTitleLabel.numberOfLines = 2;
-        self.SubTitleLabel.clipsToBounds = YES;
+        self.SubTitleLabel.numberOfLines  = 2;
+        self.SubTitleLabel.clipsToBounds  = YES;
         [self addSubview:self.SubTitleLabel];
         
         self.LocalLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYLOCALFONT)   andTextColor:XCOLOR_DARKGRAY];
@@ -74,9 +74,9 @@
         [self addSubview:self.StarBackground];
         
         for (NSInteger i = 0; i<5; i++) {
-            UIImageView *mv =[[UIImageView alloc] init];
-            mv.contentMode = UIViewContentModeScaleAspectFit;
-            mv.image = [UIImage imageNamed:@"star"];
+            UIImageView *mv = [[UIImageView alloc] init];
+            mv.contentMode  = UIViewContentModeScaleAspectFit;
+            mv.image        = [UIImage imageNamed:@"star"];
             [self.StarBackground addSubview:mv];
         }
         
@@ -89,9 +89,10 @@
 
 -(UILabel *)getLabelWithFontSize:(CGFloat)fontSize andTextColor:(UIColor *)textColor
 {
-    UILabel *Lab =[[UILabel alloc] init];
+    UILabel *Lab  = [[UILabel alloc] init];
     Lab.textColor = textColor;
-    Lab.font =[UIFont systemFontOfSize:fontSize];
+    Lab.font      = [UIFont systemFontOfSize:fontSize];
+    
     return Lab;
 }
 
@@ -102,16 +103,16 @@
     UniversityObj *uniObj = uni_Frame.uniObj;
     
     [self.LogoMView.logoImageView KD_setImageWithURL:uniObj.logoName];
-    self.LogoMView.frame = uni_Frame.LogoFrame;
+    self.LogoMView.frame  = uni_Frame.LogoFrame;
 
-    self.TitleLabel.text = uniObj.titleName;
+    self.TitleLabel.text  = uniObj.titleName;
     self.TitleLabel.frame = uni_Frame.TitleFrame;
 
 
-    self.SubTitleLabel.text = [[InternationalControl userLanguage] containsString:@"en"]?uniObj.titleName:uniObj.subTitleName;
+    self.SubTitleLabel.text  = [[InternationalControl userLanguage] containsString:@"en"]?uniObj.titleName:uniObj.subTitleName;
     self.SubTitleLabel.frame = uni_Frame.SubTitleFrame;
 
-    self.LocalLabel.text =[NSString stringWithFormat:@"%@：%@- %@- %@",GDLocalizedString(@"UniversityDetail-005"),uniObj.countryName, uniObj.stateName,uniObj.cityName];
+    self.LocalLabel.text  = [NSString stringWithFormat:@"%@：%@- %@- %@",GDLocalizedString(@"UniversityDetail-005"),uniObj.countryName, uniObj.stateName,uniObj.cityName];
     self.LocalLabel.frame = uni_Frame.LocalFrame;
 
  
@@ -123,40 +124,36 @@
 
     if (!self.flag) {
 
-              NSString   *rankStr01 = uniObj.RANKTIName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
+             NSString *rankStr01 = uniObj.RANKTIName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
              self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
 
  
     }else{
 
-        self.RankLabel.text =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
- 
+        self.RankLabel.text       = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         self.StarBackground.frame = uni_Frame.starBgFrame;
 
         //用于防止数据异常太大出现冲突情况
         NSInteger StarCount =  uniObj.RANKTIName.integerValue > 5 ? 5 : uniObj.RANKTIName.integerValue;
 
-        for (NSInteger i =0; i < self.StarBackground.subviews.count; i++) {
+        for (NSInteger i = 0; i < self.StarBackground.subviews.count; i++) {
 
             UIImageView *imageV = (UIImageView *)self.StarBackground.subviews[i];
-
-            imageV.frame = CGRectMake([uni_Frame.starFrames[i] integerValue], 0, 15, 15);
+            imageV.frame        = CGRectMake([uni_Frame.starFrames[i] integerValue], 0, 15, 15);
         }
 
 
-        for (NSInteger i =0; i < StarCount; i++) {
+        for (NSInteger i = 0; i < StarCount; i++) {
 
             UIImageView *mv = (UIImageView *)self.StarBackground.subviews[i];
-
-            mv.hidden = NO;
+            mv.hidden       = NO;
 
         }
 
         for (NSInteger i = StarCount ; i < self.StarBackground.subviews.count; i++) {
 
             UIImageView *mv = (UIImageView *)self.StarBackground.subviews[i];
-            
-            mv.hidden = YES;
+            mv.hidden       = YES;
         }
  
         

@@ -8,7 +8,7 @@
 
 #import "XWGJMessageTableViewCell.h"
 #import "XWGJMessageFrame.h"
-#import "XWGJMessage.h"
+#import "NewsItem.h"
 
 @interface XWGJMessageTableViewCell ()
 //图片
@@ -81,24 +81,23 @@
 
 
 
-
 -(void)setMessageFrame:(XWGJMessageFrame *)messageFrame
 {
     _messageFrame =  messageFrame ;
 
-    [self.Logo KD_setImageWithURL:messageFrame.Message.LogoName];
+    [self.Logo KD_setImageWithURL:messageFrame.News.LogoName];
     self.Logo.frame = messageFrame.LogoFrame;
 
     
-    self.TitleLabel.text = messageFrame.Message.messageTitle;
+    self.TitleLabel.text = messageFrame.News.messageTitle;
     self.TitleLabel.frame = messageFrame.TitleFrame;
     
-    NSString *time = [messageFrame.Message.Update_time substringToIndex:10];
+    NSString *time = [messageFrame.News.Update_time substringToIndex:10];
     [self.TimeBtn setTitle:time forState:UIControlStateNormal];
     self.TimeBtn.frame = messageFrame.TimeFrame;
 
     
-    NSString *count = [NSString stringWithFormat:@"%@",messageFrame.Message.FocusCount];
+    NSString *count = [NSString stringWithFormat:@"%@",messageFrame.News.FocusCount];
     [self.FocusBtn setTitle:count forState:UIControlStateNormal];
     self.FocusBtn.frame = messageFrame.FocusFrame;
     
@@ -110,7 +109,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 @end

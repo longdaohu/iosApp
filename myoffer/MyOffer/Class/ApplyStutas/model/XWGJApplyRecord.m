@@ -20,7 +20,8 @@
     if (self) {
         
            self.Status = recordDic[@"state"];
-           self.Course =[Applycourse applyCourseWithDictionary:recordDic[@"course"]];
+        
+           self.Course = [Applycourse applyCourseWithDictionary:recordDic[@"course"]];
     }
     
     return self;

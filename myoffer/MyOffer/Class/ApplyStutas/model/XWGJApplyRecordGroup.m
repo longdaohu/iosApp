@@ -24,13 +24,10 @@
     self =[super  init];
     if (self) {
         
-        self.university = [UniversityObj createUniversityWithUniversityInfo:recordDic[@"university"]];
-        self.universityFrame =[[UniversityFrameObj alloc] init];
-        self.universityFrame.uniObj = self.university;
-        
-        self.record = [XWGJApplyRecord ApplyStatusWithDictionary:recordDic];
-        
-
+        self.university      = [UniversityObj createUniversityWithUniversityInfo:recordDic[@"university"]];
+        self.universityFrame = [UniversityFrameObj UniversityFrameWithUniversity:self.university];
+        self.record          = [XWGJApplyRecord ApplyStatusWithDictionary:recordDic];
+ 
     }
     
     return self;

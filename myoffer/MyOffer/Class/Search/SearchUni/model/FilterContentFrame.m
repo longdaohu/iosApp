@@ -15,6 +15,14 @@
 @end
 
 @implementation FilterContentFrame
++(instancetype)FilterContentFrameWithContent:(FiltContent *)content{
+
+    FilterContentFrame *filerFrame = [[FilterContentFrame alloc] init];
+    
+    filerFrame.content = content;
+    
+    return filerFrame;
+}
 
 -(void)setContent:(FiltContent *)content
 {
@@ -23,10 +31,10 @@
     
     CGSize titleSize = [content.titleName KD_sizeWithAttributeFont:FontWithSize(16)];
     
-    CGFloat logoX = 15;
-    CGFloat logoY = 15;
-    CGFloat logoW = content.logoName.length > 0 ? 30 : 0;
-    CGFloat logoH = titleSize.height;
+    CGFloat logoX  = 15;
+    CGFloat logoY  = 15;
+    CGFloat logoW  = content.logoName.length > 0 ? 30 : 0;
+    CGFloat logoH  = titleSize.height;
     self.logoFrame = CGRectMake(logoX, logoY, logoW, logoH);
     
     

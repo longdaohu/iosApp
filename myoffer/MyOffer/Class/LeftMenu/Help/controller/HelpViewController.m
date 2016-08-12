@@ -10,6 +10,8 @@
 #import "DetailWebViewController.h"
 
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate>
+/*
+ */
 @property(nonatomic,strong)UITableView *helpTableView;
 @property(nonatomic,strong)NSArray *helpList;
 
@@ -21,7 +23,6 @@
 -(NSArray *)helpList
 {
     if (!_helpList) {
-        
         _helpList = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
     }
     return _helpList;

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XWGJNoti;
+@class NotiItem;
 @interface NotiTableViewCell : UITableViewCell
 //@property(nonatomic,strong)NSDictionary *cellInfor;
-@property(nonatomic,strong)XWGJNoti *noti;
+@property(nonatomic,strong)NotiItem *noti;
 @property(nonatomic,strong)UIImageView *NewImageView;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 @end

@@ -12,6 +12,9 @@
 #import "UniversityCourseCell.h"
 #import "XuFilerView.h"
 #import "XWGJnodataView.h"
+
+#define COURSEPAGE @"page课程列表"
+
 @interface UniversityCourseViewController ()<XuFilerViewDelegate> {
    // NSArray *_result;
     
@@ -38,7 +41,7 @@
 {
     [super viewWillAppear:animated];
     
-    [MobClick beginLogPageView:@"page课程列表"];
+    [MobClick beginLogPageView:COURSEPAGE];
     
 }
 
@@ -48,7 +51,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page课程列表"];
+    [MobClick endLogPageView:COURSEPAGE];
     
 }
 
@@ -150,13 +153,18 @@
      startAPIRequestWithSelector:@"GET api/university/:id/courses"
      parameters:_resquestParameters
      success:^(NSInteger statusCode, id response) {
-        for (NSDictionary *info in response[@"courses"]) {
+      
+         for (NSDictionary *info in response[@"courses"]) {
+             
             BOOL applied = [info[@"applied"] boolValue];
             
             if (applied)  {
+         
                 [_selectedIDs addObject:info[@"_id"]];
             }
         }
+         
+         NSLog(@"courses---courses- %@",response[@"courses"]);
          
            _result = [response[@"courses"] mutableCopy];
          
@@ -199,7 +207,6 @@
     UniversityCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.info =  info;
     
- 
     
     [self configureCellSelectionView:cell id:info[@"_id"]];
     

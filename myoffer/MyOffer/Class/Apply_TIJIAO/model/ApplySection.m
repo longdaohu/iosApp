@@ -38,7 +38,6 @@
 + (instancetype)applySectionWithDictionary:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
-
 }
 
 

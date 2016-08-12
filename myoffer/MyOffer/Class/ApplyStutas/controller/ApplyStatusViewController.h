@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 @interface ApplyStatusViewController : BaseViewController
+//用于判断是否返回 RootViewController
 @property(nonatomic,assign)BOOL isBackRootViewController;
 
 @end

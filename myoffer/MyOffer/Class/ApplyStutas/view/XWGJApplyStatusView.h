@@ -12,6 +12,7 @@
 @interface XWGJApplyStatusView : UITableViewHeaderFooterView
 //学校模型数据
 @property(nonatomic,strong)UniversityObj *uniObj;
+//学校Frame模型数据
 @property(nonatomic,strong)UniversityFrameObj *uni_Frame;
 //判断是世界、本国排名
 @property(nonatomic,copy)NSString *optionOrderBy;

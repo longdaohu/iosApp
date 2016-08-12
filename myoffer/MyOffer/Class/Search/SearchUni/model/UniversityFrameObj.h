@@ -30,5 +30,6 @@
 //**图标数组
 @property(nonatomic,strong)NSArray *starFrames;
 
++(instancetype)UniversityFrameWithUniversity:(UniversityObj *)university;
 
 @end

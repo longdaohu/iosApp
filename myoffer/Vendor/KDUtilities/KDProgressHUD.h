@@ -61,7 +61,7 @@ typedef enum {
 
 @end
 
-@interface MBRoundProgressView : UIView {
+@interface KBRoundProgressView : UIView {
 @private
     float _progress;
 }

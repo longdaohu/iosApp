@@ -18,7 +18,7 @@
 #import "XWGJMessageSectionView.h"
 #import "XWGJShareView.h"
 #import "XWGJMessageFrame.h"
-#import "XWGJMessage.h"
+#import "NewsItem.h"
 #import <WebKit/WebKit.h>
 
 @interface MessageDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate,WKNavigationDelegate>
@@ -245,19 +245,16 @@
                                    
                                    if (![self.NO_ID isEqualToString:MessageDic[@"_id"]]) {
                                     
-                                       XWGJMessage  *message =[XWGJMessage messageWithDictionary:MessageDic];
+                                       NewsItem  *News =[NewsItem mj_objectWithKeyValues:MessageDic];
                                        
-                                       XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
-                                       
-                                       messageFrame.Message = message;
-                                       
+                                       XWGJMessageFrame *messageFrame = [XWGJMessageFrame messageFrameWithMessage:News];
+                                        
                                        [messageFrames addObject:messageFrame];
                                    }
                                  
                                }
                                
                                weakSelf.Messages = [messageFrames copy];
-                               
                                
                                weakSelf.ArticleInfo = (NSDictionary *)response;
                                
@@ -608,7 +605,7 @@
 {
     MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
     XWGJMessageFrame *messageFrame =  self.Messages[indexPath.row];
-    detail.NO_ID = messageFrame.Message.messageID;
+    detail.NO_ID = messageFrame.News.messageID;
     [self.navigationController pushViewController:detail animated:YES];
 }
 

@@ -274,9 +274,7 @@ typedef enum {
 //分区头
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    centerSectionView *sectionView =  [[centerSectionView alloc] init];
-    
-    sectionView.response           =  self.myCountResponse;
+    centerSectionView *sectionView =  [centerSectionView centerSectionViewWithResponse:self.myCountResponse];
     sectionView.sectionBlock       =  ^(centerItemType type){
         switch (type) {
             case centerItemTypepipei:
@@ -294,8 +292,7 @@ typedef enum {
     return sectionView;
 }
 
-#pragma mark —————— UITableViewDelegate  UITableViewDataSoure
-
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 1;
@@ -326,9 +323,10 @@ typedef enum {
     if (cell.action) cell.action();
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return  80 * APPSIZE.width/320;
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return  80 + (XScreenWidth - 320) * 0.2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -336,7 +334,8 @@ typedef enum {
     return 55;
 }
 
-#pragma mark  ————————————  UIAlertViewDelegate
+
+#pragma mark ——— UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
      if (buttonIndex) { //跳转到QQ下载页面
@@ -377,10 +376,10 @@ typedef enum {
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
         [MobClick event:@"KeFu"];
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url         = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
+        UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
+        NSURL *url            = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate = self;
+        webView.delegate      = self;
         [webView loadRequest:request];
         [self.view addSubview:webView];
         
@@ -475,9 +474,8 @@ typedef enum {
 //跳转收藏
 -(void)CaseFavoriteUniversity{
     
-    
-    [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
     [MobClick event:@"apply_like"];
+    [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
     
 }
 

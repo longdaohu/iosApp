@@ -18,4 +18,6 @@ typedef void(^centerSectionViewBlock)(centerItemType type);
 @interface centerSectionView : UIView
 @property(nonatomic,copy)centerSectionViewBlock sectionBlock;
 @property(nonatomic,strong)NSDictionary *response;
++(instancetype)centerSectionViewWithResponse:(NSDictionary * )response;
+
 @end

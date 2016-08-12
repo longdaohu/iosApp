@@ -113,9 +113,8 @@
              
                  UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
              
-                 UniversityFrameObj *uniFrame = [[UniversityFrameObj alloc] init];
-                 uniFrame.uniObj = uni;
-                 
+                 UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uni];
+             
                  [temp addObject:uniFrame];
            
          }];

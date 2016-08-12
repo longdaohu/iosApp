@@ -703,9 +703,10 @@ typedef enum {
          //添加数据源
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              
-             UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
-             UniversityFrameObj *uniFrame = [[UniversityFrameObj alloc] init];
-             uniFrame.uniObj = uni;
+             UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:obj];
+
+             UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
+
              [self.UniversityList addObject:uniFrame];
              
          }];

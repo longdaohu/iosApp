@@ -15,8 +15,8 @@
 #import "YYAutoLoopView.h"
 #import "YYSingleNewsBO.h"
 #import "XWGJNODATASHOWView.h"
-#import "XWGJMessage.h"
 #import "XUToolbar.h"
+#import "NewsItem.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -176,7 +176,7 @@
         _RequestKeys = [NSMutableArray array];
         XWGJMessageCategoryItem *life = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学生活" andLastPage:0];
         XWGJMessageCategoryItem *request = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学申请" andLastPage:0];
-        XWGJMessageCategoryItem *fee = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学费用" andLastPage:0];
+        XWGJMessageCategoryItem *fee  = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学费用" andLastPage:0];
         XWGJMessageCategoryItem *test = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学考试" andLastPage:0];
         XWGJMessageCategoryItem *news = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学新闻" andLastPage:0];
         XWGJMessageCategoryItem *visa = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学签证" andLastPage:0];
@@ -189,7 +189,6 @@
     }
     return _RequestKeys;
 }
-
 
 
 - (void)viewDidLoad {
@@ -214,21 +213,20 @@
         [weakSelf showLeftMenu];
     };
     
-     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
- 
-    UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.myToolbar.items= @[leftItem,flexItem];
 }
 
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.dataSource =self;
-    self.tableView.delegate =self;
-    self.tableView.hidden = YES;
+    self.tableView.dataSource = self;
+    self.tableView.delegate   = self;
+    self.tableView.hidden     = YES;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView =[[UIView alloc] init];
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.tableView.mj_footer       = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.view addSubview:self.tableView];
     [self buildTableHeadView];
   
@@ -492,12 +490,11 @@
 
 -(XWGJMessageFrame *)getMessgeFrameWithDictionory:(NSDictionary *)MessageDic
 {
-   
-         XWGJMessage  *message =[XWGJMessage messageWithDictionary:MessageDic];
-         XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
-         messageFrame.Message = message;
     
-        return  messageFrame;
+    NewsItem  *item                =  [NewsItem mj_objectWithKeyValues:MessageDic];
+    XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:item];
+    
+    return  messageFrame;
 }
 
 //自定义分区头
@@ -545,19 +542,19 @@
         
        [ self.autoLoopView yy_parallaxHeaderViewWithOffset:scrollView.contentOffset];
     
-       self.StatusBarBan.alpha =  scrollView.contentOffset.y / (AdjustF(200.f) - 20);
+        self.StatusBarBan.alpha =  scrollView.contentOffset.y / (AdjustF(200.f) - 20);
         
-        self.myToolbar.alpha = 1 - self.StatusBarBan.alpha  * 3;
+        self.myToolbar.alpha    = 1 - self.StatusBarBan.alpha  * 3;
         
     }
   
 }
 
-
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 
-    return 100 +KDUtilSize(0)*2;
+    return University_HEIGHT;
 }
 
 
@@ -576,23 +573,21 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
  
-    return 100 +KDUtilSize(0)*2;
+    return University_HEIGHT;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.CurrentArr.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
     if (!cell) {
         cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
     }
-    
     cell.messageFrame = self.CurrentArr[indexPath.row];
-    
     return cell;
 }
 
@@ -600,23 +595,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    XWGJMessageFrame  *messageFrame = self.CurrentArr[indexPath.row];
-    MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
-    detail.hidesBottomBarWhenPushed = YES;
-    detail.NO_ID = messageFrame.Message.messageID;
+    XWGJMessageFrame  *messageFrame     = self.CurrentArr[indexPath.row];
+    MessageDetailViewController *detail = [[MessageDetailViewController alloc] init];
+    detail.NO_ID                        = messageFrame.News.messageID;
     [self.navigationController pushViewController:detail animated:YES];
-    
- 
+  
 }
-
--(void)showLeftMenu
-{
-
-    [self.sideMenuViewController presentLeftMenuViewController];
-
-}
-
-
 
 #pragma mark - ParallaxHeaderViewDelegate
 - (void)lockScrollView:(CGFloat)maxOffset {
@@ -624,11 +608,13 @@
     [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, maxOffset) animated:NO];
 }
 
-
--(void)loadMoreData
-{
+//加载更多
+-(void)loadMoreData{
+    
      [self getDataSource:self.currentIndex andFresh:YES];
+    
 }
+
 //左侧导航item
 -(void)leftViewMessage{
     
@@ -658,7 +644,13 @@
     }
     
 }
-
+//显示侧边菜单
+-(void)showLeftMenu
+{
+    
+    [self.sideMenuViewController presentLeftMenuViewController];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

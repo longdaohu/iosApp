@@ -14,7 +14,6 @@
 @property(nonatomic,strong) UniversityFrameApplyObj *uniFrame;
 @property(nonatomic,strong)NSMutableArray *subjects;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
 + (instancetype)applySectionWithDictionary:(NSDictionary *)dict;
 
 

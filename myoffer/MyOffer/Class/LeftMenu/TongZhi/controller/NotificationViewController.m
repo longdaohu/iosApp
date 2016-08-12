@@ -10,7 +10,7 @@
 #import "DetailWebViewController.h"
 #import "NotificationViewController.h"
 #import "NotiTableViewCell.h"
-#import "XWGJNoti.h"
+#import "NotiItem.h"
 
 @interface NotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -65,7 +65,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.contentInset    =  UIEdgeInsetsMake(0, 0, 64, 0);
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
@@ -129,26 +129,18 @@
          
          if ([self.tableView.mj_header isRefreshing]) {
              
-             [self.results removeAllObjects];
-             
-         }
+              [self.results removeAllObjects];
+          }
          
-
-        
-         for (NSDictionary *info in  response[@"messages"]) {
+         for (NSDictionary *message in response[@"messages"]) {
              
-             XWGJNoti *noti = [XWGJNoti notiCreateWithDic:info];
-             
-             [self.results addObject:noti];
-             
+              [self.results  addObject:[NotiItem mj_objectWithKeyValues:message]];
          }
-         
+  
          [self.tableView.mj_header endRefreshing];
-         
          [self.tableView.mj_footer endRefreshing];
          
           self.tableView.mj_footer = PageSize > [response[@"messages"] count] ? nil : [self makeMJ_footer];
-         
          
          if ([response[@"messages"] count] == 0 && self.results.count == 0) {
              
@@ -197,7 +189,7 @@
     
     NotiTableViewCell *cell = [NotiTableViewCell cellWithTableView:tableView];
     
-    cell.noti = self.results[indexPath.row];
+    cell.noti               = self.results[indexPath.row];
     
     return cell;
 }
@@ -207,13 +199,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-     XWGJNoti *noti  = self.results[indexPath.row];
+    NotiItem *noti  = self.results[indexPath.row];
     
-    noti.state = @"Read";
+    noti.state      = @"Read";
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-    DetailWebViewController *detailVC =[[DetailWebViewController alloc] init];
+    DetailWebViewController *detailVC = [[DetailWebViewController alloc] init];
     
     detailVC.notiID = noti.NO_id;
     
@@ -231,9 +223,9 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        XWGJNoti *noti  = self.results[indexPath.row];
+        NotiItem *noti  = self.results[indexPath.row];
         
-        NSString *path = [NSString stringWithFormat:@"DELETE api/account/message/%@",noti.NO_id];
+        NSString *path  = [NSString stringWithFormat:@"DELETE api/account/message/%@",noti.NO_id];
         
         [self startAPIRequestWithSelector:path
                                parameters:nil

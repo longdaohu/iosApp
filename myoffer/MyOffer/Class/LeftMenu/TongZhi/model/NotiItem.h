@@ -1,14 +1,13 @@
 //
-//  XWGJNoti.h
+//  NotiItem.h
 //  myOffer
 //
-//  Created by xuewuguojie on 16/1/27.
+//  Created by xuewuguojie on 16/8/11.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-@interface XWGJNoti : NSObject
+@interface NotiItem : NSObject
 @property(nonatomic,copy)NSString *NO_id;
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *summary;
@@ -17,7 +16,5 @@
 @property(nonatomic,copy)NSString *category_id;
 @property(nonatomic,copy)NSString *category;
 
-+(instancetype)notiCreateWithDic:(NSDictionary *)notiInfomation;
--(instancetype)initWithDic:(NSDictionary *)notiInfomation;
 
 @end
