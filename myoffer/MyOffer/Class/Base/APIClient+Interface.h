@@ -36,8 +36,6 @@
 #define kAPISelectorWoYaoLiuXue @"POST api/fastpass"
 #define kAPISelectorCatigoryHotCities @"GET api/hotcities"
 #define kAPISelectorMessageDetail @"GET api/article/"
-
-
 //留学资讯推荐
 #define kAPISelectorArticleRecommendation @"GET api/article/recommendations"
 //留学资讯

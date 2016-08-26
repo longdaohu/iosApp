@@ -24,6 +24,9 @@
 #define LOGO_MARGIN  15.0
 #define TOP_HIGHT  34.0
 #define ITEM_MARGIN  10.0
+#define   XPERCENT          XScreenWidth/320
+#define   XMARGIN           XPERCENT * 8
+#define   XFONT(size)        [UIFont systemFontOfSize:size]
 #define RESULTCELL_HIGH  100.0
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
 #define FONT_SCALE  ([UIScreen mainScreen].bounds.size.width - 320)*0.02
@@ -62,8 +65,8 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-//#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://www.myoffer.cn/"
+#define DOMAINURL  @"http://www.myofferdemo.com/"
+//#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MBProgressHUD.h"
 #import "LibFile/SDWebImage/UIImageView+WebCache.h"

@@ -205,7 +205,8 @@
 
 //设置控件中英文
 -(void)ChangLanguageView
-{   self.logoMV.image = [UIImage imageNamed:GDLocalizedString(@"LoginVC-icon")];
+{
+//    self.logoMV.image = [UIImage imageNamed:GDLocalizedString(@"LoginVC-icon")];
     self.LoginPhoneNumberTextF.placeholder = GDLocalizedString(@"LoginVC-004");
     self.LoginPasswdTextF.placeholder = GDLocalizedString(@"LoginVC-0011");
     [self.ForgetButton setTitle:GDLocalizedString(@ "LoginVC-003")  forState:UIControlStateNormal];

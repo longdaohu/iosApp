@@ -22,6 +22,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.clipsToBounds = YES;
+        self.backgroundColor = BACKGROUDCOLOR;
         self.panding =[[UILabel alloc] init];
         [self addSubview:self.panding];
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
@@ -41,7 +43,7 @@
         self.moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
          [self.moreBtn addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.moreBtn];
-        
+        self.moreBtn.hidden = YES;
         
     }
     return self;

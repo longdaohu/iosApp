@@ -469,7 +469,6 @@
 
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView view];
     SectionView.TitleLab.text =self.SectionTitles[section];
-    SectionView.moreBtn.hidden = YES;
     if (section == 1 && !USER_EN) {
         SectionView.moreBtn.hidden = NO;
         SectionView.actionBlock = ^{

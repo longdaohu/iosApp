@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "About_myOffer.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "myoffer_zh_black.png",
       "scale" : "2x"
     },
     {

@@ -253,8 +253,7 @@
         
     }else{
         
-        
-    
+     
        [UIView animateWithDuration:0.25 animations:^{
            
             self.FlexibleImageView.frame = self.oldFlexibleViewRect;

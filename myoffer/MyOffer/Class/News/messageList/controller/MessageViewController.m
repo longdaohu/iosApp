@@ -583,10 +583,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
-    if (!cell) {
-        cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
-    }
+    XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
     cell.messageFrame = self.CurrentArr[indexPath.row];
     return cell;
 }

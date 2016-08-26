@@ -253,8 +253,8 @@ typedef enum {
 
 //课程详情
 - (IBAction)viewAllCourses {
-//    UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
-    UniversityCourseListViewController *vc = [[UniversityCourseListViewController alloc] initWithUniversityID:_universityID];
+    UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:_universityID];
+//    UniversityCourseListViewController *vc = [[UniversityCourseListViewController alloc] initWithUniversityID:_universityID];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -348,6 +348,7 @@ typedef enum {
             
         }];
     }
-
 }
+
+
 @end

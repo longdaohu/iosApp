@@ -474,16 +474,15 @@
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
      {
-         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.web_wk.frame.size.height : 100.0f;
+         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.web_wk.frame.size.height : University_HEIGHT;
          
          return cellHight;
      }else{
      
-         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : 100.0f;
+         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
          
          return cellHight;
      }
-    
     
 }
 

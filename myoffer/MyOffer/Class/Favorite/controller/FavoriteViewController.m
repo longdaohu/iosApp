@@ -11,6 +11,7 @@
 #import "UniversityFrameObj.h"
 #import "UniversityObj.h"
 #import "NewSearchResultCell.h"
+#import "UniversityViewController.h"
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *FavoriteTableView;
@@ -157,8 +158,11 @@
     NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
   
     UniversityFrameObj *uniFrame = self.Result[indexPath.section];
+  
     UniversityObj *uni =uniFrame.uniObj;
+    
     cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
+    
     cell.uni_Frame = uniFrame;
     
     return cell;
@@ -167,9 +171,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UniversityFrameObj *uniFrame = self.Result[indexPath.row];
+    
+    
+    UniversityFrameObj *uniFrame = self.Result[indexPath.section];
+    
     UniversityObj *uni =uniFrame.uniObj;
-    [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
+    
+ 
+    UniversityViewController *University = [[UniversityViewController alloc] init];
+    
+    University.uni_id = uni.universityID;
+    
+ 
+    [self.navigationController pushViewController:University animated:YES];
     
 }
 
