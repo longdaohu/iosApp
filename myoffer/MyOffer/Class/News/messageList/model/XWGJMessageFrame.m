@@ -32,18 +32,19 @@
     self.TitleFrame = CGRectMake(titlex, titley, titlew, titleh);
     
     
+    
     CGFloat  timew = 110 ;
     CGFloat  timeh = 15 ;
     CGFloat  timey = CGRectGetMaxY(self.LogoFrame) - timeh;
     CGFloat  timex = XScreenWidth - timew;
     self.TimeFrame = CGRectMake(timex,timey, timew, timeh);
     
-    
-    CGFloat  focusw = 80;
+    CGFloat  focusw = 100;
     CGFloat  focush = 15;
+    CGFloat  focusx = titlex;
     CGFloat  focusy = timey;
-    CGFloat  focusx = timex - focusw;
     self.FocusFrame = CGRectMake(focusx,focusy, focusw, focush);
+
 
     
 }

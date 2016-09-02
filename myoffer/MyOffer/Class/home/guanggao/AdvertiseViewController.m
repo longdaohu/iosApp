@@ -8,7 +8,6 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <WebKit/WebKit.h>
-
 #import "AdvertiseViewController.h"
 #import "XLiuxueViewController.h"
 #import "InteProfileViewController.h"
@@ -17,7 +16,7 @@
 #import "XLiuxueViewController.h"
 #import "ServiceMallViewController.h"
 #import "NotificationViewController.h"
-#import "UniversityDetailViewController.h"
+#import "UniversityViewController.h"
 #import "XNewSearchViewController.h"
 
 

@@ -63,7 +63,7 @@
         self.titleLab.numberOfLines      = 2;
         
         self.localMV                     = [[UIImageView alloc] init];
-        self.localMV.image               = [UIImage imageNamed:@"anchor"];
+        self.localMV.image               = [UIImage imageNamed:@"Uni_anthor"];
         [self.bgView addSubview:self.localMV];
 
         self.localLab =  [self LabelWithFontColor:XCOLOR_DARKGRAY andFontsize:KDUtilSize(13) andLabelTextAlignment:NSTextAlignmentLeft];

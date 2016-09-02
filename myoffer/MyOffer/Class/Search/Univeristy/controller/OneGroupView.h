@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UniversityNewFrame.h"
-
+typedef void(^OneGroupViewBlock)(NSString *subjectName,NSInteger index);
 @interface OneGroupView : UIView
 @property(nonatomic,strong)UniversityNewFrame *contentFrame;
+@property(nonatomic,copy)OneGroupViewBlock     actionBlock;
 
 @end

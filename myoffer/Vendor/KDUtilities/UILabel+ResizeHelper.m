@@ -57,6 +57,14 @@
     return [self sizeWithAttributes:@{NSFontAttributeName: font}];
 }
 
+- (CGSize)KD_sizeWithAttributeFont:(UIFont *)font maxWidth:(CGFloat)maxWidth{
+    
+        CGRect frame = [self boundingRectWithSize:CGSizeMake(maxWidth, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :font}context:nil];
+    
+    return frame.size;
+}
+
+
 @end
 
 

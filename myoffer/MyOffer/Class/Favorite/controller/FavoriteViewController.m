@@ -106,8 +106,7 @@
      success:^(NSInteger statusCode, id response) {
          
          NSArray *universities = (NSArray *)response;
-         
-  
+   
          NSMutableArray *temp = [NSMutableArray array];
          
          [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

@@ -61,7 +61,7 @@
     
     self.LocalMV =[[UIView alloc] init];
     UIImageView *left =[[UIImageView alloc] init];
-    left.image = [UIImage imageNamed:@"anchor"];
+    left.image = [UIImage imageNamed:@"Uni_anthor"];
     left.contentMode = UIViewContentModeScaleAspectFit;
     [self.LocalMV addSubview:left];
     

@@ -35,20 +35,19 @@
     CGFloat nameX = CGRectGetMaxX(self.logoFrame) + XMARGIN;
     CGFloat nameY = logoY;
     CGFloat nameW = CONTENTWIDTH - nameX;
-    CGFloat nameH = KDUtilSize(UNIVERISITYTITLEFONT);
+    CGFloat nameH = XPERCENT * 15 ;
     self.nameFrame = CGRectMake(nameX, nameY, nameW, nameH);
     
     CGFloat officialX = nameX;
-    CGFloat officialY = CGRectGetMaxY(self.nameFrame);
+    CGFloat officialY = CGRectGetMaxY(self.nameFrame) + 2;
     CGFloat officialW = nameW;
-    CGFloat officialWidth   = [item.official_name KD_sizeWithAttributeFont:XFONT(KDUtilSize(UNIVERISITYSUBTITLEFONT))].width;
-    CGFloat officialHeigh   = officialWidth > officialW ? 2 * KDUtilSize(UNIVERISITYSUBTITLEFONT) + 5:  KDUtilSize(UNIVERISITYSUBTITLEFONT);
-    CGFloat officialH = officialHeigh;
+    
+    CGSize  officialSize = [item.official_name KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)  maxWidth:officialW];
+    CGFloat officialH = officialSize.height;
     self.official_nameFrame = CGRectMake(officialX, officialY, officialW, officialH);
     
-    
     CGFloat qsX = nameX;
-    CGFloat qsH = KDUtilSize(UNIVERISITYSUBTITLEFONT);
+    CGFloat qsH = XPERCENT * 11;
     CGFloat qsY = CGRectGetMaxY(self.logoFrame) - qsH;
     CGFloat qsW = 0.5 * (CONTENTWIDTH - qsX);
     self.QSRankFrame = CGRectMake(qsX, qsY, qsW, qsH);
@@ -58,28 +57,33 @@
     CGFloat localY = qsY;
     CGFloat localW = 0.5 * (CONTENTWIDTH - qsX);
     self.TIMESRankFrame = CGRectMake(localX, localY, localW, localH);
-
+    
     
     CGFloat anthorX =  nameX;
-    CGFloat anthorH =  KDUtilSize(UNIVERISITYSUBTITLEFONT) + 5;
+    CGFloat anthorH =  XPERCENT * 11 + 5;
     CGFloat anthorW =  anthorH;
-    CGFloat anthorY =  CGRectGetMinY(self.QSRankFrame) - anthorH - XMARGIN;
+    CGFloat padding  = CGRectGetMinY(self.TIMESRankFrame) - CGRectGetMaxY(self.official_nameFrame) - anthorH;
+    CGFloat anthorY =  CGRectGetMaxY(self.official_nameFrame) + padding * 0.5;
     self.anchorFrame = CGRectMake(anthorX, anthorY, anthorW, anthorH);
     
     
-    CGFloat addressX =  CGRectGetMaxX(self.anchorFrame);
-    CGFloat addressH =  KDUtilSize(UNIVERISITYSUBTITLEFONT);
+    CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
+    CGFloat addressH =  XPERCENT * 11;
     CGFloat addressW =  CONTENTWIDTH - addressX;
-    CGFloat addressY =  anthorY + 5;
+    CGFloat addressY =  anthorY  + 3;
     self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
-    CGFloat RCh =50;
+    
+    CGFloat RCh = 50;
     CGFloat RCw = RCh;
     CGFloat RCx = XScreenWidth - RCh;
     CGFloat RCy = 0;
     self.hotFrame = CGRectMake(RCx,RCy, RCw ,RCh);
     
+    
 }
+
+
 
 
 @end

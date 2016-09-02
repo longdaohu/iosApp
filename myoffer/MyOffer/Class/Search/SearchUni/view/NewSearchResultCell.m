@@ -71,7 +71,7 @@
  
         
         self.LocalMV  =[[UIImageView alloc] init];
-        self.LocalMV.image = [UIImage imageNamed:@"anchor"];
+        self.LocalMV.image = [UIImage imageNamed:@"Uni_anthor"];
         self.LocalMV.contentMode = UIViewContentModeScaleAspectFit;
         
         self.LocalTF = [[UITextField alloc] init];

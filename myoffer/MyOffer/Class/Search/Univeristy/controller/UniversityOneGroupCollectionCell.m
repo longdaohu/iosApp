@@ -20,7 +20,7 @@
         
         self.iconView         = [[UIImageView alloc] init];
         self.iconView.contentMode = UIViewContentModeScaleToFill;
-        self.iconView.image   = [UIImage imageNamed:@"logo"];
+        self.iconView.image   = [UIImage imageNamed:@"PlaceHolderImage"];
         [self.contentView addSubview:self.iconView];
         self.iconView.layer.cornerRadius = 6;
         self.iconView.layer.masksToBounds = YES;
@@ -44,7 +44,7 @@
 
     _path = path;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"logo"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 

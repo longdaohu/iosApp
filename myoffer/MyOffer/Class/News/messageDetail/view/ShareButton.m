@@ -49,7 +49,6 @@
 
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect
-
 {
     
     CGFloat titleY = contentRect.size.height *0.6;

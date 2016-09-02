@@ -12,32 +12,30 @@
 
 -(void)awakeFromNib{
 
+    
     NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
     self.bgImageView.image =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
     self.clipsToBounds = YES;
     self.bgImageView.alpha = 0;
     
+    
     XJHUtilDefineWeakSelfRef
     self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
+    [self.rightView.shareBtn setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
     self.rightView.actionBlock = ^(UIButton *sender){
-     
         [weakSelf onclick:sender];
     };
-    
     [self addSubview:self.rightView];
-
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
 }
 
 - (IBAction)backClick:(id)sender {
-    
     [self onclick:sender];
 }
 
 - (void)onclick:(UIButton *)sender{
 
     if (self.actionBlock) {
-        
         self.actionBlock(sender);
     }
 }
@@ -49,14 +47,6 @@
     CGFloat rightViewDistance = offsetY - (XPERCENT * 200 - 40 - 20 - 64);
     
     self.rightView.top = rightViewDistance >= 44 ? 20 : (64 - rightViewDistance);
-}
-
-
--(void)setFavorited:(BOOL)favorited{
-
-    _favorited = favorited;
-    
-    self.rightView.favorited = favorited;
 }
 
 -(void)layoutSubviews{

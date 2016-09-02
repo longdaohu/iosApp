@@ -12,8 +12,6 @@ typedef void(^UniversityNavViewBlock)(UIButton *sender);
 @interface UniversityNavView : UIView
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property(nonatomic,copy)UniversityNavViewBlock  actionBlock;
-@property(nonatomic,strong)UniversityRightView *rightView;
-@property(nonatomic,assign)BOOL favorited;
+@property(nonatomic,strong)UniversityRightView   *rightView;
 - (void)scrollViewContentoffset:(CGFloat)offsetY;
-
 @end

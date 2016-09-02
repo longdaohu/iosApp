@@ -53,10 +53,13 @@
 {
     [super layoutSubviews];
     
+    
+    CGSize sectionSize = self.bounds.size;
+    
     CGFloat pw = 5;
     CGFloat ph = 15;
-    CGFloat py = self.bounds.size.height - 5 - ph;
     CGFloat px = ITEM_MARGIN;
+    CGFloat py = 0.8 * (sectionSize.height - ph);
     self.panding.frame = CGRectMake(px, py, pw, ph);
     
     CGFloat titlex = CGRectGetMaxX(self.panding.frame) + ITEM_MARGIN;

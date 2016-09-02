@@ -31,7 +31,6 @@ typedef enum {
 #import "FilterSection.h"
 #import "FilterTableViewCell.h"
 #import "BottomBackgroudView.h"
-#import "UniversityDetailViewController.h"
 #import "UniversityCourseViewController.h"
 #import "searchSectionFootView.h"
 #import "UniversityFrameObj.h"
@@ -857,8 +856,8 @@ typedef enum {
          * 实现页面跳转，查看学校详情
          */
         sectionHeader.actionBlock = ^(NSString *universityID){
-            UniversityDetailViewController *detail = [[UniversityDetailViewController alloc] initWithUniversityID:universityID];
-            [weakSelf.navigationController pushViewController:detail animated:YES];
+//            UniversityDetailViewController *detail = [[UniversityDetailViewController alloc] initWithUniversityID:universityID];
+            [weakSelf.navigationController pushUniversityViewControllerWithID:universityID animated:YES];
         };
         
         return sectionHeader;

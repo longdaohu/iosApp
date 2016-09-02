@@ -9,6 +9,15 @@
 #import "UniversityNewFrame.h"
 
 @implementation UniversityNewFrame
++ (instancetype)frameWithUniversity:(UniversitydetailNew *)university{
+
+    UniversityNewFrame *UniFrame = [[UniversityNewFrame alloc] init];
+    UniFrame.item = university;
+    
+    return UniFrame;
+}
+
+
 
 -(void)setItem:(UniversitydetailNew *)item{
     
@@ -26,7 +35,7 @@
     
     CGFloat nameX = CGRectGetMaxX(self.logoFrame) + XMARGIN;
     CGFloat nameY = logoY;
-    CGFloat nameW = CONTENTWIDTH - logoW;
+    CGFloat nameW = CONTENTWIDTH - nameX;
     CGFloat nameH = XPERCENT * 16;
     self.nameFrame = CGRectMake(nameX, nameY, nameW, nameH);
     
@@ -34,14 +43,14 @@
     CGFloat officialX = nameX;
     CGFloat officialY = CGRectGetMaxY(self.nameFrame);
     CGFloat officialW = nameW;
-    CGFloat officialHeigh   = [self sizeWithTitle:self.item.official_name contentMaxWidth:officialW attributes:@{NSFontAttributeName:XFONT(XPERCENT * 11)}].height;
+    CGFloat officialHeigh   = [self.item.official_name KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)  maxWidth:officialW].height;
     CGFloat officialH = officialHeigh;
     self.official_nameFrame = CGRectMake(officialX, officialY, officialW, officialH);
     
     
     
     CGFloat webX = nameX;
-    CGFloat webW = [[NSString stringWithFormat:@" %@",self.item.website] KD_sizeWithAttributeFont:XFONT(XPERCENT * 12)].width + 20;
+    CGFloat webW = nameW - 5;
     CGFloat webH =  XPERCENT * 12;
     CGFloat webY = CGRectGetMaxY(self.logoFrame) - webH;
     self.websiteFrame = CGRectMake(webX, webY, webW, webH);
@@ -70,7 +79,7 @@
     CGFloat introX = XMARGIN;
     CGFloat introY = CGRectGetMaxY(self.lineFrame) +   XMARGIN;
     CGFloat introW = CONTENTWIDTH - 2 * introX;
-    CGFloat introductionHeight = [self sizeWithTitle:self.item.introduction contentMaxWidth:introW attributes:@{NSFontAttributeName:XFONT(XPERCENT * 12)}].height;
+    CGFloat introductionHeight = [self.item.introduction KD_sizeWithAttributeFont:XFONT(XPERCENT * 12) maxWidth:introW].height;
     
     CGFloat introH = (introductionHeight > XPERCENT * 120 ) ? XPERCENT * 120 : introductionHeight;
     self.introductionFrame= CGRectMake(introX, introY, introW, introH);
@@ -134,19 +143,7 @@
     CGFloat headH = CGRectGetMaxY(self.downViewFrame);
     self.headerFrame= CGRectMake(headX, headY, headW, headH);
     
-    
-//    CGFloat favorW = 40;
-//    CGFloat favorH = favorW;
-//    CGFloat favorX = XScreenWidth - 2 * XMARGIN - favorW;
-//    CGFloat favorY = centerY - 0.5 * favorH;
-//    self.favorFrame= CGRectMake(favorX, favorY, favorW, favorH);
-//    
-//    
-    //    CGFloat shareW = favorW;
-    //    CGFloat shareH = favorH;
-    //    CGFloat shareX = favorX - shareW - XMARGIN;
-    //    CGFloat shareY = favorY;
-    //    self.shareFrame= CGRectMake(shareX, shareY, shareW, shareH);
+ 
     
     CGFloat rightW =  80  +  XMARGIN;
     CGFloat rightH =  40;
@@ -158,13 +155,6 @@
     
 }
 
-
--(CGSize)sizeWithTitle:(NSString *)title contentMaxWidth:(CGFloat)width  attributes:(NSDictionary *)attribute
-{
-    CGSize contentSize = [title  boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil].size;
-    
-    return contentSize;
-}
 
 
 -(void)oneSectonWithUni:(UniversitydetailNew *)item{
@@ -199,12 +189,11 @@
     self.keyFrame = CGRectMake(keyX, keyY, keyW, keyH);
     
     [self makeButtonItems:item.key_subjects];
-    //    NSLog(@"key_subjectArea %@",item.key_subjectArea);
     
     
     CGFloat lineTwoX = lineOneX;
     CGFloat lineTwoY = CGRectGetMaxY(self.subjectBgFrame) + XMARGIN;
-    CGFloat lineTwoW = XScreenWidth;
+    CGFloat lineTwoW = lineOneW;
     CGFloat lineTwoH = lineOneH;
     self.lineTwoFrame = CGRectMake(lineTwoX, lineTwoY, lineTwoW, lineTwoH);
     
@@ -219,38 +208,36 @@
     CGFloat selectX = 0;
     CGFloat selectY = CGRectGetMaxY(self.rankFrame) + XMARGIN;
     CGFloat selectW = XScreenWidth;
-    CGFloat selectH = 20;
+    CGFloat selectH = 30;
     self.selectionFrame = CGRectMake(selectX, selectY, selectW, selectH);
     
     CGFloat h_lineX = XScreenWidth * 0.5;
     CGFloat h_lineY = 0;
     CGFloat h_lineW = 1;
-    CGFloat h_lineH = 20;
+    CGFloat h_lineH = selectH;
     self.historyLineFrame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
     
     CGFloat qsY = 0;
     CGFloat qsW = [@"QS世界排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
-    CGFloat qsH = 20;
+    CGFloat qsH = selectH;
     CGFloat qsX = h_lineX - XMARGIN - qsW;
     self.qsFrame = CGRectMake(qsX, qsY, qsW, qsH);
     
     CGFloat timesY = 0;
     CGFloat timesW = [@"TIMES排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
-    CGFloat timesH = 20;
+    CGFloat timesH = selectH;
     CGFloat timesX = h_lineX + XMARGIN;
     self.timesFrame = CGRectMake(timesX, timesY, timesW, timesH);
     
     
     CGFloat chartY =   CGRectGetMaxY(self.selectionFrame) + XMARGIN;
-    CGFloat chartW = XScreenWidth;
-    CGFloat chartH = 120 * XPERCENT;
-    CGFloat chartX = 0;
+    CGFloat chartW = XScreenWidth -20;
+    CGFloat chartH = 150;
+    CGFloat chartX = 5;
     self.chartViewBgFrame = CGRectMake(chartX, chartY, chartW, chartH);
     
     
     self.contentHeight = CGRectGetMaxY(self.chartViewBgFrame) + 2 * XMARGIN;
-    
-    
     
 }
 
@@ -263,11 +250,11 @@
     //第一个 label的起点
     CGSize startPoint = CGSizeMake(0, 0);
     //间距
-    CGFloat padding = 20.0;
+    CGFloat padding = 15.0;
     
     CGFloat MAXWidth = XScreenWidth - 2 * XMARGIN;
     
-    CGFloat itemH = XPERCENT * 14   + XMARGIN  * 2;
+    CGFloat itemH = XPERCENT * 14   + 10;
     
     for (int i = 0; i < items.count; i ++) {
         
@@ -308,8 +295,7 @@
     CGFloat bgY  = CGRectGetMaxY(self.keyFrame) + XMARGIN;
     CGFloat bgW  = MAXWidth;
     self.subjectBgFrame = CGRectMake(bgX, bgY, bgW, bgH);
-    
- 
+  
     
     
 }

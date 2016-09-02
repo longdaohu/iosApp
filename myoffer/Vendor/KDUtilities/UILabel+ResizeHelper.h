@@ -22,5 +22,5 @@
 @interface NSString (KDResizeHelper)
 
 - (CGSize)KD_sizeWithAttributeFont:(UIFont *)font;
-
+- (CGSize)KD_sizeWithAttributeFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
 @end

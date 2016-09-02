@@ -33,7 +33,7 @@
 @property(nonatomic,strong)NSNumber   *pageViews;        //浏览量
 @property(nonatomic,strong)NSArray    *m_images;
 @property(nonatomic,strong)NSArray    *images;
-@property(nonatomic,assign)BOOL       favorited;         //收藏标志
+@property(nonatomic,assign)BOOL       favorited;        //收藏标志
 @property(nonatomic,strong)NSNumber   *map_longitude;   //经度
 @property(nonatomic,strong)NSNumber   *map_latitude;    //纬度
 @property(nonatomic,copy)NSString     *student_organization;    //学生组织

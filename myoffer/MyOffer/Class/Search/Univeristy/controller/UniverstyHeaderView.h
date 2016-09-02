@@ -24,6 +24,8 @@ typedef void(^UniverstyHeaderViewBlock)(UIButton *sender);
 @property(nonatomic,strong)UILabel *tagTwoLab;
 @property(nonatomic,copy)UniverstyHeaderViewBlock  actionBlock;
 
++ (instancetype)headerTableViewWithUniFrame:(UniversityNewFrame *)universityFrame;
+
 
 @end
 

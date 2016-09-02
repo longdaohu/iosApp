@@ -11,8 +11,8 @@
 
 typedef void(^UniversityCenterViewBlock)(UIButton *sender);
 @interface UniversityheaderCenterView : UIView
-@property(nonatomic,strong)UniversityNewFrame *itemFrame;
-@property(nonatomic,strong)UIImageView  *logo;
+@property(nonatomic,strong)UniversityNewFrame  *itemFrame;
+@property(nonatomic,strong)LogoView     *logo;
 @property(nonatomic,strong)UILabel      *nameLab;
 @property(nonatomic,strong)UILabel      *official_nameLab;
 @property(nonatomic,strong)UIButton     *address_detailBtn;

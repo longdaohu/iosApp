@@ -43,6 +43,8 @@
     
     [MobClick beginLogPageView:COURSEPAGE];
     
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
 }
 
 
@@ -67,8 +69,8 @@
         
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
-        
         self.title = GDLocalizedString(@"UniCourseDe-001"); //@"课程详情";
+        
     }
     return self;
 }

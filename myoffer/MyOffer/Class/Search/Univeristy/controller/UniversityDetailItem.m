@@ -20,9 +20,11 @@
         [self addSubview:iconView];
         self.iconView = iconView;
         
+        
         UILabel *tilteLab = [UILabel labelWithFontsize:XPERCENT * 12 TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
         [self addSubview:tilteLab];
         self.titleLab = tilteLab;
+        
 
         UILabel *subLab  = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
         [self addSubview:subLab];
@@ -63,9 +65,9 @@
 {
 
     UniversityDetailItem *item = [[UniversityDetailItem alloc] init];
-    item.iconView.image = [UIImage imageNamed:imageName];
-    item.titleLab.text = titleName;
-    item.subtitleLab.text = subName;
+    item.iconView.image        = [UIImage imageNamed:imageName];
+    item.titleLab.text         = titleName;
+    item.subtitleLab.text      = subName;
     
     return item;
 }

@@ -7,12 +7,14 @@
 //
 
 #import "UINavigationController+NavigationHelper.h"
-#import "UniversityDetailViewController.h"
+#import "UniversityViewController.h"
 
 @implementation UINavigationController (NavigationHelper)
 
 - (void)pushUniversityViewControllerWithID:(NSString *)ID animated:(BOOL)animated {
-    UniversityDetailViewController *vc = [[UniversityDetailViewController alloc] initWithUniversityID:ID];
+    
+    UniversityViewController *vc = [[UniversityViewController alloc] init];
+    vc.uni_id =  ID;
     [self pushViewController:vc animated:animated];
 }
 

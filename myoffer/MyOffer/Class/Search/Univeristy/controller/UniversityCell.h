@@ -11,14 +11,15 @@
 
 @interface UniversityCell : UITableViewCell
 @property(nonatomic,strong)UniItemFrame *itemFrame;
-@property (weak, nonatomic) IBOutlet LogoView *logo;
-@property (weak, nonatomic) IBOutlet UIImageView *anthorView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLab;
-@property (weak, nonatomic) IBOutlet UILabel *officalLab;
-@property (weak, nonatomic) IBOutlet UILabel *addressLab;
-@property (weak, nonatomic) IBOutlet UILabel *qsLab;
-@property (weak, nonatomic) IBOutlet UILabel *localLab;
-@property (weak, nonatomic) IBOutlet UIImageView *hotView;
+@property (strong, nonatomic)LogoView *logo;
+@property (strong, nonatomic)UIImageView *anthorView;
+@property (strong, nonatomic)UILabel *nameLab;
+@property (strong, nonatomic)UILabel *officalLab;
+@property (strong, nonatomic)UILabel *addressLab;
+@property (strong, nonatomic)UILabel *qsLab;
+@property (strong, nonatomic)UILabel *localLab;
+@property (strong, nonatomic)UIImageView *hotView;
+@property (strong, nonatomic)UIView *paddingView;
 
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 

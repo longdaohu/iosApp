@@ -17,7 +17,6 @@
     if (!cell) {
         
         cell = [[NSBundle mainBundle] loadNibNamed:@"UniversityCell" owner:self options:nil].lastObject;
-//        cell = [[UniversityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"universityItem"];
      }
     return cell;
 }
@@ -25,23 +24,46 @@
 - (void)awakeFromNib {
     
     
-    self.nameLab.font = XFONT(KDUtilSize(UNIVERISITYTITLEFONT));
-    self.officalLab.font = XFONT(KDUtilSize(UNIVERISITYSUBTITLEFONT));
-    self.officalLab.numberOfLines = 2;
-    self.addressLab.font = XFONT(KDUtilSize(UNIVERISITYSUBTITLEFONT));
-    self.qsLab.font = XFONT(KDUtilSize(UNIVERISITYSUBTITLEFONT));
-    self.localLab.font = XFONT(KDUtilSize(UNIVERISITYSUBTITLEFONT));
+    self.logo =[[LogoView alloc] init];
+    [self.contentView addSubview:self.logo];
     
+    self.nameLab = [UILabel labelWithFontsize:XPERCENT * 15  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.nameLab];
+    
+    self.officalLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.officalLab];
+    self.officalLab.numberOfLines = 2;
+    
+    
+    self.addressLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.addressLab];
+    
+    self.qsLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.qsLab];
+
+    self.localLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.localLab];
+    
+    self.anthorView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Uni_anthor"]];
+    self.anthorView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:self.anthorView];
+    
+    self.hotView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot_cn"]];
+    self.hotView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:self.hotView];
+    
+    
+    self.paddingView =[[UIView alloc] init];
+    self.paddingView.backgroundColor = BACKGROUDCOLOR;
+    [self.contentView addSubview:self.paddingView];
+
     [super awakeFromNib];
-    // Initialization code
- 
     
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 -(void)setItemFrame:(UniItemFrame *)itemFrame{
@@ -50,17 +72,14 @@
     
     UniversityItemNew *item = itemFrame.item;
     
-    
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
     self.nameLab.text = item.name;
     self.officalLab.text = item.official_name;
-    NSString *addressStr = (XScreenWidth <= 320) ? [NSString stringWithFormat:@"%@ | %@",item.country,item.city] : item.address_detail;
-    self.addressLab.text = addressStr;
+    self.addressLab.text = item.address_detail;
     self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",item.global_rank];
     self.localLab.text = [NSString stringWithFormat:@"本地排名: %@",item.local_rank];
     self.hotView.hidden = (item.hot_flag == 0);
     
-   
 }
 
 -(void)layoutSubviews{
@@ -71,21 +90,26 @@
     LogoFrame = self.itemFrame.logoFrame;
     self.logo.frame = LogoFrame;
     
+    
     CGRect nameFrame = self.nameLab.frame;
     nameFrame = self.itemFrame.nameFrame;
     self.nameLab.frame = nameFrame;
     
+    
     CGRect officalFrame = self.officalLab.frame;
     officalFrame = self.itemFrame.official_nameFrame;
     self.officalLab.frame = officalFrame;
+    
  
     CGRect anthorFrame = self.anthorView.frame;
     anthorFrame = self.itemFrame.anchorFrame;
     self.anthorView.frame = anthorFrame;
+    
  
     CGRect addressFrame = self.addressLab.frame;
     addressFrame = self.itemFrame.address_detailFrame;
     self.addressLab.frame = addressFrame;
+    
     
     CGRect qsFrame = self.qsLab.frame;
     qsFrame = self.itemFrame.QSRankFrame;
@@ -96,14 +120,14 @@
     localFrame = self.itemFrame.TIMESRankFrame;
     self.localLab.frame = localFrame;
     
+    
     CGRect hotFrame = self.hotView.frame;
     hotFrame = self.itemFrame.hotFrame;
     self.hotView.frame = hotFrame;
+    
+    
   
- 
 }
-
- 
 
 
 

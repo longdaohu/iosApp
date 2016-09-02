@@ -10,8 +10,9 @@
 #import "HomeSectionHeaderView.h"
 #import "UniversityOneGroupCollectionCell.h"
 #import "HomeSectionHeaderView.h"
+#import "UUChart.h"
 
-@interface OneGroupView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface OneGroupView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
 @property(nonatomic,strong)UICollectionViewFlowLayout *flowlayout;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)HomeSectionHeaderView *fenguanView;
@@ -24,10 +25,10 @@
 @property(nonatomic,strong)UIView *historyLine;
 @property(nonatomic,strong)UIButton *qsBtn;
 @property(nonatomic,strong)UIButton *timesBtn;
-@property(nonatomic,strong)UIView *chartBgView;
-
-
-
+@property(nonatomic,strong)UILabel *chartAlertLab;
+@property(nonatomic,strong)UUChart *chartView;
+@property(nonatomic,strong)NSArray *years;
+@property(nonatomic,strong)NSArray *ranks;
 @end
 
 @implementation OneGroupView
@@ -39,8 +40,6 @@
         
         [self makeUI];
         
-        self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }
@@ -49,6 +48,7 @@
 
     
     HomeSectionHeaderView *fenguanView = [[HomeSectionHeaderView alloc] init];
+    fenguanView.backgroundColor = XCOLOR_WHITE;
     fenguanView.TitleLab.text = @"校园风光";
     self.fenguanView = fenguanView;
     [self addSubview:fenguanView];
@@ -58,65 +58,73 @@
     
     UIView *lineOne = [[UIView alloc] init];
     self.lineOne = lineOne;
-    lineOne.backgroundColor =[UIColor lightGrayColor];
+    lineOne.backgroundColor = BACKGROUDCOLOR;
     [self addSubview:lineOne];
     
     HomeSectionHeaderView *keyView = [[HomeSectionHeaderView alloc] init];
+    keyView.backgroundColor = XCOLOR_WHITE;
     keyView.TitleLab.text = @"王牌领域";
     self.keyView = keyView;
     [self addSubview:keyView];
     
+    
     UIView *keySubjectView = [[UIView alloc] init];
     self.keySubjectView = keySubjectView;
     [self addSubview:keySubjectView];
+    
 
     UIView *lineTwo = [[UIView alloc] init];
     self.lineTwo = lineTwo;
-    lineTwo.backgroundColor =[UIColor lightGrayColor];
+    lineTwo.backgroundColor = BACKGROUDCOLOR;
     [self addSubview:lineTwo];
     
+    
     HomeSectionHeaderView *rankView = [[HomeSectionHeaderView alloc] init];
+    rankView.backgroundColor = XCOLOR_WHITE;
     rankView.TitleLab.text = @"历史排名";
     self.rankView = rankView;
     [self addSubview:rankView];
     
     
     UIView *selectionView = [[UIView alloc] init];
-    selectionView.backgroundColor =[UIColor lightGrayColor];
     [self addSubview:selectionView];
     self.selectionView = selectionView;
+    
 
     UIView *historyLine = [[UIView alloc] init];
-    historyLine.backgroundColor =[UIColor blackColor];
+    historyLine.backgroundColor = BACKGROUDCOLOR;
     [selectionView addSubview:historyLine];
     self.historyLine = historyLine;
 
 
     UIButton *qsBtn = [[UIButton alloc] init];
+    
     [qsBtn setTitle:@"QS世界排名" forState:UIControlStateNormal];
-    [qsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [qsBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    qsBtn.enabled = NO;
+    [qsBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [qsBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
     [selectionView addSubview:qsBtn];
-    qsBtn.titleLabel.font = XFONT(15);
-    qsBtn.selected = YES;
+    qsBtn.titleLabel.font = XFONT(16);
     self.qsBtn = qsBtn;
+    [self.qsBtn addTarget:self action:@selector(qsClick:) forControlEvents:UIControlEventTouchUpInside];
+
     
     UIButton *timesBtn = [[UIButton alloc] init];
     [timesBtn setTitle:@"TIMES排名" forState:UIControlStateNormal];
-    [timesBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [timesBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [timesBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [timesBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
     [selectionView addSubview:timesBtn];
     self.timesBtn = timesBtn;
-    timesBtn.titleLabel.font = XFONT(15);
-
+    timesBtn.titleLabel.font = XFONT(16);
+    [self.timesBtn addTarget:self action:@selector(timesClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *chartBgView = [[UIView alloc] init];
-    chartBgView.backgroundColor =[UIColor orangeColor];
-    [self addSubview:chartBgView];
-    self.chartBgView = chartBgView;
-    
+    UILabel *alertLab = [UILabel labelWithFontsize:20 TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentCenter];
+    alertLab.text = @"暂无排名";
+    self.chartAlertLab = alertLab;
+    [self addSubview:alertLab];
     
 }
+
 
 -(void)makeCollectView
 {
@@ -153,8 +161,6 @@
 }
 
 
-
-
 -(void)setContentFrame:(UniversityNewFrame *)contentFrame{
 
     _contentFrame = contentFrame;
@@ -183,8 +189,6 @@
     
     self.timesBtn.frame = contentFrame.timesFrame;
     
-    self.chartBgView.frame = contentFrame.chartViewBgFrame;
-    
     
     for (NSString *title in contentFrame.item.key_subjects) {
         
@@ -193,11 +197,11 @@
         [sender setTitle:title forState:UIControlStateNormal];
         [sender setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
          sender.titleLabel.font = XFONT(XPERCENT * 14);
-         sender.layer.cornerRadius = 0.5  * (14 * XPERCENT + XMARGIN  * 2);
+         sender.layer.cornerRadius = 0.5  * (14 * XPERCENT + 10);
          sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
          sender.layer.borderWidth = 1;
-        [sender addTarget:self action:@selector(subjectClick:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
     
     for (NSInteger index = 0; index < contentFrame.subjectItemFrames.count; index++) {
         
@@ -207,9 +211,166 @@
         
         sender.frame  =  xvalue.CGRectValue;
     }
+    
+     self.chartAlertLab.frame = contentFrame.chartViewBgFrame;
+    
+    [self chartWithArray:self.contentFrame.item.global_rank_history];
+    
+}
+
+
+-(void)chartWithArray:(NSArray *)temps{
+
+    
+    self.chartAlertLab.hidden = temps.count > 0;
+    self.chartView.hidden = temps.count == 0;
+    
+    if (temps.count == 0) {
+        
+        return;
+    }
+    
+    NSMutableArray *years = [NSMutableArray array];
+    
+    NSMutableArray *ranks = [NSMutableArray array];
+    
+    
+    [temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       
+        [years addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"year"]]];
+        [ranks addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"rank"]]];
+        
+    }];
+    
+    self.ranks = [ranks copy];
+    self.years = [years copy];
+    
+    [self configChartUI];
+}
+
+- (void)qsClick:(UIButton *)sender{
+
+    self.qsBtn.enabled = NO;
+    self.timesBtn.enabled = YES;
+    [self chartWithArray:self.contentFrame.item.global_rank_history];
+}
+
+- (void)timesClick:(UIButton *)sender{
+    
+    self.qsBtn.enabled = YES;
+    self.timesBtn.enabled = NO;
+    
+    [self chartWithArray:self.contentFrame.item.local_rank_history];
+    
+}
+
+- (void)configChartUI
+{
+    
+    if (self.chartView) {
+        
+        [self.chartView removeFromSuperview];
+        
+        self.chartView = nil;
+    }
+    
+    self.chartView = [[UUChart alloc]initWithFrame:self.contentFrame.chartViewBgFrame
+                                        dataSource:self
+                                             style:UUChartStyleLine];
+    [self.chartView showInView:self];
+    
+}
+
+
+#pragma mark - @required
+//横坐标标题数组
+- (NSArray *)chartConfigAxisXLabel:(UUChart *)chart
+{
+    return self.years;
+}
+
+//数值多重数组
+- (NSArray *)chartConfigAxisYValue:(UUChart *)chart
+{
+    return  @[self.ranks];
+}
+#pragma mark - @optional
+//颜色数组
+- (NSArray *)chartConfigColors:(UUChart *)chart
+{
+    return @[XCOLOR_LIGHTBLUE];
+}
+
+//显示数值范围
+- (CGRange)chartRange:(UUChart *)chart
+{
+    
+    NSInteger max = [self.ranks[0] integerValue];
+    
+    NSInteger min = [self.ranks[0] integerValue];
+    
+    
+    for (NSInteger i = 0 ; i < self.ranks.count; i++) {
+        
+        
+        NSString *item = self.ranks[i];
+        
+        if (max < item.integerValue) {
+            
+            max = item.integerValue;
+        }
+        
+        if (min > item.integerValue) {
+            
+            min = item.integerValue;
+        }
  
+    }
+    
+    min  -= 3;
+    
+    if (min < 0) {
+        
+        min = 0;
+        
+    }
+ 
+    if (max - min < 5) {
+        
+        max = max + 2;
+        
+        
+        if (max - min < 5) {
+            
+            max = max + 2;
+            
+        }
+        
+     }
     
     
+    return CGRangeMake(min,max);
+    
+}
+
+#pragma mark 折线图专享功能
+//标记数值区域
+- (CGRange)chartHighlightRangeInLine:(UUChart *)chart
+{
+    return CGRangeZero;
+}
+
+//判断显示横线条
+- (BOOL)chart:(UUChart *)chart showHorizonLineAtIndex:(NSInteger)index
+{
+    return YES;
+}
+
+//判断显示最大最小值
+- (BOOL)chart:(UUChart *)chart showMaxMinAtIndex:(NSInteger)index
+{
+    
+    return YES;
 }
 
 
@@ -246,6 +407,14 @@ static NSString *oneIdentify = @"oneGroup";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
      [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+//    UniversityOneGroupCollectionCell *cell = (UniversityOneGroupCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    UIImageView *imageV = (UIImageView *)cell.contentView.subviews[0];
+    
+    if(self.actionBlock)
+    {
+        self.actionBlock(nil,indexPath.row);
+    }
 }
 
 -(void)layoutSubviews
@@ -254,12 +423,15 @@ static NSString *oneIdentify = @"oneGroup";
     
 }
 
-
+/*
 - (void)subjectClick:(UIButton *)sender{
 
-    NSLog(@"currentTitle %@",sender.currentTitle);
+    if(self.actionBlock)
+    {
+        self.actionBlock(sender.currentTitle,DefaultNumber);
+    }
 }
-
+*/
 
 
 

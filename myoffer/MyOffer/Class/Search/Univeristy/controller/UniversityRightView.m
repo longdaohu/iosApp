@@ -22,13 +22,9 @@
 
 
 -(void)setFavorited:(BOOL)favorited{
-
     _favorited = favorited;
-    
-     NSString *tilte = favorited ?@"收藏":@"NO藏";
-    
-    [self.favoriteBtn  setTitle:tilte forState:UIControlStateNormal];
-    
+    NSString *shadowFavor = favorited ? @"Uni_favorshadow" : @"Uni_Unfavorshadow";
+    [self.favoriteBtn  setImage:[UIImage imageNamed:shadowFavor] forState:UIControlStateNormal];
 }
 
  

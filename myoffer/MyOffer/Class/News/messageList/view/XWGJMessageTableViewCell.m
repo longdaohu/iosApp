@@ -58,19 +58,20 @@
          self.TimeBtn = [[UIButton alloc] init];
         self.TimeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
          self.TimeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-        self.TimeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        self.TimeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.TimeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [self.TimeBtn setImage:[UIImage imageNamed:@"Detail_time"] forState:UIControlStateNormal];
+//        [self.TimeBtn setImage:[UIImage imageNamed:@"Detail_time"] forState:UIControlStateNormal];
          self.TimeBtn.userInteractionEnabled = NO;
         [self.contentView addSubview:self.TimeBtn];
         
         
         self.FocusBtn = [[UIButton alloc] init];
-        self.FocusBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        self.FocusBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.FocusBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
         self.FocusBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
         [self.FocusBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         self.FocusBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self.FocusBtn setImage:[UIImage imageNamed:@"Detail_Focus"] forState:UIControlStateNormal];
+//        [self.FocusBtn setImage:[UIImage imageNamed:@"Detail_Focus"] forState:UIControlStateNormal];
         self.FocusBtn.userInteractionEnabled = NO;
         [self.contentView addSubview:self.FocusBtn];
         
@@ -97,7 +98,7 @@
     self.TimeBtn.frame = messageFrame.TimeFrame;
 
     
-    NSString *count = [NSString stringWithFormat:@"%@",messageFrame.News.FocusCount];
+    NSString *count = [NSString stringWithFormat:@"%@阅读",messageFrame.News.FocusCount];
     [self.FocusBtn setTitle:count forState:UIControlStateNormal];
     self.FocusBtn.frame = messageFrame.FocusFrame;
     

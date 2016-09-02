@@ -9,17 +9,29 @@
 #import "UniverstyHeaderView.h"
 #import "UniversityheaderCenterView.h"
 @implementation UniverstyHeaderView
++ (instancetype)headerTableViewWithUniFrame:(UniversityNewFrame *)universityFrame{
+
+    UniverstyHeaderView  * header  = [[UniverstyHeaderView alloc] init];
+    header.clipsToBounds           = YES;
+    header.itemFrame               = universityFrame;
+    header.frame                   = universityFrame.headerFrame;
+    
+    return header;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.upView = [[UIView alloc] init];
-         [self addSubview:self.upView];
+        [self addSubview:self.upView];
+        
         
         self.downView =[[UIView alloc] init];
         self.downView.backgroundColor = BACKGROUDCOLOR;
         [self addSubview:self.downView];
+        
         
         XJHUtilDefineWeakSelfRef
         UniversityheaderCenterView *centerView =  [UniversityheaderCenterView View];
@@ -37,45 +49,34 @@
             
             [weakSelf onclick:sender];
         };
-        
         [self addSubview:self.rightView];
         
         
-        UILabel *qsLab = [[UILabel alloc] init];
+        
+        UILabel *qsLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         qsLab.numberOfLines = 0;
-        qsLab.font = XFONT(XPERCENT * 13);
         self.QSrankLab = qsLab;
-        qsLab.textColor = [UIColor whiteColor];
-        qsLab.textAlignment = NSTextAlignmentCenter;
         [self.upView addSubview:qsLab];
         
-        UILabel *timesLab = [[UILabel alloc] init];
+        
+        
+        UILabel *timesLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         timesLab.numberOfLines = 0;
-        timesLab.font = XFONT(XPERCENT * 13);
         self.TIMESLab = timesLab;
-        timesLab.textColor = [UIColor whiteColor];
-        timesLab.textAlignment = NSTextAlignmentCenter;
         [self.upView addSubview:timesLab];
         
         
-        UILabel *tagOneLab = [[UILabel alloc] init];
+        UILabel *tagOneLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         tagOneLab.numberOfLines = 0;
-        tagOneLab.font = XFONT(XPERCENT * 13);
         self.tagOneLab = tagOneLab;
-        tagOneLab.textColor = [UIColor whiteColor];
-        tagOneLab.textAlignment = NSTextAlignmentCenter;
         [self.upView addSubview:tagOneLab];
-        tagOneLab.backgroundColor = [UIColor yellowColor];
 
         
-        UILabel *tagTwoLab = [[UILabel alloc] init];
+        UILabel *tagTwoLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         tagTwoLab.numberOfLines = 0;
-        tagTwoLab.font = XFONT(XPERCENT * 13);
         self.tagTwoLab = tagTwoLab;
-        tagTwoLab.textColor = [UIColor whiteColor];
-        tagTwoLab.textAlignment = NSTextAlignmentCenter;
         [self.upView addSubview:tagTwoLab];
-        tagTwoLab.backgroundColor = [UIColor greenColor];
+
     }
     return self;
 }
@@ -92,37 +93,43 @@
     
     self.centerView.itemFrame = itemFrame;
     
-    
     self.TIMESLab.frame = itemFrame.TIMESRankFrame;
     
     self.QSrankLab.frame = itemFrame.QSRankFrame;
     
-    NSString *times = [NSString stringWithFormat:@"%@\nTIMES排名",itemFrame.item.local_rank];
-    NSRange timesRange = [times rangeOfString:[NSString stringWithFormat:@"%@",itemFrame.item.local_rank]];
+    
+    NSString *local_rank = itemFrame.item.local_rank.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.local_rank];
+    NSString *times = [NSString stringWithFormat:@"%@\nTIMES排名",local_rank];
+    NSRange timesRange = [times rangeOfString:local_rank];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
     [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, timesRange.length)];
     self.TIMESLab.attributedText = timesAttri;
     
-    NSString *qs = [NSString stringWithFormat:@"%@\n全球QS排名",itemFrame.item.global_rank];
-    NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",itemFrame.item.global_rank]];
+    
+    NSString *global_rank = itemFrame.item.global_rank.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.global_rank];
+    NSString *qs = [NSString stringWithFormat:@"%@\n全球QS排名",global_rank];
+    NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];
     [qsAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, qsRange.length)];
     self.QSrankLab.attributedText = qsAttri;
-
- 
+   
     
     NSArray *tagsOne = [itemFrame.item.tags subarrayWithRange:NSMakeRange(0, (itemFrame.item.tags.count < 3) ? itemFrame.item.tags.count : 3)];
-    self.tagOneLab.text = (itemFrame.item.tags.count == 0) ? @" - " : [tagsOne componentsJoinedByString:@"  ·  "];
+    self.tagOneLab.text =  [tagsOne componentsJoinedByString:@"  .  "];
     self.tagOneLab.frame = itemFrame.tagsOneFrame;
- 
+
+    
+    
     if (itemFrame.item.tags.count > 3) {
         NSArray *tagsTwo = [itemFrame.item.tags subarrayWithRange:NSMakeRange(3, itemFrame.item.tags.count - 3)];
-        self.tagTwoLab.text = [tagsTwo componentsJoinedByString:@"  ·  "];
+        self.tagTwoLab.text = [tagsTwo componentsJoinedByString:@"  .  "];
     }
-  
+
     self.tagTwoLab.frame = itemFrame.tagsTwoFrame;
-    
+
+
     self.rightView.favorited = itemFrame.item.favorited;
+ 
 
 }
 

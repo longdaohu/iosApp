@@ -11,6 +11,7 @@
 #import "XWGJShareView.h"
 #import "XWGJAaboutHeader.h"
 #import "XWGJMessageSectionView.h"
+#import "ShareViewController.h"
 
 @interface XWGJAboutViewController ()<UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -18,7 +19,7 @@
 @property(nonatomic,strong)XWGJShareView *ShareView;       //分享View
 @property(nonatomic,strong)UIWebView *webView;           //用于打电话
 @property(nonatomic,strong)UILabel *CompanyLab;          //公司信息Label
-
+@property(nonatomic,strong)ShareViewController *shareVC;
 @end
 
 
@@ -243,171 +244,40 @@
 }
 
 
-//点击分享按钮
--(void)share
-{
-    [self.ShareView ShareButtonClickAndViewHiden:NO];
-}
-
-//分享功能面版
--(XWGJShareView *)ShareView{
+- (ShareViewController *)shareVC{
     
-    if (!_ShareView) {
-        XJHUtilDefineWeakSelfRef
-        _ShareView = [XWGJShareView shareView];
+    if (!_shareVC) {
         
-        _ShareView.ShareBlock = ^(UIButton *sender){
-            UIImage *shareImage = [UIImage imageNamed:@"shareMyOffer"];
-            NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/ad/landing/app_promotion"];
-            NSString *shareTitle = GDLocalizedString(@"About_shareContent");
-            NSString *shareContent =  GDLocalizedString(@"About_shareSummary");
+        
+        XJHUtilDefineWeakSelfRef
+        _shareVC = [[ShareViewController alloc] init];
+        
+        _shareVC.actionBlock = ^{
             
-            switch (sender.tag) {
-                case 0: //微信
-                {
-                    [UMSocialData defaultData].extConfig.wechatSessionData.title =  shareTitle;
-                    [UMSocialData defaultData].extConfig.wechatSessionData.url = shareURL;
-                    
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];
-                    //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-                    
-                }
-                    break;
-                    
-                    
-                case 1:  //朋友圈
-                {
-                    
-                    [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-                    
-                    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
-                    
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareContent  shareImage:shareImage socialUIDelegate:weakSelf];        //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-                    
-                }
-                    break;
-                    
-                case 2: //QQ
-                {
-                    
-                    [UMSocialData defaultData].extConfig.qqData.url = shareURL;
-                    [UMSocialData defaultData].extConfig.qqData.title = shareTitle;
-                    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
-                    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
-                        if (response.responseCode == UMSResponseCodeSuccess) {
-                            //                                                        NSLog(@"QQ分享成功！");
-                        }
-                    }];
-                    
-                    
-                }
-                    break;
-                    
-                case 3://QQ空间
-                {
-                    
-                    [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
-                    [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-                    
-                    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
-                        if (response.responseCode == UMSResponseCodeSuccess) {
-                            
-                        }
-                    }];
-                }
-                    break;
-                    
-                case 4: //微博
-                {
-                    NSString *title =   [NSString stringWithFormat:@"%@（来自@myOffer学无国界）",shareTitle];
-                    
-                    UIImage *shareImage = [UIImage imageNamed:@"share_market.jpg"];
-                    
-                    NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",title,shareURL];
-                    
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:weakSelf];        //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-                    
-                    
-                }
-                    break;
-                case 5: //Email
-                {
-                    
-                    NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
-                    
-                    [UMSocialSnsService presentSnsIconSheetView:weakSelf
-                                                         appKey:@"5668ea43e0f55af981002131"
-                                                      shareText:shareTEXT
-                                                     shareImage:nil
-                                                shareToSnsNames:@[UMShareToEmail]
-                                                       delegate:weakSelf];
-                }
-                    break;
-                    
-                    
-                    
-                case 6: //复制
-                {
-                    UIPasteboard *pab = [UIPasteboard generalPasteboard];
-                    
-                    NSString *string = shareURL;
-                    
-                    [pab setString:string];
-                    
-                    AlerMessage(GDLocalizedString(@"About_CopySusess"));
-                }
-                    break;
-                    
-                case 7: //更多
-                {
-                    NSString *textToShare =  shareTitle;
-                    
-                    UIImage *imageToShare = shareImage;
-                    
-                    NSURL *urlToShare = [NSURL URLWithString:shareURL];
-                    
-                    NSArray *activityItems = @[textToShare, imageToShare, urlToShare];
-                    
-                    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-                    NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
-                                                    UIActivityTypePostToFacebook,
-                                                    UIActivityTypePostToWeibo,
-                                                    UIActivityTypePostToTencentWeibo];
-                    controller.excludedActivityTypes = excludedActivities;
-                    
-                    
-                    
-                    [weakSelf presentViewController:controller animated:YES completion:nil];
-                }
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
-            
+            [weakSelf.shareVC.view removeFromSuperview];
             
         };
+        
+        [self.view addSubview:_shareVC.view];
 
+        [self addChildViewController:_shareVC];
         
     }
-    return _ShareView;
-    
+    return _shareVC;
 }
 
 
-//友盟分享回调方法
--(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
-{
-    //根据`responseCode`得到发送结果,如果分享成功
-    if(response.responseCode == UMSResponseCodeSuccess)
-    {
-        //得到分享到的微博平台名
-        KDClassLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+//分享
+- (void)share{
+ 
+    if (_shareVC.view.superview != self.view) {
+        
+        [self.view addSubview:_shareVC.view];
+        
+        [self.shareVC  show];
+
     }
+ 
 }
 
 

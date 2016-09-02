@@ -11,15 +11,15 @@
 #import "XWGJMessageDetailFrame.h"
 #import "XWGJMessageTableViewCell.h"
 #import "XWGJMessageDetailContentCell.h"
-#import "XWGJRecommendUniTableViewCell.h"
-#import "UniversityDetailViewController.h"
 #import "ApplyViewController.h"
-#import "UniversityObj.h"
 #import "XWGJMessageSectionView.h"
-#import "XWGJShareView.h"
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
 #import <WebKit/WebKit.h>
+#import "ShareViewController.h"
+#import "UniversityItemNew.h"
+#import "UniItemFrame.h"
+#import "UniversityCell.h"
 
 @interface MessageDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate,WKNavigationDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -44,7 +44,7 @@
 @property(nonatomic,strong)XWGJMessageDetailFrame *MessageDetailFrame;
 @property(nonatomic,strong)KDProgressHUD *hud;
 //分享
-@property(nonatomic,strong)XWGJShareView *ShareView;
+@property(nonatomic,strong)ShareViewController *shareVC;
 //无数据提示框
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 //导航栏下图片
@@ -186,8 +186,6 @@
 
 -(void)makeUI
 {
-
-    
     
     [self makeTableView];
     
@@ -200,86 +198,94 @@
 -(void)makeDataSourse
 {
     
-    self.MessageDetailFrame  = [[XWGJMessageDetailFrame alloc] init];
-    
-    NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorMessageDetail,self.NO_ID];
-    
     XJHUtilDefineWeakSelfRef
     
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-                               
-                           } additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               
-                               self.tableView.hidden = NO;
+    self.MessageDetailFrame  = [[XWGJMessageDetailFrame alloc] init];
 
-                               weakSelf.ZangBtn.enabled = ![response[@"like"] integerValue];
-                               
-                               if ([response[@"like"] integerValue]) {
-                                   
-                                   [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-                                   
-                               }
-                               
-                               //根据点赞数量改变导航栏右侧相关控件宽度
-                               [weakSelf.ZangBtn  setTitle:[NSString  stringWithFormat:@"%@",response[@"like_count"]]  forState:UIControlStateNormal];
-                               CGSize LikeCountSize =[[NSString  stringWithFormat:@"%@",response[@"like_count"]]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
-                               
-                               CGRect NewRightFrame = weakSelf.RightView.frame;
-                               NewRightFrame.size.width += LikeCountSize.width;
-                               weakSelf.RightView.frame = NewRightFrame;
-                               
-                               CGRect NewShareFrame = weakSelf.shareBtn.frame;
-                               NewShareFrame.origin.x +=  LikeCountSize.width;
-                               weakSelf.shareBtn.frame = NewShareFrame;
-                               
-                               CGRect NewLoveFrame = weakSelf.ZangBtn.frame;
-                               NewLoveFrame.size.width +=  LikeCountSize.width;
-                               weakSelf.ZangBtn.frame = NewLoveFrame;
-                               
-                               
-                               //推荐资讯数据
-                               NSMutableArray *messageFrames = [NSMutableArray array];
-                               
-                               for (NSDictionary *MessageDic in  response[@"recommendations"]) {
-                                   
-                                   if (![self.NO_ID isEqualToString:MessageDic[@"_id"]]) {
-                                    
-                                       NewsItem  *News =[NewsItem mj_objectWithKeyValues:MessageDic];
-                                       
-                                       XWGJMessageFrame *messageFrame = [XWGJMessageFrame messageFrameWithMessage:News];
-                                        
-                                       [messageFrames addObject:messageFrame];
-                                   }
-                                 
-                               }
-                               
-                               weakSelf.Messages = [messageFrames copy];
-                               
-                               weakSelf.ArticleInfo = (NSDictionary *)response;
-                               
-                               weakSelf.MessageDetailFrame.MessageDetail = (NSDictionary *)response;
-                               
-                               //推荐学校数据
-                               NSMutableArray  *UniM =[NSMutableArray array];
-                               for (NSDictionary  *uniInfo in  response[@"related_universities"]) {
-                                   
-                                       UniversityObj * uni  = [UniversityObj createUniversityWithUniversityInfo:uniInfo];
-                                       //                                   XWGJUniversity *uni = [XWGJUniversity UniversityWithDict:uniInfo];
-                                       [UniM addObject:uni];
-                               
-                               }
-                               weakSelf.Universities = [UniM copy];
-                               
-                               
-                               [weakSelf.tableView reloadData];
-                               
+    NSString *testpath =[NSString stringWithFormat:@"GET api/article/v2/%@",self.NO_ID];
+    
+    [self startAPIRequestWithSelector:testpath parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+        
+        [weakSelf dismiss];
+        
+    } additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        
+        self.tableView.hidden = NO;
+        
+        weakSelf.ZangBtn.enabled = ![response[@"like"] integerValue];
+        
+        if ([response[@"like"] integerValue]) {
+            
+            [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+            
+        }
+        
+        //根据点赞数量改变导航栏右侧相关控件宽度
+        [weakSelf.ZangBtn  setTitle:[NSString  stringWithFormat:@"%@",response[@"like_count"]]  forState:UIControlStateNormal];
+        CGSize LikeCountSize =[[NSString  stringWithFormat:@"%@",response[@"like_count"]]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
+        
+        CGRect NewRightFrame = weakSelf.RightView.frame;
+        NewRightFrame.size.width += LikeCountSize.width;
+        weakSelf.RightView.frame = NewRightFrame;
+        
+        CGRect NewShareFrame = weakSelf.shareBtn.frame;
+        NewShareFrame.origin.x +=  LikeCountSize.width;
+        weakSelf.shareBtn.frame = NewShareFrame;
+        
+        CGRect NewLoveFrame = weakSelf.ZangBtn.frame;
+        NewLoveFrame.size.width +=  LikeCountSize.width;
+        weakSelf.ZangBtn.frame = NewLoveFrame;
+        
+        
+        //推荐资讯数据
+        NSMutableArray *messageFrames = [NSMutableArray array];
+        
+        for (NSDictionary *MessageDic in  response[@"recommendations"]) {
+            
+            if (![self.NO_ID isEqualToString:MessageDic[@"_id"]]) {
+                
+                NewsItem  *News =[NewsItem mj_objectWithKeyValues:MessageDic];
+                
+                XWGJMessageFrame *messageFrame = [XWGJMessageFrame messageFrameWithMessage:News];
+                
+                [messageFrames addObject:messageFrame];
+            }
+            
+        }
+        
+        weakSelf.Messages = [messageFrames copy];
+        
+        weakSelf.ArticleInfo = (NSDictionary *)response;
+        
+        weakSelf.MessageDetailFrame.MessageDetail = (NSDictionary *)response;
+        
+        
+        
+        NSMutableArray *related_universities = [NSMutableArray array];
+        
+        [response[@"related_universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+            UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
+            [related_universities addObject:uniFrame];
+            
+        }];
 
-                           }additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               
-                                weakSelf.noDataView.hidden = NO;
-                               
-                           }];
+        weakSelf.Universities = [related_universities copy];
+        
+        [weakSelf.tableView reloadData];
+        
+        
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        weakSelf.noDataView.hidden = NO;
+        
+    }];
+    
+ 
+ 
 
 }
 
@@ -471,18 +477,21 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
+    CGFloat cellHight = 0;
+  
+    CGFloat webHeight = [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ? self.web_wk.frame.size.height : self.webView.frame.size.height ;
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-     {
-         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.web_wk.frame.size.height : University_HEIGHT;
-         
-         return cellHight;
-     }else{
-     
-         CGFloat cellHight = indexPath.section==0 ? self.MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
-         
-         return cellHight;
-     }
+    if (indexPath.section==0) {
+        
+        cellHight =  self.MessageDetailFrame.MessageDetailHeight + webHeight;
+        
+    }else{
+        
+        cellHight =  University_HEIGHT;
+        
+    }
+    
+    return cellHight;
     
 }
 
@@ -506,8 +515,6 @@
                 
             
             }
- 
-            
             
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
@@ -519,22 +526,13 @@
         {
             if (self.Universities.count > 0)
             {
+                
+                
                 if (indexPath.section == 1) {
                     
-                    XJHUtilDefineWeakSelfRef
-                    
-                    XWGJRecommendUniTableViewCell *universityCell =[XWGJRecommendUniTableViewCell CreateCellWithTableView:tableView];
-                    
-                    UniversityObj *university =    self.Universities[indexPath.row];
-                    
-                    universityCell.uni =   university;
-                    
-                    universityCell.ActionBlock = ^(UIButton *sender){
-                        
-                        [weakSelf addApplication:sender andUniversity:university];
-                        
-                    };
-                    
+                    UniversityCell *universityCell =[UniversityCell cellWithTableView:tableView];
+                    universityCell.itemFrame = self.Universities[indexPath.row];
+ 
                     return universityCell;
                     
                 }else{
@@ -551,7 +549,7 @@
                 
                 XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
                 cell.messageFrame = self.Messages[indexPath.row];
-                
+
                 return cell;
             }
             
@@ -573,8 +571,8 @@
         switch (indexPath.section) {
             case 1:
             {
-                 UniversityObj  *uni = self.Universities[indexPath.row];
-                [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
+                UniItemFrame *itemFrame = self.Universities[indexPath.row];
+                [self.navigationController pushUniversityViewControllerWithID:itemFrame.item.NO_id animated:YES];
             
             }
                 break;
@@ -615,7 +613,6 @@
     XJHUtilDefineWeakSelfRef
     NSString *path =[NSString stringWithFormat:@"GET api/article/%@/like",self.NO_ID];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
-      
         
         NSString *LikeCount = self.ZangBtn.currentTitle;
         [weakSelf.ZangBtn setTitle:[NSString stringWithFormat:@"%ld",(long)LikeCount.integerValue + 1]  forState:UIControlStateNormal];
@@ -626,36 +623,6 @@
      }];
 }
 
-//添加申请列表
--(void)addApplication:(UIButton *)sender  andUniversity:(UniversityObj *)university
-{
-    
-    [self
-     startAPIRequestWithSelector:@"POST api/account/apply"
-     parameters:@{@"uid": university.universityID}
-     success:^(NSInteger statusCode, id response) {
-       
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud setLabelText:GDLocalizedString(@"ApplicationProfile-0015")];//@"加入成功"];
-         [hud hideAnimated:YES afterDelay:2];
-         
-         [sender setTitle:@"已添加" forState:UIControlStateNormal] ;
-         sender.userInteractionEnabled =  NO;
-         
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
-             
-             ApplyViewController *vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
-             vc.isFromMessage = YES;
-             [self.navigationController pushViewController:vc animated:YES];
-             
-         }];
-     }];
-    
-}
-
-
-
 
 //弹出列表方法presentSnsIconSheetView需要设置delegate为self
 -(BOOL)isDirectShareInIconActionSheet
@@ -663,160 +630,48 @@
     return YES;
 }
 
-
-//点击分享按钮
--(void)share
-{
-    [self.ShareView ShareButtonClickAndViewHiden:NO];
-}
-
-//分享功能面版
--(XWGJShareView *)ShareView{
- 
-    if (!_ShareView) {
-        XJHUtilDefineWeakSelfRef
-        _ShareView = [XWGJShareView shareView];
+- (ShareViewController *)shareVC{
+    
+    if (!_shareVC) {
         
-        _ShareView.ShareBlock = ^(UIButton *sender){
+        NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.NO_ID];
+        NSString *path = [self.ArticleInfo[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *shareTitle = self.ArticleInfo[@"title"];
+        NSString *shareContent = self.ArticleInfo[@"summary"];
+        NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
+        [shareInfor setValue:shareURL forKey:@"shareURL"];
+        [shareInfor setValue:path forKey:@"icon"];
+        [shareInfor setValue:shareTitle forKey:@"shareTitle"];
+        [shareInfor setValue:shareContent forKey:@"shareContent"];
+        
+        XJHUtilDefineWeakSelfRef
+        _shareVC = [[ShareViewController alloc] init];
+        _shareVC.shareInfor = shareInfor;
+        _shareVC.actionBlock = ^{
             
-            NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",weakSelf.NO_ID];
-            NSString *path = [weakSelf.ArticleInfo[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-            UIImage *shareImage = [UIImage imageWithData:ImageData];
-            NSString *shareTitle = weakSelf.ArticleInfo[@"title"];
-            NSString *shareContent = weakSelf.ArticleInfo[@"summary"];
-
-             switch (sender.tag) {
-                case 0:
-                {
-
-                    [UMSocialData defaultData].extConfig.wechatSessionData.title =  shareTitle;
-                    [UMSocialData defaultData].extConfig.wechatSessionData.url = shareURL;
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];        //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-
-                }
-                    break;
-
-
-                case 1:  //朋友圈
-                {
-
-                    [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-                    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareContent  shareImage:shareImage socialUIDelegate:weakSelf];        //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-
-                }
-                    break;
-
-                case 2:
-                {
-
-
-                    [UMSocialData defaultData].extConfig.qqData.url = shareURL;
-                    [UMSocialData defaultData].extConfig.qqData.title = shareTitle;
-                    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
-                    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
-                        if (response.responseCode == UMSResponseCodeSuccess) {
-
-//                                                        NSLog(@"QQ分享成功！");
-                        }
-                    }];
-
-
-                }
-                    break;
-
-                case 3:
-                {
-
-                    [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
-                    [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-                    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:weakSelf completion:^(UMSocialResponseEntity *response){
-                        if (response.responseCode == UMSResponseCodeSuccess) {
-
-                        }
-                    }];
-                }
-                    break;
-
-                case 4:
-                {
-
-                    NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareTitle,shareURL];
-                    [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:weakSelf];        //设置分享内容和回调对象
-                    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(weakSelf,[UMSocialControllerService defaultControllerService],YES);
-
-
-                }
-                    break;
-                case 5:
-                {
-
-                    NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
-                    [UMSocialSnsService presentSnsIconSheetView:weakSelf
-                                                         appKey:@"5668ea43e0f55af981002131"
-                                                      shareText:shareTEXT
-                                                     shareImage:nil
-                                                shareToSnsNames:@[UMShareToEmail]
-                                                       delegate:weakSelf];
-                }
-                    break;
-
-
-
-                case 6:
-                {
-                    UIPasteboard *pab = [UIPasteboard generalPasteboard];
-                    NSString *string = shareURL;
-                    [pab setString:string];
-                    [KDAlertView showMessage:@"复制成功" cancelButtonTitle:@"好的"];
-
-                }
-                    break;
-
-                case 7:
-                {//更多
-                    NSString *textToShare =  shareTitle;
-                    UIImage *imageToShare = shareImage;
-                    NSURL *urlToShare = [NSURL URLWithString:shareURL];
-                    NSArray *activityItems = @[textToShare, imageToShare, urlToShare];
-                    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-                    NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
-                                                    UIActivityTypePostToFacebook,
-                                                    UIActivityTypePostToWeibo,
-                                                    UIActivityTypePostToTencentWeibo];
-                    controller.excludedActivityTypes = excludedActivities;
-                    [weakSelf presentViewController:controller animated:YES completion:nil];
-                }
-                    
-                    break;
-             
-                default:
-                    break;
-            }
-  
+            [weakSelf.shareVC.view removeFromSuperview];
+            
         };
+        [self.view addSubview:_shareVC.view];
+
+        [self addChildViewController:_shareVC];
         
     }
-    return _ShareView;
+    return _shareVC;
+}
+
+
+//分享
+- (void)share{
+    
+    if (_shareVC.view.superview != self.view) {
+        
+        [self.view addSubview:_shareVC.view];
+        
+        [self.shareVC  show];
+    }
     
 }
-
-
-#pragma mark 友盟分享回调  UMSocialUIDelegate
--(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
-{
-    //根据`responseCode`得到发送结果,如果分享成功
-    if(response.responseCode == UMSResponseCodeSuccess)
-    {
-        //得到分享到的微博平台名
-//        KDClassLog(@"得到分享到  share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
-    }
-}
-
-
 
 
 -(void)dealloc

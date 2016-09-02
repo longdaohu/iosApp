@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^ActionBlock)(UIButton *);
+typedef void(^shareViewBlock)(UIButton *sender,BOOL isHiden);
 @interface XWGJShareView : UIView
-@property(nonatomic,copy)ActionBlock ShareBlock;
-
+@property(nonatomic,copy)shareViewBlock actionBlock;
 + (instancetype)shareView;
 -(void)ShareButtonClickAndViewHiden:(BOOL)Hiden;
 

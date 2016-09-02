@@ -47,5 +47,5 @@
 @property(nonatomic,assign)CGRect chartViewBgFrame;
 @property(nonatomic,assign)CGFloat contentHeight;
 
-
++ (instancetype)frameWithUniversity:(UniversitydetailNew *)university;
 @end

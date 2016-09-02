@@ -21,13 +21,13 @@
 
 @implementation XWGJShareView
 + (instancetype)shareView{
-
     
     XWGJShareView  *ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
 
-    [[UIApplication sharedApplication].windows.lastObject addSubview:ShareView];
+    [[UIApplication sharedApplication].keyWindow addSubview:ShareView];
 
     return ShareView;
+    
 }
 
 
@@ -35,7 +35,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         
         self.cover =[[UIButton alloc] init];
         self.cover.backgroundColor =[UIColor blackColor];
@@ -47,7 +46,6 @@
         CGFloat coverW = XScreenWidth;
         CGFloat coverH = XScreenHeight;
         self.cover.frame = CGRectMake(coverX, coverY, coverW, coverH);
-        
         
         
         self.bgView =[[UIView alloc] init];
@@ -70,8 +68,6 @@
         CGFloat titleW = self.bounds.size.width;
         CGFloat titleH = self.bounds.size.width *0.2;
         self.TitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
-        
-        
 
         
         self.ShareBgView =[[UIView  alloc] init];
@@ -83,39 +79,37 @@
         self.ShareBgView.frame = CGRectMake(shareBgX, shareBgY, shareBgW, shareBgH);
         
         
-        
-        
-        ShareButton *XEIXIN= [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareweixin") seletedTitle:GDLocalizedString(@"About_shareweixin")  normalImage:@"share_weixin" seletedImage:@"share_weixinPress" actionType:0];
+        ShareButton *XEIXIN= [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareweixin") seletedTitle:GDLocalizedString(@"About_shareweixin")  normalImage:@"share_weixin" seletedImage:@"share_weixinPress" actionType:1];
         [XEIXIN addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:XEIXIN];
         
-        ShareButton *Friend= [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_sharefrend")  seletedTitle:GDLocalizedString(@"About_sharefrend")  normalImage:@"share_Friend" seletedImage:@"share_FriendPress" actionType:1];
+        ShareButton *Friend= [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_sharefrend")  seletedTitle:GDLocalizedString(@"About_sharefrend")  normalImage:@"share_Friend" seletedImage:@"share_FriendPress" actionType:2];
         [Friend addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:Friend];
         
         
-        ShareButton *QQ= [ShareButton myShareButtonWithNormalTitle:@"QQ" seletedTitle:@"QQ" normalImage:@"share_QQ" seletedImage:@"share_QQPress" actionType:2];
+        ShareButton *QQ= [ShareButton myShareButtonWithNormalTitle:@"QQ" seletedTitle:@"QQ" normalImage:@"share_QQ" seletedImage:@"share_QQPress" actionType:3];
         [QQ addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:QQ];
         
-        ShareButton *QQRoom  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareZoom")  seletedTitle:GDLocalizedString(@"About_shareZoom") normalImage:@"share_QQRoom" seletedImage:@"share_QQRoomPress" actionType:3];
+        ShareButton *QQRoom  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareZoom")  seletedTitle:GDLocalizedString(@"About_shareZoom") normalImage:@"share_QQRoom" seletedImage:@"share_QQRoomPress" actionType:4];
         [QQRoom addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:QQRoom];
 
-        ShareButton *WEIBO  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareWeibo") seletedTitle:GDLocalizedString(@"About_shareWeibo") normalImage:@"share_weibo" seletedImage:@"share_weiboPress" actionType:4];
+        ShareButton *WEIBO  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareWeibo") seletedTitle:GDLocalizedString(@"About_shareWeibo") normalImage:@"share_weibo" seletedImage:@"share_weiboPress" actionType:5];
         [WEIBO addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:WEIBO];
         
-        ShareButton *EMAIL  = [ShareButton myShareButtonWithNormalTitle:@"Email" seletedTitle:@"Email" normalImage:@"share_mail" seletedImage:@"share_mailPress" actionType:5];
+        ShareButton *EMAIL  = [ShareButton myShareButtonWithNormalTitle:@"Email" seletedTitle:@"Email" normalImage:@"share_mail" seletedImage:@"share_mailPress" actionType:6];
         [EMAIL addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:EMAIL];
 
         
-        ShareButton *COPY  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareCopy") seletedTitle:GDLocalizedString(@"About_shareCopy")  normalImage:@"share_copy" seletedImage:@"share_copyPress" actionType:6];
+        ShareButton *COPY  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareCopy") seletedTitle:GDLocalizedString(@"About_shareCopy")  normalImage:@"share_copy" seletedImage:@"share_copyPress" actionType:7];
         [COPY addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:COPY];
         
-        ShareButton *MORE  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareMore") seletedTitle:GDLocalizedString(@"About_shareMore") normalImage:@"share_More" seletedImage:@"share_MorePress" actionType:7];
+        ShareButton *MORE  = [ShareButton myShareButtonWithNormalTitle:GDLocalizedString(@"About_shareMore") seletedTitle:GDLocalizedString(@"About_shareMore") normalImage:@"share_More" seletedImage:@"share_MorePress" actionType:8];
         [MORE addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [self.ShareBgView addSubview:MORE];
       
@@ -130,10 +124,9 @@
             item.frame = CGRectMake(itemx, itemy, itemw, itemh);
         }
 
-      
         
         self.CancelBtn = [[UIButton alloc] init];
-        self.CancelBtn.tag = 8;
+        self.CancelBtn.tag = 9;
         self.CancelBtn.layer.cornerRadius = 5;
         self.CancelBtn.layer.masksToBounds = YES;
         [self.CancelBtn setTitle:GDLocalizedString(@"Potocol-Cancel") forState:UIControlStateNormal];
@@ -155,28 +148,24 @@
 
 
 
-
 -(void)share:(UIButton *)sender
 {
-   
-    [self ShareButtonClickAndViewHiden:YES];
-    if (self.ShareBlock) {
-        self.ShareBlock(sender);
-    }
+    
+    [self ShareButton:sender hiden:YES];
     
 }
-
 
 
 -(void)coverClick:(UIButton *)sender
 {
 
     [self ShareButtonClickAndViewHiden:YES];
+    
 }
 
--(void)ShareButtonClickAndViewHiden:(BOOL)Hiden{
+-(void)ShareButton:(UIButton *)sender hiden:(BOOL)Hiden{
     
-    
+ 
     if (!Hiden) {
         
         self.hidden =NO;
@@ -194,14 +183,27 @@
         
         self.bgView.frame = newRect;
         
+  
     } completion:^(BOOL finished) {
         
         if (Hiden) {
             
             self.hidden = YES;
+            
+            if (self.actionBlock) {
+                
+                self.actionBlock(sender,YES);
+                
+            }
         }
         
     }];
+}
+
+-(void)ShareButtonClickAndViewHiden:(BOOL)Hiden{
+    
+    [self ShareButton:nil hiden:Hiden];
     
 }
+
 @end
