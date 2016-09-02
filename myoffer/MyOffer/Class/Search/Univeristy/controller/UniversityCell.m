@@ -71,14 +71,16 @@
     _itemFrame = itemFrame;
     
     UniversityItemNew *item = itemFrame.item;
+   
     
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
     self.nameLab.text = item.name;
     self.officalLab.text = item.official_name;
     self.addressLab.text = item.address_detail;
-    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",item.global_rank];
-    self.localLab.text = [NSString stringWithFormat:@"本地排名: %@",item.local_rank];
-    self.hotView.hidden = (item.hot_flag == 0);
+    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",item.ranking_qs];
+    NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? [NSString stringWithFormat:@"%@",item.ranking_ti] : [NSString stringWithFormat:@"%@星",item.ranking_ti];
+    self.localLab.text = [NSString stringWithFormat:@"本地排名: %@",local_rank_name];
+    self.hotView.hidden = (item.hot == 0);
     
 }
 

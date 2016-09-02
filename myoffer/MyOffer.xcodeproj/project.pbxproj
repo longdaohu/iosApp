@@ -51,6 +51,7 @@
 		AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */; };
 		AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */; };
 		AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */; };
+		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1D011D1D2FCD2D005E2DEF /* gradient_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */; };
 		AE1D011E1D2FCD2D005E2DEF /* YYAutoLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D01161D2FCD2D005E2DEF /* YYAutoLoopView.m */; };
 		AE1D011F1D2FCD2D005E2DEF /* YYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D01181D2FCD2D005E2DEF /* YYBannerView.m */; };
@@ -153,7 +154,7 @@
 		AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E11D6DAAF80025FC58 /* UniverstyHeaderView.m */; };
 		AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */; };
 		AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E71D6DBB0E0025FC58 /* UniversityheaderCenterView.m */; };
-		AE93E4EB1D6DBDB50025FC58 /* OneGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4EA1D6DBDB50025FC58 /* OneGroupView.m */; };
+		AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */; };
 		AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */; };
 		AEA249271D5B207700DD7939 /* ApplyMatialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249221D5B207700DD7939 /* ApplyMatialViewController.m */; };
 		AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249261D5B207700DD7939 /* MyOfferViewController.m */; };
@@ -347,10 +348,9 @@
 		AEA24B981D5B25E000DD7939 /* UniversityCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B731D5B25E000DD7939 /* UniversityCourseCell.xib */; };
 		AEA24B991D5B25E000DD7939 /* XuFilerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B751D5B25E000DD7939 /* XuFilerView.m */; };
 		AEA24BBF1D5B264300DD7939 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B9E1D5B264300DD7939 /* MessageDetailViewController.m */; };
-		AEA24BC01D5B264300DD7939 /* XWGJMessageDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA11D5B264300DD7939 /* XWGJMessageDetailFrame.m */; };
+		AEA24BC01D5B264300DD7939 /* MessageDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */; };
 		AEA24BC11D5B264300DD7939 /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA41D5B264300DD7939 /* ShareButton.m */; };
-		AEA24BC21D5B264300DD7939 /* XWGJMessageDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA61D5B264300DD7939 /* XWGJMessageDetailContentCell.m */; };
-		AEA24BC31D5B264300DD7939 /* XWGJMessageSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA81D5B264300DD7939 /* XWGJMessageSectionView.m */; };
+		AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA61D5B264300DD7939 /* MessageDetailContentCell.m */; };
 		AEA24BC51D5B264300DD7939 /* XWGJShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BAC1D5B264300DD7939 /* XWGJShareView.m */; };
 		AEA24BC61D5B264300DD7939 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB01D5B264300DD7939 /* MessageViewController.m */; };
 		AEA24BC81D5B264300DD7939 /* XWGJMessageCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB51D5B264300DD7939 /* XWGJMessageCategoryItem.m */; };
@@ -517,6 +517,8 @@
 		AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityCell.h; path = controller/UniversityCell.h; sourceTree = "<group>"; };
 		AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityCell.m; path = controller/UniversityCell.m; sourceTree = "<group>"; };
 		AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UniversityCell.xib; path = controller/UniversityCell.xib; sourceTree = "<group>"; };
+		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
+		AE175BBD1D79593600FD8865 /* UniDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniDetailGroup.m; sourceTree = "<group>"; };
 		AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient_bg.png; sourceTree = "<group>"; };
 		AE1D01151D2FCD2D005E2DEF /* YYAutoLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAutoLoopView.h; sourceTree = "<group>"; };
 		AE1D01161D2FCD2D005E2DEF /* YYAutoLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAutoLoopView.m; sourceTree = "<group>"; };
@@ -679,8 +681,8 @@
 		AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityNewFrame.m; path = controller/UniversityNewFrame.m; sourceTree = "<group>"; };
 		AE93E4E61D6DBB0E0025FC58 /* UniversityheaderCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityheaderCenterView.h; path = controller/UniversityheaderCenterView.h; sourceTree = "<group>"; };
 		AE93E4E71D6DBB0E0025FC58 /* UniversityheaderCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityheaderCenterView.m; path = controller/UniversityheaderCenterView.m; sourceTree = "<group>"; };
-		AE93E4E91D6DBDB50025FC58 /* OneGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneGroupView.h; path = controller/OneGroupView.h; sourceTree = "<group>"; };
-		AE93E4EA1D6DBDB50025FC58 /* OneGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OneGroupView.m; path = controller/OneGroupView.m; sourceTree = "<group>"; };
+		AE93E4E91D6DBDB50025FC58 /* UniGroupOneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniGroupOneView.h; path = controller/UniGroupOneView.h; sourceTree = "<group>"; };
+		AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniGroupOneView.m; path = controller/UniGroupOneView.m; sourceTree = "<group>"; };
 		AE93E4EC1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityOneGroupCollectionCell.h; path = controller/UniversityOneGroupCollectionCell.h; sourceTree = "<group>"; };
 		AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityOneGroupCollectionCell.m; path = controller/UniversityOneGroupCollectionCell.m; sourceTree = "<group>"; };
 		AEA249211D5B207700DD7939 /* ApplyMatialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMatialViewController.h; sourceTree = "<group>"; };
@@ -1028,14 +1030,12 @@
 		AEA24B751D5B25E000DD7939 /* XuFilerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XuFilerView.m; sourceTree = "<group>"; };
 		AEA24B9D1D5B264300DD7939 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
 		AEA24B9E1D5B264300DD7939 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
-		AEA24BA01D5B264300DD7939 /* XWGJMessageDetailFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageDetailFrame.h; sourceTree = "<group>"; };
-		AEA24BA11D5B264300DD7939 /* XWGJMessageDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageDetailFrame.m; sourceTree = "<group>"; };
+		AEA24BA01D5B264300DD7939 /* MessageDetailFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailFrame.h; sourceTree = "<group>"; };
+		AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailFrame.m; sourceTree = "<group>"; };
 		AEA24BA31D5B264300DD7939 /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
 		AEA24BA41D5B264300DD7939 /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareButton.m; sourceTree = "<group>"; };
-		AEA24BA51D5B264300DD7939 /* XWGJMessageDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageDetailContentCell.h; sourceTree = "<group>"; };
-		AEA24BA61D5B264300DD7939 /* XWGJMessageDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageDetailContentCell.m; sourceTree = "<group>"; };
-		AEA24BA71D5B264300DD7939 /* XWGJMessageSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageSectionView.h; sourceTree = "<group>"; };
-		AEA24BA81D5B264300DD7939 /* XWGJMessageSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageSectionView.m; sourceTree = "<group>"; };
+		AEA24BA51D5B264300DD7939 /* MessageDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailContentCell.h; sourceTree = "<group>"; };
+		AEA24BA61D5B264300DD7939 /* MessageDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailContentCell.m; sourceTree = "<group>"; };
 		AEA24BAB1D5B264300DD7939 /* XWGJShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJShareView.h; sourceTree = "<group>"; };
 		AEA24BAC1D5B264300DD7939 /* XWGJShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJShareView.m; sourceTree = "<group>"; };
 		AEA24BAF1D5B264300DD7939 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -1698,6 +1698,8 @@
 				AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */,
 				AE93E4E31D6DABA30025FC58 /* UniversityNewFrame.h */,
 				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
+				AE175BBC1D79593600FD8865 /* UniDetailGroup.h */,
+				AE175BBD1D79593600FD8865 /* UniDetailGroup.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -1720,8 +1722,8 @@
 				AE7825E21D702AB100AA4EF4 /* UniversityNavView.xib */,
 				AE93E4E61D6DBB0E0025FC58 /* UniversityheaderCenterView.h */,
 				AE93E4E71D6DBB0E0025FC58 /* UniversityheaderCenterView.m */,
-				AE93E4E91D6DBDB50025FC58 /* OneGroupView.h */,
-				AE93E4EA1D6DBDB50025FC58 /* OneGroupView.m */,
+				AE93E4E91D6DBDB50025FC58 /* UniGroupOneView.h */,
+				AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */,
 				AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */,
 				AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */,
 				AE93E4EC1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.h */,
@@ -2823,8 +2825,8 @@
 		AEA24B9F1D5B264300DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24BA01D5B264300DD7939 /* XWGJMessageDetailFrame.h */,
-				AEA24BA11D5B264300DD7939 /* XWGJMessageDetailFrame.m */,
+				AEA24BA01D5B264300DD7939 /* MessageDetailFrame.h */,
+				AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2832,10 +2834,8 @@
 		AEA24BA21D5B264300DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24BA51D5B264300DD7939 /* XWGJMessageDetailContentCell.h */,
-				AEA24BA61D5B264300DD7939 /* XWGJMessageDetailContentCell.m */,
-				AEA24BA71D5B264300DD7939 /* XWGJMessageSectionView.h */,
-				AEA24BA81D5B264300DD7939 /* XWGJMessageSectionView.m */,
+				AEA24BA51D5B264300DD7939 /* MessageDetailContentCell.h */,
+				AEA24BA61D5B264300DD7939 /* MessageDetailContentCell.m */,
 				AEA24BAB1D5B264300DD7939 /* XWGJShareView.h */,
 				AEA24BAC1D5B264300DD7939 /* XWGJShareView.m */,
 				AEA24BA31D5B264300DD7939 /* ShareButton.h */,
@@ -3387,7 +3387,7 @@
 				AEA24A871D5B23F600DD7939 /* DiscoveryCell.m in Sources */,
 				AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */,
 				AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */,
-				AEA24BC21D5B264300DD7939 /* XWGJMessageDetailContentCell.m in Sources */,
+				AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */,
 				AEA249A71D5B215300DD7939 /* OrderDetailViewController.m in Sources */,
 				AEA24A361D5B231300DD7939 /* InteProfileViewController.m in Sources */,
 				AEA24A961D5B23F600DD7939 /* XliusectionView.m in Sources */,
@@ -3465,7 +3465,7 @@
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
-				AEA24BC01D5B264300DD7939 /* XWGJMessageDetailFrame.m in Sources */,
+				AEA24BC01D5B264300DD7939 /* MessageDetailFrame.m in Sources */,
 				AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */,
 				AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */,
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
@@ -3527,7 +3527,6 @@
 				AEA249B11D5B215300DD7939 /* ServiceItemView.m in Sources */,
 				AEA24B231D5B251800DD7939 /* NewForgetPasswdViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
-				AEA24BC31D5B264300DD7939 /* XWGJMessageSectionView.m in Sources */,
 				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
@@ -3543,7 +3542,7 @@
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
 				AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */,
-				AE93E4EB1D6DBDB50025FC58 /* OneGroupView.m in Sources */,
+				AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */,
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
@@ -3622,6 +3621,7 @@
 				AEA24B8A1D5B25E000DD7939 /* searchSectionFootView.m in Sources */,
 				AEA249D21D5B215300DD7939 /* centerSectionView.m in Sources */,
 				AEA249B81D5B215300DD7939 /* XWGJTJSectionGroup.m in Sources */,
+				AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* XWGJScrollView.m in Sources */,
 				AEA249C01D5B215300DD7939 /* XWGJYiXiangTableViewCell.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,

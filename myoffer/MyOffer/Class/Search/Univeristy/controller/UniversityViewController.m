@@ -10,7 +10,7 @@
 #import "UniversitydetailNew.h"
 #import "UniversityNewFrame.h"
 #import "UniverstyHeaderView.h"
-#import "OneGroupView.h"
+#import "UniGroupOneView.h"
 #import "HomeSectionHeaderView.h"
 #import "NewsItem.h"
 #import "XWGJMessageTableViewCell.h"
@@ -27,6 +27,7 @@
 #import "UniversityFooterView.h"
 #import "UniversityCourseViewController.h"
 #import "InteProfileViewController.h"
+#import "UniDetailGroup.h"
 
 
 typedef enum {
@@ -41,18 +42,16 @@ typedef enum {
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)OneGroupView  *oneGroup;
-@property(nonatomic,strong)UIImageView *iconView;
-@property(nonatomic,strong)UniversityNewFrame *UniFrame;
-@property(nonatomic,assign)CGRect iconViewOldFrame;
-@property(nonatomic,assign)CGPoint iconViewOldCenter;
-@property(nonatomic,strong)NSArray *newsFrames;
-@property(nonatomic,strong)NSArray *Result;
-@property(nonatomic,strong)NSArray *groups;
-@property(nonatomic,strong)UniverstyHeaderView  *header;
-@property(nonatomic,strong)UniversityNavView *topNavigationView;
+@property(nonatomic,strong)UniGroupOneView  *oneGroup;
+@property(nonatomic,strong)UniversityNewFrame    *UniFrame;
+@property(nonatomic,strong)UIImageView           *iconView;
+@property(nonatomic,assign)CGRect                iconViewOldFrame;
+@property(nonatomic,assign)CGPoint               iconViewOldCenter;
+@property(nonatomic,strong)NSMutableArray        *groups;
+@property(nonatomic,strong)UniverstyHeaderView   *header;
+@property(nonatomic,strong)UniversityNavView     *topNavigationView;
 @property(nonatomic,assign)BOOL favorited;
-@property(nonatomic,assign)UniversityItemType *clickType;
+@property(nonatomic,assign)UniversityItemType    *clickType;
 @property(nonatomic,strong)ShareViewController   *shareVC;
 
 @end
@@ -78,7 +77,7 @@ typedef enum {
 
 -(void)refesh{
 
-    NSString *path =[NSString stringWithFormat:@"GET api/university/v2/%@",self.uni_id];
+    NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
     
     XJHUtilDefineWeakSelfRef
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -122,6 +121,15 @@ typedef enum {
     
 }
 
+-(NSMutableArray *)groups{
+
+    if (!_groups) {
+        
+        _groups =[NSMutableArray array];
+    }
+    
+    return _groups;
+}
 
 - (void)viewDidLoad {
     
@@ -137,7 +145,7 @@ typedef enum {
 {
   
     XJHUtilDefineWeakSelfRef
-    NSString *path =[NSString stringWithFormat:@"GET api/university/v2/%@",self.uni_id];
+    NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
@@ -155,7 +163,6 @@ typedef enum {
 
         }];
         
-        
         [weakSelf.tableView reloadData];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
@@ -164,8 +171,6 @@ typedef enum {
         
     }];
     
-    
-   
 }
 
 
@@ -174,32 +179,12 @@ typedef enum {
     
     
     self.favorited = university.favorited;
+    
     [self configureLikeButton: university.favorited];
-    
-  
-     //相关院校
-    NSMutableArray *neightbour_temps = [NSMutableArray array];
-    [university.rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-       UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
-       UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
-       [neightbour_temps addObject:uniFrame];
-  
-    }];
-    self.Result = [neightbour_temps copy];
- 
-    //相关资讯
-    NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:university.relate_articles];
-    NSMutableArray *news_temps = [NSMutableArray array];
-    for (NewsItem *news in newses) {
-        XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
-        [news_temps addObject:newsFrame];
-    }
-    self.newsFrames = [news_temps copy];
-    
     
     UniversityNewFrame *UniFrame = [UniversityNewFrame frameWithUniversity:university];
     self.UniFrame = UniFrame;
+    
     
     XJHUtilDefineWeakSelfRef
    //表头
@@ -211,12 +196,45 @@ typedef enum {
     self.header = header;
     self.tableView.tableHeaderView  = header;
     
-    //设置第一分组cell数据
-    [self oneGroupViewWithUniFrame:UniFrame];
     
     //拉伸图片
     NSString *countryImageName = [university.country isEqualToString:@"英国"] ? @"Uni-uk.jpg" : @"Uni-au.jpg";
     [self.iconView setImage:[UIImage imageNamed:countryImageName]];
+    
+    
+    //设置第一分组cell数据
+    [self oneGroupViewWithUniFrame:UniFrame];
+    NSArray *sectionOne = @[UniFrame];
+    UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:sectionOne andFooter:NO];
+    [self.groups addObject:groupOne];
+    
+    
+    //相关资讯 第二分组
+    NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:university.relate_articles];
+    NSMutableArray *news_temps = [NSMutableArray array];
+    for (NewsItem *news in newses) {
+        XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
+        [news_temps addObject:newsFrame];
+    }
+ 
+    UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
+    [self.groups addObject:groupTwo];
+    
+    //相关院校  大于第二分组
+    NSMutableArray *neightbour_temps = [NSMutableArray array];
+    [university.rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
+        [neightbour_temps addObject:uniFrame];
+        
+        NSString *title = idx == 0 ? @"相关院校" : @"";
+        NSArray *items = @[uniFrame];
+        UniDetailGroup *group = [UniDetailGroup groupWithTitle:title contentes:items andFooter:YES];
+        [self.groups addObject:group];
+        
+        
+    }];
     
 }
 
@@ -250,9 +268,8 @@ typedef enum {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-     self.tableView.alpha = 0.1;
-//    [self.tableView       setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
+    self.tableView.alpha = 0.1;
+ 
     
     XJHUtilDefineWeakSelfRef
     self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
@@ -270,21 +287,23 @@ typedef enum {
 //表头显示图片
 -(void)makeHeaderIconView{
     
+    self.view.clipsToBounds = YES;
+    
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, XPERCENT * 400)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.backgroundColor = XCOLOR_LIGHTGRAY;
     iconView.image = [UIImage imageNamed:@"Uni-uk.jpg"];
-    iconView.clipsToBounds = YES;
     self.iconView = iconView;
     self.iconViewOldFrame = iconView.frame;
     self.iconViewOldCenter = iconView.center;
     [self.view insertSubview:iconView  belowSubview:self.tableView];
+    
 }
 
 //设置第一分区
 - (void)oneGroupViewWithUniFrame:(UniversityNewFrame *)UniFrame
 {
-    OneGroupView  *oneGroup =[[OneGroupView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, UniFrame.contentHeight)];
+    UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, UniFrame.contentHeight)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
     XJHUtilDefineWeakSelfRef
@@ -296,15 +315,13 @@ typedef enum {
 
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+   
     HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
-     switch (section) {
-        case 1:
-            sectionView.TitleLab.text = @"相关文章";
-            break;
-        default:
-            sectionView.TitleLab.text = @"相关院校";
-            break;
-    }
+    
+    UniDetailGroup *group = self.groups[section];
+
+    sectionView.TitleLab.text = group.HeaderTitle;
+
     
     return sectionView;
 }
@@ -313,68 +330,55 @@ typedef enum {
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     
-    return 0.0000000001;
+    UniDetailGroup *group = self.groups[section];
+    
+    return group.HaveFooter ? PADDING_TABLEGROUP : 0.0000000001;
 }
+
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     
-    
-    return  0 == section ? 0.0000000001 : 40;
+    UniDetailGroup *group = self.groups[section];
+
+    return  group.HaveHeader ? 40 : 0.0000000001;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
-    
-    if (indexPath.section == 0) {
-        
-        height = self.oneGroup.contentFrame.contentHeight;
-    }else{
-    
-        height = University_HEIGHT;
-    }
-  
-    
+ 
+    CGFloat height = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : University_HEIGHT;
+ 
     return height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return self.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NSInteger sectionRow = 0;
     
-    switch (section) {
-        case 1:
-            sectionRow = self.newsFrames.count;
-            break;
-        case 2:
-            sectionRow = self.Result.count;
-            break;
-        default:
-            sectionRow = 1;
-            break;
-    }
+    UniDetailGroup *group = self.groups[section];
     
-    return  sectionRow;
+    return  group.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    UniDetailGroup *group = self.groups[indexPath.section];
+
     if (indexPath.section == 0) {
         
         UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"one"];
-         if (!cell) {
-            
-            cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"one"];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
         
+         if (!cell) {
+             cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"one"];
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
         [cell.contentView addSubview:self.oneGroup];
         
         return cell;
@@ -382,17 +386,16 @@ typedef enum {
         
     }else if(indexPath.section == 1){
     
-        XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
-         cell.messageFrame = self.newsFrames[indexPath.row];
-         return cell;
+        XWGJMessageTableViewCell *news_cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
+        news_cell.messageFrame =  group.items[indexPath.row];
+         return news_cell;
         
     }else{
 
-        UniversityCell *cell =[UniversityCell cellWithTableView:tableView];
-        cell.itemFrame = self.Result[indexPath.row];
-//        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width);
+        UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
+        uni_cell.itemFrame = group.items[indexPath.row];
 
-        return cell;
+        return uni_cell;
         
     }
     
@@ -402,30 +405,31 @@ typedef enum {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 1) {
+    if(indexPath.section == 0) return;
+    
+    UniDetailGroup *group = self.groups[indexPath.section];
+    
+    if ([group.HeaderTitle containsString:@"文章"]) {
         
-        XWGJMessageFrame *newsFrame  =  self.newsFrames[indexPath.row];
+        XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
         MessageDetailViewController *detail  =[[MessageDetailViewController alloc] init];
         detail.NO_ID = newsFrame.News.messageID;
         [self.navigationController pushViewController:detail animated:YES];
         
-    }
-    
-    if (indexPath.section == 2) {
+    }else{
         
-         UniItemFrame *uniFrame   =  self.Result[indexPath.row];
-         UniversityViewController *Uni  =[[UniversityViewController alloc] init];
-         Uni.uni_id =  uniFrame.item.NO_id;
+        UniItemFrame *uniFrame   = group.items[indexPath.row];
+        UniversityViewController *Uni  =[[UniversityViewController alloc] init];
+        Uni.uni_id =  uniFrame.item.NO_id;
         [self.navigationController pushViewController:Uni animated:YES];
-     }
-    
+    }
     
 }
 
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
-    
-    //顶部导航条透明度
+      //顶部导航条透明度
     [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y];
  
     //顶部图片拉伸
@@ -436,7 +440,7 @@ typedef enum {
         frame.size.width  =self.iconViewOldFrame.size.width * (frame.size.height)/self.iconViewOldFrame.size.height;
         self.iconView.frame = frame;
         self.iconView.center = self.iconViewOldCenter;
- 
+  
     }else{
         
         [UIView animateWithDuration:0.25 animations:^{
@@ -444,8 +448,11 @@ typedef enum {
             self.iconView.frame = self.iconViewOldFrame;
             
         }];
+        
+        self.iconView.hidden = scrollView.contentOffset.y > XScreenHeight;
+
     }
-     
+    
 }
 
 

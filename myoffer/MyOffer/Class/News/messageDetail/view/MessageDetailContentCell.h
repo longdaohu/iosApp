@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XWGJMessageDetailFrame;
-@interface XWGJMessageDetailContentCell : UITableViewCell
-@property(nonatomic,strong)XWGJMessageDetailFrame *MessageFrame;
+@class MessageDetailFrame;
+@interface MessageDetailContentCell : UITableViewCell
+@property(nonatomic,strong)MessageDetailFrame *MessageFrame;
 +(instancetype)CreateCellWithTableView:(UITableView *)tableView;
 
 @end

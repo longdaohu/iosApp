@@ -16,14 +16,14 @@
 @property(nonatomic,copy)NSString *official_name;
 @property(nonatomic,strong)NSNumber   *found_year; //建校年份
 @property(nonatomic,assign)BOOL  private_flag;
-@property(nonatomic,strong)NSNumber *global_rank;
+@property(nonatomic,strong)NSNumber *ranking_qs;
 @property(nonatomic,assign)BOOL    cn_flag;
 @property(nonatomic,assign)BOOL    in_cart;
 @property(nonatomic,copy)NSString *logo;
 @property(nonatomic,copy)NSString *address;
-@property(nonatomic,assign)BOOL hot_flag;
+@property(nonatomic,assign)BOOL hot;
 @property(nonatomic,copy)NSString *city;
-@property(nonatomic,strong)NSNumber *local_rank;
+@property(nonatomic,strong)NSNumber *ranking_ti;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *country;
 @property(nonatomic,copy)NSString *address_detail;
@@ -31,3 +31,4 @@
 @end
 
 
+ 

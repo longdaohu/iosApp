@@ -131,10 +131,14 @@
 
 
 #pragma mark ———————— UITableViewDataSource, UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 0.001;
+}
 
-    return 0.01;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return PADDING_TABLEGROUP;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

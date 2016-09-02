@@ -59,7 +59,6 @@
         [self.upView addSubview:qsLab];
         
         
-        
         UILabel *timesLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         timesLab.numberOfLines = 0;
         self.TIMESLab = timesLab;
@@ -98,7 +97,9 @@
     self.QSrankLab.frame = itemFrame.QSRankFrame;
     
     
-    NSString *local_rank = itemFrame.item.local_rank.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.local_rank];
+    NSString *local_rankStr  = [NSString stringWithFormat:@"%@",itemFrame.item.ranking_ti];
+    NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? local_rankStr : [NSString stringWithFormat:@"%@星",local_rankStr];
+    NSString *local_rank = itemFrame.item.ranking_ti.integerValue == DefaultNumber ? @"暂无排名" :local_rank_name;
     NSString *times = [NSString stringWithFormat:@"%@\nTIMES排名",local_rank];
     NSRange timesRange = [times rangeOfString:local_rank];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
@@ -106,7 +107,7 @@
     self.TIMESLab.attributedText = timesAttri;
     
     
-    NSString *global_rank = itemFrame.item.global_rank.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.global_rank];
+    NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
     NSString *qs = [NSString stringWithFormat:@"%@\n全球QS排名",global_rank];
     NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];

@@ -11,14 +11,24 @@
 #define LabHeight 20
 #define SummaryFont 20
 #define LineHeight 1
-#import "XWGJMessageDetailFrame.h"
-@interface XWGJMessageDetailFrame ()
+#import "MessageDetailFrame.h"
+@interface MessageDetailFrame ()
 @property(nonatomic,strong)NSArray *tags;
 @property(nonatomic,strong)NSArray *tagImageNames;
 
 @end
 
-@implementation XWGJMessageDetailFrame
+@implementation MessageDetailFrame
++ (instancetype)frameWithDictionary:(NSDictionary *)messageInfo{
+
+    MessageDetailFrame *detailFrame = [[MessageDetailFrame alloc] init];
+   
+    detailFrame.MessageDetail = messageInfo;
+    
+    return detailFrame;
+}
+
+
 -(NSArray *)tags
 {
     if (!_tags) {

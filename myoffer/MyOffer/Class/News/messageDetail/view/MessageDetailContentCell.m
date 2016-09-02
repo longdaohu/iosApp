@@ -10,9 +10,10 @@
 #define SummaryFont 20
 #define MARGIN 10
 
-#import "XWGJMessageDetailContentCell.h"
-#import "XWGJMessageDetailFrame.h"
-@interface XWGJMessageDetailContentCell()
+#import "MessageDetailContentCell.h"
+#import "MessageDetailFrame.h"
+
+@interface MessageDetailContentCell()
 @property(nonatomic,strong)UIImageView *TagView;    //分类图片
 @property(nonatomic,strong)UILabel *TagLabel;       //学校名称
 @property(nonatomic,strong)UIView *TagBackground;   //用于显示小图标
@@ -29,18 +30,18 @@
 @property(nonatomic,strong)UILabel *SummaryLabel;    //文件摘要
 
 @end
-@implementation XWGJMessageDetailContentCell
+@implementation MessageDetailContentCell
 
 +(instancetype)CreateCellWithTableView:(UITableView *)tableView
 {
     
     static NSString *Identifier = @"detailContent";
     
-    XWGJMessageDetailContentCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
+    MessageDetailContentCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
     
     if (!cell) {
         
-        cell =[[XWGJMessageDetailContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+        cell =[[MessageDetailContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
         
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -131,7 +132,7 @@
     return self;
 }
 
--(void)setMessageFrame:(XWGJMessageDetailFrame *)MessageFrame
+-(void)setMessageFrame:(MessageDetailFrame *)MessageFrame
 {
 
     _MessageFrame = MessageFrame;

@@ -15,7 +15,7 @@
 @property(nonatomic,copy)NSString     *country;
 @property(nonatomic,copy)NSString     *state;
 @property(nonatomic,copy)NSString     *city;
-@property(nonatomic,strong)NSNumber   *found_year; //建校年份
+@property(nonatomic,strong)NSNumber   *found; //建校年份
 @property(nonatomic,copy)NSString     *logo;
 @property(nonatomic,copy)NSString     *address;
 @property(nonatomic,copy)NSString     *postcode;
@@ -29,7 +29,7 @@
 @property(nonatomic,copy)NSString     *short_id;
 @property(nonatomic,strong)NSArray    *relate_articles;        //关联文章
 @property(nonatomic,strong)NSArray    *tags;              //标签
-@property(nonatomic,strong)NSArray    *key_subjects;     //王牌领域
+@property(nonatomic,strong)NSArray    *key_subjectArea;     //王牌领域
 @property(nonatomic,strong)NSNumber   *pageViews;        //浏览量
 @property(nonatomic,strong)NSArray    *m_images;
 @property(nonatomic,strong)NSArray    *images;
@@ -41,14 +41,14 @@
 @property(nonatomic,copy)NSString     *school_level;            //本科, 专科...
 @property(nonatomic,assign)BOOL        private_flag; //0 false, 1 true, 私立学校标志
 @property(nonatomic,assign)BOOL        cn_flag; //0 false, 1 true, 中国教育部认可
-@property(nonatomic,assign)BOOL        hot_flag; //0 false, 1 true, 热门院校
+@property(nonatomic,assign)BOOL        hot; //0 false, 1 true, 热门院校
 @property(nonatomic,copy)NSString     *category;  //院校类型：综合类, 理工类, 语言类...
 @property(nonatomic,copy)NSString     *degree_level; //学位类型, 硕士, 博士...
 @property(nonatomic,strong)NSDictionary  *rank; //排名信息
 @property(nonatomic,strong)NSArray       *rankType; // 排名类别
 @property(nonatomic,strong)NSArray       *languageRequirement; //  语言要求原始数据
-@property(nonatomic,strong)NSNumber  *global_rank; //世界排名qs
-@property(nonatomic,strong)NSNumber  *local_rank; //当地排名times
+@property(nonatomic,strong)NSNumber  *ranking_qs; //世界排名qs
+@property(nonatomic,strong)NSNumber  *ranking_ti; //当地排名times
 @property(nonatomic,strong)NSArray       *global_rank_history; //世界排名qs历史
 @property(nonatomic,strong)NSArray       *local_rank_history; //当地排名times历史
 @property(nonatomic,strong)NSArray       *rankNeighbour; //排名相近学校

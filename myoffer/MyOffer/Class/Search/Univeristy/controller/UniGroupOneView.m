@@ -6,13 +6,13 @@
 //  Copyright © 2016年 xuewuguojie. All rights reserved.
 //
 
-#import "OneGroupView.h"
+#import "UniGroupOneView.h"
 #import "HomeSectionHeaderView.h"
 #import "UniversityOneGroupCollectionCell.h"
 #import "HomeSectionHeaderView.h"
 #import "UUChart.h"
 
-@interface OneGroupView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
+@interface UniGroupOneView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
 @property(nonatomic,strong)UICollectionViewFlowLayout *flowlayout;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)HomeSectionHeaderView *fenguanView;
@@ -31,7 +31,7 @@
 @property(nonatomic,strong)NSArray *ranks;
 @end
 
-@implementation OneGroupView
+@implementation UniGroupOneView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -133,7 +133,7 @@
     self.flowlayout = flowlayout;
     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
     CGFloat width = 100 * XPERCENT;
-    CGFloat heigh = width;
+    CGFloat heigh = 100 * XPERCENT;
     
     flowlayout.itemSize = CGSizeMake(width,heigh);
     // 设置item行与行之间的间隙
@@ -190,7 +190,7 @@
     self.timesBtn.frame = contentFrame.timesFrame;
     
     
-    for (NSString *title in contentFrame.item.key_subjects) {
+    for (NSString *title in contentFrame.item.key_subjectArea) {
         
         UIButton *sender  =  [[UIButton alloc] init];
         [self.keySubjectView addSubview:sender];

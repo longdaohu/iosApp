@@ -111,16 +111,17 @@
     CGFloat tag1W = XScreenWidth;
     self.tagsOneFrame= CGRectMake(tag1X, tag1Y, tag1W, tag1H);
     
-    CGFloat TIMESRankW = [@"TIMES排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width;
-    CGFloat QSRankW = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width;;
+    CGFloat QSRankW = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width + 5;
     CGFloat QSRankH = XPERCENT * 13 * 3;
-    CGFloat QSRankX = 0.5 * (XScreenWidth - TIMESRankW - QSRankW - 2 * XMARGIN);
+    CGFloat QSRankX = 0.5 * (XScreenWidth - 2 * QSRankW - 2 * XMARGIN);
     CGFloat QSRankY =  tag1Y - QSRankH - XMARGIN;
 
+    
     CGFloat TIMESRankX = QSRankX + QSRankW + 2 * XMARGIN;
     CGFloat TIMESRankY = QSRankY;
     CGFloat TIMESRankH = XPERCENT * 13 * 3;
-    
+    CGFloat TIMESRankW = QSRankW;
+
     self.QSRankFrame= CGRectMake(QSRankX, QSRankY, QSRankW, QSRankH);
     self.TIMESRankFrame= CGRectMake(TIMESRankX, TIMESRankY, TIMESRankW, TIMESRankH);
 
@@ -188,7 +189,8 @@
     CGFloat keyH = fenguanH;
     self.keyFrame = CGRectMake(keyX, keyY, keyW, keyH);
     
-    [self makeButtonItems:item.key_subjects];
+    
+    [self makeButtonItems:item.key_subjectArea];
     
     
     CGFloat lineTwoX = lineOneX;

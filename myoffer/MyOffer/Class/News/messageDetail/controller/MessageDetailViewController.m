@@ -5,14 +5,18 @@
 //  Created by xuewuguojie on 16/1/18.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
+/*
+ UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:sectionOne andFooter:NO];
+ [self.groups addObject:groupOne];
+ */
+
 
 #define ZangFontSize 15
 #import "MessageDetailViewController.h"
-#import "XWGJMessageDetailFrame.h"
+#import "MessageDetailFrame.h"
 #import "XWGJMessageTableViewCell.h"
-#import "XWGJMessageDetailContentCell.h"
+#import "MessageDetailContentCell.h"
 #import "ApplyViewController.h"
-#import "XWGJMessageSectionView.h"
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
 #import <WebKit/WebKit.h>
@@ -20,18 +24,15 @@
 #import "UniversityItemNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
+#import "UniDetailGroup.h"
+#import "UniversityViewController.h"
+#import "HomeSectionHeaderView.h"
 
 @interface MessageDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate,WKNavigationDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //嵌套webView到Cell中
 @property(nonatomic,strong)UIWebView *webView;
 @property(nonatomic,strong)WKWebView *web_wk;
-//webView的高度
-@property(nonatomic,assign)CGFloat WebHeight;
-//推荐资讯数据源
-@property(nonatomic,strong)NSArray *Messages;
-//推荐院校数据源
-@property(nonatomic,strong)NSArray *Universities;
 //请求返回数据字典
 @property(nonatomic,strong)NSDictionary *ArticleInfo;
 // 点赞按钮
@@ -40,8 +41,7 @@
 @property(nonatomic,strong)UIButton *shareBtn;
 //导航右边按钮
 @property(nonatomic,strong)UIView *RightView;
-//资讯详情Frame模型
-@property(nonatomic,strong)XWGJMessageDetailFrame *MessageDetailFrame;
+
 @property(nonatomic,strong)KDProgressHUD *hud;
 //分享
 @property(nonatomic,strong)ShareViewController *shareVC;
@@ -49,6 +49,8 @@
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 //导航栏下图片
 @property(nonatomic,strong)UIImageView *navImageView;
+//数据源
+@property(nonatomic,strong)NSMutableArray *groups;
 
 @end
 
@@ -73,6 +75,15 @@
     
 }
 
+-(NSMutableArray *)groups{
+    
+    if (!_groups) {
+        
+        _groups =[NSMutableArray array];
+    }
+    
+    return _groups;
+}
 
 
 //自定义导航栏右侧按钮
@@ -89,7 +100,7 @@
          self.ZangBtn  = [[UIButton alloc] initWithFrame:CGRectMake(Lx,Ly, Lw, Lh)];
         [self.ZangBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_likeHightLight"] forState:UIControlStateNormal];
-        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_likeNomal"] forState:UIControlStateDisabled];
+        [self.ZangBtn  setImage:[UIImage imageNamed  :@"nav_likeNomal"] forState:UIControlStateDisabled];
         self.ZangBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.ZangBtn  addTarget:self action:@selector(ZangBtnClick)  forControlEvents:UIControlEventTouchUpInside];
         self.ZangBtn.titleEdgeInsets = UIEdgeInsetsMake(5, 10, 0, 0);
@@ -150,7 +161,7 @@
 {
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 1)];
+        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
         NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
         [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
         self.web_wk.scrollView.scrollEnabled = NO;
@@ -160,7 +171,7 @@
         
     }else{
     
-        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, APPSIZE.width, 1)];
+        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
         self.webView.delegate = self;
         self.webView.scrollView.scrollEnabled = NO;
         self.webView.userInteractionEnabled = NO;
@@ -173,13 +184,10 @@
 }
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64) style:UITableViewStyleGrouped];
-    self.tableView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0);
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
-    self.tableView.hidden = YES;
-    self.tableView.sectionFooterHeight = 0;
-//    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.alpha = 0.1;
     [self.view addSubview:self.tableView];
     
 }
@@ -200,9 +208,8 @@
     
     XJHUtilDefineWeakSelfRef
     
-    self.MessageDetailFrame  = [[XWGJMessageDetailFrame alloc] init];
-
-    NSString *testpath =[NSString stringWithFormat:@"GET api/article/v2/%@",self.NO_ID];
+ 
+    NSString *testpath =[NSString stringWithFormat:@"GET api/v2/article/%@",self.NO_ID];
     
     [self startAPIRequestWithSelector:testpath parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
@@ -211,83 +218,93 @@
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        self.tableView.hidden = NO;
-        
-        weakSelf.ZangBtn.enabled = ![response[@"like"] integerValue];
-        
-        if ([response[@"like"] integerValue]) {
-            
-            [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-            
-        }
-        
-        //根据点赞数量改变导航栏右侧相关控件宽度
-        [weakSelf.ZangBtn  setTitle:[NSString  stringWithFormat:@"%@",response[@"like_count"]]  forState:UIControlStateNormal];
-        CGSize LikeCountSize =[[NSString  stringWithFormat:@"%@",response[@"like_count"]]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
-        
-        CGRect NewRightFrame = weakSelf.RightView.frame;
-        NewRightFrame.size.width += LikeCountSize.width;
-        weakSelf.RightView.frame = NewRightFrame;
-        
-        CGRect NewShareFrame = weakSelf.shareBtn.frame;
-        NewShareFrame.origin.x +=  LikeCountSize.width;
-        weakSelf.shareBtn.frame = NewShareFrame;
-        
-        CGRect NewLoveFrame = weakSelf.ZangBtn.frame;
-        NewLoveFrame.size.width +=  LikeCountSize.width;
-        weakSelf.ZangBtn.frame = NewLoveFrame;
-        
-        
-        //推荐资讯数据
-        NSMutableArray *messageFrames = [NSMutableArray array];
-        
-        for (NSDictionary *MessageDic in  response[@"recommendations"]) {
-            
-            if (![self.NO_ID isEqualToString:MessageDic[@"_id"]]) {
-                
-                NewsItem  *News =[NewsItem mj_objectWithKeyValues:MessageDic];
-                
-                XWGJMessageFrame *messageFrame = [XWGJMessageFrame messageFrameWithMessage:News];
-                
-                [messageFrames addObject:messageFrame];
-            }
-            
-        }
-        
-        weakSelf.Messages = [messageFrames copy];
-        
-        weakSelf.ArticleInfo = (NSDictionary *)response;
-        
-        weakSelf.MessageDetailFrame.MessageDetail = (NSDictionary *)response;
-        
-        
-        
-        NSMutableArray *related_universities = [NSMutableArray array];
-        
-        [response[@"related_universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
-            UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
-            [related_universities addObject:uniFrame];
-            
-        }];
+        [UIView animateWithDuration:0.2 animations:^{
+           
+            weakSelf.tableView.alpha = 1;
 
-        weakSelf.Universities = [related_universities copy];
+        }];
+        
+        
+        [weakSelf makeUIWithMessageDictionary:response];
         
         [weakSelf.tableView reloadData];
-        
-        
 
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         weakSelf.noDataView.hidden = NO;
         
     }];
-    
- 
- 
-
+   
 }
+
+-(void)makeUIWithMessageDictionary:(NSDictionary *)response{
+    
+    
+    self.ZangBtn.enabled = ![response[@"like"] integerValue];
+    
+    if ([response[@"like"] integerValue]) {
+        
+        [self.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        
+    }
+    
+    //根据点赞数量改变导航栏右侧相关控件宽度
+    [self.ZangBtn  setTitle:[NSString  stringWithFormat:@"%@",response[@"like_count"]]  forState:UIControlStateNormal];
+    CGSize LikeCountSize =[[NSString  stringWithFormat:@"%@",response[@"like_count"]]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
+    
+    CGRect NewRightFrame = self.RightView.frame;
+    NewRightFrame.size.width += LikeCountSize.width;
+    self.RightView.frame = NewRightFrame;
+    
+    CGRect NewShareFrame = self.shareBtn.frame;
+    NewShareFrame.origin.x +=  LikeCountSize.width;
+    self.shareBtn.frame = NewShareFrame;
+    
+    CGRect NewLoveFrame = self.ZangBtn.frame;
+    NewLoveFrame.size.width +=  LikeCountSize.width;
+    self.ZangBtn.frame = NewLoveFrame;
+    
+    
+    self.ArticleInfo = (NSDictionary *)response;
+    
+    //第一分组
+    MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithDictionary:(NSDictionary *)response];
+    UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:@[DetailFrame] andFooter:NO];
+    [self.groups addObject:groupOne];
+    
+    //相关资讯 第二分组
+    NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
+    NSMutableArray *news_temps = [NSMutableArray array];
+    for (NewsItem *news in newses) {
+        if(news.messageID != self.NO_ID){
+            XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
+            [news_temps addObject:newsFrame];
+        }
+    }
+    UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
+    [self.groups addObject:groupTwo];
+    
+    
+    //相关院校  大于第二分组
+    NSMutableArray *neightbour_temps = [NSMutableArray array];
+    [response[@"related_universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
+        [neightbour_temps addObject:uniFrame];
+        
+        NSString *title = idx == 0 ? @"相关院校" : @"";
+        NSArray *items = @[uniFrame];
+        UniDetailGroup *group = [UniDetailGroup groupWithTitle:title contentes:items andFooter:YES];
+        [self.groups addObject:group];
+        
+    }];
+    
+  
+}
+
+
+
 
 #pragma mark ——————  WKWebViewDeleage
 // 页面开始加载时调用
@@ -357,7 +374,7 @@
                          @"document.body.scrollHeight"] integerValue];
     self.webView.frame = CGRectMake(0, 0,XScreenWidth,height);
     
-    self.tableView.hidden = NO;
+     self.tableView.alpha = 1;
     [self.tableView reloadData];
     
     //加载完成后重新设置 tableview的cell的高度,和webview的frame
@@ -393,11 +410,8 @@
         
     }
     
- 
-
     
 }
-
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
 {
@@ -408,202 +422,136 @@
 
 
 #pragma mark —————— UITableViewDataDeleage UITableViewDeleage
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-   return   50;
+    
+    UniDetailGroup *group = self.groups[section];
+    
+    return group.HaveFooter ? PADDING_TABLEGROUP : 0.0000000001;
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        
-        return nil;
-    }else{
-        
-         XWGJMessageSectionView *MSView =[[XWGJMessageSectionView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 50)];
-      
-          MSView.SecitonName = @"推荐阅读";
-        
-        if (self.Universities.count) {
-            
-            MSView.SecitonName = section == 1 ? @"相关院校": @"推荐阅读";
-
-        }
-        
-          return MSView;
-        
-    }
-
+    
+    UniDetailGroup *group = self.groups[section];
+    
+    return  group.HaveHeader ? 40 : 0.0000000001;
 }
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
+    
+    UniDetailGroup *group = self.groups[section];
+    
+    sectionView.TitleLab.text = group.HeaderTitle;
+    
+    return sectionView;
+}
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.Universities.count > 0 ? 3 : 2;
+    return self.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  
-    switch (section) {
-        case 0:
-            return 1;
-            break;
-        default:
-        {
-            if (self.Universities.count > 0)
-            {
-                if (section == 1) {
-                    
-                    return self.Universities.count;
-                    
-                }else{
-                    
-                    return self.Messages.count > 2 ? 2 : self.Messages.count;
-                }
-                
-            }else{
-                
-                return self.Messages.count > 2 ? 2 : self.Messages.count;
-                
-            }
-        
-        }
-            break;
-    }
+    UniDetailGroup *group = self.groups[section];
     
+    return group.items.count;
 }
 /**
  *  设置cell高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    CGFloat cellHight = 0;
-  
-    CGFloat webHeight = [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ? self.web_wk.frame.size.height : self.webView.frame.size.height ;
     
-    if (indexPath.section==0) {
+    UniDetailGroup *group = self.groups[0];
+    MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        CGFloat cellHight = indexPath.section==0 ? MessageDetailFrame.MessageDetailHeight + self.web_wk.frame.size.height : University_HEIGHT;
         
-        cellHight =  self.MessageDetailFrame.MessageDetailHeight + webHeight;
-        
+        return cellHight;
     }else{
         
-        cellHight =  University_HEIGHT;
+        CGFloat cellHight = indexPath.section==0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
         
+        return cellHight;
     }
-    
-    return cellHight;
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    UniDetailGroup *group = self.groups[indexPath.section];
+    
+    if (indexPath.section == 0) {
+        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
 
-    switch (indexPath.section) {
-        case 0:
-        {
-            XWGJMessageDetailContentCell *cell = [XWGJMessageDetailContentCell CreateCellWithTableView:tableView];
-            cell.MessageFrame = self.MessageDetailFrame;
-           
+            MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
+            cell.MessageFrame = group.items[0];
+
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
             {
-                self.web_wk.frame = CGRectMake(0, self.MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.web_wk.frame.size.height);
+                self.web_wk.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.web_wk.frame.size.height);
                 [cell.contentView addSubview:self.web_wk];
-             
+
             }else{
-                self.webView.frame = CGRectMake(0, self.MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.webView.frame.size.height);
+                self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.webView.frame.size.height);
                 [cell.contentView addSubview:self.webView];
-                
-            
+
             }
-            
+
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            return cell;
-
-        }
-            break;
-        default:
-        {
-            if (self.Universities.count > 0)
-            {
-                
-                
-                if (indexPath.section == 1) {
-                    
-                    UniversityCell *universityCell =[UniversityCell cellWithTableView:tableView];
-                    universityCell.itemFrame = self.Universities[indexPath.row];
- 
-                    return universityCell;
-                    
-                }else{
-                    
-                    
-                XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
-                cell.messageFrame = self.Messages[indexPath.row];
-                    
-                return cell;
-                }
-                
-            }else{
-                
-                
-                XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
-                cell.messageFrame = self.Messages[indexPath.row];
-
-                return cell;
-            }
-            
-        }
-            break;
-    }
-    
-    
-    
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
- 
-    if (self.Universities.count >0) {
         
-        switch (indexPath.section) {
-            case 1:
-            {
-                UniItemFrame *itemFrame = self.Universities[indexPath.row];
-                [self.navigationController pushUniversityViewControllerWithID:itemFrame.item.NO_id animated:YES];
-            
-            }
-                break;
-            case 2:
-            {
-                [self TableViewDidSelectRowAtIndexPath:indexPath];
-            }
-                break;
-            default:
-                break;
-        }
+            return cell;
+        
+        
+    }else if(indexPath.section == 1){
+        
+        XWGJMessageTableViewCell *news_cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
+        news_cell.messageFrame =  group.items[indexPath.row];
+        return news_cell;
         
     }else{
-    
-    
-        if (indexPath.section == 1) {
-            
-            [self TableViewDidSelectRowAtIndexPath:indexPath];
-            
-        }
-
+        
+        UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
+        uni_cell.itemFrame = group.items[indexPath.row];
+        
+        return uni_cell;
+        
     }
     
 }
 
--(void)TableViewDidSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
-    XWGJMessageFrame *messageFrame =  self.Messages[indexPath.row];
-    detail.NO_ID = messageFrame.News.messageID;
-    [self.navigationController pushViewController:detail animated:YES];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(indexPath.section == 0) return;
+    
+    UniDetailGroup *group = self.groups[indexPath.section];
+    
+    if ([group.HeaderTitle containsString:@"文章"]) {
+        
+        XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
+        MessageDetailViewController *detail  =[[MessageDetailViewController alloc] init];
+        detail.NO_ID = newsFrame.News.messageID;
+        [self.navigationController pushViewController:detail animated:YES];
+        
+    }else{
+        UniItemFrame *uniFrame   = group.items[indexPath.row];
+        UniversityViewController *Uni  =[[UniversityViewController alloc] init];
+        Uni.uni_id =  uniFrame.item.NO_id;
+        [self.navigationController pushViewController:Uni animated:YES];
+    }
+    
 }
 
 

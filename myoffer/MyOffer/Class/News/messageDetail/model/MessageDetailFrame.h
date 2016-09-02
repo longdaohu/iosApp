@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XWGJMessageDetailFrame : NSObject
+@interface MessageDetailFrame : NSObject
 @property(nonatomic,strong)NSDictionary *MessageDetail;
 @property(nonatomic,assign)CGRect TagFrame;        //标签图片
 @property(nonatomic,assign)CGRect TagLabFrame;     //标签名称
@@ -26,6 +26,6 @@
 @property(nonatomic,assign)CGFloat MessageDetailHeight;   //detail高
 @property(nonatomic,copy)NSString *TagImageName;
 
-
++ (instancetype)frameWithDictionary:(NSDictionary *)messageInfo;
 
 @end

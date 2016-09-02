@@ -19,7 +19,7 @@
     if (self) {
         
         self.iconView         = [[UIImageView alloc] init];
-        self.iconView.contentMode = UIViewContentModeScaleToFill;
+        self.iconView.contentMode = UIViewContentModeScaleAspectFill;
         self.iconView.image   = [UIImage imageNamed:@"PlaceHolderImage"];
         [self.contentView addSubview:self.iconView];
         self.iconView.layer.cornerRadius = 6;

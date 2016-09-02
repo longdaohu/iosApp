@@ -10,8 +10,8 @@
 #import "XWGJAbout.h"
 #import "XWGJShareView.h"
 #import "XWGJAaboutHeader.h"
-#import "XWGJMessageSectionView.h"
 #import "ShareViewController.h"
+#import "HomeSectionHeaderView.h"
 
 @interface XWGJAboutViewController ()<UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -31,8 +31,6 @@
     [MobClick beginLogPageView:@"page关于"];
     
 }
-
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -105,27 +103,21 @@
 #pragma mark —————— UITableViewDataDeleage UITableViewDeleage
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat sectionHeigt = section == 0 ? 0 : 40;
+    CGFloat sectionHeigt = section == 0 ? 0.0001 : 40;
     
     return   sectionHeigt;
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        
-        return nil;
-        
-    }else{
-        
-        XWGJMessageSectionView *MSView =[[XWGJMessageSectionView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 50)];
-       
-        MSView.SecitonName = GDLocalizedString(@"About_contect");
-        
-        return MSView;
-    }
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
+    HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
+    
+    sectionView.TitleLab.text = GDLocalizedString(@"About_contect");
+    
+    return sectionView;
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
