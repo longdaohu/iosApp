@@ -61,7 +61,7 @@
     
     
     self.centerLine =[[UIView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 10, 1, 20)];
-    self.centerLine.backgroundColor =[UIColor lightGrayColor];
+    self.centerLine.backgroundColor = [UIColor colorWithRed:230.0/255 green:230.0/255 blue:230.0/255 alpha:1];
     [self.bgView addSubview:self.centerLine];
     
     

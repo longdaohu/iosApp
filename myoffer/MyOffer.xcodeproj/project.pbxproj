@@ -141,7 +141,6 @@
 		AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */; };
 		AE712FB31D5DB78200D0F48A /* ApplyStatusGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB21D5DB78200D0F48A /* ApplyStatusGroup.m */; };
 		AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */; };
-		AE712FB91D5DC72F00D0F48A /* UniversityCourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB81D5DC72F00D0F48A /* UniversityCourseListViewController.m */; };
 		AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */; };
 		AE777CC01D75A0A300FB1FD4 /* Uni-uk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */; };
 		AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7825DB1D70295400AA4EF4 /* UniversityRightView.m */; };
@@ -340,9 +339,6 @@
 		AEA24B8E1D5B25E000DD7939 /* XSearchSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B601D5B25E000DD7939 /* XSearchSectionHeaderView.m */; };
 		AEA24B8F1D5B25E000DD7939 /* UniversityCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B641D5B25E000DD7939 /* UniversityCourseViewController.m */; };
 		AEA24B901D5B25E000DD7939 /* UniversityCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B651D5B25E000DD7939 /* UniversityCourseViewController.xib */; };
-		AEA24B931D5B25E000DD7939 /* UniversityMapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B6A1D5B25E000DD7939 /* UniversityMapsViewController.m */; };
-		AEA24B941D5B25E000DD7939 /* UniversityMapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B6B1D5B25E000DD7939 /* UniversityMapsViewController.xib */; };
-		AEA24B951D5B25E000DD7939 /* mapShow.html in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B6D1D5B25E000DD7939 /* mapShow.html */; };
 		AEA24B961D5B25E000DD7939 /* FilerButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B701D5B25E000DD7939 /* FilerButtonItem.m */; };
 		AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B721D5B25E000DD7939 /* UniversityCourseCell.m */; };
 		AEA24B981D5B25E000DD7939 /* UniversityCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B731D5B25E000DD7939 /* UniversityCourseCell.xib */; };
@@ -658,8 +654,6 @@
 		AE712FB21D5DB78200D0F48A /* ApplyStatusGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusGroup.m; sourceTree = "<group>"; };
 		AE712FB41D5DBDA100D0F48A /* UniversityCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourse.h; sourceTree = "<group>"; };
 		AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourse.m; sourceTree = "<group>"; };
-		AE712FB71D5DC72F00D0F48A /* UniversityCourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourseListViewController.h; sourceTree = "<group>"; };
-		AE712FB81D5DC72F00D0F48A /* UniversityCourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseListViewController.m; sourceTree = "<group>"; };
 		AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Uni-au.jpg"; path = "controller/Uni-au.jpg"; sourceTree = "<group>"; };
 		AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Uni-uk.jpg"; path = "controller/Uni-uk.jpg"; sourceTree = "<group>"; };
 		AE7825DA1D70295400AA4EF4 /* UniversityRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityRightView.h; path = controller/UniversityRightView.h; sourceTree = "<group>"; };
@@ -1017,10 +1011,6 @@
 		AEA24B631D5B25E000DD7939 /* UniversityCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourseViewController.h; sourceTree = "<group>"; };
 		AEA24B641D5B25E000DD7939 /* UniversityCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseViewController.m; sourceTree = "<group>"; };
 		AEA24B651D5B25E000DD7939 /* UniversityCourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversityCourseViewController.xib; sourceTree = "<group>"; };
-		AEA24B691D5B25E000DD7939 /* UniversityMapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityMapsViewController.h; sourceTree = "<group>"; };
-		AEA24B6A1D5B25E000DD7939 /* UniversityMapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityMapsViewController.m; sourceTree = "<group>"; };
-		AEA24B6B1D5B25E000DD7939 /* UniversityMapsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversityMapsViewController.xib; sourceTree = "<group>"; };
-		AEA24B6D1D5B25E000DD7939 /* mapShow.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = mapShow.html; sourceTree = "<group>"; };
 		AEA24B6F1D5B25E000DD7939 /* FilerButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilerButtonItem.h; sourceTree = "<group>"; };
 		AEA24B701D5B25E000DD7939 /* FilerButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilerButtonItem.m; sourceTree = "<group>"; };
 		AEA24B711D5B25E000DD7939 /* UniversityCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourseCell.h; sourceTree = "<group>"; };
@@ -2761,11 +2751,6 @@
 				AEA24B631D5B25E000DD7939 /* UniversityCourseViewController.h */,
 				AEA24B641D5B25E000DD7939 /* UniversityCourseViewController.m */,
 				AEA24B651D5B25E000DD7939 /* UniversityCourseViewController.xib */,
-				AE712FB71D5DC72F00D0F48A /* UniversityCourseListViewController.h */,
-				AE712FB81D5DC72F00D0F48A /* UniversityCourseListViewController.m */,
-				AEA24B691D5B25E000DD7939 /* UniversityMapsViewController.h */,
-				AEA24B6A1D5B25E000DD7939 /* UniversityMapsViewController.m */,
-				AEA24B6B1D5B25E000DD7939 /* UniversityMapsViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2773,7 +2758,6 @@
 		AEA24B6C1D5B25E000DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24B6D1D5B25E000DD7939 /* mapShow.html */,
 				AE712FB41D5DBDA100D0F48A /* UniversityCourse.h */,
 				AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */,
 			);
@@ -3189,7 +3173,6 @@
 				AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */,
 				AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */,
 				AE1D011D1D2FCD2D005E2DEF /* gradient_bg.png in Resources */,
-				AEA24B941D5B25E000DD7939 /* UniversityMapsViewController.xib in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
@@ -3209,7 +3192,6 @@
 				AEA24C2B1D5B283700DD7939 /* guid_smart.png in Resources */,
 				AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */,
 				AEA24A9E1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png in Resources */,
-				AEA24B951D5B25E000DD7939 /* mapShow.html in Resources */,
 				AEA24B891D5B25E000DD7939 /* RankTypeTableViewCell.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
@@ -3378,7 +3360,6 @@
 				463E3AA61B23105F00E0BAF8 /* KDActionSheet.m in Sources */,
 				AEA24B8E1D5B25E000DD7939 /* XSearchSectionHeaderView.m in Sources */,
 				AEA24A3B1D5B231300DD7939 /* InputAccessoryToolBar.m in Sources */,
-				AEA24B931D5B25E000DD7939 /* UniversityMapsViewController.m in Sources */,
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
@@ -3510,7 +3491,6 @@
 				AEA24AF91D5B24D200DD7939 /* XWGJLeftMenuViewController.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AEA24A3A1D5B231300DD7939 /* AdvertiView.m in Sources */,
-				AE712FB91D5DC72F00D0F48A /* UniversityCourseListViewController.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,

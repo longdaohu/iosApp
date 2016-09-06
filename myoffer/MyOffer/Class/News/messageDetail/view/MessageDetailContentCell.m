@@ -113,6 +113,7 @@
         [self.contentView addSubview:self.FocusBtn];
         
         self.ArticleImageView = [[UIImageView alloc] init];
+//        self.ArticleImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.ArticleImageView];
         
         self.SummaryLabel =[[UILabel alloc] init];

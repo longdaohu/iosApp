@@ -99,7 +99,7 @@
 
     UIButton *qsBtn = [[UIButton alloc] init];
     
-    [qsBtn setTitle:@"QS世界排名" forState:UIControlStateNormal];
+    [qsBtn setTitle:@"世界排名" forState:UIControlStateNormal];
     qsBtn.enabled = NO;
     [qsBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [qsBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
@@ -110,7 +110,7 @@
 
     
     UIButton *timesBtn = [[UIButton alloc] init];
-    [timesBtn setTitle:@"TIMES排名" forState:UIControlStateNormal];
+    [timesBtn setTitle:@"本国排名" forState:UIControlStateNormal];
     [timesBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [timesBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
     [selectionView addSubview:timesBtn];
@@ -386,7 +386,7 @@
     
     UniversitydetailNew *uni = _contentFrame.item;
     
-    return  uni.images.count;
+    return  uni.m_images.count;
 }
 
 static NSString *oneIdentify = @"oneGroup";
@@ -397,7 +397,7 @@ static NSString *oneIdentify = @"oneGroup";
     
     UniversitydetailNew *uni = _contentFrame.item;
     
-    cell.path = uni.images[indexPath.row];
+    cell.path = uni.m_images[indexPath.row];
     
     return cell;
     
@@ -407,9 +407,6 @@ static NSString *oneIdentify = @"oneGroup";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
      [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-//    UniversityOneGroupCollectionCell *cell = (UniversityOneGroupCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    UIImageView *imageV = (UIImageView *)cell.contentView.subviews[0];
     
     if(self.actionBlock)
     {
@@ -423,15 +420,7 @@ static NSString *oneIdentify = @"oneGroup";
     
 }
 
-/*
-- (void)subjectClick:(UIButton *)sender{
 
-    if(self.actionBlock)
-    {
-        self.actionBlock(sender.currentTitle,DefaultNumber);
-    }
-}
-*/
 
 
 

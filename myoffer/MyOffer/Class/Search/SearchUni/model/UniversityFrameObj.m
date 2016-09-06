@@ -32,7 +32,9 @@
 {
     _uniObj = uniObj;
     
-    CGFloat RCh =0.6 *  University_HEIGHT;
+    
+    
+    CGFloat RCh = 50;
     CGFloat RCw = RCh;
     CGFloat RCx = XScreenWidth - RCh;
     CGFloat RCy = 0;

@@ -20,6 +20,7 @@
 @property(nonatomic,assign)CGRect lineFrame;
 @property(nonatomic,assign)CGRect introductionFrame;
 @property(nonatomic,assign)CGRect moreFrame;
+@property(nonatomic,assign)CGRect gradientBgViewFrame;
 @property(nonatomic,assign)CGFloat centerHeigh;
 @property(nonatomic,assign)CGRect upViewFrame;
 @property(nonatomic,assign)CGRect headerFrame;
@@ -30,6 +31,7 @@
 @property(nonatomic,assign)CGRect TIMESRankFrame;
 @property(nonatomic,assign)CGRect tagsOneFrame;
 @property(nonatomic,assign)CGRect tagsTwoFrame;
+@property(nonatomic,assign)BOOL   showMore;
 
 //第一分区Frame
 @property(nonatomic,assign)CGRect fenguanFrame;

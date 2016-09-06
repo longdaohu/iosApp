@@ -13,6 +13,7 @@ typedef enum {
 #import "searchToolView.h"
 @interface searchToolView ()
 @property(nonatomic,strong)UIButton *lastButton;
+@property(nonatomic,strong)UIView *centerLine;
 
 @end
 @implementation searchToolView
@@ -30,12 +31,17 @@ typedef enum {
         self.LeftView.contentMode = UIViewContentModeCenter;
         self.LeftView.image = [UIImage imageNamed:@"arrow_down"];
         [self addSubview:self.LeftView];
-        
+ 
         
         self.rightButton =[self createButton:rightType andButtonTitleColor:[UIColor blackColor] andButtonTitle:GDLocalizedString(@"SearchResult_filter")];
         [self.rightButton setImage:[UIImage imageNamed:@"filter_nomal"] forState:UIControlStateNormal];
         [self.rightButton setImage:[UIImage imageNamed:@"filter_high"] forState:UIControlStateSelected];
         self.rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+        
+        
+        self.centerLine =[[UIView alloc] init];
+        self.centerLine.backgroundColor = [UIColor colorWithRed:230.0/255 green:230.0/255 blue:230.0/255 alpha:1];
+        [self addSubview:self.centerLine];
     }
     
     return self;
@@ -94,7 +100,7 @@ typedef enum {
 {
     [super layoutSubviews];
     
-    CGFloat LBH = self.frame.size.height - 0.5 ;
+    CGFloat LBH = self.frame.size.height;
     
     CGFloat LBW = APPSIZE.width*0.5;
     
@@ -102,7 +108,10 @@ typedef enum {
     
     self.LeftView.frame = CGRectMake(LBW - LBH - 5, 0,LBH, LBH);
     
-    self.rightButton.frame = CGRectMake(APPSIZE.width*0.5+1, 0, APPSIZE.width*0.5, self.frame.size.height - 0.5);
+    self.rightButton.frame = CGRectMake(APPSIZE.width*0.5, 0, APPSIZE.width*0.5, self.frame.size.height);
+    
+     self.centerLine.frame = CGRectMake(XScreenWidth * 0.5, 10, 1, LBH - 20);
+    
     
 }
 

@@ -6,7 +6,12 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
+
 #import "UniversityNewFrame.h"
+#define  CONTENTWIDTH   XScreenWidth - 2 * XMARGIN
+
+@interface UniversityNewFrame ()
+@end
 
 @implementation UniversityNewFrame
 + (instancetype)frameWithUniversity:(UniversitydetailNew *)university{
@@ -23,8 +28,6 @@
     
     _item = item;
     
-    
-    CGFloat CONTENTWIDTH = XScreenWidth - 2 * XMARGIN;
     
     CGFloat logoX = XMARGIN;
     CGFloat logoY = XMARGIN  * 2;
@@ -57,8 +60,8 @@
     
     
     CGFloat addressX = nameX;
-    CGFloat addressW = [[NSString stringWithFormat:@" %@",self.item.address_detail] KD_sizeWithAttributeFont:XFONT(XPERCENT * 12)].width + 20;
-    CGFloat addressH =   XPERCENT * 12;
+    CGFloat addressW = nameW;
+    CGFloat addressH =  XPERCENT * 12;
     CGFloat addressY = CGRectGetMaxY(self.official_nameFrame) + 0.5 * (webY - CGRectGetMaxY(self.official_nameFrame) - addressH);
     self.address_detailFrame = CGRectMake(addressX,addressY,addressW,addressH);
     
@@ -68,6 +71,7 @@
     CGFloat dataW =  CONTENTWIDTH - 2 * dataX;
     CGFloat dataH =  XPERCENT * 140;
     self.dataViewFrame = CGRectMake(dataX, dataY, dataW, dataH);
+    
     
     CGFloat lineX = XMARGIN;
     CGFloat lineY = CGRectGetMaxY(self.dataViewFrame) + 2 * XMARGIN;
@@ -80,17 +84,8 @@
     CGFloat introY = CGRectGetMaxY(self.lineFrame) +   XMARGIN;
     CGFloat introW = CONTENTWIDTH - 2 * introX;
     CGFloat introductionHeight = [self.item.introduction KD_sizeWithAttributeFont:XFONT(XPERCENT * 12) maxWidth:introW].height;
-    
-    CGFloat introH = (introductionHeight > XPERCENT * 120 ) ? XPERCENT * 120 : introductionHeight;
+    CGFloat introH = introductionHeight;
     self.introductionFrame= CGRectMake(introX, introY, introW, introH);
-    
-    CGFloat moreY = CGRectGetMaxY(self.introductionFrame);
-    CGFloat moreW = XPERCENT * 120;
-    CGFloat moreH = XPERCENT * 40;
-    CGFloat moreX =  0.5 * (CONTENTWIDTH - moreW);
-    self.moreFrame= CGRectMake(moreX, moreY, moreW, moreH);
-    
-    self.centerHeigh = CGRectGetMaxY(self.moreFrame);
     
     
     CGFloat upX = 0;
@@ -105,54 +100,116 @@
     CGFloat tag2Y = upH -  60 - tag2H;
     self.tagsTwoFrame= CGRectMake(tag2X, tag2Y, tag2W, tag2H);
     
+    
     CGFloat tag1H = tag2H;
     CGFloat tag1X = tag2X;
     CGFloat tag1Y = tag2Y - tag1H  -  5;
     CGFloat tag1W = XScreenWidth;
     self.tagsOneFrame= CGRectMake(tag1X, tag1Y, tag1W, tag1H);
     
+    
     CGFloat QSRankW = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width + 5;
     CGFloat QSRankH = XPERCENT * 13 * 3;
     CGFloat QSRankX = 0.5 * (XScreenWidth - 2 * QSRankW - 2 * XMARGIN);
     CGFloat QSRankY =  tag1Y - QSRankH - XMARGIN;
-
+    
     
     CGFloat TIMESRankX = QSRankX + QSRankW + 2 * XMARGIN;
     CGFloat TIMESRankY = QSRankY;
     CGFloat TIMESRankH = XPERCENT * 13 * 3;
     CGFloat TIMESRankW = QSRankW;
-
     self.QSRankFrame= CGRectMake(QSRankX, QSRankY, QSRankW, QSRankH);
     self.TIMESRankFrame= CGRectMake(TIMESRankX, TIMESRankY, TIMESRankW, TIMESRankH);
 
     
-    CGFloat downX = 0;
-    CGFloat downY = upH;
-    CGFloat downW = upW;
-    CGFloat downH = self.centerHeigh - 20;
-    self.downViewFrame= CGRectMake(downX, downY, downW, downH);
+    [self updateCenterViewFrame:item];
     
-    CGFloat centerX = XMARGIN;
-    CGFloat centerY = downY - 40;
-    CGFloat centerW = XScreenWidth  - 2 * XMARGIN;
-    CGFloat centerH = self.centerHeigh;
-    self.centerViewFrame= CGRectMake(centerX, centerY, centerW, centerH);
-    
-    CGFloat headX = 0;
-    CGFloat headY = 64;
-    CGFloat headW = XScreenWidth;
-    CGFloat headH = CGRectGetMaxY(self.downViewFrame);
-    self.headerFrame= CGRectMake(headX, headY, headW, headH);
-    
- 
     
     CGFloat rightW =  80  +  XMARGIN;
     CGFloat rightH =  40;
     CGFloat rightX =  XScreenWidth - rightW - 2 * XMARGIN;
-    CGFloat rightY = centerY - 0.5 * rightH;
+    CGFloat rightY = self.centerViewFrame.origin.y - 0.5 * rightH;
     self.rightViewFrame= CGRectMake(rightX, rightY, rightW, rightH);
- 
+    
+    
     [self oneSectonWithUni:item];
+    
+}
+
+
+- (void)updateCenterViewFrame:(UniversitydetailNew *)item{
+
+
+    CGFloat moreH = XPERCENT * 40;
+    
+    
+    CGFloat realHeight = self.showMore ?  (CGRectGetMaxY(self.introductionFrame) + moreH + 10) : (CGRectGetMinY(self.introductionFrame) +  100 + moreH );
+    if(CGRectGetHeight(self.introductionFrame) <= 100){
+        realHeight = CGRectGetMaxY(self.introductionFrame) + 10;
+    }
+    
+    self.centerHeigh = realHeight;
+    
+    
+    CGFloat moreY = self.centerHeigh -  moreH;
+    CGFloat moreW = XPERCENT * 100;
+    CGFloat moreX =  0.5 * (CONTENTWIDTH - moreW);
+    CGRect moreNewFrame = self.moreFrame;
+    moreNewFrame.size.height = (CGRectGetHeight(self.introductionFrame) <= 100) ? 0 : moreH;
+    moreNewFrame.size.width  = moreW;
+    moreNewFrame.origin.x    = moreX;
+    moreNewFrame.origin.y    = moreY;
+    self.moreFrame = moreNewFrame;
+
+    
+    CGFloat downX = 0;
+    CGFloat downY = self.upViewFrame.size.height;
+    CGFloat downW = self.upViewFrame.size.width;
+    CGFloat downH = self.centerHeigh - 20;
+    CGRect downViewNewFrame = self.downViewFrame;
+    downViewNewFrame.size.height =  downH;
+    downViewNewFrame.size.width  = downW;
+    downViewNewFrame.origin.x    = downX;
+    downViewNewFrame.origin.y    = downY;
+    self.downViewFrame = downViewNewFrame;
+    
+    
+    CGFloat gradientH = moreH + 10;
+    CGFloat gradientY = moreY - 10;
+    CGFloat gradientW = CONTENTWIDTH;
+    CGFloat gradientX = 0;
+    CGRect gradientNewRect = self.gradientBgViewFrame;
+ 
+    gradientNewRect.size.height =  (CGRectGetHeight(self.introductionFrame) <= 100) ? 0 : gradientH;
+    gradientNewRect.size.width  = gradientW;
+    gradientNewRect.origin.x    = gradientX;
+    gradientNewRect.origin.y    = gradientY;
+    self.gradientBgViewFrame    = gradientNewRect;
+    
+    
+    CGRect centerViewNewFrame = self.centerViewFrame;
+    centerViewNewFrame.size.height =  self.centerHeigh;
+    centerViewNewFrame.size.width  = XScreenWidth  - 2 * XMARGIN;
+    centerViewNewFrame.origin.x    = XMARGIN;
+    centerViewNewFrame.origin.y    = downY - 40;
+    self.centerViewFrame =  centerViewNewFrame;
+    
+    
+    CGRect headerNewRect = self.headerFrame;
+    headerNewRect.size.height =  CGRectGetMaxY(self.downViewFrame);
+    headerNewRect.size.width  = XScreenWidth;
+    headerNewRect.origin.x    = 0;
+    headerNewRect.origin.y    = 64;
+    self.headerFrame = headerNewRect;
+    
+}
+
+
+-(void)setShowMore:(BOOL)showMore{
+
+    _showMore = showMore;
+    
+    [self updateCenterViewFrame:self.item];
     
 }
 
@@ -223,12 +280,18 @@
     CGFloat qsW = [@"QS世界排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
     CGFloat qsH = selectH;
     CGFloat qsX = h_lineX - XMARGIN - qsW;
-    self.qsFrame = CGRectMake(qsX, qsY, qsW, qsH);
     
     CGFloat timesY = 0;
     CGFloat timesW = [@"TIMES排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
     CGFloat timesH = selectH;
     CGFloat timesX = h_lineX + XMARGIN;
+    if([item.country containsString:@"澳"]){
+        qsX      = 0.5 * (XScreenWidth -  qsW);
+        timesX   =   XScreenWidth;
+        h_lineX  = XScreenWidth;
+    }
+    self.historyLineFrame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
+    self.qsFrame = CGRectMake(qsX, qsY, qsW, qsH);
     self.timesFrame = CGRectMake(timesX, timesY, timesW, timesH);
     
     

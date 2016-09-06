@@ -114,7 +114,7 @@ typedef enum {
     //4、当前已购买服务
     self.currentServiceLab =[UILabel labelWithFontsize:KDUtilSize(14) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:self.currentServiceLab];
-    self.currentServiceLab.text = @"myOffer将免费为你提供DIY基础免费服务包\n 可选择升级：";
+    self.currentServiceLab.text = @"myOffer将免费为你提供免费基础留学申请\n 可选择升级：";
     self.currentServiceLab.numberOfLines = 2;
     CGFloat currentX = 15;
     CGFloat currentY =  CGRectGetMaxY(self.line.frame) + 10;

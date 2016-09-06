@@ -173,8 +173,7 @@ typedef enum {
     
 }
 
-
-//设置控件数据
+#pragma mark ——— 设置控件数据
 -(void)makeUIWithUni:(UniversitydetailNew *)university{
     
     
@@ -189,9 +188,11 @@ typedef enum {
     XJHUtilDefineWeakSelfRef
    //表头
     UniverstyHeaderView  * header   = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
+    header.frame                   = UniFrame.headerFrame;
     header.actionBlock = ^(UIButton *sender){
     
         [weakSelf onClick:sender];
+        
     };
     self.header = header;
     self.tableView.tableHeaderView  = header;
@@ -199,7 +200,11 @@ typedef enum {
     
     //拉伸图片
     NSString *countryImageName = [university.country isEqualToString:@"英国"] ? @"Uni-uk.jpg" : @"Uni-au.jpg";
-    [self.iconView setImage:[UIImage imageNamed:countryImageName]];
+    [UIView transitionWithView:self.iconView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [self.iconView setImage:[UIImage imageNamed:countryImageName]];
+    } completion:^(BOOL finished) {
+        
+    }];
     
     
     //设置第一分组cell数据
@@ -260,6 +265,21 @@ typedef enum {
     
 }
 
+-(void)makeTopNavigaitonView{
+
+    
+    XJHUtilDefineWeakSelfRef
+    self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
+    self.topNavigationView.frame = CGRectMake(0, 0, XScreenWidth, NAV_HEIGHT);
+    self.topNavigationView.actionBlock = ^(UIButton *sender){
+        
+        [weakSelf onClick:sender];
+        
+    };
+    
+    [self.view addSubview:self.topNavigationView];
+}
+
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
@@ -270,17 +290,8 @@ typedef enum {
     [self.view addSubview:self.tableView];
     self.tableView.alpha = 0.1;
  
+    [self makeTopNavigaitonView];
     
-    XJHUtilDefineWeakSelfRef
-    self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
-    self.topNavigationView.frame = CGRectMake(0, 0, XScreenWidth, NAV_HEIGHT);
-    self.topNavigationView.actionBlock = ^(UIButton *sender){
-    
-         [weakSelf onClick:sender];
-
-    };
-    
-    [self.view addSubview:self.topNavigationView];
     
 }
 
@@ -291,8 +302,8 @@ typedef enum {
     
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, XPERCENT * 400)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
-    iconView.backgroundColor = XCOLOR_LIGHTGRAY;
-    iconView.image = [UIImage imageNamed:@"Uni-uk.jpg"];
+    iconView.backgroundColor = BACKGROUDCOLOR;
+//    iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
     self.iconView = iconView;
     self.iconViewOldFrame = iconView.frame;
     self.iconViewOldCenter = iconView.center;
@@ -321,7 +332,6 @@ typedef enum {
     UniDetailGroup *group = self.groups[section];
 
     sectionView.TitleLab.text = group.HeaderTitle;
-
     
     return sectionView;
 }
@@ -449,7 +459,7 @@ typedef enum {
             
         }];
         
-        self.iconView.hidden = scrollView.contentOffset.y > XScreenHeight;
+        self.iconView.hidden = scrollView.contentOffset.y > XScreenHeight * 0.5;
 
     }
     
@@ -457,6 +467,7 @@ typedef enum {
 
 
 - (void)onClick:(UIButton *)sender{
+    
     
     switch (sender.tag) {
         case 110:
@@ -530,9 +541,7 @@ typedef enum {
         
         [self.shareVC  show];
     }
-    
 }
-
 
 //收藏
 - (void)favorite{
@@ -556,13 +565,37 @@ typedef enum {
      [self.navigationController popViewControllerAnimated:YES];
 }
 
-//更多
+//点击查看更多
 - (void)more{
+  
+    self.tableView.tableHeaderView  = self.header;
     
-    NSLog(@" 更多");
+    self.UniFrame.showMore = !self.UniFrame.showMore;
+ 
+    if (CGRectGetHeight(self.header.frame) > 0) {
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            self.header.itemFrame = self.UniFrame;
+            
+            self.header.frame   =  self.UniFrame.headerFrame;
+            
+            
+//            _tableView.tableHeaderView = self.header;
+//            [self.tableView reloadData];
+
+            [_tableView beginUpdates];
+            [_tableView setTableHeaderView:self.header];
+            [_tableView endUpdates];
+
+        }];
+    
+    }
+    
+    
 }
 
-//更多
+//web
 - (void)web{
     
     NSLog(@" %@",self.UniFrame.item.website);
@@ -576,6 +609,37 @@ typedef enum {
      self.header.rightView.favorited = favorite;
     
 }
+
+
+//点击footer按钮
+- (void)footerWithButton:(UIButton *)sender
+{
+    if ([sender.currentTitle containsString:@"查看"]) {
+        
+        [self allSubjects];
+        
+    }else{
+        
+        [self CasePipei];
+    }
+    
+}
+
+//查看所有专业
+- (void)allSubjects{
+    
+    UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.uni_id];
+    [self.navigationController pushViewController:subjects animated:YES];
+}
+
+//智能匹配
+-(void)CasePipei{
+    
+    RequireLogin
+    InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
  
 
 #pragma mark - IDMPhotoBrowser Delegate
@@ -639,34 +703,6 @@ typedef enum {
     
 }
 
-//点击footer按钮
-- (void)footerWithButton:(UIButton *)sender
-{
-     if ([sender.currentTitle containsString:@"查看"]) {
-    
-        [self allSubjects];
-        
-    }else{
-    
-        [self CasePipei];
-     }
-    
-}
-
-//查看所有专业
-- (void)allSubjects{
-    
-    UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.uni_id];
-    [self.navigationController pushViewController:subjects animated:YES];
-}
-
-//智能匹配
--(void)CasePipei{
-    
-    RequireLogin
-    InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 
 -(void)dealloc{

@@ -12,7 +12,6 @@
 @implementation FiltContent
 
 
-
 +(instancetype)createItemWithTitle:(NSString *)titleName andDetailTitle:(NSString *)detailName anditems:(NSArray *)items
 {
     return [[self alloc] initItemWithLogoName:nil titleName:titleName andDetailTitleName:detailName anditems:items];

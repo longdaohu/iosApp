@@ -22,31 +22,37 @@
     XJHUtilDefineWeakSelfRef
     self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
     [self.rightView.shareBtn setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
-    self.rightView.actionBlock = ^(UIButton *sender){
+     self.rightView.actionBlock = ^(UIButton *sender){
         [weakSelf onclick:sender];
     };
-    [self addSubview:self.rightView];
+    [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    
+    [super awakeFromNib];
+
 }
 
 - (IBAction)backClick:(id)sender {
+    
     [self onclick:sender];
 }
 
 - (void)onclick:(UIButton *)sender{
 
     if (self.actionBlock) {
+        
         self.actionBlock(sender);
     }
 }
 
 - (void)scrollViewContentoffset:(CGFloat)offsetY{
-
+    
     self.bgImageView.alpha  =  offsetY / (XPERCENT * 200 - 40 - 20 - 64);
     
     CGFloat rightViewDistance = offsetY - (XPERCENT * 200 - 40 - 20 - 64);
     
     self.rightView.top = rightViewDistance >= 44 ? 20 : (64 - rightViewDistance);
+
 }
 
 -(void)layoutSubviews{

@@ -66,11 +66,10 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-#define DOMAINURL  @"http://www.myofferdemo.com/"
-//#define DOMAINURL  @"http://www.myoffer.cn/"
+//#define DOMAINURL  @"http://www.myofferdemo.com/"
+#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MBProgressHUD.h"
-//#import "LibFile/SDWebImage/UIImageView+WebCache.h"
 #import "MJExtension.h"
 #import "YYToolKit.h"
 #import "KDActionSheet.h"
@@ -115,7 +114,6 @@
 #import "UIView+Extension.h"
 #import "LeftBarButtonItemView.h"
 #import "UIImageView+WebCache.h"
-
 
 
 #endif

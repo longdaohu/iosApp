@@ -32,9 +32,6 @@
 
 @implementation DiscoverViewController
 
-
-
-
 -(void)makeUI
 {
     _searchBarTextField.placeholder = GDLocalizedString(@"Discover_search");

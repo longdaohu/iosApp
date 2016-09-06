@@ -265,10 +265,12 @@
 }
 //查看YOUKU视频
 -(void)caseVedioWithdict:(NSDictionary *)response{
-  
+    
+    
      NSDictionary *dict =  response[@"args"];
      NSString *path = [dict[@"url"] length] > 0 ? dict[@"url"]: @"http://www.myoffer.cn/";
      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
+    
 }
 
 

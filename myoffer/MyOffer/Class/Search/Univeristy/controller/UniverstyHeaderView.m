@@ -14,7 +14,6 @@
     UniverstyHeaderView  * header  = [[UniverstyHeaderView alloc] init];
     header.clipsToBounds           = YES;
     header.itemFrame               = universityFrame;
-    header.frame                   = universityFrame.headerFrame;
     
     return header;
 }
@@ -52,7 +51,6 @@
         [self addSubview:self.rightView];
         
         
-        
         UILabel *qsLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         qsLab.numberOfLines = 0;
         self.QSrankLab = qsLab;
@@ -84,23 +82,24 @@
 {
     _itemFrame = itemFrame;
     
-    self.upView.frame = itemFrame.upViewFrame;
     
-    self.downView.frame = itemFrame.downViewFrame;
- 
-    self.centerView.frame = itemFrame.centerViewFrame;
+    self.upView.frame =  itemFrame.upViewFrame;
     
-    self.centerView.itemFrame = itemFrame;
+    self.downView.frame =   itemFrame.downViewFrame;
     
-    self.TIMESLab.frame = itemFrame.TIMESRankFrame;
+    self.centerView.frame =   itemFrame.centerViewFrame;
     
-    self.QSrankLab.frame = itemFrame.QSRankFrame;
+    self.centerView.itemFrame =   itemFrame;
+    
+    self.TIMESLab.frame =   itemFrame.TIMESRankFrame;
+    
+    self.QSrankLab.frame =   itemFrame.QSRankFrame;
     
     
-    NSString *local_rankStr  = [NSString stringWithFormat:@"%@",itemFrame.item.ranking_ti];
+    NSString *local_rankStr  = [NSString stringWithFormat:@"%@", itemFrame.item.ranking_ti];
     NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? local_rankStr : [NSString stringWithFormat:@"%@星",local_rankStr];
     NSString *local_rank = itemFrame.item.ranking_ti.integerValue == DefaultNumber ? @"暂无排名" :local_rank_name;
-    NSString *times = [NSString stringWithFormat:@"%@\nTIMES排名",local_rank];
+    NSString *times = [NSString stringWithFormat:@"%@\n本国排名",local_rank];
     NSRange timesRange = [times rangeOfString:local_rank];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
     [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, timesRange.length)];
@@ -108,32 +107,29 @@
     
     
     NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
-    NSString *qs = [NSString stringWithFormat:@"%@\n全球QS排名",global_rank];
+    NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",global_rank];
     NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];
     [qsAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, qsRange.length)];
     self.QSrankLab.attributedText = qsAttri;
-   
+    
     
     NSArray *tagsOne = [itemFrame.item.tags subarrayWithRange:NSMakeRange(0, (itemFrame.item.tags.count < 3) ? itemFrame.item.tags.count : 3)];
     self.tagOneLab.text =  [tagsOne componentsJoinedByString:@"  .  "];
     self.tagOneLab.frame = itemFrame.tagsOneFrame;
-
     
     
     if (itemFrame.item.tags.count > 3) {
         NSArray *tagsTwo = [itemFrame.item.tags subarrayWithRange:NSMakeRange(3, itemFrame.item.tags.count - 3)];
         self.tagTwoLab.text = [tagsTwo componentsJoinedByString:@"  .  "];
     }
-
+    
     self.tagTwoLab.frame = itemFrame.tagsTwoFrame;
-
-
+    
+    
     self.rightView.favorited = itemFrame.item.favorited;
- 
-
+  
 }
-
 
 - (void)onclick:(UIButton *)sender{
     
@@ -149,9 +145,13 @@
     
     [super layoutSubviews];
     
+
+    
     CGRect rightRect = self.rightView.frame;
     rightRect = self.itemFrame.rightViewFrame;
     self.rightView.frame = rightRect;
+    
+
 }
 
 

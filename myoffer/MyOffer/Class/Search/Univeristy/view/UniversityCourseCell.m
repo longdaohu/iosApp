@@ -110,7 +110,7 @@ static NSString *identify = @"course";
    
     }else {
        
-        NSString *imageName = self.cellSelected ? @"check-icons-yes" : @"check-icons";
+         NSString *imageName = self.cellSelected ? @"check-icons-yes" : @"check-icons";
         [self.selectionView setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     

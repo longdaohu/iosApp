@@ -77,10 +77,16 @@
     self.nameLab.text = item.name;
     self.officalLab.text = item.official_name;
     self.addressLab.text = item.address_detail;
-    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",item.ranking_qs];
+    NSString *ranking_qs = item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",item.ranking_qs];
+    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",ranking_qs];
     NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? [NSString stringWithFormat:@"%@",item.ranking_ti] : [NSString stringWithFormat:@"%@星",item.ranking_ti];
     self.localLab.text = [NSString stringWithFormat:@"本地排名: %@",local_rank_name];
     self.hotView.hidden = (item.hot == 0);
+    
+    CGFloat addressWidth = [item.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    if (addressWidth > (itemFrame.address_detailFrame.size.width - 30)) {
+        self.addressLab.text = [NSString stringWithFormat:@" %@ | %@",itemFrame.item.country,itemFrame.item.city];
+    }
     
 }
 

@@ -6,8 +6,6 @@
 //
 //  课程详情
 
-
-
 #import "UniversityCourseViewController.h"
 #import "UniversityCourseCell.h"
 #import "XuFilerView.h"

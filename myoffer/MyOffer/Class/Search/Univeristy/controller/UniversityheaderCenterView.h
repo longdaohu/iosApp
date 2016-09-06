@@ -21,6 +21,7 @@ typedef void(^UniversityCenterViewBlock)(UIButton *sender);
 @property(nonatomic,strong)UILabel      *line;
 @property(nonatomic,strong)UILabel      *introductionLab;
 @property(nonatomic,strong)UIButton     *moreBtn;
+@property(nonatomic,strong)UIView       *gradientBgView;
 @property(nonatomic,copy)UniversityCenterViewBlock actionBlock;
 +(instancetype)View;
 

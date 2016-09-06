@@ -277,7 +277,6 @@ typedef enum {
         [temps addObject:state];
         
         
-        
         NSArray *currentCityArr = nil;
         if (self.CoreState) {
             
