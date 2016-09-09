@@ -326,11 +326,9 @@ typedef enum {
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
    
-    HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
     
     UniDetailGroup *group = self.groups[section];
-
-    sectionView.TitleLab.text = group.HeaderTitle;
+    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     
     return sectionView;
 }
@@ -690,10 +688,9 @@ typedef enum {
 
 
 
--(void)dealloc{
+- (void)dealloc{
     
-    NSLog(@" 学校详情 dealloc");
-    
+    KDClassLog(@" 学校详情 dealloc");
     
 }
 

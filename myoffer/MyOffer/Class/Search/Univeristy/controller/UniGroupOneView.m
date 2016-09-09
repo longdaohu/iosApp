@@ -45,11 +45,9 @@
 }
 
 - (void)makeUI{
-
     
-    HomeSectionHeaderView *fenguanView = [[HomeSectionHeaderView alloc] init];
+    HomeSectionHeaderView *fenguanView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"校园风光"];
     fenguanView.backgroundColor = XCOLOR_WHITE;
-    fenguanView.TitleLab.text = @"校园风光";
     self.fenguanView = fenguanView;
     [self addSubview:fenguanView];
     
@@ -61,9 +59,8 @@
     lineOne.backgroundColor = BACKGROUDCOLOR;
     [self addSubview:lineOne];
     
-    HomeSectionHeaderView *keyView = [[HomeSectionHeaderView alloc] init];
+    HomeSectionHeaderView *keyView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"王牌领域"];
     keyView.backgroundColor = XCOLOR_WHITE;
-    keyView.TitleLab.text = @"王牌领域";
     self.keyView = keyView;
     [self addSubview:keyView];
     
@@ -79,9 +76,8 @@
     [self addSubview:lineTwo];
     
     
-    HomeSectionHeaderView *rankView = [[HomeSectionHeaderView alloc] init];
+    HomeSectionHeaderView *rankView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"历史排名"];
     rankView.backgroundColor = XCOLOR_WHITE;
-    rankView.TitleLab.text = @"历史排名";
     self.rankView = rankView;
     [self addSubview:rankView];
     

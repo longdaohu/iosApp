@@ -30,7 +30,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
     [MobClick beginLogPageView:@"page忘记密码"];
 
 }
@@ -38,7 +37,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page忘记密码"];
     
 }
@@ -72,8 +70,8 @@
         
         [self.RepasswdTextF becomeFirstResponder];
         
-    }else if (textField == self.RepasswdTextF)
-    {
+    }else if (textField == self.RepasswdTextF){
+        
         [self commitButtonPressed:nil];
     }
     
@@ -86,12 +84,11 @@
    
     self.AreaTextF.text = GDLocalizedString(@"LoginVC-china");
   
-    NSString *lang =[InternationalControl userLanguage];
-     if ([lang containsString:GDLocalizedString(@"ch_Language")]) {
-        
-        self.AreaTextF.text = GDLocalizedString(@"LoginVC-english");
-        
-    }
+//    NSString *lang =[InternationalControl userLanguage];
+//    
+//     if ([lang containsString:GDLocalizedString(@"ch_Language")]) {
+//         self.AreaTextF.text = GDLocalizedString(@"LoginVC-english");
+//    }
     self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");// "请输入11位手机号码";
     self.VeritficationTextF.placeholder = GDLocalizedString(@"LoginVC-007");//"请输入验证码";
     self.RegisterPasswdTextF.placeholder = GDLocalizedString(@"LoginVC-005");//"请输入新密码";
@@ -107,9 +104,12 @@
     if (!_piker) {
         
         _piker = [self PickerView];
-        NSUInteger row = USER_EN ? 1 : 0;
-        [_piker selectRow:row inComponent:0 animated:YES];
+        
+//        NSUInteger row = USER_EN ? 1 : 0;
+//        [_piker selectRow:0 inComponent:0 animated:YES];
+        
       }
+    
     return _piker;
 }
 -(UIPickerView *)PickerView
@@ -130,11 +130,11 @@
 }
 
 
-
 //重置密码
 - (IBAction)commitButtonPressed:(UIButton *)sender {
     
      if (![self verifyRegisterFields]) {
+         
         return;
     }
     
@@ -165,12 +165,10 @@
         AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError"));
          return ;
     }
-    
- 
+  
     self.AreaCode = [self.AreaTextF.text containsString:@"86"] ? @"86":@"44";
     self.VerifycationButton.enabled = NO;
     NSDictionary *parameter = @{@"code_type":@"reset", @"phonenumber":  self.RegisterPhoneTextF.text, @"target":  self.RegisterPhoneTextF.text, @"mobile_code": self.AreaCode};
-
     
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:parameter   expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -179,17 +177,15 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        self.VerifycationButton.enabled = YES;
-
-    }];
+         self.VerifycationButton.enabled = YES;
+     }];
     
 }
 
 //注册相关字段验证
 - (BOOL)verifyRegisterFields {
     
-  
-    //"LoginVC-chinese" = "中国";
+     //"LoginVC-chinese" = "中国";
     if ([self.AreaTextF.text containsString:@"86"] && self.RegisterPhoneTextF.text.length != 11) {
         AlerMessage(GDLocalizedString(@"LoginVC-PhoneNumberError"));
         return  NO;
@@ -199,7 +195,6 @@
         AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError"));
         return  NO;
     }
-
     
     if (self.VeritficationTextF.text.length == 0) {
         AlerMessage(GDLocalizedString(@"LoginVC-007"));
@@ -276,6 +271,11 @@
     
 }
 
+-(void)dealloc{
+    
+    KDClassLog(@"忘记密码  dealloc");
+    
+}
 
 
 

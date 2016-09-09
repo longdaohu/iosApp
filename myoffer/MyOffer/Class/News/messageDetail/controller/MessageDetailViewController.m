@@ -442,11 +442,10 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
     
     UniDetailGroup *group = self.groups[section];
     
-    sectionView.TitleLab.text = group.HeaderTitle;
+    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     
     return sectionView;
 }

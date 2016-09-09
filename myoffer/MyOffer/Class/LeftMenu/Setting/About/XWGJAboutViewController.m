@@ -111,9 +111,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    HomeSectionHeaderView *sectionView = [[HomeSectionHeaderView alloc] init];
-    
-    sectionView.TitleLab.text = GDLocalizedString(@"About_contect");
+    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:GDLocalizedString(@"About_contect")];
     
     return sectionView;
 }

@@ -466,22 +466,20 @@
 
 #pragma mark  ———————————— UITableViewDelegate  UITableViewData
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
-
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView view];
-    SectionView.TitleLab.text =self.SectionTitles[section];
-    if (section == 1 && !USER_EN) {
-        SectionView.moreBtn.hidden = NO;
-        SectionView.actionBlock = ^{
+  
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:self.SectionTitles[section]];
+    if (1 == section) {
+        [SectionView moreButtonHiden];
+         SectionView.actionBlock = ^{
               [self.tabBarController setSelectedIndex:2];
         };
     }
-    
-    return  SectionView;
+     return  SectionView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 45;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath

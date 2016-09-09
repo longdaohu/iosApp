@@ -8,9 +8,21 @@
 #import "HomeSectionHeaderView.h"
 @interface HomeSectionHeaderView ()
 @property (strong, nonatomic) UILabel *panding;
+@property (strong, nonatomic) UILabel *TitleLab;
+@property (strong, nonatomic) UIImageView  *arrowView;
+@property(nonatomic,copy)NSString *title;
 @end
 
 @implementation HomeSectionHeaderView
++(instancetype)sectionHeaderViewWithTitle:(NSString *)title{
+
+    HomeSectionHeaderView *header =  [[HomeSectionHeaderView alloc] init];
+    
+    header.title = title;
+    
+    return  header;
+
+}
 
 +(instancetype)view{
 
@@ -36,47 +48,77 @@
         self.TitleLab.font = [UIFont systemFontOfSize:15];
         self.TitleLab.textColor = XCOLOR_DARKGRAY;
         
-        self.moreBtn =[[XUButton alloc] init];
-        [self.moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"common_icon_arrow"] forState:UIControlStateNormal];
-        [self.moreBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateNormal];
-        self.moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-         [self.moreBtn addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.moreBtn];
-        self.moreBtn.hidden = YES;
+        
+        UIButton *moreBtn =[[UIButton alloc] init];
+        self.moreBtn      = moreBtn;
+        [moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
+        [moreBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateNormal];
+         moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [moreBtn addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:moreBtn];
+         moreBtn.hidden = YES;
+        
+        UIImageView *arrowView = [[UIImageView alloc] init];
+         self.arrowView = arrowView;
+        [self addSubview:arrowView];
+        arrowView.image = [UIImage imageNamed:@"common_icon_arrow"];
+        arrowView.hidden = YES;
+
         
     }
     return self;
 }
 
--(void)layoutSubviews
+
+-(void)setTitle:(NSString *)title{
+
+    _title = title;
+    
+    self.TitleLab.text = title;
+    
+}
+- (void)moreButtonHiden{
+ 
+    self.moreBtn.hidden = NO;
+    self.arrowView.hidden = NO;
+    
+}
+
+
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     
     
-    CGSize sectionSize = self.bounds.size;
+    CGSize contentSize = self.bounds.size;
     
-    CGFloat pw = 5;
-    CGFloat ph = 15;
-    CGFloat px = ITEM_MARGIN;
-    CGFloat py = 0.8 * (sectionSize.height - ph);
-    self.panding.frame = CGRectMake(px, py, pw, ph);
+    CGFloat pandingW = 5;
+    CGFloat pandingH = 15;
+    CGFloat pandingX = ITEM_MARGIN;
+    CGFloat pandingY = 0.7 * (contentSize.height - pandingH);
+    self.panding.frame = CGRectMake(pandingX,pandingY, pandingW, pandingH);
     
     CGFloat titlex = CGRectGetMaxX(self.panding.frame) + ITEM_MARGIN;
     CGFloat titlew = self.bounds.size.width - titlex;
-    CGFloat titleh = ph;
-    CGFloat titley = py;
+    CGFloat titleh = pandingH;
+    CGFloat titley = pandingY;
     self.TitleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
     
     CGFloat morew = 100;
     CGFloat morex = XScreenWidth - morew;
-    CGFloat moreh = self.bounds.size.height;
-    CGFloat morey = titley - 0.5 * (moreh - titleh);
+    CGFloat moreh = pandingH;
+    CGFloat morey = pandingY;
     self.moreBtn.frame = CGRectMake(morex, morey, morew, moreh);
+    
+    CGFloat arrowW = 20;
+    CGFloat arrowX = contentSize.width - arrowW - ITEM_MARGIN;
+    CGFloat arrowH = pandingH;
+    CGFloat arrowY = pandingY;
+    self.arrowView.frame = CGRectMake(arrowX, arrowY, arrowW, arrowH);
     
 }
 
--(void)tap
+-(void)moreClick
 {
     if (self.actionBlock) {
         

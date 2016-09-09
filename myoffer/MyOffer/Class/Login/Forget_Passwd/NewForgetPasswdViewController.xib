@@ -282,7 +282,7 @@
                 <constraint firstItem="5G2-ie-2A5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-15" id="knf-4v-7Zd"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="125" y="235"/>
+            <point key="canvasLocation" x="132" y="218"/>
         </view>
     </objects>
     <resources>

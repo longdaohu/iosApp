@@ -443,12 +443,6 @@
 }
 
 
-// 点击忘记密码
-- (IBAction)ForgetPasswdButtonPressed:(id)sender {
-    
-     [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
-
-}
 
 #pragma mark ———————— 第三方登录
 - (IBAction)otherLogin:(UIButton *)sender
@@ -785,7 +779,6 @@
 -(UIButton *)cover
 {
     if (!_cover) {
-        
         _cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
         _cover.backgroundColor = XCOLOR_BLACK;
         _cover.alpha = 0;
@@ -964,6 +957,12 @@
         
 }
 
+// 点击忘记密码
+- (IBAction)ForgetPasswdButtonPressed:(id)sender {
+    
+    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     
