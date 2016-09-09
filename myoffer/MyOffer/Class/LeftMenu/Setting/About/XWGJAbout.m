@@ -14,7 +14,9 @@
 
 - (instancetype)initAboutWithLogo:(NSString *)logoName andContent:(NSString *)contentName andsubTitle:(NSString *)subName andRightAccessoryImage:(NSString *)rightImageName
 {
-    if ([super init]) {
+     self = [super init];
+    
+    if (self) {
     
         self.Logo = logoName;
         self.contentName = contentName;

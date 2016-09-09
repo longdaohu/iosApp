@@ -18,13 +18,16 @@
 -(instancetype)initWithTitle:(NSString *)titleName andSecitonIcon:(NSString *)iconName andContensArray:(NSArray *)items
 {
    
-    if ([super init]) {
+    self = [super init];
+    
+    if (self) {
         
         self.SectionIconName = iconName;
         self.SectionTitleName = titleName;
         self.cellItems = items;
 
     }
+    
     return self;
 }
 

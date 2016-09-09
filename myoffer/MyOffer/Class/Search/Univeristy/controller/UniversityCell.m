@@ -94,44 +94,44 @@
     
     [super layoutSubviews];
 
-    CGRect LogoFrame = self.logo.frame;
-    LogoFrame = self.itemFrame.logoFrame;
-    self.logo.frame = LogoFrame;
+//    CGRect LogoFrame = self.logo.frame;
+//    LogoFrame = self.itemFrame.logoFrame;
+    self.logo.frame = self.itemFrame.logoFrame;
     
     
-    CGRect nameFrame = self.nameLab.frame;
-    nameFrame = self.itemFrame.nameFrame;
-    self.nameLab.frame = nameFrame;
+//    CGRect nameFrame = self.nameLab.frame;
+//    nameFrame = self.itemFrame.nameFrame;
+    self.nameLab.frame = self.itemFrame.nameFrame;
     
     
-    CGRect officalFrame = self.officalLab.frame;
-    officalFrame = self.itemFrame.official_nameFrame;
-    self.officalLab.frame = officalFrame;
-    
- 
-    CGRect anthorFrame = self.anthorView.frame;
-    anthorFrame = self.itemFrame.anchorFrame;
-    self.anthorView.frame = anthorFrame;
+//    CGRect officalFrame = self.officalLab.frame;
+//    officalFrame = self.itemFrame.official_nameFrame;
+    self.officalLab.frame = self.itemFrame.official_nameFrame;
     
  
-    CGRect addressFrame = self.addressLab.frame;
-    addressFrame = self.itemFrame.address_detailFrame;
-    self.addressLab.frame = addressFrame;
+//    CGRect anthorFrame = self.anthorView.frame;
+//    anthorFrame = self.itemFrame.anchorFrame;
+    self.anthorView.frame = self.itemFrame.anchorFrame;
+    
+ 
+//    CGRect addressFrame = self.addressLab.frame;
+//    addressFrame = self.itemFrame.address_detailFrame;
+    self.addressLab.frame = self.itemFrame.address_detailFrame;
     
     
-    CGRect qsFrame = self.qsLab.frame;
-    qsFrame = self.itemFrame.QSRankFrame;
-    self.qsLab.frame = qsFrame;
+//    CGRect qsFrame = self.qsLab.frame;
+//    qsFrame = self.itemFrame.QSRankFrame;
+    self.qsLab.frame = self.itemFrame.QSRankFrame;
     
     
-    CGRect localFrame = self.localLab.frame;
-    localFrame = self.itemFrame.TIMESRankFrame;
-    self.localLab.frame = localFrame;
+//    CGRect localFrame = self.localLab.frame;
+//    localFrame = self.itemFrame.TIMESRankFrame;
+    self.localLab.frame = self.itemFrame.TIMESRankFrame;
     
     
-    CGRect hotFrame = self.hotView.frame;
-    hotFrame = self.itemFrame.hotFrame;
-    self.hotView.frame = hotFrame;
+//    CGRect hotFrame = self.hotView.frame;
+//    hotFrame = self.itemFrame.hotFrame;
+    self.hotView.frame = self.itemFrame.hotFrame;
     
     
   

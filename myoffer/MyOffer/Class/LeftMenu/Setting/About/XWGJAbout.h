@@ -17,5 +17,4 @@
 + (instancetype)aboutWithLogo:(NSString *)logoName andContent:(NSString *)contentName andsubTitle:(NSString *)subName andRightAccessoryImage:(NSString *)rightImageName;
 
 
-
 @end

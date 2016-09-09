@@ -145,11 +145,7 @@
     
     [super layoutSubviews];
     
-
-    
-    CGRect rightRect = self.rightView.frame;
-    rightRect = self.itemFrame.rightViewFrame;
-    self.rightView.frame = rightRect;
+    self.rightView.frame =  self.itemFrame.rightViewFrame;
     
 
 }

@@ -13,7 +13,9 @@
 
 -(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name
 {
-    if ([super init]) {
+    
+    self = [super init];
+    if (self) {
         self.IconName = iconName;
         self.TitleName = Name;
     }

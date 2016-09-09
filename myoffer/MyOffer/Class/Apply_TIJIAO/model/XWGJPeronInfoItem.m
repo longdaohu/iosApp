@@ -18,7 +18,8 @@
 
 -(instancetype)initWithPlacehoder:(NSString *)placehoder andAccessroy:(BOOL)assessory
 {
-    if ([super init]) {
+    self = [super init];
+    if (self) {
         
         self.placeholder = placehoder;
         self.Accessory = assessory;

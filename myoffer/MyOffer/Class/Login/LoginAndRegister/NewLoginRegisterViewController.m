@@ -285,7 +285,7 @@
     UIView  *moveView  = self.PhoneView.frame.origin.y < XScreenHeight? self.PhoneView :self.xLoginRegistView;
     
     if (up) {
-        moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f +40.0);
+        moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
         
      } else {
          
@@ -394,8 +394,10 @@
     if (self.LoginPasswdTextF.text.length == 0) {
         
         AlerMessage(GDLocalizedString(@"LoginVC-0011"));
+        
         return;
     }
+    
     [self
      startAPIRequestWithSelector:kAPISelectorLogin
      parameters:@{@"username":self.LoginPhoneNumberTextF.text , @"password": self.LoginPasswdTextF.text}

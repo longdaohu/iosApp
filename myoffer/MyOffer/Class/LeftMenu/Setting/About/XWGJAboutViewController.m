@@ -103,7 +103,7 @@
 #pragma mark —————— UITableViewDataDeleage UITableViewDeleage
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat sectionHeigt = section == 0 ? 0.0001 : 40;
+    CGFloat sectionHeigt = section == 0 ? HEIGHT_ZERO : 40;
     
     return   sectionHeigt;
 }

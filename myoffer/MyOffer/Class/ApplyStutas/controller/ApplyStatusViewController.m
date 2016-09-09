@@ -49,9 +49,7 @@
 -(void)makeUI
 {
     
-    
     [self makeTableView];
-    
     //没有数量是显示提示
     [self makeOther];
   
@@ -60,7 +58,7 @@
 
 -(void)makeTableView
 {
-    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 20) style:UITableViewStyleGrouped];
+    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.dataSource      = self;
     self.TableView.delegate        = self;
     self.TableView.backgroundColor = BACKGROUDCOLOR;
@@ -72,6 +70,7 @@
     self.TableView.mj_header           = header;
 
 }
+
 
 -(void)makeOther
 {
@@ -87,7 +86,6 @@
     if (self.isBackRootViewController) {
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
     }
-
     
 }
 
@@ -98,7 +96,9 @@
     
     [self makeUI];
     
-    [self RequestDataSourse:NO];
+//    [self RequestDataSourse:NO];
+    
+    [self.TableView.mj_header beginRefreshing];
 }
 
 //加载新数据
@@ -120,38 +120,54 @@
         if (refresh) {
             
             [self.TableView.mj_header endRefreshing];
+            
          }
         return; 
     }
     
     XJHUtilDefineWeakSelfRef
-    [self startAPIRequestWithSelector:@"GET api/account/checklist" parameters:nil success:^(NSInteger statusCode, id response) {
+    
+    
+    NSString *path = @"GET api/account/checklist";
+    [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
         
-        NSArray *records       = response[@"records"];
-        NSMutableArray *groups = [NSMutableArray array];
-        
-         for (NSDictionary *record in records) {
-             
-             XWGJApplyRecordGroup *group =[XWGJApplyRecordGroup ApplyRecourseGroupWithDictionary:record];
-             
-             [groups addObject:group];
-             
-        }
- 
-        weakSelf.ApplyRecordGroups = [groups copy];
+   
+        [weakSelf makeUIConfigrationWith:response];
         
         [weakSelf.TableView reloadData];
         
-        weakSelf.noDataView.hidden = records.count == 0 ? NO : YES;
-
+        
         if (refresh) {
             
-              [weakSelf.TableView.mj_header endRefreshing];
-         }
+            [weakSelf.TableView.mj_header endRefreshing];
+        }
         
-     }];
+    }];
+    
+
   
 }
+
+-(void)makeUIConfigrationWith:(id)response{
+
+    NSArray *records       = response[@"records"];
+    NSMutableArray *groups = [NSMutableArray array];
+    
+    for (NSDictionary *record in records) {
+        
+        XWGJApplyRecordGroup *group =[XWGJApplyRecordGroup ApplyRecourseGroupWithDictionary:record];
+        
+        [groups addObject:group];
+        
+    }
+    
+    self.ApplyRecordGroups = [groups copy];
+    
+    self.noDataView.hidden = records.count == 0 ? NO : YES;
+   
+    
+}
+
 
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure

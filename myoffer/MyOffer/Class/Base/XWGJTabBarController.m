@@ -196,26 +196,27 @@
 }
 
 #pragma mark ——  UITabBarDelegate
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-  
-    if (USER_EN)
-     return;
-    
-    NSString *itemName;
-    if (item.tag == 0) {
-        itemName = @"tabItem_home";
-    }else if (item.tag == 1) {
-        itemName = @"tabItem_catigory";
-    }else if (item.tag == 2) {
-        itemName = @"tabItem_news";
-    }{
-        itemName = @"tabItem_applyCenter";
-    }
-    [MobClick event:itemName];
-    
-}
-
+//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+//{
+//  
+//    if (USER_EN)
+//        return;
+//   
+//    
+//    NSString *itemName;
+//    
+//    if (item.tag == 0) {
+//        itemName = @"tabItem_home";
+//    }else if (item.tag == 1) {
+//        itemName = @"tabItem_catigory";
+//    }else if (item.tag == 2) {
+//        itemName = @"tabItem_news";
+//    }{
+//        itemName = @"tabItem_applyCenter";
+//    }
+//    [MobClick event:itemName];
+//    
+//}
 
 -(void)contentViewIsOpen:(BOOL)open
 {

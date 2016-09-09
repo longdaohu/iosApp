@@ -427,7 +427,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveFooter ? PADDING_TABLEGROUP : 0.0000000001;
+    return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
 }
 
 
@@ -437,7 +437,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return  group.HaveHeader ? 40 : 0.0000000001;
+    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

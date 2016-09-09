@@ -624,11 +624,11 @@
             NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count  = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
             [ud synchronize];
 
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)([response[@"message_count"] integerValue]+[response[@"order_count"] integerValue])];
 
         }];
         

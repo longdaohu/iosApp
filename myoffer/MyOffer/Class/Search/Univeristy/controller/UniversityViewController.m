@@ -341,7 +341,7 @@ typedef enum {
     
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveFooter ? PADDING_TABLEGROUP : 0.0000000001;
+    return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
 }
 
 
@@ -350,7 +350,7 @@ typedef enum {
     
     UniDetailGroup *group = self.groups[section];
 
-    return  group.HaveHeader ? 40 : 0.0000000001;
+    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -668,7 +668,7 @@ typedef enum {
 //点击图片浏览器
 -(void)showPhotoAtIndex:(NSUInteger)index
 {
-    NSMutableArray *photos = [NSMutableArray new];
+    
     NSMutableArray *temps = [NSMutableArray new];
     
     for (NSString *path in self.UniFrame.item.images) {
@@ -676,7 +676,7 @@ typedef enum {
     }
     
     NSArray *photosWithURL = [IDMPhoto photosWithURLs:temps];
-    photos = [NSMutableArray arrayWithArray:photosWithURL];
+     NSMutableArray *photos = [NSMutableArray arrayWithArray:photosWithURL];
     // Create and setup browser
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos];
     browser.delegate = self;

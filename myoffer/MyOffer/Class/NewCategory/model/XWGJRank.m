@@ -13,7 +13,10 @@
 
 -(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name RankKey:(NSString *)key
 {
-    if ([super init]) {
+    
+    self = [super init];
+    
+    if (self) {
         self.IconName = iconName;
         self.TitleName = Name;
         self.key = key;
