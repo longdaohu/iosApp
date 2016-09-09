@@ -14,7 +14,6 @@
 #import "XWGJApplyRecord.h"
 #import "XWGJApplyRecordGroup.h"
 #import "XSearchSectionHeaderView.h"
-
 #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -50,7 +49,6 @@
 -(void)makeUI
 {
     
-    self.title = GDLocalizedString(@"Me-002");
     
     [self makeTableView];
     
@@ -77,6 +75,9 @@
 
 -(void)makeOther
 {
+    
+    self.title = GDLocalizedString(@"Me-002");
+
     self.noDataView                   = [XWGJnodataView noDataView];
     self.noDataView.contentLabel.text = GDLocalizedString(@"ApplicationStutasVC-noData");
     self.noDataView.hidden            = YES;
@@ -89,7 +90,6 @@
 
     
 }
-
 
 
 - (void)viewDidLoad {
@@ -155,7 +155,12 @@
 
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
- - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return PADDING_TABLEGROUP;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  University_HEIGHT;
 }
@@ -215,7 +220,7 @@
 
 -(void)dealloc
 {
-    KDClassLog(@" ApplyStatusViewController --- dealloc");
+    KDClassLog(@" 申请状态 --- dealloc");
 }
 
 

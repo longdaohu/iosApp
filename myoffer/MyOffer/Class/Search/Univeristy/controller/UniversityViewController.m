@@ -38,7 +38,7 @@ typedef enum {
     UniversityItemTypeWeb,
     UniversityItemTypePop
 }UniversityItemType;//表头按钮选项
-
+#define HEIGHT_BOTTOM 70
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -187,7 +187,7 @@ typedef enum {
     
     XJHUtilDefineWeakSelfRef
    //表头
-    UniverstyHeaderView  * header   = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
+    UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
     header.frame                   = UniFrame.headerFrame;
     header.actionBlock = ^(UIButton *sender){
     
@@ -220,9 +220,9 @@ typedef enum {
         XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
         [news_temps addObject:newsFrame];
     }
- 
     UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
     [self.groups addObject:groupTwo];
+
     
     //相关院校  大于第二分组
     NSMutableArray *neightbour_temps = [NSMutableArray array];
@@ -236,7 +236,6 @@ typedef enum {
         NSArray *items = @[uniFrame];
         UniDetailGroup *group = [UniDetailGroup groupWithTitle:title contentes:items andFooter:YES];
         [self.groups addObject:group];
-        
         
     }];
     
@@ -256,7 +255,8 @@ typedef enum {
 -(void)makeFooterView{
     
     XJHUtilDefineWeakSelfRef
-    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - 70, XScreenWidth, 70)];
+
+    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - HEIGHT_BOTTOM, XScreenWidth, HEIGHT_BOTTOM)];
     footer.actionBlock = ^(UIButton *sender){
         [weakSelf footerWithButton:sender];
     };
@@ -283,9 +283,9 @@ typedef enum {
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, HEIGHT_BOTTOM, 0);
+    self.tableView.delegate     = self;
+    self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
     self.tableView.alpha = 0.1;
  
@@ -302,7 +302,6 @@ typedef enum {
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, XPERCENT * 400)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.backgroundColor = BACKGROUDCOLOR;
-//    iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
     self.iconView = iconView;
     self.iconViewOldFrame = iconView.frame;
     self.iconViewOldCenter = iconView.center;
@@ -316,9 +315,10 @@ typedef enum {
     UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, UniFrame.contentHeight)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
+    
     XJHUtilDefineWeakSelfRef
     oneGroup.actionBlock = ^(NSString *name,NSInteger index){
-             [weakSelf showPhotoAtIndex:index];
+              [weakSelf showPhotoAtIndex:index];
       };
     
 }
@@ -345,7 +345,6 @@ typedef enum {
 }
 
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     
@@ -357,9 +356,9 @@ typedef enum {
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
  
-    CGFloat height = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : University_HEIGHT;
+    CGFloat rowHeight = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : University_HEIGHT;
  
-    return height;
+    return rowHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -567,23 +566,16 @@ typedef enum {
 //点击查看更多
 - (void)more{
   
-    self.tableView.tableHeaderView  = self.header;
-    
     self.UniFrame.showMore = !self.UniFrame.showMore;
- 
+    
     if (CGRectGetHeight(self.header.frame) > 0) {
         
         [UIView animateWithDuration:ANIMATIONDUATION animations:^{
             
             self.header.itemFrame = self.UniFrame;
-            
-            self.header.frame   =  self.UniFrame.headerFrame;
-            
-            
-//            _tableView.tableHeaderView = self.header;
-//            [self.tableView reloadData];
-
-            [_tableView beginUpdates];
+            self.header.frame     =  self.UniFrame.headerFrame;
+           
+            [_tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
             [_tableView setTableHeaderView:self.header];
             [_tableView endUpdates];
 

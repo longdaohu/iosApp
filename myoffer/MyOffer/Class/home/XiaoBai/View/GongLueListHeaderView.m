@@ -33,6 +33,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.clipsToBounds = YES;
     
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = BACKGROUDCOLOR;
@@ -130,12 +131,12 @@
 {
     _contentOffsetY = contentOffsetY;
     
-    
-
+ 
     if (contentOffsetY <= 0) {
         
  
             self.headerTitleLab.frame = self.headerTitleLabFrame;
+        
     }else{
     
         
@@ -152,12 +153,7 @@
         
     }
     
-    
-    
-    
-        
-    
-    
+     
     
 }
 

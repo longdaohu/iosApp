@@ -264,11 +264,8 @@
 		AEA24A9B1D5B23F600DD7939 /* XLiuxueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */; };
 		AEA24A9C1D5B23F600DD7939 /* GonglueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */; };
 		AEA24A9D1D5B23F600DD7939 /* XXiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XXiaobaiViewController.m */; };
-		AEA24A9E1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A7A1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png */; };
 		AEA24A9F1D5B23F600DD7939 /* GongLueListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */; };
 		AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */; };
-		AEA24AA11D5B23F600DD7939 /* tap in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A7F1D5B23F600DD7939 /* tap */; };
-		AEA24AA21D5B23F600DD7939 /* tap.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A801D5B23F600DD7939 /* tap.png */; };
 		AEA24AA31D5B23F600DD7939 /* XGongLueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */; };
 		AEA24AA41D5B23F600DD7939 /* XTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A841D5B23F600DD7939 /* XTopToolView.m */; };
 		AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AA91D5B24D200DD7939 /* HelpViewController.m */; };
@@ -880,13 +877,10 @@
 		AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueListViewController.m; sourceTree = "<group>"; };
 		AEA24A771D5B23F600DD7939 /* XXiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXiaobaiViewController.h; sourceTree = "<group>"; };
 		AEA24A781D5B23F600DD7939 /* XXiaobaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXiaobaiViewController.m; sourceTree = "<group>"; };
-		AEA24A7A1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "F650AC-063E-411F-9F1A-012452FE0708.png"; sourceTree = "<group>"; };
 		AEA24A7B1D5B23F600DD7939 /* GongLueListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListCell.h; sourceTree = "<group>"; };
 		AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueListCell.m; sourceTree = "<group>"; };
 		AEA24A7D1D5B23F600DD7939 /* GongLueListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListHeaderView.h; sourceTree = "<group>"; };
 		AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueListHeaderView.m; sourceTree = "<group>"; };
-		AEA24A7F1D5B23F600DD7939 /* tap */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap; sourceTree = "<group>"; };
-		AEA24A801D5B23F600DD7939 /* tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap.png; sourceTree = "<group>"; };
 		AEA24A811D5B23F600DD7939 /* XGongLueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGongLueTableViewCell.h; sourceTree = "<group>"; };
 		AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XGongLueTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A831D5B23F600DD7939 /* XTopToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTopToolView.h; sourceTree = "<group>"; };
@@ -2359,13 +2353,10 @@
 		AEA24A791D5B23F600DD7939 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A7A1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png */,
 				AEA24A7B1D5B23F600DD7939 /* GongLueListCell.h */,
 				AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */,
 				AEA24A7D1D5B23F600DD7939 /* GongLueListHeaderView.h */,
 				AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */,
-				AEA24A7F1D5B23F600DD7939 /* tap */,
-				AEA24A801D5B23F600DD7939 /* tap.png */,
 				AEA24A811D5B23F600DD7939 /* XGongLueTableViewCell.h */,
 				AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */,
 				AEA24A831D5B23F600DD7939 /* XTopToolView.h */,
@@ -3168,7 +3159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */,
-				AEA24AA11D5B23F600DD7939 /* tap in Resources */,
 				AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */,
 				AEA24C221D5B283700DD7939 /* appbg.jpg in Resources */,
 				AEA24A881D5B23F600DD7939 /* DiscoveryCell.xib in Resources */,
@@ -3185,7 +3175,6 @@
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AEA24C2C1D5B283700DD7939 /* no_message.png in Resources */,
-				AEA24AA21D5B23F600DD7939 /* tap.png in Resources */,
 				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
 				AEA24A061D5B224E00DD7939 /* XWGJCityCollectionViewCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
@@ -3199,7 +3188,6 @@
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AEA24C2B1D5B283700DD7939 /* guid_smart.png in Resources */,
 				AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */,
-				AEA24A9E1D5B23F600DD7939 /* F650AC-063E-411F-9F1A-012452FE0708.png in Resources */,
 				AEA24B891D5B25E000DD7939 /* RankTypeTableViewCell.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,

@@ -14,6 +14,7 @@
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *timeLab;
 @property(nonatomic,strong)UILabel *subTitleLab;
+@property(nonatomic,strong)UIImageView *redSpotsView;
 
 
 @end
@@ -42,19 +43,18 @@
         self.logoView =[[UIImageView alloc] init];
         [self.contentView addSubview:self.logoView];
         
-        self.NewImageView=[[UIImageView alloc] init];
-        self.NewImageView.layer.cornerRadius = 5;
-        self.NewImageView.layer.masksToBounds = YES;
-        [self.contentView addSubview:self.NewImageView];
+        self.redSpotsView=[[UIImageView alloc] init];
+        self.redSpotsView.contentMode = UIViewContentModeCenter;
+        [self.contentView addSubview:self.redSpotsView];
+        self.redSpotsView.image = [UIImage imageNamed:@"message_dot"];
         
-        
-        self.titleLab =[UILabel labelWithFontsize:18 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.titleLab =[UILabel labelWithFontsize:XPERCENT * 15 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.titleLab];
         
-        self.timeLab = [UILabel labelWithFontsize:14 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.timeLab = [UILabel labelWithFontsize:XPERCENT * 12 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.timeLab];
         
-        self.subTitleLab = [UILabel labelWithFontsize:16 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.subTitleLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.subTitleLab];
         
      }
@@ -70,45 +70,48 @@
     self.timeLab.text       = noti.create_at;
     NSString *imageName     =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
     self.logoView.image     = [UIImage imageNamed:imageName];
-    UIImage *newImage       = noti.state.length ? nil:[UIImage imageNamed:@"message_dot"];
-    self.NewImageView.image = newImage;
-    
+    self.redSpotsView.hidden = noti.state.length;
+
 }
 
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat cx = 10;
-    CGFloat cy = 20;
-    CGFloat cw = 60;
-    CGFloat ch = 60;
-    self.logoView.frame =CGRectMake(cx, cy, cw, ch);
     
-    CGFloat nx = CGRectGetMaxX(self.logoView.frame) - 12;
-    CGFloat ny = 30;
-    CGFloat nw = 10;
-    CGFloat nh = 10;
-    self.NewImageView.frame =CGRectMake(nx, ny, nw, nh);
+    CGSize contentSize = self.contentView.bounds.size;
     
-    CGFloat nox = CGRectGetMaxX(self.logoView.frame) + 10;
-    CGFloat noy = 10;
-    CGFloat now = APPSIZE.width - nox - 20;
-    CGFloat noh = 20;
-    self.titleLab.frame = CGRectMake(nox, noy, now, noh);
+    CGFloat logox = 10;
+    CGFloat logoy = 20;
+    CGFloat logoh = contentSize.height - logoy * 2;
+    CGFloat logow = logoh;
+    self.logoView.frame =CGRectMake(logox, logoy, logow, logoh);
     
+
+    CGFloat redw = logow * 0.5 - 7;
+    CGFloat redh = redw;
+    CGFloat redx = CGRectGetMaxX(self.logoView.frame) - redw;
+    CGFloat redy = logoy;
+    self.redSpotsView.frame =CGRectMake(redx, redy, redw, redh);
     
-    CGFloat tx = nox;
-    CGFloat ty = CGRectGetMaxY(self.titleLab.frame)+10;
-    CGFloat tw = now;
-    CGFloat th = 20;
-    self.timeLab.frame =CGRectMake(tx, ty, tw, th);
+    CGFloat titleX = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
+    CGFloat titleY = logoy;
+    CGFloat titleW = XScreenWidth - titleX - 2 * ITEM_MARGIN;
+    CGFloat titleH = XPERCENT * 15;
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+
     
-    CGFloat dx = nox;
-    CGFloat dy = CGRectGetMaxY(self.timeLab.frame) +10;
-    CGFloat dw = now;
-    CGFloat dh = 20;
-    self.subTitleLab.frame =CGRectMake(dx, dy, dw, dh);
+    CGFloat subX = titleX;
+    CGFloat subW = titleW;
+    CGFloat subH = XPERCENT * 13;
+    CGFloat subY = CGRectGetMaxY(self.logoView.frame) - subH;
+    self.subTitleLab.frame =CGRectMake(subX, subY, subW, subH);
+    
+    CGFloat timeX = titleX;
+    CGFloat timeW = titleW;
+    CGFloat timeH = XPERCENT * 12;
+    CGFloat timeY = self.logoView.center.y - timeH * 0.5;
+    self.timeLab.frame =CGRectMake(timeX, timeY, timeW, timeH);
     
 }
 

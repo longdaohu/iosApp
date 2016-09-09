@@ -18,14 +18,9 @@
 @property(nonatomic,strong)MJRefreshNormalHeader *mj_header;
 @property(nonatomic,assign)int nextPage;
 @property(nonatomic,strong)XWGJnodataView *NDataView;
-
-
 @end
 
 @implementation NotificationViewController
-
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -65,11 +60,9 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.contentInset    =  UIEdgeInsetsMake(0, 0, 64, 0);
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64) style:UITableViewStyleGrouped];
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
-    self.tableView.rowHeight       = KDUtilSize(100);
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.backgroundColor = BACKGROUDCOLOR;
     [self.view addSubview:self.tableView];
@@ -112,8 +105,8 @@
 -(void)getDataSourse:(int)page
 {
   
- 
      NSString *path = [NSString stringWithFormat:@"GET api/account/messagelist?client=app&page=%d&size=%d",page,PageSize];
+    XJHUtilDefineWeakSelfRef
     
     [self
      startAPIRequestWithSelector:path
@@ -124,44 +117,52 @@
      errorAlertDismissAction:nil
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
- 
-          self.nextPage +=1;
+         [weakSelf makeUIConfigrationWithResponse:response];
          
-         if ([self.tableView.mj_header isRefreshing]) {
-             
-              [self.results removeAllObjects];
-          }
-         
-         for (NSDictionary *message in response[@"messages"]) {
-             
-              [self.results  addObject:[NotiItem mj_objectWithKeyValues:message]];
-         }
-  
-         [self.tableView.mj_header endRefreshing];
-         [self.tableView.mj_footer endRefreshing];
-         
-          self.tableView.mj_footer = PageSize > [response[@"messages"] count] ? nil : [self makeMJ_footer];
-         
-         if ([response[@"messages"] count] == 0 && self.results.count == 0) {
-             
-             self.NDataView.hidden = NO;
-             
-             return ;
-         }
-         
-          [self.tableView reloadData];
+         [weakSelf.tableView reloadData];
          
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         [self.tableView.mj_header endRefreshing];
-         [self.tableView.mj_footer endRefreshing];
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
          
-         self.NDataView.hidden = NO;
-         self.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
+         weakSelf.NDataView.hidden = NO;
+         weakSelf.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
          
      }];
 }
+
+//配置页面控件
+- (void)makeUIConfigrationWithResponse:(id)response{
+
+    self.nextPage +=1;
+    
+    if ([self.tableView.mj_header isRefreshing]) {
+        
+        [self.results removeAllObjects];
+    }
+    
+    for (NSDictionary *message in response[@"messages"]) {
+        
+        [self.results  addObject:[NotiItem mj_objectWithKeyValues:message]];
+    }
+    
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    self.tableView.mj_footer = PageSize > [response[@"messages"] count] ? nil : [self makeMJ_footer];
+    
+    if ([response[@"messages"] count] == 0 && self.results.count == 0) {
+        
+        self.NDataView.hidden = NO;
+        
+        return ;
+    }
+  
+}
+
+
 //加载新数据
 -(void)loadNewData{
     
@@ -177,7 +178,12 @@
      [self getDataSourse:self.nextPage];
     
 }
+
 #pragma mark  UITableViewDelegate UITableViewData
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
@@ -186,11 +192,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     NotiTableViewCell *cell = [NotiTableViewCell cellWithTableView:tableView];
-    
     cell.noti               = self.results[indexPath.row];
-    
     return cell;
 }
 
@@ -200,20 +203,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
     NotiItem *noti  = self.results[indexPath.row];
-    
     noti.state      = @"Read";
-    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
+    
     DetailWebViewController *detailVC = [[DetailWebViewController alloc] init];
-    
     detailVC.notiID = noti.NO_id;
-    
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    
+    return University_HEIGHT;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+  
+    return 0.0001;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
+    return 0.0001;
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return YES;
@@ -247,7 +259,7 @@
 
 -(void)dealloc
 {
-    KDClassLog(@" NotificationViewController  dealloc");   //可以释放
+    KDClassLog(@" 通知列表  dealloc");   //可以释放
 }
 
 
