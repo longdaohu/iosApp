@@ -109,12 +109,21 @@
 {
     self.FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, AdjustF(160.f))];
     self.FlexibleImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue[@"cover"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.FlexibleImageView.clipsToBounds = YES;
+    self.FlexibleImageView.backgroundColor = BACKGROUDCOLOR;
     self.oldFlexibleViewRect = self.FlexibleImageView.frame;
     self.oldFlexibleViewCenter = self.FlexibleImageView.center;
     [self.view addSubview:self.FlexibleImageView];
-    
+    self.FlexibleImageView.alpha = 0.1;
+    [self.FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue[@"cover"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
+    [UIView transitionWithView:self.FlexibleImageView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        
+        self.FlexibleImageView.alpha = 1;
+
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 
@@ -242,6 +251,8 @@
     
     self.headerView.contentOffsetY =  scrollView.contentOffset.y;
     
+    
+    
     if (scrollView.contentOffset.y < 0) {
         
         CGRect frame = self.oldFlexibleViewRect;
@@ -259,6 +270,8 @@
             self.FlexibleImageView.frame = self.oldFlexibleViewRect;
         }];
     }
+    
+    
     
     
    CGFloat height =  self.headerView.moBgView.frame.origin.y - CGRectGetMinY(self.headerView.headerTitleLab.frame);

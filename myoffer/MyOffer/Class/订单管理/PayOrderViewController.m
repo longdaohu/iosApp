@@ -283,34 +283,22 @@ static NSString *identify = @"pay";
         return;
     }
     
+    NSString *path;
     if ([self.payStyle isEqualToString:@"支付宝"]) {
-        
-        NSString *path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
-        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
-            
-            if (endStr.boolValue && !self.alert.visible) {
-                
-                [self showAler:@"支付成功"];
-            }
-            
-        }];
-        
+        path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
     }else if([self.payStyle isEqualToString:@"微信"]){
-        
-        NSString *path =[NSString stringWithFormat:@"GET api/account/wechatpayapp?is_ios=1&order_id=%@",self.order.orderId];
-        
-        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
-            if (endStr.boolValue && !self.alert.visible) {
-                
-                [self showAler:@"支付成功"];
-            }
-        }];
-        
+       path =[NSString stringWithFormat:@"GET api/account/wechatpayapp?is_ios=1&order_id=%@",self.order.orderId];
     }
+    
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
+        
+        if (endStr.boolValue && !self.alert.visible) {
+            
+            [self showAler:@"支付成功"];
+        }
+    }];
 
 }
 

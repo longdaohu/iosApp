@@ -164,7 +164,7 @@
             }
         }
          
-         NSLog(@"courses---courses- %@",response[@"courses"]);
+//         NSLog(@"courses---courses- %@",response[@"courses"]);
          
            _result = [response[@"courses"] mutableCopy];
          

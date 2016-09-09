@@ -73,6 +73,8 @@
     [attr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]  range:showRange];
     self.showLab.attributedText = attr;
     
+    
+    
 }
 
 

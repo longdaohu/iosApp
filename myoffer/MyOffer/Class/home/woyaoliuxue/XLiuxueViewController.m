@@ -660,7 +660,7 @@ typedef enum {
     
 
     
-    [self.view layoutIfNeeded];
+    [self.view layoutSubviews];
     
     [UIView commitAnimations];
 }

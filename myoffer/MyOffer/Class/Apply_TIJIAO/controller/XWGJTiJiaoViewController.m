@@ -1036,7 +1036,7 @@ typedef enum {
     
     self.TableView.contentInset = insets;
     
-    [self.view layoutIfNeeded];
+    [self.view layoutSubviews];
     
     [UIView commitAnimations];
 }

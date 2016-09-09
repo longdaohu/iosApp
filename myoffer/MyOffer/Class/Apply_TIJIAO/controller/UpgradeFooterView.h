@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^UpgradeTipsViewBlock)();
-@interface UpgradeTipsView : UIView
+@interface UpgradeFooterView : UIView
++ (instancetype)footView;
 @property(nonatomic,copy)NSString *tipStr;                  //提示字符串
 @property(nonatomic,assign)CGFloat contentHeigt;            //提示框高
 @property(nonatomic,copy)UpgradeTipsViewBlock actionBlock;

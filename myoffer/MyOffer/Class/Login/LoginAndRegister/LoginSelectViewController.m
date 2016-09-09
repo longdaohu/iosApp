@@ -532,7 +532,7 @@
         moveView.center = CGPointMake(XScreenWidth / 2.0f, XScreenHeight*2/3);
     }
     
-    [self.view layoutIfNeeded];
+    [self.view layoutSubviews];
     
     [UIView commitAnimations];
 }

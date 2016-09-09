@@ -25,6 +25,7 @@
 #define TOP_HIGHT  34.0
 #define ITEM_MARGIN   10.0
 #define PADDING_TABLEGROUP 10.0
+#define ANIMATIONDUATION 0.25
 #define   XPERCENT          XScreenWidth/320
 #define   XMARGIN           XPERCENT * 8
 #define   XFONT(size)        [UIFont systemFontOfSize:size]
@@ -66,8 +67,8 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-//#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://www.myoffer.cn/"
+#define DOMAINURL  @"http://www.myofferdemo.com/"
+//#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MBProgressHUD.h"
 #import "MJExtension.h"

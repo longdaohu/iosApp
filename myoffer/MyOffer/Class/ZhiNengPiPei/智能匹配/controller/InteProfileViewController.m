@@ -736,7 +736,7 @@ typedef enum {
     
     self.profileTabelView.contentInset = insets;
     
-    [self.view layoutIfNeeded];
+    [self.view layoutSubviews];
     
     [UIView commitAnimations];
 }

@@ -146,6 +146,7 @@
     
     [MobClick endLogPageView:@"page左侧菜单"];
     
+    
 }
 
 
@@ -306,8 +307,7 @@
 
 //注销
 - (void)xlogout{
-    
-
+ 
     UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
     [sheet showInView:self.view];
     

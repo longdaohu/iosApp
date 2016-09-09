@@ -24,13 +24,9 @@
 
 @implementation OrderViewController
 
-
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     
     [MobClick beginLogPageView:@"page订单中心"];
     
@@ -63,11 +59,11 @@
      if (![self checkNetWorkReaching]) {
         
          self.nodataView.hidden = NO;
+         
          return ;
     }
     
      [self.tableView.mj_header beginRefreshing];
-    
     
 }
 
@@ -118,7 +114,6 @@
             [self.orderGroup addObject:order];
         }
         
-
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -207,15 +202,15 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 1;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return PADDING_TABLEGROUP;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 
-    return   15 ;
+    return   0.00001;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -226,62 +221,57 @@
 #pragma mark ----- OrderTableViewCellDelegate
 -(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender
 {
-    
-    
     switch (sender.tag) {
             
         case 11:
-        {
-            
             [self cancelOrder:indexPath];
-
-        }
             break;
-            
         case 10:
-        {
-            
-            
-            PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
-            pay.order  =  self.orderGroup[indexPath.section];
-            pay.actionBlock = ^(BOOL isSuccess){
-                 OrderItem *order = self.orderGroup[indexPath.section];
-                
-                if (isSuccess) {
-                    
-                    order.status = @"ORDER_FINISHED";
-                    
-                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                }
-             };
-            
-            [self.navigationController pushViewController:pay  animated:YES];
-          }
+            [self payOrder:indexPath];
             break;
-            
         default:
-        {
-            OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
-            detail.order  =  self.orderGroup[indexPath.section];
-            detail.actionBlock = ^(BOOL isSuccess){
-            
-               OrderItem *order = self.orderGroup[indexPath.section];
-                
-                if (isSuccess) {
-                    
-                     order.status = @"ORDER_CLOSED";
-                    
-                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                }
-            };
-            [self.navigationController pushViewController:detail  animated:YES];
-        }
-            break;
+            [self OrderDetal:indexPath];
+             break;
     }
   
 }
 
+//详情
+-(void)OrderDetal:(NSIndexPath *)indexPath{
 
+    OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
+    detail.order  =  self.orderGroup[indexPath.section];
+    detail.actionBlock = ^(BOOL isSuccess){
+        OrderItem *order = self.orderGroup[indexPath.section];
+        if (isSuccess) {
+            order.status = @"ORDER_CLOSED";
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    };
+    [self.navigationController pushViewController:detail  animated:YES];
+}
+
+//支付
+-(void)payOrder:(NSIndexPath *)indexPath{
+
+    PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
+    pay.order  =  self.orderGroup[indexPath.section];
+    pay.actionBlock = ^(BOOL isSuccess){
+        OrderItem *order = self.orderGroup[indexPath.section];
+        
+        if (isSuccess) {
+            
+            order.status = @"ORDER_FINISHED";
+            
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    };
+    
+    [self.navigationController pushViewController:pay  animated:YES];
+}
+
+
+//取消
 -(void)cancelOrder:(NSIndexPath *)indexPath{
     
     __weak OrderItem *order = self.orderGroup[indexPath.section];
@@ -300,6 +290,9 @@
     }];
     
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -197,10 +197,9 @@ typedef enum {
     self.header = header;
     self.tableView.tableHeaderView  = header;
     
-    
-    //拉伸图片
+     //拉伸图片
     NSString *countryImageName = [university.country isEqualToString:@"英国"] ? @"Uni-uk.jpg" : @"Uni-au.jpg";
-    [UIView transitionWithView:self.iconView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:self.iconView duration:ANIMATIONDUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         [self.iconView setImage:[UIImage imageNamed:countryImageName]];
     } completion:^(BOOL finished) {
         
@@ -453,7 +452,7 @@ typedef enum {
   
     }else{
         
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:ANIMATIONDUATION animations:^{
             
             self.iconView.frame = self.iconViewOldFrame;
             
@@ -506,7 +505,7 @@ typedef enum {
             [self more];
             break;
         case UniversityItemTypeWeb:
-            [self web];
+//            [self web];
             break;
         default:
             break;
@@ -574,7 +573,7 @@ typedef enum {
  
     if (CGRectGetHeight(self.header.frame) > 0) {
         
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:ANIMATIONDUATION animations:^{
             
             self.header.itemFrame = self.UniFrame;
             
@@ -595,17 +594,11 @@ typedef enum {
     
 }
 
-//web
-- (void)web{
-    
-    NSLog(@" %@",self.UniFrame.item.website);
-
-}
 //设置是否收藏
 - (void)configureLikeButton:(BOOL)favorite{
     
      NSString *nomalFavor = favorite ? @"Uni_Favor" : @"Uni_Unfavor";
-     [ self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
+    [self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
      self.header.rightView.favorited = favorite;
     
 }
