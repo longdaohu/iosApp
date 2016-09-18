@@ -224,8 +224,7 @@
 
         }];
         
-        
-        [weakSelf makeUIWithMessageDictionary:response];
+         [weakSelf makeUIWithMessageDictionary:response];
         
         [weakSelf.tableView reloadData];
 
@@ -396,8 +395,6 @@
      NSURL  *url = request.URL;
     
     NSString *URLstr = [NSString stringWithFormat:@"%@",url];
-    
-    
     
     if ([URLstr containsString:@"api/article"]) {
         

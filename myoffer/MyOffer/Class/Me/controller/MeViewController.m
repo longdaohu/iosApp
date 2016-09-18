@@ -208,10 +208,11 @@ typedef enum {
 {
  
     XJHUtilDefineWeakSelfRef
-    self.leftView             = [LeftBarButtonItemView leftView];
-    self.leftView.actionBlock = ^(UIButton *sender){
+    self.leftView             = [LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf showLeftMenu];
-    };
+
+    }];
+ 
     self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     

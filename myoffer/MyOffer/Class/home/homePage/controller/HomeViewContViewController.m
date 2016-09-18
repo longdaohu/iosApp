@@ -6,6 +6,7 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 
 #define ADKEY @"Advertiseseeee"
+#define HEADER_HEIGHT XScreenHeight * 0.7
 
 #import "HomeHeaderView.h"
 #import "HomeViewContViewController.h"
@@ -23,34 +24,23 @@
 #import "HotUniversityFrame.h"
 #import "HomeSearchView.h"
 #import "SearchViewController.h"
-#import "AdvertiseViewController.h"
 #import "XXiaobaiViewController.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "XNewSearchViewController.h"
 #import "ServiceMallViewController.h"
 #import "XUToolbar.h"
+#import "UniDetailGroup.h"
 
 
-
-@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeHeaderViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
+@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
-//表头
-@property(nonatomic,strong)HomeHeaderView *TableHeaderView;
-//热门院校Frames数据
-@property(nonatomic,strong)NSMutableArray *uniFrames;
 //搜索工具条
 @property(nonatomic,strong)HomeSearchView *searchView;
 //轮播图
 @property(nonatomic,strong)YYAutoLoopView *autoLoopView;
-//分区头名称数组
-@property(nonatomic,strong)NSArray *SectionTitles;
 //广告数组
 @property(nonatomic,strong)NSMutableArray *advertise_Arr;
-//热门目地地
-@property(nonatomic,strong)NSMutableArray *hotCity_Arr;
-//推荐院校
-@property(nonatomic,strong)NSMutableArray *recommends;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //下拉
@@ -59,6 +49,8 @@
 @property(nonatomic,strong)XUToolbar *myToolbar;
 //自定义导航栏LeftBarButtonItem
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
+//分组数据
+@property(nonatomic,strong)NSMutableArray *groups;
 
 
 @end
@@ -97,7 +89,6 @@
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -106,23 +97,25 @@
     
 }
 
- 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
      
-    [self getSelectionSourse];
-    
-    [self hotCityData:NO];
-
-    [self hotUniversity:NO];
-    
-    [self hotArticle:NO];
-    
-    [self hotPromotions:NO];
+    [self makeDataSourceRefresh:NO];
     
     [self makeUI];
     
+    [self makeOther];
+
+}
+
+-(void)makeOther{
+
+    
+    [self checkAPPVersion];
+
+    [self getSelectionSourse];
+
     [self getAppReport];
     
     //--判断用户是否完成任务--
@@ -130,34 +123,37 @@
         
         [self advanceSupportWithDuration:180];
     }
- 
+
 }
 
--(NSMutableArray *)hotCity_Arr
-{
-    if (!_hotCity_Arr) {
-        
-        _hotCity_Arr =[NSMutableArray array];
-    }
-    return _hotCity_Arr;
+-(void)makeDataSourceRefresh:(BOOL)refresh{
+
+    [self hotCityData:refresh];
+    
+    [self hotUniversity:refresh];
+    
+    [self hotArticle:refresh];
+    
+    [self hotPromotions:refresh];
 }
 
--(NSMutableArray *)uniFrames
-{
-    if (!_uniFrames) {
-        
-        _uniFrames =[NSMutableArray array];
-    }
-    return _uniFrames;
-}
 
--(NSMutableArray *)recommends
-{
-    if (!_recommends) {
+-(NSMutableArray *)groups{
+
+    if (!_groups) {
         
-        _recommends =[NSMutableArray array];
+        _groups =[NSMutableArray array];
+        
+        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil andFooter:NO];
+        [_groups addObject:groupone];
+        
+        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil andFooter:NO];
+        [_groups addObject:grouptwo];
+        
+        UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil andFooter:NO];
+        [_groups addObject:groupthree];
     }
-    return _recommends;
+    return _groups;
 }
 
 -(NSMutableArray *)advertise_Arr
@@ -170,39 +166,17 @@
 }
 
 
--(void)checkZhiNengPiPei{
- 
-    if (LOGIN) {
-        //判断是否有智能匹配数据或收藏学校
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
-        }];
-    }
-}
-
-
+//热门院校
 -(void)hotUniversity:(BOOL)refresh
 {
     
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorHotUniversity parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorHotUniversity parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSArray *uniArr =  (NSArray *)response;
         
-        if (refresh) {
-            
-            [self.uniFrames removeAllObjects];
-        }
+        [self dataSourseWithFresh:refresh GroupIndex:2];
         
-        NSMutableArray *temps = [NSMutableArray array];
-        for (NSDictionary *uniInfor in uniArr) {
-            
-            HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
-            uniFrame.universityDic = uniInfor;
-            [temps addObject:uniFrame];
-        }
+        [self hotUniverstiyWithResponse:(NSArray *)response];
         
-        self.uniFrames = [temps mutableCopy];
-   
         [self.TableView reloadData];
         
     }];
@@ -210,7 +184,93 @@
 }
 
 
+//留学目的地数据
+-(void)hotCityData:(BOOL)refresh
+{
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
+        
+        [self dataSourseWithFresh:refresh GroupIndex:0];
+        
+        [self hotCityWithResponse:response];
+        
+        [self.TableView reloadData];
+        
+    }];
+}
 
+//热门文章
+-(void)hotArticle:(BOOL)refresh
+{
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorArticleRecommendation parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        [self dataSourseWithFresh:refresh GroupIndex:1];
+        
+        [self hotArticleWithResponse:(NSArray *)response];
+        
+        [self.TableView reloadData];
+    }];
+    
+}
+
+
+- (void)dataSourseWithFresh:(BOOL)refresh GroupIndex:(NSInteger)index{
+    
+    if (refresh) {
+        UniDetailGroup *groupthree = self.groups[index];
+        groupthree.items = nil;
+    }
+    
+}
+
+//留学目的地UI设置
+-(void)hotCityWithResponse:(NSArray *)response
+{
+    NSArray *temp_city =  [response copy];
+    NSRange cityRange = NSMakeRange(1, 3);
+    NSArray *temp_cities = temp_city.count > 4 ? [[temp_city subarrayWithRange:cityRange] copy] : temp_city;
+    UniDetailGroup *groupone = self.groups[0];
+    groupone.cellHeight = XScreenWidth * 0.4;
+    groupone.items = temp_cities;
+}
+
+//热门文章UI设置
+-(void)hotArticleWithResponse:(NSArray *)response
+{
+    
+    NSArray  *temp_articles  = (NSArray *)response;
+    UniDetailGroup *grouptwo = self.groups[1];
+    grouptwo.cellHeight =  ceilf(temp_articles.count * 0.5) * XScreenWidth * 0.4;
+    grouptwo.items = @[temp_articles];
+    
+}
+//热门院校UI设置
+-(void)hotUniverstiyWithResponse:(NSArray *)response
+{
+    NSArray *temp_Unies = response;
+    
+    NSMutableArray *temp_universities = [NSMutableArray array];
+    
+    for (NSDictionary *uni_Info in temp_Unies) {
+         HotUniversityFrame *uniFrame = [HotUniversityFrame frameWithUniversity:uni_Info];
+        [temp_universities addObject:uniFrame];
+    }
+    
+    
+    UniDetailGroup *groupthree = self.groups[2];
+    
+    if (temp_universities.count>0) {
+        HotUniversityFrame *uniFrame = temp_universities[0];
+        groupthree.cellHeight = uniFrame.cellHeight;
+    }
+    
+    groupthree.items =@[temp_universities];
+    
+}
+
+
+
+
+//轮播图数据
 -(void)hotPromotions:(BOOL)refresh
 {
   
@@ -257,29 +317,6 @@
 
 }
 
--(void)hotArticle:(BOOL)refresh
-{
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorArticleRecommendation parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        if (refresh) {
-            
-            [self.recommends removeAllObjects];
-        }
-        
-        self.recommends = [(NSArray *)response mutableCopy];
-        [self.TableView reloadData];
-    }];
-   
-}
-
--(NSArray *)SectionTitles
-{
-    if (!_SectionTitles) {
-        
-        _SectionTitles =@[GDLocalizedString(@"Discover_mudidi"),GDLocalizedString(@"Discover_news"),GDLocalizedString(@"Discover_hotUni")];
-    }
-    return _SectionTitles;
-}
 
 -(XUToolbar *)myToolbar
 {
@@ -297,8 +334,6 @@
     
     [self makeHomeTableView];
     
-    [self checkAPPVersion];
-    
     [self makeLeftBarButtonItemView];
     
 }
@@ -307,10 +342,10 @@
 -(void)makeLeftBarButtonItemView{
 
     XJHUtilDefineWeakSelfRef
-    self.leftView =[LeftBarButtonItemView leftView];
-    self.leftView.actionBlock = ^(UIButton *sender){
+    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf openLeftMenu];
-    };
+    }];
+    
     
     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -335,37 +370,30 @@
 
     [self makeRefreshView];
     
-    [self makeAutoLoopView];
-    
-    [self makeSearchView];
+     [self makeSearchView];
    
 }
 
 -(void)makeTableHeader
 {
+    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XScreenWidth, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
+        [self HomeHeaderViewWithItemtap:itemTag];
+    }];
     
-    self.TableHeaderView =[HomeHeaderView headerView];
-    self.TableHeaderView.delegate = self;
-    self.TableView.tableHeaderView = self.TableHeaderView;
- 
+    self.TableView.tableHeaderView  = TableHeaderView;
+    
+    [self makeAutoLoopViewAtView: TableHeaderView];
+
+   
 }
 
 //页面刷新
 -(void)refresh
 {
-    
-    [self hotCityData:YES];
-    
-    [self hotUniversity:YES];
-    
-    [self hotArticle:YES];
-    
-    [self hotPromotions:YES];
+    [self makeDataSourceRefresh:YES];
     
     [self leftViewMessage];
 }
-
-
 
 -(void)makeRefreshView
 {
@@ -394,23 +422,54 @@
     self.TableView.mj_header = header;
 }
 
+
+//搜索功能
 -(void)makeSearchView
 {
-    self.searchView = [HomeSearchView View];
+    CGFloat searchX = 20;
+    CGFloat searchH = 44;
+    CGFloat searchW = XScreenWidth - searchX * 2;
+    CGFloat searchY = HEADER_HEIGHT * 0.6 + 20 - searchH * 0.5;
+    HomeSearchView *searchView = [HomeSearchView ViewWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
+    self.searchView = searchView;
     XJHUtilDefineWeakSelfRef
-    self.searchView.actionBlock = ^{
+    searchView.actionBlock = ^{
+        
         [weakSelf CaseSearchPage];
     };
-    [self.view addSubview: self.searchView];
+    [self.view addSubview:searchView];
     
 }
 
+
+/**
+ *  创建轮播图头部
+ */
+- (void)makeAutoLoopViewAtView:(UIView *)bgView{
+    
+    XJHUtilDefineWeakSelfRef
+    
+    CGFloat AY =  XScreenHeight * 0.7 * 0.6 + 20;
+    
+    CGFloat AH =  XScreenHeight * 0.7 - AY;
+    
+    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0,AY, XScreenWidth,AH)];
+    
+    [bgView addSubview:self.autoLoopView];
+    
+    self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
+        
+        [weakSelf CaseLandingPageWithBan:StatusBarBannerNews.message_url];
+        
+    };
+    
+}
 
 
 #pragma mark ———————— UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-     self.myToolbar.top = 20 - scrollView.contentOffset.y;
+    self.myToolbar.top = 20 - scrollView.contentOffset.y;
     
     [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:scrollView.contentOffset.y];
     
@@ -421,56 +480,15 @@
     
 }
 
-//第一次网络请求
--(void)hotCityData:(BOOL)refresh
-{
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
-      
-        NSArray *temps =  [response copy];
-        
-        NSRange range = NSMakeRange(1, 3);
-      
-        if (refresh) {
-            
-            [self.hotCity_Arr removeAllObjects];
-        }
-        
-        self.hotCity_Arr = [[temps subarrayWithRange:range] mutableCopy];
-        
-        [self.TableView reloadData];
-        
-     }];
-}
-
-
-/**
- *  创建轮播图头部
- */
-- (void)makeAutoLoopView {
-    
-    XJHUtilDefineWeakSelfRef
-    
-    CGFloat AY =  XScreenHeight * 0.6 * 0.5 + 20;
-    CGFloat AH = XScreenHeight * 0.6 - AY;
-    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0,AY, XScreenWidth,AH)];
-    [self.TableHeaderView addSubview:self.autoLoopView];
-    
-    self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
-   
-        [weakSelf CaseLandingPageWithBan:StatusBarBannerNews];
-    };
-    
-}
-
-
-
 #pragma mark  ———————————— UITableViewDelegate  UITableViewData
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
   
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:self.SectionTitles[section]];
+    UniDetailGroup *group = self.groups[section];
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     if (1 == section) {
-        [SectionView moreButtonHiden];
+        [SectionView moreButtonHidenNo];
          SectionView.actionBlock = ^{
+             
               [self.tabBarController setSelectedIndex:2];
         };
     }
@@ -479,78 +497,52 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
-}
+    UniDetailGroup *group = self.groups[section];
+    
+    return group.HaveHeader ? 40 : HEIGHT_ZERO;
+ }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:
-            return XScreenWidth *0.4;
-             break;
-        case 1:
-        {
-            
-             return  (NSInteger)ceilf(self.recommends.count * 0.5) * XScreenWidth * 0.4;
-
-        }
-             break;
-        default:
-        {
-            if (self.uniFrames.count > 0) {
-             HotUniversityFrame *uniFrame = self.uniFrames[0];
-            return uniFrame.cellHeight;
-                
-             }else
-            {
-                return 0;
-             }
-        }
-             break;
-    }
+  
+    UniDetailGroup *group = self.groups[indexPath.section];
+    
+    return   group.items.count > 0 ? group.cellHeight : HEIGHT_ZERO;
 
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 3;
+    return self.groups.count;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    switch (section) {
-        case 0:
-            return self.hotCity_Arr.count;
-            break;
-        case 1:
-            return self.recommends.count > 0 ? 1 : 0;
-            break;
-        default:
-            return 1;
-            break;
-    }
-}
+    UniDetailGroup *group = self.groups[section];
 
+    return group.items.count;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    UniDetailGroup *group = self.groups[indexPath.section];
+
        switch (indexPath.section) {
         case 0:
         {
             HomeFirstTableViewCell *cell =[HomeFirstTableViewCell cellInitWithTableView:tableView];
-            cell.itemInfo = self.hotCity_Arr[indexPath.row];
+            cell.itemInfo = group.items[indexPath.row];
+            
             return cell;
          }
           break;
           case 1:{
             
             HomeSecondTableViewCell *cell =[HomeSecondTableViewCell cellInitWithTableView:tableView];
-            cell.items = self.recommends;
+            cell.items = group.items[indexPath.row];
             cell.delegate = self;
-             
-            return cell;
+             return cell;
         
         }
              break;
@@ -558,24 +550,19 @@
         {
 
             HomeThirdTableViewCell *cell =[HomeThirdTableViewCell cellInitWithTableView:tableView];
-            cell.uniFrames = self.uniFrames;
+            cell.uniFrames = group.items[indexPath.row];
             cell.delegate = self;
-
             return cell;
 
-            
-        }
+         }
             break;
     }
-
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     
     if (0 == indexPath.section) {
         
@@ -585,9 +572,8 @@
     
     
 }
-
-#pragma mark —————— HomeHeaderViewDelegate
--(void)HomeHeaderView:(HomeHeaderView *)itemView WithItemtap:(UIButton *)sender
+#pragma mark ——— HomeHeaderViewDelegate
+-(void)HomeHeaderViewWithItemtap:(NSInteger )tag
 {
    
     NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
@@ -598,7 +584,7 @@
          return;
     }
     
-     switch (sender.tag) {
+     switch (tag) {
          case 0:
              [self CaseWoyaoliuXue];
             break;
@@ -609,14 +595,19 @@
              [self CasePipeiWithItemType:HomePageClickItemTypePipei];
             break;
          case 3:
+             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
+             break;
+         case 4:
+             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@superMentor.html",DOMAINURL]];
+              break;
+         case 5:
              [self CaseServerMall];
              break;
         default:
             break;
     }
 }
-
-#pragma mark —————— HomeSecondTableViewCellDelegate
+#pragma mark ——— HomeSecondTableViewCellDelegate
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
     [MobClick event:@"home_newsItem"];
@@ -642,8 +633,6 @@
     }
     
 }
-
-
 
 #pragma mark ------- 提前加载数据，存储在本地，下次调用
 -(void)getSelectionSourse
@@ -762,7 +751,6 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        
     });
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(durationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -797,7 +785,6 @@
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
     }];
@@ -824,6 +811,18 @@
         
     }];
 }
+
+//判断是否有智能匹配数据或收藏学校
+-(void)checkZhiNengPiPei{
+    
+    if (LOGIN) {
+        
+        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
+            self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+        }];
+    }
+}
+
 
 //退出登录
 -(void)backAndLogout{
@@ -917,17 +916,23 @@
 //跳转搜索功能
 -(void)CaseSearchPage
 {
+    
     [MobClick event:@"home_shearchItemClick"];
     [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
 }
 
 //跳转LandingPage
--(void)CaseLandingPageWithBan:(YYSingleNewsBO *)item
+-(void)CaseLandingPageWithBan:(NSString *)path
 {
     [MobClick event:@"home_advertisementClick"];
-    AdvertiseViewController *detail =[[AdvertiseViewController alloc] init];
-    detail.advertise_title = self.advertise_Arr[item.index][@"title"];
-    detail.StatusBarBannerNews = item;
+    
+    if([path containsString:@"mbti/test"])
+    {
+        RequireLogin
+    }
+    
+    WebViewController *detail =[[WebViewController alloc] init];
+    detail.path = path;
     [self.navigationController pushViewController:detail animated:YES];
 
 }
@@ -949,8 +954,8 @@
     }
     [MobClick event:item];
     
-    
-    NSDictionary *info = self.hotCity_Arr[indexPath.row];
+    UniDetailGroup *group = self.groups[indexPath.section];
+    NSDictionary *info = group.items[indexPath.row];
     NSString *searchValue = info[@"search"];
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:searchValue

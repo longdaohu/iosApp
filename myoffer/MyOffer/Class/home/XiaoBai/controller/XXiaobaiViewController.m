@@ -13,7 +13,6 @@
 #import "XGongLueTableViewCell.h"
 #import "XXiaobaiViewController.h"
 #import "XWGJSubjectCollectionViewCell.h"
-#import "DetailWebViewController.h"
 #import "GonglueListViewController.h"
 #import "XWGJNODATASHOWView.h"
 
@@ -373,10 +372,10 @@ static NSString *subjectIdentify = @"subjectCell";
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
  
-    DetailWebViewController *helpDetail = [[DetailWebViewController alloc] init];
-    helpDetail.navigationBgImage = self.navigationBgImage;
-    helpDetail.index = indexPath.row;
-    [self.navigationController pushViewController:helpDetail animated:YES];
+    WebViewController *help = [[WebViewController alloc] init];
+    help.navigationBgImage = self.navigationBgImage;
+    help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
+    [self.navigationController pushViewController:help animated:YES];
     
 }
 

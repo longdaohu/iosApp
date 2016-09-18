@@ -36,9 +36,16 @@
     return self;
 }
 
-+(instancetype)leftView
++(instancetype)leftViewWithBlock:(LeftBarButtonItemViewBlock)actionBlock
 {
-    return [[self alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    
+    LeftBarButtonItemView *left =[[LeftBarButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    left.actionBlock = ^(){
+        
+        actionBlock();
+        
+    };
+    return left;
 }
 
 
@@ -63,7 +70,7 @@
 
     if (self.actionBlock) {
         
-        self.actionBlock(sender);
+        self.actionBlock();
         
     }
 }

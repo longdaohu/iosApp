@@ -17,7 +17,6 @@
 #import "GradeItem.h"
 #import "XWGJSummaryView.h"
 #import "TiJiaoFooterView.h"
-#import "AdvertiseViewController.h"
 #import "UpgradeViewController.h"
 
 typedef enum {
@@ -993,7 +992,7 @@ typedef enum {
         
     }else{
         
-        AdvertiseViewController *adver = [[AdvertiseViewController alloc] init];
+        WebViewController *adver = [[WebViewController alloc] init];
         adver.path                     = @"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf";
         [self.navigationController pushViewController:adver animated:YES];
     

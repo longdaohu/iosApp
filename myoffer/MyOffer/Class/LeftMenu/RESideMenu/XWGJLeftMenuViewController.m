@@ -15,7 +15,6 @@
 #import "leftHeadView.h"
 #import "NotificationViewController.h"
 #import "ApplyStatusViewController.h"
-#import "DetailWebViewController.h"
 #import "OrderViewController.h"
 #import "MenuCell.h"
 #import "MenuItem.h"
@@ -23,7 +22,6 @@
 #import "HomeViewContViewController.h"
 #import "MessageViewController.h"
 #import "XWGJCatigoryViewController.h"
-
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -490,9 +488,9 @@
             notiVC.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:notiVC animated:NO];
             
-            DetailWebViewController *detailVC =[[DetailWebViewController alloc] init];
-            detailVC.notiID =userInfo[@"message_id"];
-            [notiVC.navigationController pushViewController:detailVC  animated:YES];
+            WebViewController *noti =[[WebViewController alloc] init];
+            noti.path    = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,userInfo[@"message_id"]];
+            [notiVC.navigationController pushViewController:noti  animated:YES];
         
         }
             break;

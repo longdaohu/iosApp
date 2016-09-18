@@ -30,12 +30,27 @@
     
     }
     
-    
-    
-    
-    
     return group;
 }
+
+-(void)setItems:(NSArray *)items{
+
+    _items = items;
+    
+    if (items.count == 0) {
+        
+        self.HaveHeader = NO;
+        self.HaveFooter = NO;
+        
+    }else{
+          self.HaveHeader =  self.HeaderTitle.length > 0;
+     }
+
+    
+}
+
+
+
 
 
 @end

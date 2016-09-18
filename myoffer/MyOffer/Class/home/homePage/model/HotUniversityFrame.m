@@ -11,6 +11,15 @@
 
 @implementation HotUniversityFrame
 
++ (instancetype)frameWithUniversity:(NSDictionary *)uni_Info{
+
+    HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
+    uniFrame.universityDic = uni_Info;
+    return uniFrame;
+}
+
+
+
 -(void)setUniversityDic:(NSDictionary *)universityDic
 {
     _universityDic = universityDic;

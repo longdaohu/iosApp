@@ -58,59 +58,48 @@
         self.center_Line.backgroundColor = XCOLOR_LIGHTGRAY;
         [self.bgView addSubview:self.center_Line];
         
-        self.titleLab                    = [self LabelWithFontColor:XCOLOR_BLACK andFontsize:KDUtilSize(15) andLabelTextAlignment:NSTextAlignmentCenter];
+        
+        self.titleLab                    = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
         self.titleLab.lineBreakMode      = NSLineBreakByCharWrapping;
         self.titleLab.numberOfLines      = 2;
-        
+        [self.bgView addSubview:self.titleLab];
+
         self.localMV                     = [[UIImageView alloc] init];
         self.localMV.image               = [UIImage imageNamed:@"Uni_anthor"];
         [self.bgView addSubview:self.localMV];
 
-        self.localLab =  [self LabelWithFontColor:XCOLOR_DARKGRAY andFontsize:KDUtilSize(13) andLabelTextAlignment:NSTextAlignmentLeft];
+        self.localLab =  [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
         self.localLab.lineBreakMode      =  NSLineBreakByClipping;
+        [self.bgView addSubview:self.localLab];
 
     
-        self.subTitleLab =  [self LabelWithFontColor:XCOLOR_DARKGRAY andFontsize:KDUtilSize(11) andLabelTextAlignment:NSTextAlignmentCenter];
-        
+        self.subTitleLab =   [UILabel labelWithFontsize:KDUtilSize(11) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
+        [self.bgView addSubview:self.subTitleLab];
+
         self.tapView = [[UIView alloc] init];
         [self.bgView addSubview:self.tapView];
         
         for (NSInteger i = 0 ; i < 4; i++) {
             
-            UILabel *sender =[[UILabel alloc] init];
+            UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
             sender.adjustsFontSizeToFitWidth = YES;
-            sender.textAlignment             =  NSTextAlignmentCenter;
-            sender.textColor                 = XCOLOR_LIGHTGRAY;
-            sender.font                      = FontWithSize(KDUtilSize(13));
             sender.layer.borderColor         = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1].CGColor;
             sender.layer.borderWidth         = 1;
             [self.tapView addSubview:sender];
         }
         
         
-        if (USER_EN) {
-            
-            self.subTitleLab.hidden = YES;
-            self.tapView.hidden     = YES;
-        }
+//        if (USER_EN) {
+//            
+//            self.subTitleLab.hidden = YES;
+//            self.tapView.hidden     = YES;
+//        }
         
     }
     return self;
 }
 
 
-
-
--(UILabel *)LabelWithFontColor:(UIColor *)color andFontsize:(CGFloat)fontsize andLabelTextAlignment:(NSTextAlignment)ali
-{
-    UILabel *Lab      = [[UILabel alloc] init];
-    Lab.textColor     = color;
-    Lab.font          = [UIFont systemFontOfSize:fontsize];
-    Lab.textAlignment = ali;
-    [self.bgView addSubview:Lab];
-
-    return Lab;
-}
 
 
 -(void)setUniFrame:(HotUniversityFrame *)uniFrame
@@ -124,7 +113,8 @@
     self.localMV.frame       = uniFrame.LocalMVFrame;
     NSDictionary *uniInfo    = uniFrame.universityDic;
     self.logoView.frame      = uniFrame.LogoFrame;
-    [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:uniInfo[@"logo"]]];
+    
+   [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logoName]];
     
     self.titleLab.frame      = uniFrame.TitleFrame;
     self.titleLab.text       =  unversity.titleName;
@@ -133,11 +123,12 @@
     self.subTitleLab.text    = unversity.subTitleName;
    
     self.localLab.frame      = uniFrame.LocalFrame;
-    self.localLab.text       =  USER_EN ?[NSString stringWithFormat:@"%@-%@", unversity.countryName,uniInfo[@"city"]] :[NSString stringWithFormat:@"%@-%@-%@", unversity.countryName, uniInfo[@"state"], uniInfo[@"city"]];
+    self.localLab.text       =  USER_EN ?[NSString stringWithFormat:@"%@ | %@", unversity.countryName,uniInfo[@"city"]] :[NSString stringWithFormat:@"%@ | %@ | %@", unversity.countryName, unversity.stateName, unversity.cityName];
     
-  
-    for (int i = 0; i < unversity.tags.count; i ++) {
-   
+    
+    NSArray *tag_temps =  unversity.tags;
+    NSArray *tags = tag_temps.count > 4 ? [tag_temps subarrayWithRange:NSMakeRange(0, 4)] : tag_temps;
+    for (int i = 0; i < tags.count; i ++) {
         UILabel *item = (UILabel *)self.tapView.subviews[i];
         item.text = unversity.tags[i];
         item.frame = [uniFrame.tapFrames[i]  CGRectValue];

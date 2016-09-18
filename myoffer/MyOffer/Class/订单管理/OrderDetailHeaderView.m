@@ -92,14 +92,14 @@
     CGFloat titleX = 10;
     CGFloat titleY = 10;
     CGFloat titleW = sku[@"name"] ? orderSize.width :XScreenWidth - 120;
-    titleW         = titleW > XScreenWidth - 120 ? XScreenWidth - 120 : titleW;
+    titleW         = titleW > (XScreenWidth - 120) ? XScreenWidth - 120 : titleW;
     CGFloat titleH = orderSize.height;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     
     CGFloat noX = titleX;
     CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
-    CGFloat noW = titleW;
+    CGFloat noW = XScreenWidth;
     CGFloat noH = 20;
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     

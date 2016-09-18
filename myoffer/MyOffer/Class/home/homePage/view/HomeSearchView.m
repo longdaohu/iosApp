@@ -20,7 +20,6 @@
         self.LeftBtn.hidden = YES;
         
         self.RightBtn =[self makeButtonWithImageName:@"search-no-result"  andTitle:GDLocalizedString(@"Discover_search")];
-        self.RightBtn.titleEdgeInsets = UIEdgeInsetsMake(0,0, 0, 0);
         self.layer.cornerRadius = 5;
         self.backgroundColor = XCOLOR_WHITE;
         
@@ -50,13 +49,12 @@
     }
 }
 
-+(instancetype)View
++(instancetype)ViewWithFrame:(CGRect)frame
 {
-    CGFloat searchX = 20;
-    CGFloat searchH = 44;
-    CGFloat searchW = XScreenWidth - 40;
-    CGFloat searchY = XScreenHeight * 0.6 * 0.5 + 20 -22;
-    return [[self alloc] initWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
+    
+    HomeSearchView *searchView =[[HomeSearchView alloc] initWithFrame:frame];
+    
+    return searchView;
 }
 
 
@@ -81,11 +79,12 @@
 -(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contentOffsetY;
 {
 
-    CGFloat contant = XScreenHeight * 0.6 * 0.5 + 20 -22 - contentOffsetY;
+    CGFloat contant = XScreenHeight * 0.7 * 0.6 + 20 -22 - contentOffsetY;
     
     if (contant > 20) {
         
         self.top = contant;
+        
         [self searchViewWithAnimation:YES];
         
     }else{
@@ -93,7 +92,7 @@
         
         self.top = 20;
         
-        if (self.frame.origin.y == 20) {
+        if (self.top == 20) {
             
             [self  searchViewWithAnimation:NO];
         }
@@ -106,6 +105,7 @@
 {
     self.LeftBtn.hidden  = animated;
     self.RightBtn.hidden = !animated;
+    
     [UIView animateWithDuration:0.25 animations:^{
         
         self.width = animated ? (XScreenWidth - 40) : 44;

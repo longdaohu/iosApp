@@ -17,11 +17,26 @@
 @end
 
 @implementation HeadItembgView
++ (instancetype)viewWithbgBlock:(HeadItembgViewBlock)actionBlock
+{
+
+    HeadItembgView *BgView = [[HeadItembgView alloc] init];
+    
+    BgView.actionBlock = ^(NSInteger itemTag){
+        
+//        NSLog(@"itemTag  %ld",itemTag);
+        actionBlock(itemTag);
+        
+    };
+
+    return BgView;
+}
+
 
 -(NSArray *)itemImages
 {
     if (!_itemImages) {
-        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"home_Mall"];
+        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"home_Mall",@"home_Mall",@"home_Mall"];
     }
     return _itemImages;
 }
@@ -29,8 +44,7 @@
 -(NSArray *)itemTitles
 {
     if (!_itemTitles) {
-        
-        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"留学服务"];
+        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务服务"];
     }
     return _itemTitles;
 }
@@ -42,19 +56,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        for (int i = 0 ;i < 4 ; i++) {
-            HeadItem *item = [[HeadItem alloc] init];
-            item.iconTag   = i;
-            item.title     = self.itemTitles[i];
-            item.icon      = self.itemImages[i];
+        for (int i = 0 ;i < self.itemTitles.count ; i++) {
             
-            item.actionBlock = ^(UIButton *sender){
+            HeadItem *item = [HeadItem itemWithTitle:self.itemTitles[i] imageName:self.itemImages[i]];
+            item.tag       = i;
+            item.actionBlock = ^(UIView *it){
                 
-                 if ([self.delegate respondsToSelector:@selector(HeadItembgView:WithItemtap:)]) {
-                    [self.delegate HeadItembgView:self WithItemtap:sender];
-                }
-                
+                [self itemTap:it.tag];
+ 
             };
+            
             [self addSubview:item];
         }
       
@@ -62,22 +73,35 @@
     return self;
 }
 
+-(void)itemTap:(NSInteger)tag{
+    
+    
+    if (self.actionBlock) {
+ 
+        self.actionBlock(tag);
+    }
+}
+
+
+
+
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     
+    CGSize  contentSize = self.bounds.size;
     
-    CGFloat itemW = (XScreenWidth - 100) * 0.25;
-    CGFloat itemH =  self.bounds.size.height;
-    
-     for (int i = 0 ;i < self.subviews.count ; i++) {
+    CGFloat itemW =  contentSize.width / 3;
+    CGFloat itemH =  contentSize.height * 0.5;
+
+     for (int index = 0 ;index < self.subviews.count ; index++) {
         
-        HeadItem *item = (HeadItem *)self.subviews[i];
+         HeadItem *item = (HeadItem *)self.subviews[index];
+         CGFloat itemX  =  (index % 3) * itemW;
+         CGFloat itemY  =  itemH  * (index / 3);
+         item.frame     = CGRectMake(itemX, itemY, itemW, itemH);
          
-         CGFloat x  = 20 + i * (20 + itemW);
-         CGFloat y  = 0;
-         item.frame = CGRectMake(x, y, itemW, itemH);
       }
    
 }

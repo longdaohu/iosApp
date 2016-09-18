@@ -9,16 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-
-@class HeadItembgView;
-@class HomeHeaderView;
-@protocol HomeHeaderViewDelegate  <NSObject>
--(void)HomeHeaderView:(HomeHeaderView *)itemView WithItemtap:(UIButton *)sender;
-@end
-
+typedef void(^HomeHeaderViewBlock)(NSInteger itemTag);
 @interface HomeHeaderView : UIView
 @property(nonatomic,strong)UIView *upView;
-@property(nonatomic,weak)id<HomeHeaderViewDelegate> delegate;
-+(instancetype)headerView;
+@property(nonatomic,copy)HomeHeaderViewBlock actionBlock;
++ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock;
 
 @end

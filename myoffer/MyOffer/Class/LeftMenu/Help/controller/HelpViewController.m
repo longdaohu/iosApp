@@ -7,8 +7,6 @@
 //
 
 #import "HelpViewController.h"
-#import "DetailWebViewController.h"
-
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate>
 /*
  */
@@ -63,8 +61,8 @@
     self.helpTableView.backgroundColor   = BACKGROUDCOLOR;
     [self.view addSubview:self.helpTableView];
 
-
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.helpList.count;
@@ -82,9 +80,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DetailWebViewController *helpDetail = [[DetailWebViewController alloc] init];
-    helpDetail.index                    = indexPath.row;
-    [self.navigationController pushViewController:helpDetail animated:YES];
+    WebViewController *help = [[WebViewController alloc] init];
+    help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
+    [self.navigationController pushViewController:help animated:YES];
 }
 
 

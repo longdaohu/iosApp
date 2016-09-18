@@ -40,7 +40,6 @@
 }
 
 
-
 -(void)setItemInfo:(NSDictionary *)itemInfo
 {
     _itemInfo = itemInfo;

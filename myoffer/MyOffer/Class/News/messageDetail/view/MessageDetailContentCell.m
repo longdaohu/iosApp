@@ -93,8 +93,8 @@
         self.LogoView.layer.cornerRadius = 20;
         self.LogoView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.LogoView];
-        
-        
+        self.LogoView.image =[UIImage imageNamed:@"PlaceHolderImage"];
+
         self.TimeBtn =[[UIButton alloc] init];
          [self.TimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
 

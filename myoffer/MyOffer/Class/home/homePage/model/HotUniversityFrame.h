@@ -36,6 +36,6 @@
 @property(nonatomic,strong)UniversityObj  *university;
 @property(nonatomic,strong)NSDictionary *universityDic;
 
-
++ (instancetype)frameWithUniversity:(NSDictionary *)uni_Info;
 
 @end

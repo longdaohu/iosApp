@@ -7,10 +7,10 @@
 //
 
 #define PageSize 10
-#import "DetailWebViewController.h"
 #import "NotificationViewController.h"
 #import "NotiTableViewCell.h"
 #import "NotiItem.h"
+
 
 @interface NotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -206,10 +206,9 @@
     noti.state      = @"Read";
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-    
-    DetailWebViewController *detailVC = [[DetailWebViewController alloc] init];
-    detailVC.notiID = noti.NO_id;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    WebViewController *detail = [[WebViewController alloc] init];
+    detail.path    = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,noti.NO_id];
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 

@@ -208,10 +208,10 @@
     [self.view addSubview:self.StatusBarBan];
  
     XJHUtilDefineWeakSelfRef
-    self.leftView =[LeftBarButtonItemView leftView];
-    self.leftView.actionBlock = ^(UIButton *sender){
+    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf showLeftMenu];
-    };
+
+    }];
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

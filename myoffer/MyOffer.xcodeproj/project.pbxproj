@@ -51,6 +51,7 @@
 		AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */; };
 		AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */; };
 		AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */; };
+		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1D011D1D2FCD2D005E2DEF /* gradient_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */; };
 		AE1D011E1D2FCD2D005E2DEF /* YYAutoLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D01161D2FCD2D005E2DEF /* YYAutoLoopView.m */; };
@@ -243,7 +244,6 @@
 		AEA24A861D5B23F600DD7939 /* DiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A431D5B23F500DD7939 /* DiscoverViewController.xib */; };
 		AEA24A871D5B23F600DD7939 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A451D5B23F500DD7939 /* DiscoveryCell.m */; };
 		AEA24A881D5B23F600DD7939 /* DiscoveryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A461D5B23F500DD7939 /* DiscoveryCell.xib */; };
-		AEA24A891D5B23F600DD7939 /* AdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A491D5B23F500DD7939 /* AdvertiseViewController.m */; };
 		AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */; };
 		AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */; };
 		AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A531D5B23F500DD7939 /* HeadItem.m */; };
@@ -295,7 +295,6 @@
 		AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24ADD1D5B24D200DD7939 /* FeedbackViewController.xib */; };
 		AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE01D5B24D200DD7939 /* ProfileViewController.m */; };
 		AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE31D5B24D200DD7939 /* SetViewController.m */; };
-		AEA24B0B1D5B24D200DD7939 /* DetailWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE71D5B24D200DD7939 /* DetailWebViewController.m */; };
 		AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE91D5B24D200DD7939 /* NotificationViewController.m */; };
 		AEA24B0E1D5B24D200DD7939 /* NotiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AEF1D5B24D200DD7939 /* NotiTableViewCell.m */; };
 		AEA24B231D5B251800DD7939 /* NewForgetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B121D5B251800DD7939 /* NewForgetPasswdViewController.m */; };
@@ -510,6 +509,8 @@
 		AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityCell.h; path = controller/UniversityCell.h; sourceTree = "<group>"; };
 		AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityCell.m; path = controller/UniversityCell.m; sourceTree = "<group>"; };
 		AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UniversityCell.xib; path = controller/UniversityCell.xib; sourceTree = "<group>"; };
+		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
 		AE175BBD1D79593600FD8865 /* UniDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniDetailGroup.m; sourceTree = "<group>"; };
 		AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient_bg.png; sourceTree = "<group>"; };
@@ -835,8 +836,6 @@
 		AEA24A441D5B23F500DD7939 /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
 		AEA24A451D5B23F500DD7939 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		AEA24A461D5B23F500DD7939 /* DiscoveryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryCell.xib; sourceTree = "<group>"; };
-		AEA24A481D5B23F500DD7939 /* AdvertiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseViewController.h; sourceTree = "<group>"; };
-		AEA24A491D5B23F500DD7939 /* AdvertiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiseViewController.m; sourceTree = "<group>"; };
 		AEA24A4C1D5B23F500DD7939 /* HomeViewContViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewContViewController.h; sourceTree = "<group>"; };
 		AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewContViewController.m; sourceTree = "<group>"; };
 		AEA24A4F1D5B23F500DD7939 /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
@@ -931,8 +930,6 @@
 		AEA24AE01D5B24D200DD7939 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		AEA24AE21D5B24D200DD7939 /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
 		AEA24AE31D5B24D200DD7939 /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
-		AEA24AE61D5B24D200DD7939 /* DetailWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebViewController.h; sourceTree = "<group>"; };
-		AEA24AE71D5B24D200DD7939 /* DetailWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWebViewController.m; sourceTree = "<group>"; };
 		AEA24AE81D5B24D200DD7939 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		AEA24AE91D5B24D200DD7939 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		AEA24AEE1D5B24D200DD7939 /* NotiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiTableViewCell.h; sourceTree = "<group>"; };
@@ -2250,8 +2247,8 @@
 		AEA24A471D5B23F500DD7939 /* guanggao */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A481D5B23F500DD7939 /* AdvertiseViewController.h */,
-				AEA24A491D5B23F500DD7939 /* AdvertiseViewController.m */,
+				AE1501C11D8E39AF006751D0 /* WebViewController.h */,
+				AE1501C21D8E39AF006751D0 /* WebViewController.m */,
 			);
 			path = guanggao;
 			sourceTree = "<group>";
@@ -2291,12 +2288,12 @@
 				AEA24A531D5B23F500DD7939 /* HeadItem.m */,
 				AEA24A541D5B23F500DD7939 /* HeadItembgView.h */,
 				AEA24A551D5B23F500DD7939 /* HeadItembgView.m */,
-				AEA24A561D5B23F500DD7939 /* HomeFirstTableViewCell.h */,
-				AEA24A571D5B23F500DD7939 /* HomeFirstTableViewCell.m */,
 				AEA24A581D5B23F500DD7939 /* HomeHeaderView.h */,
 				AEA24A591D5B23F500DD7939 /* HomeHeaderView.m */,
 				AEA24A5A1D5B23F500DD7939 /* HomeSearchView.h */,
 				AEA24A5B1D5B23F600DD7939 /* HomeSearchView.m */,
+				AEA24A561D5B23F500DD7939 /* HomeFirstTableViewCell.h */,
+				AEA24A571D5B23F500DD7939 /* HomeFirstTableViewCell.m */,
 				AEA24A5C1D5B23F600DD7939 /* HomeSecondTableViewCell.h */,
 				AEA24A5D1D5B23F600DD7939 /* HomeSecondTableViewCell.m */,
 				AEA24A5E1D5B23F600DD7939 /* HomeSectionHeaderView.h */,
@@ -2560,8 +2557,6 @@
 		AEA24AE51D5B24D200DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24AE61D5B24D200DD7939 /* DetailWebViewController.h */,
-				AEA24AE71D5B24D200DD7939 /* DetailWebViewController.m */,
 				AEA24AE81D5B24D200DD7939 /* NotificationViewController.h */,
 				AEA24AE91D5B24D200DD7939 /* NotificationViewController.m */,
 			);
@@ -3411,7 +3406,6 @@
 				AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */,
 				AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */,
 				AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */,
-				AEA24B0B1D5B24D200DD7939 /* DetailWebViewController.m in Sources */,
 				AE1FD7561D5C929500FFD5A8 /* MJRefreshConst.m in Sources */,
 				AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */,
 				AEA24A021D5B224E00DD7939 /* XWGJBanView.m in Sources */,
@@ -3438,7 +3432,6 @@
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
-				AEA24A891D5B23F600DD7939 /* AdvertiseViewController.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */,
@@ -3585,6 +3578,7 @@
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
+				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,
 				AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */,
 				AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */,
 				AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */,

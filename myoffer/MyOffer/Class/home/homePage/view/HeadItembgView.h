@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class HeadItembgView;
-@protocol HeadItembgViewDelegate  <NSObject>
--(void)HeadItembgView:(HeadItembgView *)itemView WithItemtap:(UIButton *)sender;
-@end
-
+typedef void(^HeadItembgViewBlock)(NSInteger itemTag);
 @interface HeadItembgView : UIView
-@property(nonatomic,weak)id<HeadItembgViewDelegate> delegate;
+@property(nonatomic,copy)HeadItembgViewBlock actionBlock;
++ (instancetype)viewWithbgBlock:(HeadItembgViewBlock)actionBlock;
+
 @end

@@ -77,7 +77,7 @@
     self.TitleLab.text = title;
     
 }
-- (void)moreButtonHiden{
+- (void)moreButtonHidenNo{
  
     self.moreBtn.hidden = NO;
     self.arrowView.hidden = NO;

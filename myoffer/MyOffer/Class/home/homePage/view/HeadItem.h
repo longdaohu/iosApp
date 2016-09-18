@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^itemBlock)(UIButton *);
+typedef void(^itemBlock)(UIView *item);
 @interface HeadItem : UIView
-@property(nonatomic,assign)NSInteger iconTag;
 @property(nonatomic,copy)NSString *icon;
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,copy)itemBlock actionBlock;
-
++ (instancetype)itemWithTitle:(NSString *)title imageName:(NSString *)imageName;
 @end

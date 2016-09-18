@@ -14,6 +14,7 @@
 {
     if (self = [super init]) {
         
+        
         self.logoName  =  info[@"logo"];
         self.in_cart = info[@"in_cart"];
         self.titleName = info[@"name"];

@@ -38,9 +38,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
       
-        self.backgroundColor = XCOLOR_CLEAR;
-        self.contentView.backgroundColor = XCOLOR_CLEAR;
-        [self makeCollectView];
+         self.contentView.backgroundColor = BACKGROUDCOLOR;
+         [self makeCollectView];
         
     }
     return self;

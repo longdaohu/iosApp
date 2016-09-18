@@ -93,7 +93,6 @@
     
     NSString *absoluteString = request.URL.absoluteString;
     
-//    NSLog(@"------------- %@",absoluteString);
     if ([absoluteString containsString:@"app:jump"]) {
         
          NSArray *items =[absoluteString  componentsSeparatedByString:@"+"];

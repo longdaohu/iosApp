@@ -274,12 +274,11 @@
 {
     
     XJHUtilDefineWeakSelfRef
-    self.leftView =[LeftBarButtonItemView leftView];
-    self.leftView.actionBlock = ^(UIButton *sender){
+    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf showLeftMenu];
-    };
+    }];
+    
     self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
     
 }
@@ -500,11 +499,11 @@ static NSString *cityIdentify = @"cityCell";
             NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count    = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",order_count] forKey:@"order_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
             [ud synchronize];
             
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
         }];
        
        

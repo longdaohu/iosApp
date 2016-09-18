@@ -9,7 +9,6 @@
 #import "NewLoginRegisterViewController.h"
 #import "FXBlurView.h"
 #import "NewForgetPasswdViewController.h"
-#import "DetailWebViewController.h"
 #import "UMSocial.h"
 #import "APService.h"
 #import "YourPhoneView.h"
@@ -493,9 +492,11 @@
     [self  startAPIRequestWithSelector:kAPISelectorLogin  parameters:userInfo success:^(NSInteger statusCode, NSDictionary *response) {
         
          if (response[@"new"]) {
+             
             LoginSelectViewController *selectVC =[[LoginSelectViewController alloc] initWithNibName:@"LoginSelectViewController" bundle:[NSBundle mainBundle]];
             selectVC.parameter = userInfo;
             [self.navigationController pushViewController:selectVC animated:YES];
+             
         }
         else if([response[@"role"] isEqualToString:@"user"])
         {
@@ -505,6 +506,7 @@
         }
         
     }];
+    
 }
 
 //登录前判断用户资料是否包含手机号码
@@ -530,6 +532,7 @@
         
         [self dismiss];
      }
+    
 
 }
 
@@ -679,7 +682,7 @@
 #pragma mark ———————— 点击进入服务条款页面
 - (IBAction)ServiceButtonPressed:(id)sender {
   
-      DetailWebViewController  *service =[[DetailWebViewController alloc] init];
+      WebViewController  *service =[[WebViewController alloc] init];
       service.path =  [NSString stringWithFormat:@"http://www.myoffer.cn/docs/%@/web-agreement.html",GDLocalizedString(@"ch_Language")];
       [self.navigationController pushViewController:service animated:YES];
     

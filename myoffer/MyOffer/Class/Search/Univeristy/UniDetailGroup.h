@@ -13,6 +13,7 @@
 @property(nonatomic,strong)NSArray  *items;
 @property(nonatomic,assign)BOOL      HaveFooter;
 @property(nonatomic,assign)BOOL      HaveHeader;
+@property(nonatomic,assign)CGFloat   cellHeight;
 
 +(instancetype)groupWithTitle:(NSString *)title contentes:(NSArray *)items  andFooter:(BOOL)footer;
 

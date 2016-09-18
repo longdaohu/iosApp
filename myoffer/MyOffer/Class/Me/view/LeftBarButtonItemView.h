@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^LeftBarButtonItemViewBlock)(UIButton *sender);
+typedef void(^LeftBarButtonItemViewBlock)();
 @interface LeftBarButtonItemView : UIView
 @property(nonatomic,strong)UIButton *iconView;
 @property(nonatomic,strong)UILabel  *countLab;
 @property(nonatomic,copy)NSString   *countStr;
 @property(nonatomic,copy)LeftBarButtonItemViewBlock actionBlock;
-+(instancetype)leftView;
++(instancetype)leftViewWithBlock:(LeftBarButtonItemViewBlock)actionBlock;
 @end
