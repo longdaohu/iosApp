@@ -15,6 +15,7 @@
 #import "NotificationViewController.h"
 #import "XNewSearchViewController.h"
 #import "ApplyStatusViewController.h"
+#import "UniversityViewController.h"
 
 
 @interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
@@ -84,7 +85,6 @@
         navImageView.image = self.navigationBgImage;
         [self.view addSubview:navImageView];
     }
-    
     
     
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
@@ -169,9 +169,11 @@
         pageNumber = 5;  //Ok
     }else if([absoluteString containsString:@"jump/0"]) {
         pageNumber = 6;
+    }else if([absoluteString containsString:@"/university/"]) {
+        pageNumber = 7;
     }
     
-    NSLog(@"-------- navigationAction.request ----%ld   %@   /n   %@",(long)pageNumber,absoluteString,navigationAction.request.allHTTPHeaderFields);
+//    NSLog(@"-------- navigationAction.request ----%ld   %@   /n   %@",(long)pageNumber,absoluteString,navigationAction.request.allHTTPHeaderFields);
     
     switch (pageNumber) {
         case 0:{
@@ -251,6 +253,17 @@
                 decisionHandler(WKNavigationActionPolicyCancel);
          }
             break;
+        case 7:
+        {
+            NSRange UniRagne = [absoluteString rangeOfString:@"university/"];
+            NSString *lastPath =[absoluteString substringWithRange:NSMakeRange((UniRagne.location + UniRagne.length), absoluteString.length - (UniRagne.location + UniRagne.length))];
+            NSArray *contents = [lastPath componentsSeparatedByString:@"."];
+            
+            [self caseUniversityWithshortId:contents[0]];
+            
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }
+            break;
         default:
             decisionHandler(WKNavigationActionPolicyAllow);
             break;
@@ -295,9 +308,7 @@
         default:
             break;
     }
-    
 }
-
 
 //院校排名
 -(void)caseUniversityList:(NSDictionary *)response{
@@ -367,7 +378,13 @@
 -(void)caseUniversityWithdict:(NSDictionary *)response{
     
     NSDictionary *dict =  response[@"args"];
-    [self.navigationController pushUniversityViewControllerWithID:dict[@"id"] animated:YES];
+    [self caseUniversityWithshortId: dict[@"id"]];
+ 
+}
+//学校详情
+-(void)caseUniversityWithshortId:(NSString *)Uni_id{
+    
+    [self.navigationController pushUniversityViewControllerWithID:Uni_id animated:YES];
     
 }
 //搜索结果
@@ -379,7 +396,6 @@
 }
 //查看YOUKU视频
 -(void)caseVedioWithdict:(NSDictionary *)response{
-    
     
     NSDictionary *dict =  response[@"args"];
     NSString *path = [dict[@"url"] length] > 0 ? dict[@"url"]: @"http://www.myoffer.cn/";

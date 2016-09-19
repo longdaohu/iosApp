@@ -63,8 +63,6 @@
     [request addValue:lan forHTTPHeaderField:@"user-language"];
     [self.Web loadRequest:request];
     
-    
-    
     if (self.isBackRootViewController) {
          self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(pushApplyStatus)];
     }

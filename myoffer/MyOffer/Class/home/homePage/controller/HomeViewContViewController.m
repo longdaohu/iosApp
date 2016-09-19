@@ -267,9 +267,6 @@
     
 }
 
-
-
-
 //轮播图数据
 -(void)hotPromotions:(BOOL)refresh
 {
@@ -569,7 +566,6 @@
         [self CaseSearchResultWithindexPath:indexPath];
 
     }
-    
     
 }
 #pragma mark ——— HomeHeaderViewDelegate
