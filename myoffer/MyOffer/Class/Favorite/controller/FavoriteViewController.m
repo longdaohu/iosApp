@@ -62,7 +62,7 @@
     self.FavoriteTableView.dataSource = self;
     self.FavoriteTableView.delegate = self;
     [self.view  addSubview:self.FavoriteTableView];
-    self.FavoriteTableView.backgroundColor = BACKGROUDCOLOR;
+    self.FavoriteTableView.backgroundColor = XCOLOR_BG;
     self.FavoriteTableView.tableFooterView = [[UIView alloc] init];
     
 }

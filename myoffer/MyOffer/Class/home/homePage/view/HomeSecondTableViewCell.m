@@ -38,7 +38,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
       
-         self.contentView.backgroundColor = BACKGROUDCOLOR;
+         self.contentView.backgroundColor = XCOLOR_BG;
          [self makeCollectView];
         
     }
@@ -68,7 +68,7 @@
      self.CollectionView.dataSource = self;
      self.CollectionView.delegate = self;
      [self.CollectionView registerClass:[SecondCollectionViewCell class] forCellWithReuseIdentifier:identify];
-     self.CollectionView.backgroundColor = BACKGROUDCOLOR;
+     self.CollectionView.backgroundColor = XCOLOR_BG;
     
     [self.contentView  addSubview:self.CollectionView];
     

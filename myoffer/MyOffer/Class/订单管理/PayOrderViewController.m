@@ -125,7 +125,7 @@
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = BACKGROUDCOLOR;
+    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];

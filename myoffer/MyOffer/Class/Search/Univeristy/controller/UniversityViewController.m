@@ -301,7 +301,7 @@ typedef enum {
     
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, XPERCENT * 400)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
-    iconView.backgroundColor = BACKGROUDCOLOR;
+    iconView.backgroundColor = XCOLOR_BG;
     self.iconView = iconView;
     self.iconViewOldFrame = iconView.frame;
     self.iconViewOldCenter = iconView.center;

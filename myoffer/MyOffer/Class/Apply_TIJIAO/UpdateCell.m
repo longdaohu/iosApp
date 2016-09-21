@@ -41,7 +41,7 @@
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.contentView.backgroundColor = BACKGROUDCOLOR;
+    cell.contentView.backgroundColor = XCOLOR_BG;
     cell.xindexPath = indexPath;
     
     return cell;

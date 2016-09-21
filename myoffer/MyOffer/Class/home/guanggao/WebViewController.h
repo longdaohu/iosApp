@@ -7,9 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import <WebKit/WebKit.h>
 
 @interface WebViewController : BaseViewController
 @property(nonatomic,copy)NSString *path;
-@property(nonatomic,strong)UIImage *navigationBgImage;
+@property(nonatomic,strong)WKWebView *web_wk;
 
 @end

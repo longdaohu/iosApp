@@ -67,12 +67,12 @@
         [self.contentView addSubview:self.TagBackground];
         
         self.FirstLineView =[[UIView alloc] init];
-        self.FirstLineView.backgroundColor =BACKGROUDCOLOR;
+        self.FirstLineView.backgroundColor =XCOLOR_BG;
         [self.contentView addSubview:self.FirstLineView];
         
         
         self.SecondLine =[[UIView alloc] init];
-        self.SecondLine.backgroundColor =BACKGROUDCOLOR;
+        self.SecondLine.backgroundColor =XCOLOR_BG;
         [self.contentView addSubview:self.SecondLine];
         
         
@@ -124,7 +124,7 @@
         [self.contentView addSubview:self.SummaryLabel];
         
         self.ThreeLine =[[UIView alloc] init];
-        self.ThreeLine.backgroundColor =BACKGROUDCOLOR;
+        self.ThreeLine.backgroundColor =XCOLOR_BG;
         [self.contentView addSubview:self.ThreeLine];
         
         

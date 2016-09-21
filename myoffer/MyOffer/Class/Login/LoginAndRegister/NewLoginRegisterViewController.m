@@ -122,9 +122,10 @@
 //用于添加控件、设置控件相关属性
 -(void)makeLoginRegiterView
 {
-     self.xLoginRegistView.frame  = CGRectMake(0,APPSIZE.height, APPSIZE.width, APPSIZE.height*2/3);
+    
+     self.xLoginRegistView.frame  = CGRectMake(0,XScreenHeight, XScreenWidth, XScreenHeight*2/3);
     [self.view addSubview:self.xLoginRegistView];
-     self.xLoginView.frame =CGRectMake(0, 40, APPSIZE.width, APPSIZE.height*2/3 - 40);
+     self.xLoginView.frame =CGRectMake(0, 40, XScreenWidth, XScreenHeight*2/3 - 40);
     [self.xLoginRegistView addSubview:self.xLoginView];
      self.RegisterAreaTextF.inputView = self.AreaPicker;
     [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
@@ -288,7 +289,7 @@
         
      } else {
          
-       moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, APPSIZE.height*2/3);
+       moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, XScreenHeight*2/3);
     }
     
     [self.view layoutSubviews];
@@ -344,12 +345,12 @@
     if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
         
         self.xLoginView.hidden = YES;
-        self.FocusMV.center = CGPointMake(APPSIZE.width*0.75,38);
+        self.FocusMV.center = CGPointMake(XScreenWidth*0.75,38);
         
     }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
         
         self.xRegisterView.hidden = YES;
-        self.FocusMV.center = CGPointMake(APPSIZE.width*0.25,38);
+        self.FocusMV.center = CGPointMake(XScreenWidth*0.25,38);
         
     }else{
         

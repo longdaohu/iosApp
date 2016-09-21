@@ -248,7 +248,7 @@
     
     [self.conn startNotifier];
     
-    self.view.backgroundColor = BACKGROUDCOLOR;
+    self.view.backgroundColor = XCOLOR_BG;
     
 }
 

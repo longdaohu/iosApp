@@ -52,7 +52,7 @@
         
         
         self.line = [[UILabel alloc] init];
-        self.line.backgroundColor = BACKGROUDCOLOR;
+        self.line.backgroundColor = XCOLOR_BG;
         [self addSubview:self.line];
         
         self.introductionLab = [self labelWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 12  numberofLine:YES];

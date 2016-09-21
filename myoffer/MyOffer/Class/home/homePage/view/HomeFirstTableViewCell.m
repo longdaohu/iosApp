@@ -36,7 +36,7 @@
         self.IconView.layer.masksToBounds = YES;
         self.IconView.contentMode         = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.IconView];
-        self.contentView.backgroundColor  = BACKGROUDCOLOR;
+        self.contentView.backgroundColor  = XCOLOR_BG;
         
     }
     return self;

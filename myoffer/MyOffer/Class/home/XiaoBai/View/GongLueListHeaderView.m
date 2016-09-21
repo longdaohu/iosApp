@@ -23,26 +23,22 @@
 
 @implementation GongLueListHeaderView
 
-+(instancetype)View{
-    
-    return [[GongLueListHeaderView alloc] init];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.clipsToBounds = YES;
-    
+        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+
         self.bgView =[[UIView alloc] init];
-        self.bgView.backgroundColor = BACKGROUDCOLOR;
+        self.bgView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.bgView];
 
         
         self.moBgView =[[UIView alloc] init];
         self.moBgView.layer.cornerRadius = 5;
-        self.moBgView.backgroundColor = BACKGROUDCOLOR;
+        self.moBgView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.moBgView];
         self.moBgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
         self.moBgView.layer.shadowOffset = CGSizeMake(0, 2);
@@ -68,56 +64,52 @@
         self.headerTitleLab = [UILabel labelWithFontsize:KDUtilSize(20)  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         [self insertSubview:self.headerTitleLab belowSubview:self.bgView];
         
-        self.backgroundColor = XCOLOR_CLEAR;
         
  
     }
     return self;
 }
 
--(void)setSubTitle:(NSString *)subTitle
-{
-    _subTitle = subTitle;
-   
-    self.subTitleLab.text = subTitle;
+-(void)setGongLueDic:(NSDictionary *)gongLueDic{
+
+    _gongLueDic = gongLueDic;
     
-        CGFloat moBgViewX = ITEM_MARGIN;
-        CGFloat moBgViewW = XScreenWidth - moBgViewX * 2;
-    
-        CGFloat subX = ITEM_MARGIN;
-        CGFloat subW = moBgViewW - subX * 2;
-        CGSize subSize = [self getContentBoundWithTitle:subTitle andFontSize:KDUtilSize(13) andMaxWidth:subW];
-        CGFloat subH = subSize.height;
+    self.headerTitleLab.text = gongLueDic[@"title"];
+    self.subTitleLab.text =  gongLueDic[@"tip"][@"content"];
     
     
-        CGFloat logoX = ITEM_MARGIN;
-        CGFloat logoY = ITEM_MARGIN;
-        CGFloat logoW = 30 + KDUtilSize(0) * 5;
-        CGFloat logoH = logoW;
-        self.moLogo.frame = CGRectMake(logoX, logoY, logoW, logoH);
-    
-        CGFloat titleX = CGRectGetMaxX(self.moLogo.frame) + ITEM_MARGIN;
-        CGFloat titleY = logoY;
-        CGFloat titleW = moBgViewW - titleX;
-        CGFloat titleH = logoH;
-        self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    CGFloat logoX = ITEM_MARGIN;
+    CGFloat logoY = ITEM_MARGIN;
+    CGFloat logoW = 30 + KDUtilSize(0) * 5;
+    CGFloat logoH = logoW;
+    self.moLogo.frame = CGRectMake(logoX, logoY, logoW, logoH);
     
     
-        CGFloat subY = CGRectGetMaxY(self.moLogo.frame) + ITEM_MARGIN;
-        self.subTitleLab.frame =CGRectMake(subX, subY, subW, subH);
+    CGFloat moBgViewX = ITEM_MARGIN;
+    CGFloat moBgViewW = XScreenWidth - moBgViewX * 2;
     
-        CGFloat moBgViewH = CGRectGetMaxY(self.subTitleLab.frame) + ITEM_MARGIN;
     
-        CGFloat bgX = 0;
-        CGFloat bgH = subH + 3 * ITEM_MARGIN;
-        CGFloat bgY = AdjustF(160.f) - subY;
-        CGFloat bgW =XScreenWidth;
-        self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-        self.HeaderHeight = CGRectGetMaxY(self.bgView.frame);
+    CGFloat titleX = CGRectGetMaxX(self.moLogo.frame) + ITEM_MARGIN;
+    CGFloat titleY = logoY;
+    CGFloat titleW = moBgViewW - titleX;
+    CGFloat titleH = logoH;
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
-        CGFloat moBgViewY = CGRectGetMaxY(self.bgView.frame) - moBgViewH - 2 * ITEM_MARGIN;
-        self.moBgView.frame = CGRectMake(moBgViewX, moBgViewY, moBgViewW, moBgViewH);
+    CGFloat subX   = ITEM_MARGIN;
+    CGFloat subW   = moBgViewW - subX * 2;
+    CGSize subSize = [self.subTitleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(13)) maxWidth:subW];
+    CGFloat subH   = subSize.height;
+    CGFloat subY   = CGRectGetMaxY(self.moLogo.frame) + ITEM_MARGIN;
+    self.subTitleLab.frame =CGRectMake(subX, subY, subW, subH);
     
+    
+    CGFloat moBgViewH =   CGRectGetMaxY(self.subTitleLab.frame) + ITEM_MARGIN;
+    CGFloat moBgViewY =   self.height - CGRectGetMaxY(self.moLogo.frame);
+    
+    self.moBgView.frame = CGRectMake(moBgViewX, moBgViewY, moBgViewW, moBgViewH);
+    
+    self.height += (moBgViewH - CGRectGetMaxY(self.moLogo.frame)  + 20);
+    CGSize  contentSize = self.bounds.size;
     
     CGFloat headerTitleX = 0;
     CGFloat headerTitleW = XScreenWidth;
@@ -126,7 +118,17 @@
     self.headerTitleLab.frame = CGRectMake(headerTitleX, headerTitleY, headerTitleW, headerTitleH);
     self.headerTitleLabFrame = self.headerTitleLab.frame;
     
+    
+    CGFloat bgX =   0;
+    CGFloat bgY =   moBgViewY + CGRectGetMaxY(self.moLogo.frame);
+    CGFloat bgW =   XScreenWidth;
+    CGFloat bgH =   contentSize.height  - bgY;
+    self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
+     
 }
+
+
+
 -(void)setContentOffsetY:(CGFloat)contentOffsetY
 {
     _contentOffsetY = contentOffsetY;
@@ -137,10 +139,12 @@
  
             self.headerTitleLab.frame = self.headerTitleLabFrame;
         
+        
     }else{
     
-        
-        if (self.HeaderHeight - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
+        CGSize  contentSize = self.bounds.size;
+
+        if (contentSize.height - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
             
             CGRect NewRect = self.headerTitleLabFrame;
             
@@ -150,18 +154,11 @@
             
         }
         
-        
     }
     
-     
-    
 }
 
 
--(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{
-    
-    return [title boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
-}
 
 
 

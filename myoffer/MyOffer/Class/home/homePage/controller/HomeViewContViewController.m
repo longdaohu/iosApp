@@ -359,7 +359,7 @@
     [self.view addSubview:self.TableView];
     self.TableView.sectionFooterHeight = 0;
     self.TableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    self.TableView.backgroundColor = BACKGROUDCOLOR;
+    self.TableView.backgroundColor = XCOLOR_BG;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

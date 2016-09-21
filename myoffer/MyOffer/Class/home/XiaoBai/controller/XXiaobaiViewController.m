@@ -17,13 +17,13 @@
 #import "XWGJNODATASHOWView.h"
 
 
-@interface XXiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIWebViewDelegate>
+@interface XXiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UIView *topView;
 @property(nonatomic,strong)XTopToolView *topToolView;
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgScrollView;
 //UIWebView 留学流程
-@property(nonatomic,strong)UIWebView *webView;
+//@property(nonatomic,strong)UIWebView *webView;
 @property(nonatomic,strong)KDProgressHUD *hud;
 //UICollectionView 疑难解答
 @property(nonatomic,strong)UICollectionView *quetionCollectionView;
@@ -51,7 +51,7 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     
 }
 
@@ -220,22 +220,30 @@
 
 -(void)makeWebViewWithHeight:(CGFloat)height
 {
-    self.webView =[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, height -64)];
-    [self.bgScrollView addSubview:self.webView];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/study_white"]]];
-    self.webView.backgroundColor = BACKGROUDCOLOR;
-    self.webView.delegate=self;
-    self.webView.scrollView.bounces = NO;
-    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.webView.scrollView.showsVerticalScrollIndicator = NO;
-    self.webView.scalesPageToFit = YES;
+//    self.webView =[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, height -64)];
+//    [self.bgScrollView addSubview:self.webView];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/study_white"]]];
+//    self.webView.backgroundColor = BACKGROUDCOLOR;
+//    self.webView.delegate=self;
+//    self.webView.scrollView.bounces = NO;
+//    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+//    self.webView.scrollView.showsVerticalScrollIndicator = NO;
+//    self.webView.scalesPageToFit = YES;
+    
+    WebViewController *webVC = [[WebViewController alloc] init];
+    [self addChildViewController:webVC];
+    webVC.path = @"http://www.myoffer.cn/study_white";
+    [self.bgScrollView addSubview:webVC.view];
+    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height -64);
+    webVC.web_wk.frame = webVC.view.bounds;
+    
     
 }
 
 -(void)makeTableView
 {
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
-    self.TableView.backgroundColor = BACKGROUDCOLOR;
+    self.TableView.backgroundColor = XCOLOR_BG;
     self.TableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
@@ -271,7 +279,7 @@ static NSString *subjectIdentify = @"subjectCell";
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
     collectionView.dataSource = self;
     collectionView.delegate = self;
-    collectionView.backgroundColor = BACKGROUDCOLOR;
+    collectionView.backgroundColor = XCOLOR_BG;
     collectionView.contentInset = Inset;
     
     [self.bgScrollView addSubview:collectionView];
@@ -334,7 +342,7 @@ static NSString *subjectIdentify = @"subjectCell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      GonglueListViewController  *list = [[GonglueListViewController alloc] init];
-     list.navigationBgImage           =  self.navigationBgImage;
+//     list.navigationBgImage           =  self.navigationBgImage;
      list.gonglue                     =  self.gonglueItems[indexPath.row];
      [self.navigationController pushViewController:list  animated:YES];
 }
@@ -373,7 +381,7 @@ static NSString *subjectIdentify = @"subjectCell";
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
  
     WebViewController *help = [[WebViewController alloc] init];
-    help.navigationBgImage = self.navigationBgImage;
+//    help.navigationBgImage = self.navigationBgImage;
     help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
     [self.navigationController pushViewController:help animated:YES];
     
@@ -386,25 +394,25 @@ static NSString *subjectIdentify = @"subjectCell";
     
 }
 
-#pragma mark ——————UIWebViewDelegate
--(void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.hud removeFromSuperViewOnHide];
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    //加载完成后重新设置 tableview的cell的高度,和webview的frame
-     [self.hud hideAnimated:YES];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-     [self.hud hideAnimated:YES];
-}
+//#pragma mark ——————UIWebViewDelegate
+//-(void)webViewDidStartLoad:(UIWebView *)webView
+//{
+//    
+//    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [self.hud removeFromSuperViewOnHide];
+//    
+//}
+//
+//- (void)webViewDidFinishLoad:(UIWebView *)webView
+//{
+//    //加载完成后重新设置 tableview的cell的高度,和webview的frame
+//     [self.hud hideAnimated:YES];
+//}
+//
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+//{
+//     [self.hud hideAnimated:YES];
+//}
 
 
 - (void)didReceiveMemoryWarning {

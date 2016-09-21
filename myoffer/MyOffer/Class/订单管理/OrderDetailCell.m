@@ -20,7 +20,7 @@
         cell =[[OrderDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"orderDetail"];
     }
     
-    UIColor *cellColor =  indexPath.row % 2 ?BACKGROUDCOLOR  :  XCOLOR_WHITE;
+    UIColor *cellColor =  indexPath.row % 2 ?XCOLOR_BG  :  XCOLOR_WHITE;
     cell.contentView.backgroundColor = cellColor;
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     

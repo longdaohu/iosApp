@@ -44,7 +44,7 @@
 -(NSArray *)itemTitles
 {
     if (!_itemTitles) {
-        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务服务"];
+        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务套餐"];
     }
     return _itemTitles;
 }

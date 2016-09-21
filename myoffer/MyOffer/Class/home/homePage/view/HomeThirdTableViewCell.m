@@ -39,7 +39,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.contentView.backgroundColor = BACKGROUDCOLOR;
+        self.contentView.backgroundColor = XCOLOR_BG;
         [self makeCollectView];
         
      }
@@ -71,7 +71,7 @@
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.dataSource                     = self;
     collectionView.delegate                       = self;
-    collectionView.backgroundColor                = BACKGROUDCOLOR;
+    collectionView.backgroundColor                = XCOLOR_BG;
     [self.CollectionView registerClass:[UniCollectionViewCell class] forCellWithReuseIdentifier:identify];
     [self.contentView  addSubview:self.CollectionView];
     

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GongLueListCell : UITableViewCell
-
 @property(nonatomic,strong)NSDictionary *item;
-
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

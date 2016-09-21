@@ -33,7 +33,7 @@
         self.contentView.layer.cornerRadius = 5;
         self.contentView.layer.masksToBounds = YES;
  
-        self.backgroundColor =  BACKGROUDCOLOR;
+        self.backgroundColor =  XCOLOR_BG;
 
     }
     return self;

@@ -35,7 +35,7 @@ static NSString *identity = @"gonglue";
     if (self) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = BACKGROUDCOLOR;
+        self.contentView.backgroundColor = XCOLOR_BG;
         
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = [UIColor whiteColor];

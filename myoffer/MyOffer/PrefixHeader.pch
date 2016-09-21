@@ -44,7 +44,7 @@
 #define XCOLOR_DARKGRAY [UIColor darkGrayColor]
 #define XCOLOR_LIGHTGRAY  [UIColor lightGrayColor]
 #define XCOLOR_BLACK [UIColor blackColor]
-#define BACKGROUDCOLOR  [UIColor colorWithRed:245.0/255 green:244.0/255 blue:249.0/255 alpha:1]
+#define XCOLOR_BG  [UIColor colorWithRed:245.0/255 green:244.0/255 blue:249.0/255 alpha:1]
 #define XCOLOR_RED  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
 #define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]
 #define XCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
@@ -68,8 +68,8 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-//#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://www.myoffer.cn/"
+#define DOMAINURL  @"http://www.myofferdemo.com/"
+//#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MBProgressHUD.h"
 #import "MJExtension.h"

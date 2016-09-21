@@ -28,7 +28,7 @@
         
         
         self.downView =[[UIView alloc] init];
-        self.downView.backgroundColor = BACKGROUDCOLOR;
+        self.downView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.downView];
         
         

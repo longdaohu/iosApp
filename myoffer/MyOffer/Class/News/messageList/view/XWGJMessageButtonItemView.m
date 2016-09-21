@@ -61,7 +61,7 @@
         [self addSubview:self.bgView];
         
         self.line =[[UIView alloc] init];
-        self.line.backgroundColor = BACKGROUDCOLOR;
+        self.line.backgroundColor = XCOLOR_BG;
         [self addSubview:self.line];
         
         self.backgroundColor = XCOLOR_CLEAR;

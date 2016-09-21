@@ -41,7 +41,7 @@
      self.applySubjectTF.placeholder =  GDLocalizedString(@"Evaluate-0014");
 //    self.universityTF.enabled = NO;
     
-    self.contentView.backgroundColor =  BACKGROUDCOLOR;
+    self.contentView.backgroundColor =  XCOLOR_BG;
     [self addRightViewWithTextField:self.countryTF];
     [self addLeftViewWithTextField:self.countryTF];
     [self addRightViewWithTextField:self.timeTF];

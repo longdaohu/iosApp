@@ -7,7 +7,6 @@
 //
 
 #import "WebViewController.h"
-#import <WebKit/WebKit.h>
 #import "XLiuxueViewController.h"
 #import "InteProfileViewController.h"
 #import "NewSearchResultViewController.h"
@@ -16,11 +15,11 @@
 #import "XNewSearchViewController.h"
 #import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
+#import "ServiceMallViewController.h"
 
 
 @interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)KDProgressHUD *hud;
-@property(nonatomic,strong)WKWebView *web_wk;
 @end
 
 @implementation WebViewController
@@ -77,14 +76,14 @@
 -(void)makeUI
 {
     
-    
-    if (self.navigationBgImage) {
-        UIImageView *navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, NAV_HEIGHT)];
-        navImageView.clipsToBounds = YES;
-        navImageView.contentMode = UIViewContentModeScaleAspectFill;
-        navImageView.image = self.navigationBgImage;
-        [self.view addSubview:navImageView];
-    }
+//    
+//    if (self.navigationBgImage) {
+//        UIImageView *navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, NAV_HEIGHT)];
+//        navImageView.clipsToBounds = YES;
+//        navImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        navImageView.image = self.navigationBgImage;
+//        [self.view addSubview:navImageView];
+//    }
     
     
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
@@ -116,7 +115,6 @@
     [self.web_wk loadRequest:request];
     [self.view addSubview:self.web_wk];
     self.web_wk.navigationDelegate = self;
-
     
 }
 
@@ -126,6 +124,7 @@
 {
     
     self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [self.hud removeFromSuperViewOnHide];
 }
 
@@ -137,7 +136,6 @@
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
     [self.hud hideAnimated:YES];
-
 }
 
 
@@ -171,9 +169,11 @@
         pageNumber = 6;
     }else if([absoluteString containsString:@"/university/"]) {
         pageNumber = 7;
+    }else if([absoluteString containsString:@"service.html"]) {
+        pageNumber = 8;
     }
     
-//    NSLog(@"-------- navigationAction.request ----%ld   %@   /n   %@",(long)pageNumber,absoluteString,navigationAction.request.allHTTPHeaderFields);
+    NSLog(@"-------- navigationAction.request ----%ld   %@   /n   %@",(long)pageNumber,absoluteString,navigationAction.request.allHTTPHeaderFields);
     
     switch (pageNumber) {
         case 0:{
@@ -248,8 +248,8 @@
             break;
             case 6:
         {
-                ApplyStatusViewController *status =[[ApplyStatusViewController alloc] init];
-                [self.navigationController pushViewController:status animated:YES];
+            
+               [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
                 decisionHandler(WKNavigationActionPolicyCancel);
          }
             break;
@@ -261,6 +261,13 @@
             
             [self caseUniversityWithshortId:contents[0]];
             
+            decisionHandler(WKNavigationActionPolicyCancel);
+        }
+            break;
+        case 8:
+        {
+           
+//            [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
             decisionHandler(WKNavigationActionPolicyCancel);
         }
             break;

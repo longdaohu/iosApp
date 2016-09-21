@@ -207,15 +207,15 @@ typedef enum {
 -(void)makeOther{
 
     
-    if (self.navigationBgImage) {
-        
-        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-        self.navImageView.clipsToBounds = YES;
-        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.navImageView.image = self.navigationBgImage;
-        [self.view addSubview:self.navImageView];
-        
-    }
+//    if (self.navigationBgImage) {
+//        
+//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
+//        self.navImageView.clipsToBounds = YES;
+//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        self.navImageView.image = self.navigationBgImage;
+//        [self.view addSubview:self.navImageView];
+//        
+//    }
     
     
     self.title = GDLocalizedString(@"Evaluate-inteligent");//@"智能匹配";
@@ -299,7 +299,7 @@ typedef enum {
 //添加表头
 -(void)makeHeaderView
 {
-    self.profileTabelView.backgroundColor = BACKGROUDCOLOR;
+    self.profileTabelView.backgroundColor = XCOLOR_BG;
     self.profileTabelView.tableFooterView = [[UIView alloc] init];
     
     XWGJSummaryView *headerView=[[XWGJSummaryView alloc] init];

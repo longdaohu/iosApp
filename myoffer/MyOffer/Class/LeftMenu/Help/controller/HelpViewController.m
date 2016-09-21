@@ -58,7 +58,7 @@
     self.helpTableView.dataSource        = self;
     self.helpTableView.delegate          = self;
     self.helpTableView.tableFooterView   = [[UIView alloc] init];
-    self.helpTableView.backgroundColor   = BACKGROUDCOLOR;
+    self.helpTableView.backgroundColor   = XCOLOR_BG;
     [self.view addSubview:self.helpTableView];
 
 }

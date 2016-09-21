@@ -44,7 +44,7 @@
 -(void)makeUI
 {
     self.bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, BGHEIGHT)];
-    self.bgView.backgroundColor = BACKGROUDCOLOR;
+    self.bgView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.bgView];
     
     

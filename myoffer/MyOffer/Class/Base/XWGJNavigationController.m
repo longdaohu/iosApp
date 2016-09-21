@@ -28,14 +28,16 @@
     
  
     self.navigationBar.tintColor = XCOLOR_WHITE;
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_WHITE
+    
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_WHITE,NSFontAttributeName :[UIFont boldSystemFontOfSize:17]
                                                                     };
+    
     self.interactivePopGestureRecognizer.delegate =  self;
     [self.navigationBar setBackgroundImage:self.navigationBgImage forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = [[UIImage alloc] init];
     
     
-    
+ 
 }
 
 

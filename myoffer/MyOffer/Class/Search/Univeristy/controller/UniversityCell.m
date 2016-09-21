@@ -54,7 +54,7 @@
     
     
     self.paddingView =[[UIView alloc] init];
-    self.paddingView.backgroundColor = BACKGROUDCOLOR;
+    self.paddingView.backgroundColor = XCOLOR_BG;
     [self.contentView addSubview:self.paddingView];
 
     [super awakeFromNib];

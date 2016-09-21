@@ -144,14 +144,14 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
     
-    if (self.navigationBgImage) {
-        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-        self.navImageView.clipsToBounds = YES;
-        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.navImageView.image = self.navigationBgImage;
-        [self.view addSubview:self.navImageView];
-        
-    }
+//    if (self.navigationBgImage) {
+//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
+//        self.navImageView.clipsToBounds = YES;
+//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        self.navImageView.image = self.navigationBgImage;
+//        [self.view addSubview:self.navImageView];
+//        
+//    }
 
 }
 

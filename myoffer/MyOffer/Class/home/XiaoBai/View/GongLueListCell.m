@@ -10,8 +10,8 @@
 
 @interface GongLueListCell ()
 @property(nonatomic,strong)UIImageView *logoView;
-@property(nonatomic,strong)UILabel *titleLab;
-@property(nonatomic,strong)UILabel *subTitleLab;
+@property(nonatomic,strong)UILabel     *titleLab;
+@property(nonatomic,strong)UILabel     *subTitleLab;
 @property(nonatomic,strong)UIImageView *line;
 
 
@@ -38,30 +38,33 @@ static NSString *identity = @"gonglueList";
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
          
-        self.logoView               = [[UIImageView alloc] init];
-        self.logoView.clipsToBounds = YES;
-        self.logoView.contentMode   = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:self.logoView];
-        
-         self.line                  = [[UIImageView alloc] init];
-         self.line.image            = [UIImage imageNamed:@"Black_spot"];
-         self.line.contentMode      = UIViewContentModeScaleToFill;
-         self.line.clipsToBounds    = YES;
-         self.line.alpha = 0.2;
-         [self.contentView addSubview:self.line];
- 
-        
-        self.titleLab = [UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
-        [self.contentView addSubview:self.titleLab];
-        
-        self.subTitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
-        self.subTitleLab.numberOfLines = 0;
-        [self.contentView addSubview:self.subTitleLab];
- 
+        [self makeUI];
     }
     
     return self;
     
+}
+
+- (void)makeUI{
+
+    self.logoView               = [[UIImageView alloc] init];
+    self.logoView.contentMode   = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:self.logoView];
+    
+    self.line                  = [[UIImageView alloc] init];
+    self.line.image            = [UIImage imageNamed:@"Black_spot"];
+    self.line.contentMode      = UIViewContentModeScaleToFill;
+    self.line.clipsToBounds    = YES;
+    self.line.alpha = 0.2;
+    [self.contentView addSubview:self.line];
+    
+    self.titleLab = [UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    [self.contentView addSubview:self.titleLab];
+    
+    self.subTitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+    self.subTitleLab.numberOfLines = 0;
+    [self.contentView addSubview:self.subTitleLab];
+
 }
 
 
@@ -83,15 +86,17 @@ static NSString *identity = @"gonglueList";
     [super layoutSubviews];
     
     
-    CGFloat logox = KDUtilSize(10);
+    CGSize contentSize = self.contentView.bounds.size;
+    
+    CGFloat logox = ITEM_MARGIN;
     CGFloat logoy = ITEM_MARGIN;
-    CGFloat logoh = self.contentView.bounds.size.height - 2 * logoy;
+    CGFloat logoh = contentSize.height - 2 * logoy;
     CGFloat logow = logoh;
     self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     
     CGFloat lineX = CGRectGetMaxX(self.logoView.frame);
-    CGFloat lineY = self.contentView.bounds.size.height -0.4;
-    CGFloat lineW = self.contentView.bounds.size.width;
+    CGFloat lineY = contentSize.height -0.4;
+    CGFloat lineW = contentSize.width;
     CGFloat lineH = 0.4;
     self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
     
@@ -99,26 +104,20 @@ static NSString *identity = @"gonglueList";
         
         CGFloat titlex      = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
         CGFloat titlew      = XScreenWidth - titlex;
-        CGSize titleSize    = [self getContentBoundWithTitle:self.titleLab.text andFontSize:KDUtilSize(18)  andMaxWidth:titlew];
+        CGSize titleSize    = [self.titleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(18)) maxWidth:titlew];
         CGFloat titley      = logoy;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);
         
-        CGFloat subw           = titlew - 20;
-        CGSize subTitleSize    = [self getContentBoundWithTitle:self.subTitleLab.text andFontSize:KDUtilSize(13)  andMaxWidth:subw];
+        CGFloat subw           = titlew - 25;
+        CGSize subTitleSize    = [self.subTitleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(13)) maxWidth:subw];
         CGFloat subx           = titlex;
-        CGFloat suby           = CGRectGetMaxY(self.titleLab.frame) + KDUtilSize(10);
+        CGFloat suby           = CGRectGetMaxY(self.titleLab.frame) + ITEM_MARGIN;
         CGFloat subh           = subTitleSize.height;
         self.subTitleLab.frame = CGRectMake(subx, suby, subw, subh);
-        
     }
-    
     
 }
 
--(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{
-    
-    return [title boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
-}
 
 
 

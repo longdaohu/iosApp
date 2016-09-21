@@ -73,7 +73,7 @@
 -(UIView *)makeLine
 {
     UIView *Line =[[UIView alloc] init];
-    Line.backgroundColor = BACKGROUDCOLOR;
+    Line.backgroundColor = XCOLOR_BG;
     [self.bgView addSubview:Line];
     
     return Line;

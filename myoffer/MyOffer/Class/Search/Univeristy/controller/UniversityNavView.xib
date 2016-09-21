@@ -28,6 +28,12 @@
                         <action selector="backClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="a0H-Lk-KoW"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syv-hU-MxF">
+                    <rect key="frame" x="133" y="29" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -36,10 +42,13 @@
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Nj6-lh-HRs"/>
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="gSA-up-KwJ"/>
                 <constraint firstItem="tW3-XB-0QV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v27-tZ-jPw"/>
+                <constraint firstItem="Syv-hU-MxF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wuk-vb-6Q6"/>
+                <constraint firstItem="Syv-hU-MxF" firstAttribute="centerY" secondItem="w0Y-Hw-GQ0" secondAttribute="centerY" id="xHk-Zk-0cq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bgImageView" destination="tW3-XB-0QV" id="6qf-kK-yvy"/>
+                <outlet property="titleLab" destination="Syv-hU-MxF" id="1TX-jd-7EK"/>
             </connections>
             <point key="canvasLocation" x="353" y="12"/>
         </view>

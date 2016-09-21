@@ -201,7 +201,7 @@
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view  addSubview:self.tableView];
-    self.tableView.backgroundColor = BACKGROUDCOLOR;
+    self.tableView.backgroundColor = XCOLOR_BG;
 }
 
 

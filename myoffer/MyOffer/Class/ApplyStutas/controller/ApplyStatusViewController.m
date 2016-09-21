@@ -61,7 +61,7 @@
     self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.dataSource      = self;
     self.TableView.delegate        = self;
-    self.TableView.backgroundColor = BACKGROUDCOLOR;
+    self.TableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.TableView];
     
     //上拉刷新

@@ -163,7 +163,7 @@ typedef enum {
     CGFloat centerX = 0.5 * (XScreenWidth - centerW);
     CGFloat centerY = 0.5 * (CGRectGetHeight(self.upHeaderView.frame) - centerH );
     self.centerButton =  [[UIButton alloc] initWithFrame:CGRectMake(centerX, centerY, centerW, centerH)];
-    self.centerButton.backgroundColor = BACKGROUDCOLOR;
+    self.centerButton.backgroundColor = XCOLOR_BG;
     self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width *0.5;
     self.centerButton.layer.masksToBounds = YES;
     self.centerButton.titleLabel.numberOfLines = 0;
@@ -189,22 +189,22 @@ typedef enum {
 
 -(void)makeOtherView
 {
-    self.ResultTableView.backgroundColor = BACKGROUDCOLOR;
+    self.ResultTableView.backgroundColor = XCOLOR_BG;
     self.bottomView.hidden = YES;
     self.NoDataView.frame = CGRectMake(0, 0, APPSIZE.width, APPSIZE.height);
     self.NoDataView.hidden = YES;
     [self.view addSubview: self.NoDataView];
     
     
-    if (self.navigationBgImage) {
-        
-        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-        self.navImageView.clipsToBounds = YES;
-        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.navImageView.image = self.navigationBgImage;
-        [self.view addSubview:self.navImageView];
-        
-    }
+//    if (self.navigationBgImage) {
+//        
+//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
+//        self.navImageView.clipsToBounds = YES;
+//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        self.navImageView.image = self.navigationBgImage;
+//        [self.view addSubview:self.navImageView];
+//        
+//    }
     
 }
 -(void)makeNavigatinView
@@ -621,17 +621,14 @@ typedef enum {
             }
             
         }];
-        
-        
-  }
-
+    }
 
 }
 
 //返回上级页面
 -(void)popBack
 {
-    if (self.isComeBack || self.navigationBgImage) {
+    if (self.isComeBack) {
         
         [self.navigationController popViewControllerAnimated:YES];
         

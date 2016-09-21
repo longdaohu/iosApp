@@ -60,7 +60,7 @@
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
-    self.title = @"服务";
+    self.title = @"留学服务";
     self.Web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
     [self.view addSubview:self.Web];
     self.Web.delegate = self;

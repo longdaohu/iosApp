@@ -38,7 +38,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor =  BACKGROUDCOLOR;
+        self.backgroundColor =  XCOLOR_BG;
         
         self.bgView                     =[[UIView alloc] init];
         self.bgView.backgroundColor     = XCOLOR_WHITE;

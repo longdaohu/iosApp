@@ -129,7 +129,7 @@
             
         }else{
             
-            sender.backgroundColor = BACKGROUDCOLOR;
+            sender.backgroundColor = XCOLOR_BG;
             [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         }
@@ -165,7 +165,7 @@
     if (self.lastButton) {
         
         [self.lastButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.lastButton.backgroundColor = BACKGROUDCOLOR;
+        self.lastButton.backgroundColor = XCOLOR_BG;
         
         if (self.lastButton == sender) {
             
@@ -257,7 +257,7 @@
             
         }else{
             
-            sender.backgroundColor = BACKGROUDCOLOR;
+            sender.backgroundColor = XCOLOR_BG;
             [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         }

@@ -56,7 +56,7 @@
     
     UIView *lineOne = [[UIView alloc] init];
     self.lineOne = lineOne;
-    lineOne.backgroundColor = BACKGROUDCOLOR;
+    lineOne.backgroundColor = XCOLOR_BG;
     [self addSubview:lineOne];
     
     HomeSectionHeaderView *keyView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"王牌领域"];
@@ -72,7 +72,7 @@
 
     UIView *lineTwo = [[UIView alloc] init];
     self.lineTwo = lineTwo;
-    lineTwo.backgroundColor = BACKGROUDCOLOR;
+    lineTwo.backgroundColor = XCOLOR_BG;
     [self addSubview:lineTwo];
     
     
@@ -88,7 +88,7 @@
     
 
     UIView *historyLine = [[UIView alloc] init];
-    historyLine.backgroundColor = BACKGROUDCOLOR;
+    historyLine.backgroundColor = XCOLOR_BG;
     [selectionView addSubview:historyLine];
     self.historyLine = historyLine;
 

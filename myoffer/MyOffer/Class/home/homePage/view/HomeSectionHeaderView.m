@@ -35,7 +35,7 @@
     if (self) {
         
         self.clipsToBounds = YES;
-        self.backgroundColor = BACKGROUDCOLOR;
+        self.backgroundColor = XCOLOR_BG;
         self.panding =[[UILabel alloc] init];
         [self addSubview:self.panding];
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;

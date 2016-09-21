@@ -18,7 +18,7 @@
         
         self.titleLab =[UILabel labelWithFontsize: 20.0f TextColor:[UIColor blackColor] TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.titleLab];
-        self.contentView.backgroundColor = BACKGROUDCOLOR;
+        self.contentView.backgroundColor = XCOLOR_BG;
 
         
     }

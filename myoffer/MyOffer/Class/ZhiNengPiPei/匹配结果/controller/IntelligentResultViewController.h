@@ -12,5 +12,4 @@
 @property (strong, nonatomic) IBOutlet UIView *NoDataView;
 @property (weak, nonatomic) IBOutlet UILabel *NoDataLabel;
 @property(nonatomic,assign)BOOL isComeBack;
-@property(nonatomic,strong)UIImage *navigationBgImage;
 @end

@@ -29,12 +29,12 @@
 
 -(void)awakeFromNib{
 
-    self.bgView.backgroundColor = BACKGROUDCOLOR;
+    self.bgView.backgroundColor = XCOLOR_BG;
     self.bgView.layer.cornerRadius = 5;
     self.bgView.layer.masksToBounds = YES;
 
 
-    self.backgroundColor = BACKGROUDCOLOR;
+    self.backgroundColor = XCOLOR_BG;
 
     self.shadowView.layer.cornerRadius = 5;
         self.shadowView.layer.shadowColor = XCOLOR_BLACK.CGColor;

@@ -53,7 +53,7 @@
 -(void)makeUI
 {
     self.title = GDLocalizedString(@"LanguageVC-001");//@"语言设置";
-    self.languageTableView.backgroundColor = BACKGROUDCOLOR;
+    self.languageTableView.backgroundColor = XCOLOR_BG;
     
    
     self.footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 80)];

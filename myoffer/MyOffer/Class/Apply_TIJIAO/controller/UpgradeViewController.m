@@ -245,7 +245,7 @@ typedef enum {
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = BACKGROUDCOLOR;
+    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.scrollEnabled = NO;
     XJHUtilDefineWeakSelfRef
     

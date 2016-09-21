@@ -10,6 +10,5 @@
 
 @interface MessageDetailViewController : BaseViewController
 @property(nonatomic,assign)NSString *NO_ID;
-@property(nonatomic,strong)UIImage *navigationBgImage;
 
 @end
