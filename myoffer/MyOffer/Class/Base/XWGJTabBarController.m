@@ -11,7 +11,7 @@
 #import "MeViewController.h"
 #import "DiscoverViewController.h"
 #import "MessageViewController.h"
-#import "XWGJCatigoryViewController.h"
+#import "CatigoryViewController.h"
 
 @interface XWGJTabBarController ()
 @property(nonatomic,strong)UIImage *navigationBgImage;
@@ -26,7 +26,7 @@
     [self makeNavImage];
     
 
-    XWGJCatigoryViewController *cvc = [[XWGJCatigoryViewController alloc] init];
+    CatigoryViewController *cvc = [[CatigoryViewController alloc] init];
     cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
     
     MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];

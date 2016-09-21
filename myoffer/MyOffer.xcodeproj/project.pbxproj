@@ -207,7 +207,7 @@
 		AEA249D21D5B215300DD7939 /* centerSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499B1D5B215300DD7939 /* centerSectionView.m */; };
 		AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */; };
 		AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */; };
-		AEA249FB1D5B224E00DD7939 /* XWGJCatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* XWGJCatigoryViewController.m */; };
+		AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */; };
 		AEA249FC1D5B224E00DD7939 /* XWGJStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */; };
 		AEA249FD1D5B224E00DD7939 /* XWGJCatigorySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DF1D5B224E00DD7939 /* XWGJCatigorySubject.m */; };
 		AEA249FE1D5B224E00DD7939 /* XWGJHotCity.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E11D5B224E00DD7939 /* XWGJHotCity.m */; };
@@ -773,8 +773,8 @@
 		AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftBarButtonItemView.m; sourceTree = "<group>"; };
 		AEA249D71D5B224E00DD7939 /* NewSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSearchResultViewController.h; sourceTree = "<group>"; };
 		AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSearchResultViewController.m; sourceTree = "<group>"; };
-		AEA249D91D5B224E00DD7939 /* XWGJCatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJCatigoryViewController.h; sourceTree = "<group>"; };
-		AEA249DA1D5B224E00DD7939 /* XWGJCatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJCatigoryViewController.m; sourceTree = "<group>"; };
+		AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
+		AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
 		AEA249DB1D5B224E00DD7939 /* XWGJStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJStateViewController.h; sourceTree = "<group>"; };
 		AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJStateViewController.m; sourceTree = "<group>"; };
 		AEA249DE1D5B224E00DD7939 /* XWGJCatigorySubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJCatigorySubject.h; sourceTree = "<group>"; };
@@ -2072,8 +2072,8 @@
 			children = (
 				AEA249D71D5B224E00DD7939 /* NewSearchResultViewController.h */,
 				AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */,
-				AEA249D91D5B224E00DD7939 /* XWGJCatigoryViewController.h */,
-				AEA249DA1D5B224E00DD7939 /* XWGJCatigoryViewController.m */,
+				AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */,
+				AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */,
 				AEA249DB1D5B224E00DD7939 /* XWGJStateViewController.h */,
 				AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */,
 			);
@@ -3480,7 +3480,7 @@
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
-				AEA249FB1D5B224E00DD7939 /* XWGJCatigoryViewController.m in Sources */,
+				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AEA24B8B1D5B25E000DD7939 /* searchSectionHeadView.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,

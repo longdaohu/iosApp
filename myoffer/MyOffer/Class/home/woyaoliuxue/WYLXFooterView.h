@@ -11,6 +11,7 @@ typedef enum {
     FooterButtonTypePipei,
     FooterButtonTypeLiuxue
 } FooterButtonType;
+
 typedef void(^WYLXfooterBlock)(UIButton *sender);
 @interface WYLXFooterView : UIView
 @property(nonatomic,copy)WYLXfooterBlock actionBlock;

@@ -6,7 +6,7 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJCatigoryViewController.h"
+#import "CatigoryViewController.h"
 #import "XWGJRankTableViewCell.h"
 #import "XWGJSubjectCollectionViewCell.h"
 #import "XWGJCityCollectionViewCell.h"
@@ -24,7 +24,7 @@
 #import "XNewSearchViewController.h"
 #define INTERSET_TOP  70.0
 
-@interface XWGJCatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 //背景scroller
 @property(nonatomic,strong)XWGJScrollView *baseScroller;
 //排名tableView
@@ -49,7 +49,7 @@
 @end
 
 
-@implementation XWGJCatigoryViewController
+@implementation CatigoryViewController
 
 - (void)viewDidLoad {
     
@@ -58,7 +58,6 @@
     [self makeUI];
     
     [self getHotCitySource];
-
     
 }
 

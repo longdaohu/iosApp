@@ -26,7 +26,6 @@ typedef enum {
 #import "centerSectionView.h"
 #import "InteProfileViewController.h"
 #import "MessageViewController.h"
-#import "XWGJCatigoryViewController.h"
 #import "ServiceMallViewController.h"
 
 

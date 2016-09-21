@@ -21,7 +21,7 @@
 #import "MeViewController.h"
 #import "HomeViewContViewController.h"
 #import "MessageViewController.h"
-#import "XWGJCatigoryViewController.h"
+#import "CatigoryViewController.h"
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -400,7 +400,7 @@
                 break;
             case 1:
             {
-                XWGJCatigoryViewController  *vc =nav.childViewControllers[0];
+                CatigoryViewController  *vc =nav.childViewControllers[0];
                 [vc leftViewMessage];
             }
                 break;

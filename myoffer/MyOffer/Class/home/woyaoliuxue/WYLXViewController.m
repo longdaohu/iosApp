@@ -851,6 +851,7 @@ typedef enum {
     if (self.PhoneView.VerifyTF.text.length==0) {
         
         AlerMessage(GDLocalizedString(@"LoginVC-007"));
+        
         return ;
     }
     

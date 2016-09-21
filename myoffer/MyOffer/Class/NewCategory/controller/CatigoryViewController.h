@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface XWGJCatigoryViewController : BaseViewController
+@interface CatigoryViewController : BaseViewController
 -(void)leftViewMessage;
 @end
