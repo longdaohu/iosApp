@@ -24,7 +24,7 @@
 #import "HotUniversityFrame.h"
 #import "HomeSearchView.h"
 #import "SearchViewController.h"
-#import "XXiaobaiViewController.h"
+#import "XiaobaiViewController.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "XNewSearchViewController.h"
@@ -874,7 +874,7 @@
 -(void)CaseLiuXueXiaoBai
 {
     [MobClick event:@"XiaoBai"];
-    [self.navigationController pushViewController:[[XXiaobaiViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[XiaobaiViewController alloc] init] animated:YES];
 }
 
 //跳转智能匹配

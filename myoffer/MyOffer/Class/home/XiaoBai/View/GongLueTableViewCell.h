@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XGongLueTableViewCell : UITableViewCell
+@interface GongLueTableViewCell : UITableViewCell
 @property(nonatomic,strong)NSDictionary *item;
-
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 @end

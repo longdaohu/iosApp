@@ -6,8 +6,8 @@
 //  Copyright © 2016年 xuewuguojie. All rights reserved.
 //
 
-#import "XTopToolView.h"
-@interface XTopToolView ()
+#import "XBTopToolView.h"
+@interface XBTopToolView ()
 //黑色背景
 @property(nonatomic,strong)UIView *blackView;
 @property(nonatomic,strong)UIView *bgView;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation XTopToolView
+@implementation XBTopToolView
 
 +(instancetype)View
 {

@@ -263,11 +263,11 @@
 		AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */; };
 		AEA24A9B1D5B23F600DD7939 /* XLiuxueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */; };
 		AEA24A9C1D5B23F600DD7939 /* GonglueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */; };
-		AEA24A9D1D5B23F600DD7939 /* XXiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XXiaobaiViewController.m */; };
+		AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */; };
 		AEA24A9F1D5B23F600DD7939 /* GongLueListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */; };
 		AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */; };
-		AEA24AA31D5B23F600DD7939 /* XGongLueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */; };
-		AEA24AA41D5B23F600DD7939 /* XTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A841D5B23F600DD7939 /* XTopToolView.m */; };
+		AEA24AA31D5B23F600DD7939 /* GongLueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A821D5B23F600DD7939 /* GongLueTableViewCell.m */; };
+		AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A841D5B23F600DD7939 /* XBTopToolView.m */; };
 		AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AA91D5B24D200DD7939 /* HelpViewController.m */; };
 		AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */; };
 		AEA24AF21D5B24D200DD7939 /* leftHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB01D5B24D200DD7939 /* leftHeadView.m */; };
@@ -874,16 +874,16 @@
 		AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLiuxueViewController.m; sourceTree = "<group>"; };
 		AEA24A751D5B23F600DD7939 /* GonglueListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueListViewController.h; sourceTree = "<group>"; };
 		AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueListViewController.m; sourceTree = "<group>"; };
-		AEA24A771D5B23F600DD7939 /* XXiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXiaobaiViewController.h; sourceTree = "<group>"; };
-		AEA24A781D5B23F600DD7939 /* XXiaobaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXiaobaiViewController.m; sourceTree = "<group>"; };
+		AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiaobaiViewController.h; sourceTree = "<group>"; };
+		AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiaobaiViewController.m; sourceTree = "<group>"; };
 		AEA24A7B1D5B23F600DD7939 /* GongLueListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListCell.h; sourceTree = "<group>"; };
 		AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueListCell.m; sourceTree = "<group>"; };
 		AEA24A7D1D5B23F600DD7939 /* GongLueListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListHeaderView.h; sourceTree = "<group>"; };
 		AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueListHeaderView.m; sourceTree = "<group>"; };
-		AEA24A811D5B23F600DD7939 /* XGongLueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGongLueTableViewCell.h; sourceTree = "<group>"; };
-		AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XGongLueTableViewCell.m; sourceTree = "<group>"; };
-		AEA24A831D5B23F600DD7939 /* XTopToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTopToolView.h; sourceTree = "<group>"; };
-		AEA24A841D5B23F600DD7939 /* XTopToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTopToolView.m; sourceTree = "<group>"; };
+		AEA24A811D5B23F600DD7939 /* GongLueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueTableViewCell.h; sourceTree = "<group>"; };
+		AEA24A821D5B23F600DD7939 /* GongLueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueTableViewCell.m; sourceTree = "<group>"; };
+		AEA24A831D5B23F600DD7939 /* XBTopToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTopToolView.h; sourceTree = "<group>"; };
+		AEA24A841D5B23F600DD7939 /* XBTopToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBTopToolView.m; sourceTree = "<group>"; };
 		AEA24AA81D5B24D200DD7939 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		AEA24AA91D5B24D200DD7939 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -2341,8 +2341,8 @@
 			children = (
 				AEA24A751D5B23F600DD7939 /* GonglueListViewController.h */,
 				AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */,
-				AEA24A771D5B23F600DD7939 /* XXiaobaiViewController.h */,
-				AEA24A781D5B23F600DD7939 /* XXiaobaiViewController.m */,
+				AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */,
+				AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2354,10 +2354,10 @@
 				AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */,
 				AEA24A7D1D5B23F600DD7939 /* GongLueListHeaderView.h */,
 				AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */,
-				AEA24A811D5B23F600DD7939 /* XGongLueTableViewCell.h */,
-				AEA24A821D5B23F600DD7939 /* XGongLueTableViewCell.m */,
-				AEA24A831D5B23F600DD7939 /* XTopToolView.h */,
-				AEA24A841D5B23F600DD7939 /* XTopToolView.m */,
+				AEA24A811D5B23F600DD7939 /* GongLueTableViewCell.h */,
+				AEA24A821D5B23F600DD7939 /* GongLueTableViewCell.m */,
+				AEA24A831D5B23F600DD7939 /* XBTopToolView.h */,
+				AEA24A841D5B23F600DD7939 /* XBTopToolView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3356,7 +3356,7 @@
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
 				AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */,
-				AEA24AA41D5B23F600DD7939 /* XTopToolView.m in Sources */,
+				AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */,
 				AEA24A871D5B23F600DD7939 /* DiscoveryCell.m in Sources */,
 				AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */,
 				AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */,
@@ -3524,7 +3524,7 @@
 				AEA24BCB1D5B264300DD7939 /* XWGJMessageTableViewCell.m in Sources */,
 				AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */,
 				463E3AAC1B23105F00E0BAF8 /* KDImageCache.m in Sources */,
-				AEA24AA31D5B23F600DD7939 /* XGongLueTableViewCell.m in Sources */,
+				AEA24AA31D5B23F600DD7939 /* GongLueTableViewCell.m in Sources */,
 				AEA24A931D5B23F600DD7939 /* HomeThirdTableViewCell.m in Sources */,
 				463E3AB01B23105F00E0BAF8 /* KDLoggerViewController.m in Sources */,
 				AE1D011F1D2FCD2D005E2DEF /* YYBannerView.m in Sources */,
@@ -3583,7 +3583,7 @@
 				AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */,
 				AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */,
 				AEA249FD1D5B224E00DD7939 /* XWGJCatigorySubject.m in Sources */,
-				AEA24A9D1D5B23F600DD7939 /* XXiaobaiViewController.m in Sources */,
+				AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */,
 				AE1FD71E1D5C929500FFD5A8 /* MJProperty.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,

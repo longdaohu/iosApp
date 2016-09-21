@@ -6,8 +6,8 @@
 //  Copyright © 2016年 xuewuguojie. All rights reserved.
 //
 
-#import "XGongLueTableViewCell.h"
-@interface XGongLueTableViewCell ()
+#import "GongLueTableViewCell.h"
+@interface GongLueTableViewCell ()
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIImageView *logoView;
 @property(nonatomic,strong)UILabel *titleLab;
@@ -15,16 +15,16 @@
 
 @end
 
-@implementation XGongLueTableViewCell
+@implementation GongLueTableViewCell
 
 static NSString *identity = @"gonglue";
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
-    XGongLueTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
+    GongLueTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     
     if (!cell) {
         
-        cell =[[XGongLueTableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
+        cell =[[GongLueTableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
     }
     return cell;
 }
@@ -34,30 +34,7 @@ static NSString *identity = @"gonglue";
     self = [super initWithStyle: style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = XCOLOR_BG;
-        
-        self.bgView =[[UIView alloc] init];
-        self.bgView.backgroundColor = [UIColor whiteColor];
-        self.bgView.layer.cornerRadius = 5;
-        self.bgView.layer.shadowColor =[UIColor blackColor].CGColor;
-        self.bgView.layer.shadowOpacity = 0.1;
-        self.bgView.layer.shadowOffset = CGSizeMake(0, 1);
-        [self.contentView addSubview:self.bgView];
-        
-        
-        self.logoView =[[UIImageView alloc] init];
-        self.logoView.clipsToBounds = YES;
-        self.logoView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.bgView addSubview:self.logoView];
-        
-        
-        self.titleLab = [UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentRight];
-        [self.bgView addSubview:self.titleLab];
-        
-        
-        self.subtitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentRight];
-        [self.bgView addSubview:self.subtitleLab];
+        [self makeUI];
         
     }
     
@@ -65,8 +42,36 @@ static NSString *identity = @"gonglue";
 
 }
 
+- (void)makeUI{
 
--(void)setItem:(NSDictionary *)item
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.contentView.backgroundColor = XCOLOR_BG;
+    
+    self.bgView =[[UIView alloc] init];
+    self.bgView.backgroundColor = [UIColor whiteColor];
+    self.bgView.layer.cornerRadius = 5;
+    self.bgView.layer.shadowColor =[UIColor blackColor].CGColor;
+    self.bgView.layer.shadowOpacity = 0.1;
+    self.bgView.layer.shadowOffset = CGSizeMake(0, 1);
+    [self.contentView addSubview:self.bgView];
+    
+    
+    self.logoView =[[UIImageView alloc] init];
+    self.logoView.clipsToBounds = YES;
+    self.logoView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.bgView addSubview:self.logoView];
+    
+    
+    self.titleLab = [UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentRight];
+    [self.bgView addSubview:self.titleLab];
+    
+    
+    self.subtitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentRight];
+    [self.bgView addSubview:self.subtitleLab];
+}
+
+
+- (void)setItem:(NSDictionary *)item
 {
     _item = item;
     
@@ -79,7 +84,7 @@ static NSString *identity = @"gonglue";
 }
 
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     
@@ -102,9 +107,8 @@ static NSString *identity = @"gonglue";
         CGFloat titlex = CGRectGetMaxX(self.logoView.frame);
         CGFloat titlew = bgw - titlex - 10;
         
-        CGSize titleSize =[self.titleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(18)]];   //[self getContentBoundWithTitle:self.titleLab.text andFontSize:KDUtilSize(18)  andMaxWidth:titlew];
-        CGSize subTitleSize = [self.subtitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(13)]]; //[self getContentBoundWithTitle:self.subtitleLab.text andFontSize:KDUtilSize(13)  andMaxWidth:titlew];
-       
+        CGSize titleSize =[self.titleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(18)]];
+        CGSize subTitleSize = [self.subtitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(13)]];
         CGFloat titley = 0.5 * (bgh  - titleSize.height - subTitleSize.height - KDUtilSize(10));
 
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);
@@ -115,6 +119,7 @@ static NSString *identity = @"gonglue";
         CGFloat subw = titlew;
         CGFloat subh = subTitleSize.height;
         self.subtitleLab.frame = CGRectMake(subx, suby, subw, subh);
+        
 
     }
  
@@ -126,10 +131,6 @@ static NSString *identity = @"gonglue";
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
     [super setSelected:selected animated:animated];
-    
-    
-    self.backgroundColor =[UIColor redColor];
-
     
 }
 

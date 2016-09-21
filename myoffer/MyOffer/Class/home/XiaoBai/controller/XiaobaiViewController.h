@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XXiaobaiViewController : BaseViewController
+@interface XiaobaiViewController : BaseViewController
 @end

@@ -9,17 +9,17 @@
 
 
 
-#import "XTopToolView.h"
-#import "XGongLueTableViewCell.h"
-#import "XXiaobaiViewController.h"
+#import "XBTopToolView.h"
+#import "GongLueTableViewCell.h"
+#import "XiaobaiViewController.h"
 #import "XWGJSubjectCollectionViewCell.h"
 #import "GonglueListViewController.h"
 #import "XWGJNODATASHOWView.h"
 
 
-@interface XXiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UIView *topView;
-@property(nonatomic,strong)XTopToolView *topToolView;
+@property(nonatomic,strong)XBTopToolView *topToolView;
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgScrollView;
 //UIWebView 留学流程
@@ -40,7 +40,7 @@
 
 @end
 
-@implementation XXiaobaiViewController
+@implementation XiaobaiViewController
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -83,18 +83,27 @@
 {
     if (!_helpItems) {
         
-        NSDictionary *one = [self makeHelpItemWithLogoName:@"ICON1" titleName:@"平台网站"];
-        NSDictionary *two = [self makeHelpItemWithLogoName:@"ICON2" titleName:@"如何申请"];
+        NSDictionary *one   = [self makeHelpItemWithLogoName:@"ICON1" titleName:@"平台网站"];
+        NSDictionary *two   = [self makeHelpItemWithLogoName:@"ICON2" titleName:@"如何申请"];
         NSDictionary *three = [self makeHelpItemWithLogoName:@"ICON3" titleName:@"申请条件"];
-        NSDictionary *four = [self makeHelpItemWithLogoName:@"ICON4" titleName:@"递交申请"];
-        NSDictionary *five = [self makeHelpItemWithLogoName:@"ICON5" titleName:@"Offer管理"];
-        NSDictionary *six = [self makeHelpItemWithLogoName:@"ICON6" titleName:@"操作疑问"];
+        NSDictionary *four  = [self makeHelpItemWithLogoName:@"ICON4" titleName:@"递交申请"];
+        NSDictionary *five  = [self makeHelpItemWithLogoName:@"ICON5" titleName:@"Offer管理"];
+        NSDictionary *six   = [self makeHelpItemWithLogoName:@"ICON6" titleName:@"操作疑问"];
         
         _helpItems = @[one,two,three,four,five,six];
         
     }
     return _helpItems;
 }
+-(NSDictionary *)makeHelpItemWithLogoName:(NSString *)logoName titleName:(NSString *)title
+{
+    NSMutableDictionary *item =[NSMutableDictionary dictionary];
+    [item setValue:title forKey:@"title"];
+    [item setValue:logoName forKey:@"logo"];
+    
+    return [item copy];
+}
+
 
 //数据为空时出现
 -(XWGJNODATASHOWView *)noDataView
@@ -117,14 +126,6 @@
 
 
 
--(NSDictionary *)makeHelpItemWithLogoName:(NSString *)logoName titleName:(NSString *)title
-{
-    NSMutableDictionary *item =[NSMutableDictionary dictionary];
-    [item setValue:title forKey:@"title"];
-    [item setValue:logoName forKey:@"logo"];
-    
-    return [item copy];
-}
 
 
 -(void)makeUI
@@ -148,7 +149,7 @@
         
         self.gonglueItems =  (NSArray *)response;
         
-        self.TableView.tableFooterView = nil;
+        self.TableView.tableFooterView = [UIView new];
         
         [self.TableView reloadData];
         
@@ -172,13 +173,10 @@
 }
 
 
-
-
 -(void)makeTopView
 {
     
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -64, XScreenWidth, 124)];
-    self.topView.backgroundColor = XCOLOR_RED;
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, 124)];
     [self.view addSubview:self.topView];
  
     UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
@@ -193,17 +191,17 @@
 
 -(void)makeTopToolView
 {
-    self.topToolView = [[XTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT -10,XScreenWidth, TOP_HIGHT)];
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT -10,XScreenWidth, TOP_HIGHT)];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }
 
+
 -(void)makebgScrollView
 {
     CGFloat bgsY  =  CGRectGetMaxY(self.topView.frame);
-    CGFloat height  = XScreenHeight - bgsY;
-    
-    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,bgsY, XScreenWidth,height)];
+    CGFloat bgsH  = XScreenHeight - bgsY;
+    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,bgsY, XScreenWidth,bgsH)];
     self.bgScrollView.delegate = self;
     [self.view addSubview:self.bgScrollView];
     self.bgScrollView.contentSize = CGSizeMake(3 * XScreenWidth, XScreenHeight);
@@ -211,32 +209,23 @@
     self.bgScrollView.showsHorizontalScrollIndicator = NO;
 
     
-    [self makeWebViewWithHeight:height];
+    [self makeWebViewWithHeight:bgsH];
     
     [self makeCollectView];
 
     [self makeTableView];
 }
 
--(void)makeWebViewWithHeight:(CGFloat)height
+
+- (void)makeWebViewWithHeight:(CGFloat)height
 {
-//    self.webView =[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, height -64)];
-//    [self.bgScrollView addSubview:self.webView];
-//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/study_white"]]];
-//    self.webView.backgroundColor = BACKGROUDCOLOR;
-//    self.webView.delegate=self;
-//    self.webView.scrollView.bounces = NO;
-//    self.webView.scrollView.showsHorizontalScrollIndicator = NO;
-//    self.webView.scrollView.showsVerticalScrollIndicator = NO;
-//    self.webView.scalesPageToFit = YES;
-    
+ 
     WebViewController *webVC = [[WebViewController alloc] init];
     [self addChildViewController:webVC];
     webVC.path = @"http://www.myoffer.cn/study_white";
     [self.bgScrollView addSubview:webVC.view];
-    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height -64);
+    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height - NAV_HEIGHT);
     webVC.web_wk.frame = webVC.view.bounds;
-    
     
 }
 
@@ -261,7 +250,6 @@ static NSString *subjectIdentify = @"subjectCell";
     UINib *sub_xib = [UINib nibWithNibName:@"XWGJSubjectCollectionViewCell" bundle:nil];
     [self.quetionCollectionView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
 }
-
 
 //创建CollectionView公共方法
 -(UICollectionView *)makeCollectionViewWithFlowayoutWidth:(CGFloat)width andFrame:(CGRect)frame andcontentInset:(UIEdgeInsets)Inset
@@ -322,7 +310,7 @@ static NSString *subjectIdentify = @"subjectCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
-    XGongLueTableViewCell *cell =[XGongLueTableViewCell cellWithTableView:tableView];
+    GongLueTableViewCell *cell =[GongLueTableViewCell cellWithTableView:tableView];
     
     cell.item = self.gonglueItems[indexPath.row];
     
@@ -341,9 +329,11 @@ static NSString *subjectIdentify = @"subjectCell";
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
      GonglueListViewController  *list = [[GonglueListViewController alloc] init];
-//     list.navigationBgImage           =  self.navigationBgImage;
+    
      list.gonglue                     =  self.gonglueItems[indexPath.row];
+    
      [self.navigationController pushViewController:list  animated:YES];
 }
 
@@ -361,33 +351,36 @@ static NSString *subjectIdentify = @"subjectCell";
 }
 
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-        XWGJSubjectCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
-        cell.helpItem =self.helpItems[indexPath.row];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    XWGJSubjectCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
+
+    cell.helpItem =self.helpItems[indexPath.row];
     
     return cell;
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
  
         return CGSizeMake(0, 0);
- }
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
  
     WebViewController *help = [[WebViewController alloc] init];
+    
     help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
+    
     [self.navigationController pushViewController:help animated:YES];
     
 }
 
+
 #pragma mark —————— XTopToolViewDelegate
--(void)XTopToolView:(XTopToolView *)topToolView andButtonItem:(UIButton *)sender
+-(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {
     [self.bgScrollView setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
     

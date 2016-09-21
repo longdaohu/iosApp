@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XTopToolView;
+@class XBTopToolView;
 @protocol XTopToolViewDelegate  <NSObject>
--(void)XTopToolView:(XTopToolView *)topToolView andButtonItem:(UIButton *)sender;
-
+-(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender;
 @end
 
-@interface XTopToolView : UIView
+@interface XBTopToolView : UIView
 
 @property(nonatomic,weak)id<XTopToolViewDelegate> delegate;
 @property(nonatomic,strong)NSArray *itemImages;
