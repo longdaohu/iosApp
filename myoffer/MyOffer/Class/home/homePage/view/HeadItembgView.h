@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
 typedef void(^HeadItembgViewBlock)(NSInteger itemTag);
 @interface HeadItembgView : UIView
 @property(nonatomic,copy)HeadItembgViewBlock actionBlock;
-+ (instancetype)viewWithbgBlock:(HeadItembgViewBlock)actionBlock;
++ (instancetype)bgview;
 
 @end

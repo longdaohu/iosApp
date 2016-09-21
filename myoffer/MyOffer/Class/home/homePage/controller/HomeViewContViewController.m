@@ -314,7 +314,6 @@
 
 }
 
-
 -(XUToolbar *)myToolbar
 {
     if (!_myToolbar) {
@@ -343,7 +342,6 @@
         [weakSelf openLeftMenu];
     }];
     
-    
     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.myToolbar.items= @[leftItem,flexItem];
@@ -357,7 +355,7 @@
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
     [self.view addSubview:self.TableView];
-    self.TableView.sectionFooterHeight = 0;
+    self.TableView.sectionFooterHeight = HEIGHT_ZERO;
     self.TableView.separatorStyle = UITableViewCellSelectionStyleNone;
     self.TableView.backgroundColor = XCOLOR_BG;
     
@@ -376,12 +374,10 @@
     HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XScreenWidth, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
         [self HomeHeaderViewWithItemtap:itemTag];
     }];
-    
     self.TableView.tableHeaderView  = TableHeaderView;
-    
     [self makeAutoLoopViewAtView: TableHeaderView];
+ 
 
-   
 }
 
 //页面刷新

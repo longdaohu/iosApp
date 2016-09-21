@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-typedef void(^HomeHeaderViewBlock)(NSInteger itemTag);
+#import "HeadItembgView.h"
 @interface HomeHeaderView : UIView
 @property(nonatomic,strong)UIView *upView;
-@property(nonatomic,copy)HomeHeaderViewBlock actionBlock;
-+ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock;
++ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HeadItembgViewBlock)actionBlock;
 
 @end

@@ -10,6 +10,9 @@
 @interface HeadItem ()
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,copy)NSString *icon;
+@property(nonatomic,copy)NSString *title;
+
 @end
 
 @implementation HeadItem
@@ -22,30 +25,40 @@
     
     return item;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *iconView  =[[UIImageView alloc] init];
-        iconView.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:iconView];
-        self.iconView = iconView;
         
-        self.titleLab               = [UILabel labelWithFontsize:10 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
-        [self addSubview:self.titleLab];
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-        [self addGestureRecognizer:tap];
+
+        [self makeUI];
         
     }
     return self;
 }
 
--(void)setTitle:(NSString *)title
+
+- (void)makeUI{
+
+    UIImageView *iconView  =[[UIImageView alloc] init];
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:iconView];
+    self.iconView = iconView;
+    
+    self.titleLab  = [UILabel labelWithFontsize:10 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+    [self addSubview:self.titleLab];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemOnclick)];
+    [self addGestureRecognizer:tap];
+    
+}
+
+- (void)setTitle:(NSString *)title
 {
     _title             = title;
-    self.titleLab.text = title;
     
+    self.titleLab.text = title;
 }
 
 -(void)setIcon:(NSString *)icon
@@ -55,6 +68,7 @@
     self.iconView.image = [UIImage imageNamed:icon];
     
 }
+
 
 -(void)layoutSubviews
 {
@@ -79,11 +93,13 @@
     
 }
 
--(void)tap
+-(void)itemOnclick
 {
+    
     if (self.actionBlock) {
         
-        self.actionBlock(self);
+        self.actionBlock(self.tag);
+        
     }
 }
 

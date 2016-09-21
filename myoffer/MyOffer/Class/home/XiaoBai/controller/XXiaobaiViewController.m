@@ -381,7 +381,6 @@ static NSString *subjectIdentify = @"subjectCell";
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
  
     WebViewController *help = [[WebViewController alloc] init];
-//    help.navigationBgImage = self.navigationBgImage;
     help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
     [self.navigationController pushViewController:help animated:YES];
     
@@ -393,26 +392,6 @@ static NSString *subjectIdentify = @"subjectCell";
     [self.bgScrollView setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
     
 }
-
-//#pragma mark ——————UIWebViewDelegate
-//-(void)webViewDidStartLoad:(UIWebView *)webView
-//{
-//    
-//    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self.hud removeFromSuperViewOnHide];
-//    
-//}
-//
-//- (void)webViewDidFinishLoad:(UIWebView *)webView
-//{
-//    //加载完成后重新设置 tableview的cell的高度,和webview的frame
-//     [self.hud hideAnimated:YES];
-//}
-//
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-//{
-//     [self.hud hideAnimated:YES];
-//}
 
 
 - (void)didReceiveMemoryWarning {

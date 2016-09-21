@@ -24,17 +24,13 @@
 
 @implementation HomeHeaderView
 
-+ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock
+ 
++ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HeadItembgViewBlock)actionBlock
 {
-
     
     HomeHeaderView *headerView = [[HomeHeaderView alloc]  initWithFrame:frame];
-    headerView.actionBlock = ^(NSInteger tag){
-      
-        NSLog(@"itemTag  %ld",(long)tag);
-
-        actionBlock(tag);
-    };
+    
+    headerView.buttonsBgView.actionBlock = actionBlock;
     
     return headerView;
 }
@@ -43,10 +39,12 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
 
         [self makeUI];
     }
+    
     return self;
 }
 
@@ -67,13 +65,8 @@
     self.Logo.contentMode = UIViewContentModeScaleAspectFit;
     [self.upView addSubview:self.Logo];
     
-    self.buttonsBgView = [HeadItembgView viewWithbgBlock:^(NSInteger itemTag) {
-        
-         if (self.actionBlock) {
-            
-            self.actionBlock(itemTag);
-        }
-     }];
+ 
+    self.buttonsBgView  =[HeadItembgView bgview];
     [self.upView addSubview:self.buttonsBgView];
 
 }
@@ -85,6 +78,7 @@
     if (!_navigationBgImage) {
         
         NSString *path     = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:NAV_PNG];
+        
         _navigationBgImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
         
     }
@@ -119,17 +113,6 @@
     self.buttonsBgView.frame = CGRectMake(bbgX, bbgY, bbgW,bbgH);
    
 }
-
-
-#pragma mark ————HeadItembgViewDelegate
-//-(void)HeadItembgView:(HeadItembgView *)itemView WithItemtap:(UIButton *)sender{
-//    
-//    if ([self.delegate respondsToSelector:@selector(HomeHeaderView:WithItemtap:)]) {
-//        [self.delegate HomeHeaderView:self WithItemtap:sender];
-//     }
-//}
-
-
 
 
 

@@ -76,16 +76,7 @@
 -(void)makeUI
 {
     
-//    
-//    if (self.navigationBgImage) {
-//        UIImageView *navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, NAV_HEIGHT)];
-//        navImageView.clipsToBounds = YES;
-//        navImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        navImageView.image = self.navigationBgImage;
-//        [self.view addSubview:navImageView];
-//    }
-    
-    
+     
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];

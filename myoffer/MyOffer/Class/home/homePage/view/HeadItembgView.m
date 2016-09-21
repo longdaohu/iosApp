@@ -17,35 +17,32 @@
 @end
 
 @implementation HeadItembgView
-+ (instancetype)viewWithbgBlock:(HeadItembgViewBlock)actionBlock
-{
 
-    HeadItembgView *BgView = [[HeadItembgView alloc] init];
++ (instancetype)bgview{
     
-    BgView.actionBlock = ^(NSInteger itemTag){
-        
-//        NSLog(@"itemTag  %ld",itemTag);
-        actionBlock(itemTag);
-        
-    };
-
-    return BgView;
+    HeadItembgView *headerItemBg = [[HeadItembgView alloc] init];
+    
+    return headerItemBg;
 }
-
 
 -(NSArray *)itemImages
 {
     if (!_itemImages) {
-        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"home_Mall",@"home_Mall",@"home_Mall"];
+        
+        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"Home_mbti",@"Home_super",@"home_Mall"];
     }
+    
     return _itemImages;
 }
 
 -(NSArray *)itemTitles
 {
     if (!_itemTitles) {
+        
         _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务套餐"];
+        
     }
+    
     return _itemTitles;
 }
 
@@ -54,15 +51,16 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
         
         for (int i = 0 ;i < self.itemTitles.count ; i++) {
             
             HeadItem *item = [HeadItem itemWithTitle:self.itemTitles[i] imageName:self.itemImages[i]];
-            item.tag       = i;
-            item.actionBlock = ^(UIView *it){
+            item.tag       =  i;
+            item.actionBlock = ^(NSInteger itemTag){
                 
-                [self itemTap:it.tag];
+                [self itemTap:itemTag];
  
             };
             
@@ -75,14 +73,12 @@
 
 -(void)itemTap:(NSInteger)tag{
     
-    
     if (self.actionBlock) {
  
         self.actionBlock(tag);
     }
+    
 }
-
-
 
 
 
@@ -98,6 +94,7 @@
      for (int index = 0 ;index < self.subviews.count ; index++) {
         
          HeadItem *item = (HeadItem *)self.subviews[index];
+         
          CGFloat itemX  =  (index % 3) * itemW;
          CGFloat itemY  =  itemH  * (index / 3);
          item.frame     = CGRectMake(itemX, itemY, itemW, itemH);
