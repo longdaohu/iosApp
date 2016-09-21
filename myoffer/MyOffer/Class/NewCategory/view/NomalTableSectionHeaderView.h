@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UniversitySearchHeaderView : UITableViewHeaderFooterView
-
-@property(nonatomic,strong)UILabel *titleLab;
-@property(nonatomic,copy)NSString *title;
+@interface NomalTableSectionHeaderView : UITableViewHeaderFooterView
+-(void)sectionHeaderWithTitle:(NSString *)title FontSize:(CGFloat)fontSize;
 
 @end

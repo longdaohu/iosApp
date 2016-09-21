@@ -10,10 +10,10 @@
 #import "WYLXHeaderView.h"
 #import "WYLXCell.h"
 #import "WYLXFooterView.h"
-#import "XliusectionView.h"
 #import "InteProfileViewController.h"
 #import "YourPhoneView.h"
 #import "WYLXSuccessView.h"
+#import "NomalTableSectionHeaderView.h"
 
 #define Failure @"fail"
 typedef enum {
@@ -316,6 +316,7 @@ typedef enum {
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.sectionFooterHeight = 8;
+    self.tableView.backgroundColor = XCOLOR_BG;
     [self.view  addSubview:self.tableView];
     
     [self makeHeaderAndFooterView];
@@ -353,14 +354,30 @@ typedef enum {
     return 20 * XPERCENT;
 }
 
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    XliusectionView *sectionView =[XliusectionView sectionView];
+//   
+//    sectionView.titleLab.text = self.sectionTitles[section];
+//    
+//    return sectionView;
+//}
+
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    XliusectionView *sectionView =[XliusectionView sectionView];
-   
-    sectionView.titleLab.text = self.sectionTitles[section];
+    NomalTableSectionHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
     
-    return sectionView;
+    if (!header) {
+        
+        header =[[NomalTableSectionHeaderView alloc] initWithReuseIdentifier:@"header"];
+    }
+    
+    [header sectionHeaderWithTitle:self.sectionTitles[section] FontSize: XPERCENT *13.0];
+    
+    return header;
 }
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

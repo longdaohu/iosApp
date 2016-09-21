@@ -6,10 +6,10 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJCityCollectionViewCell.h"
+#import "CatigaryCityCollectionCell.h"
 #import "XWGJHotCity.h"
 
-@interface XWGJCityCollectionViewCell ()
+@interface CatigaryCityCollectionCell ()
 //蒙版
 @property(nonatomic,strong)UIImageView *MengView;
 //图片
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation XWGJCityCollectionViewCell
+@implementation CatigaryCityCollectionCell
 
 - (void)awakeFromNib {
   

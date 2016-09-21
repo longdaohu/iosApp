@@ -8,7 +8,7 @@
 
 #import "NewSearchResultViewController.h"
 #import "NewSearchResultCell.h"
-#import "UniversitySearchHeaderView.h"
+#import "NomalTableSectionHeaderView.h"
 #import "UniversityObj.h"
 #import "UniversityFrameObj.h"
 #import "XWGJnodataView.h"
@@ -122,7 +122,6 @@
     
     [self reloadDataWithPageIndex:0 refresh:NO];
     
-    
 }
 
 
@@ -208,12 +207,14 @@
 #pragma mark —————— UITableViewDelegate  UITableViewDataSource
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UniversitySearchHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+    NomalTableSectionHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
     
     if (!header) {
-        header =[[UniversitySearchHeaderView alloc] initWithReuseIdentifier:@"header"];
+        
+        header =[[NomalTableSectionHeaderView alloc] initWithReuseIdentifier:@"header"];
     }
-    header.title = self.sectionTitleList[section];
+    
+    [header sectionHeaderWithTitle:self.sectionTitleList[section] FontSize: 20.0f];
     
     return header;
 }

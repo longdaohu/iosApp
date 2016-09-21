@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class XWGJHotCity;
-@interface XWGJCityCollectionViewCell : UICollectionViewCell
+@interface CatigaryCityCollectionCell : UICollectionViewCell
 @property(nonatomic,strong)XWGJHotCity *city;
 
 

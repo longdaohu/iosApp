@@ -46,7 +46,7 @@
         titleView.textAlignment = NSTextAlignmentLeft;
         titleView.textContainerInset = UIEdgeInsetsMake(0, -5, 0, -5);
         titleView.dataDetectorTypes = UIDataDetectorTypeAll;
-        titleView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+        titleView.backgroundColor = XCOLOR_BG;
         [self addSubview:titleView];
         self.titleView = titleView;
         

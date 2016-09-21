@@ -9,7 +9,7 @@
 #import "CatigoryViewController.h"
 #import "XWGJRankTableViewCell.h"
 #import "XWGJSubjectCollectionViewCell.h"
-#import "XWGJCityCollectionViewCell.h"
+#import "CatigaryCityCollectionCell.h"
 #import "XWGJCityCollectionReusableView.h"
 #import "XWGJCityCollectionViewHeaderView.h"
 #import "XWGJBanView.h"
@@ -145,42 +145,60 @@
 }
 
 
--(void)makeBaseScorller
+-(void)makeBanView
 {
-    self.baseScroller = [XWGJScrollView view];
-    self.baseScroller.delegate = self;
-    [self.view addSubview:self.baseScroller];
+    XJHUtilDefineWeakSelfRef
+    
+    CGFloat sh =  60;
+    
+    self.bg_SelectView = [[XWGJBanView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth,sh)];
+    
+    [self.view addSubview:self.bg_SelectView];
+    
+    //顶部工具栏切换页面
+    self.bg_SelectView.actionBlock = ^(UIButton *sender){
+        
+        [weakSelf.baseScroller setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
+        
+    };
+    
 }
 
--(void)makeRankTableView
+
+
+-(void)makeBaseScorller
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(2*XScreenWidth, 0, XScreenWidth, XScreenHeight-114) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.contentInset = UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0);
-    self.tableView.backgroundColor = XCOLOR_CLEAR;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.baseScroller  addSubview:self.tableView];
+    CGFloat baseX = 0;
+    CGFloat baseY = 0;
+    CGFloat baseW = XScreenWidth;
+    CGFloat baseH = XScreenHeight - NAV_HEIGHT - 50;
+    self.baseScroller = [XWGJScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
+    self.baseScroller.delegate = self;
+    [self.view addSubview:self.baseScroller];
+    
+    
+    [self makeCityCollectViewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
+    
+    [self makeSubjectCollectViewWithFrame:CGRectMake(baseW, baseY, baseW,baseH)];
+    
+    [self makeRankTableViewWithFrame:CGRectMake(baseW * 2, baseY, baseW,baseH)];
     
 }
--(void)makeCityCollectView
+
+-(void)makeCityCollectViewWithFrame:(CGRect)frame
 {
-    CGRect cityRect = CGRectMake(0, 0, XScreenWidth, XScreenHeight - 114);
     CGFloat topHigh = 2 * (Country_Width - 20) + 45 + INTERSET_TOP;
     
-    self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:cityRect andcontentInset:UIEdgeInsetsMake(topHigh, 0, 40, 0)];
-   
+    self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:frame andcontentInset:UIEdgeInsetsMake(topHigh, 0, 40, 0)];
     
-    UINib *city_xib = [UINib nibWithNibName:@"XWGJCityCollectionViewCell" bundle:nil];
+    UINib *city_xib = [UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil];
     [self.City_CollectView registerNib:city_xib forCellWithReuseIdentifier:cityIdentify];
-    
     
     UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
     
     self.cityHeaderView = [[XWGJCityCollectionViewHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
-   
+    
     XJHUtilDefineWeakSelfRef
     
     self.cityHeaderView.actionBlock = ^(UIButton *sender){
@@ -190,13 +208,26 @@
     
     
     [self.City_CollectView addSubview:self.cityHeaderView];
-  
+    
 }
 
--(void)makeSubjectCollectView
+-(void)makeRankTableViewWithFrame:(CGRect)frame
 {
-    CGRect subRect = CGRectMake(XScreenWidth, 0, XScreenWidth, XScreenHeight-114);
-    self.Sub_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0)];
+    self.tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.contentInset = UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0);
+    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    [self.baseScroller  addSubview:self.tableView];
+    
+}
+
+
+-(void)makeSubjectCollectViewWithFrame:(CGRect)frame
+{
+    self.Sub_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:frame andcontentInset:UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0)];
     UINib *sub_xib = [UINib nibWithNibName:@"XWGJSubjectCollectionViewCell" bundle:nil];
     [self.Sub_CollectView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
 }
@@ -228,26 +259,6 @@
 }
 
 
--(void)makeBanView
-{
-    XJHUtilDefineWeakSelfRef
- 
-     CGFloat sh =  60;
-    
-    self.bg_SelectView = [[XWGJBanView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth,sh)];
-    
-    [self.view addSubview:self.bg_SelectView];
-    
-    //顶部工具栏切换页面
-    self.bg_SelectView.actionBlock = ^(UIButton *sender){
-        
-        [weakSelf.baseScroller setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
-        
-    };
-  
-}
-
-
 
 
 -(void)makeUI
@@ -256,12 +267,6 @@
     [self makeOtherUI];
     
     [self makeBaseScorller];
-    
-    [self makeRankTableView];
-    
-    [self makeSubjectCollectView];
-    
-    [self makeCityCollectView];
     
     [self makeBanView];
     
@@ -274,7 +279,9 @@
     
     XJHUtilDefineWeakSelfRef
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
+        
         [weakSelf showLeftMenu];
+        
     }];
     
     self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
@@ -338,6 +345,7 @@
     }
     
 }
+
 static NSString *subjectIdentify = @"subjectCell";
 static NSString *cityIdentify = @"cityCell";
 
@@ -352,7 +360,7 @@ static NSString *cityIdentify = @"cityCell";
         
     }else{
         
-        XWGJCityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
+        CatigaryCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
         
         XWGJLXCountry *country = self.countryes[indexPath.section];
         
@@ -421,7 +429,7 @@ static NSString *cityIdentify = @"cityCell";
         
     }else{
         
-        [MobClick event:indexPath.row ? @"catigory_rankUK" : @"catigory_rankWorld"];
+//        [MobClick event:indexPath.row ? @"catigory_rankUK" : @"catigory_rankWorld"];
         [self CaseUK:rank];
     }
     

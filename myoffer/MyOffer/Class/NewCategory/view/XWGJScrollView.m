@@ -11,9 +11,9 @@
 @implementation XWGJScrollView
 
 
-+(instancetype)view{
++(instancetype)viewWithFrame:(CGRect)frame{
 
-    XWGJScrollView *scrollView = [[self alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64)];
+    XWGJScrollView *scrollView = [[XWGJScrollView alloc] initWithFrame:frame];
     
     scrollView.contentSize = CGSizeMake(3*XScreenWidth, XScreenHeight);
     scrollView.pagingEnabled = YES;
