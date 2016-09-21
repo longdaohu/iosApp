@@ -386,7 +386,11 @@ static NSString *subjectIdentify = @"subjectCell";
     
 }
 
-
+-(void)dealloc{
+    
+    KDClassLog(@"留学小白  dealloc");
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

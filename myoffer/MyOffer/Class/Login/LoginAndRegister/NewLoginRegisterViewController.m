@@ -111,7 +111,7 @@
 -(void)RegisterAreaTextfieldArrow
 {
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
          self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
     }];
     

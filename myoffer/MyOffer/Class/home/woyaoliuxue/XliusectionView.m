@@ -22,7 +22,7 @@
         
         UILabel *titleLab =[[UILabel alloc] init];
         self.titleLab = titleLab;
-        titleLab.font  = FontWithSize(FONTSIZE(15));
+        titleLab.font  = XFONT(XPERCENT*13);
         [self addSubview:titleLab];
         
     }

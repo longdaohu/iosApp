@@ -199,7 +199,7 @@ typedef enum {
     
      //拉伸图片
     NSString *countryImageName = [university.country isEqualToString:@"英国"] ? @"Uni-uk.jpg" : @"Uni-au.jpg";
-    [UIView transitionWithView:self.iconView duration:ANIMATIONDUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:self.iconView duration:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         [self.iconView setImage:[UIImage imageNamed:countryImageName]];
     } completion:^(BOOL finished) {
         
@@ -449,7 +449,7 @@ typedef enum {
   
     }else{
         
-        [UIView animateWithDuration:ANIMATIONDUATION animations:^{
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             self.iconView.frame = self.iconViewOldFrame;
             
@@ -568,7 +568,7 @@ typedef enum {
     
     if (CGRectGetHeight(self.header.frame) > 0) {
         
-        [UIView animateWithDuration:ANIMATIONDUATION animations:^{
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             self.header.itemFrame = self.UniFrame;
             self.header.frame     =  self.UniFrame.headerFrame;

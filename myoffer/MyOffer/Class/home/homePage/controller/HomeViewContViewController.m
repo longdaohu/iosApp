@@ -17,7 +17,7 @@
 #import "UniCollectionViewCell.h"
 #import "YYSingleNewsBO.h"
 #import "YYAutoLoopView.h"
-#import "XLiuxueViewController.h"
+#import "WYLXViewController.h"
 #import "MessageDetailViewController.h"
 #import "InteProfileViewController.h"
 #import "IntelligentResultViewController.h"
@@ -867,7 +867,7 @@
 -(void)CaseWoyaoliuXue
 {
     [MobClick event:@"WoYaoLiuXue"];
-    [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
 }
 
 //跳转留学小白

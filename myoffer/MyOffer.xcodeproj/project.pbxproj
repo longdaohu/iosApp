@@ -257,11 +257,11 @@
 		AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A631D5B23F600DD7939 /* SecondCollectionViewCell.m */; };
 		AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */; };
 		AEA24A961D5B23F600DD7939 /* XliusectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A681D5B23F600DD7939 /* XliusectionView.m */; };
-		AEA24A971D5B23F600DD7939 /* XliuxueFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6A1D5B23F600DD7939 /* XliuxueFooterView.m */; };
-		AEA24A981D5B23F600DD7939 /* XliuxueHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6C1D5B23F600DD7939 /* XliuxueHeaderView.m */; };
-		AEA24A991D5B23F600DD7939 /* XliuxueSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* XliuxueSuccessView.m */; };
-		AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */; };
-		AEA24A9B1D5B23F600DD7939 /* XLiuxueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */; };
+		AEA24A971D5B23F600DD7939 /* WYLXFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */; };
+		AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */; };
+		AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */; };
+		AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* WYLXCell.m */; };
+		AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* WYLXViewController.m */; };
 		AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */; };
 		AEA24A9F1D5B23F600DD7939 /* GongLueListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */; };
 		AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */; };
@@ -862,16 +862,16 @@
 		AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniCollectionViewCell.m; sourceTree = "<group>"; };
 		AEA24A671D5B23F600DD7939 /* XliusectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliusectionView.h; sourceTree = "<group>"; };
 		AEA24A681D5B23F600DD7939 /* XliusectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliusectionView.m; sourceTree = "<group>"; };
-		AEA24A691D5B23F600DD7939 /* XliuxueFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueFooterView.h; sourceTree = "<group>"; };
-		AEA24A6A1D5B23F600DD7939 /* XliuxueFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueFooterView.m; sourceTree = "<group>"; };
-		AEA24A6B1D5B23F600DD7939 /* XliuxueHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueHeaderView.h; sourceTree = "<group>"; };
-		AEA24A6C1D5B23F600DD7939 /* XliuxueHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueHeaderView.m; sourceTree = "<group>"; };
-		AEA24A6D1D5B23F600DD7939 /* XliuxueSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueSuccessView.h; sourceTree = "<group>"; };
-		AEA24A6E1D5B23F600DD7939 /* XliuxueSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueSuccessView.m; sourceTree = "<group>"; };
-		AEA24A6F1D5B23F600DD7939 /* XliuxueTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XliuxueTableViewCell.h; sourceTree = "<group>"; };
-		AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueTableViewCell.m; sourceTree = "<group>"; };
-		AEA24A711D5B23F600DD7939 /* XLiuxueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLiuxueViewController.h; sourceTree = "<group>"; };
-		AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLiuxueViewController.m; sourceTree = "<group>"; };
+		AEA24A691D5B23F600DD7939 /* WYLXFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXFooterView.h; sourceTree = "<group>"; };
+		AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXFooterView.m; sourceTree = "<group>"; };
+		AEA24A6B1D5B23F600DD7939 /* WYLXHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXHeaderView.h; sourceTree = "<group>"; };
+		AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXHeaderView.m; sourceTree = "<group>"; };
+		AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXSuccessView.h; sourceTree = "<group>"; };
+		AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXSuccessView.m; sourceTree = "<group>"; };
+		AEA24A6F1D5B23F600DD7939 /* WYLXCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXCell.h; sourceTree = "<group>"; };
+		AEA24A701D5B23F600DD7939 /* WYLXCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXCell.m; sourceTree = "<group>"; };
+		AEA24A711D5B23F600DD7939 /* WYLXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXViewController.h; sourceTree = "<group>"; };
+		AEA24A721D5B23F600DD7939 /* WYLXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXViewController.m; sourceTree = "<group>"; };
 		AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiaobaiViewController.h; sourceTree = "<group>"; };
 		AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiaobaiViewController.m; sourceTree = "<group>"; };
 		AEA24A7B1D5B23F600DD7939 /* GongLueListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListCell.h; sourceTree = "<group>"; };
@@ -2311,18 +2311,9 @@
 		AEA24A661D5B23F600DD7939 /* woyaoliuxue */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A671D5B23F600DD7939 /* XliusectionView.h */,
-				AEA24A681D5B23F600DD7939 /* XliusectionView.m */,
-				AEA24A691D5B23F600DD7939 /* XliuxueFooterView.h */,
-				AEA24A6A1D5B23F600DD7939 /* XliuxueFooterView.m */,
-				AEA24A6B1D5B23F600DD7939 /* XliuxueHeaderView.h */,
-				AEA24A6C1D5B23F600DD7939 /* XliuxueHeaderView.m */,
-				AEA24A6D1D5B23F600DD7939 /* XliuxueSuccessView.h */,
-				AEA24A6E1D5B23F600DD7939 /* XliuxueSuccessView.m */,
-				AEA24A6F1D5B23F600DD7939 /* XliuxueTableViewCell.h */,
-				AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */,
-				AEA24A711D5B23F600DD7939 /* XLiuxueViewController.h */,
-				AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */,
+				AEF334131D925EFD003C3C68 /* C */,
+				AEF334121D925EFB003C3C68 /* V */,
+				AEF334111D925EF5003C3C68 /* M */,
 			);
 			path = woyaoliuxue;
 			sourceTree = "<group>";
@@ -3017,6 +3008,39 @@
 			path = SinaSSO;
 			sourceTree = "<group>";
 		};
+		AEF334111D925EF5003C3C68 /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		AEF334121D925EFB003C3C68 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AEA24A671D5B23F600DD7939 /* XliusectionView.h */,
+				AEA24A681D5B23F600DD7939 /* XliusectionView.m */,
+				AEA24A691D5B23F600DD7939 /* WYLXFooterView.h */,
+				AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */,
+				AEA24A6B1D5B23F600DD7939 /* WYLXHeaderView.h */,
+				AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */,
+				AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */,
+				AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */,
+				AEA24A6F1D5B23F600DD7939 /* WYLXCell.h */,
+				AEA24A701D5B23F600DD7939 /* WYLXCell.m */,
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
+		AEF334131D925EFD003C3C68 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AEA24A711D5B23F600DD7939 /* WYLXViewController.h */,
+				AEA24A721D5B23F600DD7939 /* WYLXViewController.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
 		AEF420E31BD4988B00CFB45E /* UMSocial_Sdk_4.2.5 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3367,7 +3391,7 @@
 				AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */,
 				AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */,
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
-				AEA24A9B1D5B23F600DD7939 /* XLiuxueViewController.m in Sources */,
+				AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */,
 				AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
@@ -3433,7 +3457,7 @@
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
-				AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */,
+				AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24BC01D5B264300DD7939 /* MessageDetailFrame.m in Sources */,
 				AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */,
@@ -3463,7 +3487,7 @@
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
-				AEA24A981D5B23F600DD7939 /* XliuxueHeaderView.m in Sources */,
+				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AEA24B021D5B24D200DD7939 /* ChangeLanguageViewController.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
 				AE1FD74D1D5C929500FFD5A8 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -3537,8 +3561,8 @@
 				AEA24B071D5B24D200DD7939 /* FeedbackViewController.m in Sources */,
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
 				AEA24B7A1D5B25E000DD7939 /* XNewSearchViewController.m in Sources */,
-				AEA24A991D5B23F600DD7939 /* XliuxueSuccessView.m in Sources */,
-				AEA24A971D5B23F600DD7939 /* XliuxueFooterView.m in Sources */,
+				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
+				AEA24A971D5B23F600DD7939 /* WYLXFooterView.m in Sources */,
 				AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */,
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,

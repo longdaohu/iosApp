@@ -249,7 +249,7 @@
  
     [self.view endEditing:YES];
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         CGRect  frame =self.PhoneView.frame;
         

@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XliuxueHeaderView : UIView
+@interface WYLXHeaderView : UIView
 @property(nonatomic,copy)NSString *title;
-@property(nonatomic,assign)CGFloat Height;
-
-+(instancetype)headView;
++(instancetype)headViewWithFrame:(CGRect)frame;
 @end

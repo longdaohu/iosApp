@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XliuxueSuccessView.h"
+#import "WYLXSuccessView.h"
 
-@interface XliuxueSuccessView ()
+@interface WYLXSuccessView ()
 //背景View
 @property(nonatomic,strong)UIView  *bgView;
 //图片
@@ -25,11 +25,15 @@
 @end
 
 
-@implementation XliuxueSuccessView
+@implementation WYLXSuccessView
 
-+(instancetype)successView
++(instancetype)successViewWithBlock:(successBlock)actionBlock
 {
-    return [[XliuxueSuccessView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
+    WYLXSuccessView  *SuccessView = [[WYLXSuccessView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
+    
+    SuccessView.actionBlock = actionBlock;
+    
+    return SuccessView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -56,11 +60,11 @@
         self.gouView.image =[UIImage imageNamed:@"gou_white"];
         [self.bgView addSubview:self.gouView];
         
-        self.succeseLab =[UILabel labelWithFontsize:20.0f  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+        self.succeseLab =[UILabel labelWithFontsize:XPERCENT * 18  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         self.succeseLab.text = GDLocalizedString(@"WoYaoLiuXue_submit");
         [self.bgView addSubview:self.succeseLab];
         
-        self.alerLab =[UILabel labelWithFontsize:16.0f  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+        self.alerLab =[UILabel labelWithFontsize:XPERCENT * 14  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         self.alerLab.numberOfLines = 0;
         self.alerLab.text =  GDLocalizedString(@"WoYaoLiuXue_aler");
         [self.bgView addSubview:self.alerLab];
@@ -69,7 +73,7 @@
         self.OKButton =[[UIButton alloc] init];
         [self.OKButton setTitle:GDLocalizedString(@"WoYaoLiuXue_home") forState:UIControlStateNormal];
         [self.OKButton setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-        self.OKButton.layer.cornerRadius = 2;
+        self.OKButton.layer.cornerRadius = CORNER_RADIUS;
         self.OKButton.layer.borderWidth = 1;
         self.OKButton.layer.borderColor = XCOLOR_WHITE.CGColor;
         [self addSubview:self.OKButton];
@@ -97,36 +101,34 @@
     self.gradientLayer.frame = self.frame;
     
     
+    CGSize contentSize = self.bounds.size;
+    
     CGFloat bgX = 0;
-    CGFloat bgY = XScreenHeight * 0.2 ;
-    CGFloat bgW = XScreenWidth;
-    CGFloat bgH = XScreenHeight  * 0.4;
+    CGFloat bgY = contentSize.height * 0.2 ;
+    CGFloat bgW = contentSize.width;
+    CGFloat bgH = contentSize.height * 0.4;
     self.bgView.frame =CGRectMake(bgX, bgY, bgW, bgH);
     
     
     CGFloat gouY = 0;
-    CGFloat gouW = 100;
-    CGFloat gouH = 100;
-    CGFloat gouX = 0.5 * (XScreenWidth - gouW);
+    CGFloat gouH = XPERCENT * 80;
+    CGFloat gouW = gouH;
+    CGFloat gouX = 0.5 * (contentSize.width - gouW);
     self.gouView.frame =CGRectMake(gouX, gouY, gouW, gouH);
     
     
     CGFloat successX = 0;
     CGFloat successY = CGRectGetMaxY(self.gouView.frame) + ITEM_MARGIN;
-    CGFloat successW = XScreenWidth;
-    CGFloat successH = 30;
+    CGFloat successW = contentSize.width;
+    CGFloat successH = XPERCENT * 18;
     self.succeseLab.frame =CGRectMake(successX, successY, successW, successH);
     
     CGFloat alerX = ITEM_MARGIN;
-    CGFloat alerY = CGRectGetMaxY(self.succeseLab.frame);
-    CGFloat alerW = XScreenWidth - 2 * ITEM_MARGIN;
+    CGFloat alerY = CGRectGetMaxY(self.succeseLab.frame) + ITEM_MARGIN;
+    CGFloat alerW = contentSize.width - 2 * ITEM_MARGIN;
     CGFloat  alerH = 0;
     if (self.alerLab.text) {
-        
-        CGSize LabSize = [self.alerLab.text boundingRectWithSize:CGSizeMake(alerW, 999)
-                                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                                      attributes:@{NSFontAttributeName:FontWithSize(16)}
-                                                         context:NULL].size;
+        CGSize LabSize = [self.alerLab.text KD_sizeWithAttributeFont:XFONT(XPERCENT * 14) maxWidth:alerW];
         alerH = LabSize.height;
     }
     
@@ -134,10 +136,10 @@
     
     
     
-    CGFloat okH = 40;
+    CGFloat okH = 40 * XPERCENT;
     CGFloat okX = 20;
-    CGFloat okW = XScreenWidth - 2 * okX;
-    CGFloat okY = XScreenHeight * 0.8;
+    CGFloat okW = contentSize.width - 2 * okX;
+    CGFloat okY = contentSize.height * 0.8;
     self.OKButton.frame =CGRectMake(okX, okY, okW, okH);
     
 }

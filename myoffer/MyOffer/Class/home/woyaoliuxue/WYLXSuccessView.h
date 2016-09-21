@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^successBlock)();
-@interface XliuxueSuccessView : UIView
+@interface WYLXSuccessView : UIView
 @property(nonatomic,copy)successBlock actionBlock;
-+(instancetype)successView;
++(instancetype)successViewWithBlock:(successBlock)actionBlock;
 @end

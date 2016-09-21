@@ -6,9 +6,9 @@
 //  Copyright © 2016年 小米. All rights reserved.
 //
 
-#import "XliuxueFooterView.h"
+#import "WYLXFooterView.h"
 
-@interface XliuxueFooterView ()
+@interface WYLXFooterView ()
 //我要留学
 @property(nonatomic,strong)UIButton *submitBtn;
 //智能匹配
@@ -18,12 +18,14 @@
 
 @end
 
-@implementation XliuxueFooterView
-
-+(instancetype)footerView
+@implementation WYLXFooterView
++(instancetype)footerViewWithBlock:(WYLXfooterBlock)actionBlock
 {
- 
-    return [[XliuxueFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 240)];
+     WYLXFooterView  *footer = [[WYLXFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 240)];
+    
+    footer.actionBlock = actionBlock;
+    
+    return footer;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -31,13 +33,16 @@
     self = [super initWithFrame:frame];
     if (self) {
     
-        self.submitBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Request") andTag:1 andBackgroudColor:XCOLOR_RED andTextColor:XCOLOR_WHITE];
-        self.pipeiBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Match")  andTag:2 andBackgroudColor:XCOLOR_WHITE andTextColor:XCOLOR_RED];
+        self.submitBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Request") andTag:FooterButtonTypeLiuxue andBackgroudColor:XCOLOR_RED andTextColor:XCOLOR_WHITE];
+        self.pipeiBtn= [self makeButtonWithTitle:GDLocalizedString(@"WoYaoLiuXue_Match")  andTag:FooterButtonTypePipei andBackgroudColor:XCOLOR_WHITE andTextColor:XCOLOR_RED];
         self.pipeiBtn.backgroundColor = XCOLOR_WHITE;
       
-        self.pipeiLab =[self makeLabelWithTextFontSize:FONTSIZE(15)];
-        self.pipeiLab.text = GDLocalizedString(@"WoYaoLiuXue_tryInTel");
         
+        self.pipeiLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.pipeiLab.adjustsFontSizeToFitWidth = YES;
+        self.pipeiLab.text = GDLocalizedString(@"WoYaoLiuXue_tryInTel");
+        [self addSubview:self.pipeiLab];
+
     }
     return self;
 }
@@ -54,27 +59,23 @@
     sender.tag = type;
      sender.layer.cornerRadius = 5;
     sender.layer.borderWidth = 1;
-    [sender addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+    [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:sender];
     return sender;
 }
 
 
--(UILabel *)makeLabelWithTextFontSize:(CGFloat)size{
-    
-     UILabel *Lab = [UILabel labelWithFontsize:size TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
-     Lab.adjustsFontSizeToFitWidth = YES;
-     [self addSubview:Lab];
-    
-    return Lab;
-}
 
--(void)click:(UIButton *)sender
+
+-(void)onClick:(UIButton *)sender
 {
-     if ([self.delegate respondsToSelector:@selector(liuxueFooterView:didClick:)]) {
-         FooterButtonType type = (sender.tag == 2) ? FooterButtonTypePipei : FooterButtonTypeLiuxue;
-        [self.delegate liuxueFooterView:self didClick:type];
+    
+    if (self.actionBlock) {
+        
+        self.actionBlock(sender);
     }
+    
+    
 }
 
 -(void)layoutSubviews
@@ -82,14 +83,14 @@
     [super layoutSubviews];
     
     CGFloat submitX  = 20;
-    CGFloat submitY  = 30;
+    CGFloat submitY  = 20 * XPERCENT;
     CGFloat submitW  = XScreenWidth - submitX * 2;
     CGFloat submitH  = 40;
     self.submitBtn.frame = CGRectMake(submitX, submitY, submitW, submitH);
     
     
     CGFloat plX  = submitX;
-    CGFloat plY  = CGRectGetMaxY(self.submitBtn.frame) + 30;
+    CGFloat plY  = CGRectGetMaxY(self.submitBtn.frame) + submitY;
     CGFloat plW  = submitW;
     CGFloat plH  = 20;
     self.pipeiLab.frame = CGRectMake(plX, plY, plW, plH);

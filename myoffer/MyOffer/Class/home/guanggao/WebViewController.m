@@ -7,7 +7,7 @@
 //
 
 #import "WebViewController.h"
-#import "XLiuxueViewController.h"
+#import "WYLXViewController.h"
 #import "InteProfileViewController.h"
 #import "NewSearchResultViewController.h"
 #import "ServiceMallViewController.h"
@@ -362,7 +362,7 @@
 
 //我要留学
 -(void)caseWoyaoluxue{
-    [self.navigationController pushViewController:[[XLiuxueViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
 }
 //购买服务
 -(void)casePay{

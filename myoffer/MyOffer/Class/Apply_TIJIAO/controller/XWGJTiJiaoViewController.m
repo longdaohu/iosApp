@@ -1117,7 +1117,7 @@ typedef enum {
 //申请成功提示页
 -(void)updateView{
 
-     [UIView animateWithDuration:0.25 animations:^{
+     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
          self.upgateVC.view.top = 0;
     }];
     

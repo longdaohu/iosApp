@@ -16,6 +16,6 @@ typedef void(^UniversityNavViewBlock)(UIButton *sender);
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
 - (void)scrollViewContentoffset:(CGFloat)offsetY;
-- (void)scrollViewContentoffsetTest:(CGFloat)offsetY andHeight:(CGFloat)contentHeight;
+- (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight;
 
 @end

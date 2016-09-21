@@ -226,10 +226,9 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    //    CGFloat  alpha_nav =  scrollView.contentOffset.y / self.headerView.bounds.size.height;
     
     //1 顶部自定义导航栏
-    [self.topNavigationView   scrollViewContentoffsetTest:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - 64];
+    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - NAV_HEIGHT];
     
     //2 自定义tableHeaderView
     self.headerView.contentOffsetY =  scrollView.contentOffset.y;
@@ -249,7 +248,7 @@
         
     }else{
         
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             self.FlexibleImageView.frame = self.oldFlexibleViewRect;
         }];
         

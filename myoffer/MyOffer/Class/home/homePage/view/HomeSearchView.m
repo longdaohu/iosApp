@@ -106,7 +106,7 @@
     self.LeftBtn.hidden  = animated;
     self.RightBtn.hidden = !animated;
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         self.width = animated ? (XScreenWidth - 40) : 44;
         

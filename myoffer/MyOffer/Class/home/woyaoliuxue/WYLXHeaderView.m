@@ -6,9 +6,9 @@
 //  Copyright © 2016年 小米. All rights reserved.
 //
 
-#import "XliuxueHeaderView.h"
+#import "WYLXHeaderView.h"
 
-@interface XliuxueHeaderView ()
+@interface WYLXHeaderView ()
 //图片
 @property(nonatomic,strong)UIImageView *iconView;
 //标题
@@ -16,19 +16,22 @@
 @property(nonatomic,strong)UITextView *titleView;
 @end
 
-@implementation XliuxueHeaderView
+@implementation WYLXHeaderView
 
-+(instancetype)headView
++ (instancetype)headViewWithFrame:(CGRect)frame
 {
    
-    return [[self alloc] init];
+    WYLXHeaderView *header = [[WYLXHeaderView  alloc] initWithFrame:frame];
+    
+    return header;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-         self.iconView =[[UIImageView alloc] init];
+        
+        self.iconView =[[UIImageView alloc] init];
         self.iconView.clipsToBounds = YES;
         self.iconView.contentMode = UIViewContentModeScaleAspectFill;
         self.iconView.image = [UIImage imageNamed:@"woYaoLiuXue.jpg"];
@@ -39,11 +42,11 @@
         titleView.scrollEnabled = NO;
         titleView.editable = NO;
         titleView.textColor =XCOLOR_RED;
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font =FontWithSize(FONTSIZE(15));
+        titleView.font = XFONT(XPERCENT * 13);
         titleView.textAlignment = NSTextAlignmentLeft;
-        titleView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        titleView.textContainerInset = UIEdgeInsetsMake(0, -5, 0, -5);
         titleView.dataDetectorTypes = UIDataDetectorTypeAll;
+        titleView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         [self addSubview:titleView];
         self.titleView = titleView;
         
@@ -58,32 +61,30 @@
     
     self.titleLab.text = title;
     
+    
+    CGSize contentSize = self.bounds.size;
+    
+    
     CGFloat iconx = 0;
     CGFloat icony = 0;
-    CGFloat iconw = XScreenWidth;
+    CGFloat iconw = contentSize.width;
     CGFloat iconh = 130 + (iconw - 320) * 0.2;
     self.iconView.frame = CGRectMake(iconx,icony,iconw,iconh);
 
     
     CGFloat titlex = ITEM_MARGIN;
     CGFloat titley = CGRectGetMaxY(self.iconView.frame) + ITEM_MARGIN;
-    CGFloat titlew = XScreenWidth - 2*titlex;
-    CGFloat titleHeight = [self stringHightWithTitle:title andFontSize:FONTSIZE(15)];
-    
+    CGFloat titlew = contentSize.width - 2 * titlex;
+    CGFloat titleHeight = [title  KD_sizeWithAttributeFont:XFONT(XPERCENT * 13) maxWidth:titlew].height;
     self.titleView.text = title;
     self.titleView.frame = CGRectMake(titlex, titley, titlew, titleHeight);
-    self.Height = CGRectGetMaxY(self.titleView.frame) + ITEM_MARGIN;
+    
+    
+    self.height = CGRectGetMaxY(self.titleView.frame) + ITEM_MARGIN;
     
  }
 
 
-
--(CGFloat )stringHightWithTitle:(NSString *)string andFontSize:(CGFloat)size
-{
-    CGFloat width = XScreenWidth - 20;
-    CGRect frame = [string boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil];
-    return frame.size.height;
-}
 
 
 

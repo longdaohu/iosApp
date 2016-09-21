@@ -6,14 +6,14 @@
 //  Copyright © 2016年 小米. All rights reserved.
 //
 
-#import "XLiuxueViewController.h"
-#import "XliuxueHeaderView.h"
-#import "XliuxueTableViewCell.h"
-#import "XliuxueFooterView.h"
+#import "WYLXViewController.h"
+#import "WYLXHeaderView.h"
+#import "WYLXCell.h"
+#import "WYLXFooterView.h"
 #import "XliusectionView.h"
 #import "InteProfileViewController.h"
 #import "YourPhoneView.h"
-#import "XliuxueSuccessView.h"
+#import "WYLXSuccessView.h"
 
 #define Failure @"fail"
 typedef enum {
@@ -30,7 +30,8 @@ typedef enum {
 }LiuxuePageClickItemType;
 
 
-@interface XLiuxueViewController ()<UITableViewDataSource,UITableViewDelegate,XliuxueTableViewCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XliuxueFooterViewDelegate,YourPhoneViewDelegate>
+@interface WYLXViewController ()<UITableViewDataSource,UITableViewDelegate,WYLXCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate,YourPhoneViewDelegate>
+
 @property(nonatomic,strong)UITableView *tableView;
 //分区title数组
 @property(nonatomic,strong)NSArray *sectionTitles;
@@ -57,7 +58,7 @@ typedef enum {
 //专业picker
 @property(nonatomic,strong)UIPickerView *subjectPicker;
 //正在编辑的cell
-@property(nonatomic,strong)XliuxueTableViewCell *editingCell;
+@property(nonatomic,strong)WYLXCell *editingCell;
 //填写手机号编辑框
 @property(nonatomic,strong)YourPhoneView *PhoneView;
 //遮盖
@@ -69,14 +70,14 @@ typedef enum {
 //国家区号数组
 @property(nonatomic,strong)NSArray *AreaCodes;
 //提示框
-@property(nonatomic,strong)XliuxueSuccessView *sucessView;
+@property(nonatomic,strong)WYLXSuccessView *sucessView;
 //用于标识提交留学按钮是还被点击
 @property(nonatomic,assign)LiuxuePageClickItemType clickType;
 
 @end
 
 
-@implementation XLiuxueViewController
+@implementation WYLXViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -188,17 +189,17 @@ typedef enum {
     return _sectionTitles;
 }
 
--(XliuxueSuccessView *)sucessView
+-(WYLXSuccessView *)sucessView
 {
     if (!_sucessView) {
         
         XJHUtilDefineWeakSelfRef
-        _sucessView = [XliuxueSuccessView successView];
-        _sucessView.actionBlock = ^{
+        _sucessView = [WYLXSuccessView successViewWithBlock:^{
             
-              [weakSelf.navigationController popViewControllerAnimated:YES];
-            
-        };
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+
+        }];
+ 
          [self.view addSubview:_sucessView];
     }
     return _sucessView;
@@ -320,25 +321,33 @@ typedef enum {
 
 -(void)makeFooterView
 {
-    XliuxueFooterView *footerView =[XliuxueFooterView footerView];
-    footerView.delegate = self;
-    self.tableView.tableFooterView = footerView;
+    
+    XJHUtilDefineWeakSelfRef
+    WYLXFooterView *footerView = [WYLXFooterView footerViewWithBlock:^(UIButton *sender) {
+        
+        [weakSelf liuxueFooterViewDidClick:sender];
+ 
+    }];
+     self.tableView.tableFooterView = footerView;
 
 }
 
 -(void)makeHeaderView
 {
-    XliuxueHeaderView *headerView =[XliuxueHeaderView headView];
+   
+    WYLXHeaderView *headerView =[WYLXHeaderView headViewWithFrame:CGRectMake(0, 0,XScreenWidth,0)];
     headerView.title = GDLocalizedString(@"WoYaoLiuXue_FillInfor");
-    headerView.frame = CGRectMake(0, 0,XScreenWidth,headerView.Height);
-    self.tableView.tableHeaderView = headerView;
     
+    [self.tableView beginUpdates];
+    self.tableView.tableHeaderView = headerView;
+    [self.tableView endUpdates];
+
 }
 
 #pragma mark —————— UITableViewDataSource,UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 30;
+    return 20 * XPERCENT;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -363,7 +372,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    XliuxueTableViewCell *cell =[XliuxueTableViewCell cellWithTableView:tableView];
+    WYLXCell *cell =[WYLXCell cellWithTableView:tableView];
     cell.indexPath = indexPath;
     cell.delegate = self;
     switch (indexPath.section) {
@@ -425,7 +434,10 @@ typedef enum {
 //提交成功提示框
 -(void)sucessViewUp
 {
-    [UIView animateWithDuration:0.25 animations:^{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         self.sucessView.top = 0;
 
@@ -434,18 +446,23 @@ typedef enum {
 }
 
 
-#pragma mark —————————— XliuxueFooterViewDelegate
--(void)liuxueFooterView:(XliuxueFooterView *)footerView didClick:(FooterButtonType)type{
- 
-    
-    switch (type) {
+#pragma mark —————————— XliuxueFooterBlock
+-(void)liuxueFooterViewDidClick:(UIButton *)sender{
+   
+    switch (sender.tag) {
+            
         case FooterButtonTypePipei:
+            
             [self PageClickWithItemType:LiuxuePageClickItemTypePipei];
+            
             break;
         case FooterButtonTypeLiuxue:
+            
             [self PageClickWithItemType:LiuxuePageClickItemTypeWoyaoliuxue];
+            
             break;
         default:
+            
             break;
     }
  
@@ -453,7 +470,7 @@ typedef enum {
 
 
 #pragma mark —————————— XliuxueTableViewCellDelegate
--(void)XliuxueTableViewCell:(XliuxueTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath   textFieldDidBeginEditing:(UITextField *)textField{
+-(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath   textFieldDidBeginEditing:(UITextField *)textField{
 
     self.editingCell = cell;
     
@@ -484,7 +501,7 @@ typedef enum {
     }
     
 }
--(void)XliuxueTableViewCell:(XliuxueTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath didClick:(UIBarButtonItem *)sender
+-(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath didClick:(UIBarButtonItem *)sender
 {
     
     NSInteger newSection = indexPath.section + 1;
@@ -498,10 +515,11 @@ typedef enum {
     }
     
         NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:indexPath.row inSection:newSection];
-        XliuxueTableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
+        WYLXCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
         [nextCell.titleTF becomeFirstResponder];
     
 }
+
 
 #pragma mark ---- YourPhoneViewDelegate
 -(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
@@ -576,7 +594,7 @@ typedef enum {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    XliuxueTableViewCell *Editingcell = ( XliuxueTableViewCell *)self.editingCell;
+    WYLXCell *Editingcell = ( WYLXCell *)self.editingCell;
     
     switch (pickerView.tag) {
         case PickerViewTypeCountry:{
@@ -614,6 +632,7 @@ typedef enum {
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
 
@@ -658,7 +677,6 @@ typedef enum {
     
     }
     
-
     
     [self.view layoutSubviews];
     
@@ -675,12 +693,18 @@ typedef enum {
     RequireLogin
     
     switch (type) {
+            
         case  LiuxuePageClickItemTypePipei:
+            
             [self casePipei];
+            
             break;
         case  LiuxuePageClickItemTypeWoyaoliuxue:
+            
             [self caseWoyaoliuxue];
+            
             break;
+            
         default:
             break;
     }
@@ -735,7 +759,8 @@ typedef enum {
 // 提交我要留学申请
 -(void)sendLiuxueRequest
 {
-    
+ 
+    XJHUtilDefineWeakSelfRef
     NSDictionary *parameters =  @{@"fastPass": @{@"des_country": self.country, @"grade":self.grade, @"subject":self.ApplySubject, @"phonenumber":self.phoneNumber}};
     
     [self
@@ -743,9 +768,7 @@ typedef enum {
      parameters:parameters
      success:^(NSInteger statusCode, id response) {
          
-         [self sucessViewUp];
-         
-         [self.navigationController setNavigationBarHidden:YES animated:YES];
+         [weakSelf sucessViewUp];
          
      }];
     
@@ -841,7 +864,8 @@ typedef enum {
                               success:^(NSInteger statusCode, id response) {
                                   
                                   [self PhoneViewHiden:YES];
-                                  self.phoneNumber = self.PhoneView.PhoneTF.text;
+                                  
+                                   self.phoneNumber = self.PhoneView.PhoneTF.text;
                                   
                               }];
     
@@ -853,7 +877,7 @@ typedef enum {
     
     [self.view endEditing:YES];
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         CGRect  frame =self.PhoneView.frame;
         
@@ -876,6 +900,6 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    KDClassLog(@"XLiuxueViewController  dealloc");
+    KDClassLog(@"我要留学  dealloc");
 }
 @end

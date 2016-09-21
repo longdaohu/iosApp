@@ -1348,7 +1348,7 @@ typedef enum {
         self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
         self.cover.alpha = 0.5;
       
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             CGRect newRect = self.RankTypeTableView.frame;
             newRect.origin.y = 0;

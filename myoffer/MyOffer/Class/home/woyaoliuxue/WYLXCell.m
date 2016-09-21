@@ -6,25 +6,25 @@
 //  Copyright © 2016年 小米. All rights reserved.
 //
 
-#import "XliuxueTableViewCell.h"
+#import "WYLXCell.h"
 #import "XWGJKeyboardToolar.h"
 
-@interface XliuxueTableViewCell ()<UITextFieldDelegate,KeyboardToolarDelegate>
+@interface WYLXCell ()<UITextFieldDelegate,KeyboardToolarDelegate>
 @property(nonatomic,strong)XWGJKeyboardToolar *tooler;
 
 @end
 
 
 
-@implementation XliuxueTableViewCell
+@implementation WYLXCell
 
 static NSString  *identity = @"liuxue";
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
-    XliuxueTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
+    WYLXCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     if (!cell) {
         
-         cell =[[XliuxueTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity];
+         cell =[[WYLXCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -51,7 +51,9 @@ static NSString  *identity = @"liuxue";
 {
     if (!_tooler) {
         _tooler =
+        
         [[NSBundle mainBundle] loadNibNamed:@"XWGJKeyboardToolar" owner:self options:nil].lastObject;
+        
         _tooler.delegate = self;
 
     }

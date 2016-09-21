@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XLiuxueViewController : BaseViewController
+@interface WYLXViewController : BaseViewController
 
 @end

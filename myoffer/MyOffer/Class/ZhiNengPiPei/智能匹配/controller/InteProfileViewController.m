@@ -986,7 +986,15 @@ typedef enum {
     [self.navigationController pushViewController:search animated:YES];
 }
 
-KDUtilRemoveNotificationCenterObserverDealloc
+//- (void)dealloc{
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    KDClassLog(@"智能匹配 dealloc");
+// }
+    KDUtilRemoveNotificationCenterObserverDealloc
+
+
+
 
 
 @end

@@ -20,13 +20,14 @@
 #define UNIVERSITY_LOCALHIGH  18.0
 #define UNIVERSITY_RANKHIGH  20.0
 #define SUB_LOCAL_MAGIN  8.0
+#define CORNER_RADIUS  5.0
 #define LOGO_HIGH  70.0
 #define LOGO_MARGIN  15.0
 #define TOP_HIGHT  34.0
 #define ITEM_MARGIN   10.0
 #define PADDING_TABLEGROUP 10.0
 #define HEIGHT_ZERO 0.0001
-#define ANIMATIONDUATION 0.25
+#define ANIMATION_DUATION 0.25
 #define   XPERCENT          XScreenWidth/320
 #define   XMARGIN           XPERCENT * 8
 #define   XFONT(size)        [UIFont systemFontOfSize:size]

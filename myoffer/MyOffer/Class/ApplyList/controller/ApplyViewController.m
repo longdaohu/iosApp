@@ -697,7 +697,7 @@
 {
     float distance = up ? 50.0 : -50.0;
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
         CGPoint center = self.cancelBottomButton.center;
         center.y += distance;
