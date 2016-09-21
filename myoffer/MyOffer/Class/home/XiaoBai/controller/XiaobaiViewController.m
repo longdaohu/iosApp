@@ -13,7 +13,7 @@
 #import "GongLueTableViewCell.h"
 #import "XiaobaiViewController.h"
 #import "XWGJSubjectCollectionViewCell.h"
-#import "GonglueListViewController.h"
+#import "GongLueViewController.h"
 #import "XWGJNODATASHOWView.h"
 
 
@@ -330,7 +330,7 @@ static NSString *subjectIdentify = @"subjectCell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-     GonglueListViewController  *list = [[GonglueListViewController alloc] init];
+     GongLueViewController  *list = [[GongLueViewController alloc] init];
     
      list.gonglue                     =  self.gonglueItems[indexPath.row];
     

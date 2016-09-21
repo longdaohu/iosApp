@@ -262,7 +262,6 @@
 		AEA24A991D5B23F600DD7939 /* XliuxueSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* XliuxueSuccessView.m */; };
 		AEA24A9A1D5B23F600DD7939 /* XliuxueTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */; };
 		AEA24A9B1D5B23F600DD7939 /* XLiuxueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */; };
-		AEA24A9C1D5B23F600DD7939 /* GonglueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */; };
 		AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */; };
 		AEA24A9F1D5B23F600DD7939 /* GongLueListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7C1D5B23F600DD7939 /* GongLueListCell.m */; };
 		AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7E1D5B23F600DD7939 /* GongLueListHeaderView.m */; };
@@ -403,6 +402,7 @@
 		AEF1FACC1BE38DD000F48E8B /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1FABE1BE38DD000F48E8B /* libWeiboSDK.a */; };
 		AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF1FAC81BE38DD000F48E8B /* WeiboSDK.bundle */; };
 		AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */; };
+		AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3340F1D925A44003C3C68 /* GongLueViewController.m */; };
 		AEF420FE1BD4988B00CFB45E /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF420E41BD4988B00CFB45E /* UMSocialLocalizable.strings */; };
 		AEF420FF1BD4988B00CFB45E /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF420F21BD4988B00CFB45E /* libUMSocial_Sdk_4.2.5.a */; };
 		AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF420F41BD4988B00CFB45E /* UMSCommentDetailController.xib */; };
@@ -872,8 +872,6 @@
 		AEA24A701D5B23F600DD7939 /* XliuxueTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XliuxueTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A711D5B23F600DD7939 /* XLiuxueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLiuxueViewController.h; sourceTree = "<group>"; };
 		AEA24A721D5B23F600DD7939 /* XLiuxueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLiuxueViewController.m; sourceTree = "<group>"; };
-		AEA24A751D5B23F600DD7939 /* GonglueListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueListViewController.h; sourceTree = "<group>"; };
-		AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueListViewController.m; sourceTree = "<group>"; };
 		AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiaobaiViewController.h; sourceTree = "<group>"; };
 		AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XiaobaiViewController.m; sourceTree = "<group>"; };
 		AEA24A7B1D5B23F600DD7939 /* GongLueListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueListCell.h; sourceTree = "<group>"; };
@@ -1119,6 +1117,8 @@
 		AEF1FAC91BE38DD000F48E8B /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		AEF1FACA1BE38DD000F48E8B /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		AEF3340E1D925A44003C3C68 /* GongLueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueViewController.h; sourceTree = "<group>"; };
+		AEF3340F1D925A44003C3C68 /* GongLueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueViewController.m; sourceTree = "<group>"; };
 		AEF420E71BD4988B00CFB45E /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		AEF420E81BD4988B00CFB45E /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
 		AEF420E91BD4988B00CFB45E /* UMSocialBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialBar.h; sourceTree = "<group>"; };
@@ -2339,8 +2339,8 @@
 		AEA24A741D5B23F600DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A751D5B23F600DD7939 /* GonglueListViewController.h */,
-				AEA24A761D5B23F600DD7939 /* GonglueListViewController.m */,
+				AEF3340E1D925A44003C3C68 /* GongLueViewController.h */,
+				AEF3340F1D925A44003C3C68 /* GongLueViewController.m */,
 				AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */,
 				AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */,
 			);
@@ -3417,7 +3417,6 @@
 				AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
 				AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */,
-				AEA24A9C1D5B23F600DD7939 /* GonglueListViewController.m in Sources */,
 				AEA24A911D5B23F600DD7939 /* HomeSecondTableViewCell.m in Sources */,
 				AE1D011E1D2FCD2D005E2DEF /* YYAutoLoopView.m in Sources */,
 				AEA24B7B1D5B25E000DD7939 /* CountryState.m in Sources */,
@@ -3553,6 +3552,7 @@
 				AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */,
 				AEA249271D5B207700DD7939 /* ApplyMatialViewController.m in Sources */,
 				AE1FD7501D5C929500FFD5A8 /* MJRefreshBackNormalFooter.m in Sources */,
+				AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
 				AE1FD68D1D5C852500FFD5A8 /* NewsItem.m in Sources */,
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,

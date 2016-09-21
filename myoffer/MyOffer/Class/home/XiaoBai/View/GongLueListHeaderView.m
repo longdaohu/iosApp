@@ -12,9 +12,9 @@
 @property(nonatomic,strong)UIView *bgView;
 //小MO头像
 @property(nonatomic,strong)UIImageView *moLogo;
-
+//标题
 @property(nonatomic,strong)UILabel *titleLab;
-//描述Lab
+//简介Lab
 @property(nonatomic,strong)UILabel *subTitleLab;
 //titleLab原始Frame
 @property(nonatomic,assign)CGRect headerTitleLabFrame;
@@ -118,7 +118,6 @@
     self.headerTitleLab.frame = CGRectMake(headerTitleX, headerTitleY, headerTitleW, headerTitleH);
     self.headerTitleLabFrame = self.headerTitleLab.frame;
     
-    
     CGFloat bgX =   0;
     CGFloat bgY =   moBgViewY + CGRectGetMaxY(self.moLogo.frame);
     CGFloat bgW =   XScreenWidth;
@@ -134,11 +133,10 @@
     _contentOffsetY = contentOffsetY;
     
  
+    
     if (contentOffsetY <= 0) {
-        
  
             self.headerTitleLab.frame = self.headerTitleLabFrame;
-        
         
     }else{
     
