@@ -17,7 +17,6 @@
  
 @interface WYLXCell : UITableViewCell 
 @property(nonatomic,strong)XTextField  *titleTF;
-@property(nonatomic,strong)NSIndexPath *indexPath;
 @property(nonatomic,weak)id<WYLXCellDelegate> delegate;
-+(instancetype)cellWithTableView:(UITableView *)tableView;
++(instancetype)cellWithTableView:(UITableView *)tableView cellForIndexPath:(NSIndexPath *)indexPath;
 @end

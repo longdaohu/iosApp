@@ -21,7 +21,7 @@
 @implementation WYLXFooterView
 +(instancetype)footerViewWithBlock:(WYLXfooterBlock)actionBlock
 {
-     WYLXFooterView  *footer = [[WYLXFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 240)];
+     WYLXFooterView  *footer = [[WYLXFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 200)];
     
     footer.actionBlock = actionBlock;
     
@@ -100,6 +100,9 @@
     CGFloat piW  = submitW;
     CGFloat piH  = 40;
     self.pipeiBtn.frame = CGRectMake(piX, piY, piW, piH);
+    
+    
+    self.height = CGRectGetMaxY(self.pipeiBtn.frame);
     
 }
 

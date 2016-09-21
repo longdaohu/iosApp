@@ -11,6 +11,7 @@
 
 @interface WYLXCell ()<UITextFieldDelegate,KeyboardToolarDelegate>
 @property(nonatomic,strong)XWGJKeyboardToolar *tooler;
+@property(nonatomic,strong)NSIndexPath *cellIndexPath;
 
 @end
 
@@ -19,13 +20,14 @@
 @implementation WYLXCell
 
 static NSString  *identity = @"liuxue";
-+(instancetype)cellWithTableView:(UITableView *)tableView
++(instancetype)cellWithTableView:(UITableView *)tableView cellForIndexPath:(NSIndexPath *)indexPath
 {
     WYLXCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     if (!cell) {
         
          cell =[[WYLXCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity];
     }
+    cell.cellIndexPath = indexPath;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -64,7 +66,8 @@ static NSString  *identity = @"liuxue";
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
      if ([self.delegate respondsToSelector:@selector(XliuxueTableViewCell:withIndexPath:textFieldDidBeginEditing:)]) {
-         [self.delegate XliuxueTableViewCell:self withIndexPath:self.indexPath textFieldDidBeginEditing:textField];
+         
+         [self.delegate XliuxueTableViewCell:self withIndexPath:self.cellIndexPath textFieldDidBeginEditing:textField];
     }
     
 }
@@ -73,7 +76,8 @@ static NSString  *identity = @"liuxue";
 -(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
 {
     if ([self.delegate respondsToSelector:@selector(XliuxueTableViewCell:withIndexPath:didClick:)]) {
-         [self.delegate XliuxueTableViewCell:self withIndexPath:self.indexPath didClick:sender];
+        
+         [self.delegate XliuxueTableViewCell:self withIndexPath:self.cellIndexPath didClick:sender];
     }
     
 }
@@ -83,10 +87,11 @@ static NSString  *identity = @"liuxue";
 {
     [super layoutSubviews];
     
+    CGSize contentSize =  self.bounds.size;
     CGFloat titlex = ITEM_MARGIN;
     CGFloat titley = 0;
-    CGFloat titlew = XScreenWidth - 30;
-    CGFloat titleh = self.bounds.size.height;
+    CGFloat titlew = contentSize.width - 30;
+    CGFloat titleh = contentSize.height;
     self.titleTF.frame = CGRectMake(titlex, titley, titlew, titleh);
     
 }

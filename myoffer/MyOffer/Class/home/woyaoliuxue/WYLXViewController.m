@@ -211,6 +211,13 @@ typedef enum {
   
     [super viewDidLoad];
     
+    [self makeUI];
+    
+}
+
+
+- (void)makeUI{
+
     self.title = GDLocalizedString(@"WoYaoLiuXue_title");
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -222,8 +229,8 @@ typedef enum {
     [self addNotificationCenter];
     
     [self makePhoneView];
-    
 }
+
 
 -(void)makePhoneView
 {
@@ -304,22 +311,20 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.sectionFooterHeight = 5 + (XScreenWidth - 320)* 0.1;
+    self.tableView.sectionFooterHeight = 8;
     [self.view  addSubview:self.tableView];
     
-    [self makeHeaderView];
-    
-    [self makeFooterView];
+    [self makeHeaderAndFooterView];
 
 }
 
 
 
--(void)makeFooterView
+-(void)makeHeaderAndFooterView
 {
     
     XJHUtilDefineWeakSelfRef
@@ -328,21 +333,19 @@ typedef enum {
         [weakSelf liuxueFooterViewDidClick:sender];
  
     }];
-     self.tableView.tableFooterView = footerView;
-
-}
-
--(void)makeHeaderView
-{
-   
+    
+    
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithFrame:CGRectMake(0, 0,XScreenWidth,0)];
     headerView.title = GDLocalizedString(@"WoYaoLiuXue_FillInfor");
     
     [self.tableView beginUpdates];
     self.tableView.tableHeaderView = headerView;
+    self.tableView.tableFooterView = footerView;
     [self.tableView endUpdates];
+    
 
 }
+
 
 #pragma mark —————— UITableViewDataSource,UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -372,8 +375,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    WYLXCell *cell =[WYLXCell cellWithTableView:tableView];
-    cell.indexPath = indexPath;
+    WYLXCell *cell =[WYLXCell cellWithTableView:tableView cellForIndexPath:indexPath];
     cell.delegate = self;
     switch (indexPath.section) {
         case 0:
@@ -435,7 +437,6 @@ typedef enum {
 -(void)sucessViewUp
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
