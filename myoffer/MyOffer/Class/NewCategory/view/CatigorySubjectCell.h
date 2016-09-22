@@ -1,5 +1,5 @@
 //
-//  XWGJSubjectCollectionViewCell.h
+//  CatigorySubjectCell.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/2/29.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class CatigorySubject;
-@interface XWGJSubjectCollectionViewCell : UICollectionViewCell
+@interface CatigorySubjectCell : UICollectionViewCell
 @property(nonatomic,strong)CatigorySubject *subject;
 @property(nonatomic,strong)NSDictionary *helpItem;
 

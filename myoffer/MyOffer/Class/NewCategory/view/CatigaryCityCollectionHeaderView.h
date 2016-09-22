@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^headerViewBlock)(UIButton *);
-@interface XWGJCityCollectionViewHeaderView : UIView
+@interface CatigaryCityCollectionHeaderView : UIView
 @property(nonatomic,strong)UILabel *panding;
 @property(nonatomic,strong)UILabel *countryLab;
 //英国选项

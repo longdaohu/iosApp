@@ -8,9 +8,9 @@
 
 
 
-#import "XWGJSubjectCollectionViewCell.h"
+#import "CatigorySubjectCell.h"
 #import "CatigorySubject.h"
-@interface XWGJSubjectCollectionViewCell ()
+@interface CatigorySubjectCell ()
 //cell图片
 @property(nonatomic,strong)UIImageView *IconView;
 //cell标题
@@ -19,7 +19,7 @@
 @end
 
 
-@implementation XWGJSubjectCollectionViewCell
+@implementation CatigorySubjectCell
 
 - (void)awakeFromNib {
     

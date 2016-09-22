@@ -1,19 +1,19 @@
 //
-//  XWGJScrollView.m
+//  CatigaryScrollView.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/4.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJScrollView.h"
+#import "CatigaryScrollView.h"
 
-@implementation XWGJScrollView
+@implementation CatigaryScrollView
 
 
 +(instancetype)viewWithFrame:(CGRect)frame{
 
-    XWGJScrollView *scrollView = [[XWGJScrollView alloc] initWithFrame:frame];
+    CatigaryScrollView *scrollView = [[CatigaryScrollView alloc] initWithFrame:frame];
     
     scrollView.contentSize = CGSizeMake(3*XScreenWidth, XScreenHeight);
     scrollView.pagingEnabled = YES;

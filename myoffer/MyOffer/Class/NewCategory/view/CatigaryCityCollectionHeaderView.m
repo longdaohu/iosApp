@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJCityCollectionViewHeaderView.h"
+#import "CatigaryCityCollectionHeaderView.h"
 
-@implementation XWGJCityCollectionViewHeaderView
+@implementation CatigaryCityCollectionHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

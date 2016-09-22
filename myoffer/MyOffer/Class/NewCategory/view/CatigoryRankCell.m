@@ -1,15 +1,15 @@
 //
-//  XWGJRankTableViewCell.m
+//  CatigoryRankCell.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/2/29.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJRankTableViewCell.h"
+#import "CatigoryRankCell.h"
 #import "CatigoryRank.h"
 
-@interface XWGJRankTableViewCell ()
+@interface CatigoryRankCell ()
 //图片
 @property(nonatomic,strong)UIImageView *IconView;
 //蒙版
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation XWGJRankTableViewCell
+@implementation CatigoryRankCell
 
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -67,11 +67,11 @@
 {
     static NSString *Identifier = @"rank";
     
-    XWGJRankTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
+    CatigoryRankCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
     
     if (!cell) {
         
-        cell =[[XWGJRankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+        cell =[[CatigoryRankCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
         
     }
     cell.selectionStyle =  UITableViewCellSelectionStyleNone;

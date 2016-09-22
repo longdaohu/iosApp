@@ -12,7 +12,7 @@
 #import "XBTopToolView.h"
 #import "GongLueTableViewCell.h"
 #import "XiaobaiViewController.h"
-#import "XWGJSubjectCollectionViewCell.h"
+#import "CatigorySubjectCell.h"
 #import "GongLueViewController.h"
 #import "XWGJNODATASHOWView.h"
 
@@ -353,7 +353,7 @@ static NSString *subjectIdentify = @"subjectCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    XWGJSubjectCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
+    CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
 
     cell.helpItem =self.helpItems[indexPath.row];
     

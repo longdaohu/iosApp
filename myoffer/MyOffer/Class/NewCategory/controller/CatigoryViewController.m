@@ -7,11 +7,11 @@
 //
 
 #import "CatigoryViewController.h"
-#import "XWGJRankTableViewCell.h"
-#import "XWGJSubjectCollectionViewCell.h"
+#import "CatigoryRankCell.h"
+#import "CatigorySubjectCell.h"
 #import "CatigaryCityCollectionCell.h"
 #import "XWGJCityCollectionReusableView.h"
-#import "XWGJCityCollectionViewHeaderView.h"
+#import "CatigaryCityCollectionHeaderView.h"
 #import "XWGJBanView.h"
 #import "CatigoryRank.h"
 #import "CatigorySubject.h"
@@ -19,14 +19,14 @@
 #import "CatigaryHotCity.h"
 #import "SearchViewController.h"
 #import "CatigaryCountry.h"
-#import "XWGJScrollView.h"
+#import "CatigaryScrollView.h"
 #import "NewSearchResultViewController.h"
 #import "XNewSearchViewController.h"
 #define INTERSET_TOP  70.0
 
 @interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 //背景scroller
-@property(nonatomic,strong)XWGJScrollView *baseScroller;
+@property(nonatomic,strong)CatigaryScrollView *baseScroller;
 //排名tableView
 @property(nonatomic,strong)UITableView *tableView;
 //专业collectionView
@@ -38,7 +38,7 @@
 //专业数组
 @property(nonatomic,strong)NSArray *SubjectList;
 //表头
-@property(nonatomic,strong)XWGJCityCollectionViewHeaderView *cityHeaderView;
+@property(nonatomic,strong)CatigaryCityCollectionHeaderView *cityHeaderView;
 //工具条
 @property(nonatomic,strong)XWGJBanView  *bg_SelectView;
 //热门城市数组
@@ -172,7 +172,7 @@
     CGFloat baseY = 0;
     CGFloat baseW = XScreenWidth;
     CGFloat baseH = XScreenHeight - NAV_HEIGHT - 50;
-    self.baseScroller = [XWGJScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
+    self.baseScroller = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     self.baseScroller.delegate = self;
     [self.view addSubview:self.baseScroller];
     
@@ -197,7 +197,7 @@
     UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
     
-    self.cityHeaderView = [[XWGJCityCollectionViewHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
+    self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
     
     XJHUtilDefineWeakSelfRef
     
@@ -210,6 +210,14 @@
     [self.City_CollectView addSubview:self.cityHeaderView];
     
 }
+
+-(void)makeSubjectCollectViewWithFrame:(CGRect)frame
+{
+    self.Sub_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:frame andcontentInset:UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0)];
+    UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
+    [self.Sub_CollectView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
+}
+
 
 -(void)makeRankTableViewWithFrame:(CGRect)frame
 {
@@ -225,12 +233,6 @@
 }
 
 
--(void)makeSubjectCollectViewWithFrame:(CGRect)frame
-{
-    self.Sub_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:frame andcontentInset:UIEdgeInsetsMake(INTERSET_TOP, 0, 0, 0)];
-    UINib *sub_xib = [UINib nibWithNibName:@"XWGJSubjectCollectionViewCell" bundle:nil];
-    [self.Sub_CollectView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
-}
 
 
 
@@ -353,7 +355,7 @@ static NSString *cityIdentify = @"cityCell";
 {
     if (collectionView == self.Sub_CollectView) {
         
-        XWGJSubjectCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
+        CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
         cell.subject =self.SubjectList[indexPath.row];
         
         return cell;
@@ -411,7 +413,7 @@ static NSString *cityIdentify = @"cityCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    XWGJRankTableViewCell *cell = [XWGJRankTableViewCell cellInitWithTableView:tableView];
+    CatigoryRankCell *cell = [CatigoryRankCell cellInitWithTableView:tableView];
     cell.rank = self.RankList[indexPath.row];
   
     return cell;

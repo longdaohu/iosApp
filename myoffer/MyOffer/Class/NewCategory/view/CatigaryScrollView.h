@@ -1,5 +1,5 @@
 //
-//  XWGJScrollView.h
+//  CatigaryScrollView.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/4.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XWGJScrollView : UIScrollView
+@interface CatigaryScrollView : UIScrollView
 
 +(instancetype)viewWithFrame:(CGRect)frame;
 @end
