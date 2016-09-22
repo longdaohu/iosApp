@@ -1,5 +1,5 @@
 //
-//  XWGJRank.h
+//  CatigoryRank.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/2.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XWGJRank : NSObject
+@interface CatigoryRank : NSObject
 //图片
 @property(nonatomic,copy)NSString *IconName;
 //标题

@@ -7,7 +7,7 @@
 //
 
 #import "XWGJRankTableViewCell.h"
-#import "XWGJRank.h"
+#import "CatigoryRank.h"
 
 @interface XWGJRankTableViewCell ()
 //图片
@@ -80,7 +80,7 @@
  
 }
 
--(void)setRank:(XWGJRank *)rank
+-(void)setRank:(CatigoryRank *)rank
 {
     _rank = rank;
    

@@ -1,14 +1,14 @@
 //
-//  XWGJRank.m
+//  CatigoryRank.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/2.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJRank.h"
+#import "CatigoryRank.h"
 
-@implementation XWGJRank
+@implementation CatigoryRank
 
 
 -(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name RankKey:(NSString *)key

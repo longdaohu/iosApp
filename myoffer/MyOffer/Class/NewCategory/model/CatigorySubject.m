@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJCatigorySubject.h"
+#import "CatigorySubject.h"
 
-@implementation XWGJCatigorySubject
+@implementation CatigorySubject
 
 
 -(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XWGJCatigorySubject;
+@class CatigorySubject;
 @interface XWGJSubjectCollectionViewCell : UICollectionViewCell
-@property(nonatomic,strong)XWGJCatigorySubject *subject;
+@property(nonatomic,strong)CatigorySubject *subject;
 @property(nonatomic,strong)NSDictionary *helpItem;
 
 

@@ -1,5 +1,5 @@
 //
-//  XWGJLXCountry.h
+//  CatigaryCountry.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/3.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XWGJLXCountry : NSObject
+@interface CatigaryCountry : NSObject
 //城市数组
 @property(nonatomic,strong)NSArray *HotCities;
 //国家

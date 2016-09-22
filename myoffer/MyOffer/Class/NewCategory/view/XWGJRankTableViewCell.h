@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XWGJRank;
+@class CatigoryRank;
 @interface XWGJRankTableViewCell : UITableViewCell
-@property(nonatomic,strong)XWGJRank *rank;
+@property(nonatomic,strong)CatigoryRank *rank;
 
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
 

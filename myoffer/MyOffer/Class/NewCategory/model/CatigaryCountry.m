@@ -6,10 +6,10 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJLXCountry.h"
-#import "XWGJHotCity.h"
+#import "CatigaryCountry.h"
+#import "CatigaryHotCity.h"
 
-@implementation XWGJLXCountry
+@implementation CatigaryCountry
 
 +(instancetype)ContryItemInitWithCountryDictionary:(NSDictionary *)countryDic
 {
@@ -28,7 +28,7 @@
         NSMutableArray *cityM = [NSMutableArray array];
         for (NSDictionary *cityDic in countryDic[@"hot_cities"]) {
           
-            XWGJHotCity *city =[XWGJHotCity CityItemInitWithCityDictionary:cityDic];
+            CatigaryHotCity *city =[CatigaryHotCity CityItemInitWithCityDictionary:cityDic];
   
             [cityM addObject:city];
         }

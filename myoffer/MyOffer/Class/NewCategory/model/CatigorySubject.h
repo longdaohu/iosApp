@@ -1,5 +1,5 @@
 //
-//  XWGJCatigorySubject.h
+//  CatigorySubject.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/2.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XWGJCatigorySubject : NSObject
+@interface CatigorySubject : NSObject
 @property(nonatomic,copy)NSString *IconName;
 @property(nonatomic,copy)NSString *TitleName;
 +(instancetype)subjectItemInitWithIconName:(NSString *)iconName TitleName:(NSString *)Name;

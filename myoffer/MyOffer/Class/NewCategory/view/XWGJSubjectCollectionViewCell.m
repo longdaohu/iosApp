@@ -9,7 +9,7 @@
 
 
 #import "XWGJSubjectCollectionViewCell.h"
-#import "XWGJCatigorySubject.h"
+#import "CatigorySubject.h"
 @interface XWGJSubjectCollectionViewCell ()
 //cell图片
 @property(nonatomic,strong)UIImageView *IconView;
@@ -38,7 +38,7 @@
     
 }
 
--(void)setSubject:(XWGJCatigorySubject *)subject
+-(void)setSubject:(CatigorySubject *)subject
 {
     _subject = subject;
     

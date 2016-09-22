@@ -209,10 +209,10 @@
 		AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */; };
 		AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */; };
 		AEA249FC1D5B224E00DD7939 /* XWGJStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */; };
-		AEA249FD1D5B224E00DD7939 /* XWGJCatigorySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DF1D5B224E00DD7939 /* XWGJCatigorySubject.m */; };
-		AEA249FE1D5B224E00DD7939 /* XWGJHotCity.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E11D5B224E00DD7939 /* XWGJHotCity.m */; };
-		AEA249FF1D5B224E00DD7939 /* XWGJLXCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E31D5B224E00DD7939 /* XWGJLXCountry.m */; };
-		AEA24A001D5B224E00DD7939 /* XWGJRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E51D5B224E00DD7939 /* XWGJRank.m */; };
+		AEA249FD1D5B224E00DD7939 /* CatigorySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */; };
+		AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E11D5B224E00DD7939 /* CatigaryHotCity.m */; };
+		AEA249FF1D5B224E00DD7939 /* CatigaryCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E31D5B224E00DD7939 /* CatigaryCountry.m */; };
+		AEA24A001D5B224E00DD7939 /* CatigoryRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E51D5B224E00DD7939 /* CatigoryRank.m */; };
 		AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E81D5B224E00DD7939 /* NomalTableSectionHeaderView.m */; };
 		AEA24A021D5B224E00DD7939 /* XWGJBanView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249EA1D5B224E00DD7939 /* XWGJBanView.m */; };
 		AEA24A031D5B224E00DD7939 /* XWGJCityCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249EC1D5B224E00DD7939 /* XWGJCityCollectionReusableView.m */; };
@@ -776,14 +776,14 @@
 		AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
 		AEA249DB1D5B224E00DD7939 /* XWGJStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJStateViewController.h; sourceTree = "<group>"; };
 		AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJStateViewController.m; sourceTree = "<group>"; };
-		AEA249DE1D5B224E00DD7939 /* XWGJCatigorySubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJCatigorySubject.h; sourceTree = "<group>"; };
-		AEA249DF1D5B224E00DD7939 /* XWGJCatigorySubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJCatigorySubject.m; sourceTree = "<group>"; };
-		AEA249E01D5B224E00DD7939 /* XWGJHotCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJHotCity.h; sourceTree = "<group>"; };
-		AEA249E11D5B224E00DD7939 /* XWGJHotCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJHotCity.m; sourceTree = "<group>"; };
-		AEA249E21D5B224E00DD7939 /* XWGJLXCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJLXCountry.h; sourceTree = "<group>"; };
-		AEA249E31D5B224E00DD7939 /* XWGJLXCountry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJLXCountry.m; sourceTree = "<group>"; };
-		AEA249E41D5B224E00DD7939 /* XWGJRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJRank.h; sourceTree = "<group>"; };
-		AEA249E51D5B224E00DD7939 /* XWGJRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJRank.m; sourceTree = "<group>"; };
+		AEA249DE1D5B224E00DD7939 /* CatigorySubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigorySubject.h; sourceTree = "<group>"; };
+		AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigorySubject.m; sourceTree = "<group>"; };
+		AEA249E01D5B224E00DD7939 /* CatigaryHotCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCity.h; sourceTree = "<group>"; };
+		AEA249E11D5B224E00DD7939 /* CatigaryHotCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigaryHotCity.m; sourceTree = "<group>"; };
+		AEA249E21D5B224E00DD7939 /* CatigaryCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryCountry.h; sourceTree = "<group>"; };
+		AEA249E31D5B224E00DD7939 /* CatigaryCountry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigaryCountry.m; sourceTree = "<group>"; };
+		AEA249E41D5B224E00DD7939 /* CatigoryRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryRank.h; sourceTree = "<group>"; };
+		AEA249E51D5B224E00DD7939 /* CatigoryRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryRank.m; sourceTree = "<group>"; };
 		AEA249E71D5B224E00DD7939 /* NomalTableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NomalTableSectionHeaderView.h; path = view/NomalTableSectionHeaderView.h; sourceTree = "<group>"; };
 		AEA249E81D5B224E00DD7939 /* NomalTableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NomalTableSectionHeaderView.m; path = view/NomalTableSectionHeaderView.m; sourceTree = "<group>"; };
 		AEA249E91D5B224E00DD7939 /* XWGJBanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJBanView.h; sourceTree = "<group>"; };
@@ -2056,7 +2056,7 @@
 		AEA249D51D5B224E00DD7939 /* NewCategory */ = {
 			isa = PBXGroup;
 			children = (
-				AEF334141D929ABC003C3C68 /* RankClass */,
+				AEF334141D929ABC003C3C68 /* CountryRankClass */,
 				AEA249D61D5B224E00DD7939 /* controller */,
 				AEA249DD1D5B224E00DD7939 /* model */,
 				AEA249E61D5B224E00DD7939 /* view */,
@@ -2079,14 +2079,14 @@
 		AEA249DD1D5B224E00DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249DE1D5B224E00DD7939 /* XWGJCatigorySubject.h */,
-				AEA249DF1D5B224E00DD7939 /* XWGJCatigorySubject.m */,
-				AEA249E01D5B224E00DD7939 /* XWGJHotCity.h */,
-				AEA249E11D5B224E00DD7939 /* XWGJHotCity.m */,
-				AEA249E21D5B224E00DD7939 /* XWGJLXCountry.h */,
-				AEA249E31D5B224E00DD7939 /* XWGJLXCountry.m */,
-				AEA249E41D5B224E00DD7939 /* XWGJRank.h */,
-				AEA249E51D5B224E00DD7939 /* XWGJRank.m */,
+				AEA249DE1D5B224E00DD7939 /* CatigorySubject.h */,
+				AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */,
+				AEA249E01D5B224E00DD7939 /* CatigaryHotCity.h */,
+				AEA249E11D5B224E00DD7939 /* CatigaryHotCity.m */,
+				AEA249E21D5B224E00DD7939 /* CatigaryCountry.h */,
+				AEA249E31D5B224E00DD7939 /* CatigaryCountry.m */,
+				AEA249E41D5B224E00DD7939 /* CatigoryRank.h */,
+				AEA249E51D5B224E00DD7939 /* CatigoryRank.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3033,7 +3033,7 @@
 			name = C;
 			sourceTree = "<group>";
 		};
-		AEF334141D929ABC003C3C68 /* RankClass */ = {
+		AEF334141D929ABC003C3C68 /* CountryRankClass */ = {
 			isa = PBXGroup;
 			children = (
 				AEA249D71D5B224E00DD7939 /* NewSearchResultViewController.h */,
@@ -3041,7 +3041,7 @@
 				AEA249E71D5B224E00DD7939 /* NomalTableSectionHeaderView.h */,
 				AEA249E81D5B224E00DD7939 /* NomalTableSectionHeaderView.m */,
 			);
-			name = RankClass;
+			name = CountryRankClass;
 			sourceTree = "<group>";
 		};
 		AEF420E31BD4988B00CFB45E /* UMSocial_Sdk_4.2.5 */ = {
@@ -3361,7 +3361,7 @@
 				AE1FD7571D5C929500FFD5A8 /* UIScrollView+MJExtension.m in Sources */,
 				AEA24B961D5B25E000DD7939 /* FilerButtonItem.m in Sources */,
 				AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */,
-				AEA24A001D5B224E00DD7939 /* XWGJRank.m in Sources */,
+				AEA24A001D5B224E00DD7939 /* CatigoryRank.m in Sources */,
 				AE1FD74C1D5C929500FFD5A8 /* MJRefreshAutoGifFooter.m in Sources */,
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,
 				AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */,
@@ -3473,7 +3473,7 @@
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
 				AEA24BC91D5B264300DD7939 /* XWGJMessageFrame.m in Sources */,
 				5672E8B11CCBA9730099FDFC /* NSString+Sha1.m in Sources */,
-				AEA249FF1D5B224E00DD7939 /* XWGJLXCountry.m in Sources */,
+				AEA249FF1D5B224E00DD7939 /* CatigaryCountry.m in Sources */,
 				AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */,
 				AEA24BC51D5B264300DD7939 /* XWGJShareView.m in Sources */,
 				AEA24B7E1D5B25E000DD7939 /* FilterItem.m in Sources */,
@@ -3515,7 +3515,7 @@
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AEA249A51D5B215300DD7939 /* OrderDetailFooterView.m in Sources */,
 				AEA24B8F1D5B25E000DD7939 /* UniversityCourseViewController.m in Sources */,
-				AEA249FE1D5B224E00DD7939 /* XWGJHotCity.m in Sources */,
+				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AEA24B991D5B25E000DD7939 /* XuFilerView.m in Sources */,
 				AE133EA21D6EDF9500AC9C42 /* UniversityItemNew.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
@@ -3608,7 +3608,7 @@
 				AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */,
 				AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */,
 				AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */,
-				AEA249FD1D5B224E00DD7939 /* XWGJCatigorySubject.m in Sources */,
+				AEA249FD1D5B224E00DD7939 /* CatigorySubject.m in Sources */,
 				AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */,
 				AE1FD71E1D5C929500FFD5A8 /* MJProperty.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,

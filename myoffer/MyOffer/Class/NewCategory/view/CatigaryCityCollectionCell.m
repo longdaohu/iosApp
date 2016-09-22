@@ -7,7 +7,7 @@
 //
 
 #import "CatigaryCityCollectionCell.h"
-#import "XWGJHotCity.h"
+#import "CatigaryHotCity.h"
 
 @interface CatigaryCityCollectionCell ()
 //蒙版
@@ -23,7 +23,7 @@
 
 - (void)awakeFromNib {
   
-    self.contentView.layer.cornerRadius = 5;
+    self.contentView.layer.cornerRadius = CORNER_RADIUS;
     self.contentView.layer.masksToBounds = YES;
     self.contentView.backgroundColor = XCOLOR_WHITE;
     
@@ -47,7 +47,7 @@
     [self.contentView addSubview:self.TitleLab];
     
 }
--(void)setCity:(XWGJHotCity *)city
+-(void)setCity:(CatigaryHotCity *)city
 {
     _city = city;
     

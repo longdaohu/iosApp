@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJHotCity.h"
+#import "CatigaryHotCity.h"
 
-@implementation XWGJHotCity
+@implementation CatigaryHotCity
 
 +(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic{
     

@@ -1,5 +1,5 @@
 //
-//  XWGJHotCity.h
+//  CatigaryHotCity.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/3.
@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XWGJHotCity : NSObject
+@interface CatigaryHotCity : NSObject
 @property(nonatomic,copy)NSString *city_id;
 @property(nonatomic,copy)NSString *cityName;
 @property(nonatomic,copy)NSString *IconName;
-
-
 +(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic;
 -(instancetype)initWithCityDictionary:(NSDictionary *)cityDic;
 

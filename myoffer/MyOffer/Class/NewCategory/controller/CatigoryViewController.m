@@ -13,12 +13,12 @@
 #import "XWGJCityCollectionReusableView.h"
 #import "XWGJCityCollectionViewHeaderView.h"
 #import "XWGJBanView.h"
-#import "XWGJRank.h"
-#import "XWGJCatigorySubject.h"
+#import "CatigoryRank.h"
+#import "CatigorySubject.h"
 #import "XWGJStateViewController.h"
-#import "XWGJHotCity.h"
+#import "CatigaryHotCity.h"
 #import "SearchViewController.h"
-#import "XWGJLXCountry.h"
+#import "CatigaryCountry.h"
 #import "XWGJScrollView.h"
 #import "NewSearchResultViewController.h"
 #import "XNewSearchViewController.h"
@@ -96,7 +96,7 @@
  
         for (NSDictionary *countryDic in response[@"hot"]) {
             
-            XWGJLXCountry *country =[XWGJLXCountry ContryItemInitWithCountryDictionary:countryDic];
+            CatigaryCountry *country =[CatigaryCountry ContryItemInitWithCountryDictionary:countryDic];
   
             [countryM addObject:country];
         }
@@ -113,9 +113,9 @@
 {
     if (!_RankList) {
         
-        XWGJRank *rank_en = [XWGJRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:@"ranking_ti"];
-        XWGJRank *rank_au = [XWGJRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:@"ranking_ti"];
-        XWGJRank *rank_qs = [XWGJRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:@"ranking_qs"];
+        CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:@"ranking_ti"];
+        CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:@"ranking_ti"];
+        CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:@"ranking_qs"];
         _RankList = @[rank_en,rank_au,rank_qs];
         
     }
@@ -128,16 +128,16 @@
 {
     if (!_SubjectList) {
         
-        XWGJCatigorySubject *art =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
-        XWGJCatigorySubject *finance =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
-        XWGJCatigorySubject *social =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_social"  TitleName:GDLocalizedString(@"CategorySub-social")];
-        XWGJCatigorySubject *humanity =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_humanit"  TitleName:GDLocalizedString(@"CategorySub-humanity")];
-        XWGJCatigorySubject *engineer =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_engineer"  TitleName:GDLocalizedString(@"CategorySub-engineer")];
-        XWGJCatigorySubject *education =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
-        XWGJCatigorySubject *medicine =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_medicine"  TitleName:GDLocalizedString(@"CategorySub-medicine")];
-        XWGJCatigorySubject *business =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_business"  TitleName:GDLocalizedString(@"CategorySub-business")];
-        XWGJCatigorySubject *farm =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
-        XWGJCatigorySubject *science =[XWGJCatigorySubject subjectItemInitWithIconName:@"sub_sciencee"  TitleName:GDLocalizedString(@"CategorySub-science")];
+        CatigorySubject *art =[CatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
+        CatigorySubject *finance =[CatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
+        CatigorySubject *social =[CatigorySubject subjectItemInitWithIconName:@"sub_social"  TitleName:GDLocalizedString(@"CategorySub-social")];
+        CatigorySubject *humanity =[CatigorySubject subjectItemInitWithIconName:@"sub_humanit"  TitleName:GDLocalizedString(@"CategorySub-humanity")];
+        CatigorySubject *engineer =[CatigorySubject subjectItemInitWithIconName:@"sub_engineer"  TitleName:GDLocalizedString(@"CategorySub-engineer")];
+        CatigorySubject *education =[CatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
+        CatigorySubject *medicine =[CatigorySubject subjectItemInitWithIconName:@"sub_medicine"  TitleName:GDLocalizedString(@"CategorySub-medicine")];
+        CatigorySubject *business =[CatigorySubject subjectItemInitWithIconName:@"sub_business"  TitleName:GDLocalizedString(@"CategorySub-business")];
+        CatigorySubject *farm =[CatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
+        CatigorySubject *science =[CatigorySubject subjectItemInitWithIconName:@"sub_sciencee"  TitleName:GDLocalizedString(@"CategorySub-science")];
         _SubjectList = @[art,finance,social,humanity,engineer,education,medicine,business,farm,science];
         
           }
@@ -301,7 +301,7 @@
             
             XWGJCityCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView" forIndexPath:indexPath];
           
-            XWGJLXCountry *country = self.countryes[indexPath.section];
+            CatigaryCountry *country = self.countryes[indexPath.section];
             
             headerView.TitleLab.text = country.countryName;
             
@@ -334,7 +334,7 @@
     
     if (collectionView == self.City_CollectView) {
         
-        XWGJLXCountry *country = self.countryes[section];
+        CatigaryCountry *country = self.countryes[section];
 
         return country.HotCities.count;
         
@@ -362,7 +362,7 @@ static NSString *cityIdentify = @"cityCell";
         
         CatigaryCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
         
-        XWGJLXCountry *country = self.countryes[indexPath.section];
+        CatigaryCountry *country = self.countryes[indexPath.section];
         
         cell.city = country.HotCities[indexPath.row];
         
@@ -421,7 +421,7 @@ static NSString *cityIdentify = @"cityCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    XWGJRank *rank = self.RankList[indexPath.row];
+    CatigoryRank *rank = self.RankList[indexPath.row];
     
     if (1 == indexPath.row) {
         
@@ -540,7 +540,7 @@ static NSString *cityIdentify = @"cityCell";
 
 
 //英国、世界排名
--(void)CaseUK:(XWGJRank *)rank
+-(void)CaseUK:(CatigoryRank *)rank
 {
      SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
     
@@ -551,7 +551,7 @@ static NSString *cityIdentify = @"cityCell";
 }
 
 //澳大利亚排名
--(void)CaseAUwith:(XWGJRank *)rank
+-(void)CaseAUwith:(CatigoryRank *)rank
 {
     [MobClick event:@"catigory_rankAU"];
     
@@ -576,8 +576,8 @@ static NSString *cityIdentify = @"cityCell";
 {
     [MobClick event:indexPath.section == 0 ? @"catigory_hotUK":@"catigory_hotAU"];
     
-    XWGJLXCountry *country = self.countryes[indexPath.section];
-    XWGJHotCity *city = country.HotCities[indexPath.row];
+    CatigaryCountry *country = self.countryes[indexPath.section];
+    CatigaryHotCity *city = country.HotCities[indexPath.row];
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:city.cityName
                                                                             orderBy:RANKTI];
@@ -588,7 +588,7 @@ static NSString *cityIdentify = @"cityCell";
 //留学专业
 -(void)CaseSubjectWithIndexPath:(NSIndexPath *)indexPath{
 
-    XWGJCatigorySubject *subject = self.SubjectList[indexPath.row];
+    CatigorySubject *subject = self.SubjectList[indexPath.row];
     
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANKQS];
     
