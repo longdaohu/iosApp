@@ -208,7 +208,7 @@
 		AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */; };
 		AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */; };
 		AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */; };
-		AEA249FC1D5B224E00DD7939 /* XWGJStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */; };
+		AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DC1D5B224E00DD7939 /* CountryStateViewController.m */; };
 		AEA249FD1D5B224E00DD7939 /* CatigorySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */; };
 		AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E11D5B224E00DD7939 /* CatigaryHotCity.m */; };
 		AEA249FF1D5B224E00DD7939 /* CatigaryCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249E31D5B224E00DD7939 /* CatigaryCountry.m */; };
@@ -774,8 +774,8 @@
 		AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewSearchResultViewController.m; path = controller/NewSearchResultViewController.m; sourceTree = "<group>"; };
 		AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
 		AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
-		AEA249DB1D5B224E00DD7939 /* XWGJStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJStateViewController.h; sourceTree = "<group>"; };
-		AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJStateViewController.m; sourceTree = "<group>"; };
+		AEA249DB1D5B224E00DD7939 /* CountryStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryStateViewController.h; sourceTree = "<group>"; };
+		AEA249DC1D5B224E00DD7939 /* CountryStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryStateViewController.m; sourceTree = "<group>"; };
 		AEA249DE1D5B224E00DD7939 /* CatigorySubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigorySubject.h; sourceTree = "<group>"; };
 		AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigorySubject.m; sourceTree = "<group>"; };
 		AEA249E01D5B224E00DD7939 /* CatigaryHotCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCity.h; sourceTree = "<group>"; };
@@ -2070,8 +2070,8 @@
 			children = (
 				AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */,
 				AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */,
-				AEA249DB1D5B224E00DD7939 /* XWGJStateViewController.h */,
-				AEA249DC1D5B224E00DD7939 /* XWGJStateViewController.m */,
+				AEA249DB1D5B224E00DD7939 /* CountryStateViewController.h */,
+				AEA249DC1D5B224E00DD7939 /* CountryStateViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3453,7 +3453,7 @@
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
 				AEA24A0A1D5B224E00DD7939 /* CatigorySubjectCell.m in Sources */,
-				AEA249FC1D5B224E00DD7939 /* XWGJStateViewController.m in Sources */,
+				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,

@@ -6,16 +6,15 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 #import "XNewSearchViewController.h"
-#import "XWGJStateViewController.h"
-//#import "NewSearchRstViewController.h"
+#import "CountryStateViewController.h"
 #import "XUCountry.h"
 
-@interface XWGJStateViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CountryStateViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *states;
 @end
 
-@implementation XWGJStateViewController
+@implementation CountryStateViewController
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -23,8 +22,6 @@
     [MobClick beginLogPageView:@"page国家地区"];
     
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -39,25 +36,33 @@
     
     [super viewDidLoad];
     
-    [self makeStateTableView];
-   
-   
+    [self makeUI];
+    
+    [self getStateData];
+ 
+}
+
+- (void)makeUI{
     
     self.title = self.countryName;
- 
-    if([self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")])
-    {
-        self.states = @[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-ENG001"),GDLocalizedString(@"CategoryVC-ENG002"),GDLocalizedString(@"CategoryVC-ENG003"),GDLocalizedString(@"CategoryVC-ENG004")];
- 
-    }else{
-        self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
-    }
- 
+
+    [self makeTableView];
+    
 }
 
 //备用数据源
 -(void)getStateData
 {
+    
+    if([self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")])
+    {
+        self.states = @[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-ENG001"),GDLocalizedString(@"CategoryVC-ENG002"),GDLocalizedString(@"CategoryVC-ENG003"),GDLocalizedString(@"CategoryVC-ENG004")];
+        
+    }else{
+        self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
+    }
+    
+    /*
     NSString *keyWord  = USER_EN ? @"Country_EN" :@"Country_CN";
     NSArray *values = [[NSUserDefaults standardUserDefaults] valueForKey:keyWord];
     NSMutableArray *temps =[NSMutableArray array];
@@ -69,21 +74,22 @@
     NSInteger  index  = [countries indexOfObject:self.countryName];
     XUCountry *country = temps[index];
     self.states =  [country.states valueForKeyPath:@"stateName"];
-    
+    */
 }
 
--(void)makeStateTableView
+-(void)makeTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = XCOLOR_CLEAR;
+    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view  addSubview:self.tableView];
     
     
     UIImage *countryImage  = [self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")] ? [UIImage imageNamed:GDLocalizedString(@"Category-UK") ] :[UIImage imageNamed:GDLocalizedString(@"Category-AU") ];
-      UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, Country_Width -20)];
+    
+    UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, (countryImage.size.height  *  XScreenWidth / countryImage.size.width))];
     headerView.contentMode = UIViewContentModeScaleAspectFill;
     headerView.image = countryImage;
     self.tableView.tableHeaderView = headerView;
@@ -111,11 +117,14 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *key = indexPath.row == 0 ?KEY_COUNTRY: KEY_STATE;
+    NSString *key = indexPath.row == 0 ? KEY_COUNTRY : KEY_STATE;
+    
     NSString *searchValue = indexPath.row == 0 ? self.countryName : self.states[indexPath.row];
+    
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:key
                                                                               value:searchValue
                                                                             orderBy:RANKTI];

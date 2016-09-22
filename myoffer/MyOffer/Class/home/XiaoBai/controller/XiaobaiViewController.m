@@ -15,7 +15,7 @@
 #import "CatigorySubjectCell.h"
 #import "GongLueViewController.h"
 #import "XWGJNODATASHOWView.h"
-
+#import "CatigorySubject.h"
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UIView *topView;
@@ -83,25 +83,17 @@
 {
     if (!_helpItems) {
         
-        NSDictionary *one   = [self makeHelpItemWithLogoName:@"ICON1" titleName:@"平台网站"];
-        NSDictionary *two   = [self makeHelpItemWithLogoName:@"ICON2" titleName:@"如何申请"];
-        NSDictionary *three = [self makeHelpItemWithLogoName:@"ICON3" titleName:@"申请条件"];
-        NSDictionary *four  = [self makeHelpItemWithLogoName:@"ICON4" titleName:@"递交申请"];
-        NSDictionary *five  = [self makeHelpItemWithLogoName:@"ICON5" titleName:@"Offer管理"];
-        NSDictionary *six   = [self makeHelpItemWithLogoName:@"ICON6" titleName:@"操作疑问"];
+        CatigorySubject *one =[CatigorySubject subjectItemInitWithIconName:@"ICON1"  TitleName:@"平台网站"];
+        CatigorySubject *two =[CatigorySubject subjectItemInitWithIconName:@"ICON2"  TitleName:@"如何申请"];
+        CatigorySubject *three =[CatigorySubject subjectItemInitWithIconName:@"ICON3"  TitleName:@"申请条件"];
+        CatigorySubject *four =[CatigorySubject subjectItemInitWithIconName:@"ICON4"  TitleName:@"递交申请"];
+        CatigorySubject *five =[CatigorySubject subjectItemInitWithIconName:@"ICON5"  TitleName:@"Offer管理"];
+        CatigorySubject *six =[CatigorySubject subjectItemInitWithIconName:@"ICON6"  TitleName:@"操作疑问"];
         
         _helpItems = @[one,two,three,four,five,six];
         
     }
     return _helpItems;
-}
--(NSDictionary *)makeHelpItemWithLogoName:(NSString *)logoName titleName:(NSString *)title
-{
-    NSMutableDictionary *item =[NSMutableDictionary dictionary];
-    [item setValue:title forKey:@"title"];
-    [item setValue:logoName forKey:@"logo"];
-    
-    return [item copy];
 }
 
 
@@ -247,7 +239,7 @@ static NSString *subjectIdentify = @"subjectCell";
 {
     CGRect subRect = CGRectMake(2 * XScreenWidth, 0, XScreenWidth, XScreenHeight);
     self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, 0, 0, 0)];
-    UINib *sub_xib = [UINib nibWithNibName:@"XWGJSubjectCollectionViewCell" bundle:nil];
+    UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
     [self.quetionCollectionView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
 }
 
@@ -350,16 +342,14 @@ static NSString *subjectIdentify = @"subjectCell";
     
 }
 
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
 
-    cell.helpItem =self.helpItems[indexPath.row];
+    cell.subject = self.helpItems[indexPath.row];
     
     return cell;
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
  

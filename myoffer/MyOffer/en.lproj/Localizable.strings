@@ -236,11 +236,11 @@
 "CategoryNew-rank" = "排名";
 "CategoryNew-hotUK" = "英国热门留学城市";
 "CategoryNew-hotAU" = "澳洲热门留学城市";
-"CategoryNew-oneStar" = "1星院校";
-"CategoryNew-twoStar" = "2星院校";
-"CategoryNew-threeStar" = "3星院校";
-"CategoryNew-fourStar" = "4星院校";
-"CategoryNew-fiveStar" = "5星院校";
+"CategoryNew-oneStar" = "1 星院校";
+"CategoryNew-twoStar" = "2 星院校";
+"CategoryNew-threeStar" = "3 星院校";
+"CategoryNew-fourStar" = "4 星院校";
+"CategoryNew-fiveStar" = "5 星院校";
 
 "CategoryVC-times" = "TIMES排名";
 "CategoryVC-world" = "QS世界大学排名";

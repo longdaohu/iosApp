@@ -10,7 +10,5 @@
 @class CatigorySubject;
 @interface CatigorySubjectCell : UICollectionViewCell
 @property(nonatomic,strong)CatigorySubject *subject;
-@property(nonatomic,strong)NSDictionary *helpItem;
-
 
 @end

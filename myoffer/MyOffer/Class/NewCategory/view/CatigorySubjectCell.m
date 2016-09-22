@@ -46,15 +46,6 @@
     self.TitleLab.text = subject.TitleName;
 }
 
--(void)setHelpItem:(NSDictionary *)helpItem
-{
-    _helpItem = helpItem;
-    
-    self.IconView.image =[UIImage imageNamed:[helpItem valueForKey:@"logo"]];
-    self.TitleLab.text = [helpItem valueForKey:@"title"];
-
-    
-}
 
 
 -(void)layoutSubviews
@@ -63,8 +54,8 @@
     
     CGFloat ix = 0;
     CGFloat iw = FLOWLAYOUT_SubW;
-    CGFloat iy = self.helpItem ? iw * 0.15 : iw * 0.1;
-    CGFloat ih = self.helpItem ? iw * 0.45 : iw * 0.6;
+    CGFloat iy = [self.subject.IconName containsString:@"ICON"]? iw * 0.15 : iw * 0.1;
+    CGFloat ih = [self.subject.IconName containsString:@"ICON"] ? iw * 0.45 : iw * 0.6;
     self.IconView.frame =CGRectMake(ix, iy, iw, ih);
     
     CGFloat Tx = 0;
