@@ -1,19 +1,19 @@
 //
-//  NewSearchResultViewController.m
+//  AUSearchResultViewController.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/7.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "NewSearchResultViewController.h"
+#import "AUSearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
 #import "UniversityObj.h"
 #import "UniversityFrameObj.h"
 #import "XWGJnodataView.h"
 
-@interface NewSearchResultViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface AUSearchResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state;
      BOOL _descending;
@@ -29,7 +29,7 @@
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 @end
 
-@implementation NewSearchResultViewController
+@implementation AUSearchResultViewController
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

@@ -20,7 +20,7 @@
 #import "SearchViewController.h"
 #import "CatigaryCountry.h"
 #import "CatigaryScrollView.h"
-#import "NewSearchResultViewController.h"
+#import "AUSearchResultViewController.h"
 #import "XNewSearchViewController.h"
 #define INTERSET_TOP  70.0
 
@@ -519,7 +519,7 @@ static NSString *cityIdentify = @"cityCell";
 {
     [MobClick event:@"catigory_rankAU"];
     
-    NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
     
     newVc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
     

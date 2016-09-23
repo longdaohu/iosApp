@@ -9,7 +9,7 @@
 #import "WebViewController.h"
 #import "WYLXViewController.h"
 #import "InteProfileViewController.h"
-#import "NewSearchResultViewController.h"
+#import "AUSearchResultViewController.h"
 #import "ServiceMallViewController.h"
 #import "NotificationViewController.h"
 #import "XNewSearchViewController.h"
@@ -334,7 +334,7 @@
 
 -(void)AUWithCountryType:(NSString *)country{
     
-    NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
     newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:newVc animated:YES];
     

@@ -206,7 +206,7 @@
 		AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249991D5B215300DD7939 /* CenterSectionItem.m */; };
 		AEA249D21D5B215300DD7939 /* centerSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499B1D5B215300DD7939 /* centerSectionView.m */; };
 		AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */; };
-		AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */; };
+		AEA249FA1D5B224E00DD7939 /* AUSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* AUSearchResultViewController.m */; };
 		AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */; };
 		AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DC1D5B224E00DD7939 /* CountryStateViewController.m */; };
 		AEA249FD1D5B224E00DD7939 /* CatigorySubject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DF1D5B224E00DD7939 /* CatigorySubject.m */; };
@@ -770,8 +770,8 @@
 		AEA2499B1D5B215300DD7939 /* centerSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = centerSectionView.m; sourceTree = "<group>"; };
 		AEA2499C1D5B215300DD7939 /* LeftBarButtonItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftBarButtonItemView.h; sourceTree = "<group>"; };
 		AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftBarButtonItemView.m; sourceTree = "<group>"; };
-		AEA249D71D5B224E00DD7939 /* NewSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewSearchResultViewController.h; path = controller/NewSearchResultViewController.h; sourceTree = "<group>"; };
-		AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewSearchResultViewController.m; path = controller/NewSearchResultViewController.m; sourceTree = "<group>"; };
+		AEA249D71D5B224E00DD7939 /* AUSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUSearchResultViewController.h; path = controller/AUSearchResultViewController.h; sourceTree = "<group>"; };
+		AEA249D81D5B224E00DD7939 /* AUSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AUSearchResultViewController.m; path = controller/AUSearchResultViewController.m; sourceTree = "<group>"; };
 		AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
 		AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
 		AEA249DB1D5B224E00DD7939 /* CountryStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryStateViewController.h; sourceTree = "<group>"; };
@@ -2056,7 +2056,6 @@
 		AEA249D51D5B224E00DD7939 /* NewCategory */ = {
 			isa = PBXGroup;
 			children = (
-				AEF334141D929ABC003C3C68 /* CountryRankClass */,
 				AEA249D61D5B224E00DD7939 /* controller */,
 				AEA249DD1D5B224E00DD7939 /* model */,
 				AEA249E61D5B224E00DD7939 /* view */,
@@ -2625,6 +2624,7 @@
 		AEA24B2E1D5B25E000DD7939 /* SearchUni */ = {
 			isa = PBXGroup;
 			children = (
+				AEF334141D929ABC003C3C68 /* CountryRankClass */,
 				AEA24B2F1D5B25E000DD7939 /* controller */,
 				AEA24B381D5B25E000DD7939 /* model */,
 				AEA24B4B1D5B25E000DD7939 /* view */,
@@ -3036,12 +3036,13 @@
 		AEF334141D929ABC003C3C68 /* CountryRankClass */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249D71D5B224E00DD7939 /* NewSearchResultViewController.h */,
-				AEA249D81D5B224E00DD7939 /* NewSearchResultViewController.m */,
+				AEA249D71D5B224E00DD7939 /* AUSearchResultViewController.h */,
+				AEA249D81D5B224E00DD7939 /* AUSearchResultViewController.m */,
 				AEA249E71D5B224E00DD7939 /* NomalTableSectionHeaderView.h */,
 				AEA249E81D5B224E00DD7939 /* NomalTableSectionHeaderView.m */,
 			);
 			name = CountryRankClass;
+			path = ../../NewCategory;
 			sourceTree = "<group>";
 		};
 		AEF420E31BD4988B00CFB45E /* UMSocial_Sdk_4.2.5 */ = {
@@ -3360,7 +3361,7 @@
 				AEA24AFC1D5B24D200DD7939 /* XWGJAbout.m in Sources */,
 				AE1FD7571D5C929500FFD5A8 /* UIScrollView+MJExtension.m in Sources */,
 				AEA24B961D5B25E000DD7939 /* FilerButtonItem.m in Sources */,
-				AEA249FA1D5B224E00DD7939 /* NewSearchResultViewController.m in Sources */,
+				AEA249FA1D5B224E00DD7939 /* AUSearchResultViewController.m in Sources */,
 				AEA24A001D5B224E00DD7939 /* CatigoryRank.m in Sources */,
 				AE1FD74C1D5C929500FFD5A8 /* MJRefreshAutoGifFooter.m in Sources */,
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,

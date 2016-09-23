@@ -1,5 +1,5 @@
 //
-//  NewSearchResultViewController.h
+//  AUSearchResultViewController.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/3/7.
@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface NewSearchResultViewController : BaseViewController
+@interface AUSearchResultViewController : BaseViewController
 
 - (instancetype)initWithFilter:(NSString *)key value:(NSString *)value orderBy:(NSString *)orderBy;
 

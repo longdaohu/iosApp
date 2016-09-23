@@ -10,7 +10,7 @@
 #import "MessageDetailViewController.h"
 #import "GongLueListCell.h"
 #import "GongLueListHeaderView.h"
-#import "NewSearchResultViewController.h"
+#import "AUSearchResultViewController.h"
 #import "SearchResultViewController.h"
 #import "InteProfileViewController.h"
 #import "IntelligentResultViewController.h"
@@ -181,7 +181,7 @@
             
         }else{
             
-            NewSearchResultViewController *newVc = [[NewSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANKTI];
+            AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANKTI];
             [self.navigationController pushViewController:newVc animated:YES];
         }
         
