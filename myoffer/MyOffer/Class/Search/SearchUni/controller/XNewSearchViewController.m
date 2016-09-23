@@ -1342,7 +1342,7 @@ typedef enum {
 //用于实现RankTypeView出现、隐藏
 -(void)rankTypeViewDown:(BOOL)down
 {
-    
+    XJHUtilDefineWeakSelfRef
     if (down) {
         //当学校数组数量为0时，不显示排列选择表单
         self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
@@ -1352,8 +1352,8 @@ typedef enum {
             
             CGRect newRect = self.RankTypeTableView.frame;
             newRect.origin.y = 0;
-            self.RankTypeTableView.frame = newRect;
-            [self.RankTypeTableView reloadData];
+            weakSelf.RankTypeTableView.frame = newRect;
+            [weakSelf.RankTypeTableView reloadData];
         }];
         
         
@@ -1362,14 +1362,14 @@ typedef enum {
         
         [UIView animateWithDuration:0.25 animations:^{
            
-            self.cover.alpha = 0;
+            weakSelf.cover.alpha = 0;
             CGRect newRect = self.RankTypeTableView.frame;
             newRect.origin.y = -88;
-            self.RankTypeTableView.frame = newRect;
+            weakSelf.RankTypeTableView.frame = newRect;
             
         } completion:^(BOOL finished) {
             
-            self.CoverBgView.hidden = YES;
+            weakSelf.CoverBgView.hidden = YES;
             
         }];
         
@@ -1412,10 +1412,17 @@ typedef enum {
     }];
 }
 
+-(void)dealloc
+{
+    KDClassLog(@"搜索结果  dealloc");
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 

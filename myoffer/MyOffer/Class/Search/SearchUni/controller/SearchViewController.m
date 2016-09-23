@@ -208,8 +208,9 @@
 #pragma mark ——— FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
-    
+ 
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANKQS];
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -256,6 +257,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
+-(void)dealloc
+{
+    KDClassLog(@"搜索页  dealloc");
+}
 @end
 

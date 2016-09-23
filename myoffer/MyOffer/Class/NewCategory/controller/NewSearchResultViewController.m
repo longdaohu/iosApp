@@ -274,4 +274,11 @@
 }
 
 
+-(void)dealloc
+{
+    KDClassLog(@" 澳大利亚大学排名  dealloc");
+}
+
+
+
 @end

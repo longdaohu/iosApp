@@ -1033,6 +1033,7 @@ typedef enum {
 - (void)dealloc{
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     KDClassLog(@"智能匹配 dealloc");
  }
 //    KDUtilRemoveNotificationCenterObserverDealloc

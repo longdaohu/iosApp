@@ -61,10 +61,7 @@
 
 }
 
-- (void)scrollViewContentoffsetTest:(CGFloat)offsetY andHeight:(CGFloat)contentHeight{
-  
-    
-//    NSLog(@"--------------------   %lf   %lf",offsetY,contentHeight);
+- (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight{
     
     self.bgImageView.alpha =  offsetY / contentHeight;
     

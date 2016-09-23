@@ -305,6 +305,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityFrameObj *uniFrame =  _result[indexPath.row];
@@ -315,6 +316,10 @@
 
 
 
+-(void)dealloc
+{
+    KDClassLog(@" 英国、世界大学排名  dealloc");
+}
 
 
 @end

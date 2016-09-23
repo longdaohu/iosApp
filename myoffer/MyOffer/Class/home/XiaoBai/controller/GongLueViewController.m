@@ -192,9 +192,10 @@
         
         RequireLogin
         
-        if (self.recommendationsCount > 0) {
+        if (self.recommendationsCount) {
             
             IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+            vc.isComeBack = YES;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else{
@@ -225,7 +226,6 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     
     //1 顶部自定义导航栏
     [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - NAV_HEIGHT];
