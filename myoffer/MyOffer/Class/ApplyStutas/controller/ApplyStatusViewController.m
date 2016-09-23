@@ -181,9 +181,7 @@
     return  University_HEIGHT;
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     return 60;
 }
@@ -227,7 +225,6 @@
     
 }
 
-
 //返回RootViewController
 -(void)popBack{
 
@@ -236,7 +233,7 @@
 
 -(void)dealloc
 {
-    KDClassLog(@" 申请状态 --- dealloc");
+    KDClassLog(@" 申请状态  dealloc");
 }
 
 

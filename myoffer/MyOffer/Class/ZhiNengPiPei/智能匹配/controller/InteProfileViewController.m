@@ -289,10 +289,11 @@ typedef enum {
 -(void)makeFooterView
 {
     self.bottomView =[[UIButton alloc] initWithFrame:CGRectMake(0, XScreenHeight - 114, XScreenWidth, 50)];
-    self.bottomView.backgroundColor = XCOLOR_RED;
+    self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
     [self.bottomView addTarget:self action:@selector(commitButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView setTitle:GDLocalizedString(@"Evaluate-commitButton") forState:UIControlStateNormal];
     self.bottomView.titleLabel.font = FontWithSize(16);
+    self.bottomView.enabled = NO;
     [self.view addSubview:self.bottomView];
 }
 
@@ -321,6 +322,7 @@ typedef enum {
                                     CountryItem *item = [CountryItem CountryWithDictionary:obj];
                                     return item;
                                 }];
+
     
     
     NSArray *countryItems_EN = [[ud valueForKey:@"Country_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
@@ -328,7 +330,9 @@ typedef enum {
                                     CountryItem *item = [CountryItem CountryWithDictionary:obj];
                                     return item;
                                 }];
-    self.countryItems_CE = @[countryItems_CN,countryItems_EN];
+    
+    
+    self.countryItems_CE =  @[countryItems_CN,countryItems_EN];
     
     
     
@@ -342,6 +346,7 @@ typedef enum {
                                     SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
                                     return item;
                                 }];
+    
     
     self.subjectItems_CE = @[subjectItems_CN,subjectItems_EN];
     
@@ -358,8 +363,8 @@ typedef enum {
                                   GradeItem *item = [GradeItem gradeWithDictionary:obj];
                                   return item;
                               }];
-    self.gradeItems_CE = @[gradeItems_CN,gradeItems_EN];
     
+    self.gradeItems_CE =  @[gradeItems_CN,gradeItems_EN];
     
     
     if (USER_EN) {
@@ -496,6 +501,8 @@ typedef enum {
         [self.miniPicker selectRow:lowIndex inComponent:0 animated:YES];
     }
     
+    [self checkTextField];
+    
     return cell;
 }
 
@@ -541,7 +548,10 @@ typedef enum {
     NSInteger index = [self getIndexWithTextFieldName:country andItems:self.countryItems andGroups:self.countryItems_CE andKeyWord:@"CountryName"];
     
     [self.countryPicker selectRow:index inComponent:0 animated:YES];
-    CountryItem *cItem = self.countryItems[index];
+    
+    
+    CountryItem *cItem = self.countryItems.count ? self.countryItems[index] : nil;
+  
     return cItem.CountryName;
 }
 
@@ -554,7 +564,7 @@ typedef enum {
     
     [self.gradePicker selectRow:gindex inComponent:0 animated:YES];
     
-    GradeItem *item = [self.gradeItems objectAtIndex:gindex];
+    GradeItem *item = self.gradeItems.count ? [self.gradeItems objectAtIndex:gindex]: nil;
     
     return item.gradeName;
 }
@@ -567,7 +577,7 @@ typedef enum {
     
     [self.applyPicker selectRow:index inComponent:0 animated:YES];
     
-    SubjectItem *item = [self.subjectItems objectAtIndex:index];
+    SubjectItem *item = self.subjectItems.count ? [self.subjectItems objectAtIndex:index]: nil;
     
     return item.subjectName;
 }
@@ -580,8 +590,8 @@ typedef enum {
     NSInteger index = [self getIndexWithTextFieldName:subject andItems:self.subjectItems andGroups:self.subjectItems_CE andKeyWord:@"subjectName"];
     
     [self.subjectPicker selectRow:index inComponent:0 animated:YES];
-    
-    SubjectItem *item = [self.subjectItems objectAtIndex:index];
+  
+    SubjectItem *item = self.subjectItems.count ? [self.subjectItems objectAtIndex:index]: nil;
     
     return item.subjectName;
 }
@@ -698,7 +708,9 @@ typedef enum {
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+
+    [self textFieldeditingEndChectk];
+    
 }
 
 #pragma mark ———— 用于键盘处理
@@ -749,17 +761,10 @@ typedef enum {
     RequireLogin
     
     
-    NSArray *textFields = @[self.countryTF, self.timeTF,self.applySubjectTF,self.universityTF,self.subjectedTF,self.GPATF,self.gradeTF,self.avgTF,self.lowTF];
-    
-    for (UITextField *textField in textFields) {
-        if (textField.text.length == 0) {
-            [KDAlertView showMessage:textField.placeholder cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
-            return;
-        }
-    }
     
     NSInteger cindex = [self getCommitArrayIndex:self.countryItems withDataKey:@"CountryName"  andPredicateString:self.countryTF.text];
     CountryItem *cItem = [self.countryItems objectAtIndex:cindex];
+
     
     
     NSInteger gindex =[self getCommitArrayIndex:self.gradeItems withDataKey:@"gradeName" andPredicateString:self.gradeTF.text];
@@ -863,7 +868,9 @@ typedef enum {
 -(void)tabBarDidSelectWithItem:(UIBarButtonItem *)item
 {
     if (item.tag == 10) {
-        [self.view  endEditing:YES];
+        
+        [self textFieldeditingEndChectk];
+        
     }else{
         if ([self.countryTF isFirstResponder]) {
             
@@ -899,36 +906,41 @@ typedef enum {
             
         }else
         {
-            [self.view endEditing:YES];
+            [self textFieldeditingEndChectk];
         }
     }
 }
 
 
 #pragma mark ————  UITextfieldDelegate
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
    
     if ([self.countryTF isFirstResponder] ) {
         
         if (self.countryTF.text.length == 0) {
-             CountryItem *item =self.countryItems[0];
-            self.countryTF.text = item.CountryName;
+
+            CountryItem *item = self.countryItems.count ? self.countryItems[0] : nil;
+            
+            self.countryTF.text = item.CountryName ? item.CountryName : @"";
+            
         }
         
     }else if ([self.timeTF isFirstResponder])
     {
         if (self.timeTF.text.length == 0) {
-             self.timeTF.text = self.timeItems[0];
+ 
+             self.timeTF.text = self.timeItems.count ? self.timeItems[0] : @"";
          }
         
     }else if([self.applySubjectTF isFirstResponder])
     {
         if (self.applySubjectTF.text.length == 0) {
             
-            SubjectItem *subjectItem =   self.subjectItems[0];
-            
-            self.applySubjectTF.text = subjectItem.subjectName;
+            SubjectItem *subjectItem =  self.subjectItems.count ? self.subjectItems[0] : nil;
+ 
+            self.applySubjectTF.text = subjectItem.subjectName ? subjectItem.subjectName : @"";
         }
         
     }else if([self.universityTF isFirstResponder]){
@@ -939,9 +951,9 @@ typedef enum {
     {
         if (self.subjectedTF.text.length == 0) {
             
-            SubjectItem *subjectItem =   self.subjectItems[0];
-            
-            self.subjectedTF.text = subjectItem.subjectName;
+             SubjectItem *subjectItem =  self.subjectItems.count ? self.subjectItems[0] : nil;
+
+            self.subjectedTF.text = subjectItem.subjectName ? subjectItem.subjectName : @"";
         }
         
     }else if([self.GPATF isFirstResponder]){
@@ -952,15 +964,15 @@ typedef enum {
         
         if (self.gradeTF.text.length == 0) {
             
-            GradeItem  *gItem =  self.gradeItems[0];
-            
-            self.gradeTF.text = gItem.gradeName;
+            GradeItem  *gItem = self.gradeItems.count ? self.gradeItems[0] : nil;
+ 
+            self.gradeTF.text =  gItem.gradeName ? gItem.gradeName : @"";
         }
     }else if([self.avgTF isFirstResponder]){
         
         if (self.avgTF.text.length == 0) {
             
-            self.avgTF.text = self.miniItems[0];
+            self.avgTF.text = self.miniItems.count ? self.miniItems[0] : @"";
             
         }
         
@@ -968,10 +980,42 @@ typedef enum {
     {
         if (self.lowTF.text.length == 0) {
             
-            self.lowTF.text = self.miniItems[0];
+            self.lowTF.text = self.miniItems.count ? self.miniItems[0] : @"";
         }
     }
+  
 }
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    [self checkTextField];
+
+}
+
+//用于键盘收起时，检验输入框是否为空
+- (void)textFieldeditingEndChectk{
+
+    [self checkTextField];
+    
+    [self.view endEditing:YES];
+}
+
+- (void)checkTextField{
+
+    
+    if (self.countryTF.text.length  && self.timeTF.text.length  && self.applySubjectTF.text.length  && self.universityTF.text.length  && self.subjectedTF.text.length  && self.GPATF.text.length  && self.gradeTF.text.length  &&  self.avgTF.text.length &&  self.lowTF.text.length) {
+        
+        self.bottomView.enabled = YES;
+        self.bottomView.backgroundColor = XCOLOR_RED;
+    }else{
+        self.bottomView.enabled = NO;
+        self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
+    }
+
+}
+
+
+
 #pragma mark ————  XprofileTableViewCellDelegate
 -(void)XprofileTableViewCell:(XprofileTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender{
 
@@ -986,12 +1030,12 @@ typedef enum {
     [self.navigationController pushViewController:search animated:YES];
 }
 
-//- (void)dealloc{
-//
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    KDClassLog(@"智能匹配 dealloc");
-// }
-    KDUtilRemoveNotificationCenterObserverDealloc
+- (void)dealloc{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    KDClassLog(@"智能匹配 dealloc");
+ }
+//    KDUtilRemoveNotificationCenterObserverDealloc
 
 
 

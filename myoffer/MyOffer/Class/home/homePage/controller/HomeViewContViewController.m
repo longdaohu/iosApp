@@ -8,6 +8,8 @@
 #define ADKEY @"Advertiseseeee"
 #define HEADER_HEIGHT XScreenHeight * 0.7
 
+
+
 #import "HomeHeaderView.h"
 #import "HomeViewContViewController.h"
 #import "HomeSectionHeaderView.h"
@@ -33,6 +35,9 @@
 #import "UniDetailGroup.h"
 
 
+
+
+
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
 //搜索工具条
@@ -51,6 +56,7 @@
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 //分组数据
 @property(nonatomic,strong)NSMutableArray *groups;
+
 
 
 @end
@@ -106,15 +112,16 @@
     [self makeUI];
     
     [self makeOther];
-
+  
 }
+
 
 -(void)makeOther{
 
     
     [self checkAPPVersion];
 
-    [self getSelectionSourse];
+    [self baseDataSourse]; //加载基础数据
 
     [self getAppReport];
     
@@ -122,6 +129,7 @@
     if(![[NSUserDefaults standardUserDefaults] boolForKey:ADKEY]){
         
         [self advanceSupportWithDuration:180];
+        
     }
 
 }
@@ -568,13 +576,13 @@
 -(void)HomeHeaderViewWithItemtap:(NSInteger )tag
 {
    
-    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
-    if (counries.count == 0) {
-         //用于防止用户第一次加载备用数据失败
-         [self getSelectionSourse];
-        
-         return;
-    }
+//    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
+//    if (counries.count == 0) {
+//         //用于防止用户第一次加载备用数据失败
+//         [self getSelectionSourse];
+//        
+//         return;
+//    }
     
      switch (tag) {
          case 0:
@@ -626,53 +634,6 @@
     
 }
 
-#pragma mark ------- 提前加载数据，存储在本地，下次调用
--(void)getSelectionSourse
-{
-    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Grade_CN"];
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-      
-        [ud setValue:response forKey:@"Subject_CN"];
-        
-    }];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_CN"];
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Subject_EN"];
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_EN"];
-        
-    }];
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-
-        [ud setValue:response forKey:@"Grade_EN"];
-
-    }];
-    
-    [ud synchronize];
-    
-    
-}
 
 //显示菜单列表
 -(void)openLeftMenu{
@@ -867,8 +828,10 @@
 -(void)CaseWoyaoliuXue
 {
     [MobClick event:@"WoYaoLiuXue"];
+    
     [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
 }
+
 
 //跳转留学小白
 -(void)CaseLiuXueXiaoBai
@@ -892,12 +855,16 @@
             [self.navigationController pushViewController:vc  animated:YES];
         }
             break;
-            
+        case HomePageClickItemTypetest:
+            [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
+            break;
         default:
             break;
     }
-
 }
+
+
+
 //跳转服务包
 -(void)CaseServerMall{
 
@@ -913,6 +880,9 @@
     [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
 }
 
+
+
+
 //跳转LandingPage
 -(void)CaseLandingPageWithBan:(NSString *)path
 {
@@ -920,6 +890,9 @@
     
     if([path containsString:@"mbti/test"])
     {
+
+        self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
+        
         RequireLogin
     }
     

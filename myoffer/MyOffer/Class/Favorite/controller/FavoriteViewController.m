@@ -16,7 +16,7 @@
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *FavoriteTableView;
 @property (strong, nonatomic) XWGJnodataView *noDataView;
-@property (strong, nonatomic) NSArray *Result;
+@property (strong, nonatomic) NSArray *favor_Unies;
 
 @end
 
@@ -58,7 +58,7 @@
 
 -(void)makeTableView
 {
-    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64) style:UITableViewStyleGrouped];
+    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
     self.FavoriteTableView.dataSource = self;
     self.FavoriteTableView.delegate = self;
     [self.view  addSubview:self.FavoriteTableView];
@@ -71,7 +71,7 @@
 -(void)makeOtherView{
 
     self.title = GDLocalizedString(@"Setting-002");
- }
+}
 
 -(void)makeNodataView
 {
@@ -81,7 +81,6 @@
     [self.view insertSubview:self.noDataView aboveSubview:self.FavoriteTableView];
     
 }
-
 
 - (void)viewDidLoad {
     
@@ -95,45 +94,52 @@
     if (![self checkNetworkState]) {
         
         self.noDataView.hidden = NO;
+        
         self.noDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
-         return;
+        
+        return;
     }
     
-    
+    XJHUtilDefineWeakSelfRef
     [self
      startAPIRequestUsingCacheWithSelector:@"GET api/account/favorites"
      parameters:@{}
      success:^(NSInteger statusCode, id response) {
          
-         NSArray *universities = (NSArray *)response;
-   
-         NSMutableArray *temp = [NSMutableArray array];
+         [weakSelf configrationUIWithresponse:response];
          
-         [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-             
-                 UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
-             
-                 UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uni];
-             
-                 [temp addObject:uniFrame];
-           
-         }];
-         
-         self.Result = [temp copy];
-         
-         self.noDataView.hidden = self.Result.count == 0 ? NO : YES;
-         
-         [self.FavoriteTableView reloadData];
+         [weakSelf.FavoriteTableView reloadData];
      }];
 }
 
 
+- (void)configrationUIWithresponse:(id)response{
+
+    NSArray *universities = (NSArray *)response;
+    
+    NSMutableArray *uni_temps = [NSMutableArray array];
+    
+    [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
+        
+        UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uni];
+        
+        [uni_temps addObject:uniFrame];
+        
+    }];
+    
+    self.favor_Unies = [uni_temps copy];
+    
+    self.noDataView.hidden = self.favor_Unies.count == 0 ? NO : YES;
+
+}
 
 
 #pragma mark ———————— UITableViewDataSource, UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 0.001;
+    return HEIGHT_ZERO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -148,7 +154,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return self.Result.count;
+    return self.favor_Unies.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -160,7 +166,7 @@
    
     NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
   
-    UniversityFrameObj *uniFrame = self.Result[indexPath.section];
+    UniversityFrameObj *uniFrame = self.favor_Unies[indexPath.section];
   
     UniversityObj *uni =uniFrame.uniObj;
     
@@ -176,16 +182,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    UniversityFrameObj *uniFrame = self.Result[indexPath.section];
-    
+    UniversityFrameObj *uniFrame = self.favor_Unies[indexPath.section];
     UniversityObj *uni =uniFrame.uniObj;
-    
- 
     UniversityViewController *University = [[UniversityViewController alloc] init];
-    
     University.uni_id = uni.universityID;
-    
- 
     [self.navigationController pushViewController:University animated:YES];
     
 }
@@ -193,7 +193,7 @@
 
 -(void)dealloc
 {
-    KDClassLog(@" FavoriteViewController --- dealloc");
+    KDClassLog(@" 收藏院校  dealloc");
 }
 
 @end

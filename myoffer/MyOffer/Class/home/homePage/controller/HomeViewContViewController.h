@@ -10,8 +10,10 @@
 
 typedef enum {
     HomePageClickItemTypeNoClick,
-    HomePageClickItemTypePipei
+    HomePageClickItemTypePipei,
+    HomePageClickItemTypetest
 }HomePageClickItemType;
+
 @interface HomeViewContViewController : BaseViewController
 //已选择服务项
 @property(nonatomic,assign)HomePageClickItemType clickType;

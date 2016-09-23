@@ -617,14 +617,15 @@
     
 }
 
-
 -(void)dealloc
 {
-    KDClassLog(@" MessageDetailViewController    dealloc");
+    KDClassLog(@"资讯详情  dealloc");
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
+    
     // Dispose of any resources that can be recreated.
 }
 

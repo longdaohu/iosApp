@@ -300,6 +300,160 @@
 
 
 
+#pragma mark ------- 提前加载数据，存储在本地，下次调用
+- (void)baseDataSourse:(NSString *)pageStr
+{
+    
+    NSInteger page;
+    if ([pageStr isEqualToString:@"country"]) {
+        
+        page = 0;
+        
+    }else if([pageStr isEqualToString:@"subject"]){
+    
+         page = 1;
+        
+    }else{
+    
+        page = 2;
+    }
+    
+    switch (page) {
+        case 0:
+            [self countryWithAlert:YES];
+            break;
+        case 1:
+             [self subjectWithAlert:YES];
+            break;
+        default:
+             [self gradeWithAlert:YES];
+            break;
+    }
+    
+
+    
+}
+
+- (void)baseDataSourse{
+
+    [self countryWithAlert:NO];
+    
+    [self gradeWithAlert:NO];
+    
+    [self subjectWithAlert:NO];
+    
+}
+
+- (void)countryWithAlert:(BOOL)show{
+    
+    
+    [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
+    [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+
+    
+ /*
+  
+    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
+
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Country_CN"];
+        
+        [ud synchronize];
+        
+    }];
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Country_EN"];
+        
+        [ud synchronize];
+        
+    }];
+  
+*/
+}
+
+- (void)subjectWithAlert:(BOOL)show{
+
+    
+    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
+    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+
+    /*
+     NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
+
+     
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Subject_CN"];
+        
+        [ud synchronize];
+        
+    }];
+    
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Subject_EN"];
+        
+    }];
+   */
+}
+
+- (void)gradeWithAlert:(BOOL)show{
+    
+    
+    [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
+    [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+/*
+    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
+
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Grade_CN"];
+        
+        [ud synchronize];
+        
+    }];
+
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
+        
+        [ud setValue:response forKey:@"Grade_EN"];
+
+        [ud synchronize];
+        
+    }];
+ */
+    
+    
+}
+
+
+-(void)baseDataSourseWithPath:(NSString *)path  keyWord:(NSString *)keyWord  parameters:(NSDictionary *)para  ErrorAlerShow:(BOOL)show{
+
+    
+    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
+
+    [self startAPIRequestWithSelector:path  parameters:para expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [ud setValue:response forKey:keyWord];
+        
+        [ud synchronize];
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        if (show) {
+            
+            AlerMessage(@"网络请求失败");
+            
+        }
+        
+    }];
+
+    
+}
+
 
 
 @end

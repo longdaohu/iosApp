@@ -20,6 +20,7 @@
     return self;
 }
 
+
 + (instancetype)subjectWithDictionary:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];

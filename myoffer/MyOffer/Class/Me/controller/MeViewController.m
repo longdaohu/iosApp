@@ -76,7 +76,6 @@ typedef enum {
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:@"page申请中心"];
-    
 }
 
 
@@ -102,10 +101,9 @@ typedef enum {
 }
 
 
--(void)getRequestCenterSourse
-{
-    XJHUtilDefineWeakSelfRef;
+-(void)getRequestCenterSourse{
     
+    XJHUtilDefineWeakSelfRef;
     //查看是否有新通知消息
     if (LOGIN && [self checkNetWorkReaching]) {
         
@@ -113,6 +111,7 @@ typedef enum {
         [self startAPIRequestWithSelector:kAPISelectorRequestCenter parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
 
              weakSelf.myCountResponse = response;
+            
             [weakSelf.tableView reloadData];
         }];
         
@@ -124,12 +123,13 @@ typedef enum {
          *  【 -1       ——没有申请过
          */
         [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+           
             NSString *state       = response[@"state"];
             NSString *imageName   = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
             OptionButtonType type =   [state containsString:@"1"] ? OptionButtonTypeZineng :OptionButtonTypeZhuangTai;
             [weakSelf matchImageName:imageName withOptionButtonTag:type];
             
-        }];
+         }];
         
     }else{
         
@@ -144,6 +144,7 @@ typedef enum {
 -(void)matchImageName:(NSString *)imageName withOptionButtonTag:(OptionButtonType)tag
 {
     self.centerHeader.image = [UIImage imageNamed:imageName];
+    
     self.OptionButton.tag   = tag;
 }
 
@@ -151,8 +152,11 @@ typedef enum {
 -(void)makeOther{
 
     [self.OptionButton addTarget:self action:@selector(OptionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRequestCenterSourse) name:@"requestCenter" object:nil];
+    
 }
+
 
 -(void)makeCellArray
 {
@@ -203,16 +207,19 @@ typedef enum {
 }
 
 
+
+
 -(void)makeNavigationView
 {
  
     XJHUtilDefineWeakSelfRef
-    self.leftView             = [LeftBarButtonItemView leftViewWithBlock:^{
+    self.leftView   = [LeftBarButtonItemView leftViewWithBlock:^{
+        
         [weakSelf showLeftMenu];
 
     }];
- 
     self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     
 }
@@ -221,8 +228,8 @@ typedef enum {
 {
     self.centerHeader.image =[UIImage imageNamed:@"PlaceHolderImage"];
     UIImage *headImage = [UIImage imageNamed:@"center_ban_CN.jpg"];
-    CGFloat headHeigh = APPSIZE.width * headImage.size.height/headImage.size.width;
-    self.headView.frame = CGRectMake(0, 0, APPSIZE.width, headHeigh);
+    CGFloat headHeigh = XScreenWidth * headImage.size.height / headImage.size.width;
+    self.headView.frame = CGRectMake(0, 0, XScreenWidth, headHeigh);
     self.tableView.tableHeaderView = self.headView;
 }
 
@@ -275,6 +282,7 @@ typedef enum {
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     centerSectionView *sectionView =  [centerSectionView centerSectionViewWithResponse:self.myCountResponse];
+    
     sectionView.sectionBlock       =  ^(centerItemType type){
         switch (type) {
             case centerItemTypepipei:
@@ -408,6 +416,7 @@ typedef enum {
          [ud synchronize];
          
          weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+         
        }];
       
     }
@@ -430,13 +439,11 @@ typedef enum {
     
     if ([self.myCountResponse[@"recommendationsCount"] integerValue] > 0 ) {
         
-        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil] animated:YES];
         
     }else{
         
-        InteProfileViewController *vc =[[InteProfileViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
         
     }
 }
@@ -445,30 +452,26 @@ typedef enum {
 -(void)CaseApplyStatusView
 {
     [MobClick event: @"apply_applyStutasItem"];
-    ApplyStatusViewController *vc = [[ApplyStatusViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
 }
 //跳转申请列表
 -(void)CaseApplyListView
 {
     
     [MobClick event: @"apply_applyItem"];
-    ApplyViewController *vc = [[ApplyViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:[[ApplyViewController alloc] init] animated:YES];
 }
 
 //跳转申请材料
 -(void)CaseApplyMatial{
     
-    ApplyMatialViewController *vc = [[ApplyMatialViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    [self.navigationController pushViewController:[[ApplyMatialViewController alloc] init] animated:YES];
 }
 //跳转申请MYOFFER
 -(void)CaseMyoffer{
     
-    MyOfferViewController *vc = [[MyOfferViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:[[MyOfferViewController alloc] init] animated:YES];
 }
 
 //跳转收藏

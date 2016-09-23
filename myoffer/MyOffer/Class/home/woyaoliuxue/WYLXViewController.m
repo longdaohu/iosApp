@@ -284,14 +284,23 @@ typedef enum {
     
     NSString *countryKey = USER_EN ? @"Country_EN":@"Country_CN";
     NSArray *countries = [ud valueForKey:countryKey];
+    if(countries.count == 0){
+        [self baseDataSourse:@"country"];
+    }
     self.countryArr = [countries valueForKeyPath:@"name"];
 
     NSString *gradeKey = USER_EN ? @"Grade_EN":@"Grade_CN";
     NSArray *grades = [ud valueForKey:gradeKey];
+    if(grades.count == 0){
+        [self baseDataSourse:@"grade"];
+    }
     self.gradeArr = [grades valueForKeyPath:@"name"];
     
     NSString *subjectKey = USER_EN ? @"Subject_EN":@"Subject_CN";
     NSArray *subjectes = [ud valueForKey:subjectKey];
+    if(subjectes.count == 0){
+        [self baseDataSourse:@"subject"];
+    }
     self.subjectArr = [subjectes valueForKeyPath:@"name"];
     
 }
@@ -353,15 +362,6 @@ typedef enum {
 
     return 20 * XPERCENT;
 }
-
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    XliusectionView *sectionView =[XliusectionView sectionView];
-//   
-//    sectionView.titleLab.text = self.sectionTitles[section];
-//    
-//    return sectionView;
-//}
 
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -498,20 +498,25 @@ typedef enum {
         switch (indexPath.section) {
             case 0:
             {
-                cell.titleTF.text = self.countryArr[0];
-                self.country = self.countryArr[0];
+                NSString *countryName =  self.countryArr.count == 0 ? @"英国" : self.countryArr[0];
+                cell.titleTF.text = countryName;
+                self.country = countryName;
             }
                 break;
             case 1:
             {
-                cell.titleTF.text = self.gradeArr[0];
-                self.grade = self.gradeArr[0];
+                NSString *gradeName =  self.gradeArr.count == 0 ? @"本科大四" : self.gradeArr[0];
+                cell.titleTF.text = gradeName;
+                self.grade = gradeName;
 
             }
                 break;
             default:
-                cell.titleTF.text = self.subjectArr[0];
-                self.ApplySubject = self.subjectArr[0];
+            {
+                NSString *subjectName =  self.subjectArr.count == 0 ? @"艺术与设计" : self.subjectArr[0];
+                cell.titleTF.text = subjectName;
+                self.ApplySubject = subjectName;
+            }
 
                 break;
         }

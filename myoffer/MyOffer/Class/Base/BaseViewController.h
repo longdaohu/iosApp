@@ -54,5 +54,7 @@
 - (BOOL)checkNetWorkReaching;
 - (BOOL)checkNetworkState;
 - (void)loginView;
+- (void)baseDataSourse;
+- (void)baseDataSourse:(NSString *)pageStr;
 
 @end
