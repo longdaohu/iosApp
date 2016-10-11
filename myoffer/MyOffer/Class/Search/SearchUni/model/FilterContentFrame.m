@@ -87,7 +87,7 @@
         }
             break;
         case XcellStateHeightZero:
-        { //状态为2时，cell显示高度为0
+        {  //状态为2时，cell显示高度为0
             self.cellHeigh = 0;
         }
             break;
@@ -150,10 +150,7 @@
     self.cellHeigh = items.count == 0 ? 0 : CGRectGetMaxY(self.bgFrame) + 10;
     
     self.originCellHeight = CGRectGetMaxY(self.bgFrame)+ 10;
-    
-    
-
-
+ 
 }
 
 @end

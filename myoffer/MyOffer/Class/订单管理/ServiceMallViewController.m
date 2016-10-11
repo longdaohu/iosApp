@@ -150,15 +150,13 @@
 }
 
 
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
-{
-    
     [self.progress hideAnimated:YES];
-//    KDProgressHUD *failHud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-//    failHud.labelText = @"加载失败";
-//    [failHud hideAnimated:YES afterDelay:1];
-//    [failHud removeFromSuperViewOnHide];
+    //    KDProgressHUD *failHud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+    //    failHud.labelText = @"加载失败";
+    //    [failHud hideAnimated:YES afterDelay:1];
+    //    [failHud removeFromSuperViewOnHide];
 
 }
 

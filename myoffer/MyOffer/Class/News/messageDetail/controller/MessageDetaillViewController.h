@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface MessageDetailViewController : BaseViewController
+@interface MessageDetaillViewController : BaseViewController
 @property(nonatomic,assign)NSString *NO_ID;
 
 @end

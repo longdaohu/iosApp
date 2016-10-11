@@ -141,9 +141,7 @@
 		<true/>
 	</dict>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>

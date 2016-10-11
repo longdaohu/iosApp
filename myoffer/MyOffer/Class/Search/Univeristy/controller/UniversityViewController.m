@@ -21,7 +21,7 @@
 #import "UniversityRightView.h"
 #import "UniversityNavView.h"
 #import "UniversityRightView.h"
-#import "MessageDetailViewController.h"
+#import "MessageDetaillViewController.h"
 #import "IDMPhotoBrowser.h"
 #import "ShareViewController.h"
 #import "UniversityFooterView.h"
@@ -418,7 +418,7 @@ typedef enum {
     if ([group.HeaderTitle containsString:@"文章"]) {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-        MessageDetailViewController *detail  =[[MessageDetailViewController alloc] init];
+        MessageDetaillViewController *detail  =[[MessageDetaillViewController alloc] init];
         detail.NO_ID = newsFrame.News.messageID;
         [self.navigationController pushViewController:detail animated:YES];
         
@@ -581,7 +581,6 @@ typedef enum {
     
     }
     
-    
 }
 
 //设置是否收藏
@@ -611,7 +610,9 @@ typedef enum {
 //查看所有专业
 - (void)allSubjects{
     
-    UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.uni_id];
+    
+    UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id];
+    
     [self.navigationController pushViewController:subjects animated:YES];
 }
 

@@ -12,14 +12,13 @@
 
 
 #define ZangFontSize 15
-#import "MessageDetailViewController.h"
+#import "MessageDetaillViewController.h"
 #import "MessageDetailFrame.h"
 #import "XWGJMessageTableViewCell.h"
 #import "MessageDetailContentCell.h"
 #import "ApplyViewController.h"
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
-#import <WebKit/WebKit.h>
 #import "ShareViewController.h"
 #import "UniversityItemNew.h"
 #import "UniItemFrame.h"
@@ -28,11 +27,10 @@
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
 
-@interface MessageDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate,WKNavigationDelegate>
+@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //嵌套webView到Cell中
 @property(nonatomic,strong)UIWebView *webView;
-@property(nonatomic,strong)WKWebView *web_wk;
 //请求返回数据字典
 @property(nonatomic,strong)NSDictionary *ArticleInfo;
 // 点赞按钮
@@ -47,14 +45,12 @@
 @property(nonatomic,strong)ShareViewController *shareVC;
 //无数据提示框
 @property(nonatomic,strong)XWGJnodataView *noDataView;
-//导航栏下图片
-@property(nonatomic,strong)UIImageView *navImageView;
 //数据源
 @property(nonatomic,strong)NSMutableArray *groups;
 
 @end
 
-@implementation MessageDetailViewController
+@implementation MessageDetaillViewController
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -141,47 +137,12 @@
      self.noDataView.contentLabel.text = @"网络请求失败，请稍候再试!";
      [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
     
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
-    
-//    if (self.navigationBgImage) {
-//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-//        self.navImageView.clipsToBounds = YES;
-//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.navImageView.image = self.navigationBgImage;
-//        [self.view addSubview:self.navImageView];
-//        
-//    }
-
-}
+ }
 
 
 
--(void)makeWebView
-{
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
-        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
-        [self.web_wk loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
-        self.web_wk.scrollView.scrollEnabled = NO;
-        self.web_wk.userInteractionEnabled = NO;
-        [self.web_wk sizeToFit];
-        self.web_wk.navigationDelegate = self;
-        
-    }else{
-    
-        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
-        self.webView.delegate = self;
-        self.webView.scrollView.scrollEnabled = NO;
-        self.webView.userInteractionEnabled = NO;
-        [self.webView sizeToFit];
-        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
-     }
-    
-   
-}
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
@@ -198,10 +159,24 @@
     [self makeTableView];
     
     [self makeWebView];
-    
+
     [self makeOtherView];
     
 }
+
+-(void)makeWebView
+{
+        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
+        self.webView.delegate = self;
+        self.webView.scrollView.scrollEnabled = NO;
+        self.webView.userInteractionEnabled = NO;
+        [self.webView sizeToFit];
+        self.webView.scalesPageToFit = YES;
+        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
+    
+}
+
 
 -(void)makeDataSourse
 {
@@ -304,53 +279,7 @@
 
 
 
-
-#pragma mark ——————  WKWebViewDeleage
-// 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
-{
-  
-     self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-     [self.hud removeFromSuperViewOnHide];
-
-}
-
 // 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    CGRect frame = webView.frame;
-    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    webView.frame = frame;
-    
-    [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id obj, NSError * _Nullable error) {
-       
-        
-        NSInteger height = [(NSString *)obj integerValue];
-     
-        self.web_wk.frame = CGRectMake(0, 0,XScreenWidth,height);
-  
-        [self.tableView reloadData];
-            
-        
-    }];
-    
-    //加载完成后重新设置 tableview的cell的高度,和webview的frame
-    if (!webView.isLoading) {
-        
-        self.RightView.hidden = NO;
-        
-        [self.hud hideAnimated:YES afterDelay:1];
-    }
-
-}
-
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    
-    [self.hud hideAnimated:YES afterDelay:1];
-
-}
 
 #pragma mark ——————  UIWebViewDeleage
 -(void)webViewDidStartLoad:(UIWebView *)webView
@@ -387,7 +316,6 @@
     
 }
 
-
 //用于设置网页快捷链接跳转
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(nonnull NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -410,7 +338,7 @@
     
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
 {
     [self.hud hideAnimated:YES afterDelay:1];
  
@@ -468,18 +396,11 @@
     
     UniDetailGroup *group = self.groups[0];
     MessageDetailFrame *MessageDetailFrame   =  group.items[0];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        CGFloat cellHight = indexPath.section==0 ? MessageDetailFrame.MessageDetailHeight + self.web_wk.frame.size.height : University_HEIGHT;
-        
-        return cellHight;
-    }else{
-        
-        CGFloat cellHight = indexPath.section==0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
-        
-        return cellHight;
-    }
+ 
+    CGFloat cellHight = indexPath.section== 0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
     
+    return cellHight;
+        
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -493,17 +414,11 @@
             MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
             cell.MessageFrame = group.items[0];
 
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-            {
-                self.web_wk.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.web_wk.frame.size.height);
-                [cell.contentView addSubview:self.web_wk];
+ 
+        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.webView.frame.size.height);
+        [cell.contentView addSubview:self.webView];
 
-            }else{
-                self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.webView.frame.size.height);
-                [cell.contentView addSubview:self.webView];
-
-            }
-
+ 
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
             return cell;
@@ -537,7 +452,7 @@
     if ([group.HeaderTitle containsString:@"文章"]) {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-        MessageDetailViewController *detail  =[[MessageDetailViewController alloc] init];
+        MessageDetaillViewController *detail  =[[MessageDetaillViewController alloc] init];
         detail.NO_ID = newsFrame.News.messageID;
         [self.navigationController pushViewController:detail animated:YES];
         

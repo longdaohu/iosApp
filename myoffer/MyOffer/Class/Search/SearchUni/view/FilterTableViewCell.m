@@ -247,7 +247,6 @@
         sender.titleLabel.font = [UIFont systemFontOfSize:15];
         
         
-        
         if ([self.selectItem isEqualToString: fileritem.buttonArray[index]]) {
             
             [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

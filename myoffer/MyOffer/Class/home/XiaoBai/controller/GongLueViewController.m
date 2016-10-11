@@ -7,7 +7,7 @@
 //
 
 #import "GongLueViewController.h"
-#import "MessageDetailViewController.h"
+#import "MessageDetaillViewController.h"
 #import "GongLueListCell.h"
 #import "GongLueListHeaderView.h"
 #import "AUSearchResultViewController.h"
@@ -217,7 +217,7 @@
     }
     
     
-    MessageDetailViewController *help =[[MessageDetailViewController alloc] init];
+    MessageDetaillViewController *help =[[MessageDetaillViewController alloc] init];
     help.NO_ID = message[@"_id"];
     [self.navigationController pushViewController:help animated:YES];
     

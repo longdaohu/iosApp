@@ -30,3 +30,5 @@ myoffer/MyOffer/APIClient+Interface.h
 myoffer/MyOffer/FiltContent.h
 
 myoffer/MyOffer/ZhiNengPiPei/智能匹配/controller/InteProfileViewController.m
+
+myoffer/MyOffer/Class/News/messageDetail/controller/MessageDetailViewController.m

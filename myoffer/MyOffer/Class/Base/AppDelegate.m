@@ -207,18 +207,27 @@ static AppDelegate *__sharedDelegate;
    
     KDClassLog(@"IOS <= 6   didReceiveRemoteNotification  %@",userInfo);
     // Required
+    
+    if (1 == [UIApplication sharedApplication].applicationState) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
+        
+        [self applicationBadgeNumber];
+    }
+
     [APService handleRemoteNotification:userInfo];
+    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
     
     KDClassLog(@"IOS 7   didReceiveRemoteNotification  %@ -- %ld",userInfo,[UIApplication sharedApplication].applicationState);
- 
     
     if (1 == [UIApplication sharedApplication].applicationState) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
+        
         [self applicationBadgeNumber];
     }
     
@@ -242,6 +251,7 @@ static AppDelegate *__sharedDelegate;
 
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
+    
     NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];

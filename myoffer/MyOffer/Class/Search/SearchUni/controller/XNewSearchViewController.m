@@ -556,6 +556,8 @@ typedef enum {
     [self.CoverBgView addSubview:self.RankTypeTableView];
     
 }
+
+
 #pragma mark ———————— 顶部工具条
 -(void)makeTopToolView
 {
@@ -666,8 +668,6 @@ typedef enum {
  
         
         [self.lastFilerParameters removeAllObjects];
-       
- 
         
         NSArray *filtes = [self getParameterArrayWithDictionary:self.filerParameters];
         
@@ -898,6 +898,7 @@ typedef enum {
     if (tableView == self.FilterTableView) {
         
         FilterContentFrame *item = self.FiltItems[indexPath.row];
+        
         return item.cellHeigh;
         
     }else if (tableView == self.RankTypeTableView) {
@@ -1151,9 +1152,13 @@ typedef enum {
     if (sender.tag == 999) {
         
         if (filterFrame.cellState == XcellStateBaseHeight) {
+            
             filterFrame.cellState = XcellStateRealHeight;
+            
         }else if(filterFrame.cellState == XcellStateRealHeight){
+            
             filterFrame.cellState = XcellStateBaseHeight;
+            
         }else{
             
         }

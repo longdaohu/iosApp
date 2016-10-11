@@ -60,7 +60,7 @@
     CGFloat TLh = LabHeight;
     CGFloat TLx = CGRectGetMaxX(self.TagFrame) + 5;
     CGFloat TLy = CGRectGetMinY(self.TagFrame) + 0.5 * (TGh - TLh);
-    CGFloat TLw = 60;
+    CGFloat TLw = 80;
     self.TagLabFrame = CGRectMake(TLx, TLy, TLw, TLh);
     
     CGFloat TBh = TLh;

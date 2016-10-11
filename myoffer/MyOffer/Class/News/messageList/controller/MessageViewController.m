@@ -10,7 +10,7 @@
 #import "XWGJMessageTableViewCell.h"
 #import "XWGJMessageButtonItemView.h"
 #import "XWGJMessageCategoryItem.h"
-#import "MessageDetailViewController.h"
+#import "MessageDetaillViewController.h"
 #import "XWGJMessageFrame.h"
 #import "YYAutoLoopView.h"
 #import "YYSingleNewsBO.h"
@@ -256,7 +256,7 @@
     
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
         
-        MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
+        MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] init];
         detail.hidesBottomBarWhenPushed = YES;
         detail.NO_ID = StatusBarBannerNews.newsId;
         [weakSelf.navigationController pushViewController:detail animated:YES];
@@ -593,7 +593,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame     = self.CurrentArr[indexPath.row];
-    MessageDetailViewController *detail = [[MessageDetailViewController alloc] init];
+    MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] init];
     detail.NO_ID                        = messageFrame.News.messageID;
     [self.navigationController pushViewController:detail animated:YES];
   

@@ -20,7 +20,7 @@
 #import "YYSingleNewsBO.h"
 #import "YYAutoLoopView.h"
 #import "WYLXViewController.h"
-#import "MessageDetailViewController.h"
+#import "MessageDetaillViewController.h"
 #import "InteProfileViewController.h"
 #import "IntelligentResultViewController.h"
 #import "HotUniversityFrame.h"
@@ -33,12 +33,12 @@
 #import "ServiceMallViewController.h"
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
+#import "MBTIViewController.h"
 
 
 
 
-
-@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIWebViewDelegate,UIAlertViewDelegate>
+@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
 //搜索工具条
 @property(nonatomic,strong)HomeSearchView *searchView;
@@ -611,7 +611,7 @@
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
     [MobClick event:@"home_newsItem"];
-    MessageDetailViewController *detail =[[MessageDetailViewController alloc] init];
+    MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] init];
     detail.NO_ID = response[@"_id"];
     [self.navigationController pushViewController:detail animated:YES];
 }
@@ -894,11 +894,22 @@
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
         
         RequireLogin
+        
+        
+        MBTIViewController *detail =[[MBTIViewController alloc] init];
+        detail.path = path;
+        [self.navigationController pushViewController:detail animated:YES];
+        
+        
+    }else{
+    
+        
+        WebViewController *detail =[[WebViewController alloc] init];
+        detail.path = path;
+        [self.navigationController pushViewController:detail animated:YES];
     }
     
-    WebViewController *detail =[[WebViewController alloc] init];
-    detail.path = path;
-    [self.navigationController pushViewController:detail animated:YES];
+
 
 }
 
@@ -922,6 +933,7 @@
     UniDetailGroup *group = self.groups[indexPath.section];
     NSDictionary *info = group.items[indexPath.row];
     NSString *searchValue = info[@"search"];
+
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:searchValue
                                                                             orderBy:RANKTI];

@@ -53,6 +53,7 @@
 		AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
+		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
 		AE1D011D1D2FCD2D005E2DEF /* gradient_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */; };
 		AE1D011E1D2FCD2D005E2DEF /* YYAutoLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D01161D2FCD2D005E2DEF /* YYAutoLoopView.m */; };
 		AE1D011F1D2FCD2D005E2DEF /* YYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D01181D2FCD2D005E2DEF /* YYBannerView.m */; };
@@ -336,7 +337,7 @@
 		AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B721D5B25E000DD7939 /* UniversityCourseCell.m */; };
 		AEA24B981D5B25E000DD7939 /* UniversityCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B731D5B25E000DD7939 /* UniversityCourseCell.xib */; };
 		AEA24B991D5B25E000DD7939 /* XuFilerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B751D5B25E000DD7939 /* XuFilerView.m */; };
-		AEA24BBF1D5B264300DD7939 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B9E1D5B264300DD7939 /* MessageDetailViewController.m */; };
+		AEA24BBF1D5B264300DD7939 /* MessageDetaillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B9E1D5B264300DD7939 /* MessageDetaillViewController.m */; };
 		AEA24BC01D5B264300DD7939 /* MessageDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */; };
 		AEA24BC11D5B264300DD7939 /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA41D5B264300DD7939 /* ShareButton.m */; };
 		AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BA61D5B264300DD7939 /* MessageDetailContentCell.m */; };
@@ -512,6 +513,8 @@
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
 		AE175BBD1D79593600FD8865 /* UniDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniDetailGroup.m; sourceTree = "<group>"; };
+		AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTIViewController.h; sourceTree = "<group>"; };
+		AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTIViewController.m; sourceTree = "<group>"; };
 		AE1D01141D2FCD2D005E2DEF /* gradient_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient_bg.png; sourceTree = "<group>"; };
 		AE1D01151D2FCD2D005E2DEF /* YYAutoLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAutoLoopView.h; sourceTree = "<group>"; };
 		AE1D01161D2FCD2D005E2DEF /* YYAutoLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAutoLoopView.m; sourceTree = "<group>"; };
@@ -620,6 +623,7 @@
 		AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		AE1FD76E1D5C957C00FFD5A8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		AE567B051C903D1100552E7A /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareMyOffer.png; path = Images.xcassets/AppIcon.appiconset/shareMyOffer.png; sourceTree = "<group>"; };
@@ -1002,8 +1006,8 @@
 		AEA24B731D5B25E000DD7939 /* UniversityCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversityCourseCell.xib; sourceTree = "<group>"; };
 		AEA24B741D5B25E000DD7939 /* XuFilerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XuFilerView.h; sourceTree = "<group>"; };
 		AEA24B751D5B25E000DD7939 /* XuFilerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XuFilerView.m; sourceTree = "<group>"; };
-		AEA24B9D1D5B264300DD7939 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
-		AEA24B9E1D5B264300DD7939 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		AEA24B9D1D5B264300DD7939 /* MessageDetaillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetaillViewController.h; sourceTree = "<group>"; };
+		AEA24B9E1D5B264300DD7939 /* MessageDetaillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetaillViewController.m; sourceTree = "<group>"; };
 		AEA24BA01D5B264300DD7939 /* MessageDetailFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailFrame.h; sourceTree = "<group>"; };
 		AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailFrame.m; sourceTree = "<group>"; };
 		AEA24BA31D5B264300DD7939 /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
@@ -1234,6 +1238,7 @@
 		463E3A4B1B230EDC00E0BAF8 /* MyOffer */ = {
 			isa = PBXGroup;
 			children = (
+				AE36595F1DAB9818007CEE3B /* myOffer.entitlements */,
 				AEA24C0F1D5B274F00DD7939 /* ImageFile */,
 				AEE73C351BCCBB6400B96006 /* LIB */,
 				AEA2491E1D5B1FBC00DD7939 /* Class */,
@@ -2242,6 +2247,8 @@
 			children = (
 				AE1501C11D8E39AF006751D0 /* WebViewController.h */,
 				AE1501C21D8E39AF006751D0 /* WebViewController.m */,
+				AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */,
+				AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */,
 			);
 			path = guanggao;
 			sourceTree = "<group>";
@@ -2766,8 +2773,8 @@
 		AEA24B9C1D5B264300DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24B9D1D5B264300DD7939 /* MessageDetailViewController.h */,
-				AEA24B9E1D5B264300DD7939 /* MessageDetailViewController.m */,
+				AEA24B9D1D5B264300DD7939 /* MessageDetaillViewController.h */,
+				AEA24B9E1D5B264300DD7939 /* MessageDetaillViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3150,8 +3157,12 @@
 					463E3A481B230EDC00E0BAF8 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = YU34U9SYND;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -3474,6 +3485,7 @@
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
 				AEA24BC91D5B264300DD7939 /* XWGJMessageFrame.m in Sources */,
 				5672E8B11CCBA9730099FDFC /* NSString+Sha1.m in Sources */,
+				AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */,
 				AEA249FF1D5B224E00DD7939 /* CatigaryCountry.m in Sources */,
 				AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */,
 				AEA24BC51D5B264300DD7939 /* XWGJShareView.m in Sources */,
@@ -3527,7 +3539,7 @@
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
-				AEA24BBF1D5B264300DD7939 /* MessageDetailViewController.m in Sources */,
+				AEA24BBF1D5B264300DD7939 /* MessageDetaillViewController.m in Sources */,
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
 				AEA24A8D1D5B23F600DD7939 /* HeadItembgView.m in Sources */,
 				AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */,
@@ -3749,9 +3761,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MyOffer/myOffer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YU34U9SYND;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3783,6 +3797,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JPush $(PODS_ROOT)/**";
 			};
 			name = Debug;
@@ -3793,9 +3808,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MyOffer/myOffer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YU34U9SYND;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3827,6 +3844,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JPush $(PODS_ROOT)/**";
 			};
 			name = Release;

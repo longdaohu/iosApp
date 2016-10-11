@@ -1,12 +1,12 @@
 //
-//  WebViewController.m
+//  MBTIViewController.m
 //  myOffer
 //
-//  Created by xuewuguojie on 16/9/18.
+//  Created by xuewuguojie on 16/10/9.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "MBTIViewController.h"
 #import "WYLXViewController.h"
 #import "InteProfileViewController.h"
 #import "AUSearchResultViewController.h"
@@ -16,132 +16,91 @@
 #import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
 #import "ServiceMallViewController.h"
+#import "WebViewController.h"
 
+@interface MBTIViewController ()<UIWebViewDelegate>
+@property(nonatomic,strong)UIWebView *web;
 
-@interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
-@property(nonatomic,strong)KDProgressHUD *hud;
 @end
 
-@implementation WebViewController
+@implementation MBTIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    [self makeUI];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:[self page]];
-}
+    [MobClick endLogPageView:@"page性格测试"];
 
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
-    [MobClick beginLogPageView:[self page]];
+    [MobClick beginLogPageView:@"page性格测试"];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
 
 
-- (NSString *)page
-{
-    NSString *page;
-    if ([self.path containsString:@"aq#index="]) {
-         self.title   = @"帮助中心";
-         page = @"page帮助详情";
-    }else  if ([self.path containsString:@"web-agreement.html"] || [self.path containsString:@"myoffer_License_Agreement"]) {
-        page = @"page查看协议";
-    }else  if ([self.path containsString:@"account/message/"] ) {
-        page = @"page通知详情";
-        self.title = @"通知详情";
-    }else  if ([self.path containsString:@"mbti"] ) {
-        page = @"page性格测试";
-        self.title = @"MBTI职业性格测试";
-    }else  if ([self.path containsString:@"superMentor.html"] ) {
-        page = @"page超级导师";
-    }else{
-        page = @"landingPage";
-    }
-    
-    return page;
-    
-}
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    [self makeUI];
-}
-
 -(void)makeUI
 {
     
-     
+    self.title = @"MBTI职业性格测试";
+    
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *userAgent = [NSString stringWithFormat:@"%@%@",bundleName,version];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+    [parameter setValue:userAgent forKey:@"UserAgent"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:parameter];
     
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
+    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - NAV_HEIGHT)];
     
-    
-    if([self.path containsString:@"agreement.html"]){
-        
-        NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-        WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-        [wkUController addUserScript:wkUScript];
-        WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
-        wkWebConfig.userContentController = wkUController;
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XScreenWidth,XScreenHeight - NAV_HEIGHT) configuration:wkWebConfig];
-        
-    }else{
-        
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - NAV_HEIGHT)];
-    }
-    
-    [self.web_wk loadRequest:request];
-    [self.view addSubview:self.web_wk];
-    self.web_wk.navigationDelegate = self;
+    [self.web loadRequest:request];
+    [self.view addSubview:self.web];
+    self.web.delegate = self;
+
     
 }
 
-#pragma mark ——————  WKWebViewDeleage
-// 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+//    self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    //重写网页方法，监听网页链接
+//    NSString *jumpF = @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
+//    
+//    [webView stringByEvaluatingJavaScriptFromString:jumpF];
+//    
+//    if (!webView.isLoading) {
+//        
+//        [self.progress hideAnimated:YES afterDelay:0.5];
+//    }
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
     
-    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [self.hud removeFromSuperViewOnHide];
-}
-
-// 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    
-     NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};" : @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
-    [webView evaluateJavaScript:jumpF completionHandler:nil];
-    
-    [self.hud hideAnimated:YES];
-}
-
-
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    
-    [KDAlertView showMessage:GDLocalizedString(@"NetRequest-connectError") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
-  
-    [self.hud hideAnimated:YES];
-}
-
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
-{
-    
-    NSString *absoluteString = navigationAction.request.URL.absoluteString;
+    NSString *absoluteString = request.URL.absoluteString;
     
     NSInteger pageNumber = DefaultNumber;
     if ([absoluteString containsString:@"app:appJump"]) {
@@ -162,23 +121,49 @@
         pageNumber = 7;
     }else if([absoluteString containsString:@"service.html"]) {
         pageNumber = 8;
-    }
+    }else if([absoluteString containsString:@"www.apesk.com"]) {
+        pageNumber = 9;
+   
+    }else{
+    
+        if (request.allHTTPHeaderFields[@"apikey"].length == 0) {
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    NSURL *url = [request URL];
+                    
+                    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+                    // set the new headers
+                    [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
+                    
+                    [self.web loadRequest:request];
+                });
+            });
+
+            return NO;
+        }
+      }
     
     switch (pageNumber) {
             
         case 0:{
+            
             NSString *pathURL = [absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             NSString *jump_str =[pathURL stringByReplacingOccurrencesOfString:@"app:appJump/" withString:@""];
             NSData *JSONData = [jump_str dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
             [self pageWithResponse:responseJSON];
-            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            return NO;
         }
             break;
             
         case 1:{
             [self caseZhiNenPipei];
-            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            return NO;
         }
             break;
             
@@ -193,55 +178,55 @@
                 
                 [self UKWithCountryType:country orderBy:RANKTI];
             }
-
-            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            return NO;
         }
             break;
         case 3:{
-        
+            
             [self caseWoyaoluxue];
             
-            decisionHandler(WKNavigationActionPolicyCancel);
+            return NO;
         }
             break;
         case 4:
         {
             [self caseWoyaoluxue];
             
-            decisionHandler(WKNavigationActionPolicyCancel);
+            return NO;
         }
             break;
         case 5:{
-        
-            NSDictionary *header =  navigationAction.request.allHTTPHeaderFields;
-            NSString *apiValue  = [header valueForKey:@"apikey"];
+            
+            NSString *apiValue  = request.allHTTPHeaderFields[@"apikey"];
             
             if (apiValue.length == 0) {
                 
-//                NSMutableURLRequest *request = [navigationAction.request mutableCopy];
-//                [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
+                //                NSMutableURLRequest *request = [navigationAction.request mutableCopy];
+                //                [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
                 
                 WebViewController *webPage = [[WebViewController alloc] init];
-                 webPage.path = absoluteString;
+                webPage.path = absoluteString;
                 [self.navigationController pushViewController:webPage animated:YES];
                 
-                decisionHandler(WKNavigationActionPolicyCancel);
+                return NO;
                 
-//                [webView loadRequest:request];
+                //                [webView loadRequest:request];
                 
             }else{
                 
-                decisionHandler(WKNavigationActionPolicyAllow);
+                return YES;
                 
             }
         }
             break;
-            case 6:
+        case 6:
         {
             
-               [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
-                decisionHandler(WKNavigationActionPolicyCancel);
-         }
+            [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
+      
+            return NO;
+        }
             break;
         case 7:
         {
@@ -251,23 +236,30 @@
             
             [self caseUniversityWithshortId:contents[0]];
             
-            decisionHandler(WKNavigationActionPolicyCancel);
+            return NO;
         }
             break;
         case 8:
         {
-           
-//            [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
-            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            //            [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+            return NO;
         }
             break;
-            
-       default:
-            decisionHandler(WKNavigationActionPolicyAllow);
+        case 9:
+        {
+          
+            return YES;
+        }
+            break;
+        default:
+            return YES;
             break;
     }
-    
+
+  
 }
+
 
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
     
@@ -377,7 +369,7 @@
     
     NSDictionary *dict =  response[@"args"];
     [self caseUniversityWithshortId: dict[@"id"]];
- 
+    
 }
 //学校详情
 -(void)caseUniversityWithshortId:(NSString *)Uni_id{
@@ -401,10 +393,9 @@
     
     
 }
-
 -(void)dealloc
 {
-    KDClassLog(@"WebViewController网页  dealloc");   //可以释放
+    KDClassLog(@"MBTIViewController 性格测试网页  dealloc");   //可以释放
 }
 
 
@@ -413,6 +404,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 
 @end
