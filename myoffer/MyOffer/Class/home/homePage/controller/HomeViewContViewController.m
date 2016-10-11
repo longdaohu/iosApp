@@ -645,7 +645,6 @@
 //检查版本更新
 -(void)checkAPPVersion
 {
-    
     NSString *urlStr = @"https://itunes.apple.com/lookup?id=1016290891";
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];

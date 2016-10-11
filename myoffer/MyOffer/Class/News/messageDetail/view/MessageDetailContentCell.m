@@ -113,7 +113,6 @@
         [self.contentView addSubview:self.FocusBtn];
         
         self.ArticleImageView = [[UIImageView alloc] init];
-//        self.ArticleImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.ArticleImageView];
         
         self.SummaryLabel =[[UILabel alloc] init];
@@ -149,6 +148,7 @@
     
     self.TitleLabel.text = MessageFrame.MessageDetail[@"title"];
     self.TitleLabel.frame = MessageFrame.TitleFrame;
+    
     
     [self.LogoView KD_setImageWithURL:MessageFrame.MessageDetail[@"author_portrait_url"]];
     self.LogoView.frame = MessageFrame.LogoFrame;

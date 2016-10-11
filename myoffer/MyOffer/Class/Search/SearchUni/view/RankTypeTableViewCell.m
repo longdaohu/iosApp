@@ -35,6 +35,9 @@
 - (void)awakeFromNib {
     // Initialization code
     
+    [super awakeFromNib];
+
+    
     self.accessoryMV.contentMode = UIViewContentModeCenter;
 }
 

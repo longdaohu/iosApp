@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     
+    [super awakeFromNib];
+    
     self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
     self.panding.layer.cornerRadius = 2.5;
     self.panding.layer.masksToBounds = YES;

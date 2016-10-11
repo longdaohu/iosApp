@@ -94,7 +94,6 @@
     NSString *time = [messageFrame.News.Update_time substringToIndex:10];
     [self.TimeBtn setTitle:time forState:UIControlStateNormal];
     self.TimeBtn.frame = messageFrame.TimeFrame;
-
     
     NSString *count = [NSString stringWithFormat:@"%@阅读",messageFrame.News.FocusCount];
     [self.FocusBtn setTitle:count forState:UIControlStateNormal];

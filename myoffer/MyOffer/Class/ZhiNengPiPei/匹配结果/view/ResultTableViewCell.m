@@ -43,6 +43,8 @@
 
 - (void)awakeFromNib {
     
+    [super awakeFromNib];
+
     self.logoView =[[LogoView alloc] init];
     [self addSubview:self.logoView];
     

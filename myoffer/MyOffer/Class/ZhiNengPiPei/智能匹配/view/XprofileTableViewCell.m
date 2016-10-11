@@ -30,6 +30,9 @@
 
 - (void)awakeFromNib {
     
+    
+    [super awakeFromNib];
+
     self.countryTF.placeholder = GDLocalizedString(@"ApplicationProfile-003");
     self.timeTF.placeholder = GDLocalizedString(@"ApplicationProfile-004");
     self.gradeTF.placeholder = GDLocalizedString(@"ApplicationProfile-grade");

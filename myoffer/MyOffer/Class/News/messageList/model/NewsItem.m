@@ -19,4 +19,10 @@
              };
     
 }
+
+-(NSString *)LogoName{
+
+    return [_LogoName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 @end

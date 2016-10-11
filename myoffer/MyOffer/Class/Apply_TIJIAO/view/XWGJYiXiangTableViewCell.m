@@ -19,13 +19,14 @@
 
 - (void)awakeFromNib {
 
+    [super awakeFromNib];
+
     [self addLeftViewWithTextField:self.ContentTF];
     
     [self addRightViewWithTextField:self.ContentTF];
     
     self.ContentTF.delegate = self;
-    
-    
+     
     XWGJKeyboardToolar *tooler =[[NSBundle mainBundle] loadNibNamed:@"XWGJKeyboardToolar" owner:self options:nil].lastObject;
     tooler.delegate = self;
     self.ContentTF.inputAccessoryView = tooler;

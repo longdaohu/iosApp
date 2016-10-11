@@ -17,6 +17,9 @@
 
 -(void)awakeFromNib
 {
+    
+    [super awakeFromNib];
+
     self.ProfileLab.text = GDLocalizedString(@"About_profile");
     
 //    self.myOfferLogo.image =[UIImage imageNamed:GDLocalizedString(@"About_Logo")];

@@ -32,6 +32,8 @@ static NSString *identify = @"course";
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
+
     self.titleLabel =[[UILabel alloc] init];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];

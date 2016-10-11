@@ -19,6 +19,8 @@
 
 - (void)awakeFromNib {
     
+    [super awakeFromNib];
+
     [self addLeftViewWithTextField:self.ContentTF];
     [self addRightViewWithTextField:self.ContentTF];
     self.ContentTF.delegate = self;

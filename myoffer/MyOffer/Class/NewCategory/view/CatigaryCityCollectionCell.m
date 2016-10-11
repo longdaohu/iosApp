@@ -23,6 +23,8 @@
 
 - (void)awakeFromNib {
   
+    [super awakeFromNib];
+
     self.contentView.layer.cornerRadius = CORNER_RADIUS;
     self.contentView.layer.masksToBounds = YES;
     self.contentView.backgroundColor = XCOLOR_WHITE;
