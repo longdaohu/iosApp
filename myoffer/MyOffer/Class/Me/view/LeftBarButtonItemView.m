@@ -17,7 +17,7 @@
      
         self.iconView =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
         self.iconView.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
-        [self.iconView  setImage:[UIImage imageNamed:@"menu_white"] forState:UIControlStateNormal];
+        [self.iconView  setImage:  XImage(@"menu_white")  forState:UIControlStateNormal];
         [self addSubview:self.iconView ];
         [self.iconView addTarget:self action:@selector(left:) forControlEvents:UIControlEventTouchDown];
         

@@ -22,7 +22,7 @@
 @implementation XWGJShareView
 + (instancetype)shareView{
     
-    XWGJShareView  *ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
+    XWGJShareView  *ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
 
     [[UIApplication sharedApplication].keyWindow addSubview:ShareView];
 
@@ -130,7 +130,7 @@
         self.CancelBtn.layer.cornerRadius = 5;
         self.CancelBtn.layer.masksToBounds = YES;
         [self.CancelBtn setTitle:GDLocalizedString(@"Potocol-Cancel") forState:UIControlStateNormal];
-        self.CancelBtn.titleLabel.font = [UIFont systemFontOfSize:16 + FONT_SCALE];
+        self.CancelBtn.titleLabel.font = [UIFont systemFontOfSize:16 + XPERCENT];
         [self.CancelBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
         self.CancelBtn.backgroundColor = XCOLOR_LIGHTGRAY;
         [self.CancelBtn addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchUpInside];

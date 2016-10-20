@@ -69,7 +69,7 @@
     self.sendButton.layer.cornerRadius = 5;
     self.sendButton.layer.masksToBounds = YES;
     
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, APPSIZE.width -20, APPSIZE.height - 414)];
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, XScreenWidth -20, XScreenHeight - 414)];
     self.textView.layer.cornerRadius = 5;
     self.textView.layer.borderWidth = 1;
     self.textView.layer.borderColor = XCOLOR_LIGHTGRAY.CGColor;

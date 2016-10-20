@@ -145,7 +145,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
     self.tableView.alpha = 0.1;
@@ -181,9 +181,8 @@
 -(void)makeDataSourse
 {
     
-    XJHUtilDefineWeakSelfRef
-    
- 
+    XWeakSelf
+  
     NSString *testpath =[NSString stringWithFormat:@"GET api/v2/article/%@",self.NO_ID];
     
     [self startAPIRequestWithSelector:testpath parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -414,7 +413,7 @@
             cell.MessageFrame = group.items[0];
 
  
-        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, APPSIZE.width,self.webView.frame.size.height);
+        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, XScreenWidth ,self.webView.frame.size.height);
         [cell.contentView addSubview:self.webView];
 
  
@@ -468,7 +467,7 @@
 //点赞
 -(void)ZangBtnClick
 {
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     NSString *path =[NSString stringWithFormat:@"GET api/article/%@/like",self.NO_ID];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
         
@@ -502,7 +501,7 @@
         [shareInfor setValue:shareTitle forKey:@"shareTitle"];
         [shareInfor setValue:shareContent forKey:@"shareContent"];
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         _shareVC = [[ShareViewController alloc] init];
         _shareVC.shareInfor = shareInfor;
         _shareVC.actionBlock = ^{

@@ -20,7 +20,7 @@
    
     CenterSectionItem *item =[[CenterSectionItem alloc] init];
     
-    item.iconView.image =[UIImage imageNamed:icon];
+    item.iconView.image = XImage(icon);
     
     item.titleLab.text = title;
     

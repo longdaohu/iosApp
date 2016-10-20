@@ -247,7 +247,7 @@ typedef enum {
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.scrollEnabled = NO;
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     
     

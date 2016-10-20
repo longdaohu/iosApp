@@ -66,19 +66,19 @@
     CGFloat TBh = TLh;
     CGFloat TBx = CGRectGetMaxX(self.TagLabFrame);
     CGFloat TBy = TLy;
-    CGFloat TBw = APPSIZE.width - TBx;
+    CGFloat TBw = XScreenWidth - TBx;
     self.TagBgFrame = CGRectMake(TBx,TBy,TBw,TBh);
     
     CGFloat ONEx = MARGIN;
     CGFloat ONEy = CGRectGetMaxY(self.TagFrame) + MARGIN;
-    CGFloat ONEw = APPSIZE.width - MARGIN;
+    CGFloat ONEw = XScreenWidth - MARGIN;
     CGFloat ONEh = LineHeight;
     self.FirstLineFrame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
     
     
     CGFloat Tx = MARGIN;
     CGFloat Ty = CGRectGetMaxY(self.FirstLineFrame) +MARGIN;
-    CGFloat Tw = APPSIZE.width - Tx * 2;
+    CGFloat Tw = XScreenWidth - Tx * 2;
     CGSize Tsize = [MessageDetail[@"title"] boundingRectWithSize:CGSizeMake(Tw, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:24]}context:nil].size;
     self.TitleFrame = CGRectMake(Tx, Ty,Tw , Tsize.height);
     
@@ -98,7 +98,7 @@
     CGFloat TMy = Ay;
     CGFloat TMw = 110 ;
     CGFloat TMh = LabHeight;
-    CGFloat TMx = APPSIZE.width - TMw - MARGIN;
+    CGFloat TMx = XScreenWidth - TMw - MARGIN;
     self.TimeFrame = CGRectMake(TMx,TMy, TMw , TMh);
     
     CGFloat FCy = Ay;

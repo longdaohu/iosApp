@@ -91,7 +91,7 @@
 
 -(void)makeTableView{
 
-    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT,XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
+    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height,XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.allowsSelection = NO;
@@ -115,7 +115,7 @@
 -(void)SearchDaraSourse
 {
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     //请求推荐数据
     [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
         

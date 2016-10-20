@@ -87,7 +87,7 @@
 
 -(void)makeDataSourse{
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
 
     NSString *path = [NSString stringWithFormat:@"GET api/account/order/%@",self.order.orderId];
     
@@ -192,7 +192,7 @@
 
 -(void)makeTableViewHeaderView{
 
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     OrderDetailHeaderView *header = [[OrderDetailHeaderView alloc] init];
     header.order = self.order;
     header.frame = CGRectMake(0, 0, XScreenWidth, header.headHeight);
@@ -208,7 +208,7 @@
 -(void)makeTableViewFooterView:(NSDictionary *)respose{
     
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     OrderDetailFooterView *footer = [[OrderDetailFooterView alloc] init];
     footer.orderDict = respose;
     footer.frame = CGRectMake(0, 0, XScreenWidth, footer.headHeight + 20);

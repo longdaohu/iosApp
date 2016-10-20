@@ -86,7 +86,8 @@
 -(XWGJNODATASHOWView *)NODATA
 {
     if (!_NODATA) {
-        XJHUtilDefineWeakSelfRef
+        
+        XWeakSelf
         
         _NODATA =[[XWGJNODATASHOWView alloc] initWithFrame:self.view.bounds];
         
@@ -207,7 +208,7 @@
     self.StatusBarBan.backgroundColor = XCOLOR_LIGHTBLUE;
     [self.view addSubview:self.StatusBarBan];
  
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf showLeftMenu];
 
@@ -248,7 +249,7 @@
  */
 - (void)buildTableHeadView {
    
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, AdjustF(200.f))];
     
@@ -373,7 +374,7 @@
     
     NSString *path =[NSString stringWithFormat:@"%@category=%@&page=%ld&size=%d",kAPISelectorArticleCategory,keyWord,(long)category.LastPage,REQUEST_SIZE];
     
-     XJHUtilDefineWeakSelfRef
+     XWeakSelf
     
     [self startAPIRequestWithSelector:path
      
@@ -502,9 +503,9 @@
 {
     if(!_sectionHeaderView)
     {
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         
-        _sectionHeaderView = [[XWGJMessageButtonItemView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 120)];
+        _sectionHeaderView = [[XWGJMessageButtonItemView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 120)];
         
         _sectionHeaderView.ActionBlock = ^(UIButton *sender){
             
@@ -612,31 +613,30 @@
     
 }
 
-//左侧导航item
+//导航栏 leftBarButtonItem
 -(void)leftViewMessage{
+    
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+    NSString *message_count  = [ud valueForKey:@"message_count"];
+    NSString *order_count    = [ud valueForKey:@"order_count"];
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
+    
+    if(!LOGIN) self.leftView.countStr = @"0";
     
     if (LOGIN && [self checkNetWorkReaching]) {
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         
         [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             
-            NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
             NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count  = [response[@"order_count"] integerValue];
+            NSInteger order_count    = [response[@"order_count"] integerValue];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
             [ud synchronize];
-
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)([response[@"message_count"] integerValue]+[response[@"order_count"] integerValue])];
-
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
         }];
-        
-    }
-    
-    if(!LOGIN){
-        
-        self.leftView.countStr = @"0";
         
     }
     

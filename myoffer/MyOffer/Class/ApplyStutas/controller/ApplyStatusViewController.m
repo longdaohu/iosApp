@@ -58,7 +58,7 @@
 
 -(void)makeTableView
 {
-    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.TableView.dataSource      = self;
     self.TableView.delegate        = self;
     self.TableView.backgroundColor = XCOLOR_BG;
@@ -125,8 +125,7 @@
         return; 
     }
     
-    XJHUtilDefineWeakSelfRef
-    
+    XWeakSelf
     
     NSString *path = @"GET api/account/checklist";
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {

@@ -28,6 +28,7 @@
 @property(nonatomic,strong)leftHeadView *headerView;
 @property(nonatomic,copy)NSString *Applystate;  //检查申请进程，判断我的申请跳转页面
 @property(nonatomic,strong)NSMutableArray *menuItems;
+@property(nonatomic,assign)BOOL haveIcon;
 @end
 
 @implementation XWGJLeftMenuViewController
@@ -89,38 +90,51 @@
  
      if(LOGIN) {
          
-        self.headerView.userNameLabel.text = nil;
-        //请求头像信息
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
-            self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
-            self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
-            [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
-        }];
+         //请求头像信息
+         if (!self.haveIcon){
+             
+              [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
+                
+                 self.haveIcon = YES;
+                 self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
+                 self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
+                 [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
+                 
+             }];
+  
+         }
          
+     }else{
+         
+         self.haveIcon = NO;
+         self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
+         self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
+     }
+    
+    
+    if (LOGIN) {
+    
         //检查网络是否连接，如果没有连接，不再往下执行代码
         if (![self checkNetWorkReaching]) {
             
             return;
         }
-           /** state     状态有4个值
-          *  【 pending  ——审核中
-          *  【 PushBack ——退回
-          *  【 Approved ——审核通过
-          *  【 -1       ——表示没有申请过
-          *   检查申请进程，判断我的申请跳转页面
-          */
-         [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-         
-             self.Applystate = response[@"state"];
-         }];
-   
-         
-     }else{
-      
-         self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
-         self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
-     }
-    
+        
+         /** state     状态有4个值
+         *  【 pending  ——审核中
+         *  【 PushBack ——退回
+         *  【 Approved ——审核通过
+         *  【 -1       ——表示没有申请过
+         *   检查申请进程，判断我的申请跳转页面
+         */
+        [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
+            self.Applystate = response[@"state"];
+            
+        }];
+        
+
+    }
     
     
 }
@@ -374,14 +388,15 @@
       
             [[AppDelegate sharedDelegate] logout];
             [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-            self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");
-            self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar"];
+//            self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");
+//            self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar"];
+//            [self makeCellItems];
+
             [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
             }];
-  
-  
-       [self makeCellItems];
+        
+        [self makeDataSource];
         
         UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
        
@@ -425,7 +440,9 @@
     
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.myoffer.cn/m/api/account/portrait"]];
+    NSString *path = [NSString stringWithFormat:@"%@m/api/account/portrait",DOMAINURL];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
+   
     [request setHTTPMethod:@"POST"];
     
     NSString *boundary = @"BOUNDARY_STRING";
@@ -441,12 +458,15 @@
     [request setHTTPBody:body];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [[APIClient defaultClient] startTaskWithRequest:request expectedStatusCodes:nil success:^(NSInteger statusCode, id response) {
+      
         [hud hideAnimated:YES afterDelay:1];
         [hud applySuccessStyle];
-        
         self.headerView.iconImageView.image = image;
+    
     } failure:^(NSInteger statusCode, NSError *error) {
+    
         [hud hideAnimated:YES];
         [self showAPIErrorAlertView:error clickAction:nil];
     }];

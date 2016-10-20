@@ -28,7 +28,7 @@
          self.tapBtn =[[UIButton alloc] init];
         [self.tapBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
         [self.tapBtn setTitle:GDLocalizedString(@"Evaluate-pipei") forState:UIControlStateNormal];
-         self.tapBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * APPSIZE.width / 320.0)];
+         self.tapBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * XScreenWidth / 320.0)];
         [self.tapBtn addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.tapBtn];
         self.tapBtn.layer.cornerRadius = 5;

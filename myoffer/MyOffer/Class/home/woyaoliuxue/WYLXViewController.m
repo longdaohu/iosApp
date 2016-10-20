@@ -193,7 +193,7 @@ typedef enum {
 {
     if (!_sucessView) {
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         _sucessView = [WYLXSuccessView successViewWithBlock:^{
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -320,7 +320,7 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -337,7 +337,7 @@ typedef enum {
 -(void)makeHeaderAndFooterView
 {
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     WYLXFooterView *footerView = [WYLXFooterView footerViewWithBlock:^(UIButton *sender) {
         
         [weakSelf liuxueFooterViewDidClick:sender];
@@ -685,7 +685,7 @@ typedef enum {
             
         } else {
             
-             self.PhoneView.center = CGPointMake(self.view.frame.size.width / 2.0f, APPSIZE.height*2/3);
+             self.PhoneView.center = CGPointMake(self.view.frame.size.width / 2.0f, XScreenHeight * 2/3);
         }
         
     }else{
@@ -783,7 +783,7 @@ typedef enum {
 -(void)sendLiuxueRequest
 {
  
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     NSDictionary *parameters =  @{@"fastPass": @{@"des_country": self.country, @"grade":self.grade, @"subject":self.ApplySubject, @"phonenumber":self.phoneNumber}};
     
     [self

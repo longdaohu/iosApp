@@ -102,13 +102,13 @@ typedef enum {
     
     CGFloat LBH = self.frame.size.height;
     
-    CGFloat LBW = APPSIZE.width*0.5;
+    CGFloat LBW = XScreenWidth * 0.5;
     
     self.leftButton.frame = CGRectMake(0, 0,LBW,LBH);
     
     self.LeftView.frame = CGRectMake(LBW - LBH - 5, 0,LBH, LBH);
     
-    self.rightButton.frame = CGRectMake(APPSIZE.width*0.5, 0, APPSIZE.width*0.5, self.frame.size.height);
+    self.rightButton.frame = CGRectMake(XScreenWidth*0.5, 0, XScreenWidth*0.5, self.frame.size.height);
     
      self.centerLine.frame = CGRectMake(XScreenWidth * 0.5, 10, 1, LBH - 20);
     

@@ -96,11 +96,11 @@
         [wkUController addUserScript:wkUScript];
         WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
         wkWebConfig.userContentController = wkUController;
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XScreenWidth,XScreenHeight - NAV_HEIGHT) configuration:wkWebConfig];
+        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XScreenWidth,XScreenHeight - XNav_Height) configuration:wkWebConfig];
         
     }else{
         
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - NAV_HEIGHT)];
+        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height)];
     }
     
     [self.web_wk loadRequest:request];

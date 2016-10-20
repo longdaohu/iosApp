@@ -812,7 +812,8 @@ typedef enum {
 {
     if (!_ADview) {
         
-        XJHUtilDefineWeakSelfRef
+        
+        XWeakSelf
         _ADview =[[AdvertiView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
         _ADview.backgroundColor = [UIColor whiteColor];
 

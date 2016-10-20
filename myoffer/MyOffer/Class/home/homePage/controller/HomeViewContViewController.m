@@ -8,8 +8,6 @@
 #define ADKEY @"Advertiseseeee"
 #define HEADER_HEIGHT XScreenHeight * 0.7
 
-
-
 #import "HomeHeaderView.h"
 #import "HomeViewContViewController.h"
 #import "HomeSectionHeaderView.h"
@@ -56,8 +54,6 @@
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 //分组数据
 @property(nonatomic,strong)NSMutableArray *groups;
-
-
 
 @end
 
@@ -112,7 +108,7 @@
     [self makeUI];
     
     [self makeOther];
-  
+    
 }
 
 
@@ -195,6 +191,7 @@
 //留学目的地数据
 -(void)hotCityData:(BOOL)refresh
 {
+    
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
         
         [self dataSourseWithFresh:refresh GroupIndex:0];
@@ -209,6 +206,7 @@
 //热门文章
 -(void)hotArticle:(BOOL)refresh
 {
+    
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorArticleRecommendation parameters:nil success:^(NSInteger statusCode, id response) {
         
         [self dataSourseWithFresh:refresh GroupIndex:1];
@@ -224,6 +222,7 @@
 - (void)dataSourseWithFresh:(BOOL)refresh GroupIndex:(NSInteger)index{
     
     if (refresh) {
+        
         UniDetailGroup *groupthree = self.groups[index];
         groupthree.items = nil;
     }
@@ -259,6 +258,7 @@
     NSMutableArray *temp_universities = [NSMutableArray array];
     
     for (NSDictionary *uni_Info in temp_Unies) {
+        
          HotUniversityFrame *uniFrame = [HotUniversityFrame frameWithUniversity:uni_Info];
         [temp_universities addObject:uniFrame];
     }
@@ -266,12 +266,13 @@
     
     UniDetailGroup *groupthree = self.groups[2];
     
-    if (temp_universities.count>0) {
+    if (temp_universities.count > 0) {
+        
         HotUniversityFrame *uniFrame = temp_universities[0];
         groupthree.cellHeight = uniFrame.cellHeight;
     }
     
-    groupthree.items =@[temp_universities];
+    groupthree.items = @[temp_universities];
     
 }
 
@@ -279,14 +280,13 @@
 -(void)hotPromotions:(BOOL)refresh
 {
   
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     [self startAPIRequestWithSelector:@"GET api/app/promotions"  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         if (refresh) {
             
             [self.advertise_Arr removeAllObjects];
-            
         }
         
         NSMutableArray *items = [NSMutableArray array];
@@ -295,17 +295,17 @@
         
         for (NSInteger i = 0; i < weakSelf.advertise_Arr.count; i++) {
             
-            NSDictionary *obj = weakSelf.advertise_Arr[i];
             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-            new.message = obj;
+            new.message = weakSelf.advertise_Arr[i];
             new.newsTitle = @"";
             new.index = i;
             [items addObject:new];
         }
         
-         weakSelf.autoLoopView.banners = [items mutableCopy];
+        
+        items.count ? weakSelf.autoLoopView.banners  = [items mutableCopy] : nil;
        
-        self.autoLoopView.userInteractionEnabled = self.advertise_Arr.count > 0 ? YES : NO;
+        self.autoLoopView.userInteractionEnabled = items.count ? YES : NO;
         
         [self.TableView.mj_header endRefreshing];
         
@@ -327,6 +327,7 @@
     if (!_myToolbar) {
         
         _myToolbar =[XUToolbar toolBar];
+        
         [self.view addSubview:_myToolbar];
     }
     return _myToolbar;
@@ -345,8 +346,9 @@
 
 -(void)makeLeftBarButtonItemView{
 
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
+        
         [weakSelf openLeftMenu];
     }];
     
@@ -377,8 +379,10 @@
    
 }
 
+//添加表头
 -(void)makeTableHeader
 {
+    
     HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XScreenWidth, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
         [self HomeHeaderViewWithItemtap:itemTag];
     }];
@@ -396,6 +400,8 @@
     [self leftViewMessage];
 }
 
+
+//设置下拉刷新
 -(void)makeRefreshView
 {
     // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
@@ -427,13 +433,14 @@
 //搜索功能
 -(void)makeSearchView
 {
+    
     CGFloat searchX = 20;
     CGFloat searchH = 44;
     CGFloat searchW = XScreenWidth - searchX * 2;
     CGFloat searchY = HEADER_HEIGHT * 0.6 + 20 - searchH * 0.5;
     HomeSearchView *searchView = [HomeSearchView ViewWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
     self.searchView = searchView;
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     searchView.actionBlock = ^{
         
         [weakSelf CaseSearchPage];
@@ -448,7 +455,7 @@
  */
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     CGFloat AY =  XScreenHeight * 0.7 * 0.6 + 20;
     
@@ -583,6 +590,9 @@
 //        
 //         return;
 //    }
+    
+    
+    
     
      switch (tag) {
          case 0:
@@ -794,30 +804,31 @@
     
 }
 
-//导航栏leftBarbuttonItem
+//导航栏 leftBarButtonItem
 -(void)leftViewMessage{
+    
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+    NSString *message_count  = [ud valueForKey:@"message_count"];
+    NSString *order_count    = [ud valueForKey:@"order_count"];
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
+    
+    if(!LOGIN) self.leftView.countStr = @"0";
     
     if (LOGIN && [self checkNetWorkReaching]) {
         
-        XJHUtilDefineWeakSelfRef
-       [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-     
-            NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+        XWeakSelf
+        
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count    = [response[@"order_count"] integerValue];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
             [ud synchronize];
-
-             weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
         }];
         
-    }
-    
-    if(!LOGIN){
-    
-        self.leftView.countStr = @"0";
-
     }
     
 }
@@ -830,7 +841,6 @@
     
     [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
 }
-
 
 //跳转留学小白
 -(void)CaseLiuXueXiaoBai
@@ -862,10 +872,9 @@
     }
 }
 
-
-
 //跳转服务包
--(void)CaseServerMall{
+-(void)CaseServerMall
+{
 
     [MobClick event:@"home_mall"];
     [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
@@ -879,21 +888,16 @@
     [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
 }
 
-
-
-
 //跳转LandingPage
 -(void)CaseLandingPageWithBan:(NSString *)path
 {
+  
     [MobClick event:@"home_advertisementClick"];
     
     if([path containsString:@"mbti/test"])
     {
-
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
-        
         RequireLogin
-        
         
         MBTIViewController *detail =[[MBTIViewController alloc] init];
         detail.path = path;
@@ -901,19 +905,17 @@
         
         
     }else{
-    
         
         WebViewController *detail =[[WebViewController alloc] init];
         detail.path = path;
         [self.navigationController pushViewController:detail animated:YES];
     }
-    
-
-
+ 
 }
 
 //跳转LandingPage
--(void)CaseSearchResultWithindexPath:(NSIndexPath *)indexPath{
+-(void)CaseSearchResultWithindexPath:(NSIndexPath *)indexPath
+{
 
     NSString *item;
     switch (indexPath.row) {
@@ -932,7 +934,6 @@
     UniDetailGroup *group = self.groups[indexPath.section];
     NSDictionary *info = group.items[indexPath.row];
     NSString *searchValue = info[@"search"];
-
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:searchValue
                                                                             orderBy:RANKTI];
@@ -940,13 +941,12 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
 {
     if (LOGIN) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self CasePipeiWithItemType:self.clickType];
 

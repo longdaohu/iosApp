@@ -32,7 +32,7 @@
         [self addSubview:self.downView];
         
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         UniversityheaderCenterView *centerView =  [UniversityheaderCenterView View];
         centerView.actionBlock = ^(UIButton *sender){
         

@@ -89,7 +89,8 @@
 -(void)getHotCitySource
 {
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
+    
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSMutableArray *countryM  =[NSMutableArray array];
@@ -123,23 +124,68 @@
 }
 
 
-
+//专业数据数组
 -(NSArray *)SubjectList
 {
     if (!_SubjectList) {
         
-        CatigorySubject *art =[CatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
-        CatigorySubject *finance =[CatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
-        CatigorySubject *social =[CatigorySubject subjectItemInitWithIconName:@"sub_social"  TitleName:GDLocalizedString(@"CategorySub-social")];
-        CatigorySubject *humanity =[CatigorySubject subjectItemInitWithIconName:@"sub_humanit"  TitleName:GDLocalizedString(@"CategorySub-humanity")];
-        CatigorySubject *engineer =[CatigorySubject subjectItemInitWithIconName:@"sub_engineer"  TitleName:GDLocalizedString(@"CategorySub-engineer")];
-        CatigorySubject *education =[CatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
-        CatigorySubject *medicine =[CatigorySubject subjectItemInitWithIconName:@"sub_medicine"  TitleName:GDLocalizedString(@"CategorySub-medicine")];
-        CatigorySubject *business =[CatigorySubject subjectItemInitWithIconName:@"sub_business"  TitleName:GDLocalizedString(@"CategorySub-business")];
-        CatigorySubject *farm =[CatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
-        CatigorySubject *science =[CatigorySubject subjectItemInitWithIconName:@"sub_sciencee"  TitleName:GDLocalizedString(@"CategorySub-science")];
-      
-        _SubjectList = @[art,finance,social,humanity,engineer,education,medicine,business,farm,science];
+        NSArray *item_subjects = [[NSUserDefaults standardUserDefaults] valueForKey:@"Subject_CN"];
+        
+        if (item_subjects.count) {
+            
+            NSMutableArray *subject_temps = [NSMutableArray array];
+            
+            for (NSInteger  index = 0 ; index < item_subjects.count ; index ++) {
+                
+                NSDictionary *item = item_subjects[index];
+                
+                NSString *iconName;
+                NSString *itemName = item[@"name"];
+                if ([item[@"name"] containsString:@"经济"]) {
+                    iconName = @"sub_finance";
+                }else if ([item[@"name"] containsString:@"商科"]){
+                    iconName = @"sub_business";
+                }else if ([item[@"name"] containsString:@"工程"]){
+                    iconName = @"sub_engineer";
+                }else if ([item[@"name"] containsString:@"人文"]){
+                    iconName = @"sub_humanit";
+                }else if ([item[@"name"] containsString:@"理学"]){
+                    iconName = @"sub_sciencee";
+                }else if ([item[@"name"] containsString:@"建筑"]){
+                    iconName = @"sub_built";
+                }else if ([item[@"name"] containsString:@"艺术"]){
+                    iconName = @"sub_art";
+                }else if ([item[@"name"] containsString:@"医"]){
+                    iconName = @"sub_medicine";
+                }else if ([item[@"name"] containsString:@"农"]){
+                    iconName = @"sub_farm";
+                }
+                
+                CatigorySubject *subject =[CatigorySubject subjectItemInitWithIconName:iconName  TitleName:itemName];
+                [subject_temps addObject:subject];
+            }
+            
+             _SubjectList =  [subject_temps copy];
+            
+            
+        }else{
+        
+            
+            CatigorySubject *art =[CatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
+            CatigorySubject *finance =[CatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
+            CatigorySubject *built =[CatigorySubject subjectItemInitWithIconName:@"sub_built"  TitleName:@"建筑与规划"];
+            CatigorySubject *humanity =[CatigorySubject subjectItemInitWithIconName:@"sub_humanit"  TitleName:GDLocalizedString(@"CategorySub-humanity")];
+            CatigorySubject *engineer =[CatigorySubject subjectItemInitWithIconName:@"sub_engineer"  TitleName:GDLocalizedString(@"CategorySub-engineer")];
+            //        CatigorySubject *education =[CatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
+            CatigorySubject *medicine =[CatigorySubject subjectItemInitWithIconName:@"sub_medicine"  TitleName:GDLocalizedString(@"CategorySub-medicine")];
+            CatigorySubject *business =[CatigorySubject subjectItemInitWithIconName:@"sub_business"  TitleName:GDLocalizedString(@"CategorySub-business")];
+            CatigorySubject *farm =[CatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
+            CatigorySubject *science =[CatigorySubject subjectItemInitWithIconName:@"sub_sciencee"  TitleName:GDLocalizedString(@"CategorySub-science")];
+            _SubjectList = @[finance,business,engineer,humanity,science,built,art,medicine,farm];
+
+        }
+        
+        
         
         }
     
@@ -149,11 +195,9 @@
 
 -(void)makeBanView
 {
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
-    CGFloat sh =  60;
-    
-    self.bg_SelectView = [[XWGJBanView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth,sh)];
+    self.bg_SelectView = [[XWGJBanView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth,60)];
     
     [self.view addSubview:self.bg_SelectView];
     
@@ -173,11 +217,10 @@
     CGFloat baseX = 0;
     CGFloat baseY = 0;
     CGFloat baseW = XScreenWidth;
-    CGFloat baseH = XScreenHeight - NAV_HEIGHT - 50;
+    CGFloat baseH = XScreenHeight - XNav_Height - 50;
     self.baseScroller = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     self.baseScroller.delegate = self;
     [self.view addSubview:self.baseScroller];
-    
     
     [self makeCityCollectViewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     
@@ -204,7 +247,7 @@
     
     self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     self.cityHeaderView.actionBlock = ^(UIButton *sender){
         
@@ -283,7 +326,7 @@
 -(void)makeOtherUI
 {
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         
         [weakSelf showLeftMenu];
@@ -464,13 +507,19 @@ static NSString *cityIdentify = @"cityCell";
 //导航栏 leftBarButtonItem
 -(void)leftViewMessage{
     
-   if (LOGIN && [self checkNetWorkReaching]) {
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+    NSString *message_count  = [ud valueForKey:@"message_count"];
+    NSString *order_count    = [ud valueForKey:@"order_count"];
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
+
+    if(!LOGIN) self.leftView.countStr = @"0";
     
-        XJHUtilDefineWeakSelfRef
+    if (LOGIN && [self checkNetWorkReaching]) {
+    
+        XWeakSelf
        
-       [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-           
-            NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count    = [response[@"order_count"] integerValue];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
@@ -479,12 +528,6 @@ static NSString *cityIdentify = @"cityCell";
             
             weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
         }];
-       
-    }
-    
-    if(!LOGIN){
-        
-        self.leftView.countStr = @"0";
         
     }
     
@@ -517,7 +560,6 @@ static NSString *cityIdentify = @"cityCell";
 //澳大利亚排名
 -(void)CaseAUwith:(CatigoryRank *)rank
 {
-    [MobClick event:@"catigory_rankAU"];
     
     AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
     
@@ -540,7 +582,6 @@ static NSString *cityIdentify = @"cityCell";
 //热门留学城市
 -(void)CaseHotCityWithIndexPath:(NSIndexPath *)indexPath
 {
-    [MobClick event:indexPath.section == 0 ? @"catigory_hotUK":@"catigory_hotAU"];
     
     CatigaryCountry *country = self.countryes[indexPath.section];
     
@@ -565,29 +606,7 @@ static NSString *cityIdentify = @"cityCell";
     
     [self.navigationController pushViewController:vc animated:YES];
     
-    NSString *item;
-    if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-art")]) {
-        item = @"catigory_subjectArt";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-finance")]) {
-        item = @"catigory_subjectFinance";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-social")]) {
-        item = @"catigory_subjectSocial";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-humanity")]) {
-        item = @"catigory_subjectHumanity";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-engineer")]) {
-        item = @"catigory_subjectEngineer";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-education")]) {
-        item = @"catigory_subjectEducation";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-medicine")]) {
-        item = @"catigory_subjectMedicine";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-business")]) {
-        item = @"catigory_subjectBusiness";
-    }else if ([subject.TitleName isEqualToString:GDLocalizedString(@"CategorySub-farm")]) {
-        item = @"catigory_subjectFarm";
-    }else{
-        item = @"catigory_subjectScience";
-    }
-    [MobClick event:item];
+
 }
 
 

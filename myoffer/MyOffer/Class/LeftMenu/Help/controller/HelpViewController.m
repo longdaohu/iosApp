@@ -54,7 +54,7 @@
 -(void)makeUI
 {
     self.title                           = GDLocalizedString(@"Left-helpCenter");
-    self.helpTableView                   = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
+    self.helpTableView                   = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
     self.helpTableView.dataSource        = self;
     self.helpTableView.delegate          = self;
     self.helpTableView.tableFooterView   = [[UIView alloc] init];

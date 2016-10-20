@@ -110,7 +110,7 @@
 - (void)RequestDataSourse {
     
     
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     
     [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil success:^(NSInteger statusCode, NSArray *response) {
         
@@ -224,7 +224,7 @@
 
 -(void)makeCancelBottonButtonView
 {
-    self.cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,APPSIZE.height - 64,XScreenWidth, 50)];
+    self.cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XScreenHeight - 64,XScreenWidth, 50)];
     [self.cancelBottomButton setTitle:GDLocalizedString(@"ApplicationList-Delete")  forState:UIControlStateNormal];
     [self.cancelBottomButton addTarget:self action:@selector(commitCancelList:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelBottomButton.backgroundColor = XCOLOR_RED;
@@ -261,7 +261,7 @@
 //用于删除cell,先删除cell再删除sectionHeader
 -(void)commitCancelselectCell
 {
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
                            parameters:@{@"ids":self.cancelCourseList}
                               success:^(NSInteger statusCode, id response) {
@@ -294,7 +294,7 @@
 
 //删除sectionHeader
 -(void)commitCancelSectionView
-{     XJHUtilDefineWeakSelfRef
+{     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
                            parameters:@{@"uIds":self.cancelUniversityList}
                               success:^(NSInteger statusCode, id response) {
@@ -381,7 +381,7 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     ApplySection *sectionModal = self.sectionGroups[section];
     NSString *universityID = sectionModal.universityInfo[@"_id"];

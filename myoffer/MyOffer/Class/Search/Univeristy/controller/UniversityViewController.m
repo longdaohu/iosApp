@@ -79,7 +79,7 @@ typedef enum {
 
     NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
         
@@ -144,7 +144,7 @@ typedef enum {
 -(void)loadNewDataSourse
 {
   
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -185,7 +185,7 @@ typedef enum {
     self.UniFrame = UniFrame;
     
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
    //表头
     UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
     header.frame                   = UniFrame.headerFrame;
@@ -254,7 +254,7 @@ typedef enum {
 
 -(void)makeFooterView{
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
 
     UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - HEIGHT_BOTTOM, XScreenWidth, HEIGHT_BOTTOM)];
     footer.actionBlock = ^(UIButton *sender){
@@ -267,9 +267,9 @@ typedef enum {
 -(void)makeTopNavigaitonView{
 
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
-    self.topNavigationView.frame = CGRectMake(0, 0, XScreenWidth, NAV_HEIGHT);
+    self.topNavigationView.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
     self.topNavigationView.actionBlock = ^(UIButton *sender){
         
         [weakSelf onClick:sender];
@@ -299,7 +299,7 @@ typedef enum {
     
     self.view.clipsToBounds = YES;
     
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, XPERCENT * 400)];
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XPERCENT * 400)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.backgroundColor = XCOLOR_BG;
     self.iconView = iconView;
@@ -316,7 +316,7 @@ typedef enum {
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     oneGroup.actionBlock = ^(NSString *name,NSInteger index){
               [weakSelf showPhotoAtIndex:index];
       };
@@ -514,7 +514,7 @@ typedef enum {
 
     if (!_shareVC) {
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         _shareVC = [[ShareViewController alloc] initWithUniversity:self.UniFrame.item];
         _shareVC.actionBlock = ^{
              [weakSelf.shareVC.view removeFromSuperview];
@@ -542,7 +542,7 @@ typedef enum {
 //收藏
 - (void)favorite{
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     NSString *path = self.favorited ?  @"GET api/account/unFavorite/:id"  : @"GET api/account/favorite/:id";
     [self startAPIRequestWithSelector:path parameters:@{@":id": self.UniFrame.item.NO_id} success:^(NSInteger statusCode, id response) {
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];

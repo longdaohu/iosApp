@@ -313,7 +313,8 @@ typedef enum {
         _Groups                     = @[JBgroup ,YXgroup,BJgroup];
         
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
+        
         [self startAPIRequestWithSelector:@"GET api/account/applicationdata" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             
             weakSelf.userInfo   = response;
@@ -1084,7 +1085,7 @@ typedef enum {
                                   @"ielts_low":[ThirdGroup.cellItems[5] itemName]
                                   };
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     
     
     

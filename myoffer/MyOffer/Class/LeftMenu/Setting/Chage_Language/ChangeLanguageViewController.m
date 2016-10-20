@@ -56,9 +56,9 @@
     self.languageTableView.backgroundColor = XCOLOR_BG;
     
    
-    self.footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 80)];
+    self.footView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 80)];
 
-    KDEasyTouchButton *saveBtn =[[KDEasyTouchButton alloc] initWithFrame:CGRectMake( 0.5 *(APPSIZE.width - 270), 20, 270, 40)];
+    KDEasyTouchButton *saveBtn =[[KDEasyTouchButton alloc] initWithFrame:CGRectMake( 0.5 *(XScreenWidth - 270), 20, 270, 40)];
     saveBtn.layer.cornerRadius = 5;
     saveBtn.layer.masksToBounds = YES;
     saveBtn.backgroundColor =XCOLOR_RED;//[UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1];

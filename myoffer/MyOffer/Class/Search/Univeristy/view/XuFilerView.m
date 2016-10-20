@@ -94,8 +94,8 @@
     NSArray *rightArr = self.groups[1];
     self.rightButton.title = GDLocalizedString(@"UniCourseDe-006");
     
-    self.leftTableView.scrollEnabled = leftArr.count * BGHEIGHT > APPSIZE.height - CGRectGetMaxY(self.filerRect) ? YES : NO;
-    self.rightTableView.scrollEnabled =  rightArr.count * BGHEIGHT  > APPSIZE.height - CGRectGetMaxY(self.filerRect)  ? YES : NO;
+    self.leftTableView.scrollEnabled = leftArr.count * BGHEIGHT > XScreenHeight - CGRectGetMaxY(self.filerRect) ? YES : NO;
+    self.rightTableView.scrollEnabled =  rightArr.count * BGHEIGHT  > XScreenHeight - CGRectGetMaxY(self.filerRect)  ? YES : NO;
  
 }
 
@@ -150,7 +150,7 @@
     
     NSInteger  index =  11 == sender.tag ?  1 : 0;
     
-    CGFloat height  = [self.groups[index] count] * BGHEIGHT   >  APPSIZE.height - CGRectGetMaxY(self.filerRect)? APPSIZE.height - CGRectGetMaxY(self.filerRect)  : [self.groups[index] count] * BGHEIGHT;
+    CGFloat height  = [self.groups[index] count] * BGHEIGHT   >  XScreenHeight - CGRectGetMaxY(self.filerRect)? XScreenHeight - CGRectGetMaxY(self.filerRect)  : [self.groups[index] count] * BGHEIGHT;
     
     newRect.size.height = show ? height : 0;
     
@@ -212,7 +212,7 @@
     
     CGRect newRect = self.view.frame;
     
-    newRect.size.height = show ? APPSIZE.height : BGHEIGHT;
+    newRect.size.height = show ? XScreenHeight : BGHEIGHT;
     
     //判断是否打开筛选页面，如果有show == YES 则立即广大 self.view.frame
     if (show) {

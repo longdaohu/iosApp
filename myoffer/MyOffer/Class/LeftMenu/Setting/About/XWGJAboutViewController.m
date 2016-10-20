@@ -76,7 +76,7 @@
 -(void)makeUI
 {
     self.title = GDLocalizedString(@"About_title");
-    self.CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, APPSIZE.height - 114, APPSIZE.width, 50)];
+    self.CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XScreenHeight - 114, XScreenWidth, 50)];
     self.CompanyLab.font = [UIFont systemFontOfSize:14];
     self.CompanyLab.textColor = XCOLOR_DARKGRAY;
     self.CompanyLab.textAlignment = NSTextAlignmentCenter;
@@ -239,7 +239,7 @@
     if (!_shareVC) {
         
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         _shareVC = [[ShareViewController alloc] init];
         
         _shareVC.actionBlock = ^{

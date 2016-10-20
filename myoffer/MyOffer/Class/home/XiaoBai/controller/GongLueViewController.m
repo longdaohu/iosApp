@@ -106,7 +106,8 @@
 
 -(void)makeTopNavigaitonView{
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
+    
     self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
     self.topNavigationView.titleLab.text = self.gonglue[@"title"];
     self.topNavigationView.actionBlock = ^(UIButton *sender){
@@ -228,7 +229,7 @@
 {
     
     //1 顶部自定义导航栏
-    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - NAV_HEIGHT];
+    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNav_Height];
     
     //2 自定义tableHeaderView
     self.headerView.contentOffsetY =  scrollView.contentOffset.y;

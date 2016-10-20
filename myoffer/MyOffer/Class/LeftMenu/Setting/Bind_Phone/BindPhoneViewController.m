@@ -113,7 +113,7 @@
         UITableViewCell *cell = [self cellDefault];
         _VertificationTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-007")];
         _VertificationTextField.keyboardType = UIKeyboardTypeNumberPad;
-          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(APPSIZE.width - 120, 0, 100, 44)];
+          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(XScreenWidth - 120, 0, 100, 44)];
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
         [self.VertificationButton addTarget:self action:@selector(SendVertificationCode:) forControlEvents:UIControlEventTouchUpInside];
         [self.VertificationButton setTitleColor:XCOLOR_RED forState:UIControlStateNormal];

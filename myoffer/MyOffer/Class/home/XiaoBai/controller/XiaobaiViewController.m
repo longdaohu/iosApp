@@ -102,7 +102,7 @@
 {
     if (!_noDataView) {
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         
         _noDataView =[[XWGJNODATASHOWView alloc] initWithFrame:CGRectMake(0, -200, XScreenWidth, XScreenHeight)];
         
@@ -168,7 +168,7 @@
 -(void)makeTopView
 {
     
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -NAV_HEIGHT, XScreenWidth, 124)];
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, 124)];
     [self.view addSubview:self.topView];
  
     UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
@@ -216,7 +216,7 @@
     [self addChildViewController:webVC];
     webVC.path = @"http://www.myoffer.cn/study_white";
     [self.bgScrollView addSubview:webVC.view];
-    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height - NAV_HEIGHT);
+    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height - XNav_Height);
     webVC.web_wk.frame = webVC.view.bounds;
     
 }

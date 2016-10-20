@@ -81,7 +81,7 @@
     CGFloat topMargin = 0;
     CGFloat Tx = leftMargin;
     CGFloat Ty = topMargin;
-    CGFloat Tw = APPSIZE.width - leftMargin;
+    CGFloat Tw = XScreenWidth - leftMargin;
     CGFloat Th = 40;
     self.TitleLabel.frame = CGRectMake(Tx, Ty, Tw, Th);
     
@@ -94,7 +94,7 @@
     
     CGFloat Ax = CGRectGetMaxX(self.LevelLabel.frame);
     CGFloat Ay = Ly;
-    CGFloat Aw = APPSIZE.width - Ax;
+    CGFloat Aw = XScreenWidth - Ax;
     CGFloat Ah = Lh;
     self.AreaLabel.frame = CGRectMake(Ax, Ay, Aw, Ah);
     

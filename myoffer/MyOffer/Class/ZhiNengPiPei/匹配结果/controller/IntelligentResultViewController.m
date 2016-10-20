@@ -191,7 +191,7 @@ typedef enum {
 {
     self.ResultTableView.backgroundColor = XCOLOR_BG;
     self.bottomView.hidden = YES;
-    self.NoDataView.frame = CGRectMake(0, 0, APPSIZE.width, APPSIZE.height);
+    self.NoDataView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
     self.NoDataView.hidden = YES;
     [self.view addSubview: self.NoDataView];
     
@@ -258,7 +258,7 @@ typedef enum {
  
     [_slices removeAllObjects];
     
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     
     [self startAPIRequestWithSelector:@"GET api/university/recommendations"  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         

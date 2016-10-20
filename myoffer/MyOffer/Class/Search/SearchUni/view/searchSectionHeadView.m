@@ -154,7 +154,7 @@
 {
     [super layoutSubviews];
 
-    CGFloat RCx = APPSIZE.width - 60;
+    CGFloat RCx = XScreenWidth - 60;
     CGFloat RCy = 0;
     CGFloat RCw = 60;
     CGFloat RCh = 60;
@@ -168,8 +168,8 @@
     
     CGFloat Tx = CGRectGetMaxX(self.LogoMView.frame) + 10;
     CGFloat Ty = 15;
-    CGFloat Tw = APPSIZE.width - Tx;
-    CGFloat Tww = APPSIZE.width - Tx -60;
+    CGFloat Tw = XScreenWidth - Tx;
+    CGFloat Tww = XScreenWidth - Tx -60;
     CGFloat Th = UNIVERSITY_TITLEHIGH;
     self.TitleLabel.frame = CGRectMake(Tx, Ty, Tww, Th);
     

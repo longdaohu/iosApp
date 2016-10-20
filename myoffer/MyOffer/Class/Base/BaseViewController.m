@@ -344,6 +344,7 @@
     
 }
 
+//获取国家
 - (void)countryWithAlert:(BOOL)show{
     
     
@@ -351,87 +352,29 @@
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
 
     
- /*
-  
-    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
-
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_CN"];
-        
-        [ud synchronize];
-        
-    }];
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCountries parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Country_EN"];
-        
-        [ud synchronize];
-        
-    }];
-  
-*/
+ 
 }
 
+//获取专业
 - (void)subjectWithAlert:(BOOL)show{
-
     
-    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
+    [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
-
-    /*
-     NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
-
-     
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Subject_CN"];
-        
-        [ud synchronize];
-        
-    }];
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorSubjects parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Subject_EN"];
-        
-    }];
-   */
+   
+ 
 }
 
+//获取年级
 - (void)gradeWithAlert:(BOOL)show{
-    
     
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
-/*
-    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
-
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"zh-cn"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Grade_CN"];
-        
-        [ud synchronize];
-        
-    }];
-
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGrades parameters:@{@":lang":@"en"} success:^(NSInteger statusCode, NSArray * response) {
-        
-        [ud setValue:response forKey:@"Grade_EN"];
-
-        [ud synchronize];
-        
-    }];
- */
-    
+ 
     
 }
 
 
 -(void)baseDataSourseWithPath:(NSString *)path  keyWord:(NSString *)keyWord  parameters:(NSDictionary *)para  ErrorAlerShow:(BOOL)show{
-
     
     NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
 
@@ -441,11 +384,11 @@
         
         [ud synchronize];
         
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         if (show) {
             
-            AlerMessage(@"网络请求失败");
+//            AlerMessage(@"网络请求失败");
             
         }
         

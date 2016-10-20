@@ -106,7 +106,8 @@
 {
   
      NSString *path = [NSString stringWithFormat:@"GET api/account/messagelist?client=app&page=%d&size=%d",page,PageSize];
-    XJHUtilDefineWeakSelfRef
+    
+    XWeakSelf
     
     [self
      startAPIRequestWithSelector:path

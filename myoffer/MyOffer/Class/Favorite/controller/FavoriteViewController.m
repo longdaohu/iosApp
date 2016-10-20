@@ -58,7 +58,7 @@
 
 -(void)makeTableView
 {
-    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - NAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.FavoriteTableView.dataSource = self;
     self.FavoriteTableView.delegate = self;
     [self.view  addSubview:self.FavoriteTableView];
@@ -100,7 +100,7 @@
         return;
     }
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     [self
      startAPIRequestUsingCacheWithSelector:@"GET api/account/favorites"
      parameters:@{}

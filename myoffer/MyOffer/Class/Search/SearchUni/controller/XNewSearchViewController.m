@@ -14,7 +14,7 @@ typedef enum {
 } XReLoadState;
 //筛选参数提交状态  nomal - 确认   fail - 清空，或提交失败、或不提交   nothing - 不做任何操作、默认
 
-#define FILTERBACKORGIN_Y   (APPSIZE.height - 64)
+#define FILTERBACKORGIN_Y   (XScreenHeight - 64)
 #define PageSize 20
 
 #import "XNewSearchViewController.h"
@@ -521,9 +521,9 @@ typedef enum {
     [self.view addSubview:self.ResultTableView];
     self.ResultTableView.tableFooterView =[[UIView alloc] init];
     
-    UIView  *headerView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 30)];
+    UIView  *headerView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 30)];
     self.ResultTableView.tableHeaderView = headerView;
-    self.headerTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(15, 0, APPSIZE.width, 30)];
+    self.headerTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(15, 0, XScreenWidth, 30)];
     [headerView addSubview:self.headerTitleLabel];
     
     self.ResultTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
@@ -542,7 +542,7 @@ typedef enum {
     self.CoverBgView =[[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.ToolView.frame), XScreenWidth, XScreenHeight)];
     self.CoverBgView.hidden = YES;
     [self.view insertSubview:self.CoverBgView belowSubview:self.ToolView];
-    UIButton  *cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, APPSIZE.height)];
+    UIButton  *cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
     self.cover = cover;
     [cover addTarget:self action:@selector(coverButtonClickRemoveOptionView:) forControlEvents:UIControlEventTouchUpInside];
     cover.backgroundColor =[UIColor blackColor];
@@ -561,9 +561,9 @@ typedef enum {
 #pragma mark ———————— 顶部工具条
 -(void)makeTopToolView
 {
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     
-    self.ToolView =[[searchToolView alloc] initWithFrame:CGRectMake(0, 0, APPSIZE.width, 50)];
+    self.ToolView =[[searchToolView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 50)];
     
     NSString  *toolTitle = [self.RankType isEqualToString:RANKTI] ? GDLocalizedString(@"SearchResult_countryxxxRank"):GDLocalizedString(@"SearchResult_worldxxxRank");
     
@@ -601,7 +601,7 @@ typedef enum {
     [self.view  insertSubview:self.FiltbackView belowSubview:self.ToolView];
     
     
-    self.FilterTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 50 ,APPSIZE.width, APPSIZE.height -164) style:UITableViewStylePlain];
+    self.FilterTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 50 ,XScreenWidth, XScreenHeight -164) style:UITableViewStylePlain];
     self.FilterTableView.dataSource = self;
     self.FilterTableView.delegate   = self;
     self.FilterTableView.allowsSelection = NO;
@@ -843,7 +843,7 @@ typedef enum {
 {
     if (tableView == self.ResultTableView) {
         
-        XJHUtilDefineWeakSelfRef;
+        XWeakSelf;
         XSearchSectionHeaderView *sectionHeader =[XSearchSectionHeaderView SectionHeaderViewWithTableView:tableView];
         sectionHeader.IsStar = self.IsStar;
         sectionHeader.RANKTYPE = self.RankType;
@@ -872,7 +872,7 @@ typedef enum {
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     UniversityFrameObj *uniFrame = self.UniversityList[section];
     UniversityObj *uniObj = uniFrame.uniObj;
     NSArray *items = uniObj.resultSubjectArray;
@@ -1347,7 +1347,7 @@ typedef enum {
 //用于实现RankTypeView出现、隐藏
 -(void)rankTypeViewDown:(BOOL)down
 {
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     if (down) {
         //当学校数组数量为0时，不显示排列选择表单
         self.CoverBgView.hidden = self.UniversityList.count == 0 ? YES : NO;
@@ -1389,7 +1389,7 @@ typedef enum {
 -(void)FiltbackViewDown:(BOOL)down
 {
     
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     __block CGRect newRect  = self.FiltbackView.frame;
     
     

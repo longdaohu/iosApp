@@ -9,8 +9,8 @@
 #ifndef MyOffer_PrefixHeader_pch
 #define MyOffer_PrefixHeader_pch
 #define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
-#define APPSIZE  [UIScreen mainScreen].bounds.size
-#define XJHUtilDefineWeakSelfRef  __weak typeof(self) weakSelf  =self;
+#define XWeakSelf  __weak typeof(self) weakSelf = self;
+#define XImage(imageName)     [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
 #define UNIVERISITYTITLEFONT  15.0
 #define UNIVERISITYSUBTITLEFONT  12.0
 #define UNIVERISITYRANKFONT  12.0
@@ -21,22 +21,20 @@
 #define UNIVERSITY_RANKHIGH  20.0
 #define SUB_LOCAL_MAGIN  8.0
 #define CORNER_RADIUS  5.0
-#define LOGO_HIGH  70.0
-#define LOGO_MARGIN  15.0
 #define TOP_HIGHT  34.0
 #define ITEM_MARGIN   10.0
 #define PADDING_TABLEGROUP 10.0
 #define HEIGHT_ZERO 0.0001
 #define ANIMATION_DUATION 0.25
-#define   XPERCENT          XScreenWidth/320
-#define   XMARGIN           XPERCENT * 8
-#define   XFONT(size)        [UIFont systemFontOfSize:size]
-#define RESULTCELL_HIGH  100.0
+#define XPERCENT          XScreenWidth/320
+#define XMARGIN           XPERCENT * 8
+#define XFONT(size)        [UIFont systemFontOfSize:size]
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
-#define FONT_SCALE  ([UIScreen mainScreen].bounds.size.width - 320)*0.02
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
-#define NAV_HEIGHT 64.0
+#define XScreenWidth [UIScreen mainScreen].bounds.size.width
+#define XScreenHeight [UIScreen mainScreen].bounds.size.height
+#define XNav_Height 64.0
 #define FLOWLAYOUT_SubW  (XScreenWidth - 41) / 3
 #define FLOWLAYOUT_CityW  (XScreenWidth - 31) / 2
 #define Country_Width  XScreenWidth / 2.5
@@ -50,12 +48,9 @@
 #define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]
 #define XCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define XFONTNAME  @"HelveticaNeue-Light"
-#define XScreenWidth [UIScreen mainScreen].bounds.size.width
-#define XScreenHeight [UIScreen mainScreen].bounds.size.height
 #define DefaultNumber 99999
 #define RANKTI  @"ranking_ti"
 #define RANKQS  @"ranking_qs"
-#define tabBarSelectIndex  @"tabBarSelectIndex"
 #define KEY_COUNTRY  @"country"
 #define KEY_STATE  @"state"
 #define KEY_CITY  @"city"
@@ -69,8 +64,8 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-//#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://www.myoffer.cn/"
+#define DOMAINURL  @"http://www.myofferdemo.com/"
+//#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MBProgressHUD.h"
 #import "MJExtension.h"

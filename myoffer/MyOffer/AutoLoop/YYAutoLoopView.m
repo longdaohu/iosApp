@@ -221,6 +221,7 @@
     };
     
     self.autoLoopViewCellForIndex = ^UIView *(int index) {
+        
         return cells[index];
     };
     

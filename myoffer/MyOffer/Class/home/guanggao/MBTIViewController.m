@@ -66,7 +66,7 @@
     
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - NAV_HEIGHT)];
+    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height)];
     
     [self.web loadRequest:request];
     [self.view addSubview:self.web];

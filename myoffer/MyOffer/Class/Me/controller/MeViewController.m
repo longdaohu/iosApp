@@ -12,8 +12,6 @@ typedef enum {
     OptionButtonTypeZhuangTai
 }OptionButtonType;//表头按钮选项
 
-
-
 #import "MeViewController.h"
 #import "ProfileViewController.h"
 #import "FXBlurView.h"
@@ -34,6 +32,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIView *headView;
 //表头图片
 @property (weak, nonatomic) IBOutlet UIImageView *centerHeader;
+//智能匹配数据或收藏学校数字
 @property(nonatomic,strong)NSDictionary  *myCountResponse;
 //cell数组
 @property(nonatomic,strong)NSArray *cells;
@@ -71,6 +70,7 @@ typedef enum {
 }
 
 
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -103,7 +103,7 @@ typedef enum {
 
 -(void)getRequestCenterSourse{
     
-    XJHUtilDefineWeakSelfRef;
+    XWeakSelf;
     //查看是否有新通知消息
     if (LOGIN && [self checkNetWorkReaching]) {
         
@@ -144,7 +144,7 @@ typedef enum {
 //用于设置tabelHeaderView图片
 -(void)matchImageName:(NSString *)imageName withOptionButtonTag:(OptionButtonType)tag
 {
-    self.centerHeader.image = [UIImage imageNamed:imageName];
+    self.centerHeader.image = XImage(imageName);
     
     self.OptionButton.tag   = tag;
 }
@@ -165,7 +165,7 @@ typedef enum {
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.detailTextLabel.textColor =[UIColor darkGrayColor];
-        cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(APPSIZE.width - 40,12,30, 30)];
+        cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(XScreenWidth - 40,12,30, 30)];
         [cell.contentView addSubview:cell.countLabel];
         cell.textLabel.text   = text;
         cell.imageView.image  = icon;
@@ -174,7 +174,7 @@ typedef enum {
         return cell;
     };
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     NSString *list        = GDLocalizedString(@"center-application");
     NSString *listSub     = GDLocalizedString(@"center-appDetail");
     NSString *status      = GDLocalizedString(@"center-status");
@@ -185,21 +185,21 @@ typedef enum {
     NSString *myofferSub  = GDLocalizedString(@"center-myofferDetail" );
     self.CelldDetailes =@[listSub,statusSub,materialSub,myofferSub];
     self.cells = @[@[
-                       newCell(list, [UIImage imageNamed:@"center_yixiang"],
+                       newCell(list, XImage(@"center_yixiang"),
                                ^{
                                    [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyList];
                                }),
-                       newCell(status,[UIImage imageNamed:@"center_status"],
+                       newCell(status,XImage(@"center_status"),
                                ^{
                                    [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
                                }),
                        
-                       newCell(material,[UIImage imageNamed:@"center_matial"],
+                       newCell(material,XImage(@"center_matial"),
                                ^{
                                    [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyMatial];
                                }),
                        
-                       newCell(myoffer, [UIImage imageNamed:@"center_myoffer"],
+                       newCell(myoffer, XImage(@"center_myoffer"),
                                ^{
                                    [weakSelf centerPageClickWithItemType:CenterClickItemTypeMyoffer];
                                    
@@ -209,26 +209,28 @@ typedef enum {
 
 
 
-
+//导航栏UI设置
 -(void)makeNavigationView
 {
  
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.leftView   = [LeftBarButtonItemView leftViewWithBlock:^{
         
         [weakSelf showLeftMenu];
 
     }];
+    
     self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"QQService"] style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:XImage(@"QQService")  style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     
 }
 
+//表头UI设置
 -(void)makeHeaderView
 {
-    self.centerHeader.image =[UIImage imageNamed:@"PlaceHolderImage"];
-    UIImage *headImage = [UIImage imageNamed:@"center_ban_CN.jpg"];
+    self.centerHeader.image = XImage(@"PlaceHolderImage");
+    UIImage *headImage =  XImage(@"center_ban_CN.jpg");
     CGFloat headHeigh = XScreenWidth * headImage.size.height / headImage.size.width;
     self.headView.frame = CGRectMake(0, 0, XScreenWidth, headHeigh);
     self.tableView.tableHeaderView = self.headView;
@@ -247,10 +249,10 @@ typedef enum {
         });
      }
 }
+
 //实现不同选项跳转
 -(void)centerPageClickWithItemType:(CenterClickItemType)type
 {
-
     self.clickType = LOGIN ? CenterClickItemTypeNoClick : type;
     
     RequireLogin
@@ -379,7 +381,6 @@ typedef enum {
     }
 }
 
-
 //跳转到QQ客服聊天页面
 -(void)QQservice
 {
@@ -399,27 +400,31 @@ typedef enum {
     }
 }
 
-//导航栏leftBarButtonItem
--(void)leftViewMessage{
-
+//导航栏 leftBarButtonItem
+-(void)leftViewMessage
+{
+    
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+    NSString *message_count  = [ud valueForKey:@"message_count"];
+    NSString *order_count    = [ud valueForKey:@"order_count"];
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
+    
+    
     if (LOGIN && [self checkNetWorkReaching]) {
         
-        XJHUtilDefineWeakSelfRef
+        XWeakSelf
         
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count    = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
+            [ud synchronize];
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+        }];
         
-     [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-         
-         NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
-         NSInteger message_count  = [response[@"message_count"] integerValue];
-         NSInteger order_count    = [response[@"order_count"] integerValue];
-         [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
-         [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
-         [ud synchronize];
-         
-         weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-         
-       }];
-      
     }
     
     if (!LOGIN) {
@@ -429,9 +434,9 @@ typedef enum {
         self.myCountResponse    = nil;
         [self.tableView reloadData];
     }
+
     
 }
-
 
 //智能匹配跳转选项
 -(void)CasePipei
@@ -456,35 +461,39 @@ typedef enum {
     
     [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
 }
+
 //跳转申请列表
 -(void)CaseApplyListView
 {
-    
     [MobClick event: @"apply_applyItem"];
+ 
     [self.navigationController pushViewController:[[ApplyViewController alloc] init] animated:YES];
 }
 
 //跳转申请材料
--(void)CaseApplyMatial{
-    
+-(void)CaseApplyMatial
+{
     [self.navigationController pushViewController:[[ApplyMatialViewController alloc] init] animated:YES];
 }
+
 //跳转申请MYOFFER
--(void)CaseMyoffer{
+-(void)CaseMyoffer
+{
     
     [self.navigationController pushViewController:[[MyOfferViewController alloc] init] animated:YES];
 }
 
 //跳转收藏
--(void)CaseFavoriteUniversity{
-    
+-(void)CaseFavoriteUniversity
+{
     [MobClick event:@"apply_like"];
     [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
     
 }
 
 //跳转服务包
--(void)CaseServiceSelection{
+-(void)CaseServiceSelection
+{
     
     [MobClick event:@"home_mall"];
     [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];

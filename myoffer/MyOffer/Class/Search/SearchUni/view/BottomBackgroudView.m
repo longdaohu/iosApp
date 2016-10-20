@@ -55,8 +55,8 @@
 {
     [super layoutSubviews];
     
-    self.clearFilterButton.frame =CGRectMake(0, 0, APPSIZE.width*0.5, 50);
-    self.FilterCommitButton.frame =CGRectMake(APPSIZE.width*0.5, 0, APPSIZE.width*0.5, 50);
+    self.clearFilterButton.frame =CGRectMake(0, 0, XScreenWidth * 0.5, 50);
+    self.FilterCommitButton.frame =CGRectMake(XScreenWidth * 0.5, 0, XScreenWidth * 0.5, 50);
     
 }
 

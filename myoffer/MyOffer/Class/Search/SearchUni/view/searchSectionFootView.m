@@ -57,8 +57,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentView.frame = CGRectMake(0, 0, APPSIZE.width, 50);
-    self.footerButton.frame = CGRectMake((APPSIZE.width - 200)*0.5, 5, 200, 40);
+    self.contentView.frame = CGRectMake(0, 0, XScreenWidth, 50);
+    self.footerButton.frame = CGRectMake((XScreenWidth - 200)*0.5, 5, 200, 40);
     
 }
 @end

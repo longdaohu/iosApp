@@ -30,7 +30,7 @@
     
      ShareButton *myShare = [[ShareButton alloc] init];
     [myShare setTitle:normal_title forState:UIControlStateNormal];
-      myShare.titleLabel.font = [UIFont systemFontOfSize:14 + FONT_SCALE];
+      myShare.titleLabel.font = [UIFont systemFontOfSize:14 + XPERCENT];
     
     if (selected_title) {
         [myShare setTitle:selected_title forState:UIControlStateHighlighted];

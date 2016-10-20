@@ -143,7 +143,8 @@
 //请求数据源
 -(void)getDataSource:(BOOL)refresh
 {
-     XJHUtilDefineWeakSelfRef
+     XWeakSelf
+    
     [self startAPIRequestWithSelector:kAPISelectorHomepage
                            parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
                            
@@ -310,9 +311,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row == 0){
-        return 122 * APPSIZE.width / 320.0;
+        return 122 * XScreenWidth / 320.0;
     }else {
-        return 213 * APPSIZE.width / 320.0;
+        return 213 * XScreenWidth / 320.0;
     }
 }
 

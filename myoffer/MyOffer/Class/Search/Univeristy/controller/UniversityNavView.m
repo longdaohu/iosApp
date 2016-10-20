@@ -19,7 +19,7 @@
     self.bgImageView.alpha = 0;
     
     
-    XJHUtilDefineWeakSelfRef
+    XWeakSelf
     self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
     [self.rightView.shareBtn setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
      self.rightView.actionBlock = ^(UIButton *sender){
@@ -33,7 +33,7 @@
     [super awakeFromNib];
     
     
-    self.frame = CGRectMake(0, 0, XScreenWidth, NAV_HEIGHT);
+    self.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
     
  
 }
@@ -74,7 +74,7 @@
     [super layoutSubviews];
     
     CGRect rightRect = self.rightView.frame;
-    rightRect.origin.y = NAV_HEIGHT;
+    rightRect.origin.y = XNav_Height;
     rightRect.size.width = 80  +  XMARGIN;
     rightRect.origin.x = XScreenWidth - rightRect.size.width - 2 * XMARGIN;
     self.rightView.frame = rightRect;

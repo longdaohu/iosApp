@@ -90,6 +90,9 @@ static NSString *cellIdentifier = @"menu";
     self.countLab.text = item.messageCount.integerValue  >= 100 ? @"99+": item.messageCount;
     
     CGFloat countw  = 18;
+    
+    NSLog(@"countLab countLab %@ ",self.countLab.text );
+    
     if (self.countLab.text.length > 1) {
         
         CGSize countSize = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
