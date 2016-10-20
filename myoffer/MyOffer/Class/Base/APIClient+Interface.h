@@ -19,6 +19,8 @@
 #define kAPISelectorRequestCenter @"GET api/account/mycount"
 //搜索接口
 #define kAPISelectorSearch @"POST api/v2/app/search"
+//收藏院校
+#define kAPISelectorFavorites @"GET api/account/favorites"
 //热门院校
 #define kAPISelectorHotUniversity @"GET api/university/hot"
 //专业数据

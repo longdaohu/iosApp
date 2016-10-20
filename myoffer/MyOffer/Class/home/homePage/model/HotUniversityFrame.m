@@ -19,7 +19,6 @@
 }
 
 
-
 -(void)setUniversityDic:(NSDictionary *)universityDic
 {
     _universityDic = universityDic;

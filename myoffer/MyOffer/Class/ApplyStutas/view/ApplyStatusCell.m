@@ -8,10 +8,10 @@
 #define StatusFont 13
 #define CellConteViewHeight 60
 #define Left_Margin 14
-#import "XWGJApplyStatusTableViewCell.h"
-#import "XWGJApplyRecord.h"
+#import "ApplyStatusCell.h"
+#import "ApplyStatusRecord.h"
 #import "Applycourse.h"
-@interface XWGJApplyStatusTableViewCell ()
+@interface ApplyStatusCell ()
 //状态
 @property (nonatomic, strong) UILabel *statusLabel;
 //学科名称
@@ -19,16 +19,16 @@
 
 @end
 
-@implementation XWGJApplyStatusTableViewCell
+@implementation ApplyStatusCell
 
 +(instancetype)CreateCellWithTableView:(UITableView *)tableView
 {
     static NSString *identi = @"record";
     
-    XWGJApplyStatusTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identi];
+    ApplyStatusCell *cell =[tableView dequeueReusableCellWithIdentifier:identi];
     if (!cell) {
         
-        cell = [[XWGJApplyStatusTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
+        cell = [[ApplyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
     }
     return cell;
 }
@@ -55,7 +55,7 @@
 }
 
 
--(void)setRecord:(XWGJApplyRecord *)record
+-(void)setRecord:(ApplyStatusRecord *)record
 {
     _record = record;
     

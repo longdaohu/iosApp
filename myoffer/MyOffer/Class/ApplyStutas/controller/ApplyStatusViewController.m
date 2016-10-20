@@ -11,13 +11,13 @@
 #import "XWGJApplyStatusView.h"
 #import "UniversityObj.h"
 #import "XWGJApplyStatusTableViewCell.h"
-#import "XWGJApplyRecord.h"
-#import "XWGJApplyRecordGroup.h"
+#import "ApplyStatusRecord.h"
+#import "ApplyStatusRecordGroup.h"
 #import "XSearchSectionHeaderView.h"
 #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *TableView;
+@property (strong, nonatomic) UITableView *tableView;
 //没有数据时显示
 @property (strong, nonatomic) XWGJnodataView *noDataView;
 //申请记录数组
@@ -50,7 +50,7 @@
 {
     
     [self makeTableView];
-    //没有数量是显示提示
+    
     [self makeOther];
   
 }
@@ -58,16 +58,16 @@
 
 -(void)makeTableView
 {
-    self.TableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
-    self.TableView.dataSource      = self;
-    self.TableView.delegate        = self;
-    self.TableView.backgroundColor = XCOLOR_BG;
-    [self.view addSubview:self.TableView];
+    self.tableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
+    self.tableView.dataSource      = self;
+    self.tableView.delegate        = self;
+    self.tableView.backgroundColor = XCOLOR_BG;
+    [self.view addSubview:self.tableView];
     
     //上拉刷新
     MJRefreshNormalHeader *header      = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
-    self.TableView.mj_header           = header;
+    self.tableView.mj_header           = header;
 
 }
 
@@ -76,17 +76,26 @@
 {
     
     self.title = GDLocalizedString(@"Me-002");
-
-    self.noDataView                   = [XWGJnodataView noDataView];
-    self.noDataView.contentLabel.text = GDLocalizedString(@"ApplicationStutasVC-noData");
-    self.noDataView.hidden            = YES;
-    [self.view insertSubview:self.noDataView aboveSubview:self.TableView];
-    
     
     if (self.isBackRootViewController) {
+        
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
     }
     
+}
+
+
+-(XWGJnodataView *)noDataView{
+    
+    if (!_noDataView) {
+        
+        _noDataView =[XWGJnodataView noDataView];
+        _noDataView.contentLabel.text = GDLocalizedString(@"ApplicationStutasVC-noData");
+        _noDataView.hidden = YES;
+        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
+    }
+    
+    return _noDataView;
 }
 
 
@@ -96,9 +105,7 @@
     
     [self makeUI];
     
-//    [self RequestDataSourse:NO];
-    
-    [self.TableView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 //加载新数据
@@ -117,11 +124,8 @@
         self.noDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
         self.noDataView.hidden = NO;
 
-        if (refresh) {
-            
-            [self.TableView.mj_header endRefreshing];
-            
-         }
+        if (refresh) [self.tableView.mj_header endRefreshing];
+          
         return; 
     }
     
@@ -129,34 +133,28 @@
     
     NSString *path = @"GET api/account/checklist";
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-        
-   
+    
         [weakSelf makeUIConfigrationWith:response];
         
-        [weakSelf.TableView reloadData];
-        
-        
-        if (refresh) {
+        if (refresh) {[weakSelf.tableView.mj_header endRefreshing];}
             
-            [weakSelf.TableView.mj_header endRefreshing];
-        }
-        
+          
     }];
     
 
   
 }
 
+//根据请求数据配置UI
 -(void)makeUIConfigrationWith:(id)response{
 
     NSArray *records       = response[@"records"];
+    
     NSMutableArray *groups = [NSMutableArray array];
     
     for (NSDictionary *record in records) {
         
-        XWGJApplyRecordGroup *group =[XWGJApplyRecordGroup ApplyRecourseGroupWithDictionary:record];
-        
-        [groups addObject:group];
+        [groups addObject:[ApplyStatusRecordGroup ApplyRecourseGroupWithDictionary:record]];
         
     }
     
@@ -164,7 +162,8 @@
     
     self.noDataView.hidden = records.count == 0 ? NO : YES;
    
-    
+    [self.tableView reloadData];
+
 }
 
 
@@ -189,7 +188,7 @@
 {
     XSearchSectionHeaderView *sectionHeader =[XSearchSectionHeaderView SectionHeaderViewWithTableView:tableView];
     sectionHeader.RecommendMV.hidden = YES;
-    XWGJApplyRecordGroup *group      = self.ApplyRecordGroups[section];
+    ApplyStatusRecordGroup *group      = self.ApplyRecordGroups[section];
     UniversityObj *uni      = group.universityFrame.uniObj;
     sectionHeader.IsStar    = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     sectionHeader.RANKTYPE  = RANKTI;
@@ -212,7 +211,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XWGJApplyStatusTableViewCell *cell =[XWGJApplyStatusTableViewCell CreateCellWithTableView:tableView];
-    XWGJApplyRecordGroup *group = self.ApplyRecordGroups[indexPath.section];
+    ApplyStatusRecordGroup *group = self.ApplyRecordGroups[indexPath.section];
     cell.record = group.record;
     
     return cell;

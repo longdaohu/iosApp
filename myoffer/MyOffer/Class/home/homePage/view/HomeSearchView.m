@@ -33,7 +33,7 @@
     [sender setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [sender setTitle:title forState:UIControlStateNormal];
     [sender setTitleColor:XCOLOR_LIGHTGRAY forState:UIControlStateNormal];
-    sender.titleLabel.font = FontWithSize(KDUtilSize(12));
+     sender.titleLabel.font = FontWithSize(KDUtilSize(12));
     [sender addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:sender];
     

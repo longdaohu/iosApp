@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 @class UniversityObj;
-@class XWGJApplyRecord;
+@class ApplyStatusRecord;
 @class UniversityFrameObj;
-@interface XWGJApplyRecordGroup : NSObject
+@interface ApplyStatusRecordGroup : NSObject
 @property(nonatomic,strong)UniversityObj *university;   //学校模型数据
 @property(nonatomic,strong)UniversityFrameObj *universityFrame;   //学校模型数据
-@property(nonatomic,strong)XWGJApplyRecord *record;
+@property(nonatomic,strong)ApplyStatusRecord *record;
 
 +(instancetype)ApplyRecourseGroupWithDictionary:(NSDictionary *)recordDic;
 

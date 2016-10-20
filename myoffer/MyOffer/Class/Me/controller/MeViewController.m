@@ -236,7 +236,6 @@ typedef enum {
     self.tableView.tableHeaderView = self.headView;
 }
 
-
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
 {

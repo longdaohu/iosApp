@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class Applycourse;
-@interface XWGJApplyRecord : NSObject
+@interface ApplyStatusRecord : NSObject
 @property(nonatomic,strong)Applycourse *Course;
 @property(nonatomic,copy)NSString      *Status;
 +(instancetype)ApplyStatusWithDictionary:(NSDictionary *)recordDic;

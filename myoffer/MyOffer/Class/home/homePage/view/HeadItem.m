@@ -30,8 +30,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-
+ 
         [self makeUI];
         
     }
@@ -73,7 +72,6 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
     
     
     CGSize  contentSize = self.bounds.size;

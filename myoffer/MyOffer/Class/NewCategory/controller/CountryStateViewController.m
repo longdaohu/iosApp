@@ -62,19 +62,6 @@
         self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
     }
     
-    /*
-    NSString *keyWord  = USER_EN ? @"Country_EN" :@"Country_CN";
-    NSArray *values = [[NSUserDefaults standardUserDefaults] valueForKey:keyWord];
-    NSMutableArray *temps =[NSMutableArray array];
-    for (NSDictionary *countryDic  in values) {
-        XUCountry *country = [XUCountry countryInitWithCountryDictionary:countryDic];
-       [temps addObject:country];
-    }
-    NSArray *countries = [temps valueForKeyPath:@"countryName"];
-    NSInteger  index  = [countries indexOfObject:self.countryName];
-    XUCountry *country = temps[index];
-    self.states =  [country.states valueForKeyPath:@"stateName"];
-    */
 }
 
 -(void)makeTableView
@@ -88,7 +75,6 @@
     
     
     UIImage *countryImage  = [self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")] ? [UIImage imageNamed:GDLocalizedString(@"Category-UK") ] :[UIImage imageNamed:GDLocalizedString(@"Category-AU") ];
-    
     UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, (countryImage.size.height  *  XScreenWidth / countryImage.size.width))];
     headerView.contentMode = UIViewContentModeScaleAspectFill;
     headerView.image = countryImage;

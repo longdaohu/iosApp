@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XWGJApplyRecord;
-@interface XWGJApplyStatusTableViewCell : UITableViewCell
-@property(nonatomic,strong)XWGJApplyRecord *record;
+@class ApplyStatusRecord;
+@interface ApplyStatusCell : UITableViewCell
+@property(nonatomic,strong)ApplyStatusRecord *record;
 +(instancetype)CreateCellWithTableView:(UITableView *)tableView;
 @end

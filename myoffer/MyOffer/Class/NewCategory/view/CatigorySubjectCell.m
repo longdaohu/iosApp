@@ -25,7 +25,7 @@
     
     [super awakeFromNib];
 
-    self.contentView.layer.cornerRadius = 5;
+    self.contentView.layer.cornerRadius = CORNER_RADIUS;
     self.contentView.layer.masksToBounds = YES;
     
     

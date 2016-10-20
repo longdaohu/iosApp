@@ -14,15 +14,15 @@
 #import "UniversityViewController.h"
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *FavoriteTableView;
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) XWGJnodataView *noDataView;
+//收藏学校数据
 @property (strong, nonatomic) NSArray *favor_Unies;
 
 @end
 
 
 @implementation FavoriteViewController
-
 
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -50,20 +50,19 @@
     [self makeTableView];
     
     [self makeOtherView];
-    
-    [self makeNodataView];
+  
  
 }
 
 
 -(void)makeTableView
 {
-    self.FavoriteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
-    self.FavoriteTableView.dataSource = self;
-    self.FavoriteTableView.delegate = self;
-    [self.view  addSubview:self.FavoriteTableView];
-    self.FavoriteTableView.backgroundColor = XCOLOR_BG;
-    self.FavoriteTableView.tableFooterView = [[UIView alloc] init];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view  addSubview:self.tableView];
+    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
 
@@ -73,13 +72,18 @@
     self.title = GDLocalizedString(@"Setting-002");
 }
 
--(void)makeNodataView
-{
-    self.noDataView =[XWGJnodataView noDataView];
-    self.noDataView.contentLabel.text = GDLocalizedString(@"Favorite-NOTI");
-    self.noDataView.hidden = YES;
-    [self.view insertSubview:self.noDataView aboveSubview:self.FavoriteTableView];
+
+-(XWGJnodataView *)noDataView{
+
+    if (!_noDataView) {
+
+        _noDataView =[XWGJnodataView noDataView];
+        _noDataView.contentLabel.text = GDLocalizedString(@"Favorite-NOTI");
+        _noDataView.hidden = YES;
+        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
+    }
     
+    return _noDataView;
 }
 
 - (void)viewDidLoad {
@@ -89,12 +93,12 @@
     [self makeUI];
  }
 
+//请求数据
 - (void)reloadData {
     
     if (![self checkNetworkState]) {
         
         self.noDataView.hidden = NO;
-        
         self.noDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
         
         return;
@@ -102,17 +106,16 @@
     
     XWeakSelf
     [self
-     startAPIRequestUsingCacheWithSelector:@"GET api/account/favorites"
-     parameters:@{}
+     startAPIRequestUsingCacheWithSelector:kAPISelectorFavorites
+     parameters:nil
      success:^(NSInteger statusCode, id response) {
          
          [weakSelf configrationUIWithresponse:response];
          
-         [weakSelf.FavoriteTableView reloadData];
      }];
 }
 
-
+//根据返回数据配置UI
 - (void)configrationUIWithresponse:(id)response{
 
     NSArray *universities = (NSArray *)response;
@@ -121,9 +124,7 @@
     
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
-        
-        UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uni];
+        UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:[UniversityObj createUniversityWithUniversityInfo:obj]];
         
         [uni_temps addObject:uniFrame];
         
@@ -132,6 +133,8 @@
     self.favor_Unies = [uni_temps copy];
     
     self.noDataView.hidden = self.favor_Unies.count == 0 ? NO : YES;
+    
+    [self.tableView reloadData];
 
 }
 
@@ -178,15 +181,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     
     UniversityFrameObj *uniFrame = self.favor_Unies[indexPath.section];
-    UniversityObj *uni =uniFrame.uniObj;
     UniversityViewController *University = [[UniversityViewController alloc] init];
-    University.uni_id = uni.universityID;
+    University.uni_id = uniFrame.uniObj.universityID;
     [self.navigationController pushViewController:University animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

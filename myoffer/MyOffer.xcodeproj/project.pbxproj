@@ -141,7 +141,6 @@
 		AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28711D77CA3C00E9A47A /* UULineChart.m */; };
 		AE7107AA1D7687FC00019B1F /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107A91D7687FC00019B1F /* ShareViewController.m */; };
 		AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */; };
-		AE712FB31D5DB78200D0F48A /* ApplyStatusGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB21D5DB78200D0F48A /* ApplyStatusGroup.m */; };
 		AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */; };
 		AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */; };
 		AE777CC01D75A0A300FB1FD4 /* Uni-uk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */; };
@@ -197,9 +196,9 @@
 		AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249761D5B215300DD7939 /* ApplyTableViewCell.m */; };
 		AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2497E1D5B215300DD7939 /* ApplyStatusViewController.m */; };
 		AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249811D5B215300DD7939 /* UniversityFrame.m */; };
-		AEA249CA1D5B215300DD7939 /* XWGJApplyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249831D5B215300DD7939 /* XWGJApplyRecord.m */; };
-		AEA249CB1D5B215300DD7939 /* XWGJApplyRecordGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249851D5B215300DD7939 /* XWGJApplyRecordGroup.m */; };
-		AEA249CC1D5B215300DD7939 /* XWGJApplyStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249881D5B215300DD7939 /* XWGJApplyStatusTableViewCell.m */; };
+		AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */; };
+		AEA249CB1D5B215300DD7939 /* ApplyStatusRecordGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */; };
+		AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249881D5B215300DD7939 /* ApplyStatusCell.m */; };
 		AEA249CD1D5B215300DD7939 /* XWGJApplyStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */; };
 		AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */; };
 		AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249941D5B215300DD7939 /* MeViewController.m */; };
@@ -651,8 +650,6 @@
 		AE7107A91D7687FC00019B1F /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		AE7107AB1D76C89D00019B1F /* UniversityFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFooterView.h; sourceTree = "<group>"; };
 		AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFooterView.m; sourceTree = "<group>"; };
-		AE712FB11D5DB78100D0F48A /* ApplyStatusGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusGroup.h; sourceTree = "<group>"; };
-		AE712FB21D5DB78200D0F48A /* ApplyStatusGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusGroup.m; sourceTree = "<group>"; };
 		AE712FB41D5DBDA100D0F48A /* UniversityCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourse.h; sourceTree = "<group>"; };
 		AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourse.m; sourceTree = "<group>"; };
 		AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Uni-au.jpg"; path = "controller/Uni-au.jpg"; sourceTree = "<group>"; };
@@ -755,12 +752,12 @@
 		AEA2497E1D5B215300DD7939 /* ApplyStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusViewController.m; sourceTree = "<group>"; };
 		AEA249801D5B215300DD7939 /* UniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFrame.h; sourceTree = "<group>"; };
 		AEA249811D5B215300DD7939 /* UniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrame.m; sourceTree = "<group>"; };
-		AEA249821D5B215300DD7939 /* XWGJApplyRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJApplyRecord.h; sourceTree = "<group>"; };
-		AEA249831D5B215300DD7939 /* XWGJApplyRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJApplyRecord.m; sourceTree = "<group>"; };
-		AEA249841D5B215300DD7939 /* XWGJApplyRecordGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJApplyRecordGroup.h; sourceTree = "<group>"; };
-		AEA249851D5B215300DD7939 /* XWGJApplyRecordGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJApplyRecordGroup.m; sourceTree = "<group>"; };
-		AEA249871D5B215300DD7939 /* XWGJApplyStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJApplyStatusTableViewCell.h; sourceTree = "<group>"; };
-		AEA249881D5B215300DD7939 /* XWGJApplyStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJApplyStatusTableViewCell.m; sourceTree = "<group>"; };
+		AEA249821D5B215300DD7939 /* ApplyStatusRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusRecord.h; sourceTree = "<group>"; };
+		AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecord.m; sourceTree = "<group>"; };
+		AEA249841D5B215300DD7939 /* ApplyStatusRecordGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusRecordGroup.h; sourceTree = "<group>"; };
+		AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecordGroup.m; sourceTree = "<group>"; };
+		AEA249871D5B215300DD7939 /* ApplyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusCell.h; sourceTree = "<group>"; };
+		AEA249881D5B215300DD7939 /* ApplyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusCell.m; sourceTree = "<group>"; };
 		AEA249891D5B215300DD7939 /* XWGJApplyStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJApplyStatusView.h; sourceTree = "<group>"; };
 		AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJApplyStatusView.m; sourceTree = "<group>"; };
 		AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
@@ -1962,12 +1959,10 @@
 			children = (
 				AEA249801D5B215300DD7939 /* UniversityFrame.h */,
 				AEA249811D5B215300DD7939 /* UniversityFrame.m */,
-				AEA249821D5B215300DD7939 /* XWGJApplyRecord.h */,
-				AEA249831D5B215300DD7939 /* XWGJApplyRecord.m */,
-				AEA249841D5B215300DD7939 /* XWGJApplyRecordGroup.h */,
-				AEA249851D5B215300DD7939 /* XWGJApplyRecordGroup.m */,
-				AE712FB11D5DB78100D0F48A /* ApplyStatusGroup.h */,
-				AE712FB21D5DB78200D0F48A /* ApplyStatusGroup.m */,
+				AEA249821D5B215300DD7939 /* ApplyStatusRecord.h */,
+				AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */,
+				AEA249841D5B215300DD7939 /* ApplyStatusRecordGroup.h */,
+				AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1975,8 +1970,8 @@
 		AEA249861D5B215300DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249871D5B215300DD7939 /* XWGJApplyStatusTableViewCell.h */,
-				AEA249881D5B215300DD7939 /* XWGJApplyStatusTableViewCell.m */,
+				AEA249871D5B215300DD7939 /* ApplyStatusCell.h */,
+				AEA249881D5B215300DD7939 /* ApplyStatusCell.m */,
 				AEA249891D5B215300DD7939 /* XWGJApplyStatusView.h */,
 				AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */,
 			);
@@ -3409,7 +3404,7 @@
 				AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
-				AEA249CC1D5B215300DD7939 /* XWGJApplyStatusTableViewCell.m in Sources */,
+				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24AF41D5B24D200DD7939 /* MenuCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
 				AE1FD7511D5C929500FFD5A8 /* MJRefreshBackStateFooter.m in Sources */,
@@ -3460,7 +3455,6 @@
 				AEA24B7B1D5B25E000DD7939 /* CountryState.m in Sources */,
 				AEA24BC61D5B264300DD7939 /* MessageViewController.m in Sources */,
 				AEA24AFE1D5B24D200DD7939 /* BindEmailViewController.m in Sources */,
-				AE712FB31D5DB78200D0F48A /* ApplyStatusGroup.m in Sources */,
 				AEA24AF71D5B24D200DD7939 /* RESideMenu.m in Sources */,
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
@@ -3601,7 +3595,7 @@
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,
 				AEA24B2C1D5B251800DD7939 /* YourPhoneView.m in Sources */,
 				AEA24B7F1D5B25E000DD7939 /* FilterSection.m in Sources */,
-				AEA249CA1D5B215300DD7939 /* XWGJApplyRecord.m in Sources */,
+				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA249C41D5B215300DD7939 /* UniversityFrameApplyObj.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
@@ -3636,7 +3630,7 @@
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,
 				463E3AB91B23105F00E0BAF8 /* NSDate+KDUtilities.m in Sources */,
-				AEA249CB1D5B215300DD7939 /* XWGJApplyRecordGroup.m in Sources */,
+				AEA249CB1D5B215300DD7939 /* ApplyStatusRecordGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

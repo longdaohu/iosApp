@@ -6,12 +6,12 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJApplyRecordGroup.h"
+#import "ApplyStatusRecordGroup.h"
 #import "UniversityObj.h"
 #import "UniversityFrameObj.h"
-#import "XWGJApplyRecord.h"
+#import "ApplyStatusRecord.h"
 
-@implementation XWGJApplyRecordGroup
+@implementation ApplyStatusRecordGroup
 
 
 +(instancetype)ApplyRecourseGroupWithDictionary:(NSDictionary *)recordDic
@@ -26,7 +26,7 @@
         
         self.university      = [UniversityObj createUniversityWithUniversityInfo:recordDic[@"university"]];
         self.universityFrame = [UniversityFrameObj UniversityFrameWithUniversity:self.university];
-        self.record          = [XWGJApplyRecord ApplyStatusWithDictionary:recordDic];
+        self.record          = [ApplyStatusRecord ApplyStatusWithDictionary:recordDic];
  
     }
     

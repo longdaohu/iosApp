@@ -6,17 +6,20 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJApplyRecord.h"
+#import "ApplyStatusRecord.h"
 #import "Applycourse.h"
 
-@implementation XWGJApplyRecord
+@implementation ApplyStatusRecord
+
 +(instancetype)ApplyStatusWithDictionary:(NSDictionary *)recordDic
 {
     return [[self alloc] initWithDictionary:recordDic];
 }
+
 -(instancetype)initWithDictionary:(NSDictionary *)recordDic
 {
     self =[super  init];
+    
     if (self) {
         
            self.Status = recordDic[@"state"];
