@@ -217,10 +217,8 @@
         return;
     }
     
-    
-    MessageDetaillViewController *help =[[MessageDetaillViewController alloc] init];
-    help.NO_ID = message[@"_id"];
-    [self.navigationController pushViewController:help animated:YES];
+ 
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message[@"_id"]] animated:YES];
     
 }
 

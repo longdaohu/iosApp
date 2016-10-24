@@ -594,9 +594,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame     = self.CurrentArr[indexPath.row];
-    MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] init];
-    detail.NO_ID                        = messageFrame.News.messageID;
-    [self.navigationController pushViewController:detail animated:YES];
+ 
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.messageID] animated:YES];
   
 }
 

@@ -10,5 +10,5 @@
 
 @interface MessageDetaillViewController : BaseViewController
 @property(nonatomic,assign)NSString *NO_ID;
-
+-(instancetype)initWithMessageId:(NSString *)message_id;
 @end

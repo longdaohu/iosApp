@@ -621,9 +621,8 @@
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
     [MobClick event:@"home_newsItem"];
-    MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] init];
-    detail.NO_ID = response[@"_id"];
-    [self.navigationController pushViewController:detail animated:YES];
+ 
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:response[@"_id"]] animated:YES];
 }
 
 #pragma mark —————— HomeThirdTableViewCellDelegate

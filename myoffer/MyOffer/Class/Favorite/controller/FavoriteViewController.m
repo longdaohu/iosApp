@@ -18,6 +18,7 @@
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
+
 @property (strong, nonatomic) XWGJnodataView *noDataView;
 //收藏学校数据
 @property (strong, nonatomic) NSArray *favor_Unies;
@@ -180,9 +181,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UniItemFrame *uniFrame = self.favor_Unies[indexPath.section];
-    UniversityViewController *University = [[UniversityViewController alloc] init];
-    University.uni_id = uniFrame.item.NO_id;
-    [self.navigationController pushViewController:University animated:YES];
+    
+     [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.item.NO_id] animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

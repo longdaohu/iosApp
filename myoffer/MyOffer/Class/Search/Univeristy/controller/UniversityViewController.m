@@ -58,6 +58,18 @@ typedef enum {
 
 @implementation UniversityViewController
 
+-(instancetype)initWithUniversityId:(NSString *)Uni_id{
+
+    self = [super init];
+    
+    if (self) {
+        
+        self.uni_id = Uni_id;
+    }
+    
+    
+    return self;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -418,16 +430,14 @@ typedef enum {
     if ([group.HeaderTitle containsString:@"文章"]) {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-        MessageDetaillViewController *detail  =[[MessageDetaillViewController alloc] init];
-        detail.NO_ID = newsFrame.News.messageID;
-        [self.navigationController pushViewController:detail animated:YES];
+   
+        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.messageID] animated:YES];
         
     }else{
         
         UniItemFrame *uniFrame   = group.items[indexPath.row];
-        UniversityViewController *Uni  =[[UniversityViewController alloc] init];
-        Uni.uni_id =  uniFrame.item.NO_id;
-        [self.navigationController pushViewController:Uni animated:YES];
+        
+        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.item.NO_id]  animated:YES];
     }
     
 }
