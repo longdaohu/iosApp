@@ -24,7 +24,6 @@
 @property(nonatomic,strong)NSArray *Restults;
 @property(nonatomic,strong)NSArray *sectionTitleList;
 @property(nonatomic,assign)NSInteger nextPage;
-@property(nonatomic,assign)NSInteger rankNumber;
 @property(nonatomic,strong)UIImageView *navImageView;
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 @end
@@ -98,8 +97,9 @@
         NSMutableArray *three = [NSMutableArray array];
         NSMutableArray *two = [NSMutableArray array];
         NSMutableArray *one = [NSMutableArray array];
-        
-        _Restults =@[five,four,three,two,one];
+        NSMutableArray *zero = [NSMutableArray array];
+
+        _Restults =@[five,four,three,two,one,zero];
 
     }
     return _Restults;
@@ -108,7 +108,9 @@
 -(NSArray *)sectionTitleList
 {
     if (!_sectionTitleList) {
-        _sectionTitleList = @[GDLocalizedString(@"CategoryNew-fiveStar"),GDLocalizedString(@"CategoryNew-fourStar"),GDLocalizedString(@"CategoryNew-threeStar"),GDLocalizedString(@"CategoryNew-twoStar"),GDLocalizedString(@"CategoryNew-oneStar")];
+        
+        _sectionTitleList = @[GDLocalizedString(@"CategoryNew-fiveStar"),GDLocalizedString(@"CategoryNew-fourStar"),GDLocalizedString(@"CategoryNew-threeStar"),GDLocalizedString(@"CategoryNew-twoStar"),GDLocalizedString(@"CategoryNew-oneStar"),@"无星院校"];
+        
     }
     return _sectionTitleList;
 }
@@ -118,7 +120,6 @@
 
     [self makeTableView];
     
-    self.rankNumber = 0;
     
     [self reloadDataWithPageIndex:0 refresh:NO];
     
@@ -153,26 +154,19 @@
      errorAlertDismissAction:nil
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
+         
           for (NSDictionary *dic in response[@"universities"]) {
-            
-              
-              UniversityFrameObj *uniFrame =[self makeUniversityFrameWithDictionary:dic];
-
-             if ([dic[RANKTI] integerValue] ==  (5 - self.rankNumber)) {
-                 
-                 NSMutableArray *temp = self.Restults[self.rankNumber];
-                 [temp addObject:uniFrame];
-                 
-             }else{
-             
-                 self.rankNumber +=1;
-
-                 NSMutableArray *temp = self.Restults[self.rankNumber];
   
-                 [temp addObject:uniFrame];
-                 
-              }
+              UniversityFrameObj *uniFrame =[self makeUniversityFrameWithDictionary:dic];
+              
+              NSInteger index =  [dic[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [dic[RANKTI] integerValue];
+              
+              NSMutableArray *temps = self.Restults[index];
+              
+              [temps addObject:uniFrame];
+              
           }
+         
          
          [self.tableView reloadData];
 
@@ -207,12 +201,7 @@
 #pragma mark —————— UITableViewDelegate  UITableViewDataSource
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NomalTableSectionHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-    
-    if (!header) {
-        
-        header =[[NomalTableSectionHeaderView alloc] initWithReuseIdentifier:@"header"];
-    }
+    NomalTableSectionHeaderView *header =[NomalTableSectionHeaderView sectionViewWithTableView:tableView];
     
     [header sectionHeaderWithTitle:self.sectionTitleList[section] FontSize: 20.0f];
     
@@ -221,9 +210,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    NSArray *temp = self.Restults[section];
+    NSArray *items = self.Restults[section];
 
-    return temp.count > 0 ? 50 : 0;
+    return items.count > 0 ? 50 : 0;
 }
 
 
@@ -234,9 +223,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NSArray *temp = self.Restults[section];
+    NSArray *items = self.Restults[section];
     
-    return temp.count;
+    return items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -13,6 +13,19 @@
 @end
 @implementation NomalTableSectionHeaderView
 
+
++(instancetype)sectionViewWithTableView:(UITableView *)tableView{
+
+    NomalTableSectionHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+    
+    if (!header) {
+        
+        header =[[NomalTableSectionHeaderView alloc] initWithReuseIdentifier:@"header"];
+    }
+    
+    return header;
+}
+
 -(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     self =  [super initWithReuseIdentifier:reuseIdentifier];
@@ -20,7 +33,7 @@
     if (self) {
         
         UILabel *titleLab = [UILabel labelWithFontsize: 20.0f TextColor:[UIColor blackColor] TextAlignment:NSTextAlignmentLeft];
-       [self.contentView addSubview:titleLab];
+        [self.contentView addSubview:titleLab];
         self.titleLab = titleLab;
  
         self.contentView.backgroundColor = XCOLOR_BG;

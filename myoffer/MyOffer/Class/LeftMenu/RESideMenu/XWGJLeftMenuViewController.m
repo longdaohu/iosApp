@@ -57,14 +57,34 @@
     if (LOGIN) {
         
         NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+        
         NSString *message_count  = [ud valueForKey:@"message_count"];
+        
         NSString *order_count    = [ud valueForKey:@"order_count"];
         
-        MenuItem *orderCount   = [MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
-        MenuItem *messageCount = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
+        MenuItem *order   = [MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
         
-        NSArray *temps = @[apply,orderCount,messageCount,set,help,logout];
+        MenuItem *message = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
+        
+        NSArray *temps = @[apply,order,message,set,help,logout];
+        
         self.menuItems = [temps mutableCopy];
+        
+    
+        
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
+            MenuItem *order = self.menuItems[1];
+            order.messageCount = [NSString stringWithFormat:@"%@",response[@"order_count"]];
+            MenuItem *message = self.menuItems[2];
+            message.messageCount = [NSString stringWithFormat:@"%@",response[@"message_count"]];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0],[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+
+        }];
+        
+        
+        
         
     }else{
         
@@ -103,6 +123,7 @@
              }];
   
          }
+   
          
      }else{
          

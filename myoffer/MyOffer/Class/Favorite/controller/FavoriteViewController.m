@@ -8,10 +8,13 @@
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 #import "FavoriteViewController.h"
-#import "UniversityFrameObj.h"
-#import "UniversityObj.h"
-#import "NewSearchResultCell.h"
+//#import "UniversityFrameObj.h"
+//#import "UniversityObj.h"
+//#import "NewSearchResultCell.h"
 #import "UniversityViewController.h"
+#import "UniversityItemNew.h"
+#import "UniItemFrame.h"
+#import "UniversityCell.h"
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -124,12 +127,12 @@
     
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:[UniversityObj createUniversityWithUniversityInfo:obj]];
         
-        [uni_temps addObject:uniFrame];
+        [uni_temps addObject: [UniItemFrame frameWithUniversity:[UniversityItemNew mj_objectWithKeyValues:obj]]];
         
     }];
     
+   
     self.favor_Unies = [uni_temps copy];
     
     self.noDataView.hidden = self.favor_Unies.count == 0 ? NO : YES;
@@ -167,24 +170,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
-  
-    UniversityFrameObj *uniFrame = self.favor_Unies[indexPath.section];
-  
-    UniversityObj *uni =uniFrame.uniObj;
+    UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
     
-    cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
+    uni_cell.itemFrame = self.favor_Unies[indexPath.section];
     
-    cell.uni_Frame = uniFrame;
-    
-    return cell;
+    return uni_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UniversityFrameObj *uniFrame = self.favor_Unies[indexPath.section];
+    UniItemFrame *uniFrame = self.favor_Unies[indexPath.section];
     UniversityViewController *University = [[UniversityViewController alloc] init];
-    University.uni_id = uniFrame.uniObj.universityID;
+    University.uni_id = uniFrame.item.NO_id;
     [self.navigationController pushViewController:University animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

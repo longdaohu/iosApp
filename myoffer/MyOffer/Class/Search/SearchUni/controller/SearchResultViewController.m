@@ -194,6 +194,9 @@
  
     _descending = self.xby;
 
+    
+
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{_fieldKey: _text ?: [NSNull null],
                                  @"page": @(page),
                                  @"size": @40,
@@ -225,10 +228,15 @@
              [_result removeAllObjects];
              
          }
+         
+         
           [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-             NSString *uid = obj[@"_id"];
-             
+              
+              
+              NSString *uid = obj[@"_id"];
+  
              if (![_resultIDSet containsObject:uid]) {
+                 
                  [_resultIDSet addObject:uid];
                 
                  UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:obj];
@@ -236,7 +244,10 @@
                  UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
 
                  [_result addObject:uniFrame];
-              }
+   
+             }
+           
+              
          }];
           _allResultCount = [response[@"count"] integerValue];
          
@@ -287,6 +298,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+ 
     return _result.count;
 }
 
@@ -300,7 +312,7 @@
     cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
-    
+
     return cell;
 }
 

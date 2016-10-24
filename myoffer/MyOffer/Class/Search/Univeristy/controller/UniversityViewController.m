@@ -435,7 +435,7 @@ typedef enum {
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
-      //顶部导航条透明度
+    //顶部导航条透明度
     [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y];
  
     //顶部图片拉伸
@@ -510,8 +510,8 @@ typedef enum {
 
 }
 //集成分享功能
-- (ShareViewController *)shareVC{
-
+- (ShareViewController *)shareVC
+{
     if (!_shareVC) {
         
         XWeakSelf
@@ -540,7 +540,8 @@ typedef enum {
 }
 
 //收藏
-- (void)favorite{
+- (void)favorite
+{
     
     XWeakSelf
     NSString *path = self.favorited ?  @"GET api/account/unFavorite/:id"  : @"GET api/account/favorite/:id";
@@ -555,14 +556,16 @@ typedef enum {
 
     }];
 }
-//回退
-- (void)pop{
 
+//回退
+- (void)pop
+{
      [self.navigationController popViewControllerAnimated:YES];
 }
 
 //点击查看更多
-- (void)more{
+- (void)more
+{
   
     self.UniFrame.showMore = !self.UniFrame.showMore;
     
@@ -584,14 +587,13 @@ typedef enum {
 }
 
 //设置是否收藏
-- (void)configureLikeButton:(BOOL)favorite{
-    
+- (void)configureLikeButton:(BOOL)favorite
+{
      NSString *nomalFavor = favorite ? @"Uni_Favor" : @"Uni_Unfavor";
     [self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
      self.header.rightView.favorited = favorite;
     
 }
-
 
 //点击footer按钮
 - (void)footerWithButton:(UIButton *)sender
@@ -608,11 +610,9 @@ typedef enum {
 }
 
 //查看所有专业
-- (void)allSubjects{
-    
-    
+- (void)allSubjects
+{
     UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id];
-    
     [self.navigationController pushViewController:subjects animated:YES];
 }
 
@@ -671,6 +671,7 @@ typedef enum {
     NSMutableArray *temps = [NSMutableArray new];
     
     for (NSString *path in self.UniFrame.item.images) {
+        
         [temps addObject:[NSURL URLWithString:path]];
     }
     

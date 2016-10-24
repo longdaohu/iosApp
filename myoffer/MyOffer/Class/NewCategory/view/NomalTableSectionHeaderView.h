@@ -10,5 +10,6 @@
 
 @interface NomalTableSectionHeaderView : UITableViewHeaderFooterView
 -(void)sectionHeaderWithTitle:(NSString *)title FontSize:(CGFloat)fontSize;
++(instancetype)sectionViewWithTableView:(UITableView *)tableView;
 
 @end

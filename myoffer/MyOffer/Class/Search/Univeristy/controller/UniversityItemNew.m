@@ -11,7 +11,7 @@
 @implementation UniversityItemNew
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    return @{@"NO_id" : @"_id"};
+    return @{@"NO_id" : @"_id",@"found_year" : @"found"};
     
 }
 

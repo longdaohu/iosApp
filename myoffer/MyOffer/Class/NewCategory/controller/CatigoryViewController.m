@@ -26,7 +26,7 @@
 
 @interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 //背景scroller
-@property(nonatomic,strong)CatigaryScrollView *baseScroller;
+@property(nonatomic,strong)CatigaryScrollView *baseScrollView;
 //排名tableView
 @property(nonatomic,strong)UITableView *tableView;
 //专业collectionView
@@ -127,6 +127,7 @@
 //专业数据数组
 -(NSArray *)SubjectList
 {
+   
     if (!_SubjectList) {
         
         NSArray *item_subjects = [[NSUserDefaults standardUserDefaults] valueForKey:@"Subject_CN"];
@@ -176,7 +177,7 @@
             CatigorySubject *built =[CatigorySubject subjectItemInitWithIconName:@"sub_built"  TitleName:@"建筑与规划"];
             CatigorySubject *humanity =[CatigorySubject subjectItemInitWithIconName:@"sub_humanit"  TitleName:GDLocalizedString(@"CategorySub-humanity")];
             CatigorySubject *engineer =[CatigorySubject subjectItemInitWithIconName:@"sub_engineer"  TitleName:GDLocalizedString(@"CategorySub-engineer")];
-            //        CatigorySubject *education =[CatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
+//           CatigorySubject *education =[CatigorySubject subjectItemInitWithIconName:@"sub_education"  TitleName:GDLocalizedString(@"CategorySub-education")];
             CatigorySubject *medicine =[CatigorySubject subjectItemInitWithIconName:@"sub_medicine"  TitleName:GDLocalizedString(@"CategorySub-medicine")];
             CatigorySubject *business =[CatigorySubject subjectItemInitWithIconName:@"sub_business"  TitleName:GDLocalizedString(@"CategorySub-business")];
             CatigorySubject *farm =[CatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
@@ -186,8 +187,7 @@
         }
         
         
-        
-        }
+    }
     
     return _SubjectList;
 }
@@ -204,7 +204,7 @@
     //顶部工具栏切换页面
     self.bg_SelectView.actionBlock = ^(UIButton *sender){
         
-        [weakSelf.baseScroller setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
+        [weakSelf.baseScrollView setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
         
     };
     
@@ -218,9 +218,9 @@
     CGFloat baseY = 0;
     CGFloat baseW = XScreenWidth;
     CGFloat baseH = XScreenHeight - XNav_Height - 50;
-    self.baseScroller = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
-    self.baseScroller.delegate = self;
-    [self.view addSubview:self.baseScroller];
+    self.baseScrollView = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
+    self.baseScrollView.delegate = self;
+    [self.view addSubview:self.baseScrollView];
     
     [self makeCityCollectViewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     
@@ -237,12 +237,12 @@
     
     self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:frame andcontentInset:UIEdgeInsetsMake(topHigh, 0, 40, 0)];
     
-    UINib *city_xib = [UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil];
     
+    UINib *city_xib = [UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil];
     [self.City_CollectView registerNib:city_xib forCellWithReuseIdentifier:cityIdentify];
     
-    UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
     
+    UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
     
     self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
@@ -275,12 +275,9 @@
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.baseScroller  addSubview:self.tableView];
+    [self.baseScrollView  addSubview:self.tableView];
     
 }
-
-
-
 
 
 //创建CollectionView公共方法
@@ -302,7 +299,7 @@
     collectionView.backgroundColor = XCOLOR_CLEAR;
     collectionView.contentInset = Inset;
     
-    [self.baseScroller addSubview:collectionView];
+    [self.baseScrollView addSubview:collectionView];
     
     return collectionView;
 }
@@ -393,22 +390,22 @@ static NSString *cityIdentify = @"cityCell";
 {
     if (collectionView == self.Sub_CollectView) {
         
-        CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
+        CatigorySubjectCell *subject_cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
       
-        cell.subject =self.SubjectList[indexPath.row];
+        subject_cell.subject =self.SubjectList[indexPath.row];
         
-        return cell;
+        return subject_cell;
         
     }else{
         
-        CatigaryCityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
+        CatigaryCityCollectionCell *city_cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
         
         CatigaryCountry *country = self.countryes[indexPath.section];
         
-        cell.city = country.HotCities[indexPath.row];
+        city_cell.city = country.HotCities[indexPath.row];
         
  
-         return cell;
+         return city_cell;
     }
     
     
@@ -438,10 +435,11 @@ static NSString *cityIdentify = @"cityCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    CatigoryRankCell *cell = [CatigoryRankCell cellInitWithTableView:tableView];
-    cell.rank = self.RankList[indexPath.row];
+    CatigoryRankCell *rank_cell = [CatigoryRankCell cellInitWithTableView:tableView];
+    
+    rank_cell.rank = self.RankList[indexPath.row];
   
-    return cell;
+    return rank_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -490,7 +488,7 @@ static NSString *cityIdentify = @"cityCell";
         }
         
         // 限制y轴不动
-        self.baseScroller.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
+        self.baseScrollView.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
     }
 }
 
@@ -507,6 +505,7 @@ static NSString *cityIdentify = @"cityCell";
 //导航栏 leftBarButtonItem
 -(void)leftViewMessage{
     
+    //先从本地获取消息数据 当网络联接时，再次请求最新网络数据
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
     NSString *order_count    = [ud valueForKey:@"order_count"];
@@ -605,8 +604,7 @@ static NSString *cityIdentify = @"cityCell";
     vc.CoreArea = subject.TitleName;
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-
+ 
 }
 
 

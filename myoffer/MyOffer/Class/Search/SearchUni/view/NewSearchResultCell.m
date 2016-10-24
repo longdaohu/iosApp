@@ -89,6 +89,7 @@
         [self addSubview:self.starBackground];
         
         for (NSInteger i = 0; i<5; i++) {
+            
             UIImageView *mv =[[UIImageView alloc] init];
             mv.image = [UIImage imageNamed:@"star"];
             mv.contentMode = UIViewContentModeScaleAspectFill;
@@ -149,13 +150,34 @@
         center.y = self.rankLabel.center.y;
         self.starBackground.center = center;
         self.rankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        
         NSInteger  StarCount  = uniObj.RANKTIName.integerValue;
+        
+        
+        if (StarCount == DefaultNumber) {
+            
+            NSString   *rankStr01 = uniObj.RANKTIName.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
+           
+            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+            
+            self.starBackground.hidden = YES;
+        
+            return;
+            
+        }else{
+        
+            self.starBackground.hidden = NO;
+
+        }
+        
         for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
             
             UIImageView *imageV = (UIImageView *)self.starBackground.subviews[i];
             
             imageV.frame = CGRectMake([uni_Frame.starFrames[i] integerValue], 0, 15, 15);
         }
+        
+        
         for (NSInteger i =0; i < StarCount; i++) {
             
             UIImageView *mv = (UIImageView *)self.starBackground.subviews[i];
@@ -163,6 +185,7 @@
             mv.hidden = NO;
             
         }
+        
         for (NSInteger i = StarCount ; i < self.starBackground.subviews.count; i++) {
             
             UIImageView *mv = (UIImageView *)self.starBackground.subviews[i];
@@ -173,10 +196,9 @@
         
     }else{
         
-            NSString   *rankStr01 = uniObj.RANKTIName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
-            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-            
- 
+        NSString   *rankStr01 = uniObj.RANKTIName.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
+        self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+  
     }
     
 }

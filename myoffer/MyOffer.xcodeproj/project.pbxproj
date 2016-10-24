@@ -199,7 +199,6 @@
 		AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */; };
 		AEA249CB1D5B215300DD7939 /* ApplyStatusRecordGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */; };
 		AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249881D5B215300DD7939 /* ApplyStatusCell.m */; };
-		AEA249CD1D5B215300DD7939 /* XWGJApplyStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */; };
 		AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */; };
 		AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249941D5B215300DD7939 /* MeViewController.m */; };
 		AEA249D01D5B215300DD7939 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249951D5B215300DD7939 /* MeViewController.xib */; };
@@ -758,8 +757,6 @@
 		AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecordGroup.m; sourceTree = "<group>"; };
 		AEA249871D5B215300DD7939 /* ApplyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusCell.h; sourceTree = "<group>"; };
 		AEA249881D5B215300DD7939 /* ApplyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusCell.m; sourceTree = "<group>"; };
-		AEA249891D5B215300DD7939 /* XWGJApplyStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJApplyStatusView.h; sourceTree = "<group>"; };
-		AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJApplyStatusView.m; sourceTree = "<group>"; };
 		AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
 		AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
 		AEA249931D5B215300DD7939 /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
@@ -1972,8 +1969,6 @@
 			children = (
 				AEA249871D5B215300DD7939 /* ApplyStatusCell.h */,
 				AEA249881D5B215300DD7939 /* ApplyStatusCell.m */,
-				AEA249891D5B215300DD7939 /* XWGJApplyStatusView.h */,
-				AEA2498A1D5B215300DD7939 /* XWGJApplyStatusView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3548,7 +3543,6 @@
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
 				AEA249B61D5B215300DD7939 /* ApplySection.m in Sources */,
-				AEA249CD1D5B215300DD7939 /* XWGJApplyStatusView.m in Sources */,
 				AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */,
 				AEA24B801D5B25E000DD7939 /* OptionItem.m in Sources */,
 				AEA24A081D5B224E00DD7939 /* CatigoryRankCell.m in Sources */,

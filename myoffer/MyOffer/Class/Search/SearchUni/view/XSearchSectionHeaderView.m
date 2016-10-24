@@ -162,7 +162,24 @@
 
         self.StarBackground.frame = uni_Frame.starBgFrame;
         self.RankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        
         NSInteger  StarCount  = uniObj.RANKTIName.integerValue;
+        
+        
+        if (StarCount == DefaultNumber) {
+            
+            NSString   *rankStr01 = uniObj.RANKTIName.intValue == 99999?GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
+            self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+            self.StarBackground.hidden = YES;
+            
+            return;
+            
+        }else{
+            
+            self.StarBackground.hidden = NO;
+            
+        }
+        
         for (NSInteger i =0; i < self.StarBackground.subviews.count; i++) {
         
             UIImageView *imageV = (UIImageView *)self.StarBackground.subviews[i];

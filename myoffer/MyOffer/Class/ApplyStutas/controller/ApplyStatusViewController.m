@@ -7,13 +7,13 @@
 // 申请状态
 
 #import "ApplyStatusViewController.h"
-#import "ApplySection.h"
-#import "XWGJApplyStatusView.h"
-#import "UniversityObj.h"
-#import "XWGJApplyStatusTableViewCell.h"
+#import "ApplyStatusCell.h"
 #import "ApplyStatusRecord.h"
 #import "ApplyStatusRecordGroup.h"
-#import "XSearchSectionHeaderView.h"
+#import "UniversityItemNew.h"
+#import "UniItemFrame.h"
+#import "UniversityCell.h"
+
 #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -21,7 +21,7 @@
 //没有数据时显示
 @property (strong, nonatomic) XWGJnodataView *noDataView;
 //申请记录数组
-@property(nonatomic,strong)NSArray *ApplyRecordGroups;
+@property(nonatomic,strong)NSArray *Record_Groups;
 
 
 @end
@@ -80,6 +80,7 @@
     if (self.isBackRootViewController) {
         
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        
     }
     
 }
@@ -158,7 +159,7 @@
         
     }
     
-    self.ApplyRecordGroups = [groups copy];
+    self.Record_Groups = [groups copy];
     
     self.noDataView.hidden = records.count == 0 ? NO : YES;
    
@@ -184,23 +185,22 @@
     return 60;
 }
 
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    XSearchSectionHeaderView *sectionHeader =[XSearchSectionHeaderView SectionHeaderViewWithTableView:tableView];
-    sectionHeader.RecommendMV.hidden = YES;
-    ApplyStatusRecordGroup *group      = self.ApplyRecordGroups[section];
-    UniversityObj *uni      = group.universityFrame.uniObj;
-    sectionHeader.IsStar    = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
-    sectionHeader.RANKTYPE  = RANKTI;
-    sectionHeader.uni_Frame = group.universityFrame;
     
-    return sectionHeader;
+    UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
+    ApplyStatusRecordGroup *group      = self.Record_Groups[section];
+    uni_cell.userInteractionEnabled = NO;
+    uni_cell.itemFrame = group.universityFrame;
+    
+    return (UIView *)uni_cell;
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  
-    return self.ApplyRecordGroups.count;
+    return self.Record_Groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -210,8 +210,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XWGJApplyStatusTableViewCell *cell =[XWGJApplyStatusTableViewCell CreateCellWithTableView:tableView];
-    ApplyStatusRecordGroup *group = self.ApplyRecordGroups[indexPath.section];
+    ApplyStatusCell *cell =[ApplyStatusCell CreateCellWithTableView:tableView];
+    ApplyStatusRecordGroup *group = self.Record_Groups[indexPath.section];
     cell.record = group.record;
     
     return cell;

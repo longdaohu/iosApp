@@ -18,6 +18,8 @@
         
         cell = [[NSBundle mainBundle] loadNibNamed:@"UniversityCell" owner:self options:nil].lastObject;
      }
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+
     return cell;
 }
 
@@ -62,6 +64,7 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    
     [super setSelected:selected animated:animated];
 
 }
@@ -136,7 +139,6 @@
     
   
 }
-
 
 
 @end

@@ -350,17 +350,15 @@
     
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
-
-    
- 
+  
 }
 
 //获取专业
 - (void)subjectWithAlert:(BOOL)show{
     
-    [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
+   [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
+//    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
-   
  
 }
 
