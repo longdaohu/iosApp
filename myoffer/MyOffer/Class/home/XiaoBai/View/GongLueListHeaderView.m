@@ -9,12 +9,13 @@
 #import "GongLueListHeaderView.h"
 
 @interface GongLueListHeaderView ()
+//控件背景
 @property(nonatomic,strong)UIView *bgView;
 //小MO头像
 @property(nonatomic,strong)UIImageView *moLogo;
 //标题
 @property(nonatomic,strong)UILabel *titleLab;
-//简介Lab
+//描述
 @property(nonatomic,strong)UILabel *subTitleLab;
 //titleLab原始Frame
 @property(nonatomic,assign)CGRect headerTitleLabFrame;
@@ -37,7 +38,7 @@
 
         
         self.moBgView =[[UIView alloc] init];
-        self.moBgView.layer.cornerRadius = 5;
+        self.moBgView.layer.cornerRadius = CORNER_RADIUS;
         self.moBgView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.moBgView];
         self.moBgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
@@ -127,12 +128,10 @@
 }
 
 
-
+//根据contentOffsetY调整效果
 -(void)setContentOffsetY:(CGFloat)contentOffsetY
 {
     _contentOffsetY = contentOffsetY;
-    
- 
     
     if (contentOffsetY <= 0) {
  
@@ -144,13 +143,12 @@
 
         if (contentSize.height - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
             
-            CGRect NewRect = self.headerTitleLabFrame;
+            CGRect NewRect    = self.headerTitleLabFrame;
             
             NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
             
             self.headerTitleLab.frame = NewRect;
-            
-        }
+         }
         
     }
     

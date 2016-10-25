@@ -235,7 +235,6 @@ typedef enum {
 -(void)makePhoneView
 {
     self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-//    [self.cover addTarget:self action:@selector(removeCover) forControlEvents:UIControlEventTouchUpInside];
     self.cover.backgroundColor = XCOLOR_BLACK;
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
@@ -366,12 +365,7 @@ typedef enum {
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NomalTableSectionHeaderView *header =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-    
-    if (!header) {
-        
-        header =[[NomalTableSectionHeaderView alloc] initWithReuseIdentifier:@"header"];
-    }
+    NomalTableSectionHeaderView *header =[NomalTableSectionHeaderView sectionViewWithTableView:tableView];
     
     [header sectionHeaderWithTitle:self.sectionTitles[section] FontSize: XPERCENT *13.0];
     
@@ -743,16 +737,10 @@ typedef enum {
     pipei.isComeBack = YES;
     [self.navigationController pushViewController:pipei animated:YES];
 }
+
 //我要留学选项
 -(void)caseWoyaoliuxue{
 
-    [self LiuxueButtonClick];
-
-}
-
-//点击我要留学
--(void)LiuxueButtonClick
-{
     if (![self checkFillInformation]) {
         
         return;
@@ -775,9 +763,8 @@ typedef enum {
         //有手机号，直接提交
         [self sendLiuxueRequest];
     }
-    
-}
 
+}
 
 // 提交我要留学申请
 -(void)sendLiuxueRequest
@@ -811,14 +798,16 @@ typedef enum {
     
     self.PhoneView.SendCodeBtn.enabled = NO;
     
+    XWeakSelf
+    
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode parameters:@{@"code_type":@"phone", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": AreaNumber} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDown) userInfo:nil repeats:YES];
-        self.verifyCodeColdDownCount= 60;
+        weakSelf.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDown) userInfo:nil repeats:YES];
+        weakSelf.verifyCodeColdDownCount = Time_CountDown;
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        self.PhoneView.SendCodeBtn.enabled = YES;
+        weakSelf.PhoneView.SendCodeBtn.enabled = YES;
         
     }];
     

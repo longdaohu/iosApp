@@ -32,9 +32,7 @@
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"
-
-
-
+#import "UniversityObj.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -626,10 +624,11 @@
 }
 
 #pragma mark —————— HomeThirdTableViewCellDelegate
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell andDictionary:(NSDictionary *)response
-{
-     [MobClick event:@"home_universityItem"];
-     [self.navigationController pushUniversityViewControllerWithID:response[@"_id"] animated:YES];
+-(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityObj *)uni{
+
+    [MobClick event:@"home_universityItem"];
+    
+    [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
 }
 
 #pragma mark  ————————————  UIAlertViewDelegate
@@ -735,6 +734,7 @@
     });
     
 }
+
 //--应用监听，用户登录立即发送提醒给服务器--
 -(void)getAppReport
 {
@@ -752,19 +752,19 @@
     
 }
 
- 
 //请求用户信息      //判断用户是否登录且登录用户手机号码是否为空，如果为空用户退出登录；
 -(void)userInformation
 {
     if (!LOGIN) return;
     
+    XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         NSString *phone = response[@"accountInfo"][@"phonenumber"];
         
         if (0 == phone.length) {
             
-            [self backAndLogout];
+            [weakSelf backAndLogout];
         }
 
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
@@ -774,19 +774,21 @@
 }
 
 //判断是否有智能匹配数据或收藏学校
--(void)checkZhiNengPiPei{
+-(void)checkZhiNengPiPei
+{
     
     if (LOGIN) {
-        
+        XWeakSelf
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+            weakSelf.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+            
         }];
     }
 }
 
-
 //退出登录
--(void)backAndLogout{
+-(void)backAndLogout
+{
     
     if(LOGIN){
         
@@ -804,7 +806,8 @@
 }
 
 //导航栏 leftBarButtonItem
--(void)leftViewMessage{
+-(void)leftViewMessage
+{
     
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
@@ -847,6 +850,9 @@
     [MobClick event:@"XiaoBai"];
     [self.navigationController pushViewController:[[XiaobaiViewController alloc] init] animated:YES];
 }
+
+
+
 
 //跳转智能匹配
 -(void)CasePipeiWithItemType:(HomePageClickItemType)type

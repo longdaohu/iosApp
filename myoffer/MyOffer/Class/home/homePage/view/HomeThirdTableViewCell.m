@@ -9,6 +9,7 @@
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
+#import "UniversityObj.h"
 
 @interface HomeThirdTableViewCell ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UICollectionView *CollectionView;
@@ -122,13 +123,12 @@ static NSString *identify = @"three";
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    if ([self.delegate respondsToSelector:@selector(HomeThirdTableViewCell: andDictionary:)]) {
+    if ([self.delegate respondsToSelector:@selector(HomeThirdTableViewCell: WithUniversity:)]) {
         
         HotUniversityFrame *uniFrame =  self.uniFrames[indexPath.row];
         
-        [self.delegate HomeThirdTableViewCell:self andDictionary:uniFrame.universityDic];
-     }
-    
+        [self.delegate HomeThirdTableViewCell:self WithUniversity:uniFrame.university];
+    }
 }
 
 

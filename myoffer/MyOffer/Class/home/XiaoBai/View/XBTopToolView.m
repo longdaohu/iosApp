@@ -72,7 +72,6 @@
         CGFloat focusw = lineMargin;
         CGFloat focush = blackH;
         self.focusView =[[UIImageView alloc] initWithFrame:CGRectMake(focusx, focusy, focusw, focush)];
-//        self.focusView.contentMode =UIViewContentModeScaleAspectFit;
         self.focusView.layer.borderWidth = 1;
         self.focusView.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.5].CGColor;
         self.focusView.layer.cornerRadius = blackH * 0.5;
@@ -154,7 +153,6 @@
     
     
     [UIView transitionWithView:self.focusView duration:0.3 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        
         
         switch (sender.tag) {
             case 0:{

@@ -67,11 +67,14 @@
 }
 
 
+/**
+  //判断是否有智能匹配数据或收藏学校
+ */
 -(void)checkZhiNengPiPei{
     
     if (LOGIN) {
-        //判断是否有智能匹配数据或收藏学校
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
+        
+         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
         }];
     }
@@ -120,7 +123,7 @@
 -(void)makeTableView
 {
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
-    self.TableView.backgroundColor =XCOLOR_CLEAR;
+    self.TableView.backgroundColor = XCOLOR_CLEAR;
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
     [self.view addSubview:self.TableView];
@@ -176,35 +179,15 @@
     
     if ([message[@"_id"] isEqualToString:@"ranks"]) {
         
-        if ([self.gonglue[@"title"] containsString:@"英国"]) {
-            SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANKTI];
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else{
-            
-            AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANKTI];
-            [self.navigationController pushViewController:newVc animated:YES];
-        }
+
+        [self caseSearchResult];
         
         return;
     }
     
     if ([message[@"_id"] isEqualToString:@"recommendations"]) {
         
-        RequireLogin
-        
-        if (self.recommendationsCount) {
-            
-            IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-            vc.isComeBack = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else{
-            
-            InteProfileViewController *vc =[[InteProfileViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        
+        [self caseIntelligent];
         
         return;
     }
@@ -217,10 +200,56 @@
         return;
     }
     
- 
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message[@"_id"]] animated:YES];
+    
+    [self caseMassageWithId:message[@"_id"]];
+}
+
+
+/**
+    区分英国、澳大利亚
+ */
+-(void)caseSearchResult
+{
+    if ([self.gonglue[@"title"] containsString:@"英国"]) {
+        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANKTI];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANKTI];
+        [self.navigationController pushViewController:newVc animated:YES];
+    }
+}
+
+
+/**
+ 智能匹配
+ recommendationsCount   用来区分用户是否提交过智能匹配数据
+ */
+-(void)caseIntelligent
+{
+    RequireLogin
+    
+    if (self.recommendationsCount) {
+        
+        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+        vc.isComeBack = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+    }
     
 }
+
+//跳转资讯详情
+-(void)caseMassageWithId:(NSString *)message_Id
+{
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_Id] animated:YES];
+
+}
+
 
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -254,6 +283,8 @@
     }
     
 }
+
+
 
 //回退
 - (void)pop{

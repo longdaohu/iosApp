@@ -8,9 +8,13 @@
 
 #import "GongLueTableViewCell.h"
 @interface GongLueTableViewCell ()
+//控件背景
 @property(nonatomic,strong)UIView *bgView;
+//头像
 @property(nonatomic,strong)UIImageView *logoView;
+//标题
 @property(nonatomic,strong)UILabel *titleLab;
+//描述
 @property(nonatomic,strong)UILabel *subtitleLab;
 
 @end
@@ -32,6 +36,7 @@ static NSString *identity = @"gonglue";
 {
     
     self = [super initWithStyle: style reuseIdentifier:reuseIdentifier];
+    
     if (self) {
         
         [self makeUI];
@@ -49,7 +54,7 @@ static NSString *identity = @"gonglue";
     
     self.bgView =[[UIView alloc] init];
     self.bgView.backgroundColor = [UIColor whiteColor];
-    self.bgView.layer.cornerRadius = 5;
+    self.bgView.layer.cornerRadius = CORNER_RADIUS;
     self.bgView.layer.shadowColor =[UIColor blackColor].CGColor;
     self.bgView.layer.shadowOpacity = 0.1;
     self.bgView.layer.shadowOffset = CGSizeMake(0, 1);

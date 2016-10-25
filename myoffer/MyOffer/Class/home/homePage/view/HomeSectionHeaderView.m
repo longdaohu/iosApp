@@ -39,7 +39,7 @@
         self.panding =[[UILabel alloc] init];
         [self addSubview:self.panding];
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
-        self.panding.layer.cornerRadius = 2.5;
+        self.panding.layer.cornerRadius = CORNER_RADIUS * 0.5;
         self.panding.layer.masksToBounds = YES;
         
         

@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 @class HomeThirdTableViewCell;
-
+@class UniversityObj;
 @protocol HomeThirdTableViewCellDelegate <NSObject>
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell andDictionary:(NSDictionary *)response;
+-(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityObj *)uni;
 
 @end
 
 @interface HomeThirdTableViewCell : UITableViewCell
 @property(nonatomic,strong)NSArray *uniFrames;
 @property(nonatomic,weak)id<HomeThirdTableViewCellDelegate> delegate;
-
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
 
 @end

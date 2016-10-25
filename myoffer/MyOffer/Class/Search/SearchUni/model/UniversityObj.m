@@ -14,7 +14,6 @@
 {
     if (self = [super init]) {
         
-        
         self.logoName  =  info[@"logo"];
         self.in_cart = info[@"in_cart"];
         self.titleName = info[@"name"];
@@ -30,13 +29,14 @@
         self.universityID = (NSString *)info[@"_id"];
         self.isHot = [info[@"hot"] boolValue];
         self.tags = info[@"tags"];
-
+  
     }
     return self;
 }
+
 +(instancetype)createUniversityWithUniversityInfo:(NSDictionary *)info
 {
-    return [[self alloc] initUniversityWithUniversityInfo:info];
+    return [[UniversityObj alloc] initUniversityWithUniversityInfo:info];
 }
 
 

@@ -51,8 +51,6 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    
 }
 
 
@@ -83,12 +81,12 @@
 {
     if (!_helpItems) {
         
-        CatigorySubject *one =[CatigorySubject subjectItemInitWithIconName:@"ICON1"  TitleName:@"平台网站"];
-        CatigorySubject *two =[CatigorySubject subjectItemInitWithIconName:@"ICON2"  TitleName:@"如何申请"];
-        CatigorySubject *three =[CatigorySubject subjectItemInitWithIconName:@"ICON3"  TitleName:@"申请条件"];
-        CatigorySubject *four =[CatigorySubject subjectItemInitWithIconName:@"ICON4"  TitleName:@"递交申请"];
-        CatigorySubject *five =[CatigorySubject subjectItemInitWithIconName:@"ICON5"  TitleName:@"Offer管理"];
-        CatigorySubject *six =[CatigorySubject subjectItemInitWithIconName:@"ICON6"  TitleName:@"操作疑问"];
+        CatigorySubject *one   = [CatigorySubject subjectItemInitWithIconName:@"ICON1"  TitleName:@"平台网站"];
+        CatigorySubject *two   = [CatigorySubject subjectItemInitWithIconName:@"ICON2"  TitleName:@"如何申请"];
+        CatigorySubject *three = [CatigorySubject subjectItemInitWithIconName:@"ICON3"  TitleName:@"申请条件"];
+        CatigorySubject *four  = [CatigorySubject subjectItemInitWithIconName:@"ICON4"  TitleName:@"递交申请"];
+        CatigorySubject *five  = [CatigorySubject subjectItemInitWithIconName:@"ICON5"  TitleName:@"Offer管理"];
+        CatigorySubject *six   = [CatigorySubject subjectItemInitWithIconName:@"ICON6"  TitleName:@"操作疑问"];
         
         _helpItems = @[one,two,three,four,five,six];
         
@@ -118,8 +116,6 @@
 
 
 
-
-
 -(void)makeUI
 {
    
@@ -135,24 +131,29 @@
 //加载申请攻略数据
 -(void)makeDataSource:(BOOL)fresh
 {
+    XWeakSelf
     
     [self startAPIRequestWithSelector:@"GET http://public.myoffer.cn/docs/zh-cn/tips.json" parameters:nil expectedStatusCodes:nil showHUD:fresh showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
-        self.gonglueItems =  (NSArray *)response;
-        
-        self.TableView.tableFooterView = [UIView new];
-        
-        [self.TableView reloadData];
+        [weakSelf configrationUIWithResponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        self.TableView.tableFooterView = self.noDataView;
+        weakSelf.TableView.tableFooterView = self.noDataView;
         
     }];
    
 }
 
+//根据网络请求结果配置UI
+-(void)configrationUIWithResponse:(id)response
+{
+    self.gonglueItems =  (NSArray *)response;
+    
+    self.TableView.tableFooterView = [UIView new];
+    
+    [self.TableView reloadData];
+}
 
 - (void)viewDidLoad {
     

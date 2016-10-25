@@ -12,8 +12,10 @@
 typedef void(^HomeSectionHeaderViewBlock)();
 @interface HomeSectionHeaderView : UIView
 @property(nonatomic,copy)HomeSectionHeaderViewBlock actionBlock;
+//更多按钮
 @property (strong, nonatomic) UIButton *moreBtn;
-+(instancetype)sectionHeaderViewWithTitle:(NSString *)title;
+//更多按钮隐藏
 - (void)moreButtonHidenNo;
++(instancetype)sectionHeaderViewWithTitle:(NSString *)title;
 
 @end

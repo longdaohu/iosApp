@@ -87,14 +87,7 @@
             sender.layer.borderWidth         = 1;
             [self.tapView addSubview:sender];
         }
-        
-        
-//        if (USER_EN) {
-//            
-//            self.subTitleLab.hidden = YES;
-//            self.tapView.hidden     = YES;
-//        }
-        
+  
     }
     return self;
 }
@@ -111,10 +104,9 @@
     self.center_Line.frame   = uniFrame.LineFrame;
     self.tapView.frame       = uniFrame.tapBgViewFrame;
     self.localMV.frame       = uniFrame.LocalMVFrame;
-    NSDictionary *uniInfo    = uniFrame.universityDic;
     self.logoView.frame      = uniFrame.LogoFrame;
     
-   [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logoName]];
+    [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logoName]];
     
     self.titleLab.frame      = uniFrame.TitleFrame;
     self.titleLab.text       =  unversity.titleName;
@@ -123,7 +115,7 @@
     self.subTitleLab.text    = unversity.subTitleName;
    
     self.localLab.frame      = uniFrame.LocalFrame;
-    self.localLab.text       =  USER_EN ?[NSString stringWithFormat:@"%@ | %@", unversity.countryName,uniInfo[@"city"]] :[NSString stringWithFormat:@"%@ | %@ | %@", unversity.countryName, unversity.stateName, unversity.cityName];
+    self.localLab.text       =  USER_EN ?[NSString stringWithFormat:@"%@ | %@", unversity.countryName,unversity.cityName] :[NSString stringWithFormat:@"%@ | %@ | %@", unversity.countryName, unversity.stateName, unversity.cityName];
     
     
     NSArray *tag_temps =  unversity.tags;
