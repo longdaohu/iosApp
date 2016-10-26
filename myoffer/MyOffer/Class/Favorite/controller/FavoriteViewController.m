@@ -8,9 +8,6 @@
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 #import "FavoriteViewController.h"
-//#import "UniversityFrameObj.h"
-//#import "UniversityObj.h"
-//#import "NewSearchResultCell.h"
 #import "UniversityViewController.h"
 #import "UniversityItemNew.h"
 #import "UniItemFrame.h"
@@ -127,7 +124,6 @@
     NSMutableArray *uni_temps = [NSMutableArray array];
     
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
         
         [uni_temps addObject: [UniItemFrame frameWithUniversity:[UniversityItemNew mj_objectWithKeyValues:obj]]];
         

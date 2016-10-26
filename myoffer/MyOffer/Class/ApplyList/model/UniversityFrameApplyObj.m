@@ -8,12 +8,14 @@
 
 #import "UniversityFrameApplyObj.h"
 #import "UniversityObj.h"
+#import "UniversityItemNew.h"
 
 @implementation UniversityFrameApplyObj
 
--(void)setUniObj:(UniversityObj *)uniObj
-{
-    _uniObj = uniObj;
+-(void)setUni:(UniversityItemNew *)uni{
+
+    _uni = uni;
+    
     
     CGFloat cancelx = ITEM_MARGIN;
     CGFloat cancely = 0;
@@ -37,63 +39,40 @@
     
     CGFloat titlex = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat titley =logoy;
-    NSString *title = uniObj.titleName;
-    CGSize titleSize = [title KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYTITLEFONT))];
-    CGFloat titleh = titleSize.height;
+    CGFloat titleh = XPERCENT * 15;
     CGFloat titlew = XScreenWidth - titlex;
-    self.TitleFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
+    self.nameFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
     
     
     CGFloat subx = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat suby = CGRectGetMaxY(self.TitleFrame) + 3;
-    CGFloat fontSize =  KDUtilSize(UNIVERISITYSUBTITLEFONT);
+    CGFloat suby = CGRectGetMaxY(self.nameFrame) + 3;
     CGFloat subw = XScreenWidth - subx - 45;
-    if (USER_EN) {
-        
-        suby   = logoy + 2;
-        fontSize =  KDUtilSize(UNIVERISITYTITLEFONT);
-        subw = XScreenWidth - subx ;
-     }
+    CGFloat subh =  XPERCENT * 11 + 2;
+    self.official_nameFrame = CGRectMake(subx, suby, subw, subh);
+
     
-    CGFloat subh =  [self getContentBoundWithTitle:uniObj.subTitleName andFontSize:fontSize andMaxWidth:subw].height;
-    self.SubTitleFrame = CGRectMake(subx, suby, subw, subh);
+    CGFloat anthorX =  subx;
+    CGFloat anthorH =  XPERCENT * 11 + 5;
+    CGFloat anthorW =  anthorH;
+    CGFloat anthorY =  CGRectGetMaxY(self.LogoFrame) - anthorH;
+    self.anchorFrame = CGRectMake(anthorX, anthorY, anthorW, anthorH);
     
-    
-    
-    NSString *local = uniObj.countryName;
-    CGSize  localSize = [local KD_sizeWithAttributeFont: FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT + 1))];
-    
-    
-    CGFloat locMVx = 0;
-    CGFloat locMVh = localSize.height;
-    CGFloat locMVw = locMVh + 5;
-    CGFloat localMargin = KDUtilSize(0);
-    
-    if (USER_EN) {
-        
-        localMargin = localMargin + (XScreenWidth - 320) * 0.06;
-    }
-    CGFloat locMVy = 0;
-    self.LocalMVFrame = CGRectMake(locMVx, locMVy, locMVw, locMVh);
-    
-    
-    CGFloat localy = CGRectGetMaxY(self.LogoFrame) - localSize.height + 3;
-    CGFloat localx = subx;
-    CGFloat localw = XScreenWidth - localx;
-    CGFloat localh = localSize.height;
-    self.LocalFrame = CGRectMake(localx, localy + 2, localw, localh);
-    
+    CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
+    CGFloat addressH =  XPERCENT * 11;
+    CGFloat addressW =  subw;
+    CGFloat addressY =  anthorY  + 3;
+    self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
     CGFloat Rankx = subx;
     CGFloat Rankw = subw;
-    CGFloat Rankh = localSize.height;
-    CGFloat Ranky = localy - Rankh - localMargin;
+    CGFloat Rankh = addressH;
+    CGFloat Ranky = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - Rankh) * 0.5;
     self.RankFrame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
     
     
     NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
     CGSize rankSize = [rankIT KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
-    self.starBgFrame = CGRectMake(self.SubTitleFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
+    self.starBgFrame = CGRectMake(self.official_nameFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
     NSMutableArray *temps =[NSMutableArray array];
     for (NSInteger i =0; i < 5; i++) {
         
@@ -109,9 +88,8 @@
     CGFloat ADw = 30;
     CGFloat ADh = University_HEIGHT;
     self.AddButtonFrame = CGRectMake(ADx,ADy,ADw,ADh);
-    
-}
 
+}
 
 
 -(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{

@@ -10,6 +10,7 @@
 #import "Applycourse.h"
 #import "UniversityFrameApplyObj.h"
 #import "UniversityObj.h"
+#import "UniversityItemNew.h"
 
 @implementation ApplySection
 - (instancetype)initWithDictionary:(NSDictionary *)dict
@@ -19,10 +20,14 @@
         
         self.universityInfo = dict;
         
+        UniversityItemNew *uni =  [UniversityItemNew mj_objectWithKeyValues:dict];
         
-        UniversityObj *uniObj =[UniversityObj createUniversityWithUniversityInfo:dict];
+//        UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:dict];
+        
         self.uniFrame = [[UniversityFrameApplyObj alloc] init];
-        self.uniFrame.uniObj = uniObj;
+        
+//        self.uniFrame.uniObj = uniObj;
+        self.uniFrame.uni = uni;
         
          NSMutableArray *subjectArray = [NSMutableArray array];
         for (NSDictionary *courseInfo in dict[@"applies"]) {

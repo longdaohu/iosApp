@@ -7,19 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UniversityObj;
-
+@class UniversityItemNew;
 @interface UniversityFrameApplyObj : NSObject
-@property(nonatomic,strong)UniversityObj *uniObj;
+@property(nonatomic,strong)UniversityItemNew *uni;
 @property(nonatomic,assign)CGRect SectionBackgroudFrame;
 @property(nonatomic,assign)CGRect LogoFrame;
-@property(nonatomic,assign)CGRect TitleFrame;
-@property(nonatomic,assign)CGRect SubTitleFrame;
-@property(nonatomic,assign)CGRect LocalFrame;
-@property(nonatomic,assign)CGRect LocalMVFrame;
+@property(nonatomic,assign)CGRect nameFrame;
+@property(nonatomic,assign)CGRect official_nameFrame;
+@property(nonatomic,assign)CGRect address_detailFrame;
+@property(nonatomic,assign)CGRect anchorFrame;
 @property(nonatomic,assign)CGRect RankFrame;
 @property(nonatomic,assign)CGRect AddButtonFrame;
 @property(nonatomic,assign)CGRect CancelButtonFrame;
 @property(nonatomic,assign)CGRect starBgFrame;
 @property(nonatomic,strong)NSArray *starFrames;
 @end
+

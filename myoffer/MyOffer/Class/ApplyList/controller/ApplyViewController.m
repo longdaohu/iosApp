@@ -741,6 +741,7 @@
         [self bottomUp:YES];
         
     }
+    
     [_waitingTableView reloadData];
     [self.courseSelecteds removeAllObjects];
     [self configureSelectedCoursedID:self.courseSelecteds];
