@@ -7,7 +7,6 @@
 //
 
 #import "UniversityFrameApplyObj.h"
-#import "UniversityObj.h"
 #import "UniversityItemNew.h"
 
 @implementation UniversityFrameApplyObj
@@ -44,14 +43,14 @@
     self.nameFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
     
     
-    CGFloat subx = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat suby = CGRectGetMaxY(self.nameFrame) + 3;
-    CGFloat subw = XScreenWidth - subx - 45;
-    CGFloat subh =  XPERCENT * 11 + 2;
-    self.official_nameFrame = CGRectMake(subx, suby, subw, subh);
+    CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
+    CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
+    CGFloat official_nameW = XScreenWidth - official_nameX - 45;
+    CGFloat official_nameH =  XPERCENT * 11 + 2;
+    self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
 
     
-    CGFloat anthorX =  subx;
+    CGFloat anthorX =  official_nameX;
     CGFloat anthorH =  XPERCENT * 11 + 5;
     CGFloat anthorW =  anthorH;
     CGFloat anthorY =  CGRectGetMaxY(self.LogoFrame) - anthorH;
@@ -59,15 +58,15 @@
     
     CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
     CGFloat addressH =  XPERCENT * 11;
-    CGFloat addressW =  subw;
+    CGFloat addressW =  official_nameW;
     CGFloat addressY =  anthorY  + 3;
     self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
-    CGFloat Rankx = subx;
-    CGFloat Rankw = subw;
-    CGFloat Rankh = addressH;
-    CGFloat Ranky = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - Rankh) * 0.5;
-    self.RankFrame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
+    CGFloat rankX = official_nameX;
+    CGFloat rankW = official_nameW;
+    CGFloat rankH = addressH;
+    CGFloat rankY = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - rankH) * 0.5;
+    self.RankFrame = CGRectMake(rankX, rankY, rankW, rankH);
     
     
     NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
@@ -83,11 +82,18 @@
     self.starFrames = [temps copy];
     
     
-    CGFloat ADx = XScreenWidth - 40;
-    CGFloat ADy = 0;
-    CGFloat ADw = 30;
-    CGFloat ADh = University_HEIGHT;
-    self.AddButtonFrame = CGRectMake(ADx,ADy,ADw,ADh);
+    CGFloat addX = XScreenWidth - 40;
+    CGFloat addY = 0;
+    CGFloat addW = 30;
+    CGFloat addH = University_HEIGHT;
+    self.AddButtonFrame = CGRectMake(addX,addY,addW,addH);
+    
+    
+    CGFloat hotH = 50;
+    CGFloat hotW = hotH;
+    CGFloat hotX = XScreenWidth - hotH;
+    CGFloat hotY = 0;
+    self.hotFrame = CGRectMake(hotX,hotY, hotW,hotH);
 
 }
 

@@ -9,9 +9,10 @@
 #import "AUSearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
-#import "UniversityObj.h"
-#import "UniversityFrameObj.h"
 #import "XWGJnodataView.h"
+#import "UniversityFrameApplyObj.h"
+#import "UniversityItemNew.h"
+
 
 @interface AUSearchResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -155,11 +156,15 @@
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
          
-          for (NSDictionary *dic in response[@"universities"]) {
+          for (NSDictionary *obj in response[@"universities"]) {
   
-              UniversityFrameObj *uniFrame =[self makeUniversityFrameWithDictionary:dic];
               
-              NSInteger index =  [dic[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [dic[RANKTI] integerValue];
+              UniversityFrameApplyObj  *uniFrame = [[UniversityFrameApplyObj alloc] init];
+              uniFrame.uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+              
+//              UniversityFrameObj *uniFrame =[self makeUniversityFrameWithDictionary:obj];
+              
+              NSInteger index =  [obj[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
               
               NSMutableArray *temps = self.Restults[index];
               
@@ -178,14 +183,15 @@
 }
 
 
--(UniversityFrameObj *)makeUniversityFrameWithDictionary:(NSDictionary *)uniInfor
-{
-    UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:uniInfor];
-    
-    UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
 
-    return uniFrame;
-}
+//-(UniversityFrameObj *)makeUniversityFrameWithDictionary:(NSDictionary *)uniInfor
+//{
+//    UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:uniInfor];
+//    
+//    UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
+//    
+//    return uniFrame;
+//}
 
 -(void)makeTableView
 {
@@ -244,9 +250,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
      NSArray *temp = self.Restults[indexPath.section];
-     UniversityFrameObj   *uni_Frame = temp[indexPath.row];
-     UniversityObj *university = uni_Frame.uniObj;
-     [self.navigationController pushUniversityViewControllerWithID:university.universityID animated:YES];
+     UniversityFrameApplyObj   *uni_Frame = temp[indexPath.row];
+     UniversityItemNew *university = uni_Frame.uni;
+     [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     
 }
 
@@ -258,8 +264,9 @@
 
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 

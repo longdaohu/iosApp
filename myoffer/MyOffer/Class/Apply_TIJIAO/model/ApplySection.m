@@ -22,12 +22,9 @@
         
         UniversityItemNew *uni =  [UniversityItemNew mj_objectWithKeyValues:dict];
         
-//        UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:dict];
-        
         self.uniFrame = [[UniversityFrameApplyObj alloc] init];
         
-//        self.uniFrame.uniObj = uniObj;
-        self.uniFrame.uni = uni;
+         self.uniFrame.uni = uni;
         
          NSMutableArray *subjectArray = [NSMutableArray array];
         for (NSDictionary *courseInfo in dict[@"applies"]) {

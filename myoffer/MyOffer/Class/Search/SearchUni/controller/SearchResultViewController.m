@@ -8,10 +8,9 @@
 
 #import "SearchResultViewController.h"
 #import "NewSearchResultCell.h"
-#import "UniversityObj.h"
-#import "UniversityFrameObj.h"
 #import "XWGJnodataView.h"
-
+#import "UniversityFrameApplyObj.h"
+#import "UniversityItemNew.h"
 
 @interface SearchResultViewController () {
     NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state, *_city;
@@ -201,7 +200,7 @@
                                  @"page": @(page),
                                  @"size": @40,
                                  @"desc": _descending ? @1: @0,
-                                 @"order": _orderBy  ?: @"ranking_ti"}];
+                                 @"order": _orderBy  ? RANKQS : RANKTI}];
     
     if (_subject) {
         [parameters setValue:@[@{@"name": @"subject", @"value": _subject}] forKey:@"filters"];
@@ -238,11 +237,14 @@
              if (![_resultIDSet containsObject:uid]) {
                  
                  [_resultIDSet addObject:uid];
-                
-                 UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:obj];
-
-                 UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
-
+                 
+                 
+                 UniversityItemNew *uni =  [UniversityItemNew mj_objectWithKeyValues:obj];
+                 
+                 UniversityFrameApplyObj *uniFrame = [[UniversityFrameApplyObj alloc] init];
+                 
+                 uniFrame.uni = uni;
+                 
                  [_result addObject:uniFrame];
    
              }
@@ -307,9 +309,10 @@
  
     NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
     cell.optionOrderBy = _orderBy;
-    UniversityFrameObj  *uniFrame = _result[indexPath.row];
-    UniversityObj *uni =uniFrame.uniObj;
-    cell.isStart = [uni.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
+ 
+    UniversityFrameApplyObj  *uniFrame = _result[indexPath.row];
+    UniversityItemNew *uni =uniFrame.uni;
+    cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
 
@@ -320,9 +323,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UniversityFrameObj *uniFrame =  _result[indexPath.row];
-    UniversityObj *uniObj = uniFrame.uniObj;
-    [self.navigationController pushUniversityViewControllerWithID:uniObj.universityID animated:YES];
+    UniversityFrameApplyObj *uniFrame =  _result[indexPath.row];
+    UniversityItemNew *uniObj = uniFrame.uni;
+    [self.navigationController pushUniversityViewControllerWithID:uniObj.NO_id animated:YES];
 }
 
 

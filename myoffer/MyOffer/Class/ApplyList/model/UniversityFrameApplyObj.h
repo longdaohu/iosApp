@@ -21,5 +21,7 @@
 @property(nonatomic,assign)CGRect CancelButtonFrame;
 @property(nonatomic,assign)CGRect starBgFrame;
 @property(nonatomic,strong)NSArray *starFrames;
+@property(nonatomic,assign)CGRect hotFrame;
+
 @end
 
