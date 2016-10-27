@@ -110,6 +110,14 @@
     self.localLab.frame      = uniFrame.LocalFrame;
     self.localLab.text       = unversity.address_detail;
     
+    CGFloat addressWidth = [unversity.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    
+    if (addressWidth > (uniFrame.LocalFrame.size.width - 30)) {
+        
+        self.localLab.text = unversity.address_short;
+        
+    }
+
     
     [self.tapView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
