@@ -79,17 +79,7 @@
 
         self.tapView = [[UIView alloc] init];
         [self.bgView addSubview:self.tapView];
-        
-        
-        for (NSInteger i = 0 ; i < 4; i++) {
-            
-            UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
-            sender.adjustsFontSizeToFitWidth = YES;
-            sender.layer.borderColor         = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1].CGColor;
-            sender.layer.borderWidth         = 1;
-            [self.tapView addSubview:sender];
-        }
-  
+
     }
     return self;
 }
@@ -129,13 +119,14 @@
     
     for (int i = 0; i < tags.count; i ++) {
         
-        UILabel *item = (UILabel *)self.tapView.subviews[i];
-        
-        item.text = unversity.tags[i];
-        
-        item.frame = [uniFrame.tapFrames[i]  CGRectValue];
-        
-        item.layer.cornerRadius = 0.5 * item.frame.size.height;
+        UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
+        sender.adjustsFontSizeToFitWidth = YES;
+        sender.layer.borderColor         = XCOLOR(222.0, 222.0, 222.0).CGColor;
+        sender.layer.borderWidth         = 1;
+        [self.tapView addSubview:sender];
+        sender.text = unversity.tags[i];
+        sender.frame = [uniFrame.tapFrames[i]  CGRectValue];
+        sender.layer.cornerRadius = 0.5 * sender.frame.size.height;
      }
     
 }
