@@ -20,7 +20,7 @@
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
 #import "ShareViewController.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
 #import "UniDetailGroup.h"
@@ -274,7 +274,7 @@
     NSMutableArray *neightbour_temps = [NSMutableArray array];
     [response[@"related_universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+        UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:obj];
         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
         [neightbour_temps addObject:uniFrame];
         

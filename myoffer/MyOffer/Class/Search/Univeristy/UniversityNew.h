@@ -1,14 +1,15 @@
 //
-//  UniversityItemNew.h
+//  UniversityNew.h
 //  myOffer
 //
-//  Created by xuewuguojie on 16/8/25.
+//  Created by xuewuguojie on 2016/10/27.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 
-@interface UniversityItemNew : NSObject
+@interface UniversityNew : NSObject
 @property(nonatomic,copy)NSString *NO_id;
 @property(nonatomic,copy)NSString *state;
 @property(nonatomic,copy)NSString *short_id;

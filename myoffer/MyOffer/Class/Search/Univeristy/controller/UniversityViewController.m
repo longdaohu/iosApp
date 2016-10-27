@@ -15,7 +15,7 @@
 #import "NewsItem.h"
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 #import "UniversityCell.h"
 #import "UniItemFrame.h"
 #import "UniversityRightView.h"
@@ -240,7 +240,7 @@ typedef enum {
     NSMutableArray *neightbour_temps = [NSMutableArray array];
     [university.rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:obj];
+        UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:obj];
         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
         [neightbour_temps addObject:uniFrame];
         

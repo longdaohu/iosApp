@@ -9,7 +9,7 @@
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 @interface HomeThirdTableViewCell ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UICollectionView *CollectionView;
@@ -41,6 +41,7 @@
     if (self) {
         
         self.contentView.backgroundColor = XCOLOR_BG;
+        
         [self makeCollectView];
         
      }
@@ -116,7 +117,6 @@ static NSString *identify = @"three";
     return cell;
     
 }
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     

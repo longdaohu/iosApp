@@ -1,14 +1,14 @@
 //
-//  UniversityItemNew.m
+//  UniversityNew.m
 //  myOffer
 //
-//  Created by xuewuguojie on 16/8/25.
+//  Created by xuewuguojie on 2016/10/27.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
-@implementation UniversityItemNew
+@implementation UniversityNew
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
     return @{@"NO_id" : @"_id",@"found_year" : @"found"};
@@ -26,7 +26,7 @@
 }
 
 -(NSNumber *)ranking_qs{
-
+    
     
     return _ranking_qs ? _ranking_qs : @DefaultNumber;
 }
@@ -37,6 +37,4 @@
     
     return _ranking_ti ? _ranking_ti : @DefaultNumber;
 }
-
-
 @end

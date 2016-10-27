@@ -19,7 +19,7 @@ typedef enum {
 #import "InteProfileViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
@@ -261,7 +261,7 @@ typedef enum {
             for (NSDictionary *obj  in items) {
                 
                   UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
-                  uniFrame.university = [UniversityItemNew mj_objectWithKeyValues:obj];
+                  uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
                   [temps addObject:uniFrame];
             }
             
@@ -405,7 +405,7 @@ typedef enum {
     cell.delegate = self;
     
     UniversityFrame *uniFrame = self.resultList[indexPath.row];
-    UniversityItemNew *university = uniFrame.university;
+    UniversityNew *university = uniFrame.university;
     [cell configureWithInfo:uniFrame];
     [self configureCellSelectionView:cell universityId:university.NO_id];
     

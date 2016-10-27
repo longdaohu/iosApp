@@ -125,7 +125,7 @@
 
     _uni_Frame  = uni_Frame;
     
-    UniversityItemNew *uniObj = uni_Frame.uni;
+    UniversityNew *uniObj = uni_Frame.uni;
     
     self.hotView.frame = uni_Frame.hotFrame;
     

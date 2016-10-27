@@ -7,11 +7,11 @@
 //
 
 #import "UniversityFrameNew.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 @implementation UniversityFrameNew
 
-+(instancetype)universityFrameWithUni:(UniversityItemNew *)uni{
++(instancetype)universityFrameWithUni:(UniversityNew *)uni{
 
     UniversityFrameNew *uniFrame = [[UniversityFrameNew alloc] init];
 
@@ -21,7 +21,7 @@
 }
 
 
--(void)setUni:(UniversityItemNew *)uni{
+-(void)setUni:(UniversityNew *)uni{
 
     _uni = uni;
     

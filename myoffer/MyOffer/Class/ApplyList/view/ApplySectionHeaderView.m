@@ -11,7 +11,7 @@
 #import "UILabel+ResizeHelper.h"
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameNew.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 
 @interface ApplySectionHeaderView ()
@@ -153,7 +153,7 @@
 {
     _uniFrame = uniFrame;
     
-    UniversityItemNew *university = uniFrame.uni;
+    UniversityNew *university = uniFrame.uni;
     
   
     self.cancelBtn.frame = uniFrame.CancelButtonFrame;

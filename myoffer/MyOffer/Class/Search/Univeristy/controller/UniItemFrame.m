@@ -9,7 +9,7 @@
 #import "UniItemFrame.h"
 
 @implementation UniItemFrame
-+(instancetype)frameWithUniversity:(UniversityItemNew *)uni
++(instancetype)frameWithUniversity:(UniversityNew *)uni
 {
  
     UniItemFrame *itemFrame = [[UniItemFrame alloc] init];
@@ -19,7 +19,7 @@
 }
 
 
--(void)setItem:(UniversityItemNew *)item{
+-(void)setItem:(UniversityNew *)item{
 
     _item = item;
     

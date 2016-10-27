@@ -7,11 +7,11 @@
 //
 
 #import "UniversityFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 @implementation UniversityFrame
 
 
--(void)setUniversity:(UniversityItemNew *)university{
+-(void)setUniversity:(UniversityNew *)university{
 
     _university = university;
  

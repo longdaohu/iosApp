@@ -47,7 +47,6 @@
 		AE027EB71C3A4F5E007EBD28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE027EB61C3A4F5E007EBD28 /* UIKit.framework */; };
 		AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE027EB81C3A53C4007EBD28 /* PushConfig.plist */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
-		AE133EA21D6EDF9500AC9C42 /* UniversityItemNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EA11D6EDF9500AC9C42 /* UniversityItemNew.m */; };
 		AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */; };
 		AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */; };
 		AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */; };
@@ -381,6 +380,7 @@
 		AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1F1D5B283700DD7939 /* UK.jpg */; };
 		AEA24C301D5B283700DD7939 /* wel_CN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C201D5B283700DD7939 /* wel_CN.png */; };
 		AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C211D5B283700DD7939 /* wel_EN.png */; };
+		AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* UniversityNew.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
@@ -496,8 +496,6 @@
 		AE027EB81C3A53C4007EBD28 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityDetailItem.h; path = controller/UniversityDetailItem.h; sourceTree = "<group>"; };
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
-		AE133EA01D6EDF9500AC9C42 /* UniversityItemNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityItemNew.h; path = controller/UniversityItemNew.h; sourceTree = "<group>"; };
-		AE133EA11D6EDF9500AC9C42 /* UniversityItemNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityItemNew.m; path = controller/UniversityItemNew.m; sourceTree = "<group>"; };
 		AE133EA31D6EE26000AC9C42 /* UniItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniItemFrame.h; path = controller/UniItemFrame.h; sourceTree = "<group>"; };
 		AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniItemFrame.m; path = controller/UniItemFrame.m; sourceTree = "<group>"; };
 		AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityCell.h; path = controller/UniversityCell.h; sourceTree = "<group>"; };
@@ -1069,6 +1067,8 @@
 		AEA24C1F1D5B283700DD7939 /* UK.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK.jpg; sourceTree = "<group>"; };
 		AEA24C201D5B283700DD7939 /* wel_CN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_CN.png; sourceTree = "<group>"; };
 		AEA24C211D5B283700DD7939 /* wel_EN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_EN.png; sourceTree = "<group>"; };
+		AEAE882A1DC2086400672E57 /* UniversityNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityNew.h; sourceTree = "<group>"; };
+		AEAE882B1DC2086400672E57 /* UniversityNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityNew.m; sourceTree = "<group>"; };
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1657,8 +1657,8 @@
 			children = (
 				AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */,
 				AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */,
-				AE133EA01D6EDF9500AC9C42 /* UniversityItemNew.h */,
-				AE133EA11D6EDF9500AC9C42 /* UniversityItemNew.m */,
+				AEAE882A1DC2086400672E57 /* UniversityNew.h */,
+				AEAE882B1DC2086400672E57 /* UniversityNew.m */,
 				AE133EA31D6EE26000AC9C42 /* UniItemFrame.h */,
 				AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */,
 				AE93E4E31D6DABA30025FC58 /* UniversityNewFrame.h */,
@@ -3496,7 +3496,6 @@
 				AEA24B8F1D5B25E000DD7939 /* UniversityCourseViewController.m in Sources */,
 				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AEA24B991D5B25E000DD7939 /* XuFilerView.m in Sources */,
-				AE133EA21D6EDF9500AC9C42 /* UniversityItemNew.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
 				AEA24B231D5B251800DD7939 /* NewForgetPasswdViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
@@ -3524,6 +3523,7 @@
 				AEA24B801D5B25E000DD7939 /* OptionItem.m in Sources */,
 				AEA24A081D5B224E00DD7939 /* CatigoryRankCell.m in Sources */,
 				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
+				AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */,
 				AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */,
 				AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */,
 				463E3AAC1B23105F00E0BAF8 /* KDImageCache.m in Sources */,

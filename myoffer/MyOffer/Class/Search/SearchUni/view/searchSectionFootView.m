@@ -41,7 +41,7 @@
     return self;
 }
 
--(void)setUniObj:(UniversityItemNew *)uniObj
+-(void)setUniObj:(UniversityNew *)uniObj
 {
     _uniObj = uniObj;
     

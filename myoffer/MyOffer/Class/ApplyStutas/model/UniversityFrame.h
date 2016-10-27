@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UniversityItemNew;
+@class UniversityNew;
 
 @interface UniversityFrame : NSObject
-@property(nonatomic,strong)UniversityItemNew *university;
+@property(nonatomic,strong)UniversityNew *university;
 @property(nonatomic,assign)CGRect selectButtonFrame;
 @property(nonatomic,assign)CGRect LogoFrame;
 @property(nonatomic,assign)CGRect nameFrame;

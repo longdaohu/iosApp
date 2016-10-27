@@ -33,7 +33,7 @@ typedef enum {
 #import "searchSectionFootView.h"
 #import "FilterContentFrame.h"
 #import "UniversityFrameNew.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 #import "ApplySectionHeaderView.h"
 
 
@@ -702,7 +702,7 @@ typedef enum {
          //添加数据源
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
            
-             UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+             UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityNew mj_objectWithKeyValues:obj]];
   
              [self.UniversityList addObject:uniFrame];
              

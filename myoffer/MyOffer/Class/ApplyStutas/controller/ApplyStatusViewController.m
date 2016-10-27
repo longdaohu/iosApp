@@ -10,7 +10,7 @@
 #import "ApplyStatusCell.h"
 #import "ApplyStatusRecord.h"
 #import "ApplyStatusRecordGroup.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
 

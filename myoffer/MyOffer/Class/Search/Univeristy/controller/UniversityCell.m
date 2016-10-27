@@ -73,7 +73,7 @@
 
     _itemFrame = itemFrame;
     
-    UniversityItemNew *item = itemFrame.item;
+    UniversityNew *item = itemFrame.item;
    
     
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];

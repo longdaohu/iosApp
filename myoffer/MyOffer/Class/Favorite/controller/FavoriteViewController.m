@@ -9,7 +9,7 @@
 
 #import "FavoriteViewController.h"
 #import "UniversityViewController.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
 
@@ -127,7 +127,7 @@
     
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        [uni_temps addObject: [UniItemFrame frameWithUniversity:[UniversityItemNew mj_objectWithKeyValues:obj]]];
+        [uni_temps addObject: [UniItemFrame frameWithUniversity:[UniversityNew mj_objectWithKeyValues:obj]]];
         
     }];
     

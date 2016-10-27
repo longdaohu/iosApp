@@ -10,7 +10,7 @@
 #import "NewSearchResultCell.h"
 #import "XWGJnodataView.h"
 #import "UniversityFrameNew.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 @interface SearchResultViewController () {
     NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state, *_city;
@@ -238,7 +238,7 @@
                  
                  [_resultIDSet addObject:uid];
                  
-                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityNew mj_objectWithKeyValues:obj]];
                  
                  [_result addObject:uniFrame];
    
@@ -306,7 +306,7 @@
     cell.optionOrderBy = _orderBy;
  
     UniversityFrameNew  *uniFrame = _result[indexPath.row];
-    UniversityItemNew *uni =uniFrame.uni;
+    UniversityNew *uni =uniFrame.uni;
     cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
@@ -319,7 +319,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityFrameNew *uniFrame =  _result[indexPath.row];
-    UniversityItemNew *uniObj = uniFrame.uni;
+    UniversityNew *uniObj = uniFrame.uni;
     [self.navigationController pushUniversityViewControllerWithID:uniObj.NO_id animated:YES];
 }
 

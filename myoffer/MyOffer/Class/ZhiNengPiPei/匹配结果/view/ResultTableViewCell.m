@@ -8,7 +8,7 @@
 
 #import "ResultTableViewCell.h"
 #import "UniversityFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
 
 @interface ResultTableViewCell ()
 @property(nonatomic,copy)NSString *universityID;
@@ -112,7 +112,7 @@
 
 - (void)configureWithInfo:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
    
-    UniversityItemNew *university =  uniFrame.university;
+    UniversityNew *university =  uniFrame.university;
     
     self.universityID = university.NO_id;
     self.nameLab.frame = uniFrame.nameFrame;

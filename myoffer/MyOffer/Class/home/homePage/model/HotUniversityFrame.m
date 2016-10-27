@@ -7,22 +7,23 @@
 //
 
 #import "HotUniversityFrame.h"
-#import "UniversityItemNew.h"
+#import "UniversityNew.h"
+
 @implementation HotUniversityFrame
 
 + (instancetype)frameWithUniversity:(NSDictionary *)uni_Info{
 
     HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
     
-    UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:uni_Info];
+    UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:uni_Info];
     
     uniFrame.uni = uni;
-//    uniFrame.universityDic = uni_Info;
+    
     return uniFrame;
 }
 
 
--(void)setUni:(UniversityItemNew *)uni{
+-(void)setUni:(UniversityNew *)uni{
 
     _uni = uni;
     
