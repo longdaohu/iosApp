@@ -111,6 +111,7 @@
      parameters:nil
      success:^(NSInteger statusCode, id response) {
          
+        
          [weakSelf configrationUIWithresponse:response];
          
      }];
@@ -119,6 +120,7 @@
 //根据返回数据配置UI
 - (void)configrationUIWithresponse:(id)response{
 
+    
     NSArray *universities = (NSArray *)response;
     
     NSMutableArray *uni_temps = [NSMutableArray array];

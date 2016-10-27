@@ -7,23 +7,24 @@
 //
 
 #import "HotUniversityFrame.h"
-#import "UniversityObj.h"
-
+#import "UniversityItemNew.h"
 @implementation HotUniversityFrame
 
 + (instancetype)frameWithUniversity:(NSDictionary *)uni_Info{
 
     HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
-    uniFrame.universityDic = uni_Info;
+    
+    UniversityItemNew *uni = [UniversityItemNew mj_objectWithKeyValues:uni_Info];
+    
+    uniFrame.uni = uni;
+//    uniFrame.universityDic = uni_Info;
     return uniFrame;
 }
 
 
--(void)setUniversityDic:(NSDictionary *)universityDic
-{
-    _universityDic = universityDic;
-    
-    self.university = [UniversityObj createUniversityWithUniversityInfo:universityDic];
+-(void)setUni:(UniversityItemNew *)uni{
+
+    _uni = uni;
     
     CGFloat Cellwidth = XScreenWidth * 0.6;
     
@@ -55,7 +56,7 @@
     CGFloat linex = 0;
     CGFloat liney = CGRectGetMaxY(self.SubTitleFrame) + KDUtilSize(ITEM_MARGIN);
     if (USER_EN) {
-    
+        
         liney = CGRectGetMaxY(self.TitleFrame) + KDUtilSize(ITEM_MARGIN);
     }
     self.LineFrame = CGRectMake(linex, liney, linew,lineh);
@@ -73,24 +74,24 @@
     CGFloat localH  = localViewH;
     self.LocalFrame = CGRectMake(localX, localY, localW, localH);
     
- 
+    
     
     NSMutableArray *temps =[NSMutableArray array];
     
     CGFloat itemW = 0.5 * (bgw - 30);
     CGFloat itemH = 25.0;
-     for (int i = 0; i < 4; i ++) {
-
-         CGFloat itemX    = i%2 * (itemW + ITEM_MARGIN) + ITEM_MARGIN;
-         CGFloat itemY    = i/2 * 30;
-         
-         CGRect itemRect  = CGRectMake(itemX, itemY, itemW, itemH);
-         
-         [temps addObject:[NSValue valueWithCGRect:itemRect]];
+    for (int i = 0; i < 4; i ++) {
+        
+        CGFloat itemX    = i%2 * (itemW + ITEM_MARGIN) + ITEM_MARGIN;
+        CGFloat itemY    = i/2 * 30;
+        
+        CGRect itemRect  = CGRectMake(itemX, itemY, itemW, itemH);
+        
+        [temps addObject:[NSValue valueWithCGRect:itemRect]];
     }
     
     self.tapFrames = [temps copy];
-
+    
     CGFloat tapViewx    = 0;
     CGFloat tapViewy    = CGRectGetMaxY(self.LocalFrame) + KDUtilSize(ITEM_MARGIN);
     CGFloat tapVieww    = bgw;
@@ -102,7 +103,7 @@
     self.bgViewFrame    = CGRectMake(bgx,bgy,bgw,bgh);
     
     self.cellHeight     = CGRectGetMaxY(self.bgViewFrame) + 20;
-    
- }
+
+}
 
 @end

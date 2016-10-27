@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class HomeThirdTableViewCell;
-@class UniversityObj;
+@class UniversityItemNew;
 @protocol HomeThirdTableViewCellDelegate <NSObject>
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityObj *)uni;
+-(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityItemNew *)uni;
 
 @end
 

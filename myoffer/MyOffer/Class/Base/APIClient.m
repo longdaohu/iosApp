@@ -189,6 +189,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     
     NSURL *url =[newPath containsString:@"tips.json"]?[NSURL URLWithString:newPath]:[NSURL URLWithString:newPath relativeToURL:_endPoint];
     
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
     request.timeoutInterval = 15;

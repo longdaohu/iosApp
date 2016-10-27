@@ -20,4 +20,23 @@
     return [NSString stringWithFormat:@"%@ | %@ | %@",self.country,self.state,self.city];
 }
 
+- (NSString *)address_short{
+    
+    return [NSString stringWithFormat:@"%@ | %@",self.country,self.city];
+}
+
+-(NSNumber *)ranking_qs{
+
+    
+    return _ranking_qs ? _ranking_qs : @DefaultNumber;
+}
+
+
+-(NSNumber *)ranking_ti{
+    
+    
+    return _ranking_ti ? _ranking_ti : @DefaultNumber;
+}
+
+
 @end

@@ -14,19 +14,19 @@
 
 @interface NewSearchResultCell()
   //LOGO图片
-@property(nonatomic,strong)LogoView *LogoMView;
+@property(nonatomic,strong)LogoView *LogoView;
 //推荐标签
 @property(nonatomic,strong)UIImageView *hotView;
  //学校名称
-@property(nonatomic,strong)UILabel *titleLabel;
+@property(nonatomic,strong)UILabel *nameLab;
 //主要显示英文学校名称
-@property(nonatomic,strong)UILabel *subTitleLabel;
+@property(nonatomic,strong)UILabel *official_nameLab;
  //地理位置
 @property(nonatomic,strong)UILabel *rankLabel;
 //地理图标
-@property(nonatomic,strong)UIImageView *LocalMV;
+@property(nonatomic,strong)UIImageView *anchorView;
 //地理位置
-@property(nonatomic,strong)UITextField *LocalTF;
+@property(nonatomic,strong)UITextField *address_detail_TF;
  //用于显示 星号图标
 @property(nonatomic,strong)UIView *starBackground;
 
@@ -57,34 +57,33 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.LogoMView =[[LogoView alloc] init];
-        [self addSubview:self.LogoMView];
+        self.LogoView =[[LogoView alloc] init];
+        [self addSubview:self.LogoView];
         
   
-        self.titleLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYTITLEFONT) andTextColor:XCOLOR_BLACK];
-        self.titleLabel.hidden = USER_EN ? YES : NO;
+        self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
+        self.nameLab.hidden = USER_EN ? YES : NO;
         
-        CGFloat  subFontSize  = USER_EN ? KDUtilSize(UNIVERISITYTITLEFONT) : KDUtilSize(UNIVERISITYSUBTITLEFONT);
-        self.subTitleLabel =[self getLabelWithFontSize:subFontSize  andTextColor:XCOLOR_BLACK];
-        self.subTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.subTitleLabel.numberOfLines = 2;
-        self.subTitleLabel.clipsToBounds = YES;
+        self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
+        self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
+        self.official_nameLab.numberOfLines = 2;
+        self.official_nameLab.clipsToBounds = YES;
         
         //地理图标
-        self.LocalMV =[[UIImageView alloc] init];
-        self.LocalMV.image = [UIImage imageNamed:@"Uni_anthor"];
-        self.LocalMV.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:self.LocalMV];
+        self.anchorView =[[UIImageView alloc] init];
+        self.anchorView.image = [UIImage imageNamed:@"Uni_anthor"];
+        self.anchorView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:self.anchorView];
         
         //地理位置
-        self.LocalTF = [[UITextField alloc] init];
-        self.LocalTF.textColor = XCOLOR_DARKGRAY;
-        self.LocalTF.font = FontWithSize(XPERCENT * 11);
-        self.LocalTF.userInteractionEnabled = NO;
-        [self.contentView addSubview:self.LocalTF];
+        self.address_detail_TF = [[UITextField alloc] init];
+        self.address_detail_TF.textColor = XCOLOR_DARKGRAY;
+        self.address_detail_TF.font = FontWithSize(Uni_address_FontSize);
+        self.address_detail_TF.userInteractionEnabled = NO;
+        [self.contentView addSubview:self.address_detail_TF];
         
         
-        self.rankLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYLOCALFONT)  andTextColor:XCOLOR_DARKGRAY];
+        self.rankLabel =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_DARKGRAY];
         
         self.starBackground =[[UIView alloc] init];
         [self addSubview:self.starBackground];
@@ -130,24 +129,31 @@
     
     self.hotView.frame = uni_Frame.hotFrame;
     
-    self.LogoMView.frame = uni_Frame.LogoFrame;
-    [self.LogoMView.logoImageView KD_setImageWithURL:uniObj.logo];
+    self.LogoView.frame = uni_Frame.LogoFrame;
+    [self.LogoView.logoImageView KD_setImageWithURL:uniObj.logo];
     
-    self.titleLabel.frame = uni_Frame.nameFrame;
-    self.titleLabel.text = uniObj.name;
+    self.nameLab.frame = uni_Frame.nameFrame;
+    self.nameLab.text = uniObj.name;
     
-    self.subTitleLabel.text = uniObj.official_name;
-    self.subTitleLabel.frame = uni_Frame.official_nameFrame;
+    self.official_nameLab.text = uniObj.official_name;
+    self.official_nameLab.frame = uni_Frame.official_nameFrame;
     
-    self.LocalMV.frame = uni_Frame.anchorFrame;
-    self.LocalTF.frame = uni_Frame.address_detailFrame;
-    self.LocalTF.text = uni_Frame.uni.address_detail;
+    self.anchorView.frame = uni_Frame.anchorFrame;
+    self.address_detail_TF.frame = uni_Frame.address_detailFrame;
+    self.address_detail_TF.text = uni_Frame.uni.address_detail;
+    
+    CGFloat addressWidth = [uniObj.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    
+    if (addressWidth > (uni_Frame.address_detailFrame.size.width - 30)) {
+        
+        self.address_detail_TF.text = uniObj.address_short;
+        
+     }
     
     self.rankLabel.frame = uni_Frame.RankFrame;
     self.starBackground.hidden = !self.isStart;
     
     self.hotView.image = uni_Frame.uni.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
-    
     
     if ([self.optionOrderBy isEqualToString:RANKQS]) {
         
@@ -170,18 +176,9 @@
         
         if (StarCount == DefaultNumber) {
             
-            NSString   *rankStr01 = uniObj.ranking_ti.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_ti];
-            
-            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-            
-            self.starBackground.hidden = YES;
+            self.rankLabel.text = @"本国排名：暂无排名";
             
             return;
-            
-        }else{
-            
-            self.starBackground.hidden = NO;
-            
         }
         
         for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
@@ -216,92 +213,6 @@
     }
 
 }
-
-/*
--(void)setUni_Frame:(UniversityFrameObj *)uni_Frame
-{
-    _uni_Frame = uni_Frame;
-    UniversityObj *uniObj = uni_Frame.uniObj;
-    
-    self.LogoMView.frame = uni_Frame.LogoFrame;
-    [self.LogoMView.logoImageView KD_setImageWithURL:uniObj.logoName];
-    
-    self.titleLabel.frame = uni_Frame.TitleFrame;
-    self.titleLabel.text = uniObj.titleName;
-    
-    self.subTitleLabel.text = uniObj.subTitleName;
-    self.subTitleLabel.frame = uni_Frame.SubTitleFrame;
-    
-    self.LocalMV.frame = uni_Frame.LocalMVFrame;
-    self.LocalTF.frame = uni_Frame.LocalFrame;
-    self.LocalTF.text = uni_Frame.uniObj.LocalPlaceName;
-    
-    self.rankLabel.frame = uni_Frame.RankFrame;
-    self.starBackground.hidden = !self.isStart;
-    
-    self.hotView.image = uni_Frame.uniObj.isHot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
-    
-    if (self.isStart) {
-        
-        self.starBackground.frame = uni_Frame.starBgFrame;
-        CGPoint center = self.starBackground.center;
-        center.y = self.rankLabel.center.y;
-        self.starBackground.center = center;
-        self.rankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
-        
-        NSInteger  StarCount  = uniObj.RANKTIName.integerValue;
-        
-        
-        if (StarCount == DefaultNumber) {
-            
-            NSString   *rankStr01 = uniObj.RANKTIName.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
-           
-            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-            
-            self.starBackground.hidden = YES;
-        
-            return;
-            
-        }else{
-        
-            self.starBackground.hidden = NO;
-
-        }
-        
-        for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
-            
-            UIImageView *imageV = (UIImageView *)self.starBackground.subviews[i];
-            
-            imageV.frame = CGRectMake([uni_Frame.starFrames[i] integerValue], 0, 15, 15);
-        }
-        
-        
-        for (NSInteger i =0; i < StarCount; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.starBackground.subviews[i];
-            
-            mv.hidden = NO;
-            
-        }
-        
-        for (NSInteger i = StarCount ; i < self.starBackground.subviews.count; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.starBackground.subviews[i];
-            
-            mv.hidden = YES;
-        }
-        
-        
-    }else{
-        
-        NSString   *rankStr01 = uniObj.RANKTIName.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):uniObj.RANKTIName;
-        self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-  
-    }
-    
-}
-
-*/
 
 
 -(void)layoutSubviews

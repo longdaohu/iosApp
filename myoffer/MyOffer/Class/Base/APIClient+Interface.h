@@ -51,6 +51,7 @@
 #define kAPISelectorCheckNews @"GET api/account/message/hasnew?client=app"
 #define kAPISelectorUserLanguage @"POST api/account/prefer/language"
 #define kAPISelectorApplicationStatus @"GET api/account/applicationliststateraw"
+//申请意向列表
 #define kAPISelectorApplicationList @"GET api/account/applies"
 #define kAPISelectorWoYaoLiuXue @"POST api/fastpass"
 #define kAPISelectorCatigoryHotCities @"GET api/hotcities"

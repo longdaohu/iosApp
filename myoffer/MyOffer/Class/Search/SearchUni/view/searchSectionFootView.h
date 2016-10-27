@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UniversityObj.h"
-
+#import "UniversityItemNew.h"
 typedef void(^universityBlock)(NSString *);
 @interface searchSectionFootView : UIView
-@property(nonatomic,strong)UniversityObj *uniObj;
+@property(nonatomic,strong)UniversityItemNew *uniObj;
 @property(nonatomic,copy)universityBlock actionBlock;
 @end

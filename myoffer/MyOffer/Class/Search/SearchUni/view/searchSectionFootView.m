@@ -41,7 +41,7 @@
     return self;
 }
 
--(void)setUniObj:(UniversityObj *)uniObj
+-(void)setUniObj:(UniversityItemNew *)uniObj
 {
     _uniObj = uniObj;
     
@@ -49,7 +49,8 @@
 -(void)moreSubjectPressed:(UIButton *)sender
 {
     if (self.actionBlock) {
-        self.actionBlock(self.uniObj.universityID);
+        
+        self.actionBlock(self.uniObj.NO_id);
     }
 }
 

@@ -238,12 +238,7 @@
                  
                  [_resultIDSet addObject:uid];
                  
-                 
-                 UniversityItemNew *uni =  [UniversityItemNew mj_objectWithKeyValues:obj];
-                 
-                 UniversityFrameApplyObj *uniFrame = [[UniversityFrameApplyObj alloc] init];
-                 
-                 uniFrame.uni = uni;
+                 UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
                  
                  [_result addObject:uniFrame];
    

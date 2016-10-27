@@ -19,8 +19,7 @@ typedef enum {
 #import "InteProfileViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityFrame.h"
-#import "UniversityObj.h"
-
+#import "UniversityItemNew.h"
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
@@ -194,19 +193,8 @@ typedef enum {
     self.NoDataView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
     self.NoDataView.hidden = YES;
     [self.view addSubview: self.NoDataView];
-    
-    
-//    if (self.navigationBgImage) {
-//        
-//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-//        self.navImageView.clipsToBounds = YES;
-//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.navImageView.image = self.navigationBgImage;
-//        [self.view addSubview:self.navImageView];
-//        
-//    }
-    
 }
+
 -(void)makeNavigatinView
 {
     if (!self.isComeBack) {
@@ -272,11 +260,9 @@ typedef enum {
             NSMutableArray *temps = [NSMutableArray array];
             for (NSDictionary *obj  in items) {
                 
-                UniversityObj *uni = [UniversityObj createUniversityWithUniversityInfo:obj];
-                UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
-                uniFrame.uniObj = uni;
-                
-                [temps addObject:uniFrame];
+                  UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
+                  uniFrame.university = [UniversityItemNew mj_objectWithKeyValues:obj];
+                  [temps addObject:uniFrame];
             }
             
             [tempArr addObject:temps];
@@ -364,9 +350,9 @@ typedef enum {
             
             for(UniversityFrame *uniFrame in universitys)
             {
-                if (uniFrame.uniObj.in_cart) {
+                if (uniFrame.university.in_cart) {
                     
-                    [weakSelf.SelectedUniversityIDs addObject:uniFrame.uniObj.universityID];
+                    [weakSelf.SelectedUniversityIDs addObject:uniFrame.university.NO_id];
                 }
             }
         }
@@ -419,9 +405,9 @@ typedef enum {
     cell.delegate = self;
     
     UniversityFrame *uniFrame = self.resultList[indexPath.row];
-    UniversityObj *university = uniFrame.uniObj;
+    UniversityItemNew *university = uniFrame.university;
     [cell configureWithInfo:uniFrame];
-    [self configureCellSelectionView:cell universityId:university.universityID];
+    [self configureCellSelectionView:cell universityId:university.NO_id];
     
     return cell;
 }
@@ -469,10 +455,10 @@ typedef enum {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UniversityFrame *uniFrame = self.resultList[indexPath.row];
-    UniversityObj *university = uniFrame.uniObj;
     
-     [self.navigationController pushUniversityViewControllerWithID:university.universityID animated:YES];
+     UniversityFrame *uniFrame = self.resultList[indexPath.row];
+ 
+     [self.navigationController pushUniversityViewControllerWithID:uniFrame.university.NO_id animated:YES];
 }
 
 

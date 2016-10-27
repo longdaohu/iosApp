@@ -32,7 +32,7 @@
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"
-#import "UniversityObj.h"
+#import "UniversityItemNew.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -624,11 +624,11 @@
 }
 
 #pragma mark —————— HomeThirdTableViewCellDelegate
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityObj *)uni{
+-(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityItemNew *)uni{
 
     [MobClick event:@"home_universityItem"];
     
-    [self.navigationController pushUniversityViewControllerWithID:uni.universityID animated:YES];
+    [self.navigationController pushUniversityViewControllerWithID:uni.NO_id animated:YES];
 }
 
 #pragma mark  ————————————  UIAlertViewDelegate

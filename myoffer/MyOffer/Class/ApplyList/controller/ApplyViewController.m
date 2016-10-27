@@ -389,7 +389,6 @@
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
     sectionView.isEdit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
     sectionView.isSelected = [self.cancelUniversityList containsObject:universityID];
-    sectionView.UniversityInfo = sectionModal.universityInfo;
     sectionView.uniFrame = sectionModal.uniFrame;
     sectionView.actionBlock = ^(UIButton *sender){
         

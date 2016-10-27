@@ -157,12 +157,8 @@
          
          
           for (NSDictionary *obj in response[@"universities"]) {
-  
               
-              UniversityFrameApplyObj  *uniFrame = [[UniversityFrameApplyObj alloc] init];
-              uniFrame.uni = [UniversityItemNew mj_objectWithKeyValues:obj];
-              
-//              UniversityFrameObj *uniFrame =[self makeUniversityFrameWithDictionary:obj];
+              UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
               
               NSInteger index =  [obj[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
               
@@ -184,14 +180,6 @@
 
 
 
-//-(UniversityFrameObj *)makeUniversityFrameWithDictionary:(NSDictionary *)uniInfor
-//{
-//    UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:uniInfor];
-//    
-//    UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
-//    
-//    return uniFrame;
-//}
 
 -(void)makeTableView
 {

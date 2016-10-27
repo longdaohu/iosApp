@@ -60,6 +60,10 @@
 #define FontWithSize(size)  [UIFont systemFontOfSize:size]
 #define FONTSIZE(size)   XScreenWidth > 375 ? size + 1 :size
 #define University_HEIGHT  100 + (XScreenWidth - 320) * 0.15
+#define Uni_address_FontSize  KDUtilSize(12)
+#define Uni_rank_FontSize  KDUtilSize(12)
+#define Uni_subtitle_FontSize  KDUtilSize(12)
+#define Uni_title_FontSize      XPERCENT * 15
 #define USER_EN [[InternationalControl userLanguage] containsString:@"en"]
 #define LOGIN [[AppDelegate sharedDelegate] isLogin]
 #define RequireLogin if(!LOGIN) {[self loginView];return;}

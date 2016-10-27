@@ -7,20 +7,24 @@
 //
 
 #import "ResultTableViewCell.h"
-#import "UniversityObj.h"
 #import "UniversityFrame.h"
+#import "UniversityItemNew.h"
 
 @interface ResultTableViewCell ()
 @property(nonatomic,copy)NSString *universityID;
 @property(nonatomic,strong)UIView *starBackground;
-@property (strong, nonatomic)  UILabel *titleLabel;
-@property (strong, nonatomic)  UILabel *subTitleLabel;
-@property (strong, nonatomic)  UILabel *rankLabel;
+//中文名
+@property (strong, nonatomic)  UILabel *nameLab;
+//英文名
+@property (strong, nonatomic)  UILabel *official_nameLab;
+//排名
+@property (strong, nonatomic)  UILabel *rankLab;
+//logo图标
 @property (strong, nonatomic)  LogoView *logoView;
 //地理图标
-@property(nonatomic,strong)UIView *LocalMV;
+@property(nonatomic,strong)UIImageView *anchorView;
 //地理位置
-@property(nonatomic,strong)UITextField *LocalTF;
+@property(nonatomic,strong)UITextField *address_detail_TF;
 
 @end
 
@@ -45,35 +49,34 @@
     
     [super awakeFromNib];
 
+    //logo图标
     self.logoView =[[LogoView alloc] init];
     [self addSubview:self.logoView];
     
-    self.titleLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYTITLEFONT) andTextColor:XCOLOR_BLACK];
-    self.titleLabel.hidden = USER_EN ? YES : NO;
+    self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
+    self.nameLab.hidden = USER_EN ? YES : NO;
     
-    CGFloat  subFontSize  = USER_EN? KDUtilSize(UNIVERISITYTITLEFONT) : KDUtilSize(UNIVERISITYSUBTITLEFONT);
-    self.subTitleLabel =[self getLabelWithFontSize:subFontSize  andTextColor:XCOLOR_BLACK];
-    self.subTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.subTitleLabel.numberOfLines = 2;
-    self.subTitleLabel.clipsToBounds = YES;
+    //英文名
+     self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
+    self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
+    self.official_nameLab.numberOfLines = 2;
+    self.official_nameLab.clipsToBounds = YES;
     
-    self.rankLabel =[self getLabelWithFontSize:KDUtilSize(UNIVERISITYLOCALFONT)  andTextColor:XCOLOR_DARKGRAY];
-
+    //排名
+    self.rankLab =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_DARKGRAY];
+ 
+    //地理图标
+    self.anchorView =[[UIImageView alloc] init];
+    self.anchorView.image = [UIImage imageNamed:@"Uni_anthor"];
+    self.anchorView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:self.anchorView];
     
-    
-    self.LocalMV =[[UIView alloc] init];
-    UIImageView *left =[[UIImageView alloc] init];
-    left.image = [UIImage imageNamed:@"Uni_anthor"];
-    left.contentMode = UIViewContentModeScaleAspectFit;
-    [self.LocalMV addSubview:left];
-    
-    self.LocalTF = [[UITextField alloc] init];
-    self.LocalTF.textColor = XCOLOR_DARKGRAY;
-    self.LocalTF.font = FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT));
-    self.LocalTF.leftViewMode = UITextFieldViewModeAlways;
-    self.LocalTF.userInteractionEnabled = NO;
-    self.LocalTF.leftView = self.LocalMV;
-    [self addSubview:self.LocalTF];
+    //地理位置
+    self.address_detail_TF = [[UITextField alloc] init];
+    self.address_detail_TF.textColor = XCOLOR_DARKGRAY;
+    self.address_detail_TF.font = FontWithSize(Uni_address_FontSize);
+    self.address_detail_TF.userInteractionEnabled = NO;
+    [self.contentView addSubview:self.address_detail_TF];
     
     self.starBackground =[[UIView alloc] init];
     [self addSubview:self.starBackground];
@@ -85,8 +88,7 @@
         [self.starBackground addSubview:mv];
     }
 
-    
-    
+     
     [self.selectButton addTarget:self action:@selector(selectCellID:) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -110,32 +112,32 @@
 
 - (void)configureWithInfo:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
    
-    UniversityObj *university =  uniFrame.uniObj;
+    UniversityItemNew *university =  uniFrame.university;
     
-    self.universityID = university.universityID;
-    self.titleLabel.frame = uniFrame.TitleFrame;
-    self.titleLabel.text = university.titleName;
+    self.universityID = university.NO_id;
+    self.nameLab.frame = uniFrame.nameFrame;
+    self.nameLab.text = university.name;
     
-    self.subTitleLabel.frame = uniFrame.SubTitleFrame;
-    self.subTitleLabel.text = university.subTitleName;
+    self.official_nameLab.frame = uniFrame.official_nameFrame;
+    self.official_nameLab.text = university.official_name;
     
  
     self.logoView.frame = uniFrame.LogoFrame;
-    [self.logoView.logoImageView KD_setImageWithURL:university.logoName];
+    [self.logoView.logoImageView KD_setImageWithURL:university.logo];
     
-    self.isStart = [university.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
+    self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
     
-    self.rankLabel.frame =uniFrame.RankFrame;
+    self.rankLab.frame =uniFrame.RankFrame;
     
     
     self.starBackground.hidden = !self.isStart;
     self.optionOrderBy =  @"ranking_ti";
     
     
-    self.LocalMV.frame = uniFrame.LocalMVFrame;
+    self.anchorView.frame = uniFrame.anchorFrame;
     
-    self.LocalTF.text = [NSString stringWithFormat:@"%@-%@",university.countryName,university.cityName];
-    self.LocalTF.frame = uniFrame.LocalFrame;
+    self.address_detail_TF.text = university.address_short;
+    self.address_detail_TF.frame = uniFrame.address_detailFrame;
     
     
     BOOL RankTIType = [self.optionOrderBy isEqualToString:RANKTI];
@@ -145,21 +147,23 @@
         
         
         if (RankTIType) {
-            NSString   *rankStr01 = [university.RANKTIName intValue] == 99999?GDLocalizedString(@"SearchResult_noRank"):university.RANKTIName;
-            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+            
+            NSString   *rankStr01 = [university.ranking_ti intValue] == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
+            self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
         }else{
             
-            NSString   *rankStr02 = [university.RANKTIName intValue]  == 99999?GDLocalizedString(@"SearchResult_noRank"):university.RANKTIName;
-            self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniversityDetail-003"), rankStr02];
+            NSString   *rankStr02 = [university.ranking_qs intValue]  == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",university.ranking_qs];
+            self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniversityDetail-003"), rankStr02];
         }
     }else{
         
         self.starBackground.frame = uniFrame.starBgFrame;
         
-        self.rankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        self.rankLab.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         
-        NSInteger  StarCount  = university.RANKTIName.integerValue;
+        NSInteger  StarCount  = university.ranking_ti.integerValue;
+        
         for (NSInteger i =0; i < self.starBackground.subviews.count; i++) {
             
             UIImageView *imageV = (UIImageView *)self.starBackground.subviews[i];
@@ -201,15 +205,6 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    if (self.LocalTF.text) {
-        CGFloat Leftx = 0;
-        CGFloat Lefty = -1;
-        CGFloat Lefth = CGRectGetHeight(self.rankLabel.frame);
-        CGFloat Leftw = Lefth;
-        UIImageView *item = (UIImageView *)self.LocalMV.subviews.firstObject;
-        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
-    }
     
 }
 

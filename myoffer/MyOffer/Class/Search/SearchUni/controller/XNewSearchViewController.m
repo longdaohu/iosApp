@@ -19,9 +19,7 @@ typedef enum {
 
 #import "XNewSearchViewController.h"
 #import "NewSearchResultCell.h"
-#import "searchSectionHeadView.h"
 #import "NewSearchRstTableViewCell.h"
-#import "XSearchSectionHeaderView.h"
 #import "XUCountry.h"
 #import "CountryState.h"
 #import "FiltContent.h"
@@ -33,8 +31,11 @@ typedef enum {
 #import "BottomBackgroudView.h"
 #import "UniversityCourseViewController.h"
 #import "searchSectionFootView.h"
-#import "UniversityFrameObj.h"
 #import "FilterContentFrame.h"
+#import "UniversityFrameApplyObj.h"
+#import "UniversityItemNew.h"
+#import "ApplySectionHeaderView.h"
+
 
 @interface XNewSearchViewController ()<UITableViewDataSource,UITableViewDelegate,BottomBackgroudViewDelegate,FilterTableViewCellDelegate>
 //判断是否是澳大利亚国家，是否需要带星号
@@ -338,6 +339,7 @@ typedef enum {
     return [country.states valueForKeyPath:@"stateName"];
     
 }
+
 //获取当前国家地区
 -(CountryState *)makeCurrentCityWithState:(NSString *)stateName  country:(NSString *)CountryName;
 {
@@ -699,11 +701,9 @@ typedef enum {
          
          //添加数据源
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-             
-             UniversityObj *uniObj = [UniversityObj createUniversityWithUniversityInfo:obj];
-
-             UniversityFrameObj *uniFrame = [UniversityFrameObj UniversityFrameWithUniversity:uniObj];
-
+           
+             UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+  
              [self.UniversityList addObject:uniFrame];
              
          }];
@@ -843,22 +843,19 @@ typedef enum {
 {
     if (tableView == self.ResultTableView) {
         
-        XWeakSelf;
-        XSearchSectionHeaderView *sectionHeader =[XSearchSectionHeaderView SectionHeaderViewWithTableView:tableView];
-        sectionHeader.IsStar = self.IsStar;
-        sectionHeader.RANKTYPE = self.RankType;
-        UniversityFrameObj *uniFrame = self.UniversityList[section];
-        sectionHeader.uni_Frame =  uniFrame;
+        XWeakSelf
         
-        /**
-         * 实现页面跳转，查看学校详情
-         */
-        sectionHeader.actionBlock = ^(NSString *universityID){
-//            UniversityDetailViewController *detail = [[UniversityDetailViewController alloc] initWithUniversityID:universityID];
-            [weakSelf.navigationController pushUniversityViewControllerWithID:universityID animated:YES];
+        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+        ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
+        [sectionView addButtonHiden];
+        sectionView.optionOrderBy = self.RankType;
+        sectionView.uniFrame = uniFrame;
+        sectionView.newActionBlock = ^(NSString *uni_id){
+        
+              [weakSelf.navigationController pushUniversityViewControllerWithID:uni_id animated:YES];
         };
         
-        return sectionHeader;
+        return sectionView;
         
     }else{
         
@@ -873,18 +870,19 @@ typedef enum {
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     XWeakSelf;
-    UniversityFrameObj *uniFrame = self.UniversityList[section];
-    UniversityObj *uniObj = uniFrame.uniObj;
-    NSArray *items = uniObj.resultSubjectArray;
-    if (items.count) {
+    
+    UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+    if (uniFrame.uni.courses.count) {
         searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
-        sectionFooter.uniObj = uniObj;
+        sectionFooter.uniObj = uniFrame.uni;
         sectionFooter.actionBlock = ^(NSString *universityID){
-            UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:universityID];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            [weakSelf.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:universityID] animated:YES];
             
         };
+        
         return sectionFooter;
+        
     }else{
         
         return nil;
@@ -907,11 +905,9 @@ typedef enum {
         
     }else{
         
-        UniversityFrameObj *uniFrame = self.UniversityList[indexPath.section];
-        UniversityObj *uniOBJ = uniFrame.uniObj;
-        NSArray *items = uniOBJ.resultSubjectArray;
+        UniversityFrameApplyObj *uniFrame = self.UniversityList[indexPath.section];
         
-        return  items.count > 0 ? 70 : 0;
+        return  uniFrame.uni.courses.count > 0 ? 70 : 0;
     }
     
 }
@@ -924,11 +920,10 @@ typedef enum {
         
     }else{
         
-        UniversityFrameObj *uniFrame = self.UniversityList[section];
-        UniversityObj *uniOBJ = uniFrame.uniObj;
-        NSArray *items = uniOBJ.resultSubjectArray;
+
+        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
         
-        if (items.count) {
+        if ( uniFrame.uni.courses.count) {
             
             return 60;
             
@@ -965,13 +960,12 @@ typedef enum {
         
     }else{
         
-        UniversityFrameObj *uniFrame = self.UniversityList[section];
-        UniversityObj *uniOBJ = uniFrame.uniObj;
-        NSArray *items = uniOBJ.resultSubjectArray;
-        if (items.count > 0) {
-            
-            //只显示部分数据
-            return  items.count > 3 ? 3:items.count;
+        
+        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+        
+        if (uniFrame.uni.courses.count > 0) {
+             //只显示部分数据
+            return  uniFrame.uni.courses.count > 3 ? 3 : uniFrame.uni.courses.count;
             
         }else{
             
@@ -1037,11 +1031,10 @@ typedef enum {
         
         
         NewSearchRstTableViewCell *cell =[NewSearchRstTableViewCell  cellWithTableView:tableView];
-        UniversityFrameObj *uniFrame = self.UniversityList[indexPath.section];
-        UniversityObj *uniOBJ = uniFrame.uniObj;
-        NSArray *items = uniOBJ.resultSubjectArray;
-        NSDictionary *itemInfo =items[indexPath.row];
-        if (items.count > 0) {
+        UniversityFrameApplyObj *uniFrame = self.UniversityList[indexPath.section];
+        NSDictionary *itemInfo =uniFrame.uni.courses[indexPath.row];
+        if (uniFrame.uni.courses.count > 0) {
+            
             cell.itemInfo = itemInfo;
             
         }
@@ -1160,6 +1153,7 @@ typedef enum {
             filterFrame.cellState = XcellStateBaseHeight;
             
         }else{
+            
             
         }
         

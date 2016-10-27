@@ -7,13 +7,14 @@
 //
 
 #import "UniversityFrame.h"
-#import "UniversityObj.h"
+#import "UniversityItemNew.h"
 @implementation UniversityFrame
 
--(void)setUniObj:(UniversityObj *)uniObj
-{
-    _uniObj = uniObj;
-    
+
+-(void)setUniversity:(UniversityItemNew *)university{
+
+    _university = university;
+ 
     CGFloat logox = 40;
     CGFloat logoy = ITEM_MARGIN;
     CGFloat logoh = University_HEIGHT - 2 * ITEM_MARGIN;
@@ -21,63 +22,46 @@
     self.LogoFrame = CGRectMake(logox, logoy, logow, logoh);
     
     
-    CGFloat titlex = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat titley =logoy;
-    NSString *title = uniObj.titleName;
-    CGSize titleSize = [title KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYTITLEFONT))];
-    CGFloat titleh = titleSize.height;
-    CGFloat titlew = XScreenWidth - titlex;
-    self.TitleFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
+    CGFloat nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
+    CGFloat nameY =logoy;
+    CGFloat nameH =  Uni_title_FontSize;
+    CGFloat nameW = XScreenWidth - nameX;
+    self.nameFrame = CGRectMake(nameX, nameY - 3, nameW, nameH);
     
     
-    CGFloat subx = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat suby = CGRectGetMaxY(self.TitleFrame) + 3;
-    CGFloat fontSize =  KDUtilSize(UNIVERISITYSUBTITLEFONT);
-    if (USER_EN) {
-        
-        suby   = logoy + 2;
-        fontSize =  KDUtilSize(UNIVERISITYTITLEFONT);
-        
-    }
-    CGFloat subw = XScreenWidth - subx;
-    CGFloat subh =  [self getContentBoundWithTitle:uniObj.subTitleName andFontSize:fontSize andMaxWidth:subw].height;
-    self.SubTitleFrame = CGRectMake(subx, suby, subw, subh);
+    CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
+    CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
+    CGFloat official_nameW = XScreenWidth - official_nameX;
+    CGFloat official_nameH =  Uni_subtitle_FontSize;
+    self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
     
     
-    NSString *local = uniObj.countryName;
-    CGSize  localSize = [local KD_sizeWithAttributeFont: FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT + 1))];
+ 
+    
+    CGFloat anthorX =  official_nameX;
+    CGFloat anthorH =  Uni_rank_FontSize + 5;
+    CGFloat anthorW =  anthorH;
+    CGFloat anthorY =  CGRectGetMaxY(self.LogoFrame) - anthorH;
+    self.anchorFrame = CGRectMake(anthorX, anthorY, anthorW, anthorH);
+    
+    CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
+    CGFloat addressH =  Uni_address_FontSize;
+    CGFloat addressW =  official_nameW;
+    CGFloat addressY =  anthorY  + 3;
+    self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
     
-    CGFloat locMVx = 0;
-    CGFloat locMVh = localSize.height;
-    CGFloat locMVw = locMVh + 5;
-    CGFloat localMargin = KDUtilSize(0);
     
-    if (USER_EN) {
-        
-        localMargin = localMargin + (XScreenWidth - 320) * 0.06;
-    }
-    CGFloat locMVy = 0;
-    self.LocalMVFrame = CGRectMake(locMVx, locMVy, locMVw, locMVh);
-    
-    
-    CGFloat localy = CGRectGetMaxY(self.LogoFrame) - localSize.height + 3;
-    CGFloat localx = subx;
-    CGFloat localw = XScreenWidth - localx;
-    CGFloat localh = localSize.height;
-    self.LocalFrame = CGRectMake(localx, localy + 2, localw, localh);
-    
-    
-    CGFloat Rankx = subx;
-    CGFloat Rankw = subw;
-    CGFloat Rankh = localSize.height;
-    CGFloat Ranky = localy - Rankh - localMargin;
-    self.RankFrame = CGRectMake(Rankx, Ranky, Rankw, Rankh);
+    CGFloat rankX = official_nameX;
+    CGFloat rankW = official_nameW;
+    CGFloat rankH = Uni_rank_FontSize;
+    CGFloat rankY = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - rankH) * 0.5;
+    self.RankFrame = CGRectMake(rankX, rankY, rankW, rankH);
     
     
     NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
     CGSize rankSize = [rankIT KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
-    self.starBgFrame = CGRectMake(self.SubTitleFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
+    self.starBgFrame = CGRectMake(self.official_nameFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
     NSMutableArray *temps =[NSMutableArray array];
     for (NSInteger i =0; i < 5; i++) {
         
@@ -87,8 +71,9 @@
     }
     self.starFrames = [temps copy];
     
-    
 }
+
+
 
 
 

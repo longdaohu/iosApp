@@ -11,10 +11,19 @@
 
 @implementation UniversityFrameApplyObj
 
++(instancetype)universityFrameWithUni:(UniversityItemNew *)uni{
+
+    UniversityFrameApplyObj *uniFrame = [[UniversityFrameApplyObj alloc] init];
+
+    uniFrame.uni = uni;
+    
+    return uniFrame;
+}
+
+
 -(void)setUni:(UniversityItemNew *)uni{
 
     _uni = uni;
-    
     
     CGFloat cancelx = ITEM_MARGIN;
     CGFloat cancely = 0;
@@ -37,8 +46,8 @@
     
     
     CGFloat titlex = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat titley =logoy;
-    CGFloat titleh = XPERCENT * 15;
+    CGFloat titley = logoy + 5;
+    CGFloat titleh = Uni_address_FontSize;
     CGFloat titlew = XScreenWidth - titlex;
     self.nameFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
     
@@ -46,25 +55,25 @@
     CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
     CGFloat official_nameW = XScreenWidth - official_nameX - 45;
-    CGFloat official_nameH =  XPERCENT * 11 + 2;
+    CGFloat official_nameH =  Uni_subtitle_FontSize + 2;
     self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
 
     
     CGFloat anthorX =  official_nameX;
-    CGFloat anthorH =  XPERCENT * 11 + 5;
+    CGFloat anthorH =  Uni_rank_FontSize + 5;
     CGFloat anthorW =  anthorH;
     CGFloat anthorY =  CGRectGetMaxY(self.LogoFrame) - anthorH;
     self.anchorFrame = CGRectMake(anthorX, anthorY, anthorW, anthorH);
     
     CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
-    CGFloat addressH =  XPERCENT * 11;
+    CGFloat addressH =  Uni_address_FontSize;
     CGFloat addressW =  official_nameW;
     CGFloat addressY =  anthorY  + 3;
     self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
     CGFloat rankX = official_nameX;
     CGFloat rankW = official_nameW;
-    CGFloat rankH = addressH;
+    CGFloat rankH = Uni_rank_FontSize;
     CGFloat rankY = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - rankH) * 0.5;
     self.RankFrame = CGRectMake(rankX, rankY, rankW, rankH);
     

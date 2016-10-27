@@ -9,7 +9,7 @@
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
-#import "UniversityObj.h"
+#import "UniversityItemNew.h"
 
 @interface HomeThirdTableViewCell ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UICollectionView *CollectionView;
@@ -127,7 +127,7 @@ static NSString *identify = @"three";
         
         HotUniversityFrame *uniFrame =  self.uniFrames[indexPath.row];
         
-        [self.delegate HomeThirdTableViewCell:self WithUniversity:uniFrame.university];
+        [self.delegate HomeThirdTableViewCell:self WithUniversity:uniFrame.uni];
     }
 }
 

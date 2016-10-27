@@ -35,19 +35,19 @@
     CGFloat nameX = CGRectGetMaxX(self.logoFrame) + XMARGIN;
     CGFloat nameY = logoY;
     CGFloat nameW = CONTENTWIDTH - nameX;
-    CGFloat nameH = XPERCENT * 15 ;
+    CGFloat nameH = Uni_title_FontSize;
     self.nameFrame = CGRectMake(nameX, nameY, nameW, nameH);
     
     CGFloat officialX = nameX;
     CGFloat officialY = CGRectGetMaxY(self.nameFrame) + 2;
     CGFloat officialW = nameW;
     
-    CGSize  officialSize = [item.official_name KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)  maxWidth:officialW];
+    CGSize  officialSize = [item.official_name KD_sizeWithAttributeFont:XFONT(Uni_subtitle_FontSize)  maxWidth:officialW];
     CGFloat officialH = officialSize.height;
     self.official_nameFrame = CGRectMake(officialX, officialY, officialW, officialH);
     
     CGFloat qsX = nameX;
-    CGFloat qsH = XPERCENT * 11;
+    CGFloat qsH = Uni_rank_FontSize;
     CGFloat qsY = CGRectGetMaxY(self.logoFrame) - qsH;
     CGFloat qsW = 0.5 * (CONTENTWIDTH - qsX);
     self.QSRankFrame = CGRectMake(qsX, qsY, qsW, qsH);
@@ -60,7 +60,7 @@
     
     
     CGFloat anthorX =  nameX;
-    CGFloat anthorH =  XPERCENT * 11 + 5;
+    CGFloat anthorH =  Uni_address_FontSize + 5;
     CGFloat anthorW =  anthorH;
     CGFloat padding  = CGRectGetMinY(self.TIMESRankFrame) - CGRectGetMaxY(self.official_nameFrame) - anthorH;
     CGFloat anthorY =  CGRectGetMaxY(self.official_nameFrame) + padding * 0.5;
@@ -68,7 +68,7 @@
     
     
     CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
-    CGFloat addressH =  XPERCENT * 11;
+    CGFloat addressH =  Uni_address_FontSize;
     CGFloat addressW =  CONTENTWIDTH - addressX;
     CGFloat addressY =  anthorY  + 3;
     self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);

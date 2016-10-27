@@ -9,7 +9,8 @@
 
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
-#import "UniversityObj.h"
+#import "UniversityItemNew.h"
+
 @interface UniCollectionViewCell ()
 //cell背景
 @property(nonatomic,strong)UIView *bgView;
@@ -18,7 +19,7 @@
 //分隔线
 @property(nonatomic,strong)UIView *center_Line;
 //地理图标
-@property(nonatomic,strong)UIImageView *localMV;
+@property(nonatomic,strong)UIImageView *anthorView;
 //学校名称
 @property(nonatomic,strong)UILabel *titleLab;
 //学校英文名称
@@ -64,9 +65,9 @@
         self.titleLab.numberOfLines      = 2;
         [self.bgView addSubview:self.titleLab];
 
-        self.localMV                     = [[UIImageView alloc] init];
-        self.localMV.image               = [UIImage imageNamed:@"Uni_anthor"];
-        [self.bgView addSubview:self.localMV];
+        self.anthorView                     = [[UIImageView alloc] init];
+        self.anthorView.image               = [UIImage imageNamed:@"Uni_anthor"];
+        [self.bgView addSubview:self.anthorView];
 
         self.localLab =  [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
         self.localLab.lineBreakMode      =  NSLineBreakByClipping;
@@ -99,31 +100,37 @@
 {
     _uniFrame = uniFrame;
     
-    UniversityObj *unversity = uniFrame.university;
+    UniversityItemNew *unversity = uniFrame.uni;
+    
     self.bgView.frame        = uniFrame.bgViewFrame;
     self.center_Line.frame   = uniFrame.LineFrame;
     self.tapView.frame       = uniFrame.tapBgViewFrame;
-    self.localMV.frame       = uniFrame.LocalMVFrame;
+    self.anthorView.frame       = uniFrame.LocalMVFrame;
     self.logoView.frame      = uniFrame.LogoFrame;
     
-    [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logoName]];
+    [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logo]];
     
     self.titleLab.frame      = uniFrame.TitleFrame;
-    self.titleLab.text       =  unversity.titleName;
+    self.titleLab.text       =  unversity.name;
     
     self.subTitleLab.frame   = uniFrame.SubTitleFrame;
-    self.subTitleLab.text    = unversity.subTitleName;
+    self.subTitleLab.text    = unversity.official_name;
    
     self.localLab.frame      = uniFrame.LocalFrame;
-    self.localLab.text       =  USER_EN ?[NSString stringWithFormat:@"%@ | %@", unversity.countryName,unversity.cityName] :[NSString stringWithFormat:@"%@ | %@ | %@", unversity.countryName, unversity.stateName, unversity.cityName];
-    
+    self.localLab.text       = unversity.address_detail;
     
     NSArray *tag_temps =  unversity.tags;
+ 
     NSArray *tags = tag_temps.count > 4 ? [tag_temps subarrayWithRange:NSMakeRange(0, 4)] : tag_temps;
+    
     for (int i = 0; i < tags.count; i ++) {
+        
         UILabel *item = (UILabel *)self.tapView.subviews[i];
+        
         item.text = unversity.tags[i];
+        
         item.frame = [uniFrame.tapFrames[i]  CGRectValue];
+        
         item.layer.cornerRadius = 0.5 * item.frame.size.height;
      }
     

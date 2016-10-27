@@ -23,5 +23,7 @@
 @property(nonatomic,strong)NSArray *starFrames;
 @property(nonatomic,assign)CGRect hotFrame;
 
++(instancetype)universityFrameWithUni:(UniversityItemNew *)uni;
+
 @end
 

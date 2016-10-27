@@ -29,21 +29,21 @@
     self.logo =[[LogoView alloc] init];
     [self.contentView addSubview:self.logo];
     
-    self.nameLab = [UILabel labelWithFontsize:XPERCENT * 15  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    self.nameLab = [UILabel labelWithFontsize:Uni_title_FontSize  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:self.nameLab];
     
-    self.officalLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
+    self.officalLab =  [UILabel labelWithFontsize:Uni_subtitle_FontSize  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:self.officalLab];
     self.officalLab.numberOfLines = 2;
     
     
-    self.addressLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    self.addressLab =  [UILabel labelWithFontsize:Uni_address_FontSize  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:self.addressLab];
     
-    self.qsLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    self.qsLab =  [UILabel labelWithFontsize:Uni_rank_FontSize  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:self.qsLab];
 
-    self.localLab =  [UILabel labelWithFontsize:XPERCENT * 11  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+    self.localLab =  [UILabel labelWithFontsize:Uni_rank_FontSize  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
     [self.contentView addSubview:self.localLab];
     
     self.anthorView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Uni_anthor"]];
@@ -83,7 +83,8 @@
     NSString *ranking_qs = item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",item.ranking_qs];
     self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",ranking_qs];
     NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? [NSString stringWithFormat:@"%@",item.ranking_ti] : [NSString stringWithFormat:@"%@星",item.ranking_ti];
-    self.localLab.text = [NSString stringWithFormat:@"本地排名: %@",local_rank_name];
+    self.localLab.text =  item.ranking_ti.integerValue == DefaultNumber ? @"本国排名: 暂无排名": [NSString stringWithFormat:@"本国排名: %@",local_rank_name];
+    
     self.hotView.hidden = (item.hot == 0);
     
     CGFloat addressWidth = [item.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;

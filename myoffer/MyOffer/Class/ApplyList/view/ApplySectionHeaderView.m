@@ -79,10 +79,10 @@
         [self.bgView addSubview:self.LogoImageView];
     
          //学校名称
-        self.nameLab =[self getLabelWithFontSize:XPERCENT * 15 andTextColor:XCOLOR_BLACK];
+        self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
         
          //学校英文名
-        self.official_nameLab =[self getLabelWithFontSize:XPERCENT * 11  andTextColor:XCOLOR_BLACK];
+        self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
         self.official_nameLab.numberOfLines = 2;
         self.official_nameLab.clipsToBounds = YES;
@@ -96,12 +96,12 @@
         //地理位置
         self.address_detail_TF = [[UITextField alloc] init];
         self.address_detail_TF.textColor = XCOLOR_DARKGRAY;
-        self.address_detail_TF.font = FontWithSize(XPERCENT * 11);
+        self.address_detail_TF.font = FontWithSize(Uni_address_FontSize);
         self.address_detail_TF.userInteractionEnabled = NO;
         [self.bgView addSubview:self.address_detail_TF];
         
         //排名
-        self.RankLabel =[self getLabelWithFontSize:XPERCENT * 11  andTextColor:XCOLOR_DARKGRAY];
+        self.RankLabel =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_DARKGRAY];
         
         
         //**号背景
@@ -179,7 +179,13 @@
     self.address_detail_TF.frame = uniFrame.address_detailFrame;
     self.address_detail_TF.text = university.address_detail;
    
+    CGFloat addressWidth = [university.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     
+    if (addressWidth > (uniFrame.address_detailFrame.size.width - 30)) {
+        
+         self.address_detail_TF.text = university.address_short;
+        
+    }
     
     self.RankLabel.frame = uniFrame.RankFrame;
     
@@ -187,17 +193,39 @@
     
     self.StarBackgroud.frame = uniFrame.starBgFrame;
 
+    
+    
+    if ([self.optionOrderBy isEqualToString:RANKQS]) {
+        
+        NSString   *rankStr01 = university.ranking_qs.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
+        self.RankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
+        
+        return;
+    }
+    
+    
     if (self.isStart) {
         
         self.RankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        
         NSInteger  StarCount  = university.ranking_ti.integerValue;
        
+        if (StarCount == DefaultNumber) {
+            
+             self.RankLabel.text = @"本国排名：暂无排名";
+
+            return;
+        }
+        
+        
         for (NSInteger i =0; i < self.StarBackgroud.subviews.count; i++) {
             
             UIImageView *imageV = (UIImageView *)self.StarBackgroud.subviews[i];
             
             imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
         }
+        
+        
         for (NSInteger i =0; i < StarCount; i++) {
             
             UIImageView *mv = (UIImageView *)self.StarBackgroud.subviews[i];
@@ -205,6 +233,7 @@
             mv.hidden = NO;
             
         }
+        
         for (NSInteger i = StarCount ; i < self.StarBackgroud.subviews.count; i++) {
             
             UIImageView *mv = (UIImageView *)self.StarBackgroud.subviews[i];
@@ -214,7 +243,8 @@
         
         
     }else{
-             NSString   *rankStr01 = university.ranking_ti.intValue == 99999 ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
+        
+            NSString   *rankStr01 = university.ranking_ti.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
             self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
     }
@@ -236,10 +266,17 @@
         self.isSelected = !self.isSelected ;
     }
     
+    //申请意向页面
     if (self.actionBlock) {
         
         self.actionBlock(sender);
         
+    }
+    
+    //用于搜索结果页面
+    if (self.newActionBlock) {
+        
+        self.newActionBlock(self.uniFrame.uni.NO_id);
     }
     
 }
@@ -274,21 +311,23 @@
 }
 
 
-
-
+-(void)addButtonHiden
+{
+    self.addSubjectBtn.hidden = YES;
+}
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     
-    if (self.address_detail_TF.text) {
-        CGFloat Leftx = 0;
-        CGFloat Lefty = 0;
-        CGFloat Lefth = CGRectGetHeight(self.RankLabel.frame);
-        CGFloat Leftw = Lefth;
-        UIImageView *item = (UIImageView *)self.anchorView.subviews.firstObject;
-        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
-    }
+//    if (self.address_detail_TF.text) {
+//        CGFloat Leftx = 0;
+//        CGFloat Lefty = 0;
+//        CGFloat Lefth = CGRectGetHeight(self.RankLabel.frame);
+//        CGFloat Leftw = Lefth;
+//        UIImageView *item = (UIImageView *)self.anchorView.subviews.firstObject;
+//        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
+//    }
     
     CGFloat SBx = self.isEdit ? 50 : 0;
     self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, University_HEIGHT);
