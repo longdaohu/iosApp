@@ -1,19 +1,19 @@
 //
-//  UniversityFrameApplyObj.m
+//  UniversityFrameNew.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/4/5.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 
-@implementation UniversityFrameApplyObj
+@implementation UniversityFrameNew
 
 +(instancetype)universityFrameWithUni:(UniversityItemNew *)uni{
 
-    UniversityFrameApplyObj *uniFrame = [[UniversityFrameApplyObj alloc] init];
+    UniversityFrameNew *uniFrame = [[UniversityFrameNew alloc] init];
 
     uniFrame.uni = uni;
     

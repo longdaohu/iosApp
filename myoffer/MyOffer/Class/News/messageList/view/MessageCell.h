@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class XWGJMessageFrame;
-@interface XWGJMessageTableViewCell : UITableViewCell
+@interface MessageCell : UITableViewCell
 @property(nonatomic,strong)XWGJMessageFrame *messageFrame;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 

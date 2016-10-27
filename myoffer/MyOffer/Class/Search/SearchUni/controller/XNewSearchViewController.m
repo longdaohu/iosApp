@@ -32,7 +32,7 @@ typedef enum {
 #import "UniversityCourseViewController.h"
 #import "searchSectionFootView.h"
 #import "FilterContentFrame.h"
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 #import "ApplySectionHeaderView.h"
 
@@ -702,7 +702,7 @@ typedef enum {
          //添加数据源
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
            
-             UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+             UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
   
              [self.UniversityList addObject:uniFrame];
              
@@ -845,7 +845,7 @@ typedef enum {
         
         XWeakSelf
         
-        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+        UniversityFrameNew *uniFrame = self.UniversityList[section];
         ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
         [sectionView addButtonHiden];
         sectionView.optionOrderBy = self.RankType;
@@ -871,7 +871,7 @@ typedef enum {
 {
     XWeakSelf;
     
-    UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+    UniversityFrameNew *uniFrame = self.UniversityList[section];
     if (uniFrame.uni.courses.count) {
         searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
         sectionFooter.uniObj = uniFrame.uni;
@@ -905,7 +905,7 @@ typedef enum {
         
     }else{
         
-        UniversityFrameApplyObj *uniFrame = self.UniversityList[indexPath.section];
+        UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         
         return  uniFrame.uni.courses.count > 0 ? 70 : 0;
     }
@@ -921,7 +921,7 @@ typedef enum {
     }else{
         
 
-        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+        UniversityFrameNew *uniFrame = self.UniversityList[section];
         
         if ( uniFrame.uni.courses.count) {
             
@@ -961,7 +961,7 @@ typedef enum {
     }else{
         
         
-        UniversityFrameApplyObj *uniFrame = self.UniversityList[section];
+        UniversityFrameNew *uniFrame = self.UniversityList[section];
         
         if (uniFrame.uni.courses.count > 0) {
              //只显示部分数据
@@ -1031,7 +1031,7 @@ typedef enum {
         
         
         NewSearchRstTableViewCell *cell =[NewSearchRstTableViewCell  cellWithTableView:tableView];
-        UniversityFrameApplyObj *uniFrame = self.UniversityList[indexPath.section];
+        UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         NSDictionary *itemInfo =uniFrame.uni.courses[indexPath.row];
         if (uniFrame.uni.courses.count > 0) {
             

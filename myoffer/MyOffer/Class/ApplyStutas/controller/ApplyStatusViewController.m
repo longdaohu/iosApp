@@ -188,7 +188,6 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
     UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
     ApplyStatusRecordGroup *group      = self.Record_Groups[section];
     uni_cell.userInteractionEnabled = NO;

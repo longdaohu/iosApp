@@ -13,7 +13,7 @@
 #import "UniGroupOneView.h"
 #import "HomeSectionHeaderView.h"
 #import "NewsItem.h"
-#import "XWGJMessageTableViewCell.h"
+#import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "UniversityItemNew.h"
 #import "UniversityCell.h"
@@ -404,7 +404,7 @@ typedef enum {
         
     }else if(indexPath.section == 1){
     
-        XWGJMessageTableViewCell *news_cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
+        MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
         news_cell.messageFrame =  group.items[indexPath.row];
          return news_cell;
         

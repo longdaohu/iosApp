@@ -340,7 +340,7 @@
 		AEA24BC81D5B264300DD7939 /* XWGJMessageCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB51D5B264300DD7939 /* XWGJMessageCategoryItem.m */; };
 		AEA24BC91D5B264300DD7939 /* XWGJMessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB71D5B264300DD7939 /* XWGJMessageFrame.m */; };
 		AEA24BCA1D5B264300DD7939 /* XWGJMessageButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBA1D5B264300DD7939 /* XWGJMessageButtonItemView.m */; };
-		AEA24BCB1D5B264300DD7939 /* XWGJMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBC1D5B264300DD7939 /* XWGJMessageTableViewCell.m */; };
+		AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBC1D5B264300DD7939 /* MessageCell.m */; };
 		AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */; };
 		AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BCF1D5B266A00DD7939 /* ActionTableViewController.m */; };
 		AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BD11D5B266A00DD7939 /* DoneButton.m */; };
@@ -737,7 +737,7 @@
 		AEA2496C1D5B215300DD7939 /* ApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyViewController.h; sourceTree = "<group>"; };
 		AEA2496D1D5B215300DD7939 /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
 		AEA2496E1D5B215300DD7939 /* ApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyViewController.xib; sourceTree = "<group>"; };
-		AEA249701D5B215300DD7939 /* UniversityFrameApplyObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFrameApplyObj.h; sourceTree = "<group>"; };
+		AEA249701D5B215300DD7939 /* UniversityFrameNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFrameNew.h; sourceTree = "<group>"; };
 		AEA249711D5B215300DD7939 /* UniversityFrameApplyObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameApplyObj.m; sourceTree = "<group>"; };
 		AEA249731D5B215300DD7939 /* ApplySectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySectionHeaderView.h; sourceTree = "<group>"; };
 		AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySectionHeaderView.m; sourceTree = "<group>"; };
@@ -1006,8 +1006,8 @@
 		AEA24BB71D5B264300DD7939 /* XWGJMessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageFrame.m; sourceTree = "<group>"; };
 		AEA24BB91D5B264300DD7939 /* XWGJMessageButtonItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageButtonItemView.h; sourceTree = "<group>"; };
 		AEA24BBA1D5B264300DD7939 /* XWGJMessageButtonItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageButtonItemView.m; sourceTree = "<group>"; };
-		AEA24BBB1D5B264300DD7939 /* XWGJMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageTableViewCell.h; sourceTree = "<group>"; };
-		AEA24BBC1D5B264300DD7939 /* XWGJMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageTableViewCell.m; sourceTree = "<group>"; };
+		AEA24BBB1D5B264300DD7939 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		AEA24BBC1D5B264300DD7939 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		AEA24BBD1D5B264300DD7939 /* XWGJNODATASHOWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJNODATASHOWView.h; sourceTree = "<group>"; };
 		AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJNODATASHOWView.m; sourceTree = "<group>"; };
 		AEA24BCE1D5B266A00DD7939 /* ActionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTableViewController.h; sourceTree = "<group>"; };
@@ -1902,7 +1902,7 @@
 		AEA2496F1D5B215300DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249701D5B215300DD7939 /* UniversityFrameApplyObj.h */,
+				AEA249701D5B215300DD7939 /* UniversityFrameNew.h */,
 				AEA249711D5B215300DD7939 /* UniversityFrameApplyObj.m */,
 			);
 			path = model;
@@ -2808,8 +2808,8 @@
 			children = (
 				AEA24BB91D5B264300DD7939 /* XWGJMessageButtonItemView.h */,
 				AEA24BBA1D5B264300DD7939 /* XWGJMessageButtonItemView.m */,
-				AEA24BBB1D5B264300DD7939 /* XWGJMessageTableViewCell.h */,
-				AEA24BBC1D5B264300DD7939 /* XWGJMessageTableViewCell.m */,
+				AEA24BBB1D5B264300DD7939 /* MessageCell.h */,
+				AEA24BBC1D5B264300DD7939 /* MessageCell.m */,
 				AEA24BBD1D5B264300DD7939 /* XWGJNODATASHOWView.h */,
 				AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */,
 			);
@@ -3524,7 +3524,7 @@
 				AEA24B801D5B25E000DD7939 /* OptionItem.m in Sources */,
 				AEA24A081D5B224E00DD7939 /* CatigoryRankCell.m in Sources */,
 				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
-				AEA24BCB1D5B264300DD7939 /* XWGJMessageTableViewCell.m in Sources */,
+				AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */,
 				AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */,
 				463E3AAC1B23105F00E0BAF8 /* KDImageCache.m in Sources */,
 				AEA24AA31D5B23F600DD7939 /* GongLueTableViewCell.m in Sources */,

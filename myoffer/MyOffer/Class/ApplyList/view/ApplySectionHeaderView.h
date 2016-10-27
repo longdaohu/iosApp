@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UniversityFrameApplyObj;
+@class UniversityFrameNew;
 
 typedef void(^sectionBlock)(UIButton *);
 typedef void(^newSectionBlock)(NSString *);
 @interface ApplySectionHeaderView : UITableViewHeaderFooterView
-@property(nonatomic,strong)UniversityFrameApplyObj *uniFrame;
+@property(nonatomic,strong)UniversityFrameNew *uniFrame;
 @property(nonatomic,assign)BOOL isEdit;
 @property(nonatomic,copy)sectionBlock actionBlock;
 @property(nonatomic,copy)newSectionBlock newActionBlock;

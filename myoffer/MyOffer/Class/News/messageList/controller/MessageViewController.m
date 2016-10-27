@@ -7,7 +7,7 @@
 //
 #define REQUEST_SIZE 10
 #import "MessageViewController.h"
-#import "XWGJMessageTableViewCell.h"
+#import "MessageCell.h"
 #import "XWGJMessageButtonItemView.h"
 #import "XWGJMessageCategoryItem.h"
 #import "MessageDetaillViewController.h"
@@ -584,7 +584,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XWGJMessageTableViewCell *cell =[XWGJMessageTableViewCell cellWithTableView:tableView];
+    MessageCell *cell =[MessageCell cellWithTableView:tableView];
     cell.messageFrame = self.CurrentArr[indexPath.row];
     return cell;
 }

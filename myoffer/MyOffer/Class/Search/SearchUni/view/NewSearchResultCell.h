@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 
 @interface NewSearchResultCell : UITableViewCell
 @property(nonatomic,copy)NSString *optionOrderBy;         //显示排名方式
-@property(nonatomic,strong)UniversityFrameApplyObj *uni_Frame;  //传入学校信息字典
-@property(nonatomic,strong)NSDictionary *UniversityInfo;  //传入学校信息字典
+@property(nonatomic,strong)UniversityFrameNew *uni_Frame;  //传入学校信息字典
 @property(nonatomic,assign)BOOL isStart;
 +(instancetype)CreateCellWithTableView:(UITableView *)tableView;
+
 
 @end

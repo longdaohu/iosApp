@@ -1,5 +1,5 @@
 //
-//  UniversityFrameApplyObj.h
+//  UniversityFrameNew.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/4/5.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class UniversityItemNew;
-@interface UniversityFrameApplyObj : NSObject
+@interface UniversityFrameNew : NSObject
 @property(nonatomic,strong)UniversityItemNew *uni;
 @property(nonatomic,assign)CGRect SectionBackgroudFrame;
 @property(nonatomic,assign)CGRect LogoFrame;

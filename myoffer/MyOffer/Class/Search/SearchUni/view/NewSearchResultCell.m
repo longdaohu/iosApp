@@ -121,7 +121,7 @@
     return Lab;
 }
 
--(void)setUni_Frame:(UniversityFrameApplyObj *)uni_Frame{
+-(void)setUni_Frame:(UniversityFrameNew *)uni_Frame{
 
     _uni_Frame  = uni_Frame;
     

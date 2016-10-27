@@ -10,7 +10,7 @@
 
 #import "UILabel+ResizeHelper.h"
 #import "ApplySectionHeaderView.h"
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 
 
@@ -149,7 +149,7 @@
 
 
 
--(void)setUniFrame:(UniversityFrameApplyObj *)uniFrame
+-(void)setUniFrame:(UniversityFrameNew *)uniFrame
 {
     _uniFrame = uniFrame;
     

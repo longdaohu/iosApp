@@ -80,6 +80,7 @@
         self.tapView = [[UIView alloc] init];
         [self.bgView addSubview:self.tapView];
         
+        
         for (NSInteger i = 0 ; i < 4; i++) {
             
             UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
@@ -118,6 +119,9 @@
    
     self.localLab.frame      = uniFrame.LocalFrame;
     self.localLab.text       = unversity.address_detail;
+    
+    
+    [self.tapView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSArray *tag_temps =  unversity.tags;
  

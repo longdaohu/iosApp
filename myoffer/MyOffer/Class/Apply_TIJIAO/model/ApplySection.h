@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@class  UniversityFrameApplyObj;
+@class  UniversityFrameNew;
 
 @interface ApplySection : NSObject
 @property(nonatomic,strong)NSDictionary *universityInfo;
-@property(nonatomic,strong) UniversityFrameApplyObj *uniFrame;
+@property(nonatomic,strong) UniversityFrameNew *uniFrame;
 @property(nonatomic,strong)NSMutableArray *subjects;
 
 + (instancetype)applySectionWithDictionary:(NSDictionary *)dict;

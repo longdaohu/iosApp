@@ -9,7 +9,7 @@
 #import "SearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "XWGJnodataView.h"
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 
 @interface SearchResultViewController () {
@@ -238,7 +238,7 @@
                  
                  [_resultIDSet addObject:uid];
                  
-                 UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
                  
                  [_result addObject:uniFrame];
    
@@ -305,7 +305,7 @@
     NewSearchResultCell *cell =[NewSearchResultCell CreateCellWithTableView:tableView];
     cell.optionOrderBy = _orderBy;
  
-    UniversityFrameApplyObj  *uniFrame = _result[indexPath.row];
+    UniversityFrameNew  *uniFrame = _result[indexPath.row];
     UniversityItemNew *uni =uniFrame.uni;
     cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
@@ -318,7 +318,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UniversityFrameApplyObj *uniFrame =  _result[indexPath.row];
+    UniversityFrameNew *uniFrame =  _result[indexPath.row];
     UniversityItemNew *uniObj = uniFrame.uni;
     [self.navigationController pushUniversityViewControllerWithID:uniObj.NO_id animated:YES];
 }

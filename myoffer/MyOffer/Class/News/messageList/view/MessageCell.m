@@ -6,11 +6,11 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJMessageTableViewCell.h"
+#import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
 
-@interface XWGJMessageTableViewCell ()
+@interface MessageCell ()
 //图片
 @property(nonatomic,strong)UIImageView *Logo;
 //消息头
@@ -23,15 +23,15 @@
 
 @end
 
-@implementation XWGJMessageTableViewCell
+@implementation MessageCell
 
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
     
-    XWGJMessageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
+    MessageCell *cell =[tableView dequeueReusableCellWithIdentifier:@"massage"];
     if (!cell) {
         
-        cell =[[XWGJMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
+        cell =[[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"massage"];
     }
 
     return cell;

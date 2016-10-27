@@ -10,7 +10,7 @@
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
 #import "XWGJnodataView.h"
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "UniversityItemNew.h"
 
 
@@ -158,7 +158,7 @@
          
           for (NSDictionary *obj in response[@"universities"]) {
               
-              UniversityFrameApplyObj  *uniFrame = [UniversityFrameApplyObj universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
+              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityItemNew mj_objectWithKeyValues:obj]];
               
               NSInteger index =  [obj[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
               
@@ -238,7 +238,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
      NSArray *temp = self.Restults[indexPath.section];
-     UniversityFrameApplyObj   *uni_Frame = temp[indexPath.row];
+     UniversityFrameNew   *uni_Frame = temp[indexPath.row];
      UniversityItemNew *university = uni_Frame.uni;
      [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     

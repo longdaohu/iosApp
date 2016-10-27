@@ -11,7 +11,7 @@
 #import "ApplySection.h"
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
-#import "UniversityFrameApplyObj.h"
+#import "UniversityFrameNew.h"
 #import "ApplyTableViewCell.h"
 #define SECTIONFOOTERHEIGHT  10
 
