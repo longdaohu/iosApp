@@ -60,7 +60,7 @@
         [self.contentView addSubview:self.TagView];
         
         self.TagLabel =[[UILabel alloc] init];
-        self.TagLabel.font =[UIFont systemFontOfSize:UNIVERISITYTITLEFONT];
+        self.TagLabel.font =[UIFont systemFontOfSize:Uni_subject_FontSize];
         [self.contentView addSubview:self.TagLabel];
         
         self.TagBackground =[[UIView alloc] init];
@@ -189,7 +189,7 @@
         
         NSString *tag =  MessageFrame.MessageDetail[@"tags"][i];
         
-        CGSize tagSize = [tag KD_sizeWithAttributeFont:[UIFont systemFontOfSize:UNIVERISITYTITLEFONT]];
+        CGSize tagSize = [tag KD_sizeWithAttributeFont:[UIFont systemFontOfSize:Uni_subject_FontSize]];
         
         CGFloat ty = 0;
         CGFloat tw = tagSize.width + 15;
@@ -198,7 +198,7 @@
         CGFloat tx = self.TagBackground.bounds.size.width - self.tagx;
         
         UILabel *tagLabel =[[UILabel alloc] init];
-        tagLabel.font = [UIFont systemFontOfSize:UNIVERISITYTITLEFONT];
+        tagLabel.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
         tagLabel.frame = CGRectMake(tx, ty, tw, th);
         tagLabel.text = tag;
         tagLabel.textColor =XCOLOR_WHITE;

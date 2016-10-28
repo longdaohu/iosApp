@@ -179,8 +179,7 @@
         
         [self hotUniverstiyWithResponse:(NSArray *)response];
         
-        [self.TableView reloadData];
-        
+        [self.TableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationFade];
     }];
 
 }
@@ -196,7 +195,7 @@
         
         [self hotCityWithResponse:response];
         
-        [self.TableView reloadData];
+        [self.TableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         
     }];
 }
@@ -211,7 +210,7 @@
         
         [self hotArticleWithResponse:(NSArray *)response];
         
-        [self.TableView reloadData];
+        [self.TableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
     }];
     
 }
@@ -222,6 +221,7 @@
     if (refresh) {
         
         UniDetailGroup *groupthree = self.groups[index];
+        
         groupthree.items = nil;
     }
     

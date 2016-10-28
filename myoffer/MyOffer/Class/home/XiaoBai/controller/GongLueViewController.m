@@ -166,7 +166,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     
-    return University_HEIGHT;
+    return Uni_Cell_Height;
 }
 
 

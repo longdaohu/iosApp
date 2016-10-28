@@ -9,21 +9,32 @@
 #import <Foundation/Foundation.h>
 @class UniversityNew;
 @interface UniversityFrameNew : NSObject
-@property(nonatomic,strong)UniversityNew *uni;
+@property(nonatomic,strong)UniversityNew *universtiy;
 @property(nonatomic,assign)CGRect SectionBackgroudFrame;
+//logo
 @property(nonatomic,assign)CGRect LogoFrame;
+//学校名称
 @property(nonatomic,assign)CGRect nameFrame;
+//英文名称
 @property(nonatomic,assign)CGRect official_nameFrame;
+//地址
 @property(nonatomic,assign)CGRect address_detailFrame;
+//地址图标
 @property(nonatomic,assign)CGRect anchorFrame;
+//排名
 @property(nonatomic,assign)CGRect RankFrame;
+//添加按钮
 @property(nonatomic,assign)CGRect AddButtonFrame;
+//删除按钮
 @property(nonatomic,assign)CGRect CancelButtonFrame;
+//显示星星
 @property(nonatomic,assign)CGRect starBgFrame;
+//星号Frame
 @property(nonatomic,strong)NSArray *starFrames;
+//推荐
 @property(nonatomic,assign)CGRect hotFrame;
 
-+(instancetype)universityFrameWithUni:(UniversityNew *)uni;
++(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy;
 
 @end
 

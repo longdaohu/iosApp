@@ -238,7 +238,7 @@
                  
                  [_resultIDSet addObject:uid];
                  
-                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityNew mj_objectWithKeyValues:obj]];
+                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
                  
                  [_result addObject:uniFrame];
    
@@ -288,7 +288,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     
-    return University_HEIGHT;
+    return Uni_Cell_Height;
     
 }
 
@@ -306,7 +306,7 @@
     cell.optionOrderBy = _orderBy;
  
     UniversityFrameNew  *uniFrame = _result[indexPath.row];
-    UniversityNew *uni =uniFrame.uni;
+    UniversityNew *uni =uniFrame.universtiy;
     cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
@@ -319,7 +319,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityFrameNew *uniFrame =  _result[indexPath.row];
-    UniversityNew *uniObj = uniFrame.uni;
+    UniversityNew *uniObj = uniFrame.universtiy;
     [self.navigationController pushUniversityViewControllerWithID:uniObj.NO_id animated:YES];
 }
 

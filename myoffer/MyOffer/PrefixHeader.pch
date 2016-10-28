@@ -11,7 +11,7 @@
 #define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
 #define XWeakSelf  __weak typeof(self) weakSelf = self;
 #define XImage(imageName)     [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
-#define UNIVERISITYTITLEFONT  15.0
+#define Uni_subject_FontSize  15.0
 #define UNIVERISITYSUBTITLEFONT  12.0
 #define UNIVERISITYRANKFONT  12.0
 #define UNIVERISITYLOCALFONT  12.0
@@ -59,7 +59,7 @@
 #define KEY_SUBJECT  @"subject"
 #define FontWithSize(size)  [UIFont systemFontOfSize:size]
 #define FONTSIZE(size)   XScreenWidth > 375 ? size + 1 :size
-#define University_HEIGHT  100 + (XScreenWidth - 320) * 0.15
+#define Uni_Cell_Height  100 + (XScreenWidth - 320) * 0.15
 #define Uni_address_FontSize  KDUtilSize(12)
 #define Uni_rank_FontSize  KDUtilSize(12)
 #define Uni_subtitle_FontSize  KDUtilSize(12)

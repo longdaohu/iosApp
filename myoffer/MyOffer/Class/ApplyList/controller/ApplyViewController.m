@@ -32,23 +32,12 @@
 @property(nonatomic,strong)NSMutableArray *cancelSetions;        //删除分区数组
 @property(nonatomic,strong)NSMutableArray *cancelindexPathes;    //删除cell对就的indexpath数组
 @property(nonatomic,copy)NSString *rightButtonTitle;
-@property(nonatomic,strong)UIButton *cancelBottomButton;         //删除按钮
-@property(nonatomic,assign)BOOL haveUp;
+//删除按钮
+@property(nonatomic,strong)UIButton *cancelBottomButton;
 @property(nonatomic,strong)XWGJnodataView *NDataView;
 @end
 
 @implementation ApplyViewController
-- (instancetype)init {
-    
-    self = [super init];
-    if (self) {
-        
-        self.hidesBottomBarWhenPushed = YES;
-    }
-    return self;
-}
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -103,6 +92,7 @@
     [super viewDidLoad];
     
     [self makeUI];
+    
     
 }
 
@@ -166,7 +156,7 @@
  */
 -(void)checkApplyStatus
 {
-    [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSString *state = response[@"state"];
         
@@ -211,6 +201,7 @@
     }
     
     _waitingTableView.tableFooterView     = [[UIView alloc] init];
+    
     _waitingTableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
 }
 
@@ -247,7 +238,6 @@
         
         [self commitCancelselectCell];
         
-        
     }else{
         
         if (self.cancelSetions.count > 0) {
@@ -278,6 +268,7 @@
                                   
                                   
                                   [weakSelf.cancelindexPathes removeAllObjects];
+                                  
                                   [weakSelf.cancelCourseList  removeAllObjects];
                                   
                                   if (weakSelf.cancelSetions > 0) {
@@ -348,21 +339,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
     
- 
-    
-    ApplySection *sectionM = self.sectionGroups[indexPath.section];
-    Applycourse *subject = sectionM.subjects[indexPath.row];
+    ApplySection *group = self.sectionGroups[indexPath.section];
+    Applycourse *subject = group.subjects[indexPath.row];
     ApplyTableViewCell *cell =[ApplyTableViewCell cellWithTableView:tableView];
    
     cell.title =  subject.official_name;
     cell.containt_select = [self.courseSelecteds  containsObject:subject.courseID];
-    
     BOOL edit =  [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
     cell.Edit = edit;
     
     if (edit) {
-        
         cell.containt = [self.cancelCourseList containsObject:subject.courseID];
     }
     
@@ -376,7 +364,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  University_HEIGHT;
+    return  Uni_Cell_Height;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -384,13 +372,13 @@
     
     XWeakSelf
     
-    ApplySection *sectionModal = self.sectionGroups[section];
-    NSString *universityID = sectionModal.universityInfo[@"_id"];
+    ApplySection *group = self.sectionGroups[section];
+    NSString *uni_ID = group.universityInfo[@"_id"];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
-    sectionView.isEdit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
-    sectionView.isSelected = [self.cancelUniversityList containsObject:universityID];
-    sectionView.uniFrame = sectionModal.uniFrame;
+    sectionView.edit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
+    sectionView.isSelected = [self.cancelUniversityList containsObject:uni_ID];
+    sectionView.uniFrame = group.uniFrame;
     sectionView.actionBlock = ^(UIButton *sender){
         
         if (sender.tag == 10) {
@@ -400,9 +388,8 @@
                 
                 return;
             }
-
             
-            UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:universityID];
+            UniversityCourseViewController *vc = [[UniversityCourseViewController alloc] initWithUniversityID:uni_ID];
             
             [weakSelf.navigationController pushViewController:vc animated:YES];
             
@@ -420,11 +407,11 @@
                 [weakSelf.cancelSetions removeObject:sectionStr];
             }
             
-            NSArray *sujectItems = sectionModal.subjects;
+            NSArray *sujectItems = group.subjects;
             
-            if (![weakSelf.cancelUniversityList containsObject:universityID]) {
+            if (![weakSelf.cancelUniversityList containsObject:uni_ID]) {
                 
-                [weakSelf.cancelUniversityList addObject:universityID];
+                [weakSelf.cancelUniversityList addObject:uni_ID];
                 
                 for (NSInteger row = sujectItems.count - 1; row >= 0; row--) {
                     
@@ -443,7 +430,7 @@
                 
             }else{
                 
-                [weakSelf.cancelUniversityList removeObject:universityID];
+                [weakSelf.cancelUniversityList removeObject:uni_ID];
                 
                 
                 for (NSInteger row = 0; row < sujectItems.count; row++) {
@@ -472,12 +459,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ApplySection *sectionModal = self.sectionGroups[indexPath.section];
-    Applycourse *subject = sectionModal.subjects[indexPath.row];
     
-    NSDictionary *universityInfo = sectionModal.universityInfo;
+    ApplySection *group = self.sectionGroups[indexPath.section];
+    Applycourse *subject = group.subjects[indexPath.row];
+    NSDictionary *uni_Info = group.universityInfo;
     
-    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")])
+     if ([self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")])
     {
         
         if([self.cancelindexPathes containsObject:indexPath]){
@@ -496,17 +483,20 @@
             
             [self.cancelCourseList removeObject:subject.courseID];
             
-            cell.iconView.image = [UIImage imageNamed:@"check-icons"];
+            [cell cellIsSelected:NO];
+            
         }else{
             
             [self.cancelCourseList addObject:subject.courseID];
-            cell.iconView.image = [UIImage imageNamed:@"check-icons-yes"];
-        }
-        
-        
-        if ([self.cancelUniversityList containsObject:universityInfo[@"_id"]]) {
             
-            [self.cancelUniversityList removeObject:universityInfo[@"_id"]];
+            [cell cellIsSelected:YES];
+
+         }
+        
+        
+        if ([self.cancelUniversityList containsObject:uni_Info[@"_id"]]) {
+            
+            [self.cancelUniversityList removeObject:uni_Info[@"_id"]];
             
             [self.cancelSetions removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.section]];
             
@@ -714,6 +704,7 @@
         AlerMessage(GDLocalizedString(@"ApplicationList-please"));
         
     }else{
+        
         UIAlertView *aler =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"ApplicationList-comfig") delegate:self cancelButtonTitle:GDLocalizedString(@"NetRequest-OK") otherButtonTitles:GDLocalizedString(@"Potocol-Cancel"), nil];
         [aler show];
     }
@@ -725,6 +716,7 @@
 {
     NSString *cancelTitle =  GDLocalizedString(@"Me-007");
     NSString *editTitle = GDLocalizedString(@"ApplicationList-Edit");
+    
     if ([sender.title isEqualToString:editTitle] ) {
         
         sender.title = cancelTitle;
@@ -732,6 +724,7 @@
         [self bottomUp:NO];
         
     }else{
+        
         sender.title = editTitle;
         self.rightButtonTitle =  sender.title;
         [self.cancelCourseList removeAllObjects];

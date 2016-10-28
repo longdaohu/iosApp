@@ -702,7 +702,7 @@ typedef enum {
          //添加数据源
          [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
            
-             UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityNew mj_objectWithKeyValues:obj]];
+             UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
   
              [self.UniversityList addObject:uniFrame];
              
@@ -828,7 +828,7 @@ typedef enum {
     
     if (tableView == self.ResultTableView) {
         
-        return University_HEIGHT;
+        return Uni_Cell_Height;
         
     }else{
         
@@ -872,9 +872,9 @@ typedef enum {
     XWeakSelf;
     
     UniversityFrameNew *uniFrame = self.UniversityList[section];
-    if (uniFrame.uni.courses.count) {
+    if (uniFrame.universtiy.courses.count) {
         searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
-        sectionFooter.uniObj = uniFrame.uni;
+        sectionFooter.uniObj = uniFrame.universtiy;
         sectionFooter.actionBlock = ^(NSString *universityID){
             
             [weakSelf.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:universityID] animated:YES];
@@ -907,7 +907,7 @@ typedef enum {
         
         UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         
-        return  uniFrame.uni.courses.count > 0 ? 70 : 0;
+        return  uniFrame.universtiy.courses.count > 0 ? 70 : 0;
     }
     
 }
@@ -923,7 +923,7 @@ typedef enum {
 
         UniversityFrameNew *uniFrame = self.UniversityList[section];
         
-        if ( uniFrame.uni.courses.count) {
+        if ( uniFrame.universtiy.courses.count) {
             
             return 60;
             
@@ -963,9 +963,9 @@ typedef enum {
         
         UniversityFrameNew *uniFrame = self.UniversityList[section];
         
-        if (uniFrame.uni.courses.count > 0) {
+        if (uniFrame.universtiy.courses.count > 0) {
              //只显示部分数据
-            return  uniFrame.uni.courses.count > 3 ? 3 : uniFrame.uni.courses.count;
+            return  uniFrame.universtiy.courses.count > 3 ? 3 : uniFrame.universtiy.courses.count;
             
         }else{
             
@@ -1032,8 +1032,8 @@ typedef enum {
         
         NewSearchRstTableViewCell *cell =[NewSearchRstTableViewCell  cellWithTableView:tableView];
         UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
-        NSDictionary *itemInfo =uniFrame.uni.courses[indexPath.row];
-        if (uniFrame.uni.courses.count > 0) {
+        NSDictionary *itemInfo =uniFrame.universtiy.courses[indexPath.row];
+        if (uniFrame.universtiy.courses.count > 0) {
             
             cell.itemInfo = itemInfo;
             

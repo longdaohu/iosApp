@@ -17,7 +17,7 @@
  
     CGFloat logox = 40;
     CGFloat logoy = ITEM_MARGIN;
-    CGFloat logoh = University_HEIGHT - 2 * ITEM_MARGIN;
+    CGFloat logoh = Uni_Cell_Height - 2 * ITEM_MARGIN;
     CGFloat logow = logoh;
     self.LogoFrame = CGRectMake(logox, logoy, logow, logoh);
     

@@ -7,14 +7,14 @@
 // 申请状态
 
 #import "ApplyStatusViewController.h"
-#import "ApplyStatusCell.h"
 #import "ApplyStatusRecord.h"
 #import "ApplyStatusRecordGroup.h"
 #import "UniversityNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
+#import "ApplyStatusCell.h"
 
-#define STATUSPAGE @"page申请状态"
+ #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -177,7 +177,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  University_HEIGHT;
+    return  Uni_Cell_Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

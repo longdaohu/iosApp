@@ -35,7 +35,7 @@
         [self.contentView addSubview:self.IconView];
         
         self.SectionTitleLab =[[UILabel alloc] init];
-        self.SectionTitleLab.font = [UIFont systemFontOfSize:UNIVERISITYTITLEFONT];
+        self.SectionTitleLab.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
         self.SectionTitleLab.textColor = XCOLOR_LIGHTBLUE;
         [self.contentView addSubview:self.SectionTitleLab];
         

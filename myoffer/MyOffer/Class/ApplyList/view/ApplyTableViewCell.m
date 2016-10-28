@@ -9,8 +9,8 @@
 #import "ApplyTableViewCell.h"
 
 @interface ApplyTableViewCell ()
-//@property(nonatomic,strong)UIImageView *accessoryView;
 @property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UIImageView *iconView;
 @end
 
 @implementation ApplyTableViewCell
@@ -24,6 +24,7 @@
         cell =[[ApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"apply"];
       
         cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        
         [(UIImageView *)cell.accessoryView setContentMode:UIViewContentModeCenter];
     }
     return cell;
@@ -37,10 +38,9 @@
         self.iconView.contentMode = UIViewContentModeCenter;
         [self.contentView addSubview:self.iconView];
  
-        self.titleLab =[UILabel labelWithFontsize:KDUtilSize(UNIVERISITYTITLEFONT) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.titleLab =[UILabel labelWithFontsize:KDUtilSize(Uni_subject_FontSize) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         self.titleLab.numberOfLines = 2;
         [self.contentView addSubview:self.titleLab];
-        
         
     }
     
@@ -50,6 +50,7 @@
 -(void)setTitle:(NSString *)title
 {
     _title = title;
+    
     self.titleLab.text = title;
 }
 
@@ -62,7 +63,26 @@
         
         self.iconView.image = nil;
     }
-
+    
+    CGFloat iconX = ITEM_MARGIN;
+    CGFloat iconY = 0;
+    CGFloat iconW = self.Edit ? 34 : 0;
+    CGFloat iconH = self.contentView.bounds.size.height;
+    
+    CGFloat titleX = iconX + iconW  + 5;
+    CGFloat titleY = iconY;
+    CGFloat titleW = self.Edit ? XScreenWidth - titleX : XScreenWidth - titleX - 44;
+    CGFloat titleH = iconH;
+    
+//    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+  
+        self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
+        self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+        
+//    }];
+    
+    
+  
 }
 
 
@@ -73,9 +93,10 @@
     if (self.Edit) {
         
         [(UIImageView *)self.accessoryView setImage:nil];
-        NSString *iconName =self.containt ? @"check-icons-yes": @"check-icons";
-        self.iconView.image = [UIImage imageNamed:iconName];
+  
+        [self cellIsSelected:containt];
     }
+
 }
 
 -(void)setContaint_select:(BOOL)containt_select
@@ -92,20 +113,15 @@
 {
     [super layoutSubviews];
     
-    CGFloat iconX = ITEM_MARGIN;
-    CGFloat iconY = 0;
-    CGFloat iconW = self.Edit ? 34 : 0;
-    CGFloat iconH = self.contentView.bounds.size.height;
-    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     
-    
-    CGFloat titleX = CGRectGetMaxX(self.iconView.frame) + 5;
-    CGFloat titleY = iconY;
-    CGFloat titleW = self.Edit ? XScreenWidth - titleX : XScreenWidth - titleX - 44;
-    CGFloat titleH = iconH;
-    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+}
 
- 
+-(void)cellIsSelected:(BOOL)selected{
+
+    NSString *iconName = selected ?  @"check-icons-yes" : @"check-icons";
+    
+    self.iconView.image = [UIImage imageNamed:iconName];
+    
 }
 
 

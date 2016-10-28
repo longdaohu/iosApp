@@ -257,9 +257,8 @@
     
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
         
-        MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] init];
-        detail.hidesBottomBarWhenPushed = YES;
-        detail.NO_ID = StatusBarBannerNews.newsId;
+        MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] initWithMessageId:StatusBarBannerNews.newsId];
+//        detail.hidesBottomBarWhenPushed = YES;
         [weakSelf.navigationController pushViewController:detail animated:YES];
         
     };
@@ -555,7 +554,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 
-    return University_HEIGHT;
+    return Uni_Cell_Height;
 }
 
 
@@ -574,7 +573,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
  
-    return University_HEIGHT;
+    return Uni_Cell_Height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

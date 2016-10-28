@@ -13,13 +13,20 @@ typedef void(^sectionBlock)(UIButton *);
 typedef void(^newSectionBlock)(NSString *);
 @interface ApplySectionHeaderView : UITableViewHeaderFooterView
 @property(nonatomic,strong)UniversityFrameNew *uniFrame;
-@property(nonatomic,assign)BOOL isEdit;
+//tableView 是否处于编辑状态
+@property(nonatomic,assign,getter=isEdit)BOOL edit;
+//tableView处于非编辑状态时，cell内部按钮实现跳转
 @property(nonatomic,copy)sectionBlock actionBlock;
+//点击 cell 实现跳转到学校详情
 @property(nonatomic,copy)newSectionBlock newActionBlock;
+//tableView 处于编辑状态时，是否被选中
 @property(nonatomic,assign)BOOL isSelected;
+//排名方式
 @property(nonatomic,copy)NSString *optionOrderBy;
+//澳大利亚排名方式  是否显示为星号
 @property(nonatomic,assign)BOOL isStart;
 
 +(instancetype)sectionHeaderViewWithTableView:(UITableView *)tableView;
+//添加按钮隐藏
 -(void)addButtonHiden;
 @end

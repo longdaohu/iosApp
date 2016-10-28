@@ -366,7 +366,7 @@ typedef enum {
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
  
-    CGFloat rowHeight = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : University_HEIGHT;
+    CGFloat rowHeight = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : Uni_Cell_Height;
  
     return rowHeight;
 }

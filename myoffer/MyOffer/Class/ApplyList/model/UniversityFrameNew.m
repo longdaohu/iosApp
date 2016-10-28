@@ -11,36 +11,37 @@
 
 @implementation UniversityFrameNew
 
-+(instancetype)universityFrameWithUni:(UniversityNew *)uni{
-
++(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy{
+    
     UniversityFrameNew *uniFrame = [[UniversityFrameNew alloc] init];
-
-    uniFrame.uni = uni;
+    
+    uniFrame.universtiy = universtiy;
     
     return uniFrame;
 }
 
 
--(void)setUni:(UniversityNew *)uni{
+-(void)setUniverstiy:(UniversityNew *)universtiy{
 
-    _uni = uni;
+    _universtiy = universtiy;
+    
     
     CGFloat cancelx = ITEM_MARGIN;
     CGFloat cancely = 0;
-    CGFloat cancelh = University_HEIGHT;
+    CGFloat cancelh = Uni_Cell_Height;
     CGFloat cancelw = 34;
     self.CancelButtonFrame = CGRectMake(cancelx, cancely, cancelw, cancelh);
     
     CGFloat sectionBgx = 0;
     CGFloat sectionBgy = 0;
-    CGFloat sectionBgh = University_HEIGHT;
+    CGFloat sectionBgh = Uni_Cell_Height;
     CGFloat sectionBgw = XScreenWidth;
     self.SectionBackgroudFrame = CGRectMake(sectionBgx,sectionBgy, sectionBgw, sectionBgh);
     
     
     CGFloat logox = ITEM_MARGIN;
     CGFloat logoy = ITEM_MARGIN;
-    CGFloat logoh = University_HEIGHT - 2 * ITEM_MARGIN;
+    CGFloat logoh = Uni_Cell_Height - 2 * ITEM_MARGIN;
     CGFloat logow = logoh;
     self.LogoFrame = CGRectMake(logox, logoy, logow, logoh);
     
@@ -57,7 +58,7 @@
     CGFloat official_nameW = XScreenWidth - official_nameX - 45;
     CGFloat official_nameH =  Uni_subtitle_FontSize + 2;
     self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
-
+    
     
     CGFloat anthorX =  official_nameX;
     CGFloat anthorH =  Uni_rank_FontSize + 5;
@@ -94,7 +95,7 @@
     CGFloat addX = XScreenWidth - 40;
     CGFloat addY = 0;
     CGFloat addW = 30;
-    CGFloat addH = University_HEIGHT;
+    CGFloat addH = Uni_Cell_Height;
     self.AddButtonFrame = CGRectMake(addX,addY,addW,addH);
     
     
@@ -104,7 +105,10 @@
     CGFloat hotY = 0;
     self.hotFrame = CGRectMake(hotX,hotY, hotW,hotH);
 
+    
 }
+
+
 
 
 -(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{

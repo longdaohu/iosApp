@@ -125,7 +125,7 @@
 
     _uni_Frame  = uni_Frame;
     
-    UniversityNew *uniObj = uni_Frame.uni;
+    UniversityNew *uniObj = uni_Frame.universtiy;
     
     self.hotView.frame = uni_Frame.hotFrame;
     
@@ -140,7 +140,7 @@
     
     self.anchorView.frame = uni_Frame.anchorFrame;
     self.address_detail_TF.frame = uni_Frame.address_detailFrame;
-    self.address_detail_TF.text = uni_Frame.uni.address_detail;
+    self.address_detail_TF.text = uni_Frame.universtiy.address_detail;
     
     CGFloat addressWidth = [uniObj.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     
@@ -153,7 +153,7 @@
     self.rankLabel.frame = uni_Frame.RankFrame;
     self.starBackground.hidden = !self.isStart;
     
-    self.hotView.image = uni_Frame.uni.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
+    self.hotView.image = uni_Frame.universtiy.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
     
     if ([self.optionOrderBy isEqualToString:RANKQS]) {
         

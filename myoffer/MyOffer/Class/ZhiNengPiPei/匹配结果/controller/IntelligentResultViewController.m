@@ -391,7 +391,7 @@ typedef enum {
 #pragma mark —————— UITableViewData UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return University_HEIGHT;
+    return Uni_Cell_Height;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

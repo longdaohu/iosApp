@@ -8,7 +8,6 @@
 
 
 
-#import "UILabel+ResizeHelper.h"
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameNew.h"
 #import "UniversityNew.h"
@@ -35,7 +34,7 @@
 @property(nonatomic,strong) UIView *bgView;
 //**号背景
 @property(nonatomic,strong) UIView *StarBackgroud;
-
+//用于点击跳转
 @property(nonatomic,strong) UITapGestureRecognizer *tap;
 
 @end
@@ -125,7 +124,7 @@
         self.contentView.backgroundColor =[UIColor whiteColor];
         
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
         self.tap  = tap;
         [self.bgView addGestureRecognizer:tap];
 
@@ -134,6 +133,7 @@
     return self;
 }
 
+//label创建共有方法
 -(UILabel *)getLabelWithFontSize:(CGFloat)fontSize andTextColor:(UIColor *)textColor
 {
     UILabel *Lab =[[UILabel alloc] init];
@@ -146,18 +146,16 @@
 
 
 
-
-
-
 -(void)setUniFrame:(UniversityFrameNew *)uniFrame
 {
     _uniFrame = uniFrame;
     
-    UniversityNew *university = uniFrame.uni;
+    UniversityNew *university = uniFrame.universtiy;
     
   
     self.cancelBtn.frame = uniFrame.CancelButtonFrame;
-    
+    self.addSubjectBtn.frame = uniFrame.AddButtonFrame;
+
     
     self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
     self.StarBackgroud.hidden = !self.isStart;
@@ -180,7 +178,7 @@
     self.address_detail_TF.text = university.address_detail;
    
     CGFloat addressWidth = [university.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
-    
+    //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uniFrame.address_detailFrame.size.width - 30)) {
         
          self.address_detail_TF.text = university.address_short;
@@ -190,11 +188,9 @@
     self.RankLabel.frame = uniFrame.RankFrame;
     
     
-    
     self.StarBackgroud.frame = uniFrame.starBgFrame;
-
     
-    
+    //当排名方式是 世界排名时，只显示世界排名信息
     if ([self.optionOrderBy isEqualToString:RANKQS]) {
         
         NSString   *rankStr01 = university.ranking_qs.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
@@ -204,12 +200,14 @@
     }
     
     
+    //判断是否需要显示*号   澳大利来排名时
     if (self.isStart) {
         
         self.RankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         
         NSInteger  StarCount  = university.ranking_ti.integerValue;
        
+        //暂无排名时
         if (StarCount == DefaultNumber) {
             
              self.RankLabel.text = @"本国排名：暂无排名";
@@ -243,13 +241,13 @@
         
         
     }else{
-        
+           //英国排名
             NSString   *rankStr01 = university.ranking_ti.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
             self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
     }
     
-    self.addSubjectBtn.frame = uniFrame.AddButtonFrame;
+    
   
 }
 
@@ -267,31 +265,16 @@
     }
     
     //申请意向页面
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-        
-    }
+    if (self.actionBlock) self.actionBlock(sender);
     
     //用于搜索结果页面
-    if (self.newActionBlock) {
-        
-        self.newActionBlock(self.uniFrame.uni.NO_id);
-    }
-    
+    if (self.newActionBlock)  self.newActionBlock(self.uniFrame.universtiy.NO_id);
 }
 
--(void)tap:(UITapGestureRecognizer *)tap
+-(void)showUniveristy:(UITapGestureRecognizer *)tap
 {
     
-    if (self.isEdit) {
-        
-        [self sectionViewButtonPressed:self.cancelBtn];
-        
-    }else{
-        [self sectionViewButtonPressed:self.addSubjectBtn];
-
-    }
+    self.isEdit ?  [self sectionViewButtonPressed:self.cancelBtn]  : [self sectionViewButtonPressed:self.addSubjectBtn];
     
 }
 
@@ -307,7 +290,7 @@
 
 -(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{
     
-    return [title boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
+    return [title boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
 }
 
 
@@ -316,22 +299,21 @@
     self.addSubjectBtn.hidden = YES;
 }
 
+-(void)setEdit:(BOOL)edit{
+
+    _edit = edit;
+}
+
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-//    if (self.address_detail_TF.text) {
-//        CGFloat Leftx = 0;
-//        CGFloat Lefty = 0;
-//        CGFloat Lefth = CGRectGetHeight(self.RankLabel.frame);
-//        CGFloat Leftw = Lefth;
-//        UIImageView *item = (UIImageView *)self.anchorView.subviews.firstObject;
-//        item.frame = CGRectMake(Leftx,Lefty,Leftw, Lefth);
-//    }
-    
+ 
     CGFloat SBx = self.isEdit ? 50 : 0;
-    self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, University_HEIGHT);
     
+    self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+        
+ 
 }
 
 

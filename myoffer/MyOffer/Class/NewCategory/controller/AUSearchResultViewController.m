@@ -158,7 +158,7 @@
          
           for (NSDictionary *obj in response[@"universities"]) {
               
-              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUni:[UniversityNew mj_objectWithKeyValues:obj]];
+              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
               
               NSInteger index =  [obj[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
               
@@ -239,7 +239,7 @@
     
      NSArray *temp = self.Restults[indexPath.section];
      UniversityFrameNew   *uni_Frame = temp[indexPath.row];
-     UniversityNew *university = uni_Frame.uni;
+     UniversityNew *university = uni_Frame.universtiy;
      [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     
 }
@@ -247,7 +247,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return University_HEIGHT;
+    return Uni_Cell_Height;
 }
 
 

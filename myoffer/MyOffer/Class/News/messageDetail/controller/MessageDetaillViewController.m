@@ -195,9 +195,9 @@
     
     XWeakSelf
   
-    NSString *testpath =[NSString stringWithFormat:@"GET api/v2/article/%@",self.NO_ID];
+    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorArticleDetail,self.NO_ID];
     
-    [self startAPIRequestWithSelector:testpath parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
         [weakSelf dismiss];
         
@@ -407,7 +407,7 @@
     UniDetailGroup *group = self.groups[0];
     MessageDetailFrame *MessageDetailFrame   =  group.items[0];
  
-    CGFloat cellHight = indexPath.section== 0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : University_HEIGHT;
+    CGFloat cellHight = indexPath.section== 0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : Uni_Cell_Height;
     
     return cellHight;
         

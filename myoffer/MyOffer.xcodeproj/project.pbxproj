@@ -190,7 +190,6 @@
 		AEA249C11D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249691D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib */; };
 		AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2496D1D5B215300DD7939 /* ApplyViewController.m */; };
 		AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2496E1D5B215300DD7939 /* ApplyViewController.xib */; };
-		AEA249C41D5B215300DD7939 /* UniversityFrameApplyObj.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249711D5B215300DD7939 /* UniversityFrameApplyObj.m */; };
 		AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */; };
 		AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249761D5B215300DD7939 /* ApplyTableViewCell.m */; };
 		AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2497E1D5B215300DD7939 /* ApplyStatusViewController.m */; };
@@ -381,6 +380,7 @@
 		AEA24C301D5B283700DD7939 /* wel_CN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C201D5B283700DD7939 /* wel_CN.png */; };
 		AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C211D5B283700DD7939 /* wel_EN.png */; };
 		AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* UniversityNew.m */; };
+		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
@@ -736,7 +736,6 @@
 		AEA2496D1D5B215300DD7939 /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
 		AEA2496E1D5B215300DD7939 /* ApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyViewController.xib; sourceTree = "<group>"; };
 		AEA249701D5B215300DD7939 /* UniversityFrameNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFrameNew.h; sourceTree = "<group>"; };
-		AEA249711D5B215300DD7939 /* UniversityFrameApplyObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameApplyObj.m; sourceTree = "<group>"; };
 		AEA249731D5B215300DD7939 /* ApplySectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySectionHeaderView.h; sourceTree = "<group>"; };
 		AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySectionHeaderView.m; sourceTree = "<group>"; };
 		AEA249751D5B215300DD7939 /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
@@ -1069,6 +1068,7 @@
 		AEA24C211D5B283700DD7939 /* wel_EN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_EN.png; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* UniversityNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityNew.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* UniversityNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityNew.m; sourceTree = "<group>"; };
+		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1903,7 +1903,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA249701D5B215300DD7939 /* UniversityFrameNew.h */,
-				AEA249711D5B215300DD7939 /* UniversityFrameApplyObj.m */,
+				AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3348,6 +3348,7 @@
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,
 				AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */,
 				AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */,
+				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
 				AEA24B831D5B25E000DD7939 /* XUCountry.m in Sources */,
 				AEA24B841D5B25E000DD7939 /* BottomBackgroudView.m in Sources */,
@@ -3566,7 +3567,6 @@
 				AEA24B2C1D5B251800DD7939 /* YourPhoneView.m in Sources */,
 				AEA24B7F1D5B25E000DD7939 /* FilterSection.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
-				AEA249C41D5B215300DD7939 /* UniversityFrameApplyObj.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA249AE1D5B215300DD7939 /* PaySectionHeaderView.m in Sources */,

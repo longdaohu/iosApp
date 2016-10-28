@@ -28,7 +28,7 @@
     
     CGFloat logoX = XMARGIN;
     CGFloat logoY = XMARGIN ;
-    CGFloat logoH = University_HEIGHT - 2 * logoY;
+    CGFloat logoH = Uni_Cell_Height - 2 * logoY;
     CGFloat logoW = logoH;
     self.logoFrame = CGRectMake(logoX, logoY, logoW, logoH);
     

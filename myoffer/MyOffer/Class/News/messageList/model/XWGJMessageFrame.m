@@ -20,7 +20,7 @@
     CGFloat  logox = Margin;
     CGFloat  logow = 90 * SCREEN_SCALE;
     CGFloat  logoy = Margin;
-    CGFloat  logoh = University_HEIGHT - 2 * logoy;
+    CGFloat  logoh = Uni_Cell_Height - 2 * logoy;
     self.LogoFrame = CGRectMake(logox,logoy,logow,logoh);
     
     
