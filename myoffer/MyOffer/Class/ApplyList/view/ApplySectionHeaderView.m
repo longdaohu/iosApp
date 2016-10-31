@@ -196,6 +196,8 @@
         NSString   *rankStr01 = university.ranking_qs.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
         self.RankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
         
+        self.StarBackgroud.hidden = YES;
+        
         return;
     }
     

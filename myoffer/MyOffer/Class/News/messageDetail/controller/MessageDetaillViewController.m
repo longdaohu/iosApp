@@ -160,7 +160,6 @@
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
-    self.tableView.alpha = 0.1;
     [self.view addSubview:self.tableView];
     
 }
@@ -204,13 +203,7 @@
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        [UIView animateWithDuration:0.2 animations:^{
-           
-            weakSelf.tableView.alpha = 1;
-
-        }];
-        
-         [weakSelf makeUIWithMessageDictionary:response];
+        [weakSelf makeUIWithMessageDictionary:response];
         
         [weakSelf.tableView reloadData];
 
@@ -296,9 +289,9 @@
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
     
-    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [self.hud removeFromSuperViewOnHide];
+//    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+//    
+//    [self.hud removeFromSuperViewOnHide];
     
 }
 
@@ -313,7 +306,7 @@
                          @"document.body.scrollHeight"] integerValue];
     self.webView.frame = CGRectMake(0, 0,XScreenWidth,height);
     
-     self.tableView.alpha = 1;
+    
     [self.tableView reloadData];
     
     //加载完成后重新设置 tableview的cell的高度,和webview的frame
@@ -321,7 +314,7 @@
         
         self.RightView.hidden = NO;
 
-        [self.hud hideAnimated:YES afterDelay:1];
+//        [self.hud hideAnimated:YES afterDelay:1];
     }
 
     
@@ -351,7 +344,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
 {
-    [self.hud hideAnimated:YES afterDelay:1];
+//    [self.hud hideAnimated:YES afterDelay:1];
  
 }
 

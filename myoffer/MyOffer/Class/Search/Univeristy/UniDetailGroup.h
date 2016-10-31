@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface UniDetailGroup : NSObject
-@property(nonatomic,copy)NSString   *HeaderTitle;
+//分组数组数据
 @property(nonatomic,strong)NSArray  *items;
-@property(nonatomic,assign)BOOL      HaveFooter;
-@property(nonatomic,assign)BOOL      HaveHeader;
+//分组header
+@property(nonatomic,copy)NSString   *HeaderTitle;
+//行高
 @property(nonatomic,assign)CGFloat   cellHeight;
-
+//是否是分组footer
+@property(nonatomic,assign)BOOL      HaveFooter;
+//是否是分组header
+@property(nonatomic,assign)BOOL      HaveHeader;
 +(instancetype)groupWithTitle:(NSString *)title contentes:(NSArray *)items  andFooter:(BOOL)footer;
 
 @end

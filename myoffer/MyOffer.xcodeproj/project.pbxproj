@@ -2276,10 +2276,10 @@
 				AEA24A5D1D5B23F600DD7939 /* HomeSecondTableViewCell.m */,
 				AEA24A5E1D5B23F600DD7939 /* HomeSectionHeaderView.h */,
 				AEA24A5F1D5B23F600DD7939 /* HomeSectionHeaderView.m */,
-				AEA24A601D5B23F600DD7939 /* HomeThirdTableViewCell.h */,
-				AEA24A611D5B23F600DD7939 /* HomeThirdTableViewCell.m */,
 				AEA24A621D5B23F600DD7939 /* SecondCollectionViewCell.h */,
 				AEA24A631D5B23F600DD7939 /* SecondCollectionViewCell.m */,
+				AEA24A601D5B23F600DD7939 /* HomeThirdTableViewCell.h */,
+				AEA24A611D5B23F600DD7939 /* HomeThirdTableViewCell.m */,
 				AEA24A641D5B23F600DD7939 /* UniCollectionViewCell.h */,
 				AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */,
 			);

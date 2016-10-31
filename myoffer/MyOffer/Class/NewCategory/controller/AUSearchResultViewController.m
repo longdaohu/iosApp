@@ -224,12 +224,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     NewSearchResultCell *cell =[NewSearchResultCell  CreateCellWithTableView:tableView];
     NSArray *temp = self.Restults[indexPath.section];
     cell.isStart = YES;
     cell.uni_Frame = temp[indexPath.row];
+  
     return cell;
+    
 }
 
 
@@ -243,7 +244,6 @@
      [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

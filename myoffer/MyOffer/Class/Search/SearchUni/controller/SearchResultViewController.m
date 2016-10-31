@@ -84,6 +84,9 @@
         _text = @"";
         _fieldKey = @"text";
         _orderBy = orderBy;
+        
+        NSLog(@"orderByorderByorderBy %@",orderBy);
+
         if([key  isEqual: @"subject"]) {
             _subject = value;
         } else if([key  isEqual: @"country"]) {
@@ -194,13 +197,11 @@
     _descending = self.xby;
 
     
-
-    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{_fieldKey: _text ?: [NSNull null],
                                  @"page": @(page),
                                  @"size": @40,
-                                 @"desc": _descending ? @1: @0,
-                                 @"order": _orderBy  ? RANKQS : RANKTI}];
+                                 @"desc": @0,
+                                 @"order": [_orderBy isEqualToString:RANKTI] ? RANKTI : RANKQS}];
     
     if (_subject) {
         [parameters setValue:@[@{@"name": @"subject", @"value": _subject}] forKey:@"filters"];
@@ -229,20 +230,24 @@
          }
          
          
+         
           [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
               
               
-              NSString *uid = obj[@"_id"];
+//              NSString *uid = obj[@"_id"];
   
-             if (![_resultIDSet containsObject:uid]) {
-                 
-                 [_resultIDSet addObject:uid];
-                 
+//             if (![_resultIDSet containsObject:uid]) {
+//                 
+//                 [_resultIDSet addObject:uid];
+              
+              
+              
                  UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
-                 
+              
+              
                  [_result addObject:uniFrame];
    
-             }
+//             }
            
               
          }];
@@ -294,8 +299,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
- 
+  
     return _result.count;
 }
 
@@ -310,7 +314,7 @@
     cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
-
+    
     return cell;
 }
 

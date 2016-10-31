@@ -258,7 +258,6 @@
     self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
         
         MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] initWithMessageId:StatusBarBannerNews.newsId];
-//        detail.hidesBottomBarWhenPushed = YES;
         [weakSelf.navigationController pushViewController:detail animated:YES];
         
     };

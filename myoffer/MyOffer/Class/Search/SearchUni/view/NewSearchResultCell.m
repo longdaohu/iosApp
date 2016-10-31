@@ -57,13 +57,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        //LOGO图标
         self.LogoView =[[LogoView alloc] init];
         [self addSubview:self.LogoView];
         
-  
+        //学校名称
         self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
         self.nameLab.hidden = USER_EN ? YES : NO;
-        
+        //学校英文名
         self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
         self.official_nameLab.numberOfLines = 2;
@@ -82,9 +83,9 @@
         self.address_detail_TF.userInteractionEnabled = NO;
         [self.contentView addSubview:self.address_detail_TF];
         
-        
+        //排名
         self.rankLabel =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_DARKGRAY];
-        
+        //**号背景
         self.starBackground =[[UIView alloc] init];
         [self addSubview:self.starBackground];
         
@@ -101,7 +102,7 @@
         
         self.contentView.backgroundColor  = [UIColor whiteColor];
         
-        
+
         self.hotView =[[UIImageView alloc] init];
         self.hotView.contentMode =UIViewContentModeScaleAspectFit;
         [self addSubview:self.hotView];
@@ -109,7 +110,7 @@
     
     return self;
 }
-
+//label创建共有方法
 -(UILabel *)getLabelWithFontSize:(CGFloat)fontSize andTextColor:(UIColor *)textColor
 {
     UILabel *Lab =[[UILabel alloc] init];
@@ -143,7 +144,7 @@
     self.address_detail_TF.text = uni_Frame.universtiy.address_detail;
     
     CGFloat addressWidth = [uniObj.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
-    
+     //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uni_Frame.address_detailFrame.size.width - 30)) {
         
         self.address_detail_TF.text = uniObj.address_short;
@@ -155,15 +156,18 @@
     
     self.hotView.image = uni_Frame.universtiy.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
     
+    //当排名方式是 世界排名时，只显示世界排名信息
     if ([self.optionOrderBy isEqualToString:RANKQS]) {
         
         NSString   *rankStr01 = uniObj.ranking_qs.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_qs];
         self.rankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
         
+        self.starBackground.hidden = YES;
+
         return;
     }
     
-    
+    //判断是否需要显示*号   澳大利来排名时
     if (self.isStart) {
         
         self.starBackground.frame = uni_Frame.starBgFrame;
@@ -174,6 +178,8 @@
         
         NSInteger  StarCount  = uniObj.ranking_ti.integerValue;
         
+        //暂无排名时
+
         if (StarCount == DefaultNumber) {
             
             self.rankLabel.text = @"本国排名：暂无排名";
@@ -206,7 +212,7 @@
         
         
     }else{
-        
+        //英国排名
         NSString   *rankStr01 = uniObj.ranking_ti.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_ti];
         self.rankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
         

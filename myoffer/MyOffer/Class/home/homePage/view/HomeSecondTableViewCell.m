@@ -80,16 +80,16 @@
 {
     _items = items;
     
-    NSInteger column = (NSInteger)(items.count * 0.5 +0.5);
+    NSInteger column = (NSInteger)(items.count * 0.5 + 0.5);
     
     CGFloat collectionx  = 0;
     CGFloat collectiony  = 0;
-    CGFloat collectionw  =  XScreenWidth;
+    CGFloat collectionw  = XScreenWidth;
     CGFloat collectionh  = column *  XScreenWidth * 0.4;
     self.CollectionView.frame =  CGRectMake(collectionx,collectiony,collectionw,collectionh);
     
-    CGFloat width =  0.5*(XScreenWidth - 3 * ITEM_MARGIN);
-    CGFloat heigh =  (collectionh - (column +1 )* ITEM_MARGIN )/ column;
+    CGFloat width =  0.5 * (XScreenWidth - 3 * ITEM_MARGIN);
+    CGFloat heigh =  (collectionh - ( column + 1 )* ITEM_MARGIN )/ column;
     self.flowlayout.itemSize = CGSizeMake(width,heigh);
  
     [self.CollectionView reloadData];

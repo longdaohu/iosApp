@@ -10,12 +10,12 @@
 @class HomeSecondTableViewCell;
 @protocol HomeSecondTableViewCellDelegate <NSObject>
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response;
-
 @end
 
 @interface HomeSecondTableViewCell : UITableViewCell
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,weak)id<HomeSecondTableViewCellDelegate> delegate;
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
+
 @end
 

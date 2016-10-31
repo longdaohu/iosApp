@@ -12,5 +12,4 @@
 @property(nonatomic,strong)NSDictionary *itemInfo;
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
 
-
 @end

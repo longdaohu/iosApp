@@ -16,10 +16,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.iconView = [[UIImageView alloc] init];
-        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
-        self.iconView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:self.iconView];
+        self.logoView = [[UIImageView alloc] init];
+        self.logoView.image = [UIImage imageNamed:@"PlaceHolderImage"];
+        self.logoView.contentMode = UIViewContentModeScaleAspectFill;
+        [self.contentView addSubview:self.logoView];
         
         self.mengView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_Mask"]];
         self.mengView.alpha = 0.7;
@@ -30,7 +30,7 @@
         self.titleLab.numberOfLines = 2;
         [self.contentView addSubview:self.titleLab];
         
-        self.contentView.layer.cornerRadius = 5;
+        self.contentView.layer.cornerRadius = CORNER_RADIUS;
         self.contentView.layer.masksToBounds = YES;
  
         self.backgroundColor =  XCOLOR_BG;
@@ -42,11 +42,11 @@
 
 -(void)setItemInfo:(NSDictionary *)itemInfo
 {
-    _itemInfo = itemInfo;
+     _itemInfo = itemInfo;
     
-      self.titleLab.text = itemInfo[@"title"];
-      NSString *iconStr = [itemInfo[@"cover_url"]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-     [self.iconView sd_setImageWithURL:[NSURL URLWithString:iconStr]];
+     self.titleLab.text = itemInfo[@"title"];
+    
+     [self.logoView sd_setImageWithURL:[NSURL URLWithString:[itemInfo[@"cover_url"]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
   
 }
 
@@ -54,27 +54,27 @@
 {
     [super layoutSubviews];
     
-    CGFloat iconx = 0;
-    CGFloat icony = 0;
-    CGFloat iconw = self.bounds.size.width;
-    CGFloat iconh = self.bounds.size.height;
-    
-    self.iconView.frame = CGRectMake(iconx, icony, iconw, iconh);
+    CGSize contentSize = self.bounds.size;
+    CGFloat logox = 0;
+    CGFloat logoy = 0;
+    CGFloat logow = contentSize.width;
+    CGFloat logoh = contentSize.height;
+    self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     
     CGFloat mengx = 0;
-    CGFloat mengy = iconh * 0.5;
-    CGFloat mengw = iconw;
-    CGFloat mengh = iconh * 0.5;
+    CGFloat mengy = logoh * 0.5;
+    CGFloat mengw = logow;
+    CGFloat mengh = logoh * 0.5;
     self.mengView.frame =CGRectMake(mengx, mengy, mengw, mengh);
     
     
     if (self.titleLab.text) {
         
         CGFloat titlex      = 10;
-        CGFloat titlew      = self.bounds.size.width - 2 * ITEM_MARGIN;
+        CGFloat titlew      = contentSize.width - 2 * ITEM_MARGIN;
         CGSize  titleSize   = [self.titleLab.text KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(15))];
         CGFloat titleh      =  titleSize.width > titlew  ? titleSize.height * 2 :titleSize.width;
-        CGFloat titley      = self.bounds.size.height - titleh - 10;
+        CGFloat titley      = contentSize.height - titleh - 10;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
         
      }

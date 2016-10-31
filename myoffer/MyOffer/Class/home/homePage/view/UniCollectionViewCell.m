@@ -21,13 +21,13 @@
 //地理图标
 @property(nonatomic,strong)UIImageView *anthorView;
 //学校名称
-@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UILabel *nameLab;
 //学校英文名称
-@property(nonatomic,strong)UILabel *subTitleLab;
+@property(nonatomic,strong)UILabel *official_nameLab;
 //地理名称
-@property(nonatomic,strong)UILabel *localLab;
+@property(nonatomic,strong)UILabel *addressLab;
 //标签背景
-@property(nonatomic,strong)UIView *tapView;
+@property(nonatomic,strong)UIView *tagsView;
 
 @end
 
@@ -61,10 +61,10 @@
         [self.bgView addSubview:self.center_Line];
         
        //学校名称
-        self.titleLab                    = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
-        self.titleLab.lineBreakMode      = NSLineBreakByCharWrapping;
-        self.titleLab.numberOfLines      = 2;
-        [self.bgView addSubview:self.titleLab];
+        self.nameLab                    = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
+        self.nameLab.lineBreakMode      = NSLineBreakByCharWrapping;
+        self.nameLab.numberOfLines      = 2;
+        [self.bgView addSubview:self.nameLab];
 
         //地理图标
         self.anthorView                     = [[UIImageView alloc] init];
@@ -72,17 +72,17 @@
         [self.bgView addSubview:self.anthorView];
 
         //地理名称
-        self.localLab =  [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
-        self.localLab.lineBreakMode      =  NSLineBreakByClipping;
-        [self.bgView addSubview:self.localLab];
+        self.addressLab =  [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.addressLab.lineBreakMode      =  NSLineBreakByClipping;
+        [self.bgView addSubview:self.addressLab];
 
        //学校英文名称
-        self.subTitleLab =   [UILabel labelWithFontsize:KDUtilSize(11) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
-        [self.bgView addSubview:self.subTitleLab];
+        self.official_nameLab =   [UILabel labelWithFontsize:KDUtilSize(11) TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
+        [self.bgView addSubview:self.official_nameLab];
 
         //标签背景
-        self.tapView = [[UIView alloc] init];
-        [self.bgView addSubview:self.tapView];
+        self.tagsView = [[UIView alloc] init];
+        [self.bgView addSubview:self.tagsView];
 
     }
     return self;
@@ -95,34 +95,34 @@
 {
     _uniFrame = uniFrame;
     
-    UniversityNew *unversity = uniFrame.uni;
+    UniversityNew *unversity = uniFrame.universtiy;
     
     self.bgView.frame        = uniFrame.bgViewFrame;
     self.center_Line.frame   = uniFrame.LineFrame;
-    self.tapView.frame       = uniFrame.tapBgViewFrame;
-    self.anthorView.frame       = uniFrame.LocalMVFrame;
+    self.tagsView.frame       = uniFrame.tagsBgViewFrame;
+    self.anthorView.frame    = uniFrame.anthorFrame;
     self.logoView.frame      = uniFrame.LogoFrame;
-    self.titleLab.frame      = uniFrame.TitleFrame;
-    self.subTitleLab.frame   = uniFrame.SubTitleFrame;
-    self.localLab.frame      = uniFrame.LocalFrame;
+    self.nameLab.frame       = uniFrame.nameFrame;
+    self.official_nameLab.frame   = uniFrame.official_nameFrame;
+    self.addressLab.frame      = uniFrame.addressFrame;
+
 
     
     [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logo]];
-    self.titleLab.text       =  unversity.name;
-    self.subTitleLab.text    = unversity.official_name;
-    self.localLab.text       = unversity.address_detail;
+    self.nameLab.text       =  unversity.name;
+    self.official_nameLab.text    = unversity.official_name;
+    self.addressLab.text       = unversity.address_detail;
     
     CGFloat addressWidth = [unversity.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
-    if (addressWidth > (uniFrame.LocalFrame.size.width - 30)) {
+    if (addressWidth > (uniFrame.addressFrame.size.width - 30)) {
         
-        self.localLab.text = unversity.address_short;
+        self.addressLab.text = unversity.address_short;
         
     }
 
     //移除子控件，防止重复显示
-    [self.tapView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-  
+    [self.tagsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+   
     NSArray *tags = unversity.tags.count > 4 ? [unversity.tags subarrayWithRange:NSMakeRange(0, 4)] : unversity.tags;
     
     for (int i = 0; i < tags.count; i ++) {
@@ -131,9 +131,9 @@
         sender.adjustsFontSizeToFitWidth = YES;
         sender.layer.borderColor         = XCOLOR(222.0, 222.0, 222.0).CGColor;
         sender.layer.borderWidth         = 1;
-        [self.tapView addSubview:sender];
+        [self.tagsView addSubview:sender];
         sender.text = unversity.tags[i];
-        sender.frame = [uniFrame.tapFrames[i]  CGRectValue];
+        sender.frame = [uniFrame.tagFrames[i]  CGRectValue];
         sender.layer.cornerRadius = 0.5 * sender.frame.size.height;
      }
     

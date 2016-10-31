@@ -11,8 +11,9 @@
 @interface SecondCollectionViewCell : UICollectionViewCell
 //蒙版
 @property(nonatomic,strong)UIImageView *mengView;
-
-@property(nonatomic,strong)UIImageView *iconView;
+//图片
+@property(nonatomic,strong)UIImageView *logoView;
+//标题
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)NSDictionary *itemInfo;
 

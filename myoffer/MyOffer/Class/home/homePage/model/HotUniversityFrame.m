@@ -15,17 +15,16 @@
 
     HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
     
-    UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:uni_Info];
+    UniversityNew *universtiy = [UniversityNew mj_objectWithKeyValues:uni_Info];
     
-    uniFrame.uni = uni;
+    uniFrame.universtiy = universtiy;
     
     return uniFrame;
 }
 
+-(void)setUniverstiy:(UniversityNew *)universtiy{
 
--(void)setUni:(UniversityNew *)uni{
-
-    _uni = uni;
+    _universtiy = universtiy;
     
     CGFloat Cellwidth = XScreenWidth * 0.6;
     
@@ -40,41 +39,36 @@
     self.LogoFrame = CGRectMake(iconx, icony, iconw,iconh);
     
     
-    CGFloat unix    = 10;
-    CGFloat uniy    = CGRectGetMaxY(self.LogoFrame) +KDUtilSize(ITEM_MARGIN);
-    CGFloat uniw    = bgw - 15;
-    CGFloat unih    = USER_EN ? KDUtilSize(40):KDUtilSize(18);
-    self.TitleFrame = CGRectMake(unix, uniy,uniw, unih);
+    CGFloat namex    = 10;
+    CGFloat namey    = CGRectGetMaxY(self.LogoFrame) +KDUtilSize(ITEM_MARGIN);
+    CGFloat namew    = bgw - 15;
+    CGFloat nameh    = USER_EN ? KDUtilSize(40):KDUtilSize(18);
+    self.nameFrame = CGRectMake(namex, namey,namew, nameh);
     
-    CGFloat engx       = unix;
-    CGFloat engy       = CGRectGetMaxY(self.TitleFrame) + KDUtilSize(5);;
-    CGFloat engw       = uniw;
-    CGFloat engh       =  KDUtilSize(14);
-    self.SubTitleFrame = CGRectMake(engx, engy, engw, engh);
+    CGFloat official_namex       = namex;
+    CGFloat official_namey       = CGRectGetMaxY(self.nameFrame) + KDUtilSize(5);;
+    CGFloat official_namew       = namew;
+    CGFloat official_nameh       =  KDUtilSize(14);
+    self.official_nameFrame = CGRectMake(official_namex, official_namey, official_namew, official_nameh);
     
     CGFloat lineh = 0.5;
     CGFloat linew = bgw;
     CGFloat linex = 0;
-    CGFloat liney = CGRectGetMaxY(self.SubTitleFrame) + KDUtilSize(ITEM_MARGIN);
-    if (USER_EN) {
-        
-        liney = CGRectGetMaxY(self.TitleFrame) + KDUtilSize(ITEM_MARGIN);
-    }
+    CGFloat liney = CGRectGetMaxY(self.official_nameFrame) + KDUtilSize(ITEM_MARGIN);
     self.LineFrame = CGRectMake(linex, liney, linew,lineh);
     
     
-    CGFloat localViewX = ITEM_MARGIN;
-    CGFloat localViewY = CGRectGetMaxY(self.LineFrame) + KDUtilSize(ITEM_MARGIN );
-    CGFloat localViewH = KDUtilSize(15);
-    CGFloat localViewW = localViewH;
-    self.LocalMVFrame  = CGRectMake(localViewX, localViewY, localViewW,localViewH);
+    CGFloat anthorX = ITEM_MARGIN;
+    CGFloat anthorY = CGRectGetMaxY(self.LineFrame) + KDUtilSize(ITEM_MARGIN );
+    CGFloat anthorH = KDUtilSize(15);
+    CGFloat anthorW = anthorH;
+    self.anthorFrame  = CGRectMake(anthorX, anthorY, anthorW,anthorH);
     
-    CGFloat localX  = CGRectGetMaxX(self.LocalMVFrame) + 5;
-    CGFloat localY  = localViewY;
-    CGFloat localW  = uniw - localX;
-    CGFloat localH  = localViewH;
-    self.LocalFrame = CGRectMake(localX, localY, localW, localH);
-    
+    CGFloat addressX  = CGRectGetMaxX(self.anthorFrame) + 5;
+    CGFloat addressY  = anthorY;
+    CGFloat addressW  = namew - addressX;
+    CGFloat addressH  = anthorH;
+    self.addressFrame = CGRectMake(addressX, addressY, addressW, addressH);
     
     
     NSMutableArray *temps =[NSMutableArray array];
@@ -85,26 +79,27 @@
         
         CGFloat itemX    = i%2 * (itemW + ITEM_MARGIN) + ITEM_MARGIN;
         CGFloat itemY    = i/2 * 30;
-        
         CGRect itemRect  = CGRectMake(itemX, itemY, itemW, itemH);
         
         [temps addObject:[NSValue valueWithCGRect:itemRect]];
     }
     
-    self.tapFrames = [temps copy];
+    self.tagFrames = [temps copy];
     
     CGFloat tapViewx    = 0;
-    CGFloat tapViewy    = CGRectGetMaxY(self.LocalFrame) + KDUtilSize(ITEM_MARGIN);
+    CGFloat tapViewy    = CGRectGetMaxY(self.addressFrame) + KDUtilSize(ITEM_MARGIN);
     CGFloat tapVieww    = bgw;
     CGFloat tapViewh    = 55;
-    self.tapBgViewFrame = CGRectMake(tapViewx, tapViewy, tapVieww, tapViewh);
+    self.tagsBgViewFrame = CGRectMake(tapViewx, tapViewy, tapVieww, tapViewh);
     
-    CGFloat bgh         =  USER_EN ? (CGRectGetMaxY(self.LocalFrame) + ITEM_MARGIN) :(CGRectGetMaxY(self.tapBgViewFrame) + ITEM_MARGIN);
+    CGFloat bgh         =  USER_EN ? (CGRectGetMaxY(self.addressFrame) + ITEM_MARGIN) :(CGRectGetMaxY(self.tagsBgViewFrame) + ITEM_MARGIN);
     
     self.bgViewFrame    = CGRectMake(bgx,bgy,bgw,bgh);
     
     self.cellHeight     = CGRectGetMaxY(self.bgViewFrame) + 20;
 
 }
+
+
 
 @end

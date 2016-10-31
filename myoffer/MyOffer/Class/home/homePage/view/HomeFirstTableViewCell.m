@@ -32,7 +32,7 @@
     if (self) {
         
         self.IconView                     = [[UIImageView alloc] init];
-        self.IconView.layer.cornerRadius  = 5;
+        self.IconView.layer.cornerRadius  = CORNER_RADIUS;
         self.IconView.layer.masksToBounds = YES;
         self.IconView.contentMode         = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.IconView];

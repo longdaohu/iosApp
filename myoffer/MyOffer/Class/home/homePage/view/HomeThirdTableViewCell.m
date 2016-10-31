@@ -63,7 +63,7 @@
 //    flowlayout.minimumLineSpacing = 0;
     // 设置item列与列之间的间隙
 //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, 0);//sectionInset的设置与item的宽高不一致会出现警报信息
+    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, 0);//sectionInset的设置与item的宽高不一致会出现警报信息
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, heigh) collectionViewLayout:flowlayout];
@@ -96,9 +96,7 @@
 
 #pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
     return 1;
-    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -127,7 +125,7 @@ static NSString *identify = @"three";
         
         HotUniversityFrame *uniFrame =  self.uniFrames[indexPath.row];
         
-        [self.delegate HomeThirdTableViewCell:self WithUniversity:uniFrame.uni];
+        [self.delegate HomeThirdTableViewCell:self WithUniversity:uniFrame.universtiy];
     }
 }
 
