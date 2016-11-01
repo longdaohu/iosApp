@@ -11,11 +11,16 @@
 
 
 @interface NotiTableViewCell ()
+//图片
 @property(nonatomic,strong)UIImageView *logoView;
+//标题
 @property(nonatomic,strong)UILabel *titleLab;
+//时间
 @property(nonatomic,strong)UILabel *timeLab;
+//描述
 @property(nonatomic,strong)UILabel *subTitleLab;
-@property(nonatomic,strong)UIImageView *redSpotsView;
+//未读消息小红点
+@property(nonatomic,strong)UIView *redSpotsView;
 
 
 @end
@@ -44,8 +49,7 @@
         self.logoView =[[UIImageView alloc] init];
         [self.contentView addSubview:self.logoView];
         
-        self.redSpotsView=[[UIImageView alloc] init];
-        self.redSpotsView.contentMode = UIViewContentModeCenter;
+        self.redSpotsView=[[UIView alloc] init];
         [self.contentView addSubview:self.redSpotsView];
         self.redSpotsView.backgroundColor = [UIColor redColor];
         self.redSpotsView.layer.cornerRadius = RedSpot_Height * 0.5;
