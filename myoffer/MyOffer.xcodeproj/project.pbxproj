@@ -261,8 +261,6 @@
 		AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A841D5B23F600DD7939 /* XBTopToolView.m */; };
 		AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AA91D5B24D200DD7939 /* HelpViewController.m */; };
 		AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */; };
-		AEA24AF21D5B24D200DD7939 /* leftHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB01D5B24D200DD7939 /* leftHeadView.m */; };
-		AEA24AF31D5B24D200DD7939 /* leftHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AB11D5B24D200DD7939 /* leftHeadView.xib */; };
 		AEA24AF41D5B24D200DD7939 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB31D5B24D200DD7939 /* MenuCell.m */; };
 		AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB51D5B24D200DD7939 /* MenuItem.m */; };
 		AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB71D5B24D200DD7939 /* RECommonFunctions.m */; };
@@ -379,6 +377,8 @@
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
+		AEE9FAE31DC87BCF00D732A7 /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9FAE21DC87BCF00D732A7 /* LeftMenuHeaderView.m */; };
+		AEE9FAE51DC87BDD00D732A7 /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEE9FAE41DC87BDD00D732A7 /* LeftMenuHeaderView.xib */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
 		AEEB51C81BF9EB8600925E36 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C41BF9EB8600925E36 /* libSocialQQ.a */; };
 		AEEB51C91BF9EB8600925E36 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */; };
@@ -863,9 +863,6 @@
 		AEA24AA81D5B24D200DD7939 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		AEA24AA91D5B24D200DD7939 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
-		AEA24AAF1D5B24D200DD7939 /* leftHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = leftHeadView.h; sourceTree = "<group>"; };
-		AEA24AB01D5B24D200DD7939 /* leftHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = leftHeadView.m; sourceTree = "<group>"; };
-		AEA24AB11D5B24D200DD7939 /* leftHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = leftHeadView.xib; sourceTree = "<group>"; };
 		AEA24AB21D5B24D200DD7939 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AEA24AB31D5B24D200DD7939 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEA24AB41D5B24D200DD7939 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
@@ -1062,6 +1059,9 @@
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AEE9FAE11DC87BCF00D732A7 /* LeftMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuHeaderView.h; sourceTree = "<group>"; };
+		AEE9FAE21DC87BCF00D732A7 /* LeftMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuHeaderView.m; sourceTree = "<group>"; };
+		AEE9FAE41DC87BDD00D732A7 /* LeftMenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderView.xib; sourceTree = "<group>"; };
 		AEEA71621BE1D1830015C42B /* Visualbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Visualbg.jpg; sourceTree = "<group>"; };
 		AEEB51C41BF9EB8600925E36 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
@@ -2375,9 +2375,9 @@
 		AEA24AAE1D5B24D200DD7939 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24AAF1D5B24D200DD7939 /* leftHeadView.h */,
-				AEA24AB01D5B24D200DD7939 /* leftHeadView.m */,
-				AEA24AB11D5B24D200DD7939 /* leftHeadView.xib */,
+				AEE9FAE11DC87BCF00D732A7 /* LeftMenuHeaderView.h */,
+				AEE9FAE21DC87BCF00D732A7 /* LeftMenuHeaderView.m */,
+				AEE9FAE41DC87BDD00D732A7 /* LeftMenuHeaderView.xib */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -3177,7 +3177,6 @@
 				AEF421071BD4988B00CFB45E /* UMSShareListController.xib in Resources */,
 				AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */,
 				AE1FD7381D5C929500FFD5A8 /* Pre-comp 1_00020.png in Resources */,
-				AEA24AF31D5B24D200DD7939 /* leftHeadView.xib in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
 				AE1FD74B1D5C929500FFD5A8 /* Pre-comp 1_0009.png in Resources */,
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
@@ -3217,6 +3216,7 @@
 				AE1FD7431D5C929500FFD5A8 /* Pre-comp 1_00030.png in Resources */,
 				AE1FD7351D5C929500FFD5A8 /* Pre-comp 1_00018.png in Resources */,
 				AEA24C281D5B283700DD7939 /* center_ban_EN.jpg in Resources */,
+				AEE9FAE51DC87BDD00D732A7 /* LeftMenuHeaderView.xib in Resources */,
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
 				AEA24C261D5B283700DD7939 /* bg98.png in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
@@ -3420,7 +3420,6 @@
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* NotiTableViewCell.m in Sources */,
-				AEA24AF21D5B24D200DD7939 /* leftHeadView.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
 				AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */,
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
@@ -3553,6 +3552,7 @@
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
+				AEE9FAE31DC87BCF00D732A7 /* LeftMenuHeaderView.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,
 				AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */,
 				AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */,

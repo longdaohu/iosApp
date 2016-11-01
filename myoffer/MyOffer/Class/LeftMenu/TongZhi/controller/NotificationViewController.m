@@ -6,7 +6,7 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-#define PageSize 10
+#define PageSize 20
 #import "NotificationViewController.h"
 #import "NotiTableViewCell.h"
 #import "NotiItem.h"

@@ -12,7 +12,6 @@
 #import "XWGJNavigationController.h"
 #import "SetViewController.h"
 #import "HelpViewController.h"
-#import "leftHeadView.h"
 #import "NotificationViewController.h"
 #import "ApplyStatusViewController.h"
 #import "OrderViewController.h"
@@ -22,17 +21,21 @@
 #import "HomeViewContViewController.h"
 #import "MessageViewController.h"
 #import "CatigoryViewController.h"
+#import "LeftMenuHeaderView.h"
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
-@property(nonatomic,strong)leftHeadView *headerView;
-@property(nonatomic,copy)NSString *Applystate;  //检查申请进程，判断我的申请跳转页面
+@property(nonatomic,strong)LeftMenuHeaderView *headerView;
+//检查申请进程，判断我的申请跳转页面
+@property(nonatomic,copy)NSString *Applystate;
+//数据源
 @property(nonatomic,strong)NSMutableArray *menuItems;
+
 @property(nonatomic,assign)BOOL haveIcon;
+
 @end
 
 @implementation XWGJLeftMenuViewController
-
 
 -(NSMutableArray *)menuItems{
 
@@ -115,10 +118,8 @@
              
               [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
                 
-                 self.haveIcon = YES;
-                 self.headerView.userNameLabel.text = response[@"accountInfo"][@"displayname"];
-                 self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
-                 [self.headerView.iconImageView KD_setImageWithURL:response[@"portraitUrl"]];
+                  self.haveIcon = YES;
+                  self.headerView.response = response;
                  
              }];
   
@@ -128,8 +129,8 @@
      }else{
          
          self.haveIcon = NO;
-         self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
-         self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar.jpg"];
+         
+         [self.headerView headerViewWithUserLoginOut];
      }
     
     
@@ -199,7 +200,6 @@
     
     [self makeTableView];
     
-    [self makeTableHeaderView];
 }
 
 
@@ -223,13 +223,12 @@
 
 -(void)makeTableHeaderView
 {
-    self.headerView = [[NSBundle mainBundle] loadNibNamed:@"leftHeadView" owner:nil options:nil].lastObject;
+    self.headerView = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:nil options:nil].lastObject;
     self.tableView.tableHeaderView = self.headerView;
-    
+ 
     KDUtilDefineWeakSelfRef
-    [self.headerView.iconImageView KD_addTapAction:^(UIView *view) {
+    [self.headerView.userIconView KD_addTapAction:^(UIView *view) {
         
-        [MobClick event:@"UserIconClick"];
 
         if(![[AppDelegate sharedDelegate] isLogin])
         {
@@ -263,7 +262,7 @@
         }];
         [as showInView:[weakSelf view]];
     }];
-
+ 
 }
 
 
@@ -408,11 +407,9 @@
         
       
             [[AppDelegate sharedDelegate] logout];
-            [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-//            self.headerView.userNameLabel.text =GDLocalizedString(@"Me-005");
-//            self.headerView.iconImageView.image = [UIImage imageNamed:@"default_avatar"];
-//            [self makeCellItems];
-
+        
+            [MobClick profileSignOff];
+        
             [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
             }];
@@ -484,7 +481,7 @@
       
         [hud hideAnimated:YES afterDelay:1];
         [hud applySuccessStyle];
-        self.headerView.iconImageView.image = image;
+        self.headerView.userIconView.image = image;
     
     } failure:^(NSInteger statusCode, NSError *error) {
     
@@ -548,12 +545,11 @@
             break;
         case 3:{
             
-            if (!USER_EN) {
+      
 
                 XWGJTabBarController *tab  = ( XWGJTabBarController *)self.contentViewController;
                 
                 [tab setSelectedIndex:2];
-            }
             
         }
             break;
