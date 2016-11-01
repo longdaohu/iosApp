@@ -18,7 +18,7 @@
 #import "NewLoginRegisterViewController.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "UMSocialQQHandler.h"
-#import "XWGJLeftMenuViewController.h"
+#import "LeftMenuViewController.h"
 #import "APService.h"
 #import "NotificationViewController.h"
 #import "RNCachingURLProtocol.h"
@@ -87,7 +87,7 @@ static AppDelegate *__sharedDelegate;
     //控制器初始化
     XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
     self.mainTabBarController = mainTabBarController;
-    XWGJLeftMenuViewController *leftMenuViewController = [[XWGJLeftMenuViewController alloc] init];
+    LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     leftMenuViewController.contentViewController = mainTabBarController;
     
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController

@@ -266,7 +266,7 @@
 		AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB71D5B24D200DD7939 /* RECommonFunctions.m */; };
 		AEA24AF71D5B24D200DD7939 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AB91D5B24D200DD7939 /* RESideMenu.m */; };
 		AEA24AF81D5B24D200DD7939 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24ABB1D5B24D200DD7939 /* UIViewController+RESideMenu.m */; };
-		AEA24AF91D5B24D200DD7939 /* XWGJLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24ABD1D5B24D200DD7939 /* XWGJLeftMenuViewController.m */; };
+		AEA24AF91D5B24D200DD7939 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24ABD1D5B24D200DD7939 /* LeftMenuViewController.m */; };
 		AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC11D5B24D200DD7939 /* XWGJAaboutHeader.m */; };
 		AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AC21D5B24D200DD7939 /* XWGJAaboutHeader.xib */; };
 		AEA24AFC1D5B24D200DD7939 /* XWGJAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC41D5B24D200DD7939 /* XWGJAbout.m */; };
@@ -873,8 +873,8 @@
 		AEA24AB91D5B24D200DD7939 /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
 		AEA24ABA1D5B24D200DD7939 /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
 		AEA24ABB1D5B24D200DD7939 /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
-		AEA24ABC1D5B24D200DD7939 /* XWGJLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJLeftMenuViewController.h; sourceTree = "<group>"; };
-		AEA24ABD1D5B24D200DD7939 /* XWGJLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJLeftMenuViewController.m; sourceTree = "<group>"; };
+		AEA24ABC1D5B24D200DD7939 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		AEA24ABD1D5B24D200DD7939 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		AEA24AC01D5B24D200DD7939 /* XWGJAaboutHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJAaboutHeader.h; sourceTree = "<group>"; };
 		AEA24AC11D5B24D200DD7939 /* XWGJAaboutHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJAaboutHeader.m; sourceTree = "<group>"; };
 		AEA24AC21D5B24D200DD7939 /* XWGJAaboutHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJAaboutHeader.xib; sourceTree = "<group>"; };
@@ -2366,8 +2366,8 @@
 				AEA24AB91D5B24D200DD7939 /* RESideMenu.m */,
 				AEA24ABA1D5B24D200DD7939 /* UIViewController+RESideMenu.h */,
 				AEA24ABB1D5B24D200DD7939 /* UIViewController+RESideMenu.m */,
-				AEA24ABC1D5B24D200DD7939 /* XWGJLeftMenuViewController.h */,
-				AEA24ABD1D5B24D200DD7939 /* XWGJLeftMenuViewController.m */,
+				AEA24ABC1D5B24D200DD7939 /* LeftMenuViewController.h */,
+				AEA24ABD1D5B24D200DD7939 /* LeftMenuViewController.m */,
 			);
 			path = RESideMenu;
 			sourceTree = "<group>";
@@ -3455,7 +3455,7 @@
 				463E3A4F1B230EDC00E0BAF8 /* main.m in Sources */,
 				AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */,
 				AEA24B8C1D5B25E000DD7939 /* searchToolView.m in Sources */,
-				AEA24AF91D5B24D200DD7939 /* XWGJLeftMenuViewController.m in Sources */,
+				AEA24AF91D5B24D200DD7939 /* LeftMenuViewController.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AEA24A3A1D5B231300DD7939 /* AdvertiView.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,

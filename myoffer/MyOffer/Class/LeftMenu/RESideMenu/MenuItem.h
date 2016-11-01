@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface MenuItem : NSObject
+//cell name
 @property(nonatomic,copy)NSString *name;
+//cell icon
 @property(nonatomic,copy)NSString *icon;
+//cell 上的数量
 @property(nonatomic,copy)NSString *messageCount;
 +(instancetype)menuItemInitWithName:(NSString *)name icon:(NSString *)icon count:(NSString *)messageCount;
 

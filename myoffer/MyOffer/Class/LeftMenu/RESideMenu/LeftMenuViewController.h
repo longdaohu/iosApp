@@ -10,6 +10,6 @@
 #import "RESideMenu.h"
 
 
-@interface XWGJLeftMenuViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface LeftMenuViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)XWGJTabBarController *contentViewController;
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roman Efimov. All rights reserved.
 //
 
-#import "XWGJLeftMenuViewController.h"
+#import "LeftMenuViewController.h"
 #import "XWGJTabBarController.h"
 #import "ApplyViewController.h"
 #import "XWGJNavigationController.h"
@@ -23,7 +23,7 @@
 #import "CatigoryViewController.h"
 #import "LeftMenuHeaderView.h"
 
-@interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
+@interface LeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 //表头
 @property(nonatomic,strong)LeftMenuHeaderView *headerView;
@@ -34,7 +34,7 @@
 
 @end
 
-@implementation XWGJLeftMenuViewController
+@implementation LeftMenuViewController
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -46,9 +46,6 @@
     
 }
 
-
-
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -56,6 +53,7 @@
     [MobClick endLogPageView:@"page左侧菜单"];
     
 }
+
 -(NSMutableArray *)menuItems{
 
     if (!_menuItems) {
@@ -124,8 +122,8 @@
 /**
  *获取数据源
  */
-- (void)makeDataSource {
-    
+- (void)makeDataSource
+{
     
     [self makeCellItems];
     
@@ -181,7 +179,6 @@
 }
 
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -220,7 +217,9 @@
 
 }
 
--(LeftMenuHeaderView *)headerView{
+//headerView懒加载
+-(LeftMenuHeaderView *)headerView
+{
 
     if (!_headerView) {
         
@@ -268,7 +267,6 @@
     return _headerView;
 }
 
-
 //UIViewController  跳转
 -(void)pushViewController:(UIViewController *)vc
 {
@@ -277,7 +275,7 @@
     
 }
 
-
+//我的申请
 -(void)caseApply
 {
     
@@ -296,48 +294,41 @@
     
 }
 
-
+//设置
 -(void)caseSetting
 {
-     [self.sideMenuViewController hideMenuViewController];
-
+ 
      [self pushViewController:[[SetViewController alloc] init]];
     
 }
 
+//帮助
 -(void)caseHelp
 {
-    [self.sideMenuViewController hideMenuViewController];
-
+ 
     [self pushViewController:[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil]];
     
 }
-
+//订单中心
 -(void)caseOrderList
 {
-    [self.sideMenuViewController hideMenuViewController];
-
+ 
     RequireLogin
     
     [self pushViewController:[[OrderViewController alloc] init]];
     
 }
 
-
+//通知
 -(void)caseNotication
 {
- 
-    [self.sideMenuViewController hideMenuViewController];
-
     RequireLogin
-  
     [self pushViewController:[[NotificationViewController alloc] init]];
-    
 }
 
-
 //注销
-- (void)xlogout{
+- (void)caseLogout
+{
  
     UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
     [sheet showInView:self.view];
@@ -349,6 +340,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
+    if (indexPath.row == self.menuItems.count - 1) {
+        
+        [self caseLogout];
+
+        return;
+    }
+    
+    
+    [self.sideMenuViewController hideMenuViewController];
+
     switch (indexPath.row) {
         case 0:
             [self caseApply];
@@ -366,7 +368,6 @@
             [self caseHelp];
             break;
         default:
-            [self xlogout];
             break;
     }
 }
