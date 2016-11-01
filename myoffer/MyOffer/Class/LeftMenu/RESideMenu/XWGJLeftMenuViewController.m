@@ -25,18 +25,37 @@
 
 @interface XWGJLeftMenuViewController ()<UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) UITableView *tableView;
+//表头
 @property(nonatomic,strong)LeftMenuHeaderView *headerView;
 //检查申请进程，判断我的申请跳转页面
 @property(nonatomic,copy)NSString *Applystate;
 //数据源
 @property(nonatomic,strong)NSMutableArray *menuItems;
 
-@property(nonatomic,assign)BOOL haveIcon;
-
 @end
 
 @implementation XWGJLeftMenuViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page左侧菜单"];
+    
+    [self  makeDataSource];
+    
+    
+}
 
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page左侧菜单"];
+    
+}
 -(NSMutableArray *)menuItems{
 
     if (!_menuItems) {
@@ -114,11 +133,11 @@
      if(LOGIN) {
          
          //请求头像信息
-         if (!self.haveIcon){
+         if (!self.headerView.haveIcon){
              
               [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
                 
-                  self.haveIcon = YES;
+                  self.headerView.haveIcon = YES;
                   self.headerView.response = response;
                  
              }];
@@ -128,7 +147,7 @@
          
      }else{
          
-         self.haveIcon = NO;
+         self.headerView.haveIcon = NO;
          
          [self.headerView headerViewWithUserLoginOut];
      }
@@ -160,28 +179,7 @@
     
     
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:@"page左侧菜单"];
-    
-    [self  makeDataSource];
-        
 
-}
-
-
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:@"page左侧菜单"];
-    
-    
-}
 
 
 - (void)viewDidLoad
@@ -217,56 +215,61 @@
         tableView;
     });
     
-    [self makeTableHeaderView];
+ 
+    self.tableView.tableHeaderView = self.headerView;
 
 }
 
--(void)makeTableHeaderView
-{
-    self.headerView = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:nil options:nil].lastObject;
-    self.tableView.tableHeaderView = self.headerView;
- 
-    KDUtilDefineWeakSelfRef
-    [self.headerView.userIconView KD_addTapAction:^(UIView *view) {
-        
+-(LeftMenuHeaderView *)headerView{
 
-        if(![[AppDelegate sharedDelegate] isLogin])
-        {
-            [self.sideMenuViewController hideMenuViewController];
+    if (!_headerView) {
+        
+        _headerView = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:nil options:nil].lastObject;
+        
+        KDUtilDefineWeakSelfRef
+        [_headerView.userIconView KD_addTapAction:^(UIView *view) {
             
-            RequireLogin
-        }
-        //@"更换头像"  @"取消"
-        KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:GDLocalizedString(@"Me-008")
-                                               cancelButtonTitle:GDLocalizedString(@"Me-007")
-                                                    cancelAction:nil
-                                          destructiveButtonTitle:nil
-                                               destructiveAction:nil];
-        // @"拍照"  @"从手机相册选择"
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
+            
+            if(![[AppDelegate sharedDelegate] isLogin])
+            {
+                [self.sideMenuViewController hideMenuViewController];
+                
+                RequireLogin
+            }
+            //@"更换头像"  @"取消"
+            KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:GDLocalizedString(@"Me-008")
+                                                   cancelButtonTitle:GDLocalizedString(@"Me-007")
+                                                        cancelAction:nil
+                                              destructiveButtonTitle:nil
+                                                   destructiveAction:nil];
+            // @"拍照"  @"从手机相册选择"
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
+                    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                    imagePicker.delegate = weakSelf;
+                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    imagePicker.allowsEditing = YES;
+                    imagePicker.showsCameraControls = YES;
+                    [self presentViewController:imagePicker animated:YES completion:^{}];
+                }];
+            }
+            [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = weakSelf;
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 imagePicker.allowsEditing = YES;
-                imagePicker.showsCameraControls = YES;
                 [self presentViewController:imagePicker animated:YES completion:^{}];
             }];
-        }
-        [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = weakSelf;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            imagePicker.allowsEditing = YES;
-            [self presentViewController:imagePicker animated:YES completion:^{}];
+            [as showInView:[weakSelf view]];
         }];
-        [as showInView:[weakSelf view]];
-    }];
- 
+
+        
+    }
+    return _headerView;
 }
 
 
-
+//UIViewController  跳转
 -(void)pushViewController:(UIViewController *)vc
 {
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
@@ -279,9 +282,6 @@
 {
     
     [self.sideMenuViewController hideMenuViewController];
-
-    
-    [MobClick event:@"myApply"];
     
      RequireLogin
     
@@ -326,8 +326,7 @@
 
 -(void)caseNotication
 {
-    [MobClick event:@"notificationItemClick"];
-
+ 
     [self.sideMenuViewController hideMenuViewController];
 
     RequireLogin
