@@ -20,7 +20,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+
 }
 
 
@@ -61,9 +61,8 @@ static NSString *cellIdentifier = @"menu";
         [self.contentView addSubview:lineView2];
         
         
-        
         self.countLab =[[UILabel alloc] init];
-        self.countLab.layer.cornerRadius = 9;
+        self.countLab.layer.cornerRadius = RedSpot_Height * 0.5;
         self.countLab.layer.masksToBounds = YES;
         self.countLab.backgroundColor =[UIColor redColor];
         self.countLab.textColor = [UIColor whiteColor];
@@ -89,9 +88,7 @@ static NSString *cellIdentifier = @"menu";
     
     self.countLab.text = item.messageCount.integerValue  >= 100 ? @"99+": item.messageCount;
     
-    CGFloat countw  = 18;
-    
-    NSLog(@"countLab countLab %@ ",self.countLab.text );
+    CGFloat countw  = RedSpot_Height;
     
     if (self.countLab.text.length > 1) {
         
@@ -101,7 +98,7 @@ static NSString *cellIdentifier = @"menu";
     
     CGFloat countx  = XScreenWidth * 0.8 - 70;
     CGFloat county  = 0.5 * (self.bounds.size.height - 18);
-    CGFloat counth  = 18;
+    CGFloat counth  = RedSpot_Height;
     self.countLab.frame =  CGRectMake(countx,county,countw,counth);
 }
 

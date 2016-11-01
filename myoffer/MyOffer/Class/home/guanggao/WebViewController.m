@@ -155,13 +155,13 @@
     }else if([absoluteString hasSuffix:@"recommend?major"]){
         pageNumber = 4; //OK   留学咨询
     }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report_hr.asp"] ) {
-        pageNumber = 5;  //Ok
+        pageNumber = 5;  //Ok   WebViewController
     }else if([absoluteString containsString:@"jump/0"]) {
-        pageNumber = 6;
+        pageNumber = 6;  //    申请状态
     }else if([absoluteString containsString:@"/university/"]) {
-        pageNumber = 7;
+        pageNumber = 7;  //     学校详情
     }else if([absoluteString containsString:@"service.html"]) {
-        pageNumber = 8;
+        pageNumber = 8;  //服务商城
     }
     
     switch (pageNumber) {

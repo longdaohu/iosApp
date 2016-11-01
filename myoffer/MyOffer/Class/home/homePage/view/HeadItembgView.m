@@ -11,7 +11,9 @@
 
 
 @interface HeadItembgView ()
+//名称数组
 @property(nonatomic,strong)NSArray *itemTitles;
+//图片数组
 @property(nonatomic,strong)NSArray *itemImages;
 
 @end
@@ -79,7 +81,6 @@
     }
     
 }
-
 
 
 -(void)layoutSubviews

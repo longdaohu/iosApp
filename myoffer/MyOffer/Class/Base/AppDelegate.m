@@ -10,7 +10,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "KDKeychain.h"
-#import "DiscoverViewController.h"
 #import "MeViewController.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"

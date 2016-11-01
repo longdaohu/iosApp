@@ -86,11 +86,11 @@
     
     self.tagFrames = [temps copy];
     
-    CGFloat tapViewx    = 0;
-    CGFloat tapViewy    = CGRectGetMaxY(self.addressFrame) + KDUtilSize(ITEM_MARGIN);
-    CGFloat tapVieww    = bgw;
-    CGFloat tapViewh    = 55;
-    self.tagsBgViewFrame = CGRectMake(tapViewx, tapViewy, tapVieww, tapViewh);
+    CGFloat tagViewx    = 0;
+    CGFloat tagViewy    = CGRectGetMaxY(self.addressFrame) + KDUtilSize(ITEM_MARGIN);
+    CGFloat tagVieww    = bgw;
+    CGFloat tagViewh    = 55;
+    self.tagsBgViewFrame = CGRectMake(tagViewx, tagViewy, tagVieww, tagViewh);
     
     CGFloat bgh         =  USER_EN ? (CGRectGetMaxY(self.addressFrame) + ITEM_MARGIN) :(CGRectGetMaxY(self.tagsBgViewFrame) + ITEM_MARGIN);
     

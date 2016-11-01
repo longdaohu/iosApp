@@ -9,6 +9,7 @@
 #import "NotiTableViewCell.h"
 #import "NotiItem.h"
 
+
 @interface NotiTableViewCell ()
 @property(nonatomic,strong)UIImageView *logoView;
 @property(nonatomic,strong)UILabel *titleLab;
@@ -46,7 +47,8 @@
         self.redSpotsView=[[UIImageView alloc] init];
         self.redSpotsView.contentMode = UIViewContentModeCenter;
         [self.contentView addSubview:self.redSpotsView];
-        self.redSpotsView.image = [UIImage imageNamed:@"message_dot"];
+        self.redSpotsView.backgroundColor = [UIColor redColor];
+        self.redSpotsView.layer.cornerRadius = RedSpot_Height * 0.5;
         
         self.titleLab =[UILabel labelWithFontsize:XPERCENT * 15 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.titleLab];
@@ -88,10 +90,10 @@
     self.logoView.frame =CGRectMake(logox, logoy, logow, logoh);
     
 
-    CGFloat redw = logow * 0.5 - 7;
+    CGFloat redw = RedSpot_Height;
     CGFloat redh = redw;
-    CGFloat redx = CGRectGetMaxX(self.logoView.frame) - redw;
-    CGFloat redy = logoy;
+    CGFloat redx = CGRectGetMaxX(self.logoView.frame) - 4 - redw;
+    CGFloat redy = logoy + 4;
     self.redSpotsView.frame =CGRectMake(redx, redy, redw, redh);
     
     CGFloat titleX = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;

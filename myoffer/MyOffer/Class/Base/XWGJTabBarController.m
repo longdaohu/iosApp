@@ -9,7 +9,7 @@
 #import "XWGJTabBarController.h"
 #import "HomeViewContViewController.h"
 #import "MeViewController.h"
-#import "DiscoverViewController.h"
+//#import "DiscoverViewController.h"
 #import "MessageViewController.h"
 #import "CatigoryViewController.h"
 

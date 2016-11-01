@@ -137,7 +137,7 @@
 //配置页面控件
 - (void)makeUIConfigrationWithResponse:(id)response{
 
-    self.nextPage +=1;
+    self.nextPage += 1;
     
     if ([self.tableView.mj_header isRefreshing]) {
         

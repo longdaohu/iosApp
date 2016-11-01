@@ -237,10 +237,6 @@
 		AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */; };
 		AEA24A3D1D5B231300DD7939 /* XprofileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */; };
 		AEA24A3E1D5B231300DD7939 /* XprofileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2E1D5B231300DD7939 /* XprofileTableViewCell.xib */; };
-		AEA24A851D5B23F600DD7939 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A421D5B23F500DD7939 /* DiscoverViewController.m */; };
-		AEA24A861D5B23F600DD7939 /* DiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A431D5B23F500DD7939 /* DiscoverViewController.xib */; };
-		AEA24A871D5B23F600DD7939 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A451D5B23F500DD7939 /* DiscoveryCell.m */; };
-		AEA24A881D5B23F600DD7939 /* DiscoveryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A461D5B23F500DD7939 /* DiscoveryCell.xib */; };
 		AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */; };
 		AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */; };
 		AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A531D5B23F500DD7939 /* HeadItem.m */; };
@@ -820,12 +816,6 @@
 		AEA24A2C1D5B231300DD7939 /* XprofileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XprofileTableViewCell.h; sourceTree = "<group>"; };
 		AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XprofileTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A2E1D5B231300DD7939 /* XprofileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XprofileTableViewCell.xib; sourceTree = "<group>"; };
-		AEA24A411D5B23F500DD7939 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
-		AEA24A421D5B23F500DD7939 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
-		AEA24A431D5B23F500DD7939 /* DiscoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverViewController.xib; sourceTree = "<group>"; };
-		AEA24A441D5B23F500DD7939 /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
-		AEA24A451D5B23F500DD7939 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
-		AEA24A461D5B23F500DD7939 /* DiscoveryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryCell.xib; sourceTree = "<group>"; };
 		AEA24A4C1D5B23F500DD7939 /* HomeViewContViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewContViewController.h; sourceTree = "<group>"; };
 		AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewContViewController.m; sourceTree = "<group>"; };
 		AEA24A4F1D5B23F500DD7939 /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
@@ -2198,26 +2188,12 @@
 		AEA24A3F1D5B23F500DD7939 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A401D5B23F500DD7939 /* Discovery */,
 				AEA24A471D5B23F500DD7939 /* guanggao */,
 				AEA24A4A1D5B23F500DD7939 /* homePage */,
 				AEA24A661D5B23F600DD7939 /* woyaoliuxue */,
 				AEA24A731D5B23F600DD7939 /* XiaoBai */,
 			);
 			path = home;
-			sourceTree = "<group>";
-		};
-		AEA24A401D5B23F500DD7939 /* Discovery */ = {
-			isa = PBXGroup;
-			children = (
-				AEA24A411D5B23F500DD7939 /* DiscoverViewController.h */,
-				AEA24A421D5B23F500DD7939 /* DiscoverViewController.m */,
-				AEA24A431D5B23F500DD7939 /* DiscoverViewController.xib */,
-				AEA24A441D5B23F500DD7939 /* DiscoveryCell.h */,
-				AEA24A451D5B23F500DD7939 /* DiscoveryCell.m */,
-				AEA24A461D5B23F500DD7939 /* DiscoveryCell.xib */,
-			);
-			path = Discovery;
 			sourceTree = "<group>";
 		};
 		AEA24A471D5B23F500DD7939 /* guanggao */ = {
@@ -3165,7 +3141,6 @@
 				AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */,
 				AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */,
 				AEA24C221D5B283700DD7939 /* appbg.jpg in Resources */,
-				AEA24A881D5B23F600DD7939 /* DiscoveryCell.xib in Resources */,
 				AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */,
 				AEA24B901D5B25E000DD7939 /* UniversityCourseViewController.xib in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
@@ -3263,7 +3238,6 @@
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
 				AEEB51CA1BF9EB8600925E36 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AEA24C271D5B283700DD7939 /* center_ban_CN.jpg in Resources */,
-				AEA24A861D5B23F600DD7939 /* DiscoverViewController.xib in Resources */,
 				AEF421011BD4988B00CFB45E /* UMSCommentInputController.xib in Resources */,
 				AEA24C251D5B283700DD7939 /* AU.jpg in Resources */,
 				AEA24B771D5B25E000DD7939 /* SearchResultViewController.xib in Resources */,
@@ -3366,7 +3340,6 @@
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
 				AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */,
 				AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */,
-				AEA24A871D5B23F600DD7939 /* DiscoveryCell.m in Sources */,
 				AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */,
 				AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */,
 				AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */,
@@ -3577,7 +3550,6 @@
 				462D46671B353A0F00BC7861 /* FXBlurView.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
 				AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */,
-				AEA24A851D5B23F600DD7939 /* DiscoverViewController.m in Sources */,
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,

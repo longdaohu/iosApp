@@ -33,7 +33,8 @@
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"
 #import "UniversityNew.h"
-
+#import "HeadItem.h"
+ 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
 //搜索工具条
@@ -174,7 +175,6 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorHotUniversity parameters:nil success:^(NSInteger statusCode, id response) {
         
-        
         [self dataSourseWithFresh:refresh GroupIndex:2];
         
         [self hotUniverstiyWithResponse:(NSArray *)response];
@@ -196,7 +196,7 @@
         [self hotCityWithResponse:response];
         
         [self.TableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-        
+    
     }];
 }
 
@@ -373,7 +373,7 @@
 
     [self makeRefreshView];
     
-     [self makeSearchView];
+    [self makeSearchView];
    
 }
 
@@ -384,6 +384,7 @@
     HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XScreenWidth, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
         [self HomeHeaderViewWithItemtap:itemTag];
     }];
+    
     self.TableView.tableHeaderView  = TableHeaderView;
     [self makeAutoLoopViewAtView: TableHeaderView];
  
