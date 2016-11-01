@@ -59,6 +59,7 @@
         self.states = @[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-ENG001"),GDLocalizedString(@"CategoryVC-ENG002"),GDLocalizedString(@"CategoryVC-ENG003"),GDLocalizedString(@"CategoryVC-ENG004")];
         
     }else{
+        
         self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
     }
     
@@ -82,7 +83,8 @@
     
 }
 
-#pragma mark —————— UITableViewDelegate  UITableViewDataSource
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return self.states.count;

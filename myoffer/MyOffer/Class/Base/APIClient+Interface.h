@@ -72,4 +72,6 @@
 #define kAPISelectorArticleCategory @"GET api/article/search?"
 //资讯详情
 #define kAPISelectorArticleDetail @"GET api/v2/article/"
+//留学攻略
+#define kAPISelectorGonglueList @"GET http://public.myoffer.cn/docs/zh-cn/tips.json"
 

@@ -91,6 +91,7 @@
     
 }
 
+//头部图片
 -(void)makeFlexibleImageView
 {
     self.FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, AdjustF(160.f))];
@@ -107,6 +108,7 @@
     }];
 }
 
+//自定义导航栏
 -(void)makeTopNavigaitonView{
     
     XWeakSelf
@@ -123,7 +125,7 @@
 -(void)makeTableView
 {
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
-    self.TableView.backgroundColor = XCOLOR_CLEAR;
+    self.TableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
     [self.view addSubview:self.TableView];

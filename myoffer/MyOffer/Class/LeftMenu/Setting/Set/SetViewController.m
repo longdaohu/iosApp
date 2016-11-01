@@ -11,7 +11,6 @@
 #import "FXBlurView.h"
 #import "ApplyViewController.h"
 #import "FeedbackViewController.h"
-#import "ChangeLanguageViewController.h"
 #import "XWGJAboutViewController.h"
 #import "MenuItem.h"
 
@@ -77,7 +76,8 @@
 }
 
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
     return 1;
@@ -126,7 +126,7 @@ static NSString *identify = @"set";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 0.01;
+    return  HEIGHT_ZERO;
 }
 
 
@@ -154,13 +154,6 @@ static NSString *identify = @"set";
     [self.navigationController pushViewController:About animated:YES];
 }
 
-//语言切换
--(void)caseChangeLanguage{
-    
-    [MobClick event:@"changeUserLanguage"];
-     ChangeLanguageViewController *vc = [[ChangeLanguageViewController alloc] initWithNibName:@"ChangeLanguageViewController" bundle:nil];
-     [self.navigationController pushViewController:vc animated:YES];
-}
 
 
 

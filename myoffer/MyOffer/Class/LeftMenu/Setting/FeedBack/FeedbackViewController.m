@@ -24,9 +24,6 @@
     return self;
 }
 
-
-
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -36,14 +33,19 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
     [MobClick beginLogPageView:@"page反馈"];
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
+    
     [_textView becomeFirstResponder];
 }
 

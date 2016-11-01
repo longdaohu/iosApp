@@ -10,7 +10,9 @@
 
 typedef void(^headerViewBlock)(UIButton *);
 @interface CatigaryCityCollectionHeaderView : UIView
+//间隔
 @property(nonatomic,strong)UILabel *panding;
+//国家
 @property(nonatomic,strong)UILabel *countryLab;
 //英国选项
 @property(nonatomic,strong)UIButton *englishBtn;

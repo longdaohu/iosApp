@@ -45,6 +45,7 @@
     _subject = subject;
     
     self.IconView.image = [UIImage imageNamed:subject.IconName];
+    
     self.TitleLab.text = subject.TitleName;
 }
 

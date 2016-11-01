@@ -275,8 +275,6 @@
 		AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24ACA1D5B24D200DD7939 /* BindEmailViewController.xib */; };
 		AEA24B001D5B24D200DD7939 /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24ACD1D5B24D200DD7939 /* BindPhoneViewController.m */; };
 		AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24ACE1D5B24D200DD7939 /* BindPhoneViewController.xib */; };
-		AEA24B021D5B24D200DD7939 /* ChangeLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AD11D5B24D200DD7939 /* ChangeLanguageViewController.m */; };
-		AEA24B031D5B24D200DD7939 /* ChangeLanguageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AD21D5B24D200DD7939 /* ChangeLanguageViewController.xib */; };
 		AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AD51D5B24D200DD7939 /* ChangePasswordViewController.m */; };
 		AEA24B051D5B24D200DD7939 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AD61D5B24D200DD7939 /* ChangePasswordViewController.xib */; };
 		AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AD91D5B24D200DD7939 /* TextFieldViewController.m */; };
@@ -888,9 +886,6 @@
 		AEA24ACC1D5B24D200DD7939 /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		AEA24ACD1D5B24D200DD7939 /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		AEA24ACE1D5B24D200DD7939 /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
-		AEA24AD01D5B24D200DD7939 /* ChangeLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLanguageViewController.h; sourceTree = "<group>"; };
-		AEA24AD11D5B24D200DD7939 /* ChangeLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLanguageViewController.m; sourceTree = "<group>"; };
-		AEA24AD21D5B24D200DD7939 /* ChangeLanguageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeLanguageViewController.xib; sourceTree = "<group>"; };
 		AEA24AD41D5B24D200DD7939 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		AEA24AD51D5B24D200DD7939 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		AEA24AD61D5B24D200DD7939 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
@@ -2355,19 +2350,9 @@
 		AEA24AAD1D5B24D200DD7939 /* RESideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24AAE1D5B24D200DD7939 /* HeaderView */,
-				AEA24AB21D5B24D200DD7939 /* MenuCell.h */,
-				AEA24AB31D5B24D200DD7939 /* MenuCell.m */,
-				AEA24AB41D5B24D200DD7939 /* MenuItem.h */,
-				AEA24AB51D5B24D200DD7939 /* MenuItem.m */,
-				AEA24AB61D5B24D200DD7939 /* RECommonFunctions.h */,
-				AEA24AB71D5B24D200DD7939 /* RECommonFunctions.m */,
-				AEA24AB81D5B24D200DD7939 /* RESideMenu.h */,
-				AEA24AB91D5B24D200DD7939 /* RESideMenu.m */,
-				AEA24ABA1D5B24D200DD7939 /* UIViewController+RESideMenu.h */,
-				AEA24ABB1D5B24D200DD7939 /* UIViewController+RESideMenu.m */,
-				AEA24ABC1D5B24D200DD7939 /* LeftMenuViewController.h */,
-				AEA24ABD1D5B24D200DD7939 /* LeftMenuViewController.m */,
+				AEE9FAE81DC89AE300D732A7 /* V */,
+				AEE9FAE71DC89ADF00D732A7 /* M */,
+				AEE9FAE61DC89ADA00D732A7 /* C */,
 			);
 			path = RESideMenu;
 			sourceTree = "<group>";
@@ -2388,7 +2373,6 @@
 				AEA24ABF1D5B24D200DD7939 /* About */,
 				AEA24AC71D5B24D200DD7939 /* Bind_Email */,
 				AEA24ACB1D5B24D200DD7939 /* Bind_Phone */,
-				AEA24ACF1D5B24D200DD7939 /* Chage_Language */,
 				AEA24AD31D5B24D200DD7939 /* Chage_Password */,
 				AEA24AD71D5B24D200DD7939 /* Change_UserName */,
 				AEA24ADA1D5B24D200DD7939 /* FeedBack */,
@@ -2430,16 +2414,6 @@
 				AEA24ACE1D5B24D200DD7939 /* BindPhoneViewController.xib */,
 			);
 			path = Bind_Phone;
-			sourceTree = "<group>";
-		};
-		AEA24ACF1D5B24D200DD7939 /* Chage_Language */ = {
-			isa = PBXGroup;
-			children = (
-				AEA24AD01D5B24D200DD7939 /* ChangeLanguageViewController.h */,
-				AEA24AD11D5B24D200DD7939 /* ChangeLanguageViewController.m */,
-				AEA24AD21D5B24D200DD7939 /* ChangeLanguageViewController.xib */,
-			);
-			path = Chage_Language;
 			sourceTree = "<group>";
 		};
 		AEA24AD31D5B24D200DD7939 /* Chage_Password */ = {
@@ -2904,6 +2878,40 @@
 			name = LIB;
 			sourceTree = "<group>";
 		};
+		AEE9FAE61DC89ADA00D732A7 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AEA24AB61D5B24D200DD7939 /* RECommonFunctions.h */,
+				AEA24AB71D5B24D200DD7939 /* RECommonFunctions.m */,
+				AEA24AB81D5B24D200DD7939 /* RESideMenu.h */,
+				AEA24AB91D5B24D200DD7939 /* RESideMenu.m */,
+				AEA24ABA1D5B24D200DD7939 /* UIViewController+RESideMenu.h */,
+				AEA24ABB1D5B24D200DD7939 /* UIViewController+RESideMenu.m */,
+				AEA24ABC1D5B24D200DD7939 /* LeftMenuViewController.h */,
+				AEA24ABD1D5B24D200DD7939 /* LeftMenuViewController.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		AEE9FAE71DC89ADF00D732A7 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AEA24AB41D5B24D200DD7939 /* MenuItem.h */,
+				AEA24AB51D5B24D200DD7939 /* MenuItem.m */,
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		AEE9FAE81DC89AE300D732A7 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AEA24AAE1D5B24D200DD7939 /* HeaderView */,
+				AEA24AB21D5B24D200DD7939 /* MenuCell.h */,
+				AEA24AB31D5B24D200DD7939 /* MenuCell.m */,
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
 		AEEB51C31BF9EB8600925E36 /* TencentOpenAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -3162,7 +3170,6 @@
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
-				AEA24B031D5B24D200DD7939 /* ChangeLanguageViewController.xib in Resources */,
 				AEF421021BD4988B00CFB45E /* UMSCommentInputControlleriPad.xib in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AEA24C2B1D5B283700DD7939 /* guid_smart.png in Resources */,
@@ -3442,7 +3449,6 @@
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
-				AEA24B021D5B24D200DD7939 /* ChangeLanguageViewController.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
 				AE1FD74D1D5C929500FFD5A8 /* MJRefreshAutoNormalFooter.m in Sources */,
 				AEA24AF81D5B24D200DD7939 /* UIViewController+RESideMenu.m in Sources */,

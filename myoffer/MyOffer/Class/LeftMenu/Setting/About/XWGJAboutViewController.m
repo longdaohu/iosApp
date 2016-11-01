@@ -100,7 +100,8 @@
 
 
 
-#pragma mark —————— UITableViewDataDeleage UITableViewDeleage
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     CGFloat sectionHeigt = section == 0 ? HEIGHT_ZERO : 40;
@@ -279,6 +280,6 @@
 
 -(void)dealloc
 {
-    KDClassLog(@"XWGJAboutViewController dealloc");
+    KDClassLog(@"关于 dealloc");
 }
 @end

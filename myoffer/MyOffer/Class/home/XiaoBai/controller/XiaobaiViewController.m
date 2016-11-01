@@ -42,7 +42,6 @@
 
 @implementation XiaobaiViewController
 
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -133,7 +132,7 @@
 {
     XWeakSelf
     
-    [self startAPIRequestWithSelector:@"GET http://public.myoffer.cn/docs/zh-cn/tips.json" parameters:nil expectedStatusCodes:nil showHUD:fresh showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorGonglueList parameters:nil expectedStatusCodes:nil showHUD:fresh showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf configrationUIWithResponse:response];
         
@@ -293,7 +292,7 @@ static NSString *subjectIdentify = @"subjectCell";
     
 }
 
-#pragma mark ———————— UITableViewData UITableViewDelegate
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -310,7 +309,6 @@ static NSString *subjectIdentify = @"subjectCell";
     return cell;
     
 }
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

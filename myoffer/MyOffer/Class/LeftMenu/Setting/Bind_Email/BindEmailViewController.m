@@ -246,12 +246,14 @@
         [alert show];
     }
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
         
         ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
         passwordVC.newpasswd = @"newPasswd";
+        
         [self.navigationController pushViewController:passwordVC animated:YES];
         
     }

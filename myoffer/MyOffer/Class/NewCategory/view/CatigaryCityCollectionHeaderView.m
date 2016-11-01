@@ -15,6 +15,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
+        
         self.panding = [[UILabel alloc] init];
         self.panding.layer.cornerRadius = 2.5;
         self.panding.layer.masksToBounds = YES;
