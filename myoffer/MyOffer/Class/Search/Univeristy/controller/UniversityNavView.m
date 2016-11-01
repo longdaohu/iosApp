@@ -25,13 +25,14 @@
      self.rightView.actionBlock = ^(UIButton *sender){
         [weakSelf onclick:sender];
     };
+    
     [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
+    
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     
     self.titleLab.font = [UIFont boldSystemFontOfSize:17];
     
     [super awakeFromNib];
-    
     
     self.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
     

@@ -42,16 +42,26 @@ typedef enum {
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
 @property(nonatomic,strong)UITableView *tableView;
+//第一分组
 @property(nonatomic,strong)UniGroupOneView  *oneGroup;
+//学校Frame数据
 @property(nonatomic,strong)UniversityNewFrame    *UniFrame;
+//头部图片
 @property(nonatomic,strong)UIImageView           *iconView;
+//头部图片数据
 @property(nonatomic,assign)CGRect                iconViewOldFrame;
 @property(nonatomic,assign)CGPoint               iconViewOldCenter;
+//分组数据
 @property(nonatomic,strong)NSMutableArray        *groups;
+//表头
 @property(nonatomic,strong)UniverstyHeaderView   *header;
+//自定义导航栏
 @property(nonatomic,strong)UniversityNavView     *topNavigationView;
+//是否收藏
 @property(nonatomic,assign)BOOL favorited;
+//当前选择类型
 @property(nonatomic,assign)UniversityItemType    *clickType;
+//分享功能
 @property(nonatomic,strong)ShareViewController   *shareVC;
 
 @end
