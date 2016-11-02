@@ -16,6 +16,8 @@ typedef enum{
 typedef void(^UniversityRightViewwBlock)(UIButton *sender);
 @interface UniversityRightView : UIView
 @property(nonatomic,copy)UniversityRightViewwBlock  actionBlock;
+
++ (instancetype)ViewWithBlock:(UniversityRightViewwBlock)actionBlock;
 //带阴影
 - (void)shadowWithFavorited:(BOOL)favorited;
 - (void)shadowWithShare;

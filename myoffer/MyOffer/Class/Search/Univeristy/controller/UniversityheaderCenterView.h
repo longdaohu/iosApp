@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UniversityNewFrame.h"
+typedef enum{
+    Uni_Header_CenterItemStyleMore = 100,  //展示
+    Uni_Header_CenterItemStyleWeb        //web
+}Uni_Header_CenterItemStyle;
 
 typedef void(^UniversityCenterViewBlock)(UIButton *sender);
 @interface UniversityheaderCenterView : UIView

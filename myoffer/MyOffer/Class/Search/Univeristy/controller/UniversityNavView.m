@@ -12,34 +12,42 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 //背景图片
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+//收藏、分享
+@property(nonatomic,strong)UniversityRightView   *rightView;
 
 @end
 
 
 @implementation UniversityNavView
 
++ (instancetype)ViewWithBlock:(UniversityNavViewBlock)actionBlock{
+    
+    UniversityNavView *topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
+    
+    topNavigationView.actionBlock = actionBlock;
+    
+    return  topNavigationView;
+}
+
 -(void)awakeFromNib{
 
+    
     
     NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
     self.bgImageView.image =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
     self.clipsToBounds = YES;
     self.bgImageView.alpha = 0;
-    
-    
-    XWeakSelf
-    self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
-  
-    [self.rightView noShadowWithShare];
-    
-     self.rightView.actionBlock = ^(UIButton *sender){
-         
+   
+     XWeakSelf
+    self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
+        
         [weakSelf onclick:sender];
+
+    }];
     
-     };
-    
-    
+    [self.rightView noShadowWithShare];
     [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
+    
     
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     
@@ -61,15 +69,25 @@
 
 - (IBAction)backClick:(id)sender {
     
-    [self onclick:sender];
+    UIButton *backBtn = (UIButton *)sender;
+    backBtn.tag = NavItemStyleBack;
+    [self onclick:backBtn];
 }
 
 - (void)onclick:(UIButton *)sender{
+    
+    [self ViewItem:sender];
+ 
+}
+
+
+- (void)ViewItem:(UIButton *)sender{
 
     if (self.actionBlock) {
-        
+
         self.actionBlock(sender);
     }
+    
 }
 
 
@@ -126,14 +144,6 @@
     
 }
 
-
-- (void)layoutSubviews{
-
-    [super layoutSubviews];
-    
-
-    
-}
 
 
 

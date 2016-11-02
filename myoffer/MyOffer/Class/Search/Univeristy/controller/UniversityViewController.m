@@ -28,6 +28,7 @@
 #import "UniversityCourseViewController.h"
 #import "InteProfileViewController.h"
 #import "UniDetailGroup.h"
+#import "UniversityheaderCenterView.h"
 
 
 typedef enum {
@@ -36,6 +37,7 @@ typedef enum {
     UniversityItemTypeShare,
     UniversityItemTypeMore,
     UniversityItemTypeWeb,
+    UniversityItemTypePipei,
     UniversityItemTypePop
 }UniversityItemType;//表头按钮选项
 #define HEIGHT_BOTTOM 70
@@ -60,7 +62,7 @@ typedef enum {
 //是否收藏
 @property(nonatomic,assign)BOOL favorited;
 //当前选择类型
-@property(nonatomic,assign)UniversityItemType    *clickType;
+@property(nonatomic,assign)UniversityItemType    clickType;
 //分享功能
 @property(nonatomic,strong)ShareViewController   *shareVC;
 
@@ -92,7 +94,8 @@ typedef enum {
     if (LOGIN) {
         
         [self refesh];
-        
+       
+        [self userDidClickItem];
     }
   
 }
@@ -124,14 +127,11 @@ typedef enum {
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
 {
-//    if (LOGIN) {
-//        
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            
-//            [self detailPageClickWithItemType:self.detailType];
-//        });
-//        
-//    }
+         XWeakSelf
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf  UnivertityClickType:self.clickType];
+        });
+    
 }
 
 
@@ -171,7 +171,7 @@ typedef enum {
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
-        [weakSelf pop];
+        [weakSelf casePop];
 
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -189,7 +189,7 @@ typedef enum {
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [weakSelf pop];
+        [weakSelf casePop];
         
     }];
     
@@ -291,16 +291,16 @@ typedef enum {
 
     
     XWeakSelf
-    self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
-    self.topNavigationView.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
-    self.topNavigationView.actionBlock = ^(UIButton *sender){
-        
+    self.topNavigationView = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
+
         [weakSelf onClick:sender];
         
-    };
+    }];
     
     [self.view addSubview:self.topNavigationView];
+    
 }
+
 
 -(void)makeTableView
 {
@@ -484,25 +484,23 @@ typedef enum {
 }
 
 
+
 - (void)onClick:(UIButton *)sender{
     
-    
     switch (sender.tag) {
-        case 110:
+        case RightViewItemStyleFavorited:
             [self UnivertityClickType:UniversityItemTypeFavor];
             break;
-        case 111:
+        case RightViewItemStyleShare:
             [self UnivertityClickType:UniversityItemTypeShare];
             break;
-        case 112:
+        case NavItemStyleBack:
             [self UnivertityClickType:UniversityItemTypePop];
             break;
-        case 113:
+        case Uni_Header_CenterItemStyleMore:
             [self UnivertityClickType:UniversityItemTypeMore];
             break;
-        case 114:
-            [self UnivertityClickType:UniversityItemTypeWeb];
-            break;
+
          default:
             break;
     }
@@ -512,19 +510,22 @@ typedef enum {
 
     switch (type) {
         case UniversityItemTypeFavor:
-            [self favorite];
+        {
+            self.clickType = UniversityItemTypeFavor;
+            [self caseFavorite];
+        }
             break;
         case UniversityItemTypeShare:
-            [self share];
+            [self caseShare];
             break;
         case UniversityItemTypePop:
-            [self pop];
+            [self casePop];
             break;
         case UniversityItemTypeMore:
-            [self more];
+            [self caseMore];
             break;
-        case UniversityItemTypeWeb:
-//            [self web];
+        case UniversityItemTypePipei:
+            [self CasePipei];
             break;
         default:
             break;
@@ -551,7 +552,7 @@ typedef enum {
 }
 
 //分享
-- (void)share{
+- (void)caseShare{
     
     if (_shareVC.view.superview != self.view) {
         
@@ -562,7 +563,7 @@ typedef enum {
 }
 
 //收藏
-- (void)favorite
+- (void)caseFavorite
 {
     
     XWeakSelf
@@ -576,18 +577,20 @@ typedef enum {
         [hud hideAnimated:YES afterDelay:1];
         
         [weakSelf configureLikeButton:weakSelf.favorited];
+        
+        weakSelf.clickType = UniversityItemTyDeFault;
 
     }];
 }
 
 //回退
-- (void)pop
+- (void)casePop
 {
      [self.navigationController popViewControllerAnimated:YES];
 }
 
 //点击查看更多
-- (void)more
+- (void)caseMore
 {
   
     self.UniFrame.showMore = !self.UniFrame.showMore;
@@ -615,11 +618,7 @@ typedef enum {
     
     [self.topNavigationView navigationWithFavorite:favorite];
     [self.headerView.rightView  shadowWithFavorited:favorite];
-    
-    
-//     NSString *nomalFavor = favorite ? @"Uni_Favor" : @"Uni_Unfavor";
-//    [self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
-//     self.headerView.rightView.favorited = favorite;
+
 }
 
 //点击footer按钮
@@ -645,6 +644,9 @@ typedef enum {
 
 //智能匹配
 -(void)CasePipei{
+    
+    
+    self.clickType = LOGIN ? UniversityItemTyDeFault : UniversityItemTypePipei;
     
     RequireLogin
     InteProfileViewController  *vc = [[InteProfileViewController alloc] init];

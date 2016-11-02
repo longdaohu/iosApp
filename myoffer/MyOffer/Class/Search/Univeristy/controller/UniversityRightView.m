@@ -17,13 +17,24 @@
 
 @implementation UniversityRightView
 
++ (instancetype)ViewWithBlock:(UniversityRightViewwBlock)actionBlock{
 
--(void)awakeFromNib{
+    UniversityRightView *rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
+
+    rightView.actionBlock = actionBlock;
+    
+    return  rightView;
+}
+
+
+
+- (void)awakeFromNib{
 
     [super awakeFromNib];
     
     self.favoriteBtn.tag = RightViewItemStyleFavorited;
-    self.shareBtn.tag = RightViewItemStyleFavorited;
+    self.shareBtn.tag = RightViewItemStyleShare;
+    
 }
 
 - (IBAction)onClick:(UIButton *)sender {

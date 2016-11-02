@@ -41,14 +41,14 @@
         };
         self.centerView = centerView;
         [self addSubview:centerView];
- 
         
-        self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
-        self.rightView.actionBlock = ^(UIButton *sender){
+        self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
             
             [weakSelf onclick:sender];
-        };
+            
+        }];
         [self addSubview:self.rightView];
+
         
         
         UILabel *qsLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];

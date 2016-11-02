@@ -82,7 +82,7 @@
         self.moreBtn .contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [self.moreBtn addTarget:self action:@selector(onMoreClick:) forControlEvents:UIControlEventTouchUpInside];
         self.moreBtn.userInteractionEnabled = YES;
-        self.moreBtn.tag = 113;
+        self.moreBtn.tag = Uni_Header_CenterItemStyleMore;
         self.moreBtn.clipsToBounds = YES;
     }
     return self;
