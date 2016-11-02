@@ -7,6 +7,14 @@
 //
 
 #import "UniversityNavView.h"
+@interface UniversityNavView ()
+//标题
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+//背景图片
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+
+@end
+
 
 @implementation UniversityNavView
 
@@ -21,10 +29,15 @@
     
     XWeakSelf
     self.rightView = [[NSBundle mainBundle] loadNibNamed:@"UniversityRightView" owner:self options:nil].lastObject;
-    [self.rightView.shareBtn setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
+  
+    [self.rightView noShadowWithShare];
+    
      self.rightView.actionBlock = ^(UIButton *sender){
+         
         [weakSelf onclick:sender];
-    };
+    
+     };
+    
     
     [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
     
@@ -36,7 +49,14 @@
     
     self.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
     
- 
+    
+    
+    CGRect rightRect = self.rightView.frame;
+    rightRect.origin.y = XNav_Height;
+    rightRect.size.width = 80  +  XMARGIN;
+    rightRect.origin.x = XScreenWidth - rightRect.size.width - 2 * XMARGIN;
+    self.rightView.frame = rightRect;
+    
 }
 
 - (IBAction)backClick:(id)sender {
@@ -52,14 +72,46 @@
     }
 }
 
-- (void)scrollViewContentoffset:(CGFloat)offsetY{
-    
-    self.bgImageView.alpha  =  offsetY / (XPERCENT * 200 - 40 - 20 - 64);
-    
-    CGFloat rightViewDistance = offsetY - (XPERCENT * 200 - 40 - 20 - 64);
-    
-    self.rightView.top = rightViewDistance >= 44 ? 20 : (64 - rightViewDistance);
 
+- (void)setTitleName:(NSString *)titleName{
+
+    _titleName = titleName;
+    
+    self.titleLab.text = titleName;
+
+}
+
+- (void)setNav_Alpha:(CGFloat)nav_Alpha{
+
+    _nav_Alpha = nav_Alpha;
+    
+    self.titleLab.alpha  = nav_Alpha;
+}
+
+
+- (void)scrollViewContentoffset:(CGFloat)offsetY  andContenHeight:(CGFloat)contentHeight{
+
+    
+    self.bgImageView.alpha  =  offsetY / contentHeight;
+    
+    /*
+     *   contentHeight  [收藏、分享按钮]的superView 的frame.origin.y  - 导航栏的高度
+     *   - 20           20是[收藏、分享按钮]的一半高度
+     *   contentHeight - 20   可以在滚动条  滚动到 [收藏、分享按钮]顶部 监听关键点
+     */
+    CGFloat rightViewDistance = contentHeight - 20 - offsetY ;
+    
+ 
+    if (rightViewDistance < 0) {
+        
+        self.rightView.top =  rightViewDistance <= -44 ? 20 : (XNav_Height + rightViewDistance);
+        
+    }else{
+    
+        self.rightView.top =  XNav_Height;
+        
+    }
+     
 }
 
 - (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight{
@@ -68,21 +120,24 @@
     
 }
 
-
-
--(void)layoutSubviews{
-
-    [super layoutSubviews];
+- (void)navigationWithFavorite:(BOOL)favorite{
     
-    CGRect rightRect = self.rightView.frame;
-    rightRect.origin.y = XNav_Height;
-    rightRect.size.width = 80  +  XMARGIN;
-    rightRect.origin.x = XScreenWidth - rightRect.size.width - 2 * XMARGIN;
-    self.rightView.frame = rightRect;
+    [self.rightView noShadowWithFavorited:favorite];
+    
 }
 
 
- 
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
+    
+
+    
+}
+
+
 
 
 @end
+
+

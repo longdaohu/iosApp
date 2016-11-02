@@ -127,7 +127,8 @@
     self.tagTwoLab.frame = itemFrame.tagsTwoFrame;
     
     
-    self.rightView.favorited = itemFrame.item.favorited;
+    [self.rightView shadowWithFavorited:itemFrame.item.favorited];
+    
   
 }
 

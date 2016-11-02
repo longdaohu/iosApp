@@ -54,7 +54,7 @@ typedef enum {
 //分组数据
 @property(nonatomic,strong)NSMutableArray        *groups;
 //表头
-@property(nonatomic,strong)UniverstyHeaderView   *header;
+@property(nonatomic,strong)UniverstyHeaderView   *headerView;
 //自定义导航栏
 @property(nonatomic,strong)UniversityNavView     *topNavigationView;
 //是否收藏
@@ -215,8 +215,9 @@ typedef enum {
     
         [weakSelf onClick:sender];
         
+        
     };
-    self.header = header;
+    self.headerView = header;
     self.tableView.tableHeaderView  = header;
     
      //拉伸图片
@@ -455,9 +456,10 @@ typedef enum {
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
-    //顶部导航条透明度
-    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y];
- 
+    
+    //监听顶部导航条透明度
+    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerViewFrame.origin.y - XNav_Height];
+  
     //顶部图片拉伸
     if (scrollView.contentOffset.y < 0) {
          
@@ -572,6 +574,7 @@ typedef enum {
         [hud setLabelText:title];//@"关注成功"];
         weakSelf.favorited =  !weakSelf.favorited;
         [hud hideAnimated:YES afterDelay:1];
+        
         [weakSelf configureLikeButton:weakSelf.favorited];
 
     }];
@@ -589,15 +592,15 @@ typedef enum {
   
     self.UniFrame.showMore = !self.UniFrame.showMore;
     
-    if (CGRectGetHeight(self.header.frame) > 0) {
+    if (CGRectGetHeight(self.headerView.frame) > 0) {
         
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
-            self.header.itemFrame = self.UniFrame;
-            self.header.frame     =  self.UniFrame.headerFrame;
+            self.headerView.itemFrame = self.UniFrame;
+            self.headerView.frame     =  self.UniFrame.headerFrame;
            
             [_tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
-            [_tableView setTableHeaderView:self.header];
+            [_tableView setTableHeaderView:self.headerView];
             [_tableView endUpdates];
 
         }];
@@ -609,10 +612,14 @@ typedef enum {
 //设置是否收藏
 - (void)configureLikeButton:(BOOL)favorite
 {
-     NSString *nomalFavor = favorite ? @"Uni_Favor" : @"Uni_Unfavor";
-    [self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
-     self.header.rightView.favorited = favorite;
     
+    [self.topNavigationView navigationWithFavorite:favorite];
+    [self.headerView.rightView  shadowWithFavorited:favorite];
+    
+    
+//     NSString *nomalFavor = favorite ? @"Uni_Favor" : @"Uni_Unfavor";
+//    [self.topNavigationView.rightView.favoriteBtn setImage:[UIImage imageNamed:nomalFavor] forState:UIControlStateNormal];
+//     self.headerView.rightView.favorited = favorite;
 }
 
 //点击footer按钮

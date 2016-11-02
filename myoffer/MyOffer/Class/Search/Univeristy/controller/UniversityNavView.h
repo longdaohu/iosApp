@@ -10,16 +10,16 @@
 #import "UniversityRightView.h"
 typedef void(^UniversityNavViewBlock)(UIButton *sender);
 @interface UniversityNavView : UIView
-//背景图片
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property(nonatomic,copy)UniversityNavViewBlock  actionBlock;
 //收藏、分享
 @property(nonatomic,strong)UniversityRightView   *rightView;
-//标题
-@property (weak, nonatomic) IBOutlet UILabel *titleLab;
-//监听scollerView滚动
-- (void)scrollViewContentoffset:(CGFloat)offsetY;
+@property(nonatomic,copy)NSString *titleName;
+@property(nonatomic,assign)CGFloat nav_Alpha;
 
+- (void)navigationWithFavorite:(BOOL)favorite;
+//监听scollerView滚动  学校详情
+- (void)scrollViewContentoffset:(CGFloat)offsetY  andContenHeight:(CGFloat)contentHeight;
+//监听scollerView滚动  攻略列表
 - (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight;
 
 @end

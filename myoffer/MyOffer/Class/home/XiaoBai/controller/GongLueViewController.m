@@ -114,7 +114,7 @@
     XWeakSelf
     
     self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
-    self.topNavigationView.titleLab.text = self.gonglue[@"title"];
+    self.topNavigationView.titleName = self.gonglue[@"title"];
     self.topNavigationView.actionBlock = ^(UIButton *sender){
         [weakSelf pop];
     };
@@ -265,7 +265,7 @@
     
     //3 顶部自定义导航栏 titleLab.alpha 控制
     CGFloat height =  self.headerView.moBgView.frame.origin.y - CGRectGetMinY(self.headerView.headerTitleLab.frame);
-    self.topNavigationView.titleLab.alpha  = (self.headerView.headerTitleLab.bounds.size.height - height)/ self.headerView.headerTitleLab.bounds.size.height;
+    self.topNavigationView.nav_Alpha = (self.headerView.headerTitleLab.bounds.size.height - height)/ self.headerView.headerTitleLab.bounds.size.height;
     
     //4 头部图片拉伸
     if (scrollView.contentOffset.y < 0) {
