@@ -615,10 +615,8 @@ typedef enum {
 //设置是否收藏
 - (void)configureLikeButton:(BOOL)favorite
 {
-    
     [self.topNavigationView navigationWithFavorite:favorite];
-    [self.headerView.rightView  shadowWithFavorited:favorite];
-
+    [self.headerView headerViewRightViewWithShadowFavorited:favorite];
 }
 
 //点击footer按钮

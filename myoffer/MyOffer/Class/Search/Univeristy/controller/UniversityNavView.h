@@ -12,9 +12,8 @@ typedef enum{
     NavItemStyleBack
 }NavItemStyle;
 
-
 #import <UIKit/UIKit.h>
-#import "UniversityRightView.h"
+@class  UniversityRightView;
 typedef void(^UniversityNavViewBlock)(UIButton *sender);
 @interface UniversityNavView : UIView
 @property(nonatomic,copy)UniversityNavViewBlock  actionBlock;

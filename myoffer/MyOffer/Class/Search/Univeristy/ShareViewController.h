@@ -11,8 +11,8 @@
 
 typedef void(^ShareViewBlock)();
 @interface ShareViewController : UIViewController
-- (instancetype)initWithUniversity:(UniversitydetailNew *)Uni;
 @property(nonatomic,strong)NSDictionary *shareInfor;
 @property(nonatomic,copy)ShareViewBlock actionBlock;
+- (instancetype)initWithUniversity:(UniversitydetailNew *)Uni;
 -(void)show;
 @end

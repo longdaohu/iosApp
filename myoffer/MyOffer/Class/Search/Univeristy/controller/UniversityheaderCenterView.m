@@ -9,9 +9,30 @@
 #import "UniversityheaderCenterView.h"
 #import "UniversitydetailNew.h"
 #import "UniversityDetailItem.h"
+#import "UniversityNewFrame.h"
 
 @interface UniversityheaderCenterView ()
 @property(nonatomic,strong)CAGradientLayer *gradient;
+//logo 学校
+@property(nonatomic,strong)LogoView     *logo;
+//学校名称
+@property(nonatomic,strong)UILabel      *nameLab;
+//英文名称
+@property(nonatomic,strong)UILabel      *official_nameLab;
+//地址
+@property(nonatomic,strong)UIButton     *address_detailBtn;
+//web地址
+@property(nonatomic,strong)UIButton     *websiteBtn;
+//xx数据
+@property(nonatomic,strong)UIView       *dataView;
+//分隔线
+@property(nonatomic,strong)UILabel      *line;
+//详情
+@property(nonatomic,strong)UILabel      *introductionLab;
+//更多按钮
+@property(nonatomic,strong)UIButton     *moreBtn;
+//渐变色
+@property(nonatomic,strong)UIView       *gradientBgView;
 @end
 
 @implementation UniversityheaderCenterView
