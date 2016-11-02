@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UniversityNewFrame.h"
+@class UniversityNewFrame;
+
 typedef void(^OneGroupViewBlock)(NSString *subjectName,NSInteger index);
 @interface UniGroupOneView : UIView
 @property(nonatomic,strong)UniversityNewFrame *contentFrame;
 @property(nonatomic,copy)OneGroupViewBlock     actionBlock;
 
 @end
+

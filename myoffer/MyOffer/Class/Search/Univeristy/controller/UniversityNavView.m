@@ -6,6 +6,7 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
+#import "UniversityRightView.h"
 #import "UniversityNavView.h"
 @interface UniversityNavView ()
 //标题

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UniItemFrame.h"
+@class UniItemFrame;
 
 @interface UniversityCell : UITableViewCell
 @property(nonatomic,strong)UniItemFrame *itemFrame;

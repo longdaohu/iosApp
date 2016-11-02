@@ -7,6 +7,7 @@
 //
 
 #import "UniversityCell.h"
+#import "UniItemFrame.h"
 
 @implementation UniversityCell
 

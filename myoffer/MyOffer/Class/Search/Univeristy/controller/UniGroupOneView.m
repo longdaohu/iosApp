@@ -11,6 +11,7 @@
 #import "UniversityOneGroupCollectionCell.h"
 #import "HomeSectionHeaderView.h"
 #import "UUChart.h"
+#import "UniversityNewFrame.h"
 
 @interface UniGroupOneView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
 @property(nonatomic,strong)UICollectionViewFlowLayout *flowlayout;
