@@ -72,7 +72,7 @@
             itemBtn.enabled = self.LastIndex ==i ? NO:YES;
             itemBtn.backgroundColor = self.LastIndex ==i ? XCOLOR_LIGHTBLUE:XCOLOR_CLEAR;
             itemBtn.tag = i;
-            [itemBtn addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+            [itemBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
             itemBtn.layer.borderWidth  = 1;
             itemBtn.layer.masksToBounds = YES;
             itemBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
@@ -131,7 +131,7 @@
 }
 
 
--(void)tap:(UIButton *)sender
+-(void)onClick:(UIButton *)sender
 {
     
     NSString *item;

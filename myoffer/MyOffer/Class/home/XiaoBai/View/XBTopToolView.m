@@ -10,13 +10,12 @@
 @interface XBTopToolView ()
 //黑色背景
 @property(nonatomic,strong)UIView *blackView;
+//按钮选项superView
 @property(nonatomic,strong)UIView *bgView;
 //选中View
 @property(nonatomic,strong)UIImageView *focusView;
 //按钮数组
 @property(nonatomic,strong)NSArray *itemArr;
-//按钮Title数组
-@property(nonatomic,strong)NSArray *name_itemArr;
 //选中的按钮
 @property(nonatomic,strong)UIButton *lastBtn;
 
@@ -24,83 +23,27 @@
 
 @implementation XBTopToolView
 
-+(instancetype)View
-{
-    return [[self alloc] initWithFrame:CGRectMake(0, 60,XScreenWidth, 50)];
-}
-
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-        
         self.blackView =[[UIView alloc] init];
-        CGFloat blackH = TOP_HIGHT;
-        CGFloat blackX = 10;
-        CGFloat blackY = 0;
-        CGFloat blackW = XScreenWidth - 2*blackX;
-        self.blackView.frame = CGRectMake(blackX, blackY, blackW, blackH);
-        [self makeView:self.blackView andCornerRadius: blackH * 0.5];
-        self.blackView.clipsToBounds = YES;
-        UIColor *color =  [UIColor colorWithWhite:0 alpha:0.5];
-
-        self.blackView.backgroundColor = color;
+        self.blackView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
         [self addSubview:self.blackView];
         
         
-        CGFloat lineMargin = self.blackView.frame.size.width/3;
-        CGFloat linew = 1;
-        CGFloat lineh = 20;
-        CGFloat liney = (self.blackView.frame.size.height - lineh)*0.5;
-        for (int i = 0; i < 2; i++) {
-             CGFloat linex = lineMargin * (i+1);
-            UIView *line =[[UIView alloc] initWithFrame:CGRectMake(linex, liney,linew, lineh)];
-            line.backgroundColor = [UIColor lightGrayColor];
-            [self.blackView addSubview:line];
-        }
-        [self lineHidenIndex:0];
-
-        
-        self.bgView =[[UIView alloc] initWithFrame:self.blackView.frame];
+        self.bgView =[[UIView alloc] init];
         [self addSubview:self.bgView];
         
-        
-        CGFloat focusx = 0;
-        CGFloat focusy = 0;
-        CGFloat focusw = lineMargin;
-        CGFloat focush = blackH;
-        self.focusView =[[UIImageView alloc] initWithFrame:CGRectMake(focusx, focusy, focusw, focush)];
+ 
+        self.focusView =[[UIImageView alloc] init];
         self.focusView.layer.borderWidth = 1;
         self.focusView.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.5].CGColor;
-        self.focusView.layer.cornerRadius = blackH * 0.5;
         self.focusView.layer.masksToBounds = YES;
         [self.bgView addSubview:self.focusView];
         self.focusView.image = self.itemImages[0];
-        
-        
-        CGFloat btnw = lineMargin;
-        CGFloat btnh = blackH;
-        CGFloat btny = 0;
-        NSMutableArray *temps = [NSMutableArray array];
-
-        for (int i = 0; i < 3; i++) {
-            CGFloat btnx = btnw * i;
-            UIButton *sender =[[UIButton alloc] initWithFrame:CGRectMake(btnx, btny,btnw, btnh)];
-            [sender setTitle:self.name_itemArr[i] forState:UIControlStateNormal];
-            [sender setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-            [sender addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-            sender.tag = i;
-            [self.bgView addSubview:sender];
-            [temps addObject:sender];
-
-        }
-        self.itemArr = [temps copy];
-        
-        self.lastBtn = self.itemArr[0];
-        self.lastBtn.enabled = NO;
+ 
         
      }
     return self;
@@ -118,6 +61,48 @@
 }
 
 
+- (void)setItemNames:(NSArray *)itemNames
+{
+    _itemArr = itemNames;
+    
+ 
+    NSMutableArray *temps = [NSMutableArray array];
+    
+    for (NSInteger index = 0; index < itemNames.count; index++) {
+        
+            UIButton *sender =[[UIButton alloc] init];
+            [sender setTitle:itemNames[index] forState:UIControlStateNormal];
+            [sender setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+            [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+            sender.tag = index;
+            [self.bgView addSubview:sender];
+            [temps addObject:sender];
+   
+    }
+    
+    self.itemArr = [temps copy];
+    self.lastBtn = self.itemArr[0];
+    self.lastBtn.enabled = NO;
+    
+    
+    if (itemNames.count > 2) { //按钮少于3个,中间间隔没有意义
+        
+        for (int i = 0; i < self.itemArr.count - 1; i++) {
+            
+            UIView *line =[[UIView alloc] init];
+            line.backgroundColor = [UIColor lightGrayColor];
+            [self.blackView addSubview:line];
+            
+        }
+        [self lineHidenIndex:0];
+        
+    }
+    
+    
+}
+
+
 -(void)makeView:(UIView *)sender andCornerRadius:(CGFloat)raduis
 {
     sender.layer.cornerRadius = raduis;
@@ -125,15 +110,6 @@
     
 }
 
-
--(NSArray *)name_itemArr{
-    
-    if (!_name_itemArr) {
-        
-        _name_itemArr =@[@"留学流程",@"申请攻略",@"疑难解答"];
-    }
-    return _name_itemArr;
-}
 
 
 -(void)SelectButtonIndex:(NSInteger)index
@@ -187,7 +163,7 @@
     
 }
  
--(void)tap:(UIButton *)sender
+-(void)onClick:(UIButton *)sender
 {
    
     [self moveWithButton:sender];
@@ -208,6 +184,65 @@
 -(void)lineHidenNoIndex:(NSInteger)index{
     UIView *line = (UIView *)self.blackView.subviews[index];
     line.alpha = 1;
+}
+
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
+    
+    CGSize contentSize = self.bounds.size;
+    
+    CGFloat blackH = contentSize.height;
+    CGFloat blackX = 10;
+    CGFloat blackY = 0;
+    CGFloat blackW = contentSize.width - 2 * blackX;
+    self.blackView.frame = CGRectMake(blackX, blackY, blackW, blackH);
+    [self makeView:self.blackView andCornerRadius: blackH * 0.5];
+
+    self.bgView.frame = self.blackView.frame;
+    
+    
+    if (self.itemArr.count) {
+        
+        CGFloat lineMargin = blackW / self.itemArr.count;
+        
+        CGFloat btnw = lineMargin;
+        CGFloat btnh = blackH;
+        CGFloat btny = 0;
+        
+        for (NSInteger index = 0; index < self.itemArr.count; index++) {
+            
+            UIButton *sender = self.itemArr[index];
+            
+            CGFloat btnx = btnw * index;
+            
+            sender.frame = CGRectMake(btnx, btny,btnw, btnh);
+        }
+        
+        
+        CGFloat linew = 1;
+        CGFloat lineh = 20;
+        CGFloat liney = (blackH - lineh)*0.5;
+        
+        for (int i = 0; i < self.blackView.subviews.count; i++) {
+            
+            UIView *line = self.blackView.subviews[i];
+            CGFloat linex = lineMargin * (i+1);
+            line.frame =  CGRectMake(linex, liney,linew, lineh);
+            
+         }
+
+        
+        CGFloat focusx = 0;
+        CGFloat focusy = 0;
+        CGFloat focusw = lineMargin;
+        CGFloat focush = blackH;
+        self.focusView.frame = CGRectMake(focusx, focusy, focusw, focush);
+        self.focusView.layer.cornerRadius = blackH * 0.5;
+
+    }
+    
 }
 
 @end

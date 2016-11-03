@@ -178,10 +178,14 @@
     
 }
 
+
+
+
 //滚动工具条
 -(void)makeTopToolView
 {
     self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
+    self.topToolView.itemNames =  @[@"留学流程",@"申请攻略",@"疑难解答"];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }

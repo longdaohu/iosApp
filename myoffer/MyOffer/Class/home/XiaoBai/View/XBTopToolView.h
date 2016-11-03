@@ -15,7 +15,10 @@
 @interface XBTopToolView : UIView
 @property(nonatomic,weak)id<XTopToolViewDelegate> delegate;
 @property(nonatomic,strong)NSArray *itemImages;
-+(instancetype)View;
+//按钮名称数组
+@property(nonatomic,strong)NSArray *itemNames;
+
+//监听选项
 -(void)SelectButtonIndex:(NSInteger)index;
 
 @end

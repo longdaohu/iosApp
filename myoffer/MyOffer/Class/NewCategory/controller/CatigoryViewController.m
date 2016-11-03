@@ -12,7 +12,6 @@
 #import "CatigaryCityCollectionCell.h"
 #import "XWGJCityCollectionReusableView.h"
 #import "CatigaryCityCollectionHeaderView.h"
-#import "XWGJBanView.h"
 #import "CatigoryRank.h"
 #import "CatigorySubject.h"
 #import "CountryStateViewController.h"
@@ -22,9 +21,11 @@
 #import "CatigaryScrollView.h"
 #import "AUSearchResultViewController.h"
 #import "XNewSearchViewController.h"
+#import "XBTopToolView.h"
+
 #define INTERSET_TOP  70.0
 
-@interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,XTopToolViewDelegate>
 //背景scroller
 @property(nonatomic,strong)CatigaryScrollView *baseScrollView;
 //排名tableView
@@ -40,14 +41,15 @@
 //表头
 @property(nonatomic,strong)CatigaryCityCollectionHeaderView *cityHeaderView;
 //工具条
-@property(nonatomic,strong)XWGJBanView  *bg_SelectView;
+@property(nonatomic,strong)UIImage  *navigationBgImage;
+@property(nonatomic,strong)UIView *topView;
+@property(nonatomic,strong)XBTopToolView   *topToolView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *countryes;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
 @end
-
 
 @implementation CatigoryViewController
 
@@ -191,21 +193,54 @@
     return _SubjectList;
 }
 
-
--(void)makeBanView
+//加载导航栏背影图片
+-(UIImage *)navigationBgImage
 {
-    XWeakSelf
-    
-    self.bg_SelectView = [[XWGJBanView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth,60)];
-    
-    [self.view addSubview:self.bg_SelectView];
-    
-    //顶部工具栏切换页面
-    self.bg_SelectView.actionBlock = ^(UIButton *sender){
+    if (!_navigationBgImage) {
         
-        [weakSelf.baseScrollView setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
+        NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
         
-    };
+        _navigationBgImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+        
+    }
+    return _navigationBgImage;
+}
+
+
+//得到部分区域图片
+-(UIImage *)makeNewImageWithRect:(CGRect)clipRect andImage:(UIImage *)image
+{
+    //原图片
+    //    UIImage * img = [UIImage imageNamed:@"bg.png"];
+    //转化为位图
+    CGImageRef temImg = image.CGImage;
+    //根据范围截图
+    temImg=CGImageCreateWithImageInRect(temImg, clipRect);
+    //得到新的图片
+    UIImage *newImage = [UIImage imageWithCGImage:temImg];
+    //释放位图对象
+    CGImageRelease(temImg);
+    
+    return newImage;
+    
+}
+
+//导航工具条
+-(void)makeTopView
+{
+    
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 60)];
+    [self.view addSubview:self.topView];
+    
+    UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
+    topImageView.image = [self makeNewImageWithRect:CGRectMake(0, XNav_Height, XScreenWidth, self.topView.bounds.size.height) andImage:self.navigationBgImage];
+    topImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.topView addSubview:topImageView];
+    
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,  self.topView.bounds.size.height - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
+    self.topToolView.itemNames =  @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
+    self.topToolView.delegate  = self;
+    [self.view  addSubview:self.topToolView];
     
 }
 
@@ -313,7 +348,7 @@
     
     [self makeBaseScorller];
     
-    [self makeBanView];
+    [self makeTopView];
     
 
 }
@@ -468,27 +503,33 @@ static NSString *cityIdentify = @"cityCell";
         if ([scrollView isKindOfClass:[UITableView class]] || !scrollView.isDragging)  return;
 
         
-        //监听滚动，实现顶部工具条按钮切换
-        CGPoint offset = scrollView.contentOffset;
-        
-        CGFloat offsetX = offset.x;
-        
-        CGFloat width = scrollView.frame.size.width;
-        
-        int pageNum = (offsetX + .5f *  width) / width;
-        
-        UIButton *sender= (UIButton *)self.bg_SelectView.SelectView.subviews[pageNum];
-        
-        UIButton *lastBtn = self.bg_SelectView.lastBtn;
-        
-        if (sender != lastBtn) {
+        if (self.baseScrollView.isDragging) {
             
-            [self.bg_SelectView selectBtnClick:sender];
+            //监听滚动，实现顶部工具条按钮切换
+            CGPoint offset = scrollView.contentOffset;
+            
+            CGFloat offsetX = offset.x;
+            
+            CGFloat width = scrollView.frame.size.width;
+            
+            NSInteger pageNum =  (offsetX + .5f *  width) / width;
+            
+            [self.topToolView SelectButtonIndex:pageNum];
+            
+            // 限制y轴不动
+            self.baseScrollView.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
         }
+
         
-        // 限制y轴不动
-        self.baseScrollView.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
+   
     }
+}
+
+
+#pragma mark ——— XTopToolViewDelegate
+-(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
+{
+    [self.baseScrollView setContentOffset:CGPointMake(XScreenWidth * sender.tag, 0) animated:YES];
 }
 
 -(void)leftViewMessage:(NSNotification *)noti{
