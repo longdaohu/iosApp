@@ -186,8 +186,7 @@
     }];
     
 }
-
-
+ 
 -(void)tap:(UIButton *)sender
 {
    

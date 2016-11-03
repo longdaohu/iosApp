@@ -452,7 +452,6 @@
 "Refresh-open" = "松开立即刷新";
 "Refresh-fresh" = "正在刷新数据中...";
 "Refresh-all" = "已经全部加载完毕";
-
 //协议页面
 "Potocol-Commit" = "我已阅读，同意";
 "Potocol-Cancel" = "取消";
@@ -490,7 +489,6 @@
 "About_CopySusess" = "复制成功";
 "About_shareContent" = "跨境的全球留学生服务生态圈——myOffer";
 "About_shareSummary" = "myOffer您的一站式智能留学申请平台，为您提供最佳的留学方案。";
-
 
 //我要留学
 "WoYaoLiuXue_tryInTel" = "已注册？试试智能选学校神器。";

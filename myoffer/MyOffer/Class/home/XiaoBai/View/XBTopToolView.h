@@ -13,7 +13,6 @@
 @end
 
 @interface XBTopToolView : UIView
-
 @property(nonatomic,weak)id<XTopToolViewDelegate> delegate;
 @property(nonatomic,strong)NSArray *itemImages;
 +(instancetype)View;

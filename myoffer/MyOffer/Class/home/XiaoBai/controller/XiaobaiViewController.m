@@ -23,7 +23,6 @@
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgScrollView;
 //UIWebView 留学流程
-//@property(nonatomic,strong)UIWebView *webView;
 @property(nonatomic,strong)KDProgressHUD *hud;
 //UICollectionView 疑难解答
 @property(nonatomic,strong)UICollectionView *quetionCollectionView;
@@ -115,18 +114,6 @@
 
 
 
--(void)makeUI
-{
-   
-    self.title = @"留学小白";
-    
-    [self makeTopView];
-    
-    [self makebgScrollView];
-    
-}
-
-
 //加载申请攻略数据
 -(void)makeDataSource:(BOOL)fresh
 {
@@ -164,26 +151,37 @@
     
 }
 
+-(void)makeUI
+{
+    
+    self.title = @"留学小白";
+    
+    [self makeTopView];
+    
+    [self makebgScrollView];
+    
+}
+
 
 -(void)makeTopView
 {
     
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, 124)];
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XNav_Height + 60)];
     [self.view addSubview:self.topView];
  
     UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
     topImageView.image = self.navigationBgImage;
-    topImageView.contentMode =UIViewContentModeScaleToFill;
+    topImageView.contentMode = UIViewContentModeScaleToFill;
     [self.topView addSubview:topImageView];
     
     [self makeTopToolView];
     
 }
 
-
+//滚动工具条
 -(void)makeTopToolView
 {
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT -10,XScreenWidth, TOP_HIGHT)];
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }
@@ -208,19 +206,20 @@
     [self makeTableView];
 }
 
-
+//添加留学流程
 - (void)makeWebViewWithHeight:(CGFloat)height
 {
  
     WebViewController *webVC = [[WebViewController alloc] init];
     [self addChildViewController:webVC];
-    webVC.path = @"http://www.myoffer.cn/study_white";
+    webVC.path = [NSString stringWithFormat:@"%@study_white",DOMAINURL];
     [self.bgScrollView addSubview:webVC.view];
     webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height - XNav_Height);
     webVC.web_wk.frame = webVC.view.bounds;
     
 }
 
+//添加申请攻略
 -(void)makeTableView
 {
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
@@ -234,11 +233,12 @@
     
 }
 
+//添加疑难解答
 static NSString *subjectIdentify = @"subjectCell";
 -(void)makeCollectView
 {
     CGRect subRect = CGRectMake(2 * XScreenWidth, 0, XScreenWidth, XScreenHeight);
-    self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, 0, 0, 0)];
+    self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, ITEM_MARGIN, 0, ITEM_MARGIN)];
     UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
     [self.quetionCollectionView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
 }
@@ -253,7 +253,7 @@ static NSString *subjectIdentify = @"subjectCell";
     flowlayout.minimumLineSpacing = ITEM_MARGIN;
     // 设置item列与列之间的间隙
     //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
+//    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
@@ -268,7 +268,8 @@ static NSString *subjectIdentify = @"subjectCell";
 }
 
 
-#pragma mark ———————— UIScrollViewDelegate
+#pragma mark ——— UIScrollViewDelegate
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -323,13 +324,14 @@ static NSString *subjectIdentify = @"subjectCell";
     
      GongLueViewController  *list = [[GongLueViewController alloc] init];
     
-     list.gonglue                     =  self.gonglueItems[indexPath.row];
+     list.gonglue                 =  self.gonglueItems[indexPath.row];
     
      [self.navigationController pushViewController:list  animated:YES];
 }
 
 
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
+#pragma mark ——— UICollectionViewDataSource UICollectionViewDelegate
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
     return 1;
@@ -368,11 +370,11 @@ static NSString *subjectIdentify = @"subjectCell";
 }
 
 
-#pragma mark —————— XTopToolViewDelegate
+#pragma mark ——— XTopToolViewDelegate
+
 -(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {
-    [self.bgScrollView setContentOffset:CGPointMake(XScreenWidth*sender.tag, 0) animated:YES];
-    
+    [self.bgScrollView setContentOffset:CGPointMake(XScreenWidth * sender.tag, 0) animated:YES];
 }
 
 -(void)dealloc{
