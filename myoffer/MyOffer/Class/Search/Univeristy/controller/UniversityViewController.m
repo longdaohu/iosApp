@@ -102,7 +102,7 @@ typedef enum {
 
 -(void)refesh{
 
-    NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
+    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -167,7 +167,7 @@ typedef enum {
 {
   
     XWeakSelf
-    NSString *path =[NSString stringWithFormat:@"GET api/v2/university/%@",self.uni_id];
+    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
@@ -565,9 +565,9 @@ typedef enum {
 //收藏
 - (void)caseFavorite
 {
-    
+
     XWeakSelf
-    NSString *path = self.favorited ?  @"GET api/account/unFavorite/:id"  : @"GET api/account/favorite/:id";
+    NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
     [self startAPIRequestWithSelector:path parameters:@{@":id": self.UniFrame.item.NO_id} success:^(NSInteger statusCode, id response) {
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
         [hud applySuccessStyle];

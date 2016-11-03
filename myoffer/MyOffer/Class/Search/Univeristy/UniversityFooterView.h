@@ -11,4 +11,5 @@ typedef void(^UniversityFooterViewBlock)(UIButton *sender);
 @interface UniversityFooterView : UIView
 @property(nonatomic,copy)NSString *rateStr;
 @property(nonatomic,copy)UniversityFooterViewBlock  actionBlock;
+
 @end

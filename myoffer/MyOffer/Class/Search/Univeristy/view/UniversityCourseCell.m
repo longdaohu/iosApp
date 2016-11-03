@@ -141,7 +141,7 @@ static NSString *identify = @"course";
  
     self.titleLabel.text = info[@"official_name"];
     
-    CGSize size = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XScreenWidth - 60, 999)
+    CGSize size = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XScreenWidth - 60, MAXFLOAT)
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:15.0]}
                                       context:NULL].size;

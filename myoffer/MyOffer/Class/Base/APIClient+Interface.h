@@ -74,4 +74,12 @@
 #define kAPISelectorArticleDetail @"GET api/v2/article/"
 //留学攻略
 #define kAPISelectorGonglueList @"GET http://public.myoffer.cn/docs/zh-cn/tips.json"
+//学校详情
+#define kAPISelectorUniversityDetail @"GET api/v2/university/"
+//取消收藏
+#define kAPISelectorUniversityUnfavorited @"GET api/account/unFavorite/:id"
+//收藏
+#define kAPISelectorUniversityfavorited @"GET api/account/favorite/:id"
+
+
 
