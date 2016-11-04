@@ -12,9 +12,10 @@
 #import "GradeItem.h"
 #import "SubjectItem.h"
 #import "InputAccessoryToolBar.h"
-#import "AdvertiView.h"
 #import "XWGJSummaryView.h"
 #import "EvaluateSearchCollegeViewController.h"
+#import "promptViewController.h"
+#import "promptViewController.h"
 
 typedef enum {
     countryPikerType = 109,
@@ -54,10 +55,9 @@ typedef enum {
 @property(nonatomic,strong)NSArray *subjectItems_CE;
 @property(nonatomic,strong)NSArray *gradeItems;
 @property(nonatomic,strong)NSArray *gradeItems_CE;
-@property(nonatomic,strong)AdvertiView *ADview;
+@property(nonatomic,strong)promptViewController *prompVC;
 @property(nonatomic,strong)UIButton *bottomView;
 @property(nonatomic,strong)InputAccessoryToolBar *toolView;
-@property(nonatomic,strong)UIImageView *navImageView;
 
 @end
 
@@ -207,16 +207,6 @@ typedef enum {
 -(void)makeOther{
 
     
-//    if (self.navigationBgImage) {
-//        
-//        self.navImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, -64, XScreenWidth, 64)];
-//        self.navImageView.clipsToBounds = YES;
-//        self.navImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.navImageView.image = self.navigationBgImage;
-//        [self.view addSubview:self.navImageView];
-//        
-//    }
-    
     
     self.title = GDLocalizedString(@"Evaluate-inteligent");//@"智能匹配";
 
@@ -244,9 +234,13 @@ typedef enum {
             
             NSString *value = [ud valueForKey:tokenKey];
             
+            NSLog(@"value value value %@",value);
+            
             if (!value) {
                 
-                [self whenNoUserInformation]; //当没有数据时，出现智能匹配提示页面
+                
+                [self prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
+                
                 
                 [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
                 
@@ -808,62 +802,67 @@ typedef enum {
 
 
 //提示页面
--(UIView *)ADview
-{
-    if (!_ADview) {
-        
+- (promptViewController *)prompVC{
+
+    if (!_prompVC) {
         
         XWeakSelf
-        _ADview =[[AdvertiView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
-        _ADview.backgroundColor = [UIColor whiteColor];
-
-        _ADview.actionBlock = ^{
+        _prompVC = [[promptViewController alloc] initWithBlock:^{
             
-            [weakSelf advertisementDisappear];
-        };
-        [[UIApplication sharedApplication].windows.lastObject addSubview:_ADview];
+            [weakSelf prompViewAppear:NO];
+            
+        }];
+        
+        _prompVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
         
     }
-    return _ADview;
+    
+    return _prompVC;
 }
 
 
 //当没有数据时，出现智能匹配提示页面
--(void)whenNoUserInformation
-{
-  
-    [self.navigationController setNavigationBarHidden:YES];
-    
-     [UIView animateWithDuration:0.5 animations:^{
-         
-         CGRect newRect = self.ADview.frame;
-         newRect.origin.y = 0;
-         self.ADview.frame = newRect;
-         
-    }];
+- (void)prompViewAppear:(BOOL)appear{
+
+    if (appear) {
+        
+        
+        [[UIApplication sharedApplication].windows.lastObject addSubview:self.prompVC.view];
+        
+    }
  
-}
-
-//点击隐藏按钮，移除智能匹配提示页面
--(void)advertisementDisappear
-{
-    [self.navigationController  setNavigationBarHidden:NO animated:YES];
-
+    CGFloat prompTop = appear ? 0 : XScreenHeight;
+    
+    CGFloat prompAlpha = appear ? 1 : 0;
+    
     [UIView animateWithDuration:0.5 animations:^{
         
-        CGRect newRect = self.ADview.frame;
-        newRect.origin.y = XScreenHeight;
-        self.ADview.frame = newRect;
-        self.ADview.alpha = 0;
+
+        if (!appear) {
+            
+            [self.navigationController setNavigationBarHidden:NO];
+            
+        }
+        
+        self.prompVC.view.top = prompTop;
+        self.prompVC.view.alpha = prompAlpha;
         
     } completion:^(BOOL finished) {
         
-        [self.ADview removeFromSuperview];
+        if (!appear) {
+            
+            [self.prompVC.view removeFromSuperview];
+            
+        }else{
+        
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+
+        }
+        
     }];
     
+    
 }
-
-
 
 //键盘辅助工具条,实现键盘隐藏、键盘跳转
 -(void)tabBarDidSelectWithItem:(UIBarButtonItem *)item

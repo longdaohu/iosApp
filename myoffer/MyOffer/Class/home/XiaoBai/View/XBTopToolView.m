@@ -18,6 +18,8 @@
 @property(nonatomic,strong)NSArray *itemArr;
 //选中的按钮
 @property(nonatomic,strong)UIButton *lastBtn;
+//选中项对应的图片
+@property(nonatomic,strong)NSArray *itemImages;
 
 @end
 

@@ -125,6 +125,7 @@
 		AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */; };
 		AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
+		AE5515EC1DCC6829003C3A1C /* NewLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */; };
 		AE567B061C903D1100552E7A /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AE567B051C903D1100552E7A /* shareMyOffer.png */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
 		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
@@ -132,6 +133,7 @@
 		AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2E1D06B1D100499B6B /* CoreMotion.framework */; };
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
+		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
 		AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F286B1D77CA3C00E9A47A /* UUChart.m */; };
@@ -231,7 +233,6 @@
 		AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A211D5B231200DD7939 /* CountryItem.m */; };
 		AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A231D5B231200DD7939 /* GradeItem.m */; };
 		AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A251D5B231200DD7939 /* SubjectItem.m */; };
-		AEA24A3A1D5B231300DD7939 /* AdvertiView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A281D5B231200DD7939 /* AdvertiView.m */; };
 		AEA24A3B1D5B231300DD7939 /* InputAccessoryToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */; };
 		AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */; };
 		AEA24A3D1D5B231300DD7939 /* XprofileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */; };
@@ -290,7 +291,6 @@
 		AEA24B271D5B251800DD7939 /* LoginSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B1A1D5B251800DD7939 /* LoginSelectViewController.m */; };
 		AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */; };
 		AEA24B291D5B251800DD7939 /* NewLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */; };
-		AEA24B2A1D5B251800DD7939 /* NewLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B1E1D5B251800DD7939 /* NewLoginRegisterViewController.xib */; };
 		AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B201D5B251800DD7939 /* YourBindView.m */; };
 		AEA24B2C1D5B251800DD7939 /* YourPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B221D5B251800DD7939 /* YourPhoneView.m */; };
 		AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */; };
@@ -611,6 +611,7 @@
 		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLoginRegisterViewController.xib; sourceTree = "<group>"; };
 		AE567B051C903D1100552E7A /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareMyOffer.png; path = Images.xcassets/AppIcon.appiconset/shareMyOffer.png; sourceTree = "<group>"; };
 		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		AE582C291D06B0ED00499B6B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -619,6 +620,8 @@
 		AE582C301D06B22C00499B6B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AE582C321D06B94600499B6B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		AE64A5441DCB4CC9004592B6 /* promptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promptViewController.h; sourceTree = "<group>"; };
+		AE64A5451DCB4CC9004592B6 /* promptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promptViewController.m; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		AE6F28671D77CA3C00E9A47A /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
@@ -803,8 +806,6 @@
 		AEA24A231D5B231200DD7939 /* GradeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeItem.m; sourceTree = "<group>"; };
 		AEA24A241D5B231200DD7939 /* SubjectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectItem.h; sourceTree = "<group>"; };
 		AEA24A251D5B231200DD7939 /* SubjectItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectItem.m; sourceTree = "<group>"; };
-		AEA24A271D5B231200DD7939 /* AdvertiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiView.h; sourceTree = "<group>"; };
-		AEA24A281D5B231200DD7939 /* AdvertiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiView.m; sourceTree = "<group>"; };
 		AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputAccessoryToolBar.h; sourceTree = "<group>"; };
 		AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputAccessoryToolBar.m; sourceTree = "<group>"; };
 		AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputAccessoryToolBar.xib; sourceTree = "<group>"; };
@@ -910,7 +911,6 @@
 		AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSelectViewController.xib; sourceTree = "<group>"; };
 		AEA24B1C1D5B251800DD7939 /* NewLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLoginRegisterViewController.h; sourceTree = "<group>"; };
 		AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLoginRegisterViewController.m; sourceTree = "<group>"; };
-		AEA24B1E1D5B251800DD7939 /* NewLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLoginRegisterViewController.xib; sourceTree = "<group>"; };
 		AEA24B1F1D5B251800DD7939 /* YourBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourBindView.h; sourceTree = "<group>"; };
 		AEA24B201D5B251800DD7939 /* YourBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourBindView.m; sourceTree = "<group>"; };
 		AEA24B211D5B251800DD7939 /* YourPhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourPhoneView.h; sourceTree = "<group>"; };
@@ -2143,6 +2143,8 @@
 				AEA24A1C1D5B231200DD7939 /* EvaluateSearchCollegeViewController.xib */,
 				AEA24A1D1D5B231200DD7939 /* InteProfileViewController.h */,
 				AEA24A1E1D5B231200DD7939 /* InteProfileViewController.m */,
+				AE64A5441DCB4CC9004592B6 /* promptViewController.h */,
+				AE64A5451DCB4CC9004592B6 /* promptViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2163,8 +2165,6 @@
 		AEA24A261D5B231200DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A271D5B231200DD7939 /* AdvertiView.h */,
-				AEA24A281D5B231200DD7939 /* AdvertiView.m */,
 				AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */,
 				AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */,
 				AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */,
@@ -2533,7 +2533,7 @@
 				AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */,
 				AEA24B1C1D5B251800DD7939 /* NewLoginRegisterViewController.h */,
 				AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */,
-				AEA24B1E1D5B251800DD7939 /* NewLoginRegisterViewController.xib */,
+				AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */,
 				AEA24B1F1D5B251800DD7939 /* YourBindView.h */,
 				AEA24B201D5B251800DD7939 /* YourBindView.m */,
 				AEA24B211D5B251800DD7939 /* YourPhoneView.h */,
@@ -3149,6 +3149,7 @@
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AEA249BB1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib in Resources */,
+				AE5515EC1DCC6829003C3A1C /* NewLoginRegisterViewController.xib in Resources */,
 				AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */,
 				AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */,
 				AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */,
@@ -3250,7 +3251,6 @@
 				AE1FD73E1D5C929500FFD5A8 /* Pre-comp 1_00026.png in Resources */,
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
 				AEA24C231D5B283700DD7939 /* appImage.png in Resources */,
-				AEA24B2A1D5B251800DD7939 /* NewLoginRegisterViewController.xib in Resources */,
 				AE7825DE1D70296F00AA4EF4 /* UniversityRightView.xib in Resources */,
 				AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */,
 				AEA24C241D5B283700DD7939 /* AU_en.jpg in Resources */,
@@ -3438,6 +3438,7 @@
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
+				AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
@@ -3457,7 +3458,6 @@
 				AEA24B8C1D5B25E000DD7939 /* searchToolView.m in Sources */,
 				AEA24AF91D5B24D200DD7939 /* LeftMenuViewController.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
-				AEA24A3A1D5B231300DD7939 /* AdvertiView.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,
