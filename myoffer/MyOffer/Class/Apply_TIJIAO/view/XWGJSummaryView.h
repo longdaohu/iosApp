@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface XWGJSummaryView : UIView
-@property(nonatomic,strong)UILabel *summaryLab;
 @property(nonatomic,copy)NSString *summary;
+
++ (instancetype)ViewWithContent:(NSString *)content;
 @end

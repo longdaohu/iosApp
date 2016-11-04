@@ -42,7 +42,6 @@
     self.lowTF.placeholder = GDLocalizedString(@"Evaluate-0013");
     self.subjectedTF.placeholder = GDLocalizedString(@"Evaluate-0010");
      self.applySubjectTF.placeholder =  GDLocalizedString(@"Evaluate-0014");
-//    self.universityTF.enabled = NO;
     
     self.contentView.backgroundColor =  XCOLOR_BG;
     [self addRightViewWithTextField:self.countryTF];

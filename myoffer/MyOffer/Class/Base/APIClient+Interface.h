@@ -80,6 +80,9 @@
 #define kAPISelectorUniversityUnfavorited @"GET api/account/unFavorite/:id"
 //收藏
 #define kAPISelectorUniversityfavorited @"GET api/account/favorite/:id"
-
+//智能匹配
+#define kAPISelectorZiZengPipeiGet @"GET api/account/evaluate"
+//提交智能匹配
+#define kAPISelectorZiZengPipeiPost @"POST api/account/evaluate"
 
 

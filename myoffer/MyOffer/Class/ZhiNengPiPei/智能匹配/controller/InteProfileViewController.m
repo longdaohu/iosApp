@@ -17,6 +17,7 @@
 #import "promptViewController.h"
 #import "promptViewController.h"
 
+#define Bottom_Height 50
 typedef enum {
     countryPikerType = 109,
     timePikerType,
@@ -99,6 +100,8 @@ typedef enum {
     }
     return _miniItems;
 }
+
+
 -(InputAccessoryToolBar *)toolView
 {
     if (!_toolView) {
@@ -221,7 +224,6 @@ typedef enum {
                                                object:nil];
     
     
-    
     if (LOGIN) {
         
         //用于判断用户是否改变,当用户第一次进入时，会出现提示窗口
@@ -234,13 +236,10 @@ typedef enum {
             
             NSString *value = [ud valueForKey:tokenKey];
             
-            NSLog(@"value value value %@",value);
             
             if (!value) {
                 
-                
                 [self prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
-                
                 
                 [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
                 
@@ -263,18 +262,21 @@ typedef enum {
 {
     [self makeTableView];
     [self makeHeaderView];
-    [self makeFooterView];
     
 }
 
 -(void)makeTableView
 {
-    self.profileTabelView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 114)];
+    self.profileTabelView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height - Bottom_Height)];
     self.profileTabelView.dataSource =self;
     self.profileTabelView.delegate =self;
     [self.view addSubview:self.profileTabelView];
     self.profileTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.profileTabelView.allowsSelection = NO;
+    self.profileTabelView.backgroundColor = XCOLOR_BG;
+    self.profileTabelView.tableFooterView = [[UIView alloc] init];
+    
+    [self makeFooterView];
 
 }
 
@@ -282,7 +284,8 @@ typedef enum {
 //底部提交按钮
 -(void)makeFooterView
 {
-    self.bottomView =[[UIButton alloc] initWithFrame:CGRectMake(0, XScreenHeight - 114, XScreenWidth, 50)];
+    
+    self.bottomView =[[UIButton alloc] initWithFrame:CGRectMake(0, XScreenHeight - XNav_Height - Bottom_Height, XScreenWidth, Bottom_Height)];
     self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
     [self.bottomView addTarget:self action:@selector(commitButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView setTitle:GDLocalizedString(@"Evaluate-commitButton") forState:UIControlStateNormal];
@@ -294,12 +297,8 @@ typedef enum {
 //添加表头
 -(void)makeHeaderView
 {
-    self.profileTabelView.backgroundColor = XCOLOR_BG;
-    self.profileTabelView.tableFooterView = [[UIView alloc] init];
-    
-    XWGJSummaryView *headerView=[[XWGJSummaryView alloc] init];
-    headerView.summary = GDLocalizedString(@"Evaluate-AD");
-    headerView.frame = CGRectMake(0, 0, 0, CGRectGetMaxY(headerView.summaryLab.frame));
+
+    XWGJSummaryView *headerView = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"Evaluate-AD")];
     self.profileTabelView.tableHeaderView = headerView;
     
 }
@@ -384,11 +383,13 @@ typedef enum {
     
     if ([AppDelegate sharedDelegate].isLogin) {
         
-        [self startAPIRequestWithSelector:@"GET api/account/evaluate"  parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        XWeakSelf
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
             
-              self.response = response;
+              weakSelf.response = response;
             
-              [self.profileTabelView reloadData];
+              [weakSelf.profileTabelView reloadData];
             
         }];
     }
@@ -599,6 +600,7 @@ typedef enum {
     return [predicate evaluateWithObject:preString];
 }
 
+
 #pragma  Mark ------  UIPickerViewDataSource, UIPickerViewDelegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
@@ -709,10 +711,12 @@ typedef enum {
 
 #pragma mark ———— 用于键盘处理
 - (void)keyboardWillShow:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
 
@@ -734,11 +738,8 @@ typedef enum {
     [UIView setAnimationCurve:animationCurve];
     
     UIEdgeInsets insets = self.profileTabelView.contentInset;
-    if (up) {
-        insets.bottom = keyboardEndFrame.size.height;
-    } else {
-        insets.bottom = 50;
-    }
+    
+    insets.bottom = up ? keyboardEndFrame.size.height : 0;
     
     self.profileTabelView.contentInset = insets;
     
@@ -754,11 +755,8 @@ typedef enum {
     
     RequireLogin
     
-    
-    
     NSInteger cindex = [self getCommitArrayIndex:self.countryItems withDataKey:@"CountryName"  andPredicateString:self.countryTF.text];
     CountryItem *cItem = [self.countryItems objectAtIndex:cindex];
-
     
     
     NSInteger gindex =[self getCommitArrayIndex:self.gradeItems withDataKey:@"gradeName" andPredicateString:self.gradeTF.text];
@@ -779,7 +777,7 @@ typedef enum {
     
  
     [self
-     startAPIRequestWithSelector:@"POST api/account/evaluate"
+     startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost
      parameters:parameters
      success:^(NSInteger statusCode, id response) {
          
@@ -836,7 +834,6 @@ typedef enum {
     CGFloat prompAlpha = appear ? 1 : 0;
     
     [UIView animateWithDuration:0.5 animations:^{
-        
 
         if (!appear) {
             
@@ -992,31 +989,9 @@ typedef enum {
 
 }
 
-//用于键盘收起时，检验输入框是否为空
-- (void)textFieldeditingEndChectk{
-
-    [self checkTextField];
-    
-    [self.view endEditing:YES];
-}
-
-- (void)checkTextField{
-
-    
-    if (self.countryTF.text.length  && self.timeTF.text.length  && self.applySubjectTF.text.length  && self.universityTF.text.length  && self.subjectedTF.text.length  && self.GPATF.text.length  && self.gradeTF.text.length  &&  self.avgTF.text.length &&  self.lowTF.text.length) {
-        
-        self.bottomView.enabled = YES;
-        self.bottomView.backgroundColor = XCOLOR_RED;
-    }else{
-        self.bottomView.enabled = NO;
-        self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
-    }
-
-}
-
-
 
 #pragma mark ————  XprofileTableViewCellDelegate
+
 -(void)XprofileTableViewCell:(XprofileTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender{
 
     EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] initWithNibName:@"EvaluateSearchCollegeViewController" bundle:nil];
@@ -1030,16 +1005,38 @@ typedef enum {
     [self.navigationController pushViewController:search animated:YES];
 }
 
-- (void)dealloc{
 
+
+
+//用于键盘收起时，检验输入框是否为空
+- (void)textFieldeditingEndChectk{
+    
+    [self checkTextField];
+    
+    [self.view endEditing:YES];
+}
+
+//判断提交按钮是否可用
+- (void)checkTextField{
+    
+    
+    if (self.countryTF.text.length  && self.timeTF.text.length  && self.applySubjectTF.text.length  && self.universityTF.text.length  && self.subjectedTF.text.length  && self.GPATF.text.length  && self.gradeTF.text.length  &&  self.avgTF.text.length &&  self.lowTF.text.length) {
+        
+        self.bottomView.enabled = YES;
+        self.bottomView.backgroundColor = XCOLOR_RED;
+    }else{
+        self.bottomView.enabled = NO;
+        self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
+    }
+    
+}
+
+- (void)dealloc{
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     KDClassLog(@"智能匹配 dealloc");
- }
+}
 //    KDUtilRemoveNotificationCenterObserverDealloc
-
-
-
-
 
 @end

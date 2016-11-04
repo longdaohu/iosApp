@@ -10,7 +10,22 @@
 #define LabFont 16
 #define PADDING 15
 
+@interface XWGJSummaryView ()
+@property(nonatomic,strong)UILabel *summaryLab;
+
+@end
+
 @implementation XWGJSummaryView
+
++ (instancetype)ViewWithContent:(NSString *)content{
+
+    
+    XWGJSummaryView *sum_View = [[XWGJSummaryView alloc] init];
+    
+    sum_View.summary = content;
+    
+    return sum_View;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -32,15 +47,19 @@
    
     self.summaryLab.text = summary;
     
-    CGSize LabSize = [summary boundingRectWithSize:CGSizeMake(XScreenWidth - 30, 999)
+    CGSize contentSize = [summary boundingRectWithSize:CGSizeMake(XScreenWidth - PADDING * 2, MAXFLOAT)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:LabFont]}
                                          context:NULL].size;
     
-    self.summaryLab.frame = CGRectMake(PADDING, ITEM_MARGIN, XScreenWidth - PADDING * 2, LabSize.height);
     
+    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height);
+    
+    self.summaryLab.frame = CGRectMake(PADDING, ITEM_MARGIN, XScreenWidth - PADDING * 2, contentSize.height);
+
 }
 
 
 
 @end
+

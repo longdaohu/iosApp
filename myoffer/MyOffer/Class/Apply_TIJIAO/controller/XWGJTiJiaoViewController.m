@@ -262,9 +262,8 @@ typedef enum {
 //添加表头
 -(void)makeHeaderView
 {
-    XWGJSummaryView *headerView    = [[XWGJSummaryView alloc] init];
-    headerView.summary             = GDLocalizedString(@"ApplicationProfile-0016");
-    headerView.frame               = CGRectMake(0, 0, 0, CGRectGetMaxY(headerView.summaryLab.frame));
+    XWGJSummaryView *headerView    = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"ApplicationProfile-0016")];
+    
     self.TableView.tableHeaderView = headerView;
 }
 
