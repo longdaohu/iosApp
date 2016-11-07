@@ -185,10 +185,15 @@
         }
         
     }
-
-    
     
 }
+
+- (void)configrationCellLefButtonWithTitle:(NSString  *)title imageName:(NSString *)imageName{
+
+    [self.selectButton setTitle:title  forState:UIControlStateNormal];
+    [self.selectButton setImage:XImage(imageName) forState:UIControlStateNormal];
+}
+
 
 
 -(void)selectCellID:(UIButton *)sender

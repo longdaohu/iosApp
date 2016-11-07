@@ -11,7 +11,7 @@
 @interface EvaluateSearchCollegeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *schoolList;
 @property(nonatomic,strong)NSArray *resultList;
-@property(nonatomic,strong)UITableView *schoolTable;
+@property(nonatomic,strong)UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @end
@@ -62,13 +62,13 @@
     [self.searchTextField addTarget:self action:@selector(searchCollegeWithKeyValue:) forControlEvents:UIControlEventEditingChanged];
     
     
-    self.schoolTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, XScreenWidth, XScreenHeight - (XNav_Height + 44))];
-    self.schoolTable.backgroundColor = XCOLOR_BG;
-    self.schoolTable.dataSource = self;
-    self.schoolTable.delegate = self;
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, XScreenWidth, XScreenHeight - (XNav_Height + 44))];
+    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 //     self.footView.backgroundColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0]; //[UIColor colorWithRed:230/255 green:230/255 blue:238/255 alpha:1.0];
-    self.schoolTable.tableFooterView = [[UIView alloc] init];
-     [self.view addSubview:self.schoolTable];
+    self.tableView.tableFooterView = [[UIView alloc] init];
+     [self.view addSubview:self.tableView];
     
     
 }
@@ -123,7 +123,7 @@
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
-    [self.schoolTable reloadData];
+    [self.tableView reloadData];
 }
 
 //提交查询

@@ -23,8 +23,11 @@ typedef enum {
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
+//推荐数据源
 @property(nonatomic,strong)NSMutableArray *recommendations;
+//临时数据源
 @property(nonatomic,strong)NSMutableArray *resultList;
+
 @property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs;
 @property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
 @property (weak, nonatomic) IBOutlet UILabel *NewSelectLabel;
@@ -89,6 +92,27 @@ typedef enum {
     return _sliceAngles;
 }
 
+-(NSMutableArray *)sliceColors{
+
+    if (!_sliceColors) {
+        
+        _sliceColors = [NSMutableArray arrayWithObjects:
+                        XCOLOR_RED,
+                        XCOLOR(44, 175, 222),
+                        XCOLOR(18, 35, 60),nil];
+    }
+    return _sliceColors;
+}
+
+-(NSMutableArray *)sliceTitleS{
+
+    if (!_sliceTitleS) {
+        _sliceTitleS = [NSMutableArray arrayWithObjects:GDLocalizedString(@"Evaluate-Dream"),GDLocalizedString(@"Evaluate-Middle"),GDLocalizedString(@"Evaluate-Secure"),nil];
+    }
+    return _sliceTitleS;
+
+}
+
 -(NSArray *)subtitleArr
 {
     if (!_subtitleArr) {
@@ -96,6 +120,7 @@ typedef enum {
     }
     return _subtitleArr;
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -107,7 +132,6 @@ typedef enum {
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -115,7 +139,6 @@ typedef enum {
     [MobClick endLogPageView:@"page智能匹配结果"];
     
 }
-
 
 
 - (void)viewDidUnload
@@ -147,11 +170,12 @@ typedef enum {
     
      [self.commitButton setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
      self.NewSelectLabel.text =[NSString stringWithFormat:@"%@ ：0",GDLocalizedString(@"ApplicationList-003")];
-    self.pieSelectLabel.text = self.subtitleArr[0];
+     self.pieSelectLabel.text = self.subtitleArr[0];
      self.title = GDLocalizedString(@"Evaluate-inteligent");
      self.NoDataLabel.text = GDLocalizedString(@"Evaluate-noData");
-    
 }
+
+
 -(void)makeHeaderView
 {
     self.ResultTableView.rowHeight = TABLEROWHEIGHT;
@@ -199,7 +223,7 @@ typedef enum {
 {
     if (!self.isComeBack) {
         
-        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(fillInfomation)];
+        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(pushInteProfile)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
     
@@ -253,32 +277,20 @@ typedef enum {
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
    
  
-        NSMutableArray *tempArr = [NSMutableArray array];
+        NSMutableArray *temp_recommendations = [NSMutableArray array];
 
         for (NSArray *items in response[@"recommendations"]) {
             
             NSMutableArray *temps = [NSMutableArray array];
             for (NSDictionary *obj  in items) {
-                
                   UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
                   uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
                   [temps addObject:uniFrame];
             }
-            
-            [tempArr addObject:temps];
-            
+            [temp_recommendations addObject:temps];
         }
-   
-        weakSelf.recommendations = [tempArr mutableCopy];
+        weakSelf.recommendations = [temp_recommendations mutableCopy];
 
-        
-        weakSelf.sliceColors = [NSMutableArray arrayWithObjects:
-                                XCOLOR_RED,
-                                [UIColor colorWithRed:47/255.0 green:175/255.0 blue:222/255.0 alpha:1],
-                                [UIColor colorWithRed:18/255.0 green:35/255.0 blue:60/255.0 alpha:1],nil];
-        
-        weakSelf.sliceTitleS =  [NSMutableArray arrayWithObjects:GDLocalizedString(@"Evaluate-Dream"),GDLocalizedString(@"Evaluate-Middle"),GDLocalizedString(@"Evaluate-Secure"),nil];
-        
         
         NSUInteger totalCount = 0;
         
@@ -289,13 +301,12 @@ typedef enum {
         
         
         NSString *firstItem;
-        for(int i = 0; i < 3; i ++)
-        {
+        for(int i = 0; i < 3; i ++){
             
             NSUInteger count = [weakSelf.recommendations[i] count];
             if (count != 0) {
-                
-                count = count + 3;
+                //count 数字大小可以增加显示范围
+                 count = count + 4;
             }
             
             NSNumber *one = [NSNumber numberWithInt:(int)count];
@@ -314,51 +325,50 @@ typedef enum {
             }
         }
         
-        int total = 0;
+        
+        int total = 0; //用于显示学校总数
+        
         for (NSNumber *num in _slices) {
             
             total += num.intValue;
         }
         
-        NSNumber *testNum ;
         
+        
+        NSNumber *startNum ;
         for (NSNumber *num in _slices) {
             if (num.intValue > 0) {
-                testNum = num;
+                startNum = num;
                 break;
             }
         }
-        CGFloat angle = 2*M_PI * testNum.intValue / total ;
-        [self.PieHeadView setStartPieAngle:M_PI_2 - angle/2];
+        CGFloat angle = 2 * M_PI * startNum.integerValue / total;
+        [self.PieHeadView setStartPieAngle:M_PI_2 - angle/2]; //piechar设置开始角度
         
         
+        //添加pieCharr的角度
         for (NSNumber *num in _slices) {
-            
-            CGFloat angle = 2*M_PI * num.intValue/total;
+            CGFloat angle = 2 * M_PI * num.intValue /total;
             NSString *angleStr = [NSString stringWithFormat:@"%lf",angle];
             [self.sliceAngles addObject:angleStr];
-            
         }
         
-        if([self.sliceAngles[0] floatValue] == 0)
-        {
-            self.selectIndex = 1;
-        }
+        
+        
+        if([self.sliceAngles[0] floatValue] == 0) self.selectIndex = 1;
         
         
         for (NSArray *universitys in weakSelf.recommendations) {
             
             for(UniversityFrame *uniFrame in universitys)
             {
-                if (uniFrame.university.in_cart) {
-                    
-                    [weakSelf.SelectedUniversityIDs addObject:uniFrame.university.NO_id];
-                }
-            }
+                if (uniFrame.university.in_cart) [weakSelf.SelectedUniversityIDs addObject:uniFrame.university.NO_id];
+             }
         }
       
         weakSelf.bottomView.hidden = total == 0 ? YES : NO;
         weakSelf.NoDataView.hidden = !weakSelf.bottomView.hidden;
+        
         if (total>0) {
             [weakSelf.PieHeadView reloadData];
          }
@@ -366,11 +376,10 @@ typedef enum {
         
         [weakSelf.ResultTableView reloadData];
         
+        //延迟显示
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
-            
-        });
+             weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
+         });
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -381,14 +390,10 @@ typedef enum {
 
 }
 
-//rightButtonItemClick
--(void)fillInfomation
-{
-     [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
-}
- 
 
-#pragma mark —————— UITableViewData UITableViewDelegate
+
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return Uni_Cell_Height;
@@ -411,6 +416,8 @@ typedef enum {
     
     return cell;
 }
+
+#pragma mark ——— ResultTableViewCellDelegate
 
 -(void)selectResultTableViewCellItem:(UIButton *)sender withUniversityInfo:(NSString *)universityID
 {
@@ -435,19 +442,16 @@ typedef enum {
     self.NewSelectLabel.text =[NSString stringWithFormat:@"%@ ：%d",GDLocalizedString(@"ApplicationList-003"),(int)self.NewSelectUniversityIDs.count];
 }
 
+
 - (void)configureCellSelectionView:(ResultTableViewCell *)cell universityId:(NSString *)Uni_id {
 
     if ([self.SelectedUniversityIDs containsObject:Uni_id]) {// @"已添加"
-        [cell.selectButton setTitle:GDLocalizedString(@"UniCourseDe-007")  forState:UIControlStateNormal];
-        [cell.selectButton setImage:nil forState:UIControlStateNormal];
+        [cell configrationCellLefButtonWithTitle:GDLocalizedString(@"UniCourseDe-007")  imageName:nil]   ;
     } else if ([self.NewSelectUniversityIDs containsObject:Uni_id]) {
-        [cell.selectButton setTitle:nil forState:UIControlStateNormal];
-        [cell.selectButton setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateNormal];
+        [cell configrationCellLefButtonWithTitle:nil  imageName:@"check-icons-yes"]   ;
     } else {
-        [cell.selectButton setTitle:nil forState:UIControlStateNormal];
-        [cell.selectButton setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
+        [cell configrationCellLefButtonWithTitle:nil  imageName:@"check-icons"]   ;
     }
-
 }
 
 
@@ -480,13 +484,14 @@ typedef enum {
      startAPIRequestWithSelector:@"POST api/account/apply"
      parameters:@{@"uid": self.NewSelectUniversityIDs}
      success:^(NSInteger statusCode, id response) {
+     
          KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
          [hud applySuccessStyle];
          [hud setLabelText:GDLocalizedString(@"ApplicationProfile-0015")];//@"加入成功"];
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
 
-             ApplyViewController *vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
+         ApplyViewController *vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
              if (self.isComeBack) {
                  vc.isFromMessage = YES;
              }
@@ -540,7 +545,6 @@ typedef enum {
         
         
         __block  CGFloat turnAngle = 0;
-        
         
         
         if ([self.sliceAngles[0] floatValue] == 0  && [self.sliceAngles[1] floatValue] == 0){
@@ -600,7 +604,7 @@ typedef enum {
             for (CATextLayer *textLayer in layer.sublayers) {
                 [UIView animateWithDuration:3 animations:^{
                     
-                    textLayer.transform=CATransform3DRotate(textLayer.transform, -turnAngle, 0, 0,1);
+                    textLayer.transform = CATransform3DRotate(textLayer.transform, -turnAngle, 0, 0,1);
                 }];
             }
             
@@ -608,6 +612,13 @@ typedef enum {
     }
 
 }
+
+//rightButtonItemClick
+-(void)pushInteProfile
+{
+    [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+}
+
 
 //返回上级页面
 -(void)popBack
@@ -625,7 +636,9 @@ typedef enum {
 }
 
 
-
-
+- (void)dealloc{
+    
+    KDClassLog(@"智能匹配结果 dealloc");
+}
 
 @end

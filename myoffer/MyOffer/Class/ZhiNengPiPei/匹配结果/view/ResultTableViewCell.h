@@ -24,7 +24,7 @@
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
 - (void)configureWithInfo:(UniversityFrame *)info;
 - (void)configureWithInfo:(UniversityFrame *)info ranking:(NSString *)ranking;
-
+- (void)configrationCellLefButtonWithTitle:(NSString  *)title imageName:(NSString *)imageName;
 
 
 @end

@@ -30,34 +30,60 @@ typedef enum {
 
 
 @interface InteProfileViewController ()<InputAccessoryToolBarDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XprofileTableViewCellDelegate>
-@property(nonatomic,strong)UITableView *profileTabelView;
+@property(nonatomic,strong)UITableView *tableView;
+//网络请求结果
 @property(nonatomic,strong)NSDictionary *response;
+//时间pick
 @property(nonatomic,strong)UIPickerView *timePiker;
+//国家pick
 @property(nonatomic,strong)UIPickerView *countryPicker;
+//年级pick
 @property(nonatomic,strong)UIPickerView *gradePicker;
+//意向专业pick
 @property(nonatomic,strong)UIPickerView *applyPicker;
+//就读专业pick
 @property(nonatomic,strong)UIPickerView *subjectPicker;
+//最低分数pick
 @property(nonatomic,strong)UIPickerView *miniPicker;
+//平均分pick
 @property(nonatomic,strong)UIPickerView *avgPicker;
+//国家TextField
 @property (strong, nonatomic)  UITextField *countryTF;
+//时间TextField
 @property (strong, nonatomic)  UITextField *timeTF;
+//申请意向TextField
 @property (strong, nonatomic)  UITextField *applySubjectTF;
+//学校TextField
 @property (strong, nonatomic)  UITextField *universityTF;
+//就读专业TextField
 @property (strong, nonatomic)  UITextField *subjectedTF;
+//平均分TextField
 @property (strong, nonatomic)  UITextField *GPATF;
+//年级TextField
 @property (strong, nonatomic)  UITextField *gradeTF;
+//平均TextField
 @property (strong, nonatomic)  UITextField *avgTF;
+//最低分TextField
 @property (strong, nonatomic)  UITextField *lowTF;
+//最低分数组
 @property(nonatomic,strong)NSArray *miniItems;
+//国家数组
 @property(nonatomic,strong)NSArray *countryItems;
+//国家中文分数组
 @property(nonatomic,strong)NSArray *countryItems_CE;
+//时间数组
 @property(nonatomic,strong)NSArray *timeItems;
+//专业数组
 @property(nonatomic,strong)NSArray *subjectItems;
 @property(nonatomic,strong)NSArray *subjectItems_CE;
+//年级数组
 @property(nonatomic,strong)NSArray *gradeItems;
 @property(nonatomic,strong)NSArray *gradeItems_CE;
+//提示页
 @property(nonatomic,strong)promptViewController *prompVC;
+//底部按钮
 @property(nonatomic,strong)UIButton *bottomView;
+//键盘工具条
 @property(nonatomic,strong)InputAccessoryToolBar *toolView;
 
 @end
@@ -351,14 +377,14 @@ typedef enum {
     CGFloat tableY = 0;
     CGFloat tableW = XScreenWidth;
     CGFloat tableH = XScreenHeight - XNav_Height - bottomH;
-    self.profileTabelView =[[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY,tableW,tableH)];
-    self.profileTabelView.dataSource =self;
-    self.profileTabelView.delegate =self;
-    [self.view addSubview:self.profileTabelView];
-    self.profileTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.profileTabelView.allowsSelection = NO;
-    self.profileTabelView.backgroundColor = XCOLOR_BG;
-    self.profileTabelView.tableFooterView = [[UIView alloc] init];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY,tableW,tableH)];
+    self.tableView.dataSource =self;
+    self.tableView.delegate =self;
+    [self.view addSubview:self.tableView];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsSelection = NO;
+    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
     [self makeFooterViewWithBottonHeight:bottomH];
  }
@@ -382,7 +408,7 @@ typedef enum {
 {
 
     XWGJSummaryView *headerView = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"Evaluate-AD")];
-    self.profileTabelView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = headerView;
     
 }
 
@@ -397,7 +423,7 @@ typedef enum {
             
               weakSelf.response = response;
             
-              [weakSelf.profileTabelView reloadData];
+              [weakSelf.tableView reloadData];
             
         }];
  }
@@ -744,11 +770,11 @@ typedef enum {
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    UIEdgeInsets insets = self.profileTabelView.contentInset;
+    UIEdgeInsets insets = self.tableView.contentInset;
     
     insets.bottom = up ? keyboardEndFrame.size.height : 0;
     
-    self.profileTabelView.contentInset = insets;
+    self.tableView.contentInset = insets;
     
     [self.view layoutSubviews];
     
