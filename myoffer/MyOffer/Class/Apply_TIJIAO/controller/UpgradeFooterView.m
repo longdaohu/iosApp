@@ -15,12 +15,14 @@
 @property(nonatomic,strong)UIImageView *arrowView;   //3、箭头
 @end
 
+;
+
 @implementation UpgradeFooterView
-+ (instancetype)footView
++ (instancetype)footViewWithContent:(NSString *)content
 {
     UpgradeFooterView *footer = [[UpgradeFooterView alloc] initWithFrame:CGRectMake(0, 10, XScreenWidth,0)];
-    footer.tipStr = @"Tips：选择VIP尊享服务包，将享有一对一服务，帮你创造亮点，指导选课，帮你冲刺世界名校。全程操办你的文书、签证，学校交涉补材料、考试分数递送、协助邮寄纸质材料等24项超值服务";
-    ;
+    
+    footer.tipStr = content;
     
     return  footer;
 }
@@ -91,8 +93,7 @@
     CGFloat bgH =  CGRectGetMaxY(self.titleLab.frame) + 2 * padding;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     
-    self.contentHeigt = CGRectGetMaxY(self.bgView.frame);
-    
+     
     CGFloat arrowH =  15;
     CGFloat arrowW =  15;
     CGFloat arrowY =  bgH - padding - arrowH;
@@ -110,7 +111,7 @@
 
 -(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{
     
-    return [title boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
+    return [title boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
 }
 
 

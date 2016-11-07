@@ -451,7 +451,6 @@ typedef enum {
 }
 
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -475,7 +474,6 @@ typedef enum {
 //        [KDAlertView showMessage:GDLocalizedString(@"Evaluate-commitAlert") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];//@"好的"];
 //        return;
 //    }
-    
     
     
     [self

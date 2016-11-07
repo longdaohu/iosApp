@@ -9,9 +9,7 @@
 #import "promptViewController.h"
 
 @interface promptViewController ()
-@property(nonatomic,strong)UIButton  *tapBtn;
 @property(nonatomic,strong)UIImageView  *prompView;
-//@property(nonatomic,strong)UIView *bgView;
 @end
 
 @implementation promptViewController
@@ -34,7 +32,6 @@
     
     [super viewDidLoad];
     
-    
     UIImageView *prompView =   [[UIImageView alloc] initWithFrame:self.view.bounds];
     prompView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:prompView];
@@ -42,20 +39,21 @@
     self.prompView = prompView;
     
     
-    CGFloat Ty = XScreenHeight  - (70 * XScreenHeight / 568.0);
-    CGFloat Tw = 240 * XScreenWidth / 320.0;
-    CGFloat Th = 40 * XScreenWidth/ 320.0;
-    CGFloat Tx =  0.5 *(XScreenWidth - Tw);
-    self.tapBtn =[[UIButton alloc] initWithFrame:CGRectMake(Tx, Ty, Tw, Th)];
-    [self.tapBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-    [self.tapBtn setTitle:GDLocalizedString(@"Evaluate-pipei") forState:UIControlStateNormal];
-    self.tapBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * XScreenWidth / 320.0)];
-    [self.tapBtn addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.tapBtn];
-    self.tapBtn.layer.cornerRadius = CORNER_RADIUS;
-    self.tapBtn.layer.masksToBounds = YES;
-    self.tapBtn.layer.borderColor = XCOLOR_RED.CGColor;
-    self.tapBtn.layer.borderWidth = 1;
+    CGFloat enterY = XScreenHeight  - (70 * XScreenHeight / 568.0);
+    CGFloat enterW = 240 * XScreenWidth / 320.0;
+    CGFloat enterH = 40 * XScreenWidth/ 320.0;
+    CGFloat enterX =  0.5 *(XScreenWidth - enterW);
+    UIButton *enterBtn =[[UIButton alloc] initWithFrame:CGRectMake(enterX, enterY, enterW, enterH)];
+    [enterBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+    [enterBtn setTitle:GDLocalizedString(@"Evaluate-pipei") forState:UIControlStateNormal];
+    enterBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * XScreenWidth / 320.0)];
+    [enterBtn addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:enterBtn];
+    enterBtn.layer.cornerRadius = CORNER_RADIUS;
+    enterBtn.layer.masksToBounds = YES;
+    enterBtn.layer.borderColor = XCOLOR_RED.CGColor;
+    enterBtn.layer.borderWidth = 1;
+    
     
     UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissView)];
     [self.view addGestureRecognizer:tap];
@@ -70,7 +68,6 @@
         
         self.actionBlock();
     }
-    
     
 }
 

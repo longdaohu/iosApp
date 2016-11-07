@@ -10,8 +10,8 @@
 
 typedef void(^UpgradeTipsViewBlock)();
 @interface UpgradeFooterView : UIView
-+ (instancetype)footView;
 @property(nonatomic,copy)NSString *tipStr;                  //提示字符串
-@property(nonatomic,assign)CGFloat contentHeigt;            //提示框高
 @property(nonatomic,copy)UpgradeTipsViewBlock actionBlock;
++ (instancetype)footViewWithContent:(NSString *)content;
+
 @end

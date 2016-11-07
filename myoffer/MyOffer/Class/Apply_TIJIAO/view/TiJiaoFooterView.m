@@ -45,8 +45,6 @@
     self.selectBtn.frame = CGRectMake(selectX, selectY, selectW, selectH);
     
     
-//    [self.descriptionBtn setTitle:title forState:UIControlStateNormal];
-    
     CGFloat desX = CGRectGetMaxY(self.selectBtn.frame) + 5;
     CGFloat desY = CGRectGetMinY(self.selectBtn.frame);
     CGFloat desW = XScreenWidth - desX - ITEM_MARGIN;

@@ -17,5 +17,14 @@
     }
 }
 
+- (void)awakeFromNib{
+
+    [super awakeFromNib];
+    
+     self.frame = CGRectMake(0, 0,XScreenWidth, 44);
+
+}
+
+
 
 @end

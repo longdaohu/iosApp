@@ -24,8 +24,8 @@
     [super viewDidAppear:animated];
     
     [self.searchTextField becomeFirstResponder];
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -54,10 +54,13 @@
 -(void)makeViewUI
 {
     self.title = GDLocalizedString(@"Evaluate-University");//@"毕业院校";  //@"完成"
+    
     UIBarButtonItem *rightCommitButton =[[UIBarButtonItem alloc] initWithTitle:GDLocalizedString(@"Evaluate-Done") style:UIBarButtonItemStylePlain target:self action:@selector(commitInput)];
     self.navigationItem.rightBarButtonItem = rightCommitButton;
     
+    
     [self.searchTextField addTarget:self action:@selector(searchCollegeWithKeyValue:) forControlEvents:UIControlEventEditingChanged];
+    
     
     self.schoolTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, XScreenWidth, XScreenHeight - (XNav_Height + 44))];
     self.schoolTable.backgroundColor = XCOLOR_BG;
@@ -65,8 +68,8 @@
     self.schoolTable.delegate = self;
 //     self.footView.backgroundColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0]; //[UIColor colorWithRed:230/255 green:230/255 blue:238/255 alpha:1.0];
     self.schoolTable.tableFooterView = [[UIView alloc] init];
-    
      [self.view addSubview:self.schoolTable];
+    
     
 }
 
@@ -87,12 +90,6 @@
     return self.resultList.count;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-      [self universityName:self.resultList[indexPath.row]];
-
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -108,6 +105,12 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self universityName:self.resultList[indexPath.row]];
+    
+}
+
 
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -115,34 +118,35 @@
     [self.view endEditing:YES];
 }
 
-
+//正则表达匹配查询结果
 -(void)searchCollegeWithKeyValue:(UITextField *)searchTF
 {
-  
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
     [self.schoolTable reloadData];
 }
 
+//提交查询
 -(void)commitInput
 {
- 
     [self universityName:self.searchTextField.text];
-
 }
+
 
 -(void)universityName:(NSString *)unversity{
 
-    if (unversity.length == 0) {
-        
-        
-    }else{
+    if (unversity && self.valueBlock) {
         
         self.valueBlock(unversity);
         
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
-    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc{
+    
+    KDClassLog(@"智能匹配 学校搜索 dealloc");
 }
 
 @end

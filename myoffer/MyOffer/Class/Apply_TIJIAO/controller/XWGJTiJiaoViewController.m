@@ -579,7 +579,6 @@ typedef enum {
 }
 
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     XWGJTJSectionGroup *group = self.Groups[section];
@@ -666,8 +665,7 @@ typedef enum {
                 default:
                     break;
             }
-
-        
+         
         }
         
         
@@ -1002,14 +1000,17 @@ typedef enum {
 
 #pragma mark —————— 键盘处理
 - (void)keyboardWillShow:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
 
 - (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
+    
     NSDictionary* userInfo = [aNotification userInfo];
     
     // Get animation info from userInfo
@@ -1027,11 +1028,8 @@ typedef enum {
     [UIView setAnimationCurve:animationCurve];
     
     UIEdgeInsets insets = self.TableView.contentInset;
-    if (up) {
-        insets.bottom   = keyboardEndFrame.size.height;
-    } else {
-        insets.bottom   = 50;
-    }
+    
+    insets.bottom   =  up  ? keyboardEndFrame.size.height  : 0;
     
     self.TableView.contentInset = insets;
     
@@ -1045,10 +1043,7 @@ typedef enum {
 -(void)commitUserInfo
 {
     
-    
-    
  
-
     RequireLogin
    
     for (XWGJTJSectionGroup *group in self.Groups) {
@@ -1094,15 +1089,6 @@ typedef enum {
          startAPIRequestWithSelector:@"POST /api/account/checkin"
          parameters:@{@"courseIds": self.selectedCoursesIDs}
          success:^(NSInteger statusCode, id response) {
-//             KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-//             [hud applySuccessStyle];
-//             [hud setLabelText: GDLocalizedString(@"WoYaoLiuXue_submit")];//@"提交成功"];
-//             [hud hideAnimated:YES afterDelay:2];
-//             [hud setHiddenBlock:^(KDProgressHUD *hud) {
-//                 
-//                 [self.navigationController popToRootViewControllerAnimated:YES];
-//                 //[self dismiss];
-//             }];
              
              [weakSelf updateView];
 

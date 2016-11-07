@@ -17,4 +17,5 @@
 @property(nonatomic,strong)UIButton *descriptionBtn;
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,weak)id<TiJiaoFooterViewDelegate> delegate;
- @end
+
+@end

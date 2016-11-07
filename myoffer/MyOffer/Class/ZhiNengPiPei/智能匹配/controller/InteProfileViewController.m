@@ -101,12 +101,83 @@ typedef enum {
     return _miniItems;
 }
 
+//请求匹配相关数据
+-(void)getSelectionResourse
+{
+    
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    
+    NSArray *countryItems_CN = [[ud valueForKey:@"Country_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                                {
+                                    CountryItem *item = [CountryItem CountryWithDictionary:obj];
+                                    return item;
+                                }];
+    
+    
+    
+    NSArray *countryItems_EN = [[ud valueForKey:@"Country_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                                {
+                                    CountryItem *item = [CountryItem CountryWithDictionary:obj];
+                                    return item;
+                                }];
+    
+    
+    self.countryItems_CE =  @[countryItems_CN,countryItems_EN];
+    
+    
+    
+    NSArray *subjectItems_CN = [[ud valueForKey:@"Subject_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                                {
+                                    SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
+                                    return item;
+                                }];
+    NSArray *subjectItems_EN = [[ud valueForKey:@"Subject_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                                {
+                                    SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
+                                    return item;
+                                }];
+    
+    
+    self.subjectItems_CE = @[subjectItems_CN,subjectItems_EN];
+    
+    
+    
+    NSArray *gradeItems_CN = [[ud valueForKey:@"Grade_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                              {
+                                  GradeItem *item = [GradeItem gradeWithDictionary:obj];
+                                  return item;
+                              }];
+    
+    NSArray *gradeItems_EN = [[ud valueForKey:@"Grade_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
+                              {
+                                  GradeItem *item = [GradeItem gradeWithDictionary:obj];
+                                  return item;
+                              }];
+    
+    self.gradeItems_CE =  @[gradeItems_CN,gradeItems_EN];
+    
+    
+    if (USER_EN) {
+        
+        self.countryItems = self.countryItems_CE[1];
+        self.subjectItems = self.subjectItems_CE[1];
+        self.gradeItems = self.gradeItems_CE[1];
+        
+    }else{
+        
+        self.countryItems = self.countryItems_CE[0];
+        self.subjectItems = self.subjectItems_CE[0];
+        self.gradeItems = self.gradeItems_CE[0];
+    }
+    
+}
 
+//键盘辅助工具条
 -(InputAccessoryToolBar *)toolView
 {
     if (!_toolView) {
+        
         _toolView =[[NSBundle mainBundle] loadNibNamed:@"InputAccessoryToolBar" owner:self options:nil].lastObject;
-        _toolView.frame = CGRectMake(0, 0, self.profileTabelView.frame.size.width, 44);
         _toolView.delegate = self;
         }
     return _toolView;
@@ -124,6 +195,7 @@ typedef enum {
     return picker;
 }
 
+//时间
 -(UIPickerView *)timePiker
 {
     if(!_timePiker)
@@ -134,6 +206,7 @@ typedef enum {
     return _timePiker;
 }
 
+//年级
 -(UIPickerView *)gradePicker
 {
     if(!_gradePicker)
@@ -144,6 +217,7 @@ typedef enum {
     return _gradePicker;
 }
 
+//意向专业
 -(UIPickerView *)applyPicker
 {
     if(!_applyPicker)
@@ -153,6 +227,7 @@ typedef enum {
     return _applyPicker;
 }
 
+//就读专业
 -(UIPickerView *)subjectPicker
 {
     if(!_subjectPicker)
@@ -163,6 +238,7 @@ typedef enum {
     return _subjectPicker;
 }
 
+//最低分数
 -(UIPickerView *)miniPicker
 {
     if (!_miniPicker) {
@@ -170,7 +246,7 @@ typedef enum {
        }
     return _miniPicker;
 }
-
+//平均分数
 -(UIPickerView *)avgPicker
 {
     if (!_avgPicker) {
@@ -180,6 +256,7 @@ typedef enum {
     }
     return _avgPicker;
 }
+//国家
 -(UIPickerView *)countryPicker
 {
     if (!_countryPicker) {
@@ -189,7 +266,6 @@ typedef enum {
     }
     return _countryPicker;
 }
-
 
 
 - (void)viewDidLoad {
@@ -203,7 +279,6 @@ typedef enum {
     [self getSelectionResourse];
  
     [self makeOther];
-
     
 }
 
@@ -265,9 +340,18 @@ typedef enum {
     
 }
 
+
+
+
 -(void)makeTableView
 {
-    self.profileTabelView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height - Bottom_Height)];
+    
+    CGFloat bottomH = Bottom_Height;
+    CGFloat tableX = 0;
+    CGFloat tableY = 0;
+    CGFloat tableW = XScreenWidth;
+    CGFloat tableH = XScreenHeight - XNav_Height - bottomH;
+    self.profileTabelView =[[UITableView alloc] initWithFrame:CGRectMake(tableX, tableY,tableW,tableH)];
     self.profileTabelView.dataSource =self;
     self.profileTabelView.delegate =self;
     [self.view addSubview:self.profileTabelView];
@@ -276,16 +360,15 @@ typedef enum {
     self.profileTabelView.backgroundColor = XCOLOR_BG;
     self.profileTabelView.tableFooterView = [[UIView alloc] init];
     
-    [self makeFooterView];
-
-}
+    [self makeFooterViewWithBottonHeight:bottomH];
+ }
 
 
 //底部提交按钮
--(void)makeFooterView
+-(void)makeFooterViewWithBottonHeight:(CGFloat)height
 {
     
-    self.bottomView =[[UIButton alloc] initWithFrame:CGRectMake(0, XScreenHeight - XNav_Height - Bottom_Height, XScreenWidth, Bottom_Height)];
+    self.bottomView =[[UIButton alloc] initWithFrame:CGRectMake(0, XScreenHeight - XNav_Height - height, XScreenWidth, height)];
     self.bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
     [self.bottomView addTarget:self action:@selector(commitButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView setTitle:GDLocalizedString(@"Evaluate-commitButton") forState:UIControlStateNormal];
@@ -304,86 +387,11 @@ typedef enum {
 }
 
 
-//请求匹配相关数据
--(void)getSelectionResourse
-{
-    
-    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-    
-    NSArray *countryItems_CN = [[ud valueForKey:@"Country_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                                {
-                                    CountryItem *item = [CountryItem CountryWithDictionary:obj];
-                                    return item;
-                                }];
-
-          
-    
-    NSArray *countryItems_EN = [[ud valueForKey:@"Country_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                                {
-                                    CountryItem *item = [CountryItem CountryWithDictionary:obj];
-                                    return item;
-                                }];
-    
-    
-    self.countryItems_CE =  @[countryItems_CN,countryItems_EN];
-    
-    
-    
-    NSArray *subjectItems_CN = [[ud valueForKey:@"Subject_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                                {
-                                    SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
-                                    return item;
-                                }];
-    NSArray *subjectItems_EN = [[ud valueForKey:@"Subject_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                                {
-                                    SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
-                                    return item;
-                                }];
-    
-    
-    self.subjectItems_CE = @[subjectItems_CN,subjectItems_EN];
-    
-    
-    
-    NSArray *gradeItems_CN = [[ud valueForKey:@"Grade_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                              {
-                                  GradeItem *item = [GradeItem gradeWithDictionary:obj];
-                                  return item;
-                              }];
-    
-    NSArray *gradeItems_EN = [[ud valueForKey:@"Grade_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                              {
-                                  GradeItem *item = [GradeItem gradeWithDictionary:obj];
-                                  return item;
-                              }];
-    
-    self.gradeItems_CE =  @[gradeItems_CN,gradeItems_EN];
-    
-    
-    if (USER_EN) {
-        
-        self.countryItems = self.countryItems_CE[1];
-        self.subjectItems = self.subjectItems_CE[1];
-        self.gradeItems = self.gradeItems_CE[1];
-        
-    }else{
-        
-        self.countryItems = self.countryItems_CE[0];
-        self.subjectItems = self.subjectItems_CE[0];
-        self.gradeItems = self.gradeItems_CE[0];
-    }
-    
-}
-
-
-
 //用于网络数据请求
 -(void)requestDataSource{
-
     
-    if ([AppDelegate sharedDelegate].isLogin) {
-        
-        
+    if (!LOGIN) return;
+    
         XWeakSelf
         [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
             
@@ -392,8 +400,7 @@ typedef enum {
               [weakSelf.profileTabelView reloadData];
             
         }];
-    }
-}
+ }
 
 
 #pragma mark ————  UITableViewDelegate
@@ -823,7 +830,6 @@ typedef enum {
 - (void)prompViewAppear:(BOOL)appear{
 
     if (appear) {
-        
         
         [[UIApplication sharedApplication].windows.lastObject addSubview:self.prompVC.view];
         
