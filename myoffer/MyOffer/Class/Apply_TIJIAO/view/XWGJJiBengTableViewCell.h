@@ -23,6 +23,8 @@
 @property(nonatomic,strong)NSIndexPath *indexPath;
 @property(nonatomic,weak)id<XWGJJiBengTableViewCellDelegate> delegate;
 @property(nonatomic,strong)XWGJPeronInfoItem *item;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 @end
 
 

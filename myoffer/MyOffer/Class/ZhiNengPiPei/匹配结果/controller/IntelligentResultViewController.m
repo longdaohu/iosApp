@@ -272,114 +272,11 @@ typedef enum {
     
     XWeakSelf;
     
-    [self startAPIRequestWithSelector:@"GET api/university/recommendations"  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+    [self startAPIRequestWithSelector:kAPISelectorZiZengRecommendation  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
    
- 
-        NSMutableArray *temp_recommendations = [NSMutableArray array];
-
-        for (NSArray *items in response[@"recommendations"]) {
-            
-            NSMutableArray *temps = [NSMutableArray array];
-            for (NSDictionary *obj  in items) {
-                  UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
-                  uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
-                  [temps addObject:uniFrame];
-            }
-            [temp_recommendations addObject:temps];
-        }
-        weakSelf.recommendations = [temp_recommendations mutableCopy];
-
-        
-        NSUInteger totalCount = 0;
-        
-        for (NSArray *uniersitys in  weakSelf.recommendations) {
-            
-            totalCount += uniersitys.count;
-        }
-        
-        
-        NSString *firstItem;
-        for(int i = 0; i < 3; i ++){
-            
-            NSUInteger count = [weakSelf.recommendations[i] count];
-            if (count != 0) {
-                //count 数字大小可以增加显示范围
-                 count = count + 4;
-            }
-            
-            NSNumber *one = [NSNumber numberWithInt:(int)count];
-            
-            [_slices addObject:one];
-            
-            
-            if (count > 0 && firstItem.length == 0) {
-                
-                firstItem = @"已存在";
-                
-                weakSelf.resultList  =  [self.recommendations[i] mutableCopy];
-                
-                [weakSelf makeAttributedText:[NSString stringWithFormat:@"%ld",(unsigned long)totalCount] currentcount:[NSString stringWithFormat:@"%ld",(long)weakSelf.resultList.count]  currentItem:weakSelf.sliceTitleS[i]];
-                 weakSelf.lineView.backgroundColor =weakSelf.sliceColors[i];
-            }
-        }
-        
-        
-        int total = 0; //用于显示学校总数
-        
-        for (NSNumber *num in _slices) {
-            
-            total += num.intValue;
-        }
-        
-        
-        
-        NSNumber *startNum ;
-        for (NSNumber *num in _slices) {
-            if (num.intValue > 0) {
-                startNum = num;
-                break;
-            }
-        }
-        CGFloat angle = 2 * M_PI * startNum.integerValue / total;
-        [self.PieHeadView setStartPieAngle:M_PI_2 - angle/2]; //piechar设置开始角度
-        
-        
-        //添加pieCharr的角度
-        for (NSNumber *num in _slices) {
-            CGFloat angle = 2 * M_PI * num.intValue /total;
-            NSString *angleStr = [NSString stringWithFormat:@"%lf",angle];
-            [self.sliceAngles addObject:angleStr];
-        }
-        
-        
-        
-        if([self.sliceAngles[0] floatValue] == 0) self.selectIndex = 1;
-        
-        
-        for (NSArray *universitys in weakSelf.recommendations) {
-            
-            for(UniversityFrame *uniFrame in universitys)
-            {
-                if (uniFrame.university.in_cart) [weakSelf.SelectedUniversityIDs addObject:uniFrame.university.NO_id];
-             }
-        }
-      
-        weakSelf.bottomView.hidden = total == 0 ? YES : NO;
-        weakSelf.NoDataView.hidden = !weakSelf.bottomView.hidden;
-        
-        if (total>0) {
-            [weakSelf.PieHeadView reloadData];
-         }
-        
-        
-        [weakSelf.ResultTableView reloadData];
-        
-        //延迟显示
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
-         });
+        [weakSelf configrationUI:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -390,6 +287,115 @@ typedef enum {
 
 }
 
+
+- (void)configrationUI:(id)response
+{
+
+    NSMutableArray *temp_recommendations = [NSMutableArray array];
+    
+    for (NSArray *items in response[@"recommendations"]) {
+        
+        NSMutableArray *temps = [NSMutableArray array];
+        for (NSDictionary *obj  in items) {
+            UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
+            uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
+            [temps addObject:uniFrame];
+        }
+        [temp_recommendations addObject:temps];
+    }
+    self.recommendations = [temp_recommendations mutableCopy];
+    
+    
+    NSUInteger totalCount = 0;
+    
+    for (NSArray *uniersitys in  self.recommendations) {
+        
+        totalCount += uniersitys.count;
+    }
+    
+    
+    NSString *firstItem;
+    for(int i = 0; i < 3; i ++){
+        
+        NSUInteger count = [self.recommendations[i] count];
+        if (count != 0) {
+            //count 数字大小可以增加显示范围
+            count = count + 4;
+        }
+        
+        NSNumber *one = [NSNumber numberWithInt:(int)count];
+        
+        [_slices addObject:one];
+        
+        
+        if (count > 0 && firstItem.length == 0) {
+            
+            firstItem = @"已存在";
+            
+            self.resultList  =  [self.recommendations[i] mutableCopy];
+            
+            [self makeAttributedText:[NSString stringWithFormat:@"%ld",(unsigned long)totalCount] currentcount:[NSString stringWithFormat:@"%ld",(long)self.resultList.count]  currentItem:self.sliceTitleS[i]];
+            self.lineView.backgroundColor =self.sliceColors[i];
+        }
+    }
+    
+    
+    int total = 0; //用于显示学校总数
+    
+    for (NSNumber *num in _slices) {
+        
+        total += num.intValue;
+    }
+    
+    
+    
+    NSNumber *startNum ;
+    for (NSNumber *num in _slices) {
+        if (num.intValue > 0) {
+            startNum = num;
+            break;
+        }
+    }
+    CGFloat angle = 2 * M_PI * startNum.integerValue / total;
+    [self.PieHeadView setStartPieAngle:M_PI_2 - angle/2]; //piechar设置开始角度
+    
+    
+    //添加pieCharr的角度
+    for (NSNumber *num in _slices) {
+        CGFloat angle = 2 * M_PI * num.intValue /total;
+        NSString *angleStr = [NSString stringWithFormat:@"%lf",angle];
+        [self.sliceAngles addObject:angleStr];
+    }
+    
+    
+    
+    if([self.sliceAngles[0] floatValue] == 0) self.selectIndex = 1;
+    
+    
+    for (NSArray *universitys in self.recommendations) {
+        
+        for(UniversityFrame *uniFrame in universitys)
+        {
+            if (uniFrame.university.in_cart) [self.SelectedUniversityIDs addObject:uniFrame.university.NO_id];
+        }
+    }
+    
+    self.bottomView.hidden = total == 0 ? YES : NO;
+    self.NoDataView.hidden = !self.bottomView.hidden;
+    
+    if (total>0) {
+        [self.PieHeadView reloadData];
+    }
+    
+    
+    [self.ResultTableView reloadData];
+    
+    //延迟显示
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    });
+
+}
 
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
@@ -481,7 +487,7 @@ typedef enum {
     
     
     [self
-     startAPIRequestWithSelector:@"POST api/account/apply"
+     startAPIRequestWithSelector:kAPISelectorZiZengApplyPost
      parameters:@{@"uid": self.NewSelectUniversityIDs}
      success:^(NSInteger statusCode, id response) {
      

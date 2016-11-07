@@ -18,4 +18,6 @@
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,weak)id<TiJiaoFooterViewDelegate> delegate;
 
++ (instancetype)footerViewWithContent:(NSString *)content;
+
 @end

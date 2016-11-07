@@ -84,5 +84,8 @@
 #define kAPISelectorZiZengPipeiGet @"GET api/account/evaluate"
 //提交智能匹配
 #define kAPISelectorZiZengPipeiPost @"POST api/account/evaluate"
-
+//提交智能匹配结果选择项
+#define kAPISelectorZiZengApplyPost @"POST api/account/apply"
+//智能匹配结果
+#define kAPISelectorZiZengRecommendation @"GET api/university/recommendations"
 

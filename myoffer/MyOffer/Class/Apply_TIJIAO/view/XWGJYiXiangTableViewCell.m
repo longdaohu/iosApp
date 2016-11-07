@@ -17,6 +17,19 @@
 
 @implementation XWGJYiXiangTableViewCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView{
+    
+    XWGJYiXiangTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"YIXIANG"];
+    
+    if (!cell) {
+        
+        cell = [[NSBundle mainBundle] loadNibNamed:@"XWGJYiXiangTableViewCell" owner:self options:nil].lastObject;
+    }
+
+     return cell;
+}
+
+
 - (void)awakeFromNib {
 
     [super awakeFromNib];

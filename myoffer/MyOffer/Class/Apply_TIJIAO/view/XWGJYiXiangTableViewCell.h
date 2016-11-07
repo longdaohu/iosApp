@@ -25,4 +25,5 @@
 @property(nonatomic,weak)id<XWGJYiXiangTableViewCellDelegate> delegate;
 @property(nonatomic,strong)XWGJPeronInfoItem *item;
 
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

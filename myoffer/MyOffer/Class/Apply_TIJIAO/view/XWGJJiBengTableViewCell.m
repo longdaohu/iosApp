@@ -16,6 +16,17 @@
 
 @implementation XWGJJiBengTableViewCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView{
+
+    XWGJJiBengTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"JIBEN"];
+    
+    if (!cell) {
+        
+        cell = [[NSBundle mainBundle] loadNibNamed:@"XWGJJiBengTableViewCell" owner:self options:nil].lastObject;
+    }
+    
+    return cell;
+}
 
 - (void)awakeFromNib {
     
@@ -41,6 +52,7 @@
     
 }
 
+
 -(void)addRightViewWithTextField:(UITextField *)textField
 {
     textField.rightViewMode = UITextFieldViewModeAlways;
@@ -63,13 +75,11 @@
     _item = item;
     
     self.ItemLab.text = item.placeholder;
-//    self.ContentTF.placeholder = item.placeholder;
     self.ContentTF.text = item.itemName;
     
     
     NSString *ArrowName = !item.Accessory ? @"":@"common_icon_arrow";
     self.RightView.image =   [UIImage imageNamed:ArrowName];
-   
     
 }
 
@@ -102,7 +112,6 @@
         
         [self.delegate JiBengTableViewCell:self withIndexPath:self.indexPath textFieldDidBeginEditing:textField];
     }
-    
 }
 
 
@@ -116,7 +125,6 @@
     }
     
 }
-
 
 
 -(void)limitTextlength:(UITextField *)textField{

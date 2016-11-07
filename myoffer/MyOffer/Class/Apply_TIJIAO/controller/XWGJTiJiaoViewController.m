@@ -32,6 +32,7 @@ typedef enum {
 
 @interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate,TiJiaoFooterViewDelegate>
 @property(nonatomic,strong)UITableView *TableView;
+//数据源
 @property(nonatomic,strong)NSArray *Groups;
 @property(nonatomic,strong)NSDictionary *userInfo;
 @property(nonatomic,strong)UITableViewCell *editingCell;
@@ -51,13 +52,12 @@ typedef enum {
 @property(nonatomic,strong)NSArray *countryItems;
 @property(nonatomic,strong)NSArray *ApplyItems;
 @property(nonatomic,strong)NSArray *IELSTScores;
-@property(nonatomic,strong)KDEasyTouchButton *commitBtn;    //提交申请按钮
+@property(nonatomic,strong)UIButton *commitBtn;    //提交申请按钮
 @property(nonatomic,strong)UpgradeViewController *upgateVC; //升级VC
 
 @end
 
 @implementation XWGJTiJiaoViewController
-
 
 -(UpgradeViewController *)upgateVC{
 
@@ -71,6 +71,7 @@ typedef enum {
     return _upgateVC;
 }
 
+
 -(UIPickerView *)PickerViewWithTag:(PickerViewType)type
 {
     UIPickerView *picker = [[UIPickerView alloc] init];
@@ -80,6 +81,7 @@ typedef enum {
     return picker;
 }
 
+//国家picker
 -(UIPickerView *)CountryPicker
 {
     if (!_CountryPicker) {
@@ -90,6 +92,7 @@ typedef enum {
     return _CountryPicker;
 }
 
+//时间picker
 -(UIPickerView *)TimePicker
 {
     if (!_TimePicker) {
@@ -100,6 +103,7 @@ typedef enum {
     return _TimePicker;
 }
 
+//专业picker
 -(UIPickerView *)ApplyPicker
 {
     if (!_ApplyPicker) {
@@ -110,7 +114,7 @@ typedef enum {
     return _ApplyPicker;
 }
 
-
+//就读专业picker
 -(UIPickerView *)SubjectPicker
 {
     if (!_SubjectPicker) {
@@ -120,6 +124,7 @@ typedef enum {
     }
     return _SubjectPicker;
 }
+//年级picker
 -(UIPickerView *)GradePicker
 {
     if (!_GradePicker) {
@@ -129,7 +134,7 @@ typedef enum {
     }
     return _GradePicker;
 }
-
+//平均分picker
 -(UIPickerView *)AVGPicker
 {
     if (!_AVGPicker) {
@@ -140,6 +145,7 @@ typedef enum {
     return _AVGPicker;
 }
 
+//最低分picker
 -(UIPickerView *)LowPicker
 {
     if (!_LowPicker) {
@@ -150,6 +156,7 @@ typedef enum {
     return _LowPicker;
 }
 
+//时间数组
 -(NSArray *)ApplyTimes
 {
     if (!_ApplyTimes) {
@@ -160,7 +167,7 @@ typedef enum {
     return _ApplyTimes;
 }
 
-
+//分数数组
 -(NSArray *)IELSTScores
 {
     if (!_IELSTScores) {
@@ -179,6 +186,7 @@ typedef enum {
     [self getSelectionResourse];
     
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -204,8 +212,6 @@ typedef enum {
     
     [self makeFooterView];
     
-    [self makeComitButton];
-   
     [self makeOther];
     
 }
@@ -234,9 +240,25 @@ typedef enum {
 
 }
 
--(void)makeComitButton
+
+-(void)makeTableView
 {
-    KDEasyTouchButton *commit = [[KDEasyTouchButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TableView.frame), XScreenWidth, 50)];
+    CGFloat bottomHeight = 50;
+    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height - bottomHeight) style:UITableViewStyleGrouped];
+    self.TableView.dataSource  = self;
+    self.TableView.delegate    = self;
+    [self.view addSubview:self.TableView];
+    self.TableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    self.TableView.allowsSelection = NO;
+    
+    [self makeComitButtonWithHeight:bottomHeight];
+
+}
+
+-(void)makeComitButtonWithHeight:(CGFloat)height
+{
+    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TableView.frame), XScreenWidth, height)];
     self.commitBtn            = commit;
     commit.backgroundColor    = XCOLOR_LIGHTGRAY;
     commit.enabled            = NO;
@@ -244,39 +266,23 @@ typedef enum {
     [commit setTitle:GDLocalizedString(@"TiJiao-Commit") forState:UIControlStateNormal];
     [commit addTarget:self action:@selector(commitUserInfo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:commit];
-
-}
-
--(void)makeTableView
-{
-    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 114) style:UITableViewStyleGrouped];
-    self.TableView.dataSource  = self;
-    self.TableView.delegate    = self;
-    [self.view addSubview:self.TableView];
-    self.TableView.backgroundColor =[UIColor clearColor];
-    self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    self.TableView.allowsSelection = NO;
     
 }
+
 
 //添加表头
 -(void)makeHeaderView
 {
     XWGJSummaryView *headerView    = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"ApplicationProfile-0016")];
-    
-    self.TableView.tableHeaderView = headerView;
+     self.TableView.tableHeaderView = headerView;
 }
 
 //添加表尾
 -(void)makeFooterView
 {
-    
-    TiJiaoFooterView *footerView   = [[TiJiaoFooterView alloc] init];
-    footerView.title               = GDLocalizedString(@"ApplicationProfile-footer");
-    footerView.frame               = CGRectMake(0, 0, XScreenWidth, CGRectGetMaxY(footerView.descriptionBtn.frame) + 50);
+    TiJiaoFooterView *footerView   = [TiJiaoFooterView footerViewWithContent: GDLocalizedString(@"ApplicationProfile-footer")];
     footerView.delegate            = self;
     self.TableView.tableFooterView = footerView;
-    
 }
 
 -(NSArray *)Groups
@@ -286,11 +292,9 @@ typedef enum {
         __block  XWGJPeronInfoItem *LastItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-LastName")  andAccessroy:NO];
         __block XWGJPeronInfoItem *FirstItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-FirstName")  andAccessroy:NO];
         __block XWGJPeronInfoItem *phoneItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Phone")  andAccessroy:NO];
-
         __block XWGJPeronInfoItem *countryItem = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Country") andAccessroy:YES];
         __block XWGJPeronInfoItem *timeItem    = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Time")  andAccessroy:YES];
         __block  XWGJPeronInfoItem *applyItem  = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-ApplySubject")  andAccessroy:YES];
-       
         __block XWGJPeronInfoItem *universityItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-University")  andAccessroy:NO];
         __block XWGJPeronInfoItem *subjectItem    = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Subjecting")  andAccessroy:YES];
         __block  XWGJPeronInfoItem *GPAItem       = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-GPA")  andAccessroy:NO];
@@ -377,7 +381,7 @@ typedef enum {
 }
 
 
-
+//选择项数据
 -(void)getSelectionResourse
 {
     
@@ -589,20 +593,12 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-
+ 
     XWGJTJSectionGroup *group = self.Groups[indexPath.section];
-    
     
     if (0 == indexPath.section) {
         
-        XWGJJiBengTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"JIBEN"];
-        
-        if (!cell) {
-            
-            cell = [[NSBundle mainBundle] loadNibNamed:@"XWGJJiBengTableViewCell" owner:self options:nil].lastObject;
-        }
-        
+        XWGJJiBengTableViewCell *cell =[XWGJJiBengTableViewCell cellWithTableView:tableView];
         cell.delegate = self;
         cell.indexPath = indexPath;
         cell.item = group.cellItems[indexPath.row];
@@ -610,13 +606,7 @@ typedef enum {
         return cell;
     }else{
     
-        XWGJYiXiangTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"YIXIANG"];
-        
-        if (!cell) {
-            
-            cell = [[NSBundle mainBundle] loadNibNamed:@"XWGJYiXiangTableViewCell" owner:self options:nil].lastObject;
-        }
-        
+        XWGJYiXiangTableViewCell *cell = [XWGJYiXiangTableViewCell cellWithTableView:tableView];
         cell.item = group.cellItems[indexPath.row];
         cell.indexPath = indexPath;
         cell.delegate = self;
@@ -675,9 +665,9 @@ typedef enum {
     
 
 }
+#pragma mark ——— UIPickerViewDataSource, UIPickerViewDelegate
 
-#pragma mark ----UIPickerViewDataSource, UIPickerViewDelegate
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+ - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
     return 1;
 }
@@ -789,10 +779,9 @@ typedef enum {
 }
 
 
+#pragma mark ——— XWGJJiBengTableViewCellDelegate
 
-#pragma mark ----XWGJJiBengTableViewCellDelegate
 -(void)JiBengTableViewCell:(XWGJJiBengTableViewCell *)cell  withIndexPath:(NSIndexPath *)indexPath EditedTextField:(UITextField *)textField{
-
     
     XWGJTJSectionGroup *group =  self.Groups[indexPath.section];
     NSArray *cellItems        = group.cellItems;
@@ -807,6 +796,7 @@ typedef enum {
     self.EditingIndexPath = indexPath;
   
 }
+
 
 -(void)JiBengTableViewCell:(XWGJJiBengTableViewCell *)cell  withIndexPath:(NSIndexPath *)indexPath didClick:(UIBarButtonItem *)sender{
 
@@ -978,7 +968,7 @@ typedef enum {
 
 }
 
-#pragma mark ——————— TiJiaoFooterViewDelegate
+#pragma mark ——— TiJiaoFooterViewDelegate
 -(void)TiJiaoFooterView:(TiJiaoFooterView *)footerView didClick:(UIButton *)sender{
     
     
@@ -998,7 +988,7 @@ typedef enum {
 }
 
 
-#pragma mark —————— 键盘处理
+#pragma mark ——— 键盘处理
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     
     [self moveTextViewForKeyboard:aNotification up:YES];
@@ -1119,10 +1109,9 @@ typedef enum {
 }
 
 
-
 - (void)dealloc{
     
-    KDClassLog(@"dealloc  XWGJTiJiaoViewController");
+    KDClassLog(@"dealloc  提交申请");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

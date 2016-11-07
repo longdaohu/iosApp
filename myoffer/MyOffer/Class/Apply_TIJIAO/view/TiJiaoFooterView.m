@@ -10,6 +10,16 @@
 
 @implementation TiJiaoFooterView
 
++ (instancetype)footerViewWithContent:(NSString *)content{
+
+    TiJiaoFooterView *footer = [[TiJiaoFooterView alloc] init];
+    
+    footer.title = content;
+    
+    return footer;
+}
+
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -60,7 +70,8 @@
     [AtributeStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:keyRangne];
     [self.descriptionBtn setAttributedTitle: AtributeStr forState:UIControlStateNormal];
     
-    
+    self.frame    = CGRectMake(0, 0, XScreenWidth, CGRectGetMaxY(self.descriptionBtn.frame) + 50);
+
 }
 
 
