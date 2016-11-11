@@ -21,7 +21,6 @@
 @property (strong, nonatomic)  UILabel *TitleLab;
 
 
-
 @end
 
 @implementation YourPhoneView

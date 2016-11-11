@@ -76,8 +76,8 @@
          } else {
              if (showErrorAlert && error.code != kCFURLErrorCancelled) {
                  
-                 [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
-
+                 //特殊处理 用户第三方登录时合并账号，如果有包含字符串
+                 if (![error.userInfo[@"message"] containsString:@"phone"]) [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
               }
          }
          

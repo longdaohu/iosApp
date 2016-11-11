@@ -47,7 +47,7 @@
         _isHasBanners = NO;
         _currentIdx = 0;
         _autoLoopScroll = YES;
-        _autoLoopScrollInterval = 3;
+        _autoLoopScrollInterval = 2;
     }
     return self;
 }
@@ -75,7 +75,7 @@
     [self addSubview:_scrollView];
 //    self.banView = [[UIImageView alloc] initWithFrame:CGRectMake(0,  100, APPSIZE.width, 100)];
 //    [self.banView setImage:[UIImage imageNamed:@"gradient_bg"]];
-////    self.banView.alpha = 0.2;
+//    self.banView.alpha = 0.2;
 //    [self addSubview: self.banView];
 
 }

@@ -13,7 +13,7 @@ typedef void(^cellBlock)(NSIndexPath *indexPath,NSString *orderId);
 @property(nonatomic,strong)NSDictionary *sku;
 @property(nonatomic,copy)cellBlock actionBlock;
 + (instancetype)cellWithTableView:(UITableView *)tableView selectedIndexPaht:(NSIndexPath *)indexPath;
-- (void)click;
+- (void)cellClick;
 
 @end
 

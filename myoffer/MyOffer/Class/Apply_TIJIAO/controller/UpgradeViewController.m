@@ -26,14 +26,22 @@ typedef enum {
 }buttonType; //底部按钮类型
 
 @interface UpgradeViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UIImageView *iconView;            //1、成功图片
-@property(nonatomic,strong)UILabel *succeseLab;              //2、成功提示
-@property(nonatomic,strong)UIView *line;                     //3、间隔线
-@property(nonatomic,strong)UILabel *currentServiceLab;       //4、当前已购买服务
-@property(nonatomic,strong)UIButton *popBtn;                 //8、完成返回按钮
-@property(nonatomic,strong)UIButton *payBtn;                 //9、支付按钮
-@property(nonatomic,copy)NSString  *payOrderId;              //10、用户已选择服务类型
+//1、成功图片
+@property(nonatomic,strong)UIImageView *iconView;
+//2、成功提示
+@property(nonatomic,strong)UILabel *succeseLab;
+//3、间隔线
+@property(nonatomic,strong)UIView *line;
+//4、当前已购买服务
+@property(nonatomic,strong)UILabel *currentServiceLab;
+//8、完成返回按钮
+@property(nonatomic,strong)UIButton *popBtn;
+//9、支付按钮
+@property(nonatomic,strong)UIButton *payBtn;
+//10、用户已选择服务类型
+@property(nonatomic,copy)NSString  *payOrderId;
 @property(nonatomic,strong)UITableView *tableView;
+//最后选择项 IndexPath
 @property(nonatomic,strong)NSIndexPath *lastIndexPath;
 @end
 
@@ -311,7 +319,7 @@ typedef enum {
     
         UpdateCell *cell = [self.tableView cellForRowAtIndexPath:self.lastIndexPath];
         
-        [cell click];
+        [cell cellClick];
      
     }
  
@@ -320,8 +328,7 @@ typedef enum {
     self.payBtn.backgroundColor  =  self.payBtn.enabled ?  XCOLOR_RED:XCOLOR_LIGHTGRAY;
     
     self.lastIndexPath = indexPath;
-    
-
+ 
 }
 
 

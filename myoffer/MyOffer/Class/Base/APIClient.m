@@ -127,9 +127,16 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         if (![expectedStatusCode containsObject:@(response.statusCode)]) {
             dispatch_async( dispatch_get_main_queue(),^{
+                /*
+                 *  collision  : 账号合并时手机号码已存在时，出现的特殊标识  collision显示手机号码信息
+                 *  error      ：后台提示错误信息
+                 */
+                //失败信息解析
+                NSString *errorStr = result[@"collision"] ? [NSString stringWithFormat:@"phone=%@",result[@"collision"]] : result[@"error"];
+                
                 failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain
                                                                  code:kAPIClientErrorDomainCodeUnexpectedStatusMaskCode + response.statusCode
-                                                             userInfo:@{@"message": result[@"error"]}]);
+                                                             userInfo:@{@"message": errorStr}]);
             });
             return;
         }

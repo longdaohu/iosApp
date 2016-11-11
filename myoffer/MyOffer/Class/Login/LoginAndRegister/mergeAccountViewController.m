@@ -1,0 +1,230 @@
+//
+//  mergeAccountViewController.m
+//  myOffer
+//
+//  Created by xuewuguojie on 2016/11/10.
+//  Copyright © 2016年 UVIC. All rights reserved.
+//
+
+#import "mergeAccountViewController.h"
+#import "mergeItemView.h"
+#import "mergeSuccessViewController.h"
+
+@interface mergeAccountViewController ()
+@property(nonatomic,strong)UILabel *notiLab;
+@property(nonatomic,strong)mergeItemView *thisView;
+@property(nonatomic,strong)mergeItemView *thatView;
+@property(nonatomic,strong)UIButton *mergeBtn;
+@property(nonatomic,strong)NSDictionary *response;
+@property(nonatomic,copy)NSString *selected_id;
+
+@end
+
+@implementation mergeAccountViewController
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page绑定手机号"];
+    
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self makeUI];
+
+    [self getDataSource];
+    
+}
+
+- (void)getDataSource{
+
+
+    NSString *path = [NSString stringWithFormat:@"GET api/account/tomerge?that_phonenumber=%@",self.mergePhone];
+    [self startAPIRequestUsingCacheWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+ 
+        [self updateUIWithResponse:response];
+        
+    }];
+    
+    
+ 
+}
+
+- (void)updateUIWithResponse:(id)response{
+    
+    self.response = response;
+
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *provider = [ud valueForKey:@"provider"];
+    
+    NSString *imageName;
+    
+    if ([provider  isEqualToString:@"qq"]) {
+        imageName = @"meger_QQ";
+    }else if ([provider  isEqualToString:@"wechat"]){
+        imageName = @"meger_wx";
+    }else{
+        imageName = @"meger_wb";
+    }
+    
+    self.thisView.itemAccout = response[@"this_account"];
+    self.thisView.logoView.image = [UIImage imageNamed:imageName];
+    
+    self.thatView.itemAccout  = response[@"that_account"];
+    self.thatView.logoView.image = [UIImage imageNamed:@"meger_Phone"];
+    
+}
+
+
+
+- (void)makeUI{
+    
+    self.title = @"选择留取账号";
+    
+    CGFloat notiX = 20;
+    CGFloat notiW = XScreenWidth - notiX * 2;
+    NSString *notiStr = @"请选择您 要保留的账号，合并账号后另一个账号资料将被替换";
+    CGSize notiSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
+    CGFloat notiY = 30;
+    CGFloat notiH = notiSize.height;
+    UILabel *notiLab = [UILabel labelWithFontsize:16 TextColor:XCOLOR_BLACK  TextAlignment:NSTextAlignmentLeft];
+    notiLab.frame = CGRectMake(notiX, notiY, notiW, notiH);
+    [self.view addSubview:notiLab];
+    notiLab.numberOfLines = 0;
+    self.notiLab = notiLab;
+    notiLab.text =  notiStr;
+    
+    
+    
+    CGFloat thisX = notiX;
+    CGFloat thisY = CGRectGetMaxY(notiLab.frame)  + 20;
+    CGFloat thisW = notiW;
+    CGFloat thisH = 80;
+    mergeItemView *thisView = [[mergeItemView  alloc] initWithFrame:CGRectMake( thisX, thisY, thisW, thisH )];
+    self.thisView = thisView;
+    [self.view addSubview:thisView];
+    thisView.actionBlock = ^(NSString *item){
+        
+        self.selected_id = item;
+        [self mergeViewWithItem:self.thatView];
+        
+    };
+    
+    
+    CGFloat phoneX = thisX;
+    CGFloat phoneY = CGRectGetMaxY(thisView.frame)  + 10;
+    CGFloat phoneW = thisW;
+    CGFloat phoneH = thisH;
+    mergeItemView *thatView = [[mergeItemView  alloc] initWithFrame:CGRectMake(phoneX, phoneY, phoneW, phoneH)];
+    self.thatView  = thatView;
+    [self.view addSubview:thatView];
+    thatView.actionBlock = ^(NSString *item){
+        
+         self.selected_id = item;
+        [self mergeViewWithItem:self.thisView];
+        
+    };
+    
+ 
+    CGFloat mergeX = phoneX;
+    CGFloat mergeY = CGRectGetMaxY(thatView.frame) + 50;
+    CGFloat mergeW = phoneW;
+    CGFloat mergeH = 50;
+    UIButton *mergeBtn = [[UIButton alloc] initWithFrame:CGRectMake(mergeX, mergeY, mergeW, mergeH)];
+    [self.view addSubview:mergeBtn];
+    [mergeBtn setTitle:@"同意合并"  forState:UIControlStateNormal];
+    [mergeBtn addTarget:self action:@selector(caseMerge:) forControlEvents:UIControlEventTouchUpInside];
+    mergeBtn.titleLabel.font = XFONT(16);
+    mergeBtn.layer.cornerRadius = CORNER_RADIUS;
+    self.mergeBtn = mergeBtn;
+    [mergeBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    [mergeBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateDisabled];
+    mergeBtn.backgroundColor = XCOLOR_LIGHTGRAY;
+    mergeBtn.enabled = NO;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_button"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
+    
+ 
+}
+
+
+- (void)mergeViewWithItem:(mergeItemView *)item{
+    
+    
+    
+    
+    if (item == self.thisView) {
+        
+        [self.thisView mergeItemViewInSelected:NO];
+        
+        [self.thatView mergeItemViewInSelected:YES];
+        
+    }else{
+        
+        [self.thisView mergeItemViewInSelected:YES];
+        
+        [self.thatView mergeItemViewInSelected:NO];
+        
+    }
+    
+    if (!self.mergeBtn.enabled) {
+        
+         self.mergeBtn.enabled = YES;
+         self.mergeBtn.backgroundColor = XCOLOR_RED;
+        [self.mergeBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+        
+    }
+    
+    
+
+}
+
+- (void)caseMerge:(UIButton *)sender{
+  
+    
+    [self startAPIRequestWithSelector:@"POST api/account/merge"  parameters:@{@"that_account_id": self.response[@"that_account"][@"_id"], @"final_account_id":  self.selected_id}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [self.navigationController  pushViewController:[[mergeSuccessViewController alloc] init]  animated:YES];
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        
+    }];
+    
+    
+}
+
+//返回当前页
+- (void)caseBack{
+
+    [[AppDelegate sharedDelegate] logout];
+    
+    [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
+    
+    [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+@end

@@ -11,10 +11,10 @@
 #import "NewForgetPasswdViewController.h"
 #import "UMSocial.h"
 #import "APService.h"
-#import "YourPhoneView.h"
 #import "LoginSelectViewController.h"
+#import "BangViewController.h"
 
-@interface NewLoginRegisterViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,YourPhoneViewDelegate>
+@interface NewLoginRegisterViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 //蒙版
 @property (weak, nonatomic) IBOutlet FXBlurView *LoginBlurView;
 //后退按钮
@@ -77,8 +77,7 @@
 @property(nonatomic,strong)UIView *coverView;
 //蒙版
 @property(nonatomic,strong)UIButton *cover;
-//手机号码编辑框
-@property(nonatomic,strong)YourPhoneView *PhoneView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *arrow_right;
 
 @end
@@ -282,7 +281,7 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    UIView  *moveView  = self.PhoneView.frame.origin.y < XScreenHeight? self.PhoneView :self.xLoginRegistView;
+    UIView  *moveView  =  self.xLoginRegistView;
     
     if (up) {
         moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
@@ -425,7 +424,7 @@
         
         [self.view endEditing:YES];
         
-        [self coverShow:YES];
+//        [self coverShow:YES];
         
     }else{
         
@@ -471,7 +470,6 @@
     
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            
             
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
             NSMutableDictionary *weixinInfo =[NSMutableDictionary dictionary];
@@ -520,19 +518,9 @@
     [MobClick profileSignInWithPUID:response[@"access_token"] provider:[userInfo valueForKey:@"provider"]];/*友盟统计记录用户账号*/
     
     [MobClick event:@"otherUserLogin"];
-
     
     //当用户没有电话时发出通知，让用户填写手机号
-    NSString *phone =response[@"phonenumber"];
-    
-    if (!phone) {
-        
-        [self coverShow:YES];
-        
-    }else{
-        
-        [self dismiss];
-     }
+    !response[@"phonenumber"]? [self caseBangding] :  [self dismiss];
     
 
 }
@@ -707,26 +695,16 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    if ([self.PhoneView.countryCode isFirstResponder]) {
-        
-        self.PhoneView.countryCode.text = self.Areas[row];
-
-    }else {
     
-        self.RegisterAreaTextF.text = self.Areas[row];
-
-    }
+      self.RegisterAreaTextF.text = self.Areas[row];
+  
     
 }
 
 #pragma  Mark  ——————————UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField == self.PhoneView.countryCode) {
-        NSInteger row = [self.PhoneView.countryCode.text containsString:@"86"] ? 0 : 1;
-        [self.AreaPicker selectRow:row inComponent:0 animated:YES];
-        
-    }
+
     return YES;
 }
 
@@ -751,47 +729,11 @@
 }
 
 
-#pragma mark —————————— 用户填写资料
--(YourPhoneView *)PhoneView
-{
-    if (!_PhoneView) {
-        
-        _PhoneView =[[YourPhoneView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, 260)];
-        _PhoneView.countryCode.inputView = self.NextAreaPicker;
-        _PhoneView.countryCode.delegate = self;
-        _PhoneView.delegate = self;
-        
-    }
-    return _PhoneView;
-}
-
--(UIView *)coverView
-{
-    if (!_coverView) {
-        
-        _coverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-        _coverView.backgroundColor = XCOLOR_CLEAR;
-        _coverView.hidden = YES;
-        [self.view insertSubview:_coverView aboveSubview:self.xLoginRegistView];
-        [self.coverView addSubview:self.cover];
-        [self.coverView addSubview:self.PhoneView];
-        
-    }
-    
-    return _coverView;
-}
--(UIButton *)cover
-{
-    if (!_cover) {
-        _cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-        _cover.backgroundColor = XCOLOR_BLACK;
-        _cover.alpha = 0;
-        
-    }
-    return _cover;
-}
 
 
+
+
+/*
 
 #pragma mark ————————  YourPhoneViewDelegate
 -(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
@@ -870,6 +812,7 @@
     
 }
 
+
 //@"验证码倒计时"
 - (void)runVerifyCodeColdDownTimer2 {
     
@@ -903,9 +846,13 @@
         return YES;
     }
 }
+ */
+- (void)caseBangding{
+    
+    [self.navigationController pushViewController:[[BangViewController alloc] init] animated:YES];
+}
 
-
-
+/*
 //手机号码编辑框出现隐藏
 -(void)coverShow:(BOOL)show
 {
@@ -940,26 +887,28 @@
     
 }
 
+ */
+ 
 //退出登录
--(void)backAndLogout{
-    
-    if(LOGIN){
-        
-        [[AppDelegate sharedDelegate] logout];
-        
-        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-        
-        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
-        
-        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        }];
-    }
-    
-        
-}
+//-(void)backAndLogout{
+//    
+//    if(LOGIN){
+//        
+//        [[AppDelegate sharedDelegate] logout];
+//        
+//        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
+//        
+//        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+//        
+//        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        }];
+//    }
+//    
+//        
+//}
 
 // 点击忘记密码
 - (IBAction)ForgetPasswdButtonPressed:(id)sender {

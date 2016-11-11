@@ -124,8 +124,14 @@
 		AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F61D5C929500FFD5A8 /* UIScrollView+MJRefresh.m */; };
 		AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */; };
 		AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */; };
+		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
+		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
+		AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */; };
+		AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E851DD5B64100B4E9F3 /* PhoneBeenViewController.m */; };
+		AE2D5E8C1DD5CD6600B4E9F3 /* YourPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */; };
+		AE2D5E8E1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */; };
+		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
-		AE5515EC1DCC6829003C3A1C /* NewLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */; };
 		AE567B061C903D1100552E7A /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AE567B051C903D1100552E7A /* shareMyOffer.png */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
 		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
@@ -292,7 +298,6 @@
 		AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */; };
 		AEA24B291D5B251800DD7939 /* NewLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */; };
 		AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B201D5B251800DD7939 /* YourBindView.m */; };
-		AEA24B2C1D5B251800DD7939 /* YourPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B221D5B251800DD7939 /* YourPhoneView.m */; };
 		AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */; };
 		AEA24B771D5B25E000DD7939 /* SearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B321D5B25E000DD7939 /* SearchResultViewController.xib */; };
 		AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B341D5B25E000DD7939 /* SearchViewController.m */; };
@@ -608,10 +613,22 @@
 		AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		AE1FD76E1D5C957C00FFD5A8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
+		AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mergeAccountViewController.m; sourceTree = "<group>"; };
+		AE2D5E801DD5B64100B4E9F3 /* mergeItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeItemView.h; sourceTree = "<group>"; };
+		AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mergeItemView.m; sourceTree = "<group>"; };
+		AE2D5E821DD5B64100B4E9F3 /* mergeSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeSuccessViewController.h; sourceTree = "<group>"; };
+		AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mergeSuccessViewController.m; sourceTree = "<group>"; };
+		AE2D5E841DD5B64100B4E9F3 /* PhoneBeenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneBeenViewController.h; sourceTree = "<group>"; };
+		AE2D5E851DD5B64100B4E9F3 /* PhoneBeenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneBeenViewController.m; sourceTree = "<group>"; };
+		AE2D5E8A1DD5CD6600B4E9F3 /* YourPhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourPhoneView.h; sourceTree = "<group>"; };
+		AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourPhoneView.m; sourceTree = "<group>"; };
+		AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLoginRegisterViewController.xib; sourceTree = "<group>"; };
+		AE329BEA1DD2BC9A00DCF433 /* BangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangViewController.h; sourceTree = "<group>"; };
+		AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BangViewController.m; sourceTree = "<group>"; };
 		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
-		AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLoginRegisterViewController.xib; sourceTree = "<group>"; };
 		AE567B051C903D1100552E7A /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareMyOffer.png; path = Images.xcassets/AppIcon.appiconset/shareMyOffer.png; sourceTree = "<group>"; };
 		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		AE582C291D06B0ED00499B6B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -913,8 +930,6 @@
 		AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLoginRegisterViewController.m; sourceTree = "<group>"; };
 		AEA24B1F1D5B251800DD7939 /* YourBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourBindView.h; sourceTree = "<group>"; };
 		AEA24B201D5B251800DD7939 /* YourBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourBindView.m; sourceTree = "<group>"; };
-		AEA24B211D5B251800DD7939 /* YourPhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourPhoneView.h; sourceTree = "<group>"; };
-		AEA24B221D5B251800DD7939 /* YourPhoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourPhoneView.m; sourceTree = "<group>"; };
 		AEA24B301D5B25E000DD7939 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		AEA24B321D5B25E000DD7939 /* SearchResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultViewController.xib; sourceTree = "<group>"; };
@@ -2528,16 +2543,26 @@
 		AEA24B181D5B251800DD7939 /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
+				AE329BEA1DD2BC9A00DCF433 /* BangViewController.h */,
+				AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */,
+				AE2D5E841DD5B64100B4E9F3 /* PhoneBeenViewController.h */,
+				AE2D5E851DD5B64100B4E9F3 /* PhoneBeenViewController.m */,
+				AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */,
+				AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */,
+				AE2D5E821DD5B64100B4E9F3 /* mergeSuccessViewController.h */,
+				AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */,
+				AE2D5E801DD5B64100B4E9F3 /* mergeItemView.h */,
+				AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */,
 				AEA24B191D5B251800DD7939 /* LoginSelectViewController.h */,
 				AEA24B1A1D5B251800DD7939 /* LoginSelectViewController.m */,
 				AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */,
 				AEA24B1C1D5B251800DD7939 /* NewLoginRegisterViewController.h */,
 				AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */,
-				AE5515EB1DCC6829003C3A1C /* NewLoginRegisterViewController.xib */,
+				AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */,
 				AEA24B1F1D5B251800DD7939 /* YourBindView.h */,
 				AEA24B201D5B251800DD7939 /* YourBindView.m */,
-				AEA24B211D5B251800DD7939 /* YourPhoneView.h */,
-				AEA24B221D5B251800DD7939 /* YourPhoneView.m */,
+				AE2D5E8A1DD5CD6600B4E9F3 /* YourPhoneView.h */,
+				AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -3149,7 +3174,7 @@
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AEA249BB1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib in Resources */,
-				AE5515EC1DCC6829003C3A1C /* NewLoginRegisterViewController.xib in Resources */,
+				AE2D5E8E1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib in Resources */,
 				AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */,
 				AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */,
 				AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */,
@@ -3340,6 +3365,7 @@
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
+				AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */,
 				AEA24AA01D5B23F600DD7939 /* GongLueListHeaderView.m in Sources */,
 				AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */,
 				AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */,
@@ -3378,6 +3404,7 @@
 				AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */,
 				AEA24B291D5B251800DD7939 /* NewLoginRegisterViewController.m in Sources */,
 				AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */,
+				AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */,
 				AEA24BEA1D5B266A00DD7939 /* LogoView.m in Sources */,
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
 				AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */,
@@ -3442,6 +3469,7 @@
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
+				AE2D5E8C1DD5CD6600B4E9F3 /* YourPhoneView.m in Sources */,
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
@@ -3475,6 +3503,7 @@
 				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
+				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AEA24BBF1D5B264300DD7939 /* MessageDetaillViewController.m in Sources */,
@@ -3512,6 +3541,7 @@
 				AE6F28761D77CA3C00E9A47A /* UUChartLabel.m in Sources */,
 				AEA249BF1D5B215300DD7939 /* XWGJSummaryView.m in Sources */,
 				AEA24B071D5B24D200DD7939 /* FeedbackViewController.m in Sources */,
+				AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */,
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
 				AEA24B7A1D5B25E000DD7939 /* XNewSearchViewController.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
@@ -3536,7 +3566,6 @@
 				AEA24B871D5B25E000DD7939 /* NewSearchRstTableViewCell.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,
-				AEA24B2C1D5B251800DD7939 /* YourPhoneView.m in Sources */,
 				AEA24B7F1D5B25E000DD7939 /* FilterSection.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
@@ -3551,6 +3580,7 @@
 				AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */,
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
+				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
 				AEE9FAE31DC87BCF00D732A7 /* LeftMenuHeaderView.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,

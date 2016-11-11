@@ -34,26 +34,46 @@ typedef enum {
 @property(nonatomic,strong)UITableView *TableView;
 //数据源
 @property(nonatomic,strong)NSArray *Groups;
+//用户资料
 @property(nonatomic,strong)NSDictionary *userInfo;
+//正在编辑的cell
 @property(nonatomic,strong)UITableViewCell *editingCell;
+//正在编辑的indexpath
 @property(nonatomic,strong)NSIndexPath *EditingIndexPath;
+//国家picker
 @property(nonatomic,strong)UIPickerView *CountryPicker;
+//时间picker
 @property(nonatomic,strong)UIPickerView *TimePicker;
+//专业picker
 @property(nonatomic,strong)UIPickerView *ApplyPicker;
+//专业picker
 @property(nonatomic,strong)UIPickerView *SubjectPicker;
+//年级picker
 @property(nonatomic,strong)UIPickerView *GradePicker;
+//平均分picker
 @property(nonatomic,strong)UIPickerView *AVGPicker;
+//最低分picker
 @property(nonatomic,strong)UIPickerView *LowPicker;
+//专业数组
 @property(nonatomic,strong)NSArray *ApplyTimes;
+//年级数组
 @property(nonatomic,strong)NSArray *gradeItems;
+//国家中文数组
 @property(nonatomic,strong)NSArray *countryItems_CE;
+//专业数组
 @property(nonatomic,strong)NSArray *subjectItems_CE;
+//年级数组
 @property(nonatomic,strong)NSArray *gradeItems_CE;
+//国家数组
 @property(nonatomic,strong)NSArray *countryItems;
+//专业数组
 @property(nonatomic,strong)NSArray *ApplyItems;
+//雅思成绩
 @property(nonatomic,strong)NSArray *IELSTScores;
-@property(nonatomic,strong)UIButton *commitBtn;    //提交申请按钮
-@property(nonatomic,strong)UpgradeViewController *upgateVC; //升级VC
+//提交申请按钮
+@property(nonatomic,strong)UIButton *commitBtn;
+//升级VC
+@property(nonatomic,strong)UpgradeViewController *upgateVC;
 
 @end
 

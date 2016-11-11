@@ -184,7 +184,7 @@
     
 }
 
--(void)click{
+-(void)cellClick{
     
     self.selectBtn.selected =  NO;
     self.selectBtn.layer.borderWidth =  self.selectBtn.selected ? 1 : 0;

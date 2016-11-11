@@ -282,7 +282,7 @@
         
         weakSelf.ArticleRecommends = (NSArray *)response;
         
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
     }];
 }
 

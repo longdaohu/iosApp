@@ -41,8 +41,6 @@
 @property(nonatomic,strong)HomeSearchView *searchView;
 //轮播图
 @property(nonatomic,strong)YYAutoLoopView *autoLoopView;
-//广告数组
-@property(nonatomic,strong)NSMutableArray *advertise_Arr;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //下拉
@@ -159,15 +157,6 @@
     return _groups;
 }
 
--(NSMutableArray *)advertise_Arr
-{
-    if (!_advertise_Arr) {
-        
-        _advertise_Arr =[NSMutableArray array];
-    }
-    return _advertise_Arr;
-}
-
 
 //热门院校
 -(void)hotUniversity:(BOOL)refresh
@@ -282,24 +271,19 @@
     
     [self startAPIRequestWithSelector:@"GET api/app/promotions"  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        if (refresh) {
-            
-            [self.advertise_Arr removeAllObjects];
-        }
         
         NSMutableArray *items = [NSMutableArray array];
         
-        weakSelf.advertise_Arr = [(NSArray *)response mutableCopy];
+        NSArray *advertise_Arr = (NSArray *)response;
         
-        for (NSInteger i = 0; i < weakSelf.advertise_Arr.count; i++) {
+        for (NSInteger i = 0; i < advertise_Arr.count; i++) {
             
             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-            new.message = weakSelf.advertise_Arr[i];
+            new.message = advertise_Arr[i];
             new.newsTitle = @"";
             new.index = i;
             [items addObject:new];
         }
-        
         
         items.count ? weakSelf.autoLoopView.banners  = [items mutableCopy] : nil;
        
