@@ -35,8 +35,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPhoneTextF;
 //注册验证码
 @property (weak, nonatomic) IBOutlet UITextField *RegisterVerTextF;
-//注册密码验证
-@property (weak, nonatomic) IBOutlet UITextField *RegisterRepwdTextF;
 //注册密码
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPasswdTextF;
 //发送验证码按钮
@@ -158,7 +156,7 @@
     self.LoginPhoneNumberTextF.delegate = self;
     self.LoginPasswdTextF.delegate = self;
     self.RegisterPasswdTextF.delegate = self;
-    self.RegisterRepwdTextF.delegate = self;
+//    self.RegisterRepwdTextF.delegate = self;
 }
 
 
@@ -217,8 +215,6 @@
     self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
     self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");
     self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
-    self.RegisterPasswdTextF.placeholder = GDLocalizedString(@"LoginVC-005");
-    self.RegisterRepwdTextF.placeholder = GDLocalizedString(@"LoginVC-009");
     [self.RegisterCommitButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
     [self.RegisterAButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
@@ -488,6 +484,11 @@
 -(void)loginWithParameters:(NSMutableDictionary *)userInfo
 {
 
+    //存储第三方登录平台信息
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:userInfo[@"provider"]  forKey:@"provider"];
+    [ud synchronize];
+    
     [self  startAPIRequestWithSelector:kAPISelectorLogin  parameters:userInfo success:^(NSInteger statusCode, NSDictionary *response) {
         
          if (response[@"new"]) {
@@ -636,10 +637,10 @@
           return NO;
     }
     
-    if (self.RegisterRepwdTextF.text.length == 0) {
-        AlerMessage(self.RegisterRepwdTextF.placeholder);
-         return NO;
-    }
+//    if (self.RegisterRepwdTextF.text.length == 0) {
+//        AlerMessage(self.RegisterRepwdTextF.placeholder);
+//         return NO;
+//    }
     
     if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
     {   //@"密码长度不小于6个字符"
@@ -647,10 +648,10 @@
          return NO;
     }
     
-    if (![self.RegisterPasswdTextF.text isEqualToString:self.RegisterRepwdTextF.text]) {
-        AlerMessage(GDLocalizedString(@"ChPasswd-004") );
-         return NO;
-    }
+//    if (![self.RegisterPasswdTextF.text isEqualToString:self.RegisterRepwdTextF.text]) {
+//        AlerMessage(GDLocalizedString(@"ChPasswd-004") );
+//         return NO;
+//    }
    
     return YES;
 }
@@ -717,13 +718,17 @@
     }else if (textField == self.LoginPasswdTextF)
     {
         [self LoginButtonCommit:nil];
+        
     }else if (textField == self.RegisterPasswdTextF)
     {
-        [self.RegisterRepwdTextF becomeFirstResponder];
-    }else if (textField == self.RegisterRepwdTextF)
-    {
+//        [self.RegisterRepwdTextF becomeFirstResponder];
         [self RegisterButtonCommitPressed:nil];
+
     }
+//    else if (textField == self.RegisterRepwdTextF)
+//    {
+//        [self RegisterButtonCommitPressed:nil];
+//    }
     
     return YES;
 }
@@ -909,11 +914,22 @@
 //    
 //        
 //}
-
 // 点击忘记密码
 - (IBAction)ForgetPasswdButtonPressed:(id)sender {
     
     [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+    
+}
+
+- (IBAction)showPassword:(UIButton *)sender {
+
+    self.RegisterPasswdTextF.keyboardType =  UIKeyboardTypeDefault;
+
+    // 切换按钮的状态
+    sender.selected = !sender.selected;
+    self.RegisterPasswdTextF.secureTextEntry = sender.selected ? NO : YES;
+    NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
+    [sender setImage:XImage(imageName) forState:UIControlStateNormal];
     
 }
 

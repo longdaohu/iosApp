@@ -14,7 +14,7 @@
 {
     if (self = [super init]) {
         
-        self.CountryName = dict[@"name"];
+         self.CountryName = dict[@"name"];
          self.NOid = [NSString stringWithFormat:@"%@",dict[@"id"]];
         
     }

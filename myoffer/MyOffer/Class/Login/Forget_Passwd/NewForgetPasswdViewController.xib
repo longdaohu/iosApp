@@ -11,7 +11,6 @@
                 <outlet property="AreaTextF" destination="1dM-U0-bDY" id="43c-gN-g2k"/>
                 <outlet property="RegisterPasswdTextF" destination="eqT-Tu-3YP" id="uCE-Xw-qMy"/>
                 <outlet property="RegisterPhoneTextF" destination="zSL-c9-IIK" id="DoW-UB-vsB"/>
-                <outlet property="RepasswdTextF" destination="cHG-WU-SrL" id="cS9-cz-ctL"/>
                 <outlet property="VerifycationButton" destination="UCi-b5-wge" id="Pyg-lW-NPe"/>
                 <outlet property="VeritficationTextF" destination="CM7-D4-XyA" id="tDu-4Q-CZn"/>
                 <outlet property="commitButton" destination="Ryo-9p-xk8" id="Q6W-Rn-B1A"/>
@@ -162,7 +161,7 @@
                                         <constraint firstAttribute="width" constant="25" id="gQs-gR-nIN"/>
                                     </constraints>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eqT-Tu-3YP">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入6-16位新密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eqT-Tu-3YP">
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 </textField>
@@ -179,39 +178,6 @@
                                 <constraint firstItem="eqT-Tu-3YP" firstAttribute="leading" secondItem="JGw-VM-8gA" secondAttribute="trailing" constant="15" id="Qj4-Wa-EhC"/>
                                 <constraint firstItem="eqT-Tu-3YP" firstAttribute="top" secondItem="IzL-If-HVP" secondAttribute="top" id="woe-yK-7fu"/>
                                 <constraint firstItem="kHD-Xp-v7j" firstAttribute="leading" secondItem="IzL-If-HVP" secondAttribute="leading" constant="15" id="zjf-Kk-fYu"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDV-JO-uaT" userLabel="RePasswdView">
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofX-VM-CbL" userLabel="lineView">
-                                    <color key="backgroundColor" red="0.82952572599999996" green="0.82952572599999996" blue="0.82952572599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="lUY-Iw-vSO"/>
-                                    </constraints>
-                                </view>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="haa-4K-Oy4">
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="25" id="2aZ-CB-axB"/>
-                                        <constraint firstAttribute="width" constant="25" id="Kd3-9F-cBa"/>
-                                    </constraints>
-                                </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter password again" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cHG-WU-SrL">
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstItem="ofX-VM-CbL" firstAttribute="leading" secondItem="vDV-JO-uaT" secondAttribute="leading" constant="15" id="3x8-Fn-fEB"/>
-                                <constraint firstItem="ofX-VM-CbL" firstAttribute="top" secondItem="haa-4K-Oy4" secondAttribute="bottom" constant="9" id="E8K-h6-ZAq"/>
-                                <constraint firstItem="ofX-VM-CbL" firstAttribute="leading" secondItem="haa-4K-Oy4" secondAttribute="leading" id="FBQ-XO-hFD"/>
-                                <constraint firstAttribute="trailing" secondItem="cHG-WU-SrL" secondAttribute="trailing" constant="15" id="FqL-vb-03z"/>
-                                <constraint firstAttribute="trailing" secondItem="ofX-VM-CbL" secondAttribute="trailing" constant="15" id="JD1-du-Czd"/>
-                                <constraint firstItem="cHG-WU-SrL" firstAttribute="leading" secondItem="haa-4K-Oy4" secondAttribute="trailing" constant="15" id="Lnq-EW-VhP"/>
-                                <constraint firstItem="ofX-VM-CbL" firstAttribute="top" secondItem="cHG-WU-SrL" secondAttribute="bottom" id="Sif-nX-kNv"/>
-                                <constraint firstItem="cHG-WU-SrL" firstAttribute="top" secondItem="vDV-JO-uaT" secondAttribute="top" id="c2w-fC-zj0"/>
-                                <constraint firstAttribute="height" constant="44" id="lBm-dn-5mg"/>
-                                <constraint firstAttribute="bottom" secondItem="ofX-VM-CbL" secondAttribute="bottom" id="sg8-fB-RB1"/>
                             </constraints>
                         </view>
                         <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryo-9p-xk8">
@@ -232,21 +198,18 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="fAw-yU-4aY" firstAttribute="leading" secondItem="5G2-ie-2A5" secondAttribute="leading" id="1Xz-Up-lH9"/>
+                        <constraint firstItem="Ryo-9p-xk8" firstAttribute="top" secondItem="IzL-If-HVP" secondAttribute="bottom" constant="74" id="4Xh-aK-WG1"/>
                         <constraint firstItem="AQS-nc-zD4" firstAttribute="leading" secondItem="5G2-ie-2A5" secondAttribute="leading" id="9Dc-37-PC4"/>
                         <constraint firstItem="AQS-nc-zD4" firstAttribute="top" secondItem="KJv-LH-Vq6" secondAttribute="bottom" id="9UI-TU-1gw"/>
-                        <constraint firstItem="vDV-JO-uaT" firstAttribute="leading" secondItem="5G2-ie-2A5" secondAttribute="leading" id="IuP-Fs-1D8"/>
-                        <constraint firstItem="vDV-JO-uaT" firstAttribute="top" secondItem="IzL-If-HVP" secondAttribute="bottom" id="JDI-Qr-Ffy"/>
                         <constraint firstAttribute="trailing" secondItem="IzL-If-HVP" secondAttribute="trailing" id="RV2-GJ-WFO"/>
                         <constraint firstAttribute="trailing" secondItem="AQS-nc-zD4" secondAttribute="trailing" id="Tx3-eB-IA9"/>
                         <constraint firstItem="Ryo-9p-xk8" firstAttribute="centerX" secondItem="5G2-ie-2A5" secondAttribute="centerX" id="WZU-cT-TRm"/>
-                        <constraint firstItem="Ryo-9p-xk8" firstAttribute="top" secondItem="vDV-JO-uaT" secondAttribute="bottom" constant="30" id="YnV-eH-a2M"/>
                         <constraint firstItem="IzL-If-HVP" firstAttribute="leading" secondItem="5G2-ie-2A5" secondAttribute="leading" id="fss-Hh-GuM"/>
                         <constraint firstItem="IzL-If-HVP" firstAttribute="top" secondItem="AQS-nc-zD4" secondAttribute="bottom" id="i8Y-1z-yvx"/>
                         <constraint firstAttribute="trailing" secondItem="KJv-LH-Vq6" secondAttribute="trailing" id="iVD-el-Nvi"/>
                         <constraint firstItem="KJv-LH-Vq6" firstAttribute="leading" secondItem="5G2-ie-2A5" secondAttribute="leading" id="kl3-I2-Hpd"/>
                         <constraint firstAttribute="trailing" secondItem="fAw-yU-4aY" secondAttribute="trailing" id="nj6-yk-LzW"/>
                         <constraint firstItem="KJv-LH-Vq6" firstAttribute="top" secondItem="fAw-yU-4aY" secondAttribute="bottom" id="ph8-by-usl"/>
-                        <constraint firstAttribute="trailing" secondItem="vDV-JO-uaT" secondAttribute="trailing" id="qeH-lR-eof"/>
                         <constraint firstItem="fAw-yU-4aY" firstAttribute="top" secondItem="5G2-ie-2A5" secondAttribute="top" constant="20" id="yTm-24-9EF"/>
                     </constraints>
                 </view>

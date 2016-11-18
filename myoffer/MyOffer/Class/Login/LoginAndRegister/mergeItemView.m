@@ -127,8 +127,11 @@
 
     _itemAccout = itemAccout;
    
-    NSString *paid = itemAccout[@"paid"] ? @"已购买付费项" : @"未购买付费项";
-    NSString *applied = itemAccout[@"applied"] ? @"申请中心已使用；" : @"申请中心未使用；";
+    NSString *hadPaid = @"已购买付费项";
+    NSString *hadApplied = @"申请中心已使用；";
+    
+    NSString *paid = itemAccout[@"paid"] ? hadPaid : @"未购买付费项";
+    NSString *applied = itemAccout[@"applied"] ? hadApplied : @"申请中心未使用；";
     
     NSString *displayname;
     if (itemAccout[@"displayname"]) {
@@ -142,9 +145,15 @@
     }
     
     self.titleLab.text = displayname;
-    self.subtitleLab.text = [NSString stringWithFormat:@"%@%@",applied,paid];
     
-
+    NSString *subString = [NSString stringWithFormat:@"%@%@",applied,paid];
+    NSRange paidRange = [subString rangeOfString:hadPaid];
+    NSRange appliedRange = [subString rangeOfString:hadApplied];
+    NSMutableAttributedString *AtributeStr = [[NSMutableAttributedString alloc] initWithString:subString];
+    [AtributeStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_RED range: paidRange];
+    [AtributeStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_RED range: appliedRange];
+    self.subtitleLab.attributedText = AtributeStr;
+ 
 }
 
 

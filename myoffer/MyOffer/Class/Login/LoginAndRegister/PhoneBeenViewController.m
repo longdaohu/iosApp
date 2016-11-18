@@ -93,7 +93,7 @@
     
     CGFloat serX = 20;
     CGFloat serW = XScreenWidth - serX;
-    NSString *serviceStr = @"如果有任何问题，请致电myoffer客服4000 666 522";
+    NSString *serviceStr = @"致电myoffer客服热线：4000666522";
     CGSize serviceSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat serH = serviceSize.height;
     CGFloat serY = XScreenHeight - serH - XNav_Height - 35;

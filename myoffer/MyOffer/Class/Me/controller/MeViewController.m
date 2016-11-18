@@ -22,10 +22,10 @@ typedef enum {
 #import "ApplyMatialViewController.h"
 #import "IntelligentResultViewController.h"
 #import "centerSectionView.h"
-#import "InteProfileViewController.h"
+//#import "InteProfileViewController.h"
 #import "MessageViewController.h"
 #import "ServiceMallViewController.h"
-
+#import "PipeiEditViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIWebViewDelegate>
 //表头
@@ -446,8 +446,9 @@ typedef enum {
         [self.navigationController pushViewController:[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil] animated:YES];
         
     }else{
-        
-        [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+
+
+        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
         
     }
 }

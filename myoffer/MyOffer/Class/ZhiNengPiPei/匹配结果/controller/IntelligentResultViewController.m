@@ -16,10 +16,11 @@ typedef enum {
 #import "XYPieChart.h"
 #import "IntelligentResultViewController.h"
 #import "ResultTableViewCell.h"
-#import "InteProfileViewController.h"
+//#import "InteProfileViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityFrame.h"
 #import "UniversityNew.h"
+#import "PipeiEditViewController.h"
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
@@ -622,7 +623,7 @@ typedef enum {
 //rightButtonItemClick
 -(void)pushInteProfile
 {
-    [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
 }
 
 

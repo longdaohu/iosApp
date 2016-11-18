@@ -68,15 +68,13 @@
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *provider = [ud valueForKey:@"provider"];
-    
     NSString *imageName;
-    
-    if ([provider  isEqualToString:@"qq"]) {
+    if ([[provider lowercaseString]  containsString:@"qq"]) {
         imageName = @"meger_QQ";
-    }else if ([provider  isEqualToString:@"wechat"]){
-        imageName = @"meger_wx";
-    }else{
+    }else if ([[provider lowercaseString]  containsString:@"weibo"]){
         imageName = @"meger_wb";
+    }else{
+        imageName = @"meger_wx";
     }
     
     self.thisView.itemAccout = response[@"this_account"];
@@ -95,7 +93,7 @@
     
     CGFloat notiX = 20;
     CGFloat notiW = XScreenWidth - notiX * 2;
-    NSString *notiStr = @"请选择您 要保留的账号，合并账号后另一个账号资料将被替换";
+    NSString *notiStr = @"请选择您要保留的账号，合并账号后另一个账号资料将被替换";
     CGSize notiSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat notiY = 30;
     CGFloat notiH = notiSize.height;

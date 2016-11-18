@@ -48,7 +48,12 @@
     
     [self makeViewUI];
     
-    [self createSearchSource];
+    [self startAPIRequestWithSelector:@"GET docs/zh-cn/chinese-university-names.json" parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        self.schoolList = [response copy];
+        
+    }];
+    
 }
 
 -(void)makeViewUI

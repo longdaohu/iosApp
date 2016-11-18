@@ -10,6 +10,7 @@
 
 @interface XWGJSummaryView : UIView
 @property(nonatomic,copy)NSString *summary;
+@property(nonatomic,strong)UIView *line;
 
 + (instancetype)ViewWithContent:(NSString *)content;
 @end

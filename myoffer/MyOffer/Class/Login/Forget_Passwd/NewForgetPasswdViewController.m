@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPhoneTextF;
 @property (weak, nonatomic) IBOutlet UITextField *VeritficationTextF;
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPasswdTextF;
-@property (weak, nonatomic) IBOutlet UITextField *RepasswdTextF;
+//@property (weak, nonatomic) IBOutlet UITextField *RepasswdTextF;
 @property (weak, nonatomic) IBOutlet UIButton *VerifycationButton;
 @property(nonatomic,copy)NSString *AreaCode;
 @property(nonatomic,strong)UIPickerView *piker;
@@ -58,7 +58,7 @@
     self.commitButton.layer.cornerRadius =2;
     self.VerifycationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.RegisterPasswdTextF.delegate =self;
-    self.RepasswdTextF.delegate =self;
+//    self.RepasswdTextF.delegate =self;
     self.RegisterPasswdTextF.returnKeyType = UIReturnKeyNext;
     
 }
@@ -68,11 +68,8 @@
 {
     if (textField == self.RegisterPasswdTextF) {
         
-        [self.RepasswdTextF becomeFirstResponder];
-        
-    }else if (textField == self.RepasswdTextF){
-        
         [self commitButtonPressed:nil];
+        
     }
     
     return YES;
@@ -91,8 +88,7 @@
 //    }
     self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");// "请输入11位手机号码";
     self.VeritficationTextF.placeholder = GDLocalizedString(@"LoginVC-007");//"请输入验证码";
-    self.RegisterPasswdTextF.placeholder = GDLocalizedString(@"LoginVC-005");//"请输入新密码";
-    self.RepasswdTextF.placeholder = GDLocalizedString(@"LoginVC-009");//"请再次输入密码";
+
     [self.commitButton  setTitle:GDLocalizedString(@"LoginVC-0012") forState:UIControlStateNormal];//"重置密码";
     [self.VerifycationButton  setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];//"重置密码";
  
@@ -207,10 +203,6 @@
         return NO;
     }
     
-    if (self.RepasswdTextF.text.length == 0) {
-        AlerMessage(self.RepasswdTextF.placeholder);
-         return NO;
-    }
     
     if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
     {   //@"密码长度不小于6个字符"
@@ -218,10 +210,6 @@
          return NO;
     }
     
-    if (![self.RepasswdTextF.text isEqualToString:self.RegisterPasswdTextF.text]) {
-        AlerMessage(GDLocalizedString(@"ChPasswd-004"));
-         return NO;
-    }
     
     return YES;
 }

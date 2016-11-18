@@ -110,7 +110,7 @@
     CGFloat arrowW = 20;
     CGFloat arrowH = areaH;
     CGFloat arrowY = areaY;
-    CGFloat arrowX = CGRectGetMaxX(areaFT.frame) - (arrowW + 5);
+    CGFloat arrowX = CGRectGetMaxX(areaFT.frame) - (arrowW + 8);
     UIImageView *arrowView = [[UIImageView alloc] initWithFrame:CGRectMake( arrowX, arrowY, arrowW, arrowH)];;
     [self.view addSubview:arrowView];
     arrowView.image =  [UIImage imageNamed:@"arrow_down"];
@@ -136,13 +136,12 @@
     CGFloat errorY = CGRectGetMaxY(phoneTF.frame) + 5;
     CGFloat errorW = phoneW;
     CGFloat errorH = 20;
-    UILabel *errorLab = [UILabel labelWithFontsize:Bang_FontSize TextColor:XCOLOR_RED TextAlignment:NSTextAlignmentLeft];
+    UILabel *errorLab = [UILabel labelWithFontsize:Bang_FontSize TextColor:[UIColor redColor] TextAlignment:NSTextAlignmentLeft];
     errorLab.frame = CGRectMake(errorX, errorY, errorW, errorH);
     [self.view addSubview:errorLab];
     self.errorLab = errorLab;
     errorLab.text = @"手机格式有误";
     errorLab.alpha = 0;
-    
     
     CGFloat verificationX = areaX;
     CGFloat verificationY = CGRectGetMaxY(areaFT.frame) + 30;
@@ -166,6 +165,7 @@
     [self.view addSubview:sendCodeBtn];
     [sendCodeBtn setTitle:@"获取验证码"  forState:UIControlStateNormal];
     [sendCodeBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+    [sendCodeBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateDisabled];
     [sendCodeBtn addTarget:self action:@selector(sendVerification:) forControlEvents:UIControlEventTouchUpInside];
     sendCodeBtn.titleLabel.font = XFONT(Bang_FontSize);
     sendCodeBtn.layer.cornerRadius = CORNER_RADIUS;
@@ -179,10 +179,9 @@
     CGFloat submitH = 50;
     UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(submitX, submitY, submitW, submitH)];
     [self.view addSubview:submitBtn];
-    [submitBtn setTitle:@"立刻绑定"  forState:UIControlStateNormal];
+    [submitBtn setTitle:@"立即绑定"  forState:UIControlStateNormal];
     [submitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [submitBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateDisabled];
-    submitBtn.backgroundColor = XCOLOR_LIGHTGRAY;
+    submitBtn.backgroundColor = XCOLOR_DARKGRAY;
     [submitBtn addTarget:self action:@selector(caseSubmit:) forControlEvents:UIControlEventTouchUpInside];
     submitBtn.titleLabel.font = XFONT(Bang_FontSize);
     submitBtn.layer.cornerRadius = CORNER_RADIUS;
@@ -201,12 +200,13 @@
     
     if (self.timeCountDown > 0) {
         
-        [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"倒计时%lds", (long)self.timeCountDown] forState:UIControlStateNormal];
+        [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"请稍等%lds", (long)self.timeCountDown] forState:UIControlStateNormal];
         
     } else {
         
+        self.sendCodeBtn.layer.borderColor = XCOLOR_RED.CGColor;
         self.sendCodeBtn.enabled = YES;
-        [self.sendCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [self.sendCodeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
         [self.timer invalidate];
          self.timer  = nil;
          self.timeCountDown = 60;
@@ -226,7 +226,10 @@
     }
     
     sender.enabled = NO;
+    sender.layer.borderColor = XCOLOR_DARKGRAY.CGColor;
+    
     NSString *areaCode = [self.areaFT.text containsString:@"44"] ?@"44" : @"86";
+    
     NSString *phone = self.phoneTF.text;
     
      [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type": @"phone", @"phonenumber":  phone, @"target": phone, @"mobile_code": areaCode}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -235,6 +238,7 @@
          
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+        sender.layer.borderColor = XCOLOR_RED.CGColor;
         sender.enabled = YES;
         
     }];
@@ -269,7 +273,6 @@
         
         return;
     }
-    
     
     
     NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];
@@ -343,7 +346,7 @@
     
     self.submitBtn.enabled = self.phoneTF.text.length > 0 && self.verificationTF.text.length > 0 ? YES : NO ;
     
-    self.submitBtn.backgroundColor = self.submitBtn.enabled ?  XCOLOR_RED : XCOLOR_LIGHTGRAY;
+    self.submitBtn.backgroundColor = self.submitBtn.enabled ?  XCOLOR_RED : XCOLOR_DARKGRAY;
     
     if ([self.areaFT.text containsString:@"44"] && self.phoneTF.isFirstResponder) {
         
@@ -376,10 +379,10 @@
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 
 - (void)didReceiveMemoryWarning {

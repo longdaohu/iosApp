@@ -37,7 +37,14 @@
         self.summaryLab.numberOfLines = 0;
         self.summaryLab.lineBreakMode = NSLineBreakByCharWrapping;
         [self addSubview:self.summaryLab];
-     }
+
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:line];
+        self.line = line;
+        line.hidden = YES;
+     
+    }
     return self;
 }
 
@@ -52,11 +59,11 @@
                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:LabFont]}
                                          context:NULL].size;
     
-    
-    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height);
-    
     self.summaryLab.frame = CGRectMake(PADDING, ITEM_MARGIN, XScreenWidth - PADDING * 2, contentSize.height);
+    
+    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height + 2 * ITEM_MARGIN);
 
+    self.line.frame = CGRectMake(PADDING, CGRectGetMaxY(self.frame)-1, XScreenWidth - PADDING * 2, 1);
 }
 
 
