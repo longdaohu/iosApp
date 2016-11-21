@@ -15,6 +15,9 @@
 #import "CountryItem.h"
 #import "SubjectItem.h"
 #import "EvaluateSearchCollegeViewController.h"
+#import "IntelligentResultViewController.h"
+
+
 #define Bottom_Height 150
 
 @interface PipeiEditViewController ()<UITableViewDelegate,UITableViewDataSource,PipeiEditCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -241,6 +244,7 @@
     [self makeHeaderView];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height, 0);
     self.tableView.backgroundColor = XCOLOR_BG;
+    
 }
 
 
@@ -506,11 +510,11 @@
      startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost
      parameters:parameters
      success:^(NSInteger statusCode, id response) {
-         
 
-//         IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-//         resultVC.isComeBack = YES;
-//         [self.navigationController pushViewController:resultVC animated:YES];
+         IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+         resultVC.isComeBack = YES;
+         [self.navigationController pushViewController:resultVC animated:YES];
+         
          
      }];
     

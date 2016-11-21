@@ -87,5 +87,5 @@
 //提交智能匹配结果选择项
 #define kAPISelectorZiZengApplyPost @"POST api/account/apply"
 //智能匹配结果
-#define kAPISelectorZiZengRecommendation @"GET api/university/recommendations"
+#define kAPISelectorZiZengRecommendation @"GET api/v2/university/recommendations"
 

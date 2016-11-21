@@ -16,11 +16,11 @@ typedef enum {
 #import "XYPieChart.h"
 #import "IntelligentResultViewController.h"
 #import "ResultTableViewCell.h"
-//#import "InteProfileViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityFrame.h"
 #import "UniversityNew.h"
 #import "PipeiEditViewController.h"
+#import "PipeiNoResultVeiw.h"
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
@@ -51,6 +51,9 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property(nonatomic,strong)UIImageView *navImageView;
+@property(nonatomic,strong)PipeiNoResultVeiw *pipeiNoDataView;
+
+@property(nonatomic,assign)BOOL refresh;
 
 @end
 
@@ -122,6 +125,22 @@ typedef enum {
     return _subtitleArr;
 }
 
+- (PipeiNoResultVeiw *)pipeiNoDataView{
+
+    if (!_pipeiNoDataView) {
+        
+        _pipeiNoDataView = [PipeiNoResultVeiw viewWithActionBlock:^{
+            
+            [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+            
+        }];
+        
+        [self.view addSubview:_pipeiNoDataView];
+    }
+    
+    return _pipeiNoDataView;
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -165,6 +184,9 @@ typedef enum {
     [self changeLanguageEnvironment];
     [self DataSourseRequst];
 //    [self.PieHeadView reloadData];
+    
+    
+    
 
 }
 -(void)changeLanguageEnvironment{
@@ -239,7 +261,7 @@ typedef enum {
     [self makeHeaderView];
     
     [self makeOtherView];
-   
+    
 }
 
 -(void)makeAttributedText:(NSString *)sumCountStr currentcount:(NSString *)currentCountSr  currentItem:(NSString *)currentStr
@@ -253,6 +275,7 @@ typedef enum {
     [self.centerButton setAttributedTitle:AttributedString forState:UIControlStateNormal];
    
     if (currentCountSr.intValue > 0) {
+        
          [self makeCurrentLabel:currentCountSr currentItem:currentStr];
      }
 }
@@ -260,7 +283,7 @@ typedef enum {
 
 -(void)makeCurrentLabel:(NSString *)currentCountSr  currentItem:(NSString *)currentStr
 {
-    NSString *currentText = [NSString stringWithFormat:@"%@ %@ %@",currentStr,currentCountSr,GDLocalizedString(@"Evaluate-dangwei")];
+    NSString *currentText = [NSString stringWithFormat:@"%@",currentStr];
     NSMutableAttributedString *Attribut = [[NSMutableAttributedString alloc] initWithString:currentText];
     [Attribut addAttribute:NSForegroundColorAttributeName   value:XCOLOR_RED  range:[currentText rangeOfString:currentCountSr]];
     self.currentCountLabel.attributedText = Attribut;
@@ -288,7 +311,7 @@ typedef enum {
 
 }
 
-
+//根据返回数据设置UI
 - (void)configrationUI:(id)response
 {
 
@@ -319,6 +342,7 @@ typedef enum {
     for(int i = 0; i < 3; i ++){
         
         NSUInteger count = [self.recommendations[i] count];
+       
         if (count != 0) {
             //count 数字大小可以增加显示范围
             count = count + 4;
@@ -327,7 +351,6 @@ typedef enum {
         NSNumber *one = [NSNumber numberWithInt:(int)count];
         
         [_slices addObject:one];
-        
         
         if (count > 0 && firstItem.length == 0) {
             
@@ -383,8 +406,11 @@ typedef enum {
     
     self.bottomView.hidden = total == 0 ? YES : NO;
     self.NoDataView.hidden = !self.bottomView.hidden;
+    self.pipeiNoDataView.hidden = !self.bottomView.hidden;
+    
     
     if (total>0) {
+        
         [self.PieHeadView reloadData];
     }
     
@@ -620,10 +646,10 @@ typedef enum {
 
 }
 
-//rightButtonItemClick
 -(void)pushInteProfile
 {
     [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+ 
 }
 
 
