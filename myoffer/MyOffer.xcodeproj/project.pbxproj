@@ -234,7 +234,6 @@
 		AEA24A301D5B231300DD7939 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A111D5B231200DD7939 /* IntelligentResultViewController.xib */; };
 		AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A151D5B231200DD7939 /* ResultTableViewCell.m */; };
 		AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */; };
-		AEA24A331D5B231300DD7939 /* collegelist in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A191D5B231200DD7939 /* collegelist */; };
 		AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */; };
 		AEA24A351D5B231300DD7939 /* EvaluateSearchCollegeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A1C1D5B231200DD7939 /* EvaluateSearchCollegeViewController.xib */; };
 		AEA24A361D5B231300DD7939 /* InteProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A1E1D5B231200DD7939 /* InteProfileViewController.m */; };
@@ -821,7 +820,6 @@
 		AEA24A141D5B231200DD7939 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		AEA24A151D5B231200DD7939 /* ResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
-		AEA24A191D5B231200DD7939 /* collegelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = collegelist; sourceTree = "<group>"; };
 		AEA24A1A1D5B231200DD7939 /* EvaluateSearchCollegeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSearchCollegeViewController.h; sourceTree = "<group>"; };
 		AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateSearchCollegeViewController.m; sourceTree = "<group>"; };
 		AEA24A1C1D5B231200DD7939 /* EvaluateSearchCollegeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluateSearchCollegeViewController.xib; sourceTree = "<group>"; };
@@ -2170,7 +2168,6 @@
 		AEA24A181D5B231200DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A191D5B231200DD7939 /* collegelist */,
 				AEA24A1A1D5B231200DD7939 /* EvaluateSearchCollegeViewController.h */,
 				AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */,
 				AEA24A1C1D5B231200DD7939 /* EvaluateSearchCollegeViewController.xib */,
@@ -3229,7 +3226,6 @@
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
 				AEA24C2A1D5B283700DD7939 /* center_ban02_EN.jpg in Resources */,
-				AEA24A331D5B231300DD7939 /* collegelist in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
 				AEF421071BD4988B00CFB45E /* UMSShareListController.xib in Resources */,

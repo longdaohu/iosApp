@@ -19,6 +19,7 @@
 @end
 @interface PipeiEditCell : UITableViewCell
 @property(nonatomic,strong)PipeiGroup *group;
+@property(nonatomic,strong)UITextField *contentTF;
 @property(nonatomic,weak)id<PipeiEditCellDelegate>delegate;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

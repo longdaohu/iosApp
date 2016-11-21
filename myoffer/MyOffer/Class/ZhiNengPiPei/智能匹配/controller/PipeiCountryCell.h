@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^PipeiCountryCellBlock)(NSString *);
 @interface PipeiCountryCell : UITableViewCell
 @property(nonatomic,copy)NSString *countryName;
+@property(nonatomic,copy)PipeiCountryCellBlock valueBlock;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end
+

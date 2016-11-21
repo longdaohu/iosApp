@@ -9,7 +9,6 @@
 #import "PipeiEditCell.h"
 
 @interface PipeiEditCell ()<UITextFieldDelegate>
-@property(nonatomic,strong)UITextField *contentTF;
 @property(nonatomic,strong)UIButton *sender;
 @end
 
@@ -21,9 +20,9 @@
     
     PipeiEditCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     
-        if (!cell) {
-            
-            cell =[[PipeiEditCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    if (!cell) {
+        
+        cell =[[PipeiEditCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     
     return cell;
@@ -35,7 +34,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-    
+        
         UITextField *contentTF = [[UITextField alloc] init];
         contentTF.backgroundColor = XCOLOR_WHITE;
         contentTF.leftViewMode =  UITextFieldViewModeAlways;
@@ -49,7 +48,6 @@
         self.contentTF.delegate = self;
         
         UIButton *sender = [[UIButton alloc] init];
-        sender.backgroundColor = [UIColor redColor];
         [sender addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
         self.sender = sender;
         [self.contentView addSubview:sender];
@@ -61,7 +59,7 @@
 
 
 -(void)layoutSubviews{
-
+    
     [super layoutSubviews];
     
     CGFloat contentX = PADDING_TABLEGROUP;
@@ -75,13 +73,18 @@
 }
 
 -(void)setGroup:(PipeiGroup *)group{
-
+    
     _group = group;
     
     self.contentTF.text = group.content;
     
     self.sender.hidden = !(group.groupType == PipeiGroupTypeUniversity);
     
+    if (group.groupType == PipeiGroupTypeScorce) {
+        
+        [self.contentTF addTarget:self action:@selector(limitMaxScore:) forControlEvents:UIControlEventEditingChanged];
+        
+    }
     
 }
 
@@ -113,10 +116,20 @@
     
 }
 
+-(void)limitMaxScore:(UITextField *)textField
+{
+    CGFloat score = textField.text.floatValue;
+    
+    if (score > 100) {
+        
+        textField.text = @"100";
+    }
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

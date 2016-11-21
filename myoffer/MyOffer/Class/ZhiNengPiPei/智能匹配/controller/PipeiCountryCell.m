@@ -115,6 +115,11 @@
         [self.au countryIsSelected:YES];
      }
     
+    if (self.valueBlock) {
+        
+        self.valueBlock([country isEqualToString:@"英国"] ? @"英国" :@"澳大利亚" );
+    }
+    
 }
 
 

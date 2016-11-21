@@ -128,6 +128,7 @@
     [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
     [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidEnd];
     _LoginBlurView.dynamic = NO;
+    [_LoginBlurView setFrame:self.view.bounds];
     [_LoginBlurView setTintColor:nil];
     [_LoginBlurView setIterations:3];
     [_LoginBlurView setBlurRadius:10];
@@ -923,11 +924,9 @@
 
 - (IBAction)showPassword:(UIButton *)sender {
 
-    self.RegisterPasswdTextF.keyboardType =  UIKeyboardTypeDefault;
-
-    // 切换按钮的状态
+     // 切换按钮的状态
     sender.selected = !sender.selected;
-    self.RegisterPasswdTextF.secureTextEntry = sender.selected ? NO : YES;
+    self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
     NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
     [sender setImage:XImage(imageName) forState:UIControlStateNormal];
     

@@ -16,7 +16,7 @@
 //请求历史数据
 #define kAPISelectorhistorySearch @"GET api/account/searchhistory"
 //判断是否有智能匹配数据或收藏学校
-#define kAPISelectorRequestCenter @"GET api/account/mycount"
+#define kAPISelectorRequestCenter @"GET api/v2/account/mycount"
 //搜索接口
 #define kAPISelectorSearch @"POST api/v2/app/search"
 //收藏院校
