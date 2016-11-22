@@ -166,6 +166,7 @@
 		AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */; };
 		AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
+		AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */; };
 		AEA249271D5B207700DD7939 /* ApplyMatialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249221D5B207700DD7939 /* ApplyMatialViewController.m */; };
 		AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249261D5B207700DD7939 /* MyOfferViewController.m */; };
 		AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2492B1D5B215300DD7939 /* HMTitleButton.m */; };
@@ -232,7 +233,6 @@
 		AEA24A0A1D5B224E00DD7939 /* CatigorySubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249F81D5B224E00DD7939 /* CatigorySubjectCell.m */; };
 		AEA24A0B1D5B224E00DD7939 /* CatigorySubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249F91D5B224E00DD7939 /* CatigorySubjectCell.xib */; };
 		AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A101D5B231200DD7939 /* IntelligentResultViewController.m */; };
-		AEA24A301D5B231300DD7939 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A111D5B231200DD7939 /* IntelligentResultViewController.xib */; };
 		AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A151D5B231200DD7939 /* ResultTableViewCell.m */; };
 		AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */; };
 		AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */; };
@@ -695,6 +695,7 @@
 		AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityOneGroupCollectionCell.m; path = controller/UniversityOneGroupCollectionCell.m; sourceTree = "<group>"; };
 		AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiNoResultVeiw.h; sourceTree = "<group>"; };
 		AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiNoResultVeiw.m; sourceTree = "<group>"; };
+		AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
 		AEA249211D5B207700DD7939 /* ApplyMatialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyMatialViewController.h; sourceTree = "<group>"; };
 		AEA249221D5B207700DD7939 /* ApplyMatialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyMatialViewController.m; sourceTree = "<group>"; };
 		AEA249251D5B207700DD7939 /* MyOfferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferViewController.h; sourceTree = "<group>"; };
@@ -819,7 +820,6 @@
 		AEA249F91D5B224E00DD7939 /* CatigorySubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatigorySubjectCell.xib; sourceTree = "<group>"; };
 		AEA24A0F1D5B231200DD7939 /* IntelligentResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntelligentResultViewController.h; sourceTree = "<group>"; };
 		AEA24A101D5B231200DD7939 /* IntelligentResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntelligentResultViewController.m; sourceTree = "<group>"; };
-		AEA24A111D5B231200DD7939 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
 		AEA24A141D5B231200DD7939 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		AEA24A151D5B231200DD7939 /* ResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
@@ -2136,7 +2136,7 @@
 			children = (
 				AEA24A0F1D5B231200DD7939 /* IntelligentResultViewController.h */,
 				AEA24A101D5B231200DD7939 /* IntelligentResultViewController.m */,
-				AEA24A111D5B231200DD7939 /* IntelligentResultViewController.xib */,
+				AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3239,6 +3239,7 @@
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
 				AE1FD74B1D5C929500FFD5A8 /* Pre-comp 1_0009.png in Resources */,
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
+				AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				AEF421061BD4988B00CFB45E /* UMSnsAccountViewController.xib in Resources */,
 				AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */,
@@ -3303,7 +3304,6 @@
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
 				AEF421041BD4988B00CFB45E /* UMShareEditViewControlleriPad.xib in Resources */,
 				AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */,
-				AEA24A301D5B231300DD7939 /* IntelligentResultViewController.xib in Resources */,
 				AE1FD73E1D5C929500FFD5A8 /* Pre-comp 1_00026.png in Resources */,
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
 				AEA24C231D5B283700DD7939 /* appImage.png in Resources */,

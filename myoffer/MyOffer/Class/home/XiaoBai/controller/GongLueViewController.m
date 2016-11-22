@@ -12,7 +12,7 @@
 #import "GongLueListHeaderView.h"
 #import "AUSearchResultViewController.h"
 #import "SearchResultViewController.h"
-#import "InteProfileViewController.h"
+#import "PipeiEditViewController.h"
 #import "IntelligentResultViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityNavView.h"
@@ -74,8 +74,11 @@
     
     if (LOGIN) {
         
-         [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            self.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+        XWeakSelf
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+            
         }];
     }
 }
@@ -235,12 +238,12 @@
     if (self.recommendationsCount) {
         
         IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-        vc.isComeBack = YES;
+//        vc.isComeBack = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
         
-        [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
     }
     
 }

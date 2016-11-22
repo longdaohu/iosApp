@@ -19,7 +19,7 @@
 #import "YYAutoLoopView.h"
 #import "WYLXViewController.h"
 #import "MessageDetaillViewController.h"
-#import "InteProfileViewController.h"
+#import "PipeiEditViewController.h"
 #import "IntelligentResultViewController.h"
 #import "HotUniversityFrame.h"
 #import "HomeSearchView.h"
@@ -764,10 +764,17 @@
     
     if (LOGIN) {
         XWeakSelf
-        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-            weakSelf.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+//        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
+//            weakSelf.recommendationsCount = [response[@"recommendationsCount"] integerValue];
+//            
+//        }];
+        
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
             
         }];
+        
     }
 }
 
@@ -850,7 +857,7 @@
         case HomePageClickItemTypePipei:
         {
             [MobClick event:@"PiPei"];
-            UIViewController *vc =  self.recommendationsCount > 0 ?  [[IntelligentResultViewController alloc] init] : [[InteProfileViewController alloc] init];
+            UIViewController *vc =  self.recommendationsCount > 0 ?  [[IntelligentResultViewController alloc] init] : [[PipeiEditViewController alloc] init];
             [self.navigationController pushViewController:vc  animated:YES];
         }
             break;

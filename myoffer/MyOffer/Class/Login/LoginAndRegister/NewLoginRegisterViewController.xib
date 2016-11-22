@@ -41,7 +41,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9bo-dL-22P"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="9bo-dL-22P"/>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iH4-Hf-b4A" customClass="KDEasyTouchButton">
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="01k-cz-RA5"/>
@@ -311,8 +311,8 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwC-Tu-Gdc">
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="32" id="5U4-0b-w8D"/>
-                                        <constraint firstAttribute="width" constant="32" id="IyG-E5-w1N"/>
+                                        <constraint firstAttribute="height" constant="40" id="5U4-0b-w8D"/>
+                                        <constraint firstAttribute="width" constant="40" id="IyG-E5-w1N"/>
                                     </constraints>
                                     <state key="normal" image="hidepassword"/>
                                     <connections>
@@ -328,7 +328,7 @@
                                 <constraint firstItem="7qC-Ft-GiX" firstAttribute="leading" secondItem="YMi-jN-dTy" secondAttribute="trailing" constant="15" id="HBz-XO-eXO"/>
                                 <constraint firstItem="HwC-Tu-Gdc" firstAttribute="centerY" secondItem="6jA-4W-qbL" secondAttribute="centerY" id="LSC-MR-v88"/>
                                 <constraint firstItem="7qC-Ft-GiX" firstAttribute="top" secondItem="6jA-4W-qbL" secondAttribute="top" id="RQu-Yt-A21"/>
-                                <constraint firstAttribute="trailing" secondItem="7qC-Ft-GiX" secondAttribute="trailing" constant="40" id="Rof-Es-TCw"/>
+                                <constraint firstAttribute="trailing" secondItem="7qC-Ft-GiX" secondAttribute="trailing" constant="60" id="Rof-Es-TCw"/>
                                 <constraint firstItem="YMi-jN-dTy" firstAttribute="top" secondItem="6jA-4W-qbL" secondAttribute="top" constant="9" id="UBV-QV-czz"/>
                                 <constraint firstItem="g7d-ee-43o" firstAttribute="leading" secondItem="6jA-4W-qbL" secondAttribute="leading" constant="15" id="W9s-ho-EmC"/>
                                 <constraint firstItem="YMi-jN-dTy" firstAttribute="leading" secondItem="6jA-4W-qbL" secondAttribute="leading" constant="15" id="Xux-WO-6qH"/>
@@ -611,12 +611,12 @@
     </objects>
     <resources>
         <image name="Vertification_icon" width="34" height="46"/>
-        <image name="appbg.jpg" width="750" height="1334"/>
         <image name="arrow_down" width="12" height="12"/>
         <image name="back_button" width="21" height="21"/>
         <image name="close_button" width="23" height="23"/>
         <image name="hidepassword" width="16" height="16"/>
         <image name="location" width="31" height="45"/>
+        <image name="loginbg" width="375" height="667"/>
         <image name="myofferCN" width="165" height="76"/>
         <image name="password" width="40" height="47"/>
         <image name="qq_icon" width="80" height="80"/>

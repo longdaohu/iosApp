@@ -14,6 +14,7 @@
 -(void)PipeiEditCellPush;
 -(void)PipeiEditCell:(PipeiEditCell *)cell  textFieldDidEndEditing:(UITextField *)textField;
 -(void)PipeiEditCell:(PipeiEditCell *)cell  textFieldDidBeginEditing:(UITextField *)textField;
+-(void)PipeiEditCell:(PipeiEditCell *)cell  didClick:(UIBarButtonItem *)sender;
 
 
 @end
@@ -22,5 +23,6 @@
 @property(nonatomic,strong)UITextField *contentTF;
 @property(nonatomic,weak)id<PipeiEditCellDelegate>delegate;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+
 
 @end

@@ -39,7 +39,8 @@ typedef enum {
 @property(nonatomic,strong)NSArray *CelldDetailes;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
-
+//智能匹配数量
+@property(nonatomic,assign)NSInteger recommendationsCount;
 
 @end
 
@@ -130,13 +131,27 @@ typedef enum {
             
          }];
         
+        /**
+         //判断是否有智能匹配数据或收藏学校
+         */
+        
+        XWeakSelf
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+            
+        }];
+
+        
+        
+        
     }else{
         
         [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
          self.myCountResponse = nil;
         [self.tableView reloadData];
         
-    }
+     }
     
     
 }
@@ -440,7 +455,7 @@ typedef enum {
 {
     [MobClick event:@"apply_pipei"];
     
-    if ([self.myCountResponse[@"recommendationsCount"] integerValue] > 0 ) {
+    if (self.recommendationsCount > 0 ) {
         
         [self.navigationController pushViewController:[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil] animated:YES];
         

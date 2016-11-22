@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 typedef void(^UniversityFooterViewBlock)(UIButton *sender);
 @interface UniversityFooterView : UIView
-@property(nonatomic,copy)NSString *rateStr;
+@property(nonatomic,assign)NSInteger level;
 @property(nonatomic,copy)UniversityFooterViewBlock  actionBlock;
 
 @end

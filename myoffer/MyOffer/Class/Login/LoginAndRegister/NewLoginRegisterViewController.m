@@ -704,8 +704,7 @@
 }
 
 #pragma  Mark  ——————————UITextFieldDelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
     return YES;
 }
@@ -733,10 +732,6 @@
     
     return YES;
 }
-
-
-
-
 
 
 /*

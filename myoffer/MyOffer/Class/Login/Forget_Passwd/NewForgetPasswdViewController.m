@@ -253,6 +253,20 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)showPassword:(UIButton *)sender {
+    
+    // 切换按钮的状态
+    sender.selected = !sender.selected;
+    self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
+    NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
+    [sender setImage:XImage(imageName) forState:UIControlStateNormal];
+    
+}
+
+
+
+
+
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];

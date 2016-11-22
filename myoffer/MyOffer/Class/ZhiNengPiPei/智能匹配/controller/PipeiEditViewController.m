@@ -16,7 +16,7 @@
 #import "SubjectItem.h"
 #import "EvaluateSearchCollegeViewController.h"
 #import "IntelligentResultViewController.h"
-
+#import "promptViewController.h"
 
 #define Bottom_Height 150
 
@@ -28,11 +28,29 @@
 @property(nonatomic,strong)UIPickerView *subjectPicker;
 @property(nonatomic,strong)PipeiEditCell *editingCell;
 @property(nonatomic,strong)UIButton *submitBtn;
+//提示页
+@property(nonatomic,strong)promptViewController *prompVC;
 
 @end
 
 @implementation PipeiEditViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page智能匹配"];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page智能匹配"];
+    
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -51,6 +69,37 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    
+    if (LOGIN) {
+        
+        //用于判断用户是否改变,当用户第一次进入时，会出现提示窗口
+        [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+            
+            NSString *tokenKey = response[@"accountInfo"][@"_id"];
+            
+            NSString *value = [ud valueForKey:tokenKey];
+            
+            
+            if (!value) {
+                
+                [self prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
+                
+                [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
+                
+                [ud synchronize];
+            }
+            
+        }];
+        
+    }else{
+        
+        RequireLogin
+        
+    }
+
     
 }
 
@@ -79,6 +128,27 @@
     }];
 }
 
+//提示页面
+- (promptViewController *)prompVC{
+    
+    if (!_prompVC) {
+        
+        XWeakSelf
+        _prompVC = [[promptViewController alloc] initWithBlock:^{
+            
+            [weakSelf prompViewAppear:NO];
+            
+        }];
+        
+        _prompVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
+        
+    }
+    
+    return _prompVC;
+}
+
+
+
 - (void)configrationUIWithresponse:(id)response{
     
     
@@ -96,7 +166,7 @@
                 }else{
                     
                     BOOL haveCountry = NO;
-                    
+                
                     for (NSInteger index = 0; index < self.countryItems_CN.count; index++) {
                         
                         CountryItem *item = self.countryItems_CN[index];
@@ -378,6 +448,28 @@
     
 }
 
+-(void)PipeiEditCell:(PipeiEditCell *)cell  didClick:(UIBarButtonItem *)sender{
+
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    
+    if (sender.tag == 10 || indexPath.section == (self.groups.count - 1)) {
+        
+        [self.view endEditing:YES];
+        
+        return;
+        
+    }
+    
+    NSIndexPath *nextIndex  = [NSIndexPath indexPathForRow:0 inSection:indexPath.section + 1];
+    PipeiEditCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
+    [nextCell.contentTF becomeFirstResponder];
+
+    
+    
+}
+
 
 #pragma  Mark ------  UIPickerViewDataSource, UIPickerViewDelegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -511,15 +603,80 @@
      parameters:parameters
      success:^(NSInteger statusCode, id response) {
 
-         IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-         resultVC.isComeBack = YES;
-         [self.navigationController pushViewController:resultVC animated:YES];
+
+         [self configrationWithResponse:response];
          
          
      }];
     
     
 }
+
+//根据条件跳转页面
+- (void)configrationWithResponse:(id)response{
+
+    
+    if (self.isfromPipeiResultPage) {
+        
+        NSArray *items = self.navigationController.childViewControllers;
+        IntelligentResultViewController *resultVC = items[items.count - 2];
+        resultVC.fromStyle = @"pop";
+        [self.navigationController popToViewController:resultVC animated:YES];
+        
+    }else{
+        
+        IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+        resultVC.fromStyle = @"push";
+        [self.navigationController pushViewController:resultVC animated:YES];
+
+    }
+    
+    
+}
+
+
+//当没有数据时，出现智能匹配提示页面
+- (void)prompViewAppear:(BOOL)appear{
+    
+    if (appear) {
+        
+        [[UIApplication sharedApplication].windows.lastObject addSubview:self.prompVC.view];
+        
+    }
+    
+    CGFloat prompTop = appear ? 0 : XScreenHeight;
+    
+    CGFloat prompAlpha = appear ? 1 : 0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        if (!appear) {
+            
+            [self.navigationController setNavigationBarHidden:NO];
+            
+        }
+        
+        self.prompVC.view.top = prompTop;
+        self.prompVC.view.alpha = prompAlpha;
+        
+    } completion:^(BOOL finished) {
+        
+        if (!appear) {
+            
+            [self.prompVC.view removeFromSuperview];
+            
+        }else{
+            
+            [self.navigationController setNavigationBarHidden:YES animated:NO];
+            
+        }
+        
+    }];
+    
+    
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {

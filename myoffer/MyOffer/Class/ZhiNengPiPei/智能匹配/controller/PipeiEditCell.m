@@ -7,6 +7,7 @@
 //
 
 #import "PipeiEditCell.h"
+#import "XWGJKeyboardToolar.h"
 
 @interface PipeiEditCell ()<UITextFieldDelegate>
 @property(nonatomic,strong)UIButton *sender;
@@ -51,6 +52,11 @@
         [sender addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
         self.sender = sender;
         [self.contentView addSubview:sender];
+        
+        
+        XWGJKeyboardToolar *tooler =[[NSBundle mainBundle] loadNibNamed:@"XWGJKeyboardToolar" owner:self options:nil].lastObject;
+        tooler.delegate = self;
+        self.contentTF.inputAccessoryView = tooler;
         
     }
     
@@ -125,6 +131,19 @@
         textField.text = @"100";
     }
 }
+
+#pragma mark ----KeyboardToolarDelegate
+-(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
+{
+    
+    if ([self.delegate respondsToSelector:@selector(PipeiEditCell:didClick:)]) {
+        
+        [self.delegate PipeiEditCell:self didClick:sender];
+        
+    }
+    
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

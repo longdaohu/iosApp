@@ -49,7 +49,7 @@
         self.rateBtn = rateBtn;
         rateBtn.titleLabel.font = XFONT(XPERCENT * 14);
         
-        UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+        UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentCenter];
         showLab.hidden = YES;
         showLab.numberOfLines = 0;
         self.showLab = showLab;
@@ -59,25 +59,45 @@
     return self;
 }
 
-- (void)setRateStr:(NSString *)rateStr{
 
-    _rateStr = rateStr;
+
+-(void)setLevel:(NSInteger)level{
+
+    _level = level;
+    
+    //	'universityId': 'level' // 0:不推荐|1:冲刺|2:核心|3:保底     你获得offer的难易度  蓝字
+    
+    NSString *levelStr;
+    
+    switch (level) {
+        case 0:
+            levelStr = @"极难：不建议申请";
+            break;
+        case 1:
+            levelStr = @"难：不妨一试";
+            break;
+        case 2:
+            levelStr = @"中：重点考虑";
+            break;
+        case 3:
+            levelStr = @"易：成功率较高";
+            break;
+        default:
+            break;
+    }
     
     self.showLab.hidden = NO;
     self.rateBtn.hidden = YES;
-    
+
     NSString *offerStr = @"您获得Offer的概率为";
-    NSString *showStri =  [NSString stringWithFormat:@"%@\n极难，不推荐申请",offerStr];
+    NSString *showStri =  [NSString stringWithFormat:@"%@\n%@",offerStr,levelStr];
     NSRange showRange = NSMakeRange(0, offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
-    [attr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]  range:showRange];
+    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_WHITE  range:showRange];
     self.showLab.attributedText = attr;
     
     
-    
 }
-
-
 
 -(void)layoutSubviews{
 

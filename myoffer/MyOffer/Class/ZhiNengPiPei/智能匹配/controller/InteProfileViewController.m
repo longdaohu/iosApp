@@ -816,7 +816,7 @@ typedef enum {
      success:^(NSInteger statusCode, id response) {
          
               IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-              resultVC.isComeBack = YES;
+//              resultVC.isComeBack = YES;
              [self.navigationController pushViewController:resultVC animated:YES];
          
      }];

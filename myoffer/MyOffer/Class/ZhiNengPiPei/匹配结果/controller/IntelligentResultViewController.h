@@ -12,4 +12,10 @@
 @property (strong, nonatomic) IBOutlet UIView *NoDataView;
 @property (weak, nonatomic) IBOutlet UILabel *NoDataLabel;
 @property(nonatomic,assign)BOOL isComeBack;
+
+
+//用于标识是否来自匹配编辑页
+//@property(nonatomic,assign)BOOL isfromPipeiEdtingPage;
+@property(nonatomic,copy)NSString *fromStyle;
+
 @end

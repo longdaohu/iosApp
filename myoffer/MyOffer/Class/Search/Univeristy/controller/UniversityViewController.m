@@ -26,9 +26,10 @@
 #import "ShareViewController.h"
 #import "UniversityFooterView.h"
 #import "UniversityCourseViewController.h"
-#import "InteProfileViewController.h"
+#import "PipeiEditViewController.h"
 #import "UniDetailGroup.h"
 #import "UniversityheaderCenterView.h"
+#import "IntelligentResultViewController.h"
 
 
 typedef enum {
@@ -65,6 +66,8 @@ typedef enum {
 @property(nonatomic,assign)UniversityItemType    clickType;
 //分享功能
 @property(nonatomic,strong)ShareViewController   *shareVC;
+@property(nonatomic,strong)UniversityFooterView *footer;
+@property(nonatomic,strong)NSNumber *user_level;
 
 @end
 
@@ -77,6 +80,8 @@ typedef enum {
     if (self) {
         
         self.uni_id = Uni_id;
+        
+        self.user_level = @DefaultNumber;
     }
     
     
@@ -96,6 +101,7 @@ typedef enum {
         [self refesh];
        
         [self userDidClickItem];
+        
     }
   
 }
@@ -120,6 +126,10 @@ typedef enum {
         
         
     }];
+    
+    
+    //加载报考难易程度
+    [self loadUserLevel];
     
 }
 
@@ -160,8 +170,24 @@ typedef enum {
     [self loadNewDataSourse];
     
     [self makeUI];
- 
+    
+    
+    
 }
+
+//根据用户资料测试录取难易程度
+- (void)loadUserLevel{
+    
+        XWeakSelf
+        NSString *path =[NSString stringWithFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
+        
+        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            [weakSelf caseLevelWithResponse:response];
+        }];
+    
+}
+
 //加载数据
 -(void)loadNewDataSourse
 {
@@ -174,6 +200,8 @@ typedef enum {
         [weakSelf casePop];
 
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        
         
         UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
         
@@ -280,6 +308,7 @@ typedef enum {
     XWeakSelf
 
     UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - HEIGHT_BOTTOM, XScreenWidth, HEIGHT_BOTTOM)];
+    self.footer = footer;
     footer.actionBlock = ^(UIButton *sender){
         [weakSelf footerWithButton:sender];
     };
@@ -525,7 +554,7 @@ typedef enum {
             [self caseMore];
             break;
         case UniversityItemTypePipei:
-            [self CasePipei];
+//            [self CasePipei];
             break;
         default:
             break;
@@ -647,8 +676,19 @@ typedef enum {
     self.clickType = LOGIN ? UniversityItemTyDeFault : UniversityItemTypePipei;
     
     RequireLogin
-    InteProfileViewController  *vc = [[InteProfileViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    if (self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
+        
+        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+
+    }else{
+    
+        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
+ 
+    }
+    
+    
 }
 
  
@@ -715,6 +755,25 @@ typedef enum {
     
 }
 
+
+- (void)caseLevelWithResponse:(id)response{
+
+    
+    NSArray *values = [(NSDictionary *)response allValues];
+    
+    NSLog(@"values values  values%ld",[values[0] integerValue]);
+    
+    if ([values[0] integerValue] == -1) {
+        
+        
+    }else{
+    
+        self.footer.level = [values[0] integerValue];
+
+    }
+    
+    
+}
 
 
 - (void)dealloc{

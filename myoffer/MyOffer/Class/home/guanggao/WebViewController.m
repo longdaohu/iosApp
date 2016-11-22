@@ -8,7 +8,7 @@
 
 #import "WebViewController.h"
 #import "WYLXViewController.h"
-#import "InteProfileViewController.h"
+#import "PipeiEditViewController.h"
 #import "AUSearchResultViewController.h"
 #import "ServiceMallViewController.h"
 #import "NotificationViewController.h"
@@ -347,7 +347,7 @@
     
     RequireLogin
     
-    [self.navigationController pushViewController:[[InteProfileViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
 }
 
 //推荐专业

@@ -20,6 +20,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor = XCOLOR_WHITE;
+        
         UIButton *sender = [[UIButton alloc] init];
         [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:sender];

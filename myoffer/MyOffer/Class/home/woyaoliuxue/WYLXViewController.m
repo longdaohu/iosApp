@@ -10,7 +10,7 @@
 #import "WYLXHeaderView.h"
 #import "WYLXCell.h"
 #import "WYLXFooterView.h"
-#import "InteProfileViewController.h"
+#import "PipeiEditViewController.h"
 #import "YourPhoneView.h"
 #import "WYLXSuccessView.h"
 #import "NomalTableSectionHeaderView.h"
@@ -733,8 +733,8 @@ typedef enum {
 //点击智能匹配选项
 -(void)casePipei{
     
-    InteProfileViewController *pipei =[[InteProfileViewController alloc] init];
-    pipei.isComeBack = YES;
+    PipeiEditViewController *pipei =[[PipeiEditViewController alloc] init];
+//    pipei.isComeBack = YES;
     [self.navigationController pushViewController:pipei animated:YES];
 }
 
