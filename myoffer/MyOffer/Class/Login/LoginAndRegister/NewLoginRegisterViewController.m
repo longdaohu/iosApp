@@ -94,6 +94,7 @@
 //    }
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
 }
 
 

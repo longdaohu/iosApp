@@ -9,10 +9,11 @@
 #import "EvaluateSearchCollegeViewController.h"
 
 @interface EvaluateSearchCollegeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UIView *topNavView;
 @property(nonatomic,strong)NSArray *schoolList;
 @property(nonatomic,strong)NSArray *resultList;
 @property(nonatomic,strong)UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property(strong, nonatomic)UITextField *searchTextField;
 
 @end
 
@@ -39,6 +40,9 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page搜索学校"];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
 }
 
 
@@ -58,16 +62,44 @@
 
 -(void)makeViewUI
 {
-    self.title = GDLocalizedString(@"Evaluate-University");//@"毕业院校";  //@"完成"
     
-    UIBarButtonItem *rightCommitButton =[[UIBarButtonItem alloc] initWithTitle:GDLocalizedString(@"Evaluate-Done") style:UIBarButtonItemStylePlain target:self action:@selector(commitInput)];
-    self.navigationItem.rightBarButtonItem = rightCommitButton;
+    UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XNav_Height)];
+    navView.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:navView];
     
+    UIImageView *navBgVew = [[UIImageView alloc] init];
+    navBgVew.contentMode = UIViewContentModeScaleAspectFit;
+    [navView addSubview:navBgVew];
     
+    NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
+    UIImage *bgImage =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+    navBgVew.frame = CGRectMake(0, 0, XScreenWidth, bgImage.size.height);
+    navView.clipsToBounds = YES;
+    navBgVew.image = bgImage;
+    
+    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 24, XScreenWidth - 80, 34)];
+    self.searchTextField = searchTextField;
+    [navView addSubview:searchTextField];
+    searchTextField.placeholder = @"请输入在读或毕业院校";
+    searchTextField.leftViewMode =  UITextFieldViewModeAlways;
+    UIImageView  *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, searchTextField.bounds.size.height, 50)];
+    leftView.image = XImage(@"search_darkgrey");
+    leftView.contentMode = UIViewContentModeScaleAspectFit;
+    searchTextField.leftView = leftView;
+    searchTextField.layer.cornerRadius = CORNER_RADIUS;
+    searchTextField.backgroundColor = XCOLOR_WHITE;
+    searchTextField.clearButtonMode = UITextFieldViewModeAlways;
     [self.searchTextField addTarget:self action:@selector(searchCollegeWithKeyValue:) forControlEvents:UIControlEventEditingChanged];
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, XScreenWidth, XScreenHeight - (XNav_Height + 44))];
+    CGFloat rightX = CGRectGetMaxX(searchTextField.frame);
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightX, 24, XScreenWidth - rightX, 34)];
+    [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [navView addSubview:rightBtn];
+    [rightBtn addTarget:self action:@selector(commitInput) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height, XScreenWidth, XScreenHeight)];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -77,17 +109,6 @@
     
     
 }
-
--(void)createSearchSource
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"collegelist" ofType:nil];
-    NSData *fileData = [NSData dataWithContentsOfFile:path];
-    NSString *pathString = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
-    NSString *noHeaderPath = [pathString stringByReplacingOccurrencesOfString:@"\[\"" withString:@""];
-    NSString *noFooterpath = [noHeaderPath stringByReplacingOccurrencesOfString:@"\"]" withString:@""];
-    self.schoolList = [noFooterpath componentsSeparatedByString:@"\",\""];
-}
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -117,7 +138,6 @@
 }
 
 
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self.view endEditing:YES];
@@ -128,18 +148,52 @@
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
+    
+    if (self.resultList.count == 0 && searchTF.text.length > 0) {
+
+        NSString *item = [NSString stringWithFormat:@"输入\" %@\" ",searchTF.text];
+        self.resultList = @[item];
+    }
+    
     [self.tableView reloadData];
 }
+
+
 
 //提交查询
 -(void)commitInput
 {
-    [self universityName:self.searchTextField.text];
+    
+    if (self.searchTextField.text.length == 0) {
+        
+         [self universityName:self.searchTextField.text];
+        
+    }else{
+    
+        NSString *regex = @"[\u4e00-\u9fa5]+";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+        NSLog(@"999999999999  %d",[pred evaluateWithObject:self.searchTextField.text]);
+        
+        if ([pred evaluateWithObject:self.searchTextField.text]) {
+            
+            [self universityName:self.searchTextField.text];
+
+        }else{
+            
+            AlerMessage(@"不能包含中文以外的字符");
+        }
+        
+    }
+
+    
+    
 }
 
 
 -(void)universityName:(NSString *)unversity{
 
+
+    
     if (unversity && self.valueBlock) {
         
         self.valueBlock(unversity);

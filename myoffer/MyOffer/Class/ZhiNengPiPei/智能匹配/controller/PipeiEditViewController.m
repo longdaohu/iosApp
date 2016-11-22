@@ -28,12 +28,15 @@
 @property(nonatomic,strong)UIPickerView *subjectPicker;
 @property(nonatomic,strong)PipeiEditCell *editingCell;
 @property(nonatomic,strong)UIButton *submitBtn;
+//判断提交按钮是否被点击过
+@property(nonatomic,assign)BOOL submitBtnHadDone;
 //提示页
 @property(nonatomic,strong)promptViewController *prompVC;
 
 @end
 
 @implementation PipeiEditViewController
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -41,6 +44,12 @@
     [MobClick beginLogPageView:@"page智能匹配"];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    if (self.submitBtnHadDone) {
+        
+        [self submit:self.submitBtn];
+        
+    }
 }
 
 
@@ -51,6 +60,8 @@
     [MobClick endLogPageView:@"page智能匹配"];
     
 }
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -93,10 +104,6 @@
             }
             
         }];
-        
-    }else{
-        
-        RequireLogin
         
     }
 
@@ -280,6 +287,9 @@
         _groups = [NSMutableArray array];
         
         PipeiGroup *country = [PipeiGroup groupWithHeader: @"意向国家"  groupType:PipeiGroupTypeCountry];
+        if (!LOGIN) {
+            country.content = @"英国";
+        }
         PipeiGroup *university = [PipeiGroup groupWithHeader: @"在读或毕业院校"  groupType:PipeiGroupTypeUniversity];
         PipeiGroup *subject = [PipeiGroup groupWithHeader: @"就读专业"  groupType:PipeiGroupTypeSubject];
         PipeiGroup *score = [PipeiGroup groupWithHeader: @"平均成绩（百分制）"  groupType:PipeiGroupTypeScorce];
@@ -399,7 +409,7 @@
     
     [self.view endEditing:YES];
     
-    EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] initWithNibName:@"EvaluateSearchCollegeViewController" bundle:nil];
+    EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
     search.valueBlock = ^(NSString *value){
         
         PipeiEditCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
@@ -546,7 +556,7 @@
 }
 
 
-//提交
+//提交智能匹配数据
 - (void)submit:(UIButton *)sender{
     
     
@@ -561,9 +571,9 @@
         }
     }
     
+    self.submitBtnHadDone = YES;
     
     RequireLogin
-    
  
     PipeiGroup *country = self.groups[0];
     PipeiGroup *university = self.groups[1];
@@ -595,20 +605,35 @@
         
     }
 
-    
+    sender.enabled = NO;
+
     NSDictionary *parameters =  @{@"des_country":country_ID,@"university":university.content,@"subject":subject_ID,@"score":score.content};
     
-    [self
-     startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost
-     parameters:parameters
-     success:^(NSInteger statusCode, id response) {
-
-
+     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost parameters:parameters expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:^{
+         
+     } additionalSuccessAction:^(NSInteger statusCode, id response) {
+         
          [self configrationWithResponse:response];
+      
+         sender.enabled = YES;
+         self.submitBtnHadDone = NO;
+
+     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         
+         sender.enabled = YES;
+         self.submitBtnHadDone = NO;
+
      }];
     
+//    [self
+//     startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost
+//     parameters:parameters
+//     success:^(NSInteger statusCode, id response) {
+// 
+//         [self configrationWithResponse:response];
+//
+//     }];
+//    
     
 }
 

@@ -70,7 +70,7 @@
 -(void)presentViewWillAppear{
     
     [MobClick beginLogPageView:@"page新版首页"];
-    
+ 
     self.tabBarController.tabBar.hidden = NO;
     
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
@@ -565,16 +565,6 @@
 #pragma mark ——— HomeHeaderViewDelegate
 -(void)HomeHeaderViewWithItemtap:(NSInteger )tag
 {
-   
-//    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
-//    if (counries.count == 0) {
-//         //用于防止用户第一次加载备用数据失败
-//         [self getSelectionSourse];
-//        
-//         return;
-//    }
-    
-    
     
     
      switch (tag) {
@@ -851,18 +841,41 @@
 {
     self.clickType = LOGIN ? HomePageClickItemTypeNoClick : type;
     
-    RequireLogin
-    
     switch (type) {
+            
         case HomePageClickItemTypePipei:
         {
             [MobClick event:@"PiPei"];
-            UIViewController *vc =  self.recommendationsCount > 0 ?  [[IntelligentResultViewController alloc] init] : [[PipeiEditViewController alloc] init];
-            [self.navigationController pushViewController:vc  animated:YES];
+            
+            if (!LOGIN) {
+                
+                self.recommendationsCount = 0;
+            }
+            
+            
+            if (self.recommendationsCount > 0) {
+                
+                RequireLogin
+                
+                [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
+                
+            }else{
+            
+                [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+
+            }
+            
+          
         }
             break;
-        case HomePageClickItemTypetest:
+        case HomePageClickItemTypetest:{
+         
+            
+            RequireLogin
+            
             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
+
+        }
             break;
         default:
             break;

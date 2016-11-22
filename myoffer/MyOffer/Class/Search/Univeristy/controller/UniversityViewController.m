@@ -31,7 +31,6 @@
 #import "UniversityheaderCenterView.h"
 #import "IntelligentResultViewController.h"
 
-
 typedef enum {
     UniversityItemTyDeFault,
     UniversityItemTypeFavor,
@@ -672,22 +671,17 @@ typedef enum {
 //智能匹配
 -(void)CasePipei{
     
-    
-    self.clickType = LOGIN ? UniversityItemTyDeFault : UniversityItemTypePipei;
-    
-    RequireLogin
-    
-    
-    if (self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
         
-        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
-
-    }else{
-    
-        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
- 
-    }
-    
+        if ( !LOGIN  ||  self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
+            
+            [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+            
+        }else{
+            
+            [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
+            
+        }
+  
     
 }
 

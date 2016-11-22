@@ -80,6 +80,7 @@
             weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
             
         }];
+        
     }
 }
 
@@ -233,18 +234,22 @@
  */
 -(void)caseIntelligent
 {
-    RequireLogin
     
-    if (self.recommendationsCount) {
+    
+    if (self.recommendationsCount > 0) {
+        
+        RequireLogin
         
         IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-//        vc.isComeBack = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
         
         [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
     }
+    
+    
+ 
     
 }
 

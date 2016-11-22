@@ -66,7 +66,7 @@ typedef enum {
      [self userDidClickItem];
     
      self.tabBarController.tabBar.hidden = NO;
-
+    
 }
 
 
@@ -271,7 +271,7 @@ typedef enum {
     
     switch (type) {
         case CenterClickItemTypePipei:
-            [self CasePipei];
+//            [self CasePipei];
             break;
         case CenterClickItemTypeFavor:
             [self CaseFavoriteUniversity];
@@ -301,7 +301,7 @@ typedef enum {
     sectionView.sectionBlock       =  ^(centerItemType type){
         switch (type) {
             case centerItemTypepipei:
-                [self centerPageClickWithItemType:CenterClickItemTypePipei];
+                [self CasePipei];
                 break;
             case centerItemTypefavor:
                 [self centerPageClickWithItemType:CenterClickItemTypeFavor];
@@ -455,13 +455,18 @@ typedef enum {
 {
     [MobClick event:@"apply_pipei"];
     
+    if (!LOGIN) {
+        self.recommendationsCount = 0;
+    }
+    
     if (self.recommendationsCount > 0 ) {
+        
+        RequireLogin
         
         [self.navigationController pushViewController:[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil] animated:YES];
         
     }else{
-
-
+ 
         [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
         
     }
