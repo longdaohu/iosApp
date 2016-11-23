@@ -94,7 +94,7 @@
     
     CGFloat areaX = 20;
     CGFloat areaY = 30;
-    CGFloat areaW = 120;
+    CGFloat areaW = 150;
     CGFloat areaH = 50;
     UITextField *areaFT = [[UITextField alloc] initWithFrame:CGRectMake(areaX, areaY, areaW, areaH)];
     areaFT.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
@@ -105,17 +105,20 @@
     [areaFT setFont:XFONT(Bang_FontSize)];
     self.areaFT = areaFT;
     areaFT.inputView = self.areaPicker;
-
+    areaFT.rightViewMode = UITextFieldViewModeAlways;
+    areaFT.textAlignment = NSTextAlignmentCenter;
+    areaFT.leftViewMode = UITextFieldViewModeNever;
     
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, areaH)];
+    areaFT.rightView = rightView;
     CGFloat arrowW = 20;
     CGFloat arrowH = areaH;
-    CGFloat arrowY = areaY;
-    CGFloat arrowX = CGRectGetMaxX(areaFT.frame) - (arrowW + 8);
+    CGFloat arrowY = 0;
+    CGFloat arrowX = 0;
     UIImageView *arrowView = [[UIImageView alloc] initWithFrame:CGRectMake( arrowX, arrowY, arrowW, arrowH)];;
-    [self.view addSubview:arrowView];
     arrowView.image =  [UIImage imageNamed:@"arrow_down"];
     arrowView.contentMode = UIViewContentModeScaleAspectFit;
-
+    [rightView  addSubview:arrowView];
     
     
     CGFloat phoneX = CGRectGetMaxX(areaFT.frame) + ITEM_MARGIN;
@@ -220,15 +223,24 @@
     
     NSString *nomalError = @"手机号码格式错误";
     
-    if ([self.areaFT.text containsString:@"86"] && self.phoneTF.text.length != 11) {
+    if (self.phoneTF.text.length == 0) {
+        
+        self.errorLab.text = @"手机号码不能为空";
+        
+        [self showError:YES];
+        
+         return;
+     }
+    
+    if ([self.areaFT.text containsString:@"86"]) {
         
         NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if ([firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"]) {
         
             errorStr = @"请输入“1”开头的11位数字";
             
-        }else{
+        }else if(self.phoneTF.text.length != 11){
         
             errorStr = nomalError;
 
@@ -238,19 +250,18 @@
         
         [self showError:YES];
         
-        return;
     }
   
-    if ([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length != 10) {
+    if ([self.areaFT.text containsString:@"44"]) {
         
         NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
 
-        if ([firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"]) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
-        }else{
+        }else if(self.phoneTF.text.length != 10){
             
             errorStr = nomalError;
             
@@ -260,24 +271,25 @@
 
         [self showError:YES];
         
-        return;
     }
     
-    
-    if ([self.areaFT.text containsString:@"60"] && self.phoneTF.text.length > 6 && self.phoneTF.text.length < 10) {
+    if ([self.areaFT.text containsString:@"60"] && (self.phoneTF.text.length < 7 || self.phoneTF.text.length > 9) ) {
         
         self.errorLab.text = nomalError;
         
         [self showError:YES];
         
+        
+    }
+    
+    if (self.errorLab.alpha == 1) {
+        
         return;
     }
-
     
     
     sender.enabled = NO;
     sender.layer.borderColor = XCOLOR_DARKGRAY.CGColor;
-    
     NSString *areaCode;
     
     if ( [self.areaFT.text containsString:@"44"]) {
@@ -289,9 +301,9 @@
         areaCode = @"60";
         
     }else{
+        
         areaCode = @"86";
     }
-    
     
     
     NSString *phone = self.phoneTF.text;
@@ -397,11 +409,15 @@
     
       self.areaFT.text = self.area_arr[row];
     
-    
      if ([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length > 10) {
         
         self.phoneTF.text = self.phoneTF.text.length > 10 ? [self.phoneTF.text substringWithRange:NSMakeRange(0, 10)] : self.phoneTF.text;
-    }
+     
+     }else if ([self.areaFT.text containsString:@"60"] && self.phoneTF.text.length > 9){
+         
+         self.phoneTF.text = self.phoneTF.text.length > 9 ? [self.phoneTF.text substringWithRange:NSMakeRange(0, 10)] : self.phoneTF.text;
+
+     }
     
 }
 
@@ -416,6 +432,10 @@
         
         self.phoneTF.text = textField.text.length > 10 ? [textField.text substringWithRange:NSMakeRange(0, 10)] : textField.text;
         
+    }else if ([self.areaFT.text containsString:@"60"] && self.phoneTF.isFirstResponder){
+    
+        self.phoneTF.text = textField.text.length > 9 ? [textField.text substringWithRange:NSMakeRange(0, 9)] : textField.text;
+     
     }else if ([self.areaFT.text containsString:@"86"] && self.phoneTF.isFirstResponder){
     
          self.phoneTF.text = textField.text.length > 11 ? [textField.text substringWithRange:NSMakeRange(0, 11)] : textField.text;
@@ -430,6 +450,7 @@
         
         [self showError:NO];
     }
+    
     
 }
 

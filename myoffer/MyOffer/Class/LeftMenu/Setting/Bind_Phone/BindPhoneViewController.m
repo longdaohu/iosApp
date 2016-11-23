@@ -59,7 +59,8 @@
 {
     if (!_AreaCodes) {
         
-        _AreaCodes = @[GDLocalizedString(@"LoginVC-china"),GDLocalizedString(@"LoginVC-english")];
+        _AreaCodes = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
+
     }
     return _AreaCodes;
 }
@@ -81,6 +82,7 @@
     [super viewDidLoad];
     
     
+      _tableView.allowsSelection = NO;
       _tableView.rowHeight = 44;
     
     NSMutableArray *cells = [NSMutableArray array];
@@ -90,11 +92,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         _AreaCodeTextField = [[XTextField alloc] init];
-         NSString *lang =[InternationalControl userLanguage];
-        _AreaCodeTextField.text = GDLocalizedString(@"LoginVC-china");
-        if ([lang containsString:GDLocalizedString(@"ch_Language")]) {
-            _AreaCodeTextField.text = GDLocalizedString(@"LoginVC-english");
-        }
+        _AreaCodeTextField.text = @"中国(+86)";
         _AreaCodeTextField.inputView = self.piker;
         [cell addSubview:_AreaCodeTextField];
         [cells addObject:cell];
@@ -117,6 +115,7 @@
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
         [self.VertificationButton addTarget:self action:@selector(SendVertificationCode:) forControlEvents:UIControlEventTouchUpInside];
         [self.VertificationButton setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        [self.VertificationButton setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateDisabled];
         [cell addSubview:self.VertificationButton];
         [cell addSubview:_VertificationTextField];
         [cells addObject:cell];
@@ -127,7 +126,6 @@
         _PasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-loginPasswd")];
         _PasswordTextField.frame = CGRectMake(20, 11, _tableView.frame.size.width - 20 * 2.0f, _tableView.rowHeight - 11 * 2.0f);
         _PasswordTextField.returnKeyType = UIReturnKeyDone;
-//         _PasswordTextField.keyboardType = UIKeyboardTypeDefault;
         [cell addSubview:_PasswordTextField];
         [cells addObject:cell];
     }
@@ -159,22 +157,102 @@
 }
 
 
+//提交修改手机号
 - (void)done {
     
-    if(_PhoneTextField.text.length == 0)
-    {
-        AlerMessage(_PhoneTextField.placeholder);
-         return ;
-    }
     
-    if (![self checkPhoneTextField]) {
+    
+    
+    NSString *nomalError = @"手机号码格式错误";
+    
+    
+    if (_PhoneTextField.text.length == 0) {
+        
+        AlerMessage(@"手机号码不能为空");
+        
         return ;
     }
     
+    
+    if ([_AreaCodeTextField.text containsString:@"86"]) {
+        
+        NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        if (![firstChar isEqualToString:@"1"]) {
+            
+            errorStr = @"请输入“1”开头的11位数字";
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }else if(_PhoneTextField.text.length != 11){
+            
+            errorStr = nomalError;
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }
+        
+    }
+    
+    
+    if ([_AreaCodeTextField.text containsString:@"44"]) {
+        
+        NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        
+        if (![firstChar isEqualToString:@"7"]) {
+            
+            errorStr = @"请输入“7”开头的10位数字";
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }else if(_AreaCodeTextField.text.length != 10){
+            
+            errorStr = nomalError;
+            
+            AlerMessage(errorStr);
+            
+            return;
+        }
+        
+    }
+    
+    
+    if ([_AreaCodeTextField.text containsString:@"60"] && (_PhoneTextField.text.length > 9 || _PhoneTextField.text.length < 7) ) {
+        
+        AlerMessage(nomalError);
+        
+        return;
+        
+    }
+    
+    
     if (_VertificationTextField.text.length==0) {
         
-        AlerMessage(_VertificationTextField.placeholder);
-
+        AlerMessage(@"验证码不能为空");
+        
+        return ;
+    }
+    
+    
+    
+    if (_PasswordTextField.text.length == 0) {
+        
+        AlerMessage(_PasswordTextField.placeholder);
+        
+        return ;
+    }
+    
+    
+    if(_PasswordTextField.text.length < 6 || _PasswordTextField.text.length >16)
+    {   //@"密码长度不小于6个字符"
+        AlerMessage(GDLocalizedString(@"Person-passwd"));
         
         return ;
     }
@@ -257,41 +335,100 @@
 
 
 
--(BOOL)checkPhoneTextField
-{
-    //"中国";
-    if ([_AreaCodeTextField.text containsString:GDLocalizedString(@"LoginVC-chinese")] && _PhoneTextField.text.length != 11) {
-        
-        AlerMessage(GDLocalizedString(@"LoginVC-PhoneNumberError"));
-        
-        return NO;
-    }else if ([_AreaCodeTextField.text containsString:GDLocalizedString(@"LoginVC-england")] && _PhoneTextField.text.length != 10) {
-       //"英国";
-        AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError"));
-         return NO;
-    }else{
-        return YES;
-    }
-}
-
 
 //发送验证码
 -(void)SendVertificationCode:(UIButton *)sender
 {
- 
     
-    if (![self checkPhoneTextField]) {
+    NSString *nomalError = @"手机号码格式错误";
+    
+    
+    if (_PhoneTextField.text.length == 0) {
+        
+        AlerMessage(@"手机号码不能为空");
+        
         return ;
     }
     
-    NSString *AreaCode =@"86";
-    if([_AreaCodeTextField.text containsString:@"44"])//@"英国"])
-    {
-        AreaCode =@"44";
-     }
+    
+    if ([_AreaCodeTextField.text containsString:@"86"]) {
+        
+        NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        if (![firstChar isEqualToString:@"1"]) {
+            
+            errorStr = @"请输入“1”开头的11位数字";
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }else if(_PhoneTextField.text.length != 11){
+            
+            errorStr = nomalError;
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }
+        
+    }
+    
+    
+    if ([_AreaCodeTextField.text containsString:@"44"]) {
+        
+        NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        
+        if (![firstChar isEqualToString:@"7"]) {
+            
+            errorStr = @"请输入“7”开头的10位数字";
+            
+            AlerMessage(errorStr);
+            
+            return;
+            
+        }else if(_AreaCodeTextField.text.length != 10){
+            
+            errorStr = nomalError;
+            
+            AlerMessage(errorStr);
+            
+            return;
+        }
+        
+    }
+    
+    
+    if ([_AreaCodeTextField.text containsString:@"60"] && (_PhoneTextField.text.length > 9 || _PhoneTextField.text.length < 7) ) {
+        
+        AlerMessage(nomalError);
+        
+        return;
+        
+    }
+    
+    
+    NSString *areaCode;
+    
+    if ([_AreaCodeTextField.text containsString:@"44"]) {
+        
+        areaCode = @"44";
+        
+    }else if( [_AreaCodeTextField.text containsString:@"60"]){
+        
+        areaCode = @"60";
+        
+    }else{
+        
+        areaCode = @"86";
+    }
+
+ 
     
     self.VertificationButton.enabled = NO;
-     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"phone", @"phonenumber":_PhoneTextField.text, @"target": _PhoneTextField.text, @"mobile_code": AreaCode} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"phone", @"phonenumber":_PhoneTextField.text, @"target": _PhoneTextField.text, @"mobile_code": areaCode} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDownTimer) userInfo:nil repeats:YES];
          self.verifyCodeColdDownCount = 60;
@@ -309,10 +446,10 @@
 - (void)runVerifyCodeColdDownTimer {
     self.verifyCodeColdDownCount--;
     if (self.verifyCodeColdDownCount > 0) {
-        [self.VertificationButton setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
+        [self.VertificationButton setTitle:[NSString stringWithFormat:@"%@%ds",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount] forState:UIControlStateNormal];
     } else {
         self.VertificationButton.enabled = YES;
-        [ self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
+        [self.VertificationButton setTitle:@"重新发送"  forState:UIControlStateNormal];
         [self.verifyCodeColdDownTimer invalidate];
         self.verifyCodeColdDownTimer = nil;
     }
@@ -323,9 +460,7 @@
     const CGFloat xInset = 20, yInset = 11;
     
     _AreaCodeTextField.frame = CGRectMake(xInset, yInset, _tableView.frame.size.width - xInset * 2.0f, _tableView.rowHeight - yInset * 2.0f);
-    
-    _PhoneTextField.frame =_AreaCodeTextField.frame; //CGRectMake(xInset, yInset, _tableView.frame.size.width - xInset * 2.0f, _tableView.rowHeight - yInset * 2.0f);
-    
+    _PhoneTextField.frame =_AreaCodeTextField.frame;
     _VertificationTextField.frame = CGRectMake(xInset, yInset, _tableView.frame.size.width - xInset * 2.0f - 100, _tableView.rowHeight - yInset * 2.0f);
     
 }

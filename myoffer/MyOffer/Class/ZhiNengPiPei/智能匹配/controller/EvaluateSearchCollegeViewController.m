@@ -99,13 +99,12 @@
     [rightBtn addTarget:self action:@selector(commitInput) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height, XScreenWidth, XScreenHeight)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height, XScreenWidth, XScreenHeight - XNav_Height)];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//     self.footView.backgroundColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0]; //[UIColor colorWithRed:230/255 green:230/255 blue:238/255 alpha:1.0];
     self.tableView.tableFooterView = [[UIView alloc] init];
-     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     
 }

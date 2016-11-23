@@ -167,10 +167,11 @@
         errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"%@ %d",GDLocalizedString(@"NetRequest-SeverError") ,(int)error.code];//服务器错误
 
      } else {
-        errorMessage = GDLocalizedString(@"NetRequest-connectError");//@"网络请求失败，请检查网络连接后重试。";
+         
+        errorMessage = @"网络请求失败，请检查网络连接后重试。";
     }
     
-    NSString *errorTitle =GDLocalizedString(@"NetRequest-ErrorTitle") ;//@"错误";
+    NSString *errorTitle = @"错误";
     
     if ([[KDAlertView presentingAlertView].title isEqualToString:errorTitle] &&
         [[KDAlertView presentingAlertView].message isEqualToString:errorMessage]) {
@@ -273,7 +274,7 @@
 
     if (![self checkNetWorkReaching]) {
         
-        [KDAlertView showMessage:GDLocalizedString(@"NetRequest-noNetWork")  cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
+        AlerMessage(@"当前网络不可用，请检查网络");
         
      }
 

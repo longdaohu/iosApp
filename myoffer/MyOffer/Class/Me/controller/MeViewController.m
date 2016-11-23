@@ -141,8 +141,6 @@ typedef enum {
             weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
             
         }];
-
-        
         
         
     }else{
@@ -271,7 +269,7 @@ typedef enum {
     
     switch (type) {
         case CenterClickItemTypePipei:
-//            [self CasePipei];
+            [self CasePipei];
             break;
         case CenterClickItemTypeFavor:
             [self CaseFavoriteUniversity];

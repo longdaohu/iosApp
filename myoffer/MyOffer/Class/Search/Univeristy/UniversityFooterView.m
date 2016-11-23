@@ -49,7 +49,7 @@
         self.rateBtn = rateBtn;
         rateBtn.titleLabel.font = XFONT(XPERCENT * 14);
         
-        UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentCenter];
+        UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         showLab.hidden = YES;
         showLab.numberOfLines = 0;
         self.showLab = showLab;
@@ -93,7 +93,7 @@
     NSString *showStri =  [NSString stringWithFormat:@"%@\n%@",offerStr,levelStr];
     NSRange showRange = NSMakeRange(0, offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
-    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_WHITE  range:showRange];
+    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
     self.showLab.attributedText = attr;
     
     

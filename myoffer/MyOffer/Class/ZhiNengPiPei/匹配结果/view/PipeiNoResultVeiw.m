@@ -18,9 +18,9 @@
 @implementation PipeiNoResultVeiw
 + (instancetype)viewWithActionBlock:(PipeiNoResultVeiwBlock)actionBlock{
 
-    PipeiNoResultVeiw *noDataView = [[PipeiNoResultVeiw alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - 64)];
-
-    noDataView.actionBlock = actionBlock;
+     PipeiNoResultVeiw *noDataView = [[PipeiNoResultVeiw alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height)];
+    
+     noDataView.actionBlock = actionBlock;
     
     return noDataView;
 }
@@ -71,11 +71,13 @@
     CGSize contentSize  = self.bounds.size;
     
     UIImage *logoImage = XImage(@"pipeiNoData");
+    
     CGFloat logoX = 0;
-    CGFloat logoW = contentSize.width - 2 * logoX;
-    CGFloat logoH = logoImage.size.height  * logoImage.size.width / logoW;
+    CGFloat logoW = contentSize.width;
+    CGFloat logoH = logoImage.size.height * logoW / logoImage.size.width;
     CGFloat logoY = contentSize.height - logoH;
     self.logoView.frame = CGRectMake(logoX, logoY, logoW, logoH);
+    
     
     
     CGSize contentLabSize = [self.contentLab.text boundingRectWithSize:CGSizeMake(contentSize.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:Content_FontSize]} context:nil].size;
