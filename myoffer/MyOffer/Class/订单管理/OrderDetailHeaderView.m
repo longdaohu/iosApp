@@ -116,6 +116,8 @@
     CGFloat bgH = CGRectGetMaxY(self.orderNoLab.frame) + 10;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     self.headHeight = CGRectGetMaxY(self.bgView.frame);
+    
+    self.orderDetailBtn.hidden = order.SKUs.count == 0;
 
     
 }

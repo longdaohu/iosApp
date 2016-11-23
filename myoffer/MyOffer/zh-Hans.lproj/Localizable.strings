@@ -356,8 +356,8 @@
 "LoginVC-keyWord" = "《myOffer用户协议》";
 "LoginVC-0011" = "请输入密码";
 "LoginVC-0012" = "重置密码";
-"LoginVC-0013" = "请等待";
-"LoginVC-0014" = "秒";
+"LoginVC-0013" = "请稍等";
+"LoginVC-0014" = "s";
 "LoginVC-icon" = "logo_CN";
 "LoginVC-moreOption" = "第三方登录";
 "LoginVC-china" = "中国(+86)";

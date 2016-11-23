@@ -9,8 +9,9 @@
 #import "PipeiEditCell.h"
 #import "XWGJKeyboardToolar.h"
 
-@interface PipeiEditCell ()<UITextFieldDelegate>
+@interface PipeiEditCell ()<UITextFieldDelegate,KeyboardToolarDelegate>
 @property(nonatomic,strong)UIButton *sender;
+@property(nonatomic,strong)UIImageView *arrowView;
 @end
 
 @implementation PipeiEditCell
@@ -58,6 +59,12 @@
         tooler.delegate = self;
         self.contentTF.inputAccessoryView = tooler;
         
+        UIImageView *arrowView = [[UIImageView alloc] init];
+        arrowView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:arrowView];
+        arrowView.image = XImage(@"upDown");
+        arrowView.hidden = YES;
+        self.arrowView = arrowView;
     }
     
     return self;
@@ -76,6 +83,12 @@
     
     self.sender.frame = self.contentTF.frame;
     
+    CGFloat arrowH = contentH;
+    CGFloat arrowW = arrowH - 35;
+    CGFloat arrowY = 0;
+    CGFloat arrowX = CGRectGetMaxX(self.contentTF.frame) - arrowW - 10;
+    self.arrowView.frame = CGRectMake(arrowX, arrowY, arrowW, arrowH);
+    
 }
 
 -(void)setGroup:(PipeiGroup *)group{
@@ -86,11 +99,14 @@
     
     self.sender.hidden = !(group.groupType == PipeiGroupTypeUniversity);
     
+    self.arrowView.hidden = !(group.groupType == PipeiGroupTypeSubject);
+
     if (group.groupType == PipeiGroupTypeScorce) {
         
         [self.contentTF addTarget:self action:@selector(limitMaxScore:) forControlEvents:UIControlEventEditingChanged];
         
     }
+    
     
 }
 
@@ -124,13 +140,33 @@
 
 -(void)limitMaxScore:(UITextField *)textField
 {
-    CGFloat score = textField.text.floatValue;
     
-    if (score > 100) {
+    if ([textField.text containsString:@"."]) {
         
-        textField.text = @"100";
+        
+        NSRange pointRange = [textField.text rangeOfString:@"."];
+   
+        if (textField.text.length > (pointRange.location + pointRange.length + 2)) {
+            
+            NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, pointRange.location + pointRange.length + 2)];
+            textField.text  = shortStr;
+        }
+        
+        
+    }else{
+        
+        
+        if (textField.text.floatValue > 100) {
+            
+            textField.text = @"100";
+        }
+        
     }
+    
+  
 }
+
+
 
 #pragma mark ----KeyboardToolarDelegate
 -(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender

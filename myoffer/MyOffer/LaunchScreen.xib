@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-82-YO7"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginbg" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-82-YO7"/>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo white" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-vy-t1E">
                     <constraints>
                         <constraint firstAttribute="height" constant="131" id="bS0-QE-XuL"/>
@@ -34,8 +34,8 @@
         </view>
     </objects>
     <resources>
-        <image name="appImage.png" width="640" height="1136"/>
-        <image name="logo white" width="100" height="35"/>
+        <image name="loginbg" width="375" height="667"/>
+        <image name="logo white" width="200" height="76"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

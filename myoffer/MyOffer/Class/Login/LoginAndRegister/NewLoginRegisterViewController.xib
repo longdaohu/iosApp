@@ -29,6 +29,7 @@
                 <outlet property="arrow_right" destination="eXt-CU-opF" id="fB8-tb-siV"/>
                 <outlet property="backButton" destination="g0t-mA-W8p" id="bxS-TF-4fh"/>
                 <outlet property="commitLoginButton" destination="nPF-z4-pmg" id="2c1-Qf-uhC"/>
+                <outlet property="showPasswdBtn" destination="HwC-Tu-Gdc" id="N4K-JA-Cjo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="welcomeMV" destination="3f8-Ly-4h8" id="Wal-1s-tCQ"/>
                 <outlet property="xLoginRegistView" destination="0PA-h7-MFc" id="J8T-zM-cAD"/>
@@ -269,6 +270,9 @@
                                     </constraints>
                                     <state key="normal" title="Send code">
                                         <color key="titleColor" red="0.89019607840000003" green="0.050980392159999999" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <state key="disabled">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="SendVertificationCode:" destination="-1" eventType="touchUpInside" id="iR3-ny-ycB"/>

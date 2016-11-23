@@ -322,9 +322,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self makeHeaderView];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height + 30, 0);
     self.tableView.backgroundColor = XCOLOR_BG;
-    
+    self.tableView.showsVerticalScrollIndicator = NO;
 }
 
 
@@ -396,7 +396,7 @@
             
         }else if (group.groupType == PipeiGroupTypeScorce){
             
-            cell.contentTF.keyboardType = UIKeyboardTypeNumberPad;
+            cell.contentTF.keyboardType = UIKeyboardTypeDecimalPad;
         }
         
         return cell;
@@ -411,6 +411,11 @@
     
     EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
     search.valueBlock = ^(NSString *value){
+        
+        if (value.length == 0) {
+            
+            return ;
+        }
         
         PipeiEditCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
         cell.contentTF.text = value;
@@ -546,7 +551,7 @@
     
     UIEdgeInsets insets = self.tableView.contentInset;
     
-    insets.bottom = up ? keyboardEndFrame.size.height + XNav_Height : Bottom_Height;
+    insets.bottom = up ? keyboardEndFrame.size.height + XNav_Height : Bottom_Height + 30;
     
     self.tableView.contentInset = insets;
     

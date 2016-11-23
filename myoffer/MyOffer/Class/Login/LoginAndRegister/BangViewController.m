@@ -61,7 +61,7 @@
 
     if (!_area_arr) {
         
-        _area_arr = @[@"中国(+86)",@"英国(+44)"];
+        _area_arr = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
         
     }
     return _area_arr;
@@ -216,19 +216,83 @@
 
 //发送验证码
 - (void)sendVerification:(UIButton *)sender{
-     
-  
-    if (([self.areaFT.text containsString:@"86"] && self.phoneTF.text.length != 11) ||([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length != 10) ) {
+    
+    
+    NSString *nomalError = @"手机号码格式错误";
+    
+    if ([self.areaFT.text containsString:@"86"] && self.phoneTF.text.length != 11) {
+        
+        NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        if ([firstChar isEqualToString:@"1"]) {
+        
+            errorStr = @"请输入“1”开头的11位数字";
+            
+        }else{
+        
+            errorStr = nomalError;
+
+        }
+        
+        self.errorLab.text = errorStr;
         
         [self showError:YES];
         
         return;
     }
+  
+    if ([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length != 10) {
+        
+        NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+
+        if ([firstChar isEqualToString:@"7"]) {
+            
+            errorStr = @"请输入“7”开头的10位数字";
+            
+        }else{
+            
+            errorStr = nomalError;
+            
+        }
+
+        self.errorLab.text = errorStr;
+
+        [self showError:YES];
+        
+        return;
+    }
+    
+    
+    if ([self.areaFT.text containsString:@"60"] && self.phoneTF.text.length > 6 && self.phoneTF.text.length < 10) {
+        
+        self.errorLab.text = nomalError;
+        
+        [self showError:YES];
+        
+        return;
+    }
+
+    
     
     sender.enabled = NO;
     sender.layer.borderColor = XCOLOR_DARKGRAY.CGColor;
     
-    NSString *areaCode = [self.areaFT.text containsString:@"44"] ?@"44" : @"86";
+    NSString *areaCode;
+    
+    if ( [self.areaFT.text containsString:@"44"]) {
+    
+        areaCode = @"44";
+        
+    }else if( [self.areaFT.text containsString:@"60"]){
+    
+        areaCode = @"60";
+        
+    }else{
+        areaCode = @"86";
+    }
+    
+    
     
     NSString *phone = self.phoneTF.text;
     

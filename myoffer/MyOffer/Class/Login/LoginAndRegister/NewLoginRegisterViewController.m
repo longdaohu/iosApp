@@ -77,6 +77,9 @@
 @property(nonatomic,strong)UIButton *cover;
 
 @property (weak, nonatomic) IBOutlet UIImageView *arrow_right;
+@property (weak, nonatomic) IBOutlet UIButton *showPasswdBtn;
+
+
 
 @end
 
@@ -213,7 +216,6 @@
     self.ORlabel.text =GDLocalizedString(@"LoginVC-OR");
     [self.LoginSelectButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     [self.SignUpselectButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
-    
     self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
     self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");
     self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
@@ -319,6 +321,13 @@
         self.FocusMV.center = CGPointMake(sender.center.x, 38);
         
     }];
+    
+    
+    if ([sender.currentTitle isEqualToString:@"登录"] || self.RegisterPasswdTextF.secureTextEntry == NO) {
+        
+        [self showPassword:self.showPasswdBtn];
+    }
+    
 
 }
 
@@ -579,7 +588,7 @@
           
     } else {
         self.VertifButton.enabled = YES;
-        [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
+        [self.VertifButton setTitle:@"重新发送"  forState:UIControlStateNormal];
         [self.verifyCodeColdDownTimer invalidate];
         _verifyCodeColdDownTimer = nil;
     }
@@ -920,8 +929,9 @@
 
 - (IBAction)showPassword:(UIButton *)sender {
 
-     // 切换按钮的状态
+     // 切换按钮的状态   密码输入框是否显示明文
     sender.selected = !sender.selected;
+    
     self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
     NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
     [sender setImage:XImage(imageName) forState:UIControlStateNormal];
