@@ -167,8 +167,7 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iuy-OU-DAa">
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="Cop-jj-udq"/>
-                                        <constraint firstAttribute="height" constant="40" id="xtr-DZ-RHN"/>
+                                        <constraint firstAttribute="height" constant="40" id="CFV-mc-eOq"/>
                                     </constraints>
                                     <state key="normal" image="hidepassword"/>
                                     <connections>
@@ -180,14 +179,15 @@
                             <constraints>
                                 <constraint firstItem="kHD-Xp-v7j" firstAttribute="leading" secondItem="JGw-VM-8gA" secondAttribute="leading" id="46a-yA-GCX"/>
                                 <constraint firstAttribute="bottom" secondItem="kHD-Xp-v7j" secondAttribute="bottom" id="5b8-R9-xkl"/>
-                                <constraint firstItem="Iuy-OU-DAa" firstAttribute="centerY" secondItem="IzL-If-HVP" secondAttribute="centerY" id="7lF-1J-tls"/>
-                                <constraint firstAttribute="trailing" secondItem="Iuy-OU-DAa" secondAttribute="trailing" constant="15" id="8mo-ep-xIY"/>
                                 <constraint firstItem="kHD-Xp-v7j" firstAttribute="top" secondItem="JGw-VM-8gA" secondAttribute="bottom" constant="9" id="ARN-KO-PYV"/>
                                 <constraint firstAttribute="trailing" secondItem="kHD-Xp-v7j" secondAttribute="trailing" constant="15" id="AjP-VJ-VkC"/>
                                 <constraint firstAttribute="trailing" secondItem="eqT-Tu-3YP" secondAttribute="trailing" constant="60" id="Bru-Ig-ks2"/>
                                 <constraint firstItem="kHD-Xp-v7j" firstAttribute="top" secondItem="eqT-Tu-3YP" secondAttribute="bottom" id="CpK-Cj-swL"/>
                                 <constraint firstAttribute="height" constant="44" id="Jpi-nZ-OTH"/>
                                 <constraint firstItem="eqT-Tu-3YP" firstAttribute="leading" secondItem="JGw-VM-8gA" secondAttribute="trailing" constant="15" id="Qj4-Wa-EhC"/>
+                                <constraint firstItem="Iuy-OU-DAa" firstAttribute="leading" secondItem="eqT-Tu-3YP" secondAttribute="trailing" id="aYs-Ho-yiG"/>
+                                <constraint firstItem="Iuy-OU-DAa" firstAttribute="centerY" secondItem="IzL-If-HVP" secondAttribute="centerY" id="nma-rt-2cP"/>
+                                <constraint firstAttribute="trailing" secondItem="Iuy-OU-DAa" secondAttribute="trailing" constant="15" id="qQF-hj-QIs"/>
                                 <constraint firstItem="eqT-Tu-3YP" firstAttribute="top" secondItem="IzL-If-HVP" secondAttribute="top" id="woe-yK-7fu"/>
                                 <constraint firstItem="kHD-Xp-v7j" firstAttribute="leading" secondItem="IzL-If-HVP" secondAttribute="leading" constant="15" id="zjf-Kk-fYu"/>
                             </constraints>

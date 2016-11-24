@@ -161,6 +161,7 @@
     self.LoginPhoneNumberTextF.delegate = self;
     self.LoginPasswdTextF.delegate = self;
     self.RegisterPasswdTextF.delegate = self;
+    [self.LoginPasswdTextF addTarget:self action:@selector(loginPasswordValueChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 
@@ -349,15 +350,32 @@
   
     if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
         
+        
         self.xLoginView.hidden = YES;
         self.FocusMV.center = CGPointMake(XScreenWidth*0.75,38);
         
     }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
         
+
+        
+        
         self.xRegisterView.hidden = YES;
         self.FocusMV.center = CGPointMake(XScreenWidth*0.25,38);
         
     }else{
+        
+        
+        self.LoginPasswdTextF.text = @"";
+        self.LoginPhoneNumberTextF.text = @"";
+
+        
+        self.RegisterPhoneTextF.text = @"";
+        self.RegisterVerTextF.text = @"";
+        self.RegisterPasswdTextF.text = @"";
+        self.VertifButton.enabled = YES;
+        [self.VertifButton setTitle:@"获取验证码"  forState:UIControlStateNormal];
+        [self.verifyCodeColdDownTimer invalidate];
+        _verifyCodeColdDownTimer = nil;
         
         self.xLoginView.hidden = NO;
         self.xRegisterView.hidden = NO;
@@ -390,15 +408,21 @@
 - (IBAction)LoginButtonCommit:(id)sender {
     
  
+    if (![self checkNetworkState]) {
+        
+        return;
+    }
+    
+    
     if (self.LoginPhoneNumberTextF.text.length == 0) {
         
-         AlerMessage(GDLocalizedString(@"LoginVC-004"));
+         AlerMessage(@"手机号码不能为空");
         
         return;
     }
     if (self.LoginPasswdTextF.text.length == 0) {
         
-        AlerMessage(GDLocalizedString(@"LoginVC-0011"));
+        AlerMessage(@"密码不能为空");
         
         return;
     }
@@ -407,7 +431,7 @@
      startAPIRequestWithSelector:kAPISelectorLogin
      parameters:@{@"username":self.LoginPhoneNumberTextF.text , @"password": self.LoginPasswdTextF.text}
      success:^(NSInteger statusCode, NSDictionary *response) {
-         
+  
          [self LoginSuccessWithResponse:response];
   
      }];
@@ -426,11 +450,11 @@
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
     
+
+    
     if (phone.length == 0) {
         
         [self.view endEditing:YES];
-        
-//        [self coverShow:YES];
         
     }else{
         
@@ -811,7 +835,8 @@
     
 }
 
-#pragma  Mark  ——————————UITextFieldDelegate
+#pragma mark ——— UITextFieldDelegate
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
     return YES;
@@ -829,195 +854,23 @@
         
     }else if (textField == self.RegisterPasswdTextF)
     {
-//        [self.RegisterRepwdTextF becomeFirstResponder];
         [self RegisterButtonCommitPressed:nil];
 
     }
-//    else if (textField == self.RegisterRepwdTextF)
-//    {
-//        [self RegisterButtonCommitPressed:nil];
-//    }
+ 
     
     return YES;
 }
 
 
-/*
-
-#pragma mark ————————  YourPhoneViewDelegate
--(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
-{
-    if (11 == sender.tag) {
-        [self backAndLogout];
-        [self coverShow:NO];
-    }else if(10 == sender.tag){
-        [self sendVerifyCode];
-    }else{
-        [self CommitVerifyCode];
-    }
-    
-}
-
-
-// 提交验证码
--(void)CommitVerifyCode
-{
-    
-    if (![self checkPhoneTextField]) {
-        
-        return ;
-    }
-    
-    if (self.PhoneView.VerifyTF.text.length==0) {
-        
-         AlerMessage(GDLocalizedString(@"LoginVC-007"));
-        
-        return ;
-    }
-    
-    
-    NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];
-    [infoParameters setValue:self.PhoneView.countryCode.text forKey:@"mobile_code"];
-    [infoParameters setValue:self.PhoneView.PhoneTF.text forKey:@"phonenumber"];
-    [infoParameters setValue:@{@"code":self.PhoneView.VerifyTF.text} forKey:@"vcode"];
-    
-    
-    [self startAPIRequestWithSelector:@"POST api/account/updatephonenumber"
-                           parameters:@{@"accountInfo":infoParameters}
-                              success:^(NSInteger statusCode, id response) {
-                                  
-                                  [self dismiss];
-                                  
-                              }];
-    
-}
-
-
-// 发送验证码
--(void)sendVerifyCode
-{
-    
-    if (![self checkPhoneTextField]) {
-        
-        return ;
-    }
-    
-    
-    self.PhoneView.SendCodeBtn.enabled = NO;
-    
-    NSString *AreaNumber =  [ self.PhoneView.VerifyTF.text containsString:@"44"] ? @"44":@"86";
-    NSString *phoneNumber = self.PhoneView.PhoneTF.text;
-    
-    [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"phone", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": AreaNumber}   expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDownTimer2) userInfo:nil repeats:YES];
-        self.verifyCodeColdDownCount= 60;
-        
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        self.PhoneView.SendCodeBtn.enabled = YES;
-
-    }];
-    
-}
-
-
-//@"验证码倒计时"
-- (void)runVerifyCodeColdDownTimer2 {
-    
-    self.verifyCodeColdDownCount--;
-    if (self.verifyCodeColdDownCount > 0) {
-        [self.PhoneView.SendCodeBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
-    } else {
-        
-        self.PhoneView.SendCodeBtn.enabled = YES;
-        [self.PhoneView.SendCodeBtn setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
-        [self.verifyCodeColdDownTimer invalidate];
-        _verifyCodeColdDownTimer = nil;
-    }
-}
-
--(BOOL)checkPhoneTextField
-{
-    //"中国";
-    if ([self.PhoneView.countryCode.text containsString:@"86"] && self.PhoneView.PhoneTF.text.length != 11) {
-        
-         AlerMessage(GDLocalizedString(@"LoginVC-PhoneNumberError"));
-        
-        return NO;
-    }else if ([self.PhoneView.countryCode.text containsString:@"44"] && self.PhoneView.PhoneTF.text.length != 10) {
-        //"英国";
-        AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError"));
-         return NO;
-        
-    }else{
-        
-        return YES;
-    }
-}
- */
+ 
 - (void)caseBangding{
     
     [self.navigationController pushViewController:[[BangViewController alloc] init] animated:YES];
 }
 
-/*
-//手机号码编辑框出现隐藏
--(void)coverShow:(BOOL)show
-{
-    if (show) {
-        self.coverView.hidden = NO;
-    }else{
-        [self.view endEditing:YES];
-     }
-    
-    CGFloat coverAlpha = show ? 0.5 : 0;
-    CGFloat phoneViewAlpha = show ? 1 : 0;
-    CGRect  NewFrame =self.PhoneView.frame;
-    NewFrame.origin.y = show ? 100 + (XScreenWidth - 320)* 0.6 : XScreenHeight;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        self.cover.alpha = coverAlpha;
-        self.PhoneView.alpha =phoneViewAlpha;
-        self.PhoneView.frame = NewFrame;
-        
-    } completion:^(BOOL finished) {
-        
-        self.PhoneView.PhoneTF.text = @"";
-        self.PhoneView.VerifyTF.text = @"";
-        
-        if (!show) {
-            
-            self.coverView.hidden = YES;
-         }
-        
-    }];
-    
-}
 
- */
- 
-//退出登录
-//-(void)backAndLogout{
-//    
-//    if(LOGIN){
-//        
-//        [[AppDelegate sharedDelegate] logout];
-//        
-//        [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-//        
-//        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
-//        
-//        [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
-//            
-//            [self.navigationController popViewControllerAnimated:YES];
-//            
-//        }];
-//    }
-//    
-//        
-//}
+
 // 点击忘记密码
 - (IBAction)ForgetPasswdButtonPressed:(id)sender {
     
@@ -1033,6 +886,16 @@
     self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
     NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
     [sender setImage:XImage(imageName) forState:UIControlStateNormal];
+    
+}
+
+
+//监听登录密码输入位数
+- (void)loginPasswordValueChange:(UITextField *)textField{
+
+    if (textField.text.length > 16) {
+        textField.text = [textField.text substringWithRange:NSMakeRange(0, 16)];
+    }
     
 }
 

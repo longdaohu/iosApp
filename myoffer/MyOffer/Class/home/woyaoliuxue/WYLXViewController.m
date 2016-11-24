@@ -465,7 +465,7 @@ typedef enum {
             
         case FooterButtonTypePipei:
             
-            [self PageClickWithItemType:LiuxuePageClickItemTypePipei];
+            [self casePipei];
             
             break;
         case FooterButtonTypeLiuxue:
@@ -707,8 +707,6 @@ typedef enum {
 {
     self.clickType = LOGIN ? LiuxuePageClickItemTypeNoClick : type;
     
-    RequireLogin
-    
     switch (type) {
             
         case  LiuxuePageClickItemTypePipei:
@@ -717,8 +715,11 @@ typedef enum {
             
             break;
         case  LiuxuePageClickItemTypeWoyaoliuxue:
+        {
+            RequireLogin
             
             [self caseWoyaoliuxue];
+        }
             
             break;
             

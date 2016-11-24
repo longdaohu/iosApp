@@ -171,7 +171,6 @@
         
     }
     
-    
     if ([self.AreaTextF.text containsString:@"44"]) {
         
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
@@ -233,6 +232,11 @@
 - (BOOL)verifyRegisterFields {
     
     
+    if (![self checkNetworkState]) {
+        
+        return NO;
+    }
+    
     NSString *nomalError = @"手机号码格式错误";
     
     
@@ -292,15 +296,23 @@
     
     if (self.RegisterPasswdTextF.text.length == 0) {
         
-        AlerMessage(self.RegisterPasswdTextF.placeholder);
+        AlerMessage(@"密码不能为空");
+        
         return NO;
     }
     
     
     
-    if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
-    {   //@"密码长度不小于6个字符"
-        AlerMessage(GDLocalizedString(@"Person-passwd"));
+    if (self.RegisterPasswdTextF.text.length < 6) {
+        
+        
+        AlerMessage(@"密码不能少于6位字符");
+        return NO;
+    }
+    
+    if (self.RegisterPasswdTextF.text.length >16) {
+        
+        AlerMessage(@"密码不能多于16位字符");
         return NO;
     }
     
@@ -310,13 +322,6 @@
         AlerMessage(@"验证码不能为空");
         
          return NO;
-    }
-    
-    if (self.RegisterPasswdTextF.text.length == 0) {
-        
-        AlerMessage(self.RegisterPasswdTextF.placeholder);
-        
-        return NO;
     }
     
     

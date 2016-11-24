@@ -345,7 +345,6 @@
 - (void)caseSubmit:(UIButton *)sender{
     
     
-    
     if (([self.areaFT.text containsString:@"86"] && self.phoneTF.text.length != 11) ||([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length != 10) ) {
         
         [self showError:YES];
