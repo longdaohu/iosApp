@@ -89,15 +89,15 @@
     self.showLab.hidden = NO;
     self.rateBtn.hidden = YES;
 
-    NSString *offerStr = @"您获得Offer的概率为";
+    NSString *offerStr = @"你获得offer的难易度";
     NSString *showStri =  [NSString stringWithFormat:@"%@\n%@",offerStr,levelStr];
     NSRange showRange = NSMakeRange(0, offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
     [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
     self.showLab.attributedText = attr;
     
-    
 }
+
 
 -(void)layoutSubviews{
 

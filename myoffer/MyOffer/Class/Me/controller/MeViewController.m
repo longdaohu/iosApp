@@ -380,12 +380,13 @@ typedef enum {
 -(void)OptionButtonPressed:(UIButton *)optionButton
 {
     [MobClick event:@"apply_topStutas"];
-    RequireLogin
+    
     switch (optionButton.tag) {
         case OptionButtonTypeZineng:
-            [self centerPageClickWithItemType:CenterClickItemTypePipei];
+            [self CasePipei];
             break;
         default:
+            RequireLogin
             [self centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
             break;
     }
@@ -454,6 +455,7 @@ typedef enum {
     [MobClick event:@"apply_pipei"];
     
     if (!LOGIN) {
+        
         self.recommendationsCount = 0;
     }
     

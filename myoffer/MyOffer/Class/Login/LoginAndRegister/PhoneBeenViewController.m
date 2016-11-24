@@ -91,13 +91,13 @@
      self.phoneLoginBtn = phoneLoginBtn;
   
     
-    CGFloat serX = 20;
+    CGFloat serX = 0;
     CGFloat serW = XScreenWidth - serX;
     NSString *serviceStr = @"致电myoffer客服热线：4000666522";
     CGSize serviceSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat serH = serviceSize.height;
     CGFloat serY = XScreenHeight - serH - XNav_Height - 35;
-    UILabel *serviceLab = [UILabel labelWithFontsize:16 TextColor:XCOLOR_DARKGRAY  TextAlignment:NSTextAlignmentLeft];
+    UILabel *serviceLab = [UILabel labelWithFontsize:16 TextColor:XCOLOR_DARKGRAY  TextAlignment:NSTextAlignmentCenter];
     serviceLab.frame = CGRectMake(serX, serY, serW, serH);
     [self.view addSubview:serviceLab];
     self.serviceLab = serviceLab;

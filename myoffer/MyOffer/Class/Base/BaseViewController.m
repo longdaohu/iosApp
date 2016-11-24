@@ -161,6 +161,7 @@
 }
 
 - (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action {
+    
     NSString *errorMessage;
     if (error.domain == kAPIClientErrorDomain) {
         

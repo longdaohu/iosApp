@@ -96,10 +96,14 @@
     CGFloat areaY = 30;
     CGFloat areaW = 150;
     CGFloat areaH = 50;
-    UITextField *areaFT = [[UITextField alloc] initWithFrame:CGRectMake(areaX, areaY, areaW, areaH)];
-    areaFT.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
-    [self.view addSubview:areaFT];
-    [self cornerWithView:areaFT];
+    UIView *areaBgView = [[UIView alloc] initWithFrame:CGRectMake(areaX, areaY, areaW, areaH)];
+    [self.view addSubview:areaBgView];
+    areaBgView.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.3].CGColor;
+    areaBgView.layer.borderWidth =  1;
+    areaBgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+    
+    XTextField *areaFT = [[XTextField alloc] initWithFrame:CGRectMake(0, 10, areaW, 30)];
+    [areaBgView addSubview:areaFT];
     areaFT.text = @"中国(+86)";
     [self leftViewWithView:areaFT];
     [areaFT setFont:XFONT(Bang_FontSize)];
@@ -109,10 +113,10 @@
     areaFT.textAlignment = NSTextAlignmentCenter;
     areaFT.leftViewMode = UITextFieldViewModeNever;
     
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, areaH)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, 30)];
     areaFT.rightView = rightView;
     CGFloat arrowW = 20;
-    CGFloat arrowH = areaH;
+    CGFloat arrowH = 30;
     CGFloat arrowY = 0;
     CGFloat arrowX = 0;
     UIImageView *arrowView = [[UIImageView alloc] initWithFrame:CGRectMake( arrowX, arrowY, arrowW, arrowH)];;
@@ -121,7 +125,7 @@
     [rightView  addSubview:arrowView];
     
     
-    CGFloat phoneX = CGRectGetMaxX(areaFT.frame) + ITEM_MARGIN;
+    CGFloat phoneX = CGRectGetMaxX(areaBgView.frame) + ITEM_MARGIN;
     CGFloat phoneY = areaY;
     CGFloat phoneW = XScreenWidth - phoneX  - areaX;
     CGFloat phoneH = areaH;
@@ -135,9 +139,9 @@
     phoneTF.keyboardType =  UIKeyboardTypeNumberPad;
     [phoneTF addTarget:self action:@selector(textFiledValueChange:) forControlEvents:UIControlEventEditingChanged];
     
-    CGFloat errorX = phoneX + ITEM_MARGIN;
+    CGFloat errorX = areaX;
     CGFloat errorY = CGRectGetMaxY(phoneTF.frame) + 5;
-    CGFloat errorW = phoneW;
+    CGFloat errorW = XScreenWidth - areaX;
     CGFloat errorH = 20;
     UILabel *errorLab = [UILabel labelWithFontsize:Bang_FontSize TextColor:[UIColor redColor] TextAlignment:NSTextAlignmentLeft];
     errorLab.frame = CGRectMake(errorX, errorY, errorW, errorH);
@@ -147,7 +151,7 @@
     errorLab.alpha = 0;
     
     CGFloat verificationX = areaX;
-    CGFloat verificationY = CGRectGetMaxY(areaFT.frame) + 30;
+    CGFloat verificationY = CGRectGetMaxY(areaBgView.frame) + 30;
     CGFloat verificationW = phoneW;
     CGFloat verificationH = phoneH;
     UITextField *verificationTF = [[UITextField alloc] initWithFrame:CGRectMake(verificationX, verificationY, verificationW, verificationH)];
@@ -236,19 +240,18 @@
         
         NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || self.phoneTF.text.length != 11) {
         
             errorStr = @"请输入“1”开头的11位数字";
             
-        }else if(self.phoneTF.text.length != 11){
-        
-            errorStr = nomalError;
-
+            self.errorLab.text = errorStr;
+            
+            [self showError:YES];
+            
+            return;
+            
         }
         
-        self.errorLab.text = errorStr;
-        
-        [self showError:YES];
         
     }
   
@@ -257,19 +260,19 @@
         NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
 
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || self.phoneTF.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
-        }else if(self.phoneTF.text.length != 10){
+            self.errorLab.text = errorStr;
             
-            errorStr = nomalError;
+            [self showError:YES];
+            
+            return;
             
         }
 
-        self.errorLab.text = errorStr;
-
-        [self showError:YES];
+    
         
     }
     
@@ -279,17 +282,17 @@
         
         [self showError:YES];
         
-        
+         return;
+
     }
     
-    if (self.errorLab.alpha == 1) {
-        
-        return;
-    }
+ 
     
     
     sender.enabled = NO;
+    
     sender.layer.borderColor = XCOLOR_DARKGRAY.CGColor;
+    
     NSString *areaCode;
     
     if ( [self.areaFT.text containsString:@"44"]) {
@@ -359,9 +362,15 @@
     [self startAPIRequestWithSelector:@"POST api/account/updatephonenumber" parameters:@{@"accountInfo":infoParameters} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
+  
         
- 
+        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow   animated:YES];
+        [hud applySuccessStyle];
+        [hud setLabelText:@"合并成功"];
+        [hud hideAnimated:YES afterDelay:1];
+        
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -443,7 +452,7 @@
     }else if (self.verificationTF.text.length > 6 && self.verificationTF.isFirstResponder){
         
         self.verificationTF.text = textField.text.length > 6 ? [textField.text substringWithRange:NSMakeRange(0, 6)] : textField.text;
-        
+    
     }
     
     if (self.phoneTF.isFirstResponder && 1 == self.errorLab.alpha) {

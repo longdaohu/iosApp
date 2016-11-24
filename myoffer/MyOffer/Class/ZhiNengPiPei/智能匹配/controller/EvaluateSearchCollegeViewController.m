@@ -83,8 +83,8 @@
     searchTextField.placeholder = @"请输入在读或毕业院校";
     searchTextField.leftViewMode =  UITextFieldViewModeAlways;
     UIImageView  *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, searchTextField.bounds.size.height, 50)];
-    leftView.image = XImage(@"search_darkgrey");
-    leftView.contentMode = UIViewContentModeScaleAspectFit;
+    leftView.image = XImage(@"search-no-result");
+    leftView.contentMode = UIViewContentModeCenter;
     searchTextField.leftView = leftView;
     searchTextField.layer.cornerRadius = CORNER_RADIUS;
     searchTextField.backgroundColor = XCOLOR_WHITE;
@@ -132,7 +132,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [self universityName:self.resultList[indexPath.row]];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    NSString *item = self.resultList[indexPath.row];
+   
+    if ([item containsString:@"输入"])  return;
+    
+    [self universityName:item];
     
 }
 
@@ -145,6 +152,16 @@
 //正则表达匹配查询结果
 -(void)searchCollegeWithKeyValue:(UITextField *)searchTF
 {
+    
+    if ([self.searchTextField.text containsString:@" "]) {
+        
+        NSRange emptyRange = [searchTF.text rangeOfString:@" "];
+        
+        searchTF.text = [searchTF.text substringWithRange:NSMakeRange(0, emptyRange.location)];
+        
+    }
+    
+    
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
     
@@ -171,7 +188,6 @@
     
         NSString *regex = @"[\u4e00-\u9fa5]+";
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-        NSLog(@"999999999999  %d",[pred evaluateWithObject:self.searchTextField.text]);
         
         if ([pred evaluateWithObject:self.searchTextField.text]) {
             
@@ -179,7 +195,7 @@
 
         }else{
             
-            AlerMessage(@"不能包含中文以外的字符");
+            AlerMessage(@"请输入完整的中文院校名称");
         }
         
     }
@@ -190,7 +206,6 @@
 
 
 -(void)universityName:(NSString *)unversity{
-
 
     
     if (unversity && self.valueBlock) {

@@ -173,8 +173,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     if ([parameters isKindOfClass:[NSDictionary class]]) {
         
         NSMutableDictionary *newParameters = [NSMutableDictionary dictionary];
-    
-
+ 
         [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
             
              if ([key hasPrefix:@":"]) {

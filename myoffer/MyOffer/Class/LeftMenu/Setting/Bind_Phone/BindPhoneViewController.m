@@ -100,7 +100,7 @@
     
     {
         UITableViewCell *cell = [self cellDefault];
-        _PhoneTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-006")];
+        _PhoneTextField = [self textFieldCreateWithPlacehodler:@"请输入新手机号码"];
         _PhoneTextField.returnKeyType = UIReturnKeyNext;
         _PhoneTextField.keyboardType = UIKeyboardTypeNumberPad;
         [cell addSubview:_PhoneTextField];
@@ -109,7 +109,7 @@
     
     {
         UITableViewCell *cell = [self cellDefault];
-        _VertificationTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"LoginVC-007")];
+        _VertificationTextField = [self textFieldCreateWithPlacehodler:@"请输入验证码"];
         _VertificationTextField.keyboardType = UIKeyboardTypeNumberPad;
           self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(XScreenWidth - 120, 0, 100, 44)];
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
@@ -125,6 +125,7 @@
         UITableViewCell *cell = [self cellDefault];
         _PasswordTextField = [self textFieldCreateWithPlacehodler:GDLocalizedString(@"ChPasswd-loginPasswd")];
         _PasswordTextField.frame = CGRectMake(20, 11, _tableView.frame.size.width - 20 * 2.0f, _tableView.rowHeight - 11 * 2.0f);
+        _PasswordTextField.secureTextEntry = YES;
         _PasswordTextField.returnKeyType = UIReturnKeyDone;
         [cell addSubview:_PasswordTextField];
         [cells addObject:cell];
@@ -161,8 +162,6 @@
 - (void)done {
     
     
-    
-    
     NSString *nomalError = @"手机号码格式错误";
     
     
@@ -178,7 +177,7 @@
         
         NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || _PhoneTextField.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
             
@@ -186,15 +185,8 @@
             
             return;
             
-        }else if(_PhoneTextField.text.length != 11){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
-            
         }
+        
         
     }
     
@@ -204,7 +196,7 @@
         NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || _AreaCodeTextField.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -212,13 +204,6 @@
             
             return;
             
-        }else if(_AreaCodeTextField.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
         }
         
     }
@@ -355,7 +340,7 @@
         
         NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || _PhoneTextField.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
             
@@ -363,16 +348,7 @@
             
             return;
             
-        }else if(_PhoneTextField.text.length != 11){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
-            
         }
-        
     }
     
     
@@ -381,7 +357,7 @@
         NSString *firstChar = [_PhoneTextField.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || _AreaCodeTextField.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -389,13 +365,6 @@
             
             return;
             
-        }else if(_AreaCodeTextField.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
         }
         
     }

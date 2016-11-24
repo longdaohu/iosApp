@@ -216,7 +216,7 @@
     [self.LoginSelectButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     [self.SignUpselectButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
-    self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");
+    self.RegisterPhoneTextF.placeholder = @"请输入新手机号码";
     self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
     [self.RegisterCommitButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
@@ -554,20 +554,12 @@
         
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
             
             AlerMessage(errorStr);
 
-            return;
-            
-        }else if(self.RegisterPhoneTextF.text.length != 11){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
             return;
             
         }
@@ -581,7 +573,7 @@
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -589,13 +581,6 @@
             
             return;
             
-        }else if(self.RegisterPhoneTextF.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
         }
         
     }
@@ -717,17 +702,9 @@
         
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
-            
-            AlerMessage(errorStr);
-            
-            return NO;
-            
-        }else if(self.RegisterPhoneTextF.text.length != 11){
-            
-            errorStr = nomalError;
             
             AlerMessage(errorStr);
             
@@ -744,7 +721,7 @@
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -752,13 +729,6 @@
             
             return NO;
             
-        }else if(self.RegisterPhoneTextF.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return NO;
         }
         
     }

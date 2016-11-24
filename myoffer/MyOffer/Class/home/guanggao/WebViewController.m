@@ -16,10 +16,14 @@
 #import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
 #import "ServiceMallViewController.h"
+#import "IntelligentResultViewController.h"
 
 
 @interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)KDProgressHUD *hud;
+//智能匹配数量
+@property(nonatomic,assign)NSInteger recommendationsCount;
+
 @end
 
 @implementation WebViewController
@@ -38,6 +42,8 @@
     [MobClick beginLogPageView:[self page]];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    [self checkZhiNengPiPei];
     
 }
 
@@ -342,12 +348,41 @@
     
 }
 
+
+//判断是否有智能匹配数据或收藏学校
+-(void)checkZhiNengPiPei
+{
+    if (LOGIN) {
+        
+        XWeakSelf
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+        }];
+    }
+}
+
+
 //智能匹配 \ 测试成功率
 -(void)caseZhiNenPipei{
     
-    RequireLogin
+    if (!LOGIN) {
+        
+        self.recommendationsCount = 0;
+    }
     
-    [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+    
+    if (self.recommendationsCount > 0) {
+        
+        RequireLogin
+        
+        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
+        
+    }else{
+        
+        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+        
+    }
+
 }
 
 //推荐专业

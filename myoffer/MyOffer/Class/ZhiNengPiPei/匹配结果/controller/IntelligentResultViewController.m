@@ -318,7 +318,6 @@ typedef enum {
 -(void)DataSourseRequst
 {
     
-//    NSLog(@"fromStyle fromStyle %@",self.fromStyle);
     
     if (self.fromStyle.length > 0 || !self.hadLoadData) {
 

@@ -8,8 +8,12 @@
 
 #import "BaseViewController.h"
 
+typedef void(^PipeiEditViewControllerBlock)(NSString *);
+
 @interface PipeiEditViewController : BaseViewController
 //用于标识是否来自匹配结果页
 @property(nonatomic,assign)BOOL isfromPipeiResultPage;
+@property(nonatomic,copy)NSString *Uni_Country;
+@property(nonatomic,copy)PipeiEditViewControllerBlock actionBlock;
 
 @end

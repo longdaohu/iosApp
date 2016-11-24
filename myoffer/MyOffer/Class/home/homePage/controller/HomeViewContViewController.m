@@ -753,21 +753,12 @@
 //判断是否有智能匹配数据或收藏学校
 -(void)checkZhiNengPiPei
 {
-    
-    if (LOGIN) {
+     if (LOGIN) {
         XWeakSelf
-//        [self startAPIRequestUsingCacheWithSelector:kAPISelectorRequestCenter parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
-//            weakSelf.recommendationsCount = [response[@"recommendationsCount"] integerValue];
-//            
-//        }];
-        
-        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-            
-        }];
-        
-    }
+         [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+             weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+         }];
+     }
 }
 
 //退出登录

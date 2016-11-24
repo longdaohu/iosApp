@@ -315,8 +315,7 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwC-Tu-Gdc">
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="5U4-0b-w8D"/>
-                                        <constraint firstAttribute="width" constant="40" id="IyG-E5-w1N"/>
+                                        <constraint firstAttribute="height" constant="40" id="EUb-8v-Ga0"/>
                                     </constraints>
                                     <state key="normal" image="hidepassword"/>
                                     <connections>
@@ -327,17 +326,18 @@
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="g7d-ee-43o" secondAttribute="trailing" constant="15" id="9hP-De-20L"/>
-                                <constraint firstAttribute="trailing" secondItem="HwC-Tu-Gdc" secondAttribute="trailing" constant="15" id="AKz-ti-iFb"/>
                                 <constraint firstAttribute="height" constant="44" id="APu-rh-zZg"/>
                                 <constraint firstItem="7qC-Ft-GiX" firstAttribute="leading" secondItem="YMi-jN-dTy" secondAttribute="trailing" constant="15" id="HBz-XO-eXO"/>
-                                <constraint firstItem="HwC-Tu-Gdc" firstAttribute="centerY" secondItem="6jA-4W-qbL" secondAttribute="centerY" id="LSC-MR-v88"/>
                                 <constraint firstItem="7qC-Ft-GiX" firstAttribute="top" secondItem="6jA-4W-qbL" secondAttribute="top" id="RQu-Yt-A21"/>
                                 <constraint firstAttribute="trailing" secondItem="7qC-Ft-GiX" secondAttribute="trailing" constant="60" id="Rof-Es-TCw"/>
                                 <constraint firstItem="YMi-jN-dTy" firstAttribute="top" secondItem="6jA-4W-qbL" secondAttribute="top" constant="9" id="UBV-QV-czz"/>
+                                <constraint firstItem="HwC-Tu-Gdc" firstAttribute="leading" secondItem="7qC-Ft-GiX" secondAttribute="trailing" id="VA4-ZM-cVZ"/>
                                 <constraint firstItem="g7d-ee-43o" firstAttribute="leading" secondItem="6jA-4W-qbL" secondAttribute="leading" constant="15" id="W9s-ho-EmC"/>
                                 <constraint firstItem="YMi-jN-dTy" firstAttribute="leading" secondItem="6jA-4W-qbL" secondAttribute="leading" constant="15" id="Xux-WO-6qH"/>
                                 <constraint firstAttribute="bottom" secondItem="7qC-Ft-GiX" secondAttribute="bottom" id="cgj-5i-xu4"/>
                                 <constraint firstAttribute="bottom" secondItem="g7d-ee-43o" secondAttribute="bottom" id="fhu-BW-G9C"/>
+                                <constraint firstAttribute="trailing" secondItem="HwC-Tu-Gdc" secondAttribute="trailing" constant="15" id="g0K-Al-pfL"/>
+                                <constraint firstItem="HwC-Tu-Gdc" firstAttribute="centerY" secondItem="6jA-4W-qbL" secondAttribute="centerY" id="vch-w3-yxl"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QV-Ws-Xgx" userLabel="SeviceView">

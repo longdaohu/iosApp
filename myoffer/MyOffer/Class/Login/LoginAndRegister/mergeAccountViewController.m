@@ -195,14 +195,8 @@
     
     [self startAPIRequestWithSelector:@"POST api/account/merge"  parameters:@{@"that_account_id": self.response[@"that_account"][@"_id"], @"final_account_id":  self.selected_id}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow   animated:YES];
-        [hud applySuccessStyle];
-        [hud setLabelText:@"合并成功"];
-        [hud hideAnimated:YES afterDelay:1];
-        
+     
         [self.navigationController  pushViewController:[[mergeSuccessViewController alloc] init]  animated:YES];
-        
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         

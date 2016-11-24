@@ -159,17 +159,9 @@
         
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
-            
-            AlerMessage(errorStr);
-            
-            return;
-            
-        }else if(self.RegisterPhoneTextF.text.length != 11){
-            
-            errorStr = nomalError;
             
             AlerMessage(errorStr);
             
@@ -185,7 +177,7 @@
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -193,17 +185,9 @@
             
             return;
             
-        }else if(self.RegisterPhoneTextF.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return;
         }
         
     }
-    
     
     if ([self.AreaTextF.text containsString:@"60"] && (self.RegisterPhoneTextF.text.length > 9 || self.RegisterPhoneTextF.text.length < 7) ) {
         
@@ -264,7 +248,7 @@
         
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"]) {
+        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
             
             errorStr = @"请输入“1”开头的11位数字";
             
@@ -272,16 +256,7 @@
             
             return NO;
             
-        }else if(self.RegisterPhoneTextF.text.length != 11){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return NO;
-            
         }
-        
     }
     
     
@@ -291,7 +266,7 @@
         NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
         NSString *errorStr;
         
-        if (![firstChar isEqualToString:@"7"]) {
+        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
             
             errorStr = @"请输入“7”开头的10位数字";
             
@@ -299,13 +274,6 @@
             
             return NO;
             
-        }else if(self.RegisterPhoneTextF.text.length != 10){
-            
-            errorStr = nomalError;
-            
-            AlerMessage(errorStr);
-            
-            return NO;
         }
         
     }

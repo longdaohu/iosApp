@@ -4,7 +4,7 @@
 //
 //  Created by xuewuguojie on 2016/11/18.
 //  Copyright © 2016年 UVIC. All rights reserved.
-//
+
 
 #import "PipeiEditViewController.h"
 #import "XWGJSummaryView.h"
@@ -45,11 +45,13 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    if (self.submitBtnHadDone) {
-        
+    if (self.submitBtnHadDone && !self.Uni_Country) {
+            
         [self submit:self.submitBtn];
-        
+            
     }
+    
+    
 }
 
 
@@ -133,6 +135,7 @@
         [weakSelf configrationUIWithresponse:response];
         
     }];
+    
 }
 
 //提示页面
@@ -177,15 +180,16 @@
                     for (NSInteger index = 0; index < self.countryItems_CN.count; index++) {
                         
                         CountryItem *item = self.countryItems_CN[index];
-                        
-
+ 
                         if ([item.NOid isEqualToString:response[@"des_country"]]) {
                             
                             haveCountry = YES;
+                            
                             group.content = item.CountryName;
 
                             break;
                         }
+                        
                     }
                     
                     if (!haveCountry) {
@@ -219,7 +223,10 @@
             }
                 break;
             case PipeiGroupTypeScorce:
-                group.content = response[@"score"] ? [NSString stringWithFormat:@"%@",response[@"score"]] : @"";
+            {
+                NSString *item  =  [NSString stringWithFormat:@"%.2f",round([response[@"score"] floatValue]*100)/100];
+                group.content = response[@"score"] ? item : @"";
+            }
                 break;
             default:
                 break;
@@ -290,6 +297,12 @@
         if (!LOGIN) {
             country.content = @"英国";
         }
+        if (self.Uni_Country) {
+            
+            country.content = self.Uni_Country;
+            country.header = @"";
+        }
+        
         PipeiGroup *university = [PipeiGroup groupWithHeader: @"在读或毕业院校"  groupType:PipeiGroupTypeUniversity];
         PipeiGroup *subject = [PipeiGroup groupWithHeader: @"就读专业"  groupType:PipeiGroupTypeSubject];
         PipeiGroup *score = [PipeiGroup groupWithHeader: @"平均成绩（百分制）"  groupType:PipeiGroupTypeScorce];
@@ -329,6 +342,12 @@
 
 
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
+//超出cell的bounds范围，不能显示
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    cell.clipsToBounds = YES;
+}
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     PipeiSectionHeaderView *header = [[PipeiSectionHeaderView alloc] init];
@@ -347,7 +366,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return  50;
+    
+    if (self.Uni_Country) {
+     
+        return  section == 0 ? HEIGHT_ZERO  :  50;
+        
+    }else{
+    
+        return 50;
+    }
+   
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -357,7 +385,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return  50;
+    if (self.Uni_Country) {
+        
+        return  indexPath.row == 0 && indexPath.section == 0? HEIGHT_ZERO  :  50;
+        
+    }else{
+        
+        return 50;
+    }
+     
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -564,7 +601,8 @@
 //提交智能匹配数据
 - (void)submit:(UIButton *)sender{
     
-    
+    self.submitBtnHadDone = YES;
+
     for (PipeiGroup *group in self.groups) {
         
         if (0 == group.content.length) {
@@ -576,70 +614,129 @@
         }
     }
     
-    self.submitBtnHadDone = YES;
-    
     RequireLogin
- 
-    PipeiGroup *country = self.groups[0];
-    PipeiGroup *university = self.groups[1];
-    PipeiGroup *subject = self.groups[2];
-    PipeiGroup *score = self.groups[3];
- 
-    NSString *country_ID;
-    for (CountryItem *countyItem in self.countryItems_CN) {
+    
+    if (self.Uni_Country) {
         
-        if ([countyItem.CountryName isEqualToString:country.content]) {
+        
+        NSMutableString *pString = [NSMutableString string];
+        [pString  appendFormat:@"?"];
+        for (PipeiGroup *item in self.groups) {
+            switch (item.groupType) {
+                    
+                case PipeiGroupTypeCountry:
+                {
+                    NSString *country_ID;
+                    for (CountryItem *countyItem in self.countryItems_CN) {
+                        
+                        if ([countyItem.CountryName isEqualToString:item.content]) {
+                            
+                            country_ID = countyItem.NOid;
+                            
+                            break;
+                        }
+                        
+                    }
+                    
+                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"des_country=%@&",country_ID]];
+
+                }
+                    
+                    break;
+                case PipeiGroupTypeSubject:
+                {
+                
+                    NSString *subject_ID;
+                    for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
+                        
+                        if ([subjcetItem.subjectName isEqualToString:item.content]) {
+                            
+                            subject_ID = subjcetItem.NOid;
+                            
+                            break;
+                        }
+                    }
+                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"subject=%@&",subject_ID]];
+ 
+                }
+                    break;
+                case PipeiGroupTypeScorce:
+                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"score=%@&",item.content]];
+                    break;
+                case PipeiGroupTypeUniversity:
+                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"university=%@&",item.content]];
+                    break;
+                default:
+                    break;
+            }
             
-            country_ID = countyItem.NOid;
-            
-            break;
         }
+        
+        if (self.actionBlock) {
+            
+            NSString *path = [[pString substringWithRange:NSMakeRange(0, pString.length-1)] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            self.actionBlock(path);
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        return;
         
     }
     
-    
-    NSString *subject_ID;
-    for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
+        sender.enabled = NO;
+
+        PipeiGroup *country = self.groups[0];
+        PipeiGroup *university = self.groups[1];
+        PipeiGroup *subject = self.groups[2];
+        PipeiGroup *score = self.groups[3];
         
-        if ([subjcetItem.subjectName isEqualToString:subject.content]) {
+        NSString *country_ID;
+        for (CountryItem *countyItem in self.countryItems_CN) {
             
-            subject_ID = subjcetItem.NOid;
+            if ([countyItem.CountryName isEqualToString:country.content]) {
+                
+                country_ID = countyItem.NOid;
+                
+                break;
+            }
             
-            break;
         }
         
-    }
-
-    sender.enabled = NO;
-
-    NSDictionary *parameters =  @{@"des_country":country_ID,@"university":university.content,@"subject":subject_ID,@"score":score.content};
-    
-     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost parameters:parameters expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:^{
-         
-     } additionalSuccessAction:^(NSInteger statusCode, id response) {
-         
-         [self configrationWithResponse:response];
+        
+        NSString *subject_ID;
+        for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
+            
+            if ([subjcetItem.subjectName isEqualToString:subject.content]) {
+                
+                subject_ID = subjcetItem.NOid;
+                
+                break;
+            }
+         }
       
-         sender.enabled = YES;
-         self.submitBtnHadDone = NO;
-
-     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-         
-         sender.enabled = YES;
-         self.submitBtnHadDone = NO;
-
-     }];
+        
+        NSDictionary *parameters =  @{@"des_country":country_ID,@"university":university.content,@"subject":subject_ID,@"score":score.content};
+        
+        [self startAPIRequestWithSelector:@"POST api/v2/account/evaluate" parameters:parameters expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:^{
+            
+        } additionalSuccessAction:^(NSInteger statusCode, id response) {
+            
+            [self configrationWithResponse:response];
+            
+            sender.enabled = YES;
+            self.submitBtnHadDone = NO;
+            
+        } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+            
+            sender.enabled = YES;
+            self.submitBtnHadDone = NO;
+            
+        }];
+   
     
-//    [self
-//     startAPIRequestWithSelector:kAPISelectorZiZengPipeiPost
-//     parameters:parameters
-//     success:^(NSInteger statusCode, id response) {
-// 
-//         [self configrationWithResponse:response];
-//
-//     }];
-//    
-    
+   
 }
 
 //根据条件跳转页面

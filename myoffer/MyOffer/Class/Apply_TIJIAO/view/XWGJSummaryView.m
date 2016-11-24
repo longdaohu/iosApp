@@ -59,9 +59,11 @@
                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:LabFont]}
                                          context:NULL].size;
     
-    self.summaryLab.frame = CGRectMake(PADDING, ITEM_MARGIN, XScreenWidth - PADDING * 2, contentSize.height);
+    CGFloat sumY = [summary containsString:@"为你一键生成"] ? 30 : ITEM_MARGIN;
     
-    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height + 2 * ITEM_MARGIN);
+    self.summaryLab.frame = CGRectMake(PADDING, sumY, XScreenWidth - PADDING * 2, contentSize.height);
+    
+    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height + 2 * sumY);
 
     self.line.frame = CGRectMake(PADDING, CGRectGetMaxY(self.frame)-1, XScreenWidth - PADDING * 2, 1);
 }

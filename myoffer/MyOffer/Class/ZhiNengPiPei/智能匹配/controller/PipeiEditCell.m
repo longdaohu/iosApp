@@ -141,10 +141,30 @@
 -(void)limitMaxScore:(UITextField *)textField
 {
     
+    if (textField.text.length > 3) {
+        
+      NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, 3)];
+      
+        if ([shortStr isEqualToString:@"100"]) {
+            
+            textField.text = @"100";
+            
+        }
+    }
+    
+    
     if ([textField.text containsString:@"."]) {
         
+ 
+        NSArray *items = [textField.text componentsSeparatedByString:@"."];
         
         NSRange pointRange = [textField.text rangeOfString:@"."];
+
+        if (items.count > 2) {
+            
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, pointRange.length  + pointRange.location)];
+        }
+        
    
         if (textField.text.length > (pointRange.location + pointRange.length + 2)) {
             
@@ -154,7 +174,6 @@
         
         
     }else{
-        
         
         if (textField.text.floatValue > 100) {
             

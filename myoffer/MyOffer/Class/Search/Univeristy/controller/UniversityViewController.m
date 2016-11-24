@@ -67,6 +67,7 @@ typedef enum {
 @property(nonatomic,strong)ShareViewController   *shareVC;
 @property(nonatomic,strong)UniversityFooterView *footer;
 @property(nonatomic,strong)NSNumber *user_level;
+@property(nonatomic,assign)BOOL FromPipei;
 
 @end
 
@@ -82,7 +83,6 @@ typedef enum {
         
         self.user_level = @DefaultNumber;
     }
-    
     
     return self;
 }
@@ -102,7 +102,6 @@ typedef enum {
         [self userDidClickItem];
         
     }
-  
 }
 
 -(void)refesh{
@@ -138,7 +137,9 @@ typedef enum {
 {
          XWeakSelf
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+           
             [weakSelf  UnivertityClickType:self.clickType];
+            
         });
     
 }
@@ -170,19 +171,25 @@ typedef enum {
     
     [self makeUI];
     
-    
-    
 }
 
 //根据用户资料测试录取难易程度
 - (void)loadUserLevel{
     
+    if (self.FromPipei) {
+ 
+        return;
+    }
+    
+    
         XWeakSelf
+    
         NSString *path =[NSString stringWithFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
         
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
             
             [weakSelf caseLevelWithResponse:response];
+            
         }];
     
 }
@@ -674,7 +681,17 @@ typedef enum {
         
         if ( !LOGIN  ||  self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
             
-            [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+            self.FromPipei = YES;
+            
+            PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
+            pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
+            pipei.actionBlock = ^(NSString *pipei){
+                
+                [self pipeiLevelWithParameter:pipei];
+                
+            };
+            
+            [self.navigationController pushViewController:pipei  animated:YES];
             
         }else{
             
@@ -755,7 +772,7 @@ typedef enum {
     
     NSArray *values = [(NSDictionary *)response allValues];
     
-    NSLog(@"values values  values%ld",[values[0] integerValue]);
+    self.user_level = values[0];
     
     if ([values[0] integerValue] == -1) {
         
@@ -766,6 +783,26 @@ typedef enum {
 
     }
     
+}
+
+- (void)pipeiLevelWithParameter:(NSString *)pString{
+
+   
+    NSMutableString *path = [NSMutableString string];
+    
+    [path  appendFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
+    
+    [path  appendFormat:@"%@",pString];
+    XWeakSelf
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        NSArray *values = [(NSDictionary *)response allValues];
+        
+        weakSelf.footer.level = [values[0] integerValue];
+        
+        weakSelf.FromPipei = NO;
+
+    }];
     
 }
 
