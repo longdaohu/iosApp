@@ -241,8 +241,6 @@
 		AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A251D5B231200DD7939 /* SubjectItem.m */; };
 		AEA24A3B1D5B231300DD7939 /* InputAccessoryToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */; };
 		AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */; };
-		AEA24A3D1D5B231300DD7939 /* XprofileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */; };
-		AEA24A3E1D5B231300DD7939 /* XprofileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2E1D5B231300DD7939 /* XprofileTableViewCell.xib */; };
 		AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */; };
 		AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */; };
 		AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A531D5B23F500DD7939 /* HeadItem.m */; };
@@ -832,9 +830,6 @@
 		AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputAccessoryToolBar.h; sourceTree = "<group>"; };
 		AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputAccessoryToolBar.m; sourceTree = "<group>"; };
 		AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputAccessoryToolBar.xib; sourceTree = "<group>"; };
-		AEA24A2C1D5B231300DD7939 /* XprofileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XprofileTableViewCell.h; sourceTree = "<group>"; };
-		AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XprofileTableViewCell.m; sourceTree = "<group>"; };
-		AEA24A2E1D5B231300DD7939 /* XprofileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XprofileTableViewCell.xib; sourceTree = "<group>"; };
 		AEA24A4C1D5B23F500DD7939 /* HomeViewContViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewContViewController.h; sourceTree = "<group>"; };
 		AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewContViewController.m; sourceTree = "<group>"; };
 		AEA24A4F1D5B23F500DD7939 /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
@@ -2207,9 +2202,6 @@
 				AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */,
 				AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */,
 				AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */,
-				AEA24A2C1D5B231300DD7939 /* XprofileTableViewCell.h */,
-				AEA24A2D1D5B231300DD7939 /* XprofileTableViewCell.m */,
-				AEA24A2E1D5B231300DD7939 /* XprofileTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3240,7 +3232,6 @@
 				AE1FD7391D5C929500FFD5A8 /* Pre-comp 1_00021.png in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
-				AEA24A3E1D5B231300DD7939 /* XprofileTableViewCell.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
@@ -3444,7 +3435,6 @@
 				AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */,
 				AEA24A8F1D5B23F600DD7939 /* HomeHeaderView.m in Sources */,
 				AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */,
-				AEA24A3D1D5B231300DD7939 /* XprofileTableViewCell.m in Sources */,
 				AE7825E11D702AA400AA4EF4 /* UniversityNavView.m in Sources */,
 				AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
