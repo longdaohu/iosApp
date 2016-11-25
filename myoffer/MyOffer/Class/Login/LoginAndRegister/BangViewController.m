@@ -365,7 +365,7 @@
         
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow   animated:YES];
         [hud applySuccessStyle];
-        [hud setLabelText:@"合并成功"];
+        [hud setLabelText:@"账号绑定成功"];
         [hud hideAnimated:YES afterDelay:1];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];

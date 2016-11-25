@@ -236,7 +236,6 @@
 		AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A151D5B231200DD7939 /* ResultTableViewCell.m */; };
 		AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */; };
 		AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */; };
-		AEA24A361D5B231300DD7939 /* InteProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A1E1D5B231200DD7939 /* InteProfileViewController.m */; };
 		AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A211D5B231200DD7939 /* CountryItem.m */; };
 		AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A231D5B231200DD7939 /* GradeItem.m */; };
 		AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A251D5B231200DD7939 /* SubjectItem.m */; };
@@ -824,8 +823,6 @@
 		AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
 		AEA24A1A1D5B231200DD7939 /* EvaluateSearchCollegeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSearchCollegeViewController.h; sourceTree = "<group>"; };
 		AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateSearchCollegeViewController.m; sourceTree = "<group>"; };
-		AEA24A1D1D5B231200DD7939 /* InteProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteProfileViewController.h; sourceTree = "<group>"; };
-		AEA24A1E1D5B231200DD7939 /* InteProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteProfileViewController.m; sourceTree = "<group>"; };
 		AEA24A201D5B231200DD7939 /* CountryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryItem.h; sourceTree = "<group>"; };
 		AEA24A211D5B231200DD7939 /* CountryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryItem.m; sourceTree = "<group>"; };
 		AEA24A221D5B231200DD7939 /* GradeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeItem.h; sourceTree = "<group>"; };
@@ -2185,8 +2182,6 @@
 				AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */,
 				AED5A8581DDEF25800E70289 /* PipeiGroup.h */,
 				AED5A8591DDEF25800E70289 /* PipeiGroup.m */,
-				AEA24A1D1D5B231200DD7939 /* InteProfileViewController.h */,
-				AEA24A1E1D5B231200DD7939 /* InteProfileViewController.m */,
 				AE64A5441DCB4CC9004592B6 /* promptViewController.h */,
 				AE64A5451DCB4CC9004592B6 /* promptViewController.m */,
 			);
@@ -3400,7 +3395,6 @@
 				AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */,
 				AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */,
 				AEA249A71D5B215300DD7939 /* OrderDetailViewController.m in Sources */,
-				AEA24A361D5B231300DD7939 /* InteProfileViewController.m in Sources */,
 				AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */,
 				AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */,
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,

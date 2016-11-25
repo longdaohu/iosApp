@@ -217,7 +217,7 @@
     [self.LoginSelectButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     [self.SignUpselectButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
-    self.RegisterPhoneTextF.placeholder = @"请输入新手机号码";
+    self.RegisterPhoneTextF.placeholder = @"请输入手机号码";
     self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
     [self.RegisterCommitButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];

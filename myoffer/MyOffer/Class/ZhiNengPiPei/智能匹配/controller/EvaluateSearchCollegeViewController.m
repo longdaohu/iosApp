@@ -9,7 +9,6 @@
 #import "EvaluateSearchCollegeViewController.h"
 
 @interface EvaluateSearchCollegeViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UIView *topNavView;
 @property(nonatomic,strong)NSArray *schoolList;
 @property(nonatomic,strong)NSArray *resultList;
 @property(nonatomic,strong)UITableView *tableView;
@@ -52,14 +51,33 @@
     
     [self makeViewUI];
     
-    [self startAPIRequestWithSelector:@"GET docs/zh-cn/chinese-university-names.json" parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        self.schoolList = [response copy];
-        
-    }];
+    [self makeDataSource];
     
 }
 
+- (void)makeDataSource{
+
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    self.schoolList = [ud valueForKey:@"uni_list"];
+    
+    if (!self.schoolList.count) {
+        
+        [self startAPIRequestWithSelector:@"GET docs/zh-cn/chinese-university-names.json" parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            self.schoolList = [response copy];
+            
+            [ud setValue:self.schoolList forKey:@"uni_list"];//保存学校数据到本地，多次加载无意义
+            
+            [ud synchronize];
+            
+        }];
+        
+    }
+
+}
+
+//其实封装一下比较好
 -(void)makeViewUI
 {
     
@@ -105,7 +123,6 @@
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
-    
     
 }
 
@@ -163,11 +180,13 @@
     
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
+    
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
     
     if (self.resultList.count == 0 && searchTF.text.length > 0) {
 
         NSString *item = [NSString stringWithFormat:@"输入\" %@\" ",searchTF.text];
+        
         self.resultList = @[item];
     }
     
@@ -180,7 +199,7 @@
 -(void)commitInput
 {
     
-    if (self.searchTextField.text.length == 0) {
+    if ( 0 ==self.searchTextField.text.length) {
         
          [self universityName:self.searchTextField.text];
         
@@ -199,14 +218,11 @@
         }
         
     }
-
-    
     
 }
 
 
 -(void)universityName:(NSString *)unversity{
-
     
     if (unversity && self.valueBlock) {
         

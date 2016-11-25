@@ -9,7 +9,9 @@
 #import "PipeiCountryCell.h"
 #import "PipeiCountryView.h"
 @interface PipeiCountryCell ()
+//英国选项
 @property(nonatomic,strong)PipeiCountryView *uk;
+//澳大利亚选项
 @property(nonatomic,strong)PipeiCountryView *au;
 
 @end
@@ -101,6 +103,7 @@
  
 }
 
+//根据情况配置cell里的选项情况
 - (void)configrationUI:(NSString *)country{
    
     
@@ -117,7 +120,7 @@
     
     if (self.valueBlock) {
         
-        self.valueBlock([country isEqualToString:@"英国"] ? @"英国" :@"澳大利亚" );
+         self.valueBlock([country isEqualToString:@"英国"] ? @"英国" :@"澳大利亚" );
     }
     
 }

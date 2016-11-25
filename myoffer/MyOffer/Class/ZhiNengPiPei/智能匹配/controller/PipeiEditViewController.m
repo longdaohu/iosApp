@@ -22,11 +22,17 @@
 
 @interface PipeiEditViewController ()<UITableViewDelegate,UITableViewDataSource,PipeiEditCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
+//分组数组
 @property(nonatomic,strong)NSMutableArray *groups;
+//国家原始数据
 @property(nonatomic,strong)NSArray *countryItems_CN;
+//学科原始数据
 @property(nonatomic,strong)NSArray *subjectItems_CN;
+//学科Picker
 @property(nonatomic,strong)UIPickerView *subjectPicker;
+//用于标识正在编辑的Cell
 @property(nonatomic,strong)PipeiEditCell *editingCell;
+//提交按钮
 @property(nonatomic,strong)UIButton *submitBtn;
 //判断提交按钮是否被点击过
 @property(nonatomic,assign)BOOL submitBtnHadDone;
@@ -45,15 +51,15 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
+    //当提交按钮被点击后，如果用户登录后，回到当前页面时会重新加载点击事件
     if (self.submitBtnHadDone && !self.Uni_Country) {
-            
-        [self submit:self.submitBtn];
+      
+        LOGIN ? [self submit:self.submitBtn] : nil;
             
     }
     
     
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -72,17 +78,11 @@
     
     [self makeUI];
     
+    [self addNotification];
+    
     [self requestDataSource];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
+    XWeakSelf
     
     if (LOGIN) {
         
@@ -98,7 +98,7 @@
             
             if (!value) {
                 
-                [self prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
+                [weakSelf prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
                 
                 [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
                 
@@ -110,6 +110,71 @@
     }
 
     
+}
+
+- (void)makeUI{
+    
+    self.title = @"智能匹配";
+    
+    [self makeTableView];
+    
+    [self makeBottomView];
+    
+}
+
+- (void)makeBottomView{
+    
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, XScreenHeight - Bottom_Height, XScreenWidth, Bottom_Height)];
+    bottomView.backgroundColor = XCOLOR_BG;
+    [self.view addSubview:bottomView];
+    
+    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(PADDING_TABLEGROUP, 0, XScreenWidth - 2 * PADDING_TABLEGROUP, 50)];
+    [submitBtn setTitle:@"获取匹配结果" forState:UIControlStateNormal];
+    [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [submitBtn addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+    submitBtn.layer.cornerRadius = CORNER_RADIUS;
+    submitBtn.backgroundColor = XCOLOR_RED;
+    [bottomView addSubview:submitBtn];
+    self.submitBtn = submitBtn;
+    
+}
+
+//添加表头
+-(void)makeHeaderView
+{
+    XWGJSummaryView *headerView = [XWGJSummaryView ViewWithContent:@"myOffer通过REBAT大数据分析技术，运用独特TBDT算法，为你一键生成智能匹配方案。"];
+    headerView.line.hidden = NO;
+    self.tableView.tableHeaderView = headerView;
+}
+
+- (void)makeTableView {
+    
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.allowsSelection = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
+    [self makeHeaderView];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height + 30, 0);
+    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.showsVerticalScrollIndicator = NO;
+}
+
+
+//添加通知中心
+- (void)addNotification{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
 }
 
 //就读专业
@@ -144,6 +209,7 @@
     if (!_prompVC) {
         
         XWeakSelf
+        
         _prompVC = [[promptViewController alloc] initWithBlock:^{
             
             [weakSelf prompViewAppear:NO];
@@ -159,9 +225,8 @@
 
 
 
+//根据网络请求设置UI
 - (void)configrationUIWithresponse:(id)response{
-    
-    
     
     for (PipeiGroup *group in self.groups) {
         
@@ -169,11 +234,13 @@
                 
             case PipeiGroupTypeCountry:{
                 
+                
                 if (!response[@"des_country"]) {
                     
                     group.content  = @"英国";
                     
                 }else{
+                    
                     
                     BOOL haveCountry = NO;
                 
@@ -201,10 +268,15 @@
             }
                 
                 break;
+                
             case PipeiGroupTypeUniversity:
+                
                 group.content = response[@"university"];
+                
                 break;
+                
             case PipeiGroupTypeSubject:{
+                
                 
                 for (NSInteger index = 0; index < self.subjectItems_CN.count; index++) {
                     
@@ -223,10 +295,9 @@
             }
                 break;
             case PipeiGroupTypeScorce:
-            {
-                NSString *item  =  [NSString stringWithFormat:@"%.2f",round([response[@"score"] floatValue]*100)/100];
-                group.content = response[@"score"] ? item : @"";
-            }
+                
+                group.content = response[@"score"] ?  [NSString stringWithFormat:@"%.2f",round([response[@"score"] floatValue]*100)/100] : @"";
+            
                 break;
             default:
                 break;
@@ -241,7 +312,7 @@
 -(void)getSelectionResourse
 {
     
-    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     self.countryItems_CN = [[ud valueForKey:@"Country_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
                             {
@@ -259,33 +330,6 @@
 }
 
 
-- (void)makeUI{
-    
-    self.title = @"智能匹配";
-    
-    [self makeTableView];
-    
-    [self makeBottomView];
-    
-}
-
-- (void)makeBottomView{
-    
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, XScreenHeight - Bottom_Height, XScreenWidth, Bottom_Height)];
-    bottomView.backgroundColor = XCOLOR_BG;
-    [self.view addSubview:bottomView];
-    
-    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(PADDING_TABLEGROUP, 0, XScreenWidth - 2 * PADDING_TABLEGROUP, 50)];
-    [submitBtn setTitle:@"获取匹配结果" forState:UIControlStateNormal];
-    [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [submitBtn addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
-    submitBtn.layer.cornerRadius = CORNER_RADIUS;
-    submitBtn.backgroundColor = XCOLOR_RED;
-    [bottomView addSubview:submitBtn];
-    self.submitBtn = submitBtn;
-    
-    
-}
 
 -(NSMutableArray *)groups{
     
@@ -316,29 +360,6 @@
     return _groups;
 }
 
-
-//添加表头
--(void)makeHeaderView
-{
-    XWGJSummaryView *headerView = [XWGJSummaryView ViewWithContent:@"myOffer通过REBAT大数据分析技术，运用独特TBDT算法，为你一键生成智能匹配方案。"];
-    headerView.line.hidden = NO;
-    self.tableView.tableHeaderView = headerView;
-}
-
-- (void)makeTableView
-{
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
-    self.tableView.allowsSelection = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableView];
-    [self makeHeaderView];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height + 30, 0);
-    self.tableView.backgroundColor = XCOLOR_BG;
-    self.tableView.showsVerticalScrollIndicator = NO;
-}
 
 
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
@@ -377,25 +398,25 @@
     }
    
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.Uni_Country) {
+        
+        return  indexPath.section == 0 ? HEIGHT_ZERO  :  50;
+        
+    }else{
+        
+        return 50;
+    }
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return  self.groups.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (self.Uni_Country) {
-        
-        return  indexPath.row == 0 && indexPath.section == 0? HEIGHT_ZERO  :  50;
-        
-    }else{
-        
-        return 50;
-    }
-     
-    
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -405,19 +426,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    XWeakSelf
     PipeiGroup *group = self.groups[indexPath.section];
     
     if (group.groupType == PipeiGroupTypeCountry) {
         
         PipeiCountryCell *countryCell = [PipeiCountryCell cellWithTableView:tableView];
-        countryCell.valueBlock = ^(NSString *country){
         
+        countryCell.valueBlock = ^(NSString *country){
             
-            PipeiGroup *group = self.groups[0];
+            PipeiGroup *group = weakSelf.groups[0];
             
             group.content = country;
             
         };
+        
         countryCell.countryName = group.content;
         
         return countryCell;
@@ -425,11 +448,14 @@
     }else{
         
         PipeiEditCell *cell =[PipeiEditCell cellWithTableView:tableView];
+        
         cell.delegate = self;
+        
         cell.group =  group;
+        
         if (group.groupType == PipeiGroupTypeSubject) {
             
-            cell.contentTF.inputView = self.subjectPicker;
+            cell.contentTF.inputView = weakSelf.subjectPicker;
             
         }else if (group.groupType == PipeiGroupTypeScorce){
             
@@ -447,9 +473,10 @@
     [self.view endEditing:YES];
     
     EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
+    
     search.valueBlock = ^(NSString *value){
         
-        if (value.length == 0) {
+        if ( 0 == value.length) {
             
             return ;
         }
@@ -504,9 +531,8 @@
 
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-
     
-    if (sender.tag == 10 || indexPath.section == (self.groups.count - 1)) {
+    if ( 10 == sender.tag || indexPath.section == self.groups.count - 1) {
         
         [self.view endEditing:YES];
         
@@ -517,7 +543,6 @@
     NSIndexPath *nextIndex  = [NSIndexPath indexPathForRow:0 inSection:indexPath.section + 1];
     PipeiEditCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
     [nextCell.contentTF becomeFirstResponder];
-
     
     
 }
@@ -608,6 +633,7 @@
         if (0 == group.content.length) {
             
             NSString *aler = [NSString stringWithFormat:@"%@不能为空",group.header];
+            
             AlerMessage(aler);
             
             return;
@@ -616,83 +642,24 @@
     
     RequireLogin
     
+    //当从学校页面来到编辑智能匹配页面时，从if里进入
     if (self.Uni_Country) {
         
+        [self fromUniversitySubmit];
         
-        NSMutableString *pString = [NSMutableString string];
-        [pString  appendFormat:@"?"];
-        for (PipeiGroup *item in self.groups) {
-            switch (item.groupType) {
-                    
-                case PipeiGroupTypeCountry:
-                {
-                    NSString *country_ID;
-                    for (CountryItem *countyItem in self.countryItems_CN) {
-                        
-                        if ([countyItem.CountryName isEqualToString:item.content]) {
-                            
-                            country_ID = countyItem.NOid;
-                            
-                            break;
-                        }
-                        
-                    }
-                    
-                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"des_country=%@&",country_ID]];
-
-                }
-                    
-                    break;
-                case PipeiGroupTypeSubject:
-                {
-                
-                    NSString *subject_ID;
-                    for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
-                        
-                        if ([subjcetItem.subjectName isEqualToString:item.content]) {
-                            
-                            subject_ID = subjcetItem.NOid;
-                            
-                            break;
-                        }
-                    }
-                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"subject=%@&",subject_ID]];
- 
-                }
-                    break;
-                case PipeiGroupTypeScorce:
-                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"score=%@&",item.content]];
-                    break;
-                case PipeiGroupTypeUniversity:
-                    [pString  appendFormat:@"%@", [NSString stringWithFormat:@"university=%@&",item.content]];
-                    break;
-                default:
-                    break;
-            }
-            
-        }
         
-        if (self.actionBlock) {
-            
-            NSString *path = [[pString substringWithRange:NSMakeRange(0, pString.length-1)] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            
-            self.actionBlock(path);
-        }
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        return;
-        
-    }
+    }else{
     
+        
         sender.enabled = NO;
-
+        
         PipeiGroup *country = self.groups[0];
         PipeiGroup *university = self.groups[1];
         PipeiGroup *subject = self.groups[2];
         PipeiGroup *score = self.groups[3];
         
         NSString *country_ID;
+        
         for (CountryItem *countyItem in self.countryItems_CN) {
             
             if ([countyItem.CountryName isEqualToString:country.content]) {
@@ -701,11 +668,11 @@
                 
                 break;
             }
-            
         }
         
         
         NSString *subject_ID;
+        
         for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
             
             if ([subjcetItem.subjectName isEqualToString:subject.content]) {
@@ -714,8 +681,9 @@
                 
                 break;
             }
-         }
-      
+        }
+        
+        XWeakSelf
         
         NSDictionary *parameters =  @{@"des_country":country_ID,@"university":university.content,@"subject":subject_ID,@"score":score.content};
         
@@ -723,20 +691,100 @@
             
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
             
-            [self configrationWithResponse:response];
+            [weakSelf configrationWithResponse:response];
             
             sender.enabled = YES;
-            self.submitBtnHadDone = NO;
+            
+            weakSelf.submitBtnHadDone = NO;
             
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
             
             sender.enabled = YES;
-            self.submitBtnHadDone = NO;
+            
+            weakSelf.submitBtnHadDone = NO;
             
         }];
-   
+        
+    }
     
-   
+}
+
+
+//当从学校页面来到编辑智能匹配页面时，从if里进入
+-(void)fromUniversitySubmit{
+    
+    NSMutableString *pString = [NSMutableString string];
+    
+    [pString  appendFormat:@"?"];
+    
+    for (PipeiGroup *item in self.groups) {
+        
+        switch (item.groupType) {
+                
+            case PipeiGroupTypeCountry:
+            {
+                NSString *country_ID;
+                
+                for (CountryItem *countyItem in self.countryItems_CN) {
+                    
+                    if ([countyItem.CountryName isEqualToString:item.content]) {
+                        
+                        country_ID = countyItem.NOid;
+                        
+                        break;
+                    }
+                    
+                }
+                
+                [pString  appendFormat:@"%@", [NSString stringWithFormat:@"des_country=%@&",country_ID]];
+                
+            }
+                
+                break;
+                
+            case PipeiGroupTypeSubject:
+            {
+                
+                NSString *subject_ID;
+                
+                for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
+                    
+                    if ([subjcetItem.subjectName isEqualToString:item.content]) {
+                        
+                        subject_ID = subjcetItem.NOid;
+                        
+                        break;
+                    }
+                }
+                
+                [pString  appendFormat:@"%@", [NSString stringWithFormat:@"subject=%@&",subject_ID]];
+                
+            }
+                break;
+            case PipeiGroupTypeScorce:
+                
+                [pString  appendFormat:@"%@", [NSString stringWithFormat:@"score=%@&",item.content]];
+                
+                break;
+            case PipeiGroupTypeUniversity:
+                
+                [pString  appendFormat:@"%@", [NSString stringWithFormat:@"university=%@&",item.content]];
+                
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    if (self.actionBlock) {
+        
+        self.actionBlock([[pString substringWithRange:NSMakeRange(0, pString.length-1)] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
+    
 }
 
 //根据条件跳转页面
@@ -771,6 +819,7 @@
         
     }
     
+    XWeakSelf
     CGFloat prompTop = appear ? 0 : XScreenHeight;
     
     CGFloat prompAlpha = appear ? 1 : 0;
@@ -779,22 +828,22 @@
         
         if (!appear) {
             
-            [self.navigationController setNavigationBarHidden:NO];
+            [weakSelf.navigationController setNavigationBarHidden:NO];
             
         }
         
-        self.prompVC.view.top = prompTop;
-        self.prompVC.view.alpha = prompAlpha;
+        weakSelf.prompVC.view.top = prompTop;
+        weakSelf.prompVC.view.alpha = prompAlpha;
         
     } completion:^(BOOL finished) {
         
         if (!appear) {
             
-            [self.prompVC.view removeFromSuperview];
+            [weakSelf.prompVC.view removeFromSuperview];
             
         }else{
             
-            [self.navigationController setNavigationBarHidden:YES animated:NO];
+            [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
             
         }
         
@@ -803,7 +852,12 @@
     
 }
 
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+    KDClassLog(@"智能匹配 编辑 dealloc");
+}
 
 
 - (void)didReceiveMemoryWarning {

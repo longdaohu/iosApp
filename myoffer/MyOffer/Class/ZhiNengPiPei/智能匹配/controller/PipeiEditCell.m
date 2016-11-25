@@ -10,7 +10,9 @@
 #import "XWGJKeyboardToolar.h"
 
 @interface PipeiEditCell ()<UITextFieldDelegate,KeyboardToolarDelegate>
+//用于监听个别cell点击跳转事件
 @property(nonatomic,strong)UIButton *sender;
+//箭头图片
 @property(nonatomic,strong)UIImageView *arrowView;
 @end
 
@@ -36,7 +38,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        
+        //输入框
         UITextField *contentTF = [[UITextField alloc] init];
         contentTF.backgroundColor = XCOLOR_WHITE;
         contentTF.leftViewMode =  UITextFieldViewModeAlways;
@@ -49,20 +51,21 @@
         self.contentView.backgroundColor = XCOLOR_BG;
         self.contentTF.delegate = self;
         
+        //跳转按钮
         UIButton *sender = [[UIButton alloc] init];
         [sender addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
         self.sender = sender;
         [self.contentView addSubview:sender];
         
-        
+        //工具条
         XWGJKeyboardToolar *tooler =[[NSBundle mainBundle] loadNibNamed:@"XWGJKeyboardToolar" owner:self options:nil].lastObject;
         tooler.delegate = self;
         self.contentTF.inputAccessoryView = tooler;
         
-        UIImageView *arrowView = [[UIImageView alloc] init];
+        //箭头图片
+        UIImageView *arrowView = [[UIImageView alloc] initWithImage:XImage(@"upDown")];
         arrowView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:arrowView];
-        arrowView.image = XImage(@"upDown");
         arrowView.hidden = YES;
         self.arrowView = arrowView;
     }
@@ -110,6 +113,20 @@
     
 }
 
+#pragma mark ———  KeyboardToolarDelegate
+-(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
+{
+    
+    if ([self.delegate respondsToSelector:@selector(PipeiEditCell:didClick:)]) {
+        
+        [self.delegate PipeiEditCell:self didClick:sender];
+        
+    }
+    
+}
+
+
+#pragma mark ——— UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     
@@ -128,7 +145,7 @@
     }
 }
 
-
+//监听点击
 -(void)onClick{
     
     if ([self.delegate respondsToSelector:@selector(PipeiEditCellPush)]) {
@@ -138,66 +155,47 @@
     
 }
 
+//限制输入框字符输入
 -(void)limitMaxScore:(UITextField *)textField
 {
     
     if (textField.text.length > 3) {
         
-      NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, 3)];
-      
-        if ([shortStr isEqualToString:@"100"]) {
-            
-            textField.text = @"100";
-            
-        }
+        NSString *shortStr =  [textField.text substringWithRange:NSMakeRange(0, 3)];
+        
+        [shortStr  isEqualToString:@"100"] ?  textField.text = @"100" : nil;
+        
     }
-    
     
     if ([textField.text containsString:@"."]) {
         
- 
+        //分割字符串数组，当出现多个 . 字符时，字符串会被分割成多个数组，超过 2 个时，要删除多出来的 .
         NSArray *items = [textField.text componentsSeparatedByString:@"."];
         
         NSRange pointRange = [textField.text rangeOfString:@"."];
-
+        
         if (items.count > 2) {
             
             textField.text = [textField.text substringWithRange:NSMakeRange(0, pointRange.length  + pointRange.location)];
         }
         
-   
+        
         if (textField.text.length > (pointRange.location + pointRange.length + 2)) {
             
-            NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, pointRange.location + pointRange.length + 2)];
-            textField.text  = shortStr;
-        }
-        
+           NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, pointRange.location + pointRange.length + 2)];
+            
+           textField.text = shortStr;
+         }
         
     }else{
         
-        if (textField.text.floatValue > 100) {
-            
-            textField.text = @"100";
-        }
+        textField.text =  textField.text.floatValue > 100 ?  @"100" : textField.text;
         
     }
     
   
 }
 
-
-
-#pragma mark ----KeyboardToolarDelegate
--(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
-{
-    
-    if ([self.delegate respondsToSelector:@selector(PipeiEditCell:didClick:)]) {
-        
-        [self.delegate PipeiEditCell:self didClick:sender];
-        
-    }
-    
-}
 
 
 
