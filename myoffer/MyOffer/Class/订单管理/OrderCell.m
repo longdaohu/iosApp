@@ -102,8 +102,6 @@
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView addSubview:self.payBtn];
         
-   
-        
         self.contentView.backgroundColor = XCOLOR_BG;
     }
      return self;
@@ -150,8 +148,8 @@
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     
     CGFloat titleX = 15;
-    CGFloat titleY = 10;
-    CGFloat titleH = bgH * 0.2;
+    CGFloat titleY = 15;
+    CGFloat titleH = KDUtilSize(16);
     
     CGSize orderSize =[self.orderTitleLab.text  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
     CGFloat titleW = self.orderTitleLab.text ? orderSize.width :XScreenWidth - 120;
@@ -168,7 +166,7 @@
     CGFloat noX = titleX;
     CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
     CGFloat noW = XScreenWidth;
-    CGFloat noH = bgH * 0.1;
+    CGFloat noH = KDUtilSize(13);
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
 
     
@@ -184,11 +182,10 @@
     CGFloat cancelY = payY;
     self.cancelBtn.frame = CGRectMake(cancelX, cancelY, cancelW, cancelH);
     
-    
     CGFloat priceX = titleX;
-    CGFloat priceY = payY;
-    CGFloat priceW = XScreenWidth  - CGRectGetMinX(self.cancelBtn.frame) - priceX;
-    CGFloat priceH = payH;
+    CGFloat priceH = KDUtilSize(16);
+    CGFloat priceY = CGRectGetMaxY(self.orderNoLab.frame) + 5;
+    CGFloat priceW = XScreenWidth ;
     self.orderPriceLab.frame = CGRectMake(priceX, priceY, priceW, priceH);
     
     

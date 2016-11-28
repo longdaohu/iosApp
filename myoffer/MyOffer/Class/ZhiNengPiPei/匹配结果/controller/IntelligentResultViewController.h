@@ -14,8 +14,7 @@
 @property(nonatomic,assign)BOOL isComeBack;
 
 
-//用于标识是否来自匹配编辑页
-//@property(nonatomic,assign)BOOL isfromPipeiEdtingPage;
+//用于标识来自结果页的方式 push 或者  pop
 @property(nonatomic,copy)NSString *fromStyle;
 
 @end

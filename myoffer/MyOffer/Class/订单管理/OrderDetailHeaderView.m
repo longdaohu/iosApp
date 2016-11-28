@@ -7,13 +7,13 @@
 //
 
 #import "OrderDetailHeaderView.h"
-#import "HMTitleButton.h"
+//#import "HMTitleButton.h"
 
 @interface OrderDetailHeaderView ()
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UILabel *orderTitleLab;
 @property(nonatomic,strong)UILabel *orderNoLab;
-@property(nonatomic,strong)HMTitleButton *orderDetailBtn;
+//@property(nonatomic,strong)HMTitleButton *orderDetailBtn;
 
 @end
 
@@ -32,8 +32,7 @@
         self.bgView.layer.shadowOpacity = 0.2;
         self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-        [self.bgView addGestureRecognizer:tap];
+
         
 
         self.orderTitleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
@@ -43,7 +42,11 @@
         self.orderNoLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView  addSubview:self.orderNoLab];
 
-        
+        /*
+         
+         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+         [self.bgView addGestureRecognizer:tap];
+         
         self.orderDetailBtn = [[HMTitleButton alloc] init];
         self.orderDetailBtn.titleLabel.font = [UIFont systemFontOfSize:KDUtilSize(16)];
         [self.orderDetailBtn setTitle:@"套餐详情"  forState:UIControlStateNormal];
@@ -53,18 +56,19 @@
         [self.orderDetailBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView  addSubview:self.orderDetailBtn];
         [self.orderDetailBtn setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
- 
-        
+        self.orderDetailBtn.hidden = YES;
+
+        */
     }
     return self;
 }
 
--(void)tap{
-
-    self.selected = !self.selected;
-    
-    [self onclick:self.orderDetailBtn];
-}
+//-(void)tap{
+//
+//    self.selected = !self.selected;
+//    
+//    [self onclick:self.orderDetailBtn];
+//}
 
 -(void)onclick:(UIButton *)sender
 {
@@ -103,13 +107,13 @@
     CGFloat noH = 20;
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     
-    
+    /*
     CGFloat detailX = XScreenWidth - CGRectGetMaxX(self.orderTitleLab.frame);
     CGFloat detailY = titleY;
     CGFloat detailW = XScreenWidth - detailX - 10;
     CGFloat detailH = titleH;
     self.orderDetailBtn.frame = CGRectMake(detailX, detailY, detailW, detailH);
-    
+    */
     CGFloat bgX = 0;
     CGFloat bgY = 15;
     CGFloat bgW = XScreenWidth;
@@ -117,11 +121,13 @@
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     self.headHeight = CGRectGetMaxY(self.bgView.frame);
     
-    self.orderDetailBtn.hidden = order.SKUs.count == 0;
-
-    
 }
 
+
+- (void)headerSelectButtonHiden{
+  
+    self.orderTitleLab.text = [self.orderTitleLab.text substringWithRange:NSMakeRange(1, self.orderTitleLab.text.length - 1)];
+}
 
 
 @end

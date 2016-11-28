@@ -107,6 +107,7 @@
     self.orderPriceLab.attributedText = attribStr;
     [self statusWithTag:orderDict[@"status"]];
     
+    
     NSString *description  = [NSString stringWithFormat:@"* %@",[orderDict[@"SKUs"][0] valueForKey:@"description"]];
     CGSize descriptionSize = [description KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(12.5)]];
     
@@ -117,9 +118,12 @@
     self.orderDescriptionLab.frame = CGRectMake(descriptionX, descriptionY, descriptionW, descriptionH);
     self.orderDescriptionLab.text  = description;
     
+    BOOL SKUsEmpty = [orderDict[@"SKUs"][0] valueForKey:@"description"];
+    self.orderDescriptionLab.hidden = !SKUsEmpty;
+    
     
     CGFloat recordX = 10;
-    CGFloat recordY = CGRectGetMaxY(self.orderDescriptionLab.frame)  + 10;
+    CGFloat recordY =  self.orderDescriptionLab.hidden ?  10 : CGRectGetMaxY(self.orderDescriptionLab.frame)  + 10;
     CGFloat recordW = XScreenWidth;
     CGFloat recordH = 20;
     self.orderRecordLab.frame = CGRectMake(recordX, recordY, recordW, recordH);
@@ -292,6 +296,7 @@
     }
     
     [self.payBtn setTitle:payString  forState:UIControlStateNormal];
+    
      self.payBtn.backgroundColor = self.payBtn.enabled ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
 
 }
@@ -299,6 +304,7 @@
 -(void)onclick:(UIButton *)sender
 {
     if (self.actionBlock) {
+        
         self.actionBlock(sender);
      }
 }

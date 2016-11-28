@@ -52,12 +52,12 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     //当提交按钮被点击后，如果用户登录后，回到当前页面时会重新加载点击事件
+    
     if (self.submitBtnHadDone && !self.Uni_Country) {
       
         LOGIN ? [self submit:self.submitBtn] : nil;
             
     }
-    
     
 }
 
@@ -467,6 +467,7 @@
     
 }
 #pragma mark ——— PipeiEditCellDelegate
+
 -(void)PipeiEditCellPush{
     
     
@@ -789,7 +790,6 @@
 
 //根据条件跳转页面
 - (void)configrationWithResponse:(id)response{
-
     
     if (self.isfromPipeiResultPage) {
         
@@ -803,7 +803,6 @@
         IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
         resultVC.fromStyle = @"push";
         [self.navigationController pushViewController:resultVC animated:YES];
-
     }
     
     

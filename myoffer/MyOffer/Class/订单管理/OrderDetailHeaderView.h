@@ -16,4 +16,6 @@ typedef void(^OrderDetailHeaderViewBlock)(UIButton *sender);
 @property(nonatomic,assign)BOOL selected;
 @property(nonatomic,assign)CGFloat headHeight;
 
+- (void)headerSelectButtonHiden;
+
 @end

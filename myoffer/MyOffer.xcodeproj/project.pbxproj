@@ -670,8 +670,8 @@
 		AE7825E21D702AB100AA4EF4 /* UniversityNavView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UniversityNavView.xib; path = controller/UniversityNavView.xib; sourceTree = "<group>"; };
 		AE8707011DDEE14700CE7780 /* PipeiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiEditViewController.h; sourceTree = "<group>"; };
 		AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiEditViewController.m; sourceTree = "<group>"; };
-		AE8707041DDEEC4200CE7780 /* PipeiSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiSectionHeaderView.h; sourceTree = "<group>"; };
-		AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiSectionHeaderView.m; sourceTree = "<group>"; };
+		AE8707041DDEEC4200CE7780 /* PipeiSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiSectionHeaderView.h; path = ../controller/PipeiSectionHeaderView.h; sourceTree = "<group>"; };
+		AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiSectionHeaderView.m; path = ../controller/PipeiSectionHeaderView.m; sourceTree = "<group>"; };
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1063,14 +1063,14 @@
 		AEA24C211D5B283700DD7939 /* wel_EN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_EN.png; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* UniversityNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityNew.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* UniversityNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityNew.m; sourceTree = "<group>"; };
-		AED5A8581DDEF25800E70289 /* PipeiGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiGroup.h; sourceTree = "<group>"; };
-		AED5A8591DDEF25800E70289 /* PipeiGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiGroup.m; sourceTree = "<group>"; };
-		AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiEditCell.h; sourceTree = "<group>"; };
-		AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiEditCell.m; sourceTree = "<group>"; };
-		AED5A85E1DDF062800E70289 /* PipeiCountryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiCountryView.h; sourceTree = "<group>"; };
-		AED5A85F1DDF062800E70289 /* PipeiCountryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiCountryView.m; sourceTree = "<group>"; };
-		AED5A8611DDF0A9600E70289 /* PipeiCountryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiCountryCell.h; sourceTree = "<group>"; };
-		AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiCountryCell.m; sourceTree = "<group>"; };
+		AED5A8581DDEF25800E70289 /* PipeiGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiGroup.h; path = ../controller/PipeiGroup.h; sourceTree = "<group>"; };
+		AED5A8591DDEF25800E70289 /* PipeiGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiGroup.m; path = ../controller/PipeiGroup.m; sourceTree = "<group>"; };
+		AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiEditCell.h; path = ../controller/PipeiEditCell.h; sourceTree = "<group>"; };
+		AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiEditCell.m; path = ../controller/PipeiEditCell.m; sourceTree = "<group>"; };
+		AED5A85E1DDF062800E70289 /* PipeiCountryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiCountryView.h; path = ../controller/PipeiCountryView.h; sourceTree = "<group>"; };
+		AED5A85F1DDF062800E70289 /* PipeiCountryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiCountryView.m; path = ../controller/PipeiCountryView.m; sourceTree = "<group>"; };
+		AED5A8611DDF0A9600E70289 /* PipeiCountryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiCountryCell.h; path = ../controller/PipeiCountryCell.h; sourceTree = "<group>"; };
+		AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiCountryCell.m; path = ../controller/PipeiCountryCell.m; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
@@ -2167,16 +2167,6 @@
 				AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */,
 				AE8707011DDEE14700CE7780 /* PipeiEditViewController.h */,
 				AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */,
-				AE8707041DDEEC4200CE7780 /* PipeiSectionHeaderView.h */,
-				AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */,
-				AED5A85E1DDF062800E70289 /* PipeiCountryView.h */,
-				AED5A85F1DDF062800E70289 /* PipeiCountryView.m */,
-				AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */,
-				AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */,
-				AED5A8611DDF0A9600E70289 /* PipeiCountryCell.h */,
-				AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */,
-				AED5A8581DDEF25800E70289 /* PipeiGroup.h */,
-				AED5A8591DDEF25800E70289 /* PipeiGroup.m */,
 				AE64A5441DCB4CC9004592B6 /* promptViewController.h */,
 				AE64A5451DCB4CC9004592B6 /* promptViewController.m */,
 			);
@@ -2186,6 +2176,8 @@
 		AEA24A1F1D5B231200DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AED5A8581DDEF25800E70289 /* PipeiGroup.h */,
+				AED5A8591DDEF25800E70289 /* PipeiGroup.m */,
 				AEA24A201D5B231200DD7939 /* CountryItem.h */,
 				AEA24A211D5B231200DD7939 /* CountryItem.m */,
 				AEA24A221D5B231200DD7939 /* GradeItem.h */,
@@ -2199,6 +2191,14 @@
 		AEA24A261D5B231200DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AE8707041DDEEC4200CE7780 /* PipeiSectionHeaderView.h */,
+				AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */,
+				AED5A85E1DDF062800E70289 /* PipeiCountryView.h */,
+				AED5A85F1DDF062800E70289 /* PipeiCountryView.m */,
+				AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */,
+				AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */,
+				AED5A8611DDF0A9600E70289 /* PipeiCountryCell.h */,
+				AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */,
 				AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */,
 				AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */,
 				AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */,

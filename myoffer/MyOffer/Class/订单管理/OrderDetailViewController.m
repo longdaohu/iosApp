@@ -109,8 +109,9 @@
 -(void)makeOrderWithResponse:(NSDictionary *)response
 {
     NSArray *SKUs = response[@"SKUs"];
-    NSDictionary *SKU = SKUs[0];
     
+    NSDictionary *SKU = SKUs[0];
+
     [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSDictionary *temp = (NSDictionary *)obj;
@@ -119,10 +120,13 @@
         
         item.name = temp[@"name"];
         
-        [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
+        [self.leftItems addObject:item];
+        
+//        [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
         
     }];
     
+    /*
     
     if (self.leftItems.count > self.rightItems.count){
         
@@ -140,8 +144,19 @@
             item.name = @"";
             [self.leftItems addObject:item];
         }
-        
     }
+    
+    */
+  
+    if (!self.leftItems.count) {
+        
+         OrderDetailHeaderView *header = ( OrderDetailHeaderView *)self.tableView.tableHeaderView;
+        [header headerSelectButtonHiden];
+    }
+    
+    [self.leftItems removeAllObjects];
+    [self.rightItems removeAllObjects];
+   
 
 }
 
@@ -317,13 +332,12 @@
             OrderViewController *orderList =(OrderViewController *)child;
             orderList.refresh = YES;
             [self.navigationController popToViewController:orderList animated:YES];
-            
-
+ 
         }else{
         
             [self.navigationController popToRootViewControllerAnimated:YES];
             
-        }
+         }
   
         
     }else{
@@ -336,7 +350,7 @@
 
 -(void)dealloc{
 
-    KDClassLog(@"OrderDetailViewController  dealloc");
+    KDClassLog(@"Order详情  dealloc");
 
 }
 

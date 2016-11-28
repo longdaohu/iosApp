@@ -215,7 +215,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return Uni_Cell_Height + 15;
+    return Uni_Cell_Height + 25;
 }
 
 #pragma mark ----- OrderTableViewCellDelegate

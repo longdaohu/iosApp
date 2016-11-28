@@ -24,34 +24,31 @@ typedef enum {
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
-//推荐数据源
-@property(nonatomic,strong)NSMutableArray *recommendations;
-//临时数据源
-@property(nonatomic,strong)NSMutableArray *resultList;
-
-@property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs;
-@property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
 @property (weak, nonatomic) IBOutlet UILabel *NewSelectLabel;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *commitButton;
-//@property (strong, nonatomic) IBOutlet XYPieChart *PieHeadView;
-@property (strong, nonatomic) XYPieChart *PieHeadView;
 @property (weak, nonatomic) IBOutlet UILabel *currentCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *pieSelectLabel;
 @property (weak, nonatomic) IBOutlet UIView *upHeaderView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+//推荐数据源
+@property(nonatomic,strong)NSMutableArray *recommendations;
+//临时数据源
+@property(nonatomic,strong)NSMutableArray *resultList;
+@property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs;
+@property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
+@property (strong, nonatomic) XYPieChart *PieHeadView;
 @property(nonatomic,assign)SortType universitySortType;
 @property(nonatomic,assign)BOOL hadLoadData;
 @property(nonatomic, strong) NSMutableArray  *slices;
-@property(nonatomic, strong)NSArray  *subtitleArr;
+@property(nonatomic, strong)NSArray            *subtitleArr;
 @property(nonatomic, strong) NSMutableArray    *sliceColors;
 @property(nonatomic, strong) NSMutableArray    *sliceTitleS;
 @property(nonatomic, strong) NSMutableArray    *sliceAngles;
-@property(nonatomic,strong)UILabel *centerLabel;
-@property(nonatomic,strong)UIButton *centerButton;
+@property(nonatomic,strong)UILabel    *centerLabel;
+@property(nonatomic,strong)UIButton   *centerButton;
 @property(nonatomic,assign)NSUInteger selectIndex;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UIView *lineView;
-@property(nonatomic,strong)UIImageView *navImageView;
 @property(nonatomic,strong)PipeiNoResultVeiw *pipeiNoDataView;
 
 @end
@@ -99,18 +96,20 @@ typedef enum {
 
     if (!_sliceColors) {
         
-        _sliceColors = [NSMutableArray arrayWithObjects:
-                        XCOLOR_RED,
-                        XCOLOR(44, 175, 222),
-                        XCOLOR(18, 35, 60),nil];
+        _sliceColors = [NSMutableArray arrayWithObjects:XCOLOR_RED,XCOLOR(44, 175, 222),XCOLOR(18, 35, 60),nil];
     }
+    
     return _sliceColors;
 }
 
 -(NSMutableArray *)sliceTitleS{
 
     if (!_sliceTitleS) {
-        
+        /*
+         "Evaluate-Dream" = "冲刺";
+         "Evaluate-Middle" = "核心";
+         "Evaluate-Secure" = "保底";
+         */
         _sliceTitleS = [NSMutableArray arrayWithObjects:GDLocalizedString(@"Evaluate-Dream"),GDLocalizedString(@"Evaluate-Middle"),GDLocalizedString(@"Evaluate-Secure"),nil];
     }
     return _sliceTitleS;
@@ -120,7 +119,11 @@ typedef enum {
 -(NSArray *)subtitleArr
 {
     if (!_subtitleArr) {
-        
+        /*
+         "Evaluate-PieDream_chongChi" = "申请成功就赚了，选2所试试。";
+         "Evaluate-PieCore_heXin" = "最适合你的学校，请至少重点考虑2-3所学校。";
+         "Evaluate-PieSecure_baoDi" = "申请成功率较高的学校，建议至少选择1-2所。";
+         */
         _subtitleArr = @[GDLocalizedString(@"Evaluate-PieDream_chongChi"),GDLocalizedString(@"Evaluate-PieCore_heXin"),GDLocalizedString(@"Evaluate-PieSecure_baoDi")];
     }
     return _subtitleArr;
@@ -184,7 +187,9 @@ typedef enum {
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self makeUI];
+    
     [self changeLanguageEnvironment];
     
  
@@ -253,7 +258,11 @@ typedef enum {
     //    [self.PieHeadView setLabelShadowColor:[UIColor blackColor]];
 //    self.PieHeadView.backgroundColor = [UIColor greenColor];
     
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.PieHeadView setSliceSelectedAtIndex:0];
+        
+    });
     self.selectIndex  = 0 ;
 
 

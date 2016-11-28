@@ -100,6 +100,18 @@
             message.messageCount = [NSString stringWithFormat:@"%@",response[@"message_count"]];
             
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0],[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            
+            
+            
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count    = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
+            [ud synchronize];
+            
+            
+            [self currentLeftMessageCount];
 
         }];
         
@@ -403,8 +415,7 @@
     
     
     if (0 == buttonIndex) {
-        
-      
+       
             [[AppDelegate sharedDelegate] logout];
         
             [MobClick profileSignOff];
@@ -413,41 +424,49 @@
             [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
             }];
         
-        [self makeDataSource];
+             [self makeDataSource];
         
-        UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
-       
-        switch (self.contentViewController.selectedIndex) {
-            case 3:
-            {
-                MeViewController *vc =nav.childViewControllers[0];
-                [vc leftViewMessage];
-            }
-                break;
-            case 2:
-            {
-                MessageViewController *vc =nav.childViewControllers[0];
-                [vc leftViewMessage];
-            }
-                break;
-            case 1:
-            {
-                CatigoryViewController  *vc =nav.childViewControllers[0];
-                [vc leftViewMessage];
-            }
-                break;
-            default:{
-            
-                HomeViewContViewController *vc =nav.childViewControllers[0];
-                [vc leftViewMessage];
-            }
-                break;
-                
-
+             [self currentLeftMessageCount];
+        
         }
+    
+}
+
+//当前控制器新消息数据
+- (void)currentLeftMessageCount
+{
+    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+    
+    switch (self.contentViewController.selectedIndex) {
+        case 3:
+        {
+            MeViewController *vc =nav.childViewControllers[0];
+            [vc leftViewMessage];
+        }
+            break;
+        case 2:
+        {
+            MessageViewController *vc =nav.childViewControllers[0];
+            [vc leftViewMessage];
+        }
+            break;
+        case 1:
+        {
+            CatigoryViewController  *vc =nav.childViewControllers[0];
+            [vc leftViewMessage];
+        }
+            break;
+        default:{
+            
+            HomeViewContViewController *vc =nav.childViewControllers[0];
+            [vc leftViewMessage];
+        }
+            break;
+            
     }
     
 }
+
 
 #pragma mark -----UIImagePickerControlleDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

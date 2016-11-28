@@ -26,7 +26,6 @@
     self =[super init];
     
     if (self) {
-        
         self.SKUs = orderDict[@"SKUs"];
         self.orderId = orderDict[@"_id"];
         self.total_fee = [NSString stringWithFormat:@"%@",orderDict[@"total_fee"]];
@@ -34,7 +33,7 @@
         self.create_at = orderDict[@"create_at"];
         self.status = orderDict[@"status"];
         [self statusWithTag:self.status];
-        
+         
     }
     
     return self;
