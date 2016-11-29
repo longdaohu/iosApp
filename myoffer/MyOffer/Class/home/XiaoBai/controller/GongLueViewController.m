@@ -45,6 +45,8 @@
     
     [MobClick beginLogPageView:@"page申请攻略列表"];
     
+    [self checkZhiNengPiPei];
+    
 }
 
 
@@ -61,8 +63,6 @@
     [super viewDidLoad];
     
     [self makeUI];
-    
-    [self checkZhiNengPiPei];
     
 }
 

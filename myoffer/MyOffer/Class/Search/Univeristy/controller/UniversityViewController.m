@@ -176,11 +176,14 @@ typedef enum {
 //根据用户资料测试录取难易程度
 - (void)loadUserLevel{
     
+    
+    NSLog(@" loadUserLevel   %d",self.FromPipei);
+
     if (self.FromPipei) {
  
+        
         return;
     }
-    
     
         XWeakSelf
     
@@ -787,7 +790,7 @@ typedef enum {
 
 - (void)pipeiLevelWithParameter:(NSString *)pString{
 
-   
+  
     NSMutableString *path = [NSMutableString string];
     
     [path  appendFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
@@ -801,7 +804,7 @@ typedef enum {
         weakSelf.footer.level = [values[0] integerValue];
         
         weakSelf.FromPipei = NO;
-
+ 
     }];
     
 }

@@ -224,6 +224,7 @@
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
          self.VerifycationButton.enabled = YES;
+        
      }];
     
 }

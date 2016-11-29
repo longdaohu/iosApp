@@ -53,9 +53,11 @@
     
     //当提交按钮被点击后，如果用户登录后，回到当前页面时会重新加载点击事件
     
-    if (self.submitBtnHadDone && !self.Uni_Country) {
+    self.submitBtnHadDone = LOGIN ? self.submitBtnHadDone : NO;
+    
+    if (self.submitBtnHadDone) {
       
-        LOGIN ? [self submit:self.submitBtn] : nil;
+         [self submit:self.submitBtn];
             
     }
     
@@ -795,7 +797,8 @@
         
         NSArray *items = self.navigationController.childViewControllers;
         IntelligentResultViewController *resultVC = items[items.count - 2];
-        resultVC.fromStyle = @"pop";
+//        resultVC.popStyle = @"pop";
+        resultVC.refreshCount = 0;
         [self.navigationController popToViewController:resultVC animated:YES];
         
     }else{

@@ -577,7 +577,7 @@
              [self CaseLiuXueXiaoBai];
             break;
          case 2:
-             [self CasePipeiWithItemType:HomePageClickItemTypePipei];
+             [self Casepipei];
             break;
          case 3:
              [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
@@ -836,38 +836,11 @@
     
     switch (type) {
             
-        case HomePageClickItemTypePipei:
+        case HomePageClickItemTypetest:
         {
-            [MobClick event:@"PiPei"];
-            
-            if (!LOGIN) {
-                
-                self.recommendationsCount = 0;
-            }
-            
-            
-            if (self.recommendationsCount > 0) {
-                
-                RequireLogin
-                
-                [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
-                
-            }else{
-            
-                [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
-
-            }
-            
-          
-        }
-            break;
-        case HomePageClickItemTypetest:{
-         
-            
             RequireLogin
             
             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
-
         }
             break;
         default:
@@ -875,6 +848,33 @@
     }
 }
 
+//跳转服务包
+-(void)Casepipei
+{
+    [MobClick event:@"PiPei"];
+    
+    if (!LOGIN) {
+        
+        self.recommendationsCount = 0;
+    }
+    
+    
+    if (self.recommendationsCount > 0) {
+        
+        RequireLogin
+        
+        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
+        
+    }else{
+        
+        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+        
+    }
+    
+    
+
+
+}
 //跳转服务包
 -(void)CaseServerMall
 {

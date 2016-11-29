@@ -40,7 +40,6 @@ typedef enum {
 @property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
 @property (strong, nonatomic) XYPieChart *PieHeadView;
 @property(nonatomic,assign)SortType universitySortType;
-@property(nonatomic,assign)BOOL hadLoadData;
 @property(nonatomic, strong) NSMutableArray  *slices;
 @property(nonatomic, strong)NSArray            *subtitleArr;
 @property(nonatomic, strong) NSMutableArray    *sliceColors;
@@ -50,6 +49,8 @@ typedef enum {
 @property(nonatomic,strong)UIButton   *centerButton;
 @property(nonatomic,assign)NSUInteger selectIndex;
 @property(nonatomic,strong)PipeiNoResultVeiw *pipeiNoDataView;
+//判断是否已经加载过数据
+//@property(nonatomic,assign)BOOL hadLoadData;
 
 @end
 
@@ -280,7 +281,7 @@ typedef enum {
 
 -(void)makeNavigatinView
 {
-    
+ 
         self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(pushPipeiEditPage)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
     
@@ -327,13 +328,15 @@ typedef enum {
 -(void)DataSourseRequst
 {
     
+    if (self.refreshCount >  0) {
+        
+        
+        return;
+    }
     
-    if (self.fromStyle.length > 0 || !self.hadLoadData) {
-
-        if ([self.fromStyle isEqualToString:@"pop"]) self.fromStyle  =  @"";
-        
-        self.hadLoadData = YES;
-        
+     self.refreshCount++;
+    
+ 
         XWeakSelf;
         
         [self startAPIRequestWithSelector:kAPISelectorZiZengRecommendation  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -348,8 +351,7 @@ typedef enum {
             
         }];
  
-    }
-
+ 
 }
 
 //根据返回数据设置UI
@@ -593,10 +595,8 @@ typedef enum {
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
 
          ApplyViewController *vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
-             if (self.isComeBack) {
-                 vc.isFromMessage = YES;
-             }
-             [self.navigationController pushViewController:vc animated:YES];
+             
+          [self.navigationController pushViewController:vc animated:YES];
          
          }];
      }];
@@ -747,15 +747,10 @@ typedef enum {
 //返回上级页面
 -(void)popBack
 {
- 
     
-//    NSLog(@"popBack popBack %@     %ld",self.fromStyle,self.resultList.count);
-    
-    
-    if ([self.fromStyle isEqualToString:@"push"] && self.resultList.count > 0) {
+    if (self.fromStyle.length > 0) {
         
         NSArray *items =  self.navigationController.childViewControllers;
-        
         
         if (items.count > 3) {
             
@@ -766,35 +761,25 @@ typedef enum {
          }else{
         
              [self.navigationController popToRootViewControllerAnimated:YES];
-
-        }
+         }
         
     }else{
     
         [self.navigationController popViewControllerAnimated:YES];
 
     }
-    
-    
  
 }
+
 
 
 -(void)pushPipeiEditPage
 {
     
-    
-    if ([self.fromStyle isEqualToString:@"push"]) {
+    PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
+    pipeiEdit.isfromPipeiResultPage = YES;
+    [self.navigationController pushViewController:pipeiEdit animated:YES];
         
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }else{
-        
-        PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
-        pipeiEdit.isfromPipeiResultPage = YES;
-        [self.navigationController pushViewController:pipeiEdit animated:YES];
-        
-    }
     
 }
 

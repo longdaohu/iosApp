@@ -63,13 +63,12 @@
         self.bgView.backgroundColor = XCOLOR_WHITE;
         [self.contentView addSubview:self.bgView];
         
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [self.bgView addGestureRecognizer:tap];
+        
         self.orderTitleLab = [UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         self.orderTitleLab.lineBreakMode = NSLineBreakByTruncatingTail;
         [self.bgView addSubview:self.orderTitleLab];
-        self.orderTitleLab.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-        [self.orderTitleLab addGestureRecognizer:tap];
-        
         
         self.orderStatusLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentRight];
         [self.bgView addSubview:self.orderStatusLab];

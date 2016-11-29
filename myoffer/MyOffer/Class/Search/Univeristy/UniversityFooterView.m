@@ -65,6 +65,8 @@
 
     _level = level;
     
+    if (!self.showLab.hidden) return;
+    
     //	'universityId': 'level' // 0:不推荐|1:冲刺|2:核心|3:保底     你获得offer的难易度  蓝字
     
     NSString *levelStr;
@@ -88,13 +90,14 @@
     
     self.showLab.hidden = NO;
     self.rateBtn.hidden = YES;
-
+    
     NSString *offerStr = @"你获得offer的难易度";
     NSString *showStri =  [NSString stringWithFormat:@"%@\n%@",offerStr,levelStr];
     NSRange showRange = NSMakeRange(0, offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
     [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
     self.showLab.attributedText = attr;
+    
     
 }
 

@@ -10,7 +10,6 @@
 
 typedef enum {
     HomePageClickItemTypeNoClick,
-    HomePageClickItemTypePipei,
     HomePageClickItemTypetest
 }HomePageClickItemType;
 
