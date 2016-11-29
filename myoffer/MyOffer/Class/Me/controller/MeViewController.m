@@ -454,10 +454,7 @@ typedef enum {
 {
     [MobClick event:@"apply_pipei"];
     
-    if (!LOGIN) {
-        
-        self.recommendationsCount = 0;
-    }
+    if (!LOGIN) self.recommendationsCount = 0;
     
     if (self.recommendationsCount > 0 ) {
         

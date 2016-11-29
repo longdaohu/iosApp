@@ -52,14 +52,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     //当提交按钮被点击后，如果用户登录后，回到当前页面时会重新加载点击事件
-    
     self.submitBtnHadDone = LOGIN ? self.submitBtnHadDone : NO;
-    
-    if (self.submitBtnHadDone) {
-      
-         [self submit:self.submitBtn];
-            
-    }
+    if (self.submitBtnHadDone) [self submit:self.submitBtn];
     
 }
 
@@ -158,10 +152,13 @@
     self.tableView.allowsSelection = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    [self makeHeaderView];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Height + 30, 0);
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.showsVerticalScrollIndicator = NO;
+    
+    [self makeHeaderView];
+    
+
 }
 
 
@@ -340,9 +337,9 @@
         _groups = [NSMutableArray array];
         
         PipeiGroup *country = [PipeiGroup groupWithHeader: @"意向国家"  groupType:PipeiGroupTypeCountry];
-        if (!LOGIN) {
-            country.content = @"英国";
-        }
+       
+        if (!LOGIN) country.content = @"英国";
+        
         if (self.Uni_Country) {
             
             country.content = self.Uni_Country;
@@ -479,10 +476,7 @@
     
     search.valueBlock = ^(NSString *value){
         
-        if ( 0 == value.length) {
-            
-            return ;
-        }
+        if ( 0 == value.length) return ;
         
         PipeiEditCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
         cell.contentTF.text = value;
@@ -652,7 +646,6 @@
         
         
     }else{
-    
         
         sender.enabled = NO;
         
@@ -661,30 +654,10 @@
         PipeiGroup *subject = self.groups[2];
         PipeiGroup *score = self.groups[3];
         
-        NSString *country_ID;
+        NSString *country_ID = [self CoungryIDWithCounryName:country.content];
         
-        for (CountryItem *countyItem in self.countryItems_CN) {
-            
-            if ([countyItem.CountryName isEqualToString:country.content]) {
-                
-                country_ID = countyItem.NOid;
-                
-                break;
-            }
-        }
-        
-        
-        NSString *subject_ID;
-        
-        for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
-            
-            if ([subjcetItem.subjectName isEqualToString:subject.content]) {
-                
-                subject_ID = subjcetItem.NOid;
-                
-                break;
-            }
-        }
+        NSString *subject_ID = [self subjectIDWithSubjectName:subject.content];
+
         
         XWeakSelf
         
@@ -713,6 +686,41 @@
 }
 
 
+-(NSString *)CoungryIDWithCounryName:(NSString *)name{
+
+    NSString *country_ID;
+
+    for (CountryItem *countyItem in self.countryItems_CN) {
+        
+        if ([countyItem.CountryName isEqualToString:name]) {
+            
+            country_ID = countyItem.NOid;
+            
+            break;
+        }
+        
+    }
+  
+    return country_ID;
+}
+
+-(NSString *)subjectIDWithSubjectName:(NSString *)name{
+    
+    NSString *subject_ID;
+    
+    for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
+        
+        if ([subjcetItem.subjectName isEqualToString:name]) {
+            
+            subject_ID = subjcetItem.NOid;
+            
+            break;
+        }
+    }
+    
+    return subject_ID;
+}
+
 //当从学校页面来到编辑智能匹配页面时，从if里进入
 -(void)fromUniversitySubmit{
     
@@ -726,18 +734,7 @@
                 
             case PipeiGroupTypeCountry:
             {
-                NSString *country_ID;
-                
-                for (CountryItem *countyItem in self.countryItems_CN) {
-                    
-                    if ([countyItem.CountryName isEqualToString:item.content]) {
-                        
-                        country_ID = countyItem.NOid;
-                        
-                        break;
-                    }
-                    
-                }
+                NSString *country_ID = [self CoungryIDWithCounryName:item.content];
                 
                 [pString  appendFormat:@"%@", [NSString stringWithFormat:@"des_country=%@&",country_ID]];
                 
@@ -748,18 +745,8 @@
             case PipeiGroupTypeSubject:
             {
                 
-                NSString *subject_ID;
-                
-                for (SubjectItem *subjcetItem  in self.subjectItems_CN) {
-                    
-                    if ([subjcetItem.subjectName isEqualToString:item.content]) {
-                        
-                        subject_ID = subjcetItem.NOid;
-                        
-                        break;
-                    }
-                }
-                
+                NSString *subject_ID = [self subjectIDWithSubjectName:item.content];
+
                 [pString  appendFormat:@"%@", [NSString stringWithFormat:@"subject=%@&",subject_ID]];
                 
             }
@@ -786,7 +773,6 @@
     }
     
     [self.navigationController popViewControllerAnimated:YES];
-
     
 }
 
@@ -795,9 +781,7 @@
     
     if (self.isfromPipeiResultPage) {
         
-        NSArray *items = self.navigationController.childViewControllers;
-        IntelligentResultViewController *resultVC = items[items.count - 2];
-//        resultVC.popStyle = @"pop";
+        IntelligentResultViewController *resultVC = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 2];
         resultVC.refreshCount = 0;
         [self.navigationController popToViewController:resultVC animated:YES];
         
@@ -849,8 +833,7 @@
             
         }
         
-    }];
-    
+     }];
     
 }
 

@@ -128,7 +128,6 @@
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
 		AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */; };
 		AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E851DD5B64100B4E9F3 /* PhoneBeenViewController.m */; };
-		AE2D5E8C1DD5CD6600B4E9F3 /* YourPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */; };
 		AE2D5E8E1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */; };
 		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
@@ -357,8 +356,6 @@
 		AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */; };
 		AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */; };
 		AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */; };
-		AEA24C221D5B283700DD7939 /* appbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C121D5B283700DD7939 /* appbg.jpg */; };
-		AEA24C231D5B283700DD7939 /* appImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C131D5B283700DD7939 /* appImage.png */; };
 		AEA24C241D5B283700DD7939 /* AU_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C141D5B283700DD7939 /* AU_en.jpg */; };
 		AEA24C251D5B283700DD7939 /* AU.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C151D5B283700DD7939 /* AU.jpg */; };
 		AEA24C261D5B283700DD7939 /* bg98.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C161D5B283700DD7939 /* bg98.png */; };
@@ -623,8 +620,6 @@
 		AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mergeSuccessViewController.m; sourceTree = "<group>"; };
 		AE2D5E841DD5B64100B4E9F3 /* PhoneBeenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneBeenViewController.h; sourceTree = "<group>"; };
 		AE2D5E851DD5B64100B4E9F3 /* PhoneBeenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneBeenViewController.m; sourceTree = "<group>"; };
-		AE2D5E8A1DD5CD6600B4E9F3 /* YourPhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourPhoneView.h; sourceTree = "<group>"; };
-		AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourPhoneView.m; sourceTree = "<group>"; };
 		AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLoginRegisterViewController.xib; sourceTree = "<group>"; };
 		AE329BEA1DD2BC9A00DCF433 /* BangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangViewController.h; sourceTree = "<group>"; };
 		AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BangViewController.m; sourceTree = "<group>"; };
@@ -1045,8 +1040,6 @@
 		AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTabBarController.h; sourceTree = "<group>"; };
 		AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTabBarController.m; sourceTree = "<group>"; };
 		AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woYaoLiuXue.jpg; sourceTree = "<group>"; };
-		AEA24C121D5B283700DD7939 /* appbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = appbg.jpg; sourceTree = "<group>"; };
-		AEA24C131D5B283700DD7939 /* appImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appImage.png; sourceTree = "<group>"; };
 		AEA24C141D5B283700DD7939 /* AU_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AU_en.jpg; sourceTree = "<group>"; };
 		AEA24C151D5B283700DD7939 /* AU.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AU.jpg; sourceTree = "<group>"; };
 		AEA24C161D5B283700DD7939 /* bg98.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg98.png; sourceTree = "<group>"; };
@@ -2577,8 +2570,6 @@
 				AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */,
 				AEA24B1F1D5B251800DD7939 /* YourBindView.h */,
 				AEA24B201D5B251800DD7939 /* YourBindView.m */,
-				AE2D5E8A1DD5CD6600B4E9F3 /* YourPhoneView.h */,
-				AE2D5E8B1DD5CD6600B4E9F3 /* YourPhoneView.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -2862,8 +2853,6 @@
 			isa = PBXGroup;
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
-				AEA24C121D5B283700DD7939 /* appbg.jpg */,
-				AEA24C131D5B283700DD7939 /* appImage.png */,
 				AEA24C141D5B283700DD7939 /* AU_en.jpg */,
 				AEA24C151D5B283700DD7939 /* AU.jpg */,
 				AEA24C161D5B283700DD7939 /* bg98.png */,
@@ -3184,7 +3173,6 @@
 			files = (
 				AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */,
 				AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */,
-				AEA24C221D5B283700DD7939 /* appbg.jpg in Resources */,
 				AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */,
 				AEA24B901D5B25E000DD7939 /* UniversityCourseViewController.xib in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
@@ -3288,7 +3276,6 @@
 				AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */,
 				AE1FD73E1D5C929500FFD5A8 /* Pre-comp 1_00026.png in Resources */,
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
-				AEA24C231D5B283700DD7939 /* appImage.png in Resources */,
 				AE7825DE1D70296F00AA4EF4 /* UniversityRightView.xib in Resources */,
 				AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */,
 				AEA24C241D5B283700DD7939 /* AU_en.jpg in Resources */,
@@ -3484,7 +3471,6 @@
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
-				AE2D5E8C1DD5CD6600B4E9F3 /* YourPhoneView.m in Sources */,
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,

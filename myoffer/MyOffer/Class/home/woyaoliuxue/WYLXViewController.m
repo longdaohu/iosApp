@@ -11,7 +11,7 @@
 #import "WYLXCell.h"
 #import "WYLXFooterView.h"
 #import "PipeiEditViewController.h"
-#import "YourPhoneView.h"
+//#import "YourPhoneView.h"
 #import "WYLXSuccessView.h"
 #import "NomalTableSectionHeaderView.h"
 
@@ -30,7 +30,7 @@ typedef enum {
 }LiuxuePageClickItemType;
 
 
-@interface WYLXViewController ()<UITableViewDataSource,UITableViewDelegate,WYLXCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate,YourPhoneViewDelegate>
+@interface WYLXViewController ()<UITableViewDataSource,UITableViewDelegate,WYLXCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 //分区title数组
@@ -59,16 +59,10 @@ typedef enum {
 @property(nonatomic,strong)UIPickerView *subjectPicker;
 //正在编辑的cell
 @property(nonatomic,strong)WYLXCell *editingCell;
-//填写手机号编辑框
-@property(nonatomic,strong)YourPhoneView *PhoneView;
-//遮盖
-@property(nonatomic,strong)UIButton *cover;
 //直接进入编辑框 ———— 倒计时Timer
 @property(nonatomic,strong)NSTimer *verifyCodeColdDownTimer;
 //直接进入编辑框 ———— 倒计时
 @property(nonatomic,assign)int verifyCodeColdDownCount;
-//国家区号数组
-@property(nonatomic,strong)NSArray *AreaCodes;
 //提示框
 @property(nonatomic,strong)WYLXSuccessView *sucessView;
 //用于标识提交留学按钮是还被点击
@@ -95,20 +89,15 @@ typedef enum {
     
     if (LOGIN) {
         
-        [self getYourPhoneNumber:NO];
+        [self userInformation];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self PageClickWithItemType:self.clickType];
             
-        });
+         });
         
-    }else{
-    
-        self.phoneNumber = Failure;
-
     }
-
     
 }
 
@@ -148,17 +137,6 @@ typedef enum {
     }
     return _countryCodePicker;
 }
-
-
--(NSArray *)AreaCodes
-{
-    if (!_AreaCodes) {
-        
-        _AreaCodes = @[GDLocalizedString(@"LoginVC-china"),GDLocalizedString(@"LoginVC-english")];//@[@"中国(+86)",@"英国(+44)"];
-    }
-    return _AreaCodes;
-}
-
 
 -(UIPickerView *)gradePicker
 {
@@ -215,6 +193,22 @@ typedef enum {
     
 }
 
+- (void)userInformation{
+
+    [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        self.phoneNumber = response[@"accountInfo"][@"phonenumber"];
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        self.phoneNumber = Failure;
+        
+    }];
+
+}
+
+
+
 
 - (void)makeUI{
 
@@ -228,52 +222,8 @@ typedef enum {
     
     [self addNotificationCenter];
     
-    [self makePhoneView];
 }
 
-
--(void)makePhoneView
-{
-    self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
-    self.cover.backgroundColor = XCOLOR_BLACK;
-    self.cover.alpha = 0;
-    [self.view addSubview:self.cover];
-    
-    
-    self.PhoneView =[[YourPhoneView alloc] initWithFrame:CGRectMake(0, XScreenHeight,XScreenWidth, 300)];
-    self.PhoneView.countryCode.inputView = self.countryCodePicker;
-    self.PhoneView.delegate = self;
-    [self.view addSubview:self.PhoneView];
-    
-}
-
-
- //请求头像信息
--(void)getYourPhoneNumber:(BOOL)Alert
-{
-    [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:Alert errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        self.phoneNumber = response[@"accountInfo"][@"phonenumber"];
-       
-        if (Alert) {
-            
-            if (self.phoneNumber.length>0) {
-                
-                [self sendLiuxueRequest];
-                
-            }else{
-                
-                [self PhoneViewHiden:NO];
-                
-            }
-         }
-        
-     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        self.phoneNumber = Failure;
-        
-    }];
-}
 
 //选择项数组
 -(void)getSelectionResourse
@@ -330,7 +280,6 @@ typedef enum {
     [self makeHeaderAndFooterView];
 
 }
-
 
 
 -(void)makeHeaderAndFooterView
@@ -538,25 +487,7 @@ typedef enum {
 }
 
 
-#pragma mark ---- YourPhoneViewDelegate
--(void)YourPhoneView:(YourPhoneView *)PhoneView WithButtonItem:(UIButton *)sender
-{
-    if (11 == sender.tag) {
-        
-        [self PhoneViewHiden:YES];
-        
-    }else if(10 == sender.tag)
-    {
-        
-        [self sendVerificationCode];
-        
-    }else{
-        
-        [self CommitVerifyCode];
-        
-    }
-    
-}
+
 
 
 #pragma mark ----UIPickerViewDataSource, UIPickerViewDelegate
@@ -576,7 +507,7 @@ typedef enum {
             return self.subjectArr.count;
             break;
         case PickerViewTypeCode:
-             return self.AreaCodes.count;
+             return 0;
             break;
          default:
              return self.gradeArr.count;
@@ -598,7 +529,7 @@ typedef enum {
         }
             break;
         case PickerViewTypeCode:
-            return self.AreaCodes[row];
+            return @"中国(+86)";
             break;
 
         default:
@@ -630,7 +561,7 @@ typedef enum {
             break;
         case PickerViewTypeCode:{
             
-             self.PhoneView.countryCode.text =  self.AreaCodes[row];
+//             self.PhoneView.countryCode.text =  self.AreaCodes[row];
             
         }
             break;
@@ -670,19 +601,7 @@ typedef enum {
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
- 
-    if (self.PhoneView.frame.origin.y < XScreenHeight) {
-        
-        if (up) {
-            
-            self.PhoneView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f);
-            
-        } else {
-            
-             self.PhoneView.center = CGPointMake(self.view.frame.size.width / 2.0f, XScreenHeight * 2/3);
-        }
-        
-    }else{
+  
         
         UIEdgeInsets insets =   _tableView.contentInset;
         if (up) {
@@ -692,7 +611,6 @@ typedef enum {
         }
         _tableView.contentInset = insets;
     
-    }
     
     
     [self.view layoutSubviews];
@@ -748,23 +666,10 @@ typedef enum {
     }
     
     RequireLogin
-    
-    if ([self.phoneNumber isEqualToString:Failure ]|| self.phoneNumber.length == 0) {
-        
-        //如果第一次请求失败，得到一个错误的电话号码，这里要求重新请求
-        [self getYourPhoneNumber:YES];
-    }
-    
-    if(self.phoneNumber.length == 0){
-        
-        //如果用户手机号为空
-        [self PhoneViewHiden:NO];
-        
-    }else{
-        //有手机号，直接提交
-        [self sendLiuxueRequest];
-    }
-
+ 
+    //有手机号，直接提交
+    [self sendLiuxueRequest];
+ 
 }
 
 // 提交我要留学申请
@@ -783,128 +688,6 @@ typedef enum {
          
      }];
     
-}
-
-// 发送验证码
--(void)sendVerificationCode
-{
-    
-    if (![self checkPhoneTextField]) {
-        
-        return ;
-    }
-    
-    NSString *AreaNumber =  [self.PhoneView.countryCode.text containsString:@"44"] ? @"44":@"86";
-    NSString *phoneNumber = self.PhoneView.PhoneTF.text;
-    
-    self.PhoneView.SendCodeBtn.enabled = NO;
-    
-    XWeakSelf
-    
-    [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode parameters:@{@"code_type":@"phone", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": AreaNumber} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        weakSelf.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDown) userInfo:nil repeats:YES];
-        weakSelf.verifyCodeColdDownCount = Time_CountDown;
-        
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        weakSelf.PhoneView.SendCodeBtn.enabled = YES;
-        
-    }];
-    
-}
-//@"验证码倒计时"
-- (void)runVerifyCodeColdDown {
-    
-    self.verifyCodeColdDownCount--;
-    if (self.verifyCodeColdDownCount > 0) {
-        
-        [self.PhoneView.SendCodeBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
-    } else {
-        self.PhoneView.SendCodeBtn.enabled = YES;
-        [self.PhoneView.SendCodeBtn setTitle:GDLocalizedString(@"LoginVC-008")   forState:UIControlStateNormal];
-        [self.verifyCodeColdDownTimer invalidate];
-        _verifyCodeColdDownTimer = nil;
-    }
-}
-
-
-//验证手机号码是否合理
--(BOOL)checkPhoneTextField
-{
-    //"中国";
-    if ([self.PhoneView.countryCode.text containsString:@"86"] && self.PhoneView.PhoneTF.text.length != 11) {
-        
-        AlerMessage(GDLocalizedString(@"LoginVC-PhoneNumberError"));
-        
-        return NO;
-        
-    }else if ([self.PhoneView.countryCode.text containsString:@"44"] && self.PhoneView.PhoneTF.text.length != 10) {
-        //"英国";
-        AlerMessage(GDLocalizedString(@"LoginVC-EnglandNumberError"));
-        
-        return NO;
-        
-    }else{
-        
-        return YES;
-    }
-}
-
-// 提交验证码
--(void)CommitVerifyCode
-{
-    
-    if (![self checkPhoneTextField]) {
-        
-        return ;
-    }
-    
-    if (self.PhoneView.VerifyTF.text.length==0) {
-        
-        AlerMessage(GDLocalizedString(@"LoginVC-007"));
-        
-        return ;
-    }
-    
-    NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];
-    [infoParameters setValue:self.PhoneView.countryCode.text forKey:@"mobile_code"];
-    [infoParameters setValue:self.PhoneView.PhoneTF.text forKey:@"phonenumber"];
-    [infoParameters setValue:@{@"code":self.PhoneView.VerifyTF.text} forKey:@"vcode"];
-    
-    
-    [self startAPIRequestWithSelector:@"POST api/account/updatephonenumber"
-                           parameters:@{@"accountInfo":infoParameters}
-                              success:^(NSInteger statusCode, id response) {
-                                  
-                                  [self PhoneViewHiden:YES];
-                                  
-                                   self.phoneNumber = self.PhoneView.PhoneTF.text;
-                                  
-                              }];
-    
-}
-
-//补充电话资料
--(void)PhoneViewHiden:(BOOL)hiden
-{
-    
-    [self.view endEditing:YES];
-    
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
-        CGRect  frame =self.PhoneView.frame;
-        
-        frame.origin.y = hiden ? XScreenHeight :100;
-        
-        self.PhoneView.frame = frame;
-        
-        self.cover.alpha = hiden ? 0 : 0.5;
-        
-    } completion:^(BOOL finished) {
-        
-        
-    }];
 }
 
 

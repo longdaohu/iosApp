@@ -5,11 +5,7 @@
 //  Created by xuewuguojie on 15/11/6.
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
-typedef enum {
-    descendeType = 0,
-    AscendeType,
-    NoType
-} SortType;
+
 #define TABLEROWHEIGHT 100
 #define TABLEHEADVIEWHEIGHT 305
 
@@ -38,19 +34,27 @@ typedef enum {
 @property(nonatomic,strong)NSMutableArray *resultList;
 @property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs;
 @property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
+//pieChart图表
 @property (strong, nonatomic) XYPieChart *PieHeadView;
-@property(nonatomic,assign)SortType universitySortType;
+//pieChart图表每一格的数量数组
 @property(nonatomic, strong) NSMutableArray  *slices;
+//pieChart图表每一格对应的图标说明
 @property(nonatomic, strong)NSArray            *subtitleArr;
+//pieChart图表每一格对应的颜色数组
 @property(nonatomic, strong) NSMutableArray    *sliceColors;
-@property(nonatomic, strong) NSMutableArray    *sliceTitleS;
+//pieChart图表每一格对应名称数组
+@property(nonatomic, strong) NSMutableArray    *sliceTitles;
+//pieChart图表每一格对应弧度数组
 @property(nonatomic, strong) NSMutableArray    *sliceAngles;
+//pieChart图表中间的文字说明
 @property(nonatomic,strong)UILabel    *centerLabel;
+//pieChart图表中间按钮
 @property(nonatomic,strong)UIButton   *centerButton;
+//pieChart已选择项
 @property(nonatomic,assign)NSUInteger selectIndex;
+//数据为空时，显示提示信息
 @property(nonatomic,strong)PipeiNoResultVeiw *pipeiNoDataView;
-//判断是否已经加载过数据
-//@property(nonatomic,assign)BOOL hadLoadData;
+
 
 @end
 
@@ -103,17 +107,17 @@ typedef enum {
     return _sliceColors;
 }
 
--(NSMutableArray *)sliceTitleS{
+-(NSMutableArray *)sliceTitles{
 
-    if (!_sliceTitleS) {
+    if (!_sliceTitles) {
         /*
          "Evaluate-Dream" = "冲刺";
          "Evaluate-Middle" = "核心";
          "Evaluate-Secure" = "保底";
          */
-        _sliceTitleS = [NSMutableArray arrayWithObjects:GDLocalizedString(@"Evaluate-Dream"),GDLocalizedString(@"Evaluate-Middle"),GDLocalizedString(@"Evaluate-Secure"),nil];
+        _sliceTitles = [NSMutableArray arrayWithObjects:GDLocalizedString(@"Evaluate-Dream"),GDLocalizedString(@"Evaluate-Middle"),GDLocalizedString(@"Evaluate-Secure"),nil];
     }
-    return _sliceTitleS;
+    return _sliceTitles;
 
 }
 
@@ -209,7 +213,6 @@ typedef enum {
 -(void)makeHeaderView
 {
     
-    
     self.ResultTableView.rowHeight = TABLEROWHEIGHT;
     self.headerView.frame =  CGRectMake(0, 0, self.ResultTableView.frame.size.width, TABLEHEADVIEWHEIGHT);
     self.ResultTableView.tableHeaderView = self.headerView;
@@ -258,15 +261,7 @@ typedef enum {
     [self.PieHeadView setUserInteractionEnabled:YES];
     //    [self.PieHeadView setLabelShadowColor:[UIColor blackColor]];
 //    self.PieHeadView.backgroundColor = [UIColor greenColor];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [self.PieHeadView setSliceSelectedAtIndex:0];
-        
-    });
-    self.selectIndex  = 0 ;
-
-
+  
 }
 
 
@@ -393,14 +388,16 @@ typedef enum {
     
     //------------------------------------------------------------------------
     NSString *firstItem;
+    NSInteger selectedIndex = -1;
     for(int i = 0; i < 3; i ++){
         
         NSUInteger count = [self.recommendations[i] count];
-       
-        if (count != 0) {
-            //count 数字大小可以增加显示范围
-            count = count + 4;
-        }
+        
+        //设置选择项
+        if (count > 0  && -1 == selectedIndex ) selectedIndex = i;
+        
+        //count 数字大小可以增加显示范围
+        if (count != 0)  count = count + 4;
         
         NSNumber *one = [NSNumber numberWithInt:(int)count];
         
@@ -410,10 +407,19 @@ typedef enum {
             
             firstItem = @"已存在";
             self.resultList  =  [self.recommendations[i] mutableCopy];
-            [self makeAttributedText:[NSString stringWithFormat:@"%ld",(unsigned long)totalCount] currentcount:[NSString stringWithFormat:@"%ld",(long)self.resultList.count]  currentItem:self.sliceTitleS[i]];
+            [self makeAttributedText:[NSString stringWithFormat:@"%ld",(unsigned long)totalCount] currentcount:[NSString stringWithFormat:@"%ld",(long)self.resultList.count]  currentItem:self.sliceTitles[i]];
             self.lineView.backgroundColor =self.sliceColors[i];
         }
     }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.PieHeadView setSliceSelectedAtIndex:selectedIndex];
+        
+    });
+    
+    self.selectIndex  = selectedIndex;
+    
     //------------------------------------------------------------------------
 
     
@@ -478,20 +484,21 @@ typedef enum {
      XWeakSelf
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if (total>0) {
-            
-            [weakSelf.PieHeadView reloadData];
-        }
-    
+        if (total>0) [weakSelf.PieHeadView reloadData];
+     
     });
+    
+    //延迟显示
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
+        
+    });
+
     
     [self.ResultTableView reloadData];
     
-    //延迟显示
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
-    });
-
+    
 }
 
 
@@ -576,12 +583,13 @@ typedef enum {
         
         return;
     }
-//    else if(self.NewSelectUniversityIDs.count >6)
-//    {
-//        [KDAlertView showMessage:GDLocalizedString(@"Evaluate-commitAlert") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];//@"好的"];
-//        return;
-//    }
-    
+/*
+    else if(self.NewSelectUniversityIDs.count >6)
+    {
+        [KDAlertView showMessage:GDLocalizedString(@"Evaluate-commitAlert") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];//@"好的"];
+        return;
+    }
+*/
     
     [self
      startAPIRequestWithSelector:kAPISelectorZiZengApplyPost
@@ -593,10 +601,8 @@ typedef enum {
          [hud setLabelText:GDLocalizedString(@"ApplicationProfile-0015")];//@"加入成功"];
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
-
-         ApplyViewController *vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
              
-          [self.navigationController pushViewController:vc animated:YES];
+          [self.navigationController pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil] animated:YES];
          
          }];
      }];
@@ -624,7 +630,7 @@ typedef enum {
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index
 {
     
-    return self.sliceTitleS[index];
+    return self.sliceTitles[index];
 }
 
 #pragma mark - XYPieChart Delegate
@@ -635,16 +641,14 @@ typedef enum {
     self.lineView.backgroundColor =self.sliceColors[index];
     
     if (self.selectIndex != index) {
-        
-    self.universitySortType = NoType;
-    
+      
     [self.resultList removeAllObjects];
     
     self.resultList =  [self.recommendations[index] mutableCopy];
         
     [self.ResultTableView reloadData];
     
-    [self makeCurrentLabel:[NSString stringWithFormat:@"%lu",(unsigned long)self.resultList.count] currentItem:self.sliceTitleS[index]];
+    [self makeCurrentLabel:[NSString stringWithFormat:@"%lu",(unsigned long)self.resultList.count] currentItem:self.sliceTitles[index]];
 
     self.pieSelectLabel.text = self.subtitleArr[index];
         
@@ -680,7 +684,6 @@ typedef enum {
             }
             
 //            NSLog(@"2  else   if sliceAngles  %lf  %lf  %lf",[self.sliceAngles[0] floatValue],[self.sliceAngles[1] floatValue],[self.sliceAngles[2] floatValue]);
-
             
         }else{
             
@@ -747,7 +750,7 @@ typedef enum {
 //返回上级页面
 -(void)popBack
 {
-    
+     
     if (self.fromStyle.length > 0) {
         
         NSArray *items =  self.navigationController.childViewControllers;
@@ -775,7 +778,6 @@ typedef enum {
 
 -(void)pushPipeiEditPage
 {
-    
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
     pipeiEdit.isfromPipeiResultPage = YES;
     [self.navigationController pushViewController:pipeiEdit animated:YES];

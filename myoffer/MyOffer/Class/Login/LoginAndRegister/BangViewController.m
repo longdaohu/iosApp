@@ -288,7 +288,6 @@
     
  
     
-    
     sender.enabled = NO;
     
     sender.layer.borderColor = XCOLOR_DARKGRAY.CGColor;

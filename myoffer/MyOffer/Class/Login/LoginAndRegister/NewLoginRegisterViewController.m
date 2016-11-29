@@ -62,6 +62,7 @@
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *RegisterAButton;
 //查看服务条款
 @property (weak, nonatomic) IBOutlet UIButton *ServiceButton;
+
 @property (weak, nonatomic) IBOutlet UIView *ButtonView;
 //欢迎图片
 @property (weak, nonatomic) IBOutlet UIImageView *welcomeMV;
@@ -69,14 +70,13 @@
 @property(nonatomic,strong)UIImageView *FocusMV;
 //Logo图片
 @property (weak, nonatomic) IBOutlet UIImageView *logoMV;
-
-//收集用户资料
 //蒙版背景
 @property(nonatomic,strong)UIView *coverView;
 //蒙版
 @property(nonatomic,strong)UIButton *cover;
-
+//地区输入框右边图片
 @property (weak, nonatomic) IBOutlet UIImageView *arrow_right;
+//明文按钮
 @property (weak, nonatomic) IBOutlet UIButton *showPasswdBtn;
 
 
@@ -90,12 +90,7 @@
     [super viewWillAppear:animated];
  
     [MobClick beginLogPageView:@"page登录页面"];
-
-//    if ([[AppDelegate sharedDelegate] isLogin]) {
-//        //用于判断用户第三方登录第一次登录时，按返回键返回时是否已登录成功，如果已登录成功则进入首页
-//        [self dismiss];
-//    }
-    
+  
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
 }
@@ -109,10 +104,11 @@
     
 }
 
+
+//arrow上下转换
 -(void)RegisterAreaTextfieldArrow
 {
-    
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
          self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
     }];
     
@@ -128,20 +124,20 @@
     [self.view addSubview:self.xLoginRegistView];
      self.xLoginView.frame =CGRectMake(0, 40, XScreenWidth, XScreenHeight*2/3 - 40);
     [self.xLoginRegistView addSubview:self.xLoginView];
-     self.RegisterAreaTextF.inputView = self.AreaPicker;
-    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
-    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidEnd];
+    
+    self.RegisterAreaTextF.inputView = self.AreaPicker;
+    
     _LoginBlurView.dynamic = NO;
-    [_LoginBlurView setFrame:self.view.bounds];
     [_LoginBlurView setTintColor:nil];
     [_LoginBlurView setIterations:3];
     [_LoginBlurView setBlurRadius:10];
     [_LoginBlurView updateAsynchronously:YES completion:^{}];
+    _LoginBlurView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
+   
     self.LoginAButton.layer.cornerRadius = 2;
     self.RegisterAButton.layer.cornerRadius = 2;
     self.commitLoginButton.layer.cornerRadius = 2;
     self.RegisterCommitButton.layer.cornerRadius = 2;
-
     self.RegisterAButton.adjustAllRectWhenHighlighted = YES;
     self.RegisterAButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.RegisterAButton.layer.borderWidth = 2;
@@ -156,12 +152,13 @@
     [self.ButtonView addSubview:self.FocusMV];
     self.FocusMV.center = CGPointMake(self.LoginSelectButton.center.x, 38);
     
-    self.LoginPhoneNumberTextF.returnKeyType = UIReturnKeyNext;
-    self.RegisterPasswdTextF.returnKeyType = UIReturnKeyNext;
     self.LoginPhoneNumberTextF.delegate = self;
     self.LoginPasswdTextF.delegate = self;
     self.RegisterPasswdTextF.delegate = self;
+    
     [self.LoginPasswdTextF addTarget:self action:@selector(loginPasswordValueChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
+    [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidEnd];
 }
 
 
@@ -183,8 +180,7 @@
         _AreaPicker =[[UIPickerView alloc] init];
         _AreaPicker.delegate =self;
         _AreaPicker.dataSource =self;
-         NSUInteger row = USER_EN ? 1 : 0;
-        [_AreaPicker selectRow:row inComponent:0 animated:YES];
+        [_AreaPicker selectRow:0 inComponent:0 animated:YES];
         
     }
     return _AreaPicker;
@@ -196,10 +192,7 @@
         _NextAreaPicker =[[UIPickerView alloc] init];
         _NextAreaPicker.delegate =self;
         _NextAreaPicker.dataSource =self;
-        
-        NSUInteger row = USER_EN ? 1 : 0;
-        
-        [_NextAreaPicker selectRow:row inComponent:0 animated:YES];
+        [_NextAreaPicker selectRow:0 inComponent:0 animated:YES];
         
     }
     return _NextAreaPicker;
@@ -223,10 +216,12 @@
     [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
     [self.RegisterAButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     [self.LoginAButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
-    [self.welcomeMV setImage:[UIImage imageNamed:GDLocalizedString(@"LoginVC-welImage")]];
-     NSString *serviceString = GDLocalizedString(@ "LoginVC-0010");
+//    [self.welcomeMV setImage:[UIImage imageNamed:GDLocalizedString(@"LoginVC-welImage")]];
+ 
+    
+    NSString *serviceString = GDLocalizedString(@ "LoginVC-0010");
      NSRange NotiRangne =[serviceString rangeOfString:GDLocalizedString(@ "LoginVC-keyWord")];
-     NSMutableAttributedString *AtributeStr = [[NSMutableAttributedString alloc] initWithString:serviceString ];
+    NSMutableAttributedString *AtributeStr = [[NSMutableAttributedString alloc] initWithString:serviceString ];
      [AtributeStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_RED range: NotiRangne];
      [AtributeStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NotiRangne];
      [self.ServiceButton setAttributedTitle: AtributeStr forState:UIControlStateNormal];
@@ -283,12 +278,14 @@
     
     UIView  *moveView  =  self.xLoginRegistView;
     
+    CGSize contentSize = self.view.bounds.size;
+    
     if (up) {
-        moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, (self.view.frame.size.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
+        moveView.center = CGPointMake(contentSize.width / 2.0f, (contentSize.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
         
      } else {
          
-       moveView.center = CGPointMake(self.view.frame.size.width / 2.0f, XScreenHeight*2/3);
+       moveView.center = CGPointMake(contentSize.width / 2.0f, XScreenHeight*2/3);
     }
     
     [self.view layoutSubviews];
@@ -297,23 +294,26 @@
 }
 
 
+//注册切换登录按钮
 - (IBAction)changeLoginView:(UIButton *)sender {
-  
+    
      [self LoginView:NO withSender:sender];
 
  }
+//登录切换注册按钮
 - (IBAction)changeRegisterView:(UIButton *)sender {
    
     [self LoginView:YES withSender:sender];
 }
 
-//注册登录页面显示、隐藏
--(void)LoginView:(BOOL)hiden withSender:(UIButton *)sender
+//登录、注册按钮之间切换
+- (void)LoginView:(BOOL)hiden withSender:(UIButton *)sender
 {
     
    [self.view endEditing:YES];
     
     self.xRegisterView.hidden = !hiden;
+    
     self.xLoginView.hidden = hiden;
     
     [UIView animateWithDuration:0.01 animations:^{
@@ -322,15 +322,13 @@
         
     }];
     
-    
-    if ([sender.currentTitle isEqualToString:@"登录"] || self.RegisterPasswdTextF.secureTextEntry == NO) {
-        
-        [self showPassword:self.showPasswdBtn];
-    }
+    //密码框是否明文显示
+    if ([sender.currentTitle isEqualToString:@"登录"] || self.RegisterPasswdTextF.secureTextEntry == NO)  [self showPassword:self.showPasswdBtn];
     
 
 }
 
+//用于控制登录、注册页面显示或隐藏
 -(void)LoginViewShow:(BOOL)show sender:(UIButton *)sender
 {
    
@@ -350,13 +348,10 @@
   
     if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
         
-        
         self.xLoginView.hidden = YES;
         self.FocusMV.center = CGPointMake(XScreenWidth*0.75,38);
         
     }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
-        
-
         
         
         self.xRegisterView.hidden = YES;
@@ -364,11 +359,9 @@
         
     }else{
         
-        
+        //当登录、注册页面回到初始位置时，子控件内容会被清空
         self.LoginPasswdTextF.text = @"";
         self.LoginPhoneNumberTextF.text = @"";
-
-        
         self.RegisterPhoneTextF.text = @"";
         self.RegisterVerTextF.text = @"";
         self.RegisterPasswdTextF.text = @"";
@@ -391,36 +384,28 @@
   
 }
 
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
    
-    if ([[AppDelegate sharedDelegate] isLogin]) {
-        
-        return;
-    }
+    if ([[AppDelegate sharedDelegate] isLogin])  return; //当登录情况，根本不会用到这个方法
     
     [self.view  endEditing:YES];
 }
 
-
-#pragma mark ————————正常（非第三方）登录
+// 正常（非第三方）登录
 - (IBAction)LoginButtonCommit:(id)sender {
     
  
-    if (![self checkNetworkState]) {
-        
-        return;
-    }
+    if (![self checkNetworkState]) return; //网络连接失败提示
     
-    
-    if (self.LoginPhoneNumberTextF.text.length == 0) {
+    if (0 ==  self.LoginPhoneNumberTextF.text.length) {
         
          AlerMessage(@"手机号码不能为空");
         
         return;
     }
-    if (self.LoginPasswdTextF.text.length == 0) {
+    
+    if (0 ==  self.LoginPasswdTextF.text.length ) {
         
         AlerMessage(@"密码不能为空");
         
@@ -439,7 +424,7 @@
 }
 
 
-//正常（非第三方）登录成功相关处理
+//正常登录成功相关处理  （非第三方）登录
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
@@ -449,8 +434,6 @@
     
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
-    
-
     
     if (phone.length == 0) {
         
@@ -471,9 +454,7 @@
     
 }
 
-
-
-#pragma mark ———————— 第三方登录
+// 第三方登录
 - (IBAction)otherLogin:(UIButton *)sender
 {
     
@@ -502,23 +483,22 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
             
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
-            NSMutableDictionary *weixinInfo =[NSMutableDictionary dictionary];
-            [weixinInfo setValue:snsAccount.usid forKey:@"user_id"];
-            [weixinInfo setValue:platformName forKey:@"provider"];
-            [weixinInfo setValue:snsAccount.accessToken forKey:@"token"];
-            [self  loginWithParameters:weixinInfo];
+           
+            NSMutableDictionary *userInfo =[NSMutableDictionary dictionary];
+            [userInfo setValue:snsAccount.usid forKey:@"user_id"];
+            [userInfo setValue:platformName forKey:@"provider"];
+            [userInfo setValue:snsAccount.accessToken forKey:@"token"];
+            [self  loginWithParameters:userInfo];
         }
     });
     
  
 }
 
-
-#pragma mark ———————— 第三方登录传参并登录
+// 第三方登录传参并登录
 -(void)loginWithParameters:(NSMutableDictionary *)userInfo
 {
-
-    //存储第三方登录平台信息
+     //存储第三方登录平台信息  用于绑定手机页面使用
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:userInfo[@"provider"]  forKey:@"provider"];
     [ud synchronize];
@@ -527,13 +507,9 @@
         
          if (response[@"new"]) {
              
-            LoginSelectViewController *selectVC =[[LoginSelectViewController alloc] initWithNibName:@"LoginSelectViewController" bundle:[NSBundle mainBundle]];
-            selectVC.parameter = userInfo;
-            [self.navigationController pushViewController:selectVC animated:YES];
+             [self caseLoginSelection:userInfo];
              
-        }
-        else if([response[@"role"] isEqualToString:@"user"])
-        {
+        }else if([response[@"role"] isEqualToString:@"user"]){
             
             [self OtherLoginSuccessWithResponse:response andUserInfo:userInfo];
             
@@ -556,17 +532,15 @@
     
     //当用户没有电话时发出通知，让用户填写手机号
     !response[@"phonenumber"]? [self caseBangding] :  [self dismiss];
-    
-
+ 
 }
 
 //发送验证码
 - (IBAction)SendVertificationCode:(id)sender {
     
     NSString *nomalError = @"手机号码格式错误";
-
     
-     if (self.RegisterPhoneTextF.text.length == 0) {
+     if (0 == self.RegisterPhoneTextF.text.length) {
          
          AlerMessage(@"手机号码不能为空");
          
@@ -585,11 +559,8 @@
             AlerMessage(errorStr);
 
             return;
-            
         }
-        
     }
-
     
     
     if ([self.RegisterAreaTextF.text containsString:@"44"]) {
@@ -604,9 +575,7 @@
             AlerMessage(errorStr);
             
             return;
-            
         }
-        
     }
 
     
@@ -615,7 +584,6 @@
         AlerMessage(nomalError);
         
         return;
-        
     }
     
  
@@ -637,7 +605,9 @@
     
     NSString *phoneNumber = self.RegisterPhoneTextF.text;
     
-     self.VertifButton.enabled = NO;
+    UIButton *vertificationBtn = (UIButton *)sender;
+    
+    vertificationBtn.enabled = NO;
     
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"register", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": areaCode}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -646,7 +616,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        self.VertifButton.enabled = YES;
+        vertificationBtn.enabled = YES;
     }];
     
     
@@ -656,15 +626,18 @@
 - (void)runVerifyCodeColdDownTimer {
 
     self.verifyCodeColdDownCount--;
-      if (self.verifyCodeColdDownCount > 0) {
+    
+    if (self.verifyCodeColdDownCount > 0) {
  
         [self.VertifButton setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
           
     } else {
+        
         self.VertifButton.enabled = YES;
         [self.VertifButton setTitle:@"重新发送"  forState:UIControlStateNormal];
         [self.verifyCodeColdDownTimer invalidate];
         _verifyCodeColdDownTimer = nil;
+        
     }
 }
 
@@ -672,33 +645,35 @@
 - (IBAction)RegisterButtonCommitPressed:(id)sender {
     
     
-    if (![self checkNetworkState]) {
+    if (![self checkNetworkState])return;
+    
+    if (![self verifyRegisterFields]) return;
+    
+    NSString *areaCode;
+    
+    if ([self.RegisterAreaTextF.text containsString:@"44"]) {
         
+        areaCode = @"44";
         
-        return;
+    }else if( [self.RegisterAreaTextF.text containsString:@"60"]){
+        
+        areaCode = @"60";
+        
+    }else{
+        
+        areaCode = @"86";
     }
-    
-    
-    if (![self verifyRegisterFields]) {
-        
-        return;
-    }
-    
-     NSString *AreaNumber =[self.RegisterAreaTextF.text containsString:@"44"]?@"44": @"86";
     
     [self
      startAPIRequestWithSelector:kAPISelectorRegister
-     parameters:@{@"mobile_code":AreaNumber,@"username":self.RegisterPhoneTextF.text, @"password":self.RegisterPasswdTextF.text, @"vcode": @{@"code":self.RegisterVerTextF.text}}
+     parameters:@{@"mobile_code":areaCode,@"username":self.RegisterPhoneTextF.text, @"password":self.RegisterPasswdTextF.text, @"vcode": @{@"code":self.RegisterVerTextF.text}}
      success:^(NSInteger statusCode, NSDictionary *response) {
        
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         
          [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
-         
          [MobClick event:@"myoffer_Register"];
          [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
 
-         
+         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
          [hud applySuccessStyle];
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
@@ -707,13 +682,121 @@
      }];
 
 }
+
+//返回注册登录第一页
+- (IBAction)backButtonPressed:(KDEasyTouchButton *)sender {
+  
+    [self LoginViewShow:NO sender:sender];
+    
+}
+//退出登录页面
+- (IBAction)popButtonPressed:(KDEasyTouchButton *)sender {
+    
+    [self dismiss];
+}
+
+// 点击进入服务条款页面
+- (IBAction)ServiceButtonPressed:(id)sender {
+  
+      WebViewController  *service =[[WebViewController alloc] init];
+      service.path =  [NSString stringWithFormat:@"%@docs/%@/web-agreement.html",DOMAINURL,GDLocalizedString(@"ch_Language")];
+      [self.navigationController pushViewController:service animated:YES];
+    
+}
+
+#pragma mark ——— UIPickerViewDataSource, UIPickerViewDelegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    return self.Areas.count;
+    
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    return self.Areas[row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+      self.RegisterAreaTextF.text = self.Areas[row];
+    
+}
+
+#pragma mark ——— UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+     if (textField == self.LoginPhoneNumberTextF) {
+        
+        [self.LoginPasswdTextF becomeFirstResponder];
+        
+    }else if (textField == self.LoginPasswdTextF)
+    {
+        [self LoginButtonCommit:nil];
+        
+    }else if (textField == self.RegisterPasswdTextF)
+    {
+        [self RegisterButtonCommitPressed:nil];
+
+    }
+ 
+    
+    return YES;
+}
+
+
+//绑定手机号    当用户没有电话时发出通知，让用户填写手机号
+- (void)caseBangding{
+    
+    [self.navigationController pushViewController:[[BangViewController alloc] init] animated:YES];
+}
+
+
+
+// 点击忘记密码
+- (IBAction)ForgetPasswdButtonPressed:(id)sender {
+    
+    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+    
+}
+
+// 切换按钮的状态   密码输入框是否显示明文
+- (IBAction)showPassword:(UIButton *)sender {
+
+    sender.selected = !sender.selected;
+    
+    self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
+    NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
+    [sender setImage:XImage(imageName) forState:UIControlStateNormal];
+    
+}
+
+
+//监听登录密码输入位数
+- (void)loginPasswordValueChange:(UITextField *)textField{
+
+    if (textField.text.length > 16){
+    
+        textField.text = [textField.text substringWithRange:NSMakeRange(0, 16)];
+    }
+ }
+
+
 //注册相关字段验证
 - (BOOL)verifyRegisterFields {
     
     
     NSString *nomalError = @"手机号码格式错误";
     
- 
     if (self.RegisterPhoneTextF.text.length == 0) {
         
         AlerMessage(@"手机号码不能为空");
@@ -766,8 +849,8 @@
         return NO;
         
     }
- 
- 
+    
+    
     if (self.RegisterVerTextF.text.length == 0) {
         AlerMessage(@"验证码不能为空");
         return NO;
@@ -784,120 +867,21 @@
     
     if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
     {   //@"密码长度不小于6个字符"
-         AlerMessage(GDLocalizedString(@"Person-passwd"));
-         return NO;
+        AlerMessage(GDLocalizedString(@"Person-passwd"));
+        return NO;
     }
-   
-    return YES;
-}
-
-
-//返回注册登录第一页
-- (IBAction)backButtonPressed:(KDEasyTouchButton *)sender {
-  
-    [self LoginViewShow:NO sender:sender];
-    
-}
-//退出登录页面
-- (IBAction)popButtonPressed:(KDEasyTouchButton *)sender {
-    
-    [self dismiss];
-}
-
-#pragma mark ———————— 点击进入服务条款页面
-- (IBAction)ServiceButtonPressed:(id)sender {
-  
-      WebViewController  *service =[[WebViewController alloc] init];
-      service.path =  [NSString stringWithFormat:@"http://www.myoffer.cn/docs/%@/web-agreement.html",GDLocalizedString(@"ch_Language")];
-      [self.navigationController pushViewController:service animated:YES];
-    
-}
-
-#pragma  Mark  —————————— UIPickerViewDataSource, UIPickerViewDelegate
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    return self.Areas.count;
-    
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
-    return self.Areas[row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-      self.RegisterAreaTextF.text = self.Areas[row];
-    
-}
-
-#pragma mark ——— UITextFieldDelegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-
-    return YES;
-}
-
- - (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == self.LoginPhoneNumberTextF) {
-        
-        [self.LoginPasswdTextF becomeFirstResponder];
-        
-    }else if (textField == self.LoginPasswdTextF)
-    {
-        [self LoginButtonCommit:nil];
-        
-    }else if (textField == self.RegisterPasswdTextF)
-    {
-        [self RegisterButtonCommitPressed:nil];
-
-    }
- 
     
     return YES;
 }
 
+//选择登录页面，用于用户填写手机号、或绑定原有账号
+- (void)caseLoginSelection:(NSDictionary *)userInfo{
 
- 
-- (void)caseBangding{
-    
-    [self.navigationController pushViewController:[[BangViewController alloc] init] animated:YES];
+    LoginSelectViewController *selectVC =[[LoginSelectViewController alloc] initWithNibName:@"LoginSelectViewController" bundle:[NSBundle mainBundle]];
+    selectVC.parameter = userInfo;
+    [self.navigationController pushViewController:selectVC animated:YES];
 }
 
-
-
-// 点击忘记密码
-- (IBAction)ForgetPasswdButtonPressed:(id)sender {
-    
-    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
-    
-}
-
-- (IBAction)showPassword:(UIButton *)sender {
-
-     // 切换按钮的状态   密码输入框是否显示明文
-    sender.selected = !sender.selected;
-    
-    self.RegisterPasswdTextF.secureTextEntry = !self.RegisterPasswdTextF.secureTextEntry;
-    NSString *imageName = sender.selected ? @"showpassword" : @"hidepassword";
-    [sender setImage:XImage(imageName) forState:UIControlStateNormal];
-    
-}
-
-
-//监听登录密码输入位数
-- (void)loginPasswordValueChange:(UITextField *)textField{
-
-    if (textField.text.length > 16) {
-        textField.text = [textField.text substringWithRange:NSMakeRange(0, 16)];
-    }
-    
-}
 
 - (void)didReceiveMemoryWarning {
     
@@ -906,7 +890,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-KDUtilRemoveNotificationCenterObserverDealloc
+- (void)dealloc{
+    
+    KDClassLog(@"登录 dealloc");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 
