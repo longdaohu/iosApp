@@ -31,6 +31,7 @@
         [self.contentView addSubview:self.titleLab];
         
         self.contentView.layer.cornerRadius = CORNER_RADIUS;
+        
         self.contentView.layer.masksToBounds = YES;
  
         self.backgroundColor =  XCOLOR_BG;
@@ -55,9 +56,10 @@
     [super layoutSubviews];
     
     CGSize contentSize = self.bounds.size;
+    
     CGFloat logox = 0;
     CGFloat logoy = 0;
-    CGFloat logow = contentSize.width;
+    CGFloat logow = contentSize.width + 20;
     CGFloat logoh = contentSize.height;
     self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     

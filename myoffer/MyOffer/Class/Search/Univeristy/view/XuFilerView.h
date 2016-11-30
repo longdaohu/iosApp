@@ -12,7 +12,6 @@
 @class XuFilerView;
 @protocol  XuFilerViewDelegate <NSObject>
 -(void)filerViewItemClick:(FilerButtonItem *)sender;
-
 @end
 
 @interface XuFilerView : UIViewController

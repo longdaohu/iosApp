@@ -11,11 +11,11 @@
 #import "WYLXCell.h"
 #import "WYLXFooterView.h"
 #import "PipeiEditViewController.h"
-//#import "YourPhoneView.h"
+#import "IntelligentResultViewController.h"
 #import "WYLXSuccessView.h"
 #import "NomalTableSectionHeaderView.h"
 
-#define Failure @"fail"
+#define Failure @"123456"
 typedef enum {
     PickerViewTypeCountry = 110,
     PickerViewTypeSubject = 111,
@@ -67,7 +67,7 @@ typedef enum {
 @property(nonatomic,strong)WYLXSuccessView *sucessView;
 //用于标识提交留学按钮是还被点击
 @property(nonatomic,assign)LiuxuePageClickItemType clickType;
-
+@property(nonatomic,assign)NSInteger recommendationsCount;
 @end
 
 
@@ -191,8 +191,18 @@ typedef enum {
     
     [self makeUI];
     
+    if (LOGIN) {
+        //判断是否有智能匹配数据或收藏学校
+        XWeakSelf
+        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+        }];
+    }
+    
 }
 
+//
 - (void)userInformation{
 
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -204,6 +214,9 @@ typedef enum {
         self.phoneNumber = Failure;
         
     }];
+    
+    
+    
 
 }
 
@@ -652,18 +665,15 @@ typedef enum {
 //点击智能匹配选项
 -(void)casePipei{
     
-    PipeiEditViewController *pipei =[[PipeiEditViewController alloc] init];
-//    pipei.isComeBack = YES;
-    [self.navigationController pushViewController:pipei animated:YES];
+    UIViewController *vc = (self.recommendationsCount > 0) ? [[IntelligentResultViewController alloc] init] : [[PipeiEditViewController alloc] init];
+     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 //我要留学选项
 -(void)caseWoyaoliuxue{
 
-    if (![self checkFillInformation]) {
-        
-        return;
-    }
+    if (![self checkFillInformation])  return;
     
     RequireLogin
  
@@ -678,7 +688,6 @@ typedef enum {
  
     XWeakSelf
     NSDictionary *parameters =  @{@"fastPass": @{@"des_country": self.country, @"grade":self.grade, @"subject":self.ApplySubject, @"phonenumber":self.phoneNumber}};
-    
     [self
      startAPIRequestWithSelector:kAPISelectorWoYaoLiuXue
      parameters:parameters

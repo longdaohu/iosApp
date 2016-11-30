@@ -271,8 +271,6 @@
             return;
             
         }
-
-    
         
     }
     
@@ -344,12 +342,64 @@
 - (void)caseSubmit:(UIButton *)sender{
     
     
-    if (([self.areaFT.text containsString:@"86"] && self.phoneTF.text.length != 11) ||([self.areaFT.text containsString:@"44"] && self.phoneTF.text.length != 10) ) {
+    NSString *nomalError = @"手机号码格式错误";
+    
+    if (self.phoneTF.text.length == 0) {
+        
+        self.errorLab.text = @"手机号码不能为空";
         
         [self showError:YES];
         
         return;
     }
+    
+    if ([self.areaFT.text containsString:@"86"]) {
+        
+        NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        if (![firstChar isEqualToString:@"1"] || self.phoneTF.text.length != 11) {
+            
+            errorStr = @"请输入“1”开头的11位数字";
+            
+            self.errorLab.text = errorStr;
+            
+            [self showError:YES];
+            
+            return;
+            
+        }
+        
+    }
+    
+    if ([self.areaFT.text containsString:@"44"]) {
+        
+        NSString *firstChar = [self.phoneTF.text substringWithRange:NSMakeRange(0, 1)];
+        NSString *errorStr;
+        
+        if (![firstChar isEqualToString:@"7"] || self.phoneTF.text.length != 10) {
+            
+            errorStr = @"请输入“7”开头的10位数字";
+            
+            self.errorLab.text = errorStr;
+            
+            [self showError:YES];
+            
+            return;
+            
+        }
+        
+    }
+    
+    if ([self.areaFT.text containsString:@"60"] && (self.phoneTF.text.length < 7 || self.phoneTF.text.length > 9) ) {
+        
+        self.errorLab.text = nomalError;
+        
+        [self showError:YES];
+        
+        return;
+        
+    }
+
     
     
     NSMutableDictionary *infoParameters =[NSMutableDictionary dictionary];

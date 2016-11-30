@@ -52,7 +52,7 @@
         self.redSpotsView=[[UIView alloc] init];
         [self.contentView addSubview:self.redSpotsView];
         self.redSpotsView.backgroundColor = [UIColor redColor];
-        self.redSpotsView.layer.cornerRadius = RedSpot_Height * 0.5;
+        self.redSpotsView.layer.cornerRadius = 6;
         
         self.titleLab =[UILabel labelWithFontsize:XPERCENT * 15 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.titleLab];
@@ -94,10 +94,10 @@
     self.logoView.frame =CGRectMake(logox, logoy, logow, logoh);
     
 
-    CGFloat redw = RedSpot_Height;
+    CGFloat redw = 12;
     CGFloat redh = redw;
-    CGFloat redx = CGRectGetMaxX(self.logoView.frame) - 4 - redw;
-    CGFloat redy = logoy + 4;
+    CGFloat redx = CGRectGetMaxX(self.logoView.frame) - redw;
+    CGFloat redy = logoy;
     self.redSpotsView.frame =CGRectMake(redx, redy, redw, redh);
     
     CGFloat titleX = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;

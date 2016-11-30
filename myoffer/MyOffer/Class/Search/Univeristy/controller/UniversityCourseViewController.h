@@ -8,10 +8,7 @@
 
 #import "BaseViewController.h"
 #import "FilterView.h"
-@interface UniversityCourseViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
-    IBOutlet UITableView *_tableView;
-    IBOutlet UILabel *_selectedCountLabel;
-}
+@interface UniversityCourseViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (instancetype)initWithUniversityID:(NSString *)ID;
 

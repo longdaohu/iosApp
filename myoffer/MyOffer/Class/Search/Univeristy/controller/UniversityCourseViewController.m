@@ -14,10 +14,6 @@
 #define COURSEPAGE @"page课程列表"
 
 @interface UniversityCourseViewController ()<XuFilerViewDelegate> {
-   // NSArray *_result;
-    
-    NSMutableArray *_result;
-    NSArray *_subjectOptions, *_levelOptions, *_levelKeyOptions;
     
     NSMutableSet *_selectedIDs, *_newSelectedIDs;
     
@@ -26,14 +22,17 @@
     BOOL _endPage;
 }
 
- @property (weak, nonatomic) IBOutlet KDEasyTouchButton *summitBtn;
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *summitBtn;
 @property(nonatomic,strong)XuFilerView *filer;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)XWGJnodataView *NoDataView;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *selectedCountLabel;
+@property(nonatomic,strong)NSMutableArray *result;
 @end
 
 #define kCellIdentifier NSStringFromClass([UniversityCourseCell class])
+
 @implementation UniversityCourseViewController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -100,7 +99,7 @@
         _NoDataView.hidden = YES;
         _NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noDataSubject");
         
-        [self.view insertSubview:_NoDataView aboveSubview:_tableView];
+        [self.view insertSubview:_NoDataView aboveSubview:self.tableView];
     }
     
     return _NoDataView;
@@ -111,10 +110,10 @@
 {
    
     [self.summitBtn setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
-    _selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
+    self.selectedCountLabel.text = [NSString stringWithFormat:@"%@ : 0",GDLocalizedString(@"ApplicationList-003")];
     
-    [_tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
-    _tableView.tableFooterView =[[UIView alloc] init];
+    [self.tableView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+    self.tableView.tableFooterView =[[UIView alloc] init];
     
     [self makeTopView];
     
@@ -165,9 +164,9 @@
         }
          
          
-           _result = [response[@"courses"] mutableCopy];
+           self.result = [response[@"courses"] mutableCopy];
          
-         if (_result.count<40) {
+         if (self.result.count<40) {
              
              _endPage = YES;
          }
@@ -177,9 +176,9 @@
          }
          
          
-          self.NoDataView.hidden = !(_result.count == 0);
+          self.NoDataView.hidden = !(self.result.count == 0);
          
-          [_tableView reloadData];
+          [self.tableView reloadData];
     }];
 }
 
@@ -187,7 +186,7 @@
 #pragma mark ———————— UItableViewData uitableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    NSDictionary *info = _result[indexPath.row];
+    NSDictionary *info = self.result[indexPath.row];
 
     CGFloat  high = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XScreenWidth - 60, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:15.0]  }context:nil].size.height;
 
@@ -196,12 +195,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-    return _result.count;
+    return self.result.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    NSDictionary *info = _result[indexPath.row];
+    NSDictionary *info = self.result[indexPath.row];
     
     UniversityCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.info =  info;
@@ -209,7 +208,7 @@
     
     [self configureCellSelectionView:cell id:info[@"_id"]];
     
-    if (indexPath.row == _result.count-1 && !_endPage) {
+    if (indexPath.row == self.result.count-1 && !_endPage) {
         
         _nextPage = ++_nextPage;
         
@@ -240,7 +239,7 @@
          
   
              for (NSDictionary *test in moreResultArray) {
-                 [_result addObject:test];
+                 [self.result addObject:test];
 
                  
              }
@@ -254,7 +253,7 @@
              _endPage = YES;
          }
          
-          [_tableView reloadData];
+          [self.tableView reloadData];
      }];
 
  
@@ -278,7 +277,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    NSDictionary *info = _result[indexPath.row];
+    NSDictionary *info = self.result[indexPath.row];
     NSString *id = info[@"_id"];
     
     if ([_selectedIDs containsObject:id]) {
@@ -293,7 +292,7 @@
     UniversityCourseCell *cell = (UniversityCourseCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self configureCellSelectionView:cell id:id];
     //已选择:
-    _selectedCountLabel.text = [NSString stringWithFormat:@"%@：%d", GDLocalizedString(@"ApplicationList-003"),(int)_newSelectedIDs.count];
+    self.selectedCountLabel.text = [NSString stringWithFormat:@"%@：%d", GDLocalizedString(@"ApplicationList-003"),(int)_newSelectedIDs.count];
 }
 
 
@@ -350,12 +349,17 @@
     }
     
     
-    [_result removeAllObjects];
+    [self.result removeAllObjects];
     
     [self reloadData];
     
 }
 
+- (void)dealloc{
+    
+    KDClassLog(@" 课程详情 dealloc");
+    
+}
 
 
 @end

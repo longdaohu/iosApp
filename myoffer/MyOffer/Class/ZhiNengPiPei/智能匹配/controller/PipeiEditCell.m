@@ -103,7 +103,8 @@
     self.sender.hidden = !(group.groupType == PipeiGroupTypeUniversity);
     
     self.arrowView.hidden = !(group.groupType == PipeiGroupTypeSubject);
-
+   
+    //监听分数输入框
     if (group.groupType == PipeiGroupTypeScorce) {
         
         [self.contentTF addTarget:self action:@selector(limitMaxScore:) forControlEvents:UIControlEventEditingChanged];
@@ -159,13 +160,21 @@
 -(void)limitMaxScore:(UITextField *)textField
 {
     
+    //1、判断前3三个字符
     if (textField.text.length > 3) {
         
         NSString *shortStr =  [textField.text substringWithRange:NSMakeRange(0, 3)];
         
-        [shortStr  isEqualToString:@"100"] ?  textField.text = @"100" : nil;
+        if ([shortStr  isEqualToString:@"100"]){
+        
+            textField.text = @"100";
+            
+            return;
+        }
         
     }
+    
+    
     
     if ([textField.text containsString:@"."]) {
         
@@ -178,7 +187,6 @@
             
             textField.text = [textField.text substringWithRange:NSMakeRange(0, pointRange.length  + pointRange.location)];
         }
-        
         
         if (textField.text.length > (pointRange.location + pointRange.length + 2)) {
             

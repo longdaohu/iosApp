@@ -20,10 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
 @property(nonatomic,weak)id<ResultTableViewCellDelegate> delegate;
 
-
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
-- (void)configureWithInfo:(UniversityFrame *)info;
-- (void)configureWithInfo:(UniversityFrame *)info ranking:(NSString *)ranking;
+- (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame;
 - (void)configrationCellLefButtonWithTitle:(NSString  *)title imageName:(NSString *)imageName;
 
 

@@ -28,18 +28,16 @@
 
 @end
 
-
 @implementation ResultTableViewCell
 +(instancetype)cellInitWithTableView:(UITableView *)tableView{
 
    static NSString  *identify = @"Result";
    ResultTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-    
     if (!cell) {
         
-        cell =[[NSBundle mainBundle] loadNibNamed:@"ResultTableViewCell" owner:nil options:nil].lastObject;
+         cell =[[NSBundle mainBundle] loadNibNamed:@"ResultTableViewCell" owner:nil options:nil].lastObject;
         
-    }
+     }
     
     return cell;
 }
@@ -52,12 +50,12 @@
     //logo图标
     self.logoView =[[LogoView alloc] init];
     [self addSubview:self.logoView];
-    
+   
+    //中文名
     self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
-    self.nameLab.hidden = USER_EN ? YES : NO;
-    
+     
     //英文名
-     self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
+    self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
     self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
     self.official_nameLab.numberOfLines = 2;
     self.official_nameLab.clipsToBounds = YES;
@@ -78,10 +76,12 @@
     self.address_detail_TF.userInteractionEnabled = NO;
     [self.contentView addSubview:self.address_detail_TF];
     
+    //存放星星View
     self.starBackground =[[UIView alloc] init];
     [self addSubview:self.starBackground];
     
     for (NSInteger i = 0; i<5; i++) {
+        
         UIImageView *mv =[[UIImageView alloc] init];
         mv.image = [UIImage imageNamed:@"star"];
         mv.contentMode = UIViewContentModeScaleAspectFit;
@@ -105,12 +105,13 @@
     return Lab;
 }
 
-- (void)configureWithInfo:(UniversityFrame *)info {
+
+- (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame {
     
-    [self configureWithInfo:info ranking:RANKTI];
+    [self configureWithUniversityFrame:uniFrame ranking:RANKTI];
 }
 
-- (void)configureWithInfo:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
+- (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
    
     UniversityNew *university =  uniFrame.university;
     
@@ -142,9 +143,7 @@
     
     BOOL RankTIType = [self.optionOrderBy isEqualToString:RANKTI];
     
-    
     if (!self.isStart) {
-        
         
         if (RankTIType) {
             
@@ -156,6 +155,8 @@
             NSString   *rankStr02 = [university.ranking_qs intValue]  == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",university.ranking_qs];
             self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniversityDetail-003"), rankStr02];
         }
+        
+        
     }else{
         
         self.starBackground.frame = uniFrame.starBgFrame;
@@ -196,8 +197,7 @@
 
 
 
--(void)selectCellID:(UIButton *)sender
-{
+- (void)selectCellID:(UIButton *)sender{
 
     if ([self.delegate respondsToSelector:@selector(selectResultTableViewCellItem:withUniversityInfo:)]) {
         

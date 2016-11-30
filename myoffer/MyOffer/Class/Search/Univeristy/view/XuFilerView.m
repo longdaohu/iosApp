@@ -7,34 +7,29 @@
 //
 
 #define  BGHEIGHT 40
-#define  LEFT_SELECTED  self.leftButton.bgButton.selected
+#define  LEFT_SELECTED  self.sujectButton.bgButton.selected
 #import "XuFilerView.h"
 
 @interface XuFilerView ()<UITableViewDelegate,UITableViewDataSource,FilerButtonItemDelegate>
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIView *centerLine;
-@property(nonatomic,strong)FilerButtonItem *leftButton;
-@property(nonatomic,strong)FilerButtonItem *rightButton;
+@property(nonatomic,strong)FilerButtonItem *sujectButton;
+@property(nonatomic,strong)FilerButtonItem *xueweiButton;
 @property(nonatomic,strong)UIButton *lastButton;
-@property(nonatomic,strong)UITableView *leftTableView;
-@property(nonatomic,strong)UITableView *rightTableView;
-@property(nonatomic,strong)NSArray *leftArr;
-@property(nonatomic,strong)NSArray *rightArr;
-@property(nonatomic,strong)NSIndexPath *lastLeftIndexPath;
-@property(nonatomic,strong)NSIndexPath *lastRightIndexPath;
+@property(nonatomic,strong)UITableView *subjectTableView;
+@property(nonatomic,strong)UITableView *xueweiTableView;
+@property(nonatomic,strong)NSArray *subjectArr;
+@property(nonatomic,strong)NSArray *xueweiArr;
+@property(nonatomic,strong)NSIndexPath *lastSubjecIndexPath;
+@property(nonatomic,strong)NSIndexPath *lastXueWeiIndexPath;
 
 @end
 
 @implementation XuFilerView
 
-
 - (void)viewDidLoad {
  
     [super viewDidLoad];
-    
-    self.view.clipsToBounds = YES;
-    
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
  
     [self makeUI];
     
@@ -43,27 +38,33 @@
 
 -(void)makeUI
 {
-    self.bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, BGHEIGHT)];
+    self.view.clipsToBounds = YES;
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    
+    
+    CGFloat bgW = XScreenWidth;
+    CGFloat bgH = BGHEIGHT;
+    self.bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, bgW, bgH)];
     self.bgView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.bgView];
     
     
-    FilerButtonItem *leftButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 0, XScreenWidth * 0.5, BGHEIGHT)];
-    leftButton.delegate = self;
-    self.leftButton = leftButton;
-    self.leftButton.tag = 10;
-    [self.bgView addSubview:self.leftButton];
+    CGFloat subjectcW = bgW * 0.5;
+    CGFloat subjectcX = subjectcW;
+    FilerButtonItem *sujectButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(subjectcX, 0, subjectcW, bgH)];
+    sujectButton.delegate = self;
+    self.sujectButton = sujectButton;
+    self.sujectButton.tag = 10;
+    [self.bgView addSubview:self.sujectButton];
     
-    self.rightButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth * 0.5, BGHEIGHT)];
-    self.rightButton .delegate = self;
-    self.rightButton.tag = 11;
-    [self.bgView addSubview:self.rightButton];
+    self.xueweiButton =[[FilerButtonItem alloc] initWithFrame:CGRectMake(0, 0,subjectcW, bgH)];
+    self.xueweiButton .delegate = self;
+    self.xueweiButton.tag = 11;
+    [self.bgView addSubview:self.xueweiButton];
     
-    
-    self.centerLine =[[UIView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5, 10, 1, 20)];
+    self.centerLine =[[UIView alloc] initWithFrame:CGRectMake(bgW * 0.5, 10, 1, 20)];
     self.centerLine.backgroundColor = [UIColor colorWithRed:230.0/255 green:230.0/255 blue:230.0/255 alpha:1];
     [self.bgView addSubview:self.centerLine];
-    
     
     [self makeTableView];
 
@@ -71,15 +72,18 @@
 
 -(void)makeTableView
 {
-    self.leftTableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth * 0.5,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
-    self.leftTableView.delegate = self;
-    self.leftTableView.dataSource = self;
-    [self.view addSubview:self.leftTableView];
     
-    self.rightTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,BGHEIGHT, XScreenWidth * 0.5, 0) style:UITableViewStylePlain];
-    self.rightTableView.delegate = self;
-    self.rightTableView.dataSource = self;
-    [self.view addSubview:self.rightTableView];
+    CGFloat subjectW = XScreenWidth * 0.5;
+    self.subjectTableView =[[UITableView alloc] initWithFrame:CGRectMake(subjectW,BGHEIGHT, subjectW, 0) style:UITableViewStylePlain];
+    self.subjectTableView.delegate = self;
+    self.subjectTableView.dataSource = self;
+    [self.view addSubview:self.subjectTableView];
+    
+    self.xueweiTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,BGHEIGHT, subjectW, 0) style:UITableViewStylePlain];
+    self.xueweiTableView.delegate = self;
+    self.xueweiTableView.dataSource = self;
+    [self.view addSubview:self.xueweiTableView];
+    
 }
 
 
@@ -87,15 +91,16 @@
 {
     _groups = groups;
  
-    NSArray *leftArr = self.groups[0];
-    self.leftButton.title = GDLocalizedString(@"UniCourseDe-005");
+    NSArray *subjectArr = self.groups[0];
+    self.sujectButton.title = GDLocalizedString(@"UniCourseDe-005");
     
     
-    NSArray *rightArr = self.groups[1];
-    self.rightButton.title = GDLocalizedString(@"UniCourseDe-006");
+    NSArray *xueweiArr = self.groups[1];
+    self.xueweiButton.title = GDLocalizedString(@"UniCourseDe-006");
     
-    self.leftTableView.scrollEnabled = leftArr.count * BGHEIGHT > XScreenHeight - CGRectGetMaxY(self.filerRect) ? YES : NO;
-    self.rightTableView.scrollEnabled =  rightArr.count * BGHEIGHT  > XScreenHeight - CGRectGetMaxY(self.filerRect)  ? YES : NO;
+    self.subjectTableView.scrollEnabled = subjectArr.count * BGHEIGHT > XScreenHeight - CGRectGetMaxY(self.filerRect) ? YES : NO;
+    
+    self.xueweiTableView.scrollEnabled =  xueweiArr.count * BGHEIGHT  > XScreenHeight - CGRectGetMaxY(self.filerRect)  ? YES : NO;
  
 }
 
@@ -110,10 +115,14 @@
 {
     
     [self showFilerViewButtonItemClick:myButton];
+    
      if (11 == myButton.tag ) {
-         self.leftButton.selected = NO;
+         
+         self.sujectButton.selected = NO;
+         
      }else{
-          self.rightButton.selected = NO;
+         
+          self.xueweiButton.selected = NO;
     }
 
 }
@@ -123,13 +132,13 @@
     
     if (LEFT_SELECTED) {
         
-        self.leftButton.selected = NO;
+        self.sujectButton.selected = NO;
         
-        [self showFilerViewButtonItemClick:self.leftButton];
+        [self showFilerViewButtonItemClick:self.sujectButton];
     }else{
-        self.rightButton.selected = NO;
+        self.xueweiButton.selected = NO;
         
-        [self showFilerViewButtonItemClick: self.rightButton];
+        [self showFilerViewButtonItemClick: self.xueweiButton];
     }
     
 }
@@ -146,7 +155,7 @@
         
     }
     
-    CGRect newRect = 11 == sender.tag ? self.rightTableView.frame : self.leftTableView.frame;
+    CGRect newRect = 11 == sender.tag ? self.xueweiTableView.frame : self.subjectTableView.frame;
     
     NSInteger  index =  11 == sender.tag ?  1 : 0;
     
@@ -154,12 +163,12 @@
     
     newRect.size.height = show ? height : 0;
     
-    CGFloat  tableHeight = 11 == sender.tag ?self.leftTableView.frame.size.height : self.rightTableView.frame.size.height;
+    CGFloat  tableHeight = 11 == sender.tag ?self.subjectTableView.frame.size.height : self.xueweiTableView.frame.size.height;
     
     
     if (show && tableHeight > 0) {
         
-        CGRect  otherNewRect =  11 == sender.tag ? self.leftTableView.frame : self.rightTableView.frame;
+        CGRect  otherNewRect =  11 == sender.tag ? self.subjectTableView.frame : self.xueweiTableView.frame;
         
         otherNewRect.size.height = 0;
         
@@ -169,11 +178,11 @@
             
             if (11 == sender.tag) {
                 
-                self.leftTableView.frame = otherNewRect;
+                self.subjectTableView.frame = otherNewRect;
                 
             }else{
                 
-                self.rightTableView.frame = otherNewRect;
+                self.xueweiTableView.frame = otherNewRect;
                 
             }
         }];
@@ -185,18 +194,18 @@
         
         if (11 == sender.tag) {
             
-            self.rightTableView.frame = newRect;
+            self.xueweiTableView.frame = newRect;
             
         }else{
         
-            self.leftTableView.frame = newRect;
+            self.subjectTableView.frame = newRect;
 
         }
         
         
     } completion:^(BOOL finished) {
         
-        if (!self.leftButton.bgButton.selected && !self.rightButton.bgButton.selected) {
+        if (!self.sujectButton.bgButton.selected && !self.xueweiButton.bgButton.selected) {
             
             [self showSuperViewFrame:NO];
             
@@ -227,7 +236,7 @@
     } completion:^(BOOL finished) {
         
           //判断两个按钮item是否还在动画过程中，如果还在动画ing则self.view不缩小
-        if (!self.leftButton.animating && !self.rightButton.animating) {
+        if (!self.sujectButton.animating && !self.xueweiButton.animating) {
             
             self.view.frame = newRect;
         }
@@ -246,7 +255,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    
-    if (tableView == self.leftTableView) {
+    if (tableView == self.subjectTableView) {
         
         return   [self.groups[0] count];
 
@@ -256,7 +265,7 @@
 
     }
     
- }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -265,26 +274,22 @@
     
     cell.textLabel.font =[UIFont systemFontOfSize:15];
     
+    cell.textLabel.text  =  tableView == self.subjectTableView ? self.groups[0][indexPath.row]:self.groups[1][indexPath.row];
     
-    cell.textLabel.text  =  tableView == self.leftTableView ? self.groups[0][indexPath.row]:self.groups[1][indexPath.row];
-    
-    FilerButtonItem *sender =   tableView == self.leftTableView ? self.leftButton : self.rightButton;
+    FilerButtonItem *sender =   tableView == self.subjectTableView ? self.sujectButton : self.xueweiButton;
     
     UIColor  *color=   [cell.textLabel.text isEqualToString:sender.title] ? XCOLOR_RED : [UIColor blackColor];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = color;
     
-//    if ([cell.textLabel.text isEqualToString:sender.title]) {
-    
-         if (tableView == self.leftTableView) {
+    if (tableView == self.subjectTableView) {
         
-             self.lastLeftIndexPath = indexPath;
+        self.lastSubjecIndexPath = indexPath;
          
-         }else{
+    }else{
              
-              self.lastRightIndexPath = indexPath;
-        }
-//     }
+        self.lastXueWeiIndexPath = indexPath;
+    }
     
     
     return cell;
@@ -296,7 +301,7 @@
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    NSIndexPath *lastIndexPath = LEFT_SELECTED ? self.lastLeftIndexPath : self.lastRightIndexPath;
+    NSIndexPath *lastIndexPath = LEFT_SELECTED ? self.lastSubjecIndexPath : self.lastXueWeiIndexPath;
     UITableViewCell *lastCell =[tableView cellForRowAtIndexPath:lastIndexPath];
     lastCell.textLabel.textColor = [UIColor blackColor];
     lastIndexPath = indexPath;
@@ -304,11 +309,11 @@
     
     if (LEFT_SELECTED) {
         
-        self.lastLeftIndexPath = lastIndexPath;
+        self.lastSubjecIndexPath = lastIndexPath;
         
     }else{
         
-        self.lastRightIndexPath= lastIndexPath;
+        self.lastXueWeiIndexPath= lastIndexPath;
 
     }
     
@@ -317,7 +322,7 @@
      currentCell.textLabel.textColor = XCOLOR_RED;
     
     
-     FilerButtonItem *sender =   LEFT_SELECTED ? self.leftButton : self.rightButton;
+     FilerButtonItem *sender =   LEFT_SELECTED ? self.sujectButton : self.xueweiButton;
      sender.title =  LEFT_SELECTED ? self.groups[0][indexPath.row]:self.groups[1][indexPath.row];
     
     

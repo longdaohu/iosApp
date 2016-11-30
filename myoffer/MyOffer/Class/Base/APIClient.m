@@ -132,6 +132,8 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                  *  error      ：后台提示错误信息
                  */
                 //失败信息解析
+                NSLog(@"%@ 失败信息解析  %@",result,[result class]);
+                
                 NSString *errorStr = result[@"collision"] ? [NSString stringWithFormat:@"phone=%@",result[@"collision"]] : result[@"error"];
                 
                 failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain

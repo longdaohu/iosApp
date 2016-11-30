@@ -87,7 +87,6 @@
     return _resultList;
 }
 
-
 -(NSMutableArray *)sliceAngles
 {
     if (!_sliceAngles) {
@@ -141,7 +140,7 @@
         XWeakSelf
         _pipeiNoDataView = [PipeiNoResultVeiw viewWithActionBlock:^{
             
-            [weakSelf pushPipeiEditPage];
+            [weakSelf casePipeiEditPage];
             
         }];
         
@@ -196,8 +195,7 @@
     [self makeUI];
     
     [self changeLanguageEnvironment];
-    
- 
+  
 }
 
 -(void)changeLanguageEnvironment{
@@ -244,7 +242,6 @@
         self.PieHeadView = nil;
     }
     
-    
     self.PieHeadView = [[XYPieChart alloc] initWithFrame:CGRectMake(0.5 *(XScreenWidth - 208), 0, 208, 208)];
     [self.upHeaderView insertSubview:self.PieHeadView belowSubview:self.centerButton];
     
@@ -252,8 +249,7 @@
     [self.PieHeadView setDelegate:self];
     [self.PieHeadView setStartPieAngle:M_PI/6];
     [self.PieHeadView setAnimationSpeed:1.0];
-    CGFloat fontSize = USER_EN ? 14 : 16;
-    [self.PieHeadView setLabelFont:[UIFont fontWithName:@"Arial-BoldItalicMT" size:fontSize]];
+    [self.PieHeadView setLabelFont:[UIFont fontWithName:@"Arial-BoldItalicMT" size:16]];
     [self.PieHeadView setLabelRadius:75];
     [self.PieHeadView setShowPercentage:NO];
     self.PieHeadView.showLabel = YES;
@@ -277,7 +273,7 @@
 -(void)makeNavigatinView
 {
  
-        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(pushPipeiEditPage)];
+        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(casePipeiEditPage)];
         self.navigationItem.rightBarButtonItem.enabled = NO;
     
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
@@ -323,15 +319,10 @@
 -(void)DataSourseRequst
 {
     
-    if (self.refreshCount >  0) {
-        
-        
-        return;
-    }
+    if (self.refreshCount >  0) return;
     
      self.refreshCount++;
-    
- 
+  
         XWeakSelf;
         
         [self startAPIRequestWithSelector:kAPISelectorZiZengRecommendation  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -345,8 +336,7 @@
             weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
             
         }];
- 
- 
+  
 }
 
 //根据返回数据设置UI
@@ -356,7 +346,6 @@
     [_slices removeAllObjects];
     [self.sliceAngles removeAllObjects];
     [self.recommendations removeAllObjects];
-    //  [self.PieHeadView reloadData];
     [self makePieChar];
     
     NSMutableArray *temp_recommendations = [NSMutableArray array];
@@ -366,11 +355,12 @@
         NSMutableArray *temps = [NSMutableArray array];
         
         for (NSDictionary *obj  in items) {
-            
+           
             UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
             uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
             [temps addObject:uniFrame];
-        }
+            
+         }
         
         [temp_recommendations addObject:temps];
         
@@ -421,8 +411,6 @@
     self.selectIndex  = selectedIndex;
     
     //------------------------------------------------------------------------
-
-    
     
     int total = 0; //用于显示学校总数
     
@@ -451,10 +439,6 @@
     
     //这里应该是正常的
    //   NSLog(@"piechar设置开始角度  %lf %lf",angle,M_PI_2 - angle/2);
-    //2016-11-21 18:00:24.408622 myOffer[1900:497026] piechar设置开始角度  2.243995 0.448799
-    //2016-11-21 18:00:47.929079 myOffer[1900:497026] piechar设置开始角度  2.174949 0.483322
-    //2016-11-21 18:02:01.880433 myOffer[1900:497026] piechar设置开始角度  1.570796 0.785398
-    
     //添加pieCharr的角度
     for (NSNumber *num in _slices) {
         
@@ -521,7 +505,7 @@
     
     UniversityFrame *uniFrame = self.resultList[indexPath.row];
     UniversityNew *university = uniFrame.university;
-    [cell configureWithInfo:uniFrame];
+    [cell configureWithUniversityFrame:uniFrame];
     [self configureCellSelectionView:cell universityId:university.NO_id];
     
     return cell;
@@ -532,10 +516,8 @@
 -(void)selectResultTableViewCellItem:(UIButton *)sender withUniversityInfo:(NSString *)universityID
 {
    
-    if ([self.SelectedUniversityIDs containsObject:universityID]) {
-        
-         return;
-    }
+    if ([self.SelectedUniversityIDs containsObject:universityID]) {return;}
+    
     
     if( [self.NewSelectUniversityIDs containsObject:universityID])
     {
@@ -602,7 +584,14 @@
          [hud hideAnimated:YES afterDelay:2];
          [hud setHiddenBlock:^(KDProgressHUD *hud) {
              
-          [self.navigationController pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil] animated:YES];
+             
+          ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
+             
+          if (self.fromStyle.length > 0) {
+                 
+                 apply.backStyle = YES;
+          }
+          [self.navigationController pushViewController:apply animated:YES];
          
          }];
      }];
@@ -750,33 +739,32 @@
 //返回上级页面
 -(void)popBack
 {
-     
+     //判断是否从编辑页面跳转过来
     if (self.fromStyle.length > 0) {
         
-        NSArray *items =  self.navigationController.childViewControllers;
-        
-        if (items.count > 3) {
+        //从编辑页跳转过来,返回时不经过编辑页跳回上级页面
+        if (self.navigationController.childViewControllers.count > 3) {
             
-            UIViewController *vc =   (UIViewController *)items[items.count - 3];
-            
-            [self.navigationController popToViewController:vc animated:YES];
+            [self.navigationController popToViewController: (UIViewController *)self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3] animated:YES];
        
-         }else{
-        
-             [self.navigationController popToRootViewControllerAnimated:YES];
+            return ;
+
          }
         
-    }else{
-    
-        [self.navigationController popViewControllerAnimated:YES];
-
+        [self.navigationController popToRootViewControllerAnimated:YES];
+     
+        return ;
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
+    
  
 }
 
 
 
--(void)pushPipeiEditPage
+-(void)casePipeiEditPage
 {
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
     pipeiEdit.isfromPipeiResultPage = YES;

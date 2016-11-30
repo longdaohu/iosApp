@@ -15,14 +15,7 @@
 #import "ApplyTableViewCell.h"
 #define SECTIONFOOTERHEIGHT  10
 
-
 @interface ApplyViewController ()<UIAlertViewDelegate>
-{
-    NSArray *_waitingCells;
-    NSArray *_info;
-    NSMutableSet *_selectedIDs;
-    NSArray *_courseInfos;
-}
 @property(nonatomic,strong)NSMutableArray *responds;            //请求得到数据数组
 @property(nonatomic,strong)NSMutableArray *idGroups;             //所有学校的专业ID数组
 @property(nonatomic,strong)NSMutableArray  *courseSelecteds;     //已选中课程ID数组
@@ -35,6 +28,13 @@
 //删除按钮
 @property(nonatomic,strong)UIButton *cancelBottomButton;
 @property(nonatomic,strong)XWGJnodataView *NDataView;
+@property (weak, nonatomic) IBOutlet UITableView *waitingTableView;
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *submitBtn;  //提交按钮
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UILabel *AlertLab;             //用户已提交审核，防止用户重复提交
+@property (weak, nonatomic) IBOutlet UILabel *selectCountLabel;
+
+
 @end
 
 @implementation ApplyViewController
@@ -69,7 +69,7 @@
     }else{
         
         [self.sectionGroups removeAllObjects];
-        [_waitingTableView reloadData];
+        [self.waitingTableView reloadData];
         self.NDataView.hidden = NO;
     }
     
@@ -93,6 +93,7 @@
     
     [self makeUI];
     
+//     NSLog(@"childViewControllers  %ld",self.navigationController.childViewControllers.count);
     
 }
 
@@ -142,7 +143,7 @@
     
     [self configureSelectedCoursedID:[self.courseSelecteds copy]];
     
-    [_waitingTableView reloadData];
+    [self.waitingTableView reloadData];
     
 }
 
@@ -156,14 +157,16 @@
  */
 -(void)checkApplyStatus
 {
+    
+    XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSString *state = response[@"state"];
         
         if (![state containsString:@"1"] && ![state containsString:@"ack"])
         {
-            self.submitBtn.enabled = NO;
-            self.AlertLab.hidden = NO;
+            weakSelf.submitBtn.enabled = NO;
+            weakSelf.AlertLab.hidden = NO;
         }
         
     }];
@@ -177,7 +180,7 @@
     self.NDataView =[XWGJnodataView noDataView];
     self.NDataView.hidden = YES;
     self.NDataView.contentLabel.text = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
-    [self.view insertSubview:self.NDataView  aboveSubview:_waitingTableView];
+    [self.view insertSubview:self.NDataView  aboveSubview:self.waitingTableView];
     
     [self makeOther];
     [self makeButtonItem];
@@ -188,21 +191,21 @@
 
 -(void)makeOther
 {
-    _selectCountLabel.text = [NSString stringWithFormat:@"%@ : ",GDLocalizedString(@"ApplicationList-003")];
+    self.selectCountLabel.text = [NSString stringWithFormat:@"%@ : ",GDLocalizedString(@"ApplicationList-003")];
     self.AlertLab.text     = GDLocalizedString(@"ApplicationList-noti");
     self.title             = GDLocalizedString(@"Me-001");
     [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-commit") forState:UIControlStateNormal];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    if ([_waitingTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+    if ([self.waitingTableView respondsToSelector:@selector(setLayoutMargins:)]) {
         
-        [_waitingTableView setLayoutMargins:UIEdgeInsetsZero];
+        [self.waitingTableView setLayoutMargins:UIEdgeInsetsZero];
         
     }
     
-    _waitingTableView.tableFooterView     = [[UIView alloc] init];
+    self.waitingTableView.tableFooterView     = [[UIView alloc] init];
     
-    _waitingTableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
+    self.waitingTableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
 }
 
 
@@ -277,7 +280,7 @@
                                       
                                   }else{
                                       
-                                      [_waitingTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:sortArray] withRowAnimation:UITableViewRowAnimationFade];
+                                      [weakSelf.waitingTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:sortArray] withRowAnimation:UITableViewRowAnimationFade];
                                       
                                   }
                               }];
@@ -300,7 +303,7 @@
                                   
                                   [weakSelf.cancelUniversityList removeAllObjects];
                                   [weakSelf.cancelSetions removeAllObjects];
-                                  [_waitingTableView reloadData];
+                                  [weakSelf.waitingTableView reloadData];
                                   
                                   weakSelf.NDataView.hidden  = weakSelf.sectionGroups.count  > 0;
                                   weakSelf.submitBtn.enabled = weakSelf.sectionGroups.count  > 0;
@@ -446,7 +449,7 @@
                 }
             }
             
-            [_waitingTableView reloadData];
+            [weakSelf.waitingTableView reloadData];
             
         }
         
@@ -501,7 +504,7 @@
             [self.cancelSetions removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.section]];
             
             
-            [_waitingTableView reloadData];
+            [self.waitingTableView reloadData];
             
         }
         
@@ -530,7 +533,7 @@
                     [self.courseSelecteds removeObject:selectedID];
                     [self.courseSelecteds addObject:subject.courseID];
                     
-                    [_waitingTableView reloadData];
+                    [self.waitingTableView reloadData];
                     
                     return;
                 }
@@ -540,7 +543,7 @@
             [self.courseSelecteds addObject:subject.courseID];
             
         }
-        [_waitingTableView reloadData];
+        [self.waitingTableView reloadData];
         
         
         [self configureSelectedCoursedID:[self.courseSelecteds copy]];
@@ -592,7 +595,7 @@
 
 - (void)configureSelectedCoursedID:(NSArray *)selectedIDs {
     
-    _selectCountLabel.text = [NSString stringWithFormat:@"%@ : %ld ",GDLocalizedString(@"ApplicationList-003"), (unsigned long)self.courseSelecteds.count];
+    self.selectCountLabel.text = [NSString stringWithFormat:@"%@ : %ld ",GDLocalizedString(@"ApplicationList-003"), (unsigned long)self.courseSelecteds.count];
 }
 
 
@@ -631,6 +634,7 @@
 -(NSMutableArray *)cancelCourseList
 {
     if (!_cancelCourseList) {
+        
         _cancelCourseList = [NSMutableArray array];
     }
     return _cancelCourseList;
@@ -639,6 +643,7 @@
 -(NSMutableArray *)cancelUniversityList
 {
     if (!_cancelUniversityList) {
+        
         _cancelUniversityList = [NSMutableArray array];
     }
     return _cancelUniversityList;
@@ -671,28 +676,44 @@
 -(void)popBackRootViewController
 {
     
-    if (self.isFromMessage) {
+    NSArray *items = self.navigationController.childViewControllers;
+    
+    if (self.backStyle) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        if (items.count > 4) {
+            
+            [self.navigationController popToViewController: (UIViewController *)items[items.count - 4] animated:YES];
+            
+            return ;
+        }
         
     }else{
+     
+        if (items.count > 3) {
+            
+            [self.navigationController popToViewController: (UIViewController *)items[items.count - 3] animated:YES];
+            
+            return ;
+        }
         
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     }
-}
+    
+ }
 
 //用于控制删除按钮出现隐藏
 -(void)bottomUp:(BOOL)up
 {
     float distance = up ? 50.0 : -50.0;
     
+    XWeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
         CGPoint center = self.cancelBottomButton.center;
         center.y += distance;
-        self.cancelBottomButton.center = center;
-        self.bottomView.hidden = !up;
+        weakSelf.cancelBottomButton.center = center;
+        weakSelf.bottomView.hidden = !up;
     }];
 }
 
@@ -735,7 +756,7 @@
         
     }
     
-    [_waitingTableView reloadData];
+    [self.waitingTableView reloadData];
     [self.courseSelecteds removeAllObjects];
     [self configureSelectedCoursedID:self.courseSelecteds];
     
@@ -744,7 +765,7 @@
 
 -(void)dealloc{
     
-    KDClassLog(@"ApplyViewController  dealloc");
+    KDClassLog(@"申请意向  dealloc");
 }
 
 @end

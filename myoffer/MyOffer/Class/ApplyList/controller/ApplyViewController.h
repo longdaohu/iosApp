@@ -8,18 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface ApplyViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
-    IBOutlet UITableView *_waitingTableView;
-    IBOutlet UILabel *_selectCountLabel;
-}
-
-@property (weak, nonatomic) IBOutlet KDEasyTouchButton *submitBtn;  //提交按钮
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UILabel *AlertLab;             //用户已提交审核，防止用户重复提交
-
-
+@interface ApplyViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>  
 - (IBAction)applyButtonPressed;
-@property(nonatomic,assign)BOOL isFromMessage;
 
+@property(nonatomic,assign)BOOL backStyle;
 
 @end
