@@ -35,8 +35,6 @@
     self.interactivePopGestureRecognizer.delegate =  self;
     [self.navigationBar setBackgroundImage:self.navigationBgImage forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = [[UIImage alloc] init];
-    
-    
  
 }
 

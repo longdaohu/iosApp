@@ -9,9 +9,9 @@
 #import "BaseViewController.h"
 
 @interface NewLoginRegisterViewController : BaseViewController
-@property (strong, nonatomic) IBOutlet UIView *xLoginRegistView;
-@property (weak, nonatomic) IBOutlet UIView *xRegisterView;
-@property (strong, nonatomic) IBOutlet UIView *xLoginView;
+@property (strong, nonatomic) IBOutlet UIView *LoginBgView;
+@property (weak, nonatomic) IBOutlet UIView *SignUpView;
+@property (strong, nonatomic) IBOutlet UIView *LoginView;
 
 
 

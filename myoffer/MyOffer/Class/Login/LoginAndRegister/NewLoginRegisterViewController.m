@@ -38,44 +38,35 @@
 //注册密码
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPasswdTextF;
 //发送验证码按钮
-@property (weak, nonatomic) IBOutlet UIButton *VertifButton;
+@property (weak, nonatomic) IBOutlet UIButton *VerificationBtn;
 //地区编号选项
 @property(nonatomic,strong)UIPickerView *AreaPicker;
-@property(nonatomic,strong)UIPickerView *NextAreaPicker;
 //地区编号数组
-@property(nonatomic,strong)NSArray *Areas;
+@property(nonatomic,strong)NSArray *AreaArr;
 //登录——忘记密码
 @property (weak, nonatomic) IBOutlet UIButton *ForgetButton;
 //登录——或者Lab
 @property (weak, nonatomic) IBOutlet UILabel *ORlabel;
 //登录——提交登录按钮
-@property (weak, nonatomic) IBOutlet UIButton *commitLoginButton;
+@property (weak, nonatomic) IBOutlet UIButton *signInCommitButton;
 //切换登录选项
 @property (weak, nonatomic) IBOutlet UIButton *LoginSelectButton;
 //切换注册选项
 @property (weak, nonatomic) IBOutlet UIButton *SignUpselectButton;
 //注册提交按钮
-@property (weak, nonatomic) IBOutlet UIButton *RegisterCommitButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpCommitButton;
 //弹出注册页面
-@property (weak, nonatomic) IBOutlet KDEasyTouchButton *LoginAButton;
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *signUpButton;
 //弹出登录页面
-@property (weak, nonatomic) IBOutlet KDEasyTouchButton *RegisterAButton;
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *signInButton;
 //查看服务条款
 @property (weak, nonatomic) IBOutlet UIButton *ServiceButton;
 
 @property (weak, nonatomic) IBOutlet UIView *ButtonView;
-//欢迎图片
-@property (weak, nonatomic) IBOutlet UIImageView *welcomeMV;
 //切换注册登录的三角图标
-@property(nonatomic,strong)UIImageView *FocusMV;
-//Logo图片
-@property (weak, nonatomic) IBOutlet UIImageView *logoMV;
-//蒙版背景
-@property(nonatomic,strong)UIView *coverView;
-//蒙版
-@property(nonatomic,strong)UIButton *cover;
+@property(nonatomic,strong)UIImageView *FocusView;
 //地区输入框右边图片
-@property (weak, nonatomic) IBOutlet UIImageView *arrow_right;
+@property (weak, nonatomic) IBOutlet UIImageView *ArrowAreaMView;
 //明文按钮
 @property (weak, nonatomic) IBOutlet UIButton *showPasswdBtn;
 
@@ -109,7 +100,7 @@
 -(void)RegisterAreaTextfieldArrow
 {
      [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-         self.arrow_right.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.arrow_right.transform, M_PI):CGAffineTransformIdentity;
+         self.ArrowAreaMView.transform = self.RegisterAreaTextF.isEditing? CGAffineTransformRotate(self.ArrowAreaMView.transform, M_PI):CGAffineTransformIdentity;
     }];
     
 }
@@ -120,10 +111,10 @@
 -(void)makeLoginRegiterView
 {
     
-     self.xLoginRegistView.frame  = CGRectMake(0,XScreenHeight, XScreenWidth, XScreenHeight*2/3);
-    [self.view addSubview:self.xLoginRegistView];
-     self.xLoginView.frame =CGRectMake(0, 40, XScreenWidth, XScreenHeight*2/3 - 40);
-    [self.xLoginRegistView addSubview:self.xLoginView];
+    self.LoginBgView.frame  = CGRectMake(0,XScreenHeight, XScreenWidth, XScreenHeight*2/3);
+    [self.view addSubview:self.LoginBgView];
+    self.LoginView.frame =CGRectMake(0, 40, XScreenWidth, XScreenHeight*2/3 - 40);
+    [self.LoginBgView addSubview:self.LoginView];
     
     self.RegisterAreaTextF.inputView = self.AreaPicker;
     
@@ -134,23 +125,22 @@
     [_LoginBlurView updateAsynchronously:YES completion:^{}];
     _LoginBlurView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
    
-    self.LoginAButton.layer.cornerRadius = 2;
-    self.RegisterAButton.layer.cornerRadius = 2;
-    self.commitLoginButton.layer.cornerRadius = 2;
-    self.RegisterCommitButton.layer.cornerRadius = 2;
-    self.RegisterAButton.adjustAllRectWhenHighlighted = YES;
-    self.RegisterAButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.RegisterAButton.layer.borderWidth = 2;
-    self.commitLoginButton.backgroundColor = XCOLOR_RED;
-    self.RegisterCommitButton.backgroundColor = XCOLOR_RED;
+    self.signUpButton.layer.cornerRadius = 2;
+    self.signInButton.layer.cornerRadius = 2;
+    self.signInCommitButton.layer.cornerRadius = 2;
+    self.signUpCommitButton.layer.cornerRadius = 2;
+    self.signInButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.signInButton.layer.borderWidth = 2;
+    self.signInCommitButton.backgroundColor = XCOLOR_RED;
+    self.signUpCommitButton.backgroundColor = XCOLOR_RED;
     self.ServiceButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.VertifButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+//    self.VertifButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
-    self.FocusMV =[[UIImageView alloc] initWithFrame:CGRectMake(0,30, 30, 10)];
-    self.FocusMV.contentMode =  UIViewContentModeScaleAspectFit;
-    self.FocusMV.image =[UIImage imageNamed:@"Triangle"];
-    [self.ButtonView addSubview:self.FocusMV];
-    self.FocusMV.center = CGPointMake(self.LoginSelectButton.center.x, 38);
+    self.FocusView =[[UIImageView alloc] initWithFrame:CGRectMake(0,30, 30, 10)];
+    self.FocusView.contentMode =  UIViewContentModeScaleAspectFit;
+    self.FocusView.image =[UIImage imageNamed:@"Triangle"];
+    [self.ButtonView addSubview:self.FocusView];
+    self.FocusView.center = CGPointMake(self.LoginSelectButton.center.x, 38);
     
     self.LoginPhoneNumberTextF.delegate = self;
     self.LoginPasswdTextF.delegate = self;
@@ -163,13 +153,13 @@
 
 
 
--(NSArray *)Areas
+-(NSArray *)AreaArr
 {
-    if (!_Areas) {
+    if (!_AreaArr) {
         
-        _Areas = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
+        _AreaArr = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
      }
-    return _Areas;
+    return _AreaArr;
 }
 
 
@@ -186,18 +176,6 @@
     return _AreaPicker;
 }
 
--(UIPickerView *)NextAreaPicker
-{
-    if (!_NextAreaPicker) {
-        _NextAreaPicker =[[UIPickerView alloc] init];
-        _NextAreaPicker.delegate =self;
-        _NextAreaPicker.dataSource =self;
-        [_NextAreaPicker selectRow:0 inComponent:0 animated:YES];
-        
-    }
-    return _NextAreaPicker;
-}
-
 //设置控件中英文
 -(void)ChangLanguageView
 {
@@ -205,19 +183,12 @@
     self.LoginPhoneNumberTextF.placeholder = @"请输入手机号码/邮箱";
     self.LoginPasswdTextF.placeholder = @"请输入6-16位密码";
     [self.ForgetButton setTitle:GDLocalizedString(@ "LoginVC-003")  forState:UIControlStateNormal];
-    [self.commitLoginButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     self.ORlabel.text =GDLocalizedString(@"LoginVC-OR");
     [self.LoginSelectButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
     [self.SignUpselectButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
     self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
     self.RegisterPhoneTextF.placeholder = @"请输入手机号码";
     self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
-    [self.RegisterCommitButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
-    [self.VertifButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
-    [self.RegisterAButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
-    [self.LoginAButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
-//    [self.welcomeMV setImage:[UIImage imageNamed:GDLocalizedString(@"LoginVC-welImage")]];
- 
     
     NSString *serviceString = GDLocalizedString(@ "LoginVC-0010");
      NSRange NotiRangne =[serviceString rangeOfString:GDLocalizedString(@ "LoginVC-keyWord")];
@@ -276,7 +247,7 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    UIView  *moveView  =  self.xLoginRegistView;
+    UIView  *moveView  =  self.LoginBgView;
     
     CGSize contentSize = self.view.bounds.size;
     
@@ -312,13 +283,13 @@
     
    [self.view endEditing:YES];
     
-    self.xRegisterView.hidden = !hiden;
+    self.SignUpView.hidden = !hiden;
     
-    self.xLoginView.hidden = hiden;
+    self.LoginView.hidden = hiden;
     
     [UIView animateWithDuration:0.01 animations:^{
     
-        self.FocusMV.center = CGPointMake(sender.center.x, 38);
+        self.FocusView.center = CGPointMake(sender.center.x, 38);
         
     }];
     
@@ -332,7 +303,7 @@
 -(void)LoginViewShow:(BOOL)show sender:(UIButton *)sender
 {
    
-    CGRect NewRect = self.xLoginRegistView.frame;
+    CGRect NewRect = self.LoginBgView.frame;
     NewRect.origin.y = show ? XScreenHeight / 3 : XScreenHeight;
     NewRect.size.width = XScreenWidth;
     NewRect.size.height = 2 * XScreenHeight/3;
@@ -341,21 +312,21 @@
         
         self.LoginBlurView.alpha = show ? 1 : 0;
         self.backButton.alpha = show ? 1 : 0;
-        self.xLoginRegistView.frame = NewRect;
+        self.LoginBgView.frame = NewRect;
         
     }];
     
   
     if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
         
-        self.xLoginView.hidden = YES;
-        self.FocusMV.center = CGPointMake(XScreenWidth*0.75,38);
+        self.LoginView.hidden = YES;
+        self.FocusView.center = CGPointMake(XScreenWidth*0.75,38);
         
     }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
         
         
-        self.xRegisterView.hidden = YES;
-        self.FocusMV.center = CGPointMake(XScreenWidth*0.25,38);
+        self.SignUpView.hidden = YES;
+        self.FocusView.center = CGPointMake(XScreenWidth*0.25,38);
         
     }else{
         
@@ -365,13 +336,13 @@
         self.RegisterPhoneTextF.text = @"";
         self.RegisterVerTextF.text = @"";
         self.RegisterPasswdTextF.text = @"";
-        self.VertifButton.enabled = YES;
-        [self.VertifButton setTitle:@"获取验证码"  forState:UIControlStateNormal];
+        self.VerificationBtn.enabled = YES;
+        [self.VerificationBtn setTitle:@"获取验证码"  forState:UIControlStateNormal];
         [self.verifyCodeColdDownTimer invalidate];
         _verifyCodeColdDownTimer = nil;
         
-        self.xLoginView.hidden = NO;
-        self.xRegisterView.hidden = NO;
+        self.LoginView.hidden = NO;
+        self.SignUpView.hidden = NO;
         
     }
  
@@ -629,12 +600,12 @@
     
     if (self.verifyCodeColdDownCount > 0) {
  
-        [self.VertifButton setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
+        [self.VerificationBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
           
     } else {
         
-        self.VertifButton.enabled = YES;
-        [self.VertifButton setTitle:@"重新发送"  forState:UIControlStateNormal];
+        self.VerificationBtn.enabled = YES;
+        [self.VerificationBtn setTitle:@"重新发送"  forState:UIControlStateNormal];
         [self.verifyCodeColdDownTimer invalidate];
         _verifyCodeColdDownTimer = nil;
         
@@ -712,18 +683,18 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    return self.Areas.count;
+    return self.AreaArr.count;
     
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    return self.Areas[row];
+    return self.AreaArr[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-      self.RegisterAreaTextF.text = self.Areas[row];
+      self.RegisterAreaTextF.text = self.AreaArr[row];
     
 }
 
