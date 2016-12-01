@@ -9,14 +9,13 @@
 #import "HomeHeaderView.h"
 #import "HeadItembgView.h"
 #import "XUToolbar.h"
+#import "TopNavView.h"
 
 @interface HomeHeaderView ()<UIScrollViewDelegate>
 //logo图片
 @property(nonatomic,strong)UIImageView *Logo;
 //背景图片
-@property (strong, nonatomic)UIImageView *upViewBackgroudView;
-//渐变色图片
-@property (strong, nonatomic)UIImage *navigationBgImage;
+@property (strong, nonatomic)TopNavView *upViewBackgroudView;
 //button背景
 @property(nonatomic,strong)HeadItembgView *buttonsBgView;
 
@@ -52,13 +51,11 @@
 
     self.upView =[[UIView alloc] init];
     [self addSubview:self.upView];
+
     
-    
-    self.upViewBackgroudView             = [[UIImageView alloc] init];
-    self.upViewBackgroudView.image       = self.navigationBgImage;
-    self.upViewBackgroudView.contentMode = UIViewContentModeScaleToFill;
+    self.upViewBackgroudView = [[TopNavView alloc] init];
     [self.upView addSubview:self.upViewBackgroudView];
-    
+    self.upViewBackgroudView.backgroundColor = XCOLOR_RED;
     
     self.Logo             = [[UIImageView alloc] init];
     self.Logo.image       = [UIImage imageNamed:@"logo white"];
@@ -73,18 +70,6 @@
 
 
 
--(UIImage *)navigationBgImage
-{
-    if (!_navigationBgImage) {
-        
-        NSString *path     = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:NAV_PNG];
-        
-        _navigationBgImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-        
-    }
-    return _navigationBgImage;
-}
-
 
 -(void)layoutSubviews
 {
@@ -97,7 +82,7 @@
     CGFloat upW = contentSize.width;
     CGFloat upH = contentSize.height * 0.6 + 20;
     self.upView.frame   = CGRectMake(upX, upY, upW,upH);
-    self.upViewBackgroudView.frame = self.upView.frame;
+    self.upViewBackgroudView.frame = self.upView.bounds;
   
     
     CGFloat LogoX   = 0;

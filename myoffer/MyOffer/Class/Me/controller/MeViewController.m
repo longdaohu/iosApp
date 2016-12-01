@@ -438,6 +438,8 @@ typedef enum {
         
     }
     
+    
+    //没有登录时要还原初始数据
     if (!LOGIN) {
         
         self.leftView.countStr  = @"0";
@@ -513,7 +515,6 @@ typedef enum {
     [MobClick event:@"home_mall"];
     [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
 }
-
 
 
 KDUtilRemoveNotificationCenterObserverDealloc

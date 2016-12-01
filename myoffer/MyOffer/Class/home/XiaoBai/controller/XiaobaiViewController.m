@@ -16,9 +16,11 @@
 #import "GongLueViewController.h"
 #import "XWGJNODATASHOWView.h"
 #import "CatigorySubject.h"
+#import "TopNavView.h"
+
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property(nonatomic,strong)UIView *topView;
+@property(nonatomic,strong)TopNavView *topView;
 @property(nonatomic,strong)XBTopToolView *topToolView;
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgScrollView;
@@ -28,8 +30,6 @@
 @property(nonatomic,strong)UICollectionView *quetionCollectionView;
 //UITableView 申请攻略
 @property(nonatomic,strong)UITableView *TableView;
-//渐变色图片
-@property(nonatomic,strong)UIImage *navigationBgImage;
 //疑难解答 数组
 @property(nonatomic,strong)NSArray *helpItems;
 //申请攻略 数组
@@ -59,20 +59,6 @@
     [MobClick endLogPageView:@"page留学小白"];
     
 }
-
-//加载导航栏背影图片
--(UIImage *)navigationBgImage
-{
-    if (!_navigationBgImage) {
-        
-        NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
-        
-        _navigationBgImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-        
-    }
-    return _navigationBgImage;
-}
-
 
 
 -(NSArray *)helpItems
@@ -166,19 +152,12 @@
 -(void)makeTopView
 {
     
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XNav_Height + 60)];
+    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XNav_Height + 60)];
     [self.view addSubview:self.topView];
- 
-    UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
-    topImageView.image = self.navigationBgImage;
-    topImageView.contentMode = UIViewContentModeScaleToFill;
-    [self.topView addSubview:topImageView];
     
     [self makeTopToolView];
     
 }
-
-
 
 
 //滚动工具条

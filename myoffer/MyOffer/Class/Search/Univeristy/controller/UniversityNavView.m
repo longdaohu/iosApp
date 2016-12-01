@@ -8,11 +8,14 @@
 
 #import "UniversityRightView.h"
 #import "UniversityNavView.h"
+#import "TopNavView.h"
+
+
 @interface UniversityNavView ()
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 //背景图片
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet TopNavView *bgImageView;
 //收藏、分享
 @property(nonatomic,strong)UniversityRightView   *rightView;
 
@@ -32,11 +35,11 @@
 
 -(void)awakeFromNib{
 
+    [super awakeFromNib];
     
     
-    NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
-    self.bgImageView.image =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
     self.clipsToBounds = YES;
+    
     self.bgImageView.alpha = 0;
    
      XWeakSelf
@@ -47,6 +50,7 @@
     }];
     
     [self.rightView noShadowWithShare];
+    
     [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
     
     

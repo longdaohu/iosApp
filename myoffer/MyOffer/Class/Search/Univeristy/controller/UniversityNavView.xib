@@ -12,11 +12,9 @@
             <rect key="frame" x="0.0" y="0.0" width="308" height="64"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tW3-XB-0QV">
-                    <constraints>
-                        <constraint firstAttribute="height" constant="64" id="oWz-Fv-ER1"/>
-                    </constraints>
-                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACV-QW-aeD" customClass="TopNavView">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <button opaque="NO" tag="112" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0Y-Hw-GQ0">
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="DNR-Pm-skI"/>
@@ -34,19 +32,19 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="tW3-XB-0QV" secondAttribute="trailing" id="4gJ-bP-2jf"/>
-                <constraint firstItem="tW3-XB-0QV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K4e-xg-wO6"/>
+                <constraint firstAttribute="bottom" secondItem="ACV-QW-aeD" secondAttribute="bottom" id="54q-8X-dZd"/>
+                <constraint firstAttribute="trailing" secondItem="ACV-QW-aeD" secondAttribute="trailing" id="AnW-rm-ggz"/>
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Nj6-lh-HRs"/>
+                <constraint firstItem="ACV-QW-aeD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PYq-yq-DuA"/>
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="gSA-up-KwJ"/>
-                <constraint firstItem="tW3-XB-0QV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v27-tZ-jPw"/>
+                <constraint firstItem="ACV-QW-aeD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mAv-cw-dCb"/>
                 <constraint firstItem="Syv-hU-MxF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wuk-vb-6Q6"/>
                 <constraint firstItem="Syv-hU-MxF" firstAttribute="centerY" secondItem="w0Y-Hw-GQ0" secondAttribute="centerY" id="xHk-Zk-0cq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bgImageView" destination="tW3-XB-0QV" id="6qf-kK-yvy"/>
+                <outlet property="bgImageView" destination="ACV-QW-aeD" id="1n4-j1-Stf"/>
                 <outlet property="titleLab" destination="Syv-hU-MxF" id="1TX-jd-7EK"/>
             </connections>
             <point key="canvasLocation" x="353" y="12"/>

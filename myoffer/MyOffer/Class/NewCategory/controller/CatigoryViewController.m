@@ -22,6 +22,7 @@
 #import "AUSearchResultViewController.h"
 #import "XNewSearchViewController.h"
 #import "XBTopToolView.h"
+#import "TopNavView.h"
 
 #define INTERSET_TOP  70.0
 
@@ -41,8 +42,7 @@
 //表头
 @property(nonatomic,strong)CatigaryCityCollectionHeaderView *cityHeaderView;
 //工具条
-@property(nonatomic,strong)UIImage  *navigationBgImage;
-@property(nonatomic,strong)UIView *topView;
+@property(nonatomic,strong)TopNavView *topView;
 @property(nonatomic,strong)XBTopToolView   *topToolView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *countryes;
@@ -193,58 +193,23 @@
     return _SubjectList;
 }
 
-//加载导航栏背影图片
--(UIImage *)navigationBgImage
-{
-    if (!_navigationBgImage) {
-        
-        NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
-        
-        _navigationBgImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-        
-    }
-    return _navigationBgImage;
-}
-
-
-//得到部分区域图片
--(UIImage *)makeNewImageWithRect:(CGRect)clipRect andImage:(UIImage *)image
-{
-    //原图片
-    //    UIImage * img = [UIImage imageNamed:@"bg.png"];
-    //转化为位图
-    CGImageRef temImg = image.CGImage;
-    //根据范围截图
-    temImg=CGImageCreateWithImageInRect(temImg, clipRect);
-    //得到新的图片
-    UIImage *newImage = [UIImage imageWithCGImage:temImg];
-    //释放位图对象
-    CGImageRelease(temImg);
-    
-    return newImage;
-    
-}
 
 //导航工具条
 -(void)makeTopView
 {
-    
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 60)];
+    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  -XNav_Height, XScreenWidth, XNav_Height + 60)];
     [self.view addSubview:self.topView];
-    
-    UIImageView *topImageView =[[UIImageView alloc] initWithFrame:self.topView.bounds];
-    topImageView.image = [self makeNewImageWithRect:CGRectMake(0, XNav_Height, XScreenWidth, self.topView.bounds.size.height) andImage:self.navigationBgImage];
-    topImageView.contentMode = UIViewContentModeScaleToFill;
-    [self.topView addSubview:topImageView];
-    
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,  self.topView.bounds.size.height - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
-    self.topToolView.itemNames =  @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
-    self.topToolView.delegate  = self;
-    [self.view  addSubview:self.topToolView];
-    
+    [self makeTopToolView];
 }
 
-
+//滚动工具条
+-(void)makeTopToolView
+{
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
+    self.topToolView.itemNames =   @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
+    self.topToolView.delegate  = self;
+    [self.view  addSubview:self.topToolView];
+}
 
 -(void)makeBaseScorller
 {

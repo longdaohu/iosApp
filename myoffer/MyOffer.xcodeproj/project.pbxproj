@@ -138,6 +138,7 @@
 		AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2E1D06B1D100499B6B /* CoreMotion.framework */; };
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
+		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
@@ -634,6 +635,8 @@
 		AE582C301D06B22C00499B6B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AE582C321D06B94600499B6B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
+		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE64A5441DCB4CC9004592B6 /* promptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promptViewController.h; sourceTree = "<group>"; };
 		AE64A5451DCB4CC9004592B6 /* promptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promptViewController.m; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -2845,6 +2848,8 @@
 				AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */,
 				AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */,
 				AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */,
+				AE5A75D91DEEDA5300F02ABB /* TopNavView.h */,
+				AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3440,6 +3445,7 @@
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AED5A8631DDF0A9600E70289 /* PipeiCountryCell.m in Sources */,
+				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */,

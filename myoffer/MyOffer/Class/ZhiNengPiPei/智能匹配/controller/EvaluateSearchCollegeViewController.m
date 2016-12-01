@@ -7,6 +7,7 @@
 //
 
 #import "EvaluateSearchCollegeViewController.h"
+#import "TopNavView.h"
 
 @interface EvaluateSearchCollegeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *schoolList;
@@ -81,19 +82,8 @@
 -(void)makeViewUI
 {
     
-    UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XNav_Height)];
-    navView.backgroundColor = [UIColor orangeColor];
+    TopNavView *navView = [TopNavView topView];
     [self.view addSubview:navView];
-    
-    UIImageView *navBgVew = [[UIImageView alloc] init];
-    navBgVew.contentMode = UIViewContentModeScaleAspectFit;
-    [navView addSubview:navBgVew];
-    
-    NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
-    UIImage *bgImage =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-    navBgVew.frame = CGRectMake(0, 0, XScreenWidth, bgImage.size.height);
-    navView.clipsToBounds = YES;
-    navBgVew.image = bgImage;
     
     UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 24, XScreenWidth - 80, 34)];
     self.searchTextField = searchTextField;
