@@ -9,6 +9,5 @@
 #import "BaseViewController.h"
 
 @interface BangViewController : BaseViewController
-@property(nonatomic,strong)NSString *provider;
 
 @end

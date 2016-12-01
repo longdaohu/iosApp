@@ -111,10 +111,23 @@
 -(void)makeLoginRegiterView
 {
     
-    self.LoginBgView.frame  = CGRectMake(0,XScreenHeight, XScreenWidth, XScreenHeight*2/3);
+    CGRect loginBgViewFrame = self.LoginBgView.frame;
+    loginBgViewFrame.origin.x = 0;
+    loginBgViewFrame.origin.y = XScreenHeight;
+    loginBgViewFrame.size.width = XScreenWidth;
+    loginBgViewFrame.size.height = XScreenHeight*2/3;
+    self.LoginBgView.frame  = loginBgViewFrame;
     [self.view addSubview:self.LoginBgView];
-    self.LoginView.frame =CGRectMake(0, 40, XScreenWidth, XScreenHeight*2/3 - 40);
+    
+    
+    CGRect LoginViewFrame = self.LoginView.frame;
+    LoginViewFrame.origin.x = 0;
+    LoginViewFrame.origin.y = 40;
+    LoginViewFrame.size.width = loginBgViewFrame.size.width;
+    LoginViewFrame.size.height = loginBgViewFrame.size.height - LoginViewFrame.origin.y;
+    self.LoginView.frame = LoginViewFrame;
     [self.LoginBgView addSubview:self.LoginView];
+    
     
     self.RegisterAreaTextF.inputView = self.AreaPicker;
     
@@ -125,26 +138,20 @@
     [_LoginBlurView updateAsynchronously:YES completion:^{}];
     _LoginBlurView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
    
-    self.signUpButton.layer.cornerRadius = 2;
-    self.signInButton.layer.cornerRadius = 2;
-    self.signInCommitButton.layer.cornerRadius = 2;
-    self.signUpCommitButton.layer.cornerRadius = 2;
-    self.signInButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.signInButton.layer.borderWidth = 2;
+    self.signInButton.layer.borderColor = XCOLOR_WHITE.CGColor;
+    self.signInButton.layer.borderWidth = 1;
+    
     self.signInCommitButton.backgroundColor = XCOLOR_RED;
     self.signUpCommitButton.backgroundColor = XCOLOR_RED;
     self.ServiceButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-//    self.VertifButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.VerificationBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     self.FocusView =[[UIImageView alloc] initWithFrame:CGRectMake(0,30, 30, 10)];
     self.FocusView.contentMode =  UIViewContentModeScaleAspectFit;
     self.FocusView.image =[UIImage imageNamed:@"Triangle"];
     [self.ButtonView addSubview:self.FocusView];
     self.FocusView.center = CGPointMake(self.LoginSelectButton.center.x, 38);
-    
-    self.LoginPhoneNumberTextF.delegate = self;
-    self.LoginPasswdTextF.delegate = self;
-    self.RegisterPasswdTextF.delegate = self;
+  
     
     [self.LoginPasswdTextF addTarget:self action:@selector(loginPasswordValueChange:) forControlEvents:UIControlEventEditingChanged];
     [self.RegisterAreaTextF addTarget:self action:@selector(RegisterAreaTextfieldArrow) forControlEvents:UIControlEventEditingDidBegin];
@@ -179,16 +186,6 @@
 //设置控件中英文
 -(void)ChangLanguageView
 {
-//    self.logoMV.image = [UIImage imageNamed:GDLocalizedString(@"LoginVC-icon")];
-    self.LoginPhoneNumberTextF.placeholder = @"请输入手机号码/邮箱";
-    self.LoginPasswdTextF.placeholder = @"请输入6-16位密码";
-    [self.ForgetButton setTitle:GDLocalizedString(@ "LoginVC-003")  forState:UIControlStateNormal];
-    self.ORlabel.text =GDLocalizedString(@"LoginVC-OR");
-    [self.LoginSelectButton setTitle:GDLocalizedString(@"LoginVC-001") forState:UIControlStateNormal];
-    [self.SignUpselectButton setTitle:GDLocalizedString(@"LoginVC-002") forState:UIControlStateNormal];
-    self.RegisterAreaTextF.text =  USER_EN ? GDLocalizedString(@"LoginVC-english"):GDLocalizedString(@"LoginVC-china");
-    self.RegisterPhoneTextF.placeholder = @"请输入手机号码";
-    self.RegisterVerTextF.placeholder = GDLocalizedString(@"LoginVC-007");
     
     NSString *serviceString = GDLocalizedString(@ "LoginVC-0010");
      NSRange NotiRangne =[serviceString rangeOfString:GDLocalizedString(@ "LoginVC-keyWord")];
@@ -247,16 +244,14 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    UIView  *moveView  =  self.LoginBgView;
-    
     CGSize contentSize = self.view.bounds.size;
     
     if (up) {
-        moveView.center = CGPointMake(contentSize.width / 2.0f, (contentSize.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
+        self.LoginBgView.center = CGPointMake(contentSize.width / 2.0f, (contentSize.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
         
      } else {
          
-       moveView.center = CGPointMake(contentSize.width / 2.0f, XScreenHeight*2/3);
+       self.LoginBgView.center = CGPointMake(contentSize.width / 2.0f, XScreenHeight*2/3);
     }
     
     [self.view layoutSubviews];
@@ -864,6 +859,7 @@
 - (void)dealloc{
     
     KDClassLog(@"登录 dealloc");
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

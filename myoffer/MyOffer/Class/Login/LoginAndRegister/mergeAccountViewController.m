@@ -11,16 +11,31 @@
 #import "mergeSuccessViewController.h"
 
 @interface mergeAccountViewController ()
+//提示文字
 @property(nonatomic,strong)UILabel *notiLab;
+//第三方
 @property(nonatomic,strong)mergeItemView *thisView;
+//手机项
 @property(nonatomic,strong)mergeItemView *thatView;
+//提交按钮
 @property(nonatomic,strong)UIButton *mergeBtn;
+//网络请求信息
 @property(nonatomic,strong)NSDictionary *response;
+//选择合并ID
 @property(nonatomic,copy)NSString *selected_id;
 
 @end
 
 @implementation mergeAccountViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page选择留取账号"];
+    
+}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     
@@ -34,12 +49,13 @@
     
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page绑定手机号"];
+    [MobClick endLogPageView:@"page选择留取账号"];
     
 }
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 
     [self makeUI];
@@ -48,6 +64,7 @@
     
 }
 
+//网络请求
 - (void)getDataSource{
 
 
@@ -58,16 +75,17 @@
         
     }];
     
-    
- 
+  
 }
 
+//更新UI
 - (void)updateUIWithResponse:(id)response{
     
     self.response = response;
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *provider = [ud valueForKey:@"provider"];
+    
     NSString *imageName;
     if ([[provider lowercaseString]  containsString:@"qq"]) {
         imageName = @"meger_QQ";
@@ -91,6 +109,7 @@
     
     self.title = @"选择留取账号";
     
+    //提示文字
     CGFloat notiX = 20;
     CGFloat notiW = XScreenWidth - notiX * 2;
     NSString *notiStr = @"请选择您要保留的账号，合并账号后另一个账号资料将被替换";
@@ -105,7 +124,7 @@
     notiLab.text =  notiStr;
     
     
-    
+     //第三方
     CGFloat thisX = notiX;
     CGFloat thisY = CGRectGetMaxY(notiLab.frame)  + 20;
     CGFloat thisW = notiW;
@@ -120,7 +139,7 @@
         
     };
     
-    
+    //手机
     CGFloat phoneX = thisX;
     CGFloat phoneY = CGRectGetMaxY(thisView.frame)  + 10;
     CGFloat phoneW = thisW;
@@ -135,7 +154,7 @@
         
     };
     
- 
+    //提交按钮
     CGFloat mergeX = phoneX;
     CGFloat mergeY = CGRectGetMaxY(thatView.frame) + 50;
     CGFloat mergeW = phoneW;
@@ -152,16 +171,15 @@
     mergeBtn.backgroundColor = XCOLOR_LIGHTGRAY;
     mergeBtn.enabled = NO;
     
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_button"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
     
  
 }
 
-
+//合并项切换
 - (void)mergeViewWithItem:(mergeItemView *)item{
-    
-    
     
     
     if (item == self.thisView) {
@@ -190,13 +208,14 @@
 
 }
 
+//提交合并
 - (void)caseMerge:(UIButton *)sender{
   
-    
+    XWeakSelf
     [self startAPIRequestWithSelector:@"POST api/account/merge"  parameters:@{@"that_account_id": self.response[@"that_account"][@"_id"], @"final_account_id":  self.selected_id}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
      
-        [self.navigationController  pushViewController:[[mergeSuccessViewController alloc] init]  animated:YES];
+        [weakSelf.navigationController  pushViewController:[[mergeSuccessViewController alloc] init]  animated:YES];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -218,6 +237,13 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
+-(void)dealloc{
+    
+    KDClassLog(@"选择留取账号  dealloc");
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

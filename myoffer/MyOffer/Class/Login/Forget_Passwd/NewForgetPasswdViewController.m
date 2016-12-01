@@ -13,13 +13,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPhoneTextF;
 @property (weak, nonatomic) IBOutlet UITextField *VeritficationTextF;
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPasswdTextF;
-//@property (weak, nonatomic) IBOutlet UITextField *RepasswdTextF;
 @property (weak, nonatomic) IBOutlet UIButton *VerifycationButton;
+@property (weak, nonatomic) IBOutlet UIButton *commitButton;
 @property(nonatomic,strong)UIPickerView *piker;
 @property(nonatomic,strong)NSArray *AreaCodes;
 @property(nonatomic,strong)NSTimer *verifyCodeColdDownTimer;
 @property(nonatomic,assign)int verifyCodeColdDownCount;
-@property (weak, nonatomic) IBOutlet UIButton *commitButton;
 
 
 @end
@@ -45,7 +44,6 @@
     
     [super viewDidLoad];
     [self makeUI];
-    [self ChangLanguageView];
     
 }
 
@@ -56,10 +54,8 @@
     self.commitButton.backgroundColor =XCOLOR_RED;
     self.commitButton.layer.cornerRadius =2;
     self.VerifycationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.RegisterPasswdTextF.delegate =self;
-//    self.RepasswdTextF.delegate =self;
-    self.RegisterPasswdTextF.returnKeyType = UIReturnKeyNext;
-    
+    self.title = @"忘记密码";
+    [self.VerifycationButton  setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
 }
 
 #pragma mark   UITextFieldDelegate
@@ -67,25 +63,14 @@
 {
     if (textField == self.RegisterPasswdTextF) {
         
-        [self commitButtonPressed:nil];
+        [self commitButtonPressed:self.commitButton];
         
     }
     
     return YES;
 }
 
--(void)ChangLanguageView
-{
-    self.title =GDLocalizedString(@"LoginVC-003"); //@"忘记密码";
-    self.AreaTextF.text = GDLocalizedString(@"LoginVC-china");
-    self.RegisterPhoneTextF.placeholder = GDLocalizedString(@"LoginVC-006");// "请输入11位手机号码";
-    self.VeritficationTextF.placeholder = GDLocalizedString(@"LoginVC-007");//"请输入验证码";
-    [self.commitButton  setTitle:GDLocalizedString(@"LoginVC-0012") forState:UIControlStateNormal];//"重置密码";
-    [self.VerifycationButton  setTitle:@"获取验证码"forState:UIControlStateNormal];
-    [self.VerifycationButton  setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-    [self.VerifycationButton  setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateDisabled];
- 
-}
+
 
 
  -(UIPickerView *)piker
@@ -93,9 +78,6 @@
     if (!_piker) {
         
         _piker = [self PickerView];
-        
-//        NSUInteger row = USER_EN ? 1 : 0;
-//        [_piker selectRow:0 inComponent:0 animated:YES];
         
       }
     
@@ -127,6 +109,7 @@
          
         return;
     }
+    
     
     [self
      startAPIRequestWithSelector:kAPISelectorResetPassword
@@ -282,7 +265,6 @@
         }
         
     }
-    
     
     
     if ([self.AreaTextF.text containsString:@"60"] && (self.RegisterPhoneTextF.text.length > 9 || self.RegisterPhoneTextF.text.length < 7) ) {

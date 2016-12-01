@@ -13,14 +13,23 @@
 
 @interface BangViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property(nonatomic,strong)NSTimer *timer;
+//验证码按钮
 @property(nonatomic,strong)UIButton *sendCodeBtn;
+//错误提示
 @property(nonatomic,strong)UILabel *errorLab;
+//提交按钮
 @property(nonatomic,strong)UIButton *submitBtn;
+//地区输入框
 @property(nonatomic,strong)UITextField *areaFT;
+//手机号码
 @property(nonatomic,strong)UITextField *phoneTF;
+//验证码输入框
 @property(nonatomic,strong)UITextField *verificationTF;
+//倒计时时间
 @property(nonatomic,assign)NSInteger timeCountDown;
+//地区数组
 @property(nonatomic,strong)NSArray *area_arr;
+//picker
 @property(nonatomic,strong)UIPickerView *areaPicker;
 
 @end
@@ -41,6 +50,7 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
     
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -70,9 +80,11 @@
 - (UIPickerView *)areaPicker{
 
     if (!_areaPicker) {
+        
         _areaPicker = [[UIPickerView alloc] init];
         _areaPicker.delegate = self;
         _areaPicker.dataSource = self;
+        
     }
     return _areaPicker;
 }
@@ -102,6 +114,7 @@
     areaBgView.layer.borderWidth =  1;
     areaBgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     
+    
     XTextField *areaFT = [[XTextField alloc] initWithFrame:CGRectMake(0, 10, areaW, 30)];
     [areaBgView addSubview:areaFT];
     areaFT.text = @"中国(+86)";
@@ -112,6 +125,7 @@
     areaFT.rightViewMode = UITextFieldViewModeAlways;
     areaFT.textAlignment = NSTextAlignmentCenter;
     areaFT.leftViewMode = UITextFieldViewModeNever;
+    
     
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, 30)];
     areaFT.rightView = rightView;
@@ -125,6 +139,7 @@
     [rightView  addSubview:arrowView];
     
     
+    //手机号码
     CGFloat phoneX = CGRectGetMaxX(areaBgView.frame) + ITEM_MARGIN;
     CGFloat phoneY = areaY;
     CGFloat phoneW = XScreenWidth - phoneX  - areaX;
@@ -133,12 +148,13 @@
     [self.view addSubview:phoneTF];
     [self cornerWithView:phoneTF];
     phoneTF.placeholder = @"请输入手机号";
-     [phoneTF setFont:XFONT(Bang_FontSize)];
+    [phoneTF setFont:XFONT(Bang_FontSize)];
     [self leftViewWithView:phoneTF];
     self.phoneTF = phoneTF;
     phoneTF.keyboardType =  UIKeyboardTypeNumberPad;
     [phoneTF addTarget:self action:@selector(textFiledValueChange:) forControlEvents:UIControlEventEditingChanged];
     
+    //错误提示
     CGFloat errorX = areaX;
     CGFloat errorY = CGRectGetMaxY(phoneTF.frame) + 5;
     CGFloat errorW = XScreenWidth - areaX;
@@ -150,6 +166,7 @@
     errorLab.text = @"手机格式有误";
     errorLab.alpha = 0;
     
+    //验证码
     CGFloat verificationX = areaX;
     CGFloat verificationY = CGRectGetMaxY(areaBgView.frame) + 30;
     CGFloat verificationW = phoneW;
@@ -164,6 +181,7 @@
     verificationTF.keyboardType =  UIKeyboardTypeNumberPad;
     [verificationTF addTarget:self action:@selector(textFiledValueChange:) forControlEvents:UIControlEventEditingChanged];
     
+    //验证码按钮
     CGFloat codeX = CGRectGetMaxX(verificationTF.frame) + ITEM_MARGIN;
     CGFloat codeY = verificationY;
     CGFloat codeW = areaW;
@@ -180,6 +198,7 @@
     sendCodeBtn.layer.borderWidth = 1;
     self.sendCodeBtn = sendCodeBtn;
     
+    //提交按钮
     CGFloat submitX = verificationX;
     CGFloat submitY = CGRectGetMaxY(verificationTF.frame) + 80;
     CGFloat submitW = XScreenWidth - 2 * areaX;
@@ -194,6 +213,7 @@
     submitBtn.layer.cornerRadius = CORNER_RADIUS;
     self.submitBtn = submitBtn;
     submitBtn.enabled = NO;
+    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
     
@@ -321,6 +341,7 @@
     
 }
 
+//错误提示显示
 - (void)showError:(BOOL)show{
 
     
@@ -338,7 +359,7 @@
 
 
 
-//提交
+//提交绑定
 - (void)caseSubmit:(UIButton *)sender{
     
     
@@ -433,13 +454,14 @@
 }
 
 
-
+//设置圆角
 - (void)cornerWithView:(UIView *)sender
 {
     sender.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.3].CGColor;
     sender.layer.borderWidth =  1;
 }
 
+//设置输入框左侧空间
 - (void)leftViewWithView:(UITextField *)sender
 {
     sender.leftViewMode =  UITextFieldViewModeAlways;
@@ -511,7 +533,7 @@
     
 }
 
-
+//提示绑定手机号错误时进入下一个页面 PhoneBeenViewController
 - (void)casePhoneHaveBeenPageWithphoneNumber:(NSString *)phone{
     
     NSArray *items = [phone componentsSeparatedByString:@"="];
@@ -521,11 +543,12 @@
     
 }
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
 
+-(void)dealloc{
+    
+    KDClassLog(@"绑定手机  dealloc");
+    
+}
 
 - (void)didReceiveMemoryWarning {
     

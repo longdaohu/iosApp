@@ -9,13 +9,24 @@
 #import "mergeSuccessViewController.h"
 
 @interface mergeSuccessViewController ()
+//图片
 @property(nonatomic,strong)UIImageView *logoView;
+//提示文字
 @property(nonatomic,strong)UILabel *notiLab;
+//立即体验
 @property(nonatomic,strong)UIButton *startBtn;
 
 @end
 
 @implementation mergeSuccessViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page合并成功"];
+    
+}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -29,18 +40,10 @@
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 
-    [MobClick endLogPageView:@"page绑定手机号"];
+    [MobClick endLogPageView:@"page合并成功"];
     
 }
 
-
--(void)viewWillAppear:(BOOL)animated{
-
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-
-}
 
 - (void)viewDidLoad {
     
@@ -54,7 +57,7 @@
 - (void)makeUI{
     
     self.title = @"合并成功";
-    
+    //图片
     CGFloat logoH = 80;
     CGFloat logoW = logoH;
     CGFloat logoX = (XScreenWidth - logoW) * 0.5;
@@ -65,7 +68,7 @@
     logoView.image =[UIImage imageNamed:@"TJ_success"];
     logoView.contentMode = UIViewContentModeScaleAspectFit;
 
-    
+    //提示文字
     CGFloat notiX = 20;
     CGFloat notiY = CGRectGetMaxY(logoView.frame) + 10;
     CGFloat notiW = XScreenWidth - notiX * 2;
@@ -76,7 +79,7 @@
     self.notiLab = notiLab;
     notiLab.text = @"账号合并成功";
     
-    
+    //立即体验
     CGFloat startX = notiX;
     CGFloat startY = CGRectGetMaxY(notiLab.frame) + 50;
     CGFloat startW = notiW;
@@ -96,7 +99,7 @@
 }
 
 
-
+//立即体验
 - (void)casestart:(UIButton *)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -104,6 +107,11 @@
 
 
 
+-(void)dealloc{
+    
+    KDClassLog(@"合并成功  dealloc");
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

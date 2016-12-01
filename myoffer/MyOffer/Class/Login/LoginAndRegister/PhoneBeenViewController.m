@@ -10,25 +10,43 @@
 #import "mergeAccountViewController.h"
 
 @interface PhoneBeenViewController ()
+//下一页合并按钮
 @property(nonatomic,strong)UIButton *mergeBtn;
+//返回登录页按钮
 @property(nonatomic,strong)UIButton *phoneLoginBtn;
+//说明文字
 @property(nonatomic,strong)UILabel *notiLab;
+//服务说明
 @property(nonatomic,strong)UILabel *serviceLab;
 @end
 
 @implementation PhoneBeenViewController
 
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page手机号已存在"];
+
+}
+
+
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"page绑定手机号"];
+    
+    [MobClick endLogPageView:@"page手机号已存在"];
     
 }
 
@@ -46,11 +64,10 @@
 - (void)makeUI{
     
     self.title = @"手机号已存在";
-  
+    //说明文字
     CGFloat notiX = 20;
     CGFloat notiY = 30;
     CGFloat notiW = XScreenWidth - notiX * 2;
-    
     NSString *notiStr = @"此号码被注册，请选择\"合并账号\" 或直接登录";
     CGSize notiSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
      CGFloat notiH = notiSize.height;
@@ -61,7 +78,7 @@
     notiLab.numberOfLines = 0;
     notiLab.text = notiStr;
     
-    
+    //下一页合并按钮
     CGFloat mergeX = notiX;
     CGFloat mergeY = CGRectGetMaxY(notiLab.frame) + 50;
     CGFloat mergeW = XScreenWidth - 2 * mergeX;
@@ -76,7 +93,7 @@
     mergeBtn.layer.cornerRadius = CORNER_RADIUS;
     self.mergeBtn = mergeBtn;
     
-    
+    //返回登录页按钮
     CGSize phoneSize = [@"手机登录" boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat phoneW = phoneSize.width;
     CGFloat phoneX = CGRectGetMaxX(mergeBtn.frame) - phoneW;
@@ -90,7 +107,7 @@
      phoneLoginBtn.titleLabel.font = XFONT(16);
      self.phoneLoginBtn = phoneLoginBtn;
   
-    
+    //服务说明
     CGFloat serX = 0;
     CGFloat serW = XScreenWidth - serX;
     NSString *serviceStr = @"致电myoffer客服热线：4000666522";
@@ -103,12 +120,12 @@
     self.serviceLab = serviceLab;
     serviceLab.text = serviceStr;
     serviceLab.numberOfLines = 0;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
-
     
 }
 
-
+//下一页合并按钮
 -(void)caseMerge:(UIButton *)sender{
     
     mergeAccountViewController *mergeVC = [[mergeAccountViewController alloc] init];
@@ -117,12 +134,18 @@
     
 }
 
-
+//返回登录页面
 - (void)casePhoneLogin{
 
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+
+-(void)dealloc{
+    
+    KDClassLog(@"手机号已存在  dealloc");
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
