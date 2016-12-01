@@ -50,7 +50,7 @@ static AppDelegate *__sharedDelegate;
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
-    
+     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -68,7 +68,9 @@ static AppDelegate *__sharedDelegate;
     [self Jpush];//极光
     //极光
     [APService setupWithOption:launchOptions];
-     NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    //接收远程消息
+    NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfox) {
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfox];
@@ -94,7 +96,7 @@ static AppDelegate *__sharedDelegate;
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
     sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
-    //    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    // sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
     sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
@@ -309,6 +311,7 @@ static AppDelegate *__sharedDelegate;
 }
 
 - (void)loadSavedToken {
+    
     NSString *savedToken = [[NSString alloc] initWithData:[Keychain keychainItemDataWithIdentifier:@"token"] encoding:NSUTF8StringEncoding];
 
     if (KDUtilIsStringValid(savedToken)) {

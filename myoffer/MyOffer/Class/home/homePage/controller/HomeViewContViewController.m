@@ -467,7 +467,8 @@
     [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:scrollView.contentOffset.y];
     
     if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
-        CGFloat Gscale =0.2 + 0.5 * ABS(scrollView.contentOffset.y)/ 100.0;
+      
+        CGFloat Gscale = 0.2 + 0.5 * ABS(scrollView.contentOffset.y)/ 100.0;
         self.fresh_Header.gifView.transform = CGAffineTransformMakeScale(Gscale, Gscale);
     }
     
@@ -478,8 +479,11 @@
   
     UniDetailGroup *group = self.groups[section];
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
+    
     if (1 == section) {
+        
         [SectionView moreButtonHidenNo];
+        
          SectionView.actionBlock = ^{
              
               [self.tabBarController setSelectedIndex:2];
@@ -600,7 +604,7 @@
     [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:response[@"_id"]] animated:YES];
 }
 
-#pragma mark —————— HomeThirdTableViewCellDelegate
+#pragma mark ——— HomeThirdTableViewCellDelegate
 -(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityNew *)uni{
 
     [MobClick event:@"home_universityItem"];
@@ -608,7 +612,7 @@
     [self.navigationController pushUniversityViewControllerWithID:uni.NO_id animated:YES];
 }
 
-#pragma mark  ————————————  UIAlertViewDelegate
+#pragma mark ——— UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
      if (buttonIndex){
@@ -741,7 +745,7 @@
         
         if (0 == phone.length) {
             
-            [weakSelf backAndLogout];
+            [weakSelf caseBackAndLogout];
         }
 
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
@@ -762,7 +766,7 @@
 }
 
 //退出登录
--(void)backAndLogout
+-(void)caseBackAndLogout
 {
     
     if(LOGIN){

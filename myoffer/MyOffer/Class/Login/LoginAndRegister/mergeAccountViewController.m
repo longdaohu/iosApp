@@ -54,6 +54,8 @@
 }
 
 
+ 
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -172,7 +174,10 @@
     mergeBtn.enabled = NO;
     
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [leftBtn addTarget:self action:@selector(caseNoClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_button"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
     
  
@@ -237,6 +242,11 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)caseNoClick{
+    
+    KDClassLog(@"没反应");
+    
+}
 
 
 -(void)dealloc{

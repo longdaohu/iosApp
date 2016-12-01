@@ -29,6 +29,7 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
+   
     [super viewDidAppear:animated];
     
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -36,10 +37,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 
+    [super viewWillDisappear:animated];
+ 
     [MobClick endLogPageView:@"page合并成功"];
     
 }
@@ -94,8 +95,11 @@
     startBtn.layer.cornerRadius = CORNER_RADIUS;
     self.startBtn = startBtn;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
- 
+    
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [leftBtn addTarget:self action:@selector(caseNoClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    
 }
 
 
@@ -106,7 +110,11 @@
 }
 
 
-
+- (void)caseNoClick{
+    
+    KDClassLog(@"没反应");
+    
+}
 -(void)dealloc{
     
     KDClassLog(@"合并成功  dealloc");

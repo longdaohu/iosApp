@@ -39,9 +39,9 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
-
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
     [super viewWillDisappear:animated];
@@ -121,7 +121,9 @@
     serviceLab.text = serviceStr;
     serviceLab.numberOfLines = 0;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:nil];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [leftBtn addTarget:self action:@selector(caseNoClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     
 }
 
@@ -139,6 +141,15 @@
 
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+- (void)caseNoClick{
+    
+    KDClassLog(@"没反应");
+    
+}
+
+
+
 
 
 -(void)dealloc{

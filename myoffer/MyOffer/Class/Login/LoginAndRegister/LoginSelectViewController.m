@@ -70,6 +70,7 @@
     NSString *pingtai =  self.parameter[@"provider"];
     
     if ([pingtai isEqualToString:@"qq"]) {
+        
         self.title = GDLocalizedString(@"bangdingVC-QQtitle");
         self.HelloLab.text = GDLocalizedString(@"bangdingVC-helloQQ");
         
@@ -84,9 +85,6 @@
         self.HelloLab.text = GDLocalizedString(@"bangdingVC-hello");//@"您好，微信用户";
     }
     
-    [self.myOfferItemBtn setTitle:@"创建新用户" forState:UIControlStateNormal]; //@"进入myOffer"
-    [self.BindItemBtn setTitle:@"绑定现有账号" forState:UIControlStateNormal];//@"绑定myOffer账号"
-    self.PromptLab.text =GDLocalizedString(@"bangdingVC-noti");//@"如果您已注册，请绑定myOffer账号";
     
 }
 
@@ -130,7 +128,7 @@
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
    
 }
 -(void)makeBindView
@@ -149,7 +147,6 @@
        
         return;
     }
-    
     
     // 直接创建新用户登录
     if (LOGIN) {
@@ -310,16 +307,14 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    UIView  *moveView  =   self.BindView;
-    
     
     if (up) {
         
-          moveView.center = CGPointMake(XScreenWidth / 2.0f, (XScreenHeight - keyboardEndFrame.size.height) / 2.0f);
+          self.BindView.center = CGPointMake(XScreenWidth / 2.0f, (XScreenHeight - keyboardEndFrame.size.height) / 2.0f);
         
     } else {
         
-        moveView.center = CGPointMake(XScreenWidth / 2.0f, XScreenHeight*2/3);
+        self.BindView.center = CGPointMake(XScreenWidth / 2.0f, XScreenHeight*2/3);
     }
     
     [self.view layoutSubviews];
@@ -328,7 +323,7 @@
 }
 
 
--(void)back{
+-(void)caseBack{
 
     if(LOGIN){
         

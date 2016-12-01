@@ -29,7 +29,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [MobClick beginLogPageView:@"page忘记密码"];
-
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated

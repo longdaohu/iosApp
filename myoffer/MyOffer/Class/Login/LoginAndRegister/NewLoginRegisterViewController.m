@@ -84,6 +84,8 @@
   
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+
 }
 
 
@@ -214,7 +216,7 @@
     [self makeLoginRegiterView];
     [self ChangLanguageView];
     [self makeNotificationCenter];
-
+  
 }
 
 #pragma mark ——————- 键盘处理
