@@ -91,7 +91,7 @@
     if (!_noDataView) {
         
         _noDataView =[XWGJnodataView noDataView];
-        _noDataView.contentLabel.text = GDLocalizedString(@"ApplicationStutasVC-noData");
+        _noDataView.errorStr = GDLocalizedString(@"ApplicationStutasVC-noData");
         _noDataView.hidden = YES;
         [self.view insertSubview:_noDataView aboveSubview:self.tableView];
     }
@@ -122,7 +122,7 @@
     
     if (![self checkNetworkState]) {
         
-        self.noDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
+        self.noDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
         self.noDataView.hidden = NO;
 
         if (refresh) [self.tableView.mj_header endRefreshing];
@@ -137,7 +137,9 @@
     
         [weakSelf makeUIConfigrationWith:response];
         
-        if (refresh) {[weakSelf.tableView.mj_header endRefreshing];}
+        if (refresh) {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }
             
           
     }];

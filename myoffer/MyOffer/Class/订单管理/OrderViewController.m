@@ -122,7 +122,7 @@
         [self.tableView reloadData];
         
         self.nodataView.hidden = self.orderGroup.count > 0;
-        self.nodataView.contentLabel.text = @"还没有购买服务！！！";
+        self.nodataView.errorStr = @"还没有购买服务！！！";
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         

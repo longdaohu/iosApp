@@ -22,7 +22,7 @@
     self.notiLabel.text = GDLocalizedString(@"myOffer-001");
     
     XWGJnodataView *noDataView =[XWGJnodataView noDataView];
-    noDataView.contentLabel.text =  GDLocalizedString(@"myOffer-001");
+    noDataView.errorStr =  GDLocalizedString(@"myOffer-001");
     [self.view addSubview:noDataView];
 
 }

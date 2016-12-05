@@ -84,6 +84,7 @@
   
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
+    //第三方绑定注释时左划手势失效，返回登录页面时，忘记密码、注册协议页面手势失效问题修改
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 
 }
@@ -500,7 +501,7 @@
     
     //当用户没有电话时发出通知，让用户填写手机号
     !response[@"phonenumber"]? [self caseBangding] :  [self dismiss];
- 
+    
 }
 
 //发送验证码

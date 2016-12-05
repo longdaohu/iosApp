@@ -97,7 +97,7 @@
         
         _NoDataView =[XWGJnodataView noDataView];
         _NoDataView.hidden = YES;
-        _NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noDataSubject");
+        _NoDataView.errorStr = GDLocalizedString(@"Evaluate-noDataSubject");
         
         [self.view insertSubview:_NoDataView aboveSubview:self.tableView];
     }

@@ -532,7 +532,7 @@ typedef enum {
     
     
     self.NoDataView =[XWGJnodataView noDataView];
-    self.NoDataView.contentLabel.text = GDLocalizedString(@"Evaluate-noData");
+    self.NoDataView.errorStr = GDLocalizedString(@"Evaluate-noData");
     self.NoDataView.hidden = YES;
     [self.view addSubview:self.NoDataView];
     

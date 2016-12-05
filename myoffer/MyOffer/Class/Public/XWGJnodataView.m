@@ -1,7 +1,11 @@
 #import "XWGJnodataView.h"
+@interface XWGJnodataView ()
+@property (weak, nonatomic) IBOutlet UIImageView *DuangImageView;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
+@end
 
 @implementation XWGJnodataView
-
 
 +(instancetype)noDataView
 {
@@ -20,9 +24,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        
     }
     return self;
 }
 
+-(void)setErrorStr:(NSString *)errorStr{
+
+    _errorStr = errorStr;
+    
+    self.contentLabel.text = errorStr;
+
+}
+
+
 
 @end
+
+

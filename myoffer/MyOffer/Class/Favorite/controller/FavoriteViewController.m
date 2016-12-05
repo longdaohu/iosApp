@@ -50,14 +50,14 @@
 {
     [self makeTableView];
     
-    [self makeOtherView];
+    self.title = GDLocalizedString(@"Setting-002");
   
- 
 }
 
 
 -(void)makeTableView
 {
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -68,18 +68,12 @@
 }
 
 
--(void)makeOtherView{
-
-    self.title = GDLocalizedString(@"Setting-002");
-}
-
-
 -(XWGJnodataView *)noDataView{
 
     if (!_noDataView) {
 
         _noDataView =[XWGJnodataView noDataView];
-        _noDataView.contentLabel.text = GDLocalizedString(@"Favorite-NOTI");
+        _noDataView.errorStr= GDLocalizedString(@"Favorite-NOTI");
         _noDataView.hidden = YES;
         [self.view insertSubview:_noDataView aboveSubview:self.tableView];
     }
@@ -97,10 +91,12 @@
 //请求数据
 - (void)reloadData {
     
+    //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
         
         self.noDataView.hidden = NO;
-        self.noDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
+        
+        self.noDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
         
         return;
     }
@@ -111,7 +107,6 @@
      parameters:nil
      success:^(NSInteger statusCode, id response) {
          
-        
          [weakSelf configrationUIWithresponse:response];
          
      }];
@@ -120,7 +115,6 @@
 //根据返回数据配置UI
 - (void)configrationUIWithresponse:(id)response{
 
-    
     NSArray *universities = (NSArray *)response;
     
     NSMutableArray *uni_temps = [NSMutableArray array];

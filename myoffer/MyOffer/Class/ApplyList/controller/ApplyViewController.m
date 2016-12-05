@@ -56,7 +56,7 @@
 
     if (![self checkNetworkState]) {
         
-        self.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork") ;
+        self.NDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
         self.NDataView.hidden = NO;
         
         return;
@@ -179,7 +179,7 @@
     
     self.NDataView =[XWGJnodataView noDataView];
     self.NDataView.hidden = YES;
-    self.NDataView.contentLabel.text = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
+    self.NDataView.errorStr = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
     [self.view insertSubview:self.NDataView  aboveSubview:self.waitingTableView];
     
     [self makeOther];

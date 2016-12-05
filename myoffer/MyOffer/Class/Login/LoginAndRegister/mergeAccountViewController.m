@@ -219,7 +219,6 @@
     XWeakSelf
     [self startAPIRequestWithSelector:@"POST api/account/merge"  parameters:@{@"that_account_id": self.response[@"that_account"][@"_id"], @"final_account_id":  self.selected_id}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-     
         [weakSelf.navigationController  pushViewController:[[mergeSuccessViewController alloc] init]  animated:YES];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {

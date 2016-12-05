@@ -146,7 +146,7 @@
     //没有数量是显示提示
      self.noDataView =[XWGJnodataView noDataView];
      self.noDataView.hidden = YES;
-     self.noDataView.contentLabel.text = @"网络请求失败，请稍候再试!";
+     self.noDataView.errorStr = @"网络请求失败，请稍候再试!";
      [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
     
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];

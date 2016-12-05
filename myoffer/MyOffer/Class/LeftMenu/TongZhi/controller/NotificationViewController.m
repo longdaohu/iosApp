@@ -97,7 +97,7 @@
     if (!_NDataView) {
         
         _NDataView  = [XWGJnodataView noDataView];
-        _NDataView.contentLabel.text = GDLocalizedString(@"Left-noNoti");
+        _NDataView.errorStr = GDLocalizedString(@"Left-noNoti");
         _NDataView.hidden = YES;
         [self.view insertSubview:_NDataView aboveSubview:self.tableView];
     }
@@ -149,7 +149,7 @@
         
          [weakSelf endMJ_Fresh];
          [weakSelf nodataViewHidden:NO];
-         weakSelf.NDataView.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
+         weakSelf.NDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork");
          
      }];
 }

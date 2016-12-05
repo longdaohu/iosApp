@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+ @interface XWGJnodataView : UIView
 
-@interface XWGJnodataView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *DuangImageView;
 +(instancetype)noDataView;
-
+@property(nonatomic,copy)NSString *errorStr;
 @end
