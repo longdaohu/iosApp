@@ -64,25 +64,6 @@
         self.iconView.image = nil;
     }
     
-    CGFloat iconX = ITEM_MARGIN;
-    CGFloat iconY = 0;
-    CGFloat iconW = self.Edit ? 34 : 0;
-    CGFloat iconH = self.contentView.bounds.size.height;
-    
-    CGFloat titleX = iconX + iconW  + 5;
-    CGFloat titleY = iconY;
-    CGFloat titleW = self.Edit ? XScreenWidth - titleX : XScreenWidth - titleX - 44;
-    CGFloat titleH = iconH;
-    
-//    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-  
-        self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
-        self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
-        
-//    }];
-    
-    
-  
 }
 
 
@@ -113,7 +94,22 @@
 {
     [super layoutSubviews];
     
+    CGFloat iconX = ITEM_MARGIN;
+    CGFloat iconY = 0;
+    CGFloat iconW = self.Edit ? 34 : 0;
+    CGFloat iconH = self.contentView.bounds.size.height;
     
+    CGFloat titleX = iconX + iconW  + 5;
+    CGFloat titleY = iconY;
+    CGFloat titleW = self.Edit ? XScreenWidth - titleX : XScreenWidth - titleX - 44;
+    CGFloat titleH = iconH;
+    
+    //    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+    
+    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    
+    //    }];
 }
 
 -(void)cellIsSelected:(BOOL)selected{

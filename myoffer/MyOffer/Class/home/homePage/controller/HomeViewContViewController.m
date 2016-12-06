@@ -182,6 +182,7 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
         
+        
         [self dataSourseWithFresh:refresh GroupIndex:0];
         
         [self hotCityWithResponse:response];
@@ -197,11 +198,13 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorArticleRecommendation parameters:nil success:^(NSInteger statusCode, id response) {
         
+        
         [self dataSourseWithFresh:refresh GroupIndex:1];
         
         [self hotArticleWithResponse:(NSArray *)response];
         
         [self.TableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+        
     }];
     
 }

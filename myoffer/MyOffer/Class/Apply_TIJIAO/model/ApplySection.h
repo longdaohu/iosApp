@@ -10,7 +10,6 @@
 @class  UniversityFrameNew;
 
 @interface ApplySection : NSObject
-@property(nonatomic,strong)NSDictionary *universityInfo;
 @property(nonatomic,strong) UniversityFrameNew *uniFrame;
 @property(nonatomic,strong)NSMutableArray *subjects;
 

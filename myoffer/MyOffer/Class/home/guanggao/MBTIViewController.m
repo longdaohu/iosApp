@@ -64,6 +64,8 @@
     [parameter setValue:userAgent forKey:@"UserAgent"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:parameter];
     
+    
+//    NSString *path = @"http://www.apesk.com/h/go_zy_dingzhi_m.asp?checkcode=PR9RZP86L1IC9HT4IA&hruserid=18201123448&l=MBTI-STEP-I-28&test_name=sha&test_email=sha";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height)];

@@ -48,7 +48,10 @@
     _itemInfo = itemInfo;
     
     NSString *iconStr = [itemInfo[@"image"]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.IconView sd_setImageWithURL:[NSURL URLWithString:iconStr] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
+    NSString *path = [iconStr containsString:@"http"] ? iconStr : [NSString stringWithFormat:@"%@%@",DOMAINURL,iconStr];
+
+    [self.IconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 

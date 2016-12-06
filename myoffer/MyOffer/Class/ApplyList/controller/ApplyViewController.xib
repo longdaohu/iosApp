@@ -12,8 +12,8 @@
                 <outlet property="bottomView" destination="IVk-0U-C6A" id="Z6l-aX-IV6"/>
                 <outlet property="selectCountLabel" destination="xma-Zp-4hY" id="r5S-XJ-Qxu"/>
                 <outlet property="submitBtn" destination="1rP-vW-A8A" id="WLr-y9-QpU"/>
+                <outlet property="tableView" destination="cml-7c-rxl" id="HT8-H0-aTs"/>
                 <outlet property="view" destination="utl-NO-JXl" id="ROz-mL-SI8"/>
-                <outlet property="waitingTableView" destination="cml-7c-rxl" id="F7r-1O-1rK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
