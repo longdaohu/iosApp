@@ -12,9 +12,7 @@
 //tableView 是否处于编辑状态
 @property(nonatomic,assign)BOOL Edit;
 //tableView处编辑状态时，cell是否被选中
-@property(nonatomic,assign)BOOL containt;
-//tableView处于非编辑状态时，cell是否被选中
-@property(nonatomic,assign)BOOL containt_select;
+@property(nonatomic,assign)BOOL isSelected;
 //cell.titleLab的名称
 @property(nonatomic,copy)NSString  *title;
 

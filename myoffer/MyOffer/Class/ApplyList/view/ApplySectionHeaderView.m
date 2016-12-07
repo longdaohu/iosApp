@@ -34,8 +34,7 @@
 @property(nonatomic,strong) UIView *bgView;
 //**号背景
 @property(nonatomic,strong) UIView *StarBackgroud;
-//用于点击跳转
-@property(nonatomic,strong) UITapGestureRecognizer *tap;
+
 
 @end
 
@@ -64,6 +63,7 @@
         //删除按钮
         self.cancelBtn = [[UIButton alloc] init];
         [self.cancelBtn setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
+        [self.cancelBtn setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateSelected];
         self.cancelBtn.tag = 11;
         [self.cancelBtn addTarget:self action:@selector(sectionViewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.cancelBtn];
@@ -77,10 +77,10 @@
          self.LogoImageView =[[LogoView alloc] init];
         [self.bgView addSubview:self.LogoImageView];
     
-         //学校名称
+        //学校名称
         self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
         
-         //学校英文名
+        //学校英文名
         self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
         self.official_nameLab.numberOfLines = 2;
@@ -123,9 +123,8 @@
         
         self.contentView.backgroundColor =[UIColor whiteColor];
         
-        
+        //监听页面点击
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
-        self.tap  = tap;
         [self.bgView addGestureRecognizer:tap];
 
     }
@@ -257,14 +256,7 @@
 -(void)sectionViewButtonPressed:(UIButton *)sender
 {
    
-    if (sender.tag == 11) {
-        
-        NSString *imageName = self.isSelected ? @"check-icons":@"check-icons-yes";
-       
-        [self.cancelBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-        
-        self.isSelected = !self.isSelected ;
-    }
+    if (sender == self.cancelBtn) self.cancelBtn.selected = !self.cancelBtn.selected;
     
     //申请意向页面
     if (self.actionBlock) self.actionBlock(sender);
@@ -276,7 +268,7 @@
 -(void)showUniveristy:(UITapGestureRecognizer *)tap
 {
     
-    self.isEdit ?  [self sectionViewButtonPressed:self.cancelBtn]  : [self sectionViewButtonPressed:self.addSubjectBtn];
+    self.isEdit ?  [self sectionViewButtonPressed:self.cancelBtn]  :  [self sectionViewButtonPressed:self.addSubjectBtn];
     
 }
 
@@ -284,9 +276,9 @@
 -(void)setIsSelected:(BOOL)isSelected
 {
     _isSelected = isSelected;
-    NSString *imageName = self.isSelected ? @"check-icons-yes":@"check-icons";
-    [self.cancelBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
+    self.cancelBtn.selected = isSelected;
+
 }
 
 
@@ -301,11 +293,6 @@
     self.addSubjectBtn.hidden = YES;
 }
 
--(void)setEdit:(BOOL)edit{
-
-    _edit = edit;
-}
-
 
 -(void)layoutSubviews
 {
@@ -313,9 +300,18 @@
  
     CGFloat SBx = self.isEdit ? 50 : 0;
     
-    self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+    if (!self.cell_Animation) {
         
+        self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+      
+        return;
+    }
  
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
+        self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+        
+    }];
 }
 
 
