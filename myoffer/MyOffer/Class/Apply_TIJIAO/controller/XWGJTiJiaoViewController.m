@@ -34,42 +34,17 @@ typedef enum {
 @property(nonatomic,strong)UITableView *TableView;
 //数据源
 @property(nonatomic,strong)NSArray *Groups;
-//用户资料
-@property(nonatomic,strong)NSDictionary *userInfo;
 //正在编辑的cell
 @property(nonatomic,strong)UITableViewCell *editingCell;
 //正在编辑的indexpath
 @property(nonatomic,strong)NSIndexPath *EditingIndexPath;
-//国家picker
-@property(nonatomic,strong)UIPickerView *CountryPicker;
-//时间picker
-@property(nonatomic,strong)UIPickerView *TimePicker;
-//专业picker
-@property(nonatomic,strong)UIPickerView *ApplyPicker;
-//专业picker
-@property(nonatomic,strong)UIPickerView *SubjectPicker;
-//年级picker
-@property(nonatomic,strong)UIPickerView *GradePicker;
-//平均分picker
-@property(nonatomic,strong)UIPickerView *AVGPicker;
-//最低分picker
-@property(nonatomic,strong)UIPickerView *LowPicker;
-//专业数组
-@property(nonatomic,strong)NSArray *ApplyTimes;
-//年级数组
-@property(nonatomic,strong)NSArray *gradeItems;
-//国家中文数组
-@property(nonatomic,strong)NSArray *countryItems_CE;
-//专业数组
-@property(nonatomic,strong)NSArray *subjectItems_CE;
-//年级数组
-@property(nonatomic,strong)NSArray *gradeItems_CE;
-//国家数组
-@property(nonatomic,strong)NSArray *countryItems;
-//专业数组
-@property(nonatomic,strong)NSArray *ApplyItems;
-//雅思成绩
-@property(nonatomic,strong)NSArray *IELSTScores;
+//CountryPicker 国家picker  //TimePicker 时间picker
+//SubjectPicker ApplyPicker 专业picker   GradePicker 年级picker      AVGPicker 平均分picker       LowPicker 最低分picker
+@property(nonatomic,strong)UIPickerView  *CountryPicker,*TimePicker,*ApplyPicker,*SubjectPicker,*GradePicker,*AVGPicker,*LowPicker;
+//专业数组  //年级数组  //专业数组  //国家数组   //雅思成绩
+@property(nonatomic,strong)NSArray *ApplyTimes,*gradeItems, *ApplyItems,*countryItems,*IELSTScores;
+//国家中文数组 //专业数组  //年级数组
+@property(nonatomic,strong)NSArray *countryItems_CE,*subjectItems_CE, *gradeItems_CE;
 //提交申请按钮
 @property(nonatomic,strong)UIButton *commitBtn;
 //升级VC
@@ -82,7 +57,6 @@ typedef enum {
 -(UpgradeViewController *)upgateVC{
 
     if (!_upgateVC) {
-        
         _upgateVC            =[[UpgradeViewController alloc] init];
         _upgateVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
         [self.view addSubview:_upgateVC.view];
@@ -264,28 +238,29 @@ typedef enum {
 -(void)makeTableView
 {
     CGFloat bottomHeight = 50;
-    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height - bottomHeight) style:UITableViewStyleGrouped];
+    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.TableView.dataSource  = self;
     self.TableView.delegate    = self;
     [self.view addSubview:self.TableView];
     self.TableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.TableView.allowsSelection = NO;
+    self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     
     [self makeComitButtonWithHeight:bottomHeight];
 
 }
-
+//添加底部提交按钮
 -(void)makeComitButtonWithHeight:(CGFloat)height
 {
-    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.TableView.frame), XScreenWidth, height)];
+    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0,  XScreenHeight - XNav_Height - height, XScreenWidth, height)];
     self.commitBtn            = commit;
     commit.backgroundColor    = XCOLOR_LIGHTGRAY;
     commit.enabled            = NO;
     [commit setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
     [commit setTitle:GDLocalizedString(@"TiJiao-Commit") forState:UIControlStateNormal];
-    [commit addTarget:self action:@selector(commitUserInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:commit];
+    [commit addTarget:self action:@selector(caseCommitUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.view  insertSubview:commit aboveSubview:self.TableView];
     
 }
 
@@ -340,60 +315,61 @@ typedef enum {
         
         [self startAPIRequestWithSelector:@"GET api/account/applicationdata" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             
-            weakSelf.userInfo   = response;
+            //姓名
             LastItem.itemName   = response[@"last_name"];
             FirstItem.itemName  = response[@"first_name"];
+            //手机号码
             phoneItem.itemName  = response[@"phonenumber"];
-            
+            //国家
             NSString *des_country = [NSString stringWithFormat:@"%@",response[@"des_country"]];
             NSString *country     = [des_country containsString:@"null"]?@"":des_country;
             countryItem.itemName  = !country.length?@"":[self getCountryLocalString:country];
             
-            
+            //出国时间
             NSString *target_time = response[@"target_date"];
             NSInteger TimeIndex   = 0;
-            
-            if([self.ApplyTimes containsObject:target_time])
+            if([weakSelf.ApplyTimes containsObject:target_time])
             {
-                TimeIndex         = [self.ApplyTimes indexOfObject:target_time];
+                TimeIndex         = [weakSelf.ApplyTimes indexOfObject:target_time];
                 timeItem.itemName = target_time;
             }
-
-            [self.TimePicker selectRow:TimeIndex inComponent:0 animated:YES];
+            [weakSelf.TimePicker selectRow:TimeIndex inComponent:0 animated:YES];
             
-            
-            applyItem.itemName      = !response[@"apply"]?@"":[self getApplySubjectLocalString:response[@"apply"]];;
+            //专业
+            applyItem.itemName      = !response[@"apply"] ? @"" : [weakSelf getApplySubjectLocalString:response[@"apply"]];;
+            //专业
+            subjectItem.itemName    =  !response[@"subject"]?@"": [weakSelf getInSubjectLocalString:response[@"subject"]];
+            //学校名称
             universityItem.itemName =  response[@"university"];
-            subjectItem.itemName    =  !response[@"subject"]?@"":[self getInSubjectLocalString:response[@"subject"]];
- 
             
-            
+            //平均成绩
             NSString *GPA      = [NSString stringWithFormat:@"%@",response[@"score"]];
             GPAItem.itemName   = [GPA containsString:@"null"]?@"":GPA;
+            //年级
             NSString *grade    = [NSString stringWithFormat:@"%@",response[@"grade"]];
             NSString *gradeStr = [grade containsString:@"null"]?@"":grade;
-            gradeItem.itemName = gradeStr.length == 0 ? @"":[self getGradeLocalString:gradeStr];
+            gradeItem.itemName = gradeStr.length == 0 ? @"":[weakSelf getGradeLocalString:gradeStr];
+            //雅思平均分
             NSString *avg      = [NSString stringWithFormat:@"%@",response[@"ielts_avg"]];
             NSString *avgStr   = [avg containsString:@"null"]?@"":avg;
             avgItem.itemName   = avgStr.length == 0 ? @"" : avgStr;
-              if (avgStr.length) {
+            if (avgStr.length) {
                   
-                NSInteger avgIndex = [self.IELSTScores containsObject:avgStr]?[self.IELSTScores indexOfObject:avgStr]:0;
-                  
-                [self.AVGPicker selectRow:avgIndex inComponent:0 animated:YES];
+                NSInteger avgIndex = [weakSelf.IELSTScores containsObject:avgStr] ? [weakSelf.IELSTScores indexOfObject:avgStr]:0;
+                [weakSelf.AVGPicker selectRow:avgIndex inComponent:0 animated:YES];
             }
             
+            //最低分
             NSString *Low    = [NSString stringWithFormat:@"%@",response[@"ielts_low"]];
             NSString *LowStr = [Low containsString:@"null"]?@"":Low;
             lowItem.itemName =   LowStr.length == 0 ? @"" : LowStr;
             if (LowStr.length) {
                 
-                NSInteger LowIndex = [self.IELSTScores containsObject:LowStr]?[self.IELSTScores indexOfObject:LowStr]:0;
-                
-                [self.LowPicker selectRow:LowIndex inComponent:0 animated:YES];
+                NSInteger LowIndex = [weakSelf.IELSTScores containsObject:LowStr]?[weakSelf.IELSTScores indexOfObject:LowStr]:0;
+                [weakSelf.LowPicker selectRow:LowIndex inComponent:0 animated:YES];
             }
             
-            [self.TableView reloadData];
+            [weakSelf.TableView reloadData];
             
         }];
     }
@@ -451,19 +427,24 @@ typedef enum {
     self.gradeItems_CE = @[gradeItems_CN,gradeItems_EN];
 
     
-    
-    if (USER_EN) {
-        
-        self.countryItems = self.countryItems_CE[1];
-        self.ApplyItems   = self.subjectItems_CE[1];
-        self.gradeItems   = self.gradeItems_CE[1];
-        
-    }else{
-        
-        self.countryItems = self.countryItems_CE[0];
-        self.ApplyItems   = self.subjectItems_CE[0];
-        self.gradeItems   = self.gradeItems_CE[0];
-    }
+/*
+ if (USER_EN) {
+ 
+ self.countryItems = self.countryItems_CE[1];
+ self.ApplyItems   = self.subjectItems_CE[1];
+ self.gradeItems   = self.gradeItems_CE[1];
+ 
+ }else{
+ 
+ self.countryItems = self.countryItems_CE[0];
+ self.ApplyItems   = self.subjectItems_CE[0];
+ self.gradeItems   = self.gradeItems_CE[0];
+ }
+ */
+
+    self.countryItems = self.countryItems_CE[0];
+    self.ApplyItems   = self.subjectItems_CE[0];
+    self.gradeItems   = self.gradeItems_CE[0];
     
 }
 //国家名称本地化
@@ -504,7 +485,6 @@ typedef enum {
     
     return item.subjectName;
 }
-
 
 -(NSInteger)getIndexWithTextFieldName:(NSString *)ItemName andItems:(NSArray *)items andGroups:(NSArray *)groupCEs andKeyWord:(NSString *)key
 {
@@ -574,13 +554,13 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 1.0;
+    return HEIGHT_ZERO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return (0 == indexPath.section)? 44 : 64;
+    return (0 == indexPath.section) ?  44 : 64;
     
 }
 
@@ -624,6 +604,7 @@ typedef enum {
         cell.item = group.cellItems[indexPath.row];
         
         return cell;
+        
     }else{
     
         XWGJYiXiangTableViewCell *cell = [XWGJYiXiangTableViewCell cellWithTableView:tableView];
@@ -635,14 +616,10 @@ typedef enum {
             
             switch (indexPath.row) {
                 case 0:
-                {
                     cell.ContentTF.inputView = self.CountryPicker;
-                }
                     break;
                 case 1:
-                {
                     cell.ContentTF.inputView = self.TimePicker;
-                }
                     break;
                 default:
                     cell.ContentTF.inputView = self.ApplyPicker;
@@ -653,24 +630,16 @@ typedef enum {
         
             switch (indexPath.row) {
                 case 1:
-                {
                     cell.ContentTF.inputView = self.SubjectPicker;
-                }
                     break;
                 case 3:
-                {
                     cell.ContentTF.inputView = self.GradePicker;
-                }
                     break;
                 case 4:
-                {
                     cell.ContentTF.inputView = self.AVGPicker;
-                }
                     break;
                 case 5:
-                {
                     cell.ContentTF.inputView = self.LowPicker;
-                }
                     break;
                 default:
                     break;
@@ -695,31 +664,20 @@ typedef enum {
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
     switch (pickerView.tag) {
-            
         case PickerViewTypeCountry:
-            
             return self.countryItems.count;
-            
             break;
         case PickerViewTypeTime:
-            
             return self.ApplyTimes.count;
-            
             break;
         case PickerViewTypeApply: case PickerViewTypeSubject:
-            
             return self.ApplyItems.count;
-            
             break;
         case PickerViewTypeGrade:
-            
             return self.gradeItems.count;
-            
             break;
         case PickerViewTypeAvg: case PickerViewTypeLow:
-            
             return self.IELSTScores.count;
-            
             break;
         default:
             return self.countryItems.count;
@@ -731,31 +689,29 @@ typedef enum {
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
     switch (pickerView.tag) {
-        case PickerViewTypeCountry:{
+        case PickerViewTypeCountry:
+        {
             CountryItem *item = self.countryItems[row];
             return  item.CountryName;
            }
             break;
-        case PickerViewTypeTime:{
-            
+        case PickerViewTypeTime:
              return   self.ApplyTimes[row];
-        }
             break;
-        case PickerViewTypeApply:case PickerViewTypeSubject:{
-            
+        case PickerViewTypeApply:case PickerViewTypeSubject:
+        {
             SubjectItem *item = self.ApplyItems[row];
             return   item.subjectName;
         }
             break;
-        case PickerViewTypeGrade:{
+        case PickerViewTypeGrade:
+        {
             GradeItem *item = self.gradeItems[row];
             return   item.gradeName;
         }
             break;
         default:
-            
             return self.IELSTScores[row];
-
             break;
     }
     
@@ -767,20 +723,17 @@ typedef enum {
     XWGJYiXiangTableViewCell *Editingcell = ( XWGJYiXiangTableViewCell *)self.editingCell;
     
           switch (pickerView.tag) {
-            case PickerViewTypeCountry:{
-                
+            case PickerViewTypeCountry:
+              {
                  CountryItem *item          =  self.countryItems[row];
                  Editingcell.ContentTF.text = item.CountryName;
-                
               }
                 break;
-              case PickerViewTypeTime:{
-                  
+              case PickerViewTypeTime:
                   Editingcell.ContentTF.text = self.ApplyTimes[row];
-              }
                   break;
-              case PickerViewTypeApply:case PickerViewTypeSubject:{
-                  
+              case PickerViewTypeApply:case PickerViewTypeSubject:
+              {
                   SubjectItem *item          =  self.ApplyItems[row];
                   Editingcell.ContentTF.text = item.subjectName;
               }
@@ -790,9 +743,8 @@ typedef enum {
                   Editingcell.ContentTF.text =  item.gradeName;
               }
                   break;
-            default:{
+            default:
                 Editingcell.ContentTF.text   = self.IELSTScores[row];
-            }
                 break;
         }
     
@@ -1039,7 +991,7 @@ typedef enum {
     
     UIEdgeInsets insets = self.TableView.contentInset;
     
-    insets.bottom   =  up  ? keyboardEndFrame.size.height  : 0;
+    insets.bottom   =  up  ? keyboardEndFrame.size.height  : 50;
     
     self.TableView.contentInset = insets;
     
@@ -1050,10 +1002,9 @@ typedef enum {
 
 
 //提交用户申请资料
--(void)commitUserInfo
+-(void)caseCommitUserInfo
 {
     
- 
     RequireLogin
    
     for (XWGJTJSectionGroup *group in self.Groups) {
@@ -1090,18 +1041,13 @@ typedef enum {
                                   };
     
     XWeakSelf
-    
-    
-    
     [self startAPIRequestWithSelector: @"POST api/account/applicationdata" parameters:@{@"applicationData":parameters} success:^(NSInteger statusCode, id response) {
         
         [weakSelf
          startAPIRequestWithSelector:@"POST /api/account/checkin"
          parameters:@{@"courseIds": self.selectedCoursesIDs}
          success:^(NSInteger statusCode, id response) {
-             
              [weakSelf updateView];
-
              
          }];
     }];
@@ -1118,13 +1064,11 @@ typedef enum {
     }];
     
     self.title = @"申请信息";
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
 }
 
 //返回
--(void)back{
-
+-(void)caseBack{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

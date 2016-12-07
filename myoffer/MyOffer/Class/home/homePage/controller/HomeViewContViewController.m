@@ -791,14 +791,19 @@
 -(void)leftViewMessage
 {
     
-    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
-    NSString *message_count  = [ud valueForKey:@"message_count"];
-    NSString *order_count    = [ud valueForKey:@"order_count"];
-    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
     
-    if(!LOGIN) self.leftView.countStr = @"0";
+    if(!LOGIN){
+        
+        self.leftView.countStr = @"0";
+        
+    }
     
     if (LOGIN && [self checkNetWorkReaching]) {
+        
+        NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+        NSString *message_count  = [ud valueForKey:@"message_count"];
+        NSString *order_count    = [ud valueForKey:@"order_count"];
+        self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
         
         XWeakSelf
         

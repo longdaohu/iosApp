@@ -656,12 +656,9 @@ typedef enum {
  
     if (XReLoadStateFail == self.ReloadStatus) {
         //网络请求失败，使用最后一次请求参数，再次请求
-        
-        
- 
+   
         
         NSArray *filtes = [self getParameterArrayWithDictionary:self.lastFilerParameters];
-
         
         [parameters setValue:filtes forKey:@"filters"];
         
@@ -679,7 +676,6 @@ typedef enum {
         
     }
     
-    
     [self
      startAPIRequestWithSelector:kAPISelectorSearch
      parameters:parameters
@@ -692,11 +688,7 @@ typedef enum {
          
          self.ReloadStatus = XReLoadStateFail;
          
-         if (page == 0) {
-             
-             [self.UniversityList removeAllObjects];
-             
-         }
+         if (page == 0)  [self.UniversityList removeAllObjects];
          
          
          //添加数据源
@@ -712,12 +704,8 @@ typedef enum {
          [self.ResultTableView reloadData];
          
          //每一次重新请求时，回到tableView顶部
-         if (page == 0) {
+         if (page == 0)  [self.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
              
-             [self.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-             
-         }
-         
          
          self.NextPage = page + 1; //加载下一页PageNumber
          

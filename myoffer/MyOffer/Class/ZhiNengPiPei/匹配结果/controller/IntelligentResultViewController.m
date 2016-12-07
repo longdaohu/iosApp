@@ -379,6 +379,7 @@
     //------------------------------------------------------------------------
     NSString *firstItem;
     NSInteger selectedIndex = -1;
+    NSInteger itemCount = 0;
     for(int i = 0; i < 3; i ++){
         
         NSUInteger count = [self.recommendations[i] count];
@@ -387,7 +388,11 @@
         if (count > 0  && -1 == selectedIndex ) selectedIndex = i;
         
         //count 数字大小可以增加显示范围
-        if (count != 0)  count = count + 4;
+        if (count != 0)
+        {
+            itemCount++;
+            count = count + 4;
+        }
         
         NSNumber *one = [NSNumber numberWithInt:(int)count];
         
@@ -402,11 +407,21 @@
         }
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    if (itemCount > 1) { //当选项只有一个时，self.PieHeadView不可点击
         
-        [self.PieHeadView setSliceSelectedAtIndex:selectedIndex];
+       self.PieHeadView.userInteractionEnabled = YES;
         
-    });
+       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.PieHeadView setSliceSelectedAtIndex:selectedIndex];
+            
+        });
+
+    }else{
+    
+        self.PieHeadView.userInteractionEnabled = NO;
+    }
     
     self.selectIndex  = selectedIndex;
     

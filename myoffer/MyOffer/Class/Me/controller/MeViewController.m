@@ -21,7 +21,7 @@ typedef enum {
 #import "MyOfferViewController.h"
 #import "ApplyMatialViewController.h"
 #import "IntelligentResultViewController.h"
-#import "centerSectionView.h"
+#import "CenterHeaderView.h"
 #import "MessageViewController.h"
 #import "ServiceMallViewController.h"
 #import "PipeiEditViewController.h"
@@ -294,9 +294,8 @@ typedef enum {
 //分区头
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    centerSectionView *sectionView =  [centerSectionView centerSectionViewWithResponse:self.myCountResponse];
-    
-    sectionView.sectionBlock       =  ^(centerItemType type){
+    CenterHeaderView *headerView =  [CenterHeaderView centerSectionViewWithResponse:self.myCountResponse];
+    headerView.sectionBlock  =  ^(centerItemType type){
         switch (type) {
             case centerItemTypepipei:
                 [self CasePipei];
@@ -310,7 +309,7 @@ typedef enum {
         }
         
     };
-    return sectionView;
+    return headerView;
 }
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
@@ -360,12 +359,8 @@ typedef enum {
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
      if (buttonIndex) { //跳转到QQ下载页面
-        UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url            = [NSURL URLWithString:@"http://appstore.com/qq"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate      = self;
-        [webView loadRequest:request];
-        [self.view addSubview:webView];
+         
+         [self addWebViewWithpath:@"http://appstore.com/qq"];
      }
 }
 
@@ -396,13 +391,10 @@ typedef enum {
 -(void)QQservice
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
+      
         [MobClick event:@"KeFu"];
-        UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url            = [NSURL URLWithString:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        webView.delegate      = self;
-        [webView loadRequest:request];
-        [self.view addSubview:webView];
+        
+        [self addWebViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
         
     }else{
         
@@ -410,6 +402,16 @@ typedef enum {
         [aler show];
     }
 }
+
+- (void)addWebViewWithpath:(NSString *)path{
+
+    UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
+    webView.delegate      = self;
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+}
+
 
 //导航栏 leftBarButtonItem
 -(void)leftViewMessage

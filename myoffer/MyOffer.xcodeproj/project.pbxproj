@@ -213,7 +213,7 @@
 		AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249941D5B215300DD7939 /* MeViewController.m */; };
 		AEA249D01D5B215300DD7939 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249951D5B215300DD7939 /* MeViewController.xib */; };
 		AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249991D5B215300DD7939 /* CenterSectionItem.m */; };
-		AEA249D21D5B215300DD7939 /* centerSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499B1D5B215300DD7939 /* centerSectionView.m */; };
+		AEA249D21D5B215300DD7939 /* CenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499B1D5B215300DD7939 /* CenterHeaderView.m */; };
 		AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */; };
 		AEA249FA1D5B224E00DD7939 /* AUSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249D81D5B224E00DD7939 /* AUSearchResultViewController.m */; };
 		AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */; };
@@ -777,8 +777,8 @@
 		AEA249951D5B215300DD7939 /* MeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		AEA249981D5B215300DD7939 /* CenterSectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterSectionItem.h; sourceTree = "<group>"; };
 		AEA249991D5B215300DD7939 /* CenterSectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterSectionItem.m; sourceTree = "<group>"; };
-		AEA2499A1D5B215300DD7939 /* centerSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = centerSectionView.h; sourceTree = "<group>"; };
-		AEA2499B1D5B215300DD7939 /* centerSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = centerSectionView.m; sourceTree = "<group>"; };
+		AEA2499A1D5B215300DD7939 /* CenterHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterHeaderView.h; sourceTree = "<group>"; };
+		AEA2499B1D5B215300DD7939 /* CenterHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterHeaderView.m; sourceTree = "<group>"; };
 		AEA2499C1D5B215300DD7939 /* LeftBarButtonItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftBarButtonItemView.h; sourceTree = "<group>"; };
 		AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftBarButtonItemView.m; sourceTree = "<group>"; };
 		AEA249D71D5B224E00DD7939 /* AUSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUSearchResultViewController.h; path = controller/AUSearchResultViewController.h; sourceTree = "<group>"; };
@@ -1636,9 +1636,9 @@
 		AE7107A41D767D5700019B1F /* UniversityDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AE7107A51D767D7200019B1F /* C */,
 				AE7107A71D767D8D00019B1F /* V */,
 				AE7107A61D767D8A00019B1F /* M */,
-				AE7107A51D767D7200019B1F /* C */,
 			);
 			name = UniversityDetail;
 			sourceTree = "<group>";
@@ -2030,8 +2030,8 @@
 			children = (
 				AEA249981D5B215300DD7939 /* CenterSectionItem.h */,
 				AEA249991D5B215300DD7939 /* CenterSectionItem.m */,
-				AEA2499A1D5B215300DD7939 /* centerSectionView.h */,
-				AEA2499B1D5B215300DD7939 /* centerSectionView.m */,
+				AEA2499A1D5B215300DD7939 /* CenterHeaderView.h */,
+				AEA2499B1D5B215300DD7939 /* CenterHeaderView.m */,
 				AEA2499C1D5B215300DD7939 /* LeftBarButtonItemView.h */,
 				AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */,
 			);
@@ -3604,7 +3604,7 @@
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,
 				AEA24A9F1D5B23F600DD7939 /* GongLueListCell.m in Sources */,
 				AEA24B8A1D5B25E000DD7939 /* searchSectionFootView.m in Sources */,
-				AEA249D21D5B215300DD7939 /* centerSectionView.m in Sources */,
+				AEA249D21D5B215300DD7939 /* CenterHeaderView.m in Sources */,
 				AEA249B81D5B215300DD7939 /* XWGJTJSectionGroup.m in Sources */,
 				AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* CatigaryScrollView.m in Sources */,

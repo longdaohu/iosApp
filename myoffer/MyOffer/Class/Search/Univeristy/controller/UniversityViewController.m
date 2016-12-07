@@ -125,7 +125,6 @@ typedef enum {
         
     }];
     
-    
     //加载报考难易程度
     [self loadUserLevel];
     
@@ -177,13 +176,8 @@ typedef enum {
 - (void)loadUserLevel{
     
     
-    NSLog(@" loadUserLevel   %d",self.FromPipei);
-
-    if (self.FromPipei) {
  
-        
-        return;
-    }
+    if (self.FromPipei) return;
     
         XWeakSelf
     
@@ -200,7 +194,7 @@ typedef enum {
 //加载数据
 -(void)loadNewDataSourse
 {
-  
+ 
     XWeakSelf
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
@@ -211,18 +205,12 @@ typedef enum {
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
+        NSLog(@"loadNewDataSourse %@",response);
         
         UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
         
         [weakSelf makeUIWithUni:item];
-        
-        [UIView animateWithDuration:0.2 animations:^{
-           
-            weakSelf.tableView.alpha = 1;
-
-        }];
-        
-        [weakSelf.tableView reloadData];
+ 
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -234,6 +222,12 @@ typedef enum {
 
 #pragma mark ——— 设置控件数据
 -(void)makeUIWithUni:(UniversitydetailNew *)university{
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        self.tableView.alpha = 1;
+        
+    }];
     
     
     self.favorited = university.favorited;
@@ -298,6 +292,9 @@ typedef enum {
         [self.groups addObject:group];
         
     }];
+    
+    [self.tableView reloadData];
+
     
 }
 
@@ -683,14 +680,14 @@ typedef enum {
     
         
         if ( !LOGIN  ||  self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
-            
+            XWeakSelf
             self.FromPipei = YES;
             
             PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
             pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
             pipei.actionBlock = ^(NSString *pipei){
                 
-                [self pipeiLevelWithParameter:pipei];
+                [weakSelf pipeiLevelWithParameter:pipei];
                 
             };
             

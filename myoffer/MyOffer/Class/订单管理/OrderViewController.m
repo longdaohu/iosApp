@@ -92,72 +92,70 @@
 
 -(void)makeDataSourse:(NSInteger)page{
 
-    
+    XWeakSelf
     NSString *path =[NSString stringWithFormat:@"GET api/account/order?page=%ld&size=10",(long)page];
-
- 
+  
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         if ( 200 == statusCode && 0 == page) {
-            
-             self.nextPage =0;
-            [self.orderGroup removeAllObjects];
-            
+             weakSelf.nextPage =0;
+             [weakSelf.orderGroup removeAllObjects];
         }
         
-        self.nextPage += 1;
-        
-        
-        for (NSDictionary *dict in  response[@"orders"]) {
-  
-            OrderItem *order = [OrderItem  orderWithDictionary:dict];
-            [self.orderGroup addObject:order];
-        }
-        
-        
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        self.tableView.mj_footer = 10 > [response[@"orders"] count] ? nil : [self makeMJ_footer];
-        
-        [self.tableView reloadData];
-        
-        self.nodataView.hidden = self.orderGroup.count > 0;
-        self.nodataView.errorStr = @"还没有购买服务！！！";
+        weakSelf.nextPage += 1;
+        [weakSelf configrationUIWithResponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
         
     }];
 
 
 }
 
--(void)loadNewData{
+- (void)loadNewData{
     
     [self makeDataSourse:0];
     
 }
 
--(void)loadMoreData{
+- (void)loadMoreData{
     
     [self makeDataSourse:self.nextPage];
 }
 
 
--(void)makeUI
-{
+- (void)configrationUIWithResponse:(id)response{
+
+    for (NSDictionary *dict in  response[@"orders"]) {
+        
+        OrderItem *order = [OrderItem  orderWithDictionary:dict];
+        [self.orderGroup addObject:order];
+    }
+    
+    
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    self.tableView.mj_footer = 10 > [response[@"orders"] count] ? nil : [self makeMJ_footer];
+    
+    [self.tableView reloadData];
+    
+    self.nodataView.hidden = self.orderGroup.count > 0;
+    self.nodataView.errorStr = @"还没有购买服务！！！";
+    
+}
+
+- (void)makeUI{
     
     self.title = @"订单中心";
     [self makeTableView];
-
-    
 }
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight - 64) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -171,7 +169,7 @@
     
 }
 
--(MJRefreshBackNormalFooter *)makeMJ_footer{
+- (MJRefreshBackNormalFooter *)makeMJ_footer{
     
     return [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
@@ -179,8 +177,7 @@
 
 
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return self.orderGroup.count;
 
@@ -222,7 +219,6 @@
 -(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender
 {
     switch (sender.tag) {
-            
         case 11:
             [self cancelOrder:indexPath];
             break;
@@ -239,13 +235,14 @@
 //详情
 -(void)OrderDetal:(NSIndexPath *)indexPath{
 
+    XWeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
     detail.order  =  self.orderGroup[indexPath.section];
     detail.actionBlock = ^(BOOL isSuccess){
         OrderItem *order = self.orderGroup[indexPath.section];
         if (isSuccess) {
             order.status = @"ORDER_CLOSED";
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
     [self.navigationController pushViewController:detail  animated:YES];
@@ -254,16 +251,15 @@
 //支付
 -(void)payOrder:(NSIndexPath *)indexPath{
 
+    XWeakSelf
     PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
     pay.order  =  self.orderGroup[indexPath.section];
     pay.actionBlock = ^(BOOL isSuccess){
+      
         OrderItem *order = self.orderGroup[indexPath.section];
-        
         if (isSuccess) {
-            
-            order.status = @"ORDER_FINISHED";
-            
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+             order.status = @"ORDER_FINISHED";
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
     
@@ -274,8 +270,8 @@
 //取消
 -(void)cancelOrder:(NSIndexPath *)indexPath{
     
-    __weak OrderItem *order = self.orderGroup[indexPath.section];
-    
+    OrderItem *order = self.orderGroup[indexPath.section];
+    XWeakSelf
     NSString *path = [NSString stringWithFormat:@"GET api/account/order/close?order_id=%@",order.orderId];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
@@ -284,7 +280,7 @@
             
               order.status = @"ORDER_CLOSED";
             
-             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          }
         
     }];
@@ -301,7 +297,7 @@
 
 -(void)dealloc{
     
-    KDClassLog(@"OrderViewController  dealloc");
+    KDClassLog(@"订单中心  dealloc");
     
 }
 

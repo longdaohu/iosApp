@@ -8,9 +8,9 @@
 
 
 
-#import "centerSectionView.h"
+#import "CenterHeaderView.h"
 #import "CenterSectionItem.h"
-@interface centerSectionView()
+@interface CenterHeaderView()
 //分隔线
 @property(nonatomic,strong)NSArray *lines;
 //选项数组
@@ -20,10 +20,10 @@
 
 
 
-@implementation centerSectionView
+@implementation CenterHeaderView
 +(instancetype)centerSectionViewWithResponse:(NSDictionary * )response{
 
-    centerSectionView *sectionView =  [[centerSectionView alloc] init];
+    CenterHeaderView *sectionView =  [[CenterHeaderView alloc] init];
     sectionView.response           =  response;
     
     return sectionView;

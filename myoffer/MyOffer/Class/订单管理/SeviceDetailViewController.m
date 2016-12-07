@@ -118,13 +118,6 @@
 }
 
 
-
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
-//{
-// 
-//    
-//}
-
 //返回
 -(void)pushApplyStatus{
     

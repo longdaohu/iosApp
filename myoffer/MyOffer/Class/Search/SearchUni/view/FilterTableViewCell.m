@@ -57,7 +57,8 @@
         
         self.upButton =[[UIButton alloc] init];
         [self.upButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
-        [self.upButton addTarget:self action:@selector(up:) forControlEvents:UIControlEventTouchUpInside];
+        [self.upButton setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateSelected];
+        [self.upButton addTarget:self action:@selector(upClick:) forControlEvents:UIControlEventTouchUpInside];
         self.upButton.tag = 999;
         [self addSubview:self.upButton];
         
@@ -92,7 +93,6 @@
     CGFloat padding = 10.0;
     
     CGFloat MAXWidth = [UIScreen  mainScreen].bounds.size.width - 30;
-    
     
     
     for (int i = 0; i < fileritem.buttonArray.count; i ++) {
@@ -193,7 +193,7 @@
 }
 
 
--(void)up:(UIButton *)sender
+-(void)upClick:(UIButton *)sender
 {
     
     if ([self.delegate respondsToSelector:@selector(FilterTableViewCell:WithButtonItem:WithIndexPath:)]) {
@@ -222,16 +222,7 @@
     self.upButton.frame = filterFrame.upFrame;
     self.contentBackView.frame  = filterFrame.bgFrame;
     
-    
-    if (filterFrame.cellState == 1) {
-        
-        [self.upButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
-    }
-    
-    if (filterFrame.cellState == 0) {
-        
-        [self.upButton setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateNormal];
-    }
+    self.upButton.selected = filterFrame.cellState == XcellStateRealHeight;
     
     for (int index = 0; index < filterFrame.itemFrames.count; index++) {
         

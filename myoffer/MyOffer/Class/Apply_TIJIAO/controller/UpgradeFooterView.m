@@ -10,9 +10,12 @@
 
 @interface UpgradeFooterView ()
 @property(nonatomic,strong)UIView *bgView;
-@property(nonatomic,strong)UILabel *titleLab;          //1、提示信息
-@property(nonatomic,strong)UILabel *moreLab;         //2、了解详情
-@property(nonatomic,strong)UIImageView *arrowView;   //3、箭头
+//1、提示信息
+@property(nonatomic,strong)UILabel *titleLab;
+//2、了解详情
+@property(nonatomic,strong)UILabel *moreLab;
+//3、箭头
+@property(nonatomic,strong)UIImageView *arrowView;
 @end
 
 ;

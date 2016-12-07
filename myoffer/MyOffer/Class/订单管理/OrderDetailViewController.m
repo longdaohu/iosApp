@@ -81,10 +81,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 -(void)makeDataSourse{
     
     XWeakSelf
@@ -112,6 +108,8 @@
     
     NSDictionary *SKU = SKUs[0];
 
+    XWeakSelf
+    
     [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSDictionary *temp = (NSDictionary *)obj;
@@ -120,7 +118,7 @@
         
         item.name = temp[@"name"];
         
-        [self.leftItems addObject:item];
+        [weakSelf.leftItems addObject:item];
         
 //        [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
         
@@ -199,7 +197,7 @@
     self.rightLab.textAlignment = NSTextAlignmentRight;
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem  alloc] initWithCustomView:self.rightLab];
     
-    self.backBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.backBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
      self.navigationItem.leftBarButtonItem = self.backBtn;
     
 }
@@ -247,7 +245,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight -64) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -268,7 +266,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
-    return self.isTableViewSelected ? 15 : 0.1;
+    return self.isTableViewSelected ? 15 : HEIGHT_ZERO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -294,18 +292,18 @@
 //取消订单
 -(void)cancelOrder{
     
- 
+    XWeakSelf
     NSString *path = [NSString stringWithFormat:@"GET api/account/order/close?order_id=%@",self.order.orderId];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         if ([response[@"result"] isEqualToString:@"OK"]) {
             
-            if (self.actionBlock) {
+            if (weakSelf.actionBlock) {
         
-                self.actionBlock(YES);
+                weakSelf.actionBlock(YES);
         
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
              }
         }
     }];
@@ -313,7 +311,7 @@
 }
 
 //返回
--(void)back{
+-(void)caseBack{
    
     if (self.navigationController.childViewControllers.count > 3) {
         
@@ -323,7 +321,6 @@
             
             ServiceMallViewController *mall =(ServiceMallViewController *)child;
             mall.refresh = YES;
-            
             [self.navigationController popToViewController:mall animated:YES];
 
 
@@ -347,6 +344,11 @@
     }
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 
 -(void)dealloc{
 
