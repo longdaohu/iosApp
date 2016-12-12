@@ -98,7 +98,7 @@
         
         
         self.moreBtn = [self buttonlWithtextColor:XCOLOR_RED fontSize:XPERCENT * 15];
-        [self.moreBtn setTitle:@"展开阅读" forState:UIControlStateNormal];
+        [self.moreBtn setTitle:@"了解详细介绍" forState:UIControlStateNormal];
         [self.moreBtn setTitle:@"点击隐藏" forState:UIControlStateSelected];
         self.moreBtn .contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [self.moreBtn addTarget:self action:@selector(onMoreClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -185,24 +185,36 @@
     if (self.dataView.subviews.count == 0) {
         
         //  雅思要求 %@\n托福要求
-        
         NSNumber *regular_degree_TF = item.TOEFLRequirement[@"regular_degree_total"];
         NSNumber *master_degree_TF = item.TOEFLRequirement[@"master_degree_total"];
         NSString *TF  = (regular_degree_TF && master_degree_TF)? [NSString stringWithFormat:@"%@:%@",regular_degree_TF,master_degree_TF]: @"-";
         
         NSNumber *regular_degree_YS = item.IELTSRequirement[@"regular_degree_total"];
         NSNumber *master_degree_YS = item.IELTSRequirement[@"master_degree_total"];
+        
         NSString *YS  = (regular_degree_YS && master_degree_YS)? [NSString stringWithFormat:@"%@:%@",regular_degree_YS,master_degree_YS]: @"-";
-   
         NSString *chengji =[NSString stringWithFormat:@"%@/%@",YS,TF];
         
-        UniversityDetailItem *item1  = [UniversityDetailItem ViewWithImage:@"Uni_tuofu" title:@"雅思/托福(本科:硕士)" subtitle:chengji];
+        NSString *TYtitle = @"学雅思/托福(本科:硕士)";
+        if([itemFrame.item.country containsString:@"美"]){
+            
+             TYtitle = @"托福(本科:硕士)";
+             chengji = TF;
+        }
+        
+        UniversityDetailItem *item1  = [UniversityDetailItem ViewWithImage:@"Uni_tuofu" title:TYtitle subtitle:chengji];
         [self.dataView addSubview:item1];
         
         CGFloat school_fee_floor = [item.school_fee_floor floatValue];
         CGFloat school_fee_limit = [item.school_fee_limit floatValue];
-        NSString *fee =[NSString stringWithFormat:@"%.2lf ~ %.2lf",school_fee_floor,school_fee_limit];
-        NSString *title =  [itemFrame.item.country containsString:@"英"] ? @"学费(万英镑/学年)" : @"学费(万澳元/学年)";
+        NSString *fee =[NSString stringWithFormat:@"%.2lf - %.2lf",school_fee_floor,school_fee_limit];
+        NSString *title = @"学费(万英镑/学年";
+        if ([itemFrame.item.country containsString:@"澳"] ) {
+            title = @"学费(万澳元/学年)";
+        }else if([itemFrame.item.country containsString:@"美"]){
+            title = @"学费(万美元/学年)";
+        }
+        
         UniversityDetailItem *item2  = [UniversityDetailItem ViewWithImage:@"Uni_Fee" title:title subtitle:fee];
         [self.dataView addSubview:item2];
         
@@ -214,7 +226,7 @@
         
         
         CGFloat foreign_student_rate = [item.foreign_student_rate floatValue];
-        NSString *foreign_student =[NSString stringWithFormat:@"%.f%% : %.f%%",foreign_student_rate*100,(1-foreign_student_rate)*100];
+        NSString *foreign_student =[NSString stringWithFormat:@"%.f%% : %.f%%",(1-foreign_student_rate)*100,foreign_student_rate*100];
         UniversityDetailItem *item4  = [UniversityDetailItem ViewWithImage:@"Uni_rate" title:@"本地 : 国际" subtitle:foreign_student];
         [self.dataView addSubview:item4];
         

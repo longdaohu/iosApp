@@ -157,6 +157,7 @@
 		AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7825E21D702AB100AA4EF4 /* UniversityNavView.xib */; };
 		AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */; };
 		AE8707061DDEEC4200CE7780 /* PipeiSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */; };
+		AE8B15A81DFE7B75007EF963 /* Uni-USA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE8B15A71DFE7B75007EF963 /* Uni-USA.jpg */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
 		AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */; };
 		AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */; };
@@ -672,6 +673,7 @@
 		AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiSectionHeaderView.m; path = ../controller/PipeiSectionHeaderView.m; sourceTree = "<group>"; };
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AE8B15A71DFE7B75007EF963 /* Uni-USA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Uni-USA.jpg"; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		AE93E4DA1D6DA3E70025FC58 /* UniversityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityViewController.h; path = controller/UniversityViewController.h; sourceTree = "<group>"; };
 		AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityViewController.m; path = controller/UniversityViewController.m; sourceTree = "<group>"; };
@@ -1674,6 +1676,7 @@
 		AE7107A71D767D8D00019B1F /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE8B15A71DFE7B75007EF963 /* Uni-USA.jpg */,
 				AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */,
 				AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */,
 				AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */,
@@ -3258,6 +3261,7 @@
 				AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */,
 				AEA24C2E1D5B283700DD7939 /* UK_en.jpg in Resources */,
 				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
+				AE8B15A81DFE7B75007EF963 /* Uni-USA.jpg in Resources */,
 				AEA24BF21D5B266A00DD7939 /* XWGJnodataView.xib in Resources */,
 				46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */,
 				AEF421051BD4988B00CFB45E /* UMSLoginViewController.xib in Resources */,

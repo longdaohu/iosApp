@@ -83,7 +83,9 @@
     self.addressLab.text = item.address_detail;
     NSString *ranking_qs = item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",item.ranking_qs];
     self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",ranking_qs];
-    NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"英"] ? [NSString stringWithFormat:@"%@",item.ranking_ti] : [NSString stringWithFormat:@"%@星",item.ranking_ti];
+  
+    
+    NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"澳"] ?  [NSString stringWithFormat:@"%@星",item.ranking_ti] :[NSString stringWithFormat:@"%@",item.ranking_ti] ;
     self.localLab.text =  item.ranking_ti.integerValue == DefaultNumber ? @"本国排名: 暂无排名": [NSString stringWithFormat:@"本国排名: %@",local_rank_name];
     
     self.hotView.hidden = (item.hot == 0);
@@ -98,7 +100,6 @@
 -(void)layoutSubviews{
     
     [super layoutSubviews];
-
  
     self.logo.frame = self.itemFrame.logoFrame;
  

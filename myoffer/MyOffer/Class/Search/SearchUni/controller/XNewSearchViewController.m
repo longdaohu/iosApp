@@ -111,7 +111,6 @@ typedef enum {
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -256,68 +255,57 @@ typedef enum {
     if (!_FiltItems) {
         //选项数据
         
-        
         NSMutableArray *temps =[NSMutableArray arrayWithCapacity:5];
-        
-        FiltContent  *fileritemCountry =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_Country") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: [self.CountriesArray valueForKey:@"countryName"]];
-        FilterContentFrame *country = [[FilterContentFrame alloc] init];
-        country.content = fileritemCountry;
-        [temps addObject:country];
+        //国家
+        FiltContent  *fileritemCountry =[FiltContent createItemWithTitle:@"国家："andDetailTitle:@"全部" anditems: [self.CountriesArray valueForKey:@"countryName"]];
+        FilterContentFrame *countryFrame = [FilterContentFrame FilterContentFrameWithContent:fileritemCountry];
+        [temps addObject:countryFrame];
         
         NSArray *stateArray = nil;
         if (self.CoreCountry) {
-            
-            country.cellState = XcellStateHeightZero;
-            
+            countryFrame.cellState = XcellStateHeightZero;
             stateArray = [self makeCurrentStateWithCountry:self.CoreCountry];
         }
-        
+ 
+        //地区
         FiltContent  *fileritemState =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_State") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems: stateArray];
-        FilterContentFrame *state = [[FilterContentFrame alloc] init];
-        state.content = fileritemState;
-        [temps addObject:state];
+        FilterContentFrame *stateFrame = [FilterContentFrame FilterContentFrameWithContent:fileritemState];
+        [temps addObject:stateFrame];
         
         
         NSArray *currentCityArr = nil;
         if (self.CoreState) {
-            
-            state.cellState = XcellStateHeightZero;
-            
+            countryFrame.cellState = XcellStateHeightZero;
+            stateFrame.cellState = XcellStateHeightZero;
             CountryState  * currentState =[self makeCurrentCityWithState:self.CoreState country:self.CoreCountry];
-            
             currentCityArr = currentState.cities;
         }
         
-        
+        //城市
         FiltContent  *fileritemCity =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_city") andDetailTitle:GDLocalizedString(@"SearchResult_All") anditems:currentCityArr];
-        FilterContentFrame *city = [[FilterContentFrame alloc] init];
-        city.content = fileritemCity;
-        [temps addObject:city];
+        FilterContentFrame *cityFrame = [FilterContentFrame FilterContentFrameWithContent:fileritemCity];
+        [temps addObject:cityFrame];
+        
         if (self.Corecity) {
-            
-            country.cellState = XcellStateHeightZero;
-            state.cellState = XcellStateHeightZero;
-            city.cellState = XcellStateHeightZero;
-            
+            countryFrame.cellState = XcellStateHeightZero;
+            stateFrame.cellState = XcellStateHeightZero;
+            cityFrame.cellState = XcellStateHeightZero;
         }
         
-        
+        //学科
         FiltContent *fileritemArea =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subjectArea")  andDetailTitle:GDLocalizedString(@"SearchResult_All")anditems: [self.filterAreas valueForKeyPath:@"areaName"]];
-        FilterContentFrame *area = [[FilterContentFrame alloc] init];
-        area.content = fileritemArea;
-        [temps addObject:area];
+        FilterContentFrame *areaFrame =  [FilterContentFrame FilterContentFrameWithContent:fileritemArea];
+        [temps addObject:areaFrame];
         
         NSArray *subjectArray = nil;
         if (self.CoreArea) {
-            
-            area.cellState = XcellStateHeightZero;
-            
+            areaFrame.cellState = XcellStateHeightZero;
             subjectArray =[self makeCurrentSubjectWithArea:self.CoreArea];
         }
         
+        //专业
         FiltContent *fileritemSubject =[FiltContent createItemWithTitle:GDLocalizedString(@"SearchResult_subject") andDetailTitle:GDLocalizedString(@"SearchResult_All")  anditems:subjectArray];
-        FilterContentFrame *subject = [[FilterContentFrame alloc] init];
-        subject.content = fileritemSubject;
+        FilterContentFrame *subject =  [FilterContentFrame FilterContentFrameWithContent:fileritemSubject];
         [temps addObject:subject];
         
         
@@ -629,7 +617,7 @@ typedef enum {
 -(void)makeData:(NSInteger)page{
     
     
- 
+   XWeakSelf
     //通过判断是不是澳大利亚城市正序或倒序
     if (XReLoadStateFail == self.ReloadStatus) {
         
@@ -686,9 +674,9 @@ typedef enum {
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
          
-         self.ReloadStatus = XReLoadStateFail;
+         weakSelf.ReloadStatus = XReLoadStateFail;
          
-         if (page == 0)  [self.UniversityList removeAllObjects];
+         if (page == 0)  [weakSelf.UniversityList removeAllObjects];
          
          
          //添加数据源
@@ -696,25 +684,25 @@ typedef enum {
            
              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
   
-             [self.UniversityList addObject:uniFrame];
+             [weakSelf.UniversityList addObject:uniFrame];
              
          }];
          
          
-         [self.ResultTableView reloadData];
+         [weakSelf.ResultTableView reloadData];
          
          //每一次重新请求时，回到tableView顶部
-         if (page == 0)  [self.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+         if (page == 0)  [weakSelf.ResultTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
              
          
-         self.NextPage = page + 1; //加载下一页PageNumber
+         weakSelf.NextPage = page + 1; //加载下一页PageNumber
          
          //数据请求为0是显示或隐藏关于控件
-         self.NoDataView.hidden = self.UniversityList.count == 0 ? NO : YES;
+         weakSelf.NoDataView.hidden = weakSelf.UniversityList.count == 0 ? NO : YES;
          
          
          //筛选时先删除optionTabel的数据源，重新添加数据源
-         [self.RankTypeList removeAllObjects];
+         [weakSelf.RankTypeList removeAllObjects];
          
          
          for (NSString *typeName in response[@"rankTypes"]) {
@@ -722,34 +710,34 @@ typedef enum {
              NSString *QSRank = [GDLocalizedString(@"SearchRank_World") lowercaseString];
              if([typeName isEqualToString:QSRank])
              {
-                 [self.RankTypeList insertObject:Option_item atIndex:0];
+                 [weakSelf.RankTypeList insertObject:Option_item atIndex:0];
                  
              }else{
-                 [self.RankTypeList addObject:Option_item];
+                 [weakSelf.RankTypeList addObject:Option_item];
                  
              }
              
-             CGRect newRect = self.RankTypeTableView.frame;
-             newRect.size.height = self.RankTypeList.count * 44;
-             self.RankTypeTableView.frame = newRect;
+             CGRect newRect = weakSelf.RankTypeTableView.frame;
+             newRect.size.height = weakSelf.RankTypeList.count * 44;
+             weakSelf.RankTypeTableView.frame = newRect;
          }
          
          
          //显示ToolView左侧按钮Title
-         int index = [self.RankType isEqualToString:RANKTI] ? 1 : 0;
-         OptionItem *rank = self.RankTypeList[index];
-         [self.ToolView.leftButton setTitle:rank.RankTypeName forState:UIControlStateNormal];
+         int index = [weakSelf.RankType isEqualToString:RANKTI] ? 1 : 0;
+         OptionItem *rank = weakSelf.RankTypeList[index];
+         [weakSelf.ToolView.leftButton setTitle:rank.RankTypeName forState:UIControlStateNormal];
          //记住是第几个排序
-         self.selectRankTypeIndex = index;
+         weakSelf.selectRankTypeIndex = index;
          
          //  加载更多是否显示
          if ([response[@"universities"] count] < PageSize) {
              
-             [self.ResultTableView.mj_footer endRefreshingWithNoMoreData];
+             [weakSelf.ResultTableView.mj_footer endRefreshingWithNoMoreData];
              
          }else{
              
-             [self.ResultTableView.mj_footer endRefreshing];
+             [weakSelf.ResultTableView.mj_footer endRefreshing];
              
          }
          
@@ -757,13 +745,13 @@ typedef enum {
          NSString *countStr =[NSString stringWithFormat:@"%@",response[@"count"]];
          
          //显示搜索结果数量
-         [self fixHeaderTitleLabelWithCount:countStr];
+         [weakSelf fixHeaderTitleLabelWithCount:countStr];
          
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         self.ReloadStatus = XReLoadStateFail;
+         weakSelf.ReloadStatus = XReLoadStateFail;
          
-         [self.ResultTableView.mj_footer endRefreshing];
+         [weakSelf.ResultTableView.mj_footer endRefreshing];
          
      }];
 }
@@ -804,7 +792,7 @@ typedef enum {
     
 }
 
-#pragma mark ———————— tableViewData tableViewDelegate
+#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 //超出cell的bounds范围，不能显示
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -1021,6 +1009,11 @@ typedef enum {
         NewSearchRstTableViewCell *cell =[NewSearchRstTableViewCell  cellWithTableView:tableView];
         UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         NSDictionary *itemInfo =uniFrame.universtiy.courses[indexPath.row];
+        
+        if (indexPath.row == 0) {
+            NSLog(@"itemInfo %@",itemInfo);
+        }
+        
         if (uniFrame.universtiy.courses.count > 0) {
             
             cell.itemInfo = itemInfo;
@@ -1224,7 +1217,7 @@ typedef enum {
                 
                 FilterContentFrame  *cityFilterFrame = self.FiltItems[indexPath.row + 1];
                 cityFilterFrame.items =  state.cities;
-                cityFilterFrame.cellState =  XcellStateRealHeight;
+//                cityFilterFrame.cellState =  XcellStateRealHeight;
                 
                 FiltContent *cityFiltItem = cityFilterFrame.content;
                 cityFiltItem.buttonArray = state.cities;
@@ -1337,7 +1330,7 @@ typedef enum {
       
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
-            CGRect newRect = self.RankTypeTableView.frame;
+            CGRect newRect = weakSelf.RankTypeTableView.frame;
             newRect.origin.y = 0;
             weakSelf.RankTypeTableView.frame = newRect;
             [weakSelf.RankTypeTableView reloadData];
@@ -1350,7 +1343,7 @@ typedef enum {
         [UIView animateWithDuration:0.25 animations:^{
            
             weakSelf.cover.alpha = 0;
-            CGRect newRect = self.RankTypeTableView.frame;
+            CGRect newRect = weakSelf.RankTypeTableView.frame;
             newRect.origin.y = -88;
             weakSelf.RankTypeTableView.frame = newRect;
             

@@ -30,6 +30,7 @@
 #import "UniDetailGroup.h"
 #import "UniversityheaderCenterView.h"
 #import "IntelligentResultViewController.h"
+#import "WYLXViewController.h"
 
 typedef enum {
     UniversityItemTyDeFault,
@@ -205,8 +206,6 @@ typedef enum {
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        NSLog(@"loadNewDataSourse %@",response);
-        
         UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
         
         [weakSelf makeUIWithUni:item];
@@ -228,7 +227,6 @@ typedef enum {
         self.tableView.alpha = 1;
         
     }];
-    
     
     self.favorited = university.favorited;
     
@@ -252,7 +250,14 @@ typedef enum {
     self.tableView.tableHeaderView  = header;
     
      //拉伸图片
-    NSString *countryImageName = [university.country isEqualToString:@"英国"] ? @"Uni-uk.jpg" : @"Uni-au.jpg";
+    
+    NSString *countryImageName =  @"Uni-au.jpg";
+    if ([university.country isEqualToString:@"英国"]) {
+        countryImageName =  @"Uni-uk.jpg";
+    }else if ([university.country isEqualToString:@"美国"]) {
+        countryImageName =  @"Uni-USA.jpg";
+     }
+    
     [UIView transitionWithView:self.iconView duration:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         [self.iconView setImage:[UIImage imageNamed:countryImageName]];
     } completion:^(BOOL finished) {
@@ -293,7 +298,10 @@ typedef enum {
         
     }];
     
+    self.footer.uni_country = university.country;
+    
     [self.tableView reloadData];
+    
 
     
 }
@@ -316,6 +324,7 @@ typedef enum {
     UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - HEIGHT_BOTTOM, XScreenWidth, HEIGHT_BOTTOM)];
     self.footer = footer;
     footer.actionBlock = ^(UIButton *sender){
+        
         [weakSelf footerWithButton:sender];
     };
     [self.view addSubview:footer];
@@ -357,7 +366,7 @@ typedef enum {
     
     self.view.clipsToBounds = YES;
     
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XPERCENT * 400)];
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XPERCENT * 200 + 50)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.backgroundColor = XCOLOR_BG;
     self.iconView = iconView;
@@ -601,6 +610,8 @@ typedef enum {
 - (void)caseFavorite
 {
 
+    
+    RequireLogin
     XWeakSelf
     NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
     [self startAPIRequestWithSelector:path parameters:@{@":id": self.UniFrame.item.NO_id} success:^(NSInteger statusCode, id response) {
@@ -618,11 +629,7 @@ typedef enum {
     }];
 }
 
-//回退
-- (void)casePop
-{
-     [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 //点击查看更多
 - (void)caseMore
@@ -644,7 +651,12 @@ typedef enum {
         }];
     
     }
-    
+}
+
+//回退
+- (void)casePop
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //设置是否收藏
@@ -659,7 +671,11 @@ typedef enum {
 {
     if ([sender.currentTitle containsString:@"查看"]) {
         
-        [self allSubjects];
+        [self caseAllSubjects];
+        
+    }else if ([sender.currentTitle containsString:@"免费"]) {
+        
+        [self caseWoyaoluexue];
         
     }else{
         
@@ -667,12 +683,16 @@ typedef enum {
     }
     
 }
+//我要留学
+- (void)caseWoyaoluexue{
+    
+    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
 
+}
 //查看所有专业
-- (void)allSubjects
-{
-    UniversityCourseViewController   *subjects = [[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id];
-    [self.navigationController pushViewController:subjects animated:YES];
+- (void)caseAllSubjects{
+    
+    [self.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id] animated:YES];
 }
 
 //智能匹配

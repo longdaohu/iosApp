@@ -370,6 +370,8 @@
 -(void)caseUniversityWithdict:(NSDictionary *)response{
     
     NSDictionary *dict =  response[@"args"];
+    
+    
     [self caseUniversityWithshortId: dict[@"id"]];
     
 }

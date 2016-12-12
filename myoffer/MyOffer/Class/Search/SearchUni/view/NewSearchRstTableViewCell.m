@@ -63,9 +63,8 @@
     self.LevelLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),itemInfo[@"level"]];
 
     NSMutableString *areaStr =[NSMutableString stringWithFormat:@"%@: ",GDLocalizedString(@"UniCourseDe-005")];
- 
-   
-    for (NSString *item in itemInfo[@"areas"] ) {
+    
+    for (NSString *item in itemInfo[@"subjects"] ) {
        
          [areaStr appendFormat:@" %@ ",item];
     }

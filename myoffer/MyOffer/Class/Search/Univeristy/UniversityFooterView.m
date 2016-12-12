@@ -10,6 +10,7 @@
 
 
 @interface UniversityFooterView ()
+@property(nonatomic,strong)UIButton *ApplyBtn;
 @property(nonatomic,strong)UIButton *subjectBtn;
 @property(nonatomic,strong)UIButton *rateBtn;
 @property(nonatomic,strong)UILabel *showLab;
@@ -49,21 +50,60 @@
         self.rateBtn = rateBtn;
         rateBtn.titleLabel.font = XFONT(XPERCENT * 14);
         
+        
         UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         showLab.hidden = YES;
         showLab.numberOfLines = 0;
         self.showLab = showLab;
         [self  addSubview:showLab];
         
+        UIButton *ApplyBtn = [[UIButton alloc] init];
+        ApplyBtn.tag = 12;
+        ApplyBtn.layer.cornerRadius = 4;
+        ApplyBtn.backgroundColor = XCOLOR_RED;
+        [ApplyBtn setTitle:@"免费申请" forState:UIControlStateNormal];
+        [ApplyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ApplyBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:ApplyBtn];
+        self.ApplyBtn = ApplyBtn;
+        ApplyBtn.titleLabel.font = XFONT(XPERCENT * 14);
+        ApplyBtn.hidden = YES;
+        
     }
     return self;
 }
 
+- (void)setUni_country:(NSString *)uni_country{
+
+    _uni_country = uni_country;
+    
+    if ([uni_country isEqualToString:@"美国"]) {
+        
+        self.showLab.hidden = YES;
+        self.rateBtn.hidden = YES;
+        self.subjectBtn.hidden = YES;
+        self.ApplyBtn.hidden = NO;
+        
+    }
+    
+}
 
 
 -(void)setLevel:(NSInteger)level{
 
     _level = level;
+    
+    if ([self.uni_country isEqualToString:@"美国"]) {
+        
+        self.showLab.hidden = YES;
+        self.rateBtn.hidden = YES;
+        self.subjectBtn.hidden = YES;
+        self.ApplyBtn.hidden = NO;
+        
+        return;
+        
+    }
+
     
     if (!self.showLab.hidden) return;
     
@@ -98,7 +138,6 @@
     [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
     self.showLab.attributedText = attr;
     
-    
 }
 
 
@@ -121,6 +160,13 @@
     CGFloat rateW = subW;
     CGFloat rateH = subH;
     self.rateBtn.frame = CGRectMake(rateX, rateY , rateW, rateH);
+    
+    
+    CGFloat ApplyY = subY;
+    CGFloat ApplyW = subW;
+    CGFloat ApplyH = subH;
+    CGFloat ApplyX = (footerSize.width - ApplyW) * 0.5;
+    self.ApplyBtn.frame = CGRectMake(ApplyX, ApplyY , ApplyW, ApplyH);
     
     self.showLab.frame = self.rateBtn.frame;
 

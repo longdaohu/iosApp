@@ -99,6 +99,7 @@
 
 -(void)makeButtonItems:(NSArray *)items
 {
+    
     NSMutableArray *temps =[NSMutableArray array];
     
     //第一个 label的起点
@@ -150,6 +151,15 @@
     self.cellHeigh = items.count == 0 ? 0 : CGRectGetMaxY(self.bgFrame) + 10;
     
     self.originCellHeight = CGRectGetMaxY(self.bgFrame)+ 10;
+    
+    if (items.count == 0) {
+        
+        self.cellState =  XcellStateHeightZero;
+    
+    }else{
+    
+        self.cellState =  XcellStateRealHeight;
+    }
  
 }
 
