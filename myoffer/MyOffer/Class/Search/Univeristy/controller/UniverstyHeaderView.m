@@ -123,7 +123,7 @@
     if ([itemFrame.item.country  containsString:@"澳"]) {
        local_rank_name  =  [NSString stringWithFormat:@"%@星",local_rankStr];
     }
-    NSString *local_rank = itemFrame.item.ranking_ti.integerValue == DefaultNumber ? @"暂无排名" :local_rank_name;
+    NSString *local_rank = itemFrame.item.ranking_ti.integerValue == DEFAULT_NUMBER ? @"暂无排名" :local_rank_name;
     NSString *localName = [itemFrame.item.country isEqualToString:@"美国"] ? @"TIMES排名":@"本国排名";
     NSString *times = [NSString stringWithFormat:@"%@\n%@",local_rank,localName];
     NSRange timesRange = [times rangeOfString:local_rank];
@@ -131,7 +131,7 @@
     [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, timesRange.length)];
     self.TIMESLab.attributedText = timesAttri;
      
-    NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
+    NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DEFAULT_NUMBER ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
     NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",global_rank];
     NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];

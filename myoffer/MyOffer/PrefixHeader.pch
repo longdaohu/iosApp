@@ -50,7 +50,7 @@
 #define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]
 #define XCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define XFONTNAME  @"HelveticaNeue-Light"
-#define DefaultNumber 99999
+#define DEFAULT_NUMBER 99999
 #define RANKTI  @"ranking_ti"
 #define RANKQS  @"ranking_qs"
 #define KEY_COUNTRY  @"country"

@@ -147,12 +147,12 @@
         
         if (RankTIType) {
             
-            NSString   *rankStr01 = [university.ranking_ti intValue] == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
+            NSString   *rankStr01 = [university.ranking_ti intValue] == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
             self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
         }else{
             
-            NSString   *rankStr02 = [university.ranking_qs intValue]  == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",university.ranking_qs];
+            NSString   *rankStr02 = [university.ranking_qs intValue]  == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",university.ranking_qs];
             self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniversityDetail-003"), rankStr02];
         }
         

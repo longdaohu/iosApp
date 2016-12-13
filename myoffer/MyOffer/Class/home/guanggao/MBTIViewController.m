@@ -104,7 +104,7 @@
     
     NSString *absoluteString = request.URL.absoluteString;
     
-    NSInteger pageNumber = DefaultNumber;
+    NSInteger pageNumber = DEFAULT_NUMBER;
     if ([absoluteString containsString:@"app:appJump"]) {
         pageNumber = 0; //ok
     }else if ([absoluteString containsString:@"/evaluate"]){

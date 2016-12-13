@@ -192,7 +192,7 @@
     //当排名方式是 世界排名时，只显示世界排名信息
     if ([self.optionOrderBy isEqualToString:RANKQS]) {
         
-        NSString   *rankStr01 = university.ranking_qs.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
+        NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
         self.RankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
         
         self.StarBackgroud.hidden = YES;
@@ -209,7 +209,7 @@
         NSInteger  StarCount  = university.ranking_ti.integerValue;
        
         //暂无排名时
-        if (StarCount == DefaultNumber) {
+        if (StarCount == DEFAULT_NUMBER) {
             
              self.RankLabel.text = @"本国排名：暂无排名";
 
@@ -243,7 +243,7 @@
         
     }else{
            //英国排名
-            NSString   *rankStr01 = university.ranking_ti.intValue == DefaultNumber ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
+            NSString   *rankStr01 = university.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
             self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
     }

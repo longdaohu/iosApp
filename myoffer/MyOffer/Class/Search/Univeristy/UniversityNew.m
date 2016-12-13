@@ -28,13 +28,13 @@
 -(NSNumber *)ranking_qs{
     
     
-    return _ranking_qs ? _ranking_qs : @DefaultNumber;
+    return _ranking_qs ? _ranking_qs : @DEFAULT_NUMBER;
 }
 
 
 -(NSNumber *)ranking_ti{
     
     
-    return _ranking_ti ? _ranking_ti : @DefaultNumber;
+    return _ranking_ti ? _ranking_ti : @DEFAULT_NUMBER;
 }
 @end

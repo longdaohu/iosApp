@@ -160,7 +160,7 @@
               
               UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
               
-              NSInteger index =  [obj[RANKTI] integerValue] == DefaultNumber ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
+              NSInteger index =  [obj[RANKTI] integerValue] == DEFAULT_NUMBER ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
               
               NSMutableArray *temps = self.Restults[index];
               

@@ -85,7 +85,7 @@ typedef enum {
         
         self.uni_id = Uni_id;
         
-        self.user_level = @DefaultNumber;
+        self.user_level = @DEFAULT_NUMBER;
     }
     
     return self;
@@ -687,7 +687,7 @@ typedef enum {
 -(void)CasePipei{
     
         
-        if ( !LOGIN  ||  self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
+        if ( !LOGIN  ||  self.user_level.integerValue == DEFAULT_NUMBER || self.user_level.integerValue == -1) {
             
             XWeakSelf
             self.FromPipei = YES;
