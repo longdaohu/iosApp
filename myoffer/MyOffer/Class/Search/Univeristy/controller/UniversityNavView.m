@@ -37,7 +37,6 @@
 
     [super awakeFromNib];
     
-    
     self.clipsToBounds = YES;
     
     self.bgImageView.alpha = 0;
@@ -49,19 +48,19 @@
 
     }];
     
-    [self.rightView noShadowWithShare];
+    [self.rightView shareButtonWithShadow:NO];
     
     [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
     
-    
-    self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    
     self.titleLab.font = [UIFont boldSystemFontOfSize:17];
     
-    [super awakeFromNib];
+}
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
     
     self.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
-    
     
     
     CGRect rightRect = self.rightView.frame;
@@ -69,14 +68,13 @@
     rightRect.size.width = 80  +  XMARGIN;
     rightRect.origin.x = XScreenWidth - rightRect.size.width - 2 * XMARGIN;
     self.rightView.frame = rightRect;
-    
 }
 
-- (IBAction)backClick:(id)sender {
+
+- (IBAction)backClick:(UIButton *)sender {
     
-    UIButton *backBtn = (UIButton *)sender;
-    backBtn.tag = NavItemStyleBack;
-    [self onclick:backBtn];
+     sender.tag = NavItemStyleBack;
+     [self onclick:sender];
 }
 
 - (void)onclick:(UIButton *)sender{

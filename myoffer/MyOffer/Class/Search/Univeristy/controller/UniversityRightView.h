@@ -20,9 +20,8 @@ typedef void(^UniversityRightViewwBlock)(UIButton *sender);
 +(instancetype)ViewWithBlock:(UniversityRightViewwBlock)actionBlock;
 //带阴影
 - (void)shadowWithFavorited:(BOOL)favorited;
-- (void)shadowWithShare;
 //不带阴影
 - (void)noShadowWithFavorited:(BOOL)favorited;
-- (void)noShadowWithShare;
+- (void)shareButtonWithShadow:(BOOL)shadow;
 
 @end

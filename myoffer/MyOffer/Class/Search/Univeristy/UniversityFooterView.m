@@ -81,7 +81,6 @@
         
         self.showLab.hidden = YES;
         self.rateBtn.hidden = YES;
-        self.subjectBtn.hidden = YES;
         self.ApplyBtn.hidden = NO;
         
     }
@@ -97,11 +96,9 @@
         
         self.showLab.hidden = YES;
         self.rateBtn.hidden = YES;
-        self.subjectBtn.hidden = YES;
         self.ApplyBtn.hidden = NO;
         
         return;
-        
     }
 
     
@@ -162,11 +159,8 @@
     self.rateBtn.frame = CGRectMake(rateX, rateY , rateW, rateH);
     
     
-    CGFloat ApplyY = subY;
-    CGFloat ApplyW = subW;
-    CGFloat ApplyH = subH;
-    CGFloat ApplyX = (footerSize.width - ApplyW) * 0.5;
-    self.ApplyBtn.frame = CGRectMake(ApplyX, ApplyY , ApplyW, ApplyH);
+ 
+    self.ApplyBtn.frame = self.rateBtn.frame;
     
     self.showLab.frame = self.rateBtn.frame;
 

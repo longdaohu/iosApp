@@ -56,12 +56,11 @@
         
         
         XWeakSelf
-        UniversityheaderCenterView *centerView =  [UniversityheaderCenterView View];
-        centerView.actionBlock = ^(UIButton *sender){
-        
+        UniversityheaderCenterView *centerView =  [UniversityheaderCenterView headerCenterViewWithBlock:^(UIButton *sender) {
+         
             [weakSelf onclick:sender];
 
-        };
+        }];
         self.centerView = centerView;
         [self addSubview:centerView];
         
@@ -125,13 +124,13 @@
        local_rank_name  =  [NSString stringWithFormat:@"%@星",local_rankStr];
     }
     NSString *local_rank = itemFrame.item.ranking_ti.integerValue == DefaultNumber ? @"暂无排名" :local_rank_name;
-    NSString *times = [NSString stringWithFormat:@"%@\n本国排名",local_rank];
+    NSString *localName = [itemFrame.item.country isEqualToString:@"美国"] ? @"TIMES排名":@"本国排名";
+    NSString *times = [NSString stringWithFormat:@"%@\n%@",local_rank,localName];
     NSRange timesRange = [times rangeOfString:local_rank];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
     [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, timesRange.length)];
     self.TIMESLab.attributedText = timesAttri;
-    
-    
+     
     NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DefaultNumber ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
     NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",global_rank];
     NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
@@ -144,7 +143,8 @@
     NSString *lastOneStr = @"";
     NSInteger lastIndex = 0;
     for (NSInteger index = 0 ; index < itemFrame.item.tags.count; index++) {
-     
+ 
+        lastIndex = index;
 
         if (index ==0) {
             
@@ -160,13 +160,13 @@
             [oneStr appendString:itemFrame.item.tags[index]];
          }
         
+        
         CGSize oneSize = [oneStr KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)];
         
-        if (oneSize.width > itemFrame.tagsOneFrame.size.width) {
+        if (oneSize.width > (itemFrame.tagsOneFrame.size.width  - 30)) {
             
-            oneStr = [lastOneStr mutableCopy];
-            
-            lastIndex = index;
+             lastIndex = index;
+             oneStr = [lastOneStr mutableCopy];
             
             break;
         }
@@ -175,14 +175,14 @@
     self.tagOneLab.text = oneStr;
     self.tagOneLab.frame = itemFrame.tagsOneFrame;
     
+    
     NSMutableString *twoStr =  [NSMutableString string];
     NSString *lastTwoStr = @"";
-    for (NSInteger index = lastIndex ; index < itemFrame.item.tags.count; index++) {
+    for (NSInteger indexx = (lastIndex + 1); indexx < itemFrame.item.tags.count; indexx++) {
         
-        
-        if (index == lastIndex) {
+        if (indexx ==  (lastIndex + 1)) {
             
-            [twoStr appendString:itemFrame.item.tags[index]];
+            [twoStr appendString:itemFrame.item.tags[indexx]];
             
             lastTwoStr = [twoStr copy];
             
@@ -191,12 +191,12 @@
             lastTwoStr = [twoStr copy];
             
             [twoStr appendString:@" . "];
-            [twoStr appendString:itemFrame.item.tags[index]];
+            [twoStr appendString:itemFrame.item.tags[indexx]];
         }
         
         CGSize oneSize = [twoStr KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)];
         
-        if (oneSize.width > itemFrame.tagsOneFrame.size.width) {
+        if (oneSize.width > (itemFrame.tagsOneFrame.size.width  - 30)) {
             
             twoStr = [lastTwoStr mutableCopy];
             
@@ -206,7 +206,6 @@
     }
     self.tagTwoLab.text = twoStr;
     self.tagTwoLab.frame = itemFrame.tagsTwoFrame;
-    
     [self.rightView shadowWithFavorited:itemFrame.item.favorited];
     
   
@@ -227,8 +226,7 @@
     [super layoutSubviews];
     
     self.rightView.frame =  self.itemFrame.rightViewFrame;
-    
-
+ 
 }
 
 //收藏

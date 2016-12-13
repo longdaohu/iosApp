@@ -24,7 +24,7 @@ typedef enum {
     if (self) {
         self.backgroundColor = [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1];
         
-        self.leftButton =[self createButton:leftType andButtonTitleColor:XCOLOR_RED andButtonTitle:GDLocalizedString(@"SearchResult_worldxxxRank")];
+        self.leftButton =[self createButton:leftType andButtonTitleColor:XCOLOR_RED andButtonTitle:@"世界排名"];
         self.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
         
         self.LeftView = [[UIImageView alloc] init];

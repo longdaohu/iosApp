@@ -59,8 +59,8 @@
     NSURL    *url =[NSURL URLWithString:self.path];
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:url];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    NSString *lan = !USER_EN ? @"":@"en";
-    [request addValue:lan forHTTPHeaderField:@"user-language"];
+//    NSString *lan = !USER_EN ? @"":@"en";
+//    [request addValue:lan forHTTPHeaderField:@"user-language"];
     [self.Web loadRequest:request];
     
     if (self.isBackRootViewController) {

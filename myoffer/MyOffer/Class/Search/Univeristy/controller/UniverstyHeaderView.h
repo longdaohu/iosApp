@@ -12,6 +12,7 @@
 @class UniversityRightView;
 
 typedef void(^UniverstyHeaderViewBlock)(UIButton *sender);
+
 @class UniversityheaderCenterView;
 @interface UniverstyHeaderView : UIView
 @property(nonatomic,strong)UniversityNewFrame *itemFrame;

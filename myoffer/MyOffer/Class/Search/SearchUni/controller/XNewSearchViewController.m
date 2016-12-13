@@ -18,7 +18,6 @@ typedef enum {
 #define PageSize 20
 
 #import "XNewSearchViewController.h"
-#import "NewSearchResultCell.h"
 #import "NewSearchRstTableViewCell.h"
 #import "XUCountry.h"
 #import "CountryState.h"
@@ -555,7 +554,7 @@ typedef enum {
     
     self.ToolView =[[searchToolView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 50)];
     
-    NSString  *toolTitle = [self.RankType isEqualToString:RANKTI] ? GDLocalizedString(@"SearchResult_countryxxxRank"):GDLocalizedString(@"SearchResult_worldxxxRank");
+    NSString  *toolTitle = [self.RankType isEqualToString:RANKTI] ?  @"本国排名":@"世界排名";
     
     [self.ToolView.leftButton setTitle:toolTitle  forState:UIControlStateNormal];
     
@@ -717,9 +716,7 @@ typedef enum {
                  
              }
              
-             CGRect newRect = weakSelf.RankTypeTableView.frame;
-             newRect.size.height = weakSelf.RankTypeList.count * 44;
-             weakSelf.RankTypeTableView.frame = newRect;
+             weakSelf.RankTypeTableView.height =  weakSelf.RankTypeList.count * 44;
          }
          
          
@@ -1010,9 +1007,6 @@ typedef enum {
         UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         NSDictionary *itemInfo =uniFrame.universtiy.courses[indexPath.row];
         
-        if (indexPath.row == 0) {
-            NSLog(@"itemInfo %@",itemInfo);
-        }
         
         if (uniFrame.universtiy.courses.count > 0) {
             

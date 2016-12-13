@@ -62,16 +62,12 @@
 }
 
 
-- (void)shadowWithShare{
+- (void)shareButtonWithShadow:(BOOL)shadow{
 
-    [self.shareBtn setImage:[UIImage imageNamed:@"Uni_share_shadow"] forState:UIControlStateNormal];
-    
-}
+    NSString *imageName= shadow ? @"Uni_share_shadow" : @"Uni_share";
+    [self.shareBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 
-- (void)noShadowWithShare{
 
-    [self.shareBtn setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
-    
 }
 
 

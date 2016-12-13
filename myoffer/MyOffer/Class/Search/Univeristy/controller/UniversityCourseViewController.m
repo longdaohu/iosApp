@@ -149,7 +149,7 @@
 - (void)reloadData {
     
     [self
-     startAPIRequestWithSelector:@"GET api/university/:id/courses"
+     startAPIRequestWithSelector:@"GET api/v2/university/:id/courses"
      parameters:_resquestParameters
      success:^(NSInteger statusCode, id response) {
       

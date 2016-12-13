@@ -66,8 +66,11 @@ typedef enum {
 @property(nonatomic,assign)UniversityItemType    clickType;
 //分享功能
 @property(nonatomic,strong)ShareViewController   *shareVC;
+//底部按钮
 @property(nonatomic,strong)UniversityFooterView *footer;
+//用于记录用户入学难易程度
 @property(nonatomic,strong)NSNumber *user_level;
+//是否来自匹配页面
 @property(nonatomic,assign)BOOL FromPipei;
 
 @end
@@ -86,6 +89,14 @@ typedef enum {
     }
     
     return self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page学校详情"];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -110,20 +121,13 @@ typedef enum {
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
     XWeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-        
-        
-    } additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
         
         weakSelf.favorited = item.favorited;
         
         [weakSelf configureLikeButton:item.favorited];
-        
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        
     }];
     
     //加载报考难易程度
@@ -145,14 +149,6 @@ typedef enum {
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:@"page学校详情"];
-    
-}
-
 -(NSMutableArray *)groups{
 
     if (!_groups) {
@@ -167,7 +163,7 @@ typedef enum {
     
     [super viewDidLoad];
     
-    [self loadNewDataSourse];
+    [self addDataSourse];
     
     [self makeUI];
     
@@ -175,15 +171,12 @@ typedef enum {
 
 //根据用户资料测试录取难易程度
 - (void)loadUserLevel{
-    
-    
- 
+   
     if (self.FromPipei) return;
     
         XWeakSelf
     
-        NSString *path =[NSString stringWithFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
-        
+        NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
             
             [weakSelf caseLevelWithResponse:response];
@@ -193,7 +186,7 @@ typedef enum {
 }
 
 //加载数据
--(void)loadNewDataSourse
+-(void)addDataSourse
 {
  
     XWeakSelf
@@ -222,11 +215,6 @@ typedef enum {
 #pragma mark ——— 设置控件数据
 -(void)makeUIWithUni:(UniversitydetailNew *)university{
     
-    [UIView animateWithDuration:0.2 animations:^{
-        
-        self.tableView.alpha = 1;
-        
-    }];
     
     self.favorited = university.favorited;
     
@@ -258,10 +246,12 @@ typedef enum {
         countryImageName =  @"Uni-USA.jpg";
      }
     
+
     [UIView transitionWithView:self.iconView duration:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        [self.iconView setImage:[UIImage imageNamed:countryImageName]];
-    } completion:^(BOOL finished) {
         
+         [self.iconView setImage:[UIImage imageNamed:countryImageName]];
+        
+     } completion:^(BOOL finished) {
     }];
     
     
@@ -275,10 +265,12 @@ typedef enum {
     //相关资讯 第二分组
     NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:university.relate_articles];
     NSMutableArray *news_temps = [NSMutableArray array];
-    for (NewsItem *news in newses) {
-        XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
+    [newses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:obj];
         [news_temps addObject:newsFrame];
-    }
+    }];
+    
     UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
     [self.groups addObject:groupTwo];
 
@@ -316,7 +308,7 @@ typedef enum {
     
 }
 
-
+//添加底部按钮
 -(void)makeFooterView{
     
     XWeakSelf
@@ -331,6 +323,7 @@ typedef enum {
     
 }
 
+//添加自定义顶部导航
 -(void)makeTopNavigaitonView{
 
     
@@ -354,10 +347,8 @@ typedef enum {
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
-    self.tableView.alpha = 0.1;
- 
-    [self makeTopNavigaitonView];
     
+    [self makeTopNavigaitonView];
     
 }
 
@@ -382,15 +373,23 @@ typedef enum {
     UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, UniFrame.contentHeight)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
-    
     XWeakSelf
     oneGroup.actionBlock = ^(NSString *name,NSInteger index){
+        
               [weakSelf showPhotoAtIndex:index];
       };
     
 }
 
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    
+    UniDetailGroup *group = self.groups[section];
+    
+    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
+}
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
    
     
@@ -409,21 +408,10 @@ typedef enum {
     return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    
-    UniDetailGroup *group = self.groups[section];
-
-    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
-    CGFloat rowHeight = indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : Uni_Cell_Height;
- 
-    return rowHeight;
+   
+    return indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : Uni_Cell_Height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -508,7 +496,7 @@ typedef enum {
     if (scrollView.contentOffset.y < 0) {
          
         CGRect frame = self.iconViewOldFrame;
-        frame.size.height = self.iconViewOldFrame.size.height - scrollView.contentOffset.y;
+        frame.size.height = self.iconViewOldFrame.size.height - scrollView.contentOffset.y  * 1.7;
         frame.size.width  =self.iconViewOldFrame.size.width * (frame.size.height)/self.iconViewOldFrame.size.height;
         self.iconView.frame = frame;
         self.iconView.center = self.iconViewOldCenter;
@@ -521,12 +509,12 @@ typedef enum {
             
         }];
         
+        //向上拉伸的时候，防止头部图片显示出来
         self.iconView.hidden = scrollView.contentOffset.y > XScreenHeight * 0.5;
 
     }
     
 }
-
 
 
 - (void)onClick:(UIButton *)sender{
@@ -614,16 +602,16 @@ typedef enum {
     RequireLogin
     XWeakSelf
     NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
-    [self startAPIRequestWithSelector:path parameters:@{@":id": self.UniFrame.item.NO_id} success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.item.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
+        
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
         [hud applySuccessStyle];
         NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
         [hud setLabelText:title];//@"关注成功"];
-        weakSelf.favorited =  !weakSelf.favorited;
         [hud hideAnimated:YES afterDelay:1];
-        
+
+        weakSelf.favorited =  !weakSelf.favorited;
         [weakSelf configureLikeButton:weakSelf.favorited];
-        
         weakSelf.clickType = UniversityItemTyDeFault;
 
     }];
@@ -700,9 +688,9 @@ typedef enum {
     
         
         if ( !LOGIN  ||  self.user_level.integerValue == DefaultNumber || self.user_level.integerValue == -1) {
+            
             XWeakSelf
             self.FromPipei = YES;
-            
             PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
             pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
             pipei.actionBlock = ^(NSString *pipei){
@@ -786,31 +774,25 @@ typedef enum {
     
 }
 
-
+//根据网络请求显示用用户入学申请等级
 - (void)caseLevelWithResponse:(id)response{
 
-    
     NSArray *values = [(NSDictionary *)response allValues];
     
     self.user_level = values[0];
     
-    if ([values[0] integerValue] == -1) {
+    if (!([values[0] integerValue] == -1)) {
         
-        
-    }else{
-    
         self.footer.level = [values[0] integerValue];
-
     }
-    
 }
 
+//根据智能匹配结果拼接相关参数网络请求
 - (void)pipeiLevelWithParameter:(NSString *)pString{
-
-  
+   
     NSMutableString *path = [NSMutableString string];
     
-    [path  appendFormat:@"GET api/v2/account/evaluate/%@",self.uni_id];
+    [path  appendFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
     
     [path  appendFormat:@"%@",pString];
     XWeakSelf

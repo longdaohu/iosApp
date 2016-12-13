@@ -77,9 +77,9 @@
 //学校详情
 #define kAPISelectorUniversityDetail @"GET api/v2/university/"
 //取消收藏
-#define kAPISelectorUniversityUnfavorited @"GET api/account/unFavorite/:id"
+#define kAPISelectorUniversityUnfavorited @"GET api/account/unFavorite/"
 //收藏
-#define kAPISelectorUniversityfavorited @"GET api/account/favorite/:id"
+#define kAPISelectorUniversityfavorited @"GET api/account/favorite/"
 //智能匹配
 #define kAPISelectorZiZengPipeiGet @"GET api/account/evaluate"
 //提交智能匹配
@@ -88,4 +88,6 @@
 #define kAPISelectorZiZengApplyPost @"POST api/account/apply"
 //智能匹配结果
 #define kAPISelectorZiZengRecommendation @"GET api/v2/university/recommendations"
+//根据用户资料测试录取难易程度
+#define kAPISelectorUniversityDetailUserLevel @"GET api/v2/account/evaluate/"
 

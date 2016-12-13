@@ -18,15 +18,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.iconView         = [[UIImageView alloc] init];
-        self.iconView.contentMode = UIViewContentModeScaleAspectFill;
-        self.iconView.image   = [UIImage imageNamed:@"PlaceHolderImage"];
-        [self.contentView addSubview:self.iconView];
-        self.iconView.layer.cornerRadius = 6;
-        self.iconView.layer.masksToBounds = YES;
-        
+        UIImageView *iconView         = [[UIImageView alloc] init];
+        iconView.contentMode = UIViewContentModeScaleAspectFill;
+        iconView.image   = [UIImage imageNamed:@"PlaceHolderImage"];
+        [self.contentView addSubview:iconView];
+        iconView.layer.cornerRadius = CORNER_RADIUS;
+        iconView.layer.masksToBounds = YES;
+        self.iconView = iconView;
         self.contentView.backgroundColor  = [UIColor whiteColor];
-        
         
     }
     return self;

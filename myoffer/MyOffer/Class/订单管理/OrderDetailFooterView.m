@@ -200,7 +200,16 @@
         NSString *temp;
         NSString *payTime = [self makeTime:trade[@"create_at"] andStatus:@"完成订单："];
         if([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]){
-            NSString *system = [trade[@"system"] isEqualToString:@"wechat_pay"] ? @"使用微信支付成功":@"使用支付宝支付成功";
+            NSString *system = @"支付成功";
+            if ([trade[@"system"] isEqualToString:@"wechat_pay"] ) {
+                system = @"使用微信支付成功";
+            }else if ([trade[@"system"] isEqualToString:@"alipay"] ) {
+                system = @"使用支付宝支付成功";
+            }else if ([trade[@"system"] isEqualToString:@"qq_pay"] ) {
+                system =  @"使用QQ支付成功";
+            }else if ([trade[@"system"] isEqualToString:@"tenpay"] ) {
+                system =  @"使用财付通支付成功";
+            }
             temp = [NSString stringWithFormat:@"%@ %@",payTime,system];
         }
          self.NoTwoRecordLab.text =  temp;

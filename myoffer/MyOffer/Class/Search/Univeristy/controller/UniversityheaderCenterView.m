@@ -37,9 +37,11 @@
 
 @implementation UniversityheaderCenterView
 
-+(instancetype)View
++(instancetype)headerCenterViewWithBlock:(UniversityCenterViewBlock)actionBlock
 {
-    return  [[UniversityheaderCenterView alloc] init];
+    UniversityheaderCenterView *headerCenter = [[UniversityheaderCenterView alloc] init];
+    headerCenter.actionBlock = actionBlock;
+    return headerCenter;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -50,7 +52,7 @@
         self.backgroundColor =[UIColor whiteColor];
         self.layer.cornerRadius  = 10;
         self.layer.masksToBounds = YES;
-        self.layer.borderColor   = [UIColor colorWithRed:228/255.0 green:229/255.0 blue:234/255.0 alpha:1].CGColor;
+        self.layer.borderColor   =  XCOLOR(228, 229, 234).CGColor;
         self.layer.borderWidth   = 1;
         
         
@@ -77,7 +79,6 @@
         [self addSubview:self.line];
         
         self.introductionLab = [self labelWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 12  numberofLine:YES];
- 
         
         UIView *gradientBgView = [[UIView alloc] init];
         [self addSubview:gradientBgView];
@@ -85,8 +86,8 @@
         
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
-        UIColor *colorOne = [UIColor colorWithRed:(255/255.0)  green:(255/255.0)  blue:(255/255.0)  alpha:0.0];
-        UIColor *colorTwo = [UIColor colorWithRed:(255/255.0)  green:(255/255.0)  blue:(255/255.0)  alpha:1.0];
+        UIColor *colorOne = [UIColor colorWithWhite:1 alpha:0];
+        UIColor *colorTwo = [UIColor colorWithWhite:1 alpha:1];
         gradient.colors           = [NSArray arrayWithObjects:
                                      (id)colorOne.CGColor,
                                      (id)colorTwo.CGColor,

@@ -42,7 +42,8 @@
     CGFloat namex    = 10;
     CGFloat namey    = CGRectGetMaxY(self.LogoFrame) +KDUtilSize(ITEM_MARGIN);
     CGFloat namew    = bgw - 15;
-    CGFloat nameh    = USER_EN ? KDUtilSize(40):KDUtilSize(18);
+//    CGFloat nameh    = USER_EN ? KDUtilSize(40):KDUtilSize(18);
+    CGFloat nameh    = KDUtilSize(18);
     self.nameFrame = CGRectMake(namex, namey,namew, nameh);
     
     CGFloat official_namex       = namex;
@@ -92,7 +93,8 @@
     CGFloat tagViewh    = 55;
     self.tagsBgViewFrame = CGRectMake(tagViewx, tagViewy, tagVieww, tagViewh);
     
-    CGFloat bgh         =  USER_EN ? (CGRectGetMaxY(self.addressFrame) + ITEM_MARGIN) :(CGRectGetMaxY(self.tagsBgViewFrame) + ITEM_MARGIN);
+//    CGFloat bgh         =  USER_EN ? (CGRectGetMaxY(self.addressFrame) + ITEM_MARGIN) :(CGRectGetMaxY(self.tagsBgViewFrame) + ITEM_MARGIN);
+    CGFloat bgh         =   (CGRectGetMaxY(self.tagsBgViewFrame) + ITEM_MARGIN);
     
     self.bgViewFrame    = CGRectMake(bgx,bgy,bgw,bgh);
     

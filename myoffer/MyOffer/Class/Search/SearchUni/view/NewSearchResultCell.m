@@ -63,7 +63,7 @@
         
         //学校名称
         self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
-        self.nameLab.hidden = USER_EN ? YES : NO;
+//        self.nameLab.hidden = USER_EN ? YES : NO;
         //学校英文名
         self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;

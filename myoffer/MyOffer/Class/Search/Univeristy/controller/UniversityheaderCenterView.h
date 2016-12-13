@@ -18,7 +18,7 @@ typedef void(^UniversityCenterViewBlock)(UIButton *sender);
 @interface UniversityheaderCenterView : UIView
 @property(nonatomic,strong)UniversityNewFrame  *itemFrame;
 @property(nonatomic,copy)UniversityCenterViewBlock actionBlock;
-+(instancetype)View;
++(instancetype)headerCenterViewWithBlock:(UniversityCenterViewBlock)actionBlock;
 
 
 @end
