@@ -143,7 +143,7 @@
     //手机号码
     CGFloat phoneX = CGRectGetMaxX(areaBgView.frame) + ITEM_MARGIN;
     CGFloat phoneY = areaY;
-    CGFloat phoneW = XScreenWidth - phoneX  - areaX;
+    CGFloat phoneW = XSCREEN_WIDTH - phoneX  - areaX;
     CGFloat phoneH = areaH;
     UITextField *phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(phoneX, phoneY, phoneW, phoneH)];
     [self.view addSubview:phoneTF];
@@ -158,7 +158,7 @@
     //错误提示
     CGFloat errorX = areaX;
     CGFloat errorY = CGRectGetMaxY(phoneTF.frame) + 5;
-    CGFloat errorW = XScreenWidth - areaX;
+    CGFloat errorW = XSCREEN_WIDTH - areaX;
     CGFloat errorH = 20;
     UILabel *errorLab = [UILabel labelWithFontsize:Bang_FontSize TextColor:[UIColor redColor] TextAlignment:NSTextAlignmentLeft];
     errorLab.frame = CGRectMake(errorX, errorY, errorW, errorH);
@@ -202,7 +202,7 @@
     //提交按钮
     CGFloat submitX = verificationX;
     CGFloat submitY = CGRectGetMaxY(verificationTF.frame) + 80;
-    CGFloat submitW = XScreenWidth - 2 * areaX;
+    CGFloat submitW = XSCREEN_WIDTH - 2 * areaX;
     CGFloat submitH = 50;
     UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(submitX, submitY, submitW, submitH)];
     [self.view addSubview:submitBtn];

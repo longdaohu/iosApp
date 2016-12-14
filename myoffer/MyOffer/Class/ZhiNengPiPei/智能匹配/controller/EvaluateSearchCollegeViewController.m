@@ -85,7 +85,7 @@
     TopNavView *navView = [TopNavView topView];
     [self.view addSubview:navView];
     
-    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 24, XScreenWidth - 80, 34)];
+    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 24, XSCREEN_WIDTH - 80, 34)];
     self.searchTextField = searchTextField;
     [navView addSubview:searchTextField];
     searchTextField.placeholder = @"请输入在读或毕业院校";
@@ -101,13 +101,13 @@
     
     
     CGFloat rightX = CGRectGetMaxX(searchTextField.frame);
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightX, 24, XScreenWidth - rightX, 34)];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightX, 24, XSCREEN_WIDTH - rightX, 34)];
     [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
     [navView addSubview:rightBtn];
     [rightBtn addTarget:self action:@selector(commitInput) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height, XScreenWidth, XScreenHeight - XNav_Height)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, XNAV_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT)];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

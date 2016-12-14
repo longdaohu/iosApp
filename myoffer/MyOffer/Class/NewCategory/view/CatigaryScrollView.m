@@ -15,7 +15,7 @@
 
     CatigaryScrollView *scrollView = [[CatigaryScrollView alloc] initWithFrame:frame];
     
-    scrollView.contentSize = CGSizeMake(3*XScreenWidth, XScreenHeight);
+    scrollView.contentSize = CGSizeMake(3*XSCREEN_WIDTH, XSCREEN_HEIGHT);
     scrollView.pagingEnabled = YES;
     scrollView.alwaysBounceHorizontal = YES;
     scrollView.directionalLockEnabled = YES;

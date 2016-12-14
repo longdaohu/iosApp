@@ -98,7 +98,7 @@
 //头部图片
 -(void)makeFlexibleImageView
 {
-    self.FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, AdjustF(160.f))];
+    self.FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
     self.FlexibleImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.FlexibleImageView.clipsToBounds = YES;
     self.oldFlexibleViewRect = self.FlexibleImageView.frame;
@@ -128,7 +128,7 @@
 
 -(void)makeTableView
 {
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
+    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.TableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
@@ -143,7 +143,7 @@
 
 -(void)makeTableViewHeaderView
 {
-    GongLueListHeaderView *header  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, AdjustF(160.f))];
+    GongLueListHeaderView *header  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
     header.gongLueDic = self.gonglue;
     self.headerView = header;
     self.TableView.tableHeaderView = header;
@@ -217,12 +217,12 @@
 -(void)caseSearchResult
 {
     if ([self.gonglue[@"title"] containsString:@"英国"]) {
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANKTI];
+        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANK_TI];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
         
-        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANKTI];
+        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANK_TI];
         [self.navigationController pushViewController:newVc animated:YES];
     }
 }
@@ -266,7 +266,7 @@
 {
     
     //1 顶部自定义导航栏
-    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNav_Height];
+    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNAV_HEIGHT];
     
     //2 自定义tableHeaderView
     self.headerView.contentOffsetY =  scrollView.contentOffset.y;

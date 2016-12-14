@@ -68,7 +68,7 @@
 //    NSString *path = @"http://www.apesk.com/h/go_zy_dingzhi_m.asp?checkcode=PR9RZP86L1IC9HT4IA&hruserid=18201123448&l=MBTI-STEP-I-28&test_name=sha&test_email=sha";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height)];
+    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT)];
     
     [self.web loadRequest:request];
     [self.view addSubview:self.web];
@@ -178,7 +178,7 @@
                 
             }else{
                 
-                [self UKWithCountryType:country orderBy:RANKTI];
+                [self UKWithCountryType:country orderBy:RANK_TI];
             }
             
             return NO;
@@ -313,11 +313,11 @@
         
     }else if([dict[@"state"] containsString:@"uk"]){
         
-        [self UKWithCountryType:@"英国" orderBy:RANKTI];
+        [self UKWithCountryType:@"英国" orderBy:RANK_TI];
         
     }else{
         
-        [self UKWithCountryType:@"QS世界排名" orderBy:RANKQS];
+        [self UKWithCountryType:@"QS世界排名" orderBy:RANK_QS];
     }
 }
 -(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
@@ -328,7 +328,7 @@
 
 -(void)AUWithCountryType:(NSString *)country{
     
-    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANK_TI];
     newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:newVc animated:YES];
     
@@ -385,7 +385,7 @@
 -(void)caseSearchUniversityWithdict:(NSDictionary *)response{
     
     NSDictionary *dict =  response[@"args"];
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANKQS];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANK_QS];
     [self.navigationController pushViewController:vc animated:YES];
 }
 //查看YOUKU视频

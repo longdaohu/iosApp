@@ -62,7 +62,7 @@ static NSString *cellIdentifier = @"menu";
         
         
         self.countLab =[[UILabel alloc] init];
-        self.countLab.layer.cornerRadius = RedSpot_Height * 0.5;
+        self.countLab.layer.cornerRadius = REDSPOT_HEIGHT * 0.5;
         self.countLab.layer.masksToBounds = YES;
         self.countLab.backgroundColor =[UIColor redColor];
         self.countLab.textColor = [UIColor whiteColor];
@@ -88,7 +88,7 @@ static NSString *cellIdentifier = @"menu";
     
     self.countLab.text = item.messageCount.integerValue  >= 100 ? @"99+": item.messageCount;
     
-    CGFloat countw  = RedSpot_Height;
+    CGFloat countw  = REDSPOT_HEIGHT;
     
     if (self.countLab.text.length > 1) {
         
@@ -96,9 +96,9 @@ static NSString *cellIdentifier = @"menu";
         countw = countSize.width  + 8;
      }
     
-    CGFloat countx  = XScreenWidth * 0.8 - 70;
+    CGFloat countx  = XSCREEN_WIDTH * 0.8 - 70;
     CGFloat county  = 0.5 * (self.bounds.size.height - 18);
-    CGFloat counth  = RedSpot_Height;
+    CGFloat counth  = REDSPOT_HEIGHT;
     self.countLab.frame =  CGRectMake(countx,county,countw,counth);
 }
 

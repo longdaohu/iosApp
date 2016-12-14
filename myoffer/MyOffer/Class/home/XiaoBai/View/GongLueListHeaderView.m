@@ -87,7 +87,7 @@
     
     
     CGFloat moBgViewX = ITEM_MARGIN;
-    CGFloat moBgViewW = XScreenWidth - moBgViewX * 2;
+    CGFloat moBgViewW = XSCREEN_WIDTH - moBgViewX * 2;
     
     
     CGFloat titleX = CGRectGetMaxX(self.moLogo.frame) + ITEM_MARGIN;
@@ -113,7 +113,7 @@
     CGSize  contentSize = self.bounds.size;
     
     CGFloat headerTitleX = 0;
-    CGFloat headerTitleW = XScreenWidth;
+    CGFloat headerTitleW = XSCREEN_WIDTH;
     CGFloat headerTitleH = 23;
     CGFloat headerTitleY = CGRectGetMinY(self.moBgView.frame) - headerTitleH - KDUtilSize(15);
     self.headerTitleLab.frame = CGRectMake(headerTitleX, headerTitleY, headerTitleW, headerTitleH);
@@ -121,7 +121,7 @@
     
     CGFloat bgX =   0;
     CGFloat bgY =   moBgViewY + CGRectGetMaxY(self.moLogo.frame);
-    CGFloat bgW =   XScreenWidth;
+    CGFloat bgW =   XSCREEN_WIDTH;
     CGFloat bgH =   contentSize.height  - bgY;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
      

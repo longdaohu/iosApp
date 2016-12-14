@@ -124,7 +124,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -172,7 +172,7 @@ static NSString *identify = @"pay";
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   
-    return [[PaySectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 30)];
+    return [[PaySectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

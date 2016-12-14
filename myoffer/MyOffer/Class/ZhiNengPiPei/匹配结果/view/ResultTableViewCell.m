@@ -108,7 +108,7 @@
 
 - (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame {
     
-    [self configureWithUniversityFrame:uniFrame ranking:RANKTI];
+    [self configureWithUniversityFrame:uniFrame ranking:RANK_TI];
 }
 
 - (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
@@ -141,11 +141,11 @@
     self.address_detail_TF.frame = uniFrame.address_detailFrame;
     
     
-    BOOL RankTIType = [self.optionOrderBy isEqualToString:RANKTI];
+    BOOL RANK_TIType = [self.optionOrderBy isEqualToString:RANK_TI];
     
     if (!self.isStart) {
         
-        if (RankTIType) {
+        if (RANK_TIType) {
             
             NSString   *rankStr01 = [university.ranking_ti intValue] == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
             self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];

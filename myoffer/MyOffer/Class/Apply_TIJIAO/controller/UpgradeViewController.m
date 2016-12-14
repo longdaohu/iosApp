@@ -81,7 +81,7 @@ typedef enum {
     
     self.tableView.tableFooterView = [UIView new];
     self.payBtn.hidden          = YES;
-    self.popBtn.width           = XScreenWidth - self.popBtn.left * 2;
+    self.popBtn.width           = XSCREEN_WIDTH - self.popBtn.left * 2;
     self.popBtn.backgroundColor = XCOLOR_RED;
     [self.popBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
 }
@@ -99,21 +99,21 @@ typedef enum {
 
 -(void)makeBottomView{
     
-    BOOL Iphone5 = XScreenHeight <= 568.0 ;
+    BOOL Iphone5 = XSCREEN_HEIGHT <= 568.0 ;
     //8、完成返回按钮
     self.popBtn =[self buttonWithTitle:@"查看申请状态" titleColor:XCOLOR_RED tag:buttonTypeApplyStatus];
     self.popBtn.layer.borderColor  = XCOLOR_RED.CGColor;
     self.popBtn.layer.borderWidth  = 1;
     CGFloat popX = 15;
-    CGFloat popY =  XScreenHeight - 80 - 64;
-    CGFloat popW = (XScreenWidth - 2 * popX - 20) * 0.5 ;
+    CGFloat popY =  XSCREEN_HEIGHT - 80 - 64;
+    CGFloat popW = (XSCREEN_WIDTH - 2 * popX - 20) * 0.5 ;
     CGFloat popH = Iphone5 ? 40 : 50;
     self.popBtn.frame = CGRectMake(popX, popY, popW, popH);
     
     //9、支付按钮
     self.payBtn =[self buttonWithTitle:@"去支付" titleColor:XCOLOR_WHITE tag:buttonTypePay];
     self.payBtn.backgroundColor = XCOLOR_LIGHTGRAY;
-    CGFloat payX = XScreenWidth - popW - popX;
+    CGFloat payX = XSCREEN_WIDTH - popW - popX;
     self.payBtn.frame = CGRectMake(payX, popY, popW, popH);
     self.payBtn.enabled = NO;
     
@@ -121,7 +121,7 @@ typedef enum {
     if (Iphone5) {
         
         self.line.hidden  =  YES;
-        CGFloat popY      =  XScreenHeight - 50 - 64  ;
+        CGFloat popY      =  XSCREEN_HEIGHT - 50 - 64  ;
         self.popBtn.top   =  popY;
         self.payBtn.top   =  popY;
         self.currentServiceLab.top = CGRectGetMaxY(self.succeseLab.frame) + 10 ;
@@ -136,7 +136,7 @@ typedef enum {
     //1、成功图片
     CGFloat iconX = 0;
     CGFloat iconY =  10;
-    CGFloat iconW = XScreenWidth;
+    CGFloat iconW = XSCREEN_WIDTH;
     CGFloat iconH = 60 * SCREEN_SCALE;
     self.iconView =[[UIImageView alloc] initWithFrame:CGRectMake(iconX, iconY , iconW,iconH)];
     self.iconView.contentMode = UIViewContentModeScaleAspectFit;
@@ -149,14 +149,14 @@ typedef enum {
     [self.view addSubview:self.succeseLab];
     CGFloat scX = 0;
     CGFloat scY = CGRectGetMaxY(self.iconView.frame)  + 10;
-    CGFloat scW = XScreenWidth;
+    CGFloat scW = XSCREEN_WIDTH;
     CGFloat scH = 20;
     self.succeseLab.frame = CGRectMake(scX, scY, scW, scH);
     
     //3、间隔线
     CGFloat lineX = 15;
     CGFloat lineY = CGRectGetMaxY(self.succeseLab.frame) + 10;
-    CGFloat lineW = XScreenWidth - 2 * lineX;
+    CGFloat lineW = XSCREEN_WIDTH - 2 * lineX;
     CGFloat lineH = 5;
     self.line =[[UIView alloc] initWithFrame:CGRectMake(lineX, lineY, lineW, lineH)];
     self.line.backgroundColor = XCOLOR(232, 233, 232);
@@ -169,7 +169,7 @@ typedef enum {
     self.currentServiceLab.numberOfLines = 2;
     CGFloat currentX =  15;
     CGFloat currentY =  CGRectGetMaxY(self.line.frame) + 10;
-    CGFloat currentW =  XScreenWidth - 2 * currentX;
+    CGFloat currentW =  XSCREEN_WIDTH - 2 * currentX;
     CGFloat currentH =  KDUtilSize(14) * 2 + 10;
     self.currentServiceLab.frame = CGRectMake(currentX, currentY, currentW, currentH);
   
@@ -248,7 +248,7 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.currentServiceLab.frame) + 10, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.currentServiceLab.frame) + 10, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

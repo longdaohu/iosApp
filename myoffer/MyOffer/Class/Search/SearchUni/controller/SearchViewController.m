@@ -91,7 +91,7 @@
 
 -(void)makeTableView{
 
-    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, XNav_Height,XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
+    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, XNAV_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.allowsSelection = NO;
@@ -209,7 +209,7 @@
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
  
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANKQS];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANK_QS];
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -252,7 +252,7 @@
 
 - (void)startSearchWithText:(NSString *)text {
     
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:text orderBy:RANKQS];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:text orderBy:RANK_QS];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

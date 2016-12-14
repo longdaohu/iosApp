@@ -113,7 +113,7 @@
     
     //提示文字
     CGFloat notiX = 20;
-    CGFloat notiW = XScreenWidth - notiX * 2;
+    CGFloat notiW = XSCREEN_WIDTH - notiX * 2;
     NSString *notiStr = @"请选择您要保留的账号，合并账号后另一个账号资料将被替换";
     CGSize notiSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat notiY = 30;

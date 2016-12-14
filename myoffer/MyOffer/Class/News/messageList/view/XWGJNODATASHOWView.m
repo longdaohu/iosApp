@@ -54,22 +54,22 @@
 {
     [super layoutSubviews];
     
-    CGFloat bgViewW = XScreenWidth;
+    CGFloat bgViewW = XSCREEN_WIDTH;
     CGFloat bgViewH = 200;
     CGFloat bgViewX = 0;
-    CGFloat bgViewY = 0 == self.bgViewY  ? 0.5*(XScreenHeight - bgViewH): self.bgViewY;
+    CGFloat bgViewY = 0 == self.bgViewY  ? 0.5*(XSCREEN_HEIGHT - bgViewH): self.bgViewY;
     self.bgView.frame = CGRectMake(bgViewX,bgViewY,bgViewW,bgViewH);
     
     CGFloat centerW = 150;
     CGFloat centerH = 150;
-    CGFloat centerX = 0.5*(XScreenWidth - centerW);
+    CGFloat centerX = 0.5*(XSCREEN_WIDTH - centerW);
     CGFloat centerY = 0;
     self.CenterImageView.frame = CGRectMake(centerX,centerY,centerW,centerH);
     
     
     CGFloat conentX = 0;
     CGFloat conentY = CGRectGetMaxY(self.CenterImageView.frame);
-    CGFloat conentW = XScreenWidth;
+    CGFloat conentW = XSCREEN_WIDTH;
     CGFloat conentH = 20;
     self.ContentLabel.frame = CGRectMake(conentX,conentY,conentW,conentH);
   

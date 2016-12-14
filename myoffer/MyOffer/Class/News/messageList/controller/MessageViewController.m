@@ -108,7 +108,7 @@
 {
     if (!_myToolbar) {
         
-        _myToolbar =[[XUToolbar  alloc] initWithFrame:CGRectMake(0, 20, XScreenWidth, 44)];
+        _myToolbar =[[XUToolbar  alloc] initWithFrame:CGRectMake(0, 20, XSCREEN_WIDTH, 44)];
         [self.view addSubview:_myToolbar];
     }
     return _myToolbar;
@@ -204,7 +204,7 @@
 
 -(void)makeOtherView
 {
-    self.StatusBarBan =[[UIView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, 20)];
+    self.StatusBarBan =[[UIView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, 20)];
     self.StatusBarBan.backgroundColor = XCOLOR_LIGHTBLUE;
     [self.view addSubview:self.StatusBarBan];
  
@@ -503,7 +503,7 @@
     {
         XWeakSelf
         
-        _sectionHeaderView = [[XWGJMessageButtonItemView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 120)];
+        _sectionHeaderView = [[XWGJMessageButtonItemView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 120)];
         
         _sectionHeaderView.ActionBlock = ^(UIButton *sender){
             

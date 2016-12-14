@@ -74,10 +74,10 @@ extern NSNumber *KDUtilIntegerValueNumberGuard(id obj) {
 
 extern CGFloat KDUtilSize(CGFloat obj){
    
-    if (320 == XScreenWidth) {
+    if (320 == XSCREEN_WIDTH) {
         
         return obj;
-    }else if (XScreenWidth > 400){
+    }else if (XSCREEN_WIDTH > 400){
     
         return obj + 1.5;
     }else{

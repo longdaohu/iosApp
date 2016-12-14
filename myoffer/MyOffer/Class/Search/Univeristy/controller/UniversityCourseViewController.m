@@ -126,8 +126,8 @@
     [self addChildViewController:filer];
     self.filer = filer;
     filer.delegate = self;
-    filer.view.frame = CGRectMake(0, 0, XScreenWidth, 0);
-    filer.filerRect = CGRectMake(0, 0, XScreenWidth, 0);
+    filer.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, 0);
+    filer.filerRect = CGRectMake(0, 0, XSCREEN_WIDTH, 0);
     filer.groups = self.groups;
     
     [self.view addSubview:filer.view];
@@ -188,7 +188,7 @@
 {
     NSDictionary *info = self.result[indexPath.row];
 
-    CGFloat  high = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XScreenWidth - 60, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:15.0]  }context:nil].size.height;
+    CGFloat  high = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - 60, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:15.0]  }context:nil].size.height;
 
      return  high > 50 ? 50 + high:100;
 }

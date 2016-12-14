@@ -218,7 +218,7 @@
     
     CGFloat centerW = 110;
     CGFloat centerH = centerW;
-    CGFloat centerX = 0.5 * (XScreenWidth - centerW);
+    CGFloat centerX = 0.5 * (XSCREEN_WIDTH - centerW);
     CGFloat centerY = 0.5 *(208 - 110);
     self.centerButton =  [[UIButton alloc] initWithFrame:CGRectMake(centerX, centerY, centerW, centerH)];
     self.centerButton.backgroundColor = XCOLOR_BG;
@@ -242,7 +242,7 @@
         self.PieHeadView = nil;
     }
     
-    self.PieHeadView = [[XYPieChart alloc] initWithFrame:CGRectMake(0.5 *(XScreenWidth - 208), 0, 208, 208)];
+    self.PieHeadView = [[XYPieChart alloc] initWithFrame:CGRectMake(0.5 *(XSCREEN_WIDTH - 208), 0, 208, 208)];
     [self.upHeaderView insertSubview:self.PieHeadView belowSubview:self.centerButton];
     
     [self.PieHeadView setDataSource:self];
@@ -265,7 +265,7 @@
 {
     self.ResultTableView.backgroundColor = XCOLOR_BG;
     self.bottomView.hidden = YES;
-    self.NoDataView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
+    self.NoDataView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     self.NoDataView.hidden = YES;
     [self.view addSubview: self.NoDataView];
 }

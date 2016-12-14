@@ -60,13 +60,13 @@
 
     [super layoutSubviews];
     
-    self.frame = CGRectMake(0, 0, XScreenWidth, XNav_Height);
+    self.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XNAV_HEIGHT);
     
     
     CGRect rightRect = self.rightView.frame;
-    rightRect.origin.y = XNav_Height;
+    rightRect.origin.y = XNAV_HEIGHT;
     rightRect.size.width = 80  +  XMARGIN;
-    rightRect.origin.x = XScreenWidth - rightRect.size.width - 2 * XMARGIN;
+    rightRect.origin.x = XSCREEN_WIDTH - rightRect.size.width - 2 * XMARGIN;
     self.rightView.frame = rightRect;
 }
 
@@ -125,11 +125,11 @@
  
     if (rightViewDistance < 0) {
         
-        self.rightView.top =  rightViewDistance <= -44 ? 20 : (XNav_Height + rightViewDistance);
+        self.rightView.top =  rightViewDistance <= -44 ? 20 : (XNAV_HEIGHT + rightViewDistance);
         
     }else{
     
-        self.rightView.top =  XNav_Height;
+        self.rightView.top =  XNAV_HEIGHT;
         
     }
      

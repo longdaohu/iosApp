@@ -59,7 +59,7 @@ static NSString *identify = @"course";
     
     self.titleLabel.text = course.official_name;
     
-    CGSize size = [course.official_name boundingRectWithSize:CGSizeMake(XScreenWidth - 60, 999)
+    CGSize size = [course.official_name boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - 60, 999)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                     attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:15.0]}
                                                        context:NULL].size;
@@ -68,7 +68,7 @@ static NSString *identify = @"course";
     
     CGFloat titleX = 10;
     CGFloat titleY = 10;
-    CGFloat titleW = XScreenWidth - 60;
+    CGFloat titleW = XSCREEN_WIDTH - 60;
     CGFloat titleH = size.height;
     self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
@@ -92,7 +92,7 @@ static NSString *identify = @"course";
     
     
     CGFloat subjectX =degreeW + degreeX + 5;
-    CGFloat subjectW = XScreenWidth - subjectX;
+    CGFloat subjectW = XSCREEN_WIDTH - subjectX;
     CGFloat subjectY = degreeY;
     CGFloat subjectH = subjectSize.width > subjectW ? 29 : 13;
     self.subjectLab.frame = CGRectMake(subjectX, subjectY, subjectW, subjectH);
@@ -141,7 +141,7 @@ static NSString *identify = @"course";
  
     self.titleLabel.text = info[@"official_name"];
     
-    CGSize size = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XScreenWidth - 60, MAXFLOAT)
+    CGSize size = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - 60, MAXFLOAT)
                                       options:NSStringDrawingUsesLineFragmentOrigin
                                    attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:15.0]}
                                       context:NULL].size;
@@ -150,7 +150,7 @@ static NSString *identify = @"course";
     
     CGFloat titleX = 10;
     CGFloat titleY = 10;
-    CGFloat titleW = XScreenWidth - 60;
+    CGFloat titleW = XSCREEN_WIDTH - 60;
     CGFloat titleH = size.height;
     self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
@@ -175,7 +175,7 @@ static NSString *identify = @"course";
     
     
     CGFloat subjectX =degreeW + degreeX + 5;
-    CGFloat subjectW = XScreenWidth - subjectX;
+    CGFloat subjectW = XSCREEN_WIDTH - subjectX;
     CGFloat subjectY = degreeY;
     CGFloat subjectH = subjectSize.width > subjectW ? 29 : 13;
     self.subjectLab.frame = CGRectMake(subjectX, subjectY, subjectW, subjectH);

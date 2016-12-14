@@ -118,7 +118,7 @@
       
         NSMutableArray *temps = [NSMutableArray array];
         CGFloat leftMargin    = 10;
-        CGFloat btnw          = (XScreenWidth - leftMargin *2)/3;
+        CGFloat btnw          = (XSCREEN_WIDTH - leftMargin *2)/3;
         CGFloat btnh          = TOP_HIGHT;
         CGFloat btny          = navHeight - btnh - 10;
         for (NSInteger index  = 0; index < 3; index++){

@@ -95,28 +95,28 @@
     
     CGFloat titleX = 10;
     CGFloat titleY = 10;
-    CGFloat titleW = sku[@"name"] ? orderSize.width :XScreenWidth - 120;
-    titleW         = titleW > (XScreenWidth - 120) ? XScreenWidth - 120 : titleW;
+    CGFloat titleW = sku[@"name"] ? orderSize.width :XSCREEN_WIDTH - 120;
+    titleW         = titleW > (XSCREEN_WIDTH - 120) ? XSCREEN_WIDTH - 120 : titleW;
     CGFloat titleH = orderSize.height;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     
     CGFloat noX = titleX;
     CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
-    CGFloat noW = XScreenWidth;
+    CGFloat noW = XSCREEN_WIDTH;
     CGFloat noH = 20;
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     
     /*
-    CGFloat detailX = XScreenWidth - CGRectGetMaxX(self.orderTitleLab.frame);
+    CGFloat detailX = XSCREEN_WIDTH - CGRectGetMaxX(self.orderTitleLab.frame);
     CGFloat detailY = titleY;
-    CGFloat detailW = XScreenWidth - detailX - 10;
+    CGFloat detailW = XSCREEN_WIDTH - detailX - 10;
     CGFloat detailH = titleH;
     self.orderDetailBtn.frame = CGRectMake(detailX, detailY, detailW, detailH);
     */
     CGFloat bgX = 0;
     CGFloat bgY = 15;
-    CGFloat bgW = XScreenWidth;
+    CGFloat bgW = XSCREEN_WIDTH;
     CGFloat bgH = CGRectGetMaxY(self.orderNoLab.frame) + 10;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     self.headHeight = CGRectGetMaxY(self.bgView.frame);

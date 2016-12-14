@@ -26,9 +26,9 @@
     
     CGFloat  titlex =  CGRectGetMaxX(self.LogoFrame) + 10;
     CGFloat  titley =  10;
-    CGFloat  titlew =  XScreenWidth - titlex;
+    CGFloat  titlew =  XSCREEN_WIDTH - titlex;
     CGFloat  TitleWidth = [News.messageTitle KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(16))].width;
-    CGFloat  titleh = TitleWidth - (XScreenWidth - CGRectGetMaxX(self.LogoFrame) - 10) > 0 ? 50 : 25;
+    CGFloat  titleh = TitleWidth - (XSCREEN_WIDTH - CGRectGetMaxX(self.LogoFrame) - 10) > 0 ? 50 : 25;
     self.TitleFrame = CGRectMake(titlex, titley, titlew, titleh);
     
     
@@ -36,7 +36,7 @@
     CGFloat  timew = 110 ;
     CGFloat  timeh = 15 ;
     CGFloat  timey = CGRectGetMaxY(self.LogoFrame) - timeh;
-    CGFloat  timex = XScreenWidth - timew;
+    CGFloat  timex = XSCREEN_WIDTH - timew;
     self.TimeFrame = CGRectMake(timex,timey, timew, timeh);
     
     CGFloat  focusw = 100;

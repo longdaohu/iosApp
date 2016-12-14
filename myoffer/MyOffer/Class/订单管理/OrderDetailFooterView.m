@@ -113,7 +113,7 @@
     
     CGFloat descriptionX = 10;
     CGFloat descriptionY = 10;
-    CGFloat descriptionW = XScreenWidth - descriptionX * 2;
+    CGFloat descriptionW = XSCREEN_WIDTH - descriptionX * 2;
     CGFloat descriptionH = descriptionSize.width > descriptionW ? descriptionSize.height * 2 + 5 : descriptionSize.height;
     self.orderDescriptionLab.frame = CGRectMake(descriptionX, descriptionY, descriptionW, descriptionH);
     self.orderDescriptionLab.text  = description;
@@ -124,12 +124,12 @@
     
     CGFloat recordX = 10;
     CGFloat recordY =  self.orderDescriptionLab.hidden ?  10 : CGRectGetMaxY(self.orderDescriptionLab.frame)  + 10;
-    CGFloat recordW = XScreenWidth;
+    CGFloat recordW = XSCREEN_WIDTH;
     CGFloat recordH = 20;
     self.orderRecordLab.frame = CGRectMake(recordX, recordY, recordW, recordH);
     
     CGFloat oneX =  recordX;
-    CGFloat oneW = XScreenWidth;
+    CGFloat oneW = XSCREEN_WIDTH;
     CGFloat oneY = CGRectGetMaxY(self.orderRecordLab.frame)  +5;
     CGFloat oneH = 15;
     self.NoOneRecordLab.frame = CGRectMake(oneX, oneY, oneW, oneH);
@@ -137,19 +137,19 @@
     
     CGFloat twoX = oneX;
     CGFloat twoY = CGRectGetMaxY(self.NoOneRecordLab.frame);
-    CGFloat twoW = XScreenWidth;
+    CGFloat twoW = XSCREEN_WIDTH;
     CGFloat twoH =  [orderDict[@"status"] isEqualToString:@"ORDER_PAY_PENDING"] ?0:oneH;
     self.NoTwoRecordLab.frame = CGRectMake(twoX, twoY, twoW, twoH);
     
     
     CGFloat priceX =  0;
     CGFloat priceY = CGRectGetMaxY(self.NoTwoRecordLab.frame) + 10;
-    CGFloat priceW = XScreenWidth - 10;
+    CGFloat priceW = XSCREEN_WIDTH - 10;
     CGFloat priceH =  30 ;
     self.orderPriceLab.frame = CGRectMake(priceX, priceY, priceW, priceH);
     
     
-    CGFloat payW = XScreenWidth * 0.3;
+    CGFloat payW = XSCREEN_WIDTH * 0.3;
     CGFloat payH = 40;
     CGFloat payX = priceW - payW;
     CGFloat payY = CGRectGetMaxY(self.orderPriceLab.frame) + 10;
@@ -178,7 +178,7 @@
     
     CGFloat bgX = 0;
     CGFloat bgY = 0;
-    CGFloat bgW = XScreenWidth;
+    CGFloat bgW = XSCREEN_WIDTH;
     CGFloat bgH = CGRectGetMaxY(self.payBtn.frame) + 10;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     

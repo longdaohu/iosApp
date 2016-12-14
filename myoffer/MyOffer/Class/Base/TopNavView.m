@@ -16,7 +16,7 @@
 
 + (instancetype)topView{
 
-    TopNavView *nav = [[TopNavView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XNav_Height)];
+    TopNavView *nav = [[TopNavView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XNAV_HEIGHT)];
     
     return nav;
 }

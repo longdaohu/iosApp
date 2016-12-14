@@ -104,13 +104,13 @@
     
     CGFloat bgHeight = self.bounds.size.height - margin;
     
-    self.bgView.frame = CGRectMake(0, 0, XScreenWidth,bgHeight);
+    self.bgView.frame = CGRectMake(0, 0, XSCREEN_WIDTH,bgHeight);
     
-    self.line.frame = CGRectMake(0, bgHeight, XScreenWidth, 0.8);
+    self.line.frame = CGRectMake(0, bgHeight, XSCREEN_WIDTH, 0.8);
     
     
     
-    CGFloat w = (XScreenWidth - 4 * margin) / 3.0;
+    CGFloat w = (XSCREEN_WIDTH - 4 * margin) / 3.0;
     
     CGFloat bh =   (bgHeight - margin) * 0.5 - margin;
     

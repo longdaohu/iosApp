@@ -157,7 +157,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
     [self.view addSubview:self.tableView];
@@ -177,7 +177,7 @@
 
 -(void)makeWebView
 {
-        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XScreenWidth, 1)];
+        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 1)];
         self.webView.delegate = self;
         self.webView.scrollView.scrollEnabled = NO;
         self.webView.userInteractionEnabled = NO;
@@ -304,7 +304,7 @@
     
     NSInteger height = [[webView stringByEvaluatingJavaScriptFromString:
                          @"document.body.scrollHeight"] integerValue];
-    self.webView.frame = CGRectMake(0, 0,XScreenWidth,height);
+    self.webView.frame = CGRectMake(0, 0,XSCREEN_WIDTH,height);
     
     
     [self.tableView reloadData];
@@ -418,7 +418,7 @@
             cell.MessageFrame = group.items[0];
 
  
-        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, XScreenWidth ,self.webView.frame.size.height);
+        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, XSCREEN_WIDTH ,self.webView.frame.size.height);
         [cell.contentView addSubview:self.webView];
 
  

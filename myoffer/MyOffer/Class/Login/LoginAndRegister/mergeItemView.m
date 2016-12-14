@@ -92,7 +92,7 @@
     self.selectBtn.frame = CGRectMake(selectX, selectY, selectW, selectH);
     
     
-    CGFloat rmX = XScreenWidth <= 320 ? 5 : 20;
+    CGFloat rmX = XSCREEN_WIDTH <= 320 ? 5 : 20;
     CGFloat rmY =   0;
     CGFloat rmW =  40;
     CGFloat rmH =  contentSize.height;

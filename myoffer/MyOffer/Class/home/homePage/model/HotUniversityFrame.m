@@ -26,7 +26,7 @@
 
     _universtiy = universtiy;
     
-    CGFloat Cellwidth = XScreenWidth * 0.6;
+    CGFloat Cellwidth = XSCREEN_WIDTH * 0.6;
     
     CGFloat bgx = 0;
     CGFloat bgy = ITEM_MARGIN;

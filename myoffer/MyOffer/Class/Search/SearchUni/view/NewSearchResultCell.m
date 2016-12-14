@@ -98,7 +98,7 @@
         }
         
         
-        self.optionOrderBy =  RANKTI;
+        self.optionOrderBy =  RANK_TI;
         
         self.contentView.backgroundColor  = [UIColor whiteColor];
         
@@ -157,7 +157,7 @@
     self.hotView.image = uni_Frame.universtiy.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
     
     //当排名方式是 世界排名时，只显示世界排名信息
-    if ([self.optionOrderBy isEqualToString:RANKQS]) {
+    if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
         NSString   *rankStr01 = uniObj.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_qs];
         self.rankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];

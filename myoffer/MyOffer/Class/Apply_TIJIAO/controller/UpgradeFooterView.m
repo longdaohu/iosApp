@@ -23,7 +23,7 @@
 @implementation UpgradeFooterView
 + (instancetype)footViewWithContent:(NSString *)content
 {
-    UpgradeFooterView *footer = [[UpgradeFooterView alloc] initWithFrame:CGRectMake(0, 10, XScreenWidth,0)];
+    UpgradeFooterView *footer = [[UpgradeFooterView alloc] initWithFrame:CGRectMake(0, 10, XSCREEN_WIDTH,0)];
     
     footer.tipStr = content;
     

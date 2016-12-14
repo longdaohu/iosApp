@@ -76,7 +76,7 @@
 -(void)makeUI
 {
     self.title = GDLocalizedString(@"About_title");
-    self.CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XScreenHeight - 114, XScreenWidth, 50)];
+    self.CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - 114, XSCREEN_WIDTH, 50)];
     self.CompanyLab.font = [UIFont systemFontOfSize:14];
     self.CompanyLab.textColor = XCOLOR_DARKGRAY;
     self.CompanyLab.textAlignment = NSTextAlignmentCenter;

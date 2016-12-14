@@ -177,7 +177,7 @@ typedef enum {
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.detailTextLabel.textColor =[UIColor darkGrayColor];
-        cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(XScreenWidth - 40,12,30, 30)];
+        cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 40,12,30, 30)];
         [cell.contentView addSubview:cell.countLabel];
         cell.textLabel.text   = text;
         cell.imageView.image  = icon;
@@ -242,8 +242,8 @@ typedef enum {
 {
     self.centerHeader.image = XImage(@"PlaceHolderImage");
     UIImage *headImage =  XImage(@"center_ban_CN.jpg");
-    CGFloat headHeigh = XScreenWidth * headImage.size.height / headImage.size.width;
-    self.headView.frame = CGRectMake(0, 0, XScreenWidth, headHeigh);
+    CGFloat headHeigh = XSCREEN_WIDTH * headImage.size.height / headImage.size.width;
+    self.headView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, headHeigh);
     self.tableView.tableHeaderView = self.headView;
 }
 
@@ -346,7 +346,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return  80 + (XScreenWidth - 320) * 0.2;
+    return  80 + (XSCREEN_WIDTH - 320) * 0.2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -95,7 +95,7 @@ static NSString *identity = @"gonglue";
     
     CGFloat bgx = KDUtilSize(8);
     CGFloat bgy = 2;
-    CGFloat bgw = XScreenWidth - bgx * 2;
+    CGFloat bgw = XSCREEN_WIDTH - bgx * 2;
     CGFloat bgh = FLOWLAYOUT_SubW;
     self.bgView.frame = CGRectMake(bgx, bgy, bgw, bgh);
     

@@ -116,9 +116,9 @@
     
     CGRect loginBgViewFrame = self.LoginBgView.frame;
     loginBgViewFrame.origin.x = 0;
-    loginBgViewFrame.origin.y = XScreenHeight;
-    loginBgViewFrame.size.width = XScreenWidth;
-    loginBgViewFrame.size.height = XScreenHeight*2/3;
+    loginBgViewFrame.origin.y = XSCREEN_HEIGHT;
+    loginBgViewFrame.size.width = XSCREEN_WIDTH;
+    loginBgViewFrame.size.height = XSCREEN_HEIGHT*2/3;
     self.LoginBgView.frame  = loginBgViewFrame;
     [self.view addSubview:self.LoginBgView];
     
@@ -139,7 +139,7 @@
     [_LoginBlurView setIterations:3];
     [_LoginBlurView setBlurRadius:10];
     [_LoginBlurView updateAsynchronously:YES completion:^{}];
-    _LoginBlurView.frame = CGRectMake(0, 0, XScreenWidth, XScreenHeight);
+    _LoginBlurView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
    
     self.signInButton.layer.borderColor = XCOLOR_WHITE.CGColor;
     self.signInButton.layer.borderWidth = 1;
@@ -254,7 +254,7 @@
         
      } else {
          
-       self.LoginBgView.center = CGPointMake(contentSize.width / 2.0f, XScreenHeight*2/3);
+       self.LoginBgView.center = CGPointMake(contentSize.width / 2.0f, XSCREEN_HEIGHT*2/3);
     }
     
     [self.view layoutSubviews];
@@ -302,9 +302,9 @@
 {
    
     CGRect NewRect = self.LoginBgView.frame;
-    NewRect.origin.y = show ? XScreenHeight / 3 : XScreenHeight;
-    NewRect.size.width = XScreenWidth;
-    NewRect.size.height = 2 * XScreenHeight/3;
+    NewRect.origin.y = show ? XSCREEN_HEIGHT / 3 : XSCREEN_HEIGHT;
+    NewRect.size.width = XSCREEN_WIDTH;
+    NewRect.size.height = 2 * XSCREEN_HEIGHT/3;
     
     [UIView animateWithDuration:0.5 animations:^{
         
@@ -318,13 +318,13 @@
     if ([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-002")]) {
         
         self.LoginView.hidden = YES;
-        self.FocusView.center = CGPointMake(XScreenWidth*0.75,38);
+        self.FocusView.center = CGPointMake(XSCREEN_WIDTH*0.75,38);
         
     }else if([sender.currentTitle isEqualToString:GDLocalizedString(@"LoginVC-001")]){
         
         
         self.SignUpView.hidden = YES;
-        self.FocusView.center = CGPointMake(XScreenWidth*0.25,38);
+        self.FocusView.center = CGPointMake(XSCREEN_WIDTH*0.25,38);
         
     }else{
         

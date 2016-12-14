@@ -102,7 +102,7 @@
 
     CGFloat titleX = iconX + iconW  + 5;
     CGFloat titleY = iconY;
-    CGFloat titleW = self.Edit ? XScreenWidth - titleX : XScreenWidth - titleX - 44;
+    CGFloat titleW = self.Edit ? XSCREEN_WIDTH - titleX : XSCREEN_WIDTH - titleX - 44;
     CGFloat titleH = iconH;
     self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
 }

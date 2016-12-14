@@ -12,7 +12,7 @@
     
     XWGJnodataView *noData =[[NSBundle mainBundle] loadNibNamed:@"XWGJnodataView" owner:self options:nil].lastObject;
     
-    noData.frame = CGRectMake(0, -64, XScreenWidth, XScreenHeight);
+    noData.frame = CGRectMake(0, -64, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     
     noData.contentLabel.text = GDLocalizedString(@"NetRequest-noNetWork");
 

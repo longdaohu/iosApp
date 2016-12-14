@@ -201,7 +201,7 @@
                                  @"page": @(page),
                                  @"size": @40,
                                  @"desc": @0,
-                                 @"order": [_orderBy isEqualToString:RANKTI] ? RANKTI : RANKQS}];
+                                 @"order": [_orderBy isEqualToString:RANK_TI] ? RANK_TI : RANK_QS}];
     
     if (_subject) {
         [parameters setValue:@[@{@"name": @"subject", @"value": _subject}] forKey:@"filters"];

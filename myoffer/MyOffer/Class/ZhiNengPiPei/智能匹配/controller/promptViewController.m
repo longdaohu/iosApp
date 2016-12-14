@@ -39,14 +39,14 @@
     self.prompView = prompView;
     
     
-    CGFloat enterY = XScreenHeight  - (70 * XScreenHeight / 568.0);
-    CGFloat enterW = 240 * XScreenWidth / 320.0;
-    CGFloat enterH = 40 * XScreenWidth/ 320.0;
-    CGFloat enterX =  0.5 *(XScreenWidth - enterW);
+    CGFloat enterY = XSCREEN_HEIGHT  - (70 * XSCREEN_HEIGHT / 568.0);
+    CGFloat enterW = 240 * XSCREEN_WIDTH / 320.0;
+    CGFloat enterH = 40 * XSCREEN_WIDTH/ 320.0;
+    CGFloat enterX =  0.5 *(XSCREEN_WIDTH - enterW);
     UIButton *enterBtn =[[UIButton alloc] initWithFrame:CGRectMake(enterX, enterY, enterW, enterH)];
     [enterBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
     [enterBtn setTitle:GDLocalizedString(@"Evaluate-pipei") forState:UIControlStateNormal];
-    enterBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * XScreenWidth / 320.0)];
+    enterBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(22 * XSCREEN_WIDTH / 320.0)];
     [enterBtn addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:enterBtn];
     enterBtn.layer.cornerRadius = CORNER_RADIUS;

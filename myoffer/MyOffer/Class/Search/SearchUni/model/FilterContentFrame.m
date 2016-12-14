@@ -46,7 +46,7 @@
     
     CGFloat detailX = CGRectGetMaxX(self.titleFrame)+5;
     CGFloat detailY = titleY;
-    CGFloat detailW = XScreenWidth - detailX - 60;
+    CGFloat detailW = XSCREEN_WIDTH - detailX - 60;
     CGFloat detailH = 20;
     self.detailFrame = CGRectMake(detailX,detailY,detailW, detailH);
     

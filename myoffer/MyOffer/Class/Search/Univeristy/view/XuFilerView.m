@@ -42,7 +42,7 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     
     
-    CGFloat bgW = XScreenWidth;
+    CGFloat bgW = XSCREEN_WIDTH;
     CGFloat bgH = BGHEIGHT;
     self.bgView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, bgW, bgH)];
     self.bgView.backgroundColor = XCOLOR_BG;
@@ -73,7 +73,7 @@
 -(void)makeTableView
 {
     
-    CGFloat subjectW = XScreenWidth * 0.5;
+    CGFloat subjectW = XSCREEN_WIDTH * 0.5;
     self.subjectTableView =[[UITableView alloc] initWithFrame:CGRectMake(subjectW,BGHEIGHT, subjectW, 0) style:UITableViewStylePlain];
     self.subjectTableView.delegate = self;
     self.subjectTableView.dataSource = self;
@@ -98,9 +98,9 @@
     NSArray *xueweiArr = self.groups[1];
     self.xueweiButton.title = GDLocalizedString(@"UniCourseDe-006");
     
-    self.subjectTableView.scrollEnabled = subjectArr.count * BGHEIGHT > XScreenHeight - CGRectGetMaxY(self.filerRect) ? YES : NO;
+    self.subjectTableView.scrollEnabled = subjectArr.count * BGHEIGHT > XSCREEN_HEIGHT - CGRectGetMaxY(self.filerRect) ? YES : NO;
     
-    self.xueweiTableView.scrollEnabled =  xueweiArr.count * BGHEIGHT  > XScreenHeight - CGRectGetMaxY(self.filerRect)  ? YES : NO;
+    self.xueweiTableView.scrollEnabled =  xueweiArr.count * BGHEIGHT  > XSCREEN_HEIGHT - CGRectGetMaxY(self.filerRect)  ? YES : NO;
  
 }
 
@@ -159,7 +159,7 @@
     
     NSInteger  index =  11 == sender.tag ?  1 : 0;
     
-    CGFloat height  = [self.groups[index] count] * BGHEIGHT   >  XScreenHeight - CGRectGetMaxY(self.filerRect)? XScreenHeight - CGRectGetMaxY(self.filerRect)  : [self.groups[index] count] * BGHEIGHT;
+    CGFloat height  = [self.groups[index] count] * BGHEIGHT   >  XSCREEN_HEIGHT - CGRectGetMaxY(self.filerRect)? XSCREEN_HEIGHT - CGRectGetMaxY(self.filerRect)  : [self.groups[index] count] * BGHEIGHT;
     
     newRect.size.height = show ? height : 0;
     
@@ -221,7 +221,7 @@
     
     CGRect newRect = self.view.frame;
     
-    newRect.size.height = show ? XScreenHeight : BGHEIGHT;
+    newRect.size.height = show ? XSCREEN_HEIGHT : BGHEIGHT;
     
     //判断是否打开筛选页面，如果有show == YES 则立即广大 self.view.frame
     if (show) {

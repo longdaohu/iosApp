@@ -50,8 +50,8 @@
     
     [super layoutSubviews];
 
-    self.leftLab.frame = CGRectMake(10, 0, XScreenWidth  * 0.5 - 10, self.bounds.size.height);
-    self.righttLab.frame = CGRectMake( XScreenWidth  * 0.5, 0, XScreenWidth  * 0.5 - 10, self.bounds.size.height);
+    self.leftLab.frame = CGRectMake(10, 0, XSCREEN_WIDTH  * 0.5 - 10, self.bounds.size.height);
+    self.righttLab.frame = CGRectMake( XSCREEN_WIDTH  * 0.5, 0, XSCREEN_WIDTH  * 0.5 - 10, self.bounds.size.height);
     
 }
 

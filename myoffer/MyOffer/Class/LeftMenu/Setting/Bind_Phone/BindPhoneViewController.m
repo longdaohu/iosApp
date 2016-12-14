@@ -111,7 +111,7 @@
         UITableViewCell *cell = [self cellDefault];
         _VertificationTextField = [self textFieldCreateWithPlacehodler:@"请输入验证码"];
         _VertificationTextField.keyboardType = UIKeyboardTypeNumberPad;
-          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(XScreenWidth - 120, 0, 100, 44)];
+          self.VertificationButton =[[UIButton alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 120, 0, 100, 44)];
         [self.VertificationButton setTitle:GDLocalizedString(@"LoginVC-008") forState:UIControlStateNormal];
         [self.VertificationButton addTarget:self action:@selector(SendVertificationCode:) forControlEvents:UIControlEventTouchUpInside];
         [self.VertificationButton setTitleColor:XCOLOR_RED forState:UIControlStateNormal];

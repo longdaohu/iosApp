@@ -106,8 +106,8 @@
     
     CGFloat iconx = ITEM_MARGIN;
     CGFloat icony = 0;
-    CGFloat iconw = XScreenWidth - 2*iconx;
-    CGFloat iconh = XScreenWidth / 2.5 - icony - 20;
+    CGFloat iconw = XSCREEN_WIDTH - 2*iconx;
+    CGFloat iconh = XSCREEN_WIDTH / 2.5 - icony - 20;
     self.IconView.frame = CGRectMake(iconx, icony, iconw, iconh);
     self.mengView.frame = self.IconView.frame;
 

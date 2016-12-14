@@ -62,7 +62,7 @@
     CGSize statusSize =[record.Status  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:StatusFont]];
     
     CGFloat sw = statusSize.width;
-    CGFloat sx = XScreenWidth - sw - 5;
+    CGFloat sx = XSCREEN_WIDTH - sw - 5;
     CGFloat sy = 0;
     CGFloat sh = CellConteViewHeight;
     self.statusLabel.frame = CGRectMake(sx,sy,sw,sh);

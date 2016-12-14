@@ -67,7 +67,7 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = XCOLOR_BG;
@@ -76,7 +76,7 @@
     
     
     UIImage *countryImage  = [self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")] ? [UIImage imageNamed:GDLocalizedString(@"Category-UK") ] :[UIImage imageNamed:GDLocalizedString(@"Category-AU") ];
-    UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, (countryImage.size.height  *  XScreenWidth / countryImage.size.width))];
+    UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, (countryImage.size.height  *  XSCREEN_WIDTH / countryImage.size.width))];
     headerView.contentMode = UIViewContentModeScaleAspectFill;
     headerView.image = countryImage;
     self.tableView.tableHeaderView = headerView;
@@ -115,7 +115,7 @@
     
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:key
                                                                               value:searchValue
-                                                                            orderBy:RANKTI];
+                                                                            orderBy:RANK_TI];
     
     if ( 0 == indexPath.row) {
         

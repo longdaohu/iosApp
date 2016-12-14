@@ -89,7 +89,7 @@
     
 
     CGFloat itemY = 0;
-    CGFloat itemW = XScreenWidth / 3;
+    CGFloat itemW = XSCREEN_WIDTH / 3;
     CGFloat itemH = self.bounds.size.height;
     
     for (NSInteger index = 0; index < self.items.count; index++) {
@@ -119,7 +119,7 @@
     }
     
     UIView *top =self.lines[2];
-    top.frame = CGRectMake(0, 0, XScreenWidth, lineW);
+    top.frame = CGRectMake(0, 0, XSCREEN_WIDTH, lineW);
  
 }
 

@@ -67,7 +67,7 @@
     //说明文字
     CGFloat notiX = 20;
     CGFloat notiY = 30;
-    CGFloat notiW = XScreenWidth - notiX * 2;
+    CGFloat notiW = XSCREEN_WIDTH - notiX * 2;
     NSString *notiStr = @"此号码被注册，请选择\"合并账号\" 或直接登录";
     CGSize notiSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
      CGFloat notiH = notiSize.height;
@@ -81,7 +81,7 @@
     //下一页合并按钮
     CGFloat mergeX = notiX;
     CGFloat mergeY = CGRectGetMaxY(notiLab.frame) + 50;
-    CGFloat mergeW = XScreenWidth - 2 * mergeX;
+    CGFloat mergeW = XSCREEN_WIDTH - 2 * mergeX;
     CGFloat mergeH = 50;
     UIButton *mergeBtn = [[UIButton alloc] initWithFrame:CGRectMake(mergeX, mergeY, mergeW, mergeH)];
     [self.view addSubview:mergeBtn];
@@ -109,11 +109,11 @@
   
     //服务说明
     CGFloat serX = 0;
-    CGFloat serW = XScreenWidth - serX;
+    CGFloat serW = XSCREEN_WIDTH - serX;
     NSString *serviceStr = @"致电myoffer客服热线：4000666522";
     CGSize serviceSize = [notiStr boundingRectWithSize:CGSizeMake(notiW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : XFONT(16)} context:nil].size;
     CGFloat serH = serviceSize.height;
-    CGFloat serY = XScreenHeight - serH - XNav_Height - 35;
+    CGFloat serY = XSCREEN_HEIGHT - serH - XNAV_HEIGHT - 35;
     UILabel *serviceLab = [UILabel labelWithFontsize:16 TextColor:XCOLOR_DARKGRAY  TextAlignment:NSTextAlignmentCenter];
     serviceLab.frame = CGRectMake(serX, serY, serW, serH);
     [self.view addSubview:serviceLab];

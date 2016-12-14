@@ -57,7 +57,7 @@
     
     CGFloat desX = CGRectGetMaxY(self.selectBtn.frame) + 5;
     CGFloat desY = CGRectGetMinY(self.selectBtn.frame);
-    CGFloat desW = XScreenWidth - desX - ITEM_MARGIN;
+    CGFloat desW = XSCREEN_WIDTH - desX - ITEM_MARGIN;
     
     CGSize titleSize =[title boundingRectWithSize:CGSizeMake(desW, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
   
@@ -70,7 +70,7 @@
     [AtributeStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:keyRangne];
     [self.descriptionBtn setAttributedTitle: AtributeStr forState:UIControlStateNormal];
     
-    self.frame    = CGRectMake(0, 0, XScreenWidth, CGRectGetMaxY(self.descriptionBtn.frame) + 50);
+    self.frame    = CGRectMake(0, 0, XSCREEN_WIDTH, CGRectGetMaxY(self.descriptionBtn.frame) + 50);
 
 }
 

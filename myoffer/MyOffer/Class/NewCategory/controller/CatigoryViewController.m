@@ -116,9 +116,9 @@
 {
     if (!_RankList) {
         
-        CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:RANKTI];
-        CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:RANKTI];
-        CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:RANKQS];
+        CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:RANK_TI];
+        CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:RANK_TI];
+        CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:RANK_QS];
         _RankList = @[rank_en,rank_au,rank_qs];
         
     }
@@ -197,7 +197,7 @@
 //导航工具条
 -(void)makeTopView
 {
-    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  -XNav_Height, XScreenWidth, XNav_Height + 60)];
+    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
     [self.view addSubview:self.topView];
     [self makeTopToolView];
 }
@@ -205,7 +205,7 @@
 //滚动工具条
 -(void)makeTopToolView
 {
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XSCREEN_WIDTH, TOP_HIGHT)];
     self.topToolView.itemNames =   @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
@@ -215,8 +215,8 @@
 {
     CGFloat baseX = 0;
     CGFloat baseY = 0;
-    CGFloat baseW = XScreenWidth;
-    CGFloat baseH = XScreenHeight - XNav_Height - 50;
+    CGFloat baseW = XSCREEN_WIDTH;
+    CGFloat baseH = XSCREEN_HEIGHT - XNAV_HEIGHT - 50;
     self.baseScrollView = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     self.baseScrollView.delegate = self;
     [self.view addSubview:self.baseScrollView];
@@ -244,7 +244,7 @@
     UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
     
-    self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XScreenWidth, topHigh)];
+    self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XSCREEN_WIDTH, topHigh)];
     
     XWeakSelf
     
@@ -413,7 +413,7 @@ static NSString *cityIdentify = @"cityCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return  collectionView == self.City_CollectView  ? CGSizeMake(XScreenWidth, 40)  : CGSizeMake(0, 0);
+    return  collectionView == self.City_CollectView  ? CGSizeMake(XSCREEN_WIDTH, 40)  : CGSizeMake(0, 0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -482,7 +482,7 @@ static NSString *cityIdentify = @"cityCell";
             [self.topToolView SelectButtonIndex:pageNum];
             
             // 限制y轴不动
-            self.baseScrollView.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
+            self.baseScrollView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
         }
 
         
@@ -494,7 +494,7 @@ static NSString *cityIdentify = @"cityCell";
 #pragma mark ——— XTopToolViewDelegate
 -(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {
-    [self.baseScrollView setContentOffset:CGPointMake(XScreenWidth * sender.tag, 0) animated:YES];
+    [self.baseScrollView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
 
 -(void)leftViewMessage:(NSNotification *)noti{
@@ -596,7 +596,7 @@ static NSString *cityIdentify = @"cityCell";
     
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:city.cityName
-                                                                            orderBy:RANKTI];
+                                                                            orderBy:RANK_TI];
     vc.Corecity = city.cityName;
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -607,7 +607,7 @@ static NSString *cityIdentify = @"cityCell";
 
     CatigorySubject *subject = self.SubjectList[indexPath.row];
     
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANKQS];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANK_QS];
     
     vc.CoreArea = subject.TitleName;
     

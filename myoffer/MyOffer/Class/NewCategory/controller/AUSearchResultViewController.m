@@ -160,7 +160,7 @@
               
               UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
               
-              NSInteger index =  [obj[RANKTI] integerValue] == DEFAULT_NUMBER ?  self.Restults.count - 1 : 5 - [obj[RANKTI] integerValue];
+              NSInteger index =  [obj[RANK_TI] integerValue] == DEFAULT_NUMBER ?  self.Restults.count - 1 : 5 - [obj[RANK_TI] integerValue];
               
               NSMutableArray *temps = self.Restults[index];
               
@@ -183,7 +183,7 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight-64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT-64) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];

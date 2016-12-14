@@ -29,7 +29,7 @@
 
 +(instancetype)successViewWithBlock:(successBlock)actionBlock
 {
-    WYLXSuccessView  *SuccessView = [[WYLXSuccessView alloc] initWithFrame:CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight)];
+    WYLXSuccessView  *SuccessView = [[WYLXSuccessView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     
     SuccessView.actionBlock = actionBlock;
     

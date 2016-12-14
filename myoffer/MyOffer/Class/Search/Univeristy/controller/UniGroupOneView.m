@@ -140,7 +140,7 @@
     flowlayout.sectionInset = UIEdgeInsetsMake(0, XMARGIN, 0, XMARGIN);//sectionInset的设置与item的宽高不一致会出现警报信息
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, heigh) collectionViewLayout:flowlayout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, heigh) collectionViewLayout:flowlayout];
     collectionView.backgroundColor  = [UIColor whiteColor];
     
     

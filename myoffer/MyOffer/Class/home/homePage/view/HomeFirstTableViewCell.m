@@ -62,7 +62,7 @@
     
     CGFloat iconX = ITEM_MARGIN;
     CGFloat iconY = ITEM_MARGIN;
-    CGFloat iconW = XScreenWidth - 2 * iconX;
+    CGFloat iconW = XSCREEN_WIDTH - 2 * iconX;
     CGFloat iconH = self.bounds.size.height - iconY;
     self.IconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     

@@ -8,7 +8,7 @@
 
 
 #import "UniversityNewFrame.h"
-#define  CONTENTWIDTH   XScreenWidth - 2 * XMARGIN
+#define  CONTENTWIDTH   XSCREEN_WIDTH - 2 * XMARGIN
 
 @interface UniversityNewFrame ()
 @end
@@ -90,12 +90,12 @@
     
     CGFloat upX = 0;
     CGFloat upY = 0;
-    CGFloat upW = XScreenWidth;
+    CGFloat upW = XSCREEN_WIDTH;
     CGFloat upH =  XPERCENT * 200;
     self.upViewFrame= CGRectMake(upX, upY, upW, upH);
     
     CGFloat tag2X = 0;
-    CGFloat tag2W = XScreenWidth;
+    CGFloat tag2W = XSCREEN_WIDTH;
     CGFloat tag2H = XPERCENT * 13;
     CGFloat tag2Y = upH -  60 - tag2H;
     self.tagsTwoFrame= CGRectMake(tag2X, tag2Y, tag2W, tag2H);
@@ -104,13 +104,13 @@
     CGFloat tag1H = tag2H;
     CGFloat tag1X = tag2X;
     CGFloat tag1Y = tag2Y - tag1H  -  5;
-    CGFloat tag1W = XScreenWidth;
+    CGFloat tag1W = XSCREEN_WIDTH;
     self.tagsOneFrame= CGRectMake(tag1X, tag1Y, tag1W, tag1H);
     
     
     CGFloat QSRankW = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width + 5;
     CGFloat QSRankH = XPERCENT * 13 * 3;
-    CGFloat QSRankX = 0.5 * (XScreenWidth - 2 * QSRankW - 2 * XMARGIN);
+    CGFloat QSRankX = 0.5 * (XSCREEN_WIDTH - 2 * QSRankW - 2 * XMARGIN);
     CGFloat QSRankY =  tag1Y - QSRankH - XMARGIN;
     
     
@@ -127,7 +127,7 @@
     
     CGFloat rightW =  80  +  XMARGIN;
     CGFloat rightH =  40;
-    CGFloat rightX =  XScreenWidth - rightW - 2 * XMARGIN;
+    CGFloat rightX =  XSCREEN_WIDTH - rightW - 2 * XMARGIN;
     CGFloat rightY = self.centerViewFrame.origin.y - 0.5 * rightH;
     self.rightViewFrame= CGRectMake(rightX, rightY, rightW, rightH);
     
@@ -189,7 +189,7 @@
     
     CGRect centerViewNewFrame = self.centerViewFrame;
     centerViewNewFrame.size.height =  self.centerHeigh;
-    centerViewNewFrame.size.width  = XScreenWidth  - 2 * XMARGIN;
+    centerViewNewFrame.size.width  = XSCREEN_WIDTH  - 2 * XMARGIN;
     centerViewNewFrame.origin.x    = XMARGIN;
     centerViewNewFrame.origin.y    = downY - 40;
     self.centerViewFrame =  centerViewNewFrame;
@@ -197,7 +197,7 @@
     
     CGRect headerNewRect = self.headerFrame;
     headerNewRect.size.height =  CGRectGetMaxY(self.downViewFrame);
-    headerNewRect.size.width  = XScreenWidth;
+    headerNewRect.size.width  = XSCREEN_WIDTH;
     headerNewRect.origin.x    = 0;
     headerNewRect.origin.y    = 64;
     self.headerFrame = headerNewRect;
@@ -221,28 +221,28 @@
     
     CGFloat fenguanX = 0;
     CGFloat fenguanY = XMARGIN * 2;
-    CGFloat fenguanW = XScreenWidth;
+    CGFloat fenguanW = XSCREEN_WIDTH;
     CGFloat fenguanH = 20;
     self.fenguanFrame = CGRectMake(fenguanX, fenguanY, fenguanW, fenguanH);
     
     
     CGFloat collectionX = 0;
     CGFloat collectionY = CGRectGetMaxY(self.fenguanFrame) + XMARGIN;
-    CGFloat collectionW = XScreenWidth;
+    CGFloat collectionW = XSCREEN_WIDTH;
     CGFloat collectionH = XPERCENT * 100;
     self.collectionViewFrame = CGRectMake(collectionX, collectionY, collectionW, collectionH);
     
     
     CGFloat lineOneX = 10;
     CGFloat lineOneY = CGRectGetMaxY(self.collectionViewFrame) + XMARGIN;
-    CGFloat lineOneW = XScreenWidth - 20;
+    CGFloat lineOneW = XSCREEN_WIDTH - 20;
     CGFloat lineOneH = 1;
     self.lineOneFrame = CGRectMake(lineOneX, lineOneY, lineOneW, lineOneH);
     
     
     CGFloat keyX = 0;
     CGFloat keyY = CGRectGetMaxY(self.lineOneFrame) + XMARGIN * 2;
-    CGFloat keyW = XScreenWidth;
+    CGFloat keyW = XSCREEN_WIDTH;
     CGFloat keyH = fenguanH;
     self.keyFrame = CGRectMake(keyX, keyY, keyW, keyH);
     
@@ -266,11 +266,11 @@
     
     CGFloat selectX = 0;
     CGFloat selectY = CGRectGetMaxY(self.rankFrame) + XMARGIN;
-    CGFloat selectW = XScreenWidth;
+    CGFloat selectW = XSCREEN_WIDTH;
     CGFloat selectH = 30;
     self.selectionFrame = CGRectMake(selectX, selectY, selectW, selectH);
     
-    CGFloat h_lineX = XScreenWidth * 0.5;
+    CGFloat h_lineX = XSCREEN_WIDTH * 0.5;
     CGFloat h_lineY = 0;
     CGFloat h_lineW = 1;
     CGFloat h_lineH = selectH;
@@ -286,9 +286,9 @@
     CGFloat timesH = selectH;
     CGFloat timesX = h_lineX + XMARGIN;
     if([item.country containsString:@"澳"]){
-        qsX      = 0.5 * (XScreenWidth -  qsW);
-        timesX   =   XScreenWidth;
-        h_lineX  = XScreenWidth;
+        qsX      = 0.5 * (XSCREEN_WIDTH -  qsW);
+        timesX   =   XSCREEN_WIDTH;
+        h_lineX  = XSCREEN_WIDTH;
     }
     self.historyLineFrame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
     self.qsFrame = CGRectMake(qsX, qsY, qsW, qsH);
@@ -296,7 +296,7 @@
     
     
     CGFloat chartY =   CGRectGetMaxY(self.selectionFrame) + XMARGIN;
-    CGFloat chartW = XScreenWidth -20;
+    CGFloat chartW = XSCREEN_WIDTH -20;
     CGFloat chartH = 150;
     CGFloat chartX = 5;
     self.chartViewBgFrame = CGRectMake(chartX, chartY, chartW, chartH);
@@ -317,7 +317,7 @@
     //间距
     CGFloat padding = 15.0;
     
-    CGFloat MAXWidth = XScreenWidth - 2 * XMARGIN;
+    CGFloat MAXWidth = XSCREEN_WIDTH - 2 * XMARGIN;
     
     CGFloat itemH = XPERCENT * 14   + 10;
     

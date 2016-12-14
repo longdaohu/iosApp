@@ -22,7 +22,7 @@
 @implementation PipeiNoResultVeiw
 + (instancetype)viewWithActionBlock:(PipeiNoResultVeiwBlock)actionBlock{
 
-     PipeiNoResultVeiw *noDataView = [[PipeiNoResultVeiw alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height)];
+     PipeiNoResultVeiw *noDataView = [[PipeiNoResultVeiw alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT)];
     
      noDataView.actionBlock = actionBlock;
     

@@ -24,7 +24,7 @@
     _item = item;
     
 
-    CGFloat CONTENTWIDTH = XScreenWidth;
+    CGFloat CONTENTWIDTH = XSCREEN_WIDTH;
     
     CGFloat logoX = XMARGIN;
     CGFloat logoY = XMARGIN ;
@@ -76,7 +76,7 @@
     
     CGFloat RCh = 50;
     CGFloat RCw = RCh;
-    CGFloat RCx = XScreenWidth - RCh;
+    CGFloat RCx = XSCREEN_WIDTH - RCh;
     CGFloat RCy = 0;
     self.hotFrame = CGRectMake(RCx,RCy, RCw ,RCh);
     

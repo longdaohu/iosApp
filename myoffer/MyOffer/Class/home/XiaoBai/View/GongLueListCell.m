@@ -103,7 +103,7 @@ static NSString *identity = @"gonglueList";
     if (self.titleLab.text || self.subTitleLab.text) {
         
         CGFloat titlex      = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
-        CGFloat titlew      = XScreenWidth - titlex;
+        CGFloat titlew      = XSCREEN_WIDTH - titlex;
         CGSize titleSize    = [self.titleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(18)) maxWidth:titlew];
         CGFloat titley      = logoy;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);

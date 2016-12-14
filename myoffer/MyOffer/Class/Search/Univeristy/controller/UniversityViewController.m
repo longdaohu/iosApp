@@ -313,7 +313,7 @@ typedef enum {
     
     XWeakSelf
 
-    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XScreenHeight - HEIGHT_BOTTOM, XScreenWidth, HEIGHT_BOTTOM)];
+    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - HEIGHT_BOTTOM, XSCREEN_WIDTH, HEIGHT_BOTTOM)];
     self.footer = footer;
     footer.actionBlock = ^(UIButton *sender){
         
@@ -341,7 +341,7 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, HEIGHT_BOTTOM, 0);
     self.tableView.delegate     = self;
@@ -357,7 +357,7 @@ typedef enum {
     
     self.view.clipsToBounds = YES;
     
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XPERCENT * 200 + 50)];
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XPERCENT * 200 + 50)];
     iconView.contentMode = UIViewContentModeScaleAspectFill;
     iconView.backgroundColor = XCOLOR_BG;
     self.iconView = iconView;
@@ -370,7 +370,7 @@ typedef enum {
 //设置第一分区
 - (void)oneGroupViewWithUniFrame:(UniversityNewFrame *)UniFrame
 {
-    UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, UniFrame.contentHeight)];
+    UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, UniFrame.contentHeight)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
     XWeakSelf
@@ -490,7 +490,7 @@ typedef enum {
  
     
     //监听顶部导航条透明度
-    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerViewFrame.origin.y - XNav_Height];
+    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerViewFrame.origin.y - XNAV_HEIGHT];
   
     //顶部图片拉伸
     if (scrollView.contentOffset.y < 0) {
@@ -510,7 +510,7 @@ typedef enum {
         }];
         
         //向上拉伸的时候，防止头部图片显示出来
-        self.iconView.hidden = scrollView.contentOffset.y > XScreenHeight * 0.5;
+        self.iconView.hidden = scrollView.contentOffset.y > XSCREEN_HEIGHT * 0.5;
 
     }
     

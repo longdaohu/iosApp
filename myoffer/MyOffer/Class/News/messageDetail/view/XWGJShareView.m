@@ -22,7 +22,7 @@
 @implementation XWGJShareView
 + (instancetype)shareView{
     
-    XWGJShareView  *ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
+    XWGJShareView  *ShareView = [[XWGJShareView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
 
     [[UIApplication sharedApplication].keyWindow addSubview:ShareView];
 
@@ -43,8 +43,8 @@
         [self addSubview:self.cover];
         CGFloat coverX = 0;
         CGFloat coverY = 0;
-        CGFloat coverW = XScreenWidth;
-        CGFloat coverH = XScreenHeight;
+        CGFloat coverW = XSCREEN_WIDTH;
+        CGFloat coverH = XSCREEN_HEIGHT;
         self.cover.frame = CGRectMake(coverX, coverY, coverW, coverH);
         
         
@@ -52,9 +52,9 @@
         self.bgView.backgroundColor =[UIColor colorWithWhite:1 alpha:0.96];
         [self addSubview:self.bgView];
         CGFloat bgX = 0;
-        CGFloat bgY = XScreenHeight;
-        CGFloat bgW = XScreenWidth;
-        CGFloat bgH = XScreenWidth;
+        CGFloat bgY = XSCREEN_HEIGHT;
+        CGFloat bgW = XSCREEN_WIDTH;
+        CGFloat bgH = XSCREEN_WIDTH;
         self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
         
         
@@ -175,7 +175,7 @@
     
     CGRect  newRect = self.bgView.frame;
     
-    newRect.origin.y = Hiden ? XScreenHeight:XScreenHeight - self.bgView.frame.size.height;
+    newRect.origin.y = Hiden ? XSCREEN_HEIGHT:XSCREEN_HEIGHT - self.bgView.frame.size.height;
     
     [UIView animateWithDuration:0.25 animations:^{
         

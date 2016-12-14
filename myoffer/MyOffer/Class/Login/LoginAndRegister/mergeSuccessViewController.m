@@ -61,7 +61,7 @@
     //图片
     CGFloat logoH = 80;
     CGFloat logoW = logoH;
-    CGFloat logoX = (XScreenWidth - logoW) * 0.5;
+    CGFloat logoX = (XSCREEN_WIDTH - logoW) * 0.5;
     CGFloat logoY = 80;
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(logoX, logoY, logoW, logoH)];
     [self.view addSubview:logoView];
@@ -72,7 +72,7 @@
     //提示文字
     CGFloat notiX = 20;
     CGFloat notiY = CGRectGetMaxY(logoView.frame) + 10;
-    CGFloat notiW = XScreenWidth - notiX * 2;
+    CGFloat notiW = XSCREEN_WIDTH - notiX * 2;
     CGFloat notiH = 20;
     UILabel *notiLab = [UILabel labelWithFontsize:18 TextColor:XCOLOR_BLACK  TextAlignment:NSTextAlignmentCenter];
     notiLab.frame = CGRectMake(notiX, notiY, notiW, notiH);

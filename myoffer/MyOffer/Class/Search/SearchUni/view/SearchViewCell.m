@@ -60,7 +60,7 @@
     //间距
     CGFloat padding = 10.0;
     
-    CGFloat MAXWidth = XScreenWidth - 30;
+    CGFloat MAXWidth = XSCREEN_WIDTH - 30;
     
     for (int i = 0; i < fileritem.buttonArray.count; i ++) {
         

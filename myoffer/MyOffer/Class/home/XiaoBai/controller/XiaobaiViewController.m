@@ -86,7 +86,7 @@
         
         XWeakSelf
         
-        _noDataView =[[XWGJNODATASHOWView alloc] initWithFrame:CGRectMake(0, -200, XScreenWidth, XScreenHeight)];
+        _noDataView =[[XWGJNODATASHOWView alloc] initWithFrame:CGRectMake(0, -200, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
         
         _noDataView.bgViewY = 100;
         
@@ -152,7 +152,7 @@
 -(void)makeTopView
 {
     
-    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0, -XNav_Height, XScreenWidth, XNav_Height + 60)];
+    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0, -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
     [self.view addSubview:self.topView];
     
     [self makeTopToolView];
@@ -163,7 +163,7 @@
 //滚动工具条
 -(void)makeTopToolView
 {
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XScreenWidth, TOP_HIGHT)];
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XSCREEN_WIDTH, TOP_HIGHT)];
     self.topToolView.itemNames =  @[@"留学流程",@"申请攻略",@"疑难解答"];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
@@ -173,11 +173,11 @@
 -(void)makebgScrollView
 {
     CGFloat bgsY  =  CGRectGetMaxY(self.topView.frame);
-    CGFloat bgsH  = XScreenHeight - bgsY;
-    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,bgsY, XScreenWidth,bgsH)];
+    CGFloat bgsH  = XSCREEN_HEIGHT - bgsY;
+    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,bgsY, XSCREEN_WIDTH,bgsH)];
     self.bgScrollView.delegate = self;
     [self.view addSubview:self.bgScrollView];
-    self.bgScrollView.contentSize = CGSizeMake(3 * XScreenWidth, XScreenHeight);
+    self.bgScrollView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
     self.bgScrollView.pagingEnabled = YES;
     self.bgScrollView.showsHorizontalScrollIndicator = NO;
 
@@ -197,7 +197,7 @@
     [self addChildViewController:webVC];
     webVC.path = [NSString stringWithFormat:@"%@study_white",DOMAINURL];
     [self.bgScrollView addSubview:webVC.view];
-    webVC.view.frame = CGRectMake(0, 0, XScreenWidth, height - XNav_Height);
+    webVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height - XNAV_HEIGHT);
     webVC.web_wk.frame = webVC.view.bounds;
     
 }
@@ -205,7 +205,7 @@
 //添加申请攻略
 -(void)makeTableView
 {
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XScreenWidth,0, XScreenWidth, XScreenHeight) style:UITableViewStylePlain];
+    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.TableView.backgroundColor = XCOLOR_BG;
     self.TableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
     self.TableView.delegate = self;
@@ -220,7 +220,7 @@
 static NSString *subjectIdentify = @"subjectCell";
 -(void)makeCollectView
 {
-    CGRect subRect = CGRectMake(2 * XScreenWidth, 0, XScreenWidth, XScreenHeight);
+    CGRect subRect = CGRectMake(2 * XSCREEN_WIDTH, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, ITEM_MARGIN, 0, ITEM_MARGIN)];
     UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
     [self.quetionCollectionView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
@@ -270,7 +270,7 @@ static NSString *subjectIdentify = @"subjectCell";
             [self.topToolView SelectButtonIndex:pageNum];
         
          // 限制y轴不动
-        self.bgScrollView.contentSize =  CGSizeMake(3 * XScreenWidth, 0);
+        self.bgScrollView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
     }
     
     
@@ -357,7 +357,7 @@ static NSString *subjectIdentify = @"subjectCell";
 
 -(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {
-    [self.bgScrollView setContentOffset:CGPointMake(XScreenWidth * sender.tag, 0) animated:YES];
+    [self.bgScrollView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
 
 -(void)dealloc{

@@ -66,19 +66,19 @@
     CGFloat TBh = TLh;
     CGFloat TBx = CGRectGetMaxX(self.TagLabFrame);
     CGFloat TBy = TLy;
-    CGFloat TBw = XScreenWidth - TBx;
+    CGFloat TBw = XSCREEN_WIDTH - TBx;
     self.TagBgFrame = CGRectMake(TBx,TBy,TBw,TBh);
     
     CGFloat ONEx = MARGIN;
     CGFloat ONEy = CGRectGetMaxY(self.TagFrame) + MARGIN;
-    CGFloat ONEw = XScreenWidth - MARGIN;
+    CGFloat ONEw = XSCREEN_WIDTH - MARGIN;
     CGFloat ONEh = LineHeight;
     self.FirstLineFrame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
     
     
     CGFloat Tx = MARGIN;
     CGFloat Ty = CGRectGetMaxY(self.FirstLineFrame) +MARGIN;
-    CGFloat Tw = XScreenWidth - Tx * 2;
+    CGFloat Tw = XSCREEN_WIDTH - Tx * 2;
     CGSize Tsize = [MessageDetail[@"title"] boundingRectWithSize:CGSizeMake(Tw, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:24]}context:nil].size;
     self.TitleFrame = CGRectMake(Tx, Ty,Tw , Tsize.height);
     
@@ -98,7 +98,7 @@
     CGFloat TMy = Ay;
     CGFloat TMw = 110 ;
     CGFloat TMh = LabHeight;
-    CGFloat TMx = XScreenWidth - TMw - MARGIN;
+    CGFloat TMx = XSCREEN_WIDTH - TMw - MARGIN;
     self.TimeFrame = CGRectMake(TMx,TMy, TMw , TMh);
     
     CGFloat FCy = Ay;
@@ -108,19 +108,19 @@
     self.FocusFrame = CGRectMake(FCx,FCy, FCw , FCh);
     
     CGFloat AMy = CGRectGetMaxY(self.LogoFrame) + MARGIN;
-    CGFloat AMh = 200 * XScreenWidth / 320.0;
-    CGFloat AMw = XScreenWidth;
+    CGFloat AMh = 200 * XSCREEN_WIDTH / 320.0;
+    CGFloat AMw = XSCREEN_WIDTH;
     self.ArticleMVFrame = CGRectMake(0, AMy,AMw, AMh);
     
     CGFloat SECy = CGRectGetMaxY(self.ArticleMVFrame) + MARGIN * 4;
-    CGFloat SECw = XScreenWidth * 0.5;
+    CGFloat SECw = XSCREEN_WIDTH * 0.5;
     CGFloat SECx = SECw * 0.5;
     CGFloat SECh = LineHeight;
     self.SecondLineFrame = CGRectMake(SECx, SECy, SECw, SECh);
     
     CGFloat SUy = CGRectGetMaxY(self.SecondLineFrame) + MARGIN * 4;
     CGFloat SUx = 2 * MARGIN;
-    CGFloat SUw = XScreenWidth - 4 * MARGIN;
+    CGFloat SUw = XSCREEN_WIDTH - 4 * MARGIN;
     CGSize SUsize = [MessageDetail[@"summary"] boundingRectWithSize:CGSizeMake(SUw, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:SummaryFont]}context:nil].size;
     self.SummaryFrame = CGRectMake(SUx, SUy,SUsize.width, SUsize.height);
    

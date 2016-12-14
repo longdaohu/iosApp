@@ -6,7 +6,7 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 
 #define ADKEY @"Advertiseseeee"
-#define HEADER_HEIGHT XScreenHeight * 0.7
+#define HEADER_HEIGHT XSCREEN_HEIGHT * 0.7
 
 #import "HomeHeaderView.h"
 #import "HomeViewContViewController.h"
@@ -228,7 +228,7 @@
     NSRange cityRange = NSMakeRange(1, 3);
     NSArray *temp_cities = temp_city.count > 4 ? [[temp_city subarrayWithRange:cityRange] copy] : temp_city;
     UniDetailGroup *groupone = self.groups[0];
-    groupone.cellHeight = XScreenWidth * 0.4;
+    groupone.cellHeight = XSCREEN_WIDTH * 0.4;
     groupone.items = temp_cities;
 }
 
@@ -238,7 +238,7 @@
     
     NSArray  *temp_articles  = (NSArray *)response;
     UniDetailGroup *grouptwo = self.groups[1];
-    grouptwo.cellHeight =  ceilf(temp_articles.count * 0.5) * XScreenWidth * 0.4;
+    grouptwo.cellHeight =  ceilf(temp_articles.count * 0.5) * XSCREEN_WIDTH * 0.4;
     grouptwo.items = @[temp_articles];
     
 }
@@ -347,7 +347,7 @@
 -(void)makeHomeTableView
 {
 
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
@@ -370,7 +370,7 @@
 -(void)makeTableHeader
 {
     
-    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XScreenWidth, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
+    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
         [self HomeHeaderViewWithItemtap:itemTag];
     }];
     
@@ -424,7 +424,7 @@
     
     CGFloat searchX = 20;
     CGFloat searchH = 44;
-    CGFloat searchW = XScreenWidth - searchX * 2;
+    CGFloat searchW = XSCREEN_WIDTH - searchX * 2;
     CGFloat searchY = HEADER_HEIGHT * 0.6 + 20 - searchH * 0.5;
     HomeSearchView *searchView = [HomeSearchView ViewWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
     self.searchView = searchView;
@@ -445,11 +445,11 @@
     
     XWeakSelf
     
-    CGFloat AY =  XScreenHeight * 0.7 * 0.6 + 20;
+    CGFloat AY =  XSCREEN_HEIGHT * 0.7 * 0.6 + 20;
     
-    CGFloat AH =  XScreenHeight * 0.7 - AY;
+    CGFloat AH =  XSCREEN_HEIGHT * 0.7 - AY;
     
-    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0,AY, XScreenWidth,AH)];
+    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0,AY, XSCREEN_WIDTH,AH)];
     
     [bgView addSubview:self.autoLoopView];
     
@@ -951,7 +951,7 @@
     NSString *searchValue = info[@"search"];
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
                                                                               value:searchValue
-                                                                            orderBy:RANKTI];
+                                                                            orderBy:RANK_TI];
     vc.Corecity = searchValue;
     [self.navigationController pushViewController:vc animated:YES];
 }

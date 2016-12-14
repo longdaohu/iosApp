@@ -52,8 +52,8 @@
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowlayout = flowlayout;
     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-//    CGFloat width =  0.5*(XScreenWidth  - 30);
-//    CGFloat heigh =  XScreenWidth *0.4;
+//    CGFloat width =  0.5*(XSCREEN_WIDTH  - 30);
+//    CGFloat heigh =  XSCREEN_WIDTH *0.4;
 //    flowlayout.itemSize = CGSizeMake(width,heigh);
 //    // 设置item行与行之间的间隙
 //    flowlayout.minimumLineSpacing = ITEM_MARGIN;
@@ -64,7 +64,7 @@
     
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
-     self.CollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 2 * XScreenWidth *0.4) collectionViewLayout:flowlayout];
+     self.CollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 2 * XSCREEN_WIDTH *0.4) collectionViewLayout:flowlayout];
      self.CollectionView.dataSource = self;
      self.CollectionView.delegate = self;
      [self.CollectionView registerClass:[SecondCollectionViewCell class] forCellWithReuseIdentifier:identify];
@@ -84,11 +84,11 @@
     
     CGFloat collectionx  = 0;
     CGFloat collectiony  = 0;
-    CGFloat collectionw  = XScreenWidth;
-    CGFloat collectionh  = column *  XScreenWidth * 0.4;
+    CGFloat collectionw  = XSCREEN_WIDTH;
+    CGFloat collectionh  = column *  XSCREEN_WIDTH * 0.4;
     self.CollectionView.frame =  CGRectMake(collectionx,collectiony,collectionw,collectionh);
     
-    CGFloat width =  0.5 * (XScreenWidth - 3 * ITEM_MARGIN);
+    CGFloat width =  0.5 * (XSCREEN_WIDTH - 3 * ITEM_MARGIN);
     CGFloat heigh =  (collectionh - ( column + 1 )* ITEM_MARGIN )/ column;
     self.flowlayout.itemSize = CGSizeMake(width,heigh);
  

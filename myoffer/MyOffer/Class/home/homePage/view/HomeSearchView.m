@@ -79,7 +79,7 @@
 -(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contentOffsetY;
 {
 
-    CGFloat contant = XScreenHeight * 0.7 * 0.6 + 20 -22 - contentOffsetY;
+    CGFloat contant = XSCREEN_HEIGHT * 0.7 * 0.6 + 20 -22 - contentOffsetY;
     
     if (contant > 20) {
         
@@ -108,7 +108,7 @@
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-        self.width = animated ? (XScreenWidth - 40) : 44;
+        self.width = animated ? (XSCREEN_WIDTH - 40) : 44;
         
         self.layer.cornerRadius = animated ? 5.0f : 22.0f;
     }];

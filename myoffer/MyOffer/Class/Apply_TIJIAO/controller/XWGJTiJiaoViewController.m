@@ -58,7 +58,7 @@ typedef enum {
 
     if (!_upgateVC) {
         _upgateVC            =[[UpgradeViewController alloc] init];
-        _upgateVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
+        _upgateVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
         [self.view addSubview:_upgateVC.view];
         
     }
@@ -238,7 +238,7 @@ typedef enum {
 -(void)makeTableView
 {
     CGFloat bottomHeight = 50;
-    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
+    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.dataSource  = self;
     self.TableView.delegate    = self;
     [self.view addSubview:self.TableView];
@@ -253,7 +253,7 @@ typedef enum {
 //添加底部提交按钮
 -(void)makeComitButtonWithHeight:(CGFloat)height
 {
-    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0,  XScreenHeight - XNav_Height - height, XScreenWidth, height)];
+    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0,  XSCREEN_HEIGHT - XNAV_HEIGHT - height, XSCREEN_WIDTH, height)];
     self.commitBtn            = commit;
     commit.backgroundColor    = XCOLOR_LIGHTGRAY;
     commit.enabled            = NO;

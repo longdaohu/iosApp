@@ -142,7 +142,7 @@
     
     CGFloat bgX =  self.cellEdit ? 50 : 0;
     CGFloat bgY = editY;
-    CGFloat bgW = XScreenWidth;
+    CGFloat bgW = XSCREEN_WIDTH;
     CGFloat bgH = editH;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     
@@ -151,12 +151,12 @@
     CGFloat titleH = KDUtilSize(16);
     
     CGSize orderSize =[self.orderTitleLab.text  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
-    CGFloat titleW = self.orderTitleLab.text ? orderSize.width :XScreenWidth - 120;
-    titleW = titleW > XScreenWidth - 120 ? XScreenWidth - 120 : titleW;
+    CGFloat titleW = self.orderTitleLab.text ? orderSize.width :XSCREEN_WIDTH - 120;
+    titleW = titleW > XSCREEN_WIDTH - 120 ? XSCREEN_WIDTH - 120 : titleW;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     CGFloat statusW = 100;
-    CGFloat statusX =  XScreenWidth - statusW - 10;
+    CGFloat statusX =  XSCREEN_WIDTH - statusW - 10;
     CGFloat statusY = titleY;
     CGFloat statusH = titleH;
     self.orderStatusLab.frame = CGRectMake(statusX, statusY, statusW, statusH);
@@ -164,14 +164,14 @@
     
     CGFloat noX = titleX;
     CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
-    CGFloat noW = XScreenWidth;
+    CGFloat noW = XSCREEN_WIDTH;
     CGFloat noH = KDUtilSize(13);
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
 
     
-    CGFloat payW = XScreenWidth * 0.3;
+    CGFloat payW = XSCREEN_WIDTH * 0.3;
     CGFloat payH = bgH  * 0.3;
-    CGFloat payX = XScreenWidth  - payW  - 10;
+    CGFloat payX = XSCREEN_WIDTH  - payW  - 10;
     CGFloat payY = CGRectGetHeight(self.bgView.frame) - 10 - payH;
     self.payBtn.frame = CGRectMake(payX, payY, payW, payH);
     
@@ -184,7 +184,7 @@
     CGFloat priceX = titleX;
     CGFloat priceH = KDUtilSize(16);
     CGFloat priceY = CGRectGetMaxY(self.orderNoLab.frame) + 5;
-    CGFloat priceW = XScreenWidth ;
+    CGFloat priceW = XSCREEN_WIDTH ;
     self.orderPriceLab.frame = CGRectMake(priceX, priceY, priceW, priceH);
     
     

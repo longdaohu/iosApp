@@ -123,7 +123,7 @@
     self.myOfferItemBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
     self.myOfferItemBtn.layer.borderWidth = 1;
     
-    self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
+    self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     self.cover.backgroundColor = XCOLOR_BLACK;
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
@@ -133,7 +133,7 @@
 }
 -(void)makeBindView
 {
-    self.BindView =[[YourBindView alloc] initWithFrame:CGRectMake(0, XScreenHeight,XScreenWidth, 210)];
+    self.BindView =[[YourBindView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT,XSCREEN_WIDTH, 210)];
     self.BindView.delegate = self;
     [self.view addSubview:self.BindView];
 }
@@ -215,7 +215,7 @@
     [UIView animateWithDuration:0.25 animations:^{
         
         CGRect newFrame = self.BindView.frame;
-        newFrame.origin.y = Hiden ?  XScreenHeight : CGRectGetMaxY(self.HelloLab.frame) + 40;
+        newFrame.origin.y = Hiden ?  XSCREEN_HEIGHT : CGRectGetMaxY(self.HelloLab.frame) + 40;
         self.BindView.frame = newFrame;
         self.cover.alpha = Hiden ? 0 : 0.7;
         
@@ -310,11 +310,11 @@
     
     if (up) {
         
-          self.BindView.center = CGPointMake(XScreenWidth / 2.0f, (XScreenHeight - keyboardEndFrame.size.height) / 2.0f);
+          self.BindView.center = CGPointMake(XSCREEN_WIDTH / 2.0f, (XSCREEN_HEIGHT - keyboardEndFrame.size.height) / 2.0f);
         
     } else {
         
-        self.BindView.center = CGPointMake(XScreenWidth / 2.0f, XScreenHeight*2/3);
+        self.BindView.center = CGPointMake(XSCREEN_WIDTH / 2.0f, XSCREEN_HEIGHT*2/3);
     }
     
     [self.view layoutSubviews];

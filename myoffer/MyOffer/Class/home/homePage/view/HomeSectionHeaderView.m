@@ -105,7 +105,7 @@
     self.TitleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
     
     CGFloat morew = 100;
-    CGFloat morex = XScreenWidth - morew;
+    CGFloat morex = XSCREEN_WIDTH - morew;
     CGFloat moreh = pandingH;
     CGFloat morey = pandingY;
     self.moreBtn.frame = CGRectMake(morex, morey, morew, moreh);

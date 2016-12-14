@@ -190,7 +190,7 @@
     self.StarBackgroud.frame = uniFrame.starBgFrame;
     
     //当排名方式是 世界排名时，只显示世界排名信息
-    if ([self.optionOrderBy isEqualToString:RANKQS]) {
+    if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
         NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
         self.RankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
@@ -302,14 +302,14 @@
     
     if (!self.cell_Animation) {
         
-        self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+        self.bgView.frame = CGRectMake(SBx,0, XSCREEN_WIDTH, Uni_Cell_Height);
       
         return;
     }
  
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-        self.bgView.frame = CGRectMake(SBx,0, XScreenWidth, Uni_Cell_Height);
+        self.bgView.frame = CGRectMake(SBx,0, XSCREEN_WIDTH, Uni_Cell_Height);
         
     }];
 }

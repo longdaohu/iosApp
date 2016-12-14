@@ -102,11 +102,11 @@
         [wkUController addUserScript:wkUScript];
         WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
         wkWebConfig.userContentController = wkUController;
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XScreenWidth,XScreenHeight - XNav_Height) configuration:wkWebConfig];
+        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XSCREEN_WIDTH,XSCREEN_HEIGHT - XNAV_HEIGHT) configuration:wkWebConfig];
         
     }else{
         
-        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - XNav_Height)];
+        self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT)];
     }
     
     [self.web_wk loadRequest:request];
@@ -197,7 +197,7 @@
                 
             }else{
                 
-                [self UKWithCountryType:country orderBy:RANKTI];
+                [self UKWithCountryType:country orderBy:RANK_TI];
             }
 
             decisionHandler(WKNavigationActionPolicyCancel);
@@ -327,11 +327,11 @@
         
     }else if([dict[@"state"] containsString:@"uk"]){
         
-        [self UKWithCountryType:@"英国" orderBy:RANKTI];
+        [self UKWithCountryType:@"英国" orderBy:RANK_TI];
         
     }else{
         
-        [self UKWithCountryType:@"QS世界排名" orderBy:RANKQS];
+        [self UKWithCountryType:@"QS世界排名" orderBy:RANK_QS];
     }
 }
 -(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
@@ -342,7 +342,7 @@
 
 -(void)AUWithCountryType:(NSString *)country{
     
-    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANKTI];
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANK_TI];
     newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
     [self.navigationController pushViewController:newVc animated:YES];
     
@@ -427,7 +427,7 @@
 -(void)caseSearchUniversityWithdict:(NSDictionary *)response{
     
     NSDictionary *dict =  response[@"args"];
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANKQS];
+    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANK_QS];
     [self.navigationController pushViewController:vc animated:YES];
 }
 //查看YOUKU视频

@@ -14,7 +14,7 @@ typedef enum {
 } XReLoadState;
 //筛选参数提交状态  nomal - 确认   fail - 清空，或提交失败、或不提交   nothing - 不做任何操作、默认
 
-#define FILTERBACKORGIN_Y   (XScreenHeight - 64)
+#define FILTERBACKORGIN_Y   (XSCREEN_HEIGHT - 64)
 #define PageSize 20
 
 #import "XNewSearchViewController.h"
@@ -129,7 +129,7 @@ typedef enum {
     if (self) {
         
         self.SearchValue = text;
-        self.RankType = orderBy.length ? orderBy : RANKQS;
+        self.RankType = orderBy.length ? orderBy : RANK_QS;
         self.title = text;
         self.hidesBottomBarWhenPushed = YES;
         
@@ -147,7 +147,7 @@ typedef enum {
         
         self.SearchValue = @"";
         
-        self.RankType = orderBy.length ? orderBy : RANKQS;
+        self.RankType = orderBy.length ? orderBy : RANK_QS;
         
         
         if([key  isEqualToString: KEY_AREA]) {
@@ -422,7 +422,7 @@ typedef enum {
 {
     self.IsStar = NO;
     
-    if ([self.RankType isEqualToString:RANKQS]) {
+    if ([self.RankType isEqualToString:RANK_QS]) {
         
         return;
     }
@@ -504,15 +504,15 @@ typedef enum {
 //搜索结果tableView
 -(void)makeResultTableView
 {
-    self.ResultTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,50, XScreenWidth, XScreenHeight - 114) style:UITableViewStyleGrouped];
+    self.ResultTableView =[[UITableView alloc] initWithFrame:CGRectMake(0,50, XSCREEN_WIDTH, XSCREEN_HEIGHT - 114) style:UITableViewStyleGrouped];
     self.ResultTableView.delegate = self;
     self.ResultTableView.dataSource = self;
     [self.view addSubview:self.ResultTableView];
     self.ResultTableView.tableFooterView =[[UIView alloc] init];
     
-    UIView  *headerView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 30)];
+    UIView  *headerView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
     self.ResultTableView.tableHeaderView = headerView;
-    self.headerTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(15, 0, XScreenWidth, 30)];
+    self.headerTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(15, 0, XSCREEN_WIDTH, 30)];
     [headerView addSubview:self.headerTitleLabel];
     
     self.ResultTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
@@ -528,17 +528,17 @@ typedef enum {
 -(void)makeRankTypeTableView
 {
     //加蒙版
-    self.CoverBgView =[[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.ToolView.frame), XScreenWidth, XScreenHeight)];
+    self.CoverBgView =[[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.ToolView.frame), XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     self.CoverBgView.hidden = YES;
     [self.view insertSubview:self.CoverBgView belowSubview:self.ToolView];
-    UIButton  *cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, XScreenHeight)];
+    UIButton  *cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     self.cover = cover;
     [cover addTarget:self action:@selector(coverButtonClickRemoveOptionView:) forControlEvents:UIControlEventTouchUpInside];
     cover.backgroundColor =[UIColor blackColor];
     cover.alpha = 0;
     [self.CoverBgView addSubview:cover];
     
-    self.RankTypeTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, -88, XScreenWidth, 88) style:UITableViewStylePlain];
+    self.RankTypeTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, -88, XSCREEN_WIDTH, 88) style:UITableViewStylePlain];
     self.RankTypeTableView.scrollEnabled = NO;
     self.RankTypeTableView.dataSource = self;
     self.RankTypeTableView.delegate = self;
@@ -552,9 +552,9 @@ typedef enum {
 {
     XWeakSelf;
     
-    self.ToolView =[[searchToolView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 50)];
+    self.ToolView =[[searchToolView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
     
-    NSString  *toolTitle = [self.RankType isEqualToString:RANKTI] ?  @"本国排名":@"世界排名";
+    NSString  *toolTitle = [self.RankType isEqualToString:RANK_TI] ?  @"本国排名":@"世界排名";
     
     [self.ToolView.leftButton setTitle:toolTitle  forState:UIControlStateNormal];
     
@@ -584,20 +584,20 @@ typedef enum {
 //筛选页面
 -(void)makeFiltbackView
 {
-    self.FiltbackView =[[UIView alloc] initWithFrame:CGRectMake(0,-FILTERBACKORGIN_Y, XScreenWidth, FILTERBACKORGIN_Y)];
+    self.FiltbackView =[[UIView alloc] initWithFrame:CGRectMake(0,-FILTERBACKORGIN_Y, XSCREEN_WIDTH, FILTERBACKORGIN_Y)];
     self.FiltbackView.backgroundColor = XCOLOR_RED;
     self.FiltbackView.alpha = 0;
     [self.view  insertSubview:self.FiltbackView belowSubview:self.ToolView];
     
     
-    self.FilterTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 50 ,XScreenWidth, XScreenHeight -164) style:UITableViewStylePlain];
+    self.FilterTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 50 ,XSCREEN_WIDTH, XSCREEN_HEIGHT -164) style:UITableViewStylePlain];
     self.FilterTableView.dataSource = self;
     self.FilterTableView.delegate   = self;
     self.FilterTableView.allowsSelection = NO;
     self.FilterTableView.tableFooterView =[[UIView alloc] init];
     [self.FiltbackView addSubview: self.FilterTableView];
     
-    self.bottomToolView = [[BottomBackgroudView alloc] initWithFrame:CGRectMake(0, self.FiltbackView.bounds.size.height - 50, XScreenWidth, 50)];
+    self.bottomToolView = [[BottomBackgroudView alloc] initWithFrame:CGRectMake(0, self.FiltbackView.bounds.size.height - 50, XSCREEN_WIDTH, 50)];
     self.bottomToolView.delegate = self;
     [self.FiltbackView addSubview:self.bottomToolView];
     
@@ -721,7 +721,7 @@ typedef enum {
          
          
          //显示ToolView左侧按钮Title
-         int index = [weakSelf.RankType isEqualToString:RANKTI] ? 1 : 0;
+         int index = [weakSelf.RankType isEqualToString:RANK_TI] ? 1 : 0;
          OptionItem *rank = weakSelf.RankTypeList[index];
          [weakSelf.ToolView.leftButton setTitle:rank.RankTypeName forState:UIControlStateNormal];
          //记住是第几个排序
@@ -1081,8 +1081,8 @@ typedef enum {
         
         if (country.length == 0 && state.length == 0 &&para_city.length == 0 && self.CoreState.length == 0) {
             
-            //如果国家、地区选项为空时排序方式设置为 RANKQS
-            self.RankType = RANKQS;
+            //如果国家、地区选项为空时排序方式设置为 RANK_QS
+            self.RankType = RANK_QS;
         }
         
         

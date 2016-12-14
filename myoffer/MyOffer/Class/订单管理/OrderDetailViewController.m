@@ -208,7 +208,7 @@
     XWeakSelf
     OrderDetailHeaderView *header = [[OrderDetailHeaderView alloc] init];
     header.order = self.order;
-    header.frame = CGRectMake(0, 0, XScreenWidth, header.headHeight);
+    header.frame = CGRectMake(0, 0, XSCREEN_WIDTH, header.headHeight);
     header.actionBlock = ^(UIButton *sender){
           weakSelf.isTableViewSelected = sender.selected;
          [weakSelf.tableView reloadData];
@@ -224,7 +224,7 @@
     XWeakSelf
     OrderDetailFooterView *footer = [[OrderDetailFooterView alloc] init];
     footer.orderDict = respose;
-    footer.frame = CGRectMake(0, 0, XScreenWidth, footer.headHeight + 20);
+    footer.frame = CGRectMake(0, 0, XSCREEN_WIDTH, footer.headHeight + 20);
     footer.actionBlock = ^(UIButton *sender){
         
         if (10 == sender.tag) {
@@ -245,7 +245,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight - XNav_Height) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

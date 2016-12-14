@@ -54,18 +54,18 @@
    
     self.summaryLab.text = summary;
     
-    CGSize contentSize = [summary boundingRectWithSize:CGSizeMake(XScreenWidth - PADDING * 2, MAXFLOAT)
+    CGSize contentSize = [summary boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - PADDING * 2, MAXFLOAT)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:LabFont]}
                                          context:NULL].size;
     
     CGFloat sumY = [summary containsString:@"为你一键生成"] ? 30 : ITEM_MARGIN;
     
-    self.summaryLab.frame = CGRectMake(PADDING, sumY, XScreenWidth - PADDING * 2, contentSize.height);
+    self.summaryLab.frame = CGRectMake(PADDING, sumY, XSCREEN_WIDTH - PADDING * 2, contentSize.height);
     
-    self.frame = CGRectMake(0, 0, XScreenWidth, contentSize.height + 2 * sumY);
+    self.frame = CGRectMake(0, 0, XSCREEN_WIDTH, contentSize.height + 2 * sumY);
 
-    self.line.frame = CGRectMake(PADDING, CGRectGetMaxY(self.frame)-1, XScreenWidth - PADDING * 2, 1);
+    self.line.frame = CGRectMake(PADDING, CGRectGetMaxY(self.frame)-1, XSCREEN_WIDTH - PADDING * 2, 1);
 }
 
 

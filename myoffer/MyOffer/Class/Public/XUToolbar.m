@@ -24,7 +24,7 @@
 
 +(instancetype)toolBar{
     
-   return [[self alloc] initWithFrame:CGRectMake(0, 20, XScreenWidth, 44)];
+   return [[self alloc] initWithFrame:CGRectMake(0, 20, XSCREEN_WIDTH, 44)];
 }
 
 

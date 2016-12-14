@@ -25,13 +25,13 @@
     CGFloat nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat nameY =logoy;
     CGFloat nameH =  Uni_title_FontSize;
-    CGFloat nameW = XScreenWidth - nameX;
+    CGFloat nameW = XSCREEN_WIDTH - nameX;
     self.nameFrame = CGRectMake(nameX, nameY - 3, nameW, nameH);
     
     
     CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
-    CGFloat official_nameW = XScreenWidth - official_nameX;
+    CGFloat official_nameW = XSCREEN_WIDTH - official_nameX;
     CGFloat official_nameH =  Uni_subtitle_FontSize;
     self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
     

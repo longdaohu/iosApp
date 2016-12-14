@@ -95,7 +95,7 @@
 
     CGFloat bgx = 20;
     CGFloat bgy = 0;
-    CGFloat bgw = XScreenWidth - 40;
+    CGFloat bgw = XSCREEN_WIDTH - 40;
     CGFloat bgh = 210;
     self.bgView.frame = CGRectMake(bgx, bgy, bgw, bgh);
     

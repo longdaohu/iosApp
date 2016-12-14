@@ -56,7 +56,7 @@
     
     
     CGFloat Tx = CGRectGetMaxX(self.IconView.frame);
-    CGFloat Tw = XScreenWidth - Tx - ITEM_MARGIN;
+    CGFloat Tw = XSCREEN_WIDTH - Tx - ITEM_MARGIN;
     CGFloat Th = Iw;
     CGFloat Ty = Iy;
     self.SectionTitleLab.frame = CGRectMake(Tx, Ty, Tw, Th);

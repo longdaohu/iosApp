@@ -5,8 +5,8 @@
 //  Created by xuewuguojie on 15/12/18.
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
-#define RANKTI  @"ranking_ti"
-#define RANKQS  @"ranking_qs"
+#define RANK_TI  @"ranking_ti"
+#define RANK_QS  @"ranking_qs"
 #import "OptionItem.h"
 
 @implementation OptionItem
@@ -19,9 +19,9 @@
         if ([typeName containsString:[GDLocalizedString(@"SearchRank_Country") lowercaseString]]) {
             
             self.RankTypeShowName = GDLocalizedString(@"SearchResult_countryxxxRank");
-            self.RankType = RANKTI;
+            self.RankType = RANK_TI;
         }else{
-            self.RankType = RANKQS;
+            self.RankType = RANK_QS;
             self.RankTypeShowName = GDLocalizedString(@"SearchResult_worldxxxRank");
             
          }

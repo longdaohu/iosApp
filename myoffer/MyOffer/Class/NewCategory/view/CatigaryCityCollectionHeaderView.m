@@ -73,13 +73,13 @@
     
     CGFloat countryx = CGRectGetMaxX(self.panding.frame)+margin;
     CGFloat countryy = pandy;
-    CGFloat countryw = XScreenWidth - countryx;
+    CGFloat countryw = XSCREEN_WIDTH - countryx;
     CGFloat countryh = pandh;
     self.countryLab.frame = CGRectMake(countryx, countryy, countryw,countryh);
     
     CGFloat englishx = margin;
     CGFloat englishy = CGRectGetMaxY(self.countryLab.frame) + 15;
-    CGFloat englishw = XScreenWidth - englishx * 2;
+    CGFloat englishw = XSCREEN_WIDTH - englishx * 2;
     CGFloat englishh = (Country_Width - 20);
     self.englishBtn.frame = CGRectMake(englishx, englishy, englishw, englishh);
     

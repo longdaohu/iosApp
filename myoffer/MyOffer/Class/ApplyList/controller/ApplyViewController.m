@@ -278,7 +278,7 @@
 
 -(void)makeCancelBottonButtonView
 {
-    UIButton *cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XScreenHeight - XNav_Height,XScreenWidth, 50)];
+    UIButton *cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XSCREEN_HEIGHT - XNAV_HEIGHT,XSCREEN_WIDTH, 50)];
     [cancelBottomButton setTitle:GDLocalizedString(@"ApplicationList-Delete")  forState:UIControlStateNormal];
     [cancelBottomButton addTarget:self action:@selector(commitCancelList:) forControlEvents:UIControlEventTouchUpInside];
     cancelBottomButton.backgroundColor = XCOLOR_RED;

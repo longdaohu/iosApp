@@ -68,7 +68,7 @@
 
 -(void)makeTableView
 {
-    self.TableView                     = [[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.TableView                     = [[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.delegate            = self;
     self.TableView.dataSource          = self;
     self.TableView.tableFooterView     = [[UIView alloc] init];

@@ -55,7 +55,7 @@
      UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowlayout = flowlayout;
     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-    CGFloat width = XScreenWidth * 0.6;
+    CGFloat width = XSCREEN_WIDTH * 0.6;
     CGFloat heigh = width * 1.3 + 20;
     
     flowlayout.itemSize = CGSizeMake(width,heigh);
@@ -66,7 +66,7 @@
     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, 0);//sectionInset的设置与item的宽高不一致会出现警报信息
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, heigh) collectionViewLayout:flowlayout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, heigh) collectionViewLayout:flowlayout];
 
     self.CollectionView                           = collectionView;
     collectionView.showsVerticalScrollIndicator   = NO;

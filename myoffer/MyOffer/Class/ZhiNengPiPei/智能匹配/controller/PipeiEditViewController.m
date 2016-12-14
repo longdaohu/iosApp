@@ -120,11 +120,11 @@
 
 - (void)makeBottomView{
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, XScreenHeight - Bottom_Height, XScreenWidth, Bottom_Height)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - Bottom_Height, XSCREEN_WIDTH, Bottom_Height)];
     bottomView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:bottomView];
     
-    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(PADDING_TABLEGROUP, 0, XScreenWidth - 2 * PADDING_TABLEGROUP, 50)];
+    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(PADDING_TABLEGROUP, 0, XSCREEN_WIDTH - 2 * PADDING_TABLEGROUP, 50)];
     [submitBtn setTitle:@"获取匹配结果" forState:UIControlStateNormal];
     [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitBtn addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
@@ -145,7 +145,7 @@
 
 - (void)makeTableView {
     
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XScreenWidth, XScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -215,7 +215,7 @@
             
         }];
         
-        _prompVC.view.frame = CGRectMake(0, XScreenHeight, XScreenWidth, XScreenHeight);
+        _prompVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
         
     }
     
@@ -610,7 +610,7 @@
     
     UIEdgeInsets insets = self.tableView.contentInset;
     
-    insets.bottom = up ? keyboardEndFrame.size.height + XNav_Height : Bottom_Height + 30;
+    insets.bottom = up ? keyboardEndFrame.size.height + XNAV_HEIGHT : Bottom_Height + 30;
     
     self.tableView.contentInset = insets;
     
@@ -806,7 +806,7 @@
     }
     
     XWeakSelf
-    CGFloat prompTop = appear ? 0 : XScreenHeight;
+    CGFloat prompTop = appear ? 0 : XSCREEN_HEIGHT;
     
     CGFloat prompAlpha = appear ? 1 : 0;
     

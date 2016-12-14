@@ -21,7 +21,7 @@
 
     [super awakeFromNib];
     
-     self.frame = CGRectMake(0, 0,XScreenWidth, 44);
+     self.frame = CGRectMake(0, 0,XSCREEN_WIDTH, 44);
 
 }
 

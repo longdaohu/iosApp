@@ -20,7 +20,7 @@
         self.contentView.backgroundColor = XCOLOR_WHITE;
         
         self.titleLab =[UILabel labelWithFontsize:15 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
-        self.titleLab.frame = CGRectMake(10, 0, XScreenWidth, self.bounds.size.height);
+        self.titleLab.frame = CGRectMake(10, 0, XSCREEN_WIDTH, self.bounds.size.height);
         self.titleLab.text = @"选择支付方式";
         [self.contentView addSubview:self.titleLab];
     }

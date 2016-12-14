@@ -21,7 +21,7 @@
 @implementation WYLXFooterView
 +(instancetype)footerViewWithBlock:(WYLXfooterBlock)actionBlock
 {
-     WYLXFooterView  *footer = [[WYLXFooterView alloc] initWithFrame:CGRectMake(0, 0, XScreenWidth, 200)];
+     WYLXFooterView  *footer = [[WYLXFooterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 200)];
     
     footer.actionBlock = actionBlock;
     
@@ -84,7 +84,7 @@
     
     CGFloat submitX  = 20;
     CGFloat submitY  = 20 * XPERCENT;
-    CGFloat submitW  = XScreenWidth - submitX * 2;
+    CGFloat submitW  = XSCREEN_WIDTH - submitX * 2;
     CGFloat submitH  = 40;
     self.submitBtn.frame = CGRectMake(submitX, submitY, submitW, submitH);
     

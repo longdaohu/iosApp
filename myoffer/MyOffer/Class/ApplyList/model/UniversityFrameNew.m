@@ -35,7 +35,7 @@
     CGFloat sectionBgx = 0;
     CGFloat sectionBgy = 0;
     CGFloat sectionBgh = Uni_Cell_Height;
-    CGFloat sectionBgw = XScreenWidth;
+    CGFloat sectionBgw = XSCREEN_WIDTH;
     self.SectionBackgroudFrame = CGRectMake(sectionBgx,sectionBgy, sectionBgw, sectionBgh);
     
     
@@ -49,13 +49,13 @@
     CGFloat titlex = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat titley = logoy + 5;
     CGFloat titleh = Uni_address_FontSize;
-    CGFloat titlew = XScreenWidth - titlex;
+    CGFloat titlew = XSCREEN_WIDTH - titlex;
     self.nameFrame = CGRectMake(titlex, titley - 3, titlew, titleh);
     
     
     CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
     CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
-    CGFloat official_nameW = XScreenWidth - official_nameX - 45;
+    CGFloat official_nameW = XSCREEN_WIDTH - official_nameX - 45;
     CGFloat official_nameH =  Uni_subtitle_FontSize + 2;
     self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
     
@@ -92,7 +92,7 @@
     self.starFrames = [temps copy];
     
     
-    CGFloat addX = XScreenWidth - 40;
+    CGFloat addX = XSCREEN_WIDTH - 40;
     CGFloat addY = 0;
     CGFloat addW = 30;
     CGFloat addH = Uni_Cell_Height;
@@ -101,7 +101,7 @@
     
     CGFloat hotH = 50;
     CGFloat hotW = hotH;
-    CGFloat hotX = XScreenWidth - hotH;
+    CGFloat hotX = XSCREEN_WIDTH - hotH;
     CGFloat hotY = 0;
     self.hotFrame = CGRectMake(hotX,hotY, hotW,hotH);
 

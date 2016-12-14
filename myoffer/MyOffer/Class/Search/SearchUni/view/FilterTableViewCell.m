@@ -85,7 +85,7 @@
     
     self.titleLabel.frame = CGRectMake(15,10, titleSize.width, 20);
     
-    self.detailNameLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame)+5,10,XScreenWidth - 100, 20);
+    self.detailNameLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame)+5,10,XSCREEN_WIDTH - 100, 20);
     
     //第一个 label的起点
     CGSize startSize = CGSizeMake(0, 10);

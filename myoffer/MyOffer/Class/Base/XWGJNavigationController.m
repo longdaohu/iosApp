@@ -45,7 +45,7 @@
      
          NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
          UIImage *navImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-        _navigationBgImage =[self makeNewImageWithRect:CGRectMake(0, 0, XScreenWidth, 64) andImage:navImage];
+        _navigationBgImage =[self makeNewImageWithRect:CGRectMake(0, 0, XSCREEN_WIDTH, 64) andImage:navImage];
         
     }
     return _navigationBgImage;

@@ -61,7 +61,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
     self.title = @"留学服务";
-    self.Web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XScreenWidth, XScreenHeight - 64)];
+    self.Web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, XSCREEN_HEIGHT - 64)];
     [self.view addSubview:self.Web];
     self.Web.delegate = self;
     
