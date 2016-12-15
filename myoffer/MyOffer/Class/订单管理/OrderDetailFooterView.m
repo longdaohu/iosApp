@@ -243,9 +243,6 @@
           NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。":@"支付超时，订单关闭。";
           self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"] andStatus:@"关闭订单："],operator];
 
-    }else {
-        
- 
     }
     
 }
@@ -254,6 +251,7 @@
 {
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: date];
+    
    return  [date  dateByAddingTimeInterval: interval];
 }
 
@@ -283,13 +281,14 @@
 {
     
     self.cancelBtn.hidden = ![status isEqualToString:@"ORDER_PAY_PENDING"];
+    
     self.payBtn.enabled = [status isEqualToString:@"ORDER_PAY_PENDING"];
     
     NSString *payString;
     if ([status isEqualToString:@"ORDER_FINISHED"]) {
         
-        
          payString = @"已完成";
+        
     }else  if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
         
         payString = @"去支付";

@@ -133,6 +133,7 @@
 		AE3566B01E011261003F1208 /* CatigaryCityCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3566AF1E011261003F1208 /* CatigaryCityCollectionReusableView.xib */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
 		AE567B061C903D1100552E7A /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AE567B051C903D1100552E7A /* shareMyOffer.png */; };
+		AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56F33F1E0280E900340742 /* WYLXGroup.m */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
 		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
 		AE582C2D1D06B18E00499B6B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2C1D06B18E00499B6B /* CoreText.framework */; };
@@ -254,7 +255,6 @@
 		AEA24A931D5B23F600DD7939 /* HomeThirdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A611D5B23F600DD7939 /* HomeThirdTableViewCell.m */; };
 		AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A631D5B23F600DD7939 /* SecondCollectionViewCell.m */; };
 		AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */; };
-		AEA24A971D5B23F600DD7939 /* WYLXFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */; };
 		AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */; };
 		AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */; };
 		AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* WYLXCell.m */; };
@@ -630,6 +630,8 @@
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		AE567B051C903D1100552E7A /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareMyOffer.png; path = Images.xcassets/AppIcon.appiconset/shareMyOffer.png; sourceTree = "<group>"; };
+		AE56F33E1E0280E900340742 /* WYLXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXGroup.h; sourceTree = "<group>"; };
+		AE56F33F1E0280E900340742 /* WYLXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXGroup.m; sourceTree = "<group>"; };
 		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		AE582C291D06B0ED00499B6B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		AE582C2C1D06B18E00499B6B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -854,8 +856,6 @@
 		AEA24A631D5B23F600DD7939 /* SecondCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondCollectionViewCell.m; sourceTree = "<group>"; };
 		AEA24A641D5B23F600DD7939 /* UniCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniCollectionViewCell.h; sourceTree = "<group>"; };
 		AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniCollectionViewCell.m; sourceTree = "<group>"; };
-		AEA24A691D5B23F600DD7939 /* WYLXFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXFooterView.h; sourceTree = "<group>"; };
-		AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXFooterView.m; sourceTree = "<group>"; };
 		AEA24A6B1D5B23F600DD7939 /* WYLXHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXHeaderView.h; sourceTree = "<group>"; };
 		AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXHeaderView.m; sourceTree = "<group>"; };
 		AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXSuccessView.h; sourceTree = "<group>"; };
@@ -2999,6 +2999,8 @@
 		AEF334111D925EF5003C3C68 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE56F33E1E0280E900340742 /* WYLXGroup.h */,
+				AE56F33F1E0280E900340742 /* WYLXGroup.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -3006,8 +3008,6 @@
 		AEF334121D925EFB003C3C68 /* V */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A691D5B23F600DD7939 /* WYLXFooterView.h */,
-				AEA24A6A1D5B23F600DD7939 /* WYLXFooterView.m */,
 				AEA24A6B1D5B23F600DD7939 /* WYLXHeaderView.h */,
 				AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */,
 				AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */,
@@ -3529,6 +3529,7 @@
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
 				AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */,
 				AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */,
+				AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */,
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
@@ -3558,7 +3559,6 @@
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
 				AEA24B7A1D5B25E000DD7939 /* XNewSearchViewController.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
-				AEA24A971D5B23F600DD7939 /* WYLXFooterView.m in Sources */,
 				AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */,
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,

@@ -40,11 +40,13 @@ static NSString  *identity = @"liuxue";
     
     if (self) {
     
-        self.titleTF =[[XTextField alloc] init];
-        self.titleTF.delegate = self;
-        [self.contentView addSubview:self.titleTF];
-        self.titleTF.inputAccessoryView = self.tooler;
-        
+        XTextField *titleTF =[[XTextField alloc] init];
+        [titleTF addTarget:self action:@selector(checkphone:) forControlEvents:UIControlEventEditingChanged];
+        titleTF.delegate = self;
+        titleTF.inputAccessoryView = self.tooler;
+        self.titleTF =  titleTF;
+        [self.contentView addSubview:titleTF];
+
     }
     return self;
 }
@@ -72,6 +74,16 @@ static NSString  *identity = @"liuxue";
     
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if ([self.delegate respondsToSelector:@selector(XliuxueTableViewCell:withIndexPath:textFieldDidEndEditing:)]) {
+        
+        [self.delegate XliuxueTableViewCell:self withIndexPath:self.cellIndexPath textFieldDidEndEditing:textField];
+    }
+ 
+}
+
+
 #pragma mark ----KeyboardToolarDelegate
 -(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
 {
@@ -80,6 +92,14 @@ static NSString  *identity = @"liuxue";
          [self.delegate XliuxueTableViewCell:self withIndexPath:self.cellIndexPath didClick:sender];
     }
     
+}
+
+- (void)checkphone:(UITextField *)textField{
+
+    if (self.cellIndexPath.section == 1 && textField.text.length > 11) {
+        
+        textField.text = [textField.text substringWithRange:NSMakeRange(0, 11)];
+    }
 }
 
 

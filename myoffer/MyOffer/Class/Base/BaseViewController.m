@@ -349,7 +349,6 @@
 //获取国家
 - (void)countryWithAlert:(BOOL)show{
     
-    
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
   

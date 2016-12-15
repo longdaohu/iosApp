@@ -454,7 +454,6 @@
             return;
         }
         
-            
         
         NSString *sectionStr = [NSString stringWithFormat:@"%ld",(long)section];
         //添加或删除   需要被删除组的信息
@@ -651,6 +650,8 @@
             return ;
         }
         
+        [self.navigationController popToRootViewControllerAnimated:YES];
+
     }else{
      
         if (items.count > 3) {

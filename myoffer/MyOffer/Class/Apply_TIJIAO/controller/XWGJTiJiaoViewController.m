@@ -18,6 +18,7 @@
 #import "XWGJSummaryView.h"
 #import "TiJiaoFooterView.h"
 #import "UpgradeViewController.h"
+#import "EvaluateSearchCollegeViewController.h"
 
 typedef enum {
     PickerViewTypeCountry = 109,
@@ -186,6 +187,7 @@ typedef enum {
 {
      [super viewWillAppear:animated];
      [MobClick beginLogPageView:@"page提交申请"];
+     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
@@ -764,6 +766,7 @@ typedef enum {
 
 -(void)JiBengTableViewCell:(XWGJJiBengTableViewCell *)cell  withIndexPath:(NSIndexPath *)indexPath textFieldDidBeginEditing:(UITextField *)textField{
 
+    
     self.editingCell = cell;
     self.EditingIndexPath = indexPath;
   
@@ -822,6 +825,25 @@ typedef enum {
     self.editingCell = cell;
     
     self.EditingIndexPath     = indexPath;
+
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        
+        
+        [textField resignFirstResponder];
+        
+        EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
+        
+        search.valueBlock = ^(NSString *value){
+            
+            if ( 0 == value.length) return ;
+            
+             textField.text = value;
+            
+        };
+        
+        [self.navigationController pushViewController:search animated:YES];
+    }
+    
     
     XWGJTJSectionGroup *group = self.Groups[indexPath.section];
     
@@ -1057,7 +1079,7 @@ typedef enum {
 }
 
 //申请成功提示页
--(void)updateView{
+- (void)updateView{
 
      [UIView animateWithDuration:ANIMATION_DUATION animations:^{
          self.upgateVC.view.top = 0;
@@ -1068,7 +1090,8 @@ typedef enum {
 }
 
 //返回
--(void)caseBack{
+- (void)caseBack{
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

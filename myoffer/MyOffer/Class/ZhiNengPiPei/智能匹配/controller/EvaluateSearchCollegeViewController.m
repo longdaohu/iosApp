@@ -64,9 +64,10 @@
     
     if (!self.schoolList.count) {
         
+        XWeakSelf
         [self startAPIRequestWithSelector:@"GET docs/zh-cn/chinese-university-names.json" parameters:nil success:^(NSInteger statusCode, id response) {
             
-            self.schoolList = [response copy];
+            weakSelf.schoolList = [response copy];
             
             [ud setValue:self.schoolList forKey:@"uni_list"];//保存学校数据到本地，多次加载无意义
             
