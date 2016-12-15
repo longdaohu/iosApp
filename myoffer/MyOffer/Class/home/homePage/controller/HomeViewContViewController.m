@@ -274,7 +274,7 @@
   
     XWeakSelf
     
-    [self startAPIRequestWithSelector:@"GET api/app/promotions"  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorMessagePromotions  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
         NSMutableArray *items = [NSMutableArray array];
@@ -746,11 +746,8 @@
         
         NSString *phone = response[@"accountInfo"][@"phonenumber"];
         
-        if (0 == phone.length) {
-            
-            [weakSelf caseBackAndLogout];
-        }
-
+        if (0 == phone.length) [weakSelf caseBackAndLogout];
+ 
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         

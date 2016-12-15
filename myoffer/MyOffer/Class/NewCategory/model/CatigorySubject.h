@@ -12,6 +12,5 @@
 @property(nonatomic,copy)NSString *IconName;
 @property(nonatomic,copy)NSString *TitleName;
 +(instancetype)subjectItemInitWithIconName:(NSString *)iconName TitleName:(NSString *)Name;
--(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name;
 
 @end

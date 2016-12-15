@@ -11,21 +11,22 @@
 @implementation CatigoryRank
 
 
--(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name RankKey:(NSString *)key
+-(instancetype)initWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type
 {
     
     self = [super init];
     
     if (self) {
-        self.IconName = iconName;
-        self.TitleName = Name;
-        self.key = key;
         
-         if ([Name containsString:@"Australia"]) {
+        self.iconName = iconName;
+        self.titleName = title;
+        self.rankType = type;
+        
+         if ([title containsString:@"Australia"]) {
             
             self.countryName = GDLocalizedString(@"CategoryVC-AU");
              
-        }else if([Name containsString:@"TIMES"]){
+        }else if([title containsString:@"TIMES"]){
             
             self.countryName = GDLocalizedString(@"CategoryVC-UK");
             
@@ -37,9 +38,9 @@
     return self;
 }
 
-+(instancetype)rankItemInitWithIconName:(NSString *)iconName TitleName:(NSString *)Name RankKey:(NSString *)key
-{
-    return [[self alloc] initWithIconName:iconName TitleName:Name RankKey:key];
++(instancetype)rankItemInitWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type{
+    
+    return [[self alloc] initWithIconName:iconName titleName:title rankType:type];
 }
 
 

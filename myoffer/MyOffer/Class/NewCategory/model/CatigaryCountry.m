@@ -26,6 +26,7 @@
           self.countryName =  [countryDic[@"country"] isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? GDLocalizedString(@"CategoryNew-hotAU") : GDLocalizedString(@"CategoryNew-hotUK") ;
         
         NSMutableArray *cityM = [NSMutableArray array];
+        
         for (NSDictionary *cityDic in countryDic[@"hot_cities"]) {
           
             CatigaryHotCity *city =[CatigaryHotCity CityItemInitWithCityDictionary:cityDic];

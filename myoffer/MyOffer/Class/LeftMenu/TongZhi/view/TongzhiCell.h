@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class NotiItem;
-@interface NotiTableViewCell : UITableViewCell
+@interface TongzhiCell : UITableViewCell
 @property(nonatomic,strong)NotiItem *noti;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 @end

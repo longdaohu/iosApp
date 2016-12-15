@@ -109,8 +109,8 @@ typedef enum {
     
 }
 
--(UIPickerView *)PickerViewWithTag:(PickerViewType)type
-{
+- (UIPickerView *)PickerViewWithTag:(PickerViewType)type{
+    
     UIPickerView *picker = [[UIPickerView alloc] init];
     picker.dataSource = self;
     picker.delegate = self;

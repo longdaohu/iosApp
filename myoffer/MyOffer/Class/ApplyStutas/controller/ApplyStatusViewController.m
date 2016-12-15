@@ -131,9 +131,8 @@
     }
     
     XWeakSelf
-    
-    NSString *path = @"GET api/account/checklist";
-    [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+ 
+    [self startAPIRequestWithSelector:kAPISelectorApplyStutas parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
     
         [weakSelf makeUIConfigrationWith:response];
         

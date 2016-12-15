@@ -93,7 +93,7 @@
 -(void)makeDataSourse:(NSInteger)page{
 
     XWeakSelf
-    NSString *path =[NSString stringWithFormat:@"GET api/account/order?page=%ld&size=10",(long)page];
+    NSString *path =[NSString stringWithFormat:kAPISelectorOrderList,(long)page];
   
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -272,7 +272,7 @@
     
     OrderItem *order = self.orderGroup[indexPath.section];
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:@"GET api/account/order/close?order_id=%@",order.orderId];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.orderId];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         

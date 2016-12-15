@@ -37,8 +37,8 @@
 
 @implementation GongLueViewController
 
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -50,8 +50,8 @@
 }
 
 
--(void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
+    
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:@"page申请攻略列表"];
@@ -72,20 +72,19 @@
  */
 -(void)checkZhiNengPiPei{
     
-    if (LOGIN) {
+    if (!LOGIN) return;
         
-        XWeakSelf
-        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-            
-        }];
+    XWeakSelf
+    [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
         
-    }
+        weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+        
+    }];
+        
+    
 }
 
--(void)makeUI
-{
+- (void)makeUI{
     
     [self makeFlexibleImageView];
     
@@ -116,7 +115,6 @@
 -(void)makeTopNavigaitonView{
     
     XWeakSelf
-    
     self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
     self.topNavigationView.titleName = self.gonglue[@"title"];
     self.topNavigationView.actionBlock = ^(UIButton *sender){
@@ -126,7 +124,7 @@
     [self.view addSubview:self.topNavigationView];
 }
 
--(void)makeTableView
+- (void)makeTableView
 {
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.TableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
@@ -141,8 +139,8 @@
 }
 
 
--(void)makeTableViewHeaderView
-{
+- (void)makeTableViewHeaderView{
+    
     GongLueListHeaderView *header  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
     header.gongLueDic = self.gonglue;
     self.headerView = header;
@@ -169,19 +167,20 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     return Uni_Cell_Height;
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *message =  self.gonglue[@"articles"][indexPath.row];
+    
+    
+    NSLog(@"message message message %@",message);
     
     if ([message[@"_id"] isEqualToString:@"ranks"]) {
         
@@ -232,9 +231,7 @@
  智能匹配
  recommendationsCount   用来区分用户是否提交过智能匹配数据
  */
--(void)caseIntelligent
-{
-    
+- (void)caseIntelligent{
     
     if (self.recommendationsCount > 0) {
         
@@ -243,10 +240,10 @@
         IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else{
-        
-        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+        return;
     }
+        
+      [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
     
     
  
@@ -254,14 +251,14 @@
 }
 
 //跳转资讯详情
--(void)caseMassageWithId:(NSString *)message_Id
-{
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_Id] animated:YES];
+- (void)caseMassageWithId:(NSString *)message_id{
+    
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_id] animated:YES];
 
 }
 
 
-
+#pragma mark ——— UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     

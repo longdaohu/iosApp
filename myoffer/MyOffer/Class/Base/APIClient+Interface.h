@@ -90,4 +90,28 @@
 #define kAPISelectorZiZengRecommendation @"GET api/v2/university/recommendations"
 //根据用户资料测试录取难易程度
 #define kAPISelectorUniversityDetailUserLevel @"GET api/v2/account/evaluate/"
+//获取通知列表
+#define kAPISelectorTongZhiList @"GET api/account/messagelist?client=app&page=%d&size=%d"
+//删除通知列表
+#define kAPISelectorDeleteTongZhi @"DELETE api/account/message/%@"
+//学校专业列表
+#define kAPISelectorUniversityCourses @"GET api/v2/university/:id/courses"
+//订单
+#define kAPISelectorOrderList @"GET api/account/order?page=%ld&size=10"
+//关闭订单
+#define kAPISelectorOrderClose @"GET api/account/order/close?order_id=%@"
+//订单详情
+#define kAPISelectorOrderDetail @"GET api/account/order/%@"
+//订单支付宝
+#define kAPISelectorOrderAlipay @"GET api/account/alipayapp?order_id=%@"
+//订单微信
+#define kAPISelectorOrderWeixin @"GET api/account/wechatpayapp?is_ios=1&order_id=%@"
+//文章点赞
+#define kAPISelectorMessageZang @"GET api/article/%@/like"
+//文章轮播
+#define kAPISelectorMessagePromotions @"GET api/app/promotions"
+//申请状态
+#define kAPISelectorApplyStutas @"GET api/account/checklist"
+//申请审核状态
+#define kAPISelectorApplyStutasNew @"GET api/account/applicationliststateraw"
 

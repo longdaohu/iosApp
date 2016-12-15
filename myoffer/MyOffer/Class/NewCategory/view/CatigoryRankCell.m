@@ -84,17 +84,17 @@
 {
     _rank = rank;
    
-    self.IconView.image = [UIImage imageNamed:rank.IconName];
+    self.IconView.image = [UIImage imageNamed:rank.iconName];
     
-    if ([rank.TitleName containsString:@"+"]) {
+    if ([rank.titleName containsString:@"+"]) {
     
-        NSArray *titles = [rank.TitleName componentsSeparatedByString:@"+"];
+        NSArray *titles = [rank.titleName componentsSeparatedByString:@"+"];
         self.twoLab.text = titles[0];
         self.threeLab.text = titles[1];
         
     }else
     {
-        self.oneLab.text = rank.TitleName;
+        self.oneLab.text = rank.titleName;
     }
     
 }

@@ -6,11 +6,11 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-#import "NotiTableViewCell.h"
+#import "TongzhiCell.h"
 #import "NotiItem.h"
 
 
-@interface NotiTableViewCell ()
+@interface TongzhiCell ()
 //图片
 @property(nonatomic,strong)UIImageView *logoView;
 //标题
@@ -25,16 +25,16 @@
 
 @end
 
-@implementation NotiTableViewCell
+@implementation TongzhiCell
 
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
     
     static NSString *identi = @"noti";
-    NotiTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identi];
+    TongzhiCell *cell = [tableView dequeueReusableCellWithIdentifier:identi];
     if (!cell) {
      
-        cell =[[NotiTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
+        cell =[[TongzhiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     

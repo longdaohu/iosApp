@@ -10,7 +10,7 @@
 #import "CatigoryRankCell.h"
 #import "CatigorySubjectCell.h"
 #import "CatigaryCityCollectionCell.h"
-#import "XWGJCityCollectionReusableView.h"
+#import "CatigaryCityCollectionReusableView.h"
 #import "CatigaryCityCollectionHeaderView.h"
 #import "CatigoryRank.h"
 #import "CatigorySubject.h"
@@ -24,7 +24,7 @@
 #import "XBTopToolView.h"
 #import "TopNavView.h"
 
-#define INTERSET_TOP  70.0
+#define INTERSET_TOP  10.0
 
 @interface CatigoryViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,XTopToolViewDelegate>
 //背景scroller
@@ -45,7 +45,7 @@
 @property(nonatomic,strong)TopNavView *topView;
 @property(nonatomic,strong)XBTopToolView   *topToolView;
 //热门城市数组
-@property(nonatomic,strong)NSArray  *countryes;
+@property(nonatomic,strong)NSArray  *Country_Hotcities;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
@@ -95,16 +95,16 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSMutableArray *countryM  =[NSMutableArray array];
+        NSMutableArray *Country_Hotcities_temp  =[NSMutableArray array];
  
         for (NSDictionary *countryDic in response[@"hot"]) {
             
             CatigaryCountry *country =[CatigaryCountry ContryItemInitWithCountryDictionary:countryDic];
   
-            [countryM addObject:country];
+            [Country_Hotcities_temp addObject:country];
         }
         
-        weakSelf.countryes = [countryM copy];
+        weakSelf.Country_Hotcities = [Country_Hotcities_temp copy];
         
         [weakSelf.City_CollectView reloadData];
         
@@ -116,9 +116,9 @@
 {
     if (!_RankList) {
         
-        CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" TitleName:GDLocalizedString(@"Categoryrank-en") RankKey:RANK_TI];
-        CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" TitleName:GDLocalizedString(@"Categoryrank-au")  RankKey:RANK_TI];
-        CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_QS" TitleName:GDLocalizedString(@"Categoryrank-qs")  RankKey:RANK_QS];
+        CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" titleName:GDLocalizedString(@"Categoryrank-en") rankType:RANK_TI];
+        CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" titleName:GDLocalizedString(@"Categoryrank-au")  rankType:RANK_TI];
+        CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_QS" titleName:GDLocalizedString(@"Categoryrank-qs")  rankType:RANK_QS];
         _RankList = @[rank_en,rank_au,rank_qs];
         
     }
@@ -173,7 +173,7 @@
             
         }else{
         
-            
+            //备用数据，防止数据失败读取
             CatigorySubject *art =[CatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
             CatigorySubject *finance =[CatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
             CatigorySubject *built =[CatigorySubject subjectItemInitWithIconName:@"sub_built"  TitleName:@"建筑与规划"];
@@ -195,53 +195,56 @@
 
 
 //导航工具条
--(void)makeTopView
-{
+- (void)makeTopView{
+    
     self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
     [self.view addSubview:self.topView];
+    
     [self makeTopToolView];
+    
+    [self makeBaseScorller];
+
 }
 
 //滚动工具条
--(void)makeTopToolView
-{
+- (void)makeTopToolView{
+    
     self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XSCREEN_WIDTH, TOP_HIGHT)];
-    self.topToolView.itemNames =   @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
+    self.topToolView.itemNames = @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }
 
--(void)makeBaseScorller
-{
+- (void)makeBaseScorller{
+    
     CGFloat baseX = 0;
-    CGFloat baseY = 0;
+    CGFloat baseY = CGRectGetMaxY(self.topView.frame);
     CGFloat baseW = XSCREEN_WIDTH;
-    CGFloat baseH = XSCREEN_HEIGHT - XNAV_HEIGHT - 50;
+    CGFloat baseH = XSCREEN_HEIGHT - 49 - baseY - XNAV_HEIGHT;//49为底部导航高度
     self.baseScrollView = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     self.baseScrollView.delegate = self;
     [self.view addSubview:self.baseScrollView];
-    
-    [self makeCityCollectViewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
-    
-    [self makeSubjectCollectViewWithFrame:CGRectMake(baseW * 1, baseY, baseW,baseH)];
-    
-    [self makeRankTableViewWithFrame:CGRectMake(baseW * 2, baseY, baseW,baseH)];
+    //热门城市
+    [self makeCityCollectViewWithFrame:CGRectMake(baseX, 0, baseW,baseH)];
+    //热门专业
+    [self makeSubjectCollectViewWithFrame:CGRectMake(baseW * 1, 0, baseW,baseH)];
+    //国家排名
+    [self makeRankTableViewWithFrame:CGRectMake(baseW * 2, 0, baseW,baseH)];
     
 }
 
--(void)makeCityCollectViewWithFrame:(CGRect)frame
-{
+- (void)makeCityCollectViewWithFrame:(CGRect)frame{
+    
    
-    CGFloat topHigh = 2 * (Country_Width - 20) + 45 + INTERSET_TOP;
+    CGFloat topHigh = 2 * Country_Width  + INTERSET_TOP;
     
-    self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:frame andcontentInset:UIEdgeInsetsMake(topHigh, 0, 40, 0)];
-    
+    self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:frame andcontentInset:UIEdgeInsetsMake(topHigh, 0, 0, 0)];
     
     UINib *city_xib = [UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil];
     [self.City_CollectView registerNib:city_xib forCellWithReuseIdentifier:cityIdentify];
     
     
-    UINib *citySection_xib = [UINib nibWithNibName:@"XWGJCityCollectionReusableView" bundle:nil];
+    UINib *citySection_xib = [UINib nibWithNibName:@"CatigaryCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
     
     self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XSCREEN_WIDTH, topHigh)];
@@ -306,21 +309,15 @@
 
 
 
--(void)makeUI
-{
+- (void)makeUI{
 
     [self makeOtherUI];
     
-    [self makeBaseScorller];
-    
     [self makeTopView];
-    
-
 }
 
 
--(void)makeOtherUI
-{
+- (void)makeOtherUI{
     
     XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
@@ -331,19 +328,17 @@
     
     self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
-    
 }
 
 
 
 #pragma mark ——————UICollectionViewDelegateFlowLayout
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-
-{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
     if (collectionView == self.City_CollectView && kind == UICollectionElementKindSectionHeader) {
         
-        XWGJCityCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView" forIndexPath:indexPath];
-        CatigaryCountry *country = self.countryes[indexPath.section];
+        CatigaryCityCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView" forIndexPath:indexPath];
+        CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
         headerView.TitleLab.text = country.countryName;
         
         return  headerView;
@@ -360,7 +355,7 @@
 #pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    NSInteger setionNumber = collectionView == self.Sub_CollectView ? 1 : self.countryes.count;
+    NSInteger setionNumber = collectionView == self.Sub_CollectView ? 1 : self.Country_Hotcities.count;
     
     return setionNumber;
     
@@ -370,15 +365,13 @@
     
     if (collectionView == self.City_CollectView) {
         
-        CatigaryCountry *country = self.countryes[section];
+        CatigaryCountry *country = self.Country_Hotcities[section];
 
         return country.HotCities.count;
         
-    }else{
-    
-        return  self.SubjectList.count;
-        
     }
+    
+    return  self.SubjectList.count;
     
 }
 
@@ -395,18 +388,16 @@ static NSString *cityIdentify = @"cityCell";
         
         return subject_cell;
         
-    }else{
+    }
         
         CatigaryCityCollectionCell *city_cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
         
-        CatigaryCountry *country = self.countryes[indexPath.section];
+        CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
         
         city_cell.city = country.HotCities[indexPath.row];
         
  
          return city_cell;
-    }
-    
     
 }
 
@@ -466,7 +457,6 @@ static NSString *cityIdentify = @"cityCell";
         
         
         if ([scrollView isKindOfClass:[UITableView class]] || !scrollView.isDragging)  return;
-
         
         if (self.baseScrollView.isDragging) {
             
@@ -492,12 +482,12 @@ static NSString *cityIdentify = @"cityCell";
 
 
 #pragma mark ——— XTopToolViewDelegate
--(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
-{
+- (void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender{
+    
     [self.baseScrollView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
 
--(void)leftViewMessage:(NSNotification *)noti{
+- (void)leftViewMessage:(NSNotification *)noti{
     
     NSString *object = (NSString *)noti.object;
     
@@ -508,7 +498,7 @@ static NSString *cityIdentify = @"cityCell";
 }
 
 //导航栏 leftBarButtonItem
--(void)leftViewMessage{
+- (void)leftViewMessage{
     
     //先从本地获取消息数据 当网络联接时，再次请求最新网络数据
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
@@ -555,10 +545,9 @@ static NSString *cityIdentify = @"cityCell";
 -(void)CaseUK:(CatigoryRank *)rank
 {
     
-
-     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
+     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.rankType];
     
-     vc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
+     vc.title  = [rank.titleName containsString:@"+"] ? [rank.titleName componentsSeparatedByString:@"+"][1] : rank.titleName;
     
      [self.navigationController pushViewController:vc animated:YES];
 }
@@ -568,9 +557,9 @@ static NSString *cityIdentify = @"cityCell";
 -(void)CaseAUwith:(CatigoryRank *)rank
 {
     
-    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.key];
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.rankType];
     
-    newVc.title  = [rank.TitleName containsString:@"+"] ? [rank.TitleName componentsSeparatedByString:@"+"][1] : rank.TitleName;
+    newVc.title  = [rank.titleName containsString:@"+"] ? [rank.titleName componentsSeparatedByString:@"+"][1] : rank.titleName;
     
     [self.navigationController pushViewController:newVc animated:YES];
     
@@ -590,7 +579,7 @@ static NSString *cityIdentify = @"cityCell";
 -(void)CaseHotCityWithIndexPath:(NSIndexPath *)indexPath
 {
     
-    CatigaryCountry *country = self.countryes[indexPath.section];
+    CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
     
     CatigaryHotCity *city = country.HotCities[indexPath.row];
     

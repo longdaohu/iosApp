@@ -49,7 +49,6 @@
         self.upView = [[UIView alloc] init];
         [self addSubview:self.upView];
         
-        
         self.downView =[[UIView alloc] init];
         self.downView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.downView];

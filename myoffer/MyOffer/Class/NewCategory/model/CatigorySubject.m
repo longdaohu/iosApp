@@ -16,6 +16,7 @@
     
     self = [super init];
     if (self) {
+        
         self.IconName = iconName;
         self.TitleName = Name;
     }

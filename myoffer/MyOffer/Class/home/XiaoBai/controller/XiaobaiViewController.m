@@ -23,7 +23,7 @@
 @property(nonatomic,strong)TopNavView *topView;
 @property(nonatomic,strong)XBTopToolView *topToolView;
 //UIScrollView 背景View
-@property(nonatomic,strong)UIScrollView *bgScrollView;
+@property(nonatomic,strong)UIScrollView *bgView;
 //UIWebView 留学流程
 @property(nonatomic,strong)KDProgressHUD *hud;
 //UICollectionView 疑难解答
@@ -118,8 +118,8 @@
 }
 
 //根据网络请求结果配置UI
--(void)configrationUIWithResponse:(id)response
-{
+- (void)configrationUIWithResponse:(id)response{
+    
     self.gonglueItems =  (NSArray *)response;
     
     self.TableView.tableFooterView = [UIView new];
@@ -144,45 +144,47 @@
     
     [self makeTopView];
     
-    [self makebgScrollView];
-    
 }
 
-
--(void)makeTopView
-{
+//顶部导航
+- (void)makeTopView{
     
     self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0, -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
     [self.view addSubview:self.topView];
-    
     [self makeTopToolView];
+    [self makebgView];
     
 }
 
 
 //滚动工具条
--(void)makeTopToolView
-{
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XSCREEN_WIDTH, TOP_HIGHT)];
+- (void)makeTopToolView{
+    
+    CGFloat topX = 0;
+    CGFloat topY = CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN;
+    CGFloat topW = XSCREEN_WIDTH;
+    CGFloat topH = TOP_HIGHT;
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(topX, topY,topW, topH)];
     self.topToolView.itemNames =  @[@"留学流程",@"申请攻略",@"疑难解答"];
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }
 
 
--(void)makebgScrollView
+-(void)makebgView
 {
-    CGFloat bgsY  =  CGRectGetMaxY(self.topView.frame);
-    CGFloat bgsH  = XSCREEN_HEIGHT - bgsY;
-    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,bgsY, XSCREEN_WIDTH,bgsH)];
-    self.bgScrollView.delegate = self;
-    [self.view addSubview:self.bgScrollView];
-    self.bgScrollView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
-    self.bgScrollView.pagingEnabled = YES;
-    self.bgScrollView.showsHorizontalScrollIndicator = NO;
-
+    CGFloat bgY  =  CGRectGetMaxY(self.topView.frame);
+    CGFloat bgH  = XSCREEN_HEIGHT - bgY;
+    CGFloat bgW  = XSCREEN_WIDTH;
+    CGFloat bgX  = 0;
+    self.bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bgX,bgY, bgW,bgH)];
+    self.bgView.delegate = self;
+    [self.view addSubview:self.bgView];
+    self.bgView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    self.bgView.pagingEnabled = YES;
+    self.bgView.showsHorizontalScrollIndicator = NO;
     
-    [self makeWebViewWithHeight:bgsH];
+    [self makeWebViewWithHeight:bgH];
     
     [self makeCollectView];
 
@@ -190,27 +192,26 @@
 }
 
 //添加留学流程
-- (void)makeWebViewWithHeight:(CGFloat)height
-{
+- (void)makeWebViewWithHeight:(CGFloat)height{
  
     WebViewController *webVC = [[WebViewController alloc] init];
     [self addChildViewController:webVC];
     webVC.path = [NSString stringWithFormat:@"%@study_white",DOMAINURL];
-    [self.bgScrollView addSubview:webVC.view];
+    [self.bgView addSubview:webVC.view];
     webVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height - XNAV_HEIGHT);
     webVC.web_wk.frame = webVC.view.bounds;
     
 }
 
 //添加申请攻略
--(void)makeTableView
-{
+-(void)makeTableView{
+    
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.TableView.backgroundColor = XCOLOR_BG;
     self.TableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
     self.TableView.delegate = self;
     self.TableView.dataSource = self;
-    [self.bgScrollView addSubview:self.TableView];
+    [self.bgView addSubview:self.TableView];
     self.TableView.tableFooterView =[[UIView alloc] init];
     self.TableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -218,8 +219,8 @@
 
 //添加疑难解答
 static NSString *subjectIdentify = @"subjectCell";
--(void)makeCollectView
-{
+-(void)makeCollectView{
+    
     CGRect subRect = CGRectMake(2 * XSCREEN_WIDTH, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, ITEM_MARGIN, 0, ITEM_MARGIN)];
     UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
@@ -245,18 +246,17 @@ static NSString *subjectIdentify = @"subjectCell";
     collectionView.backgroundColor = XCOLOR_BG;
     collectionView.contentInset = Inset;
     
-    [self.bgScrollView addSubview:collectionView];
+    [self.bgView addSubview:collectionView];
     
     return collectionView;
 }
 
 
 #pragma mark ——— UIScrollViewDelegate
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    if (self.bgScrollView.isDragging) {
+    if (self.bgView.isDragging) {
         
              //监听滚动，实现顶部工具条按钮切换
             CGPoint offset = scrollView.contentOffset;
@@ -270,7 +270,7 @@ static NSString *subjectIdentify = @"subjectCell";
             [self.topToolView SelectButtonIndex:pageNum];
         
          // 限制y轴不动
-        self.bgScrollView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
+        self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
     }
     
     
@@ -283,8 +283,7 @@ static NSString *subjectIdentify = @"subjectCell";
     return self.gonglueItems.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     GongLueTableViewCell *cell =[GongLueTableViewCell cellWithTableView:tableView];
     
@@ -294,14 +293,12 @@ static NSString *subjectIdentify = @"subjectCell";
     
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return FLOWLAYOUT_SubW + 10;;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -314,7 +311,6 @@ static NSString *subjectIdentify = @"subjectCell";
 
 
 #pragma mark ——— UICollectionViewDataSource UICollectionViewDelegate
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
     return 1;
@@ -357,7 +353,7 @@ static NSString *subjectIdentify = @"subjectCell";
 
 -(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {
-    [self.bgScrollView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
+    [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
 
 -(void)dealloc{
@@ -365,6 +361,7 @@ static NSString *subjectIdentify = @"subjectCell";
     KDClassLog(@"留学小白  dealloc");
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -146,6 +146,7 @@
              
               [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
                 
+                  NSLog(@"response %@",response);
                   self.headerView.haveIcon = YES;
                   self.headerView.response = response;
                  
@@ -177,13 +178,12 @@
          *  【 -1       ——表示没有申请过
          *   检查申请进程，判断我的申请跳转页面
          */
-        [self startAPIRequestWithSelector:@"GET api/account/applicationliststateraw" parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+        [self startAPIRequestWithSelector:kAPISelectorApplyStutasNew parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             
             self.Applystate = response[@"state"];
             
         }];
         
-
     }
     
     

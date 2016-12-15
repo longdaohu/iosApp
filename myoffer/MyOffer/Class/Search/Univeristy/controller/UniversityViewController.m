@@ -77,6 +77,17 @@ typedef enum {
 
 @implementation UniversityViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        self.user_level = @DEFAULT_NUMBER;
+
+    }
+    return self;
+}
+
 -(instancetype)initWithUniversityId:(NSString *)Uni_id{
 
     self = [super init];
@@ -118,10 +129,9 @@ typedef enum {
 
 -(void)refesh{
 
-    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
     XWeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id] parameters:nil success:^(NSInteger statusCode, id response) {
         
         UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
         
@@ -198,11 +208,7 @@ typedef enum {
 
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
-        UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
-        
-        [weakSelf makeUIWithUni:item];
- 
+        [weakSelf makeUIWithUni:[UniversitydetailNew mj_objectWithKeyValues:response]];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -232,13 +238,12 @@ typedef enum {
     
         [weakSelf onClick:sender];
         
-        
     };
     self.headerView = header;
     self.tableView.tableHeaderView  = header;
     
-     //拉伸图片
     
+     //拉伸图片
     NSString *countryImageName =  @"Uni-au.jpg";
     if ([university.country isEqualToString:@"英国"]) {
         countryImageName =  @"Uni-uk.jpg";
@@ -392,24 +397,21 @@ typedef enum {
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
    
-    
-    UniDetailGroup *group = self.groups[section];
-    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
+     UniDetailGroup *group = self.groups[section];
+     HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     
     return sectionView;
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
     
     return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     return indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : Uni_Cell_Height;
 }
@@ -485,7 +487,7 @@ typedef enum {
     
 }
 
-
+#pragma mark ——— UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
     
@@ -575,10 +577,10 @@ typedef enum {
              [weakSelf.shareVC.view removeFromSuperview];
          };
         
-        [self.view addSubview:_shareVC.view];
-        
         [self addChildViewController:_shareVC];
 
+        [self.view addSubview:_shareVC.view];
+ 
     }
     return _shareVC;
 }
@@ -586,12 +588,7 @@ typedef enum {
 //分享
 - (void)caseShare{
     
-    if (_shareVC.view.superview != self.view) {
-        
-        [self.view addSubview:_shareVC.view];
-        
-        [self.shareVC  show];
-    }
+      [self.shareVC  show];
 }
 
 //收藏
@@ -623,18 +620,19 @@ typedef enum {
 - (void)caseMore
 {
   
+    XWeakSelf
     self.UniFrame.showMore = !self.UniFrame.showMore;
     
     if (CGRectGetHeight(self.headerView.frame) > 0) {
         
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
-            self.headerView.itemFrame = self.UniFrame;
-            self.headerView.frame     =  self.UniFrame.headerFrame;
+            weakSelf.headerView.itemFrame = weakSelf.UniFrame;
+            weakSelf.headerView.frame     = weakSelf.UniFrame.headerFrame;
            
-            [_tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
-            [_tableView setTableHeaderView:self.headerView];
-            [_tableView endUpdates];
+            [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
+            [weakSelf.tableView setTableHeaderView:weakSelf.headerView];
+            [weakSelf.tableView endUpdates];
 
         }];
     
@@ -701,12 +699,12 @@ typedef enum {
             
             [self.navigationController pushViewController:pipei  animated:YES];
             
-        }else{
-            
-            [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
-            
+            return;
         }
-  
+            
+          
+          [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
+    
     
 }
 

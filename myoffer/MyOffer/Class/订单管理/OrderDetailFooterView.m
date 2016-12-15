@@ -225,8 +225,7 @@
         
         NSDate *endDate=[formatter dateFromString:[self makeTime:orderDict[@"expired_at"]  andStatus:@""]];
         NSDate *endLocalDate=[self localDate:endDate];
-      
- 
+  
         
         NSDate *currentDate = [NSDate date];
         NSDate *currentLocaleDate = [self localDate:currentDate];

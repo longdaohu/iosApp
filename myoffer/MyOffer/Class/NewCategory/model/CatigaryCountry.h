@@ -15,7 +15,6 @@
 @property(nonatomic,copy)NSString *countryName;
 
 +(instancetype)ContryItemInitWithCountryDictionary:(NSDictionary *)countryDic;
--(instancetype)initWithCountryDictionary:(NSDictionary *)countryDic;
-
+ 
 @end
 

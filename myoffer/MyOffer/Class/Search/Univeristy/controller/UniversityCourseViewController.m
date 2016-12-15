@@ -149,7 +149,7 @@
 - (void)reloadData {
     
     [self
-     startAPIRequestWithSelector:@"GET api/v2/university/:id/courses"
+     startAPIRequestWithSelector:kAPISelectorUniversityCourses
      parameters:_resquestParameters
      success:^(NSInteger statusCode, id response) {
       
@@ -225,7 +225,7 @@
 {
   
      [self
-     startAPIRequestWithSelector:@"GET api/university/:id/courses"
+     startAPIRequestWithSelector:kAPISelectorUniversityCourses
      parameters:_resquestParameters
      success:^(NSInteger statusCode, id response) {
          for (NSDictionary *info in response[@"courses"]) {

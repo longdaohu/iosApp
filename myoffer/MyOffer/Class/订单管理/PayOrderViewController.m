@@ -82,8 +82,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     
- 
-    
     if(alertView.tag == 900 && buttonIndex == 1)
     {
         
@@ -219,7 +217,7 @@ static NSString *identify = @"pay";
     
     [[AppDelegate sharedDelegate] updateUmeng];
     
-    NSString *path =[NSString stringWithFormat:@"GET api/account/wechatpayapp?is_ios=1&order_id=%@",self.order.orderId];
+    NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.orderId];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
@@ -256,7 +254,7 @@ static NSString *identify = @"pay";
 -(void)sendAliPay
 {
     
-        NSString *path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
+        NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.orderId];
             
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
                     
@@ -285,9 +283,9 @@ static NSString *identify = @"pay";
     
     NSString *path;
     if ([self.payStyle isEqualToString:@"支付宝"]) {
-        path =[NSString stringWithFormat:@"GET api/account/alipayapp?order_id=%@",self.order.orderId];
+        path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.orderId];
     }else if([self.payStyle isEqualToString:@"微信"]){
-       path =[NSString stringWithFormat:@"GET api/account/wechatpayapp?is_ios=1&order_id=%@",self.order.orderId];
+       path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.orderId];
     }
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {

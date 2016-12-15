@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XWGJCityCollectionReusableView : UICollectionReusableView
+@interface CatigaryCityCollectionReusableView : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UILabel *panding;
 @property (weak, nonatomic) IBOutlet UILabel *TitleLab;
 

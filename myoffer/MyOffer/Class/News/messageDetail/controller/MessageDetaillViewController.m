@@ -471,7 +471,7 @@
 -(void)ZangBtnClick
 {
     XWeakSelf
-    NSString *path =[NSString stringWithFormat:@"GET api/article/%@/like",self.NO_ID];
+    NSString *path =[NSString stringWithFormat:kAPISelectorMessageZang,self.NO_ID];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSString *LikeCount = self.ZangBtn.currentTitle;

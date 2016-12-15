@@ -25,9 +25,8 @@
     
     [super awakeFromNib];
 
-    self.contentView.layer.cornerRadius = CORNER_RADIUS;
-    self.contentView.layer.masksToBounds = YES;
-    
+    self.layer.cornerRadius = CORNER_RADIUS;
+    self.layer.masksToBounds = YES;
     
     self.IconView =[[UIImageView alloc] init];
     self.IconView.contentMode = UIViewContentModeScaleAspectFit;
@@ -36,11 +35,10 @@
     self.TitleLab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
     self.TitleLab.numberOfLines = 2;
     [self.contentView addSubview:self.TitleLab];
-    self.contentView.backgroundColor = XCOLOR_WHITE;
     
 }
 
--(void)setSubject:(CatigorySubject *)subject
+- (void)setSubject:(CatigorySubject *)subject
 {
     _subject = subject;
     
@@ -51,7 +49,7 @@
 
 
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     

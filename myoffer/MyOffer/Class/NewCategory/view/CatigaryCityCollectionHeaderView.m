@@ -18,7 +18,6 @@
         
         self.panding = [[UILabel alloc] init];
         self.panding.layer.cornerRadius = 2.5;
-        self.panding.layer.masksToBounds = YES;
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
         [self addSubview:self.panding];
         
@@ -37,7 +36,7 @@
     return self;
 }
 
--(UIButton *)makeButtonWithImage:(UIImage *)image andTag:(NSInteger)tag{
+- (UIButton *)makeButtonWithImage:(UIImage *)image andTag:(NSInteger)tag{
    
     UIButton *sender =  [[UIButton alloc] init];
     sender.tag = tag;
@@ -46,13 +45,12 @@
     [sender setImage:image forState:UIControlStateNormal];
     [sender setImage:image forState:UIControlStateHighlighted];
     sender.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [sender addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+    [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     return sender;
 }
 
 
--(void)click:(UIButton *)sender
-{
+- (void)onClick:(UIButton *)sender{
  
     if (self.actionBlock) {
         
@@ -66,7 +64,7 @@
     
     CGFloat margin = 10;
     CGFloat pandx = margin;
-    CGFloat pandy = 70;
+    CGFloat pandy = 10;
     CGFloat pandw = 5;
     CGFloat pandh = 15;
     self.panding.frame = CGRectMake(pandx, pandy, pandw, pandh);

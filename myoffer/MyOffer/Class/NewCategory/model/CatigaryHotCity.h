@@ -16,6 +16,5 @@
 //城市图片
 @property(nonatomic,copy)NSString *IconName;
 +(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic;
--(instancetype)initWithCityDictionary:(NSDictionary *)cityDic;
 
 @end

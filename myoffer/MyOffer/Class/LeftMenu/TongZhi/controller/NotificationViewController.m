@@ -8,7 +8,7 @@
 
 #define PageSize 20
 #import "NotificationViewController.h"
-#import "NotiTableViewCell.h"
+#import "TongzhiCell.h"
 #import "NotiItem.h"
 
 
@@ -16,8 +16,6 @@
 @property(nonatomic,strong)UITableView *tableView;
 //网络请求结果
 @property(nonatomic,strong)NSMutableArray *results;
-//下拉刷新
-@property(nonatomic,strong)MJRefreshNormalHeader *mj_header;
 //请求数据第几页
 @property(nonatomic,assign)int nextPage;
 
@@ -25,6 +23,7 @@
 @end
 
 @implementation NotificationViewController
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -71,19 +70,14 @@
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
     
-     self.tableView.mj_header = self.mj_header;
+    
+    MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    mj_header.lastUpdatedTimeLabel.hidden = YES;
+     self.tableView.mj_header = mj_header;
     
 }
 
--(MJRefreshNormalHeader *)mj_header{
 
-    if (!_mj_header) {
-        
-        _mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-        _mj_header.lastUpdatedTimeLabel.hidden = YES;
-    }
-    return _mj_header;
-}
 
 -(MJRefreshBackNormalFooter *)makeMJ_footer{
 
@@ -129,7 +123,7 @@
 -(void)getDataSourse:(int)page
 {
   
-     NSString *path = [NSString stringWithFormat:@"GET api/account/messagelist?client=app&page=%d&size=%d",page,PageSize];
+     NSString *path = [NSString stringWithFormat:kAPISelectorTongZhiList,page,PageSize];
     
     XWeakSelf
     
@@ -169,7 +163,6 @@
 
     }];
     
-    
     //结束刷新
     [self endMJ_Fresh];
     
@@ -196,7 +189,7 @@
 }
 
 //加载新数据
--(void)loadNewData{
+- (void)loadNewData{
     
      self.nextPage = 0;
     
@@ -205,8 +198,8 @@
 }
 
 //加载更多数据
--(void)loadMoreData
-{
+- (void)loadMoreData{
+    
      [self getDataSourse:self.nextPage];
 }
 
@@ -223,7 +216,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NotiTableViewCell *cell = [NotiTableViewCell cellWithTableView:tableView];
+    TongzhiCell *cell = [TongzhiCell cellWithTableView:tableView];
     cell.noti               = self.results[indexPath.row];
     return cell;
 }
@@ -266,7 +259,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         NotiItem *noti  = self.results[indexPath.row];
-        NSString *path  = [NSString stringWithFormat:@"DELETE api/account/message/%@",noti.NO_id];
+        NSString *path  = [NSString stringWithFormat:kAPISelectorDeleteTongZhi,noti.NO_id];
         
         //提交删除项到服务器
         XWeakSelf
@@ -286,7 +279,7 @@
 
 -(void)dealloc
 {
-    KDClassLog(@" 通知列表  dealloc");   //可以释放
+    KDClassLog(@" 通知列表  dealloc");
 }
 
 

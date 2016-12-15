@@ -20,6 +20,7 @@
 //titleLab原始Frame
 @property(nonatomic,assign)CGRect headerTitleLabFrame;
 
+
 @end
 
 @implementation GongLueListHeaderView
@@ -49,7 +50,6 @@
         self.moLogo =[[UIImageView alloc] init];
         self.moLogo.image = [UIImage imageNamed:@"default_avatar"];
         self.moLogo.clipsToBounds = YES;
-        self.moLogo.contentMode = UIViewContentModeScaleAspectFit;
         [self.moBgView addSubview:self.moLogo];
         
         
@@ -135,22 +135,24 @@
     
     if (contentOffsetY <= 0) {
  
-            self.headerTitleLab.frame = self.headerTitleLabFrame;
+        self.headerTitleLab.frame = self.headerTitleLabFrame;
         
-    }else{
-    
-        CGSize  contentSize = self.bounds.size;
-
-        if (contentSize.height - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
-            
-            CGRect NewRect    = self.headerTitleLabFrame;
-            
-            NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
-            
-            self.headerTitleLab.frame = NewRect;
-         }
+        return;
         
     }
+    
+    CGSize  contentSize = self.bounds.size;
+
+    if (contentSize.height - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
+        
+        CGRect NewRect    =  self.headerTitleLabFrame;
+        
+        NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
+        
+        self.headerTitleLab.frame = NewRect;
+     }
+        
+   
     
 }
 

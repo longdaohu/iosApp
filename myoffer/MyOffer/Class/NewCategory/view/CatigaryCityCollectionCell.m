@@ -27,7 +27,6 @@
 
     self.contentView.layer.cornerRadius = CORNER_RADIUS;
     self.contentView.layer.masksToBounds = YES;
-    self.contentView.backgroundColor = XCOLOR_WHITE;
     
     
     self.IconView =[[UIImageView alloc] init];
@@ -35,13 +34,10 @@
     [self.contentView addSubview:self.IconView];
     
     
-    
-    UIImage *norImage = [UIImage imageNamed:@"Menu_Mask"];
-    
     self.MengView =[[UIImageView alloc] init];
     self.MengView.alpha = 0.7;
     self.MengView.contentMode = UIViewContentModeScaleAspectFill;
-    self.MengView.image = norImage;
+    self.MengView.image = [UIImage imageNamed:@"Menu_Mask"];
     [self.contentView addSubview:self.MengView];
     
     self.TitleLab = [UILabel labelWithFontsize:20 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentLeft];
@@ -54,8 +50,6 @@
     _city = city;
     
     self.TitleLab.text =city.cityName;
-    
- 
     [self.IconView sd_setImageWithURL:[NSURL URLWithString:city.IconName]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 }
 

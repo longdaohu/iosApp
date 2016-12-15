@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJCityCollectionReusableView.h"
+#import "CatigaryCityCollectionReusableView.h"
 
-@implementation XWGJCityCollectionReusableView
+@implementation CatigaryCityCollectionReusableView
 
 - (void)awakeFromNib {
     // Initialization code
