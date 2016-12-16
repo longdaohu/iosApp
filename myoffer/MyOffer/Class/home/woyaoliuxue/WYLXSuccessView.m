@@ -45,8 +45,8 @@
         CAGradientLayer *gradient = [CAGradientLayer layer];
         self.gradientLayer = gradient;
         gradient.colors = [NSArray arrayWithObjects:
-                           (id)[UIColor colorWithRed:48/255.0 green:202/255.0 blue:255/255.0 alpha:1].CGColor,
-                           (id)[UIColor colorWithRed:159/255.0 green:0/255.0 blue:107/255.0 alpha:1].CGColor,
+                           (id)XCOLOR(48, 202, 255).CGColor,
+                           (id)XCOLOR(159, 0, 107).CGColor,
                            nil];
         gradient.startPoint = CGPointMake(0.8, 0);
         gradient.endPoint = CGPointMake(1, 1);
@@ -77,14 +77,14 @@
         self.OKButton.layer.borderWidth = 1;
         self.OKButton.layer.borderColor = XCOLOR_WHITE.CGColor;
         [self addSubview:self.OKButton];
-        [self.OKButton  addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        [self.OKButton  addTarget:self action:@selector(caseBack) forControlEvents:UIControlEventTouchUpInside];
         
         
     }
     return self;
 }
 
--(void)back
+- (void)caseBack
 {
     if (self.actionBlock) {
         

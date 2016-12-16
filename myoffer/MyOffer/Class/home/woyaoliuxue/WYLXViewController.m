@@ -237,9 +237,8 @@ typedef enum {
     [footerView addSubview:commitBtn];
     
     
-    WYLXHeaderView *headerView =[WYLXHeaderView headViewWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH,0)];
-    headerView.title = GDLocalizedString(@"WoYaoLiuXue_FillInfor");
-    
+    WYLXHeaderView *headerView =[WYLXHeaderView headViewWithContent:GDLocalizedString(@"WoYaoLiuXue_FillInfor")];
+   
     [self.tableView beginUpdates];
     self.tableView.tableHeaderView = headerView;
     self.tableView.tableFooterView = footerView;

@@ -23,7 +23,7 @@
 #import "CatigoryViewController.h"
 #import "LeftMenuHeaderView.h"
 
-@interface LeftMenuViewController ()<UIActionSheetDelegate>
+@interface LeftMenuViewController ()
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 //表头
 @property(nonatomic,strong)LeftMenuHeaderView *headerView;
@@ -89,8 +89,7 @@
         NSArray *temps = @[apply,order,message,set,help,logout];
         
         self.menuItems = [temps mutableCopy];
-        
-    
+     
         
         [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             
@@ -101,15 +100,11 @@
             
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0],[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             
-            
-            
-            
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count    = [response[@"order_count"] integerValue];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
             [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
             [ud synchronize];
-            
             
             [self currentLeftMessageCount];
 
@@ -140,25 +135,17 @@
     
  
      if(LOGIN) {
-         
          //请求头像信息
-         if (!self.headerView.haveIcon){
-             
-              [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
-                
-                  NSLog(@"response %@",response);
-                  self.headerView.haveIcon = YES;
-                  self.headerView.response = response;
-                 
-             }];
-  
-         }
-   
+         if (self.headerView.haveIcon) return;
+         
+          [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
+              self.headerView.haveIcon = YES;
+              self.headerView.response = response;
+         }];
          
      }else{
          
          self.headerView.haveIcon = NO;
-         
          [self.headerView headerViewWithUserLoginOut];
      }
     
@@ -202,7 +189,7 @@
 
 -(void)makeUI
 {
-    self.view.backgroundColor =[UIColor clearColor];
+    self.view.backgroundColor = XCOLOR_CLEAR;
     
     [self makeTableView];
     
@@ -217,14 +204,13 @@
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.bounces = NO;
-        tableView.backgroundColor = [UIColor clearColor];
+        tableView.backgroundColor = XCOLOR_CLEAR;
         [self.view addSubview:tableView];
         
         tableView;
     });
     
- 
-    self.tableView.tableHeaderView = self.headerView;
+     self.tableView.tableHeaderView = self.headerView;
 
 }
 
@@ -238,7 +224,6 @@
         
         KDUtilDefineWeakSelfRef
         [_headerView.userIconView KD_addTapAction:^(UIView *view) {
-            
             
             if(![[AppDelegate sharedDelegate] isLogin])
             {
@@ -290,18 +275,17 @@
 -(void)caseApply
 {
     
-    [self.sideMenuViewController hideMenuViewController];
-    
-     RequireLogin
+      RequireLogin
     
     if ([self.Applystate containsString:@"1"] || !self.Applystate) {
  
         [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
+        
+        return;
 
-     }else{
+     }
          
-         [self pushViewController:[[ApplyStatusViewController alloc] init]];
-    }
+      [self pushViewController:[[ApplyStatusViewController alloc] init]];
     
 }
 
@@ -323,11 +307,9 @@
 //订单中心
 -(void)caseOrderList
 {
- 
     RequireLogin
     
     [self pushViewController:[[OrderViewController alloc] init]];
-    
 }
 
 //通知
@@ -341,8 +323,31 @@
 - (void)caseLogout
 {
  
-    UIActionSheet *sheet =[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Me-007")  destructiveButtonTitle:GDLocalizedString(@"Me-006") otherButtonTitles: nil];
-    [sheet showInView:self.view];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确认登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[AppDelegate sharedDelegate] logout];
+        
+        [MobClick profileSignOff];
+        
+        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+        [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
+        }];
+        
+        [self makeDataSource];
+        
+        [self currentLeftMessageCount];
+        
+    }];
+
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 
@@ -351,14 +356,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     if (indexPath.row == self.menuItems.count - 1) {
         
         [self caseLogout];
 
         return;
     }
-    
     
     [self.sideMenuViewController hideMenuViewController];
 
@@ -385,11 +388,10 @@
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
     return 50;
- }
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
@@ -410,65 +412,30 @@
 
 
 
-#pragma mark -----UIActonSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    
-    if (0 == buttonIndex) {
-       
-            [[AppDelegate sharedDelegate] logout];
-        
-            [MobClick profileSignOff];
-        
-            [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
-            [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
-            }];
-        
-             [self makeDataSource];
-        
-             [self currentLeftMessageCount];
-        
-        }
-    
-}
-
 //当前控制器新消息数据
 - (void)currentLeftMessageCount
 {
     UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
     
-    switch (self.contentViewController.selectedIndex) {
-        case 3:
-        {
-            MeViewController *vc =nav.childViewControllers[0];
-            [vc leftViewMessage];
-        }
-            break;
-        case 2:
-        {
-            MessageViewController *vc =nav.childViewControllers[0];
-            [vc leftViewMessage];
-        }
-            break;
-        case 1:
-        {
-            CatigoryViewController  *vc =nav.childViewControllers[0];
-            [vc leftViewMessage];
-        }
-            break;
-        default:{
-            
-            HomeViewContViewController *vc =nav.childViewControllers[0];
-            [vc leftViewMessage];
-        }
-            break;
-            
+    id vc =  nav.childViewControllers[0];
+    
+    if ([vc isKindOfClass:[MeViewController class]]) {
+        vc = (MeViewController *)vc;
+    }else if ([vc isKindOfClass:[MessageViewController class]]) {
+        vc = (MessageViewController *)vc;
+    }else if ([vc isKindOfClass:[CatigoryViewController class]]) {
+        vc = (CatigoryViewController *)vc;
+    }else{
+        vc = (HomeViewContViewController *)vc;
     }
+    
+    [vc leftViewMessage];
+  
     
 }
 
-
-#pragma mark -----UIImagePickerControlleDelegate
+//照片选择器 图片上传
+#pragma mark ——— UIImagePickerControlleDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = info[UIImagePickerControllerEditedImage];
@@ -505,6 +472,7 @@
     
         [hud hideAnimated:YES];
         [self showAPIErrorAlertView:error clickAction:nil];
+        
     }];
 }
 
@@ -563,12 +531,8 @@
             break;
         case 3:{
             
-      
-
-                XWGJTabBarController *tab  = ( XWGJTabBarController *)self.contentViewController;
-                
-                [tab setSelectedIndex:2];
-            
+            XWGJTabBarController *tab  = ( XWGJTabBarController *)self.contentViewController;
+            [tab setSelectedIndex:2];
         }
             break;
         default:

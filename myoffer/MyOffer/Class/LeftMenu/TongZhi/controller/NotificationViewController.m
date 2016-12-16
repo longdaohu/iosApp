@@ -217,7 +217,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TongzhiCell *cell = [TongzhiCell cellWithTableView:tableView];
-    cell.noti               = self.results[indexPath.row];
+    cell.noti         = self.results[indexPath.row];
     return cell;
 }
 
@@ -238,9 +238,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    
     return Uni_Cell_Height;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
   
     return HEIGHT_ZERO;

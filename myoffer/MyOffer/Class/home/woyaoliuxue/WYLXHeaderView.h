@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WYLXHeaderView : UIView
-@property(nonatomic,copy)NSString *title;
-+(instancetype)headViewWithFrame:(CGRect)frame;
+@property(nonatomic,copy)NSString *content;
++(instancetype)headViewWithContent:(NSString *)content;
 @end

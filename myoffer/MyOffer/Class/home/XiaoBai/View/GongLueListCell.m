@@ -64,7 +64,7 @@ static NSString *identity = @"gonglueList";
     self.subTitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
     self.subTitleLab.numberOfLines = 0;
     [self.contentView addSubview:self.subTitleLab];
-
+ 
 }
 
 
@@ -109,23 +109,22 @@ static NSString *identity = @"gonglueList";
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);
         
         CGFloat subw           = titlew - 25;
-        CGSize subTitleSize    = [self.subTitleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(13)) maxWidth:subw];
+        CGSize  subTitleSize   = [self.subTitleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(13)) maxWidth:subw];
         CGFloat subx           = titlex;
         CGFloat suby           = CGRectGetMaxY(self.titleLab.frame) + ITEM_MARGIN;
         CGFloat subh           = subTitleSize.height;
         self.subTitleLab.frame = CGRectMake(subx, suby, subw, subh);
+        
     }
     
 }
-
-
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+
 }
 
 @end

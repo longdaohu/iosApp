@@ -75,7 +75,7 @@
     self.subTitleLab.text   = noti.summary;
     self.timeLab.text       = noti.create_at;
     NSString *imageName     =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
-    self.logoView.image     = [UIImage imageNamed:imageName];
+    self.logoView.image     =  [UIImage imageNamed:imageName];
     self.redSpotsView.hidden = noti.state.length;
 
 }

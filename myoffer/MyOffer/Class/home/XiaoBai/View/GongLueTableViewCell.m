@@ -115,7 +115,7 @@ static NSString *identity = @"gonglue";
         CGSize titleSize =[self.titleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(18)]];
         CGSize subTitleSize = [self.subtitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(13)]];
         CGFloat titley = 0.5 * (bgh  - titleSize.height - subTitleSize.height - KDUtilSize(10));
-
+        
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);
         
         
@@ -124,7 +124,6 @@ static NSString *identity = @"gonglue";
         CGFloat subw = titlew;
         CGFloat subh = subTitleSize.height;
         self.subtitleLab.frame = CGRectMake(subx, suby, subw, subh);
-        
 
     }
  

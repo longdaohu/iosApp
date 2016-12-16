@@ -130,9 +130,8 @@
     self.threeLab.frame = CGRectMake(thx, thy, thw, thh);
     
     self.oneLab.font = [UIFont systemFontOfSize: oneh * 0.8];
-    self.threeLab.font = [UIFont systemFontOfSize: oneh * 0.8];
     self.twoLab.font = [UIFont systemFontOfSize: oneh * 0.8];
-
+    self.threeLab.font = [UIFont systemFontOfSize: oneh * 0.8];
     
 }
 

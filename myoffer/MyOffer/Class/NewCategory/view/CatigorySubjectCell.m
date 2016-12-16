@@ -55,7 +55,7 @@
     
     CGFloat ix = 0;
     CGFloat iw = FLOWLAYOUT_SubW;
-    CGFloat iy = [self.subject.IconName containsString:@"ICON"]? iw * 0.15 : iw * 0.1;
+    CGFloat iy = [self.subject.IconName containsString:@"ICON"] ? iw * 0.15 : iw * 0.1;
     CGFloat ih = [self.subject.IconName containsString:@"ICON"] ? iw * 0.45 : iw * 0.6;
     self.IconView.frame =CGRectMake(ix, iy, iw, ih);
     

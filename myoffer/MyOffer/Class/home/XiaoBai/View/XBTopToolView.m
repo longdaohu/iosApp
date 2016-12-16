@@ -34,10 +34,8 @@
         self.blackView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
         [self addSubview:self.blackView];
         
-        
         self.bgView =[[UIView alloc] init];
         [self addSubview:self.bgView];
-        
  
         self.focusView =[[UIImageView alloc] init];
         self.focusView.layer.borderWidth = 1;
@@ -45,7 +43,6 @@
         self.focusView.layer.masksToBounds = YES;
         [self.bgView addSubview:self.focusView];
         self.focusView.image = self.itemImages[0];
- 
         
      }
     return self;
@@ -120,7 +117,6 @@
     
     [self moveWithButton:sender];
 }
-
 
 
 -(void)moveWithButton:(UIButton *)sender
