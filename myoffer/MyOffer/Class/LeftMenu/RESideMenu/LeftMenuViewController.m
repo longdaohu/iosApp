@@ -82,7 +82,7 @@
         
         NSString *order_count    = [ud valueForKey:@"order_count"];
         
-        MenuItem *order   = [MenuItem menuItemInitWithName:@"订单中心" icon:@"menu_service" count:order_count];
+        MenuItem *order   = [MenuItem menuItemInitWithName:@"我的订单" icon:@"menu_service" count:order_count];
         
         MenuItem *message = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
         
@@ -266,7 +266,7 @@
 //UIViewController  跳转
 -(void)pushViewController:(UIViewController *)vc
 {
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+    UINavigationController *nav = (UINavigationController *)self.mainTabBarController.selectedViewController;
     [nav pushViewController:vc animated:NO];
     
 }
@@ -415,7 +415,7 @@
 //当前控制器新消息数据
 - (void)currentLeftMessageCount
 {
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+    UINavigationController *nav = (UINavigationController *)self.mainTabBarController.selectedViewController;
     
     id vc =  nav.childViewControllers[0];
     
@@ -495,7 +495,7 @@
     
     [self.sideMenuViewController hideMenuViewController];
     
-    UINavigationController *nav = (UINavigationController *)self.contentViewController.selectedViewController;
+    UINavigationController *nav = (UINavigationController *)self.mainTabBarController.selectedViewController;
     
     [nav popToRootViewControllerAnimated:NO];
     
@@ -531,8 +531,7 @@
             break;
         case 3:{
             
-            XWGJTabBarController *tab  = ( XWGJTabBarController *)self.contentViewController;
-            [tab setSelectedIndex:2];
+            [self.mainTabBarController setSelectedIndex:2];
         }
             break;
         default:

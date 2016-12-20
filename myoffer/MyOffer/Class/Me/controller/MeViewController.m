@@ -327,10 +327,10 @@ typedef enum {
     
     ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
     cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
-    if ([cell.textLabel.text containsString:@"ffer"]) {
-        NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
-        cell.countLabel.text  = countString;
-    }
+//    if ([cell.textLabel.text containsString:@"ffer"]) {
+//        NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
+//        cell.countLabel.text  = countString;
+//    }
     return cell;
 }
 

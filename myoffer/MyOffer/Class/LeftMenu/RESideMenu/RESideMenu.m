@@ -38,7 +38,8 @@
 @property (strong, readwrite, nonatomic) UIView *menuViewContainer;
 @property (strong, readwrite, nonatomic) UIView *contentViewContainer;
 @property (assign, readwrite, nonatomic) BOOL didNotifyDelegate;
-@property(nonatomic,strong)XWGJTabBarController *mainTabBarController;
+@property (nonatomic,strong) XWGJTabBarController *mainTabBarController;
+
 @end
 
 @implementation RESideMenu
@@ -90,6 +91,7 @@
     _interactivePopGestureRecognizerEnabled = YES;
   
 //    _menuViewControllerTransformation = CGAffineTransformMakeScale(1.5f, 1.5f);
+    //菜单页放大缩小范围
     _menuViewControllerTransformation = CGAffineTransformMakeScale(0.8f, 0.8f);
     
     _scaleContentView = YES;
@@ -97,11 +99,14 @@
     _scaleMenuView = YES;
     _fadeMenuView = YES;
     
+    
     _parallaxEnabled = YES;
+    //UIMotionEffect和Home页背景视差效果
     _parallaxMenuMinimumRelativeValue = -15;
     _parallaxMenuMaximumRelativeValue = 15;
     _parallaxContentMinimumRelativeValue = -25;
     _parallaxContentMaximumRelativeValue = 25;
+    
     
     _bouncesHorizontally = YES;
     
@@ -115,6 +120,8 @@
     _contentViewShadowOpacity = 0.4f;
     _contentViewShadowRadius = 8.0f;
     _contentViewFadeOutAlpha = 1.0f;
+    
+    //菜单页放大缩小范围
     _contentViewInLandscapeOffsetCenterX = 50.f;
     _contentViewInPortraitOffsetCenterX  = 50.f;
     _contentViewScaleValue = 0.8f;
@@ -135,27 +142,29 @@
     return self;
 }
 
+//显示左侧菜单
 - (void)presentLeftMenuViewController
 {
     [self presentMenuViewContainerWithMenuViewController:self.leftMenuViewController];
     [self showLeftMenuViewController];
 }
 
+//显示右侧菜单
 - (void)presentRightMenuViewController
 {
     [self presentMenuViewContainerWithMenuViewController:self.rightMenuViewController];
     [self showRightMenuViewController];
 }
 
+//隐藏菜单页面
 - (void)hideMenuViewController
 {
     [self hideMenuViewControllerAnimated:YES];
 }
 
+
 - (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated
 {
-    
-    
     
     if (_contentViewController == contentViewController)
     {
@@ -202,6 +211,8 @@
         imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         imageView;
     });
+    
+    //隐藏菜单页面按钮
     self.contentButton = ({
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectNull];
         [button addTarget:self action:@selector(hideMenuViewController) forControlEvents:UIControlEventTouchUpInside];
@@ -211,6 +222,7 @@
     [self.view addSubview:self.backgroundImageView];
     [self.view addSubview:self.menuViewContainer];
     [self.view addSubview:self.contentViewContainer];
+    
     
     self.menuViewContainer.frame = self.view.bounds;
     self.menuViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -257,7 +269,7 @@
 
 #pragma mark -
 #pragma mark Private methods
-
+//菜单页面UI特性
 - (void)presentMenuViewContainerWithMenuViewController:(UIViewController *)menuViewController
 {
     self.menuViewContainer.transform = CGAffineTransformIdentity;
@@ -277,7 +289,7 @@
         [self.delegate sideMenu:self willShowMenuViewController:menuViewController];
     }
 }
-
+//显示左侧菜单
 - (void)showLeftMenuViewController
 {
     if (!self.leftMenuViewController) {
@@ -325,6 +337,7 @@
     [self statusBarNeedsAppearanceUpdate];
 }
 
+//显示右侧菜单
 - (void)showRightMenuViewController
 {
     if (!self.rightMenuViewController) {
@@ -368,6 +381,7 @@
     [self statusBarNeedsAppearanceUpdate];
 }
 
+//隐藏主页面
 - (void)hideViewController:(UIViewController *)viewController
 {
     [viewController willMoveToParentViewController:nil];
@@ -375,6 +389,7 @@
     [viewController removeFromParentViewController];
 }
 
+//隐藏菜单
 - (void)hideMenuViewControllerAnimated:(BOOL)animated
 {
     BOOL rightMenuVisible = self.rightMenuVisible;
@@ -440,6 +455,7 @@
     [self statusBarNeedsAppearanceUpdate];
 }
 
+//添加点击隐藏按钮
 - (void)addContentButton
 {
     if (self.contentButton.superview)
@@ -460,6 +476,7 @@
     }
 }
 
+//阴影
 - (void)updateContentViewShadow
 {
     if (self.contentViewShadowEnabled) {
@@ -485,7 +502,7 @@
 
 #pragma mark -
 #pragma mark iOS 7 Motion Effects (Private)
-
+//不重要
 - (void)addMenuViewControllerMotionEffects
 {
     if (self.parallaxEnabled) {
@@ -507,6 +524,7 @@
     }
 }
 
+//应该也不重要
 - (void)addContentViewControllerMotionEffects
 {
     if (self.parallaxEnabled) {
@@ -593,6 +611,7 @@
     
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
         [self updateContentViewShadow];
         
         self.originalPoint = CGPointMake(self.contentViewContainer.center.x - CGRectGetWidth(self.contentViewContainer.bounds) / 2.0,
@@ -778,33 +797,7 @@
     
 }
 
-- (void)setxContentViewController:(UITabBarController *)contentViewController animated:(BOOL)animated
-{
-   
-
-    if (!_contentViewController) {
-        
-        _contentViewController = contentViewController;
-        return;
-    }
-    [self hideViewController:_contentViewController];
-    _mainTabBarController = (XWGJTabBarController *)contentViewController;
-
-    _contentViewController = contentViewController;
-    
-    [self addChildViewController:self.contentViewController];
-    self.contentViewController.view.frame = self.view.bounds;
-    [self.contentViewContainer addSubview:self.contentViewController.view];
-    [self.contentViewController didMoveToParentViewController:self];
-    
-    [self updateContentViewShadow];
-    
-    if (self.visible) {
-        
-        [self addContentViewControllerMotionEffects];
-    }
-}
-
+ 
 - (void)setLeftMenuViewController:(UIViewController *)leftMenuViewController
 {
     if (!_leftMenuViewController) {
@@ -901,6 +894,7 @@
 - (BOOL)prefersStatusBarHidden
 {
     BOOL statusBarHidden = NO;
+    
     IF_IOS7_OR_GREATER(
         statusBarHidden = self.visible ? self.menuPrefersStatusBarHidden : self.contentViewController.prefersStatusBarHidden;
         if (self.contentViewContainer.frame.origin.y > 10) {
@@ -915,6 +909,7 @@
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
     UIStatusBarAnimation statusBarAnimation = UIStatusBarAnimationNone;
+
     IF_IOS7_OR_GREATER(
         statusBarAnimation = self.visible ? self.leftMenuViewController.preferredStatusBarUpdateAnimation : self.contentViewController.preferredStatusBarUpdateAnimation;
         if (self.contentViewContainer.frame.origin.y > 10) {

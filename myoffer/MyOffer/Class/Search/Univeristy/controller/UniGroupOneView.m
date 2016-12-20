@@ -216,13 +216,13 @@
 }
 
 
--(void)chartWithArray:(NSArray *)temps{
+-(void)chartWithArray:(NSArray *)temps_history{
 
     
-    self.chartAlertLab.hidden = temps.count > 0;
-    self.chartView.hidden = temps.count == 0;
+    self.chartAlertLab.hidden = temps_history.count > 0;
+    self.chartView.hidden = temps_history.count == 0;
     
-    if (temps.count == 0) {
+    if (temps_history.count == 0) {
         
         return;
     }
@@ -231,8 +231,7 @@
     
     NSMutableArray *ranks = [NSMutableArray array];
     
-    
-    [temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [temps_history enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        
         [years addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"year"]]];
         [ranks addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"rank"]]];
@@ -309,42 +308,24 @@
     
     for (NSInteger i = 0 ; i < self.ranks.count; i++) {
         
-        
         NSString *item = self.ranks[i];
         
-        if (max < item.integerValue) {
-            
-            max = item.integerValue;
-        }
+        if (max < item.integerValue) max = item.integerValue;
         
-        if (min > item.integerValue) {
-            
-            min = item.integerValue;
-        }
- 
-    }
-    
-    min  -= 3;
-    
-    if (min < 0) {
-        
-        min = 0;
+        if (min > item.integerValue) min = item.integerValue;
         
     }
- 
-    if (max - min < 5) {
-        
-        max = max + 2;
-        
-        
-        if (max - min < 5) {
-            
-            max = max + 2;
-            
-        }
-        
-     }
     
+    //数值要均匀显示才可以正确的点上
+    min -= 1;
+    
+    if (min <= 1 )  min = 0;
+    
+    if (min > 100) min -= 20;
+    
+    if (max - min < 4) max = min + 4;
+    
+    if ((max - min) % 4 ) max =  max - (max - min) % 4 + 4;
     
     return CGRangeMake(min,max);
     

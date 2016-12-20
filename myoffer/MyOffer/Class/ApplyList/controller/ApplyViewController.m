@@ -536,8 +536,10 @@
             
             [self.cancelUniversityList removeObject:university.NO_id];
             [self.cancelSetions removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.section]];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-        // [self.tableView reloadData];
+         
+            [UIView performWithoutAnimation:^{
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            }];
             
         }
         

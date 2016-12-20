@@ -10,7 +10,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "KDKeychain.h"
-#import "MeViewController.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
 #import "UMSocial.h"
@@ -20,7 +19,6 @@
 #import "UMSocialQQHandler.h"
 #import "LeftMenuViewController.h"
 #import "APService.h"
-#import "NotificationViewController.h"
 #import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
@@ -30,6 +28,7 @@
     NSString *_accessToken;
  }
 @property(nonatomic,strong)XWGJTabBarController *mainTabBarController;
+
 @end
 
 @implementation AppDelegate
@@ -57,9 +56,8 @@ static AppDelegate *__sharedDelegate;
     //初始化语言文件
     [InternationalControl initUserLanguage];
  
-    
+    //创建主控制
     [self makeRootController];
-    
     
 //    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
     
@@ -89,26 +87,28 @@ static AppDelegate *__sharedDelegate;
     //控制器初始化
     XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
     self.mainTabBarController = mainTabBarController;
+    
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
-    leftMenuViewController.contentViewController = mainTabBarController;
+    leftMenuViewController.mainTabBarController = mainTabBarController;
     
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
-    sideMenuViewController.view.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
-    // sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    
+    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54);
+//     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
     sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
+    
     self.window.rootViewController = sideMenuViewController;
+    
     [self.window makeKeyAndVisible];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
-    
     
     //产品引导页面
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
@@ -133,13 +133,16 @@ static AppDelegate *__sharedDelegate;
                                                        UIUserNotificationTypeSound |
                                                        UIUserNotificationTypeAlert)
                                            categories:nil];
-    } else {
+    }
+    /*
+    else {
         //categories 必须为nil
         [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                        UIRemoteNotificationTypeSound |
                                                        UIRemoteNotificationTypeAlert)
                                            categories:nil];
     }
+   */
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -295,7 +298,7 @@ static AppDelegate *__sharedDelegate;
     
     [Keychain writeKeychainWithIdentifier:@"token" data:[token dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [[NSNotificationCenter  defaultCenter] postNotificationName:@"newMessage" object:[NSString stringWithFormat:@"%ld",self.mainTabBarController.selectedIndex]];
+//    [[NSNotificationCenter  defaultCenter] postNotificationName:@"newMessage" object:[NSString stringWithFormat:@"%ld",self.mainTabBarController.selectedIndex]];
     
 }
 
@@ -445,8 +448,6 @@ static AppDelegate *__sharedDelegate;
 
     }
 }
-
-
 
 
 

@@ -81,7 +81,6 @@
 - (void)presentRightMenuViewController;
 - (void)hideMenuViewController;
 - (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;
-- (void)setxContentViewController:(UITabBarController *)contentViewController animated:(BOOL)animated;
 
 @end
 

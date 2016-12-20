@@ -13,8 +13,6 @@
 + (instancetype)sharedDelegate;
 
 @property (strong, nonatomic) UIWindow *window;
-//@property (readonly) UITabBarController *tabBarController;
-@property (strong,nonatomic) XWGJTabBarController *xtabBarController;
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated;
 
 - (BOOL)isLogin;

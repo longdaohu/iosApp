@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RESideMenu.h"
+//#import "RESideMenu.h"
 
 
 @interface LeftMenuViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic,strong)XWGJTabBarController *contentViewController;
+@property(nonatomic,strong)XWGJTabBarController *mainTabBarController;
 @end
