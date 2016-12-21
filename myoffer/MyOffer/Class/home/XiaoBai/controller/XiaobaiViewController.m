@@ -194,13 +194,12 @@
 //添加留学流程
 - (void)makeWebViewWithHeight:(CGFloat)height{
  
-    WebViewController *webVC = [[WebViewController alloc] init];
+    WebViewController *webVC = [[WebViewController alloc] initWithPath:[NSString stringWithFormat:@"%@study_white",DOMAINURL]];
     [self addChildViewController:webVC];
-    webVC.path = [NSString stringWithFormat:@"%@study_white",DOMAINURL];
     [self.bgView addSubview:webVC.view];
     webVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height - XNAV_HEIGHT);
-    webVC.web_wk.frame = webVC.view.bounds;
-    
+    webVC.webRect = webVC.view.bounds;
+
 }
 
 //添加申请攻略
@@ -340,10 +339,7 @@ static NSString *subjectIdentify = @"subjectCell";
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
  
-    WebViewController *help = [[WebViewController alloc] init];
-    
-    help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
-    
+    WebViewController *help = [[WebViewController alloc] initWithPath: [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row]];
     [self.navigationController pushViewController:help animated:YES];
     
 }

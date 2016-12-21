@@ -11,6 +11,7 @@
 
 @interface WebViewController : BaseViewController
 @property(nonatomic,copy)NSString *path;
-@property(nonatomic,strong)WKWebView *web_wk;
+@property(nonatomic,assign)CGRect webRect;
+- (instancetype)initWithPath:(NSString *)path;
 
 @end

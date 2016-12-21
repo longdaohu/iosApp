@@ -23,10 +23,24 @@
 @property(nonatomic,strong)KDProgressHUD *hud;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
+@property(nonatomic,strong)WKWebView *web_wk;
 
 @end
 
 @implementation WebViewController
+
+- (instancetype)initWithPath:(NSString *)path{
+    
+    self = [super init];
+    
+    if (self) {
+        
+        self.path = path;
+    }
+    return self;
+}
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -82,7 +96,6 @@
 -(void)makeUI
 {
     
-     
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     bundleName = [bundleName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
@@ -114,6 +127,14 @@
     self.web_wk.navigationDelegate = self;
     
 }
+
+- (void)setWebRect:(CGRect)webRect{
+
+    _webRect = webRect;
+    
+    self.web_wk.frame = webRect;
+}
+
 
 #pragma mark ——————  WKWebViewDeleage
 // 页面开始加载时调用

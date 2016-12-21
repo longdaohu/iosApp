@@ -25,6 +25,17 @@
 
 @implementation MBTIViewController
 
+- (instancetype)initWithPath:(NSString *)path{
+
+    self = [super init];
+    
+    if (self) {
+        
+        self.path = path;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -207,9 +218,7 @@
                 //                NSMutableURLRequest *request = [navigationAction.request mutableCopy];
                 //                [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
                 
-                WebViewController *webPage = [[WebViewController alloc] init];
-                webPage.path = absoluteString;
-                [self.navigationController pushViewController:webPage animated:YES];
+                [self.navigationController pushViewController:[[WebViewController alloc] initWithPath:absoluteString] animated:YES];
                 
                 return NO;
                 

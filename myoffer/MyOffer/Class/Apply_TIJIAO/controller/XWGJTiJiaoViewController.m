@@ -974,8 +974,7 @@ typedef enum {
         
     }else{
         
-        WebViewController *adver = [[WebViewController alloc] init];
-        adver.path                     = @"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf";
+        WebViewController *adver = [[WebViewController alloc] initWithPath:@"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf"];
         [self.navigationController pushViewController:adver animated:YES];
     
     }

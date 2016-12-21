@@ -11,4 +11,6 @@
 @interface MBTIViewController : BaseViewController
 @property(nonatomic,copy)NSString *path;
 
+- (instancetype)initWithPath:(NSString *)path;
+
 @end

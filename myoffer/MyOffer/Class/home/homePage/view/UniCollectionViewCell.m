@@ -44,9 +44,9 @@
         //cell背景
         self.bgView                     =[[UIView alloc] init];
         self.bgView.backgroundColor     = XCOLOR_WHITE;
-        self.bgView.layer.cornerRadius  = 5;
-        self.bgView.layer.borderWidth   = 1;
-        self.bgView.layer.borderColor   = XCOLOR_CLEAR.CGColor;
+        self.bgView.layer.cornerRadius  = CORNER_RADIUS;
+//        self.bgView.layer.borderWidth   = 1;
+//        self.bgView.layer.borderColor   = XCOLOR_CLEAR.CGColor;
         [self.contentView addSubview:self.bgView];
         self.bgView.layer.shadowOffset  = CGSizeMake(3, 3);
         self.bgView.layer.shadowOpacity = 0.20;

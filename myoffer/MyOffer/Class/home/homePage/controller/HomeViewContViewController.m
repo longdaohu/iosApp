@@ -16,7 +16,6 @@
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
 #import "YYSingleNewsBO.h"
-#import "YYAutoLoopView.h"
 #import "WYLXViewController.h"
 #import "MessageDetaillViewController.h"
 #import "PipeiEditViewController.h"
@@ -34,13 +33,14 @@
 #import "MBTIViewController.h"
 #import "UniversityNew.h"
 #import "HeadItem.h"
- 
-@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate,UIAlertViewDelegate>
+#import "SDCycleScrollView.h"
+
+@interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
 //搜索工具条
 @property(nonatomic,strong)HomeSearchView *searchView;
 //轮播图
-@property(nonatomic,strong)YYAutoLoopView *autoLoopView;
+@property(nonatomic,strong)SDCycleScrollView *autoLoopView;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //下拉
@@ -51,7 +51,8 @@
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 //分组数据
 @property(nonatomic,strong)NSMutableArray *groups;
-
+//轮播图数据
+@property(nonatomic,strong)NSArray *banner;
 @end
 
 @implementation HomeViewContViewController
@@ -182,7 +183,6 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorHomepage parameters:nil success:^(NSInteger statusCode, NSArray *response) {
         
-        
         [self dataSourseWithFresh:refresh GroupIndex:0];
         
         [self hotCityWithResponse:response];
@@ -224,11 +224,9 @@
 //留学目的地UI设置
 -(void)hotCityWithResponse:(NSArray *)response
 {
-    NSArray *temp_city =  [response copy];
-    NSRange cityRange = NSMakeRange(1, 3);
-    NSArray *temp_cities = temp_city.count > 4 ? [[temp_city subarrayWithRange:cityRange] copy] : temp_city;
     UniDetailGroup *groupone = self.groups[0];
     groupone.cellHeight = XSCREEN_WIDTH * 0.4;
+    NSArray *temp_cities = response.count > 4 ? [response subarrayWithRange:NSMakeRange(1, 3)] : response;
     groupone.items = temp_cities;
 }
 
@@ -245,21 +243,17 @@
 //热门院校UI设置
 -(void)hotUniverstiyWithResponse:(NSArray *)response
 {
-    NSArray *temp_Unies = response;
     
     NSMutableArray *temp_universities = [NSMutableArray array];
     
-    for (NSDictionary *uni_Info in temp_Unies) {
-        
-         HotUniversityFrame *uniFrame = [HotUniversityFrame frameWithUniversity:uni_Info];
+    [response enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        HotUniversityFrame *uniFrame = [HotUniversityFrame frameWithUniversity:obj];
         [temp_universities addObject:uniFrame];
-    }
-    
+    }];
     
     UniDetailGroup *groupthree = self.groups[2];
     
     if (temp_universities.count > 0) {
-        
         HotUniversityFrame *uniFrame = temp_universities[0];
         groupthree.cellHeight = uniFrame.cellHeight;
     }
@@ -277,32 +271,32 @@
     [self startAPIRequestWithSelector:kAPISelectorMessagePromotions  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        NSMutableArray *items = [NSMutableArray array];
+        NSMutableArray *banner = [NSMutableArray array];
+        NSArray *banner_temps = (NSArray *)response;
         
-        NSArray *advertise_Arr = (NSArray *)response;
-        
-        for (NSInteger i = 0; i < advertise_Arr.count; i++) {
-            
+        [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-            new.message = advertise_Arr[i];
+            new.message = banner_temps[idx];
             new.newsTitle = @"";
-            new.index = i;
-            [items addObject:new];
-        }
+            new.index = idx;
+            [banner addObject:new];
+        }];
         
-        items.count ? weakSelf.autoLoopView.banners  = [items mutableCopy] : nil;
-       
-        self.autoLoopView.userInteractionEnabled = items.count ? YES : NO;
+        weakSelf.banner = [banner copy];
         
-        [self.TableView.mj_header endRefreshing];
+        weakSelf.autoLoopView.imageURLStringsGroup  =  [banner valueForKey:@"imageUrl"];
         
-        [self.TableView reloadData];
+        weakSelf.autoLoopView.userInteractionEnabled = banner.count ? YES : NO;
+        
+        [weakSelf.TableView.mj_header endRefreshing];
+        
+        [weakSelf.TableView reloadData];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        self.autoLoopView.userInteractionEnabled = NO;
+        weakSelf.autoLoopView.userInteractionEnabled = NO;
         
-        [self.TableView.mj_header endRefreshing];
+        [weakSelf.TableView.mj_header endRefreshing];
         
     }];
     
@@ -335,7 +329,6 @@
 
     XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
-        
         [weakSelf openLeftMenu];
     }];
     
@@ -400,7 +393,7 @@
     self.fresh_Header.gifView.transform = CGAffineTransformMakeScale(0.2, 0.2);
 
     NSMutableArray *refreshingImages = [NSMutableArray array];
-    for (int i = 0; i<=10; i++) {
+    for (int i = 0; i<= 10; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Pre-comp 1_000%d", i]];
         [refreshingImages addObject:image];
     }
@@ -438,32 +431,33 @@
 }
 
 
+
 /**
  *  创建轮播图头部
  */
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
     XWeakSelf
-    
-    CGFloat AY =  XSCREEN_HEIGHT * 0.7 * 0.6 + 20;
-    
-    CGFloat AH =  XSCREEN_HEIGHT * 0.7 - AY;
-    
-    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0,AY, XSCREEN_WIDTH,AH)];
-    
-    [bgView addSubview:self.autoLoopView];
-    
-    self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
-        
-        [weakSelf CaseLandingPageWithBan:StatusBarBannerNews.message_url];
+    CGFloat autoY =  XSCREEN_HEIGHT * 0.7 * 0.6 + 20;
+    CGFloat autoH =  XSCREEN_HEIGHT * 0.7 - autoY;
+    CGFloat autoX =  0;
+    CGFloat autoW =  XSCREEN_WIDTH;
+    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
+    self.autoLoopView = autoLoopView;
+    autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+//  autoLoopView.titlesGroup = titles;
+    autoLoopView.currentPageDotColor = XCOLOR_RED;
+    [bgView addSubview:autoLoopView];
+    autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
+         YYSingleNewsBO  *item  = weakSelf.banner[index];
+        [weakSelf CaseLandingPageWithBan:item.message_url];
         
     };
-    
 }
-
 
 #pragma mark ———————— UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
     
     self.myToolbar.top = 20 - scrollView.contentOffset.y;
     
@@ -538,22 +532,20 @@
          }
           break;
           case 1:{
-            
+              
             HomeSecondTableViewCell *cell =[HomeSecondTableViewCell cellInitWithTableView:tableView];
             cell.items = group.items[indexPath.row];
             cell.delegate = self;
-             return cell;
-        
+              
+            return cell;
         }
              break;
             default:
         {
-
             HomeThirdTableViewCell *cell =[HomeThirdTableViewCell cellInitWithTableView:tableView];
             cell.uniFrames = group.items[indexPath.row];
             cell.delegate = self;
             return cell;
-
          }
             break;
     }
@@ -615,18 +607,6 @@
     [self.navigationController pushUniversityViewControllerWithID:uni.NO_id animated:YES];
 }
 
-#pragma mark ——— UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-     if (buttonIndex){
-       
-         [self CaseAppstore];
-         
-    }
-    
-}
-
-
 //显示菜单列表
 -(void)openLeftMenu{
     
@@ -637,13 +617,10 @@
 //检查版本更新
 -(void)checkAPPVersion
 {
-    NSString *urlStr = @"https://itunes.apple.com/lookup?id=1016290891";
-    NSURL *url = [NSURL URLWithString:urlStr];
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
     [NSURLConnection connectionWithRequest:req delegate:self];
 }
-
-
+//检查版本更新
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     
@@ -659,9 +636,18 @@
     NSString *currentVersionStr = [currentVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
     
     if (currentVersionStr.integerValue < storeVersionStr.integerValue) {
-//        @"忽略此版本"
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"有可用的新版本！" delegate:self cancelButtonTitle:@"忽略此版本" otherButtonTitles:@"访问Appstore",nil];
-        [alert show];
+
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"有可用的新版本！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"忽略此版本" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"访问Appstore" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self CaseAppstore];
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:commitAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
     }
     
 }
@@ -757,13 +743,13 @@
 //判断是否有智能匹配数据或收藏学校
 -(void)checkZhiNengPiPei
 {
-     if (LOGIN) {
-        XWeakSelf
-         [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-             weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-         }];
-     }
-}
+    if (!LOGIN) return;
+
+    XWeakSelf
+     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+         weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+     }];
+ }
 
 //退出登录
 -(void)caseBackAndLogout
@@ -788,12 +774,7 @@
 -(void)leftViewMessage
 {
     
-    
-    if(!LOGIN){
-        
-        self.leftView.countStr = @"0";
-        
-    }
+    if(!LOGIN) self.leftView.countStr = @"0";
     
     if (LOGIN && [self checkNetWorkReaching]) {
         
@@ -832,6 +813,7 @@
 -(void)CaseLiuXueXiaoBai
 {
     [MobClick event:@"XiaoBai"];
+    
     [self.navigationController pushViewController:[[XiaobaiViewController alloc] init] animated:YES];
 }
 
@@ -862,11 +844,7 @@
 {
     [MobClick event:@"PiPei"];
     
-    if (!LOGIN) {
-        
-        self.recommendationsCount = 0;
-    }
-    
+    if (!LOGIN)  self.recommendationsCount = 0;
     
     if (self.recommendationsCount > 0) {
         
@@ -874,15 +852,12 @@
         
         [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
         
-    }else{
-        
-        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+        return;
         
     }
-    
-    
-
-
+        
+     [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+ 
 }
 //跳转服务包
 -(void)CaseServerMall
@@ -910,17 +885,11 @@
     {
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
         RequireLogin
-        
-        MBTIViewController *detail =[[MBTIViewController alloc] init];
-        detail.path = path;
-        [self.navigationController pushViewController:detail animated:YES];
-        
+        [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
         
     }else{
         
-        WebViewController *detail =[[WebViewController alloc] init];
-        detail.path = path;
-        [self.navigationController pushViewController:detail animated:YES];
+        [self.navigationController pushViewController:[[WebViewController alloc] initWithPath:path] animated:YES];
     }
  
 }
@@ -954,16 +923,17 @@
 }
 
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
+
 -(void)userDidClickItem
 {
-    if (LOGIN) {
+    if (!LOGIN) return;
         
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self CasePipeiWithItemType:self.clickType];
+     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self CasePipeiWithItemType:self.clickType];
 
-        });
-    }
+    });
+    
 }
 
 //跳转到appstore下载页面
@@ -971,11 +941,9 @@
 {
     NSString *appid = @"1016290891";
     
-    NSString *str = [NSString stringWithFormat:
-                     
-                     @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid];
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
+                                                                     
+                                                                     @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid]]];
 }
 
 
