@@ -17,7 +17,7 @@
 
 @implementation HeadItem
 
-+ (instancetype)itemWithTitle:(NSString *)title imageName:(NSString *)imageName
++ (instancetype)itemInitWithTitle:(NSString *)title imageName:(NSString *)imageName
 {
     HeadItem *item = [[HeadItem alloc] init];
     item.title     = title;

@@ -253,7 +253,6 @@
 		AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */; };
 		AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */; };
 		AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A531D5B23F500DD7939 /* HeadItem.m */; };
-		AEA24A8D1D5B23F600DD7939 /* HeadItembgView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A551D5B23F500DD7939 /* HeadItembgView.m */; };
 		AEA24A8E1D5B23F600DD7939 /* HomeFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A571D5B23F500DD7939 /* HomeFirstTableViewCell.m */; };
 		AEA24A8F1D5B23F600DD7939 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A591D5B23F500DD7939 /* HomeHeaderView.m */; };
 		AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A5B1D5B23F600DD7939 /* HomeSearchView.m */; };
@@ -859,8 +858,6 @@
 		AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUniversityFrame.m; sourceTree = "<group>"; };
 		AEA24A521D5B23F500DD7939 /* HeadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadItem.h; sourceTree = "<group>"; };
 		AEA24A531D5B23F500DD7939 /* HeadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadItem.m; sourceTree = "<group>"; };
-		AEA24A541D5B23F500DD7939 /* HeadItembgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadItembgView.h; sourceTree = "<group>"; };
-		AEA24A551D5B23F500DD7939 /* HeadItembgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadItembgView.m; sourceTree = "<group>"; };
 		AEA24A561D5B23F500DD7939 /* HomeFirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFirstTableViewCell.h; sourceTree = "<group>"; };
 		AEA24A571D5B23F500DD7939 /* HomeFirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFirstTableViewCell.m; sourceTree = "<group>"; };
 		AEA24A581D5B23F500DD7939 /* HomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
@@ -2258,8 +2255,8 @@
 		AEA24A3F1D5B23F500DD7939 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A471D5B23F500DD7939 /* guanggao */,
 				AEA24A4A1D5B23F500DD7939 /* homePage */,
+				AEA24A471D5B23F500DD7939 /* guanggao */,
 				AEA24A661D5B23F600DD7939 /* woyaoliuxue */,
 				AEA24A731D5B23F600DD7939 /* XiaoBai */,
 			);
@@ -2310,8 +2307,6 @@
 			children = (
 				AEA24A521D5B23F500DD7939 /* HeadItem.h */,
 				AEA24A531D5B23F500DD7939 /* HeadItem.m */,
-				AEA24A541D5B23F500DD7939 /* HeadItembgView.h */,
-				AEA24A551D5B23F500DD7939 /* HeadItembgView.m */,
 				AEA24A581D5B23F500DD7939 /* HomeHeaderView.h */,
 				AEA24A591D5B23F500DD7939 /* HomeHeaderView.m */,
 				AEA24A5A1D5B23F500DD7939 /* HomeSearchView.h */,
@@ -3577,7 +3572,6 @@
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AEA24BBF1D5B264300DD7939 /* MessageDetaillViewController.m in Sources */,
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
-				AEA24A8D1D5B23F600DD7939 /* HeadItembgView.m in Sources */,
 				AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */,
 				AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */,
 				AE7107AA1D7687FC00019B1F /* ShareViewController.m in Sources */,

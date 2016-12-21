@@ -7,9 +7,9 @@
 //
 #import <QuartzCore/QuartzCore.h>
 #import "HomeHeaderView.h"
-#import "HeadItembgView.h"
 #import "XUToolbar.h"
 #import "TopNavView.h"
+#import "HeadItem.h"
 
 @interface HomeHeaderView ()<UIScrollViewDelegate>
 //logo图片
@@ -17,19 +17,22 @@
 //背景图片
 @property (strong, nonatomic)TopNavView *upViewBackgroudView;
 //button背景
-@property(nonatomic,strong)HeadItembgView *buttonsBgView;
-
+@property(nonatomic,strong)UIView *itemsBgView;
+//名称数组
+@property(nonatomic,strong)NSArray *itemTitles;
+//图片数组
+@property(nonatomic,strong)NSArray *itemImages;
 @end
 
 @implementation HomeHeaderView
 
  
-+ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HeadItembgViewBlock)actionBlock
++ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock
 {
     
     HomeHeaderView *headerView = [[HomeHeaderView alloc]  initWithFrame:frame];
     
-    headerView.buttonsBgView.actionBlock = actionBlock;
+    headerView.actionBlock = actionBlock;
     
     return headerView;
 }
@@ -47,6 +50,28 @@
     return self;
 }
 
+-(NSArray *)itemImages
+{
+    if (!_itemImages) {
+        
+        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"Home_mbti",@"Home_super",@"home_Mall"];
+    }
+    
+    return _itemImages;
+}
+
+-(NSArray *)itemTitles
+{
+    if (!_itemTitles) {
+        
+        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务套餐"];
+        
+    }
+    
+    return _itemTitles;
+}
+
+
 -(void)makeUI{
 
     self.upView =[[UIView alloc] init];
@@ -63,12 +88,26 @@
     [self.upView addSubview:self.Logo];
     
  
-    self.buttonsBgView  =[HeadItembgView bgview];
-    [self.upView addSubview:self.buttonsBgView];
+    self.itemsBgView  =[[UIView alloc] init];
+    [self.upView addSubview:self.itemsBgView];
+    
+    for (int i = 0 ;i < self.itemTitles.count ; i++) {
+        
+        HeadItem *item = [HeadItem itemInitWithTitle:self.itemTitles[i] imageName:self.itemImages[i]];
+        item.tag       =  i;
+        item.actionBlock = ^(NSInteger index){
+            [self buttonClick:index];
+        };
+        [self.itemsBgView addSubview:item];
+    }
+
 
 }
 
+- (void)buttonClick:(NSInteger)index{
 
+    if (self.actionBlock) self.actionBlock(index);
+}
 
 
 -(void)layoutSubviews
@@ -91,11 +130,24 @@
     CGFloat LogoH   = upH * 0.15;
     self.Logo.frame = CGRectMake(LogoX, LogoY, LogoW, LogoH);
     
-    CGFloat bbgX = 0;
-    CGFloat bbgY = CGRectGetMaxY(self.Logo.frame) + ITEM_MARGIN;
-    CGFloat bbgW = contentSize.width;
-    CGFloat bbgH = upH - bbgY - 20;
-    self.buttonsBgView.frame = CGRectMake(bbgX, bbgY, bbgW,bbgH);
+    CGFloat itemsBgX = 0;
+    CGFloat itemsBgY = CGRectGetMaxY(self.Logo.frame) + ITEM_MARGIN;
+    CGFloat itemsBgW = contentSize.width;
+    CGFloat itemsBgH = upH - itemsBgY - 20;
+    self.itemsBgView.frame = CGRectMake(itemsBgX, itemsBgY, itemsBgW,itemsBgH);
+    
+    
+    
+    CGFloat itemW =  itemsBgW / 3;
+    CGFloat itemH =  itemsBgH * 0.5;
+    for (int index = 0 ;index < self.itemsBgView.subviews.count ; index++) {
+        HeadItem *item = (HeadItem *)self.itemsBgView.subviews[index];
+        CGFloat itemX  =  (index % 3) * itemW;
+        CGFloat itemY  =  itemH  * (index / 3);
+        item.frame     = CGRectMake(itemX, itemY, itemW, itemH);
+        
+    }
+
    
 }
 

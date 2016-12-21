@@ -42,19 +42,14 @@
 
 -(void)tap{
    
-    if (self.actionBlock) {
-        
-        self.actionBlock();
-        
-    }
-}
+    if (self.actionBlock)  self.actionBlock();
+    
+ }
 
 +(instancetype)ViewWithFrame:(CGRect)frame
 {
     
-    HomeSearchView *searchView =[[HomeSearchView alloc] initWithFrame:frame];
-    
-    return searchView;
+    return [[HomeSearchView alloc] initWithFrame:frame];
 }
 
 

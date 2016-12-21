@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^itemBlock)(NSInteger itemTag);
+typedef void(^itemBlock)(NSInteger index);
 @interface HeadItem : UIView
 @property(nonatomic,copy)itemBlock actionBlock;
-+ (instancetype)itemWithTitle:(NSString *)title imageName:(NSString *)imageName;
++ (instancetype)itemInitWithTitle:(NSString *)title imageName:(NSString *)imageName;
 
 @end

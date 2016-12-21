@@ -45,12 +45,10 @@
         self.bgView                     =[[UIView alloc] init];
         self.bgView.backgroundColor     = XCOLOR_WHITE;
         self.bgView.layer.cornerRadius  = CORNER_RADIUS;
-//        self.bgView.layer.borderWidth   = 1;
-//        self.bgView.layer.borderColor   = XCOLOR_CLEAR.CGColor;
-        [self.contentView addSubview:self.bgView];
         self.bgView.layer.shadowOffset  = CGSizeMake(3, 3);
         self.bgView.layer.shadowOpacity = 0.20;
-        
+        [self.contentView addSubview:self.bgView];
+
         //学校logo
         self.logoView                   = [[LogoView alloc] init];
         [self.bgView addSubview:self.logoView];
@@ -125,17 +123,21 @@
    
     NSArray *tags = unversity.tags.count > 4 ? [unversity.tags subarrayWithRange:NSMakeRange(0, 4)] : unversity.tags;
     
-    for (int i = 0; i < tags.count; i ++) {
+    [tags enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
-        sender.adjustsFontSizeToFitWidth = YES;
         sender.layer.borderColor         = XCOLOR(222.0, 222.0, 222.0).CGColor;
         sender.layer.borderWidth         = 1;
+        sender.layer.masksToBounds = YES;
         [self.tagsView addSubview:sender];
-        sender.text = unversity.tags[i];
-        sender.frame = [uniFrame.tagFrames[i]  CGRectValue];
+        sender.text = unversity.tags[idx];
+        sender.frame = [uniFrame.tagFrames[idx]  CGRectValue];
         sender.layer.cornerRadius = 0.5 * sender.frame.size.height;
-     }
+        
+    }];
+
+    
+       
     
 }
 
