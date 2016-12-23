@@ -12,7 +12,6 @@
                 <outlet property="bottomView" destination="IVk-0U-C6A" id="Z6l-aX-IV6"/>
                 <outlet property="selectCountLabel" destination="xma-Zp-4hY" id="r5S-XJ-Qxu"/>
                 <outlet property="submitBtn" destination="1rP-vW-A8A" id="WLr-y9-QpU"/>
-                <outlet property="tableView" destination="cml-7c-rxl" id="HT8-H0-aTs"/>
                 <outlet property="view" destination="utl-NO-JXl" id="ROz-mL-SI8"/>
             </connections>
         </placeholder>
@@ -21,13 +20,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="cml-7c-rxl">
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="Qte-Hd-q6K"/>
-                        <outlet property="delegate" destination="-1" id="h8r-6T-UY2"/>
-                    </connections>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVk-0U-C6A" userLabel="bottomView">
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选择：0个  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="xma-Zp-4hY">
@@ -77,11 +69,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="IVk-0U-C6A" secondAttribute="bottom" id="5Ta-9M-FZE"/>
                 <constraint firstItem="IVk-0U-C6A" firstAttribute="leading" secondItem="utl-NO-JXl" secondAttribute="leading" id="Bn3-TM-GBQ"/>
-                <constraint firstItem="cml-7c-rxl" firstAttribute="top" secondItem="utl-NO-JXl" secondAttribute="top" id="FGq-qQ-nMz"/>
                 <constraint firstAttribute="trailing" secondItem="IVk-0U-C6A" secondAttribute="trailing" id="Nj6-Gb-yQN"/>
-                <constraint firstAttribute="trailing" secondItem="cml-7c-rxl" secondAttribute="trailing" id="Xcd-lO-KCX"/>
-                <constraint firstItem="cml-7c-rxl" firstAttribute="leading" secondItem="utl-NO-JXl" secondAttribute="leading" id="bvi-EJ-3zb"/>
-                <constraint firstAttribute="bottom" secondItem="cml-7c-rxl" secondAttribute="bottom" constant="50" id="vHn-KO-cXa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-17" y="330"/>

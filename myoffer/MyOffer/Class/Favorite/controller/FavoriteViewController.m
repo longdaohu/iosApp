@@ -14,9 +14,8 @@
 #import "UniversityCell.h"
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) XWGJnodataView *noDataView;
+@property (strong, nonatomic) DefaultTableView *tableView;
 //收藏学校数据
 @property (strong, nonatomic) NSArray *favor_Unies;
 
@@ -33,6 +32,7 @@
     [MobClick endLogPageView:@"page收藏"];
     
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -58,7 +58,8 @@
 -(void)makeTableView
 {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
@@ -68,18 +69,6 @@
 }
 
 
--(XWGJnodataView *)noDataView{
-
-    if (!_noDataView) {
-
-        _noDataView =[XWGJnodataView noDataView];
-        _noDataView.errorStr= GDLocalizedString(@"Favorite-NOTI");
-        _noDataView.hidden = YES;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-    }
-    
-    return _noDataView;
-}
 
 - (void)viewDidLoad {
     
@@ -94,9 +83,8 @@
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
         
-        self.noDataView.hidden = NO;
-        
-        self.noDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
+        [self.tableView emptyViewWithHiden:NO];
+        [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
         
         return;
     }
@@ -128,9 +116,11 @@
    
     self.favor_Unies = [uni_temps copy];
     
-    self.noDataView.hidden = self.favor_Unies.count == 0 ? NO : YES;
-    
+    [self.tableView emptyViewWithHiden:self.favor_Unies.count > 0];
+    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
+
     [self.tableView reloadData];
+    
 
 }
 

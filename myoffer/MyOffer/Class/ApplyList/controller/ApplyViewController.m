@@ -17,8 +17,8 @@
 
 #define SECTIONFOOTERHEIGHT  10
 
-@interface ApplyViewController ()<UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface ApplyViewController ()<UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@property (strong, nonatomic)  DefaultTableView *tableView;
 //模型数组
 @property(nonatomic,strong)NSMutableArray *groups;
 //已选中课程ID数组
@@ -31,7 +31,7 @@
 @property(nonatomic,strong)NSMutableArray *cancelSetions;
 //删除cell对就的indexpath数组
 @property(nonatomic,strong)NSMutableArray *cancelindexPathes;
-@property(nonatomic,strong)XWGJnodataView *NDataView;
+//@property(nonatomic,strong)XWGJnodataView *NDataView;
 //删除按钮
 @property(nonatomic,strong)UIButton *cancelBottomButton;
 //提交按钮
@@ -65,8 +65,10 @@
 -(void)presentViewWillAppear{
 
     if (![self checkNetworkState]) {
-        self.NDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
-        self.NDataView.hidden = NO;
+        
+        [self emptyViewHiden:NO];
+        [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+ 
         return;
     }
     
@@ -80,7 +82,9 @@
         
         [self.groups removeAllObjects];
         [self.tableView reloadData];
-        self.NDataView.hidden = NO;
+        
+        [self emptyViewHiden:NO];
+
     }
     
     
@@ -160,6 +164,17 @@
     
 }
 
+-(void)makeTableView
+{
+    
+    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view insertSubview:self.tableView atIndex:0];
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+}
+
 
 //网络数据请求
 - (void)RequestDataSourse {
@@ -180,16 +195,16 @@
 
     if(response.count == 0)
     {
-        self.NDataView.hidden = NO;
         
+        [self emptyViewHiden:NO];
+
         self.navigationItem.rightBarButtonItem.enabled = NO;
-        
         self.submitBtn.enabled = NO;
         
         return ;
     }
     
- 
+
     
     NSMutableArray *temp_group = [NSMutableArray array];
     
@@ -235,12 +250,7 @@
 
 -(void)makeUI
 {
-    
-    self.NDataView =[XWGJnodataView noDataView];
-    self.NDataView.hidden = YES;
-    self.NDataView.errorStr = GDLocalizedString(@"ApplicationList-noData");//Duang!请添加您的意向学校吧！
-    [self.view insertSubview:self.NDataView  aboveSubview:self.tableView];
-    
+    [self makeTableView];
     [self makeOther];
     [self makeButtonItem];
     [self makeCancelBottonButtonView];
@@ -373,9 +383,9 @@
                                       }
                                     [weakSelf.tableView reloadSections:reloadSet withRowAnimation:UITableViewRowAnimationFade];
                                   
+                                  [weakSelf  emptyViewHiden:(weakSelf.groups.count  > 0)];
                                   
-                                  weakSelf.NDataView.hidden  = weakSelf.groups.count  > 0;
-                                  weakSelf.submitBtn.enabled = weakSelf.groups.count  > 0;
+                                   weakSelf.submitBtn.enabled = weakSelf.groups.count  > 0;
                                   
                                   if (weakSelf.groups.count == 0) {
                                       [weakSelf bottomUp:YES];
@@ -384,6 +394,14 @@
                                   
                               }];
 }
+
+- (void)emptyViewHiden:(BOOL)hiden{
+    
+    [self.tableView emptyViewWithHiden:hiden];
+    [self.tableView emptyViewWithError:@"Duang!请添加您的意向学校吧！"];
+    
+}
+
 
 //对数组进行排序
 -(NSArray *)sortArray:(NSArray *)contents

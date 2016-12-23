@@ -378,6 +378,8 @@
 		AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1F1D5B283700DD7939 /* UK.jpg */; };
 		AEA24C301D5B283700DD7939 /* wel_CN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C201D5B283700DD7939 /* wel_CN.png */; };
 		AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C211D5B283700DD7939 /* wel_EN.png */; };
+		AEA5FDB61E0D32C70064B1B5 /* DefaultTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */; };
+		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
 		AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* UniversityNew.m */; };
 		AED5A85A1DDEF25800E70289 /* PipeiGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A8591DDEF25800E70289 /* PipeiGroup.m */; };
 		AED5A85D1DDEF5AF00E70289 /* PipeiEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */; };
@@ -1077,6 +1079,10 @@
 		AEA24C1F1D5B283700DD7939 /* UK.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK.jpg; sourceTree = "<group>"; };
 		AEA24C201D5B283700DD7939 /* wel_CN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_CN.png; sourceTree = "<group>"; };
 		AEA24C211D5B283700DD7939 /* wel_EN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_EN.png; sourceTree = "<group>"; };
+		AEA5FDB21E0D32C70064B1B5 /* DefaultTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTableView.h; sourceTree = "<group>"; };
+		AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTableView.m; sourceTree = "<group>"; };
+		AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyDataView.h; sourceTree = "<group>"; };
+		AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyDataView.m; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* UniversityNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityNew.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* UniversityNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityNew.m; sourceTree = "<group>"; };
 		AED5A8581DDEF25800E70289 /* PipeiGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiGroup.h; path = ../controller/PipeiGroup.h; sourceTree = "<group>"; };
@@ -2898,6 +2904,10 @@
 				AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */,
 				AE5A75D91DEEDA5300F02ABB /* TopNavView.h */,
 				AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */,
+				AEA5FDB21E0D32C70064B1B5 /* DefaultTableView.h */,
+				AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */,
+				AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */,
+				AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3435,6 +3445,7 @@
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
 				AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */,
 				AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */,
+				AEA5FDB61E0D32C70064B1B5 /* DefaultTableView.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
@@ -3589,6 +3600,7 @@
 				AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */,
 				AEA24B801D5B25E000DD7939 /* OptionItem.m in Sources */,
 				AEA24A081D5B224E00DD7939 /* CatigoryRankCell.m in Sources */,
+				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
 				AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */,
 				AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */,
