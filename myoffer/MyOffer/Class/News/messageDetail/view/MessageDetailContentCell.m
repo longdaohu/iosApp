@@ -14,20 +14,20 @@
 #import "MessageDetailFrame.h"
 
 @interface MessageDetailContentCell()
-@property(nonatomic,strong)UIImageView *TagView;    //分类图片
-@property(nonatomic,strong)UILabel *TagLabel;       //学校名称
-@property(nonatomic,strong)UIView *TagBackground;   //用于显示小图标
+@property(nonatomic,strong)UIImageView *catigory_logo;    //分类图片
+@property(nonatomic,strong)UILabel *catigoryLab;       //学校名称
+@property(nonatomic,strong)UIView *tagsBgView;   //用于显示小图标
 @property(nonatomic,assign)CGFloat tagx;
-@property(nonatomic,strong)UILabel *TitleLabel;     //文章标题
-@property(nonatomic,strong)UIView *FirstLineView;   //分隔线1
+@property(nonatomic,strong)UILabel *titleLab;     //文章标题
+@property(nonatomic,strong)UIView *FirstLine;   //分隔线1
 @property(nonatomic,strong)UIView *SecondLine;      //分隔线2
 @property(nonatomic,strong)UIView *ThreeLine;       //分隔线3
 @property(nonatomic,strong)UILabel *ArthorLab;      //作者名称
 @property(nonatomic,strong)UIButton *TimeBtn;       //时间
 @property(nonatomic,strong)UIButton *FocusBtn;      //关注数量
-@property(nonatomic,strong)UIImageView *LogoView;   //作者头像
-@property(nonatomic,strong)UIImageView *ArticleImageView; //文章大图
-@property(nonatomic,strong)UILabel *SummaryLabel;    //文件摘要
+@property(nonatomic,strong)UIImageView *authorLogoView;   //作者头像
+@property(nonatomic,strong)UIImageView *coverView; //文章大图
+@property(nonatomic,strong)UILabel *summaryLab;    //文件摘要
 
 @end
 @implementation MessageDetailContentCell
@@ -54,21 +54,21 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.TagView =[[UIImageView alloc] init];
-        self.TagView.image =[UIImage imageNamed:@"Detail_Life"];
-        self.TagView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:self.TagView];
+        self.catigory_logo =[[UIImageView alloc] init];
+        self.catigory_logo.image =[UIImage imageNamed:@"Detail_Life"];
+        self.catigory_logo.contentMode = UIViewContentModeScaleAspectFill;
+        [self.contentView addSubview:self.catigory_logo];
         
-        self.TagLabel =[[UILabel alloc] init];
-        self.TagLabel.font =[UIFont systemFontOfSize:Uni_subject_FontSize];
-        [self.contentView addSubview:self.TagLabel];
+        self.catigoryLab =[[UILabel alloc] init];
+        self.catigoryLab.font =[UIFont systemFontOfSize:Uni_subject_FontSize];
+        [self.contentView addSubview:self.catigoryLab];
         
-        self.TagBackground =[[UIView alloc] init];
-        [self.contentView addSubview:self.TagBackground];
+        self.tagsBgView =[[UIView alloc] init];
+        [self.contentView addSubview:self.tagsBgView];
         
-        self.FirstLineView =[[UIView alloc] init];
-        self.FirstLineView.backgroundColor =XCOLOR_BG;
-        [self.contentView addSubview:self.FirstLineView];
+        self.FirstLine =[[UIView alloc] init];
+        self.FirstLine.backgroundColor =XCOLOR_BG;
+        [self.contentView addSubview:self.FirstLine];
         
         
         self.SecondLine =[[UIView alloc] init];
@@ -76,10 +76,10 @@
         [self.contentView addSubview:self.SecondLine];
         
         
-        self.TitleLabel =[[UILabel alloc] init];
-        self.TitleLabel.font =  [UIFont fontWithName:@"Helvetica-Bold" size:24];
-        self.TitleLabel.numberOfLines = 0;
-        [self.contentView addSubview:self.TitleLabel];
+        self.titleLab =[[UILabel alloc] init];
+        self.titleLab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:24];
+        self.titleLab.numberOfLines = 0;
+        [self.contentView addSubview:self.titleLab];
         
         
         self.ArthorLab =[[UILabel alloc] init];
@@ -88,12 +88,11 @@
         [self.contentView addSubview:self.ArthorLab];
         
         
-        
-        self.LogoView = [[UIImageView alloc] init];
-        self.LogoView.layer.cornerRadius = 20;
-        self.LogoView.layer.masksToBounds = YES;
-        [self.contentView addSubview:self.LogoView];
-        self.LogoView.image =[UIImage imageNamed:@"PlaceHolderImage"];
+        self.authorLogoView = [[UIImageView alloc] init];
+        self.authorLogoView.layer.cornerRadius = 20;
+        self.authorLogoView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.authorLogoView];
+        self.authorLogoView.image =[UIImage imageNamed:@"PlaceHolderImage"];
 
         self.TimeBtn =[[UIButton alloc] init];
          [self.TimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
@@ -112,15 +111,15 @@
         [self.FocusBtn setImage:[UIImage imageNamed:@"Detail_Focus"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.FocusBtn];
         
-        self.ArticleImageView = [[UIImageView alloc] init];
-        [self.contentView addSubview:self.ArticleImageView];
+        self.coverView = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.coverView];
         
-        self.SummaryLabel =[[UILabel alloc] init];
-        self.SummaryLabel.font = [UIFont systemFontOfSize:SummaryFont];
-        self.SummaryLabel.numberOfLines = 0;
-        self.SummaryLabel.textColor = XCOLOR_DARKGRAY;
-        self.SummaryLabel.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:self.SummaryLabel];
+        self.summaryLab =[[UILabel alloc] init];
+        self.summaryLab.font = [UIFont systemFontOfSize:SummaryFont];
+        self.summaryLab.numberOfLines = 0;
+        self.summaryLab.textColor = XCOLOR_DARKGRAY;
+        self.summaryLab.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:self.summaryLab];
         
         self.ThreeLine =[[UIView alloc] init];
         self.ThreeLine.backgroundColor =XCOLOR_BG;
@@ -137,21 +136,24 @@
 
     _MessageFrame = MessageFrame;
     
-    self.TagView.frame = MessageFrame.TagFrame;
-    self.TagView.image =[UIImage imageNamed:MessageFrame.TagImageName];
+    self.catigory_logo.frame = MessageFrame.catigoryLogoFrame;
+    self.catigory_logo.image =[UIImage imageNamed:MessageFrame.TagImageName];
     
-    self.TagLabel.text = MessageFrame.MessageDetail[@"category"];
-    self.TagLabel.frame = MessageFrame.TagLabFrame;
+    self.catigoryLab.text = MessageFrame.MessageDetail[@"category"];
+    self.catigoryLab.frame = MessageFrame.TagLabFrame;
     
-    self.TagBackground.frame = MessageFrame.TagBgFrame;
-    self.FirstLineView.frame = MessageFrame.FirstLineFrame;
+    self.tagsBgView.frame = MessageFrame.TagBgFrame;
+    self.FirstLine.frame = MessageFrame.FirstLineFrame;
     
-    self.TitleLabel.text = MessageFrame.MessageDetail[@"title"];
-    self.TitleLabel.frame = MessageFrame.TitleFrame;
+    self.titleLab.text = MessageFrame.MessageDetail[@"title"];
+    self.titleLab.frame = MessageFrame.TitleFrame;
     
     
-    [self.LogoView KD_setImageWithURL:MessageFrame.MessageDetail[@"author_portrait_url"]];
-    self.LogoView.frame = MessageFrame.LogoFrame;
+    NSString *author_logo_str = MessageFrame.MessageDetail[@"author_portrait_url"];
+    NSString *author_logo = [author_logo_str containsString:@"http"] ? author_logo_str : [NSString stringWithFormat:@"%@%@",DOMAINURL,author_logo_str];
+    NSLog(@"author_logo %@",author_logo);
+    [self.authorLogoView sd_setImageWithURL:[NSURL URLWithString:author_logo]];
+    self.authorLogoView.frame = MessageFrame.LogoFrame;
     
     self.ArthorLab.text = MessageFrame.MessageDetail[@"author"];
     self.ArthorLab.frame = MessageFrame.ArthorFrame;
@@ -162,8 +164,8 @@
     
     NSString  *path = [MessageFrame.MessageDetail[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [self.ArticleImageView KD_setImageWithURL:path];
-    self.ArticleImageView.frame = MessageFrame.ArticleMVFrame;
+    [self.coverView KD_setImageWithURL:path];
+    self.coverView.frame = MessageFrame.coverFrame;
     
     [self.TimeBtn setTitle:MessageFrame.MessageDetail[@"update_at"] forState:UIControlStateNormal];
     self.TimeBtn.frame = MessageFrame.TimeFrame;
@@ -174,8 +176,8 @@
     
     self.SecondLine.frame = MessageFrame.SecondLineFrame;
     
-    self.SummaryLabel.frame = MessageFrame.SummaryFrame;
-    self.SummaryLabel.text = MessageFrame.MessageDetail[@"summary"];
+    self.summaryLab.frame = MessageFrame.SummaryFrame;
+    self.summaryLab.text = MessageFrame.MessageDetail[@"summary"];
     self.ThreeLine.frame = MessageFrame.ThreeLineFrame;
     
     if (self.tagx > 0) {
@@ -195,7 +197,7 @@
         CGFloat tw = tagSize.width + 15;
         CGFloat th = TagHigh;
         self.tagx += (MARGIN +tw);
-        CGFloat tx = self.TagBackground.bounds.size.width - self.tagx;
+        CGFloat tx = self.tagsBgView.bounds.size.width - self.tagx;
         
         UILabel *tagLabel =[[UILabel alloc] init];
         tagLabel.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
@@ -206,9 +208,9 @@
         tagLabel.layer.cornerRadius = 0.5 * TagHigh;
         tagLabel.layer.masksToBounds = YES;
         tagLabel.backgroundColor = XCOLOR_DARKGRAY;
-        [self.TagBackground addSubview:tagLabel];
+        [self.tagsBgView addSubview:tagLabel];
         
-        if (self.tagx > self.TagBackground.frame.size.width) {
+        if (self.tagx > self.tagsBgView.frame.size.width) {
             
             tagLabel.hidden = YES;
         }

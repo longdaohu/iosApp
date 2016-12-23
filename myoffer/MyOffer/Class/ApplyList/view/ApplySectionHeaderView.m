@@ -308,7 +308,7 @@
     }
  
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
+    
         self.bgView.frame = CGRectMake(SBx,0, XSCREEN_WIDTH, Uni_Cell_Height);
         
     }];

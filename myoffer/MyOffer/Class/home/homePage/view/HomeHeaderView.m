@@ -64,7 +64,7 @@
 {
     if (!_itemTitles) {
         
-        _itemTitles =@[GDLocalizedString(@"Discover_woyao"),GDLocalizedString(@"Discover_xiaobai"),GDLocalizedString(@"Discover_zhinengpipei"),@"职业性格测试",@"海外超级导师",@"留学服务套餐"];
+        _itemTitles =@[@"我要留学" ,@"留学小白",@"智能匹配",@"职业性格测试",@"海外超级导师",@"留学服务套餐"];
         
     }
     
@@ -135,7 +135,6 @@
     CGFloat itemsBgW = contentSize.width;
     CGFloat itemsBgH = upH - itemsBgY - 20;
     self.itemsBgView.frame = CGRectMake(itemsBgX, itemsBgY, itemsBgW,itemsBgH);
-    
     
     
     CGFloat itemW =  itemsBgW / 3;

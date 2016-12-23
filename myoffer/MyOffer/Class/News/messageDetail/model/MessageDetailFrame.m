@@ -51,15 +51,15 @@
 {
     _MessageDetail = MessageDetail;
   
-    CGFloat TGx = MARGIN;
-    CGFloat TGy = MARGIN;
-    CGFloat TGw = TagIconWidth;
-    CGFloat TGh = TGw;
-    self.TagFrame = CGRectMake(TGx, TGy, TGw, TGh);
+    CGFloat catigoryLX = MARGIN;
+    CGFloat catigoryLY = MARGIN;
+    CGFloat catigoryLW = TagIconWidth;
+    CGFloat catigoryLH = catigoryLW;
+    self.catigoryLogoFrame = CGRectMake(catigoryLX, catigoryLY, catigoryLW, catigoryLH);
     
     CGFloat TLh = LabHeight;
-    CGFloat TLx = CGRectGetMaxX(self.TagFrame) + 5;
-    CGFloat TLy = CGRectGetMinY(self.TagFrame) + 0.5 * (TGh - TLh);
+    CGFloat TLx = CGRectGetMaxX(self.catigoryLogoFrame) + 5;
+    CGFloat TLy = CGRectGetMinY(self.catigoryLogoFrame) + 0.5 * (catigoryLH - TLh);
     CGFloat TLw = 80;
     self.TagLabFrame = CGRectMake(TLx, TLy, TLw, TLh);
     
@@ -70,7 +70,7 @@
     self.TagBgFrame = CGRectMake(TBx,TBy,TBw,TBh);
     
     CGFloat ONEx = MARGIN;
-    CGFloat ONEy = CGRectGetMaxY(self.TagFrame) + MARGIN;
+    CGFloat ONEy = CGRectGetMaxY(self.catigoryLogoFrame) + MARGIN;
     CGFloat ONEw = XSCREEN_WIDTH - MARGIN;
     CGFloat ONEh = LineHeight;
     self.FirstLineFrame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
@@ -107,12 +107,13 @@
     CGFloat FCx = TMx - FCw;
     self.FocusFrame = CGRectMake(FCx,FCy, FCw , FCh);
     
-    CGFloat AMy = CGRectGetMaxY(self.LogoFrame) + MARGIN;
-    CGFloat AMh = 200 * XSCREEN_WIDTH / 320.0;
-    CGFloat AMw = XSCREEN_WIDTH;
-    self.ArticleMVFrame = CGRectMake(0, AMy,AMw, AMh);
+    CGFloat coverX =  0;
+    CGFloat coverY =  CGRectGetMaxY(self.LogoFrame) + MARGIN;
+    CGFloat coverW =  XSCREEN_WIDTH;
+    CGFloat coverH =  coverW * 0.5;
+    self.coverFrame = CGRectMake(coverX, coverY,coverW, coverH);
     
-    CGFloat SECy = CGRectGetMaxY(self.ArticleMVFrame) + MARGIN * 4;
+    CGFloat SECy = CGRectGetMaxY(self.coverFrame) + MARGIN * 4;
     CGFloat SECw = XSCREEN_WIDTH * 0.5;
     CGFloat SECx = SECw * 0.5;
     CGFloat SECh = LineHeight;

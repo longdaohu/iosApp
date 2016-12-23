@@ -33,7 +33,7 @@
 @property(nonatomic,strong)UIWebView *webView;
 //请求返回数据字典
 @property(nonatomic,strong)NSDictionary *ArticleInfo;
-// 点赞按钮
+//点赞按钮
 @property(nonatomic,strong)UIButton *ZangBtn;
 //点分享按钮
 @property(nonatomic,strong)UIButton *shareBtn;

@@ -172,23 +172,20 @@ typedef enum {
     NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
     
     NSString *countryKey = @"Country_CN";
-//    NSString *countryKey = USER_EN ? @"Country_EN":@"Country_CN";
     NSArray *countries = [ud valueForKey:countryKey];
     if(!countries.count){
         [self baseDataSourse:@"country"];
     }
     self.countryArr = [countries valueForKeyPath:@"name"];
 
-//    NSString *gradeKey = USER_EN ? @"Grade_EN":@"Grade_CN";
-    NSString *gradeKey =  @"Grade_CN";
+     NSString *gradeKey =  @"Grade_CN";
     NSArray *grades = [ud valueForKey:gradeKey];
     if(!grades.count){
         [self baseDataSourse:@"grade"];
     }
     self.gradeArr = [grades valueForKeyPath:@"name"];
     
-//    NSString *subjectKey = USER_EN ? @"Subject_EN":@"Subject_CN";
-    NSString *subjectKey =  @"Subject_CN";
+     NSString *subjectKey =  @"Subject_CN";
     NSArray *subjectes = [ud valueForKey:subjectKey];
     if(!subjectes.count){
         [self baseDataSourse:@"subject"];

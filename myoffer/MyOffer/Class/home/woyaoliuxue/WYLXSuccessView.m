@@ -126,7 +126,7 @@
     CGFloat alerX = ITEM_MARGIN;
     CGFloat alerY = CGRectGetMaxY(self.succeseLab.frame) + ITEM_MARGIN;
     CGFloat alerW = contentSize.width - 2 * ITEM_MARGIN;
-    CGFloat  alerH = 0;
+    CGFloat alerH = 0;
     if (self.alerLab.text) {
         CGSize LabSize = [self.alerLab.text KD_sizeWithAttributeFont:XFONT(XPERCENT * 14) maxWidth:alerW];
         alerH = LabSize.height;

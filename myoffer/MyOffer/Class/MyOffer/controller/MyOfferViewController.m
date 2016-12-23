@@ -22,7 +22,7 @@
     self.notiLabel.text = GDLocalizedString(@"myOffer-001");
     
     XWGJnodataView *noDataView =[XWGJnodataView noDataView];
-    noDataView.errorStr =  GDLocalizedString(@"myOffer-001");
+    noDataView.errorStr = @"亲，您的offer无法在app上显示，请登录myoffer网站查看。";
     [self.view addSubview:noDataView];
 
 }
