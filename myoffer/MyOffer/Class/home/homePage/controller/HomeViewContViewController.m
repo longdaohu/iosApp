@@ -445,7 +445,6 @@
     SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
     self.autoLoopView = autoLoopView;
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-//  autoLoopView.titlesGroup = titles;
     autoLoopView.currentPageDotColor = XCOLOR_RED;
     [bgView addSubview:autoLoopView];
     autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
@@ -459,6 +458,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     
+    if (scrollView.contentOffset.y < -150) [self.TableView setContentOffset:CGPointMake(0, -150) animated:NO];
+
     self.myToolbar.top = 20 - scrollView.contentOffset.y;
     
     [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:scrollView.contentOffset.y];

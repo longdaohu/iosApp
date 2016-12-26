@@ -12,7 +12,7 @@
 #import "XWGJMessageCategoryItem.h"
 #import "MessageDetaillViewController.h"
 #import "XWGJMessageFrame.h"
-#import "YYAutoLoopView.h"
+#import "SDCycleScrollView.h"
 #import "YYSingleNewsBO.h"
 #import "XWGJNODATASHOWView.h"
 #import "XUToolbar.h"
@@ -23,7 +23,7 @@
 //分区头数据
 @property(nonatomic,strong)NSMutableArray *RequestKeys;
 //推荐资讯
-@property(nonatomic,strong)NSArray *ArticleRecommends;
+@property(nonatomic,strong)NSArray *banner;
 //生活资讯数据源
 @property(nonatomic,strong)NSMutableArray *Category_LifeArr;
 //申请资讯数据源
@@ -42,7 +42,7 @@
 //分区选项
 @property(nonatomic,strong)XWGJMessageButtonItemView *sectionHeaderView;
 //表头轮播图
-@property(nonatomic,strong)YYAutoLoopView *autoLoopView;
+@property(nonatomic,strong)SDCycleScrollView *autoLoopView;
 //状态栏遮盖
 @property(nonatomic,strong)UIView *StatusBarBan;
 //自定义ToolBar
@@ -98,6 +98,8 @@
          _NODATA.ActionBlock = ^{
              
              [weakSelf  getDataSource:0 andFresh:0];
+             
+             [weakSelf  getAutoLoopViewData];
         };
         
     }
@@ -109,6 +111,7 @@
     if (!_myToolbar) {
         
         _myToolbar =[[XUToolbar  alloc] initWithFrame:CGRectMake(0, 20, XSCREEN_WIDTH, 44)];
+        
         [self.view addSubview:_myToolbar];
     }
     return _myToolbar;
@@ -200,14 +203,22 @@
     //第一次加载
     [self getDataSource:0 andFresh:NO];
     
+    [self getAutoLoopViewData];
+    
 }
 
 -(void)makeOtherView
 {
+    UIImageView *maskBgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
+    maskBgView.image = [UIImage imageNamed:@"gradient_up"];
+    [self.view addSubview:maskBgView];
+    
+    
     self.StatusBarBan =[[UIView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, 20)];
     self.StatusBarBan.backgroundColor = XCOLOR_LIGHTBLUE;
+    self.StatusBarBan.alpha = 0;
     [self.view addSubview:self.StatusBarBan];
- 
+   
     XWeakSelf
     self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
         [weakSelf showLeftMenu];
@@ -221,17 +232,49 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.hidden     = YES;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.mj_footer       = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.view addSubview:self.tableView];
-    [self buildTableHeadView];
-  
+    [self makeAutoLoopViewAtView];
+    [self makeRefreshView];
 }
+
+//设置下拉刷新
+-(void)makeRefreshView
+{
+ 
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(getAutoLoopViewData)];
+    //    header.lastUpdatedTimeLabel.hidden = YES;
+    //    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    header.gifView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+    
+    NSMutableArray *refreshingImages = [NSMutableArray array];
+    for (int i = 0; i<= 10; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Pre-comp 1_000%d", i]];
+        [refreshingImages addObject:image];
+    }
+    
+    NSMutableArray *nomalImages = [NSMutableArray array];
+    [nomalImages addObject:[UIImage imageNamed:@"Pre-comp 1_0000"]];
+    // 设置普通状态的动画图片
+    [header setImages:nomalImages forState:MJRefreshStateIdle];
+    // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
+    [header setImages:refreshingImages duration:0.1  forState:MJRefreshStatePulling];
+    // 设置正在刷新状态的动画图片
+    [header setImages:refreshingImages duration:0.1 forState:MJRefreshStateRefreshing];
+    // 设置header
+}
+
+
+
 
 -(void)makeUI
 {
@@ -247,44 +290,64 @@
 /**
  *  创建轮播图头部
  */
-- (void)buildTableHeadView {
-   
+- (void)makeAutoLoopViewAtView{
+    
     XWeakSelf
-    
-    self.autoLoopView = [[YYAutoLoopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, AdjustF(200.f))];
-    
-    self.tableView.tableHeaderView =  self.autoLoopView;
-    
-    self.autoLoopView.clickAutoLoopCallBackBlock = ^(YYSingleNewsBO *StatusBarBannerNews){
+    CGFloat autoY =  0;
+    CGFloat autoH =  AdjustF(200.f);
+    CGFloat autoX =  0;
+    CGFloat autoW =  XSCREEN_WIDTH;
+    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
+    autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    //  autoLoopView.titlesGroup = titles;
+    autoLoopView.currentPageDotColor = XCOLOR_RED;
+    self.autoLoopView = autoLoopView;
+    self.tableView.tableHeaderView = autoLoopView;
+    autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
         
-        MessageDetaillViewController *detail =[[MessageDetaillViewController alloc] initWithMessageId:StatusBarBannerNews.newsId];
-        [weakSelf.navigationController pushViewController:detail animated:YES];
+        YYSingleNewsBO  *item  = weakSelf.banner[index];
+        [weakSelf.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:item.newsId] animated:YES];
         
     };
-    
-    
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorArticleRecommendation parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        
-        NSMutableArray *items = [NSMutableArray array];
- 
-        if (weakSelf.ArticleRecommends == 0) {
-            
-            for (NSDictionary *obj in response) {
-                
-                YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-                new.message = obj;
-                [items addObject:new];
-            }
-            
-            weakSelf.autoLoopView.banners = [items copy];
-        }
-        
-        weakSelf.ArticleRecommends = (NSArray *)response;
-        
-//        [self.tableView reloadData];
-    }];
 }
+
+
+- (void)getAutoLoopViewData{
+
+ 
+     XWeakSelf
+    
+    [self
+     startAPIRequestWithSelector:kAPISelectorArticleRecommendation
+     parameters:nil
+     expectedStatusCodes:nil
+     showHUD:NO
+     showErrorAlert:YES
+     errorAlertDismissAction:nil
+     additionalSuccessAction:^(NSInteger statusCode, id response) {
+         
+         NSMutableArray *banner = [NSMutableArray array];
+         NSArray *banner_temps = (NSArray *)response;
+         [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
+             new.message = banner_temps[idx];
+             new.index = idx;
+             [banner addObject:new];
+         }];
+         
+         weakSelf.banner = [banner copy];
+         weakSelf.autoLoopView.titlesGroup = [weakSelf.banner valueForKey:@"newsTitle"];
+         weakSelf.autoLoopView.imageURLStringsGroup = [weakSelf.banner valueForKey:@"imageUrl"];
+         [weakSelf.tableView.mj_header endRefreshing];
+
+     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+         
+         [weakSelf.tableView.mj_header endRefreshing];
+
+     }];
+
+}
+
 
 //请求数据
 -(void)getDataSource:(NSInteger)index andFresh:(BOOL)fresh
@@ -535,16 +598,26 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
+    if (scrollView.contentOffset.y < -150) [self.tableView setContentOffset:CGPointMake(0, -150) animated:NO];
+      
     if (scrollView == self.tableView){
         
-       [ self.autoLoopView yy_parallaxHeaderViewWithOffset:scrollView.contentOffset];
-    
-        self.StatusBarBan.alpha =  scrollView.contentOffset.y / (AdjustF(200.f) - 20);
+         self.StatusBarBan.alpha =  scrollView.contentOffset.y / AdjustF(200.f);
         
         self.myToolbar.alpha    = 1 - self.StatusBarBan.alpha  * 3;
         
+        scrollView.contentInset =  (scrollView.contentOffset.y >= (AdjustF(200.f) - 64)) ? UIEdgeInsetsMake(20, 0, 0, 0) :  UIEdgeInsetsZero;
+    
+        
     }
-  
+}
+
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
+ 
+    scrollView.contentInset =  UIEdgeInsetsZero;
+    
+    return YES;
 }
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure

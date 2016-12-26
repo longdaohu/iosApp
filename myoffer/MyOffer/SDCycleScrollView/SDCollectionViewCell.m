@@ -82,6 +82,7 @@
 - (void)setupTitleLabel
 {
     UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.numberOfLines = 0;
     _titleLabel = titleLabel;
     _titleLabel.hidden = YES;
     [self.contentView addSubview:titleLabel];
@@ -90,7 +91,8 @@
 - (void)setTitle:(NSString *)title
 {
     _title = [title copy];
-    _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
+    _titleLabel.text = title;
+    
     if (_titleLabel.hidden) {
         _titleLabel.hidden = NO;
     }
@@ -105,14 +107,15 @@
         _titleLabel.frame = self.bounds;
     } else {
         _imageView.frame = self.bounds;
-        CGFloat titleLabelW = self.sd_width;
-        CGFloat titleLabelH = _titleLabelHeight;
-        CGFloat titleLabelX = 0;
-        CGFloat titleLabelY = self.sd_height - titleLabelH;
+        
+        CGFloat titleLabelX = 10;
+        CGFloat titleLabelW = self.sd_width - 2 * titleLabelX;
+        CGFloat titleLabelH = 45;
+        CGFloat titleLabelY = self.sd_height - titleLabelH - 30;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     }
     
-    self.maskBgView.frame = CGRectMake(0, 0, self.sd_width,  self.sd_height);
+    self.maskBgView.frame = CGRectMake(0, self.sd_height-80, self.sd_width, 80);
 }
 
 @end

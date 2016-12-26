@@ -59,7 +59,7 @@
 {
     _record = record;
     
-    CGSize statusSize =[record.Status  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:StatusFont]];
+    CGSize statusSize = [record.Status  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:StatusFont]];
     
     CGFloat sw = statusSize.width;
     CGFloat sx = XSCREEN_WIDTH - sw - 5;
