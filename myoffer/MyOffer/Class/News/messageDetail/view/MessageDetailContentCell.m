@@ -113,7 +113,8 @@
         
         self.coverView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.coverView];
-        
+        self.coverView.contentMode = UIViewContentModeScaleAspectFit;
+
         self.summaryLab =[[UILabel alloc] init];
         self.summaryLab.font = [UIFont systemFontOfSize:SummaryFont];
         self.summaryLab.numberOfLines = 0;
@@ -151,7 +152,6 @@
     
     NSString *author_logo_str = MessageFrame.MessageDetail[@"author_portrait_url"];
     NSString *author_logo = [author_logo_str containsString:@"http"] ? author_logo_str : [NSString stringWithFormat:@"%@%@",DOMAINURL,author_logo_str];
-    NSLog(@"author_logo %@",author_logo);
     [self.authorLogoView sd_setImageWithURL:[NSURL URLWithString:author_logo]];
     self.authorLogoView.frame = MessageFrame.LogoFrame;
     
@@ -163,7 +163,6 @@
     self.ArthorLab.frame = newRect;
     
     NSString  *path = [MessageFrame.MessageDetail[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
     [self.coverView KD_setImageWithURL:path];
     self.coverView.frame = MessageFrame.coverFrame;
     

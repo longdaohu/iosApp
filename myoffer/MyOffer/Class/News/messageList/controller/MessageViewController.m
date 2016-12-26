@@ -379,7 +379,6 @@
                            parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
                                
                            } additionalSuccessAction:^(NSInteger statusCode, id response) {
-  
                                ++category.LastPage;
                                
                                        switch (index) {
@@ -487,9 +486,8 @@
 
 }
 
--(XWGJMessageFrame *)getMessgeFrameWithDictionory:(NSDictionary *)MessageDic
-{
-    
+- (XWGJMessageFrame *)getMessgeFrameWithDictionory:(NSDictionary *)MessageDic{
+ 
     NewsItem  *item                =  [NewsItem mj_objectWithKeyValues:MessageDic];
     XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:item];
     

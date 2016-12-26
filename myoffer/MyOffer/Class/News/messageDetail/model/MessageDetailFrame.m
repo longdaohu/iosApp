@@ -110,7 +110,7 @@
     CGFloat coverX =  0;
     CGFloat coverY =  CGRectGetMaxY(self.LogoFrame) + MARGIN;
     CGFloat coverW =  XSCREEN_WIDTH;
-    CGFloat coverH =  coverW * 0.5;
+    CGFloat coverH =  coverW * 29.3/83;
     self.coverFrame = CGRectMake(coverX, coverY,coverW, coverH);
     
     CGFloat SECy = CGRectGetMaxY(self.coverFrame) + MARGIN * 4;

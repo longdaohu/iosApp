@@ -306,9 +306,9 @@
                          @"document.body.scrollHeight"] integerValue];
     self.webView.frame = CGRectMake(0, 0,XSCREEN_WIDTH,height);
     
-    
     [self.tableView reloadData];
     
+
     //加载完成后重新设置 tableview的cell的高度,和webview的frame
     if (!webView.isLoading) {
         
@@ -398,6 +398,7 @@
   
     
     UniDetailGroup *group = self.groups[0];
+    
     MessageDetailFrame *MessageDetailFrame   =  group.items[0];
  
     CGFloat cellHight = indexPath.section== 0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : Uni_Cell_Height;

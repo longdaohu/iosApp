@@ -84,7 +84,7 @@
 {
     _messageFrame =  messageFrame ;
 
-    [self.Logo KD_setImageWithURL:messageFrame.News.LogoName];
+    [self.Logo KD_setImageWithURL:messageFrame.News.cover_url_thumbnail];
     self.Logo.frame = messageFrame.LogoFrame;
 
     

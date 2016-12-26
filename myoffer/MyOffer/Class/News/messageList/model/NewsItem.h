@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NewsItem : NSObject
+@property(nonatomic,copy)NSString *cover_url_thumbnail;
 @property(nonatomic,copy)NSString *LogoName;
 @property(nonatomic,copy)NSString *messageTitle;
 @property(nonatomic,copy)NSString *FocusCount;

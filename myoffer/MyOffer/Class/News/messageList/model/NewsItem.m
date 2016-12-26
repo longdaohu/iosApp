@@ -13,6 +13,7 @@
 {
     return @{@"messageID" : @"_id",
              @"LogoName" : @"cover_url",
+             @"cover_url_thumbnail" : @"cover_url_thumbnail",
              @"messageTitle" : @"title",
              @"FocusCount" : @"view_count",
              @"Update_time" : @"update_at"
