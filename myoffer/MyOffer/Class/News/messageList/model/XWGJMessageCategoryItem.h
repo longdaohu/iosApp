@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface XWGJMessageCategoryItem : NSObject
-@property(nonatomic,copy)NSString *titleName;
+@property(nonatomic,copy)NSString *name;
 @property(nonatomic,assign)NSInteger LastPage;
 @property(nonatomic,assign)BOOL IsNoMoreState;
 
-+ (instancetype)CreateCategoryItemWithTitle:(NSString *)titleName andLastPage:(NSInteger)page;
++ (instancetype)categoryInitWithName:(NSString *)name lastPage:(NSInteger)lastPage;
+
 @end

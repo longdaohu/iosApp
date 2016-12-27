@@ -27,7 +27,7 @@
     CGFloat  titlex =  CGRectGetMaxX(self.LogoFrame) + 10;
     CGFloat  titley =  10;
     CGFloat  titlew =  XSCREEN_WIDTH - titlex;
-    CGFloat  TitleWidth = [News.messageTitle KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(16))].width;
+    CGFloat  TitleWidth = [News.title KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(16))].width;
     CGFloat  titleh = TitleWidth - (XSCREEN_WIDTH - CGRectGetMaxX(self.LogoFrame) - 10) > 0 ? 50 : 25;
     self.TitleFrame = CGRectMake(titlex, titley, titlew, titleh);
     

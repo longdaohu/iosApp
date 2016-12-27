@@ -17,26 +17,27 @@
     if (self) {
         
         self.panding = [[UILabel alloc] init];
-        self.panding.layer.cornerRadius = 2.5;
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
         [self addSubview:self.panding];
+        self.panding.layer.cornerRadius =  2.5;
+        self.panding.layer.masksToBounds = YES;
         
         self.countryLab = [UILabel labelWithFontsize:15.0f TextColor:XCOLOR_DARKGRAY  TextAlignment:NSTextAlignmentLeft];
         self.countryLab.text = GDLocalizedString(@"CategoryNew-country");
         [self addSubview:self.countryLab];
         
         
-        self.englishBtn = [self makeButtonWithImage:[UIImage imageNamed:GDLocalizedString(@"Category-UK") ] andTag:0];
+        self.englishBtn = [self makeButtonWithImage:[UIImage imageNamed:GDLocalizedString(@"Category-UK") ] tag:0];
         [self addSubview:self.englishBtn];
         
-        self.autraliaBtn = [self makeButtonWithImage:[UIImage imageNamed:GDLocalizedString(@"Category-AU") ] andTag:1];
+        self.autraliaBtn = [self makeButtonWithImage:[UIImage imageNamed:GDLocalizedString(@"Category-AU") ] tag:1];
         [self addSubview:self.autraliaBtn];
         
     }
     return self;
 }
 
-- (UIButton *)makeButtonWithImage:(UIImage *)image andTag:(NSInteger)tag{
+- (UIButton *)makeButtonWithImage:(UIImage *)image tag:(NSInteger)tag{
    
     UIButton *sender =  [[UIButton alloc] init];
     sender.tag = tag;
@@ -52,10 +53,8 @@
 
 - (void)onClick:(UIButton *)sender{
  
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-     }
+    if (self.actionBlock)  self.actionBlock(sender);
+    
 }
 
 -(void)layoutSubviews{
@@ -68,7 +67,8 @@
     CGFloat pandw = 5;
     CGFloat pandh = 15;
     self.panding.frame = CGRectMake(pandx, pandy, pandw, pandh);
-    
+
+
     CGFloat countryx = CGRectGetMaxX(self.panding.frame)+margin;
     CGFloat countryy = pandy;
     CGFloat countryw = XSCREEN_WIDTH - countryx;

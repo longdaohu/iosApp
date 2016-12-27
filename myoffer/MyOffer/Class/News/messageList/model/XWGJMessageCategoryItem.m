@@ -9,19 +9,21 @@
 #import "XWGJMessageCategoryItem.h"
 
 @implementation XWGJMessageCategoryItem
-- (instancetype)initCategoryItemWithTitle:(NSString *)titleName andLastPage:(NSInteger)page
+
+- (instancetype)initWithName:(NSString *)name lastPage:(NSInteger)lastPage
 {
     if (self = [super init]) {
         
-         self.titleName = titleName;
-         self.LastPage = page;
+        self.name = name;
+        self.LastPage = lastPage;
     }
     return self;
 }
 
-+ (instancetype)CreateCategoryItemWithTitle:(NSString *)titleName andLastPage:(NSInteger)page
-{
-    return [[self alloc] initCategoryItemWithTitle:titleName andLastPage:page];
++ (instancetype)categoryInitWithName:(NSString *)name lastPage:(NSInteger)lastPage{
+    
+    return [[self alloc] initWithName:name lastPage:lastPage];
 }
+
 
 @end

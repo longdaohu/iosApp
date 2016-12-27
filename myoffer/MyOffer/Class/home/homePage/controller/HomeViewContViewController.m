@@ -444,6 +444,7 @@
     CGFloat autoW =  XSCREEN_WIDTH;
     SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
     self.autoLoopView = autoLoopView;
+    autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
     autoLoopView.currentPageDotColor = XCOLOR_RED;
     [bgView addSubview:autoLoopView];

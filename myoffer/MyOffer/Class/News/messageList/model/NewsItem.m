@@ -9,21 +9,22 @@
 #import "NewsItem.h"
 
 @implementation NewsItem
+
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    return @{@"messageID" : @"_id",
-             @"LogoName" : @"cover_url",
-             @"cover_url_thumbnail" : @"cover_url_thumbnail",
-             @"messageTitle" : @"title",
-             @"FocusCount" : @"view_count",
-             @"Update_time" : @"update_at"
-             };
+    return @{@"messageID" : @"_id"};
     
 }
 
--(NSString *)LogoName{
 
-    return [_LogoName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+-(NSString *)cover_url{
+
+    return [_cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+-(NSString *)cover_url_thumbnail{
+    
+    return [_cover_url_thumbnail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end

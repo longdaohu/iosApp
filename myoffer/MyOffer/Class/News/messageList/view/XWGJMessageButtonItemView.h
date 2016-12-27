@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 typedef void(^MessageBlock)(UIButton *);
 @interface XWGJMessageButtonItemView : UIView
+@property(nonatomic,strong)NSArray *items;
 @property(nonatomic,copy)MessageBlock ActionBlock;
 @property(nonatomic,assign)NSInteger LastIndex;
 

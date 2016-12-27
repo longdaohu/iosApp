@@ -10,10 +10,10 @@
 
 @interface NewsItem : NSObject
 @property(nonatomic,copy)NSString *cover_url_thumbnail;
-@property(nonatomic,copy)NSString *LogoName;
-@property(nonatomic,copy)NSString *messageTitle;
-@property(nonatomic,copy)NSString *FocusCount;
-@property(nonatomic,copy)NSString *Update_time;
+@property(nonatomic,copy)NSString *cover_url;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,copy)NSString *view_count;
+@property(nonatomic,copy)NSString *update_at;
 @property(nonatomic,copy)NSString *messageID;
 
 @end

@@ -21,7 +21,7 @@
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //分区头数据
-@property(nonatomic,strong)NSMutableArray *RequestKeys;
+@property(nonatomic,strong)NSArray *RequestKeys;
 //推荐资讯
 @property(nonatomic,strong)NSArray *banner;
 //生活资讯数据源
@@ -171,25 +171,20 @@
 }
 
 
-
 //分区头数据
--(NSMutableArray *)RequestKeys
+-(NSArray *)RequestKeys
 {
     if (!_RequestKeys) {
+
+        XWGJMessageCategoryItem *life = [XWGJMessageCategoryItem categoryInitWithName:@"留学生活" lastPage:0];
+        XWGJMessageCategoryItem *request = [XWGJMessageCategoryItem categoryInitWithName:@"留学申请" lastPage:0];
+        XWGJMessageCategoryItem *fee  = [XWGJMessageCategoryItem categoryInitWithName:@"留学费用" lastPage:0];
+        XWGJMessageCategoryItem *test = [XWGJMessageCategoryItem categoryInitWithName:@"留学考试" lastPage:0];
+        XWGJMessageCategoryItem *news = [XWGJMessageCategoryItem categoryInitWithName:@"留学新闻" lastPage:0];
+        XWGJMessageCategoryItem *visa = [XWGJMessageCategoryItem categoryInitWithName:@"留学签证" lastPage:0];
         
-        _RequestKeys = [NSMutableArray array];
-        XWGJMessageCategoryItem *life = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学生活" andLastPage:0];
-        XWGJMessageCategoryItem *request = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学申请" andLastPage:0];
-        XWGJMessageCategoryItem *fee  = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学费用" andLastPage:0];
-        XWGJMessageCategoryItem *test = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学考试" andLastPage:0];
-        XWGJMessageCategoryItem *news = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学新闻" andLastPage:0];
-        XWGJMessageCategoryItem *visa = [XWGJMessageCategoryItem CreateCategoryItemWithTitle:@"留学签证" andLastPage:0];
-        [_RequestKeys addObject:life];
-        [_RequestKeys addObject:request];
-        [_RequestKeys addObject:fee];
-        [_RequestKeys addObject:test];
-        [_RequestKeys addObject:news];
-        [_RequestKeys addObject:visa];
+        _RequestKeys = @[life,request,fee,test,news,visa];
+ 
     }
     return _RequestKeys;
 }
@@ -233,7 +228,7 @@
 -(void)makeTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.hidden     = YES;
@@ -299,7 +294,7 @@
     CGFloat autoW =  XSCREEN_WIDTH;
     SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    //  autoLoopView.titlesGroup = titles;
+    autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
     autoLoopView.currentPageDotColor = XCOLOR_RED;
     self.autoLoopView = autoLoopView;
     self.tableView.tableHeaderView = autoLoopView;
@@ -311,12 +306,10 @@
     };
 }
 
-
+//请求Banner数据
 - (void)getAutoLoopViewData{
-
  
-     XWeakSelf
-    
+    XWeakSelf
     [self
      startAPIRequestWithSelector:kAPISelectorArticleRecommendation
      parameters:nil
@@ -326,19 +319,7 @@
      errorAlertDismissAction:nil
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
-         NSMutableArray *banner = [NSMutableArray array];
-         NSArray *banner_temps = (NSArray *)response;
-         [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-             YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-             new.message = banner_temps[idx];
-             new.index = idx;
-             [banner addObject:new];
-         }];
-         
-         weakSelf.banner = [banner copy];
-         weakSelf.autoLoopView.titlesGroup = [weakSelf.banner valueForKey:@"newsTitle"];
-         weakSelf.autoLoopView.imageURLStringsGroup = [weakSelf.banner valueForKey:@"imageUrl"];
-         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf configrationAutoLoopViewWithResponse:response];
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
@@ -346,6 +327,23 @@
 
      }];
 
+}
+//配置BannerUI
+- (void)configrationAutoLoopViewWithResponse:(id)response{
+
+    NSMutableArray *banner = [NSMutableArray array];
+    NSArray *banner_temps = (NSArray *)response;
+    [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
+        new.message = banner_temps[idx];
+        new.index = idx;
+        [banner addObject:new];
+    }];
+    
+    self.banner = [banner copy];
+    self.autoLoopView.titlesGroup = [self.banner valueForKey:@"newsTitle"];
+    self.autoLoopView.imageURLStringsGroup = [self.banner valueForKey:@"imageUrl"];
+    [self.tableView.mj_header endRefreshing];
 }
 
 
@@ -428,10 +426,9 @@
             break;
     }
   
-    __block XWGJMessageCategoryItem *category = self.RequestKeys[index];
-
+     XWGJMessageCategoryItem *category = self.RequestKeys[index];
     
-    NSString *keyWord = [category.titleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *keyWord = [category.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSString *path =[NSString stringWithFormat:@"%@category=%@&page=%ld&size=%d",kAPISelectorArticleCategory,keyWord,(long)category.LastPage,REQUEST_SIZE];
     
@@ -442,116 +439,104 @@
                            parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
                                
                            } additionalSuccessAction:^(NSInteger statusCode, id response) {
+                             
                                ++category.LastPage;
-                               
-                                       switch (index) {
-                                               
-                                           case 0:{
-                                               
-                                                 for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                   
-                                                   XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-                                                   
-                                                   [weakSelf.Category_LifeArr  addObject:messageFrame];
-                                                   
-                                               }
-                                               
-                                               weakSelf.CurrentArr = [weakSelf.Category_LifeArr copy];
-                               
-                               
-                                           }
-                                               break;
-                                           case 1:{
-                                               for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                   XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-
-                                                   [weakSelf.Category_RequestArr  addObject:messageFrame];
-                                                }
-                                               weakSelf.CurrentArr = [weakSelf.Category_RequestArr copy];
-
-                                           }
-                                               
-                                               break;
-                                           case 2:{
-                                                for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                   XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-
-                                                   [weakSelf.Category_FeeArr  addObject:messageFrame];
-                                               }
-                                               weakSelf.CurrentArr = [self.Category_FeeArr copy];
-                                           }
-                                               break;
-                                           case 3:{
-                                               for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                   XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-
-                                                   [weakSelf.Category_TestArr  addObject:messageFrame];
-                                                }
-                                                weakSelf.CurrentArr = [self.Category_TestArr copy];
-                                           }
-                                               break;
-                                           case 4:{
-                                               for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                   XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-
-                                                   [weakSelf.Category_NewsArr  addObject:messageFrame];
-                                                }
-                                               weakSelf.CurrentArr = [self.Category_NewsArr copy];
-                                           }
-                                               break;
-                                           case 5:{
-                                               for(NSDictionary *MessageDic in response[@"articles"])
-                                               {
-                                                    XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
-                                                   
-                                                    [weakSelf.Category_VisaArr  addObject:messageFrame];
-                                                }
-                                               
-                                                weakSelf.CurrentArr = [self.Category_VisaArr copy];
-                                           }
-                                               break;
-                                        }
-                                       
-                               
-                               [self.tableView.mj_footer endRefreshing];
+ 
+                               [weakSelf configrationUIWithResponse:response index:index];
                                
                                if ([response[@"articles"] count] < REQUEST_SIZE) {
                                    
-                                   [self.tableView.mj_footer endRefreshingWithNoMoreData];
-  
+                                   [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                                   
                                    category.IsNoMoreState = YES;
                                }
                                
-
-                               [weakSelf.tableView reloadData];
-                             
-                               self.tableView.hidden = NO;
-                               
-                               self.NODATA.hidden = YES;
                                
                            } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
                                
-                               [self.tableView.mj_footer endRefreshing];
+                               [weakSelf.tableView.mj_footer endRefreshing];
                               
-                               if (self.CurrentArr.count == 0) {
+                               if (weakSelf.CurrentArr.count == 0) {
                                    
-                                   self.NODATA.hidden = NO;
+                                   weakSelf.NODATA.hidden = NO;
                                    
-                                   self.tableView.hidden = YES;
+                                   weakSelf.tableView.hidden = YES;
                                }
                                
                            }];
 
 }
 
+
+- (void)configrationUIWithResponse:(id)response index:(NSInteger)index{
+
+    
+    for(NSDictionary *MessageDic in response[@"articles"])
+    {
+        
+        XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
+        switch (index) {
+            case 0:
+                [self.Category_LifeArr  addObject:messageFrame];
+                break;
+            case 1:
+                [self.Category_RequestArr  addObject:messageFrame];
+                break;
+            case 2:
+                [self.Category_FeeArr  addObject:messageFrame];
+                break;
+            case 3:
+                [self.Category_TestArr  addObject:messageFrame];
+                break;
+            case 4:
+                [self.Category_NewsArr  addObject:messageFrame];
+                break;
+            case 5:
+                [self.Category_VisaArr  addObject:messageFrame];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    switch (index) {
+            
+        case 0:
+            self.CurrentArr = [self.Category_LifeArr copy];
+             break;
+        case 1:
+            self.CurrentArr = [self.Category_RequestArr copy];
+            break;
+        case 2:
+            self.CurrentArr = [self.Category_FeeArr copy];
+            break;
+        case 3:
+            self.CurrentArr = [self.Category_TestArr copy];
+            break;
+        case 4:
+            self.CurrentArr = [self.Category_NewsArr copy];
+            break;
+        case 5:
+            self.CurrentArr = [self.Category_VisaArr copy];
+            break;
+    }
+    
+    
+    
+    [self.tableView.mj_footer endRefreshing];
+    
+    [self.tableView reloadData];
+    
+    self.tableView.hidden = NO;
+    
+    self.NODATA.hidden = YES;
+    
+}
+
 - (XWGJMessageFrame *)getMessgeFrameWithDictionory:(NSDictionary *)MessageDic{
  
     NewsItem  *item                =  [NewsItem mj_objectWithKeyValues:MessageDic];
+    
     XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:item];
     
     return  messageFrame;
@@ -582,11 +567,9 @@
                 [weakSelf.tableView.mj_footer resetNoMoreData];
             }
             
-            if (weakSelf.tableView.contentOffset.y > AdjustF(200.f)) {
-                
-                weakSelf.tableView.contentOffset = CGPointMake(0, AdjustF(200.f));
-                
-            }
+            if (weakSelf.tableView.contentOffset.y > AdjustF(200.f)) weakSelf.tableView.contentOffset = CGPointMake(0, AdjustF(200.f));
+            
+            
         };
         
     }
@@ -599,7 +582,7 @@
 {
     
     if (scrollView.contentOffset.y < -150) [self.tableView setContentOffset:CGPointMake(0, -150) animated:NO];
-      
+    
     if (scrollView == self.tableView){
         
          self.StatusBarBan.alpha =  scrollView.contentOffset.y / AdjustF(200.f);
@@ -630,6 +613,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    self.sectionHeaderView.items = self.RequestKeys;
     
     return self.sectionHeaderView;
 }
@@ -668,11 +652,6 @@
   
 }
 
-#pragma mark - ParallaxHeaderViewDelegate
-- (void)lockScrollView:(CGFloat)maxOffset {
-    
-    [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, maxOffset) animated:NO];
-}
 
 //加载更多
 -(void)loadMoreData{

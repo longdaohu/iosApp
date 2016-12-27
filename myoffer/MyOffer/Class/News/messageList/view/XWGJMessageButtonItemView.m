@@ -7,10 +7,11 @@
 //
 
 #import "XWGJMessageButtonItemView.h"
+#import "XWGJMessageCategoryItem.h"
+
 @interface XWGJMessageButtonItemView ();
 @property(nonatomic,strong)NSArray *ButtonImages;
 @property(nonatomic,strong)NSArray *ButtonDisableImages;
-@property(nonatomic,strong)NSArray *ButtonTitles;
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIView *line;
 
@@ -37,16 +38,6 @@
     return _ButtonDisableImages;
 }
 
--(NSArray *)ButtonTitles
-{
-    if (!_ButtonTitles) {
-        
-        _ButtonTitles = @[@"留学生活",@"留学申请",@"留学费用",@"留学考试",@"留学新闻",@"留学签证"];
-    }
-    return _ButtonTitles;
-    
-}
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -66,34 +57,44 @@
         
         self.backgroundColor = XCOLOR_CLEAR;
         
-        for (NSInteger i = 0; i < 6; i++) {
-            
-             UIButton *itemBtn = [[UIButton alloc] init];
-            itemBtn.enabled = self.LastIndex ==i ? NO:YES;
-            itemBtn.backgroundColor = self.LastIndex ==i ? XCOLOR_LIGHTBLUE:XCOLOR_CLEAR;
-            itemBtn.tag = i;
-            [itemBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+
+
+
+- (void)setItems:(NSArray *)items{
+
+    
+    _items = items;
+    
+    [items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        XWGJMessageCategoryItem *item = (XWGJMessageCategoryItem *)obj;
+        
+            UIButton *itemBtn = [[UIButton alloc] init];
+            itemBtn.enabled = self.LastIndex == idx ? NO:YES;
+            itemBtn.backgroundColor = self.LastIndex == idx ? XCOLOR_LIGHTBLUE:XCOLOR_CLEAR;
+            itemBtn.tag = idx;
             itemBtn.layer.borderWidth  = 1;
             itemBtn.layer.masksToBounds = YES;
             itemBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
-            
             [itemBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
             [itemBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
-            
-            
-            itemBtn.titleLabel.font =[UIFont systemFontOfSize:15];
-            
-            [itemBtn setTitle:self.ButtonTitles[i] forState:UIControlStateNormal];
-            
-            [itemBtn setImage:[UIImage imageNamed:self.ButtonImages[i]] forState:UIControlStateNormal];
-            [itemBtn setImage:[UIImage imageNamed:self.ButtonDisableImages[i]] forState:UIControlStateDisabled];
             itemBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-            
-            [self.bgView addSubview:itemBtn];
-        }
+            itemBtn.titleLabel.font =[UIFont systemFontOfSize:15];
+            [itemBtn setTitle:item.name forState:UIControlStateNormal];
+            [itemBtn setImage:[UIImage imageNamed:self.ButtonImages[idx]] forState:UIControlStateNormal];
+            [itemBtn setImage:[UIImage imageNamed:self.ButtonDisableImages[idx]] forState:UIControlStateDisabled];
+            [itemBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+
         
-    }
-    return self;
+            [self.bgView addSubview:itemBtn];
+        
+        
+    }];
+    
+    
 }
 
 -(void)layoutSubviews
@@ -102,30 +103,32 @@
     
     CGFloat margin = 10;
     
-    CGFloat bgHeight = self.bounds.size.height - margin;
     
-    self.bgView.frame = CGRectMake(0, 0, XSCREEN_WIDTH,bgHeight);
+    CGFloat bgX = 0;
+    CGFloat bgY = 0;
+    CGFloat bgW = XSCREEN_WIDTH;
+    CGFloat bgH = self.bounds.size.height - margin;
+    self.bgView.frame = CGRectMake(bgX, bgY, bgW,bgH);
     
-    self.line.frame = CGRectMake(0, bgHeight, XSCREEN_WIDTH, 0.8);
+    
+    
+    CGFloat lineX = 0;
+    CGFloat lineY = bgH;
+    CGFloat lineW = bgW;
+    CGFloat lineH = 0.8;
+    self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
+    
     
     
     
     CGFloat w = (XSCREEN_WIDTH - 4 * margin) / 3.0;
-    
-    CGFloat bh =   (bgHeight - margin) * 0.5 - margin;
-    
-    
-    for (int i = 0 ; i < 6 ; i++) {
-        
+    CGFloat h =   (bgH - margin) * 0.5 - margin;
+    for (int i = 0 ; i < self.bgView.subviews.count ; i++) {
         UIButton *item =(UIButton *)self.bgView.subviews[i];
-        
-        item.layer.cornerRadius = bh * 0.5;
-        
+        item.layer.cornerRadius = h * 0.5;
         CGFloat x = (i % 3 + 1) * margin + i % 3 * w;
-        
-        CGFloat y = margin + (bh +margin)* ( i / 3);
-        
-        item.frame = CGRectMake(x, y, w, bh);
+        CGFloat y = margin + (h +margin)* ( i / 3);
+        item.frame = CGRectMake(x, y, w, h);
         
     }
 }

@@ -13,13 +13,12 @@
 
 
 @interface NotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
 //网络请求结果
 @property(nonatomic,strong)NSMutableArray *results;
 //请求数据第几页
 @property(nonatomic,assign)int nextPage;
 
-@property(nonatomic,strong)XWGJnodataView *NDataView;
 @end
 
 @implementation NotificationViewController
@@ -63,7 +62,8 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    [self.tableView emptyViewWithError:GDLocalizedString(@"Left-noNoti")];
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -73,7 +73,7 @@
     
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;
-     self.tableView.mj_header = mj_header;
+    self.tableView.mj_header = mj_header;
     
 }
 
@@ -86,28 +86,15 @@
 
 
 
--(XWGJnodataView *)NDataView{
-    
-    if (!_NDataView) {
-        
-        _NDataView  = [XWGJnodataView noDataView];
-        _NDataView.errorStr = GDLocalizedString(@"Left-noNoti");
-        _NDataView.hidden = YES;
-        [self.view insertSubview:_NDataView aboveSubview:self.tableView];
-    }
-    
-    return _NDataView;
-}
-
-
 /**
  @param show    
  true : 隐藏
  faulse : 显示
  */
 -(void)nodataViewHidden:(BOOL)hidden{
-
-    self.NDataView.hidden = hidden;
+    
+    [self.tableView emptyViewWithError: GDLocalizedString(@"Left-noNoti")];
+    [self.tableView emptyViewWithHiden:hidden];
 }
 
 
@@ -142,8 +129,10 @@
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
          [weakSelf endMJ_Fresh];
-         [weakSelf nodataViewHidden:NO];
-         weakSelf.NDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork");
+         
+         [weakSelf.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+         [weakSelf.tableView emptyViewWithHiden:NO];
+
          
      }];
 }
@@ -269,6 +258,7 @@
                                       
             [weakSelf.results removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                    
             [weakSelf nodataViewHidden:weakSelf.results.count != 0];
                          
       }];
