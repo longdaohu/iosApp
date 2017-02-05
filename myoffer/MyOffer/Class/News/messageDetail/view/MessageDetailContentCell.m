@@ -163,7 +163,9 @@
     self.ArthorLab.frame = newRect;
     
     NSString  *path = [MessageFrame.MessageDetail[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.coverView KD_setImageWithURL:path];
+    
+    [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
     self.coverView.frame = MessageFrame.coverFrame;
     
     [self.TimeBtn setTitle:MessageFrame.MessageDetail[@"update_at"] forState:UIControlStateNormal];

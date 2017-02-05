@@ -58,6 +58,8 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         NSString *userAgent = [NSString stringWithFormat:@"%@/%@ %@/%@", bundleName, version,
                                @(systemInfo.machine), [[UIDevice currentDevice] systemVersion]];
         
+        
+        NSLog(@" ystemInfo.machine  %@",@(systemInfo.machine));
 //ENGLISH  设置环境
 //         NSString  *lan = [InternationalControl userLanguage];
 //        if ( [lan containsString:@"en"]) {

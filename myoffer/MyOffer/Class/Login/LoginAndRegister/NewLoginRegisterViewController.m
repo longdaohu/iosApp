@@ -199,8 +199,8 @@
  }
 
 
-- (void)makeNotificationCenter
-{
+- (void)makeNotificationCenter{
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification

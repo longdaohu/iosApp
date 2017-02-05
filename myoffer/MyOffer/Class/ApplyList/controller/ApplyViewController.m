@@ -17,7 +17,7 @@
 
 #define SECTIONFOOTERHEIGHT  10
 
-@interface ApplyViewController ()<UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ApplyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  DefaultTableView *tableView;
 //模型数组
 @property(nonatomic,strong)NSMutableArray *groups;
@@ -31,7 +31,6 @@
 @property(nonatomic,strong)NSMutableArray *cancelSetions;
 //删除cell对就的indexpath数组
 @property(nonatomic,strong)NSMutableArray *cancelindexPathes;
-//@property(nonatomic,strong)XWGJnodataView *NDataView;
 //删除按钮
 @property(nonatomic,strong)UIButton *cancelBottomButton;
 //提交按钮
@@ -298,28 +297,7 @@
 
 
 
-#pragma mark —— UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)  return;
-    
-    
-    if (self.cancelCourseList.count > 0) {
-        
-        [self commitCancelselectCell];
-        
-        return ;
-    }
-        
-     if (self.cancelSetions.count > 0) {
-         
-         [self commitCancelSectionView:YES];
-    }
-    
-    
-    
 
-}
 //用于删除cell,先删除cell再删除sectionHeader
 -(void)commitCancelselectCell
 {
@@ -711,9 +689,35 @@
         return;
     }
     
+    
+    XWeakSelf
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:GDLocalizedString(@"ApplicationList-comfig")  message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
-    UIAlertView *aler =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"ApplicationList-comfig") delegate:self cancelButtonTitle:GDLocalizedString(@"NetRequest-OK") otherButtonTitles:GDLocalizedString(@"Potocol-Cancel"), nil];
-    [aler show];
+    }];
+    
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:GDLocalizedString(@"NetRequest-OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (weakSelf.cancelCourseList.count > 0) {
+            
+            [weakSelf commitCancelselectCell];
+            
+            return ;
+        }
+        
+        if (weakSelf.cancelSetions.count > 0)[weakSelf commitCancelSectionView:YES];
+        
+        
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
     
 }
 

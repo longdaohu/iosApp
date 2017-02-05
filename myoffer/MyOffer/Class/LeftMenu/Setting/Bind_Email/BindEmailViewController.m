@@ -9,7 +9,7 @@
 #import "BindEmailViewController.h"
 #import "ChangePasswordViewController.h"
 
-@interface BindEmailViewController ()<UITextFieldDelegate,UIAlertViewDelegate> {
+@interface BindEmailViewController ()<UITextFieldDelegate> {
     NSArray *_cells;
     UITextField *_EmailTextField, *_VertificationTextField,*_PasswordTextField;
 }
@@ -221,8 +221,6 @@
  -(void)setNewPassword
 {
     
-    if([[UIDevice currentDevice].systemVersion floatValue] > 8.0){
-        
         UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:GDLocalizedString(@"Bind-mailNoti") preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:GDLocalizedString(@ "Potocol-Cancel")  style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -241,23 +239,10 @@
         [alertCtrl addAction:okAction];
         
         [self presentViewController:alertCtrl animated:YES completion:nil];
-    }else{
-        UIAlertView  *alert =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"Bind-mailNoti") delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel")  otherButtonTitles:GDLocalizedString(@"Person-SetPasswd"), nil];
-        [alert show];
-    }
+        
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        
-        ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
-        passwordVC.newpasswd = @"newPasswd";
-        
-        [self.navigationController pushViewController:passwordVC animated:YES];
-        
-    }
-}
+
 
 
 -(void)SendVertificationCode:(UIButton *)sender
@@ -317,12 +302,20 @@
 
 
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-KDUtilRemoveNotificationCenterObserverDealloc
+ - (void)dealloc{
+     
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
+     
+     KDClassLog(@"绑定邮箱 dealloc");
+ }
+
 
 @end
 

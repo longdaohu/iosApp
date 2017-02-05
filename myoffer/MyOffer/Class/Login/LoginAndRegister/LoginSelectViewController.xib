@@ -96,7 +96,7 @@
                 <constraint firstItem="h8J-ie-t0x" firstAttribute="top" secondItem="lkJ-gv-iaP" secondAttribute="bottom" constant="40" id="vOa-jn-oP6"/>
                 <constraint firstItem="h8J-ie-t0x" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vo2-YW-nia"/>
             </constraints>
-            <point key="canvasLocation" x="263" y="363"/>
+            <point key="canvasLocation" x="25" y="288"/>
         </view>
     </objects>
     <resources>

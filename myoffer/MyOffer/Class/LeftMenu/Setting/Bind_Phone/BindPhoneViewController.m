@@ -7,7 +7,7 @@
 //
 #import "BindPhoneViewController.h"
 #import "ChangePasswordViewController.h"
-@interface BindPhoneViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate> {
+@interface BindPhoneViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate> {
     NSArray *_cells;
     UITextField *_AreaCodeTextField, *_PhoneTextField, *_VertificationTextField, *_PasswordTextField;
 }
@@ -277,8 +277,6 @@
 -(void)setNewPassword
 {
     
-    if([[UIDevice currentDevice].systemVersion floatValue] > 8.0){
-    
         
         UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:GDLocalizedString(@"Bind-phoneNoti") preferredStyle:UIAlertControllerStyleAlert];
  
@@ -301,21 +299,10 @@
         [alertCtrl addAction:okAction];
         
         [self presentViewController:alertCtrl animated:YES completion:nil];
-    }else{
-        UIAlertView  *alert =[[UIAlertView alloc] initWithTitle:nil message:GDLocalizedString(@"Bind-mailNoti") delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel")  otherButtonTitles:GDLocalizedString(@"Person-SetPasswd"), nil];
-        [alert show];
-    }
+
+   
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        
-        ChangePasswordViewController *passwordVC =[[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
-        passwordVC.newpasswd = @"newPasswd";
-        [self.navigationController pushViewController:passwordVC animated:YES];
-        
-    }
-}
+
 
 
 

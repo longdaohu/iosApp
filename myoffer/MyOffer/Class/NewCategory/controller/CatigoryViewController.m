@@ -294,7 +294,7 @@
 //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
+
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
     collectionView.dataSource = self;
     collectionView.delegate = self;

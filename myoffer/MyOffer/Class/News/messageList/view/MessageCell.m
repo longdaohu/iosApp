@@ -53,12 +53,12 @@
         
         self.TitleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         self.TitleLab.numberOfLines = 2;
-         self.TitleLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:KDUtilSize(16)];
+        self.TitleLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:KDUtilSize(16)];
         [self.contentView addSubview:self.TitleLab];
         
         
          self.update_at_Btn = [[UIButton alloc] init];
-        self.update_at_Btn.titleLabel.font = [UIFont systemFontOfSize:12];
+         self.update_at_Btn.titleLabel.font = [UIFont systemFontOfSize:12];
          self.update_at_Btn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
         [self.update_at_Btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
          self.update_at_Btn.userInteractionEnabled = NO;

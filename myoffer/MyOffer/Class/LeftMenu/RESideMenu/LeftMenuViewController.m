@@ -139,6 +139,7 @@
          if (self.headerView.haveIcon) return;
          
           [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
+              
               self.headerView.haveIcon = YES;
               self.headerView.response = response;
          }];
@@ -239,21 +240,26 @@
                                                    destructiveAction:nil];
             // @"拍照"  @"从手机相册选择"
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+               
                 [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
+                
                     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                     imagePicker.delegate = weakSelf;
                     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
                     imagePicker.allowsEditing = YES;
                     imagePicker.showsCameraControls = YES;
                     [self presentViewController:imagePicker animated:YES completion:^{}];
+                
                 }];
             }
             [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
+             
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = weakSelf;
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 imagePicker.allowsEditing = YES;
                 [self presentViewController:imagePicker animated:YES completion:^{}];
+            
             }];
             [as showInView:[weakSelf view]];
         }];
@@ -332,15 +338,11 @@
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确认登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         [[AppDelegate sharedDelegate] logout];
-        
         [MobClick profileSignOff];
-        
         [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {
         }];
-        
         [self makeDataSource];
-        
         [self currentLeftMessageCount];
         
     }];
@@ -440,14 +442,10 @@
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = info[UIImagePickerControllerEditedImage];
     image = [image KD_imageByCroppedToSquare:600];
-    
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    
     NSString *path = [NSString stringWithFormat:@"%@m/api/account/portrait",DOMAINURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
-   
     [request setHTTPMethod:@"POST"];
-    
     NSString *boundary = @"BOUNDARY_STRING";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];

@@ -1701,12 +1701,12 @@
 			children = (
 				AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */,
 				AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */,
+				AE93E4E31D6DABA30025FC58 /* UniversityNewFrame.h */,
+				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AEAE882A1DC2086400672E57 /* UniversityNew.h */,
 				AEAE882B1DC2086400672E57 /* UniversityNew.m */,
 				AE133EA31D6EE26000AC9C42 /* UniItemFrame.h */,
 				AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */,
-				AE93E4E31D6DABA30025FC58 /* UniversityNewFrame.h */,
-				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AE175BBC1D79593600FD8865 /* UniDetailGroup.h */,
 				AE175BBD1D79593600FD8865 /* UniDetailGroup.m */,
 			);
