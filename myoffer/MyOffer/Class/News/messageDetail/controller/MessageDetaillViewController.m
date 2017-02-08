@@ -19,7 +19,7 @@
 #import "ApplyViewController.h"
 #import "XWGJMessageFrame.h"
 #import "NewsItem.h"
-#import "ShareViewController.h"
+#import "ShareNViewController.h"
 #import "UniversityNew.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
@@ -42,7 +42,7 @@
 
 @property(nonatomic,strong)KDProgressHUD *hud;
 //分享
-@property(nonatomic,strong)ShareViewController *shareVC;
+@property(nonatomic,strong)ShareNViewController *shareVC;
 //无数据提示框
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 //数据源
@@ -185,7 +185,7 @@
         self.webView.scalesPageToFit = YES;
         NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
-    
+ 
 }
 
 
@@ -491,7 +491,8 @@
     return YES;
 }
 
-- (ShareViewController *)shareVC{
+
+- (ShareNViewController *)shareVC{
     
     if (!_shareVC) {
         
@@ -505,19 +506,15 @@
         [shareInfor setValue:shareTitle forKey:@"shareTitle"];
         [shareInfor setValue:shareContent forKey:@"shareContent"];
         
-        XWeakSelf
-        _shareVC = [[ShareViewController alloc] init];
+        
+        _shareVC = [ShareNViewController shareView];
         _shareVC.shareInfor = shareInfor;
-        _shareVC.actionBlock = ^{
-            
-            [weakSelf.shareVC.view removeFromSuperview];
-            
-        };
-        [self.view addSubview:_shareVC.view];
-
+        
         [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
         
     }
+    
     return _shareVC;
 }
 
@@ -525,12 +522,7 @@
 //分享
 - (void)share{
     
-    if (_shareVC.view.superview != self.view) {
-        
-        [self.view addSubview:_shareVC.view];
-        
         [self.shareVC  show];
-    }
     
 }
 

@@ -15,6 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.backgroundColor = XCOLOR_CLEAR;
         self.titleLabel.textAlignment = NSTextAlignmentCenter;

@@ -8,18 +8,16 @@
 #import "UMSocial.h"
 #import "XWGJAboutViewController.h"
 #import "XWGJAbout.h"
-#import "XWGJShareView.h"
 #import "XWGJAaboutHeader.h"
-#import "ShareViewController.h"
+#import "ShareNViewController.h"
 #import "HomeSectionHeaderView.h"
 
 @interface XWGJAboutViewController ()<UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *abountArray;         //关于数据源
-@property(nonatomic,strong)XWGJShareView *ShareView;       //分享View
 @property(nonatomic,strong)UIWebView *webView;           //用于打电话
 @property(nonatomic,strong)UILabel *CompanyLab;          //公司信息Label
-@property(nonatomic,strong)ShareViewController *shareVC;
+@property(nonatomic,strong)ShareNViewController *shareVC;
 @end
 
 
@@ -169,6 +167,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
+    NSLog(@"------------ %ld",indexPath.row);
+    
     if ( 0  == indexPath.section) {
         switch (indexPath.row) {
             case 0: //喜欢
@@ -235,40 +236,25 @@
 }
 
 
-- (ShareViewController *)shareVC{
+- (ShareNViewController *)shareVC{
     
     if (!_shareVC) {
-        
-        
-        XWeakSelf
-        _shareVC = [[ShareViewController alloc] init];
-        
-        _shareVC.actionBlock = ^{
-            
-            [weakSelf.shareVC.view removeFromSuperview];
-            
-        };
-        
-        [self.view addSubview:_shareVC.view];
 
+        _shareVC = [ShareNViewController shareView];
         [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
         
     }
+    
     return _shareVC;
 }
 
 
+
 //分享
 - (void)share{
- 
-    if (_shareVC.view.superview != self.view) {
-        
-        [self.view addSubview:_shareVC.view];
-        
+    
         [self.shareVC  show];
-
-    }
- 
 }
 
 

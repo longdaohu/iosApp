@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 
 @interface MessageViewController : BaseViewController
--(void)leftViewMessage;
+- (void)leftViewMessage;
 
 @end

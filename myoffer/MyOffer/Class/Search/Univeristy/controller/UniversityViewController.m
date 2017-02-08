@@ -23,7 +23,7 @@
 #import "UniversityRightView.h"
 #import "MessageDetaillViewController.h"
 #import "IDMPhotoBrowser.h"
-#import "ShareViewController.h"
+#import "ShareNViewController.h"
 #import "UniversityFooterView.h"
 #import "UniversityCourseViewController.h"
 #import "PipeiEditViewController.h"
@@ -65,7 +65,7 @@ typedef enum {
 //当前选择类型
 @property(nonatomic,assign)UniversityItemType    clickType;
 //分享功能
-@property(nonatomic,strong)ShareViewController   *shareVC;
+@property(nonatomic,strong)ShareNViewController   *shareVC;
 //底部按钮
 @property(nonatomic,strong)UniversityFooterView *footer;
 //用于记录用户入学难易程度
@@ -568,19 +568,13 @@ typedef enum {
 
 }
 //集成分享功能
-- (ShareViewController *)shareVC
+- (ShareNViewController *)shareVC
 {
     if (!_shareVC) {
         
-        XWeakSelf
-        _shareVC = [[ShareViewController alloc] initWithUniversity:self.UniFrame.item];
-        _shareVC.actionBlock = ^{
-             [weakSelf.shareVC.view removeFromSuperview];
-         };
-        
+        _shareVC = [[ShareNViewController alloc] initWithUniversity:self.UniFrame.item];
         [self addChildViewController:_shareVC];
-
-        [self.view addSubview:_shareVC.view];
+        [self.view addSubview:self.shareVC.view];
  
     }
     return _shareVC;

@@ -7,9 +7,9 @@
 //
 
 #import "MyOfferViewController.h"
+
 @interface MyOfferViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *notiLabel;
-
 @end
 
 @implementation MyOfferViewController
@@ -24,7 +24,8 @@
     XWGJnodataView *noDataView =[XWGJnodataView noDataView];
     noDataView.errorStr = @"亲，您的offer无法在app上显示，请登录myoffer网站查看。";
     [self.view addSubview:noDataView];
-
+ 
+  
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -43,7 +44,6 @@
     [MobClick endLogPageView:@"page — 我的Offer"];
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {
