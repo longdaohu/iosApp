@@ -10,5 +10,5 @@
 @class ApplyStatusRecord;
 @interface ApplyStatusCell : UITableViewCell
 @property(nonatomic,strong)ApplyStatusRecord *record;
-+(instancetype)CreateCellWithTableView:(UITableView *)tableView;
++(instancetype)cellWithTableView:(UITableView *)tableView;
 @end

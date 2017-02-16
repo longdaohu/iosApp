@@ -5,7 +5,6 @@
 //  Created by Blankwonder on 6/17/15.
 //
 //  我的关注院校
-#define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 #import "FavoriteViewController.h"
 #import "UniversityViewController.h"
@@ -42,7 +41,7 @@
 
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
-    [self reloadData];
+    [self makeDataSource];
 }
 
 
@@ -78,7 +77,7 @@
  }
 
 //请求数据
-- (void)reloadData {
+- (void)makeDataSource {
     
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
@@ -103,7 +102,12 @@
 //根据返回数据配置UI
 - (void)configrationUIWithresponse:(id)response{
 
+    
     NSArray *universities = (NSArray *)response;
+  
+    [self.tableView emptyViewWithHiden:universities.count>0];
+    
+    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
     
     NSMutableArray *uni_temps = [NSMutableArray array];
     
@@ -112,13 +116,8 @@
         [uni_temps addObject: [UniItemFrame frameWithUniversity:[UniversityNew mj_objectWithKeyValues:obj]]];
         
     }];
-    
    
     self.favor_Unies = [uni_temps copy];
-    
-    [self.tableView emptyViewWithHiden:self.favor_Unies.count > 0];
-    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
-
     [self.tableView reloadData];
     
 

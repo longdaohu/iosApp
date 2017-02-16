@@ -34,9 +34,7 @@
     CGFloat official_nameW = XSCREEN_WIDTH - official_nameX;
     CGFloat official_nameH =  Uni_subtitle_FontSize;
     self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
-    
-    
- 
+   
     
     CGFloat anthorX =  official_nameX;
     CGFloat anthorH =  Uni_rank_FontSize + 5;

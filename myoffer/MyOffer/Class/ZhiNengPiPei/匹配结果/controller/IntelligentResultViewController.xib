@@ -10,8 +10,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntelligentResultViewController">
             <connections>
                 <outlet property="NewSelectLabel" destination="a4f-3B-CqI" id="dFR-6x-muI"/>
-                <outlet property="NoDataLabel" destination="FAA-nq-5TK" id="3MP-h1-uBj"/>
-                <outlet property="NoDataView" destination="uh8-P0-2r0" id="Tg2-j8-nOB"/>
                 <outlet property="ResultTableView" destination="3w2-tJ-h1W" id="NCN-oI-GdL"/>
                 <outlet property="bottomView" destination="B6A-Ne-GDe" id="N8s-6V-27m"/>
                 <outlet property="commitButton" destination="KGm-Yk-ruZ" id="p7c-vL-Uva"/>
@@ -25,7 +23,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3w2-tJ-h1W">
@@ -163,51 +161,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-473" y="-4"/>
         </view>
-        <view contentMode="scaleToFill" id="uh8-P0-2r0" userLabel="dataView">
-            <rect key="frame" x="0.0" y="0.0" width="337" height="273"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Inte_Nodata" translatesAutoresizingMaskIntoConstraints="NO" id="KCF-jb-L4h">
-                    <constraints>
-                        <constraint firstAttribute="width" constant="180" id="OKL-Eo-OqS"/>
-                        <constraint firstAttribute="height" constant="200" id="vgy-Ox-Ewd"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抱歉，没有符合条件的学校！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAA-nq-5TK">
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" id="N1H-Dy-6wb"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="N1H-Dy-6wb"/>
-                        </mask>
-                    </variation>
-                </label>
-            </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="FAA-nq-5TK" secondAttribute="trailing" constant="5" id="JRi-KR-AIy"/>
-                <constraint firstItem="KCF-jb-L4h" firstAttribute="centerX" secondItem="uh8-P0-2r0" secondAttribute="centerX" id="TNZ-E8-PEQ"/>
-                <constraint firstItem="FAA-nq-5TK" firstAttribute="top" secondItem="KCF-jb-L4h" secondAttribute="bottom" constant="5" id="eyo-Tt-Jdb"/>
-                <constraint firstItem="FAA-nq-5TK" firstAttribute="top" secondItem="KCF-jb-L4h" secondAttribute="bottom" constant="5" id="fTp-b9-ybN"/>
-                <constraint firstItem="FAA-nq-5TK" firstAttribute="leading" secondItem="uh8-P0-2r0" secondAttribute="leading" constant="5" id="lkS-51-81a"/>
-                <constraint firstItem="KCF-jb-L4h" firstAttribute="centerY" secondItem="uh8-P0-2r0" secondAttribute="centerY" id="tyP-MP-c8p"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="fTp-b9-ybN"/>
-                </mask>
-            </variation>
-            <point key="canvasLocation" x="-464.5" y="329.5"/>
-        </view>
     </objects>
     <resources>
-        <image name="Inte_Nodata" width="256" height="256"/>
         <image name="Triangle.png" width="25" height="22"/>
     </resources>
 </document>

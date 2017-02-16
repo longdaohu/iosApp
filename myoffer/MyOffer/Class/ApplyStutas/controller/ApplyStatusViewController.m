@@ -17,9 +17,7 @@
  #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *tableView;
-//没有数据时显示
-@property (strong, nonatomic) XWGJnodataView *noDataView;
+@property (strong, nonatomic) DefaultTableView *tableView;
 //申请记录数组
 @property(nonatomic,strong)NSArray *Record_Groups;
 
@@ -58,16 +56,23 @@
 
 -(void)makeTableView
 {
-    self.tableView                 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView                 = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
-    
+
     //上拉刷新
     MJRefreshNormalHeader *header      = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header           = header;
+
+}
+
+- (void)tableViewEmpty:(BOOL)show showString:(NSString*)errorstr{
+
+    [self.tableView emptyViewWithHiden:show];
+    [self.tableView emptyViewWithError:errorstr];
 
 }
 
@@ -85,7 +90,7 @@
     
 }
 
-
+/*
 -(XWGJnodataView *)noDataView{
     
     if (!_noDataView) {
@@ -98,7 +103,7 @@
     
     return _noDataView;
 }
-
+*/
 
 - (void)viewDidLoad {
    
@@ -121,9 +126,8 @@
 {
     
     if (![self checkNetworkState]) {
-        
-        self.noDataView.errorStr = GDLocalizedString(@"NetRequest-noNetWork") ;
-        self.noDataView.hidden = NO;
+
+        [self tableViewEmpty:NO showString:GDLocalizedString(@"NetRequest-noNetWork")];
 
         if (refresh) [self.tableView.mj_header endRefreshing];
           
@@ -136,38 +140,36 @@
     
         [weakSelf makeUIConfigrationWith:response];
         
-        if (refresh) {
-            [weakSelf.tableView.mj_header endRefreshing];
-        }
-            
-          
     }];
-    
-
-  
+   
 }
 
 
 //根据请求数据配置UI
 -(void)makeUIConfigrationWith:(id)response{
 
-    NSArray *records       = response[@"records"];
+    
+    [self.tableView.mj_header endRefreshing];
     
     NSMutableArray *groups = [NSMutableArray array];
     
-    for (NSDictionary *record in records) {
+    for (NSDictionary *record in response[@"records"]) {
         
         [groups addObject:[ApplyStatusRecordGroup ApplyRecourseGroupWithDictionary:record]];
         
     }
     
     self.Record_Groups = [groups copy];
-    
-    self.noDataView.hidden = records.count == 0 ? NO : YES;
+ 
+    [self tableViewEmpty:(self.Record_Groups.count > 0)  showString:GDLocalizedString(@"ApplicationStutasVC-noData")];
     
     [self.tableView reloadData];
     
-
+    if (!groups.count) {
+        
+        [self.tableView.mj_header removeFromSuperview];
+    }
+    
 }
 
 
@@ -212,7 +214,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ApplyStatusCell *cell =[ApplyStatusCell CreateCellWithTableView:tableView];
+    ApplyStatusCell *cell =[ApplyStatusCell cellWithTableView:tableView];
     ApplyStatusRecordGroup *group = self.Record_Groups[indexPath.section];
     cell.record = group.record;
     

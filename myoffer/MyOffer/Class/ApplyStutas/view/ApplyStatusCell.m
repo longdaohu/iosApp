@@ -21,7 +21,7 @@
 
 @implementation ApplyStatusCell
 
-+(instancetype)CreateCellWithTableView:(UITableView *)tableView
++(instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *identi = @"record";
     

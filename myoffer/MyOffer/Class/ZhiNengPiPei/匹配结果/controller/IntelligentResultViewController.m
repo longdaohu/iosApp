@@ -28,24 +28,21 @@
 @property (weak, nonatomic) IBOutlet UIView *upHeaderView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
+
 //推荐数据源
 @property(nonatomic,strong)NSMutableArray *recommendations;
 //临时数据源
 @property(nonatomic,strong)NSMutableArray *resultList;
-@property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs;
-@property(nonatomic,strong)NSMutableArray *SelectedUniversityIDs;
+@property(nonatomic,strong)NSMutableArray *NewSelectUniversityIDs,*SelectedUniversityIDs;
 //pieChart图表
 @property (strong, nonatomic) XYPieChart *PieHeadView;
-//pieChart图表每一格的数量数组
-@property(nonatomic, strong) NSMutableArray  *slices;
 //pieChart图表每一格对应的图标说明
 @property(nonatomic, strong)NSArray            *subtitleArr;
+//pieChart图表每一格的数量数组
 //pieChart图表每一格对应的颜色数组
-@property(nonatomic, strong) NSMutableArray    *sliceColors;
 //pieChart图表每一格对应名称数组
-@property(nonatomic, strong) NSMutableArray    *sliceTitles;
 //pieChart图表每一格对应弧度数组
-@property(nonatomic, strong) NSMutableArray    *sliceAngles;
+@property(nonatomic, strong) NSMutableArray   *slices,*sliceColors,*sliceTitles,*sliceAngles;
 //pieChart图表中间的文字说明
 @property(nonatomic,strong)UILabel    *centerLabel;
 //pieChart图表中间按钮
@@ -144,7 +141,8 @@
             
         }];
         
-        [self.view addSubview:_pipeiNoDataView];
+        [self.view insertSubview:_pipeiNoDataView atIndex:0];
+        
     }
     
     return _pipeiNoDataView;
@@ -204,7 +202,6 @@
      self.NewSelectLabel.text =[NSString stringWithFormat:@"%@ ：0",GDLocalizedString(@"ApplicationList-003")];
      self.pieSelectLabel.text = self.subtitleArr[0];
      self.title = GDLocalizedString(@"Evaluate-inteligent");
-     self.NoDataLabel.text = GDLocalizedString(@"Evaluate-noData");
 }
 
 
@@ -265,19 +262,13 @@
 {
     self.ResultTableView.backgroundColor = XCOLOR_BG;
     self.bottomView.hidden = YES;
-    self.NoDataView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
-    self.NoDataView.hidden = YES;
-    [self.view addSubview: self.NoDataView];
 }
 
 -(void)makeNavigatinView
 {
- 
-        self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(casePipeiEditPage)];
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    
-        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
-    
+    self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Edit39"] style:UIBarButtonItemStylePlain target:self action:@selector(casePipeiEditPage)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
 }
 
 -(void)makeUI
@@ -359,7 +350,6 @@
             UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
             uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
             [temps addObject:uniFrame];
-            
          }
         
         [temp_recommendations addObject:temps];
@@ -380,6 +370,7 @@
     NSString *firstItem;
     NSInteger selectedIndex = -1;
     NSInteger itemCount = 0;
+    
     for(int i = 0; i < 3; i ++){
         
         NSUInteger count = [self.recommendations[i] count];
@@ -407,10 +398,9 @@
         }
     }
     
-    
+    self.PieHeadView.userInteractionEnabled = itemCount > 1;
+   
     if (itemCount > 1) { //当选项只有一个时，self.PieHeadView不可点击
-        
-       self.PieHeadView.userInteractionEnabled = YES;
         
        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -418,9 +408,6 @@
             
         });
 
-    }else{
-    
-        self.PieHeadView.userInteractionEnabled = NO;
     }
     
     self.selectIndex  = selectedIndex;
@@ -446,11 +433,9 @@
             break;
         }
     }
-    
-    
     CGFloat angle = 2 * M_PI * startNum.integerValue / total;
-    
     [self.PieHeadView setStartPieAngle:M_PI_2 - angle/2]; //piechar设置开始角度
+    
     
     //这里应该是正常的
    //   NSLog(@"piechar设置开始角度  %lf %lf",angle,M_PI_2 - angle/2);
@@ -475,9 +460,7 @@
         }
     }
     
-    self.bottomView.hidden = total == 0 ? YES : NO;
-    self.NoDataView.hidden = !self.bottomView.hidden;
-    self.pipeiNoDataView.hidden = !self.bottomView.hidden;
+ 
     
     //延迟显示
      XWeakSelf
@@ -493,7 +476,13 @@
         weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
         
     });
-
+    
+    
+    self.commitButton.superview.hidden = !(total > 0);
+    
+    self.pipeiNoDataView.hidden = total;
+    
+    self.ResultTableView.hidden = !self.pipeiNoDataView.hidden;
     
     [self.ResultTableView reloadData];
     
@@ -572,6 +561,8 @@
 }
 
 
+
+//提交申请意向
 - (IBAction)CommitButtonPressed:(KDEasyTouchButton *)sender {
     
     if (self.NewSelectUniversityIDs.count == 0) {
@@ -613,6 +604,8 @@
 }
 
 
+
+
 #pragma mark - XYPieChart Data Source
 
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
@@ -647,15 +640,14 @@
     if (self.selectIndex != index) {
       
     [self.resultList removeAllObjects];
-    
-    self.resultList =  [self.recommendations[index] mutableCopy];
-        
+     self.resultList =  [self.recommendations[index] mutableCopy];
     [self.ResultTableView reloadData];
+        
     
     [self makeCurrentLabel:[NSString stringWithFormat:@"%lu",(unsigned long)self.resultList.count] currentItem:self.sliceTitles[index]];
 
-    self.pieSelectLabel.text = self.subtitleArr[index];
         
+    self.pieSelectLabel.text = self.subtitleArr[index];
         
         __block  CGFloat turnAngle = 0;
         
@@ -670,7 +662,6 @@
         }else if([self.sliceAngles[0] floatValue] == 0 && [self.sliceAngles[1] floatValue] != 0) {
             
             //数组0 为空  1  2 有数据
-
             
             NSString *slicesAngle = self.sliceAngles[2];
             
@@ -716,19 +707,22 @@
             
         }
         
+        
+        
+        
+        //pieChart转动
         [UIView animateWithDuration:0.6 animations:^{
             
             pieChart.transform = CGAffineTransformRotate(self.PieHeadView.transform, turnAngle);
             
         }];
         
+        
+        
         self.selectIndex = index;
         
-        
         UIView *pie = self.PieHeadView.subviews[0];
-        
         CALayer *parentLayer = [pie layer];
-        
         NSArray *slicelayers = [parentLayer sublayers];
         
         [slicelayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -778,7 +772,7 @@
 }
 
 
-
+//进入智能匹配
 -(void)casePipeiEditPage
 {
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
