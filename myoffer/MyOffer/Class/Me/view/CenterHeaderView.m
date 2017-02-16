@@ -36,39 +36,11 @@
         
         self.backgroundColor =XCOLOR_WHITE;
         
-        CenterSectionItem *pipei  = [CenterSectionItem viewWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所"];
-        pipei.tag                 = centerItemTypepipei;
-        pipei.actionBlack = ^(UIButton *sender){
-            
-            if (self.sectionBlock) {
-        
-                self.sectionBlock(centerItemTypepipei);
-            }
-        };
-        
-        CenterSectionItem *favor  = [CenterSectionItem viewWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所"];
-        favor.tag                 = centerItemTypefavor;
-        favor.actionBlack = ^(UIButton *sender){
-         
-            if (self.sectionBlock) {
-                
-                self.sectionBlock(centerItemTypefavor);
-            }
-        };
-        CenterSectionItem *service  = [CenterSectionItem viewWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐"];
-        service.tag                 = centerItemTypeservice;
-        service.actionBlack = ^(UIButton *sender){
-            
-            if (self.sectionBlock) {
-                
-                self.sectionBlock(centerItemTypeservice);
-            }
-        };
-        
-        [self addSubview:pipei];
-        [self addSubview:favor];
-        [self addSubview:service];
+        CenterSectionItem *pipei  = [self itemWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所" itemTag:centerItemTypepipei];
+        CenterSectionItem *favor  = [self itemWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所" itemTag:centerItemTypefavor];
+        CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
         self.items = @[pipei,favor,service];
+        
         
         UIView *lineOne = [[UIView alloc] init];
         UIView *lineTwo = [[UIView alloc] init];
@@ -83,11 +55,28 @@
     return self;
 }
 
--(void)layoutSubviews
+
+- (CenterSectionItem *)itemWithIcon:(NSString *)iconName title:(NSString *)title subtitle:(NSString *)subName itemTag:(centerItemType)type{
+
+    CenterSectionItem *item  = [CenterSectionItem viewWithIcon:iconName title:title subtitle:subName];
+    item.tag                 = type;
+    item.actionBlack = ^(UIButton *sender){
+        
+        if (self.sectionBlock) {
+            
+            self.sectionBlock(type);
+        }
+    };
+    
+    [self addSubview:item];
+    
+    return  item;
+}
+
+- (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-
+ 
     CGFloat itemY = 0;
     CGFloat itemW = XSCREEN_WIDTH / 3;
     CGFloat itemH = self.bounds.size.height;
@@ -128,7 +117,6 @@
 
     _response = response;
     
-    
     if(!response)  return;
     
     CenterSectionItem *pipei  = self.items[0];
@@ -139,7 +127,6 @@
 
     CenterSectionItem *service  = self.items[2];
     service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
-    
 }
 
 

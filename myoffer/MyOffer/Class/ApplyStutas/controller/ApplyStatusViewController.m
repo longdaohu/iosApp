@@ -147,6 +147,7 @@
   
 }
 
+
 //根据请求数据配置UI
 -(void)makeUIConfigrationWith:(id)response{
 
@@ -163,8 +164,9 @@
     self.Record_Groups = [groups copy];
     
     self.noDataView.hidden = records.count == 0 ? NO : YES;
-   
+    
     [self.tableView reloadData];
+    
 
 }
 

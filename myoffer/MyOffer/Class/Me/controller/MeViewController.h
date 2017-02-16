@@ -8,24 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    CenterClickItemTypeNoClick,
-    CenterClickItemTypePipei,
-    CenterClickItemTypeFavor,
-    CenterClickItemTypeServiceMall,
-    CenterClickItemTypeApplyList,
-    CenterClickItemTypeApplyStatus,
-    CenterClickItemTypeApplyMatial,
-    CenterClickItemTypeMyoffer
-}CenterClickItemType;
+typedef enum{
+    ItemTypeClickNO = 0,
+    ItemTypeClickPipei,
+    ItemTypeClickFavor,
+    ItemTypeClickApplyList,
+    ItemTypeClickApplyStatus,
+    ItemTypeClickApplyMatial,
+    ItemTypeClickMyoffer
+}ItemTypeClick;
 
-@interface MeViewController : BaseViewController {
 
-}
+@interface MeViewController : BaseViewController
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *OptionButton;
 //已选择服务项
-@property(nonatomic,assign)CenterClickItemType clickType;
+@property(nonatomic,assign)ItemTypeClick clickType;
 
 -(void)leftViewMessage;
 

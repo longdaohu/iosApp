@@ -234,7 +234,7 @@
             break;
         case 3:{
             MeViewController *me = ( MeViewController *)nav.viewControllers[0];
-            me.clickType = CenterClickItemTypeNoClick;
+            me.clickType = ItemTypeClickNO;
         }
             break;
         default:

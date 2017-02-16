@@ -70,7 +70,6 @@ typedef enum {
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -89,7 +88,6 @@ typedef enum {
 
 -(void)makeUI
 {
-    
     [self makeHeaderView];
     
     [self makeNavigationView];
@@ -100,61 +98,114 @@ typedef enum {
     
 }
 
+//网络请求
 
 -(void)getRequestCenterSourse{
     
-    XWeakSelf;
-    //查看是否有新通知消息
     if (LOGIN && [self checkNetWorkReaching]) {
         
-        //判断是否有智能匹配数据或收藏学校
-        [self startAPIRequestWithSelector:kAPISelectorRequestCenter parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-
-             weakSelf.myCountResponse = response;
-            
-            [weakSelf.tableView reloadData];
-        }];
+        [self requestWithPath:kAPISelectorRequestCenter];
+        [self requestWithPath:kAPISelectorApplicationStatus];
+        [self requestWithPath:kAPISelectorZiZengPipeiGet];
         
-        //判断显示图片
-        /**     state     状态有4个值
-         *  【 pending  ——审核中
-         *  【 PushBack ——退回
-         *  【 Approved ——审核通过
-         *  【 -1       ——没有申请过
-         */
-        [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-           
-            NSString *state       = response[@"state"];
-            NSString *imageName   = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
-            OptionButtonType type =   [state containsString:@"1"] ? OptionButtonTypeZineng :OptionButtonTypeZhuangTai;
-            [weakSelf matchImageName:imageName withOptionButtonTag:type];
-            
-         }];
+        return;
+    }
         
-        /**
-         //判断是否有智能匹配数据或收藏学校
-         */
-        
-        XWeakSelf
-        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-            
-        }];
-        
-        
-    }else{
-        
-        [self matchImageName:GDLocalizedString(@"center-matchImage") withOptionButtonTag:OptionButtonTypeZineng];
-         self.myCountResponse = nil;
-        [self.tableView reloadData];
-        
-     }
+    [self matchImageName:GDLocalizedString(@"center-matchImage") tag:OptionButtonTypeZineng];
+     self.myCountResponse = nil;
+    [self.tableView reloadData];
     
     
 }
+
+//网络请求
+- (void)requestWithPath:(NSString *)path{
+    
+    XWeakSelf
+    [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+        
+        
+        if ([path isEqualToString:kAPISelectorApplicationStatus]) {
+            
+            [weakSelf resultWithApplyStatusWithResponse:response];
+        }
+        
+     
+        if ([path isEqualToString:kAPISelectorZiZengPipeiGet]) {
+            
+            [weakSelf PiPeiWithResponse:response];
+
+         }
+        
+        
+        if ([path isEqualToString:kAPISelectorRequestCenter]) {
+            
+            [weakSelf resultWithRequestCenterWithResponse:response];
+
+         }
+        
+      
+        if ([path isEqualToString:kAPISelectorCheckNews]) {
+            
+            [weakSelf resultWithCheckNewsWithResponse:response];
+            
+        }
+        
+        
+    }];
+    
+}
+
+//判断是否有智能匹配数据或收藏学校
+- (void)resultWithRequestCenterWithResponse:(id)response{
+   
+    self.myCountResponse = response;
+    
+    [self.tableView reloadData];
+}
+
+
+//判断是否有智能匹配数据或收藏学校
+- (void)PiPeiWithResponse:(id)response{
+   
+    self.recommendationsCount = response[@"university"] ? 1 : 0;
+   
+}
+
+//判断显示图片
+- (void)resultWithApplyStatusWithResponse:(id)response{
+
+    /**     state     状态有4个值
+     *  【 pending  ——审核中
+     *  【 PushBack ——退回
+     *  【 Approved ——审核通过
+     *  【 -1       ——没有申请过
+     */
+    NSString *state       = response[@"state"];
+    NSString *imageName   = [state containsString:@"1"] ? GDLocalizedString(@"center-matchImage") :GDLocalizedString(@"center-statusImage");
+    OptionButtonType type =   [state containsString:@"1"] ? OptionButtonTypeZineng :OptionButtonTypeZhuangTai;
+    [self matchImageName:imageName tag:type];
+   
+}
+
+//显示是否有新消息显示在导航栏
+- (void)resultWithCheckNewsWithResponse:(id)response{
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSInteger message_count  = [response[@"message_count"] integerValue];
+    NSInteger order_count    = [response[@"order_count"] integerValue];
+    [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+    [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
+    [ud synchronize];
+    
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)(message_count +order_count)];
+   
+}
+
+
 //用于设置tabelHeaderView图片
--(void)matchImageName:(NSString *)imageName withOptionButtonTag:(OptionButtonType)tag
+-(void)matchImageName:(NSString *)imageName tag:(OptionButtonType)tag
 {
     self.centerHeader.image = XImage(imageName);
     
@@ -164,7 +215,7 @@ typedef enum {
 
 -(void)makeOther{
 
-    [self.OptionButton addTarget:self action:@selector(OptionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.OptionButton addTarget:self action:@selector(OptionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRequestCenterSourse) name:@"requestCenter" object:nil];
     
@@ -173,7 +224,7 @@ typedef enum {
 
 -(void)makeCellArray
 {
-    //外包公司cell数据方式
+    
     ActionTableViewCell *(^newCell)(NSString *text, UIImage *icon, void (^action)(void)) = ^ActionTableViewCell*(NSString *text, UIImage *icon, void (^action)(void)) {
         ActionTableViewCell *cell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.detailTextLabel.textColor =[UIColor darkGrayColor];
@@ -199,21 +250,21 @@ typedef enum {
     self.cells = @[@[
                        newCell(list, XImage(@"center_yixiang"),
                                ^{
-                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyList];
+                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyList];
                                }),
                        newCell(status,XImage(@"center_status"),
                                ^{
-                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
+                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyStatus];
                                }),
                        
                        newCell(material,XImage(@"center_matial"),
                                ^{
-                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeApplyMatial];
+                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyMatial];
                                }),
                        
                        newCell(myoffer, XImage(@"center_myoffer"),
                                ^{
-                                   [weakSelf centerPageClickWithItemType:CenterClickItemTypeMyoffer];
+                                   [weakSelf itemOnClickWithType:ItemTypeClickMyoffer];
                                    
                                })] ];
 
@@ -250,40 +301,39 @@ typedef enum {
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
 {
-    if (LOGIN) {
+    if (!LOGIN) return;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self centerPageClickWithItemType:self.clickType];
-
-        });
-     }
+        [self itemOnClickWithType:self.clickType];
+    });
+    
 }
 
 //实现不同选项跳转
--(void)centerPageClickWithItemType:(CenterClickItemType)type
+-(void)itemOnClickWithType:(ItemTypeClick)type
 {
-    self.clickType = LOGIN ? CenterClickItemTypeNoClick : type;
+    self.clickType = LOGIN ? ItemTypeClickNO : type;
     
     RequireLogin
     
     switch (type) {
-        case CenterClickItemTypePipei:
+        case ItemTypeClickPipei:
             [self CasePipei];
             break;
-        case CenterClickItemTypeFavor:
+        case ItemTypeClickFavor:
             [self CaseFavoriteUniversity];
             break;
-        case CenterClickItemTypeApplyList:
+        case ItemTypeClickApplyList:
             [self CaseApplyListView];
             break;
-        case CenterClickItemTypeApplyStatus:
+        case ItemTypeClickApplyStatus:
             [self CaseApplyStatusView];
             break;
-        case CenterClickItemTypeApplyMatial:
+        case ItemTypeClickApplyMatial:
             [self CaseApplyMatial];
             break;
-        case CenterClickItemTypeMyoffer:
+        case ItemTypeClickMyoffer:
             [self CaseMyoffer];
             break;
         default:
@@ -294,6 +344,7 @@ typedef enum {
 //分区头
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+ 
     CenterHeaderView *headerView =  [CenterHeaderView centerSectionViewWithResponse:self.myCountResponse];
     headerView.sectionBlock  =  ^(centerItemType type){
         switch (type) {
@@ -301,7 +352,7 @@ typedef enum {
                 [self CasePipei];
                 break;
             case centerItemTypefavor:
-                [self centerPageClickWithItemType:CenterClickItemTypeFavor];
+                [self itemOnClickWithType:ItemTypeClickFavor];
                 break;
             default:
                 [self CaseServiceSelection];
@@ -309,8 +360,10 @@ typedef enum {
         }
         
     };
+    
     return headerView;
 }
+
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -327,10 +380,15 @@ typedef enum {
     
     ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
     cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
-//    if ([cell.textLabel.text containsString:@"ffer"]) {
-//        NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
-//        cell.countLabel.text  = countString;
-//    }
+    
+    /*
+     if ([cell.textLabel.text containsString:@"ffer"]) {
+     NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
+     cell.countLabel.text  = countString;
+     }
+     
+     */
+
     return cell;
 }
 
@@ -355,62 +413,24 @@ typedef enum {
 }
 
 
-#pragma mark ——— UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-     if (buttonIndex) { //跳转到QQ下载页面
-         
-         [self addWebViewWithpath:@"http://appstore.com/qq"];
-     }
-}
-
-//打开左侧菜单
--(void)showLeftMenu
-{
-    [self.sideMenuViewController presentLeftMenuViewController];
-    
-}
-
 //表头图片不同状态下跳转方式
--(void)OptionButtonPressed:(UIButton *)optionButton
+-(void)OptionButtonClick:(UIButton *)optionButton
 {
     [MobClick event:@"apply_topStutas"];
     
-    switch (optionButton.tag) {
-        case OptionButtonTypeZineng:
-            [self CasePipei];
-            break;
-        default:
-            RequireLogin
-            [self centerPageClickWithItemType:CenterClickItemTypeApplyStatus];
-            break;
+    if (optionButton.tag == OptionButtonTypeZineng) {
+        
+        [self CasePipei];
+        
+        return;
     }
+    
+    RequireLogin
+    [self itemOnClickWithType:ItemTypeClickApplyStatus];
+  
+    
 }
 
-//跳转到QQ客服聊天页面
--(void)QQservice
-{
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
-      
-        [MobClick event:@"KeFu"];
-        
-        [self addWebViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
-        
-    }else{
-        
-        UIAlertView *aler =[[UIAlertView alloc] initWithTitle:GDLocalizedString(@"Me-QQService") message:nil delegate:self cancelButtonTitle:GDLocalizedString(@"Potocol-Cancel") otherButtonTitles:GDLocalizedString(@"Me-QQDownload"),nil];
-        [aler show];
-    }
-}
-
-- (void)addWebViewWithpath:(NSString *)path{
-
-    UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-    webView.delegate      = self;
-    [webView loadRequest:request];
-    [self.view addSubview:webView];
-}
 
 
 //导航栏 leftBarButtonItem
@@ -420,36 +440,21 @@ typedef enum {
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
     NSString *order_count    = [ud valueForKey:@"order_count"];
-    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
     
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)(message_count.integerValue + order_count.integerValue)];
     
     if (LOGIN && [self checkNetWorkReaching]) {
         
-        XWeakSelf
-        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
-            NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count    = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
-            [ud synchronize];
-            
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-        }];
-        
-    }
+        [self requestWithPath:kAPISelectorCheckNews];
     
+        return;
+    }
     
     //没有登录时要还原初始数据
-    if (!LOGIN) {
-        
-        self.leftView.countStr  = @"0";
-        [self matchImageName:GDLocalizedString(@"center-matchImage")  withOptionButtonTag:OptionButtonTypeZineng];
-        self.myCountResponse    = nil;
-        [self.tableView reloadData];
-    }
-
+    self.leftView.countStr  = @"0";
+    [self matchImageName:GDLocalizedString(@"center-matchImage")  tag:OptionButtonTypeZineng];
+    self.myCountResponse    = nil;
+    [self.tableView reloadData];
     
 }
 
@@ -465,20 +470,63 @@ typedef enum {
         RequireLogin
         
         [self.navigationController pushViewController:[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil] animated:YES];
-        
-    }else{
- 
-        [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+       
+        return;
         
     }
+ 
+    [self pushWithVC:@"PipeiEditViewController"];
+    
+}
+
+
+//跳转到QQ客服聊天页面
+-(void)QQservice
+{
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
+        
+        [MobClick event:@"KeFu"];
+        [self webViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
+        
+        return ;
+    }
+    
+    
+    XWeakSelf
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？"  message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"下载" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //跳转到QQ下载页面
+        [weakSelf webViewWithpath:@"http://appstore.com/qq"];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+- (void)webViewWithpath:(NSString *)path{
+    
+    UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
+    webView.delegate      = self;
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+}
+
+
+//打开左侧菜单
+-(void)showLeftMenu
+{
+    [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 //跳转申请状态
 -(void)CaseApplyStatusView
 {
     [MobClick event: @"apply_applyStutasItem"];
-    
-    [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
+
+    [self pushWithVC:@"ApplyStatusViewController"];
 }
 
 //跳转申请列表
@@ -486,28 +534,28 @@ typedef enum {
 {
     [MobClick event: @"apply_applyItem"];
  
-    [self.navigationController pushViewController:[[ApplyViewController alloc] init] animated:YES];
+    [self pushWithVC:@"ApplyViewController"];
 }
 
 //跳转申请材料
 -(void)CaseApplyMatial
 {
-    [self.navigationController pushViewController:[[ApplyMatialViewController alloc] init] animated:YES];
+    [self pushWithVC:@"ApplyMatialViewController"];
 }
 
 //跳转申请MYOFFER
 -(void)CaseMyoffer
 {
     
-    [self.navigationController pushViewController:[[MyOfferViewController alloc] init] animated:YES];
+    [self pushWithVC:@"MyOfferViewController"];
 }
 
 //跳转收藏
 -(void)CaseFavoriteUniversity
 {
     [MobClick event:@"apply_like"];
-    [self.navigationController pushViewController:[[FavoriteViewController alloc] init] animated:YES];
-    
+    [self pushWithVC:@"FavoriteViewController"];
+
 }
 
 //跳转服务包
@@ -515,9 +563,19 @@ typedef enum {
 {
     
     [MobClick event:@"home_mall"];
-    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+    
+    [self pushWithVC:@"ServiceMallViewController"];
+
+}
+//跳转
+- (void)pushWithVC:(NSString *)vcStr{
+    
+    [self.navigationController pushViewController:[[NSClassFromString(vcStr)  alloc] init] animated:YES];
+
 }
 
 
+
 KDUtilRemoveNotificationCenterObserverDealloc
+
 @end
