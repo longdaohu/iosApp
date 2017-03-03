@@ -16,8 +16,7 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *abountArray;         //关于数据源
 @property(nonatomic,strong)UIWebView *webView;           //用于打电话
-@property(nonatomic,strong)UILabel *CompanyLab;          //公司信息Label
-@property(nonatomic,strong)ShareNViewController *shareVC;
+@property(nonatomic,strong)ShareNViewController *shareVC;//分享
 @end
 
 
@@ -74,12 +73,13 @@
 -(void)makeUI
 {
     self.title = GDLocalizedString(@"About_title");
-    self.CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - 114, XSCREEN_WIDTH, 50)];
-    self.CompanyLab.font = [UIFont systemFontOfSize:14];
-    self.CompanyLab.textColor = XCOLOR_DARKGRAY;
-    self.CompanyLab.textAlignment = NSTextAlignmentCenter;
-    self.CompanyLab.text = @"CopyRight 2016 myOffer.All rights reserved.";
-    [self.view addSubview:self.CompanyLab];
+    CGFloat comHeight = 50;
+    UILabel *CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - XNAV_HEIGHT - comHeight, XSCREEN_WIDTH, comHeight)];
+     CompanyLab.font = [UIFont systemFontOfSize:14];
+     CompanyLab.textColor = XCOLOR_DARKGRAY;
+     CompanyLab.textAlignment = NSTextAlignmentCenter;
+     CompanyLab.text = @"CopyRight 2016 myOffer.All rights reserved.";
+    [self.view addSubview:CompanyLab];
     
     
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -168,8 +168,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    NSLog(@"------------ %ld",indexPath.row);
-    
     if ( 0  == indexPath.section) {
         switch (indexPath.row) {
             case 0: //喜欢
@@ -221,18 +219,32 @@
         }
     }else{ //打电话
        
-        NSString *phoneNumber = indexPath.row == 0 ? @"tel://4000666522" : @"tel://8000699799";
-        
-        if (_webView == nil) {
-            
-            _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-            
+        NSString *phoneNumber;
+        switch (indexPath.row) {
+            case 0:
+                phoneNumber = @"tel://4000666522";
+                break;
+            case 1:
+                phoneNumber = @"tel://8000699799";
+                break;
+            default:
+                break;
         }
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:phoneNumber]]];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:phoneNumber]]];
     
     }
     
+}
+
+- (UIWebView *)webView{
+
+    if (_webView == nil) {
+        
+        _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    }
+    
+    return _webView;
 }
 
 

@@ -22,6 +22,7 @@
         
         _helpList = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
     }
+    
     return _helpList;
 }
 -(void)viewWillAppear:(BOOL)animated

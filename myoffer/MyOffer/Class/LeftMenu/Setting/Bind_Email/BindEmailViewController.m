@@ -29,7 +29,6 @@
 }
 
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -43,7 +42,7 @@
     
     [super viewDidLoad];
     
-     [self makeUI];
+    [self makeUI];
   
 }
 

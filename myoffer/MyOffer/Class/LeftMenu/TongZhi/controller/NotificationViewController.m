@@ -85,7 +85,6 @@
 }
 
 
-
 /**
  @param show    
  true : 隐藏
@@ -128,13 +127,19 @@
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         [weakSelf endMJ_Fresh];
-         
-         [weakSelf.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
-         [weakSelf.tableView emptyViewWithHiden:NO];
-
+         [weakSelf requestError];
          
      }];
+}
+
+- (void)requestError{
+
+    [self.results removeAllObjects];
+    [self.tableView reloadData];
+    [self endMJ_Fresh];
+    [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+    [self.tableView emptyViewWithHiden:NO];
+    self.tableView.mj_header = nil;
 }
 
 //配置页面控件
@@ -143,7 +148,10 @@
     self.nextPage += 1;
     
     //每次刷新，选删除原有数据
-    if ([self.tableView.mj_header isRefreshing]) [self.results removeAllObjects];
+    if ([self.tableView.mj_header isRefreshing]){
+        
+        [self.results removeAllObjects];
+    }
     
     
     [response[@"messages"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -156,15 +164,24 @@
     [self endMJ_Fresh];
     
     //判断是否显示上拉刷新
-    self.tableView.mj_footer = PageSize > [response[@"messages"] count] ? nil : [self makeMJ_footer];
+    if( PageSize > [response[@"messages"] count]){
+        
+        self.tableView.mj_footer =  nil;
+    }
     
     //是否提示无数据状态
     if ([response[@"messages"] count] == 0 && self.results.count == 0) {
         
         [self nodataViewHidden:NO];
+        self.tableView.mj_header = nil;
         
         return ;
+        
+    }else{
+    
+        [self nodataViewHidden:YES];
     }
+    
     
     [self.tableView reloadData];
    
@@ -260,7 +277,18 @@
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                     
             [weakSelf nodataViewHidden:weakSelf.results.count != 0];
-                         
+                        
+            if (weakSelf.results.count == 0) {
+                
+                 weakSelf.tableView.mj_header = nil;
+                [weakSelf nodataViewHidden:NO];
+
+            }else{
+                
+                [weakSelf nodataViewHidden:YES];
+            }
+                                    
+                                    
       }];
         
      }

@@ -17,19 +17,18 @@
 #import "XWGJNODATASHOWView.h"
 #import "CatigorySubject.h"
 #import "TopNavView.h"
+#import "NomalCollectionController.h"
 
 
-@interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)TopNavView *topView;
 @property(nonatomic,strong)XBTopToolView *topToolView;
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgView;
 //UIWebView 留学流程
 @property(nonatomic,strong)KDProgressHUD *hud;
-//UICollectionView 疑难解答
-@property(nonatomic,strong)UICollectionView *quetionCollectionView;
 //UITableView 申请攻略
-@property(nonatomic,strong)UITableView *TableView;
+@property(nonatomic,strong)UITableView *tableView;
 //疑难解答 数组
 @property(nonatomic,strong)NSArray *helpItems;
 //申请攻略 数组
@@ -111,7 +110,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        weakSelf.TableView.tableFooterView = self.noDataView;
+        weakSelf.tableView.tableFooterView = self.noDataView;
         
     }];
    
@@ -122,10 +121,11 @@
     
     self.gonglueItems =  (NSArray *)response;
     
-    self.TableView.tableFooterView = [UIView new];
+    self.tableView.tableFooterView = [UIView new];
     
-    [self.TableView reloadData];
+    [self.tableView reloadData];
 }
+
 
 - (void)viewDidLoad {
     
@@ -137,6 +137,7 @@
     
 }
 
+
 -(void)makeUI
 {
     
@@ -144,16 +145,24 @@
     
     [self makeTopView];
     
+    [self makebgView];
+    
+    [self makeWebView];
+    
+    [self makeCollectView];
+    
+    [self makeTableView];
+    
 }
 
 //顶部导航
 - (void)makeTopView{
     
-    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0, -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
+    CGRect topRect =  CGRectMake(0, -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60);
+    self.topView= [[TopNavView alloc] initWithFrame:topRect];
     [self.view addSubview:self.topView];
     [self makeTopToolView];
-    [self makebgView];
-    
+ 
 }
 
 
@@ -177,27 +186,23 @@
     CGFloat bgH  = XSCREEN_HEIGHT - bgY;
     CGFloat bgW  = XSCREEN_WIDTH;
     CGFloat bgX  = 0;
-    self.bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bgX,bgY, bgW,bgH)];
-    self.bgView.delegate = self;
-    [self.view addSubview:self.bgView];
-    self.bgView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
-    self.bgView.pagingEnabled = YES;
-    self.bgView.showsHorizontalScrollIndicator = NO;
-    
-    [self makeWebViewWithHeight:bgH];
-    
-    [self makeCollectView];
+    UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bgX,bgY, bgW,bgH)];
+    bgView.delegate = self;
+    [self.view addSubview:bgView];
+    bgView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    bgView.pagingEnabled = YES;
+    bgView.showsHorizontalScrollIndicator = NO;
+    self.bgView = bgView;
 
-    [self makeTableView];
 }
 
 //添加留学流程
-- (void)makeWebViewWithHeight:(CGFloat)height{
+- (void)makeWebView{
  
     WebViewController *webVC = [[WebViewController alloc] initWithPath:[NSString stringWithFormat:@"%@study_white",DOMAINURL]];
     [self addChildViewController:webVC];
     [self.bgView addSubview:webVC.view];
-    webVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height - XNAV_HEIGHT);
+    webVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, CGRectGetHeight(self.bgView.frame) - XNAV_HEIGHT);
     webVC.webRect = webVC.view.bounds;
 
 }
@@ -205,50 +210,28 @@
 //添加申请攻略
 -(void)makeTableView{
     
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
-    self.TableView.backgroundColor = XCOLOR_BG;
-    self.TableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
-    self.TableView.delegate = self;
-    self.TableView.dataSource = self;
-    [self.bgView addSubview:self.TableView];
-    self.TableView.tableFooterView =[[UIView alloc] init];
-    self.TableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    UITableView *tableView =[[UITableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
+    tableView.backgroundColor = XCOLOR_BG;
+    tableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.tableFooterView =[[UIView alloc] init];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.bgView addSubview:tableView];
+    self.tableView = tableView;
+
 }
 
 //添加疑难解答
-static NSString *subjectIdentify = @"subjectCell";
 -(void)makeCollectView{
     
-    CGRect subRect = CGRectMake(2 * XSCREEN_WIDTH, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
-    self.quetionCollectionView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_SubW andFrame:subRect andcontentInset:UIEdgeInsetsMake(ITEM_MARGIN + 2, ITEM_MARGIN, 0, ITEM_MARGIN)];
-    UINib *sub_xib = [UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil];
-    [self.quetionCollectionView registerNib:sub_xib forCellWithReuseIdentifier:subjectIdentify];
+    NomalCollectionController *nomalCollectionVC  = [[NomalCollectionController alloc] init];
+    [self addChildViewController:nomalCollectionVC];
+    [self.bgView addSubview:nomalCollectionVC.view];
+    nomalCollectionVC.view.frame = CGRectMake(2 * XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    nomalCollectionVC.items = self.helpItems;
 }
 
-//创建CollectionView公共方法
--(UICollectionView *)makeCollectionViewWithFlowayoutWidth:(CGFloat)width andFrame:(CGRect)frame andcontentInset:(UIEdgeInsets)Inset
-{
-    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-    flowlayout.itemSize = CGSizeMake(width, width);
-    // 设置item行与行之间的间隙
-    flowlayout.minimumLineSpacing = ITEM_MARGIN;
-    // 设置item列与列之间的间隙
-    //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-//    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
-    [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.backgroundColor = XCOLOR_BG;
-    collectionView.contentInset = Inset;
-    
-    [self.bgView addSubview:collectionView];
-    
-    return collectionView;
-}
 
 
 #pragma mark ——— UIScrollViewDelegate
@@ -256,22 +239,15 @@ static NSString *subjectIdentify = @"subjectCell";
 {
     
     if (self.bgView.isDragging) {
-        
              //监听滚动，实现顶部工具条按钮切换
             CGPoint offset = scrollView.contentOffset;
-            
             CGFloat offsetX = offset.x;
-            
             CGFloat width = scrollView.frame.size.width;
-            
             NSInteger pageNum =  (offsetX + .5f *  width) / width;
-            
             [self.topToolView SelectButtonIndex:pageNum];
-        
          // 限制y轴不动
         self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
     }
-    
     
 }
 
@@ -303,46 +279,11 @@ static NSString *subjectIdentify = @"subjectCell";
     
      GongLueViewController  *list = [[GongLueViewController alloc] init];
     
-     list.gonglue                 =  self.gonglueItems[indexPath.row];
+     list.gonglue =  self.gonglueItems[indexPath.row];
     
      [self.navigationController pushViewController:list  animated:YES];
 }
 
-
-#pragma mark ——— UICollectionViewDataSource UICollectionViewDelegate
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    return self.helpItems.count;
-    
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
-
-    cell.subject = self.helpItems[indexPath.row];
-    
-    return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
- 
-        return CGSizeMake(0, 0);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
- 
-    WebViewController *help = [[WebViewController alloc] initWithPath: [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row]];
-    [self.navigationController pushViewController:help animated:YES];
-    
-}
 
 
 #pragma mark ——— XTopToolViewDelegate
@@ -364,4 +305,67 @@ static NSString *subjectIdentify = @"subjectCell";
 }
 
 @end
+
+/*
+ //创建CollectionView公共方法
+ -(UICollectionView *)makeCollectionViewWithFlowayoutWidth:(CGFloat)width andFrame:(CGRect)frame andcontentInset:(UIEdgeInsets)Inset
+ {
+ UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
+ // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
+ flowlayout.itemSize = CGSizeMake(width, width);
+ // 设置item行与行之间的间隙
+ flowlayout.minimumLineSpacing = ITEM_MARGIN;
+ // 设置item列与列之间的间隙
+ // flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
+ // flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
+ [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+ 
+ UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
+ collectionView.dataSource = self;
+ collectionView.delegate = self;
+ collectionView.backgroundColor = XCOLOR_BG;
+ collectionView.contentInset = Inset;
+ 
+ [self.bgView addSubview:collectionView];
+ 
+ return collectionView;
+ }
+ 
+ 
+ 
+ //#pragma mark ——— UICollectionViewDataSource UICollectionViewDelegate
+ //- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+ //
+ //    return 1;
+ //}
+ //
+ //- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+ //
+ //    return self.helpItems.count;
+ //
+ //}
+ //
+ //- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+ //
+ //    CatigorySubjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:subjectIdentify forIndexPath:indexPath];
+ //
+ //    cell.subject = self.helpItems[indexPath.row];
+ //
+ //    return cell;
+ //}
+ //
+ //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+ //
+ //        return CGSizeMake(0, 0);
+ //}
+ //
+ //- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+ //
+ //    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+ //
+ //    WebViewController *help = [[WebViewController alloc] initWithPath: [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row]];
+ //    [self.navigationController pushViewController:help animated:YES];
+ //    
+ //}
+ */
 

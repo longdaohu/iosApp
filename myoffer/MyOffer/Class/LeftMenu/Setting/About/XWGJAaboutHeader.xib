@@ -23,7 +23,7 @@
                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vN7-iH-brt">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.5.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vN7-iH-brt">
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -44,11 +44,12 @@
             <connections>
                 <outlet property="ProfileLab" destination="gU6-Gg-sm6" id="Gfn-mE-Ip7"/>
                 <outlet property="myOfferLogo" destination="O18-d2-TiP" id="CU3-Yo-III"/>
+                <outlet property="versionLab" destination="vN7-iH-brt" id="Cim-UG-r0R"/>
             </connections>
             <point key="canvasLocation" x="407" y="-248"/>
         </view>
     </objects>
     <resources>
-        <image name="About_myOfferCN" width="200" height="90"/>
+        <image name="About_myOfferCN" width="500" height="238"/>
     </resources>
 </document>

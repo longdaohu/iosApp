@@ -147,7 +147,7 @@
    
     if ([item containsString:@"输入"])  return;
     
-    [self universityName:item];
+    [self popWithuniversityName:item];
     
 }
 
@@ -190,32 +190,32 @@
 -(void)commitInput
 {
     
-    if ( 0 ==self.searchTextField.text.length) {
+    if ( 0 == self.searchTextField.text.length) {
         
-         [self universityName:self.searchTextField.text];
+        [self.navigationController popViewControllerAnimated:YES];
         
-    }else{
-    
-        NSString *regex = @"[\u4e00-\u9fa5]+";
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-        
-        if ([pred evaluateWithObject:self.searchTextField.text]) {
-            
-            [self universityName:self.searchTextField.text];
-
-        }else{
-            
-            AlerMessage(@"请输入完整的中文院校名称");
-        }
-        
+        return;
     }
+    
+    NSString *regex = @"[\u4e00-\u9fa5]+";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    
+    if ([pred evaluateWithObject:self.searchTextField.text]) {
+        
+        [self popWithuniversityName:self.searchTextField.text];
+        
+        return;
+    }
+    
+    
+    AlerMessage(@"请输入完整的中文院校名称");
     
 }
 
 
--(void)universityName:(NSString *)unversity{
+-(void)popWithuniversityName:(NSString *)unversity{
     
-    if (unversity && self.valueBlock) {
+    if (unversity.length > 0 && self.valueBlock) {
         
         self.valueBlock(unversity);
         

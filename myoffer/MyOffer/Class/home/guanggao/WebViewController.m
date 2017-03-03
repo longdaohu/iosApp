@@ -299,7 +299,6 @@
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
     
     
-    NSLog(@"responseJSON  %@",responseJSON);
     
     switch ([responseJSON[@"page"] integerValue]) {
         case 0:

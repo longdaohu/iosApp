@@ -58,6 +58,7 @@ typedef enum {
 -(UpgradeViewController *)upgateVC{
 
     if (!_upgateVC) {
+        
         _upgateVC            =[[UpgradeViewController alloc] init];
         _upgateVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
         [self.view addSubview:_upgateVC.view];
@@ -240,14 +241,14 @@ typedef enum {
 -(void)makeTableView
 {
     CGFloat bottomHeight = 50;
-    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT - bottomHeight) style:UITableViewStyleGrouped];
     self.TableView.dataSource  = self;
     self.TableView.delegate    = self;
     [self.view addSubview:self.TableView];
     self.TableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.TableView.allowsSelection = NO;
-    self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     [self makeComitButtonWithHeight:bottomHeight];
 
@@ -762,6 +763,10 @@ typedef enum {
     XWGJPeronInfoItem *item   = cellItems[indexPath.row];
     item.itemName             = textField.text;
     
+    
+    self.editingCell = nil;
+    self.EditingIndexPath = nil;
+    
 }
 
 -(void)JiBengTableViewCell:(XWGJJiBengTableViewCell *)cell  withIndexPath:(NSIndexPath *)indexPath textFieldDidBeginEditing:(UITextField *)textField{
@@ -982,6 +987,29 @@ typedef enum {
 
 
 #pragma mark ——— 键盘处理
+/*
+- (void)keyboardWillShow:(NSNotification *)info
+{
+    CGRect keyboardBounds = [[[info userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.TableView.contentInset = UIEdgeInsetsMake(self.TableView.contentInset.top, 0, keyboardBounds.size.height, 0);
+    
+    if (self.EditingIndexPath) {
+        
+        [self.TableView scrollToRowAtIndexPath:self.EditingIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
+    
+}
+- (void)keyboardWillHide:(NSNotification *)info
+{
+    self.TableView.contentInset = UIEdgeInsetsMake(self.TableView.contentInset.top, 0, 0, 0);
+}
+*/
+/*
+ CGRect keyboardBounds = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+ self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, 0, keyboardBounds.size.height, 0);
+ }
+ */
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     
     [self moveTextViewForKeyboard:aNotification up:YES];
@@ -991,6 +1019,8 @@ typedef enum {
     
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
+
+
 
 - (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
     
@@ -1009,7 +1039,7 @@ typedef enum {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    
+ 
     UIEdgeInsets insets = self.TableView.contentInset;
     
     insets.bottom   =  up  ? keyboardEndFrame.size.height  : 50;
@@ -1017,9 +1047,14 @@ typedef enum {
     self.TableView.contentInset = insets;
     
     [self.view layoutSubviews];
-    
     [UIView commitAnimations];
+    
+ 
 }
+
+
+
+
 
 
 //提交用户申请资料

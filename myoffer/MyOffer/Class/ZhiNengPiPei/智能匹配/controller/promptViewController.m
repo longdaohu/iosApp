@@ -9,7 +9,7 @@
 #import "promptViewController.h"
 
 @interface promptViewController ()
-@property(nonatomic,strong)UIImageView  *prompView;
+
 @end
 
 @implementation promptViewController
@@ -36,7 +36,6 @@
     prompView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:prompView];
     prompView.image = XImage(@"guid_smart");
-    self.prompView = prompView;
     
     
     CGFloat enterY = XSCREEN_HEIGHT  - (70 * XSCREEN_HEIGHT / 568.0);

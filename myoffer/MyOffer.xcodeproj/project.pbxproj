@@ -146,6 +146,7 @@
 		AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2E1D06B1D100499B6B /* CoreMotion.framework */; };
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
+		AE59A5501E697688008E479F /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59A54F1E697688008E479F /* NomalCollectionController.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
@@ -657,6 +658,8 @@
 		AE582C301D06B22C00499B6B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AE582C321D06B94600499B6B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		AE59A54E1E697688008E479F /* NomalCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NomalCollectionController.h; path = "../../../../../../iosApp发布的副本/myoffer/MyOffer/Class/home/XiaoBai/controller/NomalCollectionController.h"; sourceTree = "<group>"; };
+		AE59A54F1E697688008E479F /* NomalCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NomalCollectionController.m; path = "../../../../../../iosApp发布的副本/myoffer/MyOffer/Class/home/XiaoBai/controller/NomalCollectionController.m"; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE64A5441DCB4CC9004592B6 /* promptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promptViewController.h; sourceTree = "<group>"; };
@@ -2093,6 +2096,8 @@
 		AEA249D61D5B224E00DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE59A54E1E697688008E479F /* NomalCollectionController.h */,
+				AE59A54F1E697688008E479F /* NomalCollectionController.m */,
 				AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */,
 				AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */,
 				AEA249DB1D5B224E00DD7939 /* CountryStateViewController.h */,
@@ -3467,6 +3472,7 @@
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
 				AE3943DF1E0A1AD00038826A /* TAPageControl.m in Sources */,
 				AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */,
+				AE59A5501E697688008E479F /* NomalCollectionController.m in Sources */,
 				AEA24BCA1D5B264300DD7939 /* XWGJMessageButtonItemView.m in Sources */,
 				AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
