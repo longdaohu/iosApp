@@ -123,7 +123,6 @@
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
          [weakSelf makeUIConfigrationWithResponse:response];
-         
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -287,7 +286,6 @@
                 
                 [weakSelf nodataViewHidden:YES];
             }
-                                    
                                     
       }];
         

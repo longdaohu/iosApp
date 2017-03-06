@@ -79,11 +79,8 @@
         NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
         
         NSString *message_count  = [ud valueForKey:@"message_count"];
-        
         NSString *order_count    = [ud valueForKey:@"order_count"];
-        
         MenuItem *order   = [MenuItem menuItemInitWithName:@"我的订单" icon:@"menu_service" count:order_count];
-        
         MenuItem *message = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-noti") icon:@"menu_messages" count:message_count];
         
         NSArray *temps = @[apply,order,message,set,help,logout];

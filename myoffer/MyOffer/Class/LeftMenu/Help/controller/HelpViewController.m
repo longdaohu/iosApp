@@ -8,22 +8,23 @@
 
 #import "HelpViewController.h"
 @interface HelpViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *helpList;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property(nonatomic,strong)NSArray *helpItems;
 
 
 @end
 
 @implementation HelpViewController
 
--(NSArray *)helpList
+-(NSArray *)helpItems
 {
-    if (!_helpList) {
+    if (!_helpItems) {
         
-        _helpList = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
+        _helpItems = @[@"平台网站",@"如何申请",@"申请条件",@"递交申请",@"Offer管理",@"操作疑问"];
     }
     
-    return _helpList;
+    return _helpItems;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -32,7 +33,7 @@
     self.navigationController.navigationBarHidden = NO;
 
     [MobClick beginLogPageView:@"page帮助中心"];
-
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -44,7 +45,7 @@
 }
 
 - (void)viewDidLoad {
-    
+ 
     [super viewDidLoad];
     
     [self makeUI];
@@ -53,27 +54,22 @@
 
 -(void)makeUI
 {
-    self.title                       = GDLocalizedString(@"Left-helpCenter");
-    self.tableView                   = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
-    self.tableView.dataSource        = self;
-    self.tableView.delegate          = self;
-    self.tableView.tableFooterView   = [[UIView alloc] init];
-    self.tableView.backgroundColor   = XCOLOR_BG;
-    [self.view addSubview:self.tableView];
-
+    self.title  = GDLocalizedString(@"Left-helpCenter");
+  
+ 
 }
 
 #pragma mark ——— UITableViewDelegate  UITableViewDataSoure
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.helpList.count;
+    return self.helpItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.accessoryType    = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text   = self.helpList[indexPath.row];
+    cell.textLabel.text   = self.helpItems[indexPath.row];
     return cell;
 }
 
@@ -84,6 +80,11 @@
     WebViewController *help = [[WebViewController alloc] init];
     help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
     [self.navigationController pushViewController:help animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+
+    return HEIGHT_ZERO;
 }
 
 
