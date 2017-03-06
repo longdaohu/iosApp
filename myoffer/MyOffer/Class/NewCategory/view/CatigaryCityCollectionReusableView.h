@@ -10,6 +10,6 @@
 
 @interface CatigaryCityCollectionReusableView : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UILabel *panding;
-@property (weak, nonatomic) IBOutlet UILabel *TitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *sectionNameLab;
 
 @end

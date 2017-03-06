@@ -12,9 +12,9 @@
 #import "CatigorySubject.h"
 @interface CatigorySubjectCell ()
 //cell图片
-@property(nonatomic,strong)UIImageView *IconView;
+@property(nonatomic,strong)UIImageView *iconView;
 //cell标题
-@property(nonatomic,strong)UILabel *TitleLab;
+@property(nonatomic,strong)UILabel *titleLab;
 
 @end
 
@@ -24,27 +24,25 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
-
-    self.layer.cornerRadius = CORNER_RADIUS;
-    self.layer.masksToBounds = YES;
     
-    self.IconView =[[UIImageView alloc] init];
-    self.IconView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:self.IconView];
+    self.iconView =[[UIImageView alloc] init];
+    self.iconView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:self.iconView];
     
-    self.TitleLab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
-    self.TitleLab.numberOfLines = 2;
-    [self.contentView addSubview:self.TitleLab];
+    self.titleLab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
+    self.titleLab.numberOfLines = 2;
+    [self.contentView addSubview:self.titleLab];
     
+ 
 }
 
 - (void)setSubject:(CatigorySubject *)subject
 {
     _subject = subject;
     
-    self.IconView.image = [UIImage imageNamed:subject.IconName];
+    self.iconView.image = [UIImage imageNamed:subject.IconName];
     
-    self.TitleLab.text = subject.TitleName;
+    self.titleLab.text = subject.TitleName;
 }
 
 
@@ -53,19 +51,21 @@
 {
     [super layoutSubviews];
     
-    CGFloat ix = 0;
-    CGFloat iw = FLOWLAYOUT_SubW;
-    CGFloat iy = [self.subject.IconName containsString:@"ICON"] ? iw * 0.15 : iw * 0.1;
-    CGFloat ih = [self.subject.IconName containsString:@"ICON"] ? iw * 0.45 : iw * 0.6;
-    self.IconView.frame =CGRectMake(ix, iy, iw, ih);
+    CGSize contentSize = self.bounds.size;
     
-    CGFloat Tx = 0;
-    CGFloat Ty = iw * 0.65;
-    CGFloat Tw = iw;
-    CGFloat Th = iw * 0.3;
-    self.TitleLab.frame =CGRectMake(Tx, Ty, Tw, Th);
+    CGFloat iconx = 0;
+    CGFloat iconw = contentSize.width;
+    CGFloat icony = [self.subject.IconName containsString:@"ICON"] ? iconw * 0.15 : iconw * 0.1;
+    CGFloat iconh = [self.subject.IconName containsString:@"ICON"] ? iconw * 0.45 : iconw * 0.6;
+    self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);
     
-    self.TitleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_SubW];
+    CGFloat titlex = 0;
+    CGFloat titley = iconw * 0.65;
+    CGFloat titlew = iconw;
+    CGFloat titleh = iconw * 0.3;
+    self.titleLab.frame =CGRectMake(titlex,titley, titlew, titleh);
+    
+    self.titleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_SubW];
     
 }
 

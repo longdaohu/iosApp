@@ -23,6 +23,22 @@
 
 @implementation CatigoryRankCell
 
++(instancetype)cellInitWithTableView:(UITableView *)tableView
+{
+    static NSString *Identifier = @"rank";
+    
+    CatigoryRankCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
+    
+    if (!cell) {
+        
+        cell =[[CatigoryRankCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+        
+    }
+    cell.selectionStyle =  UITableViewCellSelectionStyleNone;
+    
+    return cell;
+    
+}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -51,43 +67,28 @@
         
         self.contentView.backgroundColor = XCOLOR_CLEAR;
         self.backgroundColor = XCOLOR_CLEAR;
-     }
+    }
     return self;
 }
 
 -(UILabel *)makeLabel{
-
+    
     UILabel *Lab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
     [self.contentView addSubview:Lab];
-
+    
     return Lab;
 }
 
-+(instancetype)cellInitWithTableView:(UITableView *)tableView
-{
-    static NSString *Identifier = @"rank";
-    
-    CatigoryRankCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
-    
-    if (!cell) {
-        
-        cell =[[CatigoryRankCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
-        
-    }
-    cell.selectionStyle =  UITableViewCellSelectionStyleNone;
 
-    return cell;
- 
-}
 
 -(void)setRank:(CatigoryRank *)rank
 {
     _rank = rank;
-   
+    
     self.IconView.image = [UIImage imageNamed:rank.iconName];
     
     if ([rank.titleName containsString:@"+"]) {
-    
+        
         NSArray *titles = [rank.titleName componentsSeparatedByString:@"+"];
         self.twoLab.text = titles[0];
         self.threeLab.text = titles[1];
@@ -101,7 +102,7 @@
 
 
 -(void)layoutSubviews{
-
+    
     [super layoutSubviews];
     
     CGFloat iconx = ITEM_MARGIN;
@@ -110,7 +111,7 @@
     CGFloat iconh = XSCREEN_WIDTH / 2.5 - icony - 20;
     self.IconView.frame = CGRectMake(iconx, icony, iconw, iconh);
     self.mengView.frame = self.IconView.frame;
-
+    
     CGFloat onex = iconx;
     CGFloat oneh = iconh / 4;
     CGFloat onew = iconw;
@@ -122,7 +123,7 @@
     CGFloat twow = iconw;
     CGFloat twoy = icony + (iconh - 2*oneh) * 0.5;
     self.twoLab.frame = CGRectMake(twox, twoy, twow, twoh);
-
+    
     CGFloat thx = twox;
     CGFloat thh = twoh;
     CGFloat thw = twow;
@@ -137,7 +138,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

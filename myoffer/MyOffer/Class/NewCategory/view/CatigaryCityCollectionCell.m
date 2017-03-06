@@ -10,12 +10,12 @@
 #import "CatigaryHotCity.h"
 
 @interface CatigaryCityCollectionCell ()
-//蒙版
-@property(nonatomic,strong)UIImageView *MengView;
 //图片
-@property(nonatomic,strong)UIImageView *IconView;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 //标题
-@property(nonatomic,strong)UILabel *TitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *cityLab;
+//蒙版
+@property(nonatomic,strong)CAGradientLayer *gradientLayer;
 
 @end
 
@@ -24,33 +24,34 @@
 - (void)awakeFromNib {
   
     [super awakeFromNib];
+ 
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    UIColor *colorOne = [UIColor colorWithWhite:0 alpha:0];
+    UIColor *colorTwo = [UIColor colorWithWhite:0 alpha:0.6];
+    gradientLayer.colors           = [NSArray arrayWithObjects:
+                                 (id)colorOne.CGColor,
+                                 (id)colorTwo.CGColor,
+                                 nil];
+    gradientLayer.locations  = @[@(0.2), @(0.8)];
 
-    self.contentView.layer.cornerRadius = CORNER_RADIUS;
-    self.contentView.layer.masksToBounds = YES;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    self.gradientLayer = gradientLayer;
+    [self.contentView.layer insertSublayer:gradientLayer below:self.cityLab.layer];
     
     
-    self.IconView =[[UIImageView alloc] init];
-    self.IconView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.contentView addSubview:self.IconView];
+    self.cityLab.font = [UIFont systemFontOfSize: XPERCENT * 16];
     
     
-    self.MengView =[[UIImageView alloc] init];
-    self.MengView.alpha = 0.7;
-    self.MengView.contentMode = UIViewContentModeScaleAspectFill;
-    self.MengView.image = [UIImage imageNamed:@"Menu_Mask"];
-    [self.contentView addSubview:self.MengView];
-    
-    self.TitleLab = [UILabel labelWithFontsize:20 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentLeft];
-    self.TitleLab.adjustsFontSizeToFitWidth = YES;
-    [self.contentView addSubview:self.TitleLab];
-    
-}
+ }
 -(void)setCity:(CatigaryHotCity *)city
 {
     _city = city;
     
-    self.TitleLab.text =city.cityName;
-    [self.IconView sd_setImageWithURL:[NSURL URLWithString:city.IconName]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    self.cityLab.text =city.cityName;
+    
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.IconName]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    
 }
 
 
@@ -60,29 +61,30 @@
 {
     [super layoutSubviews];
     
-    CGFloat margin = 10;
-    CGFloat iconx = 0;
-    CGFloat icony = 0;
-    CGFloat iconw = FLOWLAYOUT_CityW;
-    CGFloat iconh = iconw;
-    self.IconView.frame =CGRectMake(iconx, icony, iconw, iconh);
+    CGSize contentSize = self.bounds.size;
     
-    
-    CGFloat Titlex = margin;
-    CGFloat Titley = iconw * 0.8;
-    CGFloat Titlew = iconw;
-    CGFloat Titleh = iconw * 0.2;
-    self.TitleLab.frame =CGRectMake(Titlex, Titley, Titlew, Titleh);
+//    CGFloat margin = 10;
+//    CGFloat iconx = 0;
+//    CGFloat icony = 0;
+//    CGFloat iconw = contentSize.width;
+//    CGFloat iconh = iconw;
+//    self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);
+//    
+//    
+//    CGFloat Titlex = margin;
+//    CGFloat Titleh = iconw * 0.2;
+//    CGFloat Titley = iconw * 0.8;
+//    CGFloat Titlew = iconw;
+//    self.TitleLab.frame =CGRectMake(Titlex, Titley, Titlew, Titleh);
+// 
+//    self.TitleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_CityW];
  
-    self.TitleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_CityW];
-
     CGFloat mengx = 0;
-    CGFloat mengy = iconh * 0.5;
-    CGFloat mengw = Titlew;
-    CGFloat mengh = iconh * 0.5;
-    self.MengView.frame =CGRectMake(mengx, mengy, mengw, mengh);
-    
-    
+    CGFloat mengy = contentSize.height * 0.5;
+    CGFloat mengw = contentSize.width;
+    CGFloat mengh = contentSize.height  * 0.5;
+    self.gradientLayer.frame = CGRectMake(mengx, mengy, mengw, mengh);
+ 
 }
 
 

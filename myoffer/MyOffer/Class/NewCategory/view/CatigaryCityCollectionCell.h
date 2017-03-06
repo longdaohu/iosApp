@@ -11,5 +11,4 @@
 @interface CatigaryCityCollectionCell : UICollectionViewCell
 @property(nonatomic,strong)CatigaryHotCity *city;
 
-
 @end

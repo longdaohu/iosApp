@@ -10,7 +10,6 @@
 #import "CatigoryRankCell.h"
 #import "CatigaryCityCollectionCell.h"
 #import "CatigaryCityCollectionReusableView.h"
-#import "CatigaryCityCollectionHeaderView.h"
 #import "CatigoryRank.h"
 #import "CatigorySubject.h"
 #import "CountryStateViewController.h"
@@ -32,7 +31,6 @@
 //排名tableView
 @property(nonatomic,strong)UITableView *tableView;
 //专业collectionView
-//@property(nonatomic,strong)UICollectionView *Sub_CollectView;
 @property(nonatomic,strong)NomalCollectionController *nomalCollectionVC;
 //热门城市collectionView
 @property(nonatomic,strong)UICollectionView *City_CollectView;
@@ -40,10 +38,9 @@
 @property(nonatomic,strong)NSArray *RankList;
 //专业数组
 @property(nonatomic,strong)NSArray *subjectList;
-//表头
-@property(nonatomic,strong)CatigaryCityCollectionHeaderView *cityHeaderView;
-//工具条
+//自定义导航栏
 @property(nonatomic,strong)TopNavView *topView;
+//工具条
 @property(nonatomic,strong)XBTopToolView   *topToolView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *Country_Hotcities;
@@ -54,17 +51,6 @@
 
 @implementation CatigoryViewController
 
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    
-    [self makeUI];
-    
-    [self getHotCitySource];
-    
-}
-
-
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -74,7 +60,7 @@
     [MobClick beginLogPageView:@"page分类搜索"];
     
     [self leftViewMessage];
-
+    
 }
 
 
@@ -86,10 +72,19 @@
     
 }
 
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    [self makeUI];
+    
+    [self makeDataSource];
+    
+}
 
 
 //获取热门城市数组
--(void)getHotCitySource
+-(void)makeDataSource
 {
     
     XWeakSelf
@@ -97,11 +92,11 @@
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSMutableArray *Country_Hotcities_temp  =[NSMutableArray array];
- 
+        
         for (NSDictionary *countryDic in response[@"hot"]) {
             
             CatigaryCountry *country =[CatigaryCountry ContryItemInitWithCountryDictionary:countryDic];
-  
+            
             [Country_Hotcities_temp addObject:country];
         }
         
@@ -112,7 +107,7 @@
     }];
 }
 
-
+//排名列表
 -(NSArray *)RankList
 {
     if (!_RankList) {
@@ -130,7 +125,7 @@
 //专业数据数组
 -(NSArray *)subjectList
 {
-   
+    
     if (!_subjectList) {
         
         NSArray *item_subjects = [[NSUserDefaults standardUserDefaults] valueForKey:@"Subject_CN"];
@@ -169,11 +164,11 @@
                 [subject_temps addObject:subject];
             }
             
-             _subjectList =  [subject_temps copy];
+            _subjectList =  [subject_temps copy];
             
             
         }else{
-        
+            
             //备用数据，防止数据失败读取
             CatigorySubject *art =[CatigorySubject subjectItemInitWithIconName:@"sub_art"  TitleName:GDLocalizedString(@"CategorySub-art")];
             CatigorySubject *finance =[CatigorySubject subjectItemInitWithIconName:@"sub_finance"  TitleName:GDLocalizedString(@"CategorySub-finance")];
@@ -185,7 +180,7 @@
             CatigorySubject *farm =[CatigorySubject subjectItemInitWithIconName:@"sub_farm"  TitleName:GDLocalizedString(@"CategorySub-farm")];
             CatigorySubject *science =[CatigorySubject subjectItemInitWithIconName:@"sub_sciencee"  TitleName:GDLocalizedString(@"CategorySub-science")];
             _subjectList = @[finance,business,engineer,humanity,science,built,art,medicine,farm];
-
+            
         }
         
         
@@ -204,7 +199,7 @@
     [self makeTopToolView];
     
     [self makeBaseScorller];
-
+    
 }
 
 //滚动工具条
@@ -215,6 +210,7 @@
     self.topToolView.delegate  = self;
     [self.view  addSubview:self.topToolView];
 }
+
 
 - (void)makeBaseScorller{
     
@@ -237,21 +233,33 @@
 //热门城市
 - (void)makeCityCollectViewWithFrame:(CGRect)frame{
     
-   
-    CGFloat topHigh = 2 * Country_Width  + INTERSET_TOP;
-    self.City_CollectView = [self makeCollectionViewWithFlowayoutWidth:FLOWLAYOUT_CityW andFrame:frame andcontentInset:UIEdgeInsetsMake(topHigh, 0, 0, 0)];
+    
+    /*
+     //设置每一个cell的宽高 (cell在CollectionView中称之为item)
+     flowlayout.itemSize = CGSizeMake(width, width);
+     // 设置item行与行之间的间隙
+     flowlayout.minimumLineSpacing = ITEM_MARGIN;
+     //设置item列与列之间的间隙
+     flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
+     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
+     */
+    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
+    collectionView.dataSource = self;
+    collectionView.delegate = self;
+    collectionView.backgroundColor = XCOLOR_CLEAR;
+    [self.bgView addSubview:collectionView];
+    self.City_CollectView =  collectionView;
+    
+    
     UINib *city_xib = [UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil];
     [self.City_CollectView registerNib:city_xib forCellWithReuseIdentifier:cityIdentify];
-    
+    [self.City_CollectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
     UINib *citySection_xib = [UINib nibWithNibName:@"CatigaryCityCollectionReusableView" bundle:nil];
     [self.City_CollectView registerNib:citySection_xib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView"];
-    self.cityHeaderView = [[CatigaryCityCollectionHeaderView alloc] initWithFrame:CGRectMake(0, -topHigh, XSCREEN_WIDTH, topHigh)];
-    XWeakSelf
-    self.cityHeaderView.actionBlock = ^(UIButton *sender){
-        [weakSelf CaseStateWithSender:sender];
-    };
-
-    [self.City_CollectView addSubview:self.cityHeaderView];
+    
     
 }
 
@@ -284,38 +292,12 @@
     
 }
 
-
-//创建CollectionView公共方法
--(UICollectionView *)makeCollectionViewWithFlowayoutWidth:(CGFloat)width andFrame:(CGRect)frame andcontentInset:(UIEdgeInsets)Inset
-{
-    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-    flowlayout.itemSize = CGSizeMake(width, width);
-    // 设置item行与行之间的间隙
-    flowlayout.minimumLineSpacing = ITEM_MARGIN;
-    // 设置item列与列之间的间隙
-//    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
-    [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.backgroundColor = XCOLOR_CLEAR;
-    collectionView.contentInset = Inset;
-    
-    [self.bgView addSubview:collectionView];
-    return collectionView;
-}
-
-
-
-
 - (void)makeUI{
     
     [self makeTopView];
     
     [self makeOtherUI];
-
+    
 }
 
 
@@ -340,16 +322,27 @@
     if (collectionView == self.City_CollectView && kind == UICollectionElementKindSectionHeader) {
         
         CatigaryCityCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"citySectionView" forIndexPath:indexPath];
-        CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
-        headerView.TitleLab.text = country.countryName;
+        
+        NSString *headerTitle;
+        
+        if (indexPath.section == 0) {
+            
+            headerTitle = @"国家";
+            
+        }else{
+            
+            CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
+            headerTitle  = country.countryName;
+        }
+        headerView.sectionNameLab.text = headerTitle;
         
         return  headerView;
         
-    }else{
-        
-        return nil;
         
     }
+    
+    return nil;
+    
     
 }
 
@@ -357,23 +350,18 @@
 #pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    NSInteger setionNumber =  self.Country_Hotcities.count;
     
-    return setionNumber;
+    return self.Country_Hotcities.count + 1;
     
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    if (collectionView == self.City_CollectView) {
-        
-        CatigaryCountry *country = self.Country_Hotcities[section];
-
-        return country.HotCities.count;
-        
-    }
     
-    return  self.subjectList.count;
+    if (section == 0) return  2;
+    
+    CatigaryCountry *country = self.Country_Hotcities[section - 1];
+    return country.HotCities.count;
     
 }
 
@@ -382,29 +370,91 @@ static NSString *cityIdentify = @"cityCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if (indexPath.section == 0) {
+        
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+        
+        UIImageView *bgView = [[UIImageView alloc] init];
+        bgView.frame = cell.bounds;
+        bgView.contentMode = UIViewContentModeScaleAspectFill;
+        NSString *item = (indexPath.row == 0) ? GDLocalizedString(@"Category-UK") : GDLocalizedString(@"Category-AU");
+        bgView.image = [UIImage imageNamed:item];
+        
+        [cell.contentView addSubview:bgView];
+        cell.contentView.layer.cornerRadius = CORNER_RADIUS;
+        cell.contentView.layer.masksToBounds = YES;
+        
+        return cell;
+        
+    }else{
+        
         CatigaryCityCollectionCell *city_cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityIdentify forIndexPath:indexPath];
-        CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
+        CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
         city_cell.city = country.HotCities[indexPath.row];
- 
+        
         return city_cell;
+        
+    }
     
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return  collectionView == self.City_CollectView  ? CGSizeMake(XSCREEN_WIDTH, 40)  : CGSizeMake(0, 0);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    
+    return   CGSizeMake(XSCREEN_WIDTH, 50);
 }
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    [self CaseHotCityWithIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        
+        [self CaseStateWithIndexPath:indexPath];
+        
+    }else{
+        
+        [self CaseHotCityWithIndexPath:indexPath];
+    }
     
 }
 
 
+#pragma mark : UICollectionViewLayoutDelegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if (indexPath.section == 0) {
+        
+        return CGSizeMake(XSCREEN_WIDTH -  2 * ITEM_MARGIN, Country_Width -20);
+    }
+    
+    return CGSizeMake(FLOWLAYOUT_CityW, FLOWLAYOUT_CityW);
+    
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    
+    return ITEM_MARGIN;
+}
+
+/*
+ - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+ 
+ return ITEM_MARGIN;
+ }
+ */
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    return UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
+}
+
+/*
+ - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+ - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section;
+ */
 
 
 #pragma mark —————— UITableViewDelegate  UITableViewDataSource
@@ -419,7 +469,7 @@ static NSString *cityIdentify = @"cityCell";
     CatigoryRankCell *rank_cell = [CatigoryRankCell cellInitWithTableView:tableView];
     
     rank_cell.rank = self.RankList[indexPath.row];
-  
+    
     return rank_cell;
 }
 
@@ -430,7 +480,6 @@ static NSString *cityIdentify = @"cityCell";
     CatigoryRank *rank = self.RankList[indexPath.row];
     
     [rank.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ?   [self CaseAUwith:rank] : [self CaseUK:rank] ;
-  
 }
 
 
@@ -440,7 +489,8 @@ static NSString *cityIdentify = @"cityCell";
 }
 
 
-#pragma mark ————————UIScrollViewDelegate
+#pragma mark ———————— UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -461,13 +511,9 @@ static NSString *cityIdentify = @"cityCell";
             NSInteger pageNum =  (offsetX + .5f *  width) / width;
             
             [self.topToolView SelectButtonIndex:pageNum];
-            
             // 限制y轴不动
             self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
         }
-
-        
-   
     }
 }
 
@@ -477,6 +523,7 @@ static NSString *cityIdentify = @"cityCell";
     
     [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
+
 
 - (void)leftViewMessage:(NSNotification *)noti{
     
@@ -496,13 +543,13 @@ static NSString *cityIdentify = @"cityCell";
     NSString *message_count  = [ud valueForKey:@"message_count"];
     NSString *order_count    = [ud valueForKey:@"order_count"];
     self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
-
+    
     if(!LOGIN) self.leftView.countStr = @"0";
     
     if (LOGIN && [self checkNetWorkReaching]) {
-    
+        
         XWeakSelf
-       
+        
         [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             
             NSInteger message_count  = [response[@"message_count"] integerValue];
@@ -536,11 +583,11 @@ static NSString *cityIdentify = @"cityCell";
 -(void)CaseUK:(CatigoryRank *)rank
 {
     
-     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.rankType];
+    SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:rank.countryName orderBy:rank.rankType];
     
-     vc.title  = [rank.titleName containsString:@"+"] ? [rank.titleName componentsSeparatedByString:@"+"][1] : rank.titleName;
+    vc.title  = [rank.titleName containsString:@"+"] ? [rank.titleName componentsSeparatedByString:@"+"][1] : rank.titleName;
     
-     [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -556,20 +603,12 @@ static NSString *cityIdentify = @"cityCell";
     
 }
 
-//英国、澳大利亚地区列表
--(void)CaseStateWithSender:(UIButton *)sender
-{
-    CountryStateViewController *STATE = [[CountryStateViewController alloc] init];
-    
-    STATE.countryName = sender.tag == 0 ? GDLocalizedString(@"CategoryVC-UK"):GDLocalizedString(@"CategoryVC-AU");
-    
-    [self.navigationController pushViewController:STATE animated:YES];
-}
+
 //热门留学城市
 -(void)CaseHotCityWithIndexPath:(NSIndexPath *)indexPath
 {
     
-    CatigaryCountry *country = self.Country_Hotcities[indexPath.section];
+    CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
     
     CatigaryHotCity *city = country.HotCities[indexPath.row];
     
@@ -581,6 +620,15 @@ static NSString *cityIdentify = @"cityCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//英国、澳大利亚地区列表
+-(void)CaseStateWithIndexPath:(NSIndexPath *)indexPath
+{
+    CountryStateViewController *STATE = [[CountryStateViewController alloc] init];
+    
+    STATE.countryName = indexPath.row == 0 ? GDLocalizedString(@"CategoryVC-UK"):GDLocalizedString(@"CategoryVC-AU");
+    
+    [self.navigationController pushViewController:STATE animated:YES];
+}
 
 
 
