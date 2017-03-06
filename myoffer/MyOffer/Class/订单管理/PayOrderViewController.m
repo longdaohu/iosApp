@@ -7,7 +7,6 @@
 //
 
 #import "PayOrderViewController.h"
-#import "PaySectionHeaderView.h"
 #import "PayHeaderView.h"
 #import "WXApiObject.h"
 #import "WXApi.h"
@@ -18,7 +17,6 @@
 @interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
-@property(nonatomic,strong)NSDictionary *tempDic;
 @property(nonatomic,copy)NSString *payStyle;
 @property(nonatomic,assign)BOOL payEnd;
 @property(nonatomic,strong)UIAlertView *alert;
@@ -64,8 +62,9 @@
     BOOL result = ([BackResult isEqualToString:@"0"] ||  [BackResult isEqualToString:@"9000"]);
     self.payEnd = result;
     NSString *title = result ? @"支付成功" : @"支付失败";
+    
     [self showAler:title];
-
+  
 }
 
 
@@ -74,22 +73,12 @@
      UIAlertView *alert =[[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
      self.alert = alert;
      [alert show];
-
-}
+    
+ }
 
 
 #pragma mark —————— UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    
-    if(alertView.tag == 900 && buttonIndex == 1)
-    {
-        
-        NSString * URLString = @"https://itunes.apple.com/cn/app/wei-xin/id414478124?mt=8";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
-        
-        return;
-    }
     
     if ([alertView.title isEqualToString:@"支付成功"]) {
          OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
@@ -122,13 +111,14 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     [self makeTableViewHeader];
+    
 }
 
 -(void)makeTableViewHeader
@@ -170,7 +160,18 @@ static NSString *identify = @"pay";
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   
-    return [[PaySectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
+    sectionView.backgroundColor = XCOLOR_WHITE;
+    
+    UILabel *titleLab = [[UILabel alloc] init];
+    titleLab.text = @"选择支付方式";
+    titleLab.font = [UIFont systemFontOfSize:15];
+    [titleLab sizeToFit];
+    titleLab.mj_x = ITEM_MARGIN;
+    titleLab.mj_y = 5;
+    [sectionView addSubview:titleLab];
+    
+    return sectionView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -206,9 +207,25 @@ static NSString *identify = @"pay";
     
     if (![WXApi isWXAppInstalled]){
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示信息" message:@"您还没有安装微信客户端!" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"跳转微信", nil];
-        alert.tag = 900;
-        [alert show];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示信息"   message:@"您还没有安装微信客户端!" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"跳转微信"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         
+            NSString * URLString = @"https://itunes.apple.com/cn/app/wei-xin/id414478124?mt=8";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+            
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:commitAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        
         
         return;
     }
@@ -288,7 +305,7 @@ static NSString *identify = @"pay";
        path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.orderId];
     }
     
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
         
         NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
         
@@ -297,8 +314,10 @@ static NSString *identify = @"pay";
             [self showAler:@"支付成功"];
         }
     }];
+  
 
 }
+
 
 
 

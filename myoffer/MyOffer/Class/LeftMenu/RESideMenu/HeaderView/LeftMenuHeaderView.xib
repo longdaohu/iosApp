@@ -26,9 +26,20 @@
                         <constraint firstAttribute="width" constant="80" id="Edm-de-P6e"/>
                         <constraint firstAttribute="height" constant="80" id="cQy-Qa-jMG"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="duV-6M-Egw" firstAttribute="top" secondItem="19G-dE-ohI" secondAttribute="bottom" constant="10" id="23G-Tz-CY6"/>
                 <constraint firstItem="duV-6M-Egw" firstAttribute="centerX" secondItem="2oj-aA-Lvh" secondAttribute="centerX" id="NrE-2g-QX2"/>

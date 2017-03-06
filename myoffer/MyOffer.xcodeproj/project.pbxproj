@@ -190,7 +190,6 @@
 		AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2493D1D5B215300DD7939 /* PayHeaderView.m */; };
 		AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */; };
 		AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249401D5B215300DD7939 /* PayOrderViewController.m */; };
-		AEA249AE1D5B215300DD7939 /* PaySectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249421D5B215300DD7939 /* PaySectionHeaderView.m */; };
 		AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249441D5B215300DD7939 /* ServiceMallViewController.m */; };
 		AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249461D5B215300DD7939 /* SeviceDetailViewController.m */; };
 		AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2494C1D5B215300DD7939 /* UpgradeFooterView.m */; };
@@ -741,8 +740,6 @@
 		AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayHeaderView.xib; sourceTree = "<group>"; };
 		AEA2493F1D5B215300DD7939 /* PayOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderViewController.h; sourceTree = "<group>"; };
 		AEA249401D5B215300DD7939 /* PayOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderViewController.m; sourceTree = "<group>"; };
-		AEA249411D5B215300DD7939 /* PaySectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySectionHeaderView.h; sourceTree = "<group>"; };
-		AEA249421D5B215300DD7939 /* PaySectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySectionHeaderView.m; sourceTree = "<group>"; };
 		AEA249431D5B215300DD7939 /* ServiceMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMallViewController.h; sourceTree = "<group>"; };
 		AEA249441D5B215300DD7939 /* ServiceMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMallViewController.m; sourceTree = "<group>"; };
 		AEA249451D5B215300DD7939 /* SeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeviceDetailViewController.h; sourceTree = "<group>"; };
@@ -1782,8 +1779,6 @@
 				AEA2493C1D5B215300DD7939 /* PayHeaderView.h */,
 				AEA2493D1D5B215300DD7939 /* PayHeaderView.m */,
 				AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */,
-				AEA249411D5B215300DD7939 /* PaySectionHeaderView.h */,
-				AEA249421D5B215300DD7939 /* PaySectionHeaderView.m */,
 				AEA2493F1D5B215300DD7939 /* PayOrderViewController.h */,
 				AEA249401D5B215300DD7939 /* PayOrderViewController.m */,
 			);
@@ -3636,7 +3631,6 @@
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
-				AEA249AE1D5B215300DD7939 /* PaySectionHeaderView.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
 				AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */,
 				AEA24BC11D5B264300DD7939 /* ShareButton.m in Sources */,

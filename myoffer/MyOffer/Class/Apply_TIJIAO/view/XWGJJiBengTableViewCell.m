@@ -46,8 +46,6 @@
 {
     textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 1)];
     textField.leftViewMode = UITextFieldViewModeAlways;
-    textField.layer.cornerRadius = 5;
-    textField.layer.masksToBounds = YES;
     [textField setValue:[UIColor clearColor] forKeyPath:@"_placeholderLabel.textColor"];
     
 }

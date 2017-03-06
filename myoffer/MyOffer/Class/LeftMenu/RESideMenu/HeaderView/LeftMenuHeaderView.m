@@ -19,12 +19,8 @@
 {
     [super awakeFromNib];
 
-    self.userIconView.layer.cornerRadius = 40;
-    self.userIconView.layer.masksToBounds = YES;
-    self.userIconView.layer.borderWidth = 2;
     self.userIconView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.backgroundColor =[UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:1];
-    
+     
 }
 
 
@@ -48,13 +44,7 @@
 }
 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 
 @end

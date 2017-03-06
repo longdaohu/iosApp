@@ -135,7 +135,7 @@
 
 -(void)dealloc{
     
-    NSLog(@"SeviceDetailViewController dealloc");
+    NSLog(@"订单详情 dealloc");
 }
 
 

@@ -133,16 +133,18 @@
 {
     [super layoutSubviews];
     
+    CGSize contentSize = self.bounds.size;
+    
     CGFloat editX = 0;
     CGFloat editY = 0;
     CGFloat editW = 50;
-    CGFloat editH =  self.bounds.size.height - editY;
+    CGFloat editH =  contentSize.height - editY;
     self.editBtn.frame = CGRectMake(editX, editY, editW, editH);
 
     
     CGFloat bgX =  self.cellEdit ? 50 : 0;
     CGFloat bgY = editY;
-    CGFloat bgW = XSCREEN_WIDTH;
+    CGFloat bgW = contentSize.width;
     CGFloat bgH = editH;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
     
@@ -151,12 +153,12 @@
     CGFloat titleH = KDUtilSize(16);
     
     CGSize orderSize =[self.orderTitleLab.text  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
-    CGFloat titleW = self.orderTitleLab.text ? orderSize.width :XSCREEN_WIDTH - 120;
-    titleW = titleW > XSCREEN_WIDTH - 120 ? XSCREEN_WIDTH - 120 : titleW;
+    CGFloat titleW = self.orderTitleLab.text ? orderSize.width :contentSize.width - 120;
+    titleW = titleW > contentSize.width - 120 ? contentSize.width - 120 : titleW;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     CGFloat statusW = 100;
-    CGFloat statusX =  XSCREEN_WIDTH - statusW - 10;
+    CGFloat statusX =  contentSize.width - statusW - 10;
     CGFloat statusY = titleY;
     CGFloat statusH = titleH;
     self.orderStatusLab.frame = CGRectMake(statusX, statusY, statusW, statusH);
@@ -164,14 +166,14 @@
     
     CGFloat noX = titleX;
     CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
-    CGFloat noW = XSCREEN_WIDTH;
+    CGFloat noW = contentSize.width;
     CGFloat noH = KDUtilSize(13);
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
 
     
-    CGFloat payW = XSCREEN_WIDTH * 0.3;
+    CGFloat payW = contentSize.width * 0.3;
     CGFloat payH = bgH  * 0.3;
-    CGFloat payX = XSCREEN_WIDTH  - payW  - 10;
+    CGFloat payX = contentSize.width  - payW  - 10;
     CGFloat payY = CGRectGetHeight(self.bgView.frame) - 10 - payH;
     self.payBtn.frame = CGRectMake(payX, payY, payW, payH);
     
@@ -184,7 +186,7 @@
     CGFloat priceX = titleX;
     CGFloat priceH = KDUtilSize(16);
     CGFloat priceY = CGRectGetMaxY(self.orderNoLab.frame) + 5;
-    CGFloat priceW = XSCREEN_WIDTH ;
+    CGFloat priceW = contentSize.width ;
     self.orderPriceLab.frame = CGRectMake(priceX, priceY, priceW, priceH);
     
     

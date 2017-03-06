@@ -16,7 +16,6 @@
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,OrderTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *orderGroup;
-@property(nonatomic,assign)BOOL cellEdit;
 @property(nonatomic,assign)NSInteger nextPage;
 @property(nonatomic,strong)XWGJnodataView *nodataView;
 
@@ -54,7 +53,6 @@
     [super viewDidLoad];
     
     [self makeUI];
-    
     
      if (![self checkNetWorkReaching]) {
         
@@ -108,6 +106,7 @@
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         [weakSelf.tableView.mj_header endRefreshing];
+        
         [weakSelf.tableView.mj_footer endRefreshing];
         
     }];
@@ -155,13 +154,11 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
-    
     
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;

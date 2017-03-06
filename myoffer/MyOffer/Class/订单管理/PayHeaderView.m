@@ -32,15 +32,8 @@
     [super awakeFromNib];
 
     self.bgView.backgroundColor = XCOLOR_BG;
-    self.bgView.layer.cornerRadius = CORNER_RADIUS;
-    self.bgView.layer.masksToBounds = YES;
-
+    
     self.backgroundColor = XCOLOR_BG;
-
-    self.shadowView.layer.cornerRadius = CORNER_RADIUS;
-    self.shadowView.layer.shadowColor = XCOLOR_BLACK.CGColor;
-    self.shadowView.layer.shadowOpacity = 0.1;
-    self.shadowView.layer.shadowOffset = CGSizeMake(1, 1);
     
 }
 

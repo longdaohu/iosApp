@@ -52,7 +52,6 @@
 {
     self.AreaTextF.inputView = self.piker;
     self.commitButton.backgroundColor =XCOLOR_RED;
-    self.commitButton.layer.cornerRadius =2;
     self.VerifycationButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.title = @"忘记密码";
     [self.VerifycationButton  setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
