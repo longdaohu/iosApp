@@ -8,8 +8,14 @@
 
 #import "FeedbackViewController.h"
 
-@interface FeedbackViewController ()<UITextViewDelegate>
+@interface FeedbackViewController ()<UITextViewDelegate> {
+    
+    IBOutlet NSLayoutConstraint *_bottomMargin;
+    
+}
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *sendButton;
+@property (weak, nonatomic) IBOutlet UITextView *reponseView;
+@property (weak, nonatomic) IBOutlet UILabel *placeHoderLab;
 
 @end
 
@@ -46,11 +52,12 @@
     
     [super viewDidAppear:animated];
     
-    [_textView becomeFirstResponder];
+    [self.reponseView becomeFirstResponder];
 }
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 
     [self makeUI];
@@ -67,24 +74,16 @@
 -(void)makeUI
 {
     self.title = GDLocalizedString(@"Setting-003");//@"用户反馈";
+  
     [self.sendButton setTitle:GDLocalizedString(@"FeedBack-002") forState:UIControlStateNormal];
-    self.sendButton.layer.cornerRadius = 5;
-    self.sendButton.layer.masksToBounds = YES;
-    
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, XSCREEN_WIDTH -20, XSCREEN_HEIGHT - 414)];
-    self.textView.layer.cornerRadius = 5;
-    self.textView.layer.borderWidth = 1;
-    self.textView.layer.borderColor = XCOLOR_LIGHTGRAY.CGColor;
-    self.textView.layer.masksToBounds = YES;
-    self.textView.font =[UIFont systemFontOfSize:15];
-    [self.view addSubview:self.textView];
-    self.textView.delegate = self;
+ 
 }
 
 
 - (IBAction)send {
     
-    [self startAPIRequestWithSelector:@"POST api/app/feedback" parameters:@{@"content": _textView.text} success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorFeedback parameters:@{@"content": self.reponseView.text} success:^(NSInteger statusCode, id response) {
+     
         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
         [hud applySuccessStyle];
         [hud hideAnimated:YES afterDelay:1];
@@ -95,10 +94,12 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
+    
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
 
@@ -119,12 +120,7 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    if (up) {
-        _bottomMargin.constant = keyboardEndFrame.size.height;
-    } else {
-        
-        _bottomMargin.constant = 0;
-    }
+    _bottomMargin.constant = up ? keyboardEndFrame.size.height : 0;
     
     [self.view layoutIfNeeded];
     
@@ -133,9 +129,11 @@
 
 KDUtilRemoveNotificationCenterObserverDealloc
 
-
 - (void)textViewDidChange:(UITextView *)textView{
 
+    
+    self.placeHoderLab.hidden = textView.text.length > 0;
+    
     if (textView.text.length > 300) {
         
         textView.text = [textView.text substringWithRange:NSMakeRange(0, 300)];
@@ -144,4 +142,7 @@ KDUtilRemoveNotificationCenterObserverDealloc
     }
  
 }
+
+
+
 @end

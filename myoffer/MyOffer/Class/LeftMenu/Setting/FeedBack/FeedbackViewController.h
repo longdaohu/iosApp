@@ -8,9 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface FeedbackViewController : BaseViewController {
-    IBOutlet NSLayoutConstraint *_bottomMargin;
-}
-@property(nonatomic,strong)UITextView *textView;
+@interface FeedbackViewController : BaseViewController
 
 @end

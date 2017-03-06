@@ -9,8 +9,7 @@
 #import "BaseViewController.h"
 #import "ActionTableViewController.h"
 
-@interface ProfileViewController : ActionTableViewController {
+@interface ProfileViewController : ActionTableViewController
     
-}
-
+  
 @end

@@ -98,7 +98,7 @@
             MenuItem *message = self.menuItems[2];
             message.messageCount = [NSString stringWithFormat:@"%@",response[@"message_count"]];
             
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0],[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
             
             NSInteger message_count  = [response[@"message_count"] integerValue];
             NSInteger order_count    = [response[@"order_count"] integerValue];
@@ -200,6 +200,7 @@
 -(void)makeTableView
 {
     self.tableView = ({
+     
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*0.8, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;

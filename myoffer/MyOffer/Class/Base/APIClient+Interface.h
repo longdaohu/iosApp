@@ -114,4 +114,6 @@
 #define kAPISelectorApplyStutas @"GET api/account/checklist"
 //申请审核状态
 #define kAPISelectorApplyStutasNew @"GET api/account/applicationliststateraw"
+//反馈意见
+#define kAPISelectorFeedback @"POST api/app/feedback"
 

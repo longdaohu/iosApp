@@ -16,7 +16,7 @@
 
 
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic)UITableView *TableView;
+@property (strong, nonatomic)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @end
 
@@ -46,12 +46,20 @@
     
     if (!_items) {
         
-        MenuItem *profile        = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-001") icon:@"me_profile" count:@""];
-        MenuItem *feedBack       = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-003") icon:@"me_feedback" count:@""];
-        MenuItem *about          = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-004") icon:@"me_about" count:@""];
-//      MenuItem *changeLanguage = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-005") icon:@"language_39" count:@""];
-        _items                   =  @[profile,feedBack,about];
+        //个人信息
+        MenuItem *profile   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-001") icon:@"me_profile"    classString: NSStringFromClass([ProfileViewController class])];
+     
+        //反馈
+        MenuItem *feedBack  = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-003") icon:@"me_feedback"   classString: NSStringFromClass([FeedbackViewController class])];
+        
+        //关于
+        MenuItem *about   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-004") icon:@"me_about"  classString: NSStringFromClass([XWGJAboutViewController class])];
+        
+        
+        _items   =  @[profile,feedBack,about];
     }
+    
+    
     return _items;
 }
 
@@ -68,11 +76,12 @@
 
 -(void)makeTableView
 {
-    self.TableView                     = [[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
-    self.TableView.delegate            = self;
-    self.TableView.dataSource          = self;
-    self.TableView.tableFooterView     = [[UIView alloc] init];
-    [self.view addSubview:self.TableView];
+    UITableView *tableView    = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    tableView.delegate    = self;
+    tableView.dataSource     = self;
+    tableView.tableFooterView     = [[UIView alloc] init];
+    self.tableView =  tableView;
+    [self.view addSubview:tableView];
 }
 
 
@@ -84,7 +93,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     
     return self.items.count;
 }
@@ -109,50 +117,20 @@ static NSString *identify = @"set";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch (indexPath.row) {
-        case 0:
-            [self caseProfile];
-             break;
-        case 1:
-            [self caseFeedBack];
-            break;
-        case 2:
-            [self caseAbout];
-            break;
-        default:
-            break;
+    MenuItem *item  = self.items[indexPath.row];
+   
+    if ([item.classString isEqualToString: NSStringFromClass([ProfileViewController class])] || [item.classString isEqualToString:NSStringFromClass([FeedbackViewController class])] ) {
+        
+        RequireLogin
     }
     
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-
-    return  HEIGHT_ZERO;
+    [self.navigationController pushViewController:[[NSClassFromString(item.classString) alloc] init] animated:YES];
+    
 }
 
 
-//个人信息
--(void)caseProfile{
-    
-    RequireLogin
-    ProfileViewController *vc = [[ProfileViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
-//反馈
--(void)caseFeedBack{
-    
-    RequireLogin
-    [MobClick event:@"changeUserFeedback"];
-    FeedbackViewController *vc = [[FeedbackViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-//关于
--(void)caseAbout{
-    
-    [MobClick event:@"aboutItemClick"];
-    XWGJAboutViewController *About =[[XWGJAboutViewController alloc] init];
-    [self.navigationController pushViewController:About animated:YES];
-}
+
+
 
 
 
