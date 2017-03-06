@@ -15,8 +15,6 @@
     
     [super awakeFromNib];
     
-    self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
-    
  }
 
 @end

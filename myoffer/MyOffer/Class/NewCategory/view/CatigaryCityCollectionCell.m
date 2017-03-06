@@ -62,23 +62,7 @@
     [super layoutSubviews];
     
     CGSize contentSize = self.bounds.size;
-    
-//    CGFloat margin = 10;
-//    CGFloat iconx = 0;
-//    CGFloat icony = 0;
-//    CGFloat iconw = contentSize.width;
-//    CGFloat iconh = iconw;
-//    self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);
-//    
-//    
-//    CGFloat Titlex = margin;
-//    CGFloat Titleh = iconw * 0.2;
-//    CGFloat Titley = iconw * 0.8;
-//    CGFloat Titlew = iconw;
-//    self.TitleLab.frame =CGRectMake(Titlex, Titley, Titlew, Titleh);
-// 
-//    self.TitleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_CityW];
- 
+   
     CGFloat mengx = 0;
     CGFloat mengy = contentSize.height * 0.5;
     CGFloat mengw = contentSize.width;

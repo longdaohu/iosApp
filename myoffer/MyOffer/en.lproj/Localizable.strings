@@ -227,8 +227,8 @@
 "CategorySub-farm" = "农学";
 "CategorySub-humanity" = "人文科学";
 "CategorySub-science" = "理学";
-"Categoryrank-en" = "TIMES+英国大学排名";
-"Categoryrank-au" = "Australia+澳大利亚大学排名";
+"Categoryrank-en" = "TIMES\n英国大学排名";
+"Categoryrank-au" = "Australia\n澳大利亚大学排名";
 "Categoryrank-qs" = "QS世界排名";
 "CategoryNew-country" = "国家";
 "CategoryNew-region" = "地区";
