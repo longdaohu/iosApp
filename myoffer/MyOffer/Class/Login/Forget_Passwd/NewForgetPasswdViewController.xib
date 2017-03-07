@@ -8,12 +8,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewForgetPasswdViewController">
             <connections>
-                <outlet property="AreaTextF" destination="1dM-U0-bDY" id="43c-gN-g2k"/>
-                <outlet property="RegisterPasswdTextF" destination="eqT-Tu-3YP" id="uCE-Xw-qMy"/>
-                <outlet property="RegisterPhoneTextF" destination="zSL-c9-IIK" id="DoW-UB-vsB"/>
+                <outlet property="AreaTF" destination="1dM-U0-bDY" id="5If-bE-8sW"/>
                 <outlet property="VerifycationButton" destination="UCi-b5-wge" id="Pyg-lW-NPe"/>
-                <outlet property="VeritficationTextF" destination="CM7-D4-XyA" id="tDu-4Q-CZn"/>
                 <outlet property="commitButton" destination="Ryo-9p-xk8" id="Q6W-Rn-B1A"/>
+                <outlet property="passwdTF" destination="eqT-Tu-3YP" id="ygP-hM-jg1"/>
+                <outlet property="phoneTF" destination="zSL-c9-IIK" id="ayI-3p-pMS"/>
+                <outlet property="veritfyTF" destination="CM7-D4-XyA" id="uIy-UN-0or"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

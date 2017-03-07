@@ -6,16 +6,15 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 #define StatusFont 13
-#define CellConteViewHeight 60
 #define Left_Margin 14
 #import "ApplyStatusCell.h"
 #import "ApplyStatusRecord.h"
 #import "Applycourse.h"
 @interface ApplyStatusCell ()
 //状态
-@property (nonatomic, strong) UILabel *statusLabel;
+@property (nonatomic, strong) UILabel *statusLab;
 //学科名称
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UILabel *subjectLab;
 
 @end
 
@@ -23,12 +22,12 @@
 
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *identi = @"record";
+    static NSString *recordReuse = @"record";
     
-    ApplyStatusCell *cell =[tableView dequeueReusableCellWithIdentifier:identi];
+    ApplyStatusCell *cell =[tableView dequeueReusableCellWithIdentifier:recordReuse];
     if (!cell) {
         
-        cell = [[ApplyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
+        cell = [[ApplyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordReuse];
     }
     return cell;
 }
@@ -40,16 +39,19 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.statusLabel =[[UILabel alloc] init];
-        self.statusLabel.font = [UIFont systemFontOfSize:StatusFont];
-        self.statusLabel.textColor = [UIColor darkGrayColor];
-        [self.contentView addSubview:self.statusLabel];
+        UILabel *statusLab = [[UILabel alloc] init];
+        statusLab.font = [UIFont systemFontOfSize:StatusFont];
+        statusLab.textColor = [UIColor darkGrayColor];
+        [self.contentView addSubview:statusLab];
+        self.statusLab =  statusLab;
         
-        self.contentLabel =[[UILabel alloc] init];
-        self.contentLabel.font = FontWithSize(KDUtilSize(15));
-        self.contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
-        self.contentLabel.numberOfLines = 2;
-        [self.contentView addSubview: self.contentLabel];
+        UILabel *subjectLab = [[UILabel alloc] init];
+        self.subjectLab = subjectLab;
+        subjectLab.font = FontWithSize(KDUtilSize(15));
+        subjectLab.lineBreakMode = NSLineBreakByCharWrapping;
+        subjectLab.numberOfLines = 2;
+        [self.contentView addSubview: subjectLab];
+        
     }
     return self;
 }
@@ -59,22 +61,37 @@
 {
     _record = record;
     
-    CGSize statusSize = [record.Status  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:StatusFont]];
+    self.statusLab.text = record.Status;
+    [self.statusLab sizeToFit];
+
+    self.subjectLab.text = record.Course.official_name;
+
+}
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
     
-    CGFloat sw = statusSize.width;
-    CGFloat sx = XSCREEN_WIDTH - sw - 5;
-    CGFloat sy = 0;
-    CGFloat sh = CellConteViewHeight;
-    self.statusLabel.frame = CGRectMake(sx,sy,sw,sh);
-    self.statusLabel.text = record.Status;
     
     
-    CGFloat cx = Left_Margin;
-    CGFloat cy = 0;
-    CGFloat cw = sx - cx;
-    CGFloat ch = CellConteViewHeight;
-    self.contentLabel.frame = CGRectMake(cx, cy,cw, ch);
-    self.contentLabel.text = record.Course.official_name;
+    if (self.record) {
+        
+        CGSize contentSize = self.contentView.bounds.size;
+        
+        CGRect newRect = self.statusLab.frame;
+        newRect.size.height = contentSize.height;
+        newRect.origin.x    = contentSize.width - self.statusLab.frame.size.width - 5;
+        self.statusLab.frame = newRect;
+        
+        
+        CGFloat subjectx = Left_Margin;
+        CGFloat subjecty = 0;
+        CGFloat subjectw = CGRectGetMinX(self.self.statusLab.frame) - subjectx;
+        CGFloat subjecth = contentSize.height;
+        self.subjectLab.frame = CGRectMake(subjectx, subjecty,subjectw, subjecth);
+        
+    }
+    
 
 }
 

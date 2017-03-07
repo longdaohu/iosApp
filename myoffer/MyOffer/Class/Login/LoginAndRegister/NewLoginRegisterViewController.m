@@ -24,7 +24,7 @@
 //验证码Timer
 @property(nonatomic,strong)NSTimer *verifyCodeColdDownTimer;
 //验证码倒计时
-@property(nonatomic,assign)int verifyCodeColdDownCount;
+@property(nonatomic,assign)int verifyCodeCount;
 
 @property (weak, nonatomic) IBOutlet UITextField *LoginPhoneNumberTextF;
 
@@ -39,8 +39,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *RegisterPasswdTextF;
 //发送验证码按钮
 @property (weak, nonatomic) IBOutlet UIButton *VerificationBtn;
-//地区编号选项
-@property(nonatomic,strong)UIPickerView *AreaPicker;
 //地区编号数组
 @property(nonatomic,strong)NSArray *AreaArr;
 //登录——忘记密码
@@ -111,7 +109,7 @@
 
 
 //用于添加控件、设置控件相关属性
--(void)makeLoginRegiterView
+-(void)makeUI
 {
     
     CGRect loginBgViewFrame = self.LoginBgView.frame;
@@ -132,7 +130,12 @@
     [self.LoginBgView addSubview:self.LoginView];
     
     
-    self.RegisterAreaTextF.inputView = self.AreaPicker;
+    UIPickerView *AreaPicker =[[UIPickerView alloc] init];
+    AreaPicker.delegate =self;
+    AreaPicker.dataSource =self;
+    [AreaPicker selectRow:0 inComponent:0 animated:YES];
+    self.RegisterAreaTextF.inputView =AreaPicker;
+    
     
     _LoginBlurView.dynamic = NO;
     [_LoginBlurView setTintColor:nil];
@@ -142,7 +145,6 @@
     _LoginBlurView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
    
     self.signInButton.layer.borderColor = XCOLOR_WHITE.CGColor;
-    self.signInButton.layer.borderWidth = 1;
     
     self.signInCommitButton.backgroundColor = XCOLOR_RED;
     self.signUpCommitButton.backgroundColor = XCOLOR_RED;
@@ -173,19 +175,6 @@
 }
 
 
--(UIPickerView *)AreaPicker
-{
-    if (!_AreaPicker) {
-      
-        _AreaPicker =[[UIPickerView alloc] init];
-        _AreaPicker.delegate =self;
-        _AreaPicker.dataSource =self;
-        [_AreaPicker selectRow:0 inComponent:0 animated:YES];
-        
-    }
-    return _AreaPicker;
-}
-
 //设置控件中英文
 -(void)ChangLanguageView
 {
@@ -214,8 +203,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self makeLoginRegiterView];
+    
+    [self makeUI];
+    
     [self ChangLanguageView];
+    
     [self makeNotificationCenter];
   
 }
@@ -250,6 +242,7 @@
     CGSize contentSize = self.view.bounds.size;
     
     if (up) {
+        
         self.LoginBgView.center = CGPointMake(contentSize.width / 2.0f, (contentSize.height - keyboardEndFrame.size.height) / 2.0f + 40.0);
         
      } else {
@@ -504,58 +497,14 @@
     
 }
 
-//发送验证码
+#pragma mark : 发送验证码
+
 - (IBAction)SendVertificationCode:(id)sender {
     
-    NSString *nomalError = @"手机号码格式错误";
+    BOOL isMatch = [self verifyWithPhone:self.RegisterPhoneTextF.text];
     
-     if (0 == self.RegisterPhoneTextF.text.length) {
-         
-         AlerMessage(@"手机号码不能为空");
-         
-         return ;
-    }
-    
-    
-    if ([self.RegisterAreaTextF.text containsString:@"86"]) {
-        
-        NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
-        NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
-            
-            errorStr = @"请输入“1”开头的11位数字";
-            
-            AlerMessage(errorStr);
-
-            return;
-        }
-    }
-    
-    
-    if ([self.RegisterAreaTextF.text containsString:@"44"]) {
-        
-        NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
-        NSString *errorStr;
-        
-        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
-            
-            errorStr = @"请输入“7”开头的10位数字";
-            
-            AlerMessage(errorStr);
-            
-            return;
-        }
-    }
-
-    
-    if ([self.RegisterAreaTextF.text containsString:@"60"] && (self.RegisterPhoneTextF.text.length > 9 || self.RegisterPhoneTextF.text.length < 7) ) {
-       
-        AlerMessage(nomalError);
-        
-        return;
-    }
-    
- 
+    if (!isMatch) {  return; }
+  
     NSString *areaCode;
     
     if ([self.RegisterAreaTextF.text containsString:@"44"]) {
@@ -581,7 +530,7 @@
     [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:@{@"code_type":@"register", @"phonenumber":  phoneNumber, @"target": phoneNumber, @"mobile_code": areaCode}  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         self.verifyCodeColdDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runVerifyCodeColdDownTimer) userInfo:nil repeats:YES];
-        self.verifyCodeColdDownCount= 60;
+        self.verifyCodeCount= 60;
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -589,16 +538,76 @@
     }];
     
     
-    
 }
-//@"验证码倒计时"
+
+#pragma mark : 手机号码验证
+
+- (BOOL)verifyWithPhone:(NSString *)phone{
+
+    NSString *errorStr;
+    
+    BOOL isMatch = YES;
+
+    if (0 == phone.length) {
+        
+        errorStr = @"手机号码不能为空";
+        
+        isMatch = NO;
+    }
+    
+    if ([self.RegisterAreaTextF.text containsString:@"86"]) {
+        
+        NSString *china = @"^1\\d{10}$";
+        isMatch = [self predicateMatchWithValue:phone  key:china];
+        if (!isMatch) errorStr = @"请输入“1”开头的11位数字";
+    }
+    
+    
+    if ([self.RegisterAreaTextF.text containsString:@"44"]) {
+        
+        NSString *english = @"^7\\d{9}$";
+        isMatch = [self predicateMatchWithValue:phone  key:english];
+        if (!isMatch) errorStr = @"请输入“7”开头的10位数字";
+        
+    }
+    
+    
+    if ([self.RegisterAreaTextF.text containsString:@"60"] ) {
+        
+        NSString *maraxia = @"^\\d{7,9}$";
+        isMatch = [self predicateMatchWithValue:phone  key:maraxia];
+        if (!isMatch) errorStr = @"手机号码格式错误";
+        
+    }
+    
+    
+    if (!isMatch)  AlerMessage(errorStr);
+    
+    return isMatch;
+}
+
+
+//手机号码验证
+- (BOOL)predicateMatchWithValue:(NSString *)value key:(NSString *)key{
+    
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", key];
+    
+    BOOL match =  [pre evaluateWithObject:value];
+    
+    
+    return match;
+}
+
+
+#pragma mark : 验证码倒计时
+
 - (void)runVerifyCodeColdDownTimer {
 
-    self.verifyCodeColdDownCount--;
+    self.verifyCodeCount--;
     
-    if (self.verifyCodeColdDownCount > 0) {
+    if (self.verifyCodeCount > 0) {
  
-        [self.VerificationBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeColdDownCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
+        [self.VerificationBtn setTitle:[NSString stringWithFormat:@"%@%d%@",GDLocalizedString(@"LoginVC-0013"), self.verifyCodeCount,GDLocalizedString(@"LoginVC-0014")] forState:UIControlStateNormal];
           
     } else {
         
@@ -610,13 +619,16 @@
     }
 }
 
-#pragma mark ———————— 提交注册信息
+#pragma mark : 提交注册信息
+
 - (IBAction)RegisterButtonCommitPressed:(id)sender {
     
     
     if (![self checkNetworkState])return;
     
+    
     if (![self verifyRegisterFields]) return;
+    
     
     NSString *areaCode;
     
@@ -763,82 +775,38 @@
 //注册相关字段验证
 - (BOOL)verifyRegisterFields {
     
+
+    BOOL phoneMatch = [self verifyWithPhone: self.RegisterPhoneTextF.text];
     
-    NSString *nomalError = @"手机号码格式错误";
-    
-    if (self.RegisterPhoneTextF.text.length == 0) {
-        
-        AlerMessage(@"手机号码不能为空");
-        
+    if (!phoneMatch) {
+     
         return NO;
     }
-    
-    
-    if ([self.RegisterAreaTextF.text containsString:@"86"]) {
-        
-        NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
-        NSString *errorStr;
-        if (![firstChar isEqualToString:@"1"] || self.RegisterPhoneTextF.text.length != 11) {
-            
-            errorStr = @"请输入“1”开头的11位数字";
-            
-            AlerMessage(errorStr);
-            
-            return NO;
-            
-        }
-        
-    }
-    
-    
-    
-    if ([self.RegisterAreaTextF.text containsString:@"44"]) {
-        
-        NSString *firstChar = [self.RegisterPhoneTextF.text substringWithRange:NSMakeRange(0, 1)];
-        NSString *errorStr;
-        
-        if (![firstChar isEqualToString:@"7"] || self.RegisterPhoneTextF.text.length != 10) {
-            
-            errorStr = @"请输入“7”开头的10位数字";
-            
-            AlerMessage(errorStr);
-            
-            return NO;
-            
-        }
-        
-    }
-    
-    
-    
-    if ([self.RegisterAreaTextF.text containsString:@"60"] && (self.RegisterPhoneTextF.text.length > 9 || self.RegisterPhoneTextF.text.length < 7) ) {
-        
-        AlerMessage(nomalError);
-        
-        return NO;
-        
-    }
-    
     
     if (self.RegisterVerTextF.text.length == 0) {
+        
         AlerMessage(@"验证码不能为空");
-        return NO;
+        
+        return  NO;
     }
     
     
     if (self.RegisterPasswdTextF.text.length == 0) {
         
         AlerMessage(self.RegisterPasswdTextF.placeholder);
-        
-        return NO;
+
+        return  NO;
     }
     
     
     if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
     {   //@"密码长度不小于6个字符"
+        
         AlerMessage(GDLocalizedString(@"Person-passwd"));
-        return NO;
+  
+        return  NO;
     }
+    
     
     return YES;
 }
