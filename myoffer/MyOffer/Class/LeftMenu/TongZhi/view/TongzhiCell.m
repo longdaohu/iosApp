@@ -102,7 +102,7 @@
     
     CGFloat titleX = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
     CGFloat titleY = logoy;
-    CGFloat titleW = XSCREEN_WIDTH - titleX - 2 * ITEM_MARGIN;
+    CGFloat titleW = contentSize.width - titleX - 2 * ITEM_MARGIN;
     CGFloat titleH = XPERCENT * 15;
     self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
 

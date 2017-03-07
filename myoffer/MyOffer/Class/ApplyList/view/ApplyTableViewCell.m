@@ -93,16 +93,17 @@
 {
     [super layoutSubviews];
  
-    
+    CGSize contentSize = self.bounds.size;
+
     CGFloat iconX = ITEM_MARGIN;
     CGFloat iconY = 0;
     CGFloat iconW = self.Edit ? 34 : 0;
-    CGFloat iconH = self.contentView.bounds.size.height;
+    CGFloat iconH = contentSize.height;
     self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
 
     CGFloat titleX = iconX + iconW  + 5;
     CGFloat titleY = iconY;
-    CGFloat titleW = self.Edit ? XSCREEN_WIDTH - titleX : XSCREEN_WIDTH - titleX - 44;
+    CGFloat titleW = self.Edit ? contentSize.width - titleX : contentSize.width - titleX - 44;
     CGFloat titleH = iconH;
     self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
 }

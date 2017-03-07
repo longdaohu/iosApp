@@ -50,6 +50,7 @@
     [super layoutSubviews];
     
     CGSize contentSize = self.bounds.size;
+    
     self.sender.frame = self.bounds;
     
     CGFloat contentX = PADDING_TABLEGROUP;

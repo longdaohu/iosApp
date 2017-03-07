@@ -15,7 +15,7 @@
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 //背景图片
-@property (weak, nonatomic) IBOutlet TopNavView *bgImageView;
+@property (weak, nonatomic) IBOutlet TopNavView *bgView;
 //收藏、分享
 @property(nonatomic,strong)UniversityRightView   *rightView;
 
@@ -28,6 +28,8 @@
     
     UniversityNavView *topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
     
+    topNavigationView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XNAV_HEIGHT);
+    
     topNavigationView.actionBlock = actionBlock;
     
     return  topNavigationView;
@@ -39,7 +41,7 @@
     
     self.clipsToBounds = YES;
     
-    self.bgImageView.alpha = 0;
+    self.bgView.alpha = 0;
    
      XWeakSelf
     self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
@@ -50,7 +52,7 @@
     
     [self.rightView shareButtonWithShadow:NO];
     
-    [self insertSubview:self.rightView  aboveSubview:self.bgImageView];
+    [self insertSubview:self.rightView  aboveSubview:self.bgView];
     
     self.titleLab.font = [UIFont boldSystemFontOfSize:17];
     
@@ -60,13 +62,12 @@
 
     [super layoutSubviews];
     
-    self.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XNAV_HEIGHT);
-    
+    CGSize contentSize = self.bounds.size;
     
     CGRect rightRect = self.rightView.frame;
-    rightRect.origin.y = XNAV_HEIGHT;
+    rightRect.origin.y = contentSize.height;
     rightRect.size.width = 80  +  XMARGIN;
-    rightRect.origin.x = XSCREEN_WIDTH - rightRect.size.width - 2 * XMARGIN;
+    rightRect.origin.x = contentSize.width - rightRect.size.width - 2 * XMARGIN;
     self.rightView.frame = rightRect;
 }
 
@@ -74,6 +75,7 @@
 - (IBAction)backClick:(UIButton *)sender {
     
      sender.tag = NavItemStyleBack;
+    
      [self onclick:sender];
 }
 
@@ -113,7 +115,7 @@
 - (void)scrollViewContentoffset:(CGFloat)offsetY  andContenHeight:(CGFloat)contentHeight{
 
     
-    self.bgImageView.alpha  =  offsetY / contentHeight;
+    self.bgView.alpha  =  offsetY / contentHeight;
     
     /*
      *   contentHeight  [收藏、分享按钮]的superView 的frame.origin.y  - 导航栏的高度
@@ -137,7 +139,7 @@
 
 - (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight{
     
-    self.bgImageView.alpha =  offsetY / contentHeight;
+    self.bgView.alpha =  offsetY / contentHeight;
     
 }
 

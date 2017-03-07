@@ -9,9 +9,9 @@
 #import "FiltContent.h"
 #import "SearchViewCell.h"
 @interface SearchViewCell()
-@property(nonatomic,strong)UIImageView *logoMV;
-@property(nonatomic,strong)UILabel *titleLabel;
-@property(nonatomic,strong)UIView *contentBackView;
+@property(nonatomic,strong)UIImageView *logoView;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UIView *itemsView;
 
 
 @end
@@ -23,17 +23,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.logoMV =[[UIImageView alloc] init];
-        self.logoMV.contentMode =  UIViewContentModeScaleAspectFit;
-        [self addSubview:self.logoMV];
+        self.logoView =[[UIImageView alloc] init];
+        self.logoView.contentMode =  UIViewContentModeScaleAspectFit;
+        [self addSubview:self.logoView];
         
         
-        self.titleLabel =[[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:15];
-        [self addSubview:self.titleLabel];
+        self.titleLab =[[UILabel alloc] init];
+        self.titleLab.font = [UIFont systemFontOfSize:15];
+        [self addSubview:self.titleLab];
         
-        self.contentBackView =[[UIView alloc] init];
-        [self addSubview:self.contentBackView];
+        self.itemsView =[[UIView alloc] init];
+        [self addSubview:self.itemsView];
         
     }
     return self;
@@ -41,9 +41,9 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    self.logoMV.frame =CGRectMake(15, 15, 20, 20);
-    self.titleLabel.frame = CGRectMake(CGRectGetMaxY(self.logoMV.frame) +10, 15, 200, 20);
+ 
+    self.logoView.frame =CGRectMake(15, 15, 20, 20);
+    self.titleLab.frame = CGRectMake(CGRectGetMaxY(self.logoView.frame) +10, 15, 200, 20);
 
 }
 
@@ -52,8 +52,8 @@
 {
     _fileritem =fileritem;
     
-    self.titleLabel.text = fileritem.titleName;
-    self.logoMV.image = [UIImage imageNamed:fileritem.detailTitleName];
+    self.titleLab.text = fileritem.titleName;
+    self.logoView.image = [UIImage imageNamed:fileritem.detailTitleName];
     
     //第一个 label的起点
     CGSize startSize = CGSizeMake(0, 15);
@@ -88,12 +88,12 @@
         [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
          sender.titleLabel.font = [UIFont systemFontOfSize:15];
-         [self.contentBackView addSubview:sender];
+         [self.itemsView addSubview:sender];
         
         //起点 增加
         startSize.width += keyWordWidth + padding;
     }
-//    self.contentBackView.frame =  CGRectMake(15,35,APPSIZE.width - 30, fileritem.contentheigh);
+//    self.itemsView.frame =  CGRectMake(15,35,APPSIZE.width - 30, fileritem.contentheigh);
     
 }
 

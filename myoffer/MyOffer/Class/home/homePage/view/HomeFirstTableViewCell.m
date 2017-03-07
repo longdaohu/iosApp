@@ -60,10 +60,12 @@
     
     [super layoutSubviews];
     
+    CGSize contentSize = self.bounds.size;
+
     CGFloat iconX = ITEM_MARGIN;
     CGFloat iconY = ITEM_MARGIN;
-    CGFloat iconW = XSCREEN_WIDTH - 2 * iconX;
-    CGFloat iconH = self.bounds.size.height - iconY;
+    CGFloat iconW = contentSize.width - 2 * iconX;
+    CGFloat iconH = contentSize.height - iconY;
     self.IconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     
 }

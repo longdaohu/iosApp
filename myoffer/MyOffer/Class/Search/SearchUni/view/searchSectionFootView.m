@@ -9,8 +9,8 @@
 #import "searchSectionFootView.h"
 
 @interface searchSectionFootView()
-@property(nonatomic,strong)UIView *contentView;
-@property(nonatomic,strong)UIButton *footerButton;
+@property(nonatomic,strong)UIView *shadowView;
+@property(nonatomic,strong)UIButton *footerBtn;
 @end
 @implementation searchSectionFootView
 
@@ -19,23 +19,24 @@
     self =[super initWithFrame:frame];
     if (self) {
         self.backgroundColor =[UIColor clearColor];
-        self.contentView =[[UIView alloc] init];
-        self.contentView.backgroundColor =[UIColor whiteColor];
-        self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.contentView.layer.shadowOpacity = 0.1;
-        self.contentView.layer.shadowOffset = CGSizeMake(0, 4);
-        [self addSubview:self.contentView];
+       UIView *shadowView =[[UIView alloc] init];
+        shadowView.backgroundColor =[UIColor whiteColor];
+        shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+        shadowView.layer.shadowOpacity = 0.1;
+        shadowView.layer.shadowOffset = CGSizeMake(0, 4);
+        [self addSubview:shadowView];
+        self.shadowView = shadowView;
         
-        
-        self.footerButton =[[UIButton alloc] init];
-        [self.footerButton setTitle:GDLocalizedString(@"SearchResult_more") forState:UIControlStateNormal];
-        [self.footerButton addTarget:self action:@selector(moreSubjectPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.footerButton setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-        self.footerButton.titleLabel.font =[UIFont systemFontOfSize:15];
-        self.footerButton.layer.cornerRadius = 5;
-        self.footerButton.layer.borderWidth = 1;
-        self.footerButton.layer.borderColor = XCOLOR_RED.CGColor;
-        [self addSubview:self.footerButton];
+        UIButton *footerBtn =[[UIButton alloc] init];
+        [footerBtn setTitle:GDLocalizedString(@"SearchResult_more") forState:UIControlStateNormal];
+        [footerBtn addTarget:self action:@selector(moreSubjectPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [footerBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        footerBtn.titleLabel.font =[UIFont systemFontOfSize:15];
+        footerBtn.layer.cornerRadius = 5;
+        footerBtn.layer.borderWidth = 1;
+        footerBtn.layer.borderColor = XCOLOR_RED.CGColor;
+        [self addSubview:footerBtn];
+        self.footerBtn = footerBtn;
         
      }
     return self;
@@ -58,8 +59,18 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, 50);
-    self.footerButton.frame = CGRectMake((XSCREEN_WIDTH - 200)*0.5, 5, 200, 40);
+    
+    CGSize contentSize  = self.bounds.size;
+
+    CGFloat shadownW = contentSize.width;
+    CGFloat shadownH = contentSize.height - 10;
+    self.shadowView.frame = CGRectMake(0, 0,shadownW, shadownH);
+    
+    CGFloat footerW = 200;
+    CGFloat footerH = shadownH - 10;
+    CGFloat footerX = (contentSize.width - footerW) * 0.5;
+    CGFloat footerY = 5;
+    self.footerBtn.frame = CGRectMake(footerX, footerY, footerW, footerH);
     
 }
 @end

@@ -55,6 +55,7 @@
 -(void)sectionHeaderWithTitle:(NSString *)title FontSize:(CGFloat)fontSize
 {
     self.titleLab.text = title;
+    
     self.titleLab.font = XFONT(fontSize);
     
 }

@@ -103,11 +103,12 @@
     
     CGFloat margin = 10;
     
+    CGSize contentSize = self.bounds.size;
     
     CGFloat bgX = 0;
     CGFloat bgY = 0;
-    CGFloat bgW = XSCREEN_WIDTH;
-    CGFloat bgH = self.bounds.size.height - margin;
+    CGFloat bgW = contentSize.width;
+    CGFloat bgH = contentSize.height - margin;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW,bgH);
     
     
@@ -121,7 +122,7 @@
     
     
     
-    CGFloat w = (XSCREEN_WIDTH - 4 * margin) / 3.0;
+    CGFloat w = (contentSize.width - 4 * margin) / 3.0;
     CGFloat h =   (bgH - margin) * 0.5 - margin;
     for (int i = 0 ; i < self.bgView.subviews.count ; i++) {
         UIButton *item =(UIButton *)self.bgView.subviews[i];

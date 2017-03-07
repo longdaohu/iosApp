@@ -300,16 +300,18 @@
  
     CGFloat SBx = self.isEdit ? 50 : 0;
     
+    CGSize contentSize = self.bounds.size;
+    
     if (!self.cell_Animation) {
         
-        self.bgView.frame = CGRectMake(SBx,0, XSCREEN_WIDTH, Uni_Cell_Height);
+        self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
       
         return;
     }
  
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
-        self.bgView.frame = CGRectMake(SBx,0, XSCREEN_WIDTH, Uni_Cell_Height);
+        self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
         
     }];
 }

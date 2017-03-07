@@ -8,9 +8,9 @@
 
 #import "NewSearchRstTableViewCell.h"
 @interface NewSearchRstTableViewCell()
-@property(nonatomic,strong)UILabel *TitleLabel;
-@property(nonatomic,strong)UILabel *LevelLabel;
-@property(nonatomic,strong)UILabel *AreaLabel;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UILabel *levelLab;
+@property(nonatomic,strong)UILabel *areaLab;
 @end
 
 @implementation NewSearchRstTableViewCell
@@ -29,21 +29,22 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.TitleLabel =[[UILabel alloc] init];
-        self.TitleLabel.font = [UIFont systemFontOfSize:14];
-        self.TitleLabel.numberOfLines = 0;
-        self.TitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        [self addSubview:self.TitleLabel];
         
-        self.LevelLabel = [[UILabel alloc] init];
-        self.LevelLabel.textColor =[UIColor darkGrayColor];
-        self.LevelLabel.font = [UIFont systemFontOfSize:12];
-        [self addSubview:self.LevelLabel];
+        self.titleLab =[[UILabel alloc] init];
+        self.titleLab.font = [UIFont systemFontOfSize:14];
+        self.titleLab.numberOfLines = 0;
+        self.titleLab.lineBreakMode = NSLineBreakByWordWrapping;
+        [self.contentView addSubview:self.titleLab];
         
-        self.AreaLabel = [[UILabel alloc] init];
-        self.AreaLabel.textColor =[UIColor darkGrayColor];
-        self.AreaLabel.font = [UIFont systemFontOfSize:12];
-        [self addSubview:self.AreaLabel];
+        self.levelLab = [[UILabel alloc] init];
+        self.levelLab.textColor =[UIColor darkGrayColor];
+        self.levelLab.font = [UIFont systemFontOfSize:12];
+        [self.contentView addSubview:self.levelLab];
+        
+        self.areaLab = [[UILabel alloc] init];
+        self.areaLab.textColor =[UIColor darkGrayColor];
+        self.areaLab.font = [UIFont systemFontOfSize:12];
+        [self.contentView addSubview:self.areaLab];
     }
     
     return self;
@@ -53,14 +54,9 @@
 -(void)setItemInfo:(NSDictionary *)itemInfo
 {
     _itemInfo = itemInfo;
- 
-    //富文本处理
-//    NSRange keyRange = [itemInfo[@"official_name"] rangeOfString:self.keyWord];
-//    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:itemInfo[@"official_name"]];
-//    [AttributedStr addAttribute:NSForegroundColorAttributeName  value:MAINCOLOR   range:keyRange];
-//    self.TitleLabel.attributedText =  AttributedStr ;
-    self.TitleLabel.text = itemInfo[@"official_name"];
-    self.LevelLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),itemInfo[@"level"]];
+
+    self.titleLab.text = itemInfo[@"official_name"];
+    self.levelLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),itemInfo[@"level"]];
 
     NSMutableString *areaStr =[NSMutableString stringWithFormat:@"%@: ",GDLocalizedString(@"UniCourseDe-005")];
     
@@ -68,7 +64,7 @@
        
          [areaStr appendFormat:@" %@ ",item];
     }
-     self.AreaLabel.text = [NSString stringWithFormat:@"%@",areaStr];
+     self.areaLab.text = [NSString stringWithFormat:@"%@",areaStr];
 }
 
  
@@ -76,26 +72,29 @@
 {
     [super layoutSubviews];
     
+    
+    CGSize contentSize = self.bounds.size;
+    
     CGFloat leftMargin = 15;
     CGFloat topMargin = 0;
-    CGFloat Tx = leftMargin;
-    CGFloat Ty = topMargin;
-    CGFloat Tw = XSCREEN_WIDTH - leftMargin;
-    CGFloat Th = 40;
-    self.TitleLabel.frame = CGRectMake(Tx, Ty, Tw, Th);
+    CGFloat titleX = leftMargin;
+    CGFloat titleY = topMargin;
+    CGFloat titleW = contentSize.width - leftMargin;
+    CGFloat titleH = 40;
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
-    CGFloat Lx = leftMargin;
-    CGFloat Ly = CGRectGetMaxY(self.TitleLabel.frame) + 5;
-    CGFloat Lw = 130;
-    CGFloat Lh = 20;
-    self.LevelLabel.frame = CGRectMake(Lx, Ly, Lw, Lh);
+    CGFloat levelX = leftMargin;
+    CGFloat levelY = CGRectGetMaxY(self.titleLab.frame) + 5;
+    CGFloat levelW = 130;
+    CGFloat levelH = 20;
+    self.levelLab.frame = CGRectMake(levelX, levelY, levelW, levelH);
     
     
-    CGFloat Ax = CGRectGetMaxX(self.LevelLabel.frame);
-    CGFloat Ay = Ly;
-    CGFloat Aw = XSCREEN_WIDTH - Ax;
-    CGFloat Ah = Lh;
-    self.AreaLabel.frame = CGRectMake(Ax, Ay, Aw, Ah);
+    CGFloat areaX = CGRectGetMaxX(self.levelLab.frame);
+    CGFloat areaY = levelY;
+    CGFloat areaW = contentSize.width - areaX;
+    CGFloat areaH = levelH;
+    self.areaLab.frame = CGRectMake(areaX, areaY, areaW, areaH);
     
     
 }

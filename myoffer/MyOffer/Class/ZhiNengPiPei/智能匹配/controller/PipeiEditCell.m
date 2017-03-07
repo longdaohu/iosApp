@@ -78,10 +78,12 @@
     
     [super layoutSubviews];
     
+    CGSize contentSize  = self.bounds.size;
+    
     CGFloat contentX = PADDING_TABLEGROUP;
     CGFloat contentY = 0;
-    CGFloat contentW = self.bounds.size.width - contentX  * 2;
-    CGFloat contentH = self.bounds.size.height ;
+    CGFloat contentW = contentSize.width - contentX  * 2;
+    CGFloat contentH = contentSize.height ;
     self.contentTF.frame = CGRectMake(contentX, contentY, contentW, contentH);
     
     self.sender.frame = self.contentTF.frame;

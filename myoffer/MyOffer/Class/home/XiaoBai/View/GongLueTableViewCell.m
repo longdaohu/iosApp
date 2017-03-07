@@ -73,6 +73,7 @@ static NSString *identity = @"gonglue";
     
     self.subtitleLab = [UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentRight];
     [self.bgView addSubview:self.subtitleLab];
+    
 }
 
 
@@ -93,9 +94,11 @@ static NSString *identity = @"gonglue";
 {
     [super layoutSubviews];
     
+    CGSize contentSize = self.bounds.size;
+
     CGFloat bgx = KDUtilSize(8);
     CGFloat bgy = 0;
-    CGFloat bgw = XSCREEN_WIDTH - bgx * 2;
+    CGFloat bgw = contentSize.width - bgx * 2;
     CGFloat bgh = FLOWLAYOUT_SubW;
     self.bgView.frame = CGRectMake(bgx, bgy, bgw, bgh);
     

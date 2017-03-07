@@ -44,7 +44,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bgImageView" destination="ACV-QW-aeD" id="1n4-j1-Stf"/>
+                <outlet property="bgView" destination="ACV-QW-aeD" id="y6m-O0-8gB"/>
                 <outlet property="titleLab" destination="Syv-hU-MxF" id="1TX-jd-7EK"/>
             </connections>
             <point key="canvasLocation" x="353" y="12"/>

@@ -8,7 +8,7 @@
 
 #import "TopNavView.h"
 @interface TopNavView ()
-@property(nonatomic,strong)UIImageView *bgImageView;
+@property(nonatomic,strong)UIImageView *bgView;
 
 @end
 
@@ -57,23 +57,22 @@
 
     self.clipsToBounds = YES;
     
-    UIImageView *bgImageView = [[UIImageView alloc] init];
-    bgImageView.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:bgImageView];
+    UIImageView *bgView = [[UIImageView alloc] init];
+    bgView.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:bgView];
     
     NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
     UIImage *bgImage =  [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-    bgImageView.image = bgImage;
-    self.bgImageView = bgImageView;
+    bgView.image = bgImage;
+    self.bgView = bgView;
 }
 
 - (void)layoutSubviews{
 
     [super layoutSubviews];
     
-//    UIImage *bgImage = self.bgImageView.image;
     CGSize  contentSize = self.bounds.size;
-    self.bgImageView.frame = CGRectMake(0, 0, contentSize.width,contentSize.height);
+    self.bgView.frame = CGRectMake(0, 0, contentSize.width,contentSize.height);
 
     
 }

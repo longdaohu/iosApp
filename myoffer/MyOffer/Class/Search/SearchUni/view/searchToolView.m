@@ -100,17 +100,29 @@ typedef enum {
 {
     [super layoutSubviews];
     
-    CGFloat LBH = self.frame.size.height;
+    CGSize contentSize  = self.bounds.size;
     
-    CGFloat LBW = XSCREEN_WIDTH * 0.5;
+    CGFloat leftX = 0;
+    CGFloat leftY = 0;
+    CGFloat leftW = contentSize.width * 0.5;
+    CGFloat leftH = contentSize.height;
+    self.leftButton.frame = CGRectMake(leftX, leftY,leftW,leftH);
     
-    self.leftButton.frame = CGRectMake(0, 0,LBW,LBH);
+
+    CGFloat iconH = contentSize.height;
+    CGFloat iconW =  iconH;
+    CGFloat iconX = contentSize.width - iconW - 5;
+    CGFloat iconY = 0;
+    self.LeftView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     
-    self.LeftView.frame = CGRectMake(LBW - LBH - 5, 0,LBH, LBH);
+
+    CGFloat rightX = CGRectGetMaxX(self.leftButton.frame);
+    CGFloat rightY = 0;
+    CGFloat rightH = leftH;
+    CGFloat rightW =  contentSize.width - leftW;
+    self.rightButton.frame = CGRectMake(rightX, rightY, rightW , rightH);
     
-    self.rightButton.frame = CGRectMake(XSCREEN_WIDTH*0.5, 0, XSCREEN_WIDTH*0.5, self.frame.size.height);
-    
-     self.centerLine.frame = CGRectMake(XSCREEN_WIDTH * 0.5, 10, 1, LBH - 20);
+     self.centerLine.frame = CGRectMake(contentSize.width * 0.5, 10, 1, contentSize.height - 20);
     
     
 }
