@@ -11,24 +11,13 @@
 
 @implementation ApplyStatusRecord
 
-+(instancetype)ApplyStatusWithDictionary:(NSDictionary *)recordDic
-{
-    return [[self alloc] initWithDictionary:recordDic];
-}
-
--(instancetype)initWithDictionary:(NSDictionary *)recordDic
-{
-    self =[super  init];
-    
-    if (self) {
-        
-           self.Status = recordDic[@"state"];
-        
-           self.Course = [Applycourse mj_objectWithKeyValues:recordDic[@"course"]];
-    }
-    
-    return self;
-}
+/*
+ + (NSDictionary *)mj_replacedKeyFromPropertyName{
+ 
+ return @{@"record_id" : @"_id"};
+ 
+ }
+ */
 
 
 @end

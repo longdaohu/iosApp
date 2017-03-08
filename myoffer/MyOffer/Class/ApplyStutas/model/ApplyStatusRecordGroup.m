@@ -25,7 +25,8 @@
     if (self) {
         
         self.universityFrame = [UniItemFrame frameWithUniversity:[UniversityNew mj_objectWithKeyValues:recordDic[@"university"]] ];
-        self.record          = [ApplyStatusRecord ApplyStatusWithDictionary:recordDic];
+     
+        self.record   = [ApplyStatusRecord mj_objectWithKeyValues:recordDic];
  
     }
     

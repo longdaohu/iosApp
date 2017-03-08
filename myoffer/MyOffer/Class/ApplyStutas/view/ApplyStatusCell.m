@@ -61,10 +61,10 @@
 {
     _record = record;
     
-    self.statusLab.text = record.Status;
+    self.statusLab.text = record.state;
     [self.statusLab sizeToFit];
 
-    self.subjectLab.text = record.Course.official_name;
+    self.subjectLab.text = record.course.official_name;
 
 }
 
