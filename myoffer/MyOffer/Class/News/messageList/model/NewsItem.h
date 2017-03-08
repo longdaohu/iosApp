@@ -14,6 +14,6 @@
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,copy)NSString *view_count;
 @property(nonatomic,copy)NSString *update_at;
-@property(nonatomic,copy)NSString *messageID;
+@property(nonatomic,copy)NSString *message_id;
 
 @end

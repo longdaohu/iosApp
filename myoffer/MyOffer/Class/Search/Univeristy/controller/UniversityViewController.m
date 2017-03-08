@@ -477,7 +477,7 @@ typedef enum {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
    
-        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.messageID] animated:YES];
+        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
         
     }else{
         

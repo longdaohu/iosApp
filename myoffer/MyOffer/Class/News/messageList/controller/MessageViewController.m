@@ -471,28 +471,30 @@
 - (void)configrationUIWithResponse:(id)response index:(NSInteger)index{
 
     
-    for(NSDictionary *MessageDic in response[@"articles"])
-    {
+    NSArray *articles  =  [NewsItem mj_objectArrayWithKeyValuesArray:response[@"articles"]];
+    
+    for(NewsItem *article in articles){
         
-        XWGJMessageFrame *messageFrame = [self getMessgeFrameWithDictionory:MessageDic];
+        XWGJMessageFrame *articleFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
+        
         switch (index) {
             case 0:
-                [self.Category_LifeArr  addObject:messageFrame];
+                [self.Category_LifeArr  addObject:articleFrame];
                 break;
             case 1:
-                [self.Category_RequestArr  addObject:messageFrame];
+                [self.Category_RequestArr  addObject:articleFrame];
                 break;
             case 2:
-                [self.Category_FeeArr  addObject:messageFrame];
+                [self.Category_FeeArr  addObject:articleFrame];
                 break;
             case 3:
-                [self.Category_TestArr  addObject:messageFrame];
+                [self.Category_TestArr  addObject:articleFrame];
                 break;
             case 4:
-                [self.Category_NewsArr  addObject:messageFrame];
+                [self.Category_NewsArr  addObject:articleFrame];
                 break;
             case 5:
-                [self.Category_VisaArr  addObject:messageFrame];
+                [self.Category_VisaArr  addObject:articleFrame];
                 break;
             default:
                 break;
@@ -532,16 +534,6 @@
     self.NODATA.hidden = YES;
     
 }
-
-- (XWGJMessageFrame *)getMessgeFrameWithDictionory:(NSDictionary *)MessageDic{
- 
-    NewsItem  *item                =  [NewsItem mj_objectWithKeyValues:MessageDic];
-    
-    XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:item];
-    
-    return  messageFrame;
-}
-
 
 
 #pragma mark :  UIScrollViewDelegate
@@ -649,7 +641,7 @@
     
     XWGJMessageFrame  *messageFrame     = self.CurrentArr[indexPath.row];
  
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.messageID] animated:YES];
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id] animated:YES];
   
 }
 

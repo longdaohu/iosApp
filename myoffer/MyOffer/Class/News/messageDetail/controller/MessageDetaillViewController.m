@@ -251,11 +251,15 @@
     [self.groups addObject:groupOne];
     
     //相关资讯 第二分组
-    NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
+    NSArray *recommendations  = [NewsItem mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
+    
     NSMutableArray *news_temps = [NSMutableArray array];
-    for (NewsItem *news in newses) {
-        if(news.messageID != self.NO_ID){
-            XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:news];
+    for (NewsItem *article in recommendations) {
+        
+        if(article.message_id != self.NO_ID){
+            
+            XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
+            
             [news_temps addObject:newsFrame];
         }
     }
@@ -457,7 +461,7 @@
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
        
-        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.messageID] animated:YES];
+        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
         
     }else{
         
