@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyOfferArticle.h"
 
-@interface GongLueListCell : UITableViewCell
+@interface GongLueCell : UITableViewCell
 @property(nonatomic,strong)MyOfferArticle *item;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 

@@ -8,8 +8,8 @@
 
 #import "GongLueViewController.h"
 #import "MessageDetaillViewController.h"
-#import "GongLueListCell.h"
-#import "GongLueListHeaderView.h"
+#import "GongLueCell.h"
+#import "GongLueHeaderView.h"
 #import "AUSearchResultViewController.h"
 #import "SearchResultViewController.h"
 #import "PipeiEditViewController.h"
@@ -29,7 +29,7 @@
 //用于判断用户是否已登录且有推荐院校数据
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //自定义TableViewHeaderView
-@property(nonatomic,strong)GongLueListHeaderView *headerView;
+@property(nonatomic,strong)GongLueHeaderView *headerView;
 //自定义导航栏
 @property(nonatomic,strong)UniversityNavView     *topNavigationView;
 
@@ -143,7 +143,7 @@
     tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
     
-    GongLueListHeaderView *headerView  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
+    GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
     headerView.gonglue = self.gonglue;
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
@@ -160,7 +160,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GongLueListCell *cell =[GongLueListCell cellWithTableView:tableView];
+    GongLueCell *cell =[GongLueCell cellWithTableView:tableView];
   
     cell.item =  self.gonglue.articles[indexPath.row];
     

@@ -6,9 +6,9 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "GongLueListCell.h"
+#import "GongLueCell.h"
 
-@interface GongLueListCell ()
+@interface GongLueCell ()
 @property(nonatomic,strong)UIImageView *logoView;
 @property(nonatomic,strong)UILabel     *titleLab;
 @property(nonatomic,strong)UILabel     *subTitleLab;
@@ -16,15 +16,15 @@
 
 
 @end
-@implementation GongLueListCell
+@implementation GongLueCell
 static NSString *identity = @"gonglueList";
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
-    GongLueListCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
+    GongLueCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     
     if (!cell) {
         
-        cell =[[GongLueListCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
+        cell =[[GongLueCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
     }
     return cell;
 }
@@ -72,6 +72,7 @@ static NSString *identity = @"gonglueList";
 
     _item = item;
     
+    
     self.titleLab.text    = item.title;
     self.subTitleLab.text = item.desc;
     [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.logo] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
@@ -93,7 +94,7 @@ static NSString *identity = @"gonglueList";
     self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     
     CGFloat lineX = CGRectGetMaxX(self.logoView.frame);
-    CGFloat lineY = contentSize.height - 0.4;
+    CGFloat lineY = contentSize.height -0.4;
     CGFloat lineW = contentSize.width;
     CGFloat lineH = 0.4;
     self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
@@ -101,7 +102,7 @@ static NSString *identity = @"gonglueList";
     if (self.titleLab.text || self.subTitleLab.text) {
         
         CGFloat titlex      = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
-        CGFloat titlew      = contentSize.width - titlex;
+        CGFloat titlew      = XSCREEN_WIDTH - titlex;
         CGSize titleSize    = [self.titleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(18)) maxWidth:titlew];
         CGFloat titley      = logoy;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);

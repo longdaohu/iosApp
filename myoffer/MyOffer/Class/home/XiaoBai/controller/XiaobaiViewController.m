@@ -10,7 +10,7 @@
 
 
 #import "XBTopToolView.h"
-#import "GongLueTableViewCell.h"
+#import "GongLueItemCell.h"
 #import "XiaobaiViewController.h"
 #import "CatigorySubjectCell.h"
 #import "GongLueViewController.h"
@@ -265,7 +265,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    GongLueTableViewCell *cell =[GongLueTableViewCell cellWithTableView:tableView];
+    GongLueItemCell *cell =[GongLueItemCell cellWithTableView:tableView];
     
     cell.item = self.gonglueItems[indexPath.row];
     

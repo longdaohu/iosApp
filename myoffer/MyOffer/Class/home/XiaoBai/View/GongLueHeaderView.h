@@ -1,5 +1,5 @@
 //
-//  GongLueListHeaderView.h
+//  GongLueHeaderView.h
 //  myOffer
 //
 //  Created by xuewuguojie on 16/4/21.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GonglueItem.h"
 
-@interface GongLueListHeaderView : UIView
+@interface GongLueHeaderView : UIView
 
 @property(nonatomic,strong)GonglueItem *gonglue;
 

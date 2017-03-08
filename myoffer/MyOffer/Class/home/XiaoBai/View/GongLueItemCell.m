@@ -1,15 +1,15 @@
 //
-//  XGongLueTableViewCell.m
+//  XGongLueItemCell.m
 //  XUObject
 //
 //  Created by xuewuguojie on 16/4/19.
 //  Copyright © 2016年 xuewuguojie. All rights reserved.
 //
 
-#import "GongLueTableViewCell.h"
+#import "GongLueItemCell.h"
 #import "GonglueItem.h"
 
-@interface GongLueTableViewCell ()
+@interface GongLueItemCell ()
 //控件背景
 @property(nonatomic,strong)UIView *bgView;
 //头像
@@ -21,16 +21,16 @@
 
 @end
 
-@implementation GongLueTableViewCell
+@implementation GongLueItemCell
 
 static NSString *identity = @"gonglue";
 +(instancetype)cellWithTableView:(UITableView *)tableView
 {
-    GongLueTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
+    GongLueItemCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     
     if (!cell) {
         
-        cell =[[GongLueTableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
+        cell =[[GongLueItemCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:identity];
     }
     return cell;
 }

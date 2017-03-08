@@ -1,15 +1,15 @@
 //
-//  GongLueListHeaderView.m
+//  GongLueHeaderView.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/4/21.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "GongLueListHeaderView.h"
+#import "GongLueHeaderView.h"
 #import "gonglueTip.h"
 
-@interface GongLueListHeaderView ()
+@interface GongLueHeaderView ()
 //控件背景
 @property(nonatomic,strong)UIView *bgView;
 //小MO头像
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation GongLueListHeaderView
+@implementation GongLueHeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

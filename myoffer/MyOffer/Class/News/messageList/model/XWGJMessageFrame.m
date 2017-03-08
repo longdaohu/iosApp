@@ -32,7 +32,6 @@
     self.TitleFrame = CGRectMake(titlex, titley, titlew, titleh);
     
     
-    
     CGFloat  timew = 110 ;
     CGFloat  timeh = 15 ;
     CGFloat  timey = CGRectGetMaxY(self.LogoFrame) - timeh;
