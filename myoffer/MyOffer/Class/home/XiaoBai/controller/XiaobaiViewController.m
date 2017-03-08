@@ -19,7 +19,7 @@
 #import "TopNavView.h"
 #import "NomalCollectionController.h"
 #import "GonglueItem.h"
-#import "gonglueTip.h"
+#import "GongLueTip.h"
 
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>

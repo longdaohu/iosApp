@@ -7,7 +7,7 @@
 //
 
 #import "GongLueHeaderView.h"
-#import "gonglueTip.h"
+#import "GongLueTip.h"
 
 @interface GongLueHeaderView ()
 //控件背景

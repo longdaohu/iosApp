@@ -151,7 +151,7 @@
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
-		AE6643A71E6FE61A002FC072 /* gonglueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* gonglueTip.m */; };
+		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
 		AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F286B1D77CA3C00E9A47A /* UUChart.m */; };
@@ -669,8 +669,8 @@
 		AE64A5451DCB4CC9004592B6 /* promptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promptViewController.m; sourceTree = "<group>"; };
 		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
-		AE6643A51E6FE61A002FC072 /* gonglueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gonglueTip.h; sourceTree = "<group>"; };
-		AE6643A61E6FE61A002FC072 /* gonglueTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gonglueTip.m; sourceTree = "<group>"; };
+		AE6643A51E6FE61A002FC072 /* GongLueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueTip.h; sourceTree = "<group>"; };
+		AE6643A61E6FE61A002FC072 /* GongLueTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueTip.m; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		AE6F28671D77CA3C00E9A47A /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
@@ -2350,8 +2350,8 @@
 				AEF3340F1D925A44003C3C68 /* GongLueViewController.m */,
 				AE6643A21E6FA820002FC072 /* GonglueItem.h */,
 				AE6643A31E6FA820002FC072 /* GonglueItem.m */,
-				AE6643A51E6FE61A002FC072 /* gonglueTip.h */,
-				AE6643A61E6FE61A002FC072 /* gonglueTip.m */,
+				AE6643A51E6FE61A002FC072 /* GongLueTip.h */,
+				AE6643A61E6FE61A002FC072 /* GongLueTip.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3618,7 +3618,7 @@
 				AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */,
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
-				AE6643A71E6FE61A002FC072 /* gonglueTip.m in Sources */,
+				AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,
 				AE1FD74E1D5C929500FFD5A8 /* MJRefreshAutoStateFooter.m in Sources */,
