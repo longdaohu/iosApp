@@ -10,9 +10,7 @@
 
 @interface Applycourse : NSObject
 @property(nonatomic,copy)NSString *official_name;
-@property(nonatomic,copy)NSString *courseName;
-@property(nonatomic,copy)NSString *courseID;
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *course_id;
  
-+ (instancetype)applyCourseWithDictionary:(NSDictionary *)dict;
-
 @end

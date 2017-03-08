@@ -12,7 +12,7 @@
 @property(nonatomic,copy)NSString *status;
 @property(nonatomic,copy)NSString *status_order;
 @property(nonatomic,copy)NSString *status_pay;
-@property(nonatomic,copy)NSString *orderId;
+@property(nonatomic,copy)NSString *order_id;
 @property(nonatomic,copy)NSString *total_fee;
 @property(nonatomic,copy)NSString *orderDescription;
 @property(nonatomic,copy)NSString *create_at;
@@ -20,5 +20,4 @@
 @property(nonatomic,assign)BOOL cancelBtn_hiden;
 
 
-+(instancetype)orderWithDictionary:(NSDictionary *)orderDict;
 @end

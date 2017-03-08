@@ -117,7 +117,7 @@
     
      NSDictionary *sku = [order.SKUs firstObject];
     self.orderTitleLab.text = sku[@"name"] ;
-    self.orderNoLab.text = [NSString stringWithFormat:@"订单号：%@",order.orderId];
+    self.orderNoLab.text = [NSString stringWithFormat:@"订单号：%@",order.order_id];
     self.orderPriceLab.text = [NSString stringWithFormat:@"价格：%@",order.total_fee];
     
     self.cancelBtn.hidden = order.cancelBtn_hiden;

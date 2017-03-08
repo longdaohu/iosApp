@@ -18,7 +18,7 @@
 #import "UniversityNavView.h"
 
 @interface GongLueViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UITableView *TableView;
+@property(nonatomic,strong)UITableView *tableView;
 //弹性图片
 @property(nonatomic,strong)UIImageView *FlexibleImageView;
 //弹性图片初始Rect
@@ -97,16 +97,21 @@
 //头部图片
 -(void)makeFlexibleImageView
 {
-    self.FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
-    self.FlexibleImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.FlexibleImageView.clipsToBounds = YES;
-    self.oldFlexibleViewRect = self.FlexibleImageView.frame;
-    self.oldFlexibleViewCenter = self.FlexibleImageView.center;
-    [self.view addSubview:self.FlexibleImageView];
-    self.FlexibleImageView.alpha = 0.1;
-    [self.FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue[@"cover"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    UIImageView *FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
+    self.FlexibleImageView = FlexibleImageView;
+    FlexibleImageView.contentMode = UIViewContentModeScaleAspectFill;
+    FlexibleImageView.clipsToBounds = YES;
+    FlexibleImageView.alpha = 0.1;
+    [self.view addSubview:FlexibleImageView];
+    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue[@"cover"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    
+    self.oldFlexibleViewRect = FlexibleImageView.frame;
+    self.oldFlexibleViewCenter = FlexibleImageView.center;
+   
     [UIView transitionWithView:self.FlexibleImageView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.FlexibleImageView.alpha = 1;
+        
+        FlexibleImageView.alpha = 1;
+    
     } completion:^(BOOL finished) {
     }];
 }
@@ -115,49 +120,45 @@
 -(void)makeTopNavigaitonView{
     
     XWeakSelf
-    self.topNavigationView = [[NSBundle mainBundle] loadNibNamed:@"UniversityNavView" owner:self options:nil].lastObject;
+
+    self.topNavigationView =  [UniversityNavView ViewWithBlock:^(UIButton *sender) {
+        
+         [weakSelf pop];
+    }];
     self.topNavigationView.titleName = self.gonglue[@"title"];
-    self.topNavigationView.actionBlock = ^(UIButton *sender){
-        [weakSelf pop];
-    };
     
     [self.view addSubview:self.topNavigationView];
+    
 }
 
 - (void)makeTableView
 {
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
-    self.TableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
-    self.TableView.delegate = self;
-    self.TableView.dataSource = self;
-    [self.view addSubview:self.TableView];
-    self.TableView.tableFooterView =[[UIView alloc] init];
-    self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    UITableView *tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
+    tableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    tableView.tableFooterView =[[UIView alloc] init];
+    tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    self.tableView = tableView;
     
-    [self makeTableViewHeaderView];
     
-}
-
-
-- (void)makeTableViewHeaderView{
-    
-    GongLueListHeaderView *header  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
-    header.gongLueDic = self.gonglue;
-    self.headerView = header;
-    self.TableView.tableHeaderView = header;
+    GongLueListHeaderView *headerView  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
+    headerView.gongLueDic = self.gonglue;
+    self.headerView = headerView;
+    self.tableView.tableHeaderView = headerView;
     
 }
 
 
-#pragma mark ———————— UITableViewData UITableViewDelegate
+#pragma mark : UITableViewData UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [self.gonglue[@"articles"] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GongLueListCell *cell =[GongLueListCell cellWithTableView:tableView];
     
@@ -178,9 +179,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *message =  self.gonglue[@"articles"][indexPath.row];
-    
-    
-    NSLog(@"message message message %@",message);
     
     if ([message[@"_id"] isEqualToString:@"ranks"]) {
         
@@ -210,55 +208,8 @@
 }
 
 
-/**
-    区分英国、澳大利亚
- */
--(void)caseSearchResult
-{
-    if ([self.gonglue[@"title"] containsString:@"英国"]) {
-        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANK_TI];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else{
-        
-        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANK_TI];
-        [self.navigationController pushViewController:newVc animated:YES];
-    }
-}
+#pragma mark : UIScrollViewDelegate
 
-
-/**
- 智能匹配
- recommendationsCount   用来区分用户是否提交过智能匹配数据
- */
-- (void)caseIntelligent{
-    
-    if (self.recommendationsCount > 0) {
-        
-        RequireLogin
-        
-        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        return;
-    }
-        
-      [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
-    
-    
- 
-    
-}
-
-//跳转资讯详情
-- (void)caseMassageWithId:(NSString *)message_id{
-    
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_id] animated:YES];
-
-}
-
-
-#pragma mark ——— UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -291,6 +242,55 @@
     
 }
 
+
+#pragma mark : 调用方法
+/**
+    区分英国、澳大利亚
+ */
+-(void)caseSearchResult
+{
+    if ([self.gonglue[@"title"] containsString:@"英国"]) {
+        SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANK_TI];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANK_TI];
+        [self.navigationController pushViewController:newVc animated:YES];
+    }
+}
+
+
+/**
+ 智能匹配
+ recommendationsCount   用来区分用户是否提交过智能匹配数据
+ */
+- (void)caseIntelligent{
+    
+    if (self.recommendationsCount > 0) {
+        
+        RequireLogin
+        
+        IntelligentResultViewController *vc = [[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
+      
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        return;
+    }
+        
+      [self.navigationController pushViewController:[[PipeiEditViewController alloc] init] animated:YES];
+    
+    
+ 
+    
+}
+
+//跳转资讯详情
+- (void)caseMassageWithId:(NSString *)message_id{
+    
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_id] animated:YES];
+
+}
 
 
 //回退

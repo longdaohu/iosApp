@@ -9,18 +9,12 @@
 #import "Applycourse.h"
 
 @implementation Applycourse
-- (instancetype)initWithDictionary:(NSDictionary *)dict
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    if (self = [super init]) {
-        self.official_name = dict[@"official_name"];
-        self.courseName = dict[@"name"];
-        self.courseID = dict[@"_id"];
-     }
-    return self;
-}
-+ (instancetype)applyCourseWithDictionary:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDictionary:dict];
+    return @{@"course_id" : @"_id"};
     
 }
+
+
 @end

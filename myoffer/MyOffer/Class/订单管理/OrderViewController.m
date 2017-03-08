@@ -130,7 +130,7 @@
 
     for (NSDictionary *dict in  response[@"orders"]) {
         
-        OrderItem *order = [OrderItem  orderWithDictionary:dict];
+        OrderItem *order = [OrderItem  mj_objectWithKeyValues:dict];
         [self.orderGroup addObject:order];
     }
     
@@ -269,7 +269,7 @@
     
     OrderItem *order = self.orderGroup[indexPath.section];
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.orderId];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
@@ -283,7 +283,6 @@
     }];
     
 }
-
 
 
 

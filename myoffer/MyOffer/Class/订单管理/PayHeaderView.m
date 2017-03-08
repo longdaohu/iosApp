@@ -43,7 +43,7 @@
     
     NSDictionary *sku = [order.SKUs firstObject];
     self.productNameLab.text = sku[@"name"] ;
-    self.orderNoLab.text =   order.orderId;
+    self.orderNoLab.text =   order.order_id;
     self.payCountLab.text = [NSString stringWithFormat:@"￥%@", order.total_fee];
     
 }

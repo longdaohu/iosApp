@@ -8,7 +8,6 @@
 #define REQUEST_SIZE 10
 #import "MessageViewController.h"
 #import "MessageCell.h"
-#import "XWGJMessageButtonItemView.h"
 #import "XWGJMessageCategoryItem.h"
 #import "MessageDetaillViewController.h"
 #import "XWGJMessageFrame.h"
@@ -17,6 +16,7 @@
 #import "XWGJNODATASHOWView.h"
 #import "XUToolbar.h"
 #import "NewsItem.h"
+#import "MessageSectionHeaderView.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -40,7 +40,7 @@
 @property(nonatomic,strong)NSArray *CurrentArr;
 @property(nonatomic,assign)NSInteger currentIndex;
 //分区选项
-@property(nonatomic,strong)XWGJMessageButtonItemView *sectionHeaderView;
+@property(nonatomic,strong)MessageSectionHeaderView *sectionHeaderView;
 //表头轮播图
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
 //状态栏遮盖
@@ -542,42 +542,10 @@
     return  messageFrame;
 }
 
-//自定义分区头
--(XWGJMessageButtonItemView *)sectionHeaderView
-{
-    if(!_sectionHeaderView)
-    {
-        XWeakSelf
-        
-        _sectionHeaderView = [[XWGJMessageButtonItemView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 120)];
-        
-        _sectionHeaderView.ActionBlock = ^(UIButton *sender){
-            
-            [weakSelf getDataSource:sender.tag andFresh:NO];
-            
-            weakSelf.currentIndex = sender.tag;
-            
-            XWGJMessageCategoryItem *category = weakSelf.RequestKeys[sender.tag];
-            //用于判断该选项是否已经加载完数据
-            if (category.IsNoMoreState) {
-                
-                weakSelf.tableView.mj_footer.state = MJRefreshStateNoMoreData;
-                
-            }else{
-                [weakSelf.tableView.mj_footer resetNoMoreData];
-            }
-            
-            if (weakSelf.tableView.contentOffset.y > AdjustF(200.f)) weakSelf.tableView.contentOffset = CGPointMake(0, AdjustF(200.f));
-            
-            
-        };
-        
-    }
-    return _sectionHeaderView;
-}
 
 
-#pragma mark - UIScrollViewDelegate
+#pragma mark :  UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -603,47 +571,80 @@
     return YES;
 }
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//自定义分区头
+-(MessageSectionHeaderView *)sectionHeaderView
 {
+    
+    if(!_sectionHeaderView)
+    {
+        XWeakSelf
+        
+        _sectionHeaderView = [MessageSectionHeaderView  headerWithAction:^(UIButton *sender) {
+            
+            [weakSelf getDataSource:sender.tag andFresh:NO];
+            
+            weakSelf.currentIndex = sender.tag;
+            
+            XWGJMessageCategoryItem *category = weakSelf.RequestKeys[sender.tag];
+            //用于判断该选项是否已经加载完数据
+            if (category.IsNoMoreState) {
+                
+                weakSelf.tableView.mj_footer.state = MJRefreshStateNoMoreData;
+                
+            }else{
+                [weakSelf.tableView.mj_footer resetNoMoreData];
+            }
+            
+            if (weakSelf.tableView.contentOffset.y > AdjustF(200.f)) weakSelf.tableView.contentOffset = CGPointMake(0, AdjustF(200.f));
+            
+        }];
+        
+    }
+    
+    return _sectionHeaderView;
+}
+
+#pragma mark : UITableViewDelegate  UITableViewDataSoure
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
     return Uni_Cell_Height;
 }
 
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     self.sectionHeaderView.items = self.RequestKeys;
     
     return self.sectionHeaderView;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
  
     return Uni_Cell_Height;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     return self.CurrentArr.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     MessageCell *cell =[MessageCell cellWithTableView:tableView];
+    
     cell.messageFrame = self.CurrentArr[indexPath.row];
+    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame     = self.CurrentArr[indexPath.row];
@@ -654,14 +655,14 @@
 
 
 //加载更多
--(void)loadMoreData{
+- (void)loadMoreData{
     
      [self getDataSource:self.currentIndex andFresh:YES];
     
 }
 
 //导航栏 leftBarButtonItem
--(void)leftViewMessage{
+- (void)leftViewMessage{
     
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
@@ -689,8 +690,7 @@
     
 }
 //显示侧边菜单
--(void)showLeftMenu
-{
+-(void)showLeftMenu{
     
     [self.sideMenuViewController presentLeftMenuViewController];
     

@@ -16,18 +16,24 @@
 //选项数组
 @property(nonatomic,strong)NSArray *items;
 
+
 @end
 
 
 
 @implementation CenterHeaderView
-+(instancetype)centerSectionViewWithResponse:(NSDictionary * )response{
-
++ (instancetype)centerSectionViewWithResponse:(NSDictionary * )response actionBlock:(centerSectionViewBlock)actionBlock{
+    
     CenterHeaderView *sectionView =  [[CenterHeaderView alloc] init];
-    sectionView.response           =  response;
+    
+    sectionView.response     =  response;
+    
+    sectionView.actionBlock = actionBlock;
     
     return sectionView;
 }
+
+ 
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -41,13 +47,14 @@
         CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
         self.items = @[pipei,favor,service];
         
-        
         UIView *lineOne = [[UIView alloc] init];
         UIView *lineTwo = [[UIView alloc] init];
         UIView *lineTop = [[UIView alloc] init];
         self.lines      = @[lineOne,lineTwo,lineTop];
         for (UIView *line in self.lines) {
+            
             [self addSubview:line];
+            
             line.backgroundColor = XCOLOR_LIGHTGRAY;
         }
         
@@ -62,9 +69,9 @@
     item.tag                 = type;
     item.actionBlack = ^(UIButton *sender){
         
-        if (self.sectionBlock) {
+        if (self.actionBlock) {
             
-            self.sectionBlock(type);
+            self.actionBlock(type);
         }
     };
     
@@ -73,44 +80,7 @@
     return  item;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
- 
-    CGFloat itemY = 0;
-    CGFloat itemW = XSCREEN_WIDTH / 3;
-    CGFloat itemH = self.bounds.size.height;
-    
-    for (NSInteger index = 0; index < self.items.count; index++) {
-        
-        CGFloat itemX = index * itemW;
 
-        CenterSectionItem *itemView = self.items[index];
-        
-        itemView.frame = CGRectMake( itemX, itemY, itemW, itemH);
-        
-    }
-    
-    
-    
-    CGFloat lineW = 0.5;
-    CGFloat lineH = self.bounds.size.height * 0.5;
-    CGFloat lineY = lineH * 0.5;
-    
-    for (NSInteger index = 0; index < self.lines.count - 1; index ++) {
-        
-        CGFloat lineX = itemW * (index + 1);
-
-        UIView *line = self.lines[index];
-        
-        line.frame = CGRectMake(lineX, lineY,  lineW, lineH);
-        
-    }
-    
-    UIView *top =self.lines[2];
-    top.frame = CGRectMake(0, 0, XSCREEN_WIDTH, lineW);
- 
-}
 
 
 -(void)setResponse:(NSDictionary *)response{
@@ -127,6 +97,47 @@
 
     CenterSectionItem *service  = self.items[2];
     service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
+}
+
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGSize contentSize = self.bounds.size;
+    
+    CGFloat itemY = 0;
+    CGFloat itemW = contentSize.width / 3;
+    CGFloat itemH = contentSize.height;
+    
+    for (NSInteger index = 0; index < self.items.count; index++) {
+        
+        CGFloat itemX = index * itemW;
+        
+        CenterSectionItem *itemView = self.items[index];
+        
+        itemView.frame = CGRectMake( itemX, itemY, itemW, itemH);
+        
+    }
+    
+    
+    CGFloat lineW = 0.5;
+    CGFloat lineH = contentSize.height * 0.5;
+    CGFloat lineY = lineH * 0.5;
+    
+    for (NSInteger index = 0; index < self.lines.count - 1; index ++) {
+        
+        CGFloat lineX = itemW * (index + 1);
+        
+        UIView *line = self.lines[index];
+        
+        line.frame = CGRectMake(lineX, lineY,  lineW, lineH);
+        
+    }
+    
+    UIView *top =self.lines[2];
+    top.frame = CGRectMake(0, 0, contentSize.width, lineW);
+    
 }
 
 

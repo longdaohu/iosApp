@@ -98,7 +98,7 @@ typedef enum {
     
 }
 
-//网络请求
+#pragma mark : 网络请求
 
 -(void)getRequestCenterSourse{
     
@@ -115,10 +115,10 @@ typedef enum {
      self.myCountResponse = nil;
     [self.tableView reloadData];
     
-    
 }
 
-//网络请求
+#pragma mark : 网络请求
+
 - (void)requestWithPath:(NSString *)path{
     
     XWeakSelf
@@ -221,7 +221,7 @@ typedef enum {
     
 }
 
-
+//设置cell
 -(void)makeCellArray
 {
     
@@ -237,7 +237,7 @@ typedef enum {
         return cell;
     };
     
-    XWeakSelf
+    
     NSString *list        = GDLocalizedString(@"center-application");
     NSString *listSub     = GDLocalizedString(@"center-appDetail");
     NSString *status      = GDLocalizedString(@"center-status");
@@ -247,24 +247,25 @@ typedef enum {
     NSString *myoffer     = GDLocalizedString(@"center-myoffer" );
     NSString *myofferSub  = GDLocalizedString(@"center-myofferDetail" );
     self.CelldDetailes =@[listSub,statusSub,materialSub,myofferSub];
+    
     self.cells = @[@[
                        newCell(list, XImage(@"center_yixiang"),
                                ^{
-                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyList];
+                                   [self itemOnClickWithType:ItemTypeClickApplyList];
                                }),
                        newCell(status,XImage(@"center_status"),
                                ^{
-                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyStatus];
+                                   [self itemOnClickWithType:ItemTypeClickApplyStatus];
                                }),
                        
                        newCell(material,XImage(@"center_matial"),
                                ^{
-                                   [weakSelf itemOnClickWithType:ItemTypeClickApplyMatial];
+                                   [self itemOnClickWithType:ItemTypeClickApplyMatial];
                                }),
                        
                        newCell(myoffer, XImage(@"center_myoffer"),
                                ^{
-                                   [weakSelf itemOnClickWithType:ItemTypeClickMyoffer];
+                                   [self itemOnClickWithType:ItemTypeClickMyoffer];
                                    
                                })] ];
 
@@ -291,12 +292,81 @@ typedef enum {
 //表头UI设置
 -(void)makeHeaderView
 {
-    self.centerHeader.image = XImage(@"PlaceHolderImage");
+    
     UIImage *headImage =  XImage(@"center_ban_CN.jpg");
-    CGFloat headHeigh = XSCREEN_WIDTH * headImage.size.height / headImage.size.width;
-    self.headView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, headHeigh);
+    CGFloat headerW = XSCREEN_WIDTH;
+    CGFloat headerH = XSCREEN_WIDTH * headImage.size.height / headImage.size.width;
+    self.headView.frame = CGRectMake(0, 0, headerW, headerH);
+    
     self.tableView.tableHeaderView = self.headView;
 }
+
+
+
+
+#pragma mark :UITableViewDelegate  UITableViewDataSoure
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+ 
+    CenterHeaderView *headerView =  [CenterHeaderView centerSectionViewWithResponse:self.myCountResponse actionBlock:^(centerItemType type) {
+        
+        switch (type) {
+            case centerItemTypepipei:
+                [self CasePipei];
+                break;
+            case centerItemTypefavor:
+                [self itemOnClickWithType:ItemTypeClickFavor];
+                break;
+            default:
+                [self CaseServiceSelection];
+                break;
+        }
+
+        
+    }];
+ 
+    return headerView;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  
+    return [self.cells[section] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
+    cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ActionTableViewCell *cell = _cells[indexPath.section][indexPath.row];
+    
+    if (cell.action) cell.action();
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return  80 * XPERCENT;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 55;
+}
+
 
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
@@ -310,7 +380,8 @@ typedef enum {
     
 }
 
-//实现不同选项跳转
+#pragma mark : 实现不同选项跳转
+
 -(void)itemOnClickWithType:(ItemTypeClick)type
 {
     self.clickType = LOGIN ? ItemTypeClickNO : type;
@@ -339,77 +410,6 @@ typedef enum {
         default:
             break;
     }
-}
-
-//分区头
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
- 
-    CenterHeaderView *headerView =  [CenterHeaderView centerSectionViewWithResponse:self.myCountResponse];
-    headerView.sectionBlock  =  ^(centerItemType type){
-        switch (type) {
-            case centerItemTypepipei:
-                [self CasePipei];
-                break;
-            case centerItemTypefavor:
-                [self itemOnClickWithType:ItemTypeClickFavor];
-                break;
-            default:
-                [self CaseServiceSelection];
-                break;
-        }
-        
-    };
-    
-    return headerView;
-}
-
-
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-    return [self.cells[section] count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    ActionTableViewCell *cell = self.cells[indexPath.section][indexPath.row];
-    cell.detailTextLabel.text =  self.CelldDetailes[indexPath.row];
-    
-    /*
-     if ([cell.textLabel.text containsString:@"ffer"]) {
-     NSString *countString =  [self.myCountResponse[@"offersCount"] integerValue]!= 0 ?[NSString stringWithFormat:@"%@",self.myCountResponse[@"offersCount"]]:@"";
-     cell.countLabel.text  = countString;
-     }
-     
-     */
-
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    ActionTableViewCell *cell = _cells[indexPath.section][indexPath.row];
-    
-    if (cell.action) cell.action();
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return  80 + (XSCREEN_WIDTH - 320) * 0.2;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 55;
 }
 
 
@@ -492,12 +492,11 @@ typedef enum {
     }
     
     
-    XWeakSelf
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？"  message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"下载" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //跳转到QQ下载页面
-        [weakSelf webViewWithpath:@"http://appstore.com/qq"];
+        [self webViewWithpath:@"http://appstore.com/qq"];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:commitAction];

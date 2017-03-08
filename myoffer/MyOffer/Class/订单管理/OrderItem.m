@@ -14,30 +14,37 @@
 
 @implementation OrderItem
 
-+(instancetype)orderWithDictionary:(NSDictionary *)orderDict{
-
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
     
-    return [[self alloc] initWithDictionary:orderDict];
+    return @{@"order_id" : @"_id",@"orderDescription":@"description"};
+    
 }
 
 
--(instancetype)initWithDictionary:(NSDictionary *)orderDict{
- 
-    self =[super init];
-    
-    if (self) {
-        self.SKUs = orderDict[@"SKUs"];
-        self.orderId = orderDict[@"_id"];
-        self.total_fee = [NSString stringWithFormat:@"%@",orderDict[@"total_fee"]];
-        self.orderDescription = orderDict[@"description"];
-        self.create_at = orderDict[@"create_at"];
-        self.status = orderDict[@"status"];
-        [self statusWithTag:self.status];
-         
-    }
-    
-    return self;
-}
+//+(instancetype)orderWithDictionary:(NSDictionary *)orderDict{
+//
+//    
+//    return [[self alloc] initWithDictionary:orderDict];
+//}
+//
+//
+//-(instancetype)initWithDictionary:(NSDictionary *)orderDict{
+// 
+//    self =[super init];
+//    
+//    if (self) {
+//        self.SKUs = orderDict[@"SKUs"];
+//        self.order_id = orderDict[@"_id"];
+//        self.total_fee = [NSString stringWithFormat:@"%@",orderDict[@"total_fee"]];
+//        self.orderDescription = orderDict[@"description"];
+//        self.create_at = orderDict[@"create_at"];
+//        self.status = orderDict[@"status"];
+//        [self statusWithTag:self.status];
+//         
+//    }
+//    
+//    return self;
+//}
 
 
 -(void)statusWithTag:(NSString *)status

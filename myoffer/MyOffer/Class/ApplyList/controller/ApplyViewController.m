@@ -410,7 +410,7 @@
     ApplyTableViewCell *cell =[ApplyTableViewCell cellWithTableView:tableView];
     cell.Edit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
     cell.title =  subject.official_name;
-    cell.isSelected = cell.Edit ? [self.cancelCourseList containsObject:subject.courseID] : [self.courseSelecteds  containsObject:subject.courseID];
+    cell.isSelected = cell.Edit ? [self.cancelCourseList containsObject:subject.course_id] : [self.courseSelecteds  containsObject:subject.course_id];
     
     return cell;
     
@@ -464,8 +464,8 @@
                 for (NSInteger index = sujectItems.count - 1; index >= 0; index--) {
                     
                     Applycourse *subject  = sujectItems[index];
-                    if (![weakSelf.cancelCourseList containsObject:subject.courseID]) {
-                        [weakSelf.cancelCourseList addObject:subject.courseID];
+                    if (![weakSelf.cancelCourseList containsObject:subject.course_id]) {
+                        [weakSelf.cancelCourseList addObject:subject.course_id];
                         [weakSelf.cancelindexPathes addObject:[NSIndexPath  indexPathForRow:index inSection:section]];
                     }
                     
@@ -479,7 +479,7 @@
             
             for (NSInteger row = 0; row < sujectItems.count; row++) {
                 Applycourse *subject  = sujectItems[row];
-                [weakSelf.cancelCourseList removeObject:subject.courseID];
+                [weakSelf.cancelCourseList removeObject:subject.course_id];
                 [weakSelf.cancelindexPathes removeObject:[NSIndexPath  indexPathForRow:row inSection:section]];
             }
         }
@@ -512,15 +512,15 @@
         
         ApplyTableViewCell *cell =(ApplyTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         
-        if ([self.cancelCourseList containsObject:subject.courseID]) {
+        if ([self.cancelCourseList containsObject:subject.course_id]) {
             
-            [self.cancelCourseList removeObject:subject.courseID];
+            [self.cancelCourseList removeObject:subject.course_id];
             
             [cell cellIsSelected:NO];
             
         }else{
             
-            [self.cancelCourseList addObject:subject.courseID];
+            [self.cancelCourseList addObject:subject.course_id];
             
             [cell cellIsSelected:YES];
 
@@ -545,17 +545,17 @@
         
         if (self.courseSelecteds.count  == 0) {
             
-            [self.self.courseSelecteds  addObject:subject.courseID];
+            [self.self.courseSelecteds  addObject:subject.course_id];
             
  
-        }else if ([self.courseSelecteds containsObject:subject.courseID]) {
+        }else if ([self.courseSelecteds containsObject:subject.course_id]) {
             
-            [self.courseSelecteds removeObject:subject.courseID];
+            [self.courseSelecteds removeObject:subject.course_id];
             
  
         }else{
             
-            NSArray *idGroup = [group.subjects valueForKey:@"courseID"];
+            NSArray *idGroup = [group.subjects valueForKey:@"course_id"];
             
             for (NSString  *selectedID in self.courseSelecteds){
                 
@@ -563,7 +563,7 @@
                     
                     [self.courseSelecteds removeObject:selectedID];
                     
-                    [self.courseSelecteds addObject:subject.courseID];
+                    [self.courseSelecteds addObject:subject.course_id];
                     
                     //取消cell刷新时默认动画效果
                     [UIView performWithoutAnimation:^{
@@ -575,7 +575,7 @@
                 
              }
             
-                [self.courseSelecteds addObject:subject.courseID];
+                [self.courseSelecteds addObject:subject.course_id];
 
            }
         

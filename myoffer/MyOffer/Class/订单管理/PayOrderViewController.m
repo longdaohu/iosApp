@@ -81,9 +81,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if ([alertView.title isEqualToString:@"支付成功"]) {
+        
          OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
          detail.order  =  self.order;
         [self.navigationController pushViewController:detail  animated:YES];
+        
     }
     
 }
@@ -234,7 +236,7 @@ static NSString *identify = @"pay";
     
     [[AppDelegate sharedDelegate] updateUmeng];
     
-    NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.orderId];
+    NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
@@ -271,7 +273,7 @@ static NSString *identify = @"pay";
 -(void)sendAliPay
 {
     
-        NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.orderId];
+        NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
             
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
                     
@@ -300,9 +302,9 @@ static NSString *identify = @"pay";
     
     NSString *path;
     if ([self.payStyle isEqualToString:@"支付宝"]) {
-        path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.orderId];
+        path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
     }else if([self.payStyle isEqualToString:@"微信"]){
-       path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.orderId];
+       path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
     }
     
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {

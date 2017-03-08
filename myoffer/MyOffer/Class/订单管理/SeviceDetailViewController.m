@@ -100,7 +100,7 @@
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
          
             PayOrderViewController *pay =[[PayOrderViewController alloc] init];
-            pay.order = [OrderItem orderWithDictionary:response[@"order"]];
+            pay.order = [OrderItem mj_objectWithKeyValues:response[@"order"]];
             [self.navigationController pushViewController:pay animated:YES];
             
         }];

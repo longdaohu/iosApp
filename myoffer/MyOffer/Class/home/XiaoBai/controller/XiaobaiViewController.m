@@ -99,7 +99,8 @@
 
 
 
-//加载申请攻略数据
+#pragma mark : 加载申请攻略数据
+
 -(void)makeDataSource:(BOOL)fresh
 {
     XWeakSelf
@@ -121,6 +122,7 @@
     
     self.gonglueItems =  (NSArray *)response;
     
+    NSLog(@"根据网络请求结果配置UI   %@",self.gonglueItems[0]);
     self.tableView.tableFooterView = [UIView new];
     
     [self.tableView reloadData];
@@ -233,8 +235,8 @@
 }
 
 
+#pragma mark : UIScrollViewDelegate
 
-#pragma mark ——— UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -250,8 +252,7 @@
     }
     
 }
-
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark : UITableViewDelegate  UITableViewDataSoure
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -284,9 +285,7 @@
      [self.navigationController pushViewController:list  animated:YES];
 }
 
-
-
-#pragma mark ——— XTopToolViewDelegate
+#pragma mark : XTopToolViewDelegate
 
 -(void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender
 {

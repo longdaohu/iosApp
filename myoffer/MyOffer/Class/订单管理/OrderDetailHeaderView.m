@@ -88,7 +88,7 @@
     
     NSDictionary *sku       = [order.SKUs firstObject];
     self.orderTitleLab.text = [NSString stringWithFormat:@"*%@",sku[@"name"]];
-    self.orderNoLab.text    = [NSString stringWithFormat:@"订单号 ： %@",order.orderId];
+    self.orderNoLab.text    = [NSString stringWithFormat:@"订单号 ： %@",order.order_id];
  
     
     CGSize orderSize =[self.orderTitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];

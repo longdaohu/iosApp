@@ -24,7 +24,7 @@
         
            self.Status = recordDic[@"state"];
         
-           self.Course = [Applycourse applyCourseWithDictionary:recordDic[@"course"]];
+           self.Course = [Applycourse mj_objectWithKeyValues:recordDic[@"course"]];
     }
     
     return self;

@@ -19,7 +19,7 @@
         self.iconView.imageEdgeInsets = UIEdgeInsetsMake(-3, -20, 0, 0);
         [self.iconView  setImage:  XImage(@"menu_white")  forState:UIControlStateNormal];
         [self addSubview:self.iconView ];
-        [self.iconView addTarget:self action:@selector(left:) forControlEvents:UIControlEventTouchDown];
+        [self.iconView addTarget:self action:@selector(leftButtonOnClick:) forControlEvents:UIControlEventTouchDown];
         
         self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(16, 0, 18, 18)];
         self.countLab.layer.cornerRadius   = REDSPOT_HEIGHT  * 0.5;
@@ -40,11 +40,9 @@
 {
     
     LeftBarButtonItemView *left =[[LeftBarButtonItemView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    left.actionBlock = ^(){
-        
-        actionBlock();
-        
-    };
+ 
+    left.actionBlock = actionBlock;
+    
     return left;
 }
 
@@ -54,19 +52,23 @@
     _countStr = countStr;
     
     self.countLab.hidden = countStr.integerValue == 0;
+    
     self.countLab.text   = countStr.length >= 3 ? @"99+": countStr;
     
     if (self.countLab.text.length > 1) {
+        
         CGSize countSize    = [self.countLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:13]];
         self.countLab.width = countSize.width + 8;
+        
     }else{
+        
         self.countLab.width = REDSPOT_HEIGHT;
     
     }
     
 }
 
--(void)left:(UIButton *)sender{
+-(void)leftButtonOnClick:(UIButton *)sender{
 
     if (self.actionBlock) {
         

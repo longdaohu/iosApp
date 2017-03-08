@@ -33,6 +33,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
         
         UIButton *touchBtn = [[UIButton alloc] init];

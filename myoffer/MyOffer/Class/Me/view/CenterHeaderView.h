@@ -16,8 +16,11 @@ typedef enum {
 typedef void(^centerSectionViewBlock)(centerItemType type);
 
 @interface CenterHeaderView : UIView
-@property(nonatomic,copy)centerSectionViewBlock sectionBlock;
+
+@property(nonatomic,copy)centerSectionViewBlock actionBlock;
+
 @property(nonatomic,strong)NSDictionary *response;
-+(instancetype)centerSectionViewWithResponse:(NSDictionary * )response;
+
++ (instancetype)centerSectionViewWithResponse:(NSDictionary * )response actionBlock:(centerSectionViewBlock)actionBlock;
 
 @end

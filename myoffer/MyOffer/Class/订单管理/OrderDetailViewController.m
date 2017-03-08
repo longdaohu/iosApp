@@ -85,7 +85,7 @@
     
     XWeakSelf
 
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderDetail,self.order.orderId];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderDetail,self.order.order_id];
     
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
     
@@ -293,7 +293,7 @@
 -(void)cancelOrder{
     
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.orderId];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         

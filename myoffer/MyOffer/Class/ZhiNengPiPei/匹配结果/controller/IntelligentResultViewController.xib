@@ -109,12 +109,12 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="1"/>
+                                    <integer key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-cU-amC">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冲刺" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-cU-amC">
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Fu1-bL-E15"/>
@@ -123,7 +123,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="P8t-5O-MdR">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle" translatesAutoresizingMaskIntoConstraints="NO" id="P8t-5O-MdR">
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="2dG-1g-r6u"/>
                                 <constraint firstAttribute="width" constant="30" id="4Wh-1C-eiI"/>
@@ -147,7 +147,7 @@
                         <constraint firstAttribute="height" constant="85" id="KaJ-ze-t6g"/>
                         <constraint firstAttribute="trailing" secondItem="B7K-cU-amC" secondAttribute="trailing" id="LsY-7e-u9h"/>
                         <constraint firstAttribute="bottom" secondItem="P8t-5O-MdR" secondAttribute="bottom" constant="30" id="Sy2-Ka-SKH"/>
-                        <constraint firstItem="B7K-cU-amC" firstAttribute="leading" secondItem="2HB-Hj-HF9" secondAttribute="trailing" id="UC8-YL-Jw1"/>
+                        <constraint firstItem="B7K-cU-amC" firstAttribute="leading" secondItem="2HB-Hj-HF9" secondAttribute="trailing" constant="5" id="UC8-YL-Jw1"/>
                         <constraint firstAttribute="bottom" secondItem="B7K-cU-amC" secondAttribute="bottom" id="Ytr-Y6-sxW"/>
                         <constraint firstAttribute="bottom" secondItem="2HB-Hj-HF9" secondAttribute="bottom" id="gNJ-2s-pc9"/>
                         <constraint firstItem="P8t-5O-MdR" firstAttribute="centerX" secondItem="B6A-Ne-GDe" secondAttribute="centerX" id="oRS-an-Wsa"/>
@@ -169,6 +169,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Triangle.png" width="25" height="22"/>
+        <image name="Triangle" width="34" height="20"/>
     </resources>
 </document>

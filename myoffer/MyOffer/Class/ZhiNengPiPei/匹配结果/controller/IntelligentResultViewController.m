@@ -483,8 +483,7 @@
     
 }
 
-
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark :UITableViewDelegate  UITableViewDataSoure
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -565,13 +564,6 @@
         
         return;
     }
-/*
-    else if(self.NewSelectUniversityIDs.count >6)
-    {
-        [KDAlertView showMessage:GDLocalizedString(@"Evaluate-commitAlert") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];//@"好的"];
-        return;
-    }
-*/
     
     [self
      startAPIRequestWithSelector:kAPISelectorZiZengApplyPost

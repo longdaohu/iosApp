@@ -1,23 +1,35 @@
 //
-//  MessageHeaderView.m
+//  MessageSectionHeaderView.m
 //  myOffer
 //
-//  Created by xuewuguojie on 16/1/14.
-//  Copyright © 2016年 UVIC. All rights reserved.
+//  Created by xuewuguojie on 2017/3/7.
+//  Copyright © 2017年 UVIC. All rights reserved.
 //
 
-#import "XWGJMessageButtonItemView.h"
+#import "MessageSectionHeaderView.h"
 #import "XWGJMessageCategoryItem.h"
 
-@interface XWGJMessageButtonItemView ();
+@interface MessageSectionHeaderView ();
+
 @property(nonatomic,strong)NSArray *ButtonImages;
 @property(nonatomic,strong)NSArray *ButtonDisableImages;
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIView *line;
+@property(nonatomic,assign)NSInteger LastIndex;
 
 
 @end
-@implementation XWGJMessageButtonItemView
+@implementation MessageSectionHeaderView
+
++ (instancetype)headerWithAction:(MessageBlock)actionBlock{
+    
+    MessageSectionHeaderView *header = [[MessageSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 120)];
+    
+    header.actionBlock = actionBlock;
+    
+    return header;
+}
+
 
 -(NSArray *)ButtonImages
 {
@@ -64,7 +76,7 @@
 
 
 - (void)setItems:(NSArray *)items{
-
+    
     
     _items = items;
     
@@ -72,24 +84,24 @@
         
         XWGJMessageCategoryItem *item = (XWGJMessageCategoryItem *)obj;
         
-            UIButton *itemBtn = [[UIButton alloc] init];
-            itemBtn.enabled = self.LastIndex == idx ? NO:YES;
-            itemBtn.backgroundColor = self.LastIndex == idx ? XCOLOR_LIGHTBLUE:XCOLOR_CLEAR;
-            itemBtn.tag = idx;
-            itemBtn.layer.borderWidth  = 1;
-            itemBtn.layer.masksToBounds = YES;
-            itemBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
-            [itemBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-            [itemBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
-            itemBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-            itemBtn.titleLabel.font =[UIFont systemFontOfSize:15];
-            [itemBtn setTitle:item.name forState:UIControlStateNormal];
-            [itemBtn setImage:[UIImage imageNamed:self.ButtonImages[idx]] forState:UIControlStateNormal];
-            [itemBtn setImage:[UIImage imageNamed:self.ButtonDisableImages[idx]] forState:UIControlStateDisabled];
-            [itemBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        UIButton *itemBtn = [[UIButton alloc] init];
+        itemBtn.enabled = self.LastIndex == idx ? NO:YES;
+        itemBtn.backgroundColor = self.LastIndex == idx ? XCOLOR_LIGHTBLUE:XCOLOR_CLEAR;
+        itemBtn.tag = idx;
+        itemBtn.layer.borderWidth  = 1;
+        itemBtn.layer.masksToBounds = YES;
+        itemBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
+        [itemBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
+        [itemBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
+        itemBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+        itemBtn.titleLabel.font =[UIFont systemFontOfSize:15];
+        [itemBtn setTitle:item.name forState:UIControlStateNormal];
+        [itemBtn setImage:[UIImage imageNamed:self.ButtonImages[idx]] forState:UIControlStateNormal];
+        [itemBtn setImage:[UIImage imageNamed:self.ButtonDisableImages[idx]] forState:UIControlStateDisabled];
+        [itemBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         
-            [self.bgView addSubview:itemBtn];
+        
+        [self.bgView addSubview:itemBtn];
         
         
     }];
@@ -120,8 +132,6 @@
     self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
     
     
-    
-    
     CGFloat w = (contentSize.width - 4 * margin) / 3.0;
     CGFloat h =   (bgH - margin) * 0.5 - margin;
     for (int i = 0 ; i < self.bgView.subviews.count ; i++) {
@@ -135,27 +145,9 @@
 }
 
 
--(void)onClick:(UIButton *)sender
-{
+- (void)onClick:(UIButton *)sender{
     
-    NSString *item;
-    if (sender.tag == 0) {
-        item = @"news_lift";
-    }else if (sender.tag == 1) {
-        item = @"news_apply";
-    }else if (sender.tag == 2) {
-        item = @"news_fee";
-    }else if (sender.tag == 3) {
-        item = @"news_kaoshi";
-    }else if (sender.tag == 4) {
-        item = @"news_news";
-    }else{
-        item = @"news_visa";
-    }
-    [MobClick event:item];
-    
-    
-    if (sender.tag != self.LastIndex) {
+     if (sender.tag != self.LastIndex) {
         
         UIButton *item =(UIButton *)self.bgView.subviews[self.LastIndex];
         item.backgroundColor = XCOLOR_CLEAR;
@@ -163,8 +155,10 @@
         sender.enabled = NO;
         sender.backgroundColor =  XCOLOR_LIGHTBLUE;
         self.LastIndex = sender.tag;
-        if (self.ActionBlock) {
-            self.ActionBlock(sender);
+        
+        if (self.actionBlock) {
+            
+            self.actionBlock(sender);
         }
     }
     
