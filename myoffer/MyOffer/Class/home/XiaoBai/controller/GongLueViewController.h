@@ -7,9 +7,12 @@
 //
 
 #import "BaseViewController.h"
+@class GonglueItem;
 
 @interface GongLueViewController : BaseViewController
 //数据源
-@property(nonatomic,strong)NSDictionary *gonglue;
+@property(nonatomic,strong)GonglueItem *gonglue;
+
+
 
 @end

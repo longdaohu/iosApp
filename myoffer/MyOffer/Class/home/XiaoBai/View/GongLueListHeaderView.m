@@ -7,6 +7,7 @@
 //
 
 #import "GongLueListHeaderView.h"
+#import "gonglueTip.h"
 
 @interface GongLueListHeaderView ()
 //控件背景
@@ -20,6 +21,9 @@
 //titleLab原始Frame
 @property(nonatomic,assign)CGRect headerTitleLabFrame;
 
+@property(nonatomic,strong)UILabel *headerTitleLab;
+//小MO头像及其他控件背景
+@property(nonatomic,strong)UIView *moBgView;
 
 @end
 
@@ -31,7 +35,7 @@
     if (self) {
         
         self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
 
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = XCOLOR_BG;
@@ -65,19 +69,22 @@
         self.headerTitleLab = [UILabel labelWithFontsize:KDUtilSize(20)  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
         [self insertSubview:self.headerTitleLab belowSubview:self.bgView];
         
-        
- 
+  
     }
     return self;
 }
 
--(void)setGongLueDic:(NSDictionary *)gongLueDic{
 
-    _gongLueDic = gongLueDic;
+- (void)setGonglue:(GonglueItem *)gonglue{
+
+    _gonglue = gonglue;
     
-    self.headerTitleLab.text = gongLueDic[@"title"];
-    self.subTitleLab.text =  gongLueDic[@"tip"][@"content"];
+    self.headerTitleLab.text = gonglue.title;
     
+    self.subTitleLab.text =  gonglue.tip.content;
+ 
+    
+    CGSize contentSize = self.bounds.size;
     
     CGFloat logoX = ITEM_MARGIN;
     CGFloat logoY = ITEM_MARGIN;
@@ -87,7 +94,7 @@
     
     
     CGFloat moBgViewX = ITEM_MARGIN;
-    CGFloat moBgViewW = XSCREEN_WIDTH - moBgViewX * 2;
+    CGFloat moBgViewW = contentSize.width - moBgViewX * 2;
     
     
     CGFloat titleX = CGRectGetMaxX(self.moLogo.frame) + ITEM_MARGIN;
@@ -110,10 +117,8 @@
     self.moBgView.frame = CGRectMake(moBgViewX, moBgViewY, moBgViewW, moBgViewH);
     
     self.height += (moBgViewH - CGRectGetMaxY(self.moLogo.frame)  + 20);
-    CGSize  contentSize = self.bounds.size;
-    
     CGFloat headerTitleX = 0;
-    CGFloat headerTitleW = XSCREEN_WIDTH;
+    CGFloat headerTitleW = contentSize.width;
     CGFloat headerTitleH = 23;
     CGFloat headerTitleY = CGRectGetMinY(self.moBgView.frame) - headerTitleH - KDUtilSize(15);
     self.headerTitleLab.frame = CGRectMake(headerTitleX, headerTitleY, headerTitleW, headerTitleH);
@@ -121,20 +126,21 @@
     
     CGFloat bgX =   0;
     CGFloat bgY =   moBgViewY + CGRectGetMaxY(self.moLogo.frame);
-    CGFloat bgW =   XSCREEN_WIDTH;
-    CGFloat bgH =   contentSize.height  - bgY;
+    CGFloat bgW =   contentSize.width;
+    CGFloat bgH =   self.height  - bgY;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-     
 }
 
 
 //根据contentOffsetY调整效果
--(void)setContentOffsetY:(CGFloat)contentOffsetY
-{
-    _contentOffsetY = contentOffsetY;
+- (void)scrollViewDidScrollWithcontentOffsetY:(CGFloat)contentOffsetY{
+
+    
+     CGFloat height = self.moBgView.mj_y - CGRectGetMinY(self.headerTitleLab.frame);
+     self.nav_Alpha = (self.headerTitleLab.bounds.size.height - height)/ self.headerTitleLab.bounds.size.height;
     
     if (contentOffsetY <= 0) {
- 
+        
         self.headerTitleLab.frame = self.headerTitleLabFrame;
         
         return;
@@ -142,7 +148,7 @@
     }
     
     CGSize  contentSize = self.bounds.size;
-
+    
     if (contentSize.height - CGRectGetMaxY(self.headerTitleLab.frame) >= 0) {
         
         CGRect NewRect    =  self.headerTitleLabFrame;
@@ -150,12 +156,9 @@
         NewRect.origin.y  =  self.headerTitleLabFrame.origin.y + contentOffsetY;
         
         self.headerTitleLab.frame = NewRect;
-     }
-        
-   
-    
-}
+    }
 
+}
 
 
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GonglueItem;
 
 @interface GongLueTableViewCell : UITableViewCell
-@property(nonatomic,strong)NSDictionary *item;
+@property(nonatomic,strong)GonglueItem *item;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 @end

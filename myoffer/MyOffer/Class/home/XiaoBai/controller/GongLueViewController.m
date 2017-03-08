@@ -16,6 +16,7 @@
 #import "IntelligentResultViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityNavView.h"
+#import "GonglueItem.h"
 
 @interface GongLueViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -103,7 +104,7 @@
     FlexibleImageView.clipsToBounds = YES;
     FlexibleImageView.alpha = 0.1;
     [self.view addSubview:FlexibleImageView];
-    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue[@"cover"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue.cover] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
     self.oldFlexibleViewRect = FlexibleImageView.frame;
     self.oldFlexibleViewCenter = FlexibleImageView.center;
@@ -125,7 +126,7 @@
         
          [weakSelf pop];
     }];
-    self.topNavigationView.titleName = self.gonglue[@"title"];
+    self.topNavigationView.titleName = self.gonglue.title;
     
     [self.view addSubview:self.topNavigationView];
     
@@ -142,12 +143,11 @@
     tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
     
-    
     GongLueListHeaderView *headerView  =[[GongLueListHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
-    headerView.gongLueDic = self.gonglue;
-    self.headerView = headerView;
+    headerView.gonglue = self.gonglue;
     self.tableView.tableHeaderView = headerView;
-    
+    self.headerView = headerView;
+
 }
 
 
@@ -155,14 +155,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return [self.gonglue[@"articles"] count];
+    return    self.gonglue.articles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GongLueListCell *cell =[GongLueListCell cellWithTableView:tableView];
-    
-    cell.item = self.gonglue[@"articles"][indexPath.row];
+  
+    cell.item =  self.gonglue.articles[indexPath.row];
     
     return cell;
 }
@@ -178,9 +178,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *message =  self.gonglue[@"articles"][indexPath.row];
+    MyOfferArticle *item =  self.gonglue.articles[indexPath.row];
     
-    if ([message[@"_id"] isEqualToString:@"ranks"]) {
+    if ([item.message_id isEqualToString:@"ranks"]) {
         
 
         [self caseSearchResult];
@@ -188,7 +188,7 @@
         return;
     }
     
-    if ([message[@"_id"] isEqualToString:@"recommendations"]) {
+    if ([item.message_id  isEqualToString:@"recommendations"]) {
         
         [self caseIntelligent];
         
@@ -196,7 +196,7 @@
     }
     
     
-    if ([message[@"_id"] isEqualToString:@"application"]) {
+    if ([item.message_id  isEqualToString:@"application"]) {
         
         [self.tabBarController setSelectedIndex:3];
         
@@ -204,7 +204,7 @@
     }
     
     
-    [self caseMassageWithId:message[@"_id"]];
+    [self caseMassageWithId:item.message_id];
 }
 
 
@@ -214,14 +214,11 @@
 {
     
     //1 顶部自定义导航栏
-    [self.topNavigationView   scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNAV_HEIGHT];
-    
+    [self.topNavigationView  scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNAV_HEIGHT];
     //2 自定义tableHeaderView
-    self.headerView.contentOffsetY =  scrollView.contentOffset.y;
-    
-    //3 顶部自定义导航栏 titleLab.alpha 控制
-    CGFloat height =  self.headerView.moBgView.frame.origin.y - CGRectGetMinY(self.headerView.headerTitleLab.frame);
-    self.topNavigationView.nav_Alpha = (self.headerView.headerTitleLab.bounds.size.height - height)/ self.headerView.headerTitleLab.bounds.size.height;
+    [self.headerView scrollViewDidScrollWithcontentOffsetY:scrollView.contentOffset.y];
+     //3 顶部自定义导航栏透明度
+    self.topNavigationView.nav_Alpha = self.headerView.nav_Alpha;
     
     //4 头部图片拉伸
     if (scrollView.contentOffset.y < 0) {
@@ -235,6 +232,7 @@
     }else{
         
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+            
             self.FlexibleImageView.frame = self.oldFlexibleViewRect;
         }];
         
@@ -249,7 +247,7 @@
  */
 -(void)caseSearchResult
 {
-    if ([self.gonglue[@"title"] containsString:@"英国"]) {
+    if ([self.gonglue.title containsString:@"英国"]) {
         SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANK_TI];
         [self.navigationController pushViewController:vc animated:YES];
         

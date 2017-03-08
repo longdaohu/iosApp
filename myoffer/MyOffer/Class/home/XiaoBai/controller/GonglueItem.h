@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class  gonglueTip;
+
 @interface GonglueItem : NSObject
-@property(nonatomic,strong)NSDictionary *tip;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,copy)NSString *cover;
+@property(nonatomic,copy)NSString *logo;
+@property(nonatomic,copy)NSString *desc;
+@property(nonatomic,strong)gonglueTip *tip;
 @property(nonatomic,strong)NSArray *articles;
+
 
 @end

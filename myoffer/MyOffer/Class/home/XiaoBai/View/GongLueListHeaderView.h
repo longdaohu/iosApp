@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GonglueItem.h"
+
 @interface GongLueListHeaderView : UIView
-@property(nonatomic,strong)NSDictionary *gongLueDic;
-@property(nonatomic,strong)UILabel *headerTitleLab;
+
+@property(nonatomic,strong)GonglueItem *gonglue;
+
+@property(nonatomic,assign)CGFloat nav_Alpha;
+
 //传入tableView的contentOffsetY
-@property(nonatomic,assign)CGFloat contentOffsetY;
-//小MO头像及其他控件背景
-@property(nonatomic,strong)UIView *moBgView;
+- (void)scrollViewDidScrollWithcontentOffsetY:(CGFloat)contentOffsetY;
 
 @end

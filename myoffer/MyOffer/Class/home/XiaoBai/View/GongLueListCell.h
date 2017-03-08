@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyOfferArticle.h"
 
 @interface GongLueListCell : UITableViewCell
-@property(nonatomic,strong)NSDictionary *item;
+@property(nonatomic,strong)MyOfferArticle *item;
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

@@ -15,7 +15,7 @@
 #import "YYSingleNewsBO.h"
 #import "XWGJNODATASHOWView.h"
 #import "XUToolbar.h"
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 #import "MessageSectionHeaderView.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -471,9 +471,9 @@
 - (void)configrationUIWithResponse:(id)response index:(NSInteger)index{
 
     
-    NSArray *articles  =  [NewsItem mj_objectArrayWithKeyValuesArray:response[@"articles"]];
+    NSArray *articles  =  [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"articles"]];
     
-    for(NewsItem *article in articles){
+    for(MyOfferArticle *article in articles){
         
         XWGJMessageFrame *articleFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
         

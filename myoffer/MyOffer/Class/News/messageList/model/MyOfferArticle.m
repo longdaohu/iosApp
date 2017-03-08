@@ -1,18 +1,18 @@
 //
-//  NewsItem.m
+//  MyOfferArticle.m
 //  myOffer
 //
 //  Created by xuewuguojie on 16/8/11.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 
-@implementation NewsItem
+@implementation MyOfferArticle
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    return @{@"message_id" : @"_id"};
+    return @{@"message_id" : @"_id",@"desc":@"description"};
     
 }
 

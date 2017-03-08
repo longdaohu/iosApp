@@ -7,11 +7,11 @@
 //
 
 #import "XWGJMessageFrame.h"
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 
 @implementation XWGJMessageFrame
 
--(void)setNews:(NewsItem *)News{
+-(void)setNews:(MyOfferArticle *)News{
 
     _News = News;
     
@@ -48,7 +48,7 @@
 
     
 }
-+(instancetype)messageFrameWithMessage:(NewsItem *)message
++(instancetype)messageFrameWithMessage:(MyOfferArticle *)message
 {
     XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
     messageFrame.News              = message;

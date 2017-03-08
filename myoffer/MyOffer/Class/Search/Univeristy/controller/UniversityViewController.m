@@ -12,7 +12,7 @@
 #import "UniverstyHeaderView.h"
 #import "UniGroupOneView.h"
 #import "HomeSectionHeaderView.h"
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "UniversityNew.h"
@@ -269,7 +269,7 @@ typedef enum {
     
     
     //相关资讯 第二分组
-    NSArray *newses  = [NewsItem mj_objectArrayWithKeyValuesArray:university.relate_articles];
+    NSArray *newses  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:university.relate_articles];
     NSMutableArray *news_temps = [NSMutableArray array];
     [newses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         

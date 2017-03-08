@@ -7,7 +7,22 @@
 //
 
 #import "GonglueItem.h"
+#import "MyOfferArticle.h"
+#import "gonglueTip.h"
 
 @implementation GonglueItem
+
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+
+    return @{@"desc":@"description"};
+}
+
++ (NSDictionary *)mj_objectClassInArray{
+    
+    return @{@"articles" : @"MyOfferArticle"};
+}
+
+
 
 @end

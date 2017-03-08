@@ -68,15 +68,13 @@ static NSString *identity = @"gonglueList";
 }
 
 
--(void)setItem:(NSDictionary *)item{
+-(void)setItem:(MyOfferArticle *)item{
 
     _item = item;
     
-    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item[@"logo"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
-    self.titleLab.text    = item[@"title"];
-    
-    self.subTitleLab.text = item[@"description"];
+    self.titleLab.text    = item.title;
+    self.subTitleLab.text = item.desc;
+    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.logo] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 
@@ -95,7 +93,7 @@ static NSString *identity = @"gonglueList";
     self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     
     CGFloat lineX = CGRectGetMaxX(self.logoView.frame);
-    CGFloat lineY = contentSize.height -0.4;
+    CGFloat lineY = contentSize.height - 0.4;
     CGFloat lineW = contentSize.width;
     CGFloat lineH = 0.4;
     self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
@@ -103,7 +101,7 @@ static NSString *identity = @"gonglueList";
     if (self.titleLab.text || self.subTitleLab.text) {
         
         CGFloat titlex      = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
-        CGFloat titlew      = XSCREEN_WIDTH - titlex;
+        CGFloat titlew      = contentSize.width - titlex;
         CGSize titleSize    = [self.titleLab.text  KD_sizeWithAttributeFont:XFONT(KDUtilSize(18)) maxWidth:titlew];
         CGFloat titley      = logoy;
         self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleSize.height);

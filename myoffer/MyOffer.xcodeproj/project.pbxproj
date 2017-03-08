@@ -56,7 +56,7 @@
 		AE1D01201D2FCD2D005E2DEF /* YYSingleNewsBO.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011A1D2FCD2D005E2DEF /* YYSingleNewsBO.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
 		AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */; };
-		AE1FD68D1D5C852500FFD5A8 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD68C1D5C852500FFD5A8 /* NewsItem.m */; };
+		AE1FD68D1D5C852500FFD5A8 /* MyOfferArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD68C1D5C852500FFD5A8 /* MyOfferArticle.m */; };
 		AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE1FD6941D5C929500FFD5A8 /* Info.plist */; };
 		AE1FD71C1D5C929500FFD5A8 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6971D5C929500FFD5A8 /* MJExtensionConst.m */; };
 		AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6991D5C929500FFD5A8 /* MJFoundation.m */; };
@@ -151,6 +151,7 @@
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
+		AE6643A71E6FE61A002FC072 /* gonglueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* gonglueTip.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
 		AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F286B1D77CA3C00E9A47A /* UUChart.m */; };
@@ -518,8 +519,8 @@
 		AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYToolKit.m; sourceTree = "<group>"; };
 		AE1FD6881D5C78E600FFD5A8 /* NotiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiItem.h; sourceTree = "<group>"; };
 		AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotiItem.m; sourceTree = "<group>"; };
-		AE1FD68B1D5C852500FFD5A8 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
-		AE1FD68C1D5C852500FFD5A8 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
+		AE1FD68B1D5C852500FFD5A8 /* MyOfferArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferArticle.h; sourceTree = "<group>"; };
+		AE1FD68C1D5C852500FFD5A8 /* MyOfferArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferArticle.m; sourceTree = "<group>"; };
 		AE1FD6941D5C929500FFD5A8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1FD6951D5C929500FFD5A8 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		AE1FD6961D5C929500FFD5A8 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
@@ -668,6 +669,8 @@
 		AE64A5451DCB4CC9004592B6 /* promptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promptViewController.m; sourceTree = "<group>"; };
 		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
+		AE6643A51E6FE61A002FC072 /* gonglueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gonglueTip.h; sourceTree = "<group>"; };
+		AE6643A61E6FE61A002FC072 /* gonglueTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gonglueTip.m; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		AE6F28671D77CA3C00E9A47A /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
@@ -2341,12 +2344,14 @@
 		AEA24A741D5B23F600DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AEF3340E1D925A44003C3C68 /* GongLueViewController.h */,
-				AEF3340F1D925A44003C3C68 /* GongLueViewController.m */,
 				AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */,
 				AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */,
+				AEF3340E1D925A44003C3C68 /* GongLueViewController.h */,
+				AEF3340F1D925A44003C3C68 /* GongLueViewController.m */,
 				AE6643A21E6FA820002FC072 /* GonglueItem.h */,
 				AE6643A31E6FA820002FC072 /* GonglueItem.m */,
+				AE6643A51E6FE61A002FC072 /* gonglueTip.h */,
+				AE6643A61E6FE61A002FC072 /* gonglueTip.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2813,8 +2818,8 @@
 		AEA24BB11D5B264300DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				AE1FD68B1D5C852500FFD5A8 /* NewsItem.h */,
-				AE1FD68C1D5C852500FFD5A8 /* NewsItem.m */,
+				AE1FD68B1D5C852500FFD5A8 /* MyOfferArticle.h */,
+				AE1FD68C1D5C852500FFD5A8 /* MyOfferArticle.m */,
 				AEA24BB41D5B264300DD7939 /* XWGJMessageCategoryItem.h */,
 				AEA24BB51D5B264300DD7939 /* XWGJMessageCategoryItem.m */,
 				AEA24BB61D5B264300DD7939 /* XWGJMessageFrame.h */,
@@ -3613,6 +3618,7 @@
 				AEA24AF61D5B24D200DD7939 /* RECommonFunctions.m in Sources */,
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
+				AE6643A71E6FE61A002FC072 /* gonglueTip.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,
 				AE1FD74E1D5C929500FFD5A8 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -3626,7 +3632,7 @@
 				AE1FD7501D5C929500FFD5A8 /* MJRefreshBackNormalFooter.m in Sources */,
 				AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
-				AE1FD68D1D5C852500FFD5A8 /* NewsItem.m in Sources */,
+				AE1FD68D1D5C852500FFD5A8 /* MyOfferArticle.m in Sources */,
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,
 				AEA24BF11D5B266A00DD7939 /* XWGJnodataView.m in Sources */,
 				AEA24B871D5B25E000DD7939 /* NewSearchRstTableViewCell.m in Sources */,

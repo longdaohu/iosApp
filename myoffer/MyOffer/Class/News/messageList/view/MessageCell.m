@@ -8,7 +8,7 @@
 
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 
 @interface MessageCell ()
 //图片

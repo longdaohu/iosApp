@@ -18,6 +18,8 @@
 #import "CatigorySubject.h"
 #import "TopNavView.h"
 #import "NomalCollectionController.h"
+#import "GonglueItem.h"
+#import "gonglueTip.h"
 
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -120,9 +122,11 @@
 //根据网络请求结果配置UI
 - (void)configrationUIWithResponse:(id)response{
     
-    self.gonglueItems =  (NSArray *)response;
     
-    NSLog(@"根据网络请求结果配置UI   %@",self.gonglueItems[0]);
+    
+    
+    self.gonglueItems =  [GonglueItem mj_objectArrayWithKeyValuesArray:(NSArray *)response];
+ 
     self.tableView.tableFooterView = [UIView new];
     
     [self.tableView reloadData];

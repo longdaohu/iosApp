@@ -7,6 +7,8 @@
 //
 
 #import "GongLueTableViewCell.h"
+#import "GonglueItem.h"
+
 @interface GongLueTableViewCell ()
 //控件背景
 @property(nonatomic,strong)UIView *bgView;
@@ -76,18 +78,19 @@ static NSString *identity = @"gonglue";
     
 }
 
+- (void)setItem:(GonglueItem *)item{
 
-- (void)setItem:(NSDictionary *)item
-{
     _item = item;
     
-    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item[@"logo"]] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 
-    self.titleLab.text = item[@"title"];
-
-    self.subtitleLab.text =item[@"description"];
+    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.logo]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    
+    self.titleLab.text = item.title;
+    
+    self.subtitleLab.text =item.desc;
     
 }
+
 
 
 - (void)layoutSubviews

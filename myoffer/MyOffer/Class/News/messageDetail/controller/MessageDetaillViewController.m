@@ -18,7 +18,7 @@
 #import "MessageDetailContentCell.h"
 #import "ApplyViewController.h"
 #import "XWGJMessageFrame.h"
-#import "NewsItem.h"
+#import "MyOfferArticle.h"
 #import "ShareNViewController.h"
 #import "UniversityNew.h"
 #import "UniItemFrame.h"
@@ -251,10 +251,10 @@
     [self.groups addObject:groupOne];
     
     //相关资讯 第二分组
-    NSArray *recommendations  = [NewsItem mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
+    NSArray *recommendations  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
     
     NSMutableArray *news_temps = [NSMutableArray array];
-    for (NewsItem *article in recommendations) {
+    for (MyOfferArticle *article in recommendations) {
         
         if(article.message_id != self.NO_ID){
             
