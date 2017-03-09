@@ -13,6 +13,8 @@
 
 @interface XWGJYiXiangTableViewCell()<UITextFieldDelegate,KeyboardToolarDelegate>
 @property(nonatomic,strong)UIImageView *RightView;
+@property (weak, nonatomic) IBOutlet UILabel *ItemLab;
+
 @end
 
 @implementation XWGJYiXiangTableViewCell
@@ -63,19 +65,12 @@
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-
-}
-
 
 -(void)setItem:(XWGJPeronInfoItem *)item
 {
     _item = item;
     
     self.ItemLab.text = item.placeholder;
-//    self.ContentTF.placeholder = item.placeholder;
     self.ContentTF.text = item.itemName;
     
     NSString *ArrowName = !item.Accessory ? @"":@"common_icon_arrow";

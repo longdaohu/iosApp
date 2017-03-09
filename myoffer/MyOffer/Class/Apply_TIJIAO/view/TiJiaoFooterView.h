@@ -7,17 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TiJiaoFooterView;
-@protocol TiJiaoFooterViewDelegate <NSObject>
--(void)TiJiaoFooterView:(TiJiaoFooterView *)footerView didClick:(UIButton *)sender;
-@end
+
+typedef void(^TiJiaoFooterViewBlock)(UIButton *sender);
 
 @interface TiJiaoFooterView : UIView
-@property(nonatomic,strong)UIButton *selectBtn;
-@property(nonatomic,strong)UIButton *descriptionBtn;
 @property(nonatomic,copy)NSString *title;
-@property(nonatomic,weak)id<TiJiaoFooterViewDelegate> delegate;
+@property(nonatomic,copy)TiJiaoFooterViewBlock actionBlock;
 
-+ (instancetype)footerViewWithContent:(NSString *)content;
++ (instancetype)footerWithContent:(NSString *)content actionBlock:(TiJiaoFooterViewBlock)actionBlock;
 
 @end

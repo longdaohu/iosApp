@@ -19,7 +19,6 @@
 @end
 
 @interface XWGJYiXiangTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *ItemLab;
 @property (weak, nonatomic) IBOutlet UITextField *ContentTF;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 @property(nonatomic,weak)id<XWGJYiXiangTableViewCellDelegate> delegate;

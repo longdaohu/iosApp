@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XWGJTJSectionGroup;
 @interface XWGJSectionHeaderView : UITableViewHeaderFooterView
-@property(nonatomic,strong)UIImageView *IconView;
-@property(nonatomic,strong)UILabel *SectionTitleLab;
+
 @property(nonatomic,strong)XWGJTJSectionGroup *group;
 
 +(instancetype)SectionViewWithTableView:(UITableView *)tableView;

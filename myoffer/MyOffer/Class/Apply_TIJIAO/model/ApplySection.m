@@ -19,12 +19,14 @@
         self.uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:dict]];
         
          NSMutableArray *subjectArray = [NSMutableArray array];
+        
         for (NSDictionary *courseInfo in dict[@"applies"]) {
             
               Applycourse *subject = [Applycourse mj_objectWithKeyValues:courseInfo];
             
               [subjectArray addObject:subject];
          }
+        
         self.subjects  = [subjectArray mutableCopy];
 
      }

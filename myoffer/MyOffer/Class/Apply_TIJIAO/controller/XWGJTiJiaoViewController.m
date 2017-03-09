@@ -31,8 +31,8 @@ typedef enum {
 }PickerViewType;//表头按钮选项
 
 
-@interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate,TiJiaoFooterViewDelegate>
-@property(nonatomic,strong)UITableView *TableView;
+@interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate,FilterViewDelegate>
+@property(nonatomic,strong)UITableView *tableView;
 //数据源
 @property(nonatomic,strong)NSArray *Groups;
 //正在编辑的cell
@@ -179,7 +179,7 @@ typedef enum {
     
     [self makeUI];
     
-    [self getSelectionResourse];
+    [self makeDataSourse];
     
 }
 
@@ -241,14 +241,15 @@ typedef enum {
 -(void)makeTableView
 {
     CGFloat bottomHeight = 50;
-    self.TableView             = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT - bottomHeight) style:UITableViewStyleGrouped];
-    self.TableView.dataSource  = self;
-    self.TableView.delegate    = self;
-    [self.view addSubview:self.TableView];
-    self.TableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    self.TableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    self.TableView.allowsSelection = NO;
-    self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    UITableView  *tableView =  [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView   = tableView;
+    tableView.dataSource  = self;
+    tableView.delegate    = self;
+    [self.view addSubview:self.tableView];
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+    tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelection = NO;
     
     [self makeComitButtonWithHeight:bottomHeight];
 
@@ -256,32 +257,37 @@ typedef enum {
 //添加底部提交按钮
 -(void)makeComitButtonWithHeight:(CGFloat)height
 {
-    UIButton *commit = [[UIButton alloc] initWithFrame:CGRectMake(0,  XSCREEN_HEIGHT - XNAV_HEIGHT - height, XSCREEN_WIDTH, height)];
-    self.commitBtn            = commit;
-    commit.backgroundColor    = XCOLOR_LIGHTGRAY;
-    commit.enabled            = NO;
-    [commit setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [commit setTitle:GDLocalizedString(@"TiJiao-Commit") forState:UIControlStateNormal];
-    [commit addTarget:self action:@selector(caseCommitUserInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.view  insertSubview:commit aboveSubview:self.TableView];
+    UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,  XSCREEN_HEIGHT - XNAV_HEIGHT - height, XSCREEN_WIDTH, height)];
+    self.commitBtn = commitBtn;
+    commitBtn.backgroundColor   = XCOLOR_LIGHTGRAY;
+    commitBtn.enabled   = NO;
+    [commitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    [commitBtn setTitle:GDLocalizedString(@"TiJiao-Commit") forState:UIControlStateNormal];
+    [commitBtn addTarget:self action:@selector(caseCommitUserInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.view  insertSubview:commitBtn aboveSubview:self.tableView];
     
 }
 
 
 //添加表头
--(void)makeHeaderView
-{
-    XWGJSummaryView *headerView    = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"ApplicationProfile-0016")];
-     self.TableView.tableHeaderView = headerView;
+-(void)makeHeaderView{
+    
+     self.tableView.tableHeaderView = [XWGJSummaryView ViewWithContent:GDLocalizedString(@"ApplicationProfile-0016")];
 }
 
 //添加表尾
 -(void)makeFooterView
 {
-    TiJiaoFooterView *footerView   = [TiJiaoFooterView footerViewWithContent: GDLocalizedString(@"ApplicationProfile-footer")];
-    footerView.delegate            = self;
-    self.TableView.tableFooterView = footerView;
+    XWeakSelf
+    TiJiaoFooterView *footerView   = [TiJiaoFooterView footerWithContent:GDLocalizedString(@"ApplicationProfile-footer") actionBlock:^(UIButton *sender) {
+        
+        [weakSelf  TiJiaoFooterViewItemOnClick:sender];
+        
+    }];
+    
+    self.tableView.tableFooterView = footerView;
 }
+
 
 -(NSArray *)Groups
 {
@@ -372,7 +378,7 @@ typedef enum {
                 [weakSelf.LowPicker selectRow:LowIndex inComponent:0 animated:YES];
             }
             
-            [weakSelf.TableView reloadData];
+            [weakSelf.tableView reloadData];
             
         }];
     }
@@ -381,7 +387,7 @@ typedef enum {
 
 
 //选择项数据
--(void)getSelectionResourse
+-(void)makeDataSourse
 {
     
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
@@ -547,8 +553,7 @@ typedef enum {
 }
 
 
-
-#pragma mark ————  UITableViewDelegate
+#pragma mark : UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 {
@@ -573,7 +578,6 @@ typedef enum {
     return self.Groups.count;
 
 }
-
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -601,12 +605,12 @@ typedef enum {
     
     if (0 == indexPath.section) {
         
-        XWGJJiBengTableViewCell *cell =[XWGJJiBengTableViewCell cellWithTableView:tableView];
-        cell.delegate = self;
-        cell.indexPath = indexPath;
-        cell.item = group.cellItems[indexPath.row];
+        XWGJJiBengTableViewCell *firstSection_cell =[XWGJJiBengTableViewCell cellWithTableView:tableView];
+        firstSection_cell.delegate = self;
+        firstSection_cell.indexPath = indexPath;
+        firstSection_cell.item = group.cellItems[indexPath.row];
         
-        return cell;
+        return firstSection_cell;
         
     }else{
     
@@ -657,7 +661,8 @@ typedef enum {
     
 
 }
-#pragma mark ——— UIPickerViewDataSource, UIPickerViewDelegate
+
+#pragma mark :UIPickerViewDataSource, UIPickerViewDelegate
 
  - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
@@ -753,8 +758,7 @@ typedef enum {
     
 }
 
-
-#pragma mark ——— XWGJJiBengTableViewCellDelegate
+#pragma mark : XWGJJiBengTableViewCellDelegate
 
 -(void)JiBengTableViewCell:(XWGJJiBengTableViewCell *)cell  withIndexPath:(NSIndexPath *)indexPath EditedTextField:(UITextField *)textField{
     
@@ -797,13 +801,13 @@ typedef enum {
         row = 0;
         
         NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:row inSection:1];
-        XWGJYiXiangTableViewCell *nextCell = [self.TableView cellForRowAtIndexPath:nextIndex];
+        XWGJYiXiangTableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
         [nextCell.ContentTF becomeFirstResponder];
         
     }else{
     
         NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:row inSection:0];
-        XWGJJiBengTableViewCell *nextCell = [self.TableView cellForRowAtIndexPath:nextIndex];
+        XWGJJiBengTableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
         [nextCell.ContentTF becomeFirstResponder];
     
     }
@@ -833,11 +837,10 @@ typedef enum {
 
     if (indexPath.section == 2 && indexPath.row == 0) {
         
-        
-        [textField resignFirstResponder];
+ 
+        [self.view endEditing:YES];
         
         EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
-        
         search.valueBlock = ^(NSString *value){
             
             if ( 0 == value.length) return ;
@@ -847,6 +850,7 @@ typedef enum {
         };
         
         [self.navigationController pushViewController:search animated:YES];
+        
     }
     
     
@@ -961,55 +965,34 @@ typedef enum {
         
     }
 
-    NSIndexPath *nextIndex             = [NSIndexPath indexPathForRow:row inSection:section];
-    XWGJYiXiangTableViewCell *nextCell = [self.TableView cellForRowAtIndexPath:nextIndex];
+    NSIndexPath *nextIndex   = [NSIndexPath indexPathForRow:row inSection:section];
+    XWGJYiXiangTableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
     [nextCell.ContentTF becomeFirstResponder];
 
 }
 
-#pragma mark ——— TiJiaoFooterViewDelegate
--(void)TiJiaoFooterView:(TiJiaoFooterView *)footerView didClick:(UIButton *)sender{
-    
-    
-    if (10 == sender.tag) {
-        
-        sender.selected                = !sender.selected;
-        self.commitBtn.enabled         =  sender.selected;
-        self.commitBtn.backgroundColor = sender.selected  ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
-        
-    }else{
+#pragma mark : TiJiaoFooterBlock
+
+-(void)TiJiaoFooterViewItemOnClick:(UIButton *)sender{
+   
+    if(sender.currentAttributedTitle.length > 0){
         
         WebViewController *adver = [[WebViewController alloc] initWithPath:@"http://public.myoffer.cn/docs/zh-cn/myoffer_License_Agreement.pdf"];
         [self.navigationController pushViewController:adver animated:YES];
-    
-    }
-}
-
-
-#pragma mark ——— 键盘处理
-/*
-- (void)keyboardWillShow:(NSNotification *)info
-{
-    CGRect keyboardBounds = [[[info userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.TableView.contentInset = UIEdgeInsetsMake(self.TableView.contentInset.top, 0, keyboardBounds.size.height, 0);
-    
-    if (self.EditingIndexPath) {
         
-        [self.TableView scrollToRowAtIndexPath:self.EditingIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }else{
+        
+        sender.selected                = !sender.selected;
+        self.commitBtn.enabled         =  sender.selected;
+        self.commitBtn.backgroundColor =  sender.selected  ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
+        
     }
     
-    
 }
-- (void)keyboardWillHide:(NSNotification *)info
-{
-    self.TableView.contentInset = UIEdgeInsetsMake(self.TableView.contentInset.top, 0, 0, 0);
-}
-*/
-/*
- CGRect keyboardBounds = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
- self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, 0, keyboardBounds.size.height, 0);
- }
- */
+
+
+#pragma mark : 键盘处理
+
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     
     [self moveTextViewForKeyboard:aNotification up:YES];
@@ -1017,9 +1000,9 @@ typedef enum {
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     
-    [self moveTextViewForKeyboard:aNotification up:NO];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+ 
 }
-
 
 
 - (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
@@ -1039,21 +1022,17 @@ typedef enum {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
- 
-    UIEdgeInsets insets = self.TableView.contentInset;
     
-    insets.bottom   =  up  ? keyboardEndFrame.size.height  : 50;
+//    NSLog(@"  ======AA======== %lf  +  %lf   +  %lf",self.tableView.contentOffset.y, self.tableView.contentInset.bottom,self.tableView.contentSize.height);
     
-    self.TableView.contentInset = insets;
-    
+    self.tableView.contentInset =  UIEdgeInsetsMake(0, 0, keyboardEndFrame.size.height + 64, 0);
+  
     [self.view layoutSubviews];
+    
     [UIView commitAnimations];
     
- 
+    
 }
-
-
-
 
 
 
@@ -1107,10 +1086,20 @@ typedef enum {
              
          }];
     }];
-  
-  
-  
+   
 }
+
+#pragma mark : UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+
+    if (scrollView.isDragging) {
+        
+        [self.view endEditing:YES];
+        
+    }
+}
+
 
 //申请成功提示页
 - (void)updateView{

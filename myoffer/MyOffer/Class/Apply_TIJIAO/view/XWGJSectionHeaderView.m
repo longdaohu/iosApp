@@ -10,6 +10,13 @@
 #import "XWGJSectionHeaderView.h"
 #import "XWGJTJSectionGroup.h"
 
+@interface XWGJSectionHeaderView ()
+
+@property(nonatomic,strong)UIImageView *iconView;
+@property(nonatomic,strong)UILabel *SectionTitleLab;
+@end
+
+
 @implementation XWGJSectionHeaderView
 
 +(instancetype)SectionViewWithTableView:(UITableView *)tableView
@@ -18,7 +25,9 @@
     
     XWGJSectionHeaderView *sectionHeader =[tableView dequeueReusableHeaderFooterViewWithIdentifier:Identifier];
     if (!sectionHeader) {
+        
         sectionHeader = [[XWGJSectionHeaderView alloc] initWithReuseIdentifier:Identifier];
+        
     }
     return sectionHeader;
 }
@@ -30,9 +39,10 @@
         
 
         self.contentView.backgroundColor = XCOLOR_CLEAR;
-        self.IconView =[[UIImageView alloc] init];
-        self.IconView.contentMode = UIViewContentModeCenter;
-        [self.contentView addSubview:self.IconView];
+        
+        self.iconView =[[UIImageView alloc] init];
+        self.iconView.contentMode = UIViewContentModeCenter;
+        [self.contentView addSubview:self.iconView];
         
         self.SectionTitleLab =[[UILabel alloc] init];
         self.SectionTitleLab.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
@@ -44,33 +54,35 @@
 }
 
 
+
+-(void)setGroup:(XWGJTJSectionGroup *)group{
+    
+    _group = group;
+    
+     self.iconView.image =[UIImage imageNamed:_group.SectionIconName];
+     self.SectionTitleLab.text = _group.SectionTitleName;
+    
+}
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     
-    CGFloat Ix = ITEM_MARGIN - 5;
-    CGFloat Iw = ICON_WIDTH;
-    CGFloat Ih = Iw;
-    CGFloat Iy = self.bounds.size.height - Ih;
-    self.IconView.frame = CGRectMake(Ix, Iy, Iw, Ih);
+    CGSize contentSize = self.bounds.size;
+    
+    CGFloat iconX = ITEM_MARGIN - 5;
+    CGFloat iconW = ICON_WIDTH;
+    CGFloat iconH = iconW;
+    CGFloat iconY = contentSize.height - iconH;
+    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     
     
-    CGFloat Tx = CGRectGetMaxX(self.IconView.frame);
-    CGFloat Tw = XSCREEN_WIDTH - Tx - ITEM_MARGIN;
-    CGFloat Th = Iw;
-    CGFloat Ty = Iy;
-    self.SectionTitleLab.frame = CGRectMake(Tx, Ty, Tw, Th);
- 
+    CGFloat titleX = CGRectGetMaxX(self.iconView.frame);
+    CGFloat titleW = contentSize.width - titleX - ITEM_MARGIN;
+    CGFloat titleH = iconW;
+    CGFloat titleY = iconY;
+    self.SectionTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    
 }
 
--(void)setGroup:(XWGJTJSectionGroup *)group
-{
-    _group = group;
-    
-     self.IconView.image =[UIImage imageNamed:_group.SectionIconName];
-    
-    self.SectionTitleLab.text = _group.SectionTitleName;
-    
-    
- }
 @end

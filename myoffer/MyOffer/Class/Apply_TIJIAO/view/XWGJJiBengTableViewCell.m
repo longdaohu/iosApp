@@ -11,7 +11,8 @@
 #import "XWGJKeyboardToolar.h"
 
 @interface XWGJJiBengTableViewCell()<UITextFieldDelegate,KeyboardToolarDelegate>
-@property(nonatomic,strong)UIImageView *RightView;
+@property (weak, nonatomic) IBOutlet UILabel *ItemLab;
+
 @end
 
 @implementation XWGJJiBengTableViewCell
@@ -33,7 +34,6 @@
     [super awakeFromNib];
 
     [self addLeftViewWithTextField:self.ContentTF];
-    [self addRightViewWithTextField:self.ContentTF];
     self.ContentTF.delegate = self;
     
     
@@ -49,24 +49,7 @@
     [textField setValue:[UIColor clearColor] forKeyPath:@"_placeholderLabel.textColor"];
     
 }
-
-
--(void)addRightViewWithTextField:(UITextField *)textField
-{
-    textField.rightViewMode = UITextFieldViewModeAlways;
-    UIImageView  *mv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    self.RightView = mv;
-    mv.contentMode = UIViewContentModeScaleAspectFill;
-    textField.rightView  = mv;
-    
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
+ 
 
 -(void)setItem:(XWGJPeronInfoItem *)item
 {
@@ -74,10 +57,6 @@
     
     self.ItemLab.text = item.placeholder;
     self.ContentTF.text = item.itemName;
-    
-    
-    NSString *ArrowName = !item.Accessory ? @"":@"common_icon_arrow";
-    self.RightView.image =   [UIImage imageNamed:ArrowName];
     
 }
 
