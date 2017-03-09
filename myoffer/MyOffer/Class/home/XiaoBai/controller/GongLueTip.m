@@ -10,11 +10,6 @@
 
 @implementation GongLueTip
 
-- (void)setTitle:(NSString *)title{
 
-    _title = title;
-    
-}
-          
 
 @end

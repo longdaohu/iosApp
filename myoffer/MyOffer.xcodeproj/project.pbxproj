@@ -123,6 +123,7 @@
 		AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */; };
 		AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2286281E715BB500E6E5CD /* PromttViewController.m */; };
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
+		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
 		AE2A59A21E6EBDF5001F5C8F /* MessageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
@@ -618,6 +619,7 @@
 		AE2286271E715BB500E6E5CD /* PromttViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromttViewController.h; sourceTree = "<group>"; };
 		AE2286281E715BB500E6E5CD /* PromttViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromttViewController.m; sourceTree = "<group>"; };
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
+		AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PipeiNoResultVeiw.xib; sourceTree = "<group>"; };
 		AE2A59A01E6EBDF5001F5C8F /* MessageSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSectionHeaderView.h; sourceTree = "<group>"; };
 		AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSectionHeaderView.m; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
@@ -2184,6 +2186,7 @@
 				AEA24A161D5B231200DD7939 /* ResultTableViewCell.xib */,
 				AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */,
 				AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */,
+				AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3273,6 +3276,7 @@
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
 				AE3566B01E011261003F1208 /* CatigaryCityCollectionReusableView.xib in Resources */,
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
+				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,

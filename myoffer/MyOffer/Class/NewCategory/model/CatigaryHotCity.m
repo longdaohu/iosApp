@@ -10,26 +10,39 @@
 
 @implementation CatigaryHotCity
 
-+(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic{
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{@"city_id" : @"_id"};
     
-    return [[self alloc] initWithCityDictionary:cityDic];
 }
 
--(instancetype)initWithCityDictionary:(NSDictionary *)cityDic{
-    
-    self = [super init];
-    
-    if (self) {
+- (NSString *)image_path{
 
-        self.city_id = [NSString stringWithFormat:@"%@",cityDic[@"_id"]];
-        
-        self.cityName = cityDic[@"city"];
-        
-         self.IconName =[cityDic[@"image_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-     }
-    
-    return self;
+   return [self.image_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
+
+
+
+//+(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic{
+//    
+//    return [[self alloc] initWithCityDictionary:cityDic];
+//}
+//
+//-(instancetype)initWithCityDictionary:(NSDictionary *)cityDic{
+//    
+//    self = [super init];
+//    
+//    if (self) {
+//
+//        self.city_id = [NSString stringWithFormat:@"%@",cityDic[@"_id"]];
+//        
+//        self.cityName = cityDic[@"city"];
+//        
+//         self.IconName =[cityDic[@"image_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//     }
+//    
+//    return self;
+//}
 
 
 @end

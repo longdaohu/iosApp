@@ -48,9 +48,9 @@
 {
     _city = city;
     
-    self.cityLab.text =city.cityName;
+    self.cityLab.text =city.city;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.IconName]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 

@@ -621,9 +621,9 @@ static NSString *rankCellReuse = @"rankStyleCell";
     CatigaryHotCity *city = country.HotCities[indexPath.row];
     
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
-                                                                              value:city.cityName
+                                                                              value:city.city
                                                                             orderBy:RANK_TI];
-    vc.Corecity = city.cityName;
+    vc.Corecity = city.city;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
