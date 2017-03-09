@@ -8,13 +8,17 @@
 #import "OrderItem.h"
 #import "OrderCell.h"
 @interface OrderCell ()
-@property(nonatomic,strong)UIView *bgView;
+//订单名称
 @property(nonatomic,strong)UILabel *orderTitleLab;
+//订单状态
 @property(nonatomic,strong)UILabel *orderStatusLab;
+//订单编号
 @property(nonatomic,strong)UILabel *orderNoLab;
+//订单价格
 @property(nonatomic,strong)UILabel *orderPriceLab;
+//取消按钮
 @property(nonatomic,strong)UIButton  *cancelBtn;
-@property(nonatomic,strong)UIButton  *editBtn;
+//支付按钮
 @property(nonatomic,strong)UIButton  *payBtn;
 @property(nonatomic,strong)NSIndexPath  *indexPath;
 
@@ -22,12 +26,8 @@
 
 @implementation OrderCell
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-}
-
-+(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
++(instancetype)cellWithTableView:(UITableView *)tableView
 {
     OrderCell *cell =[tableView dequeueReusableCellWithIdentifier:@"order"];
     
@@ -37,7 +37,10 @@
     }
     
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
-    cell.indexPath = indexPath;
+    
+    NSIndexPath *path = [tableView indexPathForCell:cell];
+    
+    cell.indexPath = path;
     
     return cell;
     
@@ -49,35 +52,22 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        
-        self.editBtn = [[UIButton alloc] init];
-        self.editBtn.backgroundColor = XCOLOR_WHITE;
-        [self.editBtn setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateSelected];
-        [self.editBtn setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
-        self.editBtn.tag = 12;
-        [self.editBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:self.editBtn];
-        
-        
-        self.bgView = [[UIView alloc] init];
-        self.bgView.backgroundColor = XCOLOR_WHITE;
-        [self.contentView addSubview:self.bgView];
-        
-        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-        [self.bgView addGestureRecognizer:tap];
-        
         self.orderTitleLab = [UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
         self.orderTitleLab.lineBreakMode = NSLineBreakByTruncatingTail;
-        [self.bgView addSubview:self.orderTitleLab];
+        [self.contentView addSubview:self.orderTitleLab];
+        
         
         self.orderStatusLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_LIGHTBLUE TextAlignment:NSTextAlignmentRight];
-        [self.bgView addSubview:self.orderStatusLab];
+        [self.contentView addSubview:self.orderStatusLab];
+        
         
         self.orderNoLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
-        [self.bgView addSubview:self.orderNoLab];
+        [self.contentView addSubview:self.orderNoLab];
+        
         
         self.orderPriceLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
-        [self.bgView addSubview:self.orderPriceLab];
+        [self.contentView addSubview:self.orderPriceLab];
+        
         
         self.cancelBtn = [[UIButton alloc] init];
         [self.cancelBtn setTitle:@"取消订单"  forState:UIControlStateNormal];
@@ -89,7 +79,8 @@
         self.cancelBtn.layer.borderColor = XCOLOR_LIGHTGRAY.CGColor;
         self.cancelBtn.tag = 11;
         [self.cancelBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bgView addSubview:self.cancelBtn];
+        [self.contentView addSubview:self.cancelBtn];
+        
         
         self.payBtn = [[UIButton alloc] init];
         [self.payBtn setTitleColor:XCOLOR_WHITE  forState:UIControlStateNormal];
@@ -99,9 +90,14 @@
         self.payBtn.layer.cornerRadius =2;
         self.payBtn.tag = 10;
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bgView addSubview:self.payBtn];
+        [self.contentView addSubview:self.payBtn];
         
         self.contentView.backgroundColor = XCOLOR_BG;
+        
+        
+        UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [self.contentView addGestureRecognizer:tap];
+        
     }
      return self;
 }
@@ -111,11 +107,10 @@
 
 
 -(void)setOrder:(OrderItem *)order{
-
-
+ 
     _order = order;
     
-     NSDictionary *sku = [order.SKUs firstObject];
+    NSDictionary *sku = [order.SKUs firstObject];
     self.orderTitleLab.text = sku[@"name"] ;
     self.orderNoLab.text = [NSString stringWithFormat:@"订单号：%@",order.order_id];
     self.orderPriceLab.text = [NSString stringWithFormat:@"价格：%@",order.total_fee];
@@ -134,34 +129,23 @@
     [super layoutSubviews];
     
     CGSize contentSize = self.bounds.size;
-    
-    CGFloat editX = 0;
-    CGFloat editY = 0;
-    CGFloat editW = 50;
-    CGFloat editH =  contentSize.height - editY;
-    self.editBtn.frame = CGRectMake(editX, editY, editW, editH);
 
-    
-    CGFloat bgX =  self.cellEdit ? 50 : 0;
-    CGFloat bgY = editY;
-    CGFloat bgW = contentSize.width;
-    CGFloat bgH = editH;
-    self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-    
     CGFloat titleX = 15;
     CGFloat titleY = 15;
     CGFloat titleH = KDUtilSize(16);
-    
     CGSize orderSize =[self.orderTitleLab.text  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
     CGFloat titleW = self.orderTitleLab.text ? orderSize.width :contentSize.width - 120;
     titleW = titleW > contentSize.width - 120 ? contentSize.width - 120 : titleW;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    
+    
     
     CGFloat statusW = 100;
     CGFloat statusX =  contentSize.width - statusW - 10;
     CGFloat statusY = titleY;
     CGFloat statusH = titleH;
     self.orderStatusLab.frame = CGRectMake(statusX, statusY, statusW, statusH);
+    
     
     
     CGFloat noX = titleX;
@@ -171,17 +155,20 @@
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
 
     
+    
     CGFloat payW = contentSize.width * 0.3;
-    CGFloat payH = bgH  * 0.3;
+    CGFloat payH = contentSize.height  * 0.3;
     CGFloat payX = contentSize.width  - payW  - 10;
-    CGFloat payY = CGRectGetHeight(self.bgView.frame) - 10 - payH;
+    CGFloat payY = contentSize.height - 10 - payH;
     self.payBtn.frame = CGRectMake(payX, payY, payW, payH);
+    
     
     CGFloat cancelW = payW;
     CGFloat cancelH = payH;
     CGFloat cancelX = payX  - cancelW  - 10;
     CGFloat cancelY = payY;
     self.cancelBtn.frame = CGRectMake(cancelX, cancelY, cancelW, cancelH);
+    
     
     CGFloat priceX = titleX;
     CGFloat priceH = KDUtilSize(16);
@@ -193,14 +180,12 @@
 }
 
 
--(void)onclick:(UIButton *)sender
-{
+-(void)onclick:(UIButton *)sender{
     
     if ([self.delegate respondsToSelector:@selector(cellIndexPath:sender:)]) {
         
         [self.delegate cellIndexPath:self.indexPath sender:sender];
     }
-    
 }
 
 -(void)tap{

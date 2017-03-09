@@ -55,6 +55,26 @@ typedef enum {
 
 @implementation XWGJTiJiaoViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page提交申请"];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page提交申请"];
+    
+}
+
 -(UpgradeViewController *)upgateVC{
 
     if (!_upgateVC) {
@@ -179,26 +199,10 @@ typedef enum {
     
     [self makeUI];
     
-    [self makeDataSourse];
+    [self makeBaseSourse];
     
 }
 
-
--(void)viewWillAppear:(BOOL)animated
-{
-     [super viewWillAppear:animated];
-     [MobClick beginLogPageView:@"page提交申请"];
-     [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-     [super viewWillDisappear:animated];
-     [MobClick endLogPageView:@"page提交申请"];
-    
-}
 
 -(void)makeUI
 {
@@ -293,31 +297,31 @@ typedef enum {
 {
     if (!_Groups) {
         
-        __block  XWGJPeronInfoItem *LastItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-LastName")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *FirstItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-FirstName")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *phoneItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Phone")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *countryItem = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Country") andAccessroy:YES];
-        __block XWGJPeronInfoItem *timeItem    = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Time")  andAccessroy:YES];
-        __block  XWGJPeronInfoItem *applyItem  = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-ApplySubject")  andAccessroy:YES];
-        __block XWGJPeronInfoItem *universityItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-University")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *subjectItem    = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Subjecting")  andAccessroy:YES];
-        __block  XWGJPeronInfoItem *GPAItem       = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-GPA")  andAccessroy:NO];
-        __block XWGJPeronInfoItem *gradeItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Grade")  andAccessroy:YES];
-        __block   XWGJPeronInfoItem *avgItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Average")  andAccessroy:YES];
-        __block XWGJPeronInfoItem *lowItem        = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Low")  andAccessroy:YES];
+        XWGJPeronInfoItem *LastItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-LastName")  andAccessroy:NO];
+         XWGJPeronInfoItem *FirstItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-FirstName")  andAccessroy:NO];
+         XWGJPeronInfoItem *phoneItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Phone")  andAccessroy:NO];
+         XWGJPeronInfoItem *countryItem = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Country") andAccessroy:YES];
+         XWGJPeronInfoItem *timeItem    = [XWGJPeronInfoItem  personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Time")  andAccessroy:YES];
+          XWGJPeronInfoItem *applyItem  = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-ApplySubject")  andAccessroy:YES];
+         XWGJPeronInfoItem *universityItem = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-University")  andAccessroy:NO];
+         XWGJPeronInfoItem *subjectItem    = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Subjecting")  andAccessroy:YES];
+          XWGJPeronInfoItem *GPAItem       = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-GPA")  andAccessroy:NO];
+         XWGJPeronInfoItem *gradeItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Grade")  andAccessroy:YES];
+           XWGJPeronInfoItem *avgItem      = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Average")  andAccessroy:YES];
+         XWGJPeronInfoItem *lowItem        = [XWGJPeronInfoItem personInfoItemInitWithPlacehoder:GDLocalizedString(@"TiJiao-Low")  andAccessroy:YES];
        
-        NSArray *FirstSections      =  @[LastItem,FirstItem,phoneItem];
+        NSArray *FirstSections   =  @[LastItem,FirstItem,phoneItem];
         XWGJTJSectionGroup *JBgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-JiBen") andSecitonIcon:@"TJ_JiBeng" andContensArray:FirstSections];
         
         
-        NSArray *SecondSetions      = @[countryItem,timeItem,applyItem];
+        NSArray *SecondSetions   = @[countryItem,timeItem,applyItem];
         XWGJTJSectionGroup *YXgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-YiXiang") andSecitonIcon:@"TJ_YiXiang" andContensArray:SecondSetions];
 
         
-        NSArray *ThirdSetions       =  @[universityItem,subjectItem,GPAItem,gradeItem,avgItem,lowItem];
+        NSArray *ThirdSetions   =  @[universityItem,subjectItem,GPAItem,gradeItem,avgItem,lowItem];
         XWGJTJSectionGroup *BJgroup = [XWGJTJSectionGroup groupInitWithTitle:GDLocalizedString(@"TiJiao-Beijing") andSecitonIcon:@"TJ_BeiJin" andContensArray:ThirdSetions];
 
-        _Groups                     = @[JBgroup ,YXgroup,BJgroup];
+        _Groups   = @[JBgroup ,YXgroup,BJgroup];
         
         
         XWeakSelf
@@ -387,7 +391,7 @@ typedef enum {
 
 
 //选择项数据
--(void)makeDataSourse
+-(void)makeBaseSourse
 {
     
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
@@ -1121,7 +1125,7 @@ typedef enum {
 
 - (void)dealloc{
     
-    KDClassLog(@"dealloc  提交申请");
+    KDClassLog(@"dealloc  提交申请个人资料");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

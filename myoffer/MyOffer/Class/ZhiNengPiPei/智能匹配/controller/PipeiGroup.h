@@ -22,5 +22,6 @@ typedef enum {
 @property(nonatomic,copy)NSString *content;
 //cell 类型
 @property(nonatomic,assign)PipeiGroupType groupType;
+
 + (instancetype)groupWithHeader:(NSString *)header groupType:(PipeiGroupType)type;
 @end

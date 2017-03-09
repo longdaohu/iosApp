@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PromttViewController">
+            <connections>
+                <outlet property="dismissBtn" destination="FGU-kc-gIQ" id="ZBE-L1-JQp"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guid_smart.png" translatesAutoresizingMaskIntoConstraints="NO" id="0fD-vF-37s"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGU-kc-gIQ">
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="FGU-kc-gIQ" secondAttribute="height" multiplier="177:25" id="dip-6v-dhn"/>
+                    </constraints>
+                    <state key="normal" title="点击立刻匹配">
+                        <color key="titleColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="dismissOnclick:" destination="-1" eventType="touchUpInside" id="aj3-QS-EXB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0fD-vF-37s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Cee-4n-JJ4"/>
+                <constraint firstAttribute="trailing" secondItem="FGU-kc-gIQ" secondAttribute="trailing" constant="30" id="Chc-36-cbP"/>
+                <constraint firstItem="FGU-kc-gIQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="MTP-nW-cqG"/>
+                <constraint firstAttribute="trailing" secondItem="0fD-vF-37s" secondAttribute="trailing" id="bD0-Nl-qlX"/>
+                <constraint firstAttribute="bottom" secondItem="0fD-vF-37s" secondAttribute="bottom" id="k9T-I1-tQl"/>
+                <constraint firstItem="0fD-vF-37s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nan-zJ-Ew0"/>
+                <constraint firstAttribute="bottom" secondItem="FGU-kc-gIQ" secondAttribute="bottom" multiplier="1.03" constant="10" id="obR-5l-f5e"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="guid_smart.png" width="720" height="1280"/>
+    </resources>
+</document>

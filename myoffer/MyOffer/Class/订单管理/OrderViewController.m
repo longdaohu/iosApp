@@ -187,7 +187,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
  
-    OrderCell *cell =[OrderCell cellWithTableView:tableView indexPath:indexPath];
+    OrderCell *cell =[OrderCell cellWithTableView:tableView];
   
     cell.order = self.orderGroup[indexPath.section];
     

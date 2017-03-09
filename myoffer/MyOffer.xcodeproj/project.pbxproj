@@ -121,6 +121,8 @@
 		AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F61D5C929500FFD5A8 /* UIScrollView+MJRefresh.m */; };
 		AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */; };
 		AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */; };
+		AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2286281E715BB500E6E5CD /* PromttViewController.m */; };
+		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE2A59A21E6EBDF5001F5C8F /* MessageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
@@ -149,7 +151,6 @@
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
 		AE59A5531E69907D008E479F /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5521E69907D008E479F /* NomalCollectionController.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
-		AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64A5451DCB4CC9004592B6 /* promptViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
 		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
@@ -247,8 +248,6 @@
 		AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A211D5B231200DD7939 /* CountryItem.m */; };
 		AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A231D5B231200DD7939 /* GradeItem.m */; };
 		AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A251D5B231200DD7939 /* SubjectItem.m */; };
-		AEA24A3B1D5B231300DD7939 /* InputAccessoryToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */; };
-		AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */; };
 		AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */; };
 		AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */; };
 		AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A531D5B23F500DD7939 /* HeadItem.m */; };
@@ -616,6 +615,9 @@
 		AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		AE1FD76E1D5C957C00FFD5A8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AE2286271E715BB500E6E5CD /* PromttViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromttViewController.h; sourceTree = "<group>"; };
+		AE2286281E715BB500E6E5CD /* PromttViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromttViewController.m; sourceTree = "<group>"; };
+		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
 		AE2A59A01E6EBDF5001F5C8F /* MessageSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSectionHeaderView.h; sourceTree = "<group>"; };
 		AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSectionHeaderView.m; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
@@ -665,8 +667,6 @@
 		AE59A5521E69907D008E479F /* NomalCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NomalCollectionController.m; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
-		AE64A5441DCB4CC9004592B6 /* promptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promptViewController.h; sourceTree = "<group>"; };
-		AE64A5451DCB4CC9004592B6 /* promptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promptViewController.m; sourceTree = "<group>"; };
 		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
 		AE6643A51E6FE61A002FC072 /* GongLueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueTip.h; sourceTree = "<group>"; };
@@ -849,9 +849,6 @@
 		AEA24A231D5B231200DD7939 /* GradeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeItem.m; sourceTree = "<group>"; };
 		AEA24A241D5B231200DD7939 /* SubjectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectItem.h; sourceTree = "<group>"; };
 		AEA24A251D5B231200DD7939 /* SubjectItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectItem.m; sourceTree = "<group>"; };
-		AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputAccessoryToolBar.h; sourceTree = "<group>"; };
-		AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputAccessoryToolBar.m; sourceTree = "<group>"; };
-		AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputAccessoryToolBar.xib; sourceTree = "<group>"; };
 		AEA24A4C1D5B23F500DD7939 /* HomeViewContViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewContViewController.h; sourceTree = "<group>"; };
 		AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewContViewController.m; sourceTree = "<group>"; };
 		AEA24A4F1D5B23F500DD7939 /* HotUniversityFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUniversityFrame.h; sourceTree = "<group>"; };
@@ -2208,8 +2205,9 @@
 				AEA24A1B1D5B231200DD7939 /* EvaluateSearchCollegeViewController.m */,
 				AE8707011DDEE14700CE7780 /* PipeiEditViewController.h */,
 				AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */,
-				AE64A5441DCB4CC9004592B6 /* promptViewController.h */,
-				AE64A5451DCB4CC9004592B6 /* promptViewController.m */,
+				AE2286271E715BB500E6E5CD /* PromttViewController.h */,
+				AE2286281E715BB500E6E5CD /* PromttViewController.m */,
+				AE2286291E715BB500E6E5CD /* PromttViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2240,9 +2238,6 @@
 				AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */,
 				AED5A8611DDF0A9600E70289 /* PipeiCountryCell.h */,
 				AED5A8621DDF0A9600E70289 /* PipeiCountryCell.m */,
-				AEA24A291D5B231200DD7939 /* InputAccessoryToolBar.h */,
-				AEA24A2A1D5B231200DD7939 /* InputAccessoryToolBar.m */,
-				AEA24A2B1D5B231300DD7939 /* InputAccessoryToolBar.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3240,7 +3235,6 @@
 				AE2D5E8E1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib in Resources */,
 				AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */,
 				AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */,
-				AEA24A3C1D5B231300DD7939 /* InputAccessoryToolBar.xib in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
@@ -3333,6 +3327,7 @@
 				AEA24B771D5B25E000DD7939 /* SearchResultViewController.xib in Resources */,
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
 				AEF421041BD4988B00CFB45E /* UMShareEditViewControlleriPad.xib in Resources */,
+				AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */,
 				AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */,
 				AE1FD73E1D5C929500FFD5A8 /* Pre-comp 1_00026.png in Resources */,
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
@@ -3421,7 +3416,6 @@
 				AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */,
 				463E3AA61B23105F00E0BAF8 /* KDActionSheet.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,
-				AEA24A3B1D5B231300DD7939 /* InputAccessoryToolBar.m in Sources */,
 				AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */,
 				AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */,
 				AE3943DC1E0A1AD00038826A /* TAAbstractDotView.m in Sources */,
@@ -3454,6 +3448,7 @@
 				AEA24A031D5B224E00DD7939 /* CatigaryCityCollectionReusableView.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
+				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
 				AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */,
 				AED5A85A1DDEF25800E70289 /* PipeiGroup.m in Sources */,
 				AE1FD7211D5C929500FFD5A8 /* NSObject+MJClass.m in Sources */,
@@ -3535,7 +3530,6 @@
 				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
-				AE64A5461DCB4CCA004592B6 /* promptViewController.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,

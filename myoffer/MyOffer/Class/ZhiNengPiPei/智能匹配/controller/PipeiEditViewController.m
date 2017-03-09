@@ -16,7 +16,7 @@
 #import "SubjectItem.h"
 #import "EvaluateSearchCollegeViewController.h"
 #import "IntelligentResultViewController.h"
-#import "promptViewController.h"
+#import "PromttViewController.h"
 
 #define Bottom_Height 150
 
@@ -37,7 +37,7 @@
 //判断提交按钮是否被点击过
 @property(nonatomic,assign)BOOL submitBtnHadDone;
 //提示页
-@property(nonatomic,strong)promptViewController *prompVC;
+@property(nonatomic,strong)PromttViewController *prompVC;
 
 @end
 
@@ -115,7 +115,7 @@
     [self makeTableView];
     
     [self makeBottomView];
-    
+   
 }
 
 - (void)makeBottomView{
@@ -203,23 +203,20 @@
 }
 
 //提示页面
-- (promptViewController *)prompVC{
+- (PromttViewController *)prompVC{
     
     if (!_prompVC) {
         
         XWeakSelf
-        
-        _prompVC = [[promptViewController alloc] initWithBlock:^{
+        _prompVC =  [PromttViewController promptViewWithBlock:^{
             
             [weakSelf prompViewAppear:NO];
-            
-        }];
+         }];
         
         _prompVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
-        
-    }
+     }
     
-    return _prompVC;
+     return _prompVC;
 }
 
 

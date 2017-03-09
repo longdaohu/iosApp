@@ -153,7 +153,6 @@
     self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     
-//    CGSize priceSize = [self.priceLab.text  KD_sizeWithAttributeFont:[UIFont fontWithName:@"Helvetica-Bold" size:KDUtilSize(20)]];
     CGFloat priceW = bgW * 0.3;
     CGFloat priceH = KDUtilSize(20);
     CGFloat priceY = 0.5 * (bgH - priceH);

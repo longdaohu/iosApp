@@ -132,8 +132,8 @@
      self.tableView.tableHeaderView =  headerView;
 }
 
+#pragma mark : UITableViewDelegate,UITableViewDataSource
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
     return 1;
@@ -175,6 +175,7 @@ static NSString *identify = @"pay";
     
     return sectionView;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;

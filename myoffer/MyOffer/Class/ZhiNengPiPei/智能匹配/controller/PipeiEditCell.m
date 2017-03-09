@@ -38,6 +38,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
+        
+        self.contentView.backgroundColor = XCOLOR_BG;
+
         //输入框
         UITextField *contentTF = [[UITextField alloc] init];
         contentTF.backgroundColor = XCOLOR_WHITE;
@@ -48,7 +51,6 @@
         self.contentTF.layer.borderWidth = 1;
         self.contentTF.layer.borderColor = XCOLOR_LIGHTGRAY.CGColor;
         [self.contentView addSubview:contentTF];
-        self.contentView.backgroundColor = XCOLOR_BG;
         self.contentTF.delegate = self;
         
         //跳转按钮
@@ -208,12 +210,6 @@
 
 
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
 
 @end
 

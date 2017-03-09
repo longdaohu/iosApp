@@ -15,9 +15,9 @@
 @end
 
 @interface OrderCell : UITableViewCell
-@property(nonatomic,assign)BOOL cellEdit;
 @property(nonatomic,strong)OrderItem *order;
 @property(nonatomic,weak)id <OrderTableViewCellDelegate>delegate;
-+(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+
++(instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

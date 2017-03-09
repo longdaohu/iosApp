@@ -14,6 +14,6 @@ typedef void(^PipeiCountryViewBlock)(NSString *);
 @property(nonatomic,copy)NSString *contryName;
 @property(nonatomic,copy)PipeiCountryViewBlock actionBlock;
 
--(void)countryIsSelected:(BOOL)select;
+- (void)countryIsSelected:(BOOL)select;
 
 @end
