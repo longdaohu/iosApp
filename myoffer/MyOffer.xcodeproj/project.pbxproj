@@ -124,6 +124,7 @@
 		AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2286281E715BB500E6E5CD /* PromttViewController.m */; };
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
+		AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */; };
 		AE2A59A21E6EBDF5001F5C8F /* MessageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
@@ -162,6 +163,7 @@
 		AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28711D77CA3C00E9A47A /* UULineChart.m */; };
 		AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */; };
 		AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */; };
+		AE728F4B1E727EF000945EEA /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE728F4A1E727EF000945EEA /* HomeHeaderView.xib */; };
 		AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */; };
 		AE777CC01D75A0A300FB1FD4 /* Uni-uk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */; };
 		AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7825DB1D70295400AA4EF4 /* UniversityRightView.m */; };
@@ -620,6 +622,7 @@
 		AE2286281E715BB500E6E5CD /* PromttViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromttViewController.m; sourceTree = "<group>"; };
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
 		AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PipeiNoResultVeiw.xib; sourceTree = "<group>"; };
+		AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYLXSuccessView.xib; sourceTree = "<group>"; };
 		AE2A59A01E6EBDF5001F5C8F /* MessageSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSectionHeaderView.h; sourceTree = "<group>"; };
 		AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSectionHeaderView.m; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
@@ -690,6 +693,7 @@
 		AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFooterView.m; sourceTree = "<group>"; };
 		AE712FB41D5DBDA100D0F48A /* UniversityCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourse.h; sourceTree = "<group>"; };
 		AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourse.m; sourceTree = "<group>"; };
+		AE728F4A1E727EF000945EEA /* HomeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
 		AE777CBD1D75A0A200FB1FD4 /* Uni-au.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Uni-au.jpg"; path = "controller/Uni-au.jpg"; sourceTree = "<group>"; };
 		AE777CBE1D75A0A200FB1FD4 /* Uni-uk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Uni-uk.jpg"; path = "controller/Uni-uk.jpg"; sourceTree = "<group>"; };
 		AE7825DA1D70295400AA4EF4 /* UniversityRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityRightView.h; path = controller/UniversityRightView.h; sourceTree = "<group>"; };
@@ -2282,6 +2286,7 @@
 			children = (
 				AEA24A4C1D5B23F500DD7939 /* HomeViewContViewController.h */,
 				AEA24A4D1D5B23F500DD7939 /* HomeViewContViewController.m */,
+				AE728F4A1E727EF000945EEA /* HomeHeaderView.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3061,6 +3066,7 @@
 				AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */,
 				AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */,
 				AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */,
+				AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */,
 				AEA24A6F1D5B23F600DD7939 /* WYLXCell.h */,
 				AEA24A701D5B23F600DD7939 /* WYLXCell.m */,
 			);
@@ -3261,6 +3267,7 @@
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
 				AEF421071BD4988B00CFB45E /* UMSShareListController.xib in Resources */,
+				AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */,
 				AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */,
 				AE1FD7381D5C929500FFD5A8 /* Pre-comp 1_00020.png in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
@@ -3307,6 +3314,7 @@
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
 				AEA24C261D5B283700DD7939 /* bg98.png in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
+				AE728F4B1E727EF000945EEA /* HomeHeaderView.xib in Resources */,
 				AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */,
 				AEB61B6B1E6D00370096BC12 /* CatigoryRankStyleCell.xib in Resources */,
 				AEA24C2E1D5B283700DD7939 /* UK_en.jpg in Resources */,
@@ -3800,7 +3808,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyOffer/myOffer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YU34U9SYND;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3847,7 +3855,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyOffer/myOffer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YU34U9SYND;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

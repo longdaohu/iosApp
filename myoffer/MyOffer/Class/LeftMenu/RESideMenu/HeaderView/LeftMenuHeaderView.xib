@@ -21,7 +21,7 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="19G-dE-ohI">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="19G-dE-ohI">
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Edm-de-P6e"/>
                         <constraint firstAttribute="height" constant="80" id="cQy-Qa-jMG"/>
@@ -34,7 +34,7 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                             <integer key="value" value="2"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
                             <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
@@ -48,8 +48,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="userIconView" destination="19G-dE-ohI" id="EBy-0y-C44"/>
-                <outlet property="userNameLabel" destination="duV-6M-Egw" id="4UK-g6-vcl"/>
+                <outlet property="iconView" destination="19G-dE-ohI" id="XRE-Gv-MfQ"/>
+                <outlet property="nameLabel" destination="duV-6M-Egw" id="poj-1C-dVf"/>
             </connections>
             <point key="canvasLocation" x="-57" y="-162"/>
         </view>

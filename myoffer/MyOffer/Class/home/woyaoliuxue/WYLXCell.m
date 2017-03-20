@@ -54,6 +54,7 @@ static NSString  *identity = @"liuxue";
 -(XWGJKeyboardToolar *)tooler
 {
     if (!_tooler) {
+        
         _tooler =
         
         [[NSBundle mainBundle] loadNibNamed:@"XWGJKeyboardToolar" owner:self options:nil].lastObject;
@@ -87,6 +88,7 @@ static NSString  *identity = @"liuxue";
 #pragma mark ----KeyboardToolarDelegate
 -(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender
 {
+    
     if ([self.delegate respondsToSelector:@selector(XliuxueTableViewCell:withIndexPath:didClick:)]) {
         
          [self.delegate XliuxueTableViewCell:self withIndexPath:self.cellIndexPath didClick:sender];

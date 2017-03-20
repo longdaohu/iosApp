@@ -5,7 +5,6 @@
 //  Created by Roman Efimov on 10/10/13.
 //  Copyright (c) 2013 Roman Efimov. All rights reserved.
 //
-
 #import "LeftMenuViewController.h"
 #import "XWGJTabBarController.h"
 #import "ApplyViewController.h"
@@ -24,6 +23,7 @@
 #import "LeftMenuHeaderView.h"
 
 @interface LeftMenuViewController ()
+
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 //表头
 @property(nonatomic,strong)LeftMenuHeaderView *headerView;
@@ -185,9 +185,8 @@
     
 }
 
--(void)makeUI
-{
-    self.view.backgroundColor = XCOLOR_CLEAR;
+- (void)makeUI{
+    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     
     [self makeTableView];
     
@@ -203,69 +202,75 @@
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.bounces = NO;
-        tableView.backgroundColor = XCOLOR_CLEAR;
+        tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         [self.view addSubview:tableView];
         
         tableView;
     });
     
+    
+    self.headerView = [LeftMenuHeaderView headerViewWithTap:^{
+        
+        [self leftMenuHeaderViewOnclick];
+        
+    }];
+  
      self.tableView.tableHeaderView = self.headerView;
 
 }
 
-//headerView懒加载
--(LeftMenuHeaderView *)headerView
-{
 
-    if (!_headerView) {
+- (void)leftMenuHeaderViewOnclick{
+   
+    if(!LOGIN){
         
-        _headerView = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:nil options:nil].lastObject;
+        [self.sideMenuViewController hideMenuViewController];
         
-        KDUtilDefineWeakSelfRef
-        [_headerView.userIconView KD_addTapAction:^(UIView *view) {
-            
-            if(![[AppDelegate sharedDelegate] isLogin])
-            {
-                [self.sideMenuViewController hideMenuViewController];
-                
-                RequireLogin
-            }
-            //@"更换头像"  @"取消"
-            KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:GDLocalizedString(@"Me-008")
-                                                   cancelButtonTitle:GDLocalizedString(@"Me-007")
-                                                        cancelAction:nil
-                                              destructiveButtonTitle:nil
-                                                   destructiveAction:nil];
-            // @"拍照"  @"从手机相册选择"
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-               
-                [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
-                
-                    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                    imagePicker.delegate = weakSelf;
-                    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    imagePicker.allowsEditing = YES;
-                    imagePicker.showsCameraControls = YES;
-                    [self presentViewController:imagePicker animated:YES completion:^{}];
-                
-                }];
-            }
-            [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
-             
-                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                imagePicker.delegate = weakSelf;
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                imagePicker.allowsEditing = YES;
-                [self presentViewController:imagePicker animated:YES completion:^{}];
-            
-            }];
-            [as showInView:[weakSelf view]];
-        }];
-
+        RequireLogin
         
+        return;
     }
-    return _headerView;
+    
+    KDUtilDefineWeakSelfRef
+    
+    //@"更换头像"  @"取消"
+    KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:GDLocalizedString(@"Me-008")
+                                           cancelButtonTitle:GDLocalizedString(@"Me-007")
+                                                cancelAction:nil
+                                      destructiveButtonTitle:nil
+                                           destructiveAction:nil];
+    // @"拍照"  @"从手机相册选择"
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
+            
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = weakSelf;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.allowsEditing = YES;
+            imagePicker.showsCameraControls = YES;
+            [self presentViewController:imagePicker animated:YES completion:^{}];
+            
+        }];
+    }
+    [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = weakSelf;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.allowsEditing = YES;
+        [self presentViewController:imagePicker animated:YES completion:^{}];
+        
+    }];
+    
+    [as showInView:[weakSelf view]];
+   
+
 }
+
+
+
+ 
 
 //UIViewController  跳转
 -(void)pushViewController:(UIViewController *)vc
@@ -461,8 +466,10 @@
     [[APIClient defaultClient] startTaskWithRequest:request expectedStatusCodes:nil success:^(NSInteger statusCode, id response) {
       
         [hud hideAnimated:YES afterDelay:1];
+        
         [hud applySuccessStyle];
-        self.headerView.userIconView.image = image;
+        
+        self.headerView.iconImage = image;
     
     } failure:^(NSInteger statusCode, NSError *error) {
     

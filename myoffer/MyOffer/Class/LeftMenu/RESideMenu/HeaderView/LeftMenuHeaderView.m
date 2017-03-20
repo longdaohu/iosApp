@@ -9,42 +9,67 @@
 #import "LeftMenuHeaderView.h"
 @interface LeftMenuHeaderView ()
 //用户名
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+//头像
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 @end
 
 @implementation LeftMenuHeaderView
++ (instancetype)headerViewWithTap:(LeftBlock)actionBlock{
+
+    LeftMenuHeaderView *header = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:self options:nil].lastObject;
+    
+    header.actionBlock = actionBlock;
+    
+    return header;
+}
+
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
 
-    self.userIconView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.iconView.layer.borderColor = [UIColor whiteColor].CGColor;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.iconView addGestureRecognizer:tap];
+    
      
 }
 
+- (void)tap{
+
+    if (self.actionBlock) {
+        
+        self.actionBlock();
+    }
+    
+}
 
 
 -(void)setResponse:(NSDictionary *)response{
 
     _response = response;
     
-    self.userNameLabel.text = response[@"accountInfo"][@"displayname"];
-    self.userIconView.image = [UIImage imageNamed:@"default_avatar.jpg"];
-    [self.userIconView KD_setImageWithURL:response[@"portraitUrl"]];
-         
-   
+    self.nameLabel.text = response[@"accountInfo"][@"displayname"];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:response[@"portraitUrl"]]];
+    
  
 }
 
 -(void)headerViewWithUserLoginOut{
 
-    self.userNameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
-    self.userIconView.image = [UIImage imageNamed:@"default_avatar.jpg"];
+    self.nameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
+    self.iconView.image = [UIImage imageNamed:@"default_avatar.jpg"];
 }
 
 
+- (void)setIconImage:(UIImage *)iconImage{
 
+    _iconImage = iconImage;
+    
+    self.iconView.image = iconImage;
+}
 
 
 @end

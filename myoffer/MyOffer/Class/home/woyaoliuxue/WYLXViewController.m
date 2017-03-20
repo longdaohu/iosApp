@@ -376,7 +376,6 @@ typedef enum {
 
 -(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath   textFieldDidEndEditing:(UITextField *)textField{
     
-   
     WYLXGroup *group = self.groups[indexPath.section];
     
     if ([group.cellKey isEqualToString:@"phone"]) {
@@ -508,14 +507,9 @@ typedef enum {
     
     UIEdgeInsets insets =   _tableView.contentInset;
     
-        if (up) {
-            insets.bottom = keyboardEndFrame.size.height;
-        } else {
-            insets.bottom = 50;
-        }
-        _tableView.contentInset = insets;
-    
-    
+    insets.bottom = up ? keyboardEndFrame.size.height : 50;
+   
+    _tableView.contentInset = insets;
     
     [self.view layoutSubviews];
     
@@ -555,7 +549,6 @@ typedef enum {
         [fastPass setValue:group.content forKey:key];
 
     }
-    
     
     XWeakSelf
     NSDictionary *parameters =  @{@"fastPass": fastPass};

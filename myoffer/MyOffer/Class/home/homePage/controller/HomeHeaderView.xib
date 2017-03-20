@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mj2-3i-63M">
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo white" translatesAutoresizingMaskIntoConstraints="NO" id="j0t-5u-8XP">
+                    <color key="backgroundColor" red="0.16862745100000001" green="0.75686274509999996" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="pfy-X8-QIP"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxZ-ed-SPu" userLabel="oneView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_woyao" translatesAutoresizingMaskIntoConstraints="NO" id="bvQ-KK-Zse"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要留学" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D7-az-jPa">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="bvQ-KK-Zse" secondAttribute="trailing" id="FvV-4T-QhK"/>
+                        <constraint firstItem="bvQ-KK-Zse" firstAttribute="leading" secondItem="MxZ-ed-SPu" secondAttribute="leading" id="RQ6-fn-VEX"/>
+                        <constraint firstAttribute="bottom" secondItem="bvQ-KK-Zse" secondAttribute="bottom" multiplier="1.4" id="Rk9-7f-Ui8"/>
+                        <constraint firstItem="bvQ-KK-Zse" firstAttribute="top" secondItem="MxZ-ed-SPu" secondAttribute="top" id="aNe-HE-yVZ"/>
+                        <constraint firstAttribute="trailing" secondItem="6D7-az-jPa" secondAttribute="trailing" id="aRa-KU-0yF"/>
+                        <constraint firstItem="6D7-az-jPa" firstAttribute="top" secondItem="bvQ-KK-Zse" secondAttribute="bottom" constant="5" id="eO9-E7-vit"/>
+                        <constraint firstItem="6D7-az-jPa" firstAttribute="leading" secondItem="MxZ-ed-SPu" secondAttribute="leading" id="sX9-MQ-th9"/>
+                        <constraint firstAttribute="width" secondItem="MxZ-ed-SPu" secondAttribute="height" multiplier="1:1" id="wQh-gR-3QL"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-ag-9mq" userLabel="twoView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_xiaobai" translatesAutoresizingMaskIntoConstraints="NO" id="jPM-Op-t1c"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学小白" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3C-dy-VMW">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="jPM-Op-t1c" firstAttribute="leading" secondItem="ujl-ag-9mq" secondAttribute="leading" id="Ko2-hi-ltA"/>
+                        <constraint firstAttribute="trailing" secondItem="jPM-Op-t1c" secondAttribute="trailing" id="Pve-lO-gfl"/>
+                        <constraint firstItem="d3C-dy-VMW" firstAttribute="top" secondItem="jPM-Op-t1c" secondAttribute="bottom" constant="5" id="Qf5-q3-LQg"/>
+                        <constraint firstAttribute="bottom" secondItem="jPM-Op-t1c" secondAttribute="bottom" multiplier="1.4" id="WMK-N0-lhY"/>
+                        <constraint firstItem="d3C-dy-VMW" firstAttribute="leading" secondItem="ujl-ag-9mq" secondAttribute="leading" id="Zd3-0c-9Te"/>
+                        <constraint firstAttribute="trailing" secondItem="d3C-dy-VMW" secondAttribute="trailing" id="niZ-gy-O80"/>
+                        <constraint firstItem="jPM-Op-t1c" firstAttribute="top" secondItem="ujl-ag-9mq" secondAttribute="top" id="oti-mV-7tq"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbB-MV-uyF" userLabel="threeView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_pipei" translatesAutoresizingMaskIntoConstraints="NO" id="y6B-hI-jwM"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智能匹配" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fI-4z-gu3">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="y6B-hI-jwM" secondAttribute="trailing" id="863-86-cKD"/>
+                        <constraint firstItem="7fI-4z-gu3" firstAttribute="leading" secondItem="vbB-MV-uyF" secondAttribute="leading" id="Kt7-Up-5eD"/>
+                        <constraint firstAttribute="trailing" secondItem="7fI-4z-gu3" secondAttribute="trailing" id="P5w-Dj-B1l"/>
+                        <constraint firstItem="y6B-hI-jwM" firstAttribute="leading" secondItem="vbB-MV-uyF" secondAttribute="leading" id="YXV-v2-EIb"/>
+                        <constraint firstItem="y6B-hI-jwM" firstAttribute="top" secondItem="vbB-MV-uyF" secondAttribute="top" id="jFV-Jc-TNG"/>
+                        <constraint firstAttribute="bottom" secondItem="y6B-hI-jwM" secondAttribute="bottom" multiplier="1.4" id="r6z-zq-DAv"/>
+                        <constraint firstItem="7fI-4z-gu3" firstAttribute="top" secondItem="y6B-hI-jwM" secondAttribute="bottom" constant="5" id="tzu-hh-3YS"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOb-IK-PEu" userLabel="fourView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_mbti" translatesAutoresizingMaskIntoConstraints="NO" id="P4P-9u-xHP"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职业性格测试" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PjF-Tg-nsC">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="cOb-IK-PEu" secondAttribute="height" multiplier="1:1" id="8rq-Sn-j7z"/>
+                        <constraint firstItem="P4P-9u-xHP" firstAttribute="leading" secondItem="cOb-IK-PEu" secondAttribute="leading" id="At2-1B-rZm"/>
+                        <constraint firstAttribute="bottom" secondItem="P4P-9u-xHP" secondAttribute="bottom" multiplier="1.4" id="LKr-Vf-ORg"/>
+                        <constraint firstAttribute="trailing" secondItem="P4P-9u-xHP" secondAttribute="trailing" id="NsR-c9-bWH"/>
+                        <constraint firstAttribute="trailing" secondItem="PjF-Tg-nsC" secondAttribute="trailing" id="e68-c4-Y4n"/>
+                        <constraint firstItem="PjF-Tg-nsC" firstAttribute="top" secondItem="P4P-9u-xHP" secondAttribute="bottom" constant="5" id="hNt-ja-UgC"/>
+                        <constraint firstItem="P4P-9u-xHP" firstAttribute="top" secondItem="cOb-IK-PEu" secondAttribute="top" id="koD-D5-iWA"/>
+                        <constraint firstItem="PjF-Tg-nsC" firstAttribute="leading" secondItem="cOb-IK-PEu" secondAttribute="leading" id="yq9-0c-BvL"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xzk-jd-249" userLabel="fiveView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_super" translatesAutoresizingMaskIntoConstraints="NO" id="7Z9-5c-VYx"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="海外超级导师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q76-pr-y9V">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="7Z9-5c-VYx" secondAttribute="bottom" multiplier="1.4" id="6Ck-Hp-5yt"/>
+                        <constraint firstItem="7Z9-5c-VYx" firstAttribute="top" secondItem="Xzk-jd-249" secondAttribute="top" id="9FP-2C-lnO"/>
+                        <constraint firstItem="Q76-pr-y9V" firstAttribute="leading" secondItem="Xzk-jd-249" secondAttribute="leading" id="Bq0-TU-iyb"/>
+                        <constraint firstAttribute="trailing" secondItem="7Z9-5c-VYx" secondAttribute="trailing" id="NMb-lk-cV2"/>
+                        <constraint firstItem="Q76-pr-y9V" firstAttribute="top" secondItem="7Z9-5c-VYx" secondAttribute="bottom" constant="5" id="gjH-fN-Ba7"/>
+                        <constraint firstAttribute="trailing" secondItem="Q76-pr-y9V" secondAttribute="trailing" id="hW8-qd-6Mu"/>
+                        <constraint firstItem="7Z9-5c-VYx" firstAttribute="leading" secondItem="Xzk-jd-249" secondAttribute="leading" id="pd1-nd-OGI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zam-4e-IBe" userLabel="fixView">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Mall" translatesAutoresizingMaskIntoConstraints="NO" id="fsK-me-oG8"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学服务套餐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeL-xq-6ff">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="fsK-me-oG8" secondAttribute="trailing" id="8dj-uK-41S"/>
+                        <constraint firstItem="fsK-me-oG8" firstAttribute="top" secondItem="zam-4e-IBe" secondAttribute="top" id="AuR-OM-xID"/>
+                        <constraint firstAttribute="trailing" secondItem="yeL-xq-6ff" secondAttribute="trailing" id="QaK-pW-N3J"/>
+                        <constraint firstItem="fsK-me-oG8" firstAttribute="leading" secondItem="zam-4e-IBe" secondAttribute="leading" id="WNX-Iy-Zpv"/>
+                        <constraint firstItem="yeL-xq-6ff" firstAttribute="top" secondItem="fsK-me-oG8" secondAttribute="bottom" constant="5" id="fnh-0U-KGR"/>
+                        <constraint firstItem="yeL-xq-6ff" firstAttribute="leading" secondItem="zam-4e-IBe" secondAttribute="leading" id="o63-0m-2wJ"/>
+                        <constraint firstAttribute="bottom" secondItem="fsK-me-oG8" secondAttribute="bottom" multiplier="1.4" id="qLq-Jp-gjE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="vbB-MV-uyF" firstAttribute="width" secondItem="MxZ-ed-SPu" secondAttribute="width" id="0sD-A4-C4M"/>
+                <constraint firstItem="Xzk-jd-249" firstAttribute="height" secondItem="cOb-IK-PEu" secondAttribute="height" id="1co-QK-nD3"/>
+                <constraint firstItem="cOb-IK-PEu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="54E-B3-Ow2"/>
+                <constraint firstItem="zam-4e-IBe" firstAttribute="leading" secondItem="Xzk-jd-249" secondAttribute="trailing" id="5ei-8j-sHo"/>
+                <constraint firstItem="zam-4e-IBe" firstAttribute="width" secondItem="cOb-IK-PEu" secondAttribute="width" id="AsS-uL-73z"/>
+                <constraint firstItem="zam-4e-IBe" firstAttribute="height" secondItem="cOb-IK-PEu" secondAttribute="height" id="BYA-dI-UfB"/>
+                <constraint firstItem="j0t-5u-8XP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bu6-Oe-vlh"/>
+                <constraint firstItem="vbB-MV-uyF" firstAttribute="height" secondItem="MxZ-ed-SPu" secondAttribute="height" id="FLk-Zp-xXy"/>
+                <constraint firstItem="Xzk-jd-249" firstAttribute="bottom" secondItem="mj2-3i-63M" secondAttribute="bottom" id="Ghe-g4-QT7"/>
+                <constraint firstAttribute="trailing" secondItem="j0t-5u-8XP" secondAttribute="trailing" id="N6l-HN-Tc1"/>
+                <constraint firstItem="MxZ-ed-SPu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Nyw-Xh-TmA"/>
+                <constraint firstItem="mj2-3i-63M" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ODC-Hh-Hjn"/>
+                <constraint firstItem="vbB-MV-uyF" firstAttribute="top" secondItem="MxZ-ed-SPu" secondAttribute="top" id="SZ2-d3-QAx"/>
+                <constraint firstAttribute="trailing" secondItem="zam-4e-IBe" secondAttribute="trailing" id="SsI-0a-Bjp"/>
+                <constraint firstItem="Xzk-jd-249" firstAttribute="leading" secondItem="cOb-IK-PEu" secondAttribute="trailing" id="TXq-ma-Itv"/>
+                <constraint firstItem="cOb-IK-PEu" firstAttribute="top" secondItem="MxZ-ed-SPu" secondAttribute="bottom" id="am0-X1-kwq"/>
+                <constraint firstItem="ujl-ag-9mq" firstAttribute="top" secondItem="MxZ-ed-SPu" secondAttribute="top" id="d5Q-6A-924"/>
+                <constraint firstItem="MxZ-ed-SPu" firstAttribute="top" secondItem="j0t-5u-8XP" secondAttribute="bottom" constant="5" id="e4y-Kw-q46"/>
+                <constraint firstItem="vbB-MV-uyF" firstAttribute="leading" secondItem="ujl-ag-9mq" secondAttribute="trailing" id="eLa-dn-9vE"/>
+                <constraint firstAttribute="trailing" secondItem="vbB-MV-uyF" secondAttribute="trailing" id="f3p-91-n8i"/>
+                <constraint firstItem="ujl-ag-9mq" firstAttribute="height" secondItem="MxZ-ed-SPu" secondAttribute="height" id="kUO-1h-a34"/>
+                <constraint firstItem="Xzk-jd-249" firstAttribute="width" secondItem="cOb-IK-PEu" secondAttribute="width" id="lop-6N-1P6"/>
+                <constraint firstItem="ujl-ag-9mq" firstAttribute="leading" secondItem="MxZ-ed-SPu" secondAttribute="trailing" id="mUY-t6-nry"/>
+                <constraint firstItem="mj2-3i-63M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mZI-Ph-7tK"/>
+                <constraint firstItem="zam-4e-IBe" firstAttribute="top" secondItem="cOb-IK-PEu" secondAttribute="top" id="niV-6I-aOC"/>
+                <constraint firstItem="Xzk-jd-249" firstAttribute="top" secondItem="cOb-IK-PEu" secondAttribute="top" id="r4T-hh-zpn"/>
+                <constraint firstAttribute="trailing" secondItem="mj2-3i-63M" secondAttribute="trailing" id="swc-ee-HH5"/>
+                <constraint firstItem="j0t-5u-8XP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="vBa-lt-aRm"/>
+                <constraint firstItem="ujl-ag-9mq" firstAttribute="width" secondItem="MxZ-ed-SPu" secondAttribute="width" id="wSZ-uW-r5r"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Home_mbti" width="100" height="100"/>
+        <image name="Home_pipei" width="100" height="100"/>
+        <image name="Home_super" width="100" height="100"/>
+        <image name="home_Mall" width="100" height="100"/>
+        <image name="home_woyao" width="100" height="100"/>
+        <image name="home_xiaobai" width="100" height="100"/>
+        <image name="logo white" width="200" height="76"/>
+    </resources>
+</document>
