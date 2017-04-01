@@ -93,7 +93,6 @@
         //起点 增加
         startSize.width += keyWordWidth + padding;
     }
-//    self.itemsView.frame =  CGRectMake(15,35,APPSIZE.width - 30, fileritem.contentheigh);
     
 }
 

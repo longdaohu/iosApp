@@ -116,4 +116,6 @@
 #define kAPISelectorApplyStutasNew @"GET api/account/applicationliststateraw"
 //反馈意见
 #define kAPISelectorFeedback @"POST api/app/feedback"
+//留学购
+#define kAPISelectorMyofferMall @"GET api/emall/app/index"
 

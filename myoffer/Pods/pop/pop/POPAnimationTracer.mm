@@ -133,8 +133,8 @@ static POPAnimationEvent *create_event(POPAnimationTracer *self, POPAnimationEve
   [_events addObject:event];
 
   if (_shouldLogAndResetOnCompletion) {
-    NSLog(@"events:%@", self.allEvents);
-    [self reset];
+
+     [self reset];
   }
 }
 

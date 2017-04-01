@@ -121,6 +121,9 @@
 -(void)layoutSubviews{
    
     [super layoutSubviews];
+    
+    
+    self.mj_h = CGRectGetMaxY(self.bgView.frame);
    
 }
 

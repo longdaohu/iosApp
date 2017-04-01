@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet TopNavView *bgView;
 //收藏、分享
 @property(nonatomic,strong)UniversityRightView   *rightView;
+//客服
+@property (weak, nonatomic) IBOutlet UIButton *QQBtn;
 
 @end
 
@@ -42,6 +44,8 @@
     self.clipsToBounds = YES;
     
     self.bgView.alpha = 0;
+    
+    self.QQBtn.tag = NavItemStyleQQ;
    
      XWeakSelf
     self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
@@ -81,10 +85,17 @@
 
 - (void)onclick:(UIButton *)sender{
     
+
     [self ViewItem:sender];
  
 }
 
+- (IBAction)QQButtonOnClick:(UIButton *)sender {
+    
+ 
+    [self ViewItem:sender];
+
+}
 
 - (void)ViewItem:(UIButton *)sender{
 
@@ -150,6 +161,15 @@
 }
 
 
+- (void)navigationWithRightViewHiden:(BOOL)hiden{
+
+    self.rightView.hidden = hiden;
+}
+
+- (void)navigationWithQQHiden:(BOOL)hiden{
+
+    self.QQBtn.hidden = hiden;
+}
 
 
 

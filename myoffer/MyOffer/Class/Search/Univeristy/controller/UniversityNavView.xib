@@ -15,7 +15,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACV-QW-aeD" customClass="TopNavView">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" tag="112" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0Y-Hw-GQ0">
+                <button opaque="NO" tag="112" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0Y-Hw-GQ0" userLabel="popButton">
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="DNR-Pm-skI"/>
                         <constraint firstAttribute="height" constant="40" id="Qpc-Hs-brK"/>
@@ -23,6 +23,17 @@
                     <state key="normal" image="back_arrow"/>
                     <connections>
                         <action selector="backClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="qSl-NA-Hl9"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymn-dZ-Kn1">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="KUq-GP-nxY"/>
+                        <constraint firstAttribute="width" constant="40" id="exu-Wi-xhU"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="nav_QQ"/>
+                    <connections>
+                        <action selector="QQButtonOnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="WgB-Yb-k58"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titlesdgdsg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syv-hU-MxF">
@@ -33,16 +44,21 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ACV-QW-aeD" secondAttribute="bottom" id="54q-8X-dZd"/>
+                <constraint firstItem="Syv-hU-MxF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="6sl-x3-TvB"/>
                 <constraint firstAttribute="trailing" secondItem="ACV-QW-aeD" secondAttribute="trailing" id="AnW-rm-ggz"/>
+                <constraint firstAttribute="trailing" secondItem="Syv-hU-MxF" secondAttribute="trailing" constant="60" id="NTz-vo-hOZ"/>
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Nj6-lh-HRs"/>
+                <constraint firstAttribute="bottom" secondItem="ymn-dZ-Kn1" secondAttribute="bottom" id="POg-ui-HeS"/>
                 <constraint firstItem="ACV-QW-aeD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PYq-yq-DuA"/>
                 <constraint firstItem="w0Y-Hw-GQ0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="gSA-up-KwJ"/>
                 <constraint firstItem="ACV-QW-aeD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mAv-cw-dCb"/>
+                <constraint firstAttribute="trailing" secondItem="ymn-dZ-Kn1" secondAttribute="trailing" constant="10" id="tLg-7J-Pcv"/>
                 <constraint firstItem="Syv-hU-MxF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wuk-vb-6Q6"/>
                 <constraint firstItem="Syv-hU-MxF" firstAttribute="centerY" secondItem="w0Y-Hw-GQ0" secondAttribute="centerY" id="xHk-Zk-0cq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="QQBtn" destination="ymn-dZ-Kn1" id="uvx-X6-PaL"/>
                 <outlet property="bgView" destination="ACV-QW-aeD" id="y6m-O0-8gB"/>
                 <outlet property="titleLab" destination="Syv-hU-MxF" id="1TX-jd-7EK"/>
             </connections>
@@ -51,5 +67,6 @@
     </objects>
     <resources>
         <image name="back_arrow" width="30" height="30"/>
+        <image name="nav_QQ" width="30" height="28"/>
     </resources>
 </document>

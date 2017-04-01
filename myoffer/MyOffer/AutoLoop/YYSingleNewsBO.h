@@ -17,5 +17,7 @@
 @property (nonatomic, copy) NSString *newsTitle;
 @property (nonatomic, assign) NSInteger index;
 
+@property(nonatomic,strong)NSDictionary *banner;
+
 
 @end

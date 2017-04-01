@@ -51,6 +51,8 @@ typedef enum {
 //升级VC
 @property(nonatomic,strong)UpgradeViewController *upgateVC;
 
+@property(nonatomic,copy)NSString *universityName;
+
 @end
 
 @implementation XWGJTiJiaoViewController
@@ -79,7 +81,7 @@ typedef enum {
 
     if (!_upgateVC) {
         
-        _upgateVC            =[[UpgradeViewController alloc] init];
+        _upgateVC    = [[UpgradeViewController alloc] init];
         _upgateVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
         [self.view addSubview:_upgateVC.view];
         
@@ -177,7 +179,7 @@ typedef enum {
 {
     if (!_ApplyTimes) {
         
-       _ApplyTimes = @[@"2016",@"2017",@"2018+"];
+       _ApplyTimes = @[@"2017",@"2018",@"2019+"];
 
     }
     return _ApplyTimes;
@@ -845,11 +847,14 @@ typedef enum {
         [self.view endEditing:YES];
         
         EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
+        
         search.valueBlock = ^(NSString *value){
             
             if ( 0 == value.length) return ;
             
              textField.text = value;
+            
+             self.universityName = value;
             
         };
         
@@ -1045,6 +1050,13 @@ typedef enum {
 {
     
     RequireLogin
+    
+    XWGJTJSectionGroup *FirstGroup  = self.Groups[0];
+    XWGJTJSectionGroup *SecondGroup = self.Groups[1];
+    XWGJTJSectionGroup *ThirdGroup  = self.Groups[2];
+    
+    XWGJPeronInfoItem *uni_item  = ThirdGroup.cellItems[0];
+    uni_item.itemName = self.universityName;
    
     for (XWGJTJSectionGroup *group in self.Groups) {
         
@@ -1057,11 +1069,7 @@ typedef enum {
             }
         }
     }
-    
-    XWGJTJSectionGroup *FirstGroup  = self.Groups[0];
-    XWGJTJSectionGroup *SecondGroup = self.Groups[1];
-    XWGJTJSectionGroup *ThirdGroup  = self.Groups[2];
-    
+     
     
     NSDictionary *parameters =  @{@"des_country":[SecondGroup.cellItems[0] itemName],
                                   @"target_date":[SecondGroup.cellItems[1] itemName],
@@ -1109,6 +1117,7 @@ typedef enum {
 - (void)updateView{
 
      [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+         
          self.upgateVC.view.top = 0;
     }];
     

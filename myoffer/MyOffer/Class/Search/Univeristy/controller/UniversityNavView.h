@@ -9,6 +9,7 @@
 typedef enum{
     NavItemStyleFavorited = 0,  //喜欢
     NavItemStyleShare = 1,       //分享
+    NavItemStyleQQ =2,       //QQ
     NavItemStyleBack
 }NavItemStyle;
 
@@ -21,13 +22,20 @@ typedef void(^UniversityNavViewBlock)(UIButton *sender);
 @property(nonatomic,copy)NSString *titleName;
 //导航栏背景  Alpha
 @property(nonatomic,assign)CGFloat nav_Alpha;
- 
+
 //设置导航栏收藏UI
 - (void)navigationWithFavorite:(BOOL)favorite;
 //监听scollerView滚动  学校详情
 - (void)scrollViewContentoffset:(CGFloat)offsetY  andContenHeight:(CGFloat)contentHeight;
 //监听scollerView滚动  攻略列表
 - (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight;
+
+//右侧按钮不显示
+- (void)navigationWithRightViewHiden:(BOOL)hiden;
+
+//QQ按钮不显示
+- (void)navigationWithQQHiden:(BOOL)hiden;
+
 + (instancetype)ViewWithBlock:(UniversityNavViewBlock)actionBlock;
 
 @end

@@ -17,6 +17,7 @@
 @interface OrderCell : UITableViewCell
 @property(nonatomic,strong)OrderItem *order;
 @property(nonatomic,weak)id <OrderTableViewCellDelegate>delegate;
+@property(nonatomic,strong)NSIndexPath  *indexPath;
 
 +(instancetype)cellWithTableView:(UITableView *)tableView;
 

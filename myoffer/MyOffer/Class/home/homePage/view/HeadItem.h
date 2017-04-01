@@ -11,6 +11,7 @@
 typedef void(^itemBlock)(NSInteger index);
 @interface HeadItem : UIView
 @property(nonatomic,copy)itemBlock actionBlock;
+@property(nonatomic,strong)UIColor *textColor;
 + (instancetype)itemInitWithTitle:(NSString *)title imageName:(NSString *)imageName;
 
 @end

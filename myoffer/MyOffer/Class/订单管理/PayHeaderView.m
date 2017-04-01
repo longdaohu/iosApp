@@ -32,8 +32,11 @@
     [super awakeFromNib];
 
     self.bgView.backgroundColor = XCOLOR_BG;
-    
     self.backgroundColor = XCOLOR_BG;
+
+    self.shadowView.layer.shadowColor = XCOLOR_BLACK.CGColor;
+    self.shadowView.layer.shadowOpacity = 0.1;
+    self.shadowView.layer.shadowOffset = CGSizeMake(1, 1);
     
 }
 
@@ -41,7 +44,12 @@
  
     _order = order;
     
-    NSDictionary *sku = [order.SKUs firstObject];
+    if (order.SKUs.count == 0) {
+        
+        return;
+    }
+    
+     NSDictionary *sku = [order.SKUs firstObject];
     self.productNameLab.text = sku[@"name"] ;
     self.orderNoLab.text =   order.order_id;
     self.payCountLab.text = [NSString stringWithFormat:@"￥%@", order.total_fee];

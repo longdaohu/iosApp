@@ -140,6 +140,7 @@
     CGFloat itemW =  itemsBgW / 3;
     CGFloat itemH =  itemsBgH * 0.5;
     for (int index = 0 ;index < self.itemsBgView.subviews.count ; index++) {
+    
         HeadItem *item = (HeadItem *)self.itemsBgView.subviews[index];
         CGFloat itemX  =  (index % 3) * itemW;
         CGFloat itemY  =  itemH  * (index / 3);

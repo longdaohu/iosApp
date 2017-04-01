@@ -38,7 +38,6 @@
     
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -95,12 +94,15 @@
   
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
+        NSLog(@"%@",response);
+        
         if ( 200 == statusCode && 0 == page) {
              weakSelf.nextPage =0;
              [weakSelf.orderGroup removeAllObjects];
         }
         
         weakSelf.nextPage += 1;
+        
         [weakSelf configrationUIWithResponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
@@ -191,10 +193,13 @@
   
     cell.order = self.orderGroup[indexPath.section];
     
+    cell.indexPath =indexPath;
+    
     cell.delegate = self;
     
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -212,7 +217,8 @@
     return Uni_Cell_Height + 25;
 }
 
-#pragma mark ----- OrderTableViewCellDelegate
+#pragma mark : OrderTableViewCellDelegate
+
 -(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender
 {
     switch (sender.tag) {
@@ -232,13 +238,21 @@
 //详情
 -(void)OrderDetal:(NSIndexPath *)indexPath{
 
+    
     XWeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
+    
     detail.order  =  self.orderGroup[indexPath.section];
+    
+    
     detail.actionBlock = ^(BOOL isSuccess){
+        
         OrderItem *order = self.orderGroup[indexPath.section];
+        
         if (isSuccess) {
+            
             order.status = @"ORDER_CLOSED";
+            
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
@@ -250,12 +264,17 @@
 
     XWeakSelf
     PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
+    
     pay.order  =  self.orderGroup[indexPath.section];
+    
     pay.actionBlock = ^(BOOL isSuccess){
       
         OrderItem *order = self.orderGroup[indexPath.section];
+        
         if (isSuccess) {
+            
              order.status = @"ORDER_FINISHED";
+            
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };

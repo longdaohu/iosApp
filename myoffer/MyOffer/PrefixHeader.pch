@@ -20,7 +20,7 @@
 #define UNIVERSITY_LOCALHIGH  18.0
 #define UNIVERSITY_RANKHIGH  20.0
 #define SUB_LOCAL_MAGIN  8.0
-#define CORNER_RADIUS  5.0
+#define CORNER_RADIUS  4.0
 #define TOP_HIGHT  34.0
 #define ITEM_MARGIN   10.0
 #define PADDING_TABLEGROUP 10.0
@@ -45,6 +45,7 @@
 #define XCOLOR_DARKGRAY [UIColor darkGrayColor]
 #define XCOLOR_LIGHTGRAY  [UIColor lightGrayColor]
 #define XCOLOR_BLACK [UIColor blackColor]
+#define XCOLOR_line  [UIColor colorWithRed:223.0/255 green:223.0/255 blue:223.0/255 alpha:1]
 #define XCOLOR_BG  [UIColor colorWithRed:245.0/255 green:244.0/255 blue:249.0/255 alpha:1]
 #define XCOLOR_RED  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
 #define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]

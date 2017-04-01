@@ -222,7 +222,8 @@ typedef enum {
     
     SeviceDetailViewController *detail = [[SeviceDetailViewController alloc] init];
     detail.isBackRootViewController    = YES;
-    detail.path                        = [NSString stringWithFormat:@"%@service_dtl?=cset",DOMAINURL];
+    detail.path    = [NSString stringWithFormat:@"%@service_dtl?=cset",DOMAINURL];
+    NSLog(@"more = %@",detail.path);
     [self.navigationController pushViewController:detail animated:YES];
     
 }
@@ -256,9 +257,9 @@ typedef enum {
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.scrollEnabled = NO;
     XWeakSelf
-    
     UpgradeFooterView *tipsView =[UpgradeFooterView footViewWithContent:@"Tips：选择VIP尊享服务包，将享有一对一服务，帮你创造亮点，指导选课，帮你冲刺世界名校。全程操办你的文书、签证，学校交涉补材料、考试分数递送、协助邮寄纸质材料等24项超值服务"];
     self.tableView.tableFooterView = tipsView;
+    
     tipsView.actionBlock = ^{
         
         [weakSelf more];
@@ -271,7 +272,7 @@ typedef enum {
 #pragma mark —————— UITableViewDelegate,UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  0.0001;
+    return  HEIGHT_ZERO;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -334,7 +335,7 @@ typedef enum {
 
 -(void)dealloc{
 
-    KDClassLog(@"dealloc  UpgradeViewController");
+    KDClassLog(@"dealloc  UpgradeViewController 个人信息提交成功提示页");
 }
 
 @end

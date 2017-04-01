@@ -305,10 +305,14 @@ NSString * const ID = @"cycleCell";
     _imageURLStringsGroup = imageURLStringsGroup;
     
     NSMutableArray *temp = [NSMutableArray new];
+   
     [_imageURLStringsGroup enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * stop) {
+        
+
         NSString *urlString;
         if ([obj isKindOfClass:[NSString class]]) {
-            urlString = obj;
+            urlString = [obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+;
         } else if ([obj isKindOfClass:[NSURL class]]) {
             NSURL *url = (NSURL *)obj;
             urlString = [url absoluteString];

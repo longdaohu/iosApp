@@ -20,7 +20,6 @@
 @property(nonatomic,strong)UIButton  *cancelBtn;
 //支付按钮
 @property(nonatomic,strong)UIButton  *payBtn;
-@property(nonatomic,strong)NSIndexPath  *indexPath;
 
 @end
 
@@ -38,9 +37,6 @@
     
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     
-    NSIndexPath *path = [tableView indexPathForCell:cell];
-    
-    cell.indexPath = path;
     
     return cell;
     

@@ -285,7 +285,7 @@ typedef enum {
     }];
     
     self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:XImage(@"QQService")  style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:XImage(@"nav_QQ")  style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     
 }
 
@@ -479,8 +479,7 @@ typedef enum {
     
 }
 
-
-//跳转到QQ客服聊天页面
+#pragma mark : 跳转到QQ客服聊天页面
 -(void)QQservice
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {

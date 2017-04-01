@@ -53,6 +53,13 @@
     
 }
 
+- (void)setTextColor:(UIColor *)textColor{
+
+    _textColor = textColor;
+    
+    self.titleLab.textColor = textColor;
+}
+
 - (void)setTitle:(NSString *)title
 {
     _title             = title;
@@ -93,6 +100,7 @@
 
 -(void)itemOnclick
 {
+    
     
     if (self.actionBlock) {
         

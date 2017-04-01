@@ -28,6 +28,7 @@
             errorAlertDismissAction:(void (^)())errorAlertDismissAction
             additionalSuccessAction:(APIClientSuccessBlock)success
             additionalFailureAction:(APIClientFailureBlock)failure {
+    
     if (!_APIRequestTasks) {
         _APIRequestTasks = [NSMutableArray array];
     }
@@ -36,11 +37,13 @@
 
         _requestHUD = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
      }
-        
+    
+    
     NSArray *comps = [selector componentsSeparatedByString:@" "];
     NSString *method = comps[0];
     __block NSString *path = comps[1];
     
+
     __block NSURLSessionDataTask *task =
     [[APIClient defaultClient]
      startTaskWithMethod:method
@@ -121,6 +124,8 @@
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
                             success:(APIClientSuccessBlock)success{
+    
+    
     [self startAPIRequestWithSelector:selector
                            parameters:parameters
                   expectedStatusCodes:nil

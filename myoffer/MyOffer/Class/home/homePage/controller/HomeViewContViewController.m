@@ -34,6 +34,7 @@
 #import "UniversityNew.h"
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
+#import "MyOfferServerMallViewController.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -53,6 +54,7 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
 @property(nonatomic,strong)NSArray *banner;
+
 @end
 
 @implementation HomeViewContViewController
@@ -473,7 +475,8 @@
     
 }
 
-#pragma mark  ———————————— UITableViewDelegate  UITableViewData
+#pragma mark :UITableViewDelegate  UITableViewData
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
   
     UniDetailGroup *group = self.groups[section];
@@ -866,7 +869,9 @@
 {
 
     [MobClick event:@"home_mall"];
-    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[MyOfferServerMallViewController  alloc] init] animated:YES];
+    
+    
 }
 
 //跳转搜索功能

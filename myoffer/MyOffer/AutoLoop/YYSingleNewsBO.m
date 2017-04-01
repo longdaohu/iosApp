@@ -20,4 +20,16 @@
     self.message_url = [message[@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
+- (void)setBanner:(NSDictionary *)banner{
+
+    _banner = banner;
+    
+    self.newsTitle = banner[@"title"];
+    self.imageUrl = [banner[@"thumbnail"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    self.newsId = banner[@"_id"];
+    self.message_url = [banner[@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    
+}
+
 @end

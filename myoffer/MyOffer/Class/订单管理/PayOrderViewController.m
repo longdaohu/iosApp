@@ -40,6 +40,8 @@
     
     [MobClick beginLogPageView:@"page订单支付"];
     
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
 }
 
 
@@ -123,13 +125,15 @@
     
 }
 
--(void)makeTableViewHeader
-{
-    PayHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"PayHeaderView" owner:self options:nil].lastObject;
+- (void)makeTableViewHeader{
+    
+   
+    PayHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"PayHeaderView" owner:self options:nil].firstObject;
   
     headerView.order = self.order;
 
      self.tableView.tableHeaderView =  headerView;
+    
 }
 
 #pragma mark : UITableViewDelegate,UITableViewDataSource

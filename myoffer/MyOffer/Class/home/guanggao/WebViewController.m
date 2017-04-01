@@ -154,7 +154,9 @@
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
     [self.hud hideAnimated:YES];
-}
+    
+
+ }
 
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
