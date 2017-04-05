@@ -30,7 +30,7 @@
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = XCOLOR_WHITE;
         [self  addSubview:self.bgView];
-        self.bgView.layer.cornerRadius = 5;
+        self.bgView.layer.cornerRadius = CORNER_RADIUS;
         self.bgView.layer.borderColor =  XCOLOR(204, 204, 204).CGColor;
         self.bgView.layer.borderWidth = 0.5;
         
@@ -51,7 +51,7 @@
         //7、选择边框
         self.selectBtn =[[UIButton alloc] init];
         [self.selectBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        self.selectBtn.layer.cornerRadius = 5;
+        self.selectBtn.layer.cornerRadius = CORNER_RADIUS;
         self.selectBtn.layer.borderColor = XCOLOR_RED.CGColor;
         [self addSubview:self.selectBtn];
         

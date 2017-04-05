@@ -52,7 +52,7 @@
         UIButton *reloadBtn =[[UIButton alloc] init];
         [reloadBtn setTitle:@"重新加载" forState:UIControlStateNormal];
         reloadBtn.backgroundColor = [UIColor lightGrayColor];
-        reloadBtn.layer.cornerRadius = 5;
+        reloadBtn.layer.cornerRadius = CORNER_RADIUS;
         [reloadBtn addTarget:self action:@selector(reloadBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:reloadBtn];
         self.reloadBtn = reloadBtn;

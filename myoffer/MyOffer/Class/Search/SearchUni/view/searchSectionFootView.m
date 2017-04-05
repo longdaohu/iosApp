@@ -32,7 +32,7 @@
         [footerBtn addTarget:self action:@selector(moreSubjectPressed:) forControlEvents:UIControlEventTouchUpInside];
         [footerBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
         footerBtn.titleLabel.font =[UIFont systemFontOfSize:15];
-        footerBtn.layer.cornerRadius = 5;
+        footerBtn.layer.cornerRadius = CORNER_RADIUS;
         footerBtn.layer.borderWidth = 1;
         footerBtn.layer.borderColor = XCOLOR_RED.CGColor;
         [self addSubview:footerBtn];

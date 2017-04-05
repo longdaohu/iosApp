@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "guid_smart.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "university_speciallity.png",
       "scale" : "2x"
     },
     {

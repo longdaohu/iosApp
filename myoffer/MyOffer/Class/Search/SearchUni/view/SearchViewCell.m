@@ -81,7 +81,7 @@
         sender.tag = i;
         [sender addTarget:self action:@selector(cellButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
         sender.frame =CGRectMake(startSize.width, startSize.height, keyWordWidth, 25);
-        sender.layer.cornerRadius = 5;
+        sender.layer.cornerRadius = CORNER_RADIUS;
         [sender setTitle:fileritem.buttonArray[i] forState:UIControlStateNormal];
         
         sender.backgroundColor = [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1];

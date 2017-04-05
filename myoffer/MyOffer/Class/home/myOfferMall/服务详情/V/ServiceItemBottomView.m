@@ -34,8 +34,7 @@
 - (void)makeUI{
     
     self.backgroundColor = XCOLOR_WHITE;
-    UIColor *baseColor = XCOLOR(170, 170, 170);
-
+ 
     //0 line
     UIView *top_line = [UIView new];
     top_line.backgroundColor = XCOLOR_line;
@@ -85,7 +84,7 @@
     [call_btn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    //1 价格
+    //6 价格
     UILabel *zi_Lab = [[UILabel alloc] init];
     zi_Lab.font = [UIFont systemFontOfSize:12];
     self.zi_Lab = zi_Lab;

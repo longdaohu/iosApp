@@ -14,6 +14,7 @@
 @property(nonatomic,strong)UIImageView *coverView;
 @property(nonatomic,strong)UILabel *name;
 @property(nonatomic,strong)UILabel *price;
+@property(nonatomic,strong)UIView *top_line;
 @property(nonatomic,strong)UILabel *line;
 @property(nonatomic,strong)UILabel *display_price;
 @property(nonatomic,strong)UILabel *present_Value;
@@ -25,7 +26,7 @@
 
 @implementation ServiceSKUCell
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView  SKU_Frame:(ServiceSKUFrame *)SKU_Frame{
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath SKU_Frame:(ServiceSKUFrame *)SKU_Frame{
 
      ServiceSKUCell *cell =[tableView dequeueReusableCellWithIdentifier:@"SKU"];
     
@@ -39,6 +40,7 @@
     
     cell.SKU_Frame = SKU_Frame;
     
+    cell.top_line.hidden =  indexPath.row != 0;
     
     return cell;
     
@@ -62,6 +64,12 @@
     
     UIColor *baseColor = XCOLOR(170, 170, 170);
 
+    // 0 、 分隔线
+    UIView *top_line = [UIView new];
+    self.top_line = top_line;
+    top_line.backgroundColor = XCOLOR_line;
+    [self.contentView addSubview:top_line];
+    
     // 1 、 cover图片
     UIImageView *coverView = [[UIImageView alloc] init];
      self.coverView = coverView;
@@ -148,10 +156,10 @@
     }
 
     
-    
     self.present_Value.text = SKU_Frame.SKU.comment_present[@"value"];
     
     
+    self.top_line.frame = SKU_Frame.top_line_Frame;
     self.coverView.frame = SKU_Frame.cover_Frame;
     self.zheView.frame = SKU_Frame.zhe_Frame;
     self.name.frame = SKU_Frame.name_Frame;
@@ -163,8 +171,6 @@
     
     
 }
-
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

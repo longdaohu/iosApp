@@ -73,8 +73,15 @@
 
 - (void)makeUI:(CGRect)frame{
 
-    self.bottomView = [[UIView alloc] init];
+    //国家地区View 用于存放子VIEW
+    self.bottomView = [UIView new];
     [self addSubview:self.bottomView];
+    CGFloat bottomX = 0;
+    CGFloat bottomY = AdjustF(160.f) + 10;
+    CGFloat bottomW = frame.size.width;
+    CGFloat bottomH = frame.size.height - bottomY;
+    self.bottomView.frame = CGRectMake(bottomX, bottomY, bottomW,bottomH);
+    
     
     for (NSInteger i = 0 ; i < self.countries.count; i++) {
         
@@ -93,12 +100,6 @@
     }
     
     
-    CGFloat bottomX = 0;
-    CGFloat bottomY = AdjustF(160.f) + 10;
-    CGFloat bottomW = frame.size.width;
-    CGFloat bottomH = frame.size.height - bottomY;
-    self.bottomView.frame = CGRectMake(bottomX, bottomY, bottomW,bottomH);
-    
     
     CGFloat itemW =  bottomW / 3;
     CGFloat itemH =  bottomH;
@@ -113,6 +114,7 @@
     }
     
  
+    //底部分隔线
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, frame.size.height - 1, frame.size.width, 1)];
     line.backgroundColor = XCOLOR_line;
     [self addSubview:line];

@@ -24,7 +24,6 @@
     CGFloat header_conentent_X = margin_small;
     CGFloat header_conentent_Y = 0;
     CGFloat header_conentent_W = headerW - header_conentent_X * 2;
-
     
     //1、服务名称
     CGFloat nameX = margin_small;
@@ -170,7 +169,7 @@
     self.thirdFrame= CGRectMake(third_line_X, third_line_Y, third_line_W, sthird_line_H);
     
     
-//     11、买赠
+    //  11、买赠
     CGFloat present_X = nameX;
     CGFloat present_Y = CGRectGetMaxY(self.thirdFrame);
     CGFloat present_W = nameW;
@@ -182,7 +181,7 @@
     }
     self.presentFrame= CGRectMake(present_X, present_Y, present_W, present_H);
     
-//     12、买赠描述
+    //  12、买赠描述
     CGFloat present_disc_X = nameX;
     CGFloat present_disc_Y = CGRectGetMaxY(self.presentFrame);
     CGFloat present_disc_W = nameW;
@@ -198,14 +197,17 @@
     
  
     
+    //header中间显示内容区域
     CGFloat header_conentent_H = CGRectGetMaxY(self.presentDisc_Frame) + margin_small * 2;
     self.header_BgViewFrame =  CGRectMake( header_conentent_X, header_conentent_Y, header_conentent_W, header_conentent_H);
     
     
+    //headerFrame
     headerH =  CGRectGetMaxY(self.header_BgViewFrame) + margin_small;
     self.headerViewFrame = CGRectMake( headerX, headerY, headerW, headerH);
     
     
+    //底部View用于显示底色
     CGFloat header_bottom_X = 0;
     CGFloat header_bottom_Y = 60;
     CGFloat header_bottom_W = headerW;
@@ -264,7 +266,6 @@
         [temp_Arr addObject:[NSValue valueWithCGRect:optionFrame]];
         
         itemX += (itemW + padding);   //起点 增加
-        
  
     }
     

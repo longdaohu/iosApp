@@ -10,6 +10,7 @@
 @class ServiceSKU;
 @interface ServiceSKUFrame : NSObject
 @property(nonatomic,strong)ServiceSKU *SKU;
+@property(nonatomic,assign)CGRect   top_line_Frame;
 @property(nonatomic,assign)CGRect   name_Frame;
 @property(nonatomic,assign)CGRect   zhe_Frame;
 @property(nonatomic,assign)CGRect   cover_Frame;

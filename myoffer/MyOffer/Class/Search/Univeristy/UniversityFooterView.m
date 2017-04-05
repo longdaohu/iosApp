@@ -27,7 +27,7 @@
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
      
         UIButton *subjectBtn = [[UIButton alloc] init];
-        subjectBtn.layer.cornerRadius = 4;
+        subjectBtn.layer.cornerRadius = CORNER_RADIUS;
         subjectBtn.layer.borderWidth = 1;
         subjectBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
         [subjectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -41,7 +41,7 @@
         
         UIButton *rateBtn = [[UIButton alloc] init];
         rateBtn.tag = 11;
-        rateBtn.layer.cornerRadius = 4;
+        rateBtn.layer.cornerRadius = CORNER_RADIUS;
         rateBtn.backgroundColor = XCOLOR_RED;
         [rateBtn setTitle:@"测试我的入学率" forState:UIControlStateNormal];
         [rateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -59,7 +59,7 @@
         
         UIButton *ApplyBtn = [[UIButton alloc] init];
         ApplyBtn.tag = 12;
-        ApplyBtn.layer.cornerRadius = 4;
+        ApplyBtn.layer.cornerRadius = CORNER_RADIUS;
         ApplyBtn.backgroundColor = XCOLOR_RED;
         [ApplyBtn setTitle:@"免费申请" forState:UIControlStateNormal];
         [ApplyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

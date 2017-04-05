@@ -67,7 +67,7 @@
         
         self.cancelBtn = [[UIButton alloc] init];
         self.cancelBtn.tag = 9;
-        self.cancelBtn.layer.cornerRadius = 5;
+        self.cancelBtn.layer.cornerRadius = CORNER_RADIUS;
         self.cancelBtn.layer.masksToBounds = YES;
         [self.cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
         self.cancelBtn.titleLabel.font = [UIFont systemFontOfSize:18];

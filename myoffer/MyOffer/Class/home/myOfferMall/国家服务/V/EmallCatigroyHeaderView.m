@@ -10,8 +10,11 @@
 
 @interface EmallCatigroyHeaderView ()
 @property(nonatomic,strong)NSArray *lines;
+//上部
 @property(nonatomic,strong)UIView *upView;
+//下部
 @property(nonatomic,strong)UIView *bottomView;
+//国家地区名称
 @property(nonatomic,strong)UILabel *countryLab;
 
 
@@ -20,10 +23,8 @@
 
 @implementation EmallCatigroyHeaderView
 + (instancetype)headerViewWithFrame:(CGRect)frame{
-
     
     EmallCatigroyHeaderView *headerView = [[EmallCatigroyHeaderView alloc] initWithFrame:frame];
-    
     
     return headerView;
 }
@@ -58,7 +59,6 @@
     leftLine.backgroundColor = XCOLOR_WHITE;
     [upView addSubview:leftLine];
     
-    
     UIView *rightLine = [[UIView alloc] init];
     rightLine.backgroundColor = XCOLOR_WHITE;
     [upView addSubview:rightLine];
@@ -68,7 +68,7 @@
     
     UIView *bottomView = [[UIView alloc] init];
     self.bottomView = bottomView;
-    bottomView.backgroundColor = XCOLOR_LIGHTGRAY;
+    bottomView.backgroundColor = XCOLOR_BG;
     [self addSubview:bottomView];
     
     

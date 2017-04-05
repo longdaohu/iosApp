@@ -16,7 +16,7 @@
 #import "ServiceItemViewController.h"
 #import "EmallCatigoryViewController.h"
 #import "HomeSectionHeaderView.h"
-
+#import "WebViewController.h"
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -36,13 +36,8 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     
     [self makeUI];
     
@@ -107,6 +102,8 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+        
+        //加载失败退出页面
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     
@@ -120,6 +117,7 @@
         
         return ;
     }
+    
     
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
     NSMutableArray *items = [NSMutableArray array];
@@ -135,6 +133,7 @@
     //轮播图匹配数据
     self.autoLoopView.titlesGroup = [self.sevice.banners valueForKey:@"title"];
     self.autoLoopView.imageURLStringsGroup = [self.sevice.banners valueForKey:@"thumbnail"];
+    
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
@@ -162,9 +161,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
-    
-    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView SKU_Frame:itemFrame];
+    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:self.SKU_frames[indexPath.row]];
     
      return cell;
 }
@@ -206,6 +203,8 @@
 }
 
 
+
+#pragma mark : 事件处理
 - (void)casePushEmallCatigory:(NSString *)countryName{
     
     
@@ -222,15 +221,25 @@
  
     NSString *appStr = @"app://";
     
+    //url 包含 app://跳转 ServiceItemViewController
+    
     if ([banner.url containsString:@"app://"]) {
         
         NSString *item = [banner.url substringWithRange:NSMakeRange(appStr.length, banner.url.length - appStr.length)];
         
         item.length > 0 ?  [self casePushServiceItemViewControllerWithId:item] : nil;
         
+        return;
     }
+    
+    //url 包含 app://跳转 WebViewController
+    WebViewController *web = [[WebViewController alloc] initWithPath:banner.url];
+    
+    [self.navigationController  pushViewController:web animated:true];
+   
    
 }
+
 
 - (void)casePushServiceItemViewControllerWithId:(NSString *)service_id
 {

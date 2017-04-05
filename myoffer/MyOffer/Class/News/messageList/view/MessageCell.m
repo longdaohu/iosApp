@@ -44,7 +44,7 @@
     if (self) {
 
         self.Logo =[[UIImageView alloc] init];
-        self.Logo.layer.cornerRadius = 4;
+        self.Logo.layer.cornerRadius = CORNER_RADIUS;
         self.Logo.layer.masksToBounds = YES;
         self.Logo.image =[UIImage imageNamed:@"PlaceHolderImage"];
         self.Logo.clipsToBounds = YES;

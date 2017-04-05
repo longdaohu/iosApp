@@ -24,14 +24,6 @@
     return shareVC;
 }
 
-//+ (instancetype)shareWithAction:(shareBlock)actionBlock{
-//    
-//    ShareNViewController *shareVC =  [[ShareNViewController alloc] init];
-//    
-//    shareVC.actionBlock = actionBlock;
-//    
-//    return shareVC;
-//}
 
 - (instancetype)initWithUniversity:(UniversitydetailNew *)Uni{
     

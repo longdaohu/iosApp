@@ -45,7 +45,7 @@
     
     self.backgroundColor = XCOLOR_WHITE;
  
-    
+    //分区名称
     UILabel *titleLab = [[UILabel  alloc] init];
     titleLab.textColor = XCOLOR_BLACK;
     self.titleLab = titleLab;
@@ -53,17 +53,20 @@
     titleLab.font = [UIFont boldSystemFontOfSize:16];
     titleLab.textAlignment = NSTextAlignmentLeft;
     
+    //分区小图标
     UIImageView  *arrowView = [[UIImageView alloc] init];
     arrowView.image = [UIImage imageNamed:@"common_icon_arrow"];
     arrowView.contentMode = UIViewContentModeScaleAspectFill;
     self.arrowView = arrowView;
     [self addSubview:arrowView];
     
+    //分区分隔线
     UIView *line = [[UIView alloc] init];
     [self addSubview:line];
     self.line = line;
     line.backgroundColor = XCOLOR_line;
     
+    //点击事件
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClick)];
     [self addGestureRecognizer:tap];
     
@@ -109,15 +112,8 @@
     NSString *arrow = item.isClose ?  @"common_icon_arrow" : @"arrow_down" ;
     
     self.arrowView.image =  [UIImage imageNamed:arrow];
-
-    
-    
-/*
+      
  
-    item.itemStatus
-    改变arrow图片方向
-    
- */
     
 }
 

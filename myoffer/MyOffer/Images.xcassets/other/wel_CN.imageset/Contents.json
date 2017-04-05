@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "wel_CN.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "university_desc.png",
       "scale" : "2x"
     },
     {

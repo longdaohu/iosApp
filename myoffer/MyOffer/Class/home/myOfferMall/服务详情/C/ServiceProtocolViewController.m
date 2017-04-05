@@ -16,7 +16,6 @@
 @interface ServiceProtocolViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIView *bgView;
-//@property(nonatomic,assign)BOOL agreeToPay;
 @end
 
 @implementation ServiceProtocolViewController
@@ -39,7 +38,7 @@
 
 
 
--(void)setAgreements:(NSArray *)agreements{
+-(void)setAgreements:(NSArray *)agreements {
     
     _agreements = agreements;
     
@@ -57,20 +56,15 @@
         
         [web loadHTMLString:htmlStr baseURL:nil];
         
-        
         item.web = web;
-    }
-    
-    if (agreements.count) {
         
-        ServiceProtocalItem *item = agreements.firstObject;
-        item.isClose = true;
-        
+        item.isClose = (index == 0);
     }
+
 }
 
 
-- (void)makeUI{
+- (void)makeUI {
     
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     self.view.alpha = 0;
@@ -211,6 +205,7 @@
 
 
 #pragma mark : WKWebViewDelegate
+
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
     
@@ -241,7 +236,10 @@
     
 }
 
-- (void)showProtocalViw{
+
+#pragma mark : 事件处理
+
+- (void)showProtocalViw {
 
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -251,7 +249,7 @@
     
 }
 
--(void)HidenProtocalView{
+- (void)HidenProtocalView {
     
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -279,11 +277,7 @@
     
 }
 
-
-
 - (void)createOrder{
-  
-    
     
     NSString *path =[NSString stringWithFormat:@"GET api/account/order/create?sku_id=%@&skip=true",self.service_id];
     

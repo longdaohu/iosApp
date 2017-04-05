@@ -15,14 +15,24 @@
 #import "ServiceProtocolViewController.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
+//显示内容信息 webView
 @property(nonatomic,strong)WKWebView *web_wk;
+
 @property(nonatomic,strong)UITableView *tableView;
+//tableHeaderView
 @property(nonatomic,strong) ServiceItemHeaderView *headerView;
+
+// < !--头部图片
 @property(nonatomic,strong)UIImageView *flexView;
 @property(nonatomic,assign)CGRect flexFrame;
 @property(nonatomic,assign)CGPoint flexCenter;
+// 头部图片 -->
+
+//顶部View
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
+//底部View
 @property(nonatomic,strong)ServiceItemBottomView *bottomView;
+//显示协议
 @property(nonatomic,strong)ServiceProtocolViewController *protocalVC;
 
 @end
@@ -87,7 +97,6 @@
     self.flexFrame = self.flexView.frame;
     self.flexCenter = FlexibleView.center;
     
-    
     self.tableView.contentInset = UIEdgeInsetsMake(self.flexFrame.size.height - 60, 0, 80, 0);
     
 }
@@ -122,6 +131,7 @@
 }
 
 #pragma mark : WKWebViewDelegate  WBWebSiteDataStore
+
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
 
     [webView reload];
@@ -163,8 +173,6 @@
 }
 
 
-
-
 - (void)makeDataSource{
     
     NSString *path = [NSString  stringWithFormat:@"GET api/emall/sku/%@",self.service_id];
@@ -182,7 +190,7 @@
 
 - (void)updateUIWithresponse:(id)response{
     
-    //从这里开始
+    //每次刷新 新建WebView
     [self makeWebView];
     
  
@@ -310,8 +318,7 @@
     
     //3 顶部自定义导航栏透明度
     [self.topNavigationView scrollViewContentoffset:offersetY andContenHeight:self.flexFrame.size.height - XNAV_HEIGHT];
-    
-    self.topNavigationView.nav_Alpha =  offersetY /  (self.flexFrame.size.height - XNAV_HEIGHT);
+     self.topNavigationView.nav_Alpha =  offersetY /  (self.flexFrame.size.height - XNAV_HEIGHT);
 
     
     if (offersetY > 0) {
@@ -421,7 +428,6 @@
  
  }
  
- 
  [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
@@ -474,11 +480,22 @@
             // Done
             
         }];
-        
-        
-        
+ 
+ 
+ 
+ NSHTTPCookie *cookieWID = [NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+ @"wid" ,NSHTTPCookieName,
+ WID,NSHTTPCookieValue,
+ @"www.google.com",NSHTTPCookieDomain,
+ @"",NSHTTPCookiePath,
+ @"false",@"HttpOnly",
+ nil]];
+ 
+ 
+ 
  }
 */
+
 - (void)dealloc{
     
     KDClassLog(@"dealloc 留学服务详情");

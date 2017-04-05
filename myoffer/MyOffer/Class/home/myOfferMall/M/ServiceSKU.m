@@ -25,6 +25,7 @@
 
 - (BOOL)isZheKou{
     
+    
     return  [self.price isEqualToString:self.display_price];
 }
 

@@ -52,9 +52,8 @@
     _response = response;
     
     self.nameLabel.text = response[@"accountInfo"][@"displayname"];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:response[@"portraitUrl"]]];
-    
- 
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:response[@"portraitUrl"]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+   
 }
 
 -(void)headerViewWithUserLoginOut{

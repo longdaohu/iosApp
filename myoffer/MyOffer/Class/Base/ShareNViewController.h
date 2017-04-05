@@ -13,7 +13,6 @@ typedef void(^shareBlock)(NSString *item);
 
 @interface ShareNViewController : UIViewController
 @property(nonatomic,strong)NSDictionary *shareInfor;
-//@property(nonatomic,copy)shareBlock actionBlock;
 
 + (instancetype)shareView;
 - (instancetype)initWithUniversity:(UniversitydetailNew *)Uni;

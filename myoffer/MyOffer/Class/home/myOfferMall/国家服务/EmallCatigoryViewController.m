@@ -22,12 +22,15 @@
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,copy)NSString *current_Service;
 @property(nonatomic,strong)NSArray *current_frames;
+//<!---- 顶部下拉图片
 @property(nonatomic,strong)UIImageView *flexView;
 @property(nonatomic,assign)CGRect flexFrame;
 @property(nonatomic,assign)CGPoint flexCenter;
+// 顶部下拉图片---->
+//<！--工具条
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
 @property(nonatomic,assign)CGRect banViewFrame;
-
+//  工具条 --->
 
 @end
 
@@ -112,9 +115,10 @@
     
 }
 
+//头部下拉图片
 - (void)makeFlexiableView{
 
-    NSString *contry_img = @"emall_AU.jpeg";
+    NSString *contry_img;
     
     if ([self.country_Name containsString:@"英"]) {
         
@@ -169,7 +173,7 @@
 }
 
 
-- (void)makeDataSource{
+- (void)makeDataSource {
 
     
     NSString *subPath = [NSString stringWithFormat:@"api/emall/skus?country=%@&category=%@",self.country_Name,self.current_Service];
@@ -181,7 +185,6 @@
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
-        
         [weakSelf updateUIWithResponse:response];
         
     }];
@@ -189,7 +192,8 @@
  
 }
 
-- (void)updateUIWithResponse:(id)response{
+//更新UI
+- (void)updateUIWithResponse:(id)response {
     
     if (!response) {
         
@@ -204,7 +208,6 @@
  
     
     NSArray *skus  = [ServiceSKU mj_objectArrayWithKeyValuesArray:(NSArray *)response];
-
     
     NSMutableArray *items = [NSMutableArray array];
     
@@ -252,6 +255,7 @@
     }
     
     
+    //如果已经存在数据，就不重新加载网络请求
     if (self.current_frames.count > 0) {
         
         [self.tableView reloadData];
@@ -259,7 +263,7 @@
         return;
     }
     
-    
+    //当对应主题数组数据为空时，发送网络请求
     [self makeDataSource];
     
 }
@@ -280,9 +284,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    ServiceSKUFrame *itemFrame = self.current_frames[indexPath.row];
-    
-    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView SKU_Frame:itemFrame];
+    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame: self.current_frames[indexPath.row]];
     
     return cell;
 }
@@ -320,6 +322,9 @@
     
     self.topNavigationView.nav_Alpha =  offersetY / (self.flexView.bounds.size.height - XNAV_HEIGHT);
     
+    
+    
+    //工具条处理
     CGRect banNewRect = self.banViewFrame;
     banNewRect.origin.y = self.banViewFrame.origin.y -  offersetY;
     
@@ -329,7 +334,9 @@
     }
     self.banView.frame = banNewRect;
     
-
+    
+    
+    //下拉图片处理
     if (offersetY > 0) {
         
         
@@ -348,7 +355,6 @@
     self.flexView.frame = newRect;
     
     self.flexView.center = self.flexCenter;
-    
     
 }
 

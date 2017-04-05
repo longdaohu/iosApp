@@ -151,7 +151,6 @@
 		AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452D1E8D0403005EE15D /* ServiceProtocolViewController.m */; };
 		AE4645311E8D0CAC005EE15D /* ServiceProtocalItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
-		AE567B061C903D1100552E7A /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AE567B051C903D1100552E7A /* shareMyOffer.png */; };
 		AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56F33F1E0280E900340742 /* WYLXGroup.m */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
 		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
@@ -381,20 +380,12 @@
 		AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */; };
 		AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */; };
 		AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */; };
-		AEA24C241D5B283700DD7939 /* AU_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C141D5B283700DD7939 /* AU_en.jpg */; };
 		AEA24C251D5B283700DD7939 /* AU.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C151D5B283700DD7939 /* AU.jpg */; };
 		AEA24C261D5B283700DD7939 /* bg98.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C161D5B283700DD7939 /* bg98.png */; };
 		AEA24C271D5B283700DD7939 /* center_ban_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */; };
-		AEA24C281D5B283700DD7939 /* center_ban_EN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C181D5B283700DD7939 /* center_ban_EN.jpg */; };
 		AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */; };
-		AEA24C2A1D5B283700DD7939 /* center_ban02_EN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1A1D5B283700DD7939 /* center_ban02_EN.jpg */; };
-		AEA24C2B1D5B283700DD7939 /* guid_smart.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1B1D5B283700DD7939 /* guid_smart.png */; };
-		AEA24C2C1D5B283700DD7939 /* no_message.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1C1D5B283700DD7939 /* no_message.png */; };
 		AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */; };
-		AEA24C2E1D5B283700DD7939 /* UK_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1E1D5B283700DD7939 /* UK_en.jpg */; };
 		AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1F1D5B283700DD7939 /* UK.jpg */; };
-		AEA24C301D5B283700DD7939 /* wel_CN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C201D5B283700DD7939 /* wel_CN.png */; };
-		AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C211D5B283700DD7939 /* wel_EN.png */; };
 		AEA5FDB61E0D32C70064B1B5 /* DefaultTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */; };
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
 		AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* UniversityNew.m */; };
@@ -406,6 +397,7 @@
 		AEBA44C91E88BAB3005E923B /* ServiceSKU.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44C81E88BAB3005E923B /* ServiceSKU.m */; };
 		AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */; };
 		AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */; };
+		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
 		AED5A85A1DDEF25800E70289 /* PipeiGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A8591DDEF25800E70289 /* PipeiGroup.m */; };
 		AED5A85D1DDEF5AF00E70289 /* PipeiEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */; };
 		AED5A8601DDF062800E70289 /* PipeiCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A85F1DDF062800E70289 /* PipeiCountryView.m */; };
@@ -452,7 +444,6 @@
 		AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF4211F1BD499D100CFB45E /* libz.tbd */; };
 		AEF936D41C314AE30095E0A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D21C314AE30095E0A7 /* Default.png */; };
 		AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D31C314AE30095E0A7 /* Default@2x.png */; };
-		AEFA1F691C5A2FC7004002BD /* share_market.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEFA1F681C5A2FC7004002BD /* share_market.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -697,7 +688,6 @@
 		AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalItem.m; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
-		AE567B051C903D1100552E7A /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareMyOffer.png; path = Images.xcassets/AppIcon.appiconset/shareMyOffer.png; sourceTree = "<group>"; };
 		AE56F33E1E0280E900340742 /* WYLXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXGroup.h; sourceTree = "<group>"; };
 		AE56F33F1E0280E900340742 /* WYLXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXGroup.m; sourceTree = "<group>"; };
 		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -1119,20 +1109,12 @@
 		AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTabBarController.h; sourceTree = "<group>"; };
 		AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTabBarController.m; sourceTree = "<group>"; };
 		AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woYaoLiuXue.jpg; sourceTree = "<group>"; };
-		AEA24C141D5B283700DD7939 /* AU_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AU_en.jpg; sourceTree = "<group>"; };
 		AEA24C151D5B283700DD7939 /* AU.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AU.jpg; sourceTree = "<group>"; };
 		AEA24C161D5B283700DD7939 /* bg98.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg98.png; sourceTree = "<group>"; };
 		AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban_CN.jpg; sourceTree = "<group>"; };
-		AEA24C181D5B283700DD7939 /* center_ban_EN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban_EN.jpg; sourceTree = "<group>"; };
 		AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban02_CN.jpg; sourceTree = "<group>"; };
-		AEA24C1A1D5B283700DD7939 /* center_ban02_EN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban02_EN.jpg; sourceTree = "<group>"; };
-		AEA24C1B1D5B283700DD7939 /* guid_smart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guid_smart.png; sourceTree = "<group>"; };
-		AEA24C1C1D5B283700DD7939 /* no_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_message.png; sourceTree = "<group>"; };
 		AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHolderImage.png; sourceTree = "<group>"; };
-		AEA24C1E1D5B283700DD7939 /* UK_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK_en.jpg; sourceTree = "<group>"; };
 		AEA24C1F1D5B283700DD7939 /* UK.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UK.jpg; sourceTree = "<group>"; };
-		AEA24C201D5B283700DD7939 /* wel_CN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_CN.png; sourceTree = "<group>"; };
-		AEA24C211D5B283700DD7939 /* wel_EN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wel_EN.png; sourceTree = "<group>"; };
 		AEA5FDB21E0D32C70064B1B5 /* DefaultTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTableView.h; sourceTree = "<group>"; };
 		AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTableView.m; sourceTree = "<group>"; };
 		AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyDataView.h; sourceTree = "<group>"; };
@@ -1153,6 +1135,7 @@
 		AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSKUCell.m; sourceTree = "<group>"; };
 		AEBA44CF1E88C38C005E923B /* ServiceSKUFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSKUFrame.h; sourceTree = "<group>"; };
 		AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSKUFrame.m; sourceTree = "<group>"; };
+		AEC2B6141E948C5300631F2C /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareMyOffer.png; sourceTree = "<group>"; };
 		AED5A8581DDEF25800E70289 /* PipeiGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiGroup.h; path = ../controller/PipeiGroup.h; sourceTree = "<group>"; };
 		AED5A8591DDEF25800E70289 /* PipeiGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiGroup.m; path = ../controller/PipeiGroup.m; sourceTree = "<group>"; };
 		AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiEditCell.h; path = ../controller/PipeiEditCell.h; sourceTree = "<group>"; };
@@ -1235,7 +1218,6 @@
 		AEF4211F1BD499D100CFB45E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AEF936D21C314AE30095E0A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AEF936D31C314AE30095E0A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		AEFA1F681C5A2FC7004002BD /* share_market.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = share_market.jpg; sourceTree = "<group>"; };
 		DAF97F809FE91DF51B65AFA9 /* libPods-MyOffer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyOffer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02B30ECEAFCB4EF5650AED2 /* Pods-MyOffer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOffer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3119,23 +3101,15 @@
 			isa = PBXGroup;
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
-				AEA24C141D5B283700DD7939 /* AU_en.jpg */,
 				AEA24C151D5B283700DD7939 /* AU.jpg */,
 				AEA24C161D5B283700DD7939 /* bg98.png */,
 				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
-				AEA24C181D5B283700DD7939 /* center_ban_EN.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
-				AEA24C1A1D5B283700DD7939 /* center_ban02_EN.jpg */,
-				AEA24C1B1D5B283700DD7939 /* guid_smart.png */,
-				AEA24C1C1D5B283700DD7939 /* no_message.png */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
-				AEA24C1E1D5B283700DD7939 /* UK_en.jpg */,
 				AEA24C1F1D5B283700DD7939 /* UK.jpg */,
-				AEA24C201D5B283700DD7939 /* wel_CN.png */,
 				AE86B2321E8A364000BF2451 /* emall_HK.jpeg */,
 				AE86B2331E8A364000BF2451 /* emall_AU.jpeg */,
 				AE86B2341E8A364000BF2451 /* emall_UK.jpeg */,
-				AEA24C211D5B283700DD7939 /* wel_EN.png */,
 				AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */,
 			);
 			path = ImageFile;
@@ -3362,8 +3336,7 @@
 		AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */ = {
 			isa = PBXGroup;
 			children = (
-				AEFA1F681C5A2FC7004002BD /* share_market.jpg */,
-				AE567B051C903D1100552E7A /* shareMyOffer.png */,
+				AEC2B6141E948C5300631F2C /* shareMyOffer.png */,
 				AEF936D21C314AE30095E0A7 /* Default.png */,
 				AEF936D31C314AE30095E0A7 /* Default@2x.png */,
 				AEEA71621BE1D1830015C42B /* Visualbg.jpg */,
@@ -3451,11 +3424,9 @@
 				AEA249BB1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib in Resources */,
 				AE2D5E8E1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib in Resources */,
 				AE777CBF1D75A0A300FB1FD4 /* Uni-au.jpg in Resources */,
-				AEA24C311D5B283700DD7939 /* wel_EN.png in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
-				AEA24C2C1D5B283700DD7939 /* no_message.png in Resources */,
 				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
 				AEA24A061D5B224E00DD7939 /* CatigaryCityCollectionCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
@@ -3468,13 +3439,12 @@
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
 				AEF421021BD4988B00CFB45E /* UMSCommentInputControlleriPad.xib in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
-				AEA24C2B1D5B283700DD7939 /* guid_smart.png in Resources */,
 				AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */,
 				AE86B2371E8A364000BF2451 /* emall_UK.jpeg in Resources */,
 				AEA24B891D5B25E000DD7939 /* RankTypeTableViewCell.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
-				AEA24C2A1D5B283700DD7939 /* center_ban02_EN.jpg in Resources */,
+				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
 				AEF421071BD4988B00CFB45E /* UMSShareListController.xib in Resources */,
@@ -3499,13 +3469,11 @@
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
 				AEA24B241D5B251800DD7939 /* NewForgetPasswdViewController.xib in Resources */,
-				AEA24C301D5B283700DD7939 /* wel_CN.png in Resources */,
 				AEF421031BD4988B00CFB45E /* UMShareEditViewController.xib in Resources */,
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
 				AE1FD74A1D5C929500FFD5A8 /* Pre-comp 1_0008.png in Resources */,
 				AEA24B051D5B24D200DD7939 /* ChangePasswordViewController.xib in Resources */,
 				AEA249C11D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib in Resources */,
-				AEFA1F691C5A2FC7004002BD /* share_market.jpg in Resources */,
 				AEA24A0B1D5B224E00DD7939 /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
 				AEF421081BD4988B00CFB45E /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -3514,20 +3482,17 @@
 				AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
-				AE567B061C903D1100552E7A /* shareMyOffer.png in Resources */,
 				AE1FD73A1D5C929500FFD5A8 /* Pre-comp 1_00022.png in Resources */,
 				AEF420FE1BD4988B00CFB45E /* UMSocialLocalizable.strings in Resources */,
 				AEA24B981D5B25E000DD7939 /* UniversityCourseCell.xib in Resources */,
 				AE1FD7431D5C929500FFD5A8 /* Pre-comp 1_00030.png in Resources */,
 				AE1FD7351D5C929500FFD5A8 /* Pre-comp 1_00018.png in Resources */,
-				AEA24C281D5B283700DD7939 /* center_ban_EN.jpg in Resources */,
 				AEE9FAE51DC87BDD00D732A7 /* LeftMenuHeaderView.xib in Resources */,
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
 				AEA24C261D5B283700DD7939 /* bg98.png in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
 				AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */,
 				AEB61B6B1E6D00370096BC12 /* CatigoryRankStyleCell.xib in Resources */,
-				AEA24C2E1D5B283700DD7939 /* UK_en.jpg in Resources */,
 				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
 				AE8B15A81DFE7B75007EF963 /* Uni-USA.jpg in Resources */,
 				AEA24BF21D5B266A00DD7939 /* XWGJnodataView.xib in Resources */,
@@ -3557,7 +3522,6 @@
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
 				AE7825DE1D70296F00AA4EF4 /* UniversityRightView.xib in Resources */,
 				AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */,
-				AEA24C241D5B283700DD7939 /* AU_en.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -163,4 +163,57 @@
  
 }
 
+
+/*
+
+
+- (NSArray *)frameWithOptions:(NSArray *)options{
+    
+    NSMutableArray *temp_Arr = [NSMutableArray array];
+    
+    //第一个 label的起点
+    CGFloat itemX = 0;
+    CGFloat itemY = 0;
+    CGFloat itemW = 0;
+    CGFloat itemH = 40;
+    //间距
+    CGFloat padding = 10.0;
+    
+    CGFloat MAXWidth = self.nameFrame.size.width;
+    
+    CGFloat MinWidth =  self.nameFrame.size.width * 0.25;
+    
+    for (int i = 0; i < options.count; i ++) {
+        
+        
+        NSDictionary *option = options[i];
+        
+        itemW = [option[@"value"]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16]].width + padding;
+        
+        itemW = itemW <  MinWidth ? MinWidth : itemW;
+        
+        itemW = itemW > MAXWidth ? MAXWidth : itemW;
+        
+        if (MAXWidth - itemX < itemW) {
+            
+            itemY += (itemH + padding);
+            
+            itemX = 0;
+        }
+        
+        
+        CGRect  optionFrame =  CGRectMake(itemX, itemY, itemW, itemH);
+        
+        [temp_Arr addObject:[NSValue valueWithCGRect:optionFrame]];
+        
+        itemX += (itemW + padding);   //起点 增加
+        
+    }
+    
+    
+    return  [temp_Arr copy];
+}
+*/
+
+
 @end

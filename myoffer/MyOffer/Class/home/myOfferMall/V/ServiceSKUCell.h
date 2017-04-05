@@ -15,6 +15,6 @@
 
 
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView  SKU_Frame:(ServiceSKUFrame *)SKU_Frame;
++ (instancetype)cellWithTableView:(UITableView *)tableView  indexPath:(NSIndexPath *)indexPath SKU_Frame:(ServiceSKUFrame *)SKU_Frame;
 
 @end

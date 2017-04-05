@@ -25,7 +25,7 @@
         
         self.bgView =[[UIView alloc] init];
         self.bgView.backgroundColor = XCOLOR_WHITE;
-        self.bgView.layer.cornerRadius = 5;
+        self.bgView.layer.cornerRadius = CORNER_RADIUS;
         [self addSubview:self.bgView];
         
  

@@ -14,9 +14,13 @@
 
 @property(nonatomic,copy)NSString *service_id;
 
-- (void)showProtocalViw;
 
--(void)HidenProtocalView;
+/*
+ * showProtocalViw 显示
+ * HidenProtocalView 不显示
+ */
+- (void)showProtocalViw;
+- (void)HidenProtocalView;
 
 
 @end

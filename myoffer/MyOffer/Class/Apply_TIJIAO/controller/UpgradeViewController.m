@@ -184,7 +184,7 @@ typedef enum {
     [self.view addSubview:sender];
     [sender setTitle:title forState:UIControlStateNormal];
     [sender setTitleColor:color forState:UIControlStateNormal];
-    sender.layer.cornerRadius = 4;
+    sender.layer.cornerRadius = CORNER_RADIUS;
     sender.tag                = type;
     [sender addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
   

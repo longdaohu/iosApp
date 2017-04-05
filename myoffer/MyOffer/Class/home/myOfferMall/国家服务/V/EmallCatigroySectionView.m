@@ -33,7 +33,11 @@
     
     if (!_catigories) {
         
-        _catigories = @[@"留学申请",@"签证服务",@"语言培训"];
+        _catigories = @[
+                        @"留学申请",
+                        @"签证服务",
+                        @"语言培训"
+                        ];
     }
     
     return _catigories;
@@ -71,20 +75,19 @@
         item.tag = index;
         [item addTarget:self action:@selector(itemOnclick:) forControlEvents:UIControlEventTouchUpInside];
         
+        if (index == 0) {
+            
+            self.lastBtn = item;
+            self.lastBtn.enabled = false;
+        }
+        
     }
     
     UIView *focusView = [UIView new];
     self.focusView = focusView;
     focusView.backgroundColor = XCOLOR_LIGHTBLUE;
     [self addSubview:focusView];
-    
-    
-    if (self.bannerView.subviews.count > 0) {
-        
-        self.lastBtn = (UIButton *)self.bannerView.subviews.firstObject;
-        
-        self.lastBtn.enabled = false;
-    }
+  
 
 }
 
@@ -92,10 +95,10 @@
 - (void)itemOnclick:(UIButton *)sender{
     
     
-    
     self.lastBtn.enabled = true;
     sender.enabled = false;
     self.lastBtn = sender;
+    
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
@@ -137,7 +140,7 @@
     
     CGFloat focusX = 0;
     CGFloat focusW = itemW;
-    CGFloat focusH = 5;
+    CGFloat focusH = 3;
     CGFloat focusY = banH - focusH;
     self.focusView.frame = CGRectMake(focusX, focusY, focusW, focusH);
 }
