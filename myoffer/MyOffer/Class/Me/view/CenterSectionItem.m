@@ -24,7 +24,12 @@
     
     item.titleLab.text = title;
     
+    [item.titleLab sizeToFit];
+ 
     item.countLab.text = subtitle;
+    
+    [item.countLab sizeToFit];
+
     
     return item;
 }
@@ -87,26 +92,33 @@
 {
     [super layoutSubviews];
     
-    CGFloat countHeight = self.bounds.size.height;
-    CGFloat countWidth  = self.bounds.size.width;
+    CGSize contentSize = self.bounds.size;
     
-    CGFloat iconX = 0;
-    CGFloat iconY = countHeight * 0.15;
-    CGFloat iconW = countWidth;
-    CGFloat iconH = countHeight * 0.4;
-    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
+    CGFloat icon_X = 0;
+    CGFloat icon_Y = 0;
+    CGFloat icon_W = contentSize.width;
+    CGFloat icon_H = self.iconView.image.size.height;
     
     CGFloat titleX = 0;
-    CGFloat titleY = CGRectGetMaxY(self.iconView.frame);
-    CGFloat titleW = countWidth;
-    CGFloat titleH = countHeight * 0.2;
-    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    CGFloat titleY = icon_H + 10;
+    CGFloat titleW = contentSize.width;
+    CGFloat titleH = self.titleLab.bounds.size.height;
 
     CGFloat countX = 0;
-    CGFloat countY = CGRectGetMaxY(self.titleLab.frame);
-    CGFloat countW = countWidth;
-    CGFloat countH = countHeight  * 0.2;
+    CGFloat countY = titleY + titleH;
+    CGFloat countW = contentSize.width;
+    CGFloat countH = self.countLab.bounds.size.height;
+
+    
+    CGFloat margin = contentSize.height - (countY + countH);
+    icon_Y = margin * 0.5;
+    self.iconView.frame = CGRectMake(icon_X, icon_Y, icon_W, icon_H);
+    
+    titleY  += margin * 0.5;
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    countY += margin * 0.5;
     self.countLab.frame = CGRectMake(countX, countY, countW, countH);
+
     
     self.touchBtn.frame = self.bounds;
 

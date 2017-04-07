@@ -195,17 +195,10 @@
 //更新UI
 - (void)updateUIWithResponse:(id)response {
     
-    if (!response) {
-        
-        return ;
-    }
+    if (!response) return ;
     
-    if (![response isKindOfClass:[NSArray class]]) {
-        
-        return;
-    }
-    
- 
+    if (![response isKindOfClass:[NSArray class]])  return;
+  
     
     NSArray *skus  = [ServiceSKU mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     

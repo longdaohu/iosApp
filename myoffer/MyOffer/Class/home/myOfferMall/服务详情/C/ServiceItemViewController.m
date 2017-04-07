@@ -54,6 +54,7 @@
     [self makeDataSource];
     
     [self makeUI];
+    
 }
 
 
@@ -103,10 +104,7 @@
 
 - (void)makeWebView{
     
-    if (self.web_wk) {
-        
-        [self.web_wk removeFromSuperview];
-    }
+    if (self.web_wk) [self.web_wk removeFromSuperview];
     
     WKWebView *web = [[WKWebView alloc] initWithFrame:self.view.bounds];
     web.scrollView.scrollEnabled = NO;
@@ -218,7 +216,7 @@
     [self.web_wk reload];
 
     
-    self.bottomView.price = [NSString stringWithFormat:@"%@",item.price];
+    self.bottomView.price =  item.price_str;
     
     self.topNavigationView.titleName = item.name ;
     
@@ -265,7 +263,6 @@
     //隐藏收藏功能
     [nav navigationWithRightViewHiden:YES];
     self.topNavigationView = nav;
-    [nav navigationWithQQHiden:NO];
     [self.view insertSubview:nav aboveSubview:self.tableView];
     
 }
@@ -353,6 +350,8 @@
 
     if (sender.currentTitle.length) {
         
+        RequireLogin
+        
         self.protocalVC.service_id = self.service_id;
         
         [self.protocalVC showProtocalViw];
@@ -368,14 +367,7 @@
 
 - (void)navigationItemWithSender:(UIButton *)sender{
     
-    if (sender.tag ==  NavItemStyleQQ) {
-        
-        [self caseQQ];
-        
-    }else{
-        
-        [self pop];
-    }
+    [self pop];
     
 }
 

@@ -13,6 +13,9 @@
 
 @property(nonatomic,strong)GonglueItem *gonglue;
 
+@property(nonatomic,assign)CGFloat top_View_Height;
+
+
 @property(nonatomic,assign)CGFloat nav_Alpha;
 
 //传入tableView的contentOffsetY

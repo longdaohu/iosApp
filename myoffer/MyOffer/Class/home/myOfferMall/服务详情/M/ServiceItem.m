@@ -13,21 +13,23 @@
 
 + (NSDictionary *)mj_objectClassInArray{
     
-    return @{@"agreements" : @"ServiceProtocalItem"};
+    return @{@"agreements" : @"ServiceProtocalItem",@"attributes" : @"ServiceItemAttribute"};
 }
 
 
 - (NSString *)peopleDisc{
     
     NSString *item = self.comment_suit_people[@"value"];
-    
+
     return item;
 }
 
 - (NSString *)presentDisc{
     
+    
     NSString *item = self.comment_present[@"value"];
 
+    
     return item;
 }
 
@@ -65,6 +67,31 @@
     
     return country;
 }
+
+
+- (NSString *)price_str{
+    
+    return [self fomatterWithPrice:self.price];
+}
+
+- (NSString *)display_price_str{
+    
+    return [self fomatterWithPrice:self.display_price];
+}
+
+
+- (NSString *)fomatterWithPrice:(NSNumber *)price{
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *numberString = [numberFormatter stringFromNumber: price];
+    
+    NSString *final_Str = [NSString stringWithFormat:@"￥ %@",numberString];
+    
+    return  final_Str;
+}
+
 
 
 @end

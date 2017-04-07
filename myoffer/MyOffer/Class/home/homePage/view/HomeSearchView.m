@@ -20,8 +20,9 @@
         self.LeftBtn.hidden = YES;
         
         self.RightBtn =[self makeButtonWithImageName:@"search-no-result"  andTitle:GDLocalizedString(@"Discover_search")];
-        self.layer.cornerRadius = CORNER_RADIUS;
+        self.layer.cornerRadius = 22.0f;
         self.backgroundColor = XCOLOR_WHITE;
+ 
         
     }
     return self;
@@ -105,7 +106,6 @@
         
         self.width = animated ? (XSCREEN_WIDTH - 40) : 44;
         
-        self.layer.cornerRadius = animated ? 5.0f : 22.0f;
     }];
     
 }

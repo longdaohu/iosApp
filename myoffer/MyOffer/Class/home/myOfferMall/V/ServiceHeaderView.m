@@ -63,10 +63,7 @@
 
     self = [super initWithFrame:frame];
     
-    if (self) {
-        
-        [self makeUI:frame];
-    }
+    if (self) [self makeUI:frame];
     
     return self;
 }
@@ -123,10 +120,7 @@
 
 - (void)buttonClick:(NSInteger)index{
     
-    if (self.actionBlock) {
-    
-        self.actionBlock(self.countries[index]);
-    }
+    if (self.actionBlock)   self.actionBlock(self.countries[index]);
     
 }
 

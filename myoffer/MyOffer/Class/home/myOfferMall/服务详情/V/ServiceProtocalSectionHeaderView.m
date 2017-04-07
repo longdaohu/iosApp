@@ -33,10 +33,9 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        
-        [self makeUI];
-    }
+   
+    if (self) [self makeUI];
+    
     return self;
     
 }
@@ -47,7 +46,7 @@
  
     //分区名称
     UILabel *titleLab = [[UILabel  alloc] init];
-    titleLab.textColor = XCOLOR_BLACK;
+    titleLab.textColor = XCOLOR_RED;
     self.titleLab = titleLab;
     [self addSubview:titleLab];
     titleLab.font = [UIFont boldSystemFontOfSize:16];
@@ -55,7 +54,7 @@
     
     //分区小图标
     UIImageView  *arrowView = [[UIImageView alloc] init];
-    arrowView.image = [UIImage imageNamed:@"common_icon_arrow"];
+    arrowView.image = [UIImage imageNamed:@"arrow_down"];
     arrowView.contentMode = UIViewContentModeScaleAspectFill;
     self.arrowView = arrowView;
     [self addSubview:arrowView];
@@ -81,12 +80,12 @@
     CGFloat arrow_H = 24;
     CGFloat arrow_W = arrow_H;
     CGFloat arrow_Y = 0.5 * (contentSize.height - arrow_H);
-    CGFloat arrow_X = contentSize.width - arrow_W - 10;
+    CGFloat arrow_X = contentSize.width - arrow_W - 15;
     self.arrowView.frame = CGRectMake(arrow_X, arrow_Y, arrow_W, arrow_H);
     
-    CGFloat title_X = 10;
+    CGFloat title_X = 15;
     CGFloat title_Y = 0;
-    CGFloat title_W = self.bounds.size.width - title_X - arrow_W;
+    CGFloat title_W = self.bounds.size.width - title_X - arrow_W - 5;
     CGFloat title_H = self.bounds.size.height;
     self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
 
@@ -109,7 +108,7 @@
     
     [self.titleLab setText:item.title];
     
-    NSString *arrow = item.isClose ?  @"common_icon_arrow" : @"arrow_down" ;
+    NSString *arrow = item.isClose ?  @"arrow_down" : @"arrow_up" ;
     
     self.arrowView.image =  [UIImage imageNamed:arrow];
       

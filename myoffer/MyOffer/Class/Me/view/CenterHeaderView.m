@@ -44,13 +44,12 @@
         
         CenterSectionItem *pipei  = [self itemWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所" itemTag:centerItemTypepipei];
         CenterSectionItem *favor  = [self itemWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所" itemTag:centerItemTypefavor];
-        CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学服务" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
+        CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学购" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
         self.items = @[pipei,favor,service];
         
-        UIView *lineOne = [[UIView alloc] init];
-        UIView *lineTwo = [[UIView alloc] init];
+
         UIView *lineTop = [[UIView alloc] init];
-        self.lines      = @[lineOne,lineTwo,lineTop];
+        self.lines      = @[lineTop];
         for (UIView *line in self.lines) {
             
             [self addSubview:line];
@@ -122,20 +121,7 @@
     
     
     CGFloat lineW = 0.5;
-    CGFloat lineH = contentSize.height * 0.5;
-    CGFloat lineY = lineH * 0.5;
-    
-    for (NSInteger index = 0; index < self.lines.count - 1; index ++) {
-        
-        CGFloat lineX = itemW * (index + 1);
-        
-        UIView *line = self.lines[index];
-        
-        line.frame = CGRectMake(lineX, lineY,  lineW, lineH);
-        
-    }
-    
-    UIView *top =self.lines[2];
+    UIView *top =self.lines.lastObject;
     top.frame = CGRectMake(0, 0, contentSize.width, lineW);
     
 }

@@ -94,8 +94,7 @@
   
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        NSLog(@"%@",response);
-        
+         
         if ( 200 == statusCode && 0 == page) {
              weakSelf.nextPage =0;
              [weakSelf.orderGroup removeAllObjects];

@@ -48,7 +48,8 @@
     
     //价格
     CGFloat    priceX = nameX;
-    CGFloat    priceW = 100;
+    CGSize     priceSize = [SKU.price_str KD_sizeWithAttributeFont:[UIFont systemFontOfSize:18]];
+    CGFloat    priceW = priceSize.width  > 100 ? priceSize.width: 100;
     CGFloat    priceH = 18;
     CGFloat    priceY = CGRectGetMaxY(self.cover_Frame) - priceH;
     self.price_Frame = CGRectMake(priceX, priceY, priceW, priceH);

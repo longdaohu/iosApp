@@ -12,6 +12,7 @@
 @property(nonatomic,strong)UIView *bannerView;
 @property(nonatomic,strong)UIButton *lastBtn;
 @property(nonatomic,strong)UIView *focusView;
+@property(nonatomic,strong)UIView *line;
 
 @property(nonatomic,strong)NSArray *catigories;
 
@@ -47,10 +48,9 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        
-        [self makeUI];
-    }
+   
+    if (self)  [self makeUI];
+    
     return self;
 }
 
@@ -83,6 +83,11 @@
         
     }
     
+    UIView *line = [UIView new];
+    self.line = line;
+    line.backgroundColor = XCOLOR_line;
+    [self addSubview:line];
+    
     UIView *focusView = [UIView new];
     self.focusView = focusView;
     focusView.backgroundColor = XCOLOR_LIGHTBLUE;
@@ -107,11 +112,7 @@
     }];
     
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-    }
-    
+    if (self.actionBlock)  self.actionBlock(sender);
     
 }
 
@@ -137,6 +138,13 @@
         item.frame = CGRectMake(itemW * index , 0, itemW ,banH);
         
     }
+    
+    CGFloat line_X = 0;
+    CGFloat line_W = banW;
+    CGFloat line_H = 1;
+    CGFloat line_Y = banH - line_H;
+    self.line.frame = CGRectMake(line_X, line_Y, line_W, line_H);
+    
     
     CGFloat focusX = 0;
     CGFloat focusW = itemW;

@@ -25,6 +25,7 @@ typedef enum {
 #import "MessageViewController.h"
 #import "ServiceMallViewController.h"
 #import "PipeiEditViewController.h"
+#import "MyOfferServerMallViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIWebViewDelegate>
 //表头
@@ -231,7 +232,7 @@ typedef enum {
         cell.countLabel       =[[UILabel alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 40,12,30, 30)];
         [cell.contentView addSubview:cell.countLabel];
         cell.textLabel.text   = text;
-        cell.imageView.image  = icon;
+//        cell.imageView.image  = icon;
         cell.action           = action;
         
         return cell;
@@ -359,7 +360,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return  80 * XPERCENT;
+    return  100 +  XPERCENT * 12;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -562,7 +563,7 @@ typedef enum {
     
     [MobClick event:@"home_mall"];
     
-    [self pushWithVC:@"ServiceMallViewController"];
+    [self pushWithVC:NSStringFromClass([MyOfferServerMallViewController class])];
 
 }
 //跳转

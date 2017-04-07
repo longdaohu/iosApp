@@ -16,6 +16,7 @@
 @interface ServiceProtocolViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIView *bgView;
+@property(nonatomic,assign)NSInteger lastIndex;
 @end
 
 @implementation ServiceProtocolViewController
@@ -33,6 +34,8 @@
     [super viewDidLoad];
     
     [self makeUI];
+    
+    self.lastIndex = DEFAULT_NUMBER;
     
 }
 
@@ -52,27 +55,31 @@
         web.tag = index;
         
         
-        NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n ul,li,p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
+        NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n ul,li,p,img,table,hr{width:100%%!important;}\n body {margin: 0; padding: 20px 15px 30px 15px;} \n  </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
         
         [web loadHTMLString:htmlStr baseURL:nil];
         
         item.web = web;
         
-        item.isClose = (index == 0);
+        item.isClose =  !((agreements.count - 1) == index);
+        
     }
+    
+    self.lastIndex = (agreements.count - 1);
+
 
 }
 
 
 - (void)makeUI {
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
     self.view.alpha = 0;
     
     CGFloat margin = 10;
     CGFloat bg_X = margin;
     CGFloat bg_Y = XNAV_HEIGHT;
-    CGFloat bg_H = XSCREEN_HEIGHT - bg_Y - margin * 2;
+    CGFloat bg_H = XSCREEN_HEIGHT - bg_Y * 2;
     CGFloat bg_W = XSCREEN_WIDTH - margin * 2;
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(bg_X, bg_Y, bg_W, bg_H)];
     bgView.layer.cornerRadius = CORNER_RADIUS;
@@ -81,14 +88,7 @@
     [self.view addSubview:bgView];
     bgView.backgroundColor = XCOLOR_WHITE;
     
-    
-    self.tableView =[[UITableView alloc] initWithFrame:self.bgView.bounds style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
-    [self.bgView addSubview:self.tableView];
-    self.tableView.backgroundColor = XCOLOR_BG;
-    
+
     
     CGFloat header_W = bg_W;
     CGFloat header_H = 60;
@@ -99,26 +99,33 @@
     [bgView addSubview: headerLab];
     headerLab.backgroundColor = XCOLOR_WHITE;
     
-    
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header_H - 1, bg_W, 1)];
     line.backgroundColor = XCOLOR_line;
     [bgView addSubview:line];
+    
+    
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, header_H, bg_W, bg_H - header_H) style:UITableViewStyleGrouped];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView =[[UIView alloc] init];
+    [self.bgView addSubview:self.tableView];
+    self.tableView.backgroundColor = XCOLOR_BG;
     
     
     
     XWeakSelf
     ServiceProtocalBottomView *bottomView = [[NSBundle  mainBundle] loadNibNamed:@"ServiceProtocalBottomView" owner:self options:nil].lastObject;
     bottomView.actionBlock  = ^(BOOL isAgree){
-     
+        
         
         [weakSelf protocalViewWithAgree:isAgree];
     };
+    
     CGFloat bottom_H =  100;
     bottomView.frame = CGRectMake(0, bg_H - bottom_H, bg_W, bottom_H);
     [bgView addSubview:bottomView];
     
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(header_H, 0, bottom_H, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, bottom_H, 0);
 
 }
 
@@ -148,7 +155,6 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:self.bgView.bounds];
-    web_bgv.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     web_bgv.scrollEnabled = NO;
     [cell.contentView addSubview:web_bgv];
     
@@ -167,28 +173,67 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
      ServiceProtocalItem *item =  self.agreements[section];
-
+    
     XWeakSelf
     
     ServiceProtocalSectionHeaderView *sectionView = [ServiceProtocalSectionHeaderView tableView:tableView  sectionViewWithProtocalItem:item];
     
     sectionView.actionBlock = ^{
         
-        item.isClose = !item.isClose;
         
-        [weakSelf.tableView reloadData];
+        [weakSelf headerView:section];
+
     };
     
     return sectionView;
 }
 
+- (void)headerView:(NSInteger)section{
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ServiceProtocalItem *item =  self.agreements[section];
+ 
+    
+    if (self.lastIndex == section) {
+        
+        item.isClose =  !item.isClose;
+        
+        self.lastIndex = DEFAULT_NUMBER;
+        
+        
+    }else{
+    
+        if (DEFAULT_NUMBER != self.lastIndex) {
+            
+            ServiceProtocalItem *lastItem =  self.agreements[self.lastIndex];
+            
+            lastItem.isClose = YES;
+            
+        }
+        
+        
+        item.isClose  = NO;
+
+        self.lastIndex = section;
+        
+    }
+    
+    
+    [self.tableView reloadData];
+    
+    [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     ServiceProtocalItem *item = self.agreements[indexPath.section];
+
+//    if (indexPath.section == self.lastIndex) return item.height;
     
-    return  item.height;
+    
+    return item.height;
 }
 
 
@@ -226,9 +271,9 @@
         
         ServiceProtocalItem *item = self.agreements[webView.tag];
         
-        item.web.mj_h = [web_height floatValue] + 20;
+        item.web.mj_h = [web_height floatValue];
         
-        item.height = [web_height floatValue] + 20;
+        item.height = [web_height floatValue];
         
         [weakSelf.tableView reloadData];
         

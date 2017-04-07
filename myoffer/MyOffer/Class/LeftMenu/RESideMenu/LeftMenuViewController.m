@@ -133,13 +133,15 @@
  
      if(LOGIN) {
          //请求头像信息
+         
          if (self.headerView.haveIcon) return;
          
-          [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
-              
-              self.headerView.haveIcon = YES;
-              self.headerView.response = response;
+         [self startAPIRequestWithSelector:kAPISelectorAccountInfo  parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+             
+             self.headerView.haveIcon = YES;
+             self.headerView.response = response;
          }];
+         
          
      }else{
          

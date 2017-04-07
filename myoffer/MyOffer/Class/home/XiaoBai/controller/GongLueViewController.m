@@ -87,9 +87,9 @@
 
 - (void)makeUI{
     
-    [self makeFlexibleImageView];
-    
     [self makeTableView];
+
+    [self makeFlexibleImageView];
     
     [self makeTopNavigaitonView];
     
@@ -98,23 +98,49 @@
 //头部图片
 -(void)makeFlexibleImageView
 {
-    UIImageView *FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
+    UIImageView *FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
+    FlexibleImageView.clipsToBounds = true;
     self.FlexibleImageView = FlexibleImageView;
-    FlexibleImageView.contentMode = UIViewContentModeScaleAspectFill;
+    FlexibleImageView.contentMode = UIViewContentModeScaleAspectFit;
     FlexibleImageView.clipsToBounds = YES;
     FlexibleImageView.alpha = 0.1;
-    [self.view addSubview:FlexibleImageView];
-    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue.cover] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [self.view insertSubview:FlexibleImageView belowSubview:self.tableView];
+
     
-    self.oldFlexibleViewRect = FlexibleImageView.frame;
-    self.oldFlexibleViewCenter = FlexibleImageView.center;
-   
+    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue.cover]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        [self flexibleViewWithImage:image];
+    }];
+    
+
+}
+
+
+- (void)flexibleViewWithImage:(UIImage *)image{
+
+    
+    self.FlexibleImageView.mj_h =  self.FlexibleImageView.mj_w * image.size.height / image.size.width;
+    
+    self.oldFlexibleViewRect = self.FlexibleImageView.frame;
+    
+    self.oldFlexibleViewCenter = self.FlexibleImageView.center;
+    
     [UIView transitionWithView:self.FlexibleImageView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
-        FlexibleImageView.alpha = 1;
-    
+        self.FlexibleImageView.alpha = 1;
+        
     } completion:^(BOOL finished) {
+        
     }];
+    
+    
+    GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.FlexibleImageView.mj_h)];
+    headerView.top_View_Height = self.FlexibleImageView.mj_h;
+    headerView.gonglue = self.gonglue;
+    self.tableView.tableHeaderView = headerView;
+    self.headerView = headerView;
+    
+    
 }
 
 //自定义导航栏
@@ -142,11 +168,6 @@
     tableView.tableFooterView =[[UIView alloc] init];
     tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
-    
-    GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f))];
-    headerView.gonglue = self.gonglue;
-    self.tableView.tableHeaderView = headerView;
-    self.headerView = headerView;
 
 }
 
@@ -212,31 +233,44 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    CGFloat offsetY = scrollView.contentOffset.y;
     
+ 
     //1 顶部自定义导航栏
-    [self.topNavigationView  scrollViewForGongLueViewContentoffsetY:scrollView.contentOffset.y  andHeight:self.headerView.bounds.size.height - XNAV_HEIGHT];
+    [self.topNavigationView  scrollViewForGongLueViewContentoffsetY:offsetY  andHeight:self.FlexibleImageView.mj_h - XNAV_HEIGHT];
+   
     //2 自定义tableHeaderView
-    [self.headerView scrollViewDidScrollWithcontentOffsetY:scrollView.contentOffset.y];
+    [self.headerView scrollViewDidScrollWithcontentOffsetY:offsetY];
+    
      //3 顶部自定义导航栏透明度
     self.topNavigationView.nav_Alpha = self.headerView.nav_Alpha;
     
-    //4 头部图片拉伸
-    if (scrollView.contentOffset.y < 0) {
-        
-        CGRect newFrame = self.oldFlexibleViewRect;
-        newFrame.size.height = self.oldFlexibleViewRect.size.height - scrollView.contentOffset.y * 2;
-        newFrame.size.width  =self.oldFlexibleViewRect.size.width * (newFrame.size.height)/self.oldFlexibleViewRect.size.height;
-        self.FlexibleImageView.frame = newFrame;
-        self.FlexibleImageView.center = self.oldFlexibleViewCenter;
-        
-    }else{
+    
+    //下拉图片处理
+    if (offsetY > 0) {
         
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             self.FlexibleImageView.frame = self.oldFlexibleViewRect;
+            
+            self.FlexibleImageView.center = self.oldFlexibleViewCenter;
+            
         }];
         
+        
+        return;
     }
+    
+    CGRect newRect = self.oldFlexibleViewRect;
+    
+    newRect.size.height = self.oldFlexibleViewRect.size.height - offsetY * 2;
+    
+    newRect.size.width  = self.oldFlexibleViewRect.size.width * newRect.size.height / self.oldFlexibleViewRect.size.height;
+    
+    self.FlexibleImageView.frame = newRect;
+    
+    self.FlexibleImageView.center = self.oldFlexibleViewCenter;
+    
     
 }
 

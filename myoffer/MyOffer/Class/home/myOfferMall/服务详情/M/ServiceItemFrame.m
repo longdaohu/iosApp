@@ -7,6 +7,9 @@
 //
 
 #import "ServiceItemFrame.h"
+#import "ServiceItemCellFrame.h"
+#import "ServiceItemAttribute.h"
+
 
 @implementation ServiceItemFrame
 - (void)setItem:(ServiceItem *)item{
@@ -26,8 +29,8 @@
     CGFloat header_conentent_W = headerW - header_conentent_X * 2;
     
     //1、服务名称
-    CGFloat nameX = margin_small;
-    CGFloat nameY = margin_small * 2;
+    CGFloat nameX = margin_big;
+    CGFloat nameY = margin_big;
     CGFloat nameW = header_conentent_W - nameX * 2;
     CGSize  nameSize = [self contentSizeWithString:item.name MaxWidth:nameW fontSize:18];
     CGFloat nameH = nameSize.height;
@@ -36,7 +39,7 @@
     //2、价格名称
     CGFloat priceX = nameX;
     CGFloat priceY = margin_small + CGRectGetMaxY(self.nameFrame);
-    NSString *price  =  [NSString stringWithFormat:@"￥ %@",item.price];
+    NSString *price  =  item.price_str;
     CGSize  priceSize = [price KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16]];
     CGFloat priceW = priceSize.width + margin_small;
     CGFloat priceH = priceSize.height;
@@ -57,86 +60,45 @@
     self.firstlineFrame= CGRectMake(first_lineX, first_lineY, first_lineW, first_lineH);
     
     
-    //计算数组子项Frame
+    CGFloat  centerView_X = nameX;
+    CGFloat  centerView_Y = CGRectGetMaxY(self.firstlineFrame);
+    CGFloat  centerView_W = first_lineW;
+    
     CGFloat cellTitleHeight = 20;
-    NSArray *country_Options = item.country_Attibute ?  item.country_Attibute[@"options"] : @[];
-    //4、国家
-    CGFloat countryX = nameX;
-    CGFloat countryY = CGRectGetMaxY(self.firstlineFrame);
-    CGFloat countryW = nameW;
-    CGFloat countryH = 0;
-    if (country_Options.count > 0) {
-        
-        countryY += margin_big;
-        countryH = cellTitleHeight;
-    }
-    self.countryFrame = CGRectMake(countryX, countryY, countryW, countryH);
-   //5、国家子项
-    CGFloat countrybgX = nameX;
-    CGFloat countrybgY = CGRectGetMaxY(self.countryFrame);
-    CGFloat countrybgW = nameW;
-    CGFloat countrybgH = 0;
     
-    //计算数组子项Frame
-    if (country_Options.count > 0) {
+    NSMutableArray *cell_temps = [NSMutableArray array];
+    
+    CGFloat cell_top = 0;
+    NSInteger current_index = 0;
+    for (NSInteger index = 0; index < item.attributes.count; index++) {
         
-        countrybgY += margin_big;
-        
-        self.countryItemFrames = [self frameWithOptions: country_Options];
-        NSValue *lastValue =  self.countryItemFrames.lastObject;
-        countrybgH =  CGRectGetMaxY([lastValue CGRectValue]);
-        
-    }
-    self.countryBgFrame= CGRectMake(countrybgX, countrybgY, countrybgW, countrybgH);
+        current_index = index;
 
-    
-    
-    NSArray *serviceType_Options = item.serviceType_Attibute ?  item.serviceType_Attibute[@"options"] : @[];
-   //6、类型
-    CGFloat serviceTypeX = nameX;
-    CGFloat serviceTypeY = CGRectGetMaxY(self.countryBgFrame);
-    CGFloat serviceTypeW = nameW;
-    CGFloat serviceTypeH = 0;
-    if (serviceType_Options.count > 0) {
-        
-        serviceTypeY += margin_big;
-        serviceTypeH = cellTitleHeight;
+        ServiceItemCellFrame *cellView_Frame = [ServiceItemCellFrame cellWithAttribute:item.attributes[index]  maxWidth:centerView_W cellTop:cell_top];
+        cell_top = CGRectGetMaxY(cellView_Frame.cell_frame.CGRectValue);
+        [cell_temps addObject:cellView_Frame];
     }
-    self.serviceTypeFrame= CGRectMake(serviceTypeX, serviceTypeY, serviceTypeW, serviceTypeH);
     
-    //7、类型子项
-    CGFloat serviceTypeBgX = nameX;
-    CGFloat serviceTypeBgY = CGRectGetMaxY(self.serviceTypeFrame);
-    CGFloat serviceTypeBgW = nameW;
-    CGFloat serviceTypeBgH = 0;
-    
-    //计算数组子项Frame
-    if (serviceType_Options.count > 0) {
-        
-        serviceTypeBgY += margin_big;
-        self.serviceItemFrames = [self frameWithOptions: serviceType_Options];
-        NSValue *lastValue =  self.serviceItemFrames.lastObject;
-        serviceTypeBgH =  CGRectGetMaxY([lastValue CGRectValue]);
-    }
-    self.serviceTypeBgFrame= CGRectMake(serviceTypeBgX, serviceTypeBgY, serviceTypeBgW, serviceTypeBgH);
-    
+    self.centerViewCell_Frames = [cell_temps copy];
+    self.centerView_Frame = CGRectMake(centerView_X, centerView_Y, centerView_W, cell_top);
+  
     //8、分隔线
     CGFloat sec_lineX = nameX;
-    CGFloat sec_lineY = CGRectGetMaxY(self.serviceTypeBgFrame);
+    CGFloat sec_lineY = CGRectGetMaxY(self.centerView_Frame);
     CGFloat sec_lineW = first_lineW;
-    CGFloat sec_lineH = 0;
-    if (item.peopleDisc.length > 0  && item.presentDisc.length > 0) {
-        sec_lineY += margin_big;
-        sec_lineH  = first_lineH;
-    }
-    self.secondFrame= CGRectMake(sec_lineX, sec_lineY, sec_lineW, sec_lineH);
+    CGFloat sec_lineH = cell_top > 0 ? 1 : 0;
+    self.second_line_Frame= CGRectMake(sec_lineX, sec_lineY, sec_lineW, sec_lineH);
+
     
+ 
    //  9、适合人群
     CGFloat peopleX = nameX;
-    CGFloat peopleY = CGRectGetMaxY(self.secondFrame);
+    CGFloat peopleY = CGRectGetMaxY(self.second_line_Frame);
     CGFloat peopleW = nameW;
     CGFloat peopleH = 0;
-    if (item.presentDisc.length > 0) {
+    
+    if (item.peopleDisc.length > 0 && ![item.peopleDisc isEqualToString:@" "]) {
+        
         peopleY += margin_big;
         peopleH = cellTitleHeight;
     }
@@ -149,10 +111,10 @@
     CGFloat people_d_W = nameW;
     CGFloat people_d_H = 0;
     
-    if (item.presentDisc.length > 0) {
+    if (item.peopleDisc.length > 0 && ![item.peopleDisc isEqualToString:@" "]) {
         people_d_Y += margin_big;
         
-        CGSize present_Size = [self contentSizeWithString:item.peopleDisc MaxWidth:nameW fontSize:12];
+        CGSize present_Size = [self contentSizeWithString:item.peopleDisc MaxWidth:nameW fontSize:14];
         people_d_H = present_Size.height;
     }
     self.personDisc_Frame = CGRectMake(people_d_X, people_d_Y, people_d_W, people_d_H);
@@ -189,16 +151,18 @@
     if (item.presentDisc.length > 0) {
         
         present_disc_Y += margin_big;
-        
-        CGSize  present_disc_Size = [self contentSizeWithString:item.presentDisc MaxWidth:nameW fontSize:12];
+        CGSize  present_disc_Size = [self contentSizeWithString:item.presentDisc MaxWidth:nameW fontSize:14];
         present_disc_H = present_disc_Size.height;
     }
     self.presentDisc_Frame= CGRectMake(present_disc_X, present_disc_Y, present_disc_W, present_disc_H);
-    
  
     
+    
+    if (sec_lineH && !people_d_H && !present_disc_H) sec_lineH = 0;
+    self.second_line_Frame= CGRectMake(sec_lineX, sec_lineY, sec_lineW, sec_lineH);
+    
     //header中间显示内容区域
-    CGFloat header_conentent_H = CGRectGetMaxY(self.presentDisc_Frame) + margin_small * 2;
+    CGFloat header_conentent_H = CGRectGetMaxY(self.presentDisc_Frame) + margin_big;
     self.header_BgViewFrame =  CGRectMake( header_conentent_X, header_conentent_Y, header_conentent_W, header_conentent_H);
     
     

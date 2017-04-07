@@ -21,10 +21,9 @@
 
 @interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)KDProgressHUD *hud;
+@property(nonatomic,strong)WKWebView *web_wk;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
-@property(nonatomic,strong)WKWebView *web_wk;
-
 @end
 
 @implementation WebViewController

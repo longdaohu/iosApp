@@ -54,15 +54,16 @@
     CGSize contentSize = self.bounds.size;
     
     CGFloat iconx = 0;
-    CGFloat iconw = contentSize.width;
-    CGFloat icony = [self.subject.IconName containsString:@"ICON"] ? iconw * 0.15 : iconw * 0.1;
-    CGFloat iconh = [self.subject.IconName containsString:@"ICON"] ? iconw * 0.45 : iconw * 0.6;
+    CGFloat iconh = [self.subject.IconName containsString:@"ICON"] ?  36 : self.iconView.image.size.width;
+    CGFloat iconw =  iconh;
+    CGFloat icony = 0;
     self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);
+    self.iconView.center = CGPointMake(self.contentView.center.x, self.contentView.center.y - 10);
     
     CGFloat titlex = 0;
-    CGFloat titley = iconw * 0.65;
-    CGFloat titlew = iconw;
-    CGFloat titleh = iconw * 0.3;
+    CGFloat titley = contentSize.width * 0.65;
+    CGFloat titlew = contentSize.width;
+    CGFloat titleh = contentSize.width * 0.3;
     self.titleLab.frame =CGRectMake(titlex,titley, titlew, titleh);
     
     self.titleLab.font = [UIFont systemFontOfSize:0.12 *FLOWLAYOUT_SubW];

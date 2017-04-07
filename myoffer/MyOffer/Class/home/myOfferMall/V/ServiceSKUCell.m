@@ -51,10 +51,7 @@
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    if (self) {
-    
-        [self makeUI];
-    }
+    if (self) [self makeUI];
     
     return self;
 }
@@ -140,7 +137,7 @@
     
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:SKU_Frame.SKU.cover_path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.name.text = SKU_Frame.SKU.name;
-    self.price.text = [NSString stringWithFormat:@"￥ %@",SKU_Frame.SKU.price];
+    self.price.text = SKU_Frame.SKU.price_str;
     
     
     self.display_price.hidden = SKU_Frame.SKU.isZheKou;
@@ -148,13 +145,12 @@
     
     if (!SKU_Frame.SKU.isZheKou) {
         
-        self.display_price.text = [NSString stringWithFormat:@"￥ %@",SKU_Frame.SKU.display_price];
-        NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:self.display_price.text];
-        [attribueStr addAttribute:NSStrikethroughStyleAttributeName value:
-         [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, self.display_price.text.length)]; // 下划线
+         self.display_price.text = SKU_Frame.SKU.display_price_str;
+        NSRange dis_price_Rangne = NSMakeRange(0, self.display_price.text.length);
+        NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:SKU_Frame.SKU.display_price_str];
+        [attribueStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleThick)  range:dis_price_Rangne];
         self.display_price.attributedText = attribueStr;
     }
-
     
     self.present_Value.text = SKU_Frame.SKU.comment_present[@"value"];
     

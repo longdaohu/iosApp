@@ -10,9 +10,9 @@
 
 #import "ServiceItemFrame.h"
 
-typedef void(^abcBlock)(NSString *service_id);
+typedef void(^ServiceItemHeaderViewBlock)(NSString *service_id);
 
 @interface ServiceItemHeaderView : UIView
 @property(nonatomic,strong)ServiceItemFrame *itemFrame;
-@property(nonatomic,copy)abcBlock actionBlcok;
+@property(nonatomic,copy)ServiceItemHeaderViewBlock actionBlcok;
 @end

@@ -29,9 +29,9 @@
                                  (id)colorTwo.CGColor,
                                  nil];
     gradient.startPoint = CGPointMake(0, 0);
-    gradient.endPoint = CGPointMake(0, 0.3);
+    gradient.endPoint = CGPointMake(0, 0.1);
     [self.bgView.layer insertSublayer:gradient atIndex:0];
-    gradient.frame = CGRectMake(0, 0, self.bgView.bounds.size.width, 110);
+    gradient.frame = CGRectMake(0, 0, self.bgView.bounds.size.width, 120);
     
 
     
@@ -44,10 +44,9 @@
     
     BOOL agree =  [sender.currentTitle isEqualToString:@"同意"] ? true : false;
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(agree);
-    }
+    if (self.actionBlock)  self.actionBlock(agree);
+    
+     
 }
 
 

@@ -62,6 +62,8 @@
     self.tableView.tableHeaderView = headerView;
     
     [self makeAutoLoopViewAtView:headerView];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQService"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
  
 }
 
@@ -113,11 +115,8 @@
 //更新UI
 - (void)updateUIWithResponse:(id)response{
 
-    if (!response) {
-        
-        return ;
-    }
-    
+    if (!response)  return ;
+     
     
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
     NSMutableArray *items = [NSMutableArray array];
@@ -241,12 +240,47 @@
 }
 
 
+//跳转到QQ客服聊天页面
+
+-(void)caseQQ
+{
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
+        
+        [self webViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
+        
+        return ;
+    }
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？"  message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"下载" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //跳转到QQ下载页面
+        [self webViewWithpath:@"http://appstore.com/qq"];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+
+- (void)webViewWithpath:(NSString *)path{
+    
+    UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+}
+
+
 - (void)casePushServiceItemViewControllerWithId:(NSString *)service_id
 {
     ServiceItemViewController *item = [[ServiceItemViewController alloc] init];
     item.service_id = service_id;
     [self.navigationController pushViewController:item animated:true];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

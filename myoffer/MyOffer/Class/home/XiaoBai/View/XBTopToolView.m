@@ -84,7 +84,7 @@
     self.lastBtn = self.itemArr[0];
     self.lastBtn.enabled = NO;
     
-    
+   /*
     if (itemNames.count > 2) { //按钮少于3个,中间间隔没有意义
         
         for (int i = 0; i < self.itemArr.count - 1; i++) {
@@ -94,10 +94,10 @@
             [self.blackView addSubview:line];
             
         }
-        [self lineHidenIndex:0];
+       [self lineHidenIndex:0];
         
     }
-    
+    */
     
 }
 
@@ -125,10 +125,10 @@
     self.lastBtn = sender;
     self.lastBtn.enabled = NO;
     
-    
+
     [UIView transitionWithView:self.focusView duration:0.3 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
-        switch (sender.tag) {
+    /*      switch (sender.tag) {
             case 0:{
                 [self lineHidenIndex:0];
                 [self lineHidenNoIndex:1];
@@ -149,7 +149,7 @@
                 break;
         }
 
-        
+   */
         self.focusView.frame = sender.frame;
 
         self.focusView.image = self.itemImages[sender.tag];
@@ -173,7 +173,7 @@
     
 }
 
-
+/*
 -(void)lineHidenIndex:(NSInteger)index{
     UIView *line = (UIView *)self.blackView.subviews[index];
     line.alpha = 0;
@@ -184,7 +184,7 @@
     line.alpha = 1;
 }
 
-
+*/
 - (void)layoutSubviews{
 
     [super layoutSubviews];

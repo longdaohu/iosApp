@@ -7,17 +7,17 @@
 //
 
 #import "ServiceItemHeaderView.h"
+#import "ServiceItemHeaderCell.h"
+#import "ServiceItemCellFrame.h"
+
 @interface ServiceItemHeaderView ()
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UILabel *name;
 @property(nonatomic,strong)UILabel *price;
 @property(nonatomic,strong)UILabel *display_price;
 @property(nonatomic,strong)UILabel *first_line;
-@property(nonatomic,strong)UILabel *country;
-@property(nonatomic,strong)UIView *countrybgView;
-@property(nonatomic,strong)UILabel *typeLab;
-@property(nonatomic,strong)UIView *typeBgView;
-@property(nonatomic,strong)UILabel *second_line;
+@property(nonatomic,strong)UIView *centerView;
+@property(nonatomic,strong)UIView *second_line;
 @property(nonatomic,strong)UILabel *people;
 @property(nonatomic,strong)UILabel *peopleDiscLab;
 @property(nonatomic,strong)UILabel *third_line;
@@ -83,38 +83,18 @@
     self.first_line = first_line;
     first_line.backgroundColor = XCOLOR_line;
     [self addLabel:first_line textColor:baseColor fontSize:15];
+   
+    //4 attributes 部分信息
+    UIView *centerView = [UIView new];
+    self.centerView = centerView;
+    [bgView addSubview:centerView];
     
-    //4、国家
-    UILabel *country = [[UILabel alloc] init];
-    country.text = @"国家";
-    self.country = country;
-    [self addLabel:country textColor:XCOLOR_BLACK fontSize:16];
-    country.font = cellTitleFont;
-
-    //5、国家子项
-    UIView *countryBgView  = [UIView new];
-    [bgView addSubview:countryBgView];
-    self.countrybgView = countryBgView;
-    countryBgView.tag  = 1;
-
-    //6、类型
-    UILabel *typeLab = [[UILabel alloc] init];
-    self.typeLab = typeLab;
-    typeLab.text = @"类型";
-    [self addLabel:typeLab textColor:XCOLOR_BLACK fontSize:16];
-    typeLab.font = cellTitleFont;
-
-    //7、类型子项
-    UIView *typeBgView  = [UIView new];
-    [bgView addSubview:typeBgView];
-    self.typeBgView = typeBgView;
-    typeBgView.tag  = 2;
-    
-    //8、分隔线
-    UILabel *second_line = [[UILabel alloc] init];
-    self.second_line = second_line;
-    [self addLabel:second_line textColor:baseColor fontSize:15];
+    //5、分隔线
+    UIView *second_line  = [UIView new];
     second_line.backgroundColor = XCOLOR_line;
+    [self addSubview:second_line];
+    self.second_line = second_line;
+    
     //9、适合人群
     UILabel *people = [[UILabel alloc] init];
     self.people = people;
@@ -125,7 +105,7 @@
     //9、适合人群描述
     UILabel *peopleDiscLab = [[UILabel alloc] init];
     self.peopleDiscLab = peopleDiscLab;
-    [self addLabel:peopleDiscLab textColor:baseColor fontSize:12];
+    [self addLabel:peopleDiscLab textColor:baseColor fontSize:14];
     peopleDiscLab.numberOfLines = 0;
     //10、分隔线
     UILabel *third_line = [[UILabel alloc] init];
@@ -143,7 +123,7 @@
     //12、买赠描述
     UILabel *presentDiscLab = [[UILabel alloc] init];
     self.presentDiscLab = presentDiscLab;
-    [self addLabel:presentDiscLab textColor:baseColor fontSize:12];
+    [self addLabel:presentDiscLab textColor:baseColor fontSize:14];
     presentDiscLab.numberOfLines = 0;
     
 }
@@ -164,42 +144,41 @@
     
     self.name.text = itemFrame.item.name;
     
-    self.price.text = [NSString stringWithFormat:@"￥%@",itemFrame.item.price];
-    NSMutableAttributedString *attributePrice = [[NSMutableAttributedString alloc] initWithString:self.price.text];
+    self.price.text = itemFrame.item.price_str;
     
-    [attributePrice addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 1)];
-    self.price.attributedText = attributePrice;
-    
-    
-    self.display_price.text = [NSString stringWithFormat:@"原价￥%@",itemFrame.item.display_price];
+    self.display_price.text = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price_str];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.display_price.text];
     [attributeStr addAttribute:NSStrikethroughStyleAttributeName value:
      [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, self.display_price.text.length)]; // 下划线
     self.display_price.attributedText = attributeStr;
-    
-    
     self.peopleDiscLab.text = itemFrame.item.peopleDisc;
     self.presentDiscLab.text = itemFrame.item.presentDisc;
-    
-    
- 
-    NSArray *country_Options =  itemFrame.item.country_Attibute[@"options"];
-    
-    [self  itemsWithOptions:country_Options containView:self.countrybgView itemFrames:itemFrame.countryItemFrames];
-
-    NSArray *service_type_Options =  itemFrame.item.serviceType_Attibute[@"options"];
-    [self  itemsWithOptions:service_type_Options containView:self.typeBgView itemFrames:itemFrame.serviceItemFrames];
-  
     
     self.name.frame = itemFrame.nameFrame;
     self.price.frame = itemFrame.priceFrame;
     self.display_price.frame = itemFrame.display_priceFrame;
     self.first_line.frame = itemFrame.firstlineFrame;
-    self.country.frame = itemFrame.countryFrame;
-    self.countrybgView.frame = itemFrame.countryBgFrame;
-    self.typeLab.frame = itemFrame.serviceTypeFrame;
-    self.typeBgView.frame = itemFrame.serviceTypeBgFrame;
-    self.second_line.frame = itemFrame.secondFrame;
+    
+    if (self.centerView.subviews.count > 0)  [self.centerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    for (NSInteger index = 0; index < itemFrame.centerViewCell_Frames.count; index++) {
+        
+        ServiceItemHeaderCell *cell = [[ServiceItemHeaderCell alloc] init];
+        
+        cell.actionBlcok = ^(NSString *service_id){
+        
+            [self actionWithId:service_id];
+        };
+        
+        ServiceItemCellFrame *aFrame =  itemFrame.centerViewCell_Frames[index];
+        cell.cellFrame = aFrame;
+        cell.frame = aFrame.cell_frame.CGRectValue;
+        [self.centerView addSubview:cell];
+    }
+  
+    self.centerView.frame = itemFrame.centerView_Frame;
+    self.second_line.frame = itemFrame.second_line_Frame;
+    
     self.people.frame = itemFrame.peopleFrame;
     self.peopleDiscLab.frame = itemFrame.personDisc_Frame;
     self.third_line.frame = itemFrame.thirdFrame;
@@ -211,80 +190,12 @@
 }
 
 
-
-- (void)itemsWithOptions:(NSArray *)options containView:(UIView *)containView itemFrames:(NSArray *)itemsFrames{
-
+- (void)actionWithId:(NSString *)service_id{
     
-    if (containView.subviews.count > 0) {
-        
-        [containView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    }
-    
-    
-    for (NSInteger a = 0; a < options.count; a++) {
-        
-        NSDictionary *itemDic = options[a];
-        
-        UIButton *sender =  [[UIButton alloc] init];
-        UIColor *sender_Color = itemDic[@"selected"] ? XCOLOR_RED : XCOLOR(170, 170, 170);
-        sender.layer.cornerRadius = CORNER_RADIUS;
-        sender.layer.borderColor = sender_Color.CGColor;
-        sender.layer.borderWidth = 1;
-        [sender setTitleColor:sender_Color forState:UIControlStateNormal];
-        sender.enabled =  !itemDic[@"selected"];
-        [sender setTitle:itemDic[@"value"] forState:UIControlStateNormal];
-        [containView addSubview:sender];
-        sender.titleLabel.font = [UIFont systemFontOfSize:16];
-        NSValue *countryItemRect =  itemsFrames[a];
-        sender.frame = [countryItemRect CGRectValue];
-        [sender addTarget:self action:@selector(senderOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
+    if (self.actionBlcok)  self.actionBlcok(service_id);
     
 }
 
-- (void)senderOnClick:(UIButton *)sender{
-
-    UIView *temp_view = sender.superview;
-    
-    NSString *service_id;
-    
-    if (temp_view.tag == 1) {
-    
-        for (NSDictionary *option in self.itemFrame.item.country_Attibute[@"options"]) {
-            
-            if ([sender.currentTitle isEqualToString:option[@"value"]]) {
-                
-                service_id  = option[@"_id"];
-                
-                break;
-            }
-            
-        }
-        
-    }else{
-    
-        
-        for (NSDictionary *option in self.itemFrame.item.serviceType_Attibute[@"options"]) {
-            
-            if ([sender.currentTitle isEqualToString:option[@"value"]]) {
-                
-                service_id  = option[@"_id"];
-                
-                break;
-            }
-            
-        }
-        
-    }
-    
-    
-    if (self.actionBlcok) {
-        
-        self.actionBlcok(service_id);
-    }
-    
-}
 
 - (void)dealloc{
     

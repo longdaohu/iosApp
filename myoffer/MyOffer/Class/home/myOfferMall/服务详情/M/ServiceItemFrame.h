@@ -15,13 +15,8 @@
 @property(nonatomic,assign)CGRect priceFrame;
 @property(nonatomic,assign)CGRect display_priceFrame;
 @property(nonatomic,assign)CGRect firstlineFrame;
-@property(nonatomic,assign)CGRect countryFrame;
-@property(nonatomic,assign)CGRect countryBgFrame;
-@property(nonatomic,strong)NSArray *countryItemFrames;
-@property(nonatomic,assign)CGRect serviceTypeFrame;
-@property(nonatomic,assign)CGRect serviceTypeBgFrame;
-@property(nonatomic,strong)NSArray *serviceItemFrames;
-@property(nonatomic,assign)CGRect secondFrame;
+@property(nonatomic,assign)CGRect centerView_Frame;
+@property(nonatomic,assign)CGRect second_line_Frame;
 @property(nonatomic,assign)CGRect thirdFrame;
 @property(nonatomic,assign)CGRect peopleFrame;
 @property(nonatomic,assign)CGRect personDisc_Frame;
@@ -30,6 +25,8 @@
 @property(nonatomic,assign)CGRect headerViewFrame;
 @property(nonatomic,assign)CGRect header_BgViewFrame;
 @property(nonatomic,assign)CGRect header_bottomView_Frame;
+@property(nonatomic,strong)NSArray *attributeFrames;
+@property(nonatomic,strong)NSArray *centerViewCell_Frames;
 
 
 

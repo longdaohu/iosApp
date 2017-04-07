@@ -10,7 +10,6 @@
 
 @interface ServiceItemBottomView ()
 @property(nonatomic,strong)UILabel *priceLab;
-@property(nonatomic,strong)UIView *callView;
 @property(nonatomic,strong)UIView *left_line;
 @property(nonatomic,strong)UIView *right_line;
 @property(nonatomic,strong)UIButton *submit;
@@ -24,10 +23,9 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        
-        [self makeUI];
-    }
+   
+    if (self) [self makeUI];
+    
     return self;
 }
 
@@ -44,6 +42,7 @@
     //1 价格
     UILabel *priceLab = [[UILabel alloc] init];
     priceLab.font = [UIFont boldSystemFontOfSize:18];
+    priceLab.textAlignment = NSTextAlignmentCenter;
     self.priceLab = priceLab;
     [self addSubview:priceLab];
     
@@ -55,9 +54,20 @@
     self.left_line = left_line;
     
     //3
-    UIView *callView = [UIView new];
-    [self addSubview:callView];
-    self.callView = callView;
+    UIButton *call_btn = [UIButton new];
+    self.call_btn = call_btn;
+    [self addSubview:call_btn];
+    [call_btn setImage:[UIImage imageNamed:@"QQService"] forState:UIControlStateNormal];
+    call_btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [call_btn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UILabel *zi_Lab = [[UILabel alloc] init];
+    zi_Lab.font = [UIFont boldSystemFontOfSize:14];
+    zi_Lab.textAlignment = NSTextAlignmentCenter;
+    self.zi_Lab = zi_Lab;
+    zi_Lab.text = @"咨 询";
+    [self addSubview:zi_Lab];
     
     //4 line
     UIView *right_line = [UIView new];
@@ -72,25 +82,9 @@
     sender.backgroundColor = XCOLOR_RED;
     sender.layer.cornerRadius = CORNER_RADIUS;
     [self addSubview:sender];
-    [sender setTitle:@"立即购买" forState:UIControlStateNormal];
+    [sender setTitle:@"购买" forState:UIControlStateNormal];
     [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    UIButton *call_btn = [UIButton new];
-    self.call_btn = call_btn;
-    [callView addSubview:call_btn];
-    [call_btn setImage:[UIImage imageNamed:@"QQService"] forState:UIControlStateNormal];
-    call_btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [call_btn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //6 价格
-    UILabel *zi_Lab = [[UILabel alloc] init];
-    zi_Lab.font = [UIFont systemFontOfSize:12];
-    self.zi_Lab = zi_Lab;
-    zi_Lab.text  = @"咨询";
-    zi_Lab.textAlignment = NSTextAlignmentCenter;
-    [callView addSubview:zi_Lab];
     
 }
 
@@ -99,7 +93,7 @@
 
     _price = price;
     
-    self.priceLab.text = [NSString stringWithFormat:@"￥%@",price];
+    self.priceLab.text = price;
     
     [self.priceLab sizeToFit];
     
@@ -109,9 +103,12 @@
 
     [super layoutSubviews];
     
-    CGFloat margin = 20;
     
     CGSize contentSize = self.bounds.size;
+    
+    
+    CGFloat margin_min = 10;
+    CGFloat margin = contentSize.width > 350 ? 20 : 10;
     
     CGFloat top_X = 0;
     CGFloat top_Y = 0;
@@ -121,58 +118,49 @@
 
     
     CGRect priceFrame =  self.priceLab.frame;
-    priceFrame.origin.x = margin;
     priceFrame.size.height = contentSize.height;
-    priceFrame.size.width = self.priceLab.frame.size.width < 70 ? 70 : self.priceLab.frame.size.width;
+    priceFrame.size.width = contentSize.width * 0.35;
     self.priceLab.frame = priceFrame;
     
-    
-    CGFloat left_X = CGRectGetMaxX(self.priceLab.frame) + margin;
-    CGFloat left_Y = margin;
-    CGFloat left_H = contentSize.height - left_Y * 2;
+    CGFloat left_X = CGRectGetMaxX(self.priceLab.frame);
+    CGFloat left_H = 50;
     CGFloat left_W = 1;
+    CGFloat left_Y = 0.5 * (contentSize.height - left_H);
     self.left_line.frame = CGRectMake(left_X, left_Y, left_W, left_H);
     
     CGFloat call_X = CGRectGetMaxX(self.left_line.frame);
-    CGFloat call_Y = margin * 0.5;
-    CGFloat call_W = 80;
+    CGFloat call_Y = left_Y - margin_min;
+    CGFloat call_W = 50;
     CGFloat call_H = call_W;
-    self.callView.frame = CGRectMake(call_X, call_Y, call_W, call_H);
+    self.call_btn.frame = CGRectMake(call_X, call_Y, call_W, call_H);
+  
+    CGFloat zi_X = call_X;
+    CGFloat zi_Y = call_Y + call_H - margin_min;
+    CGFloat zi_W = call_W;
+    CGFloat zi_H =  20;
+    self.zi_Lab.frame = CGRectMake(zi_X, zi_Y, zi_W, zi_H);
+    
     
     CGFloat right_W = left_W;
-    CGFloat right_X = CGRectGetMaxX(self.callView.frame);
+    CGFloat right_X = CGRectGetMaxX(self.call_btn.frame);
     CGFloat right_Y = left_Y;
     CGFloat right_H = left_H;
     self.right_line.frame = CGRectMake(right_X, right_Y, right_W, right_H);
     
     CGFloat submit_X = CGRectGetMaxX(self.right_line.frame) + margin;
     CGFloat submit_W = contentSize.width - submit_X - margin;
-    CGFloat submit_Y = margin;
     CGFloat submit_H = 50;
+    CGFloat submit_Y = left_Y;
     self.submit.frame = CGRectMake(submit_X, submit_Y, submit_W, submit_H);
+  
     
-    
-    CGFloat call_btn_X = 0;
-    CGFloat call_btn_Y = 0;
-    CGFloat call_btn_W = call_W;
-    CGFloat call_btn_H = submit_H - 10;
-    self.call_btn.frame = CGRectMake(call_btn_X, call_btn_Y, call_btn_W, call_btn_H);
-    
-    CGFloat zi_X = 0;
-    CGFloat zi_Y = call_btn_H;
-    CGFloat zi_W = call_W;
-    CGFloat zi_H = 12;
-    self.zi_Lab.frame = CGRectMake(zi_X, zi_Y, zi_W, zi_H);
-
     
 }
 
 - (void)onClick:(UIButton *)sender{
 
-    if (self.acitonBlock) {
-        
-        self.acitonBlock(sender);
-    }
+    if (self.acitonBlock) self.acitonBlock(sender);
+    
 }
 
 

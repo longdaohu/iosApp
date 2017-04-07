@@ -12,7 +12,9 @@
 @property(nonatomic,copy)NSString *service_id;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *price;
+@property(nonatomic,copy)NSString *price_str;
 @property(nonatomic,copy)NSString *display_price;
+@property(nonatomic,copy)NSString *display_price_str;
 @property(nonatomic,assign)BOOL    isZheKou;
 @property(nonatomic,copy)NSString *cover_url;
 @property(nonatomic,copy)NSString *cover_path;

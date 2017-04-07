@@ -90,6 +90,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                        success:(APIClientSuccessBlock)success
                                        failure:(APIClientFailureBlock)failure {
     if (!expectedStatusCode) {
+        
         expectedStatusCode = @[@(200)];
     }
 
@@ -100,7 +101,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     NSURLSessionDataTask * task = [_URLSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *_response, NSError *error) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)_response;
         
-
+ 
         if (error) {
             KDClassLog(@"Request failed: %@", error);
             dispatch_async( dispatch_get_main_queue(),^{
@@ -116,12 +117,23 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         KDClassLog(@"Request completed: [%d], %@", (int)response.statusCode, request.URL.absoluteString);
         
+        //当返回状态为401 未登录（或状态已过期），把app退出当前登录，并不返回错误提示，当做什么事也没有发生
+        if (401 == (int)response.statusCode) {
+        
+            [[AppDelegate sharedDelegate] logout];
+            
+            return;
+            
+        };
+         
+        
+        
         NSError *JSONError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
+      
         if (JSONError) {
             KDClassLog(@"Error occurred when json serializating: %@", JSONError);
             KDClassLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-
             dispatch_async( dispatch_get_main_queue(),^{
                 
                     failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain code:kAPIClientErrorDomainCodeJSONDeserializatingError userInfo:nil]);
@@ -134,9 +146,9 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                 /*
                  *  collision  : 账号合并时手机号码已存在时，出现的特殊标识  collision显示手机号码信息
                  *  error      ：后台提示错误信息
+                 *  NSLog(@"%@ 失败信息解析  %@",result,[result class]);
                  */
                 //失败信息解析
-//                NSLog(@"%@ 失败信息解析  %@",result,[result class]);
                 
                 NSString *errorStr = result[@"collision"] ? [NSString stringWithFormat:@"phone=%@",result[@"collision"]] : result[@"error"];
                 
@@ -150,9 +162,10 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         dispatch_async( dispatch_get_main_queue(),^{
             
             success(response.statusCode, result);
-  
             
         });
+        
+        
     }];
     
     [task resume];
@@ -237,14 +250,15 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
     
-    
-    if ([[AppDelegate sharedDelegate] isLogin]) {
-        
+     
+     
+     if ([[AppDelegate sharedDelegate] isLogin]) {
+     
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-        
+     
      }
  
- 
+  
     return [self startTaskWithRequest:request expectedStatusCodes:expectedStatusCode success:success failure:failure];
     
 }
