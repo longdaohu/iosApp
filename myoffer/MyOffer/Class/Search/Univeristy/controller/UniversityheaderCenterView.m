@@ -60,25 +60,28 @@
         self.logo = logo;
         [self  addSubview:logo];
         
-        self.nameLab = [self labelWithtextColor:[UIColor blackColor] fontSize:XPERCENT * 16 numberofLine:NO];
-        self.official_nameLab = [self labelWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 11 numberofLine:YES];
         
-        self.address_detailBtn = [self buttonlWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 12];
+        
+        
+        self.nameLab = [self labelWithtextColor:XCOLOR_TITLE  fontSize:XPERCENT * 16 numberofLine:NO];
+        
+        self.official_nameLab = [self labelWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 11 numberofLine:YES];
+        
+        self.address_detailBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 12];
         [self.address_detailBtn setImage:[UIImage imageNamed:@"Uni_anthor"] forState:UIControlStateNormal];
         
-         self.websiteBtn = [self buttonlWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 12];
+         self.websiteBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 12];
         [self.websiteBtn setImage:[UIImage imageNamed:@"Uni_web"] forState:UIControlStateNormal];
          self.websiteBtn.titleLabel.lineBreakMode = NSLineBreakByClipping;
         
          self.dataView =[[UIView alloc] init];
         [self addSubview:self.dataView];
         
-        
         self.line = [[UILabel alloc] init];
-        self.line.backgroundColor = XCOLOR_BG;
+        self.line.backgroundColor = XCOLOR_line;
         [self addSubview:self.line];
         
-        self.introductionLab = [self labelWithtextColor:[UIColor lightGrayColor] fontSize:XPERCENT * 12  numberofLine:YES];
+        self.introductionLab = [self labelWithtextColor:XCOLOR_DESC fontSize:XPERCENT * 12  numberofLine:YES];
         
         UIView *gradientBgView = [[UIView alloc] init];
         [self addSubview:gradientBgView];
@@ -98,7 +101,7 @@
         self.gradient = gradient;
         
         
-        self.moreBtn = [self buttonlWithtextColor:XCOLOR_RED fontSize:XPERCENT * 15];
+        self.moreBtn = [self buttonlWithtextColor:XCOLOR_RED fontSize:16];
         [self.moreBtn setTitle:@"了解详细介绍" forState:UIControlStateNormal];
         [self.moreBtn setTitle:@"点击隐藏" forState:UIControlStateSelected];
         self.moreBtn .contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -106,6 +109,7 @@
         self.moreBtn.userInteractionEnabled = YES;
         self.moreBtn.tag = Uni_Header_CenterItemStyleMore;
         self.moreBtn.clipsToBounds = YES;
+        
     }
     return self;
 }
@@ -144,19 +148,21 @@
     UniversitydetailNew *item = itemFrame.item;
     
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
-    self.logo.frame = itemFrame.logoFrame;
+    self.logo.frame = itemFrame.logo_Frame;
     
     
     self.nameLab.text = item.name;
-    self.nameLab.frame = itemFrame.nameFrame;
+    self.nameLab.frame = itemFrame.name_Frame;
     
     
     self.official_nameLab.text = item.official_name;
     self.official_nameLab.frame = itemFrame.official_nameFrame;
     
-
-    [self.websiteBtn setTitle:[NSString stringWithFormat:@" %@",item.website] forState:UIControlStateNormal];
-    self.websiteBtn.frame = itemFrame.websiteFrame;
+    
+    NSRange wRange = [item.website rangeOfString:@"www"];
+    NSString *webStr = [item.website substringWithRange:NSMakeRange(wRange.location, item.website.length - wRange.location)];
+    [self.websiteBtn setTitle: webStr  forState:UIControlStateNormal];
+    self.websiteBtn.frame = itemFrame.website_Frame;
     
 
     [self.address_detailBtn setTitle:[NSString stringWithFormat:@" %@",item.address_detail] forState:UIControlStateNormal];
@@ -169,19 +175,17 @@
     
 
     
-    self.dataView.frame = itemFrame.dataViewFrame;
+    self.dataView.frame = itemFrame.dataView_Frame;
     self.line.frame =  itemFrame.lineFrame;
     
     self.introductionLab.text = item.introduction;
-    self.introductionLab.frame = itemFrame.introductionFrame;
+    self.introductionLab.frame = itemFrame.introduction_Frame;
     
-    self.moreBtn.frame = itemFrame.moreFrame;
+    self.moreBtn.frame = itemFrame.more_Frame;
     
     self.gradientBgView.frame = itemFrame.gradientBgViewFrame;
     self.gradient.frame       = self.gradientBgView.bounds;
-
- 
- 
+  
     
     if (self.dataView.subviews.count == 0) {
         
@@ -192,52 +196,57 @@
         
         NSNumber *regular_degree_YS = item.IELTSRequirement[@"regular_degree_total"];
         NSNumber *master_degree_YS = item.IELTSRequirement[@"master_degree_total"];
-        
         NSString *YS  = (regular_degree_YS && master_degree_YS)? [NSString stringWithFormat:@"%@:%@",regular_degree_YS,master_degree_YS]: @"-";
-        NSString *chengji =[NSString stringWithFormat:@"%@/%@",YS,TF];
         
-        NSString *TYtitle = @"学雅思/托福(本科:硕士)";
-        if([itemFrame.item.country containsString:@"美"]){
-            
-             TYtitle = @"托福(本科:硕士)";
-             chengji = TF;
+        NSString *chengji =[NSString stringWithFormat:@"%@",TF];
+        
+        NSString *TYtitle = @"托福+(本科:硕士)";
+        if (regular_degree_YS && master_degree_YS){
+        
+                TYtitle = @"雅思+(本科:硕士)";
+                chengji = YS;
         }
         
-        UniversityDetailItem *item1  = [UniversityDetailItem ViewWithImage:@"Uni_tuofu" title:TYtitle subtitle:chengji];
-        [self.dataView addSubview:item1];
+        UniversityDetailItem *ys_item  = [UniversityDetailItem ItemInitWithImage:@"Uni_tuofu"  title:TYtitle count:chengji];
+        [self.dataView addSubview:ys_item];
         
         CGFloat school_fee_floor = [item.school_fee_floor floatValue];
         CGFloat school_fee_limit = [item.school_fee_limit floatValue];
         NSString *fee =[NSString stringWithFormat:@"%.2lf - %.2lf",school_fee_floor,school_fee_limit];
-        NSString *title = @"学费(万英镑/学年";
+        NSString *fee_title = @"学费+(万英镑/学年）";
+        
         if ([itemFrame.item.country containsString:@"澳"] ) {
-            title = @"学费(万澳元/学年)";
+            fee_title = @"学费+(万澳元/学年)";
         }else if([itemFrame.item.country containsString:@"美"]){
-            title = @"学费(万美元/学年)";
+            fee_title = @"学费+(万美元/学年)";
         }
         
-        UniversityDetailItem *item2  = [UniversityDetailItem ViewWithImage:@"Uni_Fee" title:title subtitle:fee];
-        [self.dataView addSubview:item2];
+        UniversityDetailItem *fee_item  = [UniversityDetailItem ItemInitWithImage:@"Uni_Fee"  title:fee_title count:fee];
+        [self.dataView addSubview:fee_item];
         
         
         CGFloat employment_rate = [item.employment_rate floatValue];
         NSString *employment =[NSString stringWithFormat:@"%.1f%%",employment_rate*100];
-        UniversityDetailItem *item3  = [UniversityDetailItem ViewWithImage:@"Uni_foregin" title:@"就业率" subtitle:employment];
-        [self.dataView addSubview:item3];
+         UniversityDetailItem *emp_item  = [UniversityDetailItem ItemInitWithImage:@"Uni_foregin"  title:@"就业率" count:employment];
+        [self.dataView addSubview:emp_item];
         
         
         CGFloat foreign_student_rate = [item.foreign_student_rate floatValue];
         NSString *foreign_student =[NSString stringWithFormat:@"%.f%% : %.f%%",(1-foreign_student_rate)*100,foreign_student_rate*100];
-        UniversityDetailItem *item4  = [UniversityDetailItem ViewWithImage:@"Uni_rate" title:@"本地 : 国际" subtitle:foreign_student];
-        [self.dataView addSubview:item4];
+        UniversityDetailItem *foreign_item  = [UniversityDetailItem ItemInitWithImage:@"Uni_rate"  title:@"本地:国际" count:foreign_student];
+        [self.dataView addSubview:foreign_item];
         
         
+        CGFloat itemW = itemFrame.dataView_Frame.size.width * 0.25;
+        CGFloat itemH = itemFrame.dataView_Frame.size.height;
+        CGFloat itemY = 0;
+        CGFloat itemX = 0;
         for (NSInteger index = 0; index < self.dataView.subviews.count; index ++) {
+            
             UniversityDetailItem *itemView = (UniversityDetailItem *)self.dataView.subviews[index];
-            CGFloat itemW = itemFrame.dataViewFrame.size.width * 0.5;
-            CGFloat itemH = itemFrame.dataViewFrame.size.height * 0.5;
-            CGFloat itemY = itemH  * (index / 2);
-            CGFloat itemX = itemW  * (index % 2);
+            
+            itemX = itemW  * index;
+            
             itemView.frame = CGRectMake(itemX, itemY, itemW, itemH);
         }
  
@@ -250,11 +259,8 @@
     
     sender.selected = !sender.selected;
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-    }
-
+    if (self.actionBlock)  self.actionBlock(sender);
+ 
 }
 
 

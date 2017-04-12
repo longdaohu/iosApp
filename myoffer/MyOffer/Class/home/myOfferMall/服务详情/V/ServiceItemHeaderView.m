@@ -178,7 +178,6 @@
   
     self.centerView.frame = itemFrame.centerView_Frame;
     self.second_line.frame = itemFrame.second_line_Frame;
-    
     self.people.frame = itemFrame.peopleFrame;
     self.peopleDiscLab.frame = itemFrame.personDisc_Frame;
     self.third_line.frame = itemFrame.thirdFrame;

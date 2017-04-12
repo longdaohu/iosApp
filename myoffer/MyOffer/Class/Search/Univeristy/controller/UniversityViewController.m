@@ -244,7 +244,7 @@ typedef enum {
     
     
      //拉伸图片
-    NSString *countryImageName =  @"Uni-au.jpg";
+    NSString *countryImageName =  @"Uni-au";
     if ([university.country isEqualToString:@"英国"]) {
         countryImageName =  @"Uni-uk.jpg";
     }else if ([university.country isEqualToString:@"美国"]) {

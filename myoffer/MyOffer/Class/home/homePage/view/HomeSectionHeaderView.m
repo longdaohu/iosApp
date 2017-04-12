@@ -45,7 +45,7 @@
         
         self.TitleLab =[[UILabel alloc] init];
         [self addSubview:self.TitleLab];
-        self.TitleLab.font = [UIFont systemFontOfSize:15];
+        self.TitleLab.font = [UIFont systemFontOfSize:16];
         self.TitleLab.textColor = XCOLOR_DARKGRAY;
         
         

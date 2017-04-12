@@ -55,7 +55,6 @@
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
-		AE1D01201D2FCD2D005E2DEF /* YYSingleNewsBO.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011A1D2FCD2D005E2DEF /* YYSingleNewsBO.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
 		AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */; };
 		AE1FD68D1D5C852500FFD5A8 /* MyOfferArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD68C1D5C852500FFD5A8 /* MyOfferArticle.m */; };
@@ -537,8 +536,6 @@
 		AE175BBD1D79593600FD8865 /* UniDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniDetailGroup.m; sourceTree = "<group>"; };
 		AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTIViewController.h; sourceTree = "<group>"; };
 		AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTIViewController.m; sourceTree = "<group>"; };
-		AE1D01191D2FCD2D005E2DEF /* YYSingleNewsBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSingleNewsBO.h; sourceTree = "<group>"; };
-		AE1D011A1D2FCD2D005E2DEF /* YYSingleNewsBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSingleNewsBO.m; sourceTree = "<group>"; };
 		AE1D011B1D2FCD2D005E2DEF /* YYToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYToolKit.h; sourceTree = "<group>"; };
 		AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYToolKit.m; sourceTree = "<group>"; };
 		AE1FD6881D5C78E600FFD5A8 /* NotiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiItem.h; sourceTree = "<group>"; };
@@ -1483,8 +1480,6 @@
 		AE1D01131D2FCD2D005E2DEF /* AutoLoop */ = {
 			isa = PBXGroup;
 			children = (
-				AE1D01191D2FCD2D005E2DEF /* YYSingleNewsBO.h */,
-				AE1D011A1D2FCD2D005E2DEF /* YYSingleNewsBO.m */,
 				AE1D011B1D2FCD2D005E2DEF /* YYToolKit.h */,
 				AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */,
 			);
@@ -3815,7 +3810,6 @@
 				AED5A85D1DDEF5AF00E70289 /* PipeiEditCell.m in Sources */,
 				463E3AB01B23105F00E0BAF8 /* KDLoggerViewController.m in Sources */,
 				AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */,
-				AE1D01201D2FCD2D005E2DEF /* YYSingleNewsBO.m in Sources */,
 				AE1FD7541D5C929500FFD5A8 /* MJRefreshStateHeader.m in Sources */,
 				AEA24C0B1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m in Sources */,
 				AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */,

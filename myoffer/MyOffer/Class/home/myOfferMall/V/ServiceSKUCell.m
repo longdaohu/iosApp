@@ -59,7 +59,6 @@
 
 - (void)makeUI{
     
-    UIColor *baseColor = XCOLOR(170, 170, 170);
 
     // 0 、 分隔线
     UIView *top_line = [UIView new];
@@ -82,7 +81,7 @@
     // 3 、 标题
     UILabel *name = [[UILabel alloc] init];
     self.name = name;
-    [self addLable:name fontSize:16 textColor:XCOLOR_BLACK];
+    [self addLable:name fontSize:16 textColor:XCOLOR_TITLE];
     
     // 4 、 价格
     UILabel *price = [[UILabel alloc] init];
@@ -92,13 +91,13 @@
     // 5 、 分隔线
     UILabel *line = [[UILabel alloc] init];
     self.line = line;
-    [self addLable:line fontSize:18 textColor:baseColor];
+    [self addLable:line fontSize:18 textColor:XCOLOR_SUBTITLE];
     line.backgroundColor = XCOLOR_line;
     
     // 6 、原价
     UILabel *display_price = [[UILabel alloc] init];
     self.display_price = display_price;
-    [self addLable:display_price fontSize:13 textColor:baseColor];
+    [self addLable:display_price fontSize:13 textColor:XCOLOR_SUBTITLE];
     
     // 7 、 赠
     UIImageView *zengSongView = [[UIImageView alloc] init];
@@ -109,7 +108,7 @@
     // 8 、 赠送描述
     UILabel *present_Value = [[UILabel alloc] init];
     self.present_Value = present_Value;
-    [self addLable:present_Value fontSize:14 textColor:baseColor];
+    [self addLable:present_Value fontSize:14 textColor:XCOLOR_SUBTITLE];
     present_Value.numberOfLines = 0;
 
 }
@@ -136,6 +135,8 @@
     _SKU_Frame = SKU_Frame;
     
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:SKU_Frame.SKU.cover_path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    
+    
     self.name.text = SKU_Frame.SKU.name;
     self.price.text = SKU_Frame.SKU.price_str;
     
@@ -148,7 +149,8 @@
          self.display_price.text = SKU_Frame.SKU.display_price_str;
         NSRange dis_price_Rangne = NSMakeRange(0, self.display_price.text.length);
         NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:SKU_Frame.SKU.display_price_str];
-        [attribueStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleThick)  range:dis_price_Rangne];
+        [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
+
         self.display_price.attributedText = attribueStr;
     }
     
@@ -159,7 +161,7 @@
     self.coverView.frame = SKU_Frame.cover_Frame;
     self.zheView.frame = SKU_Frame.zhe_Frame;
     self.name.frame = SKU_Frame.name_Frame;
-    self.price.frame = SKU_Frame.price_Frame;
+    self.price.frame = SKU_Frame.price_Frame;  
     self.display_price.frame = SKU_Frame.display_price_Frame;
     self.present_Key.frame = SKU_Frame.present_Key_Frame;
     self.present_Value.frame = SKU_Frame.present_Value_Frame;

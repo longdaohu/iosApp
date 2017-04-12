@@ -83,12 +83,11 @@
     self.centerView_Frame = CGRectMake(centerView_X, centerView_Y, centerView_W, cell_top);
   
     //8、分隔线
-    CGFloat sec_lineX = nameX;
+    CGFloat sec_lineX = centerView_X;
     CGFloat sec_lineY = CGRectGetMaxY(self.centerView_Frame);
     CGFloat sec_lineW = first_lineW;
     CGFloat sec_lineH = cell_top > 0 ? 1 : 0;
     self.second_line_Frame= CGRectMake(sec_lineX, sec_lineY, sec_lineW, sec_lineH);
-
     
  
    //  9、适合人群

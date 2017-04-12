@@ -173,10 +173,8 @@
     
 }
 
-
-
-
 #pragma mark ——— UITableViewDelegate  UITableViewDATA
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     

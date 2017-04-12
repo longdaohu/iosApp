@@ -11,15 +11,15 @@
 
 @interface UniversityNewFrame : NSObject
 @property(nonatomic,strong)UniversitydetailNew *item;
-@property(nonatomic,assign)CGRect logoFrame;
-@property(nonatomic,assign)CGRect nameFrame;
+@property(nonatomic,assign)CGRect logo_Frame;
+@property(nonatomic,assign)CGRect name_Frame;
 @property(nonatomic,assign)CGRect official_nameFrame;
 @property(nonatomic,assign)CGRect address_detailFrame;
-@property(nonatomic,assign)CGRect websiteFrame;
-@property(nonatomic,assign)CGRect dataViewFrame;
+@property(nonatomic,assign)CGRect website_Frame;
+@property(nonatomic,assign)CGRect dataView_Frame;
 @property(nonatomic,assign)CGRect lineFrame;
-@property(nonatomic,assign)CGRect introductionFrame;
-@property(nonatomic,assign)CGRect moreFrame;
+@property(nonatomic,assign)CGRect introduction_Frame;
+@property(nonatomic,assign)CGRect more_Frame;
 @property(nonatomic,assign)CGRect gradientBgViewFrame;
 @property(nonatomic,assign)CGFloat centerHeigh;
 @property(nonatomic,assign)CGRect upViewFrame;

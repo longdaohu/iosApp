@@ -15,7 +15,6 @@
 #import "HomeSecondTableViewCell.h"
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
-#import "YYSingleNewsBO.h"
 #import "WYLXViewController.h"
 #import "MessageDetaillViewController.h"
 #import "PipeiEditViewController.h"
@@ -35,6 +34,7 @@
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
 #import "MyOfferServerMallViewController.h"
+#import "MyOfferAutoRunBanner.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -110,7 +110,7 @@
     [self makeUI];
     
     [self makeOther];
-     
+    
 }
 
 
@@ -273,22 +273,14 @@
     [self startAPIRequestWithSelector:kAPISelectorMessagePromotions  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        NSMutableArray *banner = [NSMutableArray array];
-        NSArray *banner_temps = (NSArray *)response;
         
-        [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-            new.message = banner_temps[idx];
-            new.newsTitle = @"";
-            new.index = idx;
-            [banner addObject:new];
-        }];
+        if (![response isKindOfClass:[NSArray class]] || !response) return ;
         
-        weakSelf.banner = [banner copy];
+        weakSelf.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
         
-        weakSelf.autoLoopView.imageURLStringsGroup  =  [banner valueForKey:@"imageUrl"];
+        weakSelf.autoLoopView.imageURLStringsGroup  =  [weakSelf.banner valueForKey:@"cover_url"];
         
-        weakSelf.autoLoopView.userInteractionEnabled = banner.count ? YES : NO;
+        weakSelf.autoLoopView.userInteractionEnabled = weakSelf.banner.count ? YES : NO;
         
         [weakSelf.TableView.mj_header endRefreshing];
         
@@ -451,8 +443,9 @@
     autoLoopView.currentPageDotColor = XCOLOR_RED;
     [bgView addSubview:autoLoopView];
     autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
-         YYSingleNewsBO  *item  = weakSelf.banner[index];
-        [weakSelf CaseLandingPageWithBan:item.message_url];
+        
+         MyOfferAutoRunBanner  *item  = weakSelf.banner[index];
+        [weakSelf CaseLandingPageWithBan:item.url];
         
     };
 }

@@ -130,7 +130,7 @@
     self.SKU_frames  =  [items copy];
     
     //轮播图匹配数据
-    self.autoLoopView.titlesGroup = [self.sevice.banners valueForKey:@"title"];
+//    self.autoLoopView.titlesGroup = [self.sevice.banners valueForKey:@"title"];
     self.autoLoopView.imageURLStringsGroup = [self.sevice.banners valueForKey:@"thumbnail"];
     
     

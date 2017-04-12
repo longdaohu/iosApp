@@ -29,6 +29,7 @@
 #define TIMER_COUNT 60
 #define REDSPOT_HEIGHT 18
 #define XPERCENT          XSCREEN_WIDTH/320
+#define XFONT_SIZE(size)  (XSCREEN_WIDTH <= 320 ? size - 1.0 : size)
 #define XMARGIN           XPERCENT * 8
 #define XFONT(size)        [UIFont systemFontOfSize:size]
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
@@ -46,9 +47,12 @@
 #define XCOLOR_LIGHTGRAY  [UIColor lightGrayColor]
 #define XCOLOR_BLACK [UIColor blackColor]
 #define XCOLOR_line  [UIColor colorWithRed:223.0/255 green:223.0/255 blue:223.0/255 alpha:1]
-#define XCOLOR_BG  [UIColor colorWithRed:245.0/255 green:244.0/255 blue:249.0/255 alpha:1]
-#define XCOLOR_RED  [UIColor colorWithRed:234.0/255 green:51.0/255 blue:125.0/255 alpha:1]
-#define XCOLOR_LIGHTBLUE [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1]
+#define XCOLOR_BG  [UIColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1]
+#define XCOLOR_RED  [UIColor colorWithRed:242.0/255 green:35.0/255 blue:123.0/255 alpha:1]
+#define XCOLOR_TITLE  [UIColor colorWithRed:51.0/255 green:51.0/255 blue:51.0/255 alpha:1]
+#define XCOLOR_DESC    [UIColor colorWithRed:128.0/255 green:128.0/255 blue:128.0/255 alpha:1]
+#define XCOLOR_SUBTITLE  [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:1]
+#define XCOLOR_LIGHTBLUE [UIColor colorWithRed:5.0/255 green:203.0/255 blue:249.0/255 alpha:1]
 #define XCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define XFONTNAME  @"HelveticaNeue-Light"
 #define DEFAULT_NUMBER 99999

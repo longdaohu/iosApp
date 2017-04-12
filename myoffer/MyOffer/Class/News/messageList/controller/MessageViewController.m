@@ -12,11 +12,11 @@
 #import "MessageDetaillViewController.h"
 #import "XWGJMessageFrame.h"
 #import "SDCycleScrollView.h"
-#import "YYSingleNewsBO.h"
 #import "XWGJNODATASHOWView.h"
 #import "XUToolbar.h"
 #import "MyOfferArticle.h"
 #import "MessageSectionHeaderView.h"
+#import "MyOfferAutoRunBanner.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -300,11 +300,20 @@
     self.tableView.tableHeaderView = autoLoopView;
     autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
         
-        YYSingleNewsBO  *item  = weakSelf.banner[index];
-        [weakSelf.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:item.newsId] animated:YES];
         
+        [weakSelf caseLandingPageWithIndex:index];
+ 
+
     };
 }
+
+- (void)caseLandingPageWithIndex:(NSInteger)index{
+
+    MyOfferAutoRunBanner  *item  = self.banner[index];
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:item.banner_id] animated:YES];
+
+}
+
 
 //请求Banner数据
 - (void)getAutoLoopViewData{
@@ -331,18 +340,17 @@
 //配置BannerUI
 - (void)configrationAutoLoopViewWithResponse:(id)response{
 
-    NSMutableArray *banner = [NSMutableArray array];
-    NSArray *banner_temps = (NSArray *)response;
-    [banner_temps enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        YYSingleNewsBO *new = [[YYSingleNewsBO alloc] init];
-        new.message = banner_temps[idx];
-        new.index = idx;
-        [banner addObject:new];
-    }];
     
-    self.banner = [banner copy];
-    self.autoLoopView.titlesGroup = [self.banner valueForKey:@"newsTitle"];
-    self.autoLoopView.imageURLStringsGroup = [self.banner valueForKey:@"imageUrl"];
+    if (![response isKindOfClass:[NSArray class]] || !response) return ;
+    
+    self.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
+    
+    self.autoLoopView.imageURLStringsGroup  =  [self.banner valueForKey:@"cover_url"];
+    
+    self.autoLoopView.userInteractionEnabled = self.banner.count ? YES : NO;
+  
+    self.autoLoopView.titlesGroup = [self.banner valueForKey:@"title"];
+    self.autoLoopView.imageURLStringsGroup = [self.banner valueForKey:@"cover_url"];
     [self.tableView.mj_header endRefreshing];
 }
 

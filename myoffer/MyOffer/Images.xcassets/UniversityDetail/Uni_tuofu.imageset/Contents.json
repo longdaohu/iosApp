@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Uni_tuofu@2X.png",
+      "filename" : "Uni_tuofu@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Uni_tuofu@3x.png",
       "scale" : "3x"
     }
   ],

@@ -76,27 +76,40 @@
         qsLab.numberOfLines = 0;
         self.QSrankLab = qsLab;
         [self.upView addSubview:qsLab];
-        
+        [self textShadowWithLabel:qsLab];
         
         UILabel *timesLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         timesLab.numberOfLines = 0;
         self.TIMESLab = timesLab;
         [self.upView addSubview:timesLab];
-        
+        [self textShadowWithLabel:timesLab];
+
         
         UILabel *tagOneLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         tagOneLab.numberOfLines = 0;
         self.tagOneLab = tagOneLab;
         [self.upView addSubview:tagOneLab];
+        [self textShadowWithLabel:tagOneLab];
 
         
         UILabel *tagTwoLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
         tagTwoLab.numberOfLines = 0;
         self.tagTwoLab = tagTwoLab;
         [self.upView addSubview:tagTwoLab];
+        [self textShadowWithLabel:tagTwoLab];
+
 
     }
     return self;
+}
+
+- (void)textShadowWithLabel:(UILabel *)sender{
+    //阴影颜色
+    sender.layer.shadowColor = [UIColor blackColor].CGColor;
+    sender.layer.shadowOffset = CGSizeMake(0,0);
+    sender.layer.shadowOpacity = 0.9;
+    sender.layer.shadowRadius = 2.0;
+    //        qsLab.clipsToBounds = NO;
 }
 
 - (void)setItemFrame:(UniversityNewFrame *)itemFrame
@@ -127,14 +140,14 @@
     NSString *times = [NSString stringWithFormat:@"%@\n%@",local_rank,localName];
     NSRange timesRange = [times rangeOfString:local_rank];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
-    [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, timesRange.length)];
+    [timesAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 20) range: NSMakeRange (0, timesRange.length)];
     self.TIMESLab.attributedText = timesAttri;
      
     NSString *global_rank = itemFrame.item.ranking_qs.integerValue == DEFAULT_NUMBER ? @"暂无排名" : [NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs];
     NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",global_rank];
     NSRange qsRange = [qs rangeOfString:[NSString stringWithFormat:@"%@",global_rank]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];
-    [qsAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 17) range: NSMakeRange (0, qsRange.length)];
+    [qsAttri addAttribute:NSFontAttributeName value:XFONT(XPERCENT * 20) range: NSMakeRange (0, qsRange.length)];
     self.QSrankLab.attributedText = qsAttri;
     
     

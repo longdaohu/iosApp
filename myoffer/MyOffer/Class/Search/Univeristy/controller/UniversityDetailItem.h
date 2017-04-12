@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UniversityDetailItem : UIView
-//图片
-@property(nonatomic,strong)UIImageView *iconView;
-//名称
-@property(nonatomic,strong)UILabel     *titleLab;
-//详情
-@property(nonatomic,strong)UILabel     *subtitleLab;
-+ (instancetype)ViewWithImage:(NSString *)imageName title:(NSString *)titleName subtitle:(NSString *)subName;
+
++ (instancetype)ItemInitWithImage:(NSString *)imageName title:(NSString *)title  count:(NSString *)count;
 
 @end

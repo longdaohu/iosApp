@@ -14,6 +14,7 @@
 @property(nonatomic,strong)UIButton *subjectBtn;
 @property(nonatomic,strong)UIButton *rateBtn;
 @property(nonatomic,strong)UILabel *showLab;
+@property(nonatomic,strong)CALayer *top_line;
 @end
 
 @implementation UniversityFooterView
@@ -24,13 +25,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        CALayer *top_line_layer = [CALayer layer];
+        top_line_layer.backgroundColor = XCOLOR_line.CGColor;
+        [self.layer addSublayer:top_line_layer];
+        self.top_line = top_line_layer;
+        
+        self.backgroundColor = XCOLOR_WHITE;
      
         UIButton *subjectBtn = [[UIButton alloc] init];
         subjectBtn.layer.cornerRadius = CORNER_RADIUS;
         subjectBtn.layer.borderWidth = 1;
-        subjectBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
-        [subjectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        subjectBtn.layer.borderColor = XCOLOR_RED.CGColor;
+        [subjectBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+//        [subjectBtn setTitleColor:XCOLOR_line forState:UIControlStateHighlighted];
+//        [subjectBtn addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
         [subjectBtn setTitle:@"查看所有专业" forState:UIControlStateNormal];
         [subjectBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:subjectBtn];
@@ -51,7 +59,7 @@
         rateBtn.titleLabel.font = XFONT(XPERCENT * 14);
         
         
-        UILabel *showLab = [UILabel labelWithFontsize:XPERCENT * 14 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+        UILabel *showLab = [UILabel labelWithFontsize:13 TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         showLab.hidden = YES;
         showLab.numberOfLines = 0;
         self.showLab = showLab;
@@ -130,9 +138,10 @@
     
     NSString *offerStr = @"你获得offer的难易度";
     NSString *showStri =  [NSString stringWithFormat:@"%@\n%@",offerStr,levelStr];
-    NSRange showRange = NSMakeRange(0, offerStr.length);
+    NSRange showRange = NSMakeRange(offerStr.length, showStri.length - offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
     [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18]  range:showRange];
     self.showLab.attributedText = attr;
     
 }
@@ -144,25 +153,28 @@
     
     CGSize footerSize = self.bounds.size;
     
-    CGFloat margin = 10;
+    self.top_line.frame = CGRectMake(0, 0, footerSize.width, 1);
     
-    CGFloat subX = margin;
-    CGFloat subY = margin;
-    CGFloat subW = (footerSize.width - subX * 3) * 0.5;
-    CGFloat subH = footerSize.height - 2 * subY;
-    self.subjectBtn.frame = CGRectMake(subX, subY, subW, subH);
-    
-    CGFloat rateX = CGRectGetMaxX(self.subjectBtn.frame) + margin;
-    CGFloat rateY = subY;
-    CGFloat rateW = subW;
-    CGFloat rateH = subH;
-    self.rateBtn.frame = CGRectMake(rateX, rateY , rateW, rateH);
-    
-    
- 
+    CGFloat button_hight = 50;
+    CGFloat margin = (footerSize.height - button_hight) * 0.5;
+
+    CGFloat rate_X = margin;
+    CGFloat rate_Y = margin;
+    CGFloat rate_W = (footerSize.width - rate_X * 3) * 0.5;
+    CGFloat rate_H = button_hight;
+    self.rateBtn.frame = CGRectMake(rate_X, rate_Y , rate_W, rate_H);
+   
     self.ApplyBtn.frame = self.rateBtn.frame;
     
     self.showLab.frame = self.rateBtn.frame;
+    
+    
+    CGFloat sub_X = CGRectGetMaxX(self.rateBtn.frame) + margin;
+    CGFloat sub_Y = rate_Y;
+    CGFloat sub_W = rate_W;
+    CGFloat sub_H = rate_H;
+    self.subjectBtn.frame = CGRectMake(sub_X, sub_Y, sub_W, sub_H);
+    
 
 }
 
@@ -174,5 +186,27 @@
     }
 }
 
+/*
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    
+    
+    UIButton *button = (UIButton *)object;
+    
+    if ([keyPath isEqualToString:@"highlighted"]) {
+        
+        if (button.highlighted) {
+            
+            button.layer.borderColor = XCOLOR_line.CGColor;
+            
+            return;
+        }
+        
+        button.layer.borderColor = XCOLOR_RED.CGColor;
+
+    }
+ 
+}
+
+*/
 
 @end
