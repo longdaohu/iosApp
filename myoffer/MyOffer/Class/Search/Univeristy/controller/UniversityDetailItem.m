@@ -17,6 +17,7 @@
 @property(nonatomic,strong)UILabel     *subtitleLab;
 //数字
 @property(nonatomic,strong)UILabel     *count_Lab;
+
 @property(nonatomic,strong)CALayer *bottom_line;
 @property(nonatomic,strong)CALayer *top_line;
 
@@ -50,20 +51,18 @@
         self.iconView = iconView;
         
         
-        UILabel *tilteLab = [UILabel labelWithFontsize:XPERCENT * 12 TextColor:XCOLOR_DESC TextAlignment:NSTextAlignmentCenter];
+        UILabel *tilteLab = [UILabel labelWithFontsize:XFONT_SIZE(14) TextColor:XCOLOR_DESC TextAlignment:NSTextAlignmentCenter];
         [self addSubview:tilteLab];
         tilteLab.numberOfLines = 2;
         self.titleLab = tilteLab;
         
-        UILabel *subLab  = [UILabel labelWithFontsize:XPERCENT * 10 TextColor:XCOLOR_DESC TextAlignment:NSTextAlignmentCenter];
+        UILabel *subLab  = [UILabel labelWithFontsize:XFONT_SIZE(12) TextColor:XCOLOR_DESC TextAlignment:NSTextAlignmentCenter];
         [self addSubview:subLab];
         self.subtitleLab = subLab;
 
-        UILabel *count_Lab  = [UILabel labelWithFontsize:XPERCENT * 12 TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
+        UILabel *count_Lab  = [UILabel labelWithFontsize:XFONT_SIZE(14) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         [self addSubview:count_Lab];
         self.count_Lab = count_Lab;
-        
-//        self.backgroundColor = [UIColor orangeColor];
         
         
         CALayer *top_line = [CALayer layer];
@@ -95,8 +94,10 @@
         NSArray *items = [self.title componentsSeparatedByString:fee_key];
         self.titleLab.text = items.firstObject;
         self.subtitleLab.text = items.lastObject;
+        
     }
- 
+    
+    
 }
 
 

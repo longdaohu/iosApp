@@ -60,17 +60,15 @@
         self.logo = logo;
         [self  addSubview:logo];
         
+        self.nameLab = [self labelWithtextColor:XCOLOR_TITLE  fontSize:XFONT_SIZE(18) numberofLine:NO];
         
-        
-        
-        self.nameLab = [self labelWithtextColor:XCOLOR_TITLE  fontSize:XPERCENT * 16 numberofLine:NO];
-        
-        self.official_nameLab = [self labelWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 11 numberofLine:YES];
-        
-        self.address_detailBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 12];
+        CGFloat  official_Font_Size = XFONT_SIZE(14);
+        self.official_nameLab = [self labelWithtextColor:XCOLOR_SUBTITLE fontSize:official_Font_Size numberofLine:YES];
+      
+        self.address_detailBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:official_Font_Size];
         [self.address_detailBtn setImage:[UIImage imageNamed:@"Uni_anthor"] forState:UIControlStateNormal];
         
-         self.websiteBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:XPERCENT * 12];
+         self.websiteBtn = [self buttonlWithtextColor:XCOLOR_SUBTITLE fontSize:official_Font_Size];
         [self.websiteBtn setImage:[UIImage imageNamed:@"Uni_web"] forState:UIControlStateNormal];
          self.websiteBtn.titleLabel.lineBreakMode = NSLineBreakByClipping;
         
@@ -81,7 +79,7 @@
         self.line.backgroundColor = XCOLOR_line;
         [self addSubview:self.line];
         
-        self.introductionLab = [self labelWithtextColor:XCOLOR_DESC fontSize:XPERCENT * 12  numberofLine:YES];
+        self.introductionLab = [self labelWithtextColor:XCOLOR_DESC fontSize:XFONT_SIZE(14)  numberofLine:YES];
         
         UIView *gradientBgView = [[UIView alloc] init];
         [self addSubview:gradientBgView];
@@ -109,7 +107,7 @@
         self.moreBtn.userInteractionEnabled = YES;
         self.moreBtn.tag = Uni_Header_CenterItemStyleMore;
         self.moreBtn.clipsToBounds = YES;
-        
+
     }
     return self;
 }
@@ -165,11 +163,11 @@
     self.websiteBtn.frame = itemFrame.website_Frame;
     
 
-    [self.address_detailBtn setTitle:[NSString stringWithFormat:@" %@",item.address_detail] forState:UIControlStateNormal];
-    CGFloat addressWidth = [self.address_detailBtn.currentTitle KD_sizeWithAttributeFont:XFONT(XPERCENT * 12)].width;
+    [self.address_detailBtn setTitle:[NSString stringWithFormat:@"%@",item.address_long] forState:UIControlStateNormal];
+    CGFloat addressWidth = [self.address_detailBtn.currentTitle KD_sizeWithAttributeFont:self.address_detailBtn.titleLabel.font].width;
     if (addressWidth > (itemFrame.address_detailFrame.size.width - 30)) {
-        NSString *address = [NSString stringWithFormat:@" %@ | %@",itemFrame.item.country,itemFrame.item.city];
-        [self.address_detailBtn setTitle:address forState:UIControlStateNormal];
+        
+        [self.address_detailBtn setTitle:itemFrame.item.address_short forState:UIControlStateNormal];
     }
     self.address_detailBtn.frame = itemFrame.address_detailFrame;
     
@@ -213,7 +211,7 @@
         CGFloat school_fee_floor = [item.school_fee_floor floatValue];
         CGFloat school_fee_limit = [item.school_fee_limit floatValue];
         NSString *fee =[NSString stringWithFormat:@"%.2lf - %.2lf",school_fee_floor,school_fee_limit];
-        NSString *fee_title = @"学费+(万英镑/学年）";
+        NSString *fee_title = @"学费+(万英镑/学年)";
         
         if ([itemFrame.item.country containsString:@"澳"] ) {
             fee_title = @"学费+(万澳元/学年)";
@@ -252,6 +250,8 @@
  
         
     }
+    
+    
     
 }
 

@@ -29,7 +29,6 @@
 //背景scroller
 @property(nonatomic,strong)CatigaryScrollView *bgView;
 //排名tableView
-//@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UICollectionView *rank_collectView;
 //专业collectionView
 @property(nonatomic,strong)NomalCollectionController *nomalCollectionVC;
@@ -316,7 +315,8 @@
 
 
 
-#pragma mark ——————UICollectionViewDelegateFlowLayout
+#pragma mark : UICollectionViewDelegateFlowLayout
+
 static NSString *citySectionReuse = @"citySectionView";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     

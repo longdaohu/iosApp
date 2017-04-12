@@ -65,15 +65,15 @@
     self.keyView = keyView;
     [self addSubview:keyView];
     
-    
+    //王牌标签 array
     UIView *keySubjectView = [[UIView alloc] init];
     self.keySubjectView = keySubjectView;
     [self addSubview:keySubjectView];
     
-
+    //分隔线
     UIView *lineTwo = [[UIView alloc] init];
     self.lineTwo = lineTwo;
-    lineTwo.backgroundColor = XCOLOR_BG;
+    lineTwo.backgroundColor = XCOLOR_line;
     [self addSubview:lineTwo];
     
     
@@ -187,15 +187,24 @@
     self.timesBtn.frame = contentFrame.timesFrame;
     
     
+    UIFont *sender_Font = XFONT(XFONT_SIZE(14));
+    
     for (NSString *title in contentFrame.item.key_subjectArea) {
         
         UIButton *sender  =  [[UIButton alloc] init];
+        
         [self.keySubjectView addSubview:sender];
+        
         [sender setTitle:title forState:UIControlStateNormal];
+        
         [sender setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-         sender.titleLabel.font = XFONT(XPERCENT * 14);
-         sender.layer.cornerRadius = 0.5  * (14 * XPERCENT + 10);
+        
+         sender.titleLabel.font = sender_Font;
+        
+         sender.layer.cornerRadius = 15;
+        
          sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
+        
          sender.layer.borderWidth = 1;
     }
     

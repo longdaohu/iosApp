@@ -32,7 +32,7 @@
     
     // 1、logo图片
     CGFloat logo_X = 15;
-    CGFloat logo_Y = 15;
+    CGFloat logo_Y = 20;
     CGFloat logo_W = XPERCENT * 80;
     CGFloat logo_H = logo_W;
     self.logo_Frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
@@ -41,28 +41,29 @@
     CGFloat name_X = CGRectGetMaxX(self.logo_Frame) + XMARGIN;
     CGFloat name_Y = logo_Y;
     CGFloat name_W = centerWidth - name_X - logo_X;
-    CGFloat name_H = XPERCENT * 16;
+    CGFloat name_H = XFONT_SIZE(18);
     self.name_Frame = CGRectMake(name_X, name_Y, name_W, name_H);
     
+    CGFloat  official_Font_Size = XFONT_SIZE(14);
     //3、英文名称
     CGFloat official_X = name_X;
     CGFloat official_Y = CGRectGetMaxY(self.name_Frame);
     CGFloat official_W = name_W;
-    CGFloat officialHeigh   = [self.item.official_name KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)  maxWidth:official_W].height;
+    CGFloat officialHeigh   = [self.item.official_name KD_sizeWithAttributeFont:XFONT(official_Font_Size)  maxWidth:official_W].height;
     CGFloat official_H = officialHeigh;
     self.official_nameFrame = CGRectMake(official_X, official_Y, official_W, official_H);
     
     //4、网站名称
     CGFloat web_X = name_X;
     CGFloat web_W = name_W;
-    CGFloat web_H =  XPERCENT * 12;
+    CGFloat web_H =  official_Font_Size;
     CGFloat web_Y = CGRectGetMaxY(self.logo_Frame) - web_H;
     self.website_Frame = CGRectMake(web_X, web_Y, web_W, web_H);
     
     //5、地址名称
     CGFloat address_X = name_X;
     CGFloat address_W = name_W;
-    CGFloat address_H =  XPERCENT * 12;
+    CGFloat address_H =  official_Font_Size;
     CGFloat address_Y = CGRectGetMaxY(self.official_nameFrame) + 0.5 * (web_Y - CGRectGetMaxY(self.official_nameFrame) - address_H);
     self.address_detailFrame = CGRectMake(address_X,address_Y,address_W,address_H);
     
@@ -77,7 +78,7 @@
     CGFloat intro_X = logo_X;
     CGFloat intro_Y = CGRectGetMaxY(self.dataView_Frame) +   2 * XMARGIN;
     CGFloat intro_W = centerWidth - 2 * intro_X;
-    CGFloat introductionHeight = [self.item.introduction KD_sizeWithAttributeFont:XFONT(XPERCENT * 12) maxWidth:intro_W].height;
+    CGFloat introductionHeight = [self.item.introduction KD_sizeWithAttributeFont:XFONT(official_Font_Size) maxWidth:intro_W].height;
     CGFloat intro_H = introductionHeight;
     self.introduction_Frame= CGRectMake(intro_X, intro_Y, intro_W, intro_H);
     
@@ -91,7 +92,7 @@
     //9、标签2
     CGFloat tag2X = 0;
     CGFloat tag2W = XSCREEN_WIDTH;
-    CGFloat tag2H = XPERCENT * 13;
+    CGFloat tag2H = XFONT_SIZE(16);
     CGFloat tag2Y = up_H -  60 - tag2H;
     self.tagsTwoFrame= CGRectMake(tag2X, tag2Y, tag2W, tag2H);
     
@@ -103,19 +104,21 @@
     self.tagsOneFrame= CGRectMake(tag1X, tag1Y, tag1W, tag1H);
     
     //10、世界排名
-    CGFloat QS_W = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XPERCENT * 13)].width + 5;
-    CGFloat QS_H = XPERCENT * 40;
+    CGFloat QS_W = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(16))].width + 5;
+    CGFloat QS_H = 46;
     CGFloat QS_X = 0.5 * (XSCREEN_WIDTH - 2 * QS_W - 2 * XMARGIN);
     CGFloat QS_Y =  tag1Y - QS_H - XMARGIN;
     
     //11、本国排名
     CGFloat TIMES_X = QS_X + QS_W + 2 * XMARGIN;
     CGFloat TIMES_Y = QS_Y;
-    CGFloat TIMES_H = XPERCENT * 40;
+    CGFloat TIMES_H = QS_H;
     CGFloat TIMES_W = QS_W;
-    self.QSRankFrame= CGRectMake(QS_X, QS_Y, QS_W, QS_Y);
+    
+    self.QSRankFrame= CGRectMake(QS_X, QS_Y, QS_W, QS_H);
+    
     self.TIMESRankFrame= CGRectMake(TIMES_X, TIMES_Y, TIMES_W, TIMES_H);
-
+    
     
     [self updateCenterViewFrame:item];
     
@@ -137,13 +140,13 @@
    
     CGFloat  centerWidth = XSCREEN_WIDTH - 2 * XMARGIN;
 
-    CGFloat more_H = XPERCENT * 60;
+    CGFloat more_H = 20;
     
     CGFloat realHeight = 0;
     
     if (self.showMore) {
         
-        realHeight = (CGRectGetMaxY(self.introduction_Frame) + more_H + 10);
+        realHeight = (CGRectGetMaxY(self.introduction_Frame) + more_H + 20);
         
     }else{
         
@@ -153,14 +156,14 @@
     
     if(CGRectGetHeight(self.introduction_Frame) <= 100){
         
-        realHeight = CGRectGetMaxY(self.introduction_Frame) + 10;
+        realHeight = CGRectGetMaxY(self.introduction_Frame) + 2 * XMARGIN;
     }
     
     self.centerHeigh = realHeight;
     
     
     //1、更多名称
-    CGFloat more_Y = self.centerHeigh -  more_H;
+    CGFloat more_Y = self.centerHeigh -  more_H - 2 * XMARGIN;
     CGFloat more_W = XPERCENT * 100;
     CGFloat more_X =  0.5 * (centerWidth - more_W);
     CGRect moreNewFrame = self.more_Frame;
@@ -169,10 +172,10 @@
     moreNewFrame.origin.x    = more_X;
     moreNewFrame.origin.y    = more_Y;
     self.more_Frame = moreNewFrame;
-
+ 
     //2、渐变色
-    CGFloat gradient_H = more_H + 30;
-    CGFloat gradient_Y = more_Y - 30;
+    CGFloat gradient_H = self.centerHeigh - more_Y + 20;
+    CGFloat gradient_Y = self.centerHeigh - gradient_H;
     CGFloat gradient_W = centerWidth;
     CGFloat gradient_X = 0;
     CGRect gradientNewRect = self.gradientBgViewFrame;
@@ -182,7 +185,7 @@
     gradientNewRect.origin.x    = gradient_X;
     gradientNewRect.origin.y    = gradient_Y;
     self.gradientBgViewFrame    = gradientNewRect;
-    
+ 
     
     //2、downView
     CGFloat down_X = 0;
@@ -317,62 +320,64 @@
 
 
 
--(void)makeButtonItems:(NSArray *)items
+-(void)makeButtonItems:(NSArray *)options
 {
-    NSMutableArray *temps =[NSMutableArray array];
+    
+    NSMutableArray *temp_Arr = [NSMutableArray array];
     
     //第一个 label的起点
-    CGSize startPoint = CGSizeMake(0, 0);
+    CGFloat itemX = 0;
+    CGFloat itemY = 0;
+    CGFloat itemW = 0;
+    CGFloat itemH = 30;
     //间距
-    CGFloat padding = 15.0;
+    CGFloat padding = XMARGIN;
     
     CGFloat MAXWidth = XSCREEN_WIDTH - 2 * XMARGIN;
     
-    CGFloat itemH = XPERCENT * 14   + 10;
+    CGFloat MinWidth =  MAXWidth * 0.25;
     
-    for (int i = 0; i < items.count; i ++) {
+    for (int i = 0; i < options.count; i ++) {
         
-        CGSize itemSize =[items[i] KD_sizeWithAttributeFont:XFONT(XPERCENT * 14)];
+        NSString *option = options[i];
         
-        CGFloat keyWordWidth = itemSize.width + 30;
+        itemW = [option KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]].width + padding;
+        itemW = itemW <  MinWidth ? MinWidth : itemW;
+        itemW = itemW > MAXWidth ? MAXWidth : itemW;
         
-        if (keyWordWidth > MAXWidth) {
+        if (MAXWidth - itemX < itemW) {
             
-            keyWordWidth = MAXWidth;
+            itemY += (itemH + padding);
+            
+            itemX = 0;
         }
         
         
-        if (MAXWidth - startPoint.width < keyWordWidth) {
-            
-            startPoint.width = 0;
-            
-            startPoint.height += (itemH + XMARGIN);
-            
-        }
+        CGRect  optionFrame =  CGRectMake(itemX, itemY, itemW, itemH);
         
-        CGFloat itemX = startPoint.width;
-        CGFloat itemW = keyWordWidth;
-        CGFloat itemY = startPoint.height;
-        CGRect itemRect = CGRectMake(itemX, itemY, itemW, itemH);
+        [temp_Arr addObject:[NSValue valueWithCGRect:optionFrame]];
         
-        [temps addObject:[NSNumber valueWithCGRect:itemRect]];
-        
-        //起点 增加
-        startPoint.width += keyWordWidth + padding;
+        itemX += (itemW + padding);   //起点 增加
         
     }
     
-    self.subjectItemFrames = [temps copy];
+    self.subjectItemFrames = [temp_Arr copy];
     
-    CGFloat bgH  = startPoint.height + itemH;
+    CGFloat bgH  = itemY + itemH;
     CGFloat bgX  = XMARGIN;
     CGFloat bgY  = CGRectGetMaxY(self.keyFrame) + XMARGIN;
     CGFloat bgW  = MAXWidth;
     self.subjectBgFrame = CGRectMake(bgX, bgY, bgW, bgH);
-  
-    
     
 }
+
+
+
+
+
+
+
+
 
 
 

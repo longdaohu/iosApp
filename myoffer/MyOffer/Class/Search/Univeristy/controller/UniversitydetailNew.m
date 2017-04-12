@@ -15,9 +15,14 @@
     
 }
 
-- (NSString *)address_detail{
+- (NSString *)address_long{
     
     return [NSString stringWithFormat:@"%@ | %@ | %@",self.country,self.state,self.city];
+}
+
+- (NSString *)address_short{
+    
+    return [NSString stringWithFormat:@"%@ | %@",self.country,self.city];
 }
 
 @end

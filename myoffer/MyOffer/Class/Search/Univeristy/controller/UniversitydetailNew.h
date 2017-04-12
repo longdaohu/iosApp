@@ -15,6 +15,8 @@
 @property(nonatomic,copy)NSString     *country;
 @property(nonatomic,copy)NSString     *state;
 @property(nonatomic,copy)NSString     *city;
+@property(nonatomic,copy)NSString        *address_long;
+@property(nonatomic,copy)NSString        *address_short;
 @property(nonatomic,strong)NSNumber   *found; //建校年份
 @property(nonatomic,copy)NSString     *logo;
 @property(nonatomic,copy)NSString     *address;
@@ -52,7 +54,6 @@
 @property(nonatomic,strong)NSArray       *global_rank_history; //世界排名qs历史
 @property(nonatomic,strong)NSArray       *local_rank_history; //当地排名times历史
 @property(nonatomic,strong)NSArray       *rankNeighbour; //排名相近学校
-@property(nonatomic,copy)NSString        *address_detail;
 @property(nonatomic,strong)NSNumber      *school_fee_floor; // 学费下限
 @property(nonatomic,strong)NSNumber      *school_fee_limit; // 学费上线
 @property(nonatomic,strong)NSDictionary  *IELTSRequirement; //本科，硕士雅思要求

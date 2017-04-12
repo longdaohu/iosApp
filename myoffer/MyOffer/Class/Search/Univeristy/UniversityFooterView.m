@@ -32,53 +32,55 @@
         
         self.backgroundColor = XCOLOR_WHITE;
      
+        UIFont *titleFont = XFONT(XFONT_SIZE(16));
+        
+        //1 、 查看所有专业
         UIButton *subjectBtn = [[UIButton alloc] init];
-        subjectBtn.layer.cornerRadius = CORNER_RADIUS;
         subjectBtn.layer.borderWidth = 1;
         subjectBtn.layer.borderColor = XCOLOR_RED.CGColor;
         [subjectBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
 //        [subjectBtn setTitleColor:XCOLOR_line forState:UIControlStateHighlighted];
 //        [subjectBtn addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
-        [subjectBtn setTitle:@"查看所有专业" forState:UIControlStateNormal];
-        [subjectBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:subjectBtn];
+        [self addButton:subjectBtn title:@"查看所有专业" titleFont:titleFont tag:10];
         self.subjectBtn = subjectBtn;
-        subjectBtn.titleLabel.font = XFONT(XPERCENT * 14);
-        subjectBtn.tag = 10;
 
-        
+        //2 、 测试我的入学率
         UIButton *rateBtn = [[UIButton alloc] init];
         rateBtn.tag = 11;
-        rateBtn.layer.cornerRadius = CORNER_RADIUS;
+        [self addButton:rateBtn title:@"测试我的入学率" titleFont:titleFont tag:11];
         rateBtn.backgroundColor = XCOLOR_RED;
-        [rateBtn setTitle:@"测试我的入学率" forState:UIControlStateNormal];
         [rateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [rateBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:rateBtn];
         self.rateBtn = rateBtn;
-        rateBtn.titleLabel.font = XFONT(XPERCENT * 14);
         
-        
-        UILabel *showLab = [UILabel labelWithFontsize:13 TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
+        //3 、获得offer的概率
+        UILabel *showLab = [UILabel labelWithFontsize:XFONT_SIZE(14) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         showLab.hidden = YES;
         showLab.numberOfLines = 0;
         self.showLab = showLab;
         [self  addSubview:showLab];
-        
+
+        //4 、免费申请
         UIButton *ApplyBtn = [[UIButton alloc] init];
-        ApplyBtn.tag = 12;
-        ApplyBtn.layer.cornerRadius = CORNER_RADIUS;
         ApplyBtn.backgroundColor = XCOLOR_RED;
-        [ApplyBtn setTitle:@"免费申请" forState:UIControlStateNormal];
+        [self addButton:ApplyBtn title:@"免费申请" titleFont:titleFont tag:12];
         [ApplyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [ApplyBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:ApplyBtn];
         self.ApplyBtn = ApplyBtn;
-        ApplyBtn.titleLabel.font = XFONT(XPERCENT * 14);
         ApplyBtn.hidden = YES;
         
     }
     return self;
+}
+
+- (void)addButton:(UIButton *)sender title:(NSString *)title titleFont:(UIFont *)font tag:(NSInteger)tag{
+
+    sender.layer.cornerRadius = CORNER_RADIUS;
+    [sender setTitle:title forState:UIControlStateNormal];
+    [self addSubview:sender];
+    [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    sender.titleLabel.font = font;
+
+
+    
 }
 
 - (void)setUni_country:(NSString *)uni_country{
@@ -141,7 +143,7 @@
     NSRange showRange = NSMakeRange(offerStr.length, showStri.length - offerStr.length);
     NSMutableAttributedString *attr =  [[NSMutableAttributedString alloc] initWithString:showStri];
     [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range:showRange];
-    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18]  range:showRange];
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:XPERCENT * 17]  range:showRange];
     self.showLab.attributedText = attr;
     
 }

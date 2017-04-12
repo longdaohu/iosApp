@@ -36,10 +36,11 @@
         
         self.clipsToBounds = YES;
         self.backgroundColor = XCOLOR_BG;
+        
         self.panding =[[UILabel alloc] init];
         [self addSubview:self.panding];
         self.panding.backgroundColor = XCOLOR_LIGHTBLUE;
-        self.panding.layer.cornerRadius = CORNER_RADIUS * 0.5;
+        self.panding.layer.cornerRadius = 2.5;
         self.panding.layer.masksToBounds = YES;
         
         
@@ -53,7 +54,7 @@
         self.moreBtn      = moreBtn;
         [moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
         [moreBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateNormal];
-         moreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+         moreBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [moreBtn addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:moreBtn];
          moreBtn.hidden = YES;
