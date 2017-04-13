@@ -163,33 +163,33 @@
 
     _contentFrame = contentFrame;
     
-    self.fenguanView.frame = contentFrame.fenguanFrame;
+    self.fenguanView.frame = contentFrame.fenguan_Frame;
     
-    self.collectionView.frame = contentFrame.collectionViewFrame;
+    self.collectionView.frame = contentFrame.collectionView_Frame;
     [self.collectionView reloadData];
     
 
-    self.lineOne.frame = contentFrame.lineOneFrame;
+    self.lineOne.frame = contentFrame.fg_line_Frame;
     
-    self.keyView.frame = contentFrame.keyFrame;
+    self.keyView.frame = contentFrame.key_Frame;
     
-    self.keySubjectView.frame = contentFrame.subjectBgFrame;
+    self.keySubjectView.frame = contentFrame.subject_Bg_Frame;
     
-    self.lineTwo.frame = contentFrame.lineTwoFrame;
+    self.lineTwo.frame = contentFrame.key_line_Frame;
     
-    self.rankView.frame = contentFrame.rankFrame;
+    self.rankView.frame = contentFrame.rank_Frame;
     
-    self.selectionView.frame = contentFrame.selectionFrame;
+    self.selectionView.frame = contentFrame.selection_Frame;
     
-    self.historyLine.frame = contentFrame.historyLineFrame;
+    self.historyLine.frame = contentFrame.history_Line_Frame;
     
-    self.qsBtn.frame = contentFrame.qsFrame;
+    self.qsBtn.frame = contentFrame.qs_Frame;
     
-    self.timesBtn.frame = contentFrame.timesFrame;
+    self.timesBtn.frame = contentFrame.times_Frame;
   
     [self subjectsWithUniversity:contentFrame];
     
-     self.chartAlertLab.frame = contentFrame.chartViewBgFrame;
+     self.chartAlertLab.frame = contentFrame.chart_Bg_Frame;
     
     [self chartWithArray:self.contentFrame.item.global_rank_history];
     
@@ -256,7 +256,7 @@
     self.ranks = [ranks copy];
     self.years = [years copy];
     
-    [self configChartUI];
+    [self updateChartUI];
 }
 
 - (void)qsClick:(UIButton *)sender{
@@ -275,7 +275,7 @@
     
 }
 
-- (void)configChartUI{
+- (void)updateChartUI{
     
     if (self.chartView) {
         
@@ -284,7 +284,7 @@
         self.chartView = nil;
     }
     
-    self.chartView = [[UUChart alloc]initWithFrame:self.contentFrame.chartViewBgFrame
+    self.chartView = [[UUChart alloc]initWithFrame:self.contentFrame.chart_Bg_Frame
                                         dataSource:self
                                              style:UUChartStyleLine];
     [self.chartView showInView:self];

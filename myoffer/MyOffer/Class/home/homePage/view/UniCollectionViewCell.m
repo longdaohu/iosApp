@@ -126,7 +126,7 @@
     [tags enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UILabel *sender =[UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
-        sender.layer.borderColor         = XCOLOR(222.0, 222.0, 222.0).CGColor;
+        sender.layer.borderColor         = XCOLOR(222.0, 222.0, 222.0 , 1).CGColor;
         sender.layer.borderWidth         = 1;
         sender.layer.masksToBounds = YES;
         [self.tagsView addSubview:sender];

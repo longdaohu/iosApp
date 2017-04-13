@@ -81,18 +81,15 @@
     self.nameLab.text = item.name;
     self.officalLab.text = item.official_name;
     self.addressLab.text = item.address_long;
-    NSString *ranking_qs = item.ranking_qs.integerValue == DEFAULT_NUMBER ? @"暂无排名" : [NSString stringWithFormat:@"%@",item.ranking_qs];
-    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",ranking_qs];
-  
     
-    NSString *local_rank_name  =  [itemFrame.item.country  containsString:@"澳"] ?  [NSString stringWithFormat:@"%@星",item.ranking_ti] :[NSString stringWithFormat:@"%@",item.ranking_ti] ;
-    self.localLab.text =  item.ranking_ti.integerValue == DEFAULT_NUMBER ? @"本国排名: 暂无排名": [NSString stringWithFormat:@"本国排名: %@",local_rank_name];
+    self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",item.ranking_qs_str];
+    self.localLab.text =  [NSString stringWithFormat:@"本国排名: %@",item.ranking_ti_str];
     
     self.hotView.hidden = (item.hot == 0);
     
     CGFloat addressWidth = [item.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     if (addressWidth > (itemFrame.address_detailFrame.size.width - 30)) {
-        self.addressLab.text = [NSString stringWithFormat:@" %@ | %@",itemFrame.item.country,itemFrame.item.city];
+        self.addressLab.text = item.address_short;
     }
     
 }

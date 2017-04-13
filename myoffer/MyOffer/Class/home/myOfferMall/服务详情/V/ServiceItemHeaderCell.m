@@ -77,7 +77,7 @@
         NSDictionary *itemDic = options[a];
         
         UIButton *sender =  [[UIButton alloc] init];
-        UIColor *sender_Color = itemDic[@"selected"] ? XCOLOR_RED : XCOLOR(170, 170, 170);
+        UIColor *sender_Color = itemDic[@"selected"] ? XCOLOR_RED : XCOLOR_SUBTITLE;
         sender.layer.cornerRadius = CORNER_RADIUS;
         sender.layer.borderColor = sender_Color.CGColor;
         sender.layer.borderWidth = 1;

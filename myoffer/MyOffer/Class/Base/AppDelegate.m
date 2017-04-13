@@ -95,7 +95,7 @@ static AppDelegate *__sharedDelegate;
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
     
-    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54);
+    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54 , 1);
 //     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];

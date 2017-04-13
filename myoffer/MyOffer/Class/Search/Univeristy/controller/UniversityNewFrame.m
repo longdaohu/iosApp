@@ -281,96 +281,101 @@
     
     _item = item;
     
-    CGFloat fenguanX = 0;
-    CGFloat fenguanY = XMARGIN * 2;
-    CGFloat fenguanW = XSCREEN_WIDTH;
-    CGFloat fenguanH = 20;
-    self.fenguanFrame = CGRectMake(fenguanX, fenguanY, fenguanW, fenguanH);
+    //1、校园风光
+    CGFloat fenguan_X = 0;
+    CGFloat fenguan_Y = XMARGIN * 2;
+    CGFloat fenguan_W = XSCREEN_WIDTH;
+    CGFloat fenguan_H = 20;
+    self.fenguan_Frame = CGRectMake(fenguan_X, fenguan_Y, fenguan_W, fenguan_H);
     
+    //校园风光图片容器
+    CGFloat collection_X = 0;
+    CGFloat collection_Y = CGRectGetMaxY(self.fenguan_Frame) + XMARGIN;
+    CGFloat collection_W = XSCREEN_WIDTH;
+    CGFloat collection_H = XPERCENT * 100;
+    self.collectionView_Frame = CGRectMake(collection_X, collection_Y, collection_W, collection_H);
     
-    CGFloat collectionX = 0;
-    CGFloat collectionY = CGRectGetMaxY(self.fenguanFrame) + XMARGIN;
-    CGFloat collectionW = XSCREEN_WIDTH;
-    CGFloat collectionH = XPERCENT * 100;
-    self.collectionViewFrame = CGRectMake(collectionX, collectionY, collectionW, collectionH);
+    //校园风光分隔线
+    CGFloat lineOne_X = 10;
+    CGFloat lineOne_Y = CGRectGetMaxY(self.collectionView_Frame) + XMARGIN;
+    CGFloat lineOne_W = XSCREEN_WIDTH - 20;
+    CGFloat lineOne_H = 1;
+    self.fg_line_Frame = CGRectMake(lineOne_X, lineOne_Y, lineOne_W, lineOne_H);
     
+    //王牌领域
+    CGFloat key_X = 0;
+    CGFloat key_Y = CGRectGetMaxY(self.fg_line_Frame) + XMARGIN * 2;
+    CGFloat key_W = XSCREEN_WIDTH;
+    CGFloat key_H = fenguan_H;
+    self.key_Frame = CGRectMake(key_X, key_Y, key_W, key_H);
     
-    CGFloat lineOneX = 10;
-    CGFloat lineOneY = CGRectGetMaxY(self.collectionViewFrame) + XMARGIN;
-    CGFloat lineOneW = XSCREEN_WIDTH - 20;
-    CGFloat lineOneH = 1;
-    self.lineOneFrame = CGRectMake(lineOneX, lineOneY, lineOneW, lineOneH);
-    
-    
-    CGFloat keyX = 0;
-    CGFloat keyY = CGRectGetMaxY(self.lineOneFrame) + XMARGIN * 2;
-    CGFloat keyW = XSCREEN_WIDTH;
-    CGFloat keyH = fenguanH;
-    self.keyFrame = CGRectMake(keyX, keyY, keyW, keyH);
-    
-    
+    //专业Array
     [self makeButtonItems:item.key_subjectArea];
     
+    //王牌领域分隔线
+    CGFloat lineTwo_X = lineOne_X;
+    CGFloat lineTwo_Y = CGRectGetMaxY(self.subject_Bg_Frame) + XMARGIN;
+    CGFloat lineTwo_W = lineOne_W;
+    CGFloat lineTwo_H = lineOne_H;
+    self.key_line_Frame = CGRectMake(lineTwo_X, lineTwo_Y, lineTwo_W, lineTwo_H);
     
-    CGFloat lineTwoX = lineOneX;
-    CGFloat lineTwoY = CGRectGetMaxY(self.subjectBgFrame) + XMARGIN;
-    CGFloat lineTwoW = lineOneW;
-    CGFloat lineTwoH = lineOneH;
-    self.lineTwoFrame = CGRectMake(lineTwoX, lineTwoY, lineTwoW, lineTwoH);
+    //历史排名
+    CGFloat rank_X = 0;
+    CGFloat rank_Y = CGRectGetMaxY(self.key_line_Frame) + XMARGIN * 2;
+    CGFloat rank_W = lineOne_W;
+    CGFloat rank_H = fenguan_H;
+    self.rank_Frame = CGRectMake(rank_X, rank_Y, rank_W, rank_H);
     
+    //历史排名选择项容器
+    CGFloat select_X = 0;
+    CGFloat select_Y = CGRectGetMaxY(self.rank_Frame) + XMARGIN;
+    CGFloat select_W = XSCREEN_WIDTH;
+    CGFloat select_H = 30;
+    self.selection_Frame = CGRectMake(select_X, select_Y, select_W, select_H);
     
-    CGFloat rankX = 0;
-    CGFloat rankY = CGRectGetMaxY(self.lineTwoFrame) + XMARGIN * 2;
-    CGFloat rankW = lineOneW;
-    CGFloat rankH = fenguanH;
-    self.rankFrame = CGRectMake(rankX, rankY, rankW, rankH);
-    
-    
-    CGFloat selectX = 0;
-    CGFloat selectY = CGRectGetMaxY(self.rankFrame) + XMARGIN;
-    CGFloat selectW = XSCREEN_WIDTH;
-    CGFloat selectH = 30;
-    self.selectionFrame = CGRectMake(selectX, selectY, selectW, selectH);
-    
+    //历史排名分隔线
     CGFloat h_lineX = XSCREEN_WIDTH * 0.5;
     CGFloat h_lineY = 0;
     CGFloat h_lineW = 1;
-    CGFloat h_lineH = selectH;
-    self.historyLineFrame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
+    CGFloat h_lineH = select_H;
+    self.history_Line_Frame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
     
-    CGFloat qsY = 0;
-    CGFloat qsW = [@"QS世界排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
-    CGFloat qsH = selectH;
-    CGFloat qsX = h_lineX - XMARGIN - qsW;
+    //世界排名按钮
+    CGFloat qs_Y = 0;
+    CGFloat qs_W = [@"QS世界排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
+    CGFloat qs_H = select_H;
+    CGFloat qs_X = h_lineX - XMARGIN - qs_W;
     
-    CGFloat timesY = 0;
-    CGFloat timesW = [@"TIMES排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
-    CGFloat timesH = selectH;
-    CGFloat timesX = h_lineX + XMARGIN;
+    //本国排名按钮
+    CGFloat times_Y = 0;
+    CGFloat times_W = [@"TIMES排名" KD_sizeWithAttributeFont:XFONT(15)].width + 10;
+    CGFloat times_H = select_H;
+    CGFloat times_X = h_lineX + XMARGIN;
     if([item.country containsString:@"澳"]){
-        qsX      = 0.5 * (XSCREEN_WIDTH -  qsW);
-        timesX   =   XSCREEN_WIDTH;
+        qs_X      = 0.5 * (XSCREEN_WIDTH -  qs_W);
+        times_X   =   XSCREEN_WIDTH;
         h_lineX  = XSCREEN_WIDTH;
     }
-    self.historyLineFrame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
-    self.qsFrame = CGRectMake(qsX, qsY, qsW, qsH);
-    self.timesFrame = CGRectMake(timesX, timesY, timesW, timesH);
+    self.history_Line_Frame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
+    self.qs_Frame = CGRectMake(qs_X, qs_Y, qs_W, qs_H);
+    self.times_Frame = CGRectMake(times_X, times_Y, times_W, times_H);
     
     
-    CGFloat chartY =   CGRectGetMaxY(self.selectionFrame) + XMARGIN;
-    CGFloat chartW = XSCREEN_WIDTH -20;
-    CGFloat chartH = 150;
-    CGFloat chartX = 5;
-    self.chartViewBgFrame = CGRectMake(chartX, chartY, chartW, chartH);
+    //图表
+    CGFloat chart_Y =   CGRectGetMaxY(self.selection_Frame) + XMARGIN;
+    CGFloat chart_W = XSCREEN_WIDTH -20;
+    CGFloat chart_H = 150;
+    CGFloat chart_X = 5;
+    self.chart_Bg_Frame = CGRectMake(chart_X, chart_Y, chart_W, chart_H);
     
-    self.contentHeight = CGRectGetMaxY(self.chartViewBgFrame) + 2 * XMARGIN;
+    
+    self.group_One_Height = CGRectGetMaxY(self.chart_Bg_Frame) + 2 * XMARGIN;
     
 }
 
 
 
--(void)makeButtonItems:(NSArray *)options
-{
+-(void)makeButtonItems:(NSArray *)options{
     
     NSMutableArray *temp_Arr = [NSMutableArray array];
     
@@ -414,9 +419,9 @@
     
     CGFloat bgH  = itemY + itemH;
     CGFloat bgX  = XMARGIN;
-    CGFloat bgY  = CGRectGetMaxY(self.keyFrame) + XMARGIN;
+    CGFloat bgY  = CGRectGetMaxY(self.key_Frame) + XMARGIN;
     CGFloat bgW  = MAXWidth;
-    self.subjectBgFrame = CGRectMake(bgX, bgY, bgW, bgH);
+    self.subject_Bg_Frame = CGRectMake(bgX, bgY, bgW, bgH);
     
 }
 

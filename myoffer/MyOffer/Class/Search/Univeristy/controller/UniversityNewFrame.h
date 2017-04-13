@@ -63,20 +63,35 @@
 
 
 //第一分区Frame
-@property(nonatomic,assign)CGRect fenguanFrame;
-@property(nonatomic,assign)CGRect collectionViewFrame;
-@property(nonatomic,assign)CGRect lineOneFrame;
-@property(nonatomic,assign)CGRect keyFrame;
-@property(nonatomic,assign)CGRect subjectBgFrame;
+//1、校园风光
+@property(nonatomic,assign)CGRect fenguan_Frame;
+//2、校园风光图片容器
+@property(nonatomic,assign)CGRect collectionView_Frame;
+//校园风光分隔线
+@property(nonatomic,assign)CGRect fg_line_Frame;
+ //王牌领域
+@property(nonatomic,assign)CGRect key_Frame;
+ //专业Array容器
+@property(nonatomic,assign)CGRect subject_Bg_Frame;
+ //专业Array
 @property(nonatomic,strong)NSArray *subjectItemFrames;
-@property(nonatomic,assign)CGRect lineTwoFrame;
-@property(nonatomic,assign)CGRect rankFrame;
-@property(nonatomic,assign)CGRect selectionFrame;
-@property(nonatomic,assign)CGRect qsFrame;
-@property(nonatomic,assign)CGRect timesFrame;
-@property(nonatomic,assign)CGRect historyLineFrame;
-@property(nonatomic,assign)CGRect chartViewBgFrame;
-@property(nonatomic,assign)CGFloat contentHeight;
+//王牌领域分隔线
+@property(nonatomic,assign)CGRect key_line_Frame;
+//历史排名
+@property(nonatomic,assign)CGRect rank_Frame;
+ //历史排名选择项容器
+@property(nonatomic,assign)CGRect selection_Frame;
+//世界排名按钮
+@property(nonatomic,assign)CGRect qs_Frame;
+//本国排名按钮
+@property(nonatomic,assign)CGRect times_Frame;
+//历史排名分隔线
+@property(nonatomic,assign)CGRect history_Line_Frame;
+//图表
+@property(nonatomic,assign)CGRect chart_Bg_Frame;
+//第一分区高度
+@property(nonatomic,assign)CGFloat group_One_Height;
 
 + (instancetype)frameWithUniversity:(UniversitydetailNew *)university;
+
 @end

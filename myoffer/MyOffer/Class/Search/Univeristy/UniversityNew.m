@@ -37,4 +37,26 @@
     
     return _ranking_ti ? _ranking_ti : @DEFAULT_NUMBER;
 }
+
+- (NSString *)ranking_ti_str{
+    
+    NSString *local_ranking_ti  = [NSString stringWithFormat:@"%@",self.ranking_ti];
+    
+    //1、澳大利亚
+    if ([self.country  containsString:@"澳"]) local_ranking_ti  =  [NSString stringWithFormat:@"%@星",local_ranking_ti];
+    
+    NSString *ti_rank = self.ranking_ti.integerValue == DEFAULT_NUMBER ? @"暂无排名" :local_ranking_ti;
+    
+    return ti_rank;
+}
+
+- (NSString *)ranking_qs_str{
+    
+    NSString *qs_rank = self.ranking_qs.integerValue == DEFAULT_NUMBER ? @"暂无排名" : [NSString stringWithFormat:@"%@",self.ranking_qs];
+    
+    return  qs_rank;
+}
+
+
+
 @end

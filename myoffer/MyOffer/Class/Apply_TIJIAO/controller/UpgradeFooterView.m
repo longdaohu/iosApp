@@ -39,13 +39,13 @@
         UIView *bgView = [[UIView alloc] init];
         [self addSubview:bgView];
         self.bgView = bgView;
-        self.bgView.backgroundColor = XCOLOR(232, 233, 232);
+        self.bgView.backgroundColor = XCOLOR(232, 233, 232,1);
         self.bgView.layer.cornerRadius = CORNER_RADIUS;
-        self.bgView.layer.borderColor  = XCOLOR(204, 204, 204).CGColor;
+        self.bgView.layer.borderColor  = XCOLOR(204, 204, 204,1).CGColor;
         self.bgView.layer.borderWidth = 0.5;
         
         //1、提示信息
-        self.titleLab = [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR(137, 137, 137) TextAlignment:NSTextAlignmentLeft];
+        self.titleLab = [UILabel labelWithFontsize:KDUtilSize(13) TextColor:XCOLOR(137, 137, 137,1) TextAlignment:NSTextAlignmentLeft];
         [ self.bgView addSubview:self.titleLab];
         self.titleLab.numberOfLines = 0;
  

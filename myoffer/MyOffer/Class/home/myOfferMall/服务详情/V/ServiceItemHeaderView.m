@@ -43,7 +43,6 @@
 - (void)makeUI{
     
     
-    UIColor *baseColor = XCOLOR(170, 170, 170);
     
     UIFont  *cellTitleFont = [UIFont boldSystemFontOfSize:16];
     
@@ -76,13 +75,13 @@
     //3、原价
     UILabel *display_price = [[UILabel alloc] init];
     self.display_price = display_price;
-    [self addLabel:display_price textColor:baseColor fontSize:13];
+    [self addLabel:display_price textColor:XCOLOR_SUBTITLE fontSize:13];
     
     //3、分隔线
     UILabel *first_line = [[UILabel alloc] init];
     self.first_line = first_line;
     first_line.backgroundColor = XCOLOR_line;
-    [self addLabel:first_line textColor:baseColor fontSize:15];
+    [self addLabel:first_line textColor:XCOLOR_line fontSize:15];
    
     //4 attributes 部分信息
     UIView *centerView = [UIView new];
@@ -105,12 +104,12 @@
     //9、适合人群描述
     UILabel *peopleDiscLab = [[UILabel alloc] init];
     self.peopleDiscLab = peopleDiscLab;
-    [self addLabel:peopleDiscLab textColor:baseColor fontSize:14];
+    [self addLabel:peopleDiscLab textColor:XCOLOR_SUBTITLE fontSize:14];
     peopleDiscLab.numberOfLines = 0;
     //10、分隔线
     UILabel *third_line = [[UILabel alloc] init];
     self.third_line = third_line;
-    [self addLabel:third_line textColor:baseColor fontSize:15];
+    [self addLabel:third_line textColor:XCOLOR_SUBTITLE fontSize:15];
     third_line.backgroundColor = XCOLOR_line;
     
     //11、买赠
@@ -123,7 +122,7 @@
     //12、买赠描述
     UILabel *presentDiscLab = [[UILabel alloc] init];
     self.presentDiscLab = presentDiscLab;
-    [self addLabel:presentDiscLab textColor:baseColor fontSize:14];
+    [self addLabel:presentDiscLab textColor:XCOLOR_SUBTITLE fontSize:14];
     presentDiscLab.numberOfLines = 0;
     
 }

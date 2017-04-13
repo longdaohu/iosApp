@@ -186,13 +186,8 @@
     self.gradient.frame       = self.gradientBgView.bounds;
   
     
-    
-    if (self.dataView.subviews.count == 0) {
-        //更新子项数据
-        [self configurationWithUniversity:UniversityFrame];
-        
-    }
-    
+     //更新子项数据
+    if (self.dataView.subviews.count == 0)  [self configurationWithUniversity:UniversityFrame];
     
     
 }

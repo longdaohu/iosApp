@@ -18,6 +18,7 @@
 @property(nonatomic,strong)NSNumber   *found_year; //建校年份
 @property(nonatomic,assign)BOOL  private_flag;
 @property(nonatomic,strong)NSNumber *ranking_qs;
+@property(nonatomic,copy)NSString *ranking_qs_str;
 @property(nonatomic,assign)BOOL    cn_flag;
 @property(nonatomic,assign)BOOL    in_cart;
 @property(nonatomic,copy)NSString *logo;
@@ -25,6 +26,7 @@
 @property(nonatomic,assign)BOOL hot;
 @property(nonatomic,copy)NSString *city;
 @property(nonatomic,strong)NSNumber *ranking_ti;
+@property(nonatomic,copy)NSString *ranking_ti_str;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *country;
 @property(nonatomic,copy)NSString *address_long;

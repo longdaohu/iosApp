@@ -57,7 +57,7 @@
         self.bgView.backgroundColor = XCOLOR_WHITE;
         [self.contentView  addSubview:self.bgView];
         self.bgView.layer.cornerRadius = CORNER_RADIUS;
-        self.bgView.layer.borderColor =  XCOLOR(204, 204, 204).CGColor;
+        self.bgView.layer.borderColor =  XCOLOR(204, 204, 204 , 1).CGColor;
         self.bgView.layer.borderWidth = 0.5;
         
         //2、推荐图标

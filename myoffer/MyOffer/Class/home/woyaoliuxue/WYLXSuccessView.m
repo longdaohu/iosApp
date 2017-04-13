@@ -58,8 +58,8 @@
     //渐变色
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.colors = [NSArray arrayWithObjects:
-                       (id)XCOLOR(48, 202, 255).CGColor,
-                       (id)XCOLOR(159, 0, 107).CGColor,
+                       (id)XCOLOR(48, 202, 255,1).CGColor,
+                       (id)XCOLOR(159, 0, 107,1).CGColor,
                        nil];
     gradient.startPoint = CGPointMake(0.8, 0);
     gradient.endPoint = CGPointMake(1, 1);

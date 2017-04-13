@@ -159,7 +159,7 @@ typedef enum {
     CGFloat lineW = XSCREEN_WIDTH - 2 * lineX;
     CGFloat lineH = 5;
     self.line =[[UIView alloc] initWithFrame:CGRectMake(lineX, lineY, lineW, lineH)];
-    self.line.backgroundColor = XCOLOR(232, 233, 232);
+    self.line.backgroundColor = XCOLOR(232, 233, 232,1);
     [self.view addSubview:self.line];
     
     //4、当前已购买服务

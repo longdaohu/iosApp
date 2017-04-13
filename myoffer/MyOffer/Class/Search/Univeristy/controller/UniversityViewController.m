@@ -127,8 +127,7 @@ typedef enum {
     }
 }
 
--(void)refesh{
-
+- (void)refesh{
     
     XWeakSelf
     [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id] parameters:nil success:^(NSInteger statusCode, id response) {
@@ -187,11 +186,13 @@ typedef enum {
         XWeakSelf
     
         NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
-        [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            
-            [weakSelf caseLevelWithResponse:response];
-            
-        }];
+    
+         [self startAPIRequestWithSelector:path  parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+             
+             [weakSelf caseLevelWithResponse:response];
+
+         }];
+    
     
 }
 
@@ -250,8 +251,7 @@ typedef enum {
     }else if ([university.country isEqualToString:@"美国"]) {
         countryImageName =  @"Uni-USA";
      }
-    
-
+ 
     [UIView transitionWithView:self.iconView duration:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
          [self.iconView setImage:[UIImage imageNamed:countryImageName]];
@@ -279,14 +279,17 @@ typedef enum {
     
     UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
     [self.groups addObject:groupTwo];
-
+ 
     
     //相关院校  大于第二分组
     NSMutableArray *neightbour_temps = [NSMutableArray array];
-    [university.rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    
+   NSArray *rankNeighbour = [UniversityNew  mj_objectArrayWithKeyValuesArray: university.rankNeighbour];
+    
+    
+    [rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:obj];
-        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
+         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(UniversityNew*)obj];
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";
@@ -348,8 +351,8 @@ typedef enum {
 -(void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, HEIGHT_BOTTOM, 0);
+    self.tableView.backgroundColor = XCOLOR(1, 1, 1, 0);
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
@@ -376,7 +379,7 @@ typedef enum {
 //设置第一分区
 - (void)oneGroupViewWithUniFrame:(UniversityNewFrame *)UniFrame
 {
-    UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, UniFrame.contentHeight)];
+    UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, UniFrame.group_One_Height)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
     XWeakSelf
@@ -414,7 +417,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    return indexPath.section == 0 ? self.oneGroup.contentFrame.contentHeight : Uni_Cell_Height;
+    return indexPath.section == 0 ? self.oneGroup.contentFrame.group_One_Height : Uni_Cell_Height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

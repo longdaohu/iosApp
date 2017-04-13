@@ -97,7 +97,7 @@
 
     if (!_sliceColors) {
         
-        _sliceColors = [NSMutableArray arrayWithObjects:XCOLOR_RED,XCOLOR(44, 175, 222),XCOLOR(18, 35, 60),nil];
+        _sliceColors = [NSMutableArray arrayWithObjects:XCOLOR_RED,XCOLOR(44, 175, 222 , 1),XCOLOR(18, 35, 60 , 1),nil];
     }
     
     return _sliceColors;
