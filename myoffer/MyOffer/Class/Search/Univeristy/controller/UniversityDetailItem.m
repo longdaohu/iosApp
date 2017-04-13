@@ -100,52 +100,26 @@
     
 }
 
+- (void)setUni_Frame:(UniversityNewFrame *)Uni_Frame{
+
+    _Uni_Frame = Uni_Frame;
+    
+    self.iconView.frame = Uni_Frame.data_item_iconFrame;
+    self.titleLab.frame = Uni_Frame.data_item_titleFrame;
+    self.subtitleLab.frame = Uni_Frame.data_item_subFrame;
+    self.count_Lab.frame = Uni_Frame.data_item_countFrame;
+    
+}
+
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     CGSize contentSize = self.bounds.size;
-    
     self.top_line.frame = CGRectMake(0, 0, contentSize.width, 1);
     self.bottom_line.frame = CGRectMake(0, contentSize.height, contentSize.width, 1);
-    
-    
-    CGFloat icon_X = 0;
-    CGFloat icon_Y = 0;
-    CGFloat icon_W = contentSize.width;
-    CGFloat icon_H = 24;
 
-    CGFloat title_X = 0;
-    CGFloat title_Y = icon_Y + icon_H + 3;
-    CGFloat title_W = contentSize.width;
-    CGFloat title_H = self.titleLab.font.lineHeight;
-
-    CGFloat sub_X = title_X;
-    CGFloat sub_W =  title_W;
-    CGFloat sub_H = self.subtitleLab.font.lineHeight;
-    CGFloat sub_Y =  title_Y + title_H;
-    
-    CGFloat count_X = 0;
-    CGFloat count_W = contentSize.width;
-    CGFloat count_H = self.count_Lab.font.lineHeight;
-    CGFloat count_Y =  sub_H + sub_Y + 3;
-    
-    
-    CGFloat margin = (contentSize.height - count_H  - count_Y) * 0.5;
-    
-    icon_Y += margin;
-    self.iconView.frame = CGRectMake(icon_X, icon_Y, icon_W, icon_H);
-
-    title_Y += margin;
-    self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
-
-    sub_Y   += margin;
-    self.subtitleLab.frame = CGRectMake(sub_X, sub_Y, sub_W, sub_H);
-   
-    count_Y += margin;
-    self.count_Lab.frame = CGRectMake(count_X, count_Y, count_W, count_H);
-    
 }
 
 

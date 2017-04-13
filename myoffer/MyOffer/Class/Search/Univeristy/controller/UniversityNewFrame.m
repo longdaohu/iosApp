@@ -67,12 +67,60 @@
     CGFloat address_Y = CGRectGetMaxY(self.official_nameFrame) + 0.5 * (web_Y - CGRectGetMaxY(self.official_nameFrame) - address_H);
     self.address_detailFrame = CGRectMake(address_X,address_Y,address_W,address_H);
     
+    //----------------------dataView------这里开始-----------------------------------------------
     //6、雅思、学费、就业、本地、国际   容器View;
     CGFloat data_X = logo_X;
     CGFloat data_Y = CGRectGetMaxY(self.logo_Frame) + 2 * XMARGIN;
     CGFloat data_W =  centerWidth - 2 * data_X;
-    CGFloat data_H =  70 + (XPERCENT - 1) * 40 + 2 * XMARGIN;
+    CGFloat data_item_W =  data_W * 0.25;
+
+    //6-1 子项图片
+    CGFloat data_item_icon_X = 0;
+    CGFloat data_item_icon_Y = XMARGIN;
+    CGFloat data_item_icon_W = data_item_W;
+    CGFloat data_item_icon_H = 24;
+    self.data_item_iconFrame = CGRectMake(data_item_icon_X, data_item_icon_Y, data_item_icon_W, data_item_icon_H);
+
+    //XFONT_SIZE(14) //6-2 子项标题
+    CGFloat data_item_title_X = 0;
+    CGFloat data_item_title_Y = data_item_icon_Y + data_item_icon_H + 3;
+    CGFloat data_item_title_W = data_item_icon_W;
+    CGFloat data_item_title_H = XFONT_SIZE(14);
+    self.data_item_titleFrame = CGRectMake(data_item_title_X, data_item_title_Y, data_item_title_W, data_item_title_H);
+    //6-3 子项副标题
+    CGFloat data_item_sub_X =  data_item_title_X;
+    CGFloat data_item_sub_W =  data_item_title_W;
+    CGFloat data_item_sub_H =  XFONT_SIZE(12);
+    CGFloat data_item_sub_Y =  data_item_title_Y + data_item_title_H;
+    self.data_item_subFrame = CGRectMake(data_item_sub_X, data_item_sub_Y, data_item_sub_W, data_item_sub_H);
+    
+    //6-4 子项数字标题
+    CGFloat data_item_count_X = 0;
+    CGFloat data_item_count_W = data_item_sub_W;
+    CGFloat data_item_count_H = XFONT_SIZE(14);
+    CGFloat data_item_count_Y = data_item_sub_H + data_item_sub_Y + 3;
+    self.data_item_countFrame = CGRectMake(data_item_count_X, data_item_count_Y, data_item_count_W, data_item_count_H);
+    
+    //雅思、学费、就业、本地、国际 子项
+    NSMutableArray *items_temp = [NSMutableArray array];
+    CGFloat data_item_X = 0;
+    CGFloat data_item_Y = 0;
+    CGFloat data_item_H = data_item_count_Y + data_item_count_H  + XMARGIN;
+    for (NSInteger index = 0; index < 4; index++) {
+        
+        data_item_X  = data_item_W * index;
+        
+        [items_temp addObject: [NSValue valueWithCGRect:CGRectMake(data_item_X, data_item_Y, data_item_W, data_item_H)]];
+        
+    }
+    
+    self.data_item_Frames = [items_temp copy];
+    
+    CGFloat data_H =  data_item_H;
     self.dataView_Frame = CGRectMake(data_X, data_Y, data_W, data_H);
+    
+    //-----------------------dataView-------------这里结束---------------------------------------------
+    
     
     //7、简介
     CGFloat intro_X = logo_X;
@@ -115,9 +163,9 @@
     CGFloat TIMES_H = QS_H;
     CGFloat TIMES_W = QS_W;
     
-    self.QSRankFrame= CGRectMake(QS_X, QS_Y, QS_W, QS_H);
+    self.QS_Frame= CGRectMake(QS_X, QS_Y, QS_W, QS_H);
     
-    self.TIMESRankFrame= CGRectMake(TIMES_X, TIMES_Y, TIMES_W, TIMES_H);
+    self.TIMES_Frame= CGRectMake(TIMES_X, TIMES_Y, TIMES_W, TIMES_H);
     
     
     [self updateCenterViewFrame:item];
@@ -126,8 +174,8 @@
     CGFloat rightW =  80  +  XMARGIN;
     CGFloat rightH =  40;
     CGFloat rightX =  XSCREEN_WIDTH - rightW - 2 * XMARGIN;
-    CGFloat rightY = self.centerViewFrame.origin.y - 0.5 * rightH;
-    self.rightViewFrame= CGRectMake(rightX, rightY, rightW, rightH);
+    CGFloat rightY = self.centerView_Frame.origin.y - 0.5 * rightH;
+    self.rightView_Frame= CGRectMake(rightX, rightY, rightW, rightH);
     
     
     [self oneSectonWithUni:item];
@@ -146,7 +194,7 @@
     
     if (self.showMore) {
         
-        realHeight = (CGRectGetMaxY(self.introduction_Frame) + more_H + 20);
+        realHeight = (CGRectGetMaxY(self.introduction_Frame) + more_H + 30);
         
     }else{
         
@@ -178,13 +226,13 @@
     CGFloat gradient_Y = self.centerHeigh - gradient_H;
     CGFloat gradient_W = centerWidth;
     CGFloat gradient_X = 0;
-    CGRect gradientNewRect = self.gradientBgViewFrame;
+    CGRect gradientNewRect = self.gradient_Frame;
     
     gradientNewRect.size.height =  (CGRectGetHeight(self.introduction_Frame) <= 100) ? 0 : gradient_H;
     gradientNewRect.size.width  = gradient_W;
     gradientNewRect.origin.x    = gradient_X;
     gradientNewRect.origin.y    = gradient_Y;
-    self.gradientBgViewFrame    = gradientNewRect;
+    self.gradient_Frame    = gradientNewRect;
  
     
     //2、downView
@@ -199,21 +247,22 @@
     downViewNewFrame.origin.y    = down_Y;
     self.downViewFrame = downViewNewFrame;
     
-    
-    CGRect centerViewNewFrame = self.centerViewFrame;
+    //中间View
+    CGRect centerViewNewFrame = self.centerView_Frame;
     centerViewNewFrame.size.height =  self.centerHeigh;
     centerViewNewFrame.size.width  = XSCREEN_WIDTH  - 2 * XMARGIN;
     centerViewNewFrame.origin.x    = XMARGIN;
     centerViewNewFrame.origin.y    = down_Y - 40;
-    self.centerViewFrame =  centerViewNewFrame;
+    self.centerView_Frame =  centerViewNewFrame;
     
     
-    CGRect headerNewRect = self.headerFrame;
+    //UITableViewHeaderView
+    CGRect headerNewRect = self.header_Frame;
     headerNewRect.size.height =  CGRectGetMaxY(self.downViewFrame);
     headerNewRect.size.width  = XSCREEN_WIDTH;
     headerNewRect.origin.x    = 0;
     headerNewRect.origin.y    = 64;
-    self.headerFrame = headerNewRect;
+    self.header_Frame = headerNewRect;
     
 }
 

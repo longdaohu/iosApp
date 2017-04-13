@@ -27,9 +27,9 @@
 @property(nonatomic,strong)NSNumber *ranking_ti;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *country;
-@property(nonatomic,copy)NSString *address_detail;
-@property(nonatomic,strong)NSArray *courses;
+@property(nonatomic,copy)NSString *address_long;
 @property(nonatomic,strong)NSString *address_short;
+@property(nonatomic,strong)NSArray *courses;
 @property(nonatomic,strong)NSArray *tags;
 
 @end

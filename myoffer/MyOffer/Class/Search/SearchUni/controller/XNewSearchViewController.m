@@ -1006,8 +1006,7 @@ typedef enum {
         NewSearchRstTableViewCell *cell =[NewSearchRstTableViewCell  cellWithTableView:tableView];
         UniversityFrameNew *uniFrame = self.UniversityList[indexPath.section];
         NSDictionary *itemInfo =uniFrame.universtiy.courses[indexPath.row];
-        
-        
+  
         if (uniFrame.universtiy.courses.count > 0) {
             
             cell.itemInfo = itemInfo;

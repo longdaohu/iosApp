@@ -14,7 +14,6 @@
 #import "UniversityNewFrame.h"
 
 @interface UniGroupOneView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
-@property(nonatomic,strong)UICollectionViewFlowLayout *flowlayout;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)HomeSectionHeaderView *fenguanView;
 @property(nonatomic,strong)UIView *lineOne;
@@ -47,19 +46,23 @@
 
 - (void)makeUI{
     
+    //校园风光
     HomeSectionHeaderView *fenguanView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"校园风光"];
     fenguanView.backgroundColor = XCOLOR_WHITE;
     self.fenguanView = fenguanView;
     [self addSubview:fenguanView];
     
+    //图片CollectionView
     [self makeCollectView];
     
     
+    //分隔线
     UIView *lineOne = [[UIView alloc] init];
     self.lineOne = lineOne;
-    lineOne.backgroundColor = XCOLOR_BG;
+    lineOne.backgroundColor = XCOLOR_line;
     [self addSubview:lineOne];
     
+    //王牌领域
     HomeSectionHeaderView *keyView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"王牌领域"];
     keyView.backgroundColor = XCOLOR_WHITE;
     self.keyView = keyView;
@@ -76,26 +79,25 @@
     lineTwo.backgroundColor = XCOLOR_line;
     [self addSubview:lineTwo];
     
-    
+    //历史排名
     HomeSectionHeaderView *rankView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"历史排名"];
     rankView.backgroundColor = XCOLOR_WHITE;
     self.rankView = rankView;
     [self addSubview:rankView];
     
-    
+    //选择项 世界、本国排名
     UIView *selectionView = [[UIView alloc] init];
     [self addSubview:selectionView];
     self.selectionView = selectionView;
     
-
+   //分隔线
     UIView *historyLine = [[UIView alloc] init];
-    historyLine.backgroundColor = XCOLOR_BG;
+    historyLine.backgroundColor = XCOLOR_line;
     [selectionView addSubview:historyLine];
     self.historyLine = historyLine;
 
 
     UIButton *qsBtn = [[UIButton alloc] init];
-    
     [qsBtn setTitle:@"世界排名" forState:UIControlStateNormal];
     qsBtn.enabled = NO;
     [qsBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -127,8 +129,7 @@
 {
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    self.flowlayout = flowlayout;
-    // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
+     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
     CGFloat width = 100 * XPERCENT;
     CGFloat heigh = 100 * XPERCENT;
     
@@ -165,8 +166,8 @@
     self.fenguanView.frame = contentFrame.fenguanFrame;
     
     self.collectionView.frame = contentFrame.collectionViewFrame;
-    
     [self.collectionView reloadData];
+    
 
     self.lineOne.frame = contentFrame.lineOneFrame;
     
@@ -185,8 +186,18 @@
     self.qsBtn.frame = contentFrame.qsFrame;
     
     self.timesBtn.frame = contentFrame.timesFrame;
+  
+    [self subjectsWithUniversity:contentFrame];
     
+     self.chartAlertLab.frame = contentFrame.chartViewBgFrame;
     
+    [self chartWithArray:self.contentFrame.item.global_rank_history];
+    
+}
+
+//添加大学专业
+- (void)subjectsWithUniversity:(UniversityNewFrame *)contentFrame{
+
     UIFont *sender_Font = XFONT(XFONT_SIZE(14));
     
     for (NSString *title in contentFrame.item.key_subjectArea) {
@@ -199,13 +210,13 @@
         
         [sender setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
         
-         sender.titleLabel.font = sender_Font;
+        sender.titleLabel.font = sender_Font;
         
-         sender.layer.cornerRadius = 15;
+        sender.layer.cornerRadius = 15;
         
-         sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
+        sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
         
-         sender.layer.borderWidth = 1;
+        sender.layer.borderWidth = 1;
     }
     
     
@@ -213,15 +224,10 @@
         
         UIButton *sender = (UIButton *)self.keySubjectView.subviews[index];
         
-         NSValue *xvalue =  contentFrame.subjectItemFrames[index];
+        NSValue *xvalue =  contentFrame.subjectItemFrames[index];
         
         sender.frame  =  xvalue.CGRectValue;
     }
-    
-     self.chartAlertLab.frame = contentFrame.chartViewBgFrame;
-    
-    [self chartWithArray:self.contentFrame.item.global_rank_history];
-    
 }
 
 
@@ -269,8 +275,7 @@
     
 }
 
-- (void)configChartUI
-{
+- (void)configChartUI{
     
     if (self.chartView) {
         
@@ -361,8 +366,8 @@
 }
 
 
+#pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
     return 1;
@@ -390,26 +395,20 @@ static NSString *oneIdentify = @"oneGroup";
     
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
      [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    if(self.actionBlock)
-    {
-        self.actionBlock(nil,indexPath.row);
-    }
-}
-
--(void)layoutSubviews
-{
-    [super layoutSubviews];
+    if(self.actionBlock) self.actionBlock(nil,indexPath.row);
     
 }
 
 
-
-
+- (void)dealloc{
+    
+    KDClassLog(@" 学校详情  UniGroupOneView dealloc OK");
+    
+}
 
 
 @end

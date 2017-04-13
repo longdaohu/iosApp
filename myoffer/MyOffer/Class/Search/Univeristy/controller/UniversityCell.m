@@ -80,7 +80,7 @@
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
     self.nameLab.text = item.name;
     self.officalLab.text = item.official_name;
-    self.addressLab.text = item.address_detail;
+    self.addressLab.text = item.address_long;
     NSString *ranking_qs = item.ranking_qs.integerValue == DEFAULT_NUMBER ? @"暂无排名" : [NSString stringWithFormat:@"%@",item.ranking_qs];
     self.qsLab.text = [NSString stringWithFormat:@"世界排名: %@",ranking_qs];
   
@@ -90,7 +90,7 @@
     
     self.hotView.hidden = (item.hot == 0);
     
-    CGFloat addressWidth = [item.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    CGFloat addressWidth = [item.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     if (addressWidth > (itemFrame.address_detailFrame.size.width - 30)) {
         self.addressLab.text = [NSString stringWithFormat:@" %@ | %@",itemFrame.item.country,itemFrame.item.city];
     }

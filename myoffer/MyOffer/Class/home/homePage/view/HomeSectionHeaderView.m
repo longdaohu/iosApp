@@ -119,12 +119,10 @@
     
 }
 
--(void)moreClick
-{
-    if (self.actionBlock) {
-        
-        self.actionBlock();
-    }
+-(void)moreClick{
+    
+    if (self.actionBlock) self.actionBlock();
+    
 }
 
 @end

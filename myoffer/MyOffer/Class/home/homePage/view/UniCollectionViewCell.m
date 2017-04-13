@@ -109,9 +109,9 @@
     [self.logoView.logoImageView sd_setImageWithURL:[NSURL URLWithString:unversity.logo]];
     self.nameLab.text       =  unversity.name;
     self.official_nameLab.text    = unversity.official_name;
-    self.addressLab.text       = unversity.address_detail;
+    self.addressLab.text       = unversity.address_long;
     
-    CGFloat addressWidth = [unversity.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    CGFloat addressWidth = [unversity.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     if (addressWidth > (uniFrame.addressFrame.size.width - 30)) {
         
         self.addressLab.text = unversity.address_short;

@@ -16,7 +16,7 @@ typedef enum{
 
 typedef void(^UniversityCenterViewBlock)(UIButton *sender);
 @interface UniversityheaderCenterView : UIView
-@property(nonatomic,strong)UniversityNewFrame  *itemFrame;
+@property(nonatomic,strong)UniversityNewFrame  *UniversityFrame;
 @property(nonatomic,copy)UniversityCenterViewBlock actionBlock;
 +(instancetype)headerCenterViewWithBlock:(UniversityCenterViewBlock)actionBlock;
 

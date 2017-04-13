@@ -141,9 +141,9 @@
     
     self.anchorView.frame = uni_Frame.anchorFrame;
     self.address_detail_TF.frame = uni_Frame.address_detailFrame;
-    self.address_detail_TF.text = uni_Frame.universtiy.address_detail;
+    self.address_detail_TF.text = uni_Frame.universtiy.address_long;
     
-    CGFloat addressWidth = [uniObj.address_detail KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
+    CGFloat addressWidth = [uniObj.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
      //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uni_Frame.address_detailFrame.size.width - 30)) {
         

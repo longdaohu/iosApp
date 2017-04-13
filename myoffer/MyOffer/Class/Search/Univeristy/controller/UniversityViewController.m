@@ -233,7 +233,7 @@ typedef enum {
     XWeakSelf
    //表头
     UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
-    header.frame                   = UniFrame.headerFrame;
+    header.frame                   = UniFrame.header_Frame;
     header.actionBlock = ^(UIButton *sender){
     
         [weakSelf onClick:sender];
@@ -246,9 +246,9 @@ typedef enum {
      //拉伸图片
     NSString *countryImageName =  @"Uni-au";
     if ([university.country isEqualToString:@"英国"]) {
-        countryImageName =  @"Uni-uk.jpg";
+        countryImageName =  @"Uni-uk";
     }else if ([university.country isEqualToString:@"美国"]) {
-        countryImageName =  @"Uni-USA.jpg";
+        countryImageName =  @"Uni-USA";
      }
     
 
@@ -493,13 +493,13 @@ typedef enum {
  
     
     //监听顶部导航条透明度
-    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerViewFrame.origin.y - XNAV_HEIGHT];
+    [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerView_Frame.origin.y - XNAV_HEIGHT];
   
     //顶部图片拉伸
     if (scrollView.contentOffset.y < 0) {
          
         CGRect frame = self.iconViewOldFrame;
-        frame.size.height = self.iconViewOldFrame.size.height - scrollView.contentOffset.y  * 1.7;
+        frame.size.height = self.iconViewOldFrame.size.height - scrollView.contentOffset.y * 2;
         frame.size.width  =self.iconViewOldFrame.size.width * (frame.size.height)/self.iconViewOldFrame.size.height;
         self.iconView.frame = frame;
         self.iconView.center = self.iconViewOldCenter;
@@ -623,7 +623,7 @@ typedef enum {
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             weakSelf.headerView.itemFrame = weakSelf.UniFrame;
-            weakSelf.headerView.frame     = weakSelf.UniFrame.headerFrame;
+            weakSelf.headerView.frame     = weakSelf.UniFrame.header_Frame;
            
             [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
             [weakSelf.tableView setTableHeaderView:weakSelf.headerView];

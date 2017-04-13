@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        UIImageView *iconView         = [[UIImageView alloc] init];
+        UIImageView *iconView  = [[UIImageView alloc] init];
         iconView.contentMode = UIViewContentModeScaleAspectFill;
         iconView.image   = [UIImage imageNamed:@"PlaceHolderImage"];
         [self.contentView addSubview:iconView];

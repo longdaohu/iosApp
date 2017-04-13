@@ -23,6 +23,7 @@
 @property(nonatomic,copy)NSString     *postcode;
 @property(nonatomic,copy)NSString     *introduction;
 @property(nonatomic,copy)NSString     *website;
+@property(nonatomic,copy)NSString     *webpath;
 @property(nonatomic,copy)NSString     *history_introduction; //学校历史
 @property(nonatomic,copy)NSString     *geo_introduction;      //学校位置
 @property(nonatomic,copy)NSString     *feature_introduction;  //学校特色
@@ -50,7 +51,9 @@
 @property(nonatomic,strong)NSArray       *rankType; // 排名类别
 @property(nonatomic,strong)NSArray       *languageRequirement; //  语言要求原始数据
 @property(nonatomic,strong)NSNumber  *ranking_qs; //世界排名qs
+@property(nonatomic,copy)NSString  *ranking_qs_str; //世界排名qs
 @property(nonatomic,strong)NSNumber  *ranking_ti; //当地排名times
+@property(nonatomic,copy)NSString  *ranking_ti_str; //当地排名times
 @property(nonatomic,strong)NSArray       *global_rank_history; //世界排名qs历史
 @property(nonatomic,strong)NSArray       *local_rank_history; //当地排名times历史
 @property(nonatomic,strong)NSArray       *rankNeighbour; //排名相近学校
