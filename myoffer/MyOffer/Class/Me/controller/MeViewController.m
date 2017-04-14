@@ -25,9 +25,10 @@ typedef enum {
 #import "MessageViewController.h"
 #import "PipeiEditViewController.h"
 #import "MyOfferServerMallViewController.h"
+#import "MeCenterHeaderViewFrame.h"
 
 
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIWebViewDelegate>
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 //表头
 @property (strong, nonatomic) IBOutlet UIView *headView;
 //表头图片
@@ -42,6 +43,8 @@ typedef enum {
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
+//设置智能匹配、收藏、留学服务子项Frame
+@property(nonatomic,strong)MeCenterHeaderViewFrame *centerHeaderFrame;
 
 @end
 
@@ -273,6 +276,16 @@ typedef enum {
 }
 
 
+- (MeCenterHeaderViewFrame *)centerHeaderFrame{
+
+    if (!_centerHeaderFrame) {
+    
+        _centerHeaderFrame = [[MeCenterHeaderViewFrame alloc] init];
+    }
+    
+    return _centerHeaderFrame;
+}
+
 
 //导航栏UI设置
 -(void)makeNavigationView
@@ -326,6 +339,8 @@ typedef enum {
 
         
     }];
+    
+    headerView.headerFrame = self.centerHeaderFrame;
  
     return headerView;
 }
@@ -360,7 +375,8 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return  100 +  XPERCENT * 12;
+    
+    return  self.centerHeaderFrame.section_Height;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

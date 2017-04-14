@@ -24,11 +24,7 @@
     
     item.titleLab.text = title;
     
-    [item.titleLab sizeToFit];
- 
     item.countLab.text = subtitle;
-    
-    [item.countLab sizeToFit];
 
     
     return item;
@@ -43,7 +39,7 @@
         
         UIButton *touchBtn = [[UIButton alloc] init];
         self.touchBtn      = touchBtn;
-        [touchBtn setBackgroundImage:[UIImage KD_imageWithColor:[UIColor colorWithWhite:1 alpha:0.9]] forState:UIControlStateHighlighted];
+        [touchBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_line] forState:UIControlStateHighlighted];
         [touchBtn addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:touchBtn];
 
@@ -53,12 +49,12 @@
         [self addSubview:iconView];
         
 
-        UILabel *titleLab = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
+        UILabel *titleLab = [UILabel labelWithFontsize:KDUtilSize(XFONT_SIZE(18)) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         self.titleLab     = titleLab;
         [self addSubview:titleLab];
         
 
-        UILabel *countLab = [UILabel labelWithFontsize:KDUtilSize(12) TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentCenter];
+        UILabel *countLab = [UILabel labelWithFontsize:KDUtilSize(XFONT_SIZE(14)) TextColor:XCOLOR_SUBTITLE TextAlignment:NSTextAlignmentCenter];
         self.countLab     = countLab;
         [self addSubview:countLab];
         
@@ -70,13 +66,10 @@
 }
 
 
--(void)tap:(UIButton *)sender
-{
-    if (self.actionBlack) {
+-(void)tap:(UIButton *)sender{
+    
+    if (self.actionBlack) self.actionBlack(sender);
         
-        self.actionBlack(sender);
-        
-    }
 }
 
 -(void)setCount:(NSString *)count
@@ -87,42 +80,23 @@
     
 }
 
+- (void)setHeader_Frame:(MeCenterHeaderViewFrame *)header_Frame{
+
+    _header_Frame = header_Frame;
+    
+    self.iconView.frame = header_Frame.icon_frame;
+    self.titleLab.frame = header_Frame.title_frame;
+    self.countLab.frame = header_Frame.count_frame;
+    
+}
+
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    CGSize contentSize = self.bounds.size;
-    
-    CGFloat icon_X = 0;
-    CGFloat icon_Y = 0;
-    CGFloat icon_W = contentSize.width;
-    CGFloat icon_H = self.iconView.image.size.height;
-    
-    CGFloat titleX = 0;
-    CGFloat titleY = icon_H + 10;
-    CGFloat titleW = contentSize.width;
-    CGFloat titleH = self.titleLab.bounds.size.height;
 
-    CGFloat countX = 0;
-    CGFloat countY = titleY + titleH;
-    CGFloat countW = contentSize.width;
-    CGFloat countH = self.countLab.bounds.size.height;
-
-    
-    CGFloat margin = contentSize.height - (countY + countH);
-    icon_Y = margin * 0.5;
-    self.iconView.frame = CGRectMake(icon_X, icon_Y, icon_W, icon_H);
-    
-    titleY  += margin * 0.5;
-    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
-    countY += margin * 0.5;
-    self.countLab.frame = CGRectMake(countX, countY, countW, countH);
-
-    
     self.touchBtn.frame = self.bounds;
-
-
+ 
 }
 
 @end

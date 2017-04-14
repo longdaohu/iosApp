@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MeCenterHeaderViewFrame.h"
 typedef enum {
     centerItemTypepipei,
     centerItemTypefavor,
@@ -18,8 +19,8 @@ typedef void(^centerSectionViewBlock)(centerItemType type);
 @interface CenterHeaderView : UIView
 
 @property(nonatomic,copy)centerSectionViewBlock actionBlock;
-
 @property(nonatomic,strong)NSDictionary *response;
+@property(nonatomic,strong)MeCenterHeaderViewFrame *headerFrame;
 
 + (instancetype)centerSectionViewWithResponse:(NSDictionary * )response actionBlock:(centerSectionViewBlock)actionBlock;
 

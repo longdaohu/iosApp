@@ -18,7 +18,7 @@
 #import "IntelligentResultViewController.h"
 
 
-@interface WebViewController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)KDProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 //智能匹配数量

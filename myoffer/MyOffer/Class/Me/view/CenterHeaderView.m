@@ -6,16 +6,13 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-
-
 #import "CenterHeaderView.h"
 #import "CenterSectionItem.h"
 @interface CenterHeaderView()
 //分隔线
-@property(nonatomic,strong)NSArray *lines;
+@property(nonatomic,strong)UIView *top_line;
 //选项数组
 @property(nonatomic,strong)NSArray *items;
-
 
 @end
 
@@ -47,19 +44,17 @@
         CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学购" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
         self.items = @[pipei,favor,service];
         
-
-        UIView *lineTop = [[UIView alloc] init];
-        self.lines      = @[lineTop];
-        for (UIView *line in self.lines) {
-            
-            [self addSubview:line];
-            
-            line.backgroundColor = XCOLOR_LIGHTGRAY;
-        }
+        
+        UIView *top_line = [UIView new];
+        self.top_line = top_line;
+        top_line.backgroundColor = XCOLOR_line;
+        [self addSubview:top_line];
+     
         
     }
     return self;
 }
+
 
 
 - (CenterSectionItem *)itemWithIcon:(NSString *)iconName title:(NSString *)title subtitle:(NSString *)subName itemTag:(centerItemType)type{
@@ -80,7 +75,25 @@
 }
 
 
+- (void)setHeaderFrame:(MeCenterHeaderViewFrame *)headerFrame{
 
+    _headerFrame = headerFrame;
+    
+    CGFloat item_Y = 0;
+    CGFloat item_W = headerFrame.item_Width;
+    CGFloat item_H = headerFrame.section_Height;
+    
+    for (NSInteger index = 0; index < self.items.count; index++) {
+        
+        CGFloat item_X = index * item_W;
+        CenterSectionItem *itemView = self.items[index];
+        itemView.header_Frame = headerFrame;
+        itemView.frame = CGRectMake( item_X, item_Y, item_W, item_H);
+        
+    }
+  
+    
+}
 
 -(void)setResponse:(NSDictionary *)response{
 
@@ -98,32 +111,15 @@
     service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
 }
 
+- (void)layoutSubviews{
 
-- (void)layoutSubviews
-{
     [super layoutSubviews];
+    
     
     CGSize contentSize = self.bounds.size;
     
-    CGFloat itemY = 0;
-    CGFloat itemW = contentSize.width / 3;
-    CGFloat itemH = contentSize.height;
-    
-    for (NSInteger index = 0; index < self.items.count; index++) {
-        
-        CGFloat itemX = index * itemW;
-        
-        CenterSectionItem *itemView = self.items[index];
-        
-        itemView.frame = CGRectMake( itemX, itemY, itemW, itemH);
-        
-    }
-    
-    
-    CGFloat lineW = 0.5;
-    UIView *top =self.lines.lastObject;
-    top.frame = CGRectMake(0, 0, contentSize.width, lineW);
-    
+    self.top_line.frame =  CGRectMake(0, 0, contentSize.width, 0.5);
+ 
 }
 
 
