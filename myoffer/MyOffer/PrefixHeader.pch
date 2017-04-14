@@ -126,5 +126,6 @@
 #import "UIImageView+WebCache.h"
 #import "WebViewController.h"
 #import "DefaultTableView.h"
+#import "QQserviceSingleView.h"
 
 #endif

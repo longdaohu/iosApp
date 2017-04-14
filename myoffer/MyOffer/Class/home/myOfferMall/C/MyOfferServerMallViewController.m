@@ -245,35 +245,11 @@
 
 -(void)caseQQ
 {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
-        
-        [self webViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
-        
-        return ;
-    }
-    
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？"  message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"下载" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //跳转到QQ下载页面
-        [self webViewWithpath:@"http://appstore.com/qq"];
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:commitAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+    [service call];
     
 }
-
-
-- (void)webViewWithpath:(NSString *)path{
-    
-    UIWebView *webView    = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-    [webView loadRequest:request];
-    [self.view addSubview:webView];
-}
-
+ 
 
 - (void)casePushServiceItemViewControllerWithId:(NSString *)service_id
 {

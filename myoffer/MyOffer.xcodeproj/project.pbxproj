@@ -187,6 +187,7 @@
 		AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */; };
 		AE8707061DDEEC4200CE7780 /* PipeiSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
+		AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */; };
 		AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */; };
 		AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */; };
 		AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E11D6DAAF80025FC58 /* UniverstyHeaderView.m */; };
@@ -751,6 +752,8 @@
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQserviceSingleView.h; sourceTree = "<group>"; };
+		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQserviceSingleView.m; sourceTree = "<group>"; };
 		AE93E4DA1D6DA3E70025FC58 /* UniversityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityViewController.h; path = controller/UniversityViewController.h; sourceTree = "<group>"; };
 		AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityViewController.m; path = controller/UniversityViewController.m; sourceTree = "<group>"; };
 		AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversitydetailNew.h; path = controller/UniversitydetailNew.h; sourceTree = "<group>"; };
@@ -2257,6 +2260,8 @@
 				AEA249931D5B215300DD7939 /* MeViewController.h */,
 				AEA249941D5B215300DD7939 /* MeViewController.m */,
 				AEA249951D5B215300DD7939 /* MeViewController.xib */,
+				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
+				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3714,6 +3719,7 @@
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AE3943DD1E0A1AD00038826A /* TAAnimatedDotView.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
+				AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
 				AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */,
