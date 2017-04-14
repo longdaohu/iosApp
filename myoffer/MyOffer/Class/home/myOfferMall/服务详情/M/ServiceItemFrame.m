@@ -34,11 +34,11 @@
     CGFloat nameW = header_conentent_W - nameX * 2;
     CGSize  nameSize = [self contentSizeWithString:item.name MaxWidth:nameW fontSize:18];
     CGFloat nameH = nameSize.height;
-    self.nameFrame = CGRectMake(nameX, nameY, nameW, nameH);
+    self.name_Frame = CGRectMake(nameX, nameY, nameW, nameH);
     
     //2、价格名称
     CGFloat priceX = nameX;
-    CGFloat priceY = margin_small + CGRectGetMaxY(self.nameFrame);
+    CGFloat priceY = margin_small + CGRectGetMaxY(self.name_Frame);
     NSString *price  =  item.price_str;
     CGSize  priceSize = [price KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16]];
     CGFloat priceW = priceSize.width + margin_small;
@@ -83,11 +83,11 @@
     self.centerView_Frame = CGRectMake(centerView_X, centerView_Y, centerView_W, cell_top);
   
     //8、分隔线
-    CGFloat sec_lineX = centerView_X;
+    CGFloat sec_lineX = first_lineX;
     CGFloat sec_lineY = CGRectGetMaxY(self.centerView_Frame);
     CGFloat sec_lineW = first_lineW;
     CGFloat sec_lineH = cell_top > 0 ? 1 : 0;
-    self.second_line_Frame= CGRectMake(sec_lineX, sec_lineY, sec_lineW, sec_lineH);
+    self.second_line_Frame= CGRectMake(first_lineX, sec_lineY, sec_lineW, sec_lineH);
     
  
    //  9、适合人群
@@ -201,9 +201,9 @@
     //间距
     CGFloat padding = 10.0;
     
-    CGFloat MAXWidth = self.nameFrame.size.width;
+    CGFloat MAXWidth = self.name_Frame.size.width;
     
-    CGFloat MinWidth =  self.nameFrame.size.width * 0.25;
+    CGFloat MinWidth =  self.name_Frame.size.width * 0.25;
     
     for (int i = 0; i < options.count; i ++) {
         

@@ -25,7 +25,7 @@
         CGFloat icon_H = 34;
         
         CGFloat titleX = 0;
-        CGFloat titleY = icon_H + 11;
+        CGFloat titleY = icon_H + XFONT_SIZE(11);
         CGFloat titleW = icon_W;
         CGFloat titleH = XFONT_SIZE(18);
         

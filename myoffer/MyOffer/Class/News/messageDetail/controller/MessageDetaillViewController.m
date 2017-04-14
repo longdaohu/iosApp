@@ -26,13 +26,14 @@
 #import "UniDetailGroup.h"
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
+#import "MessageArticle.h"
 
 @interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //嵌套webView到Cell中
 @property(nonatomic,strong)WKWebView *webView;
 //请求返回数据字典
-@property(nonatomic,strong)NSDictionary *ArticleInfo;
+@property(nonatomic,strong)MessageArticle *ArticleInfo;
 //点赞按钮
 @property(nonatomic,strong)UIButton *ZangBtn;
 //点分享按钮
@@ -200,7 +201,7 @@
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
-        [weakSelf makeUIWithMessageDictionary:response];
+        [weakSelf updateUIWithMessage:response];
         
         [weakSelf.tableView reloadData];
         
@@ -212,8 +213,13 @@
     
 }
 
--(void)makeUIWithMessageDictionary:(NSDictionary *)response{
+-(void)updateUIWithMessage:(NSDictionary *)response{
     
+    
+    MessageArticle *article = [MessageArticle mj_objectWithKeyValues:response];
+    
+    self.ArticleInfo = article;
+
     
     self.ZangBtn.enabled = ![response[@"like"] integerValue];
     
@@ -224,8 +230,8 @@
     }
     
     //根据点赞数量改变导航栏右侧相关控件宽度
-    [self.ZangBtn  setTitle:[NSString  stringWithFormat:@"%@",response[@"like_count"]]  forState:UIControlStateNormal];
-    CGSize LikeCountSize =[[NSString  stringWithFormat:@"%@",response[@"like_count"]]  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
+    [self.ZangBtn  setTitle:article.like_count  forState:UIControlStateNormal];
+    CGSize LikeCountSize =[article.like_count  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
     
     CGRect NewRightFrame = self.RightView.frame;
     NewRightFrame.size.width += LikeCountSize.width;
@@ -240,15 +246,15 @@
     self.ZangBtn.frame = NewLoveFrame;
     
     
-    self.ArticleInfo = (NSDictionary *)response;
     
     //第一分组
-    MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithDictionary:(NSDictionary *)response];
+    MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
+    
     UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:@[DetailFrame] andFooter:NO];
     [self.groups addObject:groupOne];
     
     //相关资讯 第二分组
-    NSArray *recommendations  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"recommendations"]];
+    NSArray *recommendations  = article.recommendations;
     
     NSMutableArray *news_temps = [NSMutableArray array];
     for (MyOfferArticle *article in recommendations) {
@@ -266,10 +272,10 @@
     
     //相关院校  大于第二分组
     NSMutableArray *neightbour_temps = [NSMutableArray array];
-    [response[@"related_universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    
+    [article.related_universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniversityNew *uni = [UniversityNew mj_objectWithKeyValues:obj];
-        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:uni];
+        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(UniversityNew *)obj];
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";
@@ -350,7 +356,6 @@
     
     return sectionView;
 }
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -477,9 +482,9 @@
     if (!_shareVC) {
         
         NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.message_id];
-        NSString *path = [self.ArticleInfo[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString *shareTitle = self.ArticleInfo[@"title"];
-        NSString *shareContent = self.ArticleInfo[@"summary"];
+        NSString *path = self.ArticleInfo.cover_url;
+        NSString *shareTitle = self.ArticleInfo.title;
+        NSString *shareContent = self.ArticleInfo.summary;
         NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
         [shareInfor setValue:shareURL forKey:@"shareURL"];
         [shareInfor setValue:path forKey:@"icon"];

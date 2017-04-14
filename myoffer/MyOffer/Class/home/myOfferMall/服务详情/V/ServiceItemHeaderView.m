@@ -15,7 +15,7 @@
 @property(nonatomic,strong)UILabel *name;
 @property(nonatomic,strong)UILabel *price;
 @property(nonatomic,strong)UILabel *display_price;
-@property(nonatomic,strong)UILabel *first_line;
+@property(nonatomic,strong)UIView *first_line;
 @property(nonatomic,strong)UIView *centerView;
 @property(nonatomic,strong)UIView *second_line;
 @property(nonatomic,strong)UILabel *people;
@@ -78,11 +78,11 @@
     [self addLabel:display_price textColor:XCOLOR_SUBTITLE fontSize:13];
     
     //3、分隔线
-    UILabel *first_line = [[UILabel alloc] init];
-    self.first_line = first_line;
+     UIView *first_line  = [UIView new];
     first_line.backgroundColor = XCOLOR_line;
-    [self addLabel:first_line textColor:XCOLOR_line fontSize:15];
-   
+    [self.bgView addSubview:first_line];
+    self.first_line = first_line;
+
     //4 attributes 部分信息
     UIView *centerView = [UIView new];
     self.centerView = centerView;
@@ -91,7 +91,7 @@
     //5、分隔线
     UIView *second_line  = [UIView new];
     second_line.backgroundColor = XCOLOR_line;
-    [self addSubview:second_line];
+    [self.bgView addSubview:second_line];
     self.second_line = second_line;
     
     //9、适合人群
@@ -145,15 +145,19 @@
     
     self.price.text = itemFrame.item.price_str;
     
-    self.display_price.text = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price_str];
-    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.display_price.text];
-    [attributeStr addAttribute:NSStrikethroughStyleAttributeName value:
-     [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, self.display_price.text.length)]; // 下划线
-    self.display_price.attributedText = attributeStr;
+    if (![self.price.text isEqualToString: itemFrame.item.display_price_str]) {
+        self.display_price.text = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price];
+        NSRange dis_price_Rangne = NSMakeRange(0, self.display_price.text.length);
+        NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:self.display_price.text];
+        [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
+        self.display_price.attributedText = attribueStr;
+        
+    }
+    
     self.peopleDiscLab.text = itemFrame.item.peopleDisc;
     self.presentDiscLab.text = itemFrame.item.presentDisc;
     
-    self.name.frame = itemFrame.nameFrame;
+    self.name.frame = itemFrame.name_Frame;
     self.price.frame = itemFrame.priceFrame;
     self.display_price.frame = itemFrame.display_priceFrame;
     self.first_line.frame = itemFrame.firstlineFrame;

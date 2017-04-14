@@ -118,10 +118,7 @@
 
 -(void)makeOther
 {
-    self.BindItemBtn.layer.cornerRadius = 2;
-    self.myOfferItemBtn.layer.cornerRadius = 2;
-    self.myOfferItemBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
-    self.myOfferItemBtn.layer.borderWidth = 1;
+     self.myOfferItemBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
     
     self.cover =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     self.cover.backgroundColor = XCOLOR_BLACK;

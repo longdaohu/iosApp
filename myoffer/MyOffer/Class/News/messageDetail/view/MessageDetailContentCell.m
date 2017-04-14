@@ -132,53 +132,55 @@
     return self;
 }
 
+
 -(void)setMessageFrame:(MessageDetailFrame *)MessageFrame
 {
 
     _MessageFrame = MessageFrame;
     
-    self.catigory_logo.frame = MessageFrame.catigoryLogoFrame;
+    self.catigory_logo.frame = MessageFrame.catigory_logo_Frame;
     self.catigory_logo.image =[UIImage imageNamed:MessageFrame.TagImageName];
     
-    self.catigoryLab.text = MessageFrame.MessageDetail[@"category"];
-    self.catigoryLab.frame = MessageFrame.TagLabFrame;
+    self.catigoryLab.text =  MessageFrame.article.category;
+    self.catigoryLab.frame = MessageFrame.tag_title_Frame;
     
-    self.tagsBgView.frame = MessageFrame.TagBgFrame;
+    self.tagsBgView.frame = MessageFrame.tagBg_Frame;
     self.FirstLine.frame = MessageFrame.FirstLineFrame;
     
-    self.titleLab.text = MessageFrame.MessageDetail[@"title"];
-    self.titleLab.frame = MessageFrame.TitleFrame;
+    self.titleLab.text = MessageFrame.article.title;
+    self.titleLab.frame = MessageFrame.title_Frame;
     
     
-    NSString *author_logo_str = MessageFrame.MessageDetail[@"author_portrait_url"];
+    NSString *author_logo_str = MessageFrame.article.author_portrait_url;
     NSString *author_logo = [author_logo_str containsString:@"http"] ? author_logo_str : [NSString stringWithFormat:@"%@%@",DOMAINURL,author_logo_str];
     [self.authorLogoView sd_setImageWithURL:[NSURL URLWithString:author_logo]];
-    self.authorLogoView.frame = MessageFrame.LogoFrame;
+    self.authorLogoView.frame = MessageFrame.icon_Frame;
     
-    self.ArthorLab.text = MessageFrame.MessageDetail[@"author"];
-    self.ArthorLab.frame = MessageFrame.ArthorFrame;
-    CGSize ArthorSize = [MessageFrame.MessageDetail[@"author"] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]];
+    self.ArthorLab.text = MessageFrame.article.author;
+    self.ArthorLab.frame = MessageFrame.Arthor_Frame;
+    
+    CGSize ArthorSize = [MessageFrame.article.author KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]];
     CGRect newRect  = self.ArthorLab.frame;
     newRect.size.width = ArthorSize.width;
     self.ArthorLab.frame = newRect;
     
-    NSString  *path = [MessageFrame.MessageDetail[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString  *path = [MessageFrame.article.cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 
-    self.coverView.frame = MessageFrame.coverFrame;
+    self.coverView.frame = MessageFrame.cover_Frame;
     
-    [self.TimeBtn setTitle:MessageFrame.MessageDetail[@"update_at"] forState:UIControlStateNormal];
-    self.TimeBtn.frame = MessageFrame.TimeFrame;
+    [self.TimeBtn setTitle:MessageFrame.article.update_at forState:UIControlStateNormal];
+    self.TimeBtn.frame = MessageFrame.time_Frame;
     
-    NSString *view_count = [NSString stringWithFormat:@"%@",MessageFrame.MessageDetail[@"view_count"]];
+    NSString *view_count = MessageFrame.article.view_count;
     [self.FocusBtn setTitle:view_count forState:UIControlStateNormal];
-    self.FocusBtn.frame = MessageFrame.FocusFrame;
+    self.FocusBtn.frame = MessageFrame.focus_Frame;
     
     self.SecondLine.frame = MessageFrame.SecondLineFrame;
     
-    self.summaryLab.frame = MessageFrame.SummaryFrame;
-    self.summaryLab.text = MessageFrame.MessageDetail[@"summary"];
+    self.summaryLab.frame = MessageFrame.Summary_Frame;
+    self.summaryLab.text = MessageFrame.article.summary;
     self.ThreeLine.frame = MessageFrame.ThreeLineFrame;
     
     if (self.tagx > 0) {
@@ -186,11 +188,11 @@
         return;
     }
     
-    NSInteger count =  [MessageFrame.MessageDetail[@"tags"] count];
+    NSInteger count =   MessageFrame.article.tags.count;
     
     for (NSInteger i = 0; i < count; i ++) {
         
-        NSString *tag =  MessageFrame.MessageDetail[@"tags"][i];
+        NSString *tag =   MessageFrame.article.tags[i];
         
         CGSize tagSize = [tag KD_sizeWithAttributeFont:[UIFont systemFontOfSize:Uni_subject_FontSize]];
         

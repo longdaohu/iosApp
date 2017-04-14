@@ -189,6 +189,7 @@
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
 		AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */; };
 		AE8CE16C1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE16B1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m */; };
+		AE8CE16F1EA0D94D000F9A8E /* MessageArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE16E1EA0D94D000F9A8E /* MessageArticle.m */; };
 		AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */; };
 		AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */; };
 		AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E11D6DAAF80025FC58 /* UniverstyHeaderView.m */; };
@@ -757,6 +758,8 @@
 		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQserviceSingleView.m; sourceTree = "<group>"; };
 		AE8CE16A1EA0B436000F9A8E /* MeCenterHeaderViewFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCenterHeaderViewFrame.h; sourceTree = "<group>"; };
 		AE8CE16B1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCenterHeaderViewFrame.m; sourceTree = "<group>"; };
+		AE8CE16D1EA0D94D000F9A8E /* MessageArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageArticle.h; sourceTree = "<group>"; };
+		AE8CE16E1EA0D94D000F9A8E /* MessageArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageArticle.m; sourceTree = "<group>"; };
 		AE93E4DA1D6DA3E70025FC58 /* UniversityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityViewController.h; path = controller/UniversityViewController.h; sourceTree = "<group>"; };
 		AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityViewController.m; path = controller/UniversityViewController.m; sourceTree = "<group>"; };
 		AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversitydetailNew.h; path = controller/UniversitydetailNew.h; sourceTree = "<group>"; };
@@ -2990,6 +2993,8 @@
 			children = (
 				AEA24BA01D5B264300DD7939 /* MessageDetailFrame.h */,
 				AEA24BA11D5B264300DD7939 /* MessageDetailFrame.m */,
+				AE8CE16D1EA0D94D000F9A8E /* MessageArticle.h */,
+				AE8CE16E1EA0D94D000F9A8E /* MessageArticle.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3710,6 +3715,7 @@
 				AEA24A0A1D5B224E00DD7939 /* CatigorySubjectCell.m in Sources */,
 				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
+				AE8CE16F1EA0D94D000F9A8E /* MessageArticle.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AED5A8631DDF0A9600E70289 /* PipeiCountryCell.m in Sources */,

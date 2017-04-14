@@ -115,15 +115,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         KDClassLog(@"Request completed: [%d], %@", (int)response.statusCode, request.URL.absoluteString);
         
-        //当返回状态为401 未登录（或状态已过期），把app退出当前登录，并不返回错误提示，当做什么事也没有发生
-        if (401 == (int)response.statusCode) {
-        
-            [[AppDelegate sharedDelegate] logout];
-            
-            return;
-            
-        };
-         
         
         
         NSError *JSONError;

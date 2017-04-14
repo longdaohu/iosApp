@@ -11,7 +11,7 @@
 
 @interface ServiceItemFrame : NSObject
 @property(nonatomic,strong)ServiceItem *item;
-@property(nonatomic,assign)CGRect nameFrame;
+@property(nonatomic,assign)CGRect name_Frame;
 @property(nonatomic,assign)CGRect priceFrame;
 @property(nonatomic,assign)CGRect display_priceFrame;
 @property(nonatomic,assign)CGRect firstlineFrame;

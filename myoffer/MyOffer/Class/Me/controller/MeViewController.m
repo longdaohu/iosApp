@@ -275,7 +275,7 @@ typedef enum {
 
 }
 
-
+//设置智能匹配、收藏、留学服务子项Frame
 - (MeCenterHeaderViewFrame *)centerHeaderFrame{
 
     if (!_centerHeaderFrame) {
@@ -320,8 +320,7 @@ typedef enum {
 
 #pragma mark :UITableViewDelegate  UITableViewDataSoure
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
  
     CenterHeaderView *headerView =  [CenterHeaderView centerSectionViewWithResponse:self.myCountResponse actionBlock:^(centerItemType type) {
         
@@ -375,11 +374,15 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    
     return  self.centerHeaderFrame.section_Height;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return HEIGHT_ZERO;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 55;
 }
