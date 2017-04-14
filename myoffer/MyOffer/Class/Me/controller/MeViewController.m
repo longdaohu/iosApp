@@ -23,7 +23,6 @@ typedef enum {
 #import "IntelligentResultViewController.h"
 #import "CenterHeaderView.h"
 #import "MessageViewController.h"
-#import "ServiceMallViewController.h"
 #import "PipeiEditViewController.h"
 #import "MyOfferServerMallViewController.h"
 

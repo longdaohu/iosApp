@@ -73,10 +73,14 @@
              _requestHUD = nil;
          }
          
+         
          if (statusCode == 401) {
+         
              [[AppDelegate sharedDelegate] logout];
              [[AppDelegate sharedDelegate] presentLoginAndRegisterViewControllerAnimated:YES];
+         
          } else {
+             
              if (showErrorAlert && error.code != kCFURLErrorCancelled) {
                  
                  //特殊处理 用户第三方登录时合并账号，如果有包含字符串
@@ -168,9 +172,12 @@
 - (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action {
     
     NSString *errorMessage;
+    
     if (error.domain == kAPIClientErrorDomain) {
         
-        errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"%@ %d",GDLocalizedString(@"NetRequest-SeverError") ,(int)error.code];//服务器错误
+        errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"服务器错误 %d",(int)error.code];//
+        
+        KDClassLog(@"服务器错误 = [-%@-]",error.userInfo);
 
      } else {
          

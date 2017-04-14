@@ -27,10 +27,10 @@
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
 
-@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UMSocialUIDelegate>
+@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //嵌套webView到Cell中
-@property(nonatomic,strong)UIWebView *webView;
+@property(nonatomic,strong)WKWebView *webView;
 //请求返回数据字典
 @property(nonatomic,strong)NSDictionary *ArticleInfo;
 //点赞按钮
@@ -57,7 +57,7 @@
     
     if (self) {
         
-        self.NO_ID = message_id;
+        self.message_id = message_id;
     }
     
     
@@ -99,13 +99,13 @@
 {
     if (!_RightView) {
         _RightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 90, 40)];
-         _RightView.hidden = YES;
+        _RightView.hidden = YES;
         
         CGFloat Lx = 0;
         CGFloat Ly = 0;
         CGFloat Lw = _RightView.frame.size.width - 35;
         CGFloat Lh = 40;
-         self.ZangBtn  = [[UIButton alloc] initWithFrame:CGRectMake(Lx,Ly, Lw, Lh)];
+        self.ZangBtn  = [[UIButton alloc] initWithFrame:CGRectMake(Lx,Ly, Lw, Lh)];
         [self.ZangBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_likeHightLight"] forState:UIControlStateNormal];
         [self.ZangBtn  setImage:[UIImage imageNamed  :@"nav_likeNomal"] forState:UIControlStateDisabled];
@@ -144,14 +144,15 @@
 {
     
     //没有数量是显示提示
-     self.noDataView =[XWGJnodataView noDataView];
-     self.noDataView.hidden = YES;
-     self.noDataView.errorStr = @"网络请求失败，请稍候再试!";
-     [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
+    self.noDataView =[XWGJnodataView noDataView];
+    self.noDataView.hidden = YES;
+    self.noDataView.errorStr = @"网络请求失败，请稍候再试!";
+    [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
     
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
     
- }
+    
+}
 
 
 
@@ -164,37 +165,33 @@
     
 }
 
--(void)makeUI
-{
+- (void)makeUI{
     
     [self makeTableView];
     
     [self makeWebView];
-
+    
     [self makeOtherView];
     
 }
 
--(void)makeWebView
-{
-        self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 1)];
-        self.webView.delegate = self;
-        self.webView.scrollView.scrollEnabled = NO;
-        self.webView.userInteractionEnabled = NO;
-        [self.webView sizeToFit];
-        self.webView.scalesPageToFit = YES;
-        NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.NO_ID];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
- 
+- (void)makeWebView{
+    
+    WKWebView *web = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    web.scrollView.scrollEnabled = NO;
+    web.navigationDelegate = self;
+    self.webView = web;
+    NSString *RequestString =[NSString stringWithFormat:@"%@api/article/%@/detail",DOMAINURL,self.message_id];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:RequestString]]];
+    
 }
 
 
--(void)makeDataSourse
-{
+-(void)makeDataSourse{
     
     XWeakSelf
-  
-    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorArticleDetail,self.NO_ID];
+    
+    NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorArticleDetail,self.message_id];
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
@@ -206,13 +203,13 @@
         [weakSelf makeUIWithMessageDictionary:response];
         
         [weakSelf.tableView reloadData];
-
+        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         weakSelf.noDataView.hidden = NO;
         
     }];
-   
+    
 }
 
 -(void)makeUIWithMessageDictionary:(NSDictionary *)response{
@@ -256,7 +253,7 @@
     NSMutableArray *news_temps = [NSMutableArray array];
     for (MyOfferArticle *article in recommendations) {
         
-        if(article.message_id != self.NO_ID){
+        if(article.message_id != self.message_id){
             
             XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
             
@@ -282,80 +279,53 @@
         
     }];
     
+    
+}
+#pragma mark : WKWebViewDelegate
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    
+    [navigationAction.request.URL.absoluteString containsString:self.message_id] ? decisionHandler(WKNavigationActionPolicyAllow) : decisionHandler(WKNavigationActionPolicyCancel);
   
+    /*
+     *  WKNavigationActionPolicyAllow
+     *  WKNavigationActionPolicyCancel   不允许
+     */
 }
 
-
-
-// 页面加载完成之后调用
-
-#pragma mark ——————  UIWebViewDeleage
--(void)webViewDidStartLoad:(UIWebView *)webView
-{
+// WKNavigationDelegate 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-//    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-//    
-//    [self.hud removeFromSuperViewOnHide];
     
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    CGRect frame = webView.frame;
-    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    webView.frame = frame;
+    [webView evaluateJavaScript:@"document.body.style.paddingBottom = '30px';" completionHandler:^(id Result, NSError * error) {
+     }];
     
-    NSInteger height = [[webView stringByEvaluatingJavaScriptFromString:
-                         @"document.body.scrollHeight"] integerValue];
-    self.webView.frame = CGRectMake(0, 0,XSCREEN_WIDTH,height);
     
-    [self.tableView reloadData];
+    XWeakSelf
+    [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
+        
+        NSString *web_height = [NSString stringWithFormat:@"%@",Result];
+        
+        weakSelf.webView.mj_h = [web_height floatValue];
+        
+        [weakSelf.tableView reloadData];
+        
+    }];
     
-
-    //加载完成后重新设置 tableview的cell的高度,和webview的frame
+    
     if (!webView.isLoading) {
         
         self.RightView.hidden = NO;
-
-//        [self.hud hideAnimated:YES afterDelay:1];
-    }
-
-    
-}
-
-//用于设置网页快捷链接跳转
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(nonnull NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    
-     NSURL  *url = request.URL;
-    
-    NSString *URLstr = [NSString stringWithFormat:@"%@",url];
-    
-    if ([URLstr containsString:@"api/article"]) {
-        
-        return YES;
-        
-    }else{
-          //用于设置网页快捷链接跳转到自带浏览器
-//          [[UIApplication sharedApplication] openURL:request.URL];
-        return NO;
         
     }
     
-    
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
-{
-//    [self.hud hideAnimated:YES afterDelay:1];
- 
 }
 
 
-#pragma mark —————— UITableViewDataDeleage UITableViewDeleage
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+
+#pragma mark :  UITableViewDataDeleage UITableViewDeleage
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
     
@@ -364,8 +334,7 @@
 
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
     
@@ -399,16 +368,17 @@
  *  设置cell高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+    
     
     UniDetailGroup *group = self.groups[0];
     
     MessageDetailFrame *MessageDetailFrame   =  group.items[0];
- 
-    CGFloat cellHight = indexPath.section== 0 ? MessageDetailFrame.MessageDetailHeight + self.webView.frame.size.height : Uni_Cell_Height;
+    
+    CGFloat cellHight = indexPath.section== 0 ?  self.webView.mj_h + MessageDetailFrame.MessageDetailHeight: Uni_Cell_Height;
+    
     
     return cellHight;
-        
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -417,19 +387,25 @@
     UniDetailGroup *group = self.groups[indexPath.section];
     
     if (indexPath.section == 0) {
-        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
-
-            MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
-            cell.MessageFrame = group.items[0];
-
- 
-        self.webView.frame = CGRectMake(0, MessageDetailFrame.MessageDetailHeight, XSCREEN_WIDTH ,self.webView.frame.size.height);
-        [cell.contentView addSubview:self.webView];
-
- 
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-            return cell;
+        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+        MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
+        cell.MessageFrame = group.items[0];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MessageDetailFrame.MessageDetailHeight , self.view.bounds.size.width, 0)];
+        web_bgv.scrollEnabled = NO;
+        [cell.contentView addSubview:web_bgv];
+        
+        
+        web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.webView.bounds.size.height);
+        web_bgv.mj_h = self.webView.bounds.size.height;
+        
+        
+        [web_bgv addSubview:self.webView];
+        
+        
+        return cell;
         
         
     }else if(indexPath.section == 1){
@@ -460,7 +436,7 @@
     if ([group.HeaderTitle containsString:@"文章"]) {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-       
+        
         [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
         
     }else{
@@ -476,7 +452,7 @@
 -(void)ZangBtnClick
 {
     XWeakSelf
-    NSString *path =[NSString stringWithFormat:kAPISelectorMessageZang,self.NO_ID];
+    NSString *path =[NSString stringWithFormat:kAPISelectorMessageZang,self.message_id];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSString *LikeCount = self.ZangBtn.currentTitle;
@@ -485,7 +461,7 @@
         
         weakSelf.ZangBtn.enabled = NO;
         
-     }];
+    }];
 }
 
 
@@ -500,7 +476,7 @@
     
     if (!_shareVC) {
         
-        NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.NO_ID];
+        NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.message_id];
         NSString *path = [self.ArticleInfo[@"cover_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *shareTitle = self.ArticleInfo[@"title"];
         NSString *shareContent = self.ArticleInfo[@"summary"];
@@ -526,7 +502,7 @@
 //分享
 - (void)share{
     
-        [self.shareVC  show];
+    [self.shareVC  show];
     
 }
 

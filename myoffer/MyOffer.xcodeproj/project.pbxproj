@@ -1663,6 +1663,16 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		AE36C4591E9F6C9100EE42F9 /* 留学购 */ = {
+			isa = PBXGroup;
+			children = (
+				AE9E6EE71E851D3A00203C00 /* C */,
+				AE9E6EE81E851D3A00203C00 /* M */,
+				AE9E6EE91E851D3A00203C00 /* V */,
+			);
+			name = "留学购";
+			sourceTree = "<group>";
+		};
 		AE3943CC1E0A1AD00038826A /* SDCycleScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1948,11 +1958,9 @@
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
+				AE36C4591E9F6C9100EE42F9 /* 留学购 */,
 				AE6FF29A1E8915F100C2A013 /* 国家服务 */,
 				AE6FF2911E8912A200C2A013 /* 服务详情 */,
-				AE9E6EE71E851D3A00203C00 /* C */,
-				AE9E6EE81E851D3A00203C00 /* M */,
-				AE9E6EE91E851D3A00203C00 /* V */,
 			);
 			path = myOfferMall;
 			sourceTree = "<group>";

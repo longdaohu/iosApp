@@ -26,7 +26,6 @@
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "XNewSearchViewController.h"
-#import "ServiceMallViewController.h"
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"

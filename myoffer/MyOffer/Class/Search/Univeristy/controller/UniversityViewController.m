@@ -234,7 +234,7 @@ typedef enum {
     XWeakSelf
    //表头
     UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
-    header.frame                   = UniFrame.header_Frame;
+    header.frame       = UniFrame.header_Frame;
     header.actionBlock = ^(UIButton *sender){
     
         [weakSelf onClick:sender];
@@ -390,9 +390,9 @@ typedef enum {
     
 }
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+#pragma mark : UITableViewDelegate,UITableViewDataSource
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
     
@@ -402,9 +402,8 @@ typedef enum {
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
    
      UniDetailGroup *group = self.groups[section];
-     HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     
-    return sectionView;
+    return [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
 }
 
 
@@ -491,7 +490,8 @@ typedef enum {
     
 }
 
-#pragma mark ——— UIScrollViewDelegate
+#pragma mark : UIScrollViewDelegate
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
     
@@ -523,192 +523,9 @@ typedef enum {
 }
 
 
-- (void)onClick:(UIButton *)sender{
-    
-    switch (sender.tag) {
-        case RightViewItemStyleFavorited:
-            [self UnivertityClickType:UniversityItemTypeFavor];
-            break;
-        case RightViewItemStyleShare:
-            [self UnivertityClickType:UniversityItemTypeShare];
-            break;
-        case NavItemStyleBack:
-            [self UnivertityClickType:UniversityItemTypePop];
-            break;
-        case Uni_Header_CenterItemStyleMore:
-            [self UnivertityClickType:UniversityItemTypeMore];
-            break;
-
-         default:
-            break;
-    }
-}
-
--(void)UnivertityClickType:(UniversityItemType)type{
-
-    switch (type) {
-        case UniversityItemTypeFavor:
-        {
-            self.clickType = UniversityItemTypeFavor;
-            [self caseFavorite];
-        }
-            break;
-        case UniversityItemTypeShare:
-            [self caseShare];
-            break;
-        case UniversityItemTypePop:
-            [self casePop];
-            break;
-        case UniversityItemTypeMore:
-            [self caseMore];
-            break;
-        case UniversityItemTypePipei:
-//            [self CasePipei];
-            break;
-        default:
-            break;
-    }
-
-}
-//集成分享功能
-- (ShareNViewController *)shareVC
-{
-    if (!_shareVC) {
-        
-        _shareVC = [[ShareNViewController alloc] initWithUniversity:self.UniFrame.item];
-        [self addChildViewController:_shareVC];
-        [self.view addSubview:self.shareVC.view];
  
-    }
-    return _shareVC;
-}
+#pragma mark : IDMPhotoBrowser Delegate
 
-//分享
-- (void)caseShare{
-    
-      [self.shareVC  show];
-}
-
-//收藏
-- (void)caseFavorite
-{
-
-    
-    RequireLogin
-    XWeakSelf
-    NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
-    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.item.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-        [hud applySuccessStyle];
-        NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
-        [hud setLabelText:title];//@"关注成功"];
-        [hud hideAnimated:YES afterDelay:1];
-
-        weakSelf.favorited =  !weakSelf.favorited;
-        [weakSelf configureLikeButton:weakSelf.favorited];
-        weakSelf.clickType = UniversityItemTyDeFault;
-
-    }];
-}
-
-
-
-//点击查看更多
-- (void)caseMore
-{
-  
-    XWeakSelf
-    self.UniFrame.showMore = !self.UniFrame.showMore;
-    
-    if (CGRectGetHeight(self.headerView.frame) > 0) {
-        
-        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-            
-            weakSelf.headerView.itemFrame = weakSelf.UniFrame;
-            weakSelf.headerView.frame     = weakSelf.UniFrame.header_Frame;
-           
-            [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
-            [weakSelf.tableView setTableHeaderView:weakSelf.headerView];
-            [weakSelf.tableView endUpdates];
-
-        }];
-    
-    }
-}
-
-//回退
-- (void)casePop
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-//设置是否收藏
-- (void)configureLikeButton:(BOOL)favorite
-{
-    [self.topNavigationView navigationWithFavorite:favorite];
-    [self.headerView headerViewRightViewWithShadowFavorited:favorite];
-}
-
-//点击footer按钮
-- (void)footerWithButton:(UIButton *)sender
-{
-    if ([sender.currentTitle containsString:@"查看"]) {
-        
-        [self caseAllSubjects];
-        
-    }else if ([sender.currentTitle containsString:@"免费"]) {
-        
-        [self caseWoyaoluexue];
-        
-    }else{
-        
-        [self CasePipei];
-    }
-    
-}
-//我要留学
-- (void)caseWoyaoluexue{
-    
-    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
-
-}
-//查看所有专业
-- (void)caseAllSubjects{
-    
-    [self.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id] animated:YES];
-}
-
-//智能匹配
--(void)CasePipei{
-    
-        
-        if ( !LOGIN  ||  self.user_level.integerValue == DEFAULT_NUMBER || self.user_level.integerValue == -1) {
-            
-            XWeakSelf
-            self.FromPipei = YES;
-            PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
-            pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
-            pipei.actionBlock = ^(NSString *pipei){
-                
-                [weakSelf pipeiLevelWithParameter:pipei];
-                
-            };
-            
-            [self.navigationController pushViewController:pipei  animated:YES];
-            
-            return;
-        }
-            
-          
-          [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
-    
-    
-}
-
- 
-
-#pragma mark - IDMPhotoBrowser Delegate
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser didShowPhotoAtIndex:(NSUInteger)pageIndex
 {
 //    id <IDMPhoto> photo = [photoBrowser photoAtIndex:pageIndex];
@@ -770,6 +587,9 @@ typedef enum {
     
 }
 
+
+#pragma mark : 事件处理
+
 //根据网络请求显示用用户入学申请等级
 - (void)caseLevelWithResponse:(id)response{
 
@@ -803,6 +623,194 @@ typedef enum {
     }];
     
 }
+
+
+- (void)onClick:(UIButton *)sender{
+    
+    switch (sender.tag) {
+        case RightViewItemStyleFavorited:
+            [self UnivertityClickType:UniversityItemTypeFavor];
+            break;
+        case RightViewItemStyleShare:
+            [self UnivertityClickType:UniversityItemTypeShare];
+            break;
+        case NavItemStyleBack:
+            [self UnivertityClickType:UniversityItemTypePop];
+            break;
+        case Uni_Header_CenterItemStyleMore:
+            [self UnivertityClickType:UniversityItemTypeMore];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)UnivertityClickType:(UniversityItemType)type{
+    
+    switch (type) {
+        case UniversityItemTypeFavor:
+        {
+            self.clickType = UniversityItemTypeFavor;
+            [self caseFavorite];
+        }
+            break;
+        case UniversityItemTypeShare:
+            [self caseShare];
+            break;
+        case UniversityItemTypePop:
+            [self casePop];
+            break;
+        case UniversityItemTypeMore:
+            [self caseMore];
+            break;
+        case UniversityItemTypePipei:
+            //            [self CasePipei];
+            break;
+        default:
+            break;
+    }
+    
+}
+//集成分享功能
+- (ShareNViewController *)shareVC
+{
+    if (!_shareVC) {
+        
+        _shareVC = [[ShareNViewController alloc] initWithUniversity:self.UniFrame.item];
+        [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
+        
+    }
+    return _shareVC;
+}
+
+//分享
+- (void)caseShare{
+    
+    [self.shareVC  show];
+}
+
+//收藏
+- (void)caseFavorite
+{
+    
+    
+    RequireLogin
+    XWeakSelf
+    NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
+    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.item.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+        [hud applySuccessStyle];
+        NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
+        [hud setLabelText:title];//@"关注成功"];
+        [hud hideAnimated:YES afterDelay:1];
+        
+        weakSelf.favorited =  !weakSelf.favorited;
+        [weakSelf configureLikeButton:weakSelf.favorited];
+        weakSelf.clickType = UniversityItemTyDeFault;
+        
+    }];
+}
+
+
+
+//点击查看更多
+- (void)caseMore
+{
+    
+    XWeakSelf
+    self.UniFrame.showMore = !self.UniFrame.showMore;
+    
+    if (CGRectGetHeight(self.headerView.frame) > 0) {
+        
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+            
+            weakSelf.headerView.itemFrame = weakSelf.UniFrame;
+            weakSelf.headerView.frame     = weakSelf.UniFrame.header_Frame;
+            
+            [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
+            [weakSelf.tableView setTableHeaderView:weakSelf.headerView];
+            [weakSelf.tableView endUpdates];
+            
+        }];
+        
+    }
+}
+
+//回退
+- (void)casePop
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+//设置是否收藏
+- (void)configureLikeButton:(BOOL)favorite
+{
+    [self.topNavigationView navigationWithFavorite:favorite];
+    [self.headerView headerViewRightViewWithShadowFavorited:favorite];
+}
+
+//点击footer按钮
+- (void)footerWithButton:(UIButton *)sender
+{
+    if ([sender.currentTitle containsString:@"查看"]) {
+        
+        [self caseAllSubjects];
+        
+    }else if ([sender.currentTitle containsString:@"免费"]) {
+        
+        [self caseWoyaoluexue];
+        
+    }else{
+        
+        [self CasePipei];
+    }
+    
+}
+//我要留学
+- (void)caseWoyaoluexue{
+    
+    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
+    
+}
+//查看所有专业
+- (void)caseAllSubjects{
+    
+    [self.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id] animated:YES];
+}
+
+//智能匹配
+-(void)CasePipei{
+    
+    
+    if ( !LOGIN  ||  self.user_level.integerValue == DEFAULT_NUMBER || self.user_level.integerValue == -1) {
+        
+        XWeakSelf
+        self.FromPipei = YES;
+        PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
+        pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
+        pipei.actionBlock = ^(NSString *pipei){
+            
+            [weakSelf pipeiLevelWithParameter:pipei];
+            
+        };
+        
+        [self.navigationController pushViewController:pipei  animated:YES];
+        
+        return;
+    }
+    
+    
+    [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init] animated:YES];
+    
+}
+
+
+
+
+
 
 
 - (void)dealloc{

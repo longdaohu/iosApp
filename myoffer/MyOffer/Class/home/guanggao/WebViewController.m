@@ -10,12 +10,11 @@
 #import "WYLXViewController.h"
 #import "PipeiEditViewController.h"
 #import "AUSearchResultViewController.h"
-#import "ServiceMallViewController.h"
+#import "MyOfferServerMallViewController.h"
 #import "NotificationViewController.h"
 #import "XNewSearchViewController.h"
 #import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
-#import "ServiceMallViewController.h"
 #import "IntelligentResultViewController.h"
 
 
@@ -300,7 +299,6 @@
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
     
     
-    
     switch ([responseJSON[@"page"] integerValue]) {
         case 0:
             RequireLogin;
@@ -424,7 +422,8 @@
 }
 //购买服务
 -(void)casePay{
-    [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+    
+    [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
 }
 //通知
 -(void)caseNotication{
