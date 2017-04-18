@@ -67,7 +67,9 @@
              }
          }
      } failure:^(NSInteger statusCode, NSError *error) {
+         
          [_APIRequestTasks removeObject:task];
+        
          if (_APIRequestTasks.count == 0) {
              [_requestHUD hideAnimated:NO];
              _requestHUD = nil;
@@ -85,7 +87,13 @@
              if (showErrorAlert && error.code != kCFURLErrorCancelled) {
                  
                  //特殊处理 用户第三方登录时合并账号，如果有包含字符串
-                 if (![error.userInfo[@"message"] containsString:@"phone"]) [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
+                 if (![error.userInfo[@"message"] containsString:@"phone"]) {
+                 
+                     [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
+                     NSLog(@"服务器错误 =  %@ ",path);
+
+                 }
+                 
               }
          }
          
@@ -177,9 +185,7 @@
     if (error.domain == kAPIClientErrorDomain) {
         
         errorMessage = error.userInfo[@"message"] ?: [NSString stringWithFormat:@"服务器错误 %d",(int)error.code];//
-        
-        KDClassLog(@"服务器错误 = [-%@-]",error.userInfo);
-
+  
      } else {
          
         errorMessage = @"网络请求失败，请检查网络连接后重试。";
@@ -221,6 +227,7 @@
 }
 
 - (IBAction)dismiss {
+    
     if (self.navigationController &&
         self.navigationController.viewControllers.count > 1 &&
         self.navigationController.viewControllers.lastObject == self) {
@@ -316,10 +323,12 @@
 
 
 #pragma mark ------- 提前加载数据，存储在本地，下次调用
+
 - (void)baseDataSourse:(NSString *)pageStr
 {
     
     NSInteger page;
+    
     if ([pageStr isEqualToString:@"country"]) {
         
         page = 0;
@@ -335,13 +344,13 @@
     
     switch (page) {
         case 0:
-            [self countryWithAlert:YES];
+            [self countryWithAlert:NO];
             break;
         case 1:
-             [self subjectWithAlert:YES];
+             [self subjectWithAlert:NO];
             break;
         default:
-             [self gradeWithAlert:YES];
+             [self gradeWithAlert:NO];
             break;
     }
     
@@ -371,7 +380,6 @@
 - (void)subjectWithAlert:(BOOL)show{
     
    [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
-//    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
  
 }
@@ -381,7 +389,6 @@
     
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
- 
     
 }
 
@@ -398,9 +405,13 @@
         
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+         NSLog(@"服务器错误 = %@  %ld",path ,statusCode);
+
         if (show) {
             
+            
 //            AlerMessage(@"网络请求失败");
+            
             
         }
         

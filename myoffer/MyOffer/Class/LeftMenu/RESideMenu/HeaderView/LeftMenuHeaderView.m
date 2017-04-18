@@ -46,15 +46,16 @@
     
 }
 
+- (void)setUser:(MyofferUser *)user{
 
--(void)setResponse:(NSDictionary *)response{
-
-    _response = response;
+    _user = user;
     
-    self.nameLabel.text = response[@"accountInfo"][@"displayname"];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:response[@"portraitUrl"]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
-   
+    self.nameLabel.text = user.displayname;
+    
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:user.portraitUrl] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
 }
+
 
 -(void)headerViewWithUserLoginOut{
 

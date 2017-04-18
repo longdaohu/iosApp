@@ -727,14 +727,17 @@
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        NSString *phone = response[@"accountInfo"][@"phonenumber"];
         
-        if (0 == phone.length) [weakSelf caseBackAndLogout];
- 
+        MyofferUser *user = [MyofferUser mj_objectWithKeyValues:response];
+        
+        if (0 == user.phonenumber.length) [weakSelf caseBackAndLogout];
+        
+  
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         
     }];
+    
 }
 
 //判断是否有智能匹配数据或收藏学校
@@ -742,10 +745,15 @@
 {
     if (!LOGIN) return;
 
+ 
+    
     XWeakSelf
-     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-         weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-     }];
+    [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
+        
+        weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+
+    }];
+ 
  }
 
 //退出登录

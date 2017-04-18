@@ -21,6 +21,8 @@
 #import "MessageViewController.h"
 #import "CatigoryViewController.h"
 #import "LeftMenuHeaderView.h"
+#import "MyofferUser.h"
+
 
 @interface LeftMenuViewController ()
 
@@ -139,7 +141,9 @@
          [self startAPIRequestWithSelector:kAPISelectorAccountInfo  parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
              
              self.headerView.haveIcon = YES;
-             self.headerView.response = response;
+             
+             self.headerView.user = [MyofferUser mj_objectWithKeyValues:response];
+             
          }];
          
          
@@ -343,6 +347,8 @@
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确认登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         [[AppDelegate sharedDelegate] logout];
+        [[MyofferUser defaultUser] userLogout];
+        
         [MobClick profileSignOff];
         [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
         [self startAPIRequestUsingCacheWithSelector:kAPISelectorLogout parameters:nil success:^(NSInteger statusCode, id response) {

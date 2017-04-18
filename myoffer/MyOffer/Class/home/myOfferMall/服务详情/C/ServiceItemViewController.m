@@ -206,8 +206,6 @@
     
     [self.tableView endUpdates];
     
-    
-    
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
     
     [self.web_wk loadHTMLString:htmlStr baseURL:nil];

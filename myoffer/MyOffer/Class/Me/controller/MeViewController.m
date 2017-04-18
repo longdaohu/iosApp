@@ -502,14 +502,34 @@ typedef enum {
 #pragma mark : 跳转到QQ客服聊天页面
 -(void)QQservice{
 
-    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
-    [service call];
+//    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+//    [service call];
+    
+    
+    
+    MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
+    
+    //创建自定义信息
+    NSDictionary* clientCustomizedAttrs = @{
+                                            @"name"        : [MyofferUser defaultUser].displayname,
+                                            @"tel"         : [MyofferUser defaultUser].phonenumber,
+                                            @"source"      : @"ios_APP"
+                                            };
+    [MQManager setClientInfo:clientCustomizedAttrs completion:^(BOOL success, NSError *error) {
+        
+    }];
+    
+     //开启同步消息
+//    [chatViewManager enableSyncServerMessage:true];
+    
+    [chatViewManager pushMQChatViewControllerInViewController:self];
 }
 
 //打开左侧菜单
--(void)showLeftMenu
-{
+-(void)showLeftMenu{
+    
     [self.sideMenuViewController presentLeftMenuViewController];
+    
 }
 
 //跳转申请状态

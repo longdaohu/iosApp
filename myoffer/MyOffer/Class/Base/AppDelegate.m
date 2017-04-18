@@ -22,6 +22,8 @@
 #import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import <MeiQiaSDK/MQManager.h>
+
 
 @interface AppDelegate ()<RESideMenuDelegate,WXApiDelegate>
 {
@@ -77,7 +79,17 @@ static AppDelegate *__sharedDelegate;
     }
  
     
- 
+    // 开发者的美洽
+    [MQManager initWithAppkey:@"edb45a1504a6f3bc86174cf8923b1006" completion:^(NSString *clientId, NSError *error) {
+        if (!error) {
+            NSLog(@"美洽 SDK：初始化成功");
+        } else {
+            NSLog(@"error:%@",error);
+        }
+//        [MQServiceToViewInterface getUnreadMessagesWithCompletion:^(NSArray *messages, NSError *error) {
+//            NSLog(@">> unread message count: %d", (int)messages.count);
+//        }];
+    }];
     
     return YES;
 }
@@ -205,6 +217,11 @@ static AppDelegate *__sharedDelegate;
     KDClassLog(@" didRegisterForRemoteNotificationsWithDeviceToken  %@",deviceToken);
     // Required
     [APService registerDeviceToken:deviceToken];
+    
+    //美洽  上传设备的 deviceToken
+    [MQManager registerDeviceToken:deviceToken];
+    
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -270,11 +287,15 @@ static AppDelegate *__sharedDelegate;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [MQManager closeMeiqiaService];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
   
+    [MQManager openMeiqiaService];
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

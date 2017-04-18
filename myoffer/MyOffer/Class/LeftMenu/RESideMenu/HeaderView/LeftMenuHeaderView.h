@@ -11,7 +11,7 @@
 typedef void(^LeftBlock)();
 @interface LeftMenuHeaderView : UIView
 //根据网络请求数据加载header
-@property(nonatomic,strong)NSDictionary *response;
+@property(nonatomic,strong)MyofferUser *user;
 //判断是否有头像
 @property(nonatomic,assign)BOOL haveIcon;
 

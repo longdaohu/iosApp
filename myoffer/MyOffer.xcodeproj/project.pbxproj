@@ -153,6 +153,7 @@
 		AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452D1E8D0403005EE15D /* ServiceProtocolViewController.m */; };
 		AE4645311E8D0CAC005EE15D /* ServiceProtocalItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
+		AE4ECE1F1EA5DCC500BE9512 /* loding.gif in Resources */ = {isa = PBXBuildFile; fileRef = AE4ECE1E1EA5DCC500BE9512 /* loding.gif */; };
 		AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56F33F1E0280E900340742 /* WYLXGroup.m */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
 		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
@@ -390,9 +391,14 @@
 		AEA24C2F1D5B283700DD7939 /* UK.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1F1D5B283700DD7939 /* UK.jpg */; };
 		AEA5FDB61E0D32C70064B1B5 /* DefaultTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */; };
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
+		AEA86E041EA4C8210021BE1B /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA86E031EA4C8210021BE1B /* MyofferUser.m */; };
 		AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* UniversityNew.m */; };
 		AEB61B6A1E6D00370096BC12 /* CatigoryRankStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB61B681E6D00370096BC12 /* CatigoryRankStyleCell.m */; };
 		AEB61B6B1E6D00370096BC12 /* CatigoryRankStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB61B691E6D00370096BC12 /* CatigoryRankStyleCell.xib */; };
+		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
+		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
+		AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */; };
+		AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33F1EA46F340025A72A /* QuickLook.framework */; };
 		AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44C01E88B1A3005E923B /* MyOfferServerMallViewController.m */; };
 		AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBA44C11E88B1A3005E923B /* MyOfferServerMallViewController.xib */; };
 		AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44C51E88B877005E923B /* MyOfferService.m */; };
@@ -694,6 +700,7 @@
 		AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalItem.m; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
+		AE4ECE1E1EA5DCC500BE9512 /* loding.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loding.gif; path = ../loding.gif; sourceTree = "<group>"; };
 		AE56F33E1E0280E900340742 /* WYLXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXGroup.h; sourceTree = "<group>"; };
 		AE56F33F1E0280E900340742 /* WYLXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXGroup.m; sourceTree = "<group>"; };
 		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -1128,11 +1135,17 @@
 		AEA5FDB31E0D32C70064B1B5 /* DefaultTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTableView.m; sourceTree = "<group>"; };
 		AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyDataView.h; sourceTree = "<group>"; };
 		AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyDataView.m; sourceTree = "<group>"; };
+		AEA86E021EA4C8210021BE1B /* MyofferUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUser.h; sourceTree = "<group>"; };
+		AEA86E031EA4C8210021BE1B /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* UniversityNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityNew.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* UniversityNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityNew.m; sourceTree = "<group>"; };
 		AEB61B671E6D00370096BC12 /* CatigoryRankStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryRankStyleCell.h; sourceTree = "<group>"; };
 		AEB61B681E6D00370096BC12 /* CatigoryRankStyleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryRankStyleCell.m; sourceTree = "<group>"; };
 		AEB61B691E6D00370096BC12 /* CatigoryRankStyleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatigoryRankStyleCell.xib; sourceTree = "<group>"; };
+		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AEB9A33F1EA46F340025A72A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		AEBA44BF1E88B1A3005E923B /* MyOfferServerMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferServerMallViewController.h; sourceTree = "<group>"; };
 		AEBA44C01E88B1A3005E923B /* MyOfferServerMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferServerMallViewController.m; sourceTree = "<group>"; };
 		AEBA44C11E88B1A3005E923B /* MyOfferServerMallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOfferServerMallViewController.xib; sourceTree = "<group>"; };
@@ -1236,7 +1249,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */,
+				AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */,
+				AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */,
 				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
+				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
 				AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */,
 				AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */,
 				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
@@ -1396,6 +1413,10 @@
 		463E3AC21B23121F00E0BAF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEB9A33F1EA46F340025A72A /* QuickLook.framework */,
+				AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */,
+				AEB9A33B1EA46F130025A72A /* AVFoundation.framework */,
+				AEB9A3391EA46EBB0025A72A /* libicucore.tbd */,
 				AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */,
 				AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */,
 				AE582C301D06B22C00499B6B /* libc++.tbd */,
@@ -3126,6 +3147,7 @@
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
 				AEA24C151D5B283700DD7939 /* AU.jpg */,
+				AE4ECE1E1EA5DCC500BE9512 /* loding.gif */,
 				AEA24C161D5B283700DD7939 /* bg98.png */,
 				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
@@ -3191,6 +3213,8 @@
 			children = (
 				AEA24AB41D5B24D200DD7939 /* MenuItem.h */,
 				AEA24AB51D5B24D200DD7939 /* MenuItem.m */,
+				AEA86E021EA4C8210021BE1B /* MyofferUser.h */,
+				AEA86E031EA4C8210021BE1B /* MyofferUser.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -3543,6 +3567,7 @@
 				AE1FD73F1D5C929500FFD5A8 /* Pre-comp 1_00027.png in Resources */,
 				AE7825DE1D70296F00AA4EF4 /* UniversityRightView.xib in Resources */,
 				AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */,
+				AE4ECE1F1EA5DCC500BE9512 /* loding.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3561,7 +3586,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8AE3B9FBC75CFF4642972ACF /* [CP] Copy Pods Resources */ = {
@@ -3860,6 +3885,7 @@
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,
 				AEA24BF11D5B266A00DD7939 /* XWGJnodataView.m in Sources */,
 				AEA24B871D5B25E000DD7939 /* NewSearchRstTableViewCell.m in Sources */,
+				AEA86E041EA4C8210021BE1B /* MyofferUser.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,
 				AEA24B7F1D5B25E000DD7939 /* FilterSection.m in Sources */,
@@ -4028,7 +4054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyOffer/myOffer.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shaoxian Hao (D9MXD857N3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = YU34U9SYND;
