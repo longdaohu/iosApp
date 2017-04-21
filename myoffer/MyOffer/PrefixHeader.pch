@@ -127,7 +127,6 @@
 #import "WebViewController.h"
 #import "DefaultTableView.h"
 #import "QQserviceSingleView.h"
-#import "MQChatViewManager.h"
 #import "MyofferUser.h"
 
 

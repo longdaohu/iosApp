@@ -108,10 +108,10 @@ typedef enum {
     loadingView.image =  [UIImage sd_animatedGIFWithData:data];
     */
     
-    
+    /* 美洽
     //#pragma 在合适的地方监听有新消息的广播
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMQMessages:) name:MQ_RECEIVED_NEW_MESSAGES_NOTIFICATION object:nil];
-
+    */
 }
 
 #pragma mark : 网络请求
@@ -514,11 +514,11 @@ typedef enum {
 #pragma mark : 跳转到QQ客服聊天页面
 -(void)QQservice{
 
-//    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
-//    [service call];
-//    
+    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+    [service call];
     
     
+    /*  美洽
     MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
     
     if(LOGIN){
@@ -545,7 +545,7 @@ typedef enum {
     
     [chatViewManager pushMQChatViewControllerInViewController:self];
      
-     
+     */
 }
 
 //打开左侧菜单
@@ -615,13 +615,14 @@ typedef enum {
 
 
 #pragma 监听收到美洽聊天消息的广播
+/*
 - (void)didReceiveNewMQMessages:(NSNotification *)notification {
     //广播中的消息数组
     NSArray *messages = [notification.userInfo objectForKey:@"messages"];
     
     NSLog(@"监听到了收到客服消息的广播 %ld",messages.count);
 }
-
+*/
 
 
 
