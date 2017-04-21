@@ -21,6 +21,8 @@
     
     [MobClick beginLogPageView:@"page国家地区"];
     
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -54,32 +56,27 @@
 -(void)getStateData
 {
     
-    if([self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")])
+    if([self.countryName containsString:@"英国"])
     {
         self.states = @[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-ENG001"),GDLocalizedString(@"CategoryVC-ENG002"),GDLocalizedString(@"CategoryVC-ENG003"),GDLocalizedString(@"CategoryVC-ENG004")];
         
-    }else{
+    }
+    
+    if ([self.countryName containsString:@"澳"]) {
         
-        self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
+         self.states =@[GDLocalizedString(@"SearchResult_All"),GDLocalizedString(@"CategoryVC-AUSTR001"),GDLocalizedString(@"CategoryVC-AUSTR002"),GDLocalizedString(@"CategoryVC-AUSTR003"),GDLocalizedString(@"CategoryVC-AUSTR004"),GDLocalizedString(@"CategoryVC-AUSTR005"),GDLocalizedString(@"CategoryVC-AUSTR006"),GDLocalizedString(@"CategoryVC-AUSTR007")];
     }
     
 }
 
--(void)makeTableView
-{
+-(void)makeTableView{
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view  addSubview:self.tableView];
-    
-    
-    UIImage *countryImage  = [self.countryName isEqualToString:GDLocalizedString(@"CategoryVC-UK")] ? [UIImage imageNamed:GDLocalizedString(@"Category-UK") ] :[UIImage imageNamed:GDLocalizedString(@"Category-AU") ];
-    UIImageView *headerView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, (countryImage.size.height  *  XSCREEN_WIDTH / countryImage.size.width))];
-    headerView.contentMode = UIViewContentModeScaleAspectFill;
-    headerView.image = countryImage;
-    self.tableView.tableHeaderView = headerView;
     
 }
 

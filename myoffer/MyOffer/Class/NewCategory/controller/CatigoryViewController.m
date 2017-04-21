@@ -22,18 +22,21 @@
 #import "TopNavView.h"
 #import "NomalCollectionController.h"
 #import "CatigoryRankStyleCell.h"
+#import "CatigaryHotCityCell.h"
+#import "HomeSectionHeaderView.h"
 
 #define INTERSET_TOP  10.0
 
-@interface CatigoryViewController ()<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,XTopToolViewDelegate>
+@interface CatigoryViewController ()<UIScrollViewDelegate,XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
 //背景scroller
 @property(nonatomic,strong)CatigaryScrollView *bgView;
 //排名tableView
-@property(nonatomic,strong)UICollectionView *rank_collectView;
+@property(nonatomic,strong)UITableView *rank_tableView;
 //专业collectionView
 @property(nonatomic,strong)NomalCollectionController *nomalCollectionVC;
 //热门城市collectionView
-@property(nonatomic,strong)UICollectionView *City_CollectView;
+//@property(nonatomic,strong)UICollectionView *City_CollectView;
+@property(nonatomic,strong)UITableView *City_tableView;
 //排名数组
 @property(nonatomic,strong)NSArray *RankList;
 //专业数组
@@ -56,6 +59,8 @@
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = NO;
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [MobClick beginLogPageView:@"page分类搜索"];
     
@@ -102,7 +107,7 @@
         
         weakSelf.Country_Hotcities = [Country_Hotcities_temp copy];
         
-        [weakSelf.City_CollectView reloadData];
+        [weakSelf.City_tableView reloadData];
         
     }];
 }
@@ -193,7 +198,8 @@
 //导航工具条
 - (void)makeTopView{
     
-    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  -XNAV_HEIGHT, XSCREEN_WIDTH, XNAV_HEIGHT + 60)];
+    self.topView= [[TopNavView alloc] initWithFrame:CGRectMake(0,  0, XSCREEN_WIDTH, XNAV_HEIGHT)];
+ 
     [self.view addSubview:self.topView];
     
     [self makeTopToolView];
@@ -205,11 +211,25 @@
 //滚动工具条
 - (void)makeTopToolView{
     
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - TOP_HIGHT - ITEM_MARGIN,XSCREEN_WIDTH, TOP_HIGHT)];
+    
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,26,XSCREEN_WIDTH, TOP_HIGHT)];
     self.topToolView.itemNames = @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
     self.topToolView.delegate  = self;
-    [self.view  addSubview:self.topToolView];
-}
+    [self.view addSubview: self.topToolView];
+    
+    UIButton *searchBtn = [[UIButton alloc] init];
+    [self.view addSubview:searchBtn];
+    [searchBtn setImage:[UIImage imageNamed:@"tabbar_discover"]  forState:UIControlStateNormal];
+    [searchBtn addTarget:self action:@selector(searchButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    searchBtn.imageView.contentMode = UIViewContentModeCenter;
+    CGFloat search_W = 20;
+    CGFloat search_H = search_W;
+    CGFloat search_X = XSCREEN_WIDTH - search_W - 16;
+    CGFloat search_Y = 0;
+    searchBtn.frame =  CGRectMake(search_X, search_Y, search_W, search_H);
+    searchBtn.center = CGPointMake(searchBtn.center.x, self.topToolView.center.y);
+    
+ }
 
 
 - (void)makeBaseScorller{
@@ -217,10 +237,12 @@
     CGFloat baseX = 0;
     CGFloat baseY = CGRectGetMaxY(self.topView.frame);
     CGFloat baseW = XSCREEN_WIDTH;
-    CGFloat baseH = XSCREEN_HEIGHT - 49 - baseY - XNAV_HEIGHT;//49为底部导航高度
+    CGFloat baseH = XSCREEN_HEIGHT - 49- XNAV_HEIGHT;//49为底部导航高度
     self.bgView = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
+    self.bgView.bounces = NO;
     self.bgView.delegate = self;
     [self.view addSubview:self.bgView];
+    self.bgView.backgroundColor = XCOLOR_WHITE;
     //热门城市
     [self makeCityCollectViewWithFrame:CGRectMake(baseW * 0, 0, baseW,baseH)];
     //热门专业
@@ -233,32 +255,12 @@
 //热门城市
 - (void)makeCityCollectViewWithFrame:(CGRect)frame{
     
-    
-    /*
-     //设置每一个cell的宽高 (cell在CollectionView中称之为item)
-     flowlayout.itemSize = CGSizeMake(width, width);
-     // 设置item行与行之间的间隙
-     flowlayout.minimumLineSpacing = ITEM_MARGIN;
-     //设置item列与列之间的间隙
-     flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
-     */
-    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.backgroundColor = XCOLOR_CLEAR;
-    [self.bgView addSubview:collectionView];
-    self.City_CollectView =  collectionView;
-    
-    
-    [self.City_CollectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
-    
-    [self.City_CollectView registerNib:[UINib nibWithNibName:@"CatigaryCityCollectionCell" bundle:nil] forCellWithReuseIdentifier:cityCellReuse];
-    [self.City_CollectView registerNib:[UINib nibWithNibName:@"CatigaryCityCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:citySectionReuse];
-    
+    self.City_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.City_tableView.delegate = self;
+    self.City_tableView.dataSource = self;
+    self.City_tableView.tableFooterView =[[UIView alloc] init];
+    self.City_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.bgView addSubview:self.City_tableView];
     
 }
 
@@ -266,16 +268,11 @@
 -(void)makeRankTableViewWithFrame:(CGRect)frame
 {
     
-    UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowlayout];
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
-    collectionView.backgroundColor = XCOLOR_CLEAR;
-    self.rank_collectView =  collectionView;
-    [self.bgView addSubview:collectionView];
-    
-    [self.rank_collectView registerNib: [UINib nibWithNibName:@"CatigoryRankStyleCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:rankCellReuse];
+    self.rank_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.rank_tableView.delegate = self;
+    self.rank_tableView.dataSource = self;
+    self.rank_tableView.tableFooterView =[[UIView alloc] init];
+    [self.bgView addSubview:self.rank_tableView];
 
 }
 
@@ -293,13 +290,6 @@
     
 }
 
-- (void)makeUI{
-    
-    [self makeTopView];
-    
-    [self makeOtherUI];
-}
-
 - (void)makeOtherUI{
     
     XWeakSelf
@@ -308,196 +298,98 @@
         [weakSelf showLeftMenu];
         
     }];
-    
+ 
     self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
 }
 
-
-
-#pragma mark : UICollectionViewDelegateFlowLayout
-
-static NSString *citySectionReuse = @"citySectionView";
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+- (void)makeUI{
     
-    if (collectionView == self.City_CollectView && kind == UICollectionElementKindSectionHeader) {
+    [self makeTopView];
+  
+}
+
+
+
+#pragma mark : UITableViewDelegate,UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return self.Country_Hotcities.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 1;
+}
+
+static NSString *identify = @"hotCity";
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CatigaryHotCityCell *cell =[CatigaryHotCityCell cellInitWithTableView:tableView];
+    
+    __block CatigaryCountry *group  = self.Country_Hotcities[indexPath.section];
+    
+    cell.hotCities = group.HotCities;
+    
+    cell.lastCell = (indexPath.section == (self.Country_Hotcities.count - 1));
+    cell.actionBlock = ^(NSString *city){
         
-        CatigaryCityCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:citySectionReuse forIndexPath:indexPath];
-        
-        NSString *headerTitle;
-        
-        if (indexPath.section == 0) {
+        if ([city isEqualToString:@"more"]) {
             
-            headerTitle = @"国家";
+            [self CaseStateWithSection:indexPath.section];
             
         }else{
-            
-            CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
-            headerTitle  = country.countryName;
-        }
-        headerView.sectionNameLab.text = headerTitle;
         
-        return  headerView;
-        
-        
-    }
-    
- 
-    return nil;
-
-   
-    
-    
-}
-
-
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
-    return  (collectionView == self.rank_collectView) ? 1 :  self.Country_Hotcities.count + 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    if (collectionView == self.rank_collectView) {
-        
-        return self.RankList.count;
-        
-    }else{
-    
-        if (section == 0) return  2;
-        CatigaryCountry *country = self.Country_Hotcities[section - 1];
-        return country.HotCities.count;
-    }
-    
-    
-}
-
-static NSString *cityCellReuse = @"cityCell";
-static NSString *rankCellReuse = @"rankStyleCell";
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if (collectionView == self.rank_collectView) {
-        
-        CatigoryRankStyleCell *rank_cell = [collectionView dequeueReusableCellWithReuseIdentifier:rankCellReuse forIndexPath:indexPath];
-
-        rank_cell.rank = self.RankList[indexPath.row];
-        
-        return rank_cell;
-        
-    }else{
-    
-    
-        if (indexPath.section == 0) {
-            
-            UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-            
-            UIImageView *bgView = [[UIImageView alloc] init];
-            bgView.frame = cell.bounds;
-            bgView.contentMode = UIViewContentModeScaleAspectFill;
-            NSString *item = (indexPath.row == 0) ? GDLocalizedString(@"Category-UK") : GDLocalizedString(@"Category-AU");
-            bgView.image = [UIImage imageNamed:item];
-            
-            [cell.contentView addSubview:bgView];
-            cell.contentView.layer.cornerRadius = CORNER_RADIUS;
-            cell.contentView.layer.masksToBounds = YES;
-            
-            return cell;
-            
-        }else{
-            
-            CatigaryCityCollectionCell *city_cell = [collectionView dequeueReusableCellWithReuseIdentifier:cityCellReuse forIndexPath:indexPath];
-            CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
-            city_cell.city = country.HotCities[indexPath.row];
-            
-            return city_cell;
-            
+            [self CaseHotCityWithCityName:city];
         }
         
-      }
+        
+    };
+
+
+     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
     
-     return  collectionView == self.City_CollectView  ? CGSizeMake(XSCREEN_WIDTH, 50)  : CGSizeMake(0, 0);
+    __block CatigaryCountry *group = self.Country_Hotcities[section];
+    
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.countryName];
+    SectionView.backgroundColor = XCOLOR_WHITE;
+    [SectionView arrowButtonHiden:NO];
+    SectionView.actionBlock = ^{
+        
+         [self CaseStateWithSection:section];
+    };
+    
+    return  SectionView;
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    
-    if (collectionView == self.rank_collectView) {
-        
-        CatigoryRank *rank = self.RankList[indexPath.row];
-        
-        [rank.countryName isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ?   [self CaseAU:rank] : [self CaseUK:rank] ;
-        
-        return;
-    }
-    
-    
-    if (indexPath.section == 0) {
-        
-        [self CaseStateWithIndexPath:indexPath];
-        
-    }else{
-        
-        [self CaseHotCityWithIndexPath:indexPath];
-    }
-    
+    return  FLOWLAYOUT_CityW + 20;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+
+    return 50;
 }
 
 
-#pragma mark : UICollectionViewLayoutDelegate
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    if (collectionView == self.rank_collectView) {
-        
 
-        return CGSizeMake(XSCREEN_WIDTH -  2 * ITEM_MARGIN, Country_Width -20);
-        
-    }
-    
-    if (indexPath.section == 0) {
-        
-        return CGSizeMake(XSCREEN_WIDTH -  2 * ITEM_MARGIN, Country_Width -20);
-    }
-    
-    return CGSizeMake(FLOWLAYOUT_CityW, FLOWLAYOUT_CityW);
-    
-    
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    
-    return ITEM_MARGIN;
-}
-
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    
-    return UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
-}
-
-/*
- - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
- 
- return ITEM_MARGIN;
- }
-   
- - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
- - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section;
- */
-
-
-#pragma mark ———————— UIScrollViewDelegate
+#pragma mark : UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -526,7 +418,8 @@ static NSString *rankCellReuse = @"rankStyleCell";
 }
 
 
-#pragma mark ——— XTopToolViewDelegate
+#pragma mark : XTopToolViewDelegate
+
 - (void)XTopToolView:(XBTopToolView *)topToolView andButtonItem:(UIButton *)sender{
     
     [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
@@ -613,29 +506,29 @@ static NSString *rankCellReuse = @"rankStyleCell";
 
 
 //热门留学城市
--(void)CaseHotCityWithIndexPath:(NSIndexPath *)indexPath
+-(void)CaseHotCityWithCityName:(NSString *)CityName
 {
     
-    CatigaryCountry *country = self.Country_Hotcities[indexPath.section - 1];
-    
-    CatigaryHotCity *city = country.HotCities[indexPath.row];
-    
     XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
-                                                                              value:city.city
+                                                                              value:CityName
                                                                             orderBy:RANK_TI];
-    vc.Corecity = city.city;
+    vc.Corecity = CityName;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //英国、澳大利亚地区列表
--(void)CaseStateWithIndexPath:(NSIndexPath *)indexPath
-{
-    CountryStateViewController *STATE = [[CountryStateViewController alloc] init];
+-(void)CaseStateWithSection:(NSInteger)section{
     
-    STATE.countryName = indexPath.row == 0 ? GDLocalizedString(@"CategoryVC-UK"):GDLocalizedString(@"CategoryVC-AU");
+    CatigaryCountry *country = self.Country_Hotcities[section];
     
-    [self.navigationController pushViewController:STATE animated:YES];
+    CountryStateViewController *country_state= [[CountryStateViewController alloc] init];
+    
+    country_state.countryName = country.countryName;
+    
+    
+    
+    [self.navigationController pushViewController:country_state animated:YES];
 }
 
 

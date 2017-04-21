@@ -14,8 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 //标题
 @property (weak, nonatomic) IBOutlet UILabel *cityLab;
-//蒙版
-@property(nonatomic,strong)CAGradientLayer *gradientLayer;
 
 @end
 
@@ -24,52 +22,35 @@
 - (void)awakeFromNib {
   
     [super awakeFromNib];
- 
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    UIColor *colorOne = [UIColor colorWithWhite:0 alpha:0];
-    UIColor *colorTwo = [UIColor colorWithWhite:0 alpha:0.6];
-    gradientLayer.colors           = [NSArray arrayWithObjects:
-                                 (id)colorOne.CGColor,
-                                 (id)colorTwo.CGColor,
-                                 nil];
-    gradientLayer.locations  = @[@(0.2), @(0.8)];
+    
+    self.cityLab.font = [UIFont boldSystemFontOfSize: XFONT_SIZE(22)];
+    
+}
 
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1);
-    self.gradientLayer = gradientLayer;
-    [self.contentView.layer insertSublayer:gradientLayer below:self.cityLab.layer];
-    
-    
-    self.cityLab.font = [UIFont systemFontOfSize: XPERCENT * 16];
-    
-    
- }
 -(void)setCity:(CatigaryHotCity *)city
 {
     _city = city;
     
     self.cityLab.text =city.city;
-    
+    self.cityLab.textColor = XCOLOR_WHITE;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 
+- (void)setMoreCity:(BOOL)moreCity{
 
-
-
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    CGSize contentSize = self.bounds.size;
-   
-    CGFloat mengx = 0;
-    CGFloat mengy = contentSize.height * 0.5;
-    CGFloat mengw = contentSize.width;
-    CGFloat mengh = contentSize.height  * 0.5;
-    self.gradientLayer.frame = CGRectMake(mengx, mengy, mengw, mengh);
+    if (moreCity) {
+        
+        self.cityLab.text = @"查看更多";
+        self.cityLab.textColor = XCOLOR_SUBTITLE;
+        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
+        
+    }
  
+    
 }
+
+
 
 
 

@@ -94,17 +94,23 @@ static NSString * const kAPIEndPoint = DOMAINURL;
 
     
     if (!success) success = ^(NSInteger statusCode , NSDictionary *response) {};
+    
     if (!failure) failure = ^(NSInteger statusCode , NSError *error) {};
     
     NSURLSessionDataTask * task = [_URLSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *_response, NSError *error) {
-        NSHTTPURLResponse *response = (NSHTTPURLResponse *)_response;
         
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)_response;
  
         if (error) {
+            
             KDClassLog(@"Request failed: %@", error);
+            
             dispatch_async( dispatch_get_main_queue(),^{
+            
                 failure(0, error);
+                
             });
+            
             return;
         }
         
@@ -120,9 +126,14 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         NSError *JSONError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
       
+        KDClassLog(@"Error 这在这里测试服务器错误 error = %@  code = %d   statusCode = %d   \n path = %@  result =  %@  ",JSONError,JSONError.code,response.statusCode,request.URL.absoluteString,result);
+ 
+        
         if (JSONError) {
+          
             KDClassLog(@"Error occurred when json serializating: %@", JSONError);
-            KDClassLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            KDClassLog(@"JSONError 出错 = %@    response.statusCode =  %d    path = %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding],response.statusCode,request.URL.absoluteString);
+            
             dispatch_async( dispatch_get_main_queue(),^{
                 
                     failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain code:kAPIClientErrorDomainCodeJSONDeserializatingError userInfo:nil]);

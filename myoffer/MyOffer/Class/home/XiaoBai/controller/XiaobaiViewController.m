@@ -123,8 +123,6 @@
 - (void)configrationUIWithResponse:(id)response{
     
     
-    
-    
     self.gonglueItems =  [GonglueItem mj_objectArrayWithKeyValuesArray:(NSArray *)response];
  
     self.tableView.tableFooterView = [UIView new];

@@ -26,15 +26,16 @@ static NSString * const reuseIdentifier = @"subjectCell";
     [super viewDidLoad];
     
     // self.clearsSelectionOnViewWillAppear = NO;
+    CGFloat item_width = (XSCREEN_WIDTH - 4) / 3;
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    flowlayout.itemSize = CGSizeMake(FLOWLAYOUT_SubW, FLOWLAYOUT_SubW);
-    flowlayout.minimumLineSpacing = ITEM_MARGIN;
-    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
-    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
+    flowlayout.itemSize = CGSizeMake(item_width, item_width);
+    flowlayout.minimumLineSpacing = 2;
+    flowlayout.minimumInteritemSpacing = 2;
+//    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowlayout];
-    self.collectionView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN,0, 0, 0);
+//    self.collectionView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN,0, 0, 0);
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.view addSubview:self.collectionView];

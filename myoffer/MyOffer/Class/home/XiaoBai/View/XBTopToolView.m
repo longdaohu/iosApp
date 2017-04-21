@@ -128,28 +128,7 @@
 
     [UIView transitionWithView:self.focusView duration:0.3 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
-    /*      switch (sender.tag) {
-            case 0:{
-                [self lineHidenIndex:0];
-                [self lineHidenNoIndex:1];
-            }
-                break;
-            case 2:{
-                [self lineHidenIndex:1];
-                [self lineHidenNoIndex:0];
-                
-            }
-                break;
-            default:
-            {
-                [self lineHidenIndex:0];
-                [self lineHidenIndex:1];
-                
-            }
-                break;
-        }
-
-   */
+ 
         self.focusView.frame = sender.frame;
 
         self.focusView.image = self.itemImages[sender.tag];
@@ -173,18 +152,7 @@
     
 }
 
-/*
--(void)lineHidenIndex:(NSInteger)index{
-    UIView *line = (UIView *)self.blackView.subviews[index];
-    line.alpha = 0;
-}
 
--(void)lineHidenNoIndex:(NSInteger)index{
-    UIView *line = (UIView *)self.blackView.subviews[index];
-    line.alpha = 1;
-}
-
-*/
 - (void)layoutSubviews{
 
     [super layoutSubviews];
@@ -192,7 +160,7 @@
     CGSize contentSize = self.bounds.size;
     
     CGFloat blackH = contentSize.height;
-    CGFloat blackX = 10;
+    CGFloat blackX = 50;
     CGFloat blackY = 0;
     CGFloat blackW = contentSize.width - 2 * blackX;
     self.blackView.frame = CGRectMake(blackX, blackY, blackW, blackH);
@@ -217,20 +185,7 @@
             
             sender.frame = CGRectMake(btnx, btny,btnw, btnh);
         }
-        
-        
-        CGFloat linew = 1;
-        CGFloat lineh = 20;
-        CGFloat liney = (blackH - lineh)*0.5;
-        
-        for (int i = 0; i < self.blackView.subviews.count; i++) {
-            
-            UIView *line = self.blackView.subviews[i];
-            CGFloat linex = lineMargin * (i+1);
-            line.frame =  CGRectMake(linex, liney,linew, lineh);
-            
-         }
-
+  
         
         CGFloat focusx = 0;
         CGFloat focusy = 0;

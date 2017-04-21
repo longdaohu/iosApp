@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,32 +18,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="185" height="144"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tNt-z1-VHi">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceHolderImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="tNt-z1-VHi">
                         <rect key="frame" x="0.0" y="0.0" width="185" height="144"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="哥伦比亚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQB-LZ-dzq">
-                        <rect key="frame" x="10" y="113" width="70" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看更多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQB-LZ-dzq">
+                        <rect key="frame" x="56" y="62" width="73.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tNt-z1-VHi" secondAttribute="trailing" id="CGs-Qi-uIF"/>
+                <constraint firstItem="aQB-LZ-dzq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="LGg-Ko-SF6"/>
                 <constraint firstItem="tNt-z1-VHi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UPQ-Bq-Q96"/>
                 <constraint firstItem="tNt-z1-VHi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UrA-JZ-MfO"/>
-                <constraint firstAttribute="bottom" secondItem="aQB-LZ-dzq" secondAttribute="bottom" constant="10" id="ouz-p4-b4U"/>
+                <constraint firstItem="aQB-LZ-dzq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="oTZ-Yp-h5C"/>
                 <constraint firstAttribute="bottom" secondItem="tNt-z1-VHi" secondAttribute="bottom" id="plc-Kk-mtW"/>
-                <constraint firstItem="aQB-LZ-dzq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="znu-Qd-iIG"/>
             </constraints>
             <size key="customSize" width="185" height="144"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                    <integer key="value" value="5"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cityLab" destination="aQB-LZ-dzq" id="gZo-b2-4IT"/>
                 <outlet property="iconView" destination="tNt-z1-VHi" id="pDA-JR-92v"/>
@@ -51,4 +46,7 @@
             <point key="canvasLocation" x="531.5" y="395"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="PlaceHolderImage.png" width="450" height="350"/>
+    </resources>
 </document>

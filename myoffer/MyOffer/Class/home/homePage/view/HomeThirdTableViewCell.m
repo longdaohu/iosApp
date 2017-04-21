@@ -13,7 +13,6 @@
 
 @interface HomeThirdTableViewCell ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UICollectionView *CollectionView;
-@property(nonatomic,strong)UICollectionViewFlowLayout *flowlayout;
 
 @end
 
@@ -53,7 +52,6 @@
 {
     
      UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-    self.flowlayout = flowlayout;
     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
     CGFloat width = XSCREEN_WIDTH * 0.6;
     CGFloat heigh = width * 1.3 + 20;

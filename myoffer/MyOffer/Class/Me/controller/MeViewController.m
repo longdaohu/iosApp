@@ -26,6 +26,7 @@ typedef enum {
 #import "PipeiEditViewController.h"
 #import "MyOfferServerMallViewController.h"
 #import "MeCenterHeaderViewFrame.h"
+#import "UIImage+GIF.h"
 
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
@@ -99,7 +100,18 @@ typedef enum {
     [self makeCellArray];
     
     [self makeOther];
+    /*
+    UIImageView *loadingView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:loadingView];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"loding" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    loadingView.image =  [UIImage sd_animatedGIFWithData:data];
+    */
     
+    
+    //#pragma 在合适的地方监听有新消息的广播
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNewMQMessages:) name:MQ_RECEIVED_NEW_MESSAGES_NOTIFICATION object:nil];
+
 }
 
 #pragma mark : 网络请求
@@ -504,25 +516,36 @@ typedef enum {
 
 //    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
 //    [service call];
-    
+//    
     
     
     MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
     
-    //创建自定义信息
-    NSDictionary* clientCustomizedAttrs = @{
-                                            @"name"        : [MyofferUser defaultUser].displayname,
-                                            @"tel"         : [MyofferUser defaultUser].phonenumber,
-                                            @"source"      : @"ios_APP"
-                                            };
-    [MQManager setClientInfo:clientCustomizedAttrs completion:^(BOOL success, NSError *error) {
+    if(LOGIN){
         
-    }];
+        //创建自定义信息
+        NSDictionary* clientCustomizedAttrs = @{
+                                                @"name"        : [MyofferUser defaultUser].displayname,
+                                                @"tel"         : [MyofferUser defaultUser].phonenumber,
+                                                @"source"      : @"ios_APP"
+                                                };
+        
+        [MQManager setClientInfo:clientCustomizedAttrs completion:^(BOOL success, NSError *error) {
+            
+        }];
+     
+//        [chatViewManager setLoginMQClientId: [MyofferUser defaultUser].user_id];
+        
+        [MQManager getCurrentClientId];
+        
+    }
     
      //开启同步消息
 //    [chatViewManager enableSyncServerMessage:true];
     
     [chatViewManager pushMQChatViewControllerInViewController:self];
+     
+     
 }
 
 //打开左侧菜单
@@ -589,6 +612,16 @@ typedef enum {
     [self.navigationController pushViewController:[[NSClassFromString(vcStr)  alloc] init] animated:YES];
 
 }
+
+
+#pragma 监听收到美洽聊天消息的广播
+- (void)didReceiveNewMQMessages:(NSNotification *)notification {
+    //广播中的消息数组
+    NSArray *messages = [notification.userInfo objectForKey:@"messages"];
+    
+    NSLog(@"监听到了收到客服消息的广播 %ld",messages.count);
+}
+
 
 
 

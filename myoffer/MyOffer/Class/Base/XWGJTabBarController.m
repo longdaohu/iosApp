@@ -105,8 +105,8 @@
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame            = navView.bounds;
         gradient.colors           = [NSArray arrayWithObjects:
-                           (id)[UIColor colorWithRed:45/255.0 green:195/255.0 blue:228/255.0 alpha:1].CGColor,
-                           (id)[UIColor colorWithRed:154/255.0 green:65/255.0 blue:147/255.0 alpha:1].CGColor,
+                           (id)[UIColor colorWithRed:47/255.0 green:212/255.0 blue:255/255.0 alpha:1].CGColor,
+                           (id)[UIColor colorWithRed:0/255.0 green:171/255.0 blue:255/255.0 alpha:1].CGColor,
                            nil];
         gradient.startPoint = CGPointMake(0.4, 0.95);
         gradient.endPoint = CGPointMake(1.0, 1.0);
@@ -117,17 +117,17 @@
 
       
         NSMutableArray *temps = [NSMutableArray array];
-        CGFloat leftMargin    = 10;
-        CGFloat btnw          = (XSCREEN_WIDTH - leftMargin *2)/3;
+        CGFloat leftMargin    = 50;
+        CGFloat btnw          = (XSCREEN_WIDTH - leftMargin * 2)/3;
         CGFloat btnh          = TOP_HIGHT;
-        CGFloat btny          = navHeight - btnh - 10;
+        CGFloat btny          =  navHeight - btnh - 6;
         for (NSInteger index  = 0; index < 3; index++){
             
             CGFloat btnx = btnw * index + leftMargin;
             UIButton *sender  = [[UIButton alloc] initWithFrame:CGRectMake(btnx, btny ,btnw, btnh)];
             [navView addSubview:sender];
             sender.layer.borderColor   = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
-            sender.layer.cornerRadius  = 17;
+            sender.layer.cornerRadius  = TOP_HIGHT * 0.5;
             sender.layer.masksToBounds = YES;
             sender.tag                 = index;
             [sender setBackgroundImage:[self makeNewImageWithRect:sender.frame] forState:UIControlStateNormal];
