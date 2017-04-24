@@ -8,21 +8,26 @@
 
 #import "UniversityCourseCell.h"
 #import "UniversityCourse.h"
+#import "UniversityCourseFrame.h"
 
 @interface UniversityCourseCell ()
-@property(nonatomic,assign)BOOL cellSelected;
+@property (nonatomic,strong) UILabel *official_Lab;
+@property (nonatomic,strong) UIButton *optionBtn;
+@property (nonatomic,strong) UIView *bg_View;
+
+
 @end
 
 @implementation UniversityCourseCell
 
 static NSString *identify = @"course";
-+(instancetype)cellWithTableView:(UITableView *)tableView{
++ (instancetype)cellWithTableView:(UITableView *)tableView{
    
     UniversityCourseCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     
     if (!cell) {
         
-        cell =[[NSBundle mainBundle] loadNibNamed:@"UniversityCourseCell" owner:self options:nil].lastObject;
+        cell = [[UniversityCourseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     
     return cell;
@@ -30,72 +35,89 @@ static NSString *identify = @"course";
 }
 
 
--(void)awakeFromNib
-{
-    [super awakeFromNib];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
-    self.titleLabel =[[UILabel alloc] init];
-    self.titleLabel.numberOfLines = 0;
-    self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];
-    self.titleLabel.textColor =XCOLOR_DARKGRAY;
-    [self.contentView addSubview:self.titleLabel];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if (self) {
+        
+        [self makeUI];
+    }
     
     
-    self.degreesLab =[UILabel labelWithFontsize:12 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
-    self.degreesLab.numberOfLines = 2;
-    [self.contentView addSubview:self.degreesLab];
+    return self;
+}
+
+
+- (void)makeUI{
+
+    UILabel *official_lab = [[UILabel alloc] init];
+    official_lab.font = XFONT(14);
+    official_lab.numberOfLines = 2;
+    official_lab.textColor = XCOLOR_TITLE;
+    [self.contentView addSubview:official_lab];
+    self.official_Lab = official_lab;
     
-    self.subjectLab =[UILabel labelWithFontsize:12 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
-    self.subjectLab.lineBreakMode = NSLineBreakByCharWrapping;
-    [self.subjectLab sizeToFit];
-    self.subjectLab.numberOfLines =2;
-    [self.contentView addSubview:self.subjectLab];
+    
+    UIButton *optionBtn = [UIButton new];
+    [self.contentView addSubview:optionBtn];
+    self.optionBtn = optionBtn;
+    optionBtn.titleLabel.font = XFONT(14);
+    optionBtn.userInteractionEnabled = NO;
+    [optionBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
+    
+    UIView *bgView = [UIView new];
+    [self.contentView addSubview:bgView];
+    self.bg_View = bgView;
+    
     
 }
 
--(void)setCourse:(UniversityCourse *)course{
+- (void)setCourse_frame:(UniversityCourseFrame *)course_frame{
 
-    _course = course;
+    _course_frame = course_frame;
     
-    self.titleLabel.text = course.official_name;
+    UniversityCourse *course = course_frame.course;
     
-    CGSize size = [course.official_name boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - 60, 999)
-                                                       options:NSStringDrawingUsesLineFragmentOrigin
-                                                    attributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:15.0]}
-                                                       context:NULL].size;
+    self.official_Lab.text = course.official_name;
     
+    self.official_Lab.frame = course_frame.official_name_Frame;
     
+    self.optionBtn.frame = course_frame.option_Frame;
     
-    CGFloat titleX = 10;
-    CGFloat titleY = 10;
-    CGFloat titleW = XSCREEN_WIDTH - 60;
-    CGFloat titleH = size.height;
-    self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    [self configureCellWithCourse:course];
     
-   
-    self.degreesLab.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),course.level];
-    self.subjectLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-005"), [course.areas componentsJoinedByString:@","]];
+    self.bg_View.frame = course_frame.items_bg_Frame;
     
- 
+    if (self.bg_View.subviews.count > 0) {
+    
+        [self.bg_View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
     
     
-    CGSize degreeSize =[self.degreesLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:12]]; //[self text:self.degreesLab.text maxWidth:degreeW andfontSize:12];
-    CGSize subjectSize = [self.subjectLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:12]];//[self text:self.subjectLab.text maxWidth:subjectW andfontSize:12];
+    for (NSInteger index = 0 ; index < course_frame.course.items.count; index++) {
     
+        NSString *item = course_frame.course.items[index];
+        CGRect item_Frame = [course_frame.items_Frame[index] CGRectValue];
+        [self itemWithName: item frame: item_Frame];
+        
+     }
+  
     
-    CGFloat degreeX = titleX;
-    CGFloat degreeW = 140 + KDUtilSize(0) * 8;
-    CGFloat degreeY = self.contentView.bounds.size.height - 30;
-    CGFloat degreeH = degreeSize.width > degreeW ? 29 : 13;
-    self.degreesLab.frame = CGRectMake(degreeX, degreeY, degreeW, degreeH);
-    
-    
-    
-    CGFloat subjectX =degreeW + degreeX + 5;
-    CGFloat subjectW = XSCREEN_WIDTH - subjectX;
-    CGFloat subjectY = degreeY;
-    CGFloat subjectH = subjectSize.width > subjectW ? 29 : 13;
-    self.subjectLab.frame = CGRectMake(subjectX, subjectY, subjectW, subjectH);
+}
+
+- (void)itemWithName:(NSString *)name frame:(CGRect)frame{
+
+    UILabel *sender = [UILabel new];
+    [self.bg_View addSubview:sender];
+    sender.textColor = XCOLOR_SUBTITLE;
+    sender.backgroundColor = XCOLOR_BG;
+    sender.font = XFONT(11);
+    sender.text = name;
+    sender.frame = frame;
+    sender.layer.cornerRadius = CORNER_RADIUS;
+    sender.layer.masksToBounds = YES;
+    sender.textAlignment = NSTextAlignmentCenter;
     
 }
 
@@ -104,42 +126,46 @@ static NSString *identify = @"course";
   
     
     NSString *title = course.applied ? GDLocalizedString(@"UniCourseDe-007") : @"";
-    [self.selectionView setTitle: title  forState:UIControlStateNormal];
+    
+    [self.optionBtn setTitle: title  forState:UIControlStateNormal];
 
     if (course.applied) {
        
-        [self.selectionView setImage:nil forState:UIControlStateNormal];
+        [self.optionBtn setImage:nil forState:UIControlStateNormal];
    
     }else {
        
-         NSString *imageName = self.cellSelected ? @"check-icons-yes" : @"check-icons";
-        [self.selectionView setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        NSString *imageName = self.course_frame.course.optionSeleced ? @"check-icons-yes" : @"check-icons";
+        
+        [self.optionBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     
 }
 
 -(void)cellDidSelectRowSelected:(BOOL)selected{
 
-     self.cellSelected = selected;
+     self.course_frame.course.optionSeleced = selected;
     
-    [self configureCellWithCourse:self.course];
+    [self configureCellWithCourse:self.course_frame.course];
 }
 
--(void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    self.cellSelected = !self.cellSelected;
     
-    [self configureCellWithCourse:self.course];
+    self.course_frame.course.optionSeleced = !self.course_frame.course.optionSeleced;
+    
+    [self configureCellWithCourse:self.course_frame.course];
+    
 
 }
 
+/*
 -(void)setInfo:(NSDictionary *)info
 {
     _info = info;
     
  
-    self.titleLabel.text = info[@"official_name"];
+    self.official_Lab.text = info[@"official_name"];
     
     CGSize size = [info[@"official_name"] boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH - 60, MAXFLOAT)
                                       options:NSStringDrawingUsesLineFragmentOrigin
@@ -152,7 +178,7 @@ static NSString *identify = @"course";
     CGFloat titleY = 10;
     CGFloat titleW = XSCREEN_WIDTH - 60;
     CGFloat titleH = size.height;
-    self.titleLabel.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    self.official_Lab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     
     self.degreesLab.text  = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniCourseDe-006"),info[@"level"]];
@@ -184,7 +210,7 @@ static NSString *identify = @"course";
 }
 
 
-
+*/
 
 
 @end

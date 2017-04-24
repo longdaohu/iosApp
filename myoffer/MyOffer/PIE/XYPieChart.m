@@ -191,7 +191,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         CGRect bounds = [[self layer] bounds];
         //设置饼图半径
         self.pieRadius = MIN(bounds.size.width/2, bounds.size.height/2);
-        KDClassLog(@"--pieRadius--- %lf",self.pieRadius);
+//        KDClassLog(@"--pieRadius--- %lf",self.pieRadius);
         self.pieCenter = CGPointMake(bounds.size.width/2, bounds.size.height/2);
         self.labelFont = [UIFont boldSystemFontOfSize:MAX((int)self.pieRadius/10, 5)];
         _labelColor = [UIColor whiteColor];

@@ -28,7 +28,8 @@ typedef enum {
 #import "FilterSection.h"
 #import "FilterTableViewCell.h"
 #import "BottomBackgroudView.h"
-#import "UniversityCourseViewController.h"
+//#import "UniversityCourseViewController.h"
+#import "UniversitySubjectListViewController.h"
 #import "searchSectionFootView.h"
 #import "FilterContentFrame.h"
 #import "UniversityFrameNew.h"
@@ -850,7 +851,7 @@ typedef enum {
         sectionFooter.uniObj = uniFrame.universtiy;
         sectionFooter.actionBlock = ^(NSString *universityID){
             
-            [weakSelf.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:universityID] animated:YES];
+            [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:universityID] animated:YES];
             
         };
         

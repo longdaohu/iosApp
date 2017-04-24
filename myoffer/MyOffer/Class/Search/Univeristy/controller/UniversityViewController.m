@@ -25,7 +25,7 @@
 #import "IDMPhotoBrowser.h"
 #import "ShareNViewController.h"
 #import "UniversityFooterView.h"
-#import "UniversityCourseViewController.h"
+#import "UniversitySubjectListViewController.h"
 #import "PipeiEditViewController.h"
 #import "UniDetailGroup.h"
 #import "UniversityheaderCenterView.h"
@@ -778,7 +778,7 @@ typedef enum {
 //查看所有专业
 - (void)caseAllSubjects{
     
-    [self.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:self.UniFrame.item.NO_id] animated:YES];
+    [self.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:self.uni_id] animated:YES];
 }
 
 //智能匹配

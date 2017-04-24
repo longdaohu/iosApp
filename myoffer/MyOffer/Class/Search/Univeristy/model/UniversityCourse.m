@@ -14,4 +14,18 @@
     return @{@"NO_id" : @"_id"};
     
 }
+
+- (NSArray *)items{
+
+    NSMutableArray *item_temps = [NSMutableArray array];
+    
+    if (self.level) [item_temps addObject:self.level];
+    
+    [item_temps addObjectsFromArray:self.areas];
+    
+  
+    return  [item_temps copy];
+}
+
+
 @end

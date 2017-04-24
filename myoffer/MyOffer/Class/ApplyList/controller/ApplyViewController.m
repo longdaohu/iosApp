@@ -7,13 +7,13 @@
 // 申请意向
 #import "XWGJTiJiaoViewController.h"
 #import "ApplyViewController.h"
-#import "UniversityCourseViewController.h"
 #import "ApplySection.h"
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameNew.h"
 #import "ApplyTableViewCell.h"
 #import "UniversityNew.h"
+#import "UniversitySubjectListViewController.h"
 
 #define SECTIONFOOTERHEIGHT  10
 
@@ -444,7 +444,7 @@
             if (![weakSelf checkNetworkState])  return;
             
             weakSelf.cell_Animation = NO;
-            [weakSelf.navigationController pushViewController:[[UniversityCourseViewController alloc] initWithUniversityID:university.NO_id] animated:YES];
+            [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:university.NO_id] animated:YES];
             
             return;
         }
