@@ -11,11 +11,11 @@
 @implementation UniversityCourse
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    return @{@"NO_id" : @"_id"};
+    return @{@"course_id" : @"_id"};
     
 }
 
-- (NSArray *)items{
+- (NSArray *)tags{
 
     NSMutableArray *item_temps = [NSMutableArray array];
     

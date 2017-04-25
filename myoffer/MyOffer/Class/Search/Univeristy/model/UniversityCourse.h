@@ -12,9 +12,11 @@
 @property(nonatomic,copy)NSString *official_name;
 @property(nonatomic,copy)NSString *level;
 @property(nonatomic,strong)NSArray *areas;
-@property(nonatomic,strong)NSArray *items;
-@property(nonatomic,copy)NSString *NO_id;
+//自定义添加cell标签数组
+@property(nonatomic,strong)NSArray *tags;
+@property(nonatomic,copy)NSString *course_id;
 @property(nonatomic,assign)BOOL applied;
+//添加cellmodel选择属性
 @property(nonatomic,assign)BOOL optionSeleced;
 
 @end

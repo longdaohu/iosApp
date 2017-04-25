@@ -97,21 +97,24 @@
 
 - (void)makeFilter{
 
-    UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] init];
+    XWeakSelf
+    
+    UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
+        
+        [weakSelf reloadWithValue:value key:key];
+
+    }];
+    
     [self addChildViewController:filter];
     self.filter = filter;
+    
     CGFloat base_Height = XNAV_HEIGHT + 50;
     filter.base_Height = base_Height;
     filter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, base_Height);
     filter.areas = self.groups;
-    
     [self.view addSubview:filter.view];
-    XWeakSelf
-    filter.actionBlock = ^(NSString *value, NSString *key) {
-      
-        [weakSelf reloadWithValue:value key:key];
-    };
-    
+ 
+ 
 }
 
 - (void)reloadWithValue:(NSString *)value key:(NSString *)key{
@@ -208,18 +211,20 @@
     
     
     if (0 == self.nextPage) {
-    
         
+        // contentOffset.y 没有上移时，不用回滚到顶部
         if (self.tableView.contentOffset.y > 0) [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         
+        // page = 0 时，删除所有数据
         if (self.course_frames.count > 0) [self.course_frames removeAllObjects];
 
         
+        // page = 0 时，删除所有选择项
         if (self.selected_items.count > 0) {
             
             [self.selected_items removeAllObjects];
             
-             self.footer.count = 0;
+            [self updateFooterViewSelectedCourse:self.selected_items.count];
         }
         
         
@@ -268,6 +273,8 @@
     
     cell.course_frame =  self.course_frames[indexPath.row];
     
+    
+    //下拉到最后indexPath.row  下拉加载
     if (indexPath.row == self.course_frames.count - 1  && !self.endPage) {
         
         [self.resquestParameters setValue:@(self.nextPage) forKey:@"page"];
@@ -286,26 +293,27 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityCourseFrame *courseFrame = self.course_frames[indexPath.row];
-     
+    
+    //已提交的专业不能再被选择
     if (courseFrame.course.applied) return;
         
     
-    if ([self.selected_items containsObject:courseFrame.course.NO_id]) {
+    if ([self.selected_items containsObject:courseFrame.course.course_id]) {
         
-        [self.selected_items removeObject:courseFrame.course.NO_id];
+        [self.selected_items removeObject:courseFrame.course.course_id];
 
     }else{
         
         //超过6个不能再选择
         if (self.selected_items.count == 6) return;
         
-        [self.selected_items addObject:courseFrame.course.NO_id];
+        [self.selected_items addObject:courseFrame.course.course_id];
     }
     
+    //更新footer显示样式
+    [self updateFooterViewSelectedCourse:self.selected_items.count];
     
-    [self updateSelectedCourse:self.selected_items.count];
-    
-    
+    //更新cell选择样式
     UniversityCourseCell *cell = (UniversityCourseCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell cellDidSelectRowAtIndexPath:indexPath];
         
@@ -313,7 +321,7 @@
     
 }
 
-- (void)updateSelectedCourse:(NSInteger)count{
+- (void)updateFooterViewSelectedCourse:(NSInteger)count{
 
      self.footer.count = count;
   

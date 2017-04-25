@@ -56,9 +56,9 @@
     CGFloat item_W = 0;
     NSMutableArray *temps_item = [NSMutableArray array];
     
-    for (NSInteger index = 0; index < course.items.count; index++) {
+    for (NSInteger index = 0; index < course.tags.count; index++) {
         
-        CGSize item_Size  = [course.items[index] KD_sizeWithAttributeFont:XFONT(11)];
+        CGSize item_Size  = [course.tags[index] KD_sizeWithAttributeFont:XFONT(11)];
         item_W = item_Size.width + 10;
         CGRect item_rect = CGRectMake(item_X, item_Y, item_W, item_H);
         item_X += (item_W + 10);

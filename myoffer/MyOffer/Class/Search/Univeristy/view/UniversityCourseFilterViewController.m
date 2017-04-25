@@ -11,21 +11,48 @@
 
 @interface UniversityCourseFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *topView;
+//学位按钮
 @property(nonatomic,strong)UIButton *levelBtn;
+//领域按钮
 @property(nonatomic,strong)UIButton *areaBtn;
+//当前已选中按钮
 @property(nonatomic,strong)UIButton *currentBtn;
-@property(nonatomic,strong)UIView   *center_line;
 @property(nonatomic,strong)UITableView *level_tableView;
 @property(nonatomic,strong)UITableView *area_tableView;
+//tableView 默认Frame
 @property(nonatomic,assign)CGRect  level_tableView_defaultFrame;
 @property(nonatomic,assign)CGRect area_tableView_defaultFrame;
+//学位类型数组
 @property(nonatomic,strong)NSArray *levels;
+//当前已选择项
 @property(nonatomic,copy)NSString *current_Level;
 @property(nonatomic,copy)NSString *current_area;
 
 @end
 
 @implementation UniversityCourseFilterViewController
+
+- (instancetype)initWithActionBlock:(UniversityCourseFilterViewBlock)actionBlock{
+ /*
+  
+  UniversityCourseFilterViewController *filter =  [[UniversityCourseFilterViewController alloc] init];
+  
+  filter.actionBlock =  actionBlock;
+  
+  return filter;
+  
+  */
+    
+    self = [self init];
+    
+    if (self) {
+    
+        self.actionBlock = actionBlock;
+    }
+    return self;
+    
+}
+
 
 - (void)viewDidLoad {
     
@@ -91,11 +118,9 @@
     self.areaBtn = [self senderWithFrame:CGRectMake(area_X, area_Y, area_W, area_H) title:@"专业方向"];
     
     
-    
     CGFloat line_Y = 10;
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(level_W, line_Y, 1, self.topView.mj_h - 2 * line_Y)];
     line.backgroundColor = XCOLOR_line;
-    self.center_line = line;
     [self.topView addSubview:line];
 }
 
@@ -121,7 +146,6 @@
     self.level_tableView = [self defaultTableViewWithframe:level_Rect];
     self.level_tableView_defaultFrame = self.level_tableView.frame;
     self.level_tableView.scrollEnabled = NO;
-
     
     self.area_tableView = [self defaultTableViewWithframe:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
     self.area_tableView_defaultFrame = self.area_tableView.frame;
@@ -139,12 +163,12 @@
     return tableView;
 }
 
-
+//传入数据
 - (void)setAreas:(NSArray *)areas{
 
     _areas = areas;
     
-    
+    //更新area_tableView 的Frame
     CGFloat  real_Height =  areas.count * 50;
     CGFloat  area_H = real_Height > (XSCREEN_HEIGHT - 50 - XNAV_HEIGHT) ?  (XSCREEN_HEIGHT - 50 - XNAV_HEIGHT)  : real_Height;
     self.area_tableView.mj_h = area_H;
@@ -223,6 +247,7 @@ static NSString *level_identify = @"level_t";
     
     [self onClick:self.currentBtn];
     
+    
     if (tableView == self.level_tableView) {
      
         NSString *currentValue =indexPath.row == 0 ? @"": self.levels[indexPath.row];
@@ -247,11 +272,12 @@ static NSString *level_identify = @"level_t";
 - (void)onClick:(UIButton *)sender{
     
     
+    // 重复点击同一个按钮时 设置self.currentBtn为空
     if (self.currentBtn == sender) {
         
         self.currentBtn.selected = NO;
-        
         self.currentBtn = nil;
+
         
     }else{
         

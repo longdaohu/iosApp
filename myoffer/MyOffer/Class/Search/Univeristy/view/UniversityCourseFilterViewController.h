@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 typedef void(^UniversityCourseFilterViewBlock)(NSString *value,NSString *key);
 @interface UniversityCourseFilterViewController : UIViewController
+//保证self.View最小高度
 @property(nonatomic,assign)CGFloat base_Height;
+//学科领域数组
 @property(nonatomic,strong)NSArray *areas;
 @property(nonatomic,copy)UniversityCourseFilterViewBlock actionBlock;
+
+- (instancetype)initWithActionBlock:(UniversityCourseFilterViewBlock)actionBlock;
 
 @end

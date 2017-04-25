@@ -16,12 +16,8 @@
 @property(nonatomic,assign)CGRect items_bg_Frame;
 @property(nonatomic,strong)NSArray *items_Frame;
 @property(nonatomic,assign)CGFloat  cell_Height;
+
 + (instancetype)frameWithCourse:(UniversityCourse *)course;
 
 @end
-/*
- @property(nonatomic,copy)NSString *official_name;
- @property(nonatomic,copy)NSString *level;
- @property(nonatomic,strong)NSArray *areas;
- @property(nonatomic,strong)NSArray *items;
- */
+
