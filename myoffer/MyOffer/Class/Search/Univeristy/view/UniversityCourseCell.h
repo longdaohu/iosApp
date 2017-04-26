@@ -10,7 +10,6 @@
 @class UniversityCourseFrame;
 @interface UniversityCourseCell : UITableViewCell
 @property(nonatomic,strong)UniversityCourseFrame *course_frame;
-@property(nonatomic,copy)NSString *title;
 
 //- (void)cellDidSelectRowSelected:(BOOL)selected;
 

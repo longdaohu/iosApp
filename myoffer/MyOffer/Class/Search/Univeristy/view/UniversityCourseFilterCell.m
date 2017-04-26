@@ -30,11 +30,23 @@
     return self;
 }
 
+- (void)setIsTextAligmentLeft:(BOOL)isTextAligmentLeft{
+
+    _isTextAligmentLeft = isTextAligmentLeft;
+    
+    self.titleLab.textAlignment = isTextAligmentLeft ? NSTextAlignmentLeft : NSTextAlignmentCenter;
+}
+
+
 - (void)layoutSubviews{
 
     [super layoutSubviews];
     
-    self.titleLab.frame = self.contentView.bounds;
+    CGFloat title_X = 10;
+    CGFloat title_W = self.contentView.bounds.size.width - title_X * 2;
+    CGFloat title_H = self.contentView.bounds.size.height;
+    self.titleLab.frame = CGRectMake(title_X, 0, title_W,title_H);
+    
     
 }
 

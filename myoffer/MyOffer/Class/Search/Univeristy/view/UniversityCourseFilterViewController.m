@@ -33,15 +33,6 @@
 @implementation UniversityCourseFilterViewController
 
 - (instancetype)initWithActionBlock:(UniversityCourseFilterViewBlock)actionBlock{
- /*
-  
-  UniversityCourseFilterViewController *filter =  [[UniversityCourseFilterViewController alloc] init];
-  
-  filter.actionBlock =  actionBlock;
-  
-  return filter;
-  
-  */
     
     self = [self init];
     
@@ -198,21 +189,21 @@
     return self.areas.count;
 }
 
-static NSString *area_identify = @"area_t";
-static NSString *level_identify = @"level_t";
+static NSString *filter_identify = @"course_filter";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    UniversityCourseFilterCell *cell =[tableView dequeueReusableCellWithIdentifier:filter_identify];
+    
+    if (!cell) {
+        
+        cell =[[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:filter_identify];
+        
+    }
+    
+    
     if (tableView == self.area_tableView) {
-        
-        UniversityCourseFilterCell *cell =[tableView dequeueReusableCellWithIdentifier:area_identify];
-        
-        if (!cell) {
-            
-            cell =[[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:area_identify];
- 
-        }
-        
         
         cell.title =  self.areas[indexPath.row];
         cell.onSelected = [self.current_area isEqualToString:self.areas[indexPath.row]];
@@ -221,22 +212,11 @@ static NSString *level_identify = @"level_t";
     }
     
     
-    
-    UniversityCourseFilterCell *cell =[tableView dequeueReusableCellWithIdentifier:level_identify];
-    
-    if (!cell) {
-        
-        cell =[[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:level_identify];
-        
-    }
-    
     cell.title = self.levels[indexPath.row];
     cell.onSelected = [self.current_Level isEqualToString:self.levels[indexPath.row]];
     
     return cell;
-    
-    
- 
+   
 }
 
 
@@ -251,9 +231,11 @@ static NSString *level_identify = @"level_t";
     if (tableView == self.level_tableView) {
      
         NSString *currentValue =indexPath.row == 0 ? @"": self.levels[indexPath.row];
+        
         self.current_Level = indexPath.row == 0 ? @"全部":self.levels[indexPath.row];
         
         if (self.actionBlock) self.actionBlock(currentValue,@"level");
+        
         [self.level_tableView reloadData];
         
         return;

@@ -7,6 +7,7 @@
 //
 
 #import "UniversityNew.h"
+#import "UniversityCourseFrame.h"
 
 @implementation UniversityNew
 + (NSDictionary *)mj_replacedKeyFromPropertyName
@@ -14,6 +15,30 @@
     return @{@"NO_id" : @"_id",@"found_year" : @"found"};
     
 }
+
++ (NSDictionary *)mj_objectClassInArray{
+    
+    return @{@"courses" : @"UniversityCourse"};
+}
+
+- (NSArray *)courseFrames{
+    
+    
+    
+    NSMutableArray *temps = [NSMutableArray array];
+    
+    [self.courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        UniversityCourseFrame *courseFrame = [UniversityCourseFrame frameWithCourse: (UniversityCourse *)obj];
+        
+        [temps addObject:courseFrame];
+    }];
+    
+    
+    return [temps copy];
+    
+}
+
 
 - (NSString *)address_long{
     

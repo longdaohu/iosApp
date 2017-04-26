@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface CatigorySubject : NSObject
-@property(nonatomic,copy)NSString *IconName;
-@property(nonatomic,copy)NSString *TitleName;
-+(instancetype)subjectItemInitWithIconName:(NSString *)iconName TitleName:(NSString *)Name;
+@property(nonatomic,copy)NSString *icon;
+@property(nonatomic,copy)NSString *title;
++ (instancetype)subjectItemInitWithIcon:(NSString *)icon title:(NSString *)title;
 
 @end

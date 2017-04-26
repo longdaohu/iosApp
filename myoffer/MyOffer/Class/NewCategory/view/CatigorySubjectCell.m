@@ -40,9 +40,9 @@
 {
     _subject = subject;
     
-    self.iconView.image = [UIImage imageNamed:subject.IconName];
+    self.iconView.image = [UIImage imageNamed:subject.icon];
     
-    self.titleLab.text = subject.TitleName;
+    self.titleLab.text = subject.title;
 }
 
 
@@ -54,7 +54,7 @@
     CGSize contentSize = self.bounds.size;
     
     CGFloat iconx = 0;
-    CGFloat iconh = [self.subject.IconName containsString:@"ICON"] ?  36 : self.iconView.image.size.width;
+    CGFloat iconh = [self.subject.icon containsString:@"ICON"] ?  36 : self.iconView.image.size.width;
     CGFloat iconw =  iconh;
     CGFloat icony = 0;
     self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);

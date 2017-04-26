@@ -124,6 +124,7 @@
 {
     [super layoutSubviews];
     
+    if (!self.title) return;
     
     CGSize contentSize = self.bounds.size;
     

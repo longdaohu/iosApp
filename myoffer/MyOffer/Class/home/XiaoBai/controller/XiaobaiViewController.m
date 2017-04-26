@@ -66,12 +66,12 @@
 {
     if (!_helpItems) {
         
-        CatigorySubject *one   = [CatigorySubject subjectItemInitWithIconName:@"ICON1"  TitleName:@"平台网站"];
-        CatigorySubject *two   = [CatigorySubject subjectItemInitWithIconName:@"ICON2"  TitleName:@"如何申请"];
-        CatigorySubject *three = [CatigorySubject subjectItemInitWithIconName:@"ICON3"  TitleName:@"申请条件"];
-        CatigorySubject *four  = [CatigorySubject subjectItemInitWithIconName:@"ICON4"  TitleName:@"递交申请"];
-        CatigorySubject *five  = [CatigorySubject subjectItemInitWithIconName:@"ICON5"  TitleName:@"Offer管理"];
-        CatigorySubject *six   = [CatigorySubject subjectItemInitWithIconName:@"ICON6"  TitleName:@"操作疑问"];
+        CatigorySubject *one   = [CatigorySubject subjectItemInitWithIcon:@"ICON1"  title:@"平台网站"];
+        CatigorySubject *two   = [CatigorySubject subjectItemInitWithIcon:@"ICON2"  title:@"如何申请"];
+        CatigorySubject *three = [CatigorySubject subjectItemInitWithIcon:@"ICON3"  title:@"申请条件"];
+        CatigorySubject *four  = [CatigorySubject subjectItemInitWithIcon:@"ICON4"  title:@"递交申请"];
+        CatigorySubject *five  = [CatigorySubject subjectItemInitWithIcon:@"ICON5"  title:@"Offer管理"];
+        CatigorySubject *six   = [CatigorySubject subjectItemInitWithIcon:@"ICON6"  title:@"操作疑问"];
         
         _helpItems = @[one,two,three,four,five,six];
         

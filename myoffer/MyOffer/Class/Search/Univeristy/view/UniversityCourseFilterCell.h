@@ -12,5 +12,6 @@
 
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,assign)BOOL onSelected;
+@property(nonatomic,assign)BOOL isTextAligmentLeft;
 
 @end

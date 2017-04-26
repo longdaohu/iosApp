@@ -17,7 +17,9 @@
 @property(nonatomic,copy)NSString *Corecity;
 //原始科目参数
 @property(nonatomic,copy)NSString *CoreArea;
+
 - (instancetype)initWithSearchText:(NSString *)text orderBy:(NSString *)orderBy;
+
 - (instancetype)initWithFilter:(NSString *)key value:(NSString *)value orderBy:(NSString *)orderBy;
 
 @end

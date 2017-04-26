@@ -19,7 +19,8 @@
     self =[super initWithFrame:frame];
     if (self) {
         self.backgroundColor =[UIColor clearColor];
-       UIView *shadowView =[[UIView alloc] init];
+       
+        UIView *shadowView =[[UIView alloc] init];
         shadowView.backgroundColor =[UIColor whiteColor];
         shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
         shadowView.layer.shadowOpacity = 0.1;
@@ -28,13 +29,10 @@
         self.shadowView = shadowView;
         
         UIButton *footerBtn =[[UIButton alloc] init];
-        [footerBtn setTitle:GDLocalizedString(@"SearchResult_more") forState:UIControlStateNormal];
+        [footerBtn setTitle:@"查看更多课程" forState:UIControlStateNormal];
         [footerBtn addTarget:self action:@selector(moreSubjectPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [footerBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        [footerBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
         footerBtn.titleLabel.font =[UIFont systemFontOfSize:15];
-        footerBtn.layer.cornerRadius = CORNER_RADIUS;
-        footerBtn.layer.borderWidth = 1;
-        footerBtn.layer.borderColor = XCOLOR_RED.CGColor;
         [self addSubview:footerBtn];
         self.footerBtn = footerBtn;
         
@@ -66,10 +64,10 @@
     CGFloat shadownH = contentSize.height - 10;
     self.shadowView.frame = CGRectMake(0, 0,shadownW, shadownH);
     
-    CGFloat footerW = 200;
-    CGFloat footerH = shadownH - 10;
-    CGFloat footerX = (contentSize.width - footerW) * 0.5;
-    CGFloat footerY = 5;
+    CGFloat footerW = contentSize.width;
+    CGFloat footerH = shadownH;
+    CGFloat footerX = 0;
+    CGFloat footerY = 0;
     self.footerBtn.frame = CGRectMake(footerX, footerY, footerW, footerH);
     
 }

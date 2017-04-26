@@ -13,6 +13,8 @@
 @property(nonatomic,copy)NSString *iconName;
 //标题
 @property(nonatomic,copy)NSString *titleName;
+//标题
+@property(nonatomic,copy)NSString *subTitle;
 //国家名称
 @property(nonatomic,copy)NSString *countryName;
 //排名方式

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Rank_AU.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Rank_AU@2x.png",
       "scale" : "2x"
     },
     {

@@ -11,7 +11,7 @@
 #import "PipeiEditViewController.h"
 #import "AUSearchResultViewController.h"
 #import "NotificationViewController.h"
-#import "XNewSearchViewController.h"
+#import "SearchUniversityCenterViewController.h"
 #import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
 #import "WebViewController.h"
@@ -395,8 +395,9 @@
 -(void)caseSearchUniversityWithdict:(NSDictionary *)response{
     
     NSDictionary *dict =  response[@"args"];
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:dict[@"search"] orderBy:RANK_QS];
+    SearchUniversityCenterViewController *vc =[[SearchUniversityCenterViewController alloc] initWithSearchValue:dict[@"search"]];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 //查看YOUKU视频
 -(void)caseVedioWithdict:(NSDictionary *)response{

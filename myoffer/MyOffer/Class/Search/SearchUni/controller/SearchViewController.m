@@ -5,12 +5,12 @@
 //  Created by Blankwonder on 6/10/15.
 //  Copyright (c) 2015 UVIC. All rights reserved.
 //
-#import "XNewSearchViewController.h"
 #import "SearchViewController.h"
 #import "FiltContent.h"
 #import "FilterContentFrame.h"
 #import "FilterTableViewCell.h"
 #import "FilterContentFrame.h"
+#import "SearchUniversityCenterViewController.h"
 
 #define SEARCHPAGE @"page搜索"
 
@@ -206,10 +206,8 @@
 #pragma mark ——— FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
- 
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:sender.currentTitle orderBy:RANK_QS];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self startSearchWithText:sender.currentTitle];
     
 }
 
@@ -250,9 +248,9 @@
 
 - (void)startSearchWithText:(NSString *)text {
     
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithSearchText:text orderBy:RANK_QS];
+    SearchUniversityCenterViewController *search = [[SearchUniversityCenterViewController alloc] initWithSearchValue:text];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:search animated:YES];
 }
 
 -(void)dealloc

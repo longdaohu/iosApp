@@ -11,21 +11,23 @@
 @implementation CatigorySubject
 
 
--(instancetype)initWithIconName:(NSString *)iconName TitleName:(NSString *)Name
+-(instancetype)initWithIcon:(NSString *)icon title:(NSString *)title
 {
     
     self = [super init];
     if (self) {
         
-        self.IconName = iconName;
-        self.TitleName = Name;
+        self.icon = icon;
+        
+        self.title = title;
     }
+    
     return self;
 }
 
-+(instancetype)subjectItemInitWithIconName:(NSString *)iconName TitleName:(NSString *)Name
++ (instancetype)subjectItemInitWithIcon:(NSString *)icon title:(NSString *)title
 {
-    return [[self alloc] initWithIconName:iconName TitleName:Name];
+    return [[self alloc] initWithIcon:icon title:title];
 }
 
 @end

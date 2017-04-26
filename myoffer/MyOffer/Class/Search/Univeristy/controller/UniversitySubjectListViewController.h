@@ -9,7 +9,9 @@
 #import "BaseViewController.h"
 
 @interface UniversitySubjectListViewController : BaseViewController
-- (instancetype)initWithUniversityID:(NSString *)ID;
+
 @property (readonly) NSString *universityID;
+
+- (instancetype)initWithUniversityID:(NSString *)ID;
 
 @end

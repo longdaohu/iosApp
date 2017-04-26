@@ -14,15 +14,21 @@
 #import "UniversityCourseFilterViewController.h"
 
 @interface UniversitySubjectListViewController ()<UITableViewDelegate,UITableViewDataSource>
+//网络请求参数字典
 @property(nonatomic,strong)NSMutableDictionary *resquestParameters;
 @property(nonatomic,strong)UITableView *tableView;
+//模型数组
 @property(nonatomic,strong)NSMutableArray *course_frames;
 @property(nonatomic,strong)NSMutableArray *selected_items;
+//选择提交专业ID数组
 @property(nonatomic,assign)NSInteger nextPage;
 @property(nonatomic,assign)BOOL endPage;
+//footerView
 @property(nonatomic,strong)UniversityCourseFooterView *footer;
+//筛选工具
 @property(nonatomic,strong)UniversityCourseFilterViewController *filter;
-@property(nonatomic,strong)NSArray *groups;
+//提供筛选数组
+@property(nonatomic,strong)NSArray *areas;
 @end
 
 @implementation UniversitySubjectListViewController
@@ -111,7 +117,7 @@
     CGFloat base_Height = XNAV_HEIGHT + 50;
     filter.base_Height = base_Height;
     filter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, base_Height);
-    filter.areas = self.groups;
+    filter.areas = self.areas;
     [self.view addSubview:filter.view];
  
  
@@ -174,19 +180,19 @@
     return _selected_items;
 }
 
--(NSArray *)groups
+-(NSArray *)areas
 {
-    if (!_groups) {
+    if (!_areas) {
         
         NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
         NSArray *subjectes = [ud valueForKey:@"Subject_CN"];
         NSMutableArray  *temps = [[subjectes valueForKeyPath:@"name"] mutableCopy];
         [temps insertObject:@"全部"  atIndex:0];
 
-        _groups = [temps copy];
+        _areas = [temps copy];
     }
     
-    return _groups;
+    return _areas;
 }
 
 
@@ -207,7 +213,6 @@
 
 
 - (void)updateUIWithResponse:(id)response{
-
     
     
     if (0 == self.nextPage) {

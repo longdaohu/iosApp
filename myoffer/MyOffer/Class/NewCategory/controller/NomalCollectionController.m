@@ -9,7 +9,7 @@
 #import "NomalCollectionController.h"
 #import "CatigorySubjectCell.h"
 #import "CatigorySubject.h"
-#import "XNewSearchViewController.h"
+#import "SearchUniversityCenterViewController.h"
 
 
 @interface NomalCollectionController ()<UICollectionViewDataSource,UICollectionViewDelegate>
@@ -103,9 +103,7 @@ static NSString * const reuseIdentifier = @"subjectCell";
     
     CatigorySubject *subject = self.items[indexPath.row];
     
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:@"area" value:subject.TitleName orderBy:RANK_QS];
-    
-    vc.CoreArea = subject.TitleName;
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:subject.title orderBy:@0];
     
     [self.navigationController pushViewController:vc animated:YES];
     

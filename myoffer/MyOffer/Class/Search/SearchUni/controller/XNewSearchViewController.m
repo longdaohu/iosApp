@@ -28,7 +28,6 @@ typedef enum {
 #import "FilterSection.h"
 #import "FilterTableViewCell.h"
 #import "BottomBackgroudView.h"
-//#import "UniversityCourseViewController.h"
 #import "UniversitySubjectListViewController.h"
 #import "searchSectionFootView.h"
 #import "FilterContentFrame.h"

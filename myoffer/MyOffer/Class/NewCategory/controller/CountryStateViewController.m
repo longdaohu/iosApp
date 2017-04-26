@@ -5,10 +5,11 @@
 //  Created by xuewuguojie on 16/3/2.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
-#import "XNewSearchViewController.h"
 #import "CountryStateViewController.h"
 #import "MyOfferCountry.h"
 #import "MyOfferCountryState.h"
+#import "SearchUniversityCenterViewController.h"
+
 
 @interface CountryStateViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *stateTableView;
@@ -17,6 +18,7 @@
 @property(nonatomic,strong)MyOfferCountryState *currentState;
 @property(nonatomic,strong)UIImageView *selectImageView;
 @property(nonatomic,strong)UIFont *cell_font;
+@property(nonatomic,strong)NSIndexPath *current_Index;
 
 @end
 
@@ -97,7 +99,7 @@
         
         if ([countryDic[@"name"] isEqualToString:country]) {
             
-           self.countryModel = [MyOfferCountry mj_objectWithKeyValues:countryDic];
+            self.countryModel = [MyOfferCountry mj_objectWithKeyValues:countryDic];
            
             [self.stateTableView reloadData];
 
@@ -111,7 +113,8 @@
     
         if (self.countryModel && self.countryModel.states.count > 0) {
             
-            [self.stateTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+            self.current_Index = [NSIndexPath indexPathForRow:1 inSection:0];
+            [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionTop];
             self.currentState = self.countryModel.states.firstObject;
             
         }
@@ -241,83 +244,69 @@
   
 }
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView  didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
+   
     NSString *key = KEY_COUNTRY;
     NSString *searchValue = self.countryModel.name;
     
+    //州tableView
     if (tableView == self.stateTableView) {
- 
+        
         if (indexPath.row != 0) {
-            
-            key  =  KEY_STATE;
-            MyOfferCountryState *state =  self.countryModel.states[indexPath.row - 1];
-            searchValue = state.name;
-        }
-        
-        XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:key
-                                                                                  value:searchValue
-                                                                                orderBy:RANK_TI];
-        
-        vc.CoreCountry =  self.countryModel.name;
-        
-        if ( 0 != indexPath.row) {
             
             self.currentState =  self.countryModel.states[indexPath.row - 1];
             
-            vc.CoreState = self.currentState.name;
-            
             [self.cityTableView reloadData];
             
-            return;
+            self.current_Index = indexPath;
             
+            return;
         }
         
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+        
+        NSNumber *desc = [self.countryName containsString:@"澳"] ? @1 : @0;
+        
+        SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue orderBy:desc];
+        
         [self.navigationController pushViewController:vc animated:YES];
         
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionTop];
+ 
+        
         return;
+        
     }
     
     
-    key  =  KEY_STATE;
-    
-    if (indexPath.row != 0) {
+    if (indexPath.row == 0) {
         
-         key  =  KEY_CITY;
-         NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
-         searchValue = city[@"name"];
+        key = KEY_STATE;
+        
+        searchValue = self.currentState.name;
         
     }else{
     
-          searchValue = self.currentState.name;
-    }
-
-    XNewSearchViewController *cityVC = [[XNewSearchViewController alloc] initWithFilter:key
-                                                                              value:searchValue
-                                                                            orderBy:RANK_TI];
-    
-    
-    cityVC.CoreCountry =  self.countryModel.name;
-    cityVC.CoreState = self.currentState.name;
-    
-    
-    if ( 0 != indexPath.row) {
-        
+        key = KEY_CITY;
         NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
-        cityVC.Corecity =  city[@"name"];
+        
+        searchValue = city[@"name"];
         
     }
-
-    [self.navigationController pushViewController:cityVC animated:YES];
+    
+    NSNumber *desc = [self.countryName containsString:@"澳"] ? @1 : @0;
+    
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue orderBy:desc];
+    
+    [self.navigationController pushViewController:vc animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 

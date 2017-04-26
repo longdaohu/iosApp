@@ -19,7 +19,10 @@
     if (self) {
         
         self.iconName = iconName;
-        self.titleName = title;
+        
+        NSArray *items = [title componentsSeparatedByString:@"+"];
+        self.titleName = items.firstObject;
+        self.subTitle = items.lastObject;
         self.rankType = type;
         
          if ([title containsString:@"Australia"]) {
