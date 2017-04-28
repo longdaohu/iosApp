@@ -265,10 +265,9 @@
         }
         
         
-        NSNumber *desc = [self.countryName containsString:@"澳"] ? @1 : @0;
         
-        SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue orderBy:desc];
-        
+        SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
+        vc.coreCountry = self.countryModel.name;
         [self.navigationController pushViewController:vc animated:YES];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -296,10 +295,10 @@
         
     }
     
-    NSNumber *desc = [self.countryName containsString:@"澳"] ? @1 : @0;
-    
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue orderBy:desc];
-    
+     
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
+    vc.coreCountry = self.countryModel.name;
+
     [self.navigationController pushViewController:vc animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

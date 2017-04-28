@@ -23,9 +23,7 @@
     
     if (self) {
         
-          self.countryName =  [countryDic[@"country"] isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? GDLocalizedString(@"CategoryNew-hotAU") : GDLocalizedString(@"CategoryNew-hotUK") ;
-        
-        
+        self.countryName = countryDic[@"country"];
         self.HotCities = [CatigaryHotCity mj_objectArrayWithKeyValuesArray: countryDic[@"hot_cities"]];
         
      }

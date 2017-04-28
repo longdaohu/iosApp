@@ -7,38 +7,28 @@
 //
 
 #import "FiltContent.h"
-#import "FilterSection.h"
 @interface FiltContent ()<NSCopying>
 
 @end
 
 @implementation FiltContent
 
-
-+(instancetype)createItemWithTitle:(NSString *)titleName andDetailTitle:(NSString *)detailName anditems:(NSArray *)items
-{
-    return [[self alloc] initItemWithLogoName:nil titleName:titleName andDetailTitleName:detailName anditems:items];
++ (instancetype)filterWithIcon:(NSString *)icon  title:(NSString *)title subtitlte:(NSString *)subtitle filterOptionItems:(NSArray *)optionItems{
+    
+    return [[self alloc] initItemWithIcon:icon title:title subtitlte:subtitle filterOptionItems:optionItems];
 }
 
 
-+(instancetype)filterItemWithLogoName:(NSString *)logoName titleName:(NSString *)title detailTitleName:(NSString *)detailTitle anditems:(NSArray *)items
-{
-    return [[self alloc] initItemWithLogoName:logoName titleName:title andDetailTitleName:detailTitle anditems:items];
-}
-
-
--(instancetype)initItemWithLogoName:(NSString *)logo  titleName:(NSString *)title andDetailTitleName:(NSString *)detailtitle anditems:(NSArray *)items
+- (instancetype)initItemWithIcon:(NSString *)icon  title:(NSString *)title subtitlte:(NSString *)subtitle filterOptionItems:(NSArray *)optionItems
 {
     
     self = [super init];
     if (self) {
         
-        
-        self.logoName = logo;
+        self.logoName = icon;
         self.titleName = title;
-        self.detailTitleName = detailtitle;
-        self.buttonArray = items;
-        
+        self.detailTitleName = subtitle;
+        self.buttonArray = optionItems;
         
     }
     return self;

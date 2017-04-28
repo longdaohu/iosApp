@@ -17,8 +17,7 @@
 
 - (instancetype)initWithSearchValue:(NSString *)searchValue;
 
-//- (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value orderBy:(NSNumber *)desc;
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
 
 
 @end

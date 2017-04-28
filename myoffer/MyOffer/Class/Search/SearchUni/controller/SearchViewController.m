@@ -123,7 +123,7 @@
             
             weakSelf.recommentArray = [response copy];
             
-            FiltContent  *recomment = [FiltContent filterItemWithLogoName:@"search_historyHot"  titleName:GDLocalizedString(@ "SearchVC-hot") detailTitleName:@"" anditems:self.recommentArray];
+            FiltContent  *recomment = [FiltContent filterWithIcon:@"search_historyHot"  title:GDLocalizedString(@ "SearchVC-hot") subtitlte:@"" filterOptionItems:self.recommentArray];
              [weakSelf setDataSourceWithContent:recomment];
             
         }
@@ -148,7 +148,7 @@
             
             weakSelf.historyArray = [histories copy];
             
-            FiltContent  *histroy = [FiltContent filterItemWithLogoName:@"search_history"   titleName:GDLocalizedString(@ "SearchVC-history") detailTitleName:@""  anditems: self.historyArray];
+            FiltContent  *histroy = [FiltContent filterWithIcon:@"search_history"  title:GDLocalizedString(@ "SearchVC-history") subtitlte:@"" filterOptionItems:self.historyArray];
    
             [weakSelf setDataSourceWithContent:histroy];
 

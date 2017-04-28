@@ -103,7 +103,7 @@ static NSString * const reuseIdentifier = @"subjectCell";
     
     CatigorySubject *subject = self.items[indexPath.row];
     
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:subject.title orderBy:@0];
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:subject.title];
     
     [self.navigationController pushViewController:vc animated:YES];
     

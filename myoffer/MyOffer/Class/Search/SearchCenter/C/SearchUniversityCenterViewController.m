@@ -15,6 +15,10 @@
 #import "searchSectionFootView.h"
 #import "UniversitySubjectListViewController.h"
 #import "SearchUniCenterFilterVController.h"
+#import "MyOfferCountry.h"
+#import "MyOfferCountryState.h"
+#import "MyOfferRank.h"
+
 
 #define KEY_TEXT_S  @"text"
 #define KEY_NAME_S  @"name"
@@ -32,8 +36,13 @@
 @property(nonatomic,assign)NSInteger nextPage;
 @property(nonatomic,assign)BOOL endPage;
 @property(nonatomic,copy)NSString *searchValue;
+@property(nonatomic,copy)NSString *currentRankType;
+@property(nonatomic,copy)NSString *current_Country;
 //筛选工具
 @property(nonatomic,strong)SearchUniCenterFilterVController *filter;
+//所有国家地区数组
+@property(nonatomic,strong)NSArray *countries;
+
 @end
 
 @implementation SearchUniversityCenterViewController
@@ -45,6 +54,7 @@
     
     if (self) {
  
+        self.currentRankType = RANK_QS;
         [self.parametersM setValue:searchValue forKey:KEY_TEXT_S];
         [self.parametersM setValue:RANK_QS forKey:KEY_ORDER_S];
         self.searchValue = searchValue;
@@ -56,7 +66,8 @@
     return self;
 }
 
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value orderBy:(NSNumber *)desc{
+//- (instancetype)initWithKey:(NSString *)key value:(NSString *)value orderBy:(NSNumber *)desc{
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value{
 
     self = [self init];
     
@@ -69,12 +80,20 @@
             rankType = RANK_TI;
         }
         
+        self.currentRankType = rankType;
+        
         NSDictionary *filter = @{KEY_NAME_S : key, KEY_VALUE_S:value};
         [self.parametersM setValue:@[filter] forKey:KEY_FILTERS_S];
         [self.parametersM setValue:rankType forKey:KEY_ORDER_S];
-        [self.parametersM setValue:desc forKey:KEY_DESC_S];
-        
         self.title = value;
+        
+        if ([key isEqualToString:KEY_COUNTRY]) self.coreCountry =  value;
+        if ([key isEqualToString:KEY_STATE])   self.coreState =  value;
+        if ([key isEqualToString:KEY_CITY])    self.coreCity =  value;
+        if ([key isEqualToString:KEY_AREA])    self.coreArea=  value;
+        if ([key isEqualToString:KEY_SUBJECT]) self.coreSubject =  value;
+
+        
         
     }
     
@@ -106,7 +125,9 @@
     [super viewDidLoad];
     
     [self makeUI];
-    
+    //1、 确保先请求网络参数
+    [self makeParameterDesc];
+    //2、 再请求网络
     [self makeDataSource];
 }
 
@@ -119,7 +140,6 @@
                                     KEY_SIZE_S: @20,
                                     KEY_DESC_S: @0,
                                     };
-
  
         _parametersM =  [NSMutableDictionary dictionaryWithDictionary:parameter];
         
@@ -127,6 +147,21 @@
     
    return  _parametersM;
 }
+
+
+- (NSArray *)countries{
+    
+    if (!_countries) {
+        
+        NSArray *country_temps = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
+        
+        _countries = [MyOfferCountry mj_objectArrayWithKeyValuesArray:country_temps];
+        
+    }
+    
+    return _countries;
+}
+
 
 
 - (NSMutableArray *)UniFrames{
@@ -146,20 +181,89 @@
     [self makeFilter];
 }
 
-- (void)makeDataSource{
-    
-    //        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"text": self.SearchValue,
-    //                                                                                           @"page": [NSNumber numberWithInteger:page],
-    //                                                                                           @"size": [NSNumber numberWithInteger:PageSize],
-    //                                                                                           @"desc": desc,
-    //                                                                                           @"order": self.RankType}];
-  
+
+
+//根据城市名称设置网络请求设置升降序
+
+- (void)makeParameterDesc{
+
     /*
-     155733  [APIClient] Request body: {"size":20,"page":0,"order":"ranking_ti","filters":[{"name":"city","value":"伦敦"}],"desc":0,"text":""}
-     160753 [APIClient] Request body: {"size":20,"order":"ranking_qs",         "filters":[{"name":"city","value":"伯明翰"}],"desc":0,"page":0}
+     *  升 1     5>4>3>2>1
+     *  降 0     1>2>3>4>5
+     */
+    
+    //   if(国家、城市都为空) {设置 RankType= 世界排名  desc = 降序}
+    if (!self.coreCountry && !self.coreCity) {
+        
+        self.currentRankType = RANK_QS;
+        
+        [self.parametersM setValue:@0  forKey:KEY_DESC_S];
+        
+        [self.parametersM setValue:self.currentRankType forKey:KEY_ORDER_S];
+     
+        return;
+        
+    }
+    
+    
+    // if(国家不为空){ 如果（国家 == 澳大利亚）&& （rankstyle == 本国排名 ）则设置  desc = 升序；否则 desc = 降序}
+    if (self.coreCountry) {
+        
+        NSNumber *desc = [self.coreCountry containsString:@"澳"] && [self.currentRankType isEqualToString:RANK_TI] ? @1 : @0;
+         [self.parametersM setValue:desc  forKey:KEY_DESC_S];
+        
+        return;
+        
+    }
+    
+    // if (国家为空 && 城市不为空) 先查国家再判断 升降序
+    if (!self.coreCountry && self.coreCity) {
+        
+        NSString *country = [self makeCurrentCountryWithCity:self.coreCity];
+        self.coreCountry = country;
+        NSNumber *desc = [self.coreCountry containsString:@"澳"] && [self.currentRankType isEqualToString:RANK_TI] ? @1 : @0;
+        [self.parametersM setValue:desc  forKey:KEY_DESC_S];
+        
+    }
+    
+}
+
+
+//根据城市名称返回所在国家名称
+- (NSString *)makeCurrentCountryWithCity:(NSString *)city{
+    
+    NSString *countyName = @"英国";
+    
+    for (MyOfferCountry *country in self.countries) {
+        
+        for (MyOfferCountryState *state in country.states) {
+            
+            NSArray *cities =  [state.cities valueForKeyPath:@"name"];
+            
+            if ([cities containsObject:self.coreCity]) {
+                
+                countyName = country.name;
+                
+                break;
+            }
+            
+        }
+    }
+    
+    
+    return countyName;
+    
+}
+
+
+
+/*
+ 155733  [APIClient] Request body: {"size":20,"page":0,"order":"ranking_ti","filters":[{"name":"city","value":"伦敦"}],"desc":0,"text":""}
+ 160753 [APIClient] Request body: {"size":20,"order":"ranking_qs",         "filters":[{"name":"city","value":"伯明翰"}],"desc":0,"page":0}
  */
-    
-    
+
+//网络请求
+- (void)makeDataSource{
     
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorSearch parameters:self.parametersM expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
@@ -178,9 +282,9 @@
     
 }
 
+//更新UI
 - (void)updateUIWithResponse:(id)response{
-
-  
+   
     if (0 == self.nextPage) {
         
         // contentOffset.y 没有上移时，不用回滚到顶部
@@ -188,23 +292,17 @@
         
         // page = 0 时，删除所有数据
         if (self.UniFrames.count > 0) [self.UniFrames removeAllObjects];
-        
     }
  
     self.nextPage += 1;
     
-    
     NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response[@"universities"]];
+ 
     
-
     //当pageSize 大于请请求结果数量时，结束加载网络
     NSNumber *pageSize = [self.parametersM valueForKey:KEY_SIZE_S];
     self.endPage =  (pageSize.integerValue > universities.count);
-/*
-    count = 396,
-	pageCount = 20,
-    pageIndex = 17
- */
+    
     
     [universities enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
@@ -215,6 +313,16 @@
     }];
     
     
+    NSArray *rankTypes  =  [response valueForKeyPath:@"rankTypes"];
+    NSMutableArray *rankings = [NSMutableArray array];
+    for (NSString *rankType in rankTypes) {
+        
+         MyOfferRank *rank = [MyOfferRank rankWithName:rankType];
+        
+        [rankings addObject:rank];
+     }
+   
+    self.filter.rankings = rankings;
     
     [self.tableView reloadData];
 }
@@ -234,11 +342,18 @@
 - (void)makeFilter{
     
     XWeakSelf
-    SearchUniCenterFilterVController *filter =[[SearchUniCenterFilterVController alloc] initWithActionBlock:^(id value, NSString *key) {
+    SearchUniCenterFilterVController *filter =[[SearchUniCenterFilterVController alloc] initWithActionBlock:^(NSArray *parameters) {
         
-        [weakSelf filterWithValue:value key:key];
+        [weakSelf filterWithParameter:parameters];
         
     }];
+    
+    if (self.coreCountry) filter.coreCountry =  self.coreCountry;
+    if (self.coreState)   filter.coreState =  self.coreState;
+    if (self.coreCity)    filter.corecity =   self.coreCity ;
+    if (self.coreArea)    filter.coreArea=  self.coreArea;
+    
+    filter.currentRankType=  self.currentRankType;
     
     [self addChildViewController:filter];
     self.filter = filter;
@@ -248,17 +363,53 @@
     filter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, base_Height);
     [self.view addSubview:filter.view];
     
-    
 }
 
-
-- (void)filterWithValue:(id)value key:(NSString *)key{
-
- [self.parametersM setValue:value forKey:key];
+//根据筛选条件设置 网络请求参数
+- (void)filterWithParameter:(NSArray *)parameters{
     
-     [self.parametersM setValue:value forKey:key];
+    for (NSDictionary *para  in parameters) {
+        
+        
+            [self.parametersM setValue:para.allValues.firstObject forKey:para.allKeys.firstObject];
+        
+             self.nextPage = 0;
+        
+             [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE_S];
+        
+        
+            if ([KEY_ORDER_S isEqualToString:para.allKeys.firstObject]) {
+                
+                self.currentRankType = para.allValues.firstObject;
+            }
+        
+        
+        
+            
+            if ([KEY_FILTERS_S isEqualToString:para.allKeys.firstObject]) {
+                
+                
+                NSString *countryName = nil;
+                NSString *cityName = nil;
+                    for (NSDictionary *filter in (NSArray *)para.allValues.firstObject) {
+                        
+                        if ([KEY_COUNTRY isEqualToString:filter[KEY_NAME_S]]) countryName = filter[KEY_VALUE_S];
+                        if ([KEY_CITY isEqualToString:filter[KEY_NAME_S]]) cityName = filter[KEY_VALUE_S];
+                        
+                 }
+                
+                
+                self.coreCountry  = countryName;
+                self.coreCity  = cityName;
+            }
+        
+        
+        
+            [self makeParameterDesc];
+
+    }
     
-     [self makeDataSource];
+    [self makeDataSource];
 }
 
 
@@ -268,6 +419,7 @@
     
     cell.clipsToBounds = YES;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
     UniversityFrameNew *uniFrame = self.UniFrames[section];

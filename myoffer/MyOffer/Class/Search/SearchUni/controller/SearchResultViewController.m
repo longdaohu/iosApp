@@ -35,6 +35,7 @@
 #define kCellIdentifier NSStringFromClass([SearchResultCell class])
 
 @implementation SearchResultViewController
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

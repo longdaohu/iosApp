@@ -25,7 +25,7 @@
 #import "XiaobaiViewController.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
-#import "XNewSearchViewController.h"
+#import "SearchUniversityCenterViewController.h"
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"
@@ -923,10 +923,9 @@
     UniDetailGroup *group = self.groups[indexPath.section];
     NSDictionary *info = group.items[indexPath.row];
     NSString *searchValue = info[@"search"];
-    XNewSearchViewController *vc = [[XNewSearchViewController alloc] initWithFilter:KEY_CITY
-                                                                              value:searchValue
-                                                                            orderBy:RANK_TI];
-    vc.Corecity = searchValue;
+    
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:searchValue];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -170,6 +170,7 @@
     FilterContentFrame *copy = [[FilterContentFrame allocWithZone:zone] init];
     
     copy.content = [self.content copy];
+    copy.cellState = self.cellState;
     
     return copy;
     

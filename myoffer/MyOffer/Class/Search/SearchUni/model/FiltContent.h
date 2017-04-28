@@ -25,7 +25,6 @@ typedef NS_ENUM(NSUInteger, FilterOption) {
 @property(nonatomic,strong)NSArray *buttonArray;
 @property(nonatomic,assign)FilterOption optionStyle;
 
-+(instancetype)createItemWithTitle:(NSString *)titleName andDetailTitle:(NSString *)detailName anditems:(NSArray *)items;
-+(instancetype)filterItemWithLogoName:(NSString *)logoName titleName:(NSString *)title detailTitleName:(NSString *)detailTitle anditems:(NSArray *)items;
--(instancetype)initItemWithLogoName:(NSString *)logo  titleName:(NSString *)title andDetailTitleName:(NSString *)detailtitle anditems:(NSArray *)items;
++ (instancetype)filterWithIcon:(NSString *)icon  title:(NSString *)title subtitlte:(NSString *)subtitle filterOptionItems:(NSArray *)optionItems;
+
 @end

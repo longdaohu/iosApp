@@ -559,9 +559,9 @@ static NSString *identify = @"hotCity";
 -(void)CaseHotCityWithCityName:(NSString *)CityName belongCountry:(NSString *)country
 {
     
-    NSNumber *desc = [country containsString:@"澳"] ? @1 : @0;
     
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName orderBy:desc];
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName];
+    vc.coreCountry = country;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

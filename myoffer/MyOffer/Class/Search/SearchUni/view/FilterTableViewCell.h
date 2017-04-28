@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "FiltContent.h"
-#import "FilterSection.h"
-#import "FilterItem.h"
 #import "FilterContentFrame.h"
 
 @class FilterTableViewCell;

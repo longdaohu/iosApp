@@ -15,6 +15,7 @@
 #import "FiltContent.h"
 #import "FilterContentFrame.h"
 #import "FilterTableViewCell.h"
+#import "MyOfferRank.h"
 
 #define KEY_ALL  @"全部"
 
@@ -36,19 +37,20 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 #define KEY_SIZE_SF  @"size"
 #define KEY_DESC_SF  @"desc"
 #define KEY_ORDER_SF  @"order"
+#define Bottom_Heigh  50
+#define Top_Heigh  50
+#define Cell_Heigh  50
 
 
 @interface SearchUniCenterFilterVController ()<UITableViewDataSource,UITableViewDelegate,FilterTableViewCellDelegate>
+//顶部工具条背景
 @property(nonatomic,strong)UIView *topView;
+//筛选按钮
 @property(nonatomic,strong)UIButton *optionBtn;
+//排名按钮
 @property(nonatomic,strong)UIButton *rankingBtn;
+//当前选中按钮
 @property(nonatomic,strong)UIButton *currentBtn;
-@property(nonatomic,strong)UIButton *clearBtn;
-@property(nonatomic,strong)UIButton *submitBtn;
-
-//排名数组
-@property(nonatomic,strong)NSArray *rankings;
-@property(nonatomic,copy)NSString *current_rank;
 //学科领域数组
 @property(nonatomic,strong)NSArray *areas;
 //国家地区数组
@@ -56,16 +58,18 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 //筛选数组
 @property(nonatomic,strong)NSMutableArray *FiltItems;
 @property(nonatomic,strong)NSMutableArray *FiltItems_origin;
-
-@property(nonatomic,strong)MyOfferArea *current_area;
-@property(nonatomic,copy)MyOfferSubjecct *current_subject;
-
-@property(nonatomic,strong)UITableView *rank_table;
-@property(nonatomic,strong)UITableView  *option_table;
-@property(nonatomic,strong)UIView *bgView;
+//@property(nonatomic,strong)MyOfferArea *current_area;
+//@property(nonatomic,copy)MyOfferSubjecct *current_subject;
+@property(nonatomic,strong)UITableView *rank_table,*option_table;
+//清空筛选数据按钮
+@property(nonatomic,strong)UIButton *clearBtn;
+//提交筛选数据按钮
+@property(nonatomic,strong)UIButton *submitBtn;
+//清空筛选数据按钮  提交筛选数据按钮 的父容器
 @property(nonatomic,strong)UIView *footerView;
+//option_table  footerView的父容器
+@property(nonatomic,strong)UIView *bgView;
 //添加网络请求参数
-//@property(nonatomic,strong)NSMutableDictionary *filterParameter;
 @property(nonatomic,strong)NSMutableArray *filterParameters;
 
 @end
@@ -83,18 +87,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     }
     return self;
     
-}
-- (NSArray *)rankings{
-    
-    if (!_rankings) {
-        
-        
-        
-        
-        _rankings = @[@"世界排名",@"本国排名"];
-    }
-    
-    return _rankings;
 }
 
 - (NSMutableArray *)filterParameters{
@@ -116,9 +108,8 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         
         _areas = [MyOfferArea mj_objectArrayWithKeyValuesArray:item_subjects];
         
-        if (_areas.count > 0) _current_area = _areas.firstObject;
+//        if (_areas.count > 0) _current_area = _areas.firstObject;
         
-         
     }
     
     return _areas;
@@ -216,9 +207,8 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         return currentState;
     
     }
-  
-    
 }
+
 
 #pragma mark : 筛选表单数据
 
@@ -230,75 +220,78 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         NSMutableArray *temps =[NSMutableArray arrayWithCapacity:5];
         
         //国家
-        FiltContent  *filter_country =[FiltContent createItemWithTitle:@"国家:"andDetailTitle:KEY_ALL anditems: [self.countries valueForKeyPath:@"name"]];
+        
+        FiltContent  *filter_country = [FiltContent filterWithIcon:nil title:@"国家:"  subtitlte:KEY_ALL filterOptionItems:[self.countries valueForKeyPath:@"name"]];
         filter_country.optionStyle = FilterOptionCountry;
         FilterContentFrame *filter_country_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_country];
         [temps addObject:filter_country_Frame];
         
         NSArray *stateArray = nil;
-        if (self.CoreCountry) {
+        if (self.coreCountry) {
             
             filter_country_Frame.cellState = XcellStateHeightZero;
-            MyOfferCountry *countryModel = [self makeCurrentStateWithCountry:self.CoreCountry];
+            MyOfferCountry *countryModel = [self makeCurrentStateWithCountry:self.coreCountry];
             stateArray =  [countryModel.states valueForKeyPath:@"name"];
-            filter_country.selectedValue = self.CoreCountry;
+            filter_country.selectedValue = self.coreCountry;
         }
         
         //地区
-        FiltContent  *filter_state =[FiltContent createItemWithTitle:@"地区:"  andDetailTitle:KEY_ALL anditems: stateArray];
+        FiltContent  *filter_state = [FiltContent filterWithIcon:nil title:@"地区:"  subtitlte:KEY_ALL filterOptionItems:stateArray];
         filter_state.optionStyle = FilterOptionState;
         FilterContentFrame *filter_state_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_state];
         [temps addObject:filter_state_Frame];
         
         
         NSArray *currentCityArr = nil;
-        if (self.CoreState) {
+        if (self.coreState) {
+            
             filter_country_Frame.cellState = XcellStateHeightZero;
             filter_state_Frame.cellState = XcellStateHeightZero;
-            MyOfferCountryState  * currentState =[self makeCurrentCityWithState:self.CoreState country:self.CoreCountry];
+            
+            MyOfferCountryState  * currentState =[self makeCurrentCityWithState:self.coreState country:self.coreCountry];
             currentCityArr = [currentState.cities valueForKeyPath:@"name"];
-            filter_state.selectedValue = self.CoreState;
+            filter_state.selectedValue = self.coreState;
 
         }
         
         //城市
-        FiltContent  *filter_city =[FiltContent createItemWithTitle:@"城市:" andDetailTitle:KEY_ALL anditems:currentCityArr];
+        FiltContent  *filter_city = [FiltContent filterWithIcon:nil title:@"城市:"  subtitlte:KEY_ALL filterOptionItems:currentCityArr];
         filter_city.optionStyle = FilterOptionCity;
         FilterContentFrame *filter_city_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_city];
         [temps addObject:filter_city_Frame];
         
-        if (self.Corecity) {
+        if (self.corecity) {
             
             filter_country_Frame.cellState = XcellStateHeightZero;
             filter_state_Frame.cellState = XcellStateHeightZero;
             filter_city_Frame.cellState = XcellStateHeightZero;
-            filter_city.selectedValue = self.Corecity;
+            filter_city.selectedValue = self.corecity;
 
         }
         
        //学科
-        FiltContent *filter_area =[FiltContent createItemWithTitle:@"学科领域:"  andDetailTitle:KEY_ALL anditems: [self.areas valueForKeyPath:@"name"]];
+        FiltContent *filter_area = [FiltContent filterWithIcon:nil title:@"学科领域:"  subtitlte:KEY_ALL filterOptionItems:[self.areas valueForKeyPath:@"name"]];
         filter_area.optionStyle = FilterOptionArea;
         FilterContentFrame *filter_area_Frame =  [FilterContentFrame FilterContentFrameWithContent:filter_area];
         [temps addObject:filter_area_Frame];
         
         NSArray *subjectArray = nil;
         
-        if (self.CoreArea) {
+        
+        if (self.coreArea) {
             
             filter_area_Frame.cellState = XcellStateHeightZero;
             
-            MyOfferArea *areaModel = [self makeCurrentSubjectWithArea:self.CoreArea];
+            MyOfferArea *areaModel = [self makeCurrentSubjectWithArea:self.coreArea];
             
             subjectArray = [areaModel.subjects valueForKeyPath:@"name"];
             
-            filter_area.selectedValue = self.CoreArea;
-
+            filter_area.selectedValue = self.coreArea;
             
         }
         
         //专业
-        FiltContent *filter_subject =[FiltContent createItemWithTitle:@"专业方向:" andDetailTitle:KEY_ALL  anditems:subjectArray];
+        FiltContent *filter_subject = [FiltContent filterWithIcon:nil title:@"专业方向:"  subtitlte:KEY_ALL filterOptionItems:subjectArray];
         filter_subject.optionStyle = FilterOptionSuject;
         FilterContentFrame *filter_subject_frame =  [FilterContentFrame FilterContentFrameWithContent:filter_subject];
         [temps addObject:filter_subject_frame];
@@ -322,10 +315,9 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     
     [self makeUI];
     
-    
-    
 }
 
+//顶部工具条背景
 - (UIView *)topView{
     
     if (!_topView) {
@@ -343,6 +335,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     return _topView;
 }
 
+
 - (void)makeUI{
     
     [self makeRankTableView];
@@ -351,18 +344,23 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     
     [self makeTopView];
     
-//    self.current_Level = @"全部";
-//    self.current_area = @"全部";
-    
-    
+    //添加保存原始筛选数据
     for (FilterContentFrame *filter_Frame in self.FiltItems) {
-        
         
         [self.FiltItems_origin addObject:[filter_Frame copy]];
         
     }
     
+}
+
+- (void)setRankings:(NSArray *)rankings{
+
+    _rankings = rankings;
     
+    //如果只有一个排序方式，一定是世界排名，设置 self.currentRankType = RANK_QS;
+    if (rankings.count == 1) self.currentRankType = RANK_QS;
+    
+    [self.rank_table reloadData];
     
 }
 
@@ -371,7 +369,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     self.view.backgroundColor = XCOLOR(0, 0, 0, 0.1);
     
     [self.view addSubview:self.topView];
-    
     
     CGFloat area_X =  0;
     CGFloat area_Y =  0;
@@ -419,7 +416,8 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 
 - (void)makeOptionView{
     
-    CGFloat area_bg_Y  = 50;
+    //筛选父容器
+    CGFloat area_bg_Y  = Top_Heigh;
     CGFloat area_bg_W  = XSCREEN_WIDTH;
     UIView  *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, area_bg_Y, area_bg_W, 0)];
     bgView.backgroundColor = XCOLOR_RED;
@@ -431,11 +429,14 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     CGFloat option_H = XSCREEN_HEIGHT - area_bg_Y - XNAV_HEIGHT;
     self.option_table = [self defaultTableViewWithframe:CGRectMake(0, 0, option_W,option_H)];
     [self.bgView addSubview:self.option_table];
+    //筛选列表
+    self.option_table.contentInset = UIEdgeInsetsMake(0, 0, Top_Heigh, 0);
     
-    self.option_table.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     
+    
+    //footer 按钮容器
     CGFloat footer_W = area_bg_W;
-    CGFloat footer_H = 50;
+    CGFloat footer_H = Bottom_Heigh;
     CGFloat footer_Y = option_H - footer_H;
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, footer_Y, footer_W, footer_H)];
     [self.bgView addSubview:footer];
@@ -443,6 +444,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     footer.backgroundColor = XCOLOR_LIGHTBLUE;
     
     
+    //清空按钮
     CGFloat clear_X =  0;
     CGFloat clear_Y =  0;
     CGFloat clear_W =  footer_W * 0.5;
@@ -453,6 +455,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     [self.clearBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.footerView addSubview:self.clearBtn];
     
+    //提交按钮
     CGFloat sub_X =  clear_W;
     CGFloat sub_Y =  0;
     CGFloat sub_W =  clear_W;
@@ -467,7 +470,8 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 
 -(void)makeRankTableView{
     
-    self.rank_table =[self defaultTableViewWithframe:CGRectMake(0, 50, XSCREEN_WIDTH,0)];
+    //排名列表
+    self.rank_table =[self defaultTableViewWithframe:CGRectMake(0, Top_Heigh, XSCREEN_WIDTH,0)];
     [self.view addSubview:self.rank_table];
     
 }
@@ -485,6 +489,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     return tableView;
 }
 
+
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -497,7 +502,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         
     }
     
-    return  50;
+    return  Cell_Heigh;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -517,29 +522,9 @@ static NSString *identify = @"uniFilter";
         Fcell.delegate = self;
         Fcell.indexPath = indexPath;
         Fcell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        switch (indexPath.row) {
-//            case 0:
-//                Fcell.selectItem =[self.filerParameters valueForKey:KEY_COUNTRY];
-//                break;
-//            case 1:
-//                Fcell.selectItem =[self.filerParameters valueForKey:KEY_STATE];
-//                break;
-//            case 2:
-//                Fcell.selectItem =[self.filerParameters valueForKey:KEY_CITY];
-//                break;
-//            case 3:
-//                Fcell.selectItem =[self.filerParameters valueForKey:KEY_AREA];
-//                break;
-//            case 4:
-//                Fcell.selectItem =[self.filerParameters valueForKey:KEY_SUBJECT];
-//                break;
-//            default:
-//                break;
-//        }
         Fcell.filterFrame = self.FiltItems[indexPath.row];
         
         return Fcell;
-        
         
     }
     
@@ -553,8 +538,9 @@ static NSString *identify = @"uniFilter";
         
     }
     
-    cell.title =  self.rankings[indexPath.row];
-    cell.onSelected = [self.current_rank isEqualToString:self.rankings[indexPath.row]];
+    MyOfferRank *rank = self.rankings[indexPath.row];
+    cell.title =  rank.name;
+    cell.onSelected = [self.currentRankType isEqualToString:rank.rankType];
     
      return cell;
     
@@ -563,19 +549,30 @@ static NSString *identify = @"uniFilter";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (tableView == self.option_table) return;
+    
     //只有排序功能才有点事件
-    self.current_rank = self.rankings[indexPath.row];
+    MyOfferRank *rank = self.rankings[indexPath.row];
 
+    self.currentRankType = rank.rankType;
+    
     [self.rank_table reloadData];
     
     
     if (self.actionBlock) {
         
-        self.actionBlock(self.current_rank, KEY_ORDER_SF);
-    }
+        NSDictionary *rankDic = @{KEY_ORDER_SF : self.currentRankType };
         
+        self.actionBlock(@[rankDic]);
+        
+    }
+    
+    
+    [self onClick:self.currentBtn];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
 }
 
 //超出cell的bounds范围，不能显示
@@ -583,6 +580,7 @@ static NSString *identify = @"uniFilter";
     
     cell.clipsToBounds = YES;
 }
+
 
 #pragma mark :  FilterTableViewCellDelegate
 
@@ -646,7 +644,7 @@ static NSString *identify = @"uniFilter";
         
         case FilterOptionCity:{
             
-//            NSLog(@"FilterOptionCity = %@",onClickItem_Frame.content.selectedValue);
+            //  NSLog(@"FilterOptionCity = %@",onClickItem_Frame.content.selectedValue);
         
         }
             break;
@@ -667,7 +665,7 @@ static NSString *identify = @"uniFilter";
             
         case FilterOptionSuject:{
         
-//            NSLog(@"FilterOptionSuject = %@",onClickItem_Frame.content.selectedValue);
+            //  NSLog(@"FilterOptionSuject = %@",onClickItem_Frame.content.selectedValue);
         
         }
             break;
@@ -679,9 +677,10 @@ static NSString *identify = @"uniFilter";
     
 }
 
-
+//按钮点击事件
 - (void)onClick:(UIButton *)sender{
     
+    //footer的按钮
     switch (sender.tag) {
         case filterButtonStyleClear:{
         [self caseClear];
@@ -728,22 +727,15 @@ static NSString *identify = @"uniFilter";
             
             self.view.backgroundColor = XCOLOR(0, 0, 0, 0.1);
             
+            self.rank_table.mj_h = 0;
+            self.bgView.mj_h = 0;
+            
         } completion:^(BOOL finished) {
             
             
             self.view.frame = realRect;
             
         }];
-        
-        
-        
-        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-            
-            self.rank_table.mj_h = 0;
-            self.bgView.mj_h = 0;
-            
-        }];
-        
         
         
         return ;
@@ -754,12 +746,11 @@ static NSString *identify = @"uniFilter";
     
     UIView *selectedView = (sender.tag ==  filterButtonStyleOption) ? self.bgView : self.rank_table;
     UIView *unSelectedView = (sender.tag ==  filterButtonStyleOption) ? self.rank_table :  self.bgView;
-    
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         if (!(sender.tag ==  filterButtonStyleOption)) {
             
-            selectedView.mj_h = self.rankings.count * 50;
+            selectedView.mj_h = self.rankings.count * Cell_Heigh;
             
         }else{
             
@@ -770,7 +761,6 @@ static NSString *identify = @"uniFilter";
         unSelectedView.mj_h = 0;
         
     }];
-    
     
     
     
@@ -787,15 +777,14 @@ static NSString *identify = @"uniFilter";
     
 }
 
+ //点击黑色背景收起tableView
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    //点击黑色背景收起tableView
     [self onClick:self.currentBtn];
-    
 }
 
 
-
+// 清空数据
 - (void)caseClear{
     
     
@@ -810,19 +799,20 @@ static NSString *identify = @"uniFilter";
     }
     
     [self.option_table reloadData];
-   
     
 }
 
+// 提交数据
 - (void)caseSubmit{
 
-    
+    //每次清空请求参数，再重新添加
     [self.filterParameters removeAllObjects];
     
     for (FilterContentFrame *filter_Frame in self.FiltItems) {
         
         FiltContent *filter = filter_Frame.content;
         
+        //参数为空时跳过
         if (!filter.selectedValue) continue;
         
         switch (filter.optionStyle) {
@@ -847,13 +837,9 @@ static NSString *identify = @"uniFilter";
         
     }
     
-    
-    
-    if (self.actionBlock) {
+
+    if (self.actionBlock) self.actionBlock(@[@{KEY_FILTERS_SF : self.filterParameters}]);
         
-        self.actionBlock(self.filterParameters, KEY_FILTERS_SF);
-    }
-    
     
     //点击黑色背景收起tableView
     [self onClick:self.currentBtn];
