@@ -25,10 +25,10 @@
     self = [super init];
     if (self) {
         
-        self.logoName = icon;
-        self.titleName = title;
-        self.detailTitleName = subtitle;
-        self.buttonArray = optionItems;
+        self.icon = icon;
+        self.title = title;
+        self.subtitle = subtitle;
+        self.optionItems = optionItems;
         
     }
     return self;
@@ -41,11 +41,11 @@
     
     FiltContent *copy = [[FiltContent allocWithZone:zone] init];
     
-    copy.titleName = [self.titleName copy];
-    copy.detailTitleName = [self.detailTitleName copy];
-    copy.buttonArray = [self.buttonArray copy];
+    copy.title = [self.title copy];
+    copy.subtitle = [self.subtitle copy];
+    copy.optionItems = [self.optionItems copy];
     copy.selectedValue = [self.selectedValue copy];
-    copy.logoName = [self.logoName copy];
+    copy.icon = [self.icon copy];
     copy.optionStyle = self.optionStyle;
     
     return copy;

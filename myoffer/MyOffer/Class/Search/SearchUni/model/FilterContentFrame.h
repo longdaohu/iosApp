@@ -6,26 +6,37 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 typedef enum {
-    XcellStateRealHeight = 0,
-    XcellStateBaseHeight,
-    XcellStateHeightZero
-} XcellState;
+    FilterCellStateRealHeight = 0,
+    FilterCellStateBaseHeight,
+    FilterCellStateHeightZero
+} FilterCellState;
+
 
 #import <Foundation/Foundation.h>
 #import "FiltContent.h"
 
 @interface FilterContentFrame : NSObject
-@property(nonatomic,assign)CGRect logoFrame;
+//title图片
+@property(nonatomic,assign)CGRect iconFrame;
+//title
 @property(nonatomic,assign)CGRect titleFrame;
-@property(nonatomic,assign)CGRect detailFrame;
+//subtitle
+@property(nonatomic,assign)CGRect subtitleFrame;
+
 @property(nonatomic,assign)CGRect upFrame;
 @property(nonatomic,assign)CGRect bgFrame;
+//选择子项Frames
 @property(nonatomic,strong)NSArray *itemFrames;
+//cell高度
 @property(nonatomic,assign)CGFloat cellHeigh;
-@property(nonatomic,assign)XcellState cellState;
-@property(nonatomic,strong)NSArray *items;
-@property(nonatomic,strong)FiltContent *content;
-+(instancetype)FilterContentFrameWithContent:(FiltContent *)content;
+//cell的状态
+@property(nonatomic,assign)FilterCellState cellState;
+
+@property(nonatomic,strong)FiltContent *filter;
+//@property(nonatomic,strong)NSArray *optionItems;
+
++ (instancetype)filterFrameWithFilter:(FiltContent *)filter;
+
 
 
 @end

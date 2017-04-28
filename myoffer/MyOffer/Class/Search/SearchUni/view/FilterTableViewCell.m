@@ -83,22 +83,22 @@
 {
     _filterFrame = filterFrame;
     
-    FiltContent *filter = filterFrame.content;
+    FiltContent *filter = filterFrame.filter;
     
-    self.iconView.image =[UIImage imageNamed:filter.logoName];
-    self.iconView.frame = filterFrame.logoFrame;
+    self.iconView.image =[UIImage imageNamed:filter.icon];
+    self.iconView.frame = filterFrame.iconFrame;
     
     
     self.titleLab.frame = filterFrame.titleFrame;
-    self.titleLab.text = filter.titleName;
+    self.titleLab.text = filter.title;
     
     
-    self.detailLab.frame = filterFrame.detailFrame;
-    self.detailLab.text = filter.detailTitleName;
+    self.detailLab.frame = filterFrame.subtitleFrame;
+    self.detailLab.text = filter.subtitle;
     
     
     self.upButton.frame = filterFrame.upFrame;
-    self.upButton.selected = (filterFrame.cellState == XcellStateRealHeight);
+    self.upButton.selected = (filterFrame.cellState == FilterCellStateRealHeight);
 
 
     
@@ -107,7 +107,7 @@
         
         NSValue *itemValue =  filterFrame.itemFrames[index];
         
-        NSString *senderName = filter.buttonArray[index];
+        NSString *senderName = filter.optionItems[index];
         
         UIButton *sender = [self makeButtonWithTitle:senderName tagIndex:index frame:itemValue.CGRectValue];
         
@@ -180,7 +180,7 @@
     }
     
     self.detailLab.text = detailStr;
-    self.filterFrame.content.selectedValue = [detailStr isEqualToString:@"全部"] ? nil : detailStr;
+    self.filterFrame.filter.selectedValue = [detailStr isEqualToString:@"全部"] ? nil : detailStr;
     
     
     

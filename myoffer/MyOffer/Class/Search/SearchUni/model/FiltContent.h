@@ -18,12 +18,12 @@ typedef NS_ENUM(NSUInteger, FilterOption) {
     
 };
 @interface FiltContent : NSObject
-@property(nonatomic,copy)NSString *selectedValue;
-@property(nonatomic,copy)NSString *logoName;
-@property(nonatomic,copy)NSString *titleName;
-@property(nonatomic,copy)NSString *detailTitleName;
-@property(nonatomic,strong)NSArray *buttonArray;
+@property(nonatomic,copy)NSString *icon;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,copy)NSString *subtitle;
+@property(nonatomic,strong)NSArray *optionItems;
 @property(nonatomic,assign)FilterOption optionStyle;
+@property(nonatomic,copy)NSString *selectedValue;
 
 + (instancetype)filterWithIcon:(NSString *)icon  title:(NSString *)title subtitlte:(NSString *)subtitle filterOptionItems:(NSArray *)optionItems;
 

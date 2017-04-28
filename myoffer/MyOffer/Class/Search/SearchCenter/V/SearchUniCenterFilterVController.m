@@ -223,13 +223,13 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         
         FiltContent  *filter_country = [FiltContent filterWithIcon:nil title:@"国家:"  subtitlte:KEY_ALL filterOptionItems:[self.countries valueForKeyPath:@"name"]];
         filter_country.optionStyle = FilterOptionCountry;
-        FilterContentFrame *filter_country_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_country];
+        FilterContentFrame *filter_country_Frame = [FilterContentFrame filterFrameWithFilter:filter_country];
         [temps addObject:filter_country_Frame];
         
         NSArray *stateArray = nil;
         if (self.coreCountry) {
             
-            filter_country_Frame.cellState = XcellStateHeightZero;
+            filter_country_Frame.cellState = FilterCellStateHeightZero;
             MyOfferCountry *countryModel = [self makeCurrentStateWithCountry:self.coreCountry];
             stateArray =  [countryModel.states valueForKeyPath:@"name"];
             filter_country.selectedValue = self.coreCountry;
@@ -238,15 +238,15 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         //地区
         FiltContent  *filter_state = [FiltContent filterWithIcon:nil title:@"地区:"  subtitlte:KEY_ALL filterOptionItems:stateArray];
         filter_state.optionStyle = FilterOptionState;
-        FilterContentFrame *filter_state_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_state];
+        FilterContentFrame *filter_state_Frame = [FilterContentFrame filterFrameWithFilter:filter_state];
         [temps addObject:filter_state_Frame];
         
         
         NSArray *currentCityArr = nil;
         if (self.coreState) {
             
-            filter_country_Frame.cellState = XcellStateHeightZero;
-            filter_state_Frame.cellState = XcellStateHeightZero;
+            filter_country_Frame.cellState = FilterCellStateHeightZero;
+            filter_state_Frame.cellState = FilterCellStateHeightZero;
             
             MyOfferCountryState  * currentState =[self makeCurrentCityWithState:self.coreState country:self.coreCountry];
             currentCityArr = [currentState.cities valueForKeyPath:@"name"];
@@ -257,14 +257,14 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         //城市
         FiltContent  *filter_city = [FiltContent filterWithIcon:nil title:@"城市:"  subtitlte:KEY_ALL filterOptionItems:currentCityArr];
         filter_city.optionStyle = FilterOptionCity;
-        FilterContentFrame *filter_city_Frame = [FilterContentFrame FilterContentFrameWithContent:filter_city];
+        FilterContentFrame *filter_city_Frame = [FilterContentFrame filterFrameWithFilter:filter_city];
         [temps addObject:filter_city_Frame];
         
         if (self.corecity) {
             
-            filter_country_Frame.cellState = XcellStateHeightZero;
-            filter_state_Frame.cellState = XcellStateHeightZero;
-            filter_city_Frame.cellState = XcellStateHeightZero;
+            filter_country_Frame.cellState = FilterCellStateHeightZero;
+            filter_state_Frame.cellState = FilterCellStateHeightZero;
+            filter_city_Frame.cellState = FilterCellStateHeightZero;
             filter_city.selectedValue = self.corecity;
 
         }
@@ -272,7 +272,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
        //学科
         FiltContent *filter_area = [FiltContent filterWithIcon:nil title:@"学科领域:"  subtitlte:KEY_ALL filterOptionItems:[self.areas valueForKeyPath:@"name"]];
         filter_area.optionStyle = FilterOptionArea;
-        FilterContentFrame *filter_area_Frame =  [FilterContentFrame FilterContentFrameWithContent:filter_area];
+        FilterContentFrame *filter_area_Frame =  [FilterContentFrame filterFrameWithFilter:filter_area];
         [temps addObject:filter_area_Frame];
         
         NSArray *subjectArray = nil;
@@ -280,7 +280,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         
         if (self.coreArea) {
             
-            filter_area_Frame.cellState = XcellStateHeightZero;
+            filter_area_Frame.cellState = FilterCellStateHeightZero;
             
             MyOfferArea *areaModel = [self makeCurrentSubjectWithArea:self.coreArea];
             
@@ -293,7 +293,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         //专业
         FiltContent *filter_subject = [FiltContent filterWithIcon:nil title:@"专业方向:"  subtitlte:KEY_ALL filterOptionItems:subjectArray];
         filter_subject.optionStyle = FilterOptionSuject;
-        FilterContentFrame *filter_subject_frame =  [FilterContentFrame FilterContentFrameWithContent:filter_subject];
+        FilterContentFrame *filter_subject_frame =  [FilterContentFrame filterFrameWithFilter:filter_subject];
         [temps addObject:filter_subject_frame];
         
         
@@ -591,7 +591,7 @@ static NSString *identify = @"uniFilter";
     //展开、收起按钮
     if (sender.tag == DEFAULT_NUMBER) {
         
-        onClickItem_Frame.cellState =  (onClickItem_Frame.cellState == XcellStateBaseHeight) ? XcellStateRealHeight : XcellStateBaseHeight;
+        onClickItem_Frame.cellState =  (onClickItem_Frame.cellState == FilterCellStateBaseHeight) ? FilterCellStateRealHeight : FilterCellStateBaseHeight;
         
         [self.option_table reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
@@ -599,7 +599,7 @@ static NSString *identify = @"uniFilter";
     }
     
     
-    switch (onClickItem_Frame.content.optionStyle) {
+    switch (onClickItem_Frame.filter.optionStyle) {
             
         case FilterOptionCountry:{
             
@@ -607,16 +607,16 @@ static NSString *identify = @"uniFilter";
             MyOfferCountry *opiotnCountry= [self makeCurrentStateWithCountry:sender.currentTitle];
             
             FilterContentFrame  *state_Frame = self.FiltItems[indexPath.row + 1];
-            FiltContent *filter_state = state_Frame.content;
-            filter_state.buttonArray  =  onClickItem_Frame.content.selectedValue.length > 0 ?  [opiotnCountry.states valueForKeyPath:@"name"] : nil;
+            FiltContent *filter_state = state_Frame.filter;
+            filter_state.optionItems  =  onClickItem_Frame.filter.selectedValue.length > 0 ?  [opiotnCountry.states valueForKeyPath:@"name"] : nil;
             filter_state.selectedValue = nil;
-            state_Frame.content = filter_state;
+            state_Frame.filter = filter_state;
             
             FilterContentFrame  *city_Frame = self.FiltItems[indexPath.row + 2];
-            FiltContent *filter_city = city_Frame.content;
-            filter_city.buttonArray = nil;
+            FiltContent *filter_city = city_Frame.filter;
+            filter_city.optionItems = nil;
             filter_city.selectedValue = nil;
-            city_Frame.content = filter_city;
+            city_Frame.filter = filter_city;
             
             NSIndexPath *state_IndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
             NSIndexPath *city_IndexPath =[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section];
@@ -631,10 +631,10 @@ static NSString *identify = @"uniFilter";
             MyOfferCountryState *opiotnState= [self makeCurrentCityWithState:sender.currentTitle country:nil];
           
             FilterContentFrame  *city_Frame = self.FiltItems[indexPath.row + 1];
-            FiltContent *filter_city = city_Frame.content;
-            filter_city.buttonArray  =  onClickItem_Frame.content.selectedValue.length > 0 ? [opiotnState.cities valueForKeyPath:@"name"] : nil;
+            FiltContent *filter_city = city_Frame.filter;
+            filter_city.optionItems  =  onClickItem_Frame.filter.selectedValue.length > 0 ? [opiotnState.cities valueForKeyPath:@"name"] : nil;
             filter_city.selectedValue = nil;
-            city_Frame.content = filter_city;
+            city_Frame.filter = filter_city;
             
             NSIndexPath *city_IndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
             [self.option_table reloadRowsAtIndexPaths:@[city_IndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -653,10 +653,10 @@ static NSString *identify = @"uniFilter";
             MyOfferArea *opiotnArea= [self makeCurrentSubjectWithArea:sender.currentTitle];
             
             FilterContentFrame  *subject_Frame = self.FiltItems[indexPath.row + 1];
-            FiltContent *filter_subject = subject_Frame.content;
-            filter_subject.buttonArray  =  onClickItem_Frame.content.selectedValue.length > 0 ? [opiotnArea.subjects valueForKeyPath:@"name"] : nil;
+            FiltContent *filter_subject = subject_Frame.filter;
+            filter_subject.optionItems  =  onClickItem_Frame.filter.selectedValue.length > 0 ? [opiotnArea.subjects valueForKeyPath:@"name"] : nil;
             filter_subject.selectedValue = nil;
-            subject_Frame.content = filter_subject;
+            subject_Frame.filter = filter_subject;
             
             NSIndexPath *subject_IndexPath =[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
             [self.option_table reloadRowsAtIndexPaths:@[subject_IndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -810,7 +810,7 @@ static NSString *identify = @"uniFilter";
     
     for (FilterContentFrame *filter_Frame in self.FiltItems) {
         
-        FiltContent *filter = filter_Frame.content;
+        FiltContent *filter = filter_Frame.filter;
         
         //参数为空时跳过
         if (!filter.selectedValue) continue;

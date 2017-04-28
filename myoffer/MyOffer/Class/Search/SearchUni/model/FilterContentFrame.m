@@ -15,30 +15,30 @@
 @end
 
 @implementation FilterContentFrame
-+(instancetype)FilterContentFrameWithContent:(FiltContent *)content{
++ (instancetype)filterFrameWithFilter:(FiltContent *)filter{
 
     FilterContentFrame *filerFrame = [[FilterContentFrame alloc] init];
     
-    filerFrame.content = content;
+    filerFrame.filter = filter;
     
     return filerFrame;
 }
 
--(void)setContent:(FiltContent *)content
-{
-    _content = content;
+- (void)setFilter:(FiltContent *)filter{
+
+    _filter = filter;
     
     
-    CGSize titleSize = [content.titleName KD_sizeWithAttributeFont:FontWithSize(16)];
+    CGSize titleSize = [filter.title KD_sizeWithAttributeFont:FontWithSize(16)];
     
     CGFloat logoX  = 15;
     CGFloat logoY  = 15;
-    CGFloat logoW  = content.logoName.length > 0 ? 30 : 0;
+    CGFloat logoW  = filter.icon.length > 0 ? 30 : 0;
     CGFloat logoH  = titleSize.height;
-    self.logoFrame = CGRectMake(logoX, logoY, logoW, logoH);
+    self.iconFrame = CGRectMake(logoX, logoY, logoW, logoH);
     
     
-    CGFloat titleX = CGRectGetMaxX(self.logoFrame);
+    CGFloat titleX = CGRectGetMaxX(self.iconFrame);
     CGFloat titleY = 15;
     CGFloat titleW = titleSize.width;
     CGFloat titleH = 20;
@@ -48,45 +48,44 @@
     CGFloat detailY = titleY;
     CGFloat detailW = XSCREEN_WIDTH - detailX - 60;
     CGFloat detailH = 20;
-    self.detailFrame = CGRectMake(detailX,detailY,detailW, detailH);
+    self.subtitleFrame = CGRectMake(detailX,detailY,detailW, detailH);
     
-    CGFloat upX = CGRectGetMaxX(self.detailFrame);
+    CGFloat upX = CGRectGetMaxX(self.subtitleFrame);
     CGFloat upY = 0;
     CGFloat upW = 60;
     CGFloat upH = 50;
     self.upFrame = CGRectMake(upX, upY, upW, upH);
     
-    [self makeButtonItems:content.buttonArray];
+    [self makeButtonItems:filter.optionItems];
   
  
     
 }
 
--(void)setItems:(NSArray *)items
-{
-    _items = items;
-    
-    [self makeButtonItems:items];
-}
+//- (void)setOptionItems:(NSArray *)optionItems{
+//
+//    _optionItems = optionItems;
+//    
+//    [self makeButtonItems:optionItems];
+//}
 
 
-
--(void)setCellState:(XcellState)cellState
+-(void)setCellState:(FilterCellState)cellState
 {
     _cellState = cellState;
     
     switch (cellState) {
-        case XcellStateRealHeight:
+        case FilterCellStateRealHeight:
         {    //状态为0时，cell显示原始高度
             self.cellHeigh = self.originCellHeight;
         }
             break;
-        case XcellStateBaseHeight:
+        case FilterCellStateBaseHeight:
         {   //状态为1时，cell显示高度50
             self.cellHeigh = 50;
         }
             break;
-        case XcellStateHeightZero:
+        case FilterCellStateHeightZero:
         {  //状态为2时，cell显示高度为0
             self.cellHeigh = 0;
         }
@@ -154,11 +153,11 @@
     
     if (items.count == 0) {
         
-        self.cellState =  XcellStateHeightZero;
+        self.cellState =  FilterCellStateHeightZero;
     
     }else{
     
-        self.cellState =  XcellStateRealHeight;
+        self.cellState =  FilterCellStateRealHeight;
     }
  
 }
@@ -169,7 +168,7 @@
     
     FilterContentFrame *copy = [[FilterContentFrame allocWithZone:zone] init];
     
-    copy.content = [self.content copy];
+    copy.filter = [self.filter copy];
     copy.cellState = self.cellState;
     
     return copy;

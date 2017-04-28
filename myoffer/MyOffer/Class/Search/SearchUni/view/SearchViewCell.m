@@ -52,8 +52,8 @@
 {
     _fileritem =fileritem;
     
-    self.titleLab.text = fileritem.titleName;
-    self.logoView.image = [UIImage imageNamed:fileritem.detailTitleName];
+    self.titleLab.text = fileritem.title;
+    self.logoView.image = [UIImage imageNamed:fileritem.subtitle];
     
     //第一个 label的起点
     CGSize startSize = CGSizeMake(0, 15);
@@ -62,9 +62,9 @@
     
     CGFloat MAXWidth = XSCREEN_WIDTH - 30;
     
-    for (int i = 0; i < fileritem.buttonArray.count; i ++) {
+    for (int i = 0; i < fileritem.optionItems.count; i ++) {
         
-        CGFloat keyWordWidth = [fileritem.buttonArray[i] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:CELLITEMFONT]].width +15;
+        CGFloat keyWordWidth = [fileritem.optionItems[i] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:CELLITEMFONT]].width +15;
         
         if (keyWordWidth > MAXWidth) {
             
@@ -82,7 +82,7 @@
         [sender addTarget:self action:@selector(cellButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
         sender.frame =CGRectMake(startSize.width, startSize.height, keyWordWidth, 25);
         sender.layer.cornerRadius = CORNER_RADIUS;
-        [sender setTitle:fileritem.buttonArray[i] forState:UIControlStateNormal];
+        [sender setTitle:fileritem.optionItems[i] forState:UIControlStateNormal];
         
         sender.backgroundColor = [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1];
         [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

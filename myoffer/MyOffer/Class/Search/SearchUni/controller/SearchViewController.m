@@ -102,9 +102,9 @@
 
 
 
--(void)setDataSourceWithContent:(FiltContent *)content{
+-(void)setDataSourceWithContent:(FiltContent *)filter{
     
-    FilterContentFrame *filterFrame = [FilterContentFrame FilterContentFrameWithContent:content];
+    FilterContentFrame *filterFrame = [FilterContentFrame filterFrameWithFilter:filter];
     
     [self.FiltItems addObject:filterFrame];
     
