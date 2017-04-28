@@ -10,10 +10,13 @@
 #import "FilterTableViewCell.h"
 
 @interface FilterTableViewCell()
-//logoView
-@property(nonatomic,strong)UIImageView *logoView;
-@property(nonatomic,strong)UILabel *titleLabel;
+
+@property(nonatomic,strong)UIImageView *iconView;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UILabel *detailLab;
 @property(nonatomic,strong)UIButton *lastButton;
+@property(nonatomic,strong)UIView *bgView;
+
 @end
 
 @implementation FilterTableViewCell
@@ -38,28 +41,28 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.logoView =[[UIImageView alloc] init];
-        self.logoView.contentMode = UIViewContentModeLeft;
-        [self addSubview:self.logoView];
+        self.iconView =[[UIImageView alloc] init];
+        self.iconView.contentMode = UIViewContentModeLeft;
+        [self addSubview:self.iconView];
         
         
-        self.titleLabel =[[UILabel alloc] init];
-        self.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self addSubview:self.titleLabel];
+        self.titleLab =[[UILabel alloc] init];
+        self.titleLab.font = [UIFont systemFontOfSize:16];
+        [self addSubview:self.titleLab];
         
-        self.detailNameLabel =[[UILabel alloc] init];
-        self.detailNameLabel.font = [UIFont systemFontOfSize:16];
-        self.detailNameLabel.textColor = XCOLOR_RED;
-        [self addSubview:self.detailNameLabel];
+        self.detailLab =[[UILabel alloc] init];
+        self.detailLab.font = [UIFont systemFontOfSize:16];
+        self.detailLab.textColor = XCOLOR_RED;
+        [self addSubview:self.detailLab];
         
-        self.contentBackView =[[UIView alloc] init];
-        [self addSubview:self.contentBackView];
+        self.bgView =[[UIView alloc] init];
+        [self addSubview:self.bgView];
         
         self.upButton =[[UIButton alloc] init];
         [self.upButton setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
         [self.upButton setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateSelected];
         [self.upButton addTarget:self action:@selector(upClick:) forControlEvents:UIControlEventTouchUpInside];
-        self.upButton.tag = 999;
+        self.upButton.tag = DEFAULT_NUMBER;
         [self addSubview:self.upButton];
         
         
@@ -68,129 +71,123 @@
 }
 
 
--(void)setIndexPath:(NSIndexPath *)indexPath
-{
+-(void)setIndexPath:(NSIndexPath *)indexPath{
+    
     _indexPath = indexPath;
 }
 
 
--(void)setFileritem:(FiltContent *)fileritem
+
+
+-(void)setFilterFrame:(FilterContentFrame *)filterFrame
 {
-    _fileritem =fileritem;
+    _filterFrame = filterFrame;
     
-    self.titleLabel.text = fileritem.titleName;
+    FiltContent *filter = filterFrame.content;
     
-    self.detailNameLabel.text = fileritem.detailTitleName;
-    CGSize titleSize = [fileritem.titleName KD_sizeWithAttributeFont:[UIFont systemFontOfSize:CELLITEMFONT]];
-    
-    self.titleLabel.frame = CGRectMake(15,10, titleSize.width, 20);
-    
-    self.detailNameLabel.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame)+5,10,XSCREEN_WIDTH - 100, 20);
-    
-    //第一个 label的起点
-    CGSize startSize = CGSizeMake(0, 10);
-    //间距
-    CGFloat padding = 10.0;
-    
-    CGFloat MAXWidth = [UIScreen  mainScreen].bounds.size.width - 30;
+    self.iconView.image =[UIImage imageNamed:filter.logoName];
+    self.iconView.frame = filterFrame.logoFrame;
     
     
-    for (int i = 0; i < fileritem.buttonArray.count; i ++) {
+    self.titleLab.frame = filterFrame.titleFrame;
+    self.titleLab.text = filter.titleName;
+    
+    
+    self.detailLab.frame = filterFrame.detailFrame;
+    self.detailLab.text = filter.detailTitleName;
+    
+    
+    self.upButton.frame = filterFrame.upFrame;
+    self.upButton.selected = (filterFrame.cellState == XcellStateRealHeight);
+
+
+    
+    self.bgView.frame  = filterFrame.bgFrame;
+    for (int index = 0; index < filterFrame.itemFrames.count; index++) {
         
-        CGFloat keyWordWidth = [fileritem.buttonArray[i] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:CELLITEMFONT]].width +15;
+        NSValue *itemValue =  filterFrame.itemFrames[index];
         
-        if (keyWordWidth > MAXWidth) {
-            
-            keyWordWidth = MAXWidth;
-        }
-        if (MAXWidth - startSize.width < keyWordWidth) {
-            
-            startSize.height += 35.0;
-            
-            startSize.width = 0;
-        }
-        //创建 label点击事件
-        UIButton *sender = [[UIButton alloc]init];
-        sender.tag = i;
-        [sender addTarget:self action:@selector(cellButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
-        sender.frame =CGRectMake(startSize.width, startSize.height, keyWordWidth, 25);
-        sender.layer.cornerRadius = 5;
-        [sender setTitle:fileritem.buttonArray[i] forState:UIControlStateNormal];
-        sender.titleLabel.font = [UIFont systemFontOfSize:15];
+        NSString *senderName = filter.buttonArray[index];
         
+        UIButton *sender = [self makeButtonWithTitle:senderName tagIndex:index frame:itemValue.CGRectValue];
         
+        [self.bgView addSubview:sender];
         
-        if ([self.selectItem isEqualToString: fileritem.buttonArray[i]]) {
-            
-            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            sender.backgroundColor =XCOLOR_RED;
-            self.lastButton = sender;
-            self.detailNameLabel.text = sender.titleLabel.text;
+        if ([filter.selectedValue isEqualToString:senderName] ) {
+
+                sender.selected = YES;
+                self.lastButton = sender;
+                self.detailLab.text = sender.titleLabel.text;
             
         }else{
-            
-            sender.backgroundColor = XCOLOR_BG;
-            [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
+        
+                sender.selected = NO;
         }
         
         
-        
-        
-        [self.contentBackView addSubview:sender];
-        
-        
-        //起点 增加
-        startSize.width += keyWordWidth + padding;
     }
-    //    self.contentBackView.frame =  CGRectMake(15,CGRectGetMaxY(self.titleLabel.frame),[UIScreen mainScreen].bounds.size.width - 30, fileritem.contentheigh);
     
 }
--(void)cellButtonItemPressed:(UIButton *)sender
-{
+
+
+- (UIButton *)makeButtonWithTitle:(NSString *)title tagIndex:(NSInteger)tag frame:(CGRect)frame{
+
+    UIButton *sender = [[UIButton alloc]init];
+    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateNormal];
+    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateSelected];
+    sender.layer.cornerRadius = CORNER_RADIUS;
+    sender.layer.masksToBounds = YES;
+    sender.tag = tag;
+    sender.titleLabel.font = [UIFont systemFontOfSize:15];
+    [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    sender.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 30);
+    [sender setTitle:title forState:UIControlStateNormal];
     
     
-    if ([self.delegate respondsToSelector:@selector(FilterTableViewCell:WithButtonItem:WithIndexPath:)]) {
-        
-        [self.delegate FilterTableViewCell:self WithButtonItem:sender WithIndexPath:self.indexPath];
-    }
+    return sender;
+
+}
+
+
+-(void)onClick:(UIButton *)sender{
     
     
-    if (self.upButton.hidden) {
+    if (self.upButton.hidden){
+    
+        [self upClick:sender];
         
         return;
     }
     
     
-    if (self.lastButton) {
+    NSString *detailStr;
+    if (self.lastButton &&  (self.lastButton == sender)) {
         
-        [self.lastButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.lastButton.backgroundColor = XCOLOR_BG;
-        
-        if (self.lastButton == sender) {
-            
-            self.detailNameLabel.text = GDLocalizedString(@"SearchResult_All");
-            self.lastButton = nil;
-            
-        }else{
-            
-            self.detailNameLabel.text = sender.titleLabel.text;
-            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            sender.backgroundColor = XCOLOR_RED;
-            self.lastButton = sender;
-        }
-        
+        detailStr = @"全部";
+        self.lastButton.selected = NO;
+        self.lastButton = nil;
+      
         
     }else{
         
-        self.detailNameLabel.text = sender.titleLabel.text;
-        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        sender.backgroundColor = XCOLOR_RED;
+        self.lastButton.selected = NO;
         self.lastButton = sender;
+        self.lastButton.selected = YES;
+        detailStr = sender.titleLabel.text;
+
     }
     
+    self.detailLab.text = detailStr;
+    self.filterFrame.content.selectedValue = [detailStr isEqualToString:@"全部"] ? nil : detailStr;
     
+    
+    
+    [self upClick:sender];
+
 }
+
 
 
 -(void)upClick:(UIButton *)sender
@@ -205,61 +202,8 @@
 
 
 
--(void)setFilterFrame:(FilterContentFrame *)filterFrame
-{
-    _filterFrame = filterFrame;
-    
-    FiltContent *fileritem = filterFrame.content;
-    
-    self.logoView.image =[UIImage imageNamed:fileritem.logoName];
-    self.logoView.frame = filterFrame.logoFrame;
-    
-    self.titleLabel.frame = filterFrame.titleFrame;
-    self.titleLabel.text = fileritem.titleName;
-    
-    self.detailNameLabel.frame = filterFrame.detailFrame;
-    self.detailNameLabel.text = fileritem.detailTitleName;
-    self.upButton.frame = filterFrame.upFrame;
-    self.contentBackView.frame  = filterFrame.bgFrame;
-    
-    self.upButton.selected = filterFrame.cellState == XcellStateRealHeight;
-    
-    for (int index = 0; index < filterFrame.itemFrames.count; index++) {
-        
-        NSValue *xvalue =  filterFrame.itemFrames[index];
-        CGRect itemRect =  xvalue.CGRectValue;
-        
-        UIButton *sender = [[UIButton alloc]init];
-        sender.tag = index;
-        [sender addTarget:self action:@selector(cellButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
-        sender.frame = CGRectMake(itemRect.origin.x, itemRect.origin.y, itemRect.size.width, 30);
-        sender.layer.cornerRadius = 5;
-        [sender setTitle:fileritem.buttonArray[index] forState:UIControlStateNormal];
-        sender.titleLabel.font = [UIFont systemFontOfSize:15];
-        
-        
-        if ([self.selectItem isEqualToString: fileritem.buttonArray[index]]) {
-            
-            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            sender.backgroundColor =XCOLOR_RED;
-            self.lastButton = sender;
-            self.detailNameLabel.text = sender.titleLabel.text;
-            
-        }else{
-            
-            sender.backgroundColor = XCOLOR_BG;
-            [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-        }
-        
-        
-        [self.contentBackView addSubview:sender];
-        
-        
-    }
-    
-}
 
 
 
 @end
+

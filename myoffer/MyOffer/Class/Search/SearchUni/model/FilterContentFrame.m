@@ -10,7 +10,7 @@
 
 #import "FilterContentFrame.h"
 
-@interface FilterContentFrame ()
+@interface FilterContentFrame ()<NSCopying>
 @property(nonatomic,assign)CGFloat originCellHeight;
 @end
 
@@ -162,6 +162,19 @@
     }
  
 }
+
+
+
+- (id)copyWithZone:(nullable NSZone *)zone{
+    
+    FilterContentFrame *copy = [[FilterContentFrame allocWithZone:zone] init];
+    
+    copy.content = [self.content copy];
+    
+    return copy;
+    
+}
+
 
 
 @end

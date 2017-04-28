@@ -959,23 +959,24 @@ typedef enum {
         Fcell.indexPath = indexPath;
         switch (indexPath.row) {
             case 0:
-                Fcell.selectItem =[self.filerParameters valueForKey:KEY_COUNTRY];
+                Fcell.selected_item =[self.filerParameters valueForKey:KEY_COUNTRY];
                 break;
             case 1:
-                Fcell.selectItem =[self.filerParameters valueForKey:KEY_STATE];
+                Fcell.selected_item =[self.filerParameters valueForKey:KEY_STATE];
                 break;
             case 2:
-                Fcell.selectItem =[self.filerParameters valueForKey:KEY_CITY];
+                Fcell.selected_item =[self.filerParameters valueForKey:KEY_CITY];
                 break;
             case 3:
-                Fcell.selectItem =[self.filerParameters valueForKey:KEY_AREA];
+                Fcell.selected_item =[self.filerParameters valueForKey:KEY_AREA];
                 break;
             case 4:
-                Fcell.selectItem =[self.filerParameters valueForKey:KEY_SUBJECT];
+                Fcell.selected_item =[self.filerParameters valueForKey:KEY_SUBJECT];
                 break;
             default:
                 break;
         }
+        
         Fcell.filterFrame = self.FiltItems[indexPath.row];
         
         return Fcell;

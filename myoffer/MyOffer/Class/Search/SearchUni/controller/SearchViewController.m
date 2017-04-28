@@ -131,32 +131,30 @@
     }];
     
     
-    if (LOGIN)
-    {
-        //请求历史数据
-        [self startAPIRequestWithSelector:kAPISelectorhistorySearch parameters:nil success:^(NSInteger statusCode, id response) {
+    if (!LOGIN) return; //未登录不加载下一步
+    
+    //请求历史数据
+    [self startAPIRequestWithSelector:kAPISelectorhistorySearch parameters:nil success:^(NSInteger statusCode, id response) {
+        
+        
+        NSMutableArray *histories = [NSMutableArray array];
+        
+        for (NSDictionary *historyInfo in response) {
             
+            [histories addObject:historyInfo[@"text"]];
+        }
+        
+        if (weakSelf.historyArray.count == 0) {
             
-            NSMutableArray *histories = [NSMutableArray array];
+            weakSelf.historyArray = [histories copy];
             
-            for (NSDictionary *historyInfo in response) {
-                
-                [histories addObject:historyInfo[@"text"]];
-            }
-            
-            if (weakSelf.historyArray.count == 0) {
-                
-                weakSelf.historyArray = [histories copy];
-                
-                FiltContent  *histroy = [FiltContent filterItemWithLogoName:@"search_history"   titleName:GDLocalizedString(@ "SearchVC-history") detailTitleName:@""  anditems: self.historyArray];
-       
-                [weakSelf setDataSourceWithContent:histroy];
- 
-            }
-            
-        }];
+            FiltContent  *histroy = [FiltContent filterItemWithLogoName:@"search_history"   titleName:GDLocalizedString(@ "SearchVC-history") detailTitleName:@""  anditems: self.historyArray];
+   
+            [weakSelf setDataSourceWithContent:histroy];
 
-    }
+        }
+        
+    }];
     
     
 }

@@ -107,7 +107,7 @@
     
     [self makeUI];
     
-    [self makeData];
+    [self makeDataSource];
 }
 
 - (NSMutableDictionary *)parametersM{
@@ -146,7 +146,7 @@
     [self makeFilter];
 }
 
-- (void)makeData{
+- (void)makeDataSource{
     
     //        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"text": self.SearchValue,
     //                                                                                           @"page": [NSNumber numberWithInteger:page],
@@ -155,7 +155,7 @@
     //                                                                                           @"order": self.RankType}];
   
     /*
-    155733  [APIClient] Request body: {"size":20,"page":0,"order":"ranking_ti","filters":[{"name":"city","value":"伦敦"}],"desc":0,"text":""}
+     155733  [APIClient] Request body: {"size":20,"page":0,"order":"ranking_ti","filters":[{"name":"city","value":"伦敦"}],"desc":0,"text":""}
      160753 [APIClient] Request body: {"size":20,"order":"ranking_qs",         "filters":[{"name":"city","value":"伯明翰"}],"desc":0,"page":0}
  */
     
@@ -234,9 +234,9 @@
 - (void)makeFilter{
     
     XWeakSelf
-    SearchUniCenterFilterVController *filter =[[SearchUniCenterFilterVController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
+    SearchUniCenterFilterVController *filter =[[SearchUniCenterFilterVController alloc] initWithActionBlock:^(id value, NSString *key) {
         
-//        [weakSelf reloadWithValue:value key:key];
+        [weakSelf filterWithValue:value key:key];
         
     }];
     
@@ -246,10 +246,19 @@
     CGFloat base_Height = XNAV_HEIGHT + 50;
     filter.base_Height = base_Height;
     filter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, base_Height);
-//    filter.areas = self.areas;
     [self.view addSubview:filter.view];
     
     
+}
+
+
+- (void)filterWithValue:(id)value key:(NSString *)key{
+
+ [self.parametersM setValue:value forKey:key];
+    
+     [self.parametersM setValue:value forKey:key];
+    
+     [self makeDataSource];
 }
 
 
@@ -380,7 +389,7 @@ static NSString *identify = @"search_course";
         
         [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE_S];
         
-        [self makeData];
+        [self makeDataSource];
     }
 
     
@@ -393,6 +402,11 @@ static NSString *identify = @"search_course";
     
 }
 
+
+-(void)dealloc
+{
+    KDClassLog(@"搜索结果  dealloc");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

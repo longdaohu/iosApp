@@ -27,4 +27,5 @@ typedef enum {
 @property(nonatomic,strong)FiltContent *content;
 +(instancetype)FilterContentFrameWithContent:(FiltContent *)content;
 
+
 @end

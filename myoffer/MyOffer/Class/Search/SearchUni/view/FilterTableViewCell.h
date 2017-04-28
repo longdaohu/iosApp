@@ -27,17 +27,16 @@ typedef void(^cellButtonBlock)(UIButton *);
 //收放按钮
 @property(nonatomic,strong)UIButton *upButton;
 @property(nonatomic,copy)NSString *itemTitle;
-@property(nonatomic,strong)FiltContent *fileritem;
 @property(nonatomic,copy)cellButtonBlock actionBlock;
-@property(nonatomic,strong)UILabel *detailNameLabel;
 @property(nonatomic,strong)NSIndexPath *indexPath;
-@property(nonatomic,strong)UIView *contentBackView;
 //已选择参数
-@property(nonatomic,copy)NSString *selectItem;
+@property(nonatomic,copy)NSString *selected_item;
 //数据模型
 @property(nonatomic,strong)FilterContentFrame *filterFrame;
+
 @property(nonatomic,weak)id <FilterTableViewCellDelegate> delegate;
 
 +(instancetype)cellInitWithTableView:(UITableView *)tableView;
+
 
 @end

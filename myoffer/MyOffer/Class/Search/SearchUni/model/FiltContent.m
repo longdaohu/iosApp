@@ -8,6 +8,9 @@
 
 #import "FiltContent.h"
 #import "FilterSection.h"
+@interface FiltContent ()<NSCopying>
+
+@end
 
 @implementation FiltContent
 
@@ -41,6 +44,26 @@
     return self;
 }
 
+
+
+- (id)copyWithZone:(nullable NSZone *)zone{
+    
+    
+    FiltContent *copy = [[FiltContent allocWithZone:zone] init];
+    
+    copy.titleName = [self.titleName copy];
+    copy.detailTitleName = [self.detailTitleName copy];
+    copy.buttonArray = [self.buttonArray copy];
+    copy.selectedValue = [self.selectedValue copy];
+    copy.logoName = [self.logoName copy];
+    copy.optionStyle = self.optionStyle;
+    
+    return copy;
+    
+}
+
+
+ 
 
 
 

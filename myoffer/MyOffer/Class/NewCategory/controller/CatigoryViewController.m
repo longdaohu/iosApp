@@ -225,7 +225,6 @@
 //滚动工具条
 - (void)makeTopToolView{
     
-    
     self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,26,XSCREEN_WIDTH, TOP_HIGHT)];
     self.topToolView.itemNames = @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
     self.topToolView.delegate  = self;
