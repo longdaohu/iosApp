@@ -24,8 +24,10 @@
 @property(nonatomic,strong)UIImageView *anchorView;
 //地理位置
 @property(nonatomic,strong)UITextField *address_detail_TF;
+//排名图标
+@property(nonatomic,strong)UIImageView *rankIconView;
  //排名
-@property(nonatomic,strong) UILabel *RankLab;
+@property(nonatomic,strong) UILabel *rankLab;
  //添加专业按钮
 @property(nonatomic,strong) UIButton *addSubjectBtn;
  //删除按钮
@@ -80,10 +82,10 @@
         [self.bgView addSubview:self.iconView];
     
         //学校名称
-        self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_TITLE];
+        self.nameLab =[self getLabelWithFontSize:XFONT_SIZE(17) andTextColor:XCOLOR_TITLE];
         
         //学校英文名
-        self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_SUBTITLE];
+        self.official_nameLab =[self getLabelWithFontSize:XFONT_SIZE(13)  andTextColor:XCOLOR_SUBTITLE];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
         self.official_nameLab.numberOfLines = 2;
         self.official_nameLab.clipsToBounds = YES;
@@ -97,13 +99,20 @@
         //地理位置
         self.address_detail_TF = [[UITextField alloc] init];
         self.address_detail_TF.textColor = XCOLOR_SUBTITLE;
-        self.address_detail_TF.font = FontWithSize(Uni_address_FontSize);
+        self.address_detail_TF.font = XFONT(XFONT_SIZE(13));
         self.address_detail_TF.userInteractionEnabled = NO;
         [self.bgView addSubview:self.address_detail_TF];
         
-        //排名
-        self.RankLab =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_SUBTITLE];
+        //排名图标
+        UIImageView *rankIconView =[[UIImageView alloc] init];
+        self.rankIconView = rankIconView;
+        rankIconView.image = [UIImage imageNamed:@"sort-arrows-none"];
+        rankIconView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.bgView addSubview:rankIconView];
         
+        //排名
+        self.rankLab =[self getLabelWithFontSize:XFONT_SIZE(13)  andTextColor:XCOLOR_SUBTITLE];
+         
         
         //底部分隔线
         UIView *line = [UIView new];
@@ -137,9 +146,7 @@
         //监听页面点击
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
         [self.bgView addGestureRecognizer:tap];
-        
-        
-        
+                 
 
     }
     
@@ -166,8 +173,8 @@
     UniversityNew *university = uniFrame.universtiy;
     
   
-    self.cancelBtn.frame = uniFrame.CancelButtonFrame;
-    self.addSubjectBtn.frame = uniFrame.AddButtonFrame;
+    self.cancelBtn.frame = uniFrame.cancel_Frame;
+    self.addSubjectBtn.frame = uniFrame.add_Frame;
 
     
     self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
@@ -175,30 +182,34 @@
     
     
    [self.iconView.logoImageView KD_setImageWithURL:university.logo];
-    self.iconView.frame = uniFrame.LogoFrame;
+    self.iconView.frame = uniFrame.icon_Frame;
     
     
     self.nameLab.text = university.name;
-    self.nameLab.frame = uniFrame.nameFrame;
+    self.nameLab.frame = uniFrame.name_Frame;
     
     
     self.official_nameLab.text = university.official_name;
-    self.official_nameLab.frame = uniFrame.official_nameFrame;
+    self.official_nameLab.frame = uniFrame.official_Frame;
     
     
-    self.anchorView.frame = uniFrame.anchorFrame;
-    self.address_detail_TF.frame = uniFrame.address_detailFrame;
+    self.anchorView.frame = uniFrame.anchor_Frame;
+    self.address_detail_TF.frame = uniFrame.address_Frame;
     self.address_detail_TF.text = university.address_long;
    
+    
+    
     CGFloat addressWidth = [university.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     //判断地址字符串太长时，换一个短的地址
-    if (addressWidth > (uniFrame.address_detailFrame.size.width - 30)) {
+    if (addressWidth > (uniFrame.address_Frame.size.width - 30)) {
         
          self.address_detail_TF.text = university.address_short;
         
     }
     
-    self.RankLab.frame = uniFrame.RankFrame;
+  
+    self.rankIconView.frame = uniFrame.rank_Icon_Frame;
+    self.rankLab.frame = uniFrame.rank_Frame;
     
     
     self.bottom_line.frame =  uniFrame.bottom_line_Frame;
@@ -210,7 +221,7 @@
     if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
         NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
-        self.RankLab.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
+        self.rankLab.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
         
         self.StarsBgView.hidden = YES;
         
@@ -221,14 +232,14 @@
     //判断是否需要显示*号   澳大利来排名时
     if (self.isStart) {
         
-        self.RankLab.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        self.rankLab.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         
         NSInteger  StarCount  = university.ranking_ti.integerValue;
        
         //暂无排名时
         if (StarCount == DEFAULT_NUMBER) {
             
-             self.RankLab.text = @"本国排名：暂无排名";
+             self.rankLab.text = @"本国排名：暂无排名";
 
             return;
         }
@@ -261,7 +272,7 @@
     }else{
            //英国排名
             NSString   *rankStr01 = university.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
-            self.RankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+            self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
     }
     

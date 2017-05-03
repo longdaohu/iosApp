@@ -10,7 +10,6 @@
 #import "ApplySection.h"
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
-#import "UniversityFrameNew.h"
 #import "ApplyTableViewCell.h"
 #import "UniversityNew.h"
 #import "UniversitySubjectListViewController.h"
@@ -389,7 +388,8 @@
 }
 
 
-#pragma mark ——————————UITableViewDelegate
+#pragma mark : UITableViewDelegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return self.groups.count;
@@ -420,9 +420,11 @@
 {
     return KDUtilSize(50);
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return  Uni_Cell_Height;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    ApplySection *group = self.groups[section];
+    
+    return  group.uniFrame.cell_Height;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

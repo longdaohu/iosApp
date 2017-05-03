@@ -128,6 +128,7 @@
 #import "DefaultTableView.h"
 #import "QQserviceSingleView.h"
 #import "MyofferUser.h"
+#import "UniversityFrameNew.h"
 
 
 #endif

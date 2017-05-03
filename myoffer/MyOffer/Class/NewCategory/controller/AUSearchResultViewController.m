@@ -10,7 +10,6 @@
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
 #import "XWGJnodataView.h"
-#import "UniversityFrameNew.h"
 #import "UniversityNew.h"
 
 
@@ -228,6 +227,7 @@
     NSArray *temp = self.Restults[indexPath.section];
     cell.isStart = YES;
     cell.uni_Frame = temp[indexPath.row];
+    
   
     return cell;
     
@@ -238,8 +238,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-     NSArray *temp = self.Restults[indexPath.section];
-     UniversityFrameNew   *uni_Frame = temp[indexPath.row];
+     NSArray *unies = self.Restults[indexPath.section];
+     UniversityFrameNew   *uni_Frame = unies[indexPath.row];
      UniversityNew *university = uni_Frame.universtiy;
      [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     
@@ -247,7 +247,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return Uni_Cell_Height;
+    NSArray *unies = self.Restults[indexPath.section];
+    
+    UniversityFrameNew   *uni_Frame = unies[indexPath.row];
+    
+    return uni_Frame.cell_Height;
 }
 
 

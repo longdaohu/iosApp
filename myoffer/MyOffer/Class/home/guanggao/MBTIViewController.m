@@ -329,6 +329,7 @@
     }
 }
 -(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
+    
     SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:rankType];
     vc.title  = [country isEqualToString:@"英国"]?[NSString stringWithFormat:@"%@大学排名",country] : country;
     [self.navigationController pushViewController:vc animated:YES];

@@ -9,7 +9,6 @@
 #import "SearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "XWGJnodataView.h"
-#import "UniversityFrameNew.h"
 #import "UniversityNew.h"
 
 @interface SearchResultViewController () {
@@ -121,19 +120,13 @@
     return _noDataView;
 }
 
-//-(void)checkCity
-//{
-//    NSArray *counries = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
-//    
-//     
-//}
 
 
 - (void)viewDidLoad {
   
     [super viewDidLoad];
     
-//    [self checkCity];
+ 
     
     {
         
@@ -289,13 +282,13 @@
 }
 
 
+#pragma mark : UITableViewDataSource UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
+    UniversityFrameNew  *uni_Frame = _result[indexPath.row];
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    
-    return Uni_Cell_Height;
-    
+    return uni_Frame.cell_Height;
 }
 
 

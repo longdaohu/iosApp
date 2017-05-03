@@ -8,7 +8,6 @@
 
 #import "SearchUniversityCenterViewController.h"
 #import "UniversityNew.h"
-#import "UniversityFrameNew.h"
 #import "UniversityCourseCell.h"
 #import "ApplySectionHeaderView.h"
 #import "searchSectionFootView.h"
@@ -470,9 +469,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    #warning 这里可能修改一下 通过FRAME 设置 cell 高度
+    UniversityFrameNew *uniFrame = self.UniFrames[section];
     
-    return Uni_Cell_Height;
+    return uniFrame.cell_Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

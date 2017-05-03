@@ -12,31 +12,36 @@
 @property(nonatomic,strong)UniversityNew *universtiy;
 @property(nonatomic,assign)CGRect SectionBackgroudFrame;
 //logo
-@property(nonatomic,assign)CGRect LogoFrame;
+@property(nonatomic,assign)CGRect icon_Frame;
 //学校名称
-@property(nonatomic,assign)CGRect nameFrame;
+@property(nonatomic,assign)CGRect name_Frame;
 //英文名称
-@property(nonatomic,assign)CGRect official_nameFrame;
+@property(nonatomic,assign)CGRect official_Frame;
 //地址
-@property(nonatomic,assign)CGRect address_detailFrame;
+@property(nonatomic,assign)CGRect address_Frame;
 //地址图标
-@property(nonatomic,assign)CGRect anchorFrame;
+@property(nonatomic,assign)CGRect anchor_Frame;
 //排名
-@property(nonatomic,assign)CGRect RankFrame;
+@property(nonatomic,assign)CGRect rank_Frame;
+//排名图标
+@property(nonatomic,assign)CGRect rank_Icon_Frame;
 //添加按钮
-@property(nonatomic,assign)CGRect AddButtonFrame;
+@property(nonatomic,assign)CGRect add_Frame;
 //删除按钮
-@property(nonatomic,assign)CGRect CancelButtonFrame;
+@property(nonatomic,assign)CGRect cancel_Frame;
 //显示星星
 @property(nonatomic,assign)CGRect starBgFrame;
 //星号Frame
 @property(nonatomic,strong)NSArray *starFrames;
 //推荐
-@property(nonatomic,assign)CGRect hotFrame;
+@property(nonatomic,assign)CGRect hot_Frame;
 //底部分隔线
 @property(nonatomic,assign)CGRect bottom_line_Frame;
+
+@property(nonatomic,assign)CGFloat cell_Height;
 
 +(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy;
 
 @end
 
+ 

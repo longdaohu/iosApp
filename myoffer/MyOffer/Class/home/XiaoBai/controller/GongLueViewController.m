@@ -11,7 +11,6 @@
 #import "GongLueCell.h"
 #import "GongLueHeaderView.h"
 #import "AUSearchResultViewController.h"
-#import "SearchResultViewController.h"
 #import "PipeiEditViewController.h"
 #import "IntelligentResultViewController.h"
 #import "ApplyViewController.h"
@@ -282,14 +281,17 @@
 -(void)caseSearchResult
 {
     if ([self.gonglue.title containsString:@"英国"]) {
+        
         SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:@"英国" orderBy:RANK_TI];
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else{
+        return;
         
-        AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANK_TI];
-        [self.navigationController pushViewController:newVc animated:YES];
     }
+        
+    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:@"澳大利亚" orderBy:RANK_TI];
+    [self.navigationController pushViewController:newVc animated:YES];
+    
 }
 
 
