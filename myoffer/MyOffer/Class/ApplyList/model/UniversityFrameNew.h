@@ -40,8 +40,11 @@
 
 @property(nonatomic,assign)CGFloat cell_Height;
 
+@property(nonatomic,strong)NSArray *courseFrames;
+
+
 +(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy;
 
 @end
 
- 
+

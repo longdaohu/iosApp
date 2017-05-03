@@ -478,11 +478,11 @@
 {
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
 
-    NSInteger courseCount = uniFrame.universtiy.courseFrames.count;
+    NSInteger courseCount = uniFrame.courseFrames.count;
     
     if (courseCount > 0 ) {
         
-        SearchUniCourseFrame *courseFrame = uniFrame.universtiy.courseFrames[indexPath.row];
+        SearchUniCourseFrame *courseFrame = uniFrame.courseFrames[indexPath.row];
         
         return  courseFrame.cell_Height;
         
@@ -503,7 +503,7 @@
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
     [sectionView addButtonWithHiden:YES];
-    [sectionView showBottomLineHiden:NO];
+    [sectionView showBottomLineHiden:!(uniFrame.courseFrames.count > 0)];
     sectionView.optionOrderBy = [self.parametersM valueForKey:KEY_ORDER_S];
     sectionView.uniFrame = uniFrame;
     sectionView.newActionBlock = ^(NSString *uni_id){
@@ -550,7 +550,7 @@
     
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
-    NSInteger courseCount = uniFrame.universtiy.courseFrames.count;
+    NSInteger courseCount = uniFrame.courseFrames.count;
     
     return courseCount > 0 ? courseCount : 1;
 }
@@ -570,9 +570,9 @@ static NSString *identify = @"search_course";
     
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
     
-    NSInteger courseCount = uniFrame.universtiy.courseFrames.count;
+    NSInteger courseCount = uniFrame.courseFrames.count;
     
-    if (courseCount > 0)  cell.course_frame = uniFrame.universtiy.courseFrames[indexPath.row];
+    if (courseCount > 0)  cell.course_frame = uniFrame.courseFrames[indexPath.row];
     
     
     //下拉到最后indexPath.row  下拉加载

@@ -8,6 +8,7 @@
 
 #import "UniversityFrameNew.h"
 #import "UniversityNew.h"
+#import "SearchUniCourseFrame.h"
 
 @implementation UniversityFrameNew
 
@@ -118,6 +119,24 @@
     self.cancel_Frame = CGRectMake(cancel_x, cancel_y, cancel_w, cancel_h);
     
 
+    if (universtiy.courses.count > 0) [self makeCourseFrameWithCourses:universtiy.courses];
+    
+}
+
+
+- (void)makeCourseFrameWithCourses:(NSArray *)courses{
+
+    
+    NSMutableArray *temps = [NSMutableArray array];
+    
+    [courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        SearchUniCourseFrame *courseFrame = [SearchUniCourseFrame frameWithCourse: (UniversityCourse *)obj];
+        
+        [temps addObject:courseFrame];
+    }];
+    
+    self.courseFrames = [temps copy];
 }
 
 

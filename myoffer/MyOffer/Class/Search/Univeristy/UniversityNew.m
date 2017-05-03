@@ -21,21 +21,21 @@
     return @{@"courses" : @"UniversityCourse"};
 }
 
-- (NSArray *)courseFrames{
-    
-    NSMutableArray *temps = [NSMutableArray array];
-    
-    [self.courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        SearchUniCourseFrame *courseFrame = [SearchUniCourseFrame frameWithCourse: (UniversityCourse *)obj];
-        
-        [temps addObject:courseFrame];
-    }];
-    
-    
-    return [temps copy];
-    
-}
+//- (NSArray *)courseFrames{
+//    
+//    NSMutableArray *temps = [NSMutableArray array];
+//    
+//    [self.courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        
+//        SearchUniCourseFrame *courseFrame = [SearchUniCourseFrame frameWithCourse: (UniversityCourse *)obj];
+//        
+//        [temps addObject:courseFrame];
+//    }];
+//    
+//    
+//    return [temps copy];
+//    
+//}
 
 
 - (NSString *)address_long{
