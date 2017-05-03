@@ -26,7 +26,7 @@
         UILabel *count_lab = [UILabel new];
         count_lab.textColor = XCOLOR_LIGHTBLUE;
         [self addSubview:count_lab];
-        count_lab.font = XFONT(XFONT_SIZE(16));
+        count_lab.font = XFONT(14);
         self.count_lab = count_lab;
         count_lab.textAlignment = NSTextAlignmentCenter;
         self.count_lab.text= @"已选择：0";
@@ -40,8 +40,8 @@
         submitBtn.backgroundColor = XCOLOR_BG;
         [submitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
         self.submitBtn.enabled = NO;
-        [submitBtn setTitle:@"确定" forState:UIControlStateNormal];
-        submitBtn.titleLabel.font = XFONT(XFONT_SIZE(16));
+        [submitBtn setTitle:@"确认" forState:UIControlStateNormal];
+        submitBtn.titleLabel.font = XFONT(14);
         [submitBtn addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
         
         CALayer *line = [CALayer layer];

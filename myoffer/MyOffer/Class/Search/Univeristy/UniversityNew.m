@@ -7,7 +7,7 @@
 //
 
 #import "UniversityNew.h"
-#import "UniversityCourseFrame.h"
+#import "SearchUniCourseFrame.h"
 
 @implementation UniversityNew
 + (NSDictionary *)mj_replacedKeyFromPropertyName
@@ -23,13 +23,11 @@
 
 - (NSArray *)courseFrames{
     
-    
-    
     NSMutableArray *temps = [NSMutableArray array];
     
     [self.courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UniversityCourseFrame *courseFrame = [UniversityCourseFrame frameWithCourse: (UniversityCourse *)obj];
+        SearchUniCourseFrame *courseFrame = [SearchUniCourseFrame frameWithCourse: (UniversityCourse *)obj];
         
         [temps addObject:courseFrame];
     }];

@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "FilterView.h"
 
 @interface SearchResultViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *_tableView;

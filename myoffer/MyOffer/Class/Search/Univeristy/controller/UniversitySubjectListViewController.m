@@ -13,7 +13,7 @@
 #import "UniversityCourseFooterView.h"
 #import "UniversityCourseFilterViewController.h"
 
-@interface UniversitySubjectListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface UniversitySubjectListViewController ()<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate>
 //网络请求参数字典
 @property(nonatomic,strong)NSMutableDictionary *resquestParameters;
 @property(nonatomic,strong)UITableView *tableView;
@@ -39,10 +39,7 @@
     self = [self init];
     if (self) {
         _universityID = ID;
-//        _selectedIDs = [NSMutableSet set];
-//        _newSelectedIDs = [NSMutableSet set];
         self.resquestParameters = [@{@":id": _universityID, @"page": @0, @"size": @40} mutableCopy];
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
         self.automaticallyAdjustsScrollViewInsets = NO;
         self.title = @"课程详情";
         
@@ -200,14 +197,22 @@
 - (void)makeDataSource{
     
     XWeakSelf
-    [self
-     startAPIRequestWithSelector:kAPISelectorUniversityCourses
-     parameters:_resquestParameters
-     success:^(NSInteger statusCode, id response) {
-         
-         [weakSelf updateUIWithResponse:response];
-         
-      }];
+ 
+    [self startAPIRequestWithSelector:kAPISelectorUniversityCourses  parameters:_resquestParameters  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+        
+        
+    } additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [weakSelf updateUIWithResponse:response];
+
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+//        [weakSelf showHubWithText:@"网络请求失败,请确认网络是否连接"];
+  
+        
+    }];
+    
     
 }
 
@@ -252,7 +257,12 @@
         
     }
     
+    //提示筛选结果为空
+    if (self.course_frames.count == 0) [self showHubWithText:@"没有相关专业"];
+    
     [self.tableView reloadData];
+    
+    
 
 }
 
@@ -310,7 +320,12 @@
     }else{
         
         //超过6个不能再选择
-        if (self.selected_items.count == 6) return;
+        if (self.selected_items.count == 6){
+        
+            [self showHubWithText:@"最多不能添加超过6个专业"];
+
+          return;
+        }
         
         [self.selected_items addObject:courseFrame.course.course_id];
     }
@@ -355,6 +370,23 @@
      }];
  
     
+}
+
+- (void)showHubWithText:(NSString *)text{
+
+    MBProgressHUD  *HUD =[MBProgressHUD showHUDAddedTo:self.view animated:NO]; //HUD效果添加哪个视图上
+    HUD.mode = MBProgressHUDModeText;
+    HUD.label.text = text;
+    [HUD hideAnimated:YES afterDelay:1.0f];     //10s后隐藏HUD
+    HUD.delegate = self;
+}
+
+#pragma mark : MBProgressHUDDelegate
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+
+    [hud removeFromSuperview];
+    
+    hud = nil;
 }
 
 

@@ -9,7 +9,6 @@
 #import "SearchUniversityCenterViewController.h"
 #import "UniversityNew.h"
 #import "UniversityFrameNew.h"
-#import "UniversityCourseFrame.h"
 #import "UniversityCourseCell.h"
 #import "ApplySectionHeaderView.h"
 #import "searchSectionFootView.h"
@@ -18,6 +17,8 @@
 #import "MyOfferCountry.h"
 #import "MyOfferCountryState.h"
 #import "MyOfferRank.h"
+#import "SearchPromptView.h"
+#import "SearchUniCourseFrame.h"
 
 
 #define KEY_TEXT_S  @"text"
@@ -42,6 +43,7 @@
 @property(nonatomic,strong)SearchUniCenterFilterVController *filter;
 //所有国家地区数组
 @property(nonatomic,strong)NSArray *countries;
+@property(nonatomic,strong)SearchPromptView *promptView;
 
 @end
 
@@ -99,6 +101,8 @@
     
     return self;
 }
+
+
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -174,11 +178,27 @@
     return _UniFrames;
 }
 
+
+- (SearchPromptView *)promptView{
+
+    if (!_promptView) {
+    
+        _promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
+        
+    }
+    
+    return _promptView;
+}
+
+
 - (void)makeUI{
     
     [self makeTableView];
     
     [self makeFilter];
+    
+    [self.view insertSubview:self.promptView  belowSubview:self.filter.view];
+ 
 }
 
 
@@ -187,6 +207,19 @@
 
 - (void)makeParameterDesc{
 
+    
+    //如果用关键字搜索
+    if (self.searchValue.length > 0) {
+    
+        [self.parametersM setValue:@0  forKey:KEY_DESC_S];
+        
+        [self.parametersM setValue:self.currentRankType forKey:KEY_ORDER_S];
+        
+        
+        return;
+    }
+    
+    
     /*
      *  升 1     5>4>3>2>1
      *  降 0     1>2>3>4>5
@@ -294,7 +327,6 @@
         if (self.UniFrames.count > 0) [self.UniFrames removeAllObjects];
     }
  
-    self.nextPage += 1;
     
     NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response[@"universities"]];
  
@@ -325,7 +357,14 @@
     self.filter.rankings = rankings;
     
     [self.tableView reloadData];
+
+    
+     if (0 == self.nextPage) [self promptShowWithCount:[response valueForKeyPath:@"count"]];
+    
+    self.nextPage += 1;
+    
 }
+
 
 
 -(void)makeTableView
@@ -336,6 +375,7 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.contentInset = UIEdgeInsetsMake(50, 0, XNAV_HEIGHT, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -443,7 +483,7 @@
     
     if (courseCount > 0 ) {
         
-        UniversityCourseFrame *courseFrame = uniFrame.universtiy.courseFrames[indexPath.row];
+        SearchUniCourseFrame *courseFrame = uniFrame.universtiy.courseFrames[indexPath.row];
         
         return  courseFrame.cell_Height;
         
@@ -463,7 +503,8 @@
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
-    [sectionView addButtonHiden];
+    [sectionView addButtonWithHiden:YES];
+    [sectionView showBottomLineHiden:NO];
     sectionView.optionOrderBy = [self.parametersM valueForKey:KEY_ORDER_S];
     sectionView.uniFrame = uniFrame;
     sectionView.newActionBlock = ^(NSString *uni_id){
@@ -524,16 +565,15 @@ static NSString *identify = @"search_course";
     if (!cell) {
         
         cell =[[UniversityCourseCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
+        
+        [cell cellSelectedButtonHiden:YES];
     }
     
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
     
     NSInteger courseCount = uniFrame.universtiy.courseFrames.count;
     
-    if (courseCount > 0) {
-       
-        cell.course_frame = uniFrame.universtiy.courseFrames[indexPath.row];
-    }
+    if (courseCount > 0)  cell.course_frame = uniFrame.universtiy.courseFrames[indexPath.row];
     
     
     //下拉到最后indexPath.row  下拉加载
@@ -551,6 +591,31 @@ static NSString *identify = @"search_course";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+//显示提示数据
+- (void)promptShowWithCount:(NSNumber *)count{
+    
+    [self.promptView promptShowWithCount:count.integerValue];
+
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
+        self.promptView.mj_y = 50;
+        
+    } completion:^(BOOL finished) {
+        
+        
+        [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
+            
+            self.promptView.mj_y = 0;
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }];
+    
     
 }
 

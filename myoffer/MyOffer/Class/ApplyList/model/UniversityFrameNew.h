@@ -33,6 +33,8 @@
 @property(nonatomic,strong)NSArray *starFrames;
 //推荐
 @property(nonatomic,assign)CGRect hotFrame;
+//底部分隔线
+@property(nonatomic,assign)CGRect bottom_line_Frame;
 
 +(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy;
 

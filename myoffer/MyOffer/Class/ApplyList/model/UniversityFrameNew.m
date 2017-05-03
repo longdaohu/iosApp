@@ -104,6 +104,10 @@
     CGFloat hotX = XSCREEN_WIDTH - hotH;
     CGFloat hotY = 0;
     self.hotFrame = CGRectMake(hotX,hotY, hotW,hotH);
+    
+    
+    self.bottom_line_Frame = CGRectMake(10, Uni_Cell_Height - 1, XSCREEN_WIDTH, 1);
+
 
     
 }

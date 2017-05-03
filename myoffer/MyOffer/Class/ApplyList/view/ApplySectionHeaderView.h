@@ -30,5 +30,8 @@ typedef void(^newSectionBlock)(NSString *);
 
 +(instancetype)sectionHeaderViewWithTableView:(UITableView *)tableView;
 //添加按钮隐藏
--(void)addButtonHiden;
+-(void)addButtonWithHiden:(BOOL)hiden;
+//是否显示底部分隔线
+- (void)showBottomLineHiden:(BOOL)hiden;
+
 @end

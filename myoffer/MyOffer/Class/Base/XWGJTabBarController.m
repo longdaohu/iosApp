@@ -108,8 +108,11 @@
                            (id)[UIColor colorWithRed:47/255.0 green:212/255.0 blue:255/255.0 alpha:1].CGColor,
                            (id)[UIColor colorWithRed:0/255.0 green:171/255.0 blue:255/255.0 alpha:1].CGColor,
                            nil];
-        gradient.startPoint = CGPointMake(0.4, 0.95);
-        gradient.endPoint = CGPointMake(1.0, 1.0);
+//        gradient.startPoint = CGPointMake(0.4, 0.95);
+//        gradient.endPoint = CGPointMake(1.0, 1.0);
+        gradient.locations  = @[@(0.5), @(1.0)];
+        gradient.startPoint = CGPointMake(0, 0);
+        gradient.endPoint = CGPointMake(1.0, 0);
         [navView.layer insertSublayer:gradient atIndex:0];
         
         self.navImage = [self getImageFromView:navView];

@@ -31,7 +31,7 @@ typedef enum {
 }PickerViewType;//表头按钮选项
 
 
-@interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate,FilterViewDelegate>
+@interface XWGJTiJiaoViewController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,XWGJJiBengTableViewCellDelegate,XWGJYiXiangTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 //数据源
 @property(nonatomic,strong)NSArray *Groups;

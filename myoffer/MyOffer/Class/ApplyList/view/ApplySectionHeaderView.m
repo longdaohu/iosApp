@@ -15,7 +15,7 @@
 
 @interface ApplySectionHeaderView ()
  //LOGO图标
-@property(nonatomic,strong)LogoView *LogoImageView;
+@property(nonatomic,strong)LogoView *iconView;
  //学校名称
 @property(strong,nonatomic) UILabel *nameLab;
  //学校英文名
@@ -25,7 +25,7 @@
 //地理位置
 @property(nonatomic,strong)UITextField *address_detail_TF;
  //排名
-@property(nonatomic,strong) UILabel *RankLabel;
+@property(nonatomic,strong) UILabel *RankLab;
  //添加专业按钮
 @property(nonatomic,strong) UIButton *addSubjectBtn;
  //删除按钮
@@ -33,7 +33,9 @@
 //背景View
 @property(nonatomic,strong) UIView *bgView;
 //**号背景
-@property(nonatomic,strong) UIView *StarBackgroud;
+@property(nonatomic,strong) UIView *StarsBgView;
+//底部分隔线
+@property(nonatomic,strong) UIView *bottom_line;
 
 
 @end
@@ -74,14 +76,14 @@
         [self.contentView addSubview: self.bgView];
         
         //LOGO图标
-         self.LogoImageView =[[LogoView alloc] init];
-        [self.bgView addSubview:self.LogoImageView];
+         self.iconView =[[LogoView alloc] init];
+        [self.bgView addSubview:self.iconView];
     
         //学校名称
-        self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_BLACK];
+        self.nameLab =[self getLabelWithFontSize:Uni_title_FontSize andTextColor:XCOLOR_TITLE];
         
         //学校英文名
-        self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_BLACK];
+        self.official_nameLab =[self getLabelWithFontSize:Uni_subtitle_FontSize  andTextColor:XCOLOR_SUBTITLE];
         self.official_nameLab.lineBreakMode = NSLineBreakByWordWrapping;
         self.official_nameLab.numberOfLines = 2;
         self.official_nameLab.clipsToBounds = YES;
@@ -94,24 +96,33 @@
         
         //地理位置
         self.address_detail_TF = [[UITextField alloc] init];
-        self.address_detail_TF.textColor = XCOLOR_DARKGRAY;
+        self.address_detail_TF.textColor = XCOLOR_SUBTITLE;
         self.address_detail_TF.font = FontWithSize(Uni_address_FontSize);
         self.address_detail_TF.userInteractionEnabled = NO;
         [self.bgView addSubview:self.address_detail_TF];
         
         //排名
-        self.RankLabel =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_DARKGRAY];
+        self.RankLab =[self getLabelWithFontSize:Uni_rank_FontSize  andTextColor:XCOLOR_SUBTITLE];
+        
+        
+        //底部分隔线
+        UIView *line = [UIView new];
+        line.hidden = YES;
+        line.backgroundColor = XCOLOR_line;
+        [self.bgView addSubview:line];
+        self.bottom_line = line;
+        
         
         
         //**号背景
-        self.StarBackgroud =[[UIView alloc] init];
-        [self.bgView addSubview:self.StarBackgroud];
+        self.StarsBgView =[[UIView alloc] init];
+        [self.bgView addSubview:self.StarsBgView];
         
         for (NSInteger i = 0; i<5; i++) {
             UIImageView *mv =[[UIImageView alloc] init];
             mv.image = [UIImage imageNamed:@"star"];
             mv.contentMode = UIViewContentModeScaleAspectFit;
-            [self.StarBackgroud addSubview:mv];
+            [self.StarsBgView addSubview:mv];
         }
         
          //添加专业按钮
@@ -126,6 +137,9 @@
         //监听页面点击
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
         [self.bgView addGestureRecognizer:tap];
+        
+        
+        
 
     }
     
@@ -157,11 +171,11 @@
 
     
     self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
-    self.StarBackgroud.hidden = !self.isStart;
+    self.StarsBgView.hidden = !self.isStart;
     
     
-   [self.LogoImageView.logoImageView KD_setImageWithURL:university.logo];
-    self.LogoImageView.frame = uniFrame.LogoFrame;
+   [self.iconView.logoImageView KD_setImageWithURL:university.logo];
+    self.iconView.frame = uniFrame.LogoFrame;
     
     
     self.nameLab.text = university.name;
@@ -184,18 +198,21 @@
         
     }
     
-    self.RankLabel.frame = uniFrame.RankFrame;
+    self.RankLab.frame = uniFrame.RankFrame;
     
     
-    self.StarBackgroud.frame = uniFrame.starBgFrame;
+    self.bottom_line.frame =  uniFrame.bottom_line_Frame;
+    
+    
+    self.StarsBgView.frame = uniFrame.starBgFrame;
     
     //当排名方式是 世界排名时，只显示世界排名信息
     if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
         NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
-        self.RankLabel.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
+        self.RankLab.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
         
-        self.StarBackgroud.hidden = YES;
+        self.StarsBgView.hidden = YES;
         
         return;
     }
@@ -204,22 +221,22 @@
     //判断是否需要显示*号   澳大利来排名时
     if (self.isStart) {
         
-        self.RankLabel.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
+        self.RankLab.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
         
         NSInteger  StarCount  = university.ranking_ti.integerValue;
        
         //暂无排名时
         if (StarCount == DEFAULT_NUMBER) {
             
-             self.RankLabel.text = @"本国排名：暂无排名";
+             self.RankLab.text = @"本国排名：暂无排名";
 
             return;
         }
         
         
-        for (NSInteger i =0; i < self.StarBackgroud.subviews.count; i++) {
+        for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
             
-            UIImageView *imageV = (UIImageView *)self.StarBackgroud.subviews[i];
+            UIImageView *imageV = (UIImageView *)self.StarsBgView.subviews[i];
             
             imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
         }
@@ -227,15 +244,15 @@
         
         for (NSInteger i =0; i < StarCount; i++) {
             
-            UIImageView *mv = (UIImageView *)self.StarBackgroud.subviews[i];
+            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
             
             mv.hidden = NO;
             
         }
         
-        for (NSInteger i = StarCount ; i < self.StarBackgroud.subviews.count; i++) {
+        for (NSInteger i = StarCount ; i < self.StarsBgView.subviews.count; i++) {
             
-            UIImageView *mv = (UIImageView *)self.StarBackgroud.subviews[i];
+            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
             
             mv.hidden = YES;
         }
@@ -244,12 +261,11 @@
     }else{
            //英国排名
             NSString   *rankStr01 = university.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
-            self.RankLabel.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
+            self.RankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
             
     }
     
-    
-  
+   
 }
 
 
@@ -287,10 +303,15 @@
     return [title boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
 }
 
+- (void)addButtonWithHiden:(BOOL)hiden{
 
--(void)addButtonHiden
-{
-    self.addSubjectBtn.hidden = YES;
+    self.addSubjectBtn.hidden = hiden;
+}
+
+
+- (void)showBottomLineHiden:(BOOL)hiden{
+
+    self.bottom_line.hidden = hiden;
 }
 
 
@@ -314,6 +335,8 @@
         self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
         
     }];
+    
+    
 }
 
 

@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class UniversityCourseFrame;
+#import "SearchUniCourseFrame.h"
+
 @interface UniversityCourseCell : UITableViewCell
+
+@property(nonatomic,strong)SearchUniCourseFrame *search_course_frame;
 @property(nonatomic,strong)UniversityCourseFrame *course_frame;
 
-//- (void)cellDidSelectRowSelected:(BOOL)selected;
+- (void)cellSelectedButtonHiden:(BOOL)hiden;
 
 - (void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 

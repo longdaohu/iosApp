@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UIButton *lastBtn;
 //选中项对应的图片
 @property(nonatomic,strong)NSArray *itemImages;
+@property(nonatomic,strong)CAGradientLayer *gradient;
 
 @end
 
@@ -31,15 +32,29 @@
     if (self) {
         
         self.blackView =[[UIView alloc] init];
-        self.blackView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
         [self addSubview:self.blackView];
+        self.blackView.backgroundColor = [UIColor blackColor];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        UIColor *colorOne = XCOLOR(33, 183, 232, 1);
+        UIColor *colorTwo = XCOLOR(9, 153, 218, 1);
+        gradient.colors           = [NSArray arrayWithObjects:
+                                     (id)colorOne.CGColor,
+                                     (id)colorTwo.CGColor,
+                                     nil];
+        gradient.startPoint = CGPointMake(0, 0);
+        gradient.endPoint = CGPointMake(1.0, 0);
+        gradient.backgroundColor = [UIColor redColor].CGColor;
+        [self.blackView.layer insertSublayer:gradient atIndex:0];
+        self.gradient = gradient;
+        
         
         self.bgView =[[UIView alloc] init];
         [self addSubview:self.bgView];
- 
+  
         self.focusView =[[UIImageView alloc] init];
         self.focusView.layer.borderWidth = 1;
-        self.focusView.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+        self.focusView.layer.borderColor =  [UIColor colorWithWhite:0 alpha:0.2].CGColor;
         self.focusView.layer.masksToBounds = YES;
         [self.bgView addSubview:self.focusView];
         self.focusView.image = self.itemImages[0];
@@ -71,7 +86,7 @@
         
             UIButton *sender =[[UIButton alloc] init];
             [sender setTitle:itemNames[index] forState:UIControlStateNormal];
-            [sender setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [sender setTitleColor:XCOLOR(255, 255, 255, 0.65) forState:UIControlStateNormal];
             [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
             [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
             sender.tag = index;
@@ -84,20 +99,6 @@
     self.lastBtn = self.itemArr[0];
     self.lastBtn.enabled = NO;
     
-   /*
-    if (itemNames.count > 2) { //按钮少于3个,中间间隔没有意义
-        
-        for (int i = 0; i < self.itemArr.count - 1; i++) {
-            
-            UIView *line =[[UIView alloc] init];
-            line.backgroundColor = [UIColor lightGrayColor];
-            [self.blackView addSubview:line];
-            
-        }
-       [self lineHidenIndex:0];
-        
-    }
-    */
     
 }
 
@@ -167,6 +168,8 @@
     [self makeView:self.blackView andCornerRadius: blackH * 0.5];
 
     self.bgView.frame = self.blackView.frame;
+    
+    self.gradient.frame = self.blackView.bounds;
     
     
     if (self.itemArr.count) {

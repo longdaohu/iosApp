@@ -150,6 +150,7 @@
     tableView.dataSource = self;
     tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:tableView];
+    tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
 
     return tableView;
 }
@@ -199,7 +200,6 @@ static NSString *filter_identify = @"course_filter";
     if (!cell) {
         
         cell =[[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:filter_identify];
-        
     }
     
     

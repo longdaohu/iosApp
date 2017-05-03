@@ -58,7 +58,6 @@ static NSString *identify = @"course";
     [self.contentView addSubview:official_lab];
     self.official_Lab = official_lab;
     
-    
     UIButton *optionBtn = [UIButton new];
     [self.contentView addSubview:optionBtn];
     self.optionBtn = optionBtn;
@@ -102,24 +101,57 @@ static NSString *identify = @"course";
         NSString *item = course_frame.course.tags[index];
         CGRect item_Frame = [course_frame.items_Frame[index] CGRectValue];
         [self itemWithName: item frame: item_Frame];
-        
      }
-  
+    
     
 }
 
+- (void)setSearch_course_frame:(SearchUniCourseFrame *)search_course_frame{
+
+    _search_course_frame = search_course_frame;
+    
+    UniversityCourse *course = search_course_frame.course;
+    
+    self.official_Lab.text = course.official_name;
+    
+    self.official_Lab.frame = search_course_frame.official_name_Frame;
+    
+    [self configureCellWithCourse:course];
+    
+    self.bg_View.frame = search_course_frame.items_bg_Frame;
+    
+    if (self.bg_View.subviews.count > 0) {
+        
+        [self.bg_View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
+    
+    
+    for (NSInteger index = 0 ; index < search_course_frame.course.tags.count; index++) {
+        
+        NSString *item = search_course_frame.course.tags[index];
+        CGRect item_Frame = [search_course_frame.items_Frame[index] CGRectValue];
+        [self itemWithName: item frame: item_Frame];
+    }
+
+    
+}
+
+
+
 - (void)itemWithName:(NSString *)name frame:(CGRect)frame{
 
-    UILabel *sender = [UILabel new];
+    UIButton *sender = [UIButton new];
     [self.bg_View addSubview:sender];
-    sender.textColor = XCOLOR_SUBTITLE;
+    [sender setTitleColor:XCOLOR_SUBTITLE  forState:UIControlStateNormal];
     sender.backgroundColor = XCOLOR_BG;
-    sender.font = XFONT(11);
-    sender.text = name;
+    sender.titleLabel.font = XFONT(11);
+    [sender setTitle:name forState:UIControlStateNormal];
     sender.frame = frame;
     sender.layer.cornerRadius = CORNER_RADIUS;
     sender.layer.masksToBounds = YES;
-    sender.textAlignment = NSTextAlignmentCenter;
+//    sender.layer.borderWidth = 1;
+//    sender.layer.borderColor = XCOLOR_BG.CGColor;
+    sender.titleLabel.textAlignment = NSTextAlignmentCenter;
     
 }
 
@@ -143,22 +175,19 @@ static NSString *identify = @"course";
     }
     
 }
-/*
--(void)cellDidSelectRowSelected:(BOOL)selected{
 
-     self.course_frame.course.optionSeleced = selected;
-    
-    [self configureCellWithCourse:self.course_frame.course];
-}
-*/
 -(void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     self.course_frame.course.optionSeleced = !self.course_frame.course.optionSeleced;
     
     [self configureCellWithCourse:self.course_frame.course];
     
 
+}
+
+- (void)cellSelectedButtonHiden:(BOOL)hiden{
+
+    self.optionBtn.hidden = hiden;
 }
 
 

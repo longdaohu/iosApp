@@ -232,7 +232,7 @@
     
     UIButton *searchBtn = [[UIButton alloc] init];
     [self.view addSubview:searchBtn];
-    [searchBtn setImage:[UIImage imageNamed:@"tabbar_discover"]  forState:UIControlStateNormal];
+    [searchBtn setImage:[UIImage imageNamed:@"search_icon"]  forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(searchButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     searchBtn.imageView.contentMode = UIViewContentModeCenter;
     CGFloat search_W = 20;
@@ -314,8 +314,8 @@
         
     }];
  
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
+//    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
 }
 
 - (void)makeUI{
