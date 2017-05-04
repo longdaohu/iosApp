@@ -16,7 +16,6 @@
 @property(nonatomic,copy)NSString *coreSubject;
 
 - (instancetype)initWithSearchValue:(NSString *)searchValue;
-
 - (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
 
 

@@ -32,8 +32,8 @@
 @property(nonatomic,copy)NSString *address_long;
 @property(nonatomic,strong)NSString *address_short;
 @property(nonatomic,strong)NSArray *courses;
-//@property(nonatomic,strong)NSArray *courseFrames;
 @property(nonatomic,strong)NSArray *tags;
+@property(nonatomic,strong)NSMutableArray *applies;
 
 @end
 

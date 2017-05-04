@@ -52,7 +52,7 @@
         
         self.detailLab =[[UILabel alloc] init];
         self.detailLab.font = [UIFont systemFontOfSize:16];
-        self.detailLab.textColor = XCOLOR_RED;
+        self.detailLab.textColor = XCOLOR_LIGHTBLUE;
         [self addSubview:self.detailLab];
         
         self.bgView =[[UIView alloc] init];
@@ -136,7 +136,7 @@
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateNormal];
-    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateSelected];
+    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_LIGHTBLUE] forState:UIControlStateSelected];
     sender.layer.cornerRadius = CORNER_RADIUS;
     sender.layer.masksToBounds = YES;
     sender.tag = tag;

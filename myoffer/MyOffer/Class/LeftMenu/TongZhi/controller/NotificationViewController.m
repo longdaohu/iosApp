@@ -63,7 +63,6 @@
 -(void)makeTableView
 {
     self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
-    [self.tableView emptyViewWithError:GDLocalizedString(@"Left-noNoti")];
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -84,17 +83,6 @@
     return [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
-
-/**
- @param show    
- true : 隐藏
- faulse : 显示
- */
--(void)nodataViewHidden:(BOOL)hidden{
-    
-    [self.tableView emptyViewWithError: GDLocalizedString(@"Left-noNoti")];
-    [self.tableView emptyViewWithHiden:hidden];
-}
 
 
 -(void)makeUI
@@ -122,7 +110,7 @@
      errorAlertDismissAction:nil
      additionalSuccessAction:^(NSInteger statusCode, id response) {
          
-         [weakSelf makeUIConfigrationWithResponse:response];
+         [weakSelf updateUIWithResponse:response];
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -137,53 +125,35 @@
     [self.tableView reloadData];
     [self endMJ_Fresh];
     [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
-    [self.tableView emptyViewWithHiden:NO];
     self.tableView.mj_header = nil;
+    self.tableView.mj_footer = nil;
 }
 
 //配置页面控件
-- (void)makeUIConfigrationWithResponse:(id)response{
-
-    self.nextPage += 1;
+- (void)updateUIWithResponse:(id)response{
     
     //每次刷新，选删除原有数据
-    if ([self.tableView.mj_header isRefreshing]){
-        
-        [self.results removeAllObjects];
-    }
+    if (self.nextPage == 0) [self.results removeAllObjects];
     
+    NSArray *messages = [NotiItem mj_objectArrayWithKeyValuesArray:response[@"messages"]];
     
-    [response[@"messages"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        [self.results  addObject:[NotiItem mj_objectWithKeyValues:obj]];
-
-    }];
+    [self.results addObjectsFromArray:messages];
     
     //结束刷新
     [self endMJ_Fresh];
     
     //判断是否显示上拉刷新
-    if( PageSize > [response[@"messages"] count]){
-        
-        self.tableView.mj_footer =  nil;
-    }
+    if( PageSize > messages.count) self.tableView.mj_footer =  nil;
     
     //是否提示无数据状态
-    if ([response[@"messages"] count] == 0 && self.results.count == 0) {
-        
-        [self nodataViewHidden:NO];
-        self.tableView.mj_header = nil;
-        
-        return ;
-        
-    }else{
-    
-        [self nodataViewHidden:YES];
-    }
+    [self updateTableViewStatusWithResultes:self.results];
     
     
     [self.tableView reloadData];
-   
+    
+    self.nextPage += 1;
+
+    
 }
 
 // mj_header  mj_footer 结束刷新
@@ -193,7 +163,24 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
-//加载新数据
+
+- (void)updateTableViewStatusWithResultes:(NSArray *)resultes{
+
+    //是否提示无数据状态
+    if (resultes.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"没有通知消息哦！"];
+        self.tableView.mj_header = nil;
+        self.tableView.mj_footer = nil;
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+    }
+
+}
+
+ //加载新数据
 - (void)loadNewData{
     
      self.nextPage = 0;
@@ -208,7 +195,8 @@
      [self getDataSourse:self.nextPage];
 }
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark : UITableViewDelegate  UITableViewDataSoure
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
     return 1;
@@ -241,8 +229,9 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
     return Uni_Cell_Height;
 }
 
@@ -266,6 +255,7 @@
         NotiItem *noti  = self.results[indexPath.row];
         NSString *path  = [NSString stringWithFormat:kAPISelectorDeleteTongZhi,noti.NO_id];
         
+        
         //提交删除项到服务器
         XWeakSelf
         [self startAPIRequestWithSelector:path
@@ -274,18 +264,7 @@
                                       
             [weakSelf.results removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                                    
-            [weakSelf nodataViewHidden:weakSelf.results.count != 0];
-                        
-            if (weakSelf.results.count == 0) {
-                
-                 weakSelf.tableView.mj_header = nil;
-                [weakSelf nodataViewHidden:NO];
-
-            }else{
-                
-                [weakSelf nodataViewHidden:YES];
-            }
+            [weakSelf updateTableViewStatusWithResultes:weakSelf.results];
                                     
       }];
         

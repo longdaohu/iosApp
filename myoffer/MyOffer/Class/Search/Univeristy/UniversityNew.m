@@ -12,14 +12,22 @@
 @implementation UniversityNew
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
-    return @{@"NO_id" : @"_id",@"found_year" : @"found"};
+    return @{
+             @"NO_id" : @"_id",
+             @"found_year" : @"found"
+             };
     
 }
 
 + (NSDictionary *)mj_objectClassInArray{
     
-    return @{@"courses" : @"UniversityCourse"};
+    return @{
+             @"courses" : @"UniversityCourse",
+             @"applies" : @"Applycourse"
+             };
 }
+
+
 
 //- (NSArray *)courseFrames{
 //    

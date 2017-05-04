@@ -54,11 +54,9 @@
 }
 
 
--(void)makeTableView
-{
+-(void)makeTableView{
     
     self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
-    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
@@ -82,7 +80,7 @@
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
         
-        [self.tableView emptyViewWithHiden:NO];
+        
         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
         
         return;
@@ -94,20 +92,16 @@
      parameters:nil
      success:^(NSInteger statusCode, id response) {
          
-         [weakSelf configrationUIWithresponse:response];
+         [weakSelf updateUIWithresponse:response];
          
      }];
 }
 
 //根据返回数据配置UI
-- (void)configrationUIWithresponse:(id)response{
+- (void)updateUIWithresponse:(id)response{
 
     
     NSArray *universities = (NSArray *)response;
-  
-    [self.tableView emptyViewWithHiden:universities.count>0];
-    
-    [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
     
     NSMutableArray *uni_temps = [NSMutableArray array];
     
@@ -118,7 +112,21 @@
     }];
    
     self.favor_Unies = [uni_temps copy];
+    
     [self.tableView reloadData];
+    
+    if (universities.count > 0) {
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }else{
+    
+       [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
+        
+    }
+    
+    
+
     
 
 }

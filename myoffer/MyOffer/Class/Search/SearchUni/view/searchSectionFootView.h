@@ -10,6 +10,8 @@
 #import "UniversityNew.h"
 typedef void(^universityBlock)(NSString *);
 @interface searchSectionFootView : UIView
-@property(nonatomic,strong)UniversityNew *uniObj;
 @property(nonatomic,copy)universityBlock actionBlock;
+
++ (instancetype)footerWithUniversity:(UniversityNew *)university actionBlock:(universityBlock)action;
+
 @end

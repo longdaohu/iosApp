@@ -12,6 +12,7 @@ typedef void(^DefaultTableViewBlock)();
 
 @interface DefaultTableView : UITableView
 @property(nonatomic,copy)DefaultTableViewBlock actionBlock;
+
 - (void)emptyViewWithHiden:(BOOL)hiden;
 - (void)emptyViewWithError:(NSString *)error;
 

@@ -30,18 +30,24 @@
 #define KEY_ORDER_S  @"order"
 
 @interface SearchUniversityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
+//网络请求参数
 @property(nonatomic,strong)NSMutableDictionary *parametersM;
+//数组模型
 @property(nonatomic,strong)NSMutableArray *UniFrames;
+//下一页
 @property(nonatomic,assign)NSInteger nextPage;
+//是否到最后一条数据
 @property(nonatomic,assign)BOOL endPage;
+//搜索关键字
 @property(nonatomic,copy)NSString *searchValue;
+//当前排名方式
 @property(nonatomic,copy)NSString *currentRankType;
-@property(nonatomic,copy)NSString *current_Country;
 //筛选工具
 @property(nonatomic,strong)SearchUniCenterFilterVController *filter;
 //所有国家地区数组
 @property(nonatomic,strong)NSArray *countries;
+//加载新数据提示框
 @property(nonatomic,strong)SearchPromptView *promptView;
 
 @end
@@ -57,7 +63,7 @@
  
         self.currentRankType = RANK_QS;
         [self.parametersM setValue:searchValue forKey:KEY_TEXT_S];
-        [self.parametersM setValue:RANK_QS forKey:KEY_ORDER_S];
+        [self.parametersM setValue:self.currentRankType forKey:KEY_ORDER_S];
         self.searchValue = searchValue;
         self.title = self.searchValue;
         
@@ -67,7 +73,6 @@
     return self;
 }
 
-//- (instancetype)initWithKey:(NSString *)key value:(NSString *)value orderBy:(NSNumber *)desc{
 - (instancetype)initWithKey:(NSString *)key value:(NSString *)value{
 
     self = [self init];
@@ -87,6 +92,7 @@
         [self.parametersM setValue:@[filter] forKey:KEY_FILTERS_S];
         [self.parametersM setValue:rankType forKey:KEY_ORDER_S];
         self.title = value;
+        
         
         if ([key isEqualToString:KEY_COUNTRY]) self.coreCountry =  value;
         if ([key isEqualToString:KEY_STATE])   self.coreState =  value;
@@ -183,7 +189,8 @@
     if (!_promptView) {
     
         _promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
-        
+        _promptView.alpha = 0;
+
     }
     
     return _promptView;
@@ -206,6 +213,15 @@
 
 - (void)makeParameterDesc{
 
+    //如果用关键字搜索 且已经选择了国家选项，判断国家是否是澳大利亚
+    if (self.searchValue.length > 0 && self.coreCountry) {
+        
+        NSNumber *desc = [self.coreCountry containsString:@"澳"] && [self.currentRankType isEqualToString:RANK_TI] ? @1 : @0;
+        [self.parametersM setValue:desc  forKey:KEY_DESC_S];
+        
+        return;
+    }
+    
     
     //如果用关键字搜索
     if (self.searchValue.length > 0) {
@@ -288,38 +304,33 @@
 }
 
 
-
-/*
- 155733  [APIClient] Request body: {"size":20,"page":0,"order":"ranking_ti","filters":[{"name":"city","value":"伦敦"}],"desc":0,"text":""}
- 160753 [APIClient] Request body: {"size":20,"order":"ranking_qs",         "filters":[{"name":"city","value":"伯明翰"}],"desc":0,"page":0}
- */
-
 //网络请求
 - (void)makeDataSource{
     
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorSearch parameters:self.parametersM expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
-        
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
-        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+        if (0 == self.UniFrames.count)  [self.tableView emptyViewWithError:@"网络请求失败，请确认网络是否连接！"];
         
     }];
     
     
 }
 
-//更新UI
+#pragma mark :网络请求结果 更新UI
+
 - (void)updateUIWithResponse:(id)response{
    
+
     if (0 == self.nextPage) {
         
-        // contentOffset.y 没有上移时，不用回滚到顶部
+         // contentOffset.y 没有上移时，不用回滚到顶部
         if (self.tableView.contentOffset.y > 0) [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         
         // page = 0 时，删除所有数据
@@ -327,8 +338,8 @@
     }
  
     
+    
     NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response[@"universities"]];
- 
     
     //当pageSize 大于请请求结果数量时，结束加载网络
     NSNumber *pageSize = [self.parametersM valueForKey:KEY_SIZE_S];
@@ -338,29 +349,34 @@
     [universities enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:(UniversityNew *)obj];
-        
         [self.UniFrames addObject:uniFrame];
         
     }];
     
     
+    //排名数组
     NSArray *rankTypes  =  [response valueForKeyPath:@"rankTypes"];
     NSMutableArray *rankings = [NSMutableArray array];
     for (NSString *rankType in rankTypes) {
         
          MyOfferRank *rank = [MyOfferRank rankWithName:rankType];
-        
-        [rankings addObject:rank];
+         [rankings addObject:rank];
      }
-   
     self.filter.rankings = rankings;
+    
+    
     
     [self.tableView reloadData];
 
+    //只有在page == 0 时，才会显示提示信息
+    if (0 == self.nextPage) [self promptShowWithCount:[response valueForKeyPath:@"count"]];
     
-     if (0 == self.nextPage) [self promptShowWithCount:[response valueForKeyPath:@"count"]];
     
     self.nextPage += 1;
+    
+    //当数据为空时，提示为空
+    [self.tableView emptyViewWithHiden:self.UniFrames.count > 0];
+    
     
 }
 
@@ -368,7 +384,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =[[DefaultTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -387,15 +403,16 @@
         
     }];
     
+    [self addChildViewController:filter];
+    self.filter = filter;
+    
     if (self.coreCountry) filter.coreCountry =  self.coreCountry;
     if (self.coreState)   filter.coreState =  self.coreState;
     if (self.coreCity)    filter.corecity =   self.coreCity ;
     if (self.coreArea)    filter.coreArea=  self.coreArea;
     
     filter.currentRankType=  self.currentRankType;
-    
-    [self addChildViewController:filter];
-    self.filter = filter;
+  
     
     CGFloat base_Height = XNAV_HEIGHT + 50;
     filter.base_Height = base_Height;
@@ -407,8 +424,8 @@
 //根据筛选条件设置 网络请求参数
 - (void)filterWithParameter:(NSArray *)parameters{
     
+    
     for (NSDictionary *para  in parameters) {
-        
         
             [self.parametersM setValue:para.allValues.firstObject forKey:para.allKeys.firstObject];
         
@@ -421,7 +438,6 @@
                 
                 self.currentRankType = para.allValues.firstObject;
             }
-        
         
         
             
@@ -463,7 +479,7 @@
 
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
-    return  uniFrame.universtiy.courses.count > 0 ? 60 : 10;
+    return  uniFrame.courseFrames.count > 0 ? 60 : 10;
    
 }
 
@@ -477,10 +493,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
-
-    NSInteger courseCount = uniFrame.courseFrames.count;
     
-    if (courseCount > 0 ) {
+    if (uniFrame.courseFrames.count > 0 ) {
         
         SearchUniCourseFrame *courseFrame = uniFrame.courseFrames[indexPath.row];
         
@@ -497,6 +511,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
+    
     XWeakSelf
     
     UniversityFrameNew *uniFrame = self.UniFrames[section];
@@ -504,7 +519,7 @@
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
     [sectionView addButtonWithHiden:YES];
     [sectionView showBottomLineHiden:!(uniFrame.courseFrames.count > 0)];
-    sectionView.optionOrderBy = [self.parametersM valueForKey:KEY_ORDER_S];
+    sectionView.optionOrderBy = self.parametersM[KEY_ORDER_S];
     sectionView.uniFrame = uniFrame;
     sectionView.newActionBlock = ^(NSString *uni_id){
         
@@ -521,23 +536,18 @@
     
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
-    if (uniFrame.universtiy.courses.count > 0) {
+    if (uniFrame.universtiy.courses.count == 0) return nil;
+   
+    
+    searchSectionFootView *sectionFooter = [searchSectionFootView footerWithUniversity:uniFrame.universtiy actionBlock:^(NSString *universityID) {
         
-        searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
-        sectionFooter.uniObj = uniFrame.universtiy;
-        sectionFooter.actionBlock = ^(NSString *universityID){
-            
-            [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:universityID] animated:YES];
-            
-        };
+        [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:universityID] animated:YES];
         
-        return sectionFooter;
-        
-    }else{
-        
-        return nil;
-        
-    }
+    }];
+    
+    return sectionFooter;
+ 
+    
     
 }
 
@@ -555,6 +565,7 @@
     return courseCount > 0 ? courseCount : 1;
 }
 
+
 static NSString *identify = @"search_course";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -570,9 +581,8 @@ static NSString *identify = @"search_course";
     
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
     
-    NSInteger courseCount = uniFrame.courseFrames.count;
     
-    if (courseCount > 0)  cell.course_frame = uniFrame.courseFrames[indexPath.row];
+    if (uniFrame.courseFrames.count > 0)  cell.course_frame = uniFrame.courseFrames[indexPath.row];
     
     
     //下拉到最后indexPath.row  下拉加载
@@ -593,13 +603,20 @@ static NSString *identify = @"search_course";
     
 }
 
-//显示提示数据
+//显示提示新加载数据
 - (void)promptShowWithCount:(NSNumber *)count{
     
     [self.promptView promptShowWithCount:count.integerValue];
-
+    
+   //每次点击时 清空动画
+    [self.promptView.layer removeAllAnimations];
+    self.promptView.alpha = 0;
+    self.promptView.mj_y = 0;
+    
+ 
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
+        self.promptView.alpha = 1;
         self.promptView.mj_y = 50;
         
     } completion:^(BOOL finished) {
@@ -608,12 +625,14 @@ static NSString *identify = @"search_course";
         [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
             
             self.promptView.mj_y = 0;
+            self.promptView.alpha = 0;
             
         } completion:^(BOOL finished) {
             
         }];
         
     }];
+
     
     
 }

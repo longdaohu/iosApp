@@ -80,28 +80,14 @@ static NSString *identify = @"course";
     
     UniversityCourse *course = course_frame.course;
     
-    self.official_Lab.text = course.official_name;
+     self.official_Lab.frame = course_frame.official_name_Frame;
     
-    self.official_Lab.frame = course_frame.official_name_Frame;
+     self.optionBtn.frame = course_frame.option_Frame;
     
-    self.optionBtn.frame = course_frame.option_Frame;
+     self.bg_View.frame = course_frame.items_bg_Frame;
     
-    [self configureCellWithCourse:course];
-    
-    self.bg_View.frame = course_frame.items_bg_Frame;
-    
-    if (self.bg_View.subviews.count > 0) {
-    
-        [self.bg_View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    }
-    
-    
-    for (NSInteger index = 0 ; index < course_frame.course.tags.count; index++) {
-    
-        NSString *item = course_frame.course.tags[index];
-        CGRect item_Frame = [course_frame.items_Frame[index] CGRectValue];
-        [self itemWithName: item frame: item_Frame];
-     }
+    [self updateUIWithCourse:course itemFrames:course_frame.items_Frame];
+
     
     
 }
@@ -112,27 +98,30 @@ static NSString *identify = @"course";
     
     UniversityCourse *course = search_course_frame.course;
     
-    self.official_Lab.text = course.official_name;
-    
     self.official_Lab.frame = search_course_frame.official_name_Frame;
-    
-    [self configureCellWithCourse:course];
     
     self.bg_View.frame = search_course_frame.items_bg_Frame;
     
-    if (self.bg_View.subviews.count > 0) {
-        
-        [self.bg_View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    }
+    [self updateUIWithCourse:course itemFrames:search_course_frame.items_Frame];
     
+}
+
+- (void)updateUIWithCourse:(UniversityCourse *)course itemFrames:(NSArray *)itemFrames{
+
+    self.official_Lab.text = course.official_name;
     
-    for (NSInteger index = 0 ; index < search_course_frame.course.tags.count; index++) {
+    [self configureCellWithCourse:course];
+
+    if (self.bg_View.subviews.count > 0) [self.bg_View.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    for (NSInteger index = 0 ; index <course.tags.count; index++) {
         
-        NSString *item = search_course_frame.course.tags[index];
-        CGRect item_Frame = [search_course_frame.items_Frame[index] CGRectValue];
+        NSString *item = course.tags[index];
+        CGRect item_Frame = [itemFrames[index] CGRectValue];
         [self itemWithName: item frame: item_Frame];
     }
 
+    
     
 }
 
@@ -149,32 +138,13 @@ static NSString *identify = @"course";
     sender.frame = frame;
     sender.layer.cornerRadius = CORNER_RADIUS;
     sender.layer.masksToBounds = YES;
-//    sender.layer.borderWidth = 1;
-//    sender.layer.borderColor = XCOLOR_BG.CGColor;
     sender.titleLabel.textAlignment = NSTextAlignmentCenter;
     
 }
 
 
-- (void)configureCellWithCourse:(UniversityCourse *)course {
-  
-    
-    NSString *title = course.applied ? GDLocalizedString(@"UniCourseDe-007") : @"";
-    
-    [self.optionBtn setTitle: title  forState:UIControlStateNormal];
 
-    if (course.applied) {
-       
-        [self.optionBtn setImage:nil forState:UIControlStateNormal];
-   
-    }else {
-       
-        NSString *imageName = self.course_frame.course.optionSeleced ? @"check-icons-yes" : @"check-icons";
-        
-        [self.optionBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    }
-    
-}
+
 
 -(void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -183,6 +153,27 @@ static NSString *identify = @"course";
     [self configureCellWithCourse:self.course_frame.course];
     
 
+}
+
+
+- (void)configureCellWithCourse:(UniversityCourse *)course {
+    
+    
+    NSString *title = course.applied ? GDLocalizedString(@"UniCourseDe-007") : @"";
+    
+    [self.optionBtn setTitle: title  forState:UIControlStateNormal];
+    
+    if (course.applied) {
+        
+        [self.optionBtn setImage:nil forState:UIControlStateNormal];
+        
+    }else {
+        
+        NSString *imageName = self.course_frame.course.optionSeleced ? @"check-icons-yes" : @"check-icons";
+        
+        [self.optionBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)cellSelectedButtonHiden:(BOOL)hiden{

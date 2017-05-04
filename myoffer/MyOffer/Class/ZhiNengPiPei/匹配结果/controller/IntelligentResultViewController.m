@@ -565,6 +565,8 @@
         return;
     }
     
+    
+    
     [self
      startAPIRequestWithSelector:kAPISelectorZiZengApplyPost
      parameters:@{@"uid": self.NewSelectUniversityIDs}
@@ -579,10 +581,8 @@
              
           ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
              
-          if (self.fromStyle.length > 0) {
-                 
-                 apply.backStyle = YES;
-          }
+          if (self.fromStyle.length > 0) apply.backStyle = YES;
+            
           [self.navigationController pushViewController:apply animated:YES];
          
          }];

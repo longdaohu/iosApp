@@ -33,7 +33,6 @@ typedef enum {
 @property(nonatomic,assign)FilterCellState cellState;
 
 @property(nonatomic,strong)FiltContent *filter;
-//@property(nonatomic,strong)NSArray *optionItems;
 
 + (instancetype)filterFrameWithFilter:(FiltContent *)filter;
 

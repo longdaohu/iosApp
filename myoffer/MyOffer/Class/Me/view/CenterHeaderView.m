@@ -41,8 +41,8 @@
         
         CenterSectionItem *pipei  = [self itemWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所" itemTag:centerItemTypepipei];
         CenterSectionItem *favor  = [self itemWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所" itemTag:centerItemTypefavor];
-        CenterSectionItem *service  = [self itemWithIcon:@"center_service" title:@"留学购" subtitle:@"暂未获得套餐" itemTag:centerItemTypeservice];
-        self.items = @[pipei,favor,service];
+        CenterSectionItem *test  = [self itemWithIcon:@"center_service" title:@"职业性格测试" subtitle:@"" itemTag:centerItemTypetest];
+        self.items = @[pipei,favor,test];
         
         
         UIView *top_line = [UIView new];
@@ -107,8 +107,8 @@
     CenterSectionItem *favor  = self.items[1];
     favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
 
-    CenterSectionItem *service  = self.items[2];
-    service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
+//    CenterSectionItem *service  = self.items[2];
+//    service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
 }
 
 - (void)layoutSubviews{

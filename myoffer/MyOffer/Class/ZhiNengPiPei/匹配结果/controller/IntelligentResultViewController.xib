@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,6 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3w2-tJ-h1W">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="nuK-yc-Tr8"/>
@@ -34,8 +38,10 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFJ-f9-nU2">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGm-Yk-ruZ" customClass="KDEasyTouchButton">
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
                             <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="加入我的申请意向">
@@ -47,6 +53,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选择：0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="a4f-3B-CqI">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="160" id="jUu-ff-WdG"/>
                             </constraints>
@@ -85,8 +92,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBd-52-T1X" userLabel="upView">
+                    <rect key="frame" x="0.0" y="6" width="320" height="208"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JY-op-jkD" customClass="XYPieChart">
+                            <rect key="frame" x="56" y="0.0" width="208" height="208"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="208" id="pjn-Fm-A52"/>
@@ -100,8 +109,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6A-Ne-GDe" userLabel="bottomView">
+                    <rect key="frame" x="0.0" y="220" width="320" height="85"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HB-Hj-HF9">
+                            <rect key="frame" x="0.0" y="45" width="10" height="40"/>
                             <color key="backgroundColor" red="0.89019607840000003" green="0.047058823530000002" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="10" id="2As-yi-rv2"/>
@@ -114,22 +125,25 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冲刺" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-cU-amC">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  冲刺" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-cU-amC">
+                            <rect key="frame" x="10" y="45" width="310" height="40"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Fu1-bL-E15"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle" translatesAutoresizingMaskIntoConstraints="NO" id="P8t-5O-MdR">
+                            <rect key="frame" x="145" y="35" width="30" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="2dG-1g-r6u"/>
                                 <constraint firstAttribute="width" constant="30" id="4Wh-1C-eiI"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请成功就赚了，申请一下试试吧！" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5M-W1-ffR">
+                            <rect key="frame" x="8" y="0.0" width="304" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="kKL-AK-Frb"/>
                             </constraints>
@@ -147,7 +161,7 @@
                         <constraint firstAttribute="height" constant="85" id="KaJ-ze-t6g"/>
                         <constraint firstAttribute="trailing" secondItem="B7K-cU-amC" secondAttribute="trailing" id="LsY-7e-u9h"/>
                         <constraint firstAttribute="bottom" secondItem="P8t-5O-MdR" secondAttribute="bottom" constant="30" id="Sy2-Ka-SKH"/>
-                        <constraint firstItem="B7K-cU-amC" firstAttribute="leading" secondItem="2HB-Hj-HF9" secondAttribute="trailing" constant="5" id="UC8-YL-Jw1"/>
+                        <constraint firstItem="B7K-cU-amC" firstAttribute="leading" secondItem="2HB-Hj-HF9" secondAttribute="trailing" id="UC8-YL-Jw1"/>
                         <constraint firstAttribute="bottom" secondItem="B7K-cU-amC" secondAttribute="bottom" id="Ytr-Y6-sxW"/>
                         <constraint firstAttribute="bottom" secondItem="2HB-Hj-HF9" secondAttribute="bottom" id="gNJ-2s-pc9"/>
                         <constraint firstItem="P8t-5O-MdR" firstAttribute="centerX" secondItem="B6A-Ne-GDe" secondAttribute="centerX" id="oRS-an-Wsa"/>

@@ -11,8 +11,19 @@
 @interface searchSectionFootView()
 @property(nonatomic,strong)UIView *shadowView;
 @property(nonatomic,strong)UIButton *footerBtn;
+@property(nonatomic,strong)UniversityNew *university;
+
 @end
 @implementation searchSectionFootView
+
++ (instancetype)footerWithUniversity:(UniversityNew *)university actionBlock:(universityBlock)action{
+
+    searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
+    sectionFooter.university =  university;
+    sectionFooter.actionBlock = action;
+    
+    return sectionFooter;
+}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -22,9 +33,7 @@
        
         UIView *shadowView =[[UIView alloc] init];
         shadowView.backgroundColor =[UIColor whiteColor];
-//        shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-//        shadowView.layer.shadowOpacity = 0.1;
-//        shadowView.layer.shadowOffset = CGSizeMake(0, 4);
+
         [self addSubview:shadowView];
         self.shadowView = shadowView;
         
@@ -40,17 +49,11 @@
     return self;
 }
 
--(void)setUniObj:(UniversityNew *)uniObj
-{
-    _uniObj = uniObj;
+
+-(void)moreSubjectPressed:(UIButton *)sender{
     
-}
--(void)moreSubjectPressed:(UIButton *)sender
-{
-    if (self.actionBlock) {
-        
-        self.actionBlock(self.uniObj.NO_id);
-    }
+    if (self.actionBlock) self.actionBlock(self.university.NO_id);
+    
 }
 
 

@@ -69,12 +69,6 @@
 
 }
 
-- (void)tableViewEmpty:(BOOL)show showString:(NSString*)errorstr{
-
-    [self.tableView emptyViewWithHiden:show];
-    [self.tableView emptyViewWithError:errorstr];
-
-}
 
 
 -(void)makeOther
@@ -89,21 +83,6 @@
     }
     
 }
-
-/*
--(XWGJnodataView *)noDataView{
-    
-    if (!_noDataView) {
-        
-        _noDataView =[XWGJnodataView noDataView];
-        _noDataView.errorStr = GDLocalizedString(@"ApplicationStutasVC-noData");
-        _noDataView.hidden = YES;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-    }
-    
-    return _noDataView;
-}
-*/
 
 - (void)viewDidLoad {
    
@@ -127,7 +106,7 @@
     
     if (![self checkNetworkState]) {
 
-        [self tableViewEmpty:NO showString:GDLocalizedString(@"NetRequest-noNetWork")];
+        [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
 
         if (refresh) [self.tableView.mj_header endRefreshing];
           
@@ -161,7 +140,16 @@
     
     self.Record_Groups = [groups copy];
  
-    [self tableViewEmpty:(self.Record_Groups.count > 0)  showString:GDLocalizedString(@"ApplicationStutasVC-noData")];
+    if (self.Record_Groups.count > 0){
+    
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }else{
+    
+         [self.tableView emptyViewWithError:GDLocalizedString(@"ApplicationStutasVC-noData")];
+    }
+        
+    
     
     [self.tableView reloadData];
     

@@ -7,7 +7,6 @@
 // 申请意向
 #import "XWGJTiJiaoViewController.h"
 #import "ApplyViewController.h"
-#import "ApplySection.h"
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
 #import "ApplyTableViewCell.h"
@@ -16,16 +15,23 @@
 
 #define SECTIONFOOTERHEIGHT  10
 
+#define Button_Title_Cancel @"取消"
+#define Button_Title_Edit @"编辑"
+
+typedef NS_ENUM(NSInteger,ApplyTableStatus){
+
+    ApplyTableStatusNomal = 0,
+    
+    ApplyTableStatusEdit
+
+};
+
 @interface ApplyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  DefaultTableView *tableView;
 //模型数组
 @property(nonatomic,strong)NSMutableArray *groups;
 //已选中课程ID数组
 @property(nonatomic,strong)NSMutableArray *courseSelecteds;
-//提交删除的课程ID数组
-@property(nonatomic,strong)NSMutableArray *cancelCourseList;
-//提交删除的学校ID数组
-@property(nonatomic,strong)NSMutableArray *cancelUniversityList;
 //删除分区数组
 @property(nonatomic,strong)NSMutableArray *cancelSetions;
 //删除cell对就的indexpath数组
@@ -42,6 +48,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *selectCountLabel;
 //判断cell是否需要做动画效果
 @property(nonatomic,assign)BOOL cell_Animation;
+//tableView的状态
+@property(nonatomic,assign)ApplyTableStatus tableStatus;
 
 @end
 
@@ -60,19 +68,20 @@
 }
 
 //viewWillAppear状态页面数据调整
+
 -(void)presentViewWillAppear{
 
     if (![self checkNetworkState]) {
-        
-        [self emptyViewHiden:NO];
+       
         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
  
         return;
     }
     
+    
     if (LOGIN) {
         
-        [self RequestDataSourse];
+         [self makeDataSourse];
         
          [self checkApplyStatus];
         
@@ -80,9 +89,8 @@
         
         [self.groups removeAllObjects];
         [self.tableView reloadData];
+        [self emptyViewShowWithResult:self.groups];
         
-        [self emptyViewHiden:NO];
-
     }
     
     
@@ -134,24 +142,6 @@
     return _courseSelecteds;
 }
 
--(NSMutableArray *)cancelCourseList
-{
-    if (!_cancelCourseList) {
-        
-        _cancelCourseList = [NSMutableArray array];
-    }
-    return _cancelCourseList;
-}
-
--(NSMutableArray *)cancelUniversityList
-{
-    if (!_cancelUniversityList) {
-        
-        _cancelUniversityList = [NSMutableArray array];
-    }
-    return _cancelUniversityList;
-}
-
 
 
 - (void)viewDidLoad {
@@ -159,64 +149,6 @@
     [super viewDidLoad];
     
     [self makeUI];
-    
-}
-
--(void)makeTableView
-{
-    
-    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.view insertSubview:self.tableView atIndex:0];
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    
-}
-
-
-//网络数据请求
-- (void)RequestDataSourse {
-    
-    
-    XWeakSelf;
-    
-    [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil success:^(NSInteger statusCode, NSArray *response) {
-        
-        [weakSelf UIWithArray:(NSArray *)response];
-        
-    }];
-    
-}
-
-//根据网络请求刷新页面
--(void)UIWithArray:(NSArray *)response{
-
-    if(response.count == 0)
-    {
-        
-        [self emptyViewHiden:NO];
-
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-        self.submitBtn.enabled = NO;
-        
-        return ;
-    }
- 
-    
-    NSMutableArray *temp_group = [NSMutableArray array];
-    
-    for (NSDictionary *sectionInfo in response) {
-        
-        ApplySection *sectionModal = [ApplySection applySectionWithDictionary:sectionInfo];
-        
-        [temp_group addObject:sectionModal];
-  
-    }
-    
-    self.groups = [temp_group mutableCopy];
-    
-    
-    [self.tableView reloadData];
     
 }
 
@@ -245,12 +177,66 @@
 }
 
 
+
+//网络数据请求
+- (void)makeDataSourse {
+    
+    XWeakSelf;
+    
+    [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil success:^(NSInteger statusCode, NSArray *response) {
+        
+        [weakSelf upadateUIWithResponse:(NSArray *)response];
+        
+    }];
+    
+}
+
+#pragma mark : 根据网络请求刷新页面
+
+-(void)upadateUIWithResponse:(NSArray *)response{
+
+    if(response.count == 0){
+        
+        [self emptyViewShowWithResult:response];
+         self.navigationItem.rightBarButtonItem.enabled = NO;
+         self.submitBtn.enabled = NO;
+        
+        return ;
+    }
+    
+    
+    NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response];
+    
+    NSMutableArray  *temps = [NSMutableArray array];
+    for (UniversityNew *uni in universities) {
+        
+        UniversityFrameNew *uni_frame = [UniversityFrameNew universityFrameWithUniverstiy:uni];
+        [temps addObject:uni_frame];
+    }
+    
+    self.groups = [temps mutableCopy];
+    
+    [self.tableView reloadData];
+    
+}
+
+
 -(void)makeUI
 {
     [self makeTableView];
     [self makeOther];
-    [self makeButtonItem];
+    [self makeNavigationBarButtonItem];
     [self makeCancelBottonButtonView];
+    
+}
+
+- (void)makeTableView{
+    
+    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view insertSubview:self.tableView atIndex:0];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
 
@@ -258,137 +244,43 @@
 -(void)makeOther
 {
     self.selectCountLabel.text = [NSString stringWithFormat:@"%@ : ",GDLocalizedString(@"ApplicationList-003")];
+    
     self.AlertLab.text     = GDLocalizedString(@"ApplicationList-noti");
-    self.title             = GDLocalizedString(@"Me-001");
+    
+    self.title             = @"申请意向";
+    
     [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-commit") forState:UIControlStateNormal];
+    [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
+    [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_LIGHTGRAY] forState:UIControlStateDisabled];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-        
-    }
-    
-    self.tableView.tableFooterView     = [[UIView alloc] init];
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     
     self.tableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
 }
 
 
--(void)makeButtonItem
-{
-    UIBarButtonItem  *leftItem             = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
+-(void)makeNavigationBarButtonItem{
+    
+    UIBarButtonItem  *leftItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
     self.navigationItem.leftBarButtonItem  = leftItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:GDLocalizedString(@"ApplicationList-Edit") style:UIBarButtonItemStylePlain target:self action:@selector(EditClick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:Button_Title_Edit style:UIBarButtonItemStylePlain target:self action:@selector(EditButtonOnClick:)];
 }
 
 
--(void)makeCancelBottonButtonView
-{
+-(void)makeCancelBottonButtonView{
+    
     UIButton *cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XSCREEN_HEIGHT - XNAV_HEIGHT,XSCREEN_WIDTH, 50)];
-    [cancelBottomButton setTitle:GDLocalizedString(@"ApplicationList-Delete")  forState:UIControlStateNormal];
-    [cancelBottomButton addTarget:self action:@selector(commitCancelList:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBottomButton setTitle:@"删除" forState:UIControlStateNormal];
+    [cancelBottomButton addTarget:self action:@selector(CancelOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cancelBottomButton.backgroundColor = XCOLOR_RED;
     self.cancelBottomButton = cancelBottomButton;
     [self.view addSubview:self.cancelBottomButton];
 }
 
 
-
-
-
-//用于删除cell,先删除cell再删除sectionHeader
--(void)commitCancelselectCell
-{
-    XWeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
-                           parameters:@{@"ids":self.cancelCourseList}
-                              success:^(NSInteger statusCode, id response) {
-                                  
-
-                                  //排序，从大小到删除
-                                  NSArray *sortIndexPathes =[weakSelf sortArray:weakSelf.cancelindexPathes];
-                                  
-                                  for (NSIndexPath *indexpath in sortIndexPathes) {
-                                      ApplySection *group = weakSelf.groups[indexpath.section];
-                                      //1、 删除已被选中 indexpath.row 对应的 group.subjects数组的子项
-                                       [group.subjects removeObjectAtIndex:indexpath.row];
-                                  }
-                                  
-                                  [weakSelf.tableView deleteRowsAtIndexPaths:weakSelf.cancelindexPathes withRowAnimation:UITableViewRowAnimationFade];
-                                  //2、 当group.subjects数组的子项被删除后，可以清空 cancelindexPathes 数组
-                                  //3、 当group.subjects数组的子项被删除后，可以清空 cancelCourseList 数组
-                                  [weakSelf.cancelindexPathes removeAllObjects];
-                                  [weakSelf.cancelCourseList  removeAllObjects];
-                                  //4、 如里存在要删除的分组数据，再进入删除分区功能
-                                  if (weakSelf.cancelSetions.count > 0) [weakSelf commitCancelSectionView:NO];
-                                  
-                              }];
-    
-}
-
-//删除sectionHeader
--(void)commitCancelSectionView:(BOOL)fresh
-{     XWeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
-                           parameters:@{@"uIds":self.cancelUniversityList}
-                              success:^(NSInteger statusCode, id response) {
-                                  
-                                  //1、排序，从大小到删除
-                                  NSArray *newArray = [weakSelf  sortArray:weakSelf.cancelSetions];
-                                  
-                                  //2、清空删除学校ID数组 、 删除分组信息数组
-                                  [weakSelf.cancelUniversityList removeAllObjects];
-                                  [weakSelf.cancelSetions removeAllObjects];
-                                  
-                                  
-                                  NSMutableIndexSet *deleteSet = [NSMutableIndexSet indexSet];
-                                  for (NSString *section in newArray) {
-                                      
-                                      [weakSelf.groups removeObjectAtIndex:section.integerValue];
-                                    //3、添加需要删除的分组
-                                      [deleteSet addIndex:section.integerValue];
-                                  }
-                                    //4、动画删除选中分组
-                                      [weakSelf.tableView deleteSections:deleteSet withRowAnimation:UITableViewRowAnimationFade];
-                                  
-                                     //5、动画刷新未选中分组
-                                      NSMutableIndexSet *reloadSet = [NSMutableIndexSet indexSet];
-                                      for (NSInteger index = 0; index < self.groups.count; index++) {
-                                          [reloadSet addIndex:index];
-                                      }
-                                    [weakSelf.tableView reloadSections:reloadSet withRowAnimation:UITableViewRowAnimationFade];
-                                  
-                                  [weakSelf  emptyViewHiden:(weakSelf.groups.count  > 0)];
-                                  
-                                   weakSelf.submitBtn.enabled = weakSelf.groups.count  > 0;
-                                  
-                                  if (weakSelf.groups.count == 0) {
-                                      [weakSelf bottomUp:YES];
-                                      weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
-                                  }
-                                  
-                              }];
-}
-
-- (void)emptyViewHiden:(BOOL)hiden{
-    
-    [self.tableView emptyViewWithHiden:hiden];
-    [self.tableView emptyViewWithError:@"Duang!请添加您的意向学校吧！"];
-    
-}
-
-
-//对数组进行排序
--(NSArray *)sortArray:(NSArray *)contents
-{
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];//yes升序排列，no,降序排列
-    NSArray *sortArray = [contents  sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sort, nil]];
-    return sortArray;
-}
-
-
-#pragma mark : UITableViewDelegate
+#pragma mark : UITableViewDelegate  UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -397,93 +289,109 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    UniversityFrameNew *uni_frame = self.groups[section];
     
-    ApplySection *group = self.groups[section];
-    
-    return group.subjects.count;
+    return uni_frame.universtiy.applies.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ApplySection *group = self.groups[indexPath.section];
-    Applycourse *subject = group.subjects[indexPath.row];
+    UniversityFrameNew *uni_frame = self.groups[indexPath.section];
+    
+    Applycourse *apply = uni_frame.universtiy.applies[indexPath.row];
+    
     ApplyTableViewCell *cell =[ApplyTableViewCell cellWithTableView:tableView];
-    cell.Edit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
-    cell.title =  subject.official_name;
-    cell.isSelected = cell.Edit ? [self.cancelCourseList containsObject:subject.course_id] : [self.courseSelecteds  containsObject:subject.course_id];
+    
+    cell.Edit = (self.tableStatus == ApplyTableStatusEdit);
+    
+    cell.title =  apply.official_name;
+    
+    cell.isSelected = cell.Edit ? [self.cancelindexPathes containsObject:indexPath] : [self.courseSelecteds  containsObject:apply.course_id];
     
     return cell;
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
     return KDUtilSize(50);
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    ApplySection *group = self.groups[section];
+    UniversityFrameNew *uni_frame = self.groups[section];
     
-    return  group.uniFrame.cell_Height;
+    return  uni_frame.cell_Height;
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     XWeakSelf
-    ApplySection *group = self.groups[section];
-    UniversityNew *university = group.uniFrame.universtiy;
+    UniversityFrameNew *uni_frame = self.groups[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
     sectionView.cell_Animation = self.cell_Animation;
-    sectionView.edit = [self.navigationItem.rightBarButtonItem.title isEqualToString:GDLocalizedString(@"Potocol-Cancel")];
-    sectionView.isSelected = [self.cancelUniversityList containsObject:university.NO_id];
-    sectionView.uniFrame = group.uniFrame;
+    sectionView.edit = (self.tableStatus == ApplyTableStatusEdit);
+    sectionView.isSelected = [self.cancelSetions containsObject:[NSString stringWithFormat:@"%ld",section]];
+    sectionView.uniFrame = uni_frame;
     sectionView.actionBlock = ^(UIButton *sender){
+        
+        
         
         if (sender.tag == 10) {//点击进入 UniversityCourseViewController 课程详情
             
             if (![weakSelf checkNetworkState])  return;
             
             weakSelf.cell_Animation = NO;
-            [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:university.NO_id] animated:YES];
+            
+            [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:uni_frame.universtiy.NO_id] animated:YES];
             
             return;
         }
         
         
+        
         NSString *sectionStr = [NSString stringWithFormat:@"%ld",(long)section];
         //添加或删除   需要被删除组的信息
-        [weakSelf.cancelSetions containsObject:sectionStr] ? [weakSelf.cancelSetions removeObject:sectionStr] :  [weakSelf.cancelSetions addObject:sectionStr];
-         
         
-        NSArray *sujectItems = group.subjects;
-        //添加或删除   需要被删除学校ID的信息 及学校ID对应学科ID数组
-        if (![weakSelf.cancelUniversityList containsObject:university.NO_id]) {
+        if ([weakSelf.cancelSetions containsObject:sectionStr]) {
             
-                [weakSelf.cancelUniversityList addObject:university.NO_id];
+            // 1
+            [weakSelf.cancelSetions removeObject:sectionStr];
             
-                for (NSInteger index = sujectItems.count - 1; index >= 0; index--) {
-                    
-                    Applycourse *subject  = sujectItems[index];
-                    if (![weakSelf.cancelCourseList containsObject:subject.course_id]) {
-                        [weakSelf.cancelCourseList addObject:subject.course_id];
-                        [weakSelf.cancelindexPathes addObject:[NSIndexPath  indexPathForRow:index inSection:section]];
-                    }
-                    
-                }
+            
+            
+            //2  学校取消
+            
+            for (NSInteger row = 0; row < uni_frame.universtiy.applies.count; row++) {
+                
+                
+                [weakSelf.cancelindexPathes removeObject:[NSIndexPath  indexPathForRow:row inSection:section]];
+            }
             
             
         }else{
             
-            //学校取消
-            [weakSelf.cancelUniversityList removeObject:university.NO_id];
+              // 1
+             [weakSelf.cancelSetions addObject:sectionStr];
             
-            for (NSInteger row = 0; row < sujectItems.count; row++) {
-                Applycourse *subject  = sujectItems[row];
-                [weakSelf.cancelCourseList removeObject:subject.course_id];
-                [weakSelf.cancelindexPathes removeObject:[NSIndexPath  indexPathForRow:row inSection:section]];
+           
+            
+            //2 添加或删除   需要被删除学校ID的信息 及学校ID对应学科ID数组
+            
+            for (NSInteger index = (uni_frame.universtiy.applies.count - 1); index >= 0; index--) {
+                
+                NSIndexPath *currentIndexPath = [NSIndexPath  indexPathForRow:index inSection:section];
+                
+                if (![weakSelf.cancelindexPathes containsObject:currentIndexPath]) {
+                  
+                    [weakSelf.cancelindexPathes addObject:[NSIndexPath  indexPathForRow:index inSection:section]];
+                    
+                }
+                
             }
+
+            
         }
         
 
@@ -501,96 +409,107 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ApplySection *group = self.groups[indexPath.section];
-    Applycourse *subject = group.subjects[indexPath.row];
-    UniversityNew *university = group.uniFrame.universtiy;
+    UniversityFrameNew *uni_frame = self.groups[indexPath.section];
+
+    Applycourse *subject = uni_frame.universtiy.applies[indexPath.row];
+    
+    UniversityNew *university = uni_frame.universtiy;
+    
     
      //编辑状态
-     if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"取消"]){
-        
-        //删除的 indexPath 数组
-        [self.cancelindexPathes containsObject:indexPath] ?  [self.cancelindexPathes removeObject:indexPath] :  [self.cancelindexPathes addObject:indexPath];
+    if (self.tableStatus == ApplyTableStatusEdit){
         
         ApplyTableViewCell *cell =(ApplyTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+      
+        //删除的 indexPath 数组
+        if ([self.cancelindexPathes containsObject:indexPath] ) {
         
-        if ([self.cancelCourseList containsObject:subject.course_id]) {
+            //1
+            [self.cancelindexPathes removeObject:indexPath];
             
-            [self.cancelCourseList removeObject:subject.course_id];
-            
+            //2
             [cell cellIsSelected:NO];
+            
             
         }else{
             
-            [self.cancelCourseList addObject:subject.course_id];
+            //1
+            [self.cancelindexPathes addObject:indexPath];
             
+            //2
             [cell cellIsSelected:YES];
-
-         }
+            
+            
+        }
+        
+   
         
         //如果学校被选择状态，在先中cell时，要删除学校的选中状态
-        if ([self.cancelUniversityList containsObject:university.NO_id]) {
+        NSString *sectionStr = [NSString stringWithFormat:@"%ld",indexPath.section];
+        if ([self.cancelSetions containsObject: sectionStr]) {
             
-            [self.cancelUniversityList removeObject:university.NO_id];
-            [self.cancelSetions removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.section]];
+            [self.cancelSetions removeObject:sectionStr];
          
             [UIView performWithoutAnimation:^{
+                
                 [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
             }];
             
         }
         
         
-        
-    }else{  //非编辑状态
- 
-        
-        if (self.courseSelecteds.count  == 0) {
-            
-            [self.self.courseSelecteds  addObject:subject.course_id];
-            
- 
-        }else if ([self.courseSelecteds containsObject:subject.course_id]) {
-            
-            [self.courseSelecteds removeObject:subject.course_id];
-            
- 
-        }else{
-            
-            NSArray *idGroup = [group.subjects valueForKey:@"course_id"];
-            
-            for (NSString  *selectedID in self.courseSelecteds){
-                
-                if([idGroup containsObject:selectedID]){
-                    
-                    [self.courseSelecteds removeObject:selectedID];
-                    
-                    [self.courseSelecteds addObject:subject.course_id];
-                    
-                    //取消cell刷新时默认动画效果
-                    [UIView performWithoutAnimation:^{
-                        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-                    }];
-                    
-                    return;
-                }
-                
-             }
-            
-                [self.courseSelecteds addObject:subject.course_id];
-
-           }
-        
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-        [self configureSelectedCoursedID:[self.courseSelecteds copy]];
+         return;
         
     }
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
+    
+    //非编辑状态
+    if([self.courseSelecteds containsObject:subject.course_id]){
+    
+        [self.courseSelecteds removeObject:subject.course_id];
+        
+        
+    }else{
+    
+        
+        NSArray *course_id_group = [uni_frame.universtiy.applies valueForKeyPath:@"course_id"];
+        
+        //判断分组是否包含已选择数据
+        for (NSString  *course_id in self.courseSelecteds){
+            
+            if([course_id_group containsObject:course_id]){
+                
+                //保证一个分组只能添加一个专业课程
+                [self.courseSelecteds removeObject:course_id];
+                [self.courseSelecteds addObject:subject.course_id];
+                
+                //取消cell刷新时默认动画效果
+                [UIView performWithoutAnimation:^{
+                    
+                    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                }];
+  
+                
+                return;
+            }
+            
+        }
+        
+        //当分组没有这个专业时，添加新专业数据
+        [self.courseSelecteds addObject:subject.course_id];
+        
+    }
+    
+    
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self updateFooterViewItems];
+   
 }
-
 
 
 /*
@@ -599,27 +518,21 @@
  *  ApplicationList-002 =  @"您提交审核的申请不能超过6个！"
  *  NSSet *selectedIDSet = [NSSet setWithArray:];
  */
+#pragma mark : 点击提交申请按钮
+
 - (IBAction)applyButtonPressed {
     
     RequireLogin
     
     if (![self checkNetworkState])  return;
     
-    if (self.courseSelecteds.count == 0) {
-        
-        AlerMessage(GDLocalizedString(@"ApplicationList-001"));
-        
-        return;
-    }
     
     if (self.courseSelecteds.count > 6) {
         
         AlerMessage(GDLocalizedString(@"ApplicationList-002"));
        
         return;
-        
     }
-    
     
     XWGJTiJiaoViewController *vc = [[XWGJTiJiaoViewController alloc] init];
     vc.selectedCoursesIDs        =  [self.courseSelecteds copy];
@@ -627,10 +540,13 @@
     
 }
 
-
-- (void)configureSelectedCoursedID:(NSArray *)selectedIDs {
+//显示已选择专业数量
+- (void)updateFooterViewItems{
     
-    self.selectCountLabel.text = [NSString stringWithFormat:@"%@ : %ld ",GDLocalizedString(@"ApplicationList-003"), (unsigned long)self.courseSelecteds.count];
+    self.selectCountLabel.text = [NSString stringWithFormat:@"已选择 : %ld ", (unsigned long)self.courseSelecteds.count];
+    
+    self.submitBtn.enabled = self.courseSelecteds.count > 0;
+    
 }
 
 
@@ -667,7 +583,7 @@
  }
 
 //用于控制删除按钮出现隐藏
--(void)bottomUp:(BOOL)up
+-(void)bottomViewUp:(BOOL)up
 {
     float distance = up ? 50.0 : -50.0;
     
@@ -678,13 +594,15 @@
         center.y += distance;
         weakSelf.cancelBottomButton.center = center;
         weakSelf.bottomView.hidden = !up;
+        
     }];
 }
 
-//提交删除按钮
--(void)commitCancelList:(UIButton *)sender
-{
-    if (self.cancelCourseList.count == 0 && self.cancelUniversityList.count == 0) {
+#pragma mark : 点击提交删除按钮
+
+-(void)CancelOnClick:(UIButton *)sender{
+    
+    if (self.cancelindexPathes.count == 0 && self.cancelSetions.count == 0) {
         
         AlerMessage(GDLocalizedString(@"ApplicationList-please"));
         
@@ -696,20 +614,22 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:GDLocalizedString(@"ApplicationList-comfig")  message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:Button_Title_Cancel  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:GDLocalizedString(@"NetRequest-OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if (weakSelf.cancelCourseList.count > 0) {
+        //先删除 已选择专业数组列表
+        if (weakSelf.cancelindexPathes.count > 0) {
             
             [weakSelf commitCancelselectCell];
             
             return ;
         }
         
-        if (weakSelf.cancelSetions.count > 0)[weakSelf commitCancelSectionView:YES];
+        //不存在已选择专业数组列表时，再判断是否存在分组列表
+        if (weakSelf.cancelSetions.count > 0)[weakSelf commitCancelSectionView];
         
         
     }];
@@ -720,38 +640,209 @@
     
     
     
-    
 }
 
 
-//编辑按钮方法
--(void)EditClick:(UIBarButtonItem *)sender
+#pragma mark : 点击编辑按钮
+
+-(void)EditButtonOnClick:(UIBarButtonItem *)sender
 {
-    NSString *cancelTitle =  @"取消";
-    NSString *editTitle = @"编辑";
     
     self.cell_Animation = YES;
-    if ([sender.title isEqualToString:editTitle] ) {
+    
+    //编辑状态
+    if ([sender.title isEqualToString:Button_Title_Edit] ) {
         
-        sender.title = cancelTitle;
-        [self bottomUp:NO];
+        sender.title = Button_Title_Cancel;
+
+        self.tableStatus = ApplyTableStatusEdit;
+
+        [self bottomViewUp:NO];
+        
         
     }else{
         
-        sender.title = editTitle;
-        [self.cancelCourseList removeAllObjects];
-        [self.cancelUniversityList removeAllObjects];
+        //正常非编辑状态
+        sender.title = Button_Title_Edit;
+        
+        self.tableStatus = ApplyTableStatusNomal;
+        
         [self.cancelSetions removeAllObjects];
         [self.cancelindexPathes removeAllObjects];
-        [self bottomUp:YES];
+        
+        [self bottomViewUp:YES];
+        
         
     }
     
     [self.tableView reloadData];
     [self.courseSelecteds removeAllObjects];
-    [self configureSelectedCoursedID:self.courseSelecteds];
+    [self updateFooterViewItems];
     
 }
+
+
+
+
+
+
+#pragma mark : 用于删除cell,先删除cell再删除sectionHeader
+
+- (void)commitCancelselectCell
+{
+    
+    //提取要删除的 已选择学校专业ID
+    NSMutableArray *courseIdes = [NSMutableArray array];
+    
+    for (NSIndexPath *indexPath in self.cancelindexPathes) {
+        
+        UniversityFrameNew *uni_Frame = self.groups[indexPath.section];
+        
+        Applycourse *course =  uni_Frame.universtiy.applies[indexPath.row];
+        
+        [courseIdes addObject:course.course_id];
+
+    }
+    
+    XWeakSelf
+    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes}  success:^(NSInteger statusCode, id response) {
+                                  
+        [weakSelf  updateCancelSelectedCell];
+        
+     }];
+    
+}
+
+//提交删除已选项 indexPath.row 成功后，更新UI
+
+- (void)updateCancelSelectedCell{
+
+    //排序，从大小到删除
+    NSArray *sortIndexPathes =[self sortArray:self.cancelindexPathes];
+    
+    for (NSIndexPath *indexpath in sortIndexPathes) {
+        
+        UniversityFrameNew *group = self.groups[indexpath.section];
+        //1、 删除已被选中 indexpath.row 对应的 group.subjects数组的子项
+        [group.universtiy.applies removeObjectAtIndex:indexpath.row];
+    }
+    
+    [self.tableView deleteRowsAtIndexPaths:self.cancelindexPathes withRowAnimation:UITableViewRowAnimationFade];
+  
+    //2、 当group.subjects数组的子项被删除后，可以清空 cancelindexPathes 数组
+    [self.cancelindexPathes removeAllObjects];
+    
+    
+    //3、 如里存在要删除的分组数据，再进入删除分区功能
+    if (self.cancelSetions.count > 0) [self commitCancelSectionView];
+    
+    
+}
+
+#pragma mark : 删除sectionHeader
+
+-(void)commitCancelSectionView{
+    
+    
+    //提取要删除的 已选择学校的ID
+    NSMutableArray *universtityIdes = [NSMutableArray array];
+    
+    for (NSString *sectionStr in self.cancelSetions) {
+        
+        NSInteger section = sectionStr.integerValue;
+        
+        UniversityFrameNew *uni_Frame = self.groups[section];
+        
+        [universtityIdes addObject:uni_Frame.universtiy.NO_id];
+    }
+    
+    
+    
+    XWeakSelf
+    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
+                           parameters:@{@"uIds":universtityIdes}
+                              success:^(NSInteger statusCode, id response) {
+                                  
+                                  [weakSelf updateCancelSelectedSection];
+                                
+                              }];
+    
+}
+
+
+//提交删除已选项 indexPath.section 成功后，更新UI
+- (void)updateCancelSelectedSection{
+    
+    //1、排序，从大小到删除
+    NSArray *newArray = [self  sortArray:self.cancelSetions];
+    
+    //2、清空删除学校ID数组 、 删除分组信息数组
+    [self.cancelSetions removeAllObjects];
+    
+    
+    NSMutableIndexSet *deleteSet = [NSMutableIndexSet indexSet];
+    for (NSString *section in newArray) {
+        
+        [self.groups removeObjectAtIndex:section.integerValue];
+        //3、添加需要删除的分组
+        [deleteSet addIndex:section.integerValue];
+    }
+    
+    //4、动画删除选中分组
+    [self.tableView deleteSections:deleteSet withRowAnimation:UITableViewRowAnimationFade];
+    
+    //5、动画刷新未选中分组
+    NSMutableIndexSet *reloadSet = [NSMutableIndexSet indexSet];
+    for (NSInteger index = 0; index < self.groups.count; index++) {
+        
+        [reloadSet addIndex:index];
+    }
+    
+    [self.tableView reloadSections:reloadSet withRowAnimation:UITableViewRowAnimationFade];
+    
+    
+    
+    [self  emptyViewShowWithResult:self.groups];
+    
+    self.submitBtn.enabled = self.groups.count  > 0;
+    
+    if (self.groups.count == 0) {
+        
+        [self bottomViewUp:YES];
+        
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
+    
+    
+    
+}
+
+- (void)emptyViewShowWithResult:(NSArray *)resultes{
+    
+    if (resultes.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"Duang!请添加您的意向学校吧！"];
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+    }
+    
+}
+
+
+
+
+//对数组进行排序
+-(NSArray *)sortArray:(NSArray *)contents
+{
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];//yes升序排列，no,降序排列
+    NSArray *sortArray = [contents  sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sort, nil]];
+    return sortArray;
+}
+
+
+
 
 
 -(void)dealloc{

@@ -11,7 +11,7 @@
 typedef enum {
     centerItemTypepipei,
     centerItemTypefavor,
-    centerItemTypeservice
+    centerItemTypetest
 }centerItemType;//表头按钮选项
 
 typedef void(^centerSectionViewBlock)(centerItemType type);

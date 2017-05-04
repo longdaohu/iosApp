@@ -26,8 +26,6 @@
 #import "CatigaryRankkCell.h"
 
 
-#define INTERSET_TOP  10.0
-
 @interface CatigoryViewController ()<UIScrollViewDelegate,XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
 //背景scroller
 @property(nonatomic,strong)CatigaryScrollView *bgView;
@@ -362,7 +360,6 @@ static NSString *identify = @"hotCity";
     }
     
     
-         
         CatigaryHotCityCell *cell =[CatigaryHotCityCell cellInitWithTableView:tableView];
         
         __block CatigaryCountry *country  = self.Country_Hotcities[indexPath.section];

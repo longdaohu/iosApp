@@ -58,8 +58,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 //筛选数组
 @property(nonatomic,strong)NSMutableArray *FiltItems;
 @property(nonatomic,strong)NSMutableArray *FiltItems_origin;
-//@property(nonatomic,strong)MyOfferArea *current_area;
-//@property(nonatomic,copy)MyOfferSubjecct *current_subject;
 @property(nonatomic,strong)UITableView *rank_table,*option_table;
 //清空筛选数据按钮
 @property(nonatomic,strong)UIButton *clearBtn;
@@ -107,8 +105,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         NSArray *item_subjects = [[NSUserDefaults standardUserDefaults] valueForKey:@"Subject_CN"];
         
         _areas = [MyOfferArea mj_objectArrayWithKeyValuesArray:item_subjects];
-        
-//        if (_areas.count > 0) _current_area = _areas.firstObject;
         
     }
     
@@ -162,7 +158,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 }
 
 
-//获取当前国家地区
+//根据条件   获取当前国家地区
 -(MyOfferCountryState *)makeCurrentCityWithState:(NSString *)stateName  country:(NSString *)countryName{
     
     MyOfferCountryState *currentState = nil;
@@ -220,7 +216,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         NSMutableArray *temps =[NSMutableArray arrayWithCapacity:5];
         
         //国家
-        
         FiltContent  *filter_country = [FiltContent filterWithIcon:nil title:@"国家:"  subtitlte:KEY_ALL filterOptionItems:[self.countries valueForKeyPath:@"name"]];
         filter_country.optionStyle = FilterOptionCountry;
         FilterContentFrame *filter_country_Frame = [FilterContentFrame filterFrameWithFilter:filter_country];
@@ -364,6 +359,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     
 }
 
+//顶部筛选工具条
 - (void)makeTopView{
     
     self.view.backgroundColor = XCOLOR(0, 0, 0, 0.1);
@@ -395,7 +391,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     [self.topView addSubview:line_left];
  
 }
-
 
 - (UIButton *)senderWithFrame:(CGRect)frame title:(NSString *)title nomalTitleColor:(UIColor *)titleColor{
     
@@ -746,6 +741,7 @@ static NSString *identify = @"uniFilter";
     
     UIView *selectedView = (sender.tag ==  filterButtonStyleOption) ? self.bgView : self.rank_table;
     UIView *unSelectedView = (sender.tag ==  filterButtonStyleOption) ? self.rank_table :  self.bgView;
+    
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         if (!(sender.tag ==  filterButtonStyleOption)) {

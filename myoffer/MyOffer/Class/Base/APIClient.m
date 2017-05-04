@@ -116,7 +116,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         if (data && data.length < 1000) {
             
-            KDClassLog(@"Response body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//            KDClassLog(@"Response body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         }
         
         KDClassLog(@"Request completed: [%d], %@", (int)response.statusCode, request.URL.absoluteString);

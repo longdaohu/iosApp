@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//typedef void(^SearchUniCenterFilterViewBlock)(id value,NSString *key);
 typedef void(^SearchUniCenterFilterViewBlock)(NSArray *parameters);
 
 @interface SearchUniCenterFilterVController : UIViewController
