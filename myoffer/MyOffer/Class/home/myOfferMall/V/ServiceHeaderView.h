@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyOfferServiceMallHeaderFrame.h"
 
 typedef void(^ServiceHeaderViewBlock)(NSString *countryName);
 @interface ServiceHeaderView : UIView
+@property(nonatomic,strong)MyOfferServiceMallHeaderFrame *headerFrame;
 @property(nonatomic,copy)ServiceHeaderViewBlock actionBlock;
 + (instancetype)headerViewWithFrame:(CGRect)frame ationBlock:(ServiceHeaderViewBlock)actionBlock;
 

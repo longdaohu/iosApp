@@ -29,7 +29,7 @@
     CGFloat Cellwidth = XSCREEN_WIDTH * 0.6;
     
     CGFloat bgx = 0;
-    CGFloat bgy = ITEM_MARGIN;
+    CGFloat bgy = 1;
     CGFloat bgw = Cellwidth - ITEM_MARGIN;
     
     CGFloat iconw  = bgw * 0.4;

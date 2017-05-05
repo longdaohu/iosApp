@@ -160,8 +160,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
  *  【 Approved ——审核通过
  *  【 -1       ——没有申请过
  */
--(void)checkApplyStatus
-{
+-(void)checkApplyStatus{
     
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
@@ -192,7 +191,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 }
 
 #pragma mark : 根据网络请求刷新页面
-
 -(void)upadateUIWithResponse:(NSArray *)response{
 
     if(response.count == 0){
@@ -245,9 +243,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 {
     self.selectCountLabel.text = [NSString stringWithFormat:@"%@ : ",GDLocalizedString(@"ApplicationList-003")];
     
-    self.AlertLab.text     = GDLocalizedString(@"ApplicationList-noti");
+    self.AlertLab.text    = GDLocalizedString(@"ApplicationList-noti");
     
-    self.title             = @"申请意向";
+    self.title    = @"申请意向";
     
     [self.submitBtn setTitle:GDLocalizedString(@"ApplicationList-commit") forState:UIControlStateNormal];
     [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
@@ -330,7 +328,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     UniversityFrameNew *uni_frame = self.groups[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
-    sectionView.cell_Animation = self.cell_Animation;
+//    sectionView.cell_Animation = self.cell_Animation;
     sectionView.edit = (self.tableStatus == ApplyTableStatusEdit);
     sectionView.isSelected = [self.cancelSetions containsObject:[NSString stringWithFormat:@"%ld",section]];
     sectionView.uniFrame = uni_frame;
@@ -340,9 +338,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         
         if (sender.tag == 10) {//点击进入 UniversityCourseViewController 课程详情
             
-            if (![weakSelf checkNetworkState])  return;
-            
-            weakSelf.cell_Animation = NO;
+//            if (![weakSelf checkNetworkState])  return;
+//            weakSelf.cell_Animation = NO;
             
             [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:uni_frame.universtiy.NO_id] animated:YES];
             
@@ -414,8 +411,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     UniversityFrameNew *uni_frame = self.groups[indexPath.section];
 
     Applycourse *subject = uni_frame.universtiy.applies[indexPath.row];
-    
-    UniversityNew *university = uni_frame.universtiy;
     
     
      //编辑状态
@@ -648,7 +643,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 -(void)EditButtonOnClick:(UIBarButtonItem *)sender
 {
     
-    self.cell_Animation = YES;
+//    self.cell_Animation = YES;
     
     //编辑状态
     if ([sender.title isEqualToString:Button_Title_Edit] ) {

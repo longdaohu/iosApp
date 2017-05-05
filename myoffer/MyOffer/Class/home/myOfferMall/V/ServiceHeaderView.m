@@ -47,6 +47,7 @@
     return _country_icones;
 }
 
+
 + (instancetype)headerViewWithFrame:(CGRect)frame ationBlock:(ServiceHeaderViewBlock)actionBlock{
     
     ServiceHeaderView *headerView = [[ServiceHeaderView alloc]  initWithFrame:frame];
@@ -73,21 +74,13 @@
     //国家地区View 用于存放子VIEW
     self.bottomView = [UIView new];
     [self addSubview:self.bottomView];
-    CGFloat bottomX = 0;
-    CGFloat bottomY = AdjustF(160.f) + 10;
-    CGFloat bottomW = frame.size.width;
-    CGFloat bottomH = frame.size.height - bottomY;
-    self.bottomView.frame = CGRectMake(bottomX, bottomY, bottomW,bottomH);
+
     
     
     for (NSInteger i = 0 ; i < self.countries.count; i++) {
         
         HeadItem *item = [HeadItem itemInitWithTitle:self.countries[i]  imageName:self.country_icones[i]];
-        
         item.tag       =  i;
-        
-        item.textColor = XCOLOR_BLACK;
-        
         item.actionBlock = ^(NSInteger index){
             
             [self buttonClick:index];
@@ -98,24 +91,35 @@
     
     
     
-    CGFloat itemW =  bottomW / 3;
-    CGFloat itemH =  bottomH;
-    for (int index = 0 ;index < self.bottomView.subviews.count ; index++) {
-       
-        HeadItem *item = (HeadItem *)self.bottomView.subviews[index];
-        
-        CGFloat itemX  =  (index % 3) * itemW;
-        CGFloat itemY  =  0;
-        item.frame     = CGRectMake(itemX, itemY, itemW, itemH);
-        
-    }
-    
+
  
     //底部分隔线
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, frame.size.height - 1, frame.size.width, 1)];
     line.backgroundColor = XCOLOR_line;
     [self addSubview:line];
 
+}
+
+
+- (void)setHeaderFrame:(MyOfferServiceMallHeaderFrame *)headerFrame{
+
+    _headerFrame = headerFrame;
+  
+    self.bottomView.frame = headerFrame.downView_frame;
+    
+ 
+    for (int index = 0 ;index < self.bottomView.subviews.count ; index++) {
+        
+        HeadItem *item = (HeadItem *)self.bottomView.subviews[index];
+        
+        item.mall_header_Frame = headerFrame;
+        
+         item.frame    = [headerFrame.headerItem_frames[index] CGRectValue];
+        
+    }
+    
+    
+    
 }
 
 - (void)buttonClick:(NSInteger)index{

@@ -15,14 +15,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.LeftBtn =[self makeButtonWithImageName:@"search_darkgrey"  andTitle:@""];
+        self.LeftBtn =[self makeButtonWithImageName:@"search_icon_gray"  andTitle:@""];
         self.LeftBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        self.LeftBtn.hidden = YES;
         
-        self.RightBtn =[self makeButtonWithImageName:@"search-no-result"  andTitle:GDLocalizedString(@"Discover_search")];
+        self.RightBtn =[self makeButtonWithImageName:@""  andTitle:@"地区/学校/专业，任你搜"];
         self.layer.cornerRadius = 22.0f;
         self.backgroundColor = XCOLOR_WHITE;
- 
+        self.layer.borderColor = XCOLOR_line.CGColor;
+        self.layer.borderWidth = 1;
         
     }
     return self;
@@ -34,7 +34,7 @@
     [sender setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [sender setTitle:title forState:UIControlStateNormal];
     [sender setTitleColor:XCOLOR_LIGHTGRAY forState:UIControlStateNormal];
-     sender.titleLabel.font = FontWithSize(KDUtilSize(12));
+     sender.titleLabel.font = XFONT(XFONT_SIZE(14));
     [sender addTarget:self action:@selector(tap) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:sender];
     
@@ -72,10 +72,8 @@
     
 }
 
--(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contentOffsetY;
+-(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contant;
 {
-
-    CGFloat contant = XSCREEN_HEIGHT * 0.7 * 0.6 + 20 -22 - contentOffsetY;
     
     if (contant > 20) {
         
@@ -99,7 +97,7 @@
 
 -(void)searchViewWithAnimation:(BOOL)animated
 {
-    self.LeftBtn.hidden  = animated;
+    
     self.RightBtn.hidden = !animated;
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{

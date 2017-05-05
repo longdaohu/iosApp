@@ -19,7 +19,7 @@
 @implementation HomeSecondTableViewCell
 +(instancetype)cellInitWithTableView:(UITableView *)tableView
 {
-    static NSString *Identifier = @"second";
+    static NSString *Identifier = @"home_second";
     
     HomeSecondTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
     
@@ -38,7 +38,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
       
-         self.contentView.backgroundColor = XCOLOR_BG;
+         self.contentView.backgroundColor = XCOLOR_RED;
+        
          [self makeCollectView];
         
     }
@@ -51,16 +52,9 @@
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowlayout = flowlayout;
-    // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-//    CGFloat width =  0.5*(XSCREEN_WIDTH  - 30);
-//    CGFloat heigh =  XSCREEN_WIDTH *0.4;
-//    flowlayout.itemSize = CGSizeMake(width,heigh);
-//    // 设置item行与行之间的间隙
-//    flowlayout.minimumLineSpacing = ITEM_MARGIN;
-    // 设置item列与列之间的间隙
-    flowlayout.minimumInteritemSpacing = 0;
- 
-    flowlayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    
+//    UIEdgeInsetsMake(<#CGFloat top#>, <#CGFloat left#>, <#CGFloat bottom#>, CGFloat right)
+    flowlayout.sectionInset = UIEdgeInsetsMake(0, 10, 10, 10);
     
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
@@ -71,7 +65,6 @@
      self.CollectionView.backgroundColor = XCOLOR_BG;
     
     [self.contentView  addSubview:self.CollectionView];
-    
     
 }
 
@@ -89,7 +82,7 @@
     self.CollectionView.frame =  CGRectMake(collectionx,collectiony,collectionw,collectionh);
     
     CGFloat width =  0.5 * (XSCREEN_WIDTH - 3 * ITEM_MARGIN);
-    CGFloat heigh =  (collectionh - ( column + 1 )* ITEM_MARGIN )/ column;
+    CGFloat heigh =   XSCREEN_WIDTH *0.4 - 10;
     self.flowlayout.itemSize = CGSizeMake(width,heigh);
  
     [self.CollectionView reloadData];
@@ -103,7 +96,7 @@
  }
 
 
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
+#pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     

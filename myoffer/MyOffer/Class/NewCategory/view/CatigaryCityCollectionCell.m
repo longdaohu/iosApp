@@ -23,7 +23,7 @@
   
     [super awakeFromNib];
     
-    self.cityLab.font = [UIFont boldSystemFontOfSize: XFONT_SIZE(22)];
+//    self.cityLab.font = [UIFont boldSystemFontOfSize: XFONT_SIZE(22)];
     
 }
 
@@ -31,8 +31,6 @@
 {
     _city = city;
     
-    self.cityLab.text =city.city;
-    self.cityLab.textColor = XCOLOR_WHITE;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
@@ -41,9 +39,11 @@
 
     if (moreCity) {
         
-        self.cityLab.text = @"查看更多";
-        self.cityLab.textColor = XCOLOR_SUBTITLE;
-        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
+        NSString *imageName = @"ao_more.jpg";
+        if ([self.city.country containsString:@"英"]) imageName = @"uk_more.jpg";
+        if ([self.city.country containsString:@"美"]) imageName = @"usa_more.jpg";
+        
+        self.iconView.image = [UIImage imageNamed:imageName];
         
     }
  

@@ -203,9 +203,14 @@
 		AE86B23A1E8A3B5200BF2451 /* EmallCatigroyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE86B2391E8A3B5200BF2451 /* EmallCatigroyHeaderView.m */; };
 		AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */; };
 		AE8707061DDEEC4200CE7780 /* PipeiSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */; };
+		AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE892A141EBC1FD70035A31D /* MeCenterHeaderViewFrame.m */; };
+		AE892A181EBC573E0035A31D /* HomeHeaderFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE892A171EBC573E0035A31D /* HomeHeaderFrame.m */; };
+		AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A191EBC87890035A31D /* uk_more.jpg */; };
+		AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A1A1EBC87890035A31D /* usa_more.jpg */; };
+		AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A1B1EBC87890035A31D /* ao_more.jpg */; };
+		AE892A211EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE892A201EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
 		AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */; };
-		AE8CE16C1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE16B1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m */; };
 		AE8CE16F1EA0D94D000F9A8E /* MessageArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE16E1EA0D94D000F9A8E /* MessageArticle.m */; };
 		AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */; };
 		AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */; };
@@ -783,13 +788,20 @@
 		AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiEditViewController.m; sourceTree = "<group>"; };
 		AE8707041DDEEC4200CE7780 /* PipeiSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiSectionHeaderView.h; path = ../controller/PipeiSectionHeaderView.h; sourceTree = "<group>"; };
 		AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiSectionHeaderView.m; path = ../controller/PipeiSectionHeaderView.m; sourceTree = "<group>"; };
+		AE892A131EBC1FD70035A31D /* MeCenterHeaderViewFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCenterHeaderViewFrame.h; sourceTree = "<group>"; };
+		AE892A141EBC1FD70035A31D /* MeCenterHeaderViewFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCenterHeaderViewFrame.m; sourceTree = "<group>"; };
+		AE892A161EBC573E0035A31D /* HomeHeaderFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderFrame.h; sourceTree = "<group>"; };
+		AE892A171EBC573E0035A31D /* HomeHeaderFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderFrame.m; sourceTree = "<group>"; };
+		AE892A191EBC87890035A31D /* uk_more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uk_more.jpg; sourceTree = "<group>"; };
+		AE892A1A1EBC87890035A31D /* usa_more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = usa_more.jpg; sourceTree = "<group>"; };
+		AE892A1B1EBC87890035A31D /* ao_more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ao_more.jpg; sourceTree = "<group>"; };
+		AE892A1F1EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferServiceMallHeaderFrame.h; sourceTree = "<group>"; };
+		AE892A201EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferServiceMallHeaderFrame.m; sourceTree = "<group>"; };
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQserviceSingleView.h; sourceTree = "<group>"; };
 		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQserviceSingleView.m; sourceTree = "<group>"; };
-		AE8CE16A1EA0B436000F9A8E /* MeCenterHeaderViewFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCenterHeaderViewFrame.h; sourceTree = "<group>"; };
-		AE8CE16B1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCenterHeaderViewFrame.m; sourceTree = "<group>"; };
 		AE8CE16D1EA0D94D000F9A8E /* MessageArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageArticle.h; sourceTree = "<group>"; };
 		AE8CE16E1EA0D94D000F9A8E /* MessageArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageArticle.m; sourceTree = "<group>"; };
 		AE93E4DA1D6DA3E70025FC58 /* UniversityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityViewController.h; path = controller/UniversityViewController.h; sourceTree = "<group>"; };
@@ -2049,6 +2061,8 @@
 			children = (
 				AEBA44C41E88B876005E923B /* MyOfferService.h */,
 				AEBA44C51E88B877005E923B /* MyOfferService.m */,
+				AE892A1F1EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.h */,
+				AE892A201EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m */,
 				AEBA44C71E88BAB3005E923B /* ServiceSKU.h */,
 				AEBA44C81E88BAB3005E923B /* ServiceSKU.m */,
 				AEBA44CF1E88C38C005E923B /* ServiceSKUFrame.h */,
@@ -2311,7 +2325,6 @@
 			isa = PBXGroup;
 			children = (
 				AEA249921D5B215300DD7939 /* controller */,
-				AEA249961D5B215300DD7939 /* model */,
 				AEA249971D5B215300DD7939 /* view */,
 			);
 			name = Me;
@@ -2330,24 +2343,17 @@
 			path = controller;
 			sourceTree = "<group>";
 		};
-		AEA249961D5B215300DD7939 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
 		AEA249971D5B215300DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				AE892A131EBC1FD70035A31D /* MeCenterHeaderViewFrame.h */,
+				AE892A141EBC1FD70035A31D /* MeCenterHeaderViewFrame.m */,
 				AEA249981D5B215300DD7939 /* CenterSectionItem.h */,
 				AEA249991D5B215300DD7939 /* CenterSectionItem.m */,
 				AEA2499A1D5B215300DD7939 /* CenterHeaderView.h */,
 				AEA2499B1D5B215300DD7939 /* CenterHeaderView.m */,
 				AEA2499C1D5B215300DD7939 /* LeftBarButtonItemView.h */,
 				AEA2499D1D5B215300DD7939 /* LeftBarButtonItemView.m */,
-				AE8CE16A1EA0B436000F9A8E /* MeCenterHeaderViewFrame.h */,
-				AE8CE16B1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2573,6 +2579,8 @@
 			children = (
 				AEA24A4F1D5B23F500DD7939 /* HotUniversityFrame.h */,
 				AEA24A501D5B23F500DD7939 /* HotUniversityFrame.m */,
+				AE892A161EBC573E0035A31D /* HomeHeaderFrame.h */,
+				AE892A171EBC573E0035A31D /* HomeHeaderFrame.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3173,6 +3181,9 @@
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
 				AE4ECE1E1EA5DCC500BE9512 /* loding.gif */,
 				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
+				AE892A191EBC87890035A31D /* uk_more.jpg */,
+				AE892A1A1EBC87890035A31D /* usa_more.jpg */,
+				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
 				AE86B2321E8A364000BF2451 /* emall_HK.jpeg */,
@@ -3462,7 +3473,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3497,6 +3508,7 @@
 				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
 				AEA24A061D5B224E00DD7939 /* CatigaryCityCollectionCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
+				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AE86B2361E8A364000BF2451 /* emall_AU.jpeg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
 				AE36006B1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib in Resources */,
@@ -3512,6 +3524,7 @@
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
+				AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
 				AEF421071BD4988B00CFB45E /* UMSShareListController.xib in Resources */,
 				AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */,
@@ -3545,6 +3558,7 @@
 				AEF421081BD4988B00CFB45E /* UMSocialSDKResourcesNew.bundle in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
+				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
@@ -3807,6 +3821,7 @@
 				AEA24AF81D5B24D200DD7939 /* UIViewController+RESideMenu.m in Sources */,
 				AEA24B851D5B25E000DD7939 /* FilterTableViewCell.m in Sources */,
 				AEA249BA1D5B215300DD7939 /* XWGJJiBengTableViewCell.m in Sources */,
+				AE892A211EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m in Sources */,
 				56DB630B1C397FF7004DA145 /* Reachability.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
 				AEA249A91D5B215300DD7939 /* OrderServiceItem.m in Sources */,
@@ -3824,6 +3839,7 @@
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */,
+				AE892A181EBC573E0035A31D /* HomeHeaderFrame.m in Sources */,
 				AEA249A51D5B215300DD7939 /* OrderDetailFooterView.m in Sources */,
 				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
@@ -3855,12 +3871,12 @@
 				AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
+				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
 				AEAE882C1DC2086400672E57 /* UniversityNew.m in Sources */,
 				AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */,
 				AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */,
 				463E3AAC1B23105F00E0BAF8 /* KDImageCache.m in Sources */,
 				AEA24AA31D5B23F600DD7939 /* GongLueItemCell.m in Sources */,
-				AE8CE16C1EA0B436000F9A8E /* MeCenterHeaderViewFrame.m in Sources */,
 				AEA24A931D5B23F600DD7939 /* HomeThirdTableViewCell.m in Sources */,
 				AED5A85D1DDEF5AF00E70289 /* PipeiEditCell.m in Sources */,
 				463E3AB01B23105F00E0BAF8 /* KDLoggerViewController.m in Sources */,
@@ -4160,7 +4176,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

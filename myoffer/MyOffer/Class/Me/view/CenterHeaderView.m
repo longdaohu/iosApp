@@ -41,7 +41,7 @@
         
         CenterSectionItem *pipei  = [self itemWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所" itemTag:centerItemTypepipei];
         CenterSectionItem *favor  = [self itemWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所" itemTag:centerItemTypefavor];
-        CenterSectionItem *test  = [self itemWithIcon:@"center_service" title:@"职业性格测试" subtitle:@"" itemTag:centerItemTypetest];
+        CenterSectionItem *test  = [self itemWithIcon:@"center_service" title:@"MBTI测试" subtitle:@"职业性格" itemTag:centerItemTypetest];
         self.items = @[pipei,favor,test];
         
         

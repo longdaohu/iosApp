@@ -9,7 +9,7 @@
 #import "HomeFirstTableViewCell.h"
 
 @interface HomeFirstTableViewCell ()
-@property(nonatomic,strong)UIImageView *IconView;
+@property(nonatomic,strong)UIImageView *iconView;
 
 @end
 
@@ -17,7 +17,7 @@
 +(instancetype)cellInitWithTableView:(UITableView *)tableView
 {
  
-    static NSString *Identifier = @"first";
+    static NSString *Identifier = @"home_first";
     HomeFirstTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
     if (!cell) {
         cell =[[HomeFirstTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
@@ -31,13 +31,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.IconView                     = [[UIImageView alloc] init];
-        self.IconView.layer.cornerRadius  = CORNER_RADIUS;
-        self.IconView.layer.masksToBounds = YES;
-        self.IconView.contentMode         = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:self.IconView];
-        self.contentView.backgroundColor  = XCOLOR_BG;
+        self.iconView   = [[UIImageView alloc] init];
+        self.iconView.contentMode  = UIViewContentModeScaleAspectFill;
+        self.iconView.clipsToBounds = YES;
         
+        [self.contentView addSubview:self.iconView];
+        self.contentView.backgroundColor = XCOLOR_BG;
     }
     return self;
 }
@@ -51,7 +50,7 @@
 
     NSString *path = [iconStr containsString:@"http"] ? iconStr : [NSString stringWithFormat:@"%@%@",DOMAINURL,iconStr];
 
-    [self.IconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 
@@ -63,10 +62,10 @@
     CGSize contentSize = self.bounds.size;
 
     CGFloat iconX = ITEM_MARGIN;
-    CGFloat iconY = ITEM_MARGIN;
+    CGFloat iconY = 0;
     CGFloat iconW = contentSize.width - 2 * iconX;
-    CGFloat iconH = contentSize.height - iconY;
-    self.IconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
+    CGFloat iconH = contentSize.height - ITEM_MARGIN;
+    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
     
 }
 

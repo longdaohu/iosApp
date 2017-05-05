@@ -292,8 +292,7 @@
     if (self.newActionBlock)  self.newActionBlock(self.uniFrame.universtiy.NO_id);
 }
 
--(void)showUniveristy:(UITapGestureRecognizer *)tap
-{
+-(void)showUniveristy:(UITapGestureRecognizer *)tap{
     
     self.isEdit ?  [self sectionViewButtonPressed:self.cancelBtn]  :  [self sectionViewButtonPressed:self.addSubjectBtn];
     
@@ -334,18 +333,18 @@
     
     CGSize contentSize = self.bounds.size;
     
-    if (!self.cell_Animation) {
-        
-        self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
-      
-        return;
-    }
- 
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+//    if (!self.cell_Animation) {
     
-        self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
-        
-    }];
+    self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
+      
+//        return;
+//    }
+ 
+//    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+//    
+//        self.bgView.frame = CGRectMake(SBx,0, contentSize.width, contentSize.height);
+//        
+//    }];
     
     
 }

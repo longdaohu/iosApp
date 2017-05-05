@@ -30,11 +30,9 @@
         self.titleLab.numberOfLines = 2;
         [self.contentView addSubview:self.titleLab];
         
-        self.contentView.layer.cornerRadius = CORNER_RADIUS;
-        
         self.contentView.layer.masksToBounds = YES;
  
-        self.backgroundColor =  XCOLOR_BG;
+        self.backgroundColor =  XCOLOR_RED;
 
     }
     return self;

@@ -145,7 +145,7 @@
 -(void)makeUI
 {
     
-    self.title = @"留学小白";
+    self.title = @"留学指南";
     
     [self makeTopView];
     

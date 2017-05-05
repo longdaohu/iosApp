@@ -13,6 +13,7 @@
 @property(nonatomic,copy)NSString *city_id;
 //城市名称
 @property(nonatomic,copy)NSString *city;
+@property(nonatomic,copy)NSString *country;
 //城市图片
 @property(nonatomic,copy)NSString *image_url;
 @property(nonatomic,copy)NSString *image_path;

@@ -77,7 +77,11 @@
 
     _title = title;
     
-    self.TitleLab.text = title;
+    NSArray *items = [title componentsSeparatedByString:@"+"];
+    
+    self.TitleLab.text = items.firstObject;
+    
+    [self.moreBtn setTitle:items.lastObject forState:UIControlStateNormal];
     
 }
 
@@ -142,7 +146,7 @@
     self.TitleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
     self.TitleLab.center = CGPointMake(self.TitleLab.center.x, contentSize.height * 0.5);
 
-    CGFloat morew = 100;
+    CGFloat morew = 120;
     CGFloat morex = contentSize.width - morew;
     CGFloat moreh = titleh;
     CGFloat morey = 0;

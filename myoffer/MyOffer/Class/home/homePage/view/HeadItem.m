@@ -7,6 +7,7 @@
 //
 
 #import "HeadItem.h"
+
 @interface HeadItem ()
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
@@ -45,19 +46,15 @@
     [self addSubview:iconView];
     self.iconView = iconView;
     
-    self.titleLab  = [UILabel labelWithFontsize:10 TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentCenter];
+    self.titleLab  = [UILabel labelWithFontsize:XFONT_SIZE(14) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
     [self addSubview:self.titleLab];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemOnclick)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClick)];
     [self addGestureRecognizer:tap];
     
-}
-
-- (void)setTextColor:(UIColor *)textColor{
-
-    _textColor = textColor;
+    self.backgroundColor = XCOLOR_WHITE;
     
-    self.titleLab.textColor = textColor;
+     
 }
 
 - (void)setTitle:(NSString *)title
@@ -76,37 +73,29 @@
 }
 
 
--(void)layoutSubviews
-{
-    [super layoutSubviews];
+- (void)setHeaderFrame:(HomeHeaderFrame *)headerFrame{
     
+    _headerFrame = headerFrame;
     
-    CGSize  contentSize = self.bounds.size;
+    self.iconView.frame = headerFrame.icon_frame;
+    self.titleLab.frame = headerFrame.title_frame;
 
-    CGFloat iconh = contentSize.height * 0.7;
-    CGFloat iconw = iconh;
-    CGFloat icony = 0;
-    CGFloat iconx = 0.5 * (contentSize.width - iconw);
-    self.iconView.frame = CGRectMake(iconx, icony, iconw, iconh);
-    
-    CGFloat titlex = 0;
-    CGFloat titley = CGRectGetMaxY(self.iconView.frame) - 3;
-    CGFloat titlew = contentSize.width;
-    CGFloat titleh = contentSize.height -CGRectGetMaxY(self.iconView.frame);
-    self.titleLab.frame = CGRectMake(titlex, titley, titlew, titleh);
-    self.titleLab.font  = [UIFont systemFontOfSize:0.5 * titleh];
-    
 }
 
--(void)itemOnclick
-{
+- (void)setMall_header_Frame:(MyOfferServiceMallHeaderFrame *)mall_header_Frame{
+
+    _mall_header_Frame = mall_header_Frame;
     
+    self.iconView.frame = mall_header_Frame.icon_frame;
+    self.titleLab.frame = mall_header_Frame.title_frame;
+
+}
+
+
+-(void)onClick{
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(self.tag);
-        
-    }
+    if (self.actionBlock)  self.actionBlock(self.tag);
+    
 }
 
 @end

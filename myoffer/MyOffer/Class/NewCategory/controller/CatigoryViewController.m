@@ -311,9 +311,7 @@
         [weakSelf showLeftMenu];
         
     }];
- 
-//    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_discover"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed:)];
+
 }
 
 - (void)makeUI{
@@ -404,7 +402,7 @@ static NSString *identify = @"hotCity";
     
     if (tableView == self.City_tableView) {
         
-        __block CatigaryCountry *group = self.Country_Hotcities[section];
+        CatigaryCountry *group = self.Country_Hotcities[section];
         HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.countryName];
         SectionView.backgroundColor = XCOLOR_WHITE;
         [SectionView arrowButtonHiden:NO];

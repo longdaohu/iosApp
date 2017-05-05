@@ -17,12 +17,16 @@
 #import "EmallCatigoryViewController.h"
 #import "HomeSectionHeaderView.h"
 #import "WebViewController.h"
+#import "MyOfferServiceMallHeaderFrame.h"
+
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic,strong) MyOfferService *sevice;
 @property(nonatomic,strong) NSArray *SKU_frames;
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
+@property(nonatomic,strong)MyOfferServiceMallHeaderFrame *headerFrame;
+
 @end
 
 @implementation MyOfferServerMallViewController
@@ -48,16 +52,17 @@
     
     self.title = @"留学购";
     
-    CGRect headerRect = CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160.f) + AdjustF(100.f));
+ 
     
     XWeakSelf
  
-    ServiceHeaderView *headerView = [ServiceHeaderView headerViewWithFrame:headerRect ationBlock:^(NSString *country) {
+    ServiceHeaderView *headerView = [ServiceHeaderView headerViewWithFrame:self.headerFrame.header_frame ationBlock:^(NSString *country) {
         
         [weakSelf casePushEmallCatigory:country];
         
     }];
     
+    headerView.headerFrame = self.headerFrame;
     
     self.tableView.tableHeaderView = headerView;
     
@@ -67,6 +72,15 @@
  
 }
 
+- (MyOfferServiceMallHeaderFrame *)headerFrame{
+    
+    if (!_headerFrame) {
+        
+        _headerFrame = [[MyOfferServiceMallHeaderFrame alloc] init];
+    }
+    
+    return _headerFrame;
+}
 
 /**
  *  创建轮播图头部
@@ -74,11 +88,8 @@
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
     XWeakSelf
-    CGFloat autoY =  0;
-    CGFloat autoX =  0;
-    CGFloat autoH =  AdjustF(160.f);
-    CGFloat autoW =  XSCREEN_WIDTH;
-    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
+    
+    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:self.headerFrame.autoScroller_frame delegate:nil placeholderImage:nil];
     self.autoLoopView = autoLoopView;
     autoLoopView.alpha = 0;
     autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];

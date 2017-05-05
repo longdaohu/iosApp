@@ -14,7 +14,7 @@ typedef enum {
 
 #import "MeViewController.h"
 #import "ProfileViewController.h"
-#import "FXBlurView.h"
+#import "PipeiEditViewController.h"
 #import "FavoriteViewController.h"
 #import "ApplyViewController.h"
 #import "ApplyStatusViewController.h"
@@ -22,12 +22,9 @@ typedef enum {
 #import "ApplyMatialViewController.h"
 #import "IntelligentResultViewController.h"
 #import "CenterHeaderView.h"
-#import "MessageViewController.h"
-#import "PipeiEditViewController.h"
-#import "MyOfferServerMallViewController.h"
 #import "MeCenterHeaderViewFrame.h"
 #import "UIImage+GIF.h"
-
+#import "MBTIViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 //表头
@@ -600,10 +597,12 @@ typedef enum {
 //跳转服务包
 -(void)CaseServiceSelection
 {
-    
+    RequireLogin
     [MobClick event:@"home_mall"];
     
-    [self pushWithVC:NSStringFromClass([MyOfferServerMallViewController class])];
+    NSString *path = [NSString stringWithFormat:@"%@mbti/test",DOMAINURL];
+    
+    [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
 
 }
 //跳转

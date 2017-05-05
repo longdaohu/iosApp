@@ -34,6 +34,9 @@
 #import "SDCycleScrollView.h"
 #import "MyOfferServerMallViewController.h"
 #import "MyOfferAutoRunBanner.h"
+#import "HomeHeaderFrame.h"
+
+
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -53,6 +56,8 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
 @property(nonatomic,strong)NSArray *banner;
+
+@property(nonatomic,strong)HomeHeaderFrame *headerFrame;
 
 @end
 
@@ -114,6 +119,7 @@
 }
 
 
+ 
 -(void)makeOther{
 
     
@@ -150,10 +156,10 @@
         
         _groups =[NSMutableArray array];
         
-        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil andFooter:NO];
+        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地+更多地区" contentes:nil andFooter:NO];
         [_groups addObject:groupone];
         
-        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil andFooter:NO];
+        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读+更多资讯" contentes:nil andFooter:NO];
         [_groups addObject:grouptwo];
         
         UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil andFooter:NO];
@@ -316,6 +322,11 @@
     
     [self makeLeftBarButtonItemView];
     
+    UIImageView *maskBgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
+    maskBgView.image = [UIImage imageNamed:@"gradient_up"];
+    [self.view addSubview:maskBgView];
+ 
+    
 }
 
 
@@ -329,6 +340,16 @@
     UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.myToolbar.items= @[leftItem,flexItem];
+}
+
+- (HomeHeaderFrame *)headerFrame{
+
+    if (!_headerFrame) {
+        
+        _headerFrame = [[HomeHeaderFrame alloc] init];
+    }
+    
+    return _headerFrame;
 }
 
 -(void)makeHomeTableView
@@ -356,11 +377,12 @@
 //添加表头
 -(void)makeTableHeader
 {
-    
-    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, HEADER_HEIGHT) withactionBlock:^(NSInteger itemTag) {
+  
+    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.headerFrame.Header_Height) withactionBlock:^(NSInteger itemTag) {
         [self HomeHeaderViewWithItemtap:itemTag];
     }];
     
+    TableHeaderView.headerFrame = self.headerFrame;
     self.TableView.tableHeaderView  = TableHeaderView;
     [self makeAutoLoopViewAtView: TableHeaderView];
  
@@ -412,7 +434,7 @@
     CGFloat searchX = 20;
     CGFloat searchH = 44;
     CGFloat searchW = XSCREEN_WIDTH - searchX * 2;
-    CGFloat searchY = HEADER_HEIGHT * 0.6 + 20 - searchH * 0.5;
+    CGFloat searchY = CGRectGetMaxY(self.headerFrame.autoScroller_frame) - searchH * 0.5;
     HomeSearchView *searchView = [HomeSearchView ViewWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
     self.searchView = searchView;
     XWeakSelf
@@ -432,11 +454,7 @@
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
     XWeakSelf
-    CGFloat autoY =  XSCREEN_HEIGHT * 0.7 * 0.6 + 20;
-    CGFloat autoH =  XSCREEN_HEIGHT * 0.7 - autoY;
-    CGFloat autoX =  0;
-    CGFloat autoW =  XSCREEN_WIDTH;
-    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
+    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:self.headerFrame.autoScroller_frame delegate:nil placeholderImage:nil];
     self.autoLoopView = autoLoopView;
     autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
@@ -450,15 +468,15 @@
     };
 }
 
-#pragma mark ———————— UIScrollViewDelegate
+#pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     
     if (scrollView.contentOffset.y < -150) [self.TableView setContentOffset:CGPointMake(0, -150) animated:NO];
 
     self.myToolbar.top = 20 - scrollView.contentOffset.y;
-    
-    [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:scrollView.contentOffset.y];
+ 
+    [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:(CGRectGetMaxY(self.headerFrame.autoScroller_frame) - self.searchView.mj_h * 0.5- scrollView.contentOffset.y)];
     
     if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
       
@@ -475,13 +493,15 @@
     UniDetailGroup *group = self.groups[section];
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
     
-    if (1 == section) {
+    if ((self.groups.count - 1) > section) {
         
         [SectionView moreButtonHidenNo];
         
          SectionView.actionBlock = ^{
              
-              [self.tabBarController setSelectedIndex:2];
+              NSInteger  selectionIndex = (section == 0) ? 1:2;
+              [self.tabBarController setSelectedIndex:selectionIndex];
+             
         };
     }
      return  SectionView;
@@ -589,7 +609,7 @@
             break;
     }
 }
-#pragma mark ——— HomeSecondTableViewCellDelegate
+#pragma mark : HomeSecondTableViewCellDelegate
 -(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
 {
     [MobClick event:@"home_newsItem"];
@@ -597,7 +617,7 @@
     [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:response[@"_id"]] animated:YES];
 }
 
-#pragma mark ——— HomeThirdTableViewCellDelegate
+#pragma mark : HomeThirdTableViewCellDelegate
 -(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityNew *)uni{
 
     [MobClick event:@"home_universityItem"];
@@ -649,20 +669,21 @@
     }
     
 }
+/*
 
-
-//ENGLISH  设置环境
-//--用户语言环境通知服务器----
-//-(void)UserLanguage
-//{
-//    if ([[AppDelegate sharedDelegate] isLogin]) {
-//        
-//        NSString *lang =USER_EN ? @"en":@"zh-cn";
-//        [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
-//            
-//        }];
-//    }
-//}
+ENGLISH  设置环境
+--用户语言环境通知服务器----
+-(void)UserLanguage
+{
+    if ([[AppDelegate sharedDelegate] isLogin]) {
+        
+        NSString *lang =USER_EN ? @"en":@"zh-cn";
+        [self startAPIRequestWithSelector:kAPISelectorUserLanguage parameters:[NSDictionary dictionaryWithObject:lang forKey:@"language"] success:^(NSInteger statusCode, id response) {
+            
+        }];
+    }
+}
+*/
 
 //---推广接口，用户是否在使用myoffer---
 -(void)advanceSupportWithDuration:(int)durationTime

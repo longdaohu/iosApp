@@ -21,28 +21,7 @@
    return [self.image_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-
-
-//+(instancetype)CityItemInitWithCityDictionary:(NSDictionary *)cityDic{
-//    
-//    return [[self alloc] initWithCityDictionary:cityDic];
-//}
-//
-//-(instancetype)initWithCityDictionary:(NSDictionary *)cityDic{
-//    
-//    self = [super init];
-//    
-//    if (self) {
-//
-//        self.city_id = [NSString stringWithFormat:@"%@",cityDic[@"_id"]];
-//        
-//        self.cityName = cityDic[@"city"];
-//        
-//         self.IconName =[cityDic[@"image_url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//     }
-//    
-//    return self;
-//}
+ 
 
 
 @end

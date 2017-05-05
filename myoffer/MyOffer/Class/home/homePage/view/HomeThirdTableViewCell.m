@@ -57,10 +57,6 @@
     CGFloat heigh = width * 1.3 + 20;
     
     flowlayout.itemSize = CGSizeMake(width,heigh);
-    // 设置item行与行之间的间隙
-//    flowlayout.minimumLineSpacing = 0;
-    // 设置item列与列之间的间隙
-//    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, 0);//sectionInset的设置与item的宽高不一致会出现警报信息
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
@@ -71,7 +67,7 @@
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.dataSource                     = self;
     collectionView.delegate                       = self;
-    collectionView.backgroundColor                = XCOLOR_BG;
+    collectionView.backgroundColor   = XCOLOR_BG;
     [self.CollectionView registerClass:[UniCollectionViewCell class] forCellWithReuseIdentifier:identify];
     [self.contentView  addSubview:self.CollectionView];
     
@@ -85,14 +81,8 @@
     [self.CollectionView reloadData];
 
 }
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-}
 
-
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
+#pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }

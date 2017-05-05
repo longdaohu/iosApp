@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MeCenterHeaderViewFrame.h"
-typedef enum {
+
+typedef NS_ENUM(NSInteger,centerItemType) {
+  
     centerItemTypepipei,
     centerItemTypefavor,
     centerItemTypetest
-}centerItemType;//表头按钮选项
+};
 
 typedef void(^centerSectionViewBlock)(centerItemType type);
 

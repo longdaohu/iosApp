@@ -26,6 +26,11 @@
         self.countryName = countryDic[@"country"];
         self.HotCities = [CatigaryHotCity mj_objectArrayWithKeyValuesArray: countryDic[@"hot_cities"]];
         
+        for (CatigaryHotCity *city in self.HotCities) {
+            
+            city.country = self.countryName;
+        }
+        
      }
     
     return self;

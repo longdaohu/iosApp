@@ -14,7 +14,7 @@ typedef void(^newSectionBlock)(NSString *);
 @interface ApplySectionHeaderView : UITableViewHeaderFooterView
 @property(nonatomic,strong)UniversityFrameNew *uniFrame;
 //判断cell是否需要做动画效果
-@property(nonatomic,assign)BOOL cell_Animation;
+//@property(nonatomic,assign)BOOL cell_Animation;
 //tableView 是否处于编辑状态
 @property(nonatomic,assign,getter=isEdit)BOOL edit;
 //tableView处于非编辑状态时，cell内部按钮实现跳转

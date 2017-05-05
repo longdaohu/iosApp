@@ -44,9 +44,9 @@
         //cell背景
         self.bgView                     =[[UIView alloc] init];
         self.bgView.backgroundColor     = XCOLOR_WHITE;
-        self.bgView.layer.cornerRadius  = CORNER_RADIUS;
-        self.bgView.layer.shadowOffset  = CGSizeMake(3, 3);
-        self.bgView.layer.shadowOpacity = 0.20;
+//        self.bgView.layer.cornerRadius  = CORNER_RADIUS;
+//        self.bgView.layer.shadowOffset  = CGSizeMake(3, 3);
+//        self.bgView.layer.shadowOpacity = 0.20;
         [self.contentView addSubview:self.bgView];
 
         //学校logo
@@ -55,11 +55,11 @@
         
         //分隔线
         self.center_Line                 = [[UIView alloc] init];
-        self.center_Line.backgroundColor = XCOLOR_LIGHTGRAY;
+        self.center_Line.backgroundColor = XCOLOR_line;
         [self.bgView addSubview:self.center_Line];
         
        //学校名称
-        self.nameLab                    = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentCenter];
+        self.nameLab                    = [UILabel labelWithFontsize:KDUtilSize(15) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         self.nameLab.lineBreakMode      = NSLineBreakByCharWrapping;
         self.nameLab.numberOfLines      = 2;
         [self.bgView addSubview:self.nameLab];
