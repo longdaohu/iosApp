@@ -74,7 +74,7 @@
 
     _itemFrame = itemFrame;
     
-    UniversityNew *item = itemFrame.item;
+    MyOfferUniversityModel *item = itemFrame.item;
    
     
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];

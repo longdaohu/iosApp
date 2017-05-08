@@ -68,7 +68,7 @@
 #define Uni_Cell_Height  100 + (XSCREEN_WIDTH - 320) * 0.15
 #define Uni_address_FontSize  KDUtilSize(12)
 #define Uni_rank_FontSize  KDUtilSize(12)
-#define Uni_subtitle_FontSize  KDUtilSize(12)
+#define Uni_subtitle_FontSize  KDUtilSize(13)
 #define Uni_title_FontSize      XPERCENT * 15
 #define USER_EN [[InternationalControl userLanguage] containsString:@"en"]
 #define LOGIN [[AppDelegate sharedDelegate] isLogin]

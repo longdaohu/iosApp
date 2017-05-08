@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UniversityNew;
+@class MyOfferUniversityModel;
 
 @interface UniversityFrame : NSObject
-@property(nonatomic,strong)UniversityNew *university;
-@property(nonatomic,assign)CGRect selectButtonFrame;
-@property(nonatomic,assign)CGRect LogoFrame;
-@property(nonatomic,assign)CGRect nameFrame;
-@property(nonatomic,assign)CGRect official_nameFrame;
-@property(nonatomic,assign)CGRect address_detailFrame;
-@property(nonatomic,assign)CGRect  anchorFrame;
-@property(nonatomic,assign)CGRect RankFrame;
+
+@property(nonatomic,strong)MyOfferUniversityModel *university;
+@property(nonatomic,assign)CGRect icon_Frame;
+@property(nonatomic,assign)CGFloat cell_Height;
+@property(nonatomic,assign)CGRect name_Frame;
+@property(nonatomic,assign)CGRect official_Frame;
+@property(nonatomic,assign)CGRect address_Frame;
+@property(nonatomic,assign)CGRect rank_Frame;
 @property(nonatomic,assign)CGRect starBgFrame;
 @property(nonatomic,strong)NSArray *starFrames;
 

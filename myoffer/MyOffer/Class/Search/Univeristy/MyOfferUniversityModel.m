@@ -1,15 +1,15 @@
 //
-//  UniversityNew.m
+//  MyOfferUniversityModel.m
 //  myOffer
 //
 //  Created by xuewuguojie on 2016/10/27.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "SearchUniCourseFrame.h"
 
-@implementation UniversityNew
+@implementation MyOfferUniversityModel
 + (NSDictionary *)mj_replacedKeyFromPropertyName
 {
     return @{
@@ -28,23 +28,7 @@
 }
 
 
-
-//- (NSArray *)courseFrames{
-//    
-//    NSMutableArray *temps = [NSMutableArray array];
-//    
-//    [self.courses enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        
-//        SearchUniCourseFrame *courseFrame = [SearchUniCourseFrame frameWithCourse: (UniversityCourse *)obj];
-//        
-//        [temps addObject:courseFrame];
-//    }];
-//    
-//    
-//    return [temps copy];
-//    
-//}
-
+ 
 
 - (NSString *)address_long{
     

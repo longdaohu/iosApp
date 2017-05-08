@@ -9,7 +9,7 @@
 
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 @interface UniCollectionViewCell ()
 //cell背景
@@ -93,7 +93,7 @@
 {
     _uniFrame = uniFrame;
     
-    UniversityNew *unversity = uniFrame.universtiy;
+    MyOfferUniversityModel *unversity = uniFrame.universtiy;
     
     self.bgView.frame        = uniFrame.bgViewFrame;
     self.center_Line.frame   = uniFrame.LineFrame;

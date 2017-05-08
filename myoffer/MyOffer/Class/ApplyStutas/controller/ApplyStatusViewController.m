@@ -9,7 +9,7 @@
 #import "ApplyStatusViewController.h"
 #import "ApplyStatusRecord.h"
 #import "ApplyStatusRecordGroup.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
 #import "ApplyStatusCell.h"

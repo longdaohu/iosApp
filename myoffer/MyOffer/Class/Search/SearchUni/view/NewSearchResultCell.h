@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UniversityFrameNew.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 @interface NewSearchResultCell : UITableViewCell
 @property(nonatomic,copy)NSString *optionOrderBy;         //显示排名方式

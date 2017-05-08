@@ -10,10 +10,10 @@
 #import "Applycourse.h"
 #import "ApplySectionHeaderView.h"
 #import "ApplyTableViewCell.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "UniversitySubjectListViewController.h"
 
-#define SECTIONFOOTERHEIGHT  10
+#define SECTION_FOOTER_HEIGHT  10
 
 #define Button_Title_Cancel @"取消"
 #define Button_Title_Edit @"编辑"
@@ -203,10 +203,10 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     }
     
     
-    NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response];
+    NSArray *universities = [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:response];
     
     NSMutableArray  *temps = [NSMutableArray array];
-    for (UniversityNew *uni in universities) {
+    for (MyOfferUniversityModel *uni in universities) {
         
         UniversityFrameNew *uni_frame = [UniversityFrameNew universityFrameWithUniverstiy:uni];
         [temps addObject:uni_frame];
@@ -235,6 +235,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     self.tableView.delegate = self;
     [self.view insertSubview:self.tableView atIndex:0];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     
 }
 
@@ -255,7 +256,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     
-    self.tableView.sectionFooterHeight =  SECTIONFOOTERHEIGHT;
+    self.tableView.sectionFooterHeight =  SECTION_FOOTER_HEIGHT;
 }
 
 
@@ -269,7 +270,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 -(void)makeCancelBottonButtonView{
     
-    UIButton *cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XSCREEN_HEIGHT - XNAV_HEIGHT,XSCREEN_WIDTH, 50)];
+    UIButton *cancelBottomButton =[[UIButton alloc] initWithFrame:CGRectMake(0,XSCREEN_HEIGHT - XNAV_HEIGHT,XSCREEN_WIDTH, 70)];
     [cancelBottomButton setTitle:@"删除" forState:UIControlStateNormal];
     [cancelBottomButton addTarget:self action:@selector(CancelOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cancelBottomButton.backgroundColor = XCOLOR_RED;
@@ -333,8 +334,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     sectionView.isSelected = [self.cancelSetions containsObject:[NSString stringWithFormat:@"%ld",section]];
     sectionView.uniFrame = uni_frame;
     sectionView.actionBlock = ^(UIButton *sender){
-        
-        
         
         if (sender.tag == 10) {//点击进入 UniversityCourseViewController 课程详情
             
@@ -580,7 +579,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 //用于控制删除按钮出现隐藏
 -(void)bottomViewUp:(BOOL)up
 {
-    float distance = up ? 50.0 : -50.0;
+    float distance = up ? 70.0 : -70.0;
     
     XWeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{

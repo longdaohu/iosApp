@@ -136,7 +136,7 @@
 
     _uni_Frame  = uni_Frame;
     
-    UniversityNew *uniObj = uni_Frame.universtiy;
+    MyOfferUniversityModel *uniObj = uni_Frame.universtiy;
     
     self.hotView.frame = uni_Frame.hot_Frame;
     

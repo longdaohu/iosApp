@@ -14,7 +14,7 @@
 #import "ResultTableViewCell.h"
 #import "ApplyViewController.h"
 #import "UniversityFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "PipeiEditViewController.h"
 #import "PipeiNoResultVeiw.h"
 
@@ -295,10 +295,11 @@
 
 -(void)makeCurrentLabel:(NSString *)currentCountSr  currentItem:(NSString *)currentStr
 {
-    NSString *currentText = [NSString stringWithFormat:@"%@",currentStr];
-    NSMutableAttributedString *Attribut = [[NSMutableAttributedString alloc] initWithString:currentText];
-    [Attribut addAttribute:NSForegroundColorAttributeName   value:XCOLOR_RED  range:[currentText rangeOfString:currentCountSr]];
-    self.currentCountLabel.attributedText = Attribut;
+//    NSString *currentText = [NSString stringWithFormat:@"%@",currentStr];
+//    NSMutableAttributedString *Attribut = [[NSMutableAttributedString alloc] initWithString:currentText];
+//    [Attribut addAttribute:NSForegroundColorAttributeName   value:XCOLOR_RED  range:[currentText rangeOfString:currentCountSr]];
+//    self.currentCountLabel.attributedText = Attribut;
+    self.currentCountLabel.text = currentStr;
 }
 
 -(void)DataSourseRequst
@@ -314,7 +315,7 @@
             
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
             
-            [weakSelf configrationUI:response[@"recommendations"]];
+            [weakSelf updateUIWithrecommendations:response[@"recommendations"]];
             
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
             
@@ -325,7 +326,7 @@
 }
 
 //根据返回数据设置UI
-- (void)configrationUI:(NSArray *)recommendations
+- (void)updateUIWithrecommendations:(NSArray *)recommendations
 {
     
     [_slices removeAllObjects];
@@ -335,14 +336,17 @@
     
     NSMutableArray *temp_recommendations = [NSMutableArray array];
     
-    for (NSArray *items in recommendations) {
+    
+    for (NSArray *recommendation in recommendations) {
+        
+        NSArray *universities = [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:recommendation];
         
         NSMutableArray *temps = [NSMutableArray array];
         
-        for (NSDictionary *obj  in items) {
+        for (MyOfferUniversityModel *uni  in universities) {
            
             UniversityFrame *uniFrame = [[UniversityFrame alloc] init];
-            uniFrame.university = [UniversityNew mj_objectWithKeyValues:obj];
+            uniFrame.university = uni;
             [temps addObject:uniFrame];
          }
         
@@ -485,36 +489,37 @@
 
 #pragma mark :UITableViewDelegate  UITableViewDataSoure
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return Uni_Cell_Height;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UniversityFrame *uniFrame = self.resultList[indexPath.row];
+
+    return uniFrame.cell_Height;
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return self.resultList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     ResultTableViewCell  *cell = [ResultTableViewCell cellInitWithTableView:tableView];
     cell.delegate = self;
     
     UniversityFrame *uniFrame = self.resultList[indexPath.row];
-    UniversityNew *university = uniFrame.university;
+    MyOfferUniversityModel *university = uniFrame.university;
     [cell configureWithUniversityFrame:uniFrame];
     [self configureCellSelectionView:cell universityId:university.NO_id];
     
-    return cell;
+    return cell; 
 }
 
-#pragma mark ——— ResultTableViewCellDelegate
+#pragma mark : ResultTableViewCellDelegate
 
 -(void)selectResultTableViewCellItem:(UIButton *)sender withUniversityInfo:(NSString *)universityID
 {
    
     if ([self.SelectedUniversityIDs containsObject:universityID]) {return;}
-    
     
     if( [self.NewSelectUniversityIDs containsObject:universityID])
     {

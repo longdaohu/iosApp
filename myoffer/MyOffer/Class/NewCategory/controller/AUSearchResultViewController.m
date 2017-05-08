@@ -10,7 +10,7 @@
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
 #import "XWGJnodataView.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 
 @interface AUSearchResultViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -157,7 +157,7 @@
          
           for (NSDictionary *obj in response[@"universities"]) {
               
-              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
+              UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[MyOfferUniversityModel mj_objectWithKeyValues:obj]];
               
               NSInteger index =  [obj[RANK_TI] integerValue] == DEFAULT_NUMBER ?  self.Restults.count - 1 : 5 - [obj[RANK_TI] integerValue];
               
@@ -240,7 +240,7 @@
     
      NSArray *unies = self.Restults[indexPath.section];
      UniversityFrameNew   *uni_Frame = unies[indexPath.row];
-     UniversityNew *university = uni_Frame.universtiy;
+     MyOfferUniversityModel *university = uni_Frame.universtiy;
      [self.navigationController pushUniversityViewControllerWithID:university.NO_id animated:YES];
     
 }

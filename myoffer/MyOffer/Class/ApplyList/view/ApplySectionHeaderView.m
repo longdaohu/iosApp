@@ -10,7 +10,7 @@
 
 #import "ApplySectionHeaderView.h"
 #import "UniversityFrameNew.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 
 @interface ApplySectionHeaderView ()
@@ -136,7 +136,7 @@
         
          //添加专业按钮
         self.addSubjectBtn =[[UIButton alloc] init];
-        [self.addSubjectBtn setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+        [self.addSubjectBtn setImage:[UIImage imageNamed:@"add_cross"] forState:UIControlStateNormal];
         self.addSubjectBtn.tag = 10;
         [self.addSubjectBtn addTarget:self action:@selector(sectionViewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView addSubview:self.addSubjectBtn];
@@ -170,7 +170,7 @@
 {
     _uniFrame = uniFrame;
     
-    UniversityNew *university = uniFrame.universtiy;
+    MyOfferUniversityModel *university = uniFrame.universtiy;
     
   
     self.cancelBtn.frame = uniFrame.cancel_Frame;

@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 #define KEY_SIZE_SF  @"size"
 #define KEY_DESC_SF  @"desc"
 #define KEY_ORDER_SF  @"order"
-#define Bottom_Heigh  50
+#define Bottom_Heigh  70
+#define Bottom_botton_Heigh  50
 #define Top_Heigh  50
 #define Cell_Heigh  50
 
@@ -397,11 +398,13 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     UIButton *sender = [[UIButton alloc] initWithFrame:frame];
     [sender setTitle:title forState:UIControlStateNormal];
     [sender setTitleColor:titleColor forState:UIControlStateNormal];
+//    [sender setTitleColor:XCOLOR_TITLE forState:UIControlStateHighlighted];
     [sender setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateSelected];
-    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_LIGHTGRAY] forState:UIControlStateHighlighted];
+    [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateHighlighted];
     sender.titleLabel.font  = XFONT(16);
     [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-  
+    sender.layer.cornerRadius = CORNER_RADIUS;
+    sender.layer.masksToBounds = YES;
     
     return sender;
     
@@ -425,7 +428,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     self.option_table = [self defaultTableViewWithframe:CGRectMake(0, 0, option_W,option_H)];
     [self.bgView addSubview:self.option_table];
     //筛选列表
-    self.option_table.contentInset = UIEdgeInsetsMake(0, 0, Top_Heigh, 0);
+    self.option_table.contentInset = UIEdgeInsetsMake(0, 0, Bottom_Heigh, 0);
     
     
     
@@ -436,25 +439,26 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, footer_Y, footer_W, footer_H)];
     [self.bgView addSubview:footer];
     self.footerView = footer;
-    footer.backgroundColor = XCOLOR_LIGHTBLUE;
+    footer.backgroundColor = XCOLOR_WHITE;
     
     
     //清空按钮
-    CGFloat clear_X =  0;
-    CGFloat clear_Y =  0;
-    CGFloat clear_W =  footer_W * 0.5;
-    CGFloat clear_H =  footer_H;
-    self.clearBtn = [self senderWithFrame:CGRectMake(clear_X, clear_Y, clear_W, clear_H) title:@"清空数据"  nomalTitleColor:XCOLOR_SUBTITLE];
+    CGFloat clear_X =  15;
+    CGFloat clear_Y =  10;
+    CGFloat clear_W =  (footer_W - 3 * clear_X) * 0.5;
+    CGFloat clear_H =  Bottom_botton_Heigh;
+    self.clearBtn = [self senderWithFrame:CGRectMake(clear_X, clear_Y, clear_W, clear_H) title:@"重置"  nomalTitleColor:XCOLOR_RED];
     self.clearBtn.tag = filterButtonStyleClear;
-    self.clearBtn.backgroundColor = XCOLOR_BG;
     [self.clearBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.footerView addSubview:self.clearBtn];
+    self.clearBtn.layer.borderColor = XCOLOR_RED.CGColor;
+    self.clearBtn.layer.borderWidth = 1;
     
     //提交按钮
-    CGFloat sub_X =  clear_W;
-    CGFloat sub_Y =  0;
+    CGFloat sub_X =  CGRectGetMaxX(self.clearBtn.frame) + clear_X;
+    CGFloat sub_Y =  clear_Y;
     CGFloat sub_W =  clear_W;
-    CGFloat sub_H =  footer_H;
+    CGFloat sub_H =  clear_H;
     self.submitBtn = [self senderWithFrame:CGRectMake(sub_X, sub_Y, sub_W, sub_H) title:@"确认"  nomalTitleColor:XCOLOR_WHITE];
     self.submitBtn.tag = filterButtonStyleSubmit;
     self.submitBtn.backgroundColor = XCOLOR_RED;

@@ -7,7 +7,7 @@
 //
 
 #import "HotUniversityFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 @implementation HotUniversityFrame
 
@@ -15,14 +15,12 @@
 
     HotUniversityFrame *uniFrame = [[HotUniversityFrame alloc] init];
     
-    UniversityNew *universtiy = [UniversityNew mj_objectWithKeyValues:uni_Info];
-    
-    uniFrame.universtiy = universtiy;
+    uniFrame.universtiy = [MyOfferUniversityModel mj_objectWithKeyValues:uni_Info];
     
     return uniFrame;
 }
 
--(void)setUniverstiy:(UniversityNew *)universtiy{
+-(void)setUniverstiy:(MyOfferUniversityModel *)universtiy{
 
     _universtiy = universtiy;
     

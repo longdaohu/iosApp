@@ -20,7 +20,7 @@
 #import "XWGJMessageFrame.h"
 #import "MyOfferArticle.h"
 #import "ShareNViewController.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "UniItemFrame.h"
 #import "UniversityCell.h"
 #import "UniDetailGroup.h"
@@ -275,7 +275,7 @@
     
     [article.related_universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(UniversityNew *)obj];
+        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(MyOfferUniversityModel *)obj];
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";

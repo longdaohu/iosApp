@@ -29,7 +29,7 @@
 #import "XUToolbar.h"
 #import "UniDetailGroup.h"
 #import "MBTIViewController.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
 #import "MyOfferServerMallViewController.h"
@@ -581,7 +581,7 @@
     }
     
 }
-#pragma mark ——— HomeHeaderViewDelegate
+#pragma mark : HomeHeaderViewDelegate
 -(void)HomeHeaderViewWithItemtap:(NSInteger )tag
 {
     
@@ -618,7 +618,7 @@
 }
 
 #pragma mark : HomeThirdTableViewCellDelegate
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(UniversityNew *)uni{
+-(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(MyOfferUniversityModel *)uni{
 
     [MobClick event:@"home_universityItem"];
     

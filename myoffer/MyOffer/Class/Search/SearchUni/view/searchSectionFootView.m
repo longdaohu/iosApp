@@ -11,12 +11,12 @@
 @interface searchSectionFootView()
 @property(nonatomic,strong)UIView *shadowView;
 @property(nonatomic,strong)UIButton *footerBtn;
-@property(nonatomic,strong)UniversityNew *university;
+@property(nonatomic,strong)MyOfferUniversityModel *university;
 
 @end
 @implementation searchSectionFootView
 
-+ (instancetype)footerWithUniversity:(UniversityNew *)university actionBlock:(universityBlock)action{
++ (instancetype)footerWithUniversity:(MyOfferUniversityModel *)university actionBlock:(universityBlock)action{
 
     searchSectionFootView  *sectionFooter =[[searchSectionFootView alloc] init];
     sectionFooter.university =  university;

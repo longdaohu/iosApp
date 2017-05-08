@@ -114,7 +114,7 @@
         if (self.countryModel && self.countryModel.states.count > 0) {
             
             self.current_Index = [NSIndexPath indexPathForRow:1 inSection:0];
-            [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionTop];
+            [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionNone];
             self.currentState = self.countryModel.states.firstObject;
             
         }
@@ -128,14 +128,15 @@
 -(void)makeTableView{
     
     CGFloat left_Width = 150;
-    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_Width, XSCREEN_HEIGHT)];
+    CGFloat left_Height = XSCREEN_HEIGHT - XNAV_HEIGHT;
+    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_Width, left_Height)];
     self.stateTableView.backgroundColor = XCOLOR_BG;
     [self.view  addSubview:self.stateTableView];
 
-    self.cityTableView =  [self tableViewWithFrame: CGRectMake(left_Width, 0, XSCREEN_WIDTH - left_Width, XSCREEN_HEIGHT)];
+    self.cityTableView =  [self tableViewWithFrame: CGRectMake(left_Width, 0, XSCREEN_WIDTH - left_Width, left_Height)];
     self.cityTableView.backgroundColor = XCOLOR_WHITE;
     self.cityTableView.showsVerticalScrollIndicator = NO;
-     [self.view  addSubview:self.cityTableView];
+    [self.view  addSubview:self.cityTableView];
     
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UniversityNew;
+@class MyOfferUniversityModel;
 @interface HotUniversityFrame : NSObject
 //背景
 @property(nonatomic,assign)CGRect  bgViewFrame;
@@ -33,7 +33,7 @@
 @property(nonatomic,strong)NSArray *tagFrames;
 //cell高度
 @property(nonatomic,assign)CGFloat  cellHeight;
-@property(nonatomic,strong)UniversityNew  *universtiy;
+@property(nonatomic,strong)MyOfferUniversityModel  *universtiy;
 
 + (instancetype)frameWithUniversity:(NSDictionary *)uni_Info;
 

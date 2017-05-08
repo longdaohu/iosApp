@@ -15,7 +15,7 @@
 #import "MyOfferArticle.h"
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "UniversityCell.h"
 #import "UniItemFrame.h"
 #import "UniversityRightView.h"
@@ -284,12 +284,12 @@ typedef enum {
     //相关院校  大于第二分组
     NSMutableArray *neightbour_temps = [NSMutableArray array];
     
-   NSArray *rankNeighbour = [UniversityNew  mj_objectArrayWithKeyValuesArray: university.rankNeighbour];
+   NSArray *rankNeighbour = [MyOfferUniversityModel  mj_objectArrayWithKeyValuesArray: university.rankNeighbour];
     
     
     [rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(UniversityNew*)obj];
+         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(MyOfferUniversityModel*)obj];
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";

@@ -7,7 +7,7 @@
 //
 
 #import "SearchUniversityCenterViewController.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 #import "UniversityCourseCell.h"
 #import "ApplySectionHeaderView.h"
 #import "searchSectionFootView.h"
@@ -339,7 +339,7 @@
  
     
     
-    NSArray *universities = [UniversityNew mj_objectArrayWithKeyValuesArray:response[@"universities"]];
+    NSArray *universities = [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:response[@"universities"]];
     
     //当pageSize 大于请请求结果数量时，结束加载网络
     NSNumber *pageSize = [self.parametersM valueForKey:KEY_SIZE_S];
@@ -348,7 +348,7 @@
     
     [universities enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:(UniversityNew *)obj];
+        UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:(MyOfferUniversityModel *)obj];
         [self.UniFrames addObject:uniFrame];
         
     }];

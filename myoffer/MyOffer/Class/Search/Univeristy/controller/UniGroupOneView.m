@@ -101,7 +101,7 @@
     [qsBtn setTitle:@"世界排名" forState:UIControlStateNormal];
     qsBtn.enabled = NO;
     [qsBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [qsBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
+    [qsBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
     [selectionView addSubview:qsBtn];
     qsBtn.titleLabel.font = XFONT(16);
     self.qsBtn = qsBtn;
@@ -111,7 +111,7 @@
     UIButton *timesBtn = [[UIButton alloc] init];
     [timesBtn setTitle:@"本国排名" forState:UIControlStateNormal];
     [timesBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [timesBtn setTitleColor:XCOLOR_RED forState:UIControlStateDisabled];
+    [timesBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
     [selectionView addSubview:timesBtn];
     self.timesBtn = timesBtn;
     timesBtn.titleLabel.font = XFONT(16);

@@ -1,5 +1,5 @@
 //
-//  UniversityNew.h
+//  MyOfferUniversityModel.h
 //  myOffer
 //
 //  Created by xuewuguojie on 2016/10/27.
@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UniversityNew : NSObject
+@interface MyOfferUniversityModel : NSObject
 @property(nonatomic,copy)NSString *NO_id;
 @property(nonatomic,copy)NSString *state;
 @property(nonatomic,copy)NSString *short_id;

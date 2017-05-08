@@ -9,7 +9,7 @@
 #import "HomeThirdTableViewCell.h"
 #import "UniCollectionViewCell.h"
 #import "HotUniversityFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 @interface HomeThirdTableViewCell ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UICollectionView *CollectionView;

@@ -99,7 +99,7 @@
         self.gradient = gradient;
         
         //8、更多
-        self.moreBtn = [self buttonlWithtextColor:XCOLOR_RED fontSize:16];
+        self.moreBtn = [self buttonlWithtextColor:XCOLOR_LIGHTBLUE fontSize:16];
         [self.moreBtn setTitle:@"了解详细介绍" forState:UIControlStateNormal];
         [self.moreBtn setTitle:@"点击隐藏" forState:UIControlStateSelected];
         self.moreBtn .contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -134,6 +134,7 @@
     sender.titleLabel.font =XFONT(size);
     sender.imageView.contentMode = UIViewContentModeScaleAspectFit;
     sender.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    sender.imageEdgeInsets = UIEdgeInsetsMake(0, -2, 0, 0);
     
     return sender;
 }

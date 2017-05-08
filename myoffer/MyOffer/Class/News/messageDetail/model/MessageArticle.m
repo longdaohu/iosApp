@@ -21,7 +21,7 @@
 {
     return @{
              @"recommendations" : @"MyOfferArticle",
-             @"related_universities" : @"UniversityNew"
+             @"related_universities" : @"MyOfferUniversityModel"
              };
 }
 

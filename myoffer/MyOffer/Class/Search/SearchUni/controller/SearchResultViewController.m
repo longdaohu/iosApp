@@ -9,7 +9,7 @@
 #import "SearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "XWGJnodataView.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 
 @interface SearchResultViewController () {
     NSString *_text, *_orderBy, *_fieldKey, *_subject, *_country, *_state, *_city;
@@ -226,23 +226,14 @@
          
          
           [response[@"universities"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+   
               
-              
-//              NSString *uid = obj[@"_id"];
-  
-//             if (![_resultIDSet containsObject:uid]) {
-//                 
-//                 [_resultIDSet addObject:uid];
-              
-              
-              
-                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[UniversityNew mj_objectWithKeyValues:obj]];
+                 UniversityFrameNew  *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:[MyOfferUniversityModel mj_objectWithKeyValues:obj]];
               
               
                  [_result addObject:uniFrame];
    
-//             }
-           
+            
               
          }];
           _allResultCount = [response[@"count"] integerValue];
@@ -304,7 +295,7 @@
     cell.optionOrderBy = _orderBy;
  
     UniversityFrameNew  *uniFrame = _result[indexPath.row];
-    UniversityNew *uni =uniFrame.universtiy;
+    MyOfferUniversityModel *uni =uniFrame.universtiy;
     cell.isStart = [uni.name isEqualToString:GDLocalizedString(@"CategoryVC-AU")];
     cell.uni_Frame = uniFrame;
     
@@ -317,7 +308,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityFrameNew *uniFrame =  _result[indexPath.row];
-    UniversityNew *uniObj = uniFrame.universtiy;
+    MyOfferUniversityModel *uniObj = uniFrame.universtiy;
     [self.navigationController pushUniversityViewControllerWithID:uniObj.NO_id animated:YES];
 }
 

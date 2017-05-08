@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 typedef void(^universityBlock)(NSString *);
 @interface searchSectionFootView : UIView
 @property(nonatomic,copy)universityBlock actionBlock;
 
-+ (instancetype)footerWithUniversity:(UniversityNew *)university actionBlock:(universityBlock)action;
++ (instancetype)footerWithUniversity:(MyOfferUniversityModel *)university actionBlock:(universityBlock)action;
 
 @end

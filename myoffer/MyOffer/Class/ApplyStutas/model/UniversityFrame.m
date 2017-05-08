@@ -7,59 +7,56 @@
 //
 
 #import "UniversityFrame.h"
-#import "UniversityNew.h"
+#import "MyOfferUniversityModel.h"
 @implementation UniversityFrame
 
 
--(void)setUniversity:(UniversityNew *)university{
+-(void)setUniversity:(MyOfferUniversityModel *)university{
 
     _university = university;
  
-    CGFloat logox = 40;
-    CGFloat logoy = ITEM_MARGIN;
-    CGFloat logoh = Uni_Cell_Height - 2 * ITEM_MARGIN;
-    CGFloat logow = logoh;
-    self.LogoFrame = CGRectMake(logox, logoy, logow, logoh);
+    CGFloat icon_X = 50;
+    CGFloat icon_Y = 10;
+    CGFloat icon_W =  80 + XFONT_SIZE(1) * 5;
+    CGFloat icon_H = icon_W;
+    self.icon_Frame = CGRectMake(icon_X, icon_Y, icon_W, icon_H);
+    
+    self.cell_Height = CGRectGetMaxY(self.icon_Frame) + icon_Y;
+
+    
+    CGFloat title_x = CGRectGetMaxX(self.icon_Frame) + 12;
+    CGFloat title_y = icon_Y;
+    CGFloat title_h = XFONT_SIZE(17);
+    CGFloat title_w = XSCREEN_WIDTH - title_x;
+    self.name_Frame = CGRectMake(title_x, title_y, title_w, title_h);
     
     
-    CGFloat nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat nameY =logoy;
-    CGFloat nameH =  Uni_title_FontSize;
-    CGFloat nameW = XSCREEN_WIDTH - nameX;
-    self.nameFrame = CGRectMake(nameX, nameY - 3, nameW, nameH);
-    
-    
-    CGFloat official_nameX = CGRectGetMaxX(self.LogoFrame) + ITEM_MARGIN;
-    CGFloat official_nameY = CGRectGetMaxY(self.nameFrame) + 3;
-    CGFloat official_nameW = XSCREEN_WIDTH - official_nameX;
-    CGFloat official_nameH =  Uni_subtitle_FontSize;
-    self.official_nameFrame = CGRectMake(official_nameX, official_nameY, official_nameW, official_nameH);
+    CGFloat official_X = title_x;
+    CGFloat official_Y = CGRectGetMaxY(self.name_Frame) + 2;
+    CGFloat official_W = title_w;
+    CGFloat official_H =  XFONT_SIZE(13);
+    self.official_Frame = CGRectMake(official_X, official_Y, official_W, official_H);
    
     
-    CGFloat anthorX =  official_nameX;
-    CGFloat anthorH =  Uni_rank_FontSize + 5;
-    CGFloat anthorW =  anthorH;
-    CGFloat anthorY =  CGRectGetMaxY(self.LogoFrame) - anthorH;
-    self.anchorFrame = CGRectMake(anthorX, anthorY, anthorW, anthorH);
-    
-    CGFloat addressX =  CGRectGetMaxX(self.anchorFrame) + 5;
-    CGFloat addressH =  Uni_address_FontSize;
-    CGFloat addressW =  official_nameW;
-    CGFloat addressY =  anthorY  + 3;
-    self.address_detailFrame = CGRectMake(addressX, addressY, addressW, addressH);
+    CGFloat address_X =  official_X;
+    CGFloat address_H =  XFONT_SIZE(13);
+    CGFloat address_W =  official_W ;
+    CGFloat address_Y =  self.cell_Height - 12 - address_H;
+    self.address_Frame = CGRectMake(address_X, address_Y, address_W, address_H);
     
     
+    CGFloat rank_H = address_H;
+    CGFloat rank_X = address_X;
+    CGFloat rank_Y = CGRectGetMaxY(self.official_Frame) + (address_Y - CGRectGetMaxY(self.official_Frame) - rank_H) * 0.5;
+    CGFloat rank_W = address_W;
+    self.rank_Frame = CGRectMake(rank_X, rank_Y, rank_W, rank_H);
     
-    CGFloat rankX = official_nameX;
-    CGFloat rankW = official_nameW;
-    CGFloat rankH = Uni_rank_FontSize;
-    CGFloat rankY = CGRectGetMaxY(self.official_nameFrame) + (addressY - CGRectGetMaxY(self.official_nameFrame) - rankH) * 0.5;
-    self.RankFrame = CGRectMake(rankX, rankY, rankW, rankH);
+ 
+    CGSize rankSize = [@"世界排名：" KD_sizeWithAttributeFont:XFONT(13)];
+    CGFloat starBg_H = 15;
+    CGFloat starBg_Y = rank_Y - (starBg_H - rank_H);
+    self.starBgFrame = CGRectMake(rank_X + rankSize.width + 5,starBg_Y, 100, starBg_H);
     
-    
-    NSString *rankIT  =[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
-    CGSize rankSize = [rankIT KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(UNIVERISITYLOCALFONT))];
-    self.starBgFrame = CGRectMake(self.official_nameFrame.origin.x + rankSize.width , self.RankFrame.origin.y, 100, 15);
     NSMutableArray *temps =[NSMutableArray array];
     for (NSInteger i =0; i < 5; i++) {
         
@@ -73,12 +70,6 @@
 
 
 
-
-
--(CGSize)getContentBoundWithTitle:(NSString *)title  andFontSize:(CGFloat)size andMaxWidth:(CGFloat)width{
-    
-    return [title boundingRectWithSize:CGSizeMake(width, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]} context:nil].size;
-}
 
 
 @end

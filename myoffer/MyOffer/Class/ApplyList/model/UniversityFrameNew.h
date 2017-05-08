@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UniversityNew;
+@class MyOfferUniversityModel;
 @interface UniversityFrameNew : NSObject
-@property(nonatomic,strong)UniversityNew *universtiy;
+@property(nonatomic,strong)MyOfferUniversityModel *universtiy;
 @property(nonatomic,assign)CGRect SectionBackgroudFrame;
 //logo
 @property(nonatomic,assign)CGRect icon_Frame;
@@ -43,7 +43,7 @@
 @property(nonatomic,strong)NSArray *courseFrames;
 
 
-+(instancetype)universityFrameWithUniverstiy:(UniversityNew *)universtiy;
++(instancetype)universityFrameWithUniverstiy:(MyOfferUniversityModel *)universtiy;
 
 @end
 
