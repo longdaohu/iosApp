@@ -20,11 +20,11 @@
 //地址
 @property(nonatomic,assign)CGRect address_Frame;
 //地址图标
-@property(nonatomic,assign)CGRect anchor_Frame;
+//@property(nonatomic,assign)CGRect anchor_Frame;
 //排名
 @property(nonatomic,assign)CGRect rank_Frame;
 //排名图标
-@property(nonatomic,assign)CGRect rank_Icon_Frame;
+//@property(nonatomic,assign)CGRect rank_Icon_Frame;
 //添加按钮
 @property(nonatomic,assign)CGRect add_Frame;
 //删除按钮

@@ -32,7 +32,6 @@
         
         self.contentView.layer.masksToBounds = YES;
  
-        self.backgroundColor =  XCOLOR_RED;
 
     }
     return self;

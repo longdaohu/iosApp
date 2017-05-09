@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroViewController">
             <connections>
-                <outlet property="EnterButton" destination="aE7-To-UpS" id="WOT-Nc-1zO"/>
-                <outlet property="_bannerView" destination="tjf-dJ-ex3" id="aba-ox-8s6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="l3n-0S-oJm"/>
             </connections>
         </placeholder>
@@ -17,37 +18,8 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjf-dJ-ex3" customClass="KDBannerView">
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="S5b-y1-fV7"/>
-                    </connections>
-                </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aE7-To-UpS" customClass="KDEasyTouchButton">
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="160" id="0dd-5T-8cx"/>
-                        <constraint firstAttribute="height" constant="70" id="6Pd-m7-DlS"/>
-                    </constraints>
-                    <state key="normal">
-                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="dismiss" destination="-1" eventType="touchUpInside" id="4W2-Pv-eEy"/>
-                    </connections>
-                </button>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="aE7-To-UpS" secondAttribute="bottom" constant="30" id="Lq0-sM-8rw"/>
-                <constraint firstItem="tjf-dJ-ex3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TMX-kF-jCs"/>
-                <constraint firstItem="aE7-To-UpS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="f5A-TB-bqL"/>
-                <constraint firstAttribute="trailing" secondItem="tjf-dJ-ex3" secondAttribute="trailing" id="j7L-fM-5dD"/>
-                <constraint firstAttribute="bottom" secondItem="tjf-dJ-ex3" secondAttribute="bottom" id="kAT-Pf-GF5"/>
-                <constraint firstItem="tjf-dJ-ex3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vi8-9O-sEz"/>
-            </constraints>
-            <point key="canvasLocation" x="196" y="316"/>
+            <point key="canvasLocation" x="195.5" y="315.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

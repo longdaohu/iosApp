@@ -16,6 +16,7 @@
 @optional
 - (void)bannerView:(KDBannerView *)bannerView didTapView:(UIView *)view atIndex:(NSInteger)index;
 - (void)bannerView:(KDBannerView *)bannerView atIndex:(int)index;
+- (void)bannerView:(KDBannerView *)bannerView scrollViewDidScroll:(UIScrollView *)scrollView;
 
 
 @end

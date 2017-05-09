@@ -208,10 +208,10 @@
 -(void)makeHeaderView
 {
     
-    self.ResultTableView.rowHeight = TABLEROWHEIGHT;
     self.headerView.frame =  CGRectMake(0, 0, self.ResultTableView.frame.size.width, TABLEHEADVIEWHEIGHT);
     self.ResultTableView.tableHeaderView = self.headerView;
     self.ResultTableView.backgroundColor = XCOLOR_BG;
+    self.ResultTableView.tableFooterView = [UIView new];
     
     CGFloat centerW = 110;
     CGFloat centerH = centerW;

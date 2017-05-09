@@ -130,22 +130,22 @@
                             <rect key="frame" x="0.0" y="45" width="320" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冲刺" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7K-cU-amC">
-                                    <rect key="frame" x="26" y="0.0" width="294" height="40"/>
+                                    <rect key="frame" x="25" y="0.0" width="295" height="40"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HB-Hj-HF9">
-                                    <rect key="frame" x="10" y="12" width="6" height="16"/>
+                                    <rect key="frame" x="10" y="12" width="5" height="16"/>
                                     <color key="backgroundColor" red="0.019607843140000001" green="0.79607843140000001" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="6" id="Ezj-8a-pYa"/>
+                                        <constraint firstAttribute="width" constant="5" id="Ezj-8a-pYa"/>
                                         <constraint firstAttribute="height" constant="16" id="rAQ-Cf-sdX"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="3"/>
+                                            <real key="value" value="2.5"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>

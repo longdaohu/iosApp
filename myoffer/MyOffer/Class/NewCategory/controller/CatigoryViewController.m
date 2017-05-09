@@ -266,7 +266,7 @@
 //热门城市
 - (void)makeCityCollectViewWithFrame:(CGRect)frame{
     
-    self.City_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.City_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     self.City_tableView.delegate = self;
     self.City_tableView.dataSource = self;
     self.City_tableView.tableFooterView =[[UIView alloc] init];

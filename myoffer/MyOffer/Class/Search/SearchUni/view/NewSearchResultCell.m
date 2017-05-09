@@ -19,14 +19,10 @@
 @property(nonatomic,strong)UILabel *nameLab;
 //主要显示英文学校名称
 @property(nonatomic,strong)UILabel *official_nameLab;
-//地理图标
-@property(nonatomic,strong)UIImageView *anchorView;
 //地理位置
-@property(nonatomic,strong)UITextField *address_detail_TF;
+@property(nonatomic,strong)UIButton *addressBtn;
 //排名图标
-@property(nonatomic,strong)UIImageView *rankIconView;
-//排名
-@property(nonatomic,strong) UILabel *rankLab;
+@property(nonatomic,strong)UIButton *rankBtn;
  //用于显示 星号图标
 @property(nonatomic,strong)UIView *StarsBgView;
 //推荐标签
@@ -70,28 +66,25 @@
         self.official_nameLab.numberOfLines = 2;
         self.official_nameLab.clipsToBounds = YES;
         
-        //地理图标
-        self.anchorView =[[UIImageView alloc] init];
-        self.anchorView.image = [UIImage imageNamed:@"Uni_anthor"];
-        self.anchorView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:self.anchorView];
+        //排名
+        UIButton *rankBtn = [[UIButton alloc] init];
+        [rankBtn setTitleColor: XCOLOR_SUBTITLE forState:UIControlStateNormal];
+        rankBtn.titleLabel.font = XFONT(XFONT_SIZE(13));
+        [rankBtn setImage:[UIImage imageNamed:@"sort-arrows-none"]  forState:UIControlStateNormal];
+        [self.contentView addSubview:rankBtn];
+        self.rankBtn = rankBtn;
+        [rankBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        rankBtn.userInteractionEnabled = NO;
         
         //地理位置
-        self.address_detail_TF = [[UITextField alloc] init];
-        self.address_detail_TF.textColor = XCOLOR_SUBTITLE;
-        self.address_detail_TF.font = XFONT(XFONT_SIZE(13));
-        self.address_detail_TF.userInteractionEnabled = NO;
-        [self.contentView addSubview:self.address_detail_TF];
-        
-        //排名图标
-        UIImageView *rankIconView =[[UIImageView alloc] init];
-        self.rankIconView = rankIconView;
-        rankIconView.image = [UIImage imageNamed:@"sort-arrows-none"];
-        rankIconView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.contentView addSubview:rankIconView];
-        
-        //排名
-        self.rankLab =[self getLabelWithFontSize:XFONT_SIZE(13)  andTextColor:XCOLOR_SUBTITLE];
+        UIButton *address_Btn = [[UIButton alloc] init];
+        [address_Btn setTitleColor: XCOLOR_SUBTITLE forState:UIControlStateNormal];
+        address_Btn.titleLabel.font = XFONT(XFONT_SIZE(13));
+        [address_Btn setImage:[UIImage imageNamed:@"Uni_anthor"]  forState:UIControlStateNormal];
+        [self.contentView addSubview:address_Btn];
+        self.addressBtn = address_Btn;
+        [address_Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        address_Btn.userInteractionEnabled = NO;
         
         //**号背景
         self.StarsBgView =[[UIView alloc] init];
@@ -150,21 +143,19 @@
     self.official_nameLab.frame = uni_Frame.official_Frame;
     
     
-    self.anchorView.frame = uni_Frame.anchor_Frame;
-    self.address_detail_TF.frame = uni_Frame.address_Frame;
-    self.address_detail_TF.text = uni_Frame.universtiy.address_long;
+    [self.addressBtn setTitle:uniObj.address_long  forState:UIControlStateNormal];
+    self.addressBtn.frame = uni_Frame.address_Frame;
     
     
     CGFloat addressWidth = [uniObj.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
      //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uni_Frame.address_Frame.size.width - 30)) {
         
-        self.address_detail_TF.text = uniObj.address_short;
-        
+        [self.addressBtn setTitle:uniObj.address_short forState:UIControlStateNormal];
      }
     
-    self.rankIconView.frame = uni_Frame.rank_Icon_Frame;
-    self.rankLab.frame = uni_Frame.rank_Frame;
+    self.rankBtn.frame = uni_Frame.rank_Frame;
+    
     self.StarsBgView.hidden = !self.isStart;
     
     self.hotView.image = uni_Frame.universtiy.hot ? [UIImage imageNamed:GDLocalizedString(@"University-hot")]:[UIImage imageNamed:@""];
@@ -173,8 +164,7 @@
     if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
         NSString   *rankStr01 = uniObj.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_qs];
-        self.rankLab.text = [NSString stringWithFormat:@"世界排名：%@",rankStr01];
-        
+        [self.rankBtn setTitle:[NSString stringWithFormat:@"世界排名：%@",rankStr01] forState:UIControlStateNormal];
         self.StarsBgView.hidden = YES;
 
         return;
@@ -185,17 +175,16 @@
         
         self.StarsBgView.frame = uni_Frame.starBgFrame;
         CGPoint center = self.StarsBgView.center;
-        center.y = self.rankLab.center.y;
+        center.y = self.rankBtn.center.y;
         self.StarsBgView.center = center;
-        self.rankLab.text = [NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")];
-        
+        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")]  forState:UIControlStateNormal];
         NSInteger  StarCount  = uniObj.ranking_ti.integerValue;
         
         //暂无排名时
 
         if (StarCount == DEFAULT_NUMBER) {
             
-            self.rankLab.text = @"本国排名：暂无排名";
+            [self.rankBtn setTitle:@"本国排名：暂无排名" forState:UIControlStateNormal];
             
             return;
         }
@@ -227,8 +216,7 @@
     }else{
         //英国排名
         NSString   *rankStr01 = uniObj.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",uniObj.ranking_ti];
-        self.rankLab.text = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-        
+        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01]  forState:UIControlStateNormal];
     }
 
 }

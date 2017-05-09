@@ -21,8 +21,6 @@
 @property(nonatomic,strong)UIButton *rankBtn;
 //logo图标
 @property (strong, nonatomic)  LogoView *iconView;
-//地理图标
-//@property(nonatomic,strong)UIImageView *anchorView;
 //地理位置
 @property(nonatomic,strong)UIButton *address_Btn;
 
@@ -68,7 +66,7 @@
     [self.contentView addSubview:rankBtn];
     self.rankBtn = rankBtn;
     [rankBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-
+     rankBtn.userInteractionEnabled = NO;
     
     //地理位置
     UIButton *address_Btn = [[UIButton alloc] init];
@@ -77,6 +75,7 @@
     [address_Btn setImage:[UIImage imageNamed:@"Uni_anthor"]  forState:UIControlStateNormal];
     [self.contentView addSubview:address_Btn];
     self.address_Btn = address_Btn;
+    address_Btn.userInteractionEnabled = NO;
     [address_Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     
     //存放星星View

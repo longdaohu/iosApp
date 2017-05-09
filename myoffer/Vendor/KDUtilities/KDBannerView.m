@@ -110,10 +110,17 @@
     //徐金辉根据引导页面的需求修改
 //          NSLog(@"++++++----- %d",page);
     
-         if ([self.delegate respondsToSelector:@selector(bannerView:atIndex:)]) {
-            
-            [self.delegate bannerView:self atIndex:page];
-         }
+//     if ([self.delegate respondsToSelector:@selector(bannerView:atIndex:)]) {
+//        
+//        [self.delegate bannerView:self atIndex:page];
+//     }
+
+    
+    if ([self.delegate respondsToSelector:@selector(bannerView:scrollViewDidScroll:)]) {
+        
+        [self.delegate bannerView:self scrollViewDidScroll:scrollView];
+    }
+    
     
     
  }
@@ -128,6 +135,7 @@
 }
 
 - (void)viewTapped:(UIGestureRecognizer *)gr {
+    
     if ([self.delegate respondsToSelector:@selector(bannerView:didTapView:atIndex:)]) {
         [self.delegate bannerView:self
                        didTapView:gr.view

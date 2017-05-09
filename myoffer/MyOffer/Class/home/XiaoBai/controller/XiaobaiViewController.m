@@ -192,6 +192,7 @@
     CGFloat bgX  = 0;
     UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bgX,bgY, bgW,bgH)];
     bgView.delegate = self;
+    bgView.bounces = NO;
     [self.view addSubview:bgView];
     bgView.contentSize = CGSizeMake(3 * XSCREEN_WIDTH, XSCREEN_HEIGHT);
     bgView.pagingEnabled = YES;

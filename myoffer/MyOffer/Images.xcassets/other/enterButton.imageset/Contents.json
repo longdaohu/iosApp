@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "into001.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "enterButton@2x.png",
       "scale" : "2x"
     },
     {

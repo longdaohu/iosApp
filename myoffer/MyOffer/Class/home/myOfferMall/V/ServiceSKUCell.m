@@ -68,7 +68,8 @@
     
     // 1 、 cover图片
     UIImageView *coverView = [[UIImageView alloc] init];
-     self.coverView = coverView;
+    coverView.contentMode = UIViewContentModeScaleAspectFill;
+    self.coverView = coverView;
     coverView.clipsToBounds = YES;
     [self addImageView:coverView];
     
@@ -134,6 +135,7 @@
 
     _SKU_Frame = SKU_Frame;
     
+   
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:SKU_Frame.SKU.cover_path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
     

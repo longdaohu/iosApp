@@ -10,7 +10,7 @@
 #import "KDBannerView.h"
 
 @interface IntroViewController : BaseViewController {
-    IBOutlet KDBannerView *_bannerView;
+//    IBOutlet KDBannerView *_bannerView;
 }
 
 @end

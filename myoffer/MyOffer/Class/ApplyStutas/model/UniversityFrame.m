@@ -55,7 +55,7 @@
     CGSize rankSize = [@"世界排名：" KD_sizeWithAttributeFont:XFONT(13)];
     CGFloat starBg_H = 15;
     CGFloat starBg_Y = rank_Y - (starBg_H - rank_H);
-    self.starBgFrame = CGRectMake(rank_X + rankSize.width + 5,starBg_Y, 100, starBg_H);
+    self.starBgFrame = CGRectMake(rank_X + rankSize.width + 8,starBg_Y, 100, starBg_H);
     
     NSMutableArray *temps =[NSMutableArray array];
     for (NSInteger i =0; i < 5; i++) {

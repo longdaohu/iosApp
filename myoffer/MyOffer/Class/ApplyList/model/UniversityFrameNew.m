@@ -50,39 +50,25 @@
     CGSize  official_Size = [universtiy.official_name KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(13))  maxWidth:official_W];
     CGFloat official_H =  official_Size.height;
     self.official_Frame = CGRectMake(official_X, official_Y, official_W, official_H);
-    
  
-    CGFloat anthor_X =  official_X;
-    CGFloat anthor_H =  XFONT_SIZE(13);
-    CGFloat anthor_W =  anthor_H;
-    CGFloat anthor_Y =  self.cell_Height - 12 - anthor_H;
-    self.anchor_Frame = CGRectMake(anthor_X, anthor_Y, anthor_W, anthor_H);
-    
-    CGFloat address_X =  CGRectGetMaxX(self.anchor_Frame) + 6;
-    CGFloat address_H =  anthor_H;
-    CGFloat address_W =  official_W - address_X;
-    CGFloat address_Y =  anthor_Y;
+
+    CGFloat address_X =  official_X;
+    CGFloat address_H =  XFONT_SIZE(13);
+    CGFloat address_W =  official_W ;
+    CGFloat address_Y =  self.cell_Height - 12 - address_H;
     self.address_Frame = CGRectMake(address_X, address_Y, address_W, address_H);
     
     
-    CGFloat rank_icon_X =  anthor_X;
-    CGFloat rank_icon_H =  anthor_H;
-    CGFloat rank_icon_W =  rank_icon_H;
-    CGFloat rank_icon_Y =  CGRectGetMaxY(self.official_Frame) + (address_Y - CGRectGetMaxY(self.official_Frame) - rank_icon_H) * 0.5;
-    self.rank_Icon_Frame = CGRectMake(rank_icon_X, rank_icon_Y, rank_icon_W, rank_icon_H);
-    
-    
-    CGFloat rank_X = address_X;
-    CGFloat rank_Y = rank_icon_Y;
-    CGFloat rank_W = address_W;
     CGFloat rank_H = address_H;
+    CGFloat rank_X = address_X;
+    CGFloat rank_Y = CGRectGetMaxY(self.official_Frame) + (address_Y - CGRectGetMaxY(self.official_Frame) - rank_H) * 0.5;
+    CGFloat rank_W = address_W;
     self.rank_Frame = CGRectMake(rank_X, rank_Y, rank_W, rank_H);
     
-    
-    CGSize rankSize = [@"世界排名：" KD_sizeWithAttributeFont:XFONT(12)];
+    CGSize rankSize = [@"世界排名：" KD_sizeWithAttributeFont:XFONT(13)];
     CGFloat starBg_H = 15;
     CGFloat starBg_Y = rank_Y - (starBg_H - rank_H);
-    self.starBgFrame = CGRectMake(rank_X + rankSize.width ,starBg_Y, 100, starBg_H);
+    self.starBgFrame = CGRectMake(rank_X + rankSize.width + 8,starBg_Y, 100, starBg_H);
     
     NSMutableArray *temps =[NSMutableArray array];
     for (NSInteger i =0; i < 5; i++) {
