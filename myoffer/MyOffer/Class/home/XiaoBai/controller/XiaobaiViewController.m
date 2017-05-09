@@ -249,7 +249,7 @@
             CGFloat offsetX = offset.x;
             CGFloat width = scrollView.frame.size.width;
             NSInteger pageNum =  (offsetX + .5f *  width) / width;
-            [self.topToolView SelectButtonIndex:pageNum];
+            [self.topToolView setSelectedIndex:pageNum];
          // 限制y轴不动
         self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
     }

@@ -34,7 +34,6 @@ static NSBundle *bundle = nil;
         
 //        NSArray* languages = [def objectForKey:@"AppleLanguages"];
         
-        
         NSString *current =  @"zh-cn";//[languages objectAtIndex:0];
         
         useLanguage = current ;//
@@ -46,19 +45,21 @@ static NSBundle *bundle = nil;
     
     //获取文件路径
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"zh-Hans.lproj" ofType:nil];
+    bundle = [NSBundle bundleWithPath:path];//生成bundle
     
+    /*
     if ( [useLanguage containsString:@"en"]) {
        
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"en.lproj" ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"en.lproj" ofType:nil];
         NSString *path = [[NSBundle mainBundle] pathForResource:@"zh-Hans.lproj" ofType:nil];
         
         bundle = [NSBundle bundleWithPath:path];//生成bundle
     } else{
     
-          NSString *path = [[NSBundle mainBundle] pathForResource:@"zh-Hans.lproj" ofType:nil];
-          bundle = [NSBundle bundleWithPath:path];//生成bundle
+    
       }
-
+*/
     
 }
 

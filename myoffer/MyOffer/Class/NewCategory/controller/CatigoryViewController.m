@@ -455,7 +455,7 @@ static NSString *identify = @"hotCity";
             
             NSInteger pageNum =  (offsetX + .5f *  width) / width;
             
-            [self.topToolView SelectButtonIndex:pageNum];
+            [self.topToolView setSelectedIndex:pageNum];
             // 限制y轴不动
             self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
         }
@@ -573,6 +573,13 @@ static NSString *identify = @"hotCity";
     [self.navigationController pushViewController:country_state animated:YES];
 }
 
+- (void)jumpToHotCity{
+
+    [self.bgView setContentOffset:CGPointZero animated:YES];
+    
+    [self.topToolView setSelectedIndex:0];
+
+}
 
 
 - (void)didReceiveMemoryWarning {

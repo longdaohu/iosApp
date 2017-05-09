@@ -111,13 +111,16 @@
 }
 
 
+-(void)setSelectedIndex:(NSInteger)selectedIndex{
 
--(void)SelectButtonIndex:(NSInteger)index
-{
-    UIButton *sender =(UIButton *)self.itemArr[index];
+    _selectedIndex = selectedIndex;
+    
+    UIButton *sender =(UIButton *)self.itemArr[selectedIndex];
     
     [self moveWithButton:sender];
 }
+
+
 
 
 -(void)moveWithButton:(UIButton *)sender

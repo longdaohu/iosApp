@@ -47,24 +47,28 @@ static AppDelegate *__sharedDelegate;
 #else
     [Fabric with:@[CrashlyticsKit]];
 #endif
+    
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
-     
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
     //初始化语言文件
     [InternationalControl initUserLanguage];
- 
+    
     //创建主控制
     [self makeRootController];
+
+    //[NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
     
-//    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
+    //友盟
+    [self umeng];
     
-    [self umeng];//友盟
+    //极光
+    [self Jpush];
     
-    [self Jpush];//极光
     //极光
     [APService setupWithOption:launchOptions];
     
@@ -110,28 +114,27 @@ static AppDelegate *__sharedDelegate;
                                                                    rightMenuViewController:nil];
     
     sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54 , 1);
-//     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
     sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
-    
     self.window.rootViewController = sideMenuViewController;
+
     
     [self.window makeKeyAndVisible];
     
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     
     //产品引导页面
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
         
-        IntroViewController *vc = [[IntroViewController alloc] init];
-        
-        [self.window.rootViewController presentViewController:vc animated:NO completion:nil];
+        [self.window.rootViewController presentViewController:[[IntroViewController alloc] init] animated:NO completion:nil];
         
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }

@@ -34,8 +34,8 @@
         self.iconView   = [[UIImageView alloc] init];
         self.iconView.contentMode  = UIViewContentModeScaleAspectFill;
         self.iconView.clipsToBounds = YES;
-        
         [self.contentView addSubview:self.iconView];
+        
         self.contentView.backgroundColor = XCOLOR_BG;
     }
     return self;
@@ -50,7 +50,7 @@
 
     NSString *path = [iconStr containsString:@"http"] ? iconStr : [NSString stringWithFormat:@"%@%@",DOMAINURL,iconStr];
 
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path]];
     
 }
 

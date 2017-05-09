@@ -35,7 +35,7 @@
 #import "MyOfferServerMallViewController.h"
 #import "MyOfferAutoRunBanner.h"
 #import "HomeHeaderFrame.h"
-
+#import "CatigoryViewController.h"
 
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
@@ -501,6 +501,14 @@
              
               NSInteger  selectionIndex = (section == 0) ? 1:2;
               [self.tabBarController setSelectedIndex:selectionIndex];
+             
+             if (selectionIndex == 1) {
+  
+                 UINavigationController *nav  = self.tabBarController.childViewControllers[selectionIndex];
+                 CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
+                 [catigroy jumpToHotCity];
+             }
+             
              
         };
     }

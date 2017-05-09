@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface CatigoryViewController : BaseViewController
--(void)leftViewMessage;
+- (void)leftViewMessage;
+- (void)jumpToHotCity;
 @end

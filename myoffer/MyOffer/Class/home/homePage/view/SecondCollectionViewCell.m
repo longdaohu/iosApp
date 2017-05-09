@@ -17,7 +17,6 @@
     if (self) {
         
         self.logoView = [[UIImageView alloc] init];
-        self.logoView.image = [UIImage imageNamed:@"PlaceHolderImage"];
         self.logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.logoView];
         
