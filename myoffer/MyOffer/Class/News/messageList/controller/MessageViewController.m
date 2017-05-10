@@ -295,7 +295,7 @@
     SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(autoX , autoY, autoW,autoH) delegate:nil placeholderImage:nil];
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
     autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
-    autoLoopView.currentPageDotColor = XCOLOR_RED;
+    autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
     self.autoLoopView = autoLoopView;
     self.tableView.tableHeaderView = autoLoopView;
     autoLoopView.clickItemOperationBlock = ^(NSInteger index) {

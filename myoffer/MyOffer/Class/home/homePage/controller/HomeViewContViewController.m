@@ -458,7 +458,8 @@
     self.autoLoopView = autoLoopView;
     autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
     autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    autoLoopView.currentPageDotColor = XCOLOR_RED;
+    autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
+    autoLoopView.pageControlBottomOffset =  15;
     [bgView addSubview:autoLoopView];
     autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
         

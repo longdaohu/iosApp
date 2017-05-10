@@ -137,7 +137,6 @@ static NSString *identify = @"cityCell";
     CatigaryHotCity *hotCity = self.hot_cities[indexPath.row];
         
     if (self.actionBlock) self.actionBlock(hotCity.city);
-            
     
 }
 

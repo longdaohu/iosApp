@@ -126,8 +126,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         NSError *JSONError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
       
-        KDClassLog(@"Error 这在这里测试服务器错误 error = %@  code = %d   statusCode = %d   \n path = %@  result =  %@  ",JSONError,JSONError.code,response.statusCode,request.URL.absoluteString,result);
- 
+//        KDClassLog(@"Error 这在这里测试服务器错误 error = %@  code = %d   statusCode = %d   \n path = %@  result =  %@  ",JSONError,JSONError.code,response.statusCode,request.URL.absoluteString,result);
         
         if (JSONError) {
           

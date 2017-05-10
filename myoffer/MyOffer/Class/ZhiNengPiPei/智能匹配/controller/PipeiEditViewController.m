@@ -124,7 +124,7 @@
     bottomView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:bottomView];
     
-    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(PADDING_TABLEGROUP, 0, XSCREEN_WIDTH - 2 * PADDING_TABLEGROUP, 50)];
+    UIButton *submitBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.5 *(XSCREEN_WIDTH - 300), 0, 300, 50)];
     [submitBtn setTitle:@"获取匹配结果" forState:UIControlStateNormal];
     [submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitBtn addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];

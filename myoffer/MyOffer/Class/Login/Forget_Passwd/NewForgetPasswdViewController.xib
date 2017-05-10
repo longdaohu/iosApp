@@ -222,10 +222,10 @@
                             </constraints>
                         </view>
                         <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryo-9p-xk8">
-                            <rect key="frame" x="52.5" y="270" width="270" height="50"/>
+                            <rect key="frame" x="37.5" y="270" width="300" height="50"/>
                             <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="270" id="gLT-Hm-5Ub"/>
+                                <constraint firstAttribute="width" constant="300" id="gLT-Hm-5Ub"/>
                                 <constraint firstAttribute="height" constant="50" id="lHa-Vv-gzQ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>

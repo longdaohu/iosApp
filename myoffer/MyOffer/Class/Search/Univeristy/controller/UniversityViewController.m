@@ -137,6 +137,7 @@ typedef enum {
         weakSelf.favorited = item.favorited;
         
         [weakSelf configureLikeButton:item.favorited];
+        
     }];
     
     //加载报考难易程度

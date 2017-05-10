@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef enum {
+
+typedef NS_ENUM(NSInteger,CollectionType) {
+    
     CollectionTypeFQ, //留学小白 ： 疑难解读
     CollectionTypeSubject  //留学搜索  ： 留学专业
-}CollectionType;
+    
+};
 
 @interface NomalCollectionController : BaseViewController
 

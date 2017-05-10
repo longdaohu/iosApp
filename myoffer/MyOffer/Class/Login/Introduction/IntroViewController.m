@@ -66,6 +66,7 @@
     bgView.contentSize = CGSizeMake(bgView.subviews.count * XSCREEN_WIDTH, 0);
     
     
+    
     UIView *bannerView = bgView.subviews.lastObject;
     
     
@@ -75,7 +76,6 @@
     versionView.contentMode = UIViewContentModeScaleAspectFit;
     self.versionView = versionView;
     self.versionView_Frame_O= versionView.frame;
-    
     
     
     CGFloat enter_W = 152;
@@ -97,7 +97,7 @@
 
 - (void)makePageControl{
     
-    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT * 0.9, XSCREEN_WIDTH, 20)];
+    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.enterBtn.frame) + 20, XSCREEN_WIDTH, 20)];
     [self.view addSubview:pageView];
     self.pageView = pageView;
     
@@ -139,6 +139,7 @@
     self.currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
 
     CGFloat  move = scrollView.contentOffset.x /  pageWidth;
+    
     CGFloat  alpha = move - (NSInteger)move;
     
     if ((NSInteger)move == (self.images.count - 2)) {
@@ -152,12 +153,14 @@
         self.versionView.frame = newVersionRect;
         self.versionView.center = CGPointMake(XSCREEN_WIDTH * 0.5, self.versionView_Frame_O.size.height * 0.5 +  self.versionView_Frame_O.origin.y);
         
+        
         CGRect newEnterRect  = self.enterBtn_Frame_O;
         newEnterRect.size.height = alpha * self.enterBtn_Frame_O.size.height;
         self.enterBtn.frame = newEnterRect;
         self.enterBtn.center = CGPointMake(XSCREEN_WIDTH * 0.5, self.enterBtn_Frame_O.size.height * 0.5 +  self.enterBtn_Frame_O.origin.y);
  
     }
+    
     
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -198,6 +201,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc{
+    
+    KDClassLog(@"page引导页 dealloc");
+}
 
 
 @end

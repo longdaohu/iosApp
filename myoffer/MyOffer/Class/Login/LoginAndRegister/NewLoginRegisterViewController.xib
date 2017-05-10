@@ -414,11 +414,11 @@
                             </constraints>
                         </view>
                         <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zk-ML-Gbq">
-                            <rect key="frame" x="38" y="394" width="270" height="50"/>
+                            <rect key="frame" x="23" y="394" width="300" height="50"/>
                             <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Gj4-gZ-9hE"/>
-                                <constraint firstAttribute="width" constant="270" id="OtM-q5-poW"/>
+                                <constraint firstAttribute="width" constant="300" id="OtM-q5-poW"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" title="注册">
@@ -661,10 +661,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPF-z4-pmg">
-                    <rect key="frame" x="25" y="120" width="270" height="50"/>
+                    <rect key="frame" x="10" y="120" width="300" height="50"/>
                     <color key="backgroundColor" red="0.92941176469999998" green="0.18039215689999999" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="270" id="L3j-Cp-1uW"/>
+                        <constraint firstAttribute="width" constant="300" id="L3j-Cp-1uW"/>
                         <constraint firstAttribute="height" constant="50" id="eAe-ZC-7cj"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

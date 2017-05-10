@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UIButton *lastBtn;
 //选中项对应的图片
 @property(nonatomic,strong)NSArray *itemImages;
+
 @property(nonatomic,strong)CAGradientLayer *gradient;
 
 @end
@@ -86,6 +87,7 @@
         
             UIButton *sender =[[UIButton alloc] init];
             [sender setTitle:itemNames[index] forState:UIControlStateNormal];
+            sender.titleLabel.font = XFONT(XFONT_SIZE(16));
             [sender setTitleColor:XCOLOR(255, 255, 255, 0.65) forState:UIControlStateNormal];
             [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
             [sender addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -131,8 +133,7 @@
     
 
     [UIView transitionWithView:self.focusView duration:0.3 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        
- 
+  
         self.focusView.frame = sender.frame;
 
         self.focusView.image = self.itemImages[sender.tag];

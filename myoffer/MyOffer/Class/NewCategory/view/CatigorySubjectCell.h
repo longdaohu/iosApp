@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class CatigorySubject;
 @interface CatigorySubjectCell : UICollectionViewCell
+
 @property(nonatomic,strong)CatigorySubject *subject;
 
 @end

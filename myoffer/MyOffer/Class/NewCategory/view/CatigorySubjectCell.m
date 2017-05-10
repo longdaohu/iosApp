@@ -29,7 +29,7 @@
     self.iconView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:self.iconView];
     
-    self.titleLab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentCenter];
+    self.titleLab =[UILabel labelWithFontsize: 20.0f TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
     self.titleLab.numberOfLines = 2;
     [self.contentView addSubview:self.titleLab];
     
@@ -53,10 +53,10 @@
     
     CGSize contentSize = self.bounds.size;
     
-    CGFloat iconx = 0;
-    CGFloat iconh = [self.subject.icon containsString:@"ICON"] ?  36 : self.iconView.image.size.width;
+    CGFloat iconx =  0;
+    CGFloat iconh =  self.iconView.image.size.width;
     CGFloat iconw =  iconh;
-    CGFloat icony = 0;
+    CGFloat icony =  0;
     self.iconView.frame =CGRectMake(iconx, icony, iconw, iconh);
     self.iconView.center = CGPointMake(self.contentView.center.x, self.contentView.center.y - 10);
     

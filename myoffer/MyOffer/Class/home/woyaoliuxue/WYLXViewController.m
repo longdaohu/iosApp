@@ -224,7 +224,7 @@ typedef enum {
 - (void)makeHeaderAndFooterView{
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 100)];
-    UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(25, 25, XSCREEN_WIDTH - 50, 50)];
+    UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.5 *(XSCREEN_WIDTH - 300), 25, 300, 50)];
     [commitBtn setTitle:@"我要留学" forState:UIControlStateNormal];
     [commitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
     [commitBtn setTitleColor:XCOLOR_LIGHTGRAY forState:UIControlStateHighlighted];
