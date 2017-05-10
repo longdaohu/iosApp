@@ -25,23 +25,20 @@ static NSString * const reuseIdentifier = @"subjectCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // self.clearsSelectionOnViewWillAppear = NO;
     CGFloat item_width = (XSCREEN_WIDTH - 4) / 3;
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     flowlayout.itemSize = CGSizeMake(item_width, item_width);
     flowlayout.minimumLineSpacing = 2;
     flowlayout.minimumInteritemSpacing = 2;
-//    flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowlayout];
-//    self.collectionView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN,0, 0, 0);
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.view addSubview:self.collectionView];
   
     // Register cell classes
-    [self.collectionView registerNib:[UINib nibWithNibName:@"CatigorySubjectCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CatigorySubjectCell class]) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     self.collectionView.backgroundColor = XCOLOR_BG;
     
     
@@ -92,7 +89,7 @@ static NSString * const reuseIdentifier = @"subjectCell";
     
     WebViewController *help = [[WebViewController alloc] init];
     
-    help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
+    help.path = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
     
     [self.navigationController pushViewController:help animated:YES];
     

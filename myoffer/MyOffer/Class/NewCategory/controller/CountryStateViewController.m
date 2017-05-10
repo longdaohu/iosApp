@@ -266,9 +266,8 @@
         }
         
         
-        
         SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
-        vc.coreCountry = self.countryModel.name;
+       
         [self.navigationController pushViewController:vc animated:YES];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -296,10 +295,7 @@
         
     }
     
-     
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
-    vc.coreCountry = self.countryModel.name;
-
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue country:self.countryModel.name];
     [self.navigationController pushViewController:vc animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

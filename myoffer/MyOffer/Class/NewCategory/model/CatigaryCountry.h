@@ -10,11 +10,9 @@
 
 @interface CatigaryCountry : NSObject
 //城市数组
-@property(nonatomic,strong)NSArray *HotCities;
+@property(nonatomic,strong)NSMutableArray *hot_cities;
 //国家
-@property(nonatomic,copy)NSString *countryName;
+@property(nonatomic,copy)NSString *country;
 
-+(instancetype)ContryItemInitWithCountryDictionary:(NSDictionary *)countryDic;
- 
 @end
 

@@ -17,6 +17,6 @@
 
 - (instancetype)initWithSearchValue:(NSString *)searchValue;
 - (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
-
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value country:(NSString *)country;
 
 @end

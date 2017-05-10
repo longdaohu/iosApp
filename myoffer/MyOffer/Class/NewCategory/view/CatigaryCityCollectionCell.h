@@ -10,6 +10,5 @@
 @class CatigaryHotCity;
 @interface CatigaryCityCollectionCell : UICollectionViewCell
 @property(nonatomic,strong)CatigaryHotCity *city;
-@property(nonatomic,assign)BOOL moreCity;
 
 @end

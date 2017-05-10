@@ -120,14 +120,22 @@
     self.dataView_Frame = CGRectMake(data_X, data_Y, data_W, data_H);
     
     //-----------------------dataView-------------这里结束---------------------------------------------
-    
-    
+
+ 
     //7、简介
     CGFloat intro_X = logo_X;
     CGFloat intro_Y = CGRectGetMaxY(self.dataView_Frame) +   2 * XMARGIN;
     CGFloat intro_W = centerWidth - 2 * intro_X;
-    CGFloat introductionHeight = [self.item.introduction KD_sizeWithAttributeFont:XFONT(official_Font_Size) maxWidth:intro_W].height;
-    CGFloat intro_H = introductionHeight;
+    NSMutableParagraphStyle *descStyle = [[NSMutableParagraphStyle alloc]init];
+    [descStyle setLineSpacing:6];//行间距
+    
+    CGSize instr_Size = [self.item.introduction boundingRectWithSize:CGSizeMake(intro_W, MAXFLOAT)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:@{NSFontAttributeName:XFONT(official_Font_Size),
+                                                           NSParagraphStyleAttributeName :descStyle}
+                                                 context:nil].size;
+    
+    CGFloat intro_H = instr_Size.height;
     self.introduction_Frame= CGRectMake(intro_X, intro_Y, intro_W, intro_H);
     
     //8、世界 本国排名、 标签容器View

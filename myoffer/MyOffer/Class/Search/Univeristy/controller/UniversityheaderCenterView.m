@@ -176,7 +176,13 @@
     self.dataView.frame = UniversityFrame.dataView_Frame;
  
     //6、学校简介
-    self.introductionLab.text = item.introduction;
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 6;
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:item.introduction];
+    [attrStr addAttribute:NSParagraphStyleAttributeName
+                    value:paragraph
+                    range:NSMakeRange(0, item.introduction.length)];
+    self.introductionLab.attributedText = attrStr;
     self.introductionLab.frame = UniversityFrame.introduction_Frame;
     
     //8、更多
@@ -277,7 +283,30 @@
 }
 
 
-
+/*
+ //        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+ //        paragraph.lineSpacing = 6;
+ //        paragraph.alignment = NSTextAlignmentCenter;
+ //        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:rank.titleName];
+ //        [attrStr addAttribute:NSParagraphStyleAttributeName
+ //                        value:paragraph
+ //                        range:NSMakeRange(0, rank.titleName.length)];
+ //        self.titleLab.attributedText = attrStr;
+ 
+ 
+ //        _descAtt = [[NSMutableAttributedString alloc] initWithString:_model.desc];
+ //        UIFont *descFont = [UIFont PingFangSC_Regular_WithSize:12];
+ //
+ //        NSMutableParagraphStyle *descStyle = [[NSMutableParagraphStyle alloc]init];
+ //        [descStyle setLineSpacing:1];//行间距
+ //
+ //        CGSize descSize = [_model.desc boundingRectWithSize:CGSizeMake(w, MAXFLOAT)
+ //                                                    options:NSStringDrawingUsesLineFragmentOrigin
+ //                                                 attributes:@{NSFontAttributeName:descFont,
+ //                                                              NSParagraphStyleAttributeName :descStyle}
+ //                                                    context:nil].size;
+ 
+ */
 
 
 

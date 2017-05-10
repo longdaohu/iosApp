@@ -15,12 +15,12 @@
     return @{@"city_id" : @"_id"};
     
 }
-
+/*
 - (NSString *)image_path{
-
+   
    return [self.image_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
-
+*/
  
 
 

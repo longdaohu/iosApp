@@ -12,43 +12,30 @@
 @interface CatigaryCityCollectionCell ()
 //图片
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
-//标题
-@property (weak, nonatomic) IBOutlet UILabel *cityLab;
 
 @end
 
 @implementation CatigaryCityCollectionCell
 
-- (void)awakeFromNib {
-  
-    [super awakeFromNib];
-    
-//    self.cityLab.font = [UIFont boldSystemFontOfSize: XFONT_SIZE(22)];
-    
-}
 
 -(void)setCity:(CatigaryHotCity *)city
 {
     _city = city;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
-}
+    if (city.imageName) {
 
-- (void)setMoreCity:(BOOL)moreCity{
-
-    if (moreCity) {
+        self.iconView.image = XImage(city.imageName);
         
-        NSString *imageName = @"ao_more.jpg";
-        if ([self.city.country containsString:@"英"]) imageName = @"uk_more.jpg";
-        if ([self.city.country containsString:@"美"]) imageName = @"usa_more.jpg";
-        
-        self.iconView.image = [UIImage imageNamed:imageName];
-        
+        return;
     }
- 
+    
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
+
+    
     
 }
+
 
 
 

@@ -79,33 +79,62 @@
     
     if (self) {
         
-        NSString *rankType = RANK_QS;
-        
-        if ([key isEqualToString:KEY_CITY] || [key isEqualToString:KEY_STATE] || [key isEqualToString:KEY_COUNTRY] ) {
-            
-            rankType = RANK_TI;
-        }
-        
-        self.currentRankType = rankType;
-        
-        NSDictionary *filter = @{KEY_NAME_S : key, KEY_VALUE_S:value};
-        [self.parametersM setValue:@[filter] forKey:KEY_FILTERS_S];
-        [self.parametersM setValue:rankType forKey:KEY_ORDER_S];
-        self.title = value;
-        
-        
-        if ([key isEqualToString:KEY_COUNTRY]) self.coreCountry =  value;
-        if ([key isEqualToString:KEY_STATE])   self.coreState =  value;
-        if ([key isEqualToString:KEY_CITY])    self.coreCity =  value;
-        if ([key isEqualToString:KEY_AREA])    self.coreArea=  value;
-        if ([key isEqualToString:KEY_SUBJECT]) self.coreSubject =  value;
-
-        
+        [self parameterWithKey:key value:value country:nil];
         
     }
     
     return self;
 }
+
+- (void)parameterWithKey:(NSString *)key value:(NSString *)value country:(NSString *)country{
+
+    NSString *rankType = RANK_QS;
+    
+    if ([key isEqualToString:KEY_CITY] || [key isEqualToString:KEY_STATE] || [key isEqualToString:KEY_COUNTRY] ) {
+        
+        rankType = RANK_TI;
+    }
+    
+    self.currentRankType = rankType;
+    
+    NSArray *filters;
+    if (country) {
+        
+        self.coreCountry = country;
+        
+        filters = @[ @{KEY_NAME_S : key, KEY_VALUE_S:value} , @{KEY_NAME_S: KEY_COUNTRY,KEY_VALUE_S:country}];
+        
+    }else{
+    
+        filters = @[@{KEY_NAME_S : key, KEY_VALUE_S:value}];
+    }
+    
+    [self.parametersM setValue:filters forKey:KEY_FILTERS_S];
+    [self.parametersM setValue:rankType forKey:KEY_ORDER_S];
+    self.title = value;
+    
+    
+    if ([key isEqualToString:KEY_COUNTRY]) self.coreCountry =  value;
+    if ([key isEqualToString:KEY_STATE])   self.coreState =  value;
+    if ([key isEqualToString:KEY_CITY])    self.coreCity =  value;
+    if ([key isEqualToString:KEY_AREA])    self.coreArea=  value;
+    if ([key isEqualToString:KEY_SUBJECT]) self.coreSubject =  value;
+
+}
+
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value country:(NSString *)country{
+
+    self = [self init];
+    
+    if (self) {
+        
+        [self parameterWithKey:key value:value country:country];
+        
+    }
+    
+    return self;
+}
+
 
 
 

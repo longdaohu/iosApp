@@ -17,11 +17,6 @@
 
 @implementation CatigaryRankkCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-    
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -43,6 +38,7 @@
 
 @end
 
+
 /*
  
  NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
@@ -55,6 +51,3 @@
  self.titleLab.attributedText = attrStr;
  
  */
-
-
-

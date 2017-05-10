@@ -34,9 +34,9 @@
 //专业collectionView
 @property(nonatomic,strong)NomalCollectionController *nomalCollectionVC;
 //热门城市collectionView
-@property(nonatomic,strong)UITableView *City_tableView;
+@property(nonatomic,strong)UITableView *city_tableView;
 //排名数组
-@property(nonatomic,strong)NSArray *RankList;
+@property(nonatomic,strong)NSArray *rankList;
 @property(nonatomic,strong)NSArray *colors;
 //专业数组
 @property(nonatomic,strong)NSArray *subjectList;
@@ -45,7 +45,7 @@
 //工具条
 @property(nonatomic,strong)XBTopToolView   *topToolView;
 //热门城市数组
-@property(nonatomic,strong)NSArray  *Country_Hotcities;
+@property(nonatomic,strong)NSArray  *country_Hotes;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
@@ -95,36 +95,46 @@
     
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSMutableArray *Country_Hotcities_temp  =[NSMutableArray array];
-        
-        for (NSDictionary *countryDic in response[@"hot"]) {
-            
-            CatigaryCountry *country =[CatigaryCountry ContryItemInitWithCountryDictionary:countryDic];
-            
-            [Country_Hotcities_temp addObject:country];
-        }
-        
-        weakSelf.Country_Hotcities = [Country_Hotcities_temp copy];
-        
-        [weakSelf.City_tableView reloadData];
+        [weakSelf updateCityUIWithResponse:response];
         
     }];
 }
 
+//更新热门留学目的地
+- (void)updateCityUIWithResponse:(id)response{
+
+    self.country_Hotes =[CatigaryCountry mj_objectArrayWithKeyValuesArray:response[@"hot"]];
+    
+    for (CatigaryCountry *country in self.country_Hotes) {
+        
+        //给每组添加最后一个数据
+        CatigaryHotCity *last_city = [[CatigaryHotCity alloc] init];
+        last_city.country = country.country;
+        
+        NSString *imageName = @"ao_more.jpg";
+        if ([country.country containsString:@"英"]) imageName = @"uk_more.jpg";
+        if ([country.country containsString:@"美"]) imageName = @"usa_more.jpg";
+        last_city.imageName = imageName;
+        
+        [country.hot_cities addObject:last_city];
+    }
+    
+    [self.city_tableView reloadData];
+}
+
 //排名列表
--(NSArray *)RankList
+-(NSArray *)rankList
 {
-    if (!_RankList) {
+    if (!_rankList) {
         
         CatigoryRank *rank_en = [CatigoryRank rankItemInitWithIconName:@"Rank_ENG" titleName:@"TIMES英国排名+TIMES UK University Rankings" rankType:RANK_TI];
         CatigoryRank *rank_au = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" titleName:@"QS澳大利业大学排名+QS Australia University Rankings" rankType:RANK_TI];
         CatigoryRank *rank_qs = [CatigoryRank rankItemInitWithIconName:@"Rank_AU" titleName:@"QS世界排名+QS World University Rankings"  rankType:RANK_QS];
-        _RankList = @[rank_en,rank_au,rank_qs];
         
-        
+        _rankList = @[rank_en,rank_au,rank_qs];
         
     }
-    return _RankList;
+    return _rankList;
 }
 
 - (NSArray *)colors{
@@ -196,6 +206,7 @@
             CatigorySubject *business =[CatigorySubject subjectItemInitWithIcon:@"sub_business"  title:GDLocalizedString(@"CategorySub-business")];
             CatigorySubject *farm =[CatigorySubject subjectItemInitWithIcon:@"sub_farm"  title:GDLocalizedString(@"CategorySub-farm")];
             CatigorySubject *science =[CatigorySubject subjectItemInitWithIcon:@"sub_sciencee"  title:GDLocalizedString(@"CategorySub-science")];
+          
             _subjectList = @[finance,business,engineer,humanity,science,built,art,medicine,farm];
             
         }
@@ -224,7 +235,7 @@
 - (void)makeTopToolView{
     
     self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,26,XSCREEN_WIDTH, TOP_HIGHT)];
-    self.topToolView.itemNames = @[GDLocalizedString(@"CategoryNew-region"),GDLocalizedString(@"CategoryNew-major"),GDLocalizedString(@"CategoryNew-rank")];
+    self.topToolView.itemNames = @[@"地区",@"专业",@"排名"];
     self.topToolView.delegate  = self;
     [self.view addSubview: self.topToolView];
     
@@ -254,6 +265,7 @@
     self.bgView.delegate = self;
     [self.view addSubview:self.bgView];
     self.bgView.backgroundColor = XCOLOR_WHITE;
+    
     //热门城市
     [self makeCityCollectViewWithFrame:CGRectMake(baseW * 0, 0, baseW,baseH)];
     //热门专业
@@ -266,33 +278,35 @@
 //热门城市
 - (void)makeCityCollectViewWithFrame:(CGRect)frame{
     
-    self.City_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
-    self.City_tableView.delegate = self;
-    self.City_tableView.dataSource = self;
-    self.City_tableView.tableFooterView =[[UIView alloc] init];
-    self.City_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.bgView addSubview:self.City_tableView];
+    self.city_tableView =[self tableViewWithUITableViewStyle:UITableViewStyleGrouped frame:frame];
+    [self.bgView addSubview:self.city_tableView];
     
 }
+
+- (UITableView *)tableViewWithUITableViewStyle:(UITableViewStyle)type frame:(CGRect)frame{
+
+    UITableView *tableView =[[UITableView alloc] initWithFrame:frame style:type];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.tableFooterView =[[UIView alloc] init];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    return tableView;
+}
+
 
 //国家排名
 -(void)makeRankTableViewWithFrame:(CGRect)frame
 {
-    
-    self.rank_tableView =[[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    self.rank_tableView.delegate = self;
-    self.rank_tableView.dataSource = self;
-    self.rank_tableView.tableFooterView =[[UIView alloc] init];
-    [self.bgView addSubview:self.rank_tableView];
-    self.rank_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.rank_tableView =[self tableViewWithUITableViewStyle:UITableViewStylePlain frame:frame];
     self.rank_tableView.backgroundColor = XCOLOR_WHITE;
+    [self.bgView addSubview:self.rank_tableView];
 
 }
 
 //热门专业
 -(void)makeSubjectCollectViewWithFrame:(CGRect)frame
 {
-    
     NomalCollectionController *nomalCollectionVC  = [[NomalCollectionController alloc] init];
     [self addChildViewController:nomalCollectionVC];
     [self.bgView addSubview:nomalCollectionVC.view];
@@ -300,13 +314,12 @@
     self.nomalCollectionVC = nomalCollectionVC;
     nomalCollectionVC.items = self.subjectList;
     nomalCollectionVC.type = CollectionTypeSubject;
-    
 }
 
 - (void)makeOtherUI{
     
     XWeakSelf
-    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
+    self.leftView = [LeftBarButtonItemView leftViewWithBlock:^{
         
         [weakSelf showLeftMenu];
         
@@ -321,12 +334,11 @@
 }
 
 
-
 #pragma mark : UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return  tableView == self.City_tableView ? self.Country_Hotcities.count : self.RankList.count;
+    return  tableView == self.city_tableView ? self.country_Hotes.count : self.rankList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -334,7 +346,7 @@
     return 1;
 }
 
-static NSString *identify = @"hotCity";
+static NSString *rankIdentify = @"rankStyle";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -342,14 +354,14 @@ static NSString *identify = @"hotCity";
     if (tableView == self.rank_tableView) {
         
         
-        CatigaryRankkCell *rank_cell =  [tableView dequeueReusableCellWithIdentifier:@"rankStyle"];
+        CatigaryRankkCell *rank_cell =  [tableView dequeueReusableCellWithIdentifier:rankIdentify];
         
         if (!rank_cell) {
             
             rank_cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CatigaryRankkCell class])  owner:self options:nil].lastObject;
         }
         
-        rank_cell.rank = self.RankList[indexPath.section];
+        rank_cell.rank = self.rankList[indexPath.section];
         
         rank_cell.bgView.backgroundColor = self.colors[indexPath.section];
          
@@ -360,22 +372,15 @@ static NSString *identify = @"hotCity";
     
         CatigaryHotCityCell *cell =[CatigaryHotCityCell cellInitWithTableView:tableView];
         
-        __block CatigaryCountry *country  = self.Country_Hotcities[indexPath.section];
+        CatigaryCountry *country  = self.country_Hotes[indexPath.section];
         
-        cell.hotCities = country.HotCities;
-        
-        cell.lastCell = (indexPath.section == (self.Country_Hotcities.count - 1));
-        
+        cell.hot_cities = country.hot_cities;
+    
         cell.actionBlock = ^(NSString *city){
             
-            if ([city isEqualToString:@"more"]) {
-                
-                [self CaseStateWithSection:indexPath.section];
-                
-            }else{
-                
-                [self CaseHotCityWithCityName:city belongCountry:country.countryName];
-            }
+            //设置一个更多城市，城市名称为空，城市名称是否为空，做为跳转判断的标准
+            
+            city ? [self CaseHotCityWithCityName:city belongCountry:country.country] :  [self CaseStateWithSection:indexPath.section];
             
         };
         
@@ -391,7 +396,7 @@ static NSString *identify = @"hotCity";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    CatigoryRank *rank = self.RankList[indexPath.section];
+    CatigoryRank *rank = self.rankList[indexPath.section];
     
     [rank.countryName containsString:@"澳"] ?   [self CaseAU:rank] : [self CaseUK:rank] ;
  }
@@ -399,67 +404,63 @@ static NSString *identify = @"hotCity";
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
     
-    
-    if (tableView == self.City_tableView) {
-        
-        CatigaryCountry *group = self.Country_Hotcities[section];
-        HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.countryName];
-        SectionView.backgroundColor = XCOLOR_WHITE;
-        [SectionView arrowButtonHiden:NO];
-        SectionView.actionBlock = ^{
-            
-            [self CaseStateWithSection:section];
-        };
-        
-        return  SectionView;
-        
+    NSString *title;
+    if (tableView == self.city_tableView) {
+          
+        CatigaryCountry *group = self.country_Hotes[section];
+        title = group.country;
     }
     
- 
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:nil];
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:title];
     SectionView.backgroundColor = XCOLOR_WHITE;
+    [SectionView arrowButtonHiden:!(tableView == self.city_tableView)];
+    SectionView.actionBlock = ^{
+        
+        [self CaseStateWithSection:section];
+    };
+   
+
     return SectionView;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return tableView == self.City_tableView ? FLOWLAYOUT_CityW + 20 : 80;
+    return tableView == self.city_tableView ? FLOWLAYOUT_CityW + 20 : 80;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return tableView == self.City_tableView ? 50 : 12;
+    return tableView == self.city_tableView ? SECTION_HEADER_HIGHT : 12;
 }
-
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return HEIGHT_ZERO;
+}
 
 #pragma mark : UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    if (![scrollView isKindOfClass:[UICollectionView class]]) {
+//    if ([scrollView isKindOfClass:[UICollectionView class]]) return;
+//    if ([scrollView isKindOfClass:[UITableView class]] || !scrollView.isDragging)  return;
+    
+    if (self.bgView.isDragging) {
         
+        //监听滚动，实现顶部工具条按钮切换
         
-        if ([scrollView isKindOfClass:[UITableView class]] || !scrollView.isDragging)  return;
+        CGFloat offsetX = scrollView.contentOffset.x;
         
-        if (self.bgView.isDragging) {
-            
-            //监听滚动，实现顶部工具条按钮切换
-            CGPoint offset = scrollView.contentOffset;
-            
-            CGFloat offsetX = offset.x;
-            
-            CGFloat width = scrollView.frame.size.width;
-            
-            NSInteger pageNum =  (offsetX + .5f *  width) / width;
-            
-            [self.topToolView setSelectedIndex:pageNum];
-            // 限制y轴不动
-            self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
-        }
+        CGFloat width = scrollView.frame.size.width;
+        
+        NSInteger pageNum =  (offsetX + .5f *  width) / width;
+        
+        [self.topToolView setSelectedIndex:pageNum];
+        // 限制y轴不动
+        self.bgView.contentSize =  CGSizeMake(3 * XSCREEN_WIDTH, 0);
     }
+    
 }
 
 
@@ -471,14 +472,13 @@ static NSString *identify = @"hotCity";
 }
 
 
+
 - (void)leftViewMessage:(NSNotification *)noti{
     
     NSString *object = (NSString *)noti.object;
     
-    if (1 == object.integerValue) {
-        
-        [self leftViewMessage];
-    }
+    if (1 == object.integerValue) [self leftViewMessage];
+    
 }
 
 //导航栏 leftBarButtonItem
@@ -512,8 +512,8 @@ static NSString *identify = @"hotCity";
 }
 
 //打开左侧菜单
--(void)showLeftMenu
-{
+-(void)showLeftMenu{
+    
     [self.sideMenuViewController presentLeftMenuViewController];
     
 }
@@ -555,24 +555,24 @@ static NSString *identify = @"hotCity";
 {
     
     
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName];
-    vc.coreCountry = country;
-    
+    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName country:country];
+   
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //英国、澳大利亚地区列表
 -(void)CaseStateWithSection:(NSInteger)section{
     
-    CatigaryCountry *country = self.Country_Hotcities[section];
+    CatigaryCountry *country = self.country_Hotes[section];
     
     CountryStateViewController *country_state= [[CountryStateViewController alloc] init];
     
-    country_state.countryName = country.countryName;
+    country_state.countryName = country.country;
     
     [self.navigationController pushViewController:country_state animated:YES];
 }
 
+//从首页跳转到热门留学目的地
 - (void)jumpToHotCity{
 
     [self.bgView setContentOffset:CGPointZero animated:YES];

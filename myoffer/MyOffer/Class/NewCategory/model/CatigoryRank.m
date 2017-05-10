@@ -11,8 +11,7 @@
 @implementation CatigoryRank
 
 
--(instancetype)initWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type
-{
+- (instancetype)initWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type{
     
     self = [super init];
     
@@ -41,7 +40,7 @@
     return self;
 }
 
-+(instancetype)rankItemInitWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type{
++ (instancetype)rankItemInitWithIconName:(NSString *)iconName titleName:(NSString *)title rankType:(NSString *)type{
     
     return [[self alloc] initWithIconName:iconName titleName:title rankType:type];
 }

@@ -11,29 +11,10 @@
 
 @implementation CatigaryCountry
 
-+(instancetype)ContryItemInitWithCountryDictionary:(NSDictionary *)countryDic
-{
-
-    return [[self alloc] initWithCountryDictionary:countryDic];
++ (NSDictionary *)mj_objectClassInArray{
+    
+    return @{@"hot_cities" : @"CatigaryHotCity"};
 }
 
--(instancetype)initWithCountryDictionary:(NSDictionary *)countryDic{
-
-    self = [super init];
-    
-    if (self) {
-        
-        self.countryName = countryDic[@"country"];
-        self.HotCities = [CatigaryHotCity mj_objectArrayWithKeyValuesArray: countryDic[@"hot_cities"]];
-        
-        for (CatigaryHotCity *city in self.HotCities) {
-            
-            city.country = self.countryName;
-        }
-        
-     }
-    
-    return self;
-}
 
 @end

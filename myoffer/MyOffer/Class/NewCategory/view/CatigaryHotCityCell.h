@@ -12,7 +12,7 @@ typedef void(^HotCityCellBlock)(NSString *city);
 
 @interface CatigaryHotCityCell : UITableViewCell
 
-@property(nonatomic,strong)NSArray *hotCities;
+@property(nonatomic,strong)NSArray *hot_cities;
 @property(nonatomic,assign)BOOL lastCell;
 @property(nonatomic,copy)HotCityCellBlock actionBlock;
 

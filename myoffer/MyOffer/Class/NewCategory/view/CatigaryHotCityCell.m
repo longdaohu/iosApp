@@ -18,27 +18,22 @@
 @end
 @implementation CatigaryHotCityCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
+static NSString *cityIdentify = @"hotCity";
 
 + (instancetype)cellInitWithTableView:(UITableView *)tableView
 {
-    static NSString *Identifier = @"third";
     
-    CatigaryHotCityCell *cell =[tableView dequeueReusableCellWithIdentifier:Identifier];
+    CatigaryHotCityCell *cell =[tableView dequeueReusableCellWithIdentifier:cityIdentify];
     
     if (!cell) {
         
-        cell =[[CatigaryHotCityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
+        cell =[[CatigaryHotCityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cityIdentify];
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -69,10 +64,7 @@
    
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
-    
     flowlayout.itemSize = CGSizeMake(FLOWLAYOUT_CityW,FLOWLAYOUT_CityW);
-    // 设置item行与行之间的间隙
-    //    flowlayout.minimumLineSpacing = 0;
     // 设置item列与列之间的间隙
     flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
     flowlayout.sectionInset = UIEdgeInsetsMake(0, ITEM_MARGIN, 0, ITEM_MARGIN);//sectionInset的设置与item的宽高不一致会出现警报信息
@@ -90,13 +82,11 @@
 
     
 }
+-(void)setHot_cities:(NSArray *)hot_cities{
 
-
-- (void)setHotCities:(NSArray *)hotCities{
-
-    _hotCities = hotCities;
+    _hot_cities = hot_cities;
     
-    [self.CollectionView  reloadData];
+//  [self.CollectionView  reloadData];
 }
 
 
@@ -119,15 +109,11 @@
 }
 
 
-#pragma mark —————— UICollectionViewDataSource UICollectionViewDelegate
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
-    return 1;
-}
+#pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return  self.hotCities.count + 1;
+    return  self.hot_cities.count;
 }
 
 static NSString *identify = @"cityCell";
@@ -136,15 +122,8 @@ static NSString *identify = @"cityCell";
     
     CatigaryCityCollectionCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     
-    if (indexPath.row == self.hotCities.count) {
+    cell.city = self.hot_cities[indexPath.row];
 
-        cell.moreCity  =  YES;
-        
-    }else{
-    
-        cell.city = self.hotCities[indexPath.row];
-
-    }
     
     return cell;
     
@@ -154,25 +133,11 @@ static NSString *identify = @"cityCell";
     
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-
-    if (indexPath.row == self.hotCities.count) {
-        
-        if (self.actionBlock) {
-            
-            self.actionBlock(@"more");
-        }
-        
-    }else{
     
-        CatigaryHotCity *hotCity = self.hotCities[indexPath.row];
+    CatigaryHotCity *hotCity = self.hot_cities[indexPath.row];
         
-        if (self.actionBlock) {
+    if (self.actionBlock) self.actionBlock(hotCity.city);
             
-            self.actionBlock(hotCity.city);
-        }
-        
-    }
-
     
 }
 
