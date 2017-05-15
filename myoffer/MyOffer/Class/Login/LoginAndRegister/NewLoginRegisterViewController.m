@@ -406,14 +406,12 @@
         
     }else{
         
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-        [hud applySuccessStyle];
-        [hud hideAnimated:YES afterDelay:2];
-        [hud setHiddenBlock:^(KDProgressHUD *hud) {
+        MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
+        HUD.completionBlock = ^{
             
             [self dismiss];
             
-        }];
+        };
         
     }
     
@@ -657,12 +655,14 @@
          [MobClick event:@"myoffer_Register"];
          [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
 
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud hideAnimated:YES afterDelay:2];
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
-             [self dismiss];
-         }]; 
+         MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:nil ToView:nil];
+         hud.completionBlock = ^{
+             
+              [self dismiss];
+         };
+         
+       
+
      }];
 
 }

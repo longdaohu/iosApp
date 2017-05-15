@@ -29,22 +29,14 @@
 //检查版本更新
 -(void)checkAPPVersion
 {
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
-    [NSURLConnection connectionWithRequest:req delegate:self];
-}
-//检查版本更新
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
+  
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    // app名称
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
-    NSError *error;
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-    
-    NSDictionary *appInfo = (NSDictionary *)jsonObject;
-    NSArray *infoContent = [appInfo objectForKey:@"results"];
-    NSString *storeVersion = [[infoContent objectAtIndex:0] objectForKey:@"version"];
-    
-    self.versionLab.text = [NSString stringWithFormat:@"Version %@",storeVersion];
+     self.versionLab.text = [NSString stringWithFormat:@"Version %@",app_Version];
     
 }
+
 
 @end

@@ -205,12 +205,14 @@
                            parameters:@{@"accountInfo":infoParameters}
                               success:^(NSInteger statusCode, id response) {
                                    if (self.Email.length > 0) {
-                                      KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-                                      [hud applySuccessStyle];
-                                      [hud hideAnimated:YES afterDelay:2];
-                                      [hud setHiddenBlock:^(KDProgressHUD *hud) {
-                                          [self dismiss];
-                                      }];
+                                     
+                                       MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:@"邮箱设置成功" ToView:self.view];
+                                       hud.completionBlock = ^{
+                                           
+                                           [self dismiss];
+                                           
+                                       };
+                                       
                                   }else{
                                       [self setNewPassword];
                                   }

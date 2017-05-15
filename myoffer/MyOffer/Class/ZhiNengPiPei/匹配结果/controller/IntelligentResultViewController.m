@@ -577,20 +577,17 @@
      parameters:@{@"uid": self.NewSelectUniversityIDs}
      success:^(NSInteger statusCode, id response) {
      
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud setLabelText:GDLocalizedString(@"ApplicationProfile-0015")];//@"加入成功"];
-         [hud hideAnimated:YES afterDelay:2];
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
-             
-             
-          ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
-             
-          if (self.fromStyle.length > 0) apply.backStyle = YES;
-            
-          [self.navigationController pushViewController:apply animated:YES];
          
-         }];
+         MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:@"加入成功" ToView:self.view];
+         hud.completionBlock = ^{
+             
+             ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
+             
+             if (self.fromStyle.length > 0) apply.backStyle = YES;
+             
+             [self.navigationController pushViewController:apply animated:YES];
+         };
+         
      }];
 }
 

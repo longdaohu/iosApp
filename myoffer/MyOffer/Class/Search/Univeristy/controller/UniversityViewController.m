@@ -702,11 +702,9 @@ typedef enum {
     NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
     [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.item.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
         
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-        [hud applySuccessStyle];
-        NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
-        [hud setLabelText:title];//@"关注成功"];
-        [hud hideAnimated:YES afterDelay:1];
+         NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
+ 
+       [MBProgressHUD showSuccessWithMessage:title ToView:self.view];
         
         weakSelf.favorited =  !weakSelf.favorited;
         [weakSelf configureLikeButton:weakSelf.favorited];

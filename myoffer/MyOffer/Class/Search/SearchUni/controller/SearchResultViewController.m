@@ -25,7 +25,6 @@
     BOOL _loading;
     BOOL _Autralia;
 }
-@property(nonatomic,strong)KDProgressHUD *progressHub;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)XWGJnodataView *noDataView;
 
@@ -246,7 +245,6 @@
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
         
   
-          [self.progressHub removeFromSuperViewOnHide];
          
          [_tableView reloadData];
          _loading = NO;

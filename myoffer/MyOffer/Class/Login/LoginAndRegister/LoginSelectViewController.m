@@ -191,15 +191,14 @@
     [self
      startAPIRequestWithSelector:kAPISelectorBind parameters:self.parameter success:^(NSInteger statusCode, id response) {
          
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud hideAnimated:YES afterDelay:2];
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
-
+         MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
+         HUD.completionBlock = ^{
+             
              [self.navigationController dismissViewControllerAnimated:YES completion:nil];
              
-         }];
-     }];
+         };
+         
+      }];
 }
 
 

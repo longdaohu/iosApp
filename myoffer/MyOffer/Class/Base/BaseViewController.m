@@ -7,13 +7,12 @@
 //
 
 #import "BaseViewController.h"
-#import "KDProgressHUD.h"
 #import "NSString+MD5.h"
 #import "NewLoginRegisterViewController.h"
 
 @implementation BaseViewController {
     NSMutableArray *_APIRequestTasks;
-    KDProgressHUD *_requestHUD;
+    MBProgressHUD *_requestHUD;
     
     UITapGestureRecognizer *_endEditingTapGestureRecognizer;
 }
@@ -35,7 +34,7 @@
     
     if (!_requestHUD && showHUD) {
 
-        _requestHUD = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
+        _requestHUD = [MBProgressHUD showMessage:nil];
      }
     
     
@@ -53,7 +52,7 @@
      success:^(NSInteger statusCode, NSDictionary *response) {
          [_APIRequestTasks removeObject:task];
          if (_APIRequestTasks.count == 0) {
-             [_requestHUD hideAnimated:NO];
+             [_requestHUD hideAnimated:YES];
              _requestHUD = nil;
          }
          
@@ -71,7 +70,7 @@
          [_APIRequestTasks removeObject:task];
         
          if (_APIRequestTasks.count == 0) {
-             [_requestHUD hideAnimated:NO];
+             [_requestHUD hideAnimated:YES];
              _requestHUD = nil;
          }
          

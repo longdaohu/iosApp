@@ -23,7 +23,6 @@ typedef enum {
 #import "IntelligentResultViewController.h"
 #import "CenterHeaderView.h"
 #import "MeCenterHeaderViewFrame.h"
-#import "UIImage+GIF.h"
 #import "MBTIViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
@@ -85,7 +84,8 @@ typedef enum {
     [super viewDidLoad];
     
     [self makeUI];
-}
+    
+ }
 
 
 -(void)makeUI
@@ -97,13 +97,8 @@ typedef enum {
     [self makeCellArray];
     
     [self makeOther];
-    /*
-    UIImageView *loadingView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:loadingView];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"loding" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    loadingView.image =  [UIImage sd_animatedGIFWithData:data];
-    */
+  
+    
     
     /* 美洽
     //#pragma 在合适的地方监听有新消息的广播

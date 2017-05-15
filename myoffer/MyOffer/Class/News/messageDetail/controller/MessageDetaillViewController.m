@@ -40,8 +40,6 @@
 @property(nonatomic,strong)UIButton *shareBtn;
 //导航右边按钮
 @property(nonatomic,strong)UIView *RightView;
-
-@property(nonatomic,strong)KDProgressHUD *hud;
 //分享
 @property(nonatomic,strong)ShareNViewController *shareVC;
 //无数据提示框
@@ -200,11 +198,8 @@
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
         [weakSelf updateUIWithMessage:response];
-        
-        [weakSelf.tableView reloadData];
-        
+         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         weakSelf.noDataView.hidden = NO;
@@ -286,6 +281,8 @@
     }];
     
     
+    [self.tableView reloadData];
+
 }
 #pragma mark : WKWebViewDelegate
 

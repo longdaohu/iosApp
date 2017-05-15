@@ -98,12 +98,14 @@
      startAPIRequestWithSelector:kAPISelectorResetPassword
      parameters:@{@"target":self.phoneTF.text, @"new_password": self.passwdTF.text, @"vcode": self.veritfyTF.text}
      success:^(NSInteger statusCode, NSDictionary *response) {
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud hideAnimated:YES afterDelay:2];
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
+       
+         MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
+         HUD.completionBlock = ^{
+             
              [self.navigationController popViewControllerAnimated:YES];
-         }];
+             
+         };
+        
      }];
 
 }

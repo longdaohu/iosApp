@@ -27,8 +27,6 @@
 @property(nonatomic,strong)XBTopToolView *topToolView;
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgView;
-//UIWebView 留学流程
-@property(nonatomic,strong)KDProgressHUD *hud;
 //UITableView 申请攻略
 @property(nonatomic,strong)UITableView *tableView;
 //疑难解答 数组

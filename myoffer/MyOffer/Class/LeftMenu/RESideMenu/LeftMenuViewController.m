@@ -450,9 +450,14 @@
 //照片选择器 图片上传
 #pragma mark ——— UIImagePickerControlleDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+  
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = info[UIImagePickerControllerEditedImage];
     image = [image KD_imageByCroppedToSquare:600];
+
+    self.headerView.iconImage = image;
+    
+    
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
     NSString *path = [NSString stringWithFormat:@"%@m/api/account/portrait",DOMAINURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
@@ -469,19 +474,12 @@
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:body];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[APIClient defaultClient] startTaskWithRequest:request expectedStatusCodes:nil success:^(NSInteger statusCode, id response) {
-      
-        [hud hideAnimated:YES afterDelay:1];
         
-        [hud applySuccessStyle];
-        
-        self.headerView.iconImage = image;
     
     } failure:^(NSInteger statusCode, NSError *error) {
-    
-        [hud hideAnimated:YES];
+        
         [self showAPIErrorAlertView:error clickAction:nil];
         
     }];

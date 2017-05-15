@@ -19,7 +19,7 @@
 
 
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
-@property(nonatomic,strong)KDProgressHUD *hud;
+@property(nonatomic,strong)MBProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 //智能匹配数量
 @property(nonatomic,assign)NSInteger recommendationsCount;
@@ -136,12 +136,10 @@
 
 #pragma mark ——————  WKWebViewDeleage
 // 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
-{
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
-    self.hud = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [self.hud removeFromSuperViewOnHide];
+   self.hud = [MBProgressHUD showMessage:nil];
+ 
 }
 
 // 页面加载完成之后调用
@@ -151,9 +149,9 @@
      NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};" : @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
-    [self.hud hideAnimated:YES];
     
-
+    [self.hud hideAnimated:YES];
+ 
  }
 
 

@@ -258,7 +258,7 @@
     }
     
     //提示筛选结果为空
-    if (self.course_frames.count == 0) [self showHubWithText:@"没有相关专业"];
+    if (self.course_frames.count == 0) [MBProgressHUD showError:@"没有相关专业"];
     
     [self.tableView reloadData];
     
@@ -322,9 +322,9 @@
         //超过6个不能再选择
         if (self.selected_items.count == 6){
         
-            [self showHubWithText:@"最多不能添加超过6个专业"];
-
-          return;
+            [MBProgressHUD showError:@"最多不能添加超过6个专业"];
+            
+            return;
         }
         
         [self.selected_items addObject:courseFrame.course.course_id];
@@ -357,37 +357,21 @@
      startAPIRequestWithSelector:@"POST api/account/apply"
      parameters:@{@"id":self.selected_items}
      success:^(NSInteger statusCode, id response) {
-        
-         KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-         [hud applySuccessStyle];
-         [hud setLabelText:@"加入成功"];
-         [hud hideAnimated:YES afterDelay:2];
-         [hud setHiddenBlock:^(KDProgressHUD *hud) {
-             
+         
+         MBProgressHUD *hud  = [MBProgressHUD showSuccessWithMessage:@"加入成功" ToView:self.view];
+         hud.completionBlock = ^{
+           
              [self dismiss];
              
-         }];
+         };
+         
+       
+         
      }];
  
     
 }
 
-- (void)showHubWithText:(NSString *)text{
-
-    MBProgressHUD  *HUD =[MBProgressHUD showHUDAddedTo:self.view animated:NO]; //HUD效果添加哪个视图上
-    HUD.mode = MBProgressHUDModeText;
-    HUD.label.text = text;
-    [HUD hideAnimated:YES afterDelay:1.0f];     //10s后隐藏HUD
-    HUD.delegate = self;
-}
-
-#pragma mark : MBProgressHUDDelegate
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-
-    [hud removeFromSuperview];
-    
-    hud = nil;
-}
 
 
 -(void)dealloc{

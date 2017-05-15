@@ -83,13 +83,15 @@
 - (IBAction)send {
     
     [self startAPIRequestWithSelector:kAPISelectorFeedback parameters:@{@"content": self.reponseView.text} success:^(NSInteger statusCode, id response) {
-     
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-        [hud applySuccessStyle];
-        [hud hideAnimated:YES afterDelay:1];
-        [hud setHiddenBlock:^(KDProgressHUD *hud) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:@"加入成功" ToView:self.view];
+        hud.completionBlock = ^{
+            
             [self.navigationController popViewControllerAnimated:YES];
-        }];
+
+        };
+
+        
     }];
 }
 

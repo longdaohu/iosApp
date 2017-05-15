@@ -434,13 +434,12 @@
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
   
-        
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow   animated:YES];
-        [hud applySuccessStyle];
-        [hud setLabelText:@"账号绑定成功"];
-        [hud hideAnimated:YES afterDelay:1];
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+       MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:@"账号绑定成功" ToView:self.view];
+       HUD.completionBlock = ^{
+            
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
+        };
         
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {

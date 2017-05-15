@@ -179,14 +179,15 @@
     
     
     [self startAPIRequestWithSelector:kAPISelectorUpdateAccountInfo  parameters:@{@"accountInfo":infoParameters} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-     
-        
-        KDProgressHUD *hud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-        [hud applySuccessStyle];
-        [hud hideAnimated:YES afterDelay:0.5];
-        [hud setHiddenBlock:^(KDProgressHUD *hud) {
+  
+        MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:@"密码设置成功" ToView:self.view];
+        hud.completionBlock = ^{
+            
             [self dismiss];
-        }];
+            
+        };
+
+        
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         

@@ -14,7 +14,7 @@
 #import "SeviceDetailViewController.h"
 
 @interface ServiceMallViewController ()<UIWebViewDelegate,WKNavigationDelegate>
-@property(nonatomic,strong)KDProgressHUD *progress;
+@property(nonatomic,strong)MBProgressHUD *HUD;
 @property(nonatomic,strong)UIWebView *Web;
 
 
@@ -87,8 +87,7 @@
 #pragma mark ——————  WKWebViewDeleage
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-     self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.progress setRemoveFromSuperViewOnHide:YES];
+     self.HUD = [MBProgressHUD showMessage:nil];
     
 }
 
@@ -99,7 +98,7 @@
      NSString *jumpF = @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};";
     [webView stringByEvaluatingJavaScriptFromString:jumpF];
     
-    [self.progress hideAnimated:YES];
+    [ self.HUD hideAnimated:YES];
     
 }
 
@@ -149,15 +148,10 @@
     return YES;
 }
 
-
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 
-    [self.progress hideAnimated:YES];
-    //    KDProgressHUD *failHud = [KDProgressHUD showHUDAddedTo:self.view animated:NO];
-    //    failHud.labelText = @"加载失败";
-    //    [failHud hideAnimated:YES afterDelay:1];
-    //    [failHud removeFromSuperViewOnHide];
-
+    [ self.HUD hideAnimated:YES];
+ 
 }
 
 

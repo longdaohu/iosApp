@@ -40,9 +40,7 @@ static NSString * const reuseIdentifier = @"subjectCell";
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CatigorySubjectCell class]) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     self.collectionView.backgroundColor = XCOLOR_BG;
-    
-    
-
+  
 }
 
 - (void)didReceiveMemoryWarning {
