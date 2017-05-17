@@ -8,6 +8,7 @@
 
 #import "ApplyStatusRecord.h"
 #import "Applycourse.h"
+#import "MyOfferUniversityModel.h"
 
 @implementation ApplyStatusRecord
 
@@ -18,6 +19,15 @@
  
  }
  */
+
+- (void)setUniversity:(MyOfferUniversityModel *)university{
+
+    _university = university;
+    
+    self.uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:university];
+}
+
+
 
 
 @end

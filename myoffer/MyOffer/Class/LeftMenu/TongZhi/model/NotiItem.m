@@ -26,11 +26,6 @@
 
 
 /*
-+ (NSDictionary *)mj_objectClassInArray{
-    
-    return @{@"articles" : @"MyOfferArticle"};
-}
-
 
 + (NSDictionary *)mj_objectClassInArray
 {

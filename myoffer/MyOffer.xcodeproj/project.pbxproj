@@ -266,7 +266,6 @@
 		AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2497E1D5B215300DD7939 /* ApplyStatusViewController.m */; };
 		AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249811D5B215300DD7939 /* UniversityFrame.m */; };
 		AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */; };
-		AEA249CB1D5B215300DD7939 /* ApplyStatusRecordGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */; };
 		AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249881D5B215300DD7939 /* ApplyStatusCell.m */; };
 		AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */; };
 		AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249941D5B215300DD7939 /* MeViewController.m */; };
@@ -907,8 +906,6 @@
 		AEA249811D5B215300DD7939 /* UniversityFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrame.m; sourceTree = "<group>"; };
 		AEA249821D5B215300DD7939 /* ApplyStatusRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusRecord.h; sourceTree = "<group>"; };
 		AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecord.m; sourceTree = "<group>"; };
-		AEA249841D5B215300DD7939 /* ApplyStatusRecordGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusRecordGroup.h; sourceTree = "<group>"; };
-		AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecordGroup.m; sourceTree = "<group>"; };
 		AEA249871D5B215300DD7939 /* ApplyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusCell.h; sourceTree = "<group>"; };
 		AEA249881D5B215300DD7939 /* ApplyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusCell.m; sourceTree = "<group>"; };
 		AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
@@ -2281,8 +2278,6 @@
 				AEA249811D5B215300DD7939 /* UniversityFrame.m */,
 				AEA249821D5B215300DD7939 /* ApplyStatusRecord.h */,
 				AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */,
-				AEA249841D5B215300DD7939 /* ApplyStatusRecordGroup.h */,
-				AEA249851D5B215300DD7939 /* ApplyStatusRecordGroup.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3980,7 +3975,6 @@
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,
 				463E3AB91B23105F00E0BAF8 /* NSDate+KDUtilities.m in Sources */,
-				AEA249CB1D5B215300DD7939 /* ApplyStatusRecordGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

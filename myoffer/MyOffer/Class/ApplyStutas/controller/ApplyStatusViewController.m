@@ -8,7 +8,6 @@
 
 #import "ApplyStatusViewController.h"
 #import "ApplyStatusRecord.h"
-#import "ApplyStatusRecordGroup.h"
 #import "MyOfferUniversityModel.h"
 #import "UniverstityTCell.h"
 #import "ApplyStatusCell.h"
@@ -18,7 +17,7 @@
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) DefaultTableView *tableView;
 //申请记录数组
-@property(nonatomic,strong)NSArray *Record_Groups;
+@property(nonatomic,strong)NSArray *groups;
 
 
 @end
@@ -55,9 +54,9 @@
 
 -(void)makeTableView
 {
-    self.tableView                 = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.dataSource      = self;
-    self.tableView.delegate        = self;
+    self.tableView   = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView.dataSource  = self;
+    self.tableView.delegate   = self;
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
 
@@ -125,21 +124,13 @@
 
 //根据请求数据配置UI
 -(void)updateUIWithResponse:(id)response{
-
     
+
     [self.tableView.mj_header endRefreshing];
     
-    NSMutableArray *groups = [NSMutableArray array];
-    
-    for (NSDictionary *record in response[@"records"]) {
-        
-        [groups addObject:[ApplyStatusRecordGroup ApplyRecourseGroupWithDictionary:record]];
-        
-    }
-    
-    self.Record_Groups = [groups copy];
+     self.groups = [ApplyStatusRecord mj_objectArrayWithKeyValuesArray:response[@"records"]];
  
-    if (self.Record_Groups.count > 0){
+    if (self.groups.count > 0){
     
         [self.tableView emptyViewWithHiden:YES];
         
@@ -152,10 +143,8 @@
     
     [self.tableView reloadData];
     
-    if (!groups.count) {
-        
-        [self.tableView.mj_header removeFromSuperview];
-    }
+    if (self.groups.count == 0) [self.tableView.mj_header removeFromSuperview];
+    
     
 }
 
@@ -170,9 +159,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    ApplyStatusRecordGroup *group   = self.Record_Groups[section];
-
-    return  group.universityFrame.cell_Height;
+    
+    ApplyStatusRecord *record = self.groups[section];
+ 
+    return  record.uniFrame.cell_Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -181,13 +171,17 @@
 }
 
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
-    ApplyStatusRecordGroup *group      = self.Record_Groups[section];
+   
+    ApplyStatusRecord *record = self.groups[section];
+   
     uni_cell.userInteractionEnabled = NO;
+   
     uni_cell.backgroundColor = XCOLOR_WHITE;
-    uni_cell.uniFrame = group.universityFrame;
+   
+    uni_cell.uniFrame = record.uniFrame;
     
     return (UIView *)uni_cell;
 }
@@ -195,7 +189,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  
-    return self.Record_Groups.count;
+    return self.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -207,9 +201,7 @@
     
     ApplyStatusCell *cell =[ApplyStatusCell cellWithTableView:tableView];
     
-    ApplyStatusRecordGroup *group = self.Record_Groups[indexPath.section];
-    
-    cell.record = group.record;
+    cell.record = self.groups[indexPath.section];
     
     return cell;
 }

@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 @class Applycourse;
+@class MyOfferUniversityModel;
+#import "UniversityFrameNew.h"
 @interface ApplyStatusRecord : NSObject
-
 @property(nonatomic,copy)NSString *state;
+@property(nonatomic,strong)UniversityFrameNew *uniFrame;
+@property(nonatomic,strong)MyOfferUniversityModel *university;
 @property(nonatomic,strong)Applycourse *course;
-
 
 
 @end
