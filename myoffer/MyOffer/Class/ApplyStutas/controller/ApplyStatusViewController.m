@@ -10,8 +10,7 @@
 #import "ApplyStatusRecord.h"
 #import "ApplyStatusRecordGroup.h"
 #import "MyOfferUniversityModel.h"
-#import "UniItemFrame.h"
-#import "UniversityCell.h"
+#import "UniverstityTCell.h"
 #import "ApplyStatusCell.h"
 
  #define STATUSPAGE @"page申请状态"
@@ -117,7 +116,7 @@
  
     [self startAPIRequestWithSelector:kAPISelectorApplyStutas parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
     
-        [weakSelf makeUIConfigrationWith:response];
+        [weakSelf updateUIWithResponse:response];
         
     }];
    
@@ -125,7 +124,7 @@
 
 
 //根据请求数据配置UI
--(void)makeUIConfigrationWith:(id)response{
+-(void)updateUIWithResponse:(id)response{
 
     
     [self.tableView.mj_header endRefreshing];
@@ -162,7 +161,8 @@
 
 
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark : UITableViewDelegate  UITableViewDataSoure
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
     return PADDING_TABLEGROUP;
@@ -170,7 +170,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  Uni_Cell_Height;
+    ApplyStatusRecordGroup *group   = self.Record_Groups[section];
+
+    return  group.universityFrame.cell_Height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -181,10 +183,11 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
+    UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
     ApplyStatusRecordGroup *group      = self.Record_Groups[section];
     uni_cell.userInteractionEnabled = NO;
-    uni_cell.itemFrame = group.universityFrame;
+    uni_cell.backgroundColor = XCOLOR_WHITE;
+    uni_cell.uniFrame = group.universityFrame;
     
     return (UIView *)uni_cell;
 }
@@ -203,7 +206,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ApplyStatusCell *cell =[ApplyStatusCell cellWithTableView:tableView];
+    
     ApplyStatusRecordGroup *group = self.Record_Groups[indexPath.section];
+    
     cell.record = group.record;
     
     return cell;

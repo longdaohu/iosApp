@@ -9,7 +9,7 @@
 #import "ApplyStatusRecordGroup.h"
 #import "ApplyStatusRecord.h"
 #import "MyOfferUniversityModel.h"
-#import "UniItemFrame.h"
+#import "UniversityFrameNew.h"
 
 @implementation ApplyStatusRecordGroup
 
@@ -24,7 +24,10 @@
     self =[super  init];
     if (self) {
         
-        self.universityFrame = [UniItemFrame frameWithUniversity:[MyOfferUniversityModel mj_objectWithKeyValues:recordDic[@"university"]] ];
+        
+       MyOfferUniversityModel *uni = [MyOfferUniversityModel mj_objectWithKeyValues:recordDic[@"university"]];
+         
+        self.universityFrame = [UniversityFrameNew universityFrameWithUniverstiy: uni];
      
         self.record   = [ApplyStatusRecord mj_objectWithKeyValues:recordDic];
  

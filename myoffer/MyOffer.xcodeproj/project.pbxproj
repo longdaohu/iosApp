@@ -49,9 +49,6 @@
 		AE05A7321E8A51940059C2BF /* EmallCatigoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */; };
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
-		AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */; };
-		AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */; };
-		AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
@@ -412,6 +409,7 @@
 		AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */; };
 		AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */; };
 		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
+		AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC47A411ECC20D60085F19A /* UniverstityTCell.m */; };
 		AED5A85A1DDEF25800E70289 /* PipeiGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A8591DDEF25800E70289 /* PipeiGroup.m */; };
 		AED5A85D1DDEF5AF00E70289 /* PipeiEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A85C1DDEF5AF00E70289 /* PipeiEditCell.m */; };
 		AED5A8601DDF062800E70289 /* PipeiCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5A85F1DDF062800E70289 /* PipeiCountryView.m */; };
@@ -537,11 +535,6 @@
 		AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigroySectionView.m; sourceTree = "<group>"; };
 		AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityDetailItem.h; path = controller/UniversityDetailItem.h; sourceTree = "<group>"; };
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
-		AE133EA31D6EE26000AC9C42 /* UniItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniItemFrame.h; path = controller/UniItemFrame.h; sourceTree = "<group>"; };
-		AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniItemFrame.m; path = controller/UniItemFrame.m; sourceTree = "<group>"; };
-		AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityCell.h; path = controller/UniversityCell.h; sourceTree = "<group>"; };
-		AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityCell.m; path = controller/UniversityCell.m; sourceTree = "<group>"; };
-		AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UniversityCell.xib; path = controller/UniversityCell.xib; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
@@ -1173,6 +1166,8 @@
 		AEBA44CF1E88C38C005E923B /* ServiceSKUFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSKUFrame.h; sourceTree = "<group>"; };
 		AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSKUFrame.m; sourceTree = "<group>"; };
 		AEC2B6141E948C5300631F2C /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareMyOffer.png; sourceTree = "<group>"; };
+		AEC47A401ECC20D60085F19A /* UniverstityTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniverstityTCell.h; sourceTree = "<group>"; };
+		AEC47A411ECC20D60085F19A /* UniverstityTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniverstityTCell.m; sourceTree = "<group>"; };
 		AED5A8581DDEF25800E70289 /* PipeiGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiGroup.h; path = ../controller/PipeiGroup.h; sourceTree = "<group>"; };
 		AED5A8591DDEF25800E70289 /* PipeiGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PipeiGroup.m; path = ../controller/PipeiGroup.m; sourceTree = "<group>"; };
 		AED5A85B1DDEF5AF00E70289 /* PipeiEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PipeiEditCell.h; path = ../controller/PipeiEditCell.h; sourceTree = "<group>"; };
@@ -1962,8 +1957,6 @@
 				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */,
 				AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */,
-				AE133EA31D6EE26000AC9C42 /* UniItemFrame.h */,
-				AE133EA41D6EE26000AC9C42 /* UniItemFrame.m */,
 				AE175BBC1D79593600FD8865 /* UniDetailGroup.h */,
 				AE175BBD1D79593600FD8865 /* UniDetailGroup.m */,
 			);
@@ -1973,9 +1966,8 @@
 		AE7107A71D767D8D00019B1F /* V */ = {
 			isa = PBXGroup;
 			children = (
-				AE133EA91D6EE98A00AC9C42 /* UniversityCell.h */,
-				AE133EAA1D6EE98A00AC9C42 /* UniversityCell.m */,
-				AE133EAB1D6EE98A00AC9C42 /* UniversityCell.xib */,
+				AEC47A401ECC20D60085F19A /* UniverstityTCell.h */,
+				AEC47A411ECC20D60085F19A /* UniverstityTCell.m */,
 				AE93E4E01D6DAAF80025FC58 /* UniverstyHeaderView.h */,
 				AE93E4E11D6DAAF80025FC58 /* UniverstyHeaderView.m */,
 				AE7825DA1D70295400AA4EF4 /* UniversityRightView.h */,
@@ -3496,7 +3488,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3584,7 +3576,6 @@
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
-				AE133EAD1D6EE98A00AC9C42 /* UniversityCell.xib in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
 				AE1FD73A1D5C929500FFD5A8 /* Pre-comp 1_00022.png in Resources */,
@@ -3782,7 +3773,6 @@
 				AE6FF2A11E89163600C2A013 /* EmallCatigoryViewController.m in Sources */,
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
 				AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */,
-				AE133EAC1D6EE98A00AC9C42 /* UniversityCell.m in Sources */,
 				AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */,
 				AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */,
 				AE1FD7561D5C929500FFD5A8 /* MJRefreshConst.m in Sources */,
@@ -3847,6 +3837,7 @@
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
+				AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */,
 				AE1FD74D1D5C929500FFD5A8 /* MJRefreshAutoNormalFooter.m in Sources */,
 				AEA24AF81D5B24D200DD7939 /* UIViewController+RESideMenu.m in Sources */,
 				AEA24B851D5B25E000DD7939 /* FilterTableViewCell.m in Sources */,
@@ -3898,7 +3889,6 @@
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
-				AE133EA51D6EE26000AC9C42 /* UniItemFrame.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
 				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
@@ -4206,7 +4196,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

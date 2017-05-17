@@ -16,8 +16,7 @@
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "MyOfferUniversityModel.h"
-#import "UniversityCell.h"
-#import "UniItemFrame.h"
+#import "UniverstityTCell.h"
 #import "UniversityRightView.h"
 #import "UniversityNavView.h"
 #import "UniversityRightView.h"
@@ -31,6 +30,8 @@
 #import "UniversityheaderCenterView.h"
 #import "IntelligentResultViewController.h"
 #import "WYLXViewController.h"
+
+
 
 typedef enum {
     UniversityItemTyDeFault,
@@ -287,10 +288,10 @@ typedef enum {
     
    NSArray *rankNeighbour = [MyOfferUniversityModel  mj_objectArrayWithKeyValuesArray: university.rankNeighbour];
     
-    
     [rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-         UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(MyOfferUniversityModel*)obj];
+        UniversityFrameNew *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy: (MyOfferUniversityModel*)obj];
+        
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";
@@ -417,7 +418,29 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    return indexPath.section == 0 ? self.oneGroup.contentFrame.group_One_Height : Uni_Cell_Height;
+    UniDetailGroup *group = self.groups[indexPath.section];
+
+    CGFloat cellHeight = Uni_Cell_Height;
+    
+    if (indexPath.section == 0) {
+        
+        cellHeight = self.oneGroup.contentFrame.group_One_Height;
+        
+    }else if (indexPath.section == 1){
+        
+        
+        
+    }else{
+        
+  
+        UniversityFrameNew  *uniFrame = group.items[indexPath.row];
+        
+        cellHeight = uniFrame.cell_Height;
+        
+    }
+    
+    
+    return cellHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -459,8 +482,9 @@ typedef enum {
         
     }else{
 
-        UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
-        uni_cell.itemFrame = group.items[indexPath.row];
+        UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+        
+        uni_cell.uniFrame = group.items[indexPath.row];
 
         return uni_cell;
         
@@ -484,9 +508,9 @@ typedef enum {
         
     }else{
         
-        UniItemFrame *uniFrame   = group.items[indexPath.row];
+        UniversityFrameNew *uniFrame   = group.items[indexPath.row];
         
-        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.item.NO_id]  animated:YES];
+        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id]  animated:YES];
     }
     
 }

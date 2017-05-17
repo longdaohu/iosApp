@@ -256,9 +256,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     self.AlertLab.font = XFONT(XFONT_SIZE(1) * 3 + 13);
     
     [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
-    [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_SUBTITLE] forState:UIControlStateDisabled];
+    [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
     [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
-    [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_SUBTITLE] forState:UIControlStateDisabled];
+    [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

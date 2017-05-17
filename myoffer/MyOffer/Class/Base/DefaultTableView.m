@@ -42,7 +42,7 @@
 - (void)makeUI{
     
 
-    self.separatorColor = XCOLOR_RED;
+    self.separatorColor = XCOLOR_line;
     
     self.emptyView  =[EmptyDataView emptyViewWithBlock:^{
         

@@ -9,8 +9,7 @@
 #import "FavoriteViewController.h"
 #import "UniversityViewController.h"
 #import "MyOfferUniversityModel.h"
-#import "UniItemFrame.h"
-#import "UniversityCell.h"
+#import "UniverstityTCell.h"
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -54,7 +53,7 @@
 }
 
 
--(void)makeTableView{
+- (void)makeTableView{
     
     self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
@@ -64,7 +63,6 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
-
 
 
 - (void)viewDidLoad {
@@ -92,22 +90,22 @@
      parameters:nil
      success:^(NSInteger statusCode, id response) {
          
-         [weakSelf updateUIWithresponse:response];
+         [weakSelf updateUIWithResponse:response];
          
      }];
 }
 
 //根据返回数据配置UI
-- (void)updateUIWithresponse:(id)response{
+- (void)updateUIWithResponse:(id)response{
 
     
-    NSArray *universities = (NSArray *)response;
+    NSArray *universities =  [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     
     NSMutableArray *uni_temps = [NSMutableArray array];
     
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        [uni_temps addObject: [UniItemFrame frameWithUniversity:[MyOfferUniversityModel mj_objectWithKeyValues:obj]]];
+        [uni_temps addObject:[UniversityFrameNew universityFrameWithUniverstiy:(MyOfferUniversityModel *)obj]];
         
     }];
    
@@ -145,7 +143,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    return Uni_Cell_Height;
+    UniversityFrameNew *uniFrame = self.favor_Unies[indexPath.section];
+    
+    return uniFrame.cell_Height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -160,18 +160,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
+    UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
     
-    uni_cell.itemFrame = self.favor_Unies[indexPath.section];
+    uni_cell.uniFrame = self.favor_Unies[indexPath.section];
     
     return uni_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UniItemFrame *uniFrame = self.favor_Unies[indexPath.section];
+    UniversityFrameNew *uniFrame = self.favor_Unies[indexPath.section];
     
-     [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.item.NO_id] animated:YES];
+     [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

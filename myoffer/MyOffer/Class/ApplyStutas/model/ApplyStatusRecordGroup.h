@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 @class ApplyStatusRecord;
-@class UniItemFrame;
+@class UniversityFrameNew;
 @interface ApplyStatusRecordGroup : NSObject
-@property(nonatomic,strong)UniItemFrame *universityFrame;   //学校模型数据
+@property(nonatomic,strong)UniversityFrameNew *universityFrame;   //学校模型数据
 @property(nonatomic,strong)ApplyStatusRecord *record;
 
 +(instancetype)ApplyRecourseGroupWithDictionary:(NSDictionary *)recordDic;

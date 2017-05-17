@@ -21,8 +21,7 @@
 #import "MyOfferArticle.h"
 #import "ShareNViewController.h"
 #import "MyOfferUniversityModel.h"
-#import "UniItemFrame.h"
-#import "UniversityCell.h"
+#import "UniverstityTCell.h"
 #import "UniDetailGroup.h"
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
@@ -270,12 +269,16 @@
     
     [article.related_universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        UniItemFrame *uniFrame = [UniItemFrame frameWithUniversity:(MyOfferUniversityModel *)obj];
+        UniversityFrameNew *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy: (MyOfferUniversityModel*)obj];
+        
         [neightbour_temps addObject:uniFrame];
         
         NSString *title = idx == 0 ? @"相关院校" : @"";
+        
         NSArray *items = @[uniFrame];
+        
         UniDetailGroup *group = [UniDetailGroup groupWithTitle:title contentes:items andFooter:YES];
+        
         [self.groups addObject:group];
         
     }];
@@ -372,15 +375,31 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    UniDetailGroup *group = self.groups[0];
+    UniDetailGroup *group = self.groups[indexPath.section];
     
-    MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+    CGFloat cellHeight = Uni_Cell_Height;
+
+    if (indexPath.section == 0) {
+        
+        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+
+        cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
+        
+    }else if (indexPath.section == 1){
+        
+        
+        
+    }else{
+        
+        UniversityFrameNew  *uniFrame = group.items[indexPath.row];
+
+        cellHeight = uniFrame.cell_Height;
+        
+    }
     
-    CGFloat cellHight = indexPath.section== 0 ?  self.webView.mj_h + MessageDetailFrame.MessageDetailHeight: Uni_Cell_Height;
     
-    
-    return cellHight;
-    
+    return cellHeight;
+  
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -413,13 +432,16 @@
     }else if(indexPath.section == 1){
         
         MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
+        
         news_cell.messageFrame =  group.items[indexPath.row];
+        
         return news_cell;
         
     }else{
         
-        UniversityCell *uni_cell =[UniversityCell cellWithTableView:tableView];
-        uni_cell.itemFrame = group.items[indexPath.row];
+        UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+      
+        uni_cell.uniFrame = group.items[indexPath.row];
         
         return uni_cell;
         
@@ -441,11 +463,14 @@
         
         [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
         
-    }else{
+        return;
         
-        UniItemFrame *uniFrame   = group.items[indexPath.row];
-        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.item.NO_id] animated:YES];
     }
+    
+        UniversityFrameNew *uniFrame   = group.items[indexPath.row];
+        
+        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
+    
     
 }
 
