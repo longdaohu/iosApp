@@ -9,7 +9,7 @@
 #import "PromttViewController.h"
 
 @interface PromttViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *dismissBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *dismissBtn;
 
 @end
 
@@ -27,28 +27,17 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self.dismissBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-    self.dismissBtn.titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:(XPERCENT*22)];
-    self.dismissBtn.layer.borderColor = XCOLOR_RED.CGColor;
-    
+ 
     UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapWithDismiss)];
     [self.view addGestureRecognizer:tap];
     
 }
 
-- (IBAction)dismissOnclick:(UIButton *)sender {
-    
-    if (self.actionBlock) {
-        
-        self.actionBlock();
-    }
-}
 
 -(void)tapWithDismiss{
     
+    if (self.actionBlock)  self.actionBlock();
     
-    [self dismissOnclick:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -40,7 +40,10 @@
 }
 
 - (void)makeUI{
+    
 
+    self.separatorColor = XCOLOR_RED;
+    
     self.emptyView  =[EmptyDataView emptyViewWithBlock:^{
         
         if (self.actionBlock) self.actionBlock();

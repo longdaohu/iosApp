@@ -29,7 +29,7 @@
 #import "MessageArticle.h"
 
 @interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
 //嵌套webView到Cell中
 @property(nonatomic,strong)WKWebView *webView;
 //请求返回数据字典
@@ -157,7 +157,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
     [self.view addSubview:self.tableView];

@@ -254,7 +254,7 @@
 "ApplicationList-004" = "共";
 "ApplicationList-005" = "立即申请";
 "ApplicationList-commit" = "立即申请";
-"ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。如有疑问请联系客服人员。";
+"ApplicationList-noti" = "您提交的申请正在审核中，暂时无法再次提交。\n如有疑问请联系客服人员。";
 "ApplicationList-noData" = "Duang!请添加您的意向学校吧！";
 "ApplicationList-Edit" = "编辑";
 "ApplicationList-Delete" = "删除";
