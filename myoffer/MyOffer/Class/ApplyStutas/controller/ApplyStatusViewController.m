@@ -136,14 +136,15 @@
         
     }else{
     
-         [self.tableView emptyViewWithError:GDLocalizedString(@"ApplicationStutasVC-noData")];
+         [self.tableView emptyViewWithError:@"Duang!您还没有提交申请！"];
+        
+         [self.tableView.mj_header removeFromSuperview];
     }
         
-    
+ 
     
     [self.tableView reloadData];
     
-    if (self.groups.count == 0) [self.tableView.mj_header removeFromSuperview];
     
     
 }
@@ -157,8 +158,7 @@
     return PADDING_TABLEGROUP;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     ApplyStatusRecord *record = self.groups[section];
  

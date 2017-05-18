@@ -56,6 +56,7 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
 @property(nonatomic,strong)NSArray *banner;
+@property(nonatomic,strong)UIView *topView;
 
 @property(nonatomic,strong)HomeHeaderFrame *headerFrame;
 
@@ -323,8 +324,17 @@
     [self makeLeftBarButtonItemView];
     
     UIImageView *maskBgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
+    
     maskBgView.image = [UIImage imageNamed:@"gradient_up"];
+    
     [self.view addSubview:maskBgView];
+    
+    
+    UIView *topView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 20)];
+    topView.backgroundColor = XCOLOR_WHITE;
+    [self.view addSubview:topView];
+    self.topView = topView;
+    
  
     
 }

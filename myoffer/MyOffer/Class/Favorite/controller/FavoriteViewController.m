@@ -78,11 +78,11 @@
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
         
-        
         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
         
         return;
     }
+    
     
     XWeakSelf
     [self
@@ -122,9 +122,6 @@
        [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
         
     }
-    
-    
-
     
 
 }
@@ -171,7 +168,7 @@
     
     UniversityFrameNew *uniFrame = self.favor_Unies[indexPath.section];
     
-     [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
+    [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

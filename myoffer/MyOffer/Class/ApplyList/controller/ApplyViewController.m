@@ -202,8 +202,10 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     if(response.count == 0){
         
         [self emptyViewShowWithResult:response];
-         self.navigationItem.rightBarButtonItem.enabled = NO;
-         self.submitBtn.enabled = NO;
+       
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        
+        self.submitBtn.enabled = NO;
         
         return ;
     }
@@ -212,9 +214,11 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     NSArray *universities = [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:response];
     
     NSMutableArray  *temps = [NSMutableArray array];
+    
     for (MyOfferUniversityModel *uni in universities) {
         
         UniversityFrameNew *uni_frame = [UniversityFrameNew universityFrameWithUniverstiy:uni];
+        
         [temps addObject:uni_frame];
     }
     
@@ -228,9 +232,11 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 -(void)makeUI
 {
     [self makeTableView];
+    
     [self makeOther];
+    
     [self makeNavigationBarButtonItem];
-//    [self makeCancelBottonButtonView];
+    
     self.editViewConstraint.constant = 70;
 
     
@@ -251,8 +257,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 -(void)makeOther
 {
    
-    self.title    = @"申请意向";
-    self.AlertLab.text    = GDLocalizedString(@"ApplicationList-noti");
+    self.title = @"申请意向";
+    self.AlertLab.text = GDLocalizedString(@"ApplicationList-noti");
     self.AlertLab.font = XFONT(XFONT_SIZE(1) * 3 + 13);
     
     [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
@@ -260,11 +266,13 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
     [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
     
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    
     self.tableView.sectionFooterHeight =  SECTION_FOOTER_HEIGHT;
+    
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    
 }
 
 
@@ -356,19 +364,19 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         //删除的 indexPath 数组
         if ([self.cancelindexPathes containsObject:indexPath] ) {
         
-            //1
+            //1 删除 indexPath
             [self.cancelindexPathes removeObject:indexPath];
             
-            //2
+            //2 是否被选中
             [cell cellIsSelected:NO];
             
             
         }else{
             
-            //1
+             //1 添加 indexPath
             [self.cancelindexPathes addObject:indexPath];
             
-            //2
+           //2 是否被选中
             [cell cellIsSelected:YES];
             
             
@@ -468,7 +476,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     }
     
     XWGJTiJiaoViewController *vc = [[XWGJTiJiaoViewController alloc] init];
+    
     vc.selectedCoursesIDs        =  [self.courseSelecteds copy];
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

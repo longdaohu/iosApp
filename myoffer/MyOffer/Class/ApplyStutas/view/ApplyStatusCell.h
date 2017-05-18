@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ApplyStatusRecord;
+
 @interface ApplyStatusCell : UITableViewCell
+
 @property(nonatomic,strong)ApplyStatusRecord *record;
+
 +(instancetype)cellWithTableView:(UITableView *)tableView;
+
 @end

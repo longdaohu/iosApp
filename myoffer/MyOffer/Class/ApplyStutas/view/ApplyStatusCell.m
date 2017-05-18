@@ -10,6 +10,8 @@
 #import "ApplyStatusCell.h"
 #import "ApplyStatusRecord.h"
 #import "Applycourse.h"
+
+
 @interface ApplyStatusCell ()
 //状态
 @property (nonatomic, strong) UILabel *statusLab;
@@ -25,10 +27,13 @@
     static NSString *recordReuse = @"record";
     
     ApplyStatusCell *cell =[tableView dequeueReusableCellWithIdentifier:recordReuse];
+    
     if (!cell) {
         
         cell = [[ApplyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordReuse];
     }
+    
+    
     return cell;
 }
 
@@ -62,6 +67,7 @@
     _record = record;
     
     self.statusLab.text = record.state;
+    
     [self.statusLab sizeToFit];
 
     self.subjectLab.text = record.course.official_name;
@@ -72,35 +78,26 @@
 
     [super layoutSubviews];
     
+    if (!self.record) return;
+        
+    CGSize contentSize = self.contentView.bounds.size;
+    
+    CGRect newRect = self.statusLab.frame;
+    newRect.size.height = contentSize.height;
+    newRect.origin.x    = contentSize.width - self.statusLab.frame.size.width - 5;
+    self.statusLab.frame = newRect;
     
     
-    if (self.record) {
-        
-        CGSize contentSize = self.contentView.bounds.size;
-        
-        CGRect newRect = self.statusLab.frame;
-        newRect.size.height = contentSize.height;
-        newRect.origin.x    = contentSize.width - self.statusLab.frame.size.width - 5;
-        self.statusLab.frame = newRect;
-        
-        
-        CGFloat subjectx = Left_Margin;
-        CGFloat subjecty = 0;
-        CGFloat subjectw = CGRectGetMinX(self.self.statusLab.frame) - subjectx;
-        CGFloat subjecth = contentSize.height;
-        self.subjectLab.frame = CGRectMake(subjectx, subjecty,subjectw, subjecth);
-        
-    }
+    CGFloat subjectx = Left_Margin;
+    CGFloat subjecty = 0;
+    CGFloat subjectw = CGRectGetMinX(self.self.statusLab.frame) - subjectx;
+    CGFloat subjecth = contentSize.height;
+    self.subjectLab.frame = CGRectMake(subjectx, subjecty,subjectw, subjecth);
     
 
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    [super setSelected:selected animated:animated];
 
-
-}
 
 @end
