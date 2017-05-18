@@ -8,7 +8,6 @@
 
 #import "SearchResultViewController.h"
 #import "NewSearchResultCell.h"
-#import "XWGJnodataView.h"
 #import "MyOfferUniversityModel.h"
 
 @interface SearchResultViewController () {
@@ -25,8 +24,7 @@
     BOOL _loading;
     BOOL _Autralia;
 }
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)XWGJnodataView *noDataView;
+@property (weak, nonatomic) IBOutlet DefaultTableView *tableView;
 
 @end
 
@@ -84,7 +82,7 @@
         _fieldKey = @"text";
         _orderBy = orderBy;
         
-        NSLog(@"orderByorderByorderBy %@",orderBy);
+//        NSLog(@"orderByorderByorderBy %@",orderBy);
 
         if([key  isEqual: @"subject"]) {
             _subject = value;
@@ -105,18 +103,6 @@
         _resultIDSet = [NSMutableSet set];
     }
     return self;
-}
-
--(XWGJnodataView *)noDataView
-{
-    if (!_noDataView) {
-        
-        _noDataView =[XWGJnodataView noDataView];
-        _noDataView.hidden = YES;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-    }
-    
-    return _noDataView;
 }
 
 
@@ -166,7 +152,7 @@
     
     [self reloadDataWithPageIndex:0 refresh:false];
     
-    _tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
+     self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
 
 
 }
@@ -238,20 +224,22 @@
           _allResultCount = [response[@"count"] integerValue];
          
          if (_result.count == 0) {
-             _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-             _noResultView.hidden = NO;
+             
+             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  
          }
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
-        
-  
+   
          
-         [_tableView reloadData];
+         [self.tableView reloadData];
          _loading = NO;
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          _loading = NO;
          self.shouldShowLoadMoreIndicator = NO;
-         self.noDataView.hidden = NO;
+         
+         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+         
          
      }];
 }
@@ -262,11 +250,11 @@
      
     if (shouldShowLoadMoreIndicator) {
         
-        [_tableView setTableFooterView:_loadMoreIndicatorView];
+        [self.tableView setTableFooterView:_loadMoreIndicatorView];
         
     } else {
         
-        [_tableView setTableFooterView:nil];
+        [self.tableView setTableFooterView:nil];
     }
 }
 

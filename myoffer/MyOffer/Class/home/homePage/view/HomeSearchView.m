@@ -75,7 +75,7 @@
 -(void)searchViewWithScrollViewDidScrollContentOffsetY:(CGFloat)contant;
 {
     
-    if (contant > 40) {
+    if (contant > 30) {
         
         self.top = contant;
         
@@ -84,10 +84,9 @@
     }else{
         
         
-        self.top = 40;
+        self.top = 30;
         
-        if (self.top == 40) [self  searchViewWithAnimation:NO];
-            
+        if (self.top == 30) [self  searchViewWithAnimation:NO];
         
     }
     

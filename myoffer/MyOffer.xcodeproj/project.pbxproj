@@ -377,8 +377,6 @@
 		AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BDE1D5B266A00DD7939 /* XTextField.m */; };
 		AEA24BEF1D5B266A00DD7939 /* XUButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BE01D5B266A00DD7939 /* XUButton.m */; };
 		AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BE21D5B266A00DD7939 /* XUToolbar.m */; };
-		AEA24BF11D5B266A00DD7939 /* XWGJnodataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BE41D5B266A00DD7939 /* XWGJnodataView.m */; };
-		AEA24BF21D5B266A00DD7939 /* XWGJnodataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24BE51D5B266A00DD7939 /* XWGJnodataView.xib */; };
 		AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF51D5B269A00DD7939 /* APIClient+Interface.m */; };
 		AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF71D5B269A00DD7939 /* APIClient.m */; };
 		AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF91D5B269A00DD7939 /* AppDelegate.m */; };
@@ -1112,9 +1110,6 @@
 		AEA24BE01D5B266A00DD7939 /* XUButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUButton.m; sourceTree = "<group>"; };
 		AEA24BE11D5B266A00DD7939 /* XUToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUToolbar.h; sourceTree = "<group>"; };
 		AEA24BE21D5B266A00DD7939 /* XUToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUToolbar.m; sourceTree = "<group>"; };
-		AEA24BE31D5B266A00DD7939 /* XWGJnodataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJnodataView.h; sourceTree = "<group>"; };
-		AEA24BE41D5B266A00DD7939 /* XWGJnodataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJnodataView.m; sourceTree = "<group>"; };
-		AEA24BE51D5B266A00DD7939 /* XWGJnodataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJnodataView.xib; sourceTree = "<group>"; };
 		AEA24BF41D5B269A00DD7939 /* APIClient+Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIClient+Interface.h"; sourceTree = "<group>"; };
 		AEA24BF51D5B269A00DD7939 /* APIClient+Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "APIClient+Interface.m"; sourceTree = "<group>"; };
 		AEA24BF61D5B269A00DD7939 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
@@ -3137,9 +3132,6 @@
 				AEA24BE01D5B266A00DD7939 /* XUButton.m */,
 				AEA24BE11D5B266A00DD7939 /* XUToolbar.h */,
 				AEA24BE21D5B266A00DD7939 /* XUToolbar.m */,
-				AEA24BE31D5B266A00DD7939 /* XWGJnodataView.h */,
-				AEA24BE41D5B266A00DD7939 /* XWGJnodataView.m */,
-				AEA24BE51D5B266A00DD7939 /* XWGJnodataView.xib */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -3583,7 +3575,6 @@
 				AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */,
 				AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */,
 				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
-				AEA24BF21D5B266A00DD7939 /* XWGJnodataView.xib in Resources */,
 				AE7FFCBE1EC07E1C00D2FDCB /* into006.jpeg in Resources */,
 				46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */,
 				AEF421051BD4988B00CFB45E /* UMSLoginViewController.xib in Resources */,
@@ -3929,7 +3920,6 @@
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
 				AE1FD68D1D5C852500FFD5A8 /* MyOfferArticle.m in Sources */,
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,
-				AEA24BF11D5B266A00DD7939 /* XWGJnodataView.m in Sources */,
 				AEA86E041EA4C8210021BE1B /* MyofferUser.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,

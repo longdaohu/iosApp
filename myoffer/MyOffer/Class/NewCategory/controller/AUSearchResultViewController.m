@@ -9,7 +9,6 @@
 #import "AUSearchResultViewController.h"
 #import "NewSearchResultCell.h"
 #import "NomalTableSectionHeaderView.h"
-#import "XWGJnodataView.h"
 #import "MyOfferUniversityModel.h"
 
 
@@ -20,12 +19,12 @@
      BOOL _loading;
      BOOL _Autralia;
 }
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
 @property(nonatomic,strong)NSArray *Restults;
 @property(nonatomic,strong)NSArray *sectionTitleList;
 @property(nonatomic,assign)NSInteger nextPage;
 @property(nonatomic,strong)UIImageView *navImageView;
-@property(nonatomic,strong)XWGJnodataView *noDataView;
+
 @end
 
 @implementation AUSearchResultViewController
@@ -76,17 +75,7 @@
 
 
 
--(XWGJnodataView *)noDataView
-{
-    if (!_noDataView) {
-        
-        _noDataView =[XWGJnodataView noDataView];
-        _noDataView.hidden = YES;
-        [self.view insertSubview:_noDataView aboveSubview:self.tableView];
-    }
-    
-    return _noDataView;
-}
+
 
 -(NSArray *)Restults
 {
@@ -172,7 +161,7 @@
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         self.noDataView.hidden = NO;
+         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
 
      }];
 }
@@ -182,7 +171,7 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT-64) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];

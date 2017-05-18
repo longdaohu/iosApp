@@ -11,13 +11,11 @@
 #import "PayOrderViewController.h"
 #import "OrderDetailViewController.h"
 #import "OrderItem.h"
-#import "XWGJnodataView.h"
 
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,OrderTableViewCellDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *orderGroup;
 @property(nonatomic,assign)NSInteger nextPage;
-@property(nonatomic,strong)XWGJnodataView *nodataView;
 
 @end
 
@@ -55,25 +53,13 @@
     
      if (![self checkNetWorkReaching]) {
         
-         self.nodataView.hidden = NO;
+         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
          
          return ;
     }
     
      [self.tableView.mj_header beginRefreshing];
     
-}
-
--(XWGJnodataView *)nodataView{
-
-    if (!_nodataView) {
-       
-        _nodataView =[XWGJnodataView noDataView];
-        
-        [self.view insertSubview:_nodataView aboveSubview:self.tableView];
-    }
-    
-    return _nodataView;
 }
 
 
@@ -142,8 +128,19 @@
     
     [self.tableView reloadData];
     
-    self.nodataView.hidden = self.orderGroup.count > 0;
-    self.nodataView.errorStr = @"还没有购买服务！！！";
+    
+    if(self.orderGroup.count == 0 ){
+    
+        [self.tableView emptyViewWithError:@"还没有购买服务！！！"];
+
+    }else{
+    
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }
+    
+ 
+    
     
 }
 
@@ -155,7 +152,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];

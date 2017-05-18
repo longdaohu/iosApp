@@ -77,8 +77,6 @@
     [self presentViewWillAppear];
     
     
-    NSLog(@">>>>viewWillAppear>>>>>> %ld",self.currentStatusBarStyle);
-    
     [UIApplication sharedApplication].statusBarStyle = (self.currentStatusBarStyle ==  UIStatusBarStyleLightContent ) ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
     
 }
@@ -109,8 +107,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    NSLog(@">>>>viewWillDisappear>>>>>> %ld",self.currentStatusBarStyle);
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     

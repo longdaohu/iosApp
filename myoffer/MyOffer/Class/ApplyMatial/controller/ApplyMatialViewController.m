@@ -7,6 +7,8 @@
 //
 
 #import "ApplyMatialViewController.h"
+#import "EmptyDataView.h"
+
 @interface ApplyMatialViewController ()
 
 
@@ -19,9 +21,11 @@
 
     self.title = GDLocalizedString(@"ApplyMater-001");  // @"我的申请材料"
     
-    XWGJnodataView *noDataView =[XWGJnodataView noDataView];
-    noDataView.errorStr =  GDLocalizedString(@"myOffer-001");
-    [self.view addSubview:noDataView];
+    
+    EmptyDataView *emptyView  =[EmptyDataView emptyViewWithBlock:^{}];
+    emptyView.errorLab.text = GDLocalizedString(@"myOffer-001");
+    [self.view addSubview:emptyView];
+    emptyView.center = self.view.center;
   
     
 }
@@ -34,12 +38,7 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
-    
- }
-
+ 
 - (void)viewWillDisappear:(BOOL)animated
 {
   

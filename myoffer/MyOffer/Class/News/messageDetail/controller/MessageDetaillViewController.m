@@ -41,8 +41,6 @@
 @property(nonatomic,strong)UIView *RightView;
 //分享
 @property(nonatomic,strong)ShareNViewController *shareVC;
-//无数据提示框
-@property(nonatomic,strong)XWGJnodataView *noDataView;
 //数据源
 @property(nonatomic,strong)NSMutableArray *groups;
 
@@ -138,19 +136,6 @@
     
 }
 
--(void)makeOtherView
-{
-    
-    //没有数量是显示提示
-    self.noDataView =[XWGJnodataView noDataView];
-    self.noDataView.hidden = YES;
-    self.noDataView.errorStr = @"网络请求失败，请稍候再试!";
-    [self.view insertSubview:self.noDataView  aboveSubview:self.tableView];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
-    
-    
-}
 
 
 
@@ -169,7 +154,8 @@
     
     [self makeWebView];
     
-    [self makeOtherView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
+
     
 }
 
@@ -201,7 +187,7 @@
          
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        weakSelf.noDataView.hidden = NO;
+        [weakSelf.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
         
     }];
     

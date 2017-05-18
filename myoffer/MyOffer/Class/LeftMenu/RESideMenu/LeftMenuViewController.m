@@ -43,8 +43,6 @@
     
     [MobClick beginLogPageView:@"page左侧菜单"];
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
     [self  makeDataSource];
     
     

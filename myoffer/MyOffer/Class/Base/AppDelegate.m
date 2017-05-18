@@ -489,6 +489,8 @@ static AppDelegate *__sharedDelegate;
 
     [self.mainTabBarController contentViewIsOpen:YES];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
 //    NSLog(@"willShowMenuViewController: %@ ", NSStringFromClass([menuViewController class]));
     
 }

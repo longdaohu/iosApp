@@ -9,11 +9,7 @@
 #import "BaseViewController.h"
 
 @interface SearchResultViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
-    IBOutlet UITableView *_tableView;
-    
-    
-    IBOutlet UIView *_noResultView;
-
+ 
 }
 @property(nonatomic,assign)BOOL xby;
 
