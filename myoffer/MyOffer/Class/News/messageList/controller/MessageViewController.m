@@ -66,6 +66,8 @@
     
     self.tabBarController.tabBar.hidden = NO;
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     [MobClick beginLogPageView:@"page资讯宝典"];
     
     [self leftViewMessage];

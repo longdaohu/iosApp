@@ -53,6 +53,8 @@ typedef enum {
     
     [MobClick beginLogPageView:@"page申请中心"];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     [self presentViewWillAppear];
     
 }

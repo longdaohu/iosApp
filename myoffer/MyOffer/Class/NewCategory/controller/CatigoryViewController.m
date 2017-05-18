@@ -61,6 +61,8 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     [MobClick beginLogPageView:@"page分类搜索"];
     
     [self leftViewMessage];

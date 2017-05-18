@@ -56,9 +56,12 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
 @property(nonatomic,strong)NSArray *banner;
+
 @property(nonatomic,strong)UIView *topView;
 
 @property(nonatomic,strong)HomeHeaderFrame *headerFrame;
+
+@property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
 
 @end
 
@@ -72,6 +75,11 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
  
     [self presentViewWillAppear];
+    
+    
+    NSLog(@">>>>viewWillAppear>>>>>> %ld",self.currentStatusBarStyle);
+    
+    [UIApplication sharedApplication].statusBarStyle = (self.currentStatusBarStyle ==  UIStatusBarStyleLightContent ) ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
     
 }
 
@@ -94,7 +102,6 @@
     
     [self userDidClickItem];
     
-    
  
 }
 
@@ -102,6 +109,10 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    NSLog(@">>>>viewWillDisappear>>>>>> %ld",self.currentStatusBarStyle);
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [MobClick endLogPageView:@"page新版首页"];
     
@@ -330,11 +341,12 @@
     [self.view addSubview:maskBgView];
     
     
-    UIView *topView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 20)];
+    UIView *topView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
     topView.backgroundColor = XCOLOR_WHITE;
     [self.view addSubview:topView];
     self.topView = topView;
     
+    self.currentStatusBarStyle = UIStatusBarStyleLightContent;
  
     
 }
@@ -362,8 +374,7 @@
     return _headerFrame;
 }
 
--(void)makeHomeTableView
-{
+-(void)makeHomeTableView{
 
     self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
@@ -438,8 +449,7 @@
 
 
 //搜索功能
--(void)makeSearchView
-{
+-(void)makeSearchView{
     
     CGFloat searchX = 20;
     CGFloat searchH = 44;
@@ -481,6 +491,25 @@
 
 #pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    
+    CGFloat show = (scrollView.contentOffset.y > CGRectGetMaxY(self.headerFrame.autoScroller_frame)) ? 20 : 0;
+    
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
+         self.topView.mj_h = show;
+        
+    } completion:^(BOOL finished) {
+     
+        
+        self.currentStatusBarStyle = show ?  UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+        
+        [UIApplication sharedApplication].statusBarStyle = self.currentStatusBarStyle;
+        
+    }];
+        
+       
+  
     
     
     if (scrollView.contentOffset.y < -150) [self.TableView setContentOffset:CGPointMake(0, -150) animated:NO];
@@ -994,7 +1023,12 @@ ENGLISH  设置环境
 }
 
 
-
+//改变状态栏颜色
+- (void)caseChangestatusBarStyle{
+    
+    [UIApplication sharedApplication].statusBarStyle = self.currentStatusBarStyle;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

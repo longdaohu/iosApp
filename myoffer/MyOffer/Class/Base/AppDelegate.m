@@ -22,6 +22,7 @@
 #import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import "HomeViewContViewController.h"
 
 
 @interface AppDelegate ()<RESideMenuDelegate,WXApiDelegate>
@@ -482,11 +483,12 @@ static AppDelegate *__sharedDelegate;
 
 
 
-#pragma mark RESideMenu Delegate
+#pragma mark  RESideMenuDelegate
 - (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
 {
 
     [self.mainTabBarController contentViewIsOpen:YES];
+    
 //    NSLog(@"willShowMenuViewController: %@ ", NSStringFromClass([menuViewController class]));
     
 }
@@ -501,11 +503,24 @@ static AppDelegate *__sharedDelegate;
 
        [self.mainTabBarController contentViewIsOpen:NO];
 //        NSLog(@"willHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+    
+    if (self.mainTabBarController.selectedIndex == 0) {
+        
+        UINavigationController *nav = self.mainTabBarController.childViewControllers[self.mainTabBarController.selectedIndex];
+        
+        HomeViewContViewController *home = (HomeViewContViewController *)nav.childViewControllers.firstObject;
+        
+        [home caseChangestatusBarStyle];
+    }
+    
 }
 
 - (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController
 {
-    //    NSLog(@"didHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+
+//    NSLog(@"didHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
+
+ 
 }
 
 

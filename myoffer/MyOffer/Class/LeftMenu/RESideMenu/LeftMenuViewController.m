@@ -24,7 +24,7 @@
 #import "MyofferUser.h"
 
 
-@interface LeftMenuViewController ()
+@interface LeftMenuViewController ()<RESideMenuDelegate>
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 //表头
@@ -42,6 +42,8 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page左侧菜单"];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [self  makeDataSource];
     
