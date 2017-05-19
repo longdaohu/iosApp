@@ -13,6 +13,7 @@
 @property(nonatomic,copy)NSString *summary;
 @property(nonatomic,copy)NSString *state;
 @property(nonatomic,copy)NSString *create_at;
+@property(nonatomic,copy)NSString *create_time_short;
 @property(nonatomic,copy)NSString *category_id;
 @property(nonatomic,copy)NSString *category;
 

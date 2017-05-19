@@ -67,6 +67,7 @@
     self.tableView.delegate        = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     
@@ -211,6 +212,8 @@
     
     TongzhiCell *cell = [TongzhiCell cellWithTableView:tableView];
     cell.noti         = self.results[indexPath.row];
+    [cell separatorLineShow:(self.results.count - 1 == indexPath.row)];
+    
     return cell;
 }
 
@@ -232,7 +235,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
-    return Uni_Cell_Height;
+    return 68;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

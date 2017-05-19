@@ -366,7 +366,6 @@
 		AEA24BC81D5B264300DD7939 /* XWGJMessageCategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB51D5B264300DD7939 /* XWGJMessageCategoryItem.m */; };
 		AEA24BC91D5B264300DD7939 /* XWGJMessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BB71D5B264300DD7939 /* XWGJMessageFrame.m */; };
 		AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBC1D5B264300DD7939 /* MessageCell.m */; };
-		AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */; };
 		AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BCF1D5B266A00DD7939 /* ActionTableViewController.m */; };
 		AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BD11D5B266A00DD7939 /* DoneButton.m */; };
 		AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BD41D5B266A00DD7939 /* Foundation+Log.m */; };
@@ -1089,8 +1088,6 @@
 		AEA24BB71D5B264300DD7939 /* XWGJMessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageFrame.m; sourceTree = "<group>"; };
 		AEA24BBB1D5B264300DD7939 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		AEA24BBC1D5B264300DD7939 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
-		AEA24BBD1D5B264300DD7939 /* XWGJNODATASHOWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJNODATASHOWView.h; sourceTree = "<group>"; };
-		AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJNODATASHOWView.m; sourceTree = "<group>"; };
 		AEA24BCE1D5B266A00DD7939 /* ActionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTableViewController.h; sourceTree = "<group>"; };
 		AEA24BCF1D5B266A00DD7939 /* ActionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTableViewController.m; sourceTree = "<group>"; };
 		AEA24BD01D5B266A00DD7939 /* DoneButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoneButton.h; sourceTree = "<group>"; };
@@ -3104,8 +3101,6 @@
 				AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */,
 				AEA24BBB1D5B264300DD7939 /* MessageCell.h */,
 				AEA24BBC1D5B264300DD7939 /* MessageCell.m */,
-				AEA24BBD1D5B264300DD7939 /* XWGJNODATASHOWView.h */,
-				AEA24BBE1D5B264300DD7939 /* XWGJNODATASHOWView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3475,7 +3470,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3876,7 +3871,6 @@
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
-				AEA24BCC1D5B264300DD7939 /* XWGJNODATASHOWView.m in Sources */,
 				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
 				AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */,
 				AEA24BCB1D5B264300DD7939 /* MessageCell.m in Sources */,
@@ -4180,7 +4174,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

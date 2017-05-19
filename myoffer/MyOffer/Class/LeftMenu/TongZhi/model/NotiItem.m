@@ -25,6 +25,11 @@
 }
 
 
+- (NSString *)create_time_short{
+
+    return [self.create_at componentsSeparatedByString:@" "][0];
+}
+
 /*
 
 + (NSDictionary *)mj_objectClassInArray

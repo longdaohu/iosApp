@@ -34,6 +34,8 @@
         
  
         UIImageView *logoView = [[UIImageView alloc] init];
+        logoView.clipsToBounds = YES;
+        logoView.backgroundColor = XCOLOR_line;
         logoView.contentMode = UIViewContentModeScaleAspectFit;
         logoView.image = [UIImage imageNamed:@"no_message"];
         [self addSubview:logoView];
@@ -44,31 +46,36 @@
         errorLab.text = @"数据为空";
         errorLab.numberOfLines = 0;
         errorLab.textColor = XCOLOR_LIGHTGRAY;
-        errorLab.font = [UIFont systemFontOfSize:13];
+        errorLab.font = [UIFont systemFontOfSize:14];
         errorLab.textAlignment = NSTextAlignmentCenter;
         self.errorLab = errorLab;
         [self addSubview:errorLab];
         
-        UIButton *reloadBtn =[[UIButton alloc] init];
-        [reloadBtn setTitle:@"重新加载" forState:UIControlStateNormal];
-        reloadBtn.backgroundColor = [UIColor lightGrayColor];
-        reloadBtn.layer.cornerRadius = CORNER_RADIUS;
-        [reloadBtn addTarget:self action:@selector(reloadBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:reloadBtn];
-        self.reloadBtn = reloadBtn;
-        reloadBtn.hidden =YES;
+        
+//        UIButton *reloadBtn =[[UIButton alloc] init];
+//        [reloadBtn setTitle:@"重新加载" forState:UIControlStateNormal];
+//        reloadBtn.backgroundColor = [UIColor lightGrayColor];
+//        reloadBtn.layer.cornerRadius = CORNER_RADIUS;
+//        [reloadBtn addTarget:self action:@selector(reloadBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:reloadBtn];
+//        self.reloadBtn = reloadBtn;
+//        reloadBtn.hidden =YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reload)];
+        [self addGestureRecognizer:tap];
+        
     }
     return self;
 }
 
-- (void)reloadBtnClick{
-
+- (void)reload{
     
-    self.hidden = YES;
+    NSLog(@">>>>>>>> 重新加载");
     
     if (self.actionBlock) self.actionBlock();
     
 }
+
 
 - (void)layoutSubviews{
 
@@ -94,13 +101,6 @@
     self.reloadBtn.frame = CGRectMake(reloadX, reloadY, reloadW, reloadH);
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
 

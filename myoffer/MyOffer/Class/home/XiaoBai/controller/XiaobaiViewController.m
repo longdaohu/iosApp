@@ -14,13 +14,12 @@
 #import "XiaobaiViewController.h"
 #import "CatigorySubjectCell.h"
 #import "GongLueViewController.h"
-#import "XWGJNODATASHOWView.h"
 #import "CatigorySubject.h"
 #import "TopNavView.h"
 #import "NomalCollectionController.h"
 #import "GonglueItem.h"
 #import "GongLueTip.h"
-
+#import "EmptyDataView.h"
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)TopNavView *topView;
@@ -34,7 +33,7 @@
 //申请攻略 数组
 @property(nonatomic,strong)NSArray *gonglueItems;
 //无数据提示
-@property(nonatomic,strong)XWGJNODATASHOWView *noDataView;
+@property(nonatomic,strong)EmptyDataView *noDataView;
 
 @end
 
@@ -79,23 +78,30 @@
 
 
 //数据为空时出现
--(XWGJNODATASHOWView *)noDataView
-{
+
+- (EmptyDataView *)noDataView{
+
     if (!_noDataView) {
         
         XWeakSelf
         
-        _noDataView =[[XWGJNODATASHOWView alloc] initWithFrame:CGRectMake(0, -200, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
-        
-        _noDataView.bgViewY = 100;
-        
-        _noDataView.ActionBlock = ^{
+       _noDataView =[EmptyDataView emptyViewWithBlock:^{
             
-             [weakSelf makeDataSource:YES];
-        };
-     }
+           [weakSelf makeDataSource:YES];
+
+           
+        }];
+        
+        _noDataView.frame = CGRectMake(0, 100, XSCREEN_WIDTH, 300);
+      
+    }
+    
     return _noDataView;
+
 }
+
+
+
 
 
 

@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UILabel *subTitleLab;
 //未读消息小红点
 @property(nonatomic,strong)UIView *redSpotsView;
+@property(nonatomic,strong)UIView *line;
 
 
 @end
@@ -35,7 +36,6 @@
     if (!cell) {
      
         cell =[[TongzhiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identi];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     return cell;
@@ -52,32 +52,49 @@
         self.redSpotsView=[[UIView alloc] init];
         [self.contentView addSubview:self.redSpotsView];
         self.redSpotsView.backgroundColor = [UIColor redColor];
-        self.redSpotsView.layer.cornerRadius = 6;
+        self.redSpotsView.layer.cornerRadius = 4;
         
-        self.titleLab =[UILabel labelWithFontsize:XPERCENT * 15 TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.titleLab =[UILabel labelWithFontsize:18 TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.titleLab];
         
-        self.timeLab = [UILabel labelWithFontsize:XPERCENT * 12 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.timeLab = [UILabel labelWithFontsize: 12 TextColor:XCOLOR_SUBTITLE TextAlignment:NSTextAlignmentRight];
         [self.contentView addSubview:self.timeLab];
         
-        self.subTitleLab = [UILabel labelWithFontsize:XPERCENT * 13 TextColor:XCOLOR_DARKGRAY TextAlignment:NSTextAlignmentLeft];
+        self.subTitleLab = [UILabel labelWithFontsize: 14 TextColor:XCOLOR_SUBTITLE TextAlignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.subTitleLab];
+        
+        self.line=[[UIView alloc] init];
+        [self.contentView addSubview:self.line];
+        self.line.backgroundColor = XCOLOR_line;
+        
         
      }
     return self;
 }
 
--(void)setNoti:(NotiItem *)noti
+- (void)setNoti:(NotiItem *)noti
 {
     _noti  = noti;
     
     self.titleLab.text      = noti.category;
+    [self.titleLab sizeToFit];
+    
     self.subTitleLab.text   = noti.summary;
-    self.timeLab.text       = noti.create_at;
+    [self.subTitleLab sizeToFit];
+
+    self.timeLab.text       = noti.create_time_short;
+    [self.timeLab sizeToFit];
+    
     NSString *imageName     =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
     self.logoView.image     =  [UIImage imageNamed:imageName];
     self.redSpotsView.hidden = noti.state.length;
 
+}
+
+
+- (void)separatorLineShow:(BOOL)show{
+
+    self.line.hidden = show;
 }
 
 
@@ -87,37 +104,44 @@
     
     CGSize contentSize = self.contentView.bounds.size;
     
-    CGFloat logox = 10;
-    CGFloat logoy = 20;
-    CGFloat logoh = contentSize.height - logoy * 2;
-    CGFloat logow = logoh;
-    self.logoView.frame =CGRectMake(logox, logoy, logow, logoh);
+    CGFloat logo_H = 50;
+    CGFloat logo_W = logo_H;
+    CGFloat logo_X = 10;
+    CGFloat logo_Y = (contentSize.height - logo_H) * 0.5;
+    self.logoView.frame =CGRectMake(logo_X, logo_Y, logo_W, logo_H);
     
-
-    CGFloat redw = 12;
+    CGFloat redw = 8;
     CGFloat redh = redw;
     CGFloat redx = CGRectGetMaxX(self.logoView.frame) - redw;
-    CGFloat redy = logoy;
+    CGFloat redy =  logo_Y;
     self.redSpotsView.frame =CGRectMake(redx, redy, redw, redh);
     
-    CGFloat titleX = CGRectGetMaxX(self.logoView.frame) + ITEM_MARGIN;
-    CGFloat titleY = logoy;
-    CGFloat titleW = contentSize.width - titleX - 2 * ITEM_MARGIN;
-    CGFloat titleH = XPERCENT * 15;
-    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    
+    CGFloat time_H = self.timeLab.mj_h;
+    CGFloat time_W = self.timeLab.mj_w;
+    CGFloat time_X =  contentSize.width - time_W - logo_X;
+    CGFloat timeY = logo_Y;
+    self.timeLab.frame =CGRectMake(time_X, timeY, time_W, time_H);
+    
+    
+    CGFloat title_X = CGRectGetMaxX(self.logoView.frame) + logo_X;
+    CGFloat title_Y = logo_Y;
+    CGFloat title_W = self.titleLab.mj_w;
+    CGFloat title_H = self.titleLab.mj_h;
+    self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
 
     
-    CGFloat subX = titleX;
-    CGFloat subW = titleW;
-    CGFloat subH = XPERCENT * 13;
-    CGFloat subY = CGRectGetMaxY(self.logoView.frame) - subH;
-    self.subTitleLab.frame =CGRectMake(subX, subY, subW, subH);
+    CGFloat sub_X = title_X;
+    CGFloat sub_W = self.subTitleLab.mj_w;
+    CGFloat sub_H = self.subTitleLab.mj_h;
+    CGFloat sub_Y = CGRectGetMaxY(self.logoView.frame) - sub_H;
+    self.subTitleLab.frame =CGRectMake(sub_X, sub_Y, sub_W, sub_H);
     
-    CGFloat timeX = titleX;
-    CGFloat timeW = titleW;
-    CGFloat timeH = XPERCENT * 12;
-    CGFloat timeY = self.logoView.center.y - timeH * 0.5;
-    self.timeLab.frame =CGRectMake(timeX, timeY, timeW, timeH);
+    CGFloat line_X = title_X;
+    CGFloat line_W = contentSize.width;
+    CGFloat line_H = 1;
+    CGFloat line_Y = contentSize.height - line_H;
+    self.line.frame =CGRectMake(line_X, line_Y, line_W, line_H);
     
 }
 

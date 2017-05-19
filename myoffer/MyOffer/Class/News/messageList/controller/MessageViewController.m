@@ -12,14 +12,13 @@
 #import "MessageDetaillViewController.h"
 #import "XWGJMessageFrame.h"
 #import "SDCycleScrollView.h"
-#import "XWGJNODATASHOWView.h"
 #import "XUToolbar.h"
 #import "MyOfferArticle.h"
 #import "MessageSectionHeaderView.h"
 #import "MyOfferAutoRunBanner.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)DefaultTableView *tableView;
 //分区头数据
 @property(nonatomic,strong)NSArray *RequestKeys;
 //推荐资讯
@@ -47,8 +46,6 @@
 @property(nonatomic,strong)UIView *StatusBarBan;
 //自定义ToolBar
 @property(nonatomic,strong)XUToolbar *myToolbar;
-//无数据提示框
-@property(nonatomic,strong)XWGJNODATASHOWView *NODATA;
 //是否有新消息图标
 @property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
@@ -82,33 +79,7 @@
     [MobClick endLogPageView:@"page资讯宝典"];
 }
 
-
- 
-//数据为空时出现
--(XWGJNODATASHOWView *)NODATA
-{
-    if (!_NODATA) {
-        
-        XWeakSelf
-        
-        _NODATA =[[XWGJNODATASHOWView alloc] initWithFrame:self.view.bounds];
-        
-        _NODATA.hidden = YES;
-        
-        [self.view addSubview:_NODATA];
-        
-         _NODATA.ActionBlock = ^{
-             
-             [weakSelf  getDataSource:0 andFresh:0];
-             
-             [weakSelf  getAutoLoopViewData];
-        };
-        
-    }
-    return _NODATA;
-}
-
--(XUToolbar *)myToolbar
+- (XUToolbar *)myToolbar
 {
     if (!_myToolbar) {
         
@@ -230,16 +201,24 @@
 -(void)makeTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
+    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
-    self.tableView.hidden     = YES;
-    self.tableView.backgroundColor = XCOLOR_BG;
+//    self.tableView.hidden  = YES;
+//    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.mj_footer       = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.view addSubview:self.tableView];
     [self makeAutoLoopViewAtView];
     [self makeRefreshView];
+    
+    XWeakSelf
+    self.tableView.actionBlock = ^{
+    
+        [weakSelf  getDataSource:0 andFresh:0];
+        
+        [weakSelf  getAutoLoopViewData];
+    };
 }
 
 //设置下拉刷新
@@ -364,6 +343,7 @@
     switch (index) {
             
         case 0:{
+            
             if (!fresh && self.Category_LifeArr.count > 0) {
                 
                 self.CurrentArr = [self.Category_LifeArr copy];
@@ -372,6 +352,8 @@
                 
                 return;
             }
+            
+            
         }
             break;
  
@@ -436,6 +418,7 @@
             break;
     }
   
+    
      XWGJMessageCategoryItem *category = self.RequestKeys[index];
     
     NSString *keyWord = [category.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -462,15 +445,23 @@
                                }
                                
                                
+                               [weakSelf.tableView emptyViewWithHiden:YES];
+                               
+                               weakSelf.autoLoopView.alpha = 1;
+                               weakSelf.sectionHeaderView.alpha = 1;
+                               
                            } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
                                
                                [weakSelf.tableView.mj_footer endRefreshing];
                               
                                if (weakSelf.CurrentArr.count == 0) {
                                    
-                                   weakSelf.NODATA.hidden = NO;
+                                   [weakSelf.tableView emptyViewWithError:@"网络请求失败，点击重新加载！"];
                                    
-                                   weakSelf.tableView.hidden = YES;
+                                   weakSelf.autoLoopView.alpha = 0;
+                                   
+                                   weakSelf.sectionHeaderView.alpha = 0;
+                                   
                                }
                                
                            }];
@@ -534,14 +525,11 @@
     }
     
     
-    
     [self.tableView.mj_footer endRefreshing];
     
     [self.tableView reloadData];
     
     self.tableView.hidden = NO;
-    
-    self.NODATA.hidden = YES;
     
 }
 
@@ -560,7 +548,6 @@
         self.myToolbar.alpha    = 1 - self.StatusBarBan.alpha  * 3;
         
         scrollView.contentInset =  (scrollView.contentOffset.y >= (AdjustF(200.f) - 64)) ? UIEdgeInsetsMake(20, 0, 0, 0) :  UIEdgeInsetsZero;
-    
         
     }
 }
@@ -610,6 +597,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
+    
     return Uni_Cell_Height;
 }
 
@@ -617,7 +605,7 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     self.sectionHeaderView.items = self.RequestKeys;
-    
+  
     return self.sectionHeaderView;
 }
 

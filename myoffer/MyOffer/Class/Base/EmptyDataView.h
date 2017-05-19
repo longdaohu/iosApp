@@ -16,4 +16,6 @@ typedef void(^EmptyDataViewBlock)();
 @property(nonatomic,copy)EmptyDataViewBlock  actionBlock;
 @property(nonatomic,strong)UILabel *errorLab;
 
+//- (void)reloadButtonShow:(BOOL)show;
+
 @end

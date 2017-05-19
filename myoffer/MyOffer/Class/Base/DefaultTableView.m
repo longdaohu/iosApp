@@ -53,7 +53,6 @@
     self.emptyView.hidden = YES;
     [self addSubview:self.emptyView];
     self.emptyView.center = self.center;
-    //        self.emptyView.centerY = self.center.y - 100;
 }
 
 - (void)emptyViewWithHiden:(BOOL)hiden{
@@ -65,7 +64,10 @@
     
     self.emptyView.hidden = NO;
     self.emptyView.errorLab.text = error;
+    
 }
+
+
 
 
 @end
