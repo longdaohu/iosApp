@@ -30,7 +30,7 @@
 #define KEY_ORDER_S  @"order"
 
 @interface SearchUniversityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //网络请求参数
 @property(nonatomic,strong)NSMutableDictionary *parametersM;
 //数组模型
@@ -413,7 +413,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[DefaultTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];

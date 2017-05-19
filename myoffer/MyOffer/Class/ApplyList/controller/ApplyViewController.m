@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 };
 
 @interface ApplyViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic)  DefaultTableView *tableView;
+@property (strong, nonatomic)  MyOfferTableView *tableView;
 //模型数组
 @property(nonatomic,strong)NSMutableArray *groups;
 //已选中课程ID数组
@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 - (void)makeTableView{
     
-    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view insertSubview:self.tableView atIndex:0];

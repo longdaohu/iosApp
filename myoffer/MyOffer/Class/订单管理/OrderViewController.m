@@ -13,7 +13,7 @@
 #import "OrderItem.h"
 
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,OrderTableViewCellDelegate>
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *orderGroup;
 @property(nonatomic,assign)NSInteger nextPage;
 
@@ -152,7 +152,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -171,7 +171,7 @@
 
 
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
+#pragma mark : UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return self.orderGroup.count;

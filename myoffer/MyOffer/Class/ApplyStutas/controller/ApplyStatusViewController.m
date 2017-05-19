@@ -15,7 +15,7 @@
  #define STATUSPAGE @"page申请状态"
 
 @interface ApplyStatusViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) DefaultTableView *tableView;
+@property (strong, nonatomic) MyOfferTableView *tableView;
 //申请记录数组
 @property(nonatomic,strong)NSArray *groups;
 
@@ -54,7 +54,7 @@
 
 -(void)makeTableView
 {
-    self.tableView   = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView   = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource  = self;
     self.tableView.delegate   = self;
     self.tableView.backgroundColor = XCOLOR_BG;

@@ -53,13 +53,13 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reload)];
         [self addGestureRecognizer:tap];
         
+        
     }
     return self;
 }
 
 - (void)reload{
     
-//    NSLog(@">>>>>>>> 重新加载");
     if (self.actionBlock) self.actionBlock();
     
 }

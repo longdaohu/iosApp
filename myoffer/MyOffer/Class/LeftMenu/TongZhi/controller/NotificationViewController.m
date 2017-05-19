@@ -13,7 +13,7 @@
 
 
 @interface NotificationViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //网络请求结果
 @property(nonatomic,strong)NSMutableArray *results;
 //请求数据第几页
@@ -62,7 +62,7 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource      = self;
     self.tableView.delegate        = self;
     self.tableView.tableFooterView = [[UIView alloc] init];

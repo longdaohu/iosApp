@@ -16,6 +16,5 @@ typedef void(^EmptyDataViewBlock)();
 @property(nonatomic,copy)EmptyDataViewBlock  actionBlock;
 @property(nonatomic,copy)NSString *errorStr;
 
-//- (void)reloadButtonShow:(BOOL)show;
 
 @end

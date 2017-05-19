@@ -79,7 +79,7 @@
  }
 
 
-#pragma mark —————— UIAlertViewDelegate
+#pragma mark : UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if ([alertView.title isEqualToString:@"支付成功"]) {
@@ -294,6 +294,7 @@ static NSString *identify = @"pay";
                     }];
                     
                 }];
+    
 }
 
 

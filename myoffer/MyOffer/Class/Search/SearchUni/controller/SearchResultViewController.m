@@ -24,7 +24,7 @@
     BOOL _loading;
     BOOL _Autralia;
 }
-@property (weak, nonatomic) IBOutlet DefaultTableView *tableView;
+@property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
 
 @end
 

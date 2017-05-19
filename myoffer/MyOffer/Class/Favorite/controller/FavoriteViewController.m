@@ -13,7 +13,7 @@
 
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) DefaultTableView *tableView;
+@property (strong, nonatomic) MyOfferTableView *tableView;
 //收藏学校数据
 @property (strong, nonatomic) NSArray *favor_Unies;
 
@@ -55,13 +55,10 @@
 
 - (void)makeTableView{
     
-    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
-    self.tableView.backgroundColor = XCOLOR_BG;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
 

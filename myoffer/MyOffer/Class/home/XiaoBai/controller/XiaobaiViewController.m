@@ -27,13 +27,13 @@
 //UIScrollView 背景View
 @property(nonatomic,strong)UIScrollView *bgView;
 //UITableView 申请攻略
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //疑难解答 数组
 @property(nonatomic,strong)NSArray *helpItems;
 //申请攻略 数组
 @property(nonatomic,strong)NSArray *gonglueItems;
 //无数据提示
-@property(nonatomic,strong)EmptyDataView *noDataView;
+//@property(nonatomic,strong)EmptyDataView *noDataView;
 
 @end
 
@@ -77,34 +77,6 @@
 }
 
 
-//数据为空时出现
-
-- (EmptyDataView *)noDataView{
-
-    if (!_noDataView) {
-        
-        XWeakSelf
-        
-       _noDataView =[EmptyDataView emptyViewWithBlock:^{
-            
-           [weakSelf makeDataSource:YES];
-
-           
-        }];
-        
-        _noDataView.frame = CGRectMake(0, 100, XSCREEN_WIDTH, 300);
-      
-    }
-    
-    return _noDataView;
-
-}
-
-
-
-
-
-
 #pragma mark : 加载申请攻略数据
 
 -(void)makeDataSource:(BOOL)fresh
@@ -117,7 +89,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        weakSelf.tableView.tableFooterView = self.noDataView;
+        [weakSelf.tableView emptyViewWithError:@"网络请求失败，点击重新加载！"];
         
     }];
    
@@ -129,7 +101,7 @@
     
     self.gonglueItems =  [GonglueItem mj_objectArrayWithKeyValuesArray:(NSArray *)response];
  
-    self.tableView.tableFooterView = [UIView new];
+    [self.tableView emptyViewWithHiden:YES];
     
     [self.tableView reloadData];
 }
@@ -219,15 +191,19 @@
 //添加申请攻略
 -(void)makeTableView{
     
-    UITableView *tableView =[[UITableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
-    tableView.backgroundColor = XCOLOR_BG;
+    MyOfferTableView *tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     tableView.contentInset = UIEdgeInsetsMake(ITEM_MARGIN, 0, 0, 0);
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.tableFooterView =[[UIView alloc] init];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.bgView addSubview:tableView];
     self.tableView = tableView;
+    
+    XWeakSelf
+    
+    self.tableView.actionBlock = ^{
+    
+        [weakSelf makeDataSource:YES];
+    };
 
 }
 

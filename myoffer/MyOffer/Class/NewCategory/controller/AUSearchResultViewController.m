@@ -19,7 +19,7 @@
      BOOL _loading;
      BOOL _Autralia;
 }
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *Restults;
 @property(nonatomic,strong)NSArray *sectionTitleList;
 @property(nonatomic,assign)NSInteger nextPage;
@@ -171,7 +171,7 @@
 
 -(void)makeTableView
 {
-    self.tableView = [[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.tableView = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT-64) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];

@@ -45,7 +45,7 @@ typedef enum {
 #define HEIGHT_BOTTOM 70
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //第一分组
 @property(nonatomic,strong)UniGroupOneView  *oneGroup;
 //学校Frame数据
@@ -352,13 +352,12 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, HEIGHT_BOTTOM, 0);
     self.tableView.backgroundColor = XCOLOR(1, 1, 1, 0);
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self makeTopNavigaitonView];
     
 }

@@ -18,7 +18,7 @@
 #import "MyOfferAutoRunBanner.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)DefaultTableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //分区头数据
 @property(nonatomic,strong)NSArray *RequestKeys;
 //推荐资讯
@@ -201,7 +201,7 @@
 -(void)makeTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.backgroundColor = XCOLOR_BG;
@@ -611,7 +611,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 1;
+    return (self.CurrentArr.count > 0);
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
