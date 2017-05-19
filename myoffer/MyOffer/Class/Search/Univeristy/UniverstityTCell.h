@@ -14,4 +14,6 @@
 
 + (instancetype)cellViewWithTableView:(UITableView *)tableView;
 
+- (void)separatorLineShow:(BOOL)show;
+
 @end

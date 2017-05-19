@@ -66,6 +66,13 @@
     }
     self.starFrames = [temps copy];
     
+    
+    CGFloat line_H =  0.5;
+    CGFloat line_W = XSCREEN_WIDTH;
+    CGFloat line_X = 10;
+    CGFloat line_Y = self.cell_Height - line_H;
+    self.lineFrame = CGRectMake(line_X, line_Y, line_W, line_H);
+    
 }
 
 

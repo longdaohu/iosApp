@@ -20,6 +20,8 @@
 //消息发布时间
 @property(nonatomic,strong)UIButton *update_at_Btn;
 
+@property(nonatomic,strong)UIView *line;
+
 
 @end
 
@@ -73,6 +75,11 @@
         self.view_count_Btn.userInteractionEnabled = NO;
         [self.contentView addSubview:self.view_count_Btn];
         
+        UIView *line = [UIView new];
+        self.line = line;
+        line.backgroundColor = XCOLOR_line;
+        [self.contentView addSubview:line];
+        
         
     }
     return self;
@@ -99,7 +106,17 @@
     [self.view_count_Btn setTitle:count forState:UIControlStateNormal];
     self.view_count_Btn.frame = messageFrame.FocusFrame;
     
+    
+    self.line.frame = messageFrame.lineFrame;
+    
+    
 }
+
+- (void)separatorLineShow:(BOOL)show{
+    
+    self.line.hidden = show;
+}
+
 
 
 

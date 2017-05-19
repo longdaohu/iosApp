@@ -63,7 +63,8 @@
 - (void)emptyViewWithError:(NSString *)error{
     
     self.emptyView.hidden = NO;
-    self.emptyView.errorLab.text = error;
+    self.emptyView.errorStr =  error;
+
     
 }
 

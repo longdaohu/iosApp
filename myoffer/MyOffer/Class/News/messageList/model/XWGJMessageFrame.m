@@ -43,6 +43,13 @@
     CGFloat  focusx = titlex;
     CGFloat  focusy = timey;
     self.FocusFrame = CGRectMake(focusx,focusy, focusw, focush);
+    
+    
+    CGFloat  line_X = titlex;
+    CGFloat  line_H = 0.5;
+    CGFloat  line_Y = Uni_Cell_Height - line_H;
+    CGFloat  line_W = XSCREEN_WIDTH;
+    self.lineFrame = CGRectMake(line_X,line_Y, line_W, line_H);
 
 
     

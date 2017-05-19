@@ -23,7 +23,7 @@
     
     
     EmptyDataView *emptyView  =[EmptyDataView emptyViewWithBlock:^{}];
-    emptyView.errorLab.text = GDLocalizedString(@"myOffer-001");
+    emptyView.errorStr =  GDLocalizedString(@"myOffer-001");
     [self.view addSubview:emptyView];
     emptyView.center = self.view.center;
   

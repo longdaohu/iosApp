@@ -24,13 +24,17 @@
 //地理位置
 @property(nonatomic,strong)UIButton *address_Btn;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation ResultTableViewCell
 +(instancetype)cellInitWithTableView:(UITableView *)tableView{
 
    static NSString  *identify = @"Result";
+    
    ResultTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    
     if (!cell) {
         
          cell =[[NSBundle mainBundle] loadNibNamed:@"ResultTableViewCell" owner:nil options:nil].lastObject;
@@ -93,6 +97,14 @@
      
     [self.selectButton addTarget:self action:@selector(selectCellID:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    
+    //底部分隔线
+    UIView *line = [UIView new];
+    line.backgroundColor = XCOLOR_line;
+    [self.contentView addSubview:line];
+    self.line = line;
+    
 }
 
 
@@ -137,10 +149,11 @@
     self.optionOrderBy =  @"ranking_ti";
     
     
-//    self.anchorView.frame = uniFrame.anchorFrame;
-    
     [self.address_Btn setTitle:university.address_short  forState:UIControlStateNormal];
     self.address_Btn.frame = uniFrame.address_Frame;
+    
+    
+    self.line.frame = uniFrame.lineFrame;
     
     
     BOOL RANK_TIType = [self.optionOrderBy isEqualToString:RANK_TI];
@@ -211,6 +224,13 @@
     }
 
 }
+
+
+- (void)separatorLineShow:(BOOL)show{
+    
+    self.line.hidden = !show;
+}
+
 
 
 

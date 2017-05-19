@@ -11,7 +11,7 @@
 
 @interface EmptyDataView ()
 @property(nonatomic,strong)UIImageView *logoView;
-@property(nonatomic,strong)UIButton *reloadBtn;
+@property(nonatomic,strong)UILabel *errorLab;
 
 @end
 
@@ -35,7 +35,6 @@
  
         UIImageView *logoView = [[UIImageView alloc] init];
         logoView.clipsToBounds = YES;
-        logoView.backgroundColor = XCOLOR_line;
         logoView.contentMode = UIViewContentModeScaleAspectFit;
         logoView.image = [UIImage imageNamed:@"no_message"];
         [self addSubview:logoView];
@@ -51,16 +50,6 @@
         self.errorLab = errorLab;
         [self addSubview:errorLab];
         
-        
-//        UIButton *reloadBtn =[[UIButton alloc] init];
-//        [reloadBtn setTitle:@"重新加载" forState:UIControlStateNormal];
-//        reloadBtn.backgroundColor = [UIColor lightGrayColor];
-//        reloadBtn.layer.cornerRadius = CORNER_RADIUS;
-//        [reloadBtn addTarget:self action:@selector(reloadBtnClick) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:reloadBtn];
-//        self.reloadBtn = reloadBtn;
-//        reloadBtn.hidden =YES;
-        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reload)];
         [self addGestureRecognizer:tap];
         
@@ -70,10 +59,18 @@
 
 - (void)reload{
     
-    NSLog(@">>>>>>>> 重新加载");
-    
+//    NSLog(@">>>>>>>> 重新加载");
     if (self.actionBlock) self.actionBlock();
     
+}
+
+
+- (void)setErrorStr:(NSString *)errorStr{
+
+    _errorStr = errorStr;
+    
+    self.errorLab.text = errorStr;
+
 }
 
 
@@ -81,24 +78,19 @@
 
     [super layoutSubviews];
     
-    CGFloat logoX = 0;
-    CGFloat logoY = 0;
-    CGFloat logoW = self.bounds.size.width;
-    CGFloat logoH = self.bounds.size.height - 100;
-     self.logoView.frame = CGRectMake(logoX, logoY, logoW, logoH);
+    CGFloat logo_X = 0;
+    CGFloat logo_Y = 0;
+    CGFloat logo_W = self.bounds.size.width;
+    CGFloat logo_H = self.bounds.size.height - 100;
+     self.logoView.frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
     
     
-    CGFloat errorX = 0;
-    CGFloat errorY = CGRectGetMaxY(self.logoView.frame);
-    CGFloat errorW = logoW;
-    CGFloat errorH = 50;
-     self.errorLab.frame = CGRectMake(errorX, errorY, errorW, errorH);
-    
-    CGFloat reloadY = CGRectGetMaxY(self.errorLab.frame) + 10;
-    CGFloat reloadW = 120;
-    CGFloat reloadH = 40;
-    CGFloat reloadX = 0.5  * (self.bounds.size.width - reloadW);
-    self.reloadBtn.frame = CGRectMake(reloadX, reloadY, reloadW, reloadH);
+    CGFloat error_X = 0;
+    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame);
+    CGFloat error_W = logo_W;
+    CGFloat error_H = 50;
+    self.errorLab.frame = CGRectMake(error_X, error_Y, error_W, error_H);
+  
 }
 
 

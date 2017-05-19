@@ -358,7 +358,7 @@ typedef enum {
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self makeTopNavigaitonView];
     
 }
@@ -477,7 +477,11 @@ typedef enum {
     }else if(indexPath.section == 1){
     
         MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
+
         news_cell.messageFrame =  group.items[indexPath.row];
+        
+        [news_cell separatorLineShow: (group.items.count - 1 == indexPath.row)];
+
          return news_cell;
         
     }else{
@@ -485,6 +489,8 @@ typedef enum {
         UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
         
         uni_cell.uniFrame = group.items[indexPath.row];
+
+        [uni_cell separatorLineShow:NO];
 
         return uni_cell;
         

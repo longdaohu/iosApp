@@ -10,6 +10,9 @@
 @class XWGJMessageFrame;
 @interface MessageCell : UITableViewCell
 @property(nonatomic,strong)XWGJMessageFrame *messageFrame;
+
 +(instancetype)cellWithTableView:(UITableView *)tableView;
+
+- (void)separatorLineShow:(BOOL)show;
 
 @end

@@ -144,6 +144,7 @@
     self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
 }
@@ -325,8 +326,7 @@
 }
 
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
     
@@ -420,6 +420,8 @@
         MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
         
         news_cell.messageFrame =  group.items[indexPath.row];
+
+        [news_cell separatorLineShow: (group.items.count - 1 == indexPath.row)];
         
         return news_cell;
         
@@ -428,6 +430,8 @@
         UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
       
         uni_cell.uniFrame = group.items[indexPath.row];
+        
+        [uni_cell separatorLineShow:NO];
         
         return uni_cell;
         

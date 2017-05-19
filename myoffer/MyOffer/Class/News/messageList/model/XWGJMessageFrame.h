@@ -14,5 +14,7 @@
 @property(nonatomic,assign)CGRect TitleFrame;
 @property(nonatomic,assign)CGRect FocusFrame;
 @property(nonatomic,assign)CGRect TimeFrame;
+@property(nonatomic,assign)CGRect lineFrame;
+
 +(instancetype)messageFrameWithMessage:(MyOfferArticle *)message;
 @end

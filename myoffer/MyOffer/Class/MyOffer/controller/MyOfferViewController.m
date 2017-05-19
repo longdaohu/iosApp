@@ -24,7 +24,7 @@
     
     
     EmptyDataView *emptyView  =[EmptyDataView emptyViewWithBlock:^{}];
-    emptyView.errorLab.text = @"亲，您的offer无法在app上显示，请登录myoffer网站查看。";
+    emptyView.errorStr =  @"亲，您的offer无法在app上显示，请登录myoffer网站查看。";
     [self.view addSubview:emptyView];
     emptyView.center = self.view.center;
  

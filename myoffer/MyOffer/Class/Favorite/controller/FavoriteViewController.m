@@ -60,6 +60,7 @@
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
     self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
@@ -157,11 +158,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+    UniverstityTCell *cell =[UniverstityTCell cellViewWithTableView:tableView];
     
-    uni_cell.uniFrame = self.favor_Unies[indexPath.section];
+    cell.uniFrame = self.favor_Unies[indexPath.section];
     
-    return uni_cell;
+    [cell separatorLineShow:NO];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

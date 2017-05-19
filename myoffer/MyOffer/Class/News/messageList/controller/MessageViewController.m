@@ -204,9 +204,9 @@
     self.tableView =[[DefaultTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 49) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
-//    self.tableView.hidden  = YES;
-//    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.mj_footer       = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.view addSubview:self.tableView];
     [self makeAutoLoopViewAtView];
@@ -630,6 +630,8 @@
     
     cell.messageFrame = self.CurrentArr[indexPath.row];
     
+    [cell separatorLineShow:(self.CurrentArr.count - 1 == indexPath.row)];
+
     return cell;
 }
 

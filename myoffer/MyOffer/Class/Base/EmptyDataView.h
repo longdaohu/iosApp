@@ -14,7 +14,7 @@ typedef void(^EmptyDataViewBlock)();
 @interface EmptyDataView : UIView
 + (instancetype)emptyViewWithBlock:(EmptyDataViewBlock)actionBlock;
 @property(nonatomic,copy)EmptyDataViewBlock  actionBlock;
-@property(nonatomic,strong)UILabel *errorLab;
+@property(nonatomic,copy)NSString *errorStr;
 
 //- (void)reloadButtonShow:(BOOL)show;
 

@@ -20,5 +20,6 @@
 @property(nonatomic,assign)CGRect rank_Frame;
 @property(nonatomic,assign)CGRect starBgFrame;
 @property(nonatomic,strong)NSArray *starFrames;
+@property(nonatomic,assign)CGRect lineFrame;
 
 @end

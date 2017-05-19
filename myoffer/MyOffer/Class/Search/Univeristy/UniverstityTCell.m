@@ -31,6 +31,8 @@
 //热门
 @property(nonatomic,strong) UIImageView *hot;
 
+@property(nonatomic,strong) UIView *line;
+
 
 @end
 
@@ -109,7 +111,6 @@
     
     //底部分隔线
     UIView *line = [UIView new];
-    line.hidden = YES;
     line.backgroundColor = XCOLOR_line;
     [self.contentView addSubview:line];
     self.bottom_line = line;
@@ -131,10 +132,12 @@
     hot.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:hot];
     self.hot = hot;
+ 
+    
 }
 
 //label创建共有方法
--(UILabel *)getLabelWithFontSize:(CGFloat)fontSize andTextColor:(UIColor *)textColor
+- (UILabel *)getLabelWithFontSize:(CGFloat)fontSize andTextColor:(UIColor *)textColor
 {
     UILabel *Lab =[[UILabel alloc] init];
     Lab.textColor = textColor;
@@ -142,6 +145,11 @@
     [self.contentView addSubview:Lab];
     
     return Lab;
+}
+
+- (void)separatorLineShow:(BOOL)show{
+    
+    self.bottom_line.hidden = !show;
 }
 
 
@@ -187,22 +195,8 @@
     self.hot.frame = uniFrame.hot_Frame;
     
     self.bottom_line.frame =  uniFrame.bottom_line_Frame;
-    
-    
+     
     self.StarsBgView.frame = uniFrame.starBgFrame;
-    
-    //当排名方式是 世界排名时，只显示世界排名信息
-//    if ([self.optionOrderBy isEqualToString:RANK_QS]) {
-//        
-//        NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
-//        
-//        [self.rankBtn setTitle:[NSString stringWithFormat:@"世界排名：%@",rankStr01] forState:UIControlStateNormal];
-//        
-//        self.StarsBgView.hidden = YES;
-//        
-//        return;
-//    }
-    
     
     //判断是否需要显示*号   澳大利来排名时
     if (isStart) {

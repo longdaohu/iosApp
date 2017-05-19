@@ -94,7 +94,11 @@
     self.hot_Frame = CGRectMake(hot_X,hot_Y, hot_W,hot_H);
     
     
-    self.bottom_line_Frame = CGRectMake(10, self.cell_Height - 1, XSCREEN_WIDTH, 1);
+    CGFloat line_H = 0.5;
+    CGFloat line_W = XSCREEN_WIDTH;
+    CGFloat line_X = 10;
+    CGFloat line_Y = self.cell_Height - line_H;
+    self.bottom_line_Frame = CGRectMake(line_X, line_Y, line_W, line_H);
     
     
     

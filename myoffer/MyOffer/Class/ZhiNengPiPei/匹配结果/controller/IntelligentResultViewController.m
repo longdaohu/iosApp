@@ -293,12 +293,8 @@
 }
 
 
--(void)makeCurrentLabel:(NSString *)currentCountSr  currentItem:(NSString *)currentStr
-{
-//    NSString *currentText = [NSString stringWithFormat:@"%@",currentStr];
-//    NSMutableAttributedString *Attribut = [[NSMutableAttributedString alloc] initWithString:currentText];
-//    [Attribut addAttribute:NSForegroundColorAttributeName   value:XCOLOR_RED  range:[currentText rangeOfString:currentCountSr]];
-//    self.currentCountLabel.attributedText = Attribut;
+-(void)makeCurrentLabel:(NSString *)currentCountSr  currentItem:(NSString *)currentStr{
+
     self.currentCountLabel.text = currentStr;
 }
 
@@ -504,14 +500,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ResultTableViewCell  *cell = [ResultTableViewCell cellInitWithTableView:tableView];
+    
     cell.delegate = self;
     
     UniversityFrame *uniFrame = self.resultList[indexPath.row];
+    
     MyOfferUniversityModel *university = uniFrame.university;
+    
     [cell configureWithUniversityFrame:uniFrame];
+    
     [self configureCellSelectionView:cell universityId:university.NO_id];
     
-    return cell; 
+    [cell separatorLineShow: !(self.resultList.count - 1 == indexPath.row)];
+
+    return cell;
 }
 
 #pragma mark : ResultTableViewCellDelegate
