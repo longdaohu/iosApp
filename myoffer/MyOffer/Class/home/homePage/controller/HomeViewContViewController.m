@@ -76,7 +76,6 @@
  
     [self presentViewWillAppear];
     
-    
     [UIApplication sharedApplication].statusBarStyle = (self.currentStatusBarStyle ==  UIStatusBarStyleLightContent ) ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
     
 }
@@ -331,9 +330,7 @@
     [self makeLeftBarButtonItemView];
     
     UIImageView *maskBgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
-    
     maskBgView.image = [UIImage imageNamed:@"gradient_up"];
-    
     [self.view addSubview:maskBgView];
     
     
@@ -343,7 +340,6 @@
     self.topView = topView;
     
     self.currentStatusBarStyle = UIStatusBarStyleLightContent;
- 
     
 }
 
@@ -395,8 +391,8 @@
 -(void)makeTableHeader
 {
   
-    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.headerFrame.Header_Height) withactionBlock:^(NSInteger itemTag) {
-        [self HomeHeaderViewWithItemtap:itemTag];
+    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.headerFrame.Header_Height) withactionBlock:^(NSInteger tag) {
+        [self HomeHeaderViewWithTag:tag];
     }];
     
     TableHeaderView.headerFrame = self.headerFrame;
@@ -626,7 +622,7 @@
     
 }
 #pragma mark : HomeHeaderViewDelegate
--(void)HomeHeaderViewWithItemtap:(NSInteger )tag
+-(void)HomeHeaderViewWithTag:(NSInteger )tag
 {
     
     
@@ -877,7 +873,10 @@ ENGLISH  设置环境
 {
     [MobClick event:@"WoYaoLiuXue"];
     
-    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
+//    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
+    
+    [self presentViewController:[[WYLXViewController alloc] init]  animated:YES completion:nil];
+    
 }
 
 //跳转留学小白

@@ -9,10 +9,19 @@
 #import <Foundation/Foundation.h>
 
 @interface WYLXGroup : NSObject
-@property(nonatomic,copy)NSString *headerTitle;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,copy)NSString *placeHolder;
 @property(nonatomic,copy)NSString *content;
-@property(nonatomic,copy)NSString *cellKey;
+@property(nonatomic,copy)NSString *key;
+@property(nonatomic,assign)BOOL spod;
 
-+(instancetype)groupWithHeader:(NSString *)headerTitle content:(NSString *)content cellKey:(NSString *)key;
+@property(nonatomic,assign)CGRect titleFrame;
+@property(nonatomic,assign)CGRect inputFrame;
+@property(nonatomic,assign)CGRect spodFrame;
+@property(nonatomic,assign)CGRect lineFrame;
+@property(nonatomic,assign)CGFloat cell_Height;
+
+
++ (instancetype)groupWithTitle:(NSString *)title placeHolder:(NSString *)placeHolder content:(NSString *)content groupKey:(NSString *)key spod:(BOOL)spod;
 
 @end

@@ -12,6 +12,8 @@
 
 - (IBAction)KeyBoardHiden:(UIBarButtonItem *)sender {
     
+    if (self.actionBlock) self.actionBlock(@"收起");
+    
  
     if ([self.delegate respondsToSelector:@selector(KeyboardToolar:didClick:)]) {
         
@@ -22,6 +24,7 @@
 
 - (IBAction)NextTextField:(UIBarButtonItem *)sender {
     
+    if (self.actionBlock) self.actionBlock(@"下一个");
     
     
     if ([self.delegate respondsToSelector:@selector(KeyboardToolar:didClick:)]) {
@@ -30,4 +33,7 @@
         [self.delegate KeyboardToolar:self didClick:sender];
     }
 }
+
+
+
 @end

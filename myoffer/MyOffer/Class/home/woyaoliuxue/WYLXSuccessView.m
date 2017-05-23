@@ -37,10 +37,8 @@
 
 - (void)caseBack
 {
-    if (self.actionBlock) {
-        
-        self.actionBlock();
-    }
+    if (self.actionBlock) self.actionBlock();
+    
 }
 
 - (void)layoutSubviews{

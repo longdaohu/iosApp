@@ -43,9 +43,9 @@
                                      (id)colorOne.CGColor,
                                      (id)colorTwo.CGColor,
                                      nil];
+        gradient.locations  = @[@(0.5), @(1.0)];
         gradient.startPoint = CGPointMake(0, 0);
         gradient.endPoint = CGPointMake(1.0, 0);
-        gradient.backgroundColor = [UIColor redColor].CGColor;
         [self.blackView.layer insertSublayer:gradient atIndex:0];
         self.gradient = gradient;
         

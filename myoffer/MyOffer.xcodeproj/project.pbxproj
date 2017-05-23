@@ -308,7 +308,6 @@
 		AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */; };
 		AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */; };
 		AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */; };
-		AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A701D5B23F600DD7939 /* WYLXCell.m */; };
 		AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* WYLXViewController.m */; };
 		AEA24A9D1D5B23F600DD7939 /* XiaobaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A781D5B23F600DD7939 /* XiaobaiViewController.m */; };
 		AEA24A9F1D5B23F600DD7939 /* GongLueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A7C1D5B23F600DD7939 /* GongLueCell.m */; };
@@ -394,6 +393,8 @@
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
 		AEA86E041EA4C8210021BE1B /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA86E031EA4C8210021BE1B /* MyofferUser.m */; };
 		AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */; };
+		AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */; };
+		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
 		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
 		AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */; };
@@ -983,8 +984,6 @@
 		AEA24A6C1D5B23F600DD7939 /* WYLXHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXHeaderView.m; sourceTree = "<group>"; };
 		AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXSuccessView.h; sourceTree = "<group>"; };
 		AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXSuccessView.m; sourceTree = "<group>"; };
-		AEA24A6F1D5B23F600DD7939 /* WYLXCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXCell.h; sourceTree = "<group>"; };
-		AEA24A701D5B23F600DD7939 /* WYLXCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXCell.m; sourceTree = "<group>"; };
 		AEA24A711D5B23F600DD7939 /* WYLXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXViewController.h; sourceTree = "<group>"; };
 		AEA24A721D5B23F600DD7939 /* WYLXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXViewController.m; sourceTree = "<group>"; };
 		AEA24A771D5B23F600DD7939 /* XiaobaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XiaobaiViewController.h; sourceTree = "<group>"; };
@@ -1139,6 +1138,10 @@
 		AEA86E031EA4C8210021BE1B /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferUniversityModel.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferUniversityModel.m; sourceTree = "<group>"; };
+		AEB634A91ED2B996009DFFD4 /* ZhiXunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiXunCell.h; sourceTree = "<group>"; };
+		AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiXunCell.m; sourceTree = "<group>"; };
+		AEB634AC1ED2D778009DFFD4 /* ZixunFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZixunFooterView.h; sourceTree = "<group>"; };
+		AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZixunFooterView.m; sourceTree = "<group>"; };
 		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -3321,8 +3324,10 @@
 				AEA24A6D1D5B23F600DD7939 /* WYLXSuccessView.h */,
 				AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */,
 				AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */,
-				AEA24A6F1D5B23F600DD7939 /* WYLXCell.h */,
-				AEA24A701D5B23F600DD7939 /* WYLXCell.m */,
+				AEB634A91ED2B996009DFFD4 /* ZhiXunCell.h */,
+				AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */,
+				AEB634AC1ED2D778009DFFD4 /* ZixunFooterView.h */,
+				AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -3781,7 +3786,6 @@
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
-				AEA24A9A1D5B23F600DD7939 /* WYLXCell.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24BC01D5B264300DD7939 /* MessageDetailFrame.m in Sources */,
 				AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */,
@@ -3806,6 +3810,7 @@
 				AE1FD71F1D5C929500FFD5A8 /* MJPropertyKey.m in Sources */,
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
+				AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,
 				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
@@ -3900,6 +3905,7 @@
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,
 				AE1FD74E1D5C929500FFD5A8 /* MJRefreshAutoStateFooter.m in Sources */,
 				AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */,
+				AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */,
 				AE1FD7251D5C929500FFD5A8 /* NSString+MJExtension.m in Sources */,
 				AE2DE44B1E9633A9009683B0 /* ServiceItemCellFrame.m in Sources */,
 				AEA24B271D5B251800DD7939 /* LoginSelectViewController.m in Sources */,

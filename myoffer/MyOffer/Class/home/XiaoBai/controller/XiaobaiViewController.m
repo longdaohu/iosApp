@@ -32,8 +32,7 @@
 @property(nonatomic,strong)NSArray *helpItems;
 //申请攻略 数组
 @property(nonatomic,strong)NSArray *gonglueItems;
-//无数据提示
-//@property(nonatomic,strong)EmptyDataView *noDataView;
+
 
 @end
 
@@ -97,7 +96,6 @@
 
 //根据网络请求结果配置UI
 - (void)configrationUIWithResponse:(id)response{
-    
     
     self.gonglueItems =  [GonglueItem mj_objectArrayWithKeyValuesArray:(NSArray *)response];
  

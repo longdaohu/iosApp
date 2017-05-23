@@ -9,18 +9,19 @@
 #import "WYLXHeaderView.h"
 
 @interface WYLXHeaderView ()
-//图片
-@property(nonatomic,strong)UIImageView *iconView;
-//标题
-@property(nonatomic,strong)UITextView *titleView;
+@property(nonatomic,strong)CAGradientLayer *gradient;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,strong)UIButton *dismissBtn;
+@property(nonatomic,strong)UILabel *titleLab;
 
 @end
 
 @implementation WYLXHeaderView
-+ (instancetype)headViewWithContent:(NSString *)content{
++ (instancetype)headViewWithTitle:(NSString *)title{
    
     WYLXHeaderView *header = [[WYLXHeaderView  alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
-    header.content = content;
+    
+    header.title = title;
     
     return header;
 }
@@ -31,57 +32,73 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.iconView =[[UIImageView alloc] init];
-        self.iconView.clipsToBounds = YES;
-        self.iconView.contentMode = UIViewContentModeScaleAspectFill;
-        self.iconView.image = [UIImage imageNamed:@"woYaoLiuXue.jpg"];
-        [self addSubview:self.iconView];
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        self.gradient = gradient;
+        UIColor *colorOne = XCOLOR(33, 183, 232, 1);
+        UIColor *colorTwo = XCOLOR(9, 153, 218, 1);
+        gradient.colors           = [NSArray arrayWithObjects:
+                                     (id)colorOne.CGColor,
+                                     (id)colorTwo.CGColor,
+                                     nil];
+        gradient.locations  = @[@(0.5), @(1.0)];
+        gradient.startPoint = CGPointMake(0, 0);
+        gradient.endPoint = CGPointMake(1.0, 0);
+        [self.layer insertSublayer:gradient atIndex:0];
+ 
         
+        UIButton *dismissBtn = [[UIButton alloc] init];
+        self.dismissBtn = dismissBtn;
+        [self addSubview:dismissBtn];
+         dismissBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [dismissBtn setImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
+        [dismissBtn addTarget:self action:@selector(dismissBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
+        dismissBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
-        UITextView *titleView =[[UITextView alloc] init];
-        titleView.scrollEnabled = NO;
-        titleView.editable = NO;
-        titleView.textColor =XCOLOR_RED;
-        titleView.font = XFONT(XPERCENT * 13);
-        titleView.textAlignment = NSTextAlignmentLeft;
-        titleView.textContainerInset = UIEdgeInsetsMake(0, -5, 0, -5);
-        titleView.dataDetectorTypes = UIDataDetectorTypeAll;
-        titleView.backgroundColor = XCOLOR_BG;
-        [self addSubview:titleView];
-        self.titleView = titleView;
+        UILabel *titleLab = [[UILabel alloc] init];
+        titleLab.numberOfLines = 0;
+        titleLab.font = XFONT(18);
+        titleLab.textColor = XCOLOR_WHITE;
+        self.titleLab = titleLab;
+        [self addSubview:titleLab];
+        
         
     }
     return self;
 }
 
-- (void)setContent:(NSString *)content{
+- (void)setTitle:(NSString *)title{
 
-    _content = content;
+    _title = title;
     
-    CGSize contentSize = self.bounds.size;
-    
-    CGFloat iconx = 0;
-    CGFloat icony = 0;
-    CGFloat iconw = contentSize.width;
-    CGFloat iconh = 130 + (iconw - 320) * 0.2;
-    self.iconView.frame = CGRectMake(iconx,icony,iconw,iconh);
+    self.titleLab.text = title;
     
     
-    CGFloat titlex = ITEM_MARGIN;
-    CGFloat titley = CGRectGetMaxY(self.iconView.frame) + ITEM_MARGIN;
-    CGFloat titlew = contentSize.width - 2 * titlex;
-    CGFloat titleHeight = [content  KD_sizeWithAttributeFont:XFONT(XPERCENT * 13) maxWidth:titlew].height;
-    self.titleView.text = content;
-    self.titleView.frame = CGRectMake(titlex, titley, titlew, titleHeight);
+    CGFloat dis_W = 40;
+    CGFloat dis_H = dis_W;
+    CGFloat dis_X = 14;
+    CGFloat dis_Y = 22;
+    self.dismissBtn.frame = CGRectMake(dis_X,dis_Y,dis_W,dis_H);
     
+    CGFloat margin = 10 + XFONT_SIZE(1) * 10;
     
-     self.height = CGRectGetMaxY(self.titleView.frame) + ITEM_MARGIN;
+    CGFloat title_X = dis_X;
+    CGFloat title_Y = self.dismissBtn.center.y +  8 + margin;
+    CGFloat title_W = XSCREEN_WIDTH - 2 * title_X;
+    CGFloat title_H = [self.title  KD_sizeWithAttributeFont:XFONT(18) maxWidth:title_W].height;
+    self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
     
+    self.mj_h = CGRectGetMaxY(self.titleLab.frame) + margin;
+    
+    self.gradient.frame = self.bounds;
+
 }
 
 
 
+- (void)dismissBtnOnClick{
 
+    if (self.actionBlock) self.actionBlock();
+}
 
 
 

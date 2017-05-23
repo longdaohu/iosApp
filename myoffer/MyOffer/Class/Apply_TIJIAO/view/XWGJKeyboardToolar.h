@@ -12,7 +12,12 @@
 -(void)KeyboardToolar:(XWGJKeyboardToolar *)toolView didClick:(UIBarButtonItem *)sender;
 @end
 
+typedef void(^KeyboardToolerBlock)(NSString *);
+
 @interface XWGJKeyboardToolar : UIView
+
+@property(nonatomic,copy)KeyboardToolerBlock actionBlock;
+
 @property(nonatomic,weak)id<KeyboardToolarDelegate> delegate;
 
 @end

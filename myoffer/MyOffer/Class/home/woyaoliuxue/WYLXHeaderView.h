@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^WYLXHeaderViewBlock)();
+
 @interface WYLXHeaderView : UIView
-@property(nonatomic,copy)NSString *content;
-+(instancetype)headViewWithContent:(NSString *)content;
+
+@property(nonatomic,copy)WYLXHeaderViewBlock actionBlock;
+
++(instancetype)headViewWithTitle:(NSString *)title;
+
 @end

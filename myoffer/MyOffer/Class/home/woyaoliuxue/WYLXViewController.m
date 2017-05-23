@@ -8,20 +8,22 @@
 
 #import "WYLXViewController.h"
 #import "WYLXHeaderView.h"
-#import "WYLXCell.h"
 #import "WYLXSuccessView.h"
-#import "NomalTableSectionHeaderView.h"
 #import "WYLXGroup.h"
+#import "ZhiXunCell.h"
+#import "ZixunFooterView.h"
 
-typedef enum {
+
+typedef NS_ENUM(NSInteger,PickerViewType){
+    
     PickerViewTypeCountry = 110,
-    PickerViewTypeSubject = 111,
-    PickerViewTypeGrade = 112,
-    PickerViewTypeCode = 113
-}PickerViewType;//表头按钮选项
+    PickerViewTypeSubject,
+    PickerViewTypeGrade,
+    PickerViewTypeCode
+};
 
 
-@interface WYLXViewController ()<UITableViewDataSource,UITableViewDelegate,WYLXCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface WYLXViewController ()<UITableViewDataSource,UITableViewDelegate,ZiXunCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 //国家名称数组
@@ -37,11 +39,13 @@ typedef enum {
 //专业picker
 @property(nonatomic,strong)UIPickerView *subjectPicker;
 //正在编辑的cell
-@property(nonatomic,strong)WYLXCell *editingCell;
+@property(nonatomic,strong)ZhiXunCell *editingCell;
 //提示框
 @property(nonatomic,strong)WYLXSuccessView *sucessView;
 //数据源
 @property(nonatomic,strong)NSArray *groups;
+
+@property(nonatomic,strong)ZixunFooterView *footer;
 
 @end
 
@@ -72,6 +76,7 @@ typedef enum {
     picker.dataSource = self;
     picker.delegate = self;
     picker.tag = type;
+    
     return picker;
 }
 
@@ -111,11 +116,11 @@ typedef enum {
 -(NSArray *)groups{
 
     if (!_groups) {
-        
-        WYLXGroup *contry   =  [WYLXGroup groupWithHeader:@"想去的国家"   content:nil cellKey:@"country"];
-        WYLXGroup *phone   =  [WYLXGroup groupWithHeader:@"联系电话"   content:nil cellKey:@"phone"];
-        WYLXGroup *grade =  [WYLXGroup groupWithHeader:@"就读年级"   content:nil cellKey:@"grade"];
-        WYLXGroup *subject  =  [WYLXGroup groupWithHeader:@"就读专业"   content:nil cellKey:@"subject"];
+  
+        WYLXGroup *contry   =  [WYLXGroup groupWithTitle:@"想去的留学目的地" placeHolder:@"英国" content:nil groupKey:@"country" spod:true];
+        WYLXGroup *phone    =  [WYLXGroup groupWithTitle:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phone" spod:false];
+        WYLXGroup *grade    =  [WYLXGroup groupWithTitle:@"就读年级" placeHolder:@"本科大四" content:nil groupKey:@"grade" spod:true];
+        WYLXGroup *subject  =  [WYLXGroup groupWithTitle:@"就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"country" spod:true];
         
         _groups = @[contry,phone,grade,subject];
     }
@@ -130,7 +135,7 @@ typedef enum {
         XWeakSelf
         _sucessView = [WYLXSuccessView successViewWithBlock:^{
             
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [weakSelf dismiss];
 
         }];
  
@@ -209,87 +214,86 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.sectionFooterHeight = 8;
-    self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.tableFooterView = [UIView new];
     [self.view  addSubview:self.tableView];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self makeHeaderAndFooterView];
-
+ 
 }
 
 - (void)makeHeaderAndFooterView{
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 100)];
-    UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.5 *(XSCREEN_WIDTH - 300), 25, 300, 50)];
-    [commitBtn setTitle:@"我要留学" forState:UIControlStateNormal];
-    [commitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [commitBtn setTitleColor:XCOLOR_LIGHTGRAY forState:UIControlStateHighlighted];
-    commitBtn.backgroundColor = XCOLOR_RED;
-    commitBtn.layer.cornerRadius = CORNER_RADIUS;
-    [commitBtn addTarget:self action:@selector(caseLiuxueRequest) forControlEvents:UIControlEventTouchUpInside];
-    [footerView addSubview:commitBtn];
     
+    XWeakSelf
+    WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"嗨, 想快速获得留学信息和申请方案？只需填写留学意向，我们的专业顾问将立即为你服务！"];
+    headerView.actionBlock = ^{
+        
+        [weakSelf dismiss];
+
+    };
+    [self.view insertSubview:headerView aboveSubview:self.tableView];
+    self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h, 0, 0, 0);
     
-    WYLXHeaderView *headerView =[WYLXHeaderView headViewWithContent:GDLocalizedString(@"WoYaoLiuXue_FillInfor")];
-   
-    [self.tableView beginUpdates];
-    self.tableView.tableHeaderView = headerView;
-    self.tableView.tableFooterView = footerView;
-    [self.tableView endUpdates];
- 
+    ZixunFooterView *footer = [[ZixunFooterView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - 60, XSCREEN_WIDTH, 60)];
+    self.footer = footer;
+    footer.actionBlock = ^(UIButton *sender){
+      
+        if ([sender.currentTitle isEqualToString:@"提交"]) {
+            
+            [weakSelf caseLiuxueRequest];
+            
+        }else{
+        
+            [weakSelf caseCall];
+        }
+        
+        
+    };
+    [self.view insertSubview:footer aboveSubview:self.tableView];
+  
 }
 
 
-#pragma mark —————— UITableViewDataSource,UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+#pragma mark : UITableViewDataSource,UITableViewDelegate
 
-    return 20 * XPERCENT;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+
+    WYLXGroup *group = self.groups[indexPath.row];
+
+    return group.cell_Height;
 }
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    NomalTableSectionHeaderView *header =[NomalTableSectionHeaderView sectionViewWithTableView:tableView];
-    
-    WYLXGroup *group = self.groups[section];
-    
-    [header sectionHeaderWithTitle:group.headerTitle FontSize: XPERCENT *13.0];
-    
-    return header;
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return self.groups.count;
-}
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
-    return 1;
+    return self.groups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    WYLXCell *cell =[WYLXCell cellWithTableView:tableView cellForIndexPath:indexPath];
+    ZhiXunCell *cell =[ZhiXunCell cellWithTableView:tableView indexPath:indexPath];
+    
+    cell.group = self.groups[indexPath.row];
+    
     cell.delegate = self;
-    switch (indexPath.section) {
+    
+    switch (indexPath.row) {
             
         case 0:
-            cell.titleTF.inputView = self.countryPicker;
+            cell.inputTF.inputView = self.countryPicker;
              break;
         case 1:
-            cell.titleTF.keyboardType = UIKeyboardTypeNumberPad;
+            cell.inputTF.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case 2:
-            cell.titleTF.inputView = self.gradePicker;
+            cell.inputTF.inputView = self.gradePicker;
             break;
         default:
-            cell.titleTF.inputView = self.subjectPicker;
+            cell.inputTF.inputView = self.subjectPicker;
             break;
     }
     
@@ -297,35 +301,15 @@ typedef enum {
     
 }
 
+
+#pragma mark : UIScrollViewDelegate
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     [self.view endEditing:YES];
 }
 
 
-//判断必填项是否为空
--(BOOL)checkFillInformationWithContent:(WYLXGroup *)group{
-    
-    if (!group.content.length) {
-        
-         NSString *message = [NSString stringWithFormat:@"%@%@",group.headerTitle,GDLocalizedString(@"TiJiao-Empty")];
-         AlerMessage(message);
-        
-         return NO;
-    
-    }else if ([group.cellKey isEqualToString:@"phone"] && (group.content.length < 7)) {
-  
-         AlerMessage(@"请输入正确的手机号码");
-        
-         return NO;
-    
-     }else{
-        
-        return YES;
-    }
-
-}
-    
 
 
 //提交成功提示框
@@ -342,71 +326,82 @@ typedef enum {
 }
 
 
-#pragma mark —————————— XliuxueTableViewCellDelegate
--(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath   textFieldDidBeginEditing:(UITextField *)textField{
+#pragma mark : zixunCellDelegate
+
+- (void)zixunCell:(ZhiXunCell *)cell indexPath:(NSIndexPath *)indexPath   textFieldDidBeginEditing:(UITextField *)textField{
 
     self.editingCell = cell;
     
-    
-    if (!cell.titleTF.text.length) {
-        
-        WYLXGroup *group = self.groups[indexPath.section];
+    WYLXGroup *group = self.groups[indexPath.row];
 
+    if (!cell.inputTF.text.length) {
+        
         NSString *content;
         
-        switch (indexPath.section) {
+        switch (indexPath.row) {
             case 0:
-                 content =  self.countryArr.count == 0 ? @"英国" : self.countryArr[0];
-                  break;
+                content =  self.countryArr.count == 0 ? @"英国" : self.countryArr[0];
+                break;
             case 2:
-                 content =  self.gradeArr.count == 0 ? @"本科大四" : self.gradeArr[0];
-                  break;
+                content =  self.gradeArr.count == 0 ?  @"本科大四" : self.gradeArr[0];
+                break;
             case 3:
-                 content =  self.subjectArr.count == 0 ? @"艺术与设计" : self.subjectArr[0];
-                 break;
+                content =  self.subjectArr.count == 0 ? @"艺术与设计" : self.subjectArr[0];
+                break;
             default:
                 break;
         }
         
-        cell.titleTF.text = content;
+        cell.inputTF.text = content;
+        
         group.content = content;
     }
+  
     
 }
 
--(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath   textFieldDidEndEditing:(UITextField *)textField{
+-  (void)zixunCell:(ZhiXunCell *)cell indexPath:(NSIndexPath *)indexPath   textFieldDidEndEditing:(UITextField *)textField{
+
+    WYLXGroup *group = self.groups[indexPath.row];
     
-    WYLXGroup *group = self.groups[indexPath.section];
+    if ([group.key isEqualToString:@"phone"]){
     
-    if ([group.cellKey isEqualToString:@"phone"]) {
-     
         group.content = textField.text;
+        //监听电话号码输入
+        [self.footer submitButtonEnable:textField.text.length > 7];
         
     }
     
+
+    
+    
 }
 
-
--(void)XliuxueTableViewCell:(WYLXCell *)cell withIndexPath:(NSIndexPath *)indexPath didClick:(UIBarButtonItem *)sender{
+- (void)zixunCell:(ZhiXunCell *)cell indexPath:(NSIndexPath *)indexPath didClickWithTextField:(UITextField *)textField{
     
-    NSInteger newSection = indexPath.section + 1;
-    
-    if (10  == sender.tag ||  self.groups.count == newSection) {
+     NSIndexPath *nextIndex = [NSIndexPath indexPathForRow: indexPath.row + 1 inSection:indexPath.section];
+  
+    if (nextIndex.row == self.groups.count) {
         
         [self.view endEditing:YES];
-        
-        return;
-        
-    }
     
-    NSIndexPath *nextIndex = [NSIndexPath indexPathForRow:indexPath.row inSection:newSection];
-    WYLXCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
-    [nextCell.titleTF becomeFirstResponder];
+        return;
+    };
+    
+    
+    ZhiXunCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
+    
+    [nextCell.inputTF becomeFirstResponder];
+    
+    
     
 }
 
 
-#pragma mark ----UIPickerViewDataSource, UIPickerViewDelegate
+
+
+#pragma mark : UIPickerViewDataSource, UIPickerViewDelegate
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
     return 1;
@@ -454,15 +449,18 @@ typedef enum {
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    WYLXCell *Editingcell = ( WYLXCell *)self.editingCell;
-    NSIndexPath *indexpath = [self.tableView indexPathForCell:Editingcell];
-    WYLXGroup *group = self.groups[indexpath.section];
+    
+    NSIndexPath *indexpath = [self.tableView indexPathForCell:self.editingCell];
+    
+    WYLXGroup *group = self.groups[indexpath.row];
     
     NSString *content;
+    
     switch (pickerView.tag) {
+            
         case PickerViewTypeCountry:
             content = self.countryArr[row];
-             break;
+            break;
          case PickerViewTypeSubject:
             content = self.subjectArr[row];
             break;
@@ -473,12 +471,13 @@ typedef enum {
             break;
     }
     
-    Editingcell.titleTF.text = content;
+
+    self.editingCell.inputTF.text = content;
     group.content = content;
     
 }
 
-#pragma mark —————— 键盘处理
+#pragma mark : 键盘处理
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     [self moveTextViewForKeyboard:aNotification up:YES];
 }
@@ -507,7 +506,7 @@ typedef enum {
     
     UIEdgeInsets insets =   _tableView.contentInset;
     
-    insets.bottom = up ? keyboardEndFrame.size.height : 50;
+    insets.bottom = up ? keyboardEndFrame.size.height : 0;
    
     _tableView.contentInset = insets;
     
@@ -523,32 +522,25 @@ typedef enum {
     NSMutableDictionary *fastPass = [NSMutableDictionary dictionary];
     
     for (WYLXGroup *group in self.groups) {
-        
-        if (![self checkFillInformationWithContent:group])return;
-        
-        NSString *key;
-        
-        if ([group.cellKey isEqualToString:@"country"]) {
-            
-            key = @"des_country";
-            
-        }else if ([group.cellKey isEqualToString:@"phone"]) {
-            
-            key = @"phonenumber";
-   
-        }else if ([group.cellKey isEqualToString:@"grade"]) {
-            
-            key = @"grade";
-   
-        }else if ([group.cellKey isEqualToString:@"subject"]) {
-            
-            key = @"subject";
   
+        
+        if ([group.key isEqualToString:@"phone"] && (group.content.length < 7)) {
+            
+           MBProgressHUD *hud = [MBProgressHUD showMessage:@"请输入正确电话号码！" toView:self.view];
+            // 再设置模式
+            hud.mode = MBProgressHUDModeText;
+            
+            [hud hideAnimated:YES afterDelay:1];
+            
+            return;
         }
         
-        [fastPass setValue:group.content forKey:key];
+        NSString *value = group.content ? group.content : group.placeHolder;
+        
+        [fastPass setValue:value forKey:group.key];
 
     }
+    
     
     XWeakSelf
     NSDictionary *parameters =  @{@"fastPass": fastPass};
@@ -562,6 +554,21 @@ typedef enum {
      }];
     
 }
+
+
+
+- (void)caseCall{
+    
+    
+    NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"4000666522"];
+   
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:^(BOOL success) {
+        
+        [self.footer callButtonEnable:YES];
+    }];
+    
+}
+
 
 
 
