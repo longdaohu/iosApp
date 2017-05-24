@@ -117,10 +117,10 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 
     if (!_groups) {
   
-        WYLXGroup *contry   =  [WYLXGroup groupWithTitle:@"想去的留学目的地" placeHolder:@"英国" content:nil groupKey:@"country" spod:true];
-        WYLXGroup *phone    =  [WYLXGroup groupWithTitle:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phone" spod:false];
-        WYLXGroup *grade    =  [WYLXGroup groupWithTitle:@"就读年级" placeHolder:@"本科大四" content:nil groupKey:@"grade" spod:true];
-        WYLXGroup *subject  =  [WYLXGroup groupWithTitle:@"就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"country" spod:true];
+        WYLXGroup *contry   =  [WYLXGroup groupWithType:EditTypeCountry title:@"想去的留学目的地" placeHolder:@"英国" content:nil groupKey:@"country" spod:true];
+        WYLXGroup *phone    =  [WYLXGroup groupWithType:EditTypePhone title:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phone" spod:false];
+        WYLXGroup *grade    =  [WYLXGroup groupWithType:EditTypeGrade title:@"就读年级" placeHolder:@"本科大四" content:nil groupKey:@"grade" spod:true];
+        WYLXGroup *subject  =  [WYLXGroup groupWithType:EditTypeSuject title:@"就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"subject" spod:true];
         
         _groups = @[contry,phone,grade,subject];
     }
@@ -179,6 +179,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     NSString *countryKey = @"Country_CN";
     NSArray *countries = [ud valueForKey:countryKey];
     if(!countries.count){
+        
         [self baseDataSourse:@"country"];
     }
     self.countryArr = [countries valueForKeyPath:@"name"];
@@ -190,7 +191,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     }
     self.gradeArr = [grades valueForKeyPath:@"name"];
     
-     NSString *subjectKey =  @"Subject_CN";
+    NSString *subjectKey =  @"Subject_CN";
     NSArray *subjectes = [ud valueForKey:subjectKey];
     if(!subjectes.count){
         [self baseDataSourse:@"subject"];
@@ -364,18 +365,14 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 
     WYLXGroup *group = self.groups[indexPath.row];
     
-    if ([group.key isEqualToString:@"phone"]){
-    
-        group.content = textField.text;
-        //监听电话号码输入
-        [self.footer submitButtonEnable:textField.text.length > 7];
+    if (group.groupType == EditTypePhone) {
         
-    }
-    
+        group.content = textField.text;
 
-    
-    
+    }
+
 }
+
 
 - (void)zixunCell:(ZhiXunCell *)cell indexPath:(NSIndexPath *)indexPath didClickWithTextField:(UITextField *)textField{
     
@@ -392,8 +389,6 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     ZhiXunCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndex];
     
     [nextCell.inputTF becomeFirstResponder];
-    
-    
     
 }
 
@@ -524,7 +519,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     for (WYLXGroup *group in self.groups) {
   
         
-        if ([group.key isEqualToString:@"phone"] && (group.content.length < 7)) {
+        if ((group.groupType == EditTypePhone) && (group.content.length < 7)) {
             
            MBProgressHUD *hud = [MBProgressHUD showMessage:@"请输入正确电话号码！" toView:self.view];
             // 再设置模式
@@ -554,7 +549,6 @@ typedef NS_ENUM(NSInteger,PickerViewType){
      }];
     
 }
-
 
 
 - (void)caseCall{

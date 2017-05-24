@@ -9,18 +9,8 @@
 #import "WYLXGroup.h"
 
 @implementation WYLXGroup
-//+ (instancetype)groupWithHeader:(NSString *)headerTitle content:(NSString *)content cellKey:(NSString *)key{
-//
-//    WYLXGroup *group = [[WYLXGroup alloc] init];
-// 
-//    group.content = content;
-//    group.headerTitle = headerTitle;
-//    group.cellKey = key;
-//    
-//    return group;
-//}
 
-+ (instancetype)groupWithTitle:(NSString *)title placeHolder:(NSString *)placeHolder content:(NSString *)content groupKey:(NSString *)key spod:(BOOL)spod{
++ (instancetype)groupWithType:(EditType)type title:(NSString *)title placeHolder:(NSString *)placeHolder content:(NSString *)content groupKey:(NSString *)key spod:(BOOL)spod{
 
     WYLXGroup *group = [[WYLXGroup alloc] init];
     
@@ -29,6 +19,7 @@
     group.content = content;
     group.key = key;
     group.spod = spod;
+    group.groupType = type;
     
     
     CGFloat title_X = 14;

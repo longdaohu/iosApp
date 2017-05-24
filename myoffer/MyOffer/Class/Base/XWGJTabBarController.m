@@ -85,7 +85,7 @@
     
     if (![fileItems containsObject:@"nav"]) {
         
-        CGFloat navHeight         = 124;
+        CGFloat navHeight         =  300;
         UIView *navView           = [[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, navHeight)];
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame            = navView.bounds;

@@ -35,6 +35,7 @@
     leftBtn.layer.borderWidth = 1;
     leftBtn.layer.borderColor = XCOLOR_RED.CGColor;
     [self addSubview:leftBtn];
+    leftBtn.titleLabel.font = XFONT(14);
     self.leftBtn = leftBtn;
     [leftBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -47,7 +48,8 @@
     rightBtn.layer.cornerRadius = CORNER_RADIUS;
     rightBtn.layer.masksToBounds = YES;
     [rightBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-    rightBtn.enabled = NO;
+    rightBtn.titleLabel.font = XFONT(14);
+    
     self.backgroundColor = XCOLOR_WHITE;
 
 }
@@ -88,10 +90,6 @@
 -(void)callButtonEnable:(BOOL)enable{
 
     self.leftBtn.enabled = enable;
-}
--(void)submitButtonEnable:(BOOL)enable{
-
-    self.rightBtn.enabled = enable;
 }
 
 

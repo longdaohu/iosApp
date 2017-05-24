@@ -7,6 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef NS_ENUM(NSInteger,EditType){
+
+    EditTypeCountry,
+    EditTypeSuject,
+    EditTypeUniversity,
+    EditTypePhone,
+    EditTypeGrade,
+    EditTypeSCore
+
+};
 
 @interface WYLXGroup : NSObject
 @property(nonatomic,copy)NSString *title;
@@ -14,6 +24,7 @@
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *key;
 @property(nonatomic,assign)BOOL spod;
+@property(nonatomic,assign)EditType groupType;
 
 @property(nonatomic,assign)CGRect titleFrame;
 @property(nonatomic,assign)CGRect inputFrame;
@@ -22,6 +33,6 @@
 @property(nonatomic,assign)CGFloat cell_Height;
 
 
-+ (instancetype)groupWithTitle:(NSString *)title placeHolder:(NSString *)placeHolder content:(NSString *)content groupKey:(NSString *)key spod:(BOOL)spod;
++ (instancetype)groupWithType:(EditType)type title:(NSString *)title placeHolder:(NSString *)placeHolder content:(NSString *)content groupKey:(NSString *)key spod:(BOOL)spod;
 
 @end

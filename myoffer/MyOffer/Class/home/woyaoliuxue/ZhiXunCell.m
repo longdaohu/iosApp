@@ -103,12 +103,22 @@ static NSString  *identity = @"liuxue";
     self.titleLab.text = group.title;
     self.inputTF.placeholder = group.placeHolder;
     self.spod.hidden = !group.spod;
-    
+    self.inputTF.text = group.content;
+
     
     self.titleLab.frame = group.titleFrame;
     self.inputTF.frame = group.inputFrame;
     self.line.frame = group.lineFrame;
     self.spod.frame = group.spodFrame;
+    
+    
+    
+    //监听分数输入框
+    if (group.groupType == EditTypeSCore) {
+        
+        [self.inputTF addTarget:self action:@selector(limitMaxScore:) forControlEvents:UIControlEventEditingChanged];
+        
+    }
 }
 
 
@@ -156,8 +166,61 @@ static NSString  *identity = @"liuxue";
 }
 
 
+
+//限制输入框字符输入
+-(void)limitMaxScore:(UITextField *)textField
+{
+    
+    //1、判断前3三个字符
+    if (textField.text.length > 3) {
+        
+        NSString *shortStr =  [textField.text substringWithRange:NSMakeRange(0, 3)];
+        
+        if ([shortStr  isEqualToString:@"100"]){
+            
+            textField.text = @"100";
+            
+            return;
+        }
+        
+    }
+    
+    
+    
+    if ([textField.text containsString:@"."]) {
+        
+        //分割字符串数组，当出现多个 . 字符时，字符串会被分割成多个数组，超过 2 个时，要删除多出来的 .
+        NSArray *items = [textField.text componentsSeparatedByString:@"."];
+        
+        NSRange pointRange = [textField.text rangeOfString:@"."];
+        
+        if (items.count > 2) {
+            
+            textField.text = [textField.text substringWithRange:NSMakeRange(0, pointRange.length  + pointRange.location)];
+        }
+        
+        if (textField.text.length > (pointRange.location + pointRange.length + 2)) {
+            
+            NSString *shortStr = [textField.text substringWithRange:NSMakeRange(0, pointRange.location + pointRange.length + 2)];
+            
+            textField.text = shortStr;
+        }
+        
+    }else{
+        
+        textField.text =  textField.text.floatValue > 100 ?  @"100" : textField.text;
+        
+    }
+    
+    
+}
+
+
+
+
+
 //-(void)dealloc{
-//    
+//
 //    KDClassLog(@"我要留学  ZhiXunCell dealloc");
 //}
 

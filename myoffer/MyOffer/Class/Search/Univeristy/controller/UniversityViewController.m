@@ -800,7 +800,7 @@ typedef enum {
 //我要留学
 - (void)caseWoyaoluexue{
     
-    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
+    [self presentViewController:[[WYLXViewController alloc] init]  animated:YES completion:nil];
     
 }
 //查看所有专业

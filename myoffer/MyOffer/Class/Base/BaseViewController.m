@@ -321,7 +321,7 @@
 
 
 
-#pragma mark ------- 提前加载数据，存储在本地，下次调用
+#pragma mark : 提前加载数据，存储在本地，下次调用
 
 - (void)baseDataSourse:(NSString *)pageStr
 {
@@ -378,7 +378,7 @@
 //获取专业
 - (void)subjectWithAlert:(BOOL)show{
     
-   [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
+    [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
     [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
  
 }

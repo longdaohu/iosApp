@@ -9,14 +9,9 @@
 #import "WYLXSuccessView.h"
 
 @interface WYLXSuccessView ()
-//提交成功
-@property (weak, nonatomic) IBOutlet UILabel *succeseLab;
-//提示文字
-@property (weak, nonatomic) IBOutlet UILabel *alerLab;
-//返回按钮
-@property (weak, nonatomic) IBOutlet UIButton *OKButton;
-//渐变色
-@property(nonatomic,strong)CAGradientLayer *gradientLayer;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+
 
 @end
 
@@ -34,43 +29,19 @@
     return SuccessView;
 }
 
-
-- (void)caseBack
-{
+- (IBAction)popBack:(id)sender {
+    
     if (self.actionBlock) self.actionBlock();
-    
-}
-
-- (void)layoutSubviews{
-
-    [super layoutSubviews];
-    
-    self.gradientLayer.frame = self.frame;
 
 }
 
--(void)awakeFromNib{
+- (void)awakeFromNib{
 
     [super awakeFromNib];
     
-    //渐变色
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)XCOLOR(48, 202, 255,1).CGColor,
-                       (id)XCOLOR(159, 0, 107,1).CGColor,
-                       nil];
-    gradient.startPoint = CGPointMake(0.8, 0);
-    gradient.endPoint = CGPointMake(1, 1);
-    [self.layer insertSublayer:gradient atIndex:0];
-    self.gradientLayer = gradient;
-
-    [self.OKButton  addTarget:self action:@selector(caseBack) forControlEvents:UIControlEventTouchUpInside];
-    self.OKButton.layer.borderColor = XCOLOR_WHITE.CGColor;
-    
-    self.alerLab.font = [UIFont systemFontOfSize:XPERCENT * 14];
-    self.succeseLab.font = [UIFont systemFontOfSize:XPERCENT * 18];
-    
+    self.bgView.layer.shadowOpacity = 0.8;
+    self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
+    self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
 }
-
 
 @end

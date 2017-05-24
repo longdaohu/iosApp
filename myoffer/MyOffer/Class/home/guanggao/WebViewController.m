@@ -417,7 +417,8 @@
 
 //我要留学
 -(void)caseWoyaoluxue{
-    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
+    
+    [self presentViewController:[[WYLXViewController alloc] init]  animated:YES completion:nil];
 }
 //购买服务
 -(void)casePay{

@@ -14,6 +14,5 @@ typedef void(^ZixunFooterViewBlock)(UIButton *);
 @property(nonatomic,copy)ZixunFooterViewBlock actionBlock;
 
 -(void)callButtonEnable:(BOOL)enable;
--(void)submitButtonEnable:(BOOL)enable;
 
 @end

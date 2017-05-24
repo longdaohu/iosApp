@@ -9,7 +9,8 @@
 #import "WYLXHeaderView.h"
 
 @interface WYLXHeaderView ()
-@property(nonatomic,strong)CAGradientLayer *gradient;
+//@property(nonatomic,strong)CAGradientLayer *gradient;
+@property(nonatomic,strong)UIImageView *bgView;
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,strong)UIButton *dismissBtn;
 @property(nonatomic,strong)UILabel *titleLab;
@@ -32,19 +33,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        self.gradient = gradient;
-        UIColor *colorOne = XCOLOR(33, 183, 232, 1);
-        UIColor *colorTwo = XCOLOR(9, 153, 218, 1);
-        gradient.colors           = [NSArray arrayWithObjects:
-                                     (id)colorOne.CGColor,
-                                     (id)colorTwo.CGColor,
-                                     nil];
-        gradient.locations  = @[@(0.5), @(1.0)];
-        gradient.startPoint = CGPointMake(0, 0);
-        gradient.endPoint = CGPointMake(1.0, 0);
-        [self.layer insertSublayer:gradient atIndex:0];
- 
+        
+        NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
+        UIImage *navImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+        UIImageView *bgView = [[UIImageView alloc] init];
+        bgView.contentMode = UIViewContentModeScaleToFill;
+        bgView.image = navImage;
+        self.bgView = bgView;
+        [self addSubview:bgView];
+
+        self.clipsToBounds = YES;
+
         
         UIButton *dismissBtn = [[UIButton alloc] init];
         self.dismissBtn = dismissBtn;
@@ -62,6 +61,8 @@
         [self addSubview:titleLab];
         
         
+        
+        
     }
     return self;
 }
@@ -71,7 +72,6 @@
     _title = title;
     
     self.titleLab.text = title;
-    
     
     CGFloat dis_W = 40;
     CGFloat dis_H = dis_W;
@@ -83,14 +83,13 @@
     
     CGFloat title_X = dis_X;
     CGFloat title_Y = self.dismissBtn.center.y +  8 + margin;
-    CGFloat title_W = XSCREEN_WIDTH - 2 * title_X;
+    CGFloat title_W = self.bounds.size.width - 2 * title_X;
     CGFloat title_H = [self.title  KD_sizeWithAttributeFont:XFONT(18) maxWidth:title_W].height;
     self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
     
     self.mj_h = CGRectGetMaxY(self.titleLab.frame) + margin;
     
-    self.gradient.frame = self.bounds;
-
+    self.bgView.frame = self.bounds;
 }
 
 
@@ -99,7 +98,6 @@
 
     if (self.actionBlock) self.actionBlock();
 }
-
 
 
 
