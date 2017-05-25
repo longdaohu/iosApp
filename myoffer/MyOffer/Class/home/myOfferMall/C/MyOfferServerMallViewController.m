@@ -18,6 +18,8 @@
 #import "HomeSectionHeaderView.h"
 #import "WebViewController.h"
 #import "MyOfferServiceMallHeaderFrame.h"
+#import "ServiceOverseaDestinationView.h"
+#import "ServiceOverSeaDestination.h"
 
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
@@ -26,6 +28,8 @@
 @property(nonatomic,strong) NSArray *SKU_frames;
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
 @property(nonatomic,strong)MyOfferServiceMallHeaderFrame *headerFrame;
+@property(nonatomic,strong)ServiceOverseaDestinationView *overseaView;
+@property(nonatomic,strong)NSArray *destinationGroup;
 
 @end
 
@@ -52,13 +56,20 @@
     
     self.title = @"留学购";
     
- 
-    
     XWeakSelf
+    self.overseaView = [ServiceOverseaDestinationView overseaView];
+    self.overseaView.actionBlock = ^(NSString *destination){
+        
+        [weakSelf casePushEmallCatigory:destination];
+        
+    };
+    self.overseaView.group = self.destinationGroup;
+    
+    
+    
  
     ServiceHeaderView *headerView = [ServiceHeaderView headerViewWithFrame:self.headerFrame.header_frame ationBlock:^(NSString *country) {
         
-        [weakSelf casePushEmallCatigory:country];
         
     }];
     
@@ -70,7 +81,10 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQService"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
  
+    
 }
+
+
 
 - (MyOfferServiceMallHeaderFrame *)headerFrame{
     
@@ -81,6 +95,23 @@
     
     return _headerFrame;
 }
+
+- (NSArray *)destinationGroup{
+
+    if (!_destinationGroup) {
+        
+        ServiceOverSeaDestination *UK = [ServiceOverSeaDestination destinationWithImage:@"destination_UK" name:@"英国"];
+        ServiceOverSeaDestination *AU = [ServiceOverSeaDestination destinationWithImage:@"destination_AU" name:@"澳大利亚"];
+        ServiceOverSeaDestination *NZ = [ServiceOverSeaDestination destinationWithImage:@"destination_NZ" name:@"新西兰"];
+        ServiceOverSeaDestination *HK = [ServiceOverSeaDestination destinationWithImage:@"destination_HK" name:@"香港"];
+     
+        _destinationGroup = @[UK,AU,NZ,HK];
+        
+      }
+    
+    return _destinationGroup;
+}
+
 
 /**
  *  创建轮播图头部
@@ -104,7 +135,7 @@
 }
 
 
-
+//网络请求
 - (void)makeDataSource{
     
     XWeakSelf
@@ -114,7 +145,6 @@
         [weakSelf updateUIWithResponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
         
         //加载失败退出页面
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -130,7 +160,9 @@
      
     
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
+    
     NSMutableArray *items = [NSMutableArray array];
+    
     for (ServiceSKU *item in self.sevice.skus) {
         
         ServiceSKUFrame *itemFrame = [[ServiceSKUFrame alloc] init];
@@ -144,8 +176,7 @@
 //    self.autoLoopView.titlesGroup = [self.sevice.banners valueForKey:@"title"];
     self.autoLoopView.imageURLStringsGroup = [self.sevice.banners valueForKey:@"thumbnail"];
     
-    
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
         
         self.autoLoopView.alpha = 1;
     }];
@@ -160,16 +191,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.sevice.skus.count;
+    NSInteger  count = 1;
+    
+    if (section == 1) {
+        
+        count =  self.sevice.skus.count;
+    }
+    
+    return count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if (indexPath.section == 0) {
+        
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        
+        cell.selectionStyle =  UITableViewCellSelectionStyleNone;
+
+        [cell.contentView addSubview:self.overseaView];
+        
+        return cell;
+    }
     
     ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:self.SKU_frames[indexPath.row]];
     
@@ -179,15 +229,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
-    ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
 
-    return itemFrame.cell_Height;
+    CGFloat cell_Height = 0;
+    
+    if (indexPath.section == 0) {
+        
+        cell_Height  = self.overseaView.mj_h;
+        
+    }else{
+    
+        ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
+    
+        cell_Height = itemFrame.cell_Height;
+    }
+ 
+    return  cell_Height;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 40;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -199,6 +261,8 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
+    if (0 == indexPath.section) return;
+    
     ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
     
     [self casePushServiceItemViewControllerWithId: itemFrame.SKU.service_id];
@@ -207,8 +271,12 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
     
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:@"热门商品"];
-   
+    NSString *title = (0 == section) ? @"留学目的地" : @"热门商品";
+    
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:title];
+    
+    SectionView.backgroundColor = XCOLOR_WHITE;
+    
     return  SectionView;
 }
 

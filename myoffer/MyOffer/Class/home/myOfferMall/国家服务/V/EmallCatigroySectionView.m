@@ -68,7 +68,7 @@
         [item setTitle:self.catigories[index] forState:UIControlStateNormal];
         [item setTitleColor:XCOLOR_LIGHTGRAY forState:UIControlStateNormal];
         [item setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
-        item.titleLabel.font = [UIFont systemFontOfSize:18];
+        item.titleLabel.font = [UIFont systemFontOfSize:14];
         item.backgroundColor = XCOLOR_WHITE;
         item.titleLabel.textAlignment = NSTextAlignmentCenter;
         [bannerView addSubview:item];

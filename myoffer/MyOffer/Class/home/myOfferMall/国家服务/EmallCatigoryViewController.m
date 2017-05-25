@@ -122,15 +122,18 @@
     
     if ([self.country_Name containsString:@"英"]) {
         
-        contry_img = @"emall_UK.jpeg";
+        contry_img = @"emall_UK";
         
     }else if([self.country_Name containsString:@"香"]){
         
-        contry_img = @"emall_HK.jpeg";
+        contry_img = @"emall_HK";
         
+    }else if([self.country_Name containsString:@"新"]){
+    
+        contry_img = @"emall_NZ";
     }else{
     
-        contry_img = @"emall_AU.jpeg";
+        contry_img = @"emall_AU";
     }
     
     
@@ -307,6 +310,14 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    
+    
+    if (scrollView.contentOffset.y <= -64  && scrollView.isDragging) {
+        
+        [scrollView setContentOffset:CGPointMake(0, -64)];
+        
+    }
+  
     
     CGFloat offersetY =  scrollView.contentOffset.y;
     

@@ -185,6 +185,8 @@
 		AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */; };
 		AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */; };
 		AE721E361EB308D500A0BA79 /* MyOfferRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AE721E351EB308D500A0BA79 /* MyOfferRank.m */; };
+		AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7222CA1ED586160000E739 /* ServiceOverseaDestinationView.m */; };
+		AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7222D51ED593560000E739 /* ServiceOverSeaDestination.m */; };
 		AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7825DB1D70295400AA4EF4 /* UniversityRightView.m */; };
 		AE7825DE1D70296F00AA4EF4 /* UniversityRightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7825DD1D70296F00AA4EF4 /* UniversityRightView.xib */; };
 		AE7825E11D702AA400AA4EF4 /* UniversityNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7825E01D702AA400AA4EF4 /* UniversityNavView.m */; };
@@ -202,9 +204,6 @@
 		AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F1C1EA9F337001993D5 /* UniversitySubjectListViewController.m */; };
 		AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F1F1EA9FA56001993D5 /* UniversityCourseFrame.m */; };
 		AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F221EAA3030001993D5 /* UniversityCourseFooterView.m */; };
-		AE86B2351E8A364000BF2451 /* emall_HK.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE86B2321E8A364000BF2451 /* emall_HK.jpeg */; };
-		AE86B2361E8A364000BF2451 /* emall_AU.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE86B2331E8A364000BF2451 /* emall_AU.jpeg */; };
-		AE86B2371E8A364000BF2451 /* emall_UK.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE86B2341E8A364000BF2451 /* emall_UK.jpeg */; };
 		AE86B23A1E8A3B5200BF2451 /* EmallCatigroyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE86B2391E8A3B5200BF2451 /* EmallCatigroyHeaderView.m */; };
 		AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707021DDEE14700CE7780 /* PipeiEditViewController.m */; };
 		AE8707061DDEEC4200CE7780 /* PipeiSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8707051DDEEC4200CE7780 /* PipeiSectionHeaderView.m */; };
@@ -760,6 +759,10 @@
 		AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourse.m; sourceTree = "<group>"; };
 		AE721E341EB308D500A0BA79 /* MyOfferRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferRank.h; sourceTree = "<group>"; };
 		AE721E351EB308D500A0BA79 /* MyOfferRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferRank.m; sourceTree = "<group>"; };
+		AE7222C91ED586160000E739 /* ServiceOverseaDestinationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOverseaDestinationView.h; sourceTree = "<group>"; };
+		AE7222CA1ED586160000E739 /* ServiceOverseaDestinationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOverseaDestinationView.m; sourceTree = "<group>"; };
+		AE7222D41ED593560000E739 /* ServiceOverSeaDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOverSeaDestination.h; sourceTree = "<group>"; };
+		AE7222D51ED593560000E739 /* ServiceOverSeaDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOverSeaDestination.m; sourceTree = "<group>"; };
 		AE7825DA1D70295400AA4EF4 /* UniversityRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityRightView.h; path = controller/UniversityRightView.h; sourceTree = "<group>"; };
 		AE7825DB1D70295400AA4EF4 /* UniversityRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityRightView.m; path = controller/UniversityRightView.m; sourceTree = "<group>"; };
 		AE7825DD1D70296F00AA4EF4 /* UniversityRightView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UniversityRightView.xib; path = controller/UniversityRightView.xib; sourceTree = "<group>"; };
@@ -786,9 +789,6 @@
 		AE851F1F1EA9FA56001993D5 /* UniversityCourseFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseFrame.m; sourceTree = "<group>"; };
 		AE851F211EAA3030001993D5 /* UniversityCourseFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourseFooterView.h; sourceTree = "<group>"; };
 		AE851F221EAA3030001993D5 /* UniversityCourseFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseFooterView.m; sourceTree = "<group>"; };
-		AE86B2321E8A364000BF2451 /* emall_HK.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emall_HK.jpeg; sourceTree = "<group>"; };
-		AE86B2331E8A364000BF2451 /* emall_AU.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emall_AU.jpeg; sourceTree = "<group>"; };
-		AE86B2341E8A364000BF2451 /* emall_UK.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = emall_UK.jpeg; sourceTree = "<group>"; };
 		AE86B2381E8A3B5200BF2451 /* EmallCatigroyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigroyHeaderView.h; sourceTree = "<group>"; };
 		AE86B2391E8A3B5200BF2451 /* EmallCatigroyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigroyHeaderView.m; sourceTree = "<group>"; };
 		AE8707011DDEE14700CE7780 /* PipeiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiEditViewController.h; sourceTree = "<group>"; };
@@ -2079,6 +2079,10 @@
 			children = (
 				AEBA44CA1E88BDFB005E923B /* ServiceSKUCell.h */,
 				AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */,
+				AE7222C91ED586160000E739 /* ServiceOverseaDestinationView.h */,
+				AE7222CA1ED586160000E739 /* ServiceOverseaDestinationView.m */,
+				AE7222D41ED593560000E739 /* ServiceOverSeaDestination.h */,
+				AE7222D51ED593560000E739 /* ServiceOverSeaDestination.m */,
 				AE96A36D1E8BC849006E8E35 /* ServiceHeaderView.h */,
 				AE96A36E1E8BC849006E8E35 /* ServiceHeaderView.m */,
 			);
@@ -3180,9 +3184,6 @@
 				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
-				AE86B2321E8A364000BF2451 /* emall_HK.jpeg */,
-				AE86B2331E8A364000BF2451 /* emall_AU.jpeg */,
-				AE86B2341E8A364000BF2451 /* emall_UK.jpeg */,
 				AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */,
 			);
 			path = ImageFile;
@@ -3511,7 +3512,6 @@
 				AEA24A061D5B224E00DD7939 /* CatigaryCityCollectionCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
-				AE86B2361E8A364000BF2451 /* emall_AU.jpeg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
 				AE36006B1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
@@ -3521,7 +3521,6 @@
 				AEF421021BD4988B00CFB45E /* UMSCommentInputControlleriPad.xib in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */,
-				AE86B2371E8A364000BF2451 /* emall_UK.jpeg in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
@@ -3581,7 +3580,6 @@
 				AEA24B261D5B251800DD7939 /* IntroViewController.xib in Resources */,
 				AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */,
 				AEA249D01D5B215300DD7939 /* MeViewController.xib in Resources */,
-				AE86B2351E8A364000BF2451 /* emall_HK.jpeg in Resources */,
 				AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */,
 				AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */,
 				AE1FD7311D5C929500FFD5A8 /* Pre-comp 1_00014.png in Resources */,
@@ -3755,6 +3753,7 @@
 				AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */,
 				AE59A5531E69907D008E479F /* NomalCollectionController.m in Sources */,
 				AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */,
+				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
 				AE6FF2A11E89163600C2A013 /* EmallCatigoryViewController.m in Sources */,
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
@@ -3818,6 +3817,7 @@
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
+				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
 				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,

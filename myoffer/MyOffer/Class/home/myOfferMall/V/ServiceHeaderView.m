@@ -52,7 +52,7 @@
     
     ServiceHeaderView *headerView = [[ServiceHeaderView alloc]  initWithFrame:frame];
     
-    headerView.actionBlock = actionBlock;
+//    headerView.actionBlock = actionBlock;
     
     headerView.backgroundColor = XCOLOR_WHITE;
     
@@ -83,7 +83,7 @@
         item.tag       =  i;
         item.actionBlock = ^(NSInteger index){
             
-            [self buttonClick:index];
+//            [self buttonClick:index];
         };
         
         [self.bottomView addSubview:item];
@@ -119,14 +119,13 @@
     }
     
     
-    
 }
 
-- (void)buttonClick:(NSInteger)index{
-    
-    if (self.actionBlock)   self.actionBlock(self.countries[index]);
-    
-}
+//- (void)buttonClick:(NSInteger)index{
+//    
+//    if (self.actionBlock)   self.actionBlock(self.countries[index]);
+//    
+//}
 
 
 @end
