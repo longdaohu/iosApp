@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -107,9 +107,8 @@
                         <action selector="popButtonPressed:" destination="-1" eventType="touchUpInside" id="rUp-4V-N1N"/>
                     </connections>
                 </button>
-                <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-BH-wpr" customClass="FXBlurView">
-                    <rect key="frame" x="0.0" y="0.0" width="614" height="736"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIO-BH-wpr" customClass="FXBlurView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0t-mA-W8p" customClass="KDEasyTouchButton">
                             <rect key="frame" x="0.0" y="20" width="50" height="50"/>
@@ -145,18 +144,22 @@
                 <constraint firstItem="9bo-dL-22P" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IzI-2j-0pC"/>
                 <constraint firstAttribute="bottom" secondItem="iH4-Hf-b4A" secondAttribute="bottom" constant="128" id="JJR-8Q-OK0"/>
                 <constraint firstItem="Qu8-Ft-Qvo" firstAttribute="top" secondItem="iH4-Hf-b4A" secondAttribute="bottom" constant="20" id="QbV-Lx-Mm4"/>
+                <constraint firstItem="EIO-BH-wpr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SsK-MM-RNm"/>
                 <constraint firstItem="Qu8-Ft-Qvo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UZX-wt-a8d"/>
                 <constraint firstAttribute="bottom" secondItem="9bo-dL-22P" secondAttribute="bottom" id="UhC-29-EpJ"/>
                 <constraint firstItem="3f8-Ly-4h8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wjz-jQ-qbe"/>
                 <constraint firstAttribute="trailing" secondItem="9bo-dL-22P" secondAttribute="trailing" id="Y2e-Lb-B2U"/>
                 <constraint firstItem="3f8-Ly-4h8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="hES-Yo-dcS"/>
+                <constraint firstAttribute="bottom" secondItem="EIO-BH-wpr" secondAttribute="bottom" id="kHl-TP-Mq5"/>
                 <constraint firstItem="ISW-Nd-awg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="qkX-cw-jA7"/>
                 <constraint firstItem="iH4-Hf-b4A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sJW-kS-dAa"/>
                 <constraint firstItem="8GQ-Cu-tbh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="uM8-X5-a6P"/>
+                <constraint firstItem="EIO-BH-wpr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wY6-jz-KBJ"/>
                 <constraint firstAttribute="trailing" secondItem="ISW-Nd-awg" secondAttribute="trailing" id="xDF-rX-apM"/>
                 <constraint firstItem="9bo-dL-22P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yeS-fk-xjg"/>
+                <constraint firstAttribute="trailing" secondItem="EIO-BH-wpr" secondAttribute="trailing" id="yqw-dt-7Pl"/>
             </constraints>
-            <point key="canvasLocation" x="75" y="310"/>
+            <point key="canvasLocation" x="74.5" y="309.5"/>
         </view>
         <view contentMode="scaleToFill" id="0PA-h7-MFc">
             <rect key="frame" x="0.0" y="0.0" width="346" height="539"/>
@@ -705,7 +708,7 @@
         <image name="Vertification_icon" width="34" height="46"/>
         <image name="arrow_down" width="12" height="12"/>
         <image name="back_button" width="21" height="21"/>
-        <image name="close_button" width="23" height="23"/>
+        <image name="close_button" width="16" height="16"/>
         <image name="hidepassword" width="16" height="16"/>
         <image name="location" width="31" height="45"/>
         <image name="loginbg" width="375" height="667"/>

@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #import "NSString+MD5.h"
-#import "NewLoginRegisterViewController.h"
+//#import "NewLoginRegisterViewController.h"
+#import "MyOfferLoginViewController.h"
 
 @implementation BaseViewController {
     NSMutableArray *_APIRequestTasks;
@@ -305,8 +306,8 @@
 //登录页面
 -(void)loginView{
 
-    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
-    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
+//    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
+    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self presentViewController:nav animated:YES completion:^{}];
 
 }

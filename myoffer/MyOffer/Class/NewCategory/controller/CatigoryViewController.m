@@ -43,7 +43,7 @@
 //自定义导航栏
 @property(nonatomic,strong)TopNavView *topView;
 //工具条
-@property(nonatomic,strong)XBTopToolView   *topToolView;
+@property(nonatomic,strong)XBTopToolView  *topToolView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *country_Hotes;
 //是否有新消息图标

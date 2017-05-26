@@ -1,0 +1,972 @@
+//
+//  MyOfferLoginViewController.m
+//  myOffer
+//
+//  Created by xuewuguojie on 2017/5/25.
+//  Copyright © 2017年 UVIC. All rights reserved.
+//
+
+#import "MyOfferLoginViewController.h"
+#import "WYLXGroup.h"
+#import "MyOfferInputView.h"
+#import "LoginSelectViewController.h"
+#import "BangViewController.h"
+#import "NewForgetPasswdViewController.h"
+
+
+typedef NS_ENUM(NSInteger,otherLoginType){
+
+    otherLoginTypeWX = 0,
+    otherLoginTypeWB,
+    otherLoginTypeQQ
+};
+
+@interface MyOfferLoginViewController ()<UIScrollViewDelegate,MyOfferInputViewDelegate>
+
+@property(nonatomic,strong)UIButton *dismissBtn;
+@property(nonatomic,strong)UIView *baseView;
+@property(nonatomic,strong)UIImageView *logoView;
+@property(nonatomic,strong)UIScrollView *bgView;
+@property(nonatomic,strong)UIView *loginBgView;
+@property(nonatomic,strong)UIView *registbgView;
+@property(nonatomic,strong)NSArray *loginArr;
+@property(nonatomic,strong)UIView *loginCellbgView;
+@property(nonatomic,strong)UIView *registCellbgView;
+@property(nonatomic,strong)NSArray *registArr;
+@property(nonatomic,strong)UIButton *loginBtn;
+@property(nonatomic,strong)UIButton *registBtn;
+@property(nonatomic,strong)UIButton *protocolBtn;
+@property(nonatomic,strong)UIButton *forgetBtn;
+@property(nonatomic,strong)UIButton *toLoginBtn;
+@property(nonatomic,strong)UIButton *toRegistBtn;
+@end
+
+@implementation MyOfferLoginViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:@"page登录页面"];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    //第三方绑定注释时左划手势失效，返回登录页面时，忘记密码、注册协议页面手势失效问题修改
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page登录页面"];
+    
+}
+
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+
+    [self makeUI];
+}
+
+- (NSArray *)loginArr{
+
+    if (!_loginArr) {
+        
+        WYLXGroup *login_Phone = [WYLXGroup groupWithType:EditTypePhone title:@"手机/邮箱" placeHolder:@"请输入手机号/邮箱" content:nil groupKey:@"username" spod:false cellType:CellGroupTypeView];
+        WYLXGroup *login_passwd = [WYLXGroup groupWithType:EditTypePasswd title:@"密码" placeHolder:@"请输入密码" content:nil groupKey:@"password" spod:false cellType:CellGroupTypeView];
+
+        _loginArr = @[login_Phone,login_passwd];
+        
+    }
+    return  _loginArr;
+}
+
+- (NSArray *)registArr{
+    
+    if (!_registArr) {
+        
+        WYLXGroup *regist_Phone = [WYLXGroup groupWithType:EditTypeRegistPhone title:@"手机" placeHolder:@"请输入手机号" content:nil groupKey:@"username" spod:false cellType:CellGroupTypeView];
+        WYLXGroup *regist_yzm = [WYLXGroup groupWithType:EditTypeVerificationCode title:@"验证码" placeHolder:@"请输入验证码" content:nil groupKey:@"password" spod:false cellType:CellGroupTypeView];
+
+        WYLXGroup *login_passwd = [WYLXGroup groupWithType:EditTypePasswd title:@"密码" placeHolder:@"请输入6-16新密码" content:nil groupKey:@"vcode" spod:false  cellType:CellGroupTypeView];
+
+        
+        _registArr = @[regist_Phone,regist_yzm,login_passwd];
+        
+    }
+    return  _registArr;
+}
+
+
+- (void)makeUI{
+    
+    
+    UIImageView *logo = [[UIImageView alloc] initWithImage:XImage(@"login_top")];
+    [self.view addSubview:logo];
+    self.logoView = logo;
+    CGFloat logo_X = 0;
+    CGFloat logo_Y = 0;
+    CGFloat logo_W = XSCREEN_WIDTH;
+    CGFloat logo_H =  logo_W * logo.image.size.height/logo.image.size.width;
+    logo.frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
+    
+    
+    
+    UIView *baseView = [[UIView alloc] initWithFrame:self.view.bounds];
+    self.baseView = baseView;
+    [self.view addSubview:baseView];
+    
+    CGFloat bg_X = 0;
+    CGFloat bg_Y = 0;
+    CGFloat bg_W = XSCREEN_WIDTH;
+    CGFloat bg_H = XSCREEN_HEIGHT - bg_Y;
+    UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bg_X, bg_Y, bg_W, bg_H)];
+    [self.baseView addSubview:bgView];
+    self.bgView = bgView;
+    
+    bgView.scrollEnabled = NO;
+    bgView.pagingEnabled = YES;
+    bgView.bounces = NO;
+    bgView.delegate = self;
+    
+    CGFloat dis_X = 14;
+    CGFloat dis_Y = 22;
+    CGFloat dis_W = 40;
+    CGFloat dis_H =  dis_W;
+    UIButton *dismiss = [[UIButton alloc] initWithFrame:CGRectMake(dis_X, dis_Y, dis_W, dis_H)];
+    [dismiss  setImage:XImage(@"close_button") forState:UIControlStateNormal];
+    self.dismissBtn = dismiss;
+    [self.view addSubview:dismiss];
+    [dismiss addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    CGFloat login_bg_X = 0;
+    CGFloat login_bg_Y = logo_H;
+    CGFloat login_bg_W = bg_W;
+    CGFloat login_bg_H = bg_H - login_bg_Y;
+    UIView *loginBg = [[UIView alloc] initWithFrame:CGRectMake(login_bg_X, login_bg_Y, login_bg_W, login_bg_H)];
+    self.loginBgView = loginBg;
+    [self.bgView addSubview:loginBg];
+    loginBg.backgroundColor = XCOLOR_WHITE;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
+    [loginBg addGestureRecognizer:tap];
+    
+    [self makeLoginView];
+    
+    CGFloat regist_bg_X = bg_W;
+    CGFloat regist_bg_Y = login_bg_Y;
+    CGFloat regist_bg_W = bg_W;
+    CGFloat regist_bg_H = login_bg_H;
+    UIView *registBg = [[UIView alloc] initWithFrame:CGRectMake(regist_bg_X, regist_bg_Y, regist_bg_W, regist_bg_H)];
+    self.registbgView = registBg;
+    [self.bgView addSubview:registBg];
+    registBg.backgroundColor = XCOLOR_WHITE;
+    UITapGestureRecognizer *tap_B = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
+    [registBg addGestureRecognizer:tap_B];
+    
+    [self makeRegistView];
+    
+    self.bgView.contentSize = CGSizeMake(self.bgView.subviews.count * bg_W, 0);
+    
+    
+    [self makeNotificationCenter];
+    
+    
+}
+
+
+- (void)makeNotificationCenter{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+
+
+- (void)makeLoginView{
+
+    CGFloat cell_W = self.loginBgView.bounds.size.width;
+    CGFloat cell_X = 0 ;
+    CGFloat cell_Y = 0 ;
+    CGFloat cell_H = 0 ;
+    
+    
+    CGFloat cell_bg_X = 0;
+    CGFloat cell_bg_Y = 0;
+    CGFloat cell_bg_W = cell_W;
+    UIView *cellBgView = [[UIView alloc] init];
+    self.loginCellbgView = cellBgView;
+    [self.loginBgView  addSubview:cellBgView];
+
+     for (NSInteger index = 0 ; index < self.loginArr.count; index++) {
+    
+         WYLXGroup *item  = self.loginArr[index];
+         cell_H = item.cell_Height;
+         cell_Y = index * cell_H;
+         
+         MyOfferInputView *cell = [[MyOfferInputView alloc] initWithFrame:CGRectMake(cell_X, cell_Y, cell_W, cell_H)];
+         
+         cell.tag = index;
+         cell.group = item;
+         cell.delegate = self;
+         cell.inputTF.returnKeyType = (index == self.loginArr.count -1) ? UIReturnKeyDone  :  UIReturnKeyNext;
+         [cellBgView addSubview:cell];
+         
+    }
+    
+    CGFloat cell_bg_H = cell_H + cell_Y;
+    cellBgView.frame = CGRectMake(cell_bg_X, cell_bg_Y, cell_bg_W, cell_bg_H);
+    
+    
+    UIButton *forgetBtn = [[UIButton alloc] init];
+    forgetBtn.titleLabel.font = XFONT(14);
+    [forgetBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
+    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [forgetBtn sizeToFit];
+    [forgetBtn addTarget:self action:@selector(forgetButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    CGFloat forget_W = forgetBtn.mj_w;
+    CGFloat forget_X = cell_W - 25 - forget_W;
+    CGFloat forget_Y = CGRectGetMaxY(cellBgView.frame) + 10;
+    CGFloat forget_H =  30;
+    forgetBtn.frame = CGRectMake(forget_X, forget_Y, forget_W, forget_H);
+    self.forgetBtn = forgetBtn;
+    [self.loginBgView addSubview:forgetBtn];
+    
+    
+    CGFloat login_X = 25;
+    CGFloat login_Y = CGRectGetMaxY(forgetBtn.frame) + 20;
+    CGFloat login_W = cell_W - login_X * 2;
+    CGFloat login_H =  50;
+    UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(login_X, login_Y, login_W, login_H)];
+    self.loginBtn = loginBtn;
+    [self.loginBgView addSubview:loginBtn];
+    loginBtn.backgroundColor = XCOLOR_RED;
+    loginBtn.layer.cornerRadius = 4;
+    loginBtn.titleLabel.font = XFONT(14);
+    [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [loginBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    [loginBtn addTarget:self action:@selector(loginButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+
+    UIButton *toRegistBtn = [[UIButton alloc] init];
+    [toRegistBtn setTitle:@"注册myOffer账号" forState:UIControlStateNormal];
+    [toRegistBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
+    toRegistBtn.titleLabel.font = XFONT(14);
+    [toRegistBtn sizeToFit];
+    
+    CGFloat toRegist_H =  20;
+    CGFloat toRegist_Y =  self.loginBgView.mj_h - toRegist_H - 20;
+    CGFloat toRegist_W = toRegistBtn.mj_w + 50;
+    CGFloat toRegist_X = (cell_W - toRegist_W) * 0.5;
+    toRegistBtn.frame = CGRectMake(toRegist_X, toRegist_Y, toRegist_W, toRegist_H);
+    
+    [self.loginBgView addSubview:toRegistBtn];
+    self.toRegistBtn = toRegistBtn;
+    [toRegistBtn addTarget:self action:@selector(toRegistBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    toRegistBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    
+    NSArray *icons = @[@"wechat_icon",@"weibo_icon",@"qq_icon"];
+    
+    CGFloat other_W = 50;
+    CGFloat other_H = other_W;
+    CGFloat other_Y = toRegist_Y - 20 - other_H;
+    CGFloat other_X =  (cell_W  -  ((other_W + 20)* icons.count - 20)) * 0.5;
+    for (NSInteger index = 0 ; index < icons.count; index++) {
+      
+         UIButton *otherBtn = [[UIButton alloc] initWithFrame:CGRectMake((other_W + 20) * index + other_X, other_Y, other_W, other_H)];
+        [otherBtn setBackgroundImage:XImage(icons[index]) forState:UIControlStateNormal];
+        [otherBtn addTarget:self action:@selector(otherBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        otherBtn.tag = index;
+        [self.loginBgView addSubview:otherBtn];
+        
+    }
+    
+
+    UILabel *otherLab = [[UILabel alloc] init];
+    otherLab.text = @"使用第三方登录";
+    otherLab.font = XFONT(12);
+    otherLab.textColor = XCOLOR_SUBTITLE;
+    [self.loginBgView addSubview:otherLab];
+    [otherLab sizeToFit];
+    CGFloat otherLab_Y  = other_Y - otherLab.mj_h - 10;
+    otherLab.center = CGPointMake(cell_W * 0.5, otherLab_Y);
+    
+    
+    CGFloat line_W = (cell_W - otherLab.mj_w - 80) * 0.5;
+    CGFloat line_H = 1;
+    CGFloat line_Y = otherLab.center.y;
+    CGFloat line_X1 = otherLab.mj_x - line_W - 10;
+    CGFloat line_X2 = CGRectGetMaxX(otherLab.frame) + 10;
+    for (NSInteger index = 0 ; index < 2; index++) {
+        
+        CGFloat X = (index == 0) ? line_X1 : line_X2;
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake( X, line_Y, line_W, line_H)];
+        line.backgroundColor = XCOLOR_line;
+        [self.loginBgView addSubview:line];
+    }
+    
+    
+    
+}
+
+- (void)makeRegistView{
+
+    
+    CGFloat cell_W = self.registbgView.bounds.size.width;
+    CGFloat cell_X = 0 ;
+    CGFloat cell_Y = 0 ;
+    CGFloat cell_H = 0 ;
+    
+    CGFloat cell_bg_X = 0;
+    CGFloat cell_bg_Y = 0;
+    CGFloat cell_bg_W = cell_W;
+    UIView *registCellbgView = [[UIView alloc] init];
+    self.registCellbgView = registCellbgView;
+    [self.registbgView  addSubview:registCellbgView];
+    
+    for (NSInteger index = 0 ; index < self.registArr.count; index++) {
+        
+        WYLXGroup *item  = self.registArr[index];
+        cell_H = item.cell_Height;
+        cell_Y = index * cell_H;
+        
+        MyOfferInputView *cell = [[MyOfferInputView alloc] initWithFrame:CGRectMake(cell_X, cell_Y, cell_W, cell_H)];
+        cell.group = item;
+        cell.tag = index;
+        cell.group = item;
+        cell.delegate = self;
+        cell.inputTF.returnKeyType = (index == self.registArr.count -1) ? UIReturnKeyDone  :  UIReturnKeyNext;
+        [registCellbgView addSubview:cell];
+        
+    }
+    
+    CGFloat cell_bg_H = cell_H + cell_Y;
+    registCellbgView.frame = CGRectMake(cell_bg_X, cell_bg_Y, cell_bg_W, cell_bg_H);
+    
+    
+    
+    CGFloat regist_X = 25;
+    CGFloat regist_Y = CGRectGetMaxY(registCellbgView.frame) + 25;
+    CGFloat regist_W = cell_W - regist_X * 2;
+    CGFloat regist_H =  50;
+    UIButton *registBtn = [[UIButton alloc] initWithFrame:CGRectMake(regist_X, regist_Y, regist_W, regist_H)];
+    self.registBtn = registBtn;
+    [self.registbgView addSubview:registBtn];
+    registBtn.backgroundColor = XCOLOR_RED;
+    registBtn.layer.cornerRadius = 4;
+    registBtn.titleLabel.font = XFONT(14);
+    [registBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [registBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    [registBtn addTarget:self action:@selector(registButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+
+    CGFloat pro_X = 0;
+    CGFloat pro_H =  20;
+    CGFloat pro_Y =  self.registbgView.mj_h - pro_H - 20;
+    CGFloat pro_W = cell_W;
+    UIButton *protocolBtn = [[UIButton alloc] initWithFrame:CGRectMake(pro_X, pro_Y, pro_W, pro_H)];
+    [protocolBtn setTitle:@"注册即表示同意<myoffer用户协议>" forState:UIControlStateNormal];
+    [protocolBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
+    protocolBtn.titleLabel.font = XFONT(14);
+    [self.registbgView addSubview:protocolBtn];
+    self.protocolBtn = protocolBtn;
+    [protocolBtn addTarget:self action:@selector(protocolBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    protocolBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+
+    UIButton *toLoginBtn = [[UIButton alloc] init];
+    [toLoginBtn setTitle:@"已经加入我们？请登录" forState:UIControlStateNormal];
+    [toLoginBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
+    toLoginBtn.titleLabel.font = XFONT(14);
+    [toLoginBtn sizeToFit];
+    CGFloat to_Login_H =  20;
+    CGFloat to_Login_Y = pro_Y - to_Login_H - 20;
+    CGFloat to_Login_W = toLoginBtn.mj_w + 50;
+    CGFloat to_Login_X = (cell_W - to_Login_W) * 0.5;
+    toLoginBtn.frame = CGRectMake(to_Login_X, to_Login_Y, to_Login_W, to_Login_H);
+    
+    self.toLoginBtn = toLoginBtn;
+    [self.registbgView addSubview:toLoginBtn];
+    [toLoginBtn addTarget:self action:@selector(toLoginBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    toLoginBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    
+}
+
+#pragma mark : UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [self.view endEditing:YES];
+}
+
+
+#pragma mark : MyOfferInputViewDelegate
+
+- (void)cell:(MyOfferInputView *)cell textFieldDidBeginEditing:(UITextField *)textField{
+
+    
+}
+
+- (void)cell:(MyOfferInputView *)cell textFieldDidEndEditing:(UITextField *)textField{
+
+    
+}
+
+- (void)cell:(MyOfferInputView *)cell  textFieldShouldReturn:(UITextField *)textField{
+
+    
+    if (cell.inputTF.returnKeyType == UIReturnKeyDone) {
+        
+        [self.view endEditing:YES];
+
+    }else{
+        
+        MyOfferInputView *nextCell  = (MyOfferInputView *)self.loginCellbgView.subviews[cell.tag + 1];
+        
+        [nextCell.inputTF becomeFirstResponder];
+    
+    }
+    
+}
+
+- (void)cell:(MyOfferInputView *)cell  shouldChangeCharacters:(NSString *)content{
+
+    
+    if (cell.group.groupType == EditTypeRegistPhone) {
+        
+        MyOfferInputView *nextCell  = (MyOfferInputView *)self.registCellbgView.subviews[cell.tag + 1];
+     
+        [nextCell changeVertificationCodeButtonEnable:(content.length > 0)];
+    }
+
+    
+}
+
+//点击发送验证码
+- (void)sendVertificationCodeWithCell:(MyOfferInputView *)cell{
+
+    if (cell.group.groupType != EditTypeVerificationCode) return;
+ 
+    MyOfferInputView *phoneCell = self.registCellbgView.subviews[cell.tag -1];
+    
+   [phoneCell checKTextFieldWithGroupValue];
+    
+    BOOL isMatch = [self verifyWithPhone:phoneCell.group.content areaCode:phoneCell.group.areaCode];
+    
+    if (!isMatch) {  return; }
+    
+    NSDictionary *parameter = @{
+                                @"code_type":@"register",
+                                @"phonenumber": phoneCell.group.content,
+                                @"target": phoneCell.group.content,
+                                @"mobile_code": phoneCell.group.areaCode
+                                };
+    
+    [self startAPIRequestWithSelector:kAPISelectorSendVerifyCode  parameters:parameter  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [cell vertificationTimerShow:YES];
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [cell vertificationTimerShow:NO];
+
+    }];
+    
+}
+
+
+#pragma mark : 手机号码验证
+
+- (BOOL)verifyWithPhone:(NSString *)phone areaCode:(NSString *)areaCode{
+    
+    NSString *errorStr;
+    
+    BOOL isMatch = YES;
+    
+    if (0 == phone.length) {
+        
+        errorStr = @"手机号码不能为空";
+        
+        isMatch = NO;
+    }
+    
+    if ([areaCode containsString:@"86"]) {
+        
+        NSString *china = @"^1\\d{10}$";
+        isMatch = [self predicateMatchWithValue:phone  key:china];
+        if (!isMatch) errorStr = @"请输入“1”开头的11位数字";
+    }
+    
+    
+    if ([areaCode containsString:@"44"]) {
+        
+        NSString *english = @"^7\\d{9}$";
+        isMatch = [self predicateMatchWithValue:phone  key:english];
+        if (!isMatch) errorStr = @"请输入“7”开头的10位数字";
+        
+    }
+    
+    
+    if ([areaCode containsString:@"60"] ) {
+        
+        NSString *maraxia = @"^\\d{7,9}$";
+        isMatch = [self predicateMatchWithValue:phone  key:maraxia];
+        if (!isMatch) errorStr = @"手机号码格式错误";
+        
+    }
+    
+    
+    if (!isMatch)  AlerMessage(errorStr);
+    
+    return isMatch;
+}
+
+//手机号码验证
+- (BOOL)predicateMatchWithValue:(NSString *)value key:(NSString *)key{
+    
+    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", key];
+    
+    BOOL match =  [pre evaluateWithObject:value];
+    
+    
+    return match;
+}
+
+
+
+
+#pragma mark : 提交注册信息
+
+- (void)registButtonOnClick:(UIButton *)sender {
+    
+    if (![self checkNetworkState])return;
+    
+    
+    for(MyOfferInputView *cell in  self.registCellbgView.subviews){
+        
+        [cell checKTextFieldWithGroupValue];
+        
+        switch (cell.group.groupType) {
+            case EditTypeRegistPhone:
+            {
+                if (![self verifyWithPhone:cell.group.content areaCode:cell.group.areaCode]) return;
+                
+                
+            }
+             
+                break;
+            case EditTypeVerificationCode:{
+            
+                if (cell.group.content.length <= 0 ) {
+                     [MBProgressHUD showError:@"验证码不能为空" toView:self.view];
+                     return;
+                }
+         
+            }
+                break;
+            case EditTypePasswd:{
+                
+                if (cell.group.content.length < 6 || cell.group.content.length > 16) {
+                    
+                    [MBProgressHUD showError:cell.group.placeHolder toView:self.view];
+                    return;
+                }
+  
+                
+            }
+                break;
+             default:
+                break;
+        }
+        
+    }
+    
+    
+    
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+    
+    for (WYLXGroup *group in self.registArr) {
+        
+        
+        if (group.groupType == EditTypeVerificationCode) {
+            
+            [parameter setValue:@{@"code":group.content} forKey:group.key];
+
+            
+        }else{
+        
+            [parameter setValue:group.content forKey:group.key];
+
+        }
+    }
+ 
+    
+    
+    [self
+     startAPIRequestWithSelector:kAPISelectorRegister
+     parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {
+         
+         [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+         [MobClick event:@"myoffer_Register"];
+         [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
+         
+         MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:nil ToView:nil];
+         hud.completionBlock = ^{
+             
+             [self dismiss];
+         };
+         
+     }];
+  
+    
+}
+
+//注册相关字段验证
+//- (BOOL)verifyRegisterFields:{
+//    
+//    
+//    if (self.RegisterVerTextF.text.length == 0) {
+//        
+//        AlerMessage(@"验证码不能为空");
+//        
+//        return  NO;
+//    }
+//    
+//    
+//    if (self.RegisterPasswdTextF.text.length == 0) {
+//        
+//        AlerMessage(self.RegisterPasswdTextF.placeholder);
+//        
+//        return  NO;
+//    }
+//    
+//    
+//    if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
+//    {   //@"密码长度不小于6个字符"
+//        
+//        AlerMessage(GDLocalizedString(@"Person-passwd"));
+//        
+//        return  NO;
+//    }
+//    
+//    
+//    return YES;
+//}
+
+
+
+
+#pragma mark : 键盘处理
+
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+//    self.backButton.hidden = YES;
+//    self.DismissButton.hidden = YES;
+    [self moveTextViewForKeyboard:aNotification up:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+//    self.backButton.hidden = NO;
+//    self.DismissButton.hidden = NO;
+    [self moveTextViewForKeyboard:aNotification up:NO];
+}
+
+- (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
+    NSDictionary* userInfo = [aNotification userInfo];
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardEndFrame;
+    
+    [userInfo[UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [userInfo[UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    [userInfo[UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+    // Animate up or down
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    self.baseView.top = up ?  - (self.logoView.mj_h - XNAV_HEIGHT): 0;
+    
+    [self.view layoutSubviews];
+    
+    [UIView commitAnimations];
+}
+
+
+
+#pragma mark :事件处理
+//退出登入
+- (void)dismiss:(UIButton *)sender{
+    
+    [self dismiss];
+    
+}
+
+//提交登录
+- (void)loginButtonOnClick:(UIButton *)sender{
+    
+    for(MyOfferInputView *cell in  self.loginCellbgView.subviews){
+    
+        [cell checKTextFieldWithGroupValue];
+
+    }
+    
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+    
+    for (WYLXGroup *group in self.loginArr) {
+        
+        
+        [parameter setValue:group.content forKey:group.key];
+        
+        switch (group.groupType) {
+            case EditTypePhone:
+            {
+                
+                if (group.content.length <= 0) {
+                    
+                    [MBProgressHUD showError:@"手机号码不能为空" toView:self.view];
+                    
+                    return;
+                }
+               
+            }
+                break;
+                
+            default:{
+                
+                if (group.content.length <= 0) {
+                    
+                    [MBProgressHUD showError:@"密码不能为空" toView:self.view];
+                    
+                    return;
+                }
+            
+            
+            }
+                break;
+        }
+        
+  
+ 
+    }
+    
+    if (![self checkNetworkState]) return; //网络连接失败提示
+  
+    
+    [self
+     startAPIRequestWithSelector:kAPISelectorLogin
+     parameters:parameter
+     success:^(NSInteger statusCode, NSDictionary *response) {
+         
+         [self LoginSuccessWithResponse:response];
+         
+     }];
+    
+}
+
+//正常登录成功相关处理  （非第三方）登录
+-(void)LoginSuccessWithResponse:(NSDictionary *)response
+{
+    //    NSLog(@"正常登录成功相关处理  = %@",response);
+    
+    [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+    [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+    [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
+    //    NSLog(@"access_token = %@",response[@"jpush_alias"]);
+    [MobClick event:@"myofferUserLogin"];
+    
+    //当用户没有电话时发出通知，让用户填写手机号
+    NSString *phone =response[@"phonenumber"];
+    
+    if (phone.length == 0) {
+        
+        [self.view endEditing:YES];
+        
+    }else{
+        
+        MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
+        HUD.completionBlock = ^{
+            
+            [self dismiss];
+            
+        };
+        
+    }
+    
+}
+
+
+//去登录
+- (void)toLoginBtnOnClick:(UIButton *)sender{
+    
+    [self.bgView setContentOffset:CGPointMake(0, 0) animated:YES];
+
+}
+
+//去注册
+- (void) toRegistBtnOnClick:(UIButton *)sender{
+    
+    [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH, 0) animated:YES];
+}
+
+//第三方登录点击
+- (void) otherBtnOnClick:(UIButton *)sender{
+
+    
+    NSString *shareplatform;
+    NSString *platformName;
+    switch (sender.tag) {
+        case otherLoginTypeWX:
+        {
+            shareplatform = UMShareToWechatSession;
+            platformName = @"wechat";
+        }
+            break;
+        case otherLoginTypeWB:
+        {
+            
+            shareplatform = UMShareToSina;
+            platformName = @"weibo";
+            
+        }
+            break;
+        default:
+        {
+            shareplatform = UMShareToQzone;
+            platformName = @"qq";
+        }
+            break;
+    }
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
+            
+            NSMutableDictionary *userInfo =[NSMutableDictionary dictionary];
+            [userInfo setValue:snsAccount.usid forKey:@"user_id"];
+            [userInfo setValue:platformName forKey:@"provider"];
+            [userInfo setValue:snsAccount.accessToken forKey:@"token"];
+         
+            [self  loginWithParameters:userInfo];
+        }
+    });
+
+    
+}
+// 第三方登录传参并登录
+-(void)loginWithParameters:(NSMutableDictionary *)userInfo
+{
+    //存储第三方登录平台信息  用于绑定手机页面使用
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:userInfo[@"provider"]  forKey:@"provider"];
+    [ud synchronize];
+    
+    [self  startAPIRequestWithSelector:kAPISelectorLogin  parameters:userInfo success:^(NSInteger statusCode, NSDictionary *response) {
+        
+        if (response[@"new"]) {
+            
+            [self caseLoginSelection:userInfo];
+            
+        }else if([response[@"role"] isEqualToString:@"user"]){
+            
+            [self OtherLoginSuccessWithResponse:response andUserInfo:userInfo];
+            
+        }
+        
+    }];
+    
+}
+
+
+//登录前判断用户资料是否包含手机号码
+-(void)OtherLoginSuccessWithResponse:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo
+{
+    [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+    
+    [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+    
+    [MobClick profileSignInWithPUID:response[@"access_token"] provider:[userInfo valueForKey:@"provider"]];/*友盟统计记录用户账号*/
+    
+    [MobClick event:@"otherUserLogin"];
+    
+    //当用户没有电话时发出通知，让用户填写手机号
+    !response[@"phonenumber"]? [self caseBangding] :  [self dismiss];
+    
+}
+
+//绑定手机号    当用户没有电话时发出通知，让用户填写手机号
+- (void)caseBangding{
+    
+    [self.navigationController pushViewController:[[BangViewController alloc] init] animated:YES];
+}
+
+
+
+//选择登录页面，用于用户填写手机号、或绑定原有账号
+- (void)caseLoginSelection:(NSDictionary *)userInfo{
+    
+    LoginSelectViewController *selectVC =[[LoginSelectViewController alloc] initWithNibName:@"LoginSelectViewController" bundle:[NSBundle mainBundle]];
+    selectVC.parameter = userInfo;
+    [self.navigationController pushViewController:selectVC animated:YES];
+}
+
+
+//点击查看协议
+- (void)protocolBtnOnClick:(UIButton *)sender{
+    
+    WebViewController  *service =[[WebViewController alloc] init];
+    service.path =  [NSString stringWithFormat:@"%@docs/%@/web-agreement.html",DOMAINURL,GDLocalizedString(@"ch_Language")];
+    [self.navigationController pushViewController:service animated:YES];
+}
+
+//点击背景隐藏键盘
+- (void)keyboardHiden{
+
+    [self.view endEditing:YES];
+}
+
+//点击忘记密码
+- (void)forgetButtonOnClick:(UIButton *)sender{
+
+    
+    [self.view endEditing:YES];
+    
+    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+    
+
+}
+
+
+- (void)dealloc{
+    
+    KDClassLog(@"登录 dealloc");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+@end

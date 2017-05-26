@@ -14,7 +14,8 @@
 #import "UserDefaults.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
-#import "NewLoginRegisterViewController.h"
+//#import "NewLoginRegisterViewController.h"
+#import "MyOfferLoginViewController.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "UMSocialQQHandler.h"
 #import "LeftMenuViewController.h"
@@ -279,8 +280,8 @@ static AppDelegate *__sharedDelegate;
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
     
-    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
-    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:vc];
+//    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
+     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
 }
 

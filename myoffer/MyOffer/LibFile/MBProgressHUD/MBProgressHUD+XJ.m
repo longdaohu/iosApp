@@ -52,9 +52,11 @@
     
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    
     hud.animationType = MBProgressHUDAnimationZoomOut;
 
     hud.label.text = message;
+    
     hud.label.numberOfLines = 2;
  
     // 隐藏时候从父控件中移除

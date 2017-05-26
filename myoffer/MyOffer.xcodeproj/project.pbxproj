@@ -226,6 +226,8 @@
 		AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */; };
 		AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */; };
 		AE96A36F1E8BC849006E8E35 /* ServiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36E1E8BC849006E8E35 /* ServiceHeaderView.m */; };
+		AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */; };
+		AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
 		AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */; };
 		AEA249271D5B207700DD7939 /* ApplyMatialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249221D5B207700DD7939 /* ApplyMatialViewController.m */; };
@@ -831,6 +833,10 @@
 		AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemHeaderView.m; sourceTree = "<group>"; };
 		AE96A36D1E8BC849006E8E35 /* ServiceHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHeaderView.h; sourceTree = "<group>"; };
 		AE96A36E1E8BC849006E8E35 /* ServiceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHeaderView.m; sourceTree = "<group>"; };
+		AE9CB3CB1ED6AC0F0049E618 /* MyOfferLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferLoginViewController.h; sourceTree = "<group>"; };
+		AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferLoginViewController.m; sourceTree = "<group>"; };
+		AE9CB3CE1ED6BBDF0049E618 /* MyOfferInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferInputView.h; sourceTree = "<group>"; };
+		AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferInputView.m; sourceTree = "<group>"; };
 		AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiNoResultVeiw.h; sourceTree = "<group>"; };
 		AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiNoResultVeiw.m; sourceTree = "<group>"; };
 		AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
@@ -2909,6 +2915,10 @@
 				AEA24B1C1D5B251800DD7939 /* NewLoginRegisterViewController.h */,
 				AEA24B1D1D5B251800DD7939 /* NewLoginRegisterViewController.m */,
 				AE2D5E8D1DD5CDE900B4E9F3 /* NewLoginRegisterViewController.xib */,
+				AE9CB3CB1ED6AC0F0049E618 /* MyOfferLoginViewController.h */,
+				AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */,
+				AE9CB3CE1ED6BBDF0049E618 /* MyOfferInputView.h */,
+				AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */,
 				AEA24B1F1D5B251800DD7939 /* YourBindView.h */,
 				AEA24B201D5B251800DD7939 /* YourBindView.m */,
 			);
@@ -3476,7 +3486,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3728,6 +3738,7 @@
 				AE7F9B101EB8546F00D30525 /* SearchPromptView.m in Sources */,
 				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
 				AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */,
+				AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */,
 				AED5A85A1DDEF25800E70289 /* PipeiGroup.m in Sources */,
 				AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */,
 				AE1FD7211D5C929500FFD5A8 /* NSObject+MJClass.m in Sources */,
@@ -3837,6 +3848,7 @@
 				AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */,
 				AE8707061DDEEC4200CE7780 /* PipeiSectionHeaderView.m in Sources */,
 				AEA24AF91D5B24D200DD7939 /* LeftMenuViewController.m in Sources */,
+				AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
@@ -4180,7 +4192,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

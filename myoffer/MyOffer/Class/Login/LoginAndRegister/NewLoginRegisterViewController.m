@@ -624,7 +624,6 @@
 
 - (IBAction)RegisterButtonCommitPressed:(id)sender {
     
-    
     if (![self checkNetworkState])return;
     
     
