@@ -134,6 +134,7 @@
 		AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2DE44D1E964CA0009683B0 /* ServiceItemAttribute.m */; };
 		AE2F23081EADA6040089084C /* UniversityCourseFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F23071EADA6040089084C /* UniversityCourseFilterViewController.m */; };
 		AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F230A1EADEC9C0089084C /* UniversityCourseFilterCell.m */; };
+		AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */; };
 		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
 		AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */; };
 		AE3566B01E011261003F1208 /* CatigaryCityCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3566AF1E011261003F1208 /* CatigaryCityCollectionReusableView.xib */; };
@@ -340,8 +341,6 @@
 		AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE31D5B24D200DD7939 /* SetViewController.m */; };
 		AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AE91D5B24D200DD7939 /* NotificationViewController.m */; };
 		AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AEF1D5B24D200DD7939 /* TongzhiCell.m */; };
-		AEA24B231D5B251800DD7939 /* NewForgetPasswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B121D5B251800DD7939 /* NewForgetPasswdViewController.m */; };
-		AEA24B241D5B251800DD7939 /* NewForgetPasswdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B131D5B251800DD7939 /* NewForgetPasswdViewController.xib */; };
 		AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B161D5B251800DD7939 /* IntroViewController.m */; };
 		AEA24B261D5B251800DD7939 /* IntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B171D5B251800DD7939 /* IntroViewController.xib */; };
 		AEA24B271D5B251800DD7939 /* LoginSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B1A1D5B251800DD7939 /* LoginSelectViewController.m */; };
@@ -666,6 +665,8 @@
 		AE2F23071EADA6040089084C /* UniversityCourseFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseFilterViewController.m; sourceTree = "<group>"; };
 		AE2F23091EADEC9C0089084C /* UniversityCourseFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityCourseFilterCell.h; sourceTree = "<group>"; };
 		AE2F230A1EADEC9C0089084C /* UniversityCourseFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityCourseFilterCell.m; sourceTree = "<group>"; };
+		AE2F25281ED989CE005FB478 /* ForgetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPWViewController.h; sourceTree = "<group>"; };
+		AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPWViewController.m; sourceTree = "<group>"; };
 		AE329BEA1DD2BC9A00DCF433 /* BangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangViewController.h; sourceTree = "<group>"; };
 		AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BangViewController.m; sourceTree = "<group>"; };
 		AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guid_smart.jpg; sourceTree = "<group>"; };
@@ -1046,9 +1047,6 @@
 		AEA24AE91D5B24D200DD7939 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		AEA24AEE1D5B24D200DD7939 /* TongzhiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongzhiCell.h; sourceTree = "<group>"; };
 		AEA24AEF1D5B24D200DD7939 /* TongzhiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongzhiCell.m; sourceTree = "<group>"; };
-		AEA24B111D5B251800DD7939 /* NewForgetPasswdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewForgetPasswdViewController.h; sourceTree = "<group>"; };
-		AEA24B121D5B251800DD7939 /* NewForgetPasswdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewForgetPasswdViewController.m; sourceTree = "<group>"; };
-		AEA24B131D5B251800DD7939 /* NewForgetPasswdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewForgetPasswdViewController.xib; sourceTree = "<group>"; };
 		AEA24B151D5B251800DD7939 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		AEA24B161D5B251800DD7939 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		AEA24B171D5B251800DD7939 /* IntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroViewController.xib; sourceTree = "<group>"; };
@@ -2879,9 +2877,8 @@
 		AEA24B101D5B251800DD7939 /* Forget_Passwd */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24B111D5B251800DD7939 /* NewForgetPasswdViewController.h */,
-				AEA24B121D5B251800DD7939 /* NewForgetPasswdViewController.m */,
-				AEA24B131D5B251800DD7939 /* NewForgetPasswdViewController.xib */,
+				AE2F25281ED989CE005FB478 /* ForgetPWViewController.h */,
+				AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */,
 			);
 			path = Forget_Passwd;
 			sourceTree = "<group>";
@@ -3486,7 +3483,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3559,7 +3556,6 @@
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
-				AEA24B241D5B251800DD7939 /* NewForgetPasswdViewController.xib in Resources */,
 				AEF421031BD4988B00CFB45E /* UMShareEditViewController.xib in Resources */,
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
 				AE1FD74A1D5C929500FFD5A8 /* Pre-comp 1_0008.png in Resources */,
@@ -3786,6 +3782,7 @@
 				AEA24AF71D5B24D200DD7939 /* RESideMenu.m in Sources */,
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
+				AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */,
 				AEA24A0A1D5B224E00DD7939 /* CatigorySubjectCell.m in Sources */,
 				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
@@ -3862,7 +3859,6 @@
 				AEA249A51D5B215300DD7939 /* OrderDetailFooterView.m in Sources */,
 				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
-				AEA24B231D5B251800DD7939 /* NewForgetPasswdViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
 				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
@@ -4192,7 +4188,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

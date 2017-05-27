@@ -59,6 +59,7 @@ static NSString  *identity = @"liuxue";
     [inputTF setFont:XFONT(18)];
     self.inputTF = inputTF;
     inputTF.delegate = self;
+    [inputTF setTintColor:XCOLOR_LIGHTBLUE];
 
     
     UIView *line = [[UIView alloc] init];
@@ -66,7 +67,7 @@ static NSString  *identity = @"liuxue";
     line.backgroundColor = XCOLOR_line;
     self.line = line;
     self.line.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
-    self.line.layer.shadowOffset = CGSizeMake(0, -1);
+    self.line.layer.shadowOffset = CGSizeMake(0, 0);
     
     UIView *spod = [[UIView alloc] init];
     [self.contentView addSubview:spod];

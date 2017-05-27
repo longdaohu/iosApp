@@ -305,7 +305,7 @@ typedef enum {
     }];
     
     self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:XImage(@"nav_QQ")  style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]  initWithImage:XImage(@"QQ_service")  style:UIBarButtonItemStylePlain target:self action:@selector(QQservice)];
     
 }
 

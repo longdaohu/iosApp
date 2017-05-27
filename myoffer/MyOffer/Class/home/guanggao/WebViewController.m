@@ -43,6 +43,8 @@
 {
     [super viewWillDisappear:animated];
     
+    [self.hud hideAnimated:YES];
+    
     [MobClick endLogPageView:[self page]];
 }
 
@@ -134,7 +136,7 @@
 }
 
 
-#pragma mark ——————  WKWebViewDeleage
+#pragma mark ；  WKWebViewDeleage
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     

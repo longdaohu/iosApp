@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 }
 
 
-
+ 
 - (void)viewDidLoad {
   
     [super viewDidLoad];
@@ -320,7 +320,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-        self.sucessView.top = 0;
+        self.sucessView.alpha = 1;
 
     }];
     

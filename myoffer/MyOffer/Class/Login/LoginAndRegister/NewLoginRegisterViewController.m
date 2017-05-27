@@ -8,7 +8,6 @@
 
 #import "NewLoginRegisterViewController.h"
 #import "FXBlurView.h"
-#import "NewForgetPasswdViewController.h"
 #import "UMSocial.h"
 #import "APService.h"
 #import "LoginSelectViewController.h"
@@ -346,13 +345,7 @@
   
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-   
-    if ([[AppDelegate sharedDelegate] isLogin])  return; //当登录情况，根本不会用到这个方法
-    
-    [self.view  endEditing:YES];
-}
+
 
 // 正常（非第三方）登录
 - (IBAction)LoginButtonCommit:(id)sender {
@@ -748,7 +741,7 @@
 // 点击忘记密码
 - (IBAction)ForgetPasswdButtonPressed:(id)sender {
     
-    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+//    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
     
 }
 

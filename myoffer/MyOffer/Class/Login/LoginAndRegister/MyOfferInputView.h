@@ -12,11 +12,14 @@
 
 @protocol MyOfferInputViewDelegate   <NSObject>
 
+@optional
 - (void)cell:(MyOfferInputView *)cell textFieldDidBeginEditing:(UITextField *)textField;
 - (void)cell:(MyOfferInputView *)cell textFieldDidEndEditing:(UITextField *)textField;
 - (void)cell:(MyOfferInputView *)cell  textFieldShouldReturn:(UITextField *)textField;
 - (void)cell:(MyOfferInputView *)cell  shouldChangeCharacters:(NSString *)content;
 - (void)sendVertificationCodeWithCell:(MyOfferInputView *)cell;
+- (void)inputAccessoryViewClickWithCell:(MyOfferInputView *)cell;
+
 
 
 @end

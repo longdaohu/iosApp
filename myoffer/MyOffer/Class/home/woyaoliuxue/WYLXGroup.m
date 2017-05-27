@@ -89,7 +89,7 @@
     
     
     CGFloat line_X = title_X;
-    CGFloat line_H = 0.5;
+    CGFloat line_H =  0.5;
     CGFloat line_Y = CGRectGetMaxY(group.inputFrame) - line_H;
     CGFloat line_W = XSCREEN_WIDTH - line_X * 2;
     group.lineFrame = CGRectMake(line_X, line_Y, line_W, line_H);
@@ -111,10 +111,11 @@
         
     }else if (group.groupType == EditTypePasswd) {
         
-        right_Y = input_Y;
-        right_H = input_H;
-        right_W = 50;
+        right_W = 22;
+        right_H = right_W;
         right_X = CGRectGetMaxX(group.lineFrame) - right_W;
+        right_Y = input_Y +(input_H - right_H) * 0.5;
+
     }
     
     group.rightBttonFrame = CGRectMake(right_X, right_Y, right_W, right_H);

@@ -22,6 +22,7 @@
 @property(nonatomic,strong)UIPickerView *areaPicker;
 @property(nonatomic,strong)NSTimer *timer;
 @property(nonatomic,assign)NSUInteger timerCount;
+@property(nonatomic,strong)XWGJKeyboardToolar *tooler;
 
 @end
 
@@ -66,30 +67,36 @@
 
 - (void)makeUI{
     
+    //标题
     UILabel *titleLab = [[UILabel alloc] init];
     [self addSubview:titleLab];
     titleLab.font = XFONT(14);
     titleLab.textColor = XCOLOR_TITLE;
     self.titleLab = titleLab;
     
+    
+    //输入框
     UITextField *inputTF = [[UITextField alloc] init];
+    [inputTF setTintColor:XCOLOR_LIGHTBLUE];
     [self addSubview:inputTF];
     [inputTF setFont:XFONT(18)];
     self.inputTF = inputTF;
     inputTF.delegate = self;
     
+    //选择地区输入框
     UITextField *areaCodeTF = [[UITextField alloc] init];
     [self addSubview:areaCodeTF];
     [areaCodeTF setFont:XFONT(18)];
     self.areaCodeTF = areaCodeTF;
     self.areaCodeTF.inputView =self.areaPicker;
     
-    
+    //选择地区输入框分隔线
     UIView *line_code = [[UIView alloc] init];
     [self addSubview:line_code];
     line_code.backgroundColor = XCOLOR_line;
     self.line_areaCode = line_code;
     
+    //显示地区
     UILabel *areaCodeLab = [[UILabel alloc] init];
     self.areaCodeLab = areaCodeLab;
     [self addSubview:areaCodeLab];
@@ -100,20 +107,25 @@
     areaCodeLab.layer.masksToBounds = YES;
     areaCodeLab.backgroundColor = XCOLOR_BG;
     
+    //根据情况提示按钮点击功能
     UIButton *rightBtn = [UIButton new];
     [rightBtn addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.rightBtn = rightBtn;
     [self addSubview:rightBtn];
     self.rightBtn.titleLabel.font = XFONT(14);
+    rightBtn.backgroundColor = XCOLOR_WHITE;
     
     
+    //分隔线
     UIView *line = [[UIView alloc] init];
     [self addSubview:line];
     line.backgroundColor = XCOLOR_line;
     self.line = line;
-    self.line.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
-    self.line.layer.shadowOffset = CGSizeMake(0, -1);
+    self.line.layer.shadowColor = XCOLOR_WHITE.CGColor;
+    self.line.layer.shadowOffset = CGSizeMake(0, 0);
+    self.line.layer.shadowOpacity =  1;
     
+    //有时候要显示提示图标
     UIView *spod = [[UIView alloc] init];
     [self addSubview:spod];
     spod.backgroundColor = XCOLOR_line;
@@ -121,9 +133,33 @@
     spod.layer.cornerRadius = 5;
     spod.layer.masksToBounds = YES;
     
- 
-    
 }
+
+- (XWGJKeyboardToolar *)tooler{
+
+    if (!_tooler) {
+        
+       _tooler = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([XWGJKeyboardToolar class]) owner:self options:nil].lastObject;
+        
+        XWeakSelf
+        _tooler.actionBlock = ^(NSString *flag){
+            
+            if ([flag isEqualToString:@"收起"]) {
+                
+                [weakSelf.inputTF resignFirstResponder];
+                
+            }else{
+                
+                [weakSelf toolerOnClick];
+                
+            }
+            
+        };
+    }
+    
+    return _tooler;
+}
+
 
 - (void)setGroup:(WYLXGroup *)group{
     
@@ -139,7 +175,6 @@
     self.inputTF.frame = group.inputFrame;
     self.line.frame = group.lineFrame;
     self.spod.frame = group.spodFrame;
-    
     self.rightBtn.frame = group.rightBttonFrame;
     
     
@@ -151,46 +186,44 @@
         self.rightBtn.layer.cornerRadius = 4;
         self.rightBtn.layer.borderWidth = 1;
         self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
-        self.rightBtn.enabled = NO;
-        [self updateRightButton:self.rightBtn];
+        [self updateRightButtonStatusEnable:NO];
+        self.inputTF.inputAccessoryView = self.tooler;
+
        
+   }else if (group.groupType == EditTypePhone) {
+      
+       self.inputTF.keyboardType = UIKeyboardTypeEmailAddress;
+       self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
+
+
+       
+   }else if (group.groupType == EditTypePasswd) {
         
-    }else if (group.groupType == EditTypePasswd) {
-        
-        [self.rightBtn setImage:XImage(@"hidepassword") forState:UIControlStateNormal];
-        [self.rightBtn setImage:XImage(@"showpassword") forState:UIControlStateSelected];
+        [self.rightBtn setBackgroundImage:XImage(@"hidepassword")forState:UIControlStateNormal];
+        [self.rightBtn setBackgroundImage:XImage(@"showpassword")forState:UIControlStateSelected];
         self.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        
         self.inputTF.secureTextEntry = YES;
         
     }else if (group.groupType == EditTypeRegistPhone){
     
         
+        self.inputTF.inputAccessoryView = self.tooler;
         self.areaCodeTF.frame = group.areacodeTFFrame;
         self.line_areaCode.frame = group.areacodeLineFrame;
         self.areaCodeLab.frame = group.areacodeLableFrame;
         self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
-//        self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
+        self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
         
     }
-    
-    
-    
+
     
  
 }
 
-- (void)toolerOnClick{
-    
-//    if ([self.delegate respondsToSelector:@selector(zixunCell:indexPath:didClickWithTextField:)]) {
-//        
-//        [self.delegate zixunCell:self indexPath:self.indexPath didClickWithTextField:self.inputTF];
-//    }
-    
-}
 
 
 #pragma mark : UITextFieldDelegate
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
     [self inputTextFieldOnEditing:YES];
@@ -215,19 +248,48 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-//    NSLog(@">>>>>shouldChangeCharactersInRange>>>>>>>> [-%@-] [-%@-]  %d  %d",textField.text,string,range.length,range.location);
     
-    if ([self.delegate respondsToSelector:@selector(cell:shouldChangeCharacters:)]) {
+    
+    NSString *content = [NSString stringWithFormat:@"%@%@",textField.text,string];
+    
+    if (self.group.groupType == EditTypeRegistPhone) {
         
-        NSString *content = [NSString stringWithFormat:@"%@%@",textField.text,string];
-
-        if (string.length == 0 && range.location == 0) {
+    
+        if ([self.delegate respondsToSelector:@selector(cell:shouldChangeCharacters:)]) {
             
-            content = @"";
+            //输入框被清空时
+            if (string.length == 0 && range.location == 0) content = @"";
+            
+            [self.delegate cell:self shouldChangeCharacters:content];
+            
         }
         
-        [self.delegate cell:self shouldChangeCharacters:content];
     }
+ 
+    if (self.group.groupType == EditTypeVerificationCode) {
+    
+        //验证码输入个数
+        if (content.length > 10 ){
+            
+            self.inputTF.text = [content substringWithRange:NSMakeRange(0, 10)];
+            
+        }
+        
+    }
+
+    
+    if (self.group.groupType == EditTypePasswd) {
+        
+        
+        //监听登录密码输入位数
+        if (content.length > 16 ){
+            
+            self.inputTF.text = [content substringWithRange:NSMakeRange(0, 16)];
+
+        }
+        
+    }
+    
     
     
     
@@ -248,20 +310,42 @@
 }
 
 
-
-- (void)inputTextFieldOnEditing:(BOOL)edit{
-    
-    self.line.backgroundColor = edit ? XCOLOR_LIGHTBLUE : XCOLOR_line;
-    
-    self.line.layer.shadowOpacity = edit ? 1 : 0;
+//监听清空按钮
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+  
+    if (self.group.groupType == EditTypeRegistPhone &&[self.delegate respondsToSelector:@selector(cell:shouldChangeCharacters:)]) {
         
+        [self.delegate cell:self shouldChangeCharacters:@""];
+    }
+
+    
+    return YES;
+}
+
+- (void)toolerOnClick{
+    
+    if ([self.delegate respondsToSelector:@selector(inputAccessoryViewClickWithCell:)]) {
+        
+        [self.delegate inputAccessoryViewClickWithCell:self];
+    }
     
 }
 
 
 
+//设置输入框在激活状态下显示效果
+- (void)inputTextFieldOnEditing:(BOOL)edit{
+    
+    self.line.backgroundColor = edit ? XCOLOR_LIGHTBLUE : XCOLOR_line;
+//    self.line.layer.shadowOpacity = edit ? 1 : 0;
+    self.line.layer.shadowColor = edit ?  XCOLOR_LIGHTBLUE.CGColor : XCOLOR_WHITE.CGColor;
+
+    
+}
+
 - (void)rightButtonClick:(UIButton *)sender{
 
+    //是否显示密码按钮点击
     if (self.group.groupType == EditTypePasswd) {
         
         sender.selected = !sender.selected;
@@ -269,7 +353,7 @@
         self.inputTF.secureTextEntry = !self.inputTF.secureTextEntry;
     }
     
-    
+    //验证码点击
     if (self.group.groupType == EditTypeVerificationCode) {
         
         if ([self.delegate respondsToSelector:@selector(sendVertificationCodeWithCell:)]) {
@@ -306,6 +390,7 @@
     NSString *codeStr = [code componentsSeparatedByString:@"+"].lastObject;
     NSString *areaCode = [codeStr substringWithRange:NSMakeRange(0, codeStr.length - 1)];
     self.areaCodeLab.text = [NSString stringWithFormat:@"+%@",areaCode];
+    
     self.group.areaCode = areaCode;
     
 }
@@ -319,76 +404,78 @@
     
 }
 
-- (void)verifyCodeCountDown{
-    
 
-    NSInteger count = self.timerCount--;
+//更新获取验证码的状态
+- (void)updateRightButtonStatusEnable:(BOOL)enable{
     
-    NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
+    if (self.rightBtn.enabled == enable) return;
     
-    if(count <= 0){
+    self.rightBtn.enabled = enable;
+    UIColor *color = self.rightBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_Disable;
+    self.rightBtn.layer.borderColor = color.CGColor;
     
+    if (enable) {
         
-        [self.timer invalidate];
-        self.timer = nil;
-        
-        self.rightBtn.enabled = YES;
-        [self updateRightButton:self.rightBtn];
-        
-        title = @"获取验证码";
+         [self.rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     }
     
-    [self.rightBtn setTitle:title forState:UIControlStateNormal];
-  
-}
-
-- (void)updateRightButton:(UIButton *)sender{
-    
-    UIColor *color = sender.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_Disable;
-    sender.layer.borderColor = color.CGColor;
-
     
 }
-
+//外部监听点击事件改显按钮状态
 - (void)changeVertificationCodeButtonEnable:(BOOL)enable{
-
-    self.rightBtn.enabled = enable;
     
-    [self updateRightButton:self.rightBtn];
+    [self updateRightButtonStatusEnable:enable];
+    
 }
+
 
 - (void)vertificationTimerShow:(BOOL)show{
     
-    self.rightBtn.enabled = !show;
-    
-    [self updateRightButton:self.rightBtn];
+    [self updateRightButtonStatusEnable:!show];
+ 
+    if (self.timer) [self timerClear];
 
     if (show) {
-        
         
         self.timerCount = 60;
         
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(verifyCodeCountDown) userInfo:nil repeats:YES];
         
         return;
+    }
     
-    }else{
+   
+}
+
+- (void)verifyCodeCountDown{
+    
+    NSInteger count = self.timerCount--;
+    
+    NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
+    
+    [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    
+    if(count <= 0){
         
-      
-        [self.timer invalidate];
-         self.timer = nil;
+        [self timerClear];
+        
+        [self updateRightButtonStatusEnable:YES];
         
     }
     
-  
+    
 }
 
+//清空timer
+- (void)timerClear{
 
+    [self.timer invalidate];
+    self.timer = nil;
+}
 
 - (void)dealloc{
     
-    [self.timer invalidate];
-    self.timer = nil;
+    [self timerClear];
     
     NSLog(@"MyOfferInputView  dealloc ");
     

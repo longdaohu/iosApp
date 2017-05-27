@@ -28,7 +28,7 @@
    
         UIView *line = [[UIView alloc] init];
         self.line = line;
-        line.backgroundColor = XCOLOR_line;
+        line.backgroundColor = XCOLOR_BG;
         [self addSubview:line];
         
         UIView *bgView = [[UIView alloc] init];

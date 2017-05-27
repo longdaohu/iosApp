@@ -22,9 +22,11 @@
 {
     WYLXSuccessView  *SuccessView =  [[NSBundle mainBundle] loadNibNamed:@"WYLXSuccessView" owner:self options:nil].lastObject;
    
-    SuccessView.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    SuccessView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     
     SuccessView.actionBlock = actionBlock;
+    
+    SuccessView.alpha = 0;
     
     return SuccessView;
 }
@@ -39,7 +41,7 @@
 
     [super awakeFromNib];
     
-    self.bgView.layer.shadowOpacity = 0.8;
+    self.bgView.layer.shadowOpacity = 0.6;
     self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
     self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
 }

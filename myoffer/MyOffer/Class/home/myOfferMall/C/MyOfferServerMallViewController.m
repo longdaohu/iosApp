@@ -79,7 +79,7 @@
     
     [self makeAutoLoopViewAtView:headerView];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQService"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQ_service"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
  
     
 }

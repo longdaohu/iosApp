@@ -11,7 +11,7 @@
 #import "MyOfferInputView.h"
 #import "LoginSelectViewController.h"
 #import "BangViewController.h"
-#import "NewForgetPasswdViewController.h"
+#import "ForgetPWViewController.h"
 
 
 typedef NS_ENUM(NSInteger,otherLoginType){
@@ -90,9 +90,9 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     if (!_registArr) {
         
         WYLXGroup *regist_Phone = [WYLXGroup groupWithType:EditTypeRegistPhone title:@"手机" placeHolder:@"请输入手机号" content:nil groupKey:@"username" spod:false cellType:CellGroupTypeView];
-        WYLXGroup *regist_yzm = [WYLXGroup groupWithType:EditTypeVerificationCode title:@"验证码" placeHolder:@"请输入验证码" content:nil groupKey:@"password" spod:false cellType:CellGroupTypeView];
+        WYLXGroup *regist_yzm = [WYLXGroup groupWithType:EditTypeVerificationCode title:@"验证码" placeHolder:@"请输入验证码" content:nil groupKey:@"vcode" spod:false cellType:CellGroupTypeView];
 
-        WYLXGroup *login_passwd = [WYLXGroup groupWithType:EditTypePasswd title:@"密码" placeHolder:@"请输入6-16新密码" content:nil groupKey:@"vcode" spod:false  cellType:CellGroupTypeView];
+        WYLXGroup *login_passwd = [WYLXGroup groupWithType:EditTypePasswd title:@"密码" placeHolder:@"请输入6-16新密码" content:nil groupKey:@"password" spod:false  cellType:CellGroupTypeView];
 
         
         _registArr = @[regist_Phone,regist_yzm,login_passwd];
@@ -102,73 +102,96 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 }
 
 
+- (void)addSubView:(UIView *)subView  frame:(CGRect)frame toSuperView:(UIView *)superView{
+   
+      subView.frame = frame;
+     [superView addSubview:subView];
+}
+
+
+- (UIButton *)buttonWithFrame:(CGRect)frame  title:(NSString *)title fontSize:(CGFloat)size titleColor:(UIColor *)color imageName:(NSString *)imageName  Action:(nonnull SEL)action{
+   
+    UIButton *sender = [[UIButton alloc] initWithFrame:frame];
+  
+    [sender setTitle:(title ? title : @"") forState:UIControlStateNormal];
+
+    [sender setTitleColor:(color ? color : XCOLOR_TITLE) forState:UIControlStateNormal];
+    
+    [sender  setImage:XImage(imageName) forState:UIControlStateNormal];
+    
+    [sender addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+
+    sender.titleLabel.font = XFONT(size);
+    
+    return sender;
+}
+
 - (void)makeUI{
     
     
-    UIImageView *logo = [[UIImageView alloc] initWithImage:XImage(@"login_top")];
-    [self.view addSubview:logo];
-    self.logoView = logo;
+    self.logoView = [[UIImageView alloc] initWithImage:XImage(@"login_top")];
     CGFloat logo_X = 0;
     CGFloat logo_Y = 0;
     CGFloat logo_W = XSCREEN_WIDTH;
-    CGFloat logo_H =  logo_W * logo.image.size.height/logo.image.size.width;
-    logo.frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
+    CGFloat logo_H =  logo_W * self.logoView.image.size.height/self.logoView.image.size.width;
+    [self addSubView:self.logoView  frame:CGRectMake(logo_X, logo_Y, logo_W, logo_H) toSuperView:self.view];
+
+     self.baseView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self addSubView:self.baseView  frame:self.view.bounds toSuperView:self.view];
     
-    
-    
-    UIView *baseView = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.baseView = baseView;
-    [self.view addSubview:baseView];
     
     CGFloat bg_X = 0;
     CGFloat bg_Y = 0;
     CGFloat bg_W = XSCREEN_WIDTH;
     CGFloat bg_H = XSCREEN_HEIGHT - bg_Y;
-    UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(bg_X, bg_Y, bg_W, bg_H)];
-    [self.baseView addSubview:bgView];
+    UIScrollView *bgView = [[UIScrollView alloc] init];
     self.bgView = bgView;
-    
     bgView.scrollEnabled = NO;
     bgView.pagingEnabled = YES;
     bgView.bounces = NO;
     bgView.delegate = self;
+    [self addSubView:bgView  frame:CGRectMake(bg_X, bg_Y, bg_W, bg_H) toSuperView:self.baseView];
     
+
     CGFloat dis_X = 14;
     CGFloat dis_Y = 22;
     CGFloat dis_W = 40;
     CGFloat dis_H =  dis_W;
-    UIButton *dismiss = [[UIButton alloc] initWithFrame:CGRectMake(dis_X, dis_Y, dis_W, dis_H)];
-    [dismiss  setImage:XImage(@"close_button") forState:UIControlStateNormal];
-    self.dismissBtn = dismiss;
-    [self.view addSubview:dismiss];
-    [dismiss addTarget:self action:@selector(dismiss:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.dismissBtn = [self buttonWithFrame:CGRectMake(dis_X, dis_Y, dis_W, dis_H) title:nil fontSize:1 titleColor:nil imageName:@"close_button" Action:@selector(dismiss:)];
+    [self.view addSubview:self.dismissBtn];
+
     
     CGFloat login_bg_X = 0;
     CGFloat login_bg_Y = logo_H;
     CGFloat login_bg_W = bg_W;
     CGFloat login_bg_H = bg_H - login_bg_Y;
-    UIView *loginBg = [[UIView alloc] initWithFrame:CGRectMake(login_bg_X, login_bg_Y, login_bg_W, login_bg_H)];
+    UIView *loginBg = [[UIView alloc] init];
     self.loginBgView = loginBg;
-    [self.bgView addSubview:loginBg];
     loginBg.backgroundColor = XCOLOR_WHITE;
+    [self addSubView:loginBg  frame:CGRectMake(login_bg_X, login_bg_Y, login_bg_W, login_bg_H) toSuperView:self.bgView];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
     [loginBg addGestureRecognizer:tap];
+
+    
     
     [self makeLoginView];
+    
     
     CGFloat regist_bg_X = bg_W;
     CGFloat regist_bg_Y = login_bg_Y;
     CGFloat regist_bg_W = bg_W;
     CGFloat regist_bg_H = login_bg_H;
-    UIView *registBg = [[UIView alloc] initWithFrame:CGRectMake(regist_bg_X, regist_bg_Y, regist_bg_W, regist_bg_H)];
+    UIView *registBg = [[UIView alloc] init];
     self.registbgView = registBg;
-    [self.bgView addSubview:registBg];
     registBg.backgroundColor = XCOLOR_WHITE;
     UITapGestureRecognizer *tap_B = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
     [registBg addGestureRecognizer:tap_B];
+    [self addSubView:registBg  frame:CGRectMake(regist_bg_X, regist_bg_Y, regist_bg_W, regist_bg_H) toSuperView:self.bgView];
+    
     
     [self makeRegistView];
+    
     
     self.bgView.contentSize = CGSizeMake(self.bgView.subviews.count * bg_W, 0);
     
@@ -228,61 +251,46 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     cellBgView.frame = CGRectMake(cell_bg_X, cell_bg_Y, cell_bg_W, cell_bg_H);
     
     
-    UIButton *forgetBtn = [[UIButton alloc] init];
-    forgetBtn.titleLabel.font = XFONT(14);
-    [forgetBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
-    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [forgetBtn sizeToFit];
-    [forgetBtn addTarget:self action:@selector(forgetButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    CGFloat forget_W = forgetBtn.mj_w;
+    self.forgetBtn = [self buttonWithFrame:CGRectZero title:@"忘记密码" fontSize:14 titleColor:XCOLOR_TITLE imageName:nil Action:@selector(forgetButtonOnClick:)];
+    [self.forgetBtn sizeToFit];
+    [self.loginBgView addSubview:self.forgetBtn];
+
+    CGFloat forget_W = self.forgetBtn.mj_w;
     CGFloat forget_X = cell_W - 25 - forget_W;
     CGFloat forget_Y = CGRectGetMaxY(cellBgView.frame) + 10;
     CGFloat forget_H =  30;
-    forgetBtn.frame = CGRectMake(forget_X, forget_Y, forget_W, forget_H);
-    self.forgetBtn = forgetBtn;
-    [self.loginBgView addSubview:forgetBtn];
+    self.forgetBtn.frame = CGRectMake(forget_X, forget_Y, forget_W, forget_H);
     
     
     CGFloat login_X = 25;
-    CGFloat login_Y = CGRectGetMaxY(forgetBtn.frame) + 20;
+    CGFloat login_Y = CGRectGetMaxY(self.forgetBtn.frame) + 10 + XFONT_SIZE(1) * 10;
     CGFloat login_W = cell_W - login_X * 2;
     CGFloat login_H =  50;
-    UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(login_X, login_Y, login_W, login_H)];
-    self.loginBtn = loginBtn;
-    [self.loginBgView addSubview:loginBtn];
-    loginBtn.backgroundColor = XCOLOR_RED;
-    loginBtn.layer.cornerRadius = 4;
-    loginBtn.titleLabel.font = XFONT(14);
-    [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-    [loginBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [loginBtn addTarget:self action:@selector(loginButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
+    self.loginBtn = [self buttonWithFrame:CGRectMake(login_X, login_Y, login_W, login_H) title:@"登录" fontSize:14 titleColor:XCOLOR_WHITE imageName:nil Action:@selector(loginButtonOnClick:)];
+    self.loginBtn.backgroundColor = XCOLOR_RED;
+    self.loginBtn.layer.cornerRadius = 4;
+    [self.loginBgView addSubview:self.loginBtn];
 
-    UIButton *toRegistBtn = [[UIButton alloc] init];
-    [toRegistBtn setTitle:@"注册myOffer账号" forState:UIControlStateNormal];
-    [toRegistBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-    toRegistBtn.titleLabel.font = XFONT(14);
-    [toRegistBtn sizeToFit];
+
     
-    CGFloat toRegist_H =  20;
-    CGFloat toRegist_Y =  self.loginBgView.mj_h - toRegist_H - 20;
-    CGFloat toRegist_W = toRegistBtn.mj_w + 50;
+    self.toRegistBtn = [self buttonWithFrame:CGRectZero title:@"注册myOffer账号" fontSize:14 titleColor:XCOLOR_LIGHTBLUE imageName:nil Action:@selector(toRegistBtnOnClick:)];
+    [self.toRegistBtn sizeToFit];
+    [self.loginBgView addSubview:self.toRegistBtn];
+    self.toRegistBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+    CGFloat toRegist_H =  30;
+    CGFloat toRegist_Y =  self.loginBgView.mj_h - toRegist_H - 15;
+    CGFloat toRegist_W = self.toRegistBtn.mj_w + 50;
     CGFloat toRegist_X = (cell_W - toRegist_W) * 0.5;
-    toRegistBtn.frame = CGRectMake(toRegist_X, toRegist_Y, toRegist_W, toRegist_H);
-    
-    [self.loginBgView addSubview:toRegistBtn];
-    self.toRegistBtn = toRegistBtn;
-    [toRegistBtn addTarget:self action:@selector(toRegistBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    toRegistBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.toRegistBtn.frame = CGRectMake(toRegist_X, toRegist_Y, toRegist_W, toRegist_H);
+   
     
     
     NSArray *icons = @[@"wechat_icon",@"weibo_icon",@"qq_icon"];
     
-    CGFloat other_W = 50;
+    CGFloat other_W = 40 + XFONT_SIZE(1) * 10;
     CGFloat other_H = other_W;
-    CGFloat other_Y = toRegist_Y - 20 - other_H;
+    CGFloat other_Y = toRegist_Y - other_H - 10 - XFONT_SIZE(1) * 10;
     CGFloat other_X =  (cell_W  -  ((other_W + 20)* icons.count - 20)) * 0.5;
     for (NSInteger index = 0 ; index < icons.count; index++) {
       
@@ -359,51 +367,35 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     
     CGFloat regist_X = 25;
-    CGFloat regist_Y = CGRectGetMaxY(registCellbgView.frame) + 25;
+    CGFloat regist_Y = CGRectGetMaxY(registCellbgView.frame) + XFONT_SIZE(1) * 10 + 15;
     CGFloat regist_W = cell_W - regist_X * 2;
     CGFloat regist_H =  50;
-    UIButton *registBtn = [[UIButton alloc] initWithFrame:CGRectMake(regist_X, regist_Y, regist_W, regist_H)];
-    self.registBtn = registBtn;
-    [self.registbgView addSubview:registBtn];
-    registBtn.backgroundColor = XCOLOR_RED;
-    registBtn.layer.cornerRadius = 4;
-    registBtn.titleLabel.font = XFONT(14);
-    [registBtn setTitle:@"注册" forState:UIControlStateNormal];
-    [registBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [registBtn addTarget:self action:@selector(registButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.registBtn = [self buttonWithFrame:CGRectMake(regist_X, regist_Y, regist_W, regist_H)  title:@"注册" fontSize:14 titleColor:XCOLOR_WHITE imageName:nil  Action:@selector(registButtonOnClick:)];
+    [self.registbgView addSubview:self.registBtn];
+    self.registBtn.layer.cornerRadius = 4;
+    self.registBtn.backgroundColor = XCOLOR_RED;
+
     
     
 
     CGFloat pro_X = 0;
-    CGFloat pro_H =  20;
-    CGFloat pro_Y =  self.registbgView.mj_h - pro_H - 20;
+    CGFloat pro_H =  30;
+    CGFloat pro_Y =  self.registbgView.mj_h - pro_H - 15;
     CGFloat pro_W = cell_W;
-    UIButton *protocolBtn = [[UIButton alloc] initWithFrame:CGRectMake(pro_X, pro_Y, pro_W, pro_H)];
-    [protocolBtn setTitle:@"注册即表示同意<myoffer用户协议>" forState:UIControlStateNormal];
-    [protocolBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
-    protocolBtn.titleLabel.font = XFONT(14);
-    [self.registbgView addSubview:protocolBtn];
-    self.protocolBtn = protocolBtn;
-    [protocolBtn addTarget:self action:@selector(protocolBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    protocolBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
+    self.protocolBtn = [self buttonWithFrame:CGRectMake(pro_X, pro_Y, pro_W, pro_H)  title:@"注册即表示同意<myoffer用户协议>" fontSize:14 titleColor:XCOLOR_SUBTITLE imageName:nil  Action:@selector(protocolBtnOnClick:)];
+    [self.registbgView addSubview:self.protocolBtn];
+    self.protocolBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 
-    UIButton *toLoginBtn = [[UIButton alloc] init];
-    [toLoginBtn setTitle:@"已经加入我们？请登录" forState:UIControlStateNormal];
-    [toLoginBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-    toLoginBtn.titleLabel.font = XFONT(14);
-    [toLoginBtn sizeToFit];
-    CGFloat to_Login_H =  20;
-    CGFloat to_Login_Y = pro_Y - to_Login_H - 20;
-    CGFloat to_Login_W = toLoginBtn.mj_w + 50;
+
+   self.toLoginBtn = [self buttonWithFrame:CGRectZero  title:@"已经加入我们？请登录" fontSize:14 titleColor:XCOLOR_LIGHTBLUE imageName:nil  Action:@selector(toLoginBtnOnClick:)];
+    [self.registbgView addSubview:self.toLoginBtn];
+    [self.toLoginBtn sizeToFit];
+    CGFloat to_Login_H =  30;
+    CGFloat to_Login_Y = pro_Y - to_Login_H - XFONT_SIZE(1) * 10;
+    CGFloat to_Login_W = self.toLoginBtn.mj_w + 50;
     CGFloat to_Login_X = (cell_W - to_Login_W) * 0.5;
-    toLoginBtn.frame = CGRectMake(to_Login_X, to_Login_Y, to_Login_W, to_Login_H);
-    
-    self.toLoginBtn = toLoginBtn;
-    [self.registbgView addSubview:toLoginBtn];
-    [toLoginBtn addTarget:self action:@selector(toLoginBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    toLoginBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.toLoginBtn.frame = CGRectMake(to_Login_X, to_Login_Y, to_Login_W, to_Login_H);
+    self.toLoginBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     
 }
@@ -418,18 +410,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
 #pragma mark : MyOfferInputViewDelegate
 
-- (void)cell:(MyOfferInputView *)cell textFieldDidBeginEditing:(UITextField *)textField{
-
-    
-}
-
-- (void)cell:(MyOfferInputView *)cell textFieldDidEndEditing:(UITextField *)textField{
-
-    
-}
-
 - (void)cell:(MyOfferInputView *)cell  textFieldShouldReturn:(UITextField *)textField{
-
     
     if (cell.inputTF.returnKeyType == UIReturnKeyDone) {
         
@@ -457,6 +438,22 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     
 }
+
+
+- (void)inputAccessoryViewClickWithCell:(MyOfferInputView *)cell{
+    
+    
+    if (cell.group.groupType == EditTypeRegistPhone || cell.group.groupType == EditTypeVerificationCode) {
+        
+        MyOfferInputView *nextCell  = (MyOfferInputView *)self.registCellbgView.subviews[cell.tag + 1];
+        
+        [nextCell.inputTF becomeFirstResponder];
+        
+    }
+
+    
+}
+
 
 //点击发送验证码
 - (void)sendVertificationCodeWithCell:(MyOfferInputView *)cell{
@@ -489,6 +486,11 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     }];
     
 }
+
+
+
+
+
 
 
 #pragma mark : 手机号码验证
@@ -532,7 +534,11 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     }
     
     
-    if (!isMatch)  AlerMessage(errorStr);
+    if (!isMatch) {
+    
+        [MBProgressHUD showError:errorStr toView:self.view];
+
+     }
     
     return isMatch;
 }
@@ -564,13 +570,10 @@ typedef NS_ENUM(NSInteger,otherLoginType){
         
         switch (cell.group.groupType) {
             case EditTypeRegistPhone:
-            {
+                
                 if (![self verifyWithPhone:cell.group.content areaCode:cell.group.areaCode]) return;
                 
-                
-            }
-             
-                break;
+                 break;
             case EditTypeVerificationCode:{
             
                 if (cell.group.content.length <= 0 ) {
@@ -597,17 +600,15 @@ typedef NS_ENUM(NSInteger,otherLoginType){
         
     }
     
-    
+
     
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     
     for (WYLXGroup *group in self.registArr) {
         
-        
         if (group.groupType == EditTypeVerificationCode) {
             
             [parameter setValue:@{@"code":group.content} forKey:group.key];
-
             
         }else{
         
@@ -636,40 +637,6 @@ typedef NS_ENUM(NSInteger,otherLoginType){
   
     
 }
-
-//注册相关字段验证
-//- (BOOL)verifyRegisterFields:{
-//    
-//    
-//    if (self.RegisterVerTextF.text.length == 0) {
-//        
-//        AlerMessage(@"验证码不能为空");
-//        
-//        return  NO;
-//    }
-//    
-//    
-//    if (self.RegisterPasswdTextF.text.length == 0) {
-//        
-//        AlerMessage(self.RegisterPasswdTextF.placeholder);
-//        
-//        return  NO;
-//    }
-//    
-//    
-//    if(self.RegisterPasswdTextF.text.length < 6 || self.RegisterPasswdTextF.text.length >16)
-//    {   //@"密码长度不小于6个字符"
-//        
-//        AlerMessage(GDLocalizedString(@"Person-passwd"));
-//        
-//        return  NO;
-//    }
-//    
-//    
-//    return YES;
-//}
-
-
 
 
 #pragma mark : 键盘处理
@@ -824,7 +791,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH, 0) animated:YES];
 }
 
-//第三方登录点击
+#pragma mark : 第三方登录点击
 - (void) otherBtnOnClick:(UIButton *)sender{
 
     
@@ -856,6 +823,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
     
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+       
         if (response.responseCode == UMSResponseCodeSuccess) {
             
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
@@ -865,6 +833,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
             [userInfo setValue:platformName forKey:@"provider"];
             [userInfo setValue:snsAccount.accessToken forKey:@"token"];
          
+            
             [self  loginWithParameters:userInfo];
         }
     });
@@ -949,7 +918,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     [self.view endEditing:YES];
     
-    [self.navigationController pushViewController:[[NewForgetPasswdViewController alloc] initWithNibName:@"NewForgetPasswdViewController" bundle:nil] animated:YES];
+    [self.navigationController pushViewController:[[ForgetPWViewController alloc] init] animated:YES];
     
 
 }
