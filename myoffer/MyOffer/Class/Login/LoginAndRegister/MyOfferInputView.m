@@ -86,7 +86,6 @@
     //选择地区输入框
     UITextField *areaCodeTF = [[UITextField alloc] init];
     [self addSubview:areaCodeTF];
-    [areaCodeTF setFont:XFONT(18)];
     self.areaCodeTF = areaCodeTF;
     self.areaCodeTF.inputView =self.areaPicker;
     
@@ -146,6 +145,7 @@
             
             if ([flag isEqualToString:@"收起"]) {
                 
+                [weakSelf.areaCodeTF resignFirstResponder];
                 [weakSelf.inputTF resignFirstResponder];
                 
             }else{
@@ -213,6 +213,10 @@
         self.areaCodeLab.frame = group.areacodeLableFrame;
         self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
         self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
+
+        self.areaCodeTF.delegate = self;
+        self.areaCodeTF.inputAccessoryView = self.tooler;
+
         
     }
 
@@ -247,7 +251,6 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    
     
     
     NSString *content = [NSString stringWithFormat:@"%@%@",textField.text,string];
@@ -323,6 +326,15 @@
 }
 
 - (void)toolerOnClick{
+    
+    
+    if (self.areaCodeTF.editing) {
+        
+        [self.inputTF becomeFirstResponder];
+        
+        return;
+    }
+    
     
     if ([self.delegate respondsToSelector:@selector(inputAccessoryViewClickWithCell:)]) {
         
