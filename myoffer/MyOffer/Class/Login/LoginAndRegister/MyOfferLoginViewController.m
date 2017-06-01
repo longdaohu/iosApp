@@ -13,7 +13,6 @@
 #import "BangViewController.h"
 #import "ForgetPWViewController.h"
 
-
 typedef NS_ENUM(NSInteger,otherLoginType){
 
     otherLoginTypeWX = 0,
@@ -128,7 +127,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
 - (void)makeUI{
     
-    
+    //logo图片
     self.logoView = [[UIImageView alloc] initWithImage:XImage(@"login_top")];
     CGFloat logo_X = 0;
     CGFloat logo_Y = 0;
@@ -136,10 +135,11 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     CGFloat logo_H =  logo_W * self.logoView.image.size.height/self.logoView.image.size.width;
     [self addSubView:self.logoView  frame:CGRectMake(logo_X, logo_Y, logo_W, logo_H) toSuperView:self.view];
 
-     self.baseView = [[UIView alloc] initWithFrame:self.view.bounds];
+    //底部容器
+    self.baseView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self addSubView:self.baseView  frame:self.view.bounds toSuperView:self.view];
     
-    
+    //底部 UIScrollView
     CGFloat bg_X = 0;
     CGFloat bg_Y = 0;
     CGFloat bg_W = XSCREEN_WIDTH;
@@ -153,6 +153,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self addSubView:bgView  frame:CGRectMake(bg_X, bg_Y, bg_W, bg_H) toSuperView:self.baseView];
     
 
+    //退出登录按钮
     CGFloat dis_X = 14;
     CGFloat dis_Y = 22;
     CGFloat dis_W = 40;
@@ -161,6 +162,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self.view addSubview:self.dismissBtn];
 
     
+    //登录板块
     CGFloat login_bg_X = 0;
     CGFloat login_bg_Y = logo_H;
     CGFloat login_bg_W = bg_W;
@@ -170,14 +172,14 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     loginBg.backgroundColor = XCOLOR_WHITE;
     [self addSubView:loginBg  frame:CGRectMake(login_bg_X, login_bg_Y, login_bg_W, login_bg_H) toSuperView:self.bgView];
 
+    //添加点击事件，点击时收起键盘
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
     [loginBg addGestureRecognizer:tap];
-
     
-    
+    //登录板块子项
     [self makeLoginView];
-    
-    
+ 
+    //注册板块
     CGFloat regist_bg_X = bg_W;
     CGFloat regist_bg_Y = login_bg_Y;
     CGFloat regist_bg_W = bg_W;
@@ -185,16 +187,18 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     UIView *registBg = [[UIView alloc] init];
     self.registbgView = registBg;
     registBg.backgroundColor = XCOLOR_WHITE;
+    [self addSubView:registBg  frame:CGRectMake(regist_bg_X, regist_bg_Y, regist_bg_W, regist_bg_H) toSuperView:self.bgView];
+
+    
+    //添加点击事件，点击时收起键盘
     UITapGestureRecognizer *tap_B = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)];
     [registBg addGestureRecognizer:tap_B];
-    [self addSubView:registBg  frame:CGRectMake(regist_bg_X, regist_bg_Y, regist_bg_W, regist_bg_H) toSuperView:self.bgView];
     
-    
+    //注册板块子项
     [self makeRegistView];
     
-    
+
     self.bgView.contentSize = CGSizeMake(self.bgView.subviews.count * bg_W, 0);
-    
     
     [self makeNotificationCenter];
     
@@ -223,7 +227,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     CGFloat cell_Y = 0 ;
     CGFloat cell_H = 0 ;
     
-    
+    //登录输入项容器
     CGFloat cell_bg_X = 0;
     CGFloat cell_bg_Y = 0;
     CGFloat cell_bg_W = cell_W;
@@ -231,39 +235,41 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     self.loginCellbgView = cellBgView;
     [self.loginBgView  addSubview:cellBgView];
 
+    //添加输入框子项
      for (NSInteger index = 0 ; index < self.loginArr.count; index++) {
     
          WYLXGroup *item  = self.loginArr[index];
          cell_H = item.cell_Height;
          cell_Y = index * cell_H;
-         
          MyOfferInputView *cell = [[MyOfferInputView alloc] initWithFrame:CGRectMake(cell_X, cell_Y, cell_W, cell_H)];
-         
          cell.tag = index;
          cell.group = item;
          cell.delegate = self;
          cell.inputTF.returnKeyType = (index == self.loginArr.count -1) ? UIReturnKeyDone  :  UIReturnKeyNext;
          [cellBgView addSubview:cell];
-         
     }
     
     CGFloat cell_bg_H = cell_H + cell_Y;
     cellBgView.frame = CGRectMake(cell_bg_X, cell_bg_Y, cell_bg_W, cell_bg_H);
     
-    
+    //忘记密码
     self.forgetBtn = [self buttonWithFrame:CGRectZero title:@"忘记密码" fontSize:14 titleColor:XCOLOR_TITLE imageName:nil Action:@selector(forgetButtonOnClick:)];
     [self.forgetBtn sizeToFit];
     [self.loginBgView addSubview:self.forgetBtn];
 
+    CGFloat leftMargin = 25;
+    CGFloat topMargin = 10;
+    
     CGFloat forget_W = self.forgetBtn.mj_w;
-    CGFloat forget_X = cell_W - 25 - forget_W;
-    CGFloat forget_Y = CGRectGetMaxY(cellBgView.frame) + 10;
+    CGFloat forget_X = cell_W - leftMargin - forget_W;
+    CGFloat forget_Y = CGRectGetMaxY(cellBgView.frame) + topMargin;
     CGFloat forget_H =  30;
     self.forgetBtn.frame = CGRectMake(forget_X, forget_Y, forget_W, forget_H);
     
     
-    CGFloat login_X = 25;
-    CGFloat login_Y = CGRectGetMaxY(self.forgetBtn.frame) + 10 + XFONT_SIZE(1) * 10;
+    //登录按钮
+    CGFloat login_X = leftMargin;
+    CGFloat login_Y = CGRectGetMaxY(self.forgetBtn.frame) + topMargin + XFONT_SIZE(1) * topMargin;
     CGFloat login_W = cell_W - login_X * 2;
     CGFloat login_H =  50;
     self.loginBtn = [self buttonWithFrame:CGRectMake(login_X, login_Y, login_W, login_H) title:@"登录" fontSize:14 titleColor:XCOLOR_WHITE imageName:nil Action:@selector(loginButtonOnClick:)];
@@ -272,7 +278,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self.loginBgView addSubview:self.loginBtn];
 
 
-    
+    //注册myOffer账号
     self.toRegistBtn = [self buttonWithFrame:CGRectZero title:@"注册myOffer账号" fontSize:14 titleColor:XCOLOR_LIGHTBLUE imageName:nil Action:@selector(toRegistBtnOnClick:)];
     [self.toRegistBtn sizeToFit];
     [self.loginBgView addSubview:self.toRegistBtn];
@@ -287,10 +293,10 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     
     NSArray *icons = @[@"wechat_icon",@"weibo_icon",@"qq_icon"];
-    
+    //第三登录按钮
     CGFloat other_W = 40 + XFONT_SIZE(1) * 10;
     CGFloat other_H = other_W;
-    CGFloat other_Y = toRegist_Y - other_H - 10 - XFONT_SIZE(1) * 10;
+    CGFloat other_Y = toRegist_Y - other_H - topMargin - XFONT_SIZE(1) * topMargin;
     CGFloat other_X =  (cell_W  -  ((other_W + 20)* icons.count - 20)) * 0.5;
     for (NSInteger index = 0 ; index < icons.count; index++) {
       
@@ -302,7 +308,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
         
     }
     
-
+    //使用第三方登录
     UILabel *otherLab = [[UILabel alloc] init];
     otherLab.text = @"使用第三方登录";
     otherLab.font = XFONT(12);
@@ -312,7 +318,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     CGFloat otherLab_Y  = other_Y - otherLab.mj_h - 10;
     otherLab.center = CGPointMake(cell_W * 0.5, otherLab_Y);
     
-    
+    //分隔线
     CGFloat line_W = (cell_W - otherLab.mj_w - 80) * 0.5;
     CGFloat line_H = 1;
     CGFloat line_Y = otherLab.center.y;
@@ -338,6 +344,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     CGFloat cell_Y = 0 ;
     CGFloat cell_H = 0 ;
     
+    //注册输入框容器
     CGFloat cell_bg_X = 0;
     CGFloat cell_bg_Y = 0;
     CGFloat cell_bg_W = cell_W;
@@ -346,7 +353,8 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self.registbgView  addSubview:registCellbgView];
     
     for (NSInteger index = 0 ; index < self.registArr.count; index++) {
-        
+    
+        //注册输入框
         WYLXGroup *item  = self.registArr[index];
         cell_H = item.cell_Height;
         cell_Y = index * cell_H;
@@ -364,8 +372,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     CGFloat cell_bg_H = cell_H + cell_Y;
     registCellbgView.frame = CGRectMake(cell_bg_X, cell_bg_Y, cell_bg_W, cell_bg_H);
     
-    
-    
+    //注册按钮
     CGFloat regist_X = 25;
     CGFloat regist_Y = CGRectGetMaxY(registCellbgView.frame) + XFONT_SIZE(1) * 10 + 15;
     CGFloat regist_W = cell_W - regist_X * 2;
@@ -375,9 +382,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     self.registBtn.layer.cornerRadius = 4;
     self.registBtn.backgroundColor = XCOLOR_RED;
 
-    
-    
-
+   //注册即表示同意<myoffer用户协议>
     CGFloat pro_X = 0;
     CGFloat pro_H =  30;
     CGFloat pro_Y =  self.registbgView.mj_h - pro_H - 15;
@@ -386,7 +391,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self.registbgView addSubview:self.protocolBtn];
     self.protocolBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
 
-
+    //已经加入我们？请登录
    self.toLoginBtn = [self buttonWithFrame:CGRectZero  title:@"已经加入我们？请登录" fontSize:14 titleColor:XCOLOR_LIGHTBLUE imageName:nil  Action:@selector(toLoginBtnOnClick:)];
     [self.registbgView addSubview:self.toLoginBtn];
     [self.toLoginBtn sizeToFit];
@@ -401,7 +406,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 }
 
 #pragma mark : UIScrollViewDelegate
-
+//scrollView滚动时收起键盘
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     [self.view endEditing:YES];
@@ -418,6 +423,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     }else{
         
+        //切换到下一个输入框
         MyOfferInputView *nextCell  = (MyOfferInputView *)self.loginCellbgView.subviews[cell.tag + 1];
         
         [nextCell.inputTF becomeFirstResponder];
@@ -430,7 +436,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     
     if (cell.group.groupType == EditTypeRegistPhone) {
-        
+        //监听注册框手机号码输入时 验证码按钮状态改变
         MyOfferInputView *nextCell  = (MyOfferInputView *)self.registCellbgView.subviews[cell.tag + 1];
      
         [nextCell changeVertificationCodeButtonEnable:(content.length > 0)];
@@ -442,7 +448,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
 - (void)inputAccessoryViewClickWithCell:(MyOfferInputView *)cell{
     
-    
+    //键盘辅助工具条监听
     if (cell.group.groupType == EditTypeRegistPhone || cell.group.groupType == EditTypeVerificationCode) {
         
         MyOfferInputView *nextCell  = (MyOfferInputView *)self.registCellbgView.subviews[cell.tag + 1];
@@ -460,7 +466,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     if (cell.group.groupType != EditTypeVerificationCode) return;
  
-    MyOfferInputView *phoneCell = self.registCellbgView.subviews[cell.tag -1];
+    MyOfferInputView *phoneCell = self.registCellbgView.subviews[cell.tag - 1];
     
    [phoneCell checKTextFieldWithGroupValue];
     
@@ -548,10 +554,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", key];
     
-    BOOL match =  [pre evaluateWithObject:value];
-    
-    
-    return match;
+    return  [pre evaluateWithObject:value];
 }
 
 
@@ -606,15 +609,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     for (WYLXGroup *group in self.registArr) {
         
-        if (group.groupType == EditTypeVerificationCode) {
-            
-            [parameter setValue:@{@"code":group.content} forKey:group.key];
-            
-        }else{
-        
-            [parameter setValue:group.content forKey:group.key];
-
-        }
+        group.groupType == EditTypeVerificationCode ?  [parameter setValue:@{@"code":group.content} forKey:group.key] :  [parameter setValue:group.content forKey:group.key];
     }
  
     
@@ -642,14 +637,12 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 #pragma mark : 键盘处理
 
 - (void)keyboardWillShow:(NSNotification *)aNotification {
-//    self.backButton.hidden = YES;
-//    self.DismissButton.hidden = YES;
+
     [self moveTextViewForKeyboard:aNotification up:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
-//    self.backButton.hidden = NO;
-//    self.DismissButton.hidden = NO;
+
     [self moveTextViewForKeyboard:aNotification up:NO];
 }
 
@@ -727,9 +720,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
             }
                 break;
         }
-        
   
- 
     }
     
     if (![self checkNetworkState]) return; //网络连接失败提示
@@ -914,15 +905,13 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
 //点击忘记密码
 - (void)forgetButtonOnClick:(UIButton *)sender{
-
     
-    [self.view endEditing:YES];
+    [self keyboardHiden];
     
     [self.navigationController pushViewController:[[ForgetPWViewController alloc] init] animated:YES];
     
 
 }
-
 
 - (void)dealloc{
     

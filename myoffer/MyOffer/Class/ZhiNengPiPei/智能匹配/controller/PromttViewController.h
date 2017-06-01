@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^promptViewControllerBlock)();
 @interface PromttViewController : UIViewController
-@property(nonatomic,copy)promptViewControllerBlock actionBlock;
-+ (instancetype)promptViewWithBlock:(promptViewControllerBlock)actionBlock;
+
++ (instancetype)promptView;
+
+- (void)promptViewShow:(BOOL)show;
+
 @end
 

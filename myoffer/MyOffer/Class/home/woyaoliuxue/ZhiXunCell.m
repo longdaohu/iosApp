@@ -109,7 +109,7 @@ static NSString  *identity = @"liuxue";
     
     self.titleLab.frame = group.titleFrame;
     self.inputTF.frame = group.inputFrame;
-    self.line.frame = group.lineFrame;
+    self.line.frame = group.line_bottom_Frame;
     self.spod.frame = group.spodFrame;
     
     

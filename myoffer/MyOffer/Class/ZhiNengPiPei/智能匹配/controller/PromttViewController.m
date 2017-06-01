@@ -9,17 +9,18 @@
 #import "PromttViewController.h"
 
 @interface PromttViewController ()
-//@property (weak, nonatomic) IBOutlet UIButton *dismissBtn;
 
 @end
 
 @implementation PromttViewController
-+ (instancetype)promptViewWithBlock:(promptViewControllerBlock)actionBlock{
++ (instancetype)promptView{
     
     PromttViewController  *prompt  = [[PromttViewController alloc] initWithNibName:@"PromttViewController" bundle:nil];
     
-    prompt.actionBlock = actionBlock;
-    
+    prompt.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+
+    [[UIApplication sharedApplication].windows.lastObject addSubview:prompt.view];
+
     return prompt;
 }
 
@@ -27,22 +28,53 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
- 
-    UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapWithDismiss)];
+    
+    UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(promtViewOnClick:)];
     [self.view addGestureRecognizer:tap];
     
 }
 
+- (void)promtViewOnClick:(id)sender{
+    
+    [self promptViewShow:NO];
 
--(void)tapWithDismiss{
-    
-    if (self.actionBlock)  self.actionBlock();
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//当没有数据时，出现智能匹配提示页面
+- (void)promptViewShow:(BOOL)show{
+    
+    XWeakSelf
+    CGFloat prompTop = show ? 0 : XSCREEN_HEIGHT;
+    
+    CGFloat prompAlpha = show ? 1 : 0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        weakSelf.view.mj_y = prompTop;
+        
+        weakSelf.view.alpha = prompAlpha;
+        
+    } completion:^(BOOL finished) {
+        
+        if (!show) {
+            
+             [weakSelf.view removeFromSuperview];
+            
+        }
+        
+    }];
+    
+}
+
+
+- (void)dealloc{
+
+    KDClassLog(@"PromttViewController dealloc");
 }
 
 

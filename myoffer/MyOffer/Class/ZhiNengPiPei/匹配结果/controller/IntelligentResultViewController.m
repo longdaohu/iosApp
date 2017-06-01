@@ -310,8 +310,8 @@
         [self startAPIRequestWithSelector:kAPISelectorZiZengRecommendation  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
             
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
-            
-            [weakSelf updateUIWithrecommendations:response[@"recommendations"]];
+          
+            [weakSelf updateUIWithRecommendations:response[@"recommendations"]];
             
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
             
@@ -322,7 +322,7 @@
 }
 
 //根据返回数据设置UI
-- (void)updateUIWithrecommendations:(NSArray *)recommendations
+- (void)updateUIWithRecommendations:(NSArray *)recommendations
 {
     
     [_slices removeAllObjects];

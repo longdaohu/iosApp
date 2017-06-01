@@ -10,10 +10,12 @@
 #import "XWGJKeyboardToolar.h"
 
 @interface MyOfferInputView ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
-
+//标题
 @property(nonatomic,strong)UILabel *titleLab;
+//右侧按钮
 @property(nonatomic,strong)UIButton *rightBtn;
-@property(nonatomic,strong)UIView *line;
+//
+@property(nonatomic,strong)UIView *line_bottom;
 @property(nonatomic,strong)UIView *spod;
 @property(nonatomic,strong)UITextField *areaCodeTF;
 @property(nonatomic,strong)UIView *line_areaCode;
@@ -119,10 +121,10 @@
     UIView *line = [[UIView alloc] init];
     [self addSubview:line];
     line.backgroundColor = XCOLOR_line;
-    self.line = line;
-    self.line.layer.shadowColor = XCOLOR_WHITE.CGColor;
-    self.line.layer.shadowOffset = CGSizeMake(0, 0);
-    self.line.layer.shadowOpacity =  1;
+    self.line_bottom = line;
+    line.layer.shadowColor = XCOLOR_WHITE.CGColor;
+    line.layer.shadowOffset = CGSizeMake(0, 0);
+    line.layer.shadowOpacity =  1;
     
     //有时候要显示提示图标
     UIView *spod = [[UIView alloc] init];
@@ -173,11 +175,11 @@
     
     self.titleLab.frame = group.titleFrame;
     self.inputTF.frame = group.inputFrame;
-    self.line.frame = group.lineFrame;
+    self.line_bottom.frame = group.line_bottom_Frame;
     self.spod.frame = group.spodFrame;
     self.rightBtn.frame = group.rightBttonFrame;
     
-    
+    //验证码
    if (group.groupType == EditTypeVerificationCode) {
         
         [self.rightBtn setTitleColor:XCOLOR_Disable forState:UIControlStateDisabled];
@@ -189,23 +191,22 @@
         [self updateRightButtonStatusEnable:NO];
         self.inputTF.inputAccessoryView = self.tooler;
 
-       
+    //手机输入框
    }else if (group.groupType == EditTypePhone) {
       
        self.inputTF.keyboardType = UIKeyboardTypeEmailAddress;
        self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
 
-
-       
+    //密码
    }else if (group.groupType == EditTypePasswd) {
         
         [self.rightBtn setBackgroundImage:XImage(@"hidepassword")forState:UIControlStateNormal];
         [self.rightBtn setBackgroundImage:XImage(@"showpassword")forState:UIControlStateSelected];
         self.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.inputTF.secureTextEntry = YES;
-        
-    }else if (group.groupType == EditTypeRegistPhone){
     
+    //注册手机号
+    }else if (group.groupType == EditTypeRegistPhone){
         
         self.inputTF.inputAccessoryView = self.tooler;
         self.areaCodeTF.frame = group.areacodeTFFrame;
@@ -216,7 +217,6 @@
 
         self.areaCodeTF.delegate = self;
         self.areaCodeTF.inputAccessoryView = self.tooler;
-
         
     }
 
@@ -252,14 +252,13 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    
     NSString *content = [NSString stringWithFormat:@"%@%@",textField.text,string];
     
+    //监听注册手机号输入
     if (self.group.groupType == EditTypeRegistPhone) {
-        
-    
+     
         if ([self.delegate respondsToSelector:@selector(cell:shouldChangeCharacters:)]) {
-            
+          
             //输入框被清空时
             if (string.length == 0 && range.location == 0) content = @"";
             
@@ -269,27 +268,21 @@
         
     }
  
+    //验证码
     if (self.group.groupType == EditTypeVerificationCode) {
     
         //验证码输入个数
-        if (content.length > 10 ){
-            
-            self.inputTF.text = [content substringWithRange:NSMakeRange(0, 10)];
-            
-        }
+        if (content.length > 10 ) self.inputTF.text = [content substringWithRange:NSMakeRange(0, 10)];
         
     }
 
     
+    //密码输入框
     if (self.group.groupType == EditTypePasswd) {
         
-        
         //监听登录密码输入位数
-        if (content.length > 16 ){
-            
-            self.inputTF.text = [content substringWithRange:NSMakeRange(0, 16)];
-
-        }
+        if (content.length > 16 )self.inputTF.text = [content substringWithRange:NSMakeRange(0, 16)];
+        
         
     }
     
@@ -302,10 +295,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
+    
     if ([self.delegate respondsToSelector:@selector(cell:textFieldShouldReturn:)]) {
         
         [self.delegate cell:self textFieldShouldReturn:self.inputTF];
-
+        
     }
     
     
@@ -348,12 +342,12 @@
 //设置输入框在激活状态下显示效果
 - (void)inputTextFieldOnEditing:(BOOL)edit{
     
-    self.line.backgroundColor = edit ? XCOLOR_LIGHTBLUE : XCOLOR_line;
-//    self.line.layer.shadowOpacity = edit ? 1 : 0;
-    self.line.layer.shadowColor = edit ?  XCOLOR_LIGHTBLUE.CGColor : XCOLOR_WHITE.CGColor;
-
+    self.line_bottom.backgroundColor = edit ? XCOLOR_LIGHTBLUE : XCOLOR_line;
+   
+    self.line_bottom.layer.shadowColor = edit ?  XCOLOR_LIGHTBLUE.CGColor : XCOLOR_WHITE.CGColor;
     
 }
+
 
 - (void)rightButtonClick:(UIButton *)sender{
 
@@ -366,18 +360,14 @@
     }
     
     //验证码点击
-    if (self.group.groupType == EditTypeVerificationCode) {
+    if ((self.group.groupType == EditTypeVerificationCode) && [self.delegate respondsToSelector:@selector(sendVertificationCodeWithCell:)]) {
         
-        if ([self.delegate respondsToSelector:@selector(sendVertificationCodeWithCell:)]) {
-            
-            [self.delegate sendVertificationCodeWithCell:self];
-        }
-  
-     }
+        [self.delegate sendVertificationCodeWithCell:self];
+    }
+
+      
     
 }
-
-
 
 #pragma mark : UIPickerViewDataSource, UIPickerViewDelegate
 
@@ -408,14 +398,11 @@
 }
 
 //当点击提交按钮时添加数据到 模型中
-
 - (void)checKTextFieldWithGroupValue{
 
     self.group.content = self.inputTF.text;
     
-    
 }
-
 
 //更新获取验证码的状态
 - (void)updateRightButtonStatusEnable:(BOOL)enable{
@@ -423,16 +410,14 @@
     if (self.rightBtn.enabled == enable) return;
     
     self.rightBtn.enabled = enable;
+    
     UIColor *color = self.rightBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_Disable;
     self.rightBtn.layer.borderColor = color.CGColor;
     
-    if (enable) {
-        
-         [self.rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    }
-    
+    if (enable)  [self.rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     
 }
+
 //外部监听点击事件改显按钮状态
 - (void)changeVertificationCodeButtonEnable:(BOOL)enable{
     
@@ -440,7 +425,7 @@
     
 }
 
-
+//是否显示倒计时
 - (void)vertificationTimerShow:(BOOL)show{
     
     [self updateRightButtonStatusEnable:!show];
@@ -459,6 +444,7 @@
    
 }
 
+//倒计时
 - (void)verifyCodeCountDown{
     
     NSInteger count = self.timerCount--;
@@ -474,7 +460,6 @@
         [self updateRightButtonStatusEnable:YES];
         
     }
-    
     
 }
 

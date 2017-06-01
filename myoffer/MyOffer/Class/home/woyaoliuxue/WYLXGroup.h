@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger,CellGroupType){
 @property(nonatomic,assign)CGRect inputFrame;
 @property(nonatomic,assign)CGRect rightBttonFrame;
 @property(nonatomic,assign)CGRect spodFrame;
-@property(nonatomic,assign)CGRect lineFrame;
+@property(nonatomic,assign)CGRect line_bottom_Frame;
 @property(nonatomic,assign)CGFloat cell_Height;
 
 

@@ -28,8 +28,11 @@
 @property(nonatomic,strong)UITextField *inputTF;
 @property(nonatomic,weak)id<MyOfferInputViewDelegate> delegate;
 
+//当点击提交按钮时添加数据到 模型中
 - (void)checKTextFieldWithGroupValue;
+//更新获取验证码的状态
 - (void)changeVertificationCodeButtonEnable:(BOOL)enable;
+//是否显示倒计时
 - (void)vertificationTimerShow:(BOOL)show;
 
 @end

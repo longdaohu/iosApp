@@ -92,10 +92,10 @@
     CGFloat line_H =  0.5;
     CGFloat line_Y = CGRectGetMaxY(group.inputFrame) - line_H;
     CGFloat line_W = XSCREEN_WIDTH - line_X * 2;
-    group.lineFrame = CGRectMake(line_X, line_Y, line_W, line_H);
+    group.line_bottom_Frame = CGRectMake(line_X, line_Y, line_W, line_H);
     
     
-    group.cell_Height = CGRectGetMaxY(group.lineFrame);
+    group.cell_Height = CGRectGetMaxY(group.line_bottom_Frame);
     
     CGFloat  right_Y = 0;
     CGFloat  right_H = 0;
@@ -106,14 +106,14 @@
         
         right_H = 40;
         right_W = 110;
-        right_X = CGRectGetMaxX(group.lineFrame) - right_W;
+        right_X = CGRectGetMaxX(group.line_bottom_Frame) - right_W;
         right_Y =input_Y + 5;
         
     }else if (group.groupType == EditTypePasswd) {
         
         right_W = 22;
         right_H = right_W;
-        right_X = CGRectGetMaxX(group.lineFrame) - right_W;
+        right_X = CGRectGetMaxX(group.line_bottom_Frame) - right_W;
         right_Y = input_Y +(input_H - right_H) * 0.5;
 
     }

@@ -8,8 +8,6 @@
 
 #import "PipeiEditViewController.h"
 #import "XWGJSummaryView.h"
-#import "PipeiSectionHeaderView.h"
-//#import "PipeiEditCell.h"
 #import "ZhiXunCell.h"
 #import "CountryItem.h"
 #import "EvaluateSearchCollegeViewController.h"
@@ -221,7 +219,7 @@
         
         if (!value) {
             
-            [weakSelf prompViewAppear:YES]; //当没有数据时，出现智能匹配提示页面
+            [weakSelf.prompVC promptViewShow:YES]; //当没有数据时，出现智能匹配提示页面
             
             [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
             
@@ -229,10 +227,7 @@
         }
         
     }];
-
-   
-  
-    
+ 
 }
 
 
@@ -306,38 +301,18 @@
     
     if (!_prompVC) {
         
-        XWeakSelf
-        _prompVC =  [PromttViewController promptViewWithBlock:^{
-            
-            [weakSelf prompViewAppear:NO];
-         }];
+        _prompVC =  [PromttViewController promptView];
         
-        _prompVC.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
      }
     
      return _prompVC;
 }
 
-/*
- 
- {
- "_id" = 58476eba69d02e1e8ee2bc26;
- "account_id" = 583e87afe054fd4d2a853b8e;
- apply = 0;
- "des_country" = 100;
- "ielts_avg" = 0;
- "ielts_low" = 0;
- score = 100;
- subject = 3;
- university = "\U5fc3";
- "update_at" = "2017-05-10T07:00:13.100Z";
- }
- 
- */
 
 //根据网络请求设置UI
 - (void)updateUIWithResponse:(NSDictionary *)response{
    
+    //新用户未填写资料
     if (response.allKeys.count < 2) return;
     
     for (WYLXGroup *group in self.groups) {
@@ -738,45 +713,6 @@
     
 }
 
-
-//当没有数据时，出现智能匹配提示页面
-- (void)prompViewAppear:(BOOL)appear{
-    
-    
-    if (appear) [[UIApplication sharedApplication].windows.lastObject addSubview:self.prompVC.view];
-    
-    
-    XWeakSelf
-    CGFloat prompTop = appear ? 0 : XSCREEN_HEIGHT;
-    
-    CGFloat prompAlpha = appear ? 1 : 0;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        if (!appear) {
-            
-            [weakSelf.navigationController setNavigationBarHidden:NO];
-            
-        }
-        
-        weakSelf.prompVC.view.top = prompTop;
-        weakSelf.prompVC.view.alpha = prompAlpha;
-        
-    } completion:^(BOOL finished) {
-        
-        if (!appear) {
-            
-            [weakSelf.prompVC.view removeFromSuperview];
-            
-        }else{
-            
-            [weakSelf.navigationController setNavigationBarHidden:YES animated:NO];
-            
-        }
-        
-     }];
-    
-}
 
 
 - (void)casePushUniversity:(UITextField *)sender{
