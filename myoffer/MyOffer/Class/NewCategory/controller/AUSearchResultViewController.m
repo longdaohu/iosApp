@@ -177,6 +177,8 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view  addSubview:self.tableView];
     self.tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
 }
 
 

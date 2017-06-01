@@ -8,7 +8,6 @@
 
 #import "BaseViewController.h"
 #import "NSString+MD5.h"
-//#import "NewLoginRegisterViewController.h"
 #import "MyOfferLoginViewController.h"
 
 @implementation BaseViewController {
@@ -18,7 +17,13 @@
     UITapGestureRecognizer *_endEditingTapGestureRecognizer;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
 
+    [super viewWillDisappear:animated];
+    
+    [MBProgressHUD hideHUD];
+    
+}
 
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
@@ -35,7 +40,7 @@
     
     if (!_requestHUD && showHUD) {
 
-        _requestHUD = [MBProgressHUD showMessage:nil];
+        _requestHUD = [MBProgressHUD showMessage:nil toView:self.view];
      }
     
     

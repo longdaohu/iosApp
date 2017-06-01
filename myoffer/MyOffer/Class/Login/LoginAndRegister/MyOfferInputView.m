@@ -489,7 +489,7 @@
     
     [self timerClear];
     
-    NSLog(@"MyOfferInputView  dealloc ");
+    KDClassLog(@"MyOfferInputView  dealloc ");
     
 }
 

@@ -337,10 +337,8 @@
 
 //根据网络请求设置UI
 - (void)updateUIWithResponse:(NSDictionary *)response{
-    
-    
-    if ([response.allValues.firstObject isEqualToString:@"OK"] || [response.allKeys.firstObject isEqualToString:@"result"])  return;
-  
+   
+    if (response.allKeys.count < 2) return;
     
     for (WYLXGroup *group in self.groups) {
         
@@ -361,7 +359,6 @@
                         
                         index = i;
                     }
-                    
                     
                 }
                 

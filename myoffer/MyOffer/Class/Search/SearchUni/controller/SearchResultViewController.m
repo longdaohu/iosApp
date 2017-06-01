@@ -153,6 +153,8 @@
     [self reloadDataWithPageIndex:0 refresh:false];
     
      self.tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
+     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
 
 
 }
@@ -223,11 +225,11 @@
          }];
           _allResultCount = [response[@"count"] integerValue];
          
-         if (_result.count == 0) {
-             
-             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-  
-         }
+//         if (_result.count == 0) {
+//             
+//             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//  
+//         }
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
    

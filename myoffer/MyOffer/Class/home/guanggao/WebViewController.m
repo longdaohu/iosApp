@@ -125,6 +125,10 @@
     [self.web_wk loadRequest:request];
     [self.view addSubview:self.web_wk];
     self.web_wk.navigationDelegate = self;
+    self.web_wk.allowsBackForwardNavigationGestures = YES;
+    
+    //监听网页加载进度
+    [self.web_wk addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld context:nil];
     
 }
 
@@ -140,7 +144,7 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
-   self.hud = [MBProgressHUD showMessage:nil];
+   self.hud = [MBProgressHUD showMessage:nil toView:self.view];
  
 }
 
@@ -154,7 +158,7 @@
     
     [self.hud hideAnimated:YES];
  
- }
+}
 
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
@@ -187,8 +191,12 @@
         pageNumber = 6;  //    申请状态
     }else if([absoluteString containsString:@"/university/"]) {
         pageNumber = 7;  //     学校详情
-    }else if([absoluteString containsString:@"service.html"]) {
+    }else if([absoluteString containsString:@"service.html"] || [absoluteString containsString:@"emall/index.html"]) {
         pageNumber = 8;  //服务商城
+    }else if([absoluteString isEqualToString:@"http://www.myoffer.cn/"]){
+        pageNumber = 9;
+    }else if(![absoluteString containsString:@"http://www.myoffer.cn"] && ![absoluteString containsString:@"www.sojump.hk"]){
+        pageNumber = 10;
     }
     
     switch (pageNumber) {
@@ -284,11 +292,20 @@
         case 8:
         {
            
-//            [self.navigationController pushViewController:[[ServiceMallViewController alloc] init] animated:YES];
+            [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
             decisionHandler(WKNavigationActionPolicyCancel);
         }
             break;
-            
+        case 9:
+            decisionHandler(WKNavigationActionPolicyCancel);
+            break;
+        case 10:
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:absoluteString]];
+            decisionHandler(WKNavigationActionPolicyCancel);
+
+        }
+            break;
        default:
             decisionHandler(WKNavigationActionPolicyAllow);
             break;
@@ -463,8 +480,27 @@
     
 }
 
+//KVC 监听方法
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"estimatedProgress"]) {
+       
+        //不要让进度条倒着走...有时候goback会出现这种情况
+        if ([change[@"new"] floatValue] < [change[@"old"] floatValue])  return;
+        
+        if ([change[@"new"] floatValue] >= 1)[self.hud setHidden:YES];
+        
+    }else{
+        
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+
 -(void)dealloc
 {
+    
+    [self.web_wk removeObserver:self forKeyPath:@"estimatedProgress"];
     KDClassLog(@"WebViewController网页  dealloc");   //可以释放
 }
 
