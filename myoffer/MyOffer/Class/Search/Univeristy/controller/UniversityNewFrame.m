@@ -117,10 +117,10 @@
     self.data_item_Frames = [items_temp copy];
     
     CGFloat data_H =  data_item_H;
+    
     self.dataView_Frame = CGRectMake(data_X, data_Y, data_W, data_H);
     
     //-----------------------dataView-------------这里结束---------------------------------------------
-
  
     //7、简介
     CGFloat intro_X = logo_X;
@@ -307,7 +307,7 @@
     CGFloat lineOne_X = 10;
     CGFloat lineOne_Y = CGRectGetMaxY(self.collectionView_Frame) + XMARGIN;
     CGFloat lineOne_W = XSCREEN_WIDTH - 20;
-    CGFloat lineOne_H = 1;
+    CGFloat lineOne_H = LINE_HEIGHT;
     self.fg_line_Frame = CGRectMake(lineOne_X, lineOne_Y, lineOne_W, lineOne_H);
     
     //王牌领域
@@ -344,7 +344,7 @@
     //历史排名分隔线
     CGFloat h_lineX = XSCREEN_WIDTH * 0.5;
     CGFloat h_lineY = 0;
-    CGFloat h_lineW = 1;
+    CGFloat h_lineW = LINE_HEIGHT;
     CGFloat h_lineH = select_H;
     self.history_Line_Frame = CGRectMake(h_lineX, h_lineY, h_lineW, h_lineH);
     

@@ -64,10 +64,8 @@
         
     };
     self.overseaView.group = self.destinationGroup;
+    self.overseaView.alpha = 0;
     
-    
-    
- 
     ServiceHeaderView *headerView = [ServiceHeaderView headerViewWithFrame:self.headerFrame.header_frame ationBlock:^(NSString *country) {
         
         
@@ -179,6 +177,7 @@
     [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
         
         self.autoLoopView.alpha = 1;
+        self.overseaView.alpha = 1;
     }];
     
     
@@ -222,6 +221,8 @@
     }
     
     ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:self.SKU_frames[indexPath.row]];
+    
+    [cell bottomLineShow:(self.SKU_frames.count - 1) != indexPath.row];
     
      return cell;
 }

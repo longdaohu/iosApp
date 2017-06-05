@@ -169,9 +169,12 @@
     self.present_Value.frame = SKU_Frame.present_Value_Frame;
     self.line.frame = SKU_Frame.line_Frame;
     
-    
 }
 
+- (void)bottomLineShow:(BOOL)show{
+
+    self.line.hidden = !show;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

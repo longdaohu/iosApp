@@ -115,10 +115,9 @@
 
     [super layoutSubviews];
     
-    
     CGSize contentSize = self.bounds.size;
     
-    self.top_line.frame =  CGRectMake(0, 0, contentSize.width, 0.5);
+    self.top_line.frame =  CGRectMake(0, 0, contentSize.width, LINE_HEIGHT);
  
 }
 

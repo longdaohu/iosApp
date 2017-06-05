@@ -104,10 +104,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvJ-PO-Tbs" userLabel="line">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
                             <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="4EB-Xs-Vhr"/>
+                                <constraint firstAttribute="height" constant="0.5" id="4EB-Xs-Vhr"/>
                             </constraints>
                         </view>
                     </subviews>

@@ -26,6 +26,8 @@
 #define ITEM_MARGIN   10.0
 #define PADDING_TABLEGROUP 10.0
 #define HEIGHT_ZERO 0.0001
+#define LINE_HEIGHT 0.5
+#define BUTTON_HEIGHT 50
 #define ANIMATION_DUATION 0.25
 #define TIMER_COUNT 60
 #define REDSPOT_HEIGHT 18
@@ -78,8 +80,8 @@
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
 //#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://120.76.78.88/"
-//#define DOMAINURL  @"http://www.myoffer.cn/"
+//#define DOMAINURL  @"http://120.76.78.88/"
+#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

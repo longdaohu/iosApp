@@ -221,8 +221,6 @@
                 
                 return NO;
                 
-                //                [webView loadRequest:request];
-                
             }else{
                 
                 return YES;

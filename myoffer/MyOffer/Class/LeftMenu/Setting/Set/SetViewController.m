@@ -108,7 +108,7 @@ static NSString *identify = @"set";
     
     MenuItem *item       = self.items[indexPath.row];
     cell.textLabel.text  = item.name;
-    cell.imageView.image = [UIImage imageNamed:item.icon];
+//    cell.imageView.image = [UIImage imageNamed:item.icon];
     
     return cell;
 }

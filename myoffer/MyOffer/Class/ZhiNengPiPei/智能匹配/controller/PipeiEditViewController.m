@@ -206,9 +206,6 @@
     
     if (!LOGIN)return;
     
-    
-    XWeakSelf;
-    
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
@@ -219,15 +216,21 @@
         
         if (!value) {
             
-            [weakSelf.prompVC promptViewShow:YES]; //当没有数据时，出现智能匹配提示页面
-            
             [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
             
             [ud synchronize];
+            
+            
+            //当没有数据时，出现智能匹配提示页面
+            PromttViewController *pro = [PromttViewController promptView];
+            
+            self.prompVC  = pro;
+            
+            [pro promptViewShow:YES];
         }
         
     }];
- 
+  
 }
 
 
@@ -296,17 +299,17 @@
 
 
 
-//提示页面
-- (PromttViewController *)prompVC{
-    
-    if (!_prompVC) {
-        
-        _prompVC =  [PromttViewController promptView];
-        
-     }
-    
-     return _prompVC;
-}
+////提示页面
+//- (PromttViewController *)prompVC{
+//    
+//    if (!_prompVC) {
+//        
+//        _prompVC =  [PromttViewController promptView];
+//        
+//     }
+//    
+//     return _prompVC;
+//}
 
 
 //根据网络请求设置UI

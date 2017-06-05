@@ -24,13 +24,23 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeC-VZ-cI8">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <connections>
+                        <action selector="promtViewOnClick:" destination="-1" eventType="touchUpInside" id="CCS-lj-x4W"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0fD-vF-37s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Cee-4n-JJ4"/>
+                <constraint firstItem="EeC-VZ-cI8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L5w-xW-goK"/>
                 <constraint firstAttribute="trailing" secondItem="0fD-vF-37s" secondAttribute="trailing" id="bD0-Nl-qlX"/>
+                <constraint firstAttribute="bottom" secondItem="EeC-VZ-cI8" secondAttribute="bottom" id="cTB-IG-0a5"/>
                 <constraint firstAttribute="bottom" secondItem="0fD-vF-37s" secondAttribute="bottom" id="k9T-I1-tQl"/>
                 <constraint firstItem="0fD-vF-37s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nan-zJ-Ew0"/>
+                <constraint firstAttribute="trailing" secondItem="EeC-VZ-cI8" secondAttribute="trailing" id="qRI-6N-7mf"/>
+                <constraint firstItem="EeC-VZ-cI8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rPU-hv-bHg"/>
             </constraints>
             <point key="canvasLocation" x="35.5" y="54.5"/>
         </view>

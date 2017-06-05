@@ -15,7 +15,7 @@ typedef void(^UniverstyHeaderViewBlock)(UIButton *sender);
 
 @class UniversityheaderCenterView;
 @interface UniverstyHeaderView : UIView
-@property(nonatomic,strong)UniversityNewFrame *itemFrame;
+@property(nonatomic,strong)UniversityNewFrame *uniFrame;
 @property(nonatomic,copy)UniverstyHeaderViewBlock  actionBlock;
 
 + (instancetype)headerTableViewWithUniFrame:(UniversityNewFrame *)universityFrame;

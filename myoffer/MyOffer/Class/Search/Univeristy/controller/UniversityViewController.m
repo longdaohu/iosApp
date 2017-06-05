@@ -733,10 +733,12 @@ typedef enum {
         
          NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
  
-       [MBProgressHUD showSuccessWithMessage:title ToView:self.view];
+        [MBProgressHUD showSuccessWithMessage:title ToView:self.view];
         
         weakSelf.favorited =  !weakSelf.favorited;
+        
         [weakSelf configureLikeButton:weakSelf.favorited];
+        
         weakSelf.clickType = UniversityItemTyDeFault;
         
     }];
@@ -755,7 +757,8 @@ typedef enum {
         
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
-            weakSelf.headerView.itemFrame = weakSelf.UniFrame;
+            weakSelf.headerView.uniFrame = weakSelf.UniFrame;
+            
             weakSelf.headerView.frame     = weakSelf.UniFrame.header_Frame;
             
             [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
@@ -763,7 +766,7 @@ typedef enum {
             [weakSelf.tableView endUpdates];
             
         }];
-        
+     
     }
 }
 

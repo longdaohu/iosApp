@@ -67,9 +67,29 @@
 
 
 -(void)tap:(UIButton *)sender{
-    
-    if (self.actionBlack) self.actionBlack(sender);
+  /*
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
+        self.iconView.transform = CGAffineTransformScale(self.iconView.transform, 0.5, 0.5);
+
+    } completion:^(BOOL finished) {
+        
+ 
+        
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+            
+            self.iconView.transform = CGAffineTransformIdentity;
+            
+        } completion:^(BOOL finished) {
+            
+            
+        }];
+        
+        
+    }];
+  */
+    if (self.actionBlack) self.actionBlack(sender);
+    
 }
 
 -(void)setCount:(NSString *)count

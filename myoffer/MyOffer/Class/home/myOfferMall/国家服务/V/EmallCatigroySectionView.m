@@ -141,7 +141,7 @@
     
     CGFloat line_X = 0;
     CGFloat line_W = banW;
-    CGFloat line_H = 1;
+    CGFloat line_H = LINE_HEIGHT;
     CGFloat line_Y = banH - line_H;
     self.line.frame = CGRectMake(line_X, line_Y, line_W, line_H);
     

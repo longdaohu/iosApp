@@ -21,7 +21,7 @@
     CGFloat    top_X = 0;
     CGFloat    top_Y = 0;
     CGFloat    top_W = XSCREEN_WIDTH;
-    CGFloat    top_H = 1;
+    CGFloat    top_H = LINE_HEIGHT;
     self.top_line_Frame = CGRectMake(top_X, top_Y, top_W, top_H);
     
     //cover图片
@@ -65,7 +65,7 @@
     CGFloat    lineX = nameX;
     CGFloat    lineY = CGRectGetMaxY(self.cover_Frame) + Margin;
     CGFloat    lineW = XSCREEN_WIDTH - lineX;
-    CGFloat    lineH = 1;
+    CGFloat    lineH = LINE_HEIGHT;
     
     
     if (SKU.comment_present) {

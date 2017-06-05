@@ -88,8 +88,6 @@
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.payBtn];
         
-        self.contentView.backgroundColor = XCOLOR_BG;
-        
         
         UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
         [self.contentView addGestureRecognizer:tap];
@@ -101,8 +99,7 @@
 
 
 
-
--(void)setOrder:(OrderItem *)order{
+- (void)setOrder:(OrderItem *)order{
  
     _order = order;
     

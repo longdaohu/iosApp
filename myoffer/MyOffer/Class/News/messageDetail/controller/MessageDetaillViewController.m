@@ -103,8 +103,9 @@
         CGFloat Lh = 40;
         self.ZangBtn  = [[UIButton alloc] initWithFrame:CGRectMake(Lx,Ly, Lw, Lh)];
         [self.ZangBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_likeHightLight"] forState:UIControlStateNormal];
-        [self.ZangBtn  setImage:[UIImage imageNamed  :@"nav_likeNomal"] forState:UIControlStateDisabled];
+        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_zangHightLight"] forState:UIControlStateNormal];
+        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_zang"] forState:UIControlStateDisabled];
+        
         self.ZangBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.ZangBtn  addTarget:self action:@selector(ZangBtnClick)  forControlEvents:UIControlEventTouchUpInside];
         self.ZangBtn.titleEdgeInsets = UIEdgeInsetsMake(5, 10, 0, 0);
@@ -204,11 +205,11 @@
     
     self.ZangBtn.enabled = ![response[@"like"] integerValue];
     
-    if ([response[@"like"] integerValue]) {
-        
-        [self.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-        
-    }
+//    if ([response[@"like"] integerValue]) {
+//        
+//        [self.ZangBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+//        
+//    }
     
     //根据点赞数量改变导航栏右侧相关控件宽度
     [self.ZangBtn  setTitle:article.like_count  forState:UIControlStateNormal];
@@ -474,7 +475,7 @@
         
         NSString *LikeCount = self.ZangBtn.currentTitle;
         [weakSelf.ZangBtn setTitle:[NSString stringWithFormat:@"%ld",(long)LikeCount.integerValue + 1]  forState:UIControlStateNormal];
-        [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+//        [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
         
         weakSelf.ZangBtn.enabled = NO;
         

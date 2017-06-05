@@ -139,7 +139,7 @@
     
     CGFloat line_X = title_X;
     CGFloat line_W = contentSize.width;
-    CGFloat line_H = 0.5;
+    CGFloat line_H = LINE_HEIGHT;
     CGFloat line_Y = contentSize.height - line_H;
     self.line.frame =CGRectMake(line_X, line_Y, line_W, line_H);
     

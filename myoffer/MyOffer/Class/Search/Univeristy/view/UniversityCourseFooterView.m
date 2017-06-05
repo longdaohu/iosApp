@@ -62,7 +62,7 @@
     
     CGSize contentSize = self.bounds.size;
     
-    self.line.frame = CGRectMake(0, 0, contentSize.width, 1);
+    self.line.frame = CGRectMake(0, 0, contentSize.width, LINE_HEIGHT);
     
     
     CGFloat button_hight = 50;

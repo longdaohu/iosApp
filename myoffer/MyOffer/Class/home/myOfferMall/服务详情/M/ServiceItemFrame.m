@@ -56,7 +56,7 @@
     CGFloat first_lineX = nameX;
     CGFloat first_lineY = margin_small + CGRectGetMaxY(self.priceFrame);
     CGFloat first_lineW = nameW;
-    CGFloat first_lineH = 1;
+    CGFloat first_lineH = LINE_HEIGHT;
     self.firstlineFrame= CGRectMake(first_lineX, first_lineY, first_lineW, first_lineH);
     
     
@@ -86,7 +86,7 @@
     CGFloat sec_lineX = first_lineX;
     CGFloat sec_lineY = CGRectGetMaxY(self.centerView_Frame);
     CGFloat sec_lineW = first_lineW;
-    CGFloat sec_lineH = cell_top > 0 ? 1 : 0;
+    CGFloat sec_lineH = cell_top > 0 ? LINE_HEIGHT : 0;
     self.second_line_Frame= CGRectMake(first_lineX, sec_lineY, sec_lineW, sec_lineH);
     
  

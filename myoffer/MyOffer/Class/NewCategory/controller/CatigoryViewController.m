@@ -377,11 +377,12 @@ static NSString *rankIdentify = @"rankStyle";
         CatigaryCountry *country  = self.country_Hotes[indexPath.section];
         
         cell.hot_cities = country.hot_cities;
-    
+
+       [cell bottomLineShow: (self.country_Hotes.count - 1) != indexPath.section];
+
         cell.actionBlock = ^(NSString *city){
             
             //设置一个更多城市，城市名称为空，城市名称是否为空，做为跳转判断的标准
-            
             city ? [self CaseHotCityWithCityName:city belongCountry:country.country] :  [self CaseStateWithSection:indexPath.section];
             
         };
@@ -397,6 +398,8 @@ static NSString *rankIdentify = @"rankStyle";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (tableView == self.city_tableView) return;
     
     CatigoryRank *rank = self.rankList[indexPath.section];
     

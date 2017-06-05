@@ -70,7 +70,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                             <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="UBx-S5-V5P"/>
+                                <constraint firstAttribute="height" constant="0.5" id="UBx-S5-V5P"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -154,7 +154,7 @@
                                     <rect key="frame" x="0.0" y="39" width="320" height="1"/>
                                     <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="gng-d6-dgS"/>
+                                        <constraint firstAttribute="height" constant="0.5" id="gng-d6-dgS"/>
                                     </constraints>
                                 </view>
                             </subviews>

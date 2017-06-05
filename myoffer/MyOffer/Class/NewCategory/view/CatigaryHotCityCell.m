@@ -89,14 +89,12 @@ static NSString *cityIdentify = @"hotCity";
 //  [self.CollectionView  reloadData];
 }
 
+- (void)bottomLineShow:(BOOL)show{
 
-- (void)setLastCell:(BOOL)lastCell{
-
-    _lastCell = lastCell;
-    
-    self.bottom_line.hidden = lastCell;
-    
+    self.bottom_line.hidden = !show;
 }
+
+
 
 -(void)layoutSubviews
 {
@@ -104,7 +102,7 @@ static NSString *cityIdentify = @"hotCity";
     
     CGSize contentsSize = self.bounds.size;
     
-    self.bottom_line.frame = CGRectMake(10, contentsSize.height - 1,contentsSize.width , 1);
+    self.bottom_line.frame = CGRectMake(10, contentsSize.height - 0.5 ,contentsSize.width , 0.5);
     
 }
 

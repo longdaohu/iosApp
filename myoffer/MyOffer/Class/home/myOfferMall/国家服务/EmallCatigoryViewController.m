@@ -282,6 +282,8 @@
     
     ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame: self.current_frames[indexPath.row]];
     
+    [cell bottomLineShow:(self.current_frames.count - 1) != indexPath.row];
+
     return cell;
 }
 

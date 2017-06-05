@@ -13,9 +13,9 @@ typedef void(^HotCityCellBlock)(NSString *city);
 @interface CatigaryHotCityCell : UITableViewCell
 
 @property(nonatomic,strong)NSArray *hot_cities;
-@property(nonatomic,assign)BOOL lastCell;
 @property(nonatomic,copy)HotCityCellBlock actionBlock;
 
 + (instancetype)cellInitWithTableView:(UITableView *)tableView;
+- (void)bottomLineShow:(BOOL)show;
 
 @end

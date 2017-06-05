@@ -185,7 +185,7 @@
         pageNumber = 3; //OK   留学咨询
     }else if([absoluteString hasSuffix:@"recommend?major"]){
         pageNumber = 4; //OK   留学咨询
-    }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report_hr.asp"] ) {
+    }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report"] ) {
         pageNumber = 5;  //Ok   WebViewController
     }else if([absoluteString containsString:@"jump/0"]) {
         pageNumber = 6;  //    申请状态
@@ -193,9 +193,9 @@
         pageNumber = 7;  //     学校详情
     }else if([absoluteString containsString:@"service.html"] || [absoluteString containsString:@"emall/index.html"]) {
         pageNumber = 8;  //服务商城
-    }else if([absoluteString isEqualToString:@"http://www.myoffer.cn/"]){
+    }else if([absoluteString isEqualToString:DOMAINURL]){
         pageNumber = 9;
-    }else if(![absoluteString containsString:@"http://www.myoffer.cn"] && ![absoluteString containsString:@"www.sojump.hk"]){
+    }else if(![absoluteString containsString:DOMAINURL] && ![absoluteString containsString:@"www.sojump.hk"] && ![absoluteString containsString:@"www.apesk.com"]){
         pageNumber = 10;
     }
     
@@ -297,7 +297,10 @@
         }
             break;
         case 9:
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:absoluteString]];
             decisionHandler(WKNavigationActionPolicyCancel);
+            
             break;
         case 10:
         {

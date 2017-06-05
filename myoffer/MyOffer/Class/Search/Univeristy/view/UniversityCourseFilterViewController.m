@@ -63,7 +63,7 @@
         
         CALayer *line = [CALayer layer];
         line.backgroundColor = XCOLOR_line.CGColor;
-        line.frame = CGRectMake(0,_topView.mj_h, _topView.mj_w, 1);
+        line.frame = CGRectMake(0,_topView.mj_h, _topView.mj_w, LINE_HEIGHT);
         [_topView.layer addSublayer:line];
     }
     
@@ -110,7 +110,7 @@
     
     
     CGFloat line_Y = 10;
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(level_W, line_Y, 1, self.topView.mj_h - 2 * line_Y)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(level_W, line_Y, LINE_HEIGHT, self.topView.mj_h - 2 * line_Y)];
     line.backgroundColor = XCOLOR_line;
     [self.topView addSubview:line];
 }

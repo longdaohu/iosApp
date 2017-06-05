@@ -35,8 +35,10 @@
 + (instancetype)headerTableViewWithUniFrame:(UniversityNewFrame *)universityFrame{
 
     UniverstyHeaderView  * header  = [[UniverstyHeaderView alloc] init];
+  
     header.clipsToBounds           = YES;
-    header.itemFrame               = universityFrame;
+   
+    header.uniFrame   = universityFrame;
     
     return header;
 }
@@ -114,28 +116,26 @@
 }
 
 
+- (void)setUniFrame:(UniversityNewFrame *)uniFrame{
 
-- (void)setItemFrame:(UniversityNewFrame *)itemFrame
-{
-    _itemFrame = itemFrame;
+    _uniFrame = uniFrame;
     
+    self.upView.frame =  uniFrame.upViewFrame;
     
-    self.upView.frame =  itemFrame.upViewFrame;
+    self.downView.frame =   uniFrame.downViewFrame;
     
-    self.downView.frame =   itemFrame.downViewFrame;
+    self.centerView.frame =   uniFrame.centerView_Frame;
     
-    self.centerView.frame =   itemFrame.centerView_Frame;
+    self.centerView.UniversityFrame =   uniFrame;
     
-    self.centerView.UniversityFrame =   itemFrame;
+    self.TIMESLab.frame =   uniFrame.TIMES_Frame;
     
-    self.TIMESLab.frame =   itemFrame.TIMES_Frame;
-    
-    self.QSrankLab.frame =   itemFrame.QS_Frame;
+    self.QSrankLab.frame =   uniFrame.QS_Frame;
     
     //更新 世界、本地排名 及大学标签
-    [self configurationWithUniversityFrame:itemFrame];
+    [self configurationWithUniversityFrame:uniFrame];
 
-    [self.rightView shadowWithFavorited:itemFrame.item.favorited];
+    [self.rightView shadowWithFavorited:uniFrame.item.favorited];
     
   
 }
@@ -154,7 +154,7 @@
     
     [super layoutSubviews];
     
-    self.rightView.frame =  self.itemFrame.rightView_Frame;
+    self.rightView.frame =  self.uniFrame.rightView_Frame;
  
 }
 

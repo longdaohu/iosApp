@@ -323,7 +323,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
         
         CALayer *line = [CALayer layer];
         line.backgroundColor = XCOLOR_line.CGColor;
-        line.frame = CGRectMake(0,_topView.mj_h, _topView.mj_w, 1);
+        line.frame = CGRectMake(0,_topView.mj_h, _topView.mj_w, LINE_HEIGHT);
         [_topView.layer addSublayer:line];
         
     }
@@ -385,7 +385,7 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     
     CGFloat aline_Y = 10;
     CGFloat aline_X = area_W;
-    CGFloat aline_W = 1;
+    CGFloat aline_W = LINE_HEIGHT;
     CGFloat aline_H = self.topView.mj_h - 2 * aline_Y;
     UIView *line_left = [[UIView alloc] initWithFrame:CGRectMake(aline_X, aline_Y, aline_W, aline_H)];
     line_left.backgroundColor = XCOLOR_line;

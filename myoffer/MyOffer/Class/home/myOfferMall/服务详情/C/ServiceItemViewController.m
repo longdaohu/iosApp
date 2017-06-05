@@ -176,11 +176,13 @@
     NSString *path = [NSString  stringWithFormat:@"GET api/emall/sku/%@",self.service_id];
     
     XWeakSelf
-    [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+       
+         [weakSelf updateUIWithresponse:response];
         
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [weakSelf updateUIWithresponse:response];
-        
+         [weakSelf pop];
     }];
     
 }

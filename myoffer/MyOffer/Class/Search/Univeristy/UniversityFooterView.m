@@ -155,7 +155,7 @@
     
     CGSize footerSize = self.bounds.size;
     
-    self.top_line.frame = CGRectMake(0, 0, footerSize.width, 1);
+    self.top_line.frame = CGRectMake(0, 0, footerSize.width, LINE_HEIGHT);
     
     CGFloat button_hight = 50;
     CGFloat margin = (footerSize.height - button_hight) * 0.5;

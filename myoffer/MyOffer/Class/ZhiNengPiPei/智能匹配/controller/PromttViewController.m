@@ -20,7 +20,8 @@
     prompt.view.frame = CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT);
 
     [[UIApplication sharedApplication].windows.lastObject addSubview:prompt.view];
-
+ 
+    
     return prompt;
 }
 
@@ -28,22 +29,22 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(promtViewOnClick:)];
-    [self.view addGestureRecognizer:tap];
-    
+ 
 }
 
-- (void)promtViewOnClick:(id)sender{
+- (IBAction)promtViewOnClick:(id)sender {
     
     [self promptViewShow:NO];
 
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 //当没有数据时，出现智能匹配提示页面
 - (void)promptViewShow:(BOOL)show{
