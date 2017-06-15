@@ -50,8 +50,6 @@
         self.backgroundColor =[UIColor whiteColor];
         self.layer.cornerRadius  = 10;
         self.layer.masksToBounds = YES;
-        self.layer.borderColor   =  XCOLOR_line.CGColor;
-        self.layer.borderWidth   = 1;
         
         //logo 学校
         LogoView *logo =[[LogoView alloc] init];

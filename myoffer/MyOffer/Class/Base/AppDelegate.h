@@ -16,7 +16,8 @@
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated;
 
 - (BOOL)isLogin;
-- (void)loginWithAccessToken:(NSString *)token;
+//- (void)loginWithAccessToken:(NSString *)token;
+- (void)loginWithAccessResponse:(NSDictionary *)response;
 - (void)logout;
 - (NSString *)accessToken;
 - (void)updateUmeng;

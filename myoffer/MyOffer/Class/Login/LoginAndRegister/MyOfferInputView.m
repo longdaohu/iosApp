@@ -76,7 +76,6 @@
     titleLab.textColor = XCOLOR_TITLE;
     self.titleLab = titleLab;
     
-    
     //输入框
     UITextField *inputTF = [[UITextField alloc] init];
     [inputTF setTintColor:XCOLOR_LIGHTBLUE];
@@ -302,7 +301,6 @@
         
     }
     
-    
     return YES;
 }
 
@@ -467,6 +465,7 @@
 - (void)timerClear{
 
     [self.timer invalidate];
+    
     self.timer = nil;
 }
 

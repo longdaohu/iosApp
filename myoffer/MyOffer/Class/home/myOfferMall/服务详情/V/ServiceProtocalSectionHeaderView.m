@@ -89,7 +89,7 @@
     CGFloat title_H = self.bounds.size.height;
     self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
 
-    self.line.frame = CGRectMake(5, title_H - 1, self.bounds.size.width - 10, 1);
+    self.line.frame = CGRectMake(5, title_H - LINE_HEIGHT, self.bounds.size.width - 10, LINE_HEIGHT);
 
 }
 

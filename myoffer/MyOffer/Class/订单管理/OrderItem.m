@@ -7,16 +7,12 @@
 //
 
 #import "OrderItem.h"
-@interface OrderItem ()
-
-@end
-
 
 @implementation OrderItem
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     
-    return @{@"order_id" : @"_id",@"orderDescription":@"description"};
+    return @{@"order_id" : @"_id",@"order_description":@"description"};
     
 }
 
@@ -56,6 +52,32 @@
     
     [self statusWithTag:status];
 }
+
+
+- (NSString *)SKU{
+
+    NSString *str = @"";
+    
+    if (_SKUs.count > 0) {
+        
+        str = _SKUs.firstObject[@"name"];
+    }
+    
+    return str;
+}
+
+- (NSString *)order_id_str{
+
+    return [NSString stringWithFormat:@"订单号：%@",self.order_id];
+}
+
+- (NSString *)total_fee_str{
+
+    return [NSString stringWithFormat:@"价格：%@元",self.total_fee];
+}
+
+
+
 
 @end
 

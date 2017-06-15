@@ -19,7 +19,6 @@
 #import "UniverstityTCell.h"
 #import "UniversityRightView.h"
 #import "UniversityNavView.h"
-#import "UniversityRightView.h"
 #import "MessageDetaillViewController.h"
 #import "IDMPhotoBrowser.h"
 #import "ShareNViewController.h"

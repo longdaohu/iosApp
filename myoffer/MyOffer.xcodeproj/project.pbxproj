@@ -144,6 +144,7 @@
 		AE37088D1EB083F700502A62 /* MyOfferSubjecct.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37088C1EB083F700502A62 /* MyOfferSubjecct.m */; };
 		AE3708911EB0A01100502A62 /* CatigaryRankkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37088F1EB0A01100502A62 /* CatigaryRankkCell.m */; };
 		AE3708921EB0A01100502A62 /* CatigaryRankkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3708901EB0A01100502A62 /* CatigaryRankkCell.xib */; };
+		AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3826721EE69EED0096AC6A /* OrderItemFrame.m */; };
 		AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */; };
 		AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEED1E4AFE0C00FCF28B /* ShareNView.m */; };
 		AE3943DC1E0A1AD00038826A /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943CF1E0A1AD00038826A /* TAAbstractDotView.m */; };
@@ -676,6 +677,8 @@
 		AE37088E1EB0A01100502A62 /* CatigaryRankkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryRankkCell.h; sourceTree = "<group>"; };
 		AE37088F1EB0A01100502A62 /* CatigaryRankkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigaryRankkCell.m; sourceTree = "<group>"; };
 		AE3708901EB0A01100502A62 /* CatigaryRankkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatigaryRankkCell.xib; sourceTree = "<group>"; };
+		AE3826711EE69EED0096AC6A /* OrderItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemFrame.h; sourceTree = "<group>"; };
+		AE3826721EE69EED0096AC6A /* OrderItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemFrame.m; sourceTree = "<group>"; };
 		AE38BEE91E4AED2700FCF28B /* ShareNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareNViewController.h; sourceTree = "<group>"; };
 		AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareNViewController.m; sourceTree = "<group>"; };
 		AE38BEEC1E4AFE0C00FCF28B /* ShareNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareNView.h; sourceTree = "<group>"; };
@@ -1973,6 +1976,8 @@
 				AEA2492D1D5B215300DD7939 /* OrderCell.m */,
 				AEA249361D5B215300DD7939 /* OrderItem.h */,
 				AEA249371D5B215300DD7939 /* OrderItem.m */,
+				AE3826711EE69EED0096AC6A /* OrderItemFrame.h */,
+				AE3826721EE69EED0096AC6A /* OrderItemFrame.m */,
 				AEA2493A1D5B215300DD7939 /* OrderViewController.h */,
 				AEA2493B1D5B215300DD7939 /* OrderViewController.m */,
 			);
@@ -3711,6 +3716,7 @@
 				AEA24A8E1D5B23F600DD7939 /* HomeFirstTableViewCell.m in Sources */,
 				AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
+				AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */,
 				AE3943E11E0A1AD00038826A /* SDCycleScrollView.m in Sources */,
 				AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */,
 				AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */,

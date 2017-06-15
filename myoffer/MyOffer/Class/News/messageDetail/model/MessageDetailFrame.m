@@ -52,15 +52,15 @@
 
     _article = article;
     
-    CGFloat c_logo_X = MARGIN;
-    CGFloat c_logo_Y = MARGIN;
-    CGFloat c_logo_W = TagIconWidth;
-    CGFloat c_logo_H = c_logo_W;
-    self.catigory_logo_Frame = CGRectMake(c_logo_X, c_logo_Y, c_logo_W, c_logo_H);
+//    CGFloat c_logo_X = MARGIN;
+//    CGFloat c_logo_Y = MARGIN;
+//    CGFloat c_logo_W = TagIconWidth;
+//    CGFloat c_logo_H = c_logo_W;
+//    self.catigory_logo_Frame = CGRectMake(c_logo_X, c_logo_Y, c_logo_W, c_logo_H);
     
     CGFloat tag_title_h = LabHeight;
-    CGFloat tag_title_x = CGRectGetMaxX(self.catigory_logo_Frame) + 5;
-    CGFloat tag_title_y = CGRectGetMinY(self.catigory_logo_Frame) + 0.5 * (c_logo_H - tag_title_h);
+    CGFloat tag_title_x = MARGIN;
+    CGFloat tag_title_y = MARGIN * 2;
     CGFloat tag_title_w = 80;
     self.tag_title_Frame = CGRectMake(tag_title_x, tag_title_y, tag_title_w, tag_title_h);
     
@@ -71,7 +71,7 @@
     self.tagBg_Frame = CGRectMake(TagBg_x,TagBg_y,TagBg_w,TagBg_h);
     
     CGFloat ONEx = MARGIN;
-    CGFloat ONEy = CGRectGetMaxY(self.catigory_logo_Frame) + MARGIN;
+    CGFloat ONEy = CGRectGetMaxY(self.tag_title_Frame) + tag_title_y;
     CGFloat ONEw = XSCREEN_WIDTH - MARGIN;
     CGFloat ONEh = LineHeight;
     self.FirstLineFrame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
@@ -97,16 +97,10 @@
     self.Arthor_Frame = CGRectMake(Arthor_x, Arthor_y, Arthor_w, Arthor_h);
     
     CGFloat time_y = Arthor_y;
-    CGFloat time_w = 110 ;
+    CGFloat time_w = ONEw;
     CGFloat time_h = LabHeight;
-    CGFloat time_x = XSCREEN_WIDTH - time_w - MARGIN;
+    CGFloat time_x = XSCREEN_WIDTH - time_w - icon_x;
     self.time_Frame = CGRectMake(time_x,time_y, time_w , time_h);
-    
-    CGFloat focus_y = Arthor_y;
-    CGFloat focus_w = 100 ;
-    CGFloat focus_h = LabHeight;
-    CGFloat focus_x = time_x - focus_w;
-    self.focus_Frame = CGRectMake(focus_x,focus_y, focus_w , focus_h);
     
     CGFloat cover_X =  0;
     CGFloat cover_Y =  CGRectGetMaxY(self.icon_Frame) + MARGIN;

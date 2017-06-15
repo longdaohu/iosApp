@@ -37,6 +37,8 @@
 @property(nonatomic,strong)UIButton *ZangBtn;
 //点分享按钮
 @property(nonatomic,strong)UIButton *shareBtn;
+
+@property(nonatomic,strong)UILabel *countLab;
 //导航右边按钮
 @property(nonatomic,strong)UIView *RightView;
 //分享
@@ -94,32 +96,32 @@
 -(UIView *)RightView
 {
     if (!_RightView) {
-        _RightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 90, 40)];
+        _RightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
         _RightView.hidden = YES;
         
         CGFloat Lx = 0;
         CGFloat Ly = 0;
-        CGFloat Lw = _RightView.frame.size.width - 35;
+        CGFloat Lw = 40;
         CGFloat Lh = 40;
         self.ZangBtn  = [[UIButton alloc] initWithFrame:CGRectMake(Lx,Ly, Lw, Lh)];
-        [self.ZangBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_zangHightLight"] forState:UIControlStateNormal];
+        [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_zang_HightLight"] forState:UIControlStateNormal];
         [self.ZangBtn  setImage:[UIImage imageNamed:@"nav_zang"] forState:UIControlStateDisabled];
-        
-        self.ZangBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.ZangBtn  addTarget:self action:@selector(ZangBtnClick)  forControlEvents:UIControlEventTouchUpInside];
-        self.ZangBtn.titleEdgeInsets = UIEdgeInsetsMake(5, 10, 0, 0);
-        self.ZangBtn.titleLabel.font =[UIFont systemFontOfSize:ZangFontSize];
+        [self.ZangBtn  addTarget:self action:@selector(ZangBtnClick:)  forControlEvents:UIControlEventTouchUpInside];
         [_RightView addSubview:self.ZangBtn ];
         
+        UILabel *countLab = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 20, 40)];
+        self.countLab = countLab;
+        countLab.textColor = XCOLOR_WHITE;
+        countLab.font = XFONT(ZangFontSize);
+        [_RightView addSubview:countLab];
+        
         CGFloat Sy = 0;
-        CGFloat Sw = 35;
+        CGFloat Sx = 60;
+        CGFloat Sw = 40;
         CGFloat Sh = 40;
-        CGFloat Sx = _RightView.frame.size.width - Sw;
         self.shareBtn = [[UIButton alloc] initWithFrame:CGRectMake( Sx, Sy, Sw, Sh)];
         [self.shareBtn addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-        [self.shareBtn  setImage:[UIImage imageNamed:@"nav_shareNomal"] forState:UIControlStateNormal];
-        [self.shareBtn  setImage:[UIImage imageNamed:@"nav_shareHightLight"] forState:UIControlStateHighlighted];
+        [self.shareBtn  setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
         [_RightView addSubview:self.shareBtn];
         
     }
@@ -202,32 +204,11 @@
     
     self.ArticleInfo = article;
 
+//    NSLog(@">>>>>>>>>> %@",response[@"like"]);
+    self.ZangBtn.enabled = !response[@"like"];
+    self.countLab.text = article.like_count;
     
-    self.ZangBtn.enabled = ![response[@"like"] integerValue];
-    
-//    if ([response[@"like"] integerValue]) {
-//        
-//        [self.ZangBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-//        
-//    }
-    
-    //根据点赞数量改变导航栏右侧相关控件宽度
-    [self.ZangBtn  setTitle:article.like_count  forState:UIControlStateNormal];
-    CGSize LikeCountSize =[article.like_count  KD_sizeWithAttributeFont:[UIFont systemFontOfSize:ZangFontSize]];
-    
-    CGRect NewRightFrame = self.RightView.frame;
-    NewRightFrame.size.width += LikeCountSize.width;
-    self.RightView.frame = NewRightFrame;
-    
-    CGRect NewShareFrame = self.shareBtn.frame;
-    NewShareFrame.origin.x +=  LikeCountSize.width;
-    self.shareBtn.frame = NewShareFrame;
-    
-    CGRect NewLoveFrame = self.ZangBtn.frame;
-    NewLoveFrame.size.width +=  LikeCountSize.width;
-    self.ZangBtn.frame = NewLoveFrame;
-    
-    
+     //根据点赞数量改变导航栏右侧相关控件宽度
     
     //第一分组
     MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
@@ -291,8 +272,7 @@
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    
-    [webView evaluateJavaScript:@"document.body.style.paddingBottom = '30px';" completionHandler:^(id Result, NSError * error) {
+    [webView evaluateJavaScript:@"document.body.style.padding = '0  15px  30px  15px';" completionHandler:^(id Result, NSError * error) {
      }];
     
     
@@ -467,17 +447,19 @@
 
 
 //点赞
--(void)ZangBtnClick
+-(void)ZangBtnClick:(UIButton *)sender
 {
+    
     XWeakSelf
     NSString *path =[NSString stringWithFormat:kAPISelectorMessageZang,self.message_id];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
         
-        NSString *LikeCount = self.ZangBtn.currentTitle;
-        [weakSelf.ZangBtn setTitle:[NSString stringWithFormat:@"%ld",(long)LikeCount.integerValue + 1]  forState:UIControlStateNormal];
-//        [weakSelf.ZangBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
+        NSString *LikeCount = self.countLab.text;
         
-        weakSelf.ZangBtn.enabled = NO;
+        weakSelf.countLab.text = [NSString stringWithFormat:@"%ld",(long)LikeCount.integerValue + 1];
+
+        sender.enabled = NO;
+        
         
     }];
 }

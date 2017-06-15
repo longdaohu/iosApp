@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class OrderItem;
+@class OrderItemFrame;
 @class OrderCell;
 
 @protocol OrderTableViewCellDelegate <NSObject>
@@ -15,7 +15,7 @@
 @end
 
 @interface OrderCell : UITableViewCell
-@property(nonatomic,strong)OrderItem *order;
+@property(nonatomic,strong)OrderItemFrame *orderFrame;
 @property(nonatomic,weak)id <OrderTableViewCellDelegate>delegate;
 @property(nonatomic,strong)NSIndexPath  *indexPath;
 

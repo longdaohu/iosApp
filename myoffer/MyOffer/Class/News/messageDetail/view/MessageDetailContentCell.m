@@ -15,7 +15,7 @@
 
 @interface MessageDetailContentCell()
 @property(nonatomic,strong)UIImageView *catigory_logo;    //分类图片
-@property(nonatomic,strong)UILabel *catigoryLab;       //学校名称
+@property(nonatomic,strong)UILabel *catigoryLab;       //名称
 @property(nonatomic,strong)UIView *tagsBgView;   //用于显示小图标
 @property(nonatomic,assign)CGFloat tagx;
 @property(nonatomic,strong)UILabel *titleLab;     //文章标题
@@ -24,7 +24,6 @@
 @property(nonatomic,strong)UIView *ThreeLine;       //分隔线3
 @property(nonatomic,strong)UILabel *ArthorLab;      //作者名称
 @property(nonatomic,strong)UIButton *TimeBtn;       //时间
-@property(nonatomic,strong)UIButton *FocusBtn;      //关注数量
 @property(nonatomic,strong)UIImageView *authorLogoView;   //作者头像
 @property(nonatomic,strong)UIImageView *coverView; //文章大图
 @property(nonatomic,strong)UILabel *summaryLab;    //文件摘要
@@ -60,25 +59,26 @@
         [self.contentView addSubview:self.catigory_logo];
         
         self.catigoryLab =[[UILabel alloc] init];
-        self.catigoryLab.font =[UIFont systemFontOfSize:Uni_subject_FontSize];
+        self.catigoryLab.font =[UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.catigoryLab];
         
         self.tagsBgView =[[UIView alloc] init];
         [self.contentView addSubview:self.tagsBgView];
         
         self.FirstLine =[[UIView alloc] init];
-        self.FirstLine.backgroundColor =XCOLOR_BG;
+        self.FirstLine.backgroundColor =XCOLOR_line;
         [self.contentView addSubview:self.FirstLine];
         
         
         self.SecondLine =[[UIView alloc] init];
-        self.SecondLine.backgroundColor =XCOLOR_BG;
+        self.SecondLine.backgroundColor =XCOLOR_line;
         [self.contentView addSubview:self.SecondLine];
         
         
         self.titleLab =[[UILabel alloc] init];
         self.titleLab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:24];
         self.titleLab.numberOfLines = 0;
+        self.titleLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:self.titleLab];
         
         
@@ -86,7 +86,7 @@
         self.ArthorLab.font = [UIFont systemFontOfSize:14];
         [self.ArthorLab sizeToFit];
         [self.contentView addSubview:self.ArthorLab];
-        
+        self.ArthorLab.textColor = XCOLOR_SUBTITLE;
         
         self.authorLogoView = [[UIImageView alloc] init];
         self.authorLogoView.layer.cornerRadius = 20;
@@ -95,35 +95,26 @@
         self.authorLogoView.image =[UIImage imageNamed:@"PlaceHolderImage"];
 
         self.TimeBtn =[[UIButton alloc] init];
-         [self.TimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-
         self.TimeBtn.enabled = NO;
         self.TimeBtn.titleLabel.font =[UIFont systemFontOfSize:14];
-        [self.TimeBtn setTitleColor:XCOLOR_DARKGRAY forState:UIControlStateNormal];
-        [self.TimeBtn setImage:[UIImage imageNamed:@"Detail_time"] forState:UIControlStateNormal];
+        [self.TimeBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
         [self.contentView addSubview:self.TimeBtn];
-        
-        self.FocusBtn =[[UIButton alloc] init];
-         [self.FocusBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-        [self.FocusBtn setTitleColor:XCOLOR_DARKGRAY  forState:UIControlStateNormal];
-        self.FocusBtn.enabled = NO;
-        self.FocusBtn.titleLabel.font =[UIFont systemFontOfSize:14];
-        [self.FocusBtn setImage:[UIImage imageNamed:@"Detail_Focus"] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.FocusBtn];
+        self.TimeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
         self.coverView = [[UIImageView alloc] init];
+        self.coverView.clipsToBounds = YES;
         [self.contentView addSubview:self.coverView];
         self.coverView.contentMode = UIViewContentModeScaleAspectFit;
 
         self.summaryLab =[[UILabel alloc] init];
         self.summaryLab.font = [UIFont systemFontOfSize:SummaryFont];
         self.summaryLab.numberOfLines = 0;
-        self.summaryLab.textColor = XCOLOR_DARKGRAY;
+        self.summaryLab.textColor = XCOLOR_DESC;
         self.summaryLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.summaryLab];
         
         self.ThreeLine =[[UIView alloc] init];
-        self.ThreeLine.backgroundColor =XCOLOR_BG;
+        self.ThreeLine.backgroundColor =XCOLOR_line;
         [self.contentView addSubview:self.ThreeLine];
         
         
@@ -164,19 +155,20 @@
     newRect.size.width = ArthorSize.width;
     self.ArthorLab.frame = newRect;
     
-    NSString  *path = [MessageFrame.article.cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-
     self.coverView.frame = MessageFrame.cover_Frame;
+
+    NSString  *path = [MessageFrame.article.cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
-    [self.TimeBtn setTitle:MessageFrame.article.update_at forState:UIControlStateNormal];
+    NSArray *times = [MessageFrame.article.update_at componentsSeparatedByString:@"/"];
+    if(times.count >= 3){
+        NSString *title = [NSString stringWithFormat:@"阅读量 %@  |  %@年%@月%@日",MessageFrame.article.view_count,times.lastObject,times[1],times.firstObject];
+        [self.TimeBtn setTitle:title forState:UIControlStateNormal];
+    }
+ 
     self.TimeBtn.frame = MessageFrame.time_Frame;
-    
-    NSString *view_count = MessageFrame.article.view_count;
-    [self.FocusBtn setTitle:view_count forState:UIControlStateNormal];
-    self.FocusBtn.frame = MessageFrame.focus_Frame;
-    
+ 
     self.SecondLine.frame = MessageFrame.SecondLineFrame;
     
     self.summaryLab.frame = MessageFrame.Summary_Frame;
@@ -189,33 +181,34 @@
     }
     
     NSInteger count =   MessageFrame.article.tags.count;
+    CGFloat ty = 0;
+    CGFloat th = TagHigh;
     
     for (NSInteger i = 0; i < count; i ++) {
         
         NSString *tag =   MessageFrame.article.tags[i];
         
-        CGSize tagSize = [tag KD_sizeWithAttributeFont:[UIFont systemFontOfSize:Uni_subject_FontSize]];
-        
-        CGFloat ty = 0;
+        CGSize tagSize = [tag KD_sizeWithAttributeFont:XFONT(11)];
         CGFloat tw = tagSize.width + 15;
-        CGFloat th = TagHigh;
         self.tagx += (MARGIN +tw);
         CGFloat tx = self.tagsBgView.bounds.size.width - self.tagx;
         
-        UILabel *tagLabel =[[UILabel alloc] init];
-        tagLabel.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
-        tagLabel.frame = CGRectMake(tx, ty, tw, th);
-        tagLabel.text = tag;
-        tagLabel.textColor =XCOLOR_WHITE;
-        tagLabel.textAlignment = NSTextAlignmentCenter;
-        tagLabel.layer.cornerRadius = 0.5 * TagHigh;
-        tagLabel.layer.masksToBounds = YES;
-        tagLabel.backgroundColor = XCOLOR_DARKGRAY;
-        [self.tagsBgView addSubview:tagLabel];
+        UIButton *tagBtn =[[UIButton alloc] init];
+        tagBtn.titleLabel.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
+        tagBtn.frame = CGRectMake(tx, ty, tw, th);
+        [tagBtn setTitle:tag forState:UIControlStateNormal];
+        tagBtn.titleLabel.font = XFONT(11);
+        [tagBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
+        tagBtn.layer.cornerRadius = CORNER_RADIUS;
+        tagBtn.layer.masksToBounds = YES;
+        tagBtn.backgroundColor = XCOLOR_BG;
+        
+        
+        [self.tagsBgView addSubview:tagBtn];
         
         if (self.tagx > self.tagsBgView.frame.size.width) {
             
-            tagLabel.hidden = YES;
+            tagBtn.hidden = YES;
         }
     }
 

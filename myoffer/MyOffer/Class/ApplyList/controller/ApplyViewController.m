@@ -344,6 +344,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         
     };
     
+    [sectionView showBottomLineHiden:(uni_frame.universtiy.applies.count == 0)];
+
     return sectionView;
 }
 

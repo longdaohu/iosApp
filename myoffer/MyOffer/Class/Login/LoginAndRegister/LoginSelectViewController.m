@@ -169,7 +169,7 @@
     
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
     
-    [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+    [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     
     [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
     
@@ -263,7 +263,7 @@
          
          [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
          
-         [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+         [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
          
          [self gotoBangDing:response[@"access_token"]];
          

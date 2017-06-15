@@ -112,7 +112,7 @@
     
     CGFloat top_X = 0;
     CGFloat top_Y = 0;
-    CGFloat top_H = 1;
+    CGFloat top_H = LINE_HEIGHT;
     CGFloat top_W = contentSize.width;
     self.top_line.frame = CGRectMake(top_X, top_Y, top_W, top_H);
 
@@ -124,7 +124,7 @@
     
     CGFloat left_X = CGRectGetMaxX(self.priceLab.frame);
     CGFloat left_H = 50;
-    CGFloat left_W = 1;
+    CGFloat left_W = LINE_HEIGHT;
     CGFloat left_Y = 0.5 * (contentSize.height - left_H);
     self.left_line.frame = CGRectMake(left_X, left_Y, left_W, left_H);
     

@@ -271,6 +271,25 @@
         
         parameters[group.key] = group.content;
         
+        if (group.groupType == EditTypeSuject) {
+            
+            NSString *value = group.content;
+         
+            
+            for (MyOfferSubjecct *subject in self.subjectItems_CN) {
+                
+                if ([value isEqualToString:subject.name]) {
+                
+                    value = subject.subject_id;
+                    
+                    break;
+                }
+            }
+ 
+            parameters[group.key] = value;
+
+        }
+        
     }
     
     XWeakSelf
@@ -295,21 +314,6 @@
     
     
 }
-
-
-
-
-////提示页面
-//- (PromttViewController *)prompVC{
-//    
-//    if (!_prompVC) {
-//        
-//        _prompVC =  [PromttViewController promptView];
-//        
-//     }
-//    
-//     return _prompVC;
-//}
 
 
 //根据网络请求设置UI

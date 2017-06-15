@@ -11,6 +11,7 @@
 #import "PayOrderViewController.h"
 #import "OrderDetailViewController.h"
 #import "OrderItem.h"
+#import "OrderItemFrame.h"
 
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,OrderTableViewCellDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -114,17 +115,22 @@
 
 
 - (void)configrationUIWithResponse:(id)response{
+    
+    
+    NSArray *temps =  [OrderItem mj_objectArrayWithKeyValuesArray:response[@"orders"]];
 
-    for (NSDictionary *dict in  response[@"orders"]) {
+    for (OrderItem *order in temps) {
         
-        OrderItem *order = [OrderItem  mj_objectWithKeyValues:dict];
-        [self.orderGroup addObject:order];
+        [self.orderGroup addObject:[[OrderItemFrame alloc] initWithOrder:order]];
+
     }
+    
+    
     
     
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
-    self.tableView.mj_footer = 10 > [response[@"orders"] count] ? nil : [self makeMJ_footer];
+    self.tableView.mj_footer = 10 > self.orderGroup.count ? nil : [self makeMJ_footer];
     
     [self.tableView reloadData];
     
@@ -187,8 +193,8 @@
     
  
     OrderCell *cell =[OrderCell cellWithTableView:tableView];
-  
-    cell.order = self.orderGroup[indexPath.section];
+    
+    cell.orderFrame = self.orderGroup[indexPath.section];
     
     cell.indexPath =indexPath;
     
@@ -211,7 +217,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return Uni_Cell_Height + 25;
+    OrderItemFrame *orderFrame = self.orderGroup[indexPath.section];
+
+    return orderFrame.cell_Height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [self OrderDetal:indexPath];
+
 }
 
 #pragma mark : OrderTableViewCellDelegate
@@ -226,7 +240,6 @@
             [self payOrder:indexPath];
             break;
         default:
-            [self OrderDetal:indexPath];
              break;
     }
   
@@ -235,11 +248,12 @@
 //详情
 -(void)OrderDetal:(NSIndexPath *)indexPath{
 
+    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
     
     XWeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
     
-    detail.order  =  self.orderGroup[indexPath.section];
+    detail.order  =  orderframe.order;
     
     
     detail.actionBlock = ^(BOOL isSuccess){
@@ -259,10 +273,13 @@
 //支付
 -(void)payOrder:(NSIndexPath *)indexPath{
 
+    
+    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
+
     XWeakSelf
     PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
     
-    pay.order  =  self.orderGroup[indexPath.section];
+    pay.order  =  orderframe.order;
     
     pay.actionBlock = ^(BOOL isSuccess){
       
@@ -283,15 +300,15 @@
 //取消
 -(void)cancelOrder:(NSIndexPath *)indexPath{
     
-    OrderItem *order = self.orderGroup[indexPath.section];
+    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,orderframe.order.order_id];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         if ([response[@"result"] isEqualToString:@"OK"]) {
             
-              order.status = @"ORDER_CLOSED";
+              orderframe.order.status = @"ORDER_CLOSED";
             
              [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          }

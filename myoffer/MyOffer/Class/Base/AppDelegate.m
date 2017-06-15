@@ -321,7 +321,30 @@ static AppDelegate *__sharedDelegate;
 
 - (BOOL)isLogin {
     
+    
+    NSString *logout_date  =  [[NSUserDefaults standardUserDefaults] valueForKey:@"logout_date"];
+    
+    //判断登录时间是否过期
+    if (logout_date) {
+        
+        NSDate *now_date = [NSDate date];
+
+        NSInteger time_count = logout_date.integerValue - (NSInteger)now_date.timeIntervalSince1970 * 1000;
+        
+        if (time_count <= 0) [self logout];
+ 
+    }
+    
     return _accessToken != nil;
+}
+
+
+- (void)loginWithAccessResponse:(NSDictionary *)response{
+    
+    [self loginWithAccessToken: response[@"access_token"]];
+    
+    [self saveLogOutDate:response[@"expiration_date"]];
+    
 }
 
 - (void)loginWithAccessToken:(NSString *)token {
@@ -330,12 +353,12 @@ static AppDelegate *__sharedDelegate;
     
     [Keychain writeKeychainWithIdentifier:@"token" data:[token dataUsingEncoding:NSUTF8StringEncoding]];
     
-//    [[NSNotificationCenter  defaultCenter] postNotificationName:@"newMessage" object:[NSString stringWithFormat:@"%ld",self.mainTabBarController.selectedIndex]];
-    
 }
 
 - (void)logout {
+    
     _accessToken = nil;
+    
     [Keychain deleteKeychainItemWithIdentifier:@"token"];
 }
 
@@ -353,6 +376,13 @@ static AppDelegate *__sharedDelegate;
         
           _accessToken = savedToken;
        }
+}
+
+//保存过期登录时间
+- (void)saveLogOutDate:(NSString *)timeStr
+{
+    [[NSUserDefaults standardUserDefaults] setValue:timeStr forKey:@"logout_date"];
+    [[NSUserDefaults standardUserDefaults]  synchronize];
 }
 
 

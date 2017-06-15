@@ -618,7 +618,8 @@ typedef NS_ENUM(NSInteger,otherLoginType){
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {
          
-         [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+         [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
+         
          [MobClick event:@"myoffer_Register"];
          [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
          
@@ -627,6 +628,8 @@ typedef NS_ENUM(NSInteger,otherLoginType){
              
              [self dismiss];
          };
+         
+         
          
      }];
   
@@ -737,13 +740,13 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
 }
 
+#pragma mark :登录
 //正常登录成功相关处理  （非第三方）登录
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
-    //    NSLog(@"正常登录成功相关处理  = %@",response);
     
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
-    [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+    [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
     //    NSLog(@"access_token = %@",response[@"jpush_alias"]);
     [MobClick event:@"myofferUserLogin"];
@@ -766,8 +769,9 @@ typedef NS_ENUM(NSInteger,otherLoginType){
         
     }
     
+ 
+    
 }
-
 
 //去登录
 - (void)toLoginBtnOnClick:(UIButton *)sender{
@@ -861,7 +865,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 {
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
     
-    [[AppDelegate sharedDelegate] loginWithAccessToken:response[@"access_token"]];
+    [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     
     [MobClick profileSignInWithPUID:response[@"access_token"] provider:[userInfo valueForKey:@"provider"]];/*友盟统计记录用户账号*/
     
