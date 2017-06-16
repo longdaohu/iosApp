@@ -19,15 +19,11 @@
 @end
 
 @implementation ZhiXunCell
-static NSString  *identity = @"liuxue";
-+(instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
+
++ (instancetype)cellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    ZhiXunCell *cell =[tableView dequeueReusableCellWithIdentifier:identity];
     
-    if (!cell) {
-        
-        cell =[[ZhiXunCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity];
-    }
+    ZhiXunCell *cell = [[ZhiXunCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.indexPath = indexPath;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -60,7 +56,6 @@ static NSString  *identity = @"liuxue";
     self.inputTF = inputTF;
     inputTF.delegate = self;
     [inputTF setTintColor:XCOLOR_LIGHTBLUE];
-
     
     UIView *line = [[UIView alloc] init];
     [self.contentView addSubview:line];
@@ -113,20 +108,20 @@ static NSString  *identity = @"liuxue";
     self.spod.frame = group.spodFrame;
     
     
-    
     //监听分数输入框
     if (group.groupType == EditTypeSCore) {
         
         [self.inputTF addTarget:self action:@selector(limitMaxScore:) forControlEvents:UIControlEventEditingChanged];
         
     }
+ 
 }
 
 
 
 
 #pragma mark : UITextFieldDelegate
--(void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
     
     [self inputTextFieldOnEditing:YES];
     
@@ -139,6 +134,7 @@ static NSString  *identity = @"liuxue";
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
+
     [self inputTextFieldOnEditing:NO];
 
     if ([self.delegate respondsToSelector:@selector(zixunCell:indexPath:textFieldDidEndEditing:)]) {

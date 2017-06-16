@@ -7,29 +7,28 @@
 //
 
 #import "XWGJTJSectionGroup.h"
-#import "XWGJPeronInfoItem.h"
 @implementation XWGJTJSectionGroup
 
-+(instancetype)groupInitWithTitle:(NSString *)titleName andSecitonIcon:(NSString *)iconName andContensArray:(NSArray *)items
-{
-    return [[self alloc] initWithTitle:titleName andSecitonIcon:iconName andContensArray:items];
++ (instancetype)groupInitWithTitle:(NSString *)title celles:(NSArray *)celles{
+   
+    return [[self alloc] initWithTitle:title celles:celles];
 }
 
--(instancetype)initWithTitle:(NSString *)titleName andSecitonIcon:(NSString *)iconName andContensArray:(NSArray *)items
-{
-   
+-(instancetype)initWithTitle:(NSString *)title  celles:(NSArray *)celles{
+
     self = [super init];
     
     if (self) {
         
-        self.SectionIconName = iconName;
-        self.SectionTitleName = titleName;
-        self.cellItems = items;
-
+        self.sectionTitleName = title;
+        self.celles = [celles copy];
+        
     }
     
     return self;
 }
+
+
 
 
 

@@ -250,17 +250,12 @@
 		AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2494E1D5B215300DD7939 /* UpgradeViewController.m */; };
 		AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249501D5B215300DD7939 /* XWGJTiJiaoViewController.m */; };
 		AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249531D5B215300DD7939 /* Applycourse.m */; };
-		AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249571D5B215300DD7939 /* XWGJPeronInfoItem.m */; };
 		AEA249B81D5B215300DD7939 /* XWGJTJSectionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249591D5B215300DD7939 /* XWGJTJSectionGroup.m */; };
 		AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2495C1D5B215300DD7939 /* TiJiaoFooterView.m */; };
-		AEA249BA1D5B215300DD7939 /* XWGJJiBengTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2495E1D5B215300DD7939 /* XWGJJiBengTableViewCell.m */; };
-		AEA249BB1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2495F1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib */; };
 		AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249611D5B215300DD7939 /* XWGJKeyboardToolar.m */; };
 		AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249621D5B215300DD7939 /* XWGJKeyboardToolar.xib */; };
 		AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249641D5B215300DD7939 /* XWGJSectionHeaderView.m */; };
 		AEA249BF1D5B215300DD7939 /* XWGJSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249661D5B215300DD7939 /* XWGJSummaryView.m */; };
-		AEA249C01D5B215300DD7939 /* XWGJYiXiangTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249681D5B215300DD7939 /* XWGJYiXiangTableViewCell.m */; };
-		AEA249C11D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA249691D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib */; };
 		AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2496D1D5B215300DD7939 /* ApplyViewController.m */; };
 		AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2496E1D5B215300DD7939 /* ApplyViewController.xib */; };
 		AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */; };
@@ -873,15 +868,10 @@
 		AEA249501D5B215300DD7939 /* XWGJTiJiaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTiJiaoViewController.m; sourceTree = "<group>"; };
 		AEA249521D5B215300DD7939 /* Applycourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Applycourse.h; sourceTree = "<group>"; };
 		AEA249531D5B215300DD7939 /* Applycourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Applycourse.m; sourceTree = "<group>"; };
-		AEA249561D5B215300DD7939 /* XWGJPeronInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJPeronInfoItem.h; sourceTree = "<group>"; };
-		AEA249571D5B215300DD7939 /* XWGJPeronInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJPeronInfoItem.m; sourceTree = "<group>"; };
 		AEA249581D5B215300DD7939 /* XWGJTJSectionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTJSectionGroup.h; sourceTree = "<group>"; };
 		AEA249591D5B215300DD7939 /* XWGJTJSectionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTJSectionGroup.m; sourceTree = "<group>"; };
 		AEA2495B1D5B215300DD7939 /* TiJiaoFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiJiaoFooterView.h; sourceTree = "<group>"; };
 		AEA2495C1D5B215300DD7939 /* TiJiaoFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiJiaoFooterView.m; sourceTree = "<group>"; };
-		AEA2495D1D5B215300DD7939 /* XWGJJiBengTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJJiBengTableViewCell.h; sourceTree = "<group>"; };
-		AEA2495E1D5B215300DD7939 /* XWGJJiBengTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJJiBengTableViewCell.m; sourceTree = "<group>"; };
-		AEA2495F1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJJiBengTableViewCell.xib; sourceTree = "<group>"; };
 		AEA249601D5B215300DD7939 /* XWGJKeyboardToolar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJKeyboardToolar.h; sourceTree = "<group>"; };
 		AEA249611D5B215300DD7939 /* XWGJKeyboardToolar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJKeyboardToolar.m; sourceTree = "<group>"; };
 		AEA249621D5B215300DD7939 /* XWGJKeyboardToolar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJKeyboardToolar.xib; sourceTree = "<group>"; };
@@ -889,9 +879,6 @@
 		AEA249641D5B215300DD7939 /* XWGJSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJSectionHeaderView.m; sourceTree = "<group>"; };
 		AEA249651D5B215300DD7939 /* XWGJSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJSummaryView.h; sourceTree = "<group>"; };
 		AEA249661D5B215300DD7939 /* XWGJSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJSummaryView.m; sourceTree = "<group>"; };
-		AEA249671D5B215300DD7939 /* XWGJYiXiangTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJYiXiangTableViewCell.h; sourceTree = "<group>"; };
-		AEA249681D5B215300DD7939 /* XWGJYiXiangTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJYiXiangTableViewCell.m; sourceTree = "<group>"; };
-		AEA249691D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJYiXiangTableViewCell.xib; sourceTree = "<group>"; };
 		AEA2496C1D5B215300DD7939 /* ApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyViewController.h; sourceTree = "<group>"; };
 		AEA2496D1D5B215300DD7939 /* ApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyViewController.m; sourceTree = "<group>"; };
 		AEA2496E1D5B215300DD7939 /* ApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyViewController.xib; sourceTree = "<group>"; };
@@ -2168,8 +2155,6 @@
 			children = (
 				AEA249521D5B215300DD7939 /* Applycourse.h */,
 				AEA249531D5B215300DD7939 /* Applycourse.m */,
-				AEA249561D5B215300DD7939 /* XWGJPeronInfoItem.h */,
-				AEA249571D5B215300DD7939 /* XWGJPeronInfoItem.m */,
 				AEA249581D5B215300DD7939 /* XWGJTJSectionGroup.h */,
 				AEA249591D5B215300DD7939 /* XWGJTJSectionGroup.m */,
 			);
@@ -2181,9 +2166,6 @@
 			children = (
 				AEA2495B1D5B215300DD7939 /* TiJiaoFooterView.h */,
 				AEA2495C1D5B215300DD7939 /* TiJiaoFooterView.m */,
-				AEA2495D1D5B215300DD7939 /* XWGJJiBengTableViewCell.h */,
-				AEA2495E1D5B215300DD7939 /* XWGJJiBengTableViewCell.m */,
-				AEA2495F1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib */,
 				AEA249601D5B215300DD7939 /* XWGJKeyboardToolar.h */,
 				AEA249611D5B215300DD7939 /* XWGJKeyboardToolar.m */,
 				AEA249621D5B215300DD7939 /* XWGJKeyboardToolar.xib */,
@@ -2191,9 +2173,6 @@
 				AEA249641D5B215300DD7939 /* XWGJSectionHeaderView.m */,
 				AEA249651D5B215300DD7939 /* XWGJSummaryView.h */,
 				AEA249661D5B215300DD7939 /* XWGJSummaryView.m */,
-				AEA249671D5B215300DD7939 /* XWGJYiXiangTableViewCell.h */,
-				AEA249681D5B215300DD7939 /* XWGJYiXiangTableViewCell.m */,
-				AEA249691D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3482,7 +3461,6 @@
 				AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
-				AEA249BB1D5B215300DD7939 /* XWGJJiBengTableViewCell.xib in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
@@ -3531,7 +3509,6 @@
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
 				AE1FD74A1D5C929500FFD5A8 /* Pre-comp 1_0008.png in Resources */,
 				AEA24B051D5B24D200DD7939 /* ChangePasswordViewController.xib in Resources */,
-				AEA249C11D5B215300DD7939 /* XWGJYiXiangTableViewCell.xib in Resources */,
 				AEA24A0B1D5B224E00DD7939 /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
 				AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */,
@@ -3796,14 +3773,12 @@
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
-				AEA249B71D5B215300DD7939 /* XWGJPeronInfoItem.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
 				AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */,
 				AE1FD74D1D5C929500FFD5A8 /* MJRefreshAutoNormalFooter.m in Sources */,
 				AEA24AF81D5B24D200DD7939 /* UIViewController+RESideMenu.m in Sources */,
 				AEA24B851D5B25E000DD7939 /* FilterTableViewCell.m in Sources */,
-				AEA249BA1D5B215300DD7939 /* XWGJJiBengTableViewCell.m in Sources */,
 				AE892A211EBCA00F0035A31D /* MyOfferServiceMallHeaderFrame.m in Sources */,
 				56DB630B1C397FF7004DA145 /* Reachability.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
@@ -3934,7 +3909,6 @@
 				AE37088D1EB083F700502A62 /* MyOfferSubjecct.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* CatigaryScrollView.m in Sources */,
 				AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */,
-				AEA249C01D5B215300DD7939 /* XWGJYiXiangTableViewCell.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,

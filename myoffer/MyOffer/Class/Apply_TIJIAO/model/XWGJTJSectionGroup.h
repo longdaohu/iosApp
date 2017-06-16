@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 @interface XWGJTJSectionGroup : NSObject
-@property(nonatomic,copy)NSString *SectionTitleName;
-@property(nonatomic,copy)NSString *SectionIconName;
-@property(nonatomic,strong)NSArray *cellItems;
+@property(nonatomic,copy)NSString *sectionTitleName;
+@property(nonatomic,strong)NSArray *celles;
 
-+(instancetype)groupInitWithTitle:(NSString *)titleName andSecitonIcon:(NSString *)iconName andContensArray:(NSArray *)items;
++(instancetype)groupInitWithTitle:(NSString *)title celles:(NSArray *)celles;
 
 
 @end

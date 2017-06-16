@@ -271,7 +271,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     self.tableView.sectionFooterHeight =  SECTION_FOOTER_HEIGHT;
     
-//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     
 }
 

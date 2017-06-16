@@ -195,7 +195,7 @@
         pageNumber = 8;  //服务商城
     }else if([absoluteString isEqualToString:DOMAINURL]){
         pageNumber = 9;
-    }else if(![absoluteString containsString:DOMAINURL] && ![absoluteString containsString:@"www.sojump.hk"] && ![absoluteString containsString:@"www.apesk.com"]){
+    }else if(![absoluteString containsString:DOMAINURL] && ![absoluteString containsString:@"http://public.myoffer.cn"] && ![absoluteString containsString:@"www.sojump.hk"] && ![absoluteString containsString:@"www.apesk.com"]){
         pageNumber = 10;
     }
     

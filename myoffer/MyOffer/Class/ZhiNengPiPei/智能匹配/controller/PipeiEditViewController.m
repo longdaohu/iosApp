@@ -113,15 +113,12 @@
 //添加表头
 -(void)makeHeaderView
 {
-    XWeakSelf
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"通过REBAT大数据分析技术，运用独特TBDT算法，为你一键生成智能匹配方案。"];
-    headerView.actionBlock = ^{
-        
-        [weakSelf dismiss];
-        
-    };
+//    headerView.actionBlock = ^{ [weakSelf dismiss];};
     headerView.mj_y = - XNAV_HEIGHT;
+    
     [self.view insertSubview:headerView aboveSubview:self.tableView];
+ 
     self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h - XNAV_HEIGHT, 0, 0, 0);
 
 }
@@ -139,6 +136,8 @@
     
     //添加表头
     [self makeHeaderView];
+    
+    
     
 
 }

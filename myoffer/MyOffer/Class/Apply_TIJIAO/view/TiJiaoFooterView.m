@@ -11,8 +11,17 @@
 
 @property(nonatomic,strong)UIButton *selectBtn;
 @property(nonatomic,strong)UIButton *descBtn;
+@property(nonatomic,strong)UIButton *submit;
 
 @end
+
+typedef NS_ENUM(NSInteger,TiJiaoFooterViewButtonType) {
+
+    TiJiaoFooterViewButtonTypeDefault = 0,
+    TiJiaoFooterViewButtonTypeDesc,
+    TiJiaoFooterViewButtonTypeSubmit
+};
+
 
 @implementation TiJiaoFooterView
 
@@ -46,6 +55,7 @@
     [selectBtn setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateSelected];
     self.selectBtn = selectBtn;
     [self addSubview:selectBtn];
+    selectBtn.tag = TiJiaoFooterViewButtonTypeDefault;
     
     UIButton *descBtn =[[UIButton alloc] init];
     [descBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -54,6 +64,26 @@
     descBtn.titleLabel.numberOfLines = 0;
     [self addSubview:descBtn];
     self.descBtn = descBtn;
+    descBtn.tag = TiJiaoFooterViewButtonTypeDesc;
+
+    
+    UIButton *submit =[[UIButton alloc] init];
+    [submit setTitle:@"提交审核" forState:UIControlStateNormal];
+    [submit setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
+    [submit setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
+    [submit setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [submit addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    [submit setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    submit.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self addSubview:submit];
+    submit.enabled = NO;
+    self.submit = submit;
+    submit.tag = TiJiaoFooterViewButtonTypeSubmit;
+    submit.layer.cornerRadius = CORNER_RADIUS;
+    submit.layer.masksToBounds = true;
+    
+    self.backgroundColor = XCOLOR_WHITE;
+
 }
 
 -(void)setTitle:(NSString *)title
@@ -71,11 +101,22 @@
 
 
 -(void)onClick:(UIButton *)sender{
+ 
+    
+    if (sender == self.selectBtn) {
+        
+        sender.selected    = !sender.selected;
+        self.submit.enabled    =  sender.selected;
+        
+        return;
+    }
+    
     
      if (self.actionBlock) {
         
         self.actionBlock(sender);
     }
+    
 }
 
 
@@ -94,16 +135,21 @@
     
     if (self.title) {
         
-        CGFloat desX = CGRectGetMaxY(self.selectBtn.frame) + 5;
-        CGFloat desY = CGRectGetMinY(self.selectBtn.frame);
-        CGFloat desW = contentSize.width - desX - ITEM_MARGIN;
+        CGFloat des_X = CGRectGetMaxY(self.selectBtn.frame) + 5;
+        CGFloat des_Y = CGRectGetMinY(self.selectBtn.frame);
+        CGFloat des_W = contentSize.width - des_X - ITEM_MARGIN;
         
-        CGSize titleSize =[self.title boundingRectWithSize:CGSizeMake(desW, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
+        CGSize titleSize =[self.title boundingRectWithSize:CGSizeMake(des_W, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
         
-        self.descBtn.frame =CGRectMake(desX, desY, desW, titleSize.height);
+        CGFloat des_H = titleSize.height;
         
+        self.descBtn.frame =CGRectMake(des_X, des_Y, des_W, des_H);
         
-        self.frame    = CGRectMake(0, 0, contentSize.width, CGRectGetMaxY(self.descBtn.frame) + 50);
+        CGFloat sub_Y = des_H + des_Y + 25;
+
+        self.submit.frame = CGRectMake(25, sub_Y, contentSize.width - 50, 50);
+        
+        self.frame    = CGRectMake(0, 0, contentSize.width, CGRectGetMaxY(self.submit.frame) + 25);
     }
     
    

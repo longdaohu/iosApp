@@ -6,7 +6,7 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#define ICON_WIDTH  30
+
 #import "XWGJSectionHeaderView.h"
 #import "XWGJTJSectionGroup.h"
 
@@ -38,15 +38,11 @@
     if (self) {
         
 
-        self.contentView.backgroundColor = XCOLOR_CLEAR;
-        
-        self.iconView =[[UIImageView alloc] init];
-        self.iconView.contentMode = UIViewContentModeCenter;
-        [self.contentView addSubview:self.iconView];
+        self.contentView.backgroundColor = XCOLOR_BG;
         
         self.SectionTitleLab =[[UILabel alloc] init];
         self.SectionTitleLab.font = [UIFont systemFontOfSize:Uni_subject_FontSize];
-        self.SectionTitleLab.textColor = XCOLOR_LIGHTBLUE;
+        self.SectionTitleLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:self.SectionTitleLab];
         
     }
@@ -59,8 +55,7 @@
     
     _group = group;
     
-     self.iconView.image =[UIImage imageNamed:_group.SectionIconName];
-     self.SectionTitleLab.text = _group.SectionTitleName;
+     self.SectionTitleLab.text = _group.sectionTitleName;
     
 }
 
@@ -70,17 +65,10 @@
     
     CGSize contentSize = self.bounds.size;
     
-    CGFloat iconX = ITEM_MARGIN - 5;
-    CGFloat iconW = ICON_WIDTH;
-    CGFloat iconH = iconW;
-    CGFloat iconY = contentSize.height - iconH;
-    self.iconView.frame = CGRectMake(iconX, iconY, iconW, iconH);
-    
-    
-    CGFloat titleX = CGRectGetMaxX(self.iconView.frame);
+    CGFloat titleX = 14;
     CGFloat titleW = contentSize.width - titleX - ITEM_MARGIN;
-    CGFloat titleH = iconW;
-    CGFloat titleY = iconY;
+    CGFloat titleH = 35;
+    CGFloat titleY = contentSize.height - titleH;
     self.SectionTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
 }

@@ -8,17 +8,22 @@
 
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSInteger,EditType){
-
+    
+    EditTypeDefault = 0,
     EditTypeCountry,
     EditTypeSuject,
+    EditTypeSujectplan,
     EditTypeUniversity,
+    EditTypePhoneNomal,
     EditTypePhone,
     EditTypeGrade,
     EditTypeSCore,
     EditTypeRegistPhone,
     EditTypeVerificationCode,
     EditTypePasswd,
-
+    EditTypeTime,
+    EditTypeYSlower,
+    EditTypeYSavg
 };
 
 typedef NS_ENUM(NSInteger,CellGroupType){
@@ -56,3 +61,5 @@ typedef NS_ENUM(NSInteger,CellGroupType){
 
 
 @end
+
+
