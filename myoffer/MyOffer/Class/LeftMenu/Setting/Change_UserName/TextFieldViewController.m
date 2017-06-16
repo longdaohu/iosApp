@@ -69,6 +69,7 @@
 - (void)rightDone {
     
     NSString *userName = self.textField.text;
+    
     NSString *temp = [userName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
      if (userName.length == 0 || temp.length == 0) {

@@ -649,13 +649,12 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     }
     
     XWeakSelf
-    
-    
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes}  success:^(NSInteger statusCode, id response) {
-                                  
+  
+    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
+        
         [weakSelf  updateCancelSelectedCell];
         
-     }];
+    }];
     
 }
 
@@ -715,13 +714,12 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     
     XWeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult
-                           parameters:@{@"uIds":universtityIdes}
-                              success:^(NSInteger statusCode, id response) {
-                                  
-                                  [weakSelf updateCancelSelectedSection];
-                                
-                              }];
+    
+    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"uIds":universtityIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
+    
+        [weakSelf updateCancelSelectedSection];
+
+    }];
     
 }
 
