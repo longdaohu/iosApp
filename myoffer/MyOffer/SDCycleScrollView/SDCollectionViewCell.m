@@ -43,12 +43,29 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self setupImageView];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        UIColor *colorOne = [UIColor colorWithWhite:0 alpha:0];
+        UIColor *colorThree = [UIColor colorWithWhite:0 alpha:0.6];
+        gradient.colors           = [NSArray arrayWithObjects:
+                                     (id)colorOne.CGColor,
+//                                     (id)colorTwo.CGColor,
+                                     (id)colorThree.CGColor,
+                                     nil];
+//        gradient.locations = @[@0.3, @0.5, @1.0];
+        gradient.startPoint = CGPointMake(0, 0);
+        gradient.endPoint = CGPointMake(0, 1);
+        [self.contentView.layer addSublayer:gradient];
+        self.gradient = gradient;
+        
         [self setupTitleLabel];
   
-        UIImageView *maskBgView =[[UIImageView alloc] init];
-        maskBgView.image = [UIImage imageNamed:@"gradient_bg"];
-        self.maskBgView = maskBgView;
-        [self addSubview:maskBgView];
+//        UIImageView *maskBgView =[[UIImageView alloc] init];
+//        maskBgView.image = [UIImage imageNamed:@"gradient_bg"];
+//        self.maskBgView = maskBgView;
+//        [self addSubview:maskBgView];
+        
+
     }
     
     return self;
@@ -96,6 +113,7 @@
     if (_titleLabel.hidden) {
         _titleLabel.hidden = NO;
     }
+ 
 }
 
 
@@ -115,7 +133,9 @@
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     }
     
-    self.maskBgView.frame = CGRectMake(0, self.sd_height-80, self.sd_width, 80);
+    CGFloat bgHeight = 120;
+    CGFloat bgY = self.title ? self.sd_height - bgHeight :  self.sd_height - bgHeight * 0.5;
+    self.gradient.frame = CGRectMake(0, bgY, self.sd_width, bgHeight);
 }
 
 @end

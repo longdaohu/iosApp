@@ -565,20 +565,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:GDLocalizedString(@"NetRequest-OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-        
-        
-        //先删除 已选择专业数组列表
-        if (weakSelf.cancelindexPathes.count > 0) {
-            
-            [weakSelf commitCancelselectCell];
-            
-            return ;
-        }
-        
-        //不存在已选择专业数组列表时，再判断是否存在分组列表
-        if (weakSelf.cancelSetions.count > 0)[weakSelf commitCancelSectionView];
-        
+        //先删除 已选择专业数组列表  > 再删除分区头
+        [weakSelf commitCancelselectCell];
         
     }];
     
@@ -632,8 +620,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 #pragma mark : 用于删除cell,先删除cell再删除sectionHeader
 
-- (void)commitCancelselectCell
-{
+- (void)commitCancelselectCell{
     
     //提取要删除的 已选择学校专业ID
     NSMutableArray *courseIdes = [NSMutableArray array];
@@ -648,9 +635,23 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
     }
     
+    //提取要删除的 已选择学校的ID
+    NSMutableArray *universtityIdes = [NSMutableArray array];
+    
+    for (NSString *sectionStr in self.cancelSetions) {
+        
+        NSInteger section = sectionStr.integerValue;
+        
+        UniversityFrameNew *uni_Frame = self.groups[section];
+        
+        [universtityIdes addObject:uni_Frame.universtiy.NO_id];
+    }
+    
+    
+    
     XWeakSelf
   
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes,@"uIds":universtityIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
         
         [weakSelf  updateCancelSelectedCell];
         
@@ -681,20 +682,18 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     //3、 如里存在要删除的分组数据，再进入删除分区功能
     if (self.cancelSetions.count > 0){
     
-        [self commitCancelSectionView];
+        [self updateCancelSelectedSection];
         
-    }else{
-    
-        [self updateEditStatusFooterView];
+        return;
     }
     
-    
-    
-    
+     [self updateEditStatusFooterView];
     
 }
 
-#pragma mark : 删除sectionHeader
+/*
+ 
+ #pragma mark : 删除sectionHeader
 
 -(void)commitCancelSectionView{
     
@@ -722,7 +721,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     }];
     
 }
-
+*/
 
 //提交删除已选项 indexPath.section 成功后，更新UI
 - (void)updateCancelSelectedSection{
@@ -747,14 +746,13 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     //5、动画刷新未选中分组
     NSMutableIndexSet *reloadSet = [NSMutableIndexSet indexSet];
+    
     for (NSInteger index = 0; index < self.groups.count; index++) {
         
         [reloadSet addIndex:index];
     }
     
     [self.tableView reloadSections:reloadSet withRowAnimation:UITableViewRowAnimationFade];
-    
-    
     
     [self  emptyViewShowWithResult:self.groups];
     
@@ -769,12 +767,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
     
     [self updateEditStatusFooterView];
-
-    
-    
-    
     
 }
+
 
 - (void)emptyViewShowWithResult:(NSArray *)resultes{
     

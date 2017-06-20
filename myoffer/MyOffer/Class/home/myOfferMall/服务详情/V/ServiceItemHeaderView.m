@@ -57,8 +57,8 @@
     self.bgView = bgView;
     [self addSubview:bgView];
     bgView.layer.cornerRadius = CORNER_RADIUS;
-    bgView.layer.borderWidth = 1;
-    bgView.layer.borderColor =  XCOLOR_line.CGColor;
+//    bgView.layer.borderWidth = 1;
+//    bgView.layer.borderColor =  XCOLOR_line.CGColor;
     
     //1、服务名称
     UILabel *name = [[UILabel alloc] init];

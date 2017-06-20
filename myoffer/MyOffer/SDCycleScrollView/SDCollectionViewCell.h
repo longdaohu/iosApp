@@ -36,6 +36,7 @@
 
 @property (weak, nonatomic) UIImageView *imageView;
 @property (weak, nonatomic) UIView *maskBgView;
+@property(nonatomic,strong)CAGradientLayer *gradient;
 @property (copy, nonatomic) NSString *title;
 
 @property (nonatomic, strong) UIColor *titleLabelTextColor;

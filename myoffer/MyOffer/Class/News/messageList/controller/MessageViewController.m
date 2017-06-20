@@ -326,12 +326,12 @@
     
     self.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     
-    self.autoLoopView.imageURLStringsGroup  =  [self.banner valueForKey:@"cover_url"];
+//    self.autoLoopView.imageURLStringsGroup  =  [self.banner valueForKey:@"cover_url"];
     
     self.autoLoopView.userInteractionEnabled = self.banner.count ? YES : NO;
-  
     self.autoLoopView.titlesGroup = [self.banner valueForKey:@"title"];
     self.autoLoopView.imageURLStringsGroup = [self.banner valueForKey:@"cover_url"];
+    
     [self.tableView.mj_header endRefreshing];
 }
 

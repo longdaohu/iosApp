@@ -272,7 +272,7 @@
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    [webView evaluateJavaScript:@"document.body.style.padding = '0  15px  30px  15px';" completionHandler:^(id Result, NSError * error) {
+    [webView evaluateJavaScript:@"document.body.style.padding = '0  15px  30px  15px';;" completionHandler:^(id Result, NSError * error) {
      }];
     
     

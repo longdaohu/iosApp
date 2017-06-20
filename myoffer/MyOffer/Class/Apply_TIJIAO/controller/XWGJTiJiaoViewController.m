@@ -640,7 +640,7 @@ typedef enum {
             cell.inputTF.inputView = self.SubjectPicker;
             break;
         case EditTypeSCore:
-            cell.inputTF.keyboardType = UIKeyboardTypePhonePad;
+            cell.inputTF.keyboardType = UIKeyboardTypeNumberPad;
             break;
         case EditTypeGrade:
             cell.inputTF.inputView = self.GradePicker;

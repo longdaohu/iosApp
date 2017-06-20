@@ -216,7 +216,9 @@ static AppDelegate *__sharedDelegate;
     [MobClick setEncryptEnabled:YES];
     [MobClick setLogEnabled:YES];
     
-    [WXApi registerApp:@"wx3b0cb66502388846" withDescription:@"demo 2.0"];
+//    [WXApi registerApp:@"wx3b0cb66502388846" withDescription:@"demo 2.0"];
+    [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
+
  }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

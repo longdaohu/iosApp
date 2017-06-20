@@ -58,7 +58,6 @@
     self.call_btn = call_btn;
     [self addSubview:call_btn];
     [call_btn setImage:[UIImage imageNamed:@"QQService"] forState:UIControlStateNormal];
-    call_btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [call_btn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -128,21 +127,21 @@
     CGFloat left_Y = 0.5 * (contentSize.height - left_H);
     self.left_line.frame = CGRectMake(left_X, left_Y, left_W, left_H);
     
-    CGFloat call_X = CGRectGetMaxX(self.left_line.frame);
-    CGFloat call_Y = left_Y - margin_min;
-    CGFloat call_W = 50;
+    CGFloat call_X = CGRectGetMaxX(self.left_line.frame) + margin_min;
+    CGFloat call_Y = left_Y;
+    CGFloat call_W = 30;
     CGFloat call_H = call_W;
     self.call_btn.frame = CGRectMake(call_X, call_Y, call_W, call_H);
-  
-    CGFloat zi_X = call_X;
-    CGFloat zi_Y = call_Y + call_H - margin_min;
-    CGFloat zi_W = call_W;
+
+    CGFloat zi_X = left_X ;
+    CGFloat zi_Y = call_Y + call_H ;
+    CGFloat zi_W = call_W  + 2 * margin_min;
     CGFloat zi_H =  20;
     self.zi_Lab.frame = CGRectMake(zi_X, zi_Y, zi_W, zi_H);
     
     
     CGFloat right_W = left_W;
-    CGFloat right_X = CGRectGetMaxX(self.call_btn.frame);
+    CGFloat right_X = CGRectGetMaxX(self.call_btn.frame) + margin_min;
     CGFloat right_Y = left_Y;
     CGFloat right_H = left_H;
     self.right_line.frame = CGRectMake(right_X, right_Y, right_W, right_H);

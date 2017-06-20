@@ -83,7 +83,6 @@
     [self.web loadRequest:request];
     [self.view addSubview:self.web];
     self.web.delegate = self;
-
     
 }
 
@@ -106,13 +105,14 @@
 //        [self.progress hideAnimated:YES afterDelay:0.5];
 //    }
     
+//    NSString *path = [webView stringByEvaluatingJavaScriptFromString:@"var abc = document.getElementsByTagName('body')[0]; if(abc.children.length == 0){} "];
+    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
     
-    
-    NSString *absoluteString = request.URL.absoluteString;
+     NSString *absoluteString = request.URL.absoluteString;
     
     NSInteger pageNumber = DEFAULT_NUMBER;
     if ([absoluteString containsString:@"app:appJump"]) {
@@ -137,6 +137,9 @@
         pageNumber = 9;
    
     }else{
+        
+        
+        
     
         if (request.allHTTPHeaderFields[@"apikey"].length == 0) {
             

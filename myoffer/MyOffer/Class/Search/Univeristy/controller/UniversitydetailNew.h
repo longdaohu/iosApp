@@ -15,8 +15,8 @@
 @property(nonatomic,copy)NSString     *country;
 @property(nonatomic,copy)NSString     *state;
 @property(nonatomic,copy)NSString     *city;
-@property(nonatomic,copy)NSString        *address_long;
-@property(nonatomic,copy)NSString        *address_short;
+@property(nonatomic,copy)NSString     *address_long;
+@property(nonatomic,copy)NSString     *address_short;
 @property(nonatomic,strong)NSNumber   *found; //建校年份
 @property(nonatomic,copy)NSString     *logo;
 @property(nonatomic,copy)NSString     *address;

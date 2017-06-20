@@ -241,6 +241,7 @@ static NSString *identify = @"pay";
     
     [[AppDelegate sharedDelegate] updateUmeng];
     
+ 
     NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {

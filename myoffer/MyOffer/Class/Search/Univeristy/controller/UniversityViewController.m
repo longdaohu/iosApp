@@ -220,9 +220,10 @@ typedef enum {
     
 }
 
-#pragma mark ——— 设置控件数据
+#pragma mark : 设置控件数据
 -(void)makeUIWithUni:(UniversitydetailNew *)university{
     
+    self.uni_id = university.NO_id;
     
     self.favorited = university.favorited;
     
