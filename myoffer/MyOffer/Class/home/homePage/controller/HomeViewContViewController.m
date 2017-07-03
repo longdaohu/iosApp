@@ -36,6 +36,7 @@
 #import "MyOfferAutoRunBanner.h"
 #import "HomeHeaderFrame.h"
 #import "CatigoryViewController.h"
+#import "MyofferUpdateView.h"
 
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
@@ -391,7 +392,7 @@
 -(void)makeTableHeader
 {
   
-    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.headerFrame.Header_Height) withactionBlock:^(NSInteger tag) {
+    HomeHeaderView *TableHeaderView =[HomeHeaderView headerViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.headerFrame.Header_Height) actionBlock:^(NSInteger tag) {
         [self HomeHeaderViewWithTag:tag];
     }];
     
@@ -675,42 +676,53 @@
 //检查版本更新
 -(void)checkAPPVersion
 {
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
-    [NSURLConnection connectionWithRequest:req delegate:self];
-}
-//检查版本更新
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
     
-    NSError *error;
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    //[NSURLConnection connectionWithRequest:req delegate:self];
     
-    NSDictionary *appInfo = (NSDictionary *)jsonObject;
-    NSArray *infoContent = [appInfo objectForKey:@"results"];
-    NSString *storeVersion = [[infoContent objectAtIndex:0] objectForKey:@"version"];
-    NSString *storeVersionStr = [storeVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
-    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
-    NSString *currentVersionStr = [currentVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
-    
-    if (currentVersionStr.integerValue < storeVersionStr.integerValue) {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        // 网络请求完成之后就会执行，NSURLSession自动实现多线程
+//        NSLog(@"%@",[NSThread currentThread]);
+        
+        if (data && (error == nil)) {
+            
+            // 网络访问成功
+            NSError *error;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            
+            NSDictionary *appInfo = (NSDictionary *)jsonObject;
+            NSArray *store_results = [appInfo objectForKey:@"results"];
+            NSString *storeVersionStr = [[store_results objectAtIndex:0] objectForKey:@"version"];
+            NSString *storeVersion = [storeVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
+            
+            
+            NSDictionary *appDic = [[NSBundle mainBundle] infoDictionary];
+            NSString *ccurrentVersionStr = [appDic objectForKey:@"CFBundleShortVersionString"];
+            NSString *currentVersion = [ccurrentVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
+            
+            if (currentVersion.integerValue < storeVersion.integerValue) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //更新UI操作
+                    //.....
+                    [[MyofferUpdateView updateView] show];
 
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"有可用的新版本！" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"忽略此版本" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"访问Appstore" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [self CaseAppstore];
-        }];
+                });
+            }
+            
+        } else {
+            // 网络访问失败
+        }
         
-        [alertController addAction:cancelAction];
-        [alertController addAction:commitAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-    }
+    }];
     
+    [task resume];
 }
+
+
 /*
-
 ENGLISH  设置环境
 --用户语言环境通知服务器----
 -(void)UserLanguage
@@ -945,6 +957,9 @@ ENGLISH  设置环境
     
     [MobClick event:@"home_shearchItemClick"];
     [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+    
+//    [[MyofferUpdateView updateView] show];
+
 }
 
 //跳转LandingPage
@@ -1005,16 +1020,6 @@ ENGLISH  设置环境
 
     });
     
-}
-
-//跳转到appstore下载页面
--(void)CaseAppstore
-{
-    NSString *appid = @"1016290891";
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
-                                                                     
-                                                                     @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid]]];
 }
 
 

@@ -22,7 +22,7 @@
         
         self.mengView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_Mask"]];
         self.mengView.alpha = 0.7;
-        self.mengView.contentMode = UIViewContentModeScaleAspectFill;
+        self.mengView.contentMode = UIViewContentModeScaleToFill;
         [self.contentView addSubview:self.mengView];
         
         self.titleLab = [UILabel labelWithFontsize:KDUtilSize(15)  TextColor:XCOLOR_WHITE TextAlignment:NSTextAlignmentLeft];

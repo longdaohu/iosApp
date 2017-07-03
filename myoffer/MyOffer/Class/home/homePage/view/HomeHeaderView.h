@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "HomeHeaderFrame.h"
 
-typedef void(^HomeHeaderViewBlock)(NSInteger itemTag);
+typedef void(^HomeHeaderViewBlock)(NSInteger);
 @interface HomeHeaderView : UIView
 @property(nonatomic,strong)HomeHeaderFrame *headerFrame;
 @property(nonatomic,copy)HomeHeaderViewBlock actionBlock;
 
-+ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock;
++ (instancetype)headerViewWithFrame:(CGRect)frame actionBlock:(HomeHeaderViewBlock)actionBlock;
 
 @end

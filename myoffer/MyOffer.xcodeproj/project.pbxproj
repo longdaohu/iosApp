@@ -401,6 +401,7 @@
 		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
 		AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC47A411ECC20D60085F19A /* UniverstityTCell.m */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
+		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
 		AEE9FAE31DC87BCF00D732A7 /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9FAE21DC87BCF00D732A7 /* LeftMenuHeaderView.m */; };
@@ -1143,6 +1144,8 @@
 		AEC47A401ECC20D60085F19A /* UniverstityTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniverstityTCell.h; sourceTree = "<group>"; };
 		AEC47A411ECC20D60085F19A /* UniverstityTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniverstityTCell.m; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
+		AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUpdateView.h; sourceTree = "<group>"; };
+		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2567,6 +2570,8 @@
 				AEA24A611D5B23F600DD7939 /* HomeThirdTableViewCell.m */,
 				AEA24A641D5B23F600DD7939 /* UniCollectionViewCell.h */,
 				AEA24A651D5B23F600DD7939 /* UniCollectionViewCell.m */,
+				AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */,
+				AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3638,6 +3643,7 @@
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				5672E8B21CCBA9730099FDFC /* RNCachingURLProtocol.m in Sources */,
 				AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */,
+				AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */,
 				AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */,
 				463E3AA61B23105F00E0BAF8 /* KDActionSheet.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,

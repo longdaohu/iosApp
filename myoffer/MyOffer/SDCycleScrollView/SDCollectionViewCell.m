@@ -60,10 +60,6 @@
         
         [self setupTitleLabel];
   
-//        UIImageView *maskBgView =[[UIImageView alloc] init];
-//        maskBgView.image = [UIImage imageNamed:@"gradient_bg"];
-//        self.maskBgView = maskBgView;
-//        [self addSubview:maskBgView];
         
 
     }

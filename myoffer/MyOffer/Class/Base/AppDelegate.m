@@ -374,7 +374,8 @@ static AppDelegate *__sharedDelegate;
     
     NSString *savedToken = [[NSString alloc] initWithData:[Keychain keychainItemDataWithIdentifier:@"token"] encoding:NSUTF8StringEncoding];
 
-    if (KDUtilIsStringValid(savedToken)) {
+
+    if (KDUtilIsStringValid(savedToken)) { 
         
           _accessToken = savedToken;
        }

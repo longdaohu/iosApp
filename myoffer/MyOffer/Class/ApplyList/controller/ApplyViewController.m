@@ -386,7 +386,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
    
         
         //如果学校被选择状态，在先中cell时，要删除学校的选中状态
-        NSString *sectionStr = [NSString stringWithFormat:@"%ld",indexPath.section];
+        NSString *sectionStr = [NSString stringWithFormat:@"%ld",(long)indexPath.section];
         if ([self.cancelSetions containsObject: sectionStr]) {
             
             [self.cancelSetions removeObject:sectionStr];

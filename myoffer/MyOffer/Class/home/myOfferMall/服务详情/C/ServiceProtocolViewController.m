@@ -99,7 +99,7 @@
     [bgView addSubview: headerLab];
     headerLab.backgroundColor = XCOLOR_WHITE;
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header_H - 1, bg_W, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, header_H - LINE_HEIGHT, bg_W, LINE_HEIGHT)];
     line.backgroundColor = XCOLOR_line;
     [bgView addSubview:line];
     

@@ -32,7 +32,7 @@
 @implementation HomeHeaderView
 
  
-+ (instancetype)headerViewWithFrame:(CGRect)frame withactionBlock:(HomeHeaderViewBlock)actionBlock
++ (instancetype)headerViewWithFrame:(CGRect)frame actionBlock:(HomeHeaderViewBlock)actionBlock
 {
     
     HomeHeaderView *headerView = [[HomeHeaderView alloc]  initWithFrame:frame];
@@ -89,6 +89,7 @@
         HeadItem *item = [HeadItem itemInitWithTitle:self.itemTitles[i] imageName:self.itemImages[i]];
         item.tag       =  i;
         item.actionBlock = ^(NSInteger index){
+            
             [self buttonClick:index];
         };
         [self.downView addSubview:item];

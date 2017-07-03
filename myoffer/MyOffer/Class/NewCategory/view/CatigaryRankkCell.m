@@ -32,7 +32,6 @@
     self.iconView.image = [UIImage imageNamed:rank.iconName];
     self.titleLab.text = rank.titleName;
     self.subTitleLab.text = rank.subTitle;
-    
 }
 
 

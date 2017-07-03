@@ -199,8 +199,8 @@
     //密码
    }else if (group.groupType == EditTypePasswd) {
         
-        [self.rightBtn setBackgroundImage:XImage(@"hidepassword")forState:UIControlStateNormal];
-        [self.rightBtn setBackgroundImage:XImage(@"showpassword")forState:UIControlStateSelected];
+        [self.rightBtn setBackgroundImage:XImage(@"hide_password")forState:UIControlStateNormal];
+        [self.rightBtn setBackgroundImage:XImage(@"show_password")forState:UIControlStateSelected];
         self.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.inputTF.secureTextEntry = YES;
     
