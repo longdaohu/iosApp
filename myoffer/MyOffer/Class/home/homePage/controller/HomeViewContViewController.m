@@ -885,8 +885,6 @@ ENGLISH  设置环境
 {
     [MobClick event:@"WoYaoLiuXue"];
     
-//    [self.navigationController pushViewController:[[WYLXViewController alloc] init] animated:YES];
-    
     [self presentViewController:[[WYLXViewController alloc] init]  animated:YES completion:nil];
     
 }
@@ -958,7 +956,6 @@ ENGLISH  设置环境
     [MobClick event:@"home_shearchItemClick"];
     [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
     
-//    [[MyofferUpdateView updateView] show];
 
 }
 

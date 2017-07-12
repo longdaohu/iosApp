@@ -162,8 +162,9 @@
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
     NSArray *times = [MessageFrame.article.update_at componentsSeparatedByString:@"/"];
+    
     if(times.count >= 3){
-        NSString *title = [NSString stringWithFormat:@"阅读量 %@  |  %@年%@月%@日",MessageFrame.article.view_count,times.lastObject,times[1],times.firstObject];
+        NSString *title = [NSString stringWithFormat:@"阅读量 %@  |  %@年%@月%@日",MessageFrame.article.view_count,times.lastObject,times.firstObject,times[1]];
         [self.TimeBtn setTitle:title forState:UIControlStateNormal];
     }
  

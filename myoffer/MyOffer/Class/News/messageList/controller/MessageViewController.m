@@ -16,6 +16,7 @@
 #import "MyOfferArticle.h"
 #import "MessageSectionHeaderView.h"
 #import "MyOfferAutoRunBanner.h"
+#import "MessageTopicViewController.h"
 
 @interface MessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -54,7 +55,7 @@
 
 @implementation MessageViewController
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     
     [super viewWillAppear:animated];
@@ -290,8 +291,9 @@
 
 - (void)caseLandingPageWithIndex:(NSInteger)index{
 
-    MyOfferAutoRunBanner  *item  = self.banner[index];
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:item.banner_id] animated:YES];
+//    MyOfferAutoRunBanner  *item  = self.banner[index];
+//    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:item.banner_id] animated:YES];
+//    [self.navigationController pushViewController:[[MessageCountryTopicVController alloc] init] animated:YES];
 
 }
 

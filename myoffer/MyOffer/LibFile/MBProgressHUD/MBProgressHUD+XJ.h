@@ -24,6 +24,5 @@
 + (void)hideHUD;
 + (MBProgressHUD *)showSuccessWithMessage:(NSString *)message ToView:(UIView *)view;
 
-//+ (MBProgressHUD *)showCustomViewToSuperView:(UIView *)view;
 
 @end

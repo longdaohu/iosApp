@@ -225,11 +225,7 @@
          }];
           _allResultCount = [response[@"count"] integerValue];
          
-//         if (_result.count == 0) {
-//             
-//             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//  
-//         }
+ 
          
          self.shouldShowLoadMoreIndicator = _result.count < _allResultCount;
    

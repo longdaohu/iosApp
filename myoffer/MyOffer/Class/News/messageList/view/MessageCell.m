@@ -9,6 +9,7 @@
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "MyOfferArticle.h"
+#import "messgeNewModel.h"
 
 @interface MessageCell ()
 //图片
@@ -91,26 +92,46 @@
 {
     _messageFrame =  messageFrame ;
     
-    NSString *path = messageFrame.News.cover_url_thumbnail.length ? messageFrame.News.cover_url_thumbnail : messageFrame.News.cover_url;
+    NSString *path = @"";
+    NSString *title = @"";
+    NSString *time = @"";
+    NSString *count = @"";
+
+    if (messageFrame.News) {
+        
+        path = messageFrame.News.cover_url_thumbnail.length ? messageFrame.News.cover_url_thumbnail : messageFrame.News.cover_url;
+        title = messageFrame.News.title;
+        
+        NSInteger  length = messageFrame.News.update_at.length > 10 ? 10 : messageFrame.News.update_at.length;
+        
+        time = [messageFrame.News.update_at substringToIndex:length];
+        
+        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.News.view_count];
+        
+    }else{
+        
+        path = messageFrame.message.cover_url;
+        title = messageFrame.message.title;
+        time  = messageFrame.message.update_at;
+        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.message.view_count];
+
+     }
+    
     [self.Logo KD_setImageWithURL:path];
-    self.Logo.frame = messageFrame.LogoFrame;
-    
-    self.TitleLab.text = messageFrame.News.title;
-    self.TitleLab.frame = messageFrame.TitleFrame;
-    
-    NSString *time = [messageFrame.News.update_at substringToIndex:10];
+    self.TitleLab.text = title;
     [self.update_at_Btn setTitle:time forState:UIControlStateNormal];
-    self.update_at_Btn.frame = messageFrame.TimeFrame;
-    
-    NSString *count = [NSString stringWithFormat:@"%@阅读",messageFrame.News.view_count];
     [self.view_count_Btn setTitle:count forState:UIControlStateNormal];
+
+
+    self.Logo.frame = messageFrame.LogoFrame;
+    self.TitleLab.frame = messageFrame.TitleFrame;
+    self.update_at_Btn.frame = messageFrame.TimeFrame;
     self.view_count_Btn.frame = messageFrame.FocusFrame;
-    
-    
     self.line.frame = messageFrame.lineFrame;
     
-    
 }
+
+
 
 - (void)separatorLineShow:(BOOL)show{
     

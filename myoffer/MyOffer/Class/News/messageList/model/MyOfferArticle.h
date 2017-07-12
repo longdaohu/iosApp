@@ -18,6 +18,4 @@
 @property(nonatomic,copy)NSString *desc;
 @property(nonatomic,copy)NSString *logo;
 
-
-
 @end

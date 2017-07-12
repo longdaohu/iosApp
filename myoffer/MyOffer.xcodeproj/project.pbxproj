@@ -123,6 +123,7 @@
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
 		AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */; };
+		AE275D661F0F7F0B00A3D10F /* messageTopicGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */; };
 		AE2A59A21E6EBDF5001F5C8F /* MessageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
@@ -154,6 +155,17 @@
 		AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D71E0A1AD00038826A /* SDCollectionViewCell.m */; };
 		AE3943E11E0A1AD00038826A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */; };
 		AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */; };
+		AE3D44AE1F14796E00B1B094 /* MessageCountryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D44AD1F14796E00B1B094 /* MessageCountryViewController.m */; };
+		AE3D44B11F14BD8C00B1B094 /* MessageCountryTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D44B01F14BD8C00B1B094 /* MessageCountryTopicModel.m */; };
+		AE3FC8061F135D0600A0C020 /* MessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC8051F135D0600A0C020 /* MessageCenterViewController.m */; };
+		AE3FC80C1F135FA000A0C020 /* MyofferSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC80B1F135FA000A0C020 /* MyofferSectionView.m */; };
+		AE3FC80F1F13602500A0C020 /* MessageSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC80E1F13602500A0C020 /* MessageSubViewController.m */; };
+		AE3FC8121F1360BA00A0C020 /* MessageTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC8111F1360BA00A0C020 /* MessageTopicView.m */; };
+		AE3FC8151F13611D00A0C020 /* MessageTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC8141F13611D00A0C020 /* MessageTopicModel.m */; };
+		AE3FC8181F1362AC00A0C020 /* MessageTopiccGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC8171F1362AC00A0C020 /* MessageTopiccGroup.m */; };
+		AE3FC81B1F1367D700A0C020 /* MessageTopicFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC81A1F1367D700A0C020 /* MessageTopicFooterView.m */; };
+		AE3FC81E1F137A5D00A0C020 /* MessageTopicHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC81D1F137A5D00A0C020 /* MessageTopicHeaderViewController.m */; };
+		AE3FC8211F137E4100A0C020 /* MessageHotTopicMedel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FC8201F137E4100A0C020 /* MessageHotTopicMedel.m */; };
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44F7861EA7744A00390809 /* CatigaryHotCityCell.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
@@ -388,6 +400,13 @@
 		AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */; };
 		AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */; };
 		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
+		AEB75D7B1F0DDAE5005DB220 /* MessageTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D7A1F0DDAE5005DB220 /* MessageTopicViewController.m */; };
+		AEB75D7E1F0DE2D0005DB220 /* MessgeTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D7D1F0DE2D0005DB220 /* MessgeTopicModel.m */; };
+		AEB75D841F0E238F005DB220 /* messgeNewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D831F0E238F005DB220 /* messgeNewModel.m */; };
+		AEB75D871F0E2AB2005DB220 /* messageCatigroyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D861F0E2AB2005DB220 /* messageCatigroyModel.m */; };
+		AEB75D8A1F0E2B3C005DB220 /* messageCatigroyCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D891F0E2B3C005DB220 /* messageCatigroyCountryModel.m */; };
+		AEB75D8D1F0E2C74005DB220 /* MessageTopicTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D8C1F0E2C74005DB220 /* MessageTopicTopView.m */; };
+		AEB75D901F0E4BF4005DB220 /* messageCatigroySubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D8F1F0E4BF4005DB220 /* messageCatigroySubModel.m */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
 		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
 		AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */; };
@@ -634,6 +653,8 @@
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
 		AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PipeiNoResultVeiw.xib; sourceTree = "<group>"; };
 		AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYLXSuccessView.xib; sourceTree = "<group>"; };
+		AE275D641F0F7F0B00A3D10F /* messageTopicGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageTopicGroup.h; path = messageTopic/messageTopicGroup.h; sourceTree = "<group>"; };
+		AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageTopicGroup.m; path = messageTopic/messageTopicGroup.m; sourceTree = "<group>"; };
 		AE2A59A01E6EBDF5001F5C8F /* MessageSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSectionHeaderView.h; sourceTree = "<group>"; };
 		AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSectionHeaderView.m; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
@@ -693,6 +714,28 @@
 		AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		AE3943DA1E0A1AD00038826A /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		AE3D44AC1F14796E00B1B094 /* MessageCountryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCountryViewController.h; sourceTree = "<group>"; };
+		AE3D44AD1F14796E00B1B094 /* MessageCountryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCountryViewController.m; sourceTree = "<group>"; };
+		AE3D44AF1F14BD8C00B1B094 /* MessageCountryTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCountryTopicModel.h; sourceTree = "<group>"; };
+		AE3D44B01F14BD8C00B1B094 /* MessageCountryTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCountryTopicModel.m; sourceTree = "<group>"; };
+		AE3FC8041F135D0600A0C020 /* MessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCenterViewController.h; sourceTree = "<group>"; };
+		AE3FC8051F135D0600A0C020 /* MessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCenterViewController.m; sourceTree = "<group>"; };
+		AE3FC80A1F135FA000A0C020 /* MyofferSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferSectionView.h; sourceTree = "<group>"; };
+		AE3FC80B1F135FA000A0C020 /* MyofferSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferSectionView.m; sourceTree = "<group>"; };
+		AE3FC80D1F13602500A0C020 /* MessageSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSubViewController.h; sourceTree = "<group>"; };
+		AE3FC80E1F13602500A0C020 /* MessageSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSubViewController.m; sourceTree = "<group>"; };
+		AE3FC8101F1360BA00A0C020 /* MessageTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopicView.h; sourceTree = "<group>"; };
+		AE3FC8111F1360BA00A0C020 /* MessageTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicView.m; sourceTree = "<group>"; };
+		AE3FC8131F13611D00A0C020 /* MessageTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopicModel.h; sourceTree = "<group>"; };
+		AE3FC8141F13611D00A0C020 /* MessageTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicModel.m; sourceTree = "<group>"; };
+		AE3FC8161F1362AC00A0C020 /* MessageTopiccGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopiccGroup.h; sourceTree = "<group>"; };
+		AE3FC8171F1362AC00A0C020 /* MessageTopiccGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopiccGroup.m; sourceTree = "<group>"; };
+		AE3FC8191F1367D700A0C020 /* MessageTopicFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopicFooterView.h; sourceTree = "<group>"; };
+		AE3FC81A1F1367D700A0C020 /* MessageTopicFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicFooterView.m; sourceTree = "<group>"; };
+		AE3FC81C1F137A5D00A0C020 /* MessageTopicHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopicHeaderViewController.h; sourceTree = "<group>"; };
+		AE3FC81D1F137A5D00A0C020 /* MessageTopicHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicHeaderViewController.m; sourceTree = "<group>"; };
+		AE3FC81F1F137E4100A0C020 /* MessageHotTopicMedel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageHotTopicMedel.h; sourceTree = "<group>"; };
+		AE3FC8201F137E4100A0C020 /* MessageHotTopicMedel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageHotTopicMedel.m; sourceTree = "<group>"; };
 		AE401ABD1EC4348A0078A0EC /* MBProgressHUD+XJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XJ.h"; sourceTree = "<group>"; };
 		AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XJ.m"; sourceTree = "<group>"; };
 		AE44F7851EA7744A00390809 /* CatigaryHotCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCityCell.h; sourceTree = "<group>"; };
@@ -1125,6 +1168,20 @@
 		AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiXunCell.m; sourceTree = "<group>"; };
 		AEB634AC1ED2D778009DFFD4 /* ZixunFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZixunFooterView.h; sourceTree = "<group>"; };
 		AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZixunFooterView.m; sourceTree = "<group>"; };
+		AEB75D791F0DDAE5005DB220 /* MessageTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTopicViewController.h; sourceTree = "<group>"; };
+		AEB75D7A1F0DDAE5005DB220 /* MessageTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicViewController.m; sourceTree = "<group>"; };
+		AEB75D7C1F0DE2D0005DB220 /* MessgeTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessgeTopicModel.h; sourceTree = "<group>"; };
+		AEB75D7D1F0DE2D0005DB220 /* MessgeTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessgeTopicModel.m; sourceTree = "<group>"; };
+		AEB75D821F0E238F005DB220 /* messgeNewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messgeNewModel.h; path = messageTopic/messgeNewModel.h; sourceTree = "<group>"; };
+		AEB75D831F0E238F005DB220 /* messgeNewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messgeNewModel.m; path = messageTopic/messgeNewModel.m; sourceTree = "<group>"; };
+		AEB75D851F0E2AB2005DB220 /* messageCatigroyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageCatigroyModel.h; path = messageTopic/messageCatigroyModel.h; sourceTree = "<group>"; };
+		AEB75D861F0E2AB2005DB220 /* messageCatigroyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageCatigroyModel.m; path = messageTopic/messageCatigroyModel.m; sourceTree = "<group>"; };
+		AEB75D881F0E2B3C005DB220 /* messageCatigroyCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageCatigroyCountryModel.h; path = messageTopic/messageCatigroyCountryModel.h; sourceTree = "<group>"; };
+		AEB75D891F0E2B3C005DB220 /* messageCatigroyCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageCatigroyCountryModel.m; path = messageTopic/messageCatigroyCountryModel.m; sourceTree = "<group>"; };
+		AEB75D8B1F0E2C74005DB220 /* MessageTopicTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTopicTopView.h; path = messageTopic/MessageTopicTopView.h; sourceTree = "<group>"; };
+		AEB75D8C1F0E2C74005DB220 /* MessageTopicTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTopicTopView.m; path = messageTopic/MessageTopicTopView.m; sourceTree = "<group>"; };
+		AEB75D8E1F0E4BF4005DB220 /* messageCatigroySubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageCatigroySubModel.h; path = messageTopic/messageCatigroySubModel.h; sourceTree = "<group>"; };
+		AEB75D8F1F0E4BF4005DB220 /* messageCatigroySubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageCatigroySubModel.m; path = messageTopic/messageCatigroySubModel.m; sourceTree = "<group>"; };
 		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1711,6 +1768,75 @@
 				AE3943D51E0A1AD00038826A /* TAPageControl.m */,
 			);
 			path = PageControl;
+			sourceTree = "<group>";
+		};
+		AE3D44A81F14728E00B1B094 /* countryTopic */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D44AC1F14796E00B1B094 /* MessageCountryViewController.h */,
+				AE3D44AD1F14796E00B1B094 /* MessageCountryViewController.m */,
+				AE3D44AF1F14BD8C00B1B094 /* MessageCountryTopicModel.h */,
+				AE3D44B01F14BD8C00B1B094 /* MessageCountryTopicModel.m */,
+			);
+			name = countryTopic;
+			sourceTree = "<group>";
+		};
+		AE3D44A91F1472F000B1B094 /* center */ = {
+			isa = PBXGroup;
+			children = (
+				AE3FC80D1F13602500A0C020 /* MessageSubViewController.h */,
+				AE3FC80E1F13602500A0C020 /* MessageSubViewController.m */,
+				AE3FC8041F135D0600A0C020 /* MessageCenterViewController.h */,
+				AE3FC8051F135D0600A0C020 /* MessageCenterViewController.m */,
+				AE3FC8191F1367D700A0C020 /* MessageTopicFooterView.h */,
+				AE3FC81A1F1367D700A0C020 /* MessageTopicFooterView.m */,
+				AE3FC8101F1360BA00A0C020 /* MessageTopicView.h */,
+				AE3FC8111F1360BA00A0C020 /* MessageTopicView.m */,
+				AE3FC80A1F135FA000A0C020 /* MyofferSectionView.h */,
+				AE3FC80B1F135FA000A0C020 /* MyofferSectionView.m */,
+				AE3FC8131F13611D00A0C020 /* MessageTopicModel.h */,
+				AE3FC8141F13611D00A0C020 /* MessageTopicModel.m */,
+				AE3FC8161F1362AC00A0C020 /* MessageTopiccGroup.h */,
+				AE3FC8171F1362AC00A0C020 /* MessageTopiccGroup.m */,
+			);
+			name = center;
+			sourceTree = "<group>";
+		};
+		AE3D44AA1F1473C500B1B094 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AEB75D881F0E2B3C005DB220 /* messageCatigroyCountryModel.h */,
+				AEB75D891F0E2B3C005DB220 /* messageCatigroyCountryModel.m */,
+				AEB75D851F0E2AB2005DB220 /* messageCatigroyModel.h */,
+				AEB75D861F0E2AB2005DB220 /* messageCatigroyModel.m */,
+				AEB75D8E1F0E4BF4005DB220 /* messageCatigroySubModel.h */,
+				AEB75D8F1F0E4BF4005DB220 /* messageCatigroySubModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		AE3D44AB1F1473DF00B1B094 /* c */ = {
+			isa = PBXGroup;
+			children = (
+				AEB75D8B1F0E2C74005DB220 /* MessageTopicTopView.h */,
+				AEB75D8C1F0E2C74005DB220 /* MessageTopicTopView.m */,
+				AE275D641F0F7F0B00A3D10F /* messageTopicGroup.h */,
+				AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */,
+				AEB75D821F0E238F005DB220 /* messgeNewModel.h */,
+				AEB75D831F0E238F005DB220 /* messgeNewModel.m */,
+			);
+			name = c;
+			sourceTree = "<group>";
+		};
+		AE3FC8221F1382AE00A0C020 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				AE3FC81C1F137A5D00A0C020 /* MessageTopicHeaderViewController.h */,
+				AE3FC81D1F137A5D00A0C020 /* MessageTopicHeaderViewController.m */,
+				AE3FC81F1F137E4100A0C020 /* MessageHotTopicMedel.h */,
+				AE3FC8201F137E4100A0C020 /* MessageHotTopicMedel.m */,
+			);
+			name = header;
 			sourceTree = "<group>";
 		};
 		AE497B421C3BB275006C3092 /* JPush */ = {
@@ -2985,6 +3111,10 @@
 		AEA24B9A1D5B264300DD7939 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D44AB1F1473DF00B1B094 /* c */,
+				AE3D44AA1F1473C500B1B094 /* model */,
+				AE3D44A81F14728E00B1B094 /* countryTopic */,
+				AEB75D781F0DDA9E005DB220 /* messageTopic */,
 				AEA24B9B1D5B264300DD7939 /* messageDetail */,
 				AEA24BAD1D5B264300DD7939 /* messageList */,
 			);
@@ -3045,6 +3175,8 @@
 		AEA24BAE1D5B264300DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D44A91F1472F000B1B094 /* center */,
+				AE3FC8221F1382AE00A0C020 /* header */,
 				AEA24BAF1D5B264300DD7939 /* MessageViewController.h */,
 				AEA24BB01D5B264300DD7939 /* MessageViewController.m */,
 			);
@@ -3150,6 +3282,17 @@
 				AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */,
 			);
 			path = ImageFile;
+			sourceTree = "<group>";
+		};
+		AEB75D781F0DDA9E005DB220 /* messageTopic */ = {
+			isa = PBXGroup;
+			children = (
+				AEB75D791F0DDAE5005DB220 /* MessageTopicViewController.h */,
+				AEB75D7A1F0DDAE5005DB220 /* MessageTopicViewController.m */,
+				AEB75D7C1F0DE2D0005DB220 /* MessgeTopicModel.h */,
+				AEB75D7D1F0DE2D0005DB220 /* MessgeTopicModel.m */,
+			);
+			path = messageTopic;
 			sourceTree = "<group>";
 		};
 		AEDCCE721D810CDA009A13FF /* Update */ = {
@@ -3637,6 +3780,7 @@
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
 				AEA24B7D1D5B25E000DD7939 /* FilterContentFrame.m in Sources */,
+				AE3FC8211F137E4100A0C020 /* MessageHotTopicMedel.m in Sources */,
 				AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */,
 				AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */,
 				AEA24BC81D5B264300DD7939 /* XWGJMessageCategoryItem.m in Sources */,
@@ -3663,6 +3807,7 @@
 				AEA24BC21D5B264300DD7939 /* MessageDetailContentCell.m in Sources */,
 				AEA249A71D5B215300DD7939 /* OrderDetailViewController.m in Sources */,
 				AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */,
+				AE3D44AE1F14796E00B1B094 /* MessageCountryViewController.m in Sources */,
 				AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */,
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
 				AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */,
@@ -3679,8 +3824,10 @@
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AEA24BEF1D5B266A00DD7939 /* XUButton.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
+				AE3FC8151F13611D00A0C020 /* MessageTopicModel.m in Sources */,
 				AEA24A031D5B224E00DD7939 /* CatigaryCityCollectionReusableView.m in Sources */,
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
+				AE3FC8181F1362AC00A0C020 /* MessageTopiccGroup.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
 				AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */,
@@ -3696,6 +3843,7 @@
 				AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */,
 				AE1FD7241D5C929500FFD5A8 /* NSObject+MJProperty.m in Sources */,
 				AE1FD71C1D5C929500FFD5A8 /* MJExtensionConst.m in Sources */,
+				AE275D661F0F7F0B00A3D10F /* messageTopicGroup.m in Sources */,
 				AEA24A8E1D5B23F600DD7939 /* HomeFirstTableViewCell.m in Sources */,
 				AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
@@ -3710,6 +3858,7 @@
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
 				AE3943DF1E0A1AD00038826A /* TAPageControl.m in Sources */,
 				AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */,
+				AE3FC81B1F1367D700A0C020 /* MessageTopicFooterView.m in Sources */,
 				AE59A5531E69907D008E479F /* NomalCollectionController.m in Sources */,
 				AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */,
 				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
@@ -3725,6 +3874,7 @@
 				AEA24A8F1D5B23F600DD7939 /* HomeHeaderView.m in Sources */,
 				AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */,
 				AE7825E11D702AA400AA4EF4 /* UniversityNavView.m in Sources */,
+				AEB75D841F0E238F005DB220 /* messgeNewModel.m in Sources */,
 				AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
 				AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */,
@@ -3737,6 +3887,7 @@
 				AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */,
 				AEA24A0A1D5B224E00DD7939 /* CatigorySubjectCell.m in Sources */,
 				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
+				AE3FC8121F1360BA00A0C020 /* MessageTopicView.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				AE8CE16F1EA0D94D000F9A8E /* MessageArticle.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
@@ -3752,6 +3903,7 @@
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AE3943DD1E0A1AD00038826A /* TAAnimatedDotView.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
+				AEB75D901F0E4BF4005DB220 /* messageCatigroySubModel.m in Sources */,
 				AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
@@ -3759,6 +3911,7 @@
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
 				AEA24BC91D5B264300DD7939 /* XWGJMessageFrame.m in Sources */,
 				5672E8B11CCBA9730099FDFC /* NSString+Sha1.m in Sources */,
+				AE3FC81E1F137A5D00A0C020 /* MessageTopicHeaderViewController.m in Sources */,
 				AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */,
 				AEA249FF1D5B224E00DD7939 /* CatigaryCountry.m in Sources */,
 				AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */,
@@ -3767,9 +3920,11 @@
 				AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */,
 				AE1FD71F1D5C929500FFD5A8 /* MJPropertyKey.m in Sources */,
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
+				AE3D44B11F14BD8C00B1B094 /* MessageCountryTopicModel.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
+				AEB75D7E1F0DE2D0005DB220 /* MessgeTopicModel.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,
 				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
@@ -3796,11 +3951,13 @@
 				AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
+				AEB75D7B1F0DDAE5005DB220 /* MessageTopicViewController.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
+				AE3FC80F1F13602500A0C020 /* MessageSubViewController.m in Sources */,
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */,
 				AE892A181EBC573E0035A31D /* HomeHeaderFrame.m in Sources */,
@@ -3823,6 +3980,7 @@
 				AE1FD72A1D5C929500FFD5A8 /* MJRefreshHeader.m in Sources */,
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
 				AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */,
+				AEB75D871F0E2AB2005DB220 /* messageCatigroyModel.m in Sources */,
 				AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
 				AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */,
@@ -3843,6 +4001,7 @@
 				AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */,
 				AE1FD7541D5C929500FFD5A8 /* MJRefreshStateHeader.m in Sources */,
 				AEA24C0B1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m in Sources */,
+				AE3FC80C1F135FA000A0C020 /* MyofferSectionView.m in Sources */,
 				AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */,
 				AE6F28761D77CA3C00E9A47A /* UUChartLabel.m in Sources */,
 				AEA249BF1D5B215300DD7939 /* XWGJSummaryView.m in Sources */,
@@ -3860,6 +4019,7 @@
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,
 				AE1FD74E1D5C929500FFD5A8 /* MJRefreshAutoStateFooter.m in Sources */,
 				AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */,
+				AE3FC8061F135D0600A0C020 /* MessageCenterViewController.m in Sources */,
 				AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */,
 				AE1FD7251D5C929500FFD5A8 /* NSString+MJExtension.m in Sources */,
 				AE2DE44B1E9633A9009683B0 /* ServiceItemCellFrame.m in Sources */,
@@ -3887,7 +4047,9 @@
 				AEA24BC11D5B264300DD7939 /* ShareButton.m in Sources */,
 				AEA24C0A1D5B269A00DD7939 /* InternationalControl.m in Sources */,
 				462D46671B353A0F00BC7861 /* FXBlurView.m in Sources */,
+				AEB75D8A1F0E2B3C005DB220 /* messageCatigroyCountryModel.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
+				AEB75D8D1F0E2C74005DB220 /* MessageTopicTopView.m in Sources */,
 				AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */,
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */,

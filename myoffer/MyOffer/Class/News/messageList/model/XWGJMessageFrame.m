@@ -15,6 +15,11 @@
 
     _News = News;
     
+    [self messageWithTitle:News.title];
+}
+
+- (void)messageWithTitle:(NSString *)title{
+    
     CGFloat Margin = 10;
     
     CGFloat  logox = Margin;
@@ -27,7 +32,7 @@
     CGFloat  titlex =  CGRectGetMaxX(self.LogoFrame) + 10;
     CGFloat  titley =  10;
     CGFloat  titlew =  XSCREEN_WIDTH - titlex;
-    CGFloat  TitleWidth = [News.title KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(16))].width;
+    CGFloat  TitleWidth = [title KD_sizeWithAttributeFont:FontWithSize(KDUtilSize(16))].width;
     CGFloat  titleh = TitleWidth - (XSCREEN_WIDTH - CGRectGetMaxX(self.LogoFrame) - 10) > 0 ? 50 : 25;
     self.TitleFrame = CGRectMake(titlex, titley, titlew, titleh);
     
@@ -50,10 +55,12 @@
     CGFloat  line_Y = Uni_Cell_Height - line_H;
     CGFloat  line_W = XSCREEN_WIDTH;
     self.lineFrame= CGRectMake(line_X,line_Y, line_W, line_H);
-
-
     
+    self.cell_Height = CGRectGetMaxY(self.lineFrame);
+
 }
+
+
 +(instancetype)messageFrameWithMessage:(MyOfferArticle *)message
 {
     XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
@@ -61,6 +68,25 @@
     
     return messageFrame;
 }
+
++(instancetype)messageFrameWithNewMessage:(messgeNewModel *)message{
+
+    XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
+    
+    messageFrame.message   = message;
+    
+    return messageFrame;
+}
+
+
+- (void)setMessage:(messgeNewModel *)message{
+
+    _message = message;
+    
+    [self messageWithTitle:message.title];
+    
+}
+
 
 
 @end

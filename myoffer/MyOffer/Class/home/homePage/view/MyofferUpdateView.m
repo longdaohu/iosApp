@@ -188,10 +188,10 @@
 }
 
 
-- (void)dealloc{
-
-    NSLog(@">>>> updateView dealloc");
-}
+//- (void)dealloc{
+//
+//    NSLog(@">>>> updateView dealloc");
+//}
 
 
 

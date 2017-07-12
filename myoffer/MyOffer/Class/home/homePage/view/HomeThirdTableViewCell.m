@@ -62,7 +62,7 @@
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, heigh) collectionViewLayout:flowlayout];
 
-    self.CollectionView                           = collectionView;
+    self.CollectionView      = collectionView;
     collectionView.showsVerticalScrollIndicator   = NO;
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.dataSource                     = self;

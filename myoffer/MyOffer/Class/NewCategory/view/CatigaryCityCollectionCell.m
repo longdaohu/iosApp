@@ -30,13 +30,17 @@
     }
     
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-
-
     
     
 }
 
+- (void)setTopic:(MessageHotTopicMedel *)topic{
 
+    _topic = topic;
+    
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    
+}
 
 
 

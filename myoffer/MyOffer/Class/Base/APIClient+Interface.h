@@ -68,6 +68,10 @@
 #define kAPISelectorMessageDetail @"GET api/article/"
 //留学资讯推荐
 #define kAPISelectorArticleRecommendation @"GET api/article/recommendations"
+//获取完整类别信息
+#define kAPISelectorArticleArticleCategory @"GET api/article-category"
+//获取文章列表
+#define kAPISelectorArticalesList @"GET api/articles"
 //留学资讯
 #define kAPISelectorArticleCategory @"GET api/article/search?"
 //资讯详情
@@ -119,4 +123,5 @@
 #define kAPISelectorFeedback @"POST api/app/feedback"
 //留学购
 #define kAPISelectorMyofferMall @"GET api/emall/app/index"
-
+//资讯专题
+#define kAPISelectorArticleCatigoryIndex @"GET api/article/category/index"

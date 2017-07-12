@@ -9,8 +9,8 @@
 #import "XWGJTabBarController.h"
 #import "HomeViewContViewController.h"
 #import "MeViewController.h"
-//#import "DiscoverViewController.h"
-#import "MessageViewController.h"
+#import "MessageCenterViewController.h"
+//#import "MessageViewController.h"
 #import "CatigoryViewController.h"
 
 @interface XWGJTabBarController ()
@@ -33,7 +33,7 @@
     mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"申请中心";
     
     
-        MessageViewController *msvc = [[MessageViewController alloc] init];
+        MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
         msvc.title = @"资讯宝典";
         
         HomeViewContViewController *home =[[HomeViewContViewController alloc] init];

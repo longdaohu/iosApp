@@ -130,16 +130,6 @@
 
 #pragma mark : WKWebViewDelegate  WBWebSiteDataStore
 
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-
-    [webView reload];
-}
-
-- (void)removeDataOfTypes:(NSSet<NSString *> *)websiteDataTypes modifiedSince:(NSDate *)date completionHandler:(void (^)(void))completionHandler{
-
-    
-}
-
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
     
