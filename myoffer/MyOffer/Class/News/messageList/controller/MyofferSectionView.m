@@ -22,7 +22,7 @@
     if (self) {
         
         self.panddingView = [UIView new];
-        self.panddingView.backgroundColor = [UIColor greenColor];
+        self.panddingView.backgroundColor =  XCOLOR_LIGHTBLUE;
         self.panddingView.layer.cornerRadius = 2.5;
         self.panddingView.layer.masksToBounds = true;
         [self addSubview:self.panddingView];
@@ -63,8 +63,10 @@
     [super layoutSubviews];
     
     CGFloat margin = 10;
-    
-    self.panddingView.frame = CGRectMake(10, margin , 5, self.bounds.size.height - 2 * margin);
+    CGFloat pad_w = 5;
+    CGFloat pan_H = 16;
+    CGFloat pan_Y =  (self.bounds.size.height - pan_H) * 0.5;
+    self.panddingView.frame = CGRectMake(margin, pan_Y , pad_w,pan_H);
     
     self.titleLab.frame = CGRectMake(CGRectGetMaxX(self.panddingView.frame) + margin, 0, self.bounds.size.width, self.bounds.size.height);
     

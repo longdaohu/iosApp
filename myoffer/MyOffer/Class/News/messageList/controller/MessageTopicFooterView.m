@@ -16,7 +16,7 @@
 @implementation MessageTopicFooterView
 + (instancetype)fooerWithTitle:(NSString *)title action:(MessageTopicFooterViewBlock)actionBlock{
     
-    MessageTopicFooterView *fooer = [[MessageTopicFooterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,50)];
+    MessageTopicFooterView *fooer = [[MessageTopicFooterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,60)];
     
     fooer.title = [NSString stringWithFormat:@"查看更多%@资讯",title];
     
@@ -74,9 +74,7 @@
     self.bgView.frame = self.bounds;
     
     self.titleBtn.frame = CGRectMake(0, 0, XSCREEN_WIDTH,contentSize.height - 10);
-    
-//    NSLog(@">>>>>> footer %lf",contentSize.width);
-
+  
     
 }
 

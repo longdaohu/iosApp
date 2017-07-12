@@ -46,6 +46,7 @@
 		AE027EB51C3A4F54007EBD28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE027EB41C3A4F54007EBD28 /* Foundation.framework */; };
 		AE027EB71C3A4F5E007EBD28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE027EB61C3A4F5E007EBD28 /* UIKit.framework */; };
 		AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE027EB81C3A53C4007EBD28 /* PushConfig.plist */; };
+		AE0285871F15FA6E00166B54 /* myofferAnchorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0285861F15FA6E00166B54 /* myofferAnchorButton.m */; };
 		AE05A7321E8A51940059C2BF /* EmallCatigoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */; };
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
@@ -123,7 +124,6 @@
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
 		AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */; };
-		AE275D661F0F7F0B00A3D10F /* messageTopicGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */; };
 		AE2A59A21E6EBDF5001F5C8F /* MessageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
@@ -402,7 +402,6 @@
 		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
 		AEB75D7B1F0DDAE5005DB220 /* MessageTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D7A1F0DDAE5005DB220 /* MessageTopicViewController.m */; };
 		AEB75D7E1F0DE2D0005DB220 /* MessgeTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D7D1F0DE2D0005DB220 /* MessgeTopicModel.m */; };
-		AEB75D841F0E238F005DB220 /* messgeNewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D831F0E238F005DB220 /* messgeNewModel.m */; };
 		AEB75D871F0E2AB2005DB220 /* messageCatigroyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D861F0E2AB2005DB220 /* messageCatigroyModel.m */; };
 		AEB75D8A1F0E2B3C005DB220 /* messageCatigroyCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D891F0E2B3C005DB220 /* messageCatigroyCountryModel.m */; };
 		AEB75D8D1F0E2C74005DB220 /* MessageTopicTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75D8C1F0E2C74005DB220 /* MessageTopicTopView.m */; };
@@ -535,6 +534,8 @@
 		AE027EB41C3A4F54007EBD28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE027EB61C3A4F5E007EBD28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE027EB81C3A53C4007EBD28 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		AE0285851F15FA6E00166B54 /* myofferAnchorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferAnchorButton.h; sourceTree = "<group>"; };
+		AE0285861F15FA6E00166B54 /* myofferAnchorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferAnchorButton.m; sourceTree = "<group>"; };
 		AE05A7301E8A51940059C2BF /* EmallCatigoryGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigoryGroup.h; sourceTree = "<group>"; };
 		AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigoryGroup.m; sourceTree = "<group>"; };
 		AE05A7331E8A6A010059C2BF /* EmallCatigroySectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigroySectionView.h; sourceTree = "<group>"; };
@@ -653,8 +654,6 @@
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
 		AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PipeiNoResultVeiw.xib; sourceTree = "<group>"; };
 		AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYLXSuccessView.xib; sourceTree = "<group>"; };
-		AE275D641F0F7F0B00A3D10F /* messageTopicGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageTopicGroup.h; path = messageTopic/messageTopicGroup.h; sourceTree = "<group>"; };
-		AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageTopicGroup.m; path = messageTopic/messageTopicGroup.m; sourceTree = "<group>"; };
 		AE2A59A01E6EBDF5001F5C8F /* MessageSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSectionHeaderView.h; sourceTree = "<group>"; };
 		AE2A59A11E6EBDF5001F5C8F /* MessageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSectionHeaderView.m; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
@@ -1172,8 +1171,6 @@
 		AEB75D7A1F0DDAE5005DB220 /* MessageTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicViewController.m; sourceTree = "<group>"; };
 		AEB75D7C1F0DE2D0005DB220 /* MessgeTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessgeTopicModel.h; sourceTree = "<group>"; };
 		AEB75D7D1F0DE2D0005DB220 /* MessgeTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessgeTopicModel.m; sourceTree = "<group>"; };
-		AEB75D821F0E238F005DB220 /* messgeNewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messgeNewModel.h; path = messageTopic/messgeNewModel.h; sourceTree = "<group>"; };
-		AEB75D831F0E238F005DB220 /* messgeNewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messgeNewModel.m; path = messageTopic/messgeNewModel.m; sourceTree = "<group>"; };
 		AEB75D851F0E2AB2005DB220 /* messageCatigroyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageCatigroyModel.h; path = messageTopic/messageCatigroyModel.h; sourceTree = "<group>"; };
 		AEB75D861F0E2AB2005DB220 /* messageCatigroyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = messageCatigroyModel.m; path = messageTopic/messageCatigroyModel.m; sourceTree = "<group>"; };
 		AEB75D881F0E2B3C005DB220 /* messageCatigroyCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = messageCatigroyCountryModel.h; path = messageTopic/messageCatigroyCountryModel.h; sourceTree = "<group>"; };
@@ -1775,6 +1772,8 @@
 			children = (
 				AE3D44AC1F14796E00B1B094 /* MessageCountryViewController.h */,
 				AE3D44AD1F14796E00B1B094 /* MessageCountryViewController.m */,
+				AE0285851F15FA6E00166B54 /* myofferAnchorButton.h */,
+				AE0285861F15FA6E00166B54 /* myofferAnchorButton.m */,
 				AE3D44AF1F14BD8C00B1B094 /* MessageCountryTopicModel.h */,
 				AE3D44B01F14BD8C00B1B094 /* MessageCountryTopicModel.m */,
 			);
@@ -1820,10 +1819,6 @@
 			children = (
 				AEB75D8B1F0E2C74005DB220 /* MessageTopicTopView.h */,
 				AEB75D8C1F0E2C74005DB220 /* MessageTopicTopView.m */,
-				AE275D641F0F7F0B00A3D10F /* messageTopicGroup.h */,
-				AE275D651F0F7F0B00A3D10F /* messageTopicGroup.m */,
-				AEB75D821F0E238F005DB220 /* messgeNewModel.h */,
-				AEB75D831F0E238F005DB220 /* messgeNewModel.m */,
 			);
 			name = c;
 			sourceTree = "<group>";
@@ -3843,7 +3838,6 @@
 				AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */,
 				AE1FD7241D5C929500FFD5A8 /* NSObject+MJProperty.m in Sources */,
 				AE1FD71C1D5C929500FFD5A8 /* MJExtensionConst.m in Sources */,
-				AE275D661F0F7F0B00A3D10F /* messageTopicGroup.m in Sources */,
 				AEA24A8E1D5B23F600DD7939 /* HomeFirstTableViewCell.m in Sources */,
 				AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
@@ -3874,7 +3868,6 @@
 				AEA24A8F1D5B23F600DD7939 /* HomeHeaderView.m in Sources */,
 				AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */,
 				AE7825E11D702AA400AA4EF4 /* UniversityNavView.m in Sources */,
-				AEB75D841F0E238F005DB220 /* messgeNewModel.m in Sources */,
 				AEA249281D5B207700DD7939 /* MyOfferViewController.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
 				AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */,
@@ -3889,6 +3882,7 @@
 				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
 				AE3FC8121F1360BA00A0C020 /* MessageTopicView.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
+				AE0285871F15FA6E00166B54 /* myofferAnchorButton.m in Sources */,
 				AE8CE16F1EA0D94D000F9A8E /* MessageArticle.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,

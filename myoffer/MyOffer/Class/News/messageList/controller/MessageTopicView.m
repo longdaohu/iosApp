@@ -35,7 +35,8 @@
         self.bottom_line = line;
         self.bottom_line.backgroundColor = XCOLOR_line;
         
-//        UIView *focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 2)];
+        
+//        UIView *focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 2)];
 //        [self addSubview:focusView];
 //        self.focusView = focusView;
 //        self.focusView.backgroundColor = XCOLOR_LIGHTBLUE;
@@ -82,24 +83,30 @@
 
 - (void)tagBtnClick:(UIButton *)sender{
 
+    //1 切换当前选择项按钮
     self.btn_current.enabled = YES;
     
     sender.enabled = NO;
     
     self.btn_current = sender;
     
+    //2 传出当前选择项
     if (self.actionBlock) {
         
-        self.actionBlock(sender.tag);
+        messageCatigroyModel *topic  = self.catigories[sender.tag];
+        
+        self.actionBlock(topic.code,sender.tag);
     }
     
-//    [self catigoryBtnClick:self.btn_current];
+    //3 按钮滚动到对页位置
+    [self catigoryBtnClick:self.btn_current];
 
 }
 
 //移动UIScrollView到对应位置
 - (void)secrollToCatigoryIndex:(NSInteger)index{
     
+    //1 确认当前选择项按钮
     UIButton *sender = self.bgView.subviews[index];
     
     self.btn_current.enabled = YES;
@@ -107,20 +114,37 @@
     sender.enabled = NO;
     
     self.btn_current = sender;
-    
-    [self catigoryBtnClick:self.btn_current];
+  
+    //2 滚动到当前选择项按钮
+    [self catigoryBtnClick:sender];
     
 }
 
 //移动UIScrollView到对应位置
 - (void)catigoryBtnClick:(UIButton *)sender{
     
+//    CGFloat center = 0.5 * (self.bgView.mj_w - sender.mj_w);
+//    
+//    if (center > sender.mj_x) return;
+//    
+//    CGFloat distance =  sender.mj_x - center;
+//    
+//    [self.bgView setContentOffset:CGPointMake(distance, 0) animated:YES];
+ 
     if ((self.bgView.contentSize.width -  (sender.tag - 1) * sender.mj_w) > self.bgView.mj_w) {
         
         [self.bgView setContentOffset:CGPointMake(sender.tag * sender.mj_w, 0) animated:YES];
+        
     }
     
 }
+
+
+- (void)superViewScrollViewDidScrollContentOffset:(CGPoint)offset{
+
+    
+}
+
 
 
 - (void)layoutSubviews{
@@ -129,7 +153,12 @@
     
     CGSize contentSize = self.bounds.size;
     
-    self.bottom_line.frame = CGRectMake(0, contentSize.height - LINE_HEIGHT, contentSize.width, LINE_HEIGHT);
+    CGFloat  bt_line_y =  contentSize.height - LINE_HEIGHT;
+    CGFloat  bt_line_w =  contentSize.width;
+    CGFloat  bt_line_h =  LINE_HEIGHT;
+    self.bottom_line.frame = CGRectMake(0, bt_line_y, bt_line_w, bt_line_h);
+    
+//    self.focusView.mj_y = contentSize.height - self.focusView.mj_h;
 
 }
 

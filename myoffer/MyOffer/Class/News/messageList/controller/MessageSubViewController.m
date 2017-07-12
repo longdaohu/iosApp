@@ -16,7 +16,6 @@
 #import "XWGJMessageFrame.h"
 #import "MyofferSectionView.h"
 #import "MessageTopicFooterView.h"
-//#import "MessageCountryTopicVController.h"
 #import "MessageDetaillViewController.h"
 #import "MessageCountryViewController.h"
 
@@ -50,7 +49,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    self.topicView.actionBlock = ^(NSInteger index){
+    self.topicView.actionBlock = ^(NSString *code,NSInteger index){
     
         [weakSelf makeDataWithCatigoryIndex:index];
         
@@ -64,7 +63,6 @@
     bgView.delegate = self;
     bgView.backgroundColor = XCOLOR_BG;
     bgView.pagingEnabled = YES;
-    
     
 }
 
@@ -90,7 +88,6 @@
     messageCatigroyModel *catigory = catigories.firstObject;
     
     [self makeDataWithCatigoryCode:catigory.code];
-    
     
     [self.bgView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -119,36 +116,41 @@
 }
 
 
+//让背景滚动条移到对应页面
+- (void)bgViewScrollToPage:(NSInteger)page{
+     //1  动画效果不会太突然  滚动 uiscrollView
+    CGFloat distance =  fabs((page * self.bgView.mj_w -  self.bgView.contentOffset.x));
+    BOOL animate = distance > self.bgView.mj_w ? NO : YES;
+    [self.bgView setContentOffset:CGPointMake(page * self.bgView.mj_w, 0) animated:animate];
+}
+
 //导航栏点击选项网络请求
 - (void)makeDataWithCatigoryIndex:(NSInteger)index{
     
     messageCatigroyModel *catigory = self.catigories[index];
     
-    //动画效果不会太突然
-    CGFloat distance =  fabs((index * self.bgView.mj_w -  self.bgView.contentOffset.x));
-    BOOL animate = distance > self.bgView.mj_w ? NO : YES;
-    [self.bgView setContentOffset:CGPointMake(index * self.bgView.mj_w, 0) animated:animate];
+    //3 背景滚动到对应页面
+    [self bgViewScrollToPage:index];
     
+    //2  如果对应选项已布在数据，不再网络请求
     MessageTopiccGroup *topic_group = self.group[index];
     
-    //如果对应选项已布在数据，不再网络请求
     if (topic_group.topic.count > 0) {
         
         self.topic_group_current  = topic_group;
-        
-        //每次点击，回到选择顶部
         UITableView *table = self.bgView.subviews[index];
-        
+        //每次点击，回到表格顶部
         [table setContentOffset:CGPointZero animated:NO];
-        
         [table reloadData];
         
         return;
     }
     
+    // 3  发起网络请求
     [self makeDataWithCatigoryCode:catigory.code];
     
 }
+
 
 //根据对应专题选项网络请求
 - (void)makeDataWithCatigoryCode:(NSString *)code{
@@ -225,7 +227,7 @@ static NSString *identify = @"topic";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 50;
+    return 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -251,6 +253,8 @@ static NSString *identify = @"topic";
 
     MyofferSectionView *sectionView = [[MyofferSectionView alloc] init];
     
+//    NSLog(@">>>>>>viewForHeaderInSection>>>>>  %ld",self.topic_group_current.index);
+    
     MessageTopicModel *topic = self.topic_group_current.topic[section];
 
     sectionView.title = topic.category;
@@ -275,7 +279,17 @@ static NSString *identify = @"topic";
 }
 
 
+
+
 #pragma mark : UIScrollViewDelege
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+   
+    if (scrollView == self.bgView) {
+          //1 滚动到对应页面
+//        [self.topicView superViewScrollViewDidScrollContentOffset:scrollView.contentOffset];
+     }
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
@@ -290,9 +304,11 @@ static NSString *identify = @"topic";
         
         //2 滚动到对应页面
         [self.topicView secrollToCatigoryIndex:index];
+  
+        //3 背景滚动到对应页面
+        [self bgViewScrollToPage:index];
         
-        //3 判断滚动页面与当前页是否一样，一样就不需要重新加载数据
-        if (index == self.topic_group_current.index) return;
+        //5 请求数据
         [self makeDataWithCatigoryIndex:index];
      
     }
@@ -301,7 +317,6 @@ static NSString *identify = @"topic";
 
 
 - (void)superViewScroll:(UITableView * )superView contentOffsetY:(CGFloat)Y{
-  
     
     self.superView = superView;
     
@@ -338,7 +353,6 @@ static NSString *identify = @"topic";
         self.superView.contentOffset = CGPointMake(0, self.superView.tableHeaderView.mj_h);
         
     }];
-    
     
     for (UITableView *table in self.bgView.subviews) {
         

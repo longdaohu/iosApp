@@ -10,16 +10,17 @@
 #import "MessageTopicTopView.h"
 #import "UniversityCourseFilterCell.h"
 #import "MessageCountryTopicModel.h"
-#import "messgeNewModel.h"
+#import "MyOfferArticle.h"
 #import "XWGJMessageFrame.h"
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
+#import "myofferAnchorButton.h"
 
 #define CELL_HIGHT_DEFAULT 44
 #define PARA_PAGE @"page"
 
 @interface MessageCountryViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UIButton *titleView;
+@property(nonatomic,strong)myofferAnchorButton *titleView;
 @property(nonatomic,strong)MessageTopicTopView *topView;
 @property(nonatomic,strong)UIScrollView *bgView;
 @property(nonatomic,strong)UIView *countryBgView;
@@ -96,7 +97,6 @@
     UIScrollView *baseView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, base_y, base_w,base_h - XNAV_HEIGHT)];
     [self.view addSubview:baseView];
     self.bgView = baseView;
-//    baseView.backgroundColor = XCOLOR_LIGHTBLUE;
     baseView.pagingEnabled = YES;
     baseView.delegate = self;
     baseView.showsHorizontalScrollIndicator=NO;
@@ -111,7 +111,7 @@
     
     //黑色背景
     UIButton *cover = [[UIButton alloc] initWithFrame:self.view.bounds];
-    cover.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    cover.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
     self.coverView = cover;
     cover.alpha = 0;
     [countryBgView addSubview:cover];
@@ -130,11 +130,15 @@
     
     
     //标题名称
-    UIButton *titleView = [[UIButton alloc] init];
+    myofferAnchorButton *titleView = [[myofferAnchorButton alloc] initWithFrame:CGRectMake(0, 0, 10, 50)];
     self.titleView = titleView;
-    [titleView addTarget:self action:@selector(titleOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    titleView.title = self.countryName;
     self.navigationItem.titleView = titleView;
-    [self titleButtonFitWithTitle:self.countryName];
+    titleView.actionBlock= ^(UIButton *sender){
+        
+         [self titleOnClick:sender];
+    };
+  
     
 }
 
@@ -162,7 +166,7 @@
 - (void)filterWithparameter:(NSDictionary *)parameter catigroyIndex:(NSInteger)catigroyIndex{
     
     
-    NSLog(@" >>>>>  filterWithparamet   %ld >>>>  %ld",self.topic_current.catigoryIndex ,catigroyIndex);
+//    NSLog(@" >>>>>  filterWithparamet   %ld >>>>  %ld",self.topic_current.catigoryIndex ,catigroyIndex);
     
     MessageCountryTopicModel *topic = self.groups[catigroyIndex];
     self.topic_current  = topic;
@@ -180,10 +184,11 @@
     topic.page = p_page;
     topic.parameters = parameters;
     
-    NSLog(@"2 筛选条件请求 >>>>>>  %@  ",self.topic_current.parameters);
+    NSLog(@"2 筛选条件请求 >>>>>>  %@    \n  %@",self.topic_current.parameters,parameter);
     
  //    //4 选择对应的选项是滚动到对应页面
     [self.bgView setContentOffset:CGPointMake(self.bgView.mj_w * catigroyIndex, 0) animated:YES];
+    
     
     
     //2 根据参数请求数据
@@ -227,13 +232,14 @@
      }
     
     //2 字典转模型
-    NSArray  *items  = [messgeNewModel mj_objectArrayWithKeyValuesArray:response[@"items"]];
-    
+    NSArray  *items  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"items"]];
+  
     
     NSMutableArray *temps = [NSMutableArray array];
-    for (messgeNewModel *item in items) {
+    
+    for (MyOfferArticle *item in items) {
         
-        [temps addObject: [XWGJMessageFrame messageFrameWithNewMessage:item]];
+        [temps addObject: [XWGJMessageFrame messageFrameWithMessage:item]];
     }
     [self.topic_current.messageFrames  addObjectsFromArray:temps];
 
@@ -429,26 +435,23 @@
         //1 收起国家表格
         [self coverOnClick:self.coverView];
         
-        
-        messageCatigroyCountryModel *country = self.catigroyGroup[indexPath.row];
-        
         //2 选择项一样时不刷新当前数据
-        if ([self.countryName isEqualToString:country.name]) {
-            
-            return;
-        }
+        messageCatigroyCountryModel *country = self.catigroyGroup[indexPath.row];
+        if ([self.countryName isEqualToString:country.name])  return;
         
         //3 设置当前国家
         self.countryName =country.name;
-        [self titleButtonFitWithTitle:country.name];
+        
+          //3-2设置当前标题
+        self.titleView.title = self.countryName;
+        
         
         //4 根据当前主题添加展示表格
         [self makeTableWithCountryCatigory: country];
         
         //5 筛选项添加数据
         self.topView.catigoryCountry = country;
-        
-
+ 
         
         return;
     }
@@ -456,7 +459,7 @@
     
     XWGJMessageFrame  *messageFrame =  self.topic_current.messageFrames[indexPath.row];
     
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.message.message_id] animated:YES];
+    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id] animated:YES];
     
 }
 
@@ -474,41 +477,34 @@
         CGFloat width = scrollView.frame.size.width;
         
         NSInteger index =  (offsetX + .5f *  width) / width;
-
-//        if (index == self.topic_current.catigoryIndex) return;
-
+ 
+        
         [self.topView scrollToCatigoryIndex:index];
         
     }
     
 }
 
-//设置self.title
-
-- (void)titleButtonFitWithTitle:(NSString *)title{
-
-    [self.titleView setTitle: title forState:UIControlStateNormal];
-    
-    [self.titleView sizeToFit];
-}
 
 - (void)titleOnClick:(UIButton *)sender{
     
-     sender.selected = !sender.selected;
-    
     [self countryTableViewShow:sender.selected];
     
+    if (sender.selected) {
+        //3-1 刷新当前数据
+        [self.countryTableView reloadData];
+    }
+  
 }
 
 - (void)coverOnClick:(UIButton *)sender{
 
-    [self titleOnClick:self.titleView];
+    [self.titleView titleButtonOnClick];
 }
 
 
 - (void)countryTableViewShow:(BOOL)show{
-
-   
+    
     CGFloat distance = show ? self.catigroyGroup.count * CELL_HIGHT_DEFAULT : 0 ;
     
     CGFloat alpha = show ? 1 : 0;

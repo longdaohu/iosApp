@@ -37,12 +37,16 @@
         self.backgroundColor = XCOLOR_BG;
         
         UIScrollView *topView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 60)];
+        topView.showsVerticalScrollIndicator = NO;
+        topView.showsHorizontalScrollIndicator = NO;
         [self addSubview:topView];
         topView.backgroundColor = [UIColor whiteColor];
         self.topView = topView;
         
         
         UIScrollView *subView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame) + 15, XSCREEN_WIDTH, 30)];
+        subView.showsVerticalScrollIndicator = NO;
+        subView.showsHorizontalScrollIndicator = NO;
         [self addSubview:subView];
         self.subView = subView;
         
@@ -55,38 +59,33 @@
 
     _catigoryCountry = catigoryCountry;
     
-    //选择国家选项是清空所有的下二级三级选择数据
+    catigoryCountry.isSelected = YES;
+    
+    //1 选择国家选项是清空所有的下二级三级选择数据
     for (messageCatigroyModel *catigory in catigoryCountry.subs) {
-        
         catigory.isSelected = NO;
-        
         for (messageCatigroySubModel *sub_catigory in catigory.subs) {
-            
             sub_catigory.isSelected = NO;
          }
-        
     }
     
-    //清空二级所选参数
+    //2 清空二级所选参数
     self.catigory_last = nil;
     
-    //清空二级筛选条件按钮
+    //3 清空二级筛选条件按钮
     [self.topView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-    //回到滚回左侧
+    //4 回到二级筛滚回左侧
     [self.topView setContentOffset:CGPointZero animated:YES];
-    
-    
     
     
     CGFloat top_W = 100;
     CGFloat top_H = self.topView.mj_h;
     CGFloat top_Y = 0;
-    //创建二级筛选条件按钮
+    //5 创建二级筛选条件按钮
     for (int index = 0; index < catigoryCountry.subs.count; index++) {
         
         messageCatigroyModel *catigory = catigoryCountry.subs[index];
-        catigory.isSelected = (index == 0);
         
         UIButton *topBtn = [[UIButton alloc] initWithFrame:CGRectMake(index * top_W, top_Y, top_W, top_H)];
         [topBtn setTitle:catigory.name forState:UIControlStateNormal];
@@ -95,18 +94,21 @@
         topBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [self.topView addSubview:topBtn];
         topBtn.tag = index;
-        
         [topBtn addTarget:self action:@selector(catigroyOnclik:) forControlEvents:UIControlEventTouchUpInside];
         
-        if (catigory.isSelected) self.catigory_last = catigory;
+        //5-1 点击国家 > 设置 二级catigroy第一个为默认项
+        if (!self.catigory_last) {
+            self.catigory_last = catigory;
+            self.catigory_last.isSelected = YES;
+        }
         
      }
     
-    
+    //6 设置二级View 的contentSize
     self.topView.contentSize = CGSizeMake(self.topView.subviews.count * top_W, 0);
 
-    //默认第一个按钮点击事件
-    if (self.subView.subviews.count > 0) [self catigroyOnclik:(UIButton *)self.topView.subviews.firstObject];
+    //7 默认第一个按钮点击事件
+    if (self.topView.subviews.count > 0) [self catigroyOnclik:(UIButton *)self.topView.subviews.firstObject];
     
 }
 
@@ -114,17 +116,18 @@
 //点击二级筛选条件
 - (void)catigroyOnclik:(UIButton *)sender{
     
-    //清空所有二级条件按钮
+    //1 清空所有二级条件按钮
     for (UIButton *sub_btn in self.topView.subviews) {
-        
         sub_btn.enabled = YES;
-        
     }
     sender.enabled = NO;
     
+    //2 设置当前选项
+    self.catigory_last = nil;
     self.catigory_last = self.catigoryCountry.subs[sender.tag];
+    self.catigory_last.isSelected = YES;
     
-    //根据当前所选二级条件更改
+    //3 根据当前所选二级条件更改
     [self catigroyOnclikWithCatigory : self.catigory_last];
    
 }
@@ -133,7 +136,7 @@
 //根据二级条件更新三级子项条件
 - (void)catigroyOnclikWithCatigory:(messageCatigroyModel *)catigory{
     
-     //清空子项
+     //1 清空子项
     [self.subView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     
@@ -141,7 +144,7 @@
     CGFloat sub_H = self.subView.mj_h;
     CGFloat sub_Y = 0;
     CGFloat margin = 10;
-    //创建三级子项
+    //2 创建三级子项
     for (int index = 0; index < catigory.subs.count + 1; index++) {
         
         UIButton *subBtn = [[UIButton alloc] initWithFrame:CGRectMake( margin + index * (sub_W + margin), sub_Y, sub_W, sub_H)];
@@ -153,12 +156,9 @@
         subBtn.layer.masksToBounds = YES;
         subBtn.backgroundColor = XCOLOR_WHITE;
         subBtn.layer.borderWidth = 1;
-        
         [subBtn addTarget:self action:@selector(subBtnOnclick:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         NSString *title = @"全部";
-        
         if (index != 0) {
             
             messageCatigroySubModel *catigroy_sub = catigory.subs[index - 1];
@@ -221,13 +221,12 @@
         messageCatigroySubModel *catigroy_sub =  self.catigory_last.subs[sender.tag];
         catigroy_sub.isSelected = YES;
         [parameters setValue:catigroy_sub.code  forKey:@"third"];
-        NSLog(@"third  = %@",catigroy_sub.name);
+//        NSLog(@"third  = %@",catigroy_sub.name);
         
     }
     
-    NSLog(@"second  = %@",self.catigory_last.name);
-    NSLog(@"first  = %@",self.catigoryCountry.name);
-
+//    NSLog(@"second  = %@",self.catigory_last.name);
+//    NSLog(@"first  = %@",self.catigoryCountry.name);
     
     if (self.actionBlock) {
         
@@ -246,8 +245,11 @@
     
     UIButton *sender = self.topView.subviews[page];
     
-    [self catigroyOnclik:sender];
+    NSInteger current_page = [self.catigoryCountry.subs indexOfObject:self.catigory_last];
+ 
+    if (current_page == page) return;
     
+    [self catigroyOnclik:sender];
 }
 
 

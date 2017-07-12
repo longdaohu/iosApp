@@ -69,23 +69,23 @@
     return messageFrame;
 }
 
-+(instancetype)messageFrameWithNewMessage:(messgeNewModel *)message{
+//+(instancetype)messageFrameWithNewMessage:(messgeNewModel *)message{
+//
+//    XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
+//    
+//    messageFrame.message   = message;
+//    
+//    return messageFrame;
+//}
 
-    XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
-    
-    messageFrame.message   = message;
-    
-    return messageFrame;
-}
 
-
-- (void)setMessage:(messgeNewModel *)message{
-
-    _message = message;
-    
-    [self messageWithTitle:message.title];
-    
-}
+//- (void)setMessage:(messgeNewModel *)message{
+//
+//    _message = message;
+//    
+//    [self messageWithTitle:message.title];
+//    
+//}
 
 
 

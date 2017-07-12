@@ -14,6 +14,8 @@
 #import "MessageSubViewController.h"
 #import "MessageHotTopicMedel.h"
 
+#define MASSAGE_HEADER_HIGHT  XSCREEN_WIDTH * 0.3 + 50
+
 @interface MessageCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)NSArray *messageCatigroies;
@@ -93,10 +95,7 @@
         self.subVC.catigories = self.messageCatigroies;
         
     }];
-    
  
-    
-    
     
 }
 
@@ -109,14 +108,14 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     self.messageHeaderView = [[MessageTopicHeaderViewController alloc] init];
     [self addChildViewController:self.messageHeaderView];
-    self.messageHeaderView.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_WIDTH * 0.3 + 50);
-    self.messageHeaderView.header_Height = XSCREEN_WIDTH * 0.3 + 50;
+    self.messageHeaderView.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT);
+    self.messageHeaderView.header_Height = MASSAGE_HEADER_HIGHT;
     
-    self.tableViewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_WIDTH * 0.3 + 50)];
+    self.tableViewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT)];
     self.tableView.tableHeaderView = self.tableViewHeader ;
     [self.tableViewHeader addSubview:self.messageHeaderView.view];
 
@@ -141,7 +140,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.contentView.backgroundColor = [UIColor redColor];
     
     [cell.contentView addSubview:self.subVC.view];
     
@@ -164,44 +162,50 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    
-//    NSLog(@">>>>>> %lf",scrollView.contentOffset.y);
-    
-    [self.subVC superViewScroll:self.tableView contentOffsetY:scrollView.contentOffset.y];
-    
-    if (scrollView.contentOffset.y >= self.tableView.tableHeaderView.mj_h) {
+
+  
+    //3 当  scrollView.contentOffset.y  大于等于 self.tableView.tableHeaderView.mj_h 切换按钮图标
+     if (scrollView.contentOffset.y >= self.tableView.tableHeaderView.mj_h) {
         
-        if (self.leftBtn.tag == 0) {
-            
-            self.leftBtn.tag = DEFAULT_NUMBER;
-            [self.leftBtn setImage:XImage(@"close_button") forState:UIControlStateNormal];
-        }
+        if (self.leftBtn.tag == 0)  [self leftButtonWithTag:DEFAULT_NUMBER imageName:@"close_button"];
         
     }else{
     
-        self.leftBtn.tag = 0;
- 
+        //1  push到下一页的时候会调用  scrollViewDidScroll 方法
+        if (!self.tableView.scrollEnabled) return;
+        
+        [self leftButtonWithTag:0 imageName:@"search_icon"];
+
     }
+    //3-1 当  scrollView.contentOffset.y  大于等于 self.tableView.tableHeaderView.mj_h 切换按钮图标
+
+    
+    //2 把self.tableView 的 contentOffsetY传到子控件
+    [self.subVC superViewScroll:self.tableView contentOffsetY:scrollView.contentOffset.y];
     
 }
 
 
--(void)leftOnClick:(UIBarButtonItem *)item{
-
+-(void)leftOnClick:(UIButton *)sender{
     
-    if (item.tag == 0) {
+    if (sender.tag > 0) {
         
-    }else{
-    
         [self.subVC superViewScrollEnable:YES];
-     
-        [self.leftBtn setImage:XImage(@"search_icon_gray") forState:UIControlStateNormal];
         
-        self.leftBtn.tag = 0;
-
+        [self leftButtonWithTag:0 imageName:@"search_icon"];
+        
+        return;
     }
     
+    NSLog(@" sender  > search功能 ");
+    
+}
+
+ - (void)leftButtonWithTag:(NSInteger)tag  imageName:(NSString *)name{
+
+    [self.leftBtn setImage:XImage(name) forState:UIControlStateNormal];
+    
+    self.leftBtn.tag = tag;
 }
 
 

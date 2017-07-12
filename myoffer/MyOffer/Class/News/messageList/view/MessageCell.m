@@ -9,7 +9,6 @@
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "MyOfferArticle.h"
-#import "messgeNewModel.h"
 
 @interface MessageCell ()
 //图片
@@ -110,10 +109,10 @@
         
     }else{
         
-        path = messageFrame.message.cover_url;
-        title = messageFrame.message.title;
-        time  = messageFrame.message.update_at;
-        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.message.view_count];
+        path = messageFrame.News.cover_url;
+        title = messageFrame.News.title;
+        time  = messageFrame.News.update_at;
+        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.News.view_count];
 
      }
     

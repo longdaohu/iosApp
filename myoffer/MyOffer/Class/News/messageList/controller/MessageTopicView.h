@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-typedef  void(^MessageTopicViewBlock)(NSInteger);
+typedef  void(^MessageTopicViewBlock)(NSString *,NSInteger);
 @interface MessageTopicView : UIView
 @property(nonatomic,strong)NSArray *catigories;
 @property(nonatomic,copy)MessageTopicViewBlock actionBlock;
 
 - (void)secrollToCatigoryIndex:(NSInteger)index;
+
+//- (void)superViewScrollViewDidScrollContentOffset:(CGPoint)offset;
+
 
 @end
