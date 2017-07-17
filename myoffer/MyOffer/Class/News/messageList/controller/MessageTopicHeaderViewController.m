@@ -16,7 +16,7 @@
 @interface MessageTopicHeaderViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property(nonatomic,strong)MyofferSectionView *sectionView;
 @property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)UICollectionViewFlowLayout *layout;
+@property(nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
 
 @end
 
@@ -34,16 +34,14 @@ static NSString * const reuseIdentifier = @"cityCell";
 
 - (void)makeUI{
     
-    self.view.backgroundColor =  XCOLOR_BG;
+    UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
+    self.flowLayout = flow;
+    flow.minimumLineSpacing = 10;
+    flow.minimumInteritemSpacing = 0;
+    flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    flow.sectionInset = UIEdgeInsetsZero;
     
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    self.layout = layout;
-    layout.minimumLineSpacing = 10;
-    layout.minimumInteritemSpacing = 0;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.sectionInset = UIEdgeInsetsZero;
-    
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flow];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CatigaryCityCollectionCell class] ) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
@@ -71,7 +69,7 @@ static NSString * const reuseIdentifier = @"cityCell";
 
     _header_Height = header_Height;
     
-    self.layout.itemSize = CGSizeMake(XSCREEN_WIDTH * 0.5, header_Height - 60);
+    self.flowLayout.itemSize = CGSizeMake(XSCREEN_WIDTH * 0.5, header_Height - 60);
     
     self.collectionView.mj_h = header_Height - self.collectionView.mj_y - 10;
  
@@ -104,8 +102,8 @@ static NSString * const reuseIdentifier = @"cityCell";
     cell.topic = self.topices[indexPath.row];
     
     return cell;
-    
 }
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     

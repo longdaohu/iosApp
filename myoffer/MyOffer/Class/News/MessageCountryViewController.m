@@ -15,6 +15,7 @@
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
 #import "myofferAnchorButton.h"
+#import "messageCatigroySubModel.h"
 
 #define CELL_HIGHT_DEFAULT 44
 #define PARA_PAGE @"page"
@@ -73,14 +74,13 @@
     [self makeCatigoryData];
     
     [self makeUI];
-
+    
 }
 
 
 - (void)makeUI{
     
     //顶部筛选栏
-
     XWeakSelf
     self.topView = [MessageTopicTopView topViewWithBlock:^(NSDictionary *parameter ,NSInteger catigory_index) {
         
@@ -89,8 +89,8 @@
     }];
     [self.view addSubview:self.topView];
     
-  
-     //添加tableView容器
+    
+    //添加tableView容器
     CGFloat base_y = CGRectGetMaxY(self.topView.frame);
     CGFloat base_w = XSCREEN_WIDTH;
     CGFloat base_h = XSCREEN_HEIGHT - base_y;
@@ -130,15 +130,17 @@
     
     
     //标题名称
-    myofferAnchorButton *titleView = [[myofferAnchorButton alloc] initWithFrame:CGRectMake(0, 0, 10, 50)];
+    myofferAnchorButton *titleView = [[myofferAnchorButton alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
     self.titleView = titleView;
     titleView.title = self.countryName;
-    self.navigationItem.titleView = titleView;
+    UIView  *nav_titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    self.navigationItem.titleView = nav_titleView;
+    [nav_titleView  addSubview:titleView];
+    titleView.center = nav_titleView.center;
     titleView.actionBlock= ^(UIButton *sender){
-        
-         [self titleOnClick:sender];
+        [self titleOnClick:sender];
     };
-  
+    
     
 }
 
@@ -163,32 +165,42 @@
 
 
 //topView 筛选条件请求
-- (void)filterWithparameter:(NSDictionary *)parameter catigroyIndex:(NSInteger)catigroyIndex{
-    
-    
-//    NSLog(@" >>>>>  filterWithparamet   %ld >>>>  %ld",self.topic_current.catigoryIndex ,catigroyIndex);
+- (void)filterWithparameter:(NSDictionary *)parameter_p catigroyIndex:(NSInteger)catigroyIndex{
     
     MessageCountryTopicModel *topic = self.groups[catigroyIndex];
+    
+    /*
+     * 1 当对应选项有数据大于0
+     * 2 当前 topic 第三个参数为空时
+     * 3 选择项与上一个选择项不一样时
+     *满足三个条件可以不加载网络，从原始数据中加载数据，刷新表格
+     */
+    //    if (topic.messageFrames.count > 0 && catigroyIndex != self.topic_current.catigoryIndex && !topic.parameters[@"third"]) {
+    //        //在确认判断条件后再设置当前的主题   self.topic_current
+    //        self.topic_current  = topic;
+    //        //4 数据刷新  或page为0时回到表格顶部
+    //        UITableView *table = (UITableView *)self.bgView.subviews[catigroyIndex];
+    //        [table setContentOffset:CGPointZero animated:NO];
+    //        [table reloadData];
+    //
+    //        return;
+    //    }
     self.topic_current  = topic;
     
     // 1 添加参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:parameter];
-     // 1 - 1 判断page参数否是点击了【全部】按钮
-    NSInteger  p_page = ([parameter[PARA_PAGE] integerValue] == DEFAULT_NUMBER) ? 0 : [parameter[PARA_PAGE] integerValue];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:parameter_p];
+    [parameters setValue:@"10" forKey: @"size"];
     
-    NSDictionary *parameter_base = @ { PARA_PAGE : @(p_page),  @"size" : @"30"};
-
-    [parameters  setValuesForKeysWithDictionary:parameter_base];
+    [parameters setValue: parameter_p[PARA_PAGE] forKey: PARA_PAGE];
     
     //3 获取当前所在主题  记录当前所在专题数据在第几页及网络请求参数
-    topic.page = p_page;
+    topic.page = [parameter_p[PARA_PAGE] integerValue];; //会在网络请求成功后记录page+1
     topic.parameters = parameters;
     
-    NSLog(@"2 筛选条件请求 >>>>>>  %@    \n  %@",self.topic_current.parameters,parameter);
+    //    NSLog(@"2 筛选条件请求 >>>>>>  %@    \n  %@",self.topic_current.parameters,parameter_p);
     
- //    //4 选择对应的选项是滚动到对应页面
+    //4 选择对应的选项是滚动到对应页面
     [self.bgView setContentOffset:CGPointMake(self.bgView.mj_w * catigroyIndex, 0) animated:YES];
-    
     
     
     //2 根据参数请求数据
@@ -207,7 +219,15 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [MBProgressHUD showError:@"网络请求失败" toView:self.view];
+        //        [MBProgressHUD showError:@"网络请求失败" toView:self.view];
+        
+        if (self.topic_current.messageFrames.count == 0) {
+            
+            MyOfferTableView *table =  (MyOfferTableView *)self.bgView.subviews[self.topic_current.catigoryIndex];
+            [table emptyViewWithError:@"网络请求失败！！！"];
+            
+        }
+        
         
     }];
     
@@ -226,43 +246,44 @@
 - (void)updateUIWithResponse:(NSDictionary *)response {
     
     //1  专题page == 0 时，清空数据
-    if (0 == self.topic_current.page){
-        
-       [self.topic_current.messageFrames removeAllObjects];
-     }
+    if (0 == self.topic_current.page)   [self.topic_current.messageFrames removeAllObjects];
     
     //2 字典转模型
     NSArray  *items  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"items"]];
-  
-    
     NSMutableArray *temps = [NSMutableArray array];
-    
     for (MyOfferArticle *item in items) {
-        
         [temps addObject: [XWGJMessageFrame messageFrameWithMessage:item]];
     }
     [self.topic_current.messageFrames  addObjectsFromArray:temps];
-
-    //3 判断是否是最近一页
-    self.topic_current.endPage = items.count < [response[@"size"] integerValue];
     
-//    NSLog(@">>>>>>updateUIWithResponse>>>>>>> %ld  %ld",self.topic_current.messageFrames.count,items.count);
+    //3 判断是否是最近一页
+    self.topic_current.endPage = (items.count < [response[@"size"] integerValue]);
     
     
     //4 数据刷新  或page为0时回到表格顶部
-    UITableView *table = (UITableView *)self.bgView.subviews[self.topic_current.catigoryIndex];
+    MyOfferTableView *table = (MyOfferTableView *)self.bgView.subviews[self.topic_current.catigoryIndex];
     
-    if (0 == self.topic_current.page){
+    if (0 == self.topic_current.page && self.topic_current.messageFrames.count > 0){
         
         table.contentOffset = CGPointZero;
     }
-
+    
+    if (self.topic_current.messageFrames.count > 0) {
+        
+        [table emptyViewWithHiden:YES];
+        
+    }else{
+        
+        [table emptyViewWithError:@"数据为空"];
+    }
+    
     [table reloadData];
-
+    
+    
     //5 确认该专题数据是否还有数据
     self.topic_current.page++;
     [self.topic_current.parameters setValue:@(self.topic_current.page) forKey:PARA_PAGE];
-
+    
 }
 
 
@@ -275,7 +296,7 @@
     //2  记录当前国家  刷新数据
     NSArray *countries = [self.catigroyGroup valueForKeyPath:@"name"];
     NSInteger index = [countries indexOfObject:self.countryName];
-     [self.countryTableView reloadData];
+    [self.countryTableView reloadData];
     
     
     //3 根据当前主题添加展示表格 及添加基本数据
@@ -283,31 +304,33 @@
     
     [self makeTableWithCountryCatigory: country_catigory];
     
-    //4 筛选项添加数据
+    //4 筛选项添加数据 并发起网络请求
     self.topView.catigoryCountry = country_catigory;
     
 }
 
 //根据当前国家catigory.subs添加tableView
 - (void)makeTableWithCountryCatigory:(messageCatigroyCountryModel *)countryCatigory{
- 
-//    [self.bgView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-      //1 清空旧数据
-     if(self.groups.count > 0){
     
+    //    [self.bgView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    //1 清空旧数据
+    if(self.groups.count > 0){
+        
         //这里清空之前的数据
-         [self.groups removeAllObjects];
-         
-         [self.topic_current.messageFrames removeAllObjects];
-         self.topic_current = nil;
-         
+        [self.groups removeAllObjects];
+        
+        [self.topic_current.messageFrames removeAllObjects];
+        self.topic_current = nil;
+        
         //这里清空之前的数据，刷新表格
-         for (UITableView *table in self.bgView.subviews) {
+        for (MyOfferTableView *table in self.bgView.subviews) {
             
-             [table reloadData];
-         }
+            [table emptyViewWithHiden:YES];
             
-     }
+            [table reloadData];
+        }
+        
+    }
     
     
     //2 添加展示表格、及初始化数组
@@ -319,16 +342,16 @@
         
         //清空数据后，再新选择请求参数时不重复添加表格
         if (index > (group_count -1)){
-        
+            
             [self makeTableViewWithTag:index superView:self.bgView];
         }
         
         //初始化数据
         MessageCountryTopicModel *topic = [MessageCountryTopicModel countryTopicWithMessages:[NSMutableArray array] catigoryIndex:index];
-      
+        
         [temps addObject:topic];
         
-//        NSLog(@" %ld   groups %ld  topic = %p   %p",group_count,self.groups.count,topic,self.topic_current);
+        //        NSLog(@" %ld   groups %ld  topic = %p   %p",group_count,self.groups.count,topic,self.topic_current);
         
         //设置当前所在主题
         if (!self.topic_current)  self.topic_current = self.groups.firstObject;
@@ -351,7 +374,7 @@
     CGFloat t_y = 0;
     CGFloat t_h = self.bgView.mj_h;
     CGFloat t_x = tag * t_w;
-    UITableView *tableView =[[UITableView alloc] initWithFrame:CGRectMake(t_x, t_y, t_w, t_h) style:UITableViewStylePlain];
+    MyOfferTableView *tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(t_x, t_y, t_w, t_h) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.tableFooterView =[[UIView alloc] init];
@@ -368,11 +391,11 @@
     CGFloat height = CELL_HIGHT_DEFAULT;
     
     if (tableView != self.countryTableView ){
-   
+        
         XWGJMessageFrame *messageFrame =  self.topic_current.messageFrames[indexPath.row];
         
         height = messageFrame.cell_Height;
-     }
+    }
     
     return height;
     
@@ -384,7 +407,7 @@
     
     if (tableView == self.countryTableView) {
         
-      rows  =  self.catigroyGroup;
+        rows  =  self.catigroyGroup;
         
     }
     
@@ -400,17 +423,17 @@
         UniversityCourseFilterCell *cell = [[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
         NSArray *names = [self.catigroyGroup valueForKeyPath:@"name"];
-    
+        
         NSString *title = names[indexPath.row];
-    
+        
         cell.title = title;
-    
+        
         cell.onSelected = [title isEqualToString:self.countryName];
-    
+        
         return cell;
     }
     
- 
+    
     //2 正常展示数据
     MessageCell *cell = [MessageCell cellWithTableView:tableView];
     
@@ -431,7 +454,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (tableView == self.countryTableView) {
- 
+        
         //1 收起国家表格
         [self coverOnClick:self.coverView];
         
@@ -442,7 +465,7 @@
         //3 设置当前国家
         self.countryName =country.name;
         
-          //3-2设置当前标题
+        //3-2设置当前标题
         self.titleView.title = self.countryName;
         
         
@@ -451,11 +474,11 @@
         
         //5 筛选项添加数据
         self.topView.catigoryCountry = country;
- 
+        
         
         return;
     }
-
+    
     
     XWGJMessageFrame  *messageFrame =  self.topic_current.messageFrames[indexPath.row];
     
@@ -477,9 +500,8 @@
         CGFloat width = scrollView.frame.size.width;
         
         NSInteger index =  (offsetX + .5f *  width) / width;
- 
         
-        [self.topView scrollToCatigoryIndex:index];
+        [self.topView superViewSetScrollViewToCatigoryIndex:index];
         
     }
     
@@ -494,29 +516,27 @@
         //3-1 刷新当前数据
         [self.countryTableView reloadData];
     }
-  
+    
 }
 
 - (void)coverOnClick:(UIButton *)sender{
-
+    
     [self.titleView titleButtonOnClick];
 }
-
 
 - (void)countryTableViewShow:(BOOL)show{
     
     CGFloat distance = show ? self.catigroyGroup.count * CELL_HIGHT_DEFAULT : 0 ;
     
     CGFloat alpha = show ? 1 : 0;
-   
     
     if (show) self.countryBgView.alpha = alpha;
     
-    [UIView animateWithDuration:ANIMATION_DUATION delay:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-            self.countryTableView.mj_h = distance;
+        self.countryTableView.mj_h = distance;
         
-            self.coverView.alpha = alpha;
+        self.coverView.alpha = alpha;
         
     } completion:^(BOOL finished) {
         
@@ -525,10 +545,9 @@
             self.countryBgView.alpha = alpha;
             
         }
-        
     }];
-        
- 
+    
+    
 }
 
 
@@ -538,14 +557,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

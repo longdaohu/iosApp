@@ -17,5 +17,8 @@
 @property(nonatomic,copy)NSString *message_id;
 @property(nonatomic,copy)NSString *desc;
 @property(nonatomic,copy)NSString *logo;
+@property(nonatomic,copy)NSString *category_thr;
 
 @end
+
+

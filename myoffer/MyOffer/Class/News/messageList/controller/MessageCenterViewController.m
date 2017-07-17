@@ -7,24 +7,31 @@
 //
 
 #import "MessageCenterViewController.h"
-#import "MessageCell.h"
 #import "messageCatigroyModel.h"
 #import "XWGJMessageFrame.h"
 #import "MessageTopicHeaderViewController.h"
-#import "MessageSubViewController.h"
 #import "MessageHotTopicMedel.h"
+#import "MessageTopiccGroup.h"
+#import "MessageTopicModel.h"
+#import "FSSegmentTitleView.h"
+#import "FSBaseTableView.h"
+#import "FSSScrollContentViewController.h"
+#import "FSBottomTableViewCell.h"
+#import "LeftBarButtonItemView.h"
 
-#define MASSAGE_HEADER_HIGHT  XSCREEN_WIDTH * 0.3 + 50
-
-@interface MessageCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
-
-@property(nonatomic,strong)NSArray *messageCatigroies;
-@property(nonatomic,strong)NSMutableArray *messageFrames;
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)UIView *tableViewHeader;
-@property(nonatomic,strong)MessageTopicHeaderViewController *messageHeaderView;
-@property(nonatomic,strong)MessageSubViewController *subVC;
-@property(nonatomic,strong)UIButton *leftBtn;
+@interface MessageCenterViewController ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate>
+@property (nonatomic, strong) FSBaseTableView *tableView;
+@property(nonatomic,strong)NSArray *catigroies;
+@property(nonatomic,strong)NSArray *groups;
+//表头
+@property(nonatomic,strong)MessageTopicHeaderViewController *headerViewController;
+//分区View
+@property(nonatomic,strong)FSSegmentTitleView *titleView;
+@property(nonatomic,assign)BOOL canScroll;
+@property(nonatomic,strong)NSArray *childVCes;
+@property(nonatomic,strong)FSSScrollContentViewController *child_current;
+@property(nonatomic,strong)FSBottomTableViewCell *contentCell;
+@property(nonatomic,strong)LeftBarButtonItemView *leftView;
 
 @end
 
@@ -39,7 +46,10 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
+    [self leftViewMessage];
+    
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -54,160 +64,366 @@
     
     [super viewDidLoad];
     
-    self.messageFrames = [NSMutableArray array];
-    
     [self makeUI];
     
-    [self makeData];
-  
+    [self makeBaseData];
+    
 }
 
 - (void)makeUI{
     
     [self makeTableView];
     
+    self.canScroll = YES;
     
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [self.leftBtn setImage:XImage(@"search_icon_gray") forState:UIControlStateNormal];
-    [self.leftBtn addTarget:self action:@selector(leftOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    self.leftBtn.tag = 0;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBtn];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
     
- 
+    
+    XWeakSelf
+    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
+        
+        [weakSelf showLeftMenu];
+        
+    }];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
     
 }
 
-- (void)makeData{
+- (void)makeBaseData{
+  
     
-    [self startAPIRequestWithSelector:@"GET api/hot-article-topics" parameters:nil success:^(NSInteger statusCode, id response) {
+    if (self.headerViewController.topices.count == 0) {
         
-        self.messageHeaderView.topices  = [MessageHotTopicMedel mj_objectArrayWithKeyValuesArray:response[@"items"]];
+        [self startAPIRequestWithSelector:@"GET api/hot-article-topics"  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+            
+            NSArray *items = [MessageHotTopicMedel mj_objectArrayWithKeyValuesArray:response[@"items"]];
+            
+            self.canScroll = items.count > 0;
+            
+            if (items.count == 0) {
+                
+                self.tableView.tableHeaderView = [UIView new];
+                
+                return ;
+            }
+            
+            self.tableView.tableHeaderView  =     self.headerViewController.view;
+            self.headerViewController.topices  = items;
+            
+        } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+            
+            self.tableView.tableHeaderView = [UIView new];
+            
+            self.canScroll = NO;
+            
+        }];
+    }
+    
+    
+    if (self.catigroies.count > 0) return;
+    
+    [self startAPIRequestWithSelector:kAPISelectorArticleCatigoryIndex  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [self updateUIWithResponse:response];
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+    // catigroies数据为空时，其他操作步骤没有意义
+        self.catigroies = nil;
+        [self.tableView emptyViewWithError:@"网络请求错误，点击页面重新加载！"];
+        [self.tableView reloadData];
         
     }];
     
  
-    [self startAPIRequestWithSelector:kAPISelectorArticleCatigoryIndex  parameters:nil success:^(NSInteger statusCode, id response) {
+}
+
+- (void)updateUIWithResponse:(id)response{
+    
+    [self.tableView emptyViewWithHiden:YES];
+    
+    //1  专题分类
+    self.catigroies  = [messageCatigroyModel mj_objectArrayWithKeyValuesArray:response[@"items"]];
+    
+    if(self.catigroies.count == 0) // catigroies数据为空时，其他操作步骤没有意义
+    {
+       [self.tableView emptyViewWithError:@"没有数据！"];
         
-        self.messageCatigroies  = [messageCatigroyModel mj_objectArrayWithKeyValuesArray:response[@"items"]];
+       [self.tableView reloadData];
         
-        self.subVC.catigories = self.messageCatigroies;
+       return;
+    }
+    
+    //2 添加子视图
+    NSMutableArray *contentVCs = [NSMutableArray array];
+    for (messageCatigroyModel *catigory in self.catigroies) {
         
-    }];
- 
+        FSSScrollContentViewController *vc = [[FSSScrollContentViewController alloc]init];
+        
+        vc.title = catigory.name;
+        
+        [contentVCs addObject:vc];
+    }
+     self.childVCes = [contentVCs copy];
+    
+    
+    //3 预添加数据
+    NSMutableArray *temps = [NSMutableArray array];
+    for (NSInteger index = 0; index < self.catigroies.count; index++) {
+        messageCatigroyModel *catigory = self.catigroies[index];
+        MessageTopiccGroup *group = [MessageTopiccGroup groupWithCatigroy:catigory index:index];
+        [temps addObject:group];
+    }
+    
+    self.groups = [temps copy];
+    
+    [self.tableView reloadData];
+    
+    //4 设置当前显示视图
+    if (!self.child_current) [self makeDataWithCatigoryIndex:0];
     
 }
+
+- (void)makeDataWithCatigoryIndex:(NSInteger)index{
+    
+    //2  设置当前显示视图
+    FSSScrollContentViewController *vc = self.childVCes[index];
+    self.child_current = vc;
+    
+    //3  当前显示视图已有数据不再请求数据
+    if (self.child_current.group.contents.count)  return;
+    
+    //4 请求当前主题视图数据
+    messageCatigroyModel *catigory = self.catigroies[index];
+    
+    NSDictionary *pass = @{@"category" : catigory.code};
+    
+    [self startAPIRequestWithSelector:@"GET api/articles/index"  parameters:pass expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        MessageTopiccGroup *group = self.groups[index];
+        
+        group.contents = [MessageTopicModel mj_objectArrayWithKeyValuesArray:response];;
+        
+        self.child_current.group = group;
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [self.child_current showError:nil];
+
+    }];
+    
+    
+}
+
+
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.mj_h = XSCREEN_HEIGHT - XNAV_HEIGHT - 50;
+    self.tableView =[[FSBaseTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    self.tableView.showsVerticalScrollIndicator = NO;
+    XWeakSelf
+    self.tableView.actionBlock = ^{
+        
+        [weakSelf makeBaseData];
+    };
     
-    self.messageHeaderView = [[MessageTopicHeaderViewController alloc] init];
-    [self addChildViewController:self.messageHeaderView];
-    self.messageHeaderView.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT);
-    self.messageHeaderView.header_Height = MASSAGE_HEADER_HIGHT;
+    self.headerViewController = [[MessageTopicHeaderViewController alloc] init];
+    [self addChildViewController:self.headerViewController];
+    self.headerViewController.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT);
+    self.headerViewController.header_Height = MASSAGE_HEADER_HIGHT;
+    self.tableView.tableHeaderView = self.headerViewController.view;
     
-    self.tableViewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT)];
-    self.tableView.tableHeaderView = self.tableViewHeader ;
-    [self.tableViewHeader addSubview:self.messageHeaderView.view];
-
-    
-    
-    self.subVC = [[MessageSubViewController alloc] init];
-    [self addChildViewController:self.subVC];
-    self.subVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.tableView.mj_h);
-    self.subVC.cell_Height =  self.tableView.mj_h;
-    [self.subVC superViewScroll:self.tableView contentOffsetY:0];
 }
-
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    
-    [cell.contentView addSubview:self.subVC.view];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
-    return cell;
+    return  self.catigroies.count > 0 ? 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return  self.subVC.cell_Height;
+    return CGRectGetHeight(self.view.bounds) + 200;
 }
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    return    60;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    NSArray *titles = [self.catigroies valueForKeyPath:@"name"];
+    
+    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 60) titles:titles delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+     
+    return self.titleView;
+}
 
-  
-    //3 当  scrollView.contentOffset.y  大于等于 self.tableView.tableHeaderView.mj_h 切换按钮图标
-     if (scrollView.contentOffset.y >= self.tableView.tableHeaderView.mj_h) {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    FSBottomTableViewCell  *contentCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    if (!contentCell) {
         
-        if (self.leftBtn.tag == 0)  [self leftButtonWithTag:DEFAULT_NUMBER imageName:@"close_button"];
+        contentCell = [[FSBottomTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        
+        _contentCell = contentCell;
+        
+    }
+    
+    _contentCell.viewControllers = [self.childVCes mutableCopy];
+    _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - 64) childVCs:[self.childVCes mutableCopy] parentVC:self delegate:self];
+    [_contentCell.contentView addSubview:_contentCell.pageContentView];
+    
+    return contentCell;
+    
+}
+
+
+
+#pragma mark UIScrollView
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //1 数据为空时，其他步骤操作没有意义
+    if (self.catigroies.count == 0) return;
+    
+    
+    CGFloat bottomCellOffset = [_tableView rectForSection:0].origin.y;
+    
+    if (scrollView.contentOffset.y >= bottomCellOffset) {
+        
+        
+        scrollView.contentOffset = CGPointMake(0, bottomCellOffset);
+        
+        
+        if (self.canScroll) {
+            
+            self.canScroll = NO;
+            
+            self.contentCell.cellCanScroll = YES;
+            
+        }
+        
         
     }else{
-    
-        //1  push到下一页的时候会调用  scrollViewDidScroll 方法
-        if (!self.tableView.scrollEnabled) return;
         
-        [self leftButtonWithTag:0 imageName:@"search_icon"];
-
-    }
-    //3-1 当  scrollView.contentOffset.y  大于等于 self.tableView.tableHeaderView.mj_h 切换按钮图标
-
-    
-    //2 把self.tableView 的 contentOffsetY传到子控件
-    [self.subVC superViewScroll:self.tableView contentOffsetY:scrollView.contentOffset.y];
-    
-}
-
-
--(void)leftOnClick:(UIButton *)sender{
-    
-    if (sender.tag > 0) {
-        
-        [self.subVC superViewScrollEnable:YES];
-        
-        [self leftButtonWithTag:0 imageName:@"search_icon"];
-        
-        return;
+        if (!self.canScroll) {
+            
+            //子视图没到顶部
+            scrollView.contentOffset = CGPointMake(0, bottomCellOffset);
+            
+        }
     }
     
-    NSLog(@" sender  > search功能 ");
+    self.tableView.showsVerticalScrollIndicator = _canScroll ? YES : NO;
+}
+
+
+
+
+#pragma mark notify
+- (void)changeScrollStatus//改变主视图的状态
+{
+    self.canScroll = YES;
+    
+    self.contentCell.cellCanScroll = NO;
+}
+
+
+#pragma mark FSSegmentTitleViewDelegate
+- (void)FSSegmentTitleView:(FSSegmentTitleView *)titleView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex
+{
+    
+    self.contentCell.pageContentView.contentViewCurrentIndex = endIndex;
+    
+    [self makeDataWithCatigoryIndex:endIndex];
     
 }
 
- - (void)leftButtonWithTag:(NSInteger)tag  imageName:(NSString *)name{
 
-    [self.leftBtn setImage:XImage(name) forState:UIControlStateNormal];
+#pragma mark FSPageContentViewDelegate
+
+- (void)FSContenViewDidEndDecelerating:(FSPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex
+{
     
-    self.leftBtn.tag = tag;
+    self.titleView.selectIndex = endIndex;
+    
+    _tableView.scrollEnabled = YES;//此处其实是监测scrollview滚动，pageView滚动结束主tableview可以滑动，或者通过手势监听或者kvo，这里只是提供一种实现方式
+    
+    [self makeDataWithCatigoryIndex:endIndex];
 }
 
+- (void)FSContentViewDidScroll:(FSPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex progress:(CGFloat)progress
+{
+    _tableView.scrollEnabled = NO;//pageView开始滚动主tableview禁止滑动
+    
+    progress = startIndex - endIndex > 0 ? - progress : progress;
+    
+    //    self.titleView.progress = progress;
+}
+
+
+
+//导航栏 leftBarButtonItem
+- (void)leftViewMessage{
+    
+    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
+    NSString *message_count  = [ud valueForKey:@"message_count"];
+    NSString *order_count    = [ud valueForKey:@"order_count"];
+    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
+    
+    if(!LOGIN) self.leftView.countStr = @"0";
+    
+    if (LOGIN && [self checkNetWorkReaching]) {
+        
+        XWeakSelf
+        
+        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+            
+            NSInteger message_count  = [response[@"message_count"] integerValue];
+            NSInteger order_count    = [response[@"order_count"] integerValue];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
+            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
+            [ud synchronize];
+            
+            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
+        }];
+        
+    }
+    
+}
+//显示侧边菜单
+-(void)showLeftMenu{
+    
+    [self.sideMenuViewController presentLeftMenuViewController];
+    
+}
+
+
+
+#pragma mark FSPageContentViewDelegate
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

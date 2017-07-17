@@ -11,7 +11,6 @@
 typedef void(^myofferTableViewBlock)();
 
 @interface MyOfferTableView : UITableView
-
 @property(nonatomic,copy)myofferTableViewBlock actionBlock;
 
 - (void)emptyViewWithHiden:(BOOL)hiden;

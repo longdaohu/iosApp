@@ -12,18 +12,17 @@
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
 #import "UniversityNavView.h"
-#import "MessgeTopicModel.h"
 #import "XWGJMessageFrame.h"
 
 
 @interface MessageTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)MessgeTopicModel *topicModel;
-@property(nonatomic,strong)NSMutableArray *messageFrames;
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
 @property(nonatomic,strong)UIImageView *flexibleView;
 @property(nonatomic,assign)CGRect flexFrame_old;
 @property(nonatomic,assign)CGPoint flexCenter_old;
+@property(nonatomic,strong)NSMutableArray *messageFrames;
+
 @end
 
 @implementation MessageTopicViewController
@@ -45,7 +44,7 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
-    [MobClick beginLogPageView:@"page资讯专题"];
+    [MobClick beginLogPageView:@"page资讯热门专题"];
     
 }
 
@@ -54,7 +53,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page资讯专题"];
+    [MobClick endLogPageView:@"page资讯热门专题"];
 
 }
 
@@ -87,25 +86,22 @@
 
 
 - (void)updateUIWithResponse:(id)response{
-
-    self.topicModel = [MessgeTopicModel mj_objectWithKeyValues:response];
     
-    for(MyOfferArticle *article in self.topicModel.articles){
+    NSArray *articles = [MyOfferArticle mj_objectArrayWithKeyValuesArray:response[@"articles"]];
+    
+    for(MyOfferArticle *article in articles){
         
         XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
         
         [self.messageFrames addObject:messageFrame];
         
-        [self.tableView reloadData];
-        
     }
     
-    self.topNavigationView.titleName = self.topicModel.title;
+    [self.tableView reloadData];
     
-    NSString *path = @"http://zx.youdao.com/zx/wp-content/uploads/2013/11/1120oral-pic.jpg";
-    //        NSString *path = weakSelf.topicModel.cover_url;
+    self.topNavigationView.titleName = response[@"title"];
+    NSString *path = response[@"cover_url"];
     [self.flexibleView sd_setImageWithURL:[NSURL URLWithString:path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
     }];
     
 }
@@ -115,6 +111,7 @@
     [self makeTableView];
     [self makeTopNavigaitonView];
     [self makeFlexiableView];
+    self.view.clipsToBounds = YES;
     
 }
 
@@ -128,7 +125,6 @@
     }];
     
     self.topNavigationView = nav;
-    nav.titleName = self.topicModel.title;
     [nav navigationWithRightViewHiden:YES];
     [nav navigationWithQQHiden:YES];
     [self.view insertSubview:nav aboveSubview:self.tableView];
@@ -139,10 +135,7 @@
 - (void)navigationItemWithSender:(UIButton *)sender{
     
     if (sender.tag ==  NavItemStyleQQ) {
-        
-        
     }else{
-        
         [self dismiss];
     }
     
@@ -181,16 +174,16 @@
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return  Uni_Cell_Height;
+  
+    XWGJMessageFrame *messageFrame = self.messageFrames[indexPath.row];
+  
+    return  messageFrame.cell_Height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return self.messageFrames.count;
 }
-
-static NSString *identify = @"cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -209,6 +202,7 @@ static NSString *identify = @"cell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame  = self.messageFrames[indexPath.row];
+    
     [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id] animated:YES];
 }
 
@@ -228,7 +222,6 @@ static NSString *identify = @"cell";
     //下拉图片处理
     if (offersetY > 0) {
         
-        
         self.flexibleView.frame = self.flexFrame_old;
         
         self.flexibleView.mj_y = -offersetY;
@@ -247,7 +240,10 @@ static NSString *identify = @"cell";
     self.flexibleView.center = self.flexCenter_old;
 }
 
+- (void)dealloc{
 
+    NSLog(@"资讯热门专题 dealloc MessageTopicViewController");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

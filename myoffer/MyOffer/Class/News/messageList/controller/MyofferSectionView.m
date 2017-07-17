@@ -70,7 +70,7 @@
     
     self.titleLab.frame = CGRectMake(CGRectGetMaxX(self.panddingView.frame) + margin, 0, self.bounds.size.width, self.bounds.size.height);
     
-    self.line_bottom.frame = CGRectMake(0, self.bounds.size.height - LINE_HEIGHT, self.bounds.size.width, LINE_HEIGHT);
+    self.line_bottom.frame = CGRectMake(0, self.bounds.size.height , self.bounds.size.width, LINE_HEIGHT);
     
 }
 

@@ -14,14 +14,15 @@
 //图片
 @property(nonatomic,strong)UIImageView *Logo;
 //消息头
-@property(nonatomic,strong)UILabel *TitleLab;
+@property(nonatomic,strong)UILabel *titleLab;
 //关注数量
 @property(nonatomic,strong)UIButton *view_count_Btn;
 //消息发布时间
 @property(nonatomic,strong)UIButton *update_at_Btn;
 
-@property(nonatomic,strong)UIView *line;
+@property(nonatomic,strong)UIView *bottom_line;
 
+@property(nonatomic,strong)UIButton *tag_Btn;
 
 @end
 
@@ -53,10 +54,10 @@
         self.Logo.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.Logo];
         
-        self.TitleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
-        self.TitleLab.numberOfLines = 2;
-        self.TitleLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:KDUtilSize(16)];
-        [self.contentView addSubview:self.TitleLab];
+        self.titleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.titleLab.numberOfLines = 2;
+        self.titleLab.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:KDUtilSize(16)];
+        [self.contentView addSubview:self.titleLab];
         
         
          self.update_at_Btn = [[UIButton alloc] init];
@@ -75,10 +76,20 @@
         self.view_count_Btn.userInteractionEnabled = NO;
         [self.contentView addSubview:self.view_count_Btn];
         
-        UIView *line = [UIView new];
-        self.line = line;
-        line.backgroundColor = XCOLOR_line;
-        [self.contentView addSubview:line];
+        
+        self.tag_Btn = [[UIButton alloc] init];
+        self.tag_Btn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [self.tag_Btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        self.tag_Btn.userInteractionEnabled = NO;
+        [self.contentView addSubview:self.tag_Btn];
+        self.tag_Btn.layer.cornerRadius = CORNER_RADIUS;
+        self.tag_Btn.layer.masksToBounds = YES;
+        self.tag_Btn.backgroundColor = XCOLOR_BG;
+        
+        UIView *bottom_line = [UIView new];
+        self.bottom_line = bottom_line;
+        bottom_line.backgroundColor = XCOLOR_line;
+        [self.contentView addSubview:bottom_line];
         
         
     }
@@ -117,26 +128,27 @@
      }
     
     [self.Logo KD_setImageWithURL:path];
-    self.TitleLab.text = title;
+    self.titleLab.text = title;
     [self.update_at_Btn setTitle:time forState:UIControlStateNormal];
     [self.view_count_Btn setTitle:count forState:UIControlStateNormal];
+    [self.tag_Btn setTitle:messageFrame.News.category_thr forState:UIControlStateNormal];
 
 
     self.Logo.frame = messageFrame.LogoFrame;
-    self.TitleLab.frame = messageFrame.TitleFrame;
+    self.titleLab.frame = messageFrame.TitleFrame;
     self.update_at_Btn.frame = messageFrame.TimeFrame;
     self.view_count_Btn.frame = messageFrame.FocusFrame;
-    self.line.frame = messageFrame.lineFrame;
-    
+    self.bottom_line.frame = messageFrame.lineFrame;
+    self.tag_Btn.frame = messageFrame.tagFrame;
+   
 }
 
 
 
 - (void)separatorLineShow:(BOOL)show{
     
-    self.line.hidden = show;
+    self.bottom_line.hidden = show;
 }
-
 
 
 

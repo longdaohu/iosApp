@@ -25,13 +25,12 @@
         [titleBtn addTarget:self action:@selector(titleOnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *anchorView = [[UIButton alloc] initWithFrame:CGRectZero];
-        [anchorView setImage:XImage(@"arrow_down") forState:UIControlStateNormal];
-        [anchorView setImage:XImage(@"arrow_up") forState:UIControlStateSelected];
+        [anchorView setImage:XImage(@"arrow_down_white") forState:UIControlStateNormal];
+        [anchorView setImage:XImage(@"arrow_up_white") forState:UIControlStateSelected];
         [anchorView sizeToFit];
         self.anchorView = anchorView;
         [self addSubview:anchorView];
         [anchorView addTarget:self action:@selector(titleOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return self;
 }
@@ -41,22 +40,20 @@
     _title = title;
     
     [self.titleBtn setTitle:title forState:UIControlStateNormal];
-    
     [self.titleBtn sizeToFit];
+    self.titleBtn.mj_w += 20;
+    self.anchorView.mj_x = self.titleBtn.mj_w;
     
-    self.anchorView.mj_x = self.titleBtn.mj_w + 5;
-    CGFloat height = self.titleBtn.mj_h;
-    self.anchorView.mj_h =  height;
-    CGFloat width = CGRectGetMaxX(self.anchorView.frame);
-    self.frame = CGRectMake(0, 0, width, height);
- 
+    self.titleBtn.mj_h = self.mj_h;
+    self.anchorView.mj_h = self.mj_h;
+    self.mj_w = CGRectGetMaxX(self.anchorView.frame);
+    
 }
 
 - (void)titleOnClick:(UIButton *)sender{
 
     self.titleBtn.selected = !self.titleBtn.selected;
     self.anchorView.selected = !self.anchorView.selected;
-    
     if (self.actionBlock)  self.actionBlock(self.titleBtn);
     
 }

@@ -14,8 +14,7 @@
 
 + (NSDictionary *)mj_objectClassInArray{
     
-    
-    return @{@"articles" : @"MyOfferArticle"};
+    return @{@"articles" : NSStringFromClass([MyOfferArticle class])};
 }
 
 - (void)setArticles:(NSArray *)articles{

@@ -13,7 +13,7 @@
 
 @implementation MessageTopiccGroup
 
-+ (instancetype)groupWithIndex:(NSInteger)index{
++ (instancetype)groupWithCatigroy:(id)catigory  index:(NSInteger)index{
     
     MessageTopiccGroup *group = [[MessageTopiccGroup alloc] init];
     

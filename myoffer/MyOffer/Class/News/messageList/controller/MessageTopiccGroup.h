@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "messageCatigroyModel.h"
 
 @interface MessageTopiccGroup : NSObject
 
-@property(nonatomic,strong)NSArray *topic;
+@property(nonatomic,strong)NSArray *contents;
 
 @property(nonatomic,assign)NSInteger index;
 
-+ (instancetype)groupWithIndex:(NSInteger)index;
+@property(nonatomic,strong)messageCatigroyModel *catigory;
+
++ (instancetype)groupWithCatigroy:(messageCatigroyModel *)catigory  index:(NSInteger)index;
 
 @end

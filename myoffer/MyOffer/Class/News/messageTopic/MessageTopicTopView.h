@@ -20,6 +20,6 @@ typedef void(^topicTopViewBlock)(NSDictionary *,NSInteger);
 
 @property(nonatomic,copy)topicTopViewBlock actionBlock;
 
-- (void)scrollToCatigoryIndex:(NSInteger)page;
+- (void)superViewSetScrollViewToCatigoryIndex:(NSInteger)page;
 
 @end

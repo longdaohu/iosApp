@@ -21,6 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
     self = [super initWithFrame:frame style:style];
+    
     if (self) {
         
         [self makeUI];
@@ -62,22 +63,19 @@
     
     self.emptyView.center = bgView.center;
     
-//    self.emptyView.backgroundColor = XCOLOR_RED;
-//    bgView.backgroundColor = XCOLOR_LIGHTBLUE;
-
 }
 
 - (void)emptyViewWithHiden:(BOOL)hiden{
     
+    //1 隐藏
     if (hiden) {
     
         self.tableFooterView = [UIView new];
         
         return;
-    
     }
     
-     
+    
     if (!self.isSeted && (self.tableHeaderView.mj_h || self.mj_y > 0 || self.contentInset.top > 0)) {
         
         self.isSeted = YES;
@@ -86,10 +84,14 @@
         
         self.emptyView.mj_y  -= (self.tableHeaderView.mj_h  * 0.5 + 64);
         
+        if (self.emptyView.mj_y >= 0) {
+            
+            self.emptyView.mj_y = 0;
+        }
+        
     }
     
     self.tableFooterView = self.bgView;
- 
     
 }
 

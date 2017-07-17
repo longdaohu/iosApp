@@ -11,6 +11,7 @@
 @interface MessageHotTopicMedel : NSObject
 @property(nonatomic,copy)NSString *topic_id;
 @property(nonatomic,copy)NSString *cover_url;
+
 @end
 
  
