@@ -59,10 +59,9 @@
     
 }
 
-
-- (void)promptShowWithCount:(NSInteger)count{
+- (void)promptShowWithMessage:(NSString *)message{
     
-    _promptLab.text = [NSString stringWithFormat:@"共 %ld 所学校",count];
+    _promptLab.text = message;
     
 }
 

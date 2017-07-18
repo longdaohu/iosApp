@@ -10,7 +10,6 @@
 #import "HomeViewContViewController.h"
 #import "MeViewController.h"
 #import "MessageCenterViewController.h"
-//#import "MessageViewController.h"
 #import "CatigoryViewController.h"
 
 @interface XWGJTabBarController ()

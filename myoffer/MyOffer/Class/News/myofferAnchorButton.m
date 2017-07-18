@@ -25,8 +25,8 @@
         [titleBtn addTarget:self action:@selector(titleOnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *anchorView = [[UIButton alloc] initWithFrame:CGRectZero];
-        [anchorView setImage:XImage(@"arrow_down_white") forState:UIControlStateNormal];
-        [anchorView setImage:XImage(@"arrow_up_white") forState:UIControlStateSelected];
+        [anchorView setImage:XImage(@"arrow_down") forState:UIControlStateNormal];
+        [anchorView setImage:XImage(@"arrow_up") forState:UIControlStateSelected];
         [anchorView sizeToFit];
         self.anchorView = anchorView;
         [self addSubview:anchorView];

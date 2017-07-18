@@ -20,8 +20,7 @@
 //是否可以继续加载
 @property(nonatomic,assign)BOOL endPage;
 
-
-+ (instancetype)countryTopicWithMessages:(NSMutableArray *)messages catigoryIndex:(NSInteger)catigoryIndex;
++ (instancetype)countryTopicWithMessageFrames:(NSMutableArray *)messageFrames catigoryIndex:(NSInteger)catigoryIndex;
 
 
 @end

@@ -147,10 +147,10 @@
     
     
     UIImageView *flexibleView = [[UIImageView alloc] init];
-        flexibleView.contentMode = UIViewContentModeScaleAspectFill;
-    //    flexibleView.contentMode = UIViewContentModeScaleAspectFit;
-//    CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-    flexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(200.f));
+    flexibleView.contentMode = UIViewContentModeScaleAspectFill;
+//    flexibleView.contentMode = UIViewContentModeScaleAspectFit;
+//    CGFloat iconHeight =  XSCREEN_WIDTH * flexibleView.image.size.height / flexibleView.image.size.width;
+    flexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f));
     [self.view insertSubview:flexibleView belowSubview:self.tableView];
     self.flexibleView = flexibleView;
     self.flexFrame_old = self.flexibleView.frame;

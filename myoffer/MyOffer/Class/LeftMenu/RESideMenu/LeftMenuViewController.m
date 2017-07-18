@@ -18,7 +18,7 @@
 #import "MenuItem.h"
 #import "MeViewController.h"
 #import "HomeViewContViewController.h"
-#import "MessageViewController.h"
+#import "MessageCenterViewController.h"
 #import "CatigoryViewController.h"
 #import "LeftMenuHeaderView.h"
 #import "MyofferUser.h"
@@ -434,8 +434,8 @@
     
     if ([vc isKindOfClass:[MeViewController class]]) {
         vc = (MeViewController *)vc;
-    }else if ([vc isKindOfClass:[MessageViewController class]]) {
-        vc = (MessageViewController *)vc;
+    }else if ([vc isKindOfClass:[MessageCenterViewController class]]) {
+        vc = (MessageCenterViewController *)vc;
     }else if ([vc isKindOfClass:[CatigoryViewController class]]) {
         vc = (CatigoryViewController *)vc;
     }else{

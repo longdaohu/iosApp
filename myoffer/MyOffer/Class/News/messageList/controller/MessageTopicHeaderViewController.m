@@ -57,6 +57,7 @@ static NSString * const reuseIdentifier = @"cityCell";
     MyofferSectionView *sectionView = [[MyofferSectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 50)];
     sectionView.title = @"热门专题";
     self.sectionView = sectionView;
+    sectionView.backgroundColor = XCOLOR_BG;
     [self.view addSubview: sectionView];
     [self.sectionView bottomLineShow:NO];
     

@@ -11,11 +11,11 @@
 @implementation MessageCountryTopicModel
 
 
-+ (instancetype)countryTopicWithMessages:(NSMutableArray *)messages catigoryIndex:(NSInteger)catigoryIndex{
++ (instancetype)countryTopicWithMessageFrames:(NSMutableArray *)messageFrames catigoryIndex:(NSInteger)catigoryIndex{
     
     MessageCountryTopicModel *topic = [[MessageCountryTopicModel  alloc] init];
     
-    topic.messageFrames = [messages mutableCopy];
+    topic.messageFrames = [messageFrames mutableCopy];
     
     topic.catigoryIndex = catigoryIndex;
     

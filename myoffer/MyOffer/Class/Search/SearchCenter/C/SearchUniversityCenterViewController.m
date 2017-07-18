@@ -635,7 +635,7 @@ static NSString *identify = @"search_course";
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSNumber *)count{
     
-    [self.promptView promptShowWithCount:count.integerValue];
+    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"共 %@ 所学校",count]];
     
    //每次点击时 清空动画
     [self.promptView.layer removeAllAnimations];

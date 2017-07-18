@@ -10,6 +10,6 @@
 
 @interface SearchPromptView : UIView
 
-- (void)promptShowWithCount:(NSInteger)count;
+- (void)promptShowWithMessage:(NSString *)message;
 
 @end

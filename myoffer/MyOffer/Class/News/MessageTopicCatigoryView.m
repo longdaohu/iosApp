@@ -1,35 +1,32 @@
 //
-//  MessageTopicTopView.m
+//  MessageTopicCatigoryView.m
 //  myOffer
 //
-//  Created by xuewuguojie on 2017/7/6.
+//  Created by xuewuguojie on 2017/7/17.
 //  Copyright © 2017年 UVIC. All rights reserved.
 //
 
-#import "MessageTopicTopView.h"
+#import "MessageTopicCatigoryView.h"
 #import "messageCatigroySubModel.h"
 
-@interface MessageTopicTopView ()
+@interface MessageTopicCatigoryView ()
 @property(nonatomic,strong)UIScrollView *topView;
-@property(nonatomic,strong)UIView *indicatorView;
-@property(nonatomic,strong)UIScrollView *subView;
-@property(nonatomic,assign)BOOL refresh;
+@property(nonatomic,strong)UIScrollView *bottomView;
 @property(nonatomic,strong)messageCatigroyModel *catigory_last;
+@property(nonatomic,strong)UIView *indicatorView;
 
 @end
 
-
-@implementation MessageTopicTopView
+@implementation MessageTopicCatigoryView
 
 + (instancetype)topViewWithBlock:(topicTopViewBlock)actionBlock{
     
-    MessageTopicTopView *topView = [[MessageTopicTopView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 120)];
+    MessageTopicCatigoryView *topView = [[MessageTopicCatigoryView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 120)];
     
     topView.actionBlock = actionBlock;
     
     return topView;
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -50,7 +47,7 @@
         subView.showsVerticalScrollIndicator = NO;
         subView.showsHorizontalScrollIndicator = NO;
         [self addSubview:subView];
-        self.subView = subView;
+        self.bottomView = subView;
         
     }
     return self;
@@ -63,7 +60,6 @@
         
         _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 60, 2)];
         _indicatorView.backgroundColor = XCOLOR_LIGHTBLUE;
-        
     }
     
     return _indicatorView;
@@ -77,6 +73,7 @@
     
     //1 选择国家选项是清空所有的下二级三级选择数据
     for (messageCatigroyModel *catigory in catigoryCountry.subs) {
+        
         catigory.isSelected = NO;
         for (messageCatigroySubModel *sub_catigory in catigory.subs) {
             sub_catigory.isSelected = NO;
@@ -93,14 +90,13 @@
     [self.topView setContentOffset:CGPointZero animated:YES];
     
     
+    //5 创建二级筛选条件按钮
     CGFloat top_W = 80;
     CGFloat top_H = self.topView.mj_h;
     CGFloat top_Y = 0;
-    //5 创建二级筛选条件按钮
     for (int index = 0; index < catigoryCountry.subs.count; index++) {
         
         messageCatigroyModel *catigory = catigoryCountry.subs[index];
-        
         
         UIButton *topBtn = [[UIButton alloc] init];
         topBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -112,66 +108,82 @@
         topBtn.tag = index;
         [topBtn addTarget:self action:@selector(catigroyOnclick:) forControlEvents:UIControlEventTouchUpInside];
         
-        //5-1 点击国家 > 设置 二级catigroy第一个为默认项
-        if (!self.catigory_last) {
-            
-            self.catigory_last = catigory;
-            self.catigory_last.isSelected = YES;
-            
-        }
-        
     }
     //6 设置二级View 的contentSize
     self.topView.contentSize = CGSizeMake(self.topView.subviews.count * top_W, 0);
     
-    
     //7 默认第一个按钮点击事件
-    if (self.topView.subviews.count > 0) [self catigroyOnclick:(UIButton *)self.topView.subviews.firstObject];
+    if (self.topView.subviews.count > 0){
+        
+        [self.topView addSubview:self.indicatorView];
+        
+        _indicatorView.mj_y = self.topView.mj_h - _indicatorView.mj_h;
+        
+        UIButton *sender = (UIButton *)self.topView.subviews.firstObject;
+        
+        _indicatorView.center = CGPointMake(sender.center.x,  _indicatorView.center.y);
+        
+        [self catigroyOnclick:sender];
+        
+    }
+    
+    
     
 }
 
 
-//点击二级筛选条件
-- (void)catigroyOnclick:(UIButton *)sender{
+#pragma mark : 事件处理
+
+- (void)catigroyOnclick:(UIButton *)topBtn{
     
-    [self topicOnclick:sender refresh:YES];
+    [self topOnclick:topBtn];
+    
 }
 
-- (void)topicOnclick:(UIButton *)sender refresh:(BOOL)refresh{
-    
-    self.refresh = refresh;
+- (void)topOnclick:(UIButton *)sender{
     
     //1 清空所有二级条件按钮
     for (UIButton *sub_btn in self.topView.subviews) {
+        
         sub_btn.enabled = YES;
     }
     sender.enabled = NO;
     
     //2 设置当前选项
-    self.catigory_last = nil;
+    self.catigory_last.isSelected = NO;
     self.catigory_last = self.catigoryCountry.subs[sender.tag];
     self.catigory_last.isSelected = YES;
     
-    //3 根据当前所选二级条件更改
-    [self catigroyOnclikWithCatigory : self.catigory_last];
     
-    [self.topView addSubview:self.indicatorView];
-//    UIButton *topBtn = self.topView.subviews.firstObject;
-    _indicatorView.mj_y = self.topView.mj_h - _indicatorView.mj_h;
-    _indicatorView.center = CGPointMake(sender.center.x,  _indicatorView.center.y);
+    //3 根据当前所选二级条件更改
+    [self catigroyOnclickWithCatigory : self.catigory_last];
+    
+    
+    //3 self.topView  滚动到对应位置
+    NSInteger page = [self.catigoryCountry.subs indexOfObject:self.catigory_last];
+    [self topViewScrollSubviewsToIndex:page];
+    
+    
+    if (self.actionBlock) {
+        
+        NSInteger  index = [self.catigoryCountry.subs indexOfObject: self.catigory_last];
+        
+        self.actionBlock(index);
+        
+    }
+    
     
 }
 
-
 //根据二级条件更新三级子项条件
-- (void)catigroyOnclikWithCatigory:(messageCatigroyModel *)catigory{
+- (void)catigroyOnclickWithCatigory:(messageCatigroyModel *)catigory{
     
     //1 清空子项
-    [self.subView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     
     CGFloat sub_W = 80;
-    CGFloat sub_H = self.subView.mj_h;
+    CGFloat sub_H = self.bottomView.mj_h;
     CGFloat sub_Y = 0;
     CGFloat margin = 10;
     //2 创建三级子项
@@ -181,10 +193,11 @@
         [subBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
         [subBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
         subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self.subView addSubview:subBtn];
+        [self.bottomView addSubview:subBtn];
         subBtn.layer.cornerRadius = CORNER_RADIUS;
         subBtn.layer.masksToBounds = YES;
         subBtn.backgroundColor = XCOLOR_WHITE;
+        subBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
         subBtn.layer.borderWidth = 1;
         [subBtn addTarget:self action:@selector(subBtnOnclick:) forControlEvents:UIControlEventTouchUpInside];
         subBtn.tag =  index;
@@ -192,75 +205,58 @@
         
         //2-1 对第一个按钮特殊处理
         if (index != 0) {
+            
             messageCatigroySubModel *catigroy_sub = catigory.subs[index - 1];
             title = catigroy_sub.name;
+        }else{
+            
+            subBtn.enabled = NO;
+            subBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
         }
+        
         [subBtn setTitle:title forState:UIControlStateNormal];
         
     }
     
     //3 设置三级参数 View contentSize
-    self.subView.contentSize = CGSizeMake(self.subView.subviews.count* (sub_W + margin), 0);
-    
-    //4 默认第一个按钮点击事件
-    if (self.subviews.count > 0)
-    {
-      [self subBtnOnclick:(UIButton *)self.subView.subviews.firstObject];
-    }
-    
+    self.bottomView.contentSize = CGSizeMake(self.bottomView.subviews.count * (sub_W + margin), 0);
     
 }
-
-
 
 - (void)subBtnOnclick:(UIButton *)sender{
     
     //1 清空subViews所有数据选项
     for (messageCatigroySubModel *catigroy_sub in self.catigory_last.subs) {
+        
         catigroy_sub.isSelected = NO;
     }
     
+    if (sender.tag != 0) {
+        
+        messageCatigroySubModel *catigroy_sub =  self.catigory_last.subs[sender.tag - 1];
+        catigroy_sub.isSelected = YES;
+    }
+    
+    
     //2 清空subViews所有数据选项
-    for (UIButton *sub_btn in self.subView.subviews) {
+    for (UIButton *sub_btn in self.bottomView.subviews) {
         sub_btn.enabled = YES;
         sub_btn.layer.borderColor = XCOLOR_WHITE.CGColor;
     }
     sender.enabled = NO;
     sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
     
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:self.catigoryCountry.code  forKey:@"first"];
-    [parameters setValue:self.catigory_last.code  forKey:@"second"];
-    [parameters setValue:@(0)  forKey:@"page"];
-    
-    if (sender.tag != 0) {
-        
-        messageCatigroySubModel *catigroy_sub =  self.catigory_last.subs[sender.tag - 1];
-        catigroy_sub.isSelected = YES;
-        [parameters setValue:catigroy_sub.code  forKey:@"third"];
-        
-        NSLog(@"third  = %@",catigroy_sub.name);
-        
-    }
-    
-    
-    NSLog(@"second  = %@",self.catigory_last.name);
-    NSLog(@"first  = %@",self.catigoryCountry.name);
-    
-    //self.topView  滚动到对应位置
-    NSInteger page = [self.catigoryCountry.subs indexOfObject:self.catigory_last];
-    [self topViewScrollSubviewsToIndex:page];
-    
-    
-    if (!self.refresh) return;
     
     if (self.actionBlock) {
         
-        self.actionBlock(parameters,page);
+        NSInteger  index = [self.catigoryCountry.subs indexOfObject: self.catigory_last];
         
+        self.actionBlock(index);
     }
     
 }
+
+
 
 //移动UIScrollView到对应位置
 - (void)topViewScrollSubviewsToIndex:(NSInteger)index{
@@ -269,7 +265,7 @@
     
     CGFloat centerX = sender.center.x;
     
-    CGFloat move = centerX- self.center.x;
+    CGFloat move = centerX - self.center.x;
     
     BOOL  isOver = (centerX  + self.center.x - self.topView.contentSize.width) > 0;
     
@@ -288,19 +284,19 @@
         po = CGPointMake(move, 0);
     }
     
+    
+    [self.topView setContentOffset:po animated:YES];
+    
+    XWeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         _indicatorView.center = CGPointMake(sender.center.x,  _indicatorView.center.y);
-
+        
     } completion:^(BOOL finished) {
         
-        [self.topView setContentOffset:po animated:YES];
-
+        [weakSelf.topView setContentOffset:po animated:YES];
+        
     }];
-    
- 
-    
-    
     
 }
 
@@ -312,28 +308,12 @@
     
     NSInteger current_page = [self.catigoryCountry.subs indexOfObject:self.catigory_last];
     
+    //传入页与当前页一样时，不用重新刷新
     if (current_page == page) return;
     
-    [self topicOnclick:sender refresh:YES];
+    [self topOnclick:sender];
     
-}
-
-/**
- 计算字符串长度
- 
- @param string string
- @param font font
- @return 字符串长度
- */
-- (CGFloat)getWidthWithString:(NSString *)string font:(UIFont *)font {
-    NSDictionary *attrs = @{NSFontAttributeName : font};
-    return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.width;
 }
 
 
 @end
-
-
-
-
-

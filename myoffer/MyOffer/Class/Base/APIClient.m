@@ -76,7 +76,14 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
 //        NSLog(@"HTTPAdditionalHeaders %@",configuration.HTTPAdditionalHeaders);
         
-        _URLSession = [NSURLSession sessionWithConfiguration:configuration];
+//        _URLSession = [NSURLSession sessionWithConfiguration:configuration];
+        
+        // 使用代理方法需要设置代理,但是session的delegate属性是只读的,要想设置代理只能通过这种方式创建session
+        _URLSession = [NSURLSession sessionWithConfiguration:configuration
+                                                              delegate:self
+                                                         delegateQueue:[[NSOperationQueue alloc] init]];
+        
+        
     }
     
     
@@ -277,6 +284,23 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         return nil;
     }
 }
+
+
+
+
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    
+    [_URLSession finishTasksAndInvalidate];
+    
+}
+
+- (void)dealloc{
+
+    [_URLSession invalidateAndCancel];
+
+}
+
 
 
 

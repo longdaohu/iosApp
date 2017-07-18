@@ -14,7 +14,8 @@
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "MessageDetaillViewController.h"
-#import "MessageCountryViewController.h"
+//#import "MessageCountryViewController.h"
+#import "MessageCountryTopicVController.h"
 
 @interface FSSScrollContentViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -47,12 +48,7 @@
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [UIView new];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, MASSAGE_HEADER_HIGHT, 0);
-    __weak typeof(self) weakSelf = self;
-    
-    //    [self.tableView addInfiniteScrollingWithActionHandler:^{
-    //
-    //        [weakSelf insertRowAtBottom];
-    //    }];
+   
 }
 
 
@@ -71,7 +67,6 @@
         [self.tableView emptyViewWithHiden:YES];
 
     }
-    
     
     [self.tableView reloadData];
   
@@ -123,9 +118,10 @@
 {
     //分区View;
     MessageTopicModel *topic =   self.group.contents[section];
+    
     MessageTopicFooterView *footer = [MessageTopicFooterView fooerWithTitle:topic.category action:^{
         
-        MessageCountryViewController *country = [[MessageCountryViewController alloc] init];
+        MessageCountryTopicVController *country = [[MessageCountryTopicVController alloc] init];
         
         country.countryName = topic.category;
         
@@ -143,7 +139,6 @@
     MessageTopicModel *topic =   self.group.contents[section];
     sectionView.title = topic.category;
     [self.view addSubview: sectionView];
-    //    [self.sectionView bottomLineShow:NO];
     
     return sectionView;
 }
@@ -158,7 +153,6 @@
     MessageTopicModel *topic =   self.group.contents[indexPath.section];
     
     cell.messageFrame =  topic.messageFrames[indexPath.row];
-    
     
     
     return cell;
