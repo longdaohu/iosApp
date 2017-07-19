@@ -78,19 +78,47 @@
     return _childVCes;
 }
 
+- (void)topviewOnClick:(NSInteger)index{
+    
+    //1-1判断是否大于1 如果大于1，则没有动画效果
+    CGFloat  page  = (index * self.bgView.mj_w -  self.bgView.contentOffset.x) / self.bgView.mj_w;
+    
+    if (fabs(page) <= 1) {
+        
+        XWeakSelf
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+            
+            weakSelf.bgView.contentOffset = CGPointMake(index * self.bgView.mj_w , 0);
+            
+        } completion:^(BOOL finished) {
+            
+            [weakSelf makeDataWithCatigroyIndex:index page:0];
+            
+        }];
+        
+        
+    }else{
+    
+        [self.bgView setContentOffset:CGPointMake(index * self.bgView.mj_w , 0) animated:NO];
+        [self makeDataWithCatigroyIndex:index page:0];
+
+        
+    }
+    
+    
+
+    
+    
+    
+}
+
 - (void)makeUI{
     
     //1 顶部筛选栏
     XWeakSelf
     self.topView = [MessageTopicCatigoryView topViewWithBlock:^(NSInteger catigory_index) {
         
-        //1-1判断是否大于1 如果大于1，则没有动画效果
-       CGFloat  page  = (catigory_index * weakSelf.bgView.mj_w -  weakSelf.bgView.contentOffset.x) / weakSelf.bgView.mj_w;
-        
-        [weakSelf.bgView setContentOffset:CGPointMake(catigory_index * weakSelf.bgView.mj_w , 0) animated:(fabs(page) <= 1)];
-        
-        [weakSelf makeDataWithCatigroyIndex:catigory_index page:0];
-        
+        [weakSelf topviewOnClick:catigory_index];
         
     }];
     [self.view addSubview:self.topView];

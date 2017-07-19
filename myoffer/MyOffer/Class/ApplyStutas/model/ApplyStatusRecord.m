@@ -12,13 +12,7 @@
 
 @implementation ApplyStatusRecord
 
-/*
- + (NSDictionary *)mj_replacedKeyFromPropertyName{
  
- return @{@"record_id" : @"_id"};
- 
- }
- */
 
 - (void)setUniversity:(MyOfferUniversityModel *)university{
 

@@ -37,6 +37,7 @@
 #import "HomeHeaderFrame.h"
 #import "CatigoryViewController.h"
 #import "MyofferUpdateView.h"
+#import "SuperMasterViewController.h"
 
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
@@ -641,7 +642,7 @@
              [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
              break;
          case 4:
-             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@superMentor.html",DOMAINURL]];
+             [self CaseSuperMaster];
               break;
          case 5:
              [self CaseServerMall];
@@ -946,7 +947,12 @@ ENGLISH  设置环境
     [MobClick event:@"home_mall"];
     [self.navigationController pushViewController:[[MyOfferServerMallViewController  alloc] init] animated:YES];
     
-    
+}
+
+//跳转服务包
+-(void)CaseSuperMaster
+{
+     [self.navigationController pushViewController:[[SuperMasterViewController  alloc] init] animated:YES];
 }
 
 //跳转搜索功能
