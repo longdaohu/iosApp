@@ -62,11 +62,11 @@
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, heigh) collectionViewLayout:flowlayout];
 
-    self.CollectionView      = collectionView;
+    self.CollectionView   = collectionView;
     collectionView.showsVerticalScrollIndicator   = NO;
     collectionView.showsHorizontalScrollIndicator = NO;
-    collectionView.dataSource                     = self;
-    collectionView.delegate                       = self;
+    collectionView.dataSource      = self;
+    collectionView.delegate         = self;
     collectionView.backgroundColor   = XCOLOR_BG;
     [self.CollectionView registerClass:[UniCollectionViewCell class] forCellWithReuseIdentifier:identify];
     [self.contentView  addSubview:self.CollectionView];
@@ -84,6 +84,7 @@
 
 #pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+   
     return 1;
 }
 

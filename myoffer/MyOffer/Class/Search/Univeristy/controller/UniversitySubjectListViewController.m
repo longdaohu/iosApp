@@ -39,7 +39,7 @@
     self = [self init];
     if (self) {
         _universityID = ID;
-        self.resquestParameters = [@{@":id": _universityID, @"page": @0, @"size": @40} mutableCopy];
+        self.resquestParameters = [@{@":id": _universityID, KEY_PAGE: @0, KEY_SIZE: @40} mutableCopy];
         self.automaticallyAdjustsScrollViewInsets = NO;
         self.title = @"课程详情";
         
@@ -105,27 +105,61 @@
     UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
         
         [weakSelf reloadWithValue:value key:key];
+        
+        
 
     }];
     
     [self addChildViewController:filter];
+    
     self.filter = filter;
     
     CGFloat base_Height = XNAV_HEIGHT + 50;
     filter.base_Height = base_Height;
     filter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, base_Height);
-    filter.areas = self.areas;
+    
+    NSMutableArray  *temps = [[self.areas valueForKeyPath:@"name"] mutableCopy];
+    [temps insertObject:KEY_ALL  atIndex:0];
+    
+    filter.rightInfo = @{
+                         @"key" : @"area",
+                         @"title" : @"专业方向",
+                         @"items" : [temps copy]
+                         };
+    
+    filter.leftInfo = @{
+                        
+        @"key" : @"level",
+        @"title" : @"学位类型",
+        @"items" : @[KEY_ALL,@"本科",@"硕士"]
+    };
+    
     [self.view addSubview:filter.view];
- 
+    
  
 }
+
+-(NSArray *)areas
+{
+    if (!_areas) {
+        
+        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+        
+        _areas = [ud valueForKey:@"Subject_CN"];
+    }
+  
+    return _areas;
+}
+
+
 
 - (void)reloadWithValue:(NSString *)value key:(NSString *)key{
 
     
     self.nextPage = 0;
     
-    [_resquestParameters setValue:@(self.nextPage) forKey:@"page"];
+    [_resquestParameters setValue:@(self.nextPage) forKey:KEY_PAGE];
+    
     [_resquestParameters setValue:value forKey:key];
     
     [self makeDataSource];
@@ -177,23 +211,8 @@
     return _selected_items;
 }
 
--(NSArray *)areas
-{
-    if (!_areas) {
-        
-        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-        NSArray *subjectes = [ud valueForKey:@"Subject_CN"];
-        NSMutableArray  *temps = [[subjectes valueForKeyPath:@"name"] mutableCopy];
-        [temps insertObject:@"全部"  atIndex:0];
 
-        _areas = [temps copy];
-    }
-    
-    return _areas;
-}
-
-
-
+#pragma mark : 网络请求
 - (void)makeDataSource{
     
     XWeakSelf
@@ -292,7 +311,7 @@
     //下拉到最后indexPath.row  下拉加载
     if (indexPath.row == self.course_frames.count - 1  && !self.endPage) {
         
-        [self.resquestParameters setValue:@(self.nextPage) forKey:@"page"];
+        [self.resquestParameters setValue:@(self.nextPage) forKey:KEY_PAGE];
         
         [self makeDataSource];
     }
@@ -349,7 +368,6 @@
 
 
 - (void)caseSubmit{
-
     
     RequireLogin
     

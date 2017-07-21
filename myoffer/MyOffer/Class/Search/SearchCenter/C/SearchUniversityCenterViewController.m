@@ -24,7 +24,6 @@
 #define KEY_NAME_S  @"name"
 #define KEY_VALUE_S  @"value"
 #define KEY_FILTERS_S  @"filters"
-#define KEY_PAGE_S  @"page"
 #define KEY_SIZE_S  @"size"
 #define KEY_DESC_S  @"desc"
 #define KEY_ORDER_S  @"order"
@@ -174,8 +173,8 @@
     if (!_parametersM) {
         
         NSDictionary *parameter = @{
-                                    KEY_PAGE_S: @0,
-                                    KEY_SIZE_S: @20,
+                                    KEY_PAGE: @0,
+                                    KEY_SIZE: @20,
                                     KEY_DESC_S: @0,
                                     };
  
@@ -460,7 +459,7 @@
         
              self.nextPage = 0;
         
-             [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE_S];
+             [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE];
         
         
             if ([KEY_ORDER_S isEqualToString:para.allKeys.firstObject]) {
@@ -617,7 +616,7 @@ static NSString *identify = @"search_course";
     //下拉到最后indexPath.row  下拉加载
     if (indexPath.section == self.UniFrames.count - 1  && !self.endPage) {
         
-        [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE_S];
+        [self.parametersM setValue:@(self.nextPage) forKey:KEY_PAGE];
         
         [self makeDataSource];
     }

@@ -9,6 +9,8 @@
 #import "UniversityCourseFilterViewController.h"
 #import "UniversityCourseFilterCell.h"
 
+#define CELL_HEIGHT_DAFAULT  50
+
 @interface UniversityCourseFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *topView;
 //学位按钮
@@ -19,14 +21,14 @@
 @property(nonatomic,strong)UIButton *currentBtn;
 @property(nonatomic,strong)UITableView *level_tableView;
 @property(nonatomic,strong)UITableView *area_tableView;
+
+@property(nonatomic,strong)NSArray *leftArr;
+//学科领域数组
+@property(nonatomic,strong)NSArray *areas;
+
 //tableView 默认Frame
 @property(nonatomic,assign)CGRect  level_tableView_defaultFrame;
 @property(nonatomic,assign)CGRect area_tableView_defaultFrame;
-//学位类型数组
-@property(nonatomic,strong)NSArray *levels;
-//当前已选择项
-@property(nonatomic,copy)NSString *current_Level;
-@property(nonatomic,copy)NSString *current_area;
 
 @end
 
@@ -70,24 +72,12 @@
     return _topView;
 }
 
-- (NSArray *)levels{
-
-    if (!_levels) {
-        
-        _levels = @[@"全部",@"本科",@"硕士"];
-    }
-    
-    return _levels;
-}
 
 - (void)makeUI{
     
     [self makeTableView];
     
     [self makeTopView];
-    
-    self.current_Level = @"全部";
-    self.current_area = @"全部";
     
 }
 
@@ -100,7 +90,7 @@
     CGFloat level_Y = 0;
     CGFloat level_W = self.view.bounds.size.width * 0.5;
     CGFloat level_H = self.topView.mj_h;
-      self.levelBtn =  [self senderWithFrame:CGRectMake(level_X, level_Y, level_W, level_H) title:@"学位类型"];
+    self.levelBtn =  [self senderWithFrame:CGRectMake(level_X, level_Y, level_W, level_H) title:@"学位类型"];
     
     CGFloat area_X =  level_W;
     CGFloat area_Y =  level_Y;
@@ -132,10 +122,8 @@
 
 - (void)makeTableView{
 
-    CGFloat level_H =  self.levels.count * 50;
-    CGRect level_Rect = CGRectMake(0, -level_H, self.view.bounds.size.width, level_H);
+    CGRect level_Rect = CGRectMake(0, 0, self.view.bounds.size.width, 0);
     self.level_tableView = [self defaultTableViewWithframe:level_Rect];
-    self.level_tableView_defaultFrame = self.level_tableView.frame;
     self.level_tableView.scrollEnabled = NO;
     
     self.area_tableView = [self defaultTableViewWithframe:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
@@ -161,8 +149,8 @@
     _areas = areas;
     
     //更新area_tableView 的Frame
-    CGFloat  real_Height =  areas.count * 50;
-    CGFloat  area_H = real_Height > (XSCREEN_HEIGHT - 50 - XNAV_HEIGHT) ?  (XSCREEN_HEIGHT - 50 - XNAV_HEIGHT)  : real_Height;
+    CGFloat  real_Height =  areas.count * CELL_HEIGHT_DAFAULT;
+    CGFloat  area_H = real_Height > (XSCREEN_HEIGHT - CELL_HEIGHT_DAFAULT - XNAV_HEIGHT) ?  (XSCREEN_HEIGHT - CELL_HEIGHT_DAFAULT - XNAV_HEIGHT)  : real_Height;
     self.area_tableView.mj_h = area_H;
     self.area_tableView.mj_y = -area_H;
     self.area_tableView_defaultFrame = self.area_tableView.frame;
@@ -171,20 +159,49 @@
     
 }
 
+- (void)setLeftInfo:(NSDictionary *)leftInfo{
+
+    _leftInfo = leftInfo;
+    
+    self.leftArr = leftInfo[@"items"];
+    NSString *title = leftInfo[@"title"];
+    [self.levelBtn setTitle:title forState:UIControlStateNormal];
+    
+    CGFloat level_H =  self.leftArr.count * CELL_HEIGHT_DAFAULT;
+    self.level_tableView.mj_h = level_H;
+    self.level_tableView.mj_y = -level_H;
+    self.level_tableView_defaultFrame = self.level_tableView.frame;
+    
+}
+
+
+
+- (void)setRightInfo:(NSDictionary *)rightInfo{
+    
+    _rightInfo = rightInfo;
+    
+    self.areas = rightInfo[@"items"];
+    
+    NSString *title = rightInfo[@"title"];
+    [self.areaBtn setTitle:title forState:UIControlStateNormal];
+    
+}
+
+
 
 
 #pragma mark : UITableViewDelegate,UITableViewDataSource
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return  50;
+    return  CELL_HEIGHT_DAFAULT;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if (tableView == self.level_tableView) {
         
-        return _levels.count;
+        return self.leftArr.count;
     }
     
     return self.areas.count;
@@ -212,8 +229,9 @@ static NSString *filter_identify = @"course_filter";
     }
     
     
-    cell.title = self.levels[indexPath.row];
-    cell.onSelected = [self.current_Level isEqualToString:self.levels[indexPath.row]];
+    cell.title = self.leftArr[indexPath.row];
+    
+    cell.onSelected = [self.current_Level isEqualToString:self.leftArr[indexPath.row]];
     
     return cell;
    
@@ -230,11 +248,11 @@ static NSString *filter_identify = @"course_filter";
     
     if (tableView == self.level_tableView) {
      
-        NSString *currentValue =indexPath.row == 0 ? @"": self.levels[indexPath.row];
+        NSString *currentValue =indexPath.row == 0 ? @"": self.leftArr[indexPath.row];
         
-        self.current_Level = indexPath.row == 0 ? @"全部":self.levels[indexPath.row];
+        self.current_Level = indexPath.row == 0 ? KEY_ALL:self.leftArr[indexPath.row];
         
-        if (self.actionBlock) self.actionBlock(currentValue,@"level");
+        if (self.actionBlock) self.actionBlock(currentValue,self.leftInfo[@"key"]);
         
         [self.level_tableView reloadData];
         
@@ -242,9 +260,12 @@ static NSString *filter_identify = @"course_filter";
     }
     
     
-    NSString *currentValue = indexPath.row == 0 ? @"": self.areas[indexPath.row];
-    self.current_area = indexPath.row == 0 ? @"全部": self.areas[indexPath.row];
-    if (self.actionBlock) self.actionBlock(currentValue,@"area");
+    NSString *currentValue = indexPath.row == 0 ? KEY_EMPTY_STRING : self.areas[indexPath.row];
+    
+    self.current_area = indexPath.row == 0 ? KEY_ALL: self.areas[indexPath.row];
+    
+    if (self.actionBlock) self.actionBlock(currentValue,self.rightInfo[@"key"]);
+    
     [self.area_tableView reloadData];
 }
 
@@ -273,8 +294,10 @@ static NSString *filter_identify = @"course_filter";
     
     realRect.size.height = self.currentBtn ? XSCREEN_HEIGHT : self.base_Height - XNAV_HEIGHT;
     
+    
     //当前Button 为空时，
     if (!self.currentBtn) {
+        
         
         //当前Button 为空时，淡化背景色，再收收起 self.view.frame高度
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -296,6 +319,7 @@ static NSString *filter_identify = @"course_filter";
           *当 self.level_tableView.mj_y >= 0  时， level_tableView 收起
           *当 self.area_tableView.mj_y >= 0  时， area_tableView 收起
           */
+        
         if (self.level_tableView.mj_y >= 0 || self.area_tableView.mj_y >= 0) {
             
             UITableView *tableView = (self.area_tableView.mj_y > 0) ? self.area_tableView : self.level_tableView;
@@ -317,22 +341,19 @@ static NSString *filter_identify = @"course_filter";
     }
     
     
-    
-    
     //当筛选框被点中时
     //一个tableView展开时，另一个tableView要收起
-    CGFloat area_y = (self.currentBtn == self.areaBtn) ? 50 : -self.area_tableView.mj_h;
+    CGFloat area_y = (self.currentBtn == self.areaBtn) ? CELL_HEIGHT_DAFAULT : -self.area_tableView.mj_h;
     
-    CGFloat level_y = (self.currentBtn == self.areaBtn) ? -self.level_tableView.mj_h : 50;
+    CGFloat level_y = (self.currentBtn == self.areaBtn) ? - self.level_tableView.mj_h : CELL_HEIGHT_DAFAULT;
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
         self.area_tableView.mj_y = area_y;
+        
         self.level_tableView.mj_y = level_y;
         
     }];
-        
-    
     
     //当self.view已经展开时，不再做展开动作
     if (self.view.mj_h > self.base_Height)  return;
@@ -340,6 +361,7 @@ static NSString *filter_identify = @"course_filter";
     self.view.frame = realRect;
     //当筛选框被点中时，背景色加深
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
          self.view.backgroundColor = XCOLOR(0, 0, 0, 0.5);
     }];
     

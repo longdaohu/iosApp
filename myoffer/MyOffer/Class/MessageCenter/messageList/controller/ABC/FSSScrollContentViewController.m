@@ -102,7 +102,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 60;
+    MessageTopicModel *topic =   self.group.contents[section];
+
+    return  (topic.articles.count >= 4) ? 60 : 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,6 +131,8 @@
         
     }];
     
+    footer.alpha = (topic.articles.count >= 4);
+    
     return footer;
 }
 
@@ -154,6 +158,9 @@
     
     cell.messageFrame =  topic.messageFrames[indexPath.row];
     
+    BOOL padding = !((topic.messageFrames.count - 1) == indexPath.row);
+    
+    [cell separatorLinePaddingShow: padding];
     
     return cell;
 }

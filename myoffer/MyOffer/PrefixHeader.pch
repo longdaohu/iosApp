@@ -68,6 +68,10 @@
 #define KEY_CITY  @"city"
 #define KEY_AREA  @"area"
 #define KEY_SUBJECT  @"subject"
+#define KEY_PAGE  @"page"
+#define KEY_SIZE  @"size"
+#define KEY_ALL  @"全部"
+#define KEY_EMPTY_STRING  @""
 #define FontWithSize(size)  [UIFont systemFontOfSize:size]
 #define FONTSIZE(size)   XSCREEN_WIDTH > 375 ? size + 1 :size
 #define Uni_Cell_Height  100 + (XSCREEN_WIDTH - 320) * 0.15

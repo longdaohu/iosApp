@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMNewsFrame.h"
 
 @interface SMNewsColViewCell : UICollectionViewCell
+
+@property(nonatomic,strong)SMNewsFrame *newsFrame;
 
 @end

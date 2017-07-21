@@ -20,6 +20,7 @@
 #import "MyOfferServiceMallHeaderFrame.h"
 #import "ServiceOverseaDestinationView.h"
 #import "ServiceOverSeaDestination.h"
+#import "SMListViewController.h"
 
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>

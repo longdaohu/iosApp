@@ -125,7 +125,7 @@
     }else{
         
         self.group.page++;
-        [self.group.parameters setValue:@(self.group.page) forKey:@"page"];
+        [self.group.parameters setValue:@(self.group.page) forKey:KEY_PAGE];
         [self.tableView.mj_footer endRefreshing];
     }
     

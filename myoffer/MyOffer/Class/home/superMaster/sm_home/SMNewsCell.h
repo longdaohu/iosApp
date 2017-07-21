@@ -10,4 +10,9 @@
 
 @interface SMNewsCell : UITableViewCell
 
+@property(nonatomic,strong)NSArray *newsGroup;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
+
 @end

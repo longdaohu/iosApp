@@ -149,6 +149,10 @@
     
     self.bottom_line.hidden = show;
 }
+- (void)separatorLinePaddingShow:(BOOL)show{
+
+    self.bottom_line.mj_x =  show ? self.titleLab.mj_x : 0;
+}
 
 
 

@@ -49,11 +49,6 @@
 		AE05A7321E8A51940059C2BF /* EmallCatigoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */; };
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
-		AE14841B1F1EF5AB00F73CED /* SMTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE14841A1F1EF5AB00F73CED /* SMTagModel.m */; };
-		AE1484211F1EFADF00F73CED /* SMNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1484201F1EFADF00F73CED /* SMNewsCell.m */; };
-		AE1484241F1EFB0000F73CED /* SMTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1484231F1EFB0000F73CED /* SMTagCell.m */; };
-		AE1484271F1EFB2400F73CED /* SMHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1484261F1EFB2400F73CED /* SMHotCell.m */; };
-		AE14842A1F1EFB9600F73CED /* SMNewsColViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1484291F1EFB9600F73CED /* SMNewsColViewCell.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
@@ -157,6 +152,23 @@
 		AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D71E0A1AD00038826A /* SDCollectionViewCell.m */; };
 		AE3943E11E0A1AD00038826A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */; };
 		AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */; };
+		AE3AB6A81F21A27300A3C7E3 /* SMBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */; };
+		AE3AB6A91F21A27300A3C7E3 /* SMHomeSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB68B1F21A27300A3C7E3 /* SMHomeSectionModel.m */; };
+		AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB68D1F21A27300A3C7E3 /* SMHotCell.m */; };
+		AE3AB6AB1F21A27300A3C7E3 /* SMHotFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB68F1F21A27300A3C7E3 /* SMHotFrame.m */; };
+		AE3AB6AC1F21A27300A3C7E3 /* SMHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6911F21A27300A3C7E3 /* SMHotModel.m */; };
+		AE3AB6AD1F21A27300A3C7E3 /* SMNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6931F21A27300A3C7E3 /* SMNewsCell.m */; };
+		AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6951F21A27300A3C7E3 /* SMNewsColViewCell.m */; };
+		AE3AB6AF1F21A27300A3C7E3 /* SMNewsFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6971F21A27300A3C7E3 /* SMNewsFrame.m */; };
+		AE3AB6B01F21A27300A3C7E3 /* SMNewsOnLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6991F21A27300A3C7E3 /* SMNewsOnLineView.m */; };
+		AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3AB69A1F21A27300A3C7E3 /* SMNewsOnLineView.xib */; };
+		AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB69C1F21A27300A3C7E3 /* SMTagCell.m */; };
+		AE3AB6B31F21A27300A3C7E3 /* SMTagFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB69E1F21A27300A3C7E3 /* SMTagFrame.m */; };
+		AE3AB6B41F21A27300A3C7E3 /* SMTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A01F21A27300A3C7E3 /* SMTagModel.m */; };
+		AE3AB6B51F21A27300A3C7E3 /* SuperMasterHomeDemol.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A21F21A27300A3C7E3 /* SuperMasterHomeDemol.m */; };
+		AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A41F21A27300A3C7E3 /* SuperMasterViewController.m */; };
+		AE3AB6B71F21A27300A3C7E3 /* SMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */; };
+		AE3AB6C01F21A3C300A3C7E3 /* SMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6BF1F21A3C300A3C7E3 /* SMDetailViewController.m */; };
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44F7861EA7744A00390809 /* CatigaryHotCityCell.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
@@ -192,10 +204,6 @@
 		AE4B2E7F1F1E095600E328F7 /* MessageTopicCatigoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E601F1E095600E328F7 /* MessageTopicCatigoryView.m */; };
 		AE4B2E801F1E095600E328F7 /* MessageTopicCountryContentVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E621F1E095600E328F7 /* MessageTopicCountryContentVController.m */; };
 		AE4B2E811F1E095600E328F7 /* myofferAnchorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E641F1E095600E328F7 /* myofferAnchorButton.m */; };
-		AE4B2E871F1E0C9B00E328F7 /* SuperMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E861F1E0C9B00E328F7 /* SuperMasterViewController.m */; };
-		AE4B2E8A1F1E0DBE00E328F7 /* SuperMasterHomeDemol.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E891F1E0DBE00E328F7 /* SuperMasterHomeDemol.m */; };
-		AE4B2E8D1F1E1D3200E328F7 /* SMHotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E8C1F1E1D3200E328F7 /* SMHotModel.m */; };
-		AE4B2E901F1E1E6A00E328F7 /* SMBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E8F1F1E1E6A00E328F7 /* SMBannerModel.m */; };
 		AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */; };
 		AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56F33F1E0280E900340742 /* WYLXGroup.m */; };
 		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
@@ -549,16 +557,6 @@
 		AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigroySectionView.m; sourceTree = "<group>"; };
 		AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityDetailItem.h; path = controller/UniversityDetailItem.h; sourceTree = "<group>"; };
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
-		AE1484191F1EF5AB00F73CED /* SMTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagModel.h; sourceTree = "<group>"; };
-		AE14841A1F1EF5AB00F73CED /* SMTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTagModel.m; sourceTree = "<group>"; };
-		AE14841F1F1EFADF00F73CED /* SMNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsCell.h; sourceTree = "<group>"; };
-		AE1484201F1EFADF00F73CED /* SMNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsCell.m; sourceTree = "<group>"; };
-		AE1484221F1EFB0000F73CED /* SMTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagCell.h; sourceTree = "<group>"; };
-		AE1484231F1EFB0000F73CED /* SMTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTagCell.m; sourceTree = "<group>"; };
-		AE1484251F1EFB2400F73CED /* SMHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotCell.h; sourceTree = "<group>"; };
-		AE1484261F1EFB2400F73CED /* SMHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotCell.m; sourceTree = "<group>"; };
-		AE1484281F1EFB9600F73CED /* SMNewsColViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsColViewCell.h; sourceTree = "<group>"; };
-		AE1484291F1EFB9600F73CED /* SMNewsColViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsColViewCell.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
@@ -726,6 +724,39 @@
 		AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		AE3943DA1E0A1AD00038826A /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		AE3AB6881F21A27300A3C7E3 /* SMBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBannerModel.h; sourceTree = "<group>"; };
+		AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMBannerModel.m; sourceTree = "<group>"; };
+		AE3AB68A1F21A27300A3C7E3 /* SMHomeSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHomeSectionModel.h; sourceTree = "<group>"; };
+		AE3AB68B1F21A27300A3C7E3 /* SMHomeSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHomeSectionModel.m; sourceTree = "<group>"; };
+		AE3AB68C1F21A27300A3C7E3 /* SMHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotCell.h; sourceTree = "<group>"; };
+		AE3AB68D1F21A27300A3C7E3 /* SMHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotCell.m; sourceTree = "<group>"; };
+		AE3AB68E1F21A27300A3C7E3 /* SMHotFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotFrame.h; sourceTree = "<group>"; };
+		AE3AB68F1F21A27300A3C7E3 /* SMHotFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotFrame.m; sourceTree = "<group>"; };
+		AE3AB6901F21A27300A3C7E3 /* SMHotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotModel.h; sourceTree = "<group>"; };
+		AE3AB6911F21A27300A3C7E3 /* SMHotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotModel.m; sourceTree = "<group>"; };
+		AE3AB6921F21A27300A3C7E3 /* SMNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsCell.h; sourceTree = "<group>"; };
+		AE3AB6931F21A27300A3C7E3 /* SMNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsCell.m; sourceTree = "<group>"; };
+		AE3AB6941F21A27300A3C7E3 /* SMNewsColViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsColViewCell.h; sourceTree = "<group>"; };
+		AE3AB6951F21A27300A3C7E3 /* SMNewsColViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsColViewCell.m; sourceTree = "<group>"; };
+		AE3AB6961F21A27300A3C7E3 /* SMNewsFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsFrame.h; sourceTree = "<group>"; };
+		AE3AB6971F21A27300A3C7E3 /* SMNewsFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsFrame.m; sourceTree = "<group>"; };
+		AE3AB6981F21A27300A3C7E3 /* SMNewsOnLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNewsOnLineView.h; sourceTree = "<group>"; };
+		AE3AB6991F21A27300A3C7E3 /* SMNewsOnLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNewsOnLineView.m; sourceTree = "<group>"; };
+		AE3AB69A1F21A27300A3C7E3 /* SMNewsOnLineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMNewsOnLineView.xib; sourceTree = "<group>"; };
+		AE3AB69B1F21A27300A3C7E3 /* SMTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagCell.h; sourceTree = "<group>"; };
+		AE3AB69C1F21A27300A3C7E3 /* SMTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTagCell.m; sourceTree = "<group>"; };
+		AE3AB69D1F21A27300A3C7E3 /* SMTagFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagFrame.h; sourceTree = "<group>"; };
+		AE3AB69E1F21A27300A3C7E3 /* SMTagFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTagFrame.m; sourceTree = "<group>"; };
+		AE3AB69F1F21A27300A3C7E3 /* SMTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagModel.h; sourceTree = "<group>"; };
+		AE3AB6A01F21A27300A3C7E3 /* SMTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTagModel.m; sourceTree = "<group>"; };
+		AE3AB6A11F21A27300A3C7E3 /* SuperMasterHomeDemol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperMasterHomeDemol.h; sourceTree = "<group>"; };
+		AE3AB6A21F21A27300A3C7E3 /* SuperMasterHomeDemol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperMasterHomeDemol.m; sourceTree = "<group>"; };
+		AE3AB6A31F21A27300A3C7E3 /* SuperMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperMasterViewController.h; sourceTree = "<group>"; };
+		AE3AB6A41F21A27300A3C7E3 /* SuperMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperMasterViewController.m; sourceTree = "<group>"; };
+		AE3AB6A61F21A27300A3C7E3 /* SMListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMListViewController.h; sourceTree = "<group>"; };
+		AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMListViewController.m; sourceTree = "<group>"; };
+		AE3AB6BE1F21A3C300A3C7E3 /* SMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailViewController.h; sourceTree = "<group>"; };
+		AE3AB6BF1F21A3C300A3C7E3 /* SMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailViewController.m; sourceTree = "<group>"; };
 		AE401ABD1EC4348A0078A0EC /* MBProgressHUD+XJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XJ.h"; sourceTree = "<group>"; };
 		AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XJ.m"; sourceTree = "<group>"; };
 		AE44F7851EA7744A00390809 /* CatigaryHotCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCityCell.h; sourceTree = "<group>"; };
@@ -797,14 +828,6 @@
 		AE4B2E621F1E095600E328F7 /* MessageTopicCountryContentVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicCountryContentVController.m; sourceTree = "<group>"; };
 		AE4B2E631F1E095600E328F7 /* myofferAnchorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferAnchorButton.h; sourceTree = "<group>"; };
 		AE4B2E641F1E095600E328F7 /* myofferAnchorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferAnchorButton.m; sourceTree = "<group>"; };
-		AE4B2E851F1E0C9B00E328F7 /* SuperMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperMasterViewController.h; sourceTree = "<group>"; };
-		AE4B2E861F1E0C9B00E328F7 /* SuperMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperMasterViewController.m; sourceTree = "<group>"; };
-		AE4B2E881F1E0DBE00E328F7 /* SuperMasterHomeDemol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperMasterHomeDemol.h; sourceTree = "<group>"; };
-		AE4B2E891F1E0DBE00E328F7 /* SuperMasterHomeDemol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperMasterHomeDemol.m; sourceTree = "<group>"; };
-		AE4B2E8B1F1E1D3200E328F7 /* SMHotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotModel.h; sourceTree = "<group>"; };
-		AE4B2E8C1F1E1D3200E328F7 /* SMHotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotModel.m; sourceTree = "<group>"; };
-		AE4B2E8E1F1E1E6A00E328F7 /* SMBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBannerModel.h; sourceTree = "<group>"; };
-		AE4B2E8F1F1E1E6A00E328F7 /* SMBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMBannerModel.m; sourceTree = "<group>"; };
 		AE54B6251ECEFA59004AFF7E /* MyOfferTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferTableView.h; sourceTree = "<group>"; };
 		AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferTableView.m; sourceTree = "<group>"; };
 		AE56F33E1E0280E900340742 /* WYLXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXGroup.h; sourceTree = "<group>"; };
@@ -1562,45 +1585,6 @@
 			path = RNURLProtocal;
 			sourceTree = "<group>";
 		};
-		AE14841C1F1EFA7D00F73CED /* M */ = {
-			isa = PBXGroup;
-			children = (
-				AE4B2E881F1E0DBE00E328F7 /* SuperMasterHomeDemol.h */,
-				AE4B2E891F1E0DBE00E328F7 /* SuperMasterHomeDemol.m */,
-				AE4B2E8B1F1E1D3200E328F7 /* SMHotModel.h */,
-				AE4B2E8C1F1E1D3200E328F7 /* SMHotModel.m */,
-				AE4B2E8E1F1E1E6A00E328F7 /* SMBannerModel.h */,
-				AE4B2E8F1F1E1E6A00E328F7 /* SMBannerModel.m */,
-				AE1484191F1EF5AB00F73CED /* SMTagModel.h */,
-				AE14841A1F1EF5AB00F73CED /* SMTagModel.m */,
-			);
-			name = M;
-			sourceTree = "<group>";
-		};
-		AE14841D1F1EFA8F00F73CED /* V */ = {
-			isa = PBXGroup;
-			children = (
-				AE14841F1F1EFADF00F73CED /* SMNewsCell.h */,
-				AE1484201F1EFADF00F73CED /* SMNewsCell.m */,
-				AE1484281F1EFB9600F73CED /* SMNewsColViewCell.h */,
-				AE1484291F1EFB9600F73CED /* SMNewsColViewCell.m */,
-				AE1484221F1EFB0000F73CED /* SMTagCell.h */,
-				AE1484231F1EFB0000F73CED /* SMTagCell.m */,
-				AE1484251F1EFB2400F73CED /* SMHotCell.h */,
-				AE1484261F1EFB2400F73CED /* SMHotCell.m */,
-			);
-			name = V;
-			sourceTree = "<group>";
-		};
-		AE14841E1F1EFA9100F73CED /* C */ = {
-			isa = PBXGroup;
-			children = (
-				AE4B2E851F1E0C9B00E328F7 /* SuperMasterViewController.h */,
-				AE4B2E861F1E0C9B00E328F7 /* SuperMasterViewController.m */,
-			);
-			name = C;
-			sourceTree = "<group>";
-		};
 		AE1D01131D2FCD2D005E2DEF /* AutoLoop */ = {
 			isa = PBXGroup;
 			children = (
@@ -1834,6 +1818,108 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		AE3AB6861F21A27300A3C7E3 /* sm_detail */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6B91F21A34300A3C7E3 /* C */,
+				AE3AB6BA1F21A34500A3C7E3 /* V */,
+				AE3AB6B81F21A33F00A3C7E3 /* M */,
+			);
+			path = sm_detail;
+			sourceTree = "<group>";
+		};
+		AE3AB6871F21A27300A3C7E3 /* sm_home */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6BD1F21A36E00A3C7E3 /* C */,
+				AE3AB6BC1F21A36B00A3C7E3 /* V */,
+				AE3AB6BB1F21A36800A3C7E3 /* M */,
+			);
+			path = sm_home;
+			sourceTree = "<group>";
+		};
+		AE3AB6A51F21A27300A3C7E3 /* sm_list */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6A61F21A27300A3C7E3 /* SMListViewController.h */,
+				AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */,
+			);
+			path = sm_list;
+			sourceTree = "<group>";
+		};
+		AE3AB6B81F21A33F00A3C7E3 /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		AE3AB6B91F21A34300A3C7E3 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6BE1F21A3C300A3C7E3 /* SMDetailViewController.h */,
+				AE3AB6BF1F21A3C300A3C7E3 /* SMDetailViewController.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		AE3AB6BA1F21A34500A3C7E3 /* V */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
+		AE3AB6BB1F21A36800A3C7E3 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6881F21A27300A3C7E3 /* SMBannerModel.h */,
+				AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */,
+				AE3AB68A1F21A27300A3C7E3 /* SMHomeSectionModel.h */,
+				AE3AB68B1F21A27300A3C7E3 /* SMHomeSectionModel.m */,
+				AE3AB68E1F21A27300A3C7E3 /* SMHotFrame.h */,
+				AE3AB68F1F21A27300A3C7E3 /* SMHotFrame.m */,
+				AE3AB6961F21A27300A3C7E3 /* SMNewsFrame.h */,
+				AE3AB6971F21A27300A3C7E3 /* SMNewsFrame.m */,
+				AE3AB69D1F21A27300A3C7E3 /* SMTagFrame.h */,
+				AE3AB69E1F21A27300A3C7E3 /* SMTagFrame.m */,
+				AE3AB69F1F21A27300A3C7E3 /* SMTagModel.h */,
+				AE3AB6A01F21A27300A3C7E3 /* SMTagModel.m */,
+				AE3AB6A11F21A27300A3C7E3 /* SuperMasterHomeDemol.h */,
+				AE3AB6A21F21A27300A3C7E3 /* SuperMasterHomeDemol.m */,
+				AE3AB6901F21A27300A3C7E3 /* SMHotModel.h */,
+				AE3AB6911F21A27300A3C7E3 /* SMHotModel.m */,
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		AE3AB6BC1F21A36B00A3C7E3 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB68C1F21A27300A3C7E3 /* SMHotCell.h */,
+				AE3AB68D1F21A27300A3C7E3 /* SMHotCell.m */,
+				AE3AB6921F21A27300A3C7E3 /* SMNewsCell.h */,
+				AE3AB6931F21A27300A3C7E3 /* SMNewsCell.m */,
+				AE3AB6941F21A27300A3C7E3 /* SMNewsColViewCell.h */,
+				AE3AB6951F21A27300A3C7E3 /* SMNewsColViewCell.m */,
+				AE3AB6981F21A27300A3C7E3 /* SMNewsOnLineView.h */,
+				AE3AB6991F21A27300A3C7E3 /* SMNewsOnLineView.m */,
+				AE3AB69A1F21A27300A3C7E3 /* SMNewsOnLineView.xib */,
+				AE3AB69B1F21A27300A3C7E3 /* SMTagCell.h */,
+				AE3AB69C1F21A27300A3C7E3 /* SMTagCell.m */,
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
+		AE3AB6BD1F21A36E00A3C7E3 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AE3AB6A31F21A27300A3C7E3 /* SuperMasterViewController.h */,
+				AE3AB6A41F21A27300A3C7E3 /* SuperMasterViewController.m */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
 		AE497B421C3BB275006C3092 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
@@ -2000,19 +2086,11 @@
 		AE4B2E831F1E0C6D00E328F7 /* superMaster */ = {
 			isa = PBXGroup;
 			children = (
-				AE4B2E841F1E0C6D00E328F7 /* Home_sm */,
+				AE3AB6861F21A27300A3C7E3 /* sm_detail */,
+				AE3AB6871F21A27300A3C7E3 /* sm_home */,
+				AE3AB6A51F21A27300A3C7E3 /* sm_list */,
 			);
 			path = superMaster;
-			sourceTree = "<group>";
-		};
-		AE4B2E841F1E0C6D00E328F7 /* Home_sm */ = {
-			isa = PBXGroup;
-			children = (
-				AE14841E1F1EFA9100F73CED /* C */,
-				AE14841D1F1EFA8F00F73CED /* V */,
-				AE14841C1F1EFA7D00F73CED /* M */,
-			);
-			path = Home_sm;
 			sourceTree = "<group>";
 		};
 		AE582C271D06B0ED00499B6B /* AlipaySDK */ = {
@@ -3709,6 +3787,7 @@
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
+				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
 				AEF421031BD4988B00CFB45E /* UMShareEditViewController.xib in Resources */,
@@ -3821,7 +3900,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA24BEB1D5B266A00DD7939 /* NSString+MD5.m in Sources */,
-				AE14842A1F1EFB9600F73CED /* SMNewsColViewCell.m in Sources */,
 				AE721E361EB308D500A0BA79 /* MyOfferRank.m in Sources */,
 				463E3AAF1B23105F00E0BAF8 /* KDLogger.m in Sources */,
 				AEA24B001D5B24D200DD7939 /* BindPhoneViewController.m in Sources */,
@@ -3840,15 +3918,18 @@
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
+				AE3AB6C01F21A3C300A3C7E3 /* SMDetailViewController.m in Sources */,
 				AEA24B7D1D5B25E000DD7939 /* FilterContentFrame.m in Sources */,
 				AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */,
 				AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */,
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				5672E8B21CCBA9730099FDFC /* RNCachingURLProtocol.m in Sources */,
+				AE3AB6B41F21A27300A3C7E3 /* SMTagModel.m in Sources */,
 				AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */,
 				AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */,
 				AEA249CE1D5B215300DD7939 /* FavoriteViewController.m in Sources */,
 				463E3AA61B23105F00E0BAF8 /* KDActionSheet.m in Sources */,
+				AE3AB6AF1F21A27300A3C7E3 /* SMNewsFrame.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,
 				AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */,
 				AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */,
@@ -3880,13 +3961,11 @@
 				AEA24AF41D5B24D200DD7939 /* MenuCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
 				AE1FD7511D5C929500FFD5A8 /* MJRefreshBackStateFooter.m in Sources */,
-				AE4B2E871F1E0C9B00E328F7 /* SuperMasterViewController.m in Sources */,
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AEA24BEF1D5B266A00DD7939 /* XUButton.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
 				AEA24A031D5B224E00DD7939 /* CatigaryCityCollectionReusableView.m in Sources */,
-				AE4B2E8D1F1E1D3200E328F7 /* SMHotModel.m in Sources */,
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
@@ -3894,6 +3973,7 @@
 				AE7F9B101EB8546F00D30525 /* SearchPromptView.m in Sources */,
 				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
 				AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */,
+				AE3AB6B71F21A27300A3C7E3 /* SMListViewController.m in Sources */,
 				AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */,
 				AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */,
 				AE1FD7211D5C929500FFD5A8 /* NSObject+MJClass.m in Sources */,
@@ -3902,7 +3982,6 @@
 				AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */,
 				AE1FD7241D5C929500FFD5A8 /* NSObject+MJProperty.m in Sources */,
 				AE1FD71C1D5C929500FFD5A8 /* MJExtensionConst.m in Sources */,
-				AE1484271F1EFB2400F73CED /* SMHotCell.m in Sources */,
 				AEA24A8E1D5B23F600DD7939 /* HomeFirstTableViewCell.m in Sources */,
 				AEA24A941D5B23F600DD7939 /* SecondCollectionViewCell.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
@@ -3925,7 +4004,6 @@
 				AE6FF2A11E89163600C2A013 /* EmallCatigoryViewController.m in Sources */,
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
 				AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */,
-				AE4B2E8A1F1E0DBE00E328F7 /* SuperMasterHomeDemol.m in Sources */,
 				AEA249CF1D5B215300DD7939 /* MeViewController.m in Sources */,
 				AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */,
 				AE1FD7561D5C929500FFD5A8 /* MJRefreshConst.m in Sources */,
@@ -3950,10 +4028,10 @@
 				AEA249FC1D5B224E00DD7939 /* CountryStateViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
-				AE1484211F1EFADF00F73CED /* SMNewsCell.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
+				AE3AB6AD1F21A27300A3C7E3 /* SMNewsCell.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */,
@@ -3981,6 +4059,7 @@
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */,
+				AE3AB6AC1F21A27300A3C7E3 /* SMHotModel.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,
 				AEA249FB1D5B224E00DD7939 /* CatigoryViewController.m in Sources */,
@@ -3988,8 +4067,10 @@
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
+				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
+				AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
 				AE1FD74F1D5C929500FFD5A8 /* MJRefreshBackGifFooter.m in Sources */,
@@ -4001,6 +4082,7 @@
 				56DB630B1C397FF7004DA145 /* Reachability.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
 				AEA249A91D5B215300DD7939 /* OrderServiceItem.m in Sources */,
+				AE3AB6B51F21A27300A3C7E3 /* SuperMasterHomeDemol.m in Sources */,
 				AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */,
 				463E3A4F1B230EDC00E0BAF8 /* main.m in Sources */,
 				AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */,
@@ -4015,6 +4097,7 @@
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
+				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
 				AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */,
 				AE892A181EBC573E0035A31D /* HomeHeaderFrame.m in Sources */,
 				AE4B2E7B1F1E095600E328F7 /* messageCatigroyCountryModel.m in Sources */,
@@ -4022,6 +4105,7 @@
 				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AE4B2E6F1F1E095600E328F7 /* FSSegmentTitleView.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
+				AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
 				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
@@ -4033,6 +4117,7 @@
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
 				AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */,
 				AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */,
+				AE3AB6A81F21A27300A3C7E3 /* SMBannerModel.m in Sources */,
 				463E3AA91B23105F00E0BAF8 /* KDColorHelper.m in Sources */,
 				AE1FD72A1D5C929500FFD5A8 /* MJRefreshHeader.m in Sources */,
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
@@ -4057,6 +4142,7 @@
 				AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */,
 				AE1FD7541D5C929500FFD5A8 /* MJRefreshStateHeader.m in Sources */,
 				AEA24C0B1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m in Sources */,
+				AE3AB6B01F21A27300A3C7E3 /* SMNewsOnLineView.m in Sources */,
 				AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */,
 				AE6F28761D77CA3C00E9A47A /* UUChartLabel.m in Sources */,
 				AE4B2E681F1E095600E328F7 /* MessageArticle.m in Sources */,
@@ -4072,7 +4158,6 @@
 				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
 				AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */,
-				AE4B2E901F1E1E6A00E328F7 /* SMBannerModel.m in Sources */,
 				AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,
@@ -4087,7 +4172,6 @@
 				AE6F28751D77CA3C00E9A47A /* UUChartConst.m in Sources */,
 				AE96A36F1E8BC849006E8E35 /* ServiceHeaderView.m in Sources */,
 				AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */,
-				AE14841B1F1EF5AB00F73CED /* SMTagModel.m in Sources */,
 				AEA249271D5B207700DD7939 /* ApplyMatialViewController.m in Sources */,
 				AE1FD7501D5C929500FFD5A8 /* MJRefreshBackNormalFooter.m in Sources */,
 				AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */,
@@ -4102,7 +4186,6 @@
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,
 				AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
-				AE1484241F1EFB0000F73CED /* SMTagCell.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
@@ -4112,8 +4195,10 @@
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
 				AE4B2E651F1E095600E328F7 /* MessageCountryTopicModel.m in Sources */,
 				AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */,
+				AE3AB6B31F21A27300A3C7E3 /* SMTagFrame.m in Sources */,
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
 				AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */,
+				AE3AB6A91F21A27300A3C7E3 /* SMHomeSectionModel.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
@@ -4143,6 +4228,7 @@
 				AE37088D1EB083F700502A62 /* MyOfferSubjecct.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* CatigaryScrollView.m in Sources */,
 				AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */,
+				AE3AB6AB1F21A27300A3C7E3 /* SMHotFrame.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,

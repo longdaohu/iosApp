@@ -33,7 +33,6 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
 #define KEY_NAME_SF  @"name"
 #define KEY_VALUE_SF  @"value"
 #define KEY_FILTERS_SF  @"filters"
-#define KEY_PAGE_SF  @"page"
 #define KEY_SIZE_SF  @"size"
 #define KEY_DESC_SF  @"desc"
 #define KEY_ORDER_SF  @"order"

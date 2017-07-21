@@ -15,4 +15,6 @@
 
 - (void)separatorLineShow:(BOOL)show;
 
+- (void)separatorLinePaddingShow:(BOOL)show;
+
 @end

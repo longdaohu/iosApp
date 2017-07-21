@@ -34,7 +34,6 @@
 
 
 #define CELL_HIGHT_DEFAULT 44
-#define PARA_PAGE @"page"
 
 @implementation MessageCountryTopicVController
 
@@ -208,7 +207,7 @@
     [paras setValue:self.country_catigory_current.code  forKey:@"first"];
     messageCatigroyModel *catigory = self.country_catigory_current.subs[index];
     [paras setValue:catigory.code  forKey:@"second"];
-    [paras setValue:@(topic.page)  forKey:PARA_PAGE];
+    [paras setValue:@(topic.page)  forKey:KEY_PAGE];
     [paras setValue:@20  forKey:@"size"];
     
     for (messageCatigroySubModel *catigory_sub in catigory.subs) {
@@ -250,7 +249,7 @@
         }else{
             
             topic.page++;//网络请求成功，+一页，请求下一页数据
-            [topic.parameters setValue:@(topic.page) forKey:PARA_PAGE];
+            [topic.parameters setValue:@(topic.page) forKey:KEY_PAGE];
         }
         
         

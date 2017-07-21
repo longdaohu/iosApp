@@ -148,7 +148,7 @@
     
     CGFloat focusX = 0;
     CGFloat focusW = itemW;
-    CGFloat focusH = 3;
+    CGFloat focusH = 2;
     CGFloat focusY = banH - focusH;
     self.focusView.frame = CGRectMake(focusX, focusY, focusW, focusH);
 }

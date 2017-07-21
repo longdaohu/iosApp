@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMHotFrame.h"
 
 @interface SMHotCell : UITableViewCell
+@property(nonatomic,strong)SMHotFrame *hotFrame;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end
