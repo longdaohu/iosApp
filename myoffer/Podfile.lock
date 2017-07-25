@@ -4,20 +4,26 @@ PODS:
     - DACircularProgress
     - pop
     - SDWebImage
+  - Masonry (1.0.2)
   - pop (1.0.9)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - ZFPlayer (2.1.1):
+    - Masonry
 
 DEPENDENCIES:
   - IDMPhotoBrowser
+  - ZFPlayer
 
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  ZFPlayer: c36657da33c28c75dfb100e98e7976b5b3e1fc10
 
-PODFILE CHECKSUM: 6b0f23cc976e5c3773cf25d1ccd172e867a1f5ff
+PODFILE CHECKSUM: b539f5ef54e43d87f6233d1271b1e53553af5391
 
 COCOAPODS: 1.2.0.rc.1

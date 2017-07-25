@@ -56,13 +56,11 @@ static NSString *identify = @"sm_audio";
     
     UIButton *play = [UIButton new];
     [play setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [play setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateSelected];
-    [play setImage:[UIImage imageNamed:@"play_lock"] forState:UIControlStateDisabled];
     self.playBtn = play;
     [self.contentView addSubview:play];
     
+    
     UIButton *statusBtn = [UIButton new];
-//    [statusBtn setTitle:@"试听" forState:UIControlStateNormal];
     [statusBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
     statusBtn.titleLabel.font = [UIFont systemFontOfSize:11];
     [statusBtn setImage:[UIImage imageNamed:@"sm_lock_tag"] forState:UIControlStateDisabled];
@@ -102,18 +100,23 @@ static NSString *identify = @"sm_audio";
     self.bottom_line.frame = audioFrame.bottom_line_Frame;
     
     
-    self.playBtn.enabled = audioFrame.item.isPlay;
     //如果播放按钮可用，判断播放按钮的当前是否正在播放状态
-    if (self.playBtn.enabled)  self.playBtn.selected  = audioFrame.item.inPlaying;
+    NSString *imageName = @"play";
+    if (audioFrame.item.isPlay){
+        imageName = audioFrame.item.inPlaying ? @"pause" : @"play";
+    }else{
+        imageName = @"play_lock";
+    }
+    [self.playBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+
     
     self.statusBtn.enabled = audioFrame.item.isPlay;
-    
     NSString *title_status = audioFrame.item.isPlay ? @"试听" : @"";
     [self.statusBtn setTitle:title_status forState:UIControlStateNormal];
     
  
     self.nameLab.text = [NSString stringWithFormat:@"%ld.%@",self.indexPath.row + 1,audioFrame.item.name];
-    self.timeLab.text = [NSString stringWithFormat:@"时长：%@",audioFrame.item.seconds_duration];
+    self.timeLab.text = [NSString stringWithFormat:@"时长：%@s",audioFrame.item.seconds_duration];
  
 }
 

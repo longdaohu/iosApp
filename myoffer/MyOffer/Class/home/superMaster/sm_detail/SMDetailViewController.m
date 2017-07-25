@@ -34,11 +34,14 @@
 
 @implementation SMDetailViewController
 
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
     
     //1 如果不存在，没有必要下一步操作
     if (!self.detail) return;
@@ -222,7 +225,12 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    CGFloat tb_y = 200;
+    CGFloat tb_x = 0;
+    CGFloat tb_w = XSCREEN_WIDTH;
+    CGFloat tb_h = XSCREEN_HEIGHT - tb_y;
+    CGRect tb_frame = CGRectMake(tb_x, tb_y, tb_w, tb_h);
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:tb_frame style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -257,7 +265,9 @@
         
         SMAudioCell *audio_cell = [SMAudioCell cellWithTableView:tableView indexPath:indexPath];
     
+        
         audio_cell.audioFrame =  group.items[indexPath.row];
+        
         
         [audio_cell bottomLineWithHiden:(indexPath.row == group.items.count - 1)];
         
@@ -399,12 +409,16 @@
         [self pushWithVC:sku_vc];
     }
     
+    
+    
     if (group.index == 0) {
+        
         
         SMAudioItemFrame *audio_frame  =  group.items[indexPath.row];
         
-        if (audio_frame.item.isPlay) {
-            
+        //不能播放音频
+        if (!audio_frame.item.isPlay)  return;
+        
             
             NSInteger temp_index = DEFAULT_NUMBER;
             
@@ -422,19 +436,35 @@
                 }
             }
             
- 
             
-            audio_frame.item.inPlaying = !audio_frame.item.inPlaying;
+            NSLog(@">>>>>>>>>>>>> %@",audio_frame.item.file_url);
+            
+            if (temp_index == DEFAULT_NUMBER ) {
+                
+                audio_frame.item.inPlaying = YES;
+
+            }else{
+                
+                if(temp_index == indexPath.row){
+                    
+                     audio_frame.item.inPlaying = NO;
+                
+                }else{
+                
+                     audio_frame.item.inPlaying = !audio_frame.item.inPlaying;
+                
+                }
+              
+            }
             
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
 
          }
-        
-        
-    }
-    
     
 }
+
+
+
 
 #pragma mark : 事件处理
 - (void)pushWithVC:(UIViewController *)vc{
