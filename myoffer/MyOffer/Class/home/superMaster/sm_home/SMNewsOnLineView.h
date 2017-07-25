@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^SMNewsOnLineViewBlock)(NSString *urlStr);
 @interface SMNewsOnLineView : UIView
 
+@property(nonatomic,strong)NSDictionary *offline;
+
+@property(nonatomic,copy)SMNewsOnLineViewBlock actionBlock;
+
+ 
 @end

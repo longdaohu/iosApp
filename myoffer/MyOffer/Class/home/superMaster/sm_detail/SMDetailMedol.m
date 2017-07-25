@@ -1,50 +1,36 @@
 //
-//  SMHotModel.m
+//  SMDetailMedol.m
 //  myOffer
 //
-//  Created by xuewuguojie on 2017/7/18.
+//  Created by xuewuguojie on 2017/7/21.
 //  Copyright © 2017年 UVIC. All rights reserved.
 //
 
+#import "SMDetailMedol.h"
 #import "SMHotModel.h"
+#import "ServiceSKU.h"
 
-@implementation SMHotModel
-
+@implementation SMDetailMedol
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     
     return @{@"message_id" : @"_id"};
 }
 
-- (SMMessageType)messageType{
++ (NSDictionary *)mj_objectClassInArray{
+    
+    return @{
+             @"related" :  NSStringFromClass([SMHotModel class]),
+             @"sku" :  NSStringFromClass([ServiceSKU class])
+             };
+}
 
-    
-    if ([self.type isEqualToString:@"offline"]) {
-    
-        return SMMessageTypeOffLine;
-    }
-    
-  
-    SMMessageType type = SMMessageTypeAudio;
-    
-    if (self.has_video && self.has_audio) {
-        
-        type = SMMessageTypeAudioVedio;
-        
-    }else if(self.has_video){
-    
-        type = SMMessageTypeVedio;
-        
-    }else{
-    
-        type = SMMessageTypeAudio;
+- (NSString *)guest_subject_uni{
 
-    }
-    
-    return type;
+    return [NSString stringWithFormat:@"%@  |  %@",self.guest_university,self.guest_subject];
 }
 
 - (NSString *)type_name{
-
+    
     
     if ([self.type isEqualToString:@"offline"]) {
         
@@ -74,5 +60,5 @@
 }
 
 
-@end
 
+@end

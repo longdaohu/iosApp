@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface SMDetailViewController : BaseViewController
+@property(nonatomic,copy)NSString *message_id;
 
 @end

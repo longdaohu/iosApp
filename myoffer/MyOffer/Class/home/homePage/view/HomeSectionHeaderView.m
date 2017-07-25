@@ -54,7 +54,7 @@
         
         UIButton *moreBtn =[[UIButton alloc] init];
         self.moreBtn      = moreBtn;
-        [moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
+//        [moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
         [moreBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
          moreBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [moreBtn addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
@@ -77,21 +77,22 @@
 
     _title = title;
     
-    NSArray *items = [title componentsSeparatedByString:@"+"];
+//    NSArray *items = [title componentsSeparatedByString:@"+"];
     
-    self.TitleLab.text = items.firstObject;
-    
-    [self.moreBtn setTitle:items.lastObject forState:UIControlStateNormal];
-    
+    self.TitleLab.text = title;
+//
+//    [self.moreBtn setTitle:items.lastObject forState:UIControlStateNormal];
 }
 
-- (void)setMoreDiscription:(NSString *)moreDiscription{
 
-    _moreDiscription = moreDiscription;
+- (void)setAccessory_title:(NSString *)accessory_title{
+
+    _accessory_title = accessory_title;
     
-    [self.moreBtn setTitle:moreDiscription forState:UIControlStateNormal];
+    [self.moreBtn setTitle:accessory_title forState:UIControlStateNormal];
 
 }
+
 
 - (void)setContentFontSize:(CGFloat)contentFontSize{
 
@@ -110,16 +111,14 @@
     
 }
 
+
 - (void)arrowButtonHiden:(BOOL)hiden{
 
-    self.arrowView.hidden = hiden;
+    
     self.moreBtn.hidden = hiden;
     
-    if (!hiden) {
-        
-        [self.moreBtn setTitle:@"  " forState:UIControlStateNormal];
-
-    }
+    self.arrowView.hidden = hiden;
+    
 
 }
 

@@ -19,4 +19,25 @@
     
     return sectionM;
 }
+
+- (void)setShowMore:(BOOL)showMore{
+
+    _showMore = showMore;
+    
+    if (showMore) {
+        
+        self.items = self.item_all;
+        
+    }
+ 
+}
+
+
+//- (BOOL)have_footer{
+//
+//    return (self.item_all.count > 3) ? YES : NO;
+//}
+//
+
+
 @end

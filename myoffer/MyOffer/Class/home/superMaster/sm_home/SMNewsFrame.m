@@ -38,14 +38,15 @@
     CGFloat title_x = Margin;
     CGFloat title_y = icon_h + Margin;
     CGFloat title_w = icon_w - title_x * 2;
-    CGSize  title_Size = [[NSString stringWithFormat:@"%@隋朝/唐朝/五代十国/两宋、邓小南主讲(7)",news.main_title] KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16] maxWidth:title_w];
-    CGFloat title_h = title_Size.height;
+    UIFont *titleFont = [UIFont systemFontOfSize:16];
+    CGSize  title_Size = [news.main_title  KD_sizeWithAttributeFont:titleFont maxWidth:title_w];
+    CGFloat title_h = title_Size.height > titleFont.lineHeight * 2 ? titleFont.lineHeight * 2 : titleFont.lineHeight;
     self.title_Frame = CGRectMake(title_x, title_y, title_w, title_h);
     
     
-    CGFloat play_w =  100;
+    CGFloat play_w =  cell_w * 0.35;
     CGFloat play_x =  cell_w - play_w - Margin;
-    CGFloat play_y =  CGRectGetMaxY(self.icon_Frame) + 58;
+    CGFloat play_y =  title_y + titleFont.lineHeight * 2 + Margin;
  
     
     CGSize name_size  = [news.guest_name KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]];

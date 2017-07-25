@@ -11,6 +11,16 @@
 
 @implementation ServiceSKUFrame
 
++ (instancetype)frameWithSKU:(ServiceSKU *)sku{
+    
+    ServiceSKUFrame *skuFrame = [[ServiceSKUFrame alloc] init];
+    
+    skuFrame.SKU = sku;
+    
+    return skuFrame;
+}
+
+
 - (void)setSKU:(ServiceSKU *)SKU{
 
     _SKU = SKU;

@@ -30,6 +30,14 @@
     CGFloat icon_h = icon_w * 184 / 270.0;
     self.icon_Frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
     
+    
+    CGFloat tag_x = icon_x + 2;
+    CGFloat tag_y = icon_y + 2;
+    CGFloat tag_w =  0;
+    CGFloat tag_h =  0;
+    self.tag_Frame = CGRectMake(tag_x, tag_y, tag_w, tag_h);
+    
+    
     CGFloat title_x =  CGRectGetMaxX(self.icon_Frame) + Margin;
     CGFloat title_y = icon_y;
     CGFloat title_w = XSCREEN_WIDTH - title_x - Margin;

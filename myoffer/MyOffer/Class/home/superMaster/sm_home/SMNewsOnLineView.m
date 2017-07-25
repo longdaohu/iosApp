@@ -8,7 +8,29 @@
 
 #import "SMNewsOnLineView.h"
 
+@interface SMNewsOnLineView ()
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+
+
+@end
+
 @implementation SMNewsOnLineView
+
+
+- (void)setOffline:(NSDictionary *)offline{
+
+    _offline = offline;
+    
+    self.titleLab.text = offline[@"main_title"];
+
+}
+- (IBAction)tap:(id)sender {
+    
+    if (self.actionBlock) {
+        
+        self.actionBlock(self.offline[@"offline_url"]);
+    }
+}
 
 
 @end

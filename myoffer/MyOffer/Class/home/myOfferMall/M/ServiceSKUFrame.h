@@ -21,4 +21,7 @@
 @property(nonatomic,assign)CGRect   line_Frame;
 @property(nonatomic,assign)CGFloat   cell_Height;
 
++ (instancetype)frameWithSKU:(ServiceSKU *)sku;
+
+
 @end

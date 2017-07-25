@@ -10,6 +10,7 @@
 #import "SMHotModel.h"
 #import "SMHotCell.h"
 #import "SMHotFrame.h"
+#import "SMDetailViewController.h"
 #import "UniversityCourseFilterViewController.h"
 
 
@@ -291,8 +292,6 @@
     
     hot_cell.hotFrame = self.items[indexPath.row];
     
-    hot_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return hot_cell;
 
 }
@@ -301,7 +300,16 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    SMHotFrame *hot_frame  = self.items[indexPath.row];
+    
+    SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+    
+    detail.message_id = hot_frame.hot.message_id;
+    
+    [self.navigationController pushViewController:detail animated:YES];
+    
 }
+
 
 #pragma mark : 事件处理
 - (void)loadMoreData{

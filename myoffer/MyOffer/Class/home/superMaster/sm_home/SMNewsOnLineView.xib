@@ -16,6 +16,12 @@
             <rect key="frame" x="0.0" y="0.0" width="585" height="118"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-zE-0F5" userLabel="tap">
+                    <rect key="frame" x="0.0" y="0.0" width="585" height="118"/>
+                    <connections>
+                        <action selector="tap:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dsf-0h-UVp"/>
+                    </connections>
+                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sm_offLine_tag" translatesAutoresizingMaskIntoConstraints="NO" id="XME-d5-n6l">
                     <rect key="frame" x="80.5" y="46.5" width="62" height="25"/>
                     <constraints>
@@ -67,6 +73,7 @@
                 <constraint firstItem="oce-l2-LAn" firstAttribute="height" secondItem="aru-wV-peL" secondAttribute="height" id="8tL-qx-hQP"/>
                 <constraint firstItem="t75-jm-84V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Cwn-hI-bFC"/>
                 <constraint firstItem="9aa-pK-2Lp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="HEc-xU-YlH"/>
+                <constraint firstAttribute="trailing" secondItem="Bnx-zE-0F5" secondAttribute="trailing" id="JTN-Lw-BbL"/>
                 <constraint firstItem="aru-wV-peL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Rfh-np-3vh"/>
                 <constraint firstItem="oce-l2-LAn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ry0-Ld-X9T"/>
                 <constraint firstItem="pHa-5b-ObH" firstAttribute="height" secondItem="aru-wV-peL" secondAttribute="height" id="S88-V2-3oK"/>
@@ -74,10 +81,16 @@
                 <constraint firstItem="pHa-5b-ObH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WsO-tU-ggb"/>
                 <constraint firstItem="pHa-5b-ObH" firstAttribute="leading" secondItem="aru-wV-peL" secondAttribute="trailing" constant="10" id="Yu3-QT-zd9"/>
                 <constraint firstAttribute="bottom" secondItem="9aa-pK-2Lp" secondAttribute="bottom" constant="20" id="br9-6w-cYS"/>
+                <constraint firstAttribute="bottom" secondItem="Bnx-zE-0F5" secondAttribute="bottom" id="nQh-xi-qRb"/>
                 <constraint firstItem="XME-d5-n6l" firstAttribute="leading" secondItem="pHa-5b-ObH" secondAttribute="trailing" constant="10" id="txH-NT-rBn"/>
+                <constraint firstItem="Bnx-zE-0F5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="u6H-uI-TbI"/>
                 <constraint firstItem="XME-d5-n6l" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uck-yd-t80"/>
+                <constraint firstItem="Bnx-zE-0F5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wa0-t4-gsb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="titleLab" destination="oce-l2-LAn" id="iY4-At-8rz"/>
+            </connections>
             <point key="canvasLocation" x="75.5" y="-398"/>
         </view>
     </objects>

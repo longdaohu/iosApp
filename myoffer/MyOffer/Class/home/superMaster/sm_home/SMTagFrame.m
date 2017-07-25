@@ -41,7 +41,6 @@
     self.topicFrame = CGRectMake(topic_x, topic_y, topic_w, topic_h);
 
     
-//    NSLog(@"111111111111  %@",[NSValue valueWithCGRect:self.topicFrame]);
     CGFloat line_x = topic_x;
     CGFloat line_y = CGRectGetMaxY(self.topicFrame) + margin;
     CGFloat line_w = topic_w;

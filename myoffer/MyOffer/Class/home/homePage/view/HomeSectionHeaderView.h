@@ -12,12 +12,12 @@
 typedef void(^HomeSectionHeaderViewBlock)();
 @interface HomeSectionHeaderView : UIView
 @property(nonatomic,copy)HomeSectionHeaderViewBlock actionBlock;
-@property(nonatomic,copy)NSString *moreDiscription;
+@property(nonatomic,copy)NSString *accessory_title;
 @property(nonatomic,assign)CGFloat contentFontSize;
 
 //更多按钮隐藏
-- (void)moreButtonHidenNo;
 - (void)arrowButtonHiden:(BOOL)hiden;
+
 +(instancetype)sectionHeaderViewWithTitle:(NSString *)title;
 
 @end

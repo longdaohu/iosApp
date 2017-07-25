@@ -169,6 +169,13 @@
 		AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A41F21A27300A3C7E3 /* SuperMasterViewController.m */; };
 		AE3AB6B71F21A27300A3C7E3 /* SMListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */; };
 		AE3AB6C01F21A3C300A3C7E3 /* SMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6BF1F21A3C300A3C7E3 /* SMDetailViewController.m */; };
+		AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6C51F21A8FC00A3C7E3 /* SMDetailMedol.m */; };
+		AE3AB6C91F21AC0300A3C7E3 /* SMAudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6C81F21AC0300A3C7E3 /* SMAudioModel.m */; };
+		AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6CB1F21AC6F00A3C7E3 /* SMAudioItem.m */; };
+		AE3AB6CF1F21CE0A00A3C7E3 /* SMAudioItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6CE1F21CE0A00A3C7E3 /* SMAudioItemFrame.m */; };
+		AE3AB6D21F21D7AC00A3C7E3 /* SMAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D11F21D7AC00A3C7E3 /* SMAudioCell.m */; };
+		AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D41F21E96500A3C7E3 /* SMDetailHeaderView.m */; };
+		AE3AB6D81F21E99100A3C7E3 /* SMDetailHeaderFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D71F21E99100A3C7E3 /* SMDetailHeaderFrame.m */; };
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44F7861EA7744A00390809 /* CatigaryHotCityCell.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
@@ -217,6 +224,8 @@
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
 		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
+		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
+		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
 		AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F286B1D77CA3C00E9A47A /* UUChart.m */; };
@@ -757,6 +766,20 @@
 		AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMListViewController.m; sourceTree = "<group>"; };
 		AE3AB6BE1F21A3C300A3C7E3 /* SMDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailViewController.h; sourceTree = "<group>"; };
 		AE3AB6BF1F21A3C300A3C7E3 /* SMDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailViewController.m; sourceTree = "<group>"; };
+		AE3AB6C41F21A8FC00A3C7E3 /* SMDetailMedol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailMedol.h; sourceTree = "<group>"; };
+		AE3AB6C51F21A8FC00A3C7E3 /* SMDetailMedol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailMedol.m; sourceTree = "<group>"; };
+		AE3AB6C71F21AC0200A3C7E3 /* SMAudioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAudioModel.h; sourceTree = "<group>"; };
+		AE3AB6C81F21AC0300A3C7E3 /* SMAudioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAudioModel.m; sourceTree = "<group>"; };
+		AE3AB6CA1F21AC6F00A3C7E3 /* SMAudioItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAudioItem.h; sourceTree = "<group>"; };
+		AE3AB6CB1F21AC6F00A3C7E3 /* SMAudioItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAudioItem.m; sourceTree = "<group>"; };
+		AE3AB6CD1F21CE0A00A3C7E3 /* SMAudioItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAudioItemFrame.h; sourceTree = "<group>"; };
+		AE3AB6CE1F21CE0A00A3C7E3 /* SMAudioItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAudioItemFrame.m; sourceTree = "<group>"; };
+		AE3AB6D01F21D7AC00A3C7E3 /* SMAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAudioCell.h; sourceTree = "<group>"; };
+		AE3AB6D11F21D7AC00A3C7E3 /* SMAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAudioCell.m; sourceTree = "<group>"; };
+		AE3AB6D31F21E96500A3C7E3 /* SMDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailHeaderView.h; sourceTree = "<group>"; };
+		AE3AB6D41F21E96500A3C7E3 /* SMDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailHeaderView.m; sourceTree = "<group>"; };
+		AE3AB6D61F21E99100A3C7E3 /* SMDetailHeaderFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailHeaderFrame.h; sourceTree = "<group>"; };
+		AE3AB6D71F21E99100A3C7E3 /* SMDetailHeaderFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailHeaderFrame.m; sourceTree = "<group>"; };
 		AE401ABD1EC4348A0078A0EC /* MBProgressHUD+XJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XJ.h"; sourceTree = "<group>"; };
 		AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XJ.m"; sourceTree = "<group>"; };
 		AE44F7851EA7744A00390809 /* CatigaryHotCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCityCell.h; sourceTree = "<group>"; };
@@ -849,6 +872,9 @@
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
 		AE6643A51E6FE61A002FC072 /* GongLueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueTip.h; sourceTree = "<group>"; };
 		AE6643A61E6FE61A002FC072 /* GongLueTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueTip.m; sourceTree = "<group>"; };
+		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
+		AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotSectionFooterView.m; sourceTree = "<group>"; };
+		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		AE6F28671D77CA3C00E9A47A /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
@@ -1850,6 +1876,16 @@
 		AE3AB6B81F21A33F00A3C7E3 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE3AB6C41F21A8FC00A3C7E3 /* SMDetailMedol.h */,
+				AE3AB6C51F21A8FC00A3C7E3 /* SMDetailMedol.m */,
+				AE3AB6D61F21E99100A3C7E3 /* SMDetailHeaderFrame.h */,
+				AE3AB6D71F21E99100A3C7E3 /* SMDetailHeaderFrame.m */,
+				AE3AB6C71F21AC0200A3C7E3 /* SMAudioModel.h */,
+				AE3AB6C81F21AC0300A3C7E3 /* SMAudioModel.m */,
+				AE3AB6CA1F21AC6F00A3C7E3 /* SMAudioItem.h */,
+				AE3AB6CB1F21AC6F00A3C7E3 /* SMAudioItem.m */,
+				AE3AB6CD1F21CE0A00A3C7E3 /* SMAudioItemFrame.h */,
+				AE3AB6CE1F21CE0A00A3C7E3 /* SMAudioItemFrame.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -1866,6 +1902,10 @@
 		AE3AB6BA1F21A34500A3C7E3 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE3AB6D01F21D7AC00A3C7E3 /* SMAudioCell.h */,
+				AE3AB6D11F21D7AC00A3C7E3 /* SMAudioCell.m */,
+				AE3AB6D31F21E96500A3C7E3 /* SMDetailHeaderView.h */,
+				AE3AB6D41F21E96500A3C7E3 /* SMDetailHeaderView.m */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -1873,8 +1913,14 @@
 		AE3AB6BB1F21A36800A3C7E3 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE3AB6A11F21A27300A3C7E3 /* SuperMasterHomeDemol.h */,
+				AE3AB6A21F21A27300A3C7E3 /* SuperMasterHomeDemol.m */,
 				AE3AB6881F21A27300A3C7E3 /* SMBannerModel.h */,
 				AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */,
+				AE3AB6901F21A27300A3C7E3 /* SMHotModel.h */,
+				AE3AB6911F21A27300A3C7E3 /* SMHotModel.m */,
+				AE3AB69F1F21A27300A3C7E3 /* SMTagModel.h */,
+				AE3AB6A01F21A27300A3C7E3 /* SMTagModel.m */,
 				AE3AB68A1F21A27300A3C7E3 /* SMHomeSectionModel.h */,
 				AE3AB68B1F21A27300A3C7E3 /* SMHomeSectionModel.m */,
 				AE3AB68E1F21A27300A3C7E3 /* SMHotFrame.h */,
@@ -1883,12 +1929,6 @@
 				AE3AB6971F21A27300A3C7E3 /* SMNewsFrame.m */,
 				AE3AB69D1F21A27300A3C7E3 /* SMTagFrame.h */,
 				AE3AB69E1F21A27300A3C7E3 /* SMTagFrame.m */,
-				AE3AB69F1F21A27300A3C7E3 /* SMTagModel.h */,
-				AE3AB6A01F21A27300A3C7E3 /* SMTagModel.m */,
-				AE3AB6A11F21A27300A3C7E3 /* SuperMasterHomeDemol.h */,
-				AE3AB6A21F21A27300A3C7E3 /* SuperMasterHomeDemol.m */,
-				AE3AB6901F21A27300A3C7E3 /* SMHotModel.h */,
-				AE3AB6911F21A27300A3C7E3 /* SMHotModel.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -1907,6 +1947,9 @@
 				AE3AB69A1F21A27300A3C7E3 /* SMNewsOnLineView.xib */,
 				AE3AB69B1F21A27300A3C7E3 /* SMTagCell.h */,
 				AE3AB69C1F21A27300A3C7E3 /* SMTagCell.m */,
+				AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */,
+				AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */,
+				AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -3818,6 +3861,7 @@
 				AEF421051BD4988B00CFB45E /* UMSLoginViewController.xib in Resources */,
 				AEA24B261D5B251800DD7939 /* IntroViewController.xib in Resources */,
 				AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */,
+				AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */,
 				AEA249D01D5B215300DD7939 /* MeViewController.xib in Resources */,
 				AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */,
 				AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */,
@@ -3906,6 +3950,8 @@
 				AEA24AFC1D5B24D200DD7939 /* XWGJAbout.m in Sources */,
 				AE1FD7571D5C929500FFD5A8 /* UIScrollView+MJExtension.m in Sources */,
 				AE86B23A1E8A3B5200BF2451 /* EmallCatigroyHeaderView.m in Sources */,
+				AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */,
+				AE3AB6CF1F21CE0A00A3C7E3 /* SMAudioItemFrame.m in Sources */,
 				AEA249FA1D5B224E00DD7939 /* AUSearchResultViewController.m in Sources */,
 				AEA24A001D5B224E00DD7939 /* CatigoryRank.m in Sources */,
 				AE3708911EB0A01100502A62 /* CatigaryRankkCell.m in Sources */,
@@ -4055,6 +4101,7 @@
 				AE2F23081EADA6040089084C /* UniversityCourseFilterViewController.m in Sources */,
 				AE2DE4481E962B51009683B0 /* ServiceItemHeaderCell.m in Sources */,
 				AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */,
+				AE3AB6C91F21AC0300A3C7E3 /* SMAudioModel.m in Sources */,
 				AE1FD71F1D5C929500FFD5A8 /* MJPropertyKey.m in Sources */,
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
@@ -4112,6 +4159,7 @@
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
 				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AE851F171EA9B818001993D5 /* MyOfferCountry.m in Sources */,
+				AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
@@ -4121,6 +4169,7 @@
 				463E3AA91B23105F00E0BAF8 /* KDColorHelper.m in Sources */,
 				AE1FD72A1D5C929500FFD5A8 /* MJRefreshHeader.m in Sources */,
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
+				AE3AB6D21F21D7AC00A3C7E3 /* SMAudioCell.m in Sources */,
 				AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */,
 				AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
@@ -4157,6 +4206,7 @@
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
+				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
 				AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */,
 				AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
@@ -4194,6 +4244,7 @@
 				462D46671B353A0F00BC7861 /* FXBlurView.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
 				AE4B2E651F1E095600E328F7 /* MessageCountryTopicModel.m in Sources */,
+				AE3AB6D81F21E99100A3C7E3 /* SMDetailHeaderFrame.m in Sources */,
 				AEA24B251D5B251800DD7939 /* IntroViewController.m in Sources */,
 				AE3AB6B31F21A27300A3C7E3 /* SMTagFrame.m in Sources */,
 				AEA249A41D5B215300DD7939 /* OrderDetailCell.m in Sources */,
@@ -4204,6 +4255,7 @@
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
 				AEE9FAE31DC87BCF00D732A7 /* LeftMenuHeaderView.m in Sources */,
+				AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */,
 				AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,
 				AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */,

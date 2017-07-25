@@ -114,6 +114,11 @@ static NSString *cv_identify = @"sm_cv_news";
     NSArray *newsArr = self.newsGroup[indexPath.section];
     
     content_cell.newsFrame = newsArr[indexPath.row];
+//    XWeakSelf
+//    content_cell.actionBlock = ^(NSString *message_id) {
+//        
+//      
+//    };
     
     return content_cell;
 }
@@ -124,8 +129,13 @@ static NSString *cv_identify = @"sm_cv_news";
     
     SMNewsFrame *newsFrame = newsArr[indexPath.row];
     
-    NSLog(@">>>>>>>>>>>>>>>> %@",newsFrame.news.guest_university);
-}
+    
+    if (self.actionBlock) {
+        
+        self.actionBlock(newsFrame.news.message_id);
+    }
+    
+ }
 
 - (void)layoutSubviews{
 

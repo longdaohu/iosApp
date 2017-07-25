@@ -13,6 +13,7 @@
 @property(nonatomic,strong)NSArray  *items;
 //分组header
 @property(nonatomic,copy)NSString   *HeaderTitle;
+@property(nonatomic,copy)NSString   *accessory_title;
 //行高
 @property(nonatomic,assign)CGFloat   cellHeight;
 //是否是分组footer

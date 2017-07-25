@@ -11,6 +11,7 @@
 
 @interface SMHotCell ()
 @property(nonatomic,strong)UIImageView *iconView;
+@property(nonatomic,strong)UIImageView *tagIV;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *nameLab;
 @property(nonatomic,strong)UILabel *uni_Lab;
@@ -53,6 +54,12 @@ static NSString *identify = @"sm_hot";
     [self.contentView addSubview:iconView];
     iconView.clipsToBounds = YES;
     
+    UIImageView *tagIV = [[UIImageView alloc] init];
+    self.tagIV = tagIV;
+    tagIV.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:tagIV];
+
+    
     UILabel *titleLab = [[UILabel alloc] init];
     self.titleLab = titleLab;
     [self addLable:titleLab fontSize:16 textColor:XCOLOR_TITLE];
@@ -87,23 +94,27 @@ static NSString *identify = @"sm_hot";
 
     _hotFrame = hotFrame;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_post_mc]];
-    self.titleLab.text = hotFrame.hot.main_title;
-    self.nameLab.text = hotFrame.hot.guest_name;
-    self.uni_Lab.text = hotFrame.hot.guest_university;
-    
     self.iconView.frame = hotFrame.icon_Frame;
     self.titleLab.frame = hotFrame.title_Frame;
     self.nameLab.frame = hotFrame.name_Frame;
     self.uni_Lab.frame = hotFrame.uni_Frame;
-    self.bottom_line.frame = hotFrame.bottom_line_Frame;
+    self.tagIV.frame = hotFrame.tag_Frame;
     
+    self.bottom_line.frame = hotFrame.bottom_line_Frame;
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_post_mc]];
+    self.titleLab.text = hotFrame.hot.main_title;
+    self.nameLab.text = hotFrame.hot.guest_name;
+    self.uni_Lab.text = hotFrame.hot.guest_university;
+    self.tagIV.image = [UIImage imageNamed:hotFrame.hot.type_name];
+    [self.tagIV sizeToFit];
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

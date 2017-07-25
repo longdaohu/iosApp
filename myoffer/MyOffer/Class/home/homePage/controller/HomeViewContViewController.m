@@ -165,10 +165,12 @@
         
         _groups =[NSMutableArray array];
         
-        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地+更多地区" contentes:nil andFooter:NO];
+        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil andFooter:NO];
+        groupone.accessory_title = @"更多地区";
         [_groups addObject:groupone];
         
-        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读+更多资讯" contentes:nil andFooter:NO];
+        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil andFooter:NO];
+        grouptwo.accessory_title = @"更多资讯";
         [_groups addObject:grouptwo];
         
         UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil andFooter:NO];
@@ -502,8 +504,7 @@
         
     }];
         
-       
-  
+   
     
     
     if (scrollView.contentOffset.y < -150) [self.TableView setContentOffset:CGPointMake(0, -150) animated:NO];
@@ -525,11 +526,14 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
   
     UniDetailGroup *group = self.groups[section];
+    
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
+    
+    SectionView.accessory_title = group.accessory_title;
     
     if ((self.groups.count - 1) > section) {
         
-        [SectionView moreButtonHidenNo];
+        [SectionView arrowButtonHiden:NO];
         
          SectionView.actionBlock = ^{
              

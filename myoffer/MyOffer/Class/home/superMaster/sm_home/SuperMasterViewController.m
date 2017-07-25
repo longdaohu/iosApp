@@ -22,6 +22,8 @@
 #import "SMNewsOnLineView.h"
 #import "SMBannerModel.h"
 #import "SMListViewController.h"
+#import "SMDetailViewController.h"
+#import "SMHotSectionFooterView.h"
 
 @interface SuperMasterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -80,10 +82,20 @@
         
         
         NSMutableArray *hots_temp = [NSMutableArray array];
+        
         for (SMHotModel *hot in home.hots){
+            
             [hots_temp addObject:[SMHotFrame frameWithHot:hot]];
         }
-        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] index:2];
+        
+        
+        NSArray *hotArr = hots_temp.count > 2 ? [hots_temp subarrayWithRange:NSMakeRange(0, 2)] : hots_temp;
+        
+        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:hotArr index:2];
+        
+        third.accessory_title = @"查看全部";
+        
+        third.item_all = [hots_temp copy];
         
         self.groups = @[one,second,third];
         
@@ -94,6 +106,8 @@
         
     }];
 }
+
+
 
 
 #pragma mark :  添加UI
@@ -135,6 +149,8 @@
         
         [header addSubview:self.onLineView];
         
+        self.onLineView.offline = self.homeModel.offline;
+        
     }
 
     header.mj_h = header_Height;
@@ -151,7 +167,11 @@
     if (!_onLineView) {
         
         _onLineView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMNewsOnLineView class]) owner:self options:nil].firstObject;
-        
+        XWeakSelf
+        _onLineView.actionBlock = ^(NSString *urlStr) {
+            
+            [weakSelf safariWithPath:urlStr];
+        };
     }
     
     return _onLineView;
@@ -194,6 +214,7 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
+  
 }
 
 
@@ -212,7 +233,6 @@
 }
 
 
-static NSString *identify = @"cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -226,7 +246,19 @@ static NSString *identify = @"cell";
         
         news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        XWeakSelf
+        news_cell.actionBlock = ^(NSString *message_id) {
+            
+            SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+            
+            detail.message_id = message_id;
+            
+            [weakSelf pushWithVC:detail];
+          
+        };
+        
         return  news_cell;
+        
         
     }else if(group.index == 1){
 
@@ -239,7 +271,7 @@ static NSString *identify = @"cell";
         tag_cell.actionBlock = ^(NSString *tag, NSString *subject_id) {
   
 
-           SMListViewController *vc = [[SMListViewController alloc] init];
+        SMListViewController *vc = [[SMListViewController alloc] init];
             
             if (tag) {
                 // 超导标签: ['留学生活', '大学招生官', '专业解析', '职业发展', '海外学习辅导']
@@ -264,13 +296,40 @@ static NSString *identify = @"cell";
         
         hot_cell.hotFrame = group.items[indexPath.row];
         
-        hot_cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         return hot_cell;
      
     }
   
 }
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    SMHomeSectionModel *group = self.groups[section];
+    
+    if (group.index == 2 && group.item_all.count > 2 && !group.showMore) {
+        
+         XWeakSelf
+    SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
+        
+        footer.actionBlock = ^{
+        
+             group.showMore = YES;
+             
+            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+            
+        };
+        
+        
+        return  footer;
+    
+    }
+    
+    return nil;
+
+ }
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
@@ -287,22 +346,21 @@ static NSString *identify = @"cell";
 
     }
     
+    SectionView.accessory_title = group.accessory_title;
+    
     [SectionView arrowButtonHiden:(group.index != 2)];
     
+    
+    XWeakSelf
     SectionView.actionBlock = ^{
  
-        [self pushWithVC:[[SMListViewController alloc] init]];
+        [weakSelf pushWithVC:[[SMListViewController alloc] init]];
         
     };
     
     return SectionView;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -335,47 +393,69 @@ static NSString *identify = @"cell";
 {
     return  50;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 10;
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    SMHomeSectionModel *group = self.groups[section];
+
+    if (group.index == 2 && group.item_all.count > 2 && !group.showMore) {
+        
+        return 80;
+    }
+    
+   return 10;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+    SMHomeSectionModel *group = self.groups[indexPath.section];
 
+    if (group.index == 2) {
+        
+        SMHotFrame *hot_frame  =  group.items[indexPath.row];
+        
+        SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+        
+        detail.message_id = hot_frame.hot.message_id;
+        
+        [self pushWithVC:detail];
+    }
+    
+}
 
 #pragma mark : 事件处理
 - (void)caseBannerWithIndex:(NSInteger)index{
     
-    
    SMBannerModel  *banner = self.homeModel.banners[index];
     
+     if ([banner.link_app containsString:@"myoffer://home"]) {
+         
+         [self dismiss];
+         
+     }else if([banner.link_app containsString:@"myoffer://articles"]){
+         
+         [self.tabBarController setSelectedIndex:2];
+         
+     }else{
  
-    NSLog(@"caseBannerWithIndex   %@ %@  %@",banner.link_app,banner.banner_id,banner.link_mc);
-    
-    
-//    NSString *appStr = @"app://";
-//    
-//    //url 包含 app://跳转 ServiceItemViewController
-//    
-//    if ([banner.url containsString:@"app://"]) {
-//        
-//        NSString *item = [banner.url substringWithRange:NSMakeRange(appStr.length, banner.url.length - appStr.length)];
-//        
-//        item.length > 0 ?  [self casePushServiceItemViewControllerWithId:item] : nil;
-//        
-//        return;
-//    }
-//    
-//    //url 包含 app://跳转 WebViewController
-//    WebViewController *web = [[WebViewController alloc] initWithPath:banner.url];
-//    
-//    [self.navigationController  pushViewController:web animated:true];
-    
+         [self safariWithPath:banner.link_app];
+         
+     }
     
 }
 
 - (void)pushWithVC:(UIViewController *)vc{
 
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)safariWithPath:(NSString *)path{
+
+    [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
+
 }
 
 

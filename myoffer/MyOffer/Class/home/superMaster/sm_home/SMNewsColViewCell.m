@@ -64,6 +64,7 @@ static NSString *identify = @"sm_news";
     playBtn.layer.cornerRadius = CORNER_RADIUS;
     playBtn.layer.masksToBounds = true;
     [self.contentView addSubview:playBtn];
+    
 }
 
 
@@ -82,7 +83,7 @@ static NSString *identify = @"sm_news";
     
 
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:newsFrame.news.ad_post_mc]];
-    self.titleLab.text = [NSString stringWithFormat:@"%@超星学术视频，北大教授邓小南主讲，中国古代史下，包括隋唐、五代十国、两宋。",newsFrame.news.main_title];
+    self.titleLab.text =  newsFrame.news.main_title;
     self.nameLab.text = newsFrame.news.guest_name;
     self.uni_Lab.text = newsFrame.news.guest_university;
 
@@ -93,6 +94,15 @@ static NSString *identify = @"sm_news";
     self.playBtn.frame = newsFrame.play_Frame;
     
 }
+ 
+//- (void)play:(UIButton *)sender{
+//    
+//    if (self.actionBlock) {
+//        
+//        self.actionBlock(self.newsFrame.news.hot_id);
+//    }
+//}
+
 
 
 
