@@ -55,6 +55,7 @@
     CGFloat  tag_h = tags_h;
     CGFloat  tag_y = 0;
     CGFloat  tag_x = 0;
+    CGFloat  tag_tmp = 0;
 
     for (NSInteger index = 0; index < detailModel.tags.count; index++) {
     
@@ -62,9 +63,11 @@
         CGSize   tagSize = [tagStr KD_sizeWithAttributeFont:[UIFont systemFontOfSize:12]];
         CGFloat  tag_w = tagSize.width + 10;
         
-        tag_x += index *(tag_w + Margin);
+        tag_x += tag_tmp;
         
         CGRect tag_Frame = CGRectMake(tag_x,tag_y, tag_w, tag_h);
+        
+        tag_tmp = tag_w + Margin;
         
         if (tag_x + tag_w > tags_w) return;
      

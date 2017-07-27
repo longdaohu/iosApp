@@ -25,6 +25,8 @@
 #import "SMDetailViewController.h"
 #import "SMHotSectionFooterView.h"
 
+#define LIMIT_COUNT 5
+
 @interface SuperMasterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)SuperMasterHomeDemol *homeModel;
@@ -89,7 +91,7 @@
         }
         
         
-        NSArray *hotArr = hots_temp.count > 2 ? [hots_temp subarrayWithRange:NSMakeRange(0, 2)] : hots_temp;
+        NSArray *hotArr = hots_temp.count > LIMIT_COUNT ? [hots_temp subarrayWithRange:NSMakeRange(0,LIMIT_COUNT)]: hots_temp;
         
         SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:hotArr index:2];
         
@@ -308,7 +310,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 2 && group.item_all.count > 2 && !group.showMore) {
+    if (group.index == 2 && group.item_all.count > LIMIT_COUNT && !group.showMore) {
         
          XWeakSelf
     SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
@@ -397,7 +399,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
 
-    if (group.index == 2 && group.item_all.count > 2 && !group.showMore) {
+    if (group.index == 2 && group.item_all.count > LIMIT_COUNT && !group.showMore) {
         
         return 80;
     }

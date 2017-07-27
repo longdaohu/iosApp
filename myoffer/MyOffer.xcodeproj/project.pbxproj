@@ -176,6 +176,7 @@
 		AE3AB6D21F21D7AC00A3C7E3 /* SMAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D11F21D7AC00A3C7E3 /* SMAudioCell.m */; };
 		AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D41F21E96500A3C7E3 /* SMDetailHeaderView.m */; };
 		AE3AB6D81F21E99100A3C7E3 /* SMDetailHeaderFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6D71F21E99100A3C7E3 /* SMDetailHeaderFrame.m */; };
+		AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */; };
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE44F7861EA7744A00390809 /* CatigaryHotCityCell.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
@@ -422,7 +423,6 @@
 		AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C011D5B269A00DD7939 /* UserDefaults.m */; };
 		AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */; };
 		AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */; };
-		AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */; };
 		AEA24C271D5B283700DD7939 /* center_ban_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */; };
 		AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */; };
 		AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */; };
@@ -780,6 +780,7 @@
 		AE3AB6D41F21E96500A3C7E3 /* SMDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailHeaderView.m; sourceTree = "<group>"; };
 		AE3AB6D61F21E99100A3C7E3 /* SMDetailHeaderFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDetailHeaderFrame.h; sourceTree = "<group>"; };
 		AE3AB6D71F21E99100A3C7E3 /* SMDetailHeaderFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDetailHeaderFrame.m; sourceTree = "<group>"; };
+		AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sm_vedio_banner.jpg; sourceTree = "<group>"; };
 		AE401ABD1EC4348A0078A0EC /* MBProgressHUD+XJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XJ.h"; sourceTree = "<group>"; };
 		AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XJ.m"; sourceTree = "<group>"; };
 		AE44F7851EA7744A00390809 /* CatigaryHotCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigaryHotCityCell.h; sourceTree = "<group>"; };
@@ -1240,7 +1241,6 @@
 		AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJNavigationController.m; sourceTree = "<group>"; };
 		AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTabBarController.h; sourceTree = "<group>"; };
 		AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTabBarController.m; sourceTree = "<group>"; };
-		AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woYaoLiuXue.jpg; sourceTree = "<group>"; };
 		AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban_CN.jpg; sourceTree = "<group>"; };
 		AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban02_CN.jpg; sourceTree = "<group>"; };
 		AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHolderImage.png; sourceTree = "<group>"; };
@@ -3469,7 +3469,7 @@
 				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
-				AEA24C101D5B274F00DD7939 /* woYaoLiuXue.jpg */,
+				AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */,
 			);
 			path = ImageFile;
 			sourceTree = "<group>";
@@ -3789,6 +3789,7 @@
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
+				AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
@@ -3863,7 +3864,6 @@
 				AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */,
 				AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */,
 				AEA249D01D5B215300DD7939 /* MeViewController.xib in Resources */,
-				AEA24C111D5B274F00DD7939 /* woYaoLiuXue.jpg in Resources */,
 				AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */,
 				AE1FD7311D5C929500FFD5A8 /* Pre-comp 1_00014.png in Resources */,
 				AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */,

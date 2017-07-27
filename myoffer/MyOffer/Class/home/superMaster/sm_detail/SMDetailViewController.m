@@ -23,12 +23,32 @@
 #import "ServiceItemViewController.h"
 #import "ServiceSKU.h"
 
-@interface SMDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+//#import <Masonry/Masonry.h>
+//#import <ZFDownload/ZFDownloadManager.h>
+//#import "UINavigationController+ZFFullscreenPopGesture.h"
+#import "ZFPlayer.h"
+
+
+@interface SMDetailViewController ()<UITableViewDelegate,UITableViewDataSource,ZFPlayerDelegate>
 @property(nonatomic,strong)SMDetailMedol *detail;
 @property(nonatomic,strong)SMDetailHeaderFrame *detail_Frame;
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)SMDetailHeaderView *headerView;
 @property(nonatomic,strong)NSArray *groups;
+
+@property (strong, nonatomic) ZFPlayerView *playerView;
+/** 离开页面时候是否在播放 */
+@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, strong) ZFPlayerModel *playerModel;
+@property (strong, nonatomic) UIView *playerFatherView;
+@property (strong, nonatomic) UIView *bgView;
+//返回按钮
+@property(nonatomic,strong)UIButton *backButton;
+
+@property(nonatomic,strong)UIButton *notiBtn;
 
 @end
 
@@ -42,6 +62,13 @@
    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
+    // pop回来时候是否自动播放
+    if (self.playerView && self.isPlaying) {
+        
+        self.isPlaying = NO;
+        self.playerView.playerPushedOrPresented = NO;
+    }
+    
     
     //1 如果不存在，没有必要下一步操作
     if (!self.detail) return;
@@ -77,6 +104,21 @@
         
         [self.tableView reloadData];
         
+    }
+    
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+   
+    // push出下一级页面时候暂停
+    
+    if (self.playerView && !self.playerView.isPauseByUser){
+        
+        self.isPlaying = YES;
+        //        [self.playerView pause];
+        self.playerView.playerPushedOrPresented = YES;
     }
     
     
@@ -194,15 +236,41 @@
     self.tableView.tableHeaderView = self.headerView;
     
     [self.tableView reloadData];
+    
+    
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
+        self.playerView.alpha = 1;
+        
+        self.bgView.alpha = 1;
+        
+    } completion:^(BOOL finished) {
+        
+        //    self.playerModel.videoURL    =  [NSURL URLWithString:@"http://183.61.66.1/video19.ifeng.com/video09/2016/11/07/4342533-102-898763-1111.mp4"];
+        
+        NSString *path = self.detail.has_video ?  @"http://14.119.88.1/video19.ifeng.com/video09/2017/06/18/4584506-102-009-201408.mp4"  : self.detail.audio.file_url;
+        
+        self.playerModel.videoURL    =  [NSURL URLWithString:path];
+        
+        [self.playerView resetToPlayNewVideo:self.playerModel];
 
+        if ([path hasSuffix:@".mp3"]) {
+        
+            _notiBtn.alpha = 1;
+            [self.playerView pause];
+        }
+        
+    }];
+ 
 }
+
 
 
 #pragma mark : 添加UI
 - (void)makeUI{
     
     [self makeTableView];
-  
+   
 }
 
 - (SMDetailHeaderView *)headerView{
@@ -223,9 +291,35 @@
 }
 
 
+
 -(void)makeTableView
 {
-    CGFloat tb_y = 200;
+  
+    UIView *fatherView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, XSCREEN_WIDTH, AdjustF(200.f))];
+    self.playerFatherView = fatherView;
+    
+    self.bgView.alpha = 0;
+    self.bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, CGRectGetMaxY(self.playerFatherView.frame))];
+    self.bgView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.bgView];
+    
+    [self.bgView addSubview:self.playerFatherView];
+    
+    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    _backButton.frame = CGRectMake(10, 20, 40, 40);
+    [self.bgView addSubview:_backButton];
+ 
+    _notiBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 , XSCREEN_WIDTH, 30)];
+    [_notiBtn setTitle:@"仅提供音频播放" forState:UIControlStateNormal];
+    _notiBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+    [_notiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.bgView addSubview:_notiBtn];
+    _notiBtn.mj_y = self.bgView.centerY + 50;
+    _notiBtn.alpha = 0;
+    
+    CGFloat tb_y = CGRectGetMaxY(self.bgView.frame);
     CGFloat tb_x = 0;
     CGFloat tb_w = XSCREEN_WIDTH;
     CGFloat tb_h = XSCREEN_HEIGHT - tb_y;
@@ -237,9 +331,7 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = self.headerView;
-
 }
-
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 
@@ -437,8 +529,8 @@
             }
             
             
-            NSLog(@">>>>>>>>>>>>> %@",audio_frame.item.file_url);
-            
+//            NSLog(@">>>>>>>>>>>>> %@",audio_frame.item.file_url);
+        
             if (temp_index == DEFAULT_NUMBER ) {
                 
                 audio_frame.item.inPlaying = YES;
@@ -465,13 +557,98 @@
 
 
 
-
 #pragma mark : 事件处理
 - (void)pushWithVC:(UIViewController *)vc{
     
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Getter
+
+- (ZFPlayerModel *)playerModel {
+    
+    if (!_playerModel) {
+        _playerModel      = [[ZFPlayerModel alloc] init];
+//        _playerModel.title   = @"这里设置视频标题";
+       _playerModel.videoURL         =  [NSURL URLWithString:self.detail.video_url];
+        _playerModel.placeholderImage = [UIImage imageNamed:@"sm_vedio_banner.jpg"];
+        _playerModel.fatherView       = self.playerFatherView;
+ 
+    }
+    return _playerModel;
+}
+
+- (ZFPlayerView *)playerView {
+    
+    if (!_playerView) {
+        
+        _playerView = [[ZFPlayerView alloc] init];
+        _playerView.alpha = 0;
+        
+        /*****************************************************************************************
+         *   // 指定控制层(可自定义)
+         *   // ZFPlayerControlView *controlView = [[ZFPlayerControlView alloc] init];
+         *   // 设置控制层和播放模型
+         *   // 控制层传nil，默认使用ZFPlayerControlView(如自定义可传自定义的控制层)
+         *   // 等效于 [_playerView playerModel:self.playerModel];
+         ******************************************************************************************/
+        [_playerView playerControlView:nil playerModel:self.playerModel];
+        
+        // 设置代理
+        _playerView.delegate = self;
+        
+        //（可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
+         _playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
+        
+        // 打开下载功能（默认没有这个功能）
+//        _playerView.hasDownload    = YES;
+        
+//        [_playerView autoPlayTheVideo];
+
+        
+        // 打开预览图
+        self.playerView.hasPreviewView = YES;
+        
+    }
+    return _playerView;
+}
+
+
+#pragma mark :  ZFPlayerDelegate
+/** 返回按钮事件 */
+- (void)zf_playerBackAction{
+
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+- (void)zf_playerDownload:(NSString *)url {
+
+}
+
+- (void)zf_playerControlViewWillShow:(UIView *)controlView isFullscreen:(BOOL)fullscreen {
+    
+}
+
+- (void)zf_playerControlViewWillHidden:(UIView *)controlView isFullscreen:(BOOL)fullscreen {
+    
+}
+
+// 返回值要必须为NO
+- (BOOL)shouldAutorotate {
+    
+    return NO;
+}
+
+- (void)backBtnClick:(UIButton *)sender{
+
+    [self dismiss];
+}
+
+
+- (void)dealloc{
+
+    NSLog(@"导师详情  dealloc");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

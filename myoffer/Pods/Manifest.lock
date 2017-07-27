@@ -9,7 +9,7 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
-  - ZFPlayer (2.1.1):
+  - ZFPlayer (2.1.5):
     - Masonry
 
 DEPENDENCIES:
@@ -22,7 +22,7 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  ZFPlayer: c36657da33c28c75dfb100e98e7976b5b3e1fc10
+  ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
 PODFILE CHECKSUM: b539f5ef54e43d87f6233d1271b1e53553af5391
 
