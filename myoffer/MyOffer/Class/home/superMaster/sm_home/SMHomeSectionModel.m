@@ -13,31 +13,53 @@
 + (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  index:(NSInteger)index{
 
     SMHomeSectionModel *sectionM = [[SMHomeSectionModel alloc] init];
-    sectionM.items = items;
+    sectionM.item_all = items;
     sectionM.index = index;
     sectionM.title = title;
+    sectionM.showAll = YES;
+    sectionM.limit_count = 2;
     
     return sectionM;
 }
 
-- (void)setShowMore:(BOOL)showMore{
+//- (void)setShowMore:(BOOL)showMore{
+//
+//    _showMore = showMore;
+//    
+//    if (showMore) {
+//        
+//        self.items = self.item_all;
+//        
+//    }
+// 
+//}
 
-    _showMore = showMore;
+- (void)setShowAll:(BOOL)showAll{
+
+    _showAll = showAll;
     
-    if (showMore) {
+    if (showAll) {
         
         self.items = self.item_all;
-        
+
+        return;
     }
- 
+    
+    
+    if (!showAll && self.item_all.count <= self.limit_count) {
+        
+        
+        self.showAll = YES;
+        
+        return;
+    }
+    
+    
+    NSArray *tmp_Arr = self.item_all.count > self.limit_count ? [self.item_all subarrayWithRange:NSMakeRange(0,self.limit_count)]: self.item_all;
+    self.items = tmp_Arr;
+    
 }
 
-
-//- (BOOL)have_footer{
-//
-//    return (self.item_all.count > 3) ? YES : NO;
-//}
-//
 
 
 @end

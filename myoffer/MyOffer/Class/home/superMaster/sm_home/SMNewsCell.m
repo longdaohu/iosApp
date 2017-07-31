@@ -14,7 +14,10 @@
 @interface SMNewsCell () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property(nonatomic,strong)UICollectionView *cView;
+@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,assign)CGFloat cv_Height;
+@property(nonatomic,assign)CGFloat title_X;
+@property(nonatomic,assign)BOOL show_push;
 
 @end
 
@@ -34,6 +37,7 @@ static NSString *cv_identify = @"sm_cv_news";
     
     return cell;
 }
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
@@ -72,6 +76,14 @@ static NSString *cv_identify = @"sm_cv_news";
     
     [cView registerClass:[SMNewsColViewCell class] forCellWithReuseIdentifier:cv_identify];
 
+    
+    UILabel *titleLab = [UILabel new];
+    titleLab.text = @"释放查看全部";
+    titleLab.numberOfLines = 0;
+    titleLab.font = [UIFont systemFontOfSize:18];
+    titleLab.textColor = XCOLOR_TITLE;
+    self.titleLab = titleLab;
+    [self.contentView addSubview:titleLab];
     
 }
 
@@ -114,11 +126,6 @@ static NSString *cv_identify = @"sm_cv_news";
     NSArray *newsArr = self.newsGroup[indexPath.section];
     
     content_cell.newsFrame = newsArr[indexPath.row];
-//    XWeakSelf
-//    content_cell.actionBlock = ^(NSString *message_id) {
-//        
-//      
-//    };
     
     return content_cell;
 }
@@ -129,19 +136,67 @@ static NSString *cv_identify = @"sm_cv_news";
     
     SMNewsFrame *newsFrame = newsArr[indexPath.row];
     
-    
     if (self.actionBlock) {
         
-        self.actionBlock(newsFrame.news.message_id);
+        self.actionBlock(newsFrame.news.message_id,NO);
     }
     
  }
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    CGFloat over_distance = self.cView.contentSize.width  - scrollView.contentOffset.x - scrollView.bounds.size.width;
+ 
+    if (over_distance < -10) {
+    
+        self.titleLab.mj_x  =  self.title_X + over_distance;
+        
+    }else{
+    
+        self.titleLab.mj_x =  self.title_X;
+
+    }
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+  
+     if (scrollView.contentOffset.x + scrollView.bounds.size.width > self.cView.contentSize.width) {
+     
+        self.show_push = YES;
+
+     }
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+
+
+    if (self.show_push && self.actionBlock) {
+        
+        self.actionBlock(nil,YES);
+    
+        self.show_push = NO;
+    }
+    
+}
+
 
 - (void)layoutSubviews{
 
     [super layoutSubviews];
     
     self.cView.frame = CGRectMake(0, 0,self.bounds.size.width,self.cv_Height);
+    
+    if (CGRectContainsRect(CGRectZero, self.titleLab.frame)) {
+        
+        self.title_X = self.bounds.size.width + 30;
+        
+        self.titleLab.frame = CGRectMake(self.title_X, 0, 20, self.bounds.size.height);
+        
+        
+     }
     
 }
 

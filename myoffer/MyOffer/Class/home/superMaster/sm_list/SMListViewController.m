@@ -327,6 +327,13 @@
     
     SMHotFrame *hot_frame  = self.items[indexPath.row];
     
+    if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+        
+        [self safariWithPath:hot_frame.hot.offline_url];
+        
+        return;
+    }
+    
     SMDetailViewController *detail = [[SMDetailViewController alloc] init];
     
     detail.message_id = hot_frame.hot.message_id;
@@ -380,10 +387,14 @@
         
     }];
     
-    
-    
 }
 
+
+- (void)safariWithPath:(NSString *)path{
+    
+    [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
+    
+}
 
 
 

@@ -56,6 +56,7 @@ static NSString *identify = @"sm_news";
     self.uni_Lab = uni_Lab;
     [self addLable:uni_Lab fontSize:14 textColor:XCOLOR_SUBTITLE];
     
+    
     UIButton *playBtn = [UIButton  new];
     [playBtn setTitle:@"观看视频" forState:UIControlStateNormal];
     playBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -64,6 +65,7 @@ static NSString *identify = @"sm_news";
     playBtn.layer.cornerRadius = CORNER_RADIUS;
     playBtn.layer.masksToBounds = true;
     [self.contentView addSubview:playBtn];
+    playBtn.userInteractionEnabled = NO;
     
 }
 
@@ -95,13 +97,6 @@ static NSString *identify = @"sm_news";
     
 }
  
-//- (void)play:(UIButton *)sender{
-//    
-//    if (self.actionBlock) {
-//        
-//        self.actionBlock(self.newsFrame.news.hot_id);
-//    }
-//}
 
 
 

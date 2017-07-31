@@ -116,7 +116,8 @@ static NSString *identify = @"sm_audio";
     
  
     self.nameLab.text = [NSString stringWithFormat:@"%ld.%@",self.indexPath.row + 1,audioFrame.item.name];
-    self.timeLab.text = [NSString stringWithFormat:@"时长：%@s",audioFrame.item.seconds_duration];
+    
+    self.timeLab.text = [NSString stringWithFormat:@"时长：%@",audioFrame.item.duration];
  
 }
 

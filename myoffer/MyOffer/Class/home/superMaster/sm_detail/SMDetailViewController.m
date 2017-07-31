@@ -39,6 +39,7 @@
 @property(nonatomic,strong)SMDetailHeaderView *headerView;
 @property(nonatomic,strong)NSArray *groups;
 
+
 @property (strong, nonatomic) ZFPlayerView *playerView;
 /** 离开页面时候是否在播放 */
 @property (nonatomic, assign) BOOL isPlaying;
@@ -47,8 +48,14 @@
 @property (strong, nonatomic) UIView *bgView;
 //返回按钮
 @property(nonatomic,strong)UIButton *backButton;
-
 @property(nonatomic,strong)UIButton *notiBtn;
+
+@property (nonatomic, assign) BOOL isPlaying_audio;
+@property (strong, nonatomic) ZFPlayerView *audioPlayerView;
+@property (nonatomic, strong) ZFPlayerModel *audioplayerModel;
+@property (strong, nonatomic) UIView *audioPlayerFatherView;
+
+
 
 @end
 
@@ -68,6 +75,15 @@
         self.isPlaying = NO;
         self.playerView.playerPushedOrPresented = NO;
     }
+    
+    
+    
+    if (self.audioPlayerView && self.isPlaying_audio) {
+        
+        self.isPlaying_audio = NO;
+        self.audioPlayerView.playerPushedOrPresented = NO;
+    }
+    
     
     
     //1 如果不存在，没有必要下一步操作
@@ -110,6 +126,7 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated {
+  
     [super viewWillDisappear:animated];
    
     // push出下一级页面时候暂停
@@ -117,8 +134,14 @@
     if (self.playerView && !self.playerView.isPauseByUser){
         
         self.isPlaying = YES;
-        //        [self.playerView pause];
         self.playerView.playerPushedOrPresented = YES;
+    }
+    
+    
+    if (self.audioPlayerView && !self.audioPlayerView.isPauseByUser) {
+        
+           self.isPlaying_audio = YES;
+           self.audioPlayerView.playerPushedOrPresented = YES;
     }
     
     
@@ -186,11 +209,11 @@
         }
         
         //3 展示部分，点击显示全部，再展示全部
-        NSArray *audioArr = audio_temp.count > 5 ? [audio_temp subarrayWithRange:NSMakeRange(0, 5)] : audio_temp;
-
-        SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audioArr copy] index:0];
+        SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] index:0];
         
-        one.item_all = audio_temp;
+        one.limit_count = 5;
+        
+        one.showAll = (one.item_all.count < one.limit_count);
         
         [group_temp addObject:one];
         
@@ -238,29 +261,27 @@
     [self.tableView reloadData];
     
     
+    
+    
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         self.playerView.alpha = 1;
-        
         self.bgView.alpha = 1;
         
     } completion:^(BOOL finished) {
         
-        //    self.playerModel.videoURL    =  [NSURL URLWithString:@"http://183.61.66.1/video19.ifeng.com/video09/2016/11/07/4342533-102-898763-1111.mp4"];
         
         NSString *path = self.detail.has_video ?  @"http://14.119.88.1/video19.ifeng.com/video09/2017/06/18/4584506-102-009-201408.mp4"  : self.detail.audio.file_url;
-        
         self.playerModel.videoURL    =  [NSURL URLWithString:path];
-        
         [self.playerView resetToPlayNewVideo:self.playerModel];
-
         if ([path hasSuffix:@".mp3"]) {
-        
             _notiBtn.alpha = 1;
             [self.playerView pause];
         }
         
     }];
+    
+    
  
 }
 
@@ -306,18 +327,22 @@
     [self.bgView addSubview:self.playerFatherView];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_backButton setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+    [_backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _backButton.frame = CGRectMake(10, 20, 40, 40);
     [self.bgView addSubview:_backButton];
  
     _notiBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 , XSCREEN_WIDTH, 30)];
     [_notiBtn setTitle:@"仅提供音频播放" forState:UIControlStateNormal];
-    _notiBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+    [_notiBtn setImage:[UIImage imageNamed:@"sm_audio_tanhao"] forState:UIControlStateNormal];
+    [_notiBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    _notiBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [_notiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.bgView addSubview:_notiBtn];
     _notiBtn.mj_y = self.bgView.centerY + 50;
     _notiBtn.alpha = 0;
+    
+    
     
     CGFloat tb_y = CGRectGetMaxY(self.bgView.frame);
     CGFloat tb_x = 0;
@@ -401,7 +426,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 0 && !group.showMore && group.item_all.count > 5) {
+    if (group.index == 0 && !group.showAll) {
         
         XWeakSelf
         SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
@@ -410,7 +435,7 @@
         footer.moreTitle = @"展开所有音频";
         footer.actionBlock = ^{
             
-            group.showMore = YES;
+            group.showAll = YES;
             
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -461,7 +486,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 0 && !group.showMore && group.item_all.count > 5) {
+    if (group.index == 0 && !group.showAll) {
         
         return 80;
     }
@@ -481,6 +506,14 @@
         
         SMHotFrame *hot_frame  =  group.items[indexPath.row];
         
+        if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+            
+            [self safariWithPath:hot_frame.hot.offline_url];
+            
+            return;
+        }
+        
+        
         SMDetailViewController *detail = [[SMDetailViewController alloc] init];
         
         detail.message_id = hot_frame.hot.message_id;
@@ -490,7 +523,6 @@
     
     
     if (group.index == 1) {
-        
         
         ServiceItemViewController *sku_vc = [[ServiceItemViewController alloc] init];
         
@@ -503,55 +535,72 @@
     
     
     
-    if (group.index == 0) {
-        
-        
+    if (group.index != 0) return;
+    
+    
         SMAudioItemFrame *audio_frame  =  group.items[indexPath.row];
-        
+    
+    
         //不能播放音频
         if (!audio_frame.item.isPlay)  return;
         
-            
-            NSInteger temp_index = DEFAULT_NUMBER;
-            
-            for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
-            
-                SMAudioItemFrame *a_frame  =  group.items[p_index];
-                
-                if (a_frame.item.inPlaying) {
-                    
-                    temp_index = p_index;
-                    
-                    a_frame.item.inPlaying = NO;
-                    
-                    break;
-                }
-            }
-            
-            
-//            NSLog(@">>>>>>>>>>>>> %@",audio_frame.item.file_url);
-        
-            if (temp_index == DEFAULT_NUMBER ) {
-                
-                audio_frame.item.inPlaying = YES;
 
+    
+        NSInteger temp_index = DEFAULT_NUMBER;
+        
+        for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
+        
+            SMAudioItemFrame *a_frame  =  group.items[p_index];
+            
+            if (a_frame.item.inPlaying) {
+                
+                temp_index = p_index;
+                
+                a_frame.item.inPlaying = NO;
+                
+                [self.audioPlayerView pause];
+                
+                break;
+            }
+        }
+    
+    
+        if (temp_index == DEFAULT_NUMBER ) {
+            
+            audio_frame.item.inPlaying = YES;
+  
+        }else{
+            
+            if(temp_index == indexPath.row){
+                
+                 audio_frame.item.inPlaying = NO;
+               
             }else{
-                
-                if(temp_index == indexPath.row){
-                    
-                     audio_frame.item.inPlaying = NO;
-                
-                }else{
-                
-                     audio_frame.item.inPlaying = !audio_frame.item.inPlaying;
-                
-                }
+            
+                 audio_frame.item.inPlaying = !audio_frame.item.inPlaying;
               
             }
-            
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+          
+        }
+ 
+    
+    if ( audio_frame.item.inPlaying) {
+        
+        self.audioplayerModel.videoURL   =  [NSURL URLWithString:audio_frame.item.file_url];
+        
+        [self.audioPlayerView resetToPlayNewVideo:self.audioplayerModel];
+        
+        [self.playerView pause];
+        
+    }else{
+    
+        [self.audioPlayerView pause];
 
-         }
+    }
+    
+    
+       [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+
     
 }
 
@@ -563,20 +612,70 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - Getter
+
+
+
+#pragma mark - PLAYER
+
+
+- (ZFPlayerModel *)audioplayerModel {
+    
+    if (!_audioplayerModel) {
+        _audioplayerModel    = [[ZFPlayerModel alloc] init];
+        _audioplayerModel.fatherView  =  self.audioPlayerFatherView;
+        
+    }
+    return _audioplayerModel;
+}
+
+
+- (UIView *)audioPlayerFatherView{
+
+    if (!_audioPlayerFatherView){
+        
+        _audioPlayerFatherView = [[UIView alloc] initWithFrame:self.playerView.bounds];
+        
+        [self.view insertSubview:_audioPlayerFatherView belowSubview:self.tableView];
+
+    }
+    
+    
+    return _audioPlayerFatherView;
+}
+
+- (ZFPlayerView *)audioPlayerView {
+    
+    if (!_audioPlayerView) {
+        
+        _audioPlayerView = [[ZFPlayerView alloc] init];
+        _audioPlayerView.alpha = 0.1;
+   
+        [_audioPlayerView playerControlView:nil playerModel:self.audioplayerModel];
+        // 设置代理
+         //（可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
+        
+        // 打开预览图
+        
+    }
+    return _audioPlayerView;
+}
+
+
+
 
 - (ZFPlayerModel *)playerModel {
     
     if (!_playerModel) {
         _playerModel      = [[ZFPlayerModel alloc] init];
-//        _playerModel.title   = @"这里设置视频标题";
-       _playerModel.videoURL         =  [NSURL URLWithString:self.detail.video_url];
+        //        _playerModel.title   = @"这里设置视频标题";
+        _playerModel.videoURL         =  [NSURL URLWithString:self.detail.video_url];
         _playerModel.placeholderImage = [UIImage imageNamed:@"sm_vedio_banner.jpg"];
         _playerModel.fatherView       = self.playerFatherView;
- 
+        
     }
     return _playerModel;
 }
+
 
 - (ZFPlayerView *)playerView {
     
@@ -621,16 +720,40 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
-- (void)zf_playerDownload:(NSString *)url {
 
+//点击播放事件
+- (void)zf_playerDidClickPlay{
+    
+    
+    
+    if (self.audioPlayerView.state == ZFPlayerStatePlaying) {
+        
+        [self.audioPlayerView pause];
+        
+        SMHomeSectionModel *group = self.groups[0];
+        
+        for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
+            
+            SMAudioItemFrame *a_frame  =  group.items[p_index];
+            
+            a_frame.item.inPlaying = NO;
+            
+         }
+
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+    
+}
+
+
+- (void)zf_playerDownload:(NSString *)url {
 }
 
 - (void)zf_playerControlViewWillShow:(UIView *)controlView isFullscreen:(BOOL)fullscreen {
-    
 }
 
 - (void)zf_playerControlViewWillHidden:(UIView *)controlView isFullscreen:(BOOL)fullscreen {
-    
 }
 
 // 返回值要必须为NO
@@ -642,6 +765,13 @@
 - (void)backBtnClick:(UIButton *)sender{
 
     [self dismiss];
+}
+
+
+- (void)safariWithPath:(NSString *)path{
+    
+    [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
+    
 }
 
 

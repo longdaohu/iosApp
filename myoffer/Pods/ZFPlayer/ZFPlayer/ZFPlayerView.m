@@ -326,7 +326,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [self.controlView zf_playerPlayBtnState:YES];
     if (self.state == ZFPlayerStatePause) { self.state = ZFPlayerStatePlaying; }
     self.isPauseByUser = NO;
+    
     [_player play];
+    
+    //监听播放器正在在播放
+    if ([self.delegate respondsToSelector:@selector(zf_playerDidClickPlay)]) { [self.delegate zf_playerDidClickPlay]; }
+    
 }
 
 /**
@@ -1075,7 +1080,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
             [weakSelf.controlView zf_playerActivity:NO];
             // 视频跳转回调
             if (completionHandler) { completionHandler(finished); }
-            [weakSelf.player play];
+//            [weakSelf.player play];
+            //这里修改 XJH
+            [weakSelf play];
             weakSelf.seekTime = 0;
             weakSelf.isDragged = NO;
             // 结束滑动
@@ -1268,8 +1275,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
     
     // 添加手势
     [self createGesture];
-    
- 
     
     
 }

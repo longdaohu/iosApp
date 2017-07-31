@@ -16,6 +16,8 @@
 @property(nonatomic,strong)UILabel *nameLab;
 @property(nonatomic,strong)UILabel *uni_Lab;
 @property(nonatomic,strong)UIView *bottom_line;
+@property(nonatomic,strong)UIImageView *playIV;
+
 @end
 
 @implementation SMHotCell
@@ -54,6 +56,11 @@ static NSString *identify = @"sm_hot";
     [self.contentView addSubview:iconView];
     iconView.clipsToBounds = YES;
     
+    UIImageView *playIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sm_play_cell"]];
+    self.playIV = playIV;
+    playIV.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:playIV];
+    
     UIImageView *tagIV = [[UIImageView alloc] init];
     self.tagIV = tagIV;
     tagIV.contentMode = UIViewContentModeScaleAspectFit;
@@ -78,6 +85,7 @@ static NSString *identify = @"sm_hot";
     bottom_line.backgroundColor = XCOLOR_line;
     self.bottom_line = bottom_line;
     [self.contentView addSubview:bottom_line];
+    
 }
 
 - (void)addLable:(UILabel *)itemLable fontSize:(CGFloat)size textColor:(UIColor *)textColor{
@@ -99,6 +107,7 @@ static NSString *identify = @"sm_hot";
     self.nameLab.frame = hotFrame.name_Frame;
     self.uni_Lab.frame = hotFrame.uni_Frame;
     self.tagIV.frame = hotFrame.tag_Frame;
+    self.playIV.frame = hotFrame.play_Frame;
     
     self.bottom_line.frame = hotFrame.bottom_line_Frame;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_post_mc]];

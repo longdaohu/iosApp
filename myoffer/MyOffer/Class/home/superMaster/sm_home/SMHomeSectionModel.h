@@ -15,7 +15,9 @@
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)NSArray *item_all;
 @property(nonatomic,assign)NSInteger index;
-@property(nonatomic,assign)BOOL showMore;
+//@property(nonatomic,assign)BOOL showMore;
+@property(nonatomic,assign)BOOL showAll;
+@property(nonatomic,assign)NSInteger limit_count;
 //@property(nonatomic,assign)BOOL have_footer;
 
 + (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  index:(NSInteger)index;

@@ -562,7 +562,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 
 - (void)hideControlView {
     
-    if (self.locked)     return;
+    //locked主要是判断是不是mp3  如果是播放按钮在暂停状态就不要隐藏了
+    if (self.locked || !self.startBtn.selected)     return;
     
     self.showing = NO;
     self.backgroundColor          = RGBA(0, 0, 0, 0);
@@ -631,7 +632,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backBtn setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
@@ -680,8 +681,9 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIButton *)startBtn {
     if (!_startBtn) {
         _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_startBtn setImage:ZFPlayerImage(@"ZFPlayer_play") forState:UIControlStateNormal];
-        [_startBtn setImage:ZFPlayerImage(@"ZFPlayer_pause") forState:UIControlStateSelected];
+        _startBtn.backgroundColor = [UIColor redColor];
+        [_startBtn setImage:[UIImage imageNamed:(@"player_play")] forState:UIControlStateNormal];
+        [_startBtn setImage:[UIImage imageNamed:(@"player_pause")] forState:UIControlStateSelected];
         [_startBtn addTarget:self action:@selector(playBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _startBtn;
@@ -710,8 +712,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIProgressView *)progressView {
     if (!_progressView) {
         _progressView                   = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.progressTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
-        _progressView.trackTintColor    = [UIColor clearColor];
+        _progressView.progressTintColor = [UIColor colorWithRed:242.0/255 green:35.0/255 blue:123.0/255 alpha:1];
+        _progressView.trackTintColor    = [UIColor whiteColor];
     }
     return _progressView;
 }
@@ -725,7 +727,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         
         [_videoSlider setThumbImage:ZFPlayerImage(@"ZFPlayer_slider") forState:UIControlStateNormal];
         _videoSlider.maximumValue          = 1;
-        _videoSlider.minimumTrackTintColor = [UIColor whiteColor];
+        _videoSlider.minimumTrackTintColor = [UIColor colorWithRed:5.0/255 green:203.0/255 blue:249.0/255 alpha:1];
         _videoSlider.maximumTrackTintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
         
         // slider开始滑动事件
@@ -762,8 +764,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIButton *)fullScreenBtn {
     if (!_fullScreenBtn) {
         _fullScreenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_fullScreenBtn setImage:ZFPlayerImage(@"ZFPlayer_fullscreen") forState:UIControlStateNormal];
-        [_fullScreenBtn setImage:ZFPlayerImage(@"ZFPlayer_shrinkscreen") forState:UIControlStateSelected];
+        [_fullScreenBtn setImage:[UIImage imageNamed:(@"player_zoom")] forState:UIControlStateNormal];
+        [_fullScreenBtn setImage:[UIImage imageNamed:(@"player_zoom")] forState:UIControlStateSelected];
         [_fullScreenBtn addTarget:self action:@selector(fullScreenBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _fullScreenBtn;
@@ -782,7 +784,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIButton *)repeatBtn {
     if (!_repeatBtn) {
         _repeatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_repeatBtn setImage:ZFPlayerImage(@"ZFPlayer_repeat_video") forState:UIControlStateNormal];
+        [_repeatBtn setImage:[UIImage imageNamed:(@"player_replay")] forState:UIControlStateNormal];
         [_repeatBtn addTarget:self action:@selector(repeatBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _repeatBtn;
@@ -1182,6 +1184,11 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 播放按钮状态 */
 - (void)zf_playerPlayBtnState:(BOOL)state {
     self.startBtn.selected = state;
+    
+    if (!self.startBtn.selected) {
+        
+        [self showControlView];
+    }
 }
 
 /** 锁定屏幕方向按钮状态 */

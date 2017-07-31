@@ -91,13 +91,9 @@
         }
         
         
-        NSArray *hotArr = hots_temp.count > LIMIT_COUNT ? [hots_temp subarrayWithRange:NSMakeRange(0,LIMIT_COUNT)]: hots_temp;
-        
-        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:hotArr index:2];
-        
+        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] index:2];
+        third.showAll = (third.item_all.count < third.limit_count);
         third.accessory_title = @"查看全部";
-        
-        third.item_all = [hots_temp copy];
         
         self.groups = @[one,second,third];
         
@@ -249,7 +245,14 @@
         news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         XWeakSelf
-        news_cell.actionBlock = ^(NSString *message_id) {
+        news_cell.actionBlock = ^(NSString *message_id,BOOL show_push) {
+            
+            if (show_push) {
+                
+                [weakSelf pushWithVC:[[SMListViewController alloc] init]];
+                
+                return ;
+            }
             
             SMDetailViewController *detail = [[SMDetailViewController alloc] init];
             
@@ -310,14 +313,14 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 2 && group.item_all.count > LIMIT_COUNT && !group.showMore) {
+    if (group.index == 2 && !group.showAll) {
         
          XWeakSelf
     SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
         
         footer.actionBlock = ^{
         
-             group.showMore = YES;
+             group.showAll = YES;
              
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -399,7 +402,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
 
-    if (group.index == 2 && group.item_all.count > LIMIT_COUNT && !group.showMore) {
+    if (group.index == 2 && !group.showAll) {
         
         return 80;
     }
@@ -414,11 +417,19 @@
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
 
-    if (group.index == 2) {
+    if (group.index == 2 ) {
         
         SMHotFrame *hot_frame  =  group.items[indexPath.row];
         
         SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+        
+        if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+        
+            [self safariWithPath:hot_frame.hot.offline_url];
+            
+            return;
+        }
+        
         
         detail.message_id = hot_frame.hot.message_id;
         

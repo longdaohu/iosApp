@@ -12,6 +12,7 @@
 @interface SMHotFrame : NSObject
 @property(nonatomic,strong)SMHotModel *hot;
 @property(nonatomic,assign)CGRect icon_Frame;
+@property(nonatomic,assign)CGRect play_Frame;
 @property(nonatomic,assign)CGRect tag_Frame;
 @property(nonatomic,assign)CGRect title_Frame;
 @property(nonatomic,assign)CGRect name_Frame;

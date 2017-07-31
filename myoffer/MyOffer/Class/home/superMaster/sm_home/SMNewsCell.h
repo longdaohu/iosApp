@@ -10,9 +10,10 @@
 
 @interface SMNewsCell : UITableViewCell
 
-typedef void(^SMNewsCellBlock)(NSString *message_id);
+typedef void(^SMNewsCellBlock)(NSString *message_id,BOOL show_push);
 
 @property(nonatomic,strong)NSArray *newsGroup;
+
 @property(nonatomic,copy)SMNewsCellBlock actionBlock;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;

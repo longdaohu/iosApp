@@ -14,5 +14,11 @@
 @property(nonatomic,copy)NSString *seconds_duration;
 @property(nonatomic,assign)BOOL isPlay;
 @property(nonatomic,assign)BOOL inPlaying;
+@property(nonatomic,copy)NSString *duration;
 
 @end
+
+
+
+
+

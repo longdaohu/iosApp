@@ -22,8 +22,7 @@
     
         return SMMessageTypeOffLine;
     }
-    
-  
+   
     SMMessageType type = SMMessageTypeAudio;
     
     if (self.has_video && self.has_audio) {

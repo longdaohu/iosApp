@@ -37,6 +37,19 @@
     CGFloat tag_h =  0;
     self.tag_Frame = CGRectMake(tag_x, tag_y, tag_w, tag_h);
     
+    if ([hot.type isEqualToString:@"offline"]) {
+        
+        self.play_Frame = CGRectZero;
+        
+    }else{
+ 
+        CGFloat play_w =  30;
+        CGFloat play_h =  play_w;
+        CGFloat play_x =  icon_x + (icon_w - play_w) * 0.5;
+        CGFloat play_y = icon_y + (icon_h - play_h) * 0.5;
+        self.play_Frame = CGRectMake(play_x, play_y, play_w, play_h);
+    }
+
     
     CGFloat title_x =  CGRectGetMaxX(self.icon_Frame) + Margin;
     CGFloat title_y = icon_y;
