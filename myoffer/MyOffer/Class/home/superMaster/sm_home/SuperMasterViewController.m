@@ -25,8 +25,7 @@
 #import "SMDetailViewController.h"
 #import "SMHotSectionFooterView.h"
 
-#define LIMIT_COUNT 5
-
+ 
 @interface SuperMasterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)SuperMasterHomeDemol *homeModel;

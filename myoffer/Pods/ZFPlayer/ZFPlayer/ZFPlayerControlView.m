@@ -104,7 +104,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 @property (nonatomic, assign,getter=isFullScreen)BOOL fullScreen;
 
 //当前正在播放的视频模型 被锁定
-@property(nonatomic,assign)BOOL locked;
+@property(nonatomic,assign)BOOL locked_audio;
 
 @end
 
@@ -377,12 +377,16 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 }
 
 - (void)lockScrrenBtnClick:(UIButton *)sender {
+   
+  
     sender.selected = !sender.selected;
     self.showing = NO;
     [self zf_playerShowControlView];
+    
     if ([self.delegate respondsToSelector:@selector(zf_controlView:lockScreenAction:)]) {
         [self.delegate zf_controlView:self lockScreenAction:sender];
     }
+    
 }
 
 - (void)playBtnClick:(UIButton *)sender {
@@ -399,8 +403,9 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 }
 
 - (void)fullScreenBtnClick:(UIButton *)sender {
-   
-    if (self.locked) return;
+
+    //音频时屏按钮不可用
+    if (self.locked_audio) return;
 
     sender.selected = !sender.selected;
     
@@ -512,7 +517,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.fullScreen             = YES;
     self.lockBtn.hidden         = !self.isFullScreen;
     self.fullScreenBtn.selected = self.isFullScreen;
-    [self.backBtn setImage:ZFPlayerImage(@"ZFPlayer_back_full") forState:UIControlStateNormal];
+    [self.backBtn setImage:[UIImage imageNamed:@"back_arrow"]  forState:UIControlStateNormal];
     [self.backBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topImageView.mas_top).offset(23);
         make.leading.equalTo(self.topImageView.mas_leading).offset(10);
@@ -563,7 +568,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (void)hideControlView {
     
     //locked主要是判断是不是mp3  如果是播放按钮在暂停状态就不要隐藏了
-    if (self.locked || !self.startBtn.selected)     return;
+    if (self.locked_audio)     return;
     
     self.showing = NO;
     self.backgroundColor          = RGBA(0, 0, 0, 0);
@@ -649,14 +654,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     return _topImageView;
 }
 
-//- (UIView *)topView{
-//    
-//    if (!_topView) {
-//        
-//    }
-//    
-//}
-
+ 
 - (UIImageView *)bottomImageView {
     if (!_bottomImageView) {
         _bottomImageView                        = [[UIImageView alloc] init];
@@ -944,8 +942,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 设置播放模型 */
 - (void)zf_playerModel:(ZFPlayerModel *)playerModel {
     
-    if ([playerModel.videoURL.absoluteString  hasSuffix:@".mp3"]) self.locked = YES;
-    
+    if ([playerModel.videoURL.absoluteString  hasSuffix:@".mp3"])  self.locked_audio = YES;
     
     if (playerModel.title) { self.titleLabel.text = playerModel.title; }
     // 设置网络占位图片
@@ -962,7 +959,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 正在播放（隐藏placeholderImageView） */
 - (void)zf_playerItemPlaying {
 
-    if (self.locked) return;
+    if (self.locked_audio) return;
 
     [UIView animateWithDuration:1.0 animations:^{
         self.placeholderImageView.alpha = 0;
@@ -999,7 +996,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
  */
 - (void)zf_playerHideControlView {
     
-    if (self.locked) return;
+//    if (self.locked_audio) return;
 
     if ([self.delegate respondsToSelector:@selector(zf_controlViewWillHidden:isFullscreen:)]) {
         [self.delegate zf_controlViewWillHidden:self isFullscreen:self.isFullScreen];
@@ -1193,6 +1190,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 
 /** 锁定屏幕方向按钮状态 */
 - (void)zf_playerLockBtnState:(BOOL)state {
+    
     self.lockBtn.selected = state;
 }
 

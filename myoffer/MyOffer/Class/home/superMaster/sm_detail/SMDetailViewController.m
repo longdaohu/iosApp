@@ -211,8 +211,6 @@
         //3 展示部分，点击显示全部，再展示全部
         SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] index:0];
         
-        one.limit_count = 5;
-        
         one.showAll = (one.item_all.count < one.limit_count);
         
         [group_temp addObject:one];
@@ -633,8 +631,8 @@
 
     if (!_audioPlayerFatherView){
         
-        _audioPlayerFatherView = [[UIView alloc] initWithFrame:self.playerView.bounds];
-        
+        _audioPlayerFatherView = [[UIView alloc] initWithFrame:CGRectMake(0, 300, XSCREEN_WIDTH, 200)];
+    
         [self.view insertSubview:_audioPlayerFatherView belowSubview:self.tableView];
 
     }
@@ -648,8 +646,7 @@
     if (!_audioPlayerView) {
         
         _audioPlayerView = [[ZFPlayerView alloc] init];
-        _audioPlayerView.alpha = 0.1;
-   
+    
         [_audioPlayerView playerControlView:nil playerModel:self.audioplayerModel];
         // 设置代理
          //（可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
@@ -761,6 +758,7 @@
     
     return NO;
 }
+
 
 - (void)backBtnClick:(UIButton *)sender{
 

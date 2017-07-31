@@ -770,7 +770,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
  *  屏幕方向发生变化会调用这里
  */
 - (void)onDeviceOrientationChange {
+    
     if (!self.player) { return; }
+   //如果没有准备好，就不要转了
+    if (self.player.status != AVPlayerStatusReadyToPlay) return;
+   //如果是音频就不要转了
+    if ([self.videoURL.absoluteString hasSuffix:@".mp3"]) return;
     if (ZFPlayerShared.isLockScreen) { return; }
     if (self.didEnterBackground) { return; };
     if (self.playerPushedOrPresented) { return; }
@@ -1503,6 +1508,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
 
 - (void)zf_controlView:(UIView *)controlView lockScreenAction:(UIButton *)sender {
     self.isLocked               = sender.selected;
+    
+    
     // 调用AppDelegate单例记录播放状态是否锁屏
     ZFPlayerShared.isLockScreen = sender.selected;
 }

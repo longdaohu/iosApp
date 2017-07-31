@@ -17,7 +17,7 @@
     sectionM.index = index;
     sectionM.title = title;
     sectionM.showAll = YES;
-    sectionM.limit_count = 2;
+    sectionM.limit_count = 5;
     
     return sectionM;
 }
