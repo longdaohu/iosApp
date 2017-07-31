@@ -110,18 +110,15 @@ static NSString *identify = @"sm_tag";
 
 - (void)topicOnClick:(UIButton *)sender{
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender.currentTitle, nil);
-    }
+    if (self.actionBlock) self.actionBlock(sender.currentTitle, nil);
+    
 }
 
 - (void)subjectOnClick:(UIButton *)sender{
-    
-    
+     
     if (self.actionBlock) {
         
-       NSDictionary*subject =  self.tagFrame.tag.subject[sender.tag];
+         NSDictionary*subject =  self.tagFrame.tag.subject[sender.tag];
         
          self.actionBlock(nil, subject[@"area_id"]);
     }

@@ -92,14 +92,18 @@ static NSString *cv_identify = @"sm_cv_news";
     
     _newsGroup = newsGroup;
     
-    NSArray *newsArr = self.newsGroup.firstObject;
+    if (newsGroup.count < 2)  self.titleLab.hidden = YES;
+      
     
+    NSArray *newsArr = self.newsGroup.firstObject;
     SMNewsFrame *newFrame = newsArr.firstObject;
     
     UICollectionViewFlowLayout *flowlayout = (UICollectionViewFlowLayout *)self.cView.collectionViewLayout;
     flowlayout.itemSize = newFrame.cell_size;
     
+    
     self.cv_Height = newFrame.cell_size.height;
+    
     
     [self.cView reloadData];
 }
@@ -136,18 +140,19 @@ static NSString *cv_identify = @"sm_cv_news";
     
     SMNewsFrame *newsFrame = newsArr[indexPath.row];
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(newsFrame.news.message_id,NO);
-    }
-    
+    if (self.actionBlock)  self.actionBlock(newsFrame.news.message_id,NO);
+     
  }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
+
+    if (self.newsGroup.count < 2) return;
+
+    
     CGFloat over_distance = self.cView.contentSize.width  - scrollView.contentOffset.x - scrollView.bounds.size.width;
- 
+
     if (over_distance < -10) {
     
         self.titleLab.mj_x  =  self.title_X + over_distance;
@@ -161,7 +166,9 @@ static NSString *cv_identify = @"sm_cv_news";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-  
+   
+     if (self.newsGroup.count < 2) return;
+
      if (scrollView.contentOffset.x + scrollView.bounds.size.width > self.cView.contentSize.width) {
      
         self.show_push = YES;
@@ -171,8 +178,9 @@ static NSString *cv_identify = @"sm_cv_news";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-
-
+ 
+    if (self.newsGroup.count < 2) return;
+    
     if (self.show_push && self.actionBlock) {
         
         self.actionBlock(nil,YES);

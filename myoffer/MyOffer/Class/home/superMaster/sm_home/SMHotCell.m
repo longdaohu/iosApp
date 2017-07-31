@@ -109,6 +109,7 @@ static NSString *identify = @"sm_hot";
     self.tagIV.frame = hotFrame.tag_Frame;
     self.playIV.frame = hotFrame.play_Frame;
     
+    
     self.bottom_line.frame = hotFrame.bottom_line_Frame;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_post_mc]];
     self.titleLab.text = hotFrame.hot.main_title;

@@ -26,10 +26,8 @@
 }
 - (IBAction)tap:(id)sender {
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(self.offline[@"offline_url"]);
-    }
+    if (self.actionBlock)  self.actionBlock(self.offline[@"offline_url"]);
+    
 }
 
 

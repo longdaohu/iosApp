@@ -56,58 +56,97 @@
 
 #pragma mark : 网络请求
 - (void)makeData{
+  
+    XWeakSelf;
+    [self startAPIRequestWithSelector:@"GET api/sm/index" parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
+        [weakSelf updateUIWithResponse:response];
+        
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [weakSelf dismiss];
+    }];
     
-    [self startAPIRequestWithSelector:@"GET api/sm/index" parameters:nil success:^(NSInteger statusCode, id response) {
-        
-//            NSLog(@" ？%@？  >>>>>>>>>>>>> [%@]",response[@"offline"],[response[@"offline"] class]);
+}
 
-        
-        SuperMasterHomeDemol *home = [SuperMasterHomeDemol mj_objectWithKeyValues:response];
-        self.homeModel = home;
-        //         NSLog(@" 最新超导 >>>>>> %@  -------- %@",home.tag.topic,home.tag.subject);
+
+- (void)updateUIWithResponse:(id)response{
+
+    SuperMasterHomeDemol *home = [SuperMasterHomeDemol mj_objectWithKeyValues:response];
+    self.homeModel = home;
+    
+    NSMutableArray *group_temp = [NSMutableArray array];
+    
+    // 1  最新超导
+    if (home.newest.count > 0) {
         
         NSMutableArray *news_temp = [NSMutableArray array];
         for (SMHotModel *news in home.newest){
             
-            SMNewsFrame *newsFrame = [SMNewsFrame frameWithHot:news];
-            
-            [news_temp addObject:newsFrame];
+            [news_temp addObject:[SMNewsFrame frameWithHot:news]];
         }
         NSArray *news_frames = [news_temp copy];
-        SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"最新超导" Items:@[news_frames] index:0];
         
+        SMHomeSectionModel *new_group = [SMHomeSectionModel sectionInitWithTitle:@"最新超导" Items:@[news_frames] groupType:SMGroupTypeNews];
         
+        if (new_group.items.count > 0)  [group_temp addObject:new_group];
+  
+    }
+  
+    
+    if (home.tag.subject.count > 0 || home.tag.topic.count > 0) {
+        
+        // 2  选分类
         SMTagFrame *tapFrame = [SMTagFrame frameWithtag:home.tag];
-        SMHomeSectionModel *second = [SMHomeSectionModel sectionInitWithTitle:@"选分类"  Items:@[tapFrame] index:1];
+        SMHomeSectionModel *tag_group = [SMHomeSectionModel sectionInitWithTitle:@"选分类"  Items:@[tapFrame] groupType:SMGroupTypeTags];
         
-        
-        
+        if (tag_group.items.count > 0)  [group_temp addObject:tag_group];
+
+    }
+   
+    
+    if (home.hots.count > 0) {
+        // 3  火热推荐
         NSMutableArray *hots_temp = [NSMutableArray array];
-        
         for (SMHotModel *hot in home.hots){
             
             [hots_temp addObject:[SMHotFrame frameWithHot:hot]];
         }
+        SMHomeSectionModel *hot_group = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] groupType:SMGroupTypeHot];
+        hot_group.showAll = (hot_group.item_all.count < hot_group.limit_count);
+        hot_group.accessory_title = @"查看全部";
+        if (hot_group.items.count > 0)  [group_temp addObject:hot_group];
         
-        
-        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] index:2];
-        third.showAll = (third.item_all.count < third.limit_count);
-        third.accessory_title = @"查看全部";
-        
-        self.groups = @[one,second,third];
-        
-        [self makeTableViewHeaderView];
-        
-        [self.tableView reloadData];
-        
-        
-    }];
+    }
+    
+    self.groups = [group_temp copy];
+    
+    
+    [self makeTableViewHeaderView];
+    
+    
+    [self.tableView reloadData];
+    
 }
 
 
-
-
 #pragma mark :  添加UI
+
+- (SMNewsOnLineView *)onLineView{
+    
+    if (!_onLineView) {
+        
+        _onLineView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMNewsOnLineView class]) owner:self options:nil].firstObject;
+        XWeakSelf
+        _onLineView.actionBlock = ^(NSString *urlStr) {
+            
+            [weakSelf safariWithPath:urlStr];
+        };
+    }
+    
+    return _onLineView;
+}
+
 
 - (void)makeUI{
     
@@ -123,6 +162,7 @@
     UIView *header =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.mj_w, header_Height)];
     header.clipsToBounds = YES;
     
+    //1 如果有banner
     if (self.homeModel.banners.count > 0 ) {
         
          self.autoLoopView.imageURLStringsGroup = [self.homeModel.banners valueForKey:@"image_url_mc"];
@@ -140,6 +180,7 @@
         
     }
     
+     //1 如果有最新线下活动
     if ([self.homeModel.offline allKeys].count > 0) {
     
         header_Height  += self.onLineView.mj_h;
@@ -152,26 +193,8 @@
 
     header.mj_h = header_Height;
     
-    
     self.tableView.tableHeaderView = header;
-   
-    
- 
-}
-
-- (SMNewsOnLineView *)onLineView{
-
-    if (!_onLineView) {
-        
-        _onLineView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMNewsOnLineView class]) owner:self options:nil].firstObject;
-        XWeakSelf
-        _onLineView.actionBlock = ^(NSString *urlStr) {
-            
-            [weakSelf safariWithPath:urlStr];
-        };
-    }
-    
-    return _onLineView;
+  
 }
 
 
@@ -201,8 +224,6 @@
 }
 
 
-
-
 -(void)makeTableView
 {
     self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -230,80 +251,75 @@
 }
 
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
- 
-    if (group.index == 0) {
-        
-        SMNewsCell *news_cell = [SMNewsCell cellWithTableView:tableView];
-        
-        news_cell.newsGroup = group.items;
-        
-        news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        XWeakSelf
-        news_cell.actionBlock = ^(NSString *message_id,BOOL show_push) {
-            
-            if (show_push) {
-                
-                [weakSelf pushWithVC:[[SMListViewController alloc] init]];
-                
-                return ;
-            }
-            
-            SMDetailViewController *detail = [[SMDetailViewController alloc] init];
-            
-            detail.message_id = message_id;
-            
-            [weakSelf pushWithVC:detail];
-          
-        };
-        
-        return  news_cell;
-        
-        
-    }else if(group.index == 1){
-
-        SMTagCell *tag_cell = [SMTagCell cellWithTableView:tableView];
-
-        tag_cell.tagFrame = group.items.firstObject;
-        
-        tag_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        tag_cell.actionBlock = ^(NSString *tag, NSString *subject_id) {
-  
-
-        SMListViewController *vc = [[SMListViewController alloc] init];
-            
-            if (tag) {
-                // 超导标签: ['留学生活', '大学招生官', '专业解析', '职业发展', '海外学习辅导']
-                vc.tag =  tag; //@"海外学习辅导";
-                
-            }else{
-            
-                vc.area_id = subject_id;
-
-            }
-            
-            [self pushWithVC:vc];
-
-            
-        };
-        
-        return tag_cell;
-        
-    }else{
     
-        SMHotCell *hot_cell = [SMHotCell cellWithTableView:tableView];
+    switch (group.groupType) {
+            
+        case SMGroupTypeNews:
+        {
+            SMNewsCell *news_cell = [SMNewsCell cellWithTableView:tableView];
+            news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            news_cell.newsGroup = group.items;
+            news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            XWeakSelf
+            news_cell.actionBlock = ^(NSString *message_id,BOOL show_push) {
+                
+                if (show_push) {
+                    
+                    [weakSelf pushWithVC:[[SMListViewController alloc] init]];
+                    
+                    return ;
+                }
+                
+                SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+                detail.message_id = message_id;
+                [weakSelf pushWithVC:detail];
+                
+            };
+            
+            return  news_cell;
+        }
+            break;
+        case SMGroupTypeTags:
+        {
+            
+            SMTagCell *tag_cell = [SMTagCell cellWithTableView:tableView];
+            tag_cell.tagFrame = group.items.firstObject;
+            tag_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            tag_cell.actionBlock = ^(NSString *tag, NSString *subject_id) {
+                
+                
+                SMListViewController *vc = [[SMListViewController alloc] init];
+                // 超导标签: ['留学生活', '大学招生官', '专业解析', '职业发展', '海外学习辅导']
+               //@"海外学习辅导";
+                tag ?  (vc.tag =  tag) : (vc.area_id = subject_id);
         
-        hot_cell.hotFrame = group.items[indexPath.row];
-        
+                [self pushWithVC:vc];
+                
+                
+            };
+            
+            return tag_cell;
 
-        return hot_cell;
-     
+            
+        }
+            break;
+            
+        default:{
+        
+            SMHotCell *hot_cell = [SMHotCell cellWithTableView:tableView];
+            hot_cell.hotFrame = group.items[indexPath.row];
+            
+            return hot_cell;
+        
+        }
+            break;
     }
+    
+  
   
 }
 
@@ -312,19 +328,16 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 2 && !group.showAll) {
+    if (group.groupType == SMGroupTypeHot && !group.showAll) {
         
          XWeakSelf
     SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
-        
         footer.actionBlock = ^{
         
              group.showAll = YES;
-             
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
         };
-        
         
         return  footer;
     
@@ -341,19 +354,11 @@
     
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.title];
     
-    if (group.index == 0) {
-        
-        SectionView.backgroundColor = XCOLOR_BG;
-
-    }else{
-        SectionView.backgroundColor = XCOLOR_WHITE;
-
-    }
-    
+    SectionView.backgroundColor = (group.groupType == SMGroupTypeNews) ? XCOLOR_BG : XCOLOR_WHITE;
+ 
     SectionView.accessory_title = group.accessory_title;
     
-    [SectionView arrowButtonHiden:(group.index != 2)];
-    
+    [SectionView arrowButtonHiden:(group.groupType != SMGroupTypeHot)];
     
     XWeakSelf
     SectionView.actionBlock = ^{
@@ -369,54 +374,53 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SMHomeSectionModel *group = self.groups[indexPath.section];
+    //在添加数据时已经做了判断，不会出现空数组情况
+    switch (group.groupType) {
+            
+        case SMGroupTypeNews:
+        {
+            NSArray *item_section = group.items[0];
+            SMNewsFrame *news_frame = item_section[indexPath.row];
+            return news_frame.cell_height;
 
-    if (group.index == 0) {
-        
-       NSArray *item_section = group.items.firstObject;
-        
-       SMNewsFrame *news_frame = item_section.firstObject;
-        
-        return news_frame.cell_height;
-
-    }else if(group.index == 1) {
-        
-        SMTagFrame *tagFrame = group.items.firstObject;
-        
-        return  tagFrame.cell_height;
-        
-    }else{
-        
-        SMHotFrame *hot_frame  =  group.items[indexPath.row];
-        
-        return  hot_frame.cell_height;
+        }
+            break;
+        case SMGroupTypeTags:{
+            SMTagFrame *tagFrame = group.items.firstObject;
+            return  tagFrame.cell_height;
+        }
+            break;
+        default:
+        {
+            SMHotFrame *hot_frame  =  group.items[indexPath.row];
+            return  hot_frame.cell_height;
+        }
+            break;
     }
-   
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  50;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     SMHomeSectionModel *group = self.groups[section];
-
-    if (group.index == 2 && !group.showAll) {
-        
-        return 80;
-    }
     
-   return 10;
+    if ( group.groupType == SMGroupTypeHot && !group.showAll)  return 80;
+    
+    return 10;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     SMHomeSectionModel *group = self.groups[indexPath.section];
-
-    if (group.index == 2 ) {
+    
+    if ( group.groupType == SMGroupTypeHot) {
         
         SMHotFrame *hot_frame  =  group.items[indexPath.row];
         
@@ -469,7 +473,6 @@
     [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
 
 }
-
 
 - (void)viewDidLayoutSubviews{
 

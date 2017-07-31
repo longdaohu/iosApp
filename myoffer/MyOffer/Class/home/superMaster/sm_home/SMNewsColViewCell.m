@@ -89,6 +89,7 @@ static NSString *identify = @"sm_news";
     self.nameLab.text = newsFrame.news.guest_name;
     self.uni_Lab.text = newsFrame.news.guest_university;
 
+    
     self.iconView.frame = newsFrame.icon_Frame;
     self.titleLab.frame = newsFrame.title_Frame;
     self.nameLab.frame = newsFrame.name_Frame;

@@ -9,17 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "SMTagModel.h"
 
+typedef NS_ENUM(NSInteger,SMGroupType){
+    SMGroupTypeDefault = 0,
+    SMGroupTypeNews,
+    SMGroupTypeTags,
+    SMGroupTypeAudios,
+    SMGroupTypeSKUs,
+    SMGroupTypeHot
+};
+
 @interface SMHomeSectionModel : NSObject
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,copy)NSString *accessory_title;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)NSArray *item_all;
-@property(nonatomic,assign)NSInteger index;
-//@property(nonatomic,assign)BOOL showMore;
+@property(nonatomic,assign)SMGroupType groupType;
+//是否显示全部
 @property(nonatomic,assign)BOOL showAll;
+//未显示全部时，限制展示几条数据
 @property(nonatomic,assign)NSInteger limit_count;
-//@property(nonatomic,assign)BOOL have_footer;
 
-+ (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  index:(NSInteger)index;
++ (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  groupType:(SMGroupType)groupType;
 
 @end

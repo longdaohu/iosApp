@@ -185,8 +185,8 @@
     
     NSMutableArray *group_temp = [NSMutableArray array];
 
+    //1 分段音频
     if (self.detail.audio.fragments.count > 0) {
-
         
         NSMutableArray *audio_temp = [NSMutableArray array];
         
@@ -209,16 +209,16 @@
         }
         
         //3 展示部分，点击显示全部，再展示全部
-        SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] index:0];
+        SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] groupType:SMGroupTypeAudios];
         
         one.showAll = (one.item_all.count < one.limit_count);
+       
         
-        [group_temp addObject:one];
-        
+        if (one.items.count > 0) [group_temp addObject:one];
     }
     
     
-    
+    //2 推荐服务
     if (self.detail.sku.count > 0) {
         
         NSMutableArray *sku_temp = [NSMutableArray array];
@@ -228,14 +228,13 @@
             
             [sku_temp addObject:skuFrame];
         }
-        SMHomeSectionModel *second = [SMHomeSectionModel sectionInitWithTitle:@"推荐服务"  Items:[sku_temp copy] index:1];
+        SMHomeSectionModel *second = [SMHomeSectionModel sectionInitWithTitle:@"推荐服务"  Items:[sku_temp copy] groupType:SMGroupTypeSKUs];
         
-        [group_temp addObject:second];
-
+        if (second.items.count > 0)  [group_temp addObject:second];
         
     }
     
-    
+    //2 相关视频
     if (self.detail.related.count > 0) {
         
         NSMutableArray *hots_temp = [NSMutableArray array];
@@ -244,9 +243,9 @@
             
             [hots_temp addObject:[SMHotFrame frameWithHot:hot]];
         }
-        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"相关视频"  Items:[hots_temp copy] index:2];
+        SMHomeSectionModel *third = [SMHomeSectionModel sectionInitWithTitle:@"相关视频"  Items:[hots_temp copy] groupType:SMGroupTypeHot];
         
-        [group_temp addObject:third];
+         if (third.items.count > 0)  [group_temp addObject:third];
         
     }
     
@@ -256,9 +255,15 @@
     
     self.tableView.tableHeaderView = self.headerView;
     
+    
+//    for ( SMHomeSectionModel *abc in self.groups) {
+//        
+//        NSLog(@">>>>>>aaaaaaaaaaaaaa>>>>>>>>>> %ld  %ld",abc.items.count,abc.groupType);
+//    }
+//    
+    
     [self.tableView reloadData];
-    
-    
+
     
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -370,49 +375,45 @@
     return group.items.count;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
     
-    if (group.index == 0) {
+    switch (group.groupType) {
+        case SMGroupTypeAudios:
+        {
+            SMAudioCell *audio_cell = [SMAudioCell cellWithTableView:tableView indexPath:indexPath];
+             audio_cell.audioFrame =  group.items[indexPath.row];
+             [audio_cell bottomLineWithHiden:(indexPath.row == group.items.count - 1)];
+            
+            return audio_cell;
+        }
+            break;
+       case SMGroupTypeSKUs:
+        {
+            ServiceSKUFrame *sku_frame = group.items[indexPath.row];
+            
+            ServiceSKUCell *sku_cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:sku_frame];
+            
+            return sku_cell;
+        }
+            break;
+            
+        default:{
         
-        SMAudioCell *audio_cell = [SMAudioCell cellWithTableView:tableView indexPath:indexPath];
-    
-        
-        audio_cell.audioFrame =  group.items[indexPath.row];
-        
-        
-        [audio_cell bottomLineWithHiden:(indexPath.row == group.items.count - 1)];
-        
-        return audio_cell;
-        
-        
-    }else if(group.index == 1){
-        
-        ServiceSKUFrame *sku_frame = group.items[indexPath.row];
-        
-        ServiceSKUCell *sku_cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:sku_frame];
-        
-        return sku_cell;
-        
-    }else{
-        
-        SMHotCell *hot_cell = [SMHotCell cellWithTableView:tableView];
-        
-        hot_cell.hotFrame = group.items[indexPath.row];
-        
-        return hot_cell;
-        
+            SMHotCell *hot_cell = [SMHotCell cellWithTableView:tableView];
+            hot_cell.hotFrame = group.items[indexPath.row];
+            return hot_cell;
+        }
+            break;
     }
+   
     
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     SMHomeSectionModel *group = self.groups[section];
-    
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.title];
     SectionView.backgroundColor = XCOLOR_WHITE;
     
@@ -424,7 +425,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 0 && !group.showAll) {
+    if (group.groupType == SMGroupTypeAudios && !group.showAll) {
         
         XWeakSelf
         SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
@@ -434,7 +435,6 @@
         footer.actionBlock = ^{
             
             group.showAll = YES;
-            
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
         };
@@ -444,7 +444,6 @@
     }
     
     return nil;
-    
 }
 
 
@@ -453,25 +452,32 @@
 {
     SMHomeSectionModel *group = self.groups[indexPath.section];
     
-    if (group.index == 0) {
-        
-      SMAudioItemFrame *audio_Frame =  group.items[indexPath.row];
-        
-        return audio_Frame.cell_height;
-        
-    }else if(group.index == 1) {
-        
-        ServiceSKUFrame *sku_frame = group.items[indexPath.row];
-
-        return sku_frame.cell_Height;
-        
-    }else{
-        
-        SMHotFrame *hot_frame  =  group.items[indexPath.row];
-        
-        return  hot_frame.cell_height;
-    }
+    CGFloat height = 0;
     
+    switch (group.groupType) {
+        case SMGroupTypeAudios:
+        {
+            SMAudioItemFrame *audio_Frame =  group.items[indexPath.row];
+            height = audio_Frame.cell_height;
+        }
+            break;
+        case SMGroupTypeSKUs:
+        {
+            ServiceSKUFrame *sku_frame = group.items[indexPath.row];
+            height = sku_frame.cell_Height;
+            
+        }
+            break;
+        default:{
+            
+            SMHotFrame *hot_frame  =  group.items[indexPath.row];
+            height = hot_frame.cell_height;
+   
+        }
+            break;
+    }
+ 
+    return height;
 }
 
 
@@ -484,10 +490,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.index == 0 && !group.showAll) {
-        
-        return 80;
-    }
+    if (group.groupType == SMGroupTypeAudios && !group.showAll) return 80;
     
     return 10;
 }
@@ -500,7 +503,7 @@
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
     
-    if (group.index == 2) {
+    if (group.groupType == SMGroupTypeHot) {
         
         SMHotFrame *hot_frame  =  group.items[indexPath.row];
         
@@ -517,10 +520,12 @@
         detail.message_id = hot_frame.hot.message_id;
         
         [self pushWithVC:detail];
+
+        return;
     }
     
     
-    if (group.index == 1) {
+    if (group.groupType == SMGroupTypeSKUs) {
         
         ServiceItemViewController *sku_vc = [[ServiceItemViewController alloc] init];
         
@@ -529,15 +534,16 @@
         sku_vc.service_id = sku_frame.SKU.service_id;
 
         [self pushWithVC:sku_vc];
+        
+        
+        return;
     }
     
     
-    
-    if (group.index != 0) return;
+    if (group.groupType != SMGroupTypeAudios) return;
     
     
         SMAudioItemFrame *audio_frame  =  group.items[indexPath.row];
-    
     
         //不能播放音频
         if (!audio_frame.item.isPlay)  return;

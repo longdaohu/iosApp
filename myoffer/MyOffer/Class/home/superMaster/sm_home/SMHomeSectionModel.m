@@ -10,11 +10,11 @@
 
 @implementation SMHomeSectionModel
 
-+ (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  index:(NSInteger)index{
++ (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  groupType:(SMGroupType)groupType{
 
     SMHomeSectionModel *sectionM = [[SMHomeSectionModel alloc] init];
     sectionM.item_all = items;
-    sectionM.index = index;
+    sectionM.groupType = groupType;
     sectionM.title = title;
     sectionM.showAll = YES;
     sectionM.limit_count = 5;
@@ -22,17 +22,6 @@
     return sectionM;
 }
 
-//- (void)setShowMore:(BOOL)showMore{
-//
-//    _showMore = showMore;
-//    
-//    if (showMore) {
-//        
-//        self.items = self.item_all;
-//        
-//    }
-// 
-//}
 
 - (void)setShowAll:(BOOL)showAll{
 
