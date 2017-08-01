@@ -92,7 +92,12 @@ static NSString *cv_identify = @"sm_cv_news";
     
     _newsGroup = newsGroup;
     
-    if (newsGroup.count < 2)  self.titleLab.hidden = YES;
+    if (newsGroup.count > 0) {
+        
+        NSArray *newsArr = self.newsGroup.firstObject;
+        if (newsArr.count < 2) self.titleLab.hidden = YES;
+        
+    }
       
     
     NSArray *newsArr = self.newsGroup.firstObject;
@@ -147,9 +152,8 @@ static NSString *cv_identify = @"sm_cv_news";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-
-    if (self.newsGroup.count < 2) return;
-
+    if (self.titleLab.hidden) return;
+    
     
     CGFloat over_distance = self.cView.contentSize.width  - scrollView.contentOffset.x - scrollView.bounds.size.width;
 
@@ -166,8 +170,8 @@ static NSString *cv_identify = @"sm_cv_news";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-   
-     if (self.newsGroup.count < 2) return;
+  
+     if (self.titleLab.hidden) return;
 
      if (scrollView.contentOffset.x + scrollView.bounds.size.width > self.cView.contentSize.width) {
      
@@ -179,8 +183,8 @@ static NSString *cv_identify = @"sm_cv_news";
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
  
-    if (self.newsGroup.count < 2) return;
-    
+    if (self.titleLab.hidden) return;
+
     if (self.show_push && self.actionBlock) {
         
         self.actionBlock(nil,YES);
@@ -202,7 +206,6 @@ static NSString *cv_identify = @"sm_cv_news";
         self.title_X = self.bounds.size.width + 30;
         
         self.titleLab.frame = CGRectMake(self.title_X, 0, 20, self.bounds.size.height);
-        
         
      }
     

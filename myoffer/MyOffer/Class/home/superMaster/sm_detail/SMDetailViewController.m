@@ -165,10 +165,13 @@
 
     NSString *path = [NSString stringWithFormat:@"GET /api/sm/lecture/%@",self.message_id];
 
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [self updateUIWithResponse:response];
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+        [self dismiss];
     }];
     
 }

@@ -140,8 +140,8 @@
         
      //2 - 1 catigroies数据为空时，其他操作步骤没有意义
         self.catigroies = nil;
-        [self.tableView emptyViewWithError:@"网络请求错误，点击页面重新加载！"];
         [self.tableView reloadData];
+        [self.tableView emptyViewWithError:@"网络请求错误，点击页面重新加载！"];
         
     }];
     
@@ -270,7 +270,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return    60;
+    return   self.catigroies.count > 0 ? 60 : HEIGHT_ZERO;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

@@ -80,6 +80,7 @@
     
     UIImageView *headView  = [UIImageView new];
     self.headView = headView;
+    headView.backgroundColor = XCOLOR_BG;
     [self addSubview:headView];
     
     
@@ -140,6 +141,8 @@
     self.registBtn.frame = header_frame.regist_Frame;
     self.line.frame = header_frame.line_Frame;
     self.headView.frame = header_frame.head_Frame;
+    self.headView.layer.cornerRadius = self.headView.mj_h * 0.5;
+    self.headView.layer.masksToBounds =YES;
     self.nameLab.frame = header_frame.name_Frame;
     self.uni_Lab.frame = header_frame.uni_Frame;
     self.gest_Lab.frame = header_frame.guest_intr_Frame;

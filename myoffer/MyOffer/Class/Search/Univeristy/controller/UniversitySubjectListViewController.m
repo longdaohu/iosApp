@@ -105,9 +105,7 @@
     UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
         
         [weakSelf reloadWithValue:value key:key];
-        
-        
-
+ 
     }];
     
     [self addChildViewController:filter];

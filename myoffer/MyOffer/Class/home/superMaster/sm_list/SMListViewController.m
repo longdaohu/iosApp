@@ -33,6 +33,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
 }
+
+
 - (NSMutableArray *)items{
 
     if (!_items) {
@@ -209,18 +211,17 @@
     
     UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
         
-        
-        NSString *real_value = value;
+         NSString *real_value = value;
         
         if ([key isEqualToString:@"area_id"]) {
             
-            NSArray *names = [self.areas valueForKey:@"name"];
+            NSArray *names = [weakSelf.areas valueForKey:@"name"];
             
             if ([names containsObject:value]) {
                 
                 NSInteger index = [names indexOfObject:value];
                 
-                NSArray *idArr = [self.areas valueForKeyPath:@"id"];
+                NSArray *idArr = [weakSelf.areas valueForKeyPath:@"id"];
 
                 real_value = idArr[index];
 
@@ -238,7 +239,7 @@
     }];
     
     [self addChildViewController:filter];
-    
+
     self.filter = filter;
     
     CGFloat base_Height = XNAV_HEIGHT + 50;
@@ -275,9 +276,8 @@
     }
     
     filter.current_area =  self.area_id ? area : KEY_ALL;
-    
     [self.view addSubview:filter.view];
-    
+
     
 }
 
@@ -370,14 +370,14 @@
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         weakSelf.promptView.alpha = 1;
-        weakSelf.promptView.mj_y = self.promptView.mj_h;
+        weakSelf.promptView.mj_y = weakSelf.promptView.mj_h;
         
     } completion:^(BOOL finished) {
         
         
         [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
             
-            weakSelf.promptView.mj_y = - self.promptView.mj_h;
+            weakSelf.promptView.mj_y = - weakSelf.promptView.mj_h;
             
             weakSelf.promptView.alpha = 0;
             
@@ -396,6 +396,11 @@
     
 }
 
+- (void)dealloc{
+    
+    NSLog(@"超级导列表 SMListViewController  dealloc");
+    
+}
 
 
 

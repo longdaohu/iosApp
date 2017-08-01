@@ -294,7 +294,7 @@ static NSString *filter_identify = @"course_filter";
     
     realRect.size.height = self.currentBtn ? XSCREEN_HEIGHT : self.base_Height - XNAV_HEIGHT;
     
-    
+    XWeakSelf
     //当前Button 为空时，
     if (!self.currentBtn) {
         
@@ -303,13 +303,13 @@ static NSString *filter_identify = @"course_filter";
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             
-            self.view.backgroundColor = XCOLOR(0, 0, 0, 0.1);
+            weakSelf.view.backgroundColor = XCOLOR(0, 0, 0, 0.1);
             
             
         } completion:^(BOOL finished) {
             
             
-            self.view.frame = realRect;
+            weakSelf.view.frame = realRect;
 
         }];
         
@@ -349,9 +349,9 @@ static NSString *filter_identify = @"course_filter";
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
-        self.area_tableView.mj_y = area_y;
+        weakSelf.area_tableView.mj_y = area_y;
         
-        self.level_tableView.mj_y = level_y;
+        weakSelf.level_tableView.mj_y = level_y;
         
     }];
     
@@ -362,7 +362,7 @@ static NSString *filter_identify = @"course_filter";
     //当筛选框被点中时，背景色加深
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-         self.view.backgroundColor = XCOLOR(0, 0, 0, 0.5);
+         weakSelf.view.backgroundColor = XCOLOR(0, 0, 0, 0.5);
     }];
     
 }

@@ -254,7 +254,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
-    
+    XWeakSelf
+
     switch (group.groupType) {
             
         case SMGroupTypeNews:
@@ -264,7 +265,6 @@
             news_cell.newsGroup = group.items;
             news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            XWeakSelf
             news_cell.actionBlock = ^(NSString *message_id,BOOL show_push) {
                 
                 if (show_push) {
@@ -297,7 +297,7 @@
                //@"海外学习辅导";
                 tag ?  (vc.tag =  tag) : (vc.area_id = subject_id);
         
-                [self pushWithVC:vc];
+                [weakSelf pushWithVC:vc];
                 
                 
             };
@@ -482,6 +482,11 @@
     
     self.onLineView.frame = CGRectMake(0, online_y, self.tableView.mj_w, 110);
 
+}
+
+- (void)dealloc{
+    
+    NSLog(@"超级导师 SuperMasterViewController  dealloc");
 }
 
 
