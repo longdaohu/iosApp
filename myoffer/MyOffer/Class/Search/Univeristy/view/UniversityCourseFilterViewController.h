@@ -14,12 +14,8 @@ typedef void(^UniversityCourseFilterViewBlock)(NSString *value,NSString *key);
 //保证self.View最小高度
 @property(nonatomic,assign)CGFloat base_Height;
 
-@property(nonatomic,strong)NSDictionary *leftInfo;
+@property(nonatomic,strong)NSDictionary *A_Info;
 @property(nonatomic,strong)NSDictionary *rightInfo;
-//当前已选择项
-@property(nonatomic,copy)NSString *current_Level;
-@property(nonatomic,copy)NSString *current_area;
-
 
 @property(nonatomic,copy)UniversityCourseFilterViewBlock actionBlock;
 

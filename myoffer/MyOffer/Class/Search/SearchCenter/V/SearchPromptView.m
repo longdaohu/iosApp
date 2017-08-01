@@ -45,23 +45,27 @@
     return self;
 }
 
-- (void)layoutSubviews{
+//- (void)layoutSubviews{
+//
+//    [super layoutSubviews];
+//    
+//
+//    
+//}
 
-    [super layoutSubviews];
+- (void)promptShowWithMessage:(NSString *)message{
     
+    _promptLab.text = message;
+    
+    [_promptLab sizeToFit];
+   
     CGFloat prompt_H = 30;
-    CGFloat prompt_W = 130;
+    CGFloat prompt_W = _promptLab.bounds.size.width + 40;
     CGFloat prompt_X = (self.bounds.size.width - prompt_W) * 0.5;
     CGFloat prompt_Y = 10;
     self.promptLab.frame = CGRectMake(prompt_X, prompt_Y, prompt_W, prompt_H);
     
     self.shadowView.frame = CGRectMake(prompt_X, prompt_Y, prompt_W, prompt_H);
-    
-}
-
-- (void)promptShowWithMessage:(NSString *)message{
-    
-    _promptLab.text = message;
     
 }
 

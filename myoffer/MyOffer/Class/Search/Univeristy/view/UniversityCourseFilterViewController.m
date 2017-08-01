@@ -14,20 +14,25 @@
 @interface UniversityCourseFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *topView;
 //学位按钮
-@property(nonatomic,strong)UIButton *levelBtn;
+@property(nonatomic,strong)UIButton *A_Btn;
 //领域按钮
 @property(nonatomic,strong)UIButton *areaBtn;
 //当前已选中按钮
 @property(nonatomic,strong)UIButton *currentBtn;
-@property(nonatomic,strong)UITableView *level_tableView;
+@property(nonatomic,strong)UITableView *A_tableView;
 @property(nonatomic,strong)UITableView *area_tableView;
 
-@property(nonatomic,strong)NSArray *leftArr;
+//当前已选择项
+@property(nonatomic,copy)NSString *current_A;
+
+@property(nonatomic,copy)NSString *current_area;
+
+@property(nonatomic,strong)NSArray *A_Arr;
 //学科领域数组
 @property(nonatomic,strong)NSArray *areas;
 
 //tableView 默认Frame
-@property(nonatomic,assign)CGRect  level_tableView_defaultFrame;
+@property(nonatomic,assign)CGRect  A_tableView_defaultFrame;
 @property(nonatomic,assign)CGRect area_tableView_defaultFrame;
 
 @end
@@ -79,6 +84,10 @@
     
     [self makeTopView];
     
+    self.current_A = KEY_ALL;
+    
+    self.current_area = KEY_ALL;
+    
 }
 
 - (void)makeTopView{
@@ -90,7 +99,7 @@
     CGFloat level_Y = 0;
     CGFloat level_W = self.view.bounds.size.width * 0.5;
     CGFloat level_H = self.topView.mj_h;
-    self.levelBtn =  [self senderWithFrame:CGRectMake(level_X, level_Y, level_W, level_H) title:@"学位类型"];
+    self.A_Btn =  [self senderWithFrame:CGRectMake(level_X, level_Y, level_W, level_H) title:@"学位类型"];
     
     CGFloat area_X =  level_W;
     CGFloat area_Y =  level_Y;
@@ -123,8 +132,8 @@
 - (void)makeTableView{
 
     CGRect level_Rect = CGRectMake(0, 0, self.view.bounds.size.width, 0);
-    self.level_tableView = [self defaultTableViewWithframe:level_Rect];
-    self.level_tableView.scrollEnabled = NO;
+    self.A_tableView = [self defaultTableViewWithframe:level_Rect];
+    self.A_tableView.scrollEnabled = NO;
     
     self.area_tableView = [self defaultTableViewWithframe:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
     self.area_tableView_defaultFrame = self.area_tableView.frame;
@@ -159,31 +168,41 @@
     
 }
 
-- (void)setLeftInfo:(NSDictionary *)leftInfo{
 
-    _leftInfo = leftInfo;
+- (void)setA_Info:(NSDictionary *)A_Info{
+
+    _A_Info = A_Info;
     
-    self.leftArr = leftInfo[@"items"];
-    NSString *title = leftInfo[@"title"];
-    [self.levelBtn setTitle:title forState:UIControlStateNormal];
+    if (A_Info[@"default_item"]) {
+        
+        self.current_A = A_Info[@"default_item"];
+    }
     
-    CGFloat level_H =  self.leftArr.count * CELL_HEIGHT_DAFAULT;
-    self.level_tableView.mj_h = level_H;
-    self.level_tableView.mj_y = -level_H;
-    self.level_tableView_defaultFrame = self.level_tableView.frame;
+    self.A_Arr = A_Info[@"items"];
     
+    [self.A_Btn setTitle:A_Info[@"title"] forState:UIControlStateNormal];
+    
+    CGFloat level_H =  self.A_Arr.count * CELL_HEIGHT_DAFAULT;
+    self.A_tableView.mj_h = level_H;
+    self.A_tableView.mj_y = -level_H;
+    self.A_tableView_defaultFrame = self.A_tableView.frame;
+
 }
-
 
 
 - (void)setRightInfo:(NSDictionary *)rightInfo{
     
     _rightInfo = rightInfo;
     
-    self.areas = rightInfo[@"items"];
+    if (rightInfo[@"default_item"]) {
+        
+        self.current_area = rightInfo[@"default_item"];
+    }
     
-    NSString *title = rightInfo[@"title"];
-    [self.areaBtn setTitle:title forState:UIControlStateNormal];
+  
+    [self.areaBtn setTitle:rightInfo[@"title"] forState:UIControlStateNormal];
+
+    self.areas = rightInfo[@"items"];
     
 }
 
@@ -199,9 +218,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (tableView == self.level_tableView) {
+    if (tableView == self.A_tableView) {
         
-        return self.leftArr.count;
+        return self.A_Arr.count;
     }
     
     return self.areas.count;
@@ -224,14 +243,18 @@ static NSString *filter_identify = @"course_filter";
         
         cell.title =  self.areas[indexPath.row];
         cell.onSelected = [self.current_area isEqualToString:self.areas[indexPath.row]];
-        
+ 
         return cell;
+        
+    }else{
+    
+        cell.title = self.A_Arr[indexPath.row];
+        cell.onSelected = [self.current_A isEqualToString:self.A_Arr[indexPath.row]];
+  
     }
     
     
-    cell.title = self.leftArr[indexPath.row];
-    
-    cell.onSelected = [self.current_Level isEqualToString:self.leftArr[indexPath.row]];
+
     
     return cell;
    
@@ -246,15 +269,15 @@ static NSString *filter_identify = @"course_filter";
     [self onClick:self.currentBtn];
     
     
-    if (tableView == self.level_tableView) {
+    if (tableView == self.A_tableView) {
      
-        NSString *currentValue =indexPath.row == 0 ? @"": self.leftArr[indexPath.row];
+        NSString *currentValue = indexPath.row == 0 ? @"": self.A_Arr[indexPath.row];
         
-        self.current_Level = indexPath.row == 0 ? KEY_ALL:self.leftArr[indexPath.row];
+        self.current_A = indexPath.row == 0 ? KEY_ALL:self.A_Arr[indexPath.row];
         
-        if (self.actionBlock) self.actionBlock(currentValue,self.leftInfo[@"key"]);
+        if (self.actionBlock) self.actionBlock(currentValue,self.A_Info[@"key"]);
         
-        [self.level_tableView reloadData];
+        [self.A_tableView reloadData];
         
         return;
     }
@@ -267,6 +290,7 @@ static NSString *filter_identify = @"course_filter";
     if (self.actionBlock) self.actionBlock(currentValue,self.rightInfo[@"key"]);
     
     [self.area_tableView reloadData];
+    
 }
 
 
@@ -320,11 +344,11 @@ static NSString *filter_identify = @"course_filter";
           *当 self.area_tableView.mj_y >= 0  时， area_tableView 收起
           */
         
-        if (self.level_tableView.mj_y >= 0 || self.area_tableView.mj_y >= 0) {
+        if (self.A_tableView.mj_y >= 0 || self.area_tableView.mj_y >= 0) {
             
-            UITableView *tableView = (self.area_tableView.mj_y > 0) ? self.area_tableView : self.level_tableView;
+            UITableView *tableView = (self.area_tableView.mj_y > 0) ? self.area_tableView : self.A_tableView;
             
-            CGRect  tableView_frame = (self.area_tableView.mj_y > 0) ? self.area_tableView_defaultFrame : self.level_tableView_defaultFrame;
+            CGRect  tableView_frame = (self.area_tableView.mj_y > 0) ? self.area_tableView_defaultFrame : self.A_tableView_defaultFrame;
           
             [UIView animateWithDuration:ANIMATION_DUATION animations:^{
                 
@@ -345,13 +369,13 @@ static NSString *filter_identify = @"course_filter";
     //一个tableView展开时，另一个tableView要收起
     CGFloat area_y = (self.currentBtn == self.areaBtn) ? CELL_HEIGHT_DAFAULT : -self.area_tableView.mj_h;
     
-    CGFloat level_y = (self.currentBtn == self.areaBtn) ? - self.level_tableView.mj_h : CELL_HEIGHT_DAFAULT;
+    CGFloat level_y = (self.currentBtn == self.areaBtn) ? - self.A_tableView.mj_h : CELL_HEIGHT_DAFAULT;
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
     
         weakSelf.area_tableView.mj_y = area_y;
         
-        weakSelf.level_tableView.mj_y = level_y;
+        weakSelf.A_tableView.mj_y = level_y;
         
     }];
     

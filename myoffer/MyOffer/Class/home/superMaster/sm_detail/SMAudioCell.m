@@ -111,7 +111,8 @@ static NSString *identify = @"sm_audio";
 
     
     self.statusBtn.enabled = audioFrame.item.isPlay;
-    NSString *title_status = audioFrame.item.isPlay ? @"试听" : @"";
+    NSString *title_tmp = LOGIN ? @"播放" : @"试听";
+    NSString *title_status = audioFrame.item.isPlay ? title_tmp : @"";
     [self.statusBtn setTitle:title_status forState:UIControlStateNormal];
     
  

@@ -167,7 +167,7 @@
         
     }else{
         
-        [self.tableView emptyViewWithError:@"亲...抱歉找不到您要的内容，我们会再接再劢的！"];
+        [self.tableView emptyViewWithError:@"亲...抱歉找不到您要的内容，\n我们会再接再厉的！"];
     }
     
     
@@ -250,32 +250,31 @@
     
     [temps insertObject:KEY_ALL  atIndex:0];
     
-    filter.rightInfo = @{
-                         @"key" : @"area_id",
-                         @"title" : @"专业方向",
-                         @"items" : [temps copy]
-                         };
-    filter.leftInfo = @{
-                        
-                        @"key" : @"tag",
-                        @"title" : @"活动主题",
-                        @"items" : @[KEY_ALL,@"留学生活",@"大学招生官",@"职业发展",@"海外学习辅导"]
-                        };
     
-    filter.current_Level = self.tag ? self.tag : KEY_ALL;
-    
-   
     NSArray *idArr = [self.areas valueForKeyPath:@"id"];
-    
     NSString *area = KEY_ALL;
     if ([idArr containsObject:self.area_id]) {
         
         NSInteger index = [idArr indexOfObject:self.area_id];
-        
         area = [self.areas[index] valueForKey:@"name"];
     }
     
-    filter.current_area =  self.area_id ? area : KEY_ALL;
+    filter.rightInfo = @{
+                         @"key" : @"area_id",
+                         @"default_item" :(self.area_id ? area : KEY_ALL),
+                         @"title" : @"学科领域",
+                         @"items" : [temps copy]
+                         };
+    
+    filter.A_Info = @{
+                        
+                        @"key" : @"tag",
+                        @"default_item" : (self.tag ? self.tag : KEY_ALL),
+                        @"title" : @"活动主题",
+                        @"items" : @[KEY_ALL,@"留学生活",@"大学招生官",@"职业发展",@"海外学习辅导"]
+                        };
+    
+ 
     [self.view addSubview:filter.view];
 
     
@@ -359,7 +358,7 @@
     if (count == 0) return;
     
     XWeakSelf
-    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"共%ld条超导",count]];
+    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"共加载%ld个超导",count]];
     
     //每次点击时 清空动画
     [self.promptView.layer removeAllAnimations];

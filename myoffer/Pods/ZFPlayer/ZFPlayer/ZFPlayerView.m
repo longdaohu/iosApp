@@ -442,6 +442,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     
     if ([self.videoURL.absoluteString hasSuffix:@".mp3"]) return;
     
+    
     if (self.isAutoPlay) {
         UITouch *touch = [touches anyObject];
         if(touch.tapCount == 1) {
@@ -1274,6 +1275,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
     if ([videoURL.absoluteString hasSuffix:@".mp3"]) {
     
         [self.controlView zf_playerShowControlView];
+        
+        [self.singleTap removeTarget:self action:@selector(singleTapAction:)];
+        [self.doubleTap removeTarget:self action:@selector(doubleTapAction:)];
+        [self removeGestureRecognizer:self.singleTap];
+        [self removeGestureRecognizer:self.doubleTap];
+        
         
         return;
     }

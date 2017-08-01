@@ -125,7 +125,7 @@
                          @"items" : [temps copy]
                          };
     
-    filter.leftInfo = @{
+    filter.A_Info = @{
                         
         @"key" : @"level",
         @"title" : @"学位类型",

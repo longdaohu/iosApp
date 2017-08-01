@@ -59,6 +59,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 @property (nonatomic, strong) UIButton                *closeBtn;
 /** 重播按钮 */
 @property (nonatomic, strong) UIButton                *repeatBtn;
+@property (nonatomic, strong) UIButton                 *repeatLab;
 /** bottomView*/
 @property (nonatomic, strong) UIImageView             *bottomImageView;
 /** topView */
@@ -105,6 +106,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 
 //当前正在播放的视频模型 被锁定
 @property(nonatomic,assign)BOOL locked_audio;
+@property (nonatomic, strong) UIButton   *audioNotiBtn;
 
 @end
 
@@ -128,6 +130,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [self addSubview:self.lockBtn];
         [self.topImageView addSubview:self.backBtn];
         [self addSubview:self.activity];
+        [self addSubview:self.audioNotiBtn];
+        [self addSubview:self.repeatLab];
         [self addSubview:self.repeatBtn];
         [self addSubview:self.playeBtn];
         [self addSubview:self.failBtn];
@@ -259,6 +263,20 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     [self.repeatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
     }];
+    
+    [self.audioNotiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+    }];
+    
+    [self.repeatLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.leading.equalTo(self.repeatBtn);
+        make.trailing.equalTo(self.repeatBtn);
+        make.height.mas_equalTo(30);
+        make.top.mas_equalTo(self.repeatBtn.mas_bottom);
+
+    }];
+    
     
     [self.playeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(50);
@@ -486,6 +504,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (void)playerPlayDidEnd {
     self.backgroundColor  = RGBA(0, 0, 0, .6);
     self.repeatBtn.hidden = NO;
+    self.repeatLab.hidden = NO;
+    if (self.locked_audio)  self.audioNotiBtn.hidden = YES;
     // 初始化显示controlView为YES
     self.showing = NO;
     // 延迟隐藏controlView
@@ -634,6 +654,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     return _titleLabel;
 }
 
+
+
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -710,8 +732,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIProgressView *)progressView {
     if (!_progressView) {
         _progressView                   = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.progressTintColor = [UIColor colorWithRed:242.0/255 green:35.0/255 blue:123.0/255 alpha:1];
-        _progressView.trackTintColor    = [UIColor whiteColor];
+        _progressView.progressTintColor = [UIColor whiteColor];
+        _progressView.trackTintColor    = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
     }
     return _progressView;
 }
@@ -787,6 +809,36 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     }
     return _repeatBtn;
 }
+
+- (UIButton *)repeatLab {
+    
+    if (!_repeatLab) {
+        _repeatLab = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_repeatLab setTitle:@"重播" forState:UIControlStateNormal];
+        _repeatLab.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_repeatLab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+    }
+    return _repeatLab;
+}
+
+- (UIButton *)audioNotiBtn{
+
+    if (!_audioNotiBtn) {
+        
+        _audioNotiBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 , self.bounds.size.width, 30)];
+        [_audioNotiBtn setTitle:@"仅提供音频播放" forState:UIControlStateNormal];
+        [_audioNotiBtn setImage:[UIImage imageNamed:@"sm_audio_tanhao"] forState:UIControlStateNormal];
+        [_audioNotiBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+        _audioNotiBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_audioNotiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        _audioNotiBtn.alpha = 0;
+    }
+    
+    return _audioNotiBtn;
+}
+
+
 
 - (UIButton *)downLoadBtn {
     if (!_downLoadBtn) {
@@ -905,6 +957,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     self.totalTimeLabel.text         = @"00:00";
     self.fastView.hidden             = YES;
     self.repeatBtn.hidden            = YES;
+    self.repeatLab.hidden            = YES;
+    self.audioNotiBtn.hidden         = !self.locked_audio;
     self.playeBtn.hidden             = YES;
     self.resolutionView.hidden       = YES;
     self.failBtn.hidden              = YES;
@@ -922,6 +976,8 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (void)zf_playerResetControlViewForResolution {
     self.fastView.hidden        = YES;
     self.repeatBtn.hidden       = YES;
+    self.repeatLab.hidden       = YES;
+    self.audioNotiBtn.hidden    = !self.locked_audio;
     self.resolutionView.hidden  = YES;
     self.playeBtn.hidden        = YES;
     self.downLoadBtn.enabled    = YES;
@@ -942,7 +998,11 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 设置播放模型 */
 - (void)zf_playerModel:(ZFPlayerModel *)playerModel {
     
-    if ([playerModel.videoURL.absoluteString  hasSuffix:@".mp3"])  self.locked_audio = YES;
+    if ([playerModel.videoURL.absoluteString  hasSuffix:@".mp3"])  {
+    
+        _audioNotiBtn.hidden = NO;
+        self.locked_audio = YES;
+    }
     
     if (playerModel.title) { self.titleLabel.text = playerModel.title; }
     // 设置网络占位图片
@@ -1122,6 +1182,10 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 /** 播放完了 */
 - (void)zf_playerPlayEnd {
     self.repeatBtn.hidden = NO;
+    self.repeatLab.hidden = NO;
+    
+    if (self.locked_audio)  self.audioNotiBtn.hidden = YES;
+    
     self.playeEnd         = YES;
     self.showing          = NO;
     // 隐藏controlView

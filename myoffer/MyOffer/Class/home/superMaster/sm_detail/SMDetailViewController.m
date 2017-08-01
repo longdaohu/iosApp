@@ -48,7 +48,6 @@
 @property (strong, nonatomic) UIView *bgView;
 //返回按钮
 @property(nonatomic,strong)UIButton *backButton;
-@property(nonatomic,strong)UIButton *notiBtn;
 
 @property (nonatomic, assign) BOOL isPlaying_audio;
 @property (strong, nonatomic) ZFPlayerView *audioPlayerView;
@@ -68,7 +67,8 @@
     
    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-
+    
+    
     // pop回来时候是否自动播放
     if (self.playerView && self.isPlaying) {
         
@@ -119,6 +119,9 @@
         
         
         [self.tableView reloadData];
+        
+        
+        self.playerView.userInteractionEnabled = YES;
         
     }
     
@@ -258,13 +261,6 @@
     
     self.tableView.tableHeaderView = self.headerView;
     
-    
-//    for ( SMHomeSectionModel *abc in self.groups) {
-//        
-//        NSLog(@">>>>>>aaaaaaaaaaaaaa>>>>>>>>>> %ld  %ld",abc.items.count,abc.groupType);
-//    }
-//    
-    
     [self.tableView reloadData];
 
     
@@ -276,14 +272,18 @@
         
     } completion:^(BOOL finished) {
         
+       
+        NSString *path = self.detail.has_video ?  @"http://183.2.196.1/video19.ifeng.com/video09/2015/12/15/3730900-102-096-1631.mp4"  : self.detail.audio.file_url;
         
-        NSString *path = self.detail.has_video ?  @"http://14.119.88.1/video19.ifeng.com/video09/2017/06/18/4584506-102-009-201408.mp4"  : self.detail.audio.file_url;
         self.playerModel.videoURL    =  [NSURL URLWithString:path];
         [self.playerView resetToPlayNewVideo:self.playerModel];
-        if ([path hasSuffix:@".mp3"]) {
-            _notiBtn.alpha = 1;
+        
+        if ([path hasSuffix:@".mp3"])  {
+            
             [self.playerView pause];
+             self.playerView.userInteractionEnabled = LOGIN ? YES : NO;
         }
+        
         
     }];
     
@@ -338,16 +338,6 @@
     _backButton.frame = CGRectMake(10, 20, 40, 40);
     [self.bgView addSubview:_backButton];
  
-    _notiBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 , XSCREEN_WIDTH, 30)];
-    [_notiBtn setTitle:@"仅提供音频播放" forState:UIControlStateNormal];
-    [_notiBtn setImage:[UIImage imageNamed:@"sm_audio_tanhao"] forState:UIControlStateNormal];
-    [_notiBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    _notiBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_notiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.bgView addSubview:_notiBtn];
-    _notiBtn.mj_y = self.bgView.centerY + 50;
-    _notiBtn.alpha = 0;
-    
     
     
     CGFloat tb_y = CGRectGetMaxY(self.bgView.frame);

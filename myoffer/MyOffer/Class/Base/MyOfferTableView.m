@@ -51,18 +51,31 @@
     
     UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
      self.bgView = bgView;
-    
-    self.emptyView  =[EmptyDataView emptyViewWithBlock:^{
-        
-        if (self.actionBlock) self.actionBlock();
-        
-    }];
-    
+//    bgView.backgroundColor = [UIColor greenColor];
     
     [bgView addSubview:self.emptyView];
     
     self.emptyView.center = bgView.center;
     
+    self.emptyY = DEFAULT_NUMBER;
+    
+}
+
+
+- (EmptyDataView *)emptyView{
+
+    if (!_emptyView) {
+        
+       _emptyView  =[EmptyDataView emptyViewWithBlock:^{
+            
+            if (self.actionBlock) self.actionBlock();
+            
+        }];
+        
+//        _emptyView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _emptyView;
 }
 
 - (void)emptyViewWithHiden:(BOOL)hiden{
@@ -75,23 +88,7 @@
         return;
     }
     
-    
-//    if (self.tableHeaderView.mj_h > 0 || self.mj_y > 0 || self.contentInset.top > 0) {
-//
-////        if (!self.isSeted && (self.tableHeaderView.mj_h || self.mj_y > 0 || self.contentInset.top > 0)) {
-////        self.isSeted = YES;
-//        
-//        self.bgView.mj_h = (self.mj_h - self.tableHeaderView.mj_h - self.mj_y - self.contentInset.top);
-//        
-//        self.emptyView.mj_y  -= (self.tableHeaderView.mj_h  * 0.5 + 64);
-//        
-//        if (self.emptyView.mj_y >= 0) {
-//            
-//            self.emptyView.mj_y = 0;
-//        }
-//        
-//    }
-    
+ 
     
     CGFloat bg_height = self.mj_h;
     
@@ -122,24 +119,14 @@
     
 //    NSLog(@">>>>>aaaaa>>>>> %lf  %lf  %lf",self.emptyView.center.y,self.bgView.center.y,self.center.y);
 
+    if (self.emptyY != DEFAULT_NUMBER) {
+        
+        self.emptyView.mj_y = self.emptyY;
+        
+        return;
+    }
+    
     self.emptyView.center = self.bgView.center;
-    
-    
-//    if (self.emptyView.center.y == self.center.y) {
-//        
-//        self.emptyView.center = self.bgView.center;
-//        
-//    }else{
-//    
-//        if (self.emptyView.center.y < self.center.y) {
-//            
-//            CGFloat distance = self.center.y -  self.emptyView.center.y;
-//            
-//            self.emptyView.center = CGPointMake(self.bgView.center.x, self.bgView.center.y - distance);
-//        }
-//        
-//    }
-//    
     
     
 }

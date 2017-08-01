@@ -48,6 +48,7 @@
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [UIView new];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, MASSAGE_HEADER_HIGHT, 0);
+    _tableView.emptyY = 60;
    
 }
 
