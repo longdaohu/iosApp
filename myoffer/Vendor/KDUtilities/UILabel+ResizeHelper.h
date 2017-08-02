@@ -23,4 +23,6 @@
 
 - (CGSize)KD_sizeWithAttributeFont:(UIFont *)font;
 - (CGSize)KD_sizeWithAttributeFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
+- (CGSize)KD_sizeWithAttribute:(NSDictionary *)attributes maxWidth:(CGFloat)maxWidth;
+
 @end

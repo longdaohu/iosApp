@@ -29,9 +29,10 @@
     return [NSString stringWithFormat:@"%@  |  %@",self.guest_university,self.guest_subject];
 }
 
-- (NSString *)type_name{
-    
-    
+
+
+- (NSString *)type_imageName{
+
     if ([self.type isEqualToString:@"offline"]) {
         
         return @"sm_off_tag";
@@ -56,8 +57,8 @@
     
     
     return type;
-    
 }
+
 
 
 

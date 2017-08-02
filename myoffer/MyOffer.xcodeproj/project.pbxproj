@@ -464,6 +464,7 @@
 		AEF1FACD1BE38DD000F48E8B /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF1FAC81BE38DD000F48E8B /* WeiboSDK.bundle */; };
 		AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */; };
 		AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3340F1D925A44003C3C68 /* GongLueViewController.m */; };
+		AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A48B1F31B797002CB2EA /* myofferTextView.m */; };
 		AEF420FE1BD4988B00CFB45E /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF420E41BD4988B00CFB45E /* UMSocialLocalizable.strings */; };
 		AEF420FF1BD4988B00CFB45E /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF420F21BD4988B00CFB45E /* libUMSocial_Sdk_4.2.5.a */; };
 		AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF420F41BD4988B00CFB45E /* UMSCommentDetailController.xib */; };
@@ -1313,6 +1314,8 @@
 		AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		AEF3340E1D925A44003C3C68 /* GongLueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueViewController.h; sourceTree = "<group>"; };
 		AEF3340F1D925A44003C3C68 /* GongLueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueViewController.m; sourceTree = "<group>"; };
+		AEF3A48A1F31B797002CB2EA /* myofferTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferTextView.h; sourceTree = "<group>"; };
+		AEF3A48B1F31B797002CB2EA /* myofferTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferTextView.m; sourceTree = "<group>"; };
 		AEF420E71BD4988B00CFB45E /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		AEF420E81BD4988B00CFB45E /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
 		AEF420E91BD4988B00CFB45E /* UMSocialBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialBar.h; sourceTree = "<group>"; };
@@ -3415,6 +3418,8 @@
 				AEA24BDC1D5B266A00DD7939 /* UIView+Extension.m */,
 				AEA24BDD1D5B266A00DD7939 /* XTextField.h */,
 				AEA24BDE1D5B266A00DD7939 /* XTextField.m */,
+				AEF3A48A1F31B797002CB2EA /* myofferTextView.h */,
+				AEF3A48B1F31B797002CB2EA /* myofferTextView.m */,
 				AEA24BDF1D5B266A00DD7939 /* XUButton.h */,
 				AEA24BE01D5B266A00DD7939 /* XUButton.m */,
 				AEA24BE11D5B266A00DD7939 /* XUToolbar.h */,
@@ -3961,6 +3966,7 @@
 				AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */,
 				AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */,
 				AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */,
+				AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */,
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,

@@ -7,8 +7,10 @@
 //
 
 #import "SMDetailHeaderView.h"
+#import "myofferTextView.h"
 
-@interface SMDetailHeaderView ()
+@interface SMDetailHeaderView ()<UITextViewDelegate>
+
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UIView *tagsView;
 @property(nonatomic,strong)UILabel *intro_Lab;
@@ -17,7 +19,7 @@
 @property(nonatomic,strong)UIImageView *headView;
 @property(nonatomic,strong)UILabel *nameLab;
 @property(nonatomic,strong)UILabel *uni_Lab;
-@property(nonatomic,strong)UILabel *gest_Lab;
+@property(nonatomic,strong)myofferTextView *gest_Lab;
 @property(nonatomic,strong)UIView *bottomView;
 
 @end
@@ -52,7 +54,6 @@
     
     
     UILabel *intro_Lab = [UILabel new];
-    intro_Lab.backgroundColor = XCOLOR_WHITE;
     self.intro_Lab = intro_Lab;
     intro_Lab.numberOfLines = 0;
     [self addSubview:intro_Lab];
@@ -96,19 +97,22 @@
     uni_Lab.font = [UIFont systemFontOfSize:12];
     uni_Lab.textColor = XCOLOR_SUBTITLE;
 
-    UILabel *gest_Lab = [UILabel new];
-    self.gest_Lab = gest_Lab;
-    [self addSubview:gest_Lab];
-    gest_Lab.numberOfLines = 0;
-    gest_Lab.font = [UIFont systemFontOfSize:12];
-    gest_Lab.textColor = XCOLOR_SUBTITLE;
     
+    myofferTextView *gest_Lab = [myofferTextView new];
+    self.gest_Lab = gest_Lab;
+    gest_Lab.editable = NO;//不可编辑
+    gest_Lab.scrollEnabled = NO;//不可滚动
+    gest_Lab.textContainerInset = UIEdgeInsetsMake(0, -5, 0, 0);//设置页边距
+    gest_Lab.font = [UIFont systemFontOfSize:12];
+    [self addSubview:gest_Lab];
+    gest_Lab.delegate = self;
+
     UIView *bottomView = [UIView  new];
     bottomView.backgroundColor = XCOLOR_BG;
     self.bottomView = bottomView;
     [self addSubview:bottomView];
     
- }
+}
 
 - (void)setHeader_frame:(SMDetailHeaderFrame *)header_frame{
 
@@ -145,32 +149,61 @@
     self.headView.layer.masksToBounds =YES;
     self.nameLab.frame = header_frame.name_Frame;
     self.uni_Lab.frame = header_frame.uni_Frame;
-    self.gest_Lab.frame = header_frame.guest_intr_Frame;
     self.bottomView.frame = header_frame.bottom_Frame;
+    
+    if (!header_frame.detailModel.guest_intr_ShowAll) {
+        
+        self.gest_Lab.frame = header_frame.guest_hiden_Frame;
+
+    }else{
+    
+        self.gest_Lab.frame = header_frame.guest_show_Frame;
+
+    }
+    
     
     self.mj_h = header_frame.header_height;
 
-    
-    
   
     
     NSMutableAttributedString *titleAttr = [[NSMutableAttributedString alloc] initWithString:detail.main_title];
     NSTextAttachment *attach = [[NSTextAttachment alloc] init];
-    attach.image = [UIImage imageNamed:header_frame.detailModel.type_name];
+    attach.image = [UIImage imageNamed:header_frame.detailModel.type_imageName];
     attach.bounds = CGRectMake(0, -5,  attach.image.size.width, attach.image.size.height);
     NSAttributedString *audioAttr = [NSAttributedString attributedStringWithAttachment:attach];
     [titleAttr insertAttributedString:audioAttr atIndex:0];
     self.titleLab.attributedText = titleAttr;
     
 
-    self.intro_Lab.text = detail.introduction;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.minimumLineHeight = 18;
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    [attributes setValue:[UIFont systemFontOfSize:12]  forKey:NSFontAttributeName];
+    [attributes setValue:paragraphStyle forKey:NSParagraphStyleAttributeName];
+   
+    self.intro_Lab.attributedText = [[NSAttributedString alloc] initWithString:detail.introduction attributes:attributes];
+  
+    
     [self.headView sd_setImageWithURL:[NSURL URLWithString:detail.guest_head_portrait]];
     self.nameLab.text = detail.guest_name;
-    
     self.uni_Lab.text = detail.guest_subject_uni;
-    self.gest_Lab.text = detail.guest_introduction;
+ 
+ 
+    self.gest_Lab.attributedText = [[NSAttributedString alloc] initWithString:detail.guest_introduction attributes:attributes];
     
-    
+    if (!detail.guest_intr_ShowAll) {
+        
+        NSDictionary *nomal_attributes = [NSDictionary dictionaryWithDictionary:attributes];
+        [attributes setValue:@"http://baidu.com" forKey:NSLinkAttributeName];
+        NSMutableAttributedString *attr_sub = [[NSMutableAttributedString alloc] initWithString:detail.guest_intr_short_sub];
+        [attr_sub setAttributes:nomal_attributes  range:NSMakeRange(0,detail.guest_intr_short_sub.length)];
+        [attr_sub setAttributes:attributes range:NSMakeRange(detail.guest_intr_short_sub.length - 4,4)];
+        
+        self.gest_Lab.attributedText = attr_sub;
+    }
+
+    self.gest_Lab.textColor = XCOLOR_SUBTITLE;
+  
 }
 
 
@@ -178,9 +211,22 @@
 
     if (self.actionBlock) {
         
-        self.actionBlock();
+        self.actionBlock(nil,sender);
     }
 }
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    
+    if (self.actionBlock) {
+        
+        self.actionBlock(YES,nil);
+    }
+    
+    return NO;
+}
+
+
+
 
 
 @end

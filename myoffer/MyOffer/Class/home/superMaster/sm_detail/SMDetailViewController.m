@@ -120,9 +120,11 @@
         
         [self.tableView reloadData];
         
-        
         self.playerView.userInteractionEnabled = YES;
+
         
+        self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
+        [self.playerView resetToPlayNewVideo:self.playerModel];
     }
     
 }
@@ -264,6 +266,19 @@
     [self.tableView reloadData];
 
     
+//    NSString *path = self.detail.has_video ?  @"http://183.2.196.1/video19.ifeng.com/video09/2015/12/15/3730900-102-096-1631.mp4"  : self.detail.audio.file_url;
+    
+    NSString *path = @"";
+    
+    if (self.detail.has_video ) {
+        
+        path =  LOGIN ? self.detail.video_url :self.detail.trial_video_url;
+        
+    }else{
+    
+        path = self.detail.audio.file_url;
+    }
+    
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
@@ -272,8 +287,7 @@
         
     } completion:^(BOOL finished) {
         
-       
-        NSString *path = self.detail.has_video ?  @"http://183.2.196.1/video19.ifeng.com/video09/2015/12/15/3730900-102-096-1631.mp4"  : self.detail.audio.file_url;
+   
         
         self.playerModel.videoURL    =  [NSURL URLWithString:path];
         [self.playerView resetToPlayNewVideo:self.playerModel];
@@ -306,15 +320,37 @@
         
         XWeakSelf;
         _headerView = [[SMDetailHeaderView alloc] init];
-        
-        _headerView.actionBlock = ^{
-        
-            [weakSelf loginView];
+        _headerView.actionBlock = ^(BOOL show_guest_intro, UIButton *sender) {
             
+            if (sender) {
+                
+                [weakSelf loginView];
+            
+            }else{
+                
+                [weakSelf showHeaderView];
+            }
+        
         };
+      
     }
     
     return _headerView;
+}
+
+- (void)showHeaderView{
+    
+    
+    self.detail.guest_intr_ShowAll = YES;
+    
+    self.detail_Frame.detailModel = self.detail;
+    
+    self.headerView.header_frame = self.detail_Frame;
+    
+    self.tableView.tableHeaderView = self.headerView;
+
+    [self.tableView reloadData];
+    
 }
 
 

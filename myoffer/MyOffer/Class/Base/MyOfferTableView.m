@@ -87,8 +87,7 @@
         
         return;
     }
-    
- 
+  
     
     CGFloat bg_height = self.mj_h;
     
@@ -117,8 +116,7 @@
   
     self.tableFooterView = self.bgView;
     
-//    NSLog(@">>>>>aaaaa>>>>> %lf  %lf  %lf",self.emptyView.center.y,self.bgView.center.y,self.center.y);
-
+ 
     if (self.emptyY != DEFAULT_NUMBER) {
         
         self.emptyView.mj_y = self.emptyY;

@@ -64,6 +64,13 @@
     return frame.size;
 }
 
+- (CGSize)KD_sizeWithAttribute:(NSDictionary *)attributes maxWidth:(CGFloat)maxWidth{
+    
+    CGRect frame = [self boundingRectWithSize:CGSizeMake(maxWidth, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:attributes context:nil];
+    
+    return frame.size;
+}
+
 
 @end
 

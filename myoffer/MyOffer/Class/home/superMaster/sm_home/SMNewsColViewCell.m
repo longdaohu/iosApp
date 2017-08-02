@@ -88,6 +88,8 @@ static NSString *identify = @"sm_news";
     self.titleLab.text =  newsFrame.news.main_title;
     self.nameLab.text = newsFrame.news.guest_name;
     self.uni_Lab.text = newsFrame.news.guest_university;
+    NSString *title = (newsFrame.news.messageType == SMMessageTypeOffLine)? @"立即查看" : @"观看视频";
+    [self.playBtn setTitle:title forState:UIControlStateNormal];
 
     
     self.iconView.frame = newsFrame.icon_Frame;

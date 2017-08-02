@@ -145,8 +145,17 @@ static NSString *cv_identify = @"sm_cv_news";
     
     SMNewsFrame *newsFrame = newsArr[indexPath.row];
     
-    if (self.actionBlock)  self.actionBlock(newsFrame.news.message_id,NO);
-     
+    NSString *message_id = nil;
+    NSString *message_url = nil;
+    if (newsFrame.news.messageType == SMMessageTypeOffLine){
+        message_url = newsFrame.news.offline_url;
+    }else{
+        message_id = newsFrame.news.message_id;
+    }
+    
+    if (self.actionBlock)  self.actionBlock(message_id,message_url,NO);
+
+    
  }
 
 
@@ -187,7 +196,7 @@ static NSString *cv_identify = @"sm_cv_news";
 
     if (self.show_push && self.actionBlock) {
         
-        self.actionBlock(nil,YES);
+        self.actionBlock(nil,nil,YES);
     
         self.show_push = NO;
     }
@@ -211,10 +220,6 @@ static NSString *cv_identify = @"sm_cv_news";
     
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

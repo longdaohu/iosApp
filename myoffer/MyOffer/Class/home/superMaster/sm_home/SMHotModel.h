@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger,SMMessageType){
 
 @interface SMHotModel : NSObject
 @property(nonatomic,copy)NSString *ad_post_mc;
-@property(nonatomic,copy)NSString *ad_post_pc;
+//@property(nonatomic,copy)NSString *ad_post_pc;
 @property(nonatomic,copy)NSString *guest_name;
 @property(nonatomic,copy)NSString *guest_subject;
 @property(nonatomic,copy)NSString *guest_university;

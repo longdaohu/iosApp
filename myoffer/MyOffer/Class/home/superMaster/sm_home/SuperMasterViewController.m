@@ -264,19 +264,24 @@
             news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             news_cell.newsGroup = group.items;
             news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            news_cell.actionBlock = ^(NSString *message_id,BOOL show_push) {
+            news_cell.actionBlock = ^(NSString *message_id,NSString *off_line,BOOL show_push) {
                 
-                if (show_push) {
+                if (message_id) {
                     
+                    SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+                    detail.message_id = message_id;
+                    [weakSelf pushWithVC:detail];
+                    
+                }else if(off_line){
+                
+                    [weakSelf safariWithPath:off_line];
+                
+                }else{
+                
                     [weakSelf pushWithVC:[[SMListViewController alloc] init]];
-                    
-                    return ;
+
                 }
-                
-                SMDetailViewController *detail = [[SMDetailViewController alloc] init];
-                detail.message_id = message_id;
-                [weakSelf pushWithVC:detail];
+        
                 
             };
             
@@ -470,6 +475,11 @@
 
 - (void)safariWithPath:(NSString *)path{
 
+    if(![path hasPrefix:@"http"]){
+    
+        path = [NSString stringWithFormat:@"http://%@",path];
+    }
+    
     [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
 
 }

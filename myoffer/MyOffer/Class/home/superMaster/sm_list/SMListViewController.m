@@ -159,7 +159,8 @@
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
         
     }
-    
+    [self.tableView reloadData];
+
     //5 消息提示
     if (self.items.count > 0) {
         
@@ -171,7 +172,6 @@
     }
     
     
-    [self.tableView reloadData];
 
     //2 提示加载信息
     [self promptShowWithCount:self.items.count];

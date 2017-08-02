@@ -701,7 +701,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
 - (UIButton *)startBtn {
     if (!_startBtn) {
         _startBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _startBtn.backgroundColor = [UIColor redColor];
+//        _startBtn.backgroundColor = [UIColor redColor];
         [_startBtn setImage:[UIImage imageNamed:(@"player_play")] forState:UIControlStateNormal];
         [_startBtn setImage:[UIImage imageNamed:(@"player_pause")] forState:UIControlStateSelected];
         [_startBtn addTarget:self action:@selector(playBtnClick:) forControlEvents:UIControlEventTouchUpInside];
