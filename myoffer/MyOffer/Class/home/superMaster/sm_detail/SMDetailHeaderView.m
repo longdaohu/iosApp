@@ -8,6 +8,7 @@
 
 #import "SMDetailHeaderView.h"
 #import "myofferTextView.h"
+#import <CoreText/CoreText.h>
 
 @interface SMDetailHeaderView ()<UITextViewDelegate>
 
@@ -107,7 +108,7 @@
     gest_Lab.font = [UIFont systemFontOfSize:12];
     [self addSubview:gest_Lab];
     gest_Lab.delegate = self;
-
+ 
     
     UIView *bottomView = [UIView  new];
     bottomView.backgroundColor = XCOLOR_BG;
@@ -195,17 +196,18 @@
     
     if (!detail.guest_intr_ShowAll) {
         
+       
         NSDictionary *nomal_attributes = [NSDictionary dictionaryWithDictionary:huodong_attributes];
+       
         [huodong_attributes setValue:@"http://baidu.com" forKey:NSLinkAttributeName];
-
+        [huodong_attributes setValue:(id)[UIColor redColor].CGColor forKey: (id)kCTForegroundColorAttributeName];
         
-        NSMutableAttributedString *more_attributeStr = [[NSMutableAttributedString alloc] initWithString:detail.guest_intr_short_sub];
-        
-        [more_attributeStr setAttributes:nomal_attributes  range:NSMakeRange(0,detail.guest_intr_short_sub.length)];
+        NSMutableAttributedString *more_attributeStr = [[NSMutableAttributedString alloc] initWithString:detail.guest_intr_short_sub attributes:nomal_attributes];
         [more_attributeStr setAttributes:huodong_attributes range:NSMakeRange(detail.guest_intr_short_sub.length - 4,4)];
-        
 
+        
         self.gest_Lab.attributedText = more_attributeStr;
+        
     }
 
     self.gest_Lab.textColor = XCOLOR_SUBTITLE;

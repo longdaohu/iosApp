@@ -26,6 +26,7 @@
 #import "ZFPlayerControlView.h"
 #import "ZFPlayerModel.h"
 #import "ZFPlayerControlViewDelegate.h"
+@class ZFPlayerView;
 
 @protocol ZFPlayerDelegate <NSObject>
 @optional
@@ -39,6 +40,8 @@
 - (void)zf_playerControlViewWillHidden:(UIView *)controlView isFullscreen:(BOOL)fullscreen;
 
 - (void)zf_playerDidClickPlay;
+
+- (void)zf_playerStateEndPlay:(ZFPlayerView *)playerView;
 
 @end
 

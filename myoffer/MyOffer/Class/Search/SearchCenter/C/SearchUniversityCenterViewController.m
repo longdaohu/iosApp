@@ -212,17 +212,6 @@
 }
 
 
-- (SearchPromptView *)promptView{
-
-    if (!_promptView) {
-    
-        _promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
-        _promptView.alpha = 0;
-
-    }
-    
-    return _promptView;
-}
 
 
 - (void)makeUI{
@@ -231,7 +220,7 @@
     
     [self makeFilter];
     
-    [self.view insertSubview:self.promptView  belowSubview:self.filter.view];
+//    [self.view insertSubview:self.promptView  belowSubview:self.filter.view];
  
 }
 
@@ -634,34 +623,12 @@ static NSString *identify = @"search_course";
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSNumber *)count{
     
-    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"共 %@ 所学校",count]];
+    if (!_promptView) {
+        
+        _promptView = [SearchPromptView promptViewInsertInView:self.tableView];
+    }
     
-   //每次点击时 清空动画
-    [self.promptView.layer removeAllAnimations];
-    self.promptView.alpha = 0;
-    self.promptView.mj_y = 0;
-    
- 
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
-        self.promptView.alpha = 1;
-        self.promptView.mj_y = 50;
-        
-    } completion:^(BOOL finished) {
-        
-        
-        [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
-            
-            self.promptView.mj_y = 0;
-            self.promptView.alpha = 0;
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    }];
-
-    
+    [self.promptView showWithTitle:[NSString stringWithFormat:@"共 %@ 所学校",count]];
     
 }
 

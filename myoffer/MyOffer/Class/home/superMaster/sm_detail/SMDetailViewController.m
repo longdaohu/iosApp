@@ -694,6 +694,7 @@
     
         [_audioPlayerView playerControlView:nil playerModel:self.audioplayerModel];
         // 设置代理
+        _audioPlayerView.delegate = self;
          //（可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
         
         // 打开预览图
@@ -754,6 +755,21 @@
     return _playerView;
 }
 
+- (void)reSetSectionAudio{
+    
+    SMHomeSectionModel *group = self.groups[0];
+    
+    for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
+        
+        SMAudioItemFrame *a_frame  =  group.items[p_index];
+        
+        a_frame.item.inPlaying = NO;
+        
+    }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 
 #pragma mark :  ZFPlayerDelegate
 /** 返回按钮事件 */
@@ -767,27 +783,21 @@
 - (void)zf_playerDidClickPlay{
     
     
-    
-    if (self.audioPlayerView.state == ZFPlayerStatePlaying) {
+    if (self.audioPlayerView.state == ZFPlayerStatePlaying ) {
         
         [self.audioPlayerView pause];
         
-        SMHomeSectionModel *group = self.groups[0];
-        
-        for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
-            
-            SMAudioItemFrame *a_frame  =  group.items[p_index];
-            
-            a_frame.item.inPlaying = NO;
-            
-         }
-
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-        
+        [self reSetSectionAudio];
     }
-    
 }
 
+- (void)zf_playerStateEndPlay:(ZFPlayerView *)playerView{
+
+    if (playerView == self.audioPlayerView) {
+    
+        [self reSetSectionAudio];
+    }
+}
 
 - (void)zf_playerDownload:(NSString *)url {
 }

@@ -40,23 +40,12 @@
     [self showEmpty];
     
     //2 提示加载信息
+    
     [self promptShowWithCount:group.messageFrames.count];
     
 }
 
 
-- (SearchPromptView *)promptView{
-    
-    if (!_promptView) {
-        
-        _promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, -50, XSCREEN_WIDTH, 50)];
-        
-        _promptView.alpha = 0;
-        
-    }
-    
-    return _promptView;
-}
 
 
 //每次清空数据时，表格回到顶部
@@ -80,7 +69,6 @@
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 120 + 64, 0);
     
     
-    [self.view insertSubview:self.promptView aboveSubview:self.tableView];
 }
 
 
@@ -211,38 +199,17 @@
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSInteger )count{
     
-    //数据为0时不显示提示信息
+    
+     //数据为0时不显示提示信息
     if (count == 0) return;
     
-    XWeakSelf
-    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"加载%ld条资讯",(long)count]];
-    
-    //每次点击时 清空动画
-    [self.promptView.layer removeAllAnimations];
-    self.promptView.alpha = 0;
-    self.promptView.mj_y = - self.promptView.mj_h;
-    
-    
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+    if (!_promptView) {
         
-        weakSelf.promptView.alpha = 1;
-        weakSelf.promptView.mj_y = 0;
-        
-    } completion:^(BOOL finished) {
-        
-        
-        [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
-            
-            weakSelf.promptView.mj_y = - self.promptView.mj_h;
-            weakSelf.promptView.alpha = 0;
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    }];
+        _promptView = [SearchPromptView promptViewInsertInView:self.tableView];
+    }
     
-    
+    [self.promptView showWithTitle:[NSString stringWithFormat:@"加载%ld条资讯",(long)count]];
+
     
 }
 

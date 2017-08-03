@@ -46,20 +46,6 @@
 }
 
 
-- (SearchPromptView *)promptView{
-    
-    if (!_promptView) {
-        
-        _promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
-        
-        _promptView.alpha = 0;
-        
-    }
-    
-    return _promptView;
-}
-
-
 - (NSMutableDictionary *)parameters{
 
     if (!_parameters) {
@@ -76,7 +62,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self makeUI];
     
@@ -159,6 +144,8 @@
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
         
     }
+    
+    
     [self.tableView reloadData];
 
     //5 消息提示
@@ -172,9 +159,13 @@
     }
     
     
-
     //2 提示加载信息
-    [self promptShowWithCount:self.items.count];
+    if (page == 0) {
+        
+        [self promptShowWithCount:[response[@"counts"] integerValue]];
+        
+     }
+
 }
 
 
@@ -199,10 +190,7 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.mj_footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    
-    
-    [self.view insertSubview:self.promptView aboveSubview:self.tableView];
-
+  
 }
 
 - (void)makeFilter{
@@ -357,35 +345,13 @@
     //数据为0时不显示提示信息
     if (count == 0) return;
     
-    XWeakSelf
-    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"共加载%ld个超导",(long)count]];
+    if (!_promptView) {
+        
+        _promptView = [SearchPromptView promptViewInsertInView:self.tableView];
+    }
     
-    //每次点击时 清空动画
-    [self.promptView.layer removeAllAnimations];
-    self.promptView.alpha = 0;
-    self.promptView.mj_y = - self.promptView.mj_h;
-    
-    
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
-        weakSelf.promptView.alpha = 1;
-        weakSelf.promptView.mj_y = weakSelf.promptView.mj_h;
-        
-    } completion:^(BOOL finished) {
-        
-        
-        [UIView animateWithDuration:ANIMATION_DUATION delay:2 options:UIViewAnimationOptionCurveEaseInOut  animations:^{
-            
-            weakSelf.promptView.mj_y = - weakSelf.promptView.mj_h;
-            
-            weakSelf.promptView.alpha = 0;
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    }];
-    
+    [self.promptView showWithTitle:[NSString stringWithFormat:@"共加载%ld个超导",(long)count]];
+
 }
 
 
@@ -400,7 +366,6 @@
     NSLog(@"超级导列表 SMListViewController  dealloc");
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {

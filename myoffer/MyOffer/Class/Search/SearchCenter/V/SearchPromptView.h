@@ -10,6 +10,8 @@
 
 @interface SearchPromptView : UIView
 
-- (void)promptShowWithMessage:(NSString *)message;
++ (instancetype)promptViewInsertInView:(UIView *)upView;
+
+- (void)showWithTitle:(NSString *)title;
 
 @end
