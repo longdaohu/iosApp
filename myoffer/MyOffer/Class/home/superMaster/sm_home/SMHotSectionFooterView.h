@@ -19,5 +19,6 @@ typedef void(^SMHotSectionFooterBlock)();
 
 @property(nonatomic,copy)SMHotSectionFooterBlock actionBlock;
 
++ (instancetype)footerWithTitle:(NSString *)title action:(SMHotSectionFooterBlock)action;
 
 @end

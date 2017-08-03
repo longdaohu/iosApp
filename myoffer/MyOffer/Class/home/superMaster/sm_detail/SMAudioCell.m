@@ -99,37 +99,19 @@ static NSString *identify = @"sm_audio";
     self.timeLab.frame = audioFrame.time_Frame;
     self.bottom_line.frame = audioFrame.bottom_line_Frame;
     
-    
-    //如果播放按钮可用，判断播放按钮的当前是否正在播放状态
-    NSString *imageName = @"play";
-    if (audioFrame.item.isPlay){
-        imageName = audioFrame.item.inPlaying ? @"pause" : @"play";
-    }else{
-        imageName = @"play_lock";
-    }
-    [self.playBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 
-    
-    self.statusBtn.enabled = audioFrame.item.isPlay;
-    NSString *title_tmp = LOGIN ? @"播放" : @"试听";
-    NSString *title_status = audioFrame.item.isPlay ? title_tmp : @"";
-    [self.statusBtn setTitle:title_status forState:UIControlStateNormal];
-    
- 
-    self.nameLab.text = [NSString stringWithFormat:@"%ld.%@",self.indexPath.row + 1,audioFrame.item.name];
-    
-    self.timeLab.text = [NSString stringWithFormat:@"时长：%@",audioFrame.item.duration];
+    [self.playBtn setImage:[UIImage imageNamed:audioFrame.item.play_imageName] forState:UIControlStateNormal];
+    [self.statusBtn setTitle:audioFrame.item.status_title forState:UIControlStateNormal];
+    self.statusBtn.enabled = audioFrame.item.isCanPlay;
+    self.nameLab.text = [NSString stringWithFormat:@"%ld.%@",(long)self.indexPath.row + 1,audioFrame.item.name];
+    self.timeLab.text = audioFrame.item.duration;
  
 }
+
 
 - (void)bottomLineWithHiden:(BOOL)hiden{
 
     self.bottom_line.hidden = hiden;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

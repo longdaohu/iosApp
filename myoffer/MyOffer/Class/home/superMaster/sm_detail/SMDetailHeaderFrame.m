@@ -133,7 +133,7 @@
     CGFloat uni_w =  title_w - uni_x;
     self.uni_Frame = CGRectMake(uni_x, uni_y, uni_w, uni_h);
     
-    
+    //10 嘉宾介绍
     CGFloat gest_x =  title_x;
     CGFloat gest_y =  CGRectGetMaxY(self.head_Frame) + padding;
     CGFloat gest_w =  title_w;
@@ -145,12 +145,12 @@
     NSInteger  line_count = gest_h/paragraphStyle.minimumLineHeight;
     
     if (line_count > 3 && !detailModel.guest_intr_ShowAll) {
-
+        //10 - 1 嘉宾介绍简介
         gest_h = paragraphStyle.minimumLineHeight * 3;
         self.guest_hiden_Frame = CGRectMake(gest_x, gest_y, gest_w, gest_h);
         guest_rect =self.guest_hiden_Frame;
         
-        NSString *more_str = @"点击展开";
+        NSString *more_str = @"查看全部";
         NSString *dish_str = @"...";
         NSInteger limit_gest_length =  detailModel.guest_introduction.length * 3/ line_count - more_str.length - dish_str.length;
         NSString *gest_sub = [detailModel.guest_introduction substringWithRange:NSMakeRange(0, limit_gest_length)];
@@ -158,11 +158,12 @@
         
     }else{
     
+         //10 - 2 嘉宾介绍全部展示
         detailModel.guest_intr_ShowAll = YES;
 
     }
     
-    
+    //11 分割线
     CGFloat bottom_x =  0;
     CGFloat bottom_y =  CGRectGetMaxY(guest_rect) + padding;
     CGFloat bottom_h =  padding;

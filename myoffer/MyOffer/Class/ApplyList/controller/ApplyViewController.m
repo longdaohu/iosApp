@@ -879,7 +879,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     NSInteger count = self.cancelSetions.count + self.cancelindexPathes.count;
     
-    self.cancelCountLab.text = [NSString stringWithFormat:@"已选择 : %ld ", count];
+    self.cancelCountLab.text = [NSString stringWithFormat:@"已选择 : %ld ", (long)count];
     
     self.cancelBottomButton.enabled = count;
  

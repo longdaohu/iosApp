@@ -111,7 +111,7 @@ static NSString *identify = @"sm_hot";
     
     
     self.bottom_line.frame = hotFrame.bottom_line_Frame;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_post_mc]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:hotFrame.hot.ad_icon]];
     self.titleLab.text = hotFrame.hot.main_title;
     self.nameLab.text = hotFrame.hot.guest_name;
     self.uni_Lab.text = hotFrame.hot.guest_university;

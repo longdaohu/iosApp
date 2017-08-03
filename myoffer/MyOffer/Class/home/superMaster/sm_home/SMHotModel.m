@@ -42,6 +42,14 @@
     return type;
 }
 
+- (NSString *)ad_icon{
+
+    
+    return [_ad_post_mc stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+
+
 - (NSString *)type_name{
 
     

@@ -93,13 +93,8 @@
     if (self.detail.islogin != LOGIN) {
         
         self.detail.islogin = LOGIN;
-        
-        self.detail_Frame.detailModel = self.detail;
-        
-        self.headerView.header_frame = self.detail_Frame;
-        
-        self.tableView.tableHeaderView = self.headerView;
-        
+
+        [self makeTableViewHeaderWithDetailModel:self.detail];
         
         for (NSInteger index = 0; index < self.detail.audio.fragments.count ; index++) {
         
@@ -108,11 +103,11 @@
             if (!LOGIN && index < 2){
             
                 //大于2个听前两个 小于两个全不可听
-                item.isPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
+                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
             }
             
             //2 登录全可听
-            if (LOGIN)  item.isPlay = YES;
+            if (LOGIN)  item.isCanPlay = YES;
             
         }
         
@@ -120,11 +115,16 @@
         
         [self.tableView reloadData];
         
-        self.playerView.userInteractionEnabled = YES;
-
         
-        self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
-        [self.playerView resetToPlayNewVideo:self.playerModel];
+        if (LOGIN && self.detail.has_video == NO)   self.playerView.userInteractionEnabled = YES;
+
+ 
+        if (LOGIN && self.detail.has_video == YES) {
+            
+            self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
+            [self.playerView resetToPlayNewVideo:self.playerModel];
+        }
+
     }
     
 }
@@ -204,11 +204,11 @@
             if (!LOGIN && audio_temp.count < 2){
             
                 //大于2个听前两个 小于两个全不可听
-                item.isPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
+                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
             }
             
             //2 登录全可听
-            if (LOGIN)  item.isPlay = YES;
+            if (LOGIN)  item.isCanPlay = YES;
             
             
             SMAudioItemFrame *audioFrame = [SMAudioItemFrame frameWitAudioItem:item];
@@ -259,8 +259,8 @@
     
     self.groups = [group_temp copy];
     
-    self.headerView.header_frame = self.detail_Frame;
     
+    self.headerView.header_frame = self.detail_Frame;
     self.tableView.tableHeaderView = self.headerView;
     
     [self.tableView reloadData];
@@ -287,7 +287,6 @@
         
     } completion:^(BOOL finished) {
         
-   
         
         self.playerModel.videoURL    =  [NSURL URLWithString:path];
         [self.playerView resetToPlayNewVideo:self.playerModel];
@@ -320,17 +319,17 @@
         
         XWeakSelf;
         _headerView = [[SMDetailHeaderView alloc] init];
-        _headerView.actionBlock = ^(BOOL show_guest_intro, UIButton *sender) {
+        _headerView.actionBlock = ^(BOOL guest_intro_showAll, UIButton *sender) {
             
-            if (sender) {
-                
+            if(sender){
+            
                 [weakSelf loginView];
             
-            }else{
-                
+            } else{
+            
                 [weakSelf showHeaderView];
             }
-        
+          
         };
       
     }
@@ -340,16 +339,22 @@
 
 - (void)showHeaderView{
     
-    
     self.detail.guest_intr_ShowAll = YES;
     
-    self.detail_Frame.detailModel = self.detail;
+    [self makeTableViewHeaderWithDetailModel:self.detail];
+
+    [self.tableView reloadData];
+    
+}
+
+//设置表头
+- (void)makeTableViewHeaderWithDetailModel:(SMDetailMedol *)detail{
+
+    self.detail_Frame.detailModel = detail;
     
     self.headerView.header_frame = self.detail_Frame;
     
     self.tableView.tableHeaderView = self.headerView;
-
-    [self.tableView reloadData];
     
 }
 
@@ -387,7 +392,6 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     
-    self.tableView.tableHeaderView = self.headerView;
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
@@ -449,7 +453,6 @@
     return SectionView;
 }
 
-
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     SMHomeSectionModel *group = self.groups[section];
@@ -457,16 +460,14 @@
     if (group.groupType == SMGroupTypeAudios && !group.showAll) {
         
         XWeakSelf
-        SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
-        footer.moreColor = XCOLOR_WHITE;
-        footer.moreTitleColor = XCOLOR_LIGHTBLUE;
-        footer.moreTitle = @"展开所有音频";
-        footer.actionBlock = ^{
+        SMHotSectionFooterView *footer = [SMHotSectionFooterView footerWithTitle:@"展开所有音频" action:^{
             
             group.showAll = YES;
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
-        };
+        }];
+        footer.moreColor = XCOLOR_WHITE;
+        footer.moreTitleColor = XCOLOR_LIGHTBLUE;
         
         return footer;
         
@@ -474,7 +475,6 @@
     
     return nil;
 }
-
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -531,51 +531,59 @@
     
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
-    
-    if (group.groupType == SMGroupTypeHot) {
-        
-        SMHotFrame *hot_frame  =  group.items[indexPath.row];
-        
-        if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+//    
+//    NSString *path = nil;
+//    UIViewController *vc = nil;
+//    
+    switch (group.groupType) {
+        case SMGroupTypeHot:
+        {
+            SMHotFrame *hot_frame  =  group.items[indexPath.row];
             
-            [self safariWithPath:hot_frame.hot.offline_url];
+            if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+                
+                [self safariWithPath:hot_frame.hot.offline_url];
+                
+                return;
+                
+            }
             
-            return;
+            SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+            
+            detail.message_id = hot_frame.hot.message_id;
+            
+            [self pushWithVC:detail];
+      
         }
+            break;
+            
+        case SMGroupTypeSKUs:{
         
-        
-        SMDetailViewController *detail = [[SMDetailViewController alloc] init];
-        
-        detail.message_id = hot_frame.hot.message_id;
-        
-        [self pushWithVC:detail];
+            ServiceItemViewController *sku_vc = [[ServiceItemViewController alloc] init];
+            
+            ServiceSKUFrame *sku_frame = group.items[indexPath.row];
+            
+            sku_vc.service_id = sku_frame.SKU.service_id;
+            
+            [self pushWithVC:sku_vc];
+        }
 
-        return;
+            break;
+            
+        default:{
+            
+        }
+            break;
     }
-    
-    
-    if (group.groupType == SMGroupTypeSKUs) {
-        
-        ServiceItemViewController *sku_vc = [[ServiceItemViewController alloc] init];
-        
-        ServiceSKUFrame *sku_frame = group.items[indexPath.row];
-
-        sku_vc.service_id = sku_frame.SKU.service_id;
-
-        [self pushWithVC:sku_vc];
-        
-        
-        return;
-    }
-    
-    
+  
+    //非音频不能点击
     if (group.groupType != SMGroupTypeAudios) return;
     
     
         SMAudioItemFrame *audio_frame  =  group.items[indexPath.row];
     
         //不能播放音频
-        if (!audio_frame.item.isPlay)  return;
+        if (!audio_frame.item.isCanPlay)  return;
         
 
     
@@ -598,6 +606,8 @@
         }
     
     
+    
+    
         if (temp_index == DEFAULT_NUMBER ) {
             
             audio_frame.item.inPlaying = YES;
@@ -617,9 +627,11 @@
         }
  
     
+    
+    
     if ( audio_frame.item.inPlaying) {
         
-        self.audioplayerModel.videoURL   =  [NSURL URLWithString:audio_frame.item.file_url];
+        self.audioplayerModel.videoURL  =  [NSURL URLWithString:audio_frame.item.file_url];
         
         [self.audioPlayerView resetToPlayNewVideo:self.audioplayerModel];
         
@@ -644,8 +656,6 @@
     
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-
 
 
 #pragma mark - PLAYER
@@ -729,7 +739,7 @@
         _playerView.delegate = self;
         
         //（可选设置）可以设置视频的填充模式，内部设置默认（ZFPlayerLayerGravityResizeAspect：等比例填充，直到一个维度到达区域边界）
-         _playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspectFill;
+         _playerView.playerLayerGravity = ZFPlayerLayerGravityResizeAspect;
         
         // 打开下载功能（默认没有这个功能）
 //        _playerView.hasDownload    = YES;

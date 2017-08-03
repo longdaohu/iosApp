@@ -215,7 +215,7 @@
     if (count == 0) return;
     
     XWeakSelf
-    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"加载%ld条资讯",count]];
+    [self.promptView promptShowWithMessage:[NSString stringWithFormat:@"加载%ld条资讯",(long)count]];
     
     //每次点击时 清空动画
     [self.promptView.layer removeAllAnimations];

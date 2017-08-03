@@ -17,6 +17,17 @@
 
 @implementation SMHotSectionFooterView
 
++ (instancetype)footerWithTitle:(NSString *)title action:(SMHotSectionFooterBlock)action{
+
+    SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
+
+    footer.moreTitle = title;
+    
+    footer.actionBlock = action;
+    
+    return footer;
+}
+
 - (void)awakeFromNib{
 
     [super awakeFromNib];

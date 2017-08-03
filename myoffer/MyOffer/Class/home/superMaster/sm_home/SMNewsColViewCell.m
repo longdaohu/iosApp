@@ -83,8 +83,8 @@ static NSString *identify = @"sm_news";
 
     _newsFrame = newsFrame;
     
-
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:newsFrame.news.ad_post_mc]];
+ 
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:newsFrame.news.ad_icon]];
     self.titleLab.text =  newsFrame.news.main_title;
     self.nameLab.text = newsFrame.news.guest_name;
     self.uni_Lab.text = newsFrame.news.guest_university;

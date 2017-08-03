@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SMDetailHeaderFrame.h"
 
-typedef void(^SMDetailHeaderBlock)(BOOL show_guest_intro,UIButton *sender);
+typedef void(^SMDetailHeaderBlock)(BOOL guest_intro_showAll,UIButton *sender);
 @interface SMDetailHeaderView : UIView
-
 @property(nonatomic,strong)SMDetailHeaderFrame *header_frame;
 @property(nonatomic,copy)SMDetailHeaderBlock actionBlock;
 

@@ -88,7 +88,7 @@
 
     _count = count;
     
-    self.count_lab.text= [NSString stringWithFormat:@"已选择：%ld",count];
+    self.count_lab.text= [NSString stringWithFormat:@"已选择：%ld",(long)count];
     
     self.submitBtn.backgroundColor = count > 0 ? XCOLOR_RED : XCOLOR_BG;
     
