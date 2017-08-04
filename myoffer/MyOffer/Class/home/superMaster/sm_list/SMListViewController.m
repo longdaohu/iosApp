@@ -34,7 +34,6 @@
 
 }
 
-
 - (NSMutableArray *)items{
 
     if (!_items) {
@@ -60,7 +59,21 @@
     return _parameters;
 }
 
+-(NSArray *)areas
+{
+    if (!_areas) {
+        
+        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+        
+        _areas = [ud valueForKey:@"Subject_CN"];
+    }
+    
+    return _areas;
+}
+
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self makeUI];
@@ -88,7 +101,7 @@
     
     XWeakSelf
     
-    [self startAPIRequestWithSelector:@"GET api/sm/lectures" parameters:self.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorSuperMasterlist  parameters:self.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
@@ -173,7 +186,7 @@
 
 - (void)makeUI{
 
-    self.title = @"超级导师列表";
+    self.title = @"超导列表";
     
     [self makeTableView];
     
@@ -259,25 +272,13 @@
                         @"key" : @"tag",
                         @"default_item" : (self.tag ? self.tag : KEY_ALL),
                         @"title" : @"活动主题",
-                        @"items" : @[KEY_ALL,@"留学生活",@"大学招生官",@"职业发展",@"海外学习辅导"]
+                        @"items" : @[KEY_ALL,@"留学生活",@"大学招生官",@"专业解析",@"职业发展",@"海外学习辅导"]
                         };
     
  
     [self.view addSubview:filter.view];
 
     
-}
-
--(NSArray *)areas
-{
-    if (!_areas) {
-        
-        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-        
-        _areas = [ud valueForKey:@"Subject_CN"];
-    }
-    
-    return _areas;
 }
 
 
@@ -336,8 +337,6 @@
     [self makeSupeMasterData];
     
 }
-
-
 
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSInteger )count{

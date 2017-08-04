@@ -28,9 +28,12 @@
  
 @interface SuperMasterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
-@property(nonatomic,strong)SuperMasterHomeDemol *homeModel;
 @property(nonatomic,strong)NSArray *groups;
+//总数据源
+@property(nonatomic,strong)SuperMasterHomeDemol *smModel;
+//轮播图View
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
+//线下活动View
 @property(nonatomic,strong)SMNewsOnLineView *onLineView;
 
 @end
@@ -58,7 +61,7 @@
 - (void)makeData{
   
     XWeakSelf;
-    [self startAPIRequestWithSelector:@"GET api/sm/index" parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorSuperMasterHome parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
@@ -73,7 +76,7 @@
 - (void)updateUIWithResponse:(id)response{
 
     SuperMasterHomeDemol *home = [SuperMasterHomeDemol mj_objectWithKeyValues:response];
-    self.homeModel = home;
+    self.smModel = home;
     
     NSMutableArray *group_temp = [NSMutableArray array];
     
@@ -113,7 +116,8 @@
             [hots_temp addObject:[SMHotFrame frameWithHot:hot]];
         }
         SMHomeSectionModel *hot_group = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] groupType:SMGroupTypeHot];
-        hot_group.showAll = (hot_group.item_all.count < hot_group.limit_count);
+  
+        hot_group.show_All_data = (hot_group.item_all.count < hot_group.limit_count);
         hot_group.accessory_title = @"查看全部";
         if (hot_group.items.count > 0)  [group_temp addObject:hot_group];
         
@@ -163,9 +167,9 @@
     header.clipsToBounds = YES;
     
     //1 如果有banner
-    if (self.homeModel.banners.count > 0 ) {
+    if (self.smModel.banners.count > 0 ) {
         
-         self.autoLoopView.imageURLStringsGroup = [self.homeModel.banners valueForKey:@"image_url_mc"];
+         self.autoLoopView.imageURLStringsGroup = [self.smModel.banners valueForKey:@"image_url_mc"];
       
         XWeakSelf
         [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
@@ -181,13 +185,13 @@
     }
     
      //1 如果有最新线下活动
-    if ([self.homeModel.offline allKeys].count > 0) {
+    if ([self.smModel.offline allKeys].count > 0) {
     
         header_Height  += self.onLineView.mj_h;
         
         [header addSubview:self.onLineView];
         
-        self.onLineView.offline = self.homeModel.offline;
+        self.onLineView.offline = self.smModel.offline;
         
     }
 
@@ -237,6 +241,11 @@
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
+//超出cell的bounds范围，不能显示
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    cell.clipsToBounds = YES;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
@@ -263,7 +272,6 @@
             SMNewsCell *news_cell = [SMNewsCell cellWithTableView:tableView];
             news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             news_cell.newsGroup = group.items;
-            news_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             news_cell.actionBlock = ^(NSString *message_id,NSString *off_line,BOOL show_push) {
                 
                 if (message_id) {
@@ -308,7 +316,6 @@
             };
             
             return tag_cell;
-
             
         }
             break;
@@ -333,13 +340,13 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.groupType == SMGroupTypeHot && !group.showAll) {
+    if (!group.show_All_data) {
         
          XWeakSelf
-    SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
+       SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
         footer.actionBlock = ^{
         
-             group.showAll = YES;
+             group.show_All_data = YES;
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
         };
@@ -414,7 +421,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if ( group.groupType == SMGroupTypeHot && !group.showAll)  return 80;
+    if (!group.show_All_data)  return 80;
     
     return 10;
 }
@@ -449,7 +456,7 @@
 #pragma mark : 事件处理
 - (void)caseBannerWithIndex:(NSInteger)index{
     
-   SMBannerModel  *banner = self.homeModel.banners[index];
+   SMBannerModel  *banner = self.smModel.banners[index];
     
      if ([banner.link_app containsString:@"myoffer://home"]) {
          
@@ -475,10 +482,7 @@
 
 - (void)safariWithPath:(NSString *)path{
 
-    if(![path hasPrefix:@"http"]){
-    
-        path = [NSString stringWithFormat:@"http://%@",path];
-    }
+    if(![path hasPrefix:@"http"]) path = [NSString stringWithFormat:@"http://%@",path];
     
     [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
 
@@ -488,7 +492,7 @@
 
     [super viewDidLayoutSubviews];
     
-    CGFloat online_y = (self.homeModel.banners.count > 0) ? CGRectGetMaxY(self.autoLoopView.frame) : 0;
+    CGFloat online_y = (self.smModel.banners.count > 0) ? CGRectGetMaxY(self.autoLoopView.frame) : 0;
     
     self.onLineView.frame = CGRectMake(0, online_y, self.tableView.mj_w, 110);
 

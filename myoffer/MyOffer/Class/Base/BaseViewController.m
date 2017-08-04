@@ -311,7 +311,7 @@
 //登录页面
 -(void)loginView{
 
-//    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
+ 
     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self presentViewController:nav animated:YES completion:^{}];
 

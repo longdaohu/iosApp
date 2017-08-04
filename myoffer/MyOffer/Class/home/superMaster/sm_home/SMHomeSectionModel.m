@@ -16,39 +16,50 @@
     sectionM.item_all = items;
     sectionM.groupType = groupType;
     sectionM.title = title;
-    sectionM.showAll = YES;
+    sectionM.show_All_data = YES;
     sectionM.limit_count = 5;
     
     return sectionM;
 }
 
 
-- (void)setShowAll:(BOOL)showAll{
 
-    _showAll = showAll;
+- (void)setShow_All_data:(BOOL)show_All_data{
+
+    _show_All_data = show_All_data;
     
-    if (showAll) {
+    //1 true 时展示全部
+    if (show_All_data) {
         
         self.items = self.item_all;
+        
+        return;
+    }
+    
+    
+    //2 当fault && 全部数据小于限制数时，把show_All_data = true
+    if (!show_All_data && self.item_all.count <= self.limit_count) {
+        
+        self.show_All_data = YES;
+  
+        return;
+    }
+    
+    //2 当show_All_data == fault && (self.item_all.count > self.limit_count)时，展示部分数据
 
-        return;
+    if (self.item_all.count > self.limit_count) {
+        
+        self.items = [self.item_all subarrayWithRange:NSMakeRange(0,self.limit_count)];
+        
+    }else{
+    
+        self.items = self.item_all;
+
     }
     
-    
-    if (!showAll && self.item_all.count <= self.limit_count) {
-        
-        
-        self.showAll = YES;
-        
-        return;
-    }
-    
-    
-    NSArray *tmp_Arr = self.item_all.count > self.limit_count ? [self.item_all subarrayWithRange:NSMakeRange(0,self.limit_count)]: self.item_all;
-    self.items = tmp_Arr;
+  
     
 }
-
 
 
 @end

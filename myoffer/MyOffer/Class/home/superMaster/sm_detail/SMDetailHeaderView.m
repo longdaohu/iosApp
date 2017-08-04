@@ -184,6 +184,7 @@
     //2 活动介绍
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.minimumLineHeight = 18;
+    
     NSMutableDictionary *huodong_attributes = [NSMutableDictionary dictionary];
     [huodong_attributes setValue:[UIFont systemFontOfSize:12]  forKey:NSFontAttributeName];
     [huodong_attributes setValue:paragraphStyle forKey:NSParagraphStyleAttributeName];
@@ -198,14 +199,13 @@
         
        
         NSDictionary *nomal_attributes = [NSDictionary dictionaryWithDictionary:huodong_attributes];
-       
         [huodong_attributes setValue:@"http://baidu.com" forKey:NSLinkAttributeName];
-        [huodong_attributes setValue:(id)[UIColor redColor].CGColor forKey: (id)kCTForegroundColorAttributeName];
         
         NSMutableAttributedString *more_attributeStr = [[NSMutableAttributedString alloc] initWithString:detail.guest_intr_short_sub attributes:nomal_attributes];
         [more_attributeStr setAttributes:huodong_attributes range:NSMakeRange(detail.guest_intr_short_sub.length - 4,4)];
 
         
+        self.gest_Lab.linkTextAttributes = @{NSForegroundColorAttributeName : XCOLOR_LIGHTBLUE};
         self.gest_Lab.attributedText = more_attributeStr;
         
     }

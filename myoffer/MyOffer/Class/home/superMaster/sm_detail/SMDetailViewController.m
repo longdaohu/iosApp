@@ -22,7 +22,7 @@
 #import "SMHotSectionFooterView.h"
 #import "ServiceItemViewController.h"
 #import "ServiceSKU.h"
-
+#import "MyOfferLoginViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -68,64 +68,7 @@
    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
-    
-    // pop回来时候是否自动播放
-    if (self.playerView && self.isPlaying) {
-        
-        self.isPlaying = NO;
-        self.playerView.playerPushedOrPresented = NO;
-    }
-    
-    
-    
-    if (self.audioPlayerView && self.isPlaying_audio) {
-        
-        self.isPlaying_audio = NO;
-        self.audioPlayerView.playerPushedOrPresented = NO;
-    }
-    
-    
-    
-    //1 如果不存在，没有必要下一步操作
-    if (!self.detail) return;
-    
-    //2 判断登录状态是否改变
-    if (self.detail.islogin != LOGIN) {
-        
-        self.detail.islogin = LOGIN;
-
-        [self makeTableViewHeaderWithDetailModel:self.detail];
-        
-        for (NSInteger index = 0; index < self.detail.audio.fragments.count ; index++) {
-        
-            SMAudioItem *item  = self.detail.audio.fragments[index];
-                 //1 没登录时限制收听个数
-            if (!LOGIN && index < 2){
-            
-                //大于2个听前两个 小于两个全不可听
-                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
-            }
-            
-            //2 登录全可听
-            if (LOGIN)  item.isCanPlay = YES;
-            
-        }
-        
-        
-        
-        [self.tableView reloadData];
-        
-        
-        if (LOGIN && self.detail.has_video == NO)   self.playerView.userInteractionEnabled = YES;
-
- 
-        if (LOGIN && self.detail.has_video == YES) {
-            
-            self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
-            [self.playerView resetToPlayNewVideo:self.playerModel];
-        }
-
-    }
+    [self whenViewWillAppearWithPlayer];
     
 }
 
@@ -168,9 +111,9 @@
 #pragma mark : 网络请求
 - (void)makeData{
 
-    NSString *path = [NSString stringWithFormat:@"GET /api/sm/lecture/%@",self.message_id];
+    
 
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",kAPISelectorSuperMasterDetail,self.message_id] parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [self updateUIWithResponse:response];
 
@@ -219,7 +162,7 @@
         //3 展示部分，点击显示全部，再展示全部
         SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] groupType:SMGroupTypeAudios];
         
-        one.showAll = (one.item_all.count < one.limit_count);
+        one.show_All_data = (one.item_all.count < one.limit_count);
        
         
         if (one.items.count > 0) [group_temp addObject:one];
@@ -323,7 +266,7 @@
             
             if(sender){
             
-                [weakSelf loginView];
+                [weakSelf toLoginView];
             
             } else{
             
@@ -457,12 +400,12 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.groupType == SMGroupTypeAudios && !group.showAll) {
+    if (!group.show_All_data) {
         
         XWeakSelf
         SMHotSectionFooterView *footer = [SMHotSectionFooterView footerWithTitle:@"展开所有音频" action:^{
             
-            group.showAll = YES;
+            group.show_All_data = YES;
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
         }];
@@ -519,7 +462,7 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (group.groupType == SMGroupTypeAudios && !group.showAll) return 80;
+    if (!group.show_All_data) return 80;
     
     return 10;
 }
@@ -531,10 +474,7 @@
     
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
-//    
-//    NSString *path = nil;
-//    UIViewController *vc = nil;
-//    
+   
     switch (group.groupType) {
         case SMGroupTypeHot:
         {
@@ -626,8 +566,7 @@
           
         }
  
-    
-    
+     
     
     if ( audio_frame.item.inPlaying) {
         
@@ -659,7 +598,6 @@
 
 
 #pragma mark - PLAYER
-
 
 - (ZFPlayerModel *)audioplayerModel {
     
@@ -755,21 +693,6 @@
     return _playerView;
 }
 
-- (void)reSetSectionAudio{
-    
-    SMHomeSectionModel *group = self.groups[0];
-    
-    for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
-        
-        SMAudioItemFrame *a_frame  =  group.items[p_index];
-        
-        a_frame.item.inPlaying = NO;
-        
-    }
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-}
-
 
 #pragma mark :  ZFPlayerDelegate
 /** 返回按钮事件 */
@@ -789,6 +712,21 @@
         
         [self reSetSectionAudio];
     }
+}
+
+- (void)reSetSectionAudio{
+
+    SMHomeSectionModel *group = self.groups[0];
+    
+    for (NSInteger p_index = 0; p_index < group.items.count; p_index++) {
+        
+        SMAudioItemFrame *a_frame  =  group.items[p_index];
+        
+        a_frame.item.inPlaying = NO;
+        
+    }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)zf_playerStateEndPlay:(ZFPlayerView *)playerView{
@@ -827,6 +765,77 @@
     
 }
 
+
+- (void)whenViewWillAppearWithPlayer{
+
+    // pop回来时候是否自动播放
+    if (self.playerView && self.isPlaying) {
+        
+        self.isPlaying = NO;
+        self.playerView.playerPushedOrPresented = NO;
+    }
+    
+    
+    
+    if (self.audioPlayerView && self.isPlaying_audio) {
+        
+        self.isPlaying_audio = NO;
+        self.audioPlayerView.playerPushedOrPresented = NO;
+    }
+    
+    
+    
+    //1 如果不存在，没有必要下一步操作
+    if (!self.detail) return;
+    
+    //2 判断登录状态是否改变
+    if (self.detail.islogin != LOGIN) {
+        
+        self.detail.islogin = LOGIN;
+        
+        [self makeTableViewHeaderWithDetailModel:self.detail];
+        
+        for (NSInteger index = 0; index < self.detail.audio.fragments.count ; index++) {
+            
+            SMAudioItem *item  = self.detail.audio.fragments[index];
+            //1 没登录时限制收听个数
+            if (!LOGIN && index < 2){
+                
+                //大于2个听前两个 小于两个全不可听
+                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
+            }
+            
+            //2 登录全可听
+            if (LOGIN)  item.isCanPlay = YES;
+            
+        }
+        
+        
+        
+        [self.tableView reloadData];
+        
+        
+        if (LOGIN && self.detail.has_video == NO)   self.playerView.userInteractionEnabled = YES;
+        
+        
+        if (LOGIN && self.detail.has_video == YES) {
+            
+            self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
+            [self.playerView resetToPlayNewVideo:self.playerModel];
+        }
+        
+    }
+
+    
+}
+
+- (void)toLoginView{
+
+   MyOfferLoginViewController *loginVC =[[MyOfferLoginViewController alloc] init];
+    loginVC.index = 1;
+    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:nav animated:YES completion:^{}];
+}
 
 - (void)dealloc{
 

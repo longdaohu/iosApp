@@ -10,4 +10,7 @@
 
 @interface MyOfferLoginViewController : BaseViewController
 
+@property(nonatomic,assign)NSInteger index;
+
+
 @end

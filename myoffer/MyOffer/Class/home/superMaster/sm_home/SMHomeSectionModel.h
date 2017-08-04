@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger,SMGroupType){
 @property(nonatomic,strong)NSArray *item_all;
 @property(nonatomic,assign)SMGroupType groupType;
 //是否显示全部
-@property(nonatomic,assign)BOOL showAll;
+@property(nonatomic,assign)BOOL show_All_data;
 //未显示全部时，限制展示几条数据
 @property(nonatomic,assign)NSInteger limit_count;
 

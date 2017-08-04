@@ -203,6 +203,10 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [self makeNotificationCenter];
     
     
+    //设置是否显示注册页面
+    if (self.index > 0) [self toRegistBtnOnClick:self.toRegistBtn];
+    
+    
 }
 
 
@@ -914,6 +918,12 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     
     [self.navigationController pushViewController:[[ForgetPWViewController alloc] init] animated:YES];
     
+
+}
+
+- (void)toRegistView{
+    
+    [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH, 0) animated:NO];
 
 }
 

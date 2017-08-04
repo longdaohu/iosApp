@@ -18,6 +18,8 @@
 @property(nonatomic,assign)CGFloat cv_Height;
 @property(nonatomic,assign)CGFloat title_X;
 @property(nonatomic,assign)BOOL show_push;
+@property(nonatomic,strong)CAShapeLayer *shaper;
+@property(nonatomic,strong)UIView *bgView;
 
 @end
 
@@ -73,18 +75,33 @@ static NSString *cv_identify = @"sm_cv_news";
     cView.showsHorizontalScrollIndicator = NO;
     [self.contentView addSubview:cView];
     cView.backgroundColor = XCOLOR_BG;
-    
     [cView registerClass:[SMNewsColViewCell class] forCellWithReuseIdentifier:cv_identify];
-
     
+    UIView *bgView = [UIView new];
+    self.bgView = bgView;
+    self.cView.backgroundView = bgView;
+    
+   
     UILabel *titleLab = [UILabel new];
     titleLab.text = @"释放查看全部";
     titleLab.numberOfLines = 0;
-    titleLab.font = [UIFont systemFontOfSize:18];
+    titleLab.font = [UIFont systemFontOfSize:FONTSIZE(16)];
     titleLab.textColor = XCOLOR_TITLE;
     self.titleLab = titleLab;
-    [self.contentView addSubview:titleLab];
+    [bgView  addSubview:titleLab];
     
+}
+
+- (CAShapeLayer *)shaper{
+
+    if (!_shaper) {
+        
+        _shaper =[CAShapeLayer layer];
+        [self.bgView.layer addSublayer:_shaper];
+        _shaper.fillColor = [UIColor colorWithWhite:0 alpha:0.3].CGColor;
+        
+    }
+    return _shaper;
 }
 
 
@@ -162,61 +179,78 @@ static NSString *cv_identify = @"sm_cv_news";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     if (self.titleLab.hidden) return;
-    
-    
+   
     CGFloat over_distance = self.cView.contentSize.width  - scrollView.contentOffset.x - scrollView.bounds.size.width;
-
-    if (over_distance < -10) {
     
-        self.titleLab.mj_x  =  self.title_X + over_distance;
+    CGFloat right_x = 0;
+    CGFloat right_max_w = 35;
+    
+    if (over_distance < 0) {
+        
+        CGFloat disctance = self.bgView.bounds.size.width + over_distance;
+  
+        if ( disctance < scrollView.bounds.size.width - right_max_w) {
+            right_x = self.title_X - right_max_w;
+            self.show_push = YES;
+        }else{
+            right_x = self.title_X + over_distance;
+            self.show_push = NO;
+        }
+        
+         self.titleLab.mj_x = right_x;
+        
+        
+        CGFloat path_x =  fabs(over_distance)  > right_max_w ? self.bgView.bounds.size.width - right_max_w * 2 : self.bgView.bounds.size.width + over_distance * 2;
+        
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        [path moveToPoint:CGPointMake(self.bgView.mj_w, 0)];
+        [path  addQuadCurveToPoint:CGPointMake(self.bgView.mj_w, self.bgView.mj_h) controlPoint:CGPointMake(path_x,self.bgView.mj_h *0.5)];
+        self.shaper.path = path.CGPath;
         
     }else{
     
-        self.titleLab.mj_x =  self.title_X;
-
-    }
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-  
-     if (self.titleLab.hidden) return;
-
-     if (scrollView.contentOffset.x + scrollView.bounds.size.width > self.cView.contentSize.width) {
-     
-        self.show_push = YES;
-
+        self.show_push = NO;
+        self.titleLab.mj_x = self.title_X;
+        self.shaper.path = nil;
      }
     
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
- 
-    if (self.titleLab.hidden) return;
 
-    if (self.show_push && self.actionBlock) {
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+  
+     if (self.titleLab.hidden || !self.show_push) return;
+    
+    if ( self.actionBlock) {
         
         self.actionBlock(nil,nil,YES);
-    
-        self.show_push = NO;
     }
     
 }
+
 
 
 - (void)layoutSubviews{
 
     [super layoutSubviews];
     
-    self.cView.frame = CGRectMake(0, 0,self.bounds.size.width,self.cv_Height);
+    CGSize contentSize = self.bounds.size;
+
+    self.cView.frame = CGRectMake(0, 0,contentSize.width,self.cv_Height);
     
-    if (CGRectContainsRect(CGRectZero, self.titleLab.frame)) {
-        
-        self.title_X = self.bounds.size.width + 30;
-        
-        self.titleLab.frame = CGRectMake(self.title_X, 0, 20, self.bounds.size.height);
-        
-     }
+    CGFloat bg_w = contentSize.width;
+    CGFloat bg_h = contentSize.height;
+    CGFloat bg_x = 0;
+    CGFloat bg_y = 0;
+    self.bgView.frame = CGRectMake(bg_x, bg_y, bg_w, bg_h);
+    
+    
+    CGFloat r_h = contentSize.height;
+    CGFloat r_x = contentSize.width + 15;
+    self.titleLab.frame = CGRectMake(r_x , 0, 20, r_h);
+    self.title_X = r_x;
+
+    
     
 }
 
