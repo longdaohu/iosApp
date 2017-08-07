@@ -38,8 +38,6 @@
 
     _topic = topic;
     
-    NSLog(@">>>>>>>>>>>>>> %@",topic.cover_path);
-    
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }

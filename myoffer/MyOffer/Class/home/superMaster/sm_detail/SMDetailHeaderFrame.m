@@ -78,20 +78,27 @@
                            NSParagraphStyleAttributeName : paragraphStyle
                            };
     
-    CGFloat intro_x =  title_x;
-    CGFloat intro_y =  CGRectGetMaxY(self.tagView_Frame) + padding;
-    CGFloat intro_w =  title_w;
-    CGSize intro_size = [detailModel.introduction KD_sizeWithAttribute:attr maxWidth:intro_w];
-    CGFloat intro_h =  intro_size.height;
-    self.intro_Frame = CGRectMake(intro_x, intro_y, intro_w, intro_h);
+    CGRect topFrame = self.tagView_Frame;
     
-    CGRect topFrame = self.intro_Frame;
+    if (detailModel.introduction.length > 0) {
+
+        CGFloat intro_x =  title_x;
+        CGFloat intro_y =  CGRectGetMaxY(topFrame) + padding;
+        CGFloat intro_w =  title_w;
+        CGSize intro_size = [detailModel.introduction KD_sizeWithAttribute:attr maxWidth:intro_w];
+        CGFloat intro_h =  intro_size.height;
+        self.intro_Frame = CGRectMake(intro_x, intro_y, intro_w, intro_h);
+        
+        topFrame = self.intro_Frame;
+        
+    }
+    
     
     // 5 注册按钮
     if (!detailModel.islogin) {
 
         CGFloat reginst_x =  title_x;
-        CGFloat reginst_y =  CGRectGetMaxY(self.intro_Frame) + padding;
+        CGFloat reginst_y =  CGRectGetMaxY(topFrame) + padding;
         CGFloat reginst_w =  title_w;
         CGFloat reginst_h =  40;
         self.regist_Frame = CGRectMake(reginst_x, reginst_y, reginst_w, reginst_h);

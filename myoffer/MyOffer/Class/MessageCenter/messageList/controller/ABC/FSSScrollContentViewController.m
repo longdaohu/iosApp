@@ -14,7 +14,6 @@
 #import "MessageCell.h"
 #import "XWGJMessageFrame.h"
 #import "MessageDetaillViewController.h"
-//#import "MessageCountryViewController.h"
 #import "MessageCountryTopicVController.h"
 
 @interface FSSScrollContentViewController ()<UITableViewDelegate,UITableViewDataSource>

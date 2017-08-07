@@ -180,7 +180,11 @@
     
     //1 清空子项
     [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+    //1 清空subViews所有数据选项
+    for (messageCatigroySubModel *catigroy_sub in catigory.subs) {
+        
+        catigroy_sub.isSelected = NO;
+    }
     
     CGFloat sub_W = 80;
     CGFloat sub_H = self.bottomView.mj_h;
@@ -230,6 +234,7 @@
         
         catigroy_sub.isSelected = NO;
     }
+    
     
     if (sender.tag != 0) {
         

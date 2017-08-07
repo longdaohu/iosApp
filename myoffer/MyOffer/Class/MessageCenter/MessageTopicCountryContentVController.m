@@ -32,7 +32,6 @@
     
     _group = group;
     
-//    NSLog(@" ageTopicCountryContentVCont ++++++++++ %@",group.parameters);
     
     [self.tableView reloadData];
 
@@ -40,8 +39,7 @@
     [self showEmpty];
     
     //2 提示加载信息
-    
-    [self promptShowWithCount:group.messageFrames.count];
+     [self promptShowWithCount:group.messageFrames.count];
     
 }
 

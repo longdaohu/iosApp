@@ -28,6 +28,14 @@
     
     CGFloat margin = 10.0;
     
+    if (tag.topic.count == 0 && tag.subject.count == 0) {
+    
+        self.cell_height = HEIGHT_ZERO;
+        
+        return;
+    }
+
+    
     CGFloat topic_w = XSCREEN_WIDTH - 20;
     CGFloat topic_x = margin;
     CGFloat topic_y = 0;
@@ -39,18 +47,28 @@
     CGRect  last_topic_frame = last_topic.CGRectValue;
     topic_h = CGRectGetMaxY(last_topic_frame);
     self.topicFrame = CGRectMake(topic_x, topic_y, topic_w, topic_h);
-
+    
+    BOOL topic_true = tag.topic.count > 0 ? YES : NO;
+    BOOL subject_true = tag.subject.count > 0 ? YES : NO;
+    
     
     CGFloat line_x = topic_x;
     CGFloat line_y = CGRectGetMaxY(self.topicFrame) + margin;
-    CGFloat line_w = topic_w;
+    CGFloat line_w = (topic_true && subject_true) ? topic_w : 0;
     CGFloat line_h = LINE_HEIGHT;
     self.lineFrame = CGRectMake(line_x, line_y, line_w, line_h);
-
     
+    CGRect top_rect =  self.lineFrame;
+    
+     if (!topic_true) {
+        
+         top_rect = CGRectZero;
+    }
+    
+ 
     
     CGFloat subject_x = topic_x;
-    CGFloat subject_y = CGRectGetMaxY(self.lineFrame) + margin;
+    CGFloat subject_y = CGRectGetMaxY(top_rect) + margin;
     CGFloat subject_w = topic_w;
     CGFloat subject_h = 0;
     self.subjectFrame = CGRectMake(subject_x, subject_y, subject_w, subject_h);
@@ -63,7 +81,13 @@
     self.subjectFrame = CGRectMake(subject_x, subject_y, subject_w, subject_h);
 
     
-    self.cell_height = CGRectGetMaxY(self.subjectFrame) + margin;
+    if ( subject_true) {
+        
+        top_rect =  self.subjectFrame;
+    }
+    
+ 
+    self.cell_height =  CGRectGetMaxY(top_rect) + margin;
     
 }
 

@@ -58,16 +58,24 @@
     CGFloat title_h = title_Size.height;
     self.title_Frame = CGRectMake(title_x, title_y, title_w, title_h);
     
+    
     CGFloat name_x = title_x;
-    CGFloat name_h = 14;
-    CGFloat name_y = CGRectGetMaxY(self.icon_Frame) - name_h;
     CGFloat name_w = [hot.guest_name KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]].width;
-    self.name_Frame = CGRectMake(name_x, name_y, name_w, name_h);
+    CGFloat name_h = 16;
+    CGFloat name_y = CGRectGetMaxY(self.icon_Frame) - name_h;
     
     CGFloat uni_y = name_y;
     CGFloat uni_w = [hot.guest_university KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]].width;
     CGFloat uni_h = name_h;
     CGFloat uni_x = CGRectGetMaxX(self.title_Frame) - uni_w;
+    
+    if (name_w + uni_w + Margin > title_w) {
+        
+        uni_x = name_w + name_x + Margin;
+        uni_w = CGRectGetMaxX(self.title_Frame) - uni_x;
+    }
+    
+    self.name_Frame = CGRectMake(name_x, name_y, name_w, name_h);
     self.uni_Frame = CGRectMake(uni_x, uni_y, uni_w, uni_h);
     
     

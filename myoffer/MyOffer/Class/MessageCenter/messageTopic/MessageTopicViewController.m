@@ -19,6 +19,7 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
 @property(nonatomic,strong)UIImageView *flexibleView;
+@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,assign)CGRect flexFrame_old;
 @property(nonatomic,assign)CGPoint flexCenter_old;
 @property(nonatomic,strong)NSMutableArray *messageFrames;
@@ -99,10 +100,24 @@
     
     [self.tableView reloadData];
     
-    self.topNavigationView.titleName = response[@"title"];
+    NSString *title = response[@"title"];
+    self.topNavigationView.titleName = title;
     NSString *path = response[@"cover_url"];
     [self.flexibleView sd_setImageWithURL:[NSURL URLWithString:path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
+    
+    
+    
+    
+    NSShadow *shadow=[[NSShadow alloc]init];
+    shadow.shadowBlurRadius= 3;//阴影的模糊程度
+    shadow.shadowColor= XCOLOR_BLACK;//阴影颜色
+    shadow.shadowOffset=CGSizeMake(2, 2);//阴影相对原来的偏移
+    NSDictionary* attrs =@{
+                           NSShadowAttributeName:shadow,//设置阴影，复制为一个NSShadow 的对象
+                           };
+    
+    self.titleLab.attributedText = [[NSAttributedString alloc] initWithString:title attributes:attrs];
     
 }
 
@@ -148,8 +163,6 @@
     
     UIImageView *flexibleView = [[UIImageView alloc] init];
     flexibleView.contentMode = UIViewContentModeScaleAspectFill;
-//    flexibleView.contentMode = UIViewContentModeScaleAspectFit;
-//    CGFloat iconHeight =  XSCREEN_WIDTH * flexibleView.image.size.height / flexibleView.image.size.width;
     flexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f));
     [self.view insertSubview:flexibleView belowSubview:self.tableView];
     self.flexibleView = flexibleView;
@@ -157,6 +170,13 @@
     self.flexCenter_old = flexibleView.center;
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:flexibleView.frame];
+    
+    self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, XSCREEN_WIDTH - 40,self.tableView.tableHeaderView.mj_h)];
+    self.titleLab.font = [UIFont systemFontOfSize:20];
+    self.titleLab.textColor = [UIColor whiteColor];
+    self.titleLab.textAlignment = NSTextAlignmentCenter;
+    self.titleLab.numberOfLines = 0;
+    [self.tableView.tableHeaderView addSubview:self.titleLab];
 
 }
 

@@ -161,13 +161,20 @@
 
 - (void)makeTableViewHeaderView{
 
+    
+    BOOL banners_true = self.smModel.banners.count > 0 ;
+    BOOL offline_true = [self.smModel.offline allKeys].count > 0;
+    
+    if (!banners_true && !offline_true)  return;
+     
     CGFloat header_Height = 0;
 
     UIView *header =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.mj_w, header_Height)];
     header.clipsToBounds = YES;
     
+
     //1 如果有banner
-    if (self.smModel.banners.count > 0 ) {
+    if (banners_true ) {
         
          self.autoLoopView.imageURLStringsGroup = [self.smModel.banners valueForKey:@"image_url_mc"];
       
@@ -185,7 +192,7 @@
     }
     
      //1 如果有最新线下活动
-    if ([self.smModel.offline allKeys].count > 0) {
+    if (offline_true) {
     
         header_Height  += self.onLineView.mj_h;
         
