@@ -108,7 +108,7 @@
     gest_Lab.font = [UIFont systemFontOfSize:12];
     [self addSubview:gest_Lab];
     gest_Lab.delegate = self;
- 
+
     
     UIView *bottomView = [UIView  new];
     bottomView.backgroundColor = XCOLOR_BG;
@@ -177,7 +177,6 @@
     NSAttributedString *audioAttribute = [NSAttributedString attributedStringWithAttachment:attach];
     
     [titleAttr insertAttributedString:audioAttribute atIndex:0];
-    
     self.titleLab.attributedText = titleAttr;
     
 
@@ -188,6 +187,9 @@
     NSMutableDictionary *huodong_attributes = [NSMutableDictionary dictionary];
     [huodong_attributes setValue:[UIFont systemFontOfSize:12]  forKey:NSFontAttributeName];
     [huodong_attributes setValue:paragraphStyle forKey:NSParagraphStyleAttributeName];
+    [huodong_attributes setValue:XCOLOR_SUBTITLE forKey:NSForegroundColorAttributeName];
+    
+    
     self.intro_Lab.attributedText = [[NSAttributedString alloc] initWithString:detail.introduction attributes:huodong_attributes];
   
  
@@ -203,15 +205,12 @@
         
         NSMutableAttributedString *more_attributeStr = [[NSMutableAttributedString alloc] initWithString:detail.guest_intr_short_sub attributes:nomal_attributes];
         [more_attributeStr setAttributes:huodong_attributes range:NSMakeRange(detail.guest_intr_short_sub.length - 4,4)];
-
-        
         self.gest_Lab.linkTextAttributes = @{NSForegroundColorAttributeName : XCOLOR_LIGHTBLUE};
         self.gest_Lab.attributedText = more_attributeStr;
         
     }
-
-    self.gest_Lab.textColor = XCOLOR_SUBTITLE;
-  
+    
+ 
 }
 
 

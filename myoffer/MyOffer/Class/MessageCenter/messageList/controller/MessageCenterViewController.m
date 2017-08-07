@@ -247,6 +247,7 @@
     self.headerViewController.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, MASSAGE_HEADER_HIGHT);
     self.headerViewController.header_Height = MASSAGE_HEADER_HIGHT;
     self.tableView.tableHeaderView = self.headerViewController.view;
+    self.headerViewController.contain_View = self.tableView;
     
 }
 
@@ -279,7 +280,8 @@
     NSArray *titles = [self.catigroies valueForKeyPath:@"name"];
     
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 60) titles:titles delegate:self indicatorType:FSIndicatorTypeEqualTitle];
-     
+    self.titleView.contain_View = tableView;
+    
     return self.titleView;
 }
 

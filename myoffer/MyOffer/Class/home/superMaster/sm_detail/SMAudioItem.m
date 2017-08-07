@@ -17,7 +17,7 @@
     
     NSInteger time_second = self.seconds_duration.integerValue;
     
-    _duration = [NSString stringWithFormat:@"时长：%ld:%ld",(long)time_second/60,(long)time_second%60];
+    _duration = [NSString stringWithFormat:@"时长：%ldm%lds",(long)time_second/60,(long)time_second%60];
     
     
 }

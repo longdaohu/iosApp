@@ -78,6 +78,9 @@ typedef enum : NSUInteger {
 //自定义移动了多少距离
 @property(nonatomic,assign)CGFloat progress;
 
+//FSSegmentTitleView 的父View
+@property(nonatomic,strong)UIView *contain_View;
+@property(nonatomic,assign)BOOL containView_scroll_enable;
 
 /**
  对象方法创建FSSegmentTitleView

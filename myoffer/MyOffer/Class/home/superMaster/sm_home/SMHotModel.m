@@ -48,7 +48,14 @@
     return [_ad_post_mc stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
+-  (NSString *)offline_path{
 
+    NSString *path = self.offline_url;
+    
+    if(![path hasPrefix:@"http"]) path = [NSString stringWithFormat:@"http://%@",path];
+    
+    return path;
+}
 
 - (NSString *)type_name{
 

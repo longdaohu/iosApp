@@ -10,4 +10,9 @@
 
 @implementation MessageHotTopicMedel
 
+- (NSString *)cover_path{
+    
+    return [_cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 @end

@@ -85,8 +85,8 @@
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
 //#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://120.76.78.88/"
-//#define DOMAINURL  @"http://www.myoffer.cn/"
+//#define DOMAINURL  @"http://120.76.78.88/"
+#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

@@ -330,10 +330,9 @@ static AppDelegate *__sharedDelegate;
     if (logout_date) {
         
         NSDate *now_date = [NSDate date];
-
-        NSInteger time_count = logout_date.integerValue - (NSInteger)now_date.timeIntervalSince1970 * 1000;
-        
-        if (time_count <= 0) [self logout];
+        NSInteger logout_time = logout_date.integerValue;
+        NSInteger current_time = (NSInteger)now_date.timeIntervalSince1970 * 1000;
+        if (logout_time <= current_time) [self logout];
  
     }
     
@@ -365,16 +364,15 @@ static AppDelegate *__sharedDelegate;
 }
 
 - (NSString *)accessToken {
-    
 
+    
     return _accessToken;
 }
 
 - (void)loadSavedToken {
     
     NSString *savedToken = [[NSString alloc] initWithData:[Keychain keychainItemDataWithIdentifier:@"token"] encoding:NSUTF8StringEncoding];
-
-
+ 
     if (KDUtilIsStringValid(savedToken)) { 
         
           _accessToken = savedToken;

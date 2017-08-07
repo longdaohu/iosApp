@@ -317,7 +317,7 @@
     
     if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
         
-        [self safariWithPath:hot_frame.hot.offline_url];
+        [self safariWithPath:hot_frame.hot.offline_path];
         
         return;
     }
@@ -355,6 +355,7 @@
 
 
 - (void)safariWithPath:(NSString *)path{
+    
     
     [[UIApplication sharedApplication ] openURL:[NSURL URLWithString:path]];
     

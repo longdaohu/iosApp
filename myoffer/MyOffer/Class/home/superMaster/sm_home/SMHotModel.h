@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger,SMMessageType){
 @property(nonatomic,copy)NSString *guest_university;
 @property(nonatomic,copy)NSString *main_title;
 @property(nonatomic,copy)NSString *offline_url;
+@property(nonatomic,copy)NSString *offline_path;
 @property(nonatomic,copy)NSString *short_id;
 @property(nonatomic,copy)NSString *message_id;
 @property(nonatomic,copy)NSString *type;

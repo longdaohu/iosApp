@@ -38,7 +38,9 @@
 
     _topic = topic;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    NSLog(@">>>>>>>>>>>>>> %@",topic.cover_path);
+    
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     
 }
 

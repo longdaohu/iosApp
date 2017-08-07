@@ -257,7 +257,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     [self.lockBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.mas_leading).offset(15);
         make.centerY.equalTo(self.mas_centerY);
-        make.width.height.mas_equalTo(32);
+        make.width.height.mas_equalTo(50);
     }];
     
     [self.repeatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -814,7 +814,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     
     if (!_repeatLab) {
         _repeatLab = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_repeatLab setTitle:@"重播" forState:UIControlStateNormal];
+        [_repeatLab setTitle:@"重新播放" forState:UIControlStateNormal];
         _repeatLab.titleLabel.font = [UIFont systemFontOfSize:16];
         [_repeatLab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
@@ -832,7 +832,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
         [_audioNotiBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
         _audioNotiBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_audioNotiBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        _audioNotiBtn.alpha = 0;
+ 
     }
     
     return _audioNotiBtn;

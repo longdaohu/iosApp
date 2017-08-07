@@ -617,7 +617,6 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     }
  
     
-    
     [self
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {

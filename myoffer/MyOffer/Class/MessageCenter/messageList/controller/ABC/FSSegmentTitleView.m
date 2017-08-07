@@ -8,9 +8,7 @@
 
 #import "FSSegmentTitleView.h"
 
-@interface FSSegmentTitleView ()
-
-
+@interface FSSegmentTitleView ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -219,6 +217,7 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.scrollsToTop = NO;
+        _scrollView.delegate = self;
         [self addSubview:_scrollView];
     }
     return _scrollView;
@@ -371,6 +370,46 @@
     NSDictionary *attrs = @{NSFontAttributeName : font};
     return [string boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size.width;
 }
+
+
+#pragma mark UIScrollViewDelegate
+
+//当将要拖拽scrollView时触发,手指结束scrollView并且将要滑动时触发
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    
+    if ([_contain_View isKindOfClass:[UITableView class]]) {
+        
+        UITableView *tableView = (UITableView *)_contain_View;
+        
+        self.containView_scroll_enable = tableView.scrollEnabled;
+        
+        if (tableView.scrollEnabled) {
+            
+            tableView.scrollEnabled = NO;
+            
+        }
+        
+    }
+}
+
+//当结束拖拽时触发(手指将要离开屏幕)
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    if ([_contain_View isKindOfClass:[UITableView class]]) {
+        
+        UITableView *tableView = (UITableView *)_contain_View;
+        
+        if (!tableView.scrollEnabled) {
+            
+            tableView.scrollEnabled = self.containView_scroll_enable;
+
+        }
+        
+        
+    }
+
+}
+
 
 
 

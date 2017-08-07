@@ -482,7 +482,7 @@
             
             if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
                 
-                [self safariWithPath:hot_frame.hot.offline_url];
+                [self safariWithPath:hot_frame.hot.offline_path];
                 
                 return;
                 
@@ -705,8 +705,7 @@
 //点击播放事件
 - (void)zf_playerDidClickPlay{
     
-    
-    if (self.audioPlayerView.state == ZFPlayerStatePlaying ) {
+    if (self.playerView.state == ZFPlayerStatePlaying && self.audioPlayerView.state == ZFPlayerStatePlaying) {
         
         [self.audioPlayerView pause];
         
@@ -781,17 +780,17 @@
         
         self.isPlaying_audio = NO;
         self.audioPlayerView.playerPushedOrPresented = NO;
+        
     }
-    
-    
     
     //1 如果不存在，没有必要下一步操作
     if (!self.detail) return;
+  
     
     //2 判断登录状态是否改变
     if (self.detail.islogin != LOGIN) {
         
-        self.detail.islogin = LOGIN;
+        self.detail.islogin = LOGIN ? YES : NO;
         
         [self makeTableViewHeaderWithDetailModel:self.detail];
         
@@ -811,21 +810,31 @@
         }
         
         
-        
         [self.tableView reloadData];
         
+        if (!LOGIN) return;
         
-        if (LOGIN && self.detail.has_video == NO)   self.playerView.userInteractionEnabled = YES;
+        if (self.detail.has_video == NO){
         
+            self.playerView.userInteractionEnabled = YES;
+            
+        }else{
         
-        if (LOGIN && self.detail.has_video == YES) {
+            //如果 self.audioPlayerView.state 正在播
             
             self.playerModel.videoURL    =  [NSURL URLWithString:self.detail.video_url];
+           
             [self.playerView resetToPlayNewVideo:self.playerModel];
+            
+            if (self.audioPlayerView.state == ZFPlayerStatePlaying)  [self.playerView pause];
+            
+            
         }
         
+    
+        
     }
-
+ 
     
 }
 
