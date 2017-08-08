@@ -56,16 +56,16 @@ static NSString *identify = @"sm_hot";
     [self.contentView addSubview:iconView];
     iconView.clipsToBounds = YES;
     
-    UIImageView *playIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sm_play_cell"]];
-    self.playIV = playIV;
-    playIV.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:playIV];
-    
     UIImageView *tagIV = [[UIImageView alloc] init];
     self.tagIV = tagIV;
     tagIV.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:tagIV];
 
+    UIImageView *playIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sm_play_cell"]];
+    self.playIV = playIV;
+    playIV.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:playIV];
+    
     
     UILabel *titleLab = [[UILabel alloc] init];
     self.titleLab = titleLab;

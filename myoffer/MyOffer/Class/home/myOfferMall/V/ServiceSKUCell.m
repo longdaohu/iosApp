@@ -70,7 +70,7 @@
     UIImageView *coverView = [[UIImageView alloc] init];
     coverView.contentMode = UIViewContentModeScaleAspectFill;
     self.coverView = coverView;
-    coverView.clipsToBounds = YES;
+//    coverView.clipsToBounds = YES;
     [self addImageView:coverView];
     
     // 2 、 折图片

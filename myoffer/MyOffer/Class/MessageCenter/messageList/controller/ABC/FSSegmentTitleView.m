@@ -7,10 +7,11 @@
 //
 
 #import "FSSegmentTitleView.h"
+#import "CatigaryScrollView.h"
 
 @interface FSSegmentTitleView ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) CatigaryScrollView *scrollView;
 
 @property (nonatomic, strong) NSMutableArray<UIButton *> *itemBtnArr;
 
@@ -213,7 +214,7 @@
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
+        _scrollView = [[CatigaryScrollView alloc] init];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.scrollsToTop = NO;

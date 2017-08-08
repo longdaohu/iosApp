@@ -26,7 +26,7 @@
     
     CGFloat icon_x = Margin;
     CGFloat icon_y = Margin;
-    CGFloat icon_w = 90 * SCREEN_SCALE;
+    CGFloat icon_w = 100 * SCREEN_SCALE;
     CGFloat icon_h = icon_w * 184 / 270.0;
     self.icon_Frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
     

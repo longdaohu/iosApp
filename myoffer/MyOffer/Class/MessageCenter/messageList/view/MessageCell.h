@@ -17,4 +17,6 @@
 
 - (void)separatorLinePaddingShow:(BOOL)show;
 
+- (void)tagsShow:(BOOL)show;
+
 @end

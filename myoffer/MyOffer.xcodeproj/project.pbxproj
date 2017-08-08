@@ -118,6 +118,8 @@
 		AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F61D5C929500FFD5A8 /* UIScrollView+MJRefresh.m */; };
 		AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */; };
 		AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */; };
+		AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2093871F3970100078DCBB /* myOfferCollectionView.m */; };
+		AE20938B1F398EA40078DCBB /* myofferFlexibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20938A1F398EA40078DCBB /* myofferFlexibleView.m */; };
 		AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2286281E715BB500E6E5CD /* PromttViewController.m */; };
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
@@ -672,6 +674,10 @@
 		AE1FD6F81D5C929500FFD5A8 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		AE1FD76E1D5C957C00FFD5A8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		AE1FD76F1D5C957C00FFD5A8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AE2093861F3970100078DCBB /* myOfferCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myOfferCollectionView.h; sourceTree = "<group>"; };
+		AE2093871F3970100078DCBB /* myOfferCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myOfferCollectionView.m; sourceTree = "<group>"; };
+		AE2093891F398EA40078DCBB /* myofferFlexibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferFlexibleView.h; sourceTree = "<group>"; };
+		AE20938A1F398EA40078DCBB /* myofferFlexibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferFlexibleView.m; sourceTree = "<group>"; };
 		AE2286271E715BB500E6E5CD /* PromttViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromttViewController.h; sourceTree = "<group>"; };
 		AE2286281E715BB500E6E5CD /* PromttViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromttViewController.m; sourceTree = "<group>"; };
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
@@ -2043,6 +2049,8 @@
 				AE4B2E341F1E095600E328F7 /* ABC */,
 				AE4B2E401F1E095600E328F7 /* MessageCenterViewController.h */,
 				AE4B2E411F1E095600E328F7 /* MessageCenterViewController.m */,
+				AE2093861F3970100078DCBB /* myOfferCollectionView.h */,
+				AE2093871F3970100078DCBB /* myOfferCollectionView.m */,
 				AE4B2E421F1E095600E328F7 /* MessageHotTopicMedel.h */,
 				AE4B2E431F1E095600E328F7 /* MessageHotTopicMedel.m */,
 				AE4B2E441F1E095600E328F7 /* MessageTopiccGroup.h */,
@@ -3424,6 +3432,8 @@
 				AEA24BE01D5B266A00DD7939 /* XUButton.m */,
 				AEA24BE11D5B266A00DD7939 /* XUToolbar.h */,
 				AEA24BE21D5B266A00DD7939 /* XUToolbar.m */,
+				AE2093891F398EA40078DCBB /* myofferFlexibleView.h */,
+				AE20938A1F398EA40078DCBB /* myofferFlexibleView.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -4188,6 +4198,7 @@
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
 				AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */,
+				AE20938B1F398EA40078DCBB /* myofferFlexibleView.m in Sources */,
 				AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */,
 				463E3AAC1B23105F00E0BAF8 /* KDImageCache.m in Sources */,
 				AEA24AA31D5B23F600DD7939 /* GongLueItemCell.m in Sources */,
@@ -4213,6 +4224,7 @@
 				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
+				AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */,
 				AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */,
 				AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,

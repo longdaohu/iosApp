@@ -15,6 +15,7 @@
 #import "EmallCatigroyHeaderView.h"
 #import "EmallCatigoryGroup.h"
 #import "EmallCatigroySectionView.h"
+#import "myofferFlexibleView.h"
 
 @interface EmallCatigoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
@@ -23,9 +24,9 @@
 @property(nonatomic,copy)NSString *current_Service;
 @property(nonatomic,strong)NSArray *current_frames;
 //<!---- 顶部下拉图片
-@property(nonatomic,strong)UIImageView *flexView;
-@property(nonatomic,assign)CGRect flexFrame;
-@property(nonatomic,assign)CGPoint flexCenter;
+@property(nonatomic,strong)myofferFlexibleView *flexView;
+//@property(nonatomic,assign)CGRect flexFrame;
+//@property(nonatomic,assign)CGPoint flexCenter;
 // 顶部下拉图片---->
 //<！--工具条
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
@@ -136,20 +137,15 @@
         contry_img = @"emall_AU";
     }
     
-    
     UIImage *FlexibleImg = XImage(contry_img);
-    UIImageView *FlexibleView = [[UIImageView alloc] init];
-    FlexibleView.contentMode = UIViewContentModeScaleAspectFit;
-    FlexibleView.image = FlexibleImg;
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-    FlexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, iconHeight);
-    [self.view insertSubview:FlexibleView belowSubview:self.tableView];
-    self.flexView = FlexibleView;
-    self.flexFrame = self.flexView.frame;
-    self.flexCenter = FlexibleView.center;
+    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
+    [self.view insertSubview:flexView belowSubview:self.tableView];
+    self.flexView = flexView;
+    flexView.image_name = contry_img;
+    [self.view insertSubview:flexView belowSubview:self.tableView];
     
     [self maketableViewHeaderWithHeight:iconHeight];
-
     
 }
 
@@ -340,27 +336,9 @@
     }
     self.banView.frame = banNewRect;
     
-    
-    
     //下拉图片处理
-    if (offersetY > 0) {
-        
-        
-        self.flexView.frame = self.flexFrame;
-        self.flexView.mj_y = -offersetY;
-        
-        return;
-    }
+    [self.flexView flexWithContentOffsetY:offersetY];
     
-    CGRect newRect = self.flexFrame;
-    
-    newRect.size.height = self.flexFrame.size.height - offersetY * 2;
-    
-    newRect.size.width  = self.flexFrame.size.width * newRect.size.height / self.flexFrame.size.height;
-  
-    self.flexView.frame = newRect;
-    
-    self.flexView.center = self.flexCenter;
     
 }
 

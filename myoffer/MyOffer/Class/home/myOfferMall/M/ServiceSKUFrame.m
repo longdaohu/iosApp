@@ -37,7 +37,7 @@
     //cover图片
     CGFloat    coverX = Margin;
     CGFloat    coverY = Margin;
-    CGFloat    coverW = 90 * SCREEN_SCALE;
+    CGFloat    coverW = 100 * SCREEN_SCALE;
     CGFloat    coverH = coverW * 184 / 270.0;
     self.cover_Frame = CGRectMake(coverX, coverY, coverW, coverH);
     

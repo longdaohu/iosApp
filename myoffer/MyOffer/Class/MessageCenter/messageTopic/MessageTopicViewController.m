@@ -13,12 +13,13 @@
 #import "MessageDetaillViewController.h"
 #import "UniversityNavView.h"
 #import "XWGJMessageFrame.h"
+#import "myofferFlexibleView.h"
 
 
 @interface MessageTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
-@property(nonatomic,strong)UIImageView *flexibleView;
+@property(nonatomic,strong)myofferFlexibleView *flexView;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,assign)CGRect flexFrame_old;
 @property(nonatomic,assign)CGPoint flexCenter_old;
@@ -100,12 +101,11 @@
     
     [self.tableView reloadData];
     
+    
     NSString *title = response[@"title"];
     self.topNavigationView.titleName = title;
-    NSString *path = response[@"cover_url"];
-    [self.flexibleView sd_setImageWithURL:[NSURL URLWithString:path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
     
+    self.flexView.image_url = response[@"cover_url"];
     
     
     
@@ -124,8 +124,8 @@
 - (void)makeUI{
 
     [self makeTableView];
-    [self makeTopNavigaitonView];
     [self makeFlexiableView];
+    [self makeTopNavigaitonView];
     self.view.clipsToBounds = YES;
     
 }
@@ -160,19 +160,15 @@
 //头部下拉图片
 - (void)makeFlexiableView{
     
+    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f))];
+    [self.view insertSubview:flexView belowSubview:self.tableView];
+    self.flexView = flexView;
+ 
     
-    UIImageView *flexibleView = [[UIImageView alloc] init];
-    flexibleView.contentMode = UIViewContentModeScaleAspectFill;
-    flexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f));
-    [self.view insertSubview:flexibleView belowSubview:self.tableView];
-    self.flexibleView = flexibleView;
-    self.flexFrame_old = self.flexibleView.frame;
-    self.flexCenter_old = flexibleView.center;
-    
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:flexibleView.frame];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:flexView.frame];
     
     self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, XSCREEN_WIDTH - 40,self.tableView.tableHeaderView.mj_h)];
-    self.titleLab.font = [UIFont systemFontOfSize:20];
+    self.titleLab.font = [UIFont systemFontOfSize:KDUtilSize(20)];
     self.titleLab.textColor = [UIColor whiteColor];
     self.titleLab.textAlignment = NSTextAlignmentCenter;
     self.titleLab.numberOfLines = 0;
@@ -181,8 +177,8 @@
 }
 
 
--(void)makeTableView
-{
+-(void)makeTableView{
+    
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -211,6 +207,8 @@
     
     cell.messageFrame = self.messageFrames[indexPath.row];
     
+    [cell tagsShow:NO];
+    
     [cell separatorLineShow:(self.messageFrames.count - 1 == indexPath.row)];
     
     return cell;
@@ -235,29 +233,14 @@
     CGFloat offersetY =  scrollView.contentOffset.y;
     
     //导航栏显示隐藏
-    [self.topNavigationView scrollViewContentoffset:offersetY  andContenHeight:self.flexibleView.bounds.size.height - XNAV_HEIGHT];
+    [self.topNavigationView scrollViewContentoffset:offersetY  andContenHeight:self.flexView.bounds.size.height - XNAV_HEIGHT];
     
-    self.topNavigationView.nav_Alpha =  offersetY / (self.flexibleView.bounds.size.height - XNAV_HEIGHT);
+    self.topNavigationView.nav_Alpha =  offersetY / (self.flexView.bounds.size.height - XNAV_HEIGHT);
     
-    //下拉图片处理
-    if (offersetY > 0) {
-        
-        self.flexibleView.frame = self.flexFrame_old;
-        
-        self.flexibleView.mj_y = -offersetY;
-        
-        return;
-    }
+ 
     
-    CGRect newRect = self.flexFrame_old;
+    [self.flexView flexWithContentOffsetY:offersetY];
     
-    newRect.size.height = self.flexFrame_old.size.height - offersetY * 2;
-    
-    newRect.size.width  = self.flexFrame_old.size.width * newRect.size.height / self.flexFrame_old.size.height;
-    
-    self.flexibleView.frame = newRect;
-    
-    self.flexibleView.center = self.flexCenter_old;
 }
 
 - (void)dealloc{

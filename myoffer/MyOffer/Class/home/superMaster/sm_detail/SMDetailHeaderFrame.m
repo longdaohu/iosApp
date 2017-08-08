@@ -60,14 +60,30 @@
         CGSize   tagSize = [tagStr KD_sizeWithAttributeFont:[UIFont systemFontOfSize:12]];
         CGFloat  tag_w = tagSize.width + 10;
         tag_x += tag_tmp;
+        
+        if (tag_x + tag_w > tags_w){
+            
+            tag_x = 0;
+            tag_tmp = 0;
+            tag_y = tags_h + Margin;
+         }
+        
         CGRect tag_Frame = CGRectMake(tag_x,tag_y, tag_w, tag_h);
+        
+        [tags_temp addObject:[NSValue valueWithCGRect:tag_Frame]];
+        
         tag_tmp = tag_w + Margin;
-        if (tag_x + tag_w > tags_w) return;
-         [tags_temp addObject:[NSValue valueWithCGRect:tag_Frame]];
+
     }
     
     self.tag_frames = [tags_temp copy];
     
+    if (tag_y > tags_h) {
+    
+        self.tagView_Frame = CGRectMake(tags_x, tags_y, tags_w, tags_h + tag_y);
+    }
+    
+
     
     
     //4 活动介绍

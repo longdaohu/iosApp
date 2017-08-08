@@ -312,6 +312,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    
     //1 数据为空时，其他步骤操作没有意义
     if (self.catigroies.count == 0) return;
     

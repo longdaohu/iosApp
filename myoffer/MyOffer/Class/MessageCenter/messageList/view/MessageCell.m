@@ -154,7 +154,10 @@
     self.bottom_line.mj_x =  show ? self.titleLab.mj_x : 0;
 }
 
+- (void)tagsShow:(BOOL)show{
 
+    self.tag_Btn.hidden = !show;
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

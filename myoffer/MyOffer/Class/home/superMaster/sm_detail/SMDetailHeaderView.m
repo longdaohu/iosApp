@@ -52,7 +52,7 @@
     UIView *tagsView = [UIView new];
     self.tagsView = tagsView;
     [self addSubview:tagsView];
-    
+//    tagsView.backgroundColor = XCOLOR_RED;
     //3 活动介绍
     UILabel *intro_Lab = [UILabel new];
     self.intro_Lab = intro_Lab;
@@ -124,7 +124,7 @@
     SMDetailMedol *detail = header_frame.detailModel;
 
     
-    for (NSInteger index = 0 ; index < detail.tags.count; index++) {
+    for (NSInteger index = 0 ; index < header_frame.tag_frames.count; index++) {
         
         NSValue *tagValue =header_frame.tag_frames[index];
         

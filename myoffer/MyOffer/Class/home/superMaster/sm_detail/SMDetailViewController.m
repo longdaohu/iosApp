@@ -208,8 +208,7 @@
     
     [self.tableView reloadData];
 
-    
-//    NSString *path = self.detail.has_video ?  @"http://183.2.196.1/video19.ifeng.com/video09/2015/12/15/3730900-102-096-1631.mp4"  : self.detail.audio.file_url;
+ 
     
     NSString *path = @"";
     

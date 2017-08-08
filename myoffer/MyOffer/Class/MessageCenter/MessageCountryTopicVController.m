@@ -188,7 +188,6 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-//        [MBProgressHUD showError:@"网络请求失败" toView:self.view];
         
         [weakSelf dismiss];
         

@@ -16,15 +16,17 @@
 #import "ApplyViewController.h"
 #import "UniversityNavView.h"
 #import "GonglueItem.h"
+#import "myofferFlexibleView.h"
 
 @interface GongLueViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 //弹性图片
-@property(nonatomic,strong)UIImageView *FlexibleImageView;
-//弹性图片初始Rect
-@property(nonatomic,assign)CGRect   oldFlexibleViewRect;
-//弹性图片初始Center
-@property(nonatomic,assign)CGPoint  oldFlexibleViewCenter;
+@property(nonatomic,strong)myofferFlexibleView *flexView;
+//@property(nonatomic,strong)UIImageView *FlexibleImageView;
+////弹性图片初始Rect
+//@property(nonatomic,assign)CGRect   oldFlexibleViewRect;
+////弹性图片初始Center
+//@property(nonatomic,assign)CGPoint  oldFlexibleViewCenter;
 //用于判断用户是否已登录且有推荐院校数据
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //自定义TableViewHeaderView
@@ -97,50 +99,45 @@
 //头部图片
 -(void)makeFlexibleImageView
 {
-    UIImageView *FlexibleImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
-    FlexibleImageView.clipsToBounds = true;
-    self.FlexibleImageView = FlexibleImageView;
-    FlexibleImageView.contentMode = UIViewContentModeScaleAspectFit;
-    FlexibleImageView.clipsToBounds = YES;
-    FlexibleImageView.alpha = 0.1;
-    [self.view insertSubview:FlexibleImageView belowSubview:self.tableView];
-
     
-    [FlexibleImageView sd_setImageWithURL:[NSURL URLWithString:self.gonglue.cover]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    myofferFlexibleView *flexView = [[myofferFlexibleView alloc] init];
+    [self.view insertSubview:flexView belowSubview:self.tableView];
+    self.flexView = flexView;
+    flexView.alpha = 0.1;
+    XWeakSelf
+
+    NSString *path = [self.gonglue.cover  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self.flexView.coverView sd_setImageWithURL:[NSURL URLWithString: path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
-        [self flexibleViewWithImage:image];
+        CGFloat image_height = XSCREEN_WIDTH * image.size.height/image.size.width;
+        
+        [weakSelf flexWithHeight:image_height];
+        
     }];
     
-
+    
 }
 
-
-- (void)flexibleViewWithImage:(UIImage *)image{
-
+- (void)flexWithHeight:(CGFloat )height{
     
-    self.FlexibleImageView.mj_h =  self.FlexibleImageView.mj_w * image.size.height / image.size.width;
     
-    self.oldFlexibleViewRect = self.FlexibleImageView.frame;
+    self.flexView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height);
     
-    self.oldFlexibleViewCenter = self.FlexibleImageView.center;
-    
-    [UIView transitionWithView:self.FlexibleImageView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:self.flexView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
-        self.FlexibleImageView.alpha = 1;
+        self.flexView.alpha = 1;
         
     } completion:^(BOOL finished) {
         
     }];
     
-    
-    GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, self.FlexibleImageView.mj_h)];
-    headerView.top_View_Height = self.FlexibleImageView.mj_h;
+    GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, height)];
+    headerView.top_View_Height = height;
     headerView.gonglue = self.gonglue;
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
-    
-    
 }
+
 
 //自定义导航栏
 -(void)makeTopNavigaitonView{
@@ -234,9 +231,10 @@
 {
     CGFloat offsetY = scrollView.contentOffset.y;
     
+    if (self.flexView.mj_h == 0) return;
  
     //1 顶部自定义导航栏
-    [self.topNavigationView  scrollViewForGongLueViewContentoffsetY:offsetY  andHeight:self.FlexibleImageView.mj_h - XNAV_HEIGHT];
+    [self.topNavigationView  scrollViewForGongLueViewContentoffsetY:offsetY  andHeight:self.flexView.mj_h - XNAV_HEIGHT];
    
     //2 自定义tableHeaderView
     [self.headerView scrollViewDidScrollWithcontentOffsetY:offsetY];
@@ -244,31 +242,8 @@
      //3 顶部自定义导航栏透明度
     self.topNavigationView.nav_Alpha = self.headerView.nav_Alpha;
     
-    
-    //下拉图片处理
-    if (offsetY > 0) {
-        
-        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-            
-            self.FlexibleImageView.frame = self.oldFlexibleViewRect;
-            
-            self.FlexibleImageView.center = self.oldFlexibleViewCenter;
-            
-        }];
-        
-        
-        return;
-    }
-    
-    CGRect newRect = self.oldFlexibleViewRect;
-    
-    newRect.size.height = self.oldFlexibleViewRect.size.height - offsetY * 2;
-    
-    newRect.size.width  = self.oldFlexibleViewRect.size.width * newRect.size.height / self.oldFlexibleViewRect.size.height;
-    
-    self.FlexibleImageView.frame = newRect;
-    
-    self.FlexibleImageView.center = self.oldFlexibleViewCenter;
+    //4 下拉图片处理
+    [self.flexView flexWithContentOffsetY:offsetY];
     
     
 }

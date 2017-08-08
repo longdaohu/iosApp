@@ -13,6 +13,7 @@
 #import "UniversityNavView.h"
 #import "ServiceItemBottomView.h"
 #import "ServiceProtocolViewController.h"
+#import "myofferFlexibleView.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
 //显示内容信息 webView
@@ -21,13 +22,8 @@
 @property(nonatomic,strong)UITableView *tableView;
 //tableHeaderView
 @property(nonatomic,strong) ServiceItemHeaderView *headerView;
-
-// < !--头部图片
-@property(nonatomic,strong)UIImageView *flexView;
-@property(nonatomic,assign)CGRect flexFrame;
-@property(nonatomic,assign)CGPoint flexCenter;
-// 头部图片 -->
-
+//头部图片
+@property(nonatomic,strong)myofferFlexibleView *flexView;
 //顶部View
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
 //底部View
@@ -86,19 +82,28 @@
 
 - (void)makeFlexibeView{
     
+    
     UIImage *FlexibleImg = XImage(@"service-info-bg");
-    UIImageView *FlexibleView = [[UIImageView alloc] init];
-    FlexibleView.contentMode = UIViewContentModeScaleAspectFit;
-    FlexibleView.image = FlexibleImg;
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
+    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
+    [self.view insertSubview:flexView belowSubview:self.tableView];
+    self.flexView = flexView;
+    flexView.image_name = @"service-info-bg";
     
-    FlexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, iconHeight);
-    [self.view insertSubview:FlexibleView belowSubview:self.tableView];
-    self.flexView = FlexibleView;
-    self.flexFrame = self.flexView.frame;
-    self.flexCenter = FlexibleView.center;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(self.flexFrame.size.height - 60, 0, 80, 0);
+//    UIImage *FlexibleImg = XImage(@"service-info-bg");
+//    UIImageView *FlexibleView = [[UIImageView alloc] init];
+//    FlexibleView.contentMode = UIViewContentModeScaleAspectFit;
+//    FlexibleView.image = FlexibleImg;
+//    CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
+//    
+//    FlexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, iconHeight);
+//    [self.view insertSubview:FlexibleView belowSubview:self.tableView];
+//    self.flexView = FlexibleView;
+//    self.flexFrame = self.flexView.frame;
+//    self.flexCenter = FlexibleView.center;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(iconHeight - 60, 0, 80, 0);
     
 }
 
@@ -301,36 +306,13 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offersetY =  scrollView.contentOffset.y +  (self.flexFrame.size.height - 60);
+    CGFloat offersetY =  scrollView.contentOffset.y +  (self.flexView.bounds.size.height - 60);
     
     //3 顶部自定义导航栏透明度
-    [self.topNavigationView scrollViewContentoffset:offersetY andContenHeight:self.flexFrame.size.height - XNAV_HEIGHT];
-     self.topNavigationView.nav_Alpha =  offersetY /  (self.flexFrame.size.height - XNAV_HEIGHT);
+    [self.topNavigationView scrollViewContentoffset:offersetY andContenHeight:self.flexView.bounds.size.height - XNAV_HEIGHT];
+     self.topNavigationView.nav_Alpha =  offersetY /  (self.flexView.bounds.size.height - XNAV_HEIGHT);
 
-    
-    if (offersetY > 0) {
-        
-        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-            
-            self.flexView.frame = self.flexFrame;
-            
-            self.flexView.center = self.flexCenter;
-            
-        }];
-        
-        
-        return;
-    }
-    
-    CGRect newRect = self.flexFrame;
-    
-    newRect.size.height = self.flexFrame.size.height - offersetY * 2;
-    
-    newRect.size.width  = self.flexFrame.size.width * newRect.size.height / self.flexFrame.size.height;
-    
-    self.flexView.frame = newRect;
-    
-    self.flexView.center = self.flexCenter;
+    [self.flexView flexWithContentOffsetY:offersetY];
     
 }
 

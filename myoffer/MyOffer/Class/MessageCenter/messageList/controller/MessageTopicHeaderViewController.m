@@ -11,11 +11,12 @@
 #import "MessageHotTopicMedel.h"
 #import "CatigaryCityCollectionCell.h"
 #import "MessageTopicViewController.h"
+#import "myOfferCollectionView.h"
 
 
 @interface MessageTopicHeaderViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property(nonatomic,strong)MyofferSectionView *sectionView;
-@property(nonatomic,strong)UICollectionView *collectionView;
+@property(nonatomic,strong)myOfferCollectionView *collectionView;
 @property(nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
 
 @end
@@ -41,7 +42,7 @@ static NSString * const reuseIdentifier = @"cityCell";
     flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flow.sectionInset = UIEdgeInsetsZero;
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flow];
+    myOfferCollectionView *collectionView = [[myOfferCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flow];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CatigaryCityCollectionCell class] ) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
