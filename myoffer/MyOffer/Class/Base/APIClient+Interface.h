@@ -125,6 +125,8 @@
 #define kAPISelectorMyofferMall @"GET api/emall/app/index"
 //资讯专题
 #define kAPISelectorArticleCatigoryIndex @"GET api/article/category/index"
+//资讯热门专题
+#define kAPISelectorArticleTopic @"GET api/topic/"
 //超级导师
 #define kAPISelectorSuperMasterHome @"GET api/sm/index"
 //超级导师详情

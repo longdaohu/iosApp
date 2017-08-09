@@ -32,6 +32,8 @@
 #import "ZFPlayer.h"
 
 
+#define Limit_Count_NoLogin 2
+ 
 @interface SMDetailViewController ()<UITableViewDelegate,UITableViewDataSource,ZFPlayerDelegate>
 @property(nonatomic,strong)SMDetailMedol *detail;
 @property(nonatomic,strong)SMDetailHeaderFrame *detail_Frame;
@@ -110,9 +112,7 @@
 
 #pragma mark : 网络请求
 - (void)makeData{
-
-    
-
+ 
     [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",kAPISelectorSuperMasterDetail,self.message_id] parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [self updateUIWithResponse:response];
@@ -144,10 +144,10 @@
         for (SMAudioItem *item in self.detail.audio.fragments){
             
             //1 没登录时限制收听个数
-            if (!LOGIN && audio_temp.count < 2){
+            if (!LOGIN && audio_temp.count < Limit_Count_NoLogin){
             
                 //大于2个听前两个 小于两个全不可听
-                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
+                item.isCanPlay = (self.detail.audio.fragments.count > Limit_Count_NoLogin) ? YES : NO;
             }
             
             //2 登录全可听
@@ -158,6 +158,7 @@
             
             [audio_temp addObject:audioFrame];
         }
+        
         
         //3 展示部分，点击显示全部，再展示全部
         SMHomeSectionModel *one = [SMHomeSectionModel sectionInitWithTitle:@"分段音频" Items:[audio_temp copy] groupType:SMGroupTypeAudios];
@@ -185,7 +186,7 @@
         
     }
     
-    //2 相关视频
+    //3 相关视频
     if (self.detail.related.count > 0) {
         
         NSMutableArray *hots_temp = [NSMutableArray array];
@@ -229,10 +230,14 @@
         
     } completion:^(BOOL finished) {
         
+        [self.tableView  setContentOffset:CGPointZero animated:NO];
         
         self.playerModel.videoURL    =  [NSURL URLWithString:path];
+        
         [self.playerView resetToPlayNewVideo:self.playerModel];
         
+        [self.audioPlayerView pause];
+
         if ([path hasSuffix:@".mp3"])  {
             
             [self.playerView pause];
@@ -454,16 +459,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  50;
+    return  Section_header_Height_nomal;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (!group.show_All_data) return 80;
+    if (!group.show_All_data) return Section_footer_Height_Title;
     
-    return 10;
+    return Section_footer_Height_nomal;
 }
 
 
@@ -487,11 +492,10 @@
                 
             }
             
-            SMDetailViewController *detail = [[SMDetailViewController alloc] init];
             
-            detail.message_id = hot_frame.hot.message_id;
+            self.message_id =  hot_frame.hot.message_id;
             
-            [self pushWithVC:detail];
+            [self makeData];
       
         }
             break;
@@ -553,15 +557,8 @@
   
         }else{
             
-            if(temp_index == indexPath.row){
-                
-                 audio_frame.item.inPlaying = NO;
-               
-            }else{
-            
-                 audio_frame.item.inPlaying = !audio_frame.item.inPlaying;
-              
-            }
+            audio_frame.item.inPlaying = (temp_index == indexPath.row) ? NO : !audio_frame.item.inPlaying;
+      
           
         }
  
@@ -797,10 +794,10 @@
             
             SMAudioItem *item  = self.detail.audio.fragments[index];
             //1 没登录时限制收听个数
-            if (!LOGIN && index < 2){
+            if (!LOGIN && index < Limit_Count_NoLogin){
                 
                 //大于2个听前两个 小于两个全不可听
-                item.isCanPlay = (self.detail.audio.fragments.count > 2) ? YES : NO;
+                item.isCanPlay = (self.detail.audio.fragments.count > Limit_Count_NoLogin) ? YES : NO;
             }
             
             //2 登录全可听
@@ -847,7 +844,7 @@
 
 - (void)dealloc{
 
-    NSLog(@"导师详情  dealloc");
+    KDClassLog(@"导师详情  dealloc");
 }
 
 - (void)didReceiveMemoryWarning {

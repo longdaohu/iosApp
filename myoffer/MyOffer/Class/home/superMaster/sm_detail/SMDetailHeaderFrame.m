@@ -30,7 +30,7 @@
     
     NSString *vedio  =  (detailModel.has_audio)  ? @"音频"  : @"";
     NSString *audio  =  (detailModel.has_video)  ? @"视频"  : @"";
-    NSString *title = [NSString stringWithFormat:@"%@%@%@",vedio,audio,detailModel.main_title];
+    NSString *title = [NSString stringWithFormat:@" %@%@ %@",vedio,audio,detailModel.main_title];
     
     // 1 标题
     CGFloat title_x =  Margin;

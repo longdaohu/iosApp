@@ -187,13 +187,13 @@
 //判断屏幕触碰状态
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    NSLog(@"接触屏幕");
+    KDClassLog(@"接触屏幕");
     self.fingerIsTouch = YES;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    NSLog(@"离开屏幕");
+    KDClassLog(@"离开屏幕");
     self.fingerIsTouch = NO;
 }
 

@@ -515,7 +515,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
             
         case AVAudioSessionRouteChangeReasonCategoryChange:
             // called at start - also when other audio wants to play
-            NSLog(@"AVAudioSessionRouteChangeReasonCategoryChange");
+//            NSLog(@"AVAudioSessionRouteChangeReasonCategoryChange");
             break;
     }
 }
@@ -1611,7 +1611,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
                 self.imageGenerator.appliesPreferredTrackTransform = YES;
                 self.imageGenerator.maximumSize = CGSizeMake(100, 56);
                 AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
-                    NSLog(@"%zd",result);
+//                    NSLog(@"%zd",result);
                     if (result != AVAssetImageGeneratorSucceeded) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [controlView zf_playerDraggedTime:dragedSeconds sliderImage:self.thumbImg ? : ZFPlayerImage(@"ZFPlayer_loading_bgView")];

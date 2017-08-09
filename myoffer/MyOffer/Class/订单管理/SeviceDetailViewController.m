@@ -135,7 +135,7 @@
 
 -(void)dealloc{
     
-    NSLog(@"订单详情 dealloc");
+    KDClassLog(@"订单详情 dealloc");
 }
 
 

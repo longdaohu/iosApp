@@ -40,7 +40,7 @@
     CGFloat title_w = icon_w - title_x * 2;
     UIFont *titleFont = [UIFont systemFontOfSize:16];
     CGSize  title_Size = [news.main_title  KD_sizeWithAttributeFont:titleFont maxWidth:title_w];
-    CGFloat title_h = title_Size.height > titleFont.lineHeight * 2 ? titleFont.lineHeight * 2 : titleFont.lineHeight;
+    CGFloat title_h = title_Size.height >= titleFont.lineHeight * 2 ? titleFont.lineHeight * 2 : titleFont.lineHeight;
     self.title_Frame = CGRectMake(title_x, title_y, title_w, title_h);
     
     

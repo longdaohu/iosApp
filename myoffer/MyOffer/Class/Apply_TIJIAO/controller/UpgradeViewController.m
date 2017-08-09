@@ -223,7 +223,7 @@ typedef enum {
     SeviceDetailViewController *detail = [[SeviceDetailViewController alloc] init];
     detail.isBackRootViewController    = YES;
     detail.path    = [NSString stringWithFormat:@"%@service_dtl?=cset",DOMAINURL];
-    NSLog(@"more = %@",detail.path);
+//    NSLog(@"more = %@",detail.path);
     [self.navigationController pushViewController:detail animated:YES];
     
 }

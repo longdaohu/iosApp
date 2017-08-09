@@ -59,6 +59,27 @@
     return type;
 }
 
+- (NSString *)message_alert{
+
+    NSString  *alert =  @"注册查看完整视频";
+    
+    if (self.has_video && self.has_audio) {
+        
+        alert = @"注册查看完整音频/视频";
+        
+    }else if(self.has_video){
+        
+        alert = @"注册查看完整视频";
+        
+    }else{
+        
+        alert = @"注册查看完整音频";
+        
+    }
+    
+    
+    return alert;
+}
 
 
 

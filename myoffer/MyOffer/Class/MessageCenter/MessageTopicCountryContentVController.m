@@ -213,7 +213,7 @@
 
 - (void)dealloc{
 
-    NSLog(@" MessageTopicCountryContentVController  资讯内容展示区 dealloc");
+    KDClassLog(@" MessageTopicCountryContentVController  资讯内容展示区 dealloc");
 
 }
 

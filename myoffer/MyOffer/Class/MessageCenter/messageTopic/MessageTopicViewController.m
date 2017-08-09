@@ -21,8 +21,6 @@
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
 @property(nonatomic,strong)myofferFlexibleView *flexView;
 @property(nonatomic,strong)UILabel *titleLab;
-@property(nonatomic,assign)CGRect flexFrame_old;
-@property(nonatomic,assign)CGPoint flexCenter_old;
 @property(nonatomic,strong)NSMutableArray *messageFrames;
 
 @end
@@ -70,7 +68,7 @@
 
 - (void)makeData{
 
-    NSString *path = [NSString stringWithFormat:@"GET api/topic/%@",self.topic_id];
+    NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorArticleTopic,self.topic_id];
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
  
@@ -102,10 +100,17 @@
     [self.tableView reloadData];
     
     
+    
     NSString *title = response[@"title"];
     self.topNavigationView.titleName = title;
     
+    
+    
     self.flexView.image_url = response[@"cover_url"];
+    [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
+        
+        self.flexView.alpha = 1;
+    }];
     
     
     
@@ -163,7 +168,8 @@
     myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f))];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
- 
+    flexView.alpha = 0.1;
+    
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:flexView.frame];
     
@@ -189,6 +195,7 @@
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
     XWGJMessageFrame *messageFrame = self.messageFrames[indexPath.row];
@@ -232,20 +239,19 @@
     
     CGFloat offersetY =  scrollView.contentOffset.y;
     
-    //导航栏显示隐藏
+    //1 导航栏显示隐藏
     [self.topNavigationView scrollViewContentoffset:offersetY  andContenHeight:self.flexView.bounds.size.height - XNAV_HEIGHT];
-    
     self.topNavigationView.nav_Alpha =  offersetY / (self.flexView.bounds.size.height - XNAV_HEIGHT);
     
  
-    
+    //2 图片下拉
     [self.flexView flexWithContentOffsetY:offersetY];
     
 }
 
 - (void)dealloc{
 
-    NSLog(@"资讯热门专题 dealloc MessageTopicViewController");
+    KDClassLog(@"资讯热门专题 dealloc MessageTopicViewController");
 }
 
 - (void)didReceiveMemoryWarning {

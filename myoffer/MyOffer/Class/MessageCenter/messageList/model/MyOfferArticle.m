@@ -19,12 +19,18 @@
 
 -(NSString *)cover_url{
 
+    NSLog(@" %@ title =  %@",_cover_url,self.title);
     return [_cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 -(NSString *)cover_url_thumbnail{
     
     return [_cover_url_thumbnail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)view_count{
+
+    return [NSString stringWithFormat:@"%@阅读",_view_count];
 }
 
 @end

@@ -248,11 +248,6 @@
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
-//超出cell的bounds范围，不能显示
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    cell.clipsToBounds = YES;
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
@@ -421,16 +416,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return  50;
+    return  Section_header_Height_nomal;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (!group.show_All_data)  return 80;
+    if (!group.show_All_data)  return Section_footer_Height_Title;
     
-    return 10;
+    return Section_footer_Height_nomal;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -464,7 +459,7 @@
 - (void)caseBannerWithIndex:(NSInteger)index{
     
    SMBannerModel  *banner = self.smModel.banners[index];
-    
+   
      if ([banner.link_app containsString:@"myoffer://home"]) {
          
          [self dismiss];
@@ -472,6 +467,8 @@
      }else if([banner.link_app containsString:@"myoffer://articles"]){
          
          [self.tabBarController setSelectedIndex:2];
+         
+         [self dismiss];
          
      }else{
  
@@ -505,7 +502,8 @@
 
 - (void)dealloc{
     
-    NSLog(@"超级导师 SuperMasterViewController  dealloc");
+    KDClassLog(@"超级导师 SuperMasterViewController  dealloc");
+    
 }
 
 

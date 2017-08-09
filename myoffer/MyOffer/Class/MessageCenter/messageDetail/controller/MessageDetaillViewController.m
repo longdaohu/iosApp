@@ -402,7 +402,9 @@
         
         news_cell.messageFrame =  group.items[indexPath.row];
 
-        [news_cell separatorLineShow: (group.items.count - 1 == indexPath.row)];
+//        BOOL show =  !(group.items.count - 1 == indexPath.row);
+        
+//        [news_cell separatorLineShow:show];
         
         return news_cell;
         

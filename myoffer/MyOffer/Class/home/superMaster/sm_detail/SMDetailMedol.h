@@ -37,6 +37,7 @@
 @property(nonatomic,assign)BOOL islogin;//判断当前页面是否登录状态改变
 @property(nonatomic,copy)NSString *type; // audio-视频音频, offline-线下活动
 @property(nonatomic,copy)NSString *type_imageName;// 视频、音频、线下活动图片
+@property(nonatomic,copy)NSString *message_alert;// 视频、音频提示语
 
 @end
 

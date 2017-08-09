@@ -103,34 +103,28 @@
     _messageFrame =  messageFrame ;
     
     NSString *path = @"";
-    NSString *title = @"";
     NSString *time = @"";
-    NSString *count = @"";
 
     if (messageFrame.News) {
         
-        path = messageFrame.News.cover_url_thumbnail.length ? messageFrame.News.cover_url_thumbnail : messageFrame.News.cover_url;
-        title = messageFrame.News.title;
+        path = messageFrame.News.cover_url_thumbnail.length > 0 ? messageFrame.News.cover_url_thumbnail : messageFrame.News.cover_url;
         
         NSInteger  length = messageFrame.News.update_at.length > 10 ? 10 : messageFrame.News.update_at.length;
         
         time = [messageFrame.News.update_at substringToIndex:length];
         
-        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.News.view_count];
         
     }else{
         
         path = messageFrame.News.cover_url;
-        title = messageFrame.News.title;
         time  = messageFrame.News.update_at;
-        count =   [NSString stringWithFormat:@"%@阅读", messageFrame.News.view_count];
 
      }
     
     [self.Logo KD_setImageWithURL:path];
-    self.titleLab.text = title;
+    self.titleLab.text = messageFrame.News.title;
     [self.update_at_Btn setTitle:time forState:UIControlStateNormal];
-    [self.view_count_Btn setTitle:count forState:UIControlStateNormal];
+    [self.view_count_Btn setTitle:messageFrame.News.view_count forState:UIControlStateNormal];
     [self.tag_Btn setTitle:messageFrame.News.category_thr forState:UIControlStateNormal];
 
 
@@ -147,8 +141,9 @@
 
 - (void)separatorLineShow:(BOOL)show{
     
-    self.bottom_line.hidden = show;
+    self.bottom_line.frame = show ? self.messageFrame.lineFrame : CGRectZero;
 }
+
 - (void)separatorLinePaddingShow:(BOOL)show{
 
     self.bottom_line.mj_x =  show ? self.titleLab.mj_x : 0;

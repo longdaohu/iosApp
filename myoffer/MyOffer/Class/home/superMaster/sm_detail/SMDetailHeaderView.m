@@ -104,6 +104,7 @@
     self.gest_Lab = gest_Lab;
     gest_Lab.editable = NO;//不可编辑
     gest_Lab.scrollEnabled = NO;//不可滚动
+//    gest_Lab.userInteractionEnabled = NO;
     gest_Lab.textContainerInset = UIEdgeInsetsMake(0, -5, 0, 0);//设置页边距
     gest_Lab.font = [UIFont systemFontOfSize:12];
     [self addSubview:gest_Lab];
@@ -168,6 +169,9 @@
     self.nameLab.text = detail.guest_name;
     self.uni_Lab.text = detail.guest_subject_uni;
   
+    
+    [self.registBtn setTitle:header_frame.detailModel.message_alert forState:UIControlStateNormal];
+    
     //1 标题
     NSMutableAttributedString *titleAttr = [[NSMutableAttributedString alloc] initWithString:detail.main_title];
     

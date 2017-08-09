@@ -42,6 +42,7 @@ static NSString * const reuseIdentifier = @"cityCell";
     flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flow.sectionInset = UIEdgeInsetsZero;
     
+    
     myOfferCollectionView *collectionView = [[myOfferCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flow];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
@@ -89,6 +90,7 @@ static NSString * const reuseIdentifier = @"cityCell";
 #pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    
     return 1;
 }
 
@@ -109,8 +111,7 @@ static NSString * const reuseIdentifier = @"cityCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-   MessageHotTopicMedel *topic = self.topices[indexPath.row];
+    MessageHotTopicMedel *topic = self.topices[indexPath.row];
     
     MessageTopicViewController *tp = [[MessageTopicViewController alloc] init];
     
