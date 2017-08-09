@@ -333,7 +333,14 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        if (0 == self.UniFrames.count)  [self.tableView emptyViewWithError:@"网络请求失败，请确认网络是否连接！"];
+        if (0 == weakSelf.UniFrames.count)
+        {
+            [weakSelf.tableView emptyViewWithError:@"网络请求失败，请确认网络是否连接！"];
+
+        }else{
+            
+            [weakSelf.tableView emptyViewWithHiden:YES];
+        }
         
     }];
     
@@ -392,10 +399,25 @@
     self.nextPage += 1;
     
     //当数据为空时，提示为空
-    [self.tableView emptyViewWithHiden:self.UniFrames.count > 0];
-    
-    
+    [self emptyWithArray:self.UniFrames];
 }
+
+
+- (void)emptyWithArray:(NSArray *)items{
+    
+    [self.tableView emptyViewWithHiden:!(items.count == 0)];
+    
+    if (items.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"数据为空！"];
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }
+}
+
 
 
 

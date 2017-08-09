@@ -18,7 +18,7 @@
 #import "myofferFlexibleView.h"
 
 @interface EmallCatigoryViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic)UITableView *tableView;
+@property (strong, nonatomic)MyOfferTableView *tableView;
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,copy)NSString *current_Service;
@@ -88,13 +88,14 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     self.tableView.showsVerticalScrollIndicator = false;
+    self.tableView.emptyY = 60;
     
 }
 
@@ -227,6 +228,8 @@
     
     [self.tableView reloadData];
     
+ 
+    [self emptyWithArray:self.current_frames];
 }
 
 
@@ -252,6 +255,8 @@
         
         [self.tableView reloadData];
         
+        [self emptyWithArray:self.current_frames];
+
         return;
     }
     
@@ -260,7 +265,20 @@
     
 }
 
+- (void)emptyWithArray:(NSArray *)items{
 
+    [self.tableView emptyViewWithHiden:!(items.count == 0)];
+    
+    if (items.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"数据为空！"];
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }
+}
 
 
 
@@ -308,7 +326,6 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     
     if (scrollView.contentOffset.y <= -64  && scrollView.isDragging) {
         

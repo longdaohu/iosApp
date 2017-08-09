@@ -97,14 +97,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50;
+    return Section_header_Height_nomal;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     MessageTopicModel *topic =   self.group.contents[section];
 
-    return  (topic.articles.count >= 4) ? 60 : 10;
+    return  (topic.articles.count >= 4) ? 60 : Section_footer_Height_nomal;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,8 +138,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
     //分区View;
-    MyofferSectionView *sectionView = [[MyofferSectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 50)];
+    MyofferSectionView *sectionView = [[MyofferSectionView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,Section_header_Height_nomal)];
     MessageTopicModel *topic =   self.group.contents[section];
     sectionView.title = topic.category;
     [self.view addSubview: sectionView];

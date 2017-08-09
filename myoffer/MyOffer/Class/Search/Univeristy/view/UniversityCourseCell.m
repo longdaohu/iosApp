@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UILabel *official_Lab;
 @property (nonatomic,strong) UIButton *optionBtn;
 @property (nonatomic,strong) UIView *bg_View;
+@property (nonatomic,strong) UIView *bottom_Line;
 
 
 @end
@@ -69,9 +70,12 @@ static NSString *identify = @"course";
     [self.contentView addSubview:bgView];
     self.bg_View = bgView;
     
+    UIView *line = [UIView new];
+    line.backgroundColor = XCOLOR_line;
+    [self.contentView addSubview:line];
+    self.bottom_Line = line;
     
 }
-
 
 
 - (void)setCourse_frame:(UniversityCourseFrame *)course_frame{
@@ -86,8 +90,9 @@ static NSString *identify = @"course";
     
      self.bg_View.frame = course_frame.items_bg_Frame;
     
+     self.bottom_Line.frame = course_frame.bottom_line_frame;
+    
     [self updateUIWithCourse:course itemFrames:course_frame.items_Frame];
-
     
     
 }
@@ -144,8 +149,6 @@ static NSString *identify = @"course";
 
 
 
-
-
 -(void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.course_frame.course.optionSeleced = !self.course_frame.course.optionSeleced;
@@ -180,6 +183,12 @@ static NSString *identify = @"course";
 
     self.optionBtn.hidden = hiden;
 }
+
+- (void)bottomLineHiden:(BOOL)hiden{
+
+    
+}
+
 
 
 @end

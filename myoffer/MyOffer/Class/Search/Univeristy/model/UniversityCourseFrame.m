@@ -43,7 +43,14 @@
     CGFloat bg_H =  20;
     self.items_bg_Frame = CGRectMake(bg_X, bg_Y, bg_W, bg_H);
     
-    self.cell_Height = CGRectGetMaxY(self.items_bg_Frame) + 20;
+    CGFloat b_line_X =  0;
+    CGFloat b_line_H =  LINE_HEIGHT;
+    CGFloat b_line_Y =  CGRectGetMaxY(self.items_bg_Frame) + 20;
+    CGFloat b_line_W =  XSCREEN_WIDTH;
+    self.bottom_line_frame = CGRectMake(b_line_X, b_line_Y, b_line_W, b_line_H);
+    
+    
+    self.cell_Height = CGRectGetMaxY(self.bottom_line_frame);
 
     
     CGFloat option_H =  self.cell_Height;

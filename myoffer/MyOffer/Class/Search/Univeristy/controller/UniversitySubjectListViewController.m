@@ -16,7 +16,7 @@
 @interface UniversitySubjectListViewController ()<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate>
 //网络请求参数字典
 @property(nonatomic,strong)NSMutableDictionary *resquestParameters;
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //模型数组
 @property(nonatomic,strong)NSMutableArray *course_frames;
 @property(nonatomic,strong)NSMutableArray *selected_items;
@@ -89,7 +89,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, XSCREEN_HEIGHT - XNAV_HEIGHT - 50) style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, XSCREEN_HEIGHT - XNAV_HEIGHT - 50) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -221,12 +221,19 @@
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
-
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-//        [weakSelf showHubWithText:@"网络请求失败,请确认网络是否连接"];
-  
+        if (self.course_frames.count) {
+            
+             [weakSelf.tableView emptyViewWithHiden:YES];
+        
+        }else{
+        
+            [weakSelf.tableView emptyViewWithError:@"网络请求失败，请确认网络是否连接！"];
+
+        }
+        
         
     }];
     
@@ -280,6 +287,7 @@
     [self.tableView reloadData];
     
     
+    [self emptyWithArray:self.course_frames];
 
 }
 
@@ -304,7 +312,6 @@
     UniversityCourseCell *cell = [UniversityCourseCell cellWithTableView:tableView];
     
     cell.course_frame =  self.course_frames[indexPath.row];
-    
     
     //下拉到最后indexPath.row  下拉加载
     if (indexPath.row == self.course_frames.count - 1  && !self.endPage) {
@@ -384,8 +391,22 @@
        
          
      }];
- 
     
+}
+
+- (void)emptyWithArray:(NSArray *)items{
+    
+    [self.tableView emptyViewWithHiden:!(items.count == 0)];
+    
+    if (items.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"数据为空！"];
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }
 }
 
 

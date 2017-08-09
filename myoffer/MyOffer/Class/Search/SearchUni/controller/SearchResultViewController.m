@@ -82,7 +82,6 @@
         _fieldKey = @"text";
         _orderBy = orderBy;
         
-//        NSLog(@"orderByorderByorderBy %@",orderBy);
 
         if([key  isEqual: @"subject"]) {
             _subject = value;

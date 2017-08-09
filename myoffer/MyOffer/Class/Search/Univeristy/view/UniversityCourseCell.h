@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UniversityCourseFrame *course_frame;
 
 - (void)cellSelectedButtonHiden:(BOOL)hiden;
+- (void)bottomLineHiden:(BOOL)hiden;
 
 - (void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
