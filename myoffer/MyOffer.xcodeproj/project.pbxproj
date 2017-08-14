@@ -1970,7 +1970,7 @@
 			children = (
 				AE4B2E821F1E09F200E328F7 /* topic */,
 				AE4B2E241F1E095600E328F7 /* messageDetail */,
-				AE4B2E321F1E095600E328F7 /* messageList */,
+				AE4B2E321F1E095600E328F7 /* messagehome */,
 				AE4B2E561F1E095600E328F7 /* messageTopic */,
 			);
 			path = MessageCenter;
@@ -2017,13 +2017,14 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		AE4B2E321F1E095600E328F7 /* messageList */ = {
+		AE4B2E321F1E095600E328F7 /* messagehome */ = {
 			isa = PBXGroup;
 			children = (
 				AE4B2E331F1E095600E328F7 /* controller */,
 				AE4B2E4E1F1E095600E328F7 /* model */,
 				AE4B2E531F1E095600E328F7 /* view */,
 			);
+			name = messagehome;
 			path = messageList;
 			sourceTree = "<group>";
 		};

@@ -161,7 +161,7 @@
 
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
          
-         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+         [self.tableView emptyViewWithError:NetRequest_ConnectError];
 
      }];
 }

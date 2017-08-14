@@ -382,7 +382,7 @@
     
     if (items.count == 0) {
         
-        [self.tableView emptyViewWithError:@"数据为空！"];
+        [self.tableView emptyViewWithError:NetRequest_NoDATA];
         
     }else{
         
@@ -398,7 +398,7 @@
     
     if (self.current_frames.count == 0) {
         
-        [self.tableView emptyViewWithError:@"网络请求错误，请确认网络是否正常连接！"];
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
 
     }else{
         

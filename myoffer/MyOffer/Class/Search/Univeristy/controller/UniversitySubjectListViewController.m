@@ -230,7 +230,7 @@
         
         }else{
         
-            [weakSelf.tableView emptyViewWithError:@"网络请求失败，请确认网络是否连接！"];
+            [weakSelf.tableView emptyViewWithError:NetRequest_ConnectError];
 
         }
         
@@ -400,7 +400,7 @@
     
     if (items.count == 0) {
         
-        [self.tableView emptyViewWithError:@"数据为空！"];
+        [self.tableView emptyViewWithError:NetRequest_NoDATA];
         
     }else{
         

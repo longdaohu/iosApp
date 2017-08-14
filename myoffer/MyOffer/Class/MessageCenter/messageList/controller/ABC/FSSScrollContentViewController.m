@@ -60,7 +60,7 @@
     
     if (group.contents.count == 0) {
         
-        [self.tableView emptyViewWithError:@"数据为空！"];
+        [self.tableView emptyViewWithError:NetRequest_NoDATA];
         
     }else{
     
@@ -74,9 +74,16 @@
 
 - (void)showError:(NSString *)error{
 
-    NSString *str = error.length > 0 ? error :@"网络请求失败，请确认网络是否连接！";
     
-    [self.tableView emptyViewWithError:str];
+    if (error.length > 0) {
+        
+        [self.tableView emptyViewWithError:error];
+
+    }else{
+    
+         [self.tableView emptyViewWithError:NetRequest_ConnectError];
+
+    }
 
 }
 

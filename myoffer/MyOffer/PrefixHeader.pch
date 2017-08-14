@@ -90,6 +90,9 @@
 #define Section_header_Height_nomal 50
 #define Section_footer_Height_Title 80
 #define AutoScroll_Height   AdjustF(160.f)
+#define NetRequest_ConnectError  @"网络请求失败，请确认网络是否正常连接！"
+#define NetRequest_NoDATA  @"数据为空!"
+
 
 
 #import "MJExtension.h"

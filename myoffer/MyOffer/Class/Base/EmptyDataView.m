@@ -42,7 +42,7 @@
         
         
         UILabel *errorLab = [[UILabel alloc] init];
-        errorLab.text = @"数据为空";
+        errorLab.text = NetRequest_NoDATA;
         errorLab.numberOfLines = 0;
         errorLab.textColor = XCOLOR_LIGHTGRAY;
         errorLab.font = [UIFont systemFontOfSize:14];

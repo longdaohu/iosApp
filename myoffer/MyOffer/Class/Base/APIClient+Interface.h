@@ -133,5 +133,9 @@
 #define kAPISelectorSuperMasterDetail @"GET /api/sm/lecture/"
 //超级导师详情
 #define kAPISelectorSuperMasterlist @"GET api/sm/lectures"
+//文章分类
+#define kAPISelectorMessageCenterCatigory @"GET api/articles/index"
+//文章分类
+#define kAPISelectorMessageCenterTopic @"GET api/hot-article-topics"
 
 

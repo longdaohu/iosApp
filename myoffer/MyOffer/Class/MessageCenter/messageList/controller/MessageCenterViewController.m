@@ -104,7 +104,7 @@
     //1  判断头部视图是否有数据
     if (self.headerViewController.topices.count == 0) {
         
-        [self startAPIRequestWithSelector:@"GET api/hot-article-topics"  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        [self startAPIRequestWithSelector:kAPISelectorMessageCenterTopic  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
             
             NSArray *items = [MessageHotTopicMedel mj_objectArrayWithKeyValuesArray:response[@"items"]];
             
@@ -159,10 +159,10 @@
     //2 catigroies数据为空时，其他操作步骤没有意义
     if(self.catigroies.count == 0)
     {
-       [self.tableView emptyViewWithError:@"数据为空！"];
+       [self.tableView emptyViewWithError:NetRequest_NoDATA];
         
-       [self.tableView reloadData];
-        
+        [self.tableView reloadData];
+
        return;
     }
     
@@ -210,7 +210,7 @@
     messageCatigroyModel *catigory = self.catigroies[index];
     NSDictionary *pass = @{@"category" : catigory.code};
     
-    [self startAPIRequestWithSelector:@"GET api/articles/index"  parameters:pass expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorMessageCenterCatigory  parameters:pass expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         MessageTopiccGroup *group = self.groups[index];
         group.contents = [MessageTopicModel mj_objectArrayWithKeyValuesArray:response];;

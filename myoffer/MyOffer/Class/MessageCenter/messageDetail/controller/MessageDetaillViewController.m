@@ -183,7 +183,7 @@
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
-        [weakSelf dismiss];
+//        [weakSelf dismiss];
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -191,7 +191,7 @@
          
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [weakSelf.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+        [weakSelf.tableView emptyViewWithError:NetRequest_ConnectError];
         
     }];
     

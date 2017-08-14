@@ -109,7 +109,7 @@
         
         if (weakSelf.items.count <= 0) {
            
-            [weakSelf.tableView emptyViewWithError:@"网络请求错误，请确认网络是否连接！"];
+            [weakSelf.tableView emptyViewWithError:NetRequest_ConnectError];
 
         }
         

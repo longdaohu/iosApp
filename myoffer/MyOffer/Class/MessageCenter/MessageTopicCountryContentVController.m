@@ -180,7 +180,7 @@
         
     }else{
         
-        [self.tableView emptyViewWithError:@"数据为空"];
+        [self.tableView emptyViewWithError:NetRequest_NoDATA];
         
     }
 }
@@ -190,7 +190,7 @@
 
     if (self.group.messageFrames.count == 0) {
         
-        [self.tableView emptyViewWithError:@"网络请求错误，请确认网络是否正常连接！"];
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
      }
 }
 
