@@ -61,22 +61,8 @@
         [self.bgView addSubview:sender];
     }
     
-}
-
-
-
-
-- (void)destinationOnClick:(UIButton *)sender{
-
-    if (self.actionBlock) self.actionBlock(sender.currentTitle);
-}
-
-
-- (void)layoutSubviews{
-
-    [super layoutSubviews];
     
-    if (self.group.count == 0) return;
+    
     
     
     ServiceOverSeaDestination *item = self.group.firstObject;
@@ -120,7 +106,26 @@
         self.mj_h =  CGRectGetMaxY( self.line.frame);
         
     }
+
+    
 }
+
+
+
+
+- (void)destinationOnClick:(UIButton *)sender{
+
+    if (self.actionBlock) self.actionBlock(sender.currentTitle);
+}
+
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
+    
+    if (self.group.count == 0) return;
+    
+    }
 
 
 

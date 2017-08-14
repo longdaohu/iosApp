@@ -9,9 +9,8 @@
 #import "ServiceProtocalBottomView.h"
 
 @interface ServiceProtocalBottomView ()
-@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIButton *noAgreeBtn;
-
+@property(nonatomic,strong)CAGradientLayer *gradient;
 
 @end
 
@@ -30,9 +29,8 @@
                                  nil];
     gradient.startPoint = CGPointMake(0, 0);
     gradient.endPoint = CGPointMake(0, 0.1);
-    [self.bgView.layer insertSublayer:gradient atIndex:0];
-    gradient.frame = CGRectMake(0, 0, self.bgView.bounds.size.width, 120);
-    
+    [self.layer insertSublayer:gradient atIndex:0];
+    self.gradient = gradient;
 
     
     self.noAgreeBtn.layer.borderColor = XCOLOR_LIGHTGRAY.CGColor;
@@ -47,6 +45,14 @@
     if (self.actionBlock)  self.actionBlock(agree);
     
      
+}
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
+    
+    self.gradient.frame = self.bounds;
+
 }
 
 

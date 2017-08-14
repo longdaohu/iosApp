@@ -82,7 +82,6 @@
 
 - (void)makeFlexibeView{
     
-    
     UIImage *FlexibleImg = XImage(@"service-info-bg");
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
     myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
@@ -90,18 +89,6 @@
     self.flexView = flexView;
     flexView.image_name = @"service-info-bg";
     
-    
-//    UIImage *FlexibleImg = XImage(@"service-info-bg");
-//    UIImageView *FlexibleView = [[UIImageView alloc] init];
-//    FlexibleView.contentMode = UIViewContentModeScaleAspectFit;
-//    FlexibleView.image = FlexibleImg;
-//    CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-//    
-//    FlexibleView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, iconHeight);
-//    [self.view insertSubview:FlexibleView belowSubview:self.tableView];
-//    self.flexView = FlexibleView;
-//    self.flexFrame = self.flexView.frame;
-//    self.flexCenter = FlexibleView.center;
     
     self.tableView.contentInset = UIEdgeInsetsMake(iconHeight - 60, 0, 80, 0);
     
@@ -115,8 +102,7 @@
     web.scrollView.scrollEnabled = NO;
     web.navigationDelegate = self;
     self.web_wk = web;
-    
-    
+ 
 }
 
 - (void)makeBottomView{
@@ -177,7 +163,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         [weakSelf pop];
+         [weakSelf dismiss];
     }];
     
 }
@@ -196,18 +182,15 @@
     itemFrame.item = item;
     
     self.headerView.itemFrame = itemFrame;
+  
+    self.tableView.tableHeaderView =  self.headerView;
     
-    [self.tableView beginUpdates];
-    
-    self.headerView.frame = itemFrame.headerViewFrame;
-    
-    [self.tableView endUpdates];
+ 
     
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
     
     [self.web_wk loadHTMLString:htmlStr baseURL:nil];
-    
- 
+  
     [self.web_wk reload];
 
     
@@ -229,20 +212,30 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+  
+    
+}
 
-    XWeakSelf
-    ServiceItemHeaderView *headerView = [[ServiceItemHeaderView alloc] init];
-    headerView.actionBlcok = ^(NSString *service_id){
+
+- (ServiceItemHeaderView *)headerView{
+
+    if (!_headerView) {
         
-        weakSelf.service_id = service_id;
+        XWeakSelf
+        ServiceItemHeaderView *headerView = [[ServiceItemHeaderView alloc] init];
+        headerView.actionBlcok = ^(NSString *service_id){
+            
+            weakSelf.service_id = service_id;
+            
+            [weakSelf makeDataSource];
+            
+        };
         
-        [weakSelf makeDataSource];
         
-    };
+        _headerView = headerView;
+    }
     
-    self.headerView = headerView;
-    self.tableView.tableHeaderView = headerView;
-    
+    return _headerView;
 }
 
 
@@ -281,7 +274,7 @@
     web_bgv.scrollEnabled = NO;
     [cell.contentView addSubview:web_bgv];
     
-    web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.web_wk.bounds.size.height);
+    web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.web_wk.mj_h);
     web_bgv.mj_h = self.web_wk.bounds.size.height;
     
     [web_bgv addSubview:self.web_wk];
@@ -293,11 +286,9 @@
 }
 
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    return self.web_wk.frame.size.height;
+    return self.web_wk.mj_h;
     
 }
 
@@ -308,10 +299,11 @@
 {
     CGFloat offersetY =  scrollView.contentOffset.y +  (self.flexView.bounds.size.height - 60);
     
-    //3 顶部自定义导航栏透明度
+    //1 顶部自定义导航栏透明度
     [self.topNavigationView scrollViewContentoffset:offersetY andContenHeight:self.flexView.bounds.size.height - XNAV_HEIGHT];
      self.topNavigationView.nav_Alpha =  offersetY /  (self.flexView.bounds.size.height - XNAV_HEIGHT);
 
+    //2 图片拉伸
     [self.flexView flexWithContentOffsetY:offersetY];
     
 }
@@ -339,7 +331,7 @@
 
 - (void)navigationItemWithSender:(UIButton *)sender{
     
-    [self pop];
+    [self dismiss];
     
 }
 
@@ -352,88 +344,7 @@
     
 }
 
- 
-- (void)pop{
-    
-    [self.navigationController popViewControllerAnimated:true];
-}
 
-
-/*
- 
- - (void)viewWillDisappear:(BOOL)animated{
- 
- [super viewWillDisappear:animated];
- 
- }
- 
- [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
- [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
- [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
- [[NSUserDefaults standardUserDefaults] synchronize];
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication*)application
-{
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-}
-
-//清除WKWebView的缓存
- myOffer[11812:2681126] [MC] Invalidating cache
-
-- (void)deleteWebCache {
- 
-        NSSet *websiteDataTypes
-        
-        = [NSSet setWithArray:@[
-                                
-                                WKWebsiteDataTypeDiskCache,
-                                
-                                //WKWebsiteDataTypeOfflineWebApplicationCache,
-                                
-                                WKWebsiteDataTypeMemoryCache,
-                                
-                                //WKWebsiteDataTypeLocalStorage,
-                                
-                                //WKWebsiteDataTypeCookies,
-                                
-                                //WKWebsiteDataTypeSessionStorage,
-                                
-                                //WKWebsiteDataTypeIndexedDBDatabases,
-                                
-                                //WKWebsiteDataTypeWebSQLDatabases
-                                
-                                ]];
-        
-        //// All kinds of data
-        
-        //NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-        
-        //// Date from
-        
-        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-        
-        //// Execute
-        
-        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-            
-            // Done
-            
-        }];
- 
- 
- 
- NSHTTPCookie *cookieWID = [NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
- @"wid" ,NSHTTPCookieName,
- WID,NSHTTPCookieValue,
- @"www.google.com",NSHTTPCookieDomain,
- @"",NSHTTPCookiePath,
- @"false",@"HttpOnly",
- nil]];
- 
- 
- 
- }
-*/
 
 - (void)dealloc{
     

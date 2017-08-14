@@ -57,8 +57,7 @@
     self.bgView = bgView;
     [self addSubview:bgView];
     bgView.layer.cornerRadius = CORNER_RADIUS;
-//    bgView.layer.borderWidth = 1;
-//    bgView.layer.borderColor =  XCOLOR_line.CGColor;
+ 
     
     //1、服务名称
     UILabel *name = [[UILabel alloc] init];
@@ -164,13 +163,14 @@
     
     if (self.centerView.subviews.count > 0)  [self.centerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+    XWeakSelf
     for (NSInteger index = 0; index < itemFrame.centerViewCell_Frames.count; index++) {
         
         ServiceItemHeaderCell *cell = [[ServiceItemHeaderCell alloc] init];
         
         cell.actionBlcok = ^(NSString *service_id){
         
-            [self actionWithId:service_id];
+            [weakSelf actionWithId:service_id];
         };
         
         ServiceItemCellFrame *aFrame =  itemFrame.centerViewCell_Frames[index];
@@ -188,6 +188,9 @@
     self.presentDiscLab.frame = itemFrame.presentDisc_Frame;
     self.bgView.frame = itemFrame.header_BgViewFrame;
     self.bottomView.frame = itemFrame.header_bottomView_Frame;
+    
+    
+    self.frame = itemFrame.headerViewFrame;
     
 }
 

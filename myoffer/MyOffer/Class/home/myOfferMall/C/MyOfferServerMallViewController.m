@@ -10,27 +10,26 @@
 #import "MyOfferService.h"
 #import "ServiceSKU.h"
 #import "ServiceSKUCell.h"
-#import "ServiceHeaderView.h"
 #import "SDCycleScrollView.h"
 #import "MyOfferAutoRunBanner.h"
 #import "ServiceItemViewController.h"
 #import "EmallCatigoryViewController.h"
 #import "HomeSectionHeaderView.h"
 #import "WebViewController.h"
-#import "MyOfferServiceMallHeaderFrame.h"
 #import "ServiceOverseaDestinationView.h"
 #import "ServiceOverSeaDestination.h"
 #import "SMListViewController.h"
+#import "GroupModel.h"
 
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic,strong) MyOfferService *sevice;
-@property(nonatomic,strong) NSArray *SKU_frames;
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
-@property(nonatomic,strong)MyOfferServiceMallHeaderFrame *headerFrame;
+@property(nonatomic,strong)NSArray *groups;
+@property(nonatomic,strong)NSArray *overSeaArr;
 @property(nonatomic,strong)ServiceOverseaDestinationView *overseaView;
-@property(nonatomic,strong)NSArray *destinationGroup;
+@property(nonatomic,strong)UIView *headerView;
 
 @end
 
@@ -57,81 +56,82 @@
     
     self.title = @"留学购";
     
-    XWeakSelf
-    self.overseaView = [ServiceOverseaDestinationView overseaView];
-    self.overseaView.actionBlock = ^(NSString *destination){
-        
-        [weakSelf casePushEmallCatigory:destination];
-        
-    };
-    self.overseaView.group = self.destinationGroup;
-    self.overseaView.alpha = 0;
-    
-    ServiceHeaderView *headerView = [ServiceHeaderView headerViewWithFrame:self.headerFrame.header_frame ationBlock:^(NSString *country) {
-        
-        
-    }];
-    
-    headerView.headerFrame = self.headerFrame;
-    
-    self.tableView.tableHeaderView = headerView;
-    
-    [self makeAutoLoopViewAtView:headerView];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQ_service"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
- 
     
 }
 
 
+- (ServiceOverseaDestinationView *)overseaView{
 
-- (MyOfferServiceMallHeaderFrame *)headerFrame{
-    
-    if (!_headerFrame) {
+    if (!_overseaView) {
+        XWeakSelf
+        _overseaView = [ServiceOverseaDestinationView overseaView];
+        _overseaView.actionBlock = ^(NSString *destination){
+            
+            [weakSelf casePushEmallCatigory:destination];
+            
+        };
         
-        _headerFrame = [[MyOfferServiceMallHeaderFrame alloc] init];
+         //4 留学目的地
+        _overseaView.group = self.overSeaArr;
     }
     
-    return _headerFrame;
+    return _overseaView;
 }
 
-- (NSArray *)destinationGroup{
 
-    if (!_destinationGroup) {
+- (NSArray *)overSeaArr{
+
+    if (!_overSeaArr) {
         
         ServiceOverSeaDestination *UK = [ServiceOverSeaDestination destinationWithImage:@"destination_UK" name:@"英国"];
         ServiceOverSeaDestination *AU = [ServiceOverSeaDestination destinationWithImage:@"destination_AU" name:@"澳大利亚"];
         ServiceOverSeaDestination *NZ = [ServiceOverSeaDestination destinationWithImage:@"destination_NZ" name:@"新西兰"];
         ServiceOverSeaDestination *HK = [ServiceOverSeaDestination destinationWithImage:@"destination_HK" name:@"香港"];
-     
-        _destinationGroup = @[UK,AU,NZ,HK];
         
-      }
-    
-    return _destinationGroup;
+        _overSeaArr = @[UK,AU,NZ,HK];
+    }
+    return _overSeaArr;
 }
 
+
+- (UIView *)headerView{
+    
+    if (!_headerView) {
+        
+        _headerView = [[UIView alloc] init];
+    }
+    
+    return _headerView;
+}
 
 /**
  *  创建轮播图头部
  */
-- (void)makeAutoLoopViewAtView:(UIView *)bgView{
+
+- (SDCycleScrollView *)autoLoopView{
+
+    if(!_autoLoopView){
     
-    XWeakSelf
+        XWeakSelf
+        
+        SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height) delegate:nil placeholderImage:nil];
+        
+        autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
+        autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
+            
+            [weakSelf  caseBannerWithIndex:index];
+            
+        };
+        
+        _autoLoopView = autoLoopView;
+
+    }
     
-    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:self.headerFrame.autoScroller_frame delegate:nil placeholderImage:nil];
-    self.autoLoopView = autoLoopView;
-    autoLoopView.alpha = 0;
-    autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
-    autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
-    [bgView addSubview:autoLoopView];
-    autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
-        
-        [weakSelf  caseBannerWithIndex:index];
-        
-    };
+    return _autoLoopView;
 }
+
 
 
 //网络请求
@@ -146,7 +146,7 @@
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         //加载失败退出页面
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf dismiss];
     }];
     
     
@@ -155,13 +155,18 @@
 //更新UI
 - (void)updateUIWithResponse:(id)response{
 
-    if (!response)  return ;
-     
-    
+    //1 数据模型
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
     
-    NSMutableArray *items = [NSMutableArray array];
+
+    //2 留学目的地
+    NSMutableArray *groups_temp = [NSMutableArray array];
+    GroupModel *one = [GroupModel groupWithIndex:0 header:@"留学目的地" footer:@"" items:@[self.overSeaArr]];
+    [groups_temp addObject:one];
     
+    
+    //3 热门商品
+    NSMutableArray *items = [NSMutableArray array];
     for (ServiceSKU *item in self.sevice.skus) {
         
         ServiceSKUFrame *itemFrame = [[ServiceSKUFrame alloc] init];
@@ -169,20 +174,28 @@
         [items addObject:itemFrame];
     }
     
-    self.SKU_frames  =  [items copy];
-    
-    //轮播图匹配数据
-//    self.autoLoopView.titlesGroup = [self.sevice.banners valueForKey:@"title"];
-    self.autoLoopView.imageURLStringsGroup = [self.sevice.banners valueForKey:@"thumbnail"];
-    
-    [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
+    if (items.count > 0) {
         
-        self.autoLoopView.alpha = 1;
-        self.overseaView.alpha = 1;
-    }];
+        GroupModel *two = [GroupModel  groupWithIndex:1 header:@"热门商品" footer:@"" items: [items copy]];
+        [groups_temp addObject:two];
+    }
+    self.groups = [groups_temp copy];
     
+  
+    
+    //5 轮播图匹配数据
+    NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
+    if (images.count > 0) {
+        
+        self.headerView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height);
+        self.tableView.tableHeaderView = self.headerView;
+        [self.headerView addSubview:self.autoLoopView];
+        self.autoLoopView.imageURLStringsGroup = images;
+    }
+ 
     
     [self.tableView reloadData];
+    
  
 }
 
@@ -191,28 +204,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return self.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger  count = 1;
+    GroupModel *group = self.groups[section];
     
-    if (section == 1) {
-        
-        count =  self.sevice.skus.count;
-    }
-    
-    return count;
+    return group.items.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    if (indexPath.section == 0) {
+    GroupModel *group = self.groups[indexPath.section];
+    
+    if (group.index == 0) {
         
-        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
         cell.selectionStyle =  UITableViewCellSelectionStyleNone;
 
@@ -220,27 +230,40 @@
         
         return cell;
     }
+
     
-    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:self.SKU_frames[indexPath.row]];
+    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:group.items[indexPath.row]];
     
-    [cell bottomLineShow:(self.SKU_frames.count - 1) != indexPath.row];
+    [cell bottomLineShow:(group.items.count - 1) != indexPath.row];
     
      return cell;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
+    
+    GroupModel *group = self.groups[section];
+    
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header];
+    
+    SectionView.backgroundColor = XCOLOR_WHITE;
+    
+    return  SectionView;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
-
+    GroupModel *group = self.groups[indexPath.section];
+    
     CGFloat cell_Height = 0;
     
-    if (indexPath.section == 0) {
+    if (group.index == 0) {
         
         cell_Height  = self.overseaView.mj_h;
         
     }else{
     
-        ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
+        ServiceSKUFrame *itemFrame = group.items[indexPath.row];
     
         cell_Height = itemFrame.cell_Height;
     }
@@ -251,7 +274,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 50;
+    return SECTION_HEADER_HIGHT;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -263,31 +286,20 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    if (0 == indexPath.section) return;
+    GroupModel *group = self.groups[indexPath.section];
+
+    if (0 == group.index) return;
     
-    ServiceSKUFrame *itemFrame = self.SKU_frames[indexPath.row];
+    ServiceSKUFrame *itemFrame = group.items[indexPath.row];
     
     [self casePushServiceItemViewControllerWithId: itemFrame.SKU.service_id];
     
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
-    
-    NSString *title = (0 == section) ? @"留学目的地" : @"热门商品";
-    
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:title];
-    
-    SectionView.backgroundColor = XCOLOR_WHITE;
-    
-    return  SectionView;
-}
-
-
 
 #pragma mark : 事件处理
 
 - (void)casePushEmallCatigory:(NSString *)countryName{
-    
     
     EmallCatigoryViewController *country =  [[EmallCatigoryViewController alloc] init];
     
@@ -295,6 +307,7 @@
     
     [self.navigationController pushViewController:country animated:true];
 }
+
 
 - (void)caseBannerWithIndex:(NSInteger)index{
 
@@ -317,8 +330,7 @@
     WebViewController *web = [[WebViewController alloc] initWithPath:banner.url];
     
     [self.navigationController  pushViewController:web animated:true];
-   
-   
+    
 }
 
 

@@ -89,6 +89,7 @@
 #define Section_footer_Height_nomal 10
 #define Section_header_Height_nomal 50
 #define Section_footer_Height_Title 80
+#define AutoScroll_Height   AdjustF(160.f)
 
 
 #import "MJExtension.h"

@@ -15,11 +15,6 @@
     
 }
 
-//- (NSString *)title{
-//
-//    return @" ";
-//}
-//
 
 
 @end

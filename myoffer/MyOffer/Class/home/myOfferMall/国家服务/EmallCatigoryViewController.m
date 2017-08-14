@@ -25,8 +25,6 @@
 @property(nonatomic,strong)NSArray *current_frames;
 //<!---- 顶部下拉图片
 @property(nonatomic,strong)myofferFlexibleView *flexView;
-//@property(nonatomic,assign)CGRect flexFrame;
-//@property(nonatomic,assign)CGPoint flexCenter;
 // 顶部下拉图片---->
 //<！--工具条
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
@@ -177,18 +175,19 @@
 
     
     NSString *subPath = [NSString stringWithFormat:@"api/emall/skus?country=%@&category=%@",self.country_Name,self.current_Service];
-    
     NSString *utfPath = [subPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-   NSString *path = [NSString stringWithFormat:@"GET %@",utfPath];
+    NSString *path = [NSString stringWithFormat:@"GET %@",utfPath];
     
     XWeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [weakSelf emptyWithError];
         
     }];
-    
  
 }
 
@@ -263,21 +262,6 @@
     //当对应主题数组数据为空时，发送网络请求
     [self makeDataSource];
     
-}
-
-- (void)emptyWithArray:(NSArray *)items{
-
-    [self.tableView emptyViewWithHiden:!(items.count == 0)];
-    
-    if (items.count == 0) {
-        
-        [self.tableView emptyViewWithError:@"数据为空！"];
-        
-    }else{
-        
-        [self.tableView emptyViewWithHiden:YES];
-        
-    }
 }
 
 
@@ -389,11 +373,45 @@
 }
 
 
+
+
+//数据为空处理
+- (void)emptyWithArray:(NSArray *)items{
+    
+    [self.tableView emptyViewWithHiden:!(items.count == 0)];
+    
+    if (items.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"数据为空！"];
+        
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }
+}
+
+//网络请求出错处理
+- (void)emptyWithError{
+
+    [self.tableView reloadData];
+    
+    if (self.current_frames.count == 0) {
+        
+        [self.tableView emptyViewWithError:@"网络请求错误，请确认网络是否正常连接！"];
+
+    }else{
+        
+        [self.tableView emptyViewWithHiden:YES];
+
+    }
+    
+}
+
 - (void)dealloc{
     
     KDClassLog(@"dealloc 留学国家地区");
 }
-
 
 
 - (void)didReceiveMemoryWarning {

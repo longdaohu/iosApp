@@ -82,14 +82,6 @@
 
 }
 
-- (void)setMall_header_Frame:(MyOfferServiceMallHeaderFrame *)mall_header_Frame{
-
-    _mall_header_Frame = mall_header_Frame;
-    
-    self.iconView.frame = mall_header_Frame.icon_frame;
-    self.titleLab.frame = mall_header_Frame.title_frame;
-
-}
 
 
 -(void)onClick{

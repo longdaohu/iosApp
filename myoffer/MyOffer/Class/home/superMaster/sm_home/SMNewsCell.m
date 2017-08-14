@@ -249,8 +249,6 @@ static NSString *cv_identify = @"sm_cv_news";
     CGFloat r_x = contentSize.width + 15;
     self.titleLab.frame = CGRectMake(r_x , 0, 20, r_h);
     self.title_X = r_x;
-
-    
     
 }
 

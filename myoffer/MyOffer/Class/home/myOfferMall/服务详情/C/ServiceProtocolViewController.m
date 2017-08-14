@@ -109,8 +109,8 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.bgView addSubview:self.tableView];
-    self.tableView.backgroundColor = XCOLOR_BG;
-    
+    self.tableView.backgroundColor = XCOLOR_WHITE;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     XWeakSelf

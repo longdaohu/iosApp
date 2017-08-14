@@ -15,13 +15,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oe7-Na-5cJ">
-                    <rect key="frame" x="0.0" y="31" width="375" height="110"/>
-                    <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="110" id="KHl-Jg-6G1"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2L-Os-6rg">
                     <rect key="frame" x="192.5" y="76" width="167.5" height="50"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,7 +57,7 @@
                     <rect key="frame" x="0.0" y="60" width="375" height="0.5"/>
                     <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.91361075680272108" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="ywQ-Xz-tBi"/>
+                        <constraint firstAttribute="height" constant="0.5" id="ywQ-Xz-tBi"/>
                     </constraints>
                 </view>
             </subviews>
@@ -72,20 +65,16 @@
                 <constraint firstItem="o2L-Os-6rg" firstAttribute="leading" secondItem="uxN-KI-fkV" secondAttribute="trailing" constant="10" id="8GE-u2-nRb"/>
                 <constraint firstItem="o2L-Os-6rg" firstAttribute="width" secondItem="uxN-KI-fkV" secondAttribute="width" id="IN7-kc-Gxc"/>
                 <constraint firstAttribute="trailing" secondItem="6vk-75-jLN" secondAttribute="trailing" id="Jz0-Fe-F4Y"/>
-                <constraint firstAttribute="trailing" secondItem="Oe7-Na-5cJ" secondAttribute="trailing" id="Kma-9v-kLc"/>
                 <constraint firstItem="o2L-Os-6rg" firstAttribute="height" secondItem="uxN-KI-fkV" secondAttribute="height" id="Wgg-PS-lfv"/>
                 <constraint firstItem="uxN-KI-fkV" firstAttribute="top" secondItem="6vk-75-jLN" secondAttribute="bottom" constant="15" id="acy-09-Im9"/>
                 <constraint firstAttribute="trailing" secondItem="o2L-Os-6rg" secondAttribute="trailing" constant="15" id="bzy-YF-2Hu"/>
                 <constraint firstAttribute="bottom" secondItem="o2L-Os-6rg" secondAttribute="bottom" constant="15" id="d0U-6u-Wie"/>
                 <constraint firstAttribute="bottom" secondItem="uxN-KI-fkV" secondAttribute="bottom" constant="15" id="fuK-p6-YgL"/>
-                <constraint firstItem="Oe7-Na-5cJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iBe-fz-tbW"/>
                 <constraint firstItem="uxN-KI-fkV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="iO1-ZV-GMB"/>
                 <constraint firstItem="6vk-75-jLN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lPu-cx-pfD"/>
-                <constraint firstAttribute="bottom" secondItem="Oe7-Na-5cJ" secondAttribute="bottom" id="qoM-sD-wpC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bgView" destination="Oe7-Na-5cJ" id="XeS-yy-WIX"/>
                 <outlet property="noAgreeBtn" destination="uxN-KI-fkV" id="Tvh-LY-KoO"/>
             </connections>
             <point key="canvasLocation" x="-138.5" y="-140.5"/>
