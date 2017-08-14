@@ -1002,6 +1002,10 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     
         _audioNotiBtn.hidden = NO;
         self.locked_audio = YES;
+    }else{
+    
+        _audioNotiBtn.hidden = YES;
+        self.locked_audio = NO;
     }
     
     if (playerModel.title) { self.titleLabel.text = playerModel.title; }

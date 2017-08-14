@@ -242,6 +242,11 @@
             
             [self.playerView pause];
              self.playerView.userInteractionEnabled = LOGIN ? YES : NO;
+            
+        }else{
+            
+            self.playerView.userInteractionEnabled = YES;
+
         }
         
         
