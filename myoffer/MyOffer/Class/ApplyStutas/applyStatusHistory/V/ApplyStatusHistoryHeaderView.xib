@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ApplyStatusHistoryHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="录控按钮。中间的红色按钮将停止与启动它被点击时，应用程序目前正在分析。注意这实际上是停止和启动应用程序,而不是暂停它" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJI-c9-Bp2">
+                    <rect key="frame" x="15" y="15" width="345" height="50.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJw-l3-nKA" userLabel="padding">
+                    <rect key="frame" x="15" y="70.5" width="4" height="14"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="4e5-LH-rCU"/>
+                        <constraint firstAttribute="width" constant="4" id="Kbi-VB-JlZ"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="运行定时器和运行导航,定时器显示APP已经运行了多长时间,箭头之间是可以移动的。如果停止，然后使用录制按钮重新启动应用程序" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Uu-cP-O2h">
+                    <rect key="frame" x="24" y="70.5" width="336" height="43"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学申请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Iw-0Q-wCr" userLabel="tag留学申请">
+                    <rect key="frame" x="15" y="118.5" width="49.5" height="20"/>
+                    <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="6sU-x5-HMn"/>
+                        <constraint firstAttribute="width" constant="49.5" id="thd-dL-vcw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <color key="highlightedColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hJw-l3-nKA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="2tg-SN-Bxd"/>
+                <constraint firstItem="hJw-l3-nKA" firstAttribute="top" secondItem="jJI-c9-Bp2" secondAttribute="bottom" constant="5" id="3g7-rT-nKb"/>
+                <constraint firstItem="2Iw-0Q-wCr" firstAttribute="top" secondItem="9Uu-cP-O2h" secondAttribute="bottom" constant="5" id="ENQ-FQ-1tn"/>
+                <constraint firstItem="jJI-c9-Bp2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Qd2-vg-GGo"/>
+                <constraint firstItem="jJI-c9-Bp2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="RzG-ng-F8j"/>
+                <constraint firstItem="9Uu-cP-O2h" firstAttribute="top" secondItem="hJw-l3-nKA" secondAttribute="top" id="VFh-PG-wGs"/>
+                <constraint firstItem="2Iw-0Q-wCr" firstAttribute="leading" secondItem="hJw-l3-nKA" secondAttribute="leading" id="dyL-Yw-wds"/>
+                <constraint firstAttribute="trailing" secondItem="jJI-c9-Bp2" secondAttribute="trailing" constant="15" id="hbA-3R-oMS"/>
+                <constraint firstItem="9Uu-cP-O2h" firstAttribute="trailing" secondItem="jJI-c9-Bp2" secondAttribute="trailing" id="jnx-oR-0GG"/>
+                <constraint firstItem="9Uu-cP-O2h" firstAttribute="leading" secondItem="hJw-l3-nKA" secondAttribute="trailing" constant="5" id="oqw-NN-Nek"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="paddingView" destination="hJw-l3-nKA" id="4qF-le-vS8"/>
+                <outlet property="sub_titleLab" destination="9Uu-cP-O2h" id="0xv-Fi-h1D"/>
+                <outlet property="tagHeightConstraint" destination="6sU-x5-HMn" id="nfK-au-KXM"/>
+                <outlet property="tagLab" destination="2Iw-0Q-wCr" id="KTn-yi-uB4"/>
+                <outlet property="tagWidthConstraint" destination="thd-dL-vcw" id="FHG-ON-ScF"/>
+                <outlet property="titleLab" destination="jJI-c9-Bp2" id="M5e-5I-KmY"/>
+            </connections>
+            <point key="canvasLocation" x="-151" y="-208"/>
+        </view>
+    </objects>
+</document>

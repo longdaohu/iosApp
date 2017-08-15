@@ -135,7 +135,11 @@
 #define kAPISelectorSuperMasterlist @"GET api/sm/lectures"
 //文章分类
 #define kAPISelectorMessageCenterCatigory @"GET api/articles/index"
-//文章分类
+//文章分类专题
 #define kAPISelectorMessageCenterTopic @"GET api/hot-article-topics"
+//服务状态列表
+#define kAPISelectorStatusList @"GET api/account/apply-process"
+//申请流程状态详情
+#define kAPISelectorStatusDetail @"GET api/account/apply-process/"
 
 

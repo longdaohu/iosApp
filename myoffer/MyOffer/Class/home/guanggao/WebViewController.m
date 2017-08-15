@@ -13,7 +13,8 @@
 #import "MyOfferServerMallViewController.h"
 #import "NotificationViewController.h"
 #import "SearchUniversityCenterViewController.h"
-#import "ApplyStatusViewController.h"
+//#import "ApplyStatusViewController.h"
+#import "ApplyStatusHistoryViewController.h"
 #import "UniversityViewController.h"
 #import "IntelligentResultViewController.h"
 
@@ -152,7 +153,7 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     
-     NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args) {window.location = 'app:jump/' + args;}};" : @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
+     NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};";
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
     
@@ -187,7 +188,7 @@
         pageNumber = 4; //OK   留学咨询
     }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report"] ) {
         pageNumber = 5;  //Ok   WebViewController
-    }else if([absoluteString containsString:@"jump/0"]) {
+    }else if([absoluteString containsString:@"jump/1"]) {
         pageNumber = 6;  //    申请状态
     }else if([absoluteString containsString:@"/university/"]) {
         pageNumber = 7;  //     学校详情
@@ -253,8 +254,6 @@
             
             if (apiValue.length == 0) {
                 
-//                NSMutableURLRequest *request = [navigationAction.request mutableCopy];
-//                [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
                 
                 WebViewController *webPage = [[WebViewController alloc] init];
                  webPage.path = absoluteString;
@@ -262,7 +261,6 @@
                 
                 decisionHandler(WKNavigationActionPolicyCancel);
                 
-//                [webView loadRequest:request];
                 
             }else{
                 
@@ -273,9 +271,9 @@
             break;
             case 6:
         {
+            [self caseApplyStatus:absoluteString];
             
-               [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
-                decisionHandler(WKNavigationActionPolicyCancel);
+            decisionHandler(WKNavigationActionPolicyCancel);
          }
             break;
         case 7:
@@ -291,24 +289,18 @@
             break;
         case 8:
         {
-           
-            [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
+            [self caseServiceMall];
+            
             decisionHandler(WKNavigationActionPolicyCancel);
         }
             break;
-        case 9:
+        case 9:  case 10:
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:absoluteString]];
             decisionHandler(WKNavigationActionPolicyCancel);
             
             break;
-        case 10:
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:absoluteString]];
-            decisionHandler(WKNavigationActionPolicyCancel);
-
-        }
-            break;
+    
        default:
             decisionHandler(WKNavigationActionPolicyAllow);
             break;
@@ -479,8 +471,6 @@
     NSDictionary *dict =  response[@"args"];
     NSString *path = [dict[@"url"] length] > 0 ? dict[@"url"]: @"http://www.myoffer.cn/";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
-    
-    
 }
 
 //KVC 监听方法
@@ -497,6 +487,31 @@
         
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+//服务商城
+- (void)caseServiceMall{
+    
+    [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
+    
+}
+
+//服务状态
+- (void)caseApplyStatus:(NSString *)url_path{
+  
+    NSString *inner = @"jump/1/";
+    NSString *process_id = [url_path componentsSeparatedByString:inner].lastObject;
+    NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorStatusDetail,process_id];
+    XWeakSelf
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+       
+        ApplyStatusHistoryViewController *historyVC = [[ApplyStatusHistoryViewController alloc] init];
+        historyVC.status_history = response;
+        [weakSelf.navigationController pushViewController:historyVC animated:YES];
+        
+    }];
+    
+    
 }
 
 

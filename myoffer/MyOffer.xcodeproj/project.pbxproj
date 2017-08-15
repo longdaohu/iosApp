@@ -123,6 +123,9 @@
 		AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2286291E715BB500E6E5CD /* PromttViewController.xib */; };
 		AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */; };
 		AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */; };
+		AE2B1DAD1F42987300FB953E /* ApplyStatusHistoryItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B1DAC1F42987300FB953E /* ApplyStatusHistoryItemFrame.m */; };
+		AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2B1DAF1F429C2900FB953E /* ApplyStatusHistoryHeaderView.m */; };
+		AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2B1DB11F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib */; };
 		AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */; };
 		AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E811DD5B64100B4E9F3 /* mergeItemView.m */; };
 		AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2D5E831DD5B64100B4E9F3 /* mergeSuccessViewController.m */; };
@@ -270,6 +273,17 @@
 		AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A1B1EBC87890035A31D /* ao_more.jpg */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
 		AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */; };
+		AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */; };
+		AE914EC91F4181E1008A43CD /* ApplyStutasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC81F4181E1008A43CD /* ApplyStutasModel.m */; };
+		AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914ECB1F418238008A43CD /* ApplyStutasHistoryModel.m */; };
+		AE914ECF1F4184F2008A43CD /* ApplyStatusModelFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914ECE1F4184F2008A43CD /* ApplyStatusModelFrame.m */; };
+		AE914ED31F4188B0008A43CD /* ApplyStatusNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914ED11F4188B0008A43CD /* ApplyStatusNewCell.m */; };
+		AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE914ED21F4188B0008A43CD /* ApplyStatusNewCell.xib */; };
+		AE914EDC1F419EB9008A43CD /* ApplyStatusHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EDA1F419EB9008A43CD /* ApplyStatusHistoryCell.m */; };
+		AE914EDD1F419EB9008A43CD /* ApplyStatusHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE914EDB1F419EB9008A43CD /* ApplyStatusHistoryCell.xib */; };
+		AE914EE11F419F38008A43CD /* ApplyStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EDF1F419F38008A43CD /* ApplyStatusHistoryViewController.m */; };
+		AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE914EE01F419F38008A43CD /* ApplyStatusHistoryViewController.xib */; };
+		AE914EE51F41A563008A43CD /* ApplyStatusHistoryFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EE41F41A563008A43CD /* ApplyStatusHistoryFrameModel.m */; };
 		AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */; };
 		AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */; };
 		AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E11D6DAAF80025FC58 /* UniverstyHeaderView.m */; };
@@ -679,6 +693,11 @@
 		AE2286291E715BB500E6E5CD /* PromttViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromttViewController.xib; sourceTree = "<group>"; };
 		AE22862C1E71660500E6E5CD /* PipeiNoResultVeiw.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PipeiNoResultVeiw.xib; sourceTree = "<group>"; };
 		AE22862E1E7176B800E6E5CD /* WYLXSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WYLXSuccessView.xib; sourceTree = "<group>"; };
+		AE2B1DAB1F42987300FB953E /* ApplyStatusHistoryItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyStatusHistoryItemFrame.h; path = ../../M/ApplyStatusHistoryItemFrame.h; sourceTree = "<group>"; };
+		AE2B1DAC1F42987300FB953E /* ApplyStatusHistoryItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyStatusHistoryItemFrame.m; path = ../../M/ApplyStatusHistoryItemFrame.m; sourceTree = "<group>"; };
+		AE2B1DAE1F429C2900FB953E /* ApplyStatusHistoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusHistoryHeaderView.h; sourceTree = "<group>"; };
+		AE2B1DAF1F429C2900FB953E /* ApplyStatusHistoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusHistoryHeaderView.m; sourceTree = "<group>"; };
+		AE2B1DB11F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyStatusHistoryHeaderView.xib; sourceTree = "<group>"; };
 		AE2D5E7E1DD5B64100B4E9F3 /* mergeAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeAccountViewController.h; sourceTree = "<group>"; };
 		AE2D5E7F1DD5B64100B4E9F3 /* mergeAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mergeAccountViewController.m; sourceTree = "<group>"; };
 		AE2D5E801DD5B64100B4E9F3 /* mergeItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mergeItemView.h; sourceTree = "<group>"; };
@@ -954,6 +973,25 @@
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQserviceSingleView.h; sourceTree = "<group>"; };
 		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQserviceSingleView.m; sourceTree = "<group>"; };
+		AE914EC21F417F59008A43CD /* ApplyStutasCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasCenterViewController.h; sourceTree = "<group>"; };
+		AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStutasCenterViewController.m; sourceTree = "<group>"; };
+		AE914EC71F4181E1008A43CD /* ApplyStutasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasModel.h; sourceTree = "<group>"; };
+		AE914EC81F4181E1008A43CD /* ApplyStutasModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStutasModel.m; sourceTree = "<group>"; };
+		AE914ECA1F418238008A43CD /* ApplyStutasHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyStutasHistoryModel.h; path = ../../M/ApplyStutasHistoryModel.h; sourceTree = "<group>"; };
+		AE914ECB1F418238008A43CD /* ApplyStutasHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyStutasHistoryModel.m; path = ../../M/ApplyStutasHistoryModel.m; sourceTree = "<group>"; };
+		AE914ECD1F4184F2008A43CD /* ApplyStatusModelFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusModelFrame.h; sourceTree = "<group>"; };
+		AE914ECE1F4184F2008A43CD /* ApplyStatusModelFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusModelFrame.m; sourceTree = "<group>"; };
+		AE914ED01F4188B0008A43CD /* ApplyStatusNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusNewCell.h; sourceTree = "<group>"; };
+		AE914ED11F4188B0008A43CD /* ApplyStatusNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusNewCell.m; sourceTree = "<group>"; };
+		AE914ED21F4188B0008A43CD /* ApplyStatusNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyStatusNewCell.xib; sourceTree = "<group>"; };
+		AE914ED91F419EB9008A43CD /* ApplyStatusHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyStatusHistoryCell.h; path = ../C/ApplyStatusHistoryCell.h; sourceTree = "<group>"; };
+		AE914EDA1F419EB9008A43CD /* ApplyStatusHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyStatusHistoryCell.m; path = ../C/ApplyStatusHistoryCell.m; sourceTree = "<group>"; };
+		AE914EDB1F419EB9008A43CD /* ApplyStatusHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ApplyStatusHistoryCell.xib; path = ../C/ApplyStatusHistoryCell.xib; sourceTree = "<group>"; };
+		AE914EDE1F419F38008A43CD /* ApplyStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusHistoryViewController.h; sourceTree = "<group>"; };
+		AE914EDF1F419F38008A43CD /* ApplyStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusHistoryViewController.m; sourceTree = "<group>"; };
+		AE914EE01F419F38008A43CD /* ApplyStatusHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyStatusHistoryViewController.xib; sourceTree = "<group>"; };
+		AE914EE31F41A563008A43CD /* ApplyStatusHistoryFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplyStatusHistoryFrameModel.h; path = ../../M/ApplyStatusHistoryFrameModel.h; sourceTree = "<group>"; };
+		AE914EE41F41A563008A43CD /* ApplyStatusHistoryFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ApplyStatusHistoryFrameModel.m; path = ../../M/ApplyStatusHistoryFrameModel.m; sourceTree = "<group>"; };
 		AE93E4DA1D6DA3E70025FC58 /* UniversityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityViewController.h; path = controller/UniversityViewController.h; sourceTree = "<group>"; };
 		AE93E4DB1D6DA3E70025FC58 /* UniversityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityViewController.m; path = controller/UniversityViewController.m; sourceTree = "<group>"; };
 		AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversitydetailNew.h; path = controller/UniversitydetailNew.h; sourceTree = "<group>"; };
@@ -2426,6 +2464,82 @@
 			name = serviceCenter;
 			sourceTree = "<group>";
 		};
+		AE914EC11F417F1A008A43CD /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AE914EC21F417F59008A43CD /* ApplyStutasCenterViewController.h */,
+				AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		AE914EC51F418139008A43CD /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AE914EC71F4181E1008A43CD /* ApplyStutasModel.h */,
+				AE914EC81F4181E1008A43CD /* ApplyStutasModel.m */,
+				AE914ECD1F4184F2008A43CD /* ApplyStatusModelFrame.h */,
+				AE914ECE1F4184F2008A43CD /* ApplyStatusModelFrame.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AE914EC61F418139008A43CD /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AE914ED01F4188B0008A43CD /* ApplyStatusNewCell.h */,
+				AE914ED11F4188B0008A43CD /* ApplyStatusNewCell.m */,
+				AE914ED21F4188B0008A43CD /* ApplyStatusNewCell.xib */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		AE914ED51F419E61008A43CD /* applyStatusHistory */ = {
+			isa = PBXGroup;
+			children = (
+				AE914ED61F419E61008A43CD /* C */,
+				AE914ED71F419E61008A43CD /* M */,
+				AE914ED81F419E61008A43CD /* V */,
+			);
+			path = applyStatusHistory;
+			sourceTree = "<group>";
+		};
+		AE914ED61F419E61008A43CD /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AE914EDE1F419F38008A43CD /* ApplyStatusHistoryViewController.h */,
+				AE914EDF1F419F38008A43CD /* ApplyStatusHistoryViewController.m */,
+				AE914EE01F419F38008A43CD /* ApplyStatusHistoryViewController.xib */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		AE914ED71F419E61008A43CD /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AE914EE31F41A563008A43CD /* ApplyStatusHistoryFrameModel.h */,
+				AE914EE41F41A563008A43CD /* ApplyStatusHistoryFrameModel.m */,
+				AE914ECA1F418238008A43CD /* ApplyStutasHistoryModel.h */,
+				AE914ECB1F418238008A43CD /* ApplyStutasHistoryModel.m */,
+				AE2B1DAB1F42987300FB953E /* ApplyStatusHistoryItemFrame.h */,
+				AE2B1DAC1F42987300FB953E /* ApplyStatusHistoryItemFrame.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AE914ED81F419E61008A43CD /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AE914ED91F419EB9008A43CD /* ApplyStatusHistoryCell.h */,
+				AE914EDA1F419EB9008A43CD /* ApplyStatusHistoryCell.m */,
+				AE914EDB1F419EB9008A43CD /* ApplyStatusHistoryCell.xib */,
+				AE2B1DAE1F429C2900FB953E /* ApplyStatusHistoryHeaderView.h */,
+				AE2B1DAF1F429C2900FB953E /* ApplyStatusHistoryHeaderView.m */,
+				AE2B1DB11F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
@@ -2632,6 +2746,10 @@
 		AEA2497B1D5B215300DD7939 /* ApplyStutas */ = {
 			isa = PBXGroup;
 			children = (
+				AE914ED51F419E61008A43CD /* applyStatusHistory */,
+				AE914EC11F417F1A008A43CD /* C */,
+				AE914EC51F418139008A43CD /* M */,
+				AE914EC61F418139008A43CD /* V */,
 				AEA2497C1D5B215300DD7939 /* controller */,
 				AEA2497F1D5B215300DD7939 /* model */,
 				AEA249861D5B215300DD7939 /* view */,
@@ -3821,7 +3939,9 @@
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				AEF421061BD4988B00CFB45E /* UMSnsAccountViewController.xib in Resources */,
 				AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */,
+				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
+				AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */,
 				AE1FD7361D5C929500FFD5A8 /* Pre-comp 1_00019.png in Resources */,
 				AE1FD7391D5C929500FFD5A8 /* Pre-comp 1_00021.png in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
@@ -3836,6 +3956,7 @@
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
 				AE1FD74A1D5C929500FFD5A8 /* Pre-comp 1_0008.png in Resources */,
 				AEA24B051D5B24D200DD7939 /* ChangePasswordViewController.xib in Resources */,
+				AE914EDD1F419EB9008A43CD /* ApplyStatusHistoryCell.xib in Resources */,
 				AEA24A0B1D5B224E00DD7939 /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
 				AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */,
@@ -3851,6 +3972,7 @@
 				AE1FD7351D5C929500FFD5A8 /* Pre-comp 1_00018.png in Resources */,
 				AEE9FAE51DC87BDD00D732A7 /* LeftMenuHeaderView.xib in Resources */,
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
+				AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
 				AEF421001BD4988B00CFB45E /* UMSCommentDetailController.xib in Resources */,
 				AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */,
@@ -3961,11 +4083,13 @@
 				AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */,
 				AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */,
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
+				AE914ECF1F4184F2008A43CD /* ApplyStatusModelFrame.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
 				AE3AB6C01F21A3C300A3C7E3 /* SMDetailViewController.m in Sources */,
 				AEA24B7D1D5B25E000DD7939 /* FilterContentFrame.m in Sources */,
 				AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */,
+				AE914EDC1F419EB9008A43CD /* ApplyStatusHistoryCell.m in Sources */,
 				AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */,
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				5672E8B21CCBA9730099FDFC /* RNCachingURLProtocol.m in Sources */,
@@ -4015,6 +4139,7 @@
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
+				AE914EC91F4181E1008A43CD /* ApplyStutasModel.m in Sources */,
 				AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */,
 				AE7F9B101EB8546F00D30525 /* SearchPromptView.m in Sources */,
 				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
@@ -4033,10 +4158,12 @@
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
 				AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */,
 				AE3943E11E0A1AD00038826A /* SDCycleScrollView.m in Sources */,
+				AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */,
 				AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */,
 				AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */,
 				AE3600691E8E24C900EE20EB /* ServiceProtocalBottomView.m in Sources */,
 				AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */,
+				AE914ED31F4188B0008A43CD /* ApplyStatusNewCell.m in Sources */,
 				AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */,
 				AEA24BEA1D5B266A00DD7939 /* LogoView.m in Sources */,
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
@@ -4078,6 +4205,7 @@
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE3AB6AD1F21A27300A3C7E3 /* SMNewsCell.m in Sources */,
+				AE2B1DAD1F42987300FB953E /* ApplyStatusHistoryItemFrame.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24AF51D5B24D200DD7939 /* MenuItem.m in Sources */,
@@ -4233,12 +4361,15 @@
 				AEA86E041EA4C8210021BE1B /* MyofferUser.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AE4B2E6D1F1E095600E328F7 /* FSBottomTableViewCell.m in Sources */,
+				AE914EE51F41A563008A43CD /* ApplyStatusHistoryFrameModel.m in Sources */,
 				AEA24A011D5B224E00DD7939 /* NomalTableSectionHeaderView.m in Sources */,
 				AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
+				AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */,
+				AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */,
 				AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */,
 				AEA24C0A1D5B269A00DD7939 /* InternationalControl.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
@@ -4279,6 +4410,7 @@
 				AE37088D1EB083F700502A62 /* MyOfferSubjecct.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* CatigaryScrollView.m in Sources */,
 				AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */,
+				AE914EE11F419F38008A43CD /* ApplyStatusHistoryViewController.m in Sources */,
 				AE3AB6AB1F21A27300A3C7E3 /* SMHotFrame.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
