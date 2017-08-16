@@ -18,7 +18,7 @@
     
     CGFloat padding = 15;
  
-    CGFloat title_x = padding;
+    CGFloat title_x = padding + 5;
     CGFloat title_y = padding;
     CGFloat title_w = XSCREEN_WIDTH - title_x - padding;
     CGSize  titleSize = [statusModel.title KD_sizeWithAttribute:@{NSFontAttributeName :[UIFont systemFontOfSize:14]} maxWidth:title_w];

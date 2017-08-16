@@ -25,31 +25,33 @@
 
     _statusModel = statusModel;
     
+    CGFloat left_Padding = 20;
+    CGFloat top_Padding = 15;
     CGFloat margin = 10;
     
     CGFloat date_w = 70;
     CGFloat date_h = 20;
     
-    CGFloat status_x = margin;
-    CGFloat status_y = margin;
+    CGFloat status_x = left_Padding;
+    CGFloat status_y = top_Padding;
     CGFloat status_w = date_w;
-    UIFont *statusFont = [UIFont systemFontOfSize:13];
+    UIFont *statusFont = [UIFont systemFontOfSize:12];
     CGSize statusSize = [statusModel.status sizeWithAttributes:@{NSFontAttributeName:statusFont}];
     CGFloat status_h =  statusSize.width > date_w ? statusFont.lineHeight * 2 :  statusFont.lineHeight;
     self.status_Frame = CGRectMake(status_x, status_y, status_w, status_h);
     
     CGFloat date_x =  status_x;
-    CGFloat date_y =  status_y + statusFont.lineHeight * 2.5  +  margin * 2;
+    CGFloat date_y =  status_y + statusFont.lineHeight * 2  +  top_Padding * 2;
     self.date_Frame = CGRectMake(date_x, date_y, date_w, date_h);
     
     
-    self.cell_Height = CGRectGetMaxY(self.date_Frame) + margin;
+    self.cell_Height = CGRectGetMaxY(self.date_Frame) + top_Padding;
     
     
     
     CGFloat title_x = CGRectGetMaxX(self.status_Frame) + margin * 2;
     CGFloat title_y = status_y;
-    CGFloat title_w = XSCREEN_WIDTH - margin - title_x;
+    CGFloat title_w = XSCREEN_WIDTH - left_Padding - title_x;
     UIFont *titleFont = [UIFont systemFontOfSize:14];
     CGSize titleSize = [statusModel.title sizeWithAttributes:@{NSFontAttributeName:titleFont}];
     CGFloat title_h =  titleSize.width > title_w ? titleFont.lineHeight * 2 :  titleFont.lineHeight;
@@ -59,7 +61,7 @@
     CGFloat tag_H = date_h;
     CGFloat tag_w = 60;
     CGFloat tag_x = title_x;
-    CGFloat tag_y = self.cell_Height - tag_H - margin;
+    CGFloat tag_y = self.cell_Height - tag_H - top_Padding;
     self.tag_Frame = CGRectMake(tag_x, tag_y, tag_w, tag_H);
     
     

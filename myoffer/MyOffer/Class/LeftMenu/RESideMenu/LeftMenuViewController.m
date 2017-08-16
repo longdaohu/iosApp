@@ -12,7 +12,7 @@
 #import "SetViewController.h"
 #import "HelpViewController.h"
 #import "NotificationViewController.h"
-#import "ApplyStatusViewController.h"
+//#import "ApplyStatusViewController.h"
 #import "OrderViewController.h"
 #import "MenuCell.h"
 #import "MenuItem.h"
@@ -22,7 +22,7 @@
 #import "CatigoryViewController.h"
 #import "LeftMenuHeaderView.h"
 #import "MyofferUser.h"
-
+#import "ApplyStutasCenterViewController.h"
 
 @interface LeftMenuViewController ()<RESideMenuDelegate>
 
@@ -71,7 +71,7 @@
     
     [self.menuItems removeAllObjects];
     
-    MenuItem *apply  = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Applycation") icon:@"menu_application" count:@"0"];
+    MenuItem *apply  = [MenuItem menuItemInitWithName:@"服务状态" icon:@"menu_application" count:@"0"];
     MenuItem *set    = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Set") icon:@"menu_setting" count:@"0"];
     MenuItem *help   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-helpCenter") icon:@"help" count:@"0"];
     MenuItem *logout = [MenuItem menuItemInitWithName:GDLocalizedString(@"Left-Logout") icon:@"logout" count:@"0"];
@@ -169,11 +169,11 @@
          *  【 -1       ——表示没有申请过
          *   检查申请进程，判断我的申请跳转页面
          */
-        [self startAPIRequestWithSelector:kAPISelectorApplyStutasNew parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
-            self.Applystate = response[@"state"];
-            
-        }];
+//        [self startAPIRequestWithSelector:kAPISelectorApplyStutasNew parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
+//            
+//            self.Applystate = response[@"state"];
+//            
+//        }];
         
     }
     
@@ -292,15 +292,15 @@
     
       RequireLogin
     
-    if ([self.Applystate containsString:@"1"] || !self.Applystate) {
- 
-        [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
-        
-        return;
-
-     }
-         
-      [self pushViewController:[[ApplyStatusViewController alloc] init]];
+//    if ([self.Applystate containsString:@"1"] || !self.Applystate) {
+// 
+//        [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
+//        
+//        return;
+//
+//     }
+//  
+      [self pushViewController:[[ApplyStutasCenterViewController alloc] init]];
     
 }
 

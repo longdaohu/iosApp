@@ -85,8 +85,8 @@ static NSString *cv_identify = @"sm_cv_news";
     UILabel *titleLab = [UILabel new];
     titleLab.text = @"释放查看全部";
     titleLab.numberOfLines = 0;
-    titleLab.font = [UIFont systemFontOfSize:FONTSIZE(16)];
-    titleLab.textColor = XCOLOR_TITLE;
+    titleLab.font = [UIFont systemFontOfSize:12];
+    titleLab.textColor = XCOLOR_SUBTITLE;
     self.titleLab = titleLab;
     [bgView  addSubview:titleLab];
     
@@ -98,7 +98,7 @@ static NSString *cv_identify = @"sm_cv_news";
         
         _shaper =[CAShapeLayer layer];
         [self.bgView.layer addSublayer:_shaper];
-        _shaper.fillColor = [UIColor colorWithWhite:0 alpha:0.3].CGColor;
+        _shaper.fillColor = [UIColor colorWithWhite:0 alpha:0.06].CGColor;
         
     }
     return _shaper;
@@ -206,6 +206,7 @@ static NSString *cv_identify = @"sm_cv_news";
         [path moveToPoint:CGPointMake(self.bgView.mj_w, 0)];
         [path  addQuadCurveToPoint:CGPointMake(self.bgView.mj_w, self.bgView.mj_h) controlPoint:CGPointMake(path_x,self.bgView.mj_h *0.5)];
         self.shaper.path = path.CGPath;
+        
         
     }else{
     

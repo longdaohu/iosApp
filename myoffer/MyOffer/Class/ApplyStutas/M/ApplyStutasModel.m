@@ -17,13 +17,5 @@
 }
 
 
-//- (NSString *)title{
-//
-//    
-//    NSString *path = @"这是为什么呢一生有你地";
-//    
-//    
-//    return [NSString stringWithFormat:@"%@%@",_title,path];
-//}
 
 @end

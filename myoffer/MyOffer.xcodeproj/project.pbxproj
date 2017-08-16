@@ -232,6 +232,7 @@
 		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
+		AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */ = {isa = PBXBuildFile; fileRef = AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
 		AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F286B1D77CA3C00E9A47A /* UUChart.m */; };
@@ -900,6 +901,7 @@
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
 		AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotSectionFooterView.m; sourceTree = "<group>"; };
 		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
+		AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dot_40x40.gif; path = ../dot_40x40.gif; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		AE6F28671D77CA3C00E9A47A /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
@@ -3579,6 +3581,7 @@
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
 				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
+				AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */,
 				AE892A191EBC87890035A31D /* uk_more.jpg */,
 				AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */,
 				AE892A1A1EBC87890035A31D /* usa_more.jpg */,
@@ -3909,6 +3912,7 @@
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
+				AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */,
 				AEA24A061D5B224E00DD7939 /* CatigaryCityCollectionCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,

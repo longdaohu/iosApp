@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-06-02" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8w-ae-NAG">
-                        <rect key="frame" x="10" y="84.5" width="70" height="20"/>
+                        <rect key="frame" x="20" y="79.5" width="70" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ANR-n1-k07"/>
                             <constraint firstAttribute="width" constant="70" id="Rtg-RU-KFy"/>
@@ -30,26 +30,26 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已获入学确认A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43l-iB-ahO">
-                        <rect key="frame" x="10" y="10" width="70" height="31.5"/>
+                        <rect key="frame" x="20" y="15" width="70" height="31.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.019607843140000001" green="0.79607843140000001" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Hi-7A-E0v" userLabel="line">
-                        <rect key="frame" x="90" y="10" width="0.5" height="94.5"/>
+                        <rect key="frame" x="100" y="15" width="0.5" height="84.5"/>
                         <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="0.5" id="geh-cG-cFT"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="University of York  Economics and Political science" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="010-FD-C1a">
-                        <rect key="frame" x="100.5" y="10" width="196.5" height="33.5"/>
+                        <rect key="frame" x="110.5" y="15" width="176.5" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学申请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HL-q6-iLN" userLabel="tag留学申请">
-                        <rect key="frame" x="100" y="84" width="60" height="20"/>
+                        <rect key="frame" x="110" y="79" width="60" height="20"/>
                         <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="03W-Ez-wHS"/>
@@ -60,7 +60,7 @@
                         <color key="highlightedColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-1d-XIc" userLabel="padding">
-                        <rect key="frame" x="100" y="40" width="4" height="14"/>
+                        <rect key="frame" x="110" y="55" width="4" height="14"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="4" id="YAJ-0i-UOg"/>
@@ -68,31 +68,40 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="international development and humantical women`s study" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNA-ie-NZD">
-                        <rect key="frame" x="109" y="40" width="180" height="14"/>
+                        <rect key="frame" x="119" y="55" width="170" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" patternImage="label:DNA-ie-NZD:patternImage" colorSpace="pattern"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-be-T49">
+                        <rect key="frame" x="97.5" y="59.5" width="6" height="6"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="6" id="Vqr-PK-XKj"/>
+                            <constraint firstAttribute="height" constant="6" id="liE-Qe-LgM"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="010-FD-C1a" firstAttribute="leading" secondItem="1Hi-7A-E0v" secondAttribute="trailing" constant="10" id="42P-Oa-zTt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="DNA-ie-NZD" secondAttribute="trailing" constant="10" id="6a3-Ei-zDe"/>
-                    <constraint firstItem="43l-iB-ahO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8k8-S9-Jsd"/>
+                    <constraint firstItem="43l-iB-ahO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="8k8-S9-Jsd"/>
                     <constraint firstItem="DNA-ie-NZD" firstAttribute="leading" secondItem="GHe-1d-XIc" secondAttribute="trailing" constant="5" id="Ap2-wh-gWR"/>
+                    <constraint firstItem="hHg-be-T49" firstAttribute="centerX" secondItem="1Hi-7A-E0v" secondAttribute="centerX" id="Bdm-cP-hkq"/>
                     <constraint firstItem="1Hi-7A-E0v" firstAttribute="leading" secondItem="43l-iB-ahO" secondAttribute="trailing" constant="10" id="CkV-gx-OpK"/>
-                    <constraint firstItem="43l-iB-ahO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Dvy-Cf-jh6"/>
-                    <constraint firstItem="z8w-ae-NAG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="FZT-xC-cBg"/>
+                    <constraint firstItem="43l-iB-ahO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Dvy-Cf-jh6"/>
+                    <constraint firstItem="z8w-ae-NAG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="FZT-xC-cBg"/>
                     <constraint firstItem="1Hi-7A-E0v" firstAttribute="bottom" secondItem="z8w-ae-NAG" secondAttribute="bottom" id="IBx-94-tpK"/>
                     <constraint firstItem="1Hi-7A-E0v" firstAttribute="top" secondItem="43l-iB-ahO" secondAttribute="top" id="Kv0-42-fDg"/>
                     <constraint firstItem="GHe-1d-XIc" firstAttribute="leading" secondItem="010-FD-C1a" secondAttribute="leading" id="LyQ-eb-KOA"/>
                     <constraint firstItem="1HL-q6-iLN" firstAttribute="bottom" secondItem="z8w-ae-NAG" secondAttribute="bottom" id="PLP-ro-aaD"/>
                     <constraint firstItem="DNA-ie-NZD" firstAttribute="top" secondItem="GHe-1d-XIc" secondAttribute="top" id="QPg-xa-e3a"/>
+                    <constraint firstItem="GHe-1d-XIc" firstAttribute="centerY" secondItem="hHg-be-T49" secondAttribute="centerY" id="XzE-oP-gb1"/>
                     <constraint firstItem="010-FD-C1a" firstAttribute="top" secondItem="43l-iB-ahO" secondAttribute="top" id="Ykp-lO-r99"/>
-                    <constraint firstItem="1HL-q6-iLN" firstAttribute="top" secondItem="GHe-1d-XIc" secondAttribute="bottom" constant="30" id="fKa-ux-tiW"/>
+                    <constraint firstItem="1HL-q6-iLN" firstAttribute="top" secondItem="GHe-1d-XIc" secondAttribute="bottom" constant="10" id="fKa-ux-tiW"/>
                     <constraint firstItem="1HL-q6-iLN" firstAttribute="leading" secondItem="010-FD-C1a" secondAttribute="leading" id="fjA-31-Tns"/>
                     <constraint firstItem="z8w-ae-NAG" firstAttribute="width" secondItem="43l-iB-ahO" secondAttribute="width" id="icE-jP-MXm"/>
-                    <constraint firstAttribute="trailing" secondItem="010-FD-C1a" secondAttribute="trailing" constant="10" id="pdZ-hE-I6W"/>
-                    <constraint firstAttribute="bottom" secondItem="z8w-ae-NAG" secondAttribute="bottom" constant="10" id="z5v-ce-DwE"/>
+                    <constraint firstAttribute="trailing" secondItem="010-FD-C1a" secondAttribute="trailing" constant="20" id="pdZ-hE-I6W"/>
+                    <constraint firstAttribute="bottom" secondItem="z8w-ae-NAG" secondAttribute="bottom" constant="15" id="z5v-ce-DwE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -107,10 +116,11 @@
                 <outlet property="tagWidthConstraint" destination="03W-Ez-wHS" id="2ME-1E-LCo"/>
                 <outlet property="titleLab" destination="010-FD-C1a" id="aup-Us-kwM"/>
             </connections>
-            <point key="canvasLocation" x="-56.5" y="18.5"/>
+            <point key="canvasLocation" x="-8.5" y="22.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="dot" width="8" height="8"/>
         <image name="label:DNA-ie-NZD:patternImage" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU

@@ -10,10 +10,5 @@
 
 @implementation ApplyStutasHistoryModel
 
-- (NSString *)date_time{
-
-    return  [NSString stringWithFormat:@"%@  %@",_date,_time];
-}
-
 
 @end

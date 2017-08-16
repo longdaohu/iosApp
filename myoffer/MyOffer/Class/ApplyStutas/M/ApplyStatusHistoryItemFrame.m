@@ -25,17 +25,19 @@
     CGFloat padding = 15;
     CGFloat margin = 10;
     
-    CGFloat spod_w = 10;
-    CGFloat spod_h = spod_w;
-    CGFloat spod_x = padding - spod_w * 0.5;
-    CGFloat spod_y = padding;
-    self.spod_Frame = CGRectMake(spod_x, spod_y, spod_w, spod_h);
+
     
-    CGFloat line_x = padding;
+    CGFloat line_x = padding + 5;
     CGFloat line_y = padding;
     CGFloat line_w = LINE_HEIGHT;
     CGFloat line_h = 100;
     self.line_Frame = CGRectMake(line_x, line_y, line_w, line_h);
+    
+    CGFloat spod_w = 10;
+    CGFloat spod_h = spod_w;
+    CGFloat spod_x = line_x - spod_w * 0.5;
+    CGFloat spod_y = padding;
+    self.spod_Frame = CGRectMake(spod_x, spod_y, spod_w, spod_h);
     
     
     CGFloat status_x = CGRectGetMaxX(self.line_Frame) + padding;

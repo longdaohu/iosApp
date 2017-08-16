@@ -72,11 +72,11 @@
         
         ApplyStutasHistoryModel *historyItem = status.history[index];
         historyItem.status_color  =  XCOLOR_SUBTITLE;
-        historyItem.image_Name  =   @"abc_spot";
+        historyItem.image_Name  =   @"dot";
         
         if (index == 0) {
             historyItem.status_color  =   XCOLOR_LIGHTBLUE;
-            historyItem.image_Name  = @"Blue_spot" ;
+            historyItem.image_Name  = @"dot_40x40.gif" ;
         }
         
         
@@ -120,7 +120,8 @@
 //超出cell的bounds范围，不能显示
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BOOL clips = (self.status_frame.statusModel.history.count - 1 == indexPath.row);
+    
+    BOOL clips = (self.group.count - 1 == indexPath.row);
   
     cell.clipsToBounds = clips;
     
@@ -128,7 +129,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    ApplyStatusHistoryItemFrame  *histroyFrame =self.group[indexPath.row];
+    ApplyStatusHistoryItemFrame  *histroyFrame = self.group[indexPath.row];
     
     return  histroyFrame.cell_Height;
 }

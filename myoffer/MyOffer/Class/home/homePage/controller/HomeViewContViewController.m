@@ -680,25 +680,25 @@
 
 //检查版本更新
 -(void)checkAPPVersion
-{
+{//https://itunes.apple.com/cn/app/myoffer/id1016290891
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
-    
-    //[NSURLConnection connectionWithRequest:req delegate:self];
-    
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         // 网络请求完成之后就会执行，NSURLSession自动实现多线程
 //        NSLog(@"%@",[NSThread currentThread]);
         
+
         if (data && (error == nil)) {
-            
+  
             // 网络访问成功
             NSError *error;
             id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-            
             NSDictionary *appInfo = (NSDictionary *)jsonObject;
-            NSArray *store_results = [appInfo objectForKey:@"results"];
+            
+ 
+            
+            NSArray *store_results = appInfo[@"results"];
             NSString *storeVersionStr = [[store_results objectAtIndex:0] objectForKey:@"version"];
             NSString *storeVersion = [storeVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
             
@@ -707,20 +707,24 @@
             NSString *ccurrentVersionStr = [appDic objectForKey:@"CFBundleShortVersionString"];
             NSString *currentVersion = [ccurrentVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
             
-            if (currentVersion.integerValue < storeVersion.integerValue) {
+            if (storeVersion.integerValue <= currentVersion.integerValue) return ;
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    //更新UI操作
-                    //.....
-                    [[MyofferUpdateView updateView] show];
-
-                });
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //更新UI操作
+                //.....
+                [[MyofferUpdateView updateView] show];
+                
+            });
             
-        } else {
-            // 网络访问失败
+            
         }
-        
+        /*else {
+            // 网络访问失败
+            
+            NSLog(@"itunes.apple >>>> 失败");
+
+        }
+        */
     }];
     
     [task resume];

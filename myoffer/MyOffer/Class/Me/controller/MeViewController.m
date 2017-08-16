@@ -17,8 +17,7 @@ typedef enum {
 #import "PipeiEditViewController.h"
 #import "FavoriteViewController.h"
 #import "ApplyViewController.h"
-//#import "ApplyStatusViewController.h"
-#import "ApplyStutasCenterViewController.h"
+#import "ApplyStatusViewController.h"
 #import "MyOfferViewController.h"
 #import "ApplyMatialViewController.h"
 #import "IntelligentResultViewController.h"
@@ -555,7 +554,7 @@ typedef enum {
 {
     [MobClick event: @"apply_applyStutasItem"];
 
-     [self pushWithVC:NSStringFromClass([ApplyStutasCenterViewController class])];
+     [self pushWithVC:NSStringFromClass([ApplyStatusViewController class])];
 
 }
 

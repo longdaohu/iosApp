@@ -16,13 +16,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="录控按钮。中间的红色按钮将停止与启动它被点击时，应用程序目前正在分析。注意这实际上是停止和启动应用程序,而不是暂停它" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJI-c9-Bp2">
-                    <rect key="frame" x="15" y="15" width="345" height="50.5"/>
+                    <rect key="frame" x="20" y="15" width="340" height="50.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJw-l3-nKA" userLabel="padding">
-                    <rect key="frame" x="15" y="70.5" width="4" height="14"/>
+                    <rect key="frame" x="20" y="70.5" width="4" height="14"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="4e5-LH-rCU"/>
@@ -30,13 +30,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="运行定时器和运行导航,定时器显示APP已经运行了多长时间,箭头之间是可以移动的。如果停止，然后使用录制按钮重新启动应用程序" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Uu-cP-O2h">
-                    <rect key="frame" x="24" y="70.5" width="336" height="43"/>
+                    <rect key="frame" x="29" y="70.5" width="331" height="43"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学申请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Iw-0Q-wCr" userLabel="tag留学申请">
-                    <rect key="frame" x="15" y="118.5" width="49.5" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="留学申请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Iw-0Q-wCr" userLabel="tag留学申请">
+                    <rect key="frame" x="20" y="118.5" width="50" height="15"/>
                     <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="6sU-x5-HMn"/>
@@ -49,11 +49,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="hJw-l3-nKA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="2tg-SN-Bxd"/>
+                <constraint firstItem="hJw-l3-nKA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="2tg-SN-Bxd"/>
                 <constraint firstItem="hJw-l3-nKA" firstAttribute="top" secondItem="jJI-c9-Bp2" secondAttribute="bottom" constant="5" id="3g7-rT-nKb"/>
                 <constraint firstItem="2Iw-0Q-wCr" firstAttribute="top" secondItem="9Uu-cP-O2h" secondAttribute="bottom" constant="5" id="ENQ-FQ-1tn"/>
                 <constraint firstItem="jJI-c9-Bp2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Qd2-vg-GGo"/>
-                <constraint firstItem="jJI-c9-Bp2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="RzG-ng-F8j"/>
+                <constraint firstItem="jJI-c9-Bp2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="RzG-ng-F8j"/>
                 <constraint firstItem="9Uu-cP-O2h" firstAttribute="top" secondItem="hJw-l3-nKA" secondAttribute="top" id="VFh-PG-wGs"/>
                 <constraint firstItem="2Iw-0Q-wCr" firstAttribute="leading" secondItem="hJw-l3-nKA" secondAttribute="leading" id="dyL-Yw-wds"/>
                 <constraint firstAttribute="trailing" secondItem="jJI-c9-Bp2" secondAttribute="trailing" constant="15" id="hbA-3R-oMS"/>

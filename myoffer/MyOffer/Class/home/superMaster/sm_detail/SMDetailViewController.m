@@ -531,7 +531,13 @@
         SMAudioItemFrame *audio_frame  =  group.items[indexPath.row];
     
         //不能播放音频
-        if (!audio_frame.item.isCanPlay)  return;
+    if (!audio_frame.item.isCanPlay)  {
+    
+        
+        [self loginView];
+        
+        return;
+    }
         
 
     

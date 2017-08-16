@@ -13,6 +13,5 @@
 @property(nonatomic,copy)NSString  *image_Name;
 @property(nonatomic,copy)NSString  *date;
 @property(nonatomic,copy)NSString  *time;
-@property(nonatomic,copy)NSString  *date_time;
 @property(nonatomic,copy)NSString  *status;
 @end

@@ -814,6 +814,7 @@ static const CGFloat ZFPlayerControlBarAutoFadeOutTimeInterval = 0.35f;
     
     if (!_repeatLab) {
         _repeatLab = [UIButton buttonWithType:UIButtonTypeCustom];
+//        NSString *title = ? 注册可观看完整视频
         [_repeatLab setTitle:@"重新播放" forState:UIControlStateNormal];
         _repeatLab.titleLabel.font = [UIFont systemFontOfSize:16];
         [_repeatLab setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
