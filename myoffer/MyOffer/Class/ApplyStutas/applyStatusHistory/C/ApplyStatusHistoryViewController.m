@@ -121,9 +121,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    BOOL clips = (self.group.count - 1 == indexPath.row);
+//    BOOL clips = (self.group.count - 1 == indexPath.row);
   
-    cell.clipsToBounds = clips;
+    cell.clipsToBounds = YES;
     
 }
 

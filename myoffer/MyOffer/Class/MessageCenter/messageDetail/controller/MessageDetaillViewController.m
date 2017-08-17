@@ -303,7 +303,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
+    return group.HaveFooter ? Section_footer_Height_nomal : HEIGHT_ZERO;
 }
 
 
@@ -311,7 +311,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
+    return  group.HaveHeader ? Section_header_Height_nomal : HEIGHT_ZERO;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -354,7 +354,9 @@
         
     }else if (indexPath.section == 1){
         
+       XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
         
+        cellHeight = messageFrame.cell_Height;
         
     }else{
         
@@ -402,9 +404,9 @@
         
         news_cell.messageFrame =  group.items[indexPath.row];
 
-//        BOOL show =  !(group.items.count - 1 == indexPath.row);
+        BOOL show =  !(group.items.count - 1 == indexPath.row);
         
-//        [news_cell separatorLineShow:show];
+        [news_cell separatorLineShow:show];
         
         return news_cell;
         

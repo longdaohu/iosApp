@@ -102,7 +102,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat sectionHeigt = section == 0 ? HEIGHT_ZERO : 40;
+    CGFloat sectionHeigt = (section == 0 )? HEIGHT_ZERO : Section_header_Height_nomal;
     
     return   sectionHeigt;
 }

@@ -436,7 +436,7 @@ static NSString *rankIdentify = @"rankStyle";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return tableView == self.city_tableView ? SECTION_HEADER_HIGHT : 12;
+    return (tableView == self.city_tableView ) ?  Section_header_Height_nomal : 12;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     

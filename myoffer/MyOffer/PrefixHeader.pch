@@ -22,9 +22,7 @@
 #define SUB_LOCAL_MAGIN  8.0
 #define CORNER_RADIUS  4.0
 #define TOP_HIGHT  32.0
-#define SECTION_HEADER_HIGHT  50.0
 #define ITEM_MARGIN   10.0
-#define PADDING_TABLEGROUP 10.0
 #define HEIGHT_ZERO 0.0001
 #define LINE_HEIGHT 0.5
 #define BUTTON_HEIGHT 50
@@ -92,8 +90,8 @@
 #define NetRequest_NoDATA  @"数据为空!"
 
 
-#define DOMAINURL  @"http://www.myofferdemo.com/"
-//#define DOMAINURL  @"http://www.myoffer.cn/"
+//#define DOMAINURL  @"http://www.myofferdemo.com/"
+#define DOMAINURL  @"http://www.myoffer.cn/"
 #import "MJExtension.h"
 #import "YYToolKit.h"
 #import "KDActionSheet.h"

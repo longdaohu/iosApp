@@ -69,10 +69,10 @@
     NSMutableArray *cell_temps = [NSMutableArray array];
     
     CGFloat cell_top = 0;
-    NSInteger current_index = 0;
+//    NSInteger current_index = 0;
     for (NSInteger index = 0; index < item.attributes.count; index++) {
         
-        current_index = index;
+//        current_index = index;
 
         ServiceItemCellFrame *cellView_Frame = [ServiceItemCellFrame cellWithAttribute:item.attributes[index]  maxWidth:centerView_W cellTop:cell_top];
         cell_top = CGRectGetMaxY(cellView_Frame.cell_frame.CGRectValue);

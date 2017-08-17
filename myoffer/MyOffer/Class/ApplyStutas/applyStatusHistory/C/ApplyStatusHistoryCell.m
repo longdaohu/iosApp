@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLab;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UIImageView *spodView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineTopConstraint;
 
 @end
 
@@ -56,9 +57,13 @@
         
         self.spodView.image =  image;
         
+        self.lineTopConstraint.constant =  15;
+        
     }else{
     
         [self.spodView setImage:[UIImage imageNamed:name]];
+        
+        self.lineTopConstraint.constant =  -10;
 
     }
     

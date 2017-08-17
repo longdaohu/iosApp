@@ -382,7 +382,7 @@
         
     }else{
         
-        return nil;
+        return [[UITableViewCell alloc] init];
     }
 
 }

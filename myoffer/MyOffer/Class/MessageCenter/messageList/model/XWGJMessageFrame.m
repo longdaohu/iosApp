@@ -57,7 +57,7 @@
     
     CGFloat  line_X = titlex;
     CGFloat  line_H = LINE_HEIGHT;
-    CGFloat  line_Y = CGRectGetMaxY(self.LogoFrame) + Margin;//Uni_Cell_Height
+    CGFloat  line_Y = CGRectGetMaxY(self.LogoFrame) + Margin;
     CGFloat  line_W = XSCREEN_WIDTH;
     self.lineFrame= CGRectMake(line_X,line_Y, line_W, line_H);
     

@@ -196,7 +196,7 @@
     
     NSArray *items = self.Restults[section];
 
-    return items.count > 0 ? 50 : 0;
+    return items.count > 0 ? Section_header_Height_nomal : 0;
 }
 
 

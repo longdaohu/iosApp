@@ -397,7 +397,7 @@ typedef enum {
     
     UniDetailGroup *group = self.groups[section];
     
-    return  group.HaveHeader ? 40 : HEIGHT_ZERO;
+    return  group.HaveHeader ? Section_header_Height_nomal : HEIGHT_ZERO;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -412,7 +412,7 @@ typedef enum {
     
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveFooter ? PADDING_TABLEGROUP : HEIGHT_ZERO;
+    return group.HaveFooter ? Section_footer_Height_nomal : HEIGHT_ZERO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -427,7 +427,9 @@ typedef enum {
         
     }else if (indexPath.section == 1){
         
+       XWGJMessageFrame *messageFrame =  group.items[indexPath.row];
         
+       cellHeight  = messageFrame.cell_Height;
         
     }else{
         

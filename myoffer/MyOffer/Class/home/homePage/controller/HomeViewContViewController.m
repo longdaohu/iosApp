@@ -557,7 +557,7 @@
 {
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveHeader ? 40 : HEIGHT_ZERO;
+    return group.HaveHeader ? Section_header_Height_nomal : HEIGHT_ZERO;
  }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath

@@ -28,7 +28,7 @@
 
     
     CGFloat line_x = padding + 5;
-    CGFloat line_y = padding;
+    CGFloat line_y = 0;
     CGFloat line_w = LINE_HEIGHT;
     CGFloat line_h = 100;
     self.line_Frame = CGRectMake(line_x, line_y, line_w, line_h);

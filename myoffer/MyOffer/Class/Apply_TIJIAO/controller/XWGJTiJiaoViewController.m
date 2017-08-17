@@ -553,7 +553,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 {
-    return 45.0;
+    return Section_header_Height_nomal;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -861,7 +861,7 @@ typedef enum {
 
     NSInteger section = indexPath.section;
     
-    NSInteger row = indexPath.row;
+    NSInteger row = 0;
     
     if ((indexPath.row + 1) == sectionGroup.celles.count) {
         

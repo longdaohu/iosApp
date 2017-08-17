@@ -383,7 +383,7 @@
 {
     _tableView.scrollEnabled = NO;//pageView开始滚动主tableview禁止滑动
     
-    progress = startIndex - endIndex > 0 ? - progress : progress;
+//    progress = startIndex - endIndex > 0 ? - progress : progress;
     
     //    self.titleView.progress = progress;
 }

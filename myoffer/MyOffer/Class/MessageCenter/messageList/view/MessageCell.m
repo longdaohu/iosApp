@@ -92,6 +92,7 @@
         [self.contentView addSubview:bottom_line];
         
         
+        
     }
     return self;
 }
@@ -132,16 +133,17 @@
     self.titleLab.frame = messageFrame.TitleFrame;
     self.update_at_Btn.frame = messageFrame.TimeFrame;
     self.view_count_Btn.frame = messageFrame.FocusFrame;
-    self.bottom_line.frame = messageFrame.lineFrame;
     self.tag_Btn.frame = messageFrame.tagFrame;
-   
+    self.bottom_line.frame = messageFrame.lineFrame;
+ 
 }
 
 
 
 - (void)separatorLineShow:(BOOL)show{
     
-    self.bottom_line.frame = show ? self.messageFrame.lineFrame : CGRectZero;
+     self.bottom_line.hidden = !show;
+
 }
 
 - (void)separatorLinePaddingShow:(BOOL)show{

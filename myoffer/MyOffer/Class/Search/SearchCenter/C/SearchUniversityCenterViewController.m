@@ -518,7 +518,7 @@
 
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
-    return  uniFrame.courseFrames.count > 0 ? 60 : 10;
+    return  uniFrame.courseFrames.count > 0 ? 60 : Section_footer_Height_nomal;
    
 }
 

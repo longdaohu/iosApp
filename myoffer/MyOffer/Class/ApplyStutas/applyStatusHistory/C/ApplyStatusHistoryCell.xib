@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请已提交" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58i-r9-VZt">
@@ -60,6 +60,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLab" destination="2T0-6b-ito" id="SWt-Sd-l0i"/>
+                <outlet property="lineTopConstraint" destination="FfG-jA-T2a" id="46X-VT-DdJ"/>
                 <outlet property="spodView" destination="b5N-Lk-wb5" id="Rzc-Zo-Tst"/>
                 <outlet property="statusLab" destination="58i-r9-VZt" id="zXe-a4-nz0"/>
             </connections>
