@@ -10,43 +10,39 @@
 
 @implementation UniDetailGroup
 
-+(instancetype)groupWithTitle:(NSString *)title contentes:(NSArray *)items  andFooter:(BOOL)footer{
++(instancetype)groupWithTitle:(NSString *)title contentes:(NSArray *)items groupType:(GroupType)type haveFooter:(BOOL)footer{
 
     UniDetailGroup *group = [[UniDetailGroup  alloc] init];
     
-    group.HeaderTitle = title;
+    group.type = type;
+    
+    group.header_title = title;
+    
+    group.section_footer_height =  footer ? Section_footer_Height_nomal: HEIGHT_ZERO;
     
     group.items = items;
-
-    if (items.count == 0) {
-        
-        group.HaveHeader = NO;
-        group.HaveFooter = NO;
-        
-    }else{
-        
-        group.HaveFooter = footer;
-        group.HaveHeader = title.length > 0;
     
-    }
     
     return group;
+
 }
+
 
 -(void)setItems:(NSArray *)items{
 
     _items = items;
     
-    if (items.count == 0) {
-        
-        self.HaveHeader = NO;
-        self.HaveFooter = NO;
+    
+    if (items.count > 0) {
+   
+        self.section_header_height =  self.header_title.length > 0 ? Section_header_Height_nomal : HEIGHT_ZERO;
         
     }else{
-          self.HaveHeader =  self.HeaderTitle.length > 0;
-     }
-
     
+        self.section_footer_height = HEIGHT_ZERO;
+
+    }
+ 
 }
 
 

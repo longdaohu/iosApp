@@ -204,19 +204,19 @@
     
     self.ArticleInfo = article;
 
-//    NSLog(@">>>>>>>>>> %@",response[@"like"]);
     self.ZangBtn.enabled = !response[@"like"];
     self.countLab.text = article.like_count;
     
      //根据点赞数量改变导航栏右侧相关控件宽度
     
-    //第一分组
+    //1 第一分组
     MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
     
-    UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:@[DetailFrame] andFooter:NO];
+
+    UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:nil contentes:@[DetailFrame] groupType:GroupTypeA haveFooter:NO];
     [self.groups addObject:groupOne];
     
-    //相关资讯 第二分组
+    //2 相关资讯 第二分组
     NSArray *recommendations  = article.recommendations;
     
     NSMutableArray *news_temps = [NSMutableArray array];
@@ -229,26 +229,26 @@
             [news_temps addObject:newsFrame];
         }
     }
-    UniDetailGroup *groupTwo = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] andFooter:NO];
-    [self.groups addObject:groupTwo];
+    
+    if (news_temps.count > 0) {
+        
+        UniDetailGroup *article_group = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] groupType:GroupTypeB  haveFooter:NO];
+       
+        [self.groups addObject:article_group];
+     }
     
     
-    //相关院校  大于第二分组
-    NSMutableArray *neightbour_temps = [NSMutableArray array];
+    //3 相关院校  大于第二分组
     
     [article.related_universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UniversityFrameNew *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy: (MyOfferUniversityModel*)obj];
         
-        [neightbour_temps addObject:uniFrame];
-        
         NSString *title = idx == 0 ? @"相关院校" : @"";
         
-        NSArray *items = @[uniFrame];
+        UniDetailGroup *uni_group = [UniDetailGroup groupWithTitle:title contentes:@[uniFrame] groupType:GroupTypeC haveFooter:YES];
         
-        UniDetailGroup *group = [UniDetailGroup groupWithTitle:title contentes:items andFooter:YES];
-        
-        [self.groups addObject:group];
+        [self.groups addObject:uni_group];
         
     }];
     
@@ -303,7 +303,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveFooter ? Section_footer_Height_nomal : HEIGHT_ZERO;
+    return group.section_footer_height;
 }
 
 
@@ -311,7 +311,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    return  group.HaveHeader ? Section_header_Height_nomal : HEIGHT_ZERO;
+    return  group.section_header_height;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -319,7 +319,7 @@
     
     UniDetailGroup *group = self.groups[section];
     
-    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
+    HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
     return sectionView;
 }
@@ -345,27 +345,30 @@
     UniDetailGroup *group = self.groups[indexPath.section];
     
     CGFloat cellHeight = Uni_Cell_Height;
-
-    if (indexPath.section == 0) {
-        
-        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
-
-        cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
-        
-    }else if (indexPath.section == 1){
-        
-       XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
-        
-        cellHeight = messageFrame.cell_Height;
-        
-    }else{
-        
-        UniversityFrameNew  *uniFrame = group.items[indexPath.row];
-
-        cellHeight = uniFrame.cell_Height;
-        
-    }
     
+    switch (group.type) {
+        case GroupTypeA:{
+             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+            cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
+        }
+            break;
+
+        case GroupTypeB:{
+            XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
+            cellHeight = messageFrame.cell_Height;
+        }
+            break;
+
+        case GroupTypeC:{
+            UniversityFrameNew  *uniFrame = group.items[indexPath.row];
+            cellHeight = uniFrame.cell_Height;
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
     
     return cellHeight;
   
@@ -376,51 +379,61 @@
     
     UniDetailGroup *group = self.groups[indexPath.section];
     
-    if (indexPath.section == 0) {
+    switch (group.type) {
+        case GroupTypeA:{
+           
+            MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+            MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
+            cell.MessageFrame = group.items[0];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MessageDetailFrame.MessageDetailHeight , self.view.bounds.size.width, 0)];
+            web_bgv.scrollEnabled = NO;
+            [cell.contentView addSubview:web_bgv];
+            
+            
+            web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.webView.bounds.size.height);
+            web_bgv.mj_h = self.webView.bounds.size.height;
+            
+            
+            [web_bgv addSubview:self.webView];
+            
+            
+            return cell;
+        }
+            break;
+            
+            
+        case GroupTypeB:{
+            
+            MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
+            
+            news_cell.messageFrame =  group.items[indexPath.row];
+            
+            BOOL show =  !(group.items.count - 1 == indexPath.row);
+            
+            [news_cell separatorLineShow:show];
+            
+            return news_cell;
+        }
+            break;
+            
+            
+            
+        default:{
         
-        MessageDetailFrame *MessageDetailFrame   =  group.items[0];
-        MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
-        cell.MessageFrame = group.items[0];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MessageDetailFrame.MessageDetailHeight , self.view.bounds.size.width, 0)];
-        web_bgv.scrollEnabled = NO;
-        [cell.contentView addSubview:web_bgv];
-        
-        
-        web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.webView.bounds.size.height);
-        web_bgv.mj_h = self.webView.bounds.size.height;
-        
-        
-        [web_bgv addSubview:self.webView];
-        
-        
-        return cell;
-        
-        
-    }else if(indexPath.section == 1){
-        
-        MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
-        
-        news_cell.messageFrame =  group.items[indexPath.row];
-
-        BOOL show =  !(group.items.count - 1 == indexPath.row);
-        
-        [news_cell separatorLineShow:show];
-        
-        return news_cell;
-        
-    }else{
-        
-        UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
-      
-        uni_cell.uniFrame = group.items[indexPath.row];
-        
-        [uni_cell separatorLineShow:NO];
-        
-        return uni_cell;
-        
+            UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+            
+            uni_cell.uniFrame = group.items[indexPath.row];
+            
+            [uni_cell separatorLineShow:NO];
+            
+            return uni_cell;
+        }
+            break;
     }
+    
+ 
     
 }
 
@@ -432,7 +445,7 @@
     
     UniDetailGroup *group = self.groups[indexPath.section];
     
-    if ([group.HeaderTitle containsString:@"文章"]) {
+    if (group.type == GroupTypeB) {
         
         XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
         
@@ -442,10 +455,10 @@
         
     }
     
-        UniversityFrameNew *uniFrame   = group.items[indexPath.row];
-        
-        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
     
+    UniversityFrameNew *uniFrame   = group.items[indexPath.row];
+    [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
+
     
 }
 

@@ -164,16 +164,16 @@
     if (!_groups) {
         
         _groups =[NSMutableArray array];
-        
-        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil andFooter:NO];
+     
+        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil groupType:GroupTypeA  haveFooter:NO];
         groupone.accessory_title = @"更多地区";
         [_groups addObject:groupone];
         
-        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil andFooter:NO];
+        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil groupType:GroupTypeB  haveFooter:NO];
         grouptwo.accessory_title = @"更多资讯";
         [_groups addObject:grouptwo];
         
-        UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil andFooter:NO];
+        UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil groupType:GroupTypeC haveFooter:NO];
         [_groups addObject:groupthree];
     }
     return _groups;
@@ -527,7 +527,7 @@
   
     UniDetailGroup *group = self.groups[section];
     
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.HeaderTitle];
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
     SectionView.accessory_title = group.accessory_title;
     
@@ -557,7 +557,7 @@
 {
     UniDetailGroup *group = self.groups[section];
     
-    return group.HaveHeader ? Section_header_Height_nomal : HEIGHT_ZERO;
+    return group.section_header_height;
  }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
@@ -585,9 +585,9 @@
     
     
     UniDetailGroup *group = self.groups[indexPath.section];
-
-       switch (indexPath.section) {
-        case 0:
+  
+       switch (group.type) {
+        case GroupTypeA:
         {
             HomeFirstTableViewCell *cell =[HomeFirstTableViewCell cellInitWithTableView:tableView];
             cell.itemInfo = group.items[indexPath.row];
@@ -595,7 +595,8 @@
             return cell;
          }
           break;
-          case 1:{
+               
+          case GroupTypeB:{
               
             HomeSecondTableViewCell *cell =[HomeSecondTableViewCell cellInitWithTableView:tableView];
             cell.items = group.items[indexPath.row];
@@ -630,7 +631,6 @@
 #pragma mark : HomeHeaderViewDelegate
 -(void)HomeHeaderViewWithTag:(NSInteger )tag
 {
-    
     
      switch (tag) {
          case 0:

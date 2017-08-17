@@ -142,7 +142,7 @@
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
     flexView.image_name = contry_img;
-    [self.view insertSubview:flexView belowSubview:self.tableView];
+    
     
     [self maketableViewHeaderWithHeight:iconHeight];
     
