@@ -79,7 +79,11 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
     if (![self checkNetworkState]) {
        
-        [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        
+        self.bottomView.alpha = 0;
+        
+        self.navigationItem.rightBarButtonItem.enabled = NO;
  
         return;
     }
@@ -691,37 +695,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
 }
 
-/*
- 
- #pragma mark : 删除sectionHeader
-
--(void)commitCancelSectionView{
-    
-    
-    //提取要删除的 已选择学校的ID
-    NSMutableArray *universtityIdes = [NSMutableArray array];
-    
-    for (NSString *sectionStr in self.cancelSetions) {
-        
-        NSInteger section = sectionStr.integerValue;
-        
-        UniversityFrameNew *uni_Frame = self.groups[section];
-        
-        [universtityIdes addObject:uni_Frame.universtiy.NO_id];
-    }
-    
-    
-    
-    XWeakSelf
-    
-    [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"uIds":universtityIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
-    
-        [weakSelf updateCancelSelectedSection];
-
-    }];
-    
-}
-*/
 
 //提交删除已选项 indexPath.section 成功后，更新UI
 - (void)updateCancelSelectedSection{
@@ -776,6 +749,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     if (resultes.count == 0) {
         
         [self.tableView emptyViewWithError:@"Duang!请添加您的意向学校吧！"];
+        
+        self.bottomView.alpha = 0;
         
     }else{
         

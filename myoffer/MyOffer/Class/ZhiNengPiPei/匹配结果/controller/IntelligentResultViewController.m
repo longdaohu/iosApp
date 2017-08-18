@@ -19,7 +19,7 @@
 #import "PipeiNoResultVeiw.h"
 
 @interface IntelligentResultViewController ()<XYPieChartDelegate, XYPieChartDataSource,UITableViewDataSource,UITableViewDelegate,ResultTableViewCellDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *ResultTableView;
+@property (weak, nonatomic) IBOutlet MyOfferTableView *ResultTableView;
 @property (weak, nonatomic) IBOutlet UILabel *NewSelectLabel;
 @property (weak, nonatomic) IBOutlet KDEasyTouchButton *commitButton;
 @property (weak, nonatomic) IBOutlet UILabel *currentCountLabel;
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *upHeaderView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 
 //推荐数据源
 @property(nonatomic,strong)NSMutableArray *recommendations;
@@ -37,7 +38,7 @@
 //pieChart图表
 @property (strong, nonatomic) XYPieChart *PieHeadView;
 //pieChart图表每一格对应的图标说明
-@property(nonatomic, strong)NSArray            *subtitleArr;
+@property(nonatomic, strong)NSArray  *subtitleArr;
 //pieChart图表每一格的数量数组
 //pieChart图表每一格对应的颜色数组
 //pieChart图表每一格对应名称数组
@@ -201,7 +202,7 @@
      [self.commitButton setTitle:GDLocalizedString(@"UniCourseDe-009") forState:UIControlStateNormal];
      self.NewSelectLabel.text =[NSString stringWithFormat:@"%@ ：0",GDLocalizedString(@"ApplicationList-003")];
      self.pieSelectLabel.text = self.subtitleArr[0];
-     self.title = GDLocalizedString(@"Evaluate-inteligent");
+     self.title = @"智能匹配";
 }
 
 
@@ -225,7 +226,6 @@
     self.centerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.upHeaderView addSubview:self.centerButton];
     self.slices = [NSMutableArray arrayWithCapacity:10];
-
     
 }
 
@@ -311,19 +311,21 @@
             
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
           
-            [weakSelf updateUIWithRecommendations:response[@"recommendations"]];
+            [weakSelf updateUIWithResponse:response];
             
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
             
-            weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
+            [weakSelf showError];
             
         }];
   
 }
 
 //根据返回数据设置UI
-- (void)updateUIWithRecommendations:(NSArray *)recommendations
-{
+- (void)updateUIWithResponse:(id)response{
+    
+    NSArray *recommendations = response[@"recommendations"];
+  
     
     [_slices removeAllObjects];
     [self.sliceAngles removeAllObjects];
@@ -573,7 +575,6 @@
     }
     
     
-    
     [self
      startAPIRequestWithSelector:kAPISelectorZiZengApplyPost
      parameters:@{@"uid": self.NewSelectUniversityIDs}
@@ -756,7 +757,6 @@
     }
     
     [self.navigationController popViewControllerAnimated:YES];
-
     
  
 }
@@ -768,11 +768,24 @@
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
     pipeiEdit.isfromPipeiResultPage = YES;
     [self.navigationController pushViewController:pipeiEdit animated:YES];
-        
     
 }
 
-
+//显示错误提示
+- (void)showError{
+    
+    if (self.recommendations.count == 0) {
+        
+        self.ResultTableView.tableHeaderView = [UIView new];
+        
+        [self.ResultTableView emptyViewWithError:NetRequest_ConnectError];
+        
+        self.footerView.alpha = 0;
+        
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        
+    }
+}
 
 - (void)dealloc{
     

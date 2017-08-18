@@ -23,7 +23,7 @@
 
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
 @property(nonatomic,strong) MyOfferService *sevice;
 @property(nonatomic,strong)SDCycleScrollView *autoLoopView;
 @property(nonatomic,strong)NSArray *groups;
@@ -145,8 +145,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        //加载失败退出页面
-        [weakSelf dismiss];
+        [weakSelf showError];
     }];
     
     
@@ -357,7 +356,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+//显示错误提示
+- (void)showError{
+    
+    if (self.groups.count == 0) {
+        
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        
+    }
+}
 
 - (void)dealloc{
     

@@ -123,6 +123,8 @@
 #define kAPISelectorFeedback @"POST api/app/feedback"
 //留学购
 #define kAPISelectorMyofferMall @"GET api/emall/app/index"
+//留学购详情
+#define kAPISelectorMyofferServiceDetail @"GET api/emall/sku/"
 //资讯专题
 #define kAPISelectorArticleCatigoryIndex @"GET api/article/category/index"
 //资讯热门专题

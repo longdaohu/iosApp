@@ -19,7 +19,7 @@
 //显示内容信息 webView
 @property(nonatomic,strong)WKWebView *web_wk;
 
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 //tableHeaderView
 @property(nonatomic,strong) ServiceItemHeaderView *headerView;
 //头部图片
@@ -30,6 +30,8 @@
 @property(nonatomic,strong)ServiceItemBottomView *bottomView;
 //显示协议
 @property(nonatomic,strong)ServiceProtocolViewController *protocalVC;
+
+@property(nonatomic,strong)ServiceItemFrame *service_Frame;
 
 @end
 
@@ -154,7 +156,7 @@
 
 - (void)makeDataSource{
     
-    NSString *path = [NSString  stringWithFormat:@"GET api/emall/sku/%@",self.service_id];
+    NSString *path = [NSString  stringWithFormat:@"%@%@",kAPISelectorMyofferServiceDetail,self.service_id];
     
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -163,7 +165,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         [weakSelf dismiss];
+         [weakSelf showError];
     }];
     
 }
@@ -180,6 +182,8 @@
     ServiceItemFrame *itemFrame = [[ServiceItemFrame alloc] init];
     
     itemFrame.item = item;
+    
+    self.service_Frame = itemFrame;
     
     self.headerView.itemFrame = itemFrame;
   
@@ -206,7 +210,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -344,7 +348,18 @@
     
 }
 
-
+//显示错误提示
+- (void)showError{
+    
+    if (!self.service_Frame) {
+      
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        
+         self.bottomView.alpha = 0;
+    }
+    
+        
+ }
 
 - (void)dealloc{
     
