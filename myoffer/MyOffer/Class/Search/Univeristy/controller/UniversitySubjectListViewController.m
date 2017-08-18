@@ -33,7 +33,7 @@
 
 @implementation UniversitySubjectListViewController
 
-#define COURSEPAGE @"page课程列表"
+#define PAGE_COURSE @"page课程列表"
 
 - (instancetype)initWithUniversityID:(NSString *)ID {
     self = [self init];
@@ -52,7 +52,7 @@
 {
     [super viewWillAppear:animated];
     
-    [MobClick beginLogPageView:COURSEPAGE];
+    [MobClick beginLogPageView:PAGE_COURSE];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
@@ -62,7 +62,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:COURSEPAGE];
+    [MobClick endLogPageView:PAGE_COURSE];
     
 }
 

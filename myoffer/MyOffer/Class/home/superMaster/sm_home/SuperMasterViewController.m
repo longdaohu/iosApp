@@ -67,7 +67,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [weakSelf dismiss];
+        [weakSelf showError];
     }];
     
 }
@@ -498,6 +498,16 @@
     
     self.onLineView.frame = CGRectMake(0, online_y, self.tableView.mj_w, 110);
 
+}
+
+//显示错误提示
+- (void)showError{
+    
+    if (self.groups.count == 0) {
+        
+         [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        
+    }
 }
 
 - (void)dealloc{

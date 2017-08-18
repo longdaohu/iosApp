@@ -41,7 +41,6 @@ typedef enum {
     UniversityItemTypePipei,
     UniversityItemTypePop
 }UniversityItemType;//表头按钮选项
-#define HEIGHT_BOTTOM 70
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -125,21 +124,15 @@ typedef enum {
 
 - (void)refesh{
     
-    XWeakSelf
-    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id] parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        UniversitydetailNew  *item  =   [UniversitydetailNew mj_objectWithKeyValues:response];
-        
-        weakSelf.favorited = item.favorited;
-        
-        [weakSelf configureLikeButton:item.favorited];
-        
-    }];
-    
     //加载报考难易程度
     [self loadUserLevel];
     
-}
+    if (self.UniFrame.item.login != LOGIN) {
+        
+        [self addDataSourse];
+
+    }
+ }
 
 
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
@@ -164,6 +157,7 @@ typedef enum {
     
     return _groups;
 }
+
 
 - (void)viewDidLoad {
     
@@ -200,30 +194,50 @@ typedef enum {
     XWeakSelf
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-        
-        [weakSelf casePop];
-
+    BOOL  show = (self.groups.count > 0) ? NO  : YES;
+    
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:show showErrorAlert:YES errorAlertDismissAction:^{
+  
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        [weakSelf makeUIWithUni:[UniversitydetailNew mj_objectWithKeyValues:response]];
+        [weakSelf updateUIWithReponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [weakSelf casePop];
+        [weakSelf showError];
         
     }];
     
 }
 
 #pragma mark : 设置控件数据
--(void)makeUIWithUni:(UniversitydetailNew *)university{
+
+- (void)updateUIWithReponse:(id)response{
+    
+    UniversitydetailNew *university = [UniversitydetailNew mj_objectWithKeyValues:response];
+    university.login = LOGIN;
+    
+    //用于刷新数据时 判断登录状态下是否收藏学校
+    if (self.groups.count > 0) {
+        
+        self.favorited = university.favorited;
+
+        [self configureLikeButton:university.favorited];
+        
+        self.UniFrame.item.favorited = university.favorited;
+        
+        return ;
+    }
+    
     
     self.uni_id = university.NO_id;
     
     self.favorited = university.favorited;
     
     [self configureLikeButton: university.favorited];
+    
+    
+    [_footer footeTouchEnable:YES];
     
     UniversityNewFrame *UniFrame = [UniversityNewFrame frameWithUniversity:university];
     self.UniFrame = UniFrame;
@@ -314,19 +328,24 @@ typedef enum {
 
     [self makeTableView];
     
-    [self makeHeaderIconView];
+    [self makeTopView];
     
-    [self makeFooterView];
+    [self makeBottomView];
     
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.footer.mj_h, 0);
+
 }
 
 //添加底部按钮
--(void)makeFooterView{
+-(void)makeBottomView{
     
     XWeakSelf
-
-    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - HEIGHT_BOTTOM, XSCREEN_WIDTH, HEIGHT_BOTTOM)];
+    CGFloat footer_h = 70;
+    CGFloat footer_w = self.tableView.mj_w;
+    CGFloat footer_y = self.tableView.mj_h - footer_h;
+    UniversityFooterView *footer = [[UniversityFooterView alloc] initWithFrame:CGRectMake(0, footer_y, footer_w, footer_h)];
     self.footer = footer;
+    [footer footeTouchEnable:NO];
     footer.actionBlock = ^(UIButton *sender){
         
         [weakSelf footerWithButton:sender];
@@ -354,7 +373,6 @@ typedef enum {
 -(void)makeTableView
 {
     self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, HEIGHT_BOTTOM, 0);
     self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
@@ -365,7 +383,7 @@ typedef enum {
 }
 
 //表头显示图片
--(void)makeHeaderIconView{
+-(void)makeTopView{
     
     self.view.clipsToBounds = YES;
    
@@ -528,19 +546,34 @@ typedef enum {
     
     UniDetailGroup *group = self.groups[indexPath.section];
     
+    UIViewController *VC = [UIViewController new];
     
-    if (group.type == GroupTypeB) {
-        
-        XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-   
-        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
-        
-    }else{
-        
-        UniversityFrameNew *uniFrame   = group.items[indexPath.row];
-        
-        [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id]  animated:YES];
+    switch (group.type) {
+        case GroupTypeB:
+        {
+            XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
+            
+            VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
+            
+            
+        }
+            break;
+            
+        case GroupTypeC:
+        {
+            UniversityFrameNew *uniFrame   = group.items[indexPath.row];
+            VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;
+            
+        }
+            break;
+            
+        default:
+            break;
     }
+    
+    [self.navigationController pushViewController:VC animated:YES];
+    
+    
     
 }
 
@@ -835,6 +868,16 @@ typedef enum {
     
 }
 
+//显示错误提示
+- (void)showError{
+
+    if (self.groups.count == 0) {
+        
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        
+    }
+}
 
 - (void)dealloc{
     

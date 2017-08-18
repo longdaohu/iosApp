@@ -63,7 +63,7 @@
 @property(nonatomic,strong)NSDictionary  *TOEFLRequirement; //本科，硕士托福要求
 @property(nonatomic,strong)NSNumber      *employment_rate; //  就业率
 @property(nonatomic,strong)NSNumber      *foreign_student_rate; // 外国学生比例 0.xx
-
+@property(nonatomic,assign)BOOL login;
 
 @end
 

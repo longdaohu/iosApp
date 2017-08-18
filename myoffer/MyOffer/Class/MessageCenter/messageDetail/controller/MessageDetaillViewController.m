@@ -49,6 +49,7 @@
 @end
 
 @implementation MessageDetaillViewController
+
 -(instancetype)initWithMessageId:(NSString *)message_id{
     
     self = [super init];
@@ -57,7 +58,6 @@
         
         self.message_id = message_id;
     }
-    
     
     return self;
 }
@@ -90,6 +90,34 @@
     
     return _groups;
 }
+
+
+- (ShareNViewController *)shareVC{
+    
+    if (!_shareVC) {
+        
+        NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.message_id];
+        NSString *path = self.ArticleInfo.cover_url;
+        NSString *shareTitle = self.ArticleInfo.title;
+        NSString *shareContent = self.ArticleInfo.summary;
+        NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
+        [shareInfor setValue:shareURL forKey:@"shareURL"];
+        [shareInfor setValue:path forKey:@"icon"];
+        [shareInfor setValue:shareTitle forKey:@"shareTitle"];
+        [shareInfor setValue:shareContent forKey:@"shareContent"];
+        
+        
+        _shareVC = [ShareNViewController shareView];
+        _shareVC.shareInfor = shareInfor;
+        
+        [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
+        
+    }
+    
+    return _shareVC;
+}
+
 
 
 //自定义导航栏右侧按钮
@@ -140,8 +168,6 @@
 }
 
 
-
-
 -(void)makeTableView
 {
     self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
@@ -159,7 +185,6 @@
     [self makeWebView];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.RightView];
-
     
 }
 
@@ -174,16 +199,15 @@
     
 }
 
+#pragma mark : 网络请求
 
--(void)makeDataSourse{
+- (void)makeDataSourse{
     
     XWeakSelf
     
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorArticleDetail,self.message_id];
     
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-        
-//        [weakSelf dismiss];
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -201,27 +225,28 @@
     
     
     MessageArticle *article = [MessageArticle mj_objectWithKeyValues:response];
-    
     self.ArticleInfo = article;
 
+    
     self.ZangBtn.enabled = !response[@"like"];
     self.countLab.text = article.like_count;
-    
      //根据点赞数量改变导航栏右侧相关控件宽度
+    
+    
     
     //1 第一分组
     MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
-    
-
     UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:nil contentes:@[DetailFrame] groupType:GroupTypeA haveFooter:NO];
     [self.groups addObject:groupOne];
+    
     
     //2 相关资讯 第二分组
     NSArray *recommendations  = article.recommendations;
     
     NSMutableArray *news_temps = [NSMutableArray array];
+    
     for (MyOfferArticle *article in recommendations) {
-        
+      
         if(article.message_id != self.message_id){
             
             XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
@@ -233,7 +258,6 @@
     if (news_temps.count > 0) {
         
         UniDetailGroup *article_group = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] groupType:GroupTypeB  haveFooter:NO];
-       
         [self.groups addObject:article_group];
      }
     
@@ -275,7 +299,6 @@
     [webView evaluateJavaScript:@"document.body.style.padding = '0  15px  30px  15px';;" completionHandler:^(id Result, NSError * error) {
      }];
     
-    
     XWeakSelf
     [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
         
@@ -299,6 +322,7 @@
 
 
 #pragma mark :  UITableViewDataDeleage UITableViewDeleage
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     UniDetailGroup *group = self.groups[section];
@@ -316,14 +340,12 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    
     UniDetailGroup *group = self.groups[section];
     
     HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
     return sectionView;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -341,27 +363,32 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     UniDetailGroup *group = self.groups[indexPath.section];
     
-    CGFloat cellHeight = Uni_Cell_Height;
+    CGFloat cellHeight = 0;
     
     switch (group.type) {
         case GroupTypeA:{
-             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
+           
+            MessageDetailFrame *MessageDetailFrame   =  group.items[0];
             cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
+            
         }
             break;
 
         case GroupTypeB:{
+            
             XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
             cellHeight = messageFrame.cell_Height;
+            
         }
             break;
 
         case GroupTypeC:{
+            
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
+            
         }
             
             break;
@@ -369,6 +396,7 @@
         default:
             break;
     }
+    
     
     return cellHeight;
   
@@ -387,7 +415,7 @@
             cell.MessageFrame = group.items[0];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MessageDetailFrame.MessageDetailHeight , self.view.bounds.size.width, 0)];
+            UIScrollView *web_bgv = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MessageDetailFrame.MessageDetailHeight , XSCREEN_WIDTH, 0)];
             web_bgv.scrollEnabled = NO;
             [cell.contentView addSubview:web_bgv];
             
@@ -445,24 +473,38 @@
     
     UniDetailGroup *group = self.groups[indexPath.section];
     
-    if (group.type == GroupTypeB) {
-        
-        XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-        
-        [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id] animated:YES];
-        
-        return;
-        
+    UIViewController *VC = [UIViewController new];
+    
+    switch (group.type) {
+        case GroupTypeB:
+        {
+            XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
+            
+            VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
+            
+            
+        }
+            break;
+            
+        case GroupTypeC:
+        {
+            UniversityFrameNew *uniFrame   = group.items[indexPath.row];
+            VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;
+  
+        }
+            break;
+            
+        default:
+            break;
     }
     
-    
-    UniversityFrameNew *uniFrame   = group.items[indexPath.row];
-    [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
+    [self.navigationController pushViewController:VC animated:YES];
 
-    
 }
 
 
+
+#pragma mark : 事件处理
 //点赞
 -(void)ZangBtnClick:(UIButton *)sender
 {
@@ -488,32 +530,6 @@
     return YES;
 }
 
-
-- (ShareNViewController *)shareVC{
-    
-    if (!_shareVC) {
-        
-        NSString *shareURL = [NSString stringWithFormat:@"http://www.myoffer.cn/article/%@",self.message_id];
-        NSString *path = self.ArticleInfo.cover_url;
-        NSString *shareTitle = self.ArticleInfo.title;
-        NSString *shareContent = self.ArticleInfo.summary;
-        NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
-        [shareInfor setValue:shareURL forKey:@"shareURL"];
-        [shareInfor setValue:path forKey:@"icon"];
-        [shareInfor setValue:shareTitle forKey:@"shareTitle"];
-        [shareInfor setValue:shareContent forKey:@"shareContent"];
-        
-        
-        _shareVC = [ShareNViewController shareView];
-        _shareVC.shareInfor = shareInfor;
-        
-        [self addChildViewController:_shareVC];
-        [self.view addSubview:self.shareVC.view];
-        
-    }
-    
-    return _shareVC;
-}
 
 
 //分享

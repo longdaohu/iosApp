@@ -11,6 +11,9 @@ typedef void(^UniversityFooterViewBlock)(UIButton *sender);
 @interface UniversityFooterView : UIView
 @property(nonatomic,copy)NSString *uni_country;
 @property(nonatomic,assign)NSInteger level;
+
 @property(nonatomic,copy)UniversityFooterViewBlock  actionBlock;
+
+- (void)footeTouchEnable:(BOOL)enable;
 
 @end

@@ -26,10 +26,18 @@
 }
 
 - (NSString *)webpath{
-
-    NSRange wRange = [self.website rangeOfString:@"www"];
     
-    return  [self.website substringWithRange:NSMakeRange(wRange.location, self.website.length - wRange.location)];
+    NSString *path = self.website;
+    
+    if ([self.website containsString:@"www"]) {
+    
+        NSRange wRange = [self.website rangeOfString:@"www"];
+        
+        path =  [self.website substringWithRange:NSMakeRange(wRange.location, self.website.length - wRange.location)];
+    
+    }
+    
+    return path;
 }
 
 

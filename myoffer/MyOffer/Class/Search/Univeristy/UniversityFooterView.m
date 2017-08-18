@@ -39,8 +39,6 @@
         subjectBtn.layer.borderWidth = 1;
         subjectBtn.layer.borderColor = XCOLOR_RED.CGColor;
         [subjectBtn setTitleColor:XCOLOR_RED forState:UIControlStateNormal];
-//        [subjectBtn setTitleColor:XCOLOR_line forState:UIControlStateHighlighted];
-//        [subjectBtn addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew context:nil];
         [self addButton:subjectBtn title:@"查看所有专业" titleFont:titleFont tag:10];
         self.subjectBtn = subjectBtn;
 
@@ -188,27 +186,25 @@
     }
 }
 
-/*
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    
-    
-    UIButton *button = (UIButton *)object;
-    
-    if ([keyPath isEqualToString:@"highlighted"]) {
-        
-        if (button.highlighted) {
-            
-            button.layer.borderColor = XCOLOR_line.CGColor;
-            
-            return;
-        }
-        
-        button.layer.borderColor = XCOLOR_RED.CGColor;
+- (void)footeTouchEnable:(BOOL)enable{
 
+    CGFloat alp = enable ? 1 : 0;
+    
+    if (!enable) {
+        
+        self.alpha = alp;
+        
+        return;
     }
- 
+    
+    XWeakSelf
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        weakSelf.alpha = alp;
+    }];
+    
+    
+    
+    
 }
-
-*/
 
 @end
