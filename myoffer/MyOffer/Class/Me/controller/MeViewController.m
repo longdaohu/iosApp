@@ -42,7 +42,6 @@ typedef enum {
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //设置智能匹配、收藏、留学服务子项Frame
 @property(nonatomic,strong)MeCenterHeaderViewFrame *centerHeaderFrame;
-
 @end
 
 @implementation MeViewController
@@ -462,7 +461,7 @@ typedef enum {
 //导航栏 leftBarButtonItem
 -(void)leftViewMessage
 {
-    
+    /*
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
     NSString *order_count    = [ud valueForKey:@"order_count"];
@@ -481,7 +480,7 @@ typedef enum {
     [self matchImageName:GDLocalizedString(@"center-matchImage")  tag:OptionButtonTypeZineng];
     self.myCountResponse    = nil;
     [self.tableView reloadData];
-    
+    */
 }
 
 //智能匹配跳转选项
@@ -578,7 +577,6 @@ typedef enum {
 -(void)CaseMyoffer{
     
     [self pushWithVC:NSStringFromClass([MyOfferViewController class])];
-
     
 }
 

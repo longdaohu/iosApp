@@ -11,6 +11,7 @@
 #import "XWGJAaboutHeader.h"
 #import "ShareNViewController.h"
 #import "HomeSectionHeaderView.h"
+#import "PersonCell.h"
 
 @interface XWGJAboutViewController ()<UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -44,13 +45,17 @@
 {
     if (!_abountArray) {
         
-        XWGJAbout *love = [XWGJAbout aboutWithLogo:@"about_love" andContent:GDLocalizedString(@"About_download") andsubTitle:nil  andRightAccessoryImage:nil];
-        XWGJAbout *share = [XWGJAbout aboutWithLogo:@"about_share" andContent:GDLocalizedString(@"About_share") andsubTitle:nil  andRightAccessoryImage:nil];
-        XWGJAbout *weibo = [XWGJAbout aboutWithLogo:nil andContent:GDLocalizedString(@"About_weibo") andsubTitle:nil  andRightAccessoryImage:@"about_weibo"];
-        XWGJAbout *weixin = [XWGJAbout aboutWithLogo:nil andContent:GDLocalizedString(@"About_weixin") andsubTitle:nil  andRightAccessoryImage:@"about_liu"];
-        XWGJAbout *web = [XWGJAbout aboutWithLogo:@"about_home" andContent:GDLocalizedString(@"About_home")  andsubTitle:@"www.myoffer.cn"  andRightAccessoryImage:nil];
-        XWGJAbout *chinaContect = [XWGJAbout aboutWithLogo:nil andContent:GDLocalizedString(@"About_phoneCN")  andsubTitle:@"4000 666 522"  andRightAccessoryImage:nil];
-        XWGJAbout *englandContect = [XWGJAbout aboutWithLogo:nil andContent:GDLocalizedString(@"About_phoneEN")  andsubTitle:@"8000 699 799"  andRightAccessoryImage:nil];
+        
+        
+        XWGJAbout *love = [XWGJAbout cellWithLogo:@"about_love"  title:GDLocalizedString(@"About_download") sub_title:nil accessory_title:nil accessory_icon:nil];
+        love.accessoryType = YES;
+        XWGJAbout *share = [XWGJAbout cellWithLogo:@"about_share"  title:GDLocalizedString(@"About_share") sub_title:nil accessory_title:nil accessory_icon:nil];
+        share.accessoryType = YES;
+        XWGJAbout *weibo = [XWGJAbout cellWithLogo:nil  title:GDLocalizedString(@"About_weibo") sub_title:nil accessory_title:nil accessory_icon:@"about_weibo"];
+        XWGJAbout *weixin = [XWGJAbout cellWithLogo:nil  title:GDLocalizedString(@"About_weixin") sub_title:nil accessory_title:nil accessory_icon:@"about_liu"];
+         XWGJAbout *web = [XWGJAbout cellWithLogo:@"about_home"  title:GDLocalizedString(@"About_home") sub_title:nil accessory_title:@"www.myoffer.cn" accessory_icon:nil];
+        XWGJAbout *chinaContect = [XWGJAbout cellWithLogo:nil  title:GDLocalizedString(@"About_phoneCN") sub_title:nil accessory_title:@"4000 666 522"   accessory_icon:nil];
+        XWGJAbout *englandContect = [XWGJAbout cellWithLogo:nil  title:GDLocalizedString(@"About_phoneEN") sub_title:nil accessory_title:@"8000 699 799"    accessory_icon:nil];
         
         NSArray *one = @[love,share,web,weibo,weixin];
         NSArray *two = @[chinaContect,englandContect];
@@ -90,6 +95,7 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.sectionFooterHeight = 0;
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
     //添加表头
     self.tableView.tableHeaderView = [[NSBundle mainBundle] loadNibNamed:@"XWGJAaboutHeader" owner:self options:nil].lastObject;
@@ -132,32 +138,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"About"];
-    if (!cell) {
-        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"About"];
-    }
+ 
     
-    NSArray *items = self.abountArray[indexPath.section];
-    XWGJAbout *item = items[indexPath.row];
-    cell.imageView.image =[UIImage imageNamed:item.Logo];
-    cell.textLabel.text = item.contentName;
-    cell.detailTextLabel.text = item.SubName;
-    
-    if(0 == indexPath.section){
-        
-        if (indexPath.row == 0 || indexPath.row ==1) {
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-    }
-    
-    if (item.RightImageName) {
-        
-        UIImageView *mv =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        mv.image = [UIImage imageNamed:item.RightImageName];
-        cell.accessoryView = mv;
-    }
-    
+    PersonCell *cell =[PersonCell cellWithTableView:tableView];
+    NSArray  *rows = self.abountArray[indexPath.section];
+    [cell bottomLineShow:(indexPath.row != (rows.count - 1))];
+    cell.item = rows[indexPath.row];
     
     return cell;
 }

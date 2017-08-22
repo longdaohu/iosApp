@@ -10,27 +10,28 @@
 
 @implementation XWGJAbout
 
++ (instancetype)cellWithLogo:(NSString *)logo title:(NSString *)title sub_title:(NSString *)subName accessory_title:(NSString *)acc_title accessory_icon:(NSString *)acc_icon{
+
+    return  [[self alloc] initWithLogo:logo title:title sub_title:subName accessory_title:acc_title accessory_icon:acc_icon];
+}
 
 
-- (instancetype)initAboutWithLogo:(NSString *)logoName andContent:(NSString *)contentName andsubTitle:(NSString *)subName andRightAccessoryImage:(NSString *)rightImageName
-{
-     self = [super init];
+- (instancetype)initWithLogo:(NSString *)logo title:(NSString *)title sub_title:(NSString *)subName accessory_title:(NSString *)acc_title accessory_icon:(NSString *)acc_icon{
+    
+    self = [super init];
     
     if (self) {
-    
-        self.Logo = logoName;
-        self.contentName = contentName;
-        self.SubName =subName;
-        self.RightImageName = rightImageName;
+        
+        self.Logo = logo;
+        self.title = title;
+        self.sub_title =subName;
+        self.acc_title = acc_title;
+        self.acc_icon = acc_icon;
+        self.accessoryType = NO;
+        self.cell_height = 44.0f;
     }
     
     return self;
-    
-}
-
-+ (instancetype)aboutWithLogo:(NSString *)logoName andContent:(NSString *)contentName andsubTitle:(NSString *)subName andRightAccessoryImage:(NSString *)rightImageName
-{
-    return [[self alloc]  initAboutWithLogo:logoName andContent:contentName andsubTitle:subName andRightAccessoryImage:rightImageName];
 }
 
 @end

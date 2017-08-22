@@ -111,18 +111,17 @@ static AppDelegate *__sharedDelegate;
     LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
     leftMenuViewController.mainTabBarController = mainTabBarController;
     
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
-                                                                    leftMenuViewController:leftMenuViewController
-                                                                   rightMenuViewController:nil];
-    
-    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54 , 1);
-    sideMenuViewController.delegate = self;
-    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
-    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
-    sideMenuViewController.contentViewShadowOpacity = 0.6;
-    sideMenuViewController.contentViewShadowRadius = 12;
-    sideMenuViewController.contentViewShadowEnabled = YES;
-    self.window.rootViewController = sideMenuViewController;
+//    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
+//                                                                    leftMenuViewController:leftMenuViewController
+//                                                                   rightMenuViewController:nil];
+//    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54 , 1);
+//    sideMenuViewController.delegate = self;
+//    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
+//    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
+//    sideMenuViewController.contentViewShadowOpacity = 0.6;
+//    sideMenuViewController.contentViewShadowRadius = 12;
+//    sideMenuViewController.contentViewShadowEnabled = YES;
+    self.window.rootViewController = mainTabBarController;
 
     
     [self.window makeKeyAndVisible];
@@ -511,53 +510,6 @@ static AppDelegate *__sharedDelegate;
 
     }
 }
-
-
-
-
-#pragma mark  RESideMenuDelegate
-- (void)sideMenu:(RESideMenu *)sideMenu willShowMenuViewController:(UIViewController *)menuViewController
-{
-
-    [self.mainTabBarController contentViewIsOpen:YES];
-    
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
-//    NSLog(@"willShowMenuViewController: %@ ", NSStringFromClass([menuViewController class]));
-    
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu didShowMenuViewController:(UIViewController *)menuViewController
-{
-    //    NSLog(@"didShowMenuViewController: %@", NSStringFromClass([menuViewController class]));
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu willHideMenuViewController:(UIViewController *)menuViewController
-{
-
-       [self.mainTabBarController contentViewIsOpen:NO];
-//        NSLog(@"willHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
-    
-    if (self.mainTabBarController.selectedIndex == 0) {
-        
-        UINavigationController *nav = self.mainTabBarController.childViewControllers[self.mainTabBarController.selectedIndex];
-        
-        HomeViewContViewController *home = (HomeViewContViewController *)nav.childViewControllers.firstObject;
-        
-        [home caseChangestatusBarStyle];
-    }
-    
-}
-
-- (void)sideMenu:(RESideMenu *)sideMenu didHideMenuViewController:(UIViewController *)menuViewController
-{
-
-//    NSLog(@"didHideMenuViewController: %@", NSStringFromClass([menuViewController class]));
-
- 
-}
-
-
 
 
 

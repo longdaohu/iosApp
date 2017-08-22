@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger,centerItemType) {
   
     centerItemTypepipei,
     centerItemTypefavor,
+    centerItemTypeOrder,
     centerItemTypetest
 };
 

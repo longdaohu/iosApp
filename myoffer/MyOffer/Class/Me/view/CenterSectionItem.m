@@ -49,17 +49,11 @@
         [self addSubview:iconView];
         
 
-        UILabel *titleLab = [UILabel labelWithFontsize:KDUtilSize(XFONT_SIZE(18)) TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
+        UILabel *titleLab = [UILabel labelWithFontsize:14 TextColor:XCOLOR_TITLE TextAlignment:NSTextAlignmentCenter];
         self.titleLab     = titleLab;
         [self addSubview:titleLab];
         
-
-        UILabel *countLab = [UILabel labelWithFontsize:KDUtilSize(XFONT_SIZE(14)) TextColor:XCOLOR_SUBTITLE TextAlignment:NSTextAlignmentCenter];
-        self.countLab     = countLab;
-        [self addSubview:countLab];
-        
-        
-
+ 
         
     }
     return self;
@@ -67,38 +61,12 @@
 
 
 -(void)tap:(UIButton *)sender{
-  /*
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
-        self.iconView.transform = CGAffineTransformScale(self.iconView.transform, 0.5, 0.5);
-
-    } completion:^(BOOL finished) {
-        
  
-        
-        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-            
-            self.iconView.transform = CGAffineTransformIdentity;
-            
-        } completion:^(BOOL finished) {
-            
-            
-        }];
-        
-        
-    }];
-  */
     if (self.actionBlack) self.actionBlack(sender);
     
 }
 
--(void)setCount:(NSString *)count
-{
-    _count = count;
-    
-    self.countLab.text = [NSString stringWithFormat:@"%@",count];
-    
-}
+
 
 - (void)setHeader_Frame:(MeCenterHeaderViewFrame *)header_Frame{
 
@@ -106,7 +74,6 @@
     
     self.iconView.frame = header_Frame.icon_frame;
     self.titleLab.frame = header_Frame.title_frame;
-    self.countLab.frame = header_Frame.count_frame;
     
 }
 

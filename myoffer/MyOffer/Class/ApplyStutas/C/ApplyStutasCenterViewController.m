@@ -13,7 +13,6 @@
 #import "ApplyStatusHistoryViewController.h"
 
 @interface ApplyStutasCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @end
 
@@ -30,7 +29,10 @@
     
     [super viewDidLoad];
     
-    [self makeDataSourse];
+    if (self.groups.count == 0) {
+     
+        [self makeDataSourse];
+    }
     
     [self makeUI];
 }
@@ -48,7 +50,7 @@
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        [weakSelf.tableView emptyViewWithError:NetRequest_ConnectError];
         
     }];
 }
@@ -143,6 +145,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
      ApplyStatusHistoryViewController  *historyVC = [[ApplyStatusHistoryViewController alloc] init];
+    
      historyVC.status_frame = self.groups[indexPath.section];
     
      [self.navigationController pushViewController:historyVC animated:YES];

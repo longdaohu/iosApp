@@ -39,16 +39,16 @@
         
         self.backgroundColor =XCOLOR_WHITE;
         
-        CenterSectionItem *pipei  = [self itemWithIcon:@"center_pipei" title:@"智能匹配" subtitle:@"0 所" itemTag:centerItemTypepipei];
-        CenterSectionItem *favor  = [self itemWithIcon:@"center_Favorite" title:@"收藏院校" subtitle:@"0 所" itemTag:centerItemTypefavor];
-        CenterSectionItem *test  = [self itemWithIcon:@"center_service" title:@"MBTI测试" subtitle:@"职业性格" itemTag:centerItemTypetest];
-        self.items = @[pipei,favor,test];
+        CenterSectionItem *pipei  = [self itemWithIcon:@"p_apply" title:@"我的申请" subtitle:nil itemTag:centerItemTypepipei];
+        CenterSectionItem *order  = [self itemWithIcon:@"p_order" title:@"我的订单" subtitle:nil itemTag:centerItemTypeOrder];
+        CenterSectionItem *test  = [self itemWithIcon:@"p_fav" title:@"我的收藏" subtitle:nil itemTag:centerItemTypefavor];
+        self.items = @[pipei, order,test];
         
         
-        UIView *top_line = [UIView new];
-        self.top_line = top_line;
-        top_line.backgroundColor = XCOLOR_line;
-        [self addSubview:top_line];
+//        UIView *top_line = [UIView new];
+//        self.top_line = top_line;
+//        top_line.backgroundColor = XCOLOR_line;
+//        [self addSubview:top_line];
      
         
     }
@@ -91,6 +91,9 @@
         itemView.frame = CGRectMake( item_X, item_Y, item_W, item_H);
         
     }
+    
+    
+    self.frame = headerFrame.section_frame;
   
     
 }

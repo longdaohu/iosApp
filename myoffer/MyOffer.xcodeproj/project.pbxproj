@@ -227,11 +227,15 @@
 		AE59A5531E69907D008E479F /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5521E69907D008E479F /* NomalCollectionController.m */; };
 		AE59CA761F3D9FE900647D22 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59CA751F3D9FE900647D22 /* GroupModel.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
+		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
 		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
+		AE6BE79B1F4A89C100AD5B3B /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE7991F4A89C100AD5B3B /* PersonCell.m */; };
+		AE6BE7A01F4AEC6A00AD5B3B /* personServiceStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */; };
+		AE6BE7A11F4AEC6A00AD5B3B /* personServiceStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */; };
 		AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */ = {isa = PBXBuildFile; fileRef = AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
@@ -503,6 +507,7 @@
 		AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF4211F1BD499D100CFB45E /* libz.tbd */; };
 		AEF936D41C314AE30095E0A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D21C314AE30095E0A7 /* Default.png */; };
 		AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D31C314AE30095E0A7 /* Default@2x.png */; };
+		AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -892,6 +897,8 @@
 		AE59CA751F3D9FE900647D22 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
+		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
+		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
 		AE61A9951EAEF44600AC4B43 /* SearchUniversityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniversityCenterViewController.h; sourceTree = "<group>"; };
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
 		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
@@ -901,6 +908,11 @@
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
 		AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotSectionFooterView.m; sourceTree = "<group>"; };
 		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
+		AE6BE7981F4A89C100AD5B3B /* PersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCell.h; sourceTree = "<group>"; };
+		AE6BE7991F4A89C100AD5B3B /* PersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCell.m; sourceTree = "<group>"; };
+		AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = personServiceStatusCell.h; sourceTree = "<group>"; };
+		AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = personServiceStatusCell.m; sourceTree = "<group>"; };
+		AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = personServiceStatusCell.xib; sourceTree = "<group>"; };
 		AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dot_40x40.gif; path = ../dot_40x40.gif; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
@@ -1393,6 +1405,8 @@
 		AEF4211F1BD499D100CFB45E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AEF936D21C314AE30095E0A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AEF936D31C314AE30095E0A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
+		AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
 		DAF97F809FE91DF51B65AFA9 /* libPods-MyOffer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyOffer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02B30ECEAFCB4EF5650AED2 /* Pods-MyOffer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOffer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1838,14 +1852,14 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		AE36C4591E9F6C9100EE42F9 /* 留学购 */ = {
+		AE36C4591E9F6C9100EE42F9 /* serviceHome */ = {
 			isa = PBXGroup;
 			children = (
 				AE9E6EE71E851D3A00203C00 /* C */,
 				AE9E6EE81E851D3A00203C00 /* M */,
 				AE9E6EE91E851D3A00203C00 /* V */,
 			);
-			name = "留学购";
+			name = serviceHome;
 			sourceTree = "<group>";
 		};
 		AE3943CC1E0A1AD00038826A /* SDCycleScrollView */ = {
@@ -2253,13 +2267,14 @@
 			path = UUChart;
 			sourceTree = "<group>";
 		};
-		AE6FF2911E8912A200C2A013 /* 服务详情 */ = {
+		AE6FF2911E8912A200C2A013 /* serviceDetail */ = {
 			isa = PBXGroup;
 			children = (
 				AE6FF2921E8912A200C2A013 /* C */,
 				AE6FF2961E8912A200C2A013 /* M */,
 				AE6FF2971E8912A200C2A013 /* V */,
 			);
+			name = serviceDetail;
 			path = "服务详情";
 			sourceTree = "<group>";
 		};
@@ -2309,13 +2324,14 @@
 			path = V;
 			sourceTree = "<group>";
 		};
-		AE6FF29A1E8915F100C2A013 /* 国家服务 */ = {
+		AE6FF29A1E8915F100C2A013 /* serviceCountry */ = {
 			isa = PBXGroup;
 			children = (
 				AE6FF29B1E8915F100C2A013 /* C */,
 				AE6FF29C1E8915F100C2A013 /* M */,
 				AE6FF29D1E8915F100C2A013 /* V */,
 			);
+			name = serviceCountry;
 			path = "国家服务";
 			sourceTree = "<group>";
 		};
@@ -2545,9 +2561,9 @@
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
-				AE36C4591E9F6C9100EE42F9 /* 留学购 */,
-				AE6FF29A1E8915F100C2A013 /* 国家服务 */,
-				AE6FF2911E8912A200C2A013 /* 服务详情 */,
+				AE36C4591E9F6C9100EE42F9 /* serviceHome */,
+				AE6FF29A1E8915F100C2A013 /* serviceCountry */,
+				AE6FF2911E8912A200C2A013 /* serviceDetail */,
 			);
 			path = myOfferMall;
 			sourceTree = "<group>";
@@ -2826,6 +2842,7 @@
 		AEA249911D5B215300DD7939 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				AEFA60A11F46F9BD0086BBCE /* M */,
 				AEA249921D5B215300DD7939 /* controller */,
 				AEA249971D5B215300DD7939 /* view */,
 			);
@@ -2841,6 +2858,15 @@
 				AEA249951D5B215300DD7939 /* MeViewController.xib */,
 				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
 				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
+				AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */,
+				AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */,
+				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
+				AE6BE7991F4A89C100AD5B3B /* PersonCell.m */,
+				AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */,
+				AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */,
+				AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */,
+				AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */,
+				AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3815,6 +3841,13 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		AEFA60A11F46F9BD0086BBCE /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
 		AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */ = {
 			isa = PBXGroup;
 			children = (
@@ -3966,6 +3999,7 @@
 				AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */,
 				AEF421081BD4988B00CFB45E /* UMSocialSDKResourcesNew.bundle in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
+				AE6BE7A11F4AEC6A00AD5B3B /* personServiceStatusCell.xib in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
@@ -4152,6 +4186,7 @@
 				AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */,
 				AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */,
 				AE1FD7211D5C929500FFD5A8 /* NSObject+MJClass.m in Sources */,
+				AE6BE79B1F4A89C100AD5B3B /* PersonCell.m in Sources */,
 				463E3AA71B23105F00E0BAF8 /* KDAlertView.m in Sources */,
 				AEA24A051D5B224E00DD7939 /* CatigaryCityCollectionCell.m in Sources */,
 				AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */,
@@ -4270,6 +4305,7 @@
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
+				AE6BE7A01F4AEC6A00AD5B3B /* personServiceStatusCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
@@ -4285,6 +4321,7 @@
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
 				AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
+				AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */,
 				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
@@ -4311,6 +4348,7 @@
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
+				AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */,
 				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
 				AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */,
 				AE20938B1F398EA40078DCBB /* myofferFlexibleView.m in Sources */,

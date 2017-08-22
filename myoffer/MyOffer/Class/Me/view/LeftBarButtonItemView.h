@@ -13,6 +13,7 @@ typedef void(^LeftBarButtonItemViewBlock)();
 @property(nonatomic,strong)UIButton *iconView;
 @property(nonatomic,strong)UILabel  *countLab;
 @property(nonatomic,copy)NSString   *countStr;
+@property(nonatomic,copy)NSString   *icon;
 @property(nonatomic,copy)LeftBarButtonItemViewBlock actionBlock;
 +(instancetype)leftViewWithBlock:(LeftBarButtonItemViewBlock)actionBlock;
 @end

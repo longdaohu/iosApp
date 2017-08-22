@@ -116,9 +116,9 @@
             [hots_temp addObject:[SMHotFrame frameWithHot:hot]];
         }
         SMHomeSectionModel *hot_group = [SMHomeSectionModel sectionInitWithTitle:@"火热推荐"  Items:[hots_temp copy] groupType:SMGroupTypeHot];
-  
         hot_group.show_All_data = (hot_group.item_all.count < hot_group.limit_count);
         hot_group.accessory_title = @"查看全部";
+        hot_group.action = NSStringFromSelector(@selector(hotRowDidClick:));
         if (hot_group.items.count > 0)  [group_temp addObject:hot_group];
         
     }
@@ -164,9 +164,11 @@
     
     BOOL banners_true = self.smModel.banners.count > 0 ;
     BOOL offline_true = [self.smModel.offline allKeys].count > 0;
-    
+    //都不存在时，不设置表头
     if (!banners_true && !offline_true)  return;
-     
+    
+    
+    
     CGFloat header_Height = 0;
 
     UIView *header =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.mj_w, header_Height)];
@@ -243,7 +245,6 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
-  
 }
 
 
@@ -342,22 +343,21 @@
     
     SMHomeSectionModel *group = self.groups[section];
     
-    if (!group.show_All_data) {
-        
-         XWeakSelf
-       SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
-        footer.actionBlock = ^{
+    if (group.show_All_data) {
+     
+        return nil;
+    }
+    
+    XWeakSelf
+    SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
+    footer.actionBlock = ^{
         
              group.show_All_data = YES;
             [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
             
-        };
+    };
         
-        return  footer;
-    
-    }
-    
-    return nil;
+    return  footer;
 
  }
 
@@ -389,29 +389,31 @@
 {
     SMHomeSectionModel *group = self.groups[indexPath.section];
     //在添加数据时已经做了判断，不会出现空数组情况
+    CGFloat   height = 0;
     switch (group.groupType) {
             
         case SMGroupTypeNews:
         {
             NSArray *item_section = group.items[0];
             SMNewsFrame *news_frame = item_section[indexPath.row];
-            return news_frame.cell_height;
+            height =  news_frame.cell_height;
 
         }
             break;
         case SMGroupTypeTags:{
             SMTagFrame *tagFrame = group.items.firstObject;
-            return  tagFrame.cell_height;
+            height = tagFrame.cell_height;
         }
             break;
         default:
         {
             SMHotFrame *hot_frame  =  group.items[indexPath.row];
-            return  hot_frame.cell_height;
+             height = hot_frame.cell_height;
         }
             break;
     }
     
+    return height;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -434,24 +436,16 @@
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
     
-    if ( group.groupType == SMGroupTypeHot) {
+    if (group.groupType != SMGroupTypeHot) return;
+    
+    if (group.action) {
         
         SMHotFrame *hot_frame  =  group.items[indexPath.row];
         
-        SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+        [self performSelector:NSSelectorFromString(group.action) withObject:hot_frame afterDelay:0.0];
         
-        if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
-        
-            [self safariWithPath:hot_frame.hot.offline_path];
-            
-            return;
-        }
-        
-        
-        detail.message_id = hot_frame.hot.message_id;
-        
-        [self pushWithVC:detail];
     }
+ 
     
 }
 
@@ -490,6 +484,23 @@
 
 }
 
+
+- (void)hotRowDidClick:(SMHotFrame *)hot_frame{
+
+
+    if (hot_frame.hot.messageType == SMMessageTypeOffLine) {
+        
+        [self safariWithPath:hot_frame.hot.offline_path];
+        
+        return;
+    }
+    
+    SMDetailViewController *detail = [[SMDetailViewController alloc] init];
+    detail.message_id = hot_frame.hot.message_id;
+    [self pushWithVC:detail];
+    
+}
+
 - (void)viewDidLayoutSubviews{
 
     [super viewDidLayoutSubviews];
@@ -508,6 +519,7 @@
          [self.tableView emptyViewWithError:NetRequest_ConnectError];
         
     }
+   
 }
 
 - (void)dealloc{

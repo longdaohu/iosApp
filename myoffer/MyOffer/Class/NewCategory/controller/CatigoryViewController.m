@@ -488,7 +488,7 @@ static NSString *rankIdentify = @"rankStyle";
 
 //导航栏 leftBarButtonItem
 - (void)leftViewMessage{
-    
+    /*
     //先从本地获取消息数据 当网络联接时，再次请求最新网络数据
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
@@ -513,7 +513,7 @@ static NSString *rankIdentify = @"rankStyle";
         }];
         
     }
-    
+     */
 }
 
 //打开左侧菜单

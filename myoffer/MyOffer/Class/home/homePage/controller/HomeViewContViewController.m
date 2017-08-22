@@ -125,10 +125,11 @@
     
     [self makeOther];
     
+ 
 }
 
 
- 
+
 -(void)makeOther{
 
     
@@ -859,9 +860,10 @@ ENGLISH  设置环境
 }
 
 //导航栏 leftBarButtonItem
+
 -(void)leftViewMessage
 {
-    
+    /*
     if(!LOGIN) self.leftView.countStr = @"0";
     
     if (LOGIN && [self checkNetWorkReaching]) {
@@ -885,7 +887,8 @@ ENGLISH  设置环境
         }];
         
     }
-    
+*/
+
 }
 
 

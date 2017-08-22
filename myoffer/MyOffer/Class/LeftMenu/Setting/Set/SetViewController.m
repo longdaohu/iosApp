@@ -16,7 +16,8 @@
 
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
-@property(nonatomic,strong)NSArray *items;
+@property(nonatomic,strong)NSMutableArray *groups;
+@property(nonatomic,strong)NSArray *logout_group;
 @end
 
 @implementation SetViewController
@@ -29,6 +30,7 @@
 
     [MobClick beginLogPageView:@"page设置中心"];
     
+    [self change];
 }
 
 
@@ -40,27 +42,83 @@
     
 }
 
+- (void)change{
 
--(NSArray *)items{
     
-    if (!_items) {
+    if (LOGIN) {
+    
+        if (self.groups.count == 1) {
+            
+            [self.groups addObject:self.logout_group];
+            
+            [self.tableView reloadData];
+
+        }
+        
+        
+    }else{
+    
+        if (self.groups.count > 1) {
+            
+            [self.groups removeLastObject];
+            
+            [self.tableView reloadData];
+            
+        }
+        
+
+    }
+    
+}
+
+
+- (NSArray *)logout_group{
+
+    if (!_logout_group) {
+        
+        //退出
+        MenuItem *logout   = [MenuItem menuItemInitWithName:@"退出登录" icon:@"me_about"  classString: nil];
+        logout.action = NSStringFromSelector(@selector(caseLogout));
+        
+        _logout_group = @[logout];
+
+    }
+    
+    return _logout_group;
+}
+
+
+
+- (NSArray *)groups{
+
+    if (!_groups) {
         
         //个人信息
         MenuItem *profile   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-001") icon:@"me_profile"    classString: NSStringFromClass([ProfileViewController class])];
-     
+        profile.action = NSStringFromSelector(@selector(caseProfile:));
         //反馈
         MenuItem *feedBack  = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-003") icon:@"me_feedback"   classString: NSStringFromClass([FeedbackViewController class])];
-        
+        feedBack.action = NSStringFromSelector(@selector(caseFeed:));
+
         //关于
         MenuItem *about   = [MenuItem menuItemInitWithName:GDLocalizedString(@"Setting-004") icon:@"me_about"  classString: NSStringFromClass([XWGJAboutViewController class])];
+        about.action = NSStringFromSelector(@selector(caseAbout:));
+    
+
+        NSArray *set = @[profile,feedBack,about];
+  
         
+        _groups   =  [NSMutableArray array];
         
-        _items   =  @[profile,feedBack,about];
+        [_groups addObject:set];
+        
     }
     
     
-    return _items;
+    return _groups;
+    
 }
+
 
 - (void)viewDidLoad {
     
@@ -88,12 +146,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 1;
+    return self.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.items.count;
+    return [self.groups[section] count];
 }
 
 static NSString *identify = @"set";
@@ -105,9 +163,19 @@ static NSString *identify = @"set";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     
-    MenuItem *item       = self.items[indexPath.row];
+    if (indexPath.section == 1) {
+        
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+    }else{
+    
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    
+    
+    NSArray *items = self.groups[indexPath.section];
+    MenuItem *item       = items[indexPath.row];
     cell.textLabel.text  = item.name;
-//    cell.imageView.image = [UIImage imageNamed:item.icon];
     
     return cell;
 }
@@ -116,19 +184,43 @@ static NSString *identify = @"set";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    MenuItem *item  = self.items[indexPath.row];
-   
-    if ([item.classString isEqualToString: NSStringFromClass([ProfileViewController class])] || [item.classString isEqualToString:NSStringFromClass([FeedbackViewController class])] ) {
-        
-        RequireLogin
-    }
+    NSArray *items = self.groups[indexPath.section];
+    MenuItem *item       = items[indexPath.row];
     
-    [self.navigationController pushViewController:[[NSClassFromString(item.classString) alloc] init] animated:YES];
+    if (item.action.length > 0) {
+        
+        [self performSelector:NSSelectorFromString(item.action) withObject:item afterDelay:0];
+    }
     
 }
 
+- (void)caseFeed:(MenuItem *)item{
 
+    RequireLogin
+    
+    [self.navigationController pushViewController:[[NSClassFromString(item.classString) alloc] init] animated:YES];
+}
 
+- (void)caseProfile:(MenuItem *)item{
+
+    RequireLogin
+    [self.navigationController pushViewController:[[NSClassFromString(item.classString) alloc] init] animated:YES];
+
+}
+
+- (void)caseAbout:(MenuItem *)item{
+    
+    [self.navigationController pushViewController:[[NSClassFromString(item.classString) alloc] init] animated:YES];
+
+}
+
+-(void)caseLogout{
+    
+    [[AppDelegate sharedDelegate] logout];
+
+    [self dismiss];
+    
+}
 
 
 

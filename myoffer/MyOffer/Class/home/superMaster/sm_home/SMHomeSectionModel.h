@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger,SMGroupType){
 @property(nonatomic,assign)BOOL show_All_data;
 //未显示全部时，限制展示几条数据
 @property(nonatomic,assign)NSInteger limit_count;
+@property(nonatomic,copy)NSString *action;
 
 + (instancetype)sectionInitWithTitle:(NSString *)title Items:(NSArray *)items  groupType:(SMGroupType)groupType;
 

@@ -8,7 +8,7 @@
 
 #import "XWGJTabBarController.h"
 #import "HomeViewContViewController.h"
-#import "MeViewController.h"
+#import "PersonCenterViewController.h"
 #import "MessageCenterViewController.h"
 #import "CatigoryViewController.h"
 
@@ -28,8 +28,8 @@
     CatigoryViewController *cvc = [[CatigoryViewController alloc] init];
     cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
     
-    MeViewController *mvc = [[MeViewController alloc] initWithNibName:NSStringFromClass([MeViewController class]) bundle:nil];
-    mvc.title = GDLocalizedString(@"MeViewControllerTitle"); //@"申请中心";
+    PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
+    mvc.title = @"我的"; //@"申请中心";
     
     
         MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
@@ -205,6 +205,8 @@
 //    
 //}
 
+
+/*
 -(void)contentViewIsOpen:(BOOL)open
 {
     
@@ -229,6 +231,6 @@
     }
     
 }
-
+*/
 
 @end

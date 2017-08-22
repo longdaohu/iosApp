@@ -17,5 +17,17 @@
 }
 
 
+//- (NSString *)title{
+//
+//    return [NSString stringWithFormat:@"Copyright © 2017年 UVIC. All rights reserved.%@",_title];
+//}
+//
+//
+//- (NSString *)sub_title{
+//    
+//    return [NSString stringWithFormat:@"Created by xuewuguojie on 2017/8/14.  myOffer xuewuguojie %@",_sub_title];
+//}
+//
+
 
 @end

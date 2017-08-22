@@ -22,17 +22,12 @@
         CGFloat icon_X = 0;
         CGFloat icon_Y = 0;
         CGFloat icon_W = item_Width;
-        CGFloat icon_H = 34;
+        CGFloat icon_H = 30;
         
         CGFloat titleX = 0;
         CGFloat titleY = icon_H + XFONT_SIZE(11);
         CGFloat titleW = icon_W;
-        CGFloat titleH = XFONT_SIZE(18);
-        
-        CGFloat countX = 0;
-        CGFloat countY = titleY + titleH + 2;
-        CGFloat countW = icon_W;
-        CGFloat countH = XFONT_SIZE(14);
+        CGFloat titleH = 16;
         
         
         CGFloat margin = XPERCENT * 17;
@@ -42,10 +37,10 @@
         titleY  += margin;
         self.title_frame = CGRectMake(titleX, titleY, titleW, titleH);
         
-        countY += margin;
-        self.count_frame = CGRectMake(countX, countY, countW, countH);
         
-        self.section_Height = countH + countY + margin;
+        self.section_Height = titleH + titleY + margin;
+        
+        self.section_frame = CGRectMake(0, 0, XSCREEN_WIDTH, titleH + titleY + margin);
         
         
     }

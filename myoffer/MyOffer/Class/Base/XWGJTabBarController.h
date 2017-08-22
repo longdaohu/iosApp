@@ -11,5 +11,6 @@
 @interface XWGJTabBarController : UITabBarController
 @property(nonatomic,strong)UIImage *navImage;
 //用于监听主页面是否打开状态
--(void)contentViewIsOpen:(BOOL)open;
+//- (void)contentViewIsOpen:(BOOL)open;
+
 @end

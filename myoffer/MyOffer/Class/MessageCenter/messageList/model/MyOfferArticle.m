@@ -19,7 +19,7 @@
 
 -(NSString *)cover_url{
 
-    NSLog(@" %@ title =  %@",_cover_url,self.title);
+//    NSLog(@" %@ title =  %@",_cover_url,self.title);
     return [_cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 

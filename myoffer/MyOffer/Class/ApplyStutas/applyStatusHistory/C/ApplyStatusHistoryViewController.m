@@ -120,9 +120,6 @@
 //超出cell的bounds范围，不能显示
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-//    BOOL clips = (self.group.count - 1 == indexPath.row);
-  
     cell.clipsToBounds = YES;
     
 }

@@ -392,7 +392,7 @@
 
 //导航栏 leftBarButtonItem
 - (void)leftViewMessage{
-    
+    /*
     NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
     NSString *message_count  = [ud valueForKey:@"message_count"];
     NSString *order_count    = [ud valueForKey:@"order_count"];
@@ -416,7 +416,7 @@
         }];
         
     }
-    
+    */
 }
 //显示侧边菜单
 -(void)showLeftMenu{

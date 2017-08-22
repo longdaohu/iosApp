@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface ApplyStutasCenterViewController : BaseViewController
+@property(nonatomic,strong)NSArray *groups;
 
 @end

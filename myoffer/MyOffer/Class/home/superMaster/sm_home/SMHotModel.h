@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger,SMMessageType){
 @property(nonatomic,assign)BOOL has_video;
 @property(nonatomic,assign)SMMessageType messageType;
 @property(nonatomic,strong)NSArray *tags;
+@property(nonatomic,copy)NSString *action;
 
 
 @end

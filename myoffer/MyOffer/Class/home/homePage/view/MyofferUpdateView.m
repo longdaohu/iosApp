@@ -170,9 +170,7 @@
         [self removeFromSuperview];
         
     }];
-
-
-    
+ 
 }
 
 //跳转到appstore下载页面
@@ -186,12 +184,6 @@
                                                                      @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid]]];
     
 }
-
-
-//- (void)dealloc{
-//
-//    NSLog(@">>>> updateView dealloc");
-//}
 
 
 

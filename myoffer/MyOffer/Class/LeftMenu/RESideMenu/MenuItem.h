@@ -10,6 +10,7 @@
 
 @interface MenuItem : NSObject
 //cell push class
+@property(nonatomic,copy)NSString *action;
 @property(nonatomic,copy)NSString *classString;
 //cell name
 @property(nonatomic,copy)NSString *name;
