@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XUButton.h"
 
 typedef void(^HomeSectionHeaderViewBlock)();
 @interface HomeSectionHeaderView : UIView

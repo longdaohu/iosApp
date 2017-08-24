@@ -8,6 +8,6 @@
 
 #import "ActionTableViewController.h"
 
-@interface SetViewController : BaseViewController
+@interface SetViewController : myofferBaseTableViewController
 
 @end

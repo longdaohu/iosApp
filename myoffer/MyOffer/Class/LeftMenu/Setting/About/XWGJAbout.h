@@ -22,10 +22,14 @@ typedef NS_ENUM(int, XWGJAboutType) {
 @property(nonatomic,copy)NSString *acc_title;
 @property(nonatomic,copy)NSString *acc_icon;
 @property(nonatomic,copy)NSString *action;
+@property(nonatomic,copy)NSString *item_class;
 @property(nonatomic,assign)BOOL accessoryType;
 @property(nonatomic,assign)XWGJAboutType  item_Type;
 @property(nonatomic,assign)CGFloat cell_height;
 
 + (instancetype)cellWithLogo:(NSString *)logo title:(NSString *)title sub_title:(NSString *)subName accessory_title:(NSString *)acc_title accessory_icon:(NSString *)acc_icon;
+
++ (instancetype)cellWithLogo:(NSString *)logo title:(NSString *)title action:(NSString *)action itemClass:(NSString *)item_class;
+
 
 @end

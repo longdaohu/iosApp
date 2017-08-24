@@ -10,6 +10,18 @@
 
 @implementation XWGJAbout
 
++ (instancetype)cellWithLogo:(NSString *)logo title:(NSString *)title action:(NSString *)action itemClass:(NSString *)item_class{
+
+    XWGJAbout *item = [[XWGJAbout alloc] initWithLogo:logo title:title sub_title:nil accessory_title:nil accessory_icon:nil];
+    
+    item.action = action;
+    
+    item.item_class = item_class;
+    
+    return  item;
+}
+
+
 + (instancetype)cellWithLogo:(NSString *)logo title:(NSString *)title sub_title:(NSString *)subName accessory_title:(NSString *)acc_title accessory_icon:(NSString *)acc_icon{
 
     return  [[self alloc] initWithLogo:logo title:title sub_title:subName accessory_title:acc_title accessory_icon:acc_icon];

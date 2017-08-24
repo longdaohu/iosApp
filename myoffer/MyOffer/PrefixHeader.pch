@@ -84,6 +84,7 @@
 #define NAV_PNG  @"nav.png"
 #define Section_footer_Height_nomal 10
 #define Section_header_Height_nomal 50
+#define Section_header_Height_min 30
 #define Section_footer_Height_Title 80
 #define AutoScroll_Height   AdjustF(160.f)
 #define NetRequest_ConnectError  @"网络请求失败，请确认网络是否正常连接！"
@@ -133,7 +134,6 @@
 #import "XTextField.h"
 #import "UILabel+extention.h"
 #import "UMSocial.h"
-#import "XUButton.h"
 #import "UIView+Extension.h"
 #import "LeftBarButtonItemView.h"
 #import "UIImageView+WebCache.h"
@@ -144,6 +144,9 @@
 #import "MBProgressHUD+XJ.h"
 #import "MyOfferTableView.h"
 //#import "DefaultTableView.h"
+#import "myofferGroupModel.h"
+#import "XWGJAbout.h"
+#import "myofferBaseTableViewController.h"
 
 
 #endif

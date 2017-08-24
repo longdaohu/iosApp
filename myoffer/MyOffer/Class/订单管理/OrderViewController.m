@@ -255,19 +255,18 @@
     
     detail.order  =  orderframe.order;
     
-    
     detail.actionBlock = ^(BOOL isSuccess){
-        
-        OrderItem *order = self.orderGroup[indexPath.section];
         
         if (isSuccess) {
             
-            order.status = @"ORDER_CLOSED";
+            orderframe.order.status = @"ORDER_CLOSED";
             
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
+    
     [self.navigationController pushViewController:detail  animated:YES];
+    
 }
 
 //支付
@@ -283,11 +282,9 @@
     
     pay.actionBlock = ^(BOOL isSuccess){
       
-        OrderItem *order = self.orderGroup[indexPath.section];
-        
-        if (isSuccess) {
+         if (isSuccess) {
             
-             order.status = @"ORDER_FINISHED";
+            orderframe.order.status = @"ORDER_FINISHED";
             
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }

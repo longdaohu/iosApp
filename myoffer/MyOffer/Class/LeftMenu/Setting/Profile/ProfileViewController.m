@@ -152,5 +152,18 @@
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    
+    return  Section_header_Height_min;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    
+    return  HEIGHT_ZERO;
+}
+
+
 
 @end

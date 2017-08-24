@@ -14,7 +14,6 @@
 #import "PersonCell.h"
 #import "FavoriteViewController.h"
 #import "MBTIViewController.h"
-#import "ApplyViewController.h"
 #import "NotificationViewController.h"
 #import "HelpViewController.h"
 #import "SetViewController.h"
@@ -27,16 +26,17 @@
 #import "PersonServiceStatusHistoryViewController.h"
 #import "IntelligentResultViewController.h"
 #import "LeftBarButtonItemView.h"
+#import "myApplyViewController.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)LeftMenuHeaderView *header_topView;
 @property(nonatomic,strong)UIImageView *colorView;
-@property(nonatomic,strong)ApplyStatusModelFrame *frameModel;
 @property(nonatomic,strong)PersonServiceStatusHistoryViewController *serviceHistoryView;
 @property(nonatomic,strong)LeftBarButtonItemView *TZView;
 @property(nonatomic,assign)BOOL havePeipeiResult;
+@property(nonatomic,strong)ApplyStatusModelFrame *statusframeModel;
 
 @end
 
@@ -61,7 +61,8 @@
     
     [self caseLogin];
     
-    [self caseUserLogout];
+    [self caseWhenUserLogout];
+ 
     
     self.tabBarController.tabBar.hidden = NO;
     
@@ -150,7 +151,7 @@
         
         switch (type) {
             case centerItemTypepipei:
-                [self caseZNPP];
+                [self caseApply];
                 break;
             case centerItemTypefavor:
                 [self caseFave];
@@ -295,7 +296,7 @@
     if (item.item_Type == XWGJAboutTypeServiceStatus) {
         
         personServiceStatusCell *status_cell =[personServiceStatusCell cellWithTableView:tableView];
-        status_cell.statusFrame = self.frameModel;
+        status_cell.statusFrame = self.statusframeModel;
         
         return status_cell;
  
@@ -344,8 +345,7 @@
         
     }else{
     
-        NSLog(@"didSelectRowAtIndexPath >>>>>>>>>> %@",item.action);
-
+ 
         if (item.action.length > 0) {
             
             [self performSelector:NSSelectorFromString(item.action) withObject:nil afterDelay:0.0];
@@ -499,16 +499,8 @@
 {
     
     RequireLogin
-    
-    //    if ([self.Applystate containsString:@"1"] || !self.Applystate) {
-    //
-    //        [self pushViewController:[[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil]];
-    //
-    //        return;
-    //
-    //     }
-    //
-     [self pushWithVC:NSStringFromClass([ApplyStutasCenterViewController class])];
+
+     [self pushWithVC:NSStringFromClass([myApplyViewController class])];
 
 }
 
@@ -631,7 +623,7 @@
 //服务状态
 - (void)caseServiceStatus{
 
-    if (self.groups.count > 2 && self.frameModel) return;
+    if (self.groups.count > 2 && self.statusframeModel) return;
     
     XWeakSelf
     
@@ -652,13 +644,13 @@
     
     if (status_Arr.count == 0) return;
     
-    ApplyStatusModelFrame *frameModel = [ApplyStatusModelFrame frameWithStatusModel:(ApplyStutasModel*)status_Arr[0]];
-    self.frameModel = frameModel;
-    self.serviceHistoryView.status_frame = self.frameModel;
+    ApplyStatusModelFrame *statusframeModel = [ApplyStatusModelFrame frameWithStatusModel:(ApplyStutasModel*)status_Arr[0]];
+    self.statusframeModel = statusframeModel;
+    self.serviceHistoryView.status_frame = self.statusframeModel;
 
     
      XWGJAbout *serviceStatus = [XWGJAbout cellWithLogo:@"about_love" title:[status_Arr.firstObject title] sub_title:nil accessory_title:nil accessory_icon:nil] ;
-    serviceStatus.cell_height = frameModel.cell_Height + 10;
+    serviceStatus.cell_height = statusframeModel.cell_Height + 10;
     serviceStatus.item_Type =  XWGJAboutTypeServiceStatus;
     
     NSArray *group = @[serviceStatus];
@@ -678,7 +670,10 @@
 }
 
 
-- (void)caseUserLogout{
+- (void)caseWhenUserLogout{
+    
+    if (LOGIN) return;
+    
     
     if (self.groups.count > 2) {
         
@@ -695,13 +690,8 @@
 }
 
 - (void)caseLogin{
-
     
-    if (!LOGIN) {
-        
-        return;
-    }
-   
+    if (!LOGIN) return;
     
     [self caseServiceStatus];
     

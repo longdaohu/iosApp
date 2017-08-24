@@ -45,8 +45,6 @@
 {
     if (!_abountArray) {
         
-        
-        
         XWGJAbout *love = [XWGJAbout cellWithLogo:@"about_love"  title:GDLocalizedString(@"About_download") sub_title:nil accessory_title:nil accessory_icon:nil];
         love.accessoryType = YES;
         XWGJAbout *share = [XWGJAbout cellWithLogo:@"about_share"  title:GDLocalizedString(@"About_share") sub_title:nil accessory_title:nil accessory_icon:nil];

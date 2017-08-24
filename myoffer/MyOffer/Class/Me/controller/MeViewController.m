@@ -18,8 +18,8 @@ typedef enum {
 #import "FavoriteViewController.h"
 #import "ApplyViewController.h"
 #import "ApplyStatusViewController.h"
-#import "MyOfferViewController.h"
-#import "ApplyMatialViewController.h"
+//#import "MyOfferViewController.h"
+//#import "ApplyMatialViewController.h"
 #import "IntelligentResultViewController.h"
 #import "CenterHeaderView.h"
 #import "MeCenterHeaderViewFrame.h"
@@ -569,14 +569,14 @@ typedef enum {
 //跳转申请材料
 -(void)CaseApplyMatial{
    
-    [self pushWithVC:NSStringFromClass([ApplyMatialViewController class])];
+//    [self pushWithVC:NSStringFromClass([ApplyMatialViewController class])];
     
 }
 
 //跳转申请MYOFFER
 -(void)CaseMyoffer{
     
-    [self pushWithVC:NSStringFromClass([MyOfferViewController class])];
+//    [self pushWithVC:NSStringFromClass([MyOfferViewController class])];
     
 }
 
