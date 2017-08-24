@@ -46,8 +46,7 @@
 @property(nonatomic,strong)XBTopToolView  *topToolView;
 //热门城市数组
 @property(nonatomic,strong)NSArray  *country_Hotes;
-//是否有新消息图标
-@property(nonatomic,strong)LeftBarButtonItemView *leftView;
+
 
 @end
 
@@ -65,7 +64,7 @@
 
     [MobClick beginLogPageView:@"page分类搜索"];
     
-    [self leftViewMessage];
+   
     
 }
 
@@ -318,16 +317,6 @@
     nomalCollectionVC.type = CollectionTypeSubject;
 }
 
-- (void)makeOtherUI{
-    
-    XWeakSelf
-    self.leftView = [LeftBarButtonItemView leftViewWithBlock:^{
-        
-        [weakSelf showLeftMenu];
-        
-    }];
-
-}
 
 - (void)makeUI{
     
@@ -482,39 +471,12 @@ static NSString *rankIdentify = @"rankStyle";
     
     NSString *object = (NSString *)noti.object;
     
-    if (1 == object.integerValue) [self leftViewMessage];
+    if (1 == object.integerValue){
+    
+    }
     
 }
 
-//导航栏 leftBarButtonItem
-- (void)leftViewMessage{
-    /*
-    //先从本地获取消息数据 当网络联接时，再次请求最新网络数据
-    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
-    NSString *message_count  = [ud valueForKey:@"message_count"];
-    NSString *order_count    = [ud valueForKey:@"order_count"];
-    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
-    
-    if(!LOGIN) self.leftView.countStr = @"0";
-    
-    if (LOGIN && [self checkNetWorkReaching]) {
-        
-        XWeakSelf
-        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
-            NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count    = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
-            [ud synchronize];
-            
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-        }];
-        
-    }
-     */
-}
 
 //打开左侧菜单
 -(void)showLeftMenu{

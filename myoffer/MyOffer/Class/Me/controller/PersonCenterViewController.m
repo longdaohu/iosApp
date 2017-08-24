@@ -28,6 +28,7 @@
 #import "LeftBarButtonItemView.h"
 #import "myApplyViewController.h"
 
+
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
@@ -39,6 +40,7 @@
 @property(nonatomic,strong)ApplyStatusModelFrame *statusframeModel;
 
 @end
+
 
 @implementation PersonCenterViewController
 
@@ -150,8 +152,8 @@
     CenterHeaderView *header_bottomeView =  [CenterHeaderView centerSectionViewWithResponse:nil actionBlock:^(centerItemType type) {
         
         switch (type) {
-            case centerItemTypepipei:
-                [self caseApply];
+            case centerItemTypeMyApply:
+                [self caseMyApply];
                 break;
             case centerItemTypefavor:
                 [self caseFave];
@@ -239,7 +241,6 @@
     
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-   
         
         //关于智能匹配
         if ([path isEqualToString:kAPISelectorZiZengPipeiGet]) {
@@ -467,7 +468,9 @@
         self.havePeipeiResult = NO;
     
         [self pushWithVC:NSStringFromClass([PipeiEditViewController class])];
-        
+     
+        return;
+
     }
     
     
@@ -477,7 +480,6 @@
         
         [self pushWithVC:NSStringFromClass([IntelligentResultViewController class])];
         
-        return;
         
     }
     
@@ -495,7 +497,7 @@
  
 
 //我的申请
--(void)caseApply
+-(void)caseMyApply
 {
     
     RequireLogin
@@ -593,7 +595,7 @@
 }
 
 //加载用户信息
-- (void)caseUserInfor{
+- (void)caseMakeDataUserInfor{
 
     if(LOGIN) {
         
@@ -610,18 +612,18 @@
         }];
         
         
-    }else{
+        return;
         
-        self.header_topView.haveIcon = NO;
-        
-        [self.header_topView headerViewWithUserLoginOut];
     }
+        
+    self.header_topView.haveIcon = NO;
+    [self.header_topView headerViewWithUserLoginOut];
     
     
 }
 
 //服务状态
-- (void)caseServiceStatus{
+- (void)caseMakeDataServiceStatus{
 
     if (self.groups.count > 2 && self.statusframeModel) return;
     
@@ -669,6 +671,11 @@
     [self requestWithPath:kAPISelectorZiZengPipeiGet];
 }
 
+- (void)caseMakeDataForNewMessage{
+
+    [self requestWithPath:kAPISelectorCheckNews];
+    
+}
 
 - (void)caseWhenUserLogout{
     
@@ -685,7 +692,7 @@
     
     self.TZView.countStr = @"0";
 
-    [self caseUserInfor];
+    [self caseMakeDataUserInfor];
     
 }
 
@@ -693,11 +700,13 @@
     
     if (!LOGIN) return;
     
-    [self caseServiceStatus];
+    [self caseMakeDataServiceStatus];
     
-    [self caseUserInfor];
+    [self caseMakeDataUserInfor];
     
     [self caseMakeDataForPipei];
+    
+    [self caseMakeDataForNewMessage];
     
 }
 

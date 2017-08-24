@@ -39,17 +39,11 @@
         
         self.backgroundColor =XCOLOR_WHITE;
         
-        CenterSectionItem *pipei  = [self itemWithIcon:@"p_apply" title:@"我的申请" subtitle:nil itemTag:centerItemTypepipei];
+        CenterSectionItem *pipei  = [self itemWithIcon:@"p_apply" title:@"我的申请" subtitle:nil itemTag:centerItemTypeMyApply];
         CenterSectionItem *order  = [self itemWithIcon:@"p_order" title:@"我的订单" subtitle:nil itemTag:centerItemTypeOrder];
         CenterSectionItem *test  = [self itemWithIcon:@"p_fav" title:@"我的收藏" subtitle:nil itemTag:centerItemTypefavor];
         self.items = @[pipei, order,test];
-        
-        
-//        UIView *top_line = [UIView new];
-//        self.top_line = top_line;
-//        top_line.backgroundColor = XCOLOR_line;
-//        [self addSubview:top_line];
-     
+      
         
     }
     return self;

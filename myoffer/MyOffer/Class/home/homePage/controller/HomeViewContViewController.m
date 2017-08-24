@@ -52,8 +52,6 @@
 @property(nonatomic,strong)MJRefreshGifHeader *fresh_Header;
 //自定义ToolBar
 @property(nonatomic,strong)XUToolbar *myToolbar;
-//自定义导航栏LeftBarButtonItem
-@property(nonatomic,strong)LeftBarButtonItemView *leftView;
 //分组数据
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
@@ -97,7 +95,6 @@
     
     [self userInformation];
     
-    [self leftViewMessage];
     
     [self userDidClickItem];
     
@@ -332,7 +329,6 @@
     
     [self makeHomeTableView];
     
-    [self makeLeftBarButtonItemView];
     
     UIImageView *maskBgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
     maskBgView.image = [UIImage imageNamed:@"gradient_up"];
@@ -349,17 +345,7 @@
 }
 
 
--(void)makeLeftBarButtonItemView{
 
-    XWeakSelf
-    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
-        [weakSelf openLeftMenu];
-    }];
-    
-    UIBarButtonItem *leftItem =[[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
-    UIBarButtonItem *flexItem =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    self.myToolbar.items= @[leftItem,flexItem];
-}
 
 - (HomeHeaderFrame *)headerFrame{
 
@@ -412,7 +398,6 @@
 {
     [self makeDataSourceRefresh:YES];
     
-    [self leftViewMessage];
 }
 
 
@@ -859,37 +844,6 @@ ENGLISH  设置环境
     
 }
 
-//导航栏 leftBarButtonItem
-
--(void)leftViewMessage
-{
-    /*
-    if(!LOGIN) self.leftView.countStr = @"0";
-    
-    if (LOGIN && [self checkNetWorkReaching]) {
-        
-        NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
-        NSString *message_count  = [ud valueForKey:@"message_count"];
-        NSString *order_count    = [ud valueForKey:@"order_count"];
-        self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
-        
-        XWeakSelf
-        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
-            NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count    = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
-            [ud synchronize];
-            
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-        }];
-        
-    }
-*/
-
-}
 
 
 //跳转我要留学

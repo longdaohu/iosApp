@@ -10,7 +10,6 @@
 
 @interface CatigoryViewController : BaseViewController
 
-- (void)leftViewMessage;
 
 - (void)jumpToHotCity;
 

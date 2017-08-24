@@ -17,8 +17,6 @@ typedef enum {
 //已选择服务项
 @property(nonatomic,assign)HomePageClickItemType clickType;
 
-- (void)leftViewMessage;
-
 - (void)caseChangestatusBarStyle;
 
 @end

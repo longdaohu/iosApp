@@ -55,7 +55,6 @@
 -(void)makeUI
 {
     self.title  = GDLocalizedString(@"Left-helpCenter");
-  
  
 }
 

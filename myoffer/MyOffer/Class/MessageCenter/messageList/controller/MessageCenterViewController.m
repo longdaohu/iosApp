@@ -17,7 +17,6 @@
 #import "FSBaseTableView.h"
 #import "FSSScrollContentViewController.h"
 #import "FSBottomTableViewCell.h"
-#import "LeftBarButtonItemView.h"
 
 @interface MessageCenterViewController ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate>
 @property (nonatomic, strong) FSBaseTableView *tableView;
@@ -53,8 +52,6 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
-    [self leftViewMessage];
-    
 }
 
 
@@ -86,15 +83,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
-    
-    XWeakSelf
-    self.leftView =[LeftBarButtonItemView leftViewWithBlock:^{
-        
-        [weakSelf showLeftMenu];
-        
-    }];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]  initWithCustomView:self.leftView];
+     
     
 }
 
@@ -390,40 +379,6 @@
 
 
 
-//导航栏 leftBarButtonItem
-- (void)leftViewMessage{
-    /*
-    NSUserDefaults *ud       = [NSUserDefaults standardUserDefaults];
-    NSString *message_count  = [ud valueForKey:@"message_count"];
-    NSString *order_count    = [ud valueForKey:@"order_count"];
-    self.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[message_count integerValue]+[order_count integerValue]];
-    
-    if(!LOGIN) self.leftView.countStr = @"0";
-    
-    if (LOGIN && [self checkNetWorkReaching]) {
-        
-        XWeakSelf
-        
-        [self startAPIRequestWithSelector:kAPISelectorCheckNews parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
-            NSInteger message_count  = [response[@"message_count"] integerValue];
-            NSInteger order_count    = [response[@"order_count"] integerValue];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)message_count] forKey:@"message_count"];
-            [ud setValue:[NSString stringWithFormat:@"%ld",(long)order_count] forKey:@"order_count"];
-            [ud synchronize];
-            
-            weakSelf.leftView.countStr =[NSString stringWithFormat:@"%ld",(long)[response[@"message_count"] integerValue]+[response[@"order_count"] integerValue]];
-        }];
-        
-    }
-    */
-}
-//显示侧边菜单
--(void)showLeftMenu{
-    
-    [self.sideMenuViewController presentLeftMenuViewController];
-    
-}
 
 
 
