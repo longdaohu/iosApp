@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XWGJAboutViewController : BaseViewController
+@interface XWGJAboutViewController : myofferBaseTableViewController
 
 @end

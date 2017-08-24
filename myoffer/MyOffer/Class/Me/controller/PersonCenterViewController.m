@@ -7,7 +7,6 @@
 //
 
 #import "PersonCenterViewController.h"
-#import "XWGJAbout.h"
 #import "LeftMenuHeaderView.h"
 #import "CenterHeaderView.h"
 #import "ApplyStutasCenterViewController.h"
@@ -38,7 +37,7 @@
 @property(nonatomic,strong)LeftBarButtonItemView *TZView;
 @property(nonatomic,assign)BOOL havePeipeiResult;
 @property(nonatomic,strong)ApplyStatusModelFrame *statusframeModel;
-
+@property(nonatomic,assign)CurrentClickType currentType;
 @end
 
 
@@ -48,7 +47,7 @@
     
     [super viewWillAppear:animated];
     
-    [MobClick beginLogPageView:@"page申请中心"];
+    [MobClick beginLogPageView:@"page个人中心"];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
@@ -56,10 +55,12 @@
     
 }
 
+
 //页面出现时预加载功能
 -(void)presentViewWillAppear{
     
-//    [self userDidClickItem];
+    
+    [self didClickCurrent];
     
     [self caseLogin];
     
@@ -75,7 +76,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page申请中心"];
+    [MobClick endLogPageView:@"page个人中心"];
 }
 
 
@@ -439,11 +440,15 @@
 
 - (void)caseMBTI{
     
+    self.currentType = CurrentClickTypeMBTI;
+    
     RequireLogin
     
     NSString *path = [NSString stringWithFormat:@"%@mbti/test",DOMAINURL];
     
     [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
+    
+    self.currentType = CurrentClickTypeDefault;
 
 }
 
@@ -462,6 +467,7 @@
 }
 
 - (void)caseZNPP{
+    
     
     if (!LOGIN){
         
@@ -489,6 +495,8 @@
 //跳转收藏
 - (void)caseFave{
     
+    self.currentType = CurrentClickTypeFavor;
+    
     RequireLogin
 
     [self pushWithVC:NSStringFromClass([FavoriteViewController class])];
@@ -499,7 +507,8 @@
 //我的申请
 -(void)caseMyApply
 {
-    
+    self.currentType = CurrentClickTypeMyApply;
+
     RequireLogin
 
      [self pushWithVC:NSStringFromClass([myApplyViewController class])];
@@ -524,7 +533,10 @@
 
 - (void)caseTZ{
 
+    self.currentType = CurrentClickTypeMsg;
+
     RequireLogin
+    
     [self pushWithVC:NSStringFromClass([NotificationViewController class])];
     
 }
@@ -532,6 +544,8 @@
 //订单中心
 -(void)caseOrder
 {
+    self.currentType = CurrentClickTypeOrder;
+
     RequireLogin
     
     [self pushWithVC:NSStringFromClass([OrderViewController class])];
@@ -543,6 +557,8 @@
 - (void)pushWithVC:(NSString *)vcStr{
     
     [self.navigationController pushViewController:[[NSClassFromString(vcStr)  alloc] init] animated:YES];
+
+    self.currentType = CurrentClickTypeDefault;
     
 }
 
@@ -629,7 +645,7 @@
     
     XWeakSelf
     
-    [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
@@ -709,6 +725,42 @@
     [self caseMakeDataForNewMessage];
     
 }
+
+- (void)didClickCurrent{
+
+    if (self.currentType == CurrentClickTypeDefault) return;
+    
+    if (!LOGIN) return;
+    
+    [self performSelector:@selector(clickedWithCurrentType) withObject:nil afterDelay:ANIMATION_DUATION * 2];
+ 
+}
+
+- (void)clickedWithCurrentType{
+
+    switch (self.currentType) {
+        case CurrentClickTypeOrder:
+            [self caseOrder];
+            break;
+        case CurrentClickTypeFavor:
+            [self caseFave];
+            break;
+        case CurrentClickTypeMyApply:
+            [self caseMyApply];
+            break;
+        case CurrentClickTypeMsg:
+            [self caseTZ];
+            break;
+        case CurrentClickTypeMBTI:
+            [self caseMBTI];
+            break;
+        default:
+            break;
+    }
+    
+    self.currentType = CurrentClickTypeDefault;
+}
+
 
 
 - (void)didReceiveMemoryWarning {

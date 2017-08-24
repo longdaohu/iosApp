@@ -12,6 +12,18 @@
 #import "APIClient+Interface.h"
 #import "Reachability.h"
 
+typedef NS_ENUM(NSInteger,CurrentClickType){
+    CurrentClickTypeDefault = 0,
+    CurrentClickTypePipei,
+    CurrentClickTypeFavor,
+    CurrentClickTypeApplyList,
+    CurrentClickTypeApplyStatus,
+    CurrentClickTypeMyApply,
+    CurrentClickTypeMsg,
+    CurrentClickTypeMBTI,
+    CurrentClickTypeOrder
+};
+
 @interface BaseViewController : UIViewController
 
 - (void)startAPIRequestUsingCacheWithSelector:(NSString *)selector

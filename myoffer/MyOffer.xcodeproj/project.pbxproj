@@ -915,11 +915,11 @@
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
 		AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotSectionFooterView.m; sourceTree = "<group>"; };
 		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
-		AE6BE7981F4A89C100AD5B3B /* PersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCell.h; sourceTree = "<group>"; };
-		AE6BE7991F4A89C100AD5B3B /* PersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCell.m; sourceTree = "<group>"; };
-		AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = personServiceStatusCell.h; sourceTree = "<group>"; };
-		AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = personServiceStatusCell.m; sourceTree = "<group>"; };
-		AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = personServiceStatusCell.xib; sourceTree = "<group>"; };
+		AE6BE7981F4A89C100AD5B3B /* PersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonCell.h; path = ../controller/PersonCell.h; sourceTree = "<group>"; };
+		AE6BE7991F4A89C100AD5B3B /* PersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonCell.m; path = ../controller/PersonCell.m; sourceTree = "<group>"; };
+		AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = personServiceStatusCell.h; path = ../controller/personServiceStatusCell.h; sourceTree = "<group>"; };
+		AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = personServiceStatusCell.m; path = ../controller/personServiceStatusCell.m; sourceTree = "<group>"; };
+		AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = personServiceStatusCell.xib; path = ../controller/personServiceStatusCell.xib; sourceTree = "<group>"; };
 		AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dot_40x40.gif; path = ../dot_40x40.gif; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
@@ -992,8 +992,8 @@
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQserviceSingleView.h; sourceTree = "<group>"; };
-		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQserviceSingleView.m; sourceTree = "<group>"; };
+		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QQserviceSingleView.h; path = ../controller/QQserviceSingleView.h; sourceTree = "<group>"; };
+		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QQserviceSingleView.m; path = ../controller/QQserviceSingleView.m; sourceTree = "<group>"; };
 		AE914EC21F417F59008A43CD /* ApplyStutasCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasCenterViewController.h; sourceTree = "<group>"; };
 		AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStutasCenterViewController.m; sourceTree = "<group>"; };
 		AE914EC71F4181E1008A43CD /* ApplyStutasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasModel.h; sourceTree = "<group>"; };
@@ -2832,17 +2832,10 @@
 				AEA249931D5B215300DD7939 /* MeViewController.h */,
 				AEA249941D5B215300DD7939 /* MeViewController.m */,
 				AEA249951D5B215300DD7939 /* MeViewController.xib */,
-				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
-				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
 				AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */,
 				AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */,
-				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
-				AE6BE7991F4A89C100AD5B3B /* PersonCell.m */,
 				AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */,
 				AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */,
-				AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */,
-				AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */,
-				AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */,
 			);
 			name = C;
 			path = controller;
@@ -2851,6 +2844,13 @@
 		AEA249971D5B215300DD7939 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
+				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
+				AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */,
+				AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */,
+				AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */,
+				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
+				AE6BE7991F4A89C100AD5B3B /* PersonCell.m */,
 				AE892A131EBC1FD70035A31D /* MeCenterHeaderViewFrame.h */,
 				AE892A141EBC1FD70035A31D /* MeCenterHeaderViewFrame.m */,
 				AEA249981D5B215300DD7939 /* CenterSectionItem.h */,
