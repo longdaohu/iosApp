@@ -8,17 +8,20 @@
 
 #import <UIKit/UIKit.h>
 @class OrderItemFrame;
-@class OrderCell;
 
-@protocol OrderTableViewCellDelegate <NSObject>
--(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender;
-@end
+typedef NS_ENUM(NSInteger,OrderCellType){
+    OrderCellTypeNomal,
+    OrderCellTypeDelete,
+    OrderCellTypePay
+};
+
 
 @interface OrderCell : UITableViewCell
 @property(nonatomic,strong)OrderItemFrame *orderFrame;
-@property(nonatomic,weak)id <OrderTableViewCellDelegate>delegate;
-@property(nonatomic,strong)NSIndexPath  *indexPath;
+
+@property(nonatomic,copy)void(^orderBlock)(OrderCellType);
 
 +(instancetype)cellWithTableView:(UITableView *)tableView;
+
 
 @end

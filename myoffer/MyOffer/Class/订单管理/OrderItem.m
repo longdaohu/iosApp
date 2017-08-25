@@ -76,6 +76,21 @@
     return [NSString stringWithFormat:@"价格：%@元",self.total_fee];
 }
 
+- (void)setStatus_finish:(BOOL)status_finish{
+
+    _status_finish = status_finish;
+    
+    self.status = status_finish ? @"ORDER_FINISHED" : @"ORDER_PAY_PENDING";
+}
+
+
+- (void)setStatus_close:(BOOL)status_close{
+    
+    _status_close = status_close;
+    
+    self.status = status_close ? @"ORDER_CLOSED" : @"ORDER_PAY_PENDING";
+
+}
 
 
 

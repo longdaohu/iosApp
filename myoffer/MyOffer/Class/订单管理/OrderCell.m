@@ -16,7 +16,7 @@
 @property(nonatomic,strong)UILabel *statusLab;
 //订单编号
 @property(nonatomic,strong)UILabel *orderNoLab;
-
+//分割线
 @property(nonatomic,strong)UIView  *line;
 //订单价格
 @property(nonatomic,strong)UILabel *feeLab;
@@ -81,7 +81,7 @@
         self.cancelBtn.layer.cornerRadius = CORNER_RADIUS;
         self.cancelBtn.layer.borderWidth = 1;
         self.cancelBtn.layer.borderColor = XCOLOR_SUBTITLE.CGColor;
-        self.cancelBtn.tag = 11;
+        self.cancelBtn.tag = OrderCellTypeDelete;
         [self.cancelBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.cancelBtn];
         
@@ -95,7 +95,7 @@
         self.payBtn.backgroundColor = XCOLOR_RED;
         self.payBtn.layer.cornerRadius = CORNER_RADIUS;
         self.payBtn.layer.masksToBounds = YES;
-        self.payBtn.tag = 10;
+        self.payBtn.tag = OrderCellTypePay;
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.payBtn];
         
@@ -134,11 +134,13 @@
 
 
 -(void)onclick:(UIButton *)sender{
+  
     
-    if ([self.delegate respondsToSelector:@selector(cellIndexPath:sender:)]) {
+    if (self.orderBlock) {
         
-        [self.delegate cellIndexPath:self.indexPath sender:sender];
+        self.orderBlock(sender.tag);
     }
+    
 }
 
 

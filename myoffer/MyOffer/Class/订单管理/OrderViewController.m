@@ -13,9 +13,11 @@
 #import "OrderItem.h"
 #import "OrderItemFrame.h"
 
-@interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,OrderTableViewCellDelegate>
+#define Parameter_Page 10
+
+@interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
-@property(nonatomic,strong)NSMutableArray *orderGroup;
+@property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,assign)NSInteger nextPage;
 
 @end
@@ -64,32 +66,23 @@
 }
 
 
--(NSMutableArray *)orderGroup{
+-(NSMutableArray *)groups{
     
-    if (!_orderGroup) {
+    if (!_groups) {
         
-        _orderGroup = [NSMutableArray array];
+        _groups = [NSMutableArray array];
     }
-    return _orderGroup;
+    return _groups;
 }
 
 
 -(void)makeDataSourse:(NSInteger)page{
-
+    
     XWeakSelf
-    NSString *path =[NSString stringWithFormat:kAPISelectorOrderList,(long)page];
   
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorOrderList parameters:@{@"page":@(page),@"size":@(Parameter_Page)} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-         
-        if ( 200 == statusCode && 0 == page) {
-             weakSelf.nextPage =0;
-             [weakSelf.orderGroup removeAllObjects];
-        }
-        
-        weakSelf.nextPage += 1;
-        
-        [weakSelf configrationUIWithResponse:response];
+        [weakSelf updateUIWithResponse:response];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
@@ -104,7 +97,9 @@
 
 - (void)loadNewData{
     
-    [self makeDataSourse:0];
+    self.nextPage = 0;
+
+    [self makeDataSourse:self.nextPage];
     
 }
 
@@ -114,28 +109,51 @@
 }
 
 
-- (void)configrationUIWithResponse:(id)response{
+- (void)updateUIWithResponse:(NSDictionary *)response{
     
-    
-    NSArray *temps =  [OrderItem mj_objectArrayWithKeyValuesArray:response[@"orders"]];
-
-    for (OrderItem *order in temps) {
+    //1 判断是否是第一页
+    if (0 == self.nextPage) {
+      
+        [self.groups removeAllObjects];
         
-        [self.orderGroup addObject:[[OrderItemFrame alloc] initWithOrder:order]];
+        self.nextPage = 0;
+    }
+    self.nextPage += 1;
+    
+    
+    //2 数据转模型
+    NSArray *orders =  [OrderItem mj_objectArrayWithKeyValuesArray:response[@"orders"]];
 
+    for (OrderItem *order in orders) {
+        
+        OrderItemFrame *order_frame = [[OrderItemFrame alloc] initWithOrder:order];
+        
+        [self.groups addObject:@[order_frame]];
+
+    }
+    [self.tableView reloadData];
+
+    
+     //3 结束刷新
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    if (self.tableView.mj_footer) {
+        
+        if ( orders.count < Parameter_Page) {
+            
+            self.tableView.mj_footer =  nil;
+        }
+        
+    }else{
+        
+        self.tableView.mj_footer =  [self makeMJ_footer];
+        
     }
     
     
-    
-    
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-    self.tableView.mj_footer = 10 > self.orderGroup.count ? nil : [self makeMJ_footer];
-    
-    [self.tableView reloadData];
-    
-    
-    if(self.orderGroup.count == 0 ){
+    //4 判断是否有数据，做相关提示
+    if(self.groups.count == 0 ){
     
         [self.tableView emptyViewWithError:@"还没有购买服务！！！"];
 
@@ -144,21 +162,22 @@
         [self.tableView emptyViewWithHiden:YES];
         
     }
-    
  
-    
     
 }
 
 - (void)makeUI{
     
     self.title = @"订单中心";
+    
     [self makeTableView];
 }
 
+
 -(void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -179,14 +198,17 @@
 
 
 #pragma mark : UITableViewDelegate,UITableViewDataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.orderGroup.count;
+    return self.groups.count;
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    NSArray *orders = self.groups[section];
+    
+    return orders.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -194,12 +216,26 @@
  
     OrderCell *cell =[OrderCell cellWithTableView:tableView];
     
-    cell.orderFrame = self.orderGroup[indexPath.section];
+    NSArray *orders_frame = self.groups[indexPath.section];
+
+    OrderItemFrame *orderFrame = orders_frame[indexPath.row];
     
-    cell.indexPath =indexPath;
-    
-    cell.delegate = self;
-    
+    cell.orderFrame = orderFrame;
+    XWeakSelf
+    cell.orderBlock = ^(OrderCellType type) {
+        
+        switch (type) {
+            case OrderCellTypeDelete:
+                [weakSelf cancelOrder:indexPath order:orderFrame.order];
+                break;
+            case OrderCellTypePay:
+                [weakSelf payOrder:indexPath order:orderFrame.order];
+                break;
+            default:
+                break;
+        }
+        
+    };
     return cell;
 }
 
@@ -217,75 +253,51 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    OrderItemFrame *orderFrame = self.orderGroup[indexPath.section];
-
-    return orderFrame.cell_Height;
+     NSArray *orders_frame = self.groups[indexPath.section];
+    
+    OrderItemFrame *order_Frame = orders_frame[indexPath.row];
+    
+    return order_Frame.cell_Height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    [self OrderDetal:indexPath];
-
-}
-
-#pragma mark : OrderTableViewCellDelegate
-
--(void)cellIndexPath:(NSIndexPath *)indexPath sender:(UIButton *)sender
-{
-    switch (sender.tag) {
-        case 11:
-            [self cancelOrder:indexPath];
-            break;
-        case 10:
-            [self payOrder:indexPath];
-            break;
-        default:
-             break;
-    }
-  
-}
-
-//详情
--(void)OrderDetal:(NSIndexPath *)indexPath{
-
-    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
+    NSArray *orders_frame = self.groups[indexPath.section];
+    
+     OrderItemFrame *order_Frame = orders_frame[indexPath.row];
     
     XWeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
-    
-    detail.order  =  orderframe.order;
-    
+    detail.order  =  order_Frame.order;
     detail.actionBlock = ^(BOOL isSuccess){
         
         if (isSuccess) {
             
-            orderframe.order.status = @"ORDER_CLOSED";
+            order_Frame.order.status_close = YES;
             
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
     
     [self.navigationController pushViewController:detail  animated:YES];
-    
 }
 
+
+#pragma mark : 事件处理
+
 //支付
--(void)payOrder:(NSIndexPath *)indexPath{
+-(void)payOrder:(NSIndexPath *)indexPath order:(OrderItem *)order{
 
+     PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
+     pay.order  =  order;
     
-    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
-
-    XWeakSelf
-    PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
-    
-    pay.order  =  orderframe.order;
-    
+     XWeakSelf
     pay.actionBlock = ^(BOOL isSuccess){
       
          if (isSuccess) {
             
-            orderframe.order.status = @"ORDER_FINISHED";
-            
+            order.status_finish = YES;
+
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
@@ -295,17 +307,17 @@
 
 
 //取消
--(void)cancelOrder:(NSIndexPath *)indexPath{
+-(void)cancelOrder:(NSIndexPath *)indexPath order:(OrderItem *)order{
     
-    OrderItemFrame *orderframe = self.orderGroup[indexPath.section];
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,orderframe.order.order_id];
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
+    
     
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         if ([response[@"result"] isEqualToString:@"OK"]) {
             
-              orderframe.order.status = @"ORDER_CLOSED";
+             order.status_close = YES;
             
              [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
          }
@@ -323,7 +335,7 @@
 
 -(void)dealloc{
     
-    KDClassLog(@"订单中心  dealloc");
+    KDClassLog(@"订单中心 OrderViewController  dealloc");
     
 }
 

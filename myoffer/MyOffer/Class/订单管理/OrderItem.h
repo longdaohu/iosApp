@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *total_fee_str;
 
 @property(nonatomic,assign)BOOL cancelBtn_hiden;
-
+@property(nonatomic,assign)BOOL status_finish;
+@property(nonatomic,assign)BOOL status_close;
 
 @end

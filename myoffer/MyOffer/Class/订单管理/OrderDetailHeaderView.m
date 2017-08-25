@@ -33,42 +33,19 @@
         self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
         
 
-        
-
-        self.orderTitleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.orderTitleLab =[UILabel labelWithFontsize:16  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.orderTitleLab.numberOfLines = 0;
         [self.bgView  addSubview:self.orderTitleLab];
         
 
         self.orderNoLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView  addSubview:self.orderNoLab];
 
-        /*
-         
-         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-         [self.bgView addGestureRecognizer:tap];
-         
-        self.orderDetailBtn = [[HMTitleButton alloc] init];
-        self.orderDetailBtn.titleLabel.font = [UIFont systemFontOfSize:KDUtilSize(16)];
-        [self.orderDetailBtn setTitle:@"套餐详情"  forState:UIControlStateNormal];
-        [self.orderDetailBtn setImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateSelected];
-        [self.orderDetailBtn setImage:[UIImage imageNamed:@"arrow_up"] forState:UIControlStateNormal];
-        self.orderDetailBtn.tag = 10;
-        [self.orderDetailBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bgView  addSubview:self.orderDetailBtn];
-        [self.orderDetailBtn setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
-        self.orderDetailBtn.hidden = YES;
 
-        */
     }
     return self;
 }
 
-//-(void)tap{
-//
-//    self.selected = !self.selected;
-//    
-//    [self onclick:self.orderDetailBtn];
-//}
 
 -(void)onclick:(UIButton *)sender
 {
@@ -89,14 +66,11 @@
     NSDictionary *sku       = [order.SKUs firstObject];
     self.orderTitleLab.text = [NSString stringWithFormat:@"*%@",sku[@"name"]];
     self.orderNoLab.text    = [NSString stringWithFormat:@"订单号 ： %@",order.order_id];
- 
-    
-    CGSize orderSize =[self.orderTitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:KDUtilSize(16)]];
-    
+
     CGFloat titleX = 10;
     CGFloat titleY = 10;
-    CGFloat titleW = sku[@"name"] ? orderSize.width :XSCREEN_WIDTH - 120;
-    titleW         = titleW > (XSCREEN_WIDTH - 120) ? XSCREEN_WIDTH - 120 : titleW;
+    CGFloat titleW = XSCREEN_WIDTH - titleX * 2;
+    CGSize orderSize = [self.orderTitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16] maxWidth:titleW];
     CGFloat titleH = orderSize.height;
     self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
@@ -107,13 +81,7 @@
     CGFloat noH = 20;
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     
-    /*
-    CGFloat detailX = XSCREEN_WIDTH - CGRectGetMaxX(self.orderTitleLab.frame);
-    CGFloat detailY = titleY;
-    CGFloat detailW = XSCREEN_WIDTH - detailX - 10;
-    CGFloat detailH = titleH;
-    self.orderDetailBtn.frame = CGRectMake(detailX, detailY, detailW, detailH);
-    */
+
     CGFloat bgX = 0;
     CGFloat bgY = 15;
     CGFloat bgW = XSCREEN_WIDTH;

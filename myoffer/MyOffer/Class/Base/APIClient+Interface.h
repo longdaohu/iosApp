@@ -101,7 +101,7 @@
 //学校专业列表
 #define kAPISelectorUniversityCourses @"GET api/v2/university/:id/courses"
 //订单
-#define kAPISelectorOrderList @"GET api/account/order?page=%ld&size=10"
+#define kAPISelectorOrderList @"GET api/account/order"
 //关闭订单
 #define kAPISelectorOrderClose @"GET api/account/order/close?order_id=%@"
 //订单详情
