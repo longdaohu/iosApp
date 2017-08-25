@@ -21,6 +21,8 @@
     
     [super awakeFromNib];
 
+    self.backgroundColor = XCOLOR_BG;
+    
      self.ProfileLab.text = GDLocalizedString(@"About_profile");
     
      [self checkAPPVersion];

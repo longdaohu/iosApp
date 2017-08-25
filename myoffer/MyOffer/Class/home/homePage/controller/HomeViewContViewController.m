@@ -657,12 +657,7 @@
     [self.navigationController pushUniversityViewControllerWithID:uni.NO_id animated:YES];
 }
 
-//显示菜单列表
--(void)openLeftMenu{
-    
-    [self.sideMenuViewController presentLeftMenuViewController];
  
-}
 
 //检查版本更新
 -(void)checkAPPVersion

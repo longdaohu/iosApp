@@ -126,7 +126,6 @@
 #import "SearchResultViewController.h" 
 #import "InternationalControl.h"
 #import "XWGJNavigationController.h"
-#import "RESideMenu.h"
 #import "MJRefresh.h"
 #import "MobClickSocialAnalytics.h"
 #import "MobClick.h"

@@ -14,11 +14,9 @@
 #import "UserDefaults.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
-//#import "NewLoginRegisterViewController.h"
 #import "MyOfferLoginViewController.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "UMSocialQQHandler.h"
-#import "LeftMenuViewController.h"
 #import "APService.h"
 #import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -26,7 +24,7 @@
 #import "HomeViewContViewController.h"
 
 
-@interface AppDelegate ()<RESideMenuDelegate,WXApiDelegate>
+@interface AppDelegate ()<WXApiDelegate>
 {
     NSString *_accessToken;
  }
@@ -107,20 +105,7 @@ static AppDelegate *__sharedDelegate;
     //控制器初始化
     XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
     self.mainTabBarController = mainTabBarController;
-    
-    LeftMenuViewController *leftMenuViewController = [[LeftMenuViewController alloc] init];
-    leftMenuViewController.mainTabBarController = mainTabBarController;
-    
-//    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:mainTabBarController
-//                                                                    leftMenuViewController:leftMenuViewController
-//                                                                   rightMenuViewController:nil];
-//    sideMenuViewController.view.backgroundColor = XCOLOR(54, 54, 54 , 1);
-//    sideMenuViewController.delegate = self;
-//    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
-//    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
-//    sideMenuViewController.contentViewShadowOpacity = 0.6;
-//    sideMenuViewController.contentViewShadowRadius = 12;
-//    sideMenuViewController.contentViewShadowEnabled = YES;
+
     self.window.rootViewController = mainTabBarController;
 
     

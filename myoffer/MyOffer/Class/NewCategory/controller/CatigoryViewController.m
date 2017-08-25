@@ -478,12 +478,7 @@ static NSString *rankIdentify = @"rankStyle";
 }
 
 
-//打开左侧菜单
--(void)showLeftMenu{
-    
-    [self.sideMenuViewController presentLeftMenuViewController];
-    
-}
+ 
 
 //打开搜索
 -(void)searchButtonPressed:(UIBarButtonItem *)barButton {

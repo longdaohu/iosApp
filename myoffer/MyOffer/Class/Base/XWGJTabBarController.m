@@ -11,6 +11,10 @@
 #import "PersonCenterViewController.h"
 #import "MessageCenterViewController.h"
 #import "CatigoryViewController.h"
+#import "ApplyStatusViewController.h"
+#import "ApplyViewController.h"
+#import "NotificationViewController.h"
+#import "MyOfferLoginViewController.h"
 
 @interface XWGJTabBarController ()
 @property(nonatomic,strong)UIImage *navigationBgImage;
@@ -49,11 +53,13 @@
         [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
         [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
     
-
     
-
-
+ 
     self.tabBar.tintColor = [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
+
 }
 
 -(void)tabbaritem:(NSInteger)index nomalImage:(NSString *)nomalName  selectImage:(NSString *)selectName
@@ -232,5 +238,65 @@
     
 }
 */
+
+
+
+//接到通知判断页面跳转
+-(void)pushWithNoti:(NSNotification *)noti
+{
+    KDClassLog(@"pushWithNoti >>>>>>> %@",noti);
+    
+    NSDictionary *userInfo = noti.userInfo;
+    NSInteger view_id = [noti.userInfo[@"view_id"] integerValue];
+    
+    UINavigationController *nav = (UINavigationController *)self.selectedViewController;
+    [nav popToRootViewControllerAnimated:NO];
+
+    if (view_id == 3) {
+        
+        [self setSelectedIndex:2];
+
+    }
+    
+    if (!LOGIN) {
+        
+        XWGJNavigationController *nav_login =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
+        [nav presentViewController:nav_login animated:YES completion:nil];
+    }
+    
+    switch (view_id) {
+        case 0:
+        {
+            [nav pushViewController:[[ApplyStatusViewController alloc] init] animated:NO];
+        }
+            break;
+            
+        case 1:{
+           
+            NotificationViewController *notiVC = [[NotificationViewController alloc] init];
+            notiVC.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:notiVC animated:NO];
+            
+            WebViewController *noti =[[WebViewController alloc] init];
+            noti.path    = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,userInfo[@"message_id"]];
+            [notiVC.navigationController pushViewController:noti  animated:YES];
+ 
+        }
+            break;
+            
+        case 2:{
+            
+                ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
+                [nav pushViewController:apply animated:NO];
+
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
 
 @end

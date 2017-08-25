@@ -22,11 +22,11 @@
         [self.iconView addTarget:self action:@selector(leftButtonOnClick:) forControlEvents:UIControlEventTouchDown];
         
         
-        self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(16, 0, 18, 18)];
+        self.countLab =[[UILabel alloc] initWithFrame:CGRectMake(16, 0, REDSPOT_HEIGHT, REDSPOT_HEIGHT)];
         self.countLab.layer.cornerRadius   = REDSPOT_HEIGHT  * 0.5;
         self.countLab.layer.masksToBounds  = YES;
-        self.countLab.backgroundColor = [UIColor redColor];
-        self.countLab.textColor       = [UIColor whiteColor];
+        self.countLab.backgroundColor = [UIColor whiteColor];
+        self.countLab.textColor       = XCOLOR_LIGHTBLUE;
         self.countLab.textAlignment   = NSTextAlignmentCenter;
         self.countLab.font            = [UIFont systemFontOfSize:13];
         self.countLab.hidden          = YES;

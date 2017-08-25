@@ -96,12 +96,13 @@
 {
     self.title = GDLocalizedString(@"About_title");
     CGFloat comHeight = 50;
-    UILabel *CompanyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - XNAV_HEIGHT - comHeight, XSCREEN_WIDTH, comHeight)];
-     CompanyLab.font = [UIFont systemFontOfSize:14];
-     CompanyLab.textColor = XCOLOR_DARKGRAY;
-     CompanyLab.textAlignment = NSTextAlignmentCenter;
-     CompanyLab.text = @"CopyRight 2016 myOffer.All rights reserved.";
-    [self.view addSubview:CompanyLab];
+    UILabel *companyLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - XNAV_HEIGHT - comHeight, XSCREEN_WIDTH, comHeight)];
+     companyLab.font = [UIFont systemFontOfSize:14];
+     companyLab.textColor = XCOLOR_TITLE;
+     companyLab.textAlignment = NSTextAlignmentCenter;
+     companyLab.text = @"CopyRight 2016 myOffer.All rights reserved.";
+    [self.view insertSubview:companyLab atIndex:0];
+    
     
     
      self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
