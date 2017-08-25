@@ -95,7 +95,7 @@
 //根据用户资料测试录取难易程度
 #define kAPISelectorUniversityDetailUserLevel @"GET api/v2/account/evaluate/"
 //获取通知列表
-#define kAPISelectorTongZhiList @"GET api/account/messagelist?client=app&page=%d&size=%d"
+#define kAPISelectorTongZhiList @"GET api/account/messagelist"
 //删除通知列表
 #define kAPISelectorDeleteTongZhi @"DELETE api/account/message/%@"
 //学校专业列表

@@ -20,7 +20,6 @@
 @property(nonatomic,copy)NSString *SKU;
 @property(nonatomic,copy)NSString *order_id_str;
 @property(nonatomic,copy)NSString *total_fee_str;
-
 @property(nonatomic,assign)BOOL cancelBtn_hiden;
 @property(nonatomic,assign)BOOL status_finish;
 @property(nonatomic,assign)BOOL status_close;

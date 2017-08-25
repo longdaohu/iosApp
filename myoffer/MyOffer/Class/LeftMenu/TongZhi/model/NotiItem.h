@@ -16,6 +16,6 @@
 @property(nonatomic,copy)NSString *create_time_short;
 @property(nonatomic,copy)NSString *category_id;
 @property(nonatomic,copy)NSString *category;
-
+@property(nonatomic,assign)BOOL state_read;
 
 @end

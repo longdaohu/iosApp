@@ -21,8 +21,8 @@
 @property(nonatomic,strong)UILabel *subTitleLab;
 //未读消息小红点
 @property(nonatomic,strong)UIView *redSpotsView;
-@property(nonatomic,strong)UIView *line;
 
+@property(nonatomic,strong)UIView *line;
 
 @end
 
@@ -76,7 +76,7 @@
 {
     _noti  = noti;
     
-    self.titleLab.text      = noti.category;
+    self.titleLab.text   = noti.category;
     [self.titleLab sizeToFit];
     
     self.subTitleLab.text   = noti.summary;
@@ -85,8 +85,8 @@
     self.timeLab.text       = noti.create_time_short;
     [self.timeLab sizeToFit];
     
-    NSString *imageName     =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
-    self.logoView.image     =  [UIImage imageNamed:imageName];
+    NSString *imageName   =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
+    self.logoView.image   =  [UIImage imageNamed:imageName];
     self.redSpotsView.hidden = noti.state.length;
 
 }

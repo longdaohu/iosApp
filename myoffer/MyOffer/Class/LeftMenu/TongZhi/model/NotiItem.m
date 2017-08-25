@@ -30,6 +30,17 @@
     return [self.create_at componentsSeparatedByString:@" "][0];
 }
 
+- (void)setState_read:(BOOL)state_read{
+
+    _state_read = state_read;
+    
+    if (state_read ) {
+        
+        self.state = @"Read";
+    }
+    
+}
+
 /*
 
 + (NSDictionary *)mj_objectClassInArray

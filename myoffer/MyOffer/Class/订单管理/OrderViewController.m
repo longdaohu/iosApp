@@ -13,8 +13,6 @@
 #import "OrderItem.h"
 #import "OrderItemFrame.h"
 
-#define Parameter_Page 10
-
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
@@ -80,7 +78,7 @@
     
     XWeakSelf
   
-    [self startAPIRequestWithSelector:kAPISelectorOrderList parameters:@{@"page":@(page),@"size":@(Parameter_Page)} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorOrderList parameters:@{KEY_PAGE:@(page),KEY_SIZE:@(Parameter_Size)} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
@@ -140,7 +138,7 @@
     
     if (self.tableView.mj_footer) {
         
-        if ( orders.count < Parameter_Page) {
+        if ( orders.count < Parameter_Size) {
             
             self.tableView.mj_footer =  nil;
         }
