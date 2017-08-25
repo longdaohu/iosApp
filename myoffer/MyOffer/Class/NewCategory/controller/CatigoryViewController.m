@@ -37,6 +37,7 @@
 @property(nonatomic,strong)UITableView *city_tableView;
 //排名数组
 @property(nonatomic,strong)NSArray *rankList;
+
 @property(nonatomic,strong)NSArray *colors;
 //专业数组
 @property(nonatomic,strong)NSArray *subjectList;
@@ -343,7 +344,6 @@ static NSString *rankIdentify = @"rankStyle";
     
     
     if (tableView == self.rank_tableView) {
-        
         
         CatigaryRankkCell *rank_cell =  [tableView dequeueReusableCellWithIdentifier:rankIdentify];
         

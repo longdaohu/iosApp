@@ -85,8 +85,7 @@
     }
     
     
-    
-    self.group = [items_tmp copy];
+    self.group = @[items_tmp];
     
 }
 
@@ -100,19 +99,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return self.group.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.group.count;
+    NSArray *items  = self.group[section];
+    
+    return items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     ApplyStatusHistoryCell *cell = [ApplyStatusHistoryCell cellWithTableView:tableView];
-    
-    cell.histroyFrame =self.group[indexPath.row];
+    NSArray *items  = self.group[indexPath.section];
+    cell.histroyFrame = items[indexPath.row];
     
     return cell;
 }
@@ -126,7 +127,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    ApplyStatusHistoryItemFrame  *histroyFrame = self.group[indexPath.row];
+    NSArray *items  = self.group[indexPath.section];
+
+    ApplyStatusHistoryItemFrame  *histroyFrame = items[indexPath.row];
     
     return  histroyFrame.cell_Height;
 }

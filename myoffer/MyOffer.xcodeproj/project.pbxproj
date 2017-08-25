@@ -231,7 +231,6 @@
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
 		AE59A5531E69907D008E479F /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5521E69907D008E479F /* NomalCollectionController.m */; };
-		AE59CA761F3D9FE900647D22 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59CA751F3D9FE900647D22 /* GroupModel.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
@@ -899,8 +898,6 @@
 		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		AE59A5511E69907D008E479F /* NomalCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NomalCollectionController.h; sourceTree = "<group>"; };
 		AE59A5521E69907D008E479F /* NomalCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NomalCollectionController.m; sourceTree = "<group>"; };
-		AE59CA741F3D9FE900647D22 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
-		AE59CA751F3D9FE900647D22 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
@@ -1103,8 +1100,8 @@
 		AEA249831D5B215300DD7939 /* ApplyStatusRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusRecord.m; sourceTree = "<group>"; };
 		AEA249871D5B215300DD7939 /* ApplyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStatusCell.h; sourceTree = "<group>"; };
 		AEA249881D5B215300DD7939 /* ApplyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStatusCell.m; sourceTree = "<group>"; };
-		AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
-		AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
+		AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteViewController.h; path = controller/FavoriteViewController.h; sourceTree = "<group>"; };
+		AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteViewController.m; path = controller/FavoriteViewController.m; sourceTree = "<group>"; };
 		AEA249981D5B215300DD7939 /* CenterSectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterSectionItem.h; sourceTree = "<group>"; };
 		AEA249991D5B215300DD7939 /* CenterSectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterSectionItem.m; sourceTree = "<group>"; };
 		AEA2499A1D5B215300DD7939 /* CenterHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterHeaderView.h; sourceTree = "<group>"; };
@@ -2600,8 +2597,6 @@
 		AE9E6EE81E851D3A00203C00 /* M */ = {
 			isa = PBXGroup;
 			children = (
-				AE59CA741F3D9FE900647D22 /* GroupModel.h */,
-				AE59CA751F3D9FE900647D22 /* GroupModel.m */,
 				AEBA44C41E88B876005E923B /* MyOfferService.h */,
 				AEBA44C51E88B877005E923B /* MyOfferService.m */,
 				AEBA44C71E88BAB3005E923B /* ServiceSKU.h */,
@@ -2791,35 +2786,11 @@
 		AEA2498B1D5B215300DD7939 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				AEA2498C1D5B215300DD7939 /* controller */,
-				AEA2498F1D5B215300DD7939 /* model */,
-				AEA249901D5B215300DD7939 /* view */,
-			);
-			name = Favorite;
-			path = Class/Favorite;
-			sourceTree = "<group>";
-		};
-		AEA2498C1D5B215300DD7939 /* controller */ = {
-			isa = PBXGroup;
-			children = (
 				AEA2498D1D5B215300DD7939 /* FavoriteViewController.h */,
 				AEA2498E1D5B215300DD7939 /* FavoriteViewController.m */,
 			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		AEA2498F1D5B215300DD7939 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		AEA249901D5B215300DD7939 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
+			name = Favorite;
+			path = Class/Favorite;
 			sourceTree = "<group>";
 		};
 		AEA249911D5B215300DD7939 /* person */ = {
@@ -4068,7 +4039,6 @@
 				AE3AB6AF1F21A27300A3C7E3 /* SMNewsFrame.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,
 				AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */,
-				AE59CA761F3D9FE900647D22 /* GroupModel.m in Sources */,
 				AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */,
 				AE851F1A1EA9B85D001993D5 /* MyOfferCountryState.m in Sources */,
 				AE3943DC1E0A1AD00038826A /* TAAbstractDotView.m in Sources */,

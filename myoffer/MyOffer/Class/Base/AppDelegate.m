@@ -314,8 +314,15 @@ static AppDelegate *__sharedDelegate;
     if (logout_date) {
         
         NSDate *now_date = [NSDate date];
-        NSInteger logout_time = logout_date.integerValue;
-        NSInteger current_time = (NSInteger)now_date.timeIntervalSince1970 * 1000;
+        long long logout_time = logout_date.longLongValue;
+        long long current_time = (long long)now_date.timeIntervalSince1970 * 1000;
+//        2017-08-25 16:22:30.752755 myOffer[11465:3132350]  1506241350589  <<<<<<保存过期登录时间>>>>>
+//        2017-08-25 16:22:33.114608 myOffer[11465:3132350]  1506241350589  int = -1292170307  <<<<<<判断登录时间是否过期>>>>> 410799400
+//        2017-08-25 16:18:05.369768+0800 myOffer[251:11211] 1506240933618  int = -1292587278  <<<<<<判断登录时间是否过期>>>>> 410531400
+        
+        NSLog(@"%@  int = %lld  <<<<<<判断登录时间是否过期>>>>> %lld",logout_date,logout_time,current_time);
+//        NSLog(@"%@  int = %ld  <<<<<<判断登录时间是否过期>>>>> %ld",logout_date,logout_time,(long)logout_time);
+        
         if (logout_time <= current_time) [self logout];
  
     }
@@ -366,6 +373,8 @@ static AppDelegate *__sharedDelegate;
 //保存过期登录时间
 - (void)saveLogOutDate:(NSString *)timeStr
 {
+    NSLog(@" %@  <<<<<<保存过期登录时间>>>>>",timeStr);
+
     [[NSUserDefaults standardUserDefaults] setValue:timeStr forKey:@"logout_date"];
     [[NSUserDefaults standardUserDefaults]  synchronize];
 }

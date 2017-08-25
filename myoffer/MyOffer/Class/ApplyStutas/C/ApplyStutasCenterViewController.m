@@ -65,7 +65,8 @@
     [status_Arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
          ApplyStatusModelFrame *frameModel = [ApplyStatusModelFrame frameWithStatusModel:(ApplyStutasModel*)obj];
-        [status_temps addObject:frameModel];
+        
+        [status_temps addObject:@[frameModel]];
         
      }];
     
@@ -111,21 +112,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    NSArray *items = self.groups[section];
+    
+    return items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ApplyStatusNewCell *cell = [ApplyStatusNewCell cellWithTableView:tableView];
  
-    cell.statusFrame = self.groups[indexPath.section];
+    NSArray *items = self.groups[indexPath.section];
+
+    cell.statusFrame = items[indexPath.row];
 
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ApplyStatusModelFrame *status_frame = self.groups[indexPath.section];
+    NSArray *items = self.groups[indexPath.section];
+
+    ApplyStatusModelFrame *status_frame = items[indexPath.row];
     
     return  status_frame.cell_Height;
 }
@@ -144,9 +151,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSArray *items = self.groups[indexPath.section];
+    
      ApplyStatusHistoryViewController  *historyVC = [[ApplyStatusHistoryViewController alloc] init];
     
-     historyVC.status_frame = self.groups[indexPath.section];
+     historyVC.status_frame = items[indexPath.row];
     
      [self.navigationController pushViewController:historyVC animated:YES];
     

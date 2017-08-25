@@ -12,6 +12,7 @@
 @property(nonatomic,copy)NSString *header_title;
 @property(nonatomic,copy)NSString *accesory_title;
 @property(nonatomic,copy)NSString *footer_title;
+@property(nonatomic,assign)NSInteger index;
 @property(nonatomic,assign)BOOL haveHeader;
 @property(nonatomic,assign)BOOL havefooter;
 @property(nonatomic,assign)BOOL head_accesory_arrow;

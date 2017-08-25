@@ -19,7 +19,6 @@
 #import "ServiceOverseaDestinationView.h"
 #import "ServiceOverSeaDestination.h"
 #import "SMListViewController.h"
-#import "GroupModel.h"
 
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
@@ -160,8 +159,9 @@
 
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];
-    GroupModel *one = [GroupModel groupWithIndex:0 header:@"留学目的地" footer:@"" items:@[self.overSeaArr]];
-    [groups_temp addObject:one];
+    myofferGroupModel *one_group =[myofferGroupModel groupWithItems:@[self.overSeaArr] header:@"留学目的地"];
+    one_group.index = 0;
+    [groups_temp addObject:one_group];
     
     
     //3 热门商品
@@ -174,9 +174,10 @@
     }
     
     if (items.count > 0) {
-        
-        GroupModel *two = [GroupModel  groupWithIndex:1 header:@"热门商品" footer:@"" items: [items copy]];
-        [groups_temp addObject:two];
+        myofferGroupModel *two_group =[myofferGroupModel groupWithItems:[items copy] header:@"热门商品"];
+        one_group.index = 1;
+//        GroupModel *two = [GroupModel  groupWithIndex:1 header:@"热门商品" footer:@"" items: [items copy]];
+        [groups_temp addObject:two_group];
     }
     self.groups = [groups_temp copy];
     
@@ -208,7 +209,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    GroupModel *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.items.count;
 }
@@ -217,7 +218,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    GroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     if (group.index == 0) {
         
@@ -240,9 +241,9 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
     
-    GroupModel *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header];
+    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
     SectionView.backgroundColor = XCOLOR_WHITE;
     
@@ -252,7 +253,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
-    GroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     CGFloat cell_Height = 0;
     
@@ -285,7 +286,7 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    GroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
 
     if (0 == group.index) return;
     

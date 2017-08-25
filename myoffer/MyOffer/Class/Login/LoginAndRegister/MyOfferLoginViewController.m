@@ -751,7 +751,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
-        NSLog(@"access_token = %@",response[@"jpush_alias"]);
+//        NSLog(@"access_token = %@",response[@"jpush_alias"]);
     [MobClick event:@"myofferUserLogin"];
     
     //当用户没有电话时发出通知，让用户填写手机号
