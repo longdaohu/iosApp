@@ -53,16 +53,6 @@
     countryLab.font = [UIFont systemFontOfSize:30];
 //    [upView addSubview:countryLab];
     
-
-//    UIView *leftLine = [[UIView alloc] init];
-//    leftLine.backgroundColor = XCOLOR_WHITE;
-//    [upView addSubview:leftLine];
-//    
-//    UIView *rightLine = [[UIView alloc] init];
-//    rightLine.backgroundColor = XCOLOR_WHITE;
-//    [upView addSubview:rightLine];
-//    
-//    self.lines = @[leftLine,rightLine];
     
     
     UIView *bottomView = [[UIView alloc] init];

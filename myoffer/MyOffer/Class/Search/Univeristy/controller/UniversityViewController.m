@@ -25,7 +25,6 @@
 #import "UniversityFooterView.h"
 #import "UniversitySubjectListViewController.h"
 #import "PipeiEditViewController.h"
-#import "UniDetailGroup.h"
 #import "UniversityheaderCenterView.h"
 #import "IntelligentResultViewController.h"
 #import "WYLXViewController.h"
@@ -277,8 +276,8 @@ typedef enum {
     
     //3-1 设置第一分组cell数据
     [self oneGroupViewWithUniFrame:UniFrame];
-    UniDetailGroup *groupOne =  [UniDetailGroup groupWithTitle:nil contentes:@[UniFrame] groupType:GroupTypeA haveFooter:NO];
-    
+    myofferGroupModel *groupOne = [myofferGroupModel groupWithItems:@[UniFrame]  header:nil footer:nil];
+    groupOne.type = AGroupTypeA;
     [self.groups addObject:groupOne];
     
     
@@ -294,8 +293,8 @@ typedef enum {
  
     if (news_temps.count > 0) {
         
-        UniDetailGroup *article_group = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] groupType:GroupTypeB haveFooter:NO];
-        
+        myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
+        article_group.type = AGroupTypeB;
         [self.groups addObject:article_group];
     }
     
@@ -311,8 +310,10 @@ typedef enum {
         
         NSString *title = (idx == 0) ? @"相关院校" : @"";
         
-        UniDetailGroup *uni_group = [UniDetailGroup groupWithTitle:title contentes:@[uniFrame] groupType:GroupTypeC haveFooter:YES];
-
+        myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
+        uni_group.section_footer_height = Section_footer_Height_nomal;
+        uni_group.type = AGroupTypeC;
+        
         [self.groups addObject:uni_group];
         
     }];
@@ -414,14 +415,14 @@ typedef enum {
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.section_header_height;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
    
-     UniDetailGroup *group = self.groups[section];
+     myofferGroupModel *group = self.groups[section];
     
     return [HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
 }
@@ -429,32 +430,32 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.section_footer_height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
 
     CGFloat cellHeight = Uni_Cell_Height;
     
     
     switch (group.type) {
-        case GroupTypeA:{
+        case AGroupTypeA:{
             
             cellHeight = self.oneGroup.contentFrame.group_One_Height;
          }
             break;
             
-        case GroupTypeB:{
+        case AGroupTypeB:{
             XWGJMessageFrame *messageFrame =  group.items[indexPath.row];
             cellHeight  = messageFrame.cell_Height;
         }
             break;
             
-        case GroupTypeC:{
+        case AGroupTypeC:{
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
         }
@@ -478,7 +479,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return  group.items.count;
 }
@@ -486,11 +487,11 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     
     switch (group.type) {
-        case GroupTypeA:{
+        case AGroupTypeA:{
             
             UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"one"];
             
@@ -505,7 +506,7 @@ typedef enum {
             break;
             
             
-        case GroupTypeB:{
+        case AGroupTypeB:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
             
@@ -544,12 +545,12 @@ typedef enum {
     
     if(indexPath.section == 0) return;
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     UIViewController *VC = [UIViewController new];
     
     switch (group.type) {
-        case GroupTypeB:
+        case AGroupTypeB:
         {
             XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
             
@@ -559,7 +560,7 @@ typedef enum {
         }
             break;
             
-        case GroupTypeC:
+        case AGroupTypeC:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;

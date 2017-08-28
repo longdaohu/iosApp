@@ -23,13 +23,9 @@
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,copy)NSString *current_Service;
 @property(nonatomic,strong)NSArray *current_frames;
-//<!---- 顶部下拉图片
 @property(nonatomic,strong)myofferFlexibleView *flexView;
-// 顶部下拉图片---->
-//<！--工具条
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
 @property(nonatomic,assign)CGRect banViewFrame;
-//  工具条 --->
 
 @end
 
@@ -172,14 +168,9 @@
 
 
 - (void)makeDataSource {
-
-    
-    NSString *subPath = [NSString stringWithFormat:@"api/emall/skus?country=%@&category=%@",self.country_Name,self.current_Service];
-    NSString *utfPath = [subPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *path = [NSString stringWithFormat:@"GET %@",utfPath];
     
     XWeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:@"GET api/emall/skus" parameters:@{@"country":self.country_Name,@"category":self.current_Service} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
 
@@ -194,10 +185,6 @@
 //更新UI
 - (void)updateUIWithResponse:(id)response {
     
-    if (!response) return ;
-    
-    if (![response isKindOfClass:[NSArray class]])  return;
-  
     
     NSArray *skus  = [ServiceSKU mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     
@@ -234,7 +221,6 @@
 
 - (void)makeCurrentSKUWithTitle:(NSString *)title{
     
-    
     self.current_Service = title;
     
     for (EmallCatigoryGroup *group in self.groups) {
@@ -270,7 +256,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    
     return self.current_frames.count;
 }
 
@@ -299,9 +284,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
     ServiceSKUFrame *itemFrame = self.current_frames[indexPath.row];
-    ServiceItemViewController *item = [[ServiceItemViewController alloc] init];
-    item.service_id = itemFrame.SKU.service_id;
-    [self.navigationController pushViewController:item animated:true];
+    ServiceItemViewController *itemVC = [[ServiceItemViewController alloc] init];
+    itemVC.service_id = itemFrame.SKU.service_id;
+    
+    [self.navigationController pushViewController:itemVC animated:true];
     
     
 }
@@ -311,9 +297,9 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
-    if (scrollView.contentOffset.y <= -64  && scrollView.isDragging) {
+    if (scrollView.contentOffset.y <= -XNAV_HEIGHT  && scrollView.isDragging) {
         
-        [scrollView setContentOffset:CGPointMake(0, -64)];
+        [scrollView setContentOffset:CGPointMake(0, -XNAV_HEIGHT)];
         
     }
   
@@ -354,7 +340,7 @@
         
     }else{
     
-        [self pop];
+        [self casePop];
     }
     
 }
@@ -367,7 +353,7 @@
 }
 
 
-- (void)pop{
+- (void)casePop{
 
     [self.navigationController popViewControllerAnimated:true];
 }

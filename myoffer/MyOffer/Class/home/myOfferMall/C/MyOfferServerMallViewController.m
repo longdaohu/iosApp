@@ -165,23 +165,24 @@
     
     
     //3 热门商品
-    NSMutableArray *items = [NSMutableArray array];
+    NSMutableArray *item_frames = [NSMutableArray array];
     for (ServiceSKU *item in self.sevice.skus) {
         
         ServiceSKUFrame *itemFrame = [[ServiceSKUFrame alloc] init];
         itemFrame.SKU = item;
-        [items addObject:itemFrame];
+        [item_frames addObject:itemFrame];
     }
     
-    if (items.count > 0) {
-        myofferGroupModel *two_group =[myofferGroupModel groupWithItems:[items copy] header:@"热门商品"];
-        one_group.index = 1;
-//        GroupModel *two = [GroupModel  groupWithIndex:1 header:@"热门商品" footer:@"" items: [items copy]];
+    if (item_frames.count > 0) {
+
+        myofferGroupModel *two_group =[myofferGroupModel groupWithItems:item_frames  header:@"热门商品"];
+        two_group.index = 1;
         [groups_temp addObject:two_group];
+ 
     }
-    self.groups = [groups_temp copy];
     
-  
+    self.groups = [groups_temp copy];
+
     
     //5 轮播图匹配数据
     NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
@@ -210,7 +211,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     myofferGroupModel *group = self.groups[section];
-    
+
     return group.items.count;
 }
 
@@ -229,14 +230,17 @@
         [cell.contentView addSubview:self.overseaView];
         
         return cell;
+    }else{
+    
+        ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:group.items[indexPath.row]];
+    
+        [cell bottomLineShow:(group.items.count - 1) != indexPath.row];
+    
+         return cell;
     }
 
     
-    ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:group.items[indexPath.row]];
-    
-    [cell bottomLineShow:(group.items.count - 1) != indexPath.row];
-    
-     return cell;
+
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {

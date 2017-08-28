@@ -27,7 +27,6 @@
 #import "NSString+MD5.h"
 #import "SearchUniversityCenterViewController.h"
 #import "XUToolbar.h"
-#import "UniDetailGroup.h"
 #import "MBTIViewController.h"
 #import "MyOfferUniversityModel.h"
 #import "HeadItem.h"
@@ -162,16 +161,19 @@
     if (!_groups) {
         
         _groups =[NSMutableArray array];
-     
-        UniDetailGroup *groupone = [UniDetailGroup groupWithTitle:@"留学目的地" contentes:nil groupType:GroupTypeA  haveFooter:NO];
-        groupone.accessory_title = @"更多地区";
+        
+        myofferGroupModel  *groupone = [myofferGroupModel groupWithItems:nil  header:@"留学目的地" footer:nil accessory:@"更多地区"];
+        groupone.type = AGroupTypeA;
+        groupone.head_accesory_arrow = YES;
         [_groups addObject:groupone];
         
-        UniDetailGroup *grouptwo = [UniDetailGroup groupWithTitle:@"热门阅读" contentes:nil groupType:GroupTypeB  haveFooter:NO];
-        grouptwo.accessory_title = @"更多资讯";
+        myofferGroupModel *grouptwo = [myofferGroupModel groupWithItems:nil  header:@"热门阅读" footer:nil accessory:@"更多资讯"];
+        grouptwo.type = AGroupTypeB;
+        grouptwo.head_accesory_arrow = YES;
         [_groups addObject:grouptwo];
         
-        UniDetailGroup *groupthree = [UniDetailGroup groupWithTitle:@"热门院校" contentes:nil groupType:GroupTypeC haveFooter:NO];
+        myofferGroupModel *groupthree = [myofferGroupModel groupWithItems:nil  header:@"热门院校" footer:nil accessory:@"更多资讯"];
+        groupthree.type = AGroupTypeC;
         [_groups addObject:groupthree];
     }
     return _groups;
@@ -231,7 +233,7 @@
     
     if (refresh) {
         
-        UniDetailGroup *groupthree = self.groups[index];
+        myofferGroupModel *groupthree = self.groups[index];
         
         groupthree.items = nil;
     }
@@ -241,8 +243,8 @@
 //留学目的地UI设置
 -(void)hotCityWithResponse:(NSArray *)response
 {
-    UniDetailGroup *groupone = self.groups[0];
-    groupone.cellHeight = XSCREEN_WIDTH * 0.4;
+    myofferGroupModel *groupone = self.groups[0];
+    groupone.cell_height_set = XSCREEN_WIDTH * 0.4;
     NSArray *temp_cities = response.count > 4 ? [response subarrayWithRange:NSMakeRange(1, 3)] : response;
     groupone.items = temp_cities;
 }
@@ -252,8 +254,8 @@
 {
     
     NSArray  *temp_articles  = (NSArray *)response;
-    UniDetailGroup *grouptwo = self.groups[1];
-    grouptwo.cellHeight =  ceilf(temp_articles.count * 0.5) * XSCREEN_WIDTH * 0.4;
+    myofferGroupModel *grouptwo = self.groups[1];
+    grouptwo.cell_height_set =  ceilf(temp_articles.count * 0.5) * XSCREEN_WIDTH * 0.4;
     grouptwo.items = @[temp_articles];
     
 }
@@ -268,11 +270,11 @@
         [temp_universities addObject:uniFrame];
     }];
     
-    UniDetailGroup *groupthree = self.groups[2];
+    myofferGroupModel *groupthree = self.groups[2];
     
     if (temp_universities.count > 0) {
         HotUniversityFrame *uniFrame = temp_universities[0];
-        groupthree.cellHeight = uniFrame.cellHeight;
+        groupthree.cell_height_set = uniFrame.cellHeight;
     }
     
     groupthree.items = @[temp_universities];
@@ -287,9 +289,6 @@
     
     [self startAPIRequestWithSelector:kAPISelectorMessagePromotions  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
-        
-        
-        if (![response isKindOfClass:[NSArray class]] || !response) return ;
         
         weakSelf.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
         
@@ -511,11 +510,11 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
   
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
-    SectionView.accessory_title = group.accessory_title;
+    SectionView.accessory_title = group.accesory_title;
     
     if ((self.groups.count - 1) > section) {
         
@@ -541,7 +540,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.section_header_height;
  }
@@ -549,9 +548,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
   
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
-    return   group.items.count > 0 ? group.cellHeight : HEIGHT_ZERO;
+    return   group.items.count > 0 ? group.cell_height_set : HEIGHT_ZERO;
 
 }
 
@@ -562,7 +561,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
 
     return group.items.count;
 }
@@ -570,10 +569,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
   
        switch (group.type) {
-        case GroupTypeA:
+        case AGroupTypeA:
         {
             HomeFirstTableViewCell *cell =[HomeFirstTableViewCell cellInitWithTableView:tableView];
             cell.itemInfo = group.items[indexPath.row];
@@ -582,7 +581,7 @@
          }
           break;
                
-          case GroupTypeB:{
+          case AGroupTypeB:{
               
             HomeSecondTableViewCell *cell =[HomeSecondTableViewCell cellInitWithTableView:tableView];
             cell.items = group.items[indexPath.row];
@@ -962,7 +961,7 @@ ENGLISH  设置环境
     }
     [MobClick event:item];
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     NSDictionary *info = group.items[indexPath.row];
     NSString *searchValue = info[@"search"];
     

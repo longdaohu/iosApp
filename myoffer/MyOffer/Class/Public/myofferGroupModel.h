@@ -8,16 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger,AGroupType){
+    AGroupTypeA = 0,
+    AGroupTypeB,
+    AGroupTypeC,
+    AGroupTypeD,
+    AGroupTypeE
+};
+
 @interface myofferGroupModel : NSObject
 @property(nonatomic,copy)NSString *header_title;
 @property(nonatomic,copy)NSString *accesory_title;
 @property(nonatomic,copy)NSString *footer_title;
 @property(nonatomic,assign)NSInteger index;
+@property(nonatomic,assign)AGroupType type;
 @property(nonatomic,assign)BOOL haveHeader;
 @property(nonatomic,assign)BOOL havefooter;
 @property(nonatomic,assign)BOOL head_accesory_arrow;
 @property(nonatomic,assign)CGFloat  section_footer_height;
 @property(nonatomic,assign)CGFloat  section_header_height;
+@property(nonatomic,assign)CGFloat  cell_height_set;
 @property(nonatomic,strong)NSArray *items;
 
 + (instancetype)groupWithItems:(NSArray *)items  header:(NSString *)header;

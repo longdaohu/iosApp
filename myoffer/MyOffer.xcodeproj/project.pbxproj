@@ -49,7 +49,6 @@
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
-		AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE175BBD1D79593600FD8865 /* UniDetailGroup.m */; };
 		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
 		AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */; };
@@ -581,8 +580,6 @@
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		AE175BBC1D79593600FD8865 /* UniDetailGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniDetailGroup.h; sourceTree = "<group>"; };
-		AE175BBD1D79593600FD8865 /* UniDetailGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniDetailGroup.m; sourceTree = "<group>"; };
 		AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTIViewController.h; sourceTree = "<group>"; };
 		AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTIViewController.m; sourceTree = "<group>"; };
 		AE1D011B1D2FCD2D005E2DEF /* YYToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYToolKit.h; sourceTree = "<group>"; };
@@ -2408,8 +2405,6 @@
 				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */,
 				AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */,
-				AE175BBC1D79593600FD8865 /* UniDetailGroup.h */,
-				AE175BBD1D79593600FD8865 /* UniDetailGroup.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -4342,7 +4337,6 @@
 				AEA24B8A1D5B25E000DD7939 /* searchSectionFootView.m in Sources */,
 				AEA249D21D5B215300DD7939 /* CenterHeaderView.m in Sources */,
 				AEA249B81D5B215300DD7939 /* XWGJTJSectionGroup.m in Sources */,
-				AE175BBE1D79593600FD8865 /* UniDetailGroup.m in Sources */,
 				AE37088D1EB083F700502A62 /* MyOfferSubjecct.m in Sources */,
 				AEA24A091D5B224E00DD7939 /* CatigaryScrollView.m in Sources */,
 				AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */,

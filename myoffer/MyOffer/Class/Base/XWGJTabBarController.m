@@ -244,7 +244,7 @@
 //接到通知判断页面跳转
 -(void)pushWithNoti:(NSNotification *)noti
 {
-    KDClassLog(@"pushWithNoti >>>>>>> %@",noti);
+//    KDClassLog(@"pushWithNoti >>>>>>> %@",noti);
     
     NSDictionary *userInfo = noti.userInfo;
     NSInteger view_id = [noti.userInfo[@"view_id"] integerValue];
@@ -262,6 +262,8 @@
         
         XWGJNavigationController *nav_login =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
         [nav presentViewController:nav_login animated:YES completion:nil];
+        
+        return;
     }
     
     switch (view_id) {

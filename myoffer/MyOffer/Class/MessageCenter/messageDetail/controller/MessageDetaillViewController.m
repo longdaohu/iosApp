@@ -5,10 +5,7 @@
 //  Created by xuewuguojie on 16/1/18.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
-/*
- UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:@"" contentes:sectionOne andFooter:NO];
- [self.groups addObject:groupOne];
- */
+
 
 
 #define ZangFontSize 15
@@ -22,7 +19,6 @@
 #import "ShareNViewController.h"
 #import "MyOfferUniversityModel.h"
 #import "UniverstityTCell.h"
-#import "UniDetailGroup.h"
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
 #import "MessageArticle.h"
@@ -236,9 +232,9 @@
     
     //1 第一分组
     MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
-    UniDetailGroup *groupOne = [UniDetailGroup groupWithTitle:nil contentes:@[DetailFrame] groupType:GroupTypeA haveFooter:NO];
+    myofferGroupModel *groupOne = [myofferGroupModel groupWithItems:@[DetailFrame]  header:nil footer:nil];
+    groupOne.type = AGroupTypeA;
     [self.groups addObject:groupOne];
-    
     
     //2 相关资讯 第二分组
     NSArray *recommendations  = article.recommendations;
@@ -257,7 +253,8 @@
     
     if (news_temps.count > 0) {
         
-        UniDetailGroup *article_group = [UniDetailGroup groupWithTitle:@"相关文章" contentes:[news_temps copy] groupType:GroupTypeB  haveFooter:NO];
+        myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
+        article_group.type = AGroupTypeB;
         [self.groups addObject:article_group];
      }
     
@@ -270,8 +267,9 @@
         
         NSString *title = idx == 0 ? @"相关院校" : @"";
         
-        UniDetailGroup *uni_group = [UniDetailGroup groupWithTitle:title contentes:@[uniFrame] groupType:GroupTypeC haveFooter:YES];
-        
+        myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
+        uni_group.section_footer_height = Section_footer_Height_nomal;
+        uni_group.type = AGroupTypeC;
         [self.groups addObject:uni_group];
         
     }];
@@ -325,7 +323,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.section_footer_height;
 }
@@ -333,14 +331,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return  group.section_header_height;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     HomeSectionHeaderView *sectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
@@ -354,7 +352,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    UniDetailGroup *group = self.groups[section];
+    myofferGroupModel *group = self.groups[section];
     
     return group.items.count;
 }
@@ -363,12 +361,12 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     CGFloat cellHeight = 0;
     
     switch (group.type) {
-        case GroupTypeA:{
+        case AGroupTypeA:{
            
             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
             cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
@@ -376,7 +374,7 @@
         }
             break;
 
-        case GroupTypeB:{
+        case AGroupTypeB:{
             
             XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
             cellHeight = messageFrame.cell_Height;
@@ -384,7 +382,7 @@
         }
             break;
 
-        case GroupTypeC:{
+        case AGroupTypeC:{
             
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
@@ -405,10 +403,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     switch (group.type) {
-        case GroupTypeA:{
+        case AGroupTypeA:{
            
             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
             MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
@@ -432,7 +430,7 @@
             break;
             
             
-        case GroupTypeB:{
+        case AGroupTypeB:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
             
@@ -471,12 +469,12 @@
     
     if(indexPath.section == 0) return;
     
-    UniDetailGroup *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.groups[indexPath.section];
     
     UIViewController *VC = [UIViewController new];
     
     switch (group.type) {
-        case GroupTypeB:
+        case AGroupTypeB:
         {
             XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
             
@@ -486,7 +484,7 @@
         }
             break;
             
-        case GroupTypeC:
+        case AGroupTypeC:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;
