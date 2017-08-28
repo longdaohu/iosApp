@@ -198,7 +198,7 @@
 
     
     UIButton *setBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
-    setBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+//    setBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     [setBtn setImage:[UIImage imageNamed:@"p_set"] forState:UIControlStateNormal];
     [setBtn addTarget:self action:@selector(caseSetting) forControlEvents:UIControlEventTouchUpInside];
     [tableHeaderView addSubview:setBtn];

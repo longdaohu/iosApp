@@ -15,24 +15,18 @@
 #import "IntelligentResultViewController.h"
 #import "ApplyViewController.h"
 #import "UniversityNavView.h"
-#import "GonglueItem.h"
 #import "myofferFlexibleView.h"
 
 @interface GongLueViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-//弹性图片
+//弹性图
 @property(nonatomic,strong)myofferFlexibleView *flexView;
-//@property(nonatomic,strong)UIImageView *FlexibleImageView;
-////弹性图片初始Rect
-//@property(nonatomic,assign)CGRect   oldFlexibleViewRect;
-////弹性图片初始Center
-//@property(nonatomic,assign)CGPoint  oldFlexibleViewCenter;
 //用于判断用户是否已登录且有推荐院校数据
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //自定义TableViewHeaderView
 @property(nonatomic,strong)GongLueHeaderView *headerView;
 //自定义导航栏
-@property(nonatomic,strong)UniversityNavView     *topNavigationView;
+@property(nonatomic,strong)UniversityNavView   *topNavigationView;
 
 
 @end
@@ -46,8 +40,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [MobClick beginLogPageView:@"page申请攻略列表"];
-    
-    [self checkZhiNengPiPei];
     
 }
 
@@ -64,7 +56,27 @@
     
     [super viewDidLoad];
     
+    [self checkZhiNengPiPei];
+
     [self makeUI];
+    
+    for ( MyOfferArticle *item  in self.gonglue.articles) {
+        
+        if ([item.message_id isEqualToString:@"ranks"]) {
+            
+            item.action = NSStringFromSelector(@selector(caseSearchResult));
+            
+        }else if ([item.message_id  isEqualToString:@"recommendations"]) {
+            
+            item.action = NSStringFromSelector(@selector(caseIntelligent));
+           
+        }else if ([item.message_id  isEqualToString:@"application"]) {
+            
+            item.action = NSStringFromSelector(@selector(caseMessageCenter));
+            
+        }
+        
+    }
     
 }
 
@@ -103,7 +115,7 @@
     myofferFlexibleView *flexView = [[myofferFlexibleView alloc] init];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
-    flexView.alpha = 0.1;
+
     XWeakSelf
 
     NSString *path = [self.gonglue.cover  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -122,20 +134,14 @@
     
     
     self.flexView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, height);
-    
-    [UIView transitionWithView:self.flexView duration:0.5 options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        
-        self.flexView.alpha = 1;
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+     
     GongLueHeaderView *headerView  =[[GongLueHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, height)];
     headerView.top_View_Height = height;
     headerView.gonglue = self.gonglue;
-    self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
+    [self.tableView beginUpdates];
+    self.tableView.tableHeaderView = headerView;
+    [self.tableView endUpdates];
 }
 
 
@@ -156,14 +162,15 @@
 
 - (void)makeTableView
 {
-    UITableView *tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor  colorWithWhite:1 alpha:0];
+    UITableView *tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableView.backgroundColor =  XCOLOR_CLEAR;
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
     tableView.tableFooterView =[[UIView alloc] init];
     tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
+    tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AdjustF(160))];
 
 }
 
@@ -196,32 +203,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MyOfferArticle *item =  self.gonglue.articles[indexPath.row];
-    
-    if ([item.message_id isEqualToString:@"ranks"]) {
-        
 
-        [self caseSearchResult];
-        
-        return;
+    if (item.action.length > 0) {
+    
+        [self performSelector:NSSelectorFromString(item.action) withObject:nil afterDelay:0];
+    
+    }else{
+    
+          [self caseMassageWithId:item.message_id];
     }
     
-    if ([item.message_id  isEqualToString:@"recommendations"]) {
-        
-        [self caseIntelligent];
-        
-        return;
-    }
-    
-    
-    if ([item.message_id  isEqualToString:@"application"]) {
-        
-        [self.tabBarController setSelectedIndex:3];
-        
-        return;
-    }
-    
-    
-    [self caseMassageWithId:item.message_id];
 }
 
 
@@ -299,6 +290,13 @@
     
     [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:message_id] animated:YES];
 
+}
+
+
+- (void)caseMessageCenter{
+    
+    [self.tabBarController setSelectedIndex:3];
+    
 }
 
 

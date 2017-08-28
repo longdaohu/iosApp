@@ -8,7 +8,6 @@
 
 #import "GonglueItem.h"
 #import "MyOfferArticle.h"
-#import "GongLueTip.h"
 
 @implementation GonglueItem
 

@@ -52,10 +52,11 @@ static NSString *identity = @"gonglueList";
     [self.contentView addSubview:self.logoView];
     
     self.line                  = [[UIImageView alloc] init];
-    self.line.image            = [UIImage imageNamed:@"Black_spot"];
-    self.line.contentMode      = UIViewContentModeScaleToFill;
-    self.line.clipsToBounds    = YES;
-    self.line.alpha = 0.2;
+//    self.line.image            = [UIImage imageNamed:@"Black_spot"];
+//    self.line.contentMode      = UIViewContentModeScaleToFill;
+//    self.line.clipsToBounds    = YES;
+//    self.line.alpha = 0.2;
+    self.line.backgroundColor = XCOLOR_line;
     [self.contentView addSubview:self.line];
     
     self.titleLab = [UILabel labelWithFontsize:KDUtilSize(18)  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
@@ -94,9 +95,9 @@ static NSString *identity = @"gonglueList";
     self.logoView.frame = CGRectMake(logox, logoy, logow, logoh);
     
     CGFloat lineX = CGRectGetMaxX(self.logoView.frame);
-    CGFloat lineY = contentSize.height -0.4;
+    CGFloat lineH = LINE_HEIGHT;
+    CGFloat lineY = contentSize.height - lineH;
     CGFloat lineW = contentSize.width;
-    CGFloat lineH = 0.4;
     self.line.frame = CGRectMake(lineX, lineY, lineW, lineH);
     
     if (self.titleLab.text || self.subTitleLab.text) {

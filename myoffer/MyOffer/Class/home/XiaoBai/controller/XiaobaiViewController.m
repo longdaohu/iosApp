@@ -18,8 +18,6 @@
 #import "TopNavView.h"
 #import "NomalCollectionController.h"
 #import "GonglueItem.h"
-#import "GongLueTip.h"
-#import "EmptyDataView.h"
 
 @interface XiaobaiViewController ()<XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)TopNavView *topView;
@@ -82,15 +80,13 @@
 {
     XWeakSelf
     
-    [self startAPIRequestWithSelector:kAPISelectorGonglueList parameters:nil expectedStatusCodes:nil showHUD:fresh showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    
+    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGonglueList parameters:nil success:^(NSInteger statusCode, id response) {
         
         [weakSelf configrationUIWithResponse:response];
-        
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        [weakSelf.tableView emptyViewWithError:@"网络请求失败，点击重新加载！"];
-        
+
     }];
+    
    
 }
 
@@ -196,12 +192,10 @@
     [self.bgView addSubview:tableView];
     self.tableView = tableView;
     
-    XWeakSelf
-    
-    self.tableView.actionBlock = ^{
-    
-        [weakSelf makeDataSource:YES];
-    };
+//    XWeakSelf
+//    self.tableView.actionBlock = ^{
+//        [weakSelf makeDataSource:YES];
+//    };
 
 }
 

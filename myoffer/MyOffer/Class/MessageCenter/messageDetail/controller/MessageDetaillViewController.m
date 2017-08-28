@@ -233,7 +233,7 @@
     //1 第一分组
     MessageDetailFrame *DetailFrame  = [MessageDetailFrame frameWithArticle:article];
     myofferGroupModel *groupOne = [myofferGroupModel groupWithItems:@[DetailFrame]  header:nil footer:nil];
-    groupOne.type = AGroupTypeA;
+    groupOne.type = SectionGroupTypeA;
     [self.groups addObject:groupOne];
     
     //2 相关资讯 第二分组
@@ -254,7 +254,7 @@
     if (news_temps.count > 0) {
         
         myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
-        article_group.type = AGroupTypeB;
+        article_group.type = SectionGroupTypeB;
         [self.groups addObject:article_group];
      }
     
@@ -269,7 +269,7 @@
         
         myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
         uni_group.section_footer_height = Section_footer_Height_nomal;
-        uni_group.type = AGroupTypeC;
+        uni_group.type = SectionGroupTypeC;
         [self.groups addObject:uni_group];
         
     }];
@@ -366,7 +366,7 @@
     CGFloat cellHeight = 0;
     
     switch (group.type) {
-        case AGroupTypeA:{
+        case SectionGroupTypeA:{
            
             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
             cellHeight = self.webView.mj_h + MessageDetailFrame.MessageDetailHeight;
@@ -374,7 +374,7 @@
         }
             break;
 
-        case AGroupTypeB:{
+        case SectionGroupTypeB:{
             
             XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
             cellHeight = messageFrame.cell_Height;
@@ -382,7 +382,7 @@
         }
             break;
 
-        case AGroupTypeC:{
+        case SectionGroupTypeC:{
             
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
@@ -406,7 +406,7 @@
     myofferGroupModel *group = self.groups[indexPath.section];
     
     switch (group.type) {
-        case AGroupTypeA:{
+        case SectionGroupTypeA:{
            
             MessageDetailFrame *MessageDetailFrame   =  group.items[0];
             MessageDetailContentCell *cell = [MessageDetailContentCell CreateCellWithTableView:tableView];
@@ -430,7 +430,7 @@
             break;
             
             
-        case AGroupTypeB:{
+        case SectionGroupTypeB:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
             
@@ -474,7 +474,7 @@
     UIViewController *VC = [UIViewController new];
     
     switch (group.type) {
-        case AGroupTypeB:
+        case SectionGroupTypeB:
         {
             XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
             
@@ -484,7 +484,7 @@
         }
             break;
             
-        case AGroupTypeC:
+        case SectionGroupTypeC:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;

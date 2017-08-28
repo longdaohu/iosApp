@@ -18,7 +18,7 @@
 @property(nonatomic,copy)NSString *desc;
 @property(nonatomic,copy)NSString *logo;
 @property(nonatomic,copy)NSString *category_thr;
-
+@property(nonatomic,copy)NSString *action;
 @end
 
 

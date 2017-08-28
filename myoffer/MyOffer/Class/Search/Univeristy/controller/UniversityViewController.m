@@ -277,7 +277,7 @@ typedef enum {
     //3-1 设置第一分组cell数据
     [self oneGroupViewWithUniFrame:UniFrame];
     myofferGroupModel *groupOne = [myofferGroupModel groupWithItems:@[UniFrame]  header:nil footer:nil];
-    groupOne.type = AGroupTypeA;
+    groupOne.type = SectionGroupTypeA;
     [self.groups addObject:groupOne];
     
     
@@ -294,7 +294,7 @@ typedef enum {
     if (news_temps.count > 0) {
         
         myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
-        article_group.type = AGroupTypeB;
+        article_group.type = SectionGroupTypeB;
         [self.groups addObject:article_group];
     }
     
@@ -312,7 +312,7 @@ typedef enum {
         
         myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
         uni_group.section_footer_height = Section_footer_Height_nomal;
-        uni_group.type = AGroupTypeC;
+        uni_group.type = SectionGroupTypeC;
         
         [self.groups addObject:uni_group];
         
@@ -443,19 +443,19 @@ typedef enum {
     
     
     switch (group.type) {
-        case AGroupTypeA:{
+        case SectionGroupTypeA:{
             
             cellHeight = self.oneGroup.contentFrame.group_One_Height;
          }
             break;
             
-        case AGroupTypeB:{
+        case SectionGroupTypeB:{
             XWGJMessageFrame *messageFrame =  group.items[indexPath.row];
             cellHeight  = messageFrame.cell_Height;
         }
             break;
             
-        case AGroupTypeC:{
+        case SectionGroupTypeC:{
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
         }
@@ -491,7 +491,7 @@ typedef enum {
     
     
     switch (group.type) {
-        case AGroupTypeA:{
+        case SectionGroupTypeA:{
             
             UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"one"];
             
@@ -506,7 +506,7 @@ typedef enum {
             break;
             
             
-        case AGroupTypeB:{
+        case SectionGroupTypeB:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
             
@@ -550,7 +550,7 @@ typedef enum {
     UIViewController *VC = [UIViewController new];
     
     switch (group.type) {
-        case AGroupTypeB:
+        case SectionGroupTypeB:
         {
             XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
             
@@ -560,7 +560,7 @@ typedef enum {
         }
             break;
             
-        case AGroupTypeC:
+        case SectionGroupTypeC:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;

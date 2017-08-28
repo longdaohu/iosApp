@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger,AGroupType){
-    AGroupTypeA = 0,
-    AGroupTypeB,
-    AGroupTypeC,
-    AGroupTypeD,
-    AGroupTypeE
+typedef NS_ENUM(NSInteger,SectionGroupType){
+    SectionGroupTypeA = 0,
+    SectionGroupTypeB,
+    SectionGroupTypeC,
+    SectionGroupTypeD,
+    SectionGroupTypeE
 };
 
 @interface myofferGroupModel : NSObject
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger,AGroupType){
 @property(nonatomic,copy)NSString *accesory_title;
 @property(nonatomic,copy)NSString *footer_title;
 @property(nonatomic,assign)NSInteger index;
-@property(nonatomic,assign)AGroupType type;
+@property(nonatomic,assign)SectionGroupType type;
 @property(nonatomic,assign)BOOL haveHeader;
 @property(nonatomic,assign)BOOL havefooter;
 @property(nonatomic,assign)BOOL head_accesory_arrow;

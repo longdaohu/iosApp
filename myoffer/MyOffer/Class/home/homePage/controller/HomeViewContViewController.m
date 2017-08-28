@@ -163,17 +163,17 @@
         _groups =[NSMutableArray array];
         
         myofferGroupModel  *groupone = [myofferGroupModel groupWithItems:nil  header:@"留学目的地" footer:nil accessory:@"更多地区"];
-        groupone.type = AGroupTypeA;
+        groupone.type = SectionGroupTypeA;
         groupone.head_accesory_arrow = YES;
         [_groups addObject:groupone];
         
         myofferGroupModel *grouptwo = [myofferGroupModel groupWithItems:nil  header:@"热门阅读" footer:nil accessory:@"更多资讯"];
-        grouptwo.type = AGroupTypeB;
+        grouptwo.type = SectionGroupTypeB;
         grouptwo.head_accesory_arrow = YES;
         [_groups addObject:grouptwo];
         
         myofferGroupModel *groupthree = [myofferGroupModel groupWithItems:nil  header:@"热门院校" footer:nil accessory:@"更多资讯"];
-        groupthree.type = AGroupTypeC;
+        groupthree.type = SectionGroupTypeC;
         [_groups addObject:groupthree];
     }
     return _groups;
@@ -572,7 +572,7 @@
     myofferGroupModel *group = self.groups[indexPath.section];
   
        switch (group.type) {
-        case AGroupTypeA:
+        case SectionGroupTypeA:
         {
             HomeFirstTableViewCell *cell =[HomeFirstTableViewCell cellInitWithTableView:tableView];
             cell.itemInfo = group.items[indexPath.row];
@@ -581,7 +581,7 @@
          }
           break;
                
-          case AGroupTypeB:{
+          case SectionGroupTypeB:{
               
             HomeSecondTableViewCell *cell =[HomeSecondTableViewCell cellInitWithTableView:tableView];
             cell.items = group.items[indexPath.row];

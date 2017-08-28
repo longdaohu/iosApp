@@ -234,7 +234,6 @@
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
-		AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A61E6FE61A002FC072 /* GongLueTip.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE67E75F1F4E849200FAC0B3 /* myofferBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75D1F4E849200FAC0B3 /* myofferBaseTableViewController.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
@@ -903,8 +902,6 @@
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
 		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
-		AE6643A51E6FE61A002FC072 /* GongLueTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueTip.h; sourceTree = "<group>"; };
-		AE6643A61E6FE61A002FC072 /* GongLueTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueTip.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
 		AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferGroupModel.m; sourceTree = "<group>"; };
 		AE67E75C1F4E849200FAC0B3 /* myofferBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myofferBaseTableViewController.h; path = ../LeftMenu/Setting/Set/myofferBaseTableViewController.h; sourceTree = "<group>"; };
@@ -3107,8 +3104,6 @@
 				AEF3340F1D925A44003C3C68 /* GongLueViewController.m */,
 				AE6643A21E6FA820002FC072 /* GonglueItem.h */,
 				AE6643A31E6FA820002FC072 /* GonglueItem.m */,
-				AE6643A51E6FE61A002FC072 /* GongLueTip.h */,
-				AE6643A61E6FE61A002FC072 /* GongLueTip.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -4269,7 +4264,6 @@
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,
 				AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */,
-				AE6643A71E6FE61A002FC072 /* GongLueTip.m in Sources */,
 				AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
 				AE1FD71D1D5C929500FFD5A8 /* MJFoundation.m in Sources */,

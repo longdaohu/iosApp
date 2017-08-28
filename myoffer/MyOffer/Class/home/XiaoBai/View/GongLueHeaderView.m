@@ -7,7 +7,6 @@
 //
 
 #import "GongLueHeaderView.h"
-#import "GongLueTip.h"
 
 @interface GongLueHeaderView ()
 //顶部View
@@ -92,7 +91,7 @@
     self.headerTitleLab.text = gonglue.title;
     [self.headerTitleLab sizeToFit];
     
-    self.subTitleLab.text =  gonglue.tip.content;
+    self.subTitleLab.text =  gonglue.tip[@"content"];
     
     
     CGSize contentSize = self.bounds.size;
