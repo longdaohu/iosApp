@@ -18,6 +18,7 @@
 #import "UpgradeViewController.h"
 #import "EvaluateSearchCollegeViewController.h"
 #import "WYLXGroup.h"
+#import "TJFooterFrame.h"
 
 typedef enum {
     PickerViewTypeCountry = 109,
@@ -209,8 +210,6 @@ typedef enum {
 
     [self makeTableView];
     
-    [self makeFooterView];
-    
     [self makeOther];
     
 }
@@ -242,16 +241,18 @@ typedef enum {
 
 -(void)makeTableView
 {
-    UITableView  *tableView =  [[UITableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    UITableView  *tableView =  [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView   = tableView;
     tableView.dataSource  = self;
     tableView.delegate    = self;
     [self.view addSubview:self.tableView];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-    tableView.allowsSelection = NO;
     
     [self makeHeaderView];
+    
+    [self makeFooterView];
+
 }
 
 
@@ -261,23 +262,29 @@ typedef enum {
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"只需补充基本资料，剩下的交给myOffer资深顾问定制属于你的绝绝佳留学方案。"];
     headerView.mj_y = - XNAV_HEIGHT;
     [self.view insertSubview:headerView aboveSubview:self.tableView];
-    self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h - XNAV_HEIGHT, 0, 0, 0);
-    
+    self.tableView.mj_y = CGRectGetMaxY(headerView.frame);
+    self.tableView.mj_h = XSCREEN_HEIGHT - self.tableView.mj_y - XNAV_HEIGHT;
+
 }
 
 
 //添加表尾
 -(void)makeFooterView
 {
+    
+    TJFooterFrame *footerFrame = [[TJFooterFrame alloc] init];
+    footerFrame.footer_title = GDLocalizedString(@"ApplicationProfile-footer");
+    
     XWeakSelf
-    TiJiaoFooterView *footerView   = [TiJiaoFooterView footerWithContent:GDLocalizedString(@"ApplicationProfile-footer") actionBlock:^(UIButton *sender) {
+    TiJiaoFooterView *footerView   = [TiJiaoFooterView footerWithContent:footerFrame actionBlock:^(UIButton *sender) {
         
         [weakSelf  TiJiaoFooterViewItemOnClick:sender];
         
     }];
     
     self.tableView.tableFooterView = footerView;
-}
+    
+ }
 
 
 

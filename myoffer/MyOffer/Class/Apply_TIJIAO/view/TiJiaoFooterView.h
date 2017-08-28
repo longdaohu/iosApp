@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TJFooterFrame.h"
 typedef void(^TiJiaoFooterViewBlock)(UIButton *sender);
 
 @interface TiJiaoFooterView : UIView
-@property(nonatomic,copy)NSString *title;
+//@property(nonatomic,copy)NSString *title;
+@property(nonatomic,strong)TJFooterFrame *footerFrame;
 @property(nonatomic,copy)TiJiaoFooterViewBlock actionBlock;
 
-+ (instancetype)footerWithContent:(NSString *)content actionBlock:(TiJiaoFooterViewBlock)actionBlock;
++ (instancetype)footerWithContent:(TJFooterFrame *)footerFrame actionBlock:(TiJiaoFooterViewBlock)actionBlock;
 
 @end

@@ -80,6 +80,8 @@
 
 - (void)emptyViewWithHiden:(BOOL)hiden{
     
+    self.alpha =1;
+
     //1 隐藏
     if (hiden) {
     
@@ -131,7 +133,8 @@
 
 - (void)emptyViewWithError:(NSString *)error{
     
-     self.emptyView.errorStr =  error;
+    
+    self.emptyView.errorStr =  error;
     
     [self emptyViewWithHiden:NO];
 

@@ -461,6 +461,7 @@
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
+		AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F4561F540D5500222342 /* TJFooterFrame.m */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
 		AEEB51C81BF9EB8600925E36 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C41BF9EB8600925E36 /* libSocialQQ.a */; };
 		AEEB51C91BF9EB8600925E36 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */; };
@@ -1313,6 +1314,8 @@
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AEE3F4551F540D5500222342 /* TJFooterFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJFooterFrame.h; sourceTree = "<group>"; };
+		AEE3F4561F540D5500222342 /* TJFooterFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TJFooterFrame.m; sourceTree = "<group>"; };
 		AEEA71621BE1D1830015C42B /* Visualbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Visualbg.jpg; sourceTree = "<group>"; };
 		AEEB51C41BF9EB8600925E36 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
@@ -2666,6 +2669,8 @@
 		AEA249511D5B215300DD7939 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AEE3F4551F540D5500222342 /* TJFooterFrame.h */,
+				AEE3F4561F540D5500222342 /* TJFooterFrame.m */,
 				AEA249521D5B215300DD7939 /* Applycourse.h */,
 				AEA249531D5B215300DD7939 /* Applycourse.m */,
 				AEA249581D5B215300DD7939 /* XWGJTJSectionGroup.h */,
@@ -4310,6 +4315,7 @@
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
+				AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */,
 				AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */,
 				AE44F7871EA7744A00390809 /* CatigaryHotCityCell.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,

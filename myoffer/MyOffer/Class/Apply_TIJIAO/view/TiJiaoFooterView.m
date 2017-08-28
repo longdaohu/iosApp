@@ -25,11 +25,11 @@ typedef NS_ENUM(NSInteger,TiJiaoFooterViewButtonType) {
 
 @implementation TiJiaoFooterView
 
-+ (instancetype)footerWithContent:(NSString *)content actionBlock:(TiJiaoFooterViewBlock)actionBlock{
++ (instancetype)footerWithContent:(TJFooterFrame *)footerFrame actionBlock:(TiJiaoFooterViewBlock)actionBlock{
 
     TiJiaoFooterView *footer = [[TiJiaoFooterView alloc] init];
     
-    footer.title = content;
+    footer.footerFrame = footerFrame;
     
     footer.actionBlock = actionBlock;
     
@@ -86,18 +86,28 @@ typedef NS_ENUM(NSInteger,TiJiaoFooterViewButtonType) {
 
 }
 
--(void)setTitle:(NSString *)title
-{
-    _title = title;
+
+
+- (void)setFooterFrame:(TJFooterFrame *)footerFrame{
+
+    _footerFrame = footerFrame;
     
-    NSRange keyRangne =[title rangeOfString:GDLocalizedString(@"ApplicationProfile-keyword")];
-    NSMutableAttributedString *AtributeStr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange keyRangne =[footerFrame.footer_title rangeOfString:GDLocalizedString(@"ApplicationProfile-keyword")];
+    NSMutableAttributedString *AtributeStr = [[NSMutableAttributedString alloc] initWithString:footerFrame.footer_title];
     [AtributeStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_RED range: keyRangne];
     [AtributeStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:keyRangne];
     [self.descBtn setAttributedTitle: AtributeStr forState:UIControlStateNormal];
-    
 
+  
+    self.selectBtn.frame = footerFrame.select_frame;
+    self.descBtn.frame = footerFrame.title_frame;
+    self.submit.frame  = footerFrame.sbm_frame;
+    
+    self.frame = footerFrame.footer_frame;
+    
+    
 }
+
 
 
 -(void)onClick:(UIButton *)sender{
@@ -120,41 +130,7 @@ typedef NS_ENUM(NSInteger,TiJiaoFooterViewButtonType) {
 }
 
 
-- (void)layoutSubviews{
 
-    [super layoutSubviews];
-    
-    CGSize contentSize = self.bounds.size;
-    
-    CGFloat selectX = ITEM_MARGIN;
-    CGFloat selectY = ITEM_MARGIN;
-    CGFloat selectW = 30;
-    CGFloat selectH = 30;
-    self.selectBtn.frame = CGRectMake(selectX, selectY, selectW, selectH);
-    
-    
-    if (self.title) {
-        
-        CGFloat des_X = CGRectGetMaxY(self.selectBtn.frame) + 5;
-        CGFloat des_Y = CGRectGetMinY(self.selectBtn.frame);
-        CGFloat des_W = contentSize.width - des_X - ITEM_MARGIN;
-        
-        CGSize titleSize =[self.title boundingRectWithSize:CGSizeMake(des_W, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
-        
-        CGFloat des_H = titleSize.height;
-        
-        self.descBtn.frame =CGRectMake(des_X, des_Y, des_W, des_H);
-        
-        CGFloat sub_Y = des_H + des_Y + 25;
-
-        self.submit.frame = CGRectMake(25, sub_Y, contentSize.width - 50, 50);
-        
-        self.frame    = CGRectMake(0, 0, contentSize.width, CGRectGetMaxY(self.submit.frame) + 25);
-    }
-    
-   
-
-}
 
 @end
 

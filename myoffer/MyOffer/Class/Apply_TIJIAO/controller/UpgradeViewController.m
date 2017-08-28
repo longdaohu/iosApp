@@ -249,8 +249,7 @@ typedef enum {
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.currentServiceLab.frame) + 10, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(self.currentServiceLab.frame) + 10, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];    self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
@@ -259,7 +258,6 @@ typedef enum {
     XWeakSelf
     UpgradeFooterView *tipsView =[UpgradeFooterView footViewWithContent:@"Tips：选择VIP尊享服务包，将享有一对一服务，帮你创造亮点，指导选课，帮你冲刺世界名校。全程操办你的文书、签证，学校交涉补材料、考试分数递送、协助邮寄纸质材料等24项超值服务"];
     self.tableView.tableFooterView = tipsView;
-    
     tipsView.actionBlock = ^{
         
         [weakSelf more];

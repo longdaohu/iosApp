@@ -57,6 +57,8 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQ_service"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
     
+    self.tableView.alpha = 0.2;
+    
 }
 
 
@@ -156,6 +158,18 @@
     //1 数据模型
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
     
+    
+    //5 轮播图匹配数据
+    NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
+    if (images.count > 0) {
+        
+//        self.headerView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height);
+        self.tableView.tableHeaderView =  self.autoLoopView;
+//        [self.headerView addSubview:self.autoLoopView];
+        self.autoLoopView.imageURLStringsGroup = images;
+    }
+    
+    
 
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];
@@ -182,20 +196,14 @@
     }
     
     self.groups = [groups_temp copy];
-
-    
-    //5 轮播图匹配数据
-    NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
-    if (images.count > 0) {
-        
-        self.headerView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height);
-        self.tableView.tableHeaderView = self.headerView;
-        [self.headerView addSubview:self.autoLoopView];
-        self.autoLoopView.imageURLStringsGroup = images;
-    }
- 
     
     [self.tableView reloadData];
+    
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        
+        self.tableView.alpha = 1;
+
+    }];
     
  
 }

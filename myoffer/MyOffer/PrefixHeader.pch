@@ -22,23 +22,15 @@
 #define SUB_LOCAL_MAGIN  8.0
 #define CORNER_RADIUS  4.0
 #define TOP_HIGHT  32.0
-#define ITEM_MARGIN   10.0
-#define HEIGHT_ZERO 0.0001
-#define LINE_HEIGHT 0.5
-#define BUTTON_HEIGHT 50
 #define ANIMATION_DUATION 0.25
 #define TIMER_COUNT 60
-#define REDSPOT_HEIGHT 18
 #define XPERCENT          XSCREEN_WIDTH/320
 #define XFONT_SIZE(size)  (XSCREEN_WIDTH <= 320 ? size - 1.0 : size)
-#define XMARGIN           XPERCENT * 8
-#define XFONT(size)        [UIFont systemFontOfSize:size]
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define XSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define XSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define XNAV_HEIGHT 64.0
 #define FLOWLAYOUT_SubW  (XSCREEN_WIDTH - 41) / 3
 #define FLOWLAYOUT_CityW  XSCREEN_WIDTH / 3
 #define Country_Width  XSCREEN_WIDTH / 2.5
@@ -87,6 +79,14 @@
 #define Section_header_Height_min 30
 #define Section_footer_Height_Title 80
 #define AutoScroll_Height   AdjustF(160.f)
+#define Tag_Height   16;
+#define REDSPOT_HEIGHT 18
+#define XNAV_HEIGHT 64.0
+#define ITEM_MARGIN   10.0
+#define HEIGHT_ZERO 0.0001
+#define LINE_HEIGHT 0.5
+#define XMARGIN       XPERCENT * 8
+#define XFONT(size)   [UIFont systemFontOfSize:size]
 #define NetRequest_ConnectError  @"网络请求失败，请确认网络是否正常连接！"
 #define NetRequest_NoDATA  @"数据为空!"
 #define NetRequest_noNetWork @"请确认你的网络是否连接？"

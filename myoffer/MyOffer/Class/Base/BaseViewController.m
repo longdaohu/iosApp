@@ -402,6 +402,14 @@
     
     NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
 
+//    [self startAPIRequestUsingCacheWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+//       
+//        [ud setValue:response forKey:keyWord];
+//        
+//        [ud synchronize];
+//        
+//    }];
+   
     [self startAPIRequestWithSelector:path  parameters:para expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [ud setValue:response forKey:keyWord];
@@ -415,8 +423,7 @@
         if (show) {
             
             
-//            AlerMessage(@"网络请求失败");
-            
+           AlerMessage(@"网络请求失败");
             
         }
         
