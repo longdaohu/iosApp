@@ -76,25 +76,29 @@
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
         
-        [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        if (self.groups == 0) {
+            
+            [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        }
         
         return;
     }
     
     
-    XWeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorFavorites parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    XWeakSelf;
+    [self startAPIRequestWithSelector:kAPISelectorFavorites parameters:nil expectedStatusCodes:nil showHUD:(self.groups.count == 0) showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
-
+        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         [weakSelf showError];
         
     }];
-    
-    
+ 
 }
+
+
 
 //根据返回数据配置UI
 - (void)updateUIWithResponse:(id)response{
@@ -135,7 +139,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return Section_header_Height_nomal;
+    return Section_footer_Height_nomal;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

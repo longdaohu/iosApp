@@ -13,7 +13,6 @@
 #import "MyOfferUniversityModel.h"
 #import "UniversitySubjectListViewController.h"
 
-#define SECTION_FOOTER_HEIGHT  10
 
 #define Button_Title_Cancel @"取消"
 #define Button_Title_Edit @"编辑"
@@ -61,6 +60,17 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 @implementation ApplyViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        self.pop_back_index = DEFAULT_NUMBER;
+
+    }
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
@@ -77,16 +87,16 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 -(void)presentViewWillAppear{
 
-    if (![self checkNetworkState]) {
-       
-        [self.tableView emptyViewWithError:NetRequest_ConnectError];
-        
-        self.bottomView.alpha = 0;
-        
-        self.navigationItem.rightBarButtonItem.enabled = NO;
- 
-        return;
-    }
+//    if (![self checkNetworkState]) {
+//       
+//        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+//        
+//        self.bottomView.alpha = 0;
+//        
+//        self.navigationItem.rightBarButtonItem.enabled = NO;
+// 
+//        return;
+//    }
     
     
     if (LOGIN) {
@@ -173,7 +183,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 -(void)checkApplyStatus{
     
     XWeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorApplicationStatus parameters:nil success:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorApplicationStatus  parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         
         if (![response[@"state"] containsString:@"1"] && ![response[@"state"] containsString:@"ack"])
         {
@@ -182,20 +192,21 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         }
         
     }];
-    
+ 
 }
-
 
 
 //网络数据请求
 - (void)makeDataSourse {
     
     XWeakSelf;
-    
-    [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil success:^(NSInteger statusCode, NSArray *response) {
+    [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil expectedStatusCodes:nil showHUD:(self.groups.count == 0) showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf upadateUIWithResponse:(NSArray *)response];
         
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
+        [weakSelf showError];
     }];
     
 }
@@ -273,7 +284,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.tableView.sectionFooterHeight =  SECTION_FOOTER_HEIGHT;
+    self.tableView.sectionFooterHeight =  Section_footer_Height_nomal;
     
     
 }
@@ -488,7 +499,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
 }
 
-
+//1  root -- 我的申请 -- A     3
 
 
 //返回上级页面
@@ -497,29 +508,23 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     NSArray *items = self.navigationController.childViewControllers;
     
-    if (self.backStyle) {
+    
+    if (self.pop_back_index == DEFAULT_NUMBER) {
         
-        if (items.count > 4) {
-            
-            [self.navigationController popToViewController: (UIViewController *)items[items.count - 4] animated:YES];
-            
-            return ;
-        }
+        [self.navigationController popViewControllerAnimated:YES];
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
-
     }else{
-     
-        if (items.count > 3) {
-            
-            [self.navigationController popToViewController: (UIViewController *)items[items.count - 3] animated:YES];
-            
-            return ;
-        }
+  
+        NSInteger index =  self.pop_back_index < 0  ?  0 : self.pop_back_index;
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        NSLog(@" ApplyViewController   pop >>>>>>>>>>>> current %ld     heavetToPop %ld   self.pop_back_index  %ld",items.count - 1,pop,self.pop_back_index);
+        
+        UIViewController *childVC = items[index];
+        
+        [self.navigationController popToViewController:childVC animated:YES];
         
     }
+    
     
  }
 
@@ -860,6 +865,20 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
  
 
 }
+
+
+//显示错误提示
+- (void)showError{
+    
+    if (self.groups.count == 0) {
+        
+        [self.tableView emptyViewWithError:NetRequest_ConnectError];
+        self.bottomView.alpha = 0;
+
+    }
+}
+
+
 
 
 -(void)dealloc{

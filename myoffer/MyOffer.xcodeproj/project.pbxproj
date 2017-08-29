@@ -2909,20 +2909,21 @@
 		AEA24A0C1D5B231200DD7939 /* ZhiNengPiPei */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A0D1D5B231200DD7939 /* 匹配结果 */,
-				AEA24A171D5B231200DD7939 /* 智能匹配 */,
+				AEA24A0D1D5B231200DD7939 /* Pipei_result */,
+				AEA24A171D5B231200DD7939 /* pipei */,
 			);
 			name = ZhiNengPiPei;
 			path = Class/ZhiNengPiPei;
 			sourceTree = "<group>";
 		};
-		AEA24A0D1D5B231200DD7939 /* 匹配结果 */ = {
+		AEA24A0D1D5B231200DD7939 /* Pipei_result */ = {
 			isa = PBXGroup;
 			children = (
 				AEA24A0E1D5B231200DD7939 /* controller */,
 				AEA24A121D5B231200DD7939 /* model */,
 				AEA24A131D5B231200DD7939 /* view */,
 			);
+			name = Pipei_result;
 			path = "匹配结果";
 			sourceTree = "<group>";
 		};
@@ -2956,13 +2957,14 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		AEA24A171D5B231200DD7939 /* 智能匹配 */ = {
+		AEA24A171D5B231200DD7939 /* pipei */ = {
 			isa = PBXGroup;
 			children = (
 				AEA24A181D5B231200DD7939 /* controller */,
 				AEA24A1F1D5B231200DD7939 /* model */,
 				AEA24A261D5B231200DD7939 /* view */,
 			);
+			name = pipei;
 			path = "智能匹配";
 			sourceTree = "<group>";
 		};

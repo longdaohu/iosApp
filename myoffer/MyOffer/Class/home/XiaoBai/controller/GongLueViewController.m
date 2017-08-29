@@ -13,7 +13,6 @@
 #import "AUSearchResultViewController.h"
 #import "PipeiEditViewController.h"
 #import "IntelligentResultViewController.h"
-#import "ApplyViewController.h"
 #import "UniversityNavView.h"
 #import "myofferFlexibleView.h"
 

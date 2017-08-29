@@ -61,5 +61,12 @@
 }
 
 
+- (NSString *)introduction{
+
+    NSString *tmp_intr = @"";
+    
+    return  _introduction ? _introduction : tmp_intr;
+}
+
 
 @end

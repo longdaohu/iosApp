@@ -81,20 +81,27 @@
         
         //7、颜色映射
         UIView *gradientBgView = [[UIView alloc] init];
+        gradientBgView.backgroundColor = XCOLOR_WHITE;
         [self addSubview:gradientBgView];
         self.gradientBgView = gradientBgView;
+        gradientBgView.backgroundColor = XCOLOR_WHITE;
+        gradientBgView.layer.shadowColor = XCOLOR_WHITE.CGColor;//shadowColor阴影颜色
+        gradientBgView.layer.shadowOffset = CGSizeMake(0,-20);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+        gradientBgView.layer.shadowRadius = 10;
+        gradientBgView.layer.shadowOpacity = 0.9;//阴影透明度，默认0
+
         
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        UIColor *colorOne = [UIColor colorWithWhite:1 alpha:0];
-        UIColor *colorTwo = [UIColor colorWithWhite:1 alpha:1];
-        gradient.colors           = [NSArray arrayWithObjects:
-                                     (id)colorOne.CGColor,
-                                     (id)colorTwo.CGColor,
-                                     nil];
-        gradient.startPoint = CGPointMake(0, 0);
-        gradient.endPoint = CGPointMake(0, 0.3);
-        [self.gradientBgView.layer insertSublayer:gradient atIndex:0];
-        self.gradient = gradient;
+//        CAGradientLayer *gradient = [CAGradientLayer layer];
+//        UIColor *colorOne = [UIColor colorWithWhite:1 alpha:0];
+//        UIColor *colorTwo = [UIColor colorWithWhite:1 alpha:1];
+//        gradient.colors           = [NSArray arrayWithObjects:
+//                                     (id)colorOne.CGColor,
+//                                     (id)colorTwo.CGColor,
+//                                     nil];
+//        gradient.startPoint = CGPointMake(0, 0);
+//        gradient.endPoint = CGPointMake(0, 0.3);
+//        [self.gradientBgView.layer insertSublayer:gradient atIndex:0];
+//        self.gradient = gradient;
         
         //8、更多
         self.moreBtn = [self buttonlWithtextColor:XCOLOR_LIGHTBLUE fontSize:16];
@@ -163,7 +170,9 @@
     
     //3、地址
     [self.address_detailBtn setTitle:[NSString stringWithFormat:@"%@",item.address_long] forState:UIControlStateNormal];
+    
     CGFloat addressWidth = [self.address_detailBtn.currentTitle KD_sizeWithAttributeFont:self.address_detailBtn.titleLabel.font].width;
+    
     if (addressWidth > (UniversityFrame.address_detailFrame.size.width - 30)) {
         
         [self.address_detailBtn setTitle:UniversityFrame.item.address_short forState:UIControlStateNormal];
@@ -188,7 +197,7 @@
     
     //7、颜色映射
     self.gradientBgView.frame = UniversityFrame.gradient_Frame;
-    self.gradient.frame       = self.gradientBgView.bounds;
+//    self.gradient.frame       = self.gradientBgView.bounds;
   
     
      //更新子项数据
@@ -281,30 +290,6 @@
 }
 
 
-/*
- //        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
- //        paragraph.lineSpacing = 6;
- //        paragraph.alignment = NSTextAlignmentCenter;
- //        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:rank.titleName];
- //        [attrStr addAttribute:NSParagraphStyleAttributeName
- //                        value:paragraph
- //                        range:NSMakeRange(0, rank.titleName.length)];
- //        self.titleLab.attributedText = attrStr;
- 
- 
- //        _descAtt = [[NSMutableAttributedString alloc] initWithString:_model.desc];
- //        UIFont *descFont = [UIFont PingFangSC_Regular_WithSize:12];
- //
- //        NSMutableParagraphStyle *descStyle = [[NSMutableParagraphStyle alloc]init];
- //        [descStyle setLineSpacing:1];//行间距
- //
- //        CGSize descSize = [_model.desc boundingRectWithSize:CGSizeMake(w, MAXFLOAT)
- //                                                    options:NSStringDrawingUsesLineFragmentOrigin
- //                                                 attributes:@{NSFontAttributeName:descFont,
- //                                                              NSParagraphStyleAttributeName :descStyle}
- //                                                    context:nil].size;
- 
- */
 
 
 

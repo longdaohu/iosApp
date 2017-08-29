@@ -6,7 +6,6 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-#define TABLEROWHEIGHT 100
 #define TABLEHEADVIEWHEIGHT 305
 
 #import "XYPieChart.h"
@@ -586,7 +585,17 @@
              
              ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
              
-             if (self.fromStyle.length > 0) apply.backStyle = YES;
+             
+             NSInteger current = self.navigationController.childViewControllers.count - 1;
+             NSInteger pop_index = current - 1;
+             
+             if (self.from_Edit_Pipei) {
+                 
+                 pop_index = pop_index - 1;
+             }
+             
+             
+             apply.pop_back_index = pop_index;
              
              [self.navigationController pushViewController:apply animated:YES];
          };
@@ -740,18 +749,22 @@
 -(void)popBack
 {
      //判断是否从编辑页面跳转过来
-    if (self.fromStyle.length > 0) {
-        
-        //从编辑页跳转过来,返回时不经过编辑页跳回上级页面
-        if (self.navigationController.childViewControllers.count > 3) {
-            
-            [self.navigationController popToViewController: (UIViewController *)self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3] animated:YES];
-       
-            return ;
+    if (self.from_Edit_Pipei) {
 
-         }
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        NSInteger current = self.navigationController.childViewControllers.count - 1;
+        NSInteger pop_index = current - 1;
+        NSInteger index = pop_index - 1;
+        
+        if (index < 0 ) {
+            
+            index  = 0;
+        }
+        
+        UIViewController *pop_vc = self.navigationController.childViewControllers[index];
+        
+        [self.navigationController popToViewController:pop_vc animated:YES];
+
      
         return ;
     }

@@ -11,6 +11,6 @@
 @interface ApplyViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>  
 - (IBAction)applyButtonPressed;
 
-@property(nonatomic,assign)BOOL backStyle;
+@property(nonatomic,assign)NSInteger pop_back_index;
 
 @end

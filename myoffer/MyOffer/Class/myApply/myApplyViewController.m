@@ -109,9 +109,25 @@ static NSString *identify = @"set";
 }
 
 - (void)caseApply:(XWGJAbout *)item{
-    
+
     RequireLogin
-    [self.navigationController pushViewController:[[NSClassFromString(item.item_class) alloc] init] animated:YES];
+
+    UIViewController *vc = [[NSClassFromString(item.item_class) alloc] init];
+    NSString *apply = NSStringFromClass([ApplyViewController class]);
+    
+    if ([apply isEqualToString:item.item_class]) {
+        
+        ApplyViewController  *apply_vc =  (ApplyViewController *)vc;
+        
+        [self.navigationController pushViewController:apply_vc animated:YES];
+
+        return;
+    }
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
     
 }
 

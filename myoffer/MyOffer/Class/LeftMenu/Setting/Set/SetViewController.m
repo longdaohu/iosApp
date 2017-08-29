@@ -8,7 +8,6 @@
 
 #import "SetViewController.h"
 #import "ProfileViewController.h"
-#import "ApplyViewController.h"
 #import "FeedbackViewController.h"
 #import "XWGJAboutViewController.h"
 

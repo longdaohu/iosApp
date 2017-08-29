@@ -212,36 +212,33 @@
     
     if(CGRectGetHeight(self.introduction_Frame) <= 100){
         
-        realHeight = CGRectGetMaxY(self.introduction_Frame) + 2 * XMARGIN;
+        realHeight = CGRectGetMaxY(self.introduction_Frame) + XMARGIN;
+    }
+    
+    if(CGRectGetHeight(self.introduction_Frame) == 0){
+        
+        realHeight = CGRectGetMidY(self.introduction_Frame);
     }
     
     self.centerHeigh = realHeight;
     
     
     //1、更多名称
-    CGFloat more_Y = self.centerHeigh -  more_H - 2 * XMARGIN;
-    CGFloat more_W = XPERCENT * 100;
-    CGFloat more_X =  0.5 * (centerWidth - more_W);
-    CGRect moreNewFrame = self.more_Frame;
-    moreNewFrame.size.height = (CGRectGetHeight(self.introduction_Frame) <= 100) ? 0 : more_H;
-    moreNewFrame.size.width  = more_W;
-    moreNewFrame.origin.x    = more_X;
-    moreNewFrame.origin.y    = more_Y;
-    self.more_Frame = moreNewFrame;
- 
-    //2、渐变色
-    CGFloat gradient_H = self.centerHeigh - more_Y + 20;
-    CGFloat gradient_Y = self.centerHeigh - gradient_H;
-    CGFloat gradient_W = centerWidth;
-    CGFloat gradient_X = 0;
-    CGRect gradientNewRect = self.gradient_Frame;
+    CGFloat more_Y = self.centerHeigh -  more_H - 10;
+    CGFloat more_W = centerWidth;
+    CGFloat more_X =  0;
+    more_H = (CGRectGetHeight(self.introduction_Frame) <= 100) ? 0 : more_H;
+    self.more_Frame = CGRectMake(more_X, more_Y, more_W, more_H);
+  
     
-    gradientNewRect.size.height =  (CGRectGetHeight(self.introduction_Frame) <= 100) ? 0 : gradient_H;
-    gradientNewRect.size.width  = gradient_W;
-    gradientNewRect.origin.x    = gradient_X;
-    gradientNewRect.origin.y    = gradient_Y;
-    self.gradient_Frame    = gradientNewRect;
- 
+    //2、渐变色
+    CGFloat gradient_X = 0;
+    CGFloat gradient_W = centerWidth;
+    CGFloat gradient_Y =  more_Y - 10;
+    CGFloat gradient_H =  more_H == 0 ?  0 : (self.centerHeigh - gradient_Y);
+    self.gradient_Frame = CGRectMake(gradient_X, gradient_Y, gradient_W, gradient_H);
+    
+  
     
     //2、downView
     CGFloat down_X = 0;

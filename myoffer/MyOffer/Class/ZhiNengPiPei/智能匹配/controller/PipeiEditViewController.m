@@ -709,7 +709,7 @@
     }else{
         
         IntelligentResultViewController *resultVC =[[IntelligentResultViewController alloc] initWithNibName:@"IntelligentResultViewController" bundle:nil];
-        resultVC.fromStyle = @"push";
+        resultVC.from_Edit_Pipei = YES;
         [self.navigationController pushViewController:resultVC animated:YES];
     }
     

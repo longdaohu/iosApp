@@ -13,7 +13,6 @@
 #import "MessageDetailFrame.h"
 #import "MessageCell.h"
 #import "MessageDetailContentCell.h"
-#import "ApplyViewController.h"
 #import "XWGJMessageFrame.h"
 #import "MyOfferArticle.h"
 #import "ShareNViewController.h"
