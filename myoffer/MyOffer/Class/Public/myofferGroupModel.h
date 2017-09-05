@@ -20,14 +20,15 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
 @property(nonatomic,copy)NSString *header_title;
 @property(nonatomic,copy)NSString *accesory_title;
 @property(nonatomic,copy)NSString *footer_title;
-@property(nonatomic,assign)NSInteger index;
-@property(nonatomic,assign)SectionGroupType type;
-@property(nonatomic,assign)BOOL haveHeader;
-@property(nonatomic,assign)BOOL havefooter;
-@property(nonatomic,assign)BOOL head_accesory_arrow;
 @property(nonatomic,assign)CGFloat  section_footer_height;
 @property(nonatomic,assign)CGFloat  section_header_height;
+//区分组信息
+@property(nonatomic,assign)SectionGroupType type;
+//分组是否有 >箭头
+@property(nonatomic,assign)BOOL head_accesory_arrow;
+//设置该group中的cell高度
 @property(nonatomic,assign)CGFloat  cell_height_set;
+//分组数据
 @property(nonatomic,strong)NSArray *items;
 
 + (instancetype)groupWithItems:(NSArray *)items  header:(NSString *)header;

@@ -88,7 +88,7 @@
 {
     [self makeTableView];
     
-     self.title  = GDLocalizedString(@"Left-noti");
+     self.title  = @"通知中心";
 }
 
 

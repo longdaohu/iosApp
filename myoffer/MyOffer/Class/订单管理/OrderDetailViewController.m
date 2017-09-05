@@ -163,21 +163,23 @@
 {
     
      NSString *title;
+    
     if ([status isEqualToString:@"ORDER_FINISHED"]) {
         
-        title = @"已付款";
+          title  = @"已付款";
         
-    }else  if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
+    }else   if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
         
-        title = @"待付款";
+         title = @"待付款";
         
-    }else  if ([status isEqualToString:@"ORDER_CLOSED"]) {
+    }else  if ( [status isEqualToString:@"ORDER_CLOSED"]) {
         
-        title = @"未付款";
+        title = @"订单关闭";
         
-    }else{
+    }else  if ( [status isEqualToString:@"ORDER_REFUNDED"]) {
         
         title = @"已退款";
+        
     }
 
     self.rightLab.text = title;
@@ -292,21 +294,59 @@
 //取消订单
 -(void)cancelOrder{
     
-    XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
+//    XWeakSelf
+//    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
+//    
+//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+//        
+//        if ([response[@"result"] isEqualToString:@"OK"]) {
+//            
+//            if (weakSelf.actionBlock) {
+//        
+//                weakSelf.actionBlock(YES);
+//        
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//             }
+//        }
+//    }];
     
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+    
+    XWeakSelf
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要取消订单"  message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([response[@"result"] isEqualToString:@"OK"]) {
-            
-            if (weakSelf.actionBlock) {
-        
-                weakSelf.actionBlock(YES);
-        
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-             }
-        }
     }];
+    
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
+        
+        //先删除 已选择专业数组列表  > 再删除分区头
+        [weakSelf startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            if ([response[@"result"] isEqualToString:@"OK"]) {
+                
+                if (weakSelf.actionBlock) {
+    
+                    weakSelf.actionBlock(YES);
+    
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                 }
+            
+            }
+            
+        }];
+        
+        
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
     
 }
 

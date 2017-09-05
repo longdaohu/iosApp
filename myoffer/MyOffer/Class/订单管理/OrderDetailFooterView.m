@@ -188,8 +188,9 @@
     
     NSArray *logs =orderDict[@"logs"];
     NSDictionary *log  = logs[0];
-    NSString *create_at =[self makeTime:log[@"create_at"] andStatus:@"创建订单："];
-    self.NoOneRecordLab.text = create_at;
+    NSString *create_at = [self makeTime:log[@"create_at"]];
+    NSString *sub_title = @"订单创建成功";
+    self.NoOneRecordLab.text = [NSString stringWithFormat:@"%@ %@",create_at,sub_title];
 
     
     if ([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]) {
@@ -198,7 +199,9 @@
         NSDictionary *trade  = trades[0];
     
         NSString *temp;
-        NSString *payTime = [self makeTime:trade[@"create_at"] andStatus:@"完成订单："];
+        NSString *payTime = [self makeTime:trade[@"create_at"]];
+        sub_title = @"完成订单";
+        
         if([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]){
             NSString *system = @"支付成功";
             if ([trade[@"system"] isEqualToString:@"wechat_pay"] ) {
@@ -223,7 +226,7 @@
         NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
-        NSDate *endDate=[formatter dateFromString:[self makeTime:orderDict[@"expired_at"]  andStatus:@""]];
+        NSDate *endDate=[formatter dateFromString:[self makeTime:orderDict[@"expired_at"]]];
         NSDate *endLocalDate=[self localDate:endDate];
   
         
@@ -240,8 +243,10 @@
     }else  if ([orderDict[@"status"] isEqualToString:@"ORDER_CLOSED"]) {
  
           NSDictionary *log1  = logs[1];
-          NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。":@"支付超时，订单关闭。";
-          self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"] andStatus:@"关闭订单："],operator];
+        
+          NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。": @"支付超时，订单关闭。";
+        
+          self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"]],operator];
 
     }
     
@@ -255,7 +260,8 @@
    return  [date  dateByAddingTimeInterval: interval];
 }
 
--(NSString *)makeTime:(NSString *)time andStatus:(NSString *)status
+
+-(NSString *)makeTime:(NSString *)time
 {
    
     NSString *temp =[time stringByReplacingOccurrencesOfString:@"T" withString:@" "];
@@ -272,7 +278,7 @@
     NSString *currentDateString = [formatter stringFromDate:currentLocalDate];
     
  
-    return [NSString stringWithFormat:@"%@%@",status,currentDateString];
+    return currentDateString;
 }
 
 
@@ -285,22 +291,26 @@
     self.payBtn.enabled = [status isEqualToString:@"ORDER_PAY_PENDING"];
     
     NSString *payString;
+    
     if ([status isEqualToString:@"ORDER_FINISHED"]) {
         
-         payString = @"已完成";
+        payString  = @"已付款";
         
-    }else  if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
+    }else   if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
         
-        payString = @"去支付";
+        payString = @"待付款";
         
-    }else  if ([status isEqualToString:@"ORDER_CLOSED"]) {
+    }else  if ( [status isEqualToString:@"ORDER_CLOSED"]) {
         
-         payString = @"已关闭";
+        payString = @"订单关闭";
         
-    }else{
+    }else  if ( [status isEqualToString:@"ORDER_REFUNDED"]) {
         
-         payString = @"已退款";
+        payString = @"已退款";
+        
     }
+
+    
     
     [self.payBtn setTitle:payString  forState:UIControlStateNormal];
     

@@ -39,6 +39,8 @@
 //底部分隔线
 @property(nonatomic,strong) UIView *bottom_line;
 
+@property(nonatomic,strong)UIImageView *hot;
+
 
 @end
 
@@ -142,6 +144,12 @@
         
         self.contentView.backgroundColor =[UIColor whiteColor];
         
+        
+        UIImageView *hot =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot_cn"]];
+        hot.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:hot];
+        self.hot = hot;
+        
         //监听页面点击
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
         [self.bgView addGestureRecognizer:tap];
@@ -206,6 +214,7 @@
   
     self.rankBtn.frame = uniFrame.rank_Frame;
     
+    self.hot.frame = uniFrame.hot_Frame;
     
     self.bottom_line.frame =  uniFrame.bottom_line_Frame;
     

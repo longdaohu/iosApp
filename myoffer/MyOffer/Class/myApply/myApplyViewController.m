@@ -56,7 +56,7 @@
     if (!_groups) {
         
         XWGJAbout *apply  =  [XWGJAbout cellWithLogo:nil title:@"申请意向" action:NSStringFromSelector(@selector(caseApply:)) itemClass:NSStringFromClass([ApplyViewController class])];
-        XWGJAbout *status  =  [XWGJAbout cellWithLogo:nil title:@"申请状态" action:NSStringFromSelector(@selector(caseApply:)) itemClass:NSStringFromClass([ApplyStatusViewController class])];
+        XWGJAbout *status  =  [XWGJAbout cellWithLogo:nil title:@"审核状态" action:NSStringFromSelector(@selector(caseApply:)) itemClass:NSStringFromClass([ApplyStatusViewController class])];
         
         myofferGroupModel *group = [myofferGroupModel groupWithItems:@[apply,status] header:nil];
         group.section_header_height = Section_header_Height_min;

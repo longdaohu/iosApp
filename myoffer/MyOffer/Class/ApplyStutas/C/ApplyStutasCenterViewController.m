@@ -88,7 +88,7 @@
 #pragma mark : 新建 UI
 - (void)makeUI{
 
-    self.title = @"服务状态列表";
+    self.title = @"服务状态";
 
     [self makeTableView];
 }

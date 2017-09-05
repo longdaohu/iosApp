@@ -23,27 +23,30 @@
     self.cancelBtn_hiden = ![status isEqualToString:@"ORDER_PAY_PENDING"];
     
     if ([status isEqualToString:@"ORDER_FINISHED"]) {
-        
+
         self.status_order = @"已付款";
         self.status_pay = @"已完成";
         
     }else   if ([status isEqualToString:@"ORDER_PAY_PENDING"]) {
-        
+
         self.status_order = @"待付款";
         self.status_pay = @"去支付";
         
     }else  if ( [status isEqualToString:@"ORDER_CLOSED"]) {
         
-        self.status_order = @"未付款";
+        self.status_order = @"订单关闭";
         self.status_pay = @"已关闭";
         
-    }else{
+    }else  if ( [status isEqualToString:@"ORDER_REFUNDED"]) {
         
         self.status_order = @"已付款";
         self.status_pay = @"已退款";
+        
     }
+  
     
 }
+
 
 
 -(void)setStatus:(NSString *)status{

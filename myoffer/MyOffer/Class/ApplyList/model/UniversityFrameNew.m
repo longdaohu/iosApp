@@ -87,7 +87,7 @@
     self.add_Frame = CGRectMake(add_X,add_Y,add_W,add_H);
     
     
-    CGFloat hot_H = 50;
+    CGFloat hot_H = universtiy.hot ? 50 : 0;
     CGFloat hot_W = hot_H;
     CGFloat hot_X = XSCREEN_WIDTH - hot_H;
     CGFloat hot_Y = 0;

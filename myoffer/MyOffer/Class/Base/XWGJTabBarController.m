@@ -33,7 +33,7 @@
     cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
     
     PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
-    mvc.title = @"我的"; //@"申请中心";
+    mvc.title = @"申请中心";
     
     
         MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];

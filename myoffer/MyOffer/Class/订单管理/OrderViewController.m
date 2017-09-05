@@ -153,7 +153,7 @@
     //4 判断是否有数据，做相关提示
     if(self.groups.count == 0 ){
     
-        [self.tableView emptyViewWithError:@"还没有购买服务！！！"];
+        [self.tableView emptyViewWithError:@"还没有购买服务！"];
 
     }else{
     
@@ -166,7 +166,7 @@
 
 - (void)makeUI{
     
-    self.title = @"订单中心";
+    self.title = @"我的订单";
     
     [self makeTableView];
 }
@@ -308,19 +308,39 @@
 -(void)cancelOrder:(NSIndexPath *)indexPath order:(OrderItem *)order{
     
     XWeakSelf
-    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
     
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要取消订单"  message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        if ([response[@"result"] isEqualToString:@"OK"]) {
-            
-             order.status_close = YES;
-            
-             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         }
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
+    
+    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
+        
+        //先删除 已选择专业数组列表  > 再删除分区头
+        [weakSelf startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+            
+            if ([response[@"result"] isEqualToString:@"OK"]) {
+                
+                order.status_close = YES;
+                
+                [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+            
+        }];
+        
+        
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:commitAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+    
+    
     
 }
 

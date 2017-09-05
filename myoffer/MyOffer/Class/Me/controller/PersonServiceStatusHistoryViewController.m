@@ -76,10 +76,10 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, footer_h, 0);
     
     
-    UIImage *close = [UIImage imageNamed:@"hud_fail"];
+    UIImage *close = [UIImage imageNamed:@"close_status"];
     CGFloat close_w =  close.size.width;
     CGFloat close_h =  close.size.height;
-    CGFloat close_y =  CGRectGetMaxY(bgView.frame) + 50;
+    CGFloat close_y =  CGRectGetMaxY(bgView.frame) + 30;
     CGFloat close_x =  (XSCREEN_WIDTH - close_w) * 0.5;
     UIImageView *closeView = [[UIImageView alloc] initWithFrame:CGRectMake( close_x, close_y, close_w, close_h)];
     closeView.image = close;
@@ -117,10 +117,13 @@
     
     [self updateUIWithStatus:status_frame.statusModel];
     
+    [self.tableView reloadData];
+    
 }
 
 
 - (void)updateUIWithStatus:(ApplyStutasModel *)status{
+    
     
     ApplyStatusHistoryFrameModel *historyFrameModel = [[ApplyStatusHistoryFrameModel alloc] init];
     historyFrameModel.statusModel = status;
@@ -128,6 +131,7 @@
     
     
     NSMutableArray *items_tmp = [NSMutableArray array];
+    
     for (NSInteger index = 0; index < status.history.count; index++) {
         
         ApplyStutasHistoryModel *historyItem = status.history[index];
@@ -143,7 +147,6 @@
         ApplyStatusHistoryItemFrame *frame_historyItem = [ApplyStatusHistoryItemFrame  frameWithHistoryItem:historyItem];
         [items_tmp addObject:frame_historyItem];
     }
-    
     
     
     self.group = [items_tmp copy];

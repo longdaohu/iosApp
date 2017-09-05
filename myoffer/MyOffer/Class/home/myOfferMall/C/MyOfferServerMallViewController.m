@@ -174,7 +174,7 @@
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];
     myofferGroupModel *one_group =[myofferGroupModel groupWithItems:@[self.overSeaArr] header:@"留学目的地"];
-    one_group.index = 0;
+    one_group.type = SectionGroupTypeA;
     [groups_temp addObject:one_group];
     
     
@@ -190,7 +190,7 @@
     if (item_frames.count > 0) {
 
         myofferGroupModel *two_group =[myofferGroupModel groupWithItems:item_frames  header:@"热门商品"];
-        two_group.index = 1;
+        two_group.type = SectionGroupTypeB;
         [groups_temp addObject:two_group];
  
     }
@@ -229,7 +229,7 @@
     
     myofferGroupModel *group = self.groups[indexPath.section];
     
-    if (group.index == 0) {
+    if (group.type == SectionGroupTypeA) {
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
@@ -238,6 +238,7 @@
         [cell.contentView addSubview:self.overseaView];
         
         return cell;
+        
     }else{
     
         ServiceSKUCell *cell = [ServiceSKUCell cellWithTableView:tableView indexPath:indexPath SKU_Frame:group.items[indexPath.row]];
@@ -269,17 +270,20 @@
     
     CGFloat cell_Height = 0;
     
-    if (group.index == 0) {
-        
-        cell_Height  = self.overseaView.mj_h;
-        
-    }else{
-    
-        ServiceSKUFrame *itemFrame = group.items[indexPath.row];
-    
-        cell_Height = itemFrame.cell_Height;
+    switch (group.type) {
+        case SectionGroupTypeA:
+            cell_Height  = self.overseaView.mj_h;
+            break;
+            
+        default:{
+            ServiceSKUFrame *itemFrame = group.items[indexPath.row];
+            
+            cell_Height = itemFrame.cell_Height;
+        }
+            break;
     }
- 
+    
+  
     return  cell_Height;
 }
 
@@ -300,7 +304,7 @@
     
     myofferGroupModel *group = self.groups[indexPath.section];
 
-    if (0 == group.index) return;
+    if (SectionGroupTypeA == group.type) return;
     
     ServiceSKUFrame *itemFrame = group.items[indexPath.row];
     

@@ -112,7 +112,7 @@
         
         _groups = [NSMutableArray array];
     
-        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能匹配" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能匹配大学" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         znpp.action = NSStringFromSelector(@selector(caseZNPP));
         
         XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"MBTI职业性格测试" sub_title:nil accessory_title:nil accessory_icon:nil] ;
@@ -121,7 +121,7 @@
         XWGJAbout *service = [XWGJAbout cellWithLogo:@"p_qq" title:@"在线客服"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
         service.action = NSStringFromSelector(@selector(caseQQ));
 
-        XWGJAbout *call = [XWGJAbout cellWithLogo:@"p_phone" title:@"服务热线"  sub_title:nil accessory_title: @"4000 666 522" accessory_icon:nil] ;
+        XWGJAbout *call = [XWGJAbout cellWithLogo:@"p_phone" title:@"客服热线"  sub_title:nil accessory_title: @"4000 666 522" accessory_icon:nil] ;
         call.action = NSStringFromSelector(@selector(casePhone));
         
         XWGJAbout *question = [XWGJAbout cellWithLogo:@"p_help" title:@"常见问题"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
@@ -198,7 +198,6 @@
 
     
     UIButton *setBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
-//    setBtn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     [setBtn setImage:[UIImage imageNamed:@"p_set"] forState:UIControlStateNormal];
     [setBtn addTarget:self action:@selector(caseSetting) forControlEvents:UIControlEventTouchUpInside];
     [tableHeaderView addSubview:setBtn];
@@ -486,7 +485,10 @@
         
         [self pushWithVC:NSStringFromClass([IntelligentResultViewController class])];
         
-        
+    }else{
+    
+        [self pushWithVC:NSStringFromClass([PipeiEditViewController class])];
+
     }
     
 
@@ -641,7 +643,7 @@
 //服务状态
 - (void)caseMakeDataServiceStatus{
 
-    if (self.groups.count > 2 && self.statusframeModel) return;
+//    if (self.groups.count > 2 && self.statusframeModel) return;
     
     XWeakSelf
     
@@ -662,7 +664,8 @@
     
     if (status_Arr.count == 0) return;
     
-    ApplyStatusModelFrame *statusframeModel = [ApplyStatusModelFrame frameWithStatusModel:(ApplyStutasModel*)status_Arr[0]];
+    ApplyStutasModel *statusItem = status_Arr.firstObject;
+    ApplyStatusModelFrame *statusframeModel = [ApplyStatusModelFrame frameWithStatusModel:statusItem];
     self.statusframeModel = statusframeModel;
     self.serviceHistoryView.status_frame = self.statusframeModel;
 
@@ -673,8 +676,16 @@
     
     NSArray *group = @[serviceStatus];
     
+    if (3 == self.groups.count) {
+        
+        [self.groups replaceObjectAtIndex:0 withObject:group];
+
+    }else{
     
-    [self.groups insertObject:group atIndex:0];
+        [self.groups insertObject:group atIndex:0];
+
+    }
+    
     
     [self.tableView reloadData];
     
@@ -699,6 +710,8 @@
     
     
     if (self.groups.count > 2) {
+        
+        self.statusframeModel = nil;
         
         [self.groups removeObjectAtIndex:0];
         

@@ -19,7 +19,7 @@
 
 //- (NSString *)title{
 //
-//    return [NSString stringWithFormat:@"Copyright © 2017年 UVIC. All rights reserved.%@",_title];
+//    return [NSString stringWithFormat:@"Copyright © 2017年 UVIC. All rights reserved . IBOutlet UIImageView *bgView%@",_title];
 //}
 //
 //

@@ -117,8 +117,8 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 
     if (!_groups) {
   
-        WYLXGroup *contry   =  [WYLXGroup groupWithType:EditTypeCountry title:@"想去的留学目的地" placeHolder:@"英国" content:nil groupKey:@"country" spod:true];
-        WYLXGroup *phone    =  [WYLXGroup groupWithType:EditTypePhone title:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phone" spod:false];
+        WYLXGroup *contry   =  [WYLXGroup groupWithType:EditTypeCountry title:@"想去的留学目的地" placeHolder:@"英国" content:nil groupKey:@"des_country" spod:true];
+        WYLXGroup *phone    =  [WYLXGroup groupWithType:EditTypePhone title:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phonenumber" spod:false];
         WYLXGroup *grade    =  [WYLXGroup groupWithType:EditTypeGrade title:@"就读年级" placeHolder:@"本科大四" content:nil groupKey:@"grade" spod:true];
         WYLXGroup *subject  =  [WYLXGroup groupWithType:EditTypeSuject title:@"就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"subject" spod:true];
         

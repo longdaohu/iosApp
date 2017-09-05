@@ -136,7 +136,7 @@
         
     }else{
     
-         [self.tableView emptyViewWithError:@"Duang!您还没有提交申请！"];
+         [self.tableView emptyViewWithError:@"Duang!您还没有提交申请哦！"];
         
          [self.tableView.mj_header removeFromSuperview];
     }

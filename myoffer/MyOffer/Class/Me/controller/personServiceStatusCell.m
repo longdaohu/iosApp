@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sub_titleLab;
 @property (weak, nonatomic) IBOutlet UIView *padding;
 @property (weak, nonatomic) IBOutlet UILabel *tagLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *paddingToBottomConstraint;
 
 @end
 
@@ -69,7 +70,8 @@
     self.sub_titleLab.text = statusFrame.statusModel.sub_title;
     self.tagLab.text = statusFrame.statusModel.type;
     self.padding.hidden = self.sub_titleLab.text.length ? NO : YES;
-//    self.paddingToBottomConstraint.constant = statusFrame.padding_bottom_distance;
+    self.paddingToBottomConstraint.constant = statusFrame.padding_bottom_distance;
+    
     
 }
 

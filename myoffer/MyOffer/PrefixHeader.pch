@@ -144,7 +144,6 @@
 #import "UniversityFrameNew.h"
 #import "MBProgressHUD+XJ.h"
 #import "MyOfferTableView.h"
-//#import "DefaultTableView.h"
 #import "myofferGroupModel.h"
 #import "XWGJAbout.h"
 #import "myofferBaseTableViewController.h"

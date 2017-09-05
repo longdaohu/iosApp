@@ -108,7 +108,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     }else{
         
         [self.groups removeAllObjects];
+        
         [self.tableView reloadData];
+        
         [self emptyViewShowWithResult:self.groups];
         
     }
@@ -187,8 +189,8 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         
         if (![response[@"state"] containsString:@"1"] && ![response[@"state"] containsString:@"ack"])
         {
-            weakSelf.submitBtn.enabled = NO;
             weakSelf.AlertLab.hidden = NO;
+            weakSelf.submitBtn.hidden = YES;
         }
         
     }];
@@ -253,7 +255,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     [self makeNavigationBarButtonItem];
     
     self.editViewConstraint.constant = 70;
-
     
 }
 
