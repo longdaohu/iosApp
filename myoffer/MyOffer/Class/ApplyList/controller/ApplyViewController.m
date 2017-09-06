@@ -351,7 +351,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
 //    sectionView.cell_Animation = self.cell_Animation;
     sectionView.edit = (self.tableStatus == ApplyTableStatusEdit);
-    sectionView.isSelected = [self.cancelSetions containsObject:[NSString stringWithFormat:@"%ld",section]];
+    sectionView.isSelected = [self.cancelSetions containsObject:[NSString stringWithFormat:@"%ld",(long)section]];
     sectionView.uniFrame = uni_frame;
     sectionView.actionBlock = ^(UIButton *sender){
         

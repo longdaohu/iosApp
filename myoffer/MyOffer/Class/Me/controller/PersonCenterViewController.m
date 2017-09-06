@@ -112,7 +112,7 @@
         
         _groups = [NSMutableArray array];
     
-        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能匹配大学" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能大学匹配" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         znpp.action = NSStringFromSelector(@selector(caseZNPP));
         
         XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"MBTI职业性格测试" sub_title:nil accessory_title:nil accessory_icon:nil] ;

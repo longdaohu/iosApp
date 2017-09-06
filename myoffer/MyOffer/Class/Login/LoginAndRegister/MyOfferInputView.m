@@ -447,7 +447,7 @@
     
     NSInteger count = self.timerCount--;
     
-    NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
+    NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",(long)count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
     
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
     

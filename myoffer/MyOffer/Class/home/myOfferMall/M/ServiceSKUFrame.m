@@ -97,15 +97,16 @@
         self.present_Value_Frame = CGRectMake(present_ValueX, present_ValueY, present_ValueW, present_ValueH);
  
         lineX =  coverX;
-        lineY =  CGRectGetMaxY(self.present_Value_Frame) + Margin;
         lineW =  XSCREEN_WIDTH - lineX;
+        lineY =  CGRectGetMaxY(self.present_Value_Frame) + Margin;
+
      }
     
     //底部分隔线
     self.line_Frame = CGRectMake(lineX, lineY, lineW, lineH);
     
     //cell高度
-    self.cell_Height = CGRectGetMaxY(self.line_Frame);
+    self.cell_Height = lineY + lineH;
     
 }
 

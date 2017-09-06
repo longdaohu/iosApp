@@ -418,7 +418,7 @@
         
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-         NSLog(@"服务器错误 = %@  %ld",path ,statusCode);
+         NSLog(@"服务器错误 = %@  %ld",path ,(long)statusCode);
 
         if (show) {
             

@@ -159,7 +159,7 @@
 
             return NO;
         }
-      }
+    }
     
     switch (pageNumber) {
             

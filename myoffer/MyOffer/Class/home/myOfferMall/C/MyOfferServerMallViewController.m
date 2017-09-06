@@ -58,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQ_service"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
     
     self.tableView.alpha = 0.2;
-    
+
 }
 
 
