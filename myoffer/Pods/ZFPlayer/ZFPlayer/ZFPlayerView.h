@@ -39,7 +39,7 @@
 /** 控制层即将隐藏 */
 - (void)zf_playerControlViewWillHidden:(UIView *)controlView isFullscreen:(BOOL)fullscreen;
 
-- (void)zf_playerDidClickPlay;
+- (void)zf_playerDidClickPlay:(ZFPlayerView *)playerView;
 
 - (void)zf_playerStateEndPlay:(ZFPlayerView *)playerView;
 

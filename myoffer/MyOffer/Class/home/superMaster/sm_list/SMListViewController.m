@@ -26,13 +26,26 @@
 @end
 
 @implementation SMListViewController
+
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-
+    
+    [MobClick beginLogPageView:@"page超导列表"];
+    
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page超导列表"];
+    
+}
+
+
 
 - (NSMutableArray *)items{
 

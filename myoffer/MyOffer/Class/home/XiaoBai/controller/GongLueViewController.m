@@ -119,15 +119,25 @@
 
     NSString *path = [self.gonglue.cover  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self.flexView.coverView sd_setImageWithURL:[NSURL URLWithString: path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
+ 
+        if (error) {return ;}
+            
         CGFloat image_height = XSCREEN_WIDTH * image.size.height/image.size.width;
         
         [weakSelf flexWithHeight:image_height];
         
     }];
     
-    
 }
+
+/* 这里有一个错误，有可能是因为图片加载错误引起的，所以增加一个判断if (error) {return ;}，如果加载失败，不进行下一步操作
+ => Start CALayer position contains NaN: [207 nan]
+ -> translating『 0x100105e24 』=> -[GongLueViewController flexWithHeight:] /Users/xuewuguojie/Desktop/iosApp发布/myoffer/MyOffer/Class/home/XiaoBai/controller/GongLueViewController.m: line 132
+ -> translating『 0x100105d6c 』=> __46-[GongLueViewController makeFlexibleImageView]_block_invoke /Users/xuewuguojie/Desktop/iosApp发布/myoffer/MyOffer/Class/home/XiaoBai/controller/GongLueViewController.m: line 121
+ -> translating『 0x10016be0c 』=>
+ -> translating『 0x1000b0f2c 』=> main /Users/xuewuguojie/Desktop/iosApp发布/myoffer/MyOffer/main.m: line 14
+ => End CALayer position contains NaN: [207 nan]
+ */
 
 - (void)flexWithHeight:(CGFloat )height{
     

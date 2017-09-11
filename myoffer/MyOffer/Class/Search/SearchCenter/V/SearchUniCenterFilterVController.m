@@ -144,7 +144,9 @@ typedef NS_ENUM(NSUInteger, filterButtonStyle) {
     
     NSInteger index = [areas indexOfObject:areaName];
     
-    return self.areas[index];
+    if (index > 500) index = 0;
+    
+    return areas ? self.areas[index] : nil;
 }
 
 //获取当前国家

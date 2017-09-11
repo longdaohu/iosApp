@@ -32,6 +32,24 @@
 
 @end
 
+/*
+ - (void)viewWillAppear:(BOOL)animated{
+ 
+ [super viewWillAppear:animated];
+ 
+ 
+ [self.navigationController setNavigationBarHidden:YES animated:animated];
+ 
+ [self whenViewWillAppearWithPlayer];
+ 
+ [MobClick beginLogPageView:@"page超导详情"];
+ }
+ 
+ 
+
+ */
+
+
 @implementation MyOfferServerMallViewController
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -39,7 +57,16 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+    [MobClick beginLogPageView:@"page留学购首页"];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page留学购首页"];
 }
 
 - (void)viewDidLoad {

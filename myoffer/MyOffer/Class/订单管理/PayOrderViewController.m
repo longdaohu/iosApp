@@ -239,7 +239,7 @@ static NSString *identify = @"pay";
     
     
     
-    [[AppDelegate sharedDelegate] updateUmeng];
+//    [[AppDelegate sharedDelegate] updateUmeng];
     
  
     NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];

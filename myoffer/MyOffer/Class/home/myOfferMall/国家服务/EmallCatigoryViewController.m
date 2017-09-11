@@ -37,7 +37,20 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
+    [MobClick beginLogPageView:@"page留学购国家"];
 }
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page留学购国家"];
+}
+
+
+
+
 
 - (NSArray *)groups{
 

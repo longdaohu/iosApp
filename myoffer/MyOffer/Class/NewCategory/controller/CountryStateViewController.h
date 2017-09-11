@@ -6,7 +6,6 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "BaseViewController.h"
 
 @interface CountryStateViewController : BaseViewController
 //根据传入国家名称显示不同数据

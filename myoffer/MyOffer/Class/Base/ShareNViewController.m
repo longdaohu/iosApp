@@ -66,6 +66,7 @@
     UIImage *shareImage;
     NSString *shareTitle;
     NSString *shareContent;
+    NSString *shareFromPlat = nil;
     
     if (self.university) {
         
@@ -84,6 +85,7 @@
         shareImage = [UIImage imageWithData:ImageData];
         shareTitle = self.shareInfor[@"shareTitle"];
         shareContent = self.shareInfor[@"shareContent"];
+        shareFromPlat = self.shareInfor[@"plat"];
         
     }else{
         
@@ -96,19 +98,34 @@
     
     
     switch (sender.tag) {
-        case 1:
+        case myOfferShareTypeWeiXin:
         {
             
             [UMSocialData defaultData].extConfig.wechatSessionData.title =  shareTitle;
             [UMSocialData defaultData].extConfig.wechatSessionData.url = shareURL;
             [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+//          [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    
+//                    NSLog(@"wechat 分享成功！");
+                    if (shareFromPlat) {
+                        
+                        [MobClick endEvent:@"ALL_transpond"];
+                        NSDictionary *dict = @{@"title" : shareTitle};
+                        [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+
+                    }
+                }
+            }];
+
+ 
             
         }
             break;
             
             
-        case 2:  //朋友圈
+        case myOfferShareTypeFriend:  //朋友圈
         {
             
             [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
@@ -119,7 +136,7 @@
         }
             break;
             
-        case 3:
+        case myOfferShareTypeQQ:
         {
             
             [UMSocialData defaultData].extConfig.qqData.url = shareURL;
@@ -127,8 +144,13 @@
             [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
+
+                    [MobClick endEvent:@"ALL_transpond"];
                     
-                    //                                                        NSLog(@"QQ分享成功！");
+                    NSDictionary *dict = @{@"title" : shareTitle};
+                    [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+                    
+//                     NSLog(@"QQ分享成功！");
                 }
             }];
             
@@ -136,7 +158,7 @@
         }
             break;
             
-        case 4:
+        case myOfferShareTypeZone:
         {
             
             [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
@@ -144,22 +166,28 @@
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     
+//                    NSLog(@"myOfferShareTypeZone 分享成功！");
+                    [MobClick endEvent:@"ALL_transpond"];
+                    
+                    NSDictionary *dict = @{@"title" : shareTitle};
+                    [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+
+
                 }
             }];
         }
             break;
-            
-        case 5:
+//            
+        case myOfferShareTypeWB:
         {
             
             NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareTitle,shareURL];
             [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:self];        //设置分享内容和回调对象
             [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
             
-            
         }
             break;
-        case 6:
+        case myOfferShareTypeEmail:
         {
             
             NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
@@ -174,7 +202,7 @@
             
             
             
-        case 7:
+        case myOfferShareTypeCopy:
         {
             UIPasteboard *pab = [UIPasteboard generalPasteboard];
             NSString *string = shareURL;
@@ -184,7 +212,7 @@
         }
             break;
             
-        case 8:
+        case myOfferShareTypeMore:
         {//更多
             NSString *textToShare =  shareTitle;
             UIImage *imageToShare = shareImage;
@@ -212,11 +240,19 @@
 #pragma mark 友盟分享回调  UMSocialUIDelegate
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
 {
+    
     //根据`responseCode`得到发送结果,如果分享成功
     if(response.responseCode == UMSResponseCodeSuccess)
     {
         //得到分享到的微博平台名
         //        KDClassLog(@"得到分享到  share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+        if (self.shareInfor[@"plat"]) {
+            
+            [MobClick endEvent:@"ALL_transpond"];
+            NSDictionary *dict = @{@"title" : self.shareInfor[@"shareTitle"]};
+            [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+        }
+        
     }
 }
 

@@ -323,6 +323,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
  *  播放
  */
 - (void)play {
+    
+    
+    
     [self.controlView zf_playerPlayBtnState:YES];
     if (self.state == ZFPlayerStatePause) { self.state = ZFPlayerStatePlaying; }
     self.isPauseByUser = NO;
@@ -330,7 +333,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [_player play];
     
     //监听播放器正在在播放
-    if ([self.delegate respondsToSelector:@selector(zf_playerDidClickPlay)]) { [self.delegate zf_playerDidClickPlay]; }
+    if ([self.delegate respondsToSelector:@selector(zf_playerDidClickPlay:)]) { [self.delegate zf_playerDidClickPlay:self]; }
     
 }
 
@@ -338,6 +341,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
  * 暂停
  */
 - (void)pause {
+    
+  
+
     [self.controlView zf_playerPlayBtnState:NO];
     if (self.state == ZFPlayerStatePlaying) { self.state = ZFPlayerStatePause;}
     self.isPauseByUser = YES;
@@ -1042,6 +1048,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     } else {
         if (!self.isDragged) { // 如果不是拖拽中，直接结束播放
             self.playDidEnd = YES;
+            
+            
             [self.controlView zf_playerPlayEnd];
         }
     }
@@ -1078,6 +1086,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
  *  @param dragedSeconds 视频跳转的秒数
  */
 - (void)seekToTime:(NSInteger)dragedSeconds completionHandler:(void (^)(BOOL finished))completionHandler {
+    
+    
+//    NSLog(@">>>>>>>>>>>>视频跳转的秒数 %lf",self.sumTime_temp);
+
+    
     if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
         // seekTime:completionHandler:不能精确定位
         // 如果需要精确定位，可以使用seekToTime:toleranceBefore:toleranceAfter:completionHandler:

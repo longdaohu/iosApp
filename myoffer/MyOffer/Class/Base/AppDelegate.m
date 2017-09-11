@@ -170,17 +170,28 @@ static AppDelegate *__sharedDelegate;
     [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
     
     //友盟统计
-    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-    [MobClick setLogEnabled:YES];
-    [MobClick setEncryptEnabled:YES];
-    [MobClick setLogEnabled:YES];
+    [self umengTrack];
+//    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
+//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    [MobClick setAppVersion:version];
+//    [MobClick setLogEnabled:YES];
+//    [MobClick setEncryptEnabled:YES];
+//    [MobClick setLogEnabled:YES];
    
      [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
-
+    
 }
 
+
+- (void)umengTrack {
+    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:YES];
+    UMConfigInstance.appKey = @"5668ea43e0f55af981002131";
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];
+}
+
+/*
 -(void)updateUmeng
 {
     // 5606655f67e58e9f00004355
@@ -205,7 +216,8 @@ static AppDelegate *__sharedDelegate;
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
 
  }
-
+*/
+ 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     KDClassLog(@" didRegisterForRemoteNotificationsWithDeviceToken  %@",deviceToken);

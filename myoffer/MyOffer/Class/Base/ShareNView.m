@@ -66,7 +66,7 @@
         
         
         self.cancelBtn = [[UIButton alloc] init];
-        self.cancelBtn.tag = 9;
+        self.cancelBtn.tag = myOfferShareTypeCancel;
         self.cancelBtn.layer.cornerRadius = CORNER_RADIUS;
         self.cancelBtn.layer.masksToBounds = YES;
         [self.cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
@@ -92,14 +92,14 @@
         self.shareBgView.frame = CGRectMake(shareBgX, shareBgY, shareBgW, shareBgH);
         
         
-        [self shareButtonWithTitle:GDLocalizedString(@"About_shareweixin")  imageName:@"share_weixin" tag:1];
-        [self shareButtonWithTitle:GDLocalizedString(@"About_sharefrend")  imageName:@"share_Friend" tag:2];
-        [self shareButtonWithTitle:@"QQ"  imageName:@"share_QQ" tag:3];
-        [self shareButtonWithTitle:GDLocalizedString(@"About_shareZoom")  imageName:@"share_QQRoom" tag:4];
-        [self shareButtonWithTitle:GDLocalizedString(@"About_shareWeibo")  imageName:@"share_weibo" tag:5];
-        [self shareButtonWithTitle:GDLocalizedString(@"Email")  imageName:@"share_mail" tag:6];
-        [self shareButtonWithTitle:GDLocalizedString(@"About_shareCopy")  imageName:@"share_copy" tag:7];
-        [self shareButtonWithTitle:GDLocalizedString(@"About_shareMore")  imageName:@"share_More" tag:8];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_shareweixin")  imageName:@"share_weixin" tag:myOfferShareTypeWeiXin];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_sharefrend")  imageName:@"share_Friend" tag:myOfferShareTypeFriend];
+        [self shareButtonWithTitle:@"QQ"  imageName:@"share_QQ" tag:myOfferShareTypeQQ];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_shareZoom")  imageName:@"share_QQRoom" tag:myOfferShareTypeZone];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_shareWeibo")  imageName:@"share_weibo" tag:myOfferShareTypeWB];
+        [self shareButtonWithTitle:GDLocalizedString(@"Email")  imageName:@"share_mail" tag:myOfferShareTypeEmail];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_shareCopy")  imageName:@"share_copy" tag:myOfferShareTypeCopy];
+        [self shareButtonWithTitle:GDLocalizedString(@"About_shareMore")  imageName:@"share_More" tag:myOfferShareTypeMore];
   
         
         CGFloat itemw = shareBgW * 0.25;

@@ -42,8 +42,19 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+  
+    [MobClick beginLogPageView:@"page留学购详情"];
 }
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page留学购详情"];
+}
+
+
 
 - (void)viewDidLoad {
     

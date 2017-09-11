@@ -36,6 +36,8 @@
 //线下活动View
 @property(nonatomic,strong)SMNewsOnLineView *onLineView;
 
+@property(nonatomic,strong)NSDate *login_date;
+
 @end
 
 @implementation SuperMasterViewController
@@ -46,14 +48,31 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
+    [MobClick beginLogPageView:@"page超导首页"];
+    
+    [MobClick event:@"ALL_PageView"];
+
+
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page超导首页"];
+    
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self makeUI];
     
     [self makeData];
+    
+    [self recordMobClick];
+   
+    self.login_date = [NSDate date];
 }
 
 
@@ -157,6 +176,7 @@
     [self makeTableView];
     
     self.title = @"超级导师";
+    
 }
 
 - (void)makeTableViewHeaderView{
@@ -522,9 +542,75 @@
    
 }
 
-- (void)dealloc{
+/*
+ 记录用户终端id进入超导模块的次数。访问超导一台电脑客户端为一个访客。00:00-24:00内相同的客户端只被计算一次。
+ */
+- (void)recordMobClick{
     
-    KDClassLog(@"超级导师 SuperMasterViewController  dealloc");
+
+    NSString  *sm_key = @"last_sm";
+
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *last_sm = [ud valueForKey:sm_key];
+    
+    NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    if (!last_sm) {
+        
+        NSDate *now_date = [NSDate date];
+        last_sm  =  [formatter stringFromDate:now_date];
+        [ud setValue: last_sm forKey:sm_key];
+        [ud synchronize];
+        
+
+        [MobClick event:@"IP_PageView"];
+
+        
+    }else{
+    
+       NSDate *date_last = [formatter dateFromString:last_sm];
+        
+       NSInteger time_distance = (NSInteger)[date_last timeIntervalSinceNow];
+        
+        NSInteger day_second = 60 * 60 * 24;
+        
+        if (labs(time_distance) > day_second) {
+            
+            [MobClick event:@"IP_PageView"];
+            
+            [ud removeObjectForKey:sm_key];
+
+        }else{
+        
+            NSDate *now_date = [NSDate date];
+            last_sm  =  [formatter stringFromDate:now_date];
+            [ud setValue: last_sm forKey:sm_key];
+            [ud synchronize];
+            
+            
+        }
+        
+        
+        
+}
+    
+ 
+    
+
+}
+
+
+
+
+- (void)dealloc{
+
+    NSInteger timeIntervalSinceNow = (NSInteger)[self.login_date  timeIntervalSinceNow];
+    NSDictionary *dict = @{ @"second" : [NSString stringWithFormat:@"%ld",-timeIntervalSinceNow]};
+    [MobClick event:@"ALL_Playduration" attributes:dict];
+    
+   
+    KDClassLog(@"超级导师首页 SuperMasterViewController  dealloc");
     
 }
 

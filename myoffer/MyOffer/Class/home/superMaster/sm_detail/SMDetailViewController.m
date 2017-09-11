@@ -23,7 +23,7 @@
 #import "ServiceItemViewController.h"
 #import "ServiceSKU.h"
 #import "MyOfferLoginViewController.h"
-
+#import "ShareNViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 //#import <Masonry/Masonry.h>
@@ -50,12 +50,14 @@
 @property (strong, nonatomic) UIView *bgView;
 //返回按钮
 @property(nonatomic,strong)UIButton *backButton;
+@property(nonatomic,strong)UIButton *shareBtn;
 
 @property (nonatomic, assign) BOOL isPlaying_audio;
 @property (strong, nonatomic) ZFPlayerView *audioPlayerView;
 @property (nonatomic, strong) ZFPlayerModel *audioplayerModel;
 @property (strong, nonatomic) UIView *audioPlayerFatherView;
-
+//分享
+@property(nonatomic,strong)ShareNViewController *shareVC;
 
 
 @end
@@ -72,6 +74,14 @@
     
     [self whenViewWillAppearWithPlayer];
     
+    [MobClick beginLogPageView:@"page超导详情"];
+    
+    if (self.detail.main_title) {
+        
+        NSDictionary *dict = @{ @"title" : self.detail.main_title};
+        [MobClick event:@"Assign_ALL_Playtime" attributes:dict];
+    }
+    
 }
 
 
@@ -79,6 +89,8 @@
   
     [super viewWillDisappear:animated];
    
+    [MobClick endLogPageView:@"page超导详情"];
+
     // push出下一级页面时候暂停
     
     if (self.playerView && !self.playerView.isPauseByUser){
@@ -109,6 +121,7 @@
   
 }
 
+ 
 
 #pragma mark : 网络请求
 - (void)makeData{
@@ -331,6 +344,11 @@
     _backButton.frame = CGRectMake(10, 20, 40, 40);
     [self.bgView addSubview:_backButton];
  
+    _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_shareBtn addTarget:self action:@selector(caseShare) forControlEvents:UIControlEventTouchUpInside];
+    [_shareBtn  setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
+    _shareBtn.frame = CGRectMake(XSCREEN_WIDTH - 50, 20, 40, 40);
+    [self.bgView addSubview:_shareBtn];
     
     
     CGFloat tb_y = CGRectGetMaxY(self.bgView.frame);
@@ -710,7 +728,18 @@
 }
 
 //点击播放事件
-- (void)zf_playerDidClickPlay{
+- (void)zf_playerDidClickPlay:(ZFPlayerView *)playerView{
+    
+    //    CMTime time = self.player.currentTime;
+    //    NSTimeIntval currentTimeSec = time.value / time.timesacle;
+    
+    //每点击一个“视频/音频”超导的播放按钮记录1次，播放-暂停-播放为2次
+    
+//    playerView.sumTime_temp
+    [MobClick event:@"ALL_Playtime"];
+    
+//    NSDictionary *dict = @{@"secondes" : [NSString stringWithFormat:@"%lf",playerView.sumTime_temp]};
+//    [MobClick event:@"purchase" attributes:dict];
     
     if (self.playerView.state == ZFPlayerStatePlaying && self.audioPlayerView.state == ZFPlayerStatePlaying) {
         
@@ -718,6 +747,8 @@
         
         [self reSetSectionAudio];
     }
+    
+   
 }
 
 - (void)reSetSectionAudio{
@@ -852,6 +883,42 @@
     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:nav animated:YES completion:^{}];
 }
+
+
+- (ShareNViewController *)shareVC{
+    
+    if (!_shareVC) {
+        
+        NSString *shareURL = [NSString stringWithFormat:@"%@sm/lecture/%@.html",DOMAINURL,self.detail.short_id];
+        NSString *shareTitle = self.detail.main_title;
+        NSString *shareContent = self.detail.introduction;
+        NSString *path = self.detail.ad_post_mc;
+
+        NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
+        [shareInfor setValue:path forKey:@"icon"];
+        [shareInfor setValue:shareURL forKey:@"shareURL"];
+        [shareInfor setValue:shareTitle forKey:@"shareTitle"];
+        [shareInfor setValue:shareContent forKey:@"shareContent"];
+        [shareInfor setValue:@"plat" forKey:@"plat"];
+        _shareVC = [ShareNViewController shareView];
+        _shareVC.shareInfor = shareInfor;
+        
+        [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
+        
+    }
+    
+    return _shareVC;
+}
+
+//分享
+- (void)caseShare{
+    
+    [self.shareVC  show];
+    
+}
+
+
 
 - (void)dealloc{
 

@@ -94,9 +94,7 @@
     
     [self userInformation];
     
-    
     [self userDidClickItem];
-    
  
 }
 

@@ -536,6 +536,8 @@
     
 }
 
+
+
 -(void)dealloc
 {
     KDClassLog(@"资讯详情  dealloc");

@@ -301,6 +301,7 @@
 		AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4E71D6DBB0E0025FC58 /* UniversityheaderCenterView.m */; };
 		AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */; };
 		AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */; };
+		AE94D8331F5FD10C00B64B10 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */; };
 		AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */; };
 		AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */; };
 		AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */; };
@@ -466,7 +467,6 @@
 		AEEB51C81BF9EB8600925E36 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C41BF9EB8600925E36 /* libSocialQQ.a */; };
 		AEEB51C91BF9EB8600925E36 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */; };
 		AEEB51CA1BF9EB8600925E36 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEEB51C61BF9EB8600925E36 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		AEF02A861C19289E00D9087B /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF02A831C19289E00D9087B /* libMobClickLibrary.a */; };
 		AEF0B3441C082BFD004C1155 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF0B3431C082BFD004C1155 /* AdSupport.framework */; };
 		AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF127481BF2D6D700FFBCD6 /* XYPieChart.m */; };
 		AEF1274B1BF2D73000FFBCD6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1274A1BF2D73000FFBCD6 /* QuartzCore.framework */; };
@@ -1022,6 +1022,7 @@
 		AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniGroupOneView.m; path = controller/UniGroupOneView.m; sourceTree = "<group>"; };
 		AE93E4EC1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityOneGroupCollectionCell.h; path = controller/UniversityOneGroupCollectionCell.h; sourceTree = "<group>"; };
 		AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityOneGroupCollectionCell.m; path = controller/UniversityOneGroupCollectionCell.m; sourceTree = "<group>"; };
+		AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		AE96A3671E8BAD54006E8E35 /* ServiceItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemFrame.h; sourceTree = "<group>"; };
 		AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemFrame.m; sourceTree = "<group>"; };
 		AE96A36A1E8BBF96006E8E35 /* ServiceItemHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemHeaderView.h; sourceTree = "<group>"; };
@@ -1321,9 +1322,6 @@
 		AEEB51C51BF9EB8600925E36 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		AEEB51C61BF9EB8600925E36 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		AEEB51C71BF9EB8600925E36 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
-		AEF02A831C19289E00D9087B /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		AEF02A841C19289E00D9087B /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
-		AEF02A851C19289E00D9087B /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		AEF0B3431C082BFD004C1155 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AEF127471BF2D6D700FFBCD6 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		AEF127481BF2D6D700FFBCD6 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
@@ -1396,15 +1394,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
+				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
+				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
 				AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */,
 				AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */,
 				AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */,
-				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
 				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
 				AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */,
 				AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */,
-				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
 				AEF421161BD499A100CFB45E /* SystemConfiguration.framework in Frameworks */,
+				AE94D8331F5FD10C00B64B10 /* UMMobClick.framework in Frameworks */,
 				AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */,
 				AE027EB11C3A4F16007EBD28 /* CFNetwork.framework in Frameworks */,
 				AE027EB51C3A4F54007EBD28 /* Foundation.framework in Frameworks */,
@@ -1414,7 +1414,6 @@
 				AEF1274B1BF2D73000FFBCD6 /* QuartzCore.framework in Frameworks */,
 				5672E8B41CCBAF7C0099FDFC /* WebKit.framework in Frameworks */,
 				AEF4211E1BD499C900CFB45E /* libstdc++.tbd in Frameworks */,
-				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
 				AEF421141BD4999400CFB45E /* libiconv.tbd in Frameworks */,
 				AEF421121BD4998A00CFB45E /* Security.framework in Frameworks */,
 				AE027EB31C3A4F29007EBD28 /* CoreFoundation.framework in Frameworks */,
@@ -1422,7 +1421,6 @@
 				AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */,
 				AEEB51C81BF9EB8600925E36 /* libSocialQQ.a in Frameworks */,
 				AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */,
-				AEF02A861C19289E00D9087B /* libMobClickLibrary.a in Frameworks */,
 				AEEB51C91BF9EB8600925E36 /* TencentOpenAPI.framework in Frameworks */,
 				AEF1FACB1BE38DD000F48E8B /* libSocialSinaSSO.a in Frameworks */,
 				AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */,
@@ -2569,6 +2567,14 @@
 			path = V;
 			sourceTree = "<group>";
 		};
+		AE94D8311F5FD10C00B64B10 /* UMAnalytics_Sdk_3.6.6 */ = {
+			isa = PBXGroup;
+			children = (
+				AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */,
+			);
+			path = UMAnalytics_Sdk_3.6.6;
+			sourceTree = "<group>";
+		};
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
@@ -3569,6 +3575,7 @@
 		AEE73C351BCCBB6400B96006 /* LIB */ = {
 			isa = PBXGroup;
 			children = (
+				AE94D8311F5FD10C00B64B10 /* UMAnalytics_Sdk_3.6.6 */,
 				AE3943CC1E0A1AD00038826A /* SDCycleScrollView */,
 				AE1FD68E1D5C924200FFD5A8 /* LibFile */,
 				AE1D01131D2FCD2D005E2DEF /* AutoLoop */,
@@ -3576,7 +3583,6 @@
 				5672E8AC1CCBA9730099FDFC /* RNURLProtocal */,
 				565E52461C269D1100B9053B /* Reachability */,
 				AEF420E31BD4988B00CFB45E /* UMSocial_Sdk_4.2.5 */,
-				AEF02A821C19289E00D9087B /* UMAnalytics_Sdk_3.6.6 */,
 				AEEB51C31BF9EB8600925E36 /* TencentOpenAPI */,
 				AEF127461BF2D6D700FFBCD6 /* PIE */,
 				AEF1FABC1BE38DD000F48E8B /* SinaSSO */,
@@ -3594,16 +3600,6 @@
 				AEEB51C71BF9EB8600925E36 /* UMSocialQQHandler.h */,
 			);
 			path = TencentOpenAPI;
-			sourceTree = "<group>";
-		};
-		AEF02A821C19289E00D9087B /* UMAnalytics_Sdk_3.6.6 */ = {
-			isa = PBXGroup;
-			children = (
-				AEF02A831C19289E00D9087B /* libMobClickLibrary.a */,
-				AEF02A841C19289E00D9087B /* MobClick.h */,
-				AEF02A851C19289E00D9087B /* MobClickSocialAnalytics.h */,
-			);
-			path = UMAnalytics_Sdk_3.6.6;
 			sourceTree = "<group>";
 		};
 		AEF127461BF2D6D700FFBCD6 /* PIE */ = {
@@ -4484,6 +4480,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
+					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
@@ -4531,6 +4528,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
+					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
