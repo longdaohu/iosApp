@@ -19,7 +19,7 @@
 - (void)loginWithAccessResponse:(NSDictionary *)response;
 - (void)logout;
 - (NSString *)accessToken;
-- (void)updateUmeng;
+//- (void)updateUmeng;
 -(void)umeng;
 
 @end

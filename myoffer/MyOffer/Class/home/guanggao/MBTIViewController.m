@@ -25,7 +25,7 @@
 @implementation MBTIViewController
 
 - (instancetype)initWithPath:(NSString *)path{
-
+    
     self = [super init];
     
     if (self) {
@@ -47,7 +47,7 @@
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:@"page性格测试"];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,7 +75,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:parameter];
     
     
-//    NSString *path = @"http://www.apesk.com/h/go_zy_dingzhi_m.asp?checkcode=PR9RZP86L1IC9HT4IA&hruserid=18201123448&l=MBTI-STEP-I-28&test_name=sha&test_email=sha";
+    //    NSString *path = @"http://www.apesk.com/h/go_zy_dingzhi_m.asp?checkcode=PR9RZP86L1IC9HT4IA&hruserid=18201123448&l=MBTI-STEP-I-28&test_name=sha&test_email=sha";
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0,XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT)];
@@ -84,35 +84,36 @@
     [self.view addSubview:self.web];
     self.web.delegate = self;
     
+    
 }
 
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-//    self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    self.progress = [KDProgressHUD showHUDAddedTo:self.view animated:YES];
     
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //重写网页方法，监听网页链接
-//    NSString *jumpF = @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
-//    
-//    [webView stringByEvaluatingJavaScriptFromString:jumpF];
-//    
-//    if (!webView.isLoading) {
-//        
-//        [self.progress hideAnimated:YES afterDelay:0.5];
-//    }
+        NSString *jumpF =  @"window.app = {appJump: function (args) {window.location = 'app:appJump/' + args;}};";
     
-//    NSString *path = [webView stringByEvaluatingJavaScriptFromString:@"var abc = document.getElementsByTagName('body')[0]; if(abc.children.length == 0){} "];
+ 
+        [webView stringByEvaluatingJavaScriptFromString:jumpF];
+    //
+    //    if (!webView.isLoading) {
+    //
+    //        [self.progress hideAnimated:YES afterDelay:0.5];
+    //    }
     
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
     
-     NSString *absoluteString = request.URL.absoluteString;
+    
+    NSString *absoluteString = request.URL.absoluteString;
     
     NSInteger pageNumber = DEFAULT_NUMBER;
     if ([absoluteString containsString:@"app:appJump"]) {
@@ -135,12 +136,9 @@
         pageNumber = 8;
     }else if([absoluteString containsString:@"www.apesk.com"]) {
         pageNumber = 9;
-   
+        
     }else{
         
-        
-        
-    
         if (request.allHTTPHeaderFields[@"apikey"].length == 0) {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -156,7 +154,7 @@
                     [self.web loadRequest:request];
                 });
             });
-
+            
             return NO;
         }
     }
@@ -224,6 +222,8 @@
                 
                 return NO;
                 
+                //                [webView loadRequest:request];
+                
             }else{
                 
                 return YES;
@@ -235,7 +235,7 @@
         {
             
             [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
-      
+            
             return NO;
         }
             break;
@@ -259,7 +259,7 @@
             break;
         case 9:
         {
-          
+            
             return YES;
         }
             break;
@@ -267,8 +267,8 @@
             return YES;
             break;
     }
-
-  
+    
+    
 }
 
 

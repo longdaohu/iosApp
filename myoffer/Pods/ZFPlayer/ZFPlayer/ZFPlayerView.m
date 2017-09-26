@@ -332,6 +332,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     
     [_player play];
     
+//    NSLog(@">>>>> *  播放 ZFPlayerState>>>>>  %ld   ",self.state);
+
     //监听播放器正在在播放
     if ([self.delegate respondsToSelector:@selector(zf_playerDidClickPlay:)]) { [self.delegate zf_playerDidClickPlay:self]; }
     

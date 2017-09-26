@@ -792,49 +792,73 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 #pragma mark : 第三方登录点击
 - (void) otherBtnOnClick:(UIButton *)sender{
 
-    
-    NSString *shareplatform;
+ 
+    UMSocialPlatformType platformType;
     NSString *platformName;
     switch (sender.tag) {
         case otherLoginTypeWX:
         {
-            shareplatform = UMShareToWechatSession;
+            platformType = UMSocialPlatformType_WechatSession;
             platformName = @"wechat";
         }
             break;
         case otherLoginTypeWB:
         {
             
-            shareplatform = UMShareToSina;
+            platformType = UMSocialPlatformType_Sina;
             platformName = @"weibo";
             
         }
             break;
         default:
         {
-            shareplatform = UMShareToQzone;
+            platformType = UMSocialPlatformType_QQ;
             platformName = @"qq";
         }
             break;
     }
+
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+        
+        UMSocialUserInfoResponse *resp = result;
+        
+        // 第三方登录数据(为空表示平台未提供)
+        // 授权数据
+        NSLog(@" uid: %@", resp.uid);
+        NSLog(@" openid: %@", resp.openid);
+        NSLog(@" accessToken: %@", resp.accessToken);
+        NSLog(@" refreshToken: %@", resp.refreshToken);
+        NSLog(@" expiration: %@", resp.expiration);
+        
+        // 用户数据
+        NSLog(@" name: %@", resp.name);
+        NSLog(@" iconurl: %@", resp.iconurl);
+        NSLog(@" gender: %@", resp.unionGender);
+        
+        // 第三方平台SDK原始数据
+        NSLog(@" originalResponse: %@", resp.originalResponse);
+    }];
     
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
-    
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-       
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
-            
-            NSMutableDictionary *userInfo =[NSMutableDictionary dictionary];
-            [userInfo setValue:snsAccount.usid forKey:@"user_id"];
-            [userInfo setValue:platformName forKey:@"provider"];
-            [userInfo setValue:snsAccount.accessToken forKey:@"token"];
-         
-            
-            [self  loginWithParameters:userInfo];
-        }
-    });
+    /*
+     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
+     
+     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+     
+     if (response.responseCode == UMSResponseCodeSuccess) {
+     
+     UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
+     
+     NSMutableDictionary *userInfo =[NSMutableDictionary dictionary];
+     [userInfo setValue:snsAccount.usid forKey:@"user_id"];
+     [userInfo setValue:platformName forKey:@"provider"];
+     [userInfo setValue:snsAccount.accessToken forKey:@"token"];
+     
+     
+     [self  loginWithParameters:userInfo];
+     }
+     });
+     
+     */
 
     
 }

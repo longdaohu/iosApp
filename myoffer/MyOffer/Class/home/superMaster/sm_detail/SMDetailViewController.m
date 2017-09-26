@@ -40,8 +40,6 @@
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)SMDetailHeaderView *headerView;
 @property(nonatomic,strong)NSArray *groups;
-
-
 @property (strong, nonatomic) ZFPlayerView *playerView;
 /** 离开页面时候是否在播放 */
 @property (nonatomic, assign) BOOL isPlaying;
@@ -58,6 +56,7 @@
 @property (strong, nonatomic) UIView *audioPlayerFatherView;
 //分享
 @property(nonatomic,strong)ShareNViewController *shareVC;
+@property(nonatomic,assign)BOOL first_time_loading;
 
 
 @end
@@ -78,7 +77,8 @@
     
     if (self.detail.main_title) {
         
-        NSDictionary *dict = @{ @"title" : self.detail.main_title};
+        NSDictionary *dict = @{@"title" : self.detail.main_title};
+        
         [MobClick event:@"Assign_ALL_Playtime" attributes:dict];
     }
     
@@ -143,8 +143,17 @@
     self.detail = [SMDetailMedol mj_objectWithKeyValues:response];
     
     self.detail.islogin = LOGIN;
-    
+
     self.detail_Frame = [SMDetailHeaderFrame frameWithDetail:self.detail];
+    
+    
+    //指定某一个超导页面统计总播放次数
+    if (self.detail.main_title) {
+        
+        NSDictionary *dict = @{@"title" : self.detail.main_title};
+        
+        [MobClick event:@"Assign_ALL_Playtime" attributes:dict];
+    }
     
     
     NSMutableArray *group_temp = [NSMutableArray array];
@@ -180,6 +189,8 @@
        
         
         if (one.items.count > 0) [group_temp addObject:one];
+        
+
     }
     
     
@@ -730,17 +741,35 @@
 //点击播放事件
 - (void)zf_playerDidClickPlay:(ZFPlayerView *)playerView{
     
-    //    CMTime time = self.player.currentTime;
-    //    NSTimeIntval currentTimeSec = time.value / time.timesacle;
+ 
     
     //每点击一个“视频/音频”超导的播放按钮记录1次，播放-暂停-播放为2次
+    /*
+     ZFPlayerStateFailed,     // 播放失败
+     ZFPlayerStateBuffering,  // 缓冲中
+     ZFPlayerStatePlaying,    // 播放中
+     ZFPlayerStateStopped,    // 停止播放
+     ZFPlayerStatePause       // 暂停播放
+     
+     
+     */
     
-//    playerView.sumTime_temp
-    [MobClick event:@"ALL_Playtime"];
+    if (playerView.state == ZFPlayerStateBuffering && !self.first_time_loading) {
+        
+        [MobClick event:@"ALL_Playtime"];
+
+        self.first_time_loading = YES;
+        
+       
+    }
     
-//    NSDictionary *dict = @{@"secondes" : [NSString stringWithFormat:@"%lf",playerView.sumTime_temp]};
-//    [MobClick event:@"purchase" attributes:dict];
-    
+    if (playerView.state == ZFPlayerStatePlaying || playerView.state == ZFPlayerStatePause|| playerView.state == ZFPlayerStateStopped) {
+        
+        [MobClick event:@"ALL_Playtime"];
+
+    }
+  
+ 
     if (self.playerView.state == ZFPlayerStatePlaying && self.audioPlayerView.state == ZFPlayerStatePlaying) {
         
         [self.audioPlayerView pause];

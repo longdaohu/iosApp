@@ -156,7 +156,6 @@
      NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};";
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
-    
     [self.hud hideAnimated:YES];
  
 }
@@ -203,9 +202,18 @@
     switch (pageNumber) {
             
         case 0:{
-            NSString *pathURL = [absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSString *jump_str =[pathURL stringByReplacingOccurrencesOfString:@"app:appJump/" withString:@""];
-            NSData *JSONData = [jump_str dataUsingEncoding:NSUTF8StringEncoding];
+
+            NSArray  *items = [absoluteString componentsSeparatedByString:@"/"];
+            NSString *jump_str = @"";
+            for (NSString *item in items) {
+                if ([item containsString:@"args"]) {
+                    jump_str  = item;
+                    break;
+                }
+            }
+ 
+            NSString *path = [jump_str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSData *JSONData = [path dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
             [self pageWithResponse:responseJSON];
             decisionHandler(WKNavigationActionPolicyCancel);
@@ -309,7 +317,7 @@
 }
 
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
-    
+
     
     switch ([responseJSON[@"page"] integerValue]) {
         case 0:

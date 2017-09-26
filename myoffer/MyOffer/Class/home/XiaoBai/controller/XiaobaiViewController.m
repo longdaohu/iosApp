@@ -80,10 +80,25 @@
 {
     XWeakSelf
     
+    NSUserDefaults *ud  = [NSUserDefaults standardUserDefaults];
     
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorGonglueList parameters:nil success:^(NSInteger statusCode, id response) {
+    id tips_value = [ud valueForKey:@"tipsKeyy"];
+    
+    if(tips_value){
+        
+        [self configrationUIWithResponse:tips_value];
+        
+        return;
+    }
+    
+    
+    [self startAPIRequestWithSelector:kAPISelectorGonglueList parameters:nil success:^(NSInteger statusCode, id response) {
         
         [weakSelf configrationUIWithResponse:response];
+        
+        [ud setValue:response forKey:@"tipsKeyy"];
+        
+        [ud synchronize];
 
     }];
     

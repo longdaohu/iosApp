@@ -22,7 +22,9 @@
 #import "HomeSectionHeaderView.h"
 #import "MessageArticle.h"
 
-@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
+//@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
+@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate>
+
 @property(nonatomic,strong)MyOfferTableView *tableView;
 //嵌套webView到Cell中
 @property(nonatomic,strong)WKWebView *webView;

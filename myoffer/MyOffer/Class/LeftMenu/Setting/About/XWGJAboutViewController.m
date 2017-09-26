@@ -5,7 +5,7 @@
 //  Created by xuewuguojie on 16/1/27.
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
-#import "UMSocial.h"
+
 #import "XWGJAboutViewController.h"
 #import "XWGJAbout.h"
 #import "XWGJAaboutHeader.h"

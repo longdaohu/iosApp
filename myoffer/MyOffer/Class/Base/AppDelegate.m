@@ -12,7 +12,6 @@
 #import "KDKeychain.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
-#import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "MyOfferLoginViewController.h"
 #import "UMSocialSinaSSOHandler.h"
@@ -22,7 +21,6 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "HomeViewContViewController.h"
-
 
 @interface AppDelegate ()<WXApiDelegate>
 {
@@ -158,29 +156,76 @@ static AppDelegate *__sharedDelegate;
 
 -(void)umeng
 {
-    // 5606655f67e58e9f00004355
-    //在AppDelegate内设置友盟AppKey
-    [UMSocialData setAppKey:@"5668ea43e0f55af981002131"];
-    //设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" url:@"http://www.myoffer.cn/"];
-    //打开新浪微博的SSO开关，设置新浪微博回调地址
-    [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
- 
-    //设置QQ登录
-    [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
+    /* 打开调试日志 */
+    [[UMSocialManager defaultManager] openLog:YES];
+    
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"5668ea43e0f55af981002131"];
+    
+    [self configUSharePlatforms];
+    
+    [self confitUShareSettings];
+    
     
     //友盟统计
     [self umengTrack];
-//    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
-//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-//    [MobClick setAppVersion:version];
-//    [MobClick setLogEnabled:YES];
-//    [MobClick setEncryptEnabled:YES];
-//    [MobClick setLogEnabled:YES];
-   
-     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
+    
+    [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
+ 
+}
+
+
+- (void)confitUShareSettings
+{
+    /*
+     * 打开图片水印
+     */
+    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+    
+    /*
+     * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
+     <key>NSAppTransportSecurity</key>
+     <dict>
+     <key>NSAllowsArbitraryLoads</key>
+     <true/>
+     </dict>
+     */
+    //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     
 }
+
+- (void)configUSharePlatforms
+{
+    
+
+    /*
+     旧版 [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"" url:@"http://www.myoffer.cn/"];
+     设置微信的appKey和appSecret
+     [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" redirectURL:@"http://www.myoffer.cn/"];
+ 
+    /* 旧版  [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
+     设置分享到QQ互联的appID
+     * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
+     100424468.no permission of union id
+     [QQ/QZone平台集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_3
+     */
+    
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104829804"/*设置QQ平台的appID*/  appSecret:@"qQUCI87bgI38XUut" redirectURL:@"http://www.myoffer.cn/"];
+    
+    /*
+     App Key：
+     9614439
+     App Sercet：
+     c768c74b50a83201de5ed201b2472971
+     旧版   [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+     设置新浪的appKey和appSecret
+     [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"9614439"  appSecret:@"c768c74b50a83201de5ed201b2472971" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+}
+    
 
 
 - (void)umengTrack {
@@ -382,7 +427,7 @@ static AppDelegate *__sharedDelegate;
 //保存过期登录时间
 - (void)saveLogOutDate:(NSString *)timeStr
 {
-    NSLog(@" %@  <<<<<<保存过期登录时间>>>>>",timeStr);
+//    NSLog(@" %@  <<<<<<保存过期登录时间>>>>>",timeStr);
 
     [[NSUserDefaults standardUserDefaults] setValue:timeStr forKey:@"logout_date"];
     [[NSUserDefaults standardUserDefaults]  synchronize];
@@ -417,11 +462,15 @@ static AppDelegate *__sharedDelegate;
     }
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    
-    KDClassLog(@"application handleOpenURL------- %@",url.absoluteString);
 
-    return  [WXApi handleOpenURL:url delegate:self];
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
+    return result;
 }
 
 
@@ -432,17 +481,9 @@ static AppDelegate *__sharedDelegate;
     if([[url absoluteString] rangeOfString:@"wx3b0cb66502388846://pay"].location == 0) //你的微信开发者appid
         return [WXApi handleOpenURL:url delegate:self];
     else
-        return [UMSocialSnsService handleOpenURL:url wxApiDelegate:self];
+//        return [UMSocialSnsService handleOpenURL:url wxApiDelegate:self];
+    return YES;
 }
-
-//
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-//    
-//    NSLog(@"application openURL:(NSURL *)url sourceApplication------- %@",url.absoluteString);
-//    
-//    return [WXApi handleOpenURL:url delegate:self];
-//}
-
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -465,10 +506,10 @@ static AppDelegate *__sharedDelegate;
         
     }else{
         
-        BOOL result = [UMSocialSnsService handleOpenURL:url];
-        if (result == FALSE) {
-            //调用其他SDK，例如支付宝SDK等
-            
+        //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+        BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+        if (!result) {
+            // 其他如支付等SDK的回调
         }
         return result;
         
@@ -503,11 +544,9 @@ static AppDelegate *__sharedDelegate;
      
     }else{
     
-        BOOL result = [UMSocialSnsService handleOpenURL:url];
-        if (result == FALSE) {
-            //调用其他SDK，例如支付宝SDK等
-            
-            
+        BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
+        if (!result) {
+            // 其他如支付等SDK的回调
         }
         return result;
 

@@ -62,6 +62,8 @@
 
 @property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
 
+@property(nonatomic,assign)BOOL hadShowNeWVersion;
+
 @end
 
 
@@ -95,6 +97,9 @@
     [self userInformation];
     
     [self userDidClickItem];
+    
+    [self checkAPPVersion];
+    
  
 }
 
@@ -125,10 +130,7 @@
 
 
 -(void)makeOther{
-
-    
-    [self checkAPPVersion];
-
+  
     [self baseDataSourse]; //加载基础数据
 
     [self getAppReport];
@@ -658,13 +660,20 @@
 
 //检查版本更新
 -(void)checkAPPVersion
-{//https://itunes.apple.com/cn/app/myoffer/id1016290891
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1016290891"]];
+{
+    //如果提示过就不再重新请求网络更新提示
+    if (self.hadShowNeWVersion) {
+        
+        return;
+    }
+    
+    //https://itunes.apple.com/cn/app/myoffer/id1016290891
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/lookup?id=1016290891"]];
+//    request.timeoutInterval = 15;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         // 网络请求完成之后就会执行，NSURLSession自动实现多线程
-//        NSLog(@"%@",[NSThread currentThread]);
         
 
         if (data && (error == nil)) {
@@ -680,13 +689,17 @@
             NSString *storeVersionStr = [[store_results objectAtIndex:0] objectForKey:@"version"];
             NSString *storeVersion = [storeVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
             
+//                    NSLog(@" itunes.apple  %@  %@",[NSThread currentThread],storeVersionStr);
+
             
             NSDictionary *appDic = [[NSBundle mainBundle] infoDictionary];
             NSString *ccurrentVersionStr = [appDic objectForKey:@"CFBundleShortVersionString"];
             NSString *currentVersion = [ccurrentVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
             
+            self.hadShowNeWVersion = YES;
+
             if (storeVersion.integerValue <= currentVersion.integerValue) return ;
-                
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //更新UI操作
                 //.....
@@ -695,14 +708,15 @@
             });
             
             
-        }
-        /*else {
+        }else {
             // 网络访问失败
             
-            NSLog(@"itunes.apple >>>> 失败");
+//            NSLog(@"itunes.apple >>>> 失败");
+            
+            self.hadShowNeWVersion = NO;
 
         }
-        */
+        
     }];
     
     [task resume];
@@ -928,7 +942,11 @@ ENGLISH  设置环境
   
     [MobClick event:@"home_advertisementClick"];
     
-    if([path containsString:@"mbti/test"])
+    if ([path hasSuffix:@"superMentor.html"]) {
+        
+        [self CaseSuperMaster];
+        
+    }else if([path containsString:@"mbti/test"])
     {
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
         RequireLogin
