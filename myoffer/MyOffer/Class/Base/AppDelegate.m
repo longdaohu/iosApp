@@ -12,10 +12,7 @@
 #import "KDKeychain.h"
 #import "IntroViewController.h"
 #import "UserDefaults.h"
-#import "UMSocialWechatHandler.h"
 #import "MyOfferLoginViewController.h"
-#import "UMSocialSinaSSOHandler.h"
-#import "UMSocialQQHandler.h"
 #import "APService.h"
 #import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -78,23 +75,7 @@ static AppDelegate *__sharedDelegate;
         
          [self applicationBadgeNumber];
     }
- 
-    
-    /* 开发者的美洽  #import <MeiQiaSDK/MQManager.h>
 
-    [MQManager initWithAppkey:@"edb45a1504a6f3bc86174cf8923b1006" completion:^(NSString *clientId, NSError *error) {
-        if (!error) {
-            NSLog(@"美洽 SDK：初始化成功");
-        } else {
-            NSLog(@"error:%@",error);
-        }
-//        [MQServiceToViewInterface getUnreadMessagesWithCompletion:^(NSArray *messages, NSError *error) {
-//            NSLog(@">> unread message count: %d", (int)messages.count);
-//        }];
-    }];
-     
-     */
-    
     return YES;
 }
 
@@ -164,34 +145,11 @@ static AppDelegate *__sharedDelegate;
     
     [self configUSharePlatforms];
     
-    [self confitUShareSettings];
-    
-    
     //友盟统计
     [self umengTrack];
     
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
  
-}
-
-
-- (void)confitUShareSettings
-{
-    /*
-     * 打开图片水印
-     */
-    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
-    
-    /*
-     * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
-     <key>NSAppTransportSecurity</key>
-     <dict>
-     <key>NSAllowsArbitraryLoads</key>
-     <true/>
-     </dict>
-     */
-    //[UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
-    
 }
 
 - (void)configUSharePlatforms
@@ -215,64 +173,33 @@ static AppDelegate *__sharedDelegate;
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104829804"/*设置QQ平台的appID*/  appSecret:@"qQUCI87bgI38XUut" redirectURL:@"http://www.myoffer.cn/"];
     
     /*
-     App Key：
-     9614439
-     App Sercet：
-     c768c74b50a83201de5ed201b2472971
      旧版   [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
      设置新浪的appKey和appSecret
      [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"9614439"  appSecret:@"c768c74b50a83201de5ed201b2472971" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1584614386"  appSecret:@"3736ea71b1062eaf980a72e14184cf78" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    
+ 
+//     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Email appKey:nil appSecret:nil redirectURL:nil];
 }
     
 
 
 - (void)umengTrack {
-    //    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    // [MobClick setAppVersion:XcodeAppVersion];
+    //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [MobClick setLogEnabled:YES];
     UMConfigInstance.appKey = @"5668ea43e0f55af981002131";
     UMConfigInstance.channelId = @"App Store";
     [MobClick startWithConfigure:UMConfigInstance];
 }
 
-/*
--(void)updateUmeng
-{
-    // 5606655f67e58e9f00004355
-    //在AppDelegate内设置友盟AppKey
-    [UMSocialData setAppKey:@"5668ea43e0f55af981002131"];
-    //设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:@"wx3b0cb66502388846" appSecret:@"5e410534cd1657326777084f1a7a3181" url:@"http://www.myoffer.cn/"];
-    //打开新浪微博的SSO开关，设置新浪微博回调地址
-    [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
-    
-    //设置QQ登录
-    [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
-    //友盟统计
-    [MobClick startWithAppkey:@"5668ea43e0f55af981002131" reportPolicy:BATCH   channelId:nil];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-    [MobClick setLogEnabled:YES];
-    [MobClick setEncryptEnabled:YES];
-    [MobClick setLogEnabled:YES];
-    
-//    [WXApi registerApp:@"wx3b0cb66502388846" withDescription:@"demo 2.0"];
-    [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
 
- }
-*/
- 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     KDClassLog(@" didRegisterForRemoteNotificationsWithDeviceToken  %@",deviceToken);
     // Required
     [APService registerDeviceToken:deviceToken];
-    
-    /*美洽  上传设备的 deviceToken
-    [MQManager registerDeviceToken:deviceToken];
-    */
-
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -338,19 +265,11 @@ static AppDelegate *__sharedDelegate;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    /*美洽
-      [MQManager closeMeiqiaService];
-     */
-   
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
-    /*美洽
-     [MQManager openMeiqiaService];
-     */
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -374,9 +293,6 @@ static AppDelegate *__sharedDelegate;
         NSDate *now_date = [NSDate date];
         long long logout_time = logout_date.longLongValue;
         long long current_time = (long long)now_date.timeIntervalSince1970 * 1000;
-
-//        NSLog(@"%@  int = %lld  <<<<<<判断登录时间是否过期>>>>> %lld",logout_date,logout_time,current_time);
-        
         if (logout_time <= current_time) [self logout];
  
     }
@@ -440,20 +356,15 @@ static AppDelegate *__sharedDelegate;
     KDClassLog(@"onReq 微信  %@",[req class]);
 
 }
-
-
 - (void)onResp:(BaseResp *)resp {
     
     if ([resp isKindOfClass:[PayResp class]]) {
         PayResp *response = (PayResp *)resp;
-     
         NSString *errcode = [NSString stringWithFormat:@"%d",response.errCode];
         [[NSNotificationCenter  defaultCenter] postNotificationName:@"wxpay" object:errcode];
         switch (response.errCode) {
-          
             case WXSuccess:
                 KDClassLog(@"微信回调的代理方法 suceess %d",response.errCode);
-
                 break;
             default:
                 KDClassLog(@"微信回调的代理方法 failed %d",response.errCode);
@@ -476,19 +387,19 @@ static AppDelegate *__sharedDelegate;
 
 - (BOOL)applicationOpenURL:(NSURL *)url
 {
-    
-    KDClassLog(@"aapplicationOpenURL------- %@",url.absoluteString);
-    if([[url absoluteString] rangeOfString:@"wx3b0cb66502388846://pay"].location == 0) //你的微信开发者appid
+    KDClassLog(@"aapplicationOpenURL: %@",url.absoluteString);
+    //你的微信开发者appid
+    if([[url absoluteString] rangeOfString:@"wx3b0cb66502388846://pay"].location == 0)
         return [WXApi handleOpenURL:url delegate:self];
     else
 //        return [UMSocialSnsService handleOpenURL:url wxApiDelegate:self];
+        
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
    
-//    NSLog(@"   以后使用新API接口   ");
     
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
@@ -499,11 +410,7 @@ static AppDelegate *__sharedDelegate;
         return YES;
         
     }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
-        
-        
         return [WXApi handleOpenURL:url delegate:self];
-        
-        
     }else{
         
         //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
@@ -521,14 +428,10 @@ static AppDelegate *__sharedDelegate;
 //// NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
-    
-    
 //    NSLog(@"    NOTE: 9.0以后使用新API接口   ");
- 
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            
              KDClassLog(@"NOTE: 9.0 跳转支付宝钱包进行支付 result = %@",resultDic);
             [[NSNotificationCenter  defaultCenter] postNotificationName:@"alipay" object:resultDic[@"resultStatus"]];
             
@@ -537,10 +440,8 @@ static AppDelegate *__sharedDelegate;
          return YES;
 
     }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
-      
         
         return [WXApi handleOpenURL:url delegate:self];
-        
      
     }else{
     

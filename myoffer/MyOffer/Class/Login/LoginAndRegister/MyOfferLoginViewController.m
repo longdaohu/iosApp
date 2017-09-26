@@ -820,50 +820,37 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
         
-        UMSocialUserInfoResponse *resp = result;
+        if (!error) {
+            
+            UMSocialUserInfoResponse *resp = result;
+            /*
+            // 第三方登录数据(为空表示平台未提供)
+            // 授权数据
+            NSLog(@" uid: %@", resp.uid);
+            NSLog(@" openid: %@", resp.openid);
+            NSLog(@" accessToken: %@", resp.accessToken);
+            NSLog(@" refreshToken: %@", resp.refreshToken);
+            NSLog(@" expiration: %@", resp.expiration);
+            
+            // 用户数据
+            NSLog(@" name: %@", resp.name);
+            NSLog(@" iconurl: %@", resp.iconurl);
+            NSLog(@" gender: %@", resp.unionGender);
+            
+            // 第三方平台SDK原始数据
+            NSLog(@" originalResponse: %@", resp.originalResponse);
         
-        // 第三方登录数据(为空表示平台未提供)
-        // 授权数据
-        NSLog(@" uid: %@", resp.uid);
-        NSLog(@" openid: %@", resp.openid);
-        NSLog(@" accessToken: %@", resp.accessToken);
-        NSLog(@" refreshToken: %@", resp.refreshToken);
-        NSLog(@" expiration: %@", resp.expiration);
-        
-        // 用户数据
-        NSLog(@" name: %@", resp.name);
-        NSLog(@" iconurl: %@", resp.iconurl);
-        NSLog(@" gender: %@", resp.unionGender);
-        
-        // 第三方平台SDK原始数据
-        NSLog(@" originalResponse: %@", resp.originalResponse);
+*/
+            NSDictionary  *userInfo = @{ @"user_id" : resp.uid, @"provider" : platformName, @"token" : resp.accessToken };
+            [self  loginWithParameters:userInfo];
+            
+        }
+ 
     }];
-    
-    /*
-     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareplatform];
-     
-     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-     
-     if (response.responseCode == UMSResponseCodeSuccess) {
-     
-     UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:shareplatform];
-     
-     NSMutableDictionary *userInfo =[NSMutableDictionary dictionary];
-     [userInfo setValue:snsAccount.usid forKey:@"user_id"];
-     [userInfo setValue:platformName forKey:@"provider"];
-     [userInfo setValue:snsAccount.accessToken forKey:@"token"];
-     
-     
-     [self  loginWithParameters:userInfo];
-     }
-     });
-     
-     */
-
-    
+ 
 }
 // 第三方登录传参并登录
--(void)loginWithParameters:(NSMutableDictionary *)userInfo
+-(void)loginWithParameters:(NSDictionary *)userInfo
 {
     //存储第三方登录平台信息  用于绑定手机页面使用
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];

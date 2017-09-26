@@ -75,7 +75,7 @@
         path = [self.university.logo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
         shareImage = [UIImage imageWithData:ImageData];
-        shareTitle = self.university.name;
+        shareTitle = [NSString stringWithFormat:@"%@%@",self.university.name,shareURL];
         shareContent = self.university.introduction;
         
     }else if(self.shareInfor){
@@ -84,7 +84,7 @@
         path = [self.shareInfor[@"icon"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
         shareImage = [UIImage imageWithData:ImageData];
-        shareTitle = self.shareInfor[@"shareTitle"];
+        shareTitle = [NSString stringWithFormat:@"%@%@",self.shareInfor[@"shareTitle"],shareURL];
         shareContent = self.shareInfor[@"shareContent"];
         shareFromPlat = self.shareInfor[@"plat"];
         
@@ -92,114 +92,57 @@
         
         shareImage = [UIImage imageNamed:@"shareMyOffer"];
         shareURL   = [NSString stringWithFormat:@"http://www.myoffer.cn/ad/landing/app_promotion"];
-        shareTitle = @"跨境的全球留学生服务生态圈——myOffer";
+        shareTitle = [NSString stringWithFormat:@"跨境的全球留学生服务生态圈——myOffer%@",shareURL];
         shareContent =  GDLocalizedString(@"About_shareSummary");
         
     }
     
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:shareTitle  descr:shareContent thumImage:shareImage];
+    shareObject.webpageUrl = shareURL;
     
     switch (sender.tag) {
-        case myOfferShareTypeWeiXin:
-        {
+        case myOfferShareTypeWeiXin:{
+//                BOOL wx = [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession];
+//                if (!wx) {
+//                    [MBProgressHUD showError:@"请先安装微信app"];
+//                    return;
+//                }
             
-            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
-            /*
-            [UMSocialData defaultData].extConfig.wechatSessionData.title =  shareTitle;
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = shareURL;
-            [[UMSocialControllerService defaultControllerService] setShareText:shareContent shareImage:shareImage socialUIDelegate:nil];        //设置分享内容和回调对象
-//          [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    
-//                    NSLog(@"wechat 分享成功！");
-                    if (shareFromPlat) {
-                        
-                        [MobClick event:@"ALL_transpond"];
-                        NSDictionary *dict = @{@"title" : shareTitle};
-                        [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession message:shareObject video:(shareFromPlat.length > 0)];
 
-                    }
-                }
-            }];
-*/
- 
-            
         }
             break;
-            
-            
         case myOfferShareTypeFriend:  //朋友圈
-        {
-            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
-            /*
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareURL;
-            [[UMSocialControllerService defaultControllerService] setShareText:shareContent  shareImage:shareImage socialUIDelegate:self];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
-             **/
-            
-        }
+            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine message:shareObject video:(shareFromPlat.length > 0)];
             break;
-            
         case myOfferShareTypeQQ:
-        {
-            [self shareWebPageToPlatformType:UMSocialPlatformType_QQ];
-/*
-            [UMSocialData defaultData].extConfig.qqData.url = shareURL;
-            [UMSocialData defaultData].extConfig.qqData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeDefault;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-
-                    [MobClick event:@"ALL_transpond"];
-                    
-                    NSDictionary *dict = @{@"title" : shareTitle};
-                    [MobClick event:@"Assign_ALL_transpond" attributes:dict];
-                    
-//                     NSLog(@"QQ分享成功！");
-                }
-            }];
-            
-            */
-        }
+            [self shareWebPageToPlatformType:UMSocialPlatformType_QQ message:shareObject video:(shareFromPlat.length > 0)];
             break;
-            
         case myOfferShareTypeZone:
-        {
-            [self shareWebPageToPlatformType:UMSocialPlatformType_Qzone];
-/*
-            [UMSocialData defaultData].extConfig.qzoneData.url = shareURL;
-            [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    
-//                    NSLog(@"myOfferShareTypeZone 分享成功！");
-                    [MobClick event:@"ALL_transpond"];
-                    
-                    NSDictionary *dict = @{@"title" : shareTitle};
-                    [MobClick event:@"Assign_ALL_transpond" attributes:dict];
-
-
-                }
-            }];
- */
-        }
+            [self shareWebPageToPlatformType:UMSocialPlatformType_Qzone message:shareObject video:(shareFromPlat.length > 0)];
             break;
-//            
         case myOfferShareTypeWB:
         {
-            [self shareWebPageToPlatformType:UMSocialPlatformType_Sina];
-/*
-            NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareTitle,shareURL];
-            [[UMSocialControllerService defaultControllerService] setShareText:shareTEXT shareImage:shareImage  socialUIDelegate:self];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
-            */
+            [self shareWebPageToPlatformType:UMSocialPlatformType_Sina message:shareObject video:(shareFromPlat.length > 0)];
         }
             break;
         case myOfferShareTypeEmail:
         {
+   
+            //创建分享消息对象
+            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+            //设置文本
+            messageObject.text = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
+             //调用分享接口
+            [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Email messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    NSLog(@"response data is %@",data);
+                }
+            }];
             
-            [self shareWebPageToPlatformType:UMSocialPlatformType_Email];
 /*
             NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
             [UMSocialSnsService presentSnsIconSheetView:self
@@ -217,8 +160,7 @@
         case myOfferShareTypeCopy:
         {
             UIPasteboard *pab = [UIPasteboard generalPasteboard];
-            NSString *string = shareURL;
-            [pab setString:string];
+            [pab setString:shareURL];
             [KDAlertView showMessage:@"复制成功" cancelButtonTitle:@"好的"];
             
         }
@@ -248,50 +190,33 @@
     
 }
 
-/*
-#pragma mark 友盟分享回调  UMSocialUIDelegate
--(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
-{
-    
-    //根据`responseCode`得到发送结果,如果分享成功
-    if(response.responseCode == UMSResponseCodeSuccess)
-    {
-        //得到分享到的微博平台名
-        //        KDClassLog(@"得到分享到  share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
-        if (self.shareInfor[@"plat"]) {
-            
-            [MobClick event:@"ALL_transpond"];
-            NSDictionary *dict = @{@"title" : self.shareInfor[@"shareTitle"]};
-            [MobClick event:@"Assign_ALL_transpond" attributes:dict];
-        }
-        
-    }
-}
-*/
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType message:(UMShareWebpageObject *)message video:(BOOL)video
 {
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
-    //设置网页地址
-    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
-    
+
     //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
+    messageObject.shareObject = message;
+ 
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
         }else{
+            
+            if(video){
+                
+                [MobClick event:@"ALL_transpond"];
+                NSDictionary *dict = @{@"title" : message.title};
+                [MobClick event:@"Assign_ALL_transpond" attributes:dict];
+            }
+            
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
                 //分享结果消息
                 UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
+                 //第三方原始返回的数据
                 UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
                 
             }else{
@@ -303,31 +228,44 @@
 }
 
 - (void)alertWithError:(NSError *)error
-{
-    NSString *result = nil;
+{/*
+
+  U-Share返回错误类型
+    typedef NS_ENUM(NSInteger, UMSocialPlatformErrorType) {
+        UMSocialPlatformErrorType_Unknow            = 2000,            // 未知错误
+        UMSocialPlatformErrorType_NotSupport        = 2001,            // 不支持（url scheme 没配置，或者没有配置-ObjC， 或则SDK版本不支持或则客户端版本不支持）
+        UMSocialPlatformErrorType_AuthorizeFailed   = 2002,            // 授权失败
+        UMSocialPlatformErrorType_ShareFailed       = 2003,            // 分享失败
+        UMSocialPlatformErrorType_RequestForUserProfileFailed = 2004,  // 请求用户信息失败
+        UMSocialPlatformErrorType_ShareDataNil      = 2005,             // 分享内容为空
+        UMSocialPlatformErrorType_ShareDataTypeIllegal = 2006,          // 分享内容不支持
+        UMSocialPlatformErrorType_CheckUrlSchemaFail = 2007,            // schemaurl fail
+        UMSocialPlatformErrorType_NotInstall        = 2008,             // 应用未安装
+        UMSocialPlatformErrorType_Cancel            = 2009,             // 取消操作
+        UMSocialPlatformErrorType_NotNetWork        = 2010,             // 网络异常
+        UMSocialPlatformErrorType_SourceError       = 2011,             // 第三方错误
+        
+        UMSocialPlatformErrorType_ProtocolNotOverride = 2013,   // 对应的    UMSocialPlatformProvider的方法没有实现
+        UMSocialPlatformErrorType_NotUsingHttps      = 2014,   // 没有用https的请求,@see UMSocialGlobal isUsingHttpsWhenShareContent
+        
+    };
+  
+    */
+    
+    
     if (!error) {
-        result = [NSString stringWithFormat:@"Share succeed"];
+        [MBProgressHUD showSuccess:@"分享成功"];
+        return;
     }
-    else{
-        NSMutableString *str = [NSMutableString string];
-        if (error.userInfo) {
-            for (NSString *key in error.userInfo) {
-                [str appendFormat:@"%@ = %@\n", key, error.userInfo[key]];
-            }
-        }
-        if (error) {
-            result = [NSString stringWithFormat:@"Share fail with error code: %d\n%@",(int)error.code, str];
-        }
-        else{
-            result = [NSString stringWithFormat:@"Share fail"];
-        }
+    
+     if (![error.userInfo[@"message"] containsString:@"cancel"]) {
+         
+        [MBProgressHUD showError: @"分享失败"];
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"share"
-                                                    message:result
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"sure", @"确定")
-                                          otherButtonTitles:nil];
-    [alert show];
+    
+      
+    
+ 
 }
 
 

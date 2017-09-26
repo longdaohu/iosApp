@@ -148,8 +148,6 @@
     }];
     
     self.header_topView.mj_w = XSCREEN_WIDTH;
-    
-    
     CenterHeaderView *header_bottomeView =  [CenterHeaderView centerSectionViewWithResponse:nil actionBlock:^(centerItemType type) {
         
         switch (type) {
@@ -231,7 +229,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+ 
 }
 
 

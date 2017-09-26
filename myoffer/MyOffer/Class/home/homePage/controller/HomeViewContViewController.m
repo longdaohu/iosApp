@@ -366,8 +366,15 @@
     self.TableView.sectionFooterHeight = HEIGHT_ZERO;
     self.TableView.separatorStyle = UITableViewCellSelectionStyleNone;
     self.TableView.backgroundColor = XCOLOR_BG;
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    /*
+     *automaticallyAdjustsScrollViewInsets属性被废弃了，顶部就多了一定的inset，
+     关于安全区域适配，简书上的这篇文章iOS 11 安全区域适配总结介绍得非常详细，请参考这篇文章。
+     */
+    if (@available(iOS 11.0, *)) {
+        self.TableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     [self makeTableHeader];
 

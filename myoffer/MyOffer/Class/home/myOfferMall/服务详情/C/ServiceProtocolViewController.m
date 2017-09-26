@@ -111,7 +111,8 @@
     [self.bgView addSubview:self.tableView];
     self.tableView.backgroundColor = XCOLOR_WHITE;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
+
     
     XWeakSelf
     ServiceProtocalBottomView *bottomView = [[NSBundle  mainBundle] loadNibNamed:@"ServiceProtocalBottomView" owner:self options:nil].lastObject;

@@ -34,6 +34,8 @@
     self.tableView =  tableView;
     [self.view addSubview:tableView];
     tableView.backgroundColor = XCOLOR_BG;
+    self.tableView.estimatedSectionFooterHeight = 0;
+
 }
 
 

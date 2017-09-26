@@ -237,7 +237,7 @@ static NSString *identify = @"pay";
         return;
     }
     
-    
+   
     
 //    [[AppDelegate sharedDelegate] updateUmeng];
     
@@ -252,6 +252,7 @@ static NSString *identify = @"pay";
         if(dict != nil){
             
             NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+            
             //   调起微信支付
             PayReq  *req           = [[PayReq alloc] init];
             req.partnerId           = [dict objectForKey:@"partnerid"];
@@ -261,7 +262,7 @@ static NSString *identify = @"pay";
             req.package             = [dict objectForKey:@"package"];
             req.sign                = [dict objectForKey:@"sign"];
             [WXApi sendReq:req];
-            
+           
             //                日志输出
 //            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
             
@@ -326,9 +327,6 @@ static NSString *identify = @"pay";
   
 
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

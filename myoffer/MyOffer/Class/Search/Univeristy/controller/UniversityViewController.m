@@ -378,7 +378,8 @@ typedef enum {
     self.tableView.delegate     = self;
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
-    
+    self.tableView.estimatedSectionFooterHeight = 0;
+
     [self makeTopNavigaitonView];
     
 }

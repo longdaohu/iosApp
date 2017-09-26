@@ -22,7 +22,6 @@
 #import "HomeSectionHeaderView.h"
 #import "MessageArticle.h"
 
-//@interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate,UMSocialUIDelegate>
 @interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate>
 
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -172,7 +171,7 @@
     self.tableView.delegate =self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    
+    self.tableView.estimatedSectionFooterHeight = 0;
 }
 
 - (void)makeUI{

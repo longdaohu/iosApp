@@ -137,6 +137,8 @@
     self.cityTableView.backgroundColor = XCOLOR_WHITE;
     self.cityTableView.showsVerticalScrollIndicator = NO;
     [self.view  addSubview:self.cityTableView];
+     self.cityTableView .estimatedSectionHeaderHeight = 0;
+     self.cityTableView .estimatedSectionFooterHeight = 0;
     
 }
 
@@ -147,18 +149,13 @@
     tableView.delegate = self;
     tableView.tableFooterView = [[UIView alloc] init];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
+
     return tableView;
 }
 
 
 #pragma mark : UITableViewDelegate  UITableViewDataSoure
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     NSInteger rows = 0;
@@ -302,8 +299,6 @@
     
 }
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
     return HEIGHT_ZERO;
@@ -313,11 +308,6 @@
 
     return HEIGHT_ZERO;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//    return  40;
-//}
 
 
 - (void)didReceiveMemoryWarning {

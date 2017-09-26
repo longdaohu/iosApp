@@ -281,6 +281,8 @@
 - (void)makeCityCollectViewWithFrame:(CGRect)frame{
     
     self.city_tableView =[self tableViewWithUITableViewStyle:UITableViewStyleGrouped frame:frame];
+    self.city_tableView .estimatedSectionFooterHeight = 0;
+    self.city_tableView .estimatedSectionHeaderHeight = 0;
     [self.bgView addSubview:self.city_tableView];
     
 }

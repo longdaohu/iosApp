@@ -72,7 +72,7 @@
     [self makeSearchBar];
     
     [self makeTableView];
-    
+
 }
 
 -(void)makeSearchBar{

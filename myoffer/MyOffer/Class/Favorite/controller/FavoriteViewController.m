@@ -59,7 +59,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
-    
+    self.tableView.estimatedSectionHeaderHeight = 0;
+
 }
 
 
