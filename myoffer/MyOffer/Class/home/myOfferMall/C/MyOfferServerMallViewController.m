@@ -32,22 +32,6 @@
 
 @end
 
-/*
- - (void)viewWillAppear:(BOOL)animated{
- 
- [super viewWillAppear:animated];
- 
- 
- [self.navigationController setNavigationBarHidden:YES animated:animated];
- 
- [self whenViewWillAppearWithPlayer];
- 
- [MobClick beginLogPageView:@"page超导详情"];
- }
- 
- 
-
- */
 
 
 @implementation MyOfferServerMallViewController
@@ -304,7 +288,7 @@
             
         default:{
             ServiceSKUFrame *itemFrame = group.items[indexPath.row];
-            
+ 
             cell_Height = itemFrame.cell_Height;
         }
             break;

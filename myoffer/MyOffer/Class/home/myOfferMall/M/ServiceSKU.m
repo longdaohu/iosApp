@@ -24,9 +24,24 @@
 }
 
 - (BOOL)isZheKou{
-    
-    
-    return  [self.price isEqualToString:self.display_price];
+ 
+    if (!self.display_price) {
+        
+        return  NO;
+        
+    }else{
+        
+        if (self.display_price.integerValue == 0) {
+            
+            return NO;
+            
+        }else{
+           
+            return  [self.price isEqualToString: self.display_price] ? NO : YES;
+
+        }
+ 
+    }
 }
 
 - (NSString *)price_str{
@@ -38,7 +53,6 @@
     
     return [self fomatterWithPrice:self.display_price];
 }
-
 
 - (NSString *)fomatterWithPrice:(NSString *)price{
     

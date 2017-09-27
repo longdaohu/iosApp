@@ -102,7 +102,6 @@
     self.flexView = flexView;
     flexView.image_name = @"service-info-bg";
     
-    
     self.tableView.contentInset = UIEdgeInsetsMake(iconHeight - 60, 0, 80, 0);
     
 }
@@ -186,7 +185,6 @@
     
     //每次刷新 新建WebView
     [self makeWebView];
-    
  
     ServiceItem *item = [ServiceItem mj_objectWithKeyValues:response];
     

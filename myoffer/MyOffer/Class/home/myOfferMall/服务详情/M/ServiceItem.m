@@ -78,6 +78,27 @@
     return [self fomatterWithPrice:self.display_price];
 }
 
+- (BOOL)isZheKou{
+    
+    if (!self.display_price) {
+        
+        return  NO;
+        
+    }else{
+        
+        if (self.display_price.integerValue == 0) {
+            
+            return NO;
+            
+        }else{
+            
+            return  (self.price.integerValue == self.display_price.integerValue) ? NO : YES;
+            
+        }
+        
+    }
+}
+
 
 - (NSString *)fomatterWithPrice:(NSNumber *)price{
     

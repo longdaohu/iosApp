@@ -49,7 +49,7 @@
     CGFloat display_priceH = 13;
     CGFloat display_priceX = CGRectGetMaxX(self.priceFrame);
     CGFloat display_priceY = priceY + priceH - display_priceH;
-    CGFloat display_priceW = 100;
+    CGFloat display_priceW = 200;
     self.display_priceFrame = CGRectMake(display_priceX, display_priceY, display_priceW, display_priceH);
     
     // 4 分隔线1

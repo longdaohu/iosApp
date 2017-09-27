@@ -171,7 +171,7 @@
     
 }
 
-#pragma mark ——— UITableViewDelegate  UITableViewDATA
+#pragma mark : UITableViewDelegate  UITableViewDATA
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -210,7 +210,7 @@
 }
 
 
-#pragma mark ——— UIScrollViewDelegate
+#pragma mark : UIScrollViewDelegate
 -(void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     [_searchBar resignFirstResponder];
@@ -227,7 +227,7 @@
 }
 
 
-#pragma mark ————  UISearchBarDelegate
+#pragma mark : UISearchBarDelegate
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
     [self dismissViewControllerAnimated:YES completion:^{}];

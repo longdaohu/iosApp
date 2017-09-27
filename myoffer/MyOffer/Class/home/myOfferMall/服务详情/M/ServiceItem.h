@@ -15,6 +15,7 @@
 @property(nonatomic,strong)NSString *price_str;
 @property(nonatomic,strong)NSNumber *display_price;
 @property(nonatomic,strong)NSString *display_price_str;
+@property(nonatomic,assign)BOOL isZheKou;
 @property(nonatomic,assign)BOOL online;
 @property(nonatomic,strong)NSNumber *rank;
 @property(nonatomic,copy)NSString *detail;
@@ -40,4 +41,6 @@
 @property(nonatomic,copy)NSDictionary *comment_country;
 @property(nonatomic,strong)NSDictionary *country_Attibute;
 @property(nonatomic,strong)NSDictionary *serviceType_Attibute;
+@property(nonatomic,assign)BOOL reduce_flag;
+
 @end

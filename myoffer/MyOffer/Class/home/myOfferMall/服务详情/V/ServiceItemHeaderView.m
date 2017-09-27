@@ -141,20 +141,26 @@
     _itemFrame = itemFrame;
     
     self.name.text = itemFrame.item.name;
-    
     self.price.text = itemFrame.item.price_str;
-    
-    if (![self.price.text isEqualToString: itemFrame.item.display_price_str]) {
-        self.display_price.text = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price];
-        NSRange dis_price_Rangne = NSMakeRange(0, self.display_price.text.length);
-        NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:self.display_price.text];
-        [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
-        self.display_price.attributedText = attribueStr;
-        
-    }
-    
     self.peopleDiscLab.text = itemFrame.item.peopleDisc;
     self.presentDiscLab.text = itemFrame.item.presentDisc;
+    self.display_price.hidden = !itemFrame.item.isZheKou;
+    
+ 
+    if (itemFrame.item.isZheKou) {
+        
+        NSString *display_price = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price];
+        NSRange dis_price_Rangne = NSMakeRange(0, display_price.length);
+        if (itemFrame.item.reduce_flag) {
+          display_price = [NSString stringWithFormat:@"%@  (已减价格)",display_price];
+        }
+        
+        NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:display_price];
+        [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
+        self.display_price.attributedText = attribueStr;
+    }
+    
+
     
     self.name.frame = itemFrame.name_Frame;
     self.price.frame = itemFrame.priceFrame;

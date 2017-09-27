@@ -83,17 +83,17 @@
     UILabel *name = [[UILabel alloc] init];
     self.name = name;
     [self addLable:name fontSize:16 textColor:XCOLOR_TITLE];
-    
-    // 4 、 价格
-    UILabel *price = [[UILabel alloc] init];
-    self.price = price;
-    [self addLable:price fontSize:18 textColor:XCOLOR_RED];
-    
+
     // 5 、 分隔线
     UILabel *line = [[UILabel alloc] init];
     self.line = line;
     [self addLable:line fontSize:18 textColor:XCOLOR_SUBTITLE];
     line.backgroundColor = XCOLOR_line;
+    
+    // 4 、 价格
+    UILabel *price = [[UILabel alloc] init];
+    self.price = price;
+    [self addLable:price fontSize:18 textColor:XCOLOR_RED];
     
     // 6 、原价
     UILabel *display_price = [[UILabel alloc] init];
@@ -130,35 +130,26 @@
     
 }
 
-
 - (void)setSKU_Frame:(ServiceSKUFrame *)SKU_Frame{
 
     _SKU_Frame = SKU_Frame;
-    
-   
+ 
     [self.coverView sd_setImageWithURL:[NSURL URLWithString:SKU_Frame.SKU.cover_path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
-    
     self.name.text = SKU_Frame.SKU.name;
     self.price.text = SKU_Frame.SKU.price_str;
+    self.present_Value.text = SKU_Frame.SKU.comment_present[@"value"];
+    self.zheView.hidden = !SKU_Frame.SKU.isZheKou;
+    self.display_price.hidden = !SKU_Frame.SKU.isZheKou;
     
-    
-    self.display_price.hidden = SKU_Frame.SKU.isZheKou;
-    self.zheView.hidden = self.display_price.hidden;
-    
-    if (!SKU_Frame.SKU.isZheKou) {
-        
+    if (SKU_Frame.SKU.isZheKou) {
          self.display_price.text = SKU_Frame.SKU.display_price_str;
         NSRange dis_price_Rangne = NSMakeRange(0, self.display_price.text.length);
         NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:SKU_Frame.SKU.display_price_str];
         [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
-
         self.display_price.attributedText = attribueStr;
     }
-    
-    self.present_Value.text = SKU_Frame.SKU.comment_present[@"value"];
-    
-    
+
+ 
     self.top_line.frame = SKU_Frame.top_line_Frame;
     self.coverView.frame = SKU_Frame.cover_Frame;
     self.zheView.frame = SKU_Frame.zhe_Frame;
