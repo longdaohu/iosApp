@@ -61,10 +61,8 @@
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
     NSNumber *number = [NSNumber numberWithFloat:price.floatValue];
     NSString *numberString = [numberFormatter stringFromNumber: number];
-    
-    NSString *final_Str = [NSString stringWithFormat:@"￥ %@",numberString];
-    
-    return  final_Str;
+ 
+    return  [NSString stringWithFormat:@"￥ %@",numberString];
 }
 
 

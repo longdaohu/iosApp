@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ServiceItem : NSObject
+@property(nonatomic,assign)BOOL login_status;
+@property(nonatomic,copy)NSString *service_id;
 @property(nonatomic,copy)NSString *product_id;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,strong)NSNumber *price;
@@ -42,5 +44,6 @@
 @property(nonatomic,strong)NSDictionary *country_Attibute;
 @property(nonatomic,strong)NSDictionary *serviceType_Attibute;
 @property(nonatomic,assign)BOOL reduce_flag;
+@property(nonatomic,strong)NSArray *comment_attr;
 
 @end

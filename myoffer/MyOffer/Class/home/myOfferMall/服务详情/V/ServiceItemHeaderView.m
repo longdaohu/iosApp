@@ -149,7 +149,7 @@
  
     if (itemFrame.item.isZheKou) {
         
-        NSString *display_price = [NSString stringWithFormat:@"原价 %@",itemFrame.item.display_price];
+        NSString *display_price =  itemFrame.item.display_price_str;
         NSRange dis_price_Rangne = NSMakeRange(0, display_price.length);
         if (itemFrame.item.reduce_flag) {
           display_price = [NSString stringWithFormat:@"%@  (已减价格)",display_price];

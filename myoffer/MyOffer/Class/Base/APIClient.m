@@ -103,7 +103,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     if (!success) success = ^(NSInteger statusCode , NSDictionary *response) {};
     
     if (!failure) failure = ^(NSInteger statusCode , NSError *error) {};
-    
+ 
     NSURLSessionDataTask * task = [_URLSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *_response, NSError *error) {
         
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)_response;
@@ -255,15 +255,16 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
-    
-     
-     
-     if ([[AppDelegate sharedDelegate] isLogin]) {
+ 
+     if (LOGIN) {
      
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
      
+     }else{
+         //cookie中保存了登录信息，可能会引起数据错误
+         [request setValue:@"" forHTTPHeaderField:@"Cookie"];
      }
- 
+    
   
     return [self startTaskWithRequest:request expectedStatusCodes:expectedStatusCode success:success failure:failure];
     

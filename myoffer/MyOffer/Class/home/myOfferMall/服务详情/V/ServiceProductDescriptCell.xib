@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="serviceProduct" rowHeight="85" id="KGk-i7-Jjw" customClass="ServiceProductDescriptCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="西元前三千年，印度河流域 離大英帝國的統治而獨立，如今是世界上最大的民主國家，隨著西方強權的衰落，這個古老文明大國，再" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5K-xc-T7l">
+                        <rect key="frame" x="80" y="10" width="230" height="67"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="67" id="Ijc-CU-Yfn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目标人群" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-JV-C9d">
+                        <rect key="frame" x="10" y="10" width="60" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="KNL-G3-pkY"/>
+                            <constraint firstAttribute="width" constant="60" id="KWV-Lk-CxO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvz-cp-GJh" userLabel="line">
+                        <rect key="frame" x="10" y="84" width="300" height="0.5"/>
+                        <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="eb7-dw-ZaS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dvz-cp-GJh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8RC-Ws-SBf"/>
+                    <constraint firstAttribute="trailing" secondItem="dvz-cp-GJh" secondAttribute="trailing" constant="10" id="AWp-qr-HED"/>
+                    <constraint firstItem="Rhc-JV-C9d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="blk-ao-e7a"/>
+                    <constraint firstAttribute="trailing" secondItem="x5K-xc-T7l" secondAttribute="trailing" constant="10" id="rRA-5Y-b6c"/>
+                    <constraint firstAttribute="bottom" secondItem="dvz-cp-GJh" secondAttribute="bottom" id="wsB-Xe-bbp"/>
+                    <constraint firstItem="Rhc-JV-C9d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="yA0-Sn-Jeq"/>
+                    <constraint firstItem="x5K-xc-T7l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="yJW-iD-OU4"/>
+                    <constraint firstItem="x5K-xc-T7l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="80" id="yf3-sM-roX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="keyLab" destination="Rhc-JV-C9d" id="tca-Gu-upg"/>
+                <outlet property="valueHeightConstant" destination="Ijc-CU-Yfn" id="HqC-Mn-iSb"/>
+                <outlet property="valueLab" destination="x5K-xc-T7l" id="UFN-Yk-D01"/>
+            </connections>
+            <point key="canvasLocation" x="38" y="26.5"/>
+        </tableViewCell>
+    </objects>
+</document>

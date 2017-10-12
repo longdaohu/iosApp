@@ -70,12 +70,16 @@
 
 - (NSString *)price_str{
     
-    return [self fomatterWithPrice:self.price];
+    NSString *tmp_price =[self fomatterWithPrice:self.price];
+    
+    return [NSString stringWithFormat:@"￥ %@",tmp_price];
 }
 
 - (NSString *)display_price_str{
+ 
+    NSString *tmp_price = [self fomatterWithPrice:self.display_price];
     
-    return [self fomatterWithPrice:self.display_price];
+    return [NSString stringWithFormat:@"原价￥ %@",tmp_price];
 }
 
 - (BOOL)isZheKou{
@@ -105,11 +109,8 @@
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    NSString *numberString = [numberFormatter stringFromNumber: price];
-    
-    NSString *final_Str = [NSString stringWithFormat:@"￥ %@",numberString];
-    
-    return  final_Str;
+ 
+    return   [numberFormatter stringFromNumber: price];
 }
 
 

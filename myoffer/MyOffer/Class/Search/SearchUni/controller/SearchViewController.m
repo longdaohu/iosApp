@@ -22,6 +22,7 @@
 @property(nonatomic,strong)NSArray *recommentArray;
 //历史搜索
 @property(nonatomic,strong)NSArray *historyArray;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarConstant;
 
 @end
 
@@ -250,6 +251,9 @@
     
     [self.navigationController pushViewController:search animated:YES];
 }
+
+
+
 
 -(void)dealloc
 {

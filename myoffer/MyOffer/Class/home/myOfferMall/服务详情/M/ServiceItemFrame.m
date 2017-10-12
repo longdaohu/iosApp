@@ -177,8 +177,23 @@
     CGFloat header_bottom_H = headerH - header_bottom_Y;
     self.header_bottomView_Frame = CGRectMake(header_bottom_X, header_bottom_Y, header_bottom_W, header_bottom_H);
     
+    NSMutableArray *tmp_comment = [NSMutableArray array];
     
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.minimumLineHeight = 20;
+    NSDictionary *attr = @{
+                           NSFontAttributeName:[UIFont systemFontOfSize:14],
+                           NSParagraphStyleAttributeName : paragraphStyle
+                           };
+    for (NSDictionary *comment in item.comment_attr) {
+        CGSize coment_size = [comment[@"value"]  KD_sizeWithAttribute:attr maxWidth:(XSCREEN_WIDTH - 90)];
+        CGFloat comment_height  = coment_size.height < 20 ? 20 : coment_size.height;
+        [tmp_comment addObject:@(comment_height)];
+    }
+    
+    self.commentFrames = [tmp_comment copy];
 }
+
 
 
 - (CGSize)contentSizeWithString:(NSString *)str MaxWidth:(CGFloat)maxWidth fontSize:(CGFloat)fontSize{

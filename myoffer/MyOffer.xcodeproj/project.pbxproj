@@ -471,6 +471,8 @@
 		AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */; };
 		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
 		AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC47A411ECC20D60085F19A /* UniverstityTCell.m */; };
+		AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */; };
+		AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
@@ -1322,6 +1324,9 @@
 		AEC2B6141E948C5300631F2C /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareMyOffer.png; sourceTree = "<group>"; };
 		AEC47A401ECC20D60085F19A /* UniverstityTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniverstityTCell.h; sourceTree = "<group>"; };
 		AEC47A411ECC20D60085F19A /* UniverstityTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniverstityTCell.m; sourceTree = "<group>"; };
+		AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProductDescriptCell.h; sourceTree = "<group>"; };
+		AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProductDescriptCell.m; sourceTree = "<group>"; };
+		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUpdateView.h; sourceTree = "<group>"; };
 		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
@@ -2304,6 +2309,9 @@
 		AE6FF2971E8912A200C2A013 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */,
+				AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */,
+				AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */,
 				AE96A36A1E8BBF96006E8E35 /* ServiceItemHeaderView.h */,
 				AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */,
 				AE2DE4461E962B51009683B0 /* ServiceItemHeaderCell.h */,
@@ -3878,6 +3886,7 @@
 				AE1FD7351D5C929500FFD5A8 /* Pre-comp 1_00018.png in Resources */,
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
 				AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */,
+				AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
 				AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */,
 				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
@@ -4129,6 +4138,7 @@
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */,
+				AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */,
 				AE3AB6AC1F21A27300A3C7E3 /* SMHotModel.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,

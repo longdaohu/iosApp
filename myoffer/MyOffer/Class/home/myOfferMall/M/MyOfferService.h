@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface MyOfferService : NSObject
+@property(nonatomic,assign)BOOL login_status;
 @property(nonatomic,strong)NSArray *skus;
 @property(nonatomic,strong)NSArray *banners;
 
 @end
+
+

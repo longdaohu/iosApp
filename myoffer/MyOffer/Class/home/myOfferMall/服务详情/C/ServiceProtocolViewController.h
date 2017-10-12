@@ -7,20 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceItem.h"
+#import "ServiceItemFrame.h"
 
 @interface ServiceProtocolViewController : BaseViewController
 
-@property(nonatomic,strong)NSArray *agreements;
-
-@property(nonatomic,copy)NSString *service_id;
-
+@property(nonatomic,strong)ServiceItemFrame *itemFrame;
 
 /*
  * showProtocalViw 显示
  * HidenProtocalView 不显示
  */
-- (void)showProtocalViw;
-- (void)HidenProtocalView;
+//- (void)showProtocalViw;
+//- (void)HidenProtocalView;
+- (void)protocalShow:(BOOL)show;
 
+- (void)productDescriptionShow:(BOOL)show;
 
 @end

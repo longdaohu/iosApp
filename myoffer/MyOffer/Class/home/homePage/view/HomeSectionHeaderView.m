@@ -53,8 +53,7 @@
         
         
         UIButton *moreBtn =[[UIButton alloc] init];
-        self.moreBtn      = moreBtn;
-//        [moreBtn setTitle:GDLocalizedString(@"Discover_more") forState:UIControlStateNormal];
+         self.moreBtn      = moreBtn;
         [moreBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
          moreBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [moreBtn addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
@@ -66,8 +65,7 @@
         [self addSubview:arrowView];
         arrowView.image = [UIImage imageNamed:@"common_icon_arrow"];
         arrowView.hidden = YES;
-
-        
+ 
     }
     return self;
 }
@@ -76,12 +74,9 @@
 - (void)setTitle:(NSString *)title{
 
     _title = title;
-    
-//    NSArray *items = [title componentsSeparatedByString:@"+"];
-    
+ 
     self.TitleLab.text = title;
-//
-//    [self.moreBtn setTitle:items.lastObject forState:UIControlStateNormal];
+ 
 }
 
 
@@ -113,12 +108,9 @@
 
 
 - (void)arrowButtonHiden:(BOOL)hiden{
-
     
     self.moreBtn.hidden = hiden;
-    
     self.arrowView.hidden = hiden;
-    
 
 }
 

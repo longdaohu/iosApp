@@ -14,6 +14,7 @@
 #import "ServiceItemBottomView.h"
 #import "ServiceProtocolViewController.h"
 #import "myofferFlexibleView.h"
+#import "HomeSectionHeaderView.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
 //显示内容信息 webView
@@ -44,6 +45,11 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
   
     [MobClick beginLogPageView:@"page留学购详情"];
+    
+    if (self.service_Frame) {
+        
+        if (self.service_Frame.item.login_status != LOGIN) {[self makeDataSource];}
+    }
 }
 
 
@@ -135,9 +141,7 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
-    
     decisionHandler(WKNavigationActionPolicyAllow);
-    //decisionHandler(WKNavigationActionPolicyCancel);  不允许
 }
 
 // WKNavigationDelegate 页面加载完成之后调用
@@ -145,24 +149,15 @@
     
     
     [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
-        
-        
+ 
         NSString *web_height = [NSString stringWithFormat:@"%@",Result];
-        
-        
-        self.web_wk.mj_h = [web_height floatValue] + 20;
-        
-        
-        [self.tableView reloadData];
+         self.web_wk.mj_h = [web_height floatValue] + 20;
+         [self.tableView reloadData];
         
         
     }];
-    
-    
-
-    
+ 
 }
-
 
 - (void)makeDataSource{
     
@@ -187,7 +182,8 @@
     [self makeWebView];
  
     ServiceItem *item = [ServiceItem mj_objectWithKeyValues:response];
-    
+    item.login_status = LOGIN;
+    item.service_id = self.service_id;
     ServiceItemFrame *itemFrame = [[ServiceItemFrame alloc] init];
     
     itemFrame.item = item;
@@ -197,7 +193,6 @@
     self.headerView.itemFrame = itemFrame;
   
     self.tableView.tableHeaderView =  self.headerView;
-    
  
     
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
@@ -211,7 +206,7 @@
     
     self.topNavigationView.titleName = item.name ;
     
-    self.protocalVC.agreements = item.agreements;
+    self.protocalVC.itemFrame = itemFrame;
 }
 
 
@@ -219,7 +214,7 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -277,7 +272,6 @@
     return 1;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -292,17 +286,38 @@
     
     [web_bgv addSubview:self.web_wk];
     
-
     
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 0, XSCREEN_WIDTH - 20, 0.5)];
+    line.backgroundColor = XCOLOR_line;
+    [cell.contentView addSubview:line];
+ 
     return cell;
     
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    XWeakSelf
+    HomeSectionHeaderView *sectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:@"商品参数"];
+    sectionView.backgroundColor = XCOLOR_WHITE;
+    [sectionView arrowButtonHiden:NO];
+    sectionView.actionBlock = ^{
+        
+        [weakSelf showProductionDescription];
+    };
+    
+    return sectionView;
+
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return self.web_wk.mj_h;
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return Section_header_Height_nomal;
 }
 
 
@@ -328,10 +343,8 @@
     if (sender.currentTitle.length) {
         
         RequireLogin
-        
-        self.protocalVC.service_id = self.service_id;
-        
-        [self.protocalVC showProtocalViw];
+ 
+        [self.protocalVC protocalShow:YES];
         
     }else{
         
@@ -370,11 +383,20 @@
         
  }
 
+- (void)showProductionDescription{
+    
+    if(0 < self.service_Frame.item.comment_attr.count) {
+
+        [self.protocalVC productDescriptionShow:YES];
+
+    }
+    
+}
+
 - (void)dealloc{
     
     KDClassLog(@"dealloc 留学服务详情");
 }
-
 
 
 - (void)didReceiveMemoryWarning {

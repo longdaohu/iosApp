@@ -26,6 +26,7 @@
 @property(nonatomic,assign)CGRect header_BgViewFrame;
 @property(nonatomic,assign)CGRect header_bottomView_Frame;
 @property(nonatomic,strong)NSArray *attributeFrames;
+@property(nonatomic,strong)NSArray *commentFrames;
 @property(nonatomic,strong)NSArray *centerViewCell_Frames;
 
 

@@ -32,8 +32,6 @@
 
 @end
 
-
-
 @implementation MyOfferServerMallViewController
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -41,6 +39,16 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    if (self.sevice) {
+
+        if (self.sevice.login_status != LOGIN) {
+
+            [self makeDataSource];
+
+         }
+
+    }
 
     [MobClick beginLogPageView:@"page留学购首页"];
     
@@ -168,20 +176,15 @@
 
     //1 数据模型
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
-    
-    
+ 
     //5 轮播图匹配数据
     NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
     if (images.count > 0) {
         
-//        self.headerView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height);
         self.tableView.tableHeaderView =  self.autoLoopView;
-//        [self.headerView addSubview:self.autoLoopView];
         self.autoLoopView.imageURLStringsGroup = images;
     }
-    
-    
-
+ 
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];
     myofferGroupModel *one_group =[myofferGroupModel groupWithItems:@[self.overSeaArr] header:@"留学目的地"];

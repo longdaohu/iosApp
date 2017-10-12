@@ -26,6 +26,7 @@
 @property(nonatomic,strong)myofferFlexibleView *flexView;
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
 @property(nonatomic,assign)CGRect banViewFrame;
+@property(nonatomic,assign)BOOL login_status;
 
 @end
 
@@ -36,6 +37,15 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    if (self.groups.count > 0) {
+
+        if (self.login_status != LOGIN) {
+
+            [self makeDataSource];
+
+         }
+    }
     
     [MobClick beginLogPageView:@"page留学购国家"];
 }
@@ -198,7 +208,6 @@
 //更新UI
 - (void)updateUIWithResponse:(id)response {
     
-    
     NSArray *skus  = [ServiceSKU mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     
     NSMutableArray *items = [NSMutableArray array];
@@ -221,14 +230,14 @@
         }
         
     }
-    
-    
+ 
     self.current_frames = [items copy];
     
     [self.tableView reloadData];
-    
  
     [self emptyWithArray:self.current_frames];
+    
+    self.login_status = LOGIN;
 }
 
 
