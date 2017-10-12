@@ -407,6 +407,11 @@
 
         self.bgView_protocal.hidden = NO;
         self.bgView_product.hidden = YES;
+ 
+    }else{
+        
+        [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
+
     }
  
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -421,11 +426,13 @@
  
     self.current_product = show;
     
+    CGFloat alpha = show ? 1 : 0;
+    
     if (show) {
     
         [self makeCurrentView];
 
-        self.view.alpha = 1;
+        self.view.alpha = alpha;
         self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         self.bgView_protocal.hidden = YES;
         self.bgView_product.hidden = NO;
@@ -439,9 +446,11 @@
         return;
     }
     
+    [self.tableView setContentOffset:CGPointMake(0,0) animated:NO];
+ 
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
-        self.view.alpha = 0;
+        self.view.alpha = alpha;
 
     } completion:^(BOOL finished) {
         
@@ -459,9 +468,7 @@
         
         [self productDescriptionShow:NO];
    }
-    
-//    [self protocalShow:NO];
-}
+    }
 
 - (void)protocalViewWithAgree:(BOOL)isAgree{
     
