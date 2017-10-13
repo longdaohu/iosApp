@@ -105,6 +105,8 @@
     
     [self makeTopNavigaitonView];
     
+    self.view.clipsToBounds = YES;
+    
 }
 
 //头部图片

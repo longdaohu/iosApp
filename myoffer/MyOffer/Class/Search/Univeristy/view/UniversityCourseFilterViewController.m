@@ -9,8 +9,6 @@
 #import "UniversityCourseFilterViewController.h"
 #import "UniversityCourseFilterCell.h"
 
-#define CELL_HEIGHT_DAFAULT  50
-
 @interface UniversityCourseFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *topView;
 //学位按钮

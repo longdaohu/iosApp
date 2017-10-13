@@ -334,6 +334,9 @@ typedef enum {
     [self makeBottomView];
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.footer.mj_h, 0);
+    
+    self.view.clipsToBounds = YES;
+
 
 }
 

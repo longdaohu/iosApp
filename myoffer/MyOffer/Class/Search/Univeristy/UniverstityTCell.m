@@ -38,13 +38,6 @@
 
 @implementation UniverstityTCell
 
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    [super setSelected:selected animated:animated];
-//
-//    // Configure the view for the selected state
-//}
-
-
 + (instancetype)cellViewWithTableView:(UITableView *)tableView{
     
     static NSString *identifier =@"uni_cell";
@@ -248,7 +241,26 @@
 }
 
 
-
+- (void)setUniFrameModel:(UniversityFrameModel *)uniFrameModel{
+    
+    _uniFrameModel = uniFrameModel;
+ 
+    self.hot.hidden = YES;
+    
+    [self.iconView.logoImageView KD_setImageWithURL:uniFrameModel.universityModel.logo];
+    self.iconView.frame = uniFrameModel.icon_Frame;
+    
+    
+    self.nameLab.text = uniFrameModel.universityModel.name;
+    self.nameLab.frame = uniFrameModel.name_Frame;
+    
+    
+    self.official_nameLab.text = uniFrameModel.universityModel.official_name;
+    self.official_nameLab.frame = uniFrameModel.official_Frame;
+    
+}
 
 
 @end
+
+

@@ -11,7 +11,6 @@
 
 @interface MyOfferUniversityModel : NSObject
 @property(nonatomic,copy)NSString *NO_id;
-@property(nonatomic,copy)NSString *state;
 @property(nonatomic,copy)NSString *short_id;
 @property(nonatomic,copy)NSString *postcode;
 @property(nonatomic,copy)NSString *official_name;
@@ -24,11 +23,13 @@
 @property(nonatomic,copy)NSString *logo;
 @property(nonatomic,copy)NSString *address;
 @property(nonatomic,assign)BOOL hot;
-@property(nonatomic,copy)NSString *city;
 @property(nonatomic,strong)NSNumber *ranking_ti;
 @property(nonatomic,copy)NSString *ranking_ti_str;
+@property(nonatomic,copy)NSString *rank;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *country;
+@property(nonatomic,copy)NSString *state;
+@property(nonatomic,copy)NSString *city;
 @property(nonatomic,copy)NSString *address_long;
 @property(nonatomic,strong)NSString *address_short;
 @property(nonatomic,strong)NSArray *courses;

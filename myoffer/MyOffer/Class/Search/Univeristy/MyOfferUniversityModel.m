@@ -14,6 +14,7 @@
 {
     return @{
              @"NO_id" : @"_id",
+             @"NO_id" : @"id",
              @"found_year" : @"found"
              };
     

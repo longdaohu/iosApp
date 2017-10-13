@@ -100,6 +100,9 @@
     
     [self makeFlexiableView];
     
+    self.view.clipsToBounds = YES;
+
+    
 }
 
 

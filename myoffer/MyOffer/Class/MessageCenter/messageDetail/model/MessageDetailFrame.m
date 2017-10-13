@@ -121,7 +121,6 @@
     self.Summary_Frame = CGRectMake(Summary_x, Summary_y,SUsize.width, SUsize.height);
     
     
-    
     self.ThreeLineFrame = CGRectMake(SECx, CGRectGetMaxY(self.Summary_Frame) + 4 * MARGIN, SECw, LineHeight);
     
     self.MessageDetailHeight = CGRectGetMaxY(self.ThreeLineFrame) + MARGIN * 2;

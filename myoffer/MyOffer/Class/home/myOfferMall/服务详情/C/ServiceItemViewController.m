@@ -85,6 +85,8 @@
     
     [self makeProtocalView];
     
+    self.view.clipsToBounds = YES;
+    
 }
 
 - (void)makeProtocalView{

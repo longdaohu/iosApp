@@ -64,6 +64,10 @@
 #define kAPISelectorWoYaoLiuXue @"POST api/fastpass"
 //热门留学城市
 #define kAPISelectorCatigoryHotCities @"GET api/hotcities"
+//排名基本数据
+#define kAPISelectorCatigoryBaseFilterData @"GET api/ranking/filter"
+#define kAPISelectorCatigoryRanks @"GET api/rankings"
+#define kAPISelectorCatigoryRankItem @"GET api/ranking/"
 //留学资讯
 #define kAPISelectorMessageDetail @"GET api/article/"
 //留学资讯推荐

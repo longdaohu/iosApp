@@ -13,7 +13,6 @@
 + (instancetype)flexibleViewWithFrame:(CGRect)frame{
     
     myofferFlexibleView *flexiableView = [[myofferFlexibleView alloc] initWithFrame:frame];
-    flexiableView.clipsToBounds = YES;
 
     return flexiableView;
 }

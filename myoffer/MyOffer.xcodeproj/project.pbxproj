@@ -221,6 +221,15 @@
 		AE4C71471F4EE6460069E83E /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71401F4EE6460069E83E /* MenuCell.m */; };
 		AE4C71481F4EE6460069E83E /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71421F4EE6460069E83E /* MenuItem.m */; };
 		AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71441F4EE6460069E83E /* MyofferUser.m */; };
+		AE5113201F8F12FD0009D274 /* rankFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE51131F1F8F12FD0009D274 /* rankFilter.m */; };
+		AE5113231F8F36BF0009D274 /* RankTypeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113221F8F36BF0009D274 /* RankTypeItem.m */; };
+		AE5113261F8F3B7C0009D274 /* RankTypeItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113251F8F3B7C0009D274 /* RankTypeItemFrame.m */; };
+		AE5113291F8F41F20009D274 /* RankTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113281F8F41F20009D274 /* RankTypeCell.m */; };
+		AE5113301F8F54BE0009D274 /* RankItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE51132F1F8F54BE0009D274 /* RankItemViewController.m */; };
+		AE5113331F8F5AA90009D274 /* RankItemFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113321F8F5AA90009D274 /* RankItemFrameModel.m */; };
+		AE5113361F8F5B830009D274 /* UniversityFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113351F8F5B830009D274 /* UniversityFrameModel.m */; };
+		AE5113391F8F5C8B0009D274 /* RankTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5113381F8F5C8B0009D274 /* RankTypeModel.m */; };
+		AE51133C1F8F610A0009D274 /* RankTypeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE51133B1F8F610A0009D274 /* RankTypeHeaderView.m */; };
 		AE53E86B1F73919800588F0C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86A1F73919800588F0C /* Social.framework */; };
 		AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */; };
 		AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */; };
@@ -282,6 +291,8 @@
 		AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE7FFCB91EC07E1C00D2FDCB /* into005.jpeg */; };
 		AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE7FFCBA1EC07E1C00D2FDCB /* into003.jpeg */; };
 		AE7FFCC11EC07E1C00D2FDCB /* into004.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE7FFCBB1EC07E1C00D2FDCB /* into004.jpeg */; };
+		AE81E6301F9060A2000C61EC /* CatigoryCountryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE81E62F1F9060A2000C61EC /* CatigoryCountryViewController.m */; };
+		AE81E6331F90741D000C61EC /* RankFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE81E6321F90741D000C61EC /* RankFilterViewController.m */; };
 		AE851F171EA9B818001993D5 /* MyOfferCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F161EA9B818001993D5 /* MyOfferCountry.m */; };
 		AE851F1A1EA9B85D001993D5 /* MyOfferCountryState.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F191EA9B85D001993D5 /* MyOfferCountryState.m */; };
 		AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE851F1C1EA9F337001993D5 /* UniversitySubjectListViewController.m */; };
@@ -878,6 +889,24 @@
 		AE4C71421F4EE6460069E83E /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		AE4C71431F4EE6460069E83E /* MyofferUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUser.h; sourceTree = "<group>"; };
 		AE4C71441F4EE6460069E83E /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
+		AE51131E1F8F12FD0009D274 /* rankFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rankFilter.h; sourceTree = "<group>"; };
+		AE51131F1F8F12FD0009D274 /* rankFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rankFilter.m; sourceTree = "<group>"; };
+		AE5113211F8F36BF0009D274 /* RankTypeItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTypeItem.h; sourceTree = "<group>"; };
+		AE5113221F8F36BF0009D274 /* RankTypeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTypeItem.m; sourceTree = "<group>"; };
+		AE5113241F8F3B7C0009D274 /* RankTypeItemFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTypeItemFrame.h; sourceTree = "<group>"; };
+		AE5113251F8F3B7C0009D274 /* RankTypeItemFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTypeItemFrame.m; sourceTree = "<group>"; };
+		AE5113271F8F41F20009D274 /* RankTypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTypeCell.h; sourceTree = "<group>"; };
+		AE5113281F8F41F20009D274 /* RankTypeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTypeCell.m; sourceTree = "<group>"; };
+		AE51132E1F8F54BE0009D274 /* RankItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankItemViewController.h; sourceTree = "<group>"; };
+		AE51132F1F8F54BE0009D274 /* RankItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankItemViewController.m; sourceTree = "<group>"; };
+		AE5113311F8F5AA90009D274 /* RankItemFrameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankItemFrameModel.h; sourceTree = "<group>"; };
+		AE5113321F8F5AA90009D274 /* RankItemFrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankItemFrameModel.m; sourceTree = "<group>"; };
+		AE5113341F8F5B830009D274 /* UniversityFrameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversityFrameModel.h; sourceTree = "<group>"; };
+		AE5113351F8F5B830009D274 /* UniversityFrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameModel.m; sourceTree = "<group>"; };
+		AE5113371F8F5C8B0009D274 /* RankTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTypeModel.h; sourceTree = "<group>"; };
+		AE5113381F8F5C8B0009D274 /* RankTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTypeModel.m; sourceTree = "<group>"; };
+		AE51133A1F8F610A0009D274 /* RankTypeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankTypeHeaderView.h; sourceTree = "<group>"; };
+		AE51133B1F8F610A0009D274 /* RankTypeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankTypeHeaderView.m; sourceTree = "<group>"; };
 		AE53E86A1F73919800588F0C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		AE53E86E1F73C0A600588F0C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -978,6 +1007,10 @@
 		AE7FFCB91EC07E1C00D2FDCB /* into005.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = into005.jpeg; sourceTree = "<group>"; };
 		AE7FFCBA1EC07E1C00D2FDCB /* into003.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = into003.jpeg; sourceTree = "<group>"; };
 		AE7FFCBB1EC07E1C00D2FDCB /* into004.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = into004.jpeg; sourceTree = "<group>"; };
+		AE81E62E1F9060A2000C61EC /* CatigoryCountryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CatigoryCountryViewController.h; sourceTree = "<group>"; };
+		AE81E62F1F9060A2000C61EC /* CatigoryCountryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatigoryCountryViewController.m; sourceTree = "<group>"; };
+		AE81E6311F90741D000C61EC /* RankFilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankFilterViewController.h; sourceTree = "<group>"; };
+		AE81E6321F90741D000C61EC /* RankFilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankFilterViewController.m; sourceTree = "<group>"; };
 		AE851F151EA9B818001993D5 /* MyOfferCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferCountry.h; sourceTree = "<group>"; };
 		AE851F161EA9B818001993D5 /* MyOfferCountry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferCountry.m; sourceTree = "<group>"; };
 		AE851F181EA9B85D001993D5 /* MyOfferCountryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferCountryState.h; sourceTree = "<group>"; };
@@ -1572,6 +1605,7 @@
 		46645D1E1B2B015F005B5B12 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AE51132A1F8F545B0009D274 /* Rank */,
 				AEA249D51D5B224E00DD7939 /* NewCategory */,
 			);
 			name = Category;
@@ -2176,6 +2210,48 @@
 			path = HeaderView;
 			sourceTree = "<group>";
 		};
+		AE51132A1F8F545B0009D274 /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				AE51132B1F8F545B0009D274 /* c */,
+				AE51132C1F8F545B0009D274 /* m */,
+				AE51132D1F8F545B0009D274 /* v */,
+			);
+			name = Rank;
+			path = Class/NewCategory/Rank;
+			sourceTree = "<group>";
+		};
+		AE51132B1F8F545B0009D274 /* c */ = {
+			isa = PBXGroup;
+			children = (
+				AE51132E1F8F54BE0009D274 /* RankItemViewController.h */,
+				AE51132F1F8F54BE0009D274 /* RankItemViewController.m */,
+			);
+			path = c;
+			sourceTree = "<group>";
+		};
+		AE51132C1F8F545B0009D274 /* m */ = {
+			isa = PBXGroup;
+			children = (
+				AE5113311F8F5AA90009D274 /* RankItemFrameModel.h */,
+				AE5113321F8F5AA90009D274 /* RankItemFrameModel.m */,
+				AE5113341F8F5B830009D274 /* UniversityFrameModel.h */,
+				AE5113351F8F5B830009D274 /* UniversityFrameModel.m */,
+				AE5113371F8F5C8B0009D274 /* RankTypeModel.h */,
+				AE5113381F8F5C8B0009D274 /* RankTypeModel.m */,
+			);
+			path = m;
+			sourceTree = "<group>";
+		};
+		AE51132D1F8F545B0009D274 /* v */ = {
+			isa = PBXGroup;
+			children = (
+				AE51133A1F8F610A0009D274 /* RankTypeHeaderView.h */,
+				AE51133B1F8F610A0009D274 /* RankTypeHeaderView.m */,
+			);
+			path = v;
+			sourceTree = "<group>";
+		};
 		AE53E86C1F73C0A600588F0C /* Wechat */ = {
 			isa = PBXGroup;
 			children = (
@@ -2568,6 +2644,15 @@
 			path = UMSocialUI;
 			sourceTree = "<group>";
 		};
+		AE81E62D1F90608B000C61EC /* CatigoryCountry */ = {
+			isa = PBXGroup;
+			children = (
+				AE81E62E1F9060A2000C61EC /* CatigoryCountryViewController.h */,
+				AE81E62F1F9060A2000C61EC /* CatigoryCountryViewController.m */,
+			);
+			path = CatigoryCountry;
+			sourceTree = "<group>";
+		};
 		AE914EC11F417F1A008A43CD /* C */ = {
 			isa = PBXGroup;
 			children = (
@@ -2933,12 +3018,15 @@
 		AEA249D61D5B224E00DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE81E62D1F90608B000C61EC /* CatigoryCountry */,
 				AE59A5511E69907D008E479F /* NomalCollectionController.h */,
 				AE59A5521E69907D008E479F /* NomalCollectionController.m */,
 				AEA249D91D5B224E00DD7939 /* CatigoryViewController.h */,
 				AEA249DA1D5B224E00DD7939 /* CatigoryViewController.m */,
 				AEA249DB1D5B224E00DD7939 /* CountryStateViewController.h */,
 				AEA249DC1D5B224E00DD7939 /* CountryStateViewController.m */,
+				AE81E6311F90741D000C61EC /* RankFilterViewController.h */,
+				AE81E6321F90741D000C61EC /* RankFilterViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2962,6 +3050,12 @@
 				AE37088C1EB083F700502A62 /* MyOfferSubjecct.m */,
 				AEA249E41D5B224E00DD7939 /* CatigoryRank.h */,
 				AEA249E51D5B224E00DD7939 /* CatigoryRank.m */,
+				AE51131E1F8F12FD0009D274 /* rankFilter.h */,
+				AE51131F1F8F12FD0009D274 /* rankFilter.m */,
+				AE5113241F8F3B7C0009D274 /* RankTypeItemFrame.h */,
+				AE5113251F8F3B7C0009D274 /* RankTypeItemFrame.m */,
+				AE5113211F8F36BF0009D274 /* RankTypeItem.h */,
+				AE5113221F8F36BF0009D274 /* RankTypeItem.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2985,6 +3079,8 @@
 				AEA249F91D5B224E00DD7939 /* CatigorySubjectCell.xib */,
 				AE44F7851EA7744A00390809 /* CatigaryHotCityCell.h */,
 				AE44F7861EA7744A00390809 /* CatigaryHotCityCell.m */,
+				AE5113271F8F41F20009D274 /* RankTypeCell.h */,
+				AE5113281F8F41F20009D274 /* RankTypeCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4030,6 +4126,7 @@
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
 				AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */,
 				AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */,
+				AE5113201F8F12FD0009D274 /* rankFilter.m in Sources */,
 				AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */,
 				AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
@@ -4085,6 +4182,7 @@
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
 				AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */,
 				AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */,
+				AE5113231F8F36BF0009D274 /* RankTypeItem.m in Sources */,
 				AE1FD7561D5C929500FFD5A8 /* MJRefreshConst.m in Sources */,
 				AE4645311E8D0CAC005EE15D /* ServiceProtocalItem.m in Sources */,
 				AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */,
@@ -4108,10 +4206,12 @@
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
 				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
+				AE5113291F8F41F20009D274 /* RankTypeCell.m in Sources */,
 				AE3AB6AD1F21A27300A3C7E3 /* SMNewsCell.m in Sources */,
 				AE2B1DAD1F42987300FB953E /* ApplyStatusHistoryItemFrame.m in Sources */,
 				AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
+				AE81E6301F9060A2000C61EC /* CatigoryCountryViewController.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */,
 				AE7F9B131EB8829300D30525 /* SearchUniCourseFrame.m in Sources */,
@@ -4146,6 +4246,7 @@
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
+				AE5113301F8F54BE0009D274 /* RankItemViewController.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
@@ -4185,6 +4286,7 @@
 				AEA249FE1D5B224E00DD7939 /* CatigaryHotCity.m in Sources */,
 				AE4B2E6F1F1E095600E328F7 /* FSSegmentTitleView.m in Sources */,
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
+				AE5113391F8F5C8B0009D274 /* RankTypeModel.m in Sources */,
 				AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */,
 				AEA249A21D5B215300DD7939 /* HMTitleButton.m in Sources */,
 				AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */,
@@ -4231,11 +4333,13 @@
 				AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */,
 				AE6F28761D77CA3C00E9A47A /* UUChartLabel.m in Sources */,
 				AE4B2E681F1E095600E328F7 /* MessageArticle.m in Sources */,
+				AE5113331F8F5AA90009D274 /* RankItemFrameModel.m in Sources */,
 				AEA249BF1D5B215300DD7939 /* XWGJSummaryView.m in Sources */,
 				AE4B2E731F1E095600E328F7 /* MessageTopiccGroup.m in Sources */,
 				AEA24B071D5B24D200DD7939 /* FeedbackViewController.m in Sources */,
 				AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */,
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
+				AE5113361F8F5B830009D274 /* UniversityFrameModel.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
 				AE4C71481F4EE6460069E83E /* MenuItem.m in Sources */,
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
@@ -4252,6 +4356,7 @@
 				AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */,
 				AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */,
 				AE4B2E7C1F1E095600E328F7 /* messageCatigroyModel.m in Sources */,
+				AE81E6331F90741D000C61EC /* RankFilterViewController.m in Sources */,
 				AE1FD7251D5C929500FFD5A8 /* NSString+MJExtension.m in Sources */,
 				AE2DE44B1E9633A9009683B0 /* ServiceItemCellFrame.m in Sources */,
 				AE4B2E671F1E095600E328F7 /* MessageDetaillViewController.m in Sources */,
@@ -4290,6 +4395,7 @@
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
+				AE5113261F8F3B7C0009D274 /* RankTypeItemFrame.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
 				AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */,
 				AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */,
@@ -4305,6 +4411,7 @@
 				AE4B2E7E1F1E095600E328F7 /* MessageTopicViewController.m in Sources */,
 				463E3AA81B23105F00E0BAF8 /* KDBannerView.m in Sources */,
 				AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */,
+				AE51133C1F8F610A0009D274 /* RankTypeHeaderView.m in Sources */,
 				AEBA44C91E88BAB3005E923B /* ServiceSKU.m in Sources */,
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,
 				AEA24A9F1D5B23F600DD7939 /* GongLueCell.m in Sources */,
