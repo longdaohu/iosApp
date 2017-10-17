@@ -48,7 +48,8 @@
 {
     [self makeTableView];
     
-    self.title = GDLocalizedString(@"Setting-002");
+    self.title = @"收藏院校";
+ 
   
 }
 
@@ -60,6 +61,11 @@
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
     self.tableView.estimatedSectionHeaderHeight = 0;
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
 }
 

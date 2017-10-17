@@ -31,18 +31,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [MobClick beginLogPageView:@"page排名子页"];
-
+ 
 }
-
-
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//
-//    self.navigationController.navigationBarHidden = NO;
-//
-//}
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -85,7 +75,6 @@
     header.typeFrame = typeFrame;
     self.tableView.tableHeaderView = header;
     self.title = typeFrame.rankItem.name;
-//    NSLog(@">>>>>>>>>  %@  %ld",typeFrame.rankItem.descrpt,typeFrame.rankItem.universities.count);
 
     [self.tableView reloadData];
  
@@ -96,6 +85,9 @@
     
     [self makeTableView];
     
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 }
 
 - (void)makeTableView
@@ -165,6 +157,7 @@
     UniversityViewController *vc = [[UniversityViewController alloc] initWithUniversityId:uniFrameModel.universityModel.short_id] ;
 
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 

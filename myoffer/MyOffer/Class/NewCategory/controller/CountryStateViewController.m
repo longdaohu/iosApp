@@ -78,7 +78,7 @@
 -(void)getStateData
 {
  
-    NSString *country;
+    NSString *country = @"英国";
     
     if([self.countryName containsString:@"英国"]){
     
@@ -137,20 +137,21 @@
     self.cityTableView.backgroundColor = XCOLOR_WHITE;
     self.cityTableView.showsVerticalScrollIndicator = NO;
     [self.view  addSubview:self.cityTableView];
-     self.cityTableView .estimatedSectionHeaderHeight = 0;
-     self.cityTableView .estimatedSectionFooterHeight = 0;
     
 }
 
 - (UITableView *)tableViewWithFrame:(CGRect)frame{
 
-    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.tableFooterView = [[UIView alloc] init];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if (@available(iOS 11.0, *)) {
+         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
-
+ 
     return tableView;
 }
 
@@ -298,17 +299,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
-    return HEIGHT_ZERO;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-
-    return HEIGHT_ZERO;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

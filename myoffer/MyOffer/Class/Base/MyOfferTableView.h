@@ -14,7 +14,6 @@ typedef void(^myofferTableViewBlock)();
 @property(nonatomic,copy)myofferTableViewBlock actionBlock;
 @property(nonatomic,assign)CGFloat emptyY;
 - (void)emptyViewWithHiden:(BOOL)hiden;
-
 - (void)emptyViewWithError:(NSString *)error;
 
 @end

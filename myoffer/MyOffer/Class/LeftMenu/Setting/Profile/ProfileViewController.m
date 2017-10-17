@@ -43,13 +43,18 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.view = self.tableView;
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+
 }
 
 - (void)viewDidLoad {
    
     [super viewDidLoad];
     
-    self.title = GDLocalizedString(@"Setting-001");
+    self.title = @"个人信息";
 }
 
 - (void)viewWillAppear:(BOOL)animated {

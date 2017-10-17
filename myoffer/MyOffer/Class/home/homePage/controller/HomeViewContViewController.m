@@ -111,7 +111,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [MobClick endLogPageView:@"page新版首页"];
-    
+ 
 }
 
 - (void)viewDidLoad {
@@ -124,7 +124,6 @@
     
     [self makeOther];
     
- 
 }
 
 

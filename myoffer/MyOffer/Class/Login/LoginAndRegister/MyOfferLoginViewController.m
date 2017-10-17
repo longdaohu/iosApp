@@ -155,12 +155,11 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 
     //退出登录按钮
     CGFloat dis_X = 14;
-    CGFloat dis_Y = 22;
     CGFloat dis_W = 40;
     CGFloat dis_H =  dis_W;
+    CGFloat dis_Y = XNAV_HEIGHT - dis_H;
     self.dismissBtn = [self buttonWithFrame:CGRectMake(dis_X, dis_Y, dis_W, dis_H) title:nil fontSize:1 titleColor:nil imageName:@"close_button" Action:@selector(dismiss:)];
     [self.view addSubview:self.dismissBtn];
-
     
     //登录板块
     CGFloat login_bg_X = 0;
@@ -631,12 +630,9 @@ typedef NS_ENUM(NSInteger,otherLoginType){
              
              [self dismiss];
          };
-         
-         
-         
+ 
      }];
-  
-    
+ 
 }
 
 
@@ -665,7 +661,7 @@ typedef NS_ENUM(NSInteger,otherLoginType){
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    
+ 
     self.baseView.top = up ?  - (self.logoView.mj_h - XNAV_HEIGHT): 0;
     
     [self.view layoutSubviews];

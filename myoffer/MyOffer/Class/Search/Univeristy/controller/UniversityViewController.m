@@ -165,7 +165,7 @@ typedef enum {
     [self addDataSourse];
     
     [self makeUI];
-    
+ 
 }
 
 //根据用户资料测试录取难易程度
@@ -336,6 +336,11 @@ typedef enum {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.footer.mj_h, 0);
     
     self.view.clipsToBounds = YES;
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
 
 }
@@ -536,10 +541,6 @@ typedef enum {
         }
             break;
     }
-
-    
-    
-    
     
 }
 
@@ -584,9 +585,8 @@ typedef enum {
 
 #pragma mark : UIScrollViewDelegate
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
  
-    
     //监听顶部导航条透明度
     [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerView_Frame.origin.y - XNAV_HEIGHT];
   

@@ -89,6 +89,12 @@
     [self makeTableView];
     
      self.title  = @"通知中心";
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+
 }
 
 

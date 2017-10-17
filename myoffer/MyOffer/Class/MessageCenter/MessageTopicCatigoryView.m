@@ -35,22 +35,31 @@
         
         self.backgroundColor = XCOLOR_BG;
         
-        UIScrollView *topView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 60)];
-        topView.showsVerticalScrollIndicator = NO;
-        topView.showsHorizontalScrollIndicator = NO;
-        [self addSubview:topView];
+        UIScrollView *topView = [self createScrollViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 60)];
         topView.backgroundColor = [UIColor whiteColor];
         self.topView = topView;
-        
-        
-        UIScrollView *subView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame) + 15, XSCREEN_WIDTH, 30)];
-        subView.showsVerticalScrollIndicator = NO;
-        subView.showsHorizontalScrollIndicator = NO;
-        [self addSubview:subView];
+ 
+        UIScrollView *subView = [self createScrollViewWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame) + 15, XSCREEN_WIDTH, 30)];
         self.bottomView = subView;
         
     }
     return self;
+}
+
+- (UIScrollView *)createScrollViewWithFrame:(CGRect)frame{
+    
+    UIScrollView *itemView = [[UIScrollView alloc] initWithFrame:frame];
+    itemView.showsVerticalScrollIndicator = NO;
+    itemView.showsHorizontalScrollIndicator = NO;
+    
+    if (@available(iOS 11.0, *)) {
+        
+        itemView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    [self addSubview:itemView];
+
+    return itemView;
 }
 
 
@@ -60,6 +69,7 @@
         
         _indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 60, 2)];
         _indicatorView.backgroundColor = XCOLOR_LIGHTBLUE;
+        
     }
     
     return _indicatorView;

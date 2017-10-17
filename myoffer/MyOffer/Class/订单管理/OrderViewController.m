@@ -186,6 +186,12 @@
     mj_header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = mj_header;
     
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+
+    
 }
 
 - (MJRefreshBackNormalFooter *)makeMJ_footer{

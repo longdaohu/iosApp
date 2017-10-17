@@ -86,26 +86,24 @@
 - (void)onclick:(UIButton *)sender{
     
 
-    [self ViewItem:sender];
+    [self viewItem:sender];
  
 }
 
 - (IBAction)QQButtonOnClick:(UIButton *)sender {
     
  
-    [self ViewItem:sender];
+    [self viewItem:sender];
 
 }
 
-- (void)ViewItem:(UIButton *)sender{
+- (void)viewItem:(UIButton *)sender{
 
     if (self.actionBlock) {
 
         self.actionBlock(sender);
     }
-    
 }
-
 
 - (void)setTitleName:(NSString *)titleName{
 
@@ -129,23 +127,31 @@
     self.bgView.alpha  =  offsetY / contentHeight;
     
     /*
-     *   contentHeight  [收藏、分享按钮]的superView 的frame.origin.y  - 导航栏的高度
+     *   iconToNavHeight 图标到导航栏底部之间的距离
+     *   contentHeight   内容到导航栏底部之间的距离
      *   - 20           20是[收藏、分享按钮]的一半高度
      *   contentHeight - 20   可以在滚动条  滚动到 [收藏、分享按钮]顶部 监听关键点
      */
-    CGFloat rightViewDistance = contentHeight - 20 - offsetY ;
-    
+    CGFloat icon_height = 40;
+    CGFloat icon_to_nav_height = contentHeight - icon_height * 0.5 - offsetY ;
  
-    if (rightViewDistance < 0) {
-        
-        self.rightView.top =  rightViewDistance <= -44 ? 20 : (XNAV_HEIGHT + rightViewDistance);
-        
-    }else{
-    
+    if (icon_to_nav_height >= 0) {
+        //大于0的时候
         self.rightView.top =  XNAV_HEIGHT;
         
+        return;
     }
-     
+ //小于等于 0 的时候  图标起过导航栏底部时
+    if (icon_to_nav_height <= - 44) {
+        
+        self.rightView.top = XStatusBar_Height;
+        
+    }else{
+        
+        self.rightView.top =   (XNAV_HEIGHT + icon_to_nav_height);
+        
+    }
+    
 }
 
 - (void)scrollViewForGongLueViewContentoffsetY:(CGFloat)offsetY andHeight:(CGFloat)contentHeight{
@@ -159,7 +165,6 @@
     [self.rightView noShadowWithFavorited:favorite];
     
 }
-
 
 - (void)navigationWithRightViewHiden:(BOOL)hiden{
 

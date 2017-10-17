@@ -30,33 +30,29 @@
     
 
     CatigoryViewController *cvc = [[CatigoryViewController alloc] init];
-    cvc.title = GDLocalizedString(@"CategoryTitle");//@"分类";
+    cvc.title = @"分类";
     
     PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
     mvc.title = @"申请中心";
     
+    MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
+    msvc.title = @"资讯宝典";
     
-        MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
-        msvc.title = @"资讯宝典";
+    HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
+    home.title =@"发现";
+    
+    self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:home],
+                             [[XWGJNavigationController alloc] initWithRootViewController:cvc],
+                             [[XWGJNavigationController alloc] initWithRootViewController:msvc],
+                             [[XWGJNavigationController alloc] initWithRootViewController:mvc]
+                             ];
         
-        HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
-        home.title = GDLocalizedString(@"DiscoverTitle");//@"发现";
-        
-        self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:home],
-                                 [[XWGJNavigationController alloc] initWithRootViewController:cvc],
-                                 [[XWGJNavigationController alloc] initWithRootViewController:msvc],
-                                 [[XWGJNavigationController alloc] initWithRootViewController:mvc]
-                                 ];
-        
-        [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
-        [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
-        [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
-        [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
+    [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
+    [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
+    [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
+    [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
     
-    
- 
-    self.tabBar.tintColor = [UIColor colorWithRed:43.0/255 green:193.0/255 blue:245.0/255 alpha:1];
-    
+    self.tabBar.tintColor = XCOLOR(43, 193, 245, 1);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
 

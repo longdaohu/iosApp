@@ -77,9 +77,13 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"QQ_service"]  style:UIBarButtonItemStyleDone target:self action:@selector(caseQQ)];
     
     self.tableView.alpha = 0.2;
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 
 }
-
 
 - (ServiceOverseaDestinationView *)overseaView{
 
@@ -372,7 +376,6 @@
     [service call];
     
 }
- 
 
 - (void)casePushServiceItemViewControllerWithId:(NSString *)service_id
 {

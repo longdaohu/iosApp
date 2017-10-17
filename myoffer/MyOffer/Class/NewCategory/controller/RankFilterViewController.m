@@ -68,15 +68,17 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
     CGFloat country_h = top_h;
     self.countryBtn = [self createButtonWithFrame:CGRectMake(country_x, country_y, country_w, country_h) title:@"全部国家" superView:topToolView];
     self.countryBtn.tag = filterButtonTypeCountry;
-    
+
     CGFloat rank_x = btn_w;
     self.rankBtn = [self createButtonWithFrame:CGRectMake(rank_x, country_y, country_w, country_h) title:@"全部排名" superView:topToolView];
     self.rankBtn.tag = filterButtonTypeRank;
+    [self createPaddingViewWithX:rank_x superView:topToolView];
     
     CGFloat time_x = btn_w * 2;
     self.timeBtn = [self createButtonWithFrame:CGRectMake(time_x, country_y, country_w, country_h) title:@"全部时间" superView:topToolView];
     self.timeBtn.tag = filterButtonTypeTime;
-    
+    [self createPaddingViewWithX:time_x superView:topToolView];
+
     [self.view insertSubview:self.coverBtn  atIndex:0];
 
 }
@@ -108,6 +110,7 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
 
 
 
+
 - (void)makeTableView{
     
     self.country_tableView = [self createTableView];
@@ -133,12 +136,21 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
     return tableView;
 }
 
+- (UIView *)createPaddingViewWithX:(CGFloat)x superView:(UIView *)spView{
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, 10, 1, 30)];
+    line.backgroundColor = XCOLOR_line;
+    [spView addSubview:line];
+
+    return line;
+}
+
+
 
 - (void)setRankFilterModel:(rankFilter *)rankFilterModel{
     
     _rankFilterModel = rankFilterModel;
  
-    
     self.rankFilterModel.countryName = self.countryBtn.currentTitle;
     self.rankFilterModel.typeName = self.rankBtn.currentTitle;
     self.rankFilterModel.yearName = self.timeBtn.currentTitle;
@@ -213,50 +225,41 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+ 
     NSString *name = self.current_button.currentTitle;
-    
+    NSString *key = @"";
+    NSDictionary *filter_item;
     switch (tableView.tag) {
         case filterTableTypeRank:{
-            NSDictionary *type_item = self.rankFilterModel.type_arr[indexPath.row];
-            self.rankFilterModel.typeName = type_item[@"name"];
-            NSString *type = indexPath.row == 0 ? @"":type_item[@"code"];
-            [self.rankFilterModel.papa_m setValue:type forKey:@"type"];
-            name = type_item[@"name"];
+            filter_item = self.rankFilterModel.type_arr[indexPath.row];
+            self.rankFilterModel.typeName = filter_item[@"name"];
+            key = @"type";
         }
             break;
         case filterTableTypeTime:{
-            NSDictionary *time_item = self.rankFilterModel.year_arr[indexPath.row];
-            self.rankFilterModel.yearName =  time_item[@"name"];
-            NSString *yearCode = indexPath.row == 0 ? @"":time_item[@"code"];
-            [self.rankFilterModel.papa_m setValue:yearCode forKey:@"year"];
-            name = time_item[@"name"];
+            filter_item = self.rankFilterModel.year_arr[indexPath.row];
+            self.rankFilterModel.yearName = filter_item[@"name"];
+            key = @"year";
         }
             break;
         default:{
-            NSDictionary *cn_item = self.rankFilterModel.countri_arr[indexPath.row];
-            self.rankFilterModel.countryName = cn_item[@"name"];
-            NSString *countryCode = indexPath.row == 0 ? @"":cn_item[@"code"];
-            [self.rankFilterModel.papa_m setValue:countryCode forKey:@"country"];
-
-            name = cn_item[@"name"];
+          filter_item = self.rankFilterModel.countri_arr[indexPath.row];
+         self.rankFilterModel.countryName = filter_item[@"name"];
+          key = @"country";
         }
             break;
     }
     
-    [self.rankFilterModel.papa_m setValue:@0 forKey:KEY_PAGE];
-    
-    [self.current_button setTitle:name forState:UIControlStateNormal];
+    NSString *value = indexPath.row == 0 ? @"":filter_item[@"code"];
+    [self.rankFilterModel.papa_m setValue:value forKey:key];
+    name = filter_item[@"name"];
     
     [tableView reloadData];
+    [self.current_button setTitle:name forState:UIControlStateNormal];
     
-    if (self.actionBlock) {
-        
-        self.actionBlock();
-    }
-    
+    if (self.actionBlock) self.actionBlock();
+ 
     [self caseSenderView:self.coverBtn];
-    
     
     
 }
@@ -268,12 +271,14 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
 #pragma mark : 事件处理
 - (void)caseSenderView:(UIButton *)sender{
  
+    if (!self.rankFilterModel){return;}
+ 
     CGFloat current_table_show =  0;
     CGFloat current_table_hiden = 0;
     CGFloat bgView_height_show = XSCREEN_HEIGHT;
     CGFloat bgView_height_hiden = 50;
-    UIColor *bgView_color_show = XCOLOR(0, 0, 0, 0.6);
-    UIColor *bgView_color_hiden = XCOLOR(0, 0, 0, 0);
+    UIColor *bgView_color_show = XCOLOR_COVER;
+    UIColor *bgView_color_hiden = XCOLOR_ZERO;
     UITableView *tmp_table = nil;
     
     //隐藏筛选功能

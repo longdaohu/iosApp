@@ -54,11 +54,17 @@
 
 -(void)makeUI
 {
-    self.title  = GDLocalizedString(@"Left-helpCenter");
+    self.title  = @"帮助中心";
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+
  
 }
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark ： UITableViewDelegate  UITableViewDataSoure
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.helpItems.count;
@@ -80,12 +86,7 @@
     help.path    = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
     [self.navigationController pushViewController:help animated:YES];
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-
-    return HEIGHT_ZERO;
-}
-
+ 
 
 -(void)dealloc
 {

@@ -33,6 +33,7 @@
 @property(nonatomic,strong)RankFilterViewController *filterVC;
 //排序筛选数据
 @property(nonatomic,strong)rankFilter *rankFilterModel;
+@property(nonatomic,assign)NSInteger para_page;
 //自定义导航栏
 @property(nonatomic,strong)TopNavView *topView;
 //工具条
@@ -86,7 +87,7 @@
     
     [self makeUI];
     
-    [self makeDataSource];
+    [self makeRankDataSource];
     
     [self makeFilterDataSource];
     
@@ -103,22 +104,31 @@
     }];
 }
 
-//获取热门城市数组
--(void)makeDataSource{
-   
-       XWeakSelf
-    [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryRanks parameters:(self.rankFilterModel?self.rankFilterModel.papa_m : @{KEY_SIZE :@5,KEY_PAGE :@0})success:^(NSInteger statusCode, id response) {
+//获取排名数组
+-(void)makeRankDataSource{
+ 
+    NSMutableDictionary *para_tmp = [NSMutableDictionary dictionaryWithDictionary: @{KEY_SIZE :@5,KEY_PAGE :@(self.para_page)}];
+    if (self.rankFilterModel) {
+        [para_tmp setValuesForKeysWithDictionary:self.rankFilterModel.papa_m];
+     }
+//    NSLog(@"papa >>>> %@",para_tmp);
+    XWeakSelf
+    [self startAPIRequestWithSelector:kAPISelectorCatigoryRanks parameters:para_tmp expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil  additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateRankViewWithResponse:response];
+
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
+        if (0 == weakSelf.groups.count) {
+            [weakSelf.rank_tableView emptyViewWithError:@"网络请求失败，点击重新加载"];
+        }
     }];
+    
 }
 
 - (void)loadMoreData{
     
-    NSNumber *page  = self.rankFilterModel.papa_m[KEY_PAGE];
-    [self.rankFilterModel.papa_m setValue:@(page.integerValue+1) forKey:KEY_PAGE];
-    [self makeDataSource];
+     [self makeRankDataSource];
 }
 
 - (void)updateFilterDataWithResponse:(id)response{
@@ -130,32 +140,63 @@
 
 
 - (void)updateRankViewWithResponse:(id)response{
-    
+ 
     NSNumber *page = response[@"page"];
     NSNumber *size = response[@"size"];
+    self.para_page = page.integerValue+1;
  
     if (page.integerValue == 0) {
         
+        CGFloat rank_top = self.rank_tableView.contentInset.top;
+        [self.rank_tableView setContentOffset:CGPointMake(0, -rank_top) animated:NO];
         [self.groups removeAllObjects];
-        
     }
  
     NSArray *items = [RankTypeItem mj_objectArrayWithKeyValuesArray:response[@"items"]];
-    for (RankTypeItem *item in items) {
+ 
+    
+    BOOL same = NO;
+     for (RankTypeItem *item in items) {
+         
         RankTypeItemFrame *itemFrame = [RankTypeItemFrame new];
         itemFrame.item = item;
-        [self.groups addObject:itemFrame];
-        NSLog(@"%@ >>>>>>> %ld",item.name,self.groups.count);
-    }
+ 
+         for (RankTypeItemFrame *other_Frame in self.groups) {
+             
+             if ([other_Frame.item.name isEqualToString:item.name]) {
+                 
+                 same = YES;
+                 break;
+             }
+             
+         }
+         
+         if (!same) {
+             
+             [self.groups addObject:itemFrame];
+         }
+         
+     }
     
     if (items.count < size.integerValue) {
         
         [self.rank_tableView.mj_footer endRefreshingWithNoMoreData];
+        
     }else{
+        
         [self.rank_tableView.mj_footer endRefreshing];
     }
     
      [self.rank_tableView reloadData];
+    
+    if (0 == self.groups.count) {
+        
+        [self.rank_tableView emptyViewWithError:NetRequest_NoDATA];
+    
+    }else{
+        
+        [self.rank_tableView emptyViewWithHiden:YES];
+    }
  
 }
 
@@ -183,7 +224,9 @@
 //滚动工具条
 - (void)makeTopToolView{
     
-    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,26,XSCREEN_WIDTH, TOP_HIGHT)];
+    
+    
+    self.topToolView = [[XBTopToolView alloc] initWithFrame:CGRectMake(0,XStatusBar_Height + 6,XSCREEN_WIDTH, TOP_HIGHT)];
     self.topToolView.itemNames = @[@"地区",@"专业",@"排名"];
     self.topToolView.delegate  = self;
     [self.view addSubview: self.topToolView];
@@ -269,7 +312,13 @@
 //排名版块
 -(void)makeRankWithFrame:(CGRect)frame
 {
+    XWeakSelf
     self.rank_tableView =[[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    self.rank_tableView.actionBlock = ^{
+      
+        [weakSelf makeRankDataSource];
+    };
+    
     self.rank_tableView.delegate = self;
     self.rank_tableView.dataSource = self;
     self.rank_tableView.tableFooterView =[[UIView alloc] init];
@@ -278,13 +327,16 @@
     RankFilterViewController  *filterVC  = [[RankFilterViewController alloc] init];
     filterVC.actionBlock = ^{
         
-        [self makeDataSource];
+        weakSelf.para_page = 0;
+        [weakSelf makeRankDataSource];
+        
     };
     
     [self addChildViewController:filterVC];
     filterVC.view.frame = CGRectMake(frame.origin.x, 0, XSCREEN_WIDTH, 50);
     [self.bgView addSubview:filterVC.view];
     self.filterVC = filterVC;
+    self.rank_tableView.contentInset = UIEdgeInsetsMake(55, 0, 0, 0);
 
 }
 
@@ -304,7 +356,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -314,7 +366,7 @@
     [self.navigationController pushViewController:rankVC animated:YES];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RankTypeItemFrame *itemFrame = self.groups[indexPath.row];
     

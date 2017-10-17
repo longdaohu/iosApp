@@ -31,8 +31,6 @@
 
 @end
 
-
-
 #define CELL_HIGHT_DEFAULT 44
 
 @implementation MessageCountryTopicVController
@@ -103,11 +101,7 @@
 
         
     }
-    
-    
 
-    
-    
     
 }
 
@@ -134,7 +128,7 @@
     bgView.delegate = self;
     bgView.showsHorizontalScrollIndicator=NO;
     bgView.showsVerticalScrollIndicator=NO;
-    
+
     
     //3 -1 国家选择项背景
     UIView *countryBgView = [[UIView alloc] initWithFrame:self.view.bounds];

@@ -18,7 +18,7 @@
 #import "MyOfferCountry.h"
 #import "WYLXHeaderView.h"
 
-#define Bottom_Height 124
+#define Bottom_Height 150
 
 @interface PipeiEditViewController ()<UITableViewDelegate,UITableViewDataSource,ZiXunCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -114,12 +114,11 @@
 -(void)makeHeaderView
 {
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"通过REBAT大数据分析技术，运用独特TBDT算法，为你一键生成智能匹配方案。"];
-//    headerView.actionBlock = ^{ [weakSelf dismiss];};
-    headerView.mj_y = - XNAV_HEIGHT;
+    headerView.mj_y = -64;
     
     [self.view insertSubview:headerView aboveSubview:self.tableView];
  
-    self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h - XNAV_HEIGHT, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h - 64, 0, 0, 0);
 
 }
 
@@ -136,6 +135,12 @@
     
     //添加表头
     [self makeHeaderView];
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+
  
 }
 

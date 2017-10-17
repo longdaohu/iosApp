@@ -129,6 +129,11 @@
     
     self.datas = [self.groups copy];
     
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+ 
 }
 
 

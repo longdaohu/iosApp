@@ -72,7 +72,6 @@
             
         }];
         
-//        _emptyView.backgroundColor = [UIColor whiteColor];
     }
     
     return _emptyView;

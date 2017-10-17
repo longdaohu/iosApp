@@ -55,7 +55,7 @@
      
         _papa_m = [NSMutableDictionary dictionary];
         [_papa_m setValue:@5 forKey:KEY_SIZE];
-        [_papa_m setValue:@0 forKey:KEY_PAGE];
+//        [_papa_m setValue:@0 forKey:KEY_PAGE];
 
 
     }

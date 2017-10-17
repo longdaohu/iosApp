@@ -86,7 +86,8 @@
     TopNavView *navView = [TopNavView topView];
     [self.view addSubview:navView];
     
-    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 24, XSCREEN_WIDTH - 80, 34)];
+    CGFloat search_y = XStatusBar_Height + 4;
+    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, search_y, XSCREEN_WIDTH - 80, 34)];
     self.searchTextField = searchTextField;
     [navView addSubview:searchTextField];
     searchTextField.placeholder = @"请输入在读或毕业院校";
@@ -102,7 +103,7 @@
     
     
     CGFloat rightX = CGRectGetMaxX(searchTextField.frame);
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightX, 24, XSCREEN_WIDTH - rightX, 34)];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightX, search_y, XSCREEN_WIDTH - rightX, 34)];
     [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
     [navView addSubview:rightBtn];
     [rightBtn addTarget:self action:@selector(commitInput) forControlEvents:UIControlEventTouchUpInside];
