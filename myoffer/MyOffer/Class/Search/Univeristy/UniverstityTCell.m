@@ -249,14 +249,20 @@
     
     [self.iconView.logoImageView KD_setImageWithURL:uniFrameModel.universityModel.logo];
     self.iconView.frame = uniFrameModel.icon_Frame;
-    
-    
+ 
     self.nameLab.text = uniFrameModel.universityModel.name;
     self.nameLab.frame = uniFrameModel.name_Frame;
-    
-    
+ 
     self.official_nameLab.text = uniFrameModel.universityModel.official_name;
     self.official_nameLab.frame = uniFrameModel.official_Frame;
+    self.official_nameLab.textColor = XCOLOR_TITLE;
+    
+    [self.addressBtn setTitle:uniFrameModel.universityModel.address_long  forState:UIControlStateNormal];
+    self.addressBtn.frame = uniFrameModel.address_Frame;
+    
+    [self.rankBtn setTitle:[NSString stringWithFormat:@"本地排名：%@",uniFrameModel.universityModel.rank]  forState:UIControlStateNormal];
+    self.rankBtn.frame = uniFrameModel.rank_Frame;
+
     
 }
 

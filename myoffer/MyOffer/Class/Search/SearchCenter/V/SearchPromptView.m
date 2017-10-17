@@ -20,17 +20,19 @@
     
     
     CGFloat top = CGRectGetMinY(bottomView.frame);
+    CGFloat p_x = 0;
     if ([bottomView isKindOfClass:[UITableView class]]) {
         
         UITableView *tableView = (UITableView *)bottomView;
         top += tableView.contentInset.top;
-        
+         p_x = tableView.frame.origin.x;
     }
     
     
     CGFloat p_h =  50;
+    CGFloat p_w =  XSCREEN_WIDTH;
     CGFloat p_y =  top - p_h;
-    SearchPromptView *promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(0, p_y, XSCREEN_WIDTH, p_h)];
+    SearchPromptView *promptView = [[SearchPromptView alloc] initWithFrame:CGRectMake(p_x, p_y, p_w, p_h)];
     promptView.alpha = 0;
 
     [bottomView.superview insertSubview:promptView aboveSubview:bottomView];

@@ -26,6 +26,7 @@
              @"courses" : @"UniversityCourse",
              @"applies" : @"Applycourse"
              };
+    
 }
 
 

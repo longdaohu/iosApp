@@ -416,9 +416,6 @@
     }
 }
 
-
-
-
 -(void)makeTableView
 {
     self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
