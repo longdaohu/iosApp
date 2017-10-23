@@ -56,10 +56,6 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
     UIView *topToolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, top_h)];
     topToolView.backgroundColor = XCOLOR_WHITE;
     [self.view addSubview:topToolView];
-    topToolView.layer.shadowColor = XCOLOR_line.CGColor;
-    topToolView.layer.shadowOffset = CGSizeMake(0, 0);
-    topToolView.layer.shadowRadius = 0;
-    topToolView.layer.shadowOpacity =  1;
     
     CGFloat btn_w =  topToolView.mj_w / 3;
     CGFloat country_x = 0;
@@ -115,8 +111,6 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
 }
 
 
-
-
 - (void)makeTableView{
     
     self.country_tableView = [self createTableView];
@@ -151,8 +145,6 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
     return line;
 }
 
-
-
 - (void)setRankFilterModel:(rankFilter *)rankFilterModel{
     
     _rankFilterModel = rankFilterModel;
@@ -182,7 +174,6 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
             break;
     }
     
-    
     return count;
 }
 
@@ -194,37 +185,32 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
         cell =[[UniversityCourseFilterCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
     }
  
+    NSString *name = @"";
+    NSString *selected_name = @"";
     switch (tableView.tag) {
         case filterTableTypeRank:{
-            
             NSDictionary *type_item = self.rankFilterModel.type_arr[indexPath.row];
-            NSString *name = type_item[@"name"];
-            cell.title = name;
-            cell.onSelected = (name  == self.rankFilterModel.typeName);
- 
-        }
+            name = type_item[@"name"];
+            selected_name = self.rankFilterModel.typeName;
+         }
             break;
         case filterTableTypeTime:{
-            
             NSDictionary *time_item = self.rankFilterModel.year_arr[indexPath.row];
-            NSString *name = time_item[@"name"];
-            cell.title = name;
-            cell.onSelected =  (name  == self.rankFilterModel.yearName);
-           
- 
+            name = time_item[@"name"];
+            selected_name = self.rankFilterModel.yearName;
         }
             break;
         default:{
             NSDictionary *cn_item = self.rankFilterModel.countri_arr[indexPath.row];
-            NSString *name = cn_item[@"name"];
-            cell.title = name;
-            cell.onSelected = (name  == self.rankFilterModel.countryName);
- 
+            name = cn_item[@"name"];
+            selected_name = self.rankFilterModel.countryName;
         }
             break;
     }
     
-    
+    cell.title = name;
+    cell.onSelected = (name  == selected_name);
+
     return cell;
 }
 
@@ -255,10 +241,16 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
         }
             break;
     }
+ 
+     name = filter_item[@"name"];
+    
+    if ([name isEqualToString:self.current_button.currentTitle]) {
+        
+        [self caseSenderView:self.coverBtn];  return;
+    }
     
     NSString *value = indexPath.row == 0 ? @"":filter_item[@"code"];
     [self.rankFilterModel.papa_m setValue:value forKey:key];
-    name = filter_item[@"name"];
     
     [tableView reloadData];
     [self.current_button setTitle:name forState:UIControlStateNormal];
@@ -267,8 +259,8 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
  
     [self caseSenderView:self.coverBtn];
     
-    
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return  CELL_HEIGHT_DAFAULT;

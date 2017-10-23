@@ -20,7 +20,7 @@
 #import "RankTypeItem.h"
 #import "RankTypeItemFrame.h"
 #import "RankTypeCell.h"
-#import "RankItemViewController.h"
+#import "RankDetailViewController.h"
 #import "SearchPromptView.h"
 
 @interface CatigoryViewController ()<UIScrollViewDelegate,XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -44,7 +44,7 @@
 //排名表格
 @property(nonatomic,strong)MyOfferTableView *rank_tableView;
 //排名数据
-@property(nonatomic,strong)NSMutableArray *groups;
+@property(nonatomic,strong)NSMutableArray *rank_groups;
 
 
 @end
@@ -74,14 +74,14 @@
     
 }
 
-- (NSMutableArray *)groups{
+- (NSMutableArray *)rank_groups{
     
-    if (!_groups) {
+    if (!_rank_groups) {
         
-        _groups = [NSMutableArray array];
+        _rank_groups = [NSMutableArray array];
     }
     
-    return _groups;
+    return _rank_groups;
 }
 
 
@@ -98,24 +98,22 @@
     
 }
 
+//网络请求筛选基础数据
 - (void)makeFilterDataSource{
-    
     XWeakSelf
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryBaseFilterData parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        [weakSelf updateFilterDataWithResponse:response];
-        
-    }];
+         [weakSelf updateFilterDataWithResponse:response];
+     }];
 }
 
-//获取排名数组
--(void)makeRankDataSource{
+//网络请求获取排名数组
+- (void)makeRankDataSource{
  
-    NSMutableDictionary *para_tmp = [NSMutableDictionary dictionaryWithDictionary: @{KEY_SIZE :@5,KEY_PAGE :@(self.para_page)}];
+    NSMutableDictionary *para_tmp = [NSMutableDictionary dictionaryWithDictionary: @{KEY_PAGE :@(self.para_page)}];
     if (self.rankFilterModel) {
         [para_tmp setValuesForKeysWithDictionary:self.rankFilterModel.papa_m];
      }
-//    NSLog(@"papa >>>> %@",para_tmp);
+    
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorCatigoryRanks parameters:para_tmp expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil  additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -123,16 +121,11 @@
 
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        if (0 == weakSelf.groups.count) {
+        if (0 == weakSelf.rank_groups.count) {
             [weakSelf.rank_tableView emptyViewWithError:@"网络请求失败，点击重新加载"];
         }
     }];
     
-}
-
-- (void)loadMoreData{
-    
-     [self makeRankDataSource];
 }
 
 - (void)updateFilterDataWithResponse:(id)response{
@@ -147,38 +140,36 @@
  
     NSNumber *page = response[@"page"];
     NSNumber *size = response[@"size"];
+    NSNumber *count_all = response[@"count"];
     self.para_page = page.integerValue+1;
  
-    if (page.integerValue == 0) {
-        
-        CGFloat rank_top = self.rank_tableView.contentInset.top;
-        [self.rank_tableView setContentOffset:CGPointMake(0, -rank_top) animated:NO];
-        [self.groups removeAllObjects];
+    if (page.integerValue == 0 && self.rank_groups.count > 0) {
+ 
+        [self.rank_groups removeAllObjects];
     }
  
     NSArray *items = [RankTypeItem mj_objectArrayWithKeyValuesArray:response[@"items"]];
- 
     
-    BOOL same = NO;
+//    BOOL same = NO;
      for (RankTypeItem *item in items) {
-         
+
         RankTypeItemFrame *itemFrame = [RankTypeItemFrame new];
         itemFrame.item = item;
  
-         for (RankTypeItemFrame *other_Frame in self.groups) {
-             
-             if ([other_Frame.item.name isEqualToString:item.name]) {
-                 
-                 same = YES;
-                 break;
-             }
-             
-         }
-         
-         if (!same) {
-             
-             [self.groups addObject:itemFrame];
-         }
+//         for (RankTypeItemFrame *other_Frame in self.rank_groups) {
+//
+//             if ([other_Frame.item.name isEqualToString:item.name]) {
+//
+//                 same = YES;
+//                 break;
+//             }
+//
+//         }
+//
+//         if (!same) {
+//
+             [self.rank_groups addObject:itemFrame];
+//         }
          
      }
     
@@ -193,7 +184,7 @@
     
      [self.rank_tableView reloadData];
     
-    if (0 == self.groups.count) {
+    if (0 == self.rank_groups.count) {
         
         [self.rank_tableView emptyViewWithError:NetRequest_NoDATA];
     
@@ -202,11 +193,16 @@
         [self.rank_tableView emptyViewWithHiden:YES];
     }
     
-    [self promptShowWithCount:self.groups.count];
+    [self promptShowWithCount:count_all.integerValue];
+    
+    
+    if (page.integerValue == 0 && self.rank_groups.count > 0) {
+        
+        [self.rank_tableView  scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        
+    }
  
 }
-
-
 
 - (void)makeUI{
     
@@ -239,7 +235,6 @@
     [self.view addSubview:searchBtn];
     [searchBtn setImage:[UIImage imageNamed:@"search_icon"]  forState:UIControlStateNormal];
     [searchBtn addTarget:self action:@selector(searchButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    searchBtn.imageView.contentMode = UIViewContentModeCenter;
     CGFloat search_W = 20;
     CGFloat search_H = search_W;
     CGFloat search_X = XSCREEN_WIDTH - search_W - 16;
@@ -347,13 +342,11 @@
 
 }
 
-
-
 #pragma mark :  UITableViewDelegate,UITableViewDataSourc
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.groups.count;
+    return self.rank_groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -364,7 +357,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     RankTypeCell *cell = [RankTypeCell  cellWithTableView:tableView];
-    cell.itemFrame = self.groups[indexPath.section];
+    cell.itemFrame = self.rank_groups[indexPath.section];
     
     return cell;
 }
@@ -389,15 +382,15 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    RankTypeItemFrame *itemFrame = self.groups[indexPath.section];
-    RankItemViewController *rankVC  = [[RankItemViewController alloc] init];
+    RankTypeItemFrame *itemFrame = self.rank_groups[indexPath.section];
+    RankDetailViewController *rankVC  = [[RankDetailViewController alloc] init];
     rankVC.type_id = itemFrame.item.type_id;
     [self.navigationController pushViewController:rankVC animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    RankTypeItemFrame *itemFrame = self.groups[indexPath.section];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    RankTypeItemFrame *itemFrame = self.rank_groups[indexPath.section];
     
     return  itemFrame.cell_frame.size.height;
 }
@@ -407,9 +400,9 @@
     return Section_footer_Height_nomal;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return  section == (self.groups.count -1) ? Section_footer_Height_nomal : HEIGHT_ZERO;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return  section == (self.rank_groups.count -1) ? Section_footer_Height_nomal : HEIGHT_ZERO;
 }
 
 
@@ -444,6 +437,7 @@
     [self.bgView setContentOffset:CGPointMake(XSCREEN_WIDTH * sender.tag, 0) animated:YES];
 }
 
+#pragma mark : 事件处理
 //打开搜索
 -(void)searchButtonPressed:(UIBarButtonItem *)barButton {
     
@@ -459,7 +453,6 @@
 
 }
 
-
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSInteger )count{
     
@@ -472,6 +465,12 @@
     
     [self.promptView showWithTitle:[NSString stringWithFormat:@"共 %ld 个排名",count]];
     
+}
+
+//网络请求更多
+- (void)loadMoreData{
+    
+    [self makeRankDataSource];
 }
 
 

@@ -260,7 +260,7 @@
     [self.addressBtn setTitle:uniFrameModel.universityModel.address_long  forState:UIControlStateNormal];
     self.addressBtn.frame = uniFrameModel.address_Frame;
     
-    [self.rankBtn setTitle:[NSString stringWithFormat:@"本地排名：%@",uniFrameModel.universityModel.rank]  forState:UIControlStateNormal];
+    [self.rankBtn setTitle:[NSString stringWithFormat:@"排名：%@",uniFrameModel.universityModel.rank]  forState:UIControlStateNormal];
     self.rankBtn.frame = uniFrameModel.rank_Frame;
 
     

@@ -60,7 +60,6 @@
         if ([country.country containsString:@"英"]) imageName = @"uk_more.jpg";
         if ([country.country containsString:@"美"]) imageName = @"usa_more.jpg";
         if ([country.country containsString:@"澳"]) imageName = @"ao_more.jpg";
-        
         last_city.imageName = imageName;
         
         [country.hot_cities addObject:last_city];
@@ -73,8 +72,8 @@
 - (void)makeUI{
     
     self.city_tableView =[self tableViewWithUITableViewStyle:UITableViewStyleGrouped frame:self.view.bounds];
-    self.city_tableView .estimatedSectionFooterHeight = 0;
-    self.city_tableView .estimatedSectionHeaderHeight = 0;
+    self.city_tableView.estimatedSectionFooterHeight = 0;
+    self.city_tableView.estimatedSectionHeaderHeight = 0;
     self.city_tableView.contentInset = UIEdgeInsetsMake(0, 0, 50 + XNAV_HEIGHT, 0);
     [self.view addSubview:self.city_tableView];
     
@@ -156,12 +155,12 @@ static NSString *rankIdentify = @"rankStyle";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return tableView == self.city_tableView ? FLOWLAYOUT_CityW + 20 : 80;
+    return FLOWLAYOUT_CityW + 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return (tableView == self.city_tableView ) ?  Section_header_Height_nomal : 12;
+    return  Section_header_Height_nomal;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -170,11 +169,9 @@ static NSString *rankIdentify = @"rankStyle";
 
 
 #pragma mark : 事件处理
-
 //热门留学城市
 -(void)CaseHotCityWithCityName:(NSString *)CityName belongCountry:(NSString *)country
 {
-    
     
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName country:country];
     

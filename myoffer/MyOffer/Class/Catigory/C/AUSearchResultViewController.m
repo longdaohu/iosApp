@@ -72,11 +72,6 @@
     return self;
 }
 
-
-
-
-
-
 -(NSArray *)Restults
 {
     if (!_Restults) {

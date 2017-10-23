@@ -150,6 +150,8 @@
 		AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D71E0A1AD00038826A /* SDCollectionViewCell.m */; };
 		AE3943E11E0A1AD00038826A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */; };
 		AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */; };
+		AE3A5AF61F98A08400DFB47A /* RankDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A5AF41F98A08400DFB47A /* RankDetailViewController.m */; };
+		AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3A5AF51F98A08400DFB47A /* RankDetailViewController.xib */; };
 		AE3AB6A81F21A27300A3C7E3 /* SMBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */; };
 		AE3AB6A91F21A27300A3C7E3 /* SMHomeSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB68B1F21A27300A3C7E3 /* SMHomeSectionModel.m */; };
 		AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3AB68D1F21A27300A3C7E3 /* SMHotCell.m */; };
@@ -467,7 +469,6 @@
 		AECC87D61F95F63800FCBBEC /* rankFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87A31F95F63800FCBBEC /* rankFilter.m */; };
 		AECC87D71F95F63800FCBBEC /* RankTypeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87A51F95F63800FCBBEC /* RankTypeItem.m */; };
 		AECC87D81F95F63800FCBBEC /* RankTypeItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87A71F95F63800FCBBEC /* RankTypeItemFrame.m */; };
-		AECC87D91F95F63800FCBBEC /* RankItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87AB1F95F63800FCBBEC /* RankItemViewController.m */; };
 		AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87AE1F95F63800FCBBEC /* RankItemFrameModel.m */; };
 		AECC87DB1F95F63800FCBBEC /* RankTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87B01F95F63800FCBBEC /* RankTypeModel.m */; };
 		AECC87DC1F95F63800FCBBEC /* UniversityFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87B21F95F63800FCBBEC /* UniversityFrameModel.m */; };
@@ -493,6 +494,7 @@
 		AEF1274B1BF2D73000FFBCD6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1274A1BF2D73000FFBCD6 /* QuartzCore.framework */; };
 		AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEF1BAEA1BC61A77008860F6 /* InfoPlist.strings */; };
 		AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */; };
+		AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF2625F1F960864005D0768 /* nzl_more.jpg */; };
 		AEF334101D925A44003C3C68 /* GongLueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3340F1D925A44003C3C68 /* GongLueViewController.m */; };
 		AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A48B1F31B797002CB2EA /* myofferTextView.m */; };
 		AEF421121BD4998A00CFB45E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF421111BD4998A00CFB45E /* Security.framework */; };
@@ -749,6 +751,9 @@
 		AE3943D91E0A1AD00038826A /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		AE3943DA1E0A1AD00038826A /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		AE3943DB1E0A1AD00038826A /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		AE3A5AF31F98A08400DFB47A /* RankDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankDetailViewController.h; sourceTree = "<group>"; };
+		AE3A5AF41F98A08400DFB47A /* RankDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankDetailViewController.m; sourceTree = "<group>"; };
+		AE3A5AF51F98A08400DFB47A /* RankDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankDetailViewController.xib; sourceTree = "<group>"; };
 		AE3AB6881F21A27300A3C7E3 /* SMBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBannerModel.h; sourceTree = "<group>"; };
 		AE3AB6891F21A27300A3C7E3 /* SMBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMBannerModel.m; sourceTree = "<group>"; };
 		AE3AB68A1F21A27300A3C7E3 /* SMHomeSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHomeSectionModel.h; sourceTree = "<group>"; };
@@ -1294,7 +1299,6 @@
 		AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProductDescriptCell.h; sourceTree = "<group>"; };
 		AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProductDescriptCell.m; sourceTree = "<group>"; };
 		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
-		AECC87731F95EF5600FCBBEC /* nzl_more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nzl_more.jpg; sourceTree = "<group>"; };
 		AECC877E1F95F63800FCBBEC /* AUSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUSearchResultViewController.h; sourceTree = "<group>"; };
 		AECC877F1F95F63800FCBBEC /* AUSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUSearchResultViewController.m; sourceTree = "<group>"; };
 		AECC87801F95F63800FCBBEC /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
@@ -1329,8 +1333,6 @@
 		AECC87A51F95F63800FCBBEC /* RankTypeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTypeItem.m; sourceTree = "<group>"; };
 		AECC87A61F95F63800FCBBEC /* RankTypeItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankTypeItemFrame.h; sourceTree = "<group>"; };
 		AECC87A71F95F63800FCBBEC /* RankTypeItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTypeItemFrame.m; sourceTree = "<group>"; };
-		AECC87AA1F95F63800FCBBEC /* RankItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankItemViewController.h; sourceTree = "<group>"; };
-		AECC87AB1F95F63800FCBBEC /* RankItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankItemViewController.m; sourceTree = "<group>"; };
 		AECC87AD1F95F63800FCBBEC /* RankItemFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankItemFrameModel.h; sourceTree = "<group>"; };
 		AECC87AE1F95F63800FCBBEC /* RankItemFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankItemFrameModel.m; sourceTree = "<group>"; };
 		AECC87AF1F95F63800FCBBEC /* RankTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankTypeModel.h; sourceTree = "<group>"; };
@@ -1371,6 +1373,7 @@
 		AEF1274A1BF2D73000FFBCD6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AEF1BAF01BC61AC7008860F6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		AEF1FACE1BE38EBE00F48E8B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		AEF2625F1F960864005D0768 /* nzl_more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nzl_more.jpg; sourceTree = "<group>"; };
 		AEF3340E1D925A44003C3C68 /* GongLueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GongLueViewController.h; sourceTree = "<group>"; };
 		AEF3340F1D925A44003C3C68 /* GongLueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GongLueViewController.m; sourceTree = "<group>"; };
 		AEF3A48A1F31B797002CB2EA /* myofferTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferTextView.h; sourceTree = "<group>"; };
@@ -3575,10 +3578,10 @@
 				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
 				AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */,
 				AE892A191EBC87890035A31D /* uk_more.jpg */,
-				AECC87731F95EF5600FCBBEC /* nzl_more.jpg */,
 				AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */,
 				AE892A1A1EBC87890035A31D /* usa_more.jpg */,
 				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
+				AEF2625F1F960864005D0768 /* nzl_more.jpg */,
 				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
 				AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */,
@@ -3592,7 +3595,6 @@
 				AECC877D1F95F63800FCBBEC /* C */,
 				AECC87841F95F63800FCBBEC /* CatigorySubject */,
 				AECC87871F95F63800FCBBEC /* CatigroyHotCity */,
-				AECC87901F95F63800FCBBEC /* CatigroyRank */,
 				AECC87911F95F63800FCBBEC /* model */,
 				AECC87A81F95F63800FCBBEC /* Rank */,
 				AECC87B61F95F63800FCBBEC /* view */,
@@ -3665,13 +3667,6 @@
 			path = V;
 			sourceTree = "<group>";
 		};
-		AECC87901F95F63800FCBBEC /* CatigroyRank */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CatigroyRank;
-			sourceTree = "<group>";
-		};
 		AECC87911F95F63800FCBBEC /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3714,8 +3709,9 @@
 		AECC87A91F95F63800FCBBEC /* c */ = {
 			isa = PBXGroup;
 			children = (
-				AECC87AA1F95F63800FCBBEC /* RankItemViewController.h */,
-				AECC87AB1F95F63800FCBBEC /* RankItemViewController.m */,
+				AE3A5AF31F98A08400DFB47A /* RankDetailViewController.h */,
+				AE3A5AF41F98A08400DFB47A /* RankDetailViewController.m */,
+				AE3A5AF51F98A08400DFB47A /* RankDetailViewController.xib */,
 			);
 			path = c;
 			sourceTree = "<group>";
@@ -3971,6 +3967,7 @@
 				AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */,
+				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
 				AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */,
@@ -3995,6 +3992,7 @@
 				AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE79827C1F735392008BBAB7 /* UMSocialSDKResources.bundle in Resources */,
+				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
@@ -4247,7 +4245,6 @@
 				AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */,
 				AE2F23081EADA6040089084C /* UniversityCourseFilterViewController.m in Sources */,
 				AECC87CA1F95F63800FCBBEC /* RankFilterViewController.m in Sources */,
-				AECC87D91F95F63800FCBBEC /* RankItemViewController.m in Sources */,
 				AE2DE4481E962B51009683B0 /* ServiceItemHeaderCell.m in Sources */,
 				AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */,
 				AE3AB6C91F21AC0300A3C7E3 /* SMAudioModel.m in Sources */,
@@ -4319,6 +4316,7 @@
 				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
+				AE3A5AF61F98A08400DFB47A /* RankDetailViewController.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
 				AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */,

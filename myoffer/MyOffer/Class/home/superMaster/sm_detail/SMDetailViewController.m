@@ -80,6 +80,8 @@
         NSDictionary *dict = @{@"title" : self.detail.main_title};
         
         [MobClick event:@"Assign_ALL_Playtime" attributes:dict];
+        [MobClick event:@"ALL_Playtime"];
+
     }
     
 }
@@ -153,6 +155,8 @@
         NSDictionary *dict = @{@"title" : self.detail.main_title};
         
         [MobClick event:@"Assign_ALL_Playtime" attributes:dict];
+        [MobClick event:@"ALL_Playtime"];
+
     }
     
     
@@ -756,19 +760,12 @@
     
     if (playerView.state == ZFPlayerStateBuffering && !self.first_time_loading) {
         
-        [MobClick event:@"ALL_Playtime"];
 
         self.first_time_loading = YES;
         
        
     }
-    
-    if (playerView.state == ZFPlayerStatePlaying || playerView.state == ZFPlayerStatePause|| playerView.state == ZFPlayerStateStopped) {
-        
-        [MobClick event:@"ALL_Playtime"];
-
-    }
-  
+ 
  
     if (self.playerView.state == ZFPlayerStatePlaying && self.audioPlayerView.state == ZFPlayerStatePlaying) {
         

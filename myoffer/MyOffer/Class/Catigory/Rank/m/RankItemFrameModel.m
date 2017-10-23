@@ -27,10 +27,9 @@
     CGFloat  desc_w = header_w - desc_x * 2;
     CGFloat  desc_h = [rankItem.descrpt KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16] maxWidth:desc_w].height;
     self.desc_frame = CGRectMake(desc_x, desc_y, desc_w, desc_h);
-    
+ 
     header_h = desc_h + desc_y * 2;
     self.header_frame = CGRectMake(header_x, header_y, header_w, header_h);
-    
  
     NSMutableArray *tmps = [NSMutableArray array];
     for (MyOfferUniversityModel *uni in rankItem.universities) {

@@ -78,26 +78,11 @@
 -(void)getStateData
 {
  
-    NSString *country = @"英国";
-    
-    if([self.countryName containsString:@"英国"]){
-    
-        country = @"英国";
-        
-    }else if([self.countryName containsString:@"澳"]){
-    
-        country = @"澳大利亚";
-   
-    }else{
-    
-        country = @"美国";
-    }
-    
     NSArray *countryes = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country_CN"];
     
     for (NSDictionary *countryDic in countryes) {
         
-        if ([countryDic[@"name"] isEqualToString:country]) {
+        if ([countryDic[@"name"] isEqualToString:self.countryName]) {
             
             self.countryModel = [MyOfferCountry mj_objectWithKeyValues:countryDic];
            
@@ -118,29 +103,26 @@
             self.currentState = self.countryModel.states.firstObject;
             
         }
-        
-        
-    }
-    
-    
+     }
+ 
 }
 
 -(void)makeTableView{
     
     CGFloat left_Width = 150;
     CGFloat left_Height = XSCREEN_HEIGHT - XNAV_HEIGHT;
-    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_Width, left_Height)];
+    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_Width, left_Height) superView:self.view];
     self.stateTableView.backgroundColor = XCOLOR_BG;
-    [self.view  addSubview:self.stateTableView];
-
-    self.cityTableView =  [self tableViewWithFrame: CGRectMake(left_Width, 0, XSCREEN_WIDTH - left_Width, left_Height)];
+ 
+    CGFloat right_w = XSCREEN_WIDTH - left_Width;
+    CGFloat right_x = left_Width;
+    self.cityTableView =  [self tableViewWithFrame: CGRectMake(right_x, 0, right_w, left_Height) superView:self.view];
     self.cityTableView.backgroundColor = XCOLOR_WHITE;
     self.cityTableView.showsVerticalScrollIndicator = NO;
-    [self.view  addSubview:self.cityTableView];
     
 }
 
-- (UITableView *)tableViewWithFrame:(CGRect)frame{
+- (UITableView *)tableViewWithFrame:(CGRect)frame superView:(UIView *)bgView{
 
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.dataSource = self;
@@ -151,7 +133,8 @@
          tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
 
- 
+    [bgView addSubview:tableView];
+
     return tableView;
 }
 
@@ -176,70 +159,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (tableView == self.stateTableView) {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"state"];
+    if (!cell) {
         
-        UITableViewCell *stateCell = [tableView dequeueReusableCellWithIdentifier:@"state"];
-        
-        if (!stateCell) {
-            
-            stateCell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state"];
-            stateCell.contentView.backgroundColor = XCOLOR_BG;
-            stateCell.selectedBackgroundView =  self.selectImageView;
-            stateCell.textLabel.highlightedTextColor = XCOLOR_LIGHTBLUE;
-            stateCell.textLabel.font =  self.cell_font;
-         }
-        
-        NSString *name;
-        
-        if (indexPath.row == 0) {
-            
-            name = @"全部";
-            
-        }else{
-            
-            MyOfferCountryState *state =  self.countryModel.states[indexPath.row - 1];
-            
-            name = state.name;
-        }
-        
-        stateCell.textLabel.text = name;
-        
-        return stateCell;
-        
-        
-        
-    }else{
-        
-        
-        UITableViewCell *city_cell = [tableView dequeueReusableCellWithIdentifier:@"state_city"];
-        
-        if (!city_cell) {
-            
-            city_cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state_city"];
-            city_cell.textLabel.font = self.cell_font;
-   
-        }
-        
-        NSString *name;
-        
-        if (indexPath.row == 0) {
-            
-            name = @"全部";
-            
-        }else{
-            
-            NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
-            
-            name = city[@"name"];
-        }
-        
-        city_cell.textLabel.text = name;
-        
-        return city_cell;
-        
+        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state"];
+        cell.textLabel.font =  self.cell_font;
     }
     
+    NSString *name = @"";
+    if (indexPath.row == 0) {
+        name = @"全部";
+    }
+    
+    if (tableView == self.stateTableView) {
+       
+        cell.contentView.backgroundColor = XCOLOR_BG;
+        cell.selectedBackgroundView =  self.selectImageView;
+        cell.textLabel.highlightedTextColor = XCOLOR_LIGHTBLUE;
+ 
+        if (indexPath.row > 0) {
+            MyOfferCountryState *state =  self.countryModel.states[indexPath.row - 1];
+            name = state.name;
+        }
+ 
+    }else{
+        
+        cell.contentView.backgroundColor = XCOLOR_WHITE;
+        if (indexPath.row > 0) {
+            NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
+            name = city[@"name"];
+        }
+     }
+    
+    cell.textLabel.text = name;
+    
+    return cell;
   
 }
 

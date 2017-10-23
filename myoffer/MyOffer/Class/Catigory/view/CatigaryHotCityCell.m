@@ -121,8 +121,7 @@ static NSString *identify = @"cityCell";
     CatigaryCityCollectionCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     
     cell.city = self.hot_cities[indexPath.row];
-
-    
+ 
     return cell;
     
 }

@@ -9,6 +9,7 @@
 #import "RankTypeHeaderView.h"
 @interface RankTypeHeaderView ()
 @property(nonatomic,strong)UILabel *desc_lab;
+
 @end
 
 @implementation RankTypeHeaderView
@@ -20,7 +21,7 @@
     if (self) {
     
         self.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.3];
-        
+
         UILabel *desc_lab = [UILabel label];
         desc_lab.font = [UIFont systemFontOfSize:16];
         desc_lab.textColor = XCOLOR_WHITE;
@@ -40,7 +41,7 @@
     
     self.desc_lab.frame = typeFrame.desc_frame;
     self.frame = typeFrame.header_frame;
-    
+
     self.desc_lab.text = typeFrame.rankItem.descrpt;
     
 }

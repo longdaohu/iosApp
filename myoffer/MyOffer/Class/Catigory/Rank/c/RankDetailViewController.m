@@ -1,12 +1,12 @@
 //
-//  RankItemViewController.m
+//  RankDetailViewController.m
 //  MyOffer
 //
-//  Created by xuewuguojie on 2017/10/12.
+//  Created by xuewuguojie on 2017/10/19.
 //  Copyright © 2017年 UVIC. All rights reserved.
 //
 
-#import "RankItemViewController.h"
+#import "RankDetailViewController.h"
 #import "MyOfferUniversityModel.h"
 #import "RankTypeModel.h"
 #import "RankTypeHeaderView.h"
@@ -15,15 +15,13 @@
 #import "UniverstityTCell.h"
 #import "UniversityViewController.h"
 
-@interface RankItemViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@interface RankDetailViewController ()
+@property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
+
 @property(nonatomic,strong)RankItemFrameModel *typeFrameModel;
-
-
 @end
 
-@implementation RankItemViewController
-
+@implementation RankDetailViewController
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -31,7 +29,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [MobClick beginLogPageView:@"page排名子页"];
- 
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -43,58 +41,51 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-
-    [self makeData];
     
-    [self makeTableView];
-
+    [super viewDidLoad];
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    [self makeData];
 }
 
 - (void)makeData{
     
     NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorCatigoryRankItem,self.type_id];
     XWeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+        
+    } additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateViewWithResponse:response];
-
+        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
-        [self dismiss];
+        [weakSelf dismiss];
         
     }];
-
+    
 }
 
 - (void)updateViewWithResponse:(id)response{
-   
-     RankItemFrameModel  *typeFrame = [[RankItemFrameModel alloc] init];
-     self.typeFrameModel  = typeFrame;
-     typeFrame.rankItem = [RankTypeModel mj_objectWithKeyValues:response];
     
-    RankTypeHeaderView *header = [[RankTypeHeaderView alloc] initWithFrame:typeFrame.header_frame];
-    header.typeFrame = typeFrame;
-    self.tableView.tableHeaderView = header;
-    self.title = typeFrame.rankItem.name;
-
-    [self.tableView reloadData];
- 
-}
-
-
-- (void)makeTableView
-{
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.estimatedSectionFooterHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
-    [self.view addSubview:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    RankItemFrameModel  *typeFrame = [[RankItemFrameModel alloc] init];
+    self.typeFrameModel  = typeFrame;
+    typeFrame.rankItem = [RankTypeModel mj_objectWithKeyValues:response];
+    
+    if (typeFrame.rankItem.descrpt.length > 0) {
+        
+        RankTypeHeaderView *header = [[RankTypeHeaderView alloc] initWithFrame:typeFrame.header_frame];
+        header.typeFrame = typeFrame;
+        self.tableView.tableHeaderView = header;
     }
+    
+    self.title = typeFrame.rankItem.name;
+    
+    [self.tableView reloadData];
+    
 }
 
 
@@ -113,7 +104,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
- 
+    
     uni_cell.uniFrameModel = self.typeFrameModel.university_frames[indexPath.section];
     
     [uni_cell separatorLineShow:NO];
@@ -122,13 +113,13 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
- 
+    
     return   [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 10;
+    return Section_headerter_Height_mini;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -150,9 +141,14 @@
     UniversityFrameModel *uniFrameModel =  self.typeFrameModel.university_frames[indexPath.section];
     
     UniversityViewController *vc = [[UniversityViewController alloc] initWithUniversityId:uniFrameModel.universityModel.short_id] ;
-
+    
     [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
+- (void)dealloc{
+    
+    KDClassLog(@"排名子项 dealloc");
 }
 
 

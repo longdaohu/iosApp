@@ -78,9 +78,10 @@
 #define RequireLogin if(!LOGIN) {[self loginView];return;}
 #define AlerMessage(message) [KDAlertView showMessage:message cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")]
 #define NAV_PNG  @"nav.png"
-#define Section_footer_Height_nomal 10
-#define Section_header_Height_nomal 50
-#define Section_header_Height_min 30
+#define Section_headerter_Height_mini 10.0
+#define Section_footer_Height_nomal 10.0
+#define Section_header_Height_nomal 50.0
+#define Section_header_Height_min 30.0
 #define Section_footer_Height_Title 80
 #define AutoScroll_Height   AdjustF(160.f)
 #define Tag_Height   16;
@@ -97,8 +98,8 @@
 #define CELL_HEIGHT_DAFAULT  50
 
 
-#define DOMAINURL  @"http://www.myofferdemo.com/"
-//#define DOMAINURL  @"http://www.myoffer.cn/"
+//#define DOMAINURL  @"http://www.myofferdemo.com/"
+#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

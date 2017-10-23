@@ -575,8 +575,7 @@
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
     if (uniFrame.universtiy.courses.count == 0) return nil;
-   
-    
+ 
     searchSectionFootView *sectionFooter = [searchSectionFootView footerWithUniversity:uniFrame.universtiy actionBlock:^(NSString *universityID) {
         
         [weakSelf.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:universityID] animated:YES];
@@ -618,7 +617,6 @@ static NSString *identify = @"search_course";
     }
     
     UniversityFrameNew *uniFrame = self.UniFrames[indexPath.section];
-    
     
     if (uniFrame.courseFrames.count > 0)  cell.course_frame = uniFrame.courseFrames[indexPath.row];
     

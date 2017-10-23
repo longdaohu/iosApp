@@ -7,6 +7,7 @@
 //
 
 #import "MyOfferCountry.h"
+#import "MyOfferCountryState.h"
 
 @implementation MyOfferCountry
 
@@ -18,7 +19,7 @@
 
 + (NSDictionary *)mj_objectClassInArray{
     
-    return @{@"states" : @"MyOfferCountryState"};
+    return @{@"states" : NSStringFromClass([MyOfferCountryState class])};
 }
 
 
