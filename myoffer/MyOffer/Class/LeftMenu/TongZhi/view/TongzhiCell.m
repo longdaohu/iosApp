@@ -85,7 +85,7 @@
     self.timeLab.text       = noti.create_time_short;
     [self.timeLab sizeToFit];
     
-    NSString *imageName   =  [noti.category_id integerValue] == 0 ? @"noti_blue" : @"noti_yellow";
+    NSString *imageName   = [NSString stringWithFormat:@"noti_0%@",noti.category_id];
     self.logoView.image   =  [UIImage imageNamed:imageName];
     self.redSpotsView.hidden = noti.state.length;
 

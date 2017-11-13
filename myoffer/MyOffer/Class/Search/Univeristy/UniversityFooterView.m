@@ -85,7 +85,7 @@
 
     _uni_country = uni_country;
     
-    if ([uni_country isEqualToString:@"美国"]) {
+    if ([uni_country isEqualToString:@"美国"] || [uni_country isEqualToString:@"新西兰"]) {
         
         self.showLab.hidden = YES;
         self.rateBtn.hidden = YES;

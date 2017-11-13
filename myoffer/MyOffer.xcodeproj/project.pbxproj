@@ -49,7 +49,6 @@
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
-		AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
 		AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */; };
 		AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE1FD6941D5C929500FFD5A8 /* Info.plist */; };
@@ -587,8 +586,6 @@
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTIViewController.h; sourceTree = "<group>"; };
-		AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTIViewController.m; sourceTree = "<group>"; };
 		AE1D011B1D2FCD2D005E2DEF /* YYToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYToolKit.h; sourceTree = "<group>"; };
 		AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYToolKit.m; sourceTree = "<group>"; };
 		AE1FD6881D5C78E600FFD5A8 /* NotiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiItem.h; sourceTree = "<group>"; };
@@ -3056,8 +3053,6 @@
 			children = (
 				AE1501C11D8E39AF006751D0 /* WebViewController.h */,
 				AE1501C21D8E39AF006751D0 /* WebViewController.m */,
-				AE1B54CE1DA9E659009FF12E /* MBTIViewController.h */,
-				AE1B54CF1DA9E659009FF12E /* MBTIViewController.m */,
 			);
 			path = guanggao;
 			sourceTree = "<group>";
@@ -4239,7 +4234,6 @@
 				AE93E4DF1D6DA5140025FC58 /* UniversitydetailNew.m in Sources */,
 				463E3ABA1B23105F00E0BAF8 /* NSDictionary+KDUtilities.m in Sources */,
 				5672E8B11CCBA9730099FDFC /* NSString+Sha1.m in Sources */,
-				AE1B54D01DA9E659009FF12E /* MBTIViewController.m in Sources */,
 				AECC87DE1F95F63800FCBBEC /* CatigaryCityCollectionCell.m in Sources */,
 				AE4B2E751F1E095600E328F7 /* MessageTopicHeaderViewController.m in Sources */,
 				AEA24A901D5B23F600DD7939 /* HomeSearchView.m in Sources */,

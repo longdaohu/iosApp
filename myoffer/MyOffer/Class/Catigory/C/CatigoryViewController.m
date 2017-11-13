@@ -261,8 +261,7 @@
     [self makeSubjectCollectViewWithFrame:CGRectMake(baseW * 1, 0, baseW,baseH)];
     //排名版块
     [self makeRankWithFrame:CGRectMake(baseW * 2, 0, baseW,baseH)];
-    
-    
+
 }
 
 //热门城市
@@ -409,9 +408,6 @@
 #pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if ([scrollView isKindOfClass:[UICollectionView class]]) return;
-//    if ([scrollView isKindOfClass:[UITableView class]] || !scrollView.isDragging)  return;
-    
     if (self.bgView.isDragging) {
         
         //监听滚动，实现顶部工具条按钮切换
@@ -452,6 +448,20 @@
     [self.topToolView setSelectedIndex:0];
 
 }
+
+//从首页跳转到热门留学目的地
+- (void)jumpToRank{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ANIMATION_DUATION * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.bgView setContentOffset:CGPointMake(2 * XSCREEN_WIDTH , 0) animated:YES];
+        
+        [self.topToolView setSelectedIndex:2];
+        
+    });
+    
+}
+
 
 //显示提示新加载数据
 - (void)promptShowWithCount:(NSInteger )count{

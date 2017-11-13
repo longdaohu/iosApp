@@ -620,8 +620,8 @@ typedef NS_ENUM(NSInteger,otherLoginType){
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {
          
+         [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
          [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
-         
          [MobClick event:@"myoffer_Register"];
          [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
          
@@ -743,11 +743,11 @@ typedef NS_ENUM(NSInteger,otherLoginType){
 //正常登录成功相关处理  （非第三方）登录
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
-    
+//    NSLog(@">>>>>>>>>>>>> jpush_alias = %@",response[@"jpush_alias"]);
+
     [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
-//        NSLog(@">>>>>>>>>>>>> access_token = %@",response[@"jpush_alias"]);
     [MobClick event:@"myofferUserLogin"];
     
     //当用户没有电话时发出通知，让用户填写手机号

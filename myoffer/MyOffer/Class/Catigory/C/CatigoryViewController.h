@@ -9,8 +9,6 @@
 #import "BaseViewController.h"
 
 @interface CatigoryViewController : BaseViewController
-
-
 - (void)jumpToHotCity;
-
+- (void)jumpToRank;
 @end

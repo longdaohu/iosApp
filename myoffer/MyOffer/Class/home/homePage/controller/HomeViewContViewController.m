@@ -27,7 +27,7 @@
 #import "NSString+MD5.h"
 #import "SearchUniversityCenterViewController.h"
 #import "XUToolbar.h"
-#import "MBTIViewController.h"
+//#import "MBTIViewController.h"
 #import "MyOfferUniversityModel.h"
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
@@ -634,7 +634,12 @@
              [self Casepipei];
             break;
          case 3:
-             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
+         {
+             [self.tabBarController setSelectedIndex:1];
+             UINavigationController *nav  = self.tabBarController.childViewControllers[1];
+             CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
+             [catigroy jumpToRank];
+         }
              break;
          case 4:
              [self CaseSuperMaster];
@@ -825,10 +830,8 @@ ENGLISH  设置环境
 -(void)checkZhiNengPiPei
 {
     if (!LOGIN) return;
-
  
-    
-    XWeakSelf
+     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         
         weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
@@ -956,7 +959,7 @@ ENGLISH  设置环境
     {
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
         RequireLogin
-        [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
+//        [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
         
     }else{
         

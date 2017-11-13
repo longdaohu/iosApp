@@ -248,50 +248,46 @@
     UINavigationController *nav = (UINavigationController *)self.selectedViewController;
     [nav popToRootViewControllerAnimated:NO];
 
-    if (view_id == 3) {
-        
-        [self setSelectedIndex:2];
-
-    }
-    
+    if (view_id == 3)  [self setSelectedIndex:2];
+ 
     if (!LOGIN) {
-        
-        XWGJNavigationController *nav_login =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
-        [nav presentViewController:nav_login animated:YES completion:nil];
-        
+
+         [nav presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]] animated:YES completion:nil];
+
         return;
     }
-    
+ 
+    UIViewController *vc = [[UIViewController alloc] init];
     switch (view_id) {
         case 0:
-        {
-            [nav pushViewController:[[ApplyStatusViewController alloc] init] animated:NO];
-        }
+            vc = [[ApplyStatusViewController alloc] init];
             break;
+        case 1: case 5:{
             
-        case 1:{
-           
             NotificationViewController *notiVC = [[NotificationViewController alloc] init];
             notiVC.hidesBottomBarWhenPushed = YES;
+            if ( view_id == 5) {
+                [nav pushViewController:notiVC animated:YES];
+                return;
+            }
             [nav pushViewController:notiVC animated:NO];
-            
             WebViewController *noti =[[WebViewController alloc] init];
             noti.path    = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,userInfo[@"message_id"]];
             [notiVC.navigationController pushViewController:noti  animated:YES];
- 
+            
+            return;
         }
             break;
             
-        case 2:{
-            
-                ApplyViewController *apply = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
-                [nav pushViewController:apply animated:NO];
-
-        }
+        case 2:
+            vc = [[ApplyViewController alloc] initWithNibName:@"ApplyViewController" bundle:nil];
             break;
         default:
             break;
     }
+    
+    [nav pushViewController:vc animated:NO];
+
     
 }
 

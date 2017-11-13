@@ -12,7 +12,7 @@
 #import "ApplyStutasCenterViewController.h"
 #import "PersonCell.h"
 #import "FavoriteViewController.h"
-#import "MBTIViewController.h"
+//#import "MBTIViewController.h"
 #import "NotificationViewController.h"
 #import "HelpViewController.h"
 #import "SetViewController.h"
@@ -115,7 +115,7 @@
         XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能大学匹配" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         znpp.action = NSStringFromSelector(@selector(caseZNPP));
         
-        XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"MBTI职业性格测试" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"大学排名" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         mbti.action = NSStringFromSelector(@selector(caseMBTI));
 
         XWGJAbout *service = [XWGJAbout cellWithLogo:@"p_qq" title:@"在线客服"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
@@ -445,7 +445,7 @@
     
     NSString *path = [NSString stringWithFormat:@"%@mbti/test",DOMAINURL];
     
-    [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
+//    [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
     
     self.currentType = CurrentClickTypeDefault;
 

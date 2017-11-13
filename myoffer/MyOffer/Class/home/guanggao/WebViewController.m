@@ -171,8 +171,32 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
+//    app:jump/openURL/http://www.baidu.com
+//    app:jump/1/35
+//    app:jump/1/32
+//    app:jump/1/34
+//    app:jump/0/undefined
     
     NSString *absoluteString = navigationAction.request.URL.absoluteString;
+    
+    NSString *pre_str = @"app:jump/openURL/";
+    
+    if ([absoluteString hasPrefix:pre_str]) {
+ 
+        [MobClick event:@"activity_ms"];
+
+        NSString *path = [absoluteString substringFromIndex:pre_str.length];
+        if (![path hasPrefix:@"http"]) {
+            
+            path = [NSString stringWithFormat:@"http://%@",path];
+        }
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
+        return;
+    }
     
     NSInteger pageNumber = DEFAULT_NUMBER;
     if ([absoluteString containsString:@"app:appJump"]) {
@@ -188,6 +212,7 @@
     }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report"] ) {
         pageNumber = 5;  //Ok   WebViewController
     }else if([absoluteString containsString:@"jump/1"]) {
+        [MobClick event:@"activity_ms"];
         pageNumber = 6;  //    申请状态
     }else if([absoluteString containsString:@"/university/"]) {
         pageNumber = 7;  //     学校详情
@@ -303,10 +328,17 @@
         }
             break;
         case 9:  case 10:
+        {
+            NSString *str = @"";
             
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:absoluteString]];
+            if (![absoluteString hasPrefix:@"http"]) {
+                
+                str = [NSString stringWithFormat:@"http://%@",absoluteString];
+            }
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
             decisionHandler(WKNavigationActionPolicyCancel);
-            
+        }
             break;
     
        default:

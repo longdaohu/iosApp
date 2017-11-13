@@ -59,7 +59,7 @@
 {
     if (!_itemImages) {
         
-        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"Home_mbti",@"Home_super",@"home_Mall"];
+        _itemImages =@[@"home_woyao",@"home_xiaobai",@"Home_pipei",@"Home_rank",@"Home_super",@"home_Mall"];
     }
   
     return _itemImages;
@@ -69,7 +69,7 @@
 {
     if (!_itemTitles) {
         
-        _itemTitles =@[@"我要留学" ,@"留学指南",@"智能匹配",@"MBTI测试",@"海外超级导师",@"留学购"];
+        _itemTitles =@[@"我要留学" ,@"留学指南",@"智能匹配",@"大学排名",@"海外超级导师",@"留学购"];
         
     }
     
