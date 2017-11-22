@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 
 @interface MessageDetaillViewController : BaseViewController
-@property(nonatomic,assign)NSString *message_id;
--(instancetype)initWithMessageId:(NSString *)message_id;
+@property(nonatomic,copy)NSString *message_id;
+- (instancetype)initWithMessageId:(NSString *)message_id;
 @end

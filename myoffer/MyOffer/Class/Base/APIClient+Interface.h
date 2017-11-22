@@ -31,6 +31,8 @@
 #define kAPISelectorGrades @"GET docs/:lang/grades.json"
 //国家数据
 #define kAPISelectorCountries @"GET docs/:lang/countries.json"
+//留学指南数据
+#define kAPISelectorGuideOversea @"GET docs/zh-cn/guide.json"
 //发送验证码
 #define kAPISelectorSendVerifyCode @"POST api/vcode"
 //用户注册

@@ -22,12 +22,10 @@
 #import "HotUniversityFrame.h"
 #import "HomeSearchView.h"
 #import "SearchViewController.h"
-#import "XiaobaiViewController.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "SearchUniversityCenterViewController.h"
 #import "XUToolbar.h"
-//#import "MBTIViewController.h"
 #import "MyOfferUniversityModel.h"
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
@@ -37,7 +35,7 @@
 #import "CatigoryViewController.h"
 #import "MyofferUpdateView.h"
 #import "SuperMasterViewController.h"
-
+#import "GuideOverseaViewController.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -870,12 +868,12 @@ ENGLISH  设置环境
     
 }
 
-//跳转留学小白
+//跳转留学指南
 -(void)CaseLiuXueXiaoBai
 {
     [MobClick event:@"XiaoBai"];
     
-    [self.navigationController pushViewController:[[XiaobaiViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[GuideOverseaViewController alloc] init] animated:YES];
 }
 
 

@@ -12,7 +12,7 @@
 #import "ApplyStutasCenterViewController.h"
 #import "PersonCell.h"
 #import "FavoriteViewController.h"
-//#import "MBTIViewController.h"
+#import "CatigoryViewController.h"
 #import "NotificationViewController.h"
 #import "HelpViewController.h"
 #import "SetViewController.h"
@@ -116,7 +116,7 @@
         znpp.action = NSStringFromSelector(@selector(caseZNPP));
         
         XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"大学排名" sub_title:nil accessory_title:nil accessory_icon:nil] ;
-        mbti.action = NSStringFromSelector(@selector(caseMBTI));
+        mbti.action = NSStringFromSelector(@selector(caseRank));
 
         XWGJAbout *service = [XWGJAbout cellWithLogo:@"p_qq" title:@"在线客服"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
         service.action = NSStringFromSelector(@selector(caseQQ));
@@ -437,18 +437,14 @@
 
 #pragma mark : 事件处理
 
-- (void)caseMBTI{
+- (void)caseRank{
     
-    self.currentType = CurrentClickTypeMBTI;
-    
-    RequireLogin
-    
-    NSString *path = [NSString stringWithFormat:@"%@mbti/test",DOMAINURL];
-    
-//    [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
-    
-    self.currentType = CurrentClickTypeDefault;
+    [self.tabBarController setSelectedIndex:1];
+    UINavigationController *nav  = self.tabBarController.childViewControllers[1];
+    CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
+    [catigroy jumpToRank];
 
+ 
 }
 
 - (void)caseQQ{
@@ -765,7 +761,7 @@
             [self caseTZ];
             break;
         case CurrentClickTypeMBTI:
-            [self caseMBTI];
+            [self caseRank];
             break;
         default:
             break;

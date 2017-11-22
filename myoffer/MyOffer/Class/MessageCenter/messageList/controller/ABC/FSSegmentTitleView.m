@@ -38,7 +38,7 @@
         self.delegate = delegate;
         self.indicatorType = incatorType;
         
-        UIView *line = [[UIView alloc] init];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, frame.size.height, 50, 1)];
         [self addSubview:line];
         self.bottom_line = line;
         self.bottom_line.backgroundColor = XCOLOR_line;
@@ -70,6 +70,7 @@
     self.bottom_line.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, LINE_HEIGHT);
     
     if (self.itemBtnArr.count == 0) {
+        
         return;
     }
     

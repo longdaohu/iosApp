@@ -198,6 +198,14 @@
         return;
     }
     
+    if ([absoluteString isEqualToString:@"about:blank"]) {
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+
+        return;
+    }
+ 
+    
     NSInteger pageNumber = DEFAULT_NUMBER;
     if ([absoluteString containsString:@"app:appJump"]) {
         pageNumber = 0; //ok
