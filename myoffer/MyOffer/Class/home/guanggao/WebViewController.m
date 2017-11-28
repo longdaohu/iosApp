@@ -9,7 +9,7 @@
 #import "WebViewController.h"
 #import "WYLXViewController.h"
 #import "PipeiEditViewController.h"
-#import "AUSearchResultViewController.h"
+//#import "AUSearchResultViewController.h"
 #import "MyOfferServerMallViewController.h"
 #import "NotificationViewController.h"
 #import "SearchUniversityCenterViewController.h"
@@ -17,6 +17,7 @@
 #import "ApplyStatusHistoryViewController.h"
 #import "UniversityViewController.h"
 #import "IntelligentResultViewController.h"
+#import "CatigoryViewController.h"
 
 
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
@@ -260,16 +261,9 @@
             break;
             
         case 2:{
-            NSString *country = [self.path hasSuffix:@"au"] ? @"澳大利亚":@"英国";
+//            NSString *country = [self.path hasSuffix:@"au"] ? @"澳大利亚":@"英国";
             
-            if([self.path hasSuffix:@"au"])
-            {
-                [self AUWithCountryType:country];
-                
-            }else{
-                
-                [self UKWithCountryType:country orderBy:RANK_TI];
-            }
+            [self caseUniversityList];
 
             decisionHandler(WKNavigationActionPolicyCancel);
         }
@@ -367,7 +361,7 @@
             [self caseZhiNenPipei];
             break;
         case 2:
-            [self caseUniversityList:responseJSON];
+            [self caseUniversityList];
             break;
         case 3:
             [self caseQQserver];
@@ -396,37 +390,18 @@
 }
 
 //院校排名
--(void)caseUniversityList:(NSDictionary *)response{
+-(void)caseUniversityList{
     
-    NSDictionary  *dict =  response[@"args"];
+//    NSDictionary  *dict =  response[@"args"];
     
-    if([dict[@"state"] containsString:@"au"])
-    {
-        [self AUWithCountryType:@"澳大利亚"];
-        
-    }else if([dict[@"state"] containsString:@"uk"]){
-        
-        [self UKWithCountryType:@"英国" orderBy:RANK_TI];
-        
-    }else{
-        
-        [self UKWithCountryType:@"QS世界排名" orderBy:RANK_QS];
-    }
-}
--(void)UKWithCountryType:(NSString *)country orderBy:(NSString *)rankType{
-    
-    SearchResultViewController *vc = [[SearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:rankType];
-    vc.title  = [country isEqualToString:@"英国"]?[NSString stringWithFormat:@"%@大学排名",country] : country;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.tabBarController setSelectedIndex:1];
+    UINavigationController *nav  = self.tabBarController.childViewControllers[1];
+    CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
+    [catigroy jumpToRank];
+  
 }
 
--(void)AUWithCountryType:(NSString *)country{
-    
-    AUSearchResultViewController *newVc = [[AUSearchResultViewController alloc] initWithFilter:@"country" value:country orderBy:RANK_TI];
-    newVc.title  = [NSString stringWithFormat:@"%@大学排名",country];
-    [self.navigationController pushViewController:newVc animated:YES];
-    
-}
+
 
 
 //判断是否有智能匹配数据或收藏学校

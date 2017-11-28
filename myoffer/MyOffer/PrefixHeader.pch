@@ -98,8 +98,8 @@
 #define CELL_HEIGHT_DAFAULT  50
 
 
-//#define DOMAINURL  @"http://www.myofferdemo.com/"
-#define DOMAINURL  @"http://www.myoffer.cn/"
+#define DOMAINURL  @"https://www.myofferdemo.com/"
+//#define DOMAINURL  @"http://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"
@@ -129,7 +129,7 @@
 #import "BaseViewController.h"
 #import "UINavigationController+NavigationHelper.h"
 #import "LogoView.h"
-#import "SearchResultViewController.h" 
+//#import "SearchResultViewController.h" 
 #import "InternationalControl.h"
 #import "XWGJNavigationController.h"
 #import "MJRefresh.h"

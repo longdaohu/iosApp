@@ -407,7 +407,7 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-     self.countryItems_CN = @[@"英国+100",@"澳大利亚+101"];
+     self.countryItems_CN = @[@"英国+100",@"澳大利亚+101",@"美国+102",@"新西兰+103",@"中国香港+104"];
     
      NSArray *subjectes = [ud valueForKey:@"Subject_CN"];
      self.subjectItems_CN = [MyOfferSubjecct mj_objectArrayWithKeyValuesArray:subjectes];

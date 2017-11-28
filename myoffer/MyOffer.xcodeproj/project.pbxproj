@@ -403,8 +403,6 @@
 		AEA24B271D5B251800DD7939 /* LoginSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B1A1D5B251800DD7939 /* LoginSelectViewController.m */; };
 		AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */; };
 		AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B201D5B251800DD7939 /* YourBindView.m */; };
-		AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */; };
-		AEA24B771D5B25E000DD7939 /* SearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B321D5B25E000DD7939 /* SearchResultViewController.xib */; };
 		AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B341D5B25E000DD7939 /* SearchViewController.m */; };
 		AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24B351D5B25E000DD7939 /* SearchViewController.xib */; };
 		AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24B3C1D5B25E000DD7939 /* FiltContent.m */; };
@@ -433,8 +431,6 @@
 		AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C011D5B269A00DD7939 /* UserDefaults.m */; };
 		AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */; };
 		AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */; };
-		AEA24C271D5B283700DD7939 /* center_ban_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */; };
-		AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */; };
 		AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */; };
 		AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */; };
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
@@ -455,7 +451,6 @@
 		AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC47A411ECC20D60085F19A /* UniverstityTCell.m */; };
 		AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */; };
 		AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */; };
-		AECC87C81F95F63800FCBBEC /* AUSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC877F1F95F63800FCBBEC /* AUSearchResultViewController.m */; };
 		AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87811F95F63800FCBBEC /* CatigoryViewController.m */; };
 		AECC87CA1F95F63800FCBBEC /* RankFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87831F95F63800FCBBEC /* RankFilterViewController.m */; };
 		AECC87CB1F95F63800FCBBEC /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87861F95F63800FCBBEC /* NomalCollectionController.m */; };
@@ -484,7 +479,6 @@
 		AECC87E31F95F63800FCBBEC /* CatigaryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C01F95F63800FCBBEC /* CatigaryScrollView.m */; };
 		AECC87E41F95F63800FCBBEC /* CatigorySubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C21F95F63800FCBBEC /* CatigorySubjectCell.m */; };
 		AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC87C31F95F63800FCBBEC /* CatigorySubjectCell.xib */; };
-		AECC87E61F95F63800FCBBEC /* NomalTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C51F95F63800FCBBEC /* NomalTableSectionHeaderView.m */; };
 		AECC87E71F95F63800FCBBEC /* RankTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C71F95F63800FCBBEC /* RankTypeCell.m */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
@@ -1214,9 +1208,6 @@
 		AEA24B1B1D5B251800DD7939 /* LoginSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSelectViewController.xib; sourceTree = "<group>"; };
 		AEA24B1F1D5B251800DD7939 /* YourBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourBindView.h; sourceTree = "<group>"; };
 		AEA24B201D5B251800DD7939 /* YourBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourBindView.m; sourceTree = "<group>"; };
-		AEA24B301D5B25E000DD7939 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
-		AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
-		AEA24B321D5B25E000DD7939 /* SearchResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultViewController.xib; sourceTree = "<group>"; };
 		AEA24B331D5B25E000DD7939 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		AEA24B341D5B25E000DD7939 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		AEA24B351D5B25E000DD7939 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
@@ -1271,8 +1262,6 @@
 		AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJNavigationController.m; sourceTree = "<group>"; };
 		AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTabBarController.h; sourceTree = "<group>"; };
 		AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTabBarController.m; sourceTree = "<group>"; };
-		AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban_CN.jpg; sourceTree = "<group>"; };
-		AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = center_ban02_CN.jpg; sourceTree = "<group>"; };
 		AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHolderImage.png; sourceTree = "<group>"; };
 		AEA255671EAF5BF700F0208B /* SearchUniCenterFilterVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniCenterFilterVController.h; sourceTree = "<group>"; };
 		AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniCenterFilterVController.m; sourceTree = "<group>"; };
@@ -1305,8 +1294,6 @@
 		AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProductDescriptCell.h; sourceTree = "<group>"; };
 		AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProductDescriptCell.m; sourceTree = "<group>"; };
 		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
-		AECC877E1F95F63800FCBBEC /* AUSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUSearchResultViewController.h; sourceTree = "<group>"; };
-		AECC877F1F95F63800FCBBEC /* AUSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUSearchResultViewController.m; sourceTree = "<group>"; };
 		AECC87801F95F63800FCBBEC /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
 		AECC87811F95F63800FCBBEC /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
 		AECC87821F95F63800FCBBEC /* RankFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankFilterViewController.h; sourceTree = "<group>"; };
@@ -1360,8 +1347,6 @@
 		AECC87C11F95F63800FCBBEC /* CatigorySubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigorySubjectCell.h; sourceTree = "<group>"; };
 		AECC87C21F95F63800FCBBEC /* CatigorySubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigorySubjectCell.m; sourceTree = "<group>"; };
 		AECC87C31F95F63800FCBBEC /* CatigorySubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatigorySubjectCell.xib; sourceTree = "<group>"; };
-		AECC87C41F95F63800FCBBEC /* NomalTableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NomalTableSectionHeaderView.h; sourceTree = "<group>"; };
-		AECC87C51F95F63800FCBBEC /* NomalTableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NomalTableSectionHeaderView.m; sourceTree = "<group>"; };
 		AECC87C61F95F63800FCBBEC /* RankTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankTypeCell.h; sourceTree = "<group>"; };
 		AECC87C71F95F63800FCBBEC /* RankTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTypeCell.m; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
@@ -3439,9 +3424,6 @@
 				AEA24B331D5B25E000DD7939 /* SearchViewController.h */,
 				AEA24B341D5B25E000DD7939 /* SearchViewController.m */,
 				AEA24B351D5B25E000DD7939 /* SearchViewController.xib */,
-				AEA24B301D5B25E000DD7939 /* SearchResultViewController.h */,
-				AEA24B311D5B25E000DD7939 /* SearchResultViewController.m */,
-				AEA24B321D5B25E000DD7939 /* SearchResultViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3589,14 +3571,12 @@
 			isa = PBXGroup;
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
-				AEA24C171D5B283700DD7939 /* center_ban_CN.jpg */,
 				AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */,
 				AE892A191EBC87890035A31D /* uk_more.jpg */,
 				AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */,
 				AE892A1A1EBC87890035A31D /* usa_more.jpg */,
 				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
 				AEF2625F1F960864005D0768 /* nzl_more.jpg */,
-				AEA24C191D5B283700DD7939 /* center_ban02_CN.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
 				AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */,
 			);
@@ -3619,8 +3599,6 @@
 		AECC877D1F95F63800FCBBEC /* C */ = {
 			isa = PBXGroup;
 			children = (
-				AECC877E1F95F63800FCBBEC /* AUSearchResultViewController.h */,
-				AECC877F1F95F63800FCBBEC /* AUSearchResultViewController.m */,
 				AECC87801F95F63800FCBBEC /* CatigoryViewController.h */,
 				AECC87811F95F63800FCBBEC /* CatigoryViewController.m */,
 				AECC87821F95F63800FCBBEC /* RankFilterViewController.h */,
@@ -3768,8 +3746,6 @@
 				AECC87C11F95F63800FCBBEC /* CatigorySubjectCell.h */,
 				AECC87C21F95F63800FCBBEC /* CatigorySubjectCell.m */,
 				AECC87C31F95F63800FCBBEC /* CatigorySubjectCell.xib */,
-				AECC87C41F95F63800FCBBEC /* NomalTableSectionHeaderView.h */,
-				AECC87C51F95F63800FCBBEC /* NomalTableSectionHeaderView.m */,
 				AECC87C61F95F63800FCBBEC /* RankTypeCell.h */,
 				AECC87C71F95F63800FCBBEC /* RankTypeCell.m */,
 			);
@@ -3953,7 +3929,6 @@
 				AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
-				AEA24C291D5B283700DD7939 /* center_ban02_CN.jpg in Resources */,
 				AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
@@ -4033,9 +4008,7 @@
 				AE1FD7551D5C929500FFD5A8 /* MJRefresh.bundle in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
-				AEA24C271D5B283700DD7939 /* center_ban_CN.jpg in Resources */,
 				AE7FFCBD1EC07E1C00D2FDCB /* into001.jpeg in Resources */,
-				AEA24B771D5B25E000DD7939 /* SearchResultViewController.xib in Resources */,
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
 				AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */,
 				AE1FD73E1D5C929500FFD5A8 /* Pre-comp 1_00026.png in Resources */,
@@ -4207,7 +4180,6 @@
 				AEA24BEA1D5B266A00DD7939 /* LogoView.m in Sources */,
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
 				AE3943DF1E0A1AD00038826A /* TAPageControl.m in Sources */,
-				AEA24B761D5B25E000DD7939 /* SearchResultViewController.m in Sources */,
 				AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */,
 				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
@@ -4417,8 +4389,6 @@
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AECC87DD1F95F63800FCBBEC /* RankTypeHeaderView.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
-				AECC87E61F95F63800FCBBEC /* NomalTableSectionHeaderView.m in Sources */,
-				AECC87C81F95F63800FCBBEC /* AUSearchResultViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
 				AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */,
 				AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */,
