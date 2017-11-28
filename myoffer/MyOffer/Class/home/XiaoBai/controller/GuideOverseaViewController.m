@@ -116,7 +116,7 @@
         for (NSInteger row = 0; row < guideModel.process.count; row++) {
             
             GuideProcess *pro = guideModel.process[row];
-            
+            pro.current_index = 1;
             pro.row = (row + 1);
         }
         
@@ -180,7 +180,7 @@
     for (GuideProcess *pro  in self.current_guide.process) {
         
          pro.item_offset_x = 0;
-         pro.current_index = 0;
+         pro.current_index = 1;
         
     }
   
