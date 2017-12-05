@@ -452,10 +452,7 @@
 }
 
 
-
-/**
- *  创建轮播图头部
- */
+#pragma mark : 创建轮播图头部
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
     XWeakSelf
@@ -956,7 +953,7 @@ ENGLISH  设置环境
     }else if([path containsString:@"mbti/test"])
     {
         self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
-        RequireLogin
+//        RequireLogin
 //        [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
         
     }else{

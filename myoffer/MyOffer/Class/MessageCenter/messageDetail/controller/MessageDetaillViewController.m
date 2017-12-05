@@ -21,6 +21,7 @@
 #import "UniversityViewController.h"
 #import "HomeSectionHeaderView.h"
 #import "MessageArticle.h"
+#import "MyOfferServerMallViewController.h"
 
 @interface MessageDetaillViewController ()<UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate>
 
@@ -281,9 +282,53 @@
 #pragma mark : WKWebViewDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+
+    NSString *path  = navigationAction.request.URL.absoluteString;
+ 
+//    NSLog(@"path = %@",path);
     
-    
-    [navigationAction.request.URL.absoluteString containsString:self.message_id] ? decisionHandler(WKNavigationActionPolicyAllow) : decisionHandler(WKNavigationActionPolicyCancel);
+    if ([path containsString:self.message_id] ) {
+        
+        decisionHandler(WKNavigationActionPolicyAllow);
+        
+    }else{
+
+        /*
+         
+         //留学购
+         NSString *emall_path = [NSString stringWithFormat:@"%@emall/index.html",DOMAINURL];
+         //大学 path = http://www.myoffer.cn/university/6782.html
+         NSString *uni_path = [NSString stringWithFormat:@"%@university/",DOMAINURL];
+         //文章详情 http://www.myoffer.cn/article/3891.html
+         NSString *article_path = [NSString stringWithFormat:@"%@article/",DOMAINURL];
+
+         
+        if ([path hasPrefix:uni_path]) {
+
+            UniversityViewController *uni = [[UniversityViewController alloc] initWithUniversityId:@"6782"] ;
+            [self.navigationController pushViewController:uni animated:YES];
+
+        }
+
+
+        if ([path hasPrefix:emall_path]) {
+
+             [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
+        }
+        
+        if ([path hasPrefix:article_path]) {
+
+            
+            MessageDetaillViewController *uni = [[MessageDetaillViewController alloc] initWithMessageId:@"3891"] ;
+            
+            [self.navigationController pushViewController:uni animated:YES];
+            
+        }
+         */
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }
+
   
     /*
      *  WKNavigationActionPolicyAllow
@@ -294,11 +339,8 @@
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    [webView evaluateJavaScript:@"document.body.style.padding = '0  15px  30px  15px';;" completionHandler:^(id Result, NSError * error) {
-     }];
-    
     XWeakSelf
-    [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
+    [webView evaluateJavaScript:@"document.body.style.paddingBottom = '30px'; document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
         
         NSString *web_height = [NSString stringWithFormat:@"%@",Result];
         

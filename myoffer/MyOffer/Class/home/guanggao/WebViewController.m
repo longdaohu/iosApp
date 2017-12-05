@@ -93,6 +93,29 @@
     [super viewDidLoad];
     
     [self makeUI];
+    
+    NSString *tozhi_url_pre = [NSString stringWithFormat:@"%@account/message",DOMAINURL];
+    NSString *tozhi_url_sub = @"client=app";
+    if ([self.path hasPrefix:tozhi_url_pre] && [self.path hasSuffix:tozhi_url_sub]) {
+        
+    }else{
+        
+        UIBarButtonItem *pre_item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(casePre)];
+        UIBarButtonItem *pop_item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_button"] style:UIBarButtonItemStyleDone target:self action:@selector(casePop)];
+        self.navigationItem.leftBarButtonItems = @[pre_item,pop_item];
+        
+    }
+    
+}
+
+- (void)casePre{
+    
+    [self.web_wk canGoBack] ? [self.web_wk goBack] : [self casePop];
+}
+
+- (void)casePop{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)makeUI
@@ -109,15 +132,16 @@
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     
     
-    if([self.path containsString:@"agreement.html"]){
-        
-        NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    if([self.path hasSuffix:@"agreement.html"]){
+
+        NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no'); document.getElementsByTagName('head')[0].appendChild(meta);";
         WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         WKUserContentController *wkUController = [[WKUserContentController alloc] init];
         [wkUController addUserScript:wkUScript];
         WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
         wkWebConfig.userContentController = wkUController;
         self.web_wk = [[WKWebView alloc] initWithFrame:CGRectMake(0,0,XSCREEN_WIDTH,XSCREEN_HEIGHT - XNAV_HEIGHT) configuration:wkWebConfig];
+        self.title = @"myOffer用户协议";
         
     }else{
         
@@ -142,7 +166,7 @@
 }
 
 
-#pragma mark ；  WKWebViewDeleage
+#pragma mark ；/Users/xuewuguojie/Desktop/iosApp/myoffer/myOffer.xcodeproj  WKWebViewDeleage
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
@@ -154,7 +178,7 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     
-     NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};";
+    NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};  var a_list = document.querySelectorAll('a');for(var index = 0;index<a_list.length;index++){a_list[index].setAttribute('target','');}";
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
     [self.hud hideAnimated:YES];
@@ -199,12 +223,16 @@
         return;
     }
     
+    
+    
+    //空白页
     if ([absoluteString isEqualToString:@"about:blank"]) {
         
         decisionHandler(WKNavigationActionPolicyCancel);
 
         return;
     }
+    
  
     
     NSInteger pageNumber = DEFAULT_NUMBER;
@@ -227,12 +255,8 @@
         pageNumber = 7;  //     学校详情
     }else if([absoluteString containsString:@"service.html"] || [absoluteString containsString:@"emall/index.html"]) {
         pageNumber = 8;  //服务商城
-    }else if([absoluteString isEqualToString:DOMAINURL]){
-        pageNumber = 9;
-    }else if(![absoluteString containsString:DOMAINURL] && ![absoluteString containsString:@"http://public.myoffer.cn"]&& ![absoluteString containsString:@"meiqia.com"] && ![absoluteString containsString:@"www.sojump.hk"] && ![absoluteString containsString:@"www.apesk.com"]){
-        pageNumber = 10;
     }
-    
+ 
     switch (pageNumber) {
             
         case 0:{
@@ -261,8 +285,7 @@
             break;
             
         case 2:{
-//            NSString *country = [self.path hasSuffix:@"au"] ? @"澳大利亚":@"英国";
-            
+ 
             [self caseUniversityList];
 
             decisionHandler(WKNavigationActionPolicyCancel);
@@ -392,16 +415,12 @@
 //院校排名
 -(void)caseUniversityList{
     
-//    NSDictionary  *dict =  response[@"args"];
-    
     [self.tabBarController setSelectedIndex:1];
     UINavigationController *nav  = self.tabBarController.childViewControllers[1];
     CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
     [catigroy jumpToRank];
   
 }
-
-
 
 
 //判断是否有智能匹配数据或收藏学校
