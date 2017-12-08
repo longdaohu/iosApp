@@ -121,7 +121,7 @@
     [self makeUI];
     
     [self makeOther];
-    
+  
 }
 
 

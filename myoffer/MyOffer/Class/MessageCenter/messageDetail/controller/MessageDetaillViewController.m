@@ -284,57 +284,63 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
     NSString *path  = navigationAction.request.URL.absoluteString;
- 
-//    NSLog(@"path = %@",path);
     
     if ([path containsString:self.message_id] ) {
         
         decisionHandler(WKNavigationActionPolicyAllow);
         
-    }else{
-
-        /*
-         
-         //留学购
-         NSString *emall_path = [NSString stringWithFormat:@"%@emall/index.html",DOMAINURL];
-         //大学 path = http://www.myoffer.cn/university/6782.html
-         NSString *uni_path = [NSString stringWithFormat:@"%@university/",DOMAINURL];
-         //文章详情 http://www.myoffer.cn/article/3891.html
-         NSString *article_path = [NSString stringWithFormat:@"%@article/",DOMAINURL];
-
-         
-        if ([path hasPrefix:uni_path]) {
-
-            UniversityViewController *uni = [[UniversityViewController alloc] initWithUniversityId:@"6782"] ;
-            [self.navigationController pushViewController:uni animated:YES];
-
-        }
-
-
-        if ([path hasPrefix:emall_path]) {
-
-             [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
-        }
-        
-        if ([path hasPrefix:article_path]) {
-
-            
-            MessageDetaillViewController *uni = [[MessageDetaillViewController alloc] initWithMessageId:@"3891"] ;
-            
-            [self.navigationController pushViewController:uni animated:YES];
-            
-        }
-         */
-        
-        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
     }
+ 
+    NSString *article_rule =@"^http(s)?://www.(myofferdemo.com|myoffer.cn)/article/[0-9]+.html";
+    NSString *uni_rule =@"^http(s)?://www.(myofferdemo.com|myoffer.cn)/university/[0-9]+.html";
+    NSString *emall_path = @"emall/index.html";
+    //    NSString *myoffer_rule =@"^http(.*)?((myofferdemo.com|myoffer.cn)/?)$";
 
-  
+    if([self matchWithPath:path rule:article_rule]){
+        
+        NSArray *arr = [path componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"./"]];
+        if(arr.count > 2){
+            
+            NSString *url_path = [NSString stringWithFormat:@"GET api/article/short-id/%@",arr[arr.count-2]];
+            XWeakSelf
+            [self startAPIRequestWithSelector:url_path parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:response[@"id"]] ;
+                [weakSelf.navigationController pushViewController:detail animated:YES];
+            } additionalFailureAction:nil];
+        }
+        
+    }else if([self matchWithPath:path rule:uni_rule]){
+ 
+        NSArray *arr = [path componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"./"]];
+        if(arr.count > 2){
+            [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:arr[arr.count-2]] animated:YES];
+        }
+        
+    }else if([path hasSuffix:emall_path]){
+        
+        [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
+ 
+    }
+ 
+ 
+    decisionHandler(WKNavigationActionPolicyCancel);
+
+ 
     /*
      *  WKNavigationActionPolicyAllow
      *  WKNavigationActionPolicyCancel   不允许
      */
 }
+
+// 正则表达式匹配 网页链接
+- (BOOL)matchWithPath:(NSString *)path rule:(NSString *)rule{
+    
+     NSPredicate *article_pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",rule];
+    
+    return [article_pre evaluateWithObject:path];
+}
+
 
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
