@@ -950,12 +950,6 @@ ENGLISH  设置环境
         
         [self CaseSuperMaster];
         
-    }else if([path containsString:@"mbti/test"])
-    {
-        self.clickType = LOGIN ? HomePageClickItemTypeNoClick : HomePageClickItemTypetest;
-//        RequireLogin
-//        [self.navigationController pushViewController:[[MBTIViewController alloc] initWithPath:path] animated:YES];
-        
     }else{
         
         [self.navigationController pushViewController:[[WebViewController alloc] initWithPath:path] animated:YES];

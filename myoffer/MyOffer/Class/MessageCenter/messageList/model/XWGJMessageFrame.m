@@ -51,7 +51,7 @@
     CGFloat  tag_w = News.category_thr.length ? tagSize.width + 10 : 0;
     CGFloat  tag_h = tagSize.height + 4;
     CGFloat  tag_x = titlex;
-    CGFloat  tag_y = timey - tag_h - 6;
+    CGFloat  tag_y = timey - tag_h - 4;
     self.tagFrame = CGRectMake(tag_x,tag_y, tag_w, tag_h);
     
     

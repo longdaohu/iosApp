@@ -163,7 +163,9 @@
     
     XWeakSelf
 
-    [self startAPIRequestWithSelector:kAPISelectorMyofferMall parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    BOOL isService = self.sevice ? NO : YES;
+    
+    [self startAPIRequestWithSelector:kAPISelectorMyofferMall parameters:nil expectedStatusCodes:nil showHUD:isService showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
         
@@ -180,7 +182,7 @@
 
     //1 数据模型
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
- 
+    self.sevice.login_status  = LOGIN;
     //5 轮播图匹配数据
     NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
     if (images.count > 0) {

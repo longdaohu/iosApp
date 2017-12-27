@@ -178,7 +178,7 @@ typedef enum {
 {
     if (!_ApplyTimes) {
         
-       _ApplyTimes = @[@"2017",@"2018",@"2019+"];
+       _ApplyTimes = @[@"2018",@"2019",@"2020+"];
 
     }
     return _ApplyTimes;
@@ -297,7 +297,7 @@ typedef enum {
         WYLXGroup *firstName_cell   =  [WYLXGroup groupWithType:EditTypeDefault title:@"名" placeHolder:@"例如：梅梅" content:nil groupKey:@"first_name" spod:NO];
         WYLXGroup *phone_cell   =  [WYLXGroup groupWithType:EditTypePhoneNomal title:@"联系电话" placeHolder:@"请输入手机号码" content:nil groupKey:@"phonenumber" spod:NO];
         WYLXGroup *country_cell   =  [WYLXGroup groupWithType:EditTypeCountry title:@"国家目的地" placeHolder:@"英国" content:nil groupKey:@"des_country" spod:true];
-        WYLXGroup *plan_time_cell   =  [WYLXGroup groupWithType:EditTypeTime title:@"计划出国时间" placeHolder:@"2017" content:nil groupKey:@"target_date" spod:true];
+        WYLXGroup *plan_time_cell   =  [WYLXGroup groupWithType:EditTypeTime title:@"计划出国时间" placeHolder:@"2018" content:nil groupKey:@"target_date" spod:true];
         WYLXGroup *plan_subject_cell   =  [WYLXGroup groupWithType:EditTypeSujectplan title:@"希望就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"apply" spod:true];
      
         WYLXGroup *uni_cell   =  [WYLXGroup groupWithType:EditTypeUniversity title:@"最近就读学校" placeHolder:@"例如：英国大学" content:nil groupKey:@"university" spod:NO];

@@ -80,8 +80,9 @@
     [self.titleLab sizeToFit];
     
     self.subTitleLab.text   = noti.summary;
-    [self.subTitleLab sizeToFit];
-
+//    [self.subTitleLab sizeToFit];
+//    self.subTitleLab.mj_w = XSCREEN_WIDTH - self.titleLab.mj_x;
+    
     self.timeLab.text       = noti.create_time_short;
     [self.timeLab sizeToFit];
     
@@ -132,8 +133,8 @@
 
     
     CGFloat sub_X = title_X;
-    CGFloat sub_W = self.subTitleLab.mj_w;
-    CGFloat sub_H = self.subTitleLab.mj_h;
+    CGFloat sub_W =  contentSize.width - title_X;
+    CGFloat sub_H = title_H;
     CGFloat sub_Y = CGRectGetMaxY(self.logoView.frame) - sub_H;
     self.subTitleLab.frame =CGRectMake(sub_X, sub_Y, sub_W, sub_H);
     

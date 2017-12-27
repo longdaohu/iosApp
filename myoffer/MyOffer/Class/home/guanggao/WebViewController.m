@@ -9,15 +9,15 @@
 #import "WebViewController.h"
 #import "WYLXViewController.h"
 #import "PipeiEditViewController.h"
-//#import "AUSearchResultViewController.h"
 #import "MyOfferServerMallViewController.h"
 #import "NotificationViewController.h"
 #import "SearchUniversityCenterViewController.h"
-//#import "ApplyStatusViewController.h"
 #import "ApplyStatusHistoryViewController.h"
+#import "ApplyStatusViewController.h"
 #import "UniversityViewController.h"
 #import "IntelligentResultViewController.h"
 #import "CatigoryViewController.h"
+#import "MessageDetaillViewController.h"
 
 
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
@@ -110,7 +110,15 @@
 
 - (void)casePre{
     
-    [self.web_wk canGoBack] ? [self.web_wk goBack] : [self casePop];
+    if ([self.web_wk canGoBack] ) {
+        
+        [self.web_wk goBack];
+        [self.hud hideAnimated:YES];
+        
+    }else{
+        
+         [self casePop];
+    }
 }
 
 - (void)casePop{
@@ -178,7 +186,8 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     
-    NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};  var a_list = document.querySelectorAll('a');for(var index = 0;index<a_list.length;index++){a_list[index].setAttribute('target','');}";
+    NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};  var a_list = document.querySelectorAll('a');for(var index = 0;index<a_list.length;index++){ a_list[index].setAttribute('target','');  } ";
+//    a_list[index].setAttribute('style','display:inline-block; overflow:hidden;');
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
     [self.hud hideAnimated:YES];
@@ -204,8 +213,8 @@
     
     NSString *absoluteString = navigationAction.request.URL.absoluteString;
     
+    //通知内在网页跳转
     NSString *pre_str = @"app:jump/openURL/";
-    
     if ([absoluteString hasPrefix:pre_str]) {
  
         [MobClick event:@"activity_ms"];
@@ -222,9 +231,7 @@
         
         return;
     }
-    
-    
-    
+
     //空白页
     if ([absoluteString isEqualToString:@"about:blank"]) {
         
@@ -233,142 +240,118 @@
         return;
     }
     
- 
+    //文章详情
+    NSString *article_rule =@"^http(s)?://www.(myofferdemo.com|myoffer.cn)/article/[0-9]+.html";
+    if([self matchWithPath:absoluteString rule:article_rule] && ![self.path isEqualToString:absoluteString]){
+        
+//          NSLog(@">>>>>>>文章详情>>>>>>>>> %@  ==  %@",absoluteString,self.path);
+        
+        NSArray *arr = [absoluteString componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"./"]];
+        if(arr.count > 2){
+            
+            NSString *url_path = [NSString stringWithFormat:@"GET api/article/short-id/%@",arr[arr.count-2]];
+            XWeakSelf
+            [self startAPIRequestWithSelector:url_path parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:response[@"id"]] ;
+                [weakSelf.navigationController pushViewController:detail animated:YES];
+            } additionalFailureAction:nil];
+        }
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
+        return;
+        
+    }
     
-    NSInteger pageNumber = DEFAULT_NUMBER;
+
+    
+   
     if ([absoluteString containsString:@"app:appJump"]) {
-        pageNumber = 0; //ok
+        NSArray  *items = [absoluteString componentsSeparatedByString:@"/"];
+        NSString *jump_str = @"";
+        for (NSString *item in items) {
+            if ([item containsString:@"args"]) {
+                jump_str  = item;
+                break;
+            }
+        }
+        
+        NSString *path = [jump_str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSData *JSONData = [path dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
+        [self pageWithResponse:responseJSON];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if ([absoluteString containsString:@"/evaluate"]){
-        pageNumber = 1; //OK   智能匹配
+        //OK   智能匹配
+        [self caseZhiNenPipei];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if([absoluteString containsString:@"/rank"]){
-        pageNumber = 2; //OK   英澳排名
+         //OK   英澳排名
+        [self caseUniversityList];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if([absoluteString containsString:@"/intention"]){
-        pageNumber = 3; //OK   留学咨询
+         //OK   留学咨询
+        [self caseWoyaoluxue];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if([absoluteString hasSuffix:@"recommend?major"]){
-        pageNumber = 4; //OK   留学咨询
+       //OK   留学咨询
+        [self caseWoyaoluxue];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else  if ([absoluteString containsString:@"recommend?major="]  || [absoluteString containsString:@"mbti/recommend"]|| [absoluteString containsString:@"mbti1_report"] ) {
-        pageNumber = 5;  //Ok   WebViewController
+       
+        //Ok   WebViewController
+        NSDictionary *header =  navigationAction.request.allHTTPHeaderFields;
+        NSString *apiValue  = [header valueForKey:@"apikey"];
+        
+        if (apiValue.length == 0) {
+            
+            WebViewController *webPage = [[WebViewController alloc] init];
+            webPage.path = absoluteString;
+            [self.navigationController pushViewController:webPage animated:YES];
+            
+            decisionHandler(WKNavigationActionPolicyCancel);
+            
+            
+        }else{
+            
+            decisionHandler(WKNavigationActionPolicyAllow);
+            
+        }
+        
+        
     }else if([absoluteString containsString:@"jump/1"]) {
         [MobClick event:@"activity_ms"];
-        pageNumber = 6;  //    申请状态
+        // 申请服务状态
+        [self caseApplyStatus:absoluteString];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
+    }else if([absoluteString hasPrefix:@"app:jump/0"]) {
+        
+        // 申请状态
+        [self caseApplyStatus];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if([absoluteString containsString:@"/university/"]) {
-        pageNumber = 7;  //     学校详情
+         //学校详情
+        NSRange UniRagne = [absoluteString rangeOfString:@"university/"];
+        NSString *lastPath =[absoluteString substringWithRange:NSMakeRange((UniRagne.location + UniRagne.length), absoluteString.length - (UniRagne.location + UniRagne.length))];
+        NSArray *contents = [lastPath componentsSeparatedByString:@"."];
+        [self caseUniversityWithshortId:contents[0]];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
     }else if([absoluteString containsString:@"service.html"] || [absoluteString containsString:@"emall/index.html"]) {
-        pageNumber = 8;  //服务商城
-    }
- 
-    switch (pageNumber) {
-            
-        case 0:{
-
-            NSArray  *items = [absoluteString componentsSeparatedByString:@"/"];
-            NSString *jump_str = @"";
-            for (NSString *item in items) {
-                if ([item containsString:@"args"]) {
-                    jump_str  = item;
-                    break;
-                }
-            }
- 
-            NSString *path = [jump_str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSData *JSONData = [path dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
-            [self pageWithResponse:responseJSON];
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-            
-        case 1:{
-            [self caseZhiNenPipei];
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-            
-        case 2:{
- 
-            [self caseUniversityList];
-
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-        case 3:{
-        
-            [self caseWoyaoluxue];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-        case 4:
-        {
-            [self caseWoyaoluxue];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-        case 5:{
-        
-            NSDictionary *header =  navigationAction.request.allHTTPHeaderFields;
-            NSString *apiValue  = [header valueForKey:@"apikey"];
-            
-            if (apiValue.length == 0) {
-                
-                
-                WebViewController *webPage = [[WebViewController alloc] init];
-                 webPage.path = absoluteString;
-                [self.navigationController pushViewController:webPage animated:YES];
-                
-                decisionHandler(WKNavigationActionPolicyCancel);
-                
-                
-            }else{
-                
-                decisionHandler(WKNavigationActionPolicyAllow);
-                
-            }
-        }
-            break;
-            case 6:
-        {
-            [self caseApplyStatus:absoluteString];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-         }
-            break;
-        case 7:
-        {
-            NSRange UniRagne = [absoluteString rangeOfString:@"university/"];
-            NSString *lastPath =[absoluteString substringWithRange:NSMakeRange((UniRagne.location + UniRagne.length), absoluteString.length - (UniRagne.location + UniRagne.length))];
-            NSArray *contents = [lastPath componentsSeparatedByString:@"."];
-            
-            [self caseUniversityWithshortId:contents[0]];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-        case 8:
-        {
-            [self caseServiceMall];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-        case 9:  case 10:
-        {
-            NSString *str = @"";
-            
-            if (![absoluteString hasPrefix:@"http"]) {
-                
-                str = [NSString stringWithFormat:@"http://%@",absoluteString];
-            }
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-            break;
-    
-       default:
-            decisionHandler(WKNavigationActionPolicyAllow);
-            break;
+        //服务商城
+        [self caseServiceMall];
+        decisionHandler(WKNavigationActionPolicyCancel);
+       
+    }else{
+//        NSLog(@">>>>>>>>>>>>>>>> %@  ==  %@",absoluteString,self.path);
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
     
 }
@@ -404,9 +387,6 @@
         case 9:
             [self caseSearchUniversityWithdict:responseJSON];
             break;
-        case 10:
-            [self caseVedioWithdict:responseJSON];
-            break;
         default:
             break;
     }
@@ -426,13 +406,13 @@
 //判断是否有智能匹配数据或收藏学校
 -(void)checkZhiNengPiPei
 {
-    if (LOGIN) {
-        
-        XWeakSelf
-        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-        }];
-    }
+//    if (LOGIN) {
+//
+//        XWeakSelf
+//        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
+//            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
+//        }];
+//    }
 }
 
 
@@ -471,6 +451,13 @@
     
 }
 
+//审核状态
+-(void)caseApplyStatus{
+    
+    [self.navigationController pushViewController:[[ApplyStatusViewController alloc] init] animated:YES];
+
+}
+
 //我要留学
 -(void)caseWoyaoluxue{
     
@@ -507,13 +494,7 @@
    [self.navigationController pushViewController:vc animated:YES];
     
 }
-//查看YOUKU视频
--(void)caseVedioWithdict:(NSDictionary *)response{
-    
-    NSDictionary *dict =  response[@"args"];
-    NSString *path = [dict[@"url"] length] > 0 ? dict[@"url"]: @"http://www.myoffer.cn/";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
-}
+
 
 //KVC 监听方法
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -555,6 +536,15 @@
     
     
 }
+
+// 正则表达式匹配 网页链接
+- (BOOL)matchWithPath:(NSString *)path rule:(NSString *)rule{
+    
+    NSPredicate *article_pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",rule];
+    
+    return [article_pre evaluateWithObject:path];
+}
+
 
 
 -(void)dealloc
