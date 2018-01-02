@@ -97,9 +97,9 @@
 #define Parameter_Size 10
 #define CELL_HEIGHT_DAFAULT  50
 
-
-#define DOMAINURL  @"https://www.myofferdemo.com/"
-//#define DOMAINURL  @"https://www.myoffer.cn/"
+//这是一个测试信息
+//#define DOMAINURL  @"https://www.myofferdemo.com/"
+#define DOMAINURL  @"https://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"
