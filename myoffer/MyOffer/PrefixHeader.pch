@@ -97,7 +97,7 @@
 #define Parameter_Size 10
 #define CELL_HEIGHT_DAFAULT  50
 
-
+//这里做一个git 修改测试
 #define DOMAINURL  @"https://www.myofferdemo.com/"
 //#define DOMAINURL  @"https://www.myoffer.cn/"
 
