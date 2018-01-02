@@ -634,7 +634,7 @@ typedef enum {
     
     NSMutableArray *temps = [NSMutableArray new];
     
-    for (NSString *path in self.UniFrame.item.images) {
+    for (NSString *path in self.UniFrame.item.m_images) {
         
         [temps addObject:[NSURL URLWithString:path]];
     }

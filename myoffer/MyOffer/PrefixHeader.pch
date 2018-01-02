@@ -31,7 +31,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define XSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define XSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define XNAV_HEIGHT  (XSCREEN_HEIGHT == 812.0 ? 88.0 : 64.0)
+#define XNAV_HEIGHT  (XSCREEN_HEIGHT > 800.0 ? 88.0 : 64.0)
 #define XStatusBar_Height  (XSCREEN_HEIGHT == 812.0 ? 44.0 : 20.0)
 #define FLOWLAYOUT_SubW  (XSCREEN_WIDTH - 41) / 3
 #define FLOWLAYOUT_CityW  XSCREEN_WIDTH / 3
@@ -98,8 +98,8 @@
 #define CELL_HEIGHT_DAFAULT  50
 
 
-//#define DOMAINURL  @"https://www.myofferdemo.com/"
-#define DOMAINURL  @"https://www.myoffer.cn/"
+#define DOMAINURL  @"https://www.myofferdemo.com/"
+//#define DOMAINURL  @"https://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

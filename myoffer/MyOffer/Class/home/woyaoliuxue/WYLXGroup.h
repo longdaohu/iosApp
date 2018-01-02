@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger,EditType){
     EditTypeGrade,
     EditTypeSCore,
     EditTypeRegistPhone,
+    EditTypeShortMessageLoginPhone,
     EditTypeVerificationCode,
     EditTypePasswd,
     EditTypeTime,

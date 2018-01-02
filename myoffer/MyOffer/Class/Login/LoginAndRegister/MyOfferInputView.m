@@ -12,15 +12,18 @@
 @interface MyOfferInputView ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 //标题
 @property(nonatomic,strong)UILabel *titleLab;
-//右侧按钮
-@property(nonatomic,strong)UIButton *rightBtn;
-//
+//获取验证码按钮
+@property(nonatomic,strong)UIButton *getcodeBtn;
+//下划线
 @property(nonatomic,strong)UIView *line_bottom;
-@property(nonatomic,strong)UIView *spod;
+//地区输入框
 @property(nonatomic,strong)UITextField *areaCodeTF;
+//地区显示分隔线
 @property(nonatomic,strong)UIView *line_areaCode;
+//地区显示标签
 @property(nonatomic,strong)UILabel *areaCodeLab;
-@property(nonatomic,strong)NSArray *areaArr;
+@property(nonatomic,strong)UIView *spod;
+@property(nonatomic,strong)NSArray *areaCodes;
 @property(nonatomic,strong)UIPickerView *areaPicker;
 @property(nonatomic,strong)NSTimer *timer;
 @property(nonatomic,assign)NSUInteger timerCount;
@@ -43,13 +46,13 @@
     return self;
 }
 
--(NSArray *)areaArr
+-(NSArray *)areaCodes
 {
-    if (!_areaArr) {
+    if (!_areaCodes) {
         
-        _areaArr = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
+        _areaCodes = @[@"中国(+86)",@"英国(+44)",@"马来西亚(+60)"];
     }
-    return _areaArr;
+    return _areaCodes;
 }
 
 - (UIPickerView *)areaPicker{
@@ -90,31 +93,6 @@
     self.areaCodeTF = areaCodeTF;
     self.areaCodeTF.inputView =self.areaPicker;
     
-    //选择地区输入框分隔线
-    UIView *line_code = [[UIView alloc] init];
-    [self addSubview:line_code];
-    line_code.backgroundColor = XCOLOR_line;
-    self.line_areaCode = line_code;
-    
-    //显示地区
-    UILabel *areaCodeLab = [[UILabel alloc] init];
-    self.areaCodeLab = areaCodeLab;
-    [self addSubview:areaCodeLab];
-    areaCodeLab.text = @"+86";
-    areaCodeLab.textAlignment =NSTextAlignmentCenter;
-    areaCodeLab.textColor = XCOLOR_SUBTITLE;
-    areaCodeLab.layer.cornerRadius = CORNER_RADIUS;
-    areaCodeLab.layer.masksToBounds = YES;
-    areaCodeLab.backgroundColor = XCOLOR_BG;
-    
-    //根据情况提示按钮点击功能
-    UIButton *rightBtn = [UIButton new];
-    [rightBtn addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    self.rightBtn = rightBtn;
-    [self addSubview:rightBtn];
-    self.rightBtn.titleLabel.font = XFONT(14);
-    rightBtn.backgroundColor = XCOLOR_WHITE;
-    
     
     //分隔线
     UIView *line = [[UIView alloc] init];
@@ -134,6 +112,57 @@
     spod.layer.masksToBounds = YES;
     
 }
+
+- (UIView *)line_areaCode{
+    
+    if (!_line_areaCode) {
+        //选择地区输入框分隔线
+        UIView *line_code = [[UIView alloc] init];
+        line_code.backgroundColor = XCOLOR_line;
+        _line_areaCode = line_code;
+    }
+    
+    return _line_areaCode;
+}
+
+
+- (UIButton *)getcodeBtn{
+    
+    if (!_getcodeBtn) {
+        
+        //根据情况提示按钮点击功能
+        UIButton *getcodeBtn = [UIButton new];
+        [getcodeBtn addTarget:self action:@selector(getCodeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _getcodeBtn = getcodeBtn;
+        getcodeBtn.titleLabel.font = XFONT(14);
+        getcodeBtn.backgroundColor = XCOLOR_WHITE;
+
+    }
+    
+    return _getcodeBtn;
+}
+
+- (UILabel *)areaCodeLab{
+    
+    if(!_areaCodeLab){
+    
+        //显示地区
+        UILabel *areaCodeLab = [[UILabel alloc] init];
+        _areaCodeLab = areaCodeLab;
+        areaCodeLab.text = @"+86";
+        areaCodeLab.textAlignment =NSTextAlignmentCenter;
+        areaCodeLab.textColor = XCOLOR_SUBTITLE;
+        areaCodeLab.layer.cornerRadius = CORNER_RADIUS;
+        areaCodeLab.layer.masksToBounds = YES;
+        areaCodeLab.backgroundColor = XCOLOR_BG;
+        
+    }
+    
+    return _areaCodeLab;
+}
+
+
+
 
 - (XWGJKeyboardToolar *)tooler{
 
@@ -176,16 +205,19 @@
     self.inputTF.frame = group.inputFrame;
     self.line_bottom.frame = group.line_bottom_Frame;
     self.spod.frame = group.spodFrame;
-    self.rightBtn.frame = group.rightBttonFrame;
+    self.getcodeBtn.frame = group.rightBttonFrame;
     
     //验证码
    if (group.groupType == EditTypeVerificationCode) {
-        
-        [self.rightBtn setTitleColor:XCOLOR_Disable forState:UIControlStateDisabled];
-        [self.rightBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-        [self.rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-        self.rightBtn.layer.cornerRadius = 4;
-        self.rightBtn.layer.borderWidth = 1;
+       
+       [self.getcodeBtn setTitleColor:XCOLOR_Disable forState:UIControlStateDisabled];
+       [self.getcodeBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
+       [self.getcodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+       self.getcodeBtn.layer.cornerRadius = 4;
+       self.getcodeBtn.layer.borderWidth = 1;
+       
+       [self addSubview:self.getcodeBtn];
+       
         self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
         [self updateRightButtonStatusEnable:NO];
         self.inputTF.inputAccessoryView = self.tooler;
@@ -198,19 +230,23 @@
 
     //密码
    }else if (group.groupType == EditTypePasswd) {
-        
-        [self.rightBtn setBackgroundImage:XImage(@"hide_password")forState:UIControlStateNormal];
-        [self.rightBtn setBackgroundImage:XImage(@"show_password")forState:UIControlStateSelected];
-        self.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+       
+        [self addSubview:self.getcodeBtn];
+        [self.getcodeBtn setBackgroundImage:XImage(@"hide_password")forState:UIControlStateNormal];
+        [self.getcodeBtn setBackgroundImage:XImage(@"show_password")forState:UIControlStateSelected];
+        self.getcodeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.inputTF.secureTextEntry = YES;
     
     //注册手机号
-    }else if (group.groupType == EditTypeRegistPhone){
+    }else if (group.groupType == EditTypeRegistPhone || group.groupType == EditTypeShortMessageLoginPhone){
         
         self.inputTF.inputAccessoryView = self.tooler;
         self.areaCodeTF.frame = group.areacodeTFFrame;
+        [self addSubview:self.areaCodeTF];
         self.line_areaCode.frame = group.areacodeLineFrame;
+        [self addSubview:self.line_areaCode];
         self.areaCodeLab.frame = group.areacodeLableFrame;
+        [self addSubview:self.areaCodeLab];
         self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
         self.inputTF.clearButtonMode = UITextFieldViewModeAlways;
 
@@ -220,13 +256,12 @@
     }
 
     
- 
 }
 
 
 
 #pragma mark : UITextFieldDelegate
-
+//开始输入
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
     [self inputTextFieldOnEditing:YES];
@@ -238,6 +273,7 @@
     
 }
 
+//结束输入
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     [self inputTextFieldOnEditing:NO];
@@ -248,13 +284,13 @@
     }
     
 }
-
+//监听输入
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     NSString *content = [NSString stringWithFormat:@"%@%@",textField.text,string];
     
     //监听注册手机号输入
-    if (self.group.groupType == EditTypeRegistPhone) {
+    if (self.group.groupType == EditTypeRegistPhone || self.group.groupType == EditTypeShortMessageLoginPhone) {
      
         if ([self.delegate respondsToSelector:@selector(cell:shouldChangeCharacters:)]) {
           
@@ -271,8 +307,8 @@
     if (self.group.groupType == EditTypeVerificationCode) {
     
         //验证码输入个数
-        if (content.length > 10 ) self.inputTF.text = [content substringWithRange:NSMakeRange(0, 10)];
-        
+          content.length > 10 ?self.inputTF.text = [content substringWithRange:NSMakeRange(0, 10)] : @"";
+
     }
 
     
@@ -280,8 +316,7 @@
     if (self.group.groupType == EditTypePasswd) {
         
         //监听登录密码输入位数
-        if (content.length > 16 )self.inputTF.text = [content substringWithRange:NSMakeRange(0, 16)];
-        
+        content.length > 16 ?self.inputTF.text = [content substringWithRange:NSMakeRange(0, 16)] : @"";
         
     }
     
@@ -291,7 +326,7 @@
     return YES;
 }
 
-
+//回车键
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     
@@ -317,6 +352,7 @@
     return YES;
 }
 
+// 点击  下一个按钮方法
 - (void)toolerOnClick{
     
     
@@ -347,7 +383,7 @@
 }
 
 
-- (void)rightButtonClick:(UIButton *)sender{
+- (void) getCodeButtonClick:(UIButton *)sender{
 
     //是否显示密码按钮点击
     if (self.group.groupType == EditTypePasswd) {
@@ -370,23 +406,24 @@
 #pragma mark : UIPickerViewDataSource, UIPickerViewDelegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
     return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    return self.areaArr.count;
+    return self.areaCodes.count;
     
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    return self.areaArr[row];
+    return self.areaCodes[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    NSString *code = self.areaArr[row];
+    NSString *code = self.areaCodes[row];
     NSString *codeStr = [code componentsSeparatedByString:@"+"].lastObject;
     NSString *areaCode = [codeStr substringWithRange:NSMakeRange(0, codeStr.length - 1)];
     self.areaCodeLab.text = [NSString stringWithFormat:@"+%@",areaCode];
@@ -405,14 +442,15 @@
 //更新获取验证码的状态
 - (void)updateRightButtonStatusEnable:(BOOL)enable{
     
-    if (self.rightBtn.enabled == enable) return;
+    if (self.getcodeBtn.enabled == enable) return;
     
-    self.rightBtn.enabled = enable;
+    self.getcodeBtn.enabled = enable;
     
-    UIColor *color = self.rightBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_Disable;
-    self.rightBtn.layer.borderColor = color.CGColor;
+    UIColor *color = self.getcodeBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_Disable;
     
-    if (enable)  [self.rightBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    self.getcodeBtn.layer.borderColor = color.CGColor;
+    
+    if (enable)  [self.getcodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     
 }
 
@@ -449,7 +487,7 @@
     
     NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",(long)count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
     
-    [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    [self.getcodeBtn setTitle:title forState:UIControlStateNormal];
     
     if(count <= 0){
         

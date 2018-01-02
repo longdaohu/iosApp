@@ -67,20 +67,26 @@
     
     
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
-        
+       
+        NSDictionary *accountInfo = response[@"accountInfo"];
+        NSString *displayname_str = accountInfo[@"displayname"];
+        NSString *phonenumber_str = accountInfo[@"phonenumber"];
+        NSString *email_str = accountInfo[@"email"];
+        NSString *hasPassword = accountInfo[@"hasPassword"];
+
         ActionTableViewCell *usernameCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
        
         //我的设置 - 个人信息页面
-        usernameCell.textLabel.text = GDLocalizedString(@"Person-001"); //@"用户名";
-        usernameCell.detailTextLabel.text = response[@"accountInfo"][@"displayname"];
+        usernameCell.textLabel.text = @"用户名";
+        usernameCell.detailTextLabel.text =  displayname_str;
         usernameCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
          [usernameCell setAction:^{
              
              [MobClick event:@"userNameItemClick"];
             TextFieldViewController *vc = [[TextFieldViewController alloc] init];
-            vc.title = GDLocalizedString(@"Person-005"); //@"修改用户名";
+            vc.title = @"修改用户名";
              [vc setViewDidLoadAction:^(TextFieldViewController *vc) {
-                vc.textField.text = response[@"accountInfo"][@"displayname"];
+                vc.textField.text =  displayname_str;
             }];
              
              [vc setDoneAction:^(TextFieldViewController *vc) {
@@ -94,15 +100,16 @@
         }];
         
         ActionTableViewCell *passwordCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-        passwordCell.textLabel.text =GDLocalizedString(@"Person-002"); // @"密码";
-        passwordCell.detailTextLabel.text = GDLocalizedString(@"Person-006");// @"修改密码";
+        passwordCell.textLabel.text = @"密码";
+        passwordCell.detailTextLabel.text =  hasPassword.boolValue ? @"修改密码" : @"新增密码" ;
         passwordCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [passwordCell setAction:^{
             
             [MobClick event:@"changePasswdItemClick"];
-            
-            if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+          
+            if (phonenumber_str || email_str) {
                 ChangePasswordViewController *vc = [[ChangePasswordViewController alloc] init];
+                if(!hasPassword.boolValue)vc.newpasswd = @"true";
                 [self.navigationController pushViewController:vc animated:YES];
               }
             else{
@@ -113,25 +120,25 @@
         }];
          
         ActionTableViewCell *phonenumberCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-        phonenumberCell.textLabel.text =  GDLocalizedString(@"Person-003"); //@"手机号";
-        phonenumberCell.detailTextLabel.text = response[@"accountInfo"][@"phonenumber"] ?: GDLocalizedString(@"Person-007");//@"未绑定手机号";
+        phonenumberCell.textLabel.text =  @"手机号";
+        phonenumberCell.detailTextLabel.text = phonenumber_str? : GDLocalizedString(@"Person-007");//@"未绑定手机号";
         phonenumberCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [phonenumberCell setAction:^{
               
                 [MobClick event:@"changePhoneItemClick"];
 
                 BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
-                 vc.title = response[@"accountInfo"][@"phonenumber"]?GDLocalizedString(@"Bind-changePhoneTitle"): GDLocalizedString(@"Bind-phoneTitle");
+                 vc.title = phonenumber_str ? GDLocalizedString(@"Bind-changePhoneTitle") : GDLocalizedString(@"Bind-phoneTitle");
 
-                if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+                if (phonenumber_str ||  email_str) {
                     vc.phoneNumber = @"phoneNumber";
                 }
                 [self.navigationController pushViewController:vc animated:YES];
             }];
         
         ActionTableViewCell *emailCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-        emailCell.textLabel.text =GDLocalizedString(@"Person-004");//  @"邮箱";
-        emailCell.detailTextLabel.text = response[@"accountInfo"][@"email"] ?: GDLocalizedString(@"Person-008"); //@"未绑定邮箱";
+        emailCell.textLabel.text = @"邮箱";
+        emailCell.detailTextLabel.text = email_str ?: @"未绑定邮箱";
         emailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [emailCell setAction:^{
           
@@ -139,9 +146,9 @@
 
             BindEmailViewController *vc = [[BindEmailViewController alloc] init];
             
-            vc.title = response[@"accountInfo"][@"email"]?GDLocalizedString(@"Bind-changeEmailTitle"):GDLocalizedString(@"Bind-EmailTitle");
+            vc.title = email_str ? GDLocalizedString(@"Bind-changeEmailTitle"):GDLocalizedString(@"Bind-EmailTitle");
            
-            if (response[@"accountInfo"][@"phonenumber"] || response[@"accountInfo"][@"email"]) {
+            if (phonenumber_str || email_str ) {
                 vc.Email = @"Email";
             }
             [self.navigationController pushViewController:vc animated:YES];

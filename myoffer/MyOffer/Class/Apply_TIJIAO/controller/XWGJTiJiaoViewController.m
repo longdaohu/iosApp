@@ -260,7 +260,7 @@ typedef enum {
 -(void)makeHeaderView{
     
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"只需补充基本资料，剩下的交给myOffer资深顾问定制属于你的绝绝佳留学方案。"];
-    headerView.mj_y = - XNAV_HEIGHT;
+    headerView.mj_y = - 64;
     [self.view insertSubview:headerView aboveSubview:self.tableView];
     self.tableView.mj_y = CGRectGetMaxY(headerView.frame);
     self.tableView.mj_h = XSCREEN_HEIGHT - self.tableView.mj_y - XNAV_HEIGHT;

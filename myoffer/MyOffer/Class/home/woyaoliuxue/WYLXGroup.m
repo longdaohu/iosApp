@@ -49,7 +49,7 @@
     CGFloat input_W = XSCREEN_WIDTH - input_X * 2;
     CGFloat input_H = 50;
     
-    if (group.groupType == EditTypeRegistPhone) {
+    if (group.groupType == EditTypeRegistPhone ||group.groupType == EditTypeShortMessageLoginPhone) {
         
         
         CGFloat areaLab_X = input_X;

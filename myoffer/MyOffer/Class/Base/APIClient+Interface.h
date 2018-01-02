@@ -39,6 +39,8 @@
 #define kAPISelectorRegister @"POST api/account/register"
 //用户登录
 #define kAPISelectorLogin @"POST api/account/login"
+//短信登录
+#define kAPISelectorShortMessageLogin @"POST api/account/sms-login"
 //用户退出登录
 #define kAPISelectorLogout @"GET api/account/logout"
 //手机绑定

@@ -13,17 +13,23 @@
 @protocol MyOfferInputViewDelegate   <NSObject>
 
 @optional
+//开始输入
 - (void)cell:(MyOfferInputView *)cell textFieldDidBeginEditing:(UITextField *)textField;
+//结束输入
 - (void)cell:(MyOfferInputView *)cell textFieldDidEndEditing:(UITextField *)textField;
+//回车键
 - (void)cell:(MyOfferInputView *)cell  textFieldShouldReturn:(UITextField *)textField;
+//监听输入
 - (void)cell:(MyOfferInputView *)cell  shouldChangeCharacters:(NSString *)content;
+//发送验证码
 - (void)sendVertificationCodeWithCell:(MyOfferInputView *)cell;
+//输入框辅助工具条点击事件
 - (void)inputAccessoryViewClickWithCell:(MyOfferInputView *)cell;
-
 
 
 @end
 @interface MyOfferInputView : UIView
+//数据源
 @property(nonatomic,strong)WYLXGroup *group;
 @property(nonatomic,strong)UITextField *inputTF;
 @property(nonatomic,weak)id<MyOfferInputViewDelegate> delegate;
