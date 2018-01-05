@@ -39,7 +39,7 @@
         
         self.backgroundColor =XCOLOR_WHITE;
         
-        CenterSectionItem *pipei  = [self itemWithIcon:@"p_apply" title:@"我的申请" subtitle:nil itemTag:centerItemTypeMyApply];
+        CenterSectionItem *pipei  = [self itemWithIcon:@"p_pipei2" title:@"智能匹配" subtitle:nil itemTag:centerItemTypeMyApply];
         CenterSectionItem *order  = [self itemWithIcon:@"p_order" title:@"我的订单" subtitle:nil itemTag:centerItemTypeOrder];
         CenterSectionItem *test  = [self itemWithIcon:@"p_fav" title:@"我的收藏" subtitle:nil itemTag:centerItemTypefavor];
         self.items = @[pipei, order,test];

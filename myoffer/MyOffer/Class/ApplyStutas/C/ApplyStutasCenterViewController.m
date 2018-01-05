@@ -11,6 +11,7 @@
 #import "ApplyStatusNewCell.h"
 #import "ApplyStatusModelFrame.h"
 #import "ApplyStatusHistoryViewController.h"
+#import "MyOfferServerMallViewController.h"
 
 @interface ApplyStutasCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -29,12 +30,13 @@
     
     [super viewDidLoad];
     
+    [self makeUI];
+    
     if (self.groups.count == 0) {
      
         [self makeDataSourse];
     }
     
-    [self makeUI];
 }
 
 
@@ -42,6 +44,9 @@
 
 - (void)makeDataSourse{
 
+    if (!LOGIN)  return;
+ 
+    
     XWeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -60,6 +65,18 @@
 
     NSArray *status_Arr = [ApplyStutasModel mj_objectArrayWithKeyValuesArray:response];
     
+    if (status_Arr.count > 0) {
+        
+        [self.tableView emptyViewWithHiden:YES];
+        
+    }else{
+        
+        [self.tableView emptyViewWithError:@"还没有申请服务！"];
+        
+         self.tableView.btn_title = @"立即购买服务包";
+    }
+    
+    
     NSMutableArray *status_temps = [NSMutableArray array];
     
     [status_Arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -71,24 +88,14 @@
      }];
     
     self.groups = [status_temps copy];
-    
-    if (self.groups.count > 0) {
-    
-        [self.tableView emptyViewWithHiden:YES];
-        
-    }else{
-        
-        [self.tableView emptyViewWithError:NetRequest_NoDATA];
-    }
-    
-    
+ 
     [self.tableView reloadData];
 }
 
 #pragma mark : 新建 UI
 - (void)makeUI{
 
-    self.title = @"服务状态";
+    self.title = @"我的申请";
 
     [self makeTableView];
 }
@@ -96,10 +103,17 @@
 -(void)makeTableView
 {
     self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
+    XWeakSelf
+    self.tableView.emptyView.actionBlock = ^{
+
+        [weakSelf caseEMall];
+    };
+
 }
 
 
@@ -160,6 +174,14 @@
      [self.navigationController pushViewController:historyVC animated:YES];
     
 }
+
+- (void)caseEMall{
+  
+    MyOfferServerMallViewController *vc = [[MyOfferServerMallViewController alloc] init] ;
+    vc.back_root_vc = true;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark : 事件处理
 

@@ -228,10 +228,10 @@
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     XWeakSelf
-    self.tableView.actionBlock = ^{
-        
+    self.tableView.emptyView.actionBlock = ^{
+
         [weakSelf makeBaseData];
-        
+
     };
     
     

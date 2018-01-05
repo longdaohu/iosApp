@@ -7,10 +7,8 @@
 //
 
 #import "MyOfferTableView.h"
-#import "EmptyDataView.h"
 
 @interface MyOfferTableView ()
-@property(nonatomic,strong)EmptyDataView  *emptyView;
 @property(nonatomic,strong)UIView  *bgView;
 @property(nonatomic,assign)BOOL  isSeted;
 
@@ -66,12 +64,8 @@
 
     if (!_emptyView) {
         
-       _emptyView  =[EmptyDataView emptyViewWithBlock:^{
-            
-            if (self.actionBlock) self.actionBlock();
-            
-        }];
-        
+        _emptyView  = [EmptyDataView emptyViewWithBlock:nil];
+       
     }
     
     return _emptyView;
@@ -130,8 +124,14 @@
     
 }
 
-- (void)emptyViewWithError:(NSString *)error{
+- (void)setBtn_title:(NSString *)btn_title{
     
+    _btn_title = btn_title;
+    
+    self.emptyView.btn_title = btn_title;
+}
+
+- (void)emptyViewWithError:(NSString *)error{
     
     self.emptyView.errorStr =  error;
     

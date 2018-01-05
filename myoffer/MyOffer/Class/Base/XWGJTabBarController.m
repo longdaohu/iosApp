@@ -33,7 +33,7 @@
     cvc.title = @"分类";
     
     PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
-    mvc.title = @"申请中心";
+    mvc.title = @"个人中心";
     
     MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
     msvc.title = @"资讯宝典";

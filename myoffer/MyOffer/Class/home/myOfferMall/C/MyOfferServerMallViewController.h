@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface MyOfferServerMallViewController : BaseViewController
-
+@property(nonatomic,assign)BOOL back_root_vc;
 @end

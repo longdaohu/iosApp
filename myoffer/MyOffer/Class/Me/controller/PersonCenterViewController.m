@@ -19,14 +19,13 @@
 #import "PipeiEditViewController.h"
 #import "OrderViewController.h"
 #import "ApplyStutasCenterViewController.h"
-#import "ApplyStutasModel.h"
-#import "ApplyStatusModelFrame.h"
-#import "personServiceStatusCell.h"
 #import "PersonServiceStatusHistoryViewController.h"
 #import "IntelligentResultViewController.h"
 #import "LeftBarButtonItemView.h"
 #import "myApplyViewController.h"
-
+#import "ApplyStutasModel.h"
+#import "ApplyStatusNewCell.h"
+#import "ApplyStatusModelFrame.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -38,6 +37,7 @@
 @property(nonatomic,assign)BOOL havePeipeiResult;
 @property(nonatomic,strong)ApplyStatusModelFrame *statusframeModel;
 @property(nonatomic,assign)CurrentClickType currentType;
+
 @end
 
 
@@ -112,10 +112,13 @@
         
         _groups = [NSMutableArray array];
     
-        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_pipei" title:@"智能大学匹配" sub_title:nil accessory_title:nil accessory_icon:nil] ;
-        znpp.action = NSStringFromSelector(@selector(caseZNPP));
+        XWGJAbout *wdsq = [XWGJAbout cellWithLogo:@"p_wdsq" title:@"我的申请" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        wdsq.action = NSStringFromSelector(@selector(caseApplyStutasCenter));
         
-        XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_mbti" title:@"大学排名" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_mbti" title:@"DIY申请" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        znpp.action = NSStringFromSelector(@selector(caseMyApply));
+        
+        XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_rank" title:@"大学排名" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         mbti.action = NSStringFromSelector(@selector(caseRank));
 
         XWGJAbout *service = [XWGJAbout cellWithLogo:@"p_qq" title:@"在线客服"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
@@ -127,11 +130,12 @@
         XWGJAbout *question = [XWGJAbout cellWithLogo:@"p_help" title:@"常见问题"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
         question.action = NSStringFromSelector(@selector(caseHelp));
   
+    
+        NSMutableArray *z_group = [NSMutableArray arrayWithObjects:wdsq,nil];
+        NSMutableArray *a_group = [NSMutableArray arrayWithObjects:znpp, mbti,nil];
+        NSMutableArray *b_group = [NSMutableArray arrayWithObjects:service, call,question,nil];
         
-        NSArray *a_group = @[znpp,mbti];
-        NSArray *b_group = @[service,call,question];
-        [_groups addObject:a_group];
-        [_groups addObject:b_group];
+        [_groups addObjectsFromArray:@[z_group,a_group,b_group]];
     }
     
     return _groups;
@@ -152,7 +156,7 @@
         
         switch (type) {
             case centerItemTypeMyApply:
-                [self caseMyApply];
+                [self caseZNPP];
                 break;
             case centerItemTypefavor:
                 [self caseFave];
@@ -193,7 +197,6 @@
     UIImage *navImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
     colorView.image = navImage;
     
-
     
     UIButton *setBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
     [setBtn setImage:[UIImage imageNamed:@"p_set"] forState:UIControlStateNormal];
@@ -284,7 +287,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    
     return [self.groups[section] count];
 }
 
@@ -296,14 +298,14 @@
     
     if (item.item_Type == XWGJAboutTypeServiceStatus) {
         
-        personServiceStatusCell *status_cell =[personServiceStatusCell cellWithTableView:tableView];
+        ApplyStatusNewCell *status_cell =[ApplyStatusNewCell cellWithTableView:tableView];
         status_cell.statusFrame = self.statusframeModel;
         
         return status_cell;
  
     }
     
-    PersonCell *cell =[PersonCell cellWithTableView:tableView];
+    PersonCell *cell = [PersonCell cellWithTableView:tableView];
     [cell bottomLineShow:(indexPath.row != (rows.count - 1))];
     cell.item = item;
     
@@ -331,7 +333,7 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -390,7 +392,7 @@
 
 
 //照片选择器 图片上传
-#pragma mark ——— UIImagePickerControlleDelegate
+#pragma mark : UIImagePickerControlleDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
@@ -444,12 +446,23 @@
     CatigoryViewController *catigroy =  (CatigoryViewController *)nav.childViewControllers[0];
     [catigroy jumpToRank];
 
- 
+}
+
+//服务状态-个人申请
+- (void)caseApplyStutasCenter{
+    
+    self.currentType = CurrentClickTypeServiceStatus;
+    
+    RequireLogin
+    
+    [self pushWithVC:NSStringFromClass([ApplyStutasCenterViewController class])];
+
 }
 
 - (void)caseQQ{
     
     QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+    
     [service call];
 }
 
@@ -639,8 +652,7 @@
 //服务状态
 - (void)caseMakeDataServiceStatus{
 
-//    if (self.groups.count > 2 && self.statusframeModel) return;
-    
+ 
     XWeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -667,22 +679,25 @@
 
     
      XWGJAbout *serviceStatus = [XWGJAbout cellWithLogo:@"about_love" title:[status_Arr.firstObject title] sub_title:nil accessory_title:nil accessory_icon:nil] ;
-    serviceStatus.cell_height = statusframeModel.cell_Height + 10;
+    serviceStatus.cell_height = statusframeModel.cell_Height;
     serviceStatus.item_Type =  XWGJAboutTypeServiceStatus;
+ 
+    NSMutableArray *items = self.groups.firstObject;
     
-    NSArray *group = @[serviceStatus];
-    
-    if (3 == self.groups.count) {
+    if (2 == [items count]) {
         
-        [self.groups replaceObjectAtIndex:0 withObject:group];
+        [items replaceObjectAtIndex:1 withObject:serviceStatus];
 
     }else{
-    
-        [self.groups insertObject:group atIndex:0];
+        
+        [items addObject:serviceStatus];
 
     }
     
-    
+    XWGJAbout *item  = items.firstObject;
+    item.acc_title = @"查看更多";
+    item.accessoryType = YES;
+
     [self.tableView reloadData];
     
 }
@@ -705,15 +720,31 @@
     if (LOGIN) return;
     
     
-    if (self.groups.count > 2) {
+    for (NSInteger index = 0 ; index < self.groups.count; index++){
+      
+        NSMutableArray *group = self.groups[index];
         
-        self.statusframeModel = nil;
+        if (index == 0) {
         
-        [self.groups removeObjectAtIndex:0];
+            XWGJAbout *item = group.firstObject;
+            item.acc_title = @"";
+            item.accessoryType = NO;
+        }
         
-        [self.tableView reloadData];
-        
+        for (XWGJAbout *item in group){
+            
+            if (item.item_Type == XWGJAboutTypeServiceStatus) {
+                
+                self.statusframeModel = nil;
+                
+                [group removeObject:item];
+                
+                [self.tableView reloadData];
+            }
+  
+        }
     }
+ 
     
     self.TZView.countStr = @"0";
 
@@ -762,6 +793,9 @@
             break;
         case CurrentClickTypeMBTI:
             [self caseRank];
+            break;
+        case CurrentClickTypeServiceStatus:
+            [self caseApplyStutasCenter];
             break;
         default:
             break;
