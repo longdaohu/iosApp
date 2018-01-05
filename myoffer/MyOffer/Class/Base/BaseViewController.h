@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger,CurrentClickType){
     CurrentClickTypeApplyStatus,
     CurrentClickTypeMyApply,
     CurrentClickTypeMsg,
+    CurrentClickTypeServiceStatus,
     CurrentClickTypeMBTI,
     CurrentClickTypeOrder
 };

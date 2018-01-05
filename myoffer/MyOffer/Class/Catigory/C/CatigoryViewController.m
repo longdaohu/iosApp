@@ -122,6 +122,7 @@
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         if (0 == weakSelf.rank_groups.count) {
+            
             [weakSelf.rank_tableView emptyViewWithError:@"网络请求失败，点击重新加载"];
         }
     }];
@@ -311,8 +312,8 @@
 {
     XWeakSelf
     self.rank_tableView =[[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
-    self.rank_tableView.actionBlock = ^{
-      
+    self.rank_tableView.emptyView.actionBlock = ^{
+
         [weakSelf makeRankDataSource];
     };
     

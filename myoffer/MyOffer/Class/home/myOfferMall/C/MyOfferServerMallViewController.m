@@ -82,6 +82,11 @@
         
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    
+    if (self.back_root_vc) {
+        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
+        self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+    }
 
 }
 
@@ -367,6 +372,11 @@
     
     [self.navigationController  pushViewController:web animated:true];
     
+}
+
+- (void)caseBack{
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

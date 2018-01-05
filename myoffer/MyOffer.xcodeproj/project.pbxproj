@@ -235,8 +235,6 @@
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
 		AE6BE79B1F4A89C100AD5B3B /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE7991F4A89C100AD5B3B /* PersonCell.m */; };
-		AE6BE7A01F4AEC6A00AD5B3B /* personServiceStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */; };
-		AE6BE7A11F4AEC6A00AD5B3B /* personServiceStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */; };
 		AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */ = {isa = PBXBuildFile; fileRef = AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
 		AE6F28731D77CA3C00E9A47A /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28691D77CA3C00E9A47A /* UUBarChart.m */; };
@@ -908,9 +906,6 @@
 		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
 		AE6BE7981F4A89C100AD5B3B /* PersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonCell.h; path = ../controller/PersonCell.h; sourceTree = "<group>"; };
 		AE6BE7991F4A89C100AD5B3B /* PersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonCell.m; path = ../controller/PersonCell.m; sourceTree = "<group>"; };
-		AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = personServiceStatusCell.h; path = ../controller/personServiceStatusCell.h; sourceTree = "<group>"; };
-		AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = personServiceStatusCell.m; path = ../controller/personServiceStatusCell.m; sourceTree = "<group>"; };
-		AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = personServiceStatusCell.xib; path = ../controller/personServiceStatusCell.xib; sourceTree = "<group>"; };
 		AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dot_40x40.gif; path = ../dot_40x40.gif; sourceTree = "<group>"; };
 		AE6E53FA1D26147100F24818 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		AE6F28661D77CA3C00E9A47A /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
@@ -2926,9 +2921,6 @@
 			children = (
 				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
 				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
-				AE6BE79D1F4AEC6A00AD5B3B /* personServiceStatusCell.h */,
-				AE6BE79E1F4AEC6A00AD5B3B /* personServiceStatusCell.m */,
-				AE6BE79F1F4AEC6A00AD5B3B /* personServiceStatusCell.xib */,
 				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
 				AE6BE7991F4A89C100AD5B3B /* PersonCell.m */,
 				AE892A131EBC1FD70035A31D /* MeCenterHeaderViewFrame.h */,
@@ -3978,7 +3970,6 @@
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
 				AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
-				AE6BE7A11F4AEC6A00AD5B3B /* personServiceStatusCell.xib in Resources */,
 				AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE79827C1F735392008BBAB7 /* UMSocialSDKResources.bundle in Resources */,
@@ -4278,7 +4269,6 @@
 				AECC87E71F95F63800FCBBEC /* RankTypeCell.m in Sources */,
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
-				AE6BE7A01F4AEC6A00AD5B3B /* personServiceStatusCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,

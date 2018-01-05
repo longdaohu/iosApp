@@ -12,7 +12,7 @@
 @interface EmptyDataView ()
 @property(nonatomic,strong)UIImageView *logoView;
 @property(nonatomic,strong)UILabel *errorLab;
-
+@property(nonatomic,strong)UIButton *btn;
 @end
 
 
@@ -40,7 +40,6 @@
         [self addSubview:logoView];
         self.logoView = logoView;
         
-        
         UILabel *errorLab = [[UILabel alloc] init];
         errorLab.text = NetRequest_NoDATA;
         errorLab.numberOfLines = 0;
@@ -49,6 +48,18 @@
         errorLab.textAlignment = NSTextAlignmentCenter;
         self.errorLab = errorLab;
         [self addSubview:errorLab];
+ 
+        UIButton *btn = [UIButton new];
+        btn.backgroundColor = XCOLOR_RED;
+        btn.layer.masksToBounds = YES;
+        btn.layer.cornerRadius = CORNER_RADIUS;
+        [btn setTitle:@"点击加载" forState:UIControlStateNormal];
+        [btn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.btn = btn;
+        [self addSubview:btn];
+        btn.hidden = YES;
+        [btn addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reload)];
         [self addGestureRecognizer:tap];
@@ -60,7 +71,12 @@
 
 - (void)reload{
     
-    if (self.actionBlock) self.actionBlock();
+    if (self.actionBlock) {
+        
+        NSLog(@">>>>> empty clicked");
+        
+        self.actionBlock();
+    };
     
 }
 
@@ -71,6 +87,16 @@
     
     self.errorLab.text = errorStr;
 
+}
+
+- (void)setBtn_title:(NSString *)btn_title{
+    
+    _btn_title = btn_title;
+    
+    self.btn.hidden = NO;
+    
+    [self.btn setTitle:btn_title forState:UIControlStateNormal];
+    
 }
 
 
@@ -86,11 +112,16 @@
     
     
     CGFloat error_X = 0;
-    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame);
+    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame) - 20;
     CGFloat error_W = logo_W;
     CGFloat error_H = 50;
     self.errorLab.frame = CGRectMake(error_X, error_Y, error_W, error_H);
-  
+    
+    CGFloat btn_W = 300;
+    CGFloat btn_X = (self.bounds.size.width - btn_W) * 0.5;
+    CGFloat btn_Y = CGRectGetMaxY(self.errorLab.frame) + 10;
+    CGFloat btn_H = 40;
+    self.btn.frame = CGRectMake(btn_X, btn_Y, btn_W, btn_H);
 }
 
 

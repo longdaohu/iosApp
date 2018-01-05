@@ -15,6 +15,7 @@ typedef void(^EmptyDataViewBlock)();
 + (instancetype)emptyViewWithBlock:(EmptyDataViewBlock)actionBlock;
 @property(nonatomic,copy)EmptyDataViewBlock  actionBlock;
 @property(nonatomic,copy)NSString *errorStr;
+@property(nonatomic,copy)NSString *btn_title;
 
 
 @end
