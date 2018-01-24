@@ -59,18 +59,15 @@
 //页面出现时预加载功能
 -(void)presentViewWillAppear{
     
-    
     [self didClickCurrent];
     
     [self caseLogin];
     
     [self caseWhenUserLogout];
- 
     
     self.tabBarController.tabBar.hidden = NO;
     
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -249,7 +246,7 @@
         if ([path isEqualToString:kAPISelectorZiZengPipeiGet]) {
             
             [weakSelf PiPeiWithResponse:response];
-            
+        
         }
         
         
