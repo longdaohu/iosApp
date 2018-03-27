@@ -20,24 +20,14 @@
 
 @interface MessageCenterViewController ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate>
 @property (nonatomic, strong) FSBaseTableView *tableView;
-//分区分数数组
-@property(nonatomic,strong)NSArray *catigroies;
-//数据数组
-@property(nonatomic,strong)NSArray *groups;
-//表头
-@property(nonatomic,strong)MessageTopicHeaderViewController *headerViewController;
-//分区View
-@property(nonatomic,strong)FSSegmentTitleView *titleView;
-//主表格是否能滚动
-@property(nonatomic,assign)BOOL canScroll;
-//所在子视图
-@property(nonatomic,strong)NSArray *childVCes;
-//当前子视图
-@property(nonatomic,strong)FSSScrollContentViewController *child_current;
-//cell
-@property(nonatomic,strong)FSBottomTableViewCell *contentCell;
-//消息栏
-@property(nonatomic,strong)LeftBarButtonItemView *leftView;
+@property(nonatomic,strong)NSArray *catigroies;//分区分数数组
+@property(nonatomic,strong)NSArray *groups;//数据数组
+@property(nonatomic,strong)MessageTopicHeaderViewController *headerViewController;//表头
+@property(nonatomic,strong)FSSegmentTitleView *titleView;//分区View
+@property(nonatomic,assign)BOOL canScroll;//主表格是否能滚动
+@property(nonatomic,strong)NSArray *childVCes;//所在子视图
+@property(nonatomic,strong)FSSScrollContentViewController *child_current;//当前子视图
+@property(nonatomic,strong)FSBottomTableViewCell *contentCell;//cell
 
 @end
 
@@ -49,7 +39,6 @@
     [MobClick beginLogPageView:@"page资讯中心"];
     
     self.tabBarController.tabBar.hidden = NO;
-    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
@@ -83,12 +72,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
-    
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    
+
 }
 
 - (void)makeBaseData{
@@ -150,11 +134,10 @@
     self.catigroies  = [messageCatigroyModel mj_objectArrayWithKeyValuesArray:response[@"items"]];
     
     //2 catigroies数据为空时，其他操作步骤没有意义
-    if(self.catigroies.count == 0)
-    {
-       [self.tableView emptyViewWithError:NetRequest_NoDATA];
+    if(self.catigroies.count == 0){
         
-        [self.tableView reloadData];
+       [self.tableView emptyViewWithError:NetRequest_NoDATA];
+       [self.tableView reloadData];
 
        return;
     }
@@ -169,8 +152,7 @@
         
     }
      self.childVCes = [contentVCs copy];
-    
-    
+ 
     
     //4 预添加数据
     NSMutableArray *temps = [NSMutableArray array];
@@ -184,7 +166,7 @@
     self.groups = [temps copy];
     [self.tableView reloadData];
     
-    //5 设置当前显示视图  及请求数据
+    //5 设置当前显示视图及请求数据
     if (self.childVCes.count > 0) [self makeDataWithCatigoryIndex:0];
     
 }
@@ -194,8 +176,7 @@
     //1  设置当前显示视图
     FSSScrollContentViewController *vc = self.childVCes[index];
     self.child_current = vc;
-    
-    
+ 
     //2  当前显示视图已有数据不再请求数据
     if (self.child_current.group.contents.count)  return;
     
@@ -227,11 +208,9 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-//    if (@available(iOS 11.0, *)) {
-//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    } else {
-//        self.automaticallyAdjustsScrollViewInsets = NO;
-//    }
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     XWeakSelf
     self.tableView.emptyView.actionBlock = ^{
 
@@ -251,18 +230,12 @@
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return  self.catigroies.count > 0 ? 1 : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     //高度要高一点，上下滑动时会流畅一点
     return CGRectGetHeight(self.view.bounds) + 200;
 }
@@ -318,7 +291,6 @@
     
     if (scrollView.contentOffset.y >= bottomCellOffset) {
         
-        
         scrollView.contentOffset = CGPointMake(0, bottomCellOffset);
         
         if (self.canScroll) {
@@ -349,7 +321,6 @@
 - (void)changeScrollStatus//改变主视图的状态
 {
     self.canScroll = YES;
-    
     self.contentCell.cellCanScroll = NO;
 }
 
@@ -380,10 +351,7 @@
 - (void)FSContentViewDidScroll:(FSPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex progress:(CGFloat)progress
 {
     _tableView.scrollEnabled = NO;//pageView开始滚动主tableview禁止滑动
-    
-//    progress = startIndex - endIndex > 0 ? - progress : progress;
-    
-    //    self.titleView.progress = progress;
+
 }
 
 

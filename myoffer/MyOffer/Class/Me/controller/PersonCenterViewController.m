@@ -182,7 +182,6 @@
     
     
     
-    
     CGFloat color_Y =  header_h - XSCREEN_HEIGHT;
     CGFloat color_h =  XSCREEN_HEIGHT;
     CGFloat color_w =  XSCREEN_WIDTH;
@@ -208,10 +207,9 @@
         [weakSelf caseTZ];
         
     }];
-    self.TZView.frame = CGRectMake(XSCREEN_WIDTH - 50, 0, 40, 40);
+    self.TZView.mj_x = XSCREEN_WIDTH - 50;
     self.TZView.icon = @"p_msg";
     [tableHeaderView addSubview:self.TZView];
-
 }
 
 

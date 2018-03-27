@@ -18,7 +18,7 @@
 @implementation LeftMenuHeaderView
 + (instancetype)headerViewWithTap:(LeftBlock)actionBlock{
 
-    LeftMenuHeaderView *header = [[NSBundle mainBundle] loadNibNamed:@"LeftMenuHeaderView" owner:self options:nil].lastObject;
+    LeftMenuHeaderView *header = Bundle(@"LeftMenuHeaderView");
     
     header.actionBlock = actionBlock;
     
@@ -59,7 +59,7 @@
 
 -(void)headerViewWithUserLoginOut{
 
-    self.nameLabel.text =GDLocalizedString(@"Me-005");//@"点击登录或注册";
+    self.nameLabel.text = @"点击登录或注册";
     self.iconView.image = [UIImage imageNamed:@"default_avatar.jpg"];
 }
 

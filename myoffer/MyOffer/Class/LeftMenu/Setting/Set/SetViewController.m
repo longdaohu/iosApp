@@ -40,32 +40,25 @@
 
 - (void)whenLoginStatusChange{
     
-    if (LOGIN) {
-    
+    if (LOGIN && self.groups.count == 1) {
+     
+        [self.groups addObject:self.logout_group];
         
-        if (self.groups.count == 1) {
-            
-            [self.groups addObject:self.logout_group];
-            
-            self.datas = [self.groups copy];
-            
-            [self.tableView reloadData];
-
-        }
+        self.datas = [self.groups copy];
         
+        [self.tableView reloadData];
         
         return;
     }
     
 
-    if (self.groups.count > 1) {
+    if ( !LOGIN && self.groups.count > 1) {
         
         [self.groups removeLastObject];
         
         self.datas = [self.groups copy];
 
         [self.tableView reloadData];
-        
     }
   
     
@@ -79,10 +72,8 @@
         //退出
         
         XWGJAbout *logout  =  [XWGJAbout cellWithLogo:nil title:@"退出登录" action:NSStringFromSelector(@selector(caseLogout)) itemClass:nil];
-        
         _logout_group = [myofferGroupModel groupWithItems:@[logout] header:nil];
         _logout_group.section_header_height = Section_header_Height_min;
-        
  
     }
     
@@ -91,35 +82,6 @@
 
 
 
-- (NSMutableArray *)groups{
-
-    if (!_groups) {
-        
-        //个人信息
-        XWGJAbout *profile   = [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-001") action:NSStringFromSelector(@selector(caseLogin:)) itemClass:NSStringFromClass([ProfileViewController class])];
-         //反馈
-        
-        XWGJAbout *feedBack  = [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-003") action:NSStringFromSelector(@selector(caseLogin:)) itemClass:NSStringFromClass([FeedbackViewController class])];
-  
-        //关于
-       XWGJAbout *about  =  [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-004") action:NSStringFromSelector(@selector(caseAbout:)) itemClass:NSStringFromClass([myOfferPageViewController class])];
-        
- 
-       myofferGroupModel *setGroup = [myofferGroupModel groupWithItems:@[profile,feedBack,about] header:nil];
-        setGroup.section_header_height = Section_header_Height_min;
-  
-        
-        _groups   =  [NSMutableArray array];
-        
-        [_groups addObject:setGroup];
-        
-    }
-    
-    
-    return _groups;
-    
-}
-
 
 - (void)viewDidLoad {
     
@@ -127,35 +89,37 @@
     
     self.title = @"设置";
     
-    self.datas = [self.groups copy];
+    //个人信息
+    XWGJAbout *profile   = [XWGJAbout cellWithLogo:nil title:@"个人信息" action:NSStringFromSelector(@selector(caseLogin:)) itemClass:NSStringFromClass([ProfileViewController class])];
+    //反馈
     
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
- 
+    XWGJAbout *feedBack  = [XWGJAbout cellWithLogo:nil title:@"用户反馈" action:NSStringFromSelector(@selector(caseLogin:)) itemClass:NSStringFromClass([FeedbackViewController class])];
+    
+    //关于
+    XWGJAbout *about  =  [XWGJAbout cellWithLogo:nil title:@"关于" action:NSStringFromSelector(@selector(caseAbout:)) itemClass:NSStringFromClass([myOfferPageViewController class])];
+    
+    myofferGroupModel *setGroup = [myofferGroupModel groupWithItems:@[profile,feedBack,about] header:nil];
+    setGroup.section_header_height = Section_header_Height_min;
+    
+    self.groups   =  [NSMutableArray array];
+    [self.groups addObject:setGroup];
+    
+    self.datas = [self.groups copy];
+
 }
 
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark : UITableViewDelegate  UITableViewDataSoure
 static NSString *identify = @"set";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
-        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    
-    if (indexPath.section == 1) {
-        
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        
-    }else{
-    
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    }
-   
+    NSTextAlignment  ali = (indexPath.section == 1) ?  NSTextAlignmentCenter : NSTextAlignmentLeft;
+    cell.textLabel.textAlignment = ali;
+ 
     myofferGroupModel *group = self.datas[indexPath.section];
     XWGJAbout *item       = group.items[indexPath.row];
     cell.textLabel.text  = item.title;
@@ -169,12 +133,9 @@ static NSString *identify = @"set";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     myofferGroupModel *group = self.datas[indexPath.section];
-    XWGJAbout *item       = group.items[indexPath.row];
+    XWGJAbout *item  = group.items[indexPath.row];
     
-    if (item.action.length > 0) {
-        
-        [self performSelector:NSSelectorFromString(item.action) withObject:item afterDelay:0];
-    }
+    (item.action.length > 0) ? [self performSelector:NSSelectorFromString(item.action) withObject:item afterDelay:0] : @"";
     
 }
 
@@ -191,7 +152,6 @@ static NSString *identify = @"set";
 - (void)caseAbout:(XWGJAbout *)item{
     
     [self.navigationController pushViewController:[[NSClassFromString(item.item_class) alloc] init] animated:YES];
-
 }
 
 -(void)caseLogout{

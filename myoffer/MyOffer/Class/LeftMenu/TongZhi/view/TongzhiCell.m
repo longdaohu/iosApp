@@ -80,9 +80,7 @@
     [self.titleLab sizeToFit];
     
     self.subTitleLab.text   = noti.summary;
-//    [self.subTitleLab sizeToFit];
-//    self.subTitleLab.mj_w = XSCREEN_WIDTH - self.titleLab.mj_x;
-    
+ 
     self.timeLab.text       = noti.create_time_short;
     [self.timeLab sizeToFit];
     

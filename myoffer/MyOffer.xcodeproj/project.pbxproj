@@ -218,8 +218,6 @@
 		AE4C71391F4EA3C20069E83E /* myApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71381F4EA3C20069E83E /* myApplyViewController.m */; };
 		AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */; };
 		AE4C71461F4EE6460069E83E /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */; };
-		AE4C71471F4EE6460069E83E /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71401F4EE6460069E83E /* MenuCell.m */; };
-		AE4C71481F4EE6460069E83E /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71421F4EE6460069E83E /* MenuItem.m */; };
 		AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71441F4EE6460069E83E /* MyofferUser.m */; };
 		AE53E86B1F73919800588F0C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86A1F73919800588F0C /* Social.framework */; };
 		AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */; };
@@ -878,10 +876,6 @@
 		AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuHeaderView.h; sourceTree = "<group>"; };
 		AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuHeaderView.m; sourceTree = "<group>"; };
 		AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderView.xib; sourceTree = "<group>"; };
-		AE4C713F1F4EE6460069E83E /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
-		AE4C71401F4EE6460069E83E /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
-		AE4C71411F4EE6460069E83E /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
-		AE4C71421F4EE6460069E83E /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		AE4C71431F4EE6460069E83E /* MyofferUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUser.h; sourceTree = "<group>"; };
 		AE4C71441F4EE6460069E83E /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
 		AE53E86A1F73919800588F0C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -2163,25 +2157,10 @@
 		AE4C713A1F4EE6460069E83E /* leftMenuFile */ = {
 			isa = PBXGroup;
 			children = (
-				AE4C713B1F4EE6460069E83E /* HeaderView */,
-				AE4C713F1F4EE6460069E83E /* MenuCell.h */,
-				AE4C71401F4EE6460069E83E /* MenuCell.m */,
-				AE4C71411F4EE6460069E83E /* MenuItem.h */,
-				AE4C71421F4EE6460069E83E /* MenuItem.m */,
 				AE4C71431F4EE6460069E83E /* MyofferUser.h */,
 				AE4C71441F4EE6460069E83E /* MyofferUser.m */,
 			);
 			path = leftMenuFile;
-			sourceTree = "<group>";
-		};
-		AE4C713B1F4EE6460069E83E /* HeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */,
-				AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */,
-				AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */,
-			);
-			path = HeaderView;
 			sourceTree = "<group>";
 		};
 		AE53E86C1F73C0A600588F0C /* Wechat */ = {
@@ -2920,6 +2899,9 @@
 		AEA249971D5B215300DD7939 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */,
+				AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */,
+				AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */,
 				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
 				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
 				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
@@ -4242,7 +4224,6 @@
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
-				AE4C71471F4EE6460069E83E /* MenuCell.m in Sources */,
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
 				AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */,
@@ -4310,7 +4291,6 @@
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,
 				AECC87CF1F95F63800FCBBEC /* CatigaryHotCity.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
-				AE4C71481F4EE6460069E83E /* MenuItem.m in Sources */,
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
 				AE1FD7221D5C929500FFD5A8 /* NSObject+MJCoding.m in Sources */,
 				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,

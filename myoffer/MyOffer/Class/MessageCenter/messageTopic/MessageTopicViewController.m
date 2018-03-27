@@ -170,7 +170,6 @@
     self.flexView = flexView;
     flexView.alpha = 0.1;
     
-    
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:flexView.frame];
     
     self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, XSCREEN_WIDTH - 40,self.tableView.tableHeaderView.mj_h)];
@@ -216,11 +215,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MessageCell *cell =[MessageCell cellWithTableView:tableView];
-    
     cell.messageFrame = self.messageFrames[indexPath.row];
-    
     [cell tagsShow:NO];
-    
     [cell separatorLineShow:(self.messageFrames.count - 1 == indexPath.row)];
     
     return cell;
@@ -232,7 +228,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame  = self.messageFrames[indexPath.row];
-    
     [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id] animated:YES];
 }
 
@@ -241,22 +236,17 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     CGFloat offersetY =  scrollView.contentOffset.y;
-    
     //1 导航栏显示隐藏
     [self.topNavigationView scrollViewContentoffset:offersetY  andContenHeight:self.flexView.bounds.size.height - XNAV_HEIGHT];
     self.topNavigationView.nav_Alpha =  offersetY / (self.flexView.bounds.size.height - XNAV_HEIGHT);
-    
- 
     //2 图片下拉
     [self.flexView flexWithContentOffsetY:offersetY];
-    
 }
 
 - (void)dealloc{
 
-    KDClassLog(@"资讯热门专题 dealloc MessageTopicViewController");
+    KDClassLog(@"资讯热门专题 + MessageTopicViewController + dealloc ");
 }
 
 - (void)didReceiveMemoryWarning {

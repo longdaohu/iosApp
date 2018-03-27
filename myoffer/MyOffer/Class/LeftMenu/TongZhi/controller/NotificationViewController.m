@@ -71,6 +71,8 @@
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    self.tableView.rowHeight = 68;
+
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -101,7 +103,6 @@
 -(void)getDataSourse:(int)page
 {
   
-    
     XWeakSelf
 
     [self
@@ -156,10 +157,8 @@
   
     //是否提示无数据状态
     [self updateTableViewStatus];
-    
-    
+ 
     //判断是否显示上拉刷新
-    
     if( Parameter_Size > messages.count)
     {
         self.tableView.mj_footer =  nil;
@@ -172,8 +171,6 @@
         }
         
     }
-    
-
     
 }
 
@@ -244,7 +241,7 @@
   
     NotiItem *noti  = self.group[indexPath.row];
     noti.state_read = YES;
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
     WebViewController *detail = [[WebViewController alloc] init];
     detail.path    = [NSString stringWithFormat:@"%@account/message/%@?client=app",DOMAINURL,noti.NO_id];
@@ -252,20 +249,6 @@
     
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    
-    return 68;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-  
-    return HEIGHT_ZERO;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
-    return HEIGHT_ZERO;
-}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return YES;
