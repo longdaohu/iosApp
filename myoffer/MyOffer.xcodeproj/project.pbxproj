@@ -53,6 +53,7 @@
 		AE05A7321E8A51940059C2BF /* EmallCatigoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */; };
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
 		AE072CD42068F161001641AC /* MessageDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE072CD32068F160001641AC /* MessageDetailHeaderView.m */; };
+		AE072CD7206A5ABA001641AC /* myofferBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE072CD5206A5AB9001641AC /* myofferBaseTableViewController.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
@@ -234,7 +235,6 @@
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
-		AE67E75F1F4E849200FAC0B3 /* myofferBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75D1F4E849200FAC0B3 /* myofferBaseTableViewController.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
 		AE6BE79B1F4A89C100AD5B3B /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE7991F4A89C100AD5B3B /* PersonCell.m */; };
@@ -587,6 +587,8 @@
 		AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigroySectionView.m; sourceTree = "<group>"; };
 		AE072CD22068F160001641AC /* MessageDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetailHeaderView.h; sourceTree = "<group>"; };
 		AE072CD32068F160001641AC /* MessageDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetailHeaderView.m; sourceTree = "<group>"; };
+		AE072CD5206A5AB9001641AC /* myofferBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = myofferBaseTableViewController.m; path = MyOffer/Class/set/Setting/Set/myofferBaseTableViewController.m; sourceTree = SOURCE_ROOT; };
+		AE072CD6206A5AB9001641AC /* myofferBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myofferBaseTableViewController.h; path = MyOffer/Class/set/Setting/Set/myofferBaseTableViewController.h; sourceTree = SOURCE_ROOT; };
 		AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityDetailItem.h; path = controller/UniversityDetailItem.h; sourceTree = "<group>"; };
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -903,8 +905,6 @@
 		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
 		AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferGroupModel.m; sourceTree = "<group>"; };
-		AE67E75C1F4E849200FAC0B3 /* myofferBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myofferBaseTableViewController.h; path = ../LeftMenu/Setting/Set/myofferBaseTableViewController.h; sourceTree = "<group>"; };
-		AE67E75D1F4E849200FAC0B3 /* myofferBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = myofferBaseTableViewController.m; path = ../LeftMenu/Setting/Set/myofferBaseTableViewController.m; sourceTree = "<group>"; };
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
 		AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMHotSectionFooterView.m; sourceTree = "<group>"; };
 		AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMHotSectionFooterView.xib; sourceTree = "<group>"; };
@@ -1589,7 +1589,7 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		567144861CBA889F002A02BF /* Apply */ = {
+		567144861CBA889F002A02BF /* userCenter */ = {
 			isa = PBXGroup;
 			children = (
 				AE4C71361F4EA3830069E83E /* myApply */,
@@ -1601,7 +1601,7 @@
 				AEA2497B1D5B215300DD7939 /* ApplyStutas */,
 				AEA2498B1D5B215300DD7939 /* Favorite */,
 			);
-			name = Apply;
+			name = userCenter;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -2705,13 +2705,13 @@
 			children = (
 				AEA24BCD1D5B266A00DD7939 /* Public */,
 				AEA24BF31D5B269A00DD7939 /* Base */,
-				AEA24AA51D5B24D200DD7939 /* LeftMenu */,
+				AEA24AA51D5B24D200DD7939 /* set */,
 				AE4B2E1F1F1E095600E328F7 /* MessageCenter */,
 				AEA24B2D1D5B25E000DD7939 /* Search */,
 				AEA24B0F1D5B251800DD7939 /* Login */,
 				AEA24A3F1D5B23F500DD7939 /* home */,
 				AECC877C1F95F63800FCBBEC /* Catigory */,
-				567144861CBA889F002A02BF /* Apply */,
+				567144861CBA889F002A02BF /* userCenter */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -3140,14 +3140,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		AEA24AA51D5B24D200DD7939 /* LeftMenu */ = {
+		AEA24AA51D5B24D200DD7939 /* set */ = {
 			isa = PBXGroup;
 			children = (
 				AE4C713A1F4EE6460069E83E /* leftMenuFile */,
 				AEA24ABE1D5B24D200DD7939 /* Setting */,
 				AEA24AE41D5B24D200DD7939 /* TongZhi */,
 			);
-			path = LeftMenu;
+			path = set;
 			sourceTree = "<group>";
 		};
 		AEA24ABE1D5B24D200DD7939 /* Setting */ = {
@@ -3470,8 +3470,8 @@
 				AE20938A1F398EA40078DCBB /* myofferFlexibleView.m */,
 				AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */,
 				AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */,
-				AE67E75C1F4E849200FAC0B3 /* myofferBaseTableViewController.h */,
-				AE67E75D1F4E849200FAC0B3 /* myofferBaseTableViewController.m */,
+				AE072CD6206A5AB9001641AC /* myofferBaseTableViewController.h */,
+				AE072CD5206A5AB9001641AC /* myofferBaseTableViewController.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -4017,6 +4017,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE072CD7206A5ABA001641AC /* myofferBaseTableViewController.m in Sources */,
 				AEA24BEB1D5B266A00DD7939 /* NSString+MD5.m in Sources */,
 				AE721E361EB308D500A0BA79 /* MyOfferRank.m in Sources */,
 				AECC87E21F95F63800FCBBEC /* CatigaryHotCityCell.m in Sources */,
@@ -4196,7 +4197,6 @@
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
-				AE67E75F1F4E849200FAC0B3 /* myofferBaseTableViewController.m in Sources */,
 				AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */,
 				AE1FD7231D5C929500FFD5A8 /* NSObject+MJKeyValue.m in Sources */,
 				AEA24A981D5B23F600DD7939 /* WYLXHeaderView.m in Sources */,
