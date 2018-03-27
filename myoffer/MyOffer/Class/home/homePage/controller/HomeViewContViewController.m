@@ -25,7 +25,6 @@
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "SearchUniversityCenterViewController.h"
-#import "XUToolbar.h"
 #import "MyOfferUniversityModel.h"
 #import "HeadItem.h"
 #import "SDCycleScrollView.h"
@@ -47,8 +46,6 @@
 @property(nonatomic,assign)NSInteger recommendationsCount;
 //下拉
 @property(nonatomic,strong)MJRefreshGifHeader *fresh_Header;
-//自定义ToolBar
-@property(nonatomic,strong)XUToolbar *myToolbar;
 //分组数据
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
@@ -308,17 +305,6 @@
 
 }
 
--(XUToolbar *)myToolbar
-{
-    if (!_myToolbar) {
-        
-        _myToolbar =[XUToolbar toolBar];
-        
-        [self.view addSubview:_myToolbar];
-    }
-    return _myToolbar;
-}
-
 
 -(void)makeUI
 {
@@ -436,6 +422,7 @@
 //搜索功能
 -(void)makeSearchView{
     
+    
     CGFloat searchX = 20;
     CGFloat searchH = 44;
     CGFloat searchW = XSCREEN_WIDTH - searchX * 2;
@@ -448,7 +435,7 @@
         [weakSelf CaseSearchPage];
     };
     [self.view addSubview:searchView];
-    
+
 }
 
 
@@ -490,14 +477,10 @@
         
     }];
         
-   
-    
     
     if (scrollView.contentOffset.y < -150) [self.TableView setContentOffset:CGPointMake(0, -150) animated:NO];
-
-    self.myToolbar.top = 20 - scrollView.contentOffset.y;
  
-    [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:(CGRectGetMaxY(self.headerFrame.autoScroller_frame) - self.searchView.mj_h * 0.5- scrollView.contentOffset.y)];
+    [self.searchView searchViewWithScrollViewDidScrollContentOffsetY:(CGRectGetMaxY(self.headerFrame.autoScroller_frame) - self.searchView.mj_h * 0.5 - scrollView.contentOffset.y)];
     
     if (scrollView.contentOffset.y >= - 100 && scrollView.contentOffset.y <= 0) {
       

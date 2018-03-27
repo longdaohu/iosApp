@@ -181,16 +181,15 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.estimatedSectionHeaderHeight = 0;
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = mj_header;
-    
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-
     
 }
 
@@ -258,19 +257,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
      NSArray *orders_frame = self.groups[indexPath.section];
-    
     OrderItemFrame *order_Frame = orders_frame[indexPath.row];
-    
     return order_Frame.cell_Height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     NSArray *orders_frame = self.groups[indexPath.section];
-    
      OrderItemFrame *order_Frame = orders_frame[indexPath.row];
-    
-    XWeakSelf
+        XWeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
     detail.order  =  order_Frame.order;
     detail.actionBlock = ^(BOOL isSuccess){

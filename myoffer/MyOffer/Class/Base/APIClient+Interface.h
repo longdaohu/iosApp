@@ -7,7 +7,7 @@
 //
 
 #import "APIClient.h"
-
+//留学目的地
 #define kAPISelectorHomepage @"GET api/app/mobile"
 //学校详情
 #define kAPISelectorUniversityInfo @"GET api/university/:id"

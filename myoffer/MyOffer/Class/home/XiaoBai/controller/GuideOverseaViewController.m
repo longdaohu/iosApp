@@ -15,7 +15,6 @@
 #import "MessageDetaillViewController.h"
 #import "MessageTopicViewController.h"
 #import "FSSegmentTitleView.h"
-#import "HelpViewController.h"
 
 @interface GuideOverseaViewController ()<UITableViewDataSource,UITableViewDelegate,FSSegmentTitleViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;

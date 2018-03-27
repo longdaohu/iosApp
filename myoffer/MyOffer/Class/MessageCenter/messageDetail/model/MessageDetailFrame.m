@@ -52,12 +52,6 @@
 
     _article = article;
     
-//    CGFloat c_logo_X = MARGIN;
-//    CGFloat c_logo_Y = MARGIN;
-//    CGFloat c_logo_W = TagIconWidth;
-//    CGFloat c_logo_H = c_logo_W;
-//    self.catigory_logo_Frame = CGRectMake(c_logo_X, c_logo_Y, c_logo_W, c_logo_H);
-    
     CGFloat tag_title_h = LabHeight;
     CGFloat tag_title_x = MARGIN;
     CGFloat tag_title_y = MARGIN * 2;
@@ -74,11 +68,11 @@
     CGFloat ONEy = CGRectGetMaxY(self.tag_title_Frame) + tag_title_y;
     CGFloat ONEw = XSCREEN_WIDTH - MARGIN;
     CGFloat ONEh = LineHeight;
-    self.FirstLineFrame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
+    self.first_line_frame = CGRectMake(ONEx,ONEy,ONEw,ONEh);
     
     
     CGFloat title_x = MARGIN;
-    CGFloat title_y = CGRectGetMaxY(self.FirstLineFrame) +MARGIN;
+    CGFloat title_y = CGRectGetMaxY(self.first_line_frame) +MARGIN;
     CGFloat title_w = XSCREEN_WIDTH - title_x * 2;
     CGSize title_size = [article.title boundingRectWithSize:CGSizeMake(title_w, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:24]}context:nil].size;
     self.title_Frame = CGRectMake(title_x, title_y, title_w , title_size.height);
@@ -92,9 +86,10 @@
     
     CGFloat Arthor_x = CGRectGetMaxX(self.icon_Frame)+ MARGIN;
     CGFloat Arthor_y = CGRectGetMinY(self.icon_Frame) + MARGIN;
-    CGFloat Arthor_w = 0;
+    CGSize arthor_size = [article.author boundingRectWithSize:CGSizeMake(title_w, 0) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:14]}context:nil].size;
+    CGFloat Arthor_w = arthor_size.width;
     CGFloat Arthor_h = LabHeight;
-    self.Arthor_Frame = CGRectMake(Arthor_x, Arthor_y, Arthor_w, Arthor_h);
+    self.arthor_Frame = CGRectMake(Arthor_x, Arthor_y, Arthor_w, Arthor_h);
     
     CGFloat time_y = Arthor_y;
     CGFloat time_w = ONEw;
@@ -112,29 +107,37 @@
     CGFloat SECw = XSCREEN_WIDTH * 0.5;
     CGFloat SECx = SECw * 0.5;
     CGFloat SECh = LineHeight;
-    self.SecondLineFrame = CGRectMake(SECx, SECy, SECw, SECh);
+    self.second_line_frame = CGRectMake(SECx, SECy, SECw, SECh);
     
-    CGFloat Summary_y = CGRectGetMaxY(self.SecondLineFrame) + MARGIN * 4;
+    CGFloat Summary_y = CGRectGetMaxY(self.second_line_frame) + MARGIN * 4;
     CGFloat Summary_x = 2 * MARGIN;
     CGFloat Summary_w = XSCREEN_WIDTH - 4 * MARGIN;
     CGSize SUsize = [article.summary boundingRectWithSize:CGSizeMake(Summary_w, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName :[UIFont systemFontOfSize:SummaryFont]}context:nil].size;
-    self.Summary_Frame = CGRectMake(Summary_x, Summary_y,SUsize.width, SUsize.height);
+    self.summary_frame = CGRectMake(Summary_x, Summary_y,SUsize.width, SUsize.height);
     
+    self.third_line_frame = CGRectMake(SECx, CGRectGetMaxY(self.summary_frame) + 4 * MARGIN, SECw, LineHeight);
     
-    self.ThreeLineFrame = CGRectMake(SECx, CGRectGetMaxY(self.Summary_Frame) + 4 * MARGIN, SECw, LineHeight);
+    CGFloat header_height = CGRectGetMaxY(self.third_line_frame) + MARGIN * 2;
+    self.header_frame = CGRectMake(0, 0, XSCREEN_WIDTH, header_height);
     
-    self.MessageDetailHeight = CGRectGetMaxY(self.ThreeLineFrame) + MARGIN * 2;
+    CGFloat tag_y = 0;
+    CGFloat tag_w = 0;
+    CGFloat tag_h = TagBg_h;
+    CGFloat tag_x = TagBg_w;
     
-    self.TagImageName =self.tagImageNames[0];
+    NSMutableArray *tags_tmp = [NSMutableArray array];
     
-    if ([self.tags containsObject:article.category]) {
+    for (NSInteger index = 0; index < article.tags.count; index++) {
         
-        NSInteger index =[self.tags indexOfObject:article.category];
-        
-        self.TagImageName =self.tagImageNames[index];
+        CGSize tagSize = [article.tags[index] KD_sizeWithAttributeFont:XFONT(11)];
+        tag_w = tagSize.width + MARGIN;
+        tag_x -= (tag_w + MARGIN);
+        CGRect tag_rect = CGRectMake(tag_x, tag_y, tag_w, tag_h);
+        if (tag_x < 0) break;
+        [tags_tmp addObject:NSStringFromCGRect(tag_rect)];
     }
-     
     
+    self.tag_frames = [tags_tmp copy];
     
 }
 

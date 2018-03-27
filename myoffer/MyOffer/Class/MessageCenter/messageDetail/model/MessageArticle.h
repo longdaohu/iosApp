@@ -20,6 +20,7 @@
 @property(nonatomic,copy)NSString *related_university_country;
 @property(nonatomic,copy)NSString *source_url;
 @property(nonatomic,copy)NSString *update_at;
+@property(nonatomic,copy)NSString *right_str;
 @property(nonatomic,strong)NSArray *related_universities;
 @property(nonatomic,strong)NSArray *tags;
 @property(nonatomic,copy)NSString *view_count;

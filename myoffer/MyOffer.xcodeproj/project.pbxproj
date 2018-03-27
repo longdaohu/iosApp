@@ -45,8 +45,14 @@
 		AE027EB51C3A4F54007EBD28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE027EB41C3A4F54007EBD28 /* Foundation.framework */; };
 		AE027EB71C3A4F5E007EBD28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE027EB61C3A4F5E007EBD28 /* UIKit.framework */; };
 		AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE027EB81C3A53C4007EBD28 /* PushConfig.plist */; };
+		AE033FD120182EA700D1D425 /* myOfferPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE033FD020182EA700D1D425 /* myOfferPageViewController.m */; };
+		AE033FD42018395900D1D425 /* myOfferMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE033FD32018395900D1D425 /* myOfferMenuItem.m */; };
+		AE033FD72018535200D1D425 /* myOfferMenuGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE033FD62018535200D1D425 /* myOfferMenuGroup.m */; };
+		AE033FDD20185C3B00D1D425 /* myofferMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE033FDC20185C3B00D1D425 /* myofferMenuCell.m */; };
+		AE033FE020186A6900D1D425 /* myOfferSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE033FDF20186A6900D1D425 /* myOfferSectionHeaderView.m */; };
 		AE05A7321E8A51940059C2BF /* EmallCatigoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */; };
 		AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */; };
+		AE072CD42068F161001641AC /* MessageDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE072CD32068F160001641AC /* MessageDetailHeaderView.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
@@ -186,7 +192,6 @@
 		AE4B2E671F1E095600E328F7 /* MessageDetaillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E271F1E095600E328F7 /* MessageDetaillViewController.m */; };
 		AE4B2E681F1E095600E328F7 /* MessageArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E2A1F1E095600E328F7 /* MessageArticle.m */; };
 		AE4B2E691F1E095600E328F7 /* MessageDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E2C1F1E095600E328F7 /* MessageDetailFrame.m */; };
-		AE4B2E6A1F1E095600E328F7 /* MessageDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E2F1F1E095600E328F7 /* MessageDetailContentCell.m */; };
 		AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E311F1E095600E328F7 /* ShareButton.m */; };
 		AE4B2E6C1F1E095600E328F7 /* FSBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E361F1E095600E328F7 /* FSBaseTableView.m */; };
 		AE4B2E6D1F1E095600E328F7 /* FSBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E381F1E095600E328F7 /* FSBottomTableViewCell.m */; };
@@ -377,12 +382,9 @@
 		AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A6E1D5B23F600DD7939 /* WYLXSuccessView.m */; };
 		AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A721D5B23F600DD7939 /* WYLXViewController.m */; };
 		AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24A841D5B23F600DD7939 /* XBTopToolView.m */; };
-		AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AA91D5B24D200DD7939 /* HelpViewController.m */; };
-		AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */; };
 		AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC11D5B24D200DD7939 /* XWGJAaboutHeader.m */; };
 		AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24AC21D5B24D200DD7939 /* XWGJAaboutHeader.xib */; };
 		AEA24AFC1D5B24D200DD7939 /* XWGJAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC41D5B24D200DD7939 /* XWGJAbout.m */; };
-		AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC61D5B24D200DD7939 /* XWGJAboutViewController.m */; };
 		AEA24AFE1D5B24D200DD7939 /* BindEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24AC91D5B24D200DD7939 /* BindEmailViewController.m */; };
 		AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA24ACA1D5B24D200DD7939 /* BindEmailViewController.xib */; };
 		AEA24B001D5B24D200DD7939 /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24ACD1D5B24D200DD7939 /* BindPhoneViewController.m */; };
@@ -418,8 +420,6 @@
 		AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BDA1D5B266A00DD7939 /* UILabel+extention.m */; };
 		AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BDC1D5B266A00DD7939 /* UIView+Extension.m */; };
 		AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BDE1D5B266A00DD7939 /* XTextField.m */; };
-		AEA24BEF1D5B266A00DD7939 /* XUButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BE01D5B266A00DD7939 /* XUButton.m */; };
-		AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BE21D5B266A00DD7939 /* XUToolbar.m */; };
 		AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF51D5B269A00DD7939 /* APIClient+Interface.m */; };
 		AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF71D5B269A00DD7939 /* APIClient.m */; };
 		AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BF91D5B269A00DD7939 /* AppDelegate.m */; };
@@ -573,10 +573,22 @@
 		AE027EB41C3A4F54007EBD28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE027EB61C3A4F5E007EBD28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE027EB81C3A53C4007EBD28 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		AE033FCF20182EA700D1D425 /* myOfferPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myOfferPageViewController.h; sourceTree = "<group>"; };
+		AE033FD020182EA700D1D425 /* myOfferPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myOfferPageViewController.m; sourceTree = "<group>"; };
+		AE033FD22018395900D1D425 /* myOfferMenuItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myOfferMenuItem.h; sourceTree = "<group>"; };
+		AE033FD32018395900D1D425 /* myOfferMenuItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myOfferMenuItem.m; sourceTree = "<group>"; };
+		AE033FD52018535200D1D425 /* myOfferMenuGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myOfferMenuGroup.h; sourceTree = "<group>"; };
+		AE033FD62018535200D1D425 /* myOfferMenuGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myOfferMenuGroup.m; sourceTree = "<group>"; };
+		AE033FDB20185C3B00D1D425 /* myofferMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myofferMenuCell.h; sourceTree = "<group>"; };
+		AE033FDC20185C3B00D1D425 /* myofferMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myofferMenuCell.m; sourceTree = "<group>"; };
+		AE033FDE20186A6900D1D425 /* myOfferSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myOfferSectionHeaderView.h; sourceTree = "<group>"; };
+		AE033FDF20186A6900D1D425 /* myOfferSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myOfferSectionHeaderView.m; sourceTree = "<group>"; };
 		AE05A7301E8A51940059C2BF /* EmallCatigoryGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigoryGroup.h; sourceTree = "<group>"; };
 		AE05A7311E8A51940059C2BF /* EmallCatigoryGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigoryGroup.m; sourceTree = "<group>"; };
 		AE05A7331E8A6A010059C2BF /* EmallCatigroySectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigroySectionView.h; sourceTree = "<group>"; };
 		AE05A7341E8A6A010059C2BF /* EmallCatigroySectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigroySectionView.m; sourceTree = "<group>"; };
+		AE072CD22068F160001641AC /* MessageDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetailHeaderView.h; sourceTree = "<group>"; };
+		AE072CD32068F160001641AC /* MessageDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetailHeaderView.m; sourceTree = "<group>"; };
 		AE133E9D1D6E952600AC9C42 /* UniversityDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniversityDetailItem.h; path = controller/UniversityDetailItem.h; sourceTree = "<group>"; };
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -814,8 +826,6 @@
 		AE4B2E2A1F1E095600E328F7 /* MessageArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageArticle.m; sourceTree = "<group>"; };
 		AE4B2E2B1F1E095600E328F7 /* MessageDetailFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailFrame.h; sourceTree = "<group>"; };
 		AE4B2E2C1F1E095600E328F7 /* MessageDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailFrame.m; sourceTree = "<group>"; };
-		AE4B2E2E1F1E095600E328F7 /* MessageDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailContentCell.h; sourceTree = "<group>"; };
-		AE4B2E2F1F1E095600E328F7 /* MessageDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailContentCell.m; sourceTree = "<group>"; };
 		AE4B2E301F1E095600E328F7 /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
 		AE4B2E311F1E095600E328F7 /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareButton.m; sourceTree = "<group>"; };
 		AE4B2E351F1E095600E328F7 /* FSBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSBaseTableView.h; sourceTree = "<group>"; };
@@ -1163,16 +1173,11 @@
 		AEA24A721D5B23F600DD7939 /* WYLXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXViewController.m; sourceTree = "<group>"; };
 		AEA24A831D5B23F600DD7939 /* XBTopToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTopToolView.h; sourceTree = "<group>"; };
 		AEA24A841D5B23F600DD7939 /* XBTopToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBTopToolView.m; sourceTree = "<group>"; };
-		AEA24AA81D5B24D200DD7939 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
-		AEA24AA91D5B24D200DD7939 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
-		AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		AEA24AC01D5B24D200DD7939 /* XWGJAaboutHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJAaboutHeader.h; sourceTree = "<group>"; };
 		AEA24AC11D5B24D200DD7939 /* XWGJAaboutHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJAaboutHeader.m; sourceTree = "<group>"; };
 		AEA24AC21D5B24D200DD7939 /* XWGJAaboutHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XWGJAaboutHeader.xib; sourceTree = "<group>"; };
 		AEA24AC31D5B24D200DD7939 /* XWGJAbout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJAbout.h; sourceTree = "<group>"; };
 		AEA24AC41D5B24D200DD7939 /* XWGJAbout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJAbout.m; sourceTree = "<group>"; };
-		AEA24AC51D5B24D200DD7939 /* XWGJAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJAboutViewController.h; sourceTree = "<group>"; };
-		AEA24AC61D5B24D200DD7939 /* XWGJAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJAboutViewController.m; sourceTree = "<group>"; };
 		AEA24AC81D5B24D200DD7939 /* BindEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindEmailViewController.h; sourceTree = "<group>"; };
 		AEA24AC91D5B24D200DD7939 /* BindEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindEmailViewController.m; sourceTree = "<group>"; };
 		AEA24ACA1D5B24D200DD7939 /* BindEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindEmailViewController.xib; sourceTree = "<group>"; };
@@ -1235,10 +1240,6 @@
 		AEA24BDC1D5B266A00DD7939 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		AEA24BDD1D5B266A00DD7939 /* XTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTextField.h; sourceTree = "<group>"; };
 		AEA24BDE1D5B266A00DD7939 /* XTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTextField.m; sourceTree = "<group>"; };
-		AEA24BDF1D5B266A00DD7939 /* XUButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUButton.h; sourceTree = "<group>"; };
-		AEA24BE01D5B266A00DD7939 /* XUButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUButton.m; sourceTree = "<group>"; };
-		AEA24BE11D5B266A00DD7939 /* XUToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUToolbar.h; sourceTree = "<group>"; };
-		AEA24BE21D5B266A00DD7939 /* XUToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUToolbar.m; sourceTree = "<group>"; };
 		AEA24BF41D5B269A00DD7939 /* APIClient+Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIClient+Interface.h"; sourceTree = "<group>"; };
 		AEA24BF51D5B269A00DD7939 /* APIClient+Interface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "APIClient+Interface.m"; sourceTree = "<group>"; };
 		AEA24BF61D5B269A00DD7939 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
@@ -2026,10 +2027,10 @@
 		AE4B2E2D1F1E095600E328F7 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AE4B2E2E1F1E095600E328F7 /* MessageDetailContentCell.h */,
-				AE4B2E2F1F1E095600E328F7 /* MessageDetailContentCell.m */,
 				AE4B2E301F1E095600E328F7 /* ShareButton.h */,
 				AE4B2E311F1E095600E328F7 /* ShareButton.m */,
+				AE072CD22068F160001641AC /* MessageDetailHeaderView.h */,
+				AE072CD32068F160001641AC /* MessageDetailHeaderView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3161,45 +3162,10 @@
 			isa = PBXGroup;
 			children = (
 				AE4C713A1F4EE6460069E83E /* leftMenuFile */,
-				AEA24AA61D5B24D200DD7939 /* Help */,
 				AEA24ABE1D5B24D200DD7939 /* Setting */,
 				AEA24AE41D5B24D200DD7939 /* TongZhi */,
 			);
 			path = LeftMenu;
-			sourceTree = "<group>";
-		};
-		AEA24AA61D5B24D200DD7939 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				AEA24AA71D5B24D200DD7939 /* controller */,
-				AEA24AAB1D5B24D200DD7939 /* model */,
-				AEA24AAC1D5B24D200DD7939 /* view */,
-			);
-			path = Help;
-			sourceTree = "<group>";
-		};
-		AEA24AA71D5B24D200DD7939 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				AEA24AA81D5B24D200DD7939 /* HelpViewController.h */,
-				AEA24AA91D5B24D200DD7939 /* HelpViewController.m */,
-				AEA24AAA1D5B24D200DD7939 /* HelpViewController.xib */,
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		AEA24AAB1D5B24D200DD7939 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		AEA24AAC1D5B24D200DD7939 /* view */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		AEA24ABE1D5B24D200DD7939 /* Setting */ = {
@@ -3225,8 +3191,16 @@
 				AEA24AC21D5B24D200DD7939 /* XWGJAaboutHeader.xib */,
 				AEA24AC31D5B24D200DD7939 /* XWGJAbout.h */,
 				AEA24AC41D5B24D200DD7939 /* XWGJAbout.m */,
-				AEA24AC51D5B24D200DD7939 /* XWGJAboutViewController.h */,
-				AEA24AC61D5B24D200DD7939 /* XWGJAboutViewController.m */,
+				AE033FCF20182EA700D1D425 /* myOfferPageViewController.h */,
+				AE033FD020182EA700D1D425 /* myOfferPageViewController.m */,
+				AE033FDB20185C3B00D1D425 /* myofferMenuCell.h */,
+				AE033FDC20185C3B00D1D425 /* myofferMenuCell.m */,
+				AE033FDE20186A6900D1D425 /* myOfferSectionHeaderView.h */,
+				AE033FDF20186A6900D1D425 /* myOfferSectionHeaderView.m */,
+				AE033FD22018395900D1D425 /* myOfferMenuItem.h */,
+				AE033FD32018395900D1D425 /* myOfferMenuItem.m */,
+				AE033FD52018535200D1D425 /* myOfferMenuGroup.h */,
+				AE033FD62018535200D1D425 /* myOfferMenuGroup.m */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -3510,10 +3484,6 @@
 				AEA24BDE1D5B266A00DD7939 /* XTextField.m */,
 				AEF3A48A1F31B797002CB2EA /* myofferTextView.h */,
 				AEF3A48B1F31B797002CB2EA /* myofferTextView.m */,
-				AEA24BDF1D5B266A00DD7939 /* XUButton.h */,
-				AEA24BE01D5B266A00DD7939 /* XUButton.m */,
-				AEA24BE11D5B266A00DD7939 /* XUToolbar.h */,
-				AEA24BE21D5B266A00DD7939 /* XUToolbar.m */,
 				AE2093891F398EA40078DCBB /* myofferFlexibleView.h */,
 				AE20938A1F398EA40078DCBB /* myofferFlexibleView.m */,
 				AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */,
@@ -3931,7 +3901,6 @@
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
-				AEA24AF11D5B24D200DD7939 /* HelpViewController.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
@@ -4132,10 +4101,10 @@
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
 				AE91DDCB1FBBE15100CD06BD /* GuideOverseaModel.m in Sources */,
 				AE91DDD51FBBEFDF00CD06BD /* GuideCell.m in Sources */,
+				AE033FD72018535200D1D425 /* myOfferMenuGroup.m in Sources */,
 				AE1FD7511D5C929500FFD5A8 /* MJRefreshBackStateFooter.m in Sources */,
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
-				AEA24BEF1D5B266A00DD7939 /* XUButton.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
@@ -4202,7 +4171,6 @@
 				AECC87E01F95F63800FCBBEC /* CatigaryCityCollectionReusableView.m in Sources */,
 				AE1FD7201D5C929500FFD5A8 /* MJPropertyType.m in Sources */,
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
-				AEA24AFD1D5B24D200DD7939 /* XWGJAboutViewController.m in Sources */,
 				AE3AB6AD1F21A27300A3C7E3 /* SMNewsCell.m in Sources */,
 				AE2B1DAD1F42987300FB953E /* ApplyStatusHistoryItemFrame.m in Sources */,
 				AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */,
@@ -4238,6 +4206,7 @@
 				AE3AB6AC1F21A27300A3C7E3 /* SMHotModel.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,
+				AE033FDD20185C3B00D1D425 /* myofferMenuCell.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
@@ -4270,7 +4239,6 @@
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
 				AEA249C61D5B215300DD7939 /* ApplyTableViewCell.m in Sources */,
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
-				AEA24AF01D5B24D200DD7939 /* HelpViewController.m in Sources */,
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AE582C341D06B94600499B6B /* Order.m in Sources */,
@@ -4289,7 +4257,6 @@
 				AECC87D21F95F63800FCBBEC /* MyOfferArea.m in Sources */,
 				AECC87D31F95F63800FCBBEC /* MyOfferCountry.m in Sources */,
 				AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */,
-				AEA24BF01D5B266A00DD7939 /* XUToolbar.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AECC87D81F95F63800FCBBEC /* RankTypeItemFrame.m in Sources */,
 				AECC87D51F95F63800FCBBEC /* MyOfferSubjecct.m in Sources */,
@@ -4300,6 +4267,7 @@
 				AE3A5AF61F98A08400DFB47A /* RankDetailViewController.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AEA24B861D5B25E000DD7939 /* NewSearchResultCell.m in Sources */,
+				AE072CD42068F161001641AC /* MessageDetailHeaderView.m in Sources */,
 				AE3943E01E0A1AD00038826A /* SDCollectionViewCell.m in Sources */,
 				AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */,
 				AE3AB6A81F21A27300A3C7E3 /* SMBannerModel.m in Sources */,
@@ -4316,6 +4284,7 @@
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
+				AE033FD120182EA700D1D425 /* myOfferPageViewController.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */,
 				AE892A151EBC1FD70035A31D /* MeCenterHeaderViewFrame.m in Sources */,
@@ -4369,6 +4338,7 @@
 				AE4B2E741F1E095600E328F7 /* MessageTopicFooterView.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,
+				AE033FE020186A6900D1D425 /* myOfferSectionHeaderView.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AECC87D61F95F63800FCBBEC /* rankFilter.m in Sources */,
 				AE91DDE01FBC169F00CD06BD /* GuideItemCell.m in Sources */,
@@ -4377,6 +4347,7 @@
 				AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
+				AE033FD42018395900D1D425 /* myOfferMenuItem.m in Sources */,
 				AECC87DD1F95F63800FCBBEC /* RankTypeHeaderView.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
@@ -4412,7 +4383,6 @@
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,
 				AECC87CC1F95F63800FCBBEC /* CatigoryCountryViewController.m in Sources */,
 				AE4B2E761F1E095600E328F7 /* MessageTopicModel.m in Sources */,
-				AE4B2E6A1F1E095600E328F7 /* MessageDetailContentCell.m in Sources */,
 				AEA24B8A1D5B25E000DD7939 /* searchSectionFootView.m in Sources */,
 				AEA249D21D5B215300DD7939 /* CenterHeaderView.m in Sources */,
 				AEA249B81D5B215300DD7939 /* XWGJTJSectionGroup.m in Sources */,
@@ -4599,7 +4569,7 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
@@ -4656,7 +4626,7 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";

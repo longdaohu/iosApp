@@ -92,12 +92,18 @@
 
 -(void)makeTableView{
 
-    self.tableView            = [[UITableView alloc] initWithFrame:CGRectMake(0, XNAV_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, XNAV_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.allowsSelection = NO;
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview: self.tableView];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
 }
 
 

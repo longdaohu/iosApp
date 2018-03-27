@@ -30,7 +30,7 @@
                 expectedStatusCodes:(NSArray *)expectedStatusCode
                             showHUD:(BOOL)showHUD
                      showErrorAlert:(BOOL)showErrorAlert
-            errorAlertDismissAction:(void (^)())errorAlertDismissAction
+            errorAlertDismissAction:(void (^)(void))errorAlertDismissAction
             additionalSuccessAction:(APIClientSuccessBlock)success
             additionalFailureAction:(APIClientFailureBlock)failure {
     
@@ -171,7 +171,7 @@
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
                             showHUD:(BOOL)showHUD
-            errorAlertDismissAction:(void (^)())errorAlertDismissAction
+            errorAlertDismissAction:(void (^)(void))errorAlertDismissAction
                             success:(APIClientSuccessBlock)success{
     [self startAPIRequestWithSelector:selector
                            parameters:parameters
@@ -183,7 +183,7 @@
               additionalFailureAction:nil];
 }
 
-- (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action {
+- (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)(void))action {
     
     NSString *errorMessage;
     

@@ -14,7 +14,6 @@
 #import "FavoriteViewController.h"
 #import "CatigoryViewController.h"
 #import "NotificationViewController.h"
-#import "HelpViewController.h"
 #import "SetViewController.h"
 #import "PipeiEditViewController.h"
 #import "OrderViewController.h"
@@ -26,6 +25,8 @@
 #import "ApplyStutasModel.h"
 #import "ApplyStatusNewCell.h"
 #import "ApplyStatusModelFrame.h"
+#import "myOfferPageViewController.h"
+
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -535,7 +536,7 @@
 -(void)caseHelp
 {
     
-    [self pushWithVC:NSStringFromClass([HelpViewController class])];
+    [self pushWithVC:NSStringFromClass([myOfferPageViewController class])];
     
 }
 
@@ -564,9 +565,19 @@
 //跳转
 - (void)pushWithVC:(NSString *)vcStr{
     
+    self.currentType = CurrentClickTypeDefault;
+
+    if (NSClassFromString(vcStr) == [myOfferPageViewController class]) {
+     
+        myOfferPageViewController *vc = [[myOfferPageViewController  alloc] init];
+        vc.pageType = myOfferPageTypeHelp;
+        [self.navigationController pushViewController:vc  animated:YES];
+        
+        return;
+    }
+    
     [self.navigationController pushViewController:[[NSClassFromString(vcStr)  alloc] init] animated:YES];
 
-    self.currentType = CurrentClickTypeDefault;
     
 }
 

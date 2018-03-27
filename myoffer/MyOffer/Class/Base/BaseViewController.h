@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger,CurrentClickType){
 - (void)startAPIRequestWithSelector:(NSString *)selector
                          parameters:(NSDictionary *)parameters
                             showHUD:(BOOL)showHUD
-            errorAlertDismissAction:(void (^)())errorAlertDismissAction
+            errorAlertDismissAction:(void (^)(void))errorAlertDismissAction
                             success:(APIClientSuccessBlock)success;
 
 - (void)startAPIRequestWithSelector:(NSString *)selector
@@ -51,11 +51,11 @@ typedef NS_ENUM(NSInteger,CurrentClickType){
                 expectedStatusCodes:(NSArray *)expectedStatusCode
                             showHUD:(BOOL)showHUD
                      showErrorAlert:(BOOL)showErrorAlert
-            errorAlertDismissAction:(void (^)())errorAlertDismissAction
+            errorAlertDismissAction:(void (^)(void))errorAlertDismissAction
             additionalSuccessAction:(APIClientSuccessBlock)success
             additionalFailureAction:(APIClientFailureBlock)failure;
 
-- (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)())action;
+- (void)showAPIErrorAlertView:(NSError *)error clickAction:(void (^)(void))action;
 
 @property (nonatomic) BOOL tapToEndEditing;
 @property (nonatomic,assign) BOOL newWorkReach;

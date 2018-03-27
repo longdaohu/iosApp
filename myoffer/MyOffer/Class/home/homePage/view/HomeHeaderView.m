@@ -7,7 +7,6 @@
 //
 #import <QuartzCore/QuartzCore.h>
 #import "HomeHeaderView.h"
-#import "XUToolbar.h"
 #import "TopNavView.h"
 #import "HeadItem.h"
 

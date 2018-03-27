@@ -9,7 +9,7 @@
 #import "SetViewController.h"
 #import "ProfileViewController.h"
 #import "FeedbackViewController.h"
-#import "XWGJAboutViewController.h"
+#import "myOfferPageViewController.h"
 
 @interface SetViewController ()
 @property(nonatomic,strong)NSMutableArray *groups;
@@ -102,7 +102,7 @@
         XWGJAbout *feedBack  = [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-003") action:NSStringFromSelector(@selector(caseLogin:)) itemClass:NSStringFromClass([FeedbackViewController class])];
   
         //关于
-       XWGJAbout *about  =  [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-004") action:NSStringFromSelector(@selector(caseAbout:)) itemClass:NSStringFromClass([XWGJAboutViewController class])];
+       XWGJAbout *about  =  [XWGJAbout cellWithLogo:nil title:GDLocalizedString(@"Setting-004") action:NSStringFromSelector(@selector(caseAbout:)) itemClass:NSStringFromClass([myOfferPageViewController class])];
         
  
        myofferGroupModel *setGroup = [myofferGroupModel groupWithItems:@[profile,feedBack,about] header:nil];

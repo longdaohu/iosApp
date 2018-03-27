@@ -49,7 +49,6 @@
     
     UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
      self.bgView = bgView;
-//    bgView.backgroundColor = [UIColor greenColor];
     
     [bgView addSubview:self.emptyView];
     
