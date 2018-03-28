@@ -67,8 +67,7 @@
                  success(statusCode, response);
              }
              @catch (NSException *exception) {
-                 //@"服务器返回结果解析出错"
-                 [KDAlertView showMessage:GDLocalizedString(@"NetRequest-SeverReturnError") cancelButtonTitle:GDLocalizedString(@"NetRequest-OK")];
+                 [KDAlertView showMessage:@"服务器返回结果解析出错" cancelButtonTitle:@"好的"];
              }
          }
      } failure:^(NSInteger statusCode, NSError *error) {

@@ -1598,7 +1598,7 @@
 				AEA249291D5B215300DD7939 /* order_Group */,
 				AEA249471D5B215300DD7939 /* Apply_TIJIAO */,
 				AEA2496A1D5B215300DD7939 /* ApplyList */,
-				AEA2497B1D5B215300DD7939 /* ApplyStutas */,
+				AEA2497B1D5B215300DD7939 /* ApplyStatus */,
 				AEA2498B1D5B215300DD7939 /* Favorite */,
 			);
 			name = userCenter;
@@ -2819,7 +2819,7 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		AEA2497B1D5B215300DD7939 /* ApplyStutas */ = {
+		AEA2497B1D5B215300DD7939 /* ApplyStatus */ = {
 			isa = PBXGroup;
 			children = (
 				AE914ED51F419E61008A43CD /* applyStatusHistory */,
@@ -2830,8 +2830,8 @@
 				AEA2497F1D5B215300DD7939 /* model */,
 				AEA249861D5B215300DD7939 /* view */,
 			);
-			name = ApplyStutas;
-			path = Class/ApplyStutas;
+			name = ApplyStatus;
+			path = Class/ApplyStatus;
 			sourceTree = "<group>";
 		};
 		AEA2497C1D5B215300DD7939 /* controller */ = {

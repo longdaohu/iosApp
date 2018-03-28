@@ -14,7 +14,6 @@
 @interface FavoriteViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) MyOfferTableView *tableView;
-//收藏学校数据
 @property (strong, nonatomic) NSArray *groups;
 
 @end
@@ -39,7 +38,6 @@
     [MobClick beginLogPageView:@"page收藏"];
 
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
     [self makeDataSource];
 }
 
@@ -47,24 +45,24 @@
 -(void)makeUI
 {
     [self makeTableView];
-    
     self.title = @"收藏院校";
- 
-  
 }
 
 
 - (void)makeTableView{
     
-    self.tableView = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view  addSubview:self.tableView];
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
-    
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
     if (@available(iOS 11.0, *)) {
-        
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
 
 }
@@ -82,25 +80,15 @@
     
     //网络不连接时，提示网络不连接
     if (![self checkNetworkState]) {
-        
-        if (self.groups == 0) {
-            
-            [self.tableView emptyViewWithError:NetRequest_noNetWork];
-        }
-        
+        if (self.groups == 0) [self.tableView emptyViewWithError:NetRequest_noNetWork];
         return;
     }
-    
-    
+ 
     XWeakSelf;
     [self startAPIRequestWithSelector:kAPISelectorFavorites parameters:nil expectedStatusCodes:nil showHUD:(self.groups.count == 0) showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        [weakSelf updateUIWithResponse:response];
-        
+        [weakSelf updateWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
         [weakSelf showError];
-        
     }];
  
 }
@@ -108,53 +96,35 @@
 
 
 //根据返回数据配置UI
-- (void)updateUIWithResponse:(id)response{
+- (void)updateWithResponse:(id)response{
 
     
     NSArray *universities =  [MyOfferUniversityModel mj_objectArrayWithKeyValuesArray:(NSArray *)response];
     
 
-    NSMutableArray *uni_temps = [NSMutableArray array];
+    NSMutableArray *groups_tmp = [NSMutableArray array];
     [universities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+ 
+        MyOfferUniversityModel *uni = (MyOfferUniversityModel *)obj;
+        UniversityFrameNew *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy:uni];
         
-        [uni_temps addObject:[UniversityFrameNew universityFrameWithUniverstiy:(MyOfferUniversityModel *)obj]];
-        
+        [groups_tmp addObject:@[uniFrame]];
     }];
-    self.groups = [uni_temps copy];
     
+    
+    self.groups = [groups_tmp copy];
     [self.tableView reloadData];
     
     if (universities.count > 0) {
-        
-        [self.tableView emptyViewWithHiden:YES];
-        
+       [self.tableView emptyViewWithHiden:YES];
     }else{
-    
-       [self.tableView emptyViewWithError:GDLocalizedString(@"Favorite-NOTI")];
-        
+       [self.tableView emptyViewWithError:@"Duang!请添加您关注的院校吧！"];
     }
     
 
 }
 
 #pragma mark : UITableViewDataSource, UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return HEIGHT_ZERO;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    return Section_footer_Height_nomal;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    UniversityFrameNew *uniFrame = self.groups[indexPath.section];
-    
-    return uniFrame.cell_Height;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
@@ -163,15 +133,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 1;
+    NSArray *group = self.groups[section];
+    return group.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     UniverstityTCell *cell =[UniverstityTCell cellViewWithTableView:tableView];
-    
-    cell.uniFrame = self.groups[indexPath.section];
-    
+    NSArray *group =  self.groups[indexPath.section];
+    cell.uniFrame = group[indexPath.row];
     [cell separatorLineShow:NO];
     
     return cell;
@@ -179,22 +149,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UniversityFrameNew *uniFrame = self.groups[indexPath.section];
-    
+    NSArray *group =  self.groups[indexPath.section];
+    UniversityFrameNew *uniFrame = group[indexPath.row];
     [self.navigationController pushViewController:[[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] animated:YES];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSArray *group =  self.groups[indexPath.section];
+    UniversityFrameNew *uniFrame = group[indexPath.row];
+
+    return uniFrame.cell_Height;
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+   return  HEIGHT_ZERO;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return  Section_footer_Height_nomal;
+}
 
 //显示错误提示
 - (void)showError{
     
     if (self.groups.count == 0) {
-        
         [self.tableView emptyViewWithError:NetRequest_ConnectError];
-  
     }
 }
 
