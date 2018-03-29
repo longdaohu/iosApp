@@ -13,8 +13,8 @@
     
     _name = name;
     
-    CGSize titleSize = [name boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH * 0.5 - 10, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
-     self.cellHeight = titleSize.height > 32 ? titleSize.height + 17 : 40;
+//    CGSize titleSize = [name boundingRectWithSize:CGSizeMake(XSCREEN_WIDTH * 0.5 - 10, 999) options:NSStringDrawingUsesLineFragmentOrigin  attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size;
+//     self.cellHeight = titleSize.height > 32 ? titleSize.height + 17 : 40;
 
 }
 

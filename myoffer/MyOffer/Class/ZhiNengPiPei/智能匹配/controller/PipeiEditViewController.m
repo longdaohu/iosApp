@@ -22,24 +22,15 @@
 
 @interface PipeiEditViewController ()<UITableViewDelegate,UITableViewDataSource,ZiXunCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-//分组数组
-@property(nonatomic,strong)NSArray *groups;
-//国家原始数据
-@property(nonatomic,strong)NSArray *countryItems_CN;
-//学科原始数据
-@property(nonatomic,strong)NSArray *subjectItems_CN;
-//学科Picker
-@property(nonatomic,strong)UIPickerView *subjectPicker;
-//国家Picker
-@property(nonatomic,strong)UIPickerView *countryPicker;
-//用于标识正在编辑的Cell
-@property(nonatomic,strong)ZhiXunCell *editingCell;
-//提交按钮
-@property(nonatomic,strong)UIButton *submitBtn;
-//判断提交按钮是否被点击过
-@property(nonatomic,assign)BOOL submitBtnHadDone;
-//提示页
-@property(nonatomic,strong)PromttViewController *prompVC;
+@property(nonatomic,strong)NSArray *groups;//分组数组
+@property(nonatomic,strong)NSArray *countryItems_CN;//国家原始数据
+@property(nonatomic,strong)NSArray *subjectItems_CN;//学科原始数据
+@property(nonatomic,strong)UIPickerView *subjectPicker;//学科Picker
+@property(nonatomic,strong)UIPickerView *countryPicker;//国家Picker
+@property(nonatomic,strong)ZhiXunCell *editingCell;//用于标识正在编辑的Cell
+@property(nonatomic,strong)UIButton *submitBtn;//提交按钮
+@property(nonatomic,assign)BOOL submitBtnHadDone;//判断提交按钮是否被点击过
+@property(nonatomic,strong)PromttViewController *prompVC;//提示页
 
 @end
 
@@ -117,14 +108,13 @@
     headerView.mj_y = -64;
     
     [self.view insertSubview:headerView aboveSubview:self.tableView];
- 
     self.tableView.contentInset = UIEdgeInsetsMake(headerView.mj_h - 64, 0, 0, 0);
 
 }
 
 - (void)makeTableView {
     
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -132,14 +122,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     self.tableView.showsVerticalScrollIndicator = NO;
-    
-    //添加表头
-    [self makeHeaderView];
-    
     if (@available(iOS 11.0, *)) {
-        
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    //添加表头
+    [self makeHeaderView];
 
  
 }
@@ -194,9 +181,7 @@
     
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
-        
         [weakSelf updateUIWithResponse:response];
-        
     }];
     
 }
@@ -218,15 +203,11 @@
         if (!value) {
             
             [ud setValue:[[AppDelegate sharedDelegate] accessToken] forKey:tokenKey];
-            
             [ud synchronize];
-            
             
             //当没有数据时，出现智能匹配提示页面
             PromttViewController *pro = [PromttViewController promptView];
-            
             self.prompVC  = pro;
-            
             [pro promptViewShow:YES];
         }
         
@@ -244,9 +225,7 @@
     for (WYLXGroup *group in self.groups) {
         
         if (group.content.length == 0) {
-            
             [MBProgressHUD showError:[NSString stringWithFormat:@"%@不能为空",group.title] toView:self.view];
-            
             return;
         }
         
@@ -256,11 +235,8 @@
     
     //当从学校页面来到编辑智能匹配页面时，从if里进入
     if (self.Uni_Country) {
-        
         [self fromUniversitySubmit];
-        
         return;
-        
     }
     
     
@@ -705,11 +681,10 @@
 //根据条件跳转页面
 - (void)configrationWithResponse:(id)response{
     
-    if (self.isfromPipeiResultPage) {
+    if (self.actionBlock) {
         
-        IntelligentResultViewController *resultVC = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 2];
-        resultVC.refreshCount = 0;
-        [self.navigationController popToViewController:resultVC animated:YES];
+        self.actionBlock(@"我要刷新");
+        [self.navigationController popViewControllerAnimated:YES];
         
     }else{
         
@@ -717,7 +692,6 @@
         resultVC.from_Edit_Pipei = YES;
         [self.navigationController pushViewController:resultVC animated:YES];
     }
-    
     
 }
 

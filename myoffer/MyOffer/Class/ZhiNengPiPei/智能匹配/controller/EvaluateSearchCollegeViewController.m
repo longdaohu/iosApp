@@ -128,12 +128,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"school"];
-    
     if (!cell) {
-        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"school"];
     }
-    
     cell.textLabel.text = self.resultList[indexPath.row];
     
     return cell;
@@ -172,16 +169,11 @@
     
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", searchTF.text];
-    
     self.resultList = [self.schoolList filteredArrayUsingPredicate:pred];
-    
     if (self.resultList.count == 0 && searchTF.text.length > 0) {
-
         NSString *item = [NSString stringWithFormat:@"输入\" %@\" ",searchTF.text];
-        
         self.resultList = @[item];
     }
-    
     [self.tableView reloadData];
 }
 
@@ -192,9 +184,7 @@
 {
     
     if ( 0 == self.searchTextField.text.length) {
-        
         [self.navigationController popViewControllerAnimated:YES];
-        
         return;
     }
     
@@ -202,24 +192,18 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
     if ([pred evaluateWithObject:self.searchTextField.text]) {
-        
         [self popWithuniversityName:self.searchTextField.text];
-        
         return;
     }
     
-    
     AlerMessage(@"请输入完整的中文院校名称");
-    
 }
 
 
 -(void)popWithuniversityName:(NSString *)unversity{
     
     if (unversity.length > 0 && self.valueBlock) {
-        
         self.valueBlock(unversity);
-        
         [self.navigationController popViewControllerAnimated:YES];
     }
     

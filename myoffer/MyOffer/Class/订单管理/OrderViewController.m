@@ -111,23 +111,16 @@
     
     //1 判断是否是第一页
     if (0 == self.nextPage) {
-      
         [self.groups removeAllObjects];
-        
         self.nextPage = 0;
     }
     self.nextPage += 1;
     
-    
     //2 数据转模型
     NSArray *orders =  [OrderItem mj_objectArrayWithKeyValuesArray:response[@"orders"]];
-
     for (OrderItem *order in orders) {
-        
         OrderItemFrame *order_frame = [[OrderItemFrame alloc] initWithOrder:order];
-        
         [self.groups addObject:@[order_frame]];
-
     }
     [self.tableView reloadData];
 
@@ -137,37 +130,24 @@
     [self.tableView.mj_footer endRefreshing];
     
     if (self.tableView.mj_footer) {
-        
         if ( orders.count < Parameter_Size) {
-            
             self.tableView.mj_footer =  nil;
         }
-        
     }else{
-        
         self.tableView.mj_footer =  [self makeMJ_footer];
-        
     }
-    
     
     //4 判断是否有数据，做相关提示
     if(self.groups.count == 0 ){
-    
         [self.tableView emptyViewWithError:@"还没有购买服务！"];
-
     }else{
-    
         [self.tableView emptyViewWithHiden:YES];
-        
     }
- 
-    
 }
 
 - (void)makeUI{
     
     self.title = @"我的订单";
-    
     [self makeTableView];
 }
 
@@ -180,13 +160,14 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = mj_header;
@@ -244,7 +225,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
+
     return Section_footer_Height_nomal;
 }
 
@@ -273,7 +254,6 @@
         if (isSuccess) {
             
             order_Frame.order.status_close = YES;
-            
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
@@ -292,15 +272,11 @@
     
      XWeakSelf
     pay.actionBlock = ^(BOOL isSuccess){
-      
          if (isSuccess) {
-            
             order.status_finish = YES;
-
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     };
-    
     [self.navigationController pushViewController:pay  animated:YES];
 }
 
@@ -311,23 +287,15 @@
     XWeakSelf
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要取消订单"  message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
     }];
-    
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
         NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
         
         //先删除 已选择专业数组列表  > 再删除分区头
         [weakSelf startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            
             if ([response[@"result"] isEqualToString:@"OK"]) {
-                
                 order.status_close = YES;
-                
                 [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
             
@@ -340,9 +308,6 @@
     [alertController addAction:commitAction];
     [self presentViewController:alertController animated:YES completion:nil];
 
-    
-    
-    
 }
 
 
@@ -354,7 +319,7 @@
 
 -(void)dealloc{
     
-    KDClassLog(@"订单中心 OrderViewController  dealloc");
+    KDClassLog(@"订单中心 + OrderViewController + dealloc");
     
 }
 

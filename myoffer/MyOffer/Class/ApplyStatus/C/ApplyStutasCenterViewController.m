@@ -82,7 +82,6 @@
     [status_Arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
          ApplyStatusModelFrame *frameModel = [ApplyStatusModelFrame frameWithStatusModel:(ApplyStutasModel*)obj];
-        
         [status_temps addObject:@[frameModel]];
         
      }];
@@ -92,11 +91,10 @@
     [self.tableView reloadData];
 }
 
-#pragma mark : 新建 UI
+
 - (void)makeUI{
 
     self.title = @"我的申请";
-
     [self makeTableView];
 }
 
@@ -107,7 +105,16 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     [self.view addSubview:self.tableView];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     XWeakSelf
     self.tableView.emptyView.actionBlock = ^{
 
@@ -134,9 +141,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ApplyStatusNewCell *cell = [ApplyStatusNewCell cellWithTableView:tableView];
- 
     NSArray *items = self.groups[indexPath.section];
-
     cell.statusFrame = items[indexPath.row];
 
     return cell;
@@ -145,7 +150,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *items = self.groups[indexPath.section];
-
     ApplyStatusModelFrame *status_frame = items[indexPath.row];
     
     return  status_frame.cell_Height;
@@ -166,11 +170,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSArray *items = self.groups[indexPath.section];
-    
      ApplyStatusHistoryViewController  *historyVC = [[ApplyStatusHistoryViewController alloc] init];
-    
      historyVC.status_frame = items[indexPath.row];
-    
      [self.navigationController pushViewController:historyVC animated:YES];
     
 }

@@ -44,7 +44,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self promptViewShow:NO];
+}
 
 //当没有数据时，出现智能匹配提示页面
 - (void)promptViewShow:(BOOL)show{
@@ -75,7 +78,7 @@
 
 - (void)dealloc{
 
-    KDClassLog(@"PromttViewController dealloc");
+    KDClassLog(@" 提示信息 + PromttViewController + dealloc");
 }
 
 

@@ -34,9 +34,7 @@
     self.title = @"服务状态";
  
     self.tableView.tableFooterView = [UIView new];
-    
     self.view.backgroundColor = XCOLOR_BG;
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
@@ -55,7 +53,6 @@
     _status_history = status_history;
  
     ApplyStutasModel *statusModel = [ApplyStutasModel mj_objectWithKeyValues:status_history];
-    
     [self updateUIWithStatus:statusModel];
     
 }

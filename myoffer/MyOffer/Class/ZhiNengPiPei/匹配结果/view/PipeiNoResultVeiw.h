@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^PipeiNoResultVeiwBlock)();
+typedef void(^PipeiNoResultVeiwBlock)(void);
 @interface PipeiNoResultVeiw : UIView
 @property(nonatomic,copy)PipeiNoResultVeiwBlock actionBlock;
 + (instancetype)viewWithActionBlock:(PipeiNoResultVeiwBlock)actionBlock;

@@ -27,12 +27,9 @@
     static NSString *recordReuse = @"record";
     
     ApplyStatusCell *cell =[tableView dequeueReusableCellWithIdentifier:recordReuse];
-    
     if (!cell) {
-        
         cell = [[ApplyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordReuse];
     }
-    
     
     return cell;
 }
@@ -67,9 +64,7 @@
     _record = record;
     
     self.statusLab.text = record.state;
-    
     [self.statusLab sizeToFit];
-
     self.subjectLab.text = record.course.official_name;
 
 }
@@ -86,7 +81,6 @@
     newRect.size.height = contentSize.height;
     newRect.origin.x    = contentSize.width - self.statusLab.frame.size.width - 5;
     self.statusLab.frame = newRect;
-    
     
     CGFloat subjectx = Left_Margin;
     CGFloat subjecty = 0;

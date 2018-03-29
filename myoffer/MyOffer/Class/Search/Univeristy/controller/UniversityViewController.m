@@ -589,8 +589,7 @@ typedef enum {
  
     //监听顶部导航条透明度
     [self.topNavigationView scrollViewContentoffset:scrollView.contentOffset.y andContenHeight:self.UniFrame.centerView_Frame.origin.y - XNAV_HEIGHT];
-  
-    
+ 
     //下拉图片处理
     [self.flexView flexWithContentOffsetY:scrollView.contentOffset.y ];
     

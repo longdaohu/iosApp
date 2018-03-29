@@ -13,7 +13,5 @@
 
 - (void)promptViewShow:(BOOL)show;
 
-//+ (void)promptViewShow:(BOOL)show;
-
 @end
 

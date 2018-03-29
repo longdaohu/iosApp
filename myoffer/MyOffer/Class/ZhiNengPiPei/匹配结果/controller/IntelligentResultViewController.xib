@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntelligentResultViewController">
             <connections>
-                <outlet property="NewSelectLabel" destination="a4f-3B-CqI" id="dFR-6x-muI"/>
                 <outlet property="ResultTableView" destination="3w2-tJ-h1W" id="6bK-1P-MJI"/>
-                <outlet property="bottomView" destination="B6A-Ne-GDe" id="N8s-6V-27m"/>
                 <outlet property="commitButton" destination="KGm-Yk-ruZ" id="p7c-vL-Uva"/>
-                <outlet property="currentCountLabel" destination="B7K-cU-amC" id="4ED-lV-Rar"/>
                 <outlet property="footerView" destination="pFJ-f9-nU2" id="R8d-0I-AHu"/>
                 <outlet property="headerView" destination="iuY-Dw-3Sh" id="8nM-Ci-vxh"/>
                 <outlet property="lineView" destination="2HB-Hj-HF9" id="we1-rc-ueC"/>
-                <outlet property="pieSelectLabel" destination="c5M-W1-ffR" id="LMq-uK-fst"/>
+                <outlet property="pieSubtitleLab" destination="c5M-W1-ffR" id="jwd-KY-VH2"/>
+                <outlet property="pieTitleLab" destination="B7K-cU-amC" id="Hxa-FV-Rik"/>
+                <outlet property="selectedLab" destination="a4f-3B-CqI" id="ZAS-QG-yqf"/>
                 <outlet property="upHeaderView" destination="BBd-52-T1X" id="lLx-SL-Qnh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

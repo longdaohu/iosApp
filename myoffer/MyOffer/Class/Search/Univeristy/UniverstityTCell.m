@@ -66,6 +66,8 @@
 
 - (void)makeUI{
 
+    self.contentView.backgroundColor = XCOLOR_WHITE;
+
     //LOGO图标
     self.iconView =[[LogoView alloc] init];
     [self.contentView addSubview:self.iconView];
@@ -194,9 +196,12 @@
     //判断是否需要显示*号   澳大利来排名时
     if (isStart) {
         
+        
+        
         [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")]  forState:UIControlStateNormal];
         NSInteger  StarCount  = university.ranking_ti.integerValue;
         
+     
         //暂无排名时
         if (StarCount == DEFAULT_NUMBER) {
             
@@ -205,7 +210,7 @@
             return;
         }
         
-        
+           /*
         for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
             
             UIImageView *imageV = (UIImageView *)self.StarsBgView.subviews[i];
@@ -228,7 +233,7 @@
             
             mv.hidden = YES;
         }
-        
+        */
         
     }else{
         

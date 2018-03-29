@@ -25,7 +25,7 @@
 @property(nonatomic,strong)UIButton *address_Btn;
 
 @property(nonatomic,strong) UIView *line;
-
+@property(nonatomic,strong)UniversityFrame *uniFrame;
 @end
 
 @implementation ResultTableViewCell
@@ -122,6 +122,8 @@
 
 - (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame {
     
+    self.uniFrame = uniFrame;
+    
     [self configureWithUniversityFrame:uniFrame ranking:RANK_TI];
 }
 
@@ -132,18 +134,14 @@
     self.universityID = university.NO_id;
     self.nameLab.frame = uniFrame.name_Frame;
     self.nameLab.text = university.name;
-    
     self.official_nameLab.frame = uniFrame.official_Frame;
     self.official_nameLab.text = university.official_name;
-    
- 
     self.iconView.frame = uniFrame.icon_Frame;
     [self.iconView.logoImageView KD_setImageWithURL:university.logo];
     
     self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
     
     self.rankBtn.frame =uniFrame.rank_Frame;
-    
     
     self.starBgView.hidden = !self.isStart;
     self.optionOrderBy =  @"ranking_ti";
@@ -183,24 +181,30 @@
         [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
 
         NSInteger  StarCount  = university.ranking_ti.integerValue;
-        
+ 
+//        if (StarCount >= 99 || StarCount <0) {
+//            StarCount =  0;
+//        }
+//        if (StarCount >5) {
+//            StarCount = 5;
+//        }
+ 
         for (NSInteger i =0; i < self.starBgView.subviews.count; i++) {
-            
+
             UIImageView *imageV = (UIImageView *)self.starBgView.subviews[i];
-            
+
             imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
         }
         for (NSInteger i =0; i < StarCount; i++) {
-            
+
             UIImageView *mv = (UIImageView *)self.starBgView.subviews[i];
-            
+
             mv.hidden = NO;
-            
+
         }
-        for (NSInteger i = StarCount ; i < self.starBgView.subviews.count; i++) {
-            
+        
+        for (NSInteger i = (StarCount -1); i < self.starBgView.subviews.count; i++) {
             UIImageView *mv = (UIImageView *)self.starBgView.subviews[i];
-            
             mv.hidden = YES;
         }
         
@@ -218,6 +222,8 @@
 
 - (void)selectCellID:(UIButton *)sender{
 
+    if (self.uniFrame.university.in_cart) return;
+    
     if ([self.delegate respondsToSelector:@selector(selectResultTableViewCellItem:withUniversityInfo:)]) {
         
         [self.delegate selectResultTableViewCellItem:sender withUniversityInfo:self.universityID];

@@ -51,7 +51,8 @@
 
 -(NSNumber *)ranking_ti{
     
-    
+    NSLog(@"澳大利来排名时 ==  %@",_ranking_ti);
+
     return _ranking_ti ? _ranking_ti : @DEFAULT_NUMBER;
 }
 

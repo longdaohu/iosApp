@@ -9,7 +9,6 @@
 #import "OrderDetailViewController.h"
 #import "OrderDetailHeaderView.h"
 #import "OrderDetailFooterView.h"
-#import "OrderDetailCell.h"
 #import "OrderServiceItem.h"
 #import "OrderItem.h"
 #import "PayOrderViewController.h"
@@ -90,11 +89,8 @@
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
     
             [weakSelf makeOrderWithResponse:response];
-            
             [weakSelf makeTableViewFooterView:response];
-
             [weakSelf statusWithTag:response[@"status"]];
-
             [weakSelf.tableView reloadData];
   
         }];
@@ -113,38 +109,12 @@
     [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSDictionary *temp = (NSDictionary *)obj;
-        
         OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-        
         item.name = temp[@"name"];
-        
         [weakSelf.leftItems addObject:item];
-        
-//        [temp[@"oversea"] integerValue] == 0 ? [self.leftItems addObject:item] :  [self.rightItems addObject:item];
         
     }];
     
-    /*
-    
-    if (self.leftItems.count > self.rightItems.count){
-        
-        for (NSInteger index = self.rightItems.count; index < self.leftItems.count; index ++ ) {
-            
-            OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-            item.name = @"";
-            [self.rightItems addObject:item];
-        }
-        
-    }else{
-        
-        for (NSInteger index = self.leftItems.count; index < self.rightItems.count; index ++ ) {
-            OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-            item.name = @"";
-            [self.leftItems addObject:item];
-        }
-    }
-    
-    */
   
     if (!self.leftItems.count) {
         
@@ -236,7 +206,6 @@
             [weakSelf.navigationController pushViewController:pay animated:YES];
             
         }else{
-            
             [weakSelf cancelOrder];
         }
         
@@ -247,24 +216,29 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.separatorStyle= UITableViewCellSeparatorStyleNone;
-
-    self.tableView.sectionHeaderHeight = 0;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self.view addSubview:self.tableView];
 }
 
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
+#pragma mark : UITableViewDelegate,UITableViewDataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderServiceItem  *left = self.leftItems[indexPath.row];
-    OrderServiceItem  *right = self.rightItems[indexPath.row];
-    return   left.cellHeight > right.cellHeight ? left.cellHeight : right.cellHeight;
+    return   1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
@@ -278,68 +252,36 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return  self.isTableViewSelected ? 0 : self.leftItems.count;
+    return  1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    OrderDetailCell *cell =[OrderDetailCell cellWithTableView:tableView indexPath:indexPath];
-    cell.leftItem = self.leftItems[indexPath.row];
-    cell.rightItem = self.rightItems[indexPath.row];
-    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     return cell;
 }
 
 
 //取消订单
 -(void)cancelOrder{
-    
-//    XWeakSelf
-//    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
-//    
-//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//        
-//        if ([response[@"result"] isEqualToString:@"OK"]) {
-//            
-//            if (weakSelf.actionBlock) {
-//        
-//                weakSelf.actionBlock(YES);
-//        
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//             }
-//        }
-//    }];
-    
-    
+
     XWeakSelf
-    
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要取消订单"  message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
     }];
     
     UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
         NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
-        
         //先删除 已选择专业数组列表  > 再删除分区头
         [weakSelf startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            
             if ([response[@"result"] isEqualToString:@"OK"]) {
                 
                 if (weakSelf.actionBlock) {
-    
                     weakSelf.actionBlock(YES);
-    
                     [weakSelf.navigationController popViewControllerAnimated:YES];
                  }
-            
             }
-            
         }];
-        
         
     }];
     
@@ -363,7 +305,6 @@
             mall.refresh = YES;
             [self.navigationController popToViewController:mall animated:YES];
 
-
         } else if([child isKindOfClass:[OrderViewController class]]){
         
             OrderViewController *orderList =(OrderViewController *)child;
@@ -375,10 +316,8 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
             
          }
-  
         
     }else{
-    
         [self.navigationController popViewControllerAnimated:YES];
  
     }
@@ -392,7 +331,7 @@
 
 -(void)dealloc{
 
-    KDClassLog(@"Order详情  dealloc");
+    KDClassLog(@"订单详情 + OrderDetailViewController + dealloc");
 
 }
 

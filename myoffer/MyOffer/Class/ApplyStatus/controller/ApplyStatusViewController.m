@@ -44,26 +44,34 @@
 
 -(void)makeUI
 {
-    
     [self makeTableView];
-    
     [self makeOther];
-  
 }
 
 
 -(void)makeTableView
 {
-    self.tableView   = [[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView   = [[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource  = self;
     self.tableView.delegate   = self;
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
-
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.rowHeight = 60;
+    self.tableView.sectionFooterHeight = Section_footer_Height_nomal;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+ 
     //上拉刷新
-    MJRefreshNormalHeader *header      = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    MJRefreshNormalHeader *header  = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
-    self.tableView.mj_header           = header;
+    self.tableView.mj_header  = header;
 
 }
 
@@ -71,13 +79,9 @@
 
 -(void)makeOther
 {
-    
-    self.title = GDLocalizedString(@"Me-002");
-    
+    self.title = @"审核状态";
     if (self.isBackRootViewController) {
-        
         self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
-        
     }
     
 }
@@ -85,9 +89,7 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-    
     [self makeUI];
-    
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -105,18 +107,13 @@
     if (![self checkNetworkState]) {
 
         [self.tableView emptyViewWithError:GDLocalizedString(@"NetRequest-noNetWork")];
-
         if (refresh) [self.tableView.mj_header endRefreshing];
-          
-        return; 
+        return;
     }
     
     XWeakSelf
- 
     [self startAPIRequestWithSelector:kAPISelectorApplyStutas parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-    
         [weakSelf updateUIWithResponse:response];
-        
     }];
    
 }
@@ -124,68 +121,23 @@
 
 //根据请求数据配置UI
 -(void)updateUIWithResponse:(id)response{
-    
 
     [self.tableView.mj_header endRefreshing];
-    
      self.groups = [ApplyStatusRecord mj_objectArrayWithKeyValuesArray:response[@"records"]];
- 
+  
     if (self.groups.count > 0){
-    
         [self.tableView emptyViewWithHiden:YES];
-        
     }else{
-    
          [self.tableView emptyViewWithError:@"Duang!您还没有提交申请哦！"];
-        
          [self.tableView.mj_header removeFromSuperview];
     }
-        
- 
     
     [self.tableView reloadData];
-    
-    
-    
 }
 
 
 
 #pragma mark : UITableViewDelegate  UITableViewDataSoure
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
-    return Section_footer_Height_nomal;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    ApplyStatusRecord *record = self.groups[section];
- 
-    return  record.uniFrame.cell_Height;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
-    return 60;
-}
-
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
-   
-    ApplyStatusRecord *record = self.groups[section];
-   
-    uni_cell.userInteractionEnabled = NO;
-   
-    uni_cell.backgroundColor = XCOLOR_WHITE;
-   
-    uni_cell.uniFrame = record.uniFrame;
-    
-    return (UIView *)uni_cell;
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
  
@@ -200,11 +152,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ApplyStatusCell *cell =[ApplyStatusCell cellWithTableView:tableView];
-    
     cell.record = self.groups[indexPath.section];
     
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    ApplyStatusRecord *record = self.groups[section];
+    return  record.uniFrame.cell_Height;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+    ApplyStatusRecord *record = self.groups[section];
+    uni_cell.userInteractionEnabled = NO;
+    uni_cell.uniFrame = record.uniFrame;
+    
+    return (UIView *)uni_cell;
+}
+
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   

@@ -7,13 +7,11 @@
 //
 
 #import "OrderDetailHeaderView.h"
-//#import "HMTitleButton.h"
 
 @interface OrderDetailHeaderView ()
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UILabel *orderTitleLab;
 @property(nonatomic,strong)UILabel *orderNoLab;
-//@property(nonatomic,strong)HMTitleButton *orderDetailBtn;
 
 @end
 
