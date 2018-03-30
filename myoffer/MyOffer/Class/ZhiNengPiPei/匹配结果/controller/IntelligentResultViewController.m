@@ -264,12 +264,14 @@
     //------------------------------------------------------------------------
     NSInteger selectedIndex = -1;//当前选择项
     NSInteger slices_count = 0;//几个色块
-    
+    NSInteger uni_count = 0;
+
     for(int i = 0; i < self.groups.count; i ++){
         
         PeiperGroup *group =  self.groups[i];
         NSUInteger group_items_count = group.items.count;
-        
+        uni_count += group_items_count;
+
         //count 数字大小可以增加显示范围
         if (group_items_count != 0)
         {
@@ -334,7 +336,7 @@
     [self.ResultTableView reloadData];
  
     // 富文本文字
-    NSString *total_str = [NSString stringWithFormat:@"%d",total];
+    NSString *total_str = [NSString stringWithFormat:@"%ld",uni_count];
     NSString *centerText = [NSString stringWithFormat:@"%@\n%@", total_str,GDLocalizedString(@"Evaluate-match")];
     NSMutableAttributedString *AttributedString = [[NSMutableAttributedString alloc] initWithString:centerText];
     [AttributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:[centerText rangeOfString:centerText]];

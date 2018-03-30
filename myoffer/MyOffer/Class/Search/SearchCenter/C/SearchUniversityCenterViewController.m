@@ -553,7 +553,6 @@
 
     
     XWeakSelf
-    
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];

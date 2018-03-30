@@ -43,15 +43,26 @@
 }
 
 -(NSNumber *)ranking_qs{
+ 
+    NSNumber *rank  = @0;
+    if (_ranking_qs) {
+        rank = (_ranking_qs.integerValue == DEFAULT_NUMBER)? @0 : _ranking_qs;
+    }else{
+        rank = @0;
+    }
+    return rank;
     
-    
-    return _ranking_qs ? _ranking_qs : @0;
 }
-
 
 -(NSNumber *)ranking_ti{
  
-    return _ranking_ti ? _ranking_ti : @0;
+    NSNumber *rank  = @0;
+    if (_ranking_ti) {
+        rank = (_ranking_ti.integerValue == DEFAULT_NUMBER)? @0 : _ranking_ti;
+    }else{
+        rank = @0;
+    }
+    return rank;
 }
 
 - (NSString *)ranking_ti_str{
@@ -60,16 +71,16 @@
     //1、澳大利亚
     if ([self.country  containsString:@"澳"]) local_ranking_ti  =  [NSString stringWithFormat:@"%@星",local_ranking_ti];
     
-    NSString *ti_rank = (self.ranking_ti.integerValue == 0 )? @"暂无排名" :local_ranking_ti;
-    
-    return ti_rank;
+    NSString *rank = (self.ranking_ti.integerValue == 0 )? @"暂无排名" :local_ranking_ti;
+ 
+    return [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rank];
 }
 
 - (NSString *)ranking_qs_str{
     
     NSString *qs_rank = (self.ranking_qs.integerValue == 0 )? @"暂无排名" : [NSString stringWithFormat:@"%@",self.ranking_qs];
-    
-    return  qs_rank;
+ 
+    return [NSString stringWithFormat:@"世界排名：%@",qs_rank];
 }
 
 

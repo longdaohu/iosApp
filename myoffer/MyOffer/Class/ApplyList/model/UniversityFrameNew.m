@@ -26,7 +26,6 @@
 
     _universtiy = universtiy;
     
-    
     CGFloat icon_X = 10;
     CGFloat icon_Y = 10;
     CGFloat icon_W =  80 + XFONT_SIZE(1) * 5;
@@ -34,7 +33,6 @@
     self.icon_Frame = CGRectMake(icon_X, icon_Y, icon_W, icon_H);
  
     self.cell_Height = CGRectGetMaxY(self.icon_Frame) + 10;
-    
     
     
     CGFloat title_x = CGRectGetMaxX(self.icon_Frame) + 12;
@@ -50,14 +48,13 @@
     CGSize  official_Size = [universtiy.official_name KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(13))  maxWidth:official_W];
     CGFloat official_H =  official_Size.height;
     self.official_Frame = CGRectMake(official_X, official_Y, official_W, official_H);
- 
 
+    
     CGFloat address_X =  official_X;
     CGFloat address_H =  XFONT_SIZE(13);
     CGFloat address_W =  official_W ;
     CGFloat address_Y =  self.cell_Height - 12 - address_H;
     self.address_Frame = CGRectMake(address_X, address_Y, address_W, address_H);
-    
     
     CGFloat rank_H = address_H;
     CGFloat rank_X = address_X;
@@ -72,24 +69,17 @@
     CGFloat starBg_w = 100;
     self.starBgFrame = CGRectMake( starBg_x,starBg_y, starBg_w, starBg_h);
     //没有排名，设置为 O
-    NSInteger star_count = (universtiy.ranking_ti.integerValue == DEFAULT_NUMBER) ?  0  : universtiy.ranking_ti.integerValue;
+    NSInteger star_count = universtiy.ranking_ti.integerValue;
     if (star_count == 0) {
         starBg_w = 0;
         self.starBgFrame = CGRectMake( starBg_x,starBg_y, starBg_w, starBg_h);
     }
     
-//    NSMutableArray *temps =[NSMutableArray array];
     CGFloat star_x = 0;
     CGFloat star_y = 0;
     CGFloat star_h = starBg_h;
     CGFloat star_w = star_h;
     NSMutableArray *star_frames_tmp = [NSMutableArray array];
-//    for (NSInteger i =0; i < star_count; i++) {
-//        NSString *x = [NSString stringWithFormat:@"%ld", (long)(20 * i)];
-//        [temps addObject: x];
-//    }
-//    self.starFrames = [temps copy];
-
     
     for (NSInteger i =0; i < 5; i++) {
         star_x = (star_w + 5) * i;
@@ -119,15 +109,13 @@
     CGFloat line_X = 10;
     CGFloat line_Y = self.cell_Height - line_H;
     self.bottom_line_Frame = CGRectMake(line_X, line_Y, line_W, line_H);
-    
-    
+ 
     
     CGFloat cancel_x = ITEM_MARGIN;
     CGFloat cancel_y = 0;
     CGFloat cancel_h = self.cell_Height;
     CGFloat cancel_w = 34;
     self.cancel_Frame = CGRectMake(cancel_x, cancel_y, cancel_w, cancel_h);
-    
 
     if (universtiy.courses.count > 0) [self makeCourseFrameWithCourses:universtiy.courses];
     

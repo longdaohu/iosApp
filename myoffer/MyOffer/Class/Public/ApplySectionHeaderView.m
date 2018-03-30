@@ -14,31 +14,18 @@
 
 
 @interface ApplySectionHeaderView ()
- //LOGO图标
-@property(nonatomic,strong)LogoView *iconView;
- //学校名称
-@property(strong,nonatomic) UILabel *nameLab;
- //学校英文名
-@property(strong,nonatomic) UILabel *official_nameLab;
-//地理图标
-@property(nonatomic,strong)UIImageView *anchorView;
-//地理位置
-@property(nonatomic,strong)UIButton *addressBtn;
-//排名图标
-@property(nonatomic,strong)UIImageView *rankIconView;
- //排名
-@property(nonatomic,strong) UIButton *rankBtn;
- //添加专业按钮
-@property(nonatomic,strong) UIButton *addSubjectBtn;
- //删除按钮
-@property(nonatomic,strong) UIButton *cancelBtn;
-//背景View
-@property(nonatomic,strong) UIView *bgView;
-//**号背景
-@property(nonatomic,strong) UIView *StarsBgView;
-//底部分隔线
-@property(nonatomic,strong) UIView *bottom_line;
-
+@property(nonatomic,strong)LogoView *iconView; //LOGO图标
+@property(strong,nonatomic) UILabel *nameLab; //学校名称
+@property(strong,nonatomic) UILabel *official_nameLab; //学校英文名
+@property(nonatomic,strong)UIImageView *anchorView;//地理图标
+@property(nonatomic,strong)UIButton *addressBtn;//地理位置
+@property(nonatomic,strong)UIImageView *rankIconView;//排名图标
+@property(nonatomic,strong) UIButton *rankBtn; //排名
+@property(nonatomic,strong) UIButton *addSubjectBtn; //添加专业按钮
+@property(nonatomic,strong) UIButton *cancelBtn; //删除按钮
+@property(nonatomic,strong) UIView *bgView;//背景View
+@property(nonatomic,strong) UIView *starsBgView;//**号背景
+@property(nonatomic,strong) UIView *bottom_line;//底部分隔线
 @property(nonatomic,strong)UIImageView *hot;
 
 
@@ -112,8 +99,7 @@
         self.addressBtn = address_Btn;
         [address_Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         address_Btn.userInteractionEnabled = NO;
-
-         
+ 
         
         //底部分隔线
         UIView *line = [UIView new];
@@ -123,15 +109,15 @@
         self.bottom_line = line;
         
         //**号背景
-        self.StarsBgView =[[UIView alloc] init];
-        self.StarsBgView.backgroundColor = XCOLOR_WHITE;
-        [self.contentView addSubview:self.StarsBgView];
+        self.starsBgView =[[UIView alloc] init];
+        self.starsBgView.backgroundColor = XCOLOR_WHITE;
+        [self.bgView addSubview:self.starsBgView];
         
         for (NSInteger i = 0; i < 5; i++) {
             UIImageView *mv =[[UIImageView alloc] init];
             mv.image = [UIImage imageNamed:@"star"];
             mv.contentMode = UIViewContentModeScaleAspectFit;
-            [self.StarsBgView addSubview:mv];
+            [self.starsBgView addSubview:mv];
         }
         
          //添加专业按钮
@@ -152,7 +138,6 @@
         //监听页面点击
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUniveristy:)];
         [self.bgView addGestureRecognizer:tap];
-                 
 
     }
     
@@ -177,81 +162,52 @@
     _uniFrame = uniFrame;
     
     MyOfferUniversityModel *university = uniFrame.universtiy;
+
     
-  
     self.cancelBtn.frame = uniFrame.cancel_Frame;
     self.addSubjectBtn.frame = uniFrame.add_Frame;
-
-    
-    self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
-    self.StarsBgView.hidden = !self.isStart;
-    
-    
-   [self.iconView.logoImageView KD_setImageWithURL:university.logo];
     self.iconView.frame = uniFrame.icon_Frame;
-    
-    
-    self.nameLab.text = university.name;
     self.nameLab.frame = uniFrame.name_Frame;
-    
-    
-    self.official_nameLab.text = university.official_name;
     self.official_nameLab.frame = uniFrame.official_Frame;
-    
-
-    [self.addressBtn setTitle:university.address_long  forState:UIControlStateNormal];
     self.addressBtn.frame = uniFrame.address_Frame;
-    
+    self.rankBtn.frame = uniFrame.rank_Frame;
+    self.hot.frame = uniFrame.hot_Frame;
+    self.bottom_line.frame =  uniFrame.bottom_line_Frame;
+    self.starsBgView.frame = uniFrame.starBgFrame;
+
+    [self.iconView.logoImageView KD_setImageWithURL:university.logo];
+    self.nameLab.text = university.name;
+    self.official_nameLab.text = university.official_name;
+    [self.addressBtn setTitle:university.address_long  forState:UIControlStateNormal];
     
     CGFloat addressWidth = [university.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uniFrame.address_Frame.size.width - 30)) {
-        
         [self.addressBtn setTitle:university.address_short  forState:UIControlStateNormal];
     }
-    
-  
-    self.rankBtn.frame = uniFrame.rank_Frame;
-    
-    self.hot.frame = uniFrame.hot_Frame;
-    
-    self.bottom_line.frame =  uniFrame.bottom_line_Frame;
-    
-    
-    self.StarsBgView.frame = uniFrame.starBgFrame;
+
+    self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
+    self.starsBgView.hidden = !self.isStart;
     
     //当排名方式是 世界排名时，只显示世界排名信息
     if ([self.optionOrderBy isEqualToString:RANK_QS]) {
         
-        NSString   *rankStr01 = university.ranking_qs.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_qs];
-        
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"世界排名：%@",rankStr01] forState:UIControlStateNormal];
-        
-        self.StarsBgView.hidden = YES;
-        
+        [self.rankBtn setTitle:university.ranking_qs_str forState:UIControlStateNormal];
+        self.starsBgView.hidden = YES;
         return;
     }
     
-    
     //判断是否需要显示*号   澳大利来排名时
+    [self.rankBtn setTitle:university.ranking_ti_str   forState:UIControlStateNormal];
     if (self.isStart) {
-        
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：暂无排名",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
-        
-        for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
-            
-            UIView *starView = self.StarsBgView.subviews[i];
+ 
+        for (NSInteger i =0; i < self.starsBgView.subviews.count; i++) {
+            UIView *starView = self.starsBgView.subviews[i];
             NSString *star_frame_str  = uniFrame.star_frames[i];
             starView.frame = CGRectFromString(star_frame_str);
         }
-
         
-    }else{
-           //英国排名
-            NSString   *rankStr01 = university.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
-           [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01]   forState:UIControlStateNormal];
     }
-    
    
 }
 

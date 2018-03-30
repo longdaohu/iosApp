@@ -2802,8 +2802,6 @@
 		AEA249721D5B215300DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249731D5B215300DD7939 /* ApplySectionHeaderView.h */,
-				AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */,
 				AEA249751D5B215300DD7939 /* ApplyTableViewCell.h */,
 				AEA249761D5B215300DD7939 /* ApplyTableViewCell.m */,
 			);
@@ -3460,6 +3458,8 @@
 				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */,
 				AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */,
+				AEA249731D5B215300DD7939 /* ApplySectionHeaderView.h */,
+				AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */,
 				AEC47A401ECC20D60085F19A /* UniverstityTCell.h */,
 				AEC47A411ECC20D60085F19A /* UniverstityTCell.m */,
 			);

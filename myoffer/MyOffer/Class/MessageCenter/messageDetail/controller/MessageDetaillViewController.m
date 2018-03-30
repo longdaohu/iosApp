@@ -435,7 +435,7 @@
             
         default:{
         
-            UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
+            UniverstityTCell *uni_cell = [UniverstityTCell cellViewWithTableView:tableView];
             uni_cell.uniFrame = group.items[indexPath.row];
             [uni_cell separatorLineShow:NO];
             return uni_cell;

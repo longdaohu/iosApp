@@ -10,28 +10,17 @@
 #import "MyOfferUniversityModel.h"
 
 @interface UniverstityTCell ()
-//LOGO图标
-@property(nonatomic,strong)LogoView *iconView;
-//学校名称
-@property(strong,nonatomic) UILabel *nameLab;
-//学校英文名
-@property(strong,nonatomic) UILabel *official_nameLab;
-//地理图标
-@property(nonatomic,strong)UIImageView *anchorView;
-//地理位置
-@property(nonatomic,strong)UIButton *addressBtn;
-//排名图标
-@property(nonatomic,strong)UIImageView *rankIconView;
-//排名
-@property(nonatomic,strong) UIButton *rankBtn;
-//**号背景
-@property(nonatomic,strong) UIView *StarsBgView;
-//底部分隔线
-@property(nonatomic,strong) UIView *bottom_line;
-//热门
-@property(nonatomic,strong) UIImageView *hot;
-
-@property(nonatomic,strong) UIView *line;
+@property(nonatomic,strong)LogoView *iconView;//LOGO图标
+@property(strong,nonatomic) UILabel *nameLab;//学校名称
+@property(strong,nonatomic) UILabel *official_nameLab;//学校英文名
+@property(nonatomic,strong)UIImageView *anchorView;//地理图标
+@property(nonatomic,strong)UIButton *addressBtn;//地理位置
+@property(nonatomic,strong)UIImageView *rankIconView;//排名图标
+@property(nonatomic,strong) UIButton *rankBtn;//排名
+@property(nonatomic,strong) UIView *starsBgView;//**号背景
+@property(nonatomic,strong) UIView *bottom_line;//底部分隔线
+@property(nonatomic,strong) UIImageView *hot;//热门
+@property(nonatomic,strong) UIView *line;//分割线
 
 
 @end
@@ -41,26 +30,19 @@
 + (instancetype)cellViewWithTableView:(UITableView *)tableView{
     
     static NSString *identifier =@"uni_cell";
-    
     UniverstityTCell *cell =[tableView dequeueReusableCellWithIdentifier:identifier];
-    
     if (!cell) {
-        
         cell = [[UniverstityTCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    
     return cell;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
     if (self) {
-        
         [self makeUI];
     }
-    
     return self;
 }
 
@@ -102,8 +84,6 @@
     [address_Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     address_Btn.userInteractionEnabled = NO;
     
-    
-    
     //底部分隔线
     UIView *line = [UIView new];
     line.backgroundColor = XCOLOR_line;
@@ -112,15 +92,15 @@
     
     
     //**号背景
-    self.StarsBgView =[[UIView alloc] init];
-    self.StarsBgView.backgroundColor = XCOLOR_WHITE;
-    [self.contentView addSubview:self.StarsBgView];
+    self.starsBgView =[[UIView alloc] init];
+    self.starsBgView.backgroundColor = XCOLOR_RED;
+    [self.contentView addSubview:self.starsBgView];
     
     for (NSInteger i = 0; i < 5; i++) {
         UIImageView *mv =[[UIImageView alloc] init];
         mv.image = [UIImage imageNamed:@"star"];
         mv.contentMode = UIViewContentModeScaleAspectFit;
-        [self.StarsBgView addSubview:mv];
+        [self.starsBgView addSubview:mv];
     }
     
     UIImageView *hot =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot_cn"]];
@@ -147,56 +127,42 @@
 }
 
 
-
--(void)setUniFrame:(UniversityFrameNew *)uniFrame
+- (void)setUniFrame:(UniversityFrameNew *)uniFrame
 {
     _uniFrame = uniFrame;
     
     MyOfferUniversityModel *university = uniFrame.universtiy;
     
-    BOOL isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? YES : NO;
-    
     [self.iconView.logoImageView KD_setImageWithURL:university.logo];
-    self.iconView.frame = uniFrame.icon_Frame;
-    
-    
     self.nameLab.text = university.name;
-    self.nameLab.frame = uniFrame.name_Frame;
-    
-    
     self.official_nameLab.text = university.official_name;
-    self.official_nameLab.frame = uniFrame.official_Frame;
-    
-    
     [self.addressBtn setTitle:university.address_long  forState:UIControlStateNormal];
-    self.addressBtn.frame = uniFrame.address_Frame;
-    
-    
+    self.hot.hidden = !uniFrame.universtiy.hot;
+
     CGFloat addressWidth = [university.address_long KD_sizeWithAttributeFont:XFONT(XPERCENT * 11)].width;
     //判断地址字符串太长时，换一个短的地址
     if (addressWidth > (uniFrame.address_Frame.size.width - 30)) {
-        
         [self.addressBtn setTitle:university.address_short  forState:UIControlStateNormal];
     }
     
-    
+    self.iconView.frame = uniFrame.icon_Frame;
+    self.nameLab.frame = uniFrame.name_Frame;
+    self.official_nameLab.frame = uniFrame.official_Frame;
+    self.addressBtn.frame = uniFrame.address_Frame;
     self.rankBtn.frame = uniFrame.rank_Frame;
-    
-    self.hot.hidden = !uniFrame.universtiy.hot;
     self.hot.frame = uniFrame.hot_Frame;
-    
     self.bottom_line.frame =  uniFrame.bottom_line_Frame;
-     
-    self.StarsBgView.frame = uniFrame.starBgFrame;
-    
-    //判断是否需要显示*号   澳大利来排名时
-    [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),uniFrame.universtiy.ranking_ti_str]   forState:UIControlStateNormal];
+    self.starsBgView.frame = uniFrame.starBgFrame;
 
+    //判断是否需要显示*号   澳大利来排名时
+    [self.rankBtn setTitle:uniFrame.universtiy.ranking_ti_str   forState:UIControlStateNormal];
+    
+    BOOL isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? YES : NO;
+    self.starsBgView.hidden = !isStart;
     if (isStart) {
- 
         //澳大利亚排名
-        for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
-            UIView *starView = self.StarsBgView.subviews[i];
+        for (NSInteger i =0; i < self.starsBgView.subviews.count; i++) {
+            UIView *starView = self.starsBgView.subviews[i];
             NSString *star_frame_str  = uniFrame.star_frames[i];
             starView.frame = CGRectFromString(star_frame_str);
         }
@@ -213,21 +179,17 @@
     self.hot.hidden = YES;
     
     [self.iconView.logoImageView KD_setImageWithURL:uniFrameModel.universityModel.logo];
-    self.iconView.frame = uniFrameModel.icon_Frame;
- 
     self.nameLab.text = uniFrameModel.universityModel.name;
-    self.nameLab.frame = uniFrameModel.name_Frame;
- 
     self.official_nameLab.text = uniFrameModel.universityModel.official_name;
-    self.official_nameLab.frame = uniFrameModel.official_Frame;
     self.official_nameLab.textColor = XCOLOR_TITLE;
-    
     [self.addressBtn setTitle:uniFrameModel.universityModel.address_long  forState:UIControlStateNormal];
-    self.addressBtn.frame = uniFrameModel.address_Frame;
-    
     [self.rankBtn setTitle:[NSString stringWithFormat:@"排名：%@",uniFrameModel.universityModel.rank]  forState:UIControlStateNormal];
+    
+    self.iconView.frame = uniFrameModel.icon_Frame;
+    self.nameLab.frame = uniFrameModel.name_Frame;
+    self.official_nameLab.frame = uniFrameModel.official_Frame;
+    self.addressBtn.frame = uniFrameModel.address_Frame;
     self.rankBtn.frame = uniFrameModel.rank_Frame;
-
     
 }
 
