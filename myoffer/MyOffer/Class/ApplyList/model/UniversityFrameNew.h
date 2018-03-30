@@ -28,7 +28,7 @@
 //显示星星
 @property(nonatomic,assign)CGRect starBgFrame;
 //星号Frame
-@property(nonatomic,strong)NSArray *starFrames;
+@property(nonatomic,strong)NSArray *star_frames;
 //推荐
 @property(nonatomic,assign)CGRect hot_Frame;
 //底部分隔线

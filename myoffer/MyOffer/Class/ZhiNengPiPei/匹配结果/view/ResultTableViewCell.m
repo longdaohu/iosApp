@@ -82,22 +82,20 @@
     address_Btn.userInteractionEnabled = NO;
     [address_Btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     
-    //存放星星View
+    //**号背景
     self.starBgView =[[UIView alloc] init];
+    self.starBgView.backgroundColor = XCOLOR_WHITE;
     [self.contentView addSubview:self.starBgView];
     
-    for (NSInteger i = 0; i<5; i++) {
-        
+    for (NSInteger i = 0; i < 5; i++) {
         UIImageView *mv =[[UIImageView alloc] init];
         mv.image = [UIImage imageNamed:@"star"];
         mv.contentMode = UIViewContentModeScaleAspectFit;
         [self.starBgView addSubview:mv];
     }
-
-     
+    
+    
     [self.selectButton addTarget:self action:@selector(selectCellID:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     
     //底部分隔线
     UIView *line = [UIView new];
@@ -143,9 +141,7 @@
     
     self.rankBtn.frame =uniFrame.rank_Frame;
     
-    self.starBgView.hidden = !self.isStart;
     self.optionOrderBy =  @"ranking_ti";
-    
     
     [self.address_Btn setTitle:university.address_short  forState:UIControlStateNormal];
     self.address_Btn.frame = uniFrame.address_Frame;
@@ -177,35 +173,11 @@
     }else{
         
         self.starBgView.frame = uniFrame.starBgFrame;
-        
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
-
-        NSInteger  StarCount  = university.ranking_ti.integerValue;
- 
-//        if (StarCount >= 99 || StarCount <0) {
-//            StarCount =  0;
-//        }
-//        if (StarCount >5) {
-//            StarCount = 5;
-//        }
- 
+        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：暂无排名",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
         for (NSInteger i =0; i < self.starBgView.subviews.count; i++) {
-
-            UIImageView *imageV = (UIImageView *)self.starBgView.subviews[i];
-
-            imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
-        }
-        for (NSInteger i =0; i < StarCount; i++) {
-
-            UIImageView *mv = (UIImageView *)self.starBgView.subviews[i];
-
-            mv.hidden = NO;
-
-        }
-        
-        for (NSInteger i = (StarCount -1); i < self.starBgView.subviews.count; i++) {
-            UIImageView *mv = (UIImageView *)self.starBgView.subviews[i];
-            mv.hidden = YES;
+            UIView *starView = self.starBgView.subviews[i];
+            NSString *star_frame_str  = uniFrame.star_frames[i];
+            starView.frame = CGRectFromString(star_frame_str);
         }
         
     }

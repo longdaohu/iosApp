@@ -113,21 +113,20 @@
     
     //**号背景
     self.StarsBgView =[[UIView alloc] init];
+    self.StarsBgView.backgroundColor = XCOLOR_WHITE;
     [self.contentView addSubview:self.StarsBgView];
     
-    for (NSInteger i = 0; i<5; i++) {
+    for (NSInteger i = 0; i < 5; i++) {
         UIImageView *mv =[[UIImageView alloc] init];
         mv.image = [UIImage imageNamed:@"star"];
         mv.contentMode = UIViewContentModeScaleAspectFit;
         [self.StarsBgView addSubview:mv];
     }
-
     
     UIImageView *hot =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hot_cn"]];
     hot.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:hot];
     self.hot = hot;
- 
     
 }
 
@@ -156,9 +155,6 @@
     MyOfferUniversityModel *university = uniFrame.universtiy;
     
     BOOL isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")] ? YES : NO;
-    
-    self.StarsBgView.hidden = !isStart;
-    
     
     [self.iconView.logoImageView KD_setImageWithURL:university.logo];
     self.iconView.frame = uniFrame.icon_Frame;
@@ -194,54 +190,18 @@
     self.StarsBgView.frame = uniFrame.starBgFrame;
     
     //判断是否需要显示*号   澳大利来排名时
+    [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),uniFrame.universtiy.ranking_ti_str]   forState:UIControlStateNormal];
+
     if (isStart) {
-        
-        
-        
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")]  forState:UIControlStateNormal];
-        NSInteger  StarCount  = university.ranking_ti.integerValue;
-        
-     
-        //暂无排名时
-        if (StarCount == DEFAULT_NUMBER) {
-            
-            [self.rankBtn setTitle:@"本国排名：暂无排名"  forState:UIControlStateNormal];
-            
-            return;
-        }
-        
-           /*
+ 
+        //澳大利亚排名
         for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
-            
-            UIImageView *imageV = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
+            UIView *starView = self.StarsBgView.subviews[i];
+            NSString *star_frame_str  = uniFrame.star_frames[i];
+            starView.frame = CGRectFromString(star_frame_str);
         }
         
-        
-        for (NSInteger i =0; i < StarCount; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            mv.hidden = NO;
-            
-        }
-        
-        for (NSInteger i = StarCount ; i < self.StarsBgView.subviews.count; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            mv.hidden = YES;
-        }
-        */
-        
-    }else{
-        
-        //英国排名
-        NSString   *rankStr01 = university.ranking_ti.intValue == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01]   forState:UIControlStateNormal];
     }
-    
     
 }
 

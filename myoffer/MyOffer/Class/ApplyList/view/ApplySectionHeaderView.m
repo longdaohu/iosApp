@@ -122,13 +122,12 @@
         [self.bgView addSubview:line];
         self.bottom_line = line;
         
-        
-        
         //**号背景
         self.StarsBgView =[[UIView alloc] init];
-        [self.bgView addSubview:self.StarsBgView];
+        self.StarsBgView.backgroundColor = XCOLOR_WHITE;
+        [self.contentView addSubview:self.StarsBgView];
         
-        for (NSInteger i = 0; i<5; i++) {
+        for (NSInteger i = 0; i < 5; i++) {
             UIImageView *mv =[[UIImageView alloc] init];
             mv.image = [UIImage imageNamed:@"star"];
             mv.contentMode = UIViewContentModeScaleAspectFit;
@@ -237,41 +236,15 @@
     //判断是否需要显示*号   澳大利来排名时
     if (self.isStart) {
         
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：",GDLocalizedString(@"SearchRank_Country")]  forState:UIControlStateNormal];
-        NSInteger  StarCount  = university.ranking_ti.integerValue;
-       
-        //暂无排名时
-        if (StarCount == DEFAULT_NUMBER) {
-            
-             [self.rankBtn setTitle:@"本国排名：暂无排名"  forState:UIControlStateNormal];
-
-            return;
-        }
-        
+        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：暂无排名",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
         
         for (NSInteger i =0; i < self.StarsBgView.subviews.count; i++) {
             
-            UIImageView *imageV = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            imageV.frame = CGRectMake([uniFrame.starFrames[i] integerValue], 0, 15, 15);
+            UIView *starView = self.StarsBgView.subviews[i];
+            NSString *star_frame_str  = uniFrame.star_frames[i];
+            starView.frame = CGRectFromString(star_frame_str);
         }
-        
-        
-        for (NSInteger i =0; i < StarCount; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            mv.hidden = NO;
-            
-        }
-        
-        for (NSInteger i = StarCount ; i < self.StarsBgView.subviews.count; i++) {
-            
-            UIImageView *mv = (UIImageView *)self.StarsBgView.subviews[i];
-            
-            mv.hidden = YES;
-        }
-        
+
         
     }else{
            //英国排名
