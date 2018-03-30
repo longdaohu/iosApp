@@ -13,19 +13,14 @@
 @interface ResultTableViewCell ()
 @property(nonatomic,copy)NSString *universityID;
 @property(nonatomic,strong)UIView *starBgView;
-//中文名
-@property (strong, nonatomic)  UILabel *nameLab;
-//英文名
-@property (strong, nonatomic)  UILabel *official_nameLab;
-//排名
-@property(nonatomic,strong)UIButton *rankBtn;
-//logo图标
-@property (strong, nonatomic)  LogoView *iconView;
-//地理位置
-@property(nonatomic,strong)UIButton *address_Btn;
-
+@property (strong, nonatomic)  UILabel *nameLab;//中文名
+@property (strong, nonatomic)  UILabel *official_nameLab;//英文名
+@property(nonatomic,strong)UIButton *rankBtn;//排名
+@property (strong, nonatomic)  LogoView *iconView;//logo图标
+@property(nonatomic,strong)UIButton *address_Btn;//地理位置
 @property(nonatomic,strong) UIView *line;
 @property(nonatomic,strong)UniversityFrame *uniFrame;
+
 @end
 
 @implementation ResultTableViewCell
@@ -34,11 +29,8 @@
    static NSString  *identify = @"Result";
     
    ResultTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-    
     if (!cell) {
-        
          cell =[[NSBundle mainBundle] loadNibNamed:@"ResultTableViewCell" owner:nil options:nil].lastObject;
-        
      }
     
     return cell;
@@ -128,52 +120,34 @@
 - (void)configureWithUniversityFrame:(UniversityFrame *)uniFrame ranking:(NSString *)ranking {
    
     MyOfferUniversityModel *university =  uniFrame.university;
-    
-    self.universityID = university.NO_id;
+ 
     self.nameLab.frame = uniFrame.name_Frame;
-    self.nameLab.text = university.name;
+    self.rankBtn.frame =uniFrame.rank_Frame;
+    self.starBgView.frame = uniFrame.starBgFrame;
     self.official_nameLab.frame = uniFrame.official_Frame;
-    self.official_nameLab.text = university.official_name;
     self.iconView.frame = uniFrame.icon_Frame;
+    self.address_Btn.frame = uniFrame.address_Frame;
+    self.line.frame = uniFrame.lineFrame;
+
+    self.optionOrderBy =  @"ranking_ti";
+    [self.address_Btn setTitle:university.address_short  forState:UIControlStateNormal];
+    self.universityID = university.NO_id;
+    self.nameLab.text = university.name;
+    self.official_nameLab.text = university.official_name;
     [self.iconView.logoImageView KD_setImageWithURL:university.logo];
     
-    self.isStart = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
-    
-    self.rankBtn.frame =uniFrame.rank_Frame;
-    
-    self.optionOrderBy =  @"ranking_ti";
-    
-    [self.address_Btn setTitle:university.address_short  forState:UIControlStateNormal];
-    self.address_Btn.frame = uniFrame.address_Frame;
-    
-    
-    self.line.frame = uniFrame.lineFrame;
-    
-    
-    BOOL RANK_TIType = [self.optionOrderBy isEqualToString:RANK_TI];
-    
-    if (!self.isStart) {
+    self.isStar = [university.country isEqualToString:GDLocalizedString(@"CategoryVC-AU")]?YES:NO;
+    self.starBgView.hidden = !self.isStar;
+ 
+    if (!self.isStar) {
         
-        if (RANK_TIType) {
-            
-            NSString   *rankStr01 = [university.ranking_ti intValue] == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"): [NSString stringWithFormat:@"%@",university.ranking_ti];
-            NSString *rank = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"SearchRank_Country"),rankStr01];
-            
-            [self.rankBtn setTitle:rank forState:UIControlStateNormal];
-            
-        }else{
-            
-            NSString   *rankStr02 = [university.ranking_qs intValue]  == DEFAULT_NUMBER ? GDLocalizedString(@"SearchResult_noRank"):[NSString stringWithFormat:@"%@",university.ranking_qs];
-             NSString *rank = [NSString stringWithFormat:@"%@：%@",GDLocalizedString(@"UniversityDetail-003"), rankStr02];
-            
-            [self.rankBtn setTitle:rank forState:UIControlStateNormal];
-        }
-        
-        
+         BOOL is_rank_ti = [self.optionOrderBy isEqualToString:RANK_TI];
+         NSString *title = is_rank_ti ? university.ranking_ti_str :  university.ranking_qs_str;
+         [self.rankBtn setTitle:title  forState:UIControlStateNormal];
+ 
     }else{
         
-        self.starBgView.frame = uniFrame.starBgFrame;
-        [self.rankBtn setTitle:[NSString stringWithFormat:@"%@：暂无排名",GDLocalizedString(@"SearchRank_Country")] forState:UIControlStateNormal];
+        [self.rankBtn setTitle:uniFrame.university.ranking_ti_str forState:UIControlStateNormal];
         for (NSInteger i =0; i < self.starBgView.subviews.count; i++) {
             UIView *starView = self.starBgView.subviews[i];
             NSString *star_frame_str  = uniFrame.star_frames[i];
@@ -183,6 +157,7 @@
     }
     
 }
+
 
 - (void)configrationCellLefButtonWithTitle:(NSString  *)title imageName:(NSString *)imageName{
 

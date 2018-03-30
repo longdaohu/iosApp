@@ -24,28 +24,15 @@
 #import "SearchPromptView.h"
 
 @interface CatigoryViewController ()<UIScrollViewDelegate,XTopToolViewDelegate,UITableViewDelegate,UITableViewDataSource>
-//背景scroller
-@property(nonatomic,strong)CatigaryScrollView *bgView;
-//专业版块
-@property(nonatomic,strong)NomalCollectionController *nomalCollectionVC;
-//热门城市版块
-@property(nonatomic,strong)CatigoryCountryViewController  *hotCityVC;
-//筛选工具
-@property(nonatomic,strong)RankFilterViewController *filterVC;
-//排序筛选数据
-@property(nonatomic,strong)rankFilter *rankFilterModel;
+@property(nonatomic,strong)CatigaryScrollView *bgView;//背景scroller
+@property(nonatomic,strong)RankFilterViewController *filterVC;//筛选工具
+@property(nonatomic,strong)rankFilter *rankFilterModel;//排序筛选数据
 @property(nonatomic,assign)NSInteger para_page;
-//自定义导航栏
-@property(nonatomic,strong)TopNavView *topView;
-//工具条
-@property(nonatomic,strong)XBTopToolView  *topToolView;
-//提示框
-@property(nonatomic,strong)SearchPromptView *promptView;
-//排名表格
-@property(nonatomic,strong)MyOfferTableView *rank_tableView;
-//排名数据
-@property(nonatomic,strong)NSMutableArray *rank_groups;
-
+@property(nonatomic,strong)TopNavView *topView;//自定义导航栏
+@property(nonatomic,strong)XBTopToolView  *topToolView;//工具条
+@property(nonatomic,strong)SearchPromptView *promptView;//提示框
+@property(nonatomic,strong)MyOfferTableView *rank_tableView;//排名表格
+@property(nonatomic,strong)NSMutableArray *rank_groups;//排名数据
 
 @end
 
@@ -122,8 +109,7 @@
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         if (0 == weakSelf.rank_groups.count) {
-            
-            [weakSelf.rank_tableView emptyViewWithError:@"网络请求失败，点击重新加载"];
+             [weakSelf.rank_tableView emptyViewWithError:@"网络请求失败，点击重新加载"];
         }
     }];
     
@@ -151,51 +137,27 @@
  
     NSArray *items = [RankTypeItem mj_objectArrayWithKeyValuesArray:response[@"items"]];
     
-//    BOOL same = NO;
      for (RankTypeItem *item in items) {
-
+         
         RankTypeItemFrame *itemFrame = [RankTypeItemFrame new];
         itemFrame.item = item;
- 
-//         for (RankTypeItemFrame *other_Frame in self.rank_groups) {
-//
-//             if ([other_Frame.item.name isEqualToString:item.name]) {
-//
-//                 same = YES;
-//                 break;
-//             }
-//
-//         }
-//
-//         if (!same) {
-//
-             [self.rank_groups addObject:itemFrame];
-//         }
-         
+        [self.rank_groups addObject:@[itemFrame]];
      }
     
     if (items.count < size.integerValue) {
-        
         [self.rank_tableView.mj_footer endRefreshingWithNoMoreData];
-        
     }else{
-        
         [self.rank_tableView.mj_footer endRefreshing];
     }
     
      [self.rank_tableView reloadData];
     
     if (0 == self.rank_groups.count) {
-        
         [self.rank_tableView emptyViewWithError:NetRequest_NoDATA];
-    
     }else{
-        
         [self.rank_tableView emptyViewWithHiden:YES];
     }
-    
     [self promptShowWithCount:count_all.integerValue];
-    
     
     if (page.integerValue == 0 && self.rank_groups.count > 0) {
         
@@ -272,7 +234,6 @@
     [self addChildViewController:hotCityVC];
     [self.bgView addSubview:hotCityVC.view];
     hotCityVC.view.frame = frame;
-    self.hotCityVC = hotCityVC;
 }
 
 
@@ -283,7 +244,6 @@
     [self addChildViewController:nomalCollectionVC];
     [self.bgView addSubview:nomalCollectionVC.view];
     nomalCollectionVC.view.frame = frame;
-    self.nomalCollectionVC = nomalCollectionVC;
     
     NSDictionary *sub_finance = @{@"name" : @"经济与金融", @"icon" : @"sub_finance"};
     NSDictionary *sub_business = @{@"name" : @"商科", @"icon" : @"sub_business"};
@@ -295,11 +255,8 @@
     NSDictionary *sub_medicine = @{@"name" : @"医学", @"icon" : @"sub_medicine"};
     NSDictionary *sub_farm = @{@"name" : @"农学", @"icon" : @"sub_farm"};
     NSArray *sub_Arr = @[sub_finance,sub_business,sub_engineer,sub_humanit,sub_sciencee,sub_built,sub_art,sub_medicine,sub_farm];
-    
     NSMutableArray *subject_temps = [NSMutableArray array];
-    
     for (NSDictionary *sub_dic in sub_Arr) {
-        
         CatigorySubject *sub_item =[CatigorySubject subjectItemInitWithIcon:sub_dic[@"icon"]  title:sub_dic[@"name"] ];
         [subject_temps addObject:sub_item];
     }
@@ -313,37 +270,27 @@
     XWeakSelf
     self.rank_tableView =[[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     self.rank_tableView.emptyView.actionBlock = ^{
-
         [weakSelf makeRankDataSource];
     };
-    
     self.rank_tableView.delegate = self;
     self.rank_tableView.dataSource = self;
-    UIView *footer =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 10)];
-    footer.backgroundColor = XCOLOR_WHITE;
-    self.rank_tableView.tableFooterView = footer;
     self.rank_tableView.estimatedSectionHeaderHeight = 0;
     self.rank_tableView.estimatedSectionFooterHeight = 0;
     [self.bgView addSubview:self.rank_tableView];
     self.rank_tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     RankFilterViewController  *filterVC  = [[RankFilterViewController alloc] init];
     filterVC.actionBlock = ^{
-        
         weakSelf.para_page = 0;
         [weakSelf makeRankDataSource];
-        
     };
-    
     [self addChildViewController:filterVC];
     filterVC.view.frame = CGRectMake(frame.origin.x, 0, XSCREEN_WIDTH, 50);
     [self.bgView addSubview:filterVC.view];
     self.filterVC = filterVC;
     self.rank_tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
-
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSourc
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return self.rank_groups.count;
@@ -351,46 +298,53 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    NSArray *items  = self.rank_groups[section];
+    return items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     RankTypeCell *cell = [RankTypeCell  cellWithTableView:tableView];
-    cell.itemFrame = self.rank_groups[indexPath.section];
+    NSArray *items = self.rank_groups[indexPath.section];
+    cell.itemFrame = items[indexPath.row];
     
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *seView = [UIView new];
-    seView.backgroundColor = XCOLOR_WHITE;
+    UIView *header = [UIView new];
+    header.backgroundColor = XCOLOR_WHITE;
     
-    return seView;
+    return header;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    UIView *seView = [UIView new];
-    seView.backgroundColor = XCOLOR_WHITE;
-    
-    return seView;
+    UIView *footer = [UIView new];
+    footer.backgroundColor = XCOLOR_WHITE;
+    return footer;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    RankTypeItemFrame *itemFrame = self.rank_groups[indexPath.section];
-    RankDetailViewController *rankVC  = [[RankDetailViewController alloc] init];
-    rankVC.type_id = itemFrame.item.type_id;
-    [self.navigationController pushViewController:rankVC animated:YES];
+    if (tableView == self.rank_tableView) {
+        
+        NSArray *items = self.rank_groups[indexPath.section];
+        RankTypeItemFrame *itemFrame = items[indexPath.row];
+        RankDetailViewController *rankVC  = [[RankDetailViewController alloc] init];
+        rankVC.type_id = itemFrame.item.type_id;
+        [self.navigationController pushViewController:rankVC animated:YES];
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    RankTypeItemFrame *itemFrame = self.rank_groups[indexPath.section];
+    NSArray *items = self.rank_groups[indexPath.section];
+    RankTypeItemFrame *itemFrame = items[indexPath.row];
     
     return  itemFrame.cell_frame.size.height;
 }
@@ -402,7 +356,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return  section == (self.rank_groups.count -1) ? Section_footer_Height_nomal : HEIGHT_ZERO;
+    CGFloat height =  (section == (self.rank_groups.count -1)) ? Section_footer_Height_nomal : HEIGHT_ZERO;
+    
+    return  height;
 }
 
 
@@ -438,7 +394,8 @@
 //打开搜索
 -(void)searchButtonPressed:(UIBarButtonItem *)barButton {
     
-    [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+    XWGJNavigationController *nav = [[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]];
+    [self presentViewController:nav  animated:YES completion:nil];
 }
 
 //从首页跳转到热门留学目的地
@@ -456,7 +413,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ANIMATION_DUATION * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [self.bgView setContentOffset:CGPointMake(2 * XSCREEN_WIDTH , 0) animated:YES];
-        
         [self.topToolView setSelectedIndex:2];
         
     });
@@ -468,14 +424,10 @@
 - (void)promptShowWithCount:(NSInteger )count{
     
     if (count == 0) return;
-    
     if (!_promptView) {
-        
         _promptView = [SearchPromptView promptViewInsertInView:self.rank_tableView];
     }
-    
     [self.promptView showWithTitle:[NSString stringWithFormat:@"共 %ld 个排名",count]];
-    
 }
 
 //网络请求更多
@@ -483,7 +435,6 @@
     
     [self makeRankDataSource];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

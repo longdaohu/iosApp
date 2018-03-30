@@ -89,8 +89,6 @@
         count_w = REDSPOT_HEIGHT;
     }
     self.countLab.frame = CGRectMake(count_x, count_y, count_w, count_h);
-
-    
  
 }
 

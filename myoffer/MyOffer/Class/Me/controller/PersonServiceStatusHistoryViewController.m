@@ -68,10 +68,10 @@
     footer.frame = CGRectMake(0, footer_y, footer_w, footer_h);
     [bgView addSubview:footer];
     footer.backgroundColor = XCOLOR_WHITE;
-    footer.layer.shadowColor = XCOLOR_WHITE.CGColor;//shadowColor阴影颜色
-    footer.layer.shadowOffset = CGSizeMake(0,-20);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+    footer.layer.shadowColor = XCOLOR_WHITE.CGColor;
+    footer.layer.shadowOffset = CGSizeMake(0,-20);
     footer.layer.shadowRadius = 10;
-    footer.layer.shadowOpacity = 0.9;//阴影透明度，默认0
+    footer.layer.shadowOpacity = 0.9;
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, footer_h, 0);
     

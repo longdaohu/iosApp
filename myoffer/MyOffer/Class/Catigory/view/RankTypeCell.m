@@ -22,11 +22,8 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView{
  
     NSString *identify = NSStringFromClass([RankTypeCell class]);
-
     RankTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-
     if(!cell){
-        
         cell = [[RankTypeCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:identify];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -80,12 +77,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)setItemFrame:(RankTypeItemFrame *)itemFrame{

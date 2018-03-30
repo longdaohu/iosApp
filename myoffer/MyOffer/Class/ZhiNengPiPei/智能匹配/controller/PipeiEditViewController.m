@@ -397,7 +397,6 @@
     
     if (!_groups) {
 
-        
         WYLXGroup *country   =  [WYLXGroup groupWithType:EditTypeCountry title:@"意向国家" placeHolder:@"英国" content:(self.Uni_Country?self.Uni_Country:nil) groupKey:@"des_country" spod:true];
         WYLXGroup *university    =  [WYLXGroup groupWithType:EditTypeUniversity title:@"在读或毕业院校" placeHolder:@"例如：北京大学" content:nil groupKey:@"university" spod:false];
         WYLXGroup *subject    =  [WYLXGroup groupWithType:EditTypeSuject title:@"就读专业" placeHolder:@"经济与金融" content:nil groupKey:@"subject" spod:true];
@@ -683,7 +682,7 @@
     
     if (self.actionBlock) {
         
-        self.actionBlock(@"我要刷新");
+        self.actionBlock(@"去刷新");
         [self.navigationController popViewControllerAnimated:YES];
         
     }else{
@@ -726,7 +725,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    KDClassLog(@"智能匹配 编辑 dealloc");
+    KDClassLog(@"智能匹配 + 编辑 + PipeiEditViewController +dealloc");
 }
 
 

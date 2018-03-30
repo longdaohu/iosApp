@@ -65,7 +65,6 @@
         _pipeiNoDataView = [PipeiNoResultVeiw viewWithActionBlock:^{
             [weakSelf casePipeiEditPage];
         }];
-//        _pipeiNoDataView.hidden = YES;
         [self.view insertSubview:_pipeiNoDataView atIndex:0];
 
     }
@@ -287,8 +286,7 @@
             PeiperGroup *group = self.groups[selectedIndex];
             group.selected = YES;
             self.selectIndex  = selectedIndex;
-            self.current_items = group.items;
-            self.lineView.backgroundColor = group.sliceColor;
+            [self makCurrentDataWithGroup:group];
         }
         
      }
@@ -345,11 +343,6 @@
     [self.centerButton setAttributedTitle:AttributedString forState:UIControlStateNormal];
     
     self.selectedLab.text =[NSString stringWithFormat:@"%@ ：%d",GDLocalizedString(@"ApplicationList-003"),(int)self.NewSelectUniversityIDs.count];
-
-    
-//    for (PeiperGroup *group in self.groups) {
-//        NSLog(@" %@  ===aaaaa== %ld   slices_count = %ld",group.title,group.items.count ,slices_count);
-//    }
     
 }
 
@@ -536,11 +529,9 @@
         }];
  
         self.selectIndex = index;
-        self.current_items = [self.groups[index] items];
+        [self makCurrentDataWithGroup:group];
         [self.ResultTableView reloadData];
-        self.pieTitleLab.text = group.title;
-        self.pieSubtitleLab.text = group.subtitle;
-        self.lineView.backgroundColor = group.sliceColor;
+
 }
 
 
@@ -573,6 +564,15 @@
  
 }
 
+//设置当前数据
+- (void)makCurrentDataWithGroup:(PeiperGroup *)group{
+    
+    self.current_items = group.items;
+    self.lineView.backgroundColor = group.sliceColor;
+    self.pieTitleLab.text = group.title;
+    self.pieSubtitleLab.text = group.subtitle;
+    
+}
 
 //进入智能匹配
 -(void)casePipeiEditPage
@@ -580,12 +580,12 @@
     XWeakSelf;
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
     pipeiEdit.actionBlock = ^(NSString *pipei) {
-        
+ 
+        weakSelf.navigationItem.rightBarButtonItem.enabled = NO;
         [weakSelf DataSourseRequst];
     };
-//    pipeiEdit.isfromPipeiResultPage = YES;
     [self.navigationController pushViewController:pipeiEdit animated:YES];
-    
+
 }
 
 //显示错误提示

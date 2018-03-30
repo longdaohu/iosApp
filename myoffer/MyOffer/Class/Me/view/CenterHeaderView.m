@@ -104,8 +104,7 @@
     CenterSectionItem *favor  = self.items[1];
     favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
 
-//    CenterSectionItem *service  = self.items[2];
-//    service.count = [response[@"paid_service_description"] length] ? [NSString stringWithFormat:@"%@",response[@"paid_service_description"]] : @"暂未获得套餐";
+
 }
 
 - (void)layoutSubviews{

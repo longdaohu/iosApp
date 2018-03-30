@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController">
             <connections>
                 <outlet property="_searchBar" destination="Xmq-xg-aEm" id="71e-oY-7tb"/>
+                <outlet property="topBarConstant" destination="FLF-Fi-yai" id="z0k-9w-0pw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,12 +22,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vN-RZ-nDs">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xmq-xg-aEm">
-                            <rect key="frame" x="0.0" y="10" width="375" height="56"/>
+                            <rect key="frame" x="0.0" y="21" width="375" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="56" id="75I-ac-IZZ"/>
+                                <constraint firstAttribute="height" constant="40" id="75I-ac-IZZ"/>
                             </constraints>
                             <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <textInputTraits key="textInputTraits"/>
@@ -38,9 +39,9 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Xmq-xg-aEm" secondAttribute="trailing" id="6Qq-a0-Csy"/>
-                        <constraint firstAttribute="height" constant="179" id="FLF-Fi-yai"/>
-                        <constraint firstItem="Xmq-xg-aEm" firstAttribute="top" secondItem="9vN-RZ-nDs" secondAttribute="top" constant="10" id="TpK-Lu-TYO"/>
+                        <constraint firstAttribute="height" constant="64" id="FLF-Fi-yai"/>
                         <constraint firstItem="Xmq-xg-aEm" firstAttribute="leading" secondItem="9vN-RZ-nDs" secondAttribute="leading" id="hf8-5W-ymu"/>
+                        <constraint firstAttribute="bottom" secondItem="Xmq-xg-aEm" secondAttribute="bottom" constant="3" id="lt4-3j-ghw"/>
                     </constraints>
                 </view>
             </subviews>

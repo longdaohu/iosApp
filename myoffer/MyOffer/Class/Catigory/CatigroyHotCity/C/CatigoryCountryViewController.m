@@ -48,7 +48,7 @@
 //更新热门留学目的地
 - (void)updateCityUIWithResponse:(id)response{
     
-    self.country_Hotes =[CatigaryCountry mj_objectArrayWithKeyValuesArray:response[@"hot"]];
+    self.country_Hotes = [CatigaryCountry mj_objectArrayWithKeyValuesArray:response[@"hot"]];
     
     for (CatigaryCountry *country in self.country_Hotes) {
         
@@ -102,34 +102,18 @@
     return 1;
 }
 
-static NSString *rankIdentify = @"rankStyle";
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     CatigaryHotCityCell *cell =[CatigaryHotCityCell cellInitWithTableView:tableView];
-    
     CatigaryCountry *country  = self.country_Hotes[indexPath.section];
-    
     cell.hot_cities = country.hot_cities;
-    
     [cell bottomLineShow: (self.country_Hotes.count - 1) != indexPath.section];
-    
     cell.actionBlock = ^(NSString *city){
-        
         //设置一个更多城市，城市名称为空，城市名称是否为空，做为跳转判断的标准
         city ? [self CaseHotCityWithCityName:city belongCountry:country.country] :  [self CaseStateWithSection:indexPath.section];
-        
     };
     
-    
     return cell;
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
@@ -145,10 +129,8 @@ static NSString *rankIdentify = @"rankStyle";
     SectionView.backgroundColor = XCOLOR_WHITE;
     [SectionView arrowButtonHiden:!(tableView == self.city_tableView)];
     SectionView.actionBlock = ^{
-        
         [self CaseStateWithSection:section];
     };
-    
     
     return SectionView;
 }
@@ -159,7 +141,7 @@ static NSString *rankIdentify = @"rankStyle";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
+
     return  Section_header_Height_nomal;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -167,27 +149,21 @@ static NSString *rankIdentify = @"rankStyle";
     return HEIGHT_ZERO;
 }
 
-
 #pragma mark : 事件处理
 //热门留学城市
 -(void)CaseHotCityWithCityName:(NSString *)CityName belongCountry:(NSString *)country
 {
-    
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName country:country];
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 
-//英国、澳大利亚地区列表
+//国家地区列表
 -(void)CaseStateWithSection:(NSInteger)section{
     
     CatigaryCountry *country = self.country_Hotes[section];
-    
     CountryStateViewController *country_state= [[CountryStateViewController alloc] init];
-    
     country_state.countryName = country.country;
-    
     [self.navigationController pushViewController:country_state animated:YES];
 }
 

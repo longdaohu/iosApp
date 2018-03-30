@@ -18,28 +18,21 @@
 @implementation CatigaryCityCollectionCell
 
 
--(void)setCity:(CatigaryHotCity *)city
+- (void)setCity:(CatigaryHotCity *)city
 {
     _city = city;
     
     if (city.imageName) {
-
         self.iconView.image = XImage(city.imageName);
-        
         return;
     }
-    
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
-    
 }
 
 - (void)setTopic:(MessageHotTopicMedel *)topic{
 
     _topic = topic;
-    
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
 }
 
 

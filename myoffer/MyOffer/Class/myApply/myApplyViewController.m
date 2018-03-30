@@ -80,7 +80,7 @@
 }
 
 
-#pragma mark ——— UITableViewDelegate  UITableViewDataSoure
+#pragma mark: UITableViewDelegate  UITableViewDataSoure
 
 static NSString *identify = @"set";
 
@@ -88,7 +88,6 @@ static NSString *identify = @"set";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
-        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     

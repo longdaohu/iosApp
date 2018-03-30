@@ -20,7 +20,6 @@
 
     PipeiNoResultVeiw *noDataView = [[NSBundle mainBundle] loadNibNamed:@"PipeiNoResultVeiw" owner:self options:nil].lastObject;
     
-//    noDataView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT - XNAV_HEIGHT);
     noDataView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
 
     noDataView.actionBlock = actionBlock;

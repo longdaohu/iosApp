@@ -18,7 +18,7 @@
 @property(nonatomic,strong)MyOfferCountryState *currentState;
 @property(nonatomic,strong)UIImageView *selectImageView;
 @property(nonatomic,strong)UIFont *cell_font;
-@property(nonatomic,strong)NSIndexPath *current_Index;
+@property(nonatomic,strong)NSIndexPath *current_indexPath;
 
 @end
 
@@ -28,7 +28,6 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page国家地区"];
-    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
@@ -36,11 +35,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page国家地区"];
-    
 }
-
 
 - (void)viewDidLoad {
     
@@ -83,40 +79,30 @@
     for (NSDictionary *countryDic in countryes) {
         
         if ([countryDic[@"name"] isEqualToString:self.countryName]) {
-            
             self.countryModel = [MyOfferCountry mj_objectWithKeyValues:countryDic];
-           
             [self.stateTableView reloadData];
-
             break;
         }
-        
     }
-    
-    
     if (self.stateTableView) {
-    
         if (self.countryModel && self.countryModel.states.count > 0) {
-            
-            self.current_Index = [NSIndexPath indexPathForRow:1 inSection:0];
-            [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionNone];
+            self.current_indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             self.currentState = self.countryModel.states.firstObject;
-            
+            [self.stateTableView selectRowAtIndexPath:self.current_indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
      }
- 
 }
 
 -(void)makeTableView{
     
-    CGFloat left_Width = 150;
-    CGFloat left_Height = XSCREEN_HEIGHT - XNAV_HEIGHT;
-    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_Width, left_Height) superView:self.view];
+    CGFloat left_w = 150;
+    CGFloat left_h = XSCREEN_HEIGHT;
+    self.stateTableView = [self tableViewWithFrame: CGRectMake(0, 0, left_w, left_h) superView:self.view];
     self.stateTableView.backgroundColor = XCOLOR_BG;
  
-    CGFloat right_w = XSCREEN_WIDTH - left_Width;
-    CGFloat right_x = left_Width;
-    self.cityTableView =  [self tableViewWithFrame: CGRectMake(right_x, 0, right_w, left_Height) superView:self.view];
+    CGFloat right_x = left_w;
+    CGFloat right_w = XSCREEN_WIDTH - right_x;
+    self.cityTableView =  [self tableViewWithFrame: CGRectMake(right_x, 0, right_w, left_h) superView:self.view];
     self.cityTableView.backgroundColor = XCOLOR_WHITE;
     self.cityTableView.showsVerticalScrollIndicator = NO;
     
@@ -129,12 +115,15 @@
     tableView.delegate = self;
     tableView.tableFooterView = [[UIView alloc] init];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
     if (@available(iOS 11.0, *)) {
          tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-
+    
     [bgView addSubview:tableView];
-
+    
     return tableView;
 }
 
@@ -143,25 +132,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     NSInteger rows = 0;
-    
     if (tableView == self.stateTableView) {
-        
-        rows = self.countryModel.states.count + 1;
-        
+        rows = self.countryModel.states.count;
     }else{
-        
-        rows = self.currentState.cities.count + 1;
-
+        rows = self.currentState.cities.count;
     }
-    
-    return rows;
+    return rows + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"state"];
     if (!cell) {
-        
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"state"];
         cell.textLabel.font =  self.cell_font;
     }
@@ -170,7 +152,7 @@
     if (indexPath.row == 0) {
         name = @"全部";
     }
-    
+ 
     if (tableView == self.stateTableView) {
        
         cell.contentView.backgroundColor = XCOLOR_BG;
@@ -178,19 +160,21 @@
         cell.textLabel.highlightedTextColor = XCOLOR_LIGHTBLUE;
  
         if (indexPath.row > 0) {
-            MyOfferCountryState *state =  self.countryModel.states[indexPath.row - 1];
+            NSInteger row = indexPath.row - 1;
+            MyOfferCountryState *state =  self.countryModel.states[row];
             name = state.name;
         }
- 
-    }else{
+        cell.textLabel.text = name;
         
-        cell.contentView.backgroundColor = XCOLOR_WHITE;
-        if (indexPath.row > 0) {
-            NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
-            name = city[@"name"];
-        }
-     }
+        return cell;
+    }
     
+    cell.contentView.backgroundColor = XCOLOR_WHITE;
+    if (indexPath.row > 0) {
+        NSInteger row = indexPath.row - 1;
+        NSDictionary *city =  self.currentState.cities[row];
+        name = city[@"name"];
+    }
     cell.textLabel.text = name;
     
     return cell;
@@ -202,56 +186,40 @@
    
     NSString *key = KEY_COUNTRY;
     NSString *searchValue = self.countryModel.name;
-    
     //州tableView
     if (tableView == self.stateTableView) {
         
-        if (indexPath.row != 0) {
-            
-            self.currentState =  self.countryModel.states[indexPath.row - 1];
-            
-            [self.cityTableView reloadData];
-            
-            self.current_Index = indexPath;
+        if (indexPath.row == 0) {
+            SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
+            [self.navigationController pushViewController:vc animated:YES];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [self.stateTableView selectRowAtIndexPath:self.current_indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
             
             return;
         }
         
-        
-        SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
-       
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-        [self.stateTableView selectRowAtIndexPath:self.current_Index animated:NO scrollPosition:UITableViewScrollPositionTop];
- 
-        
+        NSInteger row = indexPath.row - 1;
+        self.currentState =  self.countryModel.states[row];
+        [self.cityTableView reloadData];
+        self.current_indexPath = indexPath;
+
         return;
-        
     }
     
-    
+    //下列是城市表格选择情况
     if (indexPath.row == 0) {
-        
         key = KEY_STATE;
-        
         searchValue = self.currentState.name;
-        
     }else{
-    
         key = KEY_CITY;
-        NSDictionary *city =  self.currentState.cities[indexPath.row - 1];
-        
+        NSInteger row = indexPath.row - 1;
+        NSDictionary *city =  self.currentState.cities[row];
         searchValue = city[@"name"];
-        
     }
     
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue country:self.countryModel.name];
     [self.navigationController pushViewController:vc animated:YES];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -259,6 +227,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)dealloc{
+    
+    KDClassLog(@" 城市选择页 + CountryStateViewController + dealloc");
+}
 
 @end

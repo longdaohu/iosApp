@@ -3520,11 +3520,11 @@
 		AECC877C1F95F63800FCBBEC /* Catigory */ = {
 			isa = PBXGroup;
 			children = (
-				AECC877D1F95F63800FCBBEC /* C */,
+				AECC87A81F95F63800FCBBEC /* Rank */,
 				AECC87841F95F63800FCBBEC /* CatigorySubject */,
 				AECC87871F95F63800FCBBEC /* CatigroyHotCity */,
+				AECC877D1F95F63800FCBBEC /* C */,
 				AECC87911F95F63800FCBBEC /* model */,
-				AECC87A81F95F63800FCBBEC /* Rank */,
 				AECC87B61F95F63800FCBBEC /* view */,
 			);
 			path = Catigory;

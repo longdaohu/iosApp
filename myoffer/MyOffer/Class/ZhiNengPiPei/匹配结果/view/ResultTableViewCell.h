@@ -16,7 +16,7 @@
 
 @interface ResultTableViewCell : UITableViewCell
 
-@property(nonatomic,assign)BOOL isStart;
+@property(nonatomic,assign)BOOL isStar;
 
 @property(nonatomic,copy)NSString *optionOrderBy;
 

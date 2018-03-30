@@ -73,7 +73,8 @@
     [self makeSearchBar];
     
     [self makeTableView];
-
+    
+    self.topBarConstant.constant = XNAV_HEIGHT;
 }
 
 -(void)makeSearchBar{
