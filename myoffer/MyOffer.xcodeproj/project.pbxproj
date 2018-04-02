@@ -232,6 +232,7 @@
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
+		AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178AE2071FE67006B311A /* UniversityDetailRank.m */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
@@ -896,6 +897,8 @@
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
+		AE6178AD2071FE67006B311A /* UniversityDetailRank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversityDetailRank.h; sourceTree = "<group>"; };
+		AE6178AE2071FE67006B311A /* UniversityDetailRank.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniversityDetailRank.m; sourceTree = "<group>"; };
 		AE61A9951EAEF44600AC4B43 /* SearchUniversityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniversityCenterViewController.h; sourceTree = "<group>"; };
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
@@ -2367,6 +2370,10 @@
 		AE7107A61D767D8A00019B1F /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */,
+				AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */,
+				AE6178AD2071FE67006B311A /* UniversityDetailRank.h */,
+				AE6178AE2071FE67006B311A /* UniversityDetailRank.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -3447,8 +3454,6 @@
 				AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */,
 				AE072CD6206A5AB9001641AC /* myofferBaseTableViewController.h */,
 				AE072CD5206A5AB9001641AC /* myofferBaseTableViewController.m */,
-				AE93E4DD1D6DA5140025FC58 /* UniversitydetailNew.h */,
-				AE93E4DE1D6DA5140025FC58 /* UniversitydetailNew.m */,
 				AE93E4E31D6DABA30025FC58 /* UniversityNewFrame.h */,
 				AE93E4E41D6DABA30025FC58 /* UniversityNewFrame.m */,
 				AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */,
@@ -4177,6 +4182,7 @@
 				AE033FDD20185C3B00D1D425 /* myofferMenuCell.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE3943DE1E0A1AD00038826A /* TADotView.m in Sources */,
+				AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,

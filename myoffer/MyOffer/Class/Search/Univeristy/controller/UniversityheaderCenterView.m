@@ -150,7 +150,7 @@
     
     _UniversityFrame = UniversityFrame;
     
-    UniversitydetailNew *item = UniversityFrame.item;
+    UniversitydetailNew *item = UniversityFrame.uni;
     
       //logo 学校
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
@@ -175,7 +175,7 @@
     
     if (addressWidth > (UniversityFrame.address_detailFrame.size.width - 30)) {
         
-        [self.address_detailBtn setTitle:UniversityFrame.item.address_short forState:UIControlStateNormal];
+        [self.address_detailBtn setTitle:UniversityFrame.uni.address_short forState:UIControlStateNormal];
     }
     self.address_detailBtn.frame = UniversityFrame.address_detailFrame;
     
@@ -210,7 +210,7 @@
 - (void)configurationWithUniversity:(UniversityNewFrame *)UniversityFrame{
 
     
-    UniversitydetailNew *item = UniversityFrame.item;
+    UniversitydetailNew *item = UniversityFrame.uni;
     
     //  雅思要求 %@\n托福要求
     NSNumber *regular_degree_TF = item.TOEFLRequirement[@"regular_degree_total"];

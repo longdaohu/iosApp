@@ -15,7 +15,7 @@
 
 @interface UniGroupOneView ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UUChartDataSource>
 @property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)HomeSectionHeaderView *fenguanView;
+@property(nonatomic,strong)HomeSectionHeaderView *sceneryView;
 @property(nonatomic,strong)UIView *lineOne;
 @property(nonatomic,strong)HomeSectionHeaderView *keyView;
 @property(nonatomic,strong)UIView *keySubjectView;
@@ -47,14 +47,13 @@
 - (void)makeUI{
     
     //校园风光
-    HomeSectionHeaderView *fenguanView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"校园风光"];
-    fenguanView.backgroundColor = XCOLOR_WHITE;
-    self.fenguanView = fenguanView;
-    [self addSubview:fenguanView];
+    HomeSectionHeaderView *sceneryView = [HomeSectionHeaderView sectionHeaderViewWithTitle:@"校园风光"];
+    sceneryView.backgroundColor = XCOLOR_WHITE;
+    self.sceneryView = sceneryView;
+    [self addSubview:sceneryView];
     
     //图片CollectionView
     [self makeCollectView];
-    
     
     //分隔线
     UIView *lineOne = [[UIView alloc] init];
@@ -129,15 +128,9 @@
 {
     
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
-     // 设置每一个cell的宽高 (cell在CollectionView中称之为item)
     CGFloat width = 100 * XPERCENT;
     CGFloat heigh = 100 * XPERCENT;
-    
     flowlayout.itemSize = CGSizeMake(width,heigh);
-    // 设置item行与行之间的间隙
-    //    flowlayout.minimumLineSpacing = 0;
-    // 设置item列与列之间的间隙
-    //    flowlayout.minimumInteritemSpacing = ITEM_MARGIN;
     flowlayout.sectionInset = UIEdgeInsetsMake(0, XMARGIN, 0, XMARGIN);//sectionInset的设置与item的宽高不一致会出现警报信息
     [flowlayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
@@ -145,12 +138,12 @@
     collectionView.backgroundColor  = [UIColor whiteColor];
     
     
-    self.collectionView                           = collectionView;
-    collectionView.showsVerticalScrollIndicator   = NO;
+    self.collectionView   = collectionView;
+    collectionView.showsVerticalScrollIndicator = NO;
     collectionView.showsHorizontalScrollIndicator = NO;
-    collectionView.dataSource                     = self;
-    collectionView.delegate                       = self;
-    collectionView.backgroundColor                = [UIColor whiteColor];
+    collectionView.dataSource  = self;
+    collectionView.delegate  = self;
+    collectionView.backgroundColor = [UIColor whiteColor];
     
     [self.collectionView registerClass:[UniversityOneGroupCollectionCell class] forCellWithReuseIdentifier:oneIdentify];
     
@@ -163,35 +156,24 @@
 
     _contentFrame = contentFrame;
     
-    self.fenguanView.frame = contentFrame.fenguan_Frame;
+    self.sceneryView.frame = contentFrame.fenguan_Frame;
     
     self.collectionView.frame = contentFrame.collectionView_Frame;
     [self.collectionView reloadData];
-    
-
+ 
     self.lineOne.frame = contentFrame.fg_line_Frame;
-    
     self.keyView.frame = contentFrame.key_Frame;
-    
     self.keySubjectView.frame = contentFrame.subject_Bg_Frame;
-    
     self.lineTwo.frame = contentFrame.key_line_Frame;
-    
     self.rankView.frame = contentFrame.rank_Frame;
-    
     self.selectionView.frame = contentFrame.selection_Frame;
-    
     self.historyLine.frame = contentFrame.history_Line_Frame;
-    
     self.qsBtn.frame = contentFrame.qs_Frame;
-    
     self.timesBtn.frame = contentFrame.times_Frame;
-  
     [self subjectsWithUniversity:contentFrame];
+    self.chartAlertLab.frame = contentFrame.chart_Bg_Frame;
     
-     self.chartAlertLab.frame = contentFrame.chart_Bg_Frame;
-    
-    [self chartWithArray:self.contentFrame.item.global_rank_history];
+    [self chartWithItems:self.contentFrame.uni.global_rank_history];
     
 }
 
@@ -200,61 +182,36 @@
 
     UIFont *sender_Font = XFONT(XFONT_SIZE(14));
     
-    for (NSString *title in contentFrame.item.key_subjectArea) {
+    for (NSString *title in contentFrame.uni.key_subjectArea) {
         
         UIButton *sender  =  [[UIButton alloc] init];
-        
-        [self.keySubjectView addSubview:sender];
-        
         [sender setTitle:title forState:UIControlStateNormal];
-        
         [sender setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
-        
         sender.titleLabel.font = sender_Font;
-        
         sender.layer.cornerRadius = 15;
-        
         sender.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
-        
         sender.layer.borderWidth = 1;
-    }
+        [self.keySubjectView addSubview:sender];
     
+    }
     
     for (NSInteger index = 0; index < contentFrame.subjectItemFrames.count; index++) {
         
         UIButton *sender = (UIButton *)self.keySubjectView.subviews[index];
-        
         NSValue *xvalue =  contentFrame.subjectItemFrames[index];
-        
         sender.frame  =  xvalue.CGRectValue;
     }
 }
 
 
--(void)chartWithArray:(NSArray *)temps_history{
+-(void)chartWithItems:(NSArray *)history_rank{
 
+    self.chartAlertLab.hidden = history_rank.count > 0;
+    self.chartView.hidden = history_rank.count == 0;
+    if (history_rank.count == 0) return;
     
-    self.chartAlertLab.hidden = temps_history.count > 0;
-    self.chartView.hidden = temps_history.count == 0;
-    
-    if (temps_history.count == 0) {
-        
-        return;
-    }
-    
-    NSMutableArray *years = [NSMutableArray array];
-    
-    NSMutableArray *ranks = [NSMutableArray array];
-    
-    [temps_history enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       
-        [years addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"year"]]];
-        [ranks addObject: [NSString stringWithFormat:@"%@",[obj valueForKey:@"rank"]]];
-        
-    }];
-    
-    self.ranks = [ranks copy];
-    self.years = [years copy];
+    self.ranks = [history_rank valueForKey:@"rank"];
+    self.years = [history_rank valueForKey:@"year"];
     
     [self updateChartUI];
 }
@@ -263,7 +220,7 @@
 
     self.qsBtn.enabled = NO;
     self.timesBtn.enabled = YES;
-    [self chartWithArray:self.contentFrame.item.global_rank_history];
+    [self chartWithItems:self.contentFrame.uni.global_rank_history];
 }
 
 - (void)timesClick:(UIButton *)sender{
@@ -271,19 +228,16 @@
     self.qsBtn.enabled = YES;
     self.timesBtn.enabled = NO;
     
-    [self chartWithArray:self.contentFrame.item.local_rank_history];
+    [self chartWithItems:self.contentFrame.uni.local_rank_history];
     
 }
 
 - (void)updateChartUI{
     
     if (self.chartView) {
-        
         [self.chartView removeFromSuperview];
-        
         self.chartView = nil;
     }
-    
     self.chartView = [[UUChart alloc]initWithFrame:self.contentFrame.chart_Bg_Frame
                                         dataSource:self
                                              style:UUChartStyleLine];
@@ -325,9 +279,7 @@
         NSString *item = self.ranks[i];
         
         if (max < item.integerValue) max = item.integerValue;
-        
         if (min > item.integerValue) min = item.integerValue;
-        
     }
     
     //数值要均匀显示才可以正确的点上
@@ -376,19 +328,16 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    UniversitydetailNew *uni = _contentFrame.item;
+    UniversitydetailNew *uni = _contentFrame.uni;
     
     return  uni.m_images.count;
 }
 
 static NSString *oneIdentify = @"oneGroup";
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     UniversityOneGroupCollectionCell  *cell = [collectionView dequeueReusableCellWithReuseIdentifier:oneIdentify forIndexPath:indexPath];
-    
-    UniversitydetailNew *uni = _contentFrame.item;
-    
+    UniversitydetailNew *uni = _contentFrame.uni;
     cell.path = uni.m_images[indexPath.row];
     
     return cell;
@@ -398,7 +347,6 @@ static NSString *oneIdentify = @"oneGroup";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
      [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
     if(self.actionBlock) self.actionBlock(nil,indexPath.row);
     
 }

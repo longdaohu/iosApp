@@ -93,7 +93,7 @@
     
     //**号背景
     self.starsBgView =[[UIView alloc] init];
-    self.starsBgView.backgroundColor = XCOLOR_RED;
+    self.starsBgView.backgroundColor = XCOLOR_WHITE;
     [self.contentView addSubview:self.starsBgView];
     
     for (NSInteger i = 0; i < 5; i++) {

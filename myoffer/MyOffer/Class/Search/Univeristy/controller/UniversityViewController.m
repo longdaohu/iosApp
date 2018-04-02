@@ -30,7 +30,6 @@
 #import "WYLXViewController.h"
 #import "myofferFlexibleView.h"
 
-
 typedef enum {
     UniversityItemTyDeFault,
     UniversityItemTypeFavor,
@@ -43,30 +42,18 @@ typedef enum {
 
 @interface UniversityViewController ()<UITableViewDelegate,UITableViewDataSource,IDMPhotoBrowserDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
-//第一分组
-@property(nonatomic,strong)UniGroupOneView  *oneGroup;
-//学校Frame数据
-@property(nonatomic,strong)UniversityNewFrame    *UniFrame;
-//分组数据
-@property(nonatomic,strong)NSMutableArray        *groups;
-//表头
-@property(nonatomic,strong)UniverstyHeaderView   *headerView;
-//自定义导航栏
-@property(nonatomic,strong)UniversityNavView     *topNavigationView;
-//是否收藏
-@property(nonatomic,assign)BOOL favorited;
-//当前选择类型
-@property(nonatomic,assign)UniversityItemType    clickType;
-//分享功能
-@property(nonatomic,strong)ShareNViewController   *shareVC;
-//底部按钮
-@property(nonatomic,strong)UniversityFooterView *footer;
-//用于记录用户入学难易程度
-@property(nonatomic,strong)NSNumber *user_level;
-//是否来自匹配页面
-@property(nonatomic,assign)BOOL FromPipei;
-//头部图片
-@property(nonatomic,strong)myofferFlexibleView *flexView;
+@property(nonatomic,strong)UniGroupOneView  *oneGroup;//第一分组
+@property(nonatomic,strong)UniversityNewFrame    *UniFrame;//学校Frame数据
+@property(nonatomic,strong)NSMutableArray   *groups;//分组数据
+@property(nonatomic,strong)UniverstyHeaderView   *headerView;//表头
+@property(nonatomic,strong)UniversityNavView     *topNavigationView;//自定义导航栏
+@property(nonatomic,assign)UniversityItemType   clickType;//当前选择类型
+@property(nonatomic,strong)ShareNViewController   *shareVC;//分享功能
+@property(nonatomic,strong)UniversityFooterView *footer;//底部按钮
+@property(nonatomic,strong)NSNumber *user_level;//用于记录用户入学难易程度
+@property(nonatomic,assign)BOOL FromPipei;//是否来自匹配页面
+@property(nonatomic,strong)myofferFlexibleView *flexView;//头部图片
+
 @end
 
 @implementation UniversityViewController
@@ -126,7 +113,7 @@ typedef enum {
     //加载报考难易程度
     [self loadUserLevel];
     
-    if (self.UniFrame.item.login != LOGIN) {
+    if (self.UniFrame.uni.login != LOGIN) {
         
         [self addDataSourse];
 
@@ -210,7 +197,6 @@ typedef enum {
 }
 
 #pragma mark : 设置控件数据
-
 - (void)updateUIWithReponse:(id)response{
     
     UniversitydetailNew *university = [UniversitydetailNew mj_objectWithKeyValues:response];
@@ -218,30 +204,23 @@ typedef enum {
     
     //用于刷新数据时 判断登录状态下是否收藏学校
     if (self.groups.count > 0) {
-        
-        self.favorited = university.favorited;
 
         [self configureLikeButton:university.favorited];
-        
-        self.UniFrame.item.favorited = university.favorited;
-        
+        self.UniFrame.uni.favorited = university.favorited;
+       
         return ;
     }
     
     
     self.uni_id = university.NO_id;
-    
-    self.favorited = university.favorited;
-    
+ 
     [self configureLikeButton: university.favorited];
-    
-    
+ 
     [_footer footeTouchEnable:YES];
     
     UniversityNewFrame *UniFrame = [UniversityNewFrame frameWithUniversity:university];
     self.UniFrame = UniFrame;
-    
-    
+ 
     XWeakSelf
    //1  表头
     UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
@@ -264,11 +243,8 @@ typedef enum {
      }
  
     [UIView transitionWithView:self.flexView duration:ANIMATION_DUATION options:UIViewAnimationOptionCurveEaseIn |UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        
         self.flexView.image_name = countryImageName;
-        
      } completion:^(BOOL finished) {
-         
     }];
     
     
@@ -282,17 +258,13 @@ typedef enum {
     
     
    //3-2 相关资讯 第二分组
-    NSArray *newses  = [MyOfferArticle mj_objectArrayWithKeyValuesArray:university.relate_articles];
     NSMutableArray *news_temps = [NSMutableArray array];
-    [newses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
+    [university.relate_articles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:obj];
         [news_temps addObject:newsFrame];
     }];
-    
  
     if (news_temps.count > 0) {
-        
         myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
         article_group.type = SectionGroupTypeB;
         [self.groups addObject:article_group];
@@ -302,14 +274,10 @@ typedef enum {
     
     //3-3 相关院校  大于第二分组
     
-   NSArray *rankNeighbour = [MyOfferUniversityModel  mj_objectArrayWithKeyValuesArray: university.rankNeighbour];
-    
-    [rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
+    [university.rankNeighbour enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+     
         UniversityFrameNew *uniFrame = [UniversityFrameNew universityFrameWithUniverstiy: (MyOfferUniversityModel*)obj];
-        
         NSString *title = (idx == 0) ? @"相关院校" : @"";
-        
         myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
         uni_group.section_footer_height = Section_footer_Height_nomal;
         uni_group.type = SectionGroupTypeC;
@@ -319,7 +287,6 @@ typedef enum {
     }];
     
     [self.tableView reloadData];
-    
     
     self.footer.uni_country = university.country;
     
@@ -357,7 +324,7 @@ typedef enum {
     [footer footeTouchEnable:NO];
     footer.actionBlock = ^(UIButton *sender){
         
-        [weakSelf footerWithButton:sender];
+        [weakSelf footerOnClick:sender];
     };
     [self.view addSubview:footer];
     
@@ -369,15 +336,11 @@ typedef enum {
     
     XWeakSelf
     self.topNavigationView = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
-
         [weakSelf onClick:sender];
-        
     }];
-    
     [self.view addSubview:self.topNavigationView];
     
 }
-
 
 -(void)makeTableView
 {
@@ -387,7 +350,6 @@ typedef enum {
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
     self.tableView.estimatedSectionFooterHeight = 0;
-
     [self makeTopNavigaitonView];
     
 }
@@ -414,7 +376,6 @@ typedef enum {
     self.oneGroup = oneGroup;
     XWeakSelf
     oneGroup.actionBlock = ^(NSString *name,NSInteger index){
-        
               [weakSelf showPhotoAtIndex:index];
       };
     
@@ -489,7 +450,6 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     myofferGroupModel *group = self.groups[section];
-    
     return  group.items.count;
 }
 
@@ -497,19 +457,11 @@ typedef enum {
     
     
     myofferGroupModel *group = self.groups[indexPath.section];
-    
-    
     switch (group.type) {
         case SectionGroupTypeA:{
-            
-            UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"one"];
-            
-            if (!cell) {
-                cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"one"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
+            UITableViewCell  *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.contentView addSubview:self.oneGroup];
-            
             return cell;
         }
             break;
@@ -518,9 +470,7 @@ typedef enum {
         case SectionGroupTypeB:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
-            
             news_cell.messageFrame =  group.items[indexPath.row];
-            
             [news_cell separatorLineShow: !(group.items.count - 1 == indexPath.row)];
             
             return news_cell;
@@ -532,11 +482,8 @@ typedef enum {
         default:{
             
             UniverstityTCell *uni_cell =[UniverstityTCell cellViewWithTableView:tableView];
-            
             uni_cell.uniFrame = group.items[indexPath.row];
-            
             [uni_cell separatorLineShow:NO];
-            
             return uni_cell;
         }
             break;
@@ -547,29 +494,21 @@ typedef enum {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if(indexPath.section == 0) return;
     
     myofferGroupModel *group = self.groups[indexPath.section];
-    
-    UIViewController *VC = [UIViewController new];
-    
+    UIViewController *VC = nil;
     switch (group.type) {
         case SectionGroupTypeB:
         {
             XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
-            
             VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
-            
-            
         }
             break;
-            
         case SectionGroupTypeC:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;
-            
         }
             break;
             
@@ -577,8 +516,11 @@ typedef enum {
             break;
     }
     
-    [self.navigationController pushViewController:VC animated:YES];
-    
+    if (VC) {
+        
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+ 
     
     
 }
@@ -630,20 +572,10 @@ typedef enum {
 //点击图片浏览器
 -(void)showPhotoAtIndex:(NSUInteger)index
 {
-    
-    NSMutableArray *temps = [NSMutableArray new];
-    
-    for (NSString *path in self.UniFrame.item.m_images) {
-        
-        [temps addObject:[NSURL URLWithString:path]];
-    }
-    
-    NSArray *photosWithURL = [IDMPhoto photosWithURLs:temps];
-     NSMutableArray *photos = [NSMutableArray arrayWithArray:photosWithURL];
-    // Create and setup browser
+    NSArray *photosWithURL = [IDMPhoto photosWithURLs:self.UniFrame.uni.m_images];
+    NSMutableArray *photos = [NSMutableArray arrayWithArray:photosWithURL];
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos];
     browser.delegate = self;
-    //图片数组开始index
     [browser setInitialPageIndex:index];
     browser.displayCounterLabel = YES;
     browser.displayActionButton = NO;
@@ -653,16 +585,13 @@ typedef enum {
 
 
 #pragma mark : 事件处理
-
 //根据网络请求显示用用户入学申请等级
 - (void)caseLevelWithResponse:(id)response{
 
     NSArray *values = [(NSDictionary *)response allValues];
-    
+    if (values.count == 0) return;
     self.user_level = values[0];
-    
     if (!([values[0] integerValue] == -1)) {
-        
         self.footer.level = [values[0] integerValue];
     }
 }
@@ -671,17 +600,13 @@ typedef enum {
 - (void)pipeiLevelWithParameter:(NSString *)pString{
    
     NSMutableString *path = [NSMutableString string];
-    
     [path  appendFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
-    
     [path  appendFormat:@"%@",pString];
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSArray *values = [(NSDictionary *)response allValues];
-        
         weakSelf.footer.level = [values[0] integerValue];
-        
         weakSelf.FromPipei = NO;
  
     }];
@@ -704,7 +629,6 @@ typedef enum {
         case Uni_Header_CenterItemStyleMore:
             [self UnivertityClickType:UniversityItemTypeMore];
             break;
-            
         default:
             break;
     }
@@ -729,7 +653,6 @@ typedef enum {
             [self caseMore];
             break;
         case UniversityItemTypePipei:
-            //            [self CasePipei];
             break;
         default:
             break;
@@ -740,11 +663,9 @@ typedef enum {
 - (ShareNViewController *)shareVC
 {
     if (!_shareVC) {
-        
-        _shareVC = [[ShareNViewController alloc] initWithUniversity:self.UniFrame.item];
+        _shareVC = [[ShareNViewController alloc] initWithUniversity:self.UniFrame.uni];
         [self addChildViewController:_shareVC];
         [self.view addSubview:self.shareVC.view];
-        
     }
     return _shareVC;
 }
@@ -758,43 +679,29 @@ typedef enum {
 //收藏
 - (void)caseFavorite
 {
-    
-    
     RequireLogin
     XWeakSelf
-    NSString *path = self.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
-    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.item.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
-        
-         NSString *title =  weakSelf.favorited ?  @"取消收藏"  : @"收藏成功";
- 
+    NSString *path = self.UniFrame.uni.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
+    NSString *title =  self.UniFrame.uni.favorited ?  @"取消收藏"  : @"收藏成功";
+    self.clickType = UniversityItemTyDeFault;
+    [self startAPIRequestWithSelector:[NSString stringWithFormat:@"%@%@",path,self.UniFrame.uni.NO_id] parameters:nil success:^(NSInteger statusCode, id response) {
         [MBProgressHUD showSuccessWithMessage:title ToView:self.view];
-        
-        weakSelf.favorited =  !weakSelf.favorited;
-        
-        [weakSelf configureLikeButton:weakSelf.favorited];
-        
-        weakSelf.clickType = UniversityItemTyDeFault;
-        
+        weakSelf.UniFrame.uni.favorited =  !weakSelf.UniFrame.uni.favorited;
+        [weakSelf configureLikeButton:weakSelf.UniFrame.uni.favorited];
     }];
 }
-
 
 
 //点击查看更多
 - (void)caseMore
 {
-    
     XWeakSelf
     self.UniFrame.showMore = !self.UniFrame.showMore;
-    
     if (CGRectGetHeight(self.headerView.frame) > 0) {
-        
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             weakSelf.headerView.uniFrame = weakSelf.UniFrame;
-            
-            weakSelf.headerView.frame     = weakSelf.UniFrame.header_Frame;
-            
+            weakSelf.headerView.frame  = weakSelf.UniFrame.header_Frame;
             [weakSelf.tableView beginUpdates]; //  beginUpdates  endUpdates 之间_tableView有刷新处理
             [weakSelf.tableView setTableHeaderView:weakSelf.headerView];
             [weakSelf.tableView endUpdates];
@@ -818,7 +725,7 @@ typedef enum {
 }
 
 //点击footer按钮
-- (void)footerWithButton:(UIButton *)sender
+- (void)footerOnClick:(UIButton *)sender
 {
     if ([sender.currentTitle containsString:@"查看"]) {
         
@@ -843,7 +750,8 @@ typedef enum {
 //查看所有专业
 - (void)caseAllSubjects{
     
-    [self.navigationController pushViewController:[[UniversitySubjectListViewController alloc] initWithUniversityID:self.uni_id] animated:YES];
+    UniversitySubjectListViewController *vc = [[UniversitySubjectListViewController alloc] initWithUniversityID:self.uni_id];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //智能匹配
@@ -855,7 +763,7 @@ typedef enum {
         XWeakSelf
         self.FromPipei = YES;
         PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
-        pipei.Uni_Country = self.oneGroup.contentFrame.item.country;
+        pipei.Uni_Country = self.oneGroup.contentFrame.uni.country;
         pipei.actionBlock = ^(NSString *pipei){
             
             [weakSelf pipeiLevelWithParameter:pipei];
@@ -885,7 +793,7 @@ typedef enum {
 
 - (void)dealloc{
     
-    KDClassLog(@" 学校详情 dealloc");
+    KDClassLog(@"学校详情 + UniversityViewController + dealloc");
     
 }
 

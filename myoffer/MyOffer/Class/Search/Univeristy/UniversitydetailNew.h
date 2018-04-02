@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface UniversitydetailNew : NSObject
 @property(nonatomic,copy)NSString     *NO_id;
 @property(nonatomic,copy)NSString     *name;
@@ -30,9 +31,11 @@
 @property(nonatomic,copy)NSString     *apartment_introduction;  //学校公寓
 @property(nonatomic,strong)NSArray    *apartment_images;       //公寓图片
 @property(nonatomic,copy)NSString     *short_id;
-@property(nonatomic,strong)NSArray    *relate_articles;        //关联文章
-@property(nonatomic,strong)NSArray    *tags;              //标签
-@property(nonatomic,strong)NSArray    *key_subjectArea;     //王牌领域
+@property(nonatomic,strong)NSArray    *relate_articles; //关联文章
+@property(nonatomic,strong)NSArray    *tags; //标签
+@property(nonatomic,strong)NSArray    *tags_Arr; //标签
+@property(nonatomic,assign)BOOL tag_on;//是否添加好tags
+@property(nonatomic,strong)NSArray    *key_subjectArea; //王牌领域
 @property(nonatomic,strong)NSNumber   *pageViews;        //浏览量
 @property(nonatomic,strong)NSArray    *m_images;
 @property(nonatomic,strong)NSArray    *images;

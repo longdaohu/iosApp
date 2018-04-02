@@ -16,16 +16,15 @@
 + (instancetype)frameWithUniversity:(UniversitydetailNew *)university{
 
     UniversityNewFrame *UniFrame = [[UniversityNewFrame alloc] init];
-    UniFrame.item = university;
+    UniFrame.uni = university;
     
     return UniFrame;
 }
 
 
-
--(void)setItem:(UniversitydetailNew *)item{
+- (void)setUni:(UniversitydetailNew *)uni{
     
-    _item = item;
+    _uni = uni;
     
     
     CGFloat  centerWidth = XSCREEN_WIDTH - 2 * XMARGIN;
@@ -49,7 +48,7 @@
     CGFloat official_X = name_X;
     CGFloat official_Y = CGRectGetMaxY(self.name_Frame);
     CGFloat official_W = name_W;
-    CGFloat officialHeigh   = [self.item.official_name KD_sizeWithAttributeFont:XFONT(official_Font_Size)  maxWidth:official_W].height;
+    CGFloat officialHeigh   = [self.uni.official_name KD_sizeWithAttributeFont:XFONT(official_Font_Size)  maxWidth:official_W].height;
     CGFloat official_H = officialHeigh;
     self.official_nameFrame = CGRectMake(official_X, official_Y, official_W, official_H);
     
@@ -83,7 +82,7 @@
 
     //XFONT_SIZE(14) //6-2 子项标题
     CGFloat data_item_title_X = 0;
-    CGFloat data_item_title_Y = data_item_icon_Y + data_item_icon_H + 3;
+    CGFloat data_item_title_Y =  CGRectGetMaxY(self.data_item_iconFrame) + 3;
     CGFloat data_item_title_W = data_item_icon_W;
     CGFloat data_item_title_H = XFONT_SIZE(14);
     self.data_item_titleFrame = CGRectMake(data_item_title_X, data_item_title_Y, data_item_title_W, data_item_title_H);
@@ -105,19 +104,14 @@
     NSMutableArray *items_temp = [NSMutableArray array];
     CGFloat data_item_X = 0;
     CGFloat data_item_Y = 0;
-    CGFloat data_item_H = data_item_count_Y + data_item_count_H  + XMARGIN;
+    CGFloat data_item_H = CGRectGetMaxY(self.data_item_countFrame)  + XMARGIN;
     for (NSInteger index = 0; index < 4; index++) {
-        
         data_item_X  = data_item_W * index;
-        
         [items_temp addObject: [NSValue valueWithCGRect:CGRectMake(data_item_X, data_item_Y, data_item_W, data_item_H)]];
-        
     }
-    
     self.data_item_Frames = [items_temp copy];
     
     CGFloat data_H =  data_item_H;
-    
     self.dataView_Frame = CGRectMake(data_X, data_Y, data_W, data_H);
     
     //-----------------------dataView-------------这里结束---------------------------------------------
@@ -125,16 +119,14 @@
     //7、简介
     CGFloat intro_X = logo_X;
     CGFloat intro_Y = CGRectGetMaxY(self.dataView_Frame) +   2 * XMARGIN;
-    CGFloat intro_W = centerWidth - 2 * intro_X;
+    CGFloat intro_W = data_W;
     NSMutableParagraphStyle *descStyle = [[NSMutableParagraphStyle alloc]init];
     [descStyle setLineSpacing:6];//行间距
-    
-    CGSize instr_Size = [self.item.introduction boundingRectWithSize:CGSizeMake(intro_W, MAXFLOAT)
+    CGSize instr_Size = [self.uni.introduction boundingRectWithSize:CGSizeMake(intro_W, MAXFLOAT)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:@{NSFontAttributeName:XFONT(official_Font_Size),
                                                            NSParagraphStyleAttributeName :descStyle}
                                                  context:nil].size;
-    
     CGFloat intro_H = instr_Size.height;
     self.introduction_Frame= CGRectMake(intro_X, intro_Y, intro_W, intro_H);
     
@@ -145,38 +137,73 @@
     CGFloat up_H =  XPERCENT * 200;
     self.upViewFrame= CGRectMake(up_X, up_Y, up_W, up_H);
     
-    //9、标签2
-    CGFloat tag2X = 0;
-    CGFloat tag2W = XSCREEN_WIDTH;
-    CGFloat tag2H = XFONT_SIZE(16);
-    CGFloat tag2Y = up_H -  60 - tag2H;
-    self.tagsTwoFrame= CGRectMake(tag2X, tag2Y, tag2W, tag2H);
+    //计算标签字符长度
+    CGFloat tg_x = 0;
+    CGFloat tg_w = XSCREEN_WIDTH;
+    CGFloat tg_h = XFONT_SIZE(16);
+    CGFloat tgs_top =  up_H - 2 * tg_h - 68;
+    CGFloat tg_y = tgs_top;
     
-    //10、标签1
-    CGFloat tag1H = tag2H;
-    CGFloat tag1X = tag2X;
-    CGFloat tag1Y = tag2Y - tag1H  -  5;
-    CGFloat tag1W = XSCREEN_WIDTH;
-    self.tagsOneFrame= CGRectMake(tag1X, tag1Y, tag1W, tag1H);
+    NSString *line_str = @"";
+    NSString *line_str_pre = @"";
+    NSMutableArray *lines = [NSMutableArray array];
+    NSInteger last_index =  (uni.tags.count - 1);
+    for (NSInteger index = 0 ; index <uni.tags.count; index++) {
+        //不超过2行数据
+        if (lines.count > 2) break;
+        
+        NSString *tag = uni.tags[index];
+        if (line_str.length != 0) {
+            tag = [NSString stringWithFormat:@" . %@",tag];
+        }
+        line_str_pre = line_str;
+        line_str = [NSString stringWithFormat:@"%@%@",line_str,tag];
+        CGSize tagSize = [line_str KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(16))];
+       
+        if (tagSize.width > (tg_w - 30)) {
+            
+            if ([line_str containsString:@"."]) {
+                [lines addObject:line_str_pre];
+                line_str = uni.tags[index];
+            }else{
+                [lines addObject:line_str];
+                line_str = @"";
+            }
+            
+        }
+        if (index == last_index && line_str.length > 0) {
+            [lines addObject:line_str];
+        }
+        
+    }
+    uni.tags_Arr = [lines copy];
+ 
+    NSMutableArray *tg_tmp = [NSMutableArray array];
+    for (NSInteger index = 0; index < lines.count; index++) {
+        tg_y += (tg_h + 5) * index;
+        CGRect itemFrame = CGRectMake(tg_x , tg_y, tg_w, tg_h);
+        [tg_tmp addObject:NSStringFromCGRect(itemFrame)];
+    }
+    self.tag_Frames = [tg_tmp copy];
+ 
     
     //10、世界排名
     CGFloat QS_W = [@"全球QS排名" KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(16))].width + 5;
     CGFloat QS_H = 46;
     CGFloat QS_X = 0.5 * (XSCREEN_WIDTH - 2 * QS_W - 2 * XMARGIN);
-    CGFloat QS_Y =  tag1Y - QS_H - XMARGIN;
+    CGFloat QS_Y =  tgs_top - QS_H - XMARGIN;
     
     //11、本国排名
     CGFloat TIMES_X = QS_X + QS_W + 2 * XMARGIN;
     CGFloat TIMES_Y = QS_Y;
     CGFloat TIMES_H = QS_H;
     CGFloat TIMES_W = QS_W;
-    
     self.QS_Frame= CGRectMake(QS_X, QS_Y, QS_W, QS_H);
-    
     self.TIMES_Frame= CGRectMake(TIMES_X, TIMES_Y, TIMES_W, TIMES_H);
+ 
     
+    [self updateCenterViewFrame:uni];
     
-    [self updateCenterViewFrame:item];
     
     //12、分享、收藏View
     CGFloat rightW =  80  +  XMARGIN;
@@ -186,13 +213,12 @@
     self.rightView_Frame= CGRectMake(rightX, rightY, rightW, rightH);
     
     
-    [self oneSectonWithUni:item];
+    [self oneSectonWithUni:uni];
     
 }
 
 
 - (void)updateCenterViewFrame:(UniversitydetailNew *)item{
-
    
     CGFloat  centerWidth = XSCREEN_WIDTH - 2 * XMARGIN;
 
@@ -276,15 +302,13 @@
 
     _showMore = showMore;
     
-    [self updateCenterViewFrame:self.item];
+    [self updateCenterViewFrame:self.uni];
     
 }
 
 
 
 -(void)oneSectonWithUni:(UniversitydetailNew *)item{
-    
-    _item = item;
     
     //1、校园风光
     CGFloat fenguan_X = 0;
@@ -380,7 +404,7 @@
 
 
 
--(void)makeButtonItems:(NSArray *)options{
+- (void)makeButtonItems:(NSArray *)options{
     
     NSMutableArray *temp_Arr = [NSMutableArray array];
     
@@ -399,25 +423,16 @@
     for (int i = 0; i < options.count; i ++) {
         
         NSString *option = options[i];
-        
         itemW = [option KD_sizeWithAttributeFont:[UIFont systemFontOfSize:14]].width + padding;
         itemW = itemW <  MinWidth ? MinWidth : itemW;
         itemW = itemW > MAXWidth ? MAXWidth : itemW;
-        
         if (MAXWidth - itemX < itemW) {
-            
             itemY += (itemH + padding);
-            
             itemX = 0;
         }
-        
-        
         CGRect  optionFrame =  CGRectMake(itemX, itemY, itemW, itemH);
-        
         [temp_Arr addObject:[NSValue valueWithCGRect:optionFrame]];
-        
         itemX += (itemW + padding);   //起点 增加
-        
     }
     
     self.subjectItemFrames = [temp_Arr copy];

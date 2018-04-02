@@ -109,9 +109,7 @@
     
 }
 
--(void)SearchDaraSourse
-{
-    
+-(void)SearchDaraSourse{
     
     FiltContent  *historyHot = [FiltContent filterWithIcon:@"search_historyHot"  title:GDLocalizedString(@ "SearchVC-hot") subtitlte:@"" filterOptionItems:nil];
     FilterContentFrame *historyHotFrame = [FilterContentFrame filterFrameWithFilter:historyHot];
@@ -192,7 +190,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     
     FilterTableViewCell *cell =[FilterTableViewCell cellInitWithTableView:tableView];
     cell.upButton.hidden = YES;

@@ -22,10 +22,10 @@
 @property(nonatomic,strong)UILabel *QSrankLab;
 //本国排名
 @property(nonatomic,strong)UILabel *TIMESLab;
-//标签
-@property(nonatomic,strong)UILabel *tagOneLab;
-//标签
-@property(nonatomic,strong)UILabel *tagTwoLab;
+////标签
+//@property(nonatomic,strong)UILabel *tagOneLab;
+////标签
+//@property(nonatomic,strong)UILabel *tagTwoLab;
 //收藏、分享
 @property(nonatomic,strong)UniversityRightView *rightView;
 
@@ -35,9 +35,7 @@
 + (instancetype)headerTableViewWithUniFrame:(UniversityNewFrame *)universityFrame{
 
     UniverstyHeaderView  * header  = [[UniverstyHeaderView alloc] init];
-  
     header.clipsToBounds           = YES;
-   
     header.uniFrame   = universityFrame;
     
     return header;
@@ -55,21 +53,16 @@
         self.downView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.downView];
         
-        
         XWeakSelf
         UniversityheaderCenterView *centerView =  [UniversityheaderCenterView headerCenterViewWithBlock:^(UIButton *sender) {
-         
             [weakSelf onclick:sender];
-
         }];
         self.centerView = centerView;
         [self addSubview:centerView];
         
         //右侧收藏、分享
         self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
-            
             [weakSelf onclick:sender];
-            
         }];
         [self addSubview:self.rightView];
 
@@ -86,17 +79,6 @@
         self.TIMESLab = timesLab;
         [self textShadowWithLabel:timesLab];
 
-        //大学标签
-        UILabel *tagOneLab = [UILabel labelWithFontsize:XFONT_SIZE(16) TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
-        tagOneLab.numberOfLines = 0;
-        self.tagOneLab = tagOneLab;
-        [self textShadowWithLabel:tagOneLab];
-
-        //大学标签
-        UILabel *tagTwoLab = [UILabel labelWithFontsize:XFONT_SIZE(16) TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
-        tagTwoLab.numberOfLines = 0;
-        self.tagTwoLab = tagTwoLab;
-        [self textShadowWithLabel:tagTwoLab];
 
 
     }
@@ -110,7 +92,6 @@
     sender.layer.shadowOffset = CGSizeMake(0,0);
     sender.layer.shadowOpacity = 0.9;
     sender.layer.shadowRadius = 2.0;
-    //        qsLab.clipsToBounds = NO;
     [self.upView addSubview:sender];
 
 }
@@ -121,32 +102,23 @@
     _uniFrame = uniFrame;
     
     self.upView.frame =  uniFrame.upViewFrame;
-    
     self.downView.frame =   uniFrame.downViewFrame;
-    
     self.centerView.frame =   uniFrame.centerView_Frame;
-    
     self.centerView.UniversityFrame =   uniFrame;
-    
     self.TIMESLab.frame =   uniFrame.TIMES_Frame;
-    
     self.QSrankLab.frame =   uniFrame.QS_Frame;
     
     //更新 世界、本地排名 及大学标签
     [self configurationWithUniversityFrame:uniFrame];
 
-    [self.rightView shadowWithFavorited:uniFrame.item.favorited];
-    
+    [self.rightView shadowWithFavorited:uniFrame.uni.favorited];
   
 }
 
 - (void)onclick:(UIButton *)sender{
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-        
-    }
+    if (self.actionBlock) self.actionBlock(sender);
+ 
 }
 
 
@@ -169,93 +141,38 @@
 - (void)configurationWithUniversityFrame:(UniversityNewFrame *)itemFrame{
 
     
-    NSString *localName = [itemFrame.item.country isEqualToString:@"美国"] ? @"TIMES排名":@"本国排名";
-    NSString *times = [NSString stringWithFormat:@"%@\n%@",itemFrame.item.ranking_ti_str,localName];
-    NSRange timesRange = [times rangeOfString:itemFrame.item.ranking_ti_str];
+    NSString *localName = [itemFrame.uni.country isEqualToString:@"美国"] ? @"TIMES排名":@"本国排名";
+    NSString *times = [NSString stringWithFormat:@"%@\n%@",itemFrame.uni.ranking_ti_str,localName];
+    NSRange timesRange = [times rangeOfString:itemFrame.uni.ranking_ti_str];
     NSMutableAttributedString *timesAttri = [[NSMutableAttributedString alloc] initWithString:times];
     [timesAttri addAttribute:NSFontAttributeName value:XFONT(XFONT_SIZE(22)) range: NSMakeRange (0, timesRange.length)];
     self.TIMESLab.attributedText = timesAttri;
     
-    NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",itemFrame.item.ranking_qs_str];
-    NSRange qs_Range = [qs rangeOfString:[NSString stringWithFormat:@"%@",itemFrame.item.ranking_qs_str]];
+    NSString *qs = [NSString stringWithFormat:@"%@\n世界排名",itemFrame.uni.ranking_qs_str];
+    NSRange qs_Range = [qs rangeOfString:[NSString stringWithFormat:@"%@",itemFrame.uni.ranking_qs_str]];
     NSMutableAttributedString *qsAttri = [[NSMutableAttributedString alloc] initWithString:qs];
     [qsAttri addAttribute:NSFontAttributeName value:XFONT(XFONT_SIZE(22)) range: NSMakeRange (0, qs_Range.length)];
     self.QSrankLab.attributedText = qsAttri;
     
-    
-    
-    NSMutableString *oneStr =  [NSMutableString string];
-    NSString *lastOneStr = @"";
-    NSInteger lastIndex = 0;
-    for (NSInteger index = 0 ; index < itemFrame.item.tags.count; index++) {
+
+    if (itemFrame.uni.tag_on) return;
+    itemFrame.uni.tag_on = YES;
+    for (NSInteger index = 0; index <  itemFrame.uni.tags_Arr.count; index++) {
         
-        lastIndex = index;
-        
-        if (index ==0) {
-            
-            [oneStr appendString:itemFrame.item.tags[index]];
-            
-            lastOneStr = [oneStr copy];
-            
-        }else{
-            
-            lastOneStr = [oneStr copy];
-            
-            [oneStr appendString:@" . "];
-            [oneStr appendString:itemFrame.item.tags[index]];
-        }
-        
-        
-        CGSize oneSize = [oneStr KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(16))];
-        
-        if (oneSize.width > (itemFrame.tagsOneFrame.size.width  - 30)) {
-            
-            lastIndex = index;
-            oneStr = [lastOneStr mutableCopy];
-            
-            break;
-        }
-        
+        UILabel *sender = [UILabel labelWithFontsize:XFONT_SIZE(16) TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];
+        [self.upView addSubview:sender];
+        sender.text = itemFrame.uni.tags_Arr[index];
+        [self textShadowWithLabel:sender];
+        NSString *tag_frame_str = itemFrame.tag_Frames[index];
+        sender.frame = CGRectFromString(tag_frame_str);
     }
-    self.tagOneLab.text = oneStr;
-    self.tagOneLab.frame = itemFrame.tagsOneFrame;
     
     
-    NSMutableString *twoStr =  [NSMutableString string];
-    NSString *lastTwoStr = @"";
-    for (NSInteger indexx = (lastIndex + 1); indexx < itemFrame.item.tags.count; indexx++) {
-        
-        if (indexx ==  (lastIndex + 1)) {
-            
-            [twoStr appendString:itemFrame.item.tags[indexx]];
-            
-            lastTwoStr = [twoStr copy];
-            
-        }else{
-            
-            lastTwoStr = [twoStr copy];
-            
-            [twoStr appendString:@" . "];
-            [twoStr appendString:itemFrame.item.tags[indexx]];
-        }
-        
-        CGSize oneSize = [twoStr KD_sizeWithAttributeFont:XFONT(XFONT_SIZE(16))];
-        
-        if (oneSize.width > (itemFrame.tagsOneFrame.size.width  - 30)) {
-            
-            twoStr = [lastTwoStr mutableCopy];
-            
-            break;
-        }
-        
-    }
-    self.tagTwoLab.text = twoStr;
-    self.tagTwoLab.frame = itemFrame.tagsTwoFrame;
 }
 
 - (void)dealloc{
     
-    KDClassLog(@" 学校详情  UniverstyHeaderView dealloc OK");
+    KDClassLog(@" 学校详情  + UniverstyHeaderView + dealloc");
     
 }
 

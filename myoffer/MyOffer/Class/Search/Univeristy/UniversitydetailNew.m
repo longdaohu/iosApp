@@ -15,6 +15,17 @@
     
 }
 
++ (NSDictionary *)mj_objectClassInArray{
+    
+    return @{
+             @"global_rank_history" : @"UniversityDetailRank",
+             @"local_rank_history" : @"UniversityDetailRank",
+             @"rankNeighbour" : @"MyOfferUniversityModel",
+             @"relate_articles" : @"MyOfferArticle"
+             };
+}
+
+
 - (NSString *)address_long{
     
     return [NSString stringWithFormat:@"%@ | %@ | %@",self.country,self.state,self.city];
@@ -67,6 +78,7 @@
     
     return  _introduction ? _introduction : tmp_intr;
 }
+
 
 
 @end

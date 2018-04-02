@@ -108,12 +108,9 @@
         
         return;
     }
-
     
     if (!self.showLab.hidden) return;
-    
     //	'universityId': 'level' // 0:不推荐|1:冲刺|2:核心|3:保底     你获得offer的难易度  蓝字
-    
     NSString *levelStr;
     
     switch (level) {

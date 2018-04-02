@@ -416,12 +416,8 @@
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
     
     [[APIClient defaultClient] startTaskWithRequest:request expectedStatusCodes:nil success:^(NSInteger statusCode, id response) {
-        
-        
     } failure:^(NSInteger statusCode, NSError *error) {
-        
         [self showAPIErrorAlertView:error clickAction:nil];
-        
     }];
 }
 
