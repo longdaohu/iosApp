@@ -162,7 +162,6 @@
     if (page.integerValue == 0 && self.rank_groups.count > 0) {
         
         [self.rank_tableView  scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        
     }
  
 }
@@ -211,7 +210,7 @@
     CGFloat baseX = 0;
     CGFloat baseY = CGRectGetMaxY(self.topView.frame);
     CGFloat baseW = XSCREEN_WIDTH;
-    CGFloat baseH = XSCREEN_HEIGHT - 49- XNAV_HEIGHT;//49为底部导航高度
+    CGFloat baseH = XSCREEN_HEIGHT - 49 - XNAV_HEIGHT;//49为底部导航高度
     self.bgView = [CatigaryScrollView viewWithFrame:CGRectMake(baseX, baseY, baseW,baseH)];
     self.bgView.bounces = NO;
     self.bgView.delegate = self;

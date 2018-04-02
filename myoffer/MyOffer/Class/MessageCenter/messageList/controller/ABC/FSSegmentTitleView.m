@@ -74,6 +74,10 @@
         return;
     }
     
+    if (self.indicatorView.bounds.size.width == 0) {
+        self.indicatorView.frame = CGRectMake(0, self.bounds.size.height - 2, 1, 2);
+    }
+    
     CGFloat totalBtnWidth = 0.0;
     
     UIFont *titleFont = _titleFont;

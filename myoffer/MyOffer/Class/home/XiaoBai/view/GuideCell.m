@@ -28,12 +28,11 @@
     
     self.tagLab.layer.cornerRadius = 10;
     self.tagLab.layer.masksToBounds = true;
-    
     self.collectView.dataSource = self;
     self.collectView.delegate = self;
     [self.collectView registerNib:[UINib nibWithNibName:NSStringFromClass([GuideItemCell class] ) bundle:nil] forCellWithReuseIdentifier: NSStringFromClass([GuideItemCell class] )];
     self.collectView.contentInset = UIEdgeInsetsMake(0, 0, 0, 14);
-    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setProcess:(GuideProcess *)process{

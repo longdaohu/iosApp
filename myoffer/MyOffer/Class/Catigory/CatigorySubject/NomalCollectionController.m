@@ -26,7 +26,6 @@ static NSString * const reuseIdentifier = @"subjectCell";
     [super viewDidLoad];
     
     CGFloat item_width = (XSCREEN_WIDTH - 4) / 3;
-    
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
     flowlayout.itemSize = CGSizeMake(item_width, item_width);
     flowlayout.minimumLineSpacing = 2;
@@ -49,15 +48,12 @@ static NSString * const reuseIdentifier = @"subjectCell";
 }
 
 
-
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
@@ -97,9 +93,7 @@ static NSString * const reuseIdentifier = @"subjectCell";
 -(void)caseSubjectWithIndexPath:(NSIndexPath *)indexPath{
     
     CatigorySubject *subject = self.items[indexPath.row];
-    
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:subject.title];
-    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -19,18 +19,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
  
     self.iconView.layer.cornerRadius = 5;
     self.iconView.layer.masksToBounds = true;
-   
     self.tagLab.layer.cornerRadius = 2;
     self.tagLab.layer.masksToBounds = true;
-    
     self.contentView.layer.shadowOffset = CGSizeMake(3, 6);
     self.contentView.layer.shadowOpacity = 0.1;
     self.contentView.layer.shadowRadius = 4;
- 
 }
 
 - (void)setItem:(GuideItem *)item{

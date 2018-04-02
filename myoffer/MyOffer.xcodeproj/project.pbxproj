@@ -233,7 +233,6 @@
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
-		AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6643A31E6FA820002FC072 /* GonglueItem.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
@@ -899,8 +898,6 @@
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
 		AE61A9951EAEF44600AC4B43 /* SearchUniversityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniversityCenterViewController.h; sourceTree = "<group>"; };
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
-		AE6643A21E6FA820002FC072 /* GonglueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GonglueItem.h; sourceTree = "<group>"; };
-		AE6643A31E6FA820002FC072 /* GonglueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GonglueItem.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
 		AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferGroupModel.m; sourceTree = "<group>"; };
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
@@ -1588,7 +1585,7 @@
 			children = (
 				AE4C71361F4EA3830069E83E /* myApply */,
 				AEA249911D5B215300DD7939 /* person */,
-				AEA24A0C1D5B231200DD7939 /* ZhiNengPiPei */,
+				AEA24A0C1D5B231200DD7939 /* pipei */,
 				AEA249291D5B215300DD7939 /* order_Group */,
 				AEA249471D5B215300DD7939 /* Apply_TIJIAO */,
 				AEA2496A1D5B215300DD7939 /* ApplyList */,
@@ -1804,14 +1801,14 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		AE36C4591E9F6C9100EE42F9 /* serviceHome */ = {
+		AE36C4591E9F6C9100EE42F9 /* index */ = {
 			isa = PBXGroup;
 			children = (
 				AE9E6EE71E851D3A00203C00 /* C */,
 				AE9E6EE81E851D3A00203C00 /* M */,
 				AE9E6EE91E851D3A00203C00 /* V */,
 			);
-			name = serviceHome;
+			name = index;
 			sourceTree = "<group>";
 		};
 		AE3943CC1E0A1AD00038826A /* SDCycleScrollView */ = {
@@ -1843,33 +1840,33 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
-		AE3AB6861F21A27300A3C7E3 /* sm_detail */ = {
+		AE3AB6861F21A27300A3C7E3 /* detail */ = {
 			isa = PBXGroup;
 			children = (
 				AE3AB6B91F21A34300A3C7E3 /* C */,
 				AE3AB6BA1F21A34500A3C7E3 /* V */,
 				AE3AB6B81F21A33F00A3C7E3 /* M */,
 			);
-			path = sm_detail;
+			path = detail;
 			sourceTree = "<group>";
 		};
-		AE3AB6871F21A27300A3C7E3 /* sm_home */ = {
+		AE3AB6871F21A27300A3C7E3 /* index */ = {
 			isa = PBXGroup;
 			children = (
 				AE3AB6BD1F21A36E00A3C7E3 /* C */,
 				AE3AB6BC1F21A36B00A3C7E3 /* V */,
 				AE3AB6BB1F21A36800A3C7E3 /* M */,
 			);
-			path = sm_home;
+			path = index;
 			sourceTree = "<group>";
 		};
-		AE3AB6A51F21A27300A3C7E3 /* sm_list */ = {
+		AE3AB6A51F21A27300A3C7E3 /* list */ = {
 			isa = PBXGroup;
 			children = (
 				AE3AB6A61F21A27300A3C7E3 /* SMListViewController.h */,
 				AE3AB6A71F21A27300A3C7E3 /* SMListViewController.m */,
 			);
-			path = sm_list;
+			path = list;
 			sourceTree = "<group>";
 		};
 		AE3AB6B81F21A33F00A3C7E3 /* M */ = {
@@ -2131,9 +2128,9 @@
 		AE4B2E831F1E0C6D00E328F7 /* superMaster */ = {
 			isa = PBXGroup;
 			children = (
-				AE3AB6861F21A27300A3C7E3 /* sm_detail */,
-				AE3AB6871F21A27300A3C7E3 /* sm_home */,
-				AE3AB6A51F21A27300A3C7E3 /* sm_list */,
+				AE3AB6861F21A27300A3C7E3 /* detail */,
+				AE3AB6871F21A27300A3C7E3 /* index */,
+				AE3AB6A51F21A27300A3C7E3 /* list */,
 			);
 			path = superMaster;
 			sourceTree = "<group>";
@@ -2248,14 +2245,14 @@
 			path = UUChart;
 			sourceTree = "<group>";
 		};
-		AE6FF2911E8912A200C2A013 /* serviceDetail */ = {
+		AE6FF2911E8912A200C2A013 /* detail */ = {
 			isa = PBXGroup;
 			children = (
 				AE6FF2921E8912A200C2A013 /* C */,
 				AE6FF2961E8912A200C2A013 /* M */,
 				AE6FF2971E8912A200C2A013 /* V */,
 			);
-			name = serviceDetail;
+			name = detail;
 			path = "服务详情";
 			sourceTree = "<group>";
 		};
@@ -2308,14 +2305,14 @@
 			path = V;
 			sourceTree = "<group>";
 		};
-		AE6FF29A1E8915F100C2A013 /* serviceCountry */ = {
+		AE6FF29A1E8915F100C2A013 /* country */ = {
 			isa = PBXGroup;
 			children = (
 				AE6FF29B1E8915F100C2A013 /* C */,
 				AE6FF29C1E8915F100C2A013 /* M */,
 				AE6FF29D1E8915F100C2A013 /* V */,
 			);
-			name = serviceCountry;
+			name = country;
 			path = "国家服务";
 			sourceTree = "<group>";
 		};
@@ -2646,9 +2643,9 @@
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
-				AE36C4591E9F6C9100EE42F9 /* serviceHome */,
-				AE6FF29A1E8915F100C2A013 /* serviceCountry */,
-				AE6FF2911E8912A200C2A013 /* serviceDetail */,
+				AE36C4591E9F6C9100EE42F9 /* index */,
+				AE6FF29A1E8915F100C2A013 /* country */,
+				AE6FF2911E8912A200C2A013 /* detail */,
 			);
 			path = myOfferMall;
 			sourceTree = "<group>";
@@ -2908,24 +2905,24 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		AEA24A0C1D5B231200DD7939 /* ZhiNengPiPei */ = {
+		AEA24A0C1D5B231200DD7939 /* pipei */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A0D1D5B231200DD7939 /* Pipei_result */,
-				AEA24A171D5B231200DD7939 /* pipei */,
+				AEA24A0D1D5B231200DD7939 /* result */,
+				AEA24A171D5B231200DD7939 /* edit */,
 			);
-			name = ZhiNengPiPei;
-			path = Class/ZhiNengPiPei;
+			name = pipei;
+			path = Class/pipei;
 			sourceTree = "<group>";
 		};
-		AEA24A0D1D5B231200DD7939 /* Pipei_result */ = {
+		AEA24A0D1D5B231200DD7939 /* result */ = {
 			isa = PBXGroup;
 			children = (
 				AE9414D3206B963100D636A0 /* model */,
 				AEA24A0E1D5B231200DD7939 /* controller */,
 				AEA24A131D5B231200DD7939 /* view */,
 			);
-			name = Pipei_result;
+			name = result;
 			path = "匹配结果";
 			sourceTree = "<group>";
 		};
@@ -2952,14 +2949,14 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		AEA24A171D5B231200DD7939 /* pipei */ = {
+		AEA24A171D5B231200DD7939 /* edit */ = {
 			isa = PBXGroup;
 			children = (
 				AEA24A181D5B231200DD7939 /* controller */,
 				AEA24A1F1D5B231200DD7939 /* model */,
 				AEA24A261D5B231200DD7939 /* view */,
 			);
-			name = pipei;
+			name = edit;
 			path = "智能匹配";
 			sourceTree = "<group>";
 		};
@@ -3089,9 +3086,9 @@
 		AEA24A731D5B23F600DD7939 /* XiaoBai */ = {
 			isa = PBXGroup;
 			children = (
-				AE91DDC81FBBE10200CD06BD /* model */,
 				AEA24A741D5B23F600DD7939 /* controller */,
-				AEA24A791D5B23F600DD7939 /* View */,
+				AE91DDC81FBBE10200CD06BD /* model */,
+				AEA24A791D5B23F600DD7939 /* view */,
 			);
 			path = XiaoBai;
 			sourceTree = "<group>";
@@ -3099,15 +3096,13 @@
 		AEA24A741D5B23F600DD7939 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				AE6643A21E6FA820002FC072 /* GonglueItem.h */,
-				AE6643A31E6FA820002FC072 /* GonglueItem.m */,
 				AE91DDC51FBBDEF100CD06BD /* GuideOverseaViewController.h */,
 				AE91DDC61FBBDEF100CD06BD /* GuideOverseaViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
 		};
-		AEA24A791D5B23F600DD7939 /* View */ = {
+		AEA24A791D5B23F600DD7939 /* view */ = {
 			isa = PBXGroup;
 			children = (
 				AEA24A831D5B23F600DD7939 /* XBTopToolView.h */,
@@ -3119,7 +3114,7 @@
 				AE91DDDE1FBC169F00CD06BD /* GuideItemCell.m */,
 				AE91DDDF1FBC169F00CD06BD /* GuideItemCell.xib */,
 			);
-			path = View;
+			path = view;
 			sourceTree = "<group>";
 		};
 		AEA24AA51D5B24D200DD7939 /* set */ = {
@@ -4312,7 +4307,6 @@
 				AE91DDE01FBC169F00CD06BD /* GuideItemCell.m in Sources */,
 				AE4B2E6D1F1E095600E328F7 /* FSBottomTableViewCell.m in Sources */,
 				AE914EE51F41A563008A43CD /* ApplyStatusHistoryFrameModel.m in Sources */,
-				AE6643A41E6FA820002FC072 /* GonglueItem.m in Sources */,
 				AEA249CA1D5B215300DD7939 /* ApplyStatusRecord.m in Sources */,
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AE033FD42018395900D1D425 /* myOfferMenuItem.m in Sources */,

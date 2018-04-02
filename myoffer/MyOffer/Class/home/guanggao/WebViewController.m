@@ -23,8 +23,7 @@
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property(nonatomic,strong)MBProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
-//智能匹配数量
-@property(nonatomic,assign)NSInteger recommendationsCount;
+@property(nonatomic,assign)NSInteger recommendationsCount;//智能匹配数量
 @end
 
 @implementation WebViewController

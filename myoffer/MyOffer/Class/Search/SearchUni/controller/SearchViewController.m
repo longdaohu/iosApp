@@ -15,14 +15,10 @@
 #define SEARCHPAGE @"page搜索"
 
 @interface SearchViewController ()<FilterTableViewCellDelegate>
-@property(nonatomic,strong)UITableView *tableView;
-//搜索数据
-@property(nonatomic,strong)NSMutableArray *FiltItems;
-//热门搜索
-@property(nonatomic,strong)NSArray *recommentArray;
-//历史搜索
-@property(nonatomic,strong)NSArray *historyArray;
+//@property(nonatomic,strong)NSMutableArray *FiltItems;//搜索数据
+@property(nonatomic,strong)NSMutableArray *groups;//搜索数据
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarConstant;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -57,14 +53,24 @@
     
 }
 
--(NSMutableArray *)FiltItems
+//-(NSMutableArray *)FiltItems
+//{
+//    if (!_FiltItems) {
+//
+//        _FiltItems = [NSMutableArray array];
+//    }
+//    return _FiltItems;
+//}
+
+-(NSMutableArray *)groups
 {
-    if (!_FiltItems) {
+    if (!_groups) {
         
-        _FiltItems = [NSMutableArray array];
+        _groups = [NSMutableArray array];
     }
-    return _FiltItems;
+    return _groups;
 }
+
 
 
 -(void)makeUI
@@ -93,12 +99,8 @@
 
 -(void)makeTableView{
 
-    self.tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, XNAV_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate   = self;
     self.tableView.allowsSelection = NO;
     self.tableView.tableFooterView =[[UIView alloc] init];
-    [self.view addSubview: self.tableView];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -107,60 +109,57 @@
     
 }
 
-
-
-
--(void)setDataSourceWithContent:(FiltContent *)filter{
-    
-    FilterContentFrame *filterFrame = [FilterContentFrame filterFrameWithFilter:filter];
-    
-    [self.FiltItems addObject:filterFrame];
-    
-    [self.tableView reloadData];
-
-}
-
 -(void)SearchDaraSourse
 {
     
+    
+    FiltContent  *historyHot = [FiltContent filterWithIcon:@"search_historyHot"  title:GDLocalizedString(@ "SearchVC-hot") subtitlte:@"" filterOptionItems:nil];
+    FilterContentFrame *historyHotFrame = [FilterContentFrame filterFrameWithFilter:historyHot];
+    [self.groups addObject:historyHotFrame];
+
     XWeakSelf
     //请求推荐数据
     [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
         
-        if (weakSelf.recommentArray.count ==0) {
+        NSArray *items = (NSArray *)response;
+        
+        if (items.count > 0){
             
-            weakSelf.recommentArray = [response copy];
+            historyHot.optionItems = items;
+            historyHotFrame.filter = historyHot;
             
-            FiltContent  *recomment = [FiltContent filterWithIcon:@"search_historyHot"  title:GDLocalizedString(@ "SearchVC-hot") subtitlte:@"" filterOptionItems:self.recommentArray];
-             [weakSelf setDataSourceWithContent:recomment];
+        }else{
             
+            [weakSelf.groups removeObject:historyHotFrame];
         }
+        
+         [weakSelf.tableView reloadData];
         
     }];
     
     
-    if (!LOGIN) return; //未登录不加载下一步
+    if (!LOGIN)return; //未登录不加载下一步
+    
+    FiltContent  *history = [FiltContent filterWithIcon:@"search_history"  title:GDLocalizedString(@ "SearchVC-history") subtitlte:@"" filterOptionItems:nil];
+    FilterContentFrame *historyFrame = [FilterContentFrame filterFrameWithFilter:history];
+    [self.groups addObject:historyFrame];
     
     //请求历史数据
     [self startAPIRequestWithSelector:kAPISelectorhistorySearch parameters:nil success:^(NSInteger statusCode, id response) {
         
+        NSArray *text_arr =  [response valueForKeyPath:@"text"];
         
-        NSMutableArray *histories = [NSMutableArray array];
-        
-        for (NSDictionary *historyInfo in response) {
+        if (text_arr.count > 0){
             
-            [histories addObject:historyInfo[@"text"]];
+            history.optionItems = text_arr;
+            historyFrame.filter = history;
+        
+        }else{
+        
+            [weakSelf.groups removeObject:historyFrame];
         }
         
-        if (weakSelf.historyArray.count == 0) {
-            
-            weakSelf.historyArray = [histories copy];
-            
-            FiltContent  *histroy = [FiltContent filterWithIcon:@"search_history"  title:GDLocalizedString(@ "SearchVC-history") subtitlte:@"" filterOptionItems:self.historyArray];
-   
-            [weakSelf setDataSourceWithContent:histroy];
-
-        }
+        [weakSelf.tableView reloadData];
         
     }];
     
@@ -183,16 +182,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    FilterContentFrame *fileritem = self.FiltItems[indexPath.row];
+    FilterContentFrame *fileritem = self.groups[indexPath.row];
     
     return fileritem.cellHeigh;
-    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return   self.FiltItems.count;
-    
+    return   self.groups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -200,34 +196,30 @@
     
     FilterTableViewCell *cell =[FilterTableViewCell cellInitWithTableView:tableView];
     cell.upButton.hidden = YES;
-    cell.delegate        = self;
-    cell.indexPath       = indexPath;
-    cell.filterFrame     = self.FiltItems[indexPath.row];
+    cell.delegate   = self;
+    cell.indexPath   = indexPath;
+    cell.filterFrame    = self.groups[indexPath.row];
     
     return cell;
 }
 
 
 
-#pragma mark ——— FilterTableViewCellDelegate
+#pragma mark: FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
-    
     [self startSearchWithText:sender.currentTitle];
-    
 }
 
 
-#pragma mark : UIScrollViewDelegate
+#pragma mark: UIScrollViewDelegate
 -(void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     [_searchBar resignFirstResponder];
     //用于修改searchBar 失焦时，取消辽钮仍然可用
     for (UIView *view in [[_searchBar.subviews lastObject] subviews]) {
         if ([view isKindOfClass:[UIButton class]]) {
-            
             UIButton *cancelBtn = (UIButton *)view;
-            
             cancelBtn.enabled = YES;
         }
     }
@@ -246,7 +238,6 @@
     [searchBar resignFirstResponder];
     
     if (searchBar.text.length > 0) {
-        
         [self startSearchWithText:searchBar.text];
     }
     
@@ -255,7 +246,6 @@
 - (void)startSearchWithText:(NSString *)text {
     
     SearchUniversityCenterViewController *search = [[SearchUniversityCenterViewController alloc] initWithSearchValue:text];
-    
     [self.navigationController pushViewController:search animated:YES];
 }
 

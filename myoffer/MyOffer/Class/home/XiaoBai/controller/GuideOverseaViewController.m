@@ -9,7 +9,6 @@
 #import "GuideOverseaViewController.h"
 #import "GuideOverseaModel.h"
 #import "GuideProcess.h"
-#import "GuideItem.h"
 #import "GuideCell.h"
 #import "CatigoryViewController.h"
 #import "MessageDetaillViewController.h"
@@ -58,24 +57,17 @@
  
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorGuideOversea  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
         [weakSelf updateUIWithResponse:response];
-        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
         [weakSelf.tableView emptyViewWithError: NetRequest_ConnectError];
-        
     }];
 }
 
 - (void)makeUI{
     
     [self makeTableView];
-    
     self.title = @"留学指南";
-    
     self.view.backgroundColor = XCOLOR_WHITE;
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"咨询" style:UIBarButtonItemStyleDone target:self action:@selector(toHelp)];
     
 }
@@ -109,11 +101,8 @@
 - (void)updateUIWithResponse:(id)response{
     
     self.groups = [GuideOverseaModel mj_objectArrayWithKeyValuesArray:response];
- 
     for (GuideOverseaModel *guideModel  in self.groups) {
- 
         for (NSInteger row = 0; row < guideModel.process.count; row++) {
-            
             GuideProcess *pro = guideModel.process[row];
             pro.current_index = 1;
             pro.row = (row + 1);
@@ -122,23 +111,16 @@
     }
     
     self.current_guide  = self.groups.count > 0 ? self.groups[0] : nil;
-    
     [self.tableView reloadData];
-    
     self.current_guide ? [self makeTopView:self.groups] :   [self.tableView emptyViewWithError:NetRequest_NoDATA];
- 
 }
 
 - (void)makeTopView:(NSArray *)groups{
     
     NSArray *titles = [groups valueForKey:@"coutry"];
-    
     CGFloat top_height = 50;
-    
    FSSegmentTitleView *topView  = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds),top_height) titles:titles delegate:self indicatorType:FSIndicatorTypeEqualTitle];
-    
     [self.view addSubview:topView];
-    
     self.tableView.contentInset = UIEdgeInsetsMake(top_height  + 20, 0, XNAV_HEIGHT , 0);
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
@@ -155,16 +137,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GuideCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([GuideCell class]) forIndexPath:indexPath];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     cell.process = self.current_guide.process_arr[indexPath.row];
-    
     XWeakSelf
     cell.actionBlock = ^(NSString *url){
-        
         [weakSelf guideItemClick:url];
-        
     };
 
     return cell;
