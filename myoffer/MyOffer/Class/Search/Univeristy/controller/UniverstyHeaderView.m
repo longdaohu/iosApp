@@ -101,16 +101,19 @@
 
     _uniFrame = uniFrame;
     
-    self.upView.frame =  uniFrame.upViewFrame;
-    self.downView.frame =   uniFrame.downViewFrame;
     self.centerView.frame =   uniFrame.centerView_Frame;
     self.centerView.UniversityFrame =   uniFrame;
+
+    //已添加过没必要重复添加
+    if (uniFrame.uni.has_been_added) return;
+    uniFrame.uni.has_been_added = YES;
+    
+    self.downView.frame =   uniFrame.downViewFrame;
+    self.upView.frame =  uniFrame.upViewFrame;
     self.TIMESLab.frame =   uniFrame.TIMES_Frame;
     self.QSrankLab.frame =   uniFrame.QS_Frame;
-    
     //更新 世界、本地排名 及大学标签
     [self configurationWithUniversityFrame:uniFrame];
-
     [self.rightView shadowWithFavorited:uniFrame.uni.favorited];
   
 }
@@ -139,8 +142,7 @@
 
 //更新 世界、本地排名 及大学标签
 - (void)configurationWithUniversityFrame:(UniversityNewFrame *)itemFrame{
-
-    
+ 
     NSString *localName = [itemFrame.uni.country isEqualToString:@"美国"] ? @"TIMES排名":@"本国排名";
     NSString *times = [NSString stringWithFormat:@"%@\n%@",itemFrame.uni.ranking_ti_str,localName];
     NSRange timesRange = [times rangeOfString:itemFrame.uni.ranking_ti_str];
@@ -154,9 +156,6 @@
     [qsAttri addAttribute:NSFontAttributeName value:XFONT(XFONT_SIZE(22)) range: NSMakeRange (0, qs_Range.length)];
     self.QSrankLab.attributedText = qsAttri;
     
-
-    if (itemFrame.uni.tag_on) return;
-    itemFrame.uni.tag_on = YES;
     for (NSInteger index = 0; index <  itemFrame.uni.tags_Arr.count; index++) {
         
         UILabel *sender = [UILabel labelWithFontsize:XFONT_SIZE(16) TextColor:[UIColor whiteColor] TextAlignment:NSTextAlignmentCenter];

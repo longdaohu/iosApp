@@ -26,6 +26,7 @@
 #import "ApplyStatusNewCell.h"
 #import "ApplyStatusModelFrame.h"
 #import "myOfferPageViewController.h"
+#import "DiscountVC.h"
 
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -158,6 +159,9 @@
                 break;
             case centerItemTypefavor:
                 [self caseFave];
+                break;
+            case centerItemTypeDiscount:
+                [self caseDiscount];
                 break;
             default:
                 [self caseOrder];
@@ -554,6 +558,14 @@
     [self pushWithVC:NSStringFromClass([OrderViewController class])];
 
 }
+
+- (void)caseDiscount{
+    
+    [self pushWithVC:NSStringFromClass([DiscountVC class])];
+    
+}
+
+
 
 
 //跳转

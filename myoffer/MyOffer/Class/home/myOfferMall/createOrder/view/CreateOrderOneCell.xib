@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="204" id="KGk-i7-Jjw" customClass="CreateOrderOneCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="203.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QE7-Gu-ddg" userLabel="discountView">
+                        <rect key="frame" x="15" y="10" width="295" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCu-ea-LGh">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="20"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="zfY-QR-HB0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此商品参与优惠活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjS-Tf-8R2">
+                                <rect key="frame" x="45" y="0.0" width="240" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yjS-Tf-8R2" secondAttribute="bottom" id="1RI-s6-Gio"/>
+                            <constraint firstAttribute="bottom" secondItem="JCu-ea-LGh" secondAttribute="bottom" id="Dhc-Mt-A5a"/>
+                            <constraint firstAttribute="height" constant="20" id="HCh-SF-4nh"/>
+                            <constraint firstAttribute="trailing" secondItem="yjS-Tf-8R2" secondAttribute="trailing" constant="10" id="N7x-lg-jzm"/>
+                            <constraint firstItem="yjS-Tf-8R2" firstAttribute="top" secondItem="QE7-Gu-ddg" secondAttribute="top" id="UIS-CI-XwC"/>
+                            <constraint firstItem="JCu-ea-LGh" firstAttribute="leading" secondItem="QE7-Gu-ddg" secondAttribute="leading" id="gkY-Xd-M6D"/>
+                            <constraint firstItem="JCu-ea-LGh" firstAttribute="top" secondItem="QE7-Gu-ddg" secondAttribute="top" id="rhG-IN-3eH"/>
+                            <constraint firstItem="yjS-Tf-8R2" firstAttribute="leading" secondItem="JCu-ea-LGh" secondAttribute="trailing" constant="5" id="wft-qG-SXm"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ase-Yc-X2e">
+                        <rect key="frame" x="15" y="40" width="167" height="111"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="167" id="06W-Ox-WMb"/>
+                            <constraint firstAttribute="height" constant="111" id="LMa-EH-R0A"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="英国硕士预科留学服务1v1 VIP服务" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Rl-O4-pg1">
+                        <rect key="frame" x="187" y="40" width="123" height="38.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大学毕业生 专科毕业生 已就业" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0A-rx-DR3">
+                        <rect key="frame" x="187" y="136" width="123" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58o-wp-1Rd">
+                        <rect key="frame" x="188" y="108" width="50" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="适合人群">
+                            <color key="titleColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*购买商品后，请和相关咨询人员联系" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMw-pb-S3s">
+                        <rect key="frame" x="15" y="172" width="202" height="10.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="250" constant="202" id="lqN-Vd-JU6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥3000000000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTb-tD-daj">
+                        <rect key="frame" x="217" y="163.5" width="93" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QE7-Gu-ddg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="8vg-iZ-dvp"/>
+                    <constraint firstAttribute="trailing" secondItem="QE7-Gu-ddg" secondAttribute="trailing" constant="10" id="DVl-cw-gwP"/>
+                    <constraint firstItem="4Rl-O4-pg1" firstAttribute="top" secondItem="ase-Yc-X2e" secondAttribute="top" id="IqH-nk-WFm"/>
+                    <constraint firstItem="j0A-rx-DR3" firstAttribute="trailing" secondItem="4Rl-O4-pg1" secondAttribute="trailing" id="J3w-up-q2x"/>
+                    <constraint firstItem="KTb-tD-daj" firstAttribute="trailing" secondItem="j0A-rx-DR3" secondAttribute="trailing" id="JTi-VB-w93"/>
+                    <constraint firstItem="gMw-pb-S3s" firstAttribute="leading" secondItem="ase-Yc-X2e" secondAttribute="leading" id="Kcx-Tc-Rg8"/>
+                    <constraint firstItem="KTb-tD-daj" firstAttribute="centerY" secondItem="gMw-pb-S3s" secondAttribute="centerY" id="Q10-PG-Or9"/>
+                    <constraint firstAttribute="bottom" secondItem="gMw-pb-S3s" secondAttribute="bottom" constant="21" id="b0n-Op-KO8"/>
+                    <constraint firstItem="ase-Yc-X2e" firstAttribute="top" secondItem="QE7-Gu-ddg" secondAttribute="bottom" constant="10" id="bzk-r5-ust"/>
+                    <constraint firstItem="4Rl-O4-pg1" firstAttribute="leading" secondItem="ase-Yc-X2e" secondAttribute="trailing" constant="5" id="eJV-hK-j8i"/>
+                    <constraint firstItem="gMw-pb-S3s" firstAttribute="top" secondItem="ase-Yc-X2e" secondAttribute="bottom" constant="21" id="f0k-Kq-Beo"/>
+                    <constraint firstItem="j0A-rx-DR3" firstAttribute="bottom" secondItem="ase-Yc-X2e" secondAttribute="bottom" id="fXx-jb-yjl"/>
+                    <constraint firstItem="ase-Yc-X2e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="g6k-0z-RPv"/>
+                    <constraint firstItem="KTb-tD-daj" firstAttribute="leading" secondItem="gMw-pb-S3s" secondAttribute="trailing" id="gnw-1C-FGQ"/>
+                    <constraint firstItem="j0A-rx-DR3" firstAttribute="leading" secondItem="4Rl-O4-pg1" secondAttribute="leading" id="mne-it-fAO"/>
+                    <constraint firstAttribute="trailing" secondItem="4Rl-O4-pg1" secondAttribute="trailing" constant="10" id="o49-3p-45O"/>
+                    <constraint firstItem="QE7-Gu-ddg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="zqK-SR-IF0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="discount" destination="QE7-Gu-ddg" id="FBJ-Yv-LYm"/>
+                <outlet property="forPersonLab" destination="j0A-rx-DR3" id="pdG-BZ-9Vq"/>
+                <outlet property="iconView" destination="ase-Yc-X2e" id="Ye1-c1-GJh"/>
+                <outlet property="priceLab" destination="KTb-tD-daj" id="1kx-SM-6Au"/>
+                <outlet property="titleLab" destination="4Rl-O4-pg1" id="wND-sZ-ubA"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="130"/>
+        </tableViewCell>
+    </objects>
+</document>

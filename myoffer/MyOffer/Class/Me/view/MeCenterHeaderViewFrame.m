@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         
-        CGFloat item_Width = XSCREEN_WIDTH / 3;
+        CGFloat item_Width = XSCREEN_WIDTH / 4;
         
         self.item_Width = item_Width;
         

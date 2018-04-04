@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="OrderActionCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不使用优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hy-bh-88H">
+                        <rect key="frame" x="15" y="0.0" width="258" height="43.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="750" constant="43.5" id="3b6-ag-2pq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_discount_select" translatesAutoresizingMaskIntoConstraints="NO" id="N5C-kA-U5m">
+                        <rect key="frame" x="283" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="7S5-9U-8D1"/>
+                            <constraint firstAttribute="width" constant="22" id="k6K-Yc-Eti"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="N5C-kA-U5m" secondAttribute="trailing" constant="15" id="7gg-5F-KvB"/>
+                    <constraint firstItem="N5C-kA-U5m" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Of8-tt-WMG"/>
+                    <constraint firstAttribute="bottom" secondItem="8hy-bh-88H" secondAttribute="bottom" id="Tbi-cf-tP6"/>
+                    <constraint firstItem="N5C-kA-U5m" firstAttribute="leading" secondItem="8hy-bh-88H" secondAttribute="trailing" constant="10" id="YhQ-RP-opv"/>
+                    <constraint firstItem="8hy-bh-88H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oka-dI-3Iw"/>
+                    <constraint firstItem="8hy-bh-88H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="szp-BR-YMx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="iconView" destination="N5C-kA-U5m" id="FEq-Lo-mOy"/>
+            </connections>
+            <point key="canvasLocation" x="179" y="63"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="order_discount_select" width="24" height="24"/>
+    </resources>
+</document>

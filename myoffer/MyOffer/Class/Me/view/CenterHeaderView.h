@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger,centerItemType) {
     centerItemTypeMyApply,
     centerItemTypefavor,
     centerItemTypeOrder,
+    centerItemTypeDiscount,
     centerItemTypetest
 };
 

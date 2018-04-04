@@ -150,38 +150,40 @@
     
     _UniversityFrame = UniversityFrame;
     
-    UniversitydetailNew *item = UniversityFrame.uni;
+    //8、更多
+    self.moreBtn.frame = UniversityFrame.more_Frame;
+    //7、颜色映射
+    self.gradientBgView.frame = UniversityFrame.gradient_Frame;
     
+    //已添加过没必要重复添加
+    if (UniversityFrame.uni.has_been_added) return;
+    
+    self.introductionLab.frame = UniversityFrame.introduction_Frame;
+    self.address_detailBtn.frame = UniversityFrame.address_detailFrame;
+    self.websiteBtn.frame = UniversityFrame.website_Frame;
+    self.official_nameLab.frame = UniversityFrame.official_nameFrame;
+    self.nameLab.frame = UniversityFrame.name_Frame;
+    self.logo.frame = UniversityFrame.logo_Frame;
+    //5、子项容器
+    self.dataView.frame = UniversityFrame.dataView_Frame;
+    
+    
+    UniversitydetailNew *item = UniversityFrame.uni;
       //logo 学校
     [self.logo.logoImageView sd_setImageWithURL:[NSURL URLWithString:item.logo]];
-    self.logo.frame = UniversityFrame.logo_Frame;
-    
     //1、大学名称
     self.nameLab.text = item.name;
-    self.nameLab.frame = UniversityFrame.name_Frame;
-    
     //2、大学英文名称
     self.official_nameLab.text = item.official_name;
-    self.official_nameLab.frame = UniversityFrame.official_nameFrame;
-    
     //4、网络地址
     [self.websiteBtn setTitle: item.webpath  forState:UIControlStateNormal];
-    self.websiteBtn.frame = UniversityFrame.website_Frame;
-    
     //3、地址
     [self.address_detailBtn setTitle:[NSString stringWithFormat:@"%@",item.address_long] forState:UIControlStateNormal];
     
     CGFloat addressWidth = [self.address_detailBtn.currentTitle KD_sizeWithAttributeFont:self.address_detailBtn.titleLabel.font].width;
-    
     if (addressWidth > (UniversityFrame.address_detailFrame.size.width - 30)) {
-        
         [self.address_detailBtn setTitle:UniversityFrame.uni.address_short forState:UIControlStateNormal];
     }
-    self.address_detailBtn.frame = UniversityFrame.address_detailFrame;
-    
-    //5、子项容器
-    self.dataView.frame = UniversityFrame.dataView_Frame;
- 
     //6、学校简介
     NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
     paragraph.lineSpacing = 6;
@@ -190,15 +192,6 @@
                     value:paragraph
                     range:NSMakeRange(0, item.introduction.length)];
     self.introductionLab.attributedText = attrStr;
-    self.introductionLab.frame = UniversityFrame.introduction_Frame;
-    
-    //8、更多
-    self.moreBtn.frame = UniversityFrame.more_Frame;
-    
-    //7、颜色映射
-    self.gradientBgView.frame = UniversityFrame.gradient_Frame;
-//    self.gradient.frame       = self.gradientBgView.bounds;
-  
     
      //更新子项数据
     if (self.dataView.subviews.count == 0)  [self configurationWithUniversity:UniversityFrame];

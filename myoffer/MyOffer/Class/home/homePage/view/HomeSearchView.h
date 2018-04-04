@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^HomeSearchBlock)();
+typedef void(^HomeSearchBlock)(void);
 @interface HomeSearchView : UIView
 @property(nonatomic,copy)HomeSearchBlock  actionBlock;
 @property(nonatomic,strong)UIButton *LeftBtn;

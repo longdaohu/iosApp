@@ -15,6 +15,7 @@
 #import "ServiceProtocolViewController.h"
 #import "myofferFlexibleView.h"
 #import "HomeSectionHeaderView.h"
+#import "CreateOrderVC.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
 //显示内容信息 webView
@@ -346,7 +347,8 @@
         
         RequireLogin
  
-        [self.protocalVC protocalShow:YES];
+//        [self.protocalVC protocalShow:YES];
+        [self caseOrder];
         
     }else{
         
@@ -364,13 +366,20 @@
 }
 
 //跳转到QQ客服聊天页面
-
 -(void)caseQQ{
     
     QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
     [service call];
     
 }
+
+- (void)caseOrder{
+    
+    CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
+    vc.item =  self.service_Frame.item;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 //显示错误提示
 - (void)showError{
@@ -386,13 +395,13 @@
  }
 
 - (void)showProductionDescription{
-    
+
     if(0 < self.service_Frame.item.comment_attr.count) {
 
         [self.protocalVC productDescriptionShow:YES];
 
     }
-    
+
 }
 
 - (void)dealloc{

@@ -38,27 +38,33 @@
     if (self) {
         
         self.backgroundColor =XCOLOR_WHITE;
-        
-        CenterSectionItem *pipei  = [self itemWithIcon:@"p_pipei2" title:@"智能匹配" subtitle:nil itemTag:centerItemTypeMyApply];
-        CenterSectionItem *order  = [self itemWithIcon:@"p_order" title:@"我的订单" subtitle:nil itemTag:centerItemTypeOrder];
-        CenterSectionItem *test  = [self itemWithIcon:@"p_fav" title:@"我的收藏" subtitle:nil itemTag:centerItemTypefavor];
-        self.items = @[pipei, order,test];
-      
-        
+ 
     }
     return self;
 }
 
 
+- (NSArray *)items{
+    
+    if (!_items) {
+        
+        CenterSectionItem *pipei  = [self itemWithIcon:@"p_pipei2" title:@"智能匹配" subtitle:nil itemTag:centerItemTypeMyApply];
+        CenterSectionItem *order  = [self itemWithIcon:@"p_order" title:@"我的订单" subtitle:nil itemTag:centerItemTypeOrder];
+        CenterSectionItem *discount  = [self itemWithIcon:@"p_order" title:@"我的优惠" subtitle:nil itemTag:centerItemTypeDiscount];
+        CenterSectionItem *collect  = [self itemWithIcon:@"p_fav" title:@"我的收藏" subtitle:nil itemTag:centerItemTypefavor];
+        _items = @[pipei, order,discount,collect];
+    }
+    
+    return _items;
+}
+
 
 - (CenterSectionItem *)itemWithIcon:(NSString *)iconName title:(NSString *)title subtitle:(NSString *)subName itemTag:(centerItemType)type{
 
     CenterSectionItem *item  = [CenterSectionItem viewWithIcon:iconName title:title subtitle:subName];
-    item.tag                 = type;
+    item.tag   = type;
     item.actionBlack = ^(UIButton *sender){
-        
         if (self.actionBlock) {
-            
             self.actionBlock(type);
         }
     };
@@ -96,13 +102,11 @@
 
     _response = response;
     
-    if(!response)  return;
-    
-    CenterSectionItem *pipei  = self.items[0];
-    pipei.count =  [NSString stringWithFormat:@"%@  所",response[@"recommendationsCount"]];
-
-    CenterSectionItem *favor  = self.items[1];
-    favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
+//    if(!response)  return;
+//    CenterSectionItem *pipei  = self.items[0];
+//    pipei.count =  [NSString stringWithFormat:@"%@  所",response[@"recommendationsCount"]];
+//    CenterSectionItem *favor  = self.items[1];
+//    favor.count =   [NSString stringWithFormat:@"%@  所",response[@"favoritesCount"]];
 
 
 }

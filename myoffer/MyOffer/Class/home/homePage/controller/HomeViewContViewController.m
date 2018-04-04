@@ -35,6 +35,7 @@
 #import "MyofferUpdateView.h"
 #import "SuperMasterViewController.h"
 #import "GuideOverseaViewController.h"
+#import "DiscountVC.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -341,7 +342,7 @@
 
 -(void)makeHomeTableView{
 
-    self.TableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.TableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.TableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
     self.TableView.delegate = self;
     self.TableView.dataSource = self;

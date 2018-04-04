@@ -151,5 +151,7 @@
 #define kAPISelectorStatusList @"GET api/account/apply-process"
 //申请流程状态详情
 #define kAPISelectorStatusDetail @"GET api/account/apply-process/"
+//获取用户优惠券
+#define kAPISelectorCoupons @"GET svc/marketing/coupons/get"
 
 

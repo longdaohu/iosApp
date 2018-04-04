@@ -13,11 +13,15 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeB,
     SectionGroupTypeC,
     SectionGroupTypeD,
-    SectionGroupTypeE
+    SectionGroupTypeE,
+    SectionGroupTypeCreateOrderMassage,
+    SectionGroupTypeCreateOrderActive,
+    SectionGroupTypeCreateOrderEnjoy
 };
 
 @interface myofferGroupModel : NSObject
 @property(nonatomic,copy)NSString *header_title;
+@property(nonatomic,copy)NSString *sub;
 @property(nonatomic,copy)NSString *accesory_title;
 @property(nonatomic,copy)NSString *footer_title;
 @property(nonatomic,assign)CGFloat  section_footer_height;

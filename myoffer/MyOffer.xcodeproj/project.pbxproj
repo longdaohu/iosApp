@@ -220,6 +220,10 @@
 		AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */; };
 		AE4C71461F4EE6460069E83E /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */; };
 		AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71441F4EE6460069E83E /* MyofferUser.m */; };
+		AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE50BEC8207481870002DCAC /* OrderActionVC.m */; };
+		AE50BECB207481870002DCAC /* OrderActionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE50BEC9207481870002DCAC /* OrderActionVC.xib */; };
+		AE50BED32074B93C0002DCAC /* OrderActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE50BED12074B93C0002DCAC /* OrderActionCell.m */; };
+		AE50BED42074B93C0002DCAC /* OrderActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE50BED22074B93C0002DCAC /* OrderActionCell.xib */; };
 		AE53E86B1F73919800588F0C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86A1F73919800588F0C /* Social.framework */; };
 		AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */; };
 		AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */; };
@@ -233,6 +237,21 @@
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178AE2071FE67006B311A /* UniversityDetailRank.m */; };
+		AE6178B62072381D006B311A /* DiscountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178B52072381D006B311A /* DiscountItem.m */; };
+		AE6178BF20723A17006B311A /* DiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178BD20723A17006B311A /* DiscountCell.m */; };
+		AE6178C020723A17006B311A /* DiscountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178BE20723A17006B311A /* DiscountCell.xib */; };
+		AE6178C420723C21006B311A /* DiscountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178C220723C21006B311A /* DiscountVC.m */; };
+		AE6178C520723C21006B311A /* DiscountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178C320723C21006B311A /* DiscountVC.xib */; };
+		AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178CE20732A05006B311A /* CreateOrderOneCell.m */; };
+		AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178CF20732A05006B311A /* CreateOrderOneCell.xib */; };
+		AE6178D42073327A006B311A /* CreateOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178D32073327A006B311A /* CreateOrderVC.m */; };
+		AE6178D820734797006B311A /* CreateOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178D620734797006B311A /* CreateOrderItemCell.m */; };
+		AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178D720734797006B311A /* CreateOrderItemCell.xib */; };
+		AE6178DC2073790D006B311A /* CreateOrderBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178DB2073790D006B311A /* CreateOrderBottomView.m */; };
+		AE6178DE20737922006B311A /* CreateOrderBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178DD20737922006B311A /* CreateOrderBottomView.xib */; };
+		AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178DF20737ED6006B311A /* CreateOrderVC.xib */; };
+		AE6178E520738BB6006B311A /* OrderEnjoyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178E320738BB6006B311A /* OrderEnjoyVC.m */; };
+		AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
@@ -878,6 +897,12 @@
 		AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderView.xib; sourceTree = "<group>"; };
 		AE4C71431F4EE6460069E83E /* MyofferUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUser.h; sourceTree = "<group>"; };
 		AE4C71441F4EE6460069E83E /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
+		AE50BEC7207481870002DCAC /* OrderActionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderActionVC.h; sourceTree = "<group>"; };
+		AE50BEC8207481870002DCAC /* OrderActionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderActionVC.m; sourceTree = "<group>"; };
+		AE50BEC9207481870002DCAC /* OrderActionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderActionVC.xib; sourceTree = "<group>"; };
+		AE50BED02074B93C0002DCAC /* OrderActionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderActionCell.h; sourceTree = "<group>"; };
+		AE50BED12074B93C0002DCAC /* OrderActionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderActionCell.m; sourceTree = "<group>"; };
+		AE50BED22074B93C0002DCAC /* OrderActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderActionCell.xib; sourceTree = "<group>"; };
 		AE53E86A1F73919800588F0C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		AE53E86E1F73C0A600588F0C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -899,6 +924,29 @@
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
 		AE6178AD2071FE67006B311A /* UniversityDetailRank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversityDetailRank.h; sourceTree = "<group>"; };
 		AE6178AE2071FE67006B311A /* UniversityDetailRank.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniversityDetailRank.m; sourceTree = "<group>"; };
+		AE6178B42072381D006B311A /* DiscountItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountItem.h; sourceTree = "<group>"; };
+		AE6178B52072381D006B311A /* DiscountItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountItem.m; sourceTree = "<group>"; };
+		AE6178BC20723A17006B311A /* DiscountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountCell.h; sourceTree = "<group>"; };
+		AE6178BD20723A17006B311A /* DiscountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountCell.m; sourceTree = "<group>"; };
+		AE6178BE20723A17006B311A /* DiscountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountCell.xib; sourceTree = "<group>"; };
+		AE6178C120723C21006B311A /* DiscountVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountVC.h; sourceTree = "<group>"; };
+		AE6178C220723C21006B311A /* DiscountVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountVC.m; sourceTree = "<group>"; };
+		AE6178C320723C21006B311A /* DiscountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountVC.xib; sourceTree = "<group>"; };
+		AE6178CD20732A05006B311A /* CreateOrderOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderOneCell.h; sourceTree = "<group>"; };
+		AE6178CE20732A05006B311A /* CreateOrderOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderOneCell.m; sourceTree = "<group>"; };
+		AE6178CF20732A05006B311A /* CreateOrderOneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderOneCell.xib; sourceTree = "<group>"; };
+		AE6178D22073327A006B311A /* CreateOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderVC.h; sourceTree = "<group>"; };
+		AE6178D32073327A006B311A /* CreateOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderVC.m; sourceTree = "<group>"; };
+		AE6178D520734797006B311A /* CreateOrderItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderItemCell.h; sourceTree = "<group>"; };
+		AE6178D620734797006B311A /* CreateOrderItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderItemCell.m; sourceTree = "<group>"; };
+		AE6178D720734797006B311A /* CreateOrderItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderItemCell.xib; sourceTree = "<group>"; };
+		AE6178DA2073790D006B311A /* CreateOrderBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderBottomView.h; sourceTree = "<group>"; };
+		AE6178DB2073790D006B311A /* CreateOrderBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderBottomView.m; sourceTree = "<group>"; };
+		AE6178DD20737922006B311A /* CreateOrderBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderBottomView.xib; sourceTree = "<group>"; };
+		AE6178DF20737ED6006B311A /* CreateOrderVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderVC.xib; sourceTree = "<group>"; };
+		AE6178E220738BB6006B311A /* OrderEnjoyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderEnjoyVC.h; sourceTree = "<group>"; };
+		AE6178E320738BB6006B311A /* OrderEnjoyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderEnjoyVC.m; sourceTree = "<group>"; };
+		AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderEnjoyVC.xib; sourceTree = "<group>"; };
 		AE61A9951EAEF44600AC4B43 /* SearchUniversityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniversityCenterViewController.h; sourceTree = "<group>"; };
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
@@ -1586,6 +1634,7 @@
 		567144861CBA889F002A02BF /* userCenter */ = {
 			isa = PBXGroup;
 			children = (
+				AE6178B0207237AB006B311A /* discount */,
 				AE4C71361F4EA3830069E83E /* myApply */,
 				AEA249911D5B215300DD7939 /* person */,
 				AEA24A0C1D5B231200DD7939 /* pipei */,
@@ -2157,6 +2206,43 @@
 			path = leftMenuFile;
 			sourceTree = "<group>";
 		};
+		AE50BEC4207481190002DCAC /* OrderAction */ = {
+			isa = PBXGroup;
+			children = (
+				AE50BECF2074B7920002DCAC /* view */,
+				AE50BEC6207481390002DCAC /* controller */,
+				AE50BEC5207481350002DCAC /* model */,
+			);
+			path = OrderAction;
+			sourceTree = "<group>";
+		};
+		AE50BEC5207481350002DCAC /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AE50BEC6207481390002DCAC /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				AE50BEC7207481870002DCAC /* OrderActionVC.h */,
+				AE50BEC8207481870002DCAC /* OrderActionVC.m */,
+				AE50BEC9207481870002DCAC /* OrderActionVC.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		AE50BECF2074B7920002DCAC /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AE50BED02074B93C0002DCAC /* OrderActionCell.h */,
+				AE50BED12074B93C0002DCAC /* OrderActionCell.m */,
+				AE50BED22074B93C0002DCAC /* OrderActionCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		AE53E86C1F73C0A600588F0C /* Wechat */ = {
 			isa = PBXGroup;
 			children = (
@@ -2176,6 +2262,100 @@
 				AE582C291D06B0ED00499B6B /* AlipaySDK.framework */,
 			);
 			path = AlipaySDK;
+			sourceTree = "<group>";
+		};
+		AE6178B0207237AB006B311A /* discount */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178B3207237E4006B311A /* controller */,
+				AE6178B2207237E1006B311A /* model */,
+				AE6178B1207237C9006B311A /* view */,
+			);
+			path = discount;
+			sourceTree = "<group>";
+		};
+		AE6178B1207237C9006B311A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178BC20723A17006B311A /* DiscountCell.h */,
+				AE6178BD20723A17006B311A /* DiscountCell.m */,
+				AE6178BE20723A17006B311A /* DiscountCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		AE6178B2207237E1006B311A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178B42072381D006B311A /* DiscountItem.h */,
+				AE6178B52072381D006B311A /* DiscountItem.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AE6178B3207237E4006B311A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178C120723C21006B311A /* DiscountVC.h */,
+				AE6178C220723C21006B311A /* DiscountVC.m */,
+				AE6178C320723C21006B311A /* DiscountVC.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		AE6178C620732832006B311A /* createOrder */ = {
+			isa = PBXGroup;
+			children = (
+				AE50BEC4207481190002DCAC /* OrderAction */,
+				AE6178E120738B58006B311A /* OrderEnjoy */,
+				AE6178C92073286D006B311A /* controller */,
+				AE6178C82073286B006B311A /* model */,
+				AE6178C720732869006B311A /* view */,
+			);
+			path = createOrder;
+			sourceTree = "<group>";
+		};
+		AE6178C720732869006B311A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178CD20732A05006B311A /* CreateOrderOneCell.h */,
+				AE6178CE20732A05006B311A /* CreateOrderOneCell.m */,
+				AE6178CF20732A05006B311A /* CreateOrderOneCell.xib */,
+				AE6178D520734797006B311A /* CreateOrderItemCell.h */,
+				AE6178D620734797006B311A /* CreateOrderItemCell.m */,
+				AE6178D720734797006B311A /* CreateOrderItemCell.xib */,
+				AE6178DA2073790D006B311A /* CreateOrderBottomView.h */,
+				AE6178DB2073790D006B311A /* CreateOrderBottomView.m */,
+				AE6178DD20737922006B311A /* CreateOrderBottomView.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		AE6178C82073286B006B311A /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AE6178C92073286D006B311A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178D22073327A006B311A /* CreateOrderVC.h */,
+				AE6178D32073327A006B311A /* CreateOrderVC.m */,
+				AE6178DF20737ED6006B311A /* CreateOrderVC.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		AE6178E120738B58006B311A /* OrderEnjoy */ = {
+			isa = PBXGroup;
+			children = (
+				AE6178E220738BB6006B311A /* OrderEnjoyVC.h */,
+				AE6178E320738BB6006B311A /* OrderEnjoyVC.m */,
+				AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */,
+			);
+			path = OrderEnjoy;
 			sourceTree = "<group>";
 		};
 		AE61A98F1EAEF30C00AC4B43 /* UniversityCourse */ = {
@@ -2650,6 +2830,7 @@
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
+				AE6178C620732832006B311A /* createOrder */,
 				AE36C4591E9F6C9100EE42F9 /* index */,
 				AE6FF29A1E8915F100C2A013 /* country */,
 				AE6FF2911E8912A200C2A013 /* detail */,
@@ -3864,6 +4045,7 @@
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */,
+				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
@@ -3872,6 +4054,7 @@
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
+				AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
@@ -3889,17 +4072,22 @@
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
 				AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
+				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
 				AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
 				AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */,
 				AE1FD7361D5C929500FFD5A8 /* Pre-comp 1_00019.png in Resources */,
+				AE6178C520723C21006B311A /* DiscountVC.xib in Resources */,
+				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
 				AE1FD7391D5C929500FFD5A8 /* Pre-comp 1_00021.png in Resources */,
+				AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
+				AE6178DE20737922006B311A /* CreateOrderBottomView.xib in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
@@ -3935,11 +4123,13 @@
 				AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */,
 				AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */,
 				AE1FD7311D5C929500FFD5A8 /* Pre-comp 1_00014.png in Resources */,
+				AE50BECB207481870002DCAC /* OrderActionVC.xib in Resources */,
 				AE91DDE11FBC169F00CD06BD /* GuideItemCell.xib in Resources */,
 				AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */,
 				AE1FD7551D5C929500FFD5A8 /* MJRefresh.bundle in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
+				AE50BED42074B93C0002DCAC /* OrderActionCell.xib in Resources */,
 				AE7FFCBD1EC07E1C00D2FDCB /* into001.jpeg in Resources */,
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
 				AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */,
@@ -4025,6 +4215,7 @@
 				AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */,
 				AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */,
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
+				AE6178E520738BB6006B311A /* OrderEnjoyVC.m in Sources */,
 				AE914ECF1F4184F2008A43CD /* ApplyStatusModelFrame.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
@@ -4048,6 +4239,7 @@
 				AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */,
 				AE3943DC1E0A1AD00038826A /* TAAbstractDotView.m in Sources */,
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
+				AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */,
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
 				AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */,
@@ -4108,6 +4300,7 @@
 				AE3600691E8E24C900EE20EB /* ServiceProtocalBottomView.m in Sources */,
 				AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */,
 				AE914ED31F4188B0008A43CD /* ApplyStatusNewCell.m in Sources */,
+				AE6178D42073327A006B311A /* CreateOrderVC.m in Sources */,
 				AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */,
 				AECC87DC1F95F63800FCBBEC /* UniversityFrameModel.m in Sources */,
 				AEA24BEA1D5B266A00DD7939 /* LogoView.m in Sources */,
@@ -4134,6 +4327,7 @@
 				AE4B2E781F1E095600E328F7 /* MyOfferArticle.m in Sources */,
 				AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */,
 				AE4B2E711F1E095600E328F7 /* MessageCenterViewController.m in Sources */,
+				AE6178D820734797006B311A /* CreateOrderItemCell.m in Sources */,
 				AEA24A911D5B23F600DD7939 /* HomeSecondTableViewCell.m in Sources */,
 				AEA24AFE1D5B24D200DD7939 /* BindEmailViewController.m in Sources */,
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
@@ -4150,12 +4344,14 @@
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */,
+				AE50BED32074B93C0002DCAC /* OrderActionCell.m in Sources */,
 				AE7F9B131EB8829300D30525 /* SearchUniCourseFrame.m in Sources */,
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AE3943DD1E0A1AD00038826A /* TAAnimatedDotView.m in Sources */,
 				AE4B2E661F1E095600E328F7 /* MessageCountryTopicVController.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
 				AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */,
+				AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */,
 				AE4B2E701F1E095600E328F7 /* FSSScrollContentViewController.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
@@ -4200,6 +4396,7 @@
 				AEA249A91D5B215300DD7939 /* OrderServiceItem.m in Sources */,
 				AE3AB6B51F21A27300A3C7E3 /* SuperMasterHomeDemol.m in Sources */,
 				AECC87CB1F95F63800FCBBEC /* NomalCollectionController.m in Sources */,
+				AE6178BF20723A17006B311A /* DiscountCell.m in Sources */,
 				AECC87E31F95F63800FCBBEC /* CatigaryScrollView.m in Sources */,
 				AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */,
 				463E3A4F1B230EDC00E0BAF8 /* main.m in Sources */,
@@ -4231,6 +4428,7 @@
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AECC87D81F95F63800FCBBEC /* RankTypeItemFrame.m in Sources */,
 				AECC87D51F95F63800FCBBEC /* MyOfferSubjecct.m in Sources */,
+				AE6178C420723C21006B311A /* DiscountVC.m in Sources */,
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
 				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */,
@@ -4248,6 +4446,7 @@
 				AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */,
 				AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
+				AE6178B62072381D006B311A /* DiscountItem.m in Sources */,
 				AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */,
 				AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */,
 				AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */,
@@ -4285,6 +4484,7 @@
 				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
+				AE6178DC2073790D006B311A /* CreateOrderBottomView.m in Sources */,
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,
 				AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */,
 				AECC87E41F95F63800FCBBEC /* CatigorySubjectCell.m in Sources */,
@@ -4518,7 +4718,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = MyOffer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4575,7 +4775,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = MyOffer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

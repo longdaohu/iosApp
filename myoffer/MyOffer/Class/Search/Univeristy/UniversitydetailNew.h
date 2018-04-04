@@ -34,7 +34,6 @@
 @property(nonatomic,strong)NSArray    *relate_articles; //关联文章
 @property(nonatomic,strong)NSArray    *tags; //标签
 @property(nonatomic,strong)NSArray    *tags_Arr; //标签
-@property(nonatomic,assign)BOOL tag_on;//是否添加好tags
 @property(nonatomic,strong)NSArray    *key_subjectArea; //王牌领域
 @property(nonatomic,strong)NSNumber   *pageViews;        //浏览量
 @property(nonatomic,strong)NSArray    *m_images;
@@ -67,6 +66,7 @@
 @property(nonatomic,strong)NSNumber      *employment_rate; //  就业率
 @property(nonatomic,strong)NSNumber      *foreign_student_rate; // 外国学生比例 0.xx
 @property(nonatomic,assign)BOOL login;
+@property(nonatomic,assign)BOOL has_been_added;//是否添加好tags
 
 @end
 
