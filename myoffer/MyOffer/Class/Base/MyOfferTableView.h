@@ -13,6 +13,8 @@
 @property(nonatomic,strong)EmptyDataView  *emptyView;
 @property(nonatomic,assign)CGFloat emptyY;
 @property(nonatomic,copy)NSString *btn_title;
+@property(nonatomic,copy)NSString *empty_icon;
+
 - (void)emptyViewWithHiden:(BOOL)hiden;
 - (void)emptyViewWithError:(NSString *)error;
 

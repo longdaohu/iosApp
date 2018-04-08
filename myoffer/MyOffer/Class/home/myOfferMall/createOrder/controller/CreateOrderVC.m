@@ -13,6 +13,9 @@
 #import "OrderEnjoyVC.h"
 #import "OrderActionVC.h"
 #import "DiscountItem.h"
+#import "ServiceProtocolViewController.h"
+#import "PayOrderViewController.h"
+#import "OrderItem.h"
 
 @interface CreateOrderVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -23,6 +26,8 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong) UIButton *protocolBtn;
 @property(nonatomic,strong) UIButton *optionBtn;
+@property(nonatomic,strong)ServiceProtocolViewController *protocalVC;
+@property(nonatomic,strong)NSMutableDictionary *parameter;
 
 @end
 
@@ -53,31 +58,50 @@
     
 }
 
+- (NSMutableArray *)groups{
+    
+    if (!_groups) {
+        _groups =  [NSMutableArray array];
+    }
+    
+    return _groups;
+}
+
+- (NSMutableDictionary *)parameter{
+    
+    if (!_parameter) {
+        _parameter =  [NSMutableDictionary dictionary];
+    }
+    
+    return _parameter;
+}
+
+
 - (void)makeData{
     
+    //获取用户优惠券
     NSString *path  = @"GET svc/marketing/coupons/get";
     XWeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
     }];
 }
 
+//活动通道
 - (void)updateWithResponse:(id)response{
     
     NSArray *result  = response[@"result"];
     self.discount_items = [DiscountItem mj_objectArrayWithKeyValuesArray:result];
  
     if (result.count > 0) {
+        
         myofferGroupModel *act = [myofferGroupModel groupWithItems:nil header:@"活动通道"];
         act.type = SectionGroupTypeCreateOrderActive;
         [self.groups insertObject:act atIndex:1];
     }
-    
     [self.tableView reloadData];
-    
 }
 
 
@@ -87,12 +111,18 @@
     
     [self makeTableView];
     
+    self.priceLab.text = self.itemFrame.item.price_str;
+    
+    [self.parameter setValue:self.itemFrame.item.service_id  forKey:@"skuId"];
+
+    self.protocalVC.itemFrame = self.itemFrame;
+
 }
 
 - (void)makeTableView
 {
     self.tableView.backgroundColor = XCOLOR_BG;
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
     self.tableView.tableFooterView = footer;
     
     [self.view addSubview:self.tableView];
@@ -102,67 +132,58 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
-    
-    UIButton *optionBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, 10, 30, 30)];
+    UIButton *optionBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, 0, 30, 30)];
     [optionBtn setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
     [optionBtn setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateSelected];
     [footer addSubview:optionBtn];
     optionBtn.selected = YES;
-    [optionBtn addTarget:self action:@selector(footerClick:) forControlEvents:UIControlEventTouchUpInside];
+    [optionBtn addTarget:self action:@selector(optionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     self.optionBtn = optionBtn;
     
-    UIButton *subBtn = [[UIButton alloc] init];
-    self.protocolBtn = subBtn;
-    [subBtn setTitle:@"购买条款与协议，买家须知" forState:UIControlStateNormal];
-    [subBtn.titleLabel setFont:XFONT(14)];
-    [subBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
-    [subBtn sizeToFit];
-    [footer addSubview:subBtn];
-    [subBtn addTarget:self action:@selector(footerClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *protocolBtn = [[UIButton alloc] init];
+    self.protocolBtn = protocolBtn;
+    [protocolBtn setTitle:@"购买条款与协议，买家须知" forState:UIControlStateNormal];
+    [protocolBtn.titleLabel setFont:XFONT(14)];
+    [protocolBtn sizeToFit];
+    [footer addSubview:protocolBtn];
+    [protocolBtn addTarget:self action:@selector(protocolClick:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat sub_y = 0;
-    CGFloat sub_h = 50;
+    CGFloat sub_h = 30;
     CGFloat sub_x = CGRectGetMaxX(optionBtn.frame) + 5;
-    CGFloat sub_w = subBtn.mj_w;
-    subBtn.frame = CGRectMake(sub_x, sub_y, sub_w, sub_h);
-    
-    // 下划线
-    NSDictionary *attribtDic = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:subBtn.currentTitle attributes:attribtDic];
-    [subBtn setAttributedTitle:attribtStr  forState:UIControlStateNormal];
+    CGFloat sub_w = protocolBtn.mj_w;
+    protocolBtn.frame = CGRectMake(sub_x, sub_y, sub_w, sub_h);
+    [self protocolAttribute:NO];// 下划线
 
 }
 
-
-
-- (void)setItem:(ServiceItem *)item{
+- (ServiceProtocolViewController *)protocalVC{
     
-    _item = item;
- 
-    myofferGroupModel *group = [myofferGroupModel groupWithItems:@[item] header:nil];
+    if (!_protocalVC) {
+        
+        _protocalVC = [[ServiceProtocolViewController alloc] init];
+        _protocalVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:_protocalVC.view];
+    }
+    
+    return _protocalVC;
+}
+
+- (void)setItemFrame:(ServiceItemFrame *)itemFrame{
+    
+    _itemFrame = itemFrame;
+    
+    myofferGroupModel *group = [myofferGroupModel groupWithItems:@[itemFrame.item] header:nil];
     group.type = SectionGroupTypeCreateOrderMassage;
     [self.groups addObject:group];
-    
-    myofferGroupModel *enjoy = [myofferGroupModel groupWithItems:nil header:@"尊享通道"];
-    enjoy.type = SectionGroupTypeCreateOrderEnjoy;
-    [self.groups addObject:enjoy];
-    
-    if (item.reduce_flag) {
+    //reduce_flag为true优惠
+    if (itemFrame.item.reduce_flag) {
+        
+        myofferGroupModel *enjoy = [myofferGroupModel groupWithItems:nil header:@"尊享通道"];
+        enjoy.type = SectionGroupTypeCreateOrderEnjoy;
+        [self.groups addObject:enjoy];
         
         [self makeData];
-        
     }
- 
-    self.priceLab.text = item.price_str;
-    
-}
-
-- (NSMutableArray *)groups{
-    
-    if (!_groups) {
-        _groups =  [NSMutableArray array];
-    }
-    
-    return _groups;
 }
 
 
@@ -219,84 +240,244 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     myofferGroupModel *group  = self.groups[indexPath.section];
-    XWeakSelf
+    
+    //如果顶部订单信息，不继续执行
+    if (SectionGroupTypeCreateOrderMassage  == group.type) {
+        return;
+    }
+  
+    myofferGroupModel *enjoy = nil;
+    myofferGroupModel *active = nil;
+    for (myofferGroupModel *item in self.groups) {
+        if (item.type == SectionGroupTypeCreateOrderEnjoy) {
+            enjoy = item;
+        }
+        if (item.type == SectionGroupTypeCreateOrderActive) {
+            active = item;
+        }
+    }
+ 
     if (group.type == SectionGroupTypeCreateOrderEnjoy) {
  
-        OrderEnjoyVC *vc = [[OrderEnjoyVC alloc] initWithNibName:@"OrderEnjoyVC" bundle:nil];
-        vc.enjoyBlock = ^(NSString *price) {
-            
-            [weakSelf caseEnjoyItem:price group:group];
-        };
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+        if (active.sub.length > 0) {
+            [self caseAlertWithGroup:group];
+        }else{
+            [self casePushEnjoy:group];
+        }
+     }
     
     
     if (group.type == SectionGroupTypeCreateOrderActive) {
-        
+         if (enjoy.sub.length > 0) {
+            [self caseAlertWithGroup:group];
+        }else{
+            [self casePushActive:group];
+        }
+     }
+    
+}
+
+//push OrderEnjoyVC
+- (void)casePushEnjoy:(myofferGroupModel *)group{
+    
+    XWeakSelf
+    OrderEnjoyVC *vc = [[OrderEnjoyVC alloc] initWithNibName:@"OrderEnjoyVC" bundle:nil];
+    vc.enjoyBlock = ^(NSDictionary *result) {
+         [weakSelf caseEnjoyItemUpdateWithResult:result group:group];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+//Enjoy  数据更新
+- (void)caseEnjoyItemUpdateWithResult:(NSDictionary *)result group:(myofferGroupModel *) group{
+    
+    //清空数据
+    for (myofferGroupModel *item in self.groups) {
+        item.sub = @"";
+    }
+    group.sub = [NSString stringWithFormat:@"尊享优惠了 ￥%@",result[@"rules"]];
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"caseEnjoyItemUpdateWithResult  尊享 ==  %@",result[@"rules"]);
+
+    //显示总金额
+    [self discountMessage:result[@"rules"]];
+    
+    //提交订单请求参数
+    [self.parameter setValue:result[@"promote_id"]  forKey:@"pId"];
+    [self.parameter setValue:@""  forKey:@"cId"];
+
+}
+
+
+//push OrderActionVC
+- (void)casePushActive:(myofferGroupModel *)group{
+ 
+        XWeakSelf
         OrderActionVC *vc =  [[OrderActionVC alloc] initWithNibName:@"OrderActionVC" bundle:nil];
         vc.items = self.discount_items;
         vc.actBlock = ^(DiscountItem *item) {
-            [weakSelf caseActionSelectWithItem:item group:group];
+             [weakSelf caseActionUpdateWithItem:item group:group];
         };
-        
+
         [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+- (void)caseActionUpdateWithItem:(DiscountItem *)item  group:(myofferGroupModel *)group{
+    
+    //清空数据
+    for (myofferGroupModel *it in self.groups) {
+        it.sub = @"";
     }
     
-}
-- (void)caseEnjoyItem:(NSString *)price group:(myofferGroupModel *) group{
-
-    group.sub = [NSString stringWithFormat:@"尊享优惠了 ￥%@",price];
-    [self.tableView reloadData];
- 
-    self.discountLab.text = [NSString stringWithFormat:@"(已优惠 %@) ",price];
-    
-}
-
-- (void)caseActionSelectWithItem:(DiscountItem *)it  group:(myofferGroupModel *)group{
- 
-    NSString *sub = it ? [NSString stringWithFormat:@"活动优惠了 ￥%@",it.rules] : @"";
+    NSString *sub = item ? [NSString stringWithFormat:@"活动优惠了 ￥%@",item.rules] : @"";
     group.sub = sub;
     [self.tableView reloadData];
     
-    for (DiscountItem *item  in self.discount_items) {
-        item.selected = NO;
-        if ([it.cId isEqualToString: item.cId]) {
-            item.selected = YES;
-            break;
+    //设置被选项
+    for (DiscountItem *it  in self.discount_items) {
+        it.selected = NO;
+        if ([item.cId isEqualToString: it.cId]) {
+            it.selected = YES;
         }
     }
+ 
+    NSLog(@"caseActionUpdateWithItem  ==  %@",item.rules);
     
-    if (it) {
-        self.discountLab.text = [NSString stringWithFormat:@"(已优惠 %@) ",it.rules];
-    }
+    //更新总金额
+    [self discountMessage:item.rules];
+ 
+   //提交订单请求参数
+    [self.parameter setValue:@""  forKey:@"pId"];
+    [self.parameter setValue:item.cId  forKey:@"cId"];
     
 }
 
-- (void)footerClick:(UIButton *)sender{
+
+//显示 Alert
+- (void)caseAlertWithGroup:(myofferGroupModel *)group{
     
-    if (sender.currentTitle) {
-        
-        NSLog(@"查看协议");
-        
-    }else{
-        
-        sender.selected  = !sender.selected;
-        
-        if (sender.selected) {
-            NSLog(@"能提交");
-        }else{
-            NSLog(@"不能提交");
-        }
-        
+        XWeakSelf;
+        NSString *message = (group.type == SectionGroupTypeCreateOrderActive) ? @"选择使用优惠券将无法同时使用尊享通道" :  @"选择使用尊享通道将无法同时使用优惠券" ;
+        UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+         }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"依然进入" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+             if (group.type == SectionGroupTypeCreateOrderActive ) {
+                 [weakSelf casePushActive:group];
+            }else{
+                [weakSelf casePushEnjoy:group];
+            }
+        }];
+        [alertCtrl addAction:cancelAction];
+        [alertCtrl addAction:okAction];
+        [self presentViewController:alertCtrl animated:YES completion:nil];
+    
+}
+
+
+ //更新总金额
+- (void)discountMessage:(NSString *)value{
+    
+    self.discountLab.text = [NSString stringWithFormat:@"(已优惠 %@) ",value];
+    CGFloat after_price_fl = self.itemFrame.item.price.floatValue - value.floatValue;
+   
+    NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%lf",after_price_fl]];
+    self.priceLab.text = price;
+    
+}
+
+
+
+//查看协议
+- (void)protocolClick:(UIButton *)sender{
+ 
+       [self.protocalVC protocalShow:YES];
+}
+
+//选择按钮
+- (void)optionBtnClick:(UIButton *)sender{
+    
+    sender.selected  = !sender.selected;
+ 
+     if (sender.selected) {
+         NSLog(@"能提交");
+         [self protocolAttribute:NO];
+     }else{
+        NSLog(@"不能提交");
     }
     
+
+    
+}
+
+//设置协议字符串颜色
+- (void)protocolAttribute:(BOOL)colorful{
+    
+    
+    UIColor *clr  = colorful ? XCOLOR_RED : XCOLOR_BLACK;
+    NSDictionary *attribtDic = @{
+                                 NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],
+                                 NSForegroundColorAttributeName: clr
+                                 };
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.protocolBtn.currentTitle attributes:attribtDic];
+    [self.protocolBtn setAttributedTitle:attribtStr  forState:UIControlStateNormal];
 }
 
 - (IBAction)caseCommit:(UIButton *)sender {
     
-            NSLog(@"看情况能不能提交");
+      if (!self.optionBtn.selected) {
+        [self protocolAttribute:YES];
+        return;
+    }
+    
+    [self orderCreate];
+}
+
+
+- (NSString *)fomatterWithPrice:(NSString *)price{
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSNumber *number = [NSNumber numberWithFloat:price.floatValue];
+    NSString *numberString = [numberFormatter stringFromNumber: number];
+    
+    return  [NSString stringWithFormat:@"￥ %@",numberString];
+}
+
+// 下单
+- (void)orderCreate{
+//NSDictionary *parameter  = @{ @"skuId": self.item.price};
+//pId:@"",//推广码Id
+//cId:@"",//优惠券码Id   优惠券id和推广码Id只可选传
+    XWeakSelf
+    [self startAPIRequestWithSelector:@"POST svc/emall/order/create" parameters:self.parameter showHUD:YES errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
+        
+        [weakSelf orderCreateSuccessWithResponse:response];
+        
+    }];
+    
+}
+//下单成功
+- (void)orderCreateSuccessWithResponse:(id)response{
+    
+    NSDictionary *result = response[@"result"];
+    
+    OrderItem *order = [[OrderItem alloc] init];
+    order.SKU = result[@"name"];
+    order.total_fee = result[@"amount"];
+    order.order_id = result[@"orderId"];
+    
+    PayOrderViewController *pay = [[PayOrderViewController alloc] init];
+    pay.order = order;
+    [self.navigationController pushViewController:pay animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

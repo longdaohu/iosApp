@@ -48,8 +48,12 @@
 }
 
 - (IBAction)click:(UIButton *)sender {
-
+ 
+    if (self.item.disabled) return;
     
+    if (self.discountCellBlock) {
+        self.discountCellBlock();
+    }
 }
 
 - (void)setItem:(DiscountItem *)item{
@@ -60,9 +64,10 @@
     self.timeLab.text = item.time;
     self.priceLab.attributedText =  item.attriPrice;
     [self.iconView setImage:[UIImage imageNamed:item.imageName]];
-    
     self.titleLab.hidden = item.selected;
     
+//    self.commitBtn.enabled = !item.disabled;
+ 
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

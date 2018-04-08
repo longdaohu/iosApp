@@ -376,7 +376,7 @@
 - (void)caseOrder{
     
     CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
-    vc.item =  self.service_Frame.item;
+    vc.itemFrame =  self.service_Frame;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="commitBtn" destination="0kF-He-P0y" id="WaO-8f-7IQ"/>
                 <outlet property="discountLab" destination="VqV-cM-Yyg" id="Jpn-KW-MZV"/>
-                <outlet property="priceLab" destination="0iu-mT-2GT" id="bjm-aM-Mch"/>
+                <outlet property="priceLab" destination="0iu-mT-2GT" id="B5F-6b-YEJ"/>
                 <outlet property="tableView" destination="tRU-te-OsK" id="I6Q-26-s8w"/>
                 <outlet property="view" destination="iN0-l3-epB" id="GNY-Ea-74a"/>
             </connections>
@@ -44,7 +44,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总金额 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKZ-d2-zKW">
                             <rect key="frame" x="15" y="32" width="66" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.30588235289999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kF-He-P0y">
@@ -61,10 +61,10 @@
                                 <action selector="caseCommit:" destination="-1" eventType="touchUpInside" id="sIi-yF-5CS"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqV-cM-Yyg">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqV-cM-Yyg">
                             <rect key="frame" x="15" y="27" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

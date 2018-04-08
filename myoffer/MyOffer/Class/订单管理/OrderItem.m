@@ -16,8 +16,6 @@
     
 }
 
-
-
 -(void)statusWithTag:(NSString *)status
 {
     self.cancelBtn_hiden = ![status isEqualToString:@"ORDER_PAY_PENDING"];
@@ -66,7 +64,7 @@
         str = _SKUs.firstObject[@"name"];
     }
     
-    return str;
+    return str.length > 0 ? str : _SKU;
 }
 
 - (NSString *)order_id_str{

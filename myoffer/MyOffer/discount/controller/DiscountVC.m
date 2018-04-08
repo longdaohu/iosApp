@@ -9,10 +9,12 @@
 #import "DiscountVC.h"
 #import "DiscountCell.h"
 #import "DiscountItem.h"
+#import "MyOfferServerMallViewController.h"
 
 @interface DiscountVC ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *items;
+
 @end
 
 @implementation DiscountVC
@@ -50,15 +52,20 @@
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
+        [MBProgressHUD showError:@"网络请求失败！"];
     }];
 }
 
 - (void)updateWithResponse:(id)response{
-    
+
     NSArray *result  = response[@"result"];
-    self.items = [DiscountItem mj_objectArrayWithKeyValuesArray:result];
-    [self.tableView reloadData];
+     self.items = [DiscountItem mj_objectArrayWithKeyValuesArray:result];
+
+    if (self.items.count == 0) {
+        self.tableView.empty_icon = @"discount_no";
+        [self.tableView emptyViewWithError:@"亲，没有可使用的优惠券，快去参加活动吧！"];
+    }
+     [self.tableView reloadData];
     
 }
 
@@ -69,7 +76,6 @@
 
 - (void)makeTableView
 {
-
     self.tableView.tableFooterView =[[UIView alloc] init];
     UINib *xib = [UINib nibWithNibName:@"DiscountCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"DiscountCell"];
@@ -97,36 +103,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    XWeakSelf;
     DiscountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscountCell" forIndexPath:indexPath];
+    cell.selectionStyle =  UITableViewCellSelectionStyleNone;
     cell.item = self.items[indexPath.section];
+    cell.discountCellBlock = ^{
+        MyOfferServerMallViewController  *vc = [[MyOfferServerMallViewController alloc] initWithNibName:@"MyOfferServerMallViewController" bundle:nil];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
     
     return cell;
 }
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
-
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//
-//}
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//
-//}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -144,14 +131,5 @@
     NSLog(@"优惠 + DiscountVC + dealloc");
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

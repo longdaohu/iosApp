@@ -472,11 +472,10 @@
 
 - (void)protocalViewWithAgree:(BOOL)isAgree{
     
-    isAgree ? [self createOrder] :  [self protocalShow:NO];
- 
+      [self protocalShow:NO];
 }
 
-
+/*
 - (void)createOrder{
     
     NSString *path =[NSString stringWithFormat:@"GET api/account/order/create?sku_id=%@&skip=true",self.item.service_id];
@@ -495,7 +494,7 @@
         
     }];
 }
-
+*/
 
 
 - (void)dealloc{

@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 @interface OrderEnjoyVC : BaseViewController
-@property(nonatomic,copy)void(^enjoyBlock)(NSString *);
+@property(nonatomic,copy)void(^enjoyBlock)(NSDictionary *);
 
 @end
 

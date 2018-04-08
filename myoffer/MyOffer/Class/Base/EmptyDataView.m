@@ -72,10 +72,7 @@
 - (void)reload{
     
     if (self.actionBlock) {
-        
-        NSLog(@">>>>> empty clicked");
-        
-        self.actionBlock();
+         self.actionBlock();
     };
     
 }
@@ -99,6 +96,13 @@
     
 }
 
+- (void)setIcon:(NSString *)icon {
+    
+    _icon = icon;
+
+    [self.logoView setImage:[UIImage imageNamed:icon]];
+}
+
 
 - (void)layoutSubviews{
 
@@ -112,7 +116,7 @@
     
     
     CGFloat error_X = 0;
-    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame) - 20;
+    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame) - 10;
     CGFloat error_W = logo_W;
     CGFloat error_H = 50;
     self.errorLab.frame = CGRectMake(error_X, error_Y, error_W, error_H);

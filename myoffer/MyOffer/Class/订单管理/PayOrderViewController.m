@@ -77,8 +77,7 @@
      [alert show];
     
  }
-
-
+ 
 #pragma mark : UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -129,9 +128,7 @@
     
    
     PayHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"PayHeaderView" owner:self options:nil].firstObject;
-  
     headerView.order = self.order;
-
      self.tableView.tableHeaderView =  headerView;
     
 }

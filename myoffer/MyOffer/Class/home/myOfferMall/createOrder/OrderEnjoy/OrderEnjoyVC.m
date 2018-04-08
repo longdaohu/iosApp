@@ -28,34 +28,31 @@
     
     
     if (self.valueTF.text.length < 9) {
-        
         [MBProgressHUD showError:@"请输入9位数尊享码"];
          return;
     }
  
     NSDictionary *parameter = @{@"pId" : self.valueTF.text};
     XWeakSelf
-    [self startAPIRequestWithSelector:@"GET svc/marketing/promote/check" parameters:parameter success:^(NSInteger statusCode, id response) {
- 
- 
+    [self startAPIRequestWithSelector:@"GET svc/marketing/promote/check" parameters:parameter expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        
         if ([response[@"code"] integerValue]  == 1) {
             [weakSelf show:response[@"msg"]];
             return ;
         }
         
-        
         if ([response[@"code"] integerValue]  == 0) {
-
-            NSDictionary *result = response[@"result"];
+ //                  NSLog(@"尊享码 %@",result);
             if (self.enjoyBlock) {
-                self.enjoyBlock(result[@"rules"]);
+                self.enjoyBlock(response[@"result"]);
                 [self dismiss];
             }
         }
         
-        
- 
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        [weakSelf show:@"网络请求失败！！！"];
     }];
+    
  
 }
 

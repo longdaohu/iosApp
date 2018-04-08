@@ -8,9 +8,10 @@
 
 #import "BaseViewController.h"
 #import "ServiceItem.h"
+#import "ServiceItemFrame.h"
 
 @interface CreateOrderVC : BaseViewController
-@property(nonatomic,strong)ServiceItem *item;
+@property(nonatomic,strong)ServiceItemFrame *itemFrame;
 
 @end
 
