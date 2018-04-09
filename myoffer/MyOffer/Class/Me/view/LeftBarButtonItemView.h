@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^LeftBarButtonItemViewBlock)();
+typedef void(^LeftBarButtonItemViewBlock)(void);
 @interface LeftBarButtonItemView : UIView
 @property(nonatomic,strong)UIButton *iconView;
 @property(nonatomic,strong)UILabel  *countLab;

@@ -130,7 +130,10 @@
     }
     
     [self dismiss];
-    
+ 
+    //如果点击项为已选项，没必要再重复再选择
+    if (item_select.selected)  return;
+ 
     if (self.actBlock) {
         self.actBlock(item_select);
     }

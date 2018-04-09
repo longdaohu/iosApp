@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^LeftBlock)();
+typedef void(^LeftBlock)(void);
 @interface LeftMenuHeaderView : UIView
 //根据网络请求数据加载header
 @property(nonatomic,strong)MyofferUser *user;

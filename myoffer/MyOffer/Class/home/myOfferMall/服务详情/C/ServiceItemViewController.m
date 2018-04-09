@@ -12,10 +12,10 @@
 #import "ServiceItemHeaderView.h"
 #import "UniversityNavView.h"
 #import "ServiceItemBottomView.h"
-#import "ServiceProtocolViewController.h"
 #import "myofferFlexibleView.h"
 #import "HomeSectionHeaderView.h"
 #import "CreateOrderVC.h"
+#import "serviceProtocolVC.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
 //显示内容信息 webView
@@ -31,7 +31,7 @@
 //底部View
 @property(nonatomic,strong)ServiceItemBottomView *bottomView;
 //显示协议
-@property(nonatomic,strong)ServiceProtocolViewController *protocalVC;
+@property(nonatomic,strong)serviceProtocolVC *protocolVC;
 
 @property(nonatomic,strong)ServiceItemFrame *service_Frame;
 
@@ -92,13 +92,11 @@
 
 - (void)makeProtocalView{
 
-    ServiceProtocolViewController *protocalVC = [[ServiceProtocolViewController alloc] init];
-    
-    self.protocalVC = protocalVC;
-    
-    [self addChildViewController:protocalVC];
-    
-    [self.view addSubview:protocalVC.view];
+    serviceProtocolVC *protocolVC = [[serviceProtocolVC alloc] init];
+    protocolVC.type = protocolViewTypeList;
+    self.protocolVC = protocolVC;
+    [self addChildViewController:protocolVC];
+    [self.view addSubview:protocolVC.view];
 }
 
 
@@ -209,7 +207,7 @@
     
     self.topNavigationView.titleName = item.name ;
     
-    self.protocalVC.itemFrame = itemFrame;
+    self.protocolVC.itemFrame = itemFrame;
 }
 
 
@@ -398,7 +396,7 @@
 
     if(0 < self.service_Frame.item.comment_attr.count) {
 
-        [self.protocalVC productDescriptionShow:YES];
+        [self.protocolVC  pageWithHiden:NO];
 
     }
 
@@ -406,7 +404,7 @@
 
 - (void)dealloc{
     
-    KDClassLog(@"dealloc 留学服务详情");
+    KDClassLog(@"留学服务详情 + ServiceItemViewController + dealloc");
 }
 
 

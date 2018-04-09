@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^HomeSectionHeaderViewBlock)();
+typedef void(^HomeSectionHeaderViewBlock)(void);
 @interface HomeSectionHeaderView : UIView
 @property(nonatomic,copy)HomeSectionHeaderViewBlock actionBlock;
 @property(nonatomic,copy)NSString *accessory_title;

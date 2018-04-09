@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *forPersonLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
+@property (weak, nonatomic) IBOutlet UIButton *fit_personBtn;
 
 @end
 
@@ -24,6 +25,10 @@
     [super awakeFromNib];
     // Initialization code
      self.selectionStyle = UITableViewCellSelectionStyleNone;
+     self.fit_personBtn.layer.borderWidth = 1;
+     self.fit_personBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
+     self.fit_personBtn.layer.cornerRadius = 5;
+     self.fit_personBtn.layer.masksToBounds = true;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

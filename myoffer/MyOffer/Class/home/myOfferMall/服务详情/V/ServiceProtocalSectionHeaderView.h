@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ServiceProtocalItem.h"
 
-typedef void(^sprotocalSectionBlock)();
+typedef void(^sprotocalSectionBlock)(void);
 @interface ServiceProtocalSectionHeaderView : UIView
 @property(nonatomic,copy)sprotocalSectionBlock actionBlock;
 @property(nonatomic,strong)ServiceProtocalItem *item;

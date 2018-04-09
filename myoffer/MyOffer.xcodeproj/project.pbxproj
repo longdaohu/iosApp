@@ -144,8 +144,6 @@
 		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
 		AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */; };
 		AE3600661E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */; };
-		AE3600691E8E24C900EE20EB /* ServiceProtocalBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3600681E8E24C900EE20EB /* ServiceProtocalBottomView.m */; };
-		AE36006B1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE36006A1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib */; };
 		AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3826721EE69EED0096AC6A /* OrderItemFrame.m */; };
 		AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */; };
 		AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEED1E4AFE0C00FCF28B /* ShareNView.m */; };
@@ -185,7 +183,6 @@
 		AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */; };
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
-		AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452D1E8D0403005EE15D /* ServiceProtocolViewController.m */; };
 		AE4645311E8D0CAC005EE15D /* ServiceProtocalItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */; };
 		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
 		AE4B2E651F1E095600E328F7 /* MessageCountryTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E211F1E095600E328F7 /* MessageCountryTopicModel.m */; };
@@ -445,6 +442,7 @@
 		AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */; };
 		AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */; };
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
+		AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA9399C207B0D1B0035121D /* serviceProtocolVC.m */; };
 		AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */; };
 		AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */; };
 		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
@@ -746,9 +744,6 @@
 		AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guid_smart.jpg; sourceTree = "<group>"; };
 		AE3600641E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalSectionHeaderView.h; sourceTree = "<group>"; };
 		AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalSectionHeaderView.m; sourceTree = "<group>"; };
-		AE3600671E8E24C900EE20EB /* ServiceProtocalBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalBottomView.h; sourceTree = "<group>"; };
-		AE3600681E8E24C900EE20EB /* ServiceProtocalBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalBottomView.m; sourceTree = "<group>"; };
-		AE36006A1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceProtocalBottomView.xib; sourceTree = "<group>"; };
 		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
 		AE3826711EE69EED0096AC6A /* OrderItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemFrame.h; sourceTree = "<group>"; };
 		AE3826721EE69EED0096AC6A /* OrderItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemFrame.m; sourceTree = "<group>"; };
@@ -825,8 +820,6 @@
 		AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XJ.m"; sourceTree = "<group>"; };
 		AE4645291E8CE9F9005EE15D /* ServiceItemBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemBottomView.h; sourceTree = "<group>"; };
 		AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemBottomView.m; sourceTree = "<group>"; };
-		AE46452C1E8D0403005EE15D /* ServiceProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocolViewController.h; sourceTree = "<group>"; };
-		AE46452D1E8D0403005EE15D /* ServiceProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocolViewController.m; sourceTree = "<group>"; };
 		AE46452F1E8D0CAC005EE15D /* ServiceProtocalItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalItem.h; sourceTree = "<group>"; };
 		AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalItem.m; sourceTree = "<group>"; };
 		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1294,6 +1287,8 @@
 		AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniCenterFilterVController.m; sourceTree = "<group>"; };
 		AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyDataView.h; sourceTree = "<group>"; };
 		AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyDataView.m; sourceTree = "<group>"; };
+		AEA9399B207B0D1B0035121D /* serviceProtocolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = serviceProtocolVC.h; sourceTree = "<group>"; };
+		AEA9399C207B0D1B0035121D /* serviceProtocolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = serviceProtocolVC.m; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferUniversityModel.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferUniversityModel.m; sourceTree = "<group>"; };
 		AEB634A91ED2B996009DFFD4 /* ZhiXunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiXunCell.h; sourceTree = "<group>"; };
@@ -2436,8 +2431,8 @@
 			children = (
 				AE6FF2931E8912A200C2A013 /* ServiceItemViewController.h */,
 				AE6FF2941E8912A200C2A013 /* ServiceItemViewController.m */,
-				AE46452C1E8D0403005EE15D /* ServiceProtocolViewController.h */,
-				AE46452D1E8D0403005EE15D /* ServiceProtocolViewController.m */,
+				AEA9399B207B0D1B0035121D /* serviceProtocolVC.h */,
+				AEA9399C207B0D1B0035121D /* serviceProtocolVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2473,9 +2468,6 @@
 				AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */,
 				AE3600641E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.h */,
 				AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */,
-				AE3600671E8E24C900EE20EB /* ServiceProtocalBottomView.h */,
-				AE3600681E8E24C900EE20EB /* ServiceProtocalBottomView.m */,
-				AE36006A1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -4041,7 +4033,6 @@
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
-				AE36006B1E8E24DB00EE20EB /* ServiceProtocalBottomView.xib in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
@@ -4230,6 +4221,7 @@
 				AE3943E21E0A1AD00038826A /* UIView+SDExtension.m in Sources */,
 				AE3943DC1E0A1AD00038826A /* TAAbstractDotView.m in Sources */,
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
+				AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */,
 				AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */,
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
@@ -4288,7 +4280,6 @@
 				AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */,
 				AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */,
 				AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */,
-				AE3600691E8E24C900EE20EB /* ServiceProtocalBottomView.m in Sources */,
 				AEA24A341D5B231300DD7939 /* EvaluateSearchCollegeViewController.m in Sources */,
 				AE914ED31F4188B0008A43CD /* ApplyStatusNewCell.m in Sources */,
 				AE6178D42073327A006B311A /* CreateOrderVC.m in Sources */,
@@ -4435,7 +4426,6 @@
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
 				AE3AB6D21F21D7AC00A3C7E3 /* SMAudioCell.m in Sources */,
 				AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */,
-				AE46452E1E8D0403005EE15D /* ServiceProtocolViewController.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
 				AE6178B62072381D006B311A /* DiscountItem.m in Sources */,
 				AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */,

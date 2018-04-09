@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^UpgradeTipsViewBlock)();
+typedef void(^UpgradeTipsViewBlock)(void);
 @interface UpgradeFooterView : UIView
 //提示字符串
 @property(nonatomic,copy)NSString *tipStr;

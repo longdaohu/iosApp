@@ -17,6 +17,6 @@ typedef NS_ENUM(NSInteger,OrderDiscountCellType){
 @interface DiscountCell : UITableViewCell
 @property(nonatomic,strong)DiscountItem *item;
 @property(nonatomic,assign) OrderDiscountCellType type;
-@property(nonatomic,copy)void(^discountCellBlock)();
+@property(nonatomic,copy)void(^discountCellBlock)(void);
 
 @end

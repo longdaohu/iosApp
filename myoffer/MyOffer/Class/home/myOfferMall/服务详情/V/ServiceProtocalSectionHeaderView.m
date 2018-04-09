@@ -111,16 +111,17 @@
     NSString *arrow = item.isClose ?  @"arrow_down" : @"arrow_up" ;
     
     self.arrowView.image =  [UIImage imageNamed:arrow];
-      
  
-    
 }
 
 
 - (void)dealloc{
     
-    KDClassLog(@"dealloc 留学 服务协议 详情 ServiceProtocalSectionHeaderView");
+    KDClassLog(@"留学 服务协议 详情 + ServiceProtocalSectionHeaderView + dealloc");
 }
 
 
 @end
+
+
+

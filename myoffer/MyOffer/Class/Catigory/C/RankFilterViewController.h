@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "rankFilter.h"
-typedef void(^RankFilterViewControllerBlock)();
+typedef void(^RankFilterViewControllerBlock)(void);
 @interface RankFilterViewController : UIViewController
 //排序筛选数据
 @property(nonatomic,strong)rankFilter *rankFilterModel;

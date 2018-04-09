@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *priceCtrt;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedView;
 
 @end
 
@@ -64,10 +65,8 @@
     self.timeLab.text = item.time;
     self.priceLab.attributedText =  item.attriPrice;
     [self.iconView setImage:[UIImage imageNamed:item.imageName]];
-    self.titleLab.hidden = item.selected;
+    self.selectedView.hidden = !item.selected;
     
-//    self.commitBtn.enabled = !item.disabled;
- 
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

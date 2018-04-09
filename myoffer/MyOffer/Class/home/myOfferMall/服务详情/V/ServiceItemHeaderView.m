@@ -210,7 +210,7 @@
 
 - (void)dealloc{
     
-    KDClassLog(@"dealloc 留学 服务 详情 ServiceItemHeaderView");
+    KDClassLog(@" 留学 服务 详情 + ServiceItemHeaderView + dealloc");
 }
 
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^UniCourseFooterViewBlock)();
+typedef void(^UniCourseFooterViewBlock)(void);
 @interface UniversityCourseFooterView : UIView
 @property(nonatomic,assign)NSInteger count;
 @property(nonatomic,copy)UniCourseFooterViewBlock actionBlock;

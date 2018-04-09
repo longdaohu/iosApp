@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^successBlock)();
+typedef void(^successBlock)(void);
 @interface WYLXSuccessView : UIView
 @property(nonatomic,copy)successBlock actionBlock;
 +(instancetype)successViewWithBlock:(successBlock)actionBlock;

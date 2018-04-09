@@ -232,7 +232,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     _showPercentage = showPercentage;
     for(SliceLayer *layer in _pieView.layer.sublayers)
     {
-        CATextLayer *textLayer = [[layer sublayers] objectAtIndex:0];
+        CATextLayer *textLayer = (CATextLayer *)[[layer sublayers] objectAtIndex:0];
         [textLayer setHidden:!_showLabel];
         if(!_showLabel) return;
         NSString *label;
@@ -240,7 +240,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
             label = [NSString stringWithFormat:@"%0.0f", layer.percentage*100];
         else
             label = (layer.text)?layer.text:[NSString stringWithFormat:@"%0.0f", layer.value];
-        CGSize size = [label sizeWithFont:self.labelFont];
+        CGSize size = [label KD_sizeWithAttributeFont:self.labelFont];
         
         if(M_PI*2*_labelRadius*layer.percentage < MAX(size.width,size.height))
         {

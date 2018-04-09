@@ -13,7 +13,7 @@
 #import "OrderEnjoyVC.h"
 #import "OrderActionVC.h"
 #import "DiscountItem.h"
-#import "ServiceProtocolViewController.h"
+#import "serviceProtocolVC.h"
 #import "PayOrderViewController.h"
 #import "OrderItem.h"
 
@@ -26,7 +26,7 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong) UIButton *protocolBtn;
 @property(nonatomic,strong) UIButton *optionBtn;
-@property(nonatomic,strong)ServiceProtocolViewController *protocalVC;
+@property(nonatomic,strong)serviceProtocolVC *protocalVC;
 @property(nonatomic,strong)NSMutableDictionary *parameter;
 
 @end
@@ -122,7 +122,8 @@
 - (void)makeTableView
 {
     self.tableView.backgroundColor = XCOLOR_BG;
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
+    CGFloat footer_h = 30;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, footer_h)];
     self.tableView.tableFooterView = footer;
     
     [self.view addSubview:self.tableView];
@@ -132,9 +133,9 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
-    UIButton *optionBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, 0, 30, 30)];
-    [optionBtn setImage:[UIImage imageNamed:@"check-icons"] forState:UIControlStateNormal];
-    [optionBtn setImage:[UIImage imageNamed:@"check-icons-yes"] forState:UIControlStateSelected];
+    UIButton *optionBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, 0, footer_h, footer_h)];
+    [optionBtn setImage:[UIImage imageNamed:@"protocol_nomal"] forState:UIControlStateNormal];
+    [optionBtn setImage:[UIImage imageNamed:@"protocol_select"] forState:UIControlStateSelected];
     [footer addSubview:optionBtn];
     optionBtn.selected = YES;
     [optionBtn addTarget:self action:@selector(optionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -148,19 +149,20 @@
     [footer addSubview:protocolBtn];
     [protocolBtn addTarget:self action:@selector(protocolClick:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat sub_y = 0;
-    CGFloat sub_h = 30;
+    CGFloat sub_h = footer_h;
     CGFloat sub_x = CGRectGetMaxX(optionBtn.frame) + 5;
     CGFloat sub_w = protocolBtn.mj_w;
     protocolBtn.frame = CGRectMake(sub_x, sub_y, sub_w, sub_h);
     [self protocolAttribute:NO];// 下划线
-
+    
 }
 
-- (ServiceProtocolViewController *)protocalVC{
+- (serviceProtocolVC *)protocalVC{
     
     if (!_protocalVC) {
         
-        _protocalVC = [[ServiceProtocolViewController alloc] init];
+        _protocalVC = [[serviceProtocolVC alloc] init];
+        _protocalVC.type = protocolViewTypeHtml;
         _protocalVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
         [[UIApplication sharedApplication].keyWindow addSubview:_protocalVC.view];
     }
@@ -175,9 +177,10 @@
     myofferGroupModel *group = [myofferGroupModel groupWithItems:@[itemFrame.item] header:nil];
     group.type = SectionGroupTypeCreateOrderMassage;
     [self.groups addObject:group];
+   
     //reduce_flag为true优惠
     if (itemFrame.item.reduce_flag) {
-        
+      
         myofferGroupModel *enjoy = [myofferGroupModel groupWithItems:nil header:@"尊享通道"];
         enjoy.type = SectionGroupTypeCreateOrderEnjoy;
         [self.groups addObject:enjoy];
@@ -217,7 +220,6 @@
         cell.item = group;
 
         return cell;
-
     }
 
     
@@ -227,13 +229,12 @@
     return UITableViewAutomaticDimension;
 }
 
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
     return [UIView new];
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
     return HEIGHT_ZERO;
 }
 
@@ -301,7 +302,7 @@
     
     [self.tableView reloadData];
     
-    NSLog(@"caseEnjoyItemUpdateWithResult  尊享 ==  %@",result[@"rules"]);
+//    NSLog(@"caseEnjoyItemUpdateWithResult  尊享 ==  %@",result[@"rules"]);
 
     //显示总金额
     [self discountMessage:result[@"rules"]];
@@ -384,20 +385,17 @@
  //更新总金额
 - (void)discountMessage:(NSString *)value{
     
-    self.discountLab.text = [NSString stringWithFormat:@"(已优惠 %@) ",value];
+    self.discountLab.text = [NSString stringWithFormat:@"(已优惠￥%@) ",value];
     CGFloat after_price_fl = self.itemFrame.item.price.floatValue - value.floatValue;
-   
     NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%lf",after_price_fl]];
     self.priceLab.text = price;
     
 }
 
-
-
 //查看协议
 - (void)protocolClick:(UIButton *)sender{
  
-       [self.protocalVC protocalShow:YES];
+       [self.protocalVC pageWithHiden:NO];
 }
 
 //选择按钮
@@ -406,21 +404,17 @@
     sender.selected  = !sender.selected;
  
      if (sender.selected) {
-         NSLog(@"能提交");
+         
          [self protocolAttribute:NO];
-     }else{
-        NSLog(@"不能提交");
-    }
-    
-
-    
+     }
+ 
 }
 
 //设置协议字符串颜色
 - (void)protocolAttribute:(BOOL)colorful{
     
     
-    UIColor *clr  = colorful ? XCOLOR_RED : XCOLOR_BLACK;
+    UIColor *clr  = colorful ? XCOLOR_RED :XCOLOR(188, 188, 188, 1);
     NSDictionary *attribtDic = @{
                                  NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],
                                  NSForegroundColorAttributeName: clr
@@ -429,6 +423,7 @@
     [self.protocolBtn setAttributedTitle:attribtStr  forState:UIControlStateNormal];
 }
 
+//提交订单
 - (IBAction)caseCommit:(UIButton *)sender {
     
       if (!self.optionBtn.selected) {
@@ -488,7 +483,7 @@
 
 - (void)dealloc{
     
-    NSLog(@"生成订单页面 +  CreateOrderVC + dealloc");
+    NSLog(@"创建订单页面 +  CreateOrderVC + dealloc");
 }
 
 @end

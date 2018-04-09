@@ -59,11 +59,20 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discount_selected" translatesAutoresizingMaskIntoConstraints="NO" id="t4D-Xe-t2r">
+                                        <rect key="frame" x="93" y="15" width="90" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="MUo-S3-kT8"/>
+                                            <constraint firstAttribute="height" constant="90" id="g0u-Gb-SBA"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="CkK-sr-kIl" firstAttribute="trailing" secondItem="ndg-6C-fMB" secondAttribute="trailing" id="EGg-nZ-a8M"/>
+                                    <constraint firstItem="t4D-Xe-t2r" firstAttribute="centerY" secondItem="bTK-Pa-yv0" secondAttribute="centerY" id="Hqx-5J-A1K"/>
                                     <constraint firstItem="ndg-6C-fMB" firstAttribute="top" secondItem="bTK-Pa-yv0" secondAttribute="top" constant="16" id="Htj-jx-998"/>
+                                    <constraint firstAttribute="trailing" secondItem="t4D-Xe-t2r" secondAttribute="trailing" constant="10" id="K4n-S7-EMC"/>
                                     <constraint firstItem="CkK-sr-kIl" firstAttribute="top" secondItem="8f4-et-KvA" secondAttribute="bottom" constant="5" id="UWm-LB-hkv"/>
                                     <constraint firstItem="CkK-sr-kIl" firstAttribute="leading" secondItem="ndg-6C-fMB" secondAttribute="leading" id="Y2e-jv-Z1D"/>
                                     <constraint firstAttribute="trailing" secondItem="ndg-6C-fMB" secondAttribute="trailing" constant="10" id="Zx5-SE-rCg"/>
@@ -148,6 +157,7 @@
                 <outlet property="leftView" destination="bTK-Pa-yv0" id="TXh-bp-2Po"/>
                 <outlet property="priceCtrt" destination="UCb-bH-XsE" id="9Os-6t-US1"/>
                 <outlet property="priceLab" destination="Hyz-1T-QcH" id="x7n-pB-Ztr"/>
+                <outlet property="selectedView" destination="t4D-Xe-t2r" id="Fz1-wf-pAt"/>
                 <outlet property="timeLab" destination="CkK-sr-kIl" id="InJ-sN-ZcY"/>
                 <outlet property="titleLab" destination="ndg-6C-fMB" id="501-vw-fql"/>
             </connections>
@@ -156,5 +166,6 @@
     </objects>
     <resources>
         <image name="discount_nomal" width="136" height="120"/>
+        <image name="discount_selected" width="144" height="146"/>
     </resources>
 </document>

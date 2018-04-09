@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^SMHotSectionFooterBlock)();
+typedef void(^SMHotSectionFooterBlock)(void);
 @interface SMHotSectionFooterView : UIView
 
 @property(nonatomic,copy)NSString *moreTitle;

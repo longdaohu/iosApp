@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^WYLXHeaderViewBlock)();
+typedef void(^WYLXHeaderViewBlock)(void);
 
 @interface WYLXHeaderView : UIView
 
