@@ -17,16 +17,30 @@
 
 @implementation OrderEnjoyVC
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+ 
+    [MobClick beginLogPageView:@"page尊享通道"];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:@"page尊享通道"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"尊享通道";
     [self.valueTF addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
-
 - (IBAction)commitBtn:(UIButton *)sender {
-    
-    
+ 
     if (self.valueTF.text.length < 9) {
         [MBProgressHUD showError:@"请输入9位数尊享码"];
          return;
@@ -35,39 +49,36 @@
     NSDictionary *parameter = @{@"pId" : self.valueTF.text};
     XWeakSelf
     [self startAPIRequestWithSelector:@"GET svc/marketing/promote/check" parameters:parameter expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        if ([response[@"code"] integerValue]  == 1) {
-            [weakSelf show:response[@"msg"]];
-            return ;
-        }
-        
-        if ([response[@"code"] integerValue]  == 0) {
- //                  NSLog(@"尊享码 %@",result);
-            if (self.enjoyBlock) {
-                self.enjoyBlock(response[@"result"]);
-                [self dismiss];
-            }
-        }
-        
+        [weakSelf updateResultWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        [weakSelf show:@"网络请求失败！！！"];
+        [weakSelf showError:@"网络请求失败！！！"];
     }];
-    
  
 }
 
-- (void)show:(NSString *)msg{
- 
-    [MBProgressHUD showError:msg];
+- (void)updateResultWithResponse:(id)response{
   
+    if ([response[@"code"] integerValue]  == 1) {
+        [self showError:@"此尊享码不存在"];
+        return ;
+    }
+    
+    if ([response[@"code"] integerValue]  == 0) {
+        if (self.enjoyBlock) {
+            self.enjoyBlock(response[@"result"]);
+            [self dismiss];
+        }
+    }
 }
 
+- (void)showError:(NSString *)msg{
+    [MBProgressHUD showError:msg];
+}
 
 - (void)valueChange:(UITextField *)sender{
  
     if (sender.text.length > 9) {
-        
-        sender.text = [sender.text substringToIndex:9];
+         sender.text = [sender.text substringToIndex:9];
     }
     
 }
@@ -86,6 +97,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc{
+    
+    KDClassLog(@"尊享通道 +  OrderEnjoyVC + dealloc");
+}
+
 /*
 #pragma mark - Navigation
 
@@ -98,22 +114,5 @@
 
 @end
 
-//checkPromote
-//验证推广id
-//
-//url: svc/marketing/promote/check
-//method: GET
-//query: {
-//pId: string      //推广Id
-//}
-//res: {
-//code: number,           // 0表示成功，其他表示出错，出错时result中有错误描述
-//msg: string,            // 问题原因
-//result: {
-//    "id": "string",
-//    "name": "string",
-//    "rules": "number",
-//    "promoteId": "string"
-//}
-//}
+
 

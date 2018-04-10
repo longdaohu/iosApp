@@ -15,11 +15,39 @@
     
     if (!_time) {
         
-        _time = [NSString stringWithFormat:@"%@ —— %@",_statrTime,_endTime];
+        _time = [NSString stringWithFormat:@"%@ — %@",self.statrTime,self.endTime];
     }
     
     return _time;
 }
+
+
+- (NSString *)statrTime{
+    
+    return [self changeWithUrl:_statrTime];
+
+}
+
+- (NSString *)endTime{
+    
+    return [self changeWithUrl:_endTime];
+}
+
+- (NSString *)changeWithUrl:(NSString *)url{
+    
+    NSString *path = @"";
+    if (url.length == 0) {
+        return path;
+    }
+    
+    NSArray *items = [url componentsSeparatedByString:@" "];
+    if (items.count > 0) {
+        path = items.firstObject;
+        path = [path stringByReplacingOccurrencesOfString:@"-" withString:@"."];
+    }
+    return path;
+}
+
 
 - (NSAttributedString *)attriPrice{
     
@@ -32,19 +60,20 @@
     }
     return _attriPrice;
 }
-
-- (BOOL)disable{
-    
-    return (self.state.integerValue == 2);
+ 
+- (BOOL)disabled{
+ 
+    return (self.state.integerValue == 2) ? YES : NO;
 }
 
 - (NSString *)imageName{
     
     if (!_imageName) {
         
-        _imageName = _disabled ? @"discount_disable":@"discount_nomal";
+        _imageName = (self.state.integerValue == 2)  ? @"discount_disable":@"discount_nomal";
+        
     }
-    
+
     return _imageName;
 }
 

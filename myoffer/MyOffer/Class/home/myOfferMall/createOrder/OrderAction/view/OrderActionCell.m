@@ -25,7 +25,6 @@
 - (void)setCell_selected:(BOOL)cell_selected{
     
     _cell_selected  = cell_selected;
-    
  
     NSString *imageName = cell_selected ?   @"order_discount_select"  : @"order_discount_nomal" ;
     

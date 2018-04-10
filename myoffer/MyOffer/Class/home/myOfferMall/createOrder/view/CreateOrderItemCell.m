@@ -34,7 +34,7 @@
     _item = item;
     
     self.titleLab.text = item.header_title;
-    self.massageLab.text =item.sub;
+    self.massageLab.text = item.sub;
 
 }
 

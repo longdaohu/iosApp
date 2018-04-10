@@ -36,16 +36,13 @@
     
     _type = type;
     
-        if (type == OrderDiscountCellTypeNoClickButton) {
-    
-            self.priceCtrt.constant = 40;
-            self.commitBtn.hidden = YES;
-    
-        }else{
-    
-            self.priceCtrt.constant = 20;
-            self.commitBtn.hidden = NO;
-        }
+    if (type == OrderDiscountCellTypeNoClickButton) {
+        self.priceCtrt.constant = 40;
+        self.commitBtn.hidden = YES;
+    }else{
+        self.priceCtrt.constant = 20;
+        self.commitBtn.hidden = NO;
+    }
 }
 
 - (IBAction)click:(UIButton *)sender {
@@ -60,12 +57,18 @@
 - (void)setItem:(DiscountItem *)item{
     
     _item = item;
-    
+ 
     self.titleLab.text = item.name;
     self.timeLab.text = item.time;
     self.priceLab.attributedText =  item.attriPrice;
     [self.iconView setImage:[UIImage imageNamed:item.imageName]];
     self.selectedView.hidden = !item.selected;
+    
+    if (item.disabled) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }else{
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
     
 }
 
@@ -73,6 +76,7 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+ 
 }
 
 @end

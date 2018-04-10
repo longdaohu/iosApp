@@ -25,7 +25,7 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
-    [MobClick beginLogPageView:@"page优惠"];
+    [MobClick beginLogPageView:@"page我的优惠"];
     
 }
 
@@ -33,7 +33,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page优惠"];
+    [MobClick endLogPageView:@"page我的优惠"];
     
 }
 
@@ -51,15 +51,12 @@
     self.cell_top_selected = YES;
     
     for (DiscountItem *item in items) {
-        
             if (item.selected ) {
-                
                 self.cell_top_selected = NO;
- 
                 break;
             }
     }
-
+    
     [self.tableView reloadData];
     
 }
@@ -119,7 +116,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
     DiscountItem  *item_select = nil;
     
     if (indexPath.section == 0) {
@@ -128,16 +124,15 @@
     }else{
         item_select  = self.items[indexPath.section - 1];
     }
-    
-    [self dismiss];
+    //未到使用时间不可用
+    if (item_select.disabled)  return;
  
+    [self dismiss];
     //如果点击项为已选项，没必要再重复再选择
     if (item_select.selected)  return;
- 
     if (self.actBlock) {
         self.actBlock(item_select);
     }
- 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,7 +148,7 @@
 
 - (void)dealloc{
     
-    NSLog(@"优惠 + DiscountVC + dealloc");
+    NSLog(@"我的优惠 + OrderActionVC + dealloc");
 }
 
 @end

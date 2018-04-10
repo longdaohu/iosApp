@@ -107,7 +107,7 @@
 
 - (void)makeUI{
     
-    self.title  = @"创建订单";
+    self.title  = @"订单确认页";
     
     [self makeTableView];
     
@@ -298,7 +298,7 @@
     for (myofferGroupModel *item in self.groups) {
         item.sub = @"";
     }
-    group.sub = [NSString stringWithFormat:@"尊享优惠了 ￥%@",result[@"rules"]];
+    group.sub = [NSString stringWithFormat:@"尊享优惠了 -￥%@",result[@"rules"]];
     
     [self.tableView reloadData];
     
@@ -336,7 +336,7 @@
         it.sub = @"";
     }
     
-    NSString *sub = item ? [NSString stringWithFormat:@"活动优惠了 ￥%@",item.rules] : @"";
+    NSString *sub = item ? [NSString stringWithFormat:@"%@ -￥%@",item.name,item.rules] : @"";
     group.sub = sub;
     [self.tableView reloadData];
     
@@ -347,8 +347,6 @@
             it.selected = YES;
         }
     }
- 
-    NSLog(@"caseActionUpdateWithItem  ==  %@",item.rules);
     
     //更新总金额
     [self discountMessage:item.rules];
@@ -385,11 +383,11 @@
  //更新总金额
 - (void)discountMessage:(NSString *)value{
     
+    self.discountLab.hidden = !value;
     self.discountLab.text = [NSString stringWithFormat:@"(已优惠￥%@) ",value];
     CGFloat after_price_fl = self.itemFrame.item.price.floatValue - value.floatValue;
     NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%lf",after_price_fl]];
     self.priceLab.text = price;
-    
 }
 
 //查看协议
@@ -483,7 +481,7 @@
 
 - (void)dealloc{
     
-    NSLog(@"创建订单页面 +  CreateOrderVC + dealloc");
+    KDClassLog(@"创建订单页面 +  CreateOrderVC + dealloc");
 }
 
 @end

@@ -25,7 +25,7 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
  
-    [MobClick beginLogPageView:@"page优惠"];
+    [MobClick beginLogPageView:@"page我的优惠"];
 
 }
 
@@ -33,7 +33,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [MobClick endLogPageView:@"page优惠"];
+    [MobClick endLogPageView:@"page我的优惠"];
     
 }
 
@@ -105,7 +105,6 @@
     
     XWeakSelf;
     DiscountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscountCell" forIndexPath:indexPath];
-    cell.selectionStyle =  UITableViewCellSelectionStyleNone;
     cell.item = self.items[indexPath.section];
     cell.discountCellBlock = ^{
         MyOfferServerMallViewController  *vc = [[MyOfferServerMallViewController alloc] initWithNibName:@"MyOfferServerMallViewController" bundle:nil];
@@ -120,6 +119,10 @@
     return UITableViewAutomaticDimension;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

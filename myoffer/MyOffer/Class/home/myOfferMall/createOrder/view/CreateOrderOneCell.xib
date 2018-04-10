@@ -70,7 +70,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.35999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*购买商品后，请和相关咨询人员联系" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMw-pb-S3s">
-                        <rect key="frame" x="15" y="172" width="116.5" height="14.5"/>
+                        <rect key="frame" x="15" y="172" width="116.5" height="10.5"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="750" constant="202" id="bwI-LR-MqK"/>
                         </constraints>
@@ -79,7 +79,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="￥3000000000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTb-tD-daj">
-                        <rect key="frame" x="136.5" y="165" width="173.5" height="29"/>
+                        <rect key="frame" x="136.5" y="163" width="173.5" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -107,7 +107,7 @@
                     <constraint firstItem="KTb-tD-daj" firstAttribute="trailing" secondItem="4Rl-O4-pg1" secondAttribute="trailing" id="OOz-mg-jKx"/>
                     <constraint firstItem="gMw-pb-S3s" firstAttribute="leading" secondItem="ase-Yc-X2e" secondAttribute="leading" id="Ohe-ki-kb3"/>
                     <constraint firstItem="ase-Yc-X2e" firstAttribute="top" secondItem="QE7-Gu-ddg" secondAttribute="bottom" constant="10" id="bzk-r5-ust"/>
-                    <constraint firstAttribute="bottom" secondItem="gMw-pb-S3s" secondAttribute="bottom" constant="17" id="cSc-nR-Jg1"/>
+                    <constraint firstAttribute="bottom" secondItem="gMw-pb-S3s" secondAttribute="bottom" constant="21" id="cSc-nR-Jg1"/>
                     <constraint firstItem="j0A-rx-DR3" firstAttribute="top" secondItem="R96-4c-psa" secondAttribute="bottom" constant="10" id="cae-kT-aHE"/>
                     <constraint firstItem="4Rl-O4-pg1" firstAttribute="leading" secondItem="ase-Yc-X2e" secondAttribute="trailing" constant="5" id="eJV-hK-j8i"/>
                     <constraint firstItem="j0A-rx-DR3" firstAttribute="bottom" secondItem="ase-Yc-X2e" secondAttribute="bottom" id="fXx-jb-yjl"/>

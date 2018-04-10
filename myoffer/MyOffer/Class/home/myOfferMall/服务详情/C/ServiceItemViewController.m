@@ -18,21 +18,13 @@
 #import "serviceProtocolVC.h"
 
 @interface ServiceItemViewController ()<WKNavigationDelegate,UITableViewDelegate,UITableViewDataSource>
-//显示内容信息 webView
-@property(nonatomic,strong)WKWebView *web_wk;
-
+@property(nonatomic,strong)WKWebView *web_wk;//显示内容信息 webView
 @property(nonatomic,strong)MyOfferTableView *tableView;
-//tableHeaderView
 @property(nonatomic,strong) ServiceItemHeaderView *headerView;
-//头部图片
-@property(nonatomic,strong)myofferFlexibleView *flexView;
-//顶部View
-@property(nonatomic,strong)UniversityNavView *topNavigationView;
-//底部View
-@property(nonatomic,strong)ServiceItemBottomView *bottomView;
-//显示协议
-@property(nonatomic,strong)serviceProtocolVC *protocolVC;
-
+@property(nonatomic,strong)myofferFlexibleView *flexView;//顶部下拉图片
+@property(nonatomic,strong)UniversityNavView *topNavigationView;//顶部导航View
+@property(nonatomic,strong)ServiceItemBottomView *bottomView;//底部View
+@property(nonatomic,strong)serviceProtocolVC *protocolVC;//显示协议
 @property(nonatomic,strong)ServiceItemFrame *service_Frame;
 
 @end
@@ -115,7 +107,7 @@
 
 - (void)makeWebView{
     
-    if (self.web_wk) [self.web_wk removeFromSuperview];
+//    if (self.web_wk) [self.web_wk removeFromSuperview];
     
     WKWebView *web = [[WKWebView alloc] initWithFrame:self.view.bounds];
     web.scrollView.scrollEnabled = NO;
@@ -180,7 +172,9 @@
 - (void)updateUIWithresponse:(id)response{
     
     //每次刷新 新建WebView
-    [self makeWebView];
+    if (!self.web_wk) {
+        [self makeWebView];
+    }
  
     ServiceItem *item = [ServiceItem mj_objectWithKeyValues:response];
     item.login_status = LOGIN;
@@ -195,19 +189,17 @@
   
     self.tableView.tableHeaderView =  self.headerView;
  
-    
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
     
     [self.web_wk loadHTMLString:htmlStr baseURL:nil];
-  
-    [self.web_wk reload];
-
     
     self.bottomView.price =  item.price_str;
     
     self.topNavigationView.titleName = item.name ;
     
     self.protocolVC.itemFrame = itemFrame;
+ 
+    [self.web_wk  evaluateJavaScript:@"window.location.reload();" completionHandler:nil];
 }
 
 
