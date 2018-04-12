@@ -84,7 +84,7 @@
 
 
 
-#pragma mark ——————  WKWebViewDeleage
+#pragma mark : WKWebViewDeleage
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
      self.HUD = [MBProgressHUD showMessage:nil];

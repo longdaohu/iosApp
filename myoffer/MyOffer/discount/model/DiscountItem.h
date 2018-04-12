@@ -15,7 +15,7 @@
 @property(nonatomic,copy)NSString *rules;//优惠价格
 @property(nonatomic,copy)NSAttributedString *attriPrice;//优惠价格
 @property(nonatomic,copy)NSString *name;//优惠券名称
-@property(nonatomic,copy)NSString *statrTime;//优惠券开始时间
+@property(nonatomic,copy)NSString *startTime;//优惠券开始时间
 @property(nonatomic,copy)NSString *endTime;//优惠券过期时间
 @property(nonatomic,copy)NSString *time;//自定义优惠券时间
 @property(nonatomic,copy)NSString *imageName;//自定义图片名称

@@ -15,16 +15,16 @@
     
     if (!_time) {
         
-        _time = [NSString stringWithFormat:@"%@ — %@",self.statrTime,self.endTime];
+        _time = [NSString stringWithFormat:@"%@ — %@",self.startTime,self.endTime];
     }
     
     return _time;
 }
 
 
-- (NSString *)statrTime{
+- (NSString *)startTime{
     
-    return [self changeWithUrl:_statrTime];
+    return [self changeWithUrl:_startTime];
 
 }
 

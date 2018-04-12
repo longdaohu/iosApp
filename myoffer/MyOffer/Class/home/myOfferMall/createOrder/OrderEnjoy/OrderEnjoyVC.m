@@ -41,8 +41,15 @@
 
 - (IBAction)commitBtn:(UIButton *)sender {
  
+    NSLog(@" %ld",self.valueTF.text.length);
+    
+    if (self.valueTF.text.length == 0) {
+        [MBProgressHUD showMessage:@"请输入尊享码"];
+        return;
+    }
+    
     if (self.valueTF.text.length < 9) {
-        [MBProgressHUD showError:@"请输入9位数尊享码"];
+        [MBProgressHUD showMessage:@"请输入9位数尊享码"];
          return;
     }
  
@@ -58,21 +65,30 @@
 
 - (void)updateResultWithResponse:(id)response{
   
+    
     if ([response[@"code"] integerValue]  == 1) {
         [self showError:@"此尊享码不存在"];
         return ;
     }
     
     if ([response[@"code"] integerValue]  == 0) {
+        
+       NSDictionary *result = response[@"result"];
+        
+        if (self.price.floatValue < [result[@"rules"] floatValue]) {
+            [self showError:@"该尊享码不在活动范围内"];
+            return;
+        }
+
         if (self.enjoyBlock) {
-            self.enjoyBlock(response[@"result"]);
+            self.enjoyBlock(result);
             [self dismiss];
         }
     }
 }
 
 - (void)showError:(NSString *)msg{
-    [MBProgressHUD showError:msg];
+    [MBProgressHUD showMessage:msg];
 }
 
 - (void)valueChange:(UITextField *)sender{

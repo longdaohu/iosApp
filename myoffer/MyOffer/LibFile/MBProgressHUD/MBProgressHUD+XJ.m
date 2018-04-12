@@ -21,15 +21,12 @@
     hud.label.text = text;
     hud.label.numberOfLines = 2;
     hud.backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-
     // 设置图片
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
     // 再设置模式
     hud.mode = MBProgressHUDModeCustomView;
-    
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
-    
     // 1秒之后再消失
     [hud hideAnimated:YES afterDelay:2];
     
@@ -54,21 +51,20 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     
     hud.animationType = MBProgressHUDAnimationZoomOut;
-
+    
     hud.label.text = message;
     
     hud.label.numberOfLines = 2;
- 
+    
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // YES代表需要蒙版效果
-//    hud.dimBackground = YES;
+    //    hud.dimBackground = YES;
     hud.backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     
     return hud;
     
 }
-
 
 
 + (void)showSuccess:(NSString *)success
@@ -81,11 +77,6 @@
     [self showError:error toView:nil];
 }
 
-+ (MBProgressHUD *)showMessage:(NSString *)message
-{
-    return [self showMessage:message toView:nil];
-}
-
 + (void)hideHUDForView:(UIView *)view
 {
     [self hideHUDForView:view animated:YES];
@@ -96,40 +87,17 @@
     [self hideHUDForView:nil];
 }
 
-//----------------------------------------------------------------
++ (MBProgressHUD *)showMessage:(NSString *)message
+{
+    MBProgressHUD *hud = [MBProgressHUD showMessage:message toView:nil];
+    hud.mode = MBProgressHUDModeText;
+    [hud hideAnimated:YES afterDelay:2];
+    
+    return hud;
+}
 
-//
-//+ (MBProgressHUD *)showCustomViewToSuperView:(UIView *)view{
-//    
-//    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
-//    
-//    // 快速显示一个提示信息
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-// 
-//    hud.label.text = @"abc";
-//    hud.bezelView.alpha = 1;
-//    
-//    
-//    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"loding" ofType:@"gif"]];
-//    UIImageView *loadingView =  [[UIImageView alloc] initWithImage:[UIImage sd_animatedGIFWithData:data]];
-//    loadingView.frame = CGRectMake(0, 0, 120, 120);
-//    [hud.bezelView addSubview: loadingView];
-//    
-//    loadingView.center = hud.center;
-//    
-//    
-//    // 隐藏时候从父控件中移除
-//    hud.removeFromSuperViewOnHide = YES;
-//    // YES代表需要蒙版效果
-//    hud.backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-//    
-//    
-//    return hud;
-//}
-//
-//
 + (MBProgressHUD *)showSuccessWithMessage:(NSString *)message ToView:(UIView *)view{
-
+    
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
@@ -155,3 +123,4 @@
 
 
 @end
+

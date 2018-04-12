@@ -152,14 +152,13 @@
         NSString *display_price =  itemFrame.item.display_price_str;
         NSRange dis_price_Rangne = NSMakeRange(0, display_price.length);
         if (itemFrame.item.reduce_flag) {
-          display_price = [NSString stringWithFormat:@"%@  (已减价格)",display_price];
+          display_price = [NSString stringWithFormat:@"%@ ",display_price];
         }
         
         NSMutableAttributedString *attribueStr = [[NSMutableAttributedString alloc] initWithString:display_price];
         [attribueStr addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:dis_price_Rangne];
         self.display_price.attributedText = attribueStr;
     }
-    
 
     
     self.name.frame = itemFrame.name_Frame;

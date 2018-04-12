@@ -1,4 +1,4 @@
-//
+///Users/xuewuguojie/Desktop/iosApp/myoffer/MyOffer/Class
 //  OrderEnjoyVC.h
 //  MyOffer
 //
@@ -10,6 +10,7 @@
 
 @interface OrderEnjoyVC : BaseViewController
 @property(nonatomic,copy)void(^enjoyBlock)(NSDictionary *);
+@property(nonatomic,strong)NSNumber *price;
 
 @end
 

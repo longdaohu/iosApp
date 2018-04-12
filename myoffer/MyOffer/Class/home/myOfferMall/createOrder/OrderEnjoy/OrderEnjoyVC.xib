@@ -31,7 +31,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpE-VE-p0h">
-                                    <rect key="frame" x="35.5" y="25" width="303" height="366"/>
+                                    <rect key="frame" x="35.5" y="29" width="303" height="366"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown" translatesAutoresizingMaskIntoConstraints="NO" id="CgQ-FS-NKD">
                                             <rect key="frame" x="133.5" y="20" width="37" height="37"/>
@@ -48,7 +48,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rv4-yi-W5d">
                                             <rect key="frame" x="50" y="271" width="204" height="50"/>
-                                            <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.85098039219999999" green="0.054901960780000002" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="FmM-s0-4Vk"/>
                                                 <constraint firstAttribute="width" constant="204" id="QZe-1I-EoR"/>
@@ -57,9 +57,10 @@
                                             <state key="normal" title="使用">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="highlighted" backgroundImage="red_highligh"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="5"/>
+                                                    <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
@@ -102,7 +103,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2z-bb-Ft7">
-                                    <rect key="frame" x="15" y="417" width="345" height="120"/>
+                                    <rect key="frame" x="15" y="421" width="345" height="120"/>
                                     <string key="text">使用规则：
 
 1.尊享码不可给予他人，或转增，交易。一经发现将不视于该尊享码
@@ -120,7 +121,7 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="q2z-bb-Ft7" secondAttribute="trailing" constant="15" id="UT2-XO-h6n"/>
                                 <constraint firstItem="q2z-bb-Ft7" firstAttribute="leading" secondItem="jgA-9h-CGa" secondAttribute="leading" constant="15" id="eX1-HO-5h2"/>
-                                <constraint firstItem="bpE-VE-p0h" firstAttribute="top" secondItem="jgA-9h-CGa" secondAttribute="top" constant="25" id="kbr-K0-xA5"/>
+                                <constraint firstItem="bpE-VE-p0h" firstAttribute="top" secondItem="jgA-9h-CGa" secondAttribute="top" constant="29" id="kbr-K0-xA5"/>
                                 <constraint firstItem="bpE-VE-p0h" firstAttribute="centerX" secondItem="jgA-9h-CGa" secondAttribute="centerX" id="qXD-GB-xxK"/>
                                 <constraint firstItem="q2z-bb-Ft7" firstAttribute="top" secondItem="bpE-VE-p0h" secondAttribute="bottom" constant="26" id="z8X-TX-1rb"/>
                             </constraints>
@@ -154,5 +155,6 @@
         <image name="crown" width="37" height="37"/>
         <image name="crown_bg" width="200" height="191"/>
         <image name="ipt_border" width="120" height="15"/>
+        <image name="red_highligh" width="5" height="5"/>
     </resources>
 </document>

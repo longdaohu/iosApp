@@ -142,12 +142,9 @@
     
     
     [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
- 
         NSString *web_height = [NSString stringWithFormat:@"%@",Result];
          self.web_wk.mj_h = [web_height floatValue] + 20;
          [self.tableView reloadData];
-        
-        
     }];
  
 }
@@ -225,13 +222,9 @@
         XWeakSelf
         ServiceItemHeaderView *headerView = [[ServiceItemHeaderView alloc] init];
         headerView.actionBlcok = ^(NSString *service_id){
-            
-            weakSelf.service_id = service_id;
-            
+             weakSelf.service_id = service_id;
             [weakSelf makeDataSource];
-            
         };
-        
         
         _headerView = headerView;
     }
@@ -243,10 +236,8 @@
 //添加自定义顶部导航
 -(void)makeTopNavigaitonView{
     
-    
     XWeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
-        
         [weakSelf navigationItemWithSender:sender];
     }];
     //隐藏收藏功能
@@ -276,11 +267,10 @@
     
     web_bgv.contentSize =  CGSizeMake(cell.bounds.size.width, self.web_wk.mj_h);
     web_bgv.mj_h = self.web_wk.bounds.size.height;
-    
     [web_bgv addSubview:self.web_wk];
     
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 0, XSCREEN_WIDTH - 20, 0.5)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 0, XSCREEN_WIDTH - 20, LINE_HEIGHT)];
     line.backgroundColor = XCOLOR_line;
     [cell.contentView addSubview:line];
  
@@ -334,14 +324,9 @@
 - (void) bottomViewWithItemOnClick:(UIButton *)sender{
 
     if (sender.currentTitle.length) {
-        
         RequireLogin
- 
-//        [self.protocalVC protocalShow:YES];
         [self caseOrder];
-        
     }else{
-        
         [self  caseQQ];
     }
 }
@@ -375,21 +360,16 @@
 - (void)showError{
     
     if (!self.service_Frame) {
-      
         [self.tableView emptyViewWithError:NetRequest_ConnectError];
-        
          self.bottomView.alpha = 0;
     }
     
-        
  }
 
 - (void)showProductionDescription{
 
     if(0 < self.service_Frame.item.comment_attr.count) {
-
         [self.protocolVC  pageWithHiden:NO];
-
     }
 
 }
