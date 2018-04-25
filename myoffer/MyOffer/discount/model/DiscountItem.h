@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface DiscountItem : NSObject
-//@property(nonatomic,copy)NSString *id;
+@property(nonatomic,copy)NSString *item_id;
 @property(nonatomic,copy)NSString *cId;//优惠券类型Id
 @property(nonatomic,copy)NSString *state;//0表示可使用 2表示不可使用
 @property(nonatomic,copy)NSString *rules;//优惠价格

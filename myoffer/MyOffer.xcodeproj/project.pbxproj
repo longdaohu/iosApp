@@ -2013,10 +2013,10 @@
 		AE4B2E1F1F1E095600E328F7 /* MessageCenter */ = {
 			isa = PBXGroup;
 			children = (
+				AE4B2E561F1E095600E328F7 /* messageTopic */,
 				AE4B2E821F1E09F200E328F7 /* topic */,
 				AE4B2E241F1E095600E328F7 /* messageDetail */,
 				AE4B2E321F1E095600E328F7 /* messagehome */,
-				AE4B2E561F1E095600E328F7 /* messageTopic */,
 			);
 			path = MessageCenter;
 			sourceTree = "<group>";

@@ -117,7 +117,6 @@
 //订单支付宝
 #define kAPISelectorOrderAlipay @"GET api/account/alipayapp?order_id=%@"
 //订单微信
-//#define kAPISelectorOrderWeixin @"GET api/account/wechatpayapp?is_ios=1&order_id=%@"
 #define kAPISelectorOrderWeixin @"GET api/sz/account/wechatpayapp?is_ios=1&order_id=%@"
 //文章点赞
 #define kAPISelectorMessageZang @"GET api/article/%@/like"

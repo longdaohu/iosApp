@@ -23,7 +23,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
      self.selectionStyle = UITableViewCellSelectionStyleNone;
      self.fit_personBtn.layer.borderWidth = 1;
      self.fit_personBtn.layer.borderColor = XCOLOR_LIGHTBLUE.CGColor;
@@ -42,8 +42,8 @@
     _item = item;
     
     self.discount.hidden = !item.reduce_flag;
-    
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.cover_url] placeholderImage:nil];
+ 
+    [self.iconView sd_setImageWithURL: [item.cover_url mj_url] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.titleLab.text = item.name;
     self.priceLab.text = item.price_str;
     self.forPersonLab.text = item.comment_suit_people[@"value"];

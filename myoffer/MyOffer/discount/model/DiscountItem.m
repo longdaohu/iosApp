@@ -10,6 +10,13 @@
 
 @implementation DiscountItem
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{
+             @"item_id" : @"id"
+             };
+    
+}
 
 - (NSString *)time{
     

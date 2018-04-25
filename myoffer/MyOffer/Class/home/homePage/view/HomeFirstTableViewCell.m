@@ -46,9 +46,9 @@
 {
     _itemInfo = itemInfo;
     
-    NSString *iconStr = [itemInfo[@"image"]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *iconUrl = [itemInfo[@"image"]  mj_url];
 
-    NSString *path = [iconStr containsString:@"http"] ? iconStr : [NSString stringWithFormat:@"%@%@",DOMAINURL,iconStr];
+    NSString *path = [iconUrl.absoluteString containsString:@"http"] ? iconUrl.absoluteString : [NSString stringWithFormat:@"%@%@",DOMAINURL,iconUrl.absoluteString];
 
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:path]];
     

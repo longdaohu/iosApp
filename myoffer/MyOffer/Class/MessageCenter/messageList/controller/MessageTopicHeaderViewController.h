@@ -11,7 +11,6 @@
 @interface MessageTopicHeaderViewController : UIViewController
 @property(nonatomic,assign)CGFloat header_Height;
 @property(nonatomic,strong)NSArray *topices;
-//MessageTopicHeaderViewController 的父View
 @property(nonatomic,strong)UIView *contain_View;
 @property(nonatomic,assign)BOOL containView_scroll_enable;
 

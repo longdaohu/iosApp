@@ -330,21 +330,18 @@
 //push OrderEnjoyVC  数据更新
 - (void)caseEnjoyItemUpdateWithResult:(NSDictionary *)result group:(myofferGroupModel *) group{
  
-    NSString *enjoy_price = result[@"rules"];
+    NSString *enjoy_price = [self fomatterWithPrice:result[@"rules"]];
     
     //显示总金额
     [self discountMessage:enjoy_price];
-
     group.sub = [NSString stringWithFormat:@"尊享码立减优惠 -￥%@",enjoy_price];
-    
     [self.tableView reloadData];
  
     //提交订单请求参数
     [self.parameter setValue:result[@"promote_id"]  forKey:@"pId"];
-    [self.parameter setValue:@""  forKey:@"cId"];
+    [self.parameter setValue:@""  forKey:@"id"];
  
 }
-
 
 //push OrderActionVC
 - (void)casePushActive:(myofferGroupModel *)group{
@@ -379,8 +376,7 @@
  
    //提交订单请求参数
     [self.parameter setValue:@""  forKey:@"pId"];
-    [self.parameter setValue:item.cId  forKey:@"cId"];
-    
+    [self.parameter setValue:item.item_id  forKey:@"id"];
 }
 
 
@@ -418,10 +414,13 @@
     
     self.discountLab.hidden = !value;
     self.discountLab.text = [NSString stringWithFormat:@"(已优惠￥%@) ",value];
-    CGFloat after_price_fl = self.itemFrame.item.price.floatValue - value.floatValue;
-    NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%lf",after_price_fl]];
-     price = price.floatValue < 0 ? @"0" : price;
-    self.priceLab.text = price;
+    
+    CGFloat nomal_price =  self.itemFrame.item.price.floatValue * 1000;
+    CGFloat discount_price = value.floatValue * 1000;
+    NSInteger result_price = (NSInteger)nomal_price - (NSInteger)discount_price;
+    result_price = result_price < 0 ? 0 : result_price;
+
+    self.priceLab.text = [NSString stringWithFormat:@"￥%.2f",result_price * 0.001];
 }
 
 //查看协议
@@ -475,7 +474,7 @@
     NSNumber *number = [NSNumber numberWithFloat:price.floatValue];
     NSString *numberString = [numberFormatter stringFromNumber: number];
     
-    return  [NSString stringWithFormat:@"￥ %@",numberString];
+    return  numberString;
 }
 
 // 下单
@@ -505,13 +504,17 @@
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order = order;
         [self.navigationController pushViewController:pay animated:YES];
-    }
     
-    
-    if(code.integerValue == 1){
-//        NSString *msg = response[@"msg"];
-//        [MBProgressHUD showMessage:msg];
+    }else if(code.integerValue == 2){
+      
+        [self showErrorAlert];
         
+        return;
+        
+    }else{
+        
+        NSString *msg = response[@"msg"];
+        [MBProgressHUD showMessage:msg];
         
         return;
     }
@@ -522,17 +525,17 @@
     [self tableReload];
  
     //4、请求参数也要更新 再次请求数据，刷新优惠券数据
-    NSLog(@"self.parameter.allKeys >>>>>>>> %@",self.parameter);
+//    NSLog(@"self.parameter.allKeys >>>>>>>> %@",self.parameter);
     
     for (NSString *key in self.parameter.allKeys) {
         
          NSString *value = self.parameter[key];
  
-        if ([key isEqualToString:@"cId"]) {
+        if ([key isEqualToString:@"id"]) {
             
             if (value.length > 0) {
 
-                NSLog(@"请求参数也要更新 >>>>>>>> %@ %@",key,value);
+//                NSLog(@"请求参数也要更新 >>>>>>>> %@ %@",key,value);
                 [self makeData];
                 [self.parameter setValue:@"" forKey:key];
              }
@@ -583,6 +586,35 @@
             [self.parameter setValue:@"" forKey:key];
          }
     }
+}
+
+
+- (void)showErrorAlert{
+
+    XWeakSelf;
+    UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:@"该优惠券已失效，是否继续购买" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+       
+        [weakSelf clearGroupSubstring];
+        [weakSelf initBottom];
+        [weakSelf clearActive];
+        [weakSelf tableReload];
+        [weakSelf clearOtherParameter];
+        
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"原价购买" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [weakSelf clearGroupSubstring];
+        [weakSelf initBottom];
+        [weakSelf clearActive];
+        [weakSelf tableReload];
+        [weakSelf clearOtherParameter];
+        [weakSelf orderCreate];
+        
+    }];
+    [alertCtrl addAction:cancelAction];
+    [alertCtrl addAction:okAction];
+    [self presentViewController:alertCtrl animated:YES completion:nil];
 }
 
 

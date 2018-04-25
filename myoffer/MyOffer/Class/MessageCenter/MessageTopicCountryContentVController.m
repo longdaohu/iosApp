@@ -65,14 +65,13 @@
     
     _tableView.mj_footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 120 + 64, 0);
-    
-    
+
 }
 
 
 #pragma mark : 网络请求
 - (void)makeDataWithPage:(NSInteger)page{
-    
+
     XWeakSelf
     [self startAPIRequestWithSelector:kAPISelectorArticalesList  parameters:self.group.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, NSDictionary *response) {
         

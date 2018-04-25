@@ -108,11 +108,9 @@
     
     self.flexView.image_url = response[@"cover_url"];
     [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
-        
         self.flexView.alpha = 1;
     }];
-    
-    
+ 
     
     NSShadow *shadow=[[NSShadow alloc]init];
     shadow.shadowBlurRadius= 3;//阴影的模糊程度
@@ -140,10 +138,8 @@
     
     XWeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
-        
         [weakSelf navigationItemWithSender:sender];
     }];
-    
     self.topNavigationView = nav;
     [nav navigationWithRightViewHiden:YES];
     [nav navigationWithQQHiden:YES];
@@ -228,7 +224,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     XWGJMessageFrame  *messageFrame  = self.messageFrames[indexPath.row];
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id] animated:YES];
+    MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 

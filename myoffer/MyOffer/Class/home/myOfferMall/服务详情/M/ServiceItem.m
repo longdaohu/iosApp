@@ -72,7 +72,7 @@
     
     NSString *tmp_price =[self fomatterWithPrice:self.price];
     
-    return [NSString stringWithFormat:@"￥ %@",tmp_price];
+    return [NSString stringWithFormat:@"￥%@",tmp_price];
 }
 
 - (NSString *)display_price_str{

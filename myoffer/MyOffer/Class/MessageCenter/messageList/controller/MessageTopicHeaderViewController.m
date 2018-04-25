@@ -89,11 +89,6 @@ static NSString * const reuseIdentifier = @"cityCell";
 
 #pragma mark : UICollectionViewDataSource UICollectionViewDelegate
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
-    return 1;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return  self.topices.count;
@@ -114,9 +109,7 @@ static NSString * const reuseIdentifier = @"cityCell";
     MessageHotTopicMedel *topic = self.topices[indexPath.row];
     
     MessageTopicViewController *tp = [[MessageTopicViewController alloc] init];
-    
     tp.topic_id = topic.topic_id;
-    
     [self.navigationController pushViewController:tp animated:YES];
     
 }
@@ -135,9 +128,7 @@ static NSString * const reuseIdentifier = @"cityCell";
         self.containView_scroll_enable = tableView.scrollEnabled;
         
         if (tableView.scrollEnabled) {
-            
             tableView.scrollEnabled = NO;
-            
         }
         
     }
