@@ -263,15 +263,17 @@ static NSString *filter_identify = @"course_filter";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+ 
     [self onClick:self.currentBtn];
     
+    UniversityCourseFilterCell *cell = (UniversityCourseFilterCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.onSelected) return;
     
     if (tableView == self.A_tableView) {
      
-        NSString *currentValue = indexPath.row == 0 ? @"": self.A_Arr[indexPath.row];
+        NSString *currentValue = (indexPath.row == 0) ? @"": self.A_Arr[indexPath.row];
         
-        self.current_A = indexPath.row == 0 ? KEY_ALL:self.A_Arr[indexPath.row];
+        self.current_A = (indexPath.row == 0) ? KEY_ALL : self.A_Arr[indexPath.row];
         
         if (self.actionBlock) self.actionBlock(currentValue,self.A_Info[@"key"]);
         
@@ -281,9 +283,9 @@ static NSString *filter_identify = @"course_filter";
     }
     
     
-    NSString *currentValue = indexPath.row == 0 ? KEY_EMPTY_STRING : self.areas[indexPath.row];
+    NSString *currentValue = (indexPath.row == 0) ? KEY_EMPTY_STRING : self.areas[indexPath.row];
     
-    self.current_area = indexPath.row == 0 ? KEY_ALL: self.areas[indexPath.row];
+    self.current_area = (indexPath.row == 0) ? KEY_ALL: self.areas[indexPath.row];
     
     if (self.actionBlock) self.actionBlock(currentValue,self.rightInfo[@"key"]);
     

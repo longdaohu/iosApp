@@ -144,7 +144,6 @@
 
      }
     
-    
     //2 字典转数组
     NSArray *items = [SMHotModel mj_objectArrayWithKeyValuesArray:response[@"items"]];
     NSMutableArray *hots_temp = [NSMutableArray array];

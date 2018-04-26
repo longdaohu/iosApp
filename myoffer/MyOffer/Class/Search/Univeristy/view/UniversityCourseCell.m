@@ -143,6 +143,7 @@ static NSString *identify = @"course";
     sender.frame = frame;
     sender.layer.cornerRadius = CORNER_RADIUS;
     sender.layer.masksToBounds = YES;
+//    sender.layer.shouldRasterize = YES;
     sender.titleLabel.textAlignment = NSTextAlignmentCenter;
     
 }

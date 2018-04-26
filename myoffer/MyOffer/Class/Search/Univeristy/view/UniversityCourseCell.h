@@ -17,9 +17,7 @@
 
 - (void)cellSelectedButtonHiden:(BOOL)hiden;
 - (void)bottomLineHiden:(BOOL)hiden;
-
 - (void)cellDidSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

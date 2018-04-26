@@ -107,7 +107,7 @@
 
 - (void)makeWebView{
     
-//    if (self.web_wk) [self.web_wk removeFromSuperview];
+    if (self.web_wk) [self.web_wk removeFromSuperview];
     
     WKWebView *web = [[WKWebView alloc] initWithFrame:self.view.bounds];
     web.scrollView.scrollEnabled = NO;
@@ -169,9 +169,7 @@
 - (void)updateUIWithresponse:(id)response{
     
     //每次刷新 新建WebView
-    if (!self.web_wk) {
-        [self makeWebView];
-    }
+    [self makeWebView];
  
     ServiceItem *item = [ServiceItem mj_objectWithKeyValues:response];
     item.login_status = LOGIN;
@@ -189,14 +187,14 @@
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
     
     [self.web_wk loadHTMLString:htmlStr baseURL:nil];
-    
+    //    [self.web_wk  evaluateJavaScript:@"window.location.reload();" completionHandler:nil];
+
     self.bottomView.price =  item.price_str;
     
     self.topNavigationView.titleName = item.name ;
     
     self.protocolVC.itemFrame = itemFrame;
  
-    [self.web_wk  evaluateJavaScript:@"window.location.reload();" completionHandler:nil];
 }
 
 
@@ -350,6 +348,8 @@
 
 - (void)caseOrder{
     
+    if (!self.service_Frame) return;
+
     CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
     vc.itemFrame =  self.service_Frame;
     [self.navigationController pushViewController:vc animated:YES];

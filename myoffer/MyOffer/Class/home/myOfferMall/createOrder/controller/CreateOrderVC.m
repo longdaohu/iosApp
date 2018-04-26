@@ -315,7 +315,7 @@
     
 }
 
-//push OrderEnjoyVC
+//push  尊享通道
 - (void)casePushEnjoy:(myofferGroupModel *)group{
     
     XWeakSelf
@@ -327,11 +327,11 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-//push OrderEnjoyVC  数据更新
+//push 尊享通道 > 数据更新
 - (void)caseEnjoyItemUpdateWithResult:(NSDictionary *)result group:(myofferGroupModel *) group{
- 
-    NSString *enjoy_price = [self fomatterWithPrice:result[@"rules"]];
-    
+
+    NSString *rules = [NSString stringWithFormat:@"%@",result[@"rules"]];
+    NSString *enjoy_price = [self reviseString:rules];
     //显示总金额
     [self discountMessage:enjoy_price];
     group.sub = [NSString stringWithFormat:@"尊享码立减优惠 -￥%@",enjoy_price];
@@ -343,7 +343,7 @@
  
 }
 
-//push OrderActionVC
+//push  活动通道
 - (void)casePushActive:(myofferGroupModel *)group{
  
         XWeakSelf
@@ -356,7 +356,7 @@
         [self.navigationController pushViewController:vc animated:YES];
 }
 
-//push OrderActionVC >更新数据
+//push 活动通道 > 更新数据
 - (void)caseActionUpdateWithItem:(DiscountItem *)item  group:(myofferGroupModel *)group{
     
      NSString *sub = item ? [NSString stringWithFormat:@"%@ -￥%@",item.name,item.rules] : @"";
@@ -415,12 +415,13 @@
     self.discountLab.hidden = !value;
     self.discountLab.text = [NSString stringWithFormat:@"(已优惠￥%@) ",value];
     
-    CGFloat nomal_price =  self.itemFrame.item.price.floatValue * 1000;
-    CGFloat discount_price = value.floatValue * 1000;
+    CGFloat nomal_price =  1000 * self.itemFrame.item.price.floatValue;
+    CGFloat discount_price = 1000 * value.floatValue;
     NSInteger result_price = (NSInteger)nomal_price - (NSInteger)discount_price;
     result_price = result_price < 0 ? 0 : result_price;
-
-    self.priceLab.text = [NSString stringWithFormat:@"￥%.2f",result_price * 0.001];
+    
+    NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%.2f",(result_price * 0.001)]];
+    self.priceLab.text = price;//[NSString stringWithFormat:@"￥%.2f",(result_price * 0.001)];
 }
 
 //查看协议
@@ -465,17 +466,27 @@
     [self orderCreate];
 }
 
-
+//数据转换
 - (NSString *)fomatterWithPrice:(NSString *)price{
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    NSNumber *number = [NSNumber numberWithFloat:price.floatValue];
+    NSNumber *number = [NSNumber numberWithDouble:price.doubleValue];
     NSString *numberString = [numberFormatter stringFromNumber: number];
     
     return  numberString;
 }
+
+- (NSString *)reviseString:(NSString *)str{
+    
+    //直接传入精度丢失有问题的Double类型
+    double conversionValue = [str doubleValue];
+    NSString *doubleString = [NSString stringWithFormat:@"%lf", conversionValue];
+    NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:doubleString];
+    return [decNumber stringValue];
+}
+
 
 // 下单
 - (void)orderCreate{
