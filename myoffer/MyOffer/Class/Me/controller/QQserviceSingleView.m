@@ -10,6 +10,7 @@
 
 @interface QQserviceSingleView ()<UIWebViewDelegate>
 @property(nonatomic,strong)UIWebView *web;
+@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 
@@ -92,6 +93,20 @@ static id QQserviceSingle = nil;
     return self;
 }
 
+- (UIAlertController *)alert{
+    
+    if (!_alert) {
+        XWeakSelf
+        _alert = [UIAlertController alertWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"下载" actionWithDoneHandler:^{
+            //跳转到QQ下载页面
+            [weakSelf webViewWithpath:@"http://appstore.com/qq"];
+        }];
+    }
+    
+    return _alert;
+}
+
+
 
 - (void)webViewWithpath:(NSString *)path{
     
@@ -107,29 +122,13 @@ static id QQserviceSingle = nil;
         
         [self webViewWithpath:@"mqq://im/chat?chat_type=wpa&uin=3062202216&version=1&src_type=web"];
         
-    }else{
-        
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？"  message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"下载" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //跳转到QQ下载页面
-            [self webViewWithpath:@"http://appstore.com/qq"];
-        }];
-        [alertController addAction:cancelAction];
-        [alertController addAction:commitAction];
-        
-        
-        [[UIApplication sharedApplication ].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        return;
         
     }
-
-  
+    
+    //提示是否下载
+    [self.alert alertShow:[UIApplication sharedApplication ].keyWindow.rootViewController];
+ 
 }
-
-
-
-
-
 
 @end

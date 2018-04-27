@@ -27,34 +27,21 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 @interface ApplyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  MyOfferTableView *tableView;
-//模型数组
-@property(nonatomic,strong)NSMutableArray *groups;
-//已选中课程ID数组
-@property(nonatomic,strong)NSMutableArray *courseSelecteds;
-//删除分区数组
-@property(nonatomic,strong)NSMutableArray *cancelSetions;
-//删除cell对就的indexpath数组
-@property(nonatomic,strong)NSMutableArray *cancelindexPathes;
-
-//提交按钮
-@property (weak, nonatomic) IBOutlet KDEasyTouchButton *submitBtn;
-//底部按钮SuperView
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-//用户已提交审核，防止用户重复提交
-@property (weak, nonatomic) IBOutlet UILabel *AlertLab;
-//已选择数量
-@property (weak, nonatomic) IBOutlet UILabel *selectCountLabel;
-//判断cell是否需要做动画效果
-@property(nonatomic,assign)BOOL cell_Animation;
-//tableView的状态
-@property(nonatomic,assign)ApplyTableStatus tableStatus;
-
+@property(nonatomic,strong)NSMutableArray *groups;//模型数组
+@property(nonatomic,strong)NSMutableArray *courseSelecteds;//已选中课程ID数组
+@property(nonatomic,strong)NSMutableArray *cancelSetions;//删除分区数组
+@property(nonatomic,strong)NSMutableArray *cancelindexPathes;//删除cell对就的indexpath数组
+@property (weak, nonatomic) IBOutlet KDEasyTouchButton *submitBtn;//提交按钮
+@property (strong, nonatomic) IBOutlet UIView *bottomView;//底部按钮SuperView
+@property (weak, nonatomic) IBOutlet UILabel *AlertLab;//用户已提交审核，防止用户重复提交
+@property (weak, nonatomic) IBOutlet UILabel *selectCountLabel;//已选择数量
+@property(nonatomic,assign)BOOL cell_Animation;//判断cell是否需要做动画效果
+@property(nonatomic,assign)ApplyTableStatus tableStatus;//tableView的状态
 @property (weak, nonatomic) IBOutlet UIView *editView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editViewConstraint;
-//删除按钮
-@property (weak, nonatomic) IBOutlet UIButton *cancelBottomButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBottomButton;//删除按钮
 @property (weak, nonatomic) IBOutlet UILabel *cancelCountLab;
-
+@property(nonatomic,strong)UIAlertController *alert;//提示信息
 
 @end
 
@@ -86,19 +73,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 //viewWillAppear状态页面数据调整
 
 -(void)presentViewWillAppear{
-
-//    if (![self checkNetworkState]) {
-//       
-//        [self.tableView emptyViewWithError:NetRequest_ConnectError];
-//        
-//        self.bottomView.alpha = 0;
-//        
-//        self.navigationItem.rightBarButtonItem.enabled = NO;
-// 
-//        return;
-//    }
-    
-    
+ 
     if (LOGIN) {
         
          [self makeDataSourse];
@@ -114,8 +89,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         [self emptyViewShowWithResult:self.groups];
         
     }
-    
-    
 }
 
 
@@ -164,7 +137,17 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     return _courseSelecteds;
 }
 
-
+- (UIAlertController *)alert{
+    
+    if (!_alert) {
+        XWeakSelf
+        _alert = [UIAlertController alertWithTitle:@"是否确认删除" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
+            //先删除 已选择专业数组列表  > 再删除分区头
+            [weakSelf commitCancelselectCell];
+        }];
+    }
+    return _alert;
+}
 
 - (void)viewDidLoad {
     
@@ -566,30 +549,9 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         
         return;
     }
-    
-    
-    XWeakSelf
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:GDLocalizedString(@"ApplicationList-comfig")  message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:Button_Title_Cancel  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:GDLocalizedString(@"NetRequest-OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        //先删除 已选择专业数组列表  > 再删除分区头
-        [weakSelf commitCancelselectCell];
-        
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:commitAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    //提示是否删除
+    [self.alert alertShow:self];
 }
-
-
-
 
 #pragma mark : 点击编辑按钮
 

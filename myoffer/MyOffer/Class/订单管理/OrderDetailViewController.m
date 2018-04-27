@@ -24,7 +24,7 @@
 @property(nonatomic,strong)NSDictionary *orderDetailDict;
 @property(nonatomic,strong)UILabel *rightLab;
 @property(nonatomic,strong)UIBarButtonItem *backBtn;
-
+@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 @implementation OrderDetailViewController
@@ -68,7 +68,16 @@
     return  _leftItems;
 }
 
-
+- (UIAlertController *)alert{
+    
+    if (!_alert) {
+         XWeakSelf
+       _alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
+            [weakSelf caseOrderClose];
+        }];
+    }
+    return _alert;
+}
 
 - (void)viewDidLoad {
     
@@ -78,7 +87,6 @@
     
     [self makeUI];
 }
-
 
 -(void)makeDataSourse{
     
@@ -264,32 +272,24 @@
 
 //取消订单
 -(void)cancelOrder{
-
-    XWeakSelf
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要取消订单"  message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
     
-    UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
-        //先删除 已选择专业数组列表  > 再删除分区头
-        [weakSelf startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-            if ([response[@"result"] isEqualToString:@"OK"]) {
-                
-                if (weakSelf.actionBlock) {
-                    weakSelf.actionBlock(YES);
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
-                 }
-            }
-        }];
+    [self.alert alertShow:self];
+}
+
+- (void)caseOrderClose{
+    
+    XWeakSelf
+    NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
+    //先删除 已选择专业数组列表  > 再删除分区头
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+       
+        if (![response[@"result"] isEqualToString:@"OK"]) return;
+        if (weakSelf.actionBlock) {
+             weakSelf.actionBlock(YES);
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
         
     }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:commitAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-    
 }
 
 //返回

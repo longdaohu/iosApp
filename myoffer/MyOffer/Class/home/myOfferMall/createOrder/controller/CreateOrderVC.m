@@ -92,30 +92,31 @@
 
 //活动通道
 - (void)updateWithResponse:(id)response{
+   
+    /*
+     code == 0 网络请求成功
+     code > 0  网络请求不成功 不继续执行
+     */
+    if ([response[@"code"] integerValue] != 0) return;
     
     NSArray *result  = response[@"result"];
-
+    
+    //数据为 0  不继续执行
+    if (result.count == 0) return;
  
-//    NSArray *arr = [DiscountItem mj_objectArrayWithKeyValuesArray:result];
     CGFloat price = self.itemFrame.item.price.floatValue;
     NSMutableArray *able_arr = [NSMutableArray array];
     NSMutableArray *disable_arr = [NSMutableArray array];
     [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
         NSDictionary *it  = (NSDictionary *)obj;
         if (obj&& (it.allKeys.count > 0)) {
-            
             DiscountItem *item = [DiscountItem mj_objectWithKeyValues:it];
-            //1. 当优惠券价格>商品价格=此优惠券无效（同时，变为不可使用状态，置灰显示）
+            //1  当优惠券价格>商品价格=此优惠券无效（同时，变为不可使用状态，置灰显示）
             if (item.rules.floatValue > price) {
                 item.state = @"2";
             }
-            if (item.disabled) {
-                [disable_arr addObject:item];
-            }else{
-                [able_arr addObject:item];
-            }
-            
+            //2  数据分组
+            item.disabled ? [disable_arr addObject:item] :  [able_arr addObject:item];
         }
  
     }];
@@ -143,13 +144,9 @@
 - (void)makeUI{
     
     self.title  = @"订单确认页";
-    
     [self makeTableView];
-    
     self.priceLab.text = self.itemFrame.item.price_str;
-    
     [self.parameter setValue:self.itemFrame.item.service_id  forKey:@"skuId"];
-
     self.protocalVC.itemFrame = self.itemFrame;
 
 }
@@ -157,17 +154,18 @@
 - (void)makeTableView
 {
     self.tableView.backgroundColor = XCOLOR_BG;
-    CGFloat footer_h = 30;
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, footer_h)];
-    self.tableView.tableFooterView = footer;
-    
     [self.view addSubview:self.tableView];
     self.tableView.estimatedRowHeight = 200;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.automaticallyAdjustsScrollViewInsets = NO;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
+    
+    CGFloat footer_h = 30;
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, footer_h)];
+    self.tableView.tableFooterView = footer;
     UIButton *optionBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, 0, footer_h, footer_h)];
     [optionBtn setImage:[UIImage imageNamed:@"protocol_nomal"] forState:UIControlStateNormal];
     [optionBtn setImage:[UIImage imageNamed:@"protocol_select"] forState:UIControlStateSelected];
@@ -243,7 +241,7 @@
  
     if (group.type == SectionGroupTypeCreateOrderMassage) {
         
-        CreateOrderOneCell  *cell = [[NSBundle mainBundle] loadNibNamed:@"CreateOrderOneCell" owner:self options:nil].lastObject;
+        CreateOrderOneCell  *cell =  Bundle(@"CreateOrderOneCell");
         cell.item = group.items[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -251,17 +249,13 @@
         
     }else{
         
-        CreateOrderItemCell  *cell = [[NSBundle mainBundle] loadNibNamed:@"CreateOrderItemCell" owner:self options:nil].lastObject;
+        CreateOrderItemCell  *cell = Bundle(@"CreateOrderItemCell");
         cell.item = group;
 
         return cell;
     }
 
     
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -383,29 +377,25 @@
 //显示 Alert
 - (void)caseAlertWithGroup:(myofferGroupModel *)group{
     
-        XWeakSelf;
-        NSString *message = (group.type == SectionGroupTypeCreateOrderActive) ? @"选择使用活动通道将无法同时使用尊享码" :  @"选择使用尊享通道将无法同时使用优惠券" ;
-        UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-         }];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"依然进入" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-            [weakSelf clearGroupSubstring];
-            [weakSelf initBottom];
-            if (group.type == SectionGroupTypeCreateOrderActive ) {
-                //活动通道
-                 [weakSelf casePushActive:group];
-            }else{
-                //尊享通道
-                [weakSelf clearActive];
-                [weakSelf casePushEnjoy:group];
-            }
-            
-            [weakSelf tableReload];
-        }];
-        [alertCtrl addAction:cancelAction];
-        [alertCtrl addAction:okAction];
-        [self presentViewController:alertCtrl animated:YES completion:nil];
+    XWeakSelf
+    NSString *message = (group.type == SectionGroupTypeCreateOrderActive) ? @"选择使用活动通道将无法同时使用尊享码" :  @"选择使用尊享通道将无法同时使用优惠券" ;
+    UIAlertController *alert = [UIAlertController alertWithTitle:nil  message:message actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"依然进入" actionWithDoneHandler:^{
+       
+        [weakSelf clearGroupSubstring];
+        [weakSelf initBottom];
+        if (group.type == SectionGroupTypeCreateOrderActive ) {
+            //活动通道
+            [weakSelf casePushActive:group];
+        }else{
+            //尊享通道
+            [weakSelf clearActive];
+            [weakSelf casePushEnjoy:group];
+        }
+        
+        [weakSelf tableReload];
+        
+    }];
+    [alert  alertShow:self];
     
 }
 
@@ -427,7 +417,7 @@
 //查看协议
 - (void)protocolClick:(UIButton *)sender{
  
-       [self.protocalVC pageWithHiden:NO];
+    [self.protocalVC pageWithHiden:NO];
 }
 
 //选择按钮

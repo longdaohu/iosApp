@@ -140,6 +140,7 @@
 #import "myofferGroupModel.h"
 #import "XWGJAbout.h"
 #import "myofferBaseTableViewController.h"
+#import "UIAlertController+alert.h"
 
 
 #endif

@@ -56,6 +56,7 @@
 		AE072CD7206A5ABA001641AC /* myofferBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE072CD5206A5AB9001641AC /* myofferBaseTableViewController.m */; };
 		AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */; };
 		AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1501C21D8E39AF006751D0 /* WebViewController.m */; };
+		AE1CEF072092D787001D24F0 /* UIAlertController+alert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1CEF062092D786001D24F0 /* UIAlertController+alert.m */; };
 		AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */; };
 		AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1FD6891D5C78E600FFD5A8 /* NotiItem.m */; };
 		AE1FD71B1D5C929500FFD5A8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE1FD6941D5C929500FFD5A8 /* Info.plist */; };
@@ -606,6 +607,8 @@
 		AE133E9E1D6E952600AC9C42 /* UniversityDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityDetailItem.m; path = controller/UniversityDetailItem.m; sourceTree = "<group>"; };
 		AE1501C11D8E39AF006751D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AE1501C21D8E39AF006751D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		AE1CEF052092D786001D24F0 /* UIAlertController+alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+alert.h"; sourceTree = "<group>"; };
+		AE1CEF062092D786001D24F0 /* UIAlertController+alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+alert.m"; sourceTree = "<group>"; };
 		AE1D011B1D2FCD2D005E2DEF /* YYToolKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYToolKit.h; sourceTree = "<group>"; };
 		AE1D011C1D2FCD2D005E2DEF /* YYToolKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYToolKit.m; sourceTree = "<group>"; };
 		AE1FD6881D5C78E600FFD5A8 /* NotiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiItem.h; sourceTree = "<group>"; };
@@ -3596,6 +3599,8 @@
 		AEA24BCD1D5B266A00DD7939 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				AE1CEF052092D786001D24F0 /* UIAlertController+alert.h */,
+				AE1CEF062092D786001D24F0 /* UIAlertController+alert.m */,
 				AEA24BCE1D5B266A00DD7939 /* ActionTableViewController.h */,
 				AEA24BCF1D5B266A00DD7939 /* ActionTableViewController.m */,
 				AEA24BD01D5B266A00DD7939 /* DoneButton.h */,
@@ -4288,6 +4293,7 @@
 				AEA24BEA1D5B266A00DD7939 /* LogoView.m in Sources */,
 				AE6F28741D77CA3C00E9A47A /* UUChart.m in Sources */,
 				AE3943DF1E0A1AD00038826A /* TAPageControl.m in Sources */,
+				AE1CEF072092D787001D24F0 /* UIAlertController+alert.m in Sources */,
 				AEA24A391D5B231300DD7939 /* SubjectItem.m in Sources */,
 				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
