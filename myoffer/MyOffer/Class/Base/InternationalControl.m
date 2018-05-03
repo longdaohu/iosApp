@@ -35,8 +35,6 @@ static NSBundle *bundle = nil;
 //        NSArray* languages = [def objectForKey:@"AppleLanguages"];
         
         NSString *current =  @"zh-cn";//[languages objectAtIndex:0];
-        
-        useLanguage = current ;//
  
         [def setValue:current forKey:@"userLanguage"];
         

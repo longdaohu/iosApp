@@ -107,7 +107,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [MobClick endLogPageView:@"page新版首页"];
- 
+  
 }
 
 - (void)viewDidLoad {
@@ -119,7 +119,7 @@
     [self makeUI];
     
     [self makeOther];
-  
+ 
 }
 
 
@@ -287,7 +287,7 @@
         
         weakSelf.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
         
-        weakSelf.autoLoopView.imageURLStringsGroup  =  [weakSelf.banner valueForKey:@"cover_url"];
+        weakSelf.autoLoopView.imageURLStringsGroup  =  [weakSelf.banner valueForKeyPath:@"thumbnail"];
         
         weakSelf.autoLoopView.userInteractionEnabled = weakSelf.banner.count ? YES : NO;
         

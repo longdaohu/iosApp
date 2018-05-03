@@ -64,7 +64,7 @@
         if (tag_x + tag_w > tags_w){
             
             tag_x = 0;
-            tag_tmp = 0;
+            //tag_tmp = 0; //Value stored to 'tag_tmp' is never read
             tag_y = tags_h + Margin;
          }
         

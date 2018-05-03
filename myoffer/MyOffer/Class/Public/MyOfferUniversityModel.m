@@ -44,7 +44,7 @@
 
 -(NSNumber *)ranking_qs{
  
-    NSNumber *rank  = @0;
+    NSNumber *rank; //= @0 Value stored to 'rank' during its initialization is never read
     if (_ranking_qs) {
         rank = (_ranking_qs.integerValue == DEFAULT_NUMBER)? @0 : _ranking_qs;
     }else{
@@ -56,7 +56,7 @@
 
 -(NSNumber *)ranking_ti{
  
-    NSNumber *rank  = @0;
+    NSNumber *rank;//= @0 Value stored to 'rank' during its initialization is never read
     if (_ranking_ti) {
         rank = (_ranking_ti.integerValue == DEFAULT_NUMBER)? @0 : _ranking_ti;
     }else{

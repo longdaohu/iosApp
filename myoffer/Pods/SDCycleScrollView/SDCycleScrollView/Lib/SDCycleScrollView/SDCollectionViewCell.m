@@ -43,25 +43,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self setupImageView];
-        
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        UIColor *colorOne = [UIColor colorWithWhite:0 alpha:0];
-        UIColor *colorThree = [UIColor colorWithWhite:0 alpha:0.6];
-        gradient.colors           = [NSArray arrayWithObjects:
-                                     (id)colorOne.CGColor,
-//                                     (id)colorTwo.CGColor,
-                                     (id)colorThree.CGColor,
-                                     nil];
-//        gradient.locations = @[@0.3, @0.5, @1.0];
-        gradient.startPoint = CGPointMake(0, 0);
-        gradient.endPoint = CGPointMake(0, 1);
-        [self.contentView.layer addSublayer:gradient];
-        self.gradient = gradient;
-        
         [self setupTitleLabel];
-  
-        
-
     }
     
     return self;
@@ -95,7 +77,6 @@
 - (void)setupTitleLabel
 {
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.numberOfLines = 0;
     _titleLabel = titleLabel;
     _titleLabel.hidden = YES;
     [self.contentView addSubview:titleLabel];
@@ -104,14 +85,17 @@
 - (void)setTitle:(NSString *)title
 {
     _title = [title copy];
-    _titleLabel.text = title;
-    
+    _titleLabel.text = [NSString stringWithFormat:@"   %@", title];
     if (_titleLabel.hidden) {
         _titleLabel.hidden = NO;
     }
- 
 }
 
+-(void)setTitleLabelTextAlignment:(NSTextAlignment)titleLabelTextAlignment
+{
+    _titleLabelTextAlignment = titleLabelTextAlignment;
+    _titleLabel.textAlignment = titleLabelTextAlignment;
+}
 
 - (void)layoutSubviews
 {
@@ -121,17 +105,12 @@
         _titleLabel.frame = self.bounds;
     } else {
         _imageView.frame = self.bounds;
-        
-        CGFloat titleLabelX = 10;
-        CGFloat titleLabelW = self.sd_width - 2 * titleLabelX;
-        CGFloat titleLabelH = 45;
-        CGFloat titleLabelY = self.sd_height - titleLabelH - 30;
+        CGFloat titleLabelW = self.sd_width;
+        CGFloat titleLabelH = _titleLabelHeight;
+        CGFloat titleLabelX = 0;
+        CGFloat titleLabelY = self.sd_height - titleLabelH;
         _titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     }
-    
-    CGFloat bgHeight = 120;
-    CGFloat bgY = self.title ? self.sd_height - bgHeight :  self.sd_height - bgHeight * 0.5;
-    self.gradient.frame = CGRectMake(0, bgY, self.sd_width, bgHeight);
 }
 
 @end

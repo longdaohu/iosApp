@@ -138,7 +138,7 @@
 
 - (void)moveIndicatorView:(BOOL)animated
 {
-    UIFont *titleFont = _titleFont;
+    UIFont *titleFont;//= _titleFont; Value stored to 'titleFont' during its initialization is never read
     
     UIButton *selectBtn = self.itemBtnArr[self.selectIndex];
     

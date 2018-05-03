@@ -14,7 +14,6 @@
 #import "UserDefaults.h"
 #import "MyOfferLoginViewController.h"
 #import "APService.h"
-#import "RNCachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "HomeViewContViewController.h"
@@ -55,9 +54,7 @@ static AppDelegate *__sharedDelegate;
     
     //创建主控制
     [self makeRootController];
-
-    //[NSURLProtocol registerClass:[RNCachingURLProtocol class]];//用于缓存
-    
+ 
     //友盟
     [self umeng];
     

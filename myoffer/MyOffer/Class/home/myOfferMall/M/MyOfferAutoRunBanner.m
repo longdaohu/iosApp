@@ -14,7 +14,24 @@
     return @{@"banner_id" : @"_id"};
     
 }
+- (NSString *)thumbnail{
+    
+    NSString *path = [_thumbnail JH_stringUTF8WithString];
+    
+    if (!_thumbnail) {
+        path = [_cover_url JH_stringUTF8WithString];
+    }
+    
+    return path;
+}
 
-
+- (NSString *)cover_url{
+    
+    NSString *path = [_cover_url JH_stringUTF8WithString];
+ 
+    return path;
+}
 
 @end
+
+

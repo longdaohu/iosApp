@@ -29,13 +29,9 @@
 @interface SuperMasterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *groups;
-//总数据源
-@property(nonatomic,strong)SuperMasterHomeDemol *smModel;
-//轮播图View
-@property(nonatomic,strong)SDCycleScrollView *autoLoopView;
-//线下活动View
-@property(nonatomic,strong)SMNewsOnLineView *onLineView;
-
+@property(nonatomic,strong)SuperMasterHomeDemol *smModel;//总数据源
+@property(nonatomic,strong)SDCycleScrollView *autoLoopView;//轮播图
+@property(nonatomic,strong)SMNewsOnLineView *onLineView;//线下活动
 @property(nonatomic,strong)NSDate *login_date;
 
 @end

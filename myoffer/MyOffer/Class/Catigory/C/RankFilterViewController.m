@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger,filterButtonType) {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
  
-    NSString *name = self.current_button.currentTitle;
+    NSString *name;
     NSString *key = @"";
     NSDictionary *filter_item;
     switch (tableView.tag) {

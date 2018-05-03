@@ -75,7 +75,7 @@
 #define Section_footer_Height_Title 80
 #define AutoScroll_Height   AdjustF(160.f)
 #define Tag_Height   16;
-#define REDSPOT_HEIGHT 20.0
+#define RedSpot_Height 20.0
 #define ITEM_MARGIN   10.0
 #define HEIGHT_ZERO 0.01
 #define LINE_HEIGHT 0.5
@@ -141,6 +141,7 @@
 #import "XWGJAbout.h"
 #import "myofferBaseTableViewController.h"
 #import "UIAlertController+alert.h"
+#import "NSString+extent.h"
 
 
 #endif

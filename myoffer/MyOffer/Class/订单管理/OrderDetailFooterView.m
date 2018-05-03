@@ -191,8 +191,7 @@
     NSString *create_at = [self makeTime:log[@"create_at"]];
     NSString *sub_title = @"订单创建成功";
     self.NoOneRecordLab.text = [NSString stringWithFormat:@"%@ %@",create_at,sub_title];
-
-    
+ 
     if ([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]) {
         
         NSArray *trades =orderDict[@"trades"];
@@ -200,7 +199,7 @@
     
         NSString *temp;
         NSString *payTime = [self makeTime:trade[@"create_at"]];
-        sub_title = @"完成订单";
+        // sub_title = @"完成订单";  Dead store: Value stored to 'sub_title' is never read
         
         if([orderDict[@"status"] isEqualToString:@"ORDER_FINISHED"]){
             NSString *system = @"支付成功";

@@ -35,7 +35,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
     // Buttons
     UIButton *_doneButton;
-    UIButton *_saveButton;
 
 	// Toolbar
 	UIToolbar *_toolbar;
@@ -115,8 +114,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 - (void)cancelControlHiding;
 - (void)hideControlsAfterDelay;
 - (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated permanent:(BOOL)permanent;
-- (void)toggleControls;
+//- (void)toggleControls;
 - (BOOL)areControlsHidden;
+
+// Interactions
+- (void)handleSingleTap;
 
 // Data
 - (NSUInteger)numberOfPhotos;
@@ -132,12 +134,13 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 // Properties
 @synthesize displayDoneButton = _displayDoneButton, displayToolbar = _displayToolbar, displayActionButton = _displayActionButton, displayCounterLabel = _displayCounterLabel, useWhiteBackgroundColor = _useWhiteBackgroundColor, doneButtonImage = _doneButtonImage;
-@synthesize leftArrowImage = _leftArrowImage, rightArrowImage = _rightArrowImage, leftArrowSelectedImage = _leftArrowSelectedImage, rightArrowSelectedImage = _rightArrowSelectedImage;
+@synthesize leftArrowImage = _leftArrowImage, rightArrowImage = _rightArrowImage, leftArrowSelectedImage = _leftArrowSelectedImage, rightArrowSelectedImage = _rightArrowSelectedImage, actionButtonImage = _actionButtonImage, actionButtonSelectedImage = _actionButtonSelectedImage;
 @synthesize displayArrowButton = _displayArrowButton, actionButtonTitles = _actionButtonTitles;
 @synthesize arrowButtonsChangePhotosAnimated = _arrowButtonsChangePhotosAnimated;
 @synthesize forceHideStatusBar = _forceHideStatusBar;
 @synthesize usePopAnimation = _usePopAnimation;
 @synthesize disableVerticalSwipe = _disableVerticalSwipe;
+@synthesize dismissOnTouch = _dismissOnTouch;
 @synthesize actionsSheet = _actionsSheet, activityViewController = _activityViewController;
 @synthesize trackTintColor = _trackTintColor, progressTintColor = _progressTintColor;
 @synthesize delegate = _delegate;
@@ -148,6 +151,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     if ((self = [super init])) {
         // Defaults
         self.hidesBottomBarWhenPushed = YES;
+		
         _currentPageIndex = 0;
 		_performingLayout = NO; // Reset on view did appear
 		_rotating = NO;
@@ -159,7 +163,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _initalPageIndex = 0;
         _autoHide = YES;
         _autoHideInterface = YES;
-        
+
         _displayDoneButton = YES;
         _doneButtonImage = nil;
 
@@ -171,6 +175,8 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _forceHideStatusBar = NO;
         _usePopAnimation = NO;
 		_disableVerticalSwipe = NO;
+		
+		_dismissOnTouch = NO;
 
         _useWhiteBackgroundColor = NO;
         _leftArrowImage = _rightArrowImage = _leftArrowSelectedImage = _rightArrowSelectedImage = nil;
@@ -183,26 +189,19 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         _scaleImage = nil;
 
         _isdraggingPhoto = NO;
+        
+        _doneButtonRightInset = 20.f;
+        _doneButtonTopInset = 30.f;
+        _doneButtonSize = CGSizeMake(55.f, 26.f);
 
-        if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)])
+		if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
             self.automaticallyAdjustsScrollViewInsets = NO;
-
+		}
+		
         _applicationWindow = [[[UIApplication sharedApplication] delegate] window];
-
-		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-		{
-			self.modalPresentationStyle = UIModalPresentationCustom;
-			self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            self.modalPresentationCapturesStatusBarAppearance = YES;
-		}
-		else
-		{
-			_applicationTopViewController = [self topviewController];
-			_previousModalPresentationStyle = _applicationTopViewController.modalPresentationStyle;
-			_applicationTopViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-			self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		}
-
+		self.modalPresentationStyle = UIModalPresentationCustom;
+		self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		self.modalPresentationCapturesStatusBarAppearance = YES;
 		self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
         // Listen for IDMPhoto notifications
@@ -211,7 +210,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
                                                      name:IDMPhoto_LOADING_DID_END_NOTIFICATION
                                                    object:nil];
     }
-
+	
     return self;
 }
 
@@ -301,7 +300,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
     self.view.opaque = YES;
 
-    self.view.backgroundColor = [UIColor darkGrayColor]; //[UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:newAlpha];
+    self.view.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:newAlpha];
 
     // Gesture Ended
     if ([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
@@ -338,7 +337,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
             _isdraggingPhoto = NO;
             [self setNeedsStatusBarAppearanceUpdate];
 
-            self.view.backgroundColor = [UIColor darkGrayColor]; //[UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
+            self.view.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
 
             CGFloat velocityY = (.35*[(UIPanGestureRecognizer*)sender velocityInView:self.view].y);
 
@@ -410,6 +409,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 }
 
 - (void)performCloseAnimationWithScrollView:(IDMZoomingScrollView*)scrollView {
+    if ([_delegate respondsToSelector:@selector(willDisappearPhotoBrowser:)]) {
+        [_delegate willDisappearPhotoBrowser:self];
+    }
+
     float fadeAlpha = 1 - fabs(scrollView.frame.origin.y)/scrollView.frame.size.height;
 
     UIImage *imageFromView = [scrollView.photo underlyingImage];
@@ -520,22 +523,29 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         if ([_delegate respondsToSelector:@selector(photoBrowser:didDismissAtPageIndex:)])
             [_delegate photoBrowser:self didDismissAtPageIndex:_currentPageIndex];
 
-		if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
-		{
-			_applicationTopViewController.modalPresentationStyle = _previousModalPresentationStyle;
-		}
+//		if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+//		{
+//			_applicationTopViewController.modalPresentationStyle = _previousModalPresentationStyle;
+//		}
     }];
 }
 
 - (UIButton*)customToolbarButtonImage:(UIImage*)image imageSelected:(UIImage*)selectedImage action:(SEL)action {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    [button setBackgroundImage:selectedImage forState:UIControlStateDisabled];
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImage:selectedImage forState:UIControlStateDisabled];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [button setContentMode:UIViewContentModeCenter];
-//陷藏上一页下一页按钮
-//    [button setFrame:CGRectMake(0,0, image.size.width, image.size.height)];
+    [button setFrame:[self getToolbarButtonFrame:image]];
     return button;
+}
+
+- (CGRect)getToolbarButtonFrame:(UIImage *)image{
+    BOOL const isRetinaHd = ((float)[[UIScreen mainScreen] scale] > 2.0f);
+    float const defaultButtonSize = isRetinaHd ? 66.0f : 44.0f;
+    CGFloat buttonWidth = (image.size.width > defaultButtonSize) ? image.size.width : defaultButtonSize;
+    CGFloat buttonHeight = (image.size.height > defaultButtonSize) ? image.size.width : defaultButtonSize;
+    return CGRectMake(0,0, buttonWidth, buttonHeight);
 }
 
 - (UIImage*)getImageFromView:(UIView *)view {
@@ -561,7 +571,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 - (void)viewDidLoad {
     // View
-	self.view.backgroundColor =  [UIColor darkGrayColor];//[UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
+	self.view.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
 
     self.view.clipsToBounds = YES;
 
@@ -591,14 +601,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
               forToolbarPosition:UIToolbarPositionAny
                       barMetrics:UIBarMetricsDefault];
 
-    CGRect screenBound = self.view.bounds;
-    CGFloat screenWidth = screenBound.size.width;
-    _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_saveButton setFrame:CGRectMake(screenWidth - 75, 20, 40, 40)];
-    [_saveButton setImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
-    [_saveButton addTarget:self action:@selector(saveClick) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_saveButton];
-    
     // Close Button
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneButton setFrame:[self frameForDoneButtonAtOrientation:currentOrientation]];
@@ -606,14 +608,14 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     [_doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
     if(!_doneButtonImage) {
-//        [_doneButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateNormal|UIControlStateHighlighted];
-//        [_doneButton setTitle:IDMPhotoBrowserLocalizedStrings(@"Done") forState:UIControlStateNormal];
-        [_doneButton setImage:[UIImage imageNamed:@"close_button"] forState:UIControlStateNormal];
-//        [_doneButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11.0f]];
-//        [_doneButton setBackgroundColor:[UIColor colorWithWhite:0.1 alpha:0.5]];
-//        _doneButton.layer.cornerRadius = 3.0f;
-//        _doneButton.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.9].CGColor;
-//        _doneButton.layer.borderWidth = 1.0f;
+        [_doneButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateNormal|UIControlStateHighlighted];
+        [_doneButton setTitle:IDMPhotoBrowserLocalizedStrings(@"Done") forState:UIControlStateNormal];
+        [_doneButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11.0f]];
+        [_doneButton setBackgroundColor:[UIColor colorWithWhite:0.1 alpha:0.5]];
+        _doneButton.layer.cornerRadius = 3.0f;
+        _doneButton.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.9].CGColor;
+        _doneButton.layer.borderWidth = 1.0f;
+        _doneButtonSize = _doneButton.frame.size;
     }
     else {
         [_doneButton setImage:_doneButtonImage forState:UIControlStateNormal];
@@ -660,13 +662,19 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     _counterButton = [[UIBarButtonItem alloc] initWithCustomView:_counterLabel];
 
     // Action Button
-    _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+    if(_actionButtonImage != nil && _actionButtonSelectedImage != nil) {
+        _actionButton = [[UIBarButtonItem alloc] initWithCustomView:[self customToolbarButtonImage:_actionButtonImage
+                                                                                   imageSelected:_actionButtonSelectedImage
+                                                                                          action:@selector(actionButtonPressed:)]];
+    }
+    else {
+        _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                   target:self
                                                                   action:@selector(actionButtonPressed:)];
+    }
 
-    // Gesture   设置可以拖动
-//    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
-    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:nil];
+    // Gesture
+    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
     [_panGesture setMinimumNumberOfTouches:1];
     [_panGesture setMaximumNumberOfTouches:1];
 
@@ -680,6 +688,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 - (void)viewWillAppear:(BOOL)animated {
     // Update
     [self reloadData];
+
+
+    if ([_delegate respondsToSelector:@selector(willAppearPhotoBrowser:)]) {
+        [_delegate willAppearPhotoBrowser:self];
+    }
 
     // Super
 	[super viewWillAppear:animated];
@@ -717,22 +730,21 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 }
 
 - (BOOL)prefersStatusBarHidden {
-//    if(_forceHideStatusBar) {
-//        return YES;
-//    }
-//
-//    if(_isdraggingPhoto) {
-//        if(_statusBarOriginallyHidden) {
-//            return YES;
-//        }
-//        else {
-//            return NO;
-//        }
-//    }
-//    else {
-//        return [self areControlsHidden];
-//    }
-    return NO;
+    if(_forceHideStatusBar) {
+        return YES;
+    }
+
+    if(_isdraggingPhoto) {
+        if(_statusBarOriginallyHidden) {
+            return YES;
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        return [self areControlsHidden];
+    }
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
@@ -842,8 +854,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     [self tilePages];
     _performingLayout = NO;
 
-	if(! _disableVerticalSwipe)
+	if(! _disableVerticalSwipe) {
 		[self.view addGestureRecognizer:_panGesture];
+	}
 }
 
 #pragma mark - Data
@@ -937,6 +950,12 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         } else {
             // Failed to load
             [page displayImageFailure];
+            if ([_delegate respondsToSelector:@selector(photoBrowser:imageFailed:imageView:)]) {
+                NSUInteger pageIndex = PAGE_INDEX(page);
+                [_delegate photoBrowser:self imageFailed:pageIndex imageView:page.photoImageView];
+            }
+            // make sure the page is completely updated
+            [page setNeedsLayout];
         }
     }
 }
@@ -1106,7 +1125,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
     // if ([self isLandscape:orientation]) screenWidth = screenBound.size.height;
 
-    return CGRectMake(20, 20, 40, 40);
+    return CGRectMake(screenWidth - self.doneButtonRightInset - self.doneButtonSize.width, self.doneButtonTopInset, self.doneButtonSize.width, self.doneButtonSize.height);
 }
 
 - (CGRect)frameForCaptionView:(IDMCaptionView *)captionView atIndex:(NSUInteger)index {
@@ -1206,17 +1225,19 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
     // Hide/show bars
     [UIView animateWithDuration:(animated ? 0.1 : 0) animations:^(void) {
-//        CGFloat alpha = hidden ? 0 : 1;
-//        [self.navigationController.navigationBar setAlpha:alpha];
-//        [_toolbar setAlpha:alpha];
-//        [_doneButton setAlpha:alpha];
-//        for (UIView *v in captionViews) v.alpha = alpha;
+        CGFloat alpha = hidden ? 0 : 1;
+        [self.navigationController.navigationBar setAlpha:alpha];
+        [_toolbar setAlpha:alpha];
+        [_doneButton setAlpha:alpha];
+        for (UIView *v in captionViews) v.alpha = alpha;
     } completion:^(BOOL finished) {}];
 
 	// Control hiding timer
 	// Will cancel existing timer but only begin hiding if they are visible
-	if (!permanent) [self hideControlsAfterDelay];
-
+	if (!permanent) {
+		[self hideControlsAfterDelay];
+	}
+	
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -1230,20 +1251,32 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 // Enable/disable control visiblity timer
 - (void)hideControlsAfterDelay {
-	
     if (![self autoHideInterface]) {
         return;
     }
-	
+
 	if (![self areControlsHidden]) {
         [self cancelControlHiding];
 		_controlVisibilityTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideControls) userInfo:nil repeats:NO];
 	}
 }
 
-- (BOOL)areControlsHidden { return (_toolbar.alpha == 0); }
-- (void)hideControls      { if(_autoHide && _autoHideInterface) [self setControlsHidden:YES animated:YES permanent:NO]; }
-- (void)toggleControls    { [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO]; }
+- (BOOL)areControlsHidden {
+	return (_toolbar.alpha == 0);
+}
+
+- (void)hideControls {
+	if(_autoHide && _autoHideInterface) {
+		[self setControlsHidden:YES animated:YES permanent:NO];
+	}
+}
+- (void)handleSingleTap {
+	if (_dismissOnTouch) {
+		[self doneButtonPressed:nil];
+	} else {
+		[self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO];
+	}
+}
 
 
 #pragma mark - Properties
@@ -1262,6 +1295,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 #pragma mark - Buttons
 
 - (void)doneButtonPressed:(id)sender {
+    if ([_delegate respondsToSelector:@selector(willDisappearPhotoBrowser:)]) {
+        [_delegate willDisappearPhotoBrowser:self];
+    }
+
     if (_senderViewForAnimation && _currentPageIndex == _initalPageIndex) {
         IDMZoomingScrollView *scrollView = [self pageDisplayedAtIndex:_currentPageIndex];
         [self performCloseAnimationWithScrollView:scrollView];
@@ -1273,29 +1310,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     }
 }
 
-
-- (void)saveClick{
-
-    IDMZoomingScrollView *scrollView = [self pageDisplayedAtIndex:_currentPageIndex];
-    IDMTapDetectingImageView *photoImageView = scrollView.photoImageView;
-    UIImageWriteToSavedPhotosAlbum(photoImageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-    //因为需要知道该操作的完成情况，即保存成功与否，所以此处需要一个回调方法image:didFinishSavingWithError:contextInfo:
-}
-
-//回调方法
-- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
-{
-    NSString *msg = nil ;
-    if(error != NULL){
-        msg = @"保存图片失败" ;
-    }else{
-        msg = @"保存图片成功" ;
-    }
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    [self showViewController:alert sender:nil];
-    
-}
 - (void)actionButtonPressed:(id)sender {
     id <IDMPhoto> photo = [self photoAtIndex:_currentPageIndex];
 
@@ -1310,20 +1324,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
             __typeof__(self) __weak selfBlock = self;
 
-			if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-			{
-				[self.activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-					[selfBlock hideControlsAfterDelay];
-					selfBlock.activityViewController = nil;
-				}];
-			}
-			else
-			{
-				[self.activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-					[selfBlock hideControlsAfterDelay];
-					selfBlock.activityViewController = nil;
-				}];
-			}
+			[self.activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+				[selfBlock hideControlsAfterDelay];
+				selfBlock.activityViewController = nil;
+			}];
 
 			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 				[self presentViewController:self.activityViewController animated:YES completion:nil];
@@ -1393,5 +1397,4 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 		}];
 	}
 }
-
 @end

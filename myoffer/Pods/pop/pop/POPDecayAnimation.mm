@@ -71,7 +71,7 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
 - (void)setToValue:(id)aValue
 {
   // no-op
-
+  NSLog(@"ignoring to value on decay animation %@", self);
 }
 
 - (id)reversedVelocity
@@ -149,7 +149,7 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
     }
   } else {
     __state->velocityVec = NULL;
-//    NSLog(@"Invalid velocity value for the decayAnimation: %@", aValue);
+    NSLog(@"Invalid velocity value for the decayAnimation: %@", aValue);
   }
 }
 
