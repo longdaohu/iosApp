@@ -21,7 +21,6 @@
 @property(nonatomic,strong)NSMutableArray *rightItems;
 @property(nonatomic,strong)UILabel *rightLab;
 @property(nonatomic,strong)UIBarButtonItem *backBtn;
-@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 @implementation OrderDetailViewController
@@ -65,16 +64,6 @@
     return  _leftItems;
 }
 
-- (UIAlertController *)alert{
-    
-    if (!_alert) {
-         WeakSelf
-       _alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
-            [weakSelf caseOrderClose];
-        }];
-    }
-    return _alert;
-}
 
 - (void)viewDidLoad {
     
@@ -236,7 +225,12 @@
 //取消订单
 -(void)cancelOrder{
     
-    [self.alert alertShow:self];
+    WeakSelf
+    UIAlertController *alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
+        [weakSelf caseOrderClose];
+    }];
+    
+    [alert alertShow:self];
 }
 
 - (void)caseOrderClose{

@@ -14,12 +14,11 @@
 #import "OrderItem.h"
 #import "OrderDetailViewController.h"
 
-@interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,copy)NSString *payStyle;
 @property(nonatomic,assign)BOOL payEnd;
-//@property(nonatomic,strong)UIAlertView *alert;
 @end
 
 @implementation PayOrderViewController
@@ -77,16 +76,14 @@
 
 -(void)showAler:(NSString *)title{
  
+    WeakSelf
     UIAlertController *aler =[UIAlertController alertWithTitle:title message:nil actionWithCancelTitle:nil actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
-       
         if ([title isEqualToString:@"支付成功"]) {
             OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
             detail.order = self.order;
-            [self.navigationController pushViewController:detail  animated:YES];
+            [weakSelf.navigationController pushViewController:detail  animated:YES];
         }
-        
     }];
-    
     [self presentViewController:aler animated:YES completion:nil];
 }
  
@@ -191,18 +188,12 @@ static NSString *identify = @"pay";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RequireLogin
-    
-    
     NSDictionary *item = self.items[indexPath.row];
-    
     if ([item[@"name"] isEqualToString:@"支付宝"]) {
-        
            [self sendAliPay];
-        
     }else{
-            [self payWeixin];
+          [self payWeixin];
      }
-
 
 }
 
@@ -211,42 +202,29 @@ static NSString *identify = @"pay";
 {
     
     if (![WXApi isWXAppInstalled]){
-        
-        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示信息"   message:@"您还没有安装微信客户端!" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
         }];
-        
         UIAlertAction *commitAction = [UIAlertAction actionWithTitle:@"跳转微信"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-         
             NSString * URLString = @"https://itunes.apple.com/cn/app/wei-xin/id414478124?mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
-            
         }];
-        
         [alertController addAction:cancelAction];
         [alertController addAction:commitAction];
         [self presentViewController:alertController animated:YES completion:nil];
-        
-        
         
         return;
     }
     
  
     NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
-    
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        self.payStyle = @"微信";
-         NSDictionary *dict = response[@"paramsObj"];
-        
+        weakSelf.payStyle = @"微信";
+        NSDictionary *dict = response[@"paramsObj"];
         if(dict != nil){
-            
             NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
-            
             //   调起微信支付
             PayReq  *req           = [[PayReq alloc] init];
             req.partnerId           = [dict objectForKey:@"partnerid"];
@@ -256,7 +234,6 @@ static NSString *identify = @"pay";
             req.package             = [dict objectForKey:@"package"];
             req.sign                = [dict objectForKey:@"sign"];
             [WXApi sendReq:req];
-           
             //                日志输出
 //            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
             
@@ -275,18 +252,14 @@ static NSString *identify = @"pay";
 {
     
         NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
-            
+        WeakSelf
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
                     
-                    self.payStyle = @"支付宝";
+                    weakSelf.payStyle = @"支付宝";
                     NSString *appScheme = @"My0ffer767577465";
                     NSString *params = [response valueForKey:@"params"];
-                  
                     [[AlipaySDK defaultService] payOrder:params fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                        
-                        
-                        [self pay:nil];
-                        
+                         [weakSelf pay:nil];
                     }];
                     
                 }];
@@ -298,7 +271,6 @@ static NSString *identify = @"pay";
 {
     
     if (self.payEnd) {
-        
         return;
     }
     
@@ -308,14 +280,11 @@ static NSString *identify = @"pay";
     }else if([self.payStyle isEqualToString:@"微信"]){
        path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
     }
-    
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-        
         NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
-        
         if (endStr.boolValue) {
-            
-            [self showAler:@"支付成功"];
+            [weakSelf showAler:@"支付成功"];
         }
     }];
   
@@ -330,7 +299,8 @@ static NSString *identify = @"pay";
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-     KDClassLog(@"PayOrderViewController  dealloc");
+    
+     KDClassLog(@"订单支付 + PayOrderViewController + dealloc");
     
 }
 

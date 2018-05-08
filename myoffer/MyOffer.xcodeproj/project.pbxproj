@@ -1412,8 +1412,8 @@
 		463E3A401B230EDC00E0BAF8 = {
 			isa = PBXGroup;
 			children = (
-				AE497B421C3BB275006C3092 /* JPush */,
 				463E3AC21B23121F00E0BAF8 /* Frameworks */,
+				AE497B421C3BB275006C3092 /* JPush */,
 				463E3A721B23105E00E0BAF8 /* Vendor */,
 				463E3A4B1B230EDC00E0BAF8 /* MyOffer */,
 				463E3A4A1B230EDC00E0BAF8 /* Products */,
@@ -3563,14 +3563,14 @@
 				AECC87A81F95F63800FCBBEC /* Rank */,
 				AECC87841F95F63800FCBBEC /* CatigorySubject */,
 				AECC87871F95F63800FCBBEC /* CatigroyHotCity */,
-				AECC877D1F95F63800FCBBEC /* C */,
+				AECC877D1F95F63800FCBBEC /* Controller */,
 				AECC87911F95F63800FCBBEC /* model */,
 				AECC87B61F95F63800FCBBEC /* view */,
 			);
 			path = Catigory;
 			sourceTree = "<group>";
 		};
-		AECC877D1F95F63800FCBBEC /* C */ = {
+		AECC877D1F95F63800FCBBEC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				AECC87801F95F63800FCBBEC /* CatigoryViewController.h */,
@@ -3578,7 +3578,7 @@
 				AECC87821F95F63800FCBBEC /* RankFilterViewController.h */,
 				AECC87831F95F63800FCBBEC /* RankFilterViewController.m */,
 			);
-			path = C;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		AECC87841F95F63800FCBBEC /* CatigorySubject */ = {
@@ -3868,7 +3868,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4639,7 +4639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

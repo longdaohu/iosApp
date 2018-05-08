@@ -37,7 +37,8 @@
     
     [MobClick beginLogPageView:@"page收藏"];
 
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    NavigationBarHidden(NO);
+    
     [self makeDataSource];
 }
 

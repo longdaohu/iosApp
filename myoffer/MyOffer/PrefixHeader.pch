@@ -85,7 +85,7 @@
 #define Parameter_Size 10
 #define CELL_HEIGHT_DAFAULT  50
 #define Bundle(name) [[NSBundle mainBundle] loadNibNamed:name owner:self options:nil].lastObject
-
+#define NavigationBarHidden(done) [self.navigationController setNavigationBarHidden:done animated:animated]
 
 #define DOMAINURL  @"https://www.myofferdemo.com/"
 //#define DOMAINURL  @"https://www.myoffer.cn/"

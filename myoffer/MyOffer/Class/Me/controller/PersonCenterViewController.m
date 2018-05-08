@@ -51,7 +51,7 @@
     
     [MobClick beginLogPageView:@"page个人中心"];
     
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    NavigationBarHidden(YES);
     
     [self presentViewWillAppear];
     

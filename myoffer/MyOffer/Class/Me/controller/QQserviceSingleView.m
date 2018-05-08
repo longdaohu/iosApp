@@ -10,7 +10,6 @@
 
 @interface QQserviceSingleView ()<UIWebViewDelegate>
 @property(nonatomic,strong)UIWebView *web;
-@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 
@@ -93,21 +92,6 @@ static id QQserviceSingle = nil;
     return self;
 }
 
-- (UIAlertController *)alert{
-    
-    if (!_alert) {
-        WeakSelf
-        _alert = [UIAlertController alertWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"下载" actionWithDoneHandler:^{
-            //跳转到QQ下载页面
-            [weakSelf webViewWithpath:@"http://appstore.com/qq"];
-        }];
-    }
-    
-    return _alert;
-}
-
-
-
 - (void)webViewWithpath:(NSString *)path{
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
@@ -126,8 +110,13 @@ static id QQserviceSingle = nil;
         
     }
     
+    WeakSelf
+    UIAlertController *alert = [UIAlertController alertWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"下载" actionWithDoneHandler:^{
+        //跳转到QQ下载页面
+        [weakSelf webViewWithpath:@"http://appstore.com/qq"];
+    }];
     //提示是否下载
-    [self.alert alertShow:[UIApplication sharedApplication ].keyWindow.rootViewController];
+    [alert alertShow:[UIApplication sharedApplication ].keyWindow.rootViewController];
  
 }
 

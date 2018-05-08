@@ -42,8 +42,7 @@
     
     [MobClick beginLogPageView:@"page智能匹配"];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
+    NavigationBarHidden(NO);
     //当提交按钮被点击后，如果用户登录后，回到当前页面时会重新加载点击事件
     self.submitBtnHadDone = LOGIN ? self.submitBtnHadDone : NO;
     if (self.submitBtnHadDone) [self submitBtnOnClick:self.submitBtn];

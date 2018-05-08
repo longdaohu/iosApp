@@ -17,7 +17,6 @@
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,assign)NSInteger nextPage;
-@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 @implementation OrderViewController
@@ -28,7 +27,7 @@
     
     [MobClick beginLogPageView:@"page订单中心"];
     
-    self.navigationController.navigationBarHidden = NO;
+    NavigationBarHidden(NO);
     
     if (self.refresh) {
         
@@ -286,7 +285,9 @@
     UIAlertController *alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
         [weakSelf caseOrderCloseWithOrder:order index:indexPath];
     }];
-    [alert  alertShow:self];
+    
+    [alert alertShow:self];
+
 }
 //提交取消订单
 - (void)caseOrderCloseWithOrder:(OrderItem *)order index:(NSIndexPath *)index{

@@ -26,7 +26,6 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 };
 
 @interface ApplyViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic)  MyOfferTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;//模型数组
 @property(nonatomic,strong)NSMutableArray *courseSelecteds;//已选中课程ID数组
 @property(nonatomic,strong)NSMutableArray *cancelSetions;//删除分区数组
@@ -41,7 +40,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editViewConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBottomButton;//删除按钮
 @property (weak, nonatomic) IBOutlet UILabel *cancelCountLab;
-@property(nonatomic,strong)UIAlertController *alert;//提示信息
+@property(nonatomic,strong)MyOfferTableView *tableView;
 
 @end
 
@@ -137,17 +136,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     return _courseSelecteds;
 }
 
-- (UIAlertController *)alert{
-    
-    if (!_alert) {
-        WeakSelf
-        _alert = [UIAlertController alertWithTitle:@"是否确认删除" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
-            //先删除 已选择专业数组列表  > 再删除分区头
-            [weakSelf commitCancelselectCell];
-        }];
-    }
-    return _alert;
-}
+
 
 - (void)viewDidLoad {
     
@@ -550,7 +539,13 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
         return;
     }
     //提示是否删除
-    [self.alert alertShow:self];
+    WeakSelf
+   UIAlertController *alert = [UIAlertController alertWithTitle:@"是否确认删除" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
+        //先删除 已选择专业数组列表  > 再删除分区头
+        [weakSelf commitCancelselectCell];
+    }];
+    
+    [alert alertShow:self];
 }
 
 #pragma mark : 点击编辑按钮

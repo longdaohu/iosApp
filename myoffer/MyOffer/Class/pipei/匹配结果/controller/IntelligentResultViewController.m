@@ -79,7 +79,8 @@
     
     [MobClick beginLogPageView:@"page智能匹配结果"];
  
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    NavigationBarHidden(NO);
+
 }
 
 

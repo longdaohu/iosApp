@@ -38,7 +38,7 @@
     
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    NavigationBarHidden(NO);
     
     if (self.sevice) {
 
