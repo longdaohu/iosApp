@@ -9,7 +9,6 @@
 #import "OrderDetailViewController.h"
 #import "OrderDetailHeaderView.h"
 #import "OrderDetailFooterView.h"
-#import "OrderServiceItem.h"
 #import "OrderItem.h"
 #import "PayOrderViewController.h"
 #import "ServiceMallViewController.h"
@@ -18,10 +17,8 @@
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,assign)BOOL isTableViewSelected;
 @property(nonatomic,strong)NSMutableArray *leftItems;
 @property(nonatomic,strong)NSMutableArray *rightItems;
-@property(nonatomic,strong)NSDictionary *orderDetailDict;
 @property(nonatomic,strong)UILabel *rightLab;
 @property(nonatomic,strong)UIBarButtonItem *backBtn;
 @property(nonatomic,strong)UIAlertController *alert;
@@ -96,7 +93,7 @@
     
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
     
-            [weakSelf makeOrderWithResponse:response];
+//            [weakSelf makeOrderWithResponse:response];
             [weakSelf makeTableViewFooterView:response];
             [weakSelf statusWithTag:response[@"status"]];
             [weakSelf.tableView reloadData];
@@ -106,35 +103,7 @@
 }
 
 
--(void)makeOrderWithResponse:(NSDictionary *)response
-{
-    NSArray *SKUs = response[@"SKUs"];
-    
-    NSDictionary *SKU = SKUs[0];
 
-    XWeakSelf
-    
-    [SKU[@"services"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        NSDictionary *temp = (NSDictionary *)obj;
-        OrderServiceItem  *item = [[OrderServiceItem alloc] init];
-        item.name = temp[@"name"];
-        [weakSelf.leftItems addObject:item];
-        
-    }];
-    
-  
-    if (!self.leftItems.count) {
-        
-         OrderDetailHeaderView *header = ( OrderDetailHeaderView *)self.tableView.tableHeaderView;
-        [header headerSelectButtonHiden];
-    }
-    
-    [self.leftItems removeAllObjects];
-    [self.rightItems removeAllObjects];
-   
-
-}
 
 
 -(void)statusWithTag:(NSString *)status
@@ -185,21 +154,15 @@
 
 -(void)makeTableViewHeaderView{
 
-    XWeakSelf
     OrderDetailHeaderView *header = [[OrderDetailHeaderView alloc] init];
     header.order = self.order;
     header.frame = CGRectMake(0, 0, XSCREEN_WIDTH, header.headHeight);
-    header.actionBlock = ^(UIButton *sender){
-          weakSelf.isTableViewSelected = sender.selected;
-         [weakSelf.tableView reloadData];
-     };
     self.tableView.tableHeaderView = header;
 }
 
 
 
 -(void)makeTableViewFooterView:(NSDictionary *)respose{
-    
     
     XWeakSelf
     OrderDetailFooterView *footer = [[OrderDetailFooterView alloc] init];
@@ -250,7 +213,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
-    return self.isTableViewSelected ? 15 : HEIGHT_ZERO;
+    return HEIGHT_ZERO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

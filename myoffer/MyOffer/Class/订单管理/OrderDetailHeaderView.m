@@ -9,8 +9,7 @@
 #import "OrderDetailHeaderView.h"
 
 @interface OrderDetailHeaderView ()
-@property(nonatomic,strong)UIView *bgView;
-@property(nonatomic,strong)UILabel *orderTitleLab;
+@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *orderNoLab;
 
 @end
@@ -23,21 +22,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.bgView = [[UIView alloc] init];
-        self.bgView.backgroundColor = XCOLOR_WHITE;
-        [self addSubview:self.bgView];
-        self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
-        self.bgView.layer.shadowOpacity = 0.2;
-        self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
-        
+        self.backgroundColor = [UIColor whiteColor];
 
-        self.orderTitleLab =[UILabel labelWithFontsize:16  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
-        self.orderTitleLab.numberOfLines = 0;
-        [self.bgView  addSubview:self.orderTitleLab];
-        
+        self.titleLab =[UILabel labelWithFontsize:16  TextColor:XCOLOR_BLACK TextAlignment:NSTextAlignmentLeft];
+        self.titleLab.numberOfLines = 0;
+        [self  addSubview:self.titleLab];
 
         self.orderNoLab =[UILabel labelWithFontsize:KDUtilSize(13)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
-        [self.bgView  addSubview:self.orderNoLab];
+        [self  addSubview:self.orderNoLab];
 
 
     }
@@ -45,55 +37,36 @@
 }
 
 
--(void)onclick:(UIButton *)sender
-{
-    
-    sender.selected = !sender.selected;
-    
-    if (self.actionBlock) {
-        
-        self.actionBlock(sender);
-    }
-}
 
 -(void)setOrder:(OrderItem *)order{
     
     
     _order = order;
     
-    NSDictionary *sku       = [order.SKUs firstObject];
-    self.orderTitleLab.text = [NSString stringWithFormat:@"*%@",sku[@"name"]];
+    self.titleLab.text = order.SKU;
     self.orderNoLab.text    = [NSString stringWithFormat:@"订单号 ： %@",order.order_id];
-
+  
     CGFloat titleX = 10;
     CGFloat titleY = 10;
     CGFloat titleW = XSCREEN_WIDTH - titleX * 2;
-    CGSize orderSize = [self.orderTitleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16] maxWidth:titleW];
-    CGFloat titleH = orderSize.height;
-    self.orderTitleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    CGFloat titleH =  0;
+    if (self.titleLab.text.length > 0) {
+        CGSize orderSize = [self.titleLab.text KD_sizeWithAttributeFont:[UIFont systemFontOfSize:16] maxWidth:titleW];
+        titleH = orderSize.height;
+    }
+    self.titleLab.frame = CGRectMake(titleX, titleY, titleW, titleH);
     
     
     CGFloat noX = titleX;
-    CGFloat noY = CGRectGetMaxY(self.orderTitleLab.frame) + 5;
-    CGFloat noW = XSCREEN_WIDTH;
+    CGFloat noY = CGRectGetMaxY(self.titleLab.frame) + 5;
+    CGFloat noW = titleW;
     CGFloat noH = 20;
     self.orderNoLab.frame = CGRectMake(noX, noY, noW, noH);
     
-
-    CGFloat bgX = 0;
-    CGFloat bgY = 15;
-    CGFloat bgW = XSCREEN_WIDTH;
-    CGFloat bgH = CGRectGetMaxY(self.orderNoLab.frame) + 10;
-    self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-    self.headHeight = CGRectGetMaxY(self.bgView.frame);
+    self.headHeight = CGRectGetMaxY(self.orderNoLab.frame) + 10;
     
 }
 
-
-- (void)headerSelectButtonHiden{
-  
-    self.orderTitleLab.text = [self.orderTitleLab.text substringWithRange:NSMakeRange(1, self.orderTitleLab.text.length - 1)];
-}
 
 
 @end

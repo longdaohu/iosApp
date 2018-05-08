@@ -89,8 +89,8 @@
 #define Bundle(name) [[NSBundle mainBundle] loadNibNamed:name owner:self options:nil].lastObject
 
 
-//#define DOMAINURL  @"https://www.myofferdemo.com/"
-#define DOMAINURL  @"https://www.myoffer.cn/"
+#define DOMAINURL  @"https://www.myofferdemo.com/"
+//#define DOMAINURL  @"https://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

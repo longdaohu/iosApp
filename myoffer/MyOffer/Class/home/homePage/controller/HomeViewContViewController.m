@@ -96,7 +96,6 @@
     
     [self checkAPPVersion];
     
- 
 }
 
 
@@ -119,10 +118,8 @@
     [self makeUI];
     
     [self makeOther];
- 
+
 }
-
-
 
 -(void)makeOther{
   

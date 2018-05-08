@@ -19,7 +19,7 @@
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,copy)NSString *payStyle;
 @property(nonatomic,assign)BOOL payEnd;
-@property(nonatomic,strong)UIAlertView *alert;
+//@property(nonatomic,strong)UIAlertView *alert;
 @end
 
 @implementation PayOrderViewController
@@ -58,6 +58,11 @@
 
 }
 
+- (void)setOrder:(OrderItem *)order{
+    
+    _order = order;
+}
+
 -(void)payResult:(NSNotification *)notification{
 
     NSString *BackResult = (NSString *)notification.object;
@@ -70,26 +75,22 @@
 }
 
 
--(void)showAler:(NSString *)title
-{
-     UIAlertView *alert =[[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
-     self.alert = alert;
-     [alert show];
-    
- }
+-(void)showAler:(NSString *)title{
  
-#pragma mark : UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if ([alertView.title isEqualToString:@"支付成功"]) {
+    UIAlertController *aler =[UIAlertController alertWithTitle:title message:nil actionWithCancelTitle:nil actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
+       
+        if ([title isEqualToString:@"支付成功"]) {
+            OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
+            detail.order = self.order;
+            [self.navigationController pushViewController:detail  animated:YES];
+        }
         
-         OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
-         detail.order  =  self.order;
-        [self.navigationController pushViewController:detail  animated:YES];
-        
-    }
+    }];
     
+    [self presentViewController:aler animated:YES completion:nil];
 }
+ 
+
 
 -(NSArray *)items
 {
@@ -127,7 +128,7 @@
 - (void)makeTableViewHeader{
     
    
-    PayHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"PayHeaderView" owner:self options:nil].firstObject;
+    PayHeaderView *headerView = Bundle(@"PayHeaderView");
     headerView.order = self.order;
      self.tableView.tableHeaderView =  headerView;
     
@@ -234,10 +235,6 @@ static NSString *identify = @"pay";
         return;
     }
     
-   
-    
-//    [[AppDelegate sharedDelegate] updateUmeng];
-    
  
     NSString *path =[NSString stringWithFormat:kAPISelectorOrderWeixin,self.order.order_id];
     
@@ -316,7 +313,7 @@ static NSString *identify = @"pay";
         
         NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
         
-        if (endStr.boolValue && !self.alert.visible) {
+        if (endStr.boolValue) {
             
             [self showAler:@"支付成功"];
         }

@@ -323,7 +323,6 @@
 		AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249331D5B215300DD7939 /* OrderDetailHeaderView.m */; };
 		AEA249A71D5B215300DD7939 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249351D5B215300DD7939 /* OrderDetailViewController.m */; };
 		AEA249A81D5B215300DD7939 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249371D5B215300DD7939 /* OrderItem.m */; };
-		AEA249A91D5B215300DD7939 /* OrderServiceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249391D5B215300DD7939 /* OrderServiceItem.m */; };
 		AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2493B1D5B215300DD7939 /* OrderViewController.m */; };
 		AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2493D1D5B215300DD7939 /* PayHeaderView.m */; };
 		AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */; };
@@ -1044,8 +1043,6 @@
 		AEA249351D5B215300DD7939 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		AEA249361D5B215300DD7939 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
 		AEA249371D5B215300DD7939 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItem.m; sourceTree = "<group>"; };
-		AEA249381D5B215300DD7939 /* OrderServiceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServiceItem.h; sourceTree = "<group>"; };
-		AEA249391D5B215300DD7939 /* OrderServiceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServiceItem.m; sourceTree = "<group>"; };
 		AEA2493A1D5B215300DD7939 /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		AEA2493B1D5B215300DD7939 /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		AEA2493C1D5B215300DD7939 /* PayHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayHeaderView.h; sourceTree = "<group>"; };
@@ -2463,8 +2460,6 @@
 		AE712FAE1D5D6E3D00D0F48A /* orderDetail */ = {
 			isa = PBXGroup;
 			children = (
-				AEA249381D5B215300DD7939 /* OrderServiceItem.h */,
-				AEA249391D5B215300DD7939 /* OrderServiceItem.m */,
 				AEA249301D5B215300DD7939 /* OrderDetailFooterView.h */,
 				AEA249311D5B215300DD7939 /* OrderDetailFooterView.m */,
 				AEA249321D5B215300DD7939 /* OrderDetailHeaderView.h */,
@@ -3069,8 +3064,8 @@
 		AEA24A4A1D5B23F500DD7939 /* homePage */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A4B1D5B23F500DD7939 /* controller */,
 				AEA24A4E1D5B23F500DD7939 /* model */,
+				AEA24A4B1D5B23F500DD7939 /* controller */,
 				AEA24A511D5B23F500DD7939 /* view */,
 			);
 			path = homePage;
@@ -3873,7 +3868,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4234,7 +4229,6 @@
 				AEA24B851D5B25E000DD7939 /* FilterTableViewCell.m in Sources */,
 				56DB630B1C397FF7004DA145 /* Reachability.m in Sources */,
 				463E3AB81B23105F00E0BAF8 /* NSArray+KDUtilities.m in Sources */,
-				AEA249A91D5B215300DD7939 /* OrderServiceItem.m in Sources */,
 				AE3AB6B51F21A27300A3C7E3 /* SuperMasterHomeDemol.m in Sources */,
 				AECC87CB1F95F63800FCBBEC /* NomalCollectionController.m in Sources */,
 				AE6178BF20723A17006B311A /* DiscountCell.m in Sources */,
@@ -4645,7 +4639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,
