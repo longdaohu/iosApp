@@ -46,7 +46,7 @@
     
      self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
   
-    XWeakSelf;
+    WeakSelf;
     self.shareView = [ShareNView shareViewWithAction:^(UIButton *sender, BOOL isHiden) {
         
         if (sender) [weakSelf shareItemClick:sender];

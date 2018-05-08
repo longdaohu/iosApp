@@ -68,7 +68,7 @@
 - (UIAlertController *)alert{
     
     if (!_alert) {
-         XWeakSelf
+         WeakSelf
        _alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
             [weakSelf caseOrderClose];
         }];
@@ -87,7 +87,7 @@
 
 -(void)makeDataSourse{
     
-    XWeakSelf
+    WeakSelf
 
     NSString *path = [NSString stringWithFormat:kAPISelectorOrderDetail,self.order.order_id];
     
@@ -164,7 +164,7 @@
 
 -(void)makeTableViewFooterView:(NSDictionary *)respose{
     
-    XWeakSelf
+    WeakSelf
     OrderDetailFooterView *footer = [[OrderDetailFooterView alloc] init];
     footer.orderDict = respose;
     footer.frame = CGRectMake(0, 0, XSCREEN_WIDTH, footer.headHeight + 20);
@@ -241,7 +241,7 @@
 
 - (void)caseOrderClose{
     
-    XWeakSelf
+    WeakSelf
     NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,self.order.order_id];
     //先删除 已选择专业数组列表  > 再删除分区头
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {

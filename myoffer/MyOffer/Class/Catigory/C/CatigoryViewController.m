@@ -87,7 +87,7 @@
 
 //网络请求筛选基础数据
 - (void)makeFilterDataSource{
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryBaseFilterData parameters:nil success:^(NSInteger statusCode, id response) {
          [weakSelf updateFilterDataWithResponse:response];
      }];
@@ -101,7 +101,7 @@
         [para_tmp setValuesForKeysWithDictionary:self.rankFilterModel.papa_m];
      }
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorCatigoryRanks parameters:para_tmp expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil  additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateRankViewWithResponse:response];
@@ -266,7 +266,7 @@
 //排名版块
 -(void)makeRankWithFrame:(CGRect)frame
 {
-    XWeakSelf
+    WeakSelf
     self.rank_tableView =[[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     self.rank_tableView.emptyView.actionBlock = ^{
         [weakSelf makeRankDataSource];

@@ -47,7 +47,7 @@
 - (void)makeData{
     
     NSString *path  = @"GET svc/marketing/coupons/get";
-   XWeakSelf
+   WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
@@ -103,7 +103,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    XWeakSelf;
+    WeakSelf;
     DiscountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiscountCell" forIndexPath:indexPath];
     cell.item = self.items[indexPath.section];
     cell.discountCellBlock = ^{

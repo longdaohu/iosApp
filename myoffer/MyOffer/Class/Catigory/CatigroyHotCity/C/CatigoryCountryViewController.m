@@ -36,7 +36,7 @@
 //获取热门城市数组
 -(void)makeDataSource{
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestUsingCacheWithSelector:kAPISelectorCatigoryHotCities parameters:nil success:^(NSInteger statusCode, id response) {
         
         [weakSelf updateCityUIWithResponse:response];

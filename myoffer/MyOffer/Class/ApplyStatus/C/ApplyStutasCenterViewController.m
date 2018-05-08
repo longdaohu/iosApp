@@ -47,7 +47,7 @@
     if (!LOGIN)  return;
  
     
-    XWeakSelf
+    WeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -115,7 +115,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
-    XWeakSelf
+    WeakSelf
     self.tableView.emptyView.actionBlock = ^{
 
         [weakSelf caseEMall];

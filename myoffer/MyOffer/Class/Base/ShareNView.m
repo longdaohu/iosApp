@@ -161,7 +161,7 @@
     
     CGFloat bgViewY =  show ? [UIScreen mainScreen].bounds.size.height - self.bgView.bounds.size.height : [UIScreen mainScreen].bounds.size.height;
     
-    XWeakSelf;
+    WeakSelf;
     
     [UIView animateWithDuration:0.25 animations:^{
         

@@ -111,7 +111,7 @@
         return;
     }
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorApplyStutas parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
         [weakSelf updateUIWithResponse:response];
     }];

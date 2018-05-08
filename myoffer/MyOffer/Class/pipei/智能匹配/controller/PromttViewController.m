@@ -52,7 +52,7 @@
 //当没有数据时，出现智能匹配提示页面
 - (void)promptViewShow:(BOOL)show{
     
-    XWeakSelf
+    WeakSelf
     CGFloat prompTop = show ? 0 : XSCREEN_HEIGHT;
     
     CGFloat prompAlpha = show ? 1 : 0;

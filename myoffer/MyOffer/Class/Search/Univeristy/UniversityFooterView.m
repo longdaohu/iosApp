@@ -194,7 +194,7 @@
         return;
     }
     
-    XWeakSelf
+    WeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         weakSelf.alpha = alp;
     }];

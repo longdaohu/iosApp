@@ -75,7 +75,7 @@
 #pragma mark : 网络请求
 - (void)makeData{
   
-    XWeakSelf;
+    WeakSelf;
     [self startAPIRequestWithSelector:kAPISelectorSuperMasterHome parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];
@@ -156,7 +156,7 @@
     if (!_onLineView) {
         
         _onLineView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMNewsOnLineView class]) owner:self options:nil].firstObject;
-        XWeakSelf
+        WeakSelf
         _onLineView.actionBlock = ^(NSString *urlStr) {
             
             [weakSelf safariWithPath:urlStr];
@@ -196,7 +196,7 @@
         
          self.autoLoopView.imageURLStringsGroup = [self.smModel.banners valueForKey:@"image_url_mc"];
       
-        XWeakSelf
+        WeakSelf
         [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{
             
             weakSelf.autoLoopView.alpha = 1;
@@ -238,7 +238,7 @@
         CGFloat auto_W = XSCREEN_WIDTH;
         CGFloat auto_H = AdjustF(160.f);
         CGRect autoFrame = CGRectMake(auto_X, auto_Y, auto_W, auto_H);
-        XWeakSelf
+        WeakSelf
         _autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:autoFrame delegate:nil placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
          _autoLoopView.alpha = 0;
         _autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
@@ -282,7 +282,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SMHomeSectionModel *group = self.groups[indexPath.section];
-    XWeakSelf
+    WeakSelf
 
     switch (group.groupType) {
             
@@ -364,7 +364,7 @@
         return nil;
     }
     
-    XWeakSelf
+    WeakSelf
     SMHotSectionFooterView *footer = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([SMHotSectionFooterView class]) owner:self options:nil].firstObject;
     footer.actionBlock = ^{
         
@@ -390,7 +390,7 @@
     
     [SectionView arrowButtonHiden:(group.groupType != SMGroupTypeHot)];
     
-    XWeakSelf
+    WeakSelf
     SectionView.actionBlock = ^{
  
         [weakSelf pushWithVC:[[SMListViewController alloc] init]];

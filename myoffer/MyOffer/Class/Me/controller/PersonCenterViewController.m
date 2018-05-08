@@ -205,7 +205,7 @@
     [tableHeaderView addSubview:setBtn];
     
     
-    XWeakSelf
+    WeakSelf
     self.TZView  = [LeftBarButtonItemView leftViewWithBlock:^{
         
         [weakSelf caseTZ];
@@ -242,7 +242,7 @@
 #pragma mark : 网络请求
 - (void)requestWithPath:(NSString *)path{
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
         
         //关于智能匹配
@@ -667,7 +667,7 @@
 - (void)caseMakeDataServiceStatus{
 
  
-    XWeakSelf
+    WeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         

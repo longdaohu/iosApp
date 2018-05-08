@@ -69,7 +69,7 @@
 - (void)makeData{
 
     NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorArticleTopic,self.topic_id];
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
  
         [weakSelf updateUIWithResponse:response];
@@ -136,7 +136,7 @@
 //添加自定义顶部导航
 -(void)makeTopNavigaitonView{
     
-    XWeakSelf
+    WeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
         [weakSelf navigationItemWithSender:sender];
     }];

@@ -53,8 +53,7 @@
 - (void)makeData{
     
     NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorCatigoryRankItem,self.type_id];
-    XWeakSelf
-    
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {

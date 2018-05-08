@@ -229,7 +229,7 @@
 
         return nil;
     }
-    XWeakSelf
+    WeakSelf
     ServiceProtocalSectionHeaderView *sectionView = [ServiceProtocalSectionHeaderView tableView:tableView  sectionViewWithProtocalItem:self.agreements[section]];
     sectionView.actionBlock = ^{
         
@@ -273,7 +273,7 @@
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    XWeakSelf
+    WeakSelf
     [webView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
         
         NSString *web_height = [NSString stringWithFormat:@"%@",Result];

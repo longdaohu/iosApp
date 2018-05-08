@@ -297,7 +297,7 @@
 
     if (!_headerView) {
         
-        XWeakSelf;
+        WeakSelf;
         _headerView = [[SMDetailHeaderView alloc] init];
         _headerView.actionBlock = ^(BOOL guest_intro_showAll, UIButton *sender) {
             
@@ -444,7 +444,7 @@
     
     if (!group.show_All_data) {
         
-        XWeakSelf
+        WeakSelf
         SMHotSectionFooterView *footer = [SMHotSectionFooterView footerWithTitle:@"展开所有音频" action:^{
             
             group.show_All_data = YES;

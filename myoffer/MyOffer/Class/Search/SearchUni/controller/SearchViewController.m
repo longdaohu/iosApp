@@ -115,7 +115,7 @@
     FilterContentFrame *historyHotFrame = [FilterContentFrame filterFrameWithFilter:historyHot];
     [self.groups addObject:historyHotFrame];
 
-    XWeakSelf
+    WeakSelf
     //请求推荐数据
     [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
         

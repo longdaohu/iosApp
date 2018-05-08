@@ -211,7 +211,7 @@
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    XWeakSelf
+    WeakSelf
     self.tableView.emptyView.actionBlock = ^{
 
         [weakSelf makeBaseData];

@@ -168,7 +168,7 @@
     
     if (self.centerView.subviews.count > 0)  [self.centerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    XWeakSelf
+    WeakSelf
     for (NSInteger index = 0; index < itemFrame.centerViewCell_Frames.count; index++) {
         
         ServiceItemHeaderCell *cell = [[ServiceItemHeaderCell alloc] init];

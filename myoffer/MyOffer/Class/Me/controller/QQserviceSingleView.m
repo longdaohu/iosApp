@@ -96,7 +96,7 @@ static id QQserviceSingle = nil;
 - (UIAlertController *)alert{
     
     if (!_alert) {
-        XWeakSelf
+        WeakSelf
         _alert = [UIAlertController alertWithTitle:@"联系客服前请先下载QQ，是否需要下载QQ？" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"下载" actionWithDoneHandler:^{
             //跳转到QQ下载页面
             [weakSelf webViewWithpath:@"http://appstore.com/qq"];

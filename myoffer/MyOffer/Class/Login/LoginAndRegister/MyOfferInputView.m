@@ -170,7 +170,7 @@
         
        _tooler = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([XWGJKeyboardToolar class]) owner:self options:nil].lastObject;
         
-        XWeakSelf
+        WeakSelf
         _tooler.actionBlock = ^(NSString *flag){
             
             if ([flag isEqualToString:@"收起"]) {

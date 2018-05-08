@@ -121,7 +121,7 @@
     ServiceItemBottomView *bottomView = [[ServiceItemBottomView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - 80, XSCREEN_WIDTH, 90)];
     [self.view insertSubview:bottomView aboveSubview:self.tableView];
     self.bottomView = bottomView;
-    XWeakSelf;
+    WeakSelf;
     bottomView.acitonBlock = ^(UIButton *sender){
         
         [weakSelf bottomViewWithItemOnClick:sender];
@@ -153,7 +153,7 @@
     
     NSString *path = [NSString  stringWithFormat:@"%@%@",kAPISelectorMyofferServiceDetail,self.service_id];
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
        
          [weakSelf updateUIWithresponse:response];
@@ -217,7 +217,7 @@
 
     if (!_headerView) {
         
-        XWeakSelf
+        WeakSelf
         ServiceItemHeaderView *headerView = [[ServiceItemHeaderView alloc] init];
         headerView.actionBlcok = ^(NSString *service_id){
              weakSelf.service_id = service_id;
@@ -234,7 +234,7 @@
 //添加自定义顶部导航
 -(void)makeTopNavigaitonView{
     
-    XWeakSelf
+    WeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
         [weakSelf navigationItemWithSender:sender];
     }];
@@ -277,7 +277,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    XWeakSelf
+    WeakSelf
     HomeSectionHeaderView *sectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:@"商品参数"];
     sectionView.backgroundColor = XCOLOR_WHITE;
     [sectionView arrowButtonHiden:NO];

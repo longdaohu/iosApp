@@ -55,7 +55,7 @@
 
 - (void)makeData{
  
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorGuideOversea  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateUIWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
@@ -138,7 +138,7 @@
     
     GuideCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([GuideCell class]) forIndexPath:indexPath];
     cell.process = self.current_guide.process_arr[indexPath.row];
-    XWeakSelf
+    WeakSelf
     cell.actionBlock = ^(NSString *url){
         [weakSelf guideItemClick:url];
     };

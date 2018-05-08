@@ -54,7 +54,7 @@
     }
  
     NSDictionary *parameter = @{@"pId" : self.valueTF.text};
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:@"GET svc/marketing/promote/check" parameters:parameter expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateResultWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {

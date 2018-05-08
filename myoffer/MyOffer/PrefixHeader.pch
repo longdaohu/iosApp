@@ -9,7 +9,7 @@
 #ifndef MyOffer_PrefixHeader_pch
 #define MyOffer_PrefixHeader_pch
 #define GDLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:(key) value:@"" table:nil]
-#define XWeakSelf  __weak typeof(self) weakSelf = self;
+#define WeakSelf  __weak typeof(self) weakSelf = self;
 #define XImage(imageName)     [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
 #define Uni_subject_FontSize  15.0
 #define CORNER_RADIUS  4.0
@@ -19,8 +19,6 @@
 #define XPERCENT          XSCREEN_WIDTH/320
 #define XFONT_SIZE(size)  (XSCREEN_WIDTH <= 320 ? size - 1.0 : size)
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
-//#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-//#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define XSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define XSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define XNAV_HEIGHT  (XSCREEN_HEIGHT > 800.0 ? 88.0 : 64.0)

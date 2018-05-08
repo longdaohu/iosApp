@@ -179,7 +179,7 @@
     
     if (!LOGIN) return;
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
         [weakSelf updateUIWithResponse:response];
     }];
@@ -269,7 +269,7 @@
         
     }
     
-    XWeakSelf
+    WeakSelf
     
     [self startAPIRequestWithSelector:@"POST api/v2/account/evaluate" parameters:parameters expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:^{
         

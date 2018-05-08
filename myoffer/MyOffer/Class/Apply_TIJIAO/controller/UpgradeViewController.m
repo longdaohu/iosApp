@@ -255,7 +255,7 @@ typedef enum {
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = XCOLOR_BG;
     self.tableView.scrollEnabled = NO;
-    XWeakSelf
+    WeakSelf
     UpgradeFooterView *tipsView =[UpgradeFooterView footViewWithContent:@"Tips：选择VIP尊享服务包，将享有一对一服务，帮你创造亮点，指导选课，帮你冲刺世界名校。全程操办你的文书、签证，学校交涉补材料、考试分数递送、协助邮寄纸质材料等24项超值服务"];
     self.tableView.tableFooterView = tipsView;
     tipsView.actionBlock = ^{

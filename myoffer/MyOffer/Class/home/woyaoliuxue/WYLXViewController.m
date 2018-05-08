@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 {
     if (!_sucessView) {
         
-        XWeakSelf
+        WeakSelf
         _sucessView = [WYLXSuccessView successViewWithBlock:^{
             
             [weakSelf dismiss];
@@ -230,7 +230,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
 - (void)makeHeaderAndFooterView{
     
     
-    XWeakSelf
+    WeakSelf
     WYLXHeaderView *headerView =[WYLXHeaderView headViewWithTitle:@"嗨, 想快速获得留学信息和申请方案？只需填写留学意向，我们的专业顾问将立即为你服务！"];
     headerView.actionBlock = ^{
         
@@ -537,7 +537,7 @@ typedef NS_ENUM(NSInteger,PickerViewType){
     }
     
     
-    XWeakSelf
+    WeakSelf
     NSDictionary *parameters =  @{@"fastPass": fastPass};
     [self
      startAPIRequestWithSelector:kAPISelectorWoYaoLiuXue

@@ -198,7 +198,7 @@
 
 - (void)makeDataSourse{
     
-    XWeakSelf
+    WeakSelf
     
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorArticleDetail,self.message_id];
     
@@ -286,7 +286,7 @@
         if(arr.count > 2){
             
             NSString *url_path = [NSString stringWithFormat:@"GET api/article/short-id/%@",arr[arr.count-2]];
-            XWeakSelf
+            WeakSelf
             [self startAPIRequestWithSelector:url_path parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                 MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:response[@"id"]] ;
                 [weakSelf.navigationController pushViewController:detail animated:YES];
@@ -324,7 +324,7 @@
 // WKNavigationDelegate 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     
-    XWeakSelf
+    WeakSelf
     [webView evaluateJavaScript:@"document.body.style.paddingBottom = '30px'; document.body.offsetHeight;" completionHandler:^(id Result, NSError * error) {
         
         NSString *web_height = [NSString stringWithFormat:@"%@",Result];
@@ -481,7 +481,7 @@
 //点赞
 -(void)ZangBtnClick:(UIButton *)sender
 {
-    XWeakSelf
+    WeakSelf
     NSString *path =[NSString stringWithFormat:kAPISelectorMessageZang,self.message_id];
     [self startAPIRequestWithSelector:path  parameters:nil success:^(NSInteger statusCode, id response) {
         

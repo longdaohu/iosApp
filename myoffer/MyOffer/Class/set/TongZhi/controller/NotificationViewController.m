@@ -103,7 +103,7 @@
 -(void)getDataSourse:(int)page
 {
   
-    XWeakSelf
+    WeakSelf
 
     [self
      startAPIRequestWithSelector:kAPISelectorTongZhiList
@@ -262,8 +262,7 @@
         NSString *path  = [NSString stringWithFormat:kAPISelectorDeleteTongZhi,noti.NO_id];
         
         //提交删除项到服务器
-        XWeakSelf
-        
+        WeakSelf
         [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             
             [weakSelf.group removeObjectAtIndex:indexPath.row];

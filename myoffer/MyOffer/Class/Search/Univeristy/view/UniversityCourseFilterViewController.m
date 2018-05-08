@@ -318,7 +318,7 @@ static NSString *filter_identify = @"course_filter";
     
     realRect.size.height = self.currentBtn ? XSCREEN_HEIGHT : self.base_Height - XNAV_HEIGHT;
     
-    XWeakSelf
+    WeakSelf
     //当前Button 为空时，
     if (!self.currentBtn) {
         

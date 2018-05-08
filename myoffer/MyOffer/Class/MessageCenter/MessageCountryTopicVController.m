@@ -82,7 +82,7 @@
     
     if (fabs(page) <= 1) {
         
-        XWeakSelf
+        WeakSelf
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
             
             weakSelf.bgView.contentOffset = CGPointMake(index * self.bgView.mj_w , 0);
@@ -108,7 +108,7 @@
 - (void)makeUI{
     
     //1 顶部筛选栏
-    XWeakSelf
+    WeakSelf
     self.topView = [MessageTopicCatigoryView topViewWithBlock:^(NSInteger catigory_index) {
         
         [weakSelf topviewOnClick:catigory_index];
@@ -175,7 +175,7 @@
 #pragma mark : 网络请求 得到基础数据
 - (void)makeCatigoryData{
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorArticleArticleCategory parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateTopViewUIWithResponse:response];
@@ -462,7 +462,7 @@
     
     if (show) self.countryBgView.alpha = alpha;
     
-    XWeakSelf
+    WeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         weakSelf.countryTableView.mj_h = distance;

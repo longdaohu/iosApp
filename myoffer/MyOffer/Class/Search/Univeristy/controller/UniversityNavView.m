@@ -47,7 +47,7 @@
     
     self.QQBtn.tag = NavItemStyleQQ;
    
-     XWeakSelf
+     WeakSelf
     self.rightView = [UniversityRightView ViewWithBlock:^(UIButton *sender) {
         
         [weakSelf onclick:sender];

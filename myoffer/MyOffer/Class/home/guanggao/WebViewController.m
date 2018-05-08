@@ -249,7 +249,7 @@
         if(arr.count > 2){
             
             NSString *url_path = [NSString stringWithFormat:@"GET api/article/short-id/%@",arr[arr.count-2]];
-            XWeakSelf
+            WeakSelf
             [self startAPIRequestWithSelector:url_path parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                 MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:response[@"id"]] ;
                 [weakSelf.navigationController pushViewController:detail animated:YES];
@@ -407,7 +407,7 @@
 {
 //    if (LOGIN) {
 //
-//        XWeakSelf
+//        WeakSelf
 //        [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet  parameters:nil success:^(NSInteger statusCode, id response) {
 //            weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
 //        }];
@@ -524,7 +524,7 @@
     NSString *inner = @"jump/1/";
     NSString *process_id = [url_path componentsSeparatedByString:inner].lastObject;
     NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorStatusDetail,process_id];
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
        
         ApplyStatusHistoryViewController *historyVC = [[ApplyStatusHistoryViewController alloc] init];

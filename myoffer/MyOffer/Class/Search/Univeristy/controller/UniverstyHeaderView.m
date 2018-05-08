@@ -53,7 +53,7 @@
         self.downView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.downView];
         
-        XWeakSelf
+        WeakSelf
         UniversityheaderCenterView *centerView =  [UniversityheaderCenterView headerCenterViewWithBlock:^(UIButton *sender) {
             [weakSelf onclick:sender];
         }];

@@ -322,7 +322,7 @@
 //网络请求
 - (void)makeDataSource{
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorSearch parameters:self.parametersM expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -436,7 +436,7 @@
 
 - (void)makeFilter{
     
-    XWeakSelf
+    WeakSelf
     SearchUniCenterFilterVController *filter =[[SearchUniCenterFilterVController alloc] initWithActionBlock:^(NSArray *parameters) {
         
         [weakSelf filterWithParameter:parameters];
@@ -552,7 +552,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
     
-    XWeakSelf
+    WeakSelf
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
@@ -571,7 +571,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    XWeakSelf;
+    WeakSelf;
     
     UniversityFrameNew *uniFrame = self.UniFrames[section];
     

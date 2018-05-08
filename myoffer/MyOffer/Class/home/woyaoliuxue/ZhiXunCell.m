@@ -74,7 +74,7 @@
     XWGJKeyboardToolar *tooler = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([XWGJKeyboardToolar class]) owner:self options:nil].lastObject;
     inputTF.inputAccessoryView = tooler;
 
-    XWeakSelf
+    WeakSelf
     tooler.actionBlock = ^(NSString *flag){
         
         if ([flag isEqualToString:@"收起"]) {

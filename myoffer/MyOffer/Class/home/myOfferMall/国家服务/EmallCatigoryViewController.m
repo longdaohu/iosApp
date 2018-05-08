@@ -123,7 +123,7 @@
 //添加自定义顶部导航
 -(void)makeTopNavigaitonView{
     
-    XWeakSelf
+    WeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
         
         [weakSelf navigationItemWithSender:sender];
@@ -180,7 +180,7 @@
     self.tableView.tableHeaderView = headerView;
     
     
-    XWeakSelf
+    WeakSelf
     EmallCatigroySectionView *banView = [EmallCatigroySectionView headerViewWithFrame:CGRectMake(0, height, XSCREEN_WIDTH, bannerHeight) actionBlock:^(UIButton *sender) {
         
         [weakSelf makeCurrentSKUWithTitle:(sender.currentTitle)];
@@ -195,7 +195,7 @@
 
 - (void)makeDataSource {
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:@"GET api/emall/skus" parameters:@{@"country":self.country_Name,@"category":self.current_Service} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf updateUIWithResponse:response];

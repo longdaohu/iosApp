@@ -124,7 +124,7 @@ typedef enum {
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务
 -(void)userDidClickItem
 {
-         XWeakSelf
+         WeakSelf
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
            
             [weakSelf  UnivertityClickType:self.clickType];
@@ -160,7 +160,7 @@ typedef enum {
    
     if (self.FromPipei) return;
     
-        XWeakSelf
+        WeakSelf
     
         NSString *path = [NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
     
@@ -177,7 +177,7 @@ typedef enum {
 -(void)addDataSourse
 {
  
-    XWeakSelf
+    WeakSelf
     NSString *path =[NSString stringWithFormat:@"%@%@",kAPISelectorUniversityDetail,self.uni_id];
     
     BOOL  show = (self.groups.count > 0) ? NO  : YES;
@@ -221,7 +221,7 @@ typedef enum {
     UniversityNewFrame *UniFrame = [UniversityNewFrame frameWithUniversity:university];
     self.UniFrame = UniFrame;
  
-    XWeakSelf
+    WeakSelf
    //1  表头
     UniverstyHeaderView  * header  = [UniverstyHeaderView headerTableViewWithUniFrame:UniFrame];
     header.frame       = UniFrame.header_Frame;
@@ -315,7 +315,7 @@ typedef enum {
 //添加底部按钮
 -(void)makeBottomView{
     
-    XWeakSelf
+    WeakSelf
     CGFloat footer_h = 70;
     CGFloat footer_w = self.tableView.mj_w;
     CGFloat footer_y = self.tableView.mj_h - footer_h;
@@ -334,7 +334,7 @@ typedef enum {
 -(void)makeTopNavigaitonView{
 
     
-    XWeakSelf
+    WeakSelf
     self.topNavigationView = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
         [weakSelf onClick:sender];
     }];
@@ -374,7 +374,7 @@ typedef enum {
     UniGroupOneView  *oneGroup =[[UniGroupOneView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, UniFrame.group_One_Height)];
     oneGroup.contentFrame = UniFrame;
     self.oneGroup = oneGroup;
-    XWeakSelf
+    WeakSelf
     oneGroup.actionBlock = ^(NSString *name,NSInteger index){
               [weakSelf showPhotoAtIndex:index];
       };
@@ -602,7 +602,7 @@ typedef enum {
     NSMutableString *path = [NSMutableString string];
     [path  appendFormat:@"%@%@",kAPISelectorUniversityDetailUserLevel,self.uni_id];
     [path  appendFormat:@"%@",pString];
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         
         NSArray *values = [(NSDictionary *)response allValues];
@@ -680,7 +680,7 @@ typedef enum {
 - (void)caseFavorite
 {
     RequireLogin
-    XWeakSelf
+    WeakSelf
     NSString *path = self.UniFrame.uni.favorited ?  kAPISelectorUniversityUnfavorited : kAPISelectorUniversityfavorited;
     NSString *title =  self.UniFrame.uni.favorited ?  @"取消收藏"  : @"收藏成功";
     self.clickType = UniversityItemTyDeFault;
@@ -695,7 +695,7 @@ typedef enum {
 //点击查看更多
 - (void)caseMore
 {
-    XWeakSelf
+    WeakSelf
     self.UniFrame.showMore = !self.UniFrame.showMore;
     if (CGRectGetHeight(self.headerView.frame) > 0) {
         [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -760,7 +760,7 @@ typedef enum {
     
     if ( !LOGIN  ||  self.user_level.integerValue == DEFAULT_NUMBER || self.user_level.integerValue == -1) {
         
-        XWeakSelf
+        WeakSelf
         self.FromPipei = YES;
         PipeiEditViewController *pipei = [[PipeiEditViewController alloc] init];
         pipei.Uni_Country = self.oneGroup.contentFrame.uni.country;

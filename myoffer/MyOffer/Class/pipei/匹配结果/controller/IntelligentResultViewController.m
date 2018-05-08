@@ -61,7 +61,7 @@
 
     if (!_pipeiNoDataView) {
         
-        XWeakSelf
+        WeakSelf
         _pipeiNoDataView = [PipeiNoResultVeiw viewWithActionBlock:^{
             [weakSelf casePipeiEditPage];
         }];
@@ -188,7 +188,7 @@
 -(void)DataSourseRequst
 {
  
-        XWeakSelf;
+        WeakSelf;
         
         [self startAPIRequestWithSelector:kAPISelectorZiZengRecommendation  parameters:@{} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -319,7 +319,7 @@
     }
 
     //延迟显示
-     XWeakSelf
+     WeakSelf
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (total>0) [weakSelf.PieHeadView reloadData];
     });
@@ -577,7 +577,7 @@
 //进入智能匹配
 -(void)casePipeiEditPage
 {
-    XWeakSelf;
+    WeakSelf;
     PipeiEditViewController *pipeiEdit = [[PipeiEditViewController alloc] init];
     pipeiEdit.actionBlock = ^(NSString *pipei) {
  

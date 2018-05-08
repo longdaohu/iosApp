@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 - (UIAlertController *)alert{
     
     if (!_alert) {
-        XWeakSelf
+        WeakSelf
         _alert = [UIAlertController alertWithTitle:@"是否确认删除" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"好的" actionWithDoneHandler:^{
             //先删除 已选择专业数组列表  > 再删除分区头
             [weakSelf commitCancelselectCell];
@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
  */
 -(void)checkApplyStatus{
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorApplicationStatus  parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         
         if (![response[@"state"] containsString:@"1"] && ![response[@"state"] containsString:@"ack"])
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 //网络数据请求
 - (void)makeDataSourse {
     
-    XWeakSelf;
+    WeakSelf;
     [self startAPIRequestWithSelector:kAPISelectorApplicationList parameters:nil expectedStatusCodes:nil showHUD:(self.groups.count == 0) showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         [weakSelf upadateUIWithResponse:(NSArray *)response];
@@ -331,7 +331,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    XWeakSelf
+    WeakSelf
     UniversityFrameNew *uni_frame = self.groups[section];
     
     ApplySectionHeaderView  *sectionView= [ApplySectionHeaderView sectionHeaderViewWithTableView:tableView];
@@ -525,7 +525,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     [self.view setNeedsUpdateConstraints];
     
-    XWeakSelf
+    WeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         [weakSelf.view layoutIfNeeded];
@@ -624,7 +624,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     
     
     
-    XWeakSelf
+    WeakSelf
   
     [self startAPIRequestWithSelector:kAPISelectorUpdateApplyResult parameters:@{@"ids":courseIdes,@"uIds":universtityIdes} showHUD:NO success:^(NSInteger statusCode, id response) {
         

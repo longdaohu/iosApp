@@ -275,7 +275,7 @@ typedef enum {
     TJFooterFrame *footerFrame = [[TJFooterFrame alloc] init];
     footerFrame.footer_title = GDLocalizedString(@"ApplicationProfile-footer");
     
-    XWeakSelf
+    WeakSelf
     TiJiaoFooterView *footerView   = [TiJiaoFooterView footerWithContent:footerFrame actionBlock:^(UIButton *sender) {
         
         [weakSelf  TiJiaoFooterViewItemOnClick:sender];
@@ -330,7 +330,7 @@ typedef enum {
         
         
         
-        XWeakSelf
+        WeakSelf
         
         [self startAPIRequestWithSelector:@"GET api/account/applicationdata" parameters:nil success:^(NSInteger statusCode, NSDictionary *response) {
             
@@ -992,7 +992,7 @@ typedef enum {
     
     
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector: @"POST api/account/applicationdata" parameters:@{@"applicationData":parameters} success:^(NSInteger statusCode, id response) {
         
         [weakSelf

@@ -302,7 +302,7 @@
     
     [self.topView setContentOffset:po animated:YES];
     
-    XWeakSelf
+    WeakSelf
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         _indicatorView.center = CGPointMake(sender.center.x,  _indicatorView.center.y);

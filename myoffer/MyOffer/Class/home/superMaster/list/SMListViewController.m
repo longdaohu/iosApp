@@ -112,7 +112,7 @@
 
 - (void)makeSupeMasterData{
     
-    XWeakSelf
+    WeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorSuperMasterlist  parameters:self.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -220,7 +220,7 @@
 
 - (void)makeFilter{
     
-    XWeakSelf
+    WeakSelf
     
     UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
         

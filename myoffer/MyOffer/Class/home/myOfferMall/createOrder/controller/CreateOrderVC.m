@@ -81,7 +81,7 @@
     
     //获取用户优惠券
     NSString *path  = @"GET svc/marketing/coupons/get";
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
@@ -312,7 +312,7 @@
 //push  尊享通道
 - (void)casePushEnjoy:(myofferGroupModel *)group{
     
-    XWeakSelf
+    WeakSelf
     OrderEnjoyVC *vc = [[OrderEnjoyVC alloc] initWithNibName:@"OrderEnjoyVC" bundle:nil];
     vc.price = self.itemFrame.item.price;
     vc.enjoyBlock = ^(NSDictionary *result) {
@@ -340,7 +340,7 @@
 //push  活动通道
 - (void)casePushActive:(myofferGroupModel *)group{
  
-        XWeakSelf
+        WeakSelf
         OrderActionVC *vc =  [[OrderActionVC alloc] initWithNibName:@"OrderActionVC" bundle:nil];
         vc.items = self.discount_items;
         vc.actBlock = ^(DiscountItem *item) {
@@ -377,7 +377,7 @@
 //显示 Alert
 - (void)caseAlertWithGroup:(myofferGroupModel *)group{
     
-    XWeakSelf
+    WeakSelf
     NSString *message = (group.type == SectionGroupTypeCreateOrderActive) ? @"选择使用活动通道将无法同时使用尊享码" :  @"选择使用尊享通道将无法同时使用优惠券" ;
     UIAlertController *alert = [UIAlertController alertWithTitle:nil  message:message actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"依然进入" actionWithDoneHandler:^{
        
@@ -483,7 +483,7 @@
 //NSDictionary *parameter  = @{ @"skuId": self.item.price};
 //pId:@"",//推广码Id
 //cId:@"",//优惠券码Id   优惠券id和推广码Id只可选传
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:@"POST svc/emall/order/create" parameters:self.parameter showHUD:YES errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         [weakSelf orderCreateSuccessWithResponse:response];
     }];
@@ -592,7 +592,7 @@
 
 - (void)showErrorAlert{
 
-    XWeakSelf;
+    WeakSelf;
     UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:nil message:@"该优惠券已失效，是否继续购买" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"  style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
        

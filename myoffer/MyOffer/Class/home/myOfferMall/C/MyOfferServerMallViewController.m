@@ -93,7 +93,7 @@
 - (ServiceOverseaDestinationView *)overseaView{
 
     if (!_overseaView) {
-        XWeakSelf
+        WeakSelf
         _overseaView = [ServiceOverseaDestinationView overseaView];
         _overseaView.actionBlock = ^(NSString *destination){
             
@@ -142,7 +142,7 @@
 
     if(!_autoLoopView){
     
-        XWeakSelf
+        WeakSelf
         
         SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height) delegate:nil placeholderImage:nil];
         
@@ -166,7 +166,7 @@
 //网络请求
 - (void)makeDataSource{
     
-    XWeakSelf
+    WeakSelf
 
     BOOL isService = self.sevice ? NO : YES;
     

@@ -277,7 +277,7 @@
 -(void)hotPromotions:(BOOL)refresh
 {
   
-    XWeakSelf
+    WeakSelf
     
     [self startAPIRequestWithSelector:kAPISelectorMessagePromotions  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -427,7 +427,7 @@
     CGFloat searchY = CGRectGetMaxY(self.headerFrame.autoScroller_frame) - searchH * 0.5;
     HomeSearchView *searchView = [HomeSearchView ViewWithFrame:CGRectMake(searchX,searchY,searchW, searchH)];
     self.searchView = searchView;
-    XWeakSelf
+    WeakSelf
     searchView.actionBlock = ^{
         
         [weakSelf CaseSearchPage];
@@ -440,7 +440,7 @@
 #pragma mark : 创建轮播图头部
 - (void)makeAutoLoopViewAtView:(UIView *)bgView{
     
-    XWeakSelf
+    WeakSelf
     SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:self.headerFrame.autoScroller_frame delegate:nil placeholderImage:nil];
     self.autoLoopView = autoLoopView;
     autoLoopView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
@@ -786,7 +786,7 @@ ENGLISH  设置环境
 {
     if (!LOGIN) return;
     
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
         
@@ -807,7 +807,7 @@ ENGLISH  设置环境
 {
     if (!LOGIN) return;
  
-     XWeakSelf
+     WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         
         weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;

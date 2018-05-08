@@ -76,7 +76,7 @@
 
 -(void)makeDataSourse:(NSInteger)page{
     
-    XWeakSelf
+    WeakSelf
   
     [self startAPIRequestWithSelector:kAPISelectorOrderList parameters:@{KEY_PAGE:@(page),KEY_SIZE:@(Parameter_Size)} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         
@@ -203,7 +203,7 @@
     OrderItemFrame *orderFrame = orders_frame[indexPath.row];
     
     cell.orderFrame = orderFrame;
-    XWeakSelf
+    WeakSelf
     cell.orderBlock = ^(OrderCellType type) {
         
         switch (type) {
@@ -244,7 +244,7 @@
 
     NSArray *orders_frame = self.groups[indexPath.section];
      OrderItemFrame *order_Frame = orders_frame[indexPath.row];
-        XWeakSelf
+        WeakSelf
     OrderDetailViewController  *detail = [[OrderDetailViewController alloc] init];
     detail.order  =  order_Frame.order;
     detail.actionBlock = ^(BOOL isSuccess){
@@ -268,7 +268,7 @@
      PayOrderViewController  *pay = [[PayOrderViewController alloc] init];
      pay.order  =  order;
     
-     XWeakSelf
+     WeakSelf
     pay.actionBlock = ^(BOOL isSuccess){
          if (isSuccess) {
             order.status_finish = YES;
@@ -282,7 +282,7 @@
 //取消订单
 -(void)cancelOrder:(NSIndexPath *)indexPath order:(OrderItem *)order{
     
-    XWeakSelf
+    WeakSelf
     UIAlertController *alert = [UIAlertController alertWithTitle:@"是否要取消订单" message:nil actionWithCancelTitle:@"取消" actionWithCancelBlock:nil actionWithDoneTitle:@"确定" actionWithDoneHandler:^{
         [weakSelf caseOrderCloseWithOrder:order index:indexPath];
     }];
@@ -291,7 +291,7 @@
 //提交取消订单
 - (void)caseOrderCloseWithOrder:(OrderItem *)order index:(NSIndexPath *)index{
  
-    XWeakSelf
+    WeakSelf
     NSString *path = [NSString stringWithFormat:kAPISelectorOrderClose,order.order_id];
     //先删除 已选择专业数组列表  > 再删除分区头
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {

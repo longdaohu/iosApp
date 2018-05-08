@@ -84,7 +84,7 @@
         return;
     }
  
-    XWeakSelf;
+    WeakSelf;
     [self startAPIRequestWithSelector:kAPISelectorFavorites parameters:nil expectedStatusCodes:nil showHUD:(self.groups.count == 0) showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {

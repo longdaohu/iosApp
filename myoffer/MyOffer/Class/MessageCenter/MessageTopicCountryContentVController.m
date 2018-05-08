@@ -72,7 +72,7 @@
 #pragma mark : 网络请求
 - (void)makeDataWithPage:(NSInteger)page{
 
-    XWeakSelf
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorArticalesList  parameters:self.group.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, NSDictionary *response) {
         
         [weakSelf updateUIWithResponse:response];

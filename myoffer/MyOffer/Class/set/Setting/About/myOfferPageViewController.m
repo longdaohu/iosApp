@@ -245,7 +245,7 @@
     
     if(group.active.length>0){
         
-        XWeakSelf
+        WeakSelf
         header.myOfferSectionHeaderViewBlock = ^{
             
             [weakSelf caseMore:group];

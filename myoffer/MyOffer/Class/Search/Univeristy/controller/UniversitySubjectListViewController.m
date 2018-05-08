@@ -100,7 +100,7 @@
 
 - (void)makeFilter{
 
-    XWeakSelf
+    WeakSelf
     
     UniversityCourseFilterViewController *filter =[[UniversityCourseFilterViewController alloc] initWithActionBlock:^(NSString *value, NSString *key) {
         
@@ -173,7 +173,7 @@
     [self.view addSubview:footer];
     self.footer = footer;
     
-    XWeakSelf;
+    WeakSelf;
     
     footer.actionBlock = ^{
         
@@ -213,7 +213,7 @@
 #pragma mark : 网络请求
 - (void)makeDataSource{
     
-    XWeakSelf
+    WeakSelf
  
     [self startAPIRequestWithSelector:kAPISelectorUniversityCourses  parameters:_resquestParameters  expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
         
