@@ -15,5 +15,11 @@
     return @{@"banner_id" : @"_id"};
 }
 
+- (NSString *)image_url{
+    
+    NSLog(@"========   %@",_image_url_mc);
+    
+    return [_image_url_mc JH_stringUTF8WithString];
+}
 
 @end

@@ -194,7 +194,7 @@
     //1 如果有banner
     if (banners_true ) {
         
-         self.autoLoopView.imageURLStringsGroup = [self.smModel.banners valueForKey:@"image_url_mc"];
+         self.autoLoopView.imageURLStringsGroup = [self.smModel.banners valueForKeyPath:@"image_url"];
       
         WeakSelf
         [UIView animateWithDuration:ANIMATION_DUATION * 2 animations:^{

@@ -439,6 +439,9 @@
 		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
 		AEC47A421ECC20D60085F19A /* UniverstityTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC47A411ECC20D60085F19A /* UniverstityTCell.m */; };
 		AEC85BB0209B11570002F19B /* NSString+extent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC85BAF209B11570002F19B /* NSString+extent.m */; };
+		AEC85BC320A29F4D0002F19B /* gradeCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC120A29F4D0002F19B /* gradeCN.plist */; };
+		AEC85BC620A2A1030002F19B /* subjectsCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC520A2A1030002F19B /* subjectsCN.plist */; };
+		AEC85BC820A2CBB30002F19B /* countriesCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC720A2CBB30002F19B /* countriesCN.plist */; };
 		AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */; };
 		AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */; };
 		AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87811F95F63800FCBBEC /* CatigoryViewController.m */; };
@@ -1256,6 +1259,9 @@
 		AEC47A411ECC20D60085F19A /* UniverstityTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniverstityTCell.m; sourceTree = "<group>"; };
 		AEC85BAE209B11570002F19B /* NSString+extent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+extent.h"; sourceTree = "<group>"; };
 		AEC85BAF209B11570002F19B /* NSString+extent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+extent.m"; sourceTree = "<group>"; };
+		AEC85BC120A29F4D0002F19B /* gradeCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = gradeCN.plist; sourceTree = "<group>"; };
+		AEC85BC520A2A1030002F19B /* subjectsCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = subjectsCN.plist; sourceTree = "<group>"; };
+		AEC85BC720A2CBB30002F19B /* countriesCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCN.plist; sourceTree = "<group>"; };
 		AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProductDescriptCell.h; sourceTree = "<group>"; };
 		AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProductDescriptCell.m; sourceTree = "<group>"; };
 		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
@@ -1432,6 +1438,7 @@
 		463E3A4B1B230EDC00E0BAF8 /* MyOffer */ = {
 			isa = PBXGroup;
 			children = (
+				AEC85BC020A29F4D0002F19B /* plist_File */,
 				AE36595F1DAB9818007CEE3B /* myOffer.entitlements */,
 				AEA24C0F1D5B274F00DD7939 /* ImageFile */,
 				AEE73C351BCCBB6400B96006 /* LIB */,
@@ -3064,8 +3071,8 @@
 		AEA24A4A1D5B23F500DD7939 /* homePage */ = {
 			isa = PBXGroup;
 			children = (
-				AEA24A4E1D5B23F500DD7939 /* model */,
 				AEA24A4B1D5B23F500DD7939 /* controller */,
+				AEA24A4E1D5B23F500DD7939 /* model */,
 				AEA24A511D5B23F500DD7939 /* view */,
 			);
 			path = homePage;
@@ -3557,6 +3564,16 @@
 			path = ImageFile;
 			sourceTree = "<group>";
 		};
+		AEC85BC020A29F4D0002F19B /* plist_File */ = {
+			isa = PBXGroup;
+			children = (
+				AEC85BC120A29F4D0002F19B /* gradeCN.plist */,
+				AEC85BC520A2A1030002F19B /* subjectsCN.plist */,
+				AEC85BC720A2CBB30002F19B /* countriesCN.plist */,
+			);
+			path = plist_File;
+			sourceTree = "<group>";
+		};
 		AECC877C1F95F63800FCBBEC /* Catigory */ = {
 			isa = PBXGroup;
 			children = (
@@ -3868,7 +3885,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3910,6 +3927,7 @@
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
 				AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */,
+				AEC85BC320A29F4D0002F19B /* gradeCN.plist in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
@@ -3927,6 +3945,7 @@
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
 				AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
+				AEC85BC620A2A1030002F19B /* subjectsCN.plist in Resources */,
 				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
@@ -3956,6 +3975,7 @@
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE79827C1F735392008BBAB7 /* UMSocialSDKResources.bundle in Resources */,
 				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
+				AEC85BC820A2CBB30002F19B /* countriesCN.plist in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
@@ -4639,7 +4659,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

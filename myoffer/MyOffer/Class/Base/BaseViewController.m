@@ -267,15 +267,10 @@
 
     [super viewDidLoad];
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:kReachabilityChangedNotification object:nil];
-    
     self.conn = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    
     [self.conn startNotifier];
-    
     self.view.backgroundColor = XCOLOR_BG;
-    
 }
 
 - (void)networkStateChange
@@ -376,7 +371,7 @@
 - (void)countryWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
-    [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+//    [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
   
 }
 
@@ -384,7 +379,7 @@
 - (void)subjectWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
-    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+//    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
  
 }
 
@@ -392,47 +387,41 @@
 - (void)gradeWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
-    [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
+//    [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
     
 }
 
 
 -(void)baseDataSourseWithPath:(NSString *)path  keyWord:(NSString *)keyWord  parameters:(NSDictionary *)para  ErrorAlerShow:(BOOL)show{
+ 
     
-    NSUserDefaults *ud  = [NSUserDefaults  standardUserDefaults];
-
-//    [self startAPIRequestUsingCacheWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//       
-//        [ud setValue:response forKey:keyWord];
-//        
-//        [ud synchronize];
-//        
-//    }];
-   
     [self startAPIRequestWithSelector:path  parameters:para expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        [ud setValue:response forKey:keyWord];
-        
-        [ud synchronize];
-        
+
+        [USDefault setValue:response forKey:keyWord];
+        [USDefault synchronize];
+
      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-         NSLog(@"服务器错误 = %@  %ld",path ,(long)statusCode);
 
-        if (show) {
-            
-            
-           AlerMessage(@"网络请求失败");
-            
-        }
-        
-    }];
-
+         KDLog(@"服务器错误 = %@  %ld",path ,(long)statusCode);
+         
+         NSString *key;
+         if ([path isEqualToString:kAPISelectorGrades]) {
+             key = @"gradeCN";
+         }
+         if ([path isEqualToString:kAPISelectorSubjects_new]) {
+             key = @"subjectsCN";
+         }
+         if ([path isEqualToString:kAPISelectorCountries]) {
+             key = @"countriesCN";
+         }
+         NSString *plist_path = [[NSBundle mainBundle] pathForResource:key ofType:@"plist"];
+         NSArray *items = [[NSArray alloc] initWithContentsOfFile:plist_path];
+         [USDefault setValue:items forKey:keyWord];
+         [USDefault synchronize];
+ 
+     }];
     
 }
-
-
-
 
 
 @end

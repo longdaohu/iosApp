@@ -118,7 +118,8 @@
     
     NSMutableArray  *temps = [[self.areas valueForKeyPath:@"name"] mutableCopy];
     [temps insertObject:KEY_ALL  atIndex:0];
-    
+    //temps有可能为空，NSDictionary插入nil对象会造成崩溃，手动添了学科plist文件
+    //*** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[1]
     filter.rightInfo = @{
                          @"key" : @"area",
                          @"title" : @"专业方向",
@@ -140,10 +141,8 @@
 -(NSArray *)areas
 {
     if (!_areas) {
-        
-        NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-        
-        _areas = [ud valueForKey:@"Subject_CN"];
+ 
+        _areas = [USDefault valueForKey:@"Subject_CN"];
     }
   
     return _areas;

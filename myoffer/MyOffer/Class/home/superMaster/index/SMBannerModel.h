@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SMBannerModel : NSObject
+@property(nonatomic,copy)NSString *image_url;
 @property(nonatomic,copy)NSString *image_url_mc;
 @property(nonatomic,copy)NSString *image_url_pc;
 @property(nonatomic,copy)NSString *link_app;

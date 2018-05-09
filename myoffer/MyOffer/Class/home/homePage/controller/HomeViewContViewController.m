@@ -118,7 +118,7 @@
     [self makeUI];
     
     [self makeOther];
-
+    
 }
 
 -(void)makeOther{
