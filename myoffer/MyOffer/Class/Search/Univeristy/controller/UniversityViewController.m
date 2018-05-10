@@ -14,7 +14,7 @@
 #import "HomeSectionHeaderView.h"
 #import "MyOfferArticle.h"
 #import "MessageCell.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MyOfferUniversityModel.h"
 #import "UniverstityTCell.h"
 #import "UniversityRightView.h"
@@ -260,7 +260,7 @@ typedef enum {
    //3-2 相关资讯 第二分组
     NSMutableArray *news_temps = [NSMutableArray array];
     [university.relate_articles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:obj];
+        MyofferMessageFrame *newsFrame =  [MyofferMessageFrame messageFrameWithMessage:obj];
         [news_temps addObject:newsFrame];
     }];
  
@@ -420,7 +420,7 @@ typedef enum {
             break;
             
         case SectionGroupTypeB:{
-            XWGJMessageFrame *messageFrame =  group.items[indexPath.row];
+            MyofferMessageFrame *messageFrame =  group.items[indexPath.row];
             cellHeight  = messageFrame.cell_Height;
         }
             break;
@@ -501,7 +501,7 @@ typedef enum {
     switch (group.type) {
         case SectionGroupTypeB:
         {
-            XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
+            MyofferMessageFrame *newsFrame  = group.items[indexPath.row];
             VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
         }
             break;

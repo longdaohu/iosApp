@@ -9,7 +9,7 @@
 #import "MessageTopiccGroup.h"
 #import "MessageTopicModel.h"
 #import "MyOfferArticle.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 
 @implementation MessageTopiccGroup
 

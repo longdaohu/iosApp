@@ -185,7 +185,7 @@
 		AE4B2E761F1E095600E328F7 /* MessageTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E4B1F1E095600E328F7 /* MessageTopicModel.m */; };
 		AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E4D1F1E095600E328F7 /* MyofferSectionView.m */; };
 		AE4B2E781F1E095600E328F7 /* MyOfferArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E501F1E095600E328F7 /* MyOfferArticle.m */; };
-		AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E521F1E095600E328F7 /* XWGJMessageFrame.m */; };
+		AE4B2E791F1E095600E328F7 /* MyofferMessageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E521F1E095600E328F7 /* MyofferMessageFrame.m */; };
 		AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E551F1E095600E328F7 /* MessageCell.m */; };
 		AE4B2E7B1F1E095600E328F7 /* messageCatigroyCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E581F1E095600E328F7 /* messageCatigroyCountryModel.m */; };
 		AE4B2E7C1F1E095600E328F7 /* messageCatigroyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E5A1F1E095600E328F7 /* messageCatigroyModel.m */; };
@@ -809,8 +809,8 @@
 		AE4B2E4D1F1E095600E328F7 /* MyofferSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferSectionView.m; sourceTree = "<group>"; };
 		AE4B2E4F1F1E095600E328F7 /* MyOfferArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferArticle.h; sourceTree = "<group>"; };
 		AE4B2E501F1E095600E328F7 /* MyOfferArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferArticle.m; sourceTree = "<group>"; };
-		AE4B2E511F1E095600E328F7 /* XWGJMessageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJMessageFrame.h; sourceTree = "<group>"; };
-		AE4B2E521F1E095600E328F7 /* XWGJMessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJMessageFrame.m; sourceTree = "<group>"; };
+		AE4B2E511F1E095600E328F7 /* MyofferMessageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferMessageFrame.h; sourceTree = "<group>"; };
+		AE4B2E521F1E095600E328F7 /* MyofferMessageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferMessageFrame.m; sourceTree = "<group>"; };
 		AE4B2E541F1E095600E328F7 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		AE4B2E551F1E095600E328F7 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		AE4B2E571F1E095600E328F7 /* messageCatigroyCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messageCatigroyCountryModel.h; sourceTree = "<group>"; };
@@ -2002,8 +2002,8 @@
 			children = (
 				AE4B2E4F1F1E095600E328F7 /* MyOfferArticle.h */,
 				AE4B2E501F1E095600E328F7 /* MyOfferArticle.m */,
-				AE4B2E511F1E095600E328F7 /* XWGJMessageFrame.h */,
-				AE4B2E521F1E095600E328F7 /* XWGJMessageFrame.m */,
+				AE4B2E511F1E095600E328F7 /* MyofferMessageFrame.h */,
+				AE4B2E521F1E095600E328F7 /* MyofferMessageFrame.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4333,7 +4333,7 @@
 				AECC87CF1F95F63800FCBBEC /* CatigaryHotCity.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
-				AE4B2E791F1E095600E328F7 /* XWGJMessageFrame.m in Sources */,
+				AE4B2E791F1E095600E328F7 /* MyofferMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,

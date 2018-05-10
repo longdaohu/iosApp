@@ -19,7 +19,7 @@
 -(NSString *)cover_path{
     
     
-  return   [self.cover_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  return   [self.cover_url toUTF8WithString];
     
 }
 

@@ -8,7 +8,7 @@
 
 #import "MessageTopicModel.h"
 #import "MyOfferArticle.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 
 @implementation MessageTopicModel
 
@@ -26,7 +26,7 @@
 
     for (MyOfferArticle *ms in articles) {
         
-        [temps addObject:[XWGJMessageFrame messageFrameWithMessage:ms]];
+        [temps addObject:[MyofferMessageFrame messageFrameWithMessage:ms]];
     }
     
     self.messageFrames = [temps copy];

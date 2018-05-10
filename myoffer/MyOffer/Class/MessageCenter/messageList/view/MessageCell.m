@@ -7,7 +7,7 @@
 //
 
 #import "MessageCell.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MyOfferArticle.h"
 
 @interface MessageCell ()
@@ -99,7 +99,7 @@
 
 
 
--(void)setMessageFrame:(XWGJMessageFrame *)messageFrame
+-(void)setMessageFrame:(MyofferMessageFrame *)messageFrame
 {
     _messageFrame =  messageFrame ;
     

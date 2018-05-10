@@ -72,7 +72,7 @@
     if (self.university) {
         
         shareURL = [NSString stringWithFormat:@"%@university/%@.html",DOMAINURL,self.university.short_id];
-        path = [self.university.logo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        path = [self.university.logo toUTF8WithString];
         NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
         shareImage = [UIImage imageWithData:ImageData];
         shareTitle = [NSString stringWithFormat:@"%@%@",self.university.name,shareURL];
@@ -81,7 +81,7 @@
     }else if(self.shareInfor){
         
         shareURL = self.shareInfor[@"shareURL"];
-        path = [self.shareInfor[@"icon"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        path = [self.shareInfor[@"icon"] toUTF8WithString];
         NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
         shareImage = [UIImage imageWithData:ImageData];
         shareTitle = [NSString stringWithFormat:@"%@%@",self.shareInfor[@"shareTitle"],shareURL];

@@ -26,13 +26,14 @@
         self.iconView.image = XImage(city.imageName);
         return;
     }
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_url]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:city.image_url]  placeholderImage:XImage(@"PlaceHolderImage")];
 }
 
 - (void)setTopic:(MessageHotTopicMedel *)topic{
 
     _topic = topic;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:topic.cover_path]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    NSURL *url_path = [NSURL URLWithString:topic.cover_path];
+    [self.iconView sd_setImageWithURL:url_path  placeholderImage:XImage(@"PlaceHolderImage")];
 }
 
 

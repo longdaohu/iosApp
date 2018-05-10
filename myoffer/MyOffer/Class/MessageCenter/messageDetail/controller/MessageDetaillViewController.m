@@ -12,7 +12,7 @@
 #import "MessageDetaillViewController.h"
 #import "MessageDetailFrame.h"
 #import "MessageCell.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MyOfferArticle.h"
 #import "ShareNViewController.h"
 #import "MyOfferUniversityModel.h"
@@ -236,7 +236,7 @@
     NSMutableArray *news_temps = [NSMutableArray array];
     for (MyOfferArticle *article in recommendations) {
         if(article.message_id != self.message_id){
-            XWGJMessageFrame *newsFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
+            MyofferMessageFrame *newsFrame =  [MyofferMessageFrame messageFrameWithMessage:article];
             [news_temps addObject:newsFrame];
         }
     }
@@ -384,7 +384,7 @@
         }
             break;
         case SectionGroupTypeB:{
-            XWGJMessageFrame   *messageFrame =  group.items[indexPath.row];
+            MyofferMessageFrame   *messageFrame =  group.items[indexPath.row];
             cellHeight = messageFrame.cell_Height;
         }
             break;
@@ -459,7 +459,7 @@
     switch (group.type) {
         case SectionGroupTypeB:
         {
-            XWGJMessageFrame *newsFrame  = group.items[indexPath.row];
+            MyofferMessageFrame *newsFrame  = group.items[indexPath.row];
             VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
         }
             break;

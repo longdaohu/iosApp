@@ -669,7 +669,7 @@
     
     if (self.actionBlock) {
         
-        self.actionBlock([[pString substringWithRange:NSMakeRange(0, pString.length-1)] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+        self.actionBlock([[pString substringWithRange:NSMakeRange(0, pString.length-1)] toUTF8WithString]);
     }
     
     [self.navigationController popViewControllerAnimated:YES];

@@ -10,7 +10,7 @@
 
 @interface NSString (extent)
 
-- (NSString *)JH_stringUTF8WithString;
+- (NSString *)toUTF8WithString;
 
 @end
 

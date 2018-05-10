@@ -16,10 +16,8 @@
 }
 
 - (NSString *)image_url{
-    
-    NSLog(@"========   %@",_image_url_mc);
-    
-    return [_image_url_mc JH_stringUTF8WithString];
+ 
+    return [_image_url_mc toUTF8WithString];
 }
 
 @end

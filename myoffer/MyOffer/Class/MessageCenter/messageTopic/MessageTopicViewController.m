@@ -8,11 +8,10 @@
 
 #import "MessageTopicViewController.h"
 #import "MyOfferArticle.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
 #import "UniversityNavView.h"
-#import "XWGJMessageFrame.h"
 #import "myofferFlexibleView.h"
 
 
@@ -41,9 +40,7 @@
 {
     
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+    NavigationBarHidden(YES);
     [MobClick beginLogPageView:@"page资讯热门专题"];
     
 }
@@ -91,7 +88,7 @@
     
     for(MyOfferArticle *article in articles){
         
-        XWGJMessageFrame *messageFrame =  [XWGJMessageFrame messageFrameWithMessage:article];
+        MyofferMessageFrame *messageFrame =  [MyofferMessageFrame messageFrameWithMessage:article];
         
         [self.messageFrames addObject:messageFrame];
         
@@ -198,7 +195,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    XWGJMessageFrame *messageFrame = self.messageFrames[indexPath.row];
+    MyofferMessageFrame *messageFrame = self.messageFrames[indexPath.row];
   
     return  messageFrame.cell_Height;
 }
@@ -223,7 +220,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    XWGJMessageFrame  *messageFrame  = self.messageFrames[indexPath.row];
+    MyofferMessageFrame  *messageFrame  = self.messageFrames[indexPath.row];
     MessageDetaillViewController *detail = [[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id];
     [self.navigationController pushViewController:detail animated:YES];
 }

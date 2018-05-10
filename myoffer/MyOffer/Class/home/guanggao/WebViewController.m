@@ -275,7 +275,7 @@
             }
         }
         
-        NSString *path = [jump_str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *path = [jump_str toUTF8WithString];
         NSData *JSONData = [path dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves error:nil];
         [self pageWithResponse:responseJSON];

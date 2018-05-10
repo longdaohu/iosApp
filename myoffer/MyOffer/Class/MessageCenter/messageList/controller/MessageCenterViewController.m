@@ -8,7 +8,7 @@
 
 #import "MessageCenterViewController.h"
 #import "messageCatigroyModel.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MessageTopicHeaderViewController.h"
 #import "MessageHotTopicMedel.h"
 #import "MessageTopiccGroup.h"

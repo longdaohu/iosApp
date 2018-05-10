@@ -16,10 +16,10 @@
 }
 - (NSString *)thumbnail{
     
-    NSString *path = [_thumbnail JH_stringUTF8WithString];
+    NSString *path = [_thumbnail toUTF8WithString];
     
     if (!_thumbnail) {
-        path = [_cover_url JH_stringUTF8WithString];
+        path = [_cover_url toUTF8WithString];
     }
     
     return path;
@@ -27,7 +27,7 @@
 
 - (NSString *)cover_url{
     
-    NSString *path = [_cover_url JH_stringUTF8WithString];
+    NSString *path = [_cover_url toUTF8WithString];
  
     return path;
 }

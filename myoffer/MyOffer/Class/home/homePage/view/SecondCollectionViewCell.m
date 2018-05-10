@@ -42,8 +42,8 @@
      _itemInfo = itemInfo;
     
      self.titleLab.text = itemInfo[@"title"];
-    
-     [self.logoView sd_setImageWithURL:[NSURL URLWithString:[itemInfo[@"cover_url"]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+     NSString *path = [itemInfo[@"cover_url"]  toUTF8WithString];
+     [self.logoView sd_setImageWithURL:[NSURL URLWithString:path]];
   
 }
 

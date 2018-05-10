@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class MyOfferArticle;
 
-@interface XWGJMessageFrame : NSObject
+@interface MyofferMessageFrame : NSObject
 @property(nonatomic,strong)MyOfferArticle *News;
 @property(nonatomic,assign)CGRect LogoFrame;
 @property(nonatomic,assign)CGRect TitleFrame;

@@ -15,7 +15,7 @@
 #import "MessageTopicCountryContentVController.h"
 #import "messageCatigroySubModel.h"
 #import "MyOfferArticle.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
  
 @interface MessageCountryTopicVController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) NSArray *catigroyGroup;
@@ -228,7 +228,7 @@
         NSMutableArray *temps = [NSMutableArray array];
         for (MyOfferArticle *article in items) {
             
-            [temps addObject:[XWGJMessageFrame messageFrameWithMessage:article]];
+            [temps addObject:[MyofferMessageFrame messageFrameWithMessage:article]];
         }
         
         [topic.messageFrames addObjectsFromArray:temps];

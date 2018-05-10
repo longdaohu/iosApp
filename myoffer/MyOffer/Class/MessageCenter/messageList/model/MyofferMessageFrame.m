@@ -6,10 +6,10 @@
 //  Copyright © 2016年 UVIC. All rights reserved.
 //
 
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MyOfferArticle.h"
 
-@implementation XWGJMessageFrame
+@implementation MyofferMessageFrame
 
 -(void)setNews:(MyOfferArticle *)News{
 
@@ -70,8 +70,8 @@
 
 +(instancetype)messageFrameWithMessage:(MyOfferArticle *)message
 {
-    XWGJMessageFrame *messageFrame = [[XWGJMessageFrame alloc] init];
-    messageFrame.News              = message;
+    MyofferMessageFrame *messageFrame = [[MyofferMessageFrame alloc] init];
+    messageFrame.News  = message;
     
     return messageFrame;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "MessageTopicCountryContentVController.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
 #import "MyOfferArticle.h"
@@ -96,7 +96,7 @@
     NSMutableArray *temps = [NSMutableArray array];
     for (MyOfferArticle *article in items) {
         
-        [temps addObject:[XWGJMessageFrame messageFrameWithMessage:article]];
+        [temps addObject:[MyofferMessageFrame messageFrameWithMessage:article]];
     }
     [self.group.messageFrames addObjectsFromArray:temps];
     
@@ -133,7 +133,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    XWGJMessageFrame *messageFrame =  self.group.messageFrames[indexPath.row];
+    MyofferMessageFrame *messageFrame =  self.group.messageFrames[indexPath.row];
     
     return messageFrame.cell_Height;
 }
@@ -155,7 +155,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    XWGJMessageFrame *messageFrame =  self.group.messageFrames[indexPath.row];
+    MyofferMessageFrame *messageFrame =  self.group.messageFrames[indexPath.row];
     
     MessageDetaillViewController *vc = [[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id];
     

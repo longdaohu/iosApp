@@ -43,9 +43,8 @@
 }
 
 - (NSString *)ad_icon{
-
-    
-    return [_ad_post_mc stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+ 
+    return [_ad_post_mc toUTF8WithString];
 }
 
 -  (NSString *)offline_path{

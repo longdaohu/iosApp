@@ -12,7 +12,7 @@
 #import "MessageTopicModel.h"
 #import "MyOfferArticle.h"
 #import "MessageCell.h"
-#import "XWGJMessageFrame.h"
+#import "MyofferMessageFrame.h"
 #import "MessageDetaillViewController.h"
 #import "MessageCountryTopicVController.h"
 
@@ -119,7 +119,7 @@
 {
     MessageTopicModel *topic =   self.group.contents[indexPath.section];
     
-    XWGJMessageFrame *messageFrame =  topic.messageFrames[indexPath.row];
+    MyofferMessageFrame *messageFrame =  topic.messageFrames[indexPath.row];
     
     return messageFrame.cell_Height;
 }
@@ -181,7 +181,7 @@
     
     MessageTopicModel *topic =   self.group.contents[indexPath.section];
     
-     XWGJMessageFrame *messageFrame =  topic.messageFrames[indexPath.row];
+     MyofferMessageFrame *messageFrame =  topic.messageFrames[indexPath.row];
     
     MessageDetaillViewController *vc = [[MessageDetaillViewController alloc] initWithMessageId:messageFrame.News.message_id];
     

@@ -53,7 +53,7 @@
 
     _image_url = image_url;
     
-    NSString *path = [image_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *path = [image_url toUTF8WithString];
     
      [self.coverView sd_setImageWithURL:[NSURL URLWithString:path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
          
