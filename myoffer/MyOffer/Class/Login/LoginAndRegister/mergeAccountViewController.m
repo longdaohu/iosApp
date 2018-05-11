@@ -233,18 +233,15 @@
 - (void)caseBack{
 
     [[AppDelegate sharedDelegate] logout];
-    
     [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-    
-    [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
-    
+    [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+    } seq:0];
+    //[APService setAlias:@"" callbackSelector:nil object:nil];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)caseNoClick{
-    
     KDClassLog(@"没反应");
-    
 }
 
 

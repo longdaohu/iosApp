@@ -167,7 +167,8 @@
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
     
-    [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+    [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+    } seq:0 ];//Jpush设置登录用户别名
     
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     
@@ -261,8 +262,8 @@
      parameters:@{@"username":self.BindView.Bind_PhoneFT.text, @"password": self.BindView.Bind_PastWordFT.text}
      success:^(NSInteger statusCode, NSDictionary *response) {
          
-         [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
-         
+         [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+         } seq:0 ];//Jpush设置登录用户别名
          [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
          
          [self gotoBangDing:response[@"access_token"]];
@@ -327,7 +328,11 @@
         
         [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
         
-        [APService setAlias:@"" callbackSelector:nil object:nil];  //设置Jpush用户所用别名为空
+
+//        [JPUSHService setAlias:@"" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//        } seq:0 ];//设置Jpush用户所用别名为空
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        } seq:0];
         
         [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
          

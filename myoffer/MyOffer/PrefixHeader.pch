@@ -87,9 +87,10 @@
 #define Bundle(name) [[NSBundle mainBundle] loadNibNamed:name owner:self options:nil].lastObject
 #define NavigationBarHidden(done) [self.navigationController setNavigationBarHidden:done animated:animated]
 #define USDefault [NSUserDefaults  standardUserDefaults]
+#define DeviceVersion  [[UIDevice currentDevice].systemVersion floatValue]
 
-#define DOMAINURL  @"https://www.myofferdemo.com/"
-//#define DOMAINURL  @"https://www.myoffer.cn/"
+//#define DOMAINURL  @"https://www.myofferdemo.com/"
+#define DOMAINURL  @"https://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"
@@ -123,7 +124,7 @@
 #import "XWGJNavigationController.h"
 #import "MJRefresh.h"
 #import "UMMobClick/MobClick.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "XTextField.h"
 #import "UILabel+extention.h"
 #import <UMSocialCore/UMSocialCore.h>

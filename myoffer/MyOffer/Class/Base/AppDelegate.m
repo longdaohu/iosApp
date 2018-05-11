@@ -13,12 +13,20 @@
 #import "IntroViewController.h"
 #import "UserDefaults.h"
 #import "MyOfferLoginViewController.h"
-#import "APService.h"
+
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "HomeViewContViewController.h"
 
-@interface AppDelegate ()<WXApiDelegate>
+// 引入JPush功能所需头文件
+//#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+#import <AdSupport/AdSupport.h>// 如果需要使用idfa功能所需要引入的头文件（可选）
+
+@interface AppDelegate ()<WXApiDelegate,JPUSHRegisterDelegate>
 {
     NSString *_accessToken;
  }
@@ -51,25 +59,17 @@ static AppDelegate *__sharedDelegate;
     
     //初始化语言文件
     [InternationalControl initUserLanguage];
-    
     //创建主控制
     [self makeRootController];
- 
     //友盟
     [self umeng];
-    
     //极光
-    [self Jpush];
-    
-    //极光
-    [APService setupWithOption:launchOptions];
-    
+    [self JpushWithOptions:launchOptions];
+ 
     //接收远程消息
     NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfox) {
-
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfox];
-        
          [self applicationBadgeNumber];
     }
 
@@ -103,31 +103,35 @@ static AppDelegate *__sharedDelegate;
     
 
 }
--(void)Jpush //极光推送
+-(void)JpushWithOptions:(NSDictionary *)launchOptions //极光推送
 {
-    // Required
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                       UIUserNotificationTypeSound |
-                                                       UIUserNotificationTypeAlert)
-                                           categories:nil];
-    }
-    /*
-    else {
-        //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
-                                           categories:nil];
-    }
-   */
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [APService setBadge:0];
-
-
+    //Required
+    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    
+    
+    // Optional
+    // 获取IDFA
+    // 如需使用IDFA功能请添加此代码并在初始化方法的advertisingIdentifier参数中填写对应值
+    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    // Required
+    // init Push
+    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
+    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+    [JPUSHService setupWithOption:launchOptions appKey:@"c73db911f4f72b608e116576"
+                          channel:@"Publish channel"
+                 apsForProduction:NO
+            advertisingIdentifier:advertisingId];
+    //apsForProduction  1.3.1版本新增，用于标识当前应用所使用的APNs证书环境。 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用。 注：此字段的值要与Build Settings的Code Signing配置的证书环境一致。
   
 }
 
@@ -195,40 +199,41 @@ static AppDelegate *__sharedDelegate;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     KDClassLog(@" didRegisterForRemoteNotificationsWithDeviceToken  %@",deviceToken);
-    // Required
-    [APService registerDeviceToken:deviceToken];
+    
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
    
-    KDClassLog(@"IOS <= 6   didReceiveRemoteNotification  %@",userInfo);
+    KDClassLog(@"iOS6及以下系统，收到通知: %@",userInfo);
     // Required
+    // Required,For systems with less than or equal to iOS6
+    [JPUSHService handleRemoteNotification:userInfo];
     
+    //iOS6及以下系统，收到通知:
     if (1 == [UIApplication sharedApplication].applicationState) {
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
-        
         [self applicationBadgeNumber];
     }
 
-    [APService handleRemoteNotification:userInfo];
-    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
     
-    KDClassLog(@"IOS 7   didReceiveRemoteNotification  %@ -- %ld",userInfo,[UIApplication sharedApplication].applicationState);
-    
+    KDClassLog(@"iOS7及以上系统，收到通知:  %@ -- %ld",userInfo,[UIApplication sharedApplication].applicationState);
+    //iOS7及以上系统，收到通知:
     if (1 == [UIApplication sharedApplication].applicationState) {
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
-        
         [self applicationBadgeNumber];
     }
-    
-      // IOS 7 Support Required
-    [APService handleRemoteNotification:userInfo];
+    // IOS 7 Support Required
+    [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
  
 }
@@ -236,19 +241,14 @@ static AppDelegate *__sharedDelegate;
 -(void)applicationBadgeNumber
 {
     
-    NSInteger Value = [UIApplication sharedApplication].applicationIconBadgeNumber - 1;
-    
-    NSInteger ValueNumber = Value > 0 ? Value : 0;
-    
-    [UIApplication sharedApplication].applicationIconBadgeNumber =  ValueNumber;
-    
-    [APService setBadge:[UIApplication sharedApplication].applicationIconBadgeNumber];
+//    NSInteger Value = [UIApplication sharedApplication].applicationIconBadgeNumber - 1;
+//    NSInteger ValueNumber = Value > 0 ? Value : 0;
+    [UIApplication sharedApplication].applicationIconBadgeNumber =  0;
+    [JPUSHService setBadge:[UIApplication sharedApplication].applicationIconBadgeNumber];
 }
 
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
-    
-//    NewLoginRegisterViewController *vc = [[NewLoginRegisterViewController alloc] initWithNibName:@"NewLoginRegisterViewController" bundle:nil];
      XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
 }
@@ -278,6 +278,67 @@ static AppDelegate *__sharedDelegate;
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark- JPUSHRegisterDelegate
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+//        KDLog(@"iOS10 前台收到远程通知:");
+        if (1 == [UIApplication sharedApplication].applicationState) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
+            [self applicationBadgeNumber];
+        }
+
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+//        KDLog(@"iOS10 收到远程通知:");
+        if (1 == [UIApplication sharedApplication].applicationState) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfo];
+            [self applicationBadgeNumber];
+        }
+    }
+    else {
+        // 判断为本地通知
+        KDLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler();  // 系统要求执行这个方法
+    
+}
+
+
 
 - (BOOL)isLogin {
     

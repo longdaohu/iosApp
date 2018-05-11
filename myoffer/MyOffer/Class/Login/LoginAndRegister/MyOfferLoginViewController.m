@@ -768,7 +768,8 @@ typedef NS_ENUM(NSInteger,cellViewType){
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {
          
-         [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+         [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+         } seq:0 ];//Jpush设置登录用户别名
          [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
          [MobClick event:@"myoffer_Register"];
          [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
@@ -895,31 +896,21 @@ typedef NS_ENUM(NSInteger,cellViewType){
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
 //    NSLog(@">>>>>>>>>>>>> jpush_alias = %@",response[@"jpush_alias"]);
-
-    [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+    [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+    } seq:0 ];//Jpush设置登录用户别名
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     [MobClick profileSignInWithPUID:response[@"access_token"]];/*友盟统计记录用户账号*/
     [MobClick event:@"myofferUserLogin"];
-    
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
-    
     if (phone.length == 0) {
-        
         [self.view endEditing:YES];
-        
     }else{
-        
         MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
         HUD.completionBlock = ^{
-            
             [self dismiss];
-            
         };
-        
     }
-    
- 
     
 }
 
@@ -1012,7 +1003,8 @@ typedef NS_ENUM(NSInteger,cellViewType){
 //登录前判断用户资料是否包含手机号码
 -(void)OtherLoginSuccessWithResponse:(NSDictionary *)response andUserInfo:(NSDictionary *)userInfo
 {
-    [APService setAlias:response[@"jpush_alias"] callbackSelector:nil object:nil];//Jpush设置登录用户别名
+    [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+    } seq:0 ];//Jpush设置登录用户别名
     
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
     

@@ -165,7 +165,6 @@
 		AE401ABF1EC4348A0078A0EC /* MBProgressHUD+XJ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE401ABE1EC4348A0078A0EC /* MBProgressHUD+XJ.m */; };
 		AE46452B1E8CE9F9005EE15D /* ServiceItemBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */; };
 		AE4645311E8D0CAC005EE15D /* ServiceProtocalItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */; };
-		AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */; };
 		AE4B2E651F1E095600E328F7 /* MessageCountryTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E211F1E095600E328F7 /* MessageCountryTopicModel.m */; };
 		AE4B2E661F1E095600E328F7 /* MessageCountryTopicVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E231F1E095600E328F7 /* MessageCountryTopicVController.m */; };
 		AE4B2E671F1E095600E328F7 /* MessageDetaillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E271F1E095600E328F7 /* MessageDetaillViewController.m */; };
@@ -442,6 +441,8 @@
 		AEC85BC320A29F4D0002F19B /* gradeCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC120A29F4D0002F19B /* gradeCN.plist */; };
 		AEC85BC620A2A1030002F19B /* subjectsCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC520A2A1030002F19B /* subjectsCN.plist */; };
 		AEC85BC820A2CBB30002F19B /* countriesCN.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEC85BC720A2CBB30002F19B /* countriesCN.plist */; };
+		AEC85BD220A444D50002F19B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC85BD120A444D50002F19B /* UserNotifications.framework */; };
+		AEC85BD420A444F20002F19B /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC85BD320A444F20002F19B /* libresolv.tbd */; };
 		AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */; };
 		AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */; };
 		AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87811F95F63800FCBBEC /* CatigoryViewController.m */; };
@@ -768,8 +769,6 @@
 		AE46452A1E8CE9F9005EE15D /* ServiceItemBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemBottomView.m; sourceTree = "<group>"; };
 		AE46452F1E8D0CAC005EE15D /* ServiceProtocalItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalItem.h; sourceTree = "<group>"; };
 		AE4645301E8D0CAC005EE15D /* ServiceProtocalItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalItem.m; sourceTree = "<group>"; };
-		AE497B431C3BB275006C3092 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		AE4B2E201F1E095600E328F7 /* MessageCountryTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCountryTopicModel.h; sourceTree = "<group>"; };
 		AE4B2E211F1E095600E328F7 /* MessageCountryTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCountryTopicModel.m; sourceTree = "<group>"; };
 		AE4B2E221F1E095600E328F7 /* MessageCountryTopicVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCountryTopicVController.h; sourceTree = "<group>"; };
@@ -1262,6 +1261,8 @@
 		AEC85BC120A29F4D0002F19B /* gradeCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = gradeCN.plist; sourceTree = "<group>"; };
 		AEC85BC520A2A1030002F19B /* subjectsCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = subjectsCN.plist; sourceTree = "<group>"; };
 		AEC85BC720A2CBB30002F19B /* countriesCN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countriesCN.plist; sourceTree = "<group>"; };
+		AEC85BD120A444D50002F19B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		AEC85BD320A444F20002F19B /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		AECBD4841F7BAAAA002AD88A /* ServiceProductDescriptCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceProductDescriptCell.h; sourceTree = "<group>"; };
 		AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceProductDescriptCell.m; sourceTree = "<group>"; };
 		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
@@ -1359,6 +1360,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC85BD420A444F20002F19B /* libresolv.tbd in Frameworks */,
+				AEC85BD220A444D50002F19B /* UserNotifications.framework in Frameworks */,
 				AE53E86B1F73919800588F0C /* Social.framework in Frameworks */,
 				AEF421181BD499AB00CFB45E /* CoreGraphics.framework in Frameworks */,
 				AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */,
@@ -1392,7 +1395,6 @@
 				AE7982791F735392008BBAB7 /* UMSocialNetwork.framework in Frameworks */,
 				AE027EB31C3A4F29007EBD28 /* CoreFoundation.framework in Frameworks */,
 				AEF0B3441C082BFD004C1155 /* AdSupport.framework in Frameworks */,
-				AE497B451C3BB275006C3092 /* libPushSDK-1.8.8.a in Frameworks */,
 				AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */,
 				AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */,
 				AE79827D1F735392008BBAB7 /* UShareUI.framework in Frameworks */,
@@ -1419,7 +1421,6 @@
 			isa = PBXGroup;
 			children = (
 				463E3AC21B23121F00E0BAF8 /* Frameworks */,
-				AE497B421C3BB275006C3092 /* JPush */,
 				463E3A721B23105E00E0BAF8 /* Vendor */,
 				463E3A4B1B230EDC00E0BAF8 /* MyOffer */,
 				463E3A4A1B230EDC00E0BAF8 /* Products */,
@@ -1529,6 +1530,8 @@
 		463E3AC21B23121F00E0BAF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEC85BD320A444F20002F19B /* libresolv.tbd */,
+				AEC85BD120A444D50002F19B /* UserNotifications.framework */,
 				AE53E86A1F73919800588F0C /* Social.framework */,
 				AE79827E1F735ED3008BBAB7 /* libz.1.1.3.tbd */,
 				AEB9A33F1EA46F340025A72A /* QuickLook.framework */,
@@ -1881,15 +1884,6 @@
 				AE3AB6A41F21A27300A3C7E3 /* SuperMasterViewController.m */,
 			);
 			name = C;
-			sourceTree = "<group>";
-		};
-		AE497B421C3BB275006C3092 /* JPush */ = {
-			isa = PBXGroup;
-			children = (
-				AE497B431C3BB275006C3092 /* APService.h */,
-				AE497B441C3BB275006C3092 /* libPushSDK-1.8.8.a */,
-			);
-			path = JPush;
 			sourceTree = "<group>";
 		};
 		AE4B2E1F1F1E095600E328F7 /* MessageCenter */ = {
@@ -4577,8 +4571,8 @@
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
-					"$(PROJECT_DIR)/JPush",
-					"$(SRCROOT)/JPush",
+					"$(PROJECT_DIR)/Pods/JPush",
+					"$(SRCROOT)/Pods/JPush",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDK",
@@ -4592,7 +4586,7 @@
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JPush $(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -4636,8 +4630,8 @@
 					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
-					"$(PROJECT_DIR)/JPush",
-					"$(SRCROOT)/JPush",
+					"$(PROJECT_DIR)/Pods/JPush",
+					"$(SRCROOT)/Pods/JPush",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/UniqueId",
@@ -4651,7 +4645,7 @@
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JPush $(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

@@ -5,6 +5,9 @@ PODS:
     - DACircularProgress
     - pop
     - SDWebImage (= 4.0.0)
+  - JCore (1.1.5)
+  - JPush (3.0.6):
+    - JCore (~> 1.1.1)
   - Masonry (1.0.2)
   - MJExtension (3.0.13)
   - MLeaksFinder (0.2.1):
@@ -20,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - IDMPhotoBrowser
+  - JPush
   - MJExtension
   - MLeaksFinder
   - SDCycleScrollView
@@ -30,6 +34,8 @@ SPEC REPOS:
     - DACircularProgress
     - FBRetainCycleDetector
     - IDMPhotoBrowser
+    - JCore
+    - JPush
     - Masonry
     - MJExtension
     - MLeaksFinder
@@ -42,6 +48,8 @@ SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FBRetainCycleDetector: f0c7b290bf48ae77f6ae060843ce34ae341781eb
   IDMPhotoBrowser: b96159fe4adb991a844068eb17dab9c0b7d7e51a
+  JCore: 9bd9c770c877c583d98b90a68792b8361974c231
+  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MLeaksFinder: 0850e2f2abc7227adc4d4e2d1992b431264eb4d5
@@ -50,6 +58,6 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 5e6473142c7f7a5da2f8e5ce087e5823564a887f
+PODFILE CHECKSUM: 3672c9f7df54d41fccbc04c14d44f3b59e8c4a66
 
 COCOAPODS: 1.5.0
