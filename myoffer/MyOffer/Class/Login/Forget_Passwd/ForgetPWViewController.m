@@ -86,7 +86,7 @@
     CGFloat regist_Y = CGRectGetMaxY(registCellbgView.frame) + XFONT_SIZE(1) * 10 + 15;
     CGFloat regist_W = cell_W - regist_X * 2;
     CGFloat regist_H =  50;
-    self.registBtn = [self buttonWithFrame:CGRectMake(regist_X, regist_Y, regist_W, regist_H)  title:@"重置密码" fontSize:14 titleColor:XCOLOR_WHITE imageName:nil  Action:@selector(registButtonOnClick:)];
+    self.registBtn = [self buttonWithFrame:CGRectMake(regist_X, regist_Y, regist_W, regist_H)  title:@"重置密码" fontSize:14 titleColor:XCOLOR_WHITE imageName:nil  Action:@selector(resetButtonOnClick:)];
     [self.view addSubview:self.registBtn];
     
     self.registBtn.layer.cornerRadius = 4;
@@ -271,36 +271,30 @@
 
 
 //提交按钮
-- (void)registButtonOnClick:(UIButton *)sender {
+- (void)resetButtonOnClick:(UIButton *)sender {
 
-
+    [self.view endEditing:YES];
+    
     for(MyOfferInputView *cell in  self.registCellbgView.subviews){
         
         [cell checKTextFieldWithGroupValue];
         
         switch (cell.group.groupType) {
             case EditTypeRegistPhone:
-                
                 if (![self verifyWithPhone:cell.group.content areaCode:cell.group.areaCode]) return;
-                
                 break;
             case EditTypeVerificationCode:{
-                
                 if (cell.group.content.length <= 0 ) {
                     [MBProgressHUD showError:@"验证码不能为空" toView:self.view];
                     return;
                 }
-                
             }
                 break;
             case EditTypePasswd:{
-                
                 if (cell.group.content.length < 6 || cell.group.content.length > 16) {
-                    
                     [MBProgressHUD showError:cell.group.placeHolder toView:self.view];
                     return;
                 }
-                
                 
             }
                 break;
@@ -315,22 +309,17 @@
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     
     for (WYLXGroup *group in self.registArr) {
-        
         [parameter setValue:group.content forKey:group.key];
     }
     
-    
-    
+    WeakSelf
     [self
      startAPIRequestWithSelector:kAPISelectorResetPassword
      parameters:parameter
      success:^(NSInteger statusCode, NSDictionary *response) {
-         
          MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
          HUD.completionBlock = ^{
-             
-             [self.navigationController popViewControllerAnimated:YES];
-             
+             [weakSelf.navigationController popViewControllerAnimated:YES];
          };
          
      }];

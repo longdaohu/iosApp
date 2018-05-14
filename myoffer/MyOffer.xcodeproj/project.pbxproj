@@ -477,6 +477,7 @@
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
+		AEE0AAC620A95CCA00E9AF99 /* MyofferWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
 		AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F4561F540D5500222342 /* TJFooterFrame.m */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
@@ -1326,6 +1327,8 @@
 		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
 		AEDCCE761D810D8C009A13FF /* UpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCell.h; sourceTree = "<group>"; };
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
+		AEE0AAC420A95CCA00E9AF99 /* MyofferWeakTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyofferWeakTimer.h; sourceTree = "<group>"; };
+		AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyofferWeakTimer.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AEE3F4551F540D5500222342 /* TJFooterFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJFooterFrame.h; sourceTree = "<group>"; };
 		AEE3F4561F540D5500222342 /* TJFooterFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TJFooterFrame.m; sourceTree = "<group>"; };
@@ -3503,6 +3506,8 @@
 				AEA249741D5B215300DD7939 /* ApplySectionHeaderView.m */,
 				AEC47A401ECC20D60085F19A /* UniverstityTCell.h */,
 				AEC47A411ECC20D60085F19A /* UniverstityTCell.m */,
+				AEE0AAC420A95CCA00E9AF99 /* MyofferWeakTimer.h */,
+				AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -4321,6 +4326,7 @@
 				AE4B2E681F1E095600E328F7 /* MessageArticle.m in Sources */,
 				AEA249BF1D5B215300DD7939 /* XWGJSummaryView.m in Sources */,
 				AE4B2E731F1E095600E328F7 /* MessageTopiccGroup.m in Sources */,
+				AEE0AAC620A95CCA00E9AF99 /* MyofferWeakTimer.m in Sources */,
 				AEA24B071D5B24D200DD7939 /* FeedbackViewController.m in Sources */,
 				AE2D5E861DD5B64100B4E9F3 /* mergeAccountViewController.m in Sources */,
 				463E3ABC1B23105F00E0BAF8 /* UIImage+KDUtilities.m in Sources */,

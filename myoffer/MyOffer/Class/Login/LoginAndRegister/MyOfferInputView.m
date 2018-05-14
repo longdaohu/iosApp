@@ -8,24 +8,19 @@
 
 #import "MyOfferInputView.h"
 #import "XWGJKeyboardToolar.h"
+#import "MyofferWeakTimer.h"
 
 @interface MyOfferInputView ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
-//标题
-@property(nonatomic,strong)UILabel *titleLab;
-//获取验证码按钮
-@property(nonatomic,strong)UIButton *getcodeBtn;
-//下划线
-@property(nonatomic,strong)UIView *line_bottom;
-//地区输入框
-@property(nonatomic,strong)UITextField *areaCodeTF;
-//地区显示分隔线
-@property(nonatomic,strong)UIView *line_areaCode;
-//地区显示标签
-@property(nonatomic,strong)UILabel *areaCodeLab;
+@property(nonatomic,strong)UILabel *titleLab;//标题
+@property(nonatomic,strong)UIButton *getcodeBtn;//获取验证码按钮
+@property(nonatomic,strong)UIView *line_bottom;//下划线
+@property(nonatomic,strong)UITextField *areaCodeTF;//地区输入框
+@property(nonatomic,strong)UIView *line_areaCode;//地区显示分隔线
+@property(nonatomic,strong)UILabel *areaCodeLab;//地区显示标签
 @property(nonatomic,strong)UIView *spod;
 @property(nonatomic,strong)NSArray *areaCodes;
 @property(nonatomic,strong)UIPickerView *areaPicker;
-@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic,strong)MyofferWeakTimer *weakTimer;
 @property(nonatomic,assign)NSUInteger timerCount;
 @property(nonatomic,strong)XWGJKeyboardToolar *tooler;
 
@@ -466,14 +461,12 @@
     
     [self updateRightButtonStatusEnable:!show];
  
-    if (self.timer) [self timerClear];
+    if (self.weakTimer) [self timerClear];
 
     if (show) {
-        
-        self.timerCount = 60;
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(verifyCodeCountDown) userInfo:nil repeats:YES];
-        
+         self.timerCount = 60;
+         MyofferWeakTimer *weakTimer = [MyofferWeakTimer objWithTimeInterval:1 target:self selector:@selector(verifyCodeCountDown)];
+         self.weakTimer = weakTimer;
         return;
     }
     
@@ -482,36 +475,32 @@
 
 //倒计时
 - (void)verifyCodeCountDown{
-    
+
     NSInteger count = self.timerCount--;
-    
     NSString *title = count >=10 ? [NSString stringWithFormat:@"%ld 秒",(long)count] : [NSString stringWithFormat:@"0%ld 秒",count] ;
-    
     [self.getcodeBtn setTitle:title forState:UIControlStateNormal];
-    
     if(count <= 0){
-        
-        [self timerClear];
-        
         [self updateRightButtonStatusEnable:YES];
-        
+        [self timerClear];
     }
-    
+
 }
 
 //清空timer
 - (void)timerClear{
-
-    [self.timer invalidate];
     
-    self.timer = nil;
+    if (self.weakTimer) {
+        [self.weakTimer.timer invalidate];
+        self.weakTimer.timer = nil;
+    }
+   
 }
 
 - (void)dealloc{
     
     [self timerClear];
     
-    KDClassLog(@"MyOfferInputView  dealloc ");
+    KDClassLog(@"MyOfferInputView  dealloc  %@",self.group.title);
     
 }
 
