@@ -282,7 +282,6 @@
 		AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A1A1EBC87890035A31D /* usa_more.jpg */; };
 		AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE892A1B1EBC87890035A31D /* ao_more.jpg */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
-		AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */; };
 		AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */; };
 		AE914EC91F4181E1008A43CD /* ApplyStutasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC81F4181E1008A43CD /* ApplyStutasModel.m */; };
 		AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914ECB1F418238008A43CD /* ApplyStutasHistoryModel.m */; };
@@ -416,8 +415,8 @@
 		AEA24C0A1D5B269A00DD7939 /* InternationalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BFD1D5B269A00DD7939 /* InternationalControl.m */; };
 		AEA24C0B1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24BFF1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m */; };
 		AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C011D5B269A00DD7939 /* UserDefaults.m */; };
-		AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */; };
-		AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */; };
+		AEA24C0D1D5B269A00DD7939 /* MyofferNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C031D5B269A00DD7939 /* MyofferNavigationController.m */; };
+		AEA24C0E1D5B269A00DD7939 /* MyofferTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA24C051D5B269A00DD7939 /* MyofferTabBarController.m */; };
 		AEA24C2D1D5B283700DD7939 /* PlaceHolderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */; };
 		AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */; };
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
@@ -478,6 +477,7 @@
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
 		AEE0AAC620A95CCA00E9AF99 /* MyofferWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */; };
+		AEE0AB3520AD31F600E9AF99 /* MeiqiaServiceCall.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0AB3420AD31F600E9AF99 /* MeiqiaServiceCall.m */; };
 		AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */; };
 		AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE3F4561F540D5500222342 /* TJFooterFrame.m */; };
 		AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEEA71621BE1D1830015C42B /* Visualbg.jpg */; };
@@ -973,8 +973,6 @@
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QQserviceSingleView.h; path = ../controller/QQserviceSingleView.h; sourceTree = "<group>"; };
-		AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QQserviceSingleView.m; path = ../controller/QQserviceSingleView.m; sourceTree = "<group>"; };
 		AE914EC21F417F59008A43CD /* ApplyStutasCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasCenterViewController.h; sourceTree = "<group>"; };
 		AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStutasCenterViewController.m; sourceTree = "<group>"; };
 		AE914EC71F4181E1008A43CD /* ApplyStutasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasModel.h; sourceTree = "<group>"; };
@@ -1222,10 +1220,10 @@
 		AEA24BFF1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+NavigationHelper.m"; sourceTree = "<group>"; };
 		AEA24C001D5B269A00DD7939 /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaults.h; sourceTree = "<group>"; };
 		AEA24C011D5B269A00DD7939 /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaults.m; sourceTree = "<group>"; };
-		AEA24C021D5B269A00DD7939 /* XWGJNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJNavigationController.h; sourceTree = "<group>"; };
-		AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJNavigationController.m; sourceTree = "<group>"; };
-		AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWGJTabBarController.h; sourceTree = "<group>"; };
-		AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWGJTabBarController.m; sourceTree = "<group>"; };
+		AEA24C021D5B269A00DD7939 /* MyofferNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferNavigationController.h; sourceTree = "<group>"; };
+		AEA24C031D5B269A00DD7939 /* MyofferNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferNavigationController.m; sourceTree = "<group>"; };
+		AEA24C041D5B269A00DD7939 /* MyofferTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferTabBarController.h; sourceTree = "<group>"; };
+		AEA24C051D5B269A00DD7939 /* MyofferTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferTabBarController.m; sourceTree = "<group>"; };
 		AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceHolderImage.png; sourceTree = "<group>"; };
 		AEA255671EAF5BF700F0208B /* SearchUniCenterFilterVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniCenterFilterVController.h; sourceTree = "<group>"; };
 		AEA255681EAF5BF700F0208B /* SearchUniCenterFilterVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniCenterFilterVController.m; sourceTree = "<group>"; };
@@ -1329,6 +1327,8 @@
 		AEDCCE771D810D8C009A13FF /* UpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCell.m; sourceTree = "<group>"; };
 		AEE0AAC420A95CCA00E9AF99 /* MyofferWeakTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyofferWeakTimer.h; sourceTree = "<group>"; };
 		AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyofferWeakTimer.m; sourceTree = "<group>"; };
+		AEE0AB3320AD31F600E9AF99 /* MeiqiaServiceCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeiqiaServiceCall.h; sourceTree = "<group>"; };
+		AEE0AB3420AD31F600E9AF99 /* MeiqiaServiceCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeiqiaServiceCall.m; sourceTree = "<group>"; };
 		AEE1ABAF1BCA79A50008EF0C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AEE3F4551F540D5500222342 /* TJFooterFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJFooterFrame.h; sourceTree = "<group>"; };
 		AEE3F4561F540D5500222342 /* TJFooterFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TJFooterFrame.m; sourceTree = "<group>"; };
@@ -2937,8 +2937,6 @@
 				AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */,
 				AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */,
 				AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */,
-				AE8CE1611EA0796C000F9A8E /* QQserviceSingleView.h */,
-				AE8CE1621EA0796C000F9A8E /* QQserviceSingleView.m */,
 				AE6BE7981F4A89C100AD5B3B /* PersonCell.h */,
 				AE6BE7991F4A89C100AD5B3B /* PersonCell.m */,
 				AE892A131EBC1FD70035A31D /* MeCenterHeaderViewFrame.h */,
@@ -3529,10 +3527,10 @@
 				AEA24BFF1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m */,
 				AEA24C001D5B269A00DD7939 /* UserDefaults.h */,
 				AEA24C011D5B269A00DD7939 /* UserDefaults.m */,
-				AEA24C021D5B269A00DD7939 /* XWGJNavigationController.h */,
-				AEA24C031D5B269A00DD7939 /* XWGJNavigationController.m */,
-				AEA24C041D5B269A00DD7939 /* XWGJTabBarController.h */,
-				AEA24C051D5B269A00DD7939 /* XWGJTabBarController.m */,
+				AEA24C021D5B269A00DD7939 /* MyofferNavigationController.h */,
+				AEA24C031D5B269A00DD7939 /* MyofferNavigationController.m */,
+				AEA24C041D5B269A00DD7939 /* MyofferTabBarController.h */,
+				AEA24C051D5B269A00DD7939 /* MyofferTabBarController.m */,
 				AE5A75D91DEEDA5300F02ABB /* TopNavView.h */,
 				AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */,
 				AE54B6251ECEFA59004AFF7E /* MyOfferTableView.h */,
@@ -3543,6 +3541,8 @@
 				AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */,
 				AE38BEEC1E4AFE0C00FCF28B /* ShareNView.h */,
 				AE38BEED1E4AFE0C00FCF28B /* ShareNView.m */,
+				AEE0AB3320AD31F600E9AF99 /* MeiqiaServiceCall.h */,
+				AEE0AB3420AD31F600E9AF99 /* MeiqiaServiceCall.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3609,8 +3609,8 @@
 		AECC87871F95F63800FCBBEC /* CatigroyHotCity */ = {
 			isa = PBXGroup;
 			children = (
-				AECC87881F95F63800FCBBEC /* C */,
 				AECC878B1F95F63800FCBBEC /* HotCountry */,
+				AECC87881F95F63800FCBBEC /* C */,
 				AECC878E1F95F63800FCBBEC /* M */,
 				AECC878F1F95F63800FCBBEC /* V */,
 			);
@@ -4116,7 +4116,7 @@
 				AEA24B061D5B24D200DD7939 /* TextFieldViewController.m in Sources */,
 				AE1FD7591D5C929500FFD5A8 /* UIView+MJExtension.m in Sources */,
 				AEA249A71D5B215300DD7939 /* OrderDetailViewController.m in Sources */,
-				AEA24C0D1D5B269A00DD7939 /* XWGJNavigationController.m in Sources */,
+				AEA24C0D1D5B269A00DD7939 /* MyofferNavigationController.m in Sources */,
 				AECC87DB1F95F63800FCBBEC /* RankTypeModel.m in Sources */,
 				AE4B2E801F1E095600E328F7 /* MessageTopicCountryContentVController.m in Sources */,
 				AE4B2E721F1E095600E328F7 /* MessageHotTopicMedel.m in Sources */,
@@ -4142,6 +4142,7 @@
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
 				AE914EC91F4181E1008A43CD /* ApplyStutasModel.m in Sources */,
+				AEE0AB3520AD31F600E9AF99 /* MeiqiaServiceCall.m in Sources */,
 				AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */,
 				AE7F9B101EB8546F00D30525 /* SearchPromptView.m in Sources */,
 				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
@@ -4211,7 +4212,6 @@
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AE4B2E661F1E095600E328F7 /* MessageCountryTopicVController.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
-				AE8CE1631EA0796C000F9A8E /* QQserviceSingleView.m in Sources */,
 				AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */,
 				AE4B2E701F1E095600E328F7 /* FSSScrollContentViewController.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
@@ -4254,7 +4254,7 @@
 				AECC87CB1F95F63800FCBBEC /* NomalCollectionController.m in Sources */,
 				AE6178BF20723A17006B311A /* DiscountCell.m in Sources */,
 				AECC87E31F95F63800FCBBEC /* CatigaryScrollView.m in Sources */,
-				AEA24C0E1D5B269A00DD7939 /* XWGJTabBarController.m in Sources */,
+				AEA24C0E1D5B269A00DD7939 /* MyofferTabBarController.m in Sources */,
 				463E3A4F1B230EDC00E0BAF8 /* main.m in Sources */,
 				AEA249C91D5B215300DD7939 /* UniversityFrame.m in Sources */,
 				AE4B2E7F1F1E095600E328F7 /* MessageTopicCatigoryView.m in Sources */,

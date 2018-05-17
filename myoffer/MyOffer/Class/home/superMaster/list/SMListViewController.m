@@ -375,7 +375,7 @@
 
 - (void)dealloc{
     
-    KDClassLog(@"超级导列表 SMListViewController  dealloc");
+    KDClassLog(@"超级导列表 + SMListViewController + dealloc");
     
 }
 

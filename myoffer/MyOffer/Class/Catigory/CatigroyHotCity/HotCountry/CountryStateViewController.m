@@ -191,7 +191,7 @@
         
         if (indexPath.row == 0) {
             SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue];
-            [self.navigationController pushViewController:vc animated:YES];
+            PushToViewController(vc);
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
             [self.stateTableView selectRowAtIndexPath:self.current_indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
             
@@ -218,7 +218,7 @@
     }
     
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:searchValue country:self.countryModel.name];
-    [self.navigationController pushViewController:vc animated:YES];
+    PushToViewController(vc);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

@@ -1,5 +1,5 @@
 //
-//  XWGJNavigationController.h
+//  MyofferNavigationController.h
 //  MyOffer
 //
 //  Created by xuewuguojie on 15/10/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XWGJNavigationController : UINavigationController
+@interface MyofferNavigationController : UINavigationController
 
 @end

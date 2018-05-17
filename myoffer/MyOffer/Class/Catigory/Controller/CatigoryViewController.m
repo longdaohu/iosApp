@@ -335,7 +335,7 @@
         RankTypeItemFrame *itemFrame = items[indexPath.row];
         RankDetailViewController *rankVC  = [[RankDetailViewController alloc] init];
         rankVC.type_id = itemFrame.item.type_id;
-        [self.navigationController pushViewController:rankVC animated:YES];
+        PushToViewController(rankVC);
     }
     
 }
@@ -393,7 +393,7 @@
 //打开搜索
 -(void)searchButtonPressed:(UIBarButtonItem *)barButton {
     
-    XWGJNavigationController *nav = [[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]];
+    MyofferNavigationController *nav = [[MyofferNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]];
     [self presentViewController:nav  animated:YES completion:nil];
 }
 

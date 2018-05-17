@@ -81,21 +81,20 @@ static NSString * const reuseIdentifier = @"subjectCell";
         return;
     }
     
-    WebViewController *help = [[WebViewController alloc] init];
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.path = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
+    PushToViewController(vc);
     
-    help.path = [NSString stringWithFormat:@"%@faq#index=%ld",DOMAINURL,(long)indexPath.row];
-    
-    [self.navigationController pushViewController:help animated:YES];
     
 }
 
 //留学专业
--(void)caseSubjectWithIndexPath:(NSIndexPath *)indexPath{
+- (void)caseSubjectWithIndexPath:(NSIndexPath *)indexPath{
     
     CatigorySubject *subject = self.items[indexPath.row];
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:subject.title];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    PushToViewController(vc);
+
 }
 
 

@@ -589,12 +589,10 @@
 
     //这个参数是时间
     NSInteger timeIntervalSinceNow = (NSInteger)[self.login_date  timeIntervalSinceNow];
-    
     NSDictionary *dict = @{ @"second" : [NSString stringWithFormat:@"%ld",-timeIntervalSinceNow]};
-    
     [MobClick event:@"ALL_Playduration" attributes:dict];
     
-   
+    KDClassLog(@"导师主页 + SuperMasterViewController + dealloc");
     
 }
 

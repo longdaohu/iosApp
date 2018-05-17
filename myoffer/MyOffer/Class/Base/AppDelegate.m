@@ -31,7 +31,7 @@
 {
     NSString *_accessToken;
  }
-@property(nonatomic,strong)XWGJTabBarController *mainTabBarController;
+@property(nonatomic,strong)MyofferTabBarController *mainTabBarController;
 
 @end
 
@@ -75,7 +75,7 @@ static AppDelegate *__sharedDelegate;
 - (void)makeRootController
 {
     //控制器初始化
-    XWGJTabBarController *mainTabBarController  = [[XWGJTabBarController alloc] init];
+    MyofferTabBarController *mainTabBarController  = [[MyofferTabBarController alloc] init];
     self.mainTabBarController = mainTabBarController;
 
     self.window.rootViewController = mainTabBarController;
@@ -232,7 +232,6 @@ static AppDelegate *__sharedDelegate;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
    
     KDClassLog(@"iOS6及以下系统，收到通知: %@",userInfo);
-    // Required
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
     
@@ -270,7 +269,7 @@ static AppDelegate *__sharedDelegate;
 
 
 - (void)presentLoginAndRegisterViewControllerAnimated:(BOOL)animated {
-     XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
+     MyofferNavigationController *nav =[[MyofferNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self.window.rootViewController presentViewController:nav animated:YES completion:^{}];
 }
 

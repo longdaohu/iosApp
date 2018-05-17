@@ -26,9 +26,6 @@
 #import "ShareNViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-//#import <Masonry/Masonry.h>
-//#import <ZFDownload/ZFDownloadManager.h>
-//#import "UINavigationController+ZFFullscreenPopGesture.h"
 #import "ZFPlayer.h"
 
 
@@ -906,7 +903,7 @@
 
    MyOfferLoginViewController *loginVC =[[MyOfferLoginViewController alloc] init];
     loginVC.index = 1;
-    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:loginVC];
+    MyofferNavigationController *nav =[[MyofferNavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:nav animated:YES completion:^{}];
 }
 
@@ -943,13 +940,10 @@
     [self.shareVC  show];
     
 }
-
-
-
 - (void)dealloc{
-
-    KDClassLog(@"导师详情  dealloc");
-}
+    
+    KDClassLog(@"导师详情 + SMDetailViewController + dealloc");
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

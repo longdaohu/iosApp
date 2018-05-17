@@ -154,7 +154,7 @@
 -(void)CaseHotCityWithCityName:(NSString *)CityName belongCountry:(NSString *)country
 {
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:CityName country:country];
-    [self.navigationController pushViewController:vc animated:YES];
+    PushToViewController(vc);
 }
 
 
@@ -164,7 +164,7 @@
     CatigaryCountry *country = self.country_Hotes[section];
     CountryStateViewController *country_state= [[CountryStateViewController alloc] init];
     country_state.countryName = country.country;
-    [self.navigationController pushViewController:country_state animated:YES];
+    PushToViewController(country_state);
 }
 
 

@@ -1,19 +1,19 @@
 //
-//  XWGJNavigationController.m
+//  MyofferNavigationController
 //  MyOffer
 //
 //  Created by xuewuguojie on 15/10/15.
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-#import "XWGJNavigationController.h"
+#import "MyofferNavigationController.h"
 
-@interface XWGJNavigationController ()<UIGestureRecognizerDelegate>
+@interface MyofferNavigationController ()<UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UIImage *navigationBgImage;
 
 @end
 
-@implementation XWGJNavigationController
+@implementation MyofferNavigationController
 
 - (void)viewDidAppear:(BOOL)animated {
     
@@ -25,13 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
  
     self.navigationBar.tintColor = XCOLOR_WHITE;
-    
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_WHITE,NSFontAttributeName :[UIFont boldSystemFontOfSize:17]
-                                                                    };
-    
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_WHITE,NSFontAttributeName :[UIFont boldSystemFontOfSize:17] };
     self.interactivePopGestureRecognizer.delegate =  self;
     [self.navigationBar setBackgroundImage:self.navigationBgImage forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.shadowImage = [[UIImage alloc] init];
@@ -42,7 +38,6 @@
 -(UIImage *)navigationBgImage
 {
     if (!_navigationBgImage) {
-     
          NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
          UIImage *navImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
         _navigationBgImage =[self makeNewImageWithRect:CGRectMake(0, 0, XSCREEN_WIDTH, 64) andImage:navImage];
@@ -96,21 +91,16 @@
 }
 
 
-
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    
     if (self.viewControllers.count <= 1 ) {
-        
-        
         return NO;
     }
-    
     return YES;
 }
 
 
-- (void)back
-{
+- (void)back{
+    
     [self popViewControllerAnimated:YES];
 }
 

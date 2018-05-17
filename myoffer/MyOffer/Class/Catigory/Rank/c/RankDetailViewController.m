@@ -138,10 +138,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UniversityFrameModel *uniFrameModel =  self.typeFrameModel.university_frames[indexPath.section];
-    
     UniversityViewController *vc = [[UniversityViewController alloc] initWithUniversityId:uniFrameModel.universityModel.short_id] ;
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    PushToViewController(vc);
     
 }
 

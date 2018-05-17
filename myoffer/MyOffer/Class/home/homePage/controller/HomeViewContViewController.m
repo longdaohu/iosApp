@@ -628,32 +628,25 @@
     }
 }
 #pragma mark : HomeSecondTableViewCellDelegate
--(void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response
-{
+- (void)HomeSecondTableViewCell:(HomeSecondTableViewCell *)cell andDictionary:(NSDictionary *)response{
+    
     [MobClick event:@"home_newsItem"];
- 
-    [self.navigationController pushViewController:[[MessageDetaillViewController alloc] initWithMessageId:response[@"_id"]] animated:YES];
-}
+    PushToViewController([[MessageDetaillViewController alloc] initWithMessageId:response[@"_id"]]);
+ }
 
 #pragma mark : HomeThirdTableViewCellDelegate
--(void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(MyOfferUniversityModel *)uni{
+- (void)HomeThirdTableViewCell:(HomeThirdTableViewCell *)cell WithUniversity:(MyOfferUniversityModel *)uni{
 
     [MobClick event:@"home_universityItem"];
-    
     [self.navigationController pushUniversityViewControllerWithID:uni.NO_id animated:YES];
 }
-
- 
-
 //检查版本更新
--(void)checkAPPVersion
+- (void)checkAPPVersion
 {
     //如果提示过就不再重新请求网络更新提示
     if (self.hadShowNeWVersion) {
-        
         return;
     }
-    
     //https://itunes.apple.com/cn/app/myoffer/id1016290891
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/lookup?id=1016290891"]];
 //    request.timeoutInterval = 15;
@@ -763,7 +756,6 @@ ENGLISH  设置环境
     });
     
 }
-
 //--应用监听，用户登录立即发送提醒给服务器--
 -(void)getAppReport
 {
@@ -837,8 +829,6 @@ ENGLISH  设置环境
     
 }
 
-
-
 //跳转我要留学
 -(void)CaseWoyaoliuXue
 {
@@ -847,14 +837,13 @@ ENGLISH  设置环境
     [self presentViewController:[[WYLXViewController alloc] init]  animated:YES completion:nil];
     
 }
-
 //跳转留学指南
--(void)CaseLiuXueXiaoBai
-{
-    [MobClick event:@"XiaoBai"];
+- (void)CaseLiuXueXiaoBai{
     
-    [self.navigationController pushViewController:[[GuideOverseaViewController alloc] init] animated:YES];
-}
+    [MobClick event:@"XiaoBai"];
+    PushToViewController([[GuideOverseaViewController alloc] init]);
+
+ }
 
 
 
@@ -886,31 +875,23 @@ ENGLISH  设置环境
     if (!LOGIN)  self.recommendationsCount = 0;
     
     if (self.recommendationsCount > 0) {
-        
         RequireLogin
-        
-        [self.navigationController pushViewController:[[IntelligentResultViewController alloc] init]   animated:YES];
-        
+        PushToViewController([[IntelligentResultViewController alloc] init] );
         return;
-        
     }
-        
-     [self.navigationController pushViewController:[[PipeiEditViewController alloc] init]   animated:YES];
+    PushToViewController([[PipeiEditViewController alloc] init] );
  
 }
 //跳转服务包
--(void)CaseServerMall
-{
-
-    [MobClick event:@"home_mall"];
-    [self.navigationController pushViewController:[[MyOfferServerMallViewController  alloc] init] animated:YES];
+- (void)CaseServerMall{
     
+    [MobClick event:@"home_mall"];
+    PushToViewController([[MyOfferServerMallViewController alloc] init] );
 }
-
 //跳转服务包
--(void)CaseSuperMaster
-{
-     [self.navigationController pushViewController:[[SuperMasterViewController  alloc] init] animated:YES];
+-(void)CaseSuperMaster{
+    
+    PushToViewController([[SuperMasterViewController alloc] init] );
 }
 
 //跳转搜索功能
@@ -918,28 +899,20 @@ ENGLISH  设置环境
 {
     
     [MobClick event:@"home_shearchItemClick"];
-    [self presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
+    [self presentViewController:[[MyofferNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
     
 
 }
-
 //跳转LandingPage
--(void)CaseLandingPageWithBan:(NSString *)path
-{
+- (void)CaseLandingPageWithBan:(NSString *)path{
   
     [MobClick event:@"home_advertisementClick"];
-    
     if ([path hasSuffix:@"superMentor.html"]) {
-        
         [self CaseSuperMaster];
-        
     }else{
-        
-        [self.navigationController pushViewController:[[WebViewController alloc] initWithPath:path] animated:YES];
-    }
- 
+        PushToViewController([[WebViewController alloc] initWithPath:path]);
+     }
 }
-
 //跳转LandingPage
 -(void)CaseSearchResultWithindexPath:(NSIndexPath *)indexPath
 {
@@ -963,8 +936,7 @@ ENGLISH  设置环境
     NSString *searchValue = info[@"search"];
     
     SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:searchValue];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    PushToViewController(vc);
 }
 
 //判断用户在未登录前在申请中心页面选择服务，当用户登录时直接跳转已选择服务

@@ -306,7 +306,7 @@
 -(void)loginView{
 
  
-    XWGJNavigationController *nav =[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
+    MyofferNavigationController *nav =[[MyofferNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]];
     [self presentViewController:nav animated:YES completion:^{}];
 
 }

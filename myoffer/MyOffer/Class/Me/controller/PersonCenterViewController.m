@@ -28,6 +28,7 @@
 #import "myOfferPageViewController.h"
 #import "DiscountVC.h"
 #import "MQChatViewManager.h"
+#import "MeiqiaServiceCall.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -440,49 +441,14 @@
 - (void)caseApplyStutasCenter{
     
     self.currentType = CurrentClickTypeServiceStatus;
-    
     RequireLogin
-    
     [self pushWithVC:NSStringFromClass([ApplyStutasCenterViewController class])];
 
 }
 
 - (void)caseQQ{
     
-//    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
-//    [service call];
-    #pragma mark 总之, 要自定义UI层  请参考 MQChatViewStyle.h类中的相关的方法 ,要修改逻辑相关的 请参考MQChatViewManager.h中相关的方法
-    #pragma mark  最简单的集成方法: 全部使用meiqia的,  不做任何自定义UI.  https://github.com/Meiqia/MeiqiaSDK-iOS
-    MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
-    [chatViewManager setoutgoingDefaultAvatarImage:[UIImage imageNamed:@"meiqia-icon"]];
-    MQChatViewStyle *aStyle = [chatViewManager chatViewStyle];
-    [aStyle setEnableRoundAvatar:YES];
-    [aStyle setEnableOutgoingAvatar:NO];
-    
-    if (LOGIN) {
-       MyofferUser *user = [MyofferUser defaultUser];
-      [chatViewManager setClientInfo:@{@"name":user.displayname,@"tel":user.phonenumber} override:YES];
-        NSString *clientId = [USDefault valueForKey:user.user_id];
-        if ([clientId length] > 0) {
-            [chatViewManager setLoginMQClientId:clientId];
-        }else{
-            [MQManager createClient:^(NSString *clientId, NSError *error) {
-                if (!error) {
-                    [USDefault setValue:clientId forKey:user.user_id];
-                }
-            }];
-        }
-    }else{
-         NSString *off_line_value = [MQManager getCurrentClientId];
-         NSString *clientId_offLine = [USDefault valueForKey:@"offLineClientKey"];
-        if (!clientId_offLine) {
-             [USDefault setValue:off_line_value forKey:@"offLineClientKey"];
-             clientId_offLine = off_line_value;
-        }
-        [chatViewManager setLoginMQClientId:clientId_offLine];
-    }
-    [MQManager setScheduledAgentWithAgentId:@"538999aef992e2fc4f4cfc8ae250e6cc" agentGroupId:nil  scheduleRule:MQScheduleRulesRedirectNone];
-    [chatViewManager pushMQChatViewControllerInViewController:self];
+    [MeiqiaServiceCall callWithController:self];
 }
 
 
@@ -497,91 +463,62 @@
     
     
     if (!LOGIN){
-        
         self.havePeipeiResult = NO;
-    
         [self pushWithVC:NSStringFromClass([PipeiEditViewController class])];
-     
         return;
-
     }
     
-    
     if (self.havePeipeiResult) {
-        
         RequireLogin
-        
         [self pushWithVC:NSStringFromClass([IntelligentResultViewController class])];
-        
     }else{
-    
         [self pushWithVC:NSStringFromClass([PipeiEditViewController class])];
-
     }
     
 
 }
-
 //跳转收藏
 - (void)caseFave{
     
     self.currentType = CurrentClickTypeFavor;
-    
     RequireLogin
-
     [self pushWithVC:NSStringFromClass([FavoriteViewController class])];
 
 }
- 
-
 //我的申请
--(void)caseMyApply
-{
+- (void)caseMyApply{
+    
     self.currentType = CurrentClickTypeMyApply;
-
     RequireLogin
-
-     [self pushWithVC:NSStringFromClass([myApplyViewController class])];
-
+    [self pushWithVC:NSStringFromClass([myApplyViewController class])];
 }
-
 //设置
--(void)caseSetting
-{
+- (void)caseSetting{
     
     [self pushWithVC:NSStringFromClass([SetViewController class])];
-    
 }
 
 //帮助
--(void)caseHelp
-{
+- (void)caseHelp{
     
     [self pushWithVC:NSStringFromClass([myOfferPageViewController class])];
-    
 }
-
+//通知
 - (void)caseTZ{
 
     self.currentType = CurrentClickTypeMsg;
-
     RequireLogin
-    
     [self pushWithVC:NSStringFromClass([NotificationViewController class])];
-    
 }
-
 //订单中心
--(void)caseOrder
-{
-    self.currentType = CurrentClickTypeOrder;
-
-    RequireLogin
+- (void)caseOrder{
     
+    self.currentType = CurrentClickTypeOrder;
+    RequireLogin
     [self pushWithVC:NSStringFromClass([OrderViewController class])];
 
 }
-
+//折扣
 - (void)caseDiscount{
     
     [self pushWithVC:NSStringFromClass([DiscountVC class])];
@@ -595,19 +532,14 @@
 - (void)pushWithVC:(NSString *)vcStr{
     
     self.currentType = CurrentClickTypeDefault;
-
     if (NSClassFromString(vcStr) == [myOfferPageViewController class]) {
-     
         myOfferPageViewController *vc = [[myOfferPageViewController  alloc] init];
         vc.pageType = myOfferPageTypeHelp;
-        [self.navigationController pushViewController:vc  animated:YES];
-        
+        PushToViewController(vc);
         return;
     }
-    
-    [self.navigationController pushViewController:[[NSClassFromString(vcStr)  alloc] init] animated:YES];
-
-    
+    PushToViewController([[NSClassFromString(vcStr)  alloc] init]);
+ 
 }
 
 
@@ -657,8 +589,7 @@
 //加载用户信息
 - (void)caseMakeDataUserInfor{
 
-    if(LOGIN) {
-        //请求头像信息
+    if(LOGIN) { //请求头像信息
         if (self.header_topView.haveIcon) return;
         [self startAPIRequestWithSelector:kAPISelectorAccountInfo  parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
             self.header_topView.haveIcon = YES;
@@ -666,27 +597,18 @@
         }];
         return;
     }
-        
     self.header_topView.haveIcon = NO;
     [self.header_topView headerViewWithUserLoginOut];
-    
     
 }
 
 //服务状态
 - (void)caseMakeDataServiceStatus{
 
- 
     WeakSelf
-    
     [self startAPIRequestWithSelector:kAPISelectorStatusList  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
         [weakSelf updateUIWithResponse:response];
-        
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        
-    }];
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) { }];
     
 }
 
@@ -700,9 +622,8 @@
     ApplyStatusModelFrame *statusframeModel = [ApplyStatusModelFrame frameWithStatusModel:statusItem];
     self.statusframeModel = statusframeModel;
     self.serviceHistoryView.status_frame = self.statusframeModel;
-
     
-     XWGJAbout *serviceStatus = [XWGJAbout cellWithLogo:@"about_love" title:[status_Arr.firstObject title] sub_title:nil accessory_title:nil accessory_icon:nil] ;
+    XWGJAbout *serviceStatus = [XWGJAbout cellWithLogo:@"about_love" title:[status_Arr.firstObject title] sub_title:nil accessory_title:nil accessory_icon:nil] ;
     serviceStatus.cell_height = statusframeModel.cell_Height;
     serviceStatus.item_Type =  XWGJAboutTypeServiceStatus;
  
@@ -725,25 +646,21 @@
     [self.tableView reloadData];
     
 }
-
-
-
+//网络请求智能匹配数据
 - (void)caseMakeDataForPipei{
 
     [self requestWithPath:kAPISelectorZiZengPipeiGet];
 }
-
+//网络请求新消息数据
 - (void)caseMakeDataForNewMessage{
 
     [self requestWithPath:kAPISelectorCheckNews];
-    
 }
-
+//未登录情况
 - (void)caseWhenUserLogout{
     
     if (LOGIN) return;
-    
-    
+ 
     for (NSInteger index = 0 ; index < self.groups.count; index++){
       
         NSMutableArray *group = self.groups[index];
@@ -775,7 +692,7 @@
     [self caseMakeDataUserInfor];
     
 }
-
+//登录情况
 - (void)caseLogin{
     
     if (!LOGIN) return;
@@ -789,7 +706,7 @@
     [self caseMakeDataForNewMessage];
     
 }
-
+//当前点击项
 - (void)didClickCurrent{
 
     if (self.currentType == CurrentClickTypeDefault) return;

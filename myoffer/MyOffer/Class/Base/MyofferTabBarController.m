@@ -6,7 +6,7 @@
 //  Copyright © 2015年 UVIC. All rights reserved.
 //
 
-#import "XWGJTabBarController.h"
+#import "MyofferTabBarController.h"
 #import "HomeViewContViewController.h"
 #import "PersonCenterViewController.h"
 #import "MessageCenterViewController.h"
@@ -16,11 +16,11 @@
 #import "NotificationViewController.h"
 #import "MyOfferLoginViewController.h"
 
-@interface XWGJTabBarController ()
+@interface MyofferTabBarController ()
 @property(nonatomic,strong)UIImage *navigationBgImage;
 @end
 
-@implementation XWGJTabBarController
+@implementation MyofferTabBarController
 
 - (void)viewDidLoad {
     
@@ -31,27 +31,21 @@
 
     CatigoryViewController *cvc = [[CatigoryViewController alloc] init];
     cvc.title = @"分类";
-    
     PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
     mvc.title = @"个人中心";
-    
     MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
     msvc.title = @"资讯宝典";
-    
     HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
     home.title =@"发现";
-    
-    self.viewControllers = @[[[XWGJNavigationController alloc] initWithRootViewController:home],
-                             [[XWGJNavigationController alloc] initWithRootViewController:cvc],
-                             [[XWGJNavigationController alloc] initWithRootViewController:msvc],
-                             [[XWGJNavigationController alloc] initWithRootViewController:mvc]
+    self.viewControllers = @[[[MyofferNavigationController alloc] initWithRootViewController:home],
+                             [[MyofferNavigationController alloc] initWithRootViewController:cvc],
+                             [[MyofferNavigationController alloc] initWithRootViewController:msvc],
+                             [[MyofferNavigationController alloc] initWithRootViewController:mvc]
                              ];
-        
     [self tabbaritem:0 nomalImage:@"search_nomal" selectImage:@"search_select"];
     [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
     [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
     [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
-    
     self.tabBar.tintColor = XCOLOR(43, 193, 245, 1);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
@@ -208,35 +202,6 @@
 //}
 
 
-/*
--(void)contentViewIsOpen:(BOOL)open
-{
-    
-    XWGJNavigationController *nav =  (XWGJNavigationController *)self.selectedViewController;
-    switch (self.selectedIndex) {
-        case 0:{
-            HomeViewContViewController *home = ( HomeViewContViewController *)nav.viewControllers[0];
-            home.clickType = HomePageClickItemTypeNoClick;
-        }
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:{
-            MeViewController *me = ( MeViewController *)nav.viewControllers[0];
-            me.clickType = ItemTypeClickNO;
-        }
-            break;
-        default:
-            break;
-    }
-    
-}
-*/
-
-
-
 //接到通知判断页面跳转
 -(void)pushWithNoti:(NSNotification *)noti
 {
@@ -251,7 +216,7 @@
     if (view_id == 3)  [self setSelectedIndex:2];
  
     if (!LOGIN) {
-         [nav presentViewController:[[XWGJNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]] animated:YES completion:nil];
+         [nav presentViewController:[[MyofferNavigationController alloc] initWithRootViewController:[[MyOfferLoginViewController alloc] init]] animated:YES completion:nil];
         return;
     }
  

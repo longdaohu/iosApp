@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XWGJTabBarController.h"
+#import "MyofferTabBarController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 + (instancetype)sharedDelegate;

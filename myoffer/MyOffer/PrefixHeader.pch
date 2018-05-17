@@ -88,6 +88,8 @@
 #define NavigationBarHidden(done) [self.navigationController setNavigationBarHidden:done animated:animated]
 #define USDefault [NSUserDefaults  standardUserDefaults]
 #define DeviceVersion  [[UIDevice currentDevice].systemVersion floatValue]
+#define PushToViewController(vc)   [self.navigationController pushViewController:vc animated:YES]
+
 
 //#define DOMAINURL  @"https://www.myofferdemo.com/"
 #define DOMAINURL  @"https://www.myoffer.cn/"
@@ -121,7 +123,7 @@
 #import "UINavigationController+NavigationHelper.h"
 #import "LogoView.h"
 #import "InternationalControl.h"
-#import "XWGJNavigationController.h"
+#import "MyofferNavigationController.h"
 #import "MJRefresh.h"
 #import "UMMobClick/MobClick.h"
 #import "JPUSHService.h"
