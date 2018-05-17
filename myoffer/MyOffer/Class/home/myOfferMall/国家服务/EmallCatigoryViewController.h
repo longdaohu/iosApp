@@ -9,7 +9,5 @@
 #import "BaseViewController.h"
 
 @interface EmallCatigoryViewController : BaseViewController
-
 @property(nonatomic,copy)NSString *country_Name;
-
 @end

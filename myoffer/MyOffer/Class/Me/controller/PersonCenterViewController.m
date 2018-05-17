@@ -27,7 +27,7 @@
 #import "ApplyStatusModelFrame.h"
 #import "myOfferPageViewController.h"
 #import "DiscountVC.h"
-
+#import "MQChatViewManager.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -145,9 +145,7 @@
     [self makeTableView];
     
     self.header_topView = [LeftMenuHeaderView headerViewWithTap:^{
-        
         [self caseTapUserHeader];
-        
     }];
     
     self.header_topView.mj_w = XSCREEN_WIDTH;
@@ -175,10 +173,8 @@
     header_bottomeView.headerFrame = [[MeCenterHeaderViewFrame alloc] init];
     header_bottomeView.mj_y = self.header_topView.mj_h;
     
-    
     CGFloat header_h = CGRectGetMaxY(header_bottomeView.frame);
     CGFloat header_w = XSCREEN_WIDTH;
-    
     UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, header_w, header_h)];
      self.tableView.tableHeaderView = tableHeaderView;
     [tableHeaderView addSubview:self.header_topView];
@@ -197,20 +193,16 @@
     NSString *path = [[NSHomeDirectory()stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:@"nav.png"];
     UIImage *navImage =[UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
     colorView.image = navImage;
-    
-    
+ 
     UIButton *setBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 40, 40)];
     [setBtn setImage:[UIImage imageNamed:@"p_set"] forState:UIControlStateNormal];
     [setBtn addTarget:self action:@selector(caseSetting) forControlEvents:UIControlEventTouchUpInside];
     [tableHeaderView addSubview:setBtn];
-    
-    
+ 
     WeakSelf
     self.TZView  = [LeftBarButtonItemView leftViewWithBlock:^{
-        
-        [weakSelf caseTZ];
-        
-    }];
+         [weakSelf caseTZ];
+     }];
     self.TZView.mj_x = XSCREEN_WIDTH - 50;
     self.TZView.icon = @"p_msg";
     [tableHeaderView addSubview:self.TZView];
@@ -457,15 +449,46 @@
 
 - (void)caseQQ{
     
-    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+//    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+//    [service call];
+    #pragma mark 总之, 要自定义UI层  请参考 MQChatViewStyle.h类中的相关的方法 ,要修改逻辑相关的 请参考MQChatViewManager.h中相关的方法
+    #pragma mark  最简单的集成方法: 全部使用meiqia的,  不做任何自定义UI.  https://github.com/Meiqia/MeiqiaSDK-iOS
+    MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
+    [chatViewManager setoutgoingDefaultAvatarImage:[UIImage imageNamed:@"meiqia-icon"]];
+    MQChatViewStyle *aStyle = [chatViewManager chatViewStyle];
+    [aStyle setEnableRoundAvatar:YES];
+    [aStyle setEnableOutgoingAvatar:NO];
     
-    [service call];
+    if (LOGIN) {
+       MyofferUser *user = [MyofferUser defaultUser];
+      [chatViewManager setClientInfo:@{@"name":user.displayname,@"tel":user.phonenumber} override:YES];
+        NSString *clientId = [USDefault valueForKey:user.user_id];
+        if ([clientId length] > 0) {
+            [chatViewManager setLoginMQClientId:clientId];
+        }else{
+            [MQManager createClient:^(NSString *clientId, NSError *error) {
+                if (!error) {
+                    [USDefault setValue:clientId forKey:user.user_id];
+                }
+            }];
+        }
+    }else{
+         NSString *off_line_value = [MQManager getCurrentClientId];
+         NSString *clientId_offLine = [USDefault valueForKey:@"offLineClientKey"];
+        if (!clientId_offLine) {
+             [USDefault setValue:off_line_value forKey:@"offLineClientKey"];
+             clientId_offLine = off_line_value;
+        }
+        [chatViewManager setLoginMQClientId:clientId_offLine];
+    }
+    [MQManager setScheduledAgentWithAgentId:@"538999aef992e2fc4f4cfc8ae250e6cc" agentGroupId:nil  scheduleRule:MQScheduleRulesRedirectNone];
+    [chatViewManager pushMQChatViewControllerInViewController:self];
 }
+
 
 - (void)casePhone{
    
     NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"4000666522"];
-    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
   
 }
@@ -592,14 +615,10 @@
 - (void)caseTapUserHeader{
     
     if(!LOGIN){
-        
         RequireLogin
-        
         return;
     }
-    
     KDUtilDefineWeakSelfRef
-    
      KDActionSheet *as = [[KDActionSheet alloc] initWithTitle:@"更换头像"
                                            cancelButtonTitle:@"取消"
                                                 cancelAction:nil
@@ -639,22 +658,13 @@
 - (void)caseMakeDataUserInfor{
 
     if(LOGIN) {
-        
         //请求头像信息
-
         if (self.header_topView.haveIcon) return;
-        
         [self startAPIRequestWithSelector:kAPISelectorAccountInfo  parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
-            
             self.header_topView.haveIcon = YES;
-            
             self.header_topView.user = [MyofferUser mj_objectWithKeyValues:response];
-            
         }];
-        
-        
         return;
-        
     }
         
     self.header_topView.haveIcon = NO;

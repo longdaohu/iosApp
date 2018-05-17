@@ -1363,22 +1363,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */,
+				AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */,
+				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
+				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
 				AEC85BD420A444F20002F19B /* libresolv.tbd in Frameworks */,
 				AEC85BD220A444D50002F19B /* UserNotifications.framework in Frameworks */,
 				AE53E86B1F73919800588F0C /* Social.framework in Frameworks */,
 				AEF421181BD499AB00CFB45E /* CoreGraphics.framework in Frameworks */,
 				AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */,
-				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
 				AE79827F1F735ED3008BBAB7 /* libz.1.1.3.tbd in Frameworks */,
 				AEF4211E1BD499C900CFB45E /* libstdc++.tbd in Frameworks */,
 				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
 				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
 				AE79827B1F735392008BBAB7 /* libUMSocialLog.a in Frameworks */,
-				AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */,
-				AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */,
 				AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */,
 				AE7982771F735392008BBAB7 /* libSocialWeChat.a in Frameworks */,
-				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
 				AE7982751F735392008BBAB7 /* libSocialSina.a in Frameworks */,
 				AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */,
 				AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */,
@@ -1582,9 +1582,9 @@
 		567144861CBA889F002A02BF /* userCenter */ = {
 			isa = PBXGroup;
 			children = (
+				AEA249911D5B215300DD7939 /* person */,
 				AE6178B0207237AB006B311A /* discount */,
 				AE4C71361F4EA3830069E83E /* myApply */,
-				AEA249911D5B215300DD7939 /* person */,
 				AEA24A0C1D5B231200DD7939 /* pipei */,
 				AEA249291D5B215300DD7939 /* order_Group */,
 				AEA249471D5B215300DD7939 /* Apply_TIJIAO */,
@@ -4044,12 +4044,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer-resources.sh",
 				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPhotoBrowser.bundle",
 				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPBLocalizations.bundle",
+				"${PODS_ROOT}/Meiqia/Meiqia-SDK-files/MQChatViewController/Assets/MQChatViewAsset.bundle",
 				"${PODS_ROOT}/ZFPlayer/ZFPlayer/ZFPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IDMPhotoBrowser.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IDMPBLocalizations.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MQChatViewAsset.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

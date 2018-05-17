@@ -7,4 +7,5 @@ target 'MyOffer' do
     pod 'SDCycleScrollView'
     pod 'MLeaksFinder'
     pod 'JPush'
+    pod 'Meiqia'
 end

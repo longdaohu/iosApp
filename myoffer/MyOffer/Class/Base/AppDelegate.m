@@ -13,10 +13,11 @@
 #import "IntroViewController.h"
 #import "UserDefaults.h"
 #import "MyOfferLoginViewController.h"
-
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "HomeViewContViewController.h"
+#import "MQManager.h"
+
 
 // 引入JPush功能所需头文件
 //#import "JPUSHService.h"
@@ -65,14 +66,9 @@ static AppDelegate *__sharedDelegate;
     [self umeng];
     //极光
     [self JpushWithOptions:launchOptions];
- 
-    //接收远程消息
-    NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (userInfox) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfox];
-         [self applicationBadgeNumber];
-    }
-
+    //美洽
+    [self meiqia];
+    
     return YES;
 }
 
@@ -132,6 +128,16 @@ static AppDelegate *__sharedDelegate;
                  apsForProduction:NO
             advertisingIdentifier:advertisingId];
     //apsForProduction  1.3.1版本新增，用于标识当前应用所使用的APNs证书环境。 0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用。 注：此字段的值要与Build Settings的Code Signing配置的证书环境一致。
+ 
+    
+    
+    //接收远程消息
+    NSDictionary *userInfox = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfox) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil userInfo:userInfox];
+        [self applicationBadgeNumber];
+    }
+    
   
 }
 
@@ -196,16 +202,31 @@ static AppDelegate *__sharedDelegate;
 }
 
 
+- (void)meiqia{
+    
+    [MQManager initWithAppkey:@"edb45a1504a6f3bc86174cf8923b1006" completion:^(NSString *clientId, NSError *error) {
+        if (!error) {
+            KDClassLog(@"美洽 SDK：初始化成功");
+        } else {
+            KDClassLog(@"error:%@",error);
+        }
+    }];
+}
+
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     KDClassLog(@" didRegisterForRemoteNotificationsWithDeviceToken  %@",deviceToken);
-    
     [JPUSHService registerDeviceToken:deviceToken];
+    
+    #pragma mark  集成第四步: 上传设备deviceToken
+    [MQManager registerDeviceToken:deviceToken];
+    
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+    KDClassLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -262,11 +283,15 @@ static AppDelegate *__sharedDelegate;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    #pragma mark  集成第三步: 进入后台 关闭美洽服务
+    [MQManager closeMeiqiaService];
 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    #pragma mark  集成第二步: 进入前台 打开meiqia服务
+    [MQManager openMeiqiaService];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

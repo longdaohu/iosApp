@@ -14,7 +14,6 @@
 +(instancetype)viewWithFrame:(CGRect)frame{
 
     CatigaryScrollView *scrollView = [[CatigaryScrollView alloc] initWithFrame:frame];
-    
     scrollView.contentSize = CGSizeMake(3*XSCREEN_WIDTH, XSCREEN_HEIGHT);
     scrollView.pagingEnabled = YES;
     scrollView.alwaysBounceHorizontal = YES;
@@ -24,42 +23,21 @@
     return scrollView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
-        
-    }
-    return self;
-}
-
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        
         CGPoint velocity = [(UIPanGestureRecognizer *)gestureRecognizer velocityInView:self];
         CGPoint location = [gestureRecognizer locationInView:self];
         // 自定义scrollView监听滚动
 //        NSLog(@"velocity.x:%f----location.x:%d",velocity.x,(int)location.x%(int)[UIScreen mainScreen].bounds.size.width);
         if (velocity.x > 0.0f&&(int)location.x%(int)[UIScreen mainScreen].bounds.size.width < 60) {
-            
-            
             return NO;
-            
-            
         }else{
-            
-            
             CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self];
-            
             return  fabs(translation.x) >  fabs(translation.y);
         }
-    
-        
     }else{
-    
         return YES;
     }
  

@@ -16,6 +16,7 @@
 #import "EmallCatigoryGroup.h"
 #import "EmallCatigroySectionView.h"
 #import "myofferFlexibleView.h"
+#import "MQChatViewManager.h"
 
 @interface EmallCatigoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)MyOfferTableView *tableView;
@@ -35,32 +36,21 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+    NavigationBarHidden(YES);
     if (self.groups.count > 0) {
-
         if (self.login_status != LOGIN) {
-
             [self makeDataSource];
-
          }
     }
     
     [MobClick beginLogPageView:@"page留学购国家"];
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page留学购国家"];
 }
-
-
-
-
 
 - (NSArray *)groups{
 
@@ -91,17 +81,12 @@
 - (void)makeUI{
     
     self.title = self.country_Name;
-    
+    self.view.clipsToBounds = YES;
     self.current_Service = @"留学申请";
     
     [self makeTableView];
-    
     [self makeTopNavigaitonView];
-    
     [self makeFlexiableView];
-    
-    self.view.clipsToBounds = YES;
-
     
 }
 
@@ -125,10 +110,8 @@
     
     WeakSelf
     UniversityNavView *nav = [UniversityNavView ViewWithBlock:^(UIButton *sender) {
-        
         [weakSelf navigationItemWithSender:sender];
     }];
-    
     self.topNavigationView = nav;
     nav.titleName = self.country_Name;
     [nav navigationWithRightViewHiden:YES];
@@ -165,7 +148,6 @@
     self.flexView = flexView;
     flexView.image_name = contry_img;
     
-    
     [self maketableViewHeaderWithHeight:iconHeight];
     
 }
@@ -197,11 +179,8 @@
     
     WeakSelf
     [self startAPIRequestWithSelector:@"GET api/emall/skus" parameters:@{@"country":self.country_Name,@"category":self.current_Service} expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
         [weakSelf updateUIWithResponse:response];
-
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
         [weakSelf emptyWithError];
         
     }];
@@ -360,11 +339,8 @@
 - (void)navigationItemWithSender:(UIButton *)sender{
 
     if (sender.tag ==  NavItemStyleQQ) {
-    
         [self caseQQ];
-        
     }else{
-    
         [self casePop];
     }
     
@@ -372,33 +348,58 @@
 //跳转到QQ客服聊天页面
 - (void)caseQQ{
     
-    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
-    [service call];
+//    QQserviceSingleView *service = [[QQserviceSingleView alloc] init];
+//    [service call];
+#pragma mark 总之, 要自定义UI层  请参考 MQChatViewStyle.h类中的相关的方法 ,要修改逻辑相关的 请参考MQChatViewManager.h中相关的方法
+#pragma mark  最简单的集成方法: 全部使用meiqia的,  不做任何自定义UI.  https://github.com/Meiqia/MeiqiaSDK-iOS
+    MQChatViewManager *chatViewManager = [[MQChatViewManager alloc] init];
+    [chatViewManager setoutgoingDefaultAvatarImage:[UIImage imageNamed:@"meiqia-icon"]];
+    MQChatViewStyle *aStyle = [chatViewManager chatViewStyle];
+    [aStyle setEnableRoundAvatar:YES];
+    [aStyle setEnableOutgoingAvatar:NO];
     
+    if (LOGIN) {
+        MyofferUser *user = [MyofferUser defaultUser];
+        [chatViewManager setClientInfo:@{@"name":user.displayname,@"tel":user.phonenumber} override:YES];
+        NSString *clientId = [USDefault valueForKey:user.user_id];
+        if ([clientId length] > 0) {
+            [MQManager setClientOnlineWithClientId:clientId success:^(MQClientOnlineResult result, MQAgent *agent, NSArray<MQMessage *> *messages) {
+            } failure:^(NSError *error) {
+            } receiveMessageDelegate:self];
+        }else{
+            [MQManager createClient:^(NSString *clientId, NSError *error) {
+                if (!error) {
+                    [USDefault setValue:clientId forKey:user.user_id];
+                }
+            }];
+        }
+    }else{
+        NSString *off_line_value = [MQManager getCurrentClientId];
+        NSString *clientId_offLine = [USDefault valueForKey:@"offLineClientKey"];
+        if (!clientId_offLine) {
+            [USDefault setValue:off_line_value forKey:@"offLineClientKey"];
+            clientId_offLine = off_line_value;
+        }
+        [MQManager setClientOnlineWithClientId:clientId_offLine success:^(MQClientOnlineResult result, MQAgent *agent, NSArray<MQMessage *> *messages) {
+        } failure:^(NSError *error) {
+        } receiveMessageDelegate:self];
+    }
+    [MQManager setScheduledAgentWithAgentId:@"538999aef992e2fc4f4cfc8ae250e6cc" agentGroupId:nil  scheduleRule:MQScheduleRulesRedirectNone];
+    [chatViewManager pushMQChatViewControllerInViewController:self];
 }
-
 
 - (void)casePop{
-
     [self.navigationController popViewControllerAnimated:true];
 }
-
-
-
 
 //数据为空处理
 - (void)emptyWithArray:(NSArray *)items{
     
     [self.tableView emptyViewWithHiden:!(items.count == 0)];
-    
     if (items.count == 0) {
-        
         [self.tableView emptyViewWithError:NetRequest_NoDATA];
-        
     }else{
-        
         [self.tableView emptyViewWithHiden:YES];
-        
     }
 }
 

@@ -44,7 +44,6 @@
     self.tableView.dataSource = self;
     self.view = self.tableView;
     if (@available(iOS 11.0, *)) {
-        
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
 
@@ -60,12 +59,10 @@
 - (void)viewWillAppear:(BOOL)animated {
    
     [super viewWillAppear:animated];
-    
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
     [MobClick beginLogPageView:@"page个人信息"];
-    
-    
+ 
+    WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil success:^(NSInteger statusCode, id response) {
        
         NSDictionary *accountInfo = response[@"accountInfo"];
@@ -96,7 +93,7 @@
                 }
  
             }];
-             [self.navigationController pushViewController:vc animated:YES];
+             [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         
         ActionTableViewCell *passwordCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
@@ -110,7 +107,7 @@
             if (phonenumber_str || email_str) {
                 ChangePasswordViewController *vc = [[ChangePasswordViewController alloc] init];
                 if(!hasPassword.boolValue)vc.newpasswd = @"true";
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
               }
             else{
                 UIAlertView  *aler  = [[UIAlertView alloc] initWithTitle:@"请先绑定手机号或Email" message:nil delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -133,7 +130,7 @@
                 if (phonenumber_str ||  email_str) {
                     vc.phoneNumber = @"phoneNumber";
                 }
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }];
         
         ActionTableViewCell *emailCell = [[ActionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
@@ -151,7 +148,7 @@
             if (phonenumber_str || email_str ) {
                 vc.Email = @"Email";
             }
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         
     
