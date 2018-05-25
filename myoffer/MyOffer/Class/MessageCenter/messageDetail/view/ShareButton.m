@@ -29,7 +29,7 @@
 +(instancetype)myShareButtonWithNormalTitle:( NSString *)normal_title seletedTitle:(NSString * )selected_title normalImage:(NSString *)normal_Image seletedImage:(NSString *)selected_Image actionType:(NSInteger)shareType
 {
     
-     ShareButton *myShare = [[ShareButton alloc] init];
+    ShareButton *myShare = [[ShareButton alloc] init];
     [myShare setTitle:normal_title forState:UIControlStateNormal];
       myShare.titleLabel.font = [UIFont systemFontOfSize:14 + XPERCENT];
     

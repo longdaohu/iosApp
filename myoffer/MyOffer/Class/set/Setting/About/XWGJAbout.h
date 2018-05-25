@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(int, XWGJAboutType) {
     XWGJAboutTypeDefault = 0,
+    XWGJAboutTypeInvitaion = 1,
     XWGJAboutTypeServiceStatus
 };
 

@@ -63,10 +63,10 @@
      */
     
     // 初始化文字
-    [self setTitle:GDLocalizedString(@"Refresh-up") forState:MJRefreshStateIdle];
-    [self setTitle:GDLocalizedString(@"Refresh-release") forState:MJRefreshStatePulling];
-    [self setTitle:GDLocalizedString(@"Refresh-loading") forState:MJRefreshStateRefreshing];
-    [self setTitle:GDLocalizedString(@"Refresh-all") forState:MJRefreshStateNoMoreData];
+    [self setTitle:MJRefreshBackFooterIdleText forState:MJRefreshStateIdle];
+    [self setTitle:MJRefreshBackFooterPullingText forState:MJRefreshStatePulling];
+    [self setTitle:MJRefreshBackFooterRefreshingText forState:MJRefreshStateRefreshing];
+    [self setTitle:MJRefreshBackFooterNoMoreDataText  forState:MJRefreshStateNoMoreData];
 }
 
 - (void)placeSubviews

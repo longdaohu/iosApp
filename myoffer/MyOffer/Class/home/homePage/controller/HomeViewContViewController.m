@@ -490,11 +490,11 @@
 
 #pragma mark :UITableViewDelegate  UITableViewData
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section; {
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   
     myofferGroupModel *group = self.groups[section];
     
-    HomeSectionHeaderView *SectionView =[HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
+    HomeSectionHeaderView *SectionView = [HomeSectionHeaderView sectionHeaderViewWithTitle:group.header_title];
     
     SectionView.accessory_title = group.accesory_title;
     

@@ -43,9 +43,7 @@
     [super viewWillAppear:animated];
     
     self.tabBarController.tabBar.hidden = NO;
-    
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+    NavigationBarHidden(YES);
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     [MobClick beginLogPageView:@"page分类搜索"];

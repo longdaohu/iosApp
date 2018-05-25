@@ -312,6 +312,41 @@
 		AE94D8331F5FD10C00B64B10 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */; };
 		AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */; };
 		AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */; };
+		AE9BA42E20B3BA8E008B65D4 /* RewardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */; };
+		AE9BA42F20B3BA8E008B65D4 /* RewardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */; };
+		AE9BA43220B3BAFF008B65D4 /* InvitationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */; };
+		AE9BA43520B3C426008B65D4 /* RewardHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43420B3C426008B65D4 /* RewardHeader.m */; };
+		AE9BA43B20B3EFEE008B65D4 /* RewardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43920B3EFEE008B65D4 /* RewardListVC.m */; };
+		AE9BA43C20B3EFEE008B65D4 /* RewardListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA43A20B3EFEE008B65D4 /* RewardListVC.xib */; };
+		AE9BA44020B3F116008B65D4 /* RewardListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43E20B3F116008B65D4 /* RewardListCell.m */; };
+		AE9BA44120B3F116008B65D4 /* RewardListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA43F20B3F116008B65D4 /* RewardListCell.xib */; };
+		AE9BA44620B3FA74008B65D4 /* RewardDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA44420B3FA74008B65D4 /* RewardDetailVC.m */; };
+		AE9BA44720B3FA74008B65D4 /* RewardDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA44520B3FA74008B65D4 /* RewardDetailVC.xib */; };
+		AE9BA45120B402E3008B65D4 /* ExtractionBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA44F20B402E3008B65D4 /* ExtractionBVC.m */; };
+		AE9BA45220B402E3008B65D4 /* ExtractionBVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA45020B402E3008B65D4 /* ExtractionBVC.xib */; };
+		AE9BA45620B40B66008B65D4 /* ExchangeAVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA45420B40B66008B65D4 /* ExchangeAVC.m */; };
+		AE9BA45720B40B66008B65D4 /* ExchangeAVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA45520B40B66008B65D4 /* ExchangeAVC.xib */; };
+		AE9BA45B20B40DEF008B65D4 /* ExtractionSuccessedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA45920B40DEF008B65D4 /* ExtractionSuccessedVC.m */; };
+		AE9BA45C20B40DEF008B65D4 /* ExtractionSuccessedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA45A20B40DEF008B65D4 /* ExtractionSuccessedVC.xib */; };
+		AE9BA46020B41732008B65D4 /* InvitationRecordsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA45F20B41732008B65D4 /* InvitationRecordsVC.m */; };
+		AE9BA46420B42D63008B65D4 /* InvitationRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA46220B42D63008B65D4 /* InvitationRecordsCell.m */; };
+		AE9BA46520B42D63008B65D4 /* InvitationRecordsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA46320B42D63008B65D4 /* InvitationRecordsCell.xib */; };
+		AE9BA46A20B50119008B65D4 /* InvitationRecordsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA46920B50119008B65D4 /* InvitationRecordsHeader.xib */; };
+		AE9BA46F20B5154E008B65D4 /* InvitationRecordDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA46D20B5154E008B65D4 /* InvitationRecordDetailVC.m */; };
+		AE9BA47020B5154E008B65D4 /* InvitationRecordDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA46E20B5154E008B65D4 /* InvitationRecordDetailVC.xib */; };
+		AE9BA47420B51A5F008B65D4 /* InvitationRecordUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA47220B51A5F008B65D4 /* InvitationRecordUserCell.m */; };
+		AE9BA47520B51A5F008B65D4 /* InvitationRecordUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA47320B51A5F008B65D4 /* InvitationRecordUserCell.xib */; };
+		AE9BA47720B53794008B65D4 /* InvitationRecordUserFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA47620B53794008B65D4 /* InvitationRecordUserFooter.xib */; };
+		AE9BA47A20B53A18008B65D4 /* InvitationRecordHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA47920B53A18008B65D4 /* InvitationRecordHeader.m */; };
+		AE9BA47C20B53A2A008B65D4 /* InvitationRecordHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA47B20B53A2A008B65D4 /* InvitationRecordHeader.xib */; };
+		AE9BA48020B53E68008B65D4 /* InvitationRecordDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA47E20B53E68008B65D4 /* InvitationRecordDetailCell.m */; };
+		AE9BA48120B53E68008B65D4 /* InvitationRecordDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA47F20B53E68008B65D4 /* InvitationRecordDetailCell.xib */; };
+		AE9BA48420B54DC2008B65D4 /* RewardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48320B54DC2008B65D4 /* RewardItem.m */; };
+		AE9BA48720B55897008B65D4 /* RewardDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48620B55897008B65D4 /* RewardDetailItem.m */; };
+		AE9BA48A20B5598A008B65D4 /* RewardDetailCelltem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48920B5598A008B65D4 /* RewardDetailCelltem.m */; };
+		AE9BA48D20B65CA9008B65D4 /* InvitationRecordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48C20B65CA9008B65D4 /* InvitationRecordItem.m */; };
+		AE9BA49020B68B62008B65D4 /* MyofferOnColumnFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48F20B68B62008B65D4 /* MyofferOnColumnFilterView.m */; };
+		AE9BA49320B7B1CC008B65D4 /* MyofferButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA49120B7B1CB008B65D4 /* MyofferButton.m */; };
 		AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */; };
 		AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
@@ -1027,6 +1062,62 @@
 		AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemFrame.m; sourceTree = "<group>"; };
 		AE96A36A1E8BBF96006E8E35 /* ServiceItemHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemHeaderView.h; sourceTree = "<group>"; };
 		AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemHeaderView.m; sourceTree = "<group>"; };
+		AE9BA42B20B3BA8E008B65D4 /* RewardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardVC.h; sourceTree = "<group>"; };
+		AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardVC.m; sourceTree = "<group>"; };
+		AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardVC.xib; sourceTree = "<group>"; };
+		AE9BA43020B3BAFF008B65D4 /* InvitationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationVC.h; sourceTree = "<group>"; };
+		AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationVC.m; sourceTree = "<group>"; };
+		AE9BA43320B3C426008B65D4 /* RewardHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardHeader.h; sourceTree = "<group>"; };
+		AE9BA43420B3C426008B65D4 /* RewardHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardHeader.m; sourceTree = "<group>"; };
+		AE9BA43820B3EFEE008B65D4 /* RewardListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardListVC.h; sourceTree = "<group>"; };
+		AE9BA43920B3EFEE008B65D4 /* RewardListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardListVC.m; sourceTree = "<group>"; };
+		AE9BA43A20B3EFEE008B65D4 /* RewardListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardListVC.xib; sourceTree = "<group>"; };
+		AE9BA43D20B3F116008B65D4 /* RewardListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardListCell.h; sourceTree = "<group>"; };
+		AE9BA43E20B3F116008B65D4 /* RewardListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardListCell.m; sourceTree = "<group>"; };
+		AE9BA43F20B3F116008B65D4 /* RewardListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardListCell.xib; sourceTree = "<group>"; };
+		AE9BA44320B3FA74008B65D4 /* RewardDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardDetailVC.h; sourceTree = "<group>"; };
+		AE9BA44420B3FA74008B65D4 /* RewardDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardDetailVC.m; sourceTree = "<group>"; };
+		AE9BA44520B3FA74008B65D4 /* RewardDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailVC.xib; sourceTree = "<group>"; };
+		AE9BA44E20B402E3008B65D4 /* ExtractionBVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtractionBVC.h; sourceTree = "<group>"; };
+		AE9BA44F20B402E3008B65D4 /* ExtractionBVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtractionBVC.m; sourceTree = "<group>"; };
+		AE9BA45020B402E3008B65D4 /* ExtractionBVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtractionBVC.xib; sourceTree = "<group>"; };
+		AE9BA45320B40B66008B65D4 /* ExchangeAVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExchangeAVC.h; sourceTree = "<group>"; };
+		AE9BA45420B40B66008B65D4 /* ExchangeAVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExchangeAVC.m; sourceTree = "<group>"; };
+		AE9BA45520B40B66008B65D4 /* ExchangeAVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExchangeAVC.xib; sourceTree = "<group>"; };
+		AE9BA45820B40DEF008B65D4 /* ExtractionSuccessedVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtractionSuccessedVC.h; sourceTree = "<group>"; };
+		AE9BA45920B40DEF008B65D4 /* ExtractionSuccessedVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtractionSuccessedVC.m; sourceTree = "<group>"; };
+		AE9BA45A20B40DEF008B65D4 /* ExtractionSuccessedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtractionSuccessedVC.xib; sourceTree = "<group>"; };
+		AE9BA45E20B41732008B65D4 /* InvitationRecordsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordsVC.h; sourceTree = "<group>"; };
+		AE9BA45F20B41732008B65D4 /* InvitationRecordsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordsVC.m; sourceTree = "<group>"; };
+		AE9BA46120B42D63008B65D4 /* InvitationRecordsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordsCell.h; sourceTree = "<group>"; };
+		AE9BA46220B42D63008B65D4 /* InvitationRecordsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordsCell.m; sourceTree = "<group>"; };
+		AE9BA46320B42D63008B65D4 /* InvitationRecordsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordsCell.xib; sourceTree = "<group>"; };
+		AE9BA46920B50119008B65D4 /* InvitationRecordsHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordsHeader.xib; sourceTree = "<group>"; };
+		AE9BA46C20B5154E008B65D4 /* InvitationRecordDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordDetailVC.h; sourceTree = "<group>"; };
+		AE9BA46D20B5154E008B65D4 /* InvitationRecordDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordDetailVC.m; sourceTree = "<group>"; };
+		AE9BA46E20B5154E008B65D4 /* InvitationRecordDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordDetailVC.xib; sourceTree = "<group>"; };
+		AE9BA47120B51A5F008B65D4 /* InvitationRecordUserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordUserCell.h; sourceTree = "<group>"; };
+		AE9BA47220B51A5F008B65D4 /* InvitationRecordUserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordUserCell.m; sourceTree = "<group>"; };
+		AE9BA47320B51A5F008B65D4 /* InvitationRecordUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordUserCell.xib; sourceTree = "<group>"; };
+		AE9BA47620B53794008B65D4 /* InvitationRecordUserFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordUserFooter.xib; sourceTree = "<group>"; };
+		AE9BA47820B53A18008B65D4 /* InvitationRecordHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordHeader.h; sourceTree = "<group>"; };
+		AE9BA47920B53A18008B65D4 /* InvitationRecordHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordHeader.m; sourceTree = "<group>"; };
+		AE9BA47B20B53A2A008B65D4 /* InvitationRecordHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordHeader.xib; sourceTree = "<group>"; };
+		AE9BA47D20B53E68008B65D4 /* InvitationRecordDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordDetailCell.h; sourceTree = "<group>"; };
+		AE9BA47E20B53E68008B65D4 /* InvitationRecordDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordDetailCell.m; sourceTree = "<group>"; };
+		AE9BA47F20B53E68008B65D4 /* InvitationRecordDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitationRecordDetailCell.xib; sourceTree = "<group>"; };
+		AE9BA48220B54DC2008B65D4 /* RewardItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardItem.h; sourceTree = "<group>"; };
+		AE9BA48320B54DC2008B65D4 /* RewardItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardItem.m; sourceTree = "<group>"; };
+		AE9BA48520B55897008B65D4 /* RewardDetailItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardDetailItem.h; sourceTree = "<group>"; };
+		AE9BA48620B55897008B65D4 /* RewardDetailItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardDetailItem.m; sourceTree = "<group>"; };
+		AE9BA48820B5598A008B65D4 /* RewardDetailCelltem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardDetailCelltem.h; sourceTree = "<group>"; };
+		AE9BA48920B5598A008B65D4 /* RewardDetailCelltem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardDetailCelltem.m; sourceTree = "<group>"; };
+		AE9BA48B20B65CA9008B65D4 /* InvitationRecordItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationRecordItem.h; sourceTree = "<group>"; };
+		AE9BA48C20B65CA9008B65D4 /* InvitationRecordItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationRecordItem.m; sourceTree = "<group>"; };
+		AE9BA48E20B68B62008B65D4 /* MyofferOnColumnFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyofferOnColumnFilterView.h; sourceTree = "<group>"; };
+		AE9BA48F20B68B62008B65D4 /* MyofferOnColumnFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyofferOnColumnFilterView.m; sourceTree = "<group>"; };
+		AE9BA49120B7B1CB008B65D4 /* MyofferButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferButton.m; sourceTree = "<group>"; };
+		AE9BA49220B7B1CC008B65D4 /* MyofferButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferButton.h; sourceTree = "<group>"; };
 		AE9CB3CB1ED6AC0F0049E618 /* MyOfferLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferLoginViewController.h; sourceTree = "<group>"; };
 		AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferLoginViewController.m; sourceTree = "<group>"; };
 		AE9CB3CE1ED6BBDF0049E618 /* MyOfferInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferInputView.h; sourceTree = "<group>"; };
@@ -1582,6 +1673,7 @@
 		567144861CBA889F002A02BF /* userCenter */ = {
 			isa = PBXGroup;
 			children = (
+				AE9BA43620B3EF42008B65D4 /* Recommend */,
 				AEA249911D5B215300DD7939 /* person */,
 				AE6178B0207237AB006B311A /* discount */,
 				AE4C71361F4EA3830069E83E /* myApply */,
@@ -2688,6 +2780,123 @@
 			path = UMAnalytics_Sdk_3.6.6;
 			sourceTree = "<group>";
 		};
+		AE9BA42920B3BA00008B65D4 /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA43020B3BAFF008B65D4 /* InvitationVC.h */,
+				AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */,
+			);
+			path = Invitation;
+			sourceTree = "<group>";
+		};
+		AE9BA42A20B3BA17008B65D4 /* Reward */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA42B20B3BA8E008B65D4 /* RewardVC.h */,
+				AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */,
+				AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */,
+				AE9BA43320B3C426008B65D4 /* RewardHeader.h */,
+				AE9BA43420B3C426008B65D4 /* RewardHeader.m */,
+			);
+			path = Reward;
+			sourceTree = "<group>";
+		};
+		AE9BA43620B3EF42008B65D4 /* Recommend */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA46B20B514A0008B65D4 /* InvitationRecordDetail */,
+				AE9BA45D20B41704008B65D4 /* InvitationRecords */,
+				AE9BA44820B3FCCA008B65D4 /* Extraction */,
+				AE9BA44220B3FA0C008B65D4 /* Rewarddetail */,
+				AE9BA43720B3EF76008B65D4 /* RewardList */,
+				AE9BA42920B3BA00008B65D4 /* Invitation */,
+				AE9BA42A20B3BA17008B65D4 /* Reward */,
+			);
+			name = Recommend;
+			sourceTree = "<group>";
+		};
+		AE9BA43720B3EF76008B65D4 /* RewardList */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA43820B3EFEE008B65D4 /* RewardListVC.h */,
+				AE9BA43920B3EFEE008B65D4 /* RewardListVC.m */,
+				AE9BA43A20B3EFEE008B65D4 /* RewardListVC.xib */,
+				AE9BA43D20B3F116008B65D4 /* RewardListCell.h */,
+				AE9BA43E20B3F116008B65D4 /* RewardListCell.m */,
+				AE9BA43F20B3F116008B65D4 /* RewardListCell.xib */,
+				AE9BA48220B54DC2008B65D4 /* RewardItem.h */,
+				AE9BA48320B54DC2008B65D4 /* RewardItem.m */,
+			);
+			path = RewardList;
+			sourceTree = "<group>";
+		};
+		AE9BA44220B3FA0C008B65D4 /* Rewarddetail */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA44320B3FA74008B65D4 /* RewardDetailVC.h */,
+				AE9BA44420B3FA74008B65D4 /* RewardDetailVC.m */,
+				AE9BA44520B3FA74008B65D4 /* RewardDetailVC.xib */,
+				AE9BA48520B55897008B65D4 /* RewardDetailItem.h */,
+				AE9BA48620B55897008B65D4 /* RewardDetailItem.m */,
+				AE9BA48820B5598A008B65D4 /* RewardDetailCelltem.h */,
+				AE9BA48920B5598A008B65D4 /* RewardDetailCelltem.m */,
+			);
+			path = Rewarddetail;
+			sourceTree = "<group>";
+		};
+		AE9BA44820B3FCCA008B65D4 /* Extraction */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA45820B40DEF008B65D4 /* ExtractionSuccessedVC.h */,
+				AE9BA45920B40DEF008B65D4 /* ExtractionSuccessedVC.m */,
+				AE9BA45A20B40DEF008B65D4 /* ExtractionSuccessedVC.xib */,
+				AE9BA44E20B402E3008B65D4 /* ExtractionBVC.h */,
+				AE9BA44F20B402E3008B65D4 /* ExtractionBVC.m */,
+				AE9BA45020B402E3008B65D4 /* ExtractionBVC.xib */,
+				AE9BA45320B40B66008B65D4 /* ExchangeAVC.h */,
+				AE9BA45420B40B66008B65D4 /* ExchangeAVC.m */,
+				AE9BA45520B40B66008B65D4 /* ExchangeAVC.xib */,
+			);
+			path = Extraction;
+			sourceTree = "<group>";
+		};
+		AE9BA45D20B41704008B65D4 /* InvitationRecords */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA48B20B65CA9008B65D4 /* InvitationRecordItem.h */,
+				AE9BA48C20B65CA9008B65D4 /* InvitationRecordItem.m */,
+				AE9BA45E20B41732008B65D4 /* InvitationRecordsVC.h */,
+				AE9BA45F20B41732008B65D4 /* InvitationRecordsVC.m */,
+				AE9BA46920B50119008B65D4 /* InvitationRecordsHeader.xib */,
+				AE9BA46120B42D63008B65D4 /* InvitationRecordsCell.h */,
+				AE9BA46220B42D63008B65D4 /* InvitationRecordsCell.m */,
+				AE9BA46320B42D63008B65D4 /* InvitationRecordsCell.xib */,
+				AE9BA48E20B68B62008B65D4 /* MyofferOnColumnFilterView.h */,
+				AE9BA48F20B68B62008B65D4 /* MyofferOnColumnFilterView.m */,
+			);
+			path = InvitationRecords;
+			sourceTree = "<group>";
+		};
+		AE9BA46B20B514A0008B65D4 /* InvitationRecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AE9BA46C20B5154E008B65D4 /* InvitationRecordDetailVC.h */,
+				AE9BA46D20B5154E008B65D4 /* InvitationRecordDetailVC.m */,
+				AE9BA46E20B5154E008B65D4 /* InvitationRecordDetailVC.xib */,
+				AE9BA47120B51A5F008B65D4 /* InvitationRecordUserCell.h */,
+				AE9BA47220B51A5F008B65D4 /* InvitationRecordUserCell.m */,
+				AE9BA47320B51A5F008B65D4 /* InvitationRecordUserCell.xib */,
+				AE9BA47620B53794008B65D4 /* InvitationRecordUserFooter.xib */,
+				AE9BA47820B53A18008B65D4 /* InvitationRecordHeader.h */,
+				AE9BA47920B53A18008B65D4 /* InvitationRecordHeader.m */,
+				AE9BA47B20B53A2A008B65D4 /* InvitationRecordHeader.xib */,
+				AE9BA47D20B53E68008B65D4 /* InvitationRecordDetailCell.h */,
+				AE9BA47E20B53E68008B65D4 /* InvitationRecordDetailCell.m */,
+				AE9BA47F20B53E68008B65D4 /* InvitationRecordDetailCell.xib */,
+			);
+			path = InvitationRecordDetail;
+			sourceTree = "<group>";
+		};
 		AE9E6EE61E851D3A00203C00 /* myOfferMall */ = {
 			isa = PBXGroup;
 			children = (
@@ -3543,6 +3752,8 @@
 				AE38BEED1E4AFE0C00FCF28B /* ShareNView.m */,
 				AEE0AB3320AD31F600E9AF99 /* MeiqiaServiceCall.h */,
 				AEE0AB3420AD31F600E9AF99 /* MeiqiaServiceCall.m */,
+				AE9BA49220B7B1CC008B65D4 /* MyofferButton.h */,
+				AE9BA49120B7B1CB008B65D4 /* MyofferButton.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -3909,16 +4120,19 @@
 			files = (
 				AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */,
 				AE91DDD61FBBEFDF00CD06BD /* GuideCell.xib in Resources */,
+				AE9BA47C20B53A2A008B65D4 /* InvitationRecordHeader.xib in Resources */,
 				AEA24B281D5B251800DD7939 /* LoginSelectViewController.xib in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
+				AE9BA45C20B40DEF008B65D4 /* ExtractionSuccessedVC.xib in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */,
 				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
+				AE9BA47720B53794008B65D4 /* InvitationRecordUserFooter.xib in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
@@ -3928,12 +4142,14 @@
 				AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */,
 				AEC85BC320A29F4D0002F19B /* gradeCN.plist in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
+				AE9BA47520B51A5F008B65D4 /* InvitationRecordUserCell.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
+				AE9BA42F20B3BA8E008B65D4 /* RewardVC.xib in Resources */,
 				AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */,
 				AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */,
 				AECC87E11F95F63800FCBBEC /* CatigaryCityCollectionReusableView.xib in Resources */,
@@ -3941,6 +4157,7 @@
 				AE7FFCC11EC07E1C00D2FDCB /* into004.jpeg in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
 				AE1FD74B1D5C929500FFD5A8 /* Pre-comp 1_0009.png in Resources */,
+				AE9BA43C20B3EFEE008B65D4 /* RewardListVC.xib in Resources */,
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
 				AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */,
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
@@ -3953,10 +4170,12 @@
 				AE1FD7361D5C929500FFD5A8 /* Pre-comp 1_00019.png in Resources */,
 				AE6178C520723C21006B311A /* DiscountVC.xib in Resources */,
 				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
+				AE9BA46A20B50119008B65D4 /* InvitationRecordsHeader.xib in Resources */,
 				AE1FD7391D5C929500FFD5A8 /* Pre-comp 1_00021.png in Resources */,
 				AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
+				AE9BA44720B3FA74008B65D4 /* RewardDetailVC.xib in Resources */,
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
@@ -3968,16 +4187,20 @@
 				AE914EDD1F419EB9008A43CD /* ApplyStatusHistoryCell.xib in Resources */,
 				AE79827A1F735392008BBAB7 /* UMSocialSDKPromptResources.bundle in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
+				AE9BA46520B42D63008B65D4 /* InvitationRecordsCell.xib in Resources */,
 				AE7FFCBF1EC07E1C00D2FDCB /* into005.jpeg in Resources */,
+				AE9BA45720B40B66008B65D4 /* ExchangeAVC.xib in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE79827C1F735392008BBAB7 /* UMSocialSDKResources.bundle in Resources */,
+				AE9BA45220B402E3008B65D4 /* ExtractionBVC.xib in Resources */,
 				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
 				AEC85BC820A2CBB30002F19B /* countriesCN.plist in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
+				AE9BA47020B5154E008B65D4 /* InvitationRecordDetailVC.xib in Resources */,
 				AE1FD73A1D5C929500FFD5A8 /* Pre-comp 1_00022.png in Resources */,
 				AE1FD7431D5C929500FFD5A8 /* Pre-comp 1_00030.png in Resources */,
 				AECC87DF1F95F63800FCBBEC /* CatigaryCityCollectionCell.xib in Resources */,
@@ -3995,9 +4218,11 @@
 				AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */,
 				AE7FFCC01EC07E1C00D2FDCB /* into003.jpeg in Resources */,
 				AE1FD7311D5C929500FFD5A8 /* Pre-comp 1_00014.png in Resources */,
+				AE9BA44120B3F116008B65D4 /* RewardListCell.xib in Resources */,
 				AE50BECB207481870002DCAC /* OrderActionVC.xib in Resources */,
 				AE91DDE11FBC169F00CD06BD /* GuideItemCell.xib in Resources */,
 				AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */,
+				AE9BA48120B53E68008B65D4 /* InvitationRecordDetailCell.xib in Resources */,
 				AE1FD7551D5C929500FFD5A8 /* MJRefresh.bundle in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
@@ -4081,10 +4306,13 @@
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,
 				AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */,
 				AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */,
+				AE9BA45B20B40DEF008B65D4 /* ExtractionSuccessedVC.m in Sources */,
 				AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */,
 				AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */,
+				AE9BA44020B3F116008B65D4 /* RewardListCell.m in Sources */,
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
 				AE6178E520738BB6006B311A /* OrderEnjoyVC.m in Sources */,
+				AE9BA48020B53E68008B65D4 /* InvitationRecordDetailCell.m in Sources */,
 				AE914ECF1F4184F2008A43CD /* ApplyStatusModelFrame.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
@@ -4093,6 +4321,7 @@
 				AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */,
 				AE914EDC1F419EB9008A43CD /* ApplyStatusHistoryCell.m in Sources */,
 				AECC87D01F95F63800FCBBEC /* CatigoryRank.m in Sources */,
+				AE9BA48A20B5598A008B65D4 /* RewardDetailCelltem.m in Sources */,
 				AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */,
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */,
@@ -4127,10 +4356,12 @@
 				AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */,
 				AE133E9F1D6E952600AC9C42 /* UniversityDetailItem.m in Sources */,
 				AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */,
+				AE9BA46F20B5154E008B65D4 /* InvitationRecordDetailVC.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
+				AE9BA43520B3C426008B65D4 /* RewardHeader.m in Sources */,
 				AE91DDCB1FBBE15100CD06BD /* GuideOverseaModel.m in Sources */,
 				AE91DDD51FBBEFDF00CD06BD /* GuideCell.m in Sources */,
 				AE033FD72018535200D1D425 /* myOfferMenuGroup.m in Sources */,
@@ -4138,6 +4369,7 @@
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
+				AE9BA48D20B65CA9008B65D4 /* InvitationRecordItem.m in Sources */,
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
@@ -4190,6 +4422,7 @@
 				AE4B2E781F1E095600E328F7 /* MyOfferArticle.m in Sources */,
 				AEA249B51D5B215300DD7939 /* Applycourse.m in Sources */,
 				AE4B2E711F1E095600E328F7 /* MessageCenterViewController.m in Sources */,
+				AE9BA47420B51A5F008B65D4 /* InvitationRecordUserCell.m in Sources */,
 				AE6178D820734797006B311A /* CreateOrderItemCell.m in Sources */,
 				AEA24A911D5B23F600DD7939 /* HomeSecondTableViewCell.m in Sources */,
 				AEA24AFE1D5B24D200DD7939 /* BindEmailViewController.m in Sources */,
@@ -4213,6 +4446,7 @@
 				AE4B2E661F1E095600E328F7 /* MessageCountryTopicVController.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
 				AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */,
+				AE9BA48420B54DC2008B65D4 /* RewardItem.m in Sources */,
 				AE4B2E701F1E095600E328F7 /* FSSScrollContentViewController.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
@@ -4227,6 +4461,7 @@
 				AE2DE4481E962B51009683B0 /* ServiceItemHeaderCell.m in Sources */,
 				AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */,
 				AE3AB6C91F21AC0300A3C7E3 /* SMAudioModel.m in Sources */,
+				AE9BA45620B40B66008B65D4 /* ExchangeAVC.m in Sources */,
 				AEA24C0C1D5B269A00DD7939 /* UserDefaults.m in Sources */,
 				463E3AB71B23105F00E0BAF8 /* KDUtilities.m in Sources */,
 				AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */,
@@ -4260,6 +4495,7 @@
 				AE4B2E7F1F1E095600E328F7 /* MessageTopicCatigoryView.m in Sources */,
 				AECC87D71F95F63800FCBBEC /* RankTypeItem.m in Sources */,
 				AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */,
+				AE9BA47A20B53A18008B65D4 /* InvitationRecordHeader.m in Sources */,
 				AEA249A61D5B215300DD7939 /* OrderDetailHeaderView.m in Sources */,
 				AECC87E71F95F63800FCBBEC /* RankTypeCell.m in Sources */,
 				AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */,
@@ -4283,12 +4519,15 @@
 				AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */,
 				AEA24A8C1D5B23F600DD7939 /* HeadItem.m in Sources */,
 				AECC87D81F95F63800FCBBEC /* RankTypeItemFrame.m in Sources */,
+				AE9BA42E20B3BA8E008B65D4 /* RewardVC.m in Sources */,
+				AE9BA44620B3FA74008B65D4 /* RewardDetailVC.m in Sources */,
 				AECC87D51F95F63800FCBBEC /* MyOfferSubjecct.m in Sources */,
 				AE6178C420723C21006B311A /* DiscountVC.m in Sources */,
 				AEA249BE1D5B215300DD7939 /* XWGJSectionHeaderView.m in Sources */,
 				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
+				AE9BA46420B42D63008B65D4 /* InvitationRecordsCell.m in Sources */,
 				AE3A5AF61F98A08400DFB47A /* RankDetailViewController.m in Sources */,
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AE072CD42068F161001641AC /* MessageDetailHeaderView.m in Sources */,
@@ -4356,6 +4595,7 @@
 				AE3600661E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m in Sources */,
 				AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */,
 				AE4B2E741F1E095600E328F7 /* MessageTopicFooterView.m in Sources */,
+				AE9BA49020B68B62008B65D4 /* MyofferOnColumnFilterView.m in Sources */,
 				463E3AAB1B23105F00E0BAF8 /* KDEasyTouchButton.m in Sources */,
 				AEA24B041D5B24D200DD7939 /* ChangePasswordViewController.m in Sources */,
 				AE033FE020186A6900D1D425 /* myOfferSectionHeaderView.m in Sources */,
@@ -4368,6 +4608,7 @@
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AE033FD42018395900D1D425 /* myOfferMenuItem.m in Sources */,
 				AECC87DD1F95F63800FCBBEC /* RankTypeHeaderView.m in Sources */,
+				AE9BA43220B3BAFF008B65D4 /* InvitationVC.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
 				AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */,
@@ -4382,10 +4623,12 @@
 				AE4C71391F4EA3C20069E83E /* myApplyViewController.m in Sources */,
 				AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */,
 				AE3AB6A91F21A27300A3C7E3 /* SMHomeSectionModel.m in Sources */,
+				AE9BA43B20B3EFEE008B65D4 /* RewardListVC.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AEA24A8A1D5B23F600DD7939 /* HomeViewContViewController.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
+				AE9BA49320B7B1CC008B65D4 /* MyofferButton.m in Sources */,
 				AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */,
 				AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,
@@ -4398,6 +4641,7 @@
 				AE05A7351E8A6A010059C2BF /* EmallCatigroySectionView.m in Sources */,
 				AEBA44C91E88BAB3005E923B /* ServiceSKU.m in Sources */,
 				463E3AB21B23105F00E0BAF8 /* KDProgressHUD.m in Sources */,
+				AE9BA46020B41732008B65D4 /* InvitationRecordsVC.m in Sources */,
 				AECC87CC1F95F63800FCBBEC /* CatigoryCountryViewController.m in Sources */,
 				AE4B2E761F1E095600E328F7 /* MessageTopicModel.m in Sources */,
 				AEA24B8A1D5B25E000DD7939 /* searchSectionFootView.m in Sources */,
@@ -4409,6 +4653,8 @@
 				AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
+				AE9BA48720B55897008B65D4 /* RewardDetailItem.m in Sources */,
+				AE9BA45120B402E3008B65D4 /* ExtractionBVC.m in Sources */,
 				463E3ABE1B23105F00E0BAF8 /* UIView+KDUtilities.m in Sources */,
 				AE9414D6206B966800D636A0 /* PeiperGroup.m in Sources */,
 				463E3AB91B23105F00E0BAF8 /* NSDate+KDUtilities.m in Sources */,

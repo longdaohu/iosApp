@@ -29,6 +29,8 @@
 #import "DiscountVC.h"
 #import "MQChatViewManager.h"
 #import "MeiqiaServiceCall.h"
+#import "RewardVC.h"
+#import "InvitationVC.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -51,9 +53,7 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page个人中心"];
-    
     NavigationBarHidden(YES);
-    
     [self presentViewWillAppear];
     
 }
@@ -63,11 +63,8 @@
 -(void)presentViewWillAppear{
     
     [self didClickCurrent];
-    
     [self caseLogin];
-    
     [self caseWhenUserLogout];
-    
     self.tabBarController.tabBar.hidden = NO;
     
 }
@@ -75,7 +72,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page个人中心"];
 }
 
@@ -83,7 +79,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [self makeUI];
     
 }
@@ -121,9 +116,16 @@
         XWGJAbout *mbti = [XWGJAbout cellWithLogo:@"p_rank" title:@"大学排名" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         mbti.action = NSStringFromSelector(@selector(caseRank));
 
+        XWGJAbout *invitation = [XWGJAbout cellWithLogo:@"p_invitation" title:@"邀请有礼"  sub_title:nil accessory_title: @"坐享最高800现金奖励" accessory_icon:nil] ;
+        invitation.item_Type = XWGJAboutTypeInvitaion;
+        invitation.action = NSStringFromSelector(@selector(caseInvitation));
+        
+        XWGJAbout *reward = [XWGJAbout cellWithLogo:@"p_reward" title:@"我的奖励"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
+        reward.action = NSStringFromSelector(@selector(caseReward));
+
         XWGJAbout *service = [XWGJAbout cellWithLogo:@"p_qq" title:@"在线客服"  sub_title:nil accessory_title: nil accessory_icon:nil] ;
         service.action = NSStringFromSelector(@selector(caseQQ));
-
+        
         XWGJAbout *call = [XWGJAbout cellWithLogo:@"p_phone" title:@"客服热线"  sub_title:nil accessory_title: @"4000 666 522" accessory_icon:nil] ;
         call.action = NSStringFromSelector(@selector(casePhone));
         
@@ -133,7 +135,7 @@
     
         NSMutableArray *z_group = [NSMutableArray arrayWithObjects:wdsq,nil];
         NSMutableArray *a_group = [NSMutableArray arrayWithObjects:znpp, mbti,nil];
-        NSMutableArray *b_group = [NSMutableArray arrayWithObjects:service, call,question,nil];
+        NSMutableArray *b_group = [NSMutableArray arrayWithObjects:invitation,reward,service, call,question,nil];
         
         [_groups addObjectsFromArray:@[z_group,a_group,b_group]];
     }
@@ -297,9 +299,11 @@
         return status_cell;
  
     }
-    
     PersonCell *cell = [PersonCell cellWithTableView:tableView];
     [cell bottomLineShow:(indexPath.row != (rows.count - 1))];
+    if (item.item_Type == XWGJAboutTypeInvitaion) {
+        [cell redSpodShow:YES];
+    }
     cell.item = item;
     
     return cell;
@@ -309,7 +313,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray  *rows = self.groups[indexPath.section];
-    
     XWGJAbout *item = rows[indexPath.row];
     
     return  item.cell_height;
@@ -325,60 +328,38 @@
     return HEIGHT_ZERO;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSArray  *rows = self.groups[indexPath.section];
-    
     XWGJAbout *item = rows[indexPath.row];
     
     
     if (item.item_Type == XWGJAboutTypeServiceStatus) {
-        
         [self.serviceHistoryView serviceHishtoryShow:YES];
-        
     }else{
-    
- 
         if (item.action.length > 0) {
-            
             [self performSelector:NSSelectorFromString(item.action) withObject:nil afterDelay:0.0];
-            
         }
-    
     }
-    
  
 }
 
 #pragma mark : UIScrollViewDelegate
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
     
     CGFloat offset_y = scrollView.contentOffset.y;
-    
     if (offset_y < -XSCREEN_WIDTH  && scrollView.isDragging) {
-        
         scrollView.contentOffset = CGPointMake(0, -XSCREEN_WIDTH);
-    
     }
-    
     
     CGFloat origin_y =  self.tableView.tableHeaderView.mj_h - XSCREEN_HEIGHT;
-
     if (offset_y > self.header_topView.mj_h) {
-        
          self.colorView.mj_y =  22 - XSCREEN_HEIGHT;
-        
     }else{
-    
         self.colorView.mj_y = origin_y -(scrollView.contentOffset.y);
-        
     }
-    
     
 }
 
@@ -522,11 +503,20 @@
 - (void)caseDiscount{
     
     [self pushWithVC:NSStringFromClass([DiscountVC class])];
-    
+}
+//邀请有礼
+- (void)caseInvitation{
+ 
+    [self pushWithVC:NSStringFromClass([InvitationVC class])];
+
 }
 
+//我的奖励
+- (void)caseReward{
 
-
+    RequireLogin
+    [self pushWithVC:NSStringFromClass([RewardVC class])];
+}
 
 //跳转
 - (void)pushWithVC:(NSString *)vcStr{

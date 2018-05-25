@@ -15,4 +15,6 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 - (void)bottomLineShow:(BOOL)show;
+- (void)redSpodShow:(BOOL)show;
+
 @end

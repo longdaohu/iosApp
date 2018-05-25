@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//typedef  NSString * (^optionBlcok)();
+
 @interface ShareButton : UIButton
 
 +(instancetype)myShareButtonWithNormalTitle:( NSString *)normal_title seletedTitle:(NSString * )selected_title normalImage:(NSString *)normal_Image seletedImage:(NSString *)selected_Image actionType:(NSInteger)shareType;

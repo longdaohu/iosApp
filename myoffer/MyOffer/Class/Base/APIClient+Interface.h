@@ -152,5 +152,20 @@
 #define kAPISelectorStatusDetail @"GET api/account/apply-process/"
 //获取用户优惠券
 #define kAPISelectorCoupons @"GET svc/marketing/coupons/get"
+//获取用户可提取现金
+#define kAPISelectorUserCashBalance @"GET svc/promotion/cash-balance"
+//获取用户已提取现金列表
+#define kAPISelectorUserCashApplyItems @"GET /svc/promotion/cash-apply/items"
+//获取用户已提取详情
+#define kAPISelectorUserCashApplyDetail @"GET svc/promotion/cash-apply/detail/"
+//获取被推荐用户列表
+#define kAPISelectorPromotionItems @"GET svc/promotion/items"
+//获取被推荐用户状态
+#define kAPISelectorPromotionStateItems @"GET svc/promotion/state-items"
+//获取被推荐用户详情
+#define kAPISelectorPromotionItemDetail @"GET /svc/promotion/detail/"
+//发起提现
+#define kAPISelectorPromotionCashApply @"POST /svc/promotion/cash-apply"
+
 
 
