@@ -4835,7 +4835,10 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
@@ -4894,7 +4897,10 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.com.uvic.myoffer;
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";

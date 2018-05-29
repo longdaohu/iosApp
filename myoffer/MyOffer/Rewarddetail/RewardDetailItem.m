@@ -16,7 +16,8 @@
     if (!_statusGroup) {
         
         RewardDetailCelltem *stateDisplay = [RewardDetailCelltem itemWithTitle:@"状态" sub:self.stateDisplay];
-        RewardDetailCelltem *amount = [RewardDetailCelltem itemWithTitle:@"消耗的现金券" sub:[NSString stringWithFormat:@"-%@",self.amount]];
+        NSString *sub = [self.amount isEqualToString:@"0"] ? @"0" :[NSString stringWithFormat:@"-%@",self.amount];
+        RewardDetailCelltem *amount = [RewardDetailCelltem itemWithTitle:@"消耗的现金券" sub:sub];
         _statusGroup = @[stateDisplay,amount];
     }
     

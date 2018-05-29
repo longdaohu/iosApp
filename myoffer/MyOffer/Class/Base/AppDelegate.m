@@ -146,15 +146,11 @@ static AppDelegate *__sharedDelegate;
 {
     /* 打开调试日志 */
     [[UMSocialManager defaultManager] openLog:YES];
-    
     /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"5668ea43e0f55af981002131"];
-    
     [self configUSharePlatforms];
-    
     //友盟统计
     [self umengTrack];
-    
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
  
 }

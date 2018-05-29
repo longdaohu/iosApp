@@ -10,13 +10,10 @@
 #import "UniversitydetailNew.h"
 
 typedef void(^shareBlock)(NSString *item);
-
 @interface ShareNViewController : UIViewController
 @property(nonatomic,strong)NSDictionary *shareInfor;
-
 + (instancetype)shareView;
 - (instancetype)initWithUniversity:(UniversitydetailNew *)Uni;
-
 - (void)show;
 
 @end

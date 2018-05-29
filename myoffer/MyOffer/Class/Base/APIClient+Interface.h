@@ -166,6 +166,8 @@
 #define kAPISelectorPromotionItemDetail @"GET /svc/promotion/detail/"
 //发起提现
 #define kAPISelectorPromotionCashApply @"POST /svc/promotion/cash-apply"
+//推广统计摘要
+#define kAPISelectorPromotionSummary @"GET svc/promotion/summary"
 
 
 

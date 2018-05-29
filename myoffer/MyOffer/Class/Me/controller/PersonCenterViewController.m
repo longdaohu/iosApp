@@ -506,9 +506,26 @@
 }
 //邀请有礼
 - (void)caseInvitation{
- 
-    [self pushWithVC:NSStringFromClass([InvitationVC class])];
 
+    RequireLogin
+    WeakSelf
+    [self startAPIRequestWithSelector:kAPISelectorPromotionSummary  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+        [weakSelf caseInvitationActivityWithResponse:response];
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) { }];
+}
+
+- (void)caseInvitationActivityWithResponse:(id)response{
+    
+     //网络请求出错
+    if (!ResponseIsOK) {
+        [MBProgressHUD showMessage:NetRequest_ConnectError];
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    NSString *path = [NSString stringWithFormat:@"https://m.myofferdemo.com/invitation-activity.html?rewarded=%@&waitAward=%@&total=%@",result[@"rewarded"],result[@"waitAward"],result[@"total"]];
+    WebViewController *vc = [[WebViewController alloc] initWithPath:path];
+    vc.title = @"邀请有礼";
+    PushToViewController(vc);
 }
 
 //我的奖励
@@ -531,8 +548,6 @@
     PushToViewController([[NSClassFromString(vcStr)  alloc] init]);
  
 }
-
-
 
 - (void)caseTapUserHeader{
     

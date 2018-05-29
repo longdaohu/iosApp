@@ -48,7 +48,7 @@
     }
     RewardDetailItem *detail = [RewardDetailItem mj_objectWithKeyValues:response[@"result"]];
     myofferGroupModel *one = [myofferGroupModel groupWithItems:detail.statusGroup header:@""];
-    myofferGroupModel *two = [myofferGroupModel groupWithItems:detail.userGroup header:@"消耗的现金券"];
+    myofferGroupModel *two = [myofferGroupModel groupWithItems:detail.userGroup header:@"收款账户信息"];
     myofferGroupModel *three = [myofferGroupModel groupWithItems:detail.stateHistory header:@"进度详情"];
     self.groups = @[one,two,three];
     
@@ -62,7 +62,7 @@
 
 - (void)makeUI{
     
-    self.title = @"明细";
+    self.title = @"详情";
     [self makeTableView];
 }
 

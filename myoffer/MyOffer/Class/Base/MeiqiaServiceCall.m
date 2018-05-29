@@ -43,7 +43,7 @@
         }
         [chatViewManager setLoginMQClientId:clientId_offLine];
     }
-    [MQManager setScheduledAgentWithAgentId:@"538999aef992e2fc4f4cfc8ae250e6cc" agentGroupId:nil  scheduleRule:MQScheduleRulesRedirectNone];
+//    [MQManager setScheduledAgentWithAgentId:@"538999aef992e2fc4f4cfc8ae250e6cc" agentGroupId:nil  scheduleRule:MQScheduleRulesRedirectNone];
     [chatViewManager pushMQChatViewControllerInViewController:vc];
 }
 /*

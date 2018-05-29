@@ -29,7 +29,7 @@
 
 - (void)makeUI{
     
-    self.title = @"明细";
+    self.title = @"详情";
     [self makeTableView];
 }
 

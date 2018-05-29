@@ -16,17 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self makeUI];
 }
 
 - (void)makeUI{
     
     self.title = @"兑换和提取";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[UIButton new]];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
 - (IBAction)back:(id)sender {
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

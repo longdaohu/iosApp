@@ -31,8 +31,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    InvitationRecordsVC *vc = [[InvitationRecordsVC alloc] init];
-    PushToViewController(vc);
+
 }
 
 - (void)didReceiveMemoryWarning {

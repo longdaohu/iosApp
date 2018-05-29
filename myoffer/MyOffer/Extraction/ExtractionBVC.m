@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *cardTF;
 @property (weak, nonatomic) IBOutlet UITextField *bankTF;
 @property(nonatomic,strong)NSMutableDictionary *parameters;
+@property (weak, nonatomic) IBOutlet UIButton *nextBnt;
 
 @end
 
@@ -37,7 +38,7 @@
     return _parameters;
 }
 
-- (IBAction)next:(id)sender {
+- (IBAction)next:(UIButton *)sender {
     
     [self.view endEditing:YES];
     
@@ -60,6 +61,7 @@
         return;
     }
  
+    sender.enabled = NO;
     [self.parameters setValue:bankAccount forKey:@"bankAccount"];
     [self.parameters setValue:bankName forKey:@"bankName"];
     [self.parameters setValue:bankReceiptName forKey:@"bankReceiptName"];
@@ -68,18 +70,19 @@
         [weakSelf updateUIWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         [MBProgressHUD showMessage:NetRequest_ConnectError];
+        sender.enabled = YES;
     }];
 
 }
 
 - (void)updateUIWithResponse:(id)response{
     
+    self.nextBnt.enabled = YES;
     //网络请求出错
     if (!ResponseIsOK) {
         [MBProgressHUD showMessage:NetRequest_ConnectError];
         return;
     }
-    
     ExtractionSuccessedVC *vc = [[ExtractionSuccessedVC alloc] init];
     PushToViewController(vc);
 

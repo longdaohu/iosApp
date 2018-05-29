@@ -18,12 +18,16 @@
 #import "IntelligentResultViewController.h"
 #import "CatigoryViewController.h"
 #import "MessageDetaillViewController.h"
+#import "InvitationRecordsVC.h"
+#import "ShareNViewController.h"
 
 
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
-@property(nonatomic,strong)MBProgressHUD *hud;
+//@property(nonatomic,strong)MBProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 @property(nonatomic,assign)NSInteger recommendationsCount;//智能匹配数量
+@property(nonatomic,strong)ShareNViewController *shareVC;
+@property(nonatomic,strong)UIView *progressView;
 @end
 
 @implementation WebViewController
@@ -44,7 +48,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.hud hideAnimated:YES];
+//    [self.hud hideAnimated:YES];
     
     [MobClick endLogPageView:[self page]];
 }
@@ -112,12 +116,48 @@
     if ([self.web_wk canGoBack] ) {
         
         [self.web_wk goBack];
-        [self.hud hideAnimated:YES];
+//        [self.hud hideAnimated:YES];
         
     }else{
         
          [self casePop];
     }
+}
+
+- (ShareNViewController *)shareVC{
+    
+    if (!_shareVC) {
+        
+        NSString *shareURL = self.path;
+        NSString *shareTitle = @"你的好友邀你一起赚现金，成功留学就差这一步！";
+        NSString *shareContent = @"800元福利一键收入囊中，留学宜早不宜晚~";
+        NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
+        [shareInfor setValue:shareURL forKey:@"shareURL"];
+        [shareInfor setValue:shareTitle forKey:@"shareTitle"];
+        [shareInfor setValue:shareContent forKey:@"shareContent"];
+        [shareInfor setValue:@"plat" forKey:@"plat"];
+
+        _shareVC = [ShareNViewController shareView];
+        _shareVC.shareInfor = shareInfor;
+        [self addChildViewController:_shareVC];
+        [self.view addSubview:self.shareVC.view];
+        
+    }
+    
+    return _shareVC;
+}
+
+- (UIView *)progressView{
+    
+    if (!_progressView) {
+        
+        _progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
+        _progressView.layer.cornerRadius = 1.5;
+        _progressView.backgroundColor = XCOLOR_RED;
+        [self.view addSubview:_progressView];
+    }
+    
+    return _progressView;
 }
 
 - (void)casePop{
@@ -134,10 +174,8 @@
     NSString *userAgent = [NSString stringWithFormat:@"%@%@",bundleName,version];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:userAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
-    
     NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.path]];
     [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-    
     
     if([self.path hasSuffix:@"agreement.html"]){
 
@@ -177,7 +215,7 @@
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
-   self.hud = [MBProgressHUD showMessage:nil toView:self.view];
+//   self.hud = [MBProgressHUD showMessage:nil toView:self.view];
  
 }
 
@@ -189,7 +227,7 @@
 //    a_list[index].setAttribute('style','display:inline-block; overflow:hidden;');
     [webView evaluateJavaScript:jumpF completionHandler:nil];
     
-    [self.hud hideAnimated:YES];
+//    [self.hud hideAnimated:YES];
  
 }
 
@@ -198,7 +236,7 @@
     
     [KDAlertView showMessage:GDLocalizedString(@"NetRequest-connectError") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
   
-    [self.hud hideAnimated:YES];
+//    [self.hud hideAnimated:YES];
 }
 
 
@@ -206,26 +244,35 @@
 {
 //    app:jump/openURL/http://www.baidu.com
 //    app:jump/1/35
-//    app:jump/1/32
-//    app:jump/1/34
 //    app:jump/0/undefined
     
     NSString *absoluteString = navigationAction.request.URL.absoluteString;
+    if ([absoluteString isEqualToString:@"myoffer://jump-from-share"]) {
+        
+        [self caseShare];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+    if ([absoluteString isEqualToString:@"myoffer://view-all"]) {
+
+        [self caseViewAll];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+        
+    
+    
     
     //通知内在网页跳转
     NSString *pre_str = @"app:jump/openURL/";
     if ([absoluteString hasPrefix:pre_str]) {
  
         [MobClick event:@"activity_ms"];
-
         NSString *path = [absoluteString substringFromIndex:pre_str.length];
         if (![path hasPrefix:@"http"]) {
-            
             path = [NSString stringWithFormat:@"http://%@",path];
         }
-        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
-        
         decisionHandler(WKNavigationActionPolicyCancel);
         
         return;
@@ -233,17 +280,13 @@
 
     //空白页
     if ([absoluteString isEqualToString:@"about:blank"]) {
-        
         decisionHandler(WKNavigationActionPolicyCancel);
-
         return;
     }
     
     //文章详情
     NSString *article_rule =@"^http(s)?://www.(myofferdemo.com|myoffer.cn)/article/[0-9]+.html";
     if([self matchWithPath:absoluteString rule:article_rule] && ![self.path isEqualToString:absoluteString]){
-        
-//          NSLog(@">>>>>>>文章详情>>>>>>>>> %@  ==  %@",absoluteString,self.path);
         
         NSArray *arr = [absoluteString componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"./"]];
         if(arr.count > 2){
@@ -261,8 +304,6 @@
         return;
         
     }
-    
-
     
    
     if ([absoluteString containsString:@"app:appJump"]) {
@@ -349,7 +390,6 @@
         decisionHandler(WKNavigationActionPolicyCancel);
        
     }else{
-//        NSLog(@">>>>>>>>>>>>>>>> %@  ==  %@",absoluteString,self.path);
         decisionHandler(WKNavigationActionPolicyAllow);
     }
     
@@ -500,10 +540,23 @@
     
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
        
+        self.progressView.alpha = 1;
+        self.progressView.mj_w = XSCREEN_WIDTH * [change[@"new"] floatValue];
+ 
         //不要让进度条倒着走...有时候goback会出现这种情况
         if ([change[@"new"] floatValue] < [change[@"old"] floatValue])  return;
         
-        if ([change[@"new"] floatValue] >= 1)[self.hud setHidden:YES];
+        if ([change[@"new"] floatValue] >= 1){
+            
+//            [self.hud setHidden:YES];
+            self.progressView.mj_w = XSCREEN_WIDTH;
+            [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+                self.progressView.alpha = 0;
+            } completion:^(BOOL finished) {
+                 self.progressView.mj_w = 0;
+            }];
+       
+        };
         
     }else{
         
@@ -544,16 +597,25 @@
     return [article_pre evaluateWithObject:path];
 }
 
+//分享
+- (void)caseShare{
+    
+//    NSLog(@" 分享");
+    [self.shareVC show];
 
+}
+//查看全部
+- (void)caseViewAll{
+    
+    InvitationRecordsVC *vc = [[InvitationRecordsVC alloc] init];
+    PushToViewController(vc);
+}
 
 -(void)dealloc
 {
-    
     [self.web_wk removeObserver:self forKeyPath:@"estimatedProgress"];
     KDClassLog(@"WebViewController网页  dealloc");   //可以释放
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

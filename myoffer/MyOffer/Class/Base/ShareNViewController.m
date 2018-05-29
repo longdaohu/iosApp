@@ -9,8 +9,7 @@
 #import "ShareNViewController.h"
 #import "ShareNView.h"
 
-//@interface ShareNViewController ()<UMSocialUIDelegate>
-@interface ShareNViewController ()
+@interface ShareNViewController ()<UMSocialPlatformProvider>
 @property(nonatomic,strong)ShareNView *shareView;
 @property(nonatomic,strong)UniversitydetailNew *university;
 
@@ -29,9 +28,7 @@
 - (instancetype)initWithUniversity:(UniversitydetailNew *)Uni{
     
     self = [self init];
-    
     if (self) {
-        
         self.university = Uni;
     }
     
@@ -81,9 +78,13 @@
     }else if(self.shareInfor){
         
         shareURL = self.shareInfor[@"shareURL"];
-        path = [self.shareInfor[@"icon"] toUTF8WithString];
-        NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-        shareImage = [UIImage imageWithData:ImageData];
+        if (self.shareInfor[@"icon"]) {
+            path = [self.shareInfor[@"icon"] toUTF8WithString];
+            NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            shareImage = [UIImage imageWithData:ImageData];
+        }else{
+            shareImage = [UIImage imageNamed:@"shareMyOffer"];
+        }
         shareTitle = [NSString stringWithFormat:@"%@%@",self.shareInfor[@"shareTitle"],shareURL];
         shareContent = self.shareInfor[@"shareContent"];
         shareFromPlat = self.shareInfor[@"plat"];
@@ -129,29 +130,27 @@
             break;
         case myOfferShareTypeEmail:
         {
-   
+ 
             //创建分享消息对象
             UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
             //设置文本
             messageObject.text = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
              //调用分享接口
+            
+//            - (void)shareToPlatform:(UMSocialPlatformType)platformType
+//        messageObject:(UMSocialMessageObject *)messageObject
+//        currentViewController:(id)currentViewController
+//        completion:(UMSocialRequestCompletionHandler)completion;
+            
             [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Email messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
                 if (error) {
-                    NSLog(@"************Share fail with error %@*********",error);
+                    KDClassLog(@"************Share fail with error %@*********",error);
                 }else{
-                    NSLog(@"response data is %@",data);
+                    KDClassLog(@"response data is %@",data);
                 }
             }];
             
-/*
-            NSString *shareTEXT = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:@"5668ea43e0f55af981002131"
-                                              shareText:shareTEXT
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToEmail]
-                                            delegate:self];
-  */
+
         }
             break;
             
@@ -161,7 +160,7 @@
         {
             UIPasteboard *pab = [UIPasteboard generalPasteboard];
             [pab setString:shareURL];
-            [KDAlertView showMessage:@"复制成功" cancelButtonTitle:@"好的"];
+            [MBProgressHUD showMessage:@"复制成功"];
             
         }
             break;
@@ -200,13 +199,13 @@
     messageObject.shareObject = message;
  
     //调用分享接口
+    WeakSelf;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
         if (error) {
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
         }else{
             
             if(video){
-                
                 [MobClick event:@"ALL_transpond"];
                 NSDictionary *dict = @{@"title" : message.title};
                 [MobClick event:@"Assign_ALL_transpond" attributes:dict];
@@ -223,7 +222,7 @@
                 UMSocialLogInfo(@"response data is %@",data);
             }
         }
-        [self alertWithError:error];
+        [weakSelf alertWithError:error];
     }];
 }
 
