@@ -20,7 +20,6 @@
 + (instancetype)shareView{
 
     ShareNViewController *shareVC =  [[ShareNViewController alloc] init];
-    
     return shareVC;
 }
 
@@ -35,8 +34,6 @@
     return self;
 }
 
-
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -45,9 +42,7 @@
   
     WeakSelf;
     self.shareView = [ShareNView shareViewWithAction:^(UIButton *sender, BOOL isHiden) {
-        
         if (sender) [weakSelf shareItemClick:sender];
-        
         if (isHiden) weakSelf.view.hidden = isHiden;
         
      }];
@@ -72,7 +67,7 @@
         path = [self.university.logo toUTF8WithString];
         NSData *ImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
         shareImage = [UIImage imageWithData:ImageData];
-        shareTitle = [NSString stringWithFormat:@"%@%@",self.university.name,shareURL];
+        shareTitle = [NSString stringWithFormat:@"%@",self.university.name];
         shareContent = self.university.introduction;
         
     }else if(self.shareInfor){
@@ -85,7 +80,7 @@
         }else{
             shareImage = [UIImage imageNamed:@"shareMyOffer"];
         }
-        shareTitle = [NSString stringWithFormat:@"%@%@",self.shareInfor[@"shareTitle"],shareURL];
+        shareTitle = [NSString stringWithFormat:@"%@",self.shareInfor[@"shareTitle"]];
         shareContent = self.shareInfor[@"shareContent"];
         shareFromPlat = self.shareInfor[@"plat"];
         
@@ -93,7 +88,7 @@
         
         shareImage = [UIImage imageNamed:@"shareMyOffer"];
         shareURL   = [NSString stringWithFormat:@"http://www.myoffer.cn/ad/landing/app_promotion"];
-        shareTitle = [NSString stringWithFormat:@"跨境的全球留学生服务生态圈——myOffer%@",shareURL];
+        shareTitle = [NSString stringWithFormat:@"跨境的全球留学生服务生态圈——myOffer"];
         shareContent =  GDLocalizedString(@"About_shareSummary");
         
     }
@@ -104,14 +99,7 @@
     
     switch (sender.tag) {
         case myOfferShareTypeWeiXin:{
-//                BOOL wx = [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession];
-//                if (!wx) {
-//                    [MBProgressHUD showError:@"请先安装微信app"];
-//                    return;
-//                }
-            
-            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession message:shareObject video:(shareFromPlat.length > 0)];
-
+             [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession message:shareObject video:(shareFromPlat.length > 0)];
         }
             break;
         case myOfferShareTypeFriend:  //朋友圈
@@ -171,13 +159,17 @@
             UIImage *imageToShare = shareImage;
             NSURL *urlToShare = [NSURL URLWithString:shareURL];
             NSArray *activityItems = @[textToShare, imageToShare, urlToShare];
-            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+            UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
             NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
                                             UIActivityTypePostToFacebook,
                                             UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo];
-            controller.excludedActivityTypes = excludedActivities;
-            [self presentViewController:controller animated:YES completion:nil];
+            activityVC.excludedActivityTypes = excludedActivities;
+            if ( [activityVC respondsToSelector:@selector(popoverPresentationController)] ) {
+                 activityVC.popoverPresentationController.sourceView = self.view;
+             }
+            
+            [self presentViewController:activityVC animated:YES completion:nil];
         }
             
             break;
@@ -189,15 +181,46 @@
     
 }
 
-
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType message:(UMShareWebpageObject *)message video:(BOOL)video
 {
+    NSString *alert = @"";
+    switch (platformType) {
+        case UMSocialPlatformType_QQ: case UMSocialPlatformType_Qzone:
+        {
+            BOOL qq = [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_QQ];
+            if(!qq){
+                alert = @"请确认是否安装QQ";
+            }
+        }
+            break;
+        case UMSocialPlatformType_WechatSession : case UMSocialPlatformType_WechatTimeLine:
+        {
+            BOOL wx = [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession];
+            if(!wx){
+                alert = @"请确认是否安装微信";
+            }
+        }
+            break;
+        case UMSocialPlatformType_Sina:{
+            BOOL sina = [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_Sina];
+            if(!sina){
+                alert = @"请确认是否装微博";
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if(alert.length > 0){
+        [MBProgressHUD showMessage:alert];
+        return;
+    }
+    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-
     //分享消息对象设置分享内容对象
     messageObject.shareObject = message;
- 
     //调用分享接口
     WeakSelf;
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {

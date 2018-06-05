@@ -15,4 +15,19 @@
     return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
 
+- (NSString *)toDecimalStyleString{
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSNumber *number = [NSNumber numberWithFloat:self.floatValue];
+    NSString *numberString = [numberFormatter stringFromNumber: number];
+    
+    return numberString;
+}
+
+
+
+
+
 @end

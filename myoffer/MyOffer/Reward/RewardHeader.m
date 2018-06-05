@@ -84,13 +84,14 @@
 - (void)setDollor:(NSString *)dollor{
     _dollor = dollor;
     
+    NSString *money = [dollor toDecimalStyleString];
     if (_isMoney) {
-         NSString *dollor_a = [NSString stringWithFormat:@"￥%@",dollor];
+         NSString *dollor_a = [NSString stringWithFormat:@"￥%@",money];
          NSMutableAttributedString *atti = [[NSMutableAttributedString alloc] initWithString:dollor_a];
         [atti addAttribute:NSFontAttributeName  value:XFONT(15) range:NSMakeRange(0, 1)];
          self.dollarLab.attributedText = atti;
     }else{
-        self.dollarLab.text = dollor;
+        self.dollarLab.text = money;
     }
     
 }

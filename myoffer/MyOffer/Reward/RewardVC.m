@@ -65,13 +65,8 @@
     
     RewardHeader *header = [[RewardHeader alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 158)];
     self.tableView.tableHeaderView = header;
-    
- //    self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-//    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-//    self.tableView.estimatedRowHeight = 0;
-//    self.tableView.estimatedSectionHeaderHeight = 0;
-//    self.tableView.estimatedSectionFooterHeight = 0;
-    if (@available(iOS 11.0, *)) {
+
+    if (@available(iOS 11.0, *) || @available(iOS 12.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }else {
 //        self.tableView.contentInset = UIEdgeInsetsMake(Nav_Height, 0, 0, 0);
@@ -144,7 +139,6 @@
         [MBProgressHUD showMessage:@"您的余额不足无法发起该操作"];
         return;
     }
-  
     ExchangeAVC *vc = [[ExchangeAVC alloc] init];
     vc.dollor = self.balance;
     PushToViewController(vc);

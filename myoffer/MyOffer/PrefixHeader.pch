@@ -21,8 +21,11 @@
 #define SCREEN_SCALE  [UIScreen mainScreen].bounds.size.height/568
 #define XSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define XSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IsiPhoneBigScreen (XSCREEN_WIDTH >=375.0f && XSCREEN_HEIGHT >=812.0f&& Is_Iphone)
+#define XTabBarHeight  (CGFloat)(IsiPhoneBigScreen?(83):(49))
 #define XNAV_HEIGHT  (XSCREEN_HEIGHT > 800.0 ? 88.0 : 64.0)
-#define XStatusBar_Height  (XSCREEN_HEIGHT == 812.0 ? 44.0 : 20.0)
+#define XStatusBar_Height  (XSCREEN_HEIGHT > 812.0 ? 44.0 : 20.0)
 #define FLOWLAYOUT_SubW  (XSCREEN_WIDTH - 41) / 3
 #define FLOWLAYOUT_CityW  XSCREEN_WIDTH / 3
 #define MASSAGE_HEADER_HIGHT  XSCREEN_WIDTH * 0.3 + 50
@@ -55,6 +58,7 @@
 #define KEY_SIZE  @"size"
 #define KEY_ALL  @"全部"
 #define KEY_EMPTY_STRING  @""
+#define KEY_RECOMMEND @"recommend"
 #define Parameter_Size 10
 #define FontWithSize(size)  [UIFont systemFontOfSize:size]
 #define FONTSIZE(size)   XSCREEN_WIDTH > 375 ? size + 1 :size
@@ -92,8 +96,9 @@
 #define ResponseIsOK  [response[@"msg"] isEqualToString:@"ok"]
 
 
-#define DOMAINURL  @"https://www.myofferdemo.com/"
-//#define DOMAINURL  @"https://www.myoffer.cn/"
+
+//#define DOMAINURL  @"https://www.myofferdemo.com/"
+#define DOMAINURL  @"https://www.myoffer.cn/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"
@@ -144,6 +149,7 @@
 #import "myofferBaseTableViewController.h"
 #import "UIAlertController+alert.h"
 #import "NSString+extent.h"
+#import "NewRecommedView.h"
 
 
 #endif

@@ -17,6 +17,20 @@
     UITapGestureRecognizer *_endEditingTapGestureRecognizer;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    //用于判断是否显示 推荐提示信息
+    NSString *value = [USDefault valueForKey:KEY_RECOMMEND];
+    if (value.length == 0 && ![[NewRecommedView defaultView] hadBeenDone] && !self.presentingViewController && self.navigationController.childViewControllers.count <= 1) {
+           [[NewRecommedView defaultView]  showRecommend];
+     }else{
+        [[NewRecommedView defaultView] hidenAnimate:NO];
+    }
+  
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
 
     [super viewWillDisappear:animated];

@@ -40,22 +40,37 @@
 
 - (IBAction)next:(UIButton *)sender {
     
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
     
     NSString *bankAccount = self.cardTF.text;
     NSString *bankName = self.bankTF.text;
     NSString *bankReceiptName = self.nameTF.text;
     NSString *alert = @"";
-    if (bankReceiptName.length == 0) {
+    BOOL isAlert = NO;
+    if (bankReceiptName.length == 0 && !isAlert) {
         alert = @"请输入持卡人姓名";
+        isAlert = YES;
     }
-    if (bankAccount.length == 0) {
+    if (bankReceiptName.length > 16 && !isAlert) {
+        alert = @"“持卡人姓名”格式错误，请输入16个字符以内的文本";
+        isAlert = YES;
+    }
+    if (bankAccount.length == 0 && !isAlert) {
         alert = @"请输入储蓄卡卡号";
+        isAlert = YES;
     }
-    if (bankName.length == 0) {
+    if (bankAccount.length > 19 && !isAlert) {
+        alert = @"“银行卡卡号”格式错误，请输入19位以内的数字";
+        isAlert = YES;
+    }
+    if (bankName.length == 0 && !isAlert) {
         alert = @"请输入开户银行名称";
+        isAlert = YES;
     }
-    
+    if (bankName.length > 32 && !isAlert) {
+        alert = @"“开户银行”格式错误，请输入32个字符以内的文本";
+        isAlert = YES;
+    }
     if (alert.length>0) {
         [MBProgressHUD showMessage:alert];
         return;

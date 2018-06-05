@@ -34,7 +34,6 @@
 - (void)makeTableView{
 
     self.tableView.tableFooterView =[[UIView alloc] init];
- 
     UINib *xib = [UINib nibWithNibName:@"RewardListCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RewardListCell"];
     self.tableView.estimatedRowHeight = 75;//很重要保障滑动流畅性

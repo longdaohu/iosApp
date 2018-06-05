@@ -30,7 +30,6 @@
 #import "MQChatViewManager.h"
 #import "MeiqiaServiceCall.h"
 #import "RewardVC.h"
-#import "InvitationVC.h"
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -499,9 +498,9 @@
     [self pushWithVC:NSStringFromClass([OrderViewController class])];
 
 }
-//折扣
+//我的优惠
 - (void)caseDiscount{
-    
+    RequireLogin
     [self pushWithVC:NSStringFromClass([DiscountVC class])];
 }
 //邀请有礼

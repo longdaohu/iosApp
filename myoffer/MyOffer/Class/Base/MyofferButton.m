@@ -51,7 +51,6 @@
 
     
     CGSize  contentSize = self.bounds.size;
-
     CGRect titleRect  = self.titleLabel.frame;
     CGRect imageeRect  = self.imageView.frame;
     

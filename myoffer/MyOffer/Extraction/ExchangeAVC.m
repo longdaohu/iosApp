@@ -20,8 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"兑换和提取";
-    self.dollarLab.text = self.dollor;
-
+    self.dollarLab.text = [self.dollor toDecimalStyleString];
 }
 
 - (IBAction)next:(id)sender {

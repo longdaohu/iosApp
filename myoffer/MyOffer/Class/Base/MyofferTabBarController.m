@@ -47,7 +47,6 @@
     [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
     [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
     self.tabBar.tintColor = XCOLOR(43, 193, 245, 1);
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
 
 }
@@ -64,6 +63,13 @@
     item.titlePositionAdjustment = UIOffsetMake(0, -2);
 }
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+ 
+    if ([item.title isEqualToString:@"个人中心"]) {
+        [[NewRecommedView defaultView] hadBeenSaw];
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     

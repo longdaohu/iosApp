@@ -20,11 +20,8 @@
 
 + (instancetype)updateView{
     
-
     MyofferUpdateView *updateView = [[MyofferUpdateView  alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
-    
     [[[[UIApplication sharedApplication] delegate] window] addSubview:updateView];
-
 
     return updateView;
 }
@@ -37,8 +34,7 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
-
-        
+ 
         CGFloat bg_Width =  320;
         CGFloat bg_X =  (frame.size.width - bg_Width) * 0.5;
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(bg_X, 0, bg_Width, 0)];
@@ -57,11 +53,9 @@
         CGFloat icon_Y =  0;
         self.iconView.frame = CGRectMake(icon_X, icon_Y, icon_Width, icon_Height);
         iconView.transform = CGAffineTransformScale(iconView.transform, 0.1, 0.1);
-        
-        
+ 
         bgView.mj_h = icon_Height;
-        
-        
+ 
         UIButton *dis_Btn = [[UIButton alloc] init];
         [bgView addSubview:dis_Btn];
         [dis_Btn setTitle:@"下次再说" forState:UIControlStateNormal];
@@ -125,9 +119,7 @@
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-        
         self.iconView.transform = CGAffineTransformIdentity;
-        
         
     } completion:^(BOOL finished) {
         
@@ -135,9 +127,7 @@
         [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseOut animations:^{
             
             self.dis_Btn.mj_x = (self.bgView.mj_w - self.dis_Btn.width) * 0.5;
-            
             self.update_Btn.mj_x = (self.bgView.mj_w - self.update_Btn.width) * 0.5;
-            
             
         } completion:^(BOOL finished) {
             
@@ -148,12 +138,7 @@
             }];
         }];
         
-        
-        
     }];
-    
-    
-
     
 }
 
@@ -162,13 +147,9 @@
 - (void)updateViewDismiss{
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
         self.alpha = 0;
-        
     } completion:^(BOOL finished) {
-        
         [self removeFromSuperview];
-        
     }];
  
 }
@@ -176,13 +157,9 @@
 //跳转到appstore下载页面
 
 - (void)toAppStore{
-
     NSString *appid = @"1016290891";
-    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
-                                                                     
                                                                      @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appid]]];
-    
 }
 
 

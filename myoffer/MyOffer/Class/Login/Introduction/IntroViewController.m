@@ -27,12 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [self makeUi];
+    [self makeUI];
     
 }
 
 
-- (void)makeUi{
+- (void)makeUI{
 
     UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
     bgView.pagingEnabled = YES;
@@ -146,14 +146,12 @@
         
         self.enterBtn.alpha = alpha;
         self.versionView.alpha = alpha;
-        
-        
+ 
         CGRect newVersionRect  = self.versionView_Frame_O;
         newVersionRect.size.height = alpha * self.versionView_Frame_O.size.height;
         self.versionView.frame = newVersionRect;
         self.versionView.center = CGPointMake(XSCREEN_WIDTH * 0.5, self.versionView_Frame_O.size.height * 0.5 +  self.versionView_Frame_O.origin.y);
-        
-        
+ 
         CGRect newEnterRect  = self.enterBtn_Frame_O;
         newEnterRect.size.height = alpha * self.enterBtn_Frame_O.size.height;
         self.enterBtn.frame = newEnterRect;
@@ -161,24 +159,16 @@
  
     }
     
-    
-    
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
         self.focusView.center = [self.pageView.subviews[self.currentPage] center];
-
     }];
     
-    
 }
-
-
 
 - (void)onClick:(UIButton *)sender{
 
     [self dismiss];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

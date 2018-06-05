@@ -212,6 +212,7 @@
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
+		AE5C824920C13E2F00EB3F82 /* NewRecommedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178AE2071FE67006B311A /* UniversityDetailRank.m */; };
 		AE6178B62072381D006B311A /* DiscountItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178B52072381D006B311A /* DiscountItem.m */; };
@@ -314,7 +315,6 @@
 		AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */; };
 		AE9BA42E20B3BA8E008B65D4 /* RewardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */; };
 		AE9BA42F20B3BA8E008B65D4 /* RewardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */; };
-		AE9BA43220B3BAFF008B65D4 /* InvitationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */; };
 		AE9BA43520B3C426008B65D4 /* RewardHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43420B3C426008B65D4 /* RewardHeader.m */; };
 		AE9BA43B20B3EFEE008B65D4 /* RewardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA43920B3EFEE008B65D4 /* RewardListVC.m */; };
 		AE9BA43C20B3EFEE008B65D4 /* RewardListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9BA43A20B3EFEE008B65D4 /* RewardListVC.xib */; };
@@ -892,6 +892,8 @@
 		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
+		AE5C824720C13E2F00EB3F82 /* NewRecommedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRecommedView.h; sourceTree = "<group>"; };
+		AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRecommedView.m; sourceTree = "<group>"; };
 		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
 		AE6178AD2071FE67006B311A /* UniversityDetailRank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversityDetailRank.h; sourceTree = "<group>"; };
@@ -1065,8 +1067,6 @@
 		AE9BA42B20B3BA8E008B65D4 /* RewardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardVC.h; sourceTree = "<group>"; };
 		AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardVC.m; sourceTree = "<group>"; };
 		AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardVC.xib; sourceTree = "<group>"; };
-		AE9BA43020B3BAFF008B65D4 /* InvitationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationVC.h; sourceTree = "<group>"; };
-		AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationVC.m; sourceTree = "<group>"; };
 		AE9BA43320B3C426008B65D4 /* RewardHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardHeader.h; sourceTree = "<group>"; };
 		AE9BA43420B3C426008B65D4 /* RewardHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardHeader.m; sourceTree = "<group>"; };
 		AE9BA43820B3EFEE008B65D4 /* RewardListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardListVC.h; sourceTree = "<group>"; };
@@ -2780,15 +2780,6 @@
 			path = UMAnalytics_Sdk_3.6.6;
 			sourceTree = "<group>";
 		};
-		AE9BA42920B3BA00008B65D4 /* Invitation */ = {
-			isa = PBXGroup;
-			children = (
-				AE9BA43020B3BAFF008B65D4 /* InvitationVC.h */,
-				AE9BA43120B3BAFF008B65D4 /* InvitationVC.m */,
-			);
-			path = Invitation;
-			sourceTree = "<group>";
-		};
 		AE9BA42A20B3BA17008B65D4 /* Reward */ = {
 			isa = PBXGroup;
 			children = (
@@ -2797,6 +2788,8 @@
 				AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */,
 				AE9BA43320B3C426008B65D4 /* RewardHeader.h */,
 				AE9BA43420B3C426008B65D4 /* RewardHeader.m */,
+				AE5C824720C13E2F00EB3F82 /* NewRecommedView.h */,
+				AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */,
 			);
 			path = Reward;
 			sourceTree = "<group>";
@@ -2809,7 +2802,6 @@
 				AE9BA44820B3FCCA008B65D4 /* Extraction */,
 				AE9BA44220B3FA0C008B65D4 /* Rewarddetail */,
 				AE9BA43720B3EF76008B65D4 /* RewardList */,
-				AE9BA42920B3BA00008B65D4 /* Invitation */,
 				AE9BA42A20B3BA17008B65D4 /* Reward */,
 			);
 			name = Recommend;
@@ -4546,6 +4538,7 @@
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
+				AE5C824920C13E2F00EB3F82 /* NewRecommedView.m in Sources */,
 				AE033FD120182EA700D1D425 /* myOfferPageViewController.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */,
@@ -4608,7 +4601,6 @@
 				AEA24B8D1D5B25E000DD7939 /* SearchViewCell.m in Sources */,
 				AE033FD42018395900D1D425 /* myOfferMenuItem.m in Sources */,
 				AECC87DD1F95F63800FCBBEC /* RankTypeHeaderView.m in Sources */,
-				AE9BA43220B3BAFF008B65D4 /* InvitationVC.m in Sources */,
 				AEA249AA1D5B215300DD7939 /* OrderViewController.m in Sources */,
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
 				AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */,

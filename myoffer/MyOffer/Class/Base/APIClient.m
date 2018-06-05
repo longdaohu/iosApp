@@ -220,7 +220,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     
     NSURL *url =[newPath containsString:@"tips.json"]?[NSURL URLWithString:newPath]:[NSURL URLWithString:newPath relativeToURL:_endPoint];
     
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
     request.timeoutInterval = 15;
@@ -233,7 +232,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
             [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 NSString *encodedKey = [self encodedString:key];
                 NSString *encodedValue = [self encodedString:obj];
-                
                 [pairs addObject:[NSString stringWithFormat:@"%@=%@", encodedKey, encodedValue]];
             }];
             NSString *query = [pairs componentsJoinedByString:@"&"];
@@ -252,7 +250,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         }
         
         [request setHTTPBody:data];
-        
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
  
@@ -293,7 +290,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     
     [_URLSession finishTasksAndInvalidate];
-    
 }
 
 - (void)dealloc{

@@ -35,6 +35,7 @@
     [self.view addSubview:tableView];
     tableView.backgroundColor = XCOLOR_BG;
     self.tableView.estimatedSectionFooterHeight = 0;
+   
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {

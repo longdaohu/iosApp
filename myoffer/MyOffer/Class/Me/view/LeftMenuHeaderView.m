@@ -51,9 +51,7 @@
     _user = user;
     
     self.nameLabel.text = user.displayname;
-    
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:user.portraitUrl] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
-    
 }
 
 

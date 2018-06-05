@@ -77,26 +77,19 @@ static AppDelegate *__sharedDelegate;
     //控制器初始化
     MyofferTabBarController *mainTabBarController  = [[MyofferTabBarController alloc] init];
     self.mainTabBarController = mainTabBarController;
-
     self.window.rootViewController = mainTabBarController;
 
-    
     [self.window makeKeyAndVisible];
     
-    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
     
     //产品引导页面
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
-        
         [self.window.rootViewController presentViewController:[[IntroViewController alloc] init] animated:NO completion:nil];
-        
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }
-    
 
 }
 -(void)JpushWithOptions:(NSDictionary *)launchOptions //极光推送
@@ -422,7 +415,6 @@ static AppDelegate *__sharedDelegate;
 - (void)saveLogOutDate:(NSString *)timeStr
 {
 //    NSLog(@" %@  <<<<<<保存过期登录时间>>>>>",timeStr);
-
     [[NSUserDefaults standardUserDefaults] setValue:timeStr forKey:@"logout_date"];
     [[NSUserDefaults standardUserDefaults]  synchronize];
 }

@@ -23,7 +23,6 @@
 
 
 @interface WebViewController ()<WKNavigationDelegate,WKUIDelegate>
-//@property(nonatomic,strong)MBProgressHUD *hud;
 @property(nonatomic,strong)WKWebView *web_wk;
 @property(nonatomic,assign)NSInteger recommendationsCount;//智能匹配数量
 @property(nonatomic,strong)ShareNViewController *shareVC;
@@ -128,7 +127,8 @@
     
     if (!_shareVC) {
         
-        NSString *shareURL = self.path;
+        NSString *path = [NSString stringWithFormat:@"%@ad/landing/38.html?accountId=%@",DOMAINURL,[MyofferUser defaultUser].user_id];
+        NSString *shareURL = path;
         NSString *shareTitle = @"你的好友邀你一起赚现金，成功留学就差这一步！";
         NSString *shareContent = @"800元福利一键收入囊中，留学宜早不宜晚~";
         NSMutableDictionary *shareInfor = [NSMutableDictionary dictionary];
@@ -141,7 +141,6 @@
         _shareVC.shareInfor = shareInfor;
         [self addChildViewController:_shareVC];
         [self.view addSubview:self.shareVC.view];
-        
     }
     
     return _shareVC;
@@ -394,6 +393,18 @@
     }
     
 }
+/*
+ 白屏问题
+  方法1：
+ 当 WKWebView 总体内存占用过大，页面即将白屏的时候，系统会调用上面的回调函数，我们在该函数里执行[webView reload](这个时候 webView.URL 取值尚不为 nil）解决白屏问题。在一些高内存消耗的页面可能会频繁刷新当前页面，H5侧也要做相应的适配操作
+ 方法2：
+ 检测 webView.title 是否为空
+ 可以在 viewWillAppear 的时候检测 webView.title 是否为空来 reload 页面
+ */
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
+    
+    [webView reload];
+}
 
 -(void)pageWithResponse:(NSDictionary *)responseJSON{
 
@@ -600,10 +611,9 @@
 //分享
 - (void)caseShare{
     
-//    NSLog(@" 分享");
     [self.shareVC show];
-
 }
+
 //查看全部
 - (void)caseViewAll{
     

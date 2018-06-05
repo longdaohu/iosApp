@@ -11,6 +11,7 @@
 @interface NSString (extent)
 
 - (NSString *)toUTF8WithString;
+- (NSString *)toDecimalStyleString;
 
 @end
 

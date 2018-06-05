@@ -36,6 +36,7 @@
 #import "SuperMasterViewController.h"
 #import "GuideOverseaViewController.h"
 #import "DiscountVC.h"
+#import "NewRecommedView.h"
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
@@ -51,15 +52,10 @@
 @property(nonatomic,strong)NSMutableArray *groups;
 //轮播图数据
 @property(nonatomic,strong)NSArray *banner;
-
 @property(nonatomic,strong)UIView *topView;
-
 @property(nonatomic,strong)HomeHeaderFrame *headerFrame;
-
 @property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
-
 @property(nonatomic,assign)BOOL hadShowNeWVersion;
-
 @end
 
 
@@ -74,7 +70,7 @@
     [self presentViewWillAppear];
     
     [UIApplication sharedApplication].statusBarStyle = (self.currentStatusBarStyle ==  UIStatusBarStyleLightContent ) ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
-    
+ 
 }
 
 //页面出现时预加载功能
@@ -118,7 +114,6 @@
     [self makeUI];
     
     [self makeOther];
-    
 }
 
 -(void)makeOther{
@@ -321,11 +316,9 @@
     self.topView = topView;
     
     self.currentStatusBarStyle = UIStatusBarStyleLightContent;
+ 
     
 }
-
-
-
 
 - (HomeHeaderFrame *)headerFrame{
 
@@ -589,11 +582,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (0 == indexPath.section) {
-        
         [self CaseSearchResultWithindexPath:indexPath];
-
     }
-    
 }
 #pragma mark : HomeHeaderViewDelegate
 -(void)HomeHeaderViewWithTag:(NSInteger )tag
@@ -654,37 +644,25 @@
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         // 网络请求完成之后就会执行，NSURLSession自动实现多线程
-        
-
         if (data && (error == nil)) {
-  
             // 网络访问成功
             NSError *error;
             id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
             NSDictionary *appInfo = (NSDictionary *)jsonObject;
             
- 
-            
             NSArray *store_results = appInfo[@"results"];
             NSString *storeVersionStr = [[store_results objectAtIndex:0] objectForKey:@"version"];
             NSString *storeVersion = [storeVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
-            
 //                    NSLog(@" itunes.apple  %@  %@",[NSThread currentThread],storeVersionStr);
-
             
             NSDictionary *appDic = [[NSBundle mainBundle] infoDictionary];
             NSString *ccurrentVersionStr = [appDic objectForKey:@"CFBundleShortVersionString"];
             NSString *currentVersion = [ccurrentVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
-            
             self.hadShowNeWVersion = YES;
-
             if (storeVersion.integerValue <= currentVersion.integerValue) return ;
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //更新UI操作
-                //.....
                 [[MyofferUpdateView updateView] show];
-                
             });
             
             
