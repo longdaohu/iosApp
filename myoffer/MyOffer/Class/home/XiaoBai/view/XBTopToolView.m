@@ -51,6 +51,7 @@
         
         
         self.bgView =[[UIView alloc] init];
+//        self.bgView.backgroundColor = XCOLOR_BG;
         [self addSubview:self.bgView];
   
         self.focusView =[[UIImageView alloc] init];
@@ -169,12 +170,11 @@
     CGFloat blackY = 0;
     CGFloat blackW = contentSize.width - 2 * blackX;
     self.blackView.frame = CGRectMake(blackX, blackY, blackW, blackH);
+    
     [self makeView:self.blackView andCornerRadius: blackH * 0.5];
-
+    
     self.bgView.frame = self.blackView.frame;
-    
     self.gradient.frame = self.blackView.bounds;
-    
     
     if (self.itemArr.count) {
         
@@ -187,12 +187,9 @@
         for (NSInteger index = 0; index < self.itemArr.count; index++) {
             
             UIButton *sender = self.itemArr[index];
-            
             CGFloat btnx = btnw * index;
-            
             sender.frame = CGRectMake(btnx, btny,btnw, btnh);
         }
-  
         
         CGFloat focusx = 0;
         CGFloat focusy = 0;

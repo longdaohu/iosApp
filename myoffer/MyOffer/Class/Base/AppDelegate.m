@@ -134,7 +134,6 @@ static AppDelegate *__sharedDelegate;
   
 }
 
-
 -(void)umeng
 {
     /* 打开调试日志 */
@@ -145,7 +144,7 @@ static AppDelegate *__sharedDelegate;
     //友盟统计
     [self umengTrack];
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
- 
+
 }
 
 - (void)configUSharePlatforms

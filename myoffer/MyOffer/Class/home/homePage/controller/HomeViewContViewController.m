@@ -40,18 +40,12 @@
 
 @interface HomeViewContViewController ()<UITableViewDataSource,UITableViewDelegate,HomeSecondTableViewCellDelegate,HomeThirdTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *TableView;
-//搜索工具条
-@property(nonatomic,strong)HomeSearchView *searchView;
-//轮播图
-@property(nonatomic,strong)SDCycleScrollView *autoLoopView;
-//智能匹配数量
-@property(nonatomic,assign)NSInteger recommendationsCount;
-//下拉
-@property(nonatomic,strong)MJRefreshGifHeader *fresh_Header;
-//分组数据
-@property(nonatomic,strong)NSMutableArray *groups;
-//轮播图数据
-@property(nonatomic,strong)NSArray *banner;
+@property(nonatomic,strong)HomeSearchView *searchView;//搜索工具条
+@property(nonatomic,strong)SDCycleScrollView *autoLoopView;//轮播图
+@property(nonatomic,assign)NSInteger recommendationsCount;//智能匹配数量
+@property(nonatomic,strong)MJRefreshGifHeader *fresh_Header;//下拉
+@property(nonatomic,strong)NSMutableArray *groups;//分组数据
+@property(nonatomic,strong)NSArray *banner;//轮播图数据
 @property(nonatomic,strong)UIView *topView;
 @property(nonatomic,strong)HomeHeaderFrame *headerFrame;
 @property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
@@ -278,19 +272,14 @@
         
         
         weakSelf.banner  = [MyOfferAutoRunBanner mj_objectArrayWithKeyValuesArray:(NSArray *)response];
-        
         weakSelf.autoLoopView.imageURLStringsGroup  =  [weakSelf.banner valueForKeyPath:@"thumbnail"];
-        
         weakSelf.autoLoopView.userInteractionEnabled = weakSelf.banner.count ? YES : NO;
-        
         [weakSelf.TableView.mj_header endRefreshing];
-        
         [weakSelf.TableView reloadData];
         
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         
         weakSelf.autoLoopView.userInteractionEnabled = NO;
-        
         [weakSelf.TableView.mj_header endRefreshing];
         
     }];
@@ -755,53 +744,36 @@ ENGLISH  设置环境
 -(void)userInformation
 {
     if (!LOGIN) return;
-    
     WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
-        
         MyofferUser *user = [MyofferUser mj_objectWithKeyValues:response];
-        
         if (0 == user.phonenumber.length) [weakSelf caseBackAndLogout];
-        
-  
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
-        
     }];
     
 }
 
 //判断是否有智能匹配数据或收藏学校
--(void)checkZhiNengPiPei
-{
+-(void)checkZhiNengPiPei{
+    
     if (!LOGIN) return;
- 
      WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorZiZengPipeiGet parameters:nil showHUD:NO errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
-        
         weakSelf.recommendationsCount = response[@"university"] ? 1 : 0;
-
     }];
- 
  }
 
 //退出登录
 -(void)caseBackAndLogout
 {
-    
     if(LOGIN){
-        
         [[AppDelegate sharedDelegate] logout];
-        
         [MobClick profileSignOff];/*友盟第三方统计功能统计退出*/
-        
 //        [JPUSHService setAlias:@"" completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
 //        } seq:0 ];//Jpush设置登录用户别名
         [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         } seq:0];
         [self startAPIRequestWithSelector:kAPISelectorLogout parameters:nil showHUD:YES success:^(NSInteger statusCode, id response) {
-            
         }];
     }
     
@@ -830,13 +802,11 @@ ENGLISH  设置环境
 -(void)CasePipeiWithItemType:(HomePageClickItemType)type
 {
     self.clickType = LOGIN ? HomePageClickItemTypeNoClick : type;
-    
     switch (type) {
             
         case HomePageClickItemTypetest:
         {
             RequireLogin
-            
             [self CaseLandingPageWithBan:[NSString stringWithFormat:@"%@mbti/test",DOMAINURL]];
         }
             break;
@@ -878,14 +848,13 @@ ENGLISH  设置环境
     
     [MobClick event:@"home_shearchItemClick"];
     [self presentViewController:[[MyofferNavigationController alloc] initWithRootViewController:[[SearchViewController alloc] init]] animated:YES completion:nil];
-    
 
 }
 //跳转LandingPage
 - (void)CaseLandingPageWithBan:(NSString *)path{
   
     [MobClick event:@"home_advertisementClick"];
-    if ([path hasSuffix:@"superMentor.html"]) {
+    if ([path containsString:@"superMentor.html"]) {
         [self CaseSuperMaster];
     }else{
         PushToViewController([[WebViewController alloc] initWithPath:path]);
@@ -922,11 +891,8 @@ ENGLISH  设置环境
 -(void)userDidClickItem
 {
     if (!LOGIN) return;
-        
      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
         [self CasePipeiWithItemType:self.clickType];
-
     });
     
 }
