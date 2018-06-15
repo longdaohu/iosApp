@@ -16,7 +16,11 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeE,
     SectionGroupTypeCreateOrderMassage,
     SectionGroupTypeCreateOrderActive,
-    SectionGroupTypeCreateOrderEnjoy
+    SectionGroupTypeCreateOrderEnjoy,
+    SectionGroupTypeHotCommodities,
+    SectionGroupTypePopularActivity,
+    SectionGroupTypeHotVideo,
+    SectionGroupTypeArticleColumn,
 };
 
 @interface myofferGroupModel : NSObject
@@ -26,6 +30,7 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
 @property(nonatomic,copy)NSString *footer_title;
 @property(nonatomic,assign)CGFloat  section_footer_height;
 @property(nonatomic,assign)CGFloat  section_header_height;
+@property(nonatomic,assign)CGFloat  cell_offset_x;
 //区分组信息
 @property(nonatomic,assign)SectionGroupType type;
 //分组是否有 >箭头

@@ -12,6 +12,7 @@
 
 - (NSString *)toUTF8WithString;
 - (NSString *)toDecimalStyleString;
+- (CGSize )stringWithfontSize:(CGFloat)fontSize;
 
 @end
 

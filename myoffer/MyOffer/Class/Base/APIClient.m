@@ -215,10 +215,13 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         
         parameters = newParameters;
     }
-    
+ 
+ 
+    NSURL *url =[NSURL URLWithString:newPath relativeToURL:_endPoint];
 
-    
-    NSURL *url =[newPath containsString:@"tips.json"]?[NSURL URLWithString:newPath]:[NSURL URLWithString:newPath relativeToURL:_endPoint];
+    if([newPath hasPrefix:@"http"]){
+        url =[NSURL URLWithString:newPath];
+    }
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];

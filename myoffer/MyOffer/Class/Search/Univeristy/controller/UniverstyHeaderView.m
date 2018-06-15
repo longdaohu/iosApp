@@ -12,22 +12,12 @@
 #import "UniverstyHeaderView.h"
 #import "UniversityheaderCenterView.h"
 @interface UniverstyHeaderView ()
-//上部分View
-@property(nonatomic,strong)UIView  *upView;
-//中间部分
-@property(nonatomic,strong)UniversityheaderCenterView *centerView;
-//下部分View
-@property(nonatomic,strong)UIView   *downView;
-//世界排名
-@property(nonatomic,strong)UILabel *QSrankLab;
-//本国排名
-@property(nonatomic,strong)UILabel *TIMESLab;
-////标签
-//@property(nonatomic,strong)UILabel *tagOneLab;
-////标签
-//@property(nonatomic,strong)UILabel *tagTwoLab;
-//收藏、分享
-@property(nonatomic,strong)UniversityRightView *rightView;
+@property(nonatomic,strong)UIView  *upView;//上部分View
+@property(nonatomic,strong)UniversityheaderCenterView *centerView;//中间部分
+@property(nonatomic,strong)UIView   *downView;//下部分View
+@property(nonatomic,strong)UILabel *QSrankLab;//世界排名
+@property(nonatomic,strong)UILabel *TIMESLab;//本国排名
+@property(nonatomic,strong)UniversityRightView *rightView;//收藏、分享
 
 @end
 

@@ -45,6 +45,7 @@
 #define XCOLOR_DESC   XCOLOR(128,128,128,1)
 #define XCOLOR_SUBTITLE  XCOLOR(170,170,170,1)
 #define XCOLOR_LIGHTBLUE  XCOLOR(5,203,249,1)
+#define XCOLOR_RANDOM XCOLOR(arc4random()%250,arc4random()%250,arc4random()%250,1)
 #define XFONTNAME  @"HelveticaNeue-Light"
 #define DEFAULT_NUMBER 99999
 #define RANK_TI  @"ranking_ti"
@@ -150,6 +151,7 @@
 #import "UIAlertController+alert.h"
 #import "NSString+extent.h"
 #import "NewRecommedView.h"
+#import "myofferGroupModel.h"
 
 
 #endif

@@ -66,13 +66,9 @@
 - (void)makeUI{
     
     [self makeTableView];
-    
     self.canScroll = YES;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
-
 }
 
 - (void)makeBaseData{
@@ -84,11 +80,9 @@
         [self startAPIRequestWithSelector:kAPISelectorMessageCenterTopic  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
             
             NSArray *items = [MessageHotTopicMedel mj_objectArrayWithKeyValuesArray:response[@"items"]];
-            
             //判断表格是否可以滚动
             self.canScroll = items.count > 0;
             if (items.count == 0) {
-                
                 // 没有数据时头部View为空
                 self.tableView.tableHeaderView = [UIView new];
                 return ;

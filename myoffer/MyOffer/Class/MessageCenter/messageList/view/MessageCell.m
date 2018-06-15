@@ -121,14 +121,13 @@
         time  = messageFrame.News.update_at;
 
      }
-    
+ 
     [self.Logo KD_setImageWithURL:path];
     self.titleLab.text = messageFrame.News.title;
     [self.update_at_Btn setTitle:time forState:UIControlStateNormal];
     [self.view_count_Btn setTitle:messageFrame.News.view_count forState:UIControlStateNormal];
     [self.tag_Btn setTitle:messageFrame.News.category_thr forState:UIControlStateNormal];
-
-
+ 
     self.Logo.frame = messageFrame.LogoFrame;
     self.titleLab.frame = messageFrame.TitleFrame;
     self.update_at_Btn.frame = messageFrame.TimeFrame;

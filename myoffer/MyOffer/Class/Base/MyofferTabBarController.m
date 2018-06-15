@@ -15,6 +15,7 @@
 #import "ApplyViewController.h"
 #import "NotificationViewController.h"
 #import "MyOfferLoginViewController.h"
+#import "HomeIndexVC.h"
 
 @interface MyofferTabBarController ()
 @property(nonatomic,strong)UIImage *navigationBgImage;
@@ -35,7 +36,9 @@
     mvc.title = @"个人中心";
     MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
     msvc.title = @"资讯宝典";
-    HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
+//    HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
+//    home.title =@"发现";
+    HomeIndexVC *home =[[HomeIndexVC alloc] init];
     home.title =@"发现";
     self.viewControllers = @[[[MyofferNavigationController alloc] initWithRootViewController:home],
                              [[MyofferNavigationController alloc] initWithRootViewController:cvc],

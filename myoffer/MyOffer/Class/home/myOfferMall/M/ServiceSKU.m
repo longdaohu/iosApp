@@ -12,12 +12,14 @@
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     
-    return @{@"service_id" : @"_id"};
+    return @{
+             @"service_id" : @"_id",
+             @"sku_id" : @"id"
+             };
     
 }
 
 -(NSString *)cover_path{
-    
     
   return   [self.cover_url toUTF8WithString];
     

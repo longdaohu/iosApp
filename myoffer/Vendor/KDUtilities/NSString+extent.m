@@ -27,7 +27,13 @@
 }
 
 
-
-
+- (CGSize )stringWithfontSize:(CGFloat)fontSize{
+    
+    if (!fontSize || fontSize == 0) {fontSize = 14;}
+    NSDictionary *dic = @{ NSFontAttributeName:[UIFont systemFontOfSize:fontSize] };
+    CGSize titleSize =   [self sizeWithAttributes:dic];
+    
+    return   titleSize;
+}
 
 @end

@@ -23,5 +23,7 @@
 @property(nonatomic,strong)NSDictionary *comment_country;
 @property(nonatomic,strong)NSDictionary *comment_suit_people;
 @property(nonatomic,strong)NSDictionary *comment_present;
+@property(nonatomic,copy)NSString *coverUrl;
+@property(nonatomic,copy)NSString *sku_id;
 
 @end

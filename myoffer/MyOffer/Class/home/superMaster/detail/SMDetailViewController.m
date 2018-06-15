@@ -353,16 +353,26 @@
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    _backButton.frame = CGRectMake(10, 20, 40, 40);
     [self.bgView addSubview:_backButton];
+    CGFloat top_y = IsiPhoneBigScreen ? 40 : 20;
+    CGFloat btn_w = 40;
+    CGFloat btn_h = btn_w;
+    [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(btn_w, btn_h));
+        make.left.mas_equalTo(self.view.mas_left).mas_offset(10);
+        make.top.mas_equalTo(self.view.mas_top).mas_offset(top_y);
+    }];
  
     _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_shareBtn addTarget:self action:@selector(caseShare) forControlEvents:UIControlEventTouchUpInside];
     [_shareBtn  setImage:[UIImage imageNamed:@"Uni_share"] forState:UIControlStateNormal];
-    _shareBtn.frame = CGRectMake(XSCREEN_WIDTH - 50, 20, 40, 40);
     [self.bgView addSubview:_shareBtn];
-    
-    
+    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(btn_w, btn_h));
+        make.right.mas_equalTo(self.view.mas_right).mas_offset(-10);
+        make.top.mas_equalTo(self.view.mas_top).mas_offset(top_y);
+    }];
+ 
     CGFloat tb_y = CGRectGetMaxY(self.bgView.frame);
     CGFloat tb_x = 0;
     CGFloat tb_w = XSCREEN_WIDTH;
