@@ -8,7 +8,7 @@
 
 #import "MyofferOnColumnFilterView.h"
 #import "UniversityCourseFilterCell.h"
-#import "MyofferButton.h"
+#import "AppButton.h"
 
 @interface MyofferOnColumnFilterView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *topView;
@@ -81,9 +81,9 @@
        
         NSArray *items =  groups[index];
         NSString *title = items.firstObject;
-        MyofferButton *item = [[MyofferButton alloc] init];
+        AppButton *item = [[AppButton alloc] init];
         item.type = MyofferButtonTypeImageRight;
-        item.margin_between = 5;
+        item.margin = 5;
         [item setImage:XImage(@"Triangle_Black_Down") forState:UIControlStateNormal];
         [self.topView addSubview:item];
         item.titleLabel.font = XFONT(16);

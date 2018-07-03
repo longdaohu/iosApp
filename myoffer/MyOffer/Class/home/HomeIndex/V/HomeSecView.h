@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface HomeSecView : UIView
 @property(nonatomic,strong)myofferGroupModel  *group;
 @property(nonatomic,assign)CGFloat leftMargin;

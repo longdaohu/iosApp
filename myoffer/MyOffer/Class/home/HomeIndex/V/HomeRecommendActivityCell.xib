@@ -23,11 +23,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSo-nL-d7A">
                         <rect key="frame" x="195" y="0.0" width="160" height="228.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_AU" translatesAutoresizingMaskIntoConstraints="NO" id="G6s-5A-P5n">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_AU" translatesAutoresizingMaskIntoConstraints="NO" id="G6s-5A-P5n">
                                 <rect key="frame" x="0.0" y="0.0" width="160.5" height="107"/>
+                                <color key="backgroundColor" red="1" green="0.67680293989999996" blue="0.67796183789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_HK" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-21-ebG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_HK" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-21-ebG">
                                 <rect key="frame" x="0.0" y="122" width="160.5" height="106.5"/>
+                                <color key="backgroundColor" red="1" green="0.91019994370000001" blue="0.87255402380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -42,7 +44,7 @@
                             <constraint firstAttribute="trailing" secondItem="L0k-21-ebG" secondAttribute="trailing" id="yPu-cD-FQC"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="into005.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="X1y-Wd-Tod">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_recomment_active_cash.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X1y-Wd-Tod">
                         <rect key="frame" x="20" y="0.0" width="160" height="228.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="X1y-Wd-Tod" secondAttribute="height" multiplier="163:233" id="egK-9G-IdS"/>
@@ -52,9 +54,9 @@
                 <constraints>
                     <constraint firstItem="iSo-nL-d7A" firstAttribute="height" secondItem="X1y-Wd-Tod" secondAttribute="height" id="4KN-hv-CxU"/>
                     <constraint firstItem="X1y-Wd-Tod" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4kn-1U-nP6"/>
+                    <constraint firstAttribute="bottom" secondItem="X1y-Wd-Tod" secondAttribute="bottom" priority="750" constant="20" id="ItI-sH-tmc"/>
                     <constraint firstItem="X1y-Wd-Tod" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="NGC-eo-wht"/>
                     <constraint firstItem="iSo-nL-d7A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="O8P-C4-MNB"/>
-                    <constraint firstAttribute="bottom" secondItem="X1y-Wd-Tod" secondAttribute="bottom" priority="750" constant="15" id="WBL-ji-BNG"/>
                     <constraint firstItem="iSo-nL-d7A" firstAttribute="width" secondItem="X1y-Wd-Tod" secondAttribute="width" id="dXK-dj-L2S"/>
                     <constraint firstAttribute="trailing" secondItem="iSo-nL-d7A" secondAttribute="trailing" constant="20" id="fff-qQ-rmV"/>
                     <constraint firstItem="iSo-nL-d7A" firstAttribute="leading" secondItem="X1y-Wd-Tod" secondAttribute="trailing" constant="15" id="j8Q-dR-2tc"/>
@@ -73,6 +75,6 @@
     <resources>
         <image name="destination_AU" width="168" height="90"/>
         <image name="destination_HK" width="168" height="90"/>
-        <image name="into005.jpeg" width="750" height="1334"/>
+        <image name="home_recomment_active_cash.jpg" width="330" height="472"/>
     </resources>
 </document>

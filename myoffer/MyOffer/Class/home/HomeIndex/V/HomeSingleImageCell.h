@@ -10,5 +10,6 @@
 
 @interface HomeSingleImageCell : UICollectionViewCell
 @property(nonatomic,copy)NSString *path;
+@property(nonatomic,strong)NSDictionary *item;
 
 @end

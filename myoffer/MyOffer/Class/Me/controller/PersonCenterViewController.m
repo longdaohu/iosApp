@@ -521,7 +521,8 @@
         return;
     }
     NSDictionary *result = response[@"result"];
-    NSString *path = [NSString stringWithFormat:@"https://m.myofferdemo.com/invitation-activity.html?rewarded=%@&waitAward=%@&total=%@",result[@"rewarded"],result[@"waitAward"],result[@"total"]];
+    
+    NSString *path = [NSString stringWithFormat:@"https://m.myoffer.cn/invitation-activity.html?rewarded=%@&waitAward=%@&total=%@",result[@"rewarded"],result[@"waitAward"],result[@"total"]];
     WebViewController *vc = [[WebViewController alloc] initWithPath:path];
     vc.title = @"邀请有礼";
     PushToViewController(vc);

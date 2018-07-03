@@ -32,16 +32,16 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留学费用" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-Qm-mIZ">
                                 <rect key="frame" x="14" y="56.5" width="50" height="18"/>
-                                <color key="backgroundColor" red="1" green="0.91019994370000001" blue="0.87255402380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99607843137254903" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="YSF-gE-jH9"/>
-                                    <constraint firstAttribute="width" priority="750" constant="50" id="lqz-3b-K7i"/>
+                                    <constraint firstAttribute="width" constant="50" id="lqz-3b-K7i"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.13725490200000001" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown" translatesAutoresizingMaskIntoConstraints="NO" id="Qnq-NY-1r7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_eye" translatesAutoresizingMaskIntoConstraints="NO" id="Qnq-NY-1r7">
                                 <rect key="frame" x="79" y="58" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="14" id="Lzg-G7-U4E"/>
@@ -54,10 +54,10 @@
                                     <constraint firstAttribute="width" constant="35" id="C4s-lV-glg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.76078431369999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown" translatesAutoresizingMaskIntoConstraints="NO" id="ETo-EP-Qct">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_time" translatesAutoresizingMaskIntoConstraints="NO" id="ETo-EP-Qct">
                                 <rect key="frame" x="138" y="59" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="14" id="SFA-E6-Plp"/>
@@ -67,11 +67,11 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-04-12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-pq-0Tw">
                                 <rect key="frame" x="157" y="59.5" width="57.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.76078431369999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.9844921875" green="0.9844921875" blue="0.9844921875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Qnq-NY-1r7" firstAttribute="centerY" secondItem="qmS-Qm-mIZ" secondAttribute="centerY" id="134-nd-klD"/>
                             <constraint firstAttribute="height" priority="750" constant="85.5" id="3VZ-8h-3qM"/>
@@ -105,10 +105,11 @@
                 <outlet property="titleLab" destination="Gmj-ph-Wz6" id="zGt-9Y-HaZ"/>
                 <outlet property="viewsLab" destination="Meg-q7-C2i" id="JRe-gl-chh"/>
             </connections>
-            <point key="canvasLocation" x="-34" y="104"/>
+            <point key="canvasLocation" x="7" y="100"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="crown" width="37" height="37"/>
+        <image name="cell_eye" width="30" height="28"/>
+        <image name="cell_time" width="30" height="28"/>
     </resources>
 </document>

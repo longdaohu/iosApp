@@ -500,7 +500,8 @@
         //创建订单
         OrderItem *order = [[OrderItem alloc] init];
         order.SKU = result[@"name"];
-        order.total_fee = result[@"amount"];
+        NSString *amount =  [NSString stringWithFormat:@"%@",result[@"amount"] ];
+        order.total_fee = [amount toDecimalStyleString];
         order.order_id = result[@"orderId"];
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order = order;

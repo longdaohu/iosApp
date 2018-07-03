@@ -8,8 +8,8 @@
 
 #import "HomeSingleImageCell.h"
 @interface HomeSingleImageCell ()
-//@property (weak, nonatomic) IBOutlet
 @property(nonatomic,strong)UIImageView *iconView;
+@property(nonatomic,strong)UILabel *titleLab;
 @end
 
 @implementation HomeSingleImageCell
@@ -27,6 +27,16 @@
         iconView.layer.cornerRadius = CORNER_RADIUS;
         iconView.backgroundColor = XCOLOR_line;
         self.iconView = iconView;
+        
+        UILabel *titleLab = [UILabel new];
+        titleLab.textAlignment = NSTextAlignmentCenter;
+        titleLab.font = [UIFont boldSystemFontOfSize:13];
+        titleLab.textColor = XCOLOR_WHITE;
+        titleLab.numberOfLines = 2;
+        self.titleLab = titleLab;
+        [self.contentView addSubview:titleLab];
+        
+        
     }
     return self;
 }
@@ -36,11 +46,21 @@
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:nil];
 }
 
+- (void)setItem:(NSDictionary *)item{
+    
+    _item = item;
+    
+    [self.iconView setImage:XImage(item[@"icon"])];
+    self.titleLab.text  = item[@"name"];
+
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
 //    NSArray *items =  self.contentView.subviews;
 //    if (items.count > 0) {
         self.iconView.frame = self.contentView.bounds;
+        self.titleLab.frame = self.contentView.bounds;
 //    }
 }
 

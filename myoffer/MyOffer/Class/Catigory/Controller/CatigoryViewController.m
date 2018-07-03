@@ -397,11 +397,8 @@
 
 //从首页跳转到热门留学目的地
 - (void)jumpToHotCity{
-
     [self.bgView setContentOffset:CGPointZero animated:YES];
-    
     [self.topToolView setSelectedIndex:0];
-
 }
 
 //从首页跳转到热门留学目的地

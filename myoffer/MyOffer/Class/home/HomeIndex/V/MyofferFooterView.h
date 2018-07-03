@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface MyofferFooterView : UIView
+@property(nonatomic,copy)NSString *iconName;
+@property(nonatomic,copy)NSString *title;
+@property(nonatomic,copy)void(^actionBlock)(void);
+
 + (instancetype)footer;
 
 @end

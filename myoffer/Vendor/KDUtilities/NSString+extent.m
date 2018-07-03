@@ -36,4 +36,15 @@
     return   titleSize;
 }
 
+- (CGSize )sizeWithfontSize:(CGFloat)size maxWidth:(CGFloat)width{
+    
+    if (!size) {size = 14;}
+    
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
+    
+    CGRect infoRect =   [self boundingRectWithSize:CGSizeMake(width, 0)  options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    
+    return   infoRect.size;
+}
+
 @end

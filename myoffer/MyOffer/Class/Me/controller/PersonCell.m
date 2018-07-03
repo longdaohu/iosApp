@@ -51,7 +51,7 @@
         UIImageView *redSpod = [UIImageView new];
         self.redSpod = redSpod;
         redSpod.image = [UIImage KD_imageWithColor:XCOLOR_RED];
-        redSpod.layer.cornerRadius = 4;
+        redSpod.layer.cornerRadius = 5;
         redSpod.layer.masksToBounds = YES;
         redSpod.hidden = YES;
         [redSpod bringSubviewToFront:self.imageView];

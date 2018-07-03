@@ -42,13 +42,13 @@
     if (items.count == 0) return;
     
     
-    for (NSInteger index = 0; index < self.iconViews.count; index++) {
+    for (NSInteger index = 1; index < self.iconViews.count; index++) {
     
         UIImageView *item = self.iconViews[index];
         
         if (index < items.count) {
  
-            NSDictionary *dic = items[index];
+            NSDictionary *dic = items[index - 1];
             NSString *icon = [dic[@"thumbnail"] toUTF8WithString];
             [item sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:nil];
  
@@ -62,11 +62,19 @@
 
 - (void)actionClick:(UITapGestureRecognizer *)tap{
     
+    NSString *path = @"";
+    
+    if (tap.view.tag == 0) {
+        path = @"caseInvitation";
+    }else{
+         NSDictionary *dic = self.items[tap.view.tag - 1];
+        path = dic[@"url"];
+    }
     if (self.actionBlock) {
-        NSDictionary *dic = self.items[tap.view.tag];
-        self.actionBlock(dic[@"id"]);
+        self.actionBlock(path);
     }
 }
+
 
 
 @end

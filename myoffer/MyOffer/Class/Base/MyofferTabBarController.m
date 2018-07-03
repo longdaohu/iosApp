@@ -49,7 +49,7 @@
     [self tabbaritem:1 nomalImage:@"catigory_nomal" selectImage:@"catigory_select"];
     [self tabbaritem:2 nomalImage:@"liuxue_nomal" selectImage:@"liuxue_select"];
     [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
-    self.tabBar.tintColor = XCOLOR(43, 193, 245, 1);
+    self.tabBar.tintColor = XCOLOR(51, 51, 51, 1);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
 
 }
@@ -58,19 +58,20 @@
 {
     UITabBar *tabBar     = self.tabBar;
     UITabBarItem *item   = [tabBar.items objectAtIndex:index];
-    item.tag             = index;
+    item.tag = index;
     UIImage *NomalImage  = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
     UIImage *SelectImage = [UIImage imageNamed:selectName];//@"catigory_select"];
     item.image           = [NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.selectedImage   = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.titlePositionAdjustment = UIOffsetMake(0, -2);
+    
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
  
-    if ([item.title isEqualToString:@"个人中心"]) {
-        [[NewRecommedView defaultView] hadBeenSaw];
-    }
+//    if ([item.title isEqualToString:@"个人中心"]) {
+//        [[NewRecommedView defaultView] hadBeenSaw];
+//    }
     
 }
 

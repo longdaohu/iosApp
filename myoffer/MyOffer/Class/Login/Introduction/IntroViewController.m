@@ -8,183 +8,155 @@
 
 #import "IntroViewController.h"
 #import "KDBannerView.h"
+#import "IntroCell.h"
 
-@interface IntroViewController ()<UIScrollViewDelegate>
-@property(nonatomic,strong)UIScrollView *bgView;
-@property(nonatomic,strong)UIButton *enterBtn;
-@property(nonatomic,strong)UIImageView  *versionView;
+@interface IntroViewController ()
 @property(nonatomic,assign)NSInteger currentPage;
-@property(nonatomic,strong)NSArray *images;
 @property(nonatomic,strong)UIView *pageView;
 @property(nonatomic,strong)UIView *focusView;
-@property(nonatomic,assign)CGRect versionView_Frame_O;
-@property(nonatomic,assign)CGRect enterBtn_Frame_O;
+@property (weak, nonatomic) IBOutlet UICollectionView *bgView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flow;
+@property(nonatomic,strong)NSArray *items;
 
 @end
 
 @implementation IntroViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
- 
-    [self makeUI];
+- (NSArray *)items{
+    if (!_items) {
+        
+        
+        _items = @[
+                          @{
+                              @"title":@"海外留学",
+                              @"summary":@"一键智能匹配院校&专业\n极速48小时递交申请",
+                              @"icon":@"intro_01.jpg"
+                              },
+                          @{
+                              @"title":@"海外租房",
+                              @"summary":@"1、000、000+全球房源\n5分钟完成预订",
+                              @"icon":@"intro_02.jpg"
+                              },
+                          @{
+                              @"title":@"海外学费支付",
+                              @"summary":@"全球1000+所大学\n24小时随时支付",
+                              @"icon":@"intro_03.jpg"
+                              },
+                          
+                          @{
+                              @"title":@"海外名企训练营",
+                              @"summary":@"500强顶级海外企业\n职业培训/实习",
+                              @"icon":@"intro_04.jpg"
+                              },
+                          @{
+                              @"title":@"移民签证",
+                              @"summary":@"100%签证成功率 30、000+成功案例\n境内+境外权威律师团队",
+                              @"icon":@"intro_05.jpg"
+                              }
+                          ];
+    }
     
+    
+    return _items;
 }
 
 
-- (void)makeUI{
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-    UIScrollView *bgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
-    bgView.pagingEnabled = YES;
-    bgView.alwaysBounceHorizontal = YES;
-    bgView.bounces = NO;
-    bgView.showsHorizontalScrollIndicator = NO;
-    bgView.delegate = self;
-    [self.view addSubview:bgView];
-    self.bgView = bgView;
+    self.flow.itemSize = CGSizeMake(XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    self.bgView.bounces = NO;
+    [self.bgView registerClass:[IntroCell class] forCellWithReuseIdentifier:@"IntroCell"];
+    
+    [self makeUI];
 
-    self.images = @[@"into001.jpeg",@"into002.jpeg",@"into003.jpeg",@"into004.jpeg",@"into005.jpeg",@"into006.jpeg"];
-   
-    for (NSString *imageName in self.images) {
-        
-        CGFloat item_W = bgView.bounds.size.width;
-        CGFloat item_X = bgView.subviews.count * item_W;
-        CGFloat item_Y = 0;
-        CGFloat item_H = bgView.bounds.size.height;
-        UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(item_X, item_Y, item_W, item_H)];
-        bannerView.clipsToBounds = YES;
-        
-        UIImageView *banner = [[UIImageView alloc] initWithFrame:bannerView.bounds];
-        [bannerView addSubview:banner];
-        bgView.contentMode = UIViewContentModeScaleAspectFill;
-        banner.image = XImage(imageName);
-        
-        [bgView addSubview:bannerView];
-        
-    }
+}
+
+#pragma mark : UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    bgView.contentSize = CGSizeMake(bgView.subviews.count * XSCREEN_WIDTH, 0);
+    return self.items.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    WeakSelf;
+    IntroCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IntroCell" forIndexPath:indexPath];
+    cell.item = self.items[indexPath.row];
+    cell.acitonBlock = ^{
+        [weakSelf onClick];
+    };
     
-    
-    UIView *bannerView = bgView.subviews.lastObject;
-    
-    
-    UIImageView *versionView = [[UIImageView alloc] initWithImage:XImage(@"intro_version")];
-    versionView.frame = CGRectMake(0,bannerView.bounds.size.height * 0.1, bannerView.bounds.size.width, versionView.image.size.height);
-    [bannerView addSubview:versionView];
-    versionView.contentMode = UIViewContentModeScaleAspectFit;
-    self.versionView = versionView;
-    self.versionView_Frame_O= versionView.frame;
-    
-    
-    CGFloat enter_W = 152;
-    CGFloat enter_X = (XSCREEN_WIDTH - enter_W) * 0.5;
-    CGFloat enter_Y = XSCREEN_HEIGHT * 0.8;
-    CGFloat enter_H = 52;
-    UIButton *enterBtn = [[UIButton alloc] initWithFrame:CGRectMake(enter_X, enter_Y, enter_W, enter_H)];
-    [bannerView addSubview:enterBtn];
-    [enterBtn setImage:[UIImage imageNamed:@"enterButton"] forState:UIControlStateNormal];
-    enterBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [enterBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-    self.enterBtn = enterBtn;
-    self.enterBtn_Frame_O = enterBtn.frame;
-    
- 
-    [self makePageControl];
-    
+    return cell;
 }
 
 - (void)makePageControl{
     
-    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.enterBtn.frame) + 20, XSCREEN_WIDTH, 20)];
+    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT * 0.88, XSCREEN_WIDTH, 20)];
     [self.view addSubview:pageView];
     self.pageView = pageView;
     
     
     CGFloat margin = 20;
-    CGFloat spod_W = 10;
+    CGFloat spod_W = 8;
     CGFloat spod_H = spod_W;
     CGFloat spod_Y = 0;
-    CGFloat spod_X = (XSCREEN_WIDTH - self.images.count * spod_W - (self.images.count - 1)* margin) * 0.5;
+    CGFloat spod_X = (XSCREEN_WIDTH - self.items.count * spod_W - (self.items.count - 1)* margin) * 0.5;
     
-    for (NSInteger index = 0; index < self.images.count; index++) {
+    for (NSInteger index = 0; index < self.items.count; index++) {
         
         CGFloat temp_X  = (spod_W + margin) * index;
         
         UIView *spodView = [[UIView alloc] initWithFrame:CGRectMake(temp_X + spod_X, spod_Y, spod_W, spod_H)];
-        spodView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+        spodView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
         spodView.layer.cornerRadius = spod_W * 0.5;
         spodView.layer.masksToBounds = YES;
         [pageView addSubview:spodView];
-     }
-    
-    
-    UIView *focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 10)];
-    focusView.backgroundColor = XCOLOR_WHITE;
-    focusView.layer.cornerRadius = spod_W * 0.5;
+    }
+ 
+    UIView *focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 14, 14)];
+    focusView.backgroundColor = XCOLOR_LIGHTBLUE;
+    focusView.layer.cornerRadius = 7;
     focusView.layer.masksToBounds = YES;
     [pageView addSubview:focusView];
     focusView.center = [pageView.subviews.firstObject center];
     self.focusView = focusView;
+}
+- (void)makeUI{
+
+    [self makePageControl];
 }
 
 
 #pragma mark :UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
+    
     CGFloat pageWidth = scrollView.frame.size.width;
-    
     self.currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-
-    CGFloat  move = scrollView.contentOffset.x /  pageWidth;
-    
-    CGFloat  alpha = move - (NSInteger)move;
-    
-    if ((NSInteger)move == (self.images.count - 2)) {
-        
-        self.enterBtn.alpha = alpha;
-        self.versionView.alpha = alpha;
- 
-        CGRect newVersionRect  = self.versionView_Frame_O;
-        newVersionRect.size.height = alpha * self.versionView_Frame_O.size.height;
-        self.versionView.frame = newVersionRect;
-        self.versionView.center = CGPointMake(XSCREEN_WIDTH * 0.5, self.versionView_Frame_O.size.height * 0.5 +  self.versionView_Frame_O.origin.y);
- 
-        CGRect newEnterRect  = self.enterBtn_Frame_O;
-        newEnterRect.size.height = alpha * self.enterBtn_Frame_O.size.height;
-        self.enterBtn.frame = newEnterRect;
-        self.enterBtn.center = CGPointMake(XSCREEN_WIDTH * 0.5, self.enterBtn_Frame_O.size.height * 0.5 +  self.enterBtn_Frame_O.origin.y);
- 
-    }
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.focusView.center = [self.pageView.subviews[self.currentPage] center];
     }];
     
+    CGFloat  margin = (scrollView.contentSize.width -  scrollView.mj_offsetX);
+    self.pageView.hidden = (margin < scrollView.mj_w * 1.5);
+    
 }
 
-- (void)onClick:(UIButton *)sender{
-
+- (void)onClick{
     [self dismiss];
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [MobClick beginLogPageView:@"page引导页"];
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page引导页"];
-    
 }
-
 
 - (void)didReceiveMemoryWarning {  
     [super didReceiveMemoryWarning];
@@ -193,7 +165,7 @@
 
 - (void)dealloc{
     
-    KDClassLog(@"page引导页 dealloc");
+    KDClassLog(@"page引导页 + IntroViewController +  dealloc");
 }
 
 

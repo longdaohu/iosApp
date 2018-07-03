@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeApplyUniCell" rowHeight="266" id="ueX-dU-c6z" customClass="HomeApplyUniCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="292"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ueX-dU-c6z" id="VUo-Hi-1Ti">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="291.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWA-7L-6xV">
+                        <rect key="frame" x="20" y="0.0" width="335" height="264"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_application_cell_uni.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FL9-2O-2Kh">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="179"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHF-lp-3CX">
+                                <rect key="frame" x="0.0" y="179" width="335" height="85"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_apply_uni_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vnt-Az-9de">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="85"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="伦敦政治经济学院" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qU-xS-Vpc">
+                                        <rect key="frame" x="14" y="5" width="307" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.98373046880000004" green="0.98373046880000004" blue="0.98373046880000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="London School of  Eeconomics and Political (LSE)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f9-u6-5J9">
+                                        <rect key="frame" x="14" y="27" width="307" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.98373046880000004" green="0.98373046880000004" blue="0.98373046880000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="英国 | 英格兰 | 伦敦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3g2-70-QQN">
+                                        <rect key="frame" x="14" y="44" width="307" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.98373046880000004" green="0.98373046880000004" blue="0.98373046880000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMz-3w-2kD">
+                                        <rect key="frame" x="14" y="62" width="307" height="23"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.66975146809999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3g2-70-QQN" firstAttribute="top" secondItem="9f9-u6-5J9" secondAttribute="bottom" constant="5" id="6y9-lQ-jVN"/>
+                                    <constraint firstAttribute="height" constant="85" id="9Bw-Gg-mT6"/>
+                                    <constraint firstItem="9f9-u6-5J9" firstAttribute="top" secondItem="3qU-xS-Vpc" secondAttribute="bottom" constant="5" id="9fK-g1-IVd"/>
+                                    <constraint firstAttribute="bottom" secondItem="vnt-Az-9de" secondAttribute="bottom" id="EfT-vN-tOh"/>
+                                    <constraint firstItem="vnt-Az-9de" firstAttribute="top" secondItem="kHF-lp-3CX" secondAttribute="top" id="Khf-Az-Y1t"/>
+                                    <constraint firstAttribute="bottom" secondItem="cMz-3w-2kD" secondAttribute="bottom" id="N3P-Eu-UWq"/>
+                                    <constraint firstItem="cMz-3w-2kD" firstAttribute="leading" secondItem="3qU-xS-Vpc" secondAttribute="leading" id="SsI-DA-V2Y"/>
+                                    <constraint firstAttribute="trailing" secondItem="vnt-Az-9de" secondAttribute="trailing" id="Wz9-cc-f9u"/>
+                                    <constraint firstItem="3qU-xS-Vpc" firstAttribute="top" secondItem="kHF-lp-3CX" secondAttribute="top" constant="5" id="YHI-Tz-FNE"/>
+                                    <constraint firstItem="3g2-70-QQN" firstAttribute="trailing" secondItem="9f9-u6-5J9" secondAttribute="trailing" id="Yex-i0-k1x"/>
+                                    <constraint firstAttribute="trailing" secondItem="3qU-xS-Vpc" secondAttribute="trailing" constant="14" id="YjG-Kn-lBC"/>
+                                    <constraint firstItem="cMz-3w-2kD" firstAttribute="trailing" secondItem="3qU-xS-Vpc" secondAttribute="trailing" id="a2w-qM-doA"/>
+                                    <constraint firstItem="3qU-xS-Vpc" firstAttribute="leading" secondItem="kHF-lp-3CX" secondAttribute="leading" constant="14" id="iOb-UQ-WeW"/>
+                                    <constraint firstItem="cMz-3w-2kD" firstAttribute="top" secondItem="3g2-70-QQN" secondAttribute="bottom" constant="6" id="iSt-ja-kIV"/>
+                                    <constraint firstItem="9f9-u6-5J9" firstAttribute="leading" secondItem="3qU-xS-Vpc" secondAttribute="leading" id="pSd-B9-0EN"/>
+                                    <constraint firstItem="vnt-Az-9de" firstAttribute="leading" secondItem="kHF-lp-3CX" secondAttribute="leading" id="rMd-7H-0Oi"/>
+                                    <constraint firstItem="9f9-u6-5J9" firstAttribute="trailing" secondItem="3qU-xS-Vpc" secondAttribute="trailing" id="xp0-um-Yvk"/>
+                                    <constraint firstItem="3g2-70-QQN" firstAttribute="leading" secondItem="9f9-u6-5J9" secondAttribute="leading" id="yUw-0J-gBb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9075271614" green="1" blue="0.23406943869999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="FL9-2O-2Kh" firstAttribute="top" secondItem="LWA-7L-6xV" secondAttribute="top" id="2Ro-av-RPp"/>
+                            <constraint firstItem="FL9-2O-2Kh" firstAttribute="leading" secondItem="LWA-7L-6xV" secondAttribute="leading" id="49c-CC-dXW"/>
+                            <constraint firstAttribute="width" secondItem="LWA-7L-6xV" secondAttribute="height" multiplier="334:263" id="9Jn-jj-3NN"/>
+                            <constraint firstItem="kHF-lp-3CX" firstAttribute="leading" secondItem="LWA-7L-6xV" secondAttribute="leading" id="HYl-0w-sVv"/>
+                            <constraint firstItem="kHF-lp-3CX" firstAttribute="top" secondItem="FL9-2O-2Kh" secondAttribute="bottom" id="MF9-J0-dXC"/>
+                            <constraint firstAttribute="bottom" secondItem="kHF-lp-3CX" secondAttribute="bottom" id="X2z-5L-BhY"/>
+                            <constraint firstAttribute="trailing" secondItem="kHF-lp-3CX" secondAttribute="trailing" id="pH2-YH-H3P"/>
+                            <constraint firstAttribute="trailing" secondItem="FL9-2O-2Kh" secondAttribute="trailing" id="xFL-93-b1D"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="LWA-7L-6xV" firstAttribute="leading" secondItem="VUo-Hi-1Ti" secondAttribute="leading" constant="20" id="80A-oI-mIN"/>
+                    <constraint firstItem="LWA-7L-6xV" firstAttribute="top" secondItem="VUo-Hi-1Ti" secondAttribute="top" id="N8U-Ze-jdw"/>
+                    <constraint firstAttribute="trailing" secondItem="LWA-7L-6xV" secondAttribute="trailing" constant="20" id="mBR-Xw-Pyx"/>
+                    <constraint firstAttribute="bottom" secondItem="LWA-7L-6xV" secondAttribute="bottom" priority="750" constant="27.5" id="zIW-4f-eer"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLab" destination="3g2-70-QQN" id="xgG-IY-vSu"/>
+                <outlet property="bgView" destination="LWA-7L-6xV" id="xsq-fy-icL"/>
+                <outlet property="enLab" destination="9f9-u6-5J9" id="tde-ZF-Dps"/>
+                <outlet property="labelsView" destination="cMz-3w-2kD" id="6Qz-8M-gMY"/>
+                <outlet property="titleLab" destination="3qU-xS-Vpc" id="BlG-Pz-QBO"/>
+            </connections>
+            <point key="canvasLocation" x="-179.5" y="275"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="home_application_cell_uni.jpg" width="668" height="364"/>
+        <image name="home_apply_uni_bg.jpg" width="668" height="162"/>
+    </resources>
+</document>

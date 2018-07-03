@@ -21,6 +21,9 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypePopularActivity,
     SectionGroupTypeHotVideo,
     SectionGroupTypeArticleColumn,
+    SectionGroupTypeApplyUniversity,
+    SectionGroupTypeApplyDestination,
+    SectionGroupTypeApplySubject,
 };
 
 @interface myofferGroupModel : NSObject

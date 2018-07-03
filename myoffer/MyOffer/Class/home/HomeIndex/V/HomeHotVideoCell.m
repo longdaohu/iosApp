@@ -18,8 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property(nonatomic,strong)NSArray *iconViews;
-
-
+@property (weak, nonatomic) IBOutlet UIView *title_bgView;
+@property(nonatomic,strong)UIVisualEffectView *effectView;
 @end
 
 @implementation HomeHotVideoCell
@@ -40,10 +40,21 @@
         item.userInteractionEnabled = YES;
         item.tag = index;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoClick:)];
-        [item addGestureRecognizer:tap];
-    }
+        if (index == 0) {
+            [item.superview addGestureRecognizer:tap];
+        }else{
+            [item addGestureRecognizer:tap];
+         }
+     }
     
+    //  创建需要的毛玻璃特效类型
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark ];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    effectView.alpha = 0.9;
+    [self.title_bgView insertSubview:effectView  atIndex:0];
+    self.effectView = effectView;
 }
+
 - (void)setItems:(NSArray *)items{
     _items = items;
  
@@ -57,6 +68,7 @@
              [item sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:nil];
              if (index == 0) {
                  self.titleLab.text = dic[@"mainTitle"];
+                 self.nameLab.text = [NSString stringWithFormat:@"%@ %@",dic[@"guest_name"],dic[@"guest_university_name"]];
              }
          }else{
              item.userInteractionEnabled = NO;
@@ -71,6 +83,14 @@
         NSDictionary *dic = self.items[tap.view.tag];
         self.actionBlock(dic[@"id"]);
     }
+}
+
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    self.effectView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_WIDTH);
+    
 }
 
 @end

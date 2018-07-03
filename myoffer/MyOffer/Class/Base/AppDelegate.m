@@ -87,7 +87,7 @@ static AppDelegate *__sharedDelegate;
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     
     if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
-        [self.window.rootViewController presentViewController:[[IntroViewController alloc] init] animated:NO completion:nil];
+        [self.window.rootViewController presentViewController:[[IntroViewController alloc] initWithNibName:@"IntroViewController" bundle:nil] animated:NO completion:nil];
         [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
     }
 

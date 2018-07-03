@@ -66,6 +66,7 @@
     self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     
     UIScrollView *bgView = [[UIScrollView alloc] init];
+    bgView.showsHorizontalScrollIndicator = NO;
     self.bgView = bgView;
     [self addSubview:bgView];
     
@@ -148,6 +149,7 @@
 - (void)initFirstResponse{
     
     self.current_btn.transform =  CGAffineTransformMakeScale(Sender_Scale, Sender_Scale);
+    self.current_btn.titleLabel.font = Font_Black;
 }
 
 - (void)titleClick:(UIButton *)sender{
@@ -377,7 +379,7 @@
     
     CGFloat bt_x = 0;
     CGFloat bt_h = Across_Height;
-    CGFloat bt_y = self.bgView.mj_h - bt_h - 6;
+    CGFloat bt_y = self.bgView.mj_h - bt_h - 10;
     CGFloat bt_w = self.bgView.contentSize.width;
     self.acrossView.frame = CGRectMake(bt_x, bt_y, bt_w, bt_h);
     
