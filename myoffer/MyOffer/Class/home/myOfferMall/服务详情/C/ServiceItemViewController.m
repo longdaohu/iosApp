@@ -25,7 +25,7 @@
 @property(nonatomic,strong)myofferFlexibleView *flexView;//顶部下拉图片
 @property(nonatomic,strong)UniversityNavView *topNavigationView;//顶部导航View
 @property(nonatomic,strong)ServiceItemBottomView *bottomView;//底部View
-@property(nonatomic,strong)serviceProtocolVC *protocolVC;//显示协议
+@property(nonatomic,strong)serviceProtocolVC *protocalVC;//显示协议
 @property(nonatomic,strong)ServiceItemFrame *service_Frame;
 
 @end
@@ -77,21 +77,25 @@
     
     [self makeBottomView];
     
-    [self makeProtocalView];
-    
+ 
     self.view.clipsToBounds = YES;
     
 }
 
-- (void)makeProtocalView{
 
-    serviceProtocolVC *protocolVC = [[serviceProtocolVC alloc] init];
-    protocolVC.type = protocolViewTypeList;
-    self.protocolVC = protocolVC;
-    [self addChildViewController:protocolVC];
-    [self.view addSubview:protocolVC.view];
+- (serviceProtocolVC *)protocalVC{
+    
+    if (!_protocalVC) {
+        _protocalVC = [[serviceProtocolVC alloc] init];
+        _protocalVC.type = protocolViewTypeList;
+        _protocalVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+        [self addChildViewController:_protocalVC];
+        [self.view addSubview:_protocalVC.view];
+        
+    }
+    
+    return _protocalVC;
 }
-
 
 - (void)makeFlexibeView{
     
@@ -156,11 +160,8 @@
     
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-       
          [weakSelf updateUIWithresponse:response];
-        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
          [weakSelf showError];
     }];
     
@@ -176,15 +177,10 @@
     item.login_status = LOGIN;
     item.service_id = self.service_id;
     ServiceItemFrame *itemFrame = [[ServiceItemFrame alloc] init];
-    
     itemFrame.item = item;
-    
     self.service_Frame = itemFrame;
-    
     self.headerView.itemFrame = itemFrame;
-  
     self.tableView.tableHeaderView =  self.headerView;
- 
     NSString *htmlStr = [NSString stringWithFormat:@"<html> \n <head>\n  <meta name= 'viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'> <style type=\"text/css\"> \n p,img,table,hr{width:100%%!important;}\n </style> \n </head> \n  <body>%@</body> \n </html>",item.detail];
     
     [self.web_wk loadHTMLString:htmlStr baseURL:nil];
@@ -193,8 +189,6 @@
     self.bottomView.price =  item.price_str;
     
     self.topNavigationView.titleName = item.name ;
-    
-    self.protocolVC.itemFrame = itemFrame;
  
 }
 
@@ -369,7 +363,10 @@
 - (void)showProductionDescription{
 
     if(0 < self.service_Frame.item.comment_attr.count) {
-        [self.protocolVC  pageWithHiden:NO];
+        if (!self.protocalVC.itemFrame) {
+            self.protocalVC.itemFrame = self.service_Frame;
+        }
+        [self.protocalVC  pageWithHiden:NO];
     }
 
 }

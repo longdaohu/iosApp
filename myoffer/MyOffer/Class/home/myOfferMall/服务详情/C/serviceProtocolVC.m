@@ -88,8 +88,9 @@
     _itemFrame = itemFrame;
     
     self.item = itemFrame.item;
-    self.agreements = itemFrame.item.agreements;
-    
+    if (self.type == protocolViewTypeHtml) {
+        self.agreements = itemFrame.item.agreements;
+    }
     [self.tableView reloadData];
 }
 

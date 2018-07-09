@@ -95,7 +95,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                        success:(APIClientSuccessBlock)success
                                        failure:(APIClientFailureBlock)failure {
     if (!expectedStatusCode) {
-        
         expectedStatusCode = @[@(200)];
     }
 
@@ -122,13 +121,9 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         }
         
         if (data && data.length < 1000) {
-            
 //            KDClassLog(@"Response body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         }
-        
         KDClassLog(@"Request completed: [%d], %@", (int)response.statusCode, request.URL.absoluteString);
-        
-        
         
         NSError *JSONError;
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
@@ -136,12 +131,9 @@ static NSString * const kAPIEndPoint = DOMAINURL;
 //        KDClassLog(@"Error 这在这里测试服务器错误 error = %@  code = %d   statusCode = %d   \n path = %@  result =  %@  ",JSONError,JSONError.code,response.statusCode,request.URL.absoluteString,result);
         
         if (JSONError) {
-          
             KDClassLog(@"Error occurred when json serializating: %@", JSONError);
             KDClassLog(@"JSONError 出错 = %@    response.statusCode =  %d    path = %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding],response.statusCode,request.URL.absoluteString);
-            
             dispatch_async( dispatch_get_main_queue(),^{
-                
                     failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain code:kAPIClientErrorDomainCodeJSONDeserializatingError userInfo:nil]);
             });
             return;
@@ -152,12 +144,14 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                 /*
                  *  collision  : 账号合并时手机号码已存在时，出现的特殊标识  collision显示手机号码信息
                  *  error      ：后台提示错误信息
+                 *  msg      ：后台提示错误信息
                  *  NSLog(@"%@ 失败信息解析  %@",result,[result class]);
                  */
                 //失败信息解析
-                
                 NSString *errorStr = result[@"collision"] ? [NSString stringWithFormat:@"phone=%@",result[@"collision"]] : result[@"error"];
-                
+                if(!errorStr){
+                    errorStr =  result[@"msg"];
+                }
                 failure(response.statusCode, [NSError errorWithDomain:kAPIClientErrorDomain
                                                                  code:kAPIClientErrorDomainCodeUnexpectedStatusMaskCode + response.statusCode
                                                              userInfo:@{@"message": errorStr}]);
@@ -202,13 +196,8 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
             
              if ([key hasPrefix:@":"]) {
-                 
- 
                 newPath = [path stringByReplacingOccurrencesOfString:key withString:[self encodedString:obj]];
-
-
             } else {
-                
                 newParameters[key] = obj;
             }
         }];
@@ -225,6 +214,7 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
+ 
     request.timeoutInterval = 15;
     
     if ([method isEqualToString:@"GET"] ||
@@ -255,11 +245,9 @@ static NSString * const kAPIEndPoint = DOMAINURL;
         [request setHTTPBody:data];
         [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
- 
+    
      if (LOGIN) {
-     
         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
-     
      }else{
          //cookie中保存了登录信息，可能会引起数据错误
          [request setValue:@"" forHTTPHeaderField:@"Cookie"];

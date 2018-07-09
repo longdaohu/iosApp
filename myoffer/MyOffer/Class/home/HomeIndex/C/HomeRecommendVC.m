@@ -103,7 +103,6 @@
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
         return;
     }
-    self.tableView.tableHeaderView = self.header;
     
     NSArray *cover_url_arr = (NSArray *)[items valueForKeyPath:@"cover_url"];
     NSMutableArray *cover_arr = [NSMutableArray array];
@@ -115,7 +114,8 @@
     if (!self.bannerView) {
         CGFloat b_x = 20;
         CGFloat b_w = XSCREEN_WIDTH - b_x * 2;
-        CGRect banner_frame = CGRectMake(b_x, 0, b_w,self.header.mj_h - 20);
+        CGFloat b_h = b_w * 316.0/668;
+        CGRect banner_frame = CGRectMake(b_x, 0, b_w,b_h);
         self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:nil];
         [self.header addSubview:self.bannerView];
         self.bannerView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
@@ -127,7 +127,8 @@
             NSDictionary *item  = items[index];
             [weakSelf CaseLandingPage:item[@"url"]];
         };
-        
+        self.header.mj_h = (b_h + 20);
+        self.tableView.tableHeaderView = self.header;
     }
     self.bannerView.imageURLStringsGroup = cover_arr;
 }
@@ -262,9 +263,6 @@
 - (void)makeHotArticle{
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@svc/article/hotArticle",DOMAINURL_API];
-//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//        [weakSelf makHotArticleWithResponse:response];
-//    }];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makHotArticleWithResponse:response];

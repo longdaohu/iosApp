@@ -92,7 +92,8 @@
 
 - (void)makePageControl{
     
-    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT * 0.88, XSCREEN_WIDTH, 20)];
+    CGFloat pageView_y  = (XSCREEN_HEIGHT<= 480) ? XSCREEN_HEIGHT * 0.9 :XSCREEN_HEIGHT * 0.88;
+    UIView *pageView = [[UIView  alloc] initWithFrame:CGRectMake(0,pageView_y, XSCREEN_WIDTH, 20)];
     [self.view addSubview:pageView];
     self.pageView = pageView;
     

@@ -19,6 +19,11 @@
 @property(nonatomic,strong)UILabel *TimeLab;
 @property(nonatomic,strong)UIButton  *cancelBtn;
 @property(nonatomic,strong)UIButton  *payBtn;
+@property(nonatomic,strong)UIView *contactView;
+@property(nonatomic,strong)UILabel *contact_titleLab;
+@property(nonatomic,strong)UILabel *contact_subLab;
+@property(nonatomic,strong)UIButton *lookBtn;
+@property(nonatomic,strong)UIButton *downloadBtn;
 
 @end
 
@@ -35,8 +40,7 @@
         self.bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
         self.bgView.layer.shadowOpacity = 0.2;
         self.bgView.layer.shadowOffset = CGSizeMake(0, 0);
-        
-        
+ 
         self.orderDescriptionLab =[UILabel labelWithFontsize:KDUtilSize(12.5)  TextColor:XCOLOR_LIGHTGRAY TextAlignment:NSTextAlignmentLeft];
         [self.bgView addSubview:self.orderDescriptionLab];
         self.orderDescriptionLab.numberOfLines = 2;
@@ -88,18 +92,93 @@
         self.payBtn.tag = 10;
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView addSubview:self.payBtn];
+        
+        [self makeContactView];
     }
     
     
     return self;
 }
 
+- (void)makeContactView{
+ 
+    UIView *bgView = [UIView new];
+    bgView.backgroundColor = XCOLOR_WHITE;
+    [self insertSubview:bgView belowSubview:self.bgView];
+    bgView.hidden = YES;
+    self.contactView = bgView;
+    
+    UILabel *contact_titleLab =[UILabel labelWithFontsize:KDUtilSize(16)  TextColor:XCOLOR(78, 78, 78, 1) TextAlignment:NSTextAlignmentLeft];
+    [bgView addSubview:contact_titleLab];
+    contact_titleLab.text = @"合同信息";
+    self.contact_titleLab = contact_titleLab;
+    
+    
+    UILabel *contact_subLab =[UILabel labelWithFontsize:KDUtilSize(12)  TextColor:XCOLOR(187, 187, 187, 1) TextAlignment:NSTextAlignmentLeft];
+    [bgView addSubview:contact_subLab];
+    contact_subLab.text = @"合同名称:《留学产品合同》";
+    self.contact_subLab = contact_subLab;
+    
+    UIButton *lookBtn = [[UIButton alloc] init];
+    [lookBtn setTitleColor:XCOLOR(51, 51, 51, 1)   forState:UIControlStateNormal];
+    lookBtn.titleLabel.font = XFONT(12);
+    [lookBtn setTitle:@"查看"  forState:UIControlStateNormal];
+    [lookBtn addTarget:self action:@selector(lookBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:lookBtn];
+    self.lookBtn = lookBtn;
+    
+    UIButton *downloadBtn = [[UIButton alloc] init];
+    [downloadBtn setTitleColor:XCOLOR(51, 51, 51, 1)   forState:UIControlStateNormal];
+    downloadBtn.titleLabel.font = XFONT(12);
+    [downloadBtn setTitle:@"下载"  forState:UIControlStateNormal];
+    [downloadBtn setTitle:@"下载中"  forState:UIControlStateSelected];
+    [downloadBtn setTitle:@"下载完成"  forState:UIControlStateDisabled];
+    [downloadBtn addTarget:self action:@selector(downloadBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:downloadBtn];
+    self.downloadBtn = downloadBtn;
+
+}
+
+- (void)setType:(OrderDetailDownloadStyle)type{
+ 
+    _type = type;
+    
+    switch (type) {
+      case  OrderDetailDownloadStyleLoaded:
+            [self.downloadBtn setTitle:@"下载完成"  forState:UIControlStateNormal];
+            self.downloadBtn.enabled = NO;
+            break;
+       case OrderDetailDownloadStyleLoading:
+            self.downloadBtn.selected = YES;
+            break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)downloadBtnClick:(UIButton *)sender{
+    
+    //下载中 、 下载完成都不可以再点击
+    if (self.type != OrderDetailDownloadStyleNomal) return;
+    
+    if (self.orderDetailActionBlock) {
+        self.orderDetailActionBlock(YES);
+    }
+}
+
+- (void)lookBtnClick:(UIButton *)sender{
+    if (self.orderDetailActionBlock) {
+        self.orderDetailActionBlock(NO);
+    }
+}
 
 -(void)setOrderDict:(NSDictionary *)orderDict{
 
     _orderDict = orderDict;
     
-    NSString *payStr = [NSString stringWithFormat:@"￥%@元",orderDict[@"total_fee"]];
+    NSString *price = [NSString stringWithFormat:@"%@",orderDict[@"total_fee"]];
+    NSString *payStr = [NSString stringWithFormat:@"￥%@元",[price toDecimalStyleString]];
     NSMutableAttributedString *attribStr = [[NSMutableAttributedString alloc] initWithString:payStr];
     [attribStr addAttribute:NSForegroundColorAttributeName value:XCOLOR_BLACK range:NSMakeRange(1, payStr.length - 1)];
     [attribStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:KDUtilSize(13)] range:NSMakeRange(payStr.length - 1, 1)];
@@ -181,8 +260,7 @@
     CGFloat bgW = XSCREEN_WIDTH;
     CGFloat bgH = CGRectGetMaxY(self.payBtn.frame) + 10;
     self.bgView.frame = CGRectMake(bgX, bgY, bgW, bgH);
-    
-    
+ 
     self.headHeight = CGRectGetMaxY(self.bgView.frame);
  
     
@@ -236,17 +314,13 @@
         
         NSInteger hour = (NSInteger)len / 3600;
         NSInteger min =  (NSInteger)len%3600/60;
-//        NSInteger second =  (NSInteger)len % 60;
         self.TimeLab.text = (min <= 9 && hour <=0)? @"订单即将关闭，请尽快完成支付！":[NSString stringWithFormat:@"%ld小时%ld分",(long)hour,(long)min];
         
     }else  if ([orderDict[@"status"] isEqualToString:@"ORDER_CLOSED"]) {
  
           NSDictionary *log1  = logs[1];
-        
           NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。": @"支付超时，订单关闭。";
-        
           self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"]],operator];
-
     }
     
 }
@@ -271,7 +345,6 @@
     NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *currentDate=[formatter dateFromString: dateString];
-    
     NSDate *currentLocalDate=[self localDate:currentDate];
     
     NSString *currentDateString = [formatter stringFromDate:currentLocalDate];
@@ -310,7 +383,6 @@
     }
 
     
-    
     [self.payBtn setTitle:payString  forState:UIControlStateNormal];
     
      self.payBtn.backgroundColor = self.payBtn.enabled ? XCOLOR_RED : XCOLOR_LIGHTGRAY;
@@ -323,6 +395,56 @@
         
         self.actionBlock(sender);
      }
+}
+
+
+- (void)setContracturls_result:(NSDictionary *)contracturls_result{
+    _contracturls_result = contracturls_result;
+    
+    if (contracturls_result) {
+        self.contactView.hidden = NO;
+    }
+    
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+ 
+        CGSize content_size  = self.bounds.size;
+        CGFloat contact_bg_x  = 0;
+        CGFloat contact_bg_w  = content_size.width;
+        CGFloat contact_bg_h  = 71;
+        CGFloat contact_bg_y  = CGRectGetMaxY(self.bgView.frame);
+        self.contactView.frame = CGRectMake(contact_bg_x, contact_bg_y,contact_bg_w, contact_bg_h);
+        
+        
+        CGFloat title_x = 10;
+        CGFloat title_y = 15;
+        CGFloat title_w = XSCREEN_WIDTH;
+        CGFloat title_h = 20;
+        self.contact_titleLab.frame = CGRectMake(title_x, title_y, title_w, title_h);
+        
+        CGFloat sub_x = title_x;
+        CGFloat sub_w = 170;
+        CGFloat sub_h = 17;
+        CGFloat sub_y = title_y + title_h + 5;
+        self.contact_subLab.frame = CGRectMake(sub_x, sub_y, sub_w, sub_h);
+        
+        
+        CGFloat down_w = 80;
+        CGFloat down_x = content_size.width - down_w;
+        CGFloat down_h = 27;
+        CGFloat down_y = sub_y - 5;
+        self.downloadBtn.frame = CGRectMake(down_x, down_y, down_w, down_h);
+        
+        
+        CGFloat look_w = 80;
+        CGFloat look_x = down_x - look_w;
+        CGFloat look_h = down_h;
+        CGFloat look_y = down_y;
+        self.lookBtn.frame = CGRectMake(look_x, look_y, look_w, look_h);
+    
+    
 }
 
 @end

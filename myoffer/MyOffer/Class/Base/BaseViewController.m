@@ -13,7 +13,6 @@
 @implementation BaseViewController {
     NSMutableArray *_APIRequestTasks;
     MBProgressHUD *_requestHUD;
-    
     UITapGestureRecognizer *_endEditingTapGestureRecognizer;
 }
 
@@ -95,17 +94,14 @@
          
          //当返回状态为401 未登录（或状态已过期），把app退出当前登录，并不返回错误提示，当做什么事也没有发生
          if (statusCode == 401) {
-         
              [[AppDelegate sharedDelegate] logout];
              [[AppDelegate sharedDelegate] presentLoginAndRegisterViewControllerAnimated:YES];
          
          } else {
              
              if (showErrorAlert && error.code != kCFURLErrorCancelled) {
-                 
                  //特殊处理 用户第三方登录时合并账号，如果有包含字符串
                  if (![error.userInfo[@"message"] containsString:@"phone"]) {
-                 
                      [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
                      NSLog(@"服务器错误 =  %@ ",path);
 

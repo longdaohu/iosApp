@@ -74,7 +74,8 @@
 
 - (NSString *)total_fee_str{
 
-    return [NSString stringWithFormat:@"价格：%@元",self.total_fee];
+    NSString *price = [NSString stringWithFormat:@"%@",self.total_fee];
+    return [NSString stringWithFormat:@"价格：%@元",[price toDecimalStyleString]];
 }
 
 - (void)setStatus_finish:(BOOL)status_finish{

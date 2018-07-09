@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeC,
     SectionGroupTypeD,
     SectionGroupTypeE,
+    SectionGroupTypeCreateOrderContact,//合同信息
     SectionGroupTypeCreateOrderMassage,
     SectionGroupTypeCreateOrderActive,
     SectionGroupTypeCreateOrderEnjoy,

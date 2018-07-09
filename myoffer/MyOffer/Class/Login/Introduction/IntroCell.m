@@ -82,14 +82,14 @@
         self.acitonBlock();
     }
 }
-
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-
-    CGFloat icon_w =   XSCREEN_WIDTH * 0.8;
+ 
+    
+    CGFloat icon_w =  (XSCREEN_HEIGHT<= 480) ? XSCREEN_WIDTH * 0.65 : XSCREEN_WIDTH * 0.8;
     CGFloat icon_h =   icon_w * 1296.0/1038;
-    CGFloat icon_x =   XSCREEN_WIDTH * 0.1;
+    CGFloat icon_x =   (XSCREEN_WIDTH - icon_w) * 0.5;
     CGFloat icon_y =   0;
     
     CGFloat title_w =   XSCREEN_WIDTH ;
@@ -104,17 +104,20 @@
     
     CGFloat  margin = self.bounds.size.height  - (icon_h + title_h + sub_h);
     icon_y = margin * 0.4;
-    title_y =   icon_h + icon_y + 10;
+    title_y =  icon_h + icon_y + 10;
     sub_y =   title_y + title_h + 10;
-    
     self.titleLab.frame = CGRectMake(title_x, title_y, title_w,title_h);
     self.iconView.frame = CGRectMake(icon_x, icon_y, icon_w,icon_h);
     self.subLab.frame = CGRectMake(sub_x, sub_y, sub_w,sub_h);
     
     
-    CGFloat item_y = CGRectGetMaxY(self.subLab.frame) + 20;
-    CGFloat item_w = 160;
     CGFloat item_h = 50;
+    CGFloat item_y = CGRectGetMaxY(self.subLab.frame) + 20;
+    if (XSCREEN_HEIGHT<= 480 ) {
+        CGFloat margin = (XSCREEN_HEIGHT - CGRectGetMaxY(self.subLab.frame) - item_h);
+        item_y = CGRectGetMaxY(self.subLab.frame) + margin * 0.5;
+    }
+    CGFloat item_w = 160;
     CGFloat item_x = (self.bounds.size.width - item_w) * 0.5;
     self.closeBtn.frame = CGRectMake(item_x, item_y, item_w, item_h);
     

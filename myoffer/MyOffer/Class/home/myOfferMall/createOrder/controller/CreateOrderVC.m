@@ -16,18 +16,33 @@
 #import "serviceProtocolVC.h"
 #import "PayOrderViewController.h"
 #import "OrderItem.h"
+#import "CreateOrderContractCell.h"
+#import "CreateOrderUserInformationVC.h"
+#import "CreateOrderWebVC.h"
+#import "IDMPhotoBrowser.h"
+#import "SDImageCache.h"
 
 @interface CreateOrderVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *discountLab;
-@property (weak, nonatomic) IBOutlet UILabel *priceLab;
-@property (weak, nonatomic) IBOutlet UIButton *commitBtn;
+@property (weak, nonatomic) IBOutlet UILabel *priceLab;//价格标签
+@property (weak, nonatomic) IBOutlet UIButton *commitBtn;//提交按钮
 @property(nonatomic,strong)NSArray *discount_items;
-@property(nonatomic,strong)NSMutableArray *groups;
+@property(nonatomic,strong)NSMutableArray *groups;//分组数据
 @property(nonatomic,strong) UIButton *protocolBtn;
-@property(nonatomic,strong) UIButton *optionBtn;
-@property(nonatomic,strong)serviceProtocolVC *protocalVC;
+@property(nonatomic,strong) UIButton *optionBtn;//页尾标注信息
 @property(nonatomic,strong)NSMutableDictionary *parameter;
+@property(nonatomic,strong)serviceProtocolVC *protocalVC;//用户但看协议
+@property(nonatomic,strong)CreateOrderUserInformationVC *userVC;//用户填写资料页
+@property(nonatomic,assign)BOOL contractStatus;//签署状态
+@property(nonatomic,assign)BOOL contractEnable;//是否有合同
+@property(nonatomic,strong)NSDictionary *accountInformation;//获取账户身份信息
+@property(nonatomic,strong)NSDictionary *contracturls_result;//合同文件地址
+@property(nonatomic,assign)NSInteger contracturls_pages;//计算下载合同页数
+@property(nonatomic,strong)NSMutableArray *contracturlsImages;//计算下载合同图片
+@property(nonatomic,assign)BOOL contracturls_downloaded;//计算下载状态
+@property(nonatomic,assign)CreateOrderContractDownloadStyle  downloadStyle;
+@property(nonatomic,assign)BOOL fromWebViewRefresh;//签合同页面返回刷新
 
 @end
 
@@ -36,26 +51,34 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
+    NavigationBarHidden(NO);
     [MobClick beginLogPageView:@"page创建订单"];
-
+    
+    [self refresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page创建订单"];
 }
 
+- (void)refresh{
+    
+    //签合同页面返回刷新
+    if(self.fromWebViewRefresh){
+        [self makeContractStatusData];
+    }
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self makeUI];
-    
+    //签署状态
+    [self makeContractStatusData];
+    //获取账户身份信息
+    [self makeAccountData];
 }
 
 - (NSMutableArray *)groups{
@@ -63,36 +86,36 @@
     if (!_groups) {
         _groups =  [NSMutableArray array];
     }
-    
     return _groups;
 }
 
 - (NSMutableDictionary *)parameter{
-    
     if (!_parameter) {
         _parameter =  [NSMutableDictionary dictionary];
     }
-    
     return _parameter;
+}
+- (NSMutableArray *)contracturlsImages{
+    
+    if (!_contracturlsImages) {
+        _contracturlsImages =  [NSMutableArray array];
+    }
+    return _contracturlsImages;
 }
 
 
-- (void)makeData{
-    
-    //获取用户优惠券
-    NSString *path  = @"GET svc/marketing/coupons/get";
+#pragma mark :  获取用户优惠券
+- (void)makeCouponsData{
+    NSString *path  = [NSString stringWithFormat:@"GET %@svc/marketing/coupons/get",DOMAINURL];
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
     }];
-    
 }
-
 //活动通道
 - (void)updateWithResponse:(id)response{
-   
     /*
      code == 0 网络请求成功
      code > 0  网络请求不成功 不继续执行
@@ -100,7 +123,6 @@
     if ([response[@"code"] integerValue] != 0) return;
     
     NSArray *result  = response[@"result"];
-    
     //数据为 0  不继续执行
     if (result.count == 0) return;
  
@@ -140,6 +162,137 @@
     [self.tableView reloadData];
 }
 
+#pragma mark :  签署状态【loginRequired】
+- (void)makeContractStatusData{
+    WeakSelf
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-status",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:@{@"skuId":self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContractStatusWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                           }];
+}
+- (void)makeContractStatusWithResponse:(id)response{
+
+    if (!ResponseIsOK)return;
+    NSDictionary *result  = response[@"result"];
+    NSNumber *signStatus = result[@"signStatus"];
+    NSNumber *contractEnable = result[@"contractEnable"];
+    self.contractStatus = [signStatus boolValue];
+    self.contractEnable = [contractEnable boolValue];
+
+    if ([contractEnable boolValue]) {
+        
+        self.commitBtn.backgroundColor = self.contractStatus ? XCOLOR_RED : XCOLOR(180, 180, 180, 1);
+        
+        BOOL haveOrderContact  = NO;
+        for ( myofferGroupModel *group  in self.groups) {
+            if (group.type == SectionGroupTypeCreateOrderContact) {
+                haveOrderContact = YES;
+                break;
+            }
+        }
+        
+        if (!haveOrderContact) {
+            myofferGroupModel *group = [myofferGroupModel groupWithItems:@[@"合同信息"] header:nil];
+            group.type = SectionGroupTypeCreateOrderContact;
+            [self.groups addObject:group];
+        }
+        
+        [self.tableView reloadData];
+
+        [self makeContracturlsData];
+        
+        self.protocolBtn.enabled = NO;
+        self.protocolBtn.mj_x = self.optionBtn.mj_x;
+        self.optionBtn.hidden = YES;
+      }
+    
+}
+/* ------------------------------------- 签署状态【loginRequired】 -------------------------------------  */
+
+
+#pragma mark :  获取账户身份信息
+- (void)makeAccountData{
+    
+    if(!LOGIN)return;
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/accounts/id-card",DOMAINURL_API];
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeAccountWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               NSLog(@"============获取账户身份信息===失败=====  %@",error);
+    }];
+    
+}
+- (void)makeAccountWithResponse:(id)response{
+    
+    if (!ResponseIsOK) return;
+    self.accountInformation = response[@"result"];
+    
+}
+
+/* ------------------------------------- 签署状态【loginRequired】 ------------------------------------- */
+
+#pragma mark : 获取合同表单数据【loginRequired】
+- (void)makeContactFormData{
+    
+    NSString *redirect = [@"http://www.myoffer.cn/aboutus" toUTF8WithString];
+    WeakSelf
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-view-form-data",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:@{@"skuId":self.itemFrame.item.service_id,@"redirect" : redirect} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContactFormResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+    }];
+    
+}
+
+- (void)makeContactFormResponse:(id)response{
+ 
+    if (!ResponseIsOK) return;
+    
+    self.fromWebViewRefresh = YES;
+    WeakSelf;
+    NSDictionary *result  = response[@"result"];
+    CreateOrderWebVC *vc = [[CreateOrderWebVC alloc] init];
+    vc.path = @"https://sign.zqsign.com/mobileSignView";
+    vc.item = result;
+    PushToViewController(vc);
+    vc.webSuccesedCallBack = ^{
+        
+        weakSelf.contractStatus = YES;
+        weakSelf.commitBtn.backgroundColor = XCOLOR_RED;
+        [weakSelf.tableView reloadData];
+        [weakSelf makeContracturlsData];
+        
+    };
+
+}
+/* ------------------------------------- 获取合同表单数据  ------------------------------------- */
+
+
+#pragma mark : 合同文件地址【loginRequired】api/v1/contracts/contract-urls
+- (void)makeContracturlsData{
+    
+    self.fromWebViewRefresh = NO;
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/contract-urls",DOMAINURL_API];
+
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:@{@"skuId":self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContracturlsDataResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+     }];
+}
+- (void)makeContracturlsDataResponse:(id)response{
+    
+    if (!ResponseIsOK) return;
+    self.contracturls_result = response[@"result"];
+}
+/* ------------------------------------- 合同文件地址 ------------------------------------- */
+
 
 - (void)makeUI{
     
@@ -147,7 +300,6 @@
     [self makeTableView];
     self.priceLab.text = self.itemFrame.item.price_str;
     [self.parameter setValue:self.itemFrame.item.service_id  forKey:@"skuId"];
-    self.protocalVC.itemFrame = self.itemFrame;
 
 }
 
@@ -156,13 +308,11 @@
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
     self.tableView.estimatedRowHeight = 200;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.automaticallyAdjustsScrollViewInsets = NO;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    
-    
+ 
     CGFloat footer_h = 30;
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, footer_h)];
     self.tableView.tableFooterView = footer;
@@ -176,24 +326,26 @@
     
     UIButton *protocolBtn = [[UIButton alloc] init];
     self.protocolBtn = protocolBtn;
+    
     [protocolBtn setTitle:@"购买条款与协议，买家须知" forState:UIControlStateNormal];
+    protocolBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [protocolBtn.titleLabel setFont:XFONT(14)];
-    [protocolBtn sizeToFit];
     [footer addSubview:protocolBtn];
     [protocolBtn addTarget:self action:@selector(protocolClick:) forControlEvents:UIControlEventTouchUpInside];
     CGFloat sub_y = 0;
     CGFloat sub_h = footer_h;
     CGFloat sub_x = CGRectGetMaxX(optionBtn.frame) + 5;
-    CGFloat sub_w = protocolBtn.mj_w;
+    CGFloat sub_w = footer.mj_w - sub_x;
     protocolBtn.frame = CGRectMake(sub_x, sub_y, sub_w, sub_h);
     [self protocolAttribute:NO];// 下划线
     
 }
 
+
+
 - (serviceProtocolVC *)protocalVC{
     
     if (!_protocalVC) {
-        
         _protocalVC = [[serviceProtocolVC alloc] init];
         _protocalVC.type = protocolViewTypeHtml;
         _protocalVC.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
@@ -201,6 +353,25 @@
     }
     
     return _protocalVC;
+}
+
+- (CreateOrderUserInformationVC *)userVC{
+    
+    if (!_userVC) {
+        
+        WeakSelf
+        CreateOrderUserInformationVC *vc = [[CreateOrderUserInformationVC alloc] initWithNibName:@"CreateOrderUserInformationVC" bundle:nil];
+        _userVC = vc;
+        vc.actionBlock = ^{
+            [weakSelf makeContactFormData];
+        };
+        vc.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+        vc.view.backgroundColor = XCOLOR(0, 0, 0, 0.5);
+        vc.view.alpha = 0;
+        [[UIApplication sharedApplication].keyWindow addSubview:vc.view];
+    }
+    
+    return _userVC;
 }
 
 - (void)setItemFrame:(ServiceItemFrame *)itemFrame{
@@ -213,12 +384,12 @@
    
     //reduce_flag为true优惠
     if (itemFrame.item.reduce_flag) {
-      
+        
         myofferGroupModel *enjoy = [myofferGroupModel groupWithItems:nil header:@"尊享通道"];
         enjoy.type = SectionGroupTypeCreateOrderEnjoy;
         [self.groups addObject:enjoy];
-        
-        [self makeData];
+ 
+        [self makeCouponsData];
     }
 }
 
@@ -239,7 +410,18 @@
  
     myofferGroupModel *group = self.groups[indexPath.section];
  
-    if (group.type == SectionGroupTypeCreateOrderMassage) {
+    if (group.type == SectionGroupTypeCreateOrderContact) {
+        
+        WeakSelf
+        CreateOrderContractCell *cell = [[CreateOrderContractCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        cell.contactStatus = self.contractStatus;
+        cell.type = self.downloadStyle;
+        cell.actionBlock = ^(BOOL isDownLoadButtonClick) {
+            [weakSelf orderContactCellOnClick:isDownLoadButtonClick];
+        };
+        return cell;
+        
+    }else if (group.type == SectionGroupTypeCreateOrderMassage) {
         
         CreateOrderOneCell  *cell =  Bundle(@"CreateOrderOneCell");
         cell.item = group.items[indexPath.row];
@@ -251,11 +433,9 @@
         
         CreateOrderItemCell  *cell = Bundle(@"CreateOrderItemCell");
         cell.item = group;
-
         return cell;
     }
-
-    
+ 
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -267,6 +447,18 @@
     return HEIGHT_ZERO;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    
+    myofferGroupModel *group = self.groups[indexPath.section];
+
+    if (group.type == SectionGroupTypeCreateOrderContact) {
+        return  self.contractStatus ? 92 : 75;
+    }
+    
+    return UITableViewAutomaticDimension;
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -276,6 +468,21 @@
     if (SectionGroupTypeCreateOrderMassage  == group.type) {
         return;
     }
+    
+    
+    if (group.type == SectionGroupTypeCreateOrderContact) {
+ 
+        if (self.contractStatus) return;
+ 
+        self.userVC.view.alpha = 0.1;
+        self.userVC.item = self.accountInformation;
+        [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+            self.userVC.view.alpha = 1;
+        }];
+        
+        return;
+    }
+    
   
     myofferGroupModel *enjoy = nil;
     myofferGroupModel *active = nil;
@@ -414,45 +621,53 @@
     self.priceLab.text = price;//[NSString stringWithFormat:@"￥%.2f",(result_price * 0.001)];
 }
 
-//查看协议
+#pragma mark : 查看协议
 - (void)protocolClick:(UIButton *)sender{
- 
+    
+    if (!self.protocalVC.itemFrame) {
+        self.protocalVC.itemFrame = self.itemFrame;
+    }
+    
     [self.protocalVC pageWithHiden:NO];
 }
 
-//选择按钮
+#pragma mark : 选择按钮
 - (void)optionBtnClick:(UIButton *)sender{
     
     sender.selected  = !sender.selected;
  
      if (sender.selected) {
-         
          [self protocolAttribute:NO];
      }
  
 }
-
-//设置协议字符串颜色
+#pragma mark : 设置协议字符串颜色
 - (void)protocolAttribute:(BOOL)colorful{
     
     
-    UIColor *clr  = colorful ? XCOLOR_RED :XCOLOR(188, 188, 188, 1);
+    UIColor *clr  = colorful ? XCOLOR_RED : XCOLOR(188, 188, 188, 1);
     NSDictionary *attribtDic = @{
                                  NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],
                                  NSForegroundColorAttributeName: clr
                                  };
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.protocolBtn.currentTitle attributes:attribtDic];
     [self.protocolBtn setAttributedTitle:attribtStr  forState:UIControlStateNormal];
+    [self.protocolBtn  setAttributedTitle: [[NSAttributedString alloc] initWithString:@"(注：需签署合同后才可购买)" attributes:@{NSForegroundColorAttributeName: XCOLOR(188, 188, 188, 1)}] forState:UIControlStateDisabled];
 }
 
-//提交订单
+#pragma mark : 提交订单
 - (IBAction)caseCommit:(UIButton *)sender {
     
-      if (!self.optionBtn.selected) {
-        [self protocolAttribute:YES];
-        return;
+    if (self.contractEnable) {
+         if (!self.contractStatus)  return;
+    }else{
+        
+        if (!self.optionBtn.selected) {
+            [self protocolAttribute:YES];
+            return;
+        }
     }
-    
+ 
     [self orderCreate];
 }
 
@@ -477,19 +692,20 @@
     return [decNumber stringValue];
 }
 
-
-// 下单
+/*
+     NSDictionary *parameter  = @{ @"skuId": self.item.price};
+     pId:@"",//推广码Id
+     cId:@"",//优惠券码Id   优惠券id和推广码Id只可选传
+ */
+#pragma mark :  下单
 - (void)orderCreate{
-//NSDictionary *parameter  = @{ @"skuId": self.item.price};
-//pId:@"",//推广码Id
-//cId:@"",//优惠券码Id   优惠券id和推广码Id只可选传
-    WeakSelf
+     WeakSelf
     [self startAPIRequestWithSelector:@"POST svc/emall/order/create" parameters:self.parameter showHUD:YES errorAlertDismissAction:nil success:^(NSInteger statusCode, id response) {
         [weakSelf orderCreateSuccessWithResponse:response];
     }];
     
 }
-//下单成功
+#pragma mark :  下单成功
 - (void)orderCreateSuccessWithResponse:(id)response{
     
     NSNumber *code = response[@"code"];
@@ -506,13 +722,12 @@
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order = order;
         [self.navigationController pushViewController:pay animated:YES];
+        
+        [self updateOrderContactCell];
     
     }else if(code.integerValue == 2){
-      
         [self showErrorAlert];
-        
         return;
-        
     }else{
         
         NSString *msg = response[@"msg"];
@@ -527,18 +742,11 @@
     [self tableReload];
  
     //4、请求参数也要更新 再次请求数据，刷新优惠券数据
-//    NSLog(@"self.parameter.allKeys >>>>>>>> %@",self.parameter);
-    
     for (NSString *key in self.parameter.allKeys) {
-        
          NSString *value = self.parameter[key];
- 
         if ([key isEqualToString:@"id"]) {
-            
             if (value.length > 0) {
-
-//                NSLog(@"请求参数也要更新 >>>>>>>> %@ %@",key,value);
-                [self makeData];
+                [self makeCouponsData];
                 [self.parameter setValue:@"" forKey:key];
              }
          }
@@ -583,10 +791,135 @@
 - (void)clearOtherParameter{
     
     for (NSString *key in self.parameter.allKeys) {
-        
         if (![key isEqualToString:@"skuId"]) {
             [self.parameter setValue:@"" forKey:key];
          }
+    }
+}
+
+
+//提交订单后 还原合同状态
+- (void)updateOrderContactCell{
+  
+    if (!self.contractEnable) return;
+ 
+    self.contractStatus = NO;
+//    self.contractEnable = YES;
+    self.contracturls_result = nil;
+    [self.contracturlsImages removeAllObjects];
+    self.contracturls_pages = 0;
+    self.contracturls_downloaded = NO;
+    self.downloadStyle = CreateOrderContractDownloadStyleNomal;
+    self.commitBtn.backgroundColor = XCOLOR(180, 180, 180, 1);
+ 
+    [self ContractCellReload];
+    
+}
+
+#pragma mark : 合同cell点击事件处理
+- (void)orderContactCellOnClick:(BOOL)isDownLoadButtonClick{
+    
+    if (!self.contracturls_result) {
+        [self makeContracturlsData];
+        return;
+    }
+    
+     //点击下载
+    if (isDownLoadButtonClick) {
+        
+        if (self.contracturls_downloaded) return;
+        
+        self.downloadStyle = CreateOrderContractDownloadStyleLoading;
+        [self ContractCellReload];
+        
+        NSArray *imgUrls  = self.contracturls_result[@"imgUrls"];
+        for (NSInteger index  = 0 ; index < imgUrls.count; index++) {
+            
+           NSString *path = imgUrls[index];
+           __block BOOL downLoadfail = NO;
+            WeakSelf;
+            [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
+            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:path] options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                
+                if (error) {
+                    
+                    downLoadfail = YES;
+                    if (index != (imgUrls.count - 1)) return;
+
+                    [MBProgressHUD showMessage:@"合同下载失败，请重新下载！"];
+                    weakSelf.contracturls_downloaded = NO;
+                    weakSelf.contracturls_pages = 0;
+                      //下载失败 恢复下载按钮状态
+                    self.downloadStyle = CreateOrderContractDownloadStyleNomal;
+                    [self ContractCellReload];
+
+                    return ;
+                }
+                if (finished) {
+                    UIImageWriteToSavedPhotosAlbum(image, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+                }
+            }];
+        }
+ 
+        return;
+    }
+    //点击查看
+    [self showPhotoView];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    [self.contracturlsImages addObject:image];
+    ++self.contracturls_pages;
+    NSArray *imgUrls  = self.contracturls_result[@"imgUrls"];
+    if (self.contracturls_pages >=  imgUrls.count) {
+        self.contracturls_pages = 0;
+        self.contracturls_downloaded = YES;
+        [MBProgressHUD showMessage:@"合同已保存到相册，请到相册查看！"];
+        self.downloadStyle = CreateOrderContractDownloadStyleLoaded;
+        [self ContractCellReload];
+
+    }else{
+        
+        self.contracturls_downloaded = NO;
+        if (self.contracturls_pages >=  imgUrls.count) {
+            //下载失败 恢复下载按钮状态
+            self.downloadStyle = CreateOrderContractDownloadStyleNomal;
+            [self ContractCellReload];
+        }
+    }
+}
+
+//点击图片浏览器
+-(void)showPhotoView
+{
+ 
+    NSArray *imgUrls  = self.contracturls_result[@"imgUrls"];
+    NSArray *photosWithURL;
+    if (self.contracturlsImages.count > 0) {
+        photosWithURL =   [IDMPhoto photosWithImages:self.contracturlsImages];
+    }else{
+        photosWithURL =  [IDMPhoto photosWithURLs:imgUrls];
+    }
+    NSMutableArray *photos = [NSMutableArray arrayWithArray:photosWithURL];
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos];
+    [browser setInitialPageIndex:0];
+    browser.displayCounterLabel = YES;
+    browser.displayActionButton = NO;
+    [self presentViewController:browser animated:YES completion:nil];
+    
+}
+
+- (void)ContractCellReload{
+
+    for (NSInteger index = 0; index < self.groups.count; index++) {
+        
+        myofferGroupModel *group = self.groups[index];
+        if (group.type == SectionGroupTypeCreateOrderContact) {
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:index]] withRowAnimation:UITableViewRowAnimationFade];
+            return;
+        }
     }
 }
 
@@ -604,6 +937,7 @@
         [weakSelf clearOtherParameter];
         
     }];
+    
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"原价购买" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         [weakSelf clearGroupSubstring];
@@ -619,7 +953,6 @@
     [self presentViewController:alertCtrl animated:YES completion:nil];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -627,8 +960,9 @@
 
 
 - (void)dealloc{
-    
-    KDClassLog(@"创建订单页面 +  CreateOrderVC + dealloc");
+    //释放图片内存
+     [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+     KDClassLog(@"创建订单页面/订单确认页 + CreateOrderVC + dealloc");
 }
 
 @end

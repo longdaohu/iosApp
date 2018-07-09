@@ -66,11 +66,8 @@
         
         WeakSelf
         [self startAPIRequestWithSelector:@"GET docs/zh-cn/chinese-university-names.json" parameters:nil success:^(NSInteger statusCode, id response) {
-            
             weakSelf.schoolList = [response copy];
-            
             [ud setValue:self.schoolList forKey:@"uni_list"];//保存学校数据到本地，多次加载无意义
-            
             [ud synchronize];
             
         }];
@@ -190,7 +187,6 @@
     
     NSString *regex = @"[\u4e00-\u9fa5]+";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    
     if ([pred evaluateWithObject:self.searchTextField.text]) {
         [self popWithuniversityName:self.searchTextField.text];
         return;

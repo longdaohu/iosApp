@@ -196,7 +196,6 @@
     [self.view addSubview:self.web_wk];
     self.web_wk.navigationDelegate = self;
     self.web_wk.allowsBackForwardNavigationGestures = YES;
-    
     //监听网页加载进度
     [self.web_wk addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld context:nil];
     
@@ -566,11 +565,9 @@
             } completion:^(BOOL finished) {
                  self.progressView.mj_w = 0;
             }];
-       
         };
         
     }else{
-        
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }

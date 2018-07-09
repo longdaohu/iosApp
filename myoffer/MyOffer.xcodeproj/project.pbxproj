@@ -306,7 +306,6 @@
 		AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28711D77CA3C00E9A47A /* UULineChart.m */; };
 		AE6FF28B1E89073A00C2A013 /* MyOfferAutoRunBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6FF28A1E89073A00C2A013 /* MyOfferAutoRunBanner.m */; };
 		AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6FF2941E8912A200C2A013 /* ServiceItemViewController.m */; };
-		AE6FF2A11E89163600C2A013 /* EmallCatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6FF29F1E89163600C2A013 /* EmallCatigoryViewController.m */; };
 		AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6FF2A41E892A2800C2A013 /* ServiceItem.m */; };
 		AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7107AC1D76C89D00019B1F /* UniversityFooterView.m */; };
 		AE712FB61D5DBDA100D0F48A /* UniversityCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE712FB51D5DBDA100D0F48A /* UniversityCourse.m */; };
@@ -584,6 +583,10 @@
 		AECC677E20E9C6E800B1904B /* HomeRentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC677D20E9C6E800B1904B /* HomeRentCell.xib */; };
 		AECC678320EA308200B1904B /* LaunchScreen_logo_f.png in Resources */ = {isa = PBXBuildFile; fileRef = AECC678120EA308200B1904B /* LaunchScreen_logo_f.png */; };
 		AECC678420EA308200B1904B /* LaunchScreen_logo_g.png in Resources */ = {isa = PBXBuildFile; fileRef = AECC678220EA308200B1904B /* LaunchScreen_logo_g.png */; };
+		AECC678720EB5DFE00B1904B /* CreateOrderContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */; };
+		AECC678A20EB758800B1904B /* CreatOrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678920EB758800B1904B /* CreatOrderFooterView.m */; };
+		AECC678E20EB791900B1904B /* CreateOrderUserInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */; };
+		AECC678F20EB791900B1904B /* CreateOrderUserInformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */; };
 		AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87811F95F63800FCBBEC /* CatigoryViewController.m */; };
 		AECC87CA1F95F63800FCBBEC /* RankFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87831F95F63800FCBBEC /* RankFilterViewController.m */; };
 		AECC87CB1F95F63800FCBBEC /* NomalCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87861F95F63800FCBBEC /* NomalCollectionController.m */; };
@@ -613,6 +616,8 @@
 		AECC87E41F95F63800FCBBEC /* CatigorySubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C21F95F63800FCBBEC /* CatigorySubjectCell.m */; };
 		AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC87C31F95F63800FCBBEC /* CatigorySubjectCell.xib */; };
 		AECC87E71F95F63800FCBBEC /* RankTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C71F95F63800FCBBEC /* RankTypeCell.m */; };
+		AED10B9020EC9F050083AA85 /* CreateOrderWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10B8F20EC9F040083AA85 /* CreateOrderWebVC.m */; };
+		AED10B9520ECBA220083AA85 /* EmallCatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10B9420ECBA220083AA85 /* EmallCatigoryViewController.m */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
@@ -1134,8 +1139,6 @@
 		AE6FF28A1E89073A00C2A013 /* MyOfferAutoRunBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferAutoRunBanner.m; sourceTree = "<group>"; };
 		AE6FF2931E8912A200C2A013 /* ServiceItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemViewController.h; sourceTree = "<group>"; };
 		AE6FF2941E8912A200C2A013 /* ServiceItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemViewController.m; sourceTree = "<group>"; };
-		AE6FF29E1E89163600C2A013 /* EmallCatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmallCatigoryViewController.h; path = ../EmallCatigoryViewController.h; sourceTree = "<group>"; };
-		AE6FF29F1E89163600C2A013 /* EmallCatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmallCatigoryViewController.m; path = ../EmallCatigoryViewController.m; sourceTree = "<group>"; };
 		AE6FF2A31E892A2800C2A013 /* ServiceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItem.h; sourceTree = "<group>"; };
 		AE6FF2A41E892A2800C2A013 /* ServiceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItem.m; sourceTree = "<group>"; };
 		AE7107AB1D76C89D00019B1F /* UniversityFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversityFooterView.h; sourceTree = "<group>"; };
@@ -1605,6 +1608,13 @@
 		AECC677D20E9C6E800B1904B /* HomeRentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeRentCell.xib; sourceTree = "<group>"; };
 		AECC678120EA308200B1904B /* LaunchScreen_logo_f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen_logo_f.png; sourceTree = "<group>"; };
 		AECC678220EA308200B1904B /* LaunchScreen_logo_g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen_logo_g.png; sourceTree = "<group>"; };
+		AECC678520EB5DFE00B1904B /* CreateOrderContractCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderContractCell.h; sourceTree = "<group>"; };
+		AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderContractCell.m; sourceTree = "<group>"; };
+		AECC678820EB758800B1904B /* CreatOrderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatOrderFooterView.h; sourceTree = "<group>"; };
+		AECC678920EB758800B1904B /* CreatOrderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatOrderFooterView.m; sourceTree = "<group>"; };
+		AECC678B20EB791900B1904B /* CreateOrderUserInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderUserInformationVC.h; sourceTree = "<group>"; };
+		AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderUserInformationVC.m; sourceTree = "<group>"; };
+		AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderUserInformationVC.xib; sourceTree = "<group>"; };
 		AECC87801F95F63800FCBBEC /* CatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatigoryViewController.h; sourceTree = "<group>"; };
 		AECC87811F95F63800FCBBEC /* CatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatigoryViewController.m; sourceTree = "<group>"; };
 		AECC87821F95F63800FCBBEC /* RankFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankFilterViewController.h; sourceTree = "<group>"; };
@@ -1660,6 +1670,10 @@
 		AECC87C31F95F63800FCBBEC /* CatigorySubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CatigorySubjectCell.xib; sourceTree = "<group>"; };
 		AECC87C61F95F63800FCBBEC /* RankTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankTypeCell.h; sourceTree = "<group>"; };
 		AECC87C71F95F63800FCBBEC /* RankTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTypeCell.m; sourceTree = "<group>"; };
+		AED10B8E20EC9F040083AA85 /* CreateOrderWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderWebVC.h; sourceTree = "<group>"; };
+		AED10B8F20EC9F040083AA85 /* CreateOrderWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderWebVC.m; sourceTree = "<group>"; };
+		AED10B9320ECBA220083AA85 /* EmallCatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigoryViewController.h; sourceTree = "<group>"; };
+		AED10B9420ECBA220083AA85 /* EmallCatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigoryViewController.m; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUpdateView.h; sourceTree = "<group>"; };
 		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
@@ -2534,7 +2548,6 @@
 				AE50BEC4207481190002DCAC /* OrderAction */,
 				AE6178E120738B58006B311A /* OrderEnjoy */,
 				AE6178C92073286D006B311A /* controller */,
-				AE6178C82073286B006B311A /* model */,
 				AE6178C720732869006B311A /* view */,
 			);
 			path = createOrder;
@@ -2549,15 +2562,12 @@
 				AE6178D520734797006B311A /* CreateOrderItemCell.h */,
 				AE6178D620734797006B311A /* CreateOrderItemCell.m */,
 				AE6178D720734797006B311A /* CreateOrderItemCell.xib */,
+				AECC678520EB5DFE00B1904B /* CreateOrderContractCell.h */,
+				AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */,
+				AECC678820EB758800B1904B /* CreatOrderFooterView.h */,
+				AECC678920EB758800B1904B /* CreatOrderFooterView.m */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		AE6178C82073286B006B311A /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		AE6178C92073286D006B311A /* controller */ = {
@@ -2566,6 +2576,11 @@
 				AE6178D22073327A006B311A /* CreateOrderVC.h */,
 				AE6178D32073327A006B311A /* CreateOrderVC.m */,
 				AE6178DF20737ED6006B311A /* CreateOrderVC.xib */,
+				AED10B8E20EC9F040083AA85 /* CreateOrderWebVC.h */,
+				AED10B8F20EC9F040083AA85 /* CreateOrderWebVC.m */,
+				AECC678B20EB791900B1904B /* CreateOrderUserInformationVC.h */,
+				AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */,
+				AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -2710,21 +2725,12 @@
 		AE6FF29A1E8915F100C2A013 /* country */ = {
 			isa = PBXGroup;
 			children = (
-				AE6FF29B1E8915F100C2A013 /* C */,
+				AED10B9220ECBA220083AA85 /* C */,
 				AE6FF29C1E8915F100C2A013 /* M */,
 				AE6FF29D1E8915F100C2A013 /* V */,
 			);
 			name = country;
 			path = "国家服务";
-			sourceTree = "<group>";
-		};
-		AE6FF29B1E8915F100C2A013 /* C */ = {
-			isa = PBXGroup;
-			children = (
-				AE6FF29E1E89163600C2A013 /* EmallCatigoryViewController.h */,
-				AE6FF29F1E89163600C2A013 /* EmallCatigoryViewController.m */,
-			);
-			path = C;
 			sourceTree = "<group>";
 		};
 		AE6FF29C1E8915F100C2A013 /* M */ = {
@@ -4376,6 +4382,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		AED10B9220ECBA220083AA85 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AED10B9320ECBA220083AA85 /* EmallCatigoryViewController.h */,
+				AED10B9420ECBA220083AA85 /* EmallCatigoryViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		AEDCCE721D810CDA009A13FF /* Update */ = {
 			isa = PBXGroup;
 			children = (
@@ -4641,6 +4656,7 @@
 				AE60C1FB20E247F7000867A8 /* home_global_user_06.jpg in Resources */,
 				AE9BA46A20B50119008B65D4 /* InvitationRecordsHeader.xib in Resources */,
 				AE1FD7391D5C929500FFD5A8 /* Pre-comp 1_00021.png in Resources */,
+				AECC678F20EB791900B1904B /* CreateOrderUserInformationVC.xib in Resources */,
 				AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */,
 				AE60C1BC20E1EECC000867A8 /* home_rent_process_b.jpg in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
@@ -4848,6 +4864,7 @@
 				AE3AB6AF1F21A27300A3C7E3 /* SMNewsFrame.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,
 				AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */,
+				AECC678A20EB758800B1904B /* CreatOrderFooterView.m in Sources */,
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
 				AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */,
 				AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */,
@@ -4921,7 +4938,6 @@
 				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
 				AE4B2E6E1F1E095600E328F7 /* FSPageContentView.m in Sources */,
-				AE6FF2A11E89163600C2A013 /* EmallCatigoryViewController.m in Sources */,
 				AECC87CD1F95F63800FCBBEC /* CountryStateViewController.m in Sources */,
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
 				AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */,
@@ -5037,6 +5053,7 @@
 				AEA24A2F1D5B231300DD7939 /* IntelligentResultViewController.m in Sources */,
 				AECC87D41F95F63800FCBBEC /* MyOfferCountryState.m in Sources */,
 				AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */,
+				AECC678720EB5DFE00B1904B /* CreateOrderContractCell.m in Sources */,
 				AEC4285020E09ECC007B3949 /* HomeUVICImmigrationProjectCell.m in Sources */,
 				AECC87D21F95F63800FCBBEC /* MyOfferArea.m in Sources */,
 				AECC87D31F95F63800FCBBEC /* MyOfferCountry.m in Sources */,
@@ -5083,6 +5100,7 @@
 				AE4B2E811F1E095600E328F7 /* myofferAnchorButton.m in Sources */,
 				AEA24A931D5B23F600DD7939 /* HomeThirdTableViewCell.m in Sources */,
 				AEA545E320D276460095CBDA /* HomeSingleImageCell.m in Sources */,
+				AED10B9520ECBA220083AA85 /* EmallCatigoryViewController.m in Sources */,
 				463E3AB01B23105F00E0BAF8 /* KDLoggerViewController.m in Sources */,
 				AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */,
 				AE60C1EA20E2405D000867A8 /* HomeYESUserCell.m in Sources */,
@@ -5134,6 +5152,7 @@
 				AE1A804E20D9EB3E00CE9E50 /* AppButton.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AECC87D61F95F63800FCBBEC /* rankFilter.m in Sources */,
+				AECC678E20EB791900B1904B /* CreateOrderUserInformationVC.m in Sources */,
 				AE91DDE01FBC169F00CD06BD /* GuideItemCell.m in Sources */,
 				AE4B2E6D1F1E095600E328F7 /* FSBottomTableViewCell.m in Sources */,
 				AE914EE51F41A563008A43CD /* ApplyStatusHistoryFrameModel.m in Sources */,
@@ -5147,6 +5166,7 @@
 				AECC677C20E9C49C00B1904B /* HomeRecommendProdoctView.m in Sources */,
 				AE1A805720DA304D00CE9E50 /* HomeFeeCell.m in Sources */,
 				AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */,
+				AED10B9020EC9F050083AA85 /* CreateOrderWebVC.m in Sources */,
 				AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */,
 				AEA24C0A1D5B269A00DD7939 /* InternationalControl.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,

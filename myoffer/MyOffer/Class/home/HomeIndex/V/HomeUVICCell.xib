@@ -13,11 +13,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeUVICCell" rowHeight="2848" id="KGk-i7-Jjw" customClass="HomeUVICCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="2832"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeUVICCell" rowHeight="2941" id="KGk-i7-Jjw" customClass="HomeUVICCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="2924"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="2831.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="2923.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9l-ac-AnP">
@@ -40,10 +40,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnZ-pn-4qM">
-                        <rect key="frame" x="20" y="83" width="335" height="184"/>
+                        <rect key="frame" x="20" y="83" width="335" height="276"/>
                         <attributedString key="attributedText">
                             <fragment>
-                                <string key="content">全球青年精英计划（Young Elite Scheme, Global）是学无国界联合英国贸易与投资总署、伦敦市政府、英中贸易协会、全球中国智库、苏格兰发展国际发展总署、英国游戏与互动娱乐产业（UKIE）等战略合作伙伴，以帮助国际留学生和青年企业家拓展全球视野、发展管理技能、建立精英社交网络为己任， 而打造的一个集 500 强名企训练营、全球领袖实习计划、VIP1 对 1 英国求职、职场菁英计划、海外创业大赛、以及高定制化领导力学游项目于一体的精英计划。</string>
+                                <mutableString key="content">UVIC 于 2003 年成立于伦敦， 全球总部位于伦敦金融城的中心，同英格兰银行、伦敦股票交易所、金融城市长
+官邸以及彭博社等国际机构比邻而居。UVIC 在曼彻斯特、纽卡斯尔、悉尼、北京、上海、深圳、长沙、武汉、
+宁波等地设立支持中心，战略伙伴遍布欧洲、亚洲。逾十年里，UVIC 为世界各地数万跨境移民和留学生提供教育、
+签证、移民、投资、传媒等多元化、一站式、高端定制服务。
+UVIC 集团旗下拥有英国领先的教育推广中心、英国最大规模的权威移民服务中心。
+UVIC 是全英第一个被四大政府机构（英国高等教育招生委员会 UCAS，英国皇家翻译学会 CIOL，英国移民
+事务署 OISC，英国移民律师工会 ILPA）认证授权的机构。</mutableString>
                                 <attributes>
                                     <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="NSColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,7 +61,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfO-LT-beX">
-                        <rect key="frame" x="20" y="327" width="335" height="20"/>
+                        <rect key="frame" x="20" y="419" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="官方认证" image="cell_diamond">
@@ -63,13 +69,13 @@
                         </state>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_uvic_trademark.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZXH-o6-Skg">
-                        <rect key="frame" x="20" y="357" width="335" height="95.5"/>
+                        <rect key="frame" x="20" y="449" width="335" height="95.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZXH-o6-Skg" secondAttribute="height" multiplier="165:47" id="1yM-xQ-xBa"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zR7-Pw-U7M">
-                        <rect key="frame" x="20" y="512.5" width="335" height="20"/>
+                        <rect key="frame" x="20" y="604.5" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="英国教育签证中心-服务优势" image="cell_diamond">
@@ -77,7 +83,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHa-wm-EaL">
-                        <rect key="frame" x="20" y="535.5" width="335" height="69"/>
+                        <rect key="frame" x="20" y="627.5" width="335" height="69"/>
                         <attributedString key="attributedText">
                             <fragment content="UVIC 英国教育签证中心是 UVIC 集团旗下的品牌，是由英国百所国立大学、英国高等教育招生委员会、英国移民事务署，及英国移民律师公会授权运营的权威英国教育及签证服务机构。">
                                 <attributes>
@@ -90,7 +96,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Oj4-AY-gJF">
-                        <rect key="frame" x="0.0" y="614.5" width="375" height="330"/>
+                        <rect key="frame" x="0.0" y="706.5" width="375" height="330"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="330" id="Z1Q-rE-6fQ"/>
@@ -103,7 +109,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaf-Il-bcC">
-                        <rect key="frame" x="20" y="1004.5" width="335" height="20"/>
+                        <rect key="frame" x="20" y="1096.5" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="UVIC 移民签证中心-服务优势" image="cell_diamond">
@@ -111,7 +117,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqe-tE-ePX">
-                        <rect key="frame" x="20" y="1027.5" width="335" height="138"/>
+                        <rect key="frame" x="20" y="1119.5" width="335" height="138"/>
                         <attributedString key="attributedText">
                             <fragment>
                                 <string key="content">UVIC 英国移民签证中心是 UVIC 集团旗下的品牌，作为英国规模最大的签证移民法律事务所 , 不仅提供权威的英国移民和签证服务，并且为跨境移民提供赴英之后的极其丰富的投资，创业和社交资源。创立至今，UVIC 在业界获得了诸多荣誉和嘉奖，在使馆界赢得了良好的声誉。UVIC 英国移民签证中心目前是移民法律业界遥遥领先的领军者。</string>
@@ -125,7 +131,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xB9-oA-i6b">
-                        <rect key="frame" x="20" y="1175.5" width="335" height="70"/>
+                        <rect key="frame" x="20" y="1267.5" width="335" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_uvice_VisaCenter_a.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bxn-NV-OBC">
                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -167,7 +173,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Cy-iG-PFZ">
-                        <rect key="frame" x="20" y="1255.5" width="335" height="70"/>
+                        <rect key="frame" x="20" y="1347.5" width="335" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_uvice_VisaCenter_b.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x0r-no-R5V">
                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -209,7 +215,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Kd-Mf-CY5">
-                        <rect key="frame" x="20" y="1415.5" width="335" height="70"/>
+                        <rect key="frame" x="20" y="1507.5" width="335" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_uvice_VisaCenter_d.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-TV-DvQ">
                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -235,7 +241,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qic-Sw-6hh">
-                        <rect key="frame" x="20" y="1335.5" width="335" height="70"/>
+                        <rect key="frame" x="20" y="1427.5" width="335" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_uvice_VisaCenter_c.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OlW-rA-CkZ">
                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
@@ -277,7 +283,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FS-eX-CvE">
-                        <rect key="frame" x="100" y="1438" width="255" height="43"/>
+                        <rect key="frame" x="100" y="1530" width="255" height="43"/>
                         <attributedString key="attributedText">
                             <fragment content="UVIC 长期积累的高端客户资源创造了有效沟通的平台，提供财富、机会与信息共享的强大商业移民网络。">
                                 <attributes>
@@ -290,7 +296,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1X-4o-h55">
-                        <rect key="frame" x="20" y="1545.5" width="335" height="20"/>
+                        <rect key="frame" x="20" y="1637.5" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="UVIC移民项目" image="cell_diamond">
@@ -298,7 +304,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra7-10-cDN">
-                        <rect key="frame" x="20" y="1568.5" width="335" height="92"/>
+                        <rect key="frame" x="20" y="1660.5" width="335" height="92"/>
                         <attributedString key="attributedText">
                             <fragment content="英国投资移民：">
                                 <attributes>
@@ -318,7 +324,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="pMB-zx-4xI">
-                        <rect key="frame" x="0.0" y="1670.5" width="375" height="224"/>
+                        <rect key="frame" x="0.0" y="1762.5" width="375" height="224"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="224" id="CgP-lZ-Ae9"/>
@@ -331,7 +337,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSN-ZE-cew">
-                        <rect key="frame" x="20" y="1954.5" width="335" height="20"/>
+                        <rect key="frame" x="20" y="2046.5" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="来自客户的口碑" image="cell_diamond">
@@ -339,7 +345,7 @@
                         </state>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVG-4C-osl">
-                        <rect key="frame" x="20" y="1984.5" width="335" height="200"/>
+                        <rect key="frame" x="20" y="2076.5" width="335" height="200"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_Rectangle_r" translatesAutoresizingMaskIntoConstraints="NO" id="ZbO-da-B4W">
                                 <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
@@ -721,7 +727,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOF-AG-pWQ">
-                        <rect key="frame" x="20" y="2194.5" width="335" height="200"/>
+                        <rect key="frame" x="20" y="2286.5" width="335" height="200"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_Rectangle_l" translatesAutoresizingMaskIntoConstraints="NO" id="m2v-zP-FGX">
                                 <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
@@ -1085,7 +1091,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kod-Dt-Re1">
-                        <rect key="frame" x="20" y="2404.5" width="335" height="200"/>
+                        <rect key="frame" x="20" y="2496.5" width="335" height="200"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_Rectangle_r" translatesAutoresizingMaskIntoConstraints="NO" id="yxy-J8-xpV">
                                 <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
@@ -1611,7 +1617,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-9T-HEj">
-                        <rect key="frame" x="20" y="2664.5" width="335" height="20"/>
+                        <rect key="frame" x="20" y="2756.5" width="335" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" title="联系 UVIC" image="cell_diamond">
@@ -1619,7 +1625,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfG-U4-Hol">
-                        <rect key="frame" x="20" y="2687.5" width="335" height="84"/>
+                        <rect key="frame" x="20" y="2779.5" width="335" height="84"/>
                         <attributedString key="attributedText">
                             <fragment content="官方网站：">
                                 <attributes>
@@ -1742,12 +1748,12 @@ Cg
                     <constraint firstItem="HAP-ju-4Qc" firstAttribute="top" secondItem="D9l-ac-AnP" secondAttribute="bottom" constant="4" id="9sY-gP-Zoj"/>
                     <constraint firstItem="ZfO-LT-beX" firstAttribute="leading" secondItem="DnZ-pn-4qM" secondAttribute="leading" id="9xm-QM-pTo"/>
                     <constraint firstItem="DnZ-pn-4qM" firstAttribute="trailing" secondItem="D9l-ac-AnP" secondAttribute="trailing" id="AQl-ej-UcN"/>
-                    <constraint firstAttribute="bottom" secondItem="pfG-U4-Hol" secondAttribute="bottom" priority="750" constant="60" id="BVM-UQ-1Fp"/>
                     <constraint firstItem="D9l-ac-AnP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="Bhp-7e-ygi"/>
                     <constraint firstItem="mOF-AG-pWQ" firstAttribute="trailing" secondItem="NVG-4C-osl" secondAttribute="trailing" id="BsW-da-rYi"/>
                     <constraint firstItem="Tb9-9T-HEj" firstAttribute="trailing" secondItem="XSN-ZE-cew" secondAttribute="trailing" id="C8m-xM-XfW"/>
                     <constraint firstItem="XSN-ZE-cew" firstAttribute="top" secondItem="pMB-zx-4xI" secondAttribute="bottom" constant="60" id="Cp6-T9-BS7"/>
                     <constraint firstItem="0FS-eX-CvE" firstAttribute="top" secondItem="vJA-qN-Ebp" secondAttribute="bottom" constant="8" id="Dyb-NZ-waX"/>
+                    <constraint firstAttribute="bottom" secondItem="pfG-U4-Hol" secondAttribute="bottom" priority="750" constant="60" id="F6C-zL-FOV"/>
                     <constraint firstItem="ZXH-o6-Skg" firstAttribute="top" secondItem="ZfO-LT-beX" secondAttribute="bottom" constant="10" id="G3G-jQ-I6O"/>
                     <constraint firstItem="pfG-U4-Hol" firstAttribute="trailing" secondItem="Tb9-9T-HEj" secondAttribute="trailing" id="I4S-6q-5MI"/>
                     <constraint firstItem="XSN-ZE-cew" firstAttribute="leading" secondItem="Ra7-10-cDN" secondAttribute="leading" id="J3n-N1-FlZ"/>
@@ -1809,7 +1815,7 @@ Cg
                 <outlet property="UVICImmigrationView" destination="pMB-zx-4xI" id="bd9-og-MzY"/>
                 <outlet property="uvicAdvantView" destination="Oj4-AY-gJF" id="jjY-XO-bRo"/>
             </connections>
-            <point key="canvasLocation" x="61.5" y="1456"/>
+            <point key="canvasLocation" x="61.5" y="1502.5"/>
         </tableViewCell>
     </objects>
     <resources>

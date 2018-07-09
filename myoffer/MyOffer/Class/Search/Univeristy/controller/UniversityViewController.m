@@ -578,7 +578,7 @@ typedef enum {
     browser.delegate = self;
     [browser setInitialPageIndex:index];
     browser.displayCounterLabel = YES;
-    browser.displayActionButton = NO;
+    browser.displayActionButton = NO; 
     [self presentViewController:browser animated:YES completion:nil];
     
 }
