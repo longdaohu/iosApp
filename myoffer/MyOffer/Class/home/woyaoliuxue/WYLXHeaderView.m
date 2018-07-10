@@ -9,7 +9,6 @@
 #import "WYLXHeaderView.h"
 
 @interface WYLXHeaderView ()
-//@property(nonatomic,strong)CAGradientLayer *gradient;
 @property(nonatomic,strong)UIImageView *bgView;
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,strong)UIButton *dismissBtn;
@@ -76,13 +75,13 @@
     CGFloat dis_W = 40;
     CGFloat dis_H = dis_W;
     CGFloat dis_X = 14;
-    CGFloat dis_Y = 22;
+    CGFloat dis_Y = 32;
     self.dismissBtn.frame = CGRectMake(dis_X,dis_Y,dis_W,dis_H);
     
     CGFloat margin = 10 + XFONT_SIZE(1) * 10;
     
     CGFloat title_X = dis_X;
-    CGFloat title_Y = self.dismissBtn.center.y +  8 + margin;
+    CGFloat title_Y = self.dismissBtn.center.y + margin;
     CGFloat title_W = self.bounds.size.width - 2 * title_X;
     CGFloat title_H = [self.title  KD_sizeWithAttributeFont:XFONT(18) maxWidth:title_W].height;
     self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);

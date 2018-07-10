@@ -23,6 +23,7 @@
 #define XSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IsiPhoneBigScreen (XSCREEN_WIDTH >=375.0f && XSCREEN_HEIGHT >= 812.0f&& Is_Iphone)
+#define IsIphoneMiniScreen  (XSCREEN_HEIGHT<= 480)
 #define XTabBarHeight  (CGFloat)(IsiPhoneBigScreen?(83):(49))
 #define XNAV_HEIGHT  (XSCREEN_HEIGHT > 800.0 ? 88.0 : 64.0)
 #define XStatusBar_Height  (XSCREEN_HEIGHT >= 812.0 ? 44.0 : 20.0)

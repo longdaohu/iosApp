@@ -152,6 +152,7 @@
             self.downloadBtn.selected = YES;
             break;
         default:
+            self.downloadBtn.selected = NO;
             break;
     }
     

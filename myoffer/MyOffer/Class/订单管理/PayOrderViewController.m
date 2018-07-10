@@ -57,11 +57,6 @@
 
 }
 
-- (void)setOrder:(OrderItem *)order{
-    
-    _order = order;
-}
-
 -(void)payResult:(NSNotification *)notification{
 
     NSString *BackResult = (NSString *)notification.object;
@@ -117,6 +112,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
     [self.view addSubview:self.tableView];
     [self makeTableViewHeader];
     

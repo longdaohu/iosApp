@@ -34,7 +34,9 @@
 @property (weak, nonatomic) IBOutlet UIView *Whatget010;
 
 @property(nonatomic,strong)NSArray *projectViews;
+@property(nonatomic,strong)NSArray *itemViews;
 @property(nonatomic,strong)CAShapeLayer *shadowLayer;
+@property(nonatomic,strong)CAShapeLayer *cellShadowLayer;
 
 @end
 
@@ -48,8 +50,9 @@
     self.advantageView.dataSource = self;
     [self.fixView registerClass:[HomeYESUserCell class] forCellWithReuseIdentifier:@"HomeYESUserCell"];
     [self.advantageView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell2"];
- 
-    self.projectViews = @[self.Whatget01,self.Whatget02,self.Whatget03,self.Whatget04,self.Whatget05,self.Whatget06,self.Whatget07,self.Whatget08,self.Whatget09,self.Whatget010,self.Whatget011,self.Whatget012,self.Whatget013,self.Whatget014,self.projectView1,self.projectView2,self.projectView3];
+     self.projectViews = @[self.projectView1,self.projectView2,self.projectView3];
+    
+    self.itemViews = @[self.Whatget01,self.Whatget02,self.Whatget03,self.Whatget04,self.Whatget05,self.Whatget06,self.Whatget07,self.Whatget08,self.Whatget09,self.Whatget010,self.Whatget011,self.Whatget012,self.Whatget013,self.Whatget014];
     
  
 }
@@ -167,10 +170,26 @@
         shaper.shadowOpacity = 0.05;
         _shadowLayer = shaper;
 
-        [self.contentView.layer insertSublayer:shaper below:self.projectView1.layer];
+        [self.projectView1.superview.layer insertSublayer:shaper below:self.projectView1.layer];
     }
     
     return _shadowLayer;
+}
+
+- (CAShapeLayer *)cellShadowLayer{
+    if (!_cellShadowLayer) {
+        
+        CAShapeLayer *shaper = [CAShapeLayer layer];
+        shaper.shadowColor = XCOLOR_BLACK.CGColor;
+        shaper.shadowOffset = CGSizeMake(0, 0);
+        shaper.shadowRadius = 5;
+        shaper.shadowOpacity = 0.05;
+        _cellShadowLayer = shaper;
+        
+        [self.Whatget01.superview.layer insertSublayer:shaper atIndex:0];
+    }
+    
+    return _cellShadowLayer;
 }
 
 
@@ -181,14 +200,30 @@
     UIBezierPath *path;
     for (NSInteger index = 0; index < self.projectViews.count; index++) {
         UIView *item =  self.projectViews[index];
+        CGRect newFrame = item.frame;
+        newFrame.size.width = (self.contentView.bounds.size.width - 40);
         if (index == 0) {
-            path = [UIBezierPath bezierPathWithRect:item.frame];
+            path = [UIBezierPath bezierPathWithRect:newFrame];
         }else{
-            [path appendPath: [UIBezierPath bezierPathWithRect:item.frame]];
+            [path appendPath: [UIBezierPath bezierPathWithRect:newFrame]];
         }
     }
     self.shadowLayer.shadowPath = path.CGPath;
  
+    
+    UIBezierPath *path_b;
+    for (NSInteger index = 0; index < self.itemViews.count; index++) {
+        UIView *item =  self.itemViews[index];
+        CGRect newFrame = item.frame;
+        newFrame.size.width = (self.contentView.bounds.size.width - 55) * 0.5;
+        newFrame.origin.x = index%2 * (newFrame.size.width + 15);
+        if (index == 0) {
+            path_b = [UIBezierPath bezierPathWithRect:newFrame];
+        }else{
+            [path_b appendPath: [UIBezierPath bezierPathWithRect:newFrame]];
+        }
+    }
+    self.cellShadowLayer.shadowPath = path_b.CGPath;
  
 }
 

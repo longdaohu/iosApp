@@ -140,7 +140,6 @@
 		AE2F230C1EADEC9C0089084C /* UniversityCourseFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F230A1EADEC9C0089084C /* UniversityCourseFilterCell.m */; };
 		AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */; };
 		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
-		AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */; };
 		AE3600661E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */; };
 		AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3826721EE69EED0096AC6A /* OrderItemFrame.m */; };
 		AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */; };
@@ -238,7 +237,6 @@
 		AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */; };
 		AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */; };
 		AE60C1C320E21B3D000867A8 /* home_global_smile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */; };
-		AE60C1C520E21BA8000867A8 /* home_global_plan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1C420E21BA8000867A8 /* home_global_plan.jpg */; };
 		AE60C1C920E21D5B000867A8 /* home_global_ban.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */; };
 		AE60C1CD20E21E1C000867A8 /* home_global_job_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1CA20E21E1B000867A8 /* home_global_job_b.jpg */; };
 		AE60C1CE20E21E1C000867A8 /* home_global_job_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1CB20E21E1B000867A8 /* home_global_job_a.jpg */; };
@@ -584,7 +582,6 @@
 		AECC678320EA308200B1904B /* LaunchScreen_logo_f.png in Resources */ = {isa = PBXBuildFile; fileRef = AECC678120EA308200B1904B /* LaunchScreen_logo_f.png */; };
 		AECC678420EA308200B1904B /* LaunchScreen_logo_g.png in Resources */ = {isa = PBXBuildFile; fileRef = AECC678220EA308200B1904B /* LaunchScreen_logo_g.png */; };
 		AECC678720EB5DFE00B1904B /* CreateOrderContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */; };
-		AECC678A20EB758800B1904B /* CreatOrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678920EB758800B1904B /* CreatOrderFooterView.m */; };
 		AECC678E20EB791900B1904B /* CreateOrderUserInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */; };
 		AECC678F20EB791900B1904B /* CreateOrderUserInformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */; };
 		AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87811F95F63800FCBBEC /* CatigoryViewController.m */; };
@@ -877,7 +874,6 @@
 		AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPWViewController.m; sourceTree = "<group>"; };
 		AE329BEA1DD2BC9A00DCF433 /* BangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangViewController.h; sourceTree = "<group>"; };
 		AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BangViewController.m; sourceTree = "<group>"; };
-		AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guid_smart.jpg; sourceTree = "<group>"; };
 		AE3600641E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalSectionHeaderView.h; sourceTree = "<group>"; };
 		AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalSectionHeaderView.m; sourceTree = "<group>"; };
 		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
@@ -1049,7 +1045,6 @@
 		AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_c.jpg; sourceTree = "<group>"; };
 		AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_d.jpg; sourceTree = "<group>"; };
 		AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_smile.jpg; sourceTree = "<group>"; };
-		AE60C1C420E21BA8000867A8 /* home_global_plan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_plan.jpg; sourceTree = "<group>"; };
 		AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_ban.jpg; sourceTree = "<group>"; };
 		AE60C1CA20E21E1B000867A8 /* home_global_job_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_job_b.jpg; sourceTree = "<group>"; };
 		AE60C1CB20E21E1B000867A8 /* home_global_job_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_job_a.jpg; sourceTree = "<group>"; };
@@ -1610,8 +1605,6 @@
 		AECC678220EA308200B1904B /* LaunchScreen_logo_g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen_logo_g.png; sourceTree = "<group>"; };
 		AECC678520EB5DFE00B1904B /* CreateOrderContractCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderContractCell.h; sourceTree = "<group>"; };
 		AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderContractCell.m; sourceTree = "<group>"; };
-		AECC678820EB758800B1904B /* CreatOrderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatOrderFooterView.h; sourceTree = "<group>"; };
-		AECC678920EB758800B1904B /* CreatOrderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatOrderFooterView.m; sourceTree = "<group>"; };
 		AECC678B20EB791900B1904B /* CreateOrderUserInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderUserInformationVC.h; sourceTree = "<group>"; };
 		AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderUserInformationVC.m; sourceTree = "<group>"; };
 		AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderUserInformationVC.xib; sourceTree = "<group>"; };
@@ -2564,8 +2557,6 @@
 				AE6178D720734797006B311A /* CreateOrderItemCell.xib */,
 				AECC678520EB5DFE00B1904B /* CreateOrderContractCell.h */,
 				AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */,
-				AECC678820EB758800B1904B /* CreatOrderFooterView.h */,
-				AECC678920EB758800B1904B /* CreatOrderFooterView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3948,7 +3939,6 @@
 				AE1A805B20DA44B800CE9E50 /* home_fee_b.jpg */,
 				AE892A191EBC87890035A31D /* uk_more.jpg */,
 				AE1A804F20DA2A0300CE9E50 /* home_apply_uni_bg.jpg */,
-				AE32E43C1ECADA7C00E88504 /* guid_smart.jpg */,
 				AE1A805920DA432500CE9E50 /* home_fee_a.jpg */,
 				AE892A1A1EBC87890035A31D /* usa_more.jpg */,
 				AE892A1B1EBC87890035A31D /* ao_more.jpg */,
@@ -3991,7 +3981,6 @@
 				AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */,
 				AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */,
 				AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */,
-				AE60C1C420E21BA8000867A8 /* home_global_plan.jpg */,
 				AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */,
 				AE60C1CB20E21E1B000867A8 /* home_global_job_a.jpg */,
 				AE60C1CA20E21E1B000867A8 /* home_global_job_b.jpg */,
@@ -4616,7 +4605,6 @@
 				AE60C21120E47F10000867A8 /* home_uvic_dong.jpg in Resources */,
 				AE60C1F720E247F7000867A8 /* home_global_user_09.jpg in Resources */,
 				AE60C21220E47F10000867A8 /* home_uvic_zhang.jpg in Resources */,
-				AE60C1C520E21BA8000867A8 /* home_global_plan.jpg in Resources */,
 				AEC4285520E0DA81007B3949 /* HomeUVICCell.xib in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
 				AE76ACEF20D8E63300C42FA2 /* city_xn.jpg in Resources */,
@@ -4720,7 +4708,6 @@
 				AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */,
 				AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
-				AE32E43D1ECADA7C00E88504 /* guid_smart.jpg in Resources */,
 				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
 				AE60C1CD20E21E1C000867A8 /* home_global_job_b.jpg in Resources */,
 				AEDDAA5C20E4D36C0069C138 /* home_application_uni_rank.png in Resources */,
@@ -4864,7 +4851,6 @@
 				AE3AB6AF1F21A27300A3C7E3 /* SMNewsFrame.m in Sources */,
 				AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */,
 				AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */,
-				AECC678A20EB758800B1904B /* CreatOrderFooterView.m in Sources */,
 				AE1FD68A1D5C78E600FFD5A8 /* NotiItem.m in Sources */,
 				AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */,
 				AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */,

@@ -180,17 +180,17 @@ typedef NS_ENUM(NSInteger,cellViewType){
     
 
     //退出登录按钮
-    CGFloat dis_X = 14;
     CGFloat dis_W = 40;
+    CGFloat dis_X =  IsIphoneMiniScreen ? (XSCREEN_WIDTH - dis_W) : 14;
     CGFloat dis_H =  dis_W;
-    CGFloat dis_Y = XNAV_HEIGHT - dis_H;
+    CGFloat dis_Y = IsIphoneMiniScreen ? 10 : (XNAV_HEIGHT - dis_H);
     self.dismissBtn = [self buttonWithFrame:CGRectMake(dis_X, dis_Y, dis_W, dis_H) title:nil fontSize:1 titleColor:nil imageName:@"close_button" Action:@selector(dismiss:)];
     [self.view addSubview:self.dismissBtn];
     
     
     //短信登录板块
     CGFloat short_bg_X = 0;
-    CGFloat short_bg_Y = logo_H;
+    CGFloat short_bg_Y = IsIphoneMiniScreen ?  64 : logo_H;
     CGFloat short_bg_W = bg_W;
     CGFloat short_bg_H = bg_H - short_bg_Y;
     UIView *short_loginBg = [[UIView alloc] init];
@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
     
     //登录板块
     CGFloat login_bg_X = bg_W;
-    CGFloat login_bg_Y = logo_H;
+    CGFloat login_bg_Y = short_bg_Y;
     CGFloat login_bg_W = bg_W;
     CGFloat login_bg_H = bg_H - login_bg_Y;
     UIView *loginBg = [[UIView alloc] init];
@@ -218,8 +218,6 @@ typedef NS_ENUM(NSInteger,cellViewType){
      [loginBg addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHiden)]];
     //登录板块子项
     [self makeNomalLoginView];
- 
- 
     //注册板块
     CGFloat regist_bg_X = bg_W * 2;
     CGFloat regist_bg_Y = login_bg_Y;
@@ -810,12 +808,14 @@ typedef NS_ENUM(NSInteger,cellViewType){
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
- 
-    self.baseView.top = up ?  - (self.logoView.mj_h - XNAV_HEIGHT): 0;
-    
+    CGFloat up_y =  - (self.logoView.mj_h - XNAV_HEIGHT);
+    if(up && (XSCREEN_HEIGHT <= 480 )){
+        up_y = -64;
+    }
+    self.baseView.top = up ?  up_y : 0;
     [self.view layoutSubviews];
-    
     [UIView commitAnimations];
+    
 }
 
 

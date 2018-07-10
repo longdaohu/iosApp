@@ -87,7 +87,7 @@
     [super layoutSubviews];
  
     
-    CGFloat icon_w =  (XSCREEN_HEIGHT<= 480) ? XSCREEN_WIDTH * 0.65 : XSCREEN_WIDTH * 0.8;
+    CGFloat icon_w =  IsIphoneMiniScreen ? XSCREEN_WIDTH * 0.65 : XSCREEN_WIDTH * 0.8;
     CGFloat icon_h =   icon_w * 1296.0/1038;
     CGFloat icon_x =   (XSCREEN_WIDTH - icon_w) * 0.5;
     CGFloat icon_y =   0;
@@ -113,7 +113,7 @@
     
     CGFloat item_h = 50;
     CGFloat item_y = CGRectGetMaxY(self.subLab.frame) + 20;
-    if (XSCREEN_HEIGHT<= 480 ) {
+    if (IsIphoneMiniScreen) {
         CGFloat margin = (XSCREEN_HEIGHT - CGRectGetMaxY(self.subLab.frame) - item_h);
         item_y = CGRectGetMaxY(self.subLab.frame) + margin * 0.5;
     }

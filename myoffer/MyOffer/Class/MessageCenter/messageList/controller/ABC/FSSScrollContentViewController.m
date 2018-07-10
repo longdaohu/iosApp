@@ -41,14 +41,18 @@
 
 - (void)setupSubViews
 {
-    _tableView = [[MyOfferTableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)) style:UITableViewStyleGrouped];
+    _tableView = [[MyOfferTableView alloc]initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [UIView new];
-    CGFloat intsetBottom = XSCREEN_WIDTH > 320 ? MASSAGE_HEADER_HIGHT : (MASSAGE_HEADER_HIGHT  + 30);
-    _tableView.contentInset = UIEdgeInsetsMake(0, 0, intsetBottom, 0);
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight + XNAV_HEIGHT + 50, 0);
     _tableView.emptyY = 60;
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
    
 }
 

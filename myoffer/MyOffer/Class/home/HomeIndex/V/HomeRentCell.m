@@ -31,11 +31,11 @@
         
         CAShapeLayer *shaper = [CAShapeLayer layer];
         shaper.shadowColor = XCOLOR_BLACK.CGColor;
-        shaper.shadowOffset = CGSizeMake(0, 5);
+        shaper.shadowOffset = CGSizeMake(0, 0);
         shaper.shadowRadius = 5;
         shaper.shadowOpacity = 0.05;
         _shadowLayer = shaper;
-        [self.contentView.layer insertSublayer:shaper below:self.home_room_apartment_01.layer];
+        [self.home_room_apartment_01.superview.layer insertSublayer:shaper below:self.home_room_apartment_01.layer];
     }
     
     return _shadowLayer;
@@ -45,13 +45,11 @@
     
     [super layoutSubviews];
     
-    if ( !self.shadowLayer.shadowPath) {
-        
         UIBezierPath *path;
         for (NSInteger index = 0; index < self.projectViews.count; index++) {
             UIView *item =  self.projectViews[index];
             CGRect frame = item.frame;
-            frame.size.width = self.bounds.size.width - frame.origin.x * 2;
+            frame.size.width = self.bounds.size.width - 40;
             if (index == 0) {
                 path = [UIBezierPath bezierPathWithRect:frame];
             }else{
@@ -59,10 +57,7 @@
             }
         }
         self.shadowLayer.shadowPath = path.CGPath;
-        
-    }
  
-    
 }
 
 

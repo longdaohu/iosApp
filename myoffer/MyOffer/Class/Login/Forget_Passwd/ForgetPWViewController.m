@@ -14,7 +14,7 @@
 @property(nonatomic,strong)NSArray *registArr;
 @property(nonatomic,strong)UIView *registCellbgView;
 @property(nonatomic,strong)UIButton *registBtn;
-
+@property (strong, nonatomic)UIView *current_cell;
 @end
 
 @implementation ForgetPWViewController
@@ -91,9 +91,65 @@
     
     self.registBtn.layer.cornerRadius = 4;
     self.registBtn.backgroundColor = XCOLOR_RED;
-
     
+    if(IsIphoneMiniScreen){
+        [self makeNotificationCenter];
+    }
 }
+
+- (void)makeNotificationCenter{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+
+#pragma mark : 键盘处理
+
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    
+    [self moveTextViewForKeyboard:aNotification up:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    
+    [self moveTextViewForKeyboard:aNotification up:NO];
+}
+
+- (void) moveTextViewForKeyboard:(NSNotification*)aNotification up: (BOOL) up {
+    
+    if (XSCREEN_HEIGHT > 480) return;
+  
+    NSDictionary* userInfo = [aNotification userInfo];
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardEndFrame;
+    
+    [userInfo[UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    [userInfo[UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    [userInfo[UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
+    // Animate up or down
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    CGFloat up_y =  0;
+    if(up){
+        up_y = (CGRectGetMaxY(self.current_cell.frame) + keyboardEndFrame.size.height - XSCREEN_HEIGHT);
+        if(up_y < - 64)  up_y = - 64;
+    }
+    self.view.top = up ?  -up_y : 64;
+    
+    [self.view layoutSubviews];
+    
+    [UIView commitAnimations];
+}
+
 
 
 - (UIButton *)buttonWithFrame:(CGRect)frame  title:(NSString *)title fontSize:(CGFloat)size titleColor:(UIColor *)color imageName:(NSString *)imageName  Action:(nonnull SEL)action{
@@ -161,6 +217,11 @@
     }
     
     
+}
+
+- (void)cell:(MyOfferInputView *)cell textFieldDidBeginEditing:(UITextField *)textField{
+    
+    self.current_cell = textField.superview;
 }
 
 
@@ -272,7 +333,7 @@
 
 //提交按钮
 - (void)resetButtonOnClick:(UIButton *)sender {
-
+    
     [self.view endEditing:YES];
     
     for(MyOfferInputView *cell in  self.registCellbgView.subviews){
@@ -333,8 +394,9 @@
 
 -(void)dealloc{
     
-    KDClassLog(@"忘记密码  dealloc");
+    KDClassLog(@"忘记密码 + ForgetPWViewController + dealloc");
     
 }
 
 @end
+

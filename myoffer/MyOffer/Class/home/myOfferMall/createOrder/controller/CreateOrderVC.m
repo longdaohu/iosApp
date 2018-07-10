@@ -873,7 +873,7 @@
     [self.contracturlsImages addObject:image];
     ++self.contracturls_pages;
     NSArray *imgUrls  = self.contracturls_result[@"imgUrls"];
-    if (self.contracturls_pages >=  imgUrls.count) {
+    if (self.contracturls_pages >=  imgUrls.count && !error) {
         self.contracturls_pages = 0;
         self.contracturls_downloaded = YES;
         [MBProgressHUD showMessage:@"合同已保存到相册，请到相册查看！"];

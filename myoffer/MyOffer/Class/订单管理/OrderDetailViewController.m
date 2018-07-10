@@ -318,14 +318,9 @@
             WeakSelf;
             [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:path] options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-                
-                
                 if (error) {
-                    
                     downLoadfail = YES;
-                    
                     if (index != (imgUrls.count - 1)) return;
-                    
                     [MBProgressHUD showMessage:@"合同下载失败，请重新下载！"];
                     weakSelf.contracturls_downloaded = NO;
                     weakSelf.contracturls_pages = 0;
@@ -353,10 +348,11 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
+ 
     [self.contracturlsImages addObject:image];
     ++self.contracturls_pages;
     NSArray *imgUrls  = self.contracturls_result[@"imgUrls"];
-    if (self.contracturls_pages >=  imgUrls.count) {
+    if (self.contracturls_pages >=  imgUrls.count && !error) {
         self.contracturls_pages = 0;
         self.contracturls_downloaded = YES;
         [MBProgressHUD showMessage:@"合同已保存到相册，请到相册查看！"];
