@@ -47,13 +47,8 @@
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [UIView new];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight + XNAV_HEIGHT + 50, 0);
-    _tableView.emptyY = 60;
-    if (@available(iOS 11.0, *)) {
-        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-   
+    _tableView.emptyY = 0;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 

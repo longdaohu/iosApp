@@ -167,11 +167,6 @@
     [self.view addSubview:self.tableView];
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0,XNAV_HEIGHT, 0);
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
     
 }
 

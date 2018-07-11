@@ -17,7 +17,6 @@
 
 @interface RankDetailViewController ()
 @property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
-
 @property(nonatomic,strong)RankItemFrameModel *typeFrameModel;
 @end
 
@@ -43,10 +42,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
     [self makeData];
 }
 

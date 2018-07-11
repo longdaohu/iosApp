@@ -266,7 +266,7 @@
 {
     WeakSelf
     self.rank_tableView =[[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
-    self.rank_tableView.emptyView.actionBlock = ^{
+    self.rank_tableView.actionBlock = ^{
         [weakSelf makeRankDataSource];
     };
     self.rank_tableView.delegate = self;

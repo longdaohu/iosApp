@@ -65,12 +65,8 @@
     
     RewardHeader *header = [[RewardHeader alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 158)];
     self.tableView.tableHeaderView = header;
-
-    if (@available(iOS 11.0, *) || @available(iOS 12.0, *)) {
+    if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-//        self.tableView.contentInset = UIEdgeInsetsMake(Nav_Height, 0, 0, 0);
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
 }
 

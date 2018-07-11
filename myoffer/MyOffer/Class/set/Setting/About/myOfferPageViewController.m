@@ -13,6 +13,7 @@
 #import "ShareNViewController.h"
 #import "myOfferSectionHeaderView.h"
 #import "XWGJAaboutHeader.h"
+#import "Masonry.h"
 
 @interface myOfferPageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *groups;
@@ -109,18 +110,21 @@
     self.groups = @[first_group,sec_group];
  
     self.title = @"关于";
-    CGFloat comHeight = 50;
-    UILabel *copyRightLab  =[[UILabel alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT - XNAV_HEIGHT - comHeight, XSCREEN_WIDTH, comHeight)];
+    UILabel *copyRightLab  =[[UILabel alloc] init];
     copyRightLab.font = [UIFont systemFontOfSize:14];
     copyRightLab.textColor = XCOLOR_TITLE;
     copyRightLab.textAlignment = NSTextAlignmentCenter;
     copyRightLab.text = @"CopyRight 2016 myOffer.All rights reserved.";
     [self.view insertSubview:copyRightLab atIndex:0];
     
-    
+    [copyRightLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(60);
+        make.left.mas_equalTo(self.view.mas_left).mas_offset(10);
+        make.right.mas_equalTo(self.view.mas_right).mas_offset(-10);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    
     //添加表头
     self.tableView.tableHeaderView = [[NSBundle mainBundle] loadNibNamed:@"XWGJAaboutHeader" owner:self options:nil].lastObject;
     
@@ -131,21 +135,13 @@
     self.title  = @"帮助中心";
     
     myOfferMenuItem *one = [myOfferMenuItem itemWithIcon:nil title:@"平台网站" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-    
     myOfferMenuItem *two = [myOfferMenuItem itemWithIcon:nil title:@"如何申请" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-    
     myOfferMenuItem *three = [myOfferMenuItem itemWithIcon:nil title:@"申请条件" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-
     myOfferMenuItem *four = [myOfferMenuItem itemWithIcon:nil title:@"递交申请" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-
     myOfferMenuItem *five = [myOfferMenuItem itemWithIcon:nil title:@"Offer管理" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-    
     myOfferMenuItem *six = [myOfferMenuItem itemWithIcon:nil title:@"操作疑问" arrow:true accessoryTitle:nil accessoryImage:nil active:nil];
-
     NSArray *first_items = @[one,two,three,four,five,six];
-
     myOfferMenuGroup *first_group = [myOfferMenuGroup itemWithTitle:@"" items:first_items moreTitle:nil headerHeigh:HEIGHT_ZERO footerHeigh:HEIGHT_ZERO arrow:false active: nil];
-
     self.groups = @[first_group];
  
 }
@@ -163,16 +159,6 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-
-    /*
-     *automaticallyAdjustsScrollViewInsets属性被废弃了，顶部就多了一定的inset，
-     关于安全区域适配，简书上的这篇文章iOS 11 安全区域适配总结介绍得非常详细，请参考这篇文章。
-     */
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
 }
 
 - (ShareNViewController *)shareVC{

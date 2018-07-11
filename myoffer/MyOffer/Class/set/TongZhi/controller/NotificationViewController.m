@@ -72,12 +72,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     self.tableView.rowHeight = 68;
-
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
     
     MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     mj_header.lastUpdatedTimeLabel.hidden = YES;
@@ -95,7 +89,6 @@
     [self makeTableView];
     
      self.title  = @"通知中心";
-
 }
 
 

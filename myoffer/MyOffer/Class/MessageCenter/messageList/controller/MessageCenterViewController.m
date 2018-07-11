@@ -37,7 +37,6 @@
     [super viewWillAppear:animated];
     
     [MobClick beginLogPageView:@"page资讯中心"];
-    
     self.tabBarController.tabBar.hidden = NO;
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
@@ -47,11 +46,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
     [MobClick endLogPageView:@"page资讯中心"];
 }
-
-
 
 - (void)viewDidLoad {
     
@@ -67,7 +63,6 @@
     
     [self makeTableView];
     self.canScroll = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
 }
 
@@ -202,16 +197,10 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
     WeakSelf
-    self.tableView.emptyView.actionBlock = ^{
-
+    self.tableView.actionBlock = ^{
         [weakSelf makeBaseData];
-
     };
-    
     
     self.headerViewController = [[MessageTopicHeaderViewController alloc] init];
     [self addChildViewController:self.headerViewController];

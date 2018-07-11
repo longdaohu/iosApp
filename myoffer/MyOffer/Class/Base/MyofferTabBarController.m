@@ -16,6 +16,7 @@
 #import "NotificationViewController.h"
 #import "MyOfferLoginViewController.h"
 #import "HomeIndexVC.h"
+#import "BaseTabbar.h"
 
 @interface MyofferTabBarController ()
 @property(nonatomic,strong)UIImage *navigationBgImage;
@@ -28,8 +29,12 @@
     [super viewDidLoad];
 
     [self makeNavImage];
-    
-
+ 
+    if (IsIphoneX) {
+        BaseTabbar *baseTabBar = [[BaseTabbar alloc] init];
+        [self setValue:baseTabBar forKey:@"tabBar"];
+    }
+ 
     CatigoryViewController *cvc = [[CatigoryViewController alloc] init];
     cvc.title = @"分类";
     PersonCenterViewController *mvc = [[PersonCenterViewController alloc] init];
@@ -37,7 +42,6 @@
     MessageCenterViewController *msvc = [[MessageCenterViewController alloc] init];
     msvc.title = @"资讯宝典";
 //    HomeViewContViewController *home =[[HomeViewContViewController alloc] init];
-//    home.title =@"发现";
     HomeIndexVC *home =[[HomeIndexVC alloc] init];
     home.title =@"发现";
     self.viewControllers = @[[[MyofferNavigationController alloc] initWithRootViewController:home],
@@ -59,8 +63,8 @@
     UITabBar *tabBar     = self.tabBar;
     UITabBarItem *item   = [tabBar.items objectAtIndex:index];
     item.tag = index;
-    UIImage *NomalImage  = [UIImage imageNamed:nomalName];//@"catigory_nomal"];
-    UIImage *SelectImage = [UIImage imageNamed:selectName];//@"catigory_select"];
+    UIImage *NomalImage  = [UIImage imageNamed:nomalName];
+    UIImage *SelectImage = [UIImage imageNamed:selectName];
     item.image           = [NomalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.selectedImage   = [SelectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.titlePositionAdjustment = UIOffsetMake(0, -2);
@@ -68,17 +72,12 @@
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
- 
-//    if ([item.title isEqualToString:@"个人中心"]) {
-//        [[NewRecommedView defaultView] hadBeenSaw];
-//    }
     
 }
 
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
-
 }
 
 -(void)makeNavImage
@@ -98,8 +97,6 @@
                            (id)[UIColor colorWithRed:47/255.0 green:212/255.0 blue:255/255.0 alpha:1].CGColor,
                            (id)[UIColor colorWithRed:0/255.0 green:171/255.0 blue:255/255.0 alpha:1].CGColor,
                            nil];
-//        gradient.startPoint = CGPointMake(0.4, 0.95);
-//        gradient.endPoint = CGPointMake(1.0, 1.0);
         gradient.locations  = @[@(0.5), @(1.0)];
         gradient.startPoint = CGPointMake(0, 0);
         gradient.endPoint = CGPointMake(1.0, 0);
@@ -187,30 +184,6 @@
     return newImage;
     
 }
-
-#pragma mark ——  UITabBarDelegate
-//- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-//{
-//  
-//    if (USER_EN)
-//        return;
-//   
-//    
-//    NSString *itemName;
-//    
-//    if (item.tag == 0) {
-//        itemName = @"tabItem_home";
-//    }else if (item.tag == 1) {
-//        itemName = @"tabItem_catigory";
-//    }else if (item.tag == 2) {
-//        itemName = @"tabItem_news";
-//    }{
-//        itemName = @"tabItem_applyCenter";
-//    }
-//    [MobClick event:itemName];
-//    
-//}
-
 
 //接到通知判断页面跳转
 -(void)pushWithNoti:(NSNotification *)noti

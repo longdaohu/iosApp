@@ -13,7 +13,6 @@
 #import "HomeRecommendActivityCell.h"
 #import "SDCycleScrollView.h"
 #import "myofferGroupModel.h"
-#import "MyofferFooterView.h"
 #import "ServiceSKU.h"
 #import "MessageDetaillViewController.h"
 #import "ServiceItemViewController.h"
@@ -23,7 +22,7 @@
 #import "HomeRecommendProdoctView.h"
 
 @interface HomeRecommendVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)SDCycleScrollView *bannerView;
 @property(nonatomic,strong)UIView *header;
@@ -317,7 +316,7 @@
     CGFloat t_y = XNAV_HEIGHT + 16;
     CGFloat t_h = self.view.bounds.size.height - t_y;
     CGFloat t_w = self.view.bounds.size.width;
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, t_y, t_w, t_h) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, t_y, t_w, t_h) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -327,13 +326,12 @@
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight, 0);
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
     self.tableView.backgroundColor = XCOLOR_WHITE;
+    self.tableView.btn_title = @"网络加载失败，点击重新加载!";
+    WeakSelf
+    self.tableView.actionBlock = ^{
+        [weakSelf makeData];
+    };
 }
 
 
@@ -453,15 +451,9 @@ static NSString *identify = @"cell";
     
     self.request_count +=1;
     if (self.request_count >= self.groups.count) {
-        
-        MyofferFooterView *footer = [MyofferFooterView footer];
-        footer.actionBlock = ^{
-            [self makeData];
-        };
-        footer.mj_h = self.tableView.mj_h;
-        self.tableView.tableFooterView = footer;
+        [self.tableView emptyViewWithHiden:NO];
     }else{
-        self.tableView.tableFooterView = [UIView new];
+        [self.tableView emptyViewWithHiden:YES];
     }
 
 }

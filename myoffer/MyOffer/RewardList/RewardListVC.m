@@ -37,11 +37,7 @@
     UINib *xib = [UINib nibWithNibName:@"RewardListCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RewardListCell"];
     self.tableView.estimatedRowHeight = 75;//很重要保障滑动流畅性
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+
 }
 
 

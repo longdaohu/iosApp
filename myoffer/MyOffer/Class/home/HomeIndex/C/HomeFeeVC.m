@@ -7,7 +7,6 @@
 //
 
 #import "HomeFeeVC.h"
-#import "MyofferFooterView.h"
 #import "HomeFeeCell.h"
 #import "HomeRentCell.h"
 #import "HomeYESGlobalCell.h"

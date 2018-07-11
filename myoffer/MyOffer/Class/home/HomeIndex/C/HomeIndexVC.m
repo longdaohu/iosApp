@@ -60,20 +60,20 @@
 - (NSArray<UIViewController *> *)childViewControllersArray {
     
     if (!_childViewControllersArray) {
-        
+        //推荐
         HomeRecommendVC *recomend  = [[HomeRecommendVC alloc] init];
-        
+        //留学申请
         HomeApplicationVC *application  = [[HomeApplicationVC alloc] init];
-        
+        //学费支付
         HomeFeeVC *fee  = [[HomeFeeVC alloc] init];
         fee.type = HomeLandingTypeMoney;
-        
+        //海外租房
         HomeFeeVC *room  = [[HomeFeeVC alloc] init];
         room.type = HomeLandingTypeRoom;
-        
+        //游学职培
         HomeFeeVC *yes  = [[HomeFeeVC alloc] init];
         yes.type = HomeLandingTypeYesGlobal;
-        
+        //海外移民
         HomeFeeVC *uvic  = [[HomeFeeVC alloc] init];
         uvic.type = HomeLandingTypeUVIC;
         
@@ -102,7 +102,6 @@
 
 - (void)makeUI{
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.currentStatusBarStyle = UIStatusBarStyleDefault;
     [self makeCollectView];
     [self makeMenuView];
@@ -188,7 +187,6 @@
 
 - (void)toLoadViewControllerWithPage:(NSInteger)page{
     
-    //    NSLog(@"page ==  %ld",page);
     if (page == 0) return;
     UIViewController *vc = self.childViewControllersArray[page];
     if (page == 1) {

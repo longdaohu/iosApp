@@ -38,26 +38,13 @@
 
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
- 
     UINib *user_xib = [UINib nibWithNibName:@"InvitationRecordUserCell" bundle:nil];
     [self.tableView registerNib:user_xib forCellReuseIdentifier:@"InvitationRecordUserCell"];
     UINib *detail_xib = [UINib nibWithNibName:@"InvitationRecordDetailCell" bundle:nil];
     [self.tableView registerNib:detail_xib forCellReuseIdentifier:@"InvitationRecordDetailCell"];
-    
     self.tableView.estimatedRowHeight = 100;//很重要保障滑动流畅性
-    
-
- 
-    
-//    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-//    self.tableView.estimatedRowHeight = 0;
-//    self.tableView.estimatedSectionHeaderHeight = 0;
-//    self.tableView.estimatedSectionFooterHeight = 0;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-//        self.tableView.contentInset = UIEdgeInsetsMake(Nav_Height, 0, 0, 0);
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
 }
 

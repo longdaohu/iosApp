@@ -41,15 +41,7 @@
     [super viewDidLoad];
     
     self.title = @"我的申请";
-    
     self.datas = [self.groups copy];
-    
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,7 +58,6 @@
         
         myofferGroupModel *group = [myofferGroupModel groupWithItems:@[apply,status] header:nil];
         group.section_header_height = Section_header_Height_min;
-        
         
         _groups   =  [NSMutableArray array];
         

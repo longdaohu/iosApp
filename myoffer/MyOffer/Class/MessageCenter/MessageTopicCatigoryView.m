@@ -51,12 +51,9 @@
     UIScrollView *itemView = [[UIScrollView alloc] initWithFrame:frame];
     itemView.showsVerticalScrollIndicator = NO;
     itemView.showsHorizontalScrollIndicator = NO;
-    
     if (@available(iOS 11.0, *)) {
-        
         itemView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    
     [self addSubview:itemView];
 
     return itemView;

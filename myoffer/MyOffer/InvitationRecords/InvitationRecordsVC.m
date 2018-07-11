@@ -44,25 +44,20 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 50, XSCREEN_WIDTH, XSCREEN_HEIGHT - NavHeight - 50) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(makeMoreData)];
- 
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor greenColor];
+    self.tableView.emptyY =  (XSCREEN_HEIGHT - self.tableView.mj_y - NavHeight)* 0.5 - 200;
+    
     UINib *cell_nib = [UINib nibWithNibName:@"InvitationRecordsCell" bundle:nil];
     [self.tableView registerNib:cell_nib forCellReuseIdentifier:@"InvitationRecordsCell"];
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.emptyY = self.tableView.mj_h * 0.2;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-
     [self makeFilterView];
-    
 }
 
 - (void)makeFilterView{
@@ -75,7 +70,6 @@
         [weakSelf filterWithTag:tb_tag row:index_row];
     };
     [self.view addSubview:filterView];
-    [self.tableView setContentInset:UIEdgeInsetsMake(top_h, 0, top_h + NavHeight, 0)];
 }
 
 - (void)filterWithTag:(NSInteger)tag row:(NSInteger)row{

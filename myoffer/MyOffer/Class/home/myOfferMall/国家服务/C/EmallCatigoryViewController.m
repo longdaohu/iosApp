@@ -96,7 +96,6 @@
     self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     self.tableView.showsVerticalScrollIndicator = false;

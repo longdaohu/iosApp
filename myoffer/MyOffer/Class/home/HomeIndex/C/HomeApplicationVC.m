@@ -13,7 +13,6 @@
 #import "HomeApplicationTopView.h"
 #import "HomeApplicationDestinationCell.h"
 #import "HomeApplySubjecttCell.h"
-#import "MyofferFooterView.h"
 #import "MessageDetaillViewController.h"
 
 #import "SearchViewController.h"
@@ -187,8 +186,6 @@
     [self.view addSubview:self.bgView];
     if (@available(iOS 11.0, *)) {
         self.bgView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
     CGFloat up_w = 80;
@@ -233,7 +230,7 @@
     header.frame = CGRectMake(0, 0, header_w, header_h);
     header.clipsToBounds = YES;
     
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, header_w, XSCREEN_HEIGHT - MENU_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, header_w, XSCREEN_HEIGHT - MENU_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = header;
@@ -245,11 +242,6 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight + 30, 0);
     self.tableView.backgroundColor = XCOLOR(0, 0, 0, 0);
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
     self.tableView.layer.cornerRadius = 10;
     self.tableView.layer.masksToBounds = YES;
     self.tableView.backgroundColor = XCOLOR_WHITE;

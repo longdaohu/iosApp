@@ -83,9 +83,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
 }
 
 

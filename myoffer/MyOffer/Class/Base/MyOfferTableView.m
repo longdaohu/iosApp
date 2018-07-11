@@ -7,12 +7,15 @@
 //
 
 #import "MyOfferTableView.h"
+#import "AppButton.h"
 
 @interface MyOfferTableView ()
-@property(nonatomic,strong)UIView  *bgView;
+@property(nonatomic,strong)UIView  *tablefooter;
 @property(nonatomic,assign)BOOL  isSeted;
+@property(nonatomic,strong)UIButton  *emptyView;
 
 @end
+
 @implementation MyOfferTableView
 
 
@@ -44,30 +47,48 @@
 - (void)makeUI{
     
     self.backgroundColor = XCOLOR_BG;
-
-    self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:self.bounds];
-     self.bgView = bgView;
-    
-    [bgView addSubview:self.emptyView];
-    
-    self.emptyView.center = bgView.center;
-    
     self.emptyY = DEFAULT_NUMBER;
-    
+    if (@available(iOS 11.0, *)) {
+        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 }
+ 
 
-
-- (EmptyDataView *)emptyView{
-
+- (UIButton *)emptyView{
+    
     if (!_emptyView) {
         
-        _emptyView  = [EmptyDataView emptyViewWithBlock:nil];
-       
+        CGFloat empty_h = 200;
+        CGFloat empty_y = (self.bounds.size.height - empty_h) * 0.5;
+        AppButton *empty = [[AppButton alloc] initWithFrame: CGRectMake(0, empty_y, self.bounds.size.width, empty_h)];
+        [empty setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
+        empty.titleLabel.font = XFONT(13);
+        empty.type = MyofferButtonTypeImageTop;
+        [empty setImage: XImage(@"no_message") forState:UIControlStateNormal];
+        [empty setTitle:NetRequest_NoDATA forState:UIControlStateNormal];
+        [empty addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
+        
+        _emptyView = empty;
     }
     
     return _emptyView;
+}
+
+- (void)reload{
+  
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
+}
+
+- (UIView *)tablefooter{
+    if (!_tablefooter) {
+        
+        _tablefooter = [[UIView alloc] initWithFrame:self.bounds];
+        [_tablefooter addSubview:self.emptyView];
+    }
+    
+    return _tablefooter;
 }
 
 - (void)emptyViewWithHiden:(BOOL)hiden{
@@ -106,34 +127,37 @@
 
     }
     
-    self.bgView.mj_h = bg_height;
-  
-    self.tableFooterView = self.bgView;
-    
- 
+    self.tablefooter.mj_h = bg_height;
+    self.tableFooterView = self.tablefooter;
+    self.emptyView.center = self.tablefooter.center;
+
+    NSLog(@" emptyY == %lf",self.emptyY);
     if (self.emptyY != DEFAULT_NUMBER) {
-        
         self.emptyView.mj_y = self.emptyY;
-        
         return;
     }
+ 
+}
+
+- (void)setEmptyY:(CGFloat)emptyY{
     
-    self.emptyView.center = self.bgView.center;
+    _emptyY = emptyY;
     
-    
+    NSLog(@"bbbbb   emptyY == %lf",emptyY);
+
 }
 
 - (void)setBtn_title:(NSString *)btn_title{
     
     _btn_title = btn_title;
+    [self.emptyView setTitle:btn_title forState:UIControlStateNormal];
     
-    self.emptyView.btn_title = btn_title;
 }
 
 - (void)emptyViewWithError:(NSString *)error{
     
-    self.emptyView.errorStr =  error;
-    
+
+    [self.emptyView setTitle:error forState:UIControlStateNormal];
     [self emptyViewWithHiden:NO];
 
 }
@@ -142,9 +166,10 @@
     
     _empty_icon  = empty_icon;
     
-    self.emptyView.icon = empty_icon;
+    [self.emptyView setImage:XImage(empty_icon) forState:UIControlStateNormal];
     
 }
+
 
 
 @end

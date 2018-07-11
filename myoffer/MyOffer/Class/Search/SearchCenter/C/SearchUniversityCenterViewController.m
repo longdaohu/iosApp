@@ -425,11 +425,6 @@
     [self.view addSubview:self.tableView];
     self.tableView.contentInset = UIEdgeInsetsMake(50, 0, XNAV_HEIGHT, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
 
 }
 

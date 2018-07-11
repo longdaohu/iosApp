@@ -62,11 +62,8 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.rowHeight = 60;
     self.tableView.sectionFooterHeight = Section_footer_Height_nomal;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
  
     //上拉刷新
     MJRefreshNormalHeader *header  = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];

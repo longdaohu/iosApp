@@ -50,7 +50,7 @@
     //  创建需要的毛玻璃特效类型
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark ];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    effectView.alpha = 0.9;
+    effectView.alpha = 1;
     [self.title_bgView insertSubview:effectView  atIndex:0];
     self.effectView = effectView;
 }
@@ -88,7 +88,6 @@
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-    
     self.effectView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_WIDTH);
     
 }

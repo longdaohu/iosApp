@@ -80,16 +80,6 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    /*
-     *automaticallyAdjustsScrollViewInsets属性被废弃了，顶部就多了一定的inset，
-     关于安全区域适配，简书上的这篇文章iOS 11 安全区域适配总结介绍得非常详细，请参考这篇文章。
-     */
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([GuideCell class]) bundle:nil]   forCellReuseIdentifier:NSStringFromClass([GuideCell class])];
     self.tableView.backgroundColor = XCOLOR_WHITE;
     self.tableView.estimatedRowHeight = 255;//很重要保障滑动流畅性

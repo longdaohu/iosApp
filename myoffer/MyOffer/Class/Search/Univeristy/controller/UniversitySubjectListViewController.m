@@ -40,7 +40,6 @@
     if (self) {
         _universityID = ID;
         self.resquestParameters = [@{@":id": _universityID, KEY_PAGE: @0, KEY_SIZE: @40} mutableCopy];
-        self.automaticallyAdjustsScrollViewInsets = NO;
         self.title = @"课程详情";
         
     }
@@ -95,7 +94,7 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)makeFilter{

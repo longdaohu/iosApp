@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EmptyDataView.h"
+//#import "EmptyDataView.h"
 
 @interface MyOfferTableView : UITableView
-@property(nonatomic,strong)EmptyDataView  *emptyView;
 @property(nonatomic,assign)CGFloat emptyY;
 @property(nonatomic,copy)NSString *btn_title;
 @property(nonatomic,copy)NSString *empty_icon;
+@property(nonatomic,copy)void(^actionBlock)(void);
 
 - (void)emptyViewWithHiden:(BOOL)hiden;
 - (void)emptyViewWithError:(NSString *)error;

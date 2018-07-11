@@ -110,18 +110,12 @@
 
 - (UITableView *)tableViewWithFrame:(CGRect)frame superView:(UIView *)bgView{
 
-    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    UITableView *tableView = [[MyOfferTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.tableFooterView = [[UIView alloc] init];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.contentInset = UIEdgeInsetsMake(0, 0, XNAV_HEIGHT, 0);
-    if (@available(iOS 11.0, *)) {
-         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
     [bgView addSubview:tableView];
     
     return tableView;

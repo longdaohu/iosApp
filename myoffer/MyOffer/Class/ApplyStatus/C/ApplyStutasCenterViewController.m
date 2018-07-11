@@ -109,14 +109,8 @@
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     [self.view addSubview:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
     WeakSelf
-    self.tableView.emptyView.actionBlock = ^{
+    self.tableView.actionBlock = ^{
 
         [weakSelf caseEMall];
     };

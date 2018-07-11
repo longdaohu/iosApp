@@ -308,7 +308,6 @@
     self.tableView.backgroundColor = XCOLOR_BG;
     [self.view addSubview:self.tableView];
     self.tableView.estimatedRowHeight = 200;
-    self.automaticallyAdjustsScrollViewInsets = NO;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }

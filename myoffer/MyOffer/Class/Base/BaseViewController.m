@@ -280,6 +280,9 @@
     self.conn = [Reachability reachabilityWithHostName:@"www.baidu.com"];
     [self.conn startNotifier];
     self.view.backgroundColor = XCOLOR_BG;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
 }
 
 - (void)networkStateChange

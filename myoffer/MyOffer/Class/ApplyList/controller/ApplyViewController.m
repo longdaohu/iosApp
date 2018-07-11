@@ -238,10 +238,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     [self.view insertSubview:self.tableView atIndex:0];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 }
 
@@ -258,9 +255,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
     [self.submitBtn setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
     [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_RED] forState:UIControlStateNormal];
     [self.cancelBottomButton setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_Disable] forState:UIControlStateDisabled];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+        
     self.tableView.sectionFooterHeight =  Section_footer_Height_nomal;
 
 }

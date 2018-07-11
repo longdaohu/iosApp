@@ -15,7 +15,6 @@
 #define SEARCHPAGE @"page搜索"
 
 @interface SearchViewController ()<FilterTableViewCellDelegate>
-//@property(nonatomic,strong)NSMutableArray *FiltItems;//搜索数据
 @property(nonatomic,strong)NSMutableArray *groups;//搜索数据
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarConstant;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -53,14 +52,6 @@
     
 }
 
-//-(NSMutableArray *)FiltItems
-//{
-//    if (!_FiltItems) {
-//
-//        _FiltItems = [NSMutableArray array];
-//    }
-//    return _FiltItems;
-//}
 
 -(NSMutableArray *)groups
 {
@@ -103,8 +94,6 @@
     self.tableView.tableFooterView =[[UIView alloc] init];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
 }

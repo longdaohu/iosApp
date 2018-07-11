@@ -295,20 +295,10 @@ typedef enum {
 -(void)makeUI{
 
     [self makeTableView];
-    
     [self makeTopView];
-    
     [self makeBottomView];
-    
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.footer.mj_h, 0);
-    
     self.view.clipsToBounds = YES;
-    
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-
 
 }
 
@@ -350,8 +340,8 @@ typedef enum {
     self.tableView.dataSource   = self;
     [self.view addSubview:self.tableView];
     self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self makeTopNavigaitonView];
-    
 }
 
 //表头显示图片
