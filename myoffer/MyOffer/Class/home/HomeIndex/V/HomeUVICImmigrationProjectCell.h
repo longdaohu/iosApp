@@ -12,8 +12,3 @@
 @property(nonatomic,strong)NSDictionary *item;
 @end
 
-@interface ItemCellView : UIView
-@property(nonatomic,strong)NSDictionary *item;
-@property(nonatomic,assign)CGFloat cell_height;
-
-@end

@@ -162,12 +162,19 @@
             UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
             NSArray *excludedActivities = @[UIActivityTypePostToTwitter,
                                             UIActivityTypePostToFacebook,
-                                            UIActivityTypePostToWeibo,
-                                            UIActivityTypePostToTencentWeibo];
+                                            UIActivityTypeAirDrop,
+                    ];
             activityVC.excludedActivityTypes = excludedActivities;
             if ( [activityVC respondsToSelector:@selector(popoverPresentationController)] ) {
                  activityVC.popoverPresentationController.sourceView = self.view;
              }
+            activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+              
+                if (activityType == UIActivityTypeCopyToPasteboard) {
+                    [UIPasteboard generalPasteboard].string = shareURL;
+                }
+                
+            };
             
             [self presentViewController:activityVC animated:YES completion:nil];
         }

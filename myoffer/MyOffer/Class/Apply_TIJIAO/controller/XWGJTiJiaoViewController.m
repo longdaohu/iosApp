@@ -200,7 +200,7 @@ typedef enum {
     
     [self makeUI];
     
-    [self makeBaseSourse];
+//    [self makeBaseSourse];
     
 }
 
@@ -411,14 +411,11 @@ typedef enum {
                                 CountryItem *item = [CountryItem CountryWithDictionary:obj];
                                 return item;
                             }];
-    
-    
-    NSArray *countryItems_EN = [[ud valueForKey:@"Country_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                            {
-                                CountryItem *item = [CountryItem CountryWithDictionary:obj];
-                                return item;
-                            }];
-    self.countryItems_CE = @[countryItems_CN,countryItems_EN];
+
+    if (countryItems_CN.count > 0) {
+        self.countryItems_CE = @[countryItems_CN];
+        self.countryItems = self.countryItems_CE[0];
+    }
     
  
     
@@ -427,14 +424,12 @@ typedef enum {
                                 SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
                                 return item;
                             }];
-    NSArray *subjectItems_EN = [[ud valueForKey:@"Subject_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                            {
-                                SubjectItem *item = [SubjectItem subjectWithDictionary:obj];
-                                return item;
-                            }];
-    
-    self.subjectItems_CE     = @[subjectItems_CN,subjectItems_EN];
+ 
 
+    if (subjectItems_CN.count > 0) {
+        self.subjectItems_CE = @[subjectItems_CN];
+        self.ApplyItems = self.subjectItems_CE[0];
+    }
     
  
     NSArray *gradeItems_CN = [[ud valueForKey:@"Grade_CN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
@@ -442,20 +437,10 @@ typedef enum {
                               GradeItem *item = [GradeItem gradeWithDictionary:obj];
                               return item;
                           }];
-    
-    NSArray *gradeItems_EN = [[ud valueForKey:@"Grade_EN"] KD_arrayUsingMapEnumerateBlock:^id(NSDictionary *obj, NSUInteger idx)
-                          {
-                              GradeItem *item = [GradeItem gradeWithDictionary:obj];
-                              return item;
-                          }];
-    self.gradeItems_CE = @[gradeItems_CN,gradeItems_EN];
-
-    
- 
-
-    self.countryItems = self.countryItems_CE[0];
-    self.ApplyItems   = self.subjectItems_CE[0];
-    self.gradeItems   = self.gradeItems_CE[0];
+    if (gradeItems_CN.count > 0) {
+        self.gradeItems_CE = @[gradeItems_CN];
+        self.gradeItems   = self.gradeItems_CE[0];
+    }
     
 }
 //国家名称本地化

@@ -10,4 +10,5 @@
 
 @interface HomeApplicationVC : BaseViewController
 - (void)toLoadView;
+- (void)toSetTabBarhidden;
 @end

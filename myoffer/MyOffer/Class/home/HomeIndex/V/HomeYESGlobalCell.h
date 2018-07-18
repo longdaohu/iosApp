@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeYESGlobalCell : UITableViewCell
-
+@property(nonatomic,copy)void(^actionBlock)(NSString *path);
 @end

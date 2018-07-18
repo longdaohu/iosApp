@@ -13,21 +13,42 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeUVICImmigrationProjectCell" id="gTV-IL-0wX" customClass="HomeUVICImmigrationProjectCell">
-            <rect key="frame" x="0.0" y="0.0" width="277" height="224"/>
+            <rect key="frame" x="0.0" y="0.0" width="249" height="249"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="277" height="224"/>
+                <rect key="frame" x="0.0" y="0.0" width="249" height="249"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1J-ru-DbF">
-                        <rect key="frame" x="0.0" y="0.0" width="277" height="32"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7bV-vj-s57">
+                        <rect key="frame" x="0.0" y="0.0" width="249" height="177"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="32" id="8dV-q3-srw"/>
+                            <constraint firstAttribute="height" constant="177" id="Jw6-4r-aAv"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YxM-d7-Ma8">
+                        <rect key="frame" x="14" y="218" width="221" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.19607843137254902" green="0.15686274509803921" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDe-zX-Qo3">
+                        <rect key="frame" x="189" y="0.0" width="70" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="7cE-Lr-4hy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <state key="normal" title="项目一" backgroundImage="home_uvic_white_icon">
+                            <color key="titleColor" red="0.19607843137254902" green="0.15686274509803921" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1J-ru-DbF">
+                        <rect key="frame" x="14" y="189" width="78" height="23"/>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.15686274509803921" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="qNA-xB-CAv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <state key="normal" title="项目优势">
                             <color key="titleColor" red="0.97953344669999998" green="0.97829060219999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -35,16 +56,29 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Z1J-ru-DbF" secondAttribute="trailing" id="Dbr-2P-YJO"/>
-                <constraint firstItem="Z1J-ru-DbF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gIW-2A-sAx"/>
-                <constraint firstItem="Z1J-ru-DbF" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vPJ-28-7EQ"/>
+                <constraint firstAttribute="trailing" secondItem="YxM-d7-Ma8" secondAttribute="trailing" constant="14" id="5bY-gh-ycE"/>
+                <constraint firstItem="YxM-d7-Ma8" firstAttribute="leading" secondItem="Z1J-ru-DbF" secondAttribute="leading" id="Sdc-JL-Zf7"/>
+                <constraint firstAttribute="trailing" secondItem="aDe-zX-Qo3" secondAttribute="trailing" constant="-10" id="SuS-AE-lwp"/>
+                <constraint firstItem="7bV-vj-s57" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aRW-az-mfd"/>
+                <constraint firstAttribute="trailing" secondItem="7bV-vj-s57" secondAttribute="trailing" id="adP-gR-RsT"/>
+                <constraint firstItem="YxM-d7-Ma8" firstAttribute="top" secondItem="Z1J-ru-DbF" secondAttribute="bottom" constant="6" id="fjE-bf-7k8"/>
+                <constraint firstItem="Z1J-ru-DbF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="14" id="hw3-6Y-dgV"/>
+                <constraint firstItem="7bV-vj-s57" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kuR-SU-X05"/>
+                <constraint firstItem="Z1J-ru-DbF" firstAttribute="top" secondItem="7bV-vj-s57" secondAttribute="bottom" constant="12" id="lDW-4P-uFg"/>
+                <constraint firstItem="aDe-zX-Qo3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wme-aW-xId"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <size key="customSize" width="277" height="224"/>
+            <size key="customSize" width="391" height="419"/>
             <connections>
+                <outlet property="iconView" destination="7bV-vj-s57" id="uVO-bI-MZD"/>
+                <outlet property="subLab" destination="YxM-d7-Ma8" id="VF6-vB-m3d"/>
+                <outlet property="tagBtn" destination="aDe-zX-Qo3" id="08O-I7-Qhc"/>
                 <outlet property="titleBtn" destination="Z1J-ru-DbF" id="rt6-cR-xXw"/>
             </connections>
-            <point key="canvasLocation" x="146.5" y="123"/>
+            <point key="canvasLocation" x="203.5" y="220.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="home_uvic_white_icon" width="48" height="36"/>
+    </resources>
 </document>

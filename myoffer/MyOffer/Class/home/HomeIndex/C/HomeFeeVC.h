@@ -19,4 +19,6 @@ typedef NS_ENUM(NSInteger,HomeLandingType) {
 @interface HomeFeeVC : UIViewController
 @property(nonatomic,assign)HomeLandingType type;
 - (void)toLoadView;
+- (void)toSetTabBarhidden;
+
 @end

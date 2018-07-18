@@ -30,8 +30,9 @@
 #import "MQChatViewManager.h"
 #import "MeiqiaServiceCall.h"
 #import "RewardVC.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
+@interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)LeftMenuHeaderView *header_topView;
@@ -368,14 +369,14 @@
 #pragma mark : UIImagePickerControlleDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
     UIImage *image = info[UIImagePickerControllerEditedImage];
     image = [image KD_imageByCroppedToSquare:600];
-    
     self.header_topView.iconImage = image;
+    [self imagePickerControllerDidCancel:picker];
+//   [picker dismissViewControllerAnimated:YES completion:^{}];
+//    模仿发送成功
     
-    
-    NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    NSData *data = UIImageJPEGRepresentation(image, 0.7);
     NSString *path = [NSString stringWithFormat:@"%@m/api/account/portrait",DOMAINURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
     [request setHTTPMethod:@"POST"];
@@ -396,11 +397,14 @@
     } failure:^(NSInteger statusCode, NSError *error) {
         [self showAPIErrorAlertView:error clickAction:nil];
     }];
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
-    [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
+    //方法过期，但是内存不泄漏
+    [picker dismissModalViewControllerAnimated:YES];
+ 
 }
 
 
@@ -564,30 +568,50 @@
     // @"拍照"  @"从手机相册选择"
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
-        [as addButtonWithTitle:GDLocalizedString(@"Me-009") action:^{
-            
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = weakSelf;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            imagePicker.allowsEditing = YES;
-            imagePicker.showsCameraControls = YES;
-            [self presentViewController:imagePicker animated:YES completion:^{}];
-            
+        [as addButtonWithTitle:@"拍照" action:^{
+            [weakSelf imagePickerWithType:UIImagePickerControllerSourceTypeCamera];
         }];
     }
     
-    [as addButtonWithTitle:GDLocalizedString(@"Me-0010") action:^{
-        
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = weakSelf;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.allowsEditing = YES;
-        [self presentViewController:imagePicker animated:YES completion:^{}];
-        
-    }];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
     
-    [as showInView:[weakSelf view]];
+        [as addButtonWithTitle:@"从手机相册选择" action:^{
+            [weakSelf imagePickerWithType:UIImagePickerControllerSourceTypePhotoLibrary];
+        }];
+    }
     
+    [as showInView:self.view];
+    
+}
+
+- (void)imagePickerWithType:(UIImagePickerControllerSourceType)type{
+    
+    
+    if (type == UIImagePickerControllerSourceTypeCamera) {
+        
+        NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
+        if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+            
+            NSString *errorStr = @"应用相机权限受限,请在“设置”-“隐私”-“相机”中启用";
+            UIAlertController *alertVC = [UIAlertController alertWithTitle:errorStr message:nil actionWithCancelTitle:@"好的" actionWithCancelBlock:nil actionWithDoneTitle:nil actionWithDoneHandler:^{
+            }];
+            [alertVC alertShow:self];
+            
+            return;
+        }
+        
+    }
+    
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = type;
+    imagePicker.allowsEditing = YES;
+    if (type == UIImagePickerControllerSourceTypeCamera) {
+        imagePicker.showsCameraControls = YES;
+    }
+    [self presentViewController:imagePicker animated:YES completion:^{}];
     
 }
 
@@ -607,7 +631,7 @@
     
 }
 
-//服务状态
+#pragma mark : 服务状态
 - (void)caseMakeDataServiceStatus{
 
     WeakSelf
@@ -653,7 +677,6 @@
 }
 //网络请求智能匹配数据
 - (void)caseMakeDataForPipei{
-
     [self requestWithPath:kAPISelectorZiZengPipeiGet];
 }
 //网络请求新消息数据

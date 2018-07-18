@@ -90,20 +90,25 @@
 
     if (self.isloaded) return;
     self.isloaded = YES;
-    //    if (!delayed) {
-    //        [self makeUI];
-    //        return;
-    //    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self makeUI];
     });
+}
+
+- (void)toSetTabBarhidden{
+    
+    if (self.meiqiaBtn) {
+        self.tabBarController.tabBar.hidden = (self.meiqiaBtn.alpha > 0 ? NO : YES);
+    }else{
+        self.tabBarController.tabBar.hidden = YES;
+    }
 }
 
 
 - (void)makeUI{
     
     self.bgView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    self.bgView.contentSize = CGSizeMake(XSCREEN_WIDTH, XSCREEN_HEIGHT + 10);
+    self.bgView.contentSize = CGSizeMake(XSCREEN_WIDTH, XSCREEN_HEIGHT+1);
     self.bgView.delegate = self;
     [self.view addSubview:self.bgView];
     if (@available(iOS 11.0, *)) {
@@ -207,9 +212,39 @@
     if (!cell) {
         cell = Bundle(class_name);
     }
+
+    if ([class_name isEqualToString:@"HomeFeeCell"]) {
+        HomeFeeCell *cell_fee = (HomeFeeCell *)cell;
+        cell_fee.actionBlock = ^(NSString *path) {
+            [self web:path];
+        };
+    }
+    
+    if ([class_name isEqualToString:@"HomeRentCell"]) {
+        HomeRentCell *cell_fee = (HomeRentCell *)cell;
+        cell_fee.actionBlock = ^(NSString *path) {
+            [self web:path];
+        };
+    }
+    
+    if ([class_name isEqualToString:@"HomeYESGlobalCell"]) {
+        HomeYESGlobalCell *cell_fee = (HomeYESGlobalCell *)cell;
+        cell_fee.actionBlock = ^(NSString *path) {
+            [self web:path];
+        };
+    }
+    
+    if ([class_name isEqualToString:@"HomeUVICCell"]) {
+        HomeUVICCell *cell_fee = (HomeUVICCell *)cell;
+        cell_fee.actionBlock = ^(NSString *path) {
+            [self web:path];
+        };
+    }
+    
     return cell;
     
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return   UITableViewAutomaticDimension;
@@ -220,45 +255,36 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     if (scrollView == self.bgView) {
-        //        NSLog(@"Aaaaaaaa --- %lf bgView = %d", scrollView.mj_offsetY,scrollView.userInteractionEnabled);
         if (self.isTableOnMoving) return;
-        self.tableView.mj_y =  (XSCREEN_HEIGHT - 1.5*scrollView.mj_offsetY);
-    }
+            self.tableView.mj_y =  (XSCREEN_HEIGHT - 1.5 * scrollView.mj_offsetY);
+     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     
     if (self.bgView == scrollView ) {
         
-//        NSLog(@"BBBBB --- %lf  bgView   %lf", scrollView.mj_offsetY,XSCREEN_WIDTH * 0.3);
-        
         self.isTableOnMoving = (scrollView.mj_offsetY >= XSCREEN_WIDTH * 0.3);
-        
         if (!self.isTableOnMoving) return;
         if (scrollView.mj_offsetY >= XSCREEN_WIDTH * 0.3) {
-//            NSLog(@"CCCCCC --- %lf   bgView", scrollView.mj_offsetY);
             [self caseToTop];
         }
     }
-    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     if (self.tableView == scrollView) {
-        
         if (-scrollView.mj_offsetY >= XSCREEN_WIDTH * 0.2) {
-//            NSLog(@"-----DDDDD---- %lf    %d  tableView",scrollView.mj_offsetY,decelerate);
             [self caseToBottom];
         }
     }
 }
 
 - (void)caseToTop{
-//    NSLog(@"-----caseToTop----caseToTop start");
     self.isTableOnMoving = YES;
     self.bgView.userInteractionEnabled = NO;
-    
+    self.tabBarController.tabBar.hidden = NO;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.tableView.mj_y =  MENU_HEIGHT;
         self.meiqiaBtn.alpha = 1;
@@ -269,25 +295,21 @@
         self.tableView.userInteractionEnabled = YES;
         self.isTableOnMoving = NO;
         
-//        NSLog(@"-----caseToTop----caseToTop   end");
-        
     }];
 }
 
 - (void)caseToBottom{
     
-//    NSLog(@"-----caseToBottom----caseToBottom start");
     self.isTableOnMoving = YES;
     self.tableView.userInteractionEnabled = NO;
-    
+    self.tabBarController.tabBar.hidden = YES;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.tableView.mj_y = XSCREEN_HEIGHT - MENU_HEIGHT;
+        self.tableView.mj_y = XSCREEN_HEIGHT + 50;
         self.meiqiaBtn.alpha = 0;
     } completion:^(BOOL finished) {
         
         self.bgView.userInteractionEnabled = YES;
         self.isTableOnMoving = NO;
-//        NSLog(@"-----caseToBottom----caseToBottom end");
         
     }];
 }
@@ -296,6 +318,11 @@
     
     self.isMeiqiaPush = YES;
     [MeiqiaServiceCall callWithController:self];
+}
+
+- (void)web:(NSString *)path{
+    WebViewController *vc  = [[WebViewController alloc] initWithPath:path];
+    PushToViewController(vc);
 }
 
 

@@ -55,7 +55,7 @@
     [self tabbaritem:3 nomalImage:@"center_nomal" selectImage:@"center_select"];
     self.tabBar.tintColor = XCOLOR(51, 51, 51, 1);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
-
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void)tabbaritem:(NSInteger)index nomalImage:(NSString *)nomalName  selectImage:(NSString *)selectName

@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIView *Whatget07;
 @property (weak, nonatomic) IBOutlet UIView *Whatget09;
 @property (weak, nonatomic) IBOutlet UIView *Whatget010;
+@property (weak, nonatomic) IBOutlet UILabel *contactLab;
 
 @property(nonatomic,strong)NSArray *projectViews;
 @property(nonatomic,strong)NSArray *itemViews;
@@ -54,7 +55,19 @@
     
     self.itemViews = @[self.Whatget01,self.Whatget02,self.Whatget03,self.Whatget04,self.Whatget05,self.Whatget06,self.Whatget07,self.Whatget08,self.Whatget09,self.Whatget010,self.Whatget011,self.Whatget012,self.Whatget013,self.Whatget014];
     
+    NSString *web = @"www.yesglobal.cn访问官网查看更多";
+    NSString *start = @"欢迎加入 YES.Global 海外创业大赛联系邮箱：hello@yesociety.org官方网站：";
+    NSDictionary *attribtDic = @{ NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithAttributedString:self.contactLab.attributedText];
+    [attribtStr addAttributes:attribtDic range:NSMakeRange(start.length + 4 , web.length)];
+    self.contactLab.attributedText = attribtStr;
  
+}
+- (IBAction)webOnClicked:(id)sender {
+    
+    if (self.actionBlock) {
+        self.actionBlock(@"http://www.yesglobal.cn/");
+    }
 }
 
 

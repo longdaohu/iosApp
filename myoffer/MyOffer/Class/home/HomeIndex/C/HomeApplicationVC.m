@@ -69,19 +69,25 @@
 
 - (void)toLoadView{
  
-    if (self.upBtn)  [self upButtonAnimate:self.upBtn];
- 
+    if (self.upBtn) {
+         [self upButtonAnimate:self.upBtn];
+    }
     if (self.isloaded) return;
     self.isloaded = YES;
-    //    if (!delayed) {
-    //        [self makeUI];
-    //        return;
-    //    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self makeUI];
         [self makedData];
     });
+ 
+}
 
+- (void)toSetTabBarhidden{
+    
+    if (self.meiqiaBtn) {
+        self.tabBarController.tabBar.hidden = (self.meiqiaBtn.alpha > 0 ? NO : YES);
+    }else{
+        self.tabBarController.tabBar.hidden = YES;
+    }
 }
 
 - (UIButton *)meiqiaBtn{
@@ -181,7 +187,7 @@
     self.view.clipsToBounds = YES;
     
     self.bgView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    self.bgView.contentSize = CGSizeMake(XSCREEN_WIDTH, XSCREEN_HEIGHT + 10);
+    self.bgView.contentSize = CGSizeMake(XSCREEN_WIDTH, XSCREEN_HEIGHT+1);
     self.bgView.delegate = self;
     [self.view addSubview:self.bgView];
     if (@available(iOS 11.0, *)) {
@@ -390,23 +396,17 @@ static NSString *identify = @"cell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     if (scrollView == self.bgView) {
-//        NSLog(@"Aaaaaaaa --- %lf bgView = %d", scrollView.mj_offsetY,scrollView.userInteractionEnabled);
         if (self.isTableOnMoving) return;
-        self.tableView.mj_y =  (XSCREEN_HEIGHT - 1.5*scrollView.mj_offsetY);
+        self.tableView.mj_y =  (XSCREEN_HEIGHT - 1.5 * scrollView.mj_offsetY);
     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     
     if (self.bgView == scrollView ) {
-        
-//        NSLog(@"BBBBB --- %lf  bgView   %lf", scrollView.mj_offsetY,XSCREEN_WIDTH * 0.3);
-        
         self.isTableOnMoving = (scrollView.mj_offsetY >= XSCREEN_WIDTH * 0.3);
-        
         if (!self.isTableOnMoving) return;
         if (scrollView.mj_offsetY >= XSCREEN_WIDTH * 0.3) {
-//            NSLog(@"CCCCCC --- %lf   bgView", scrollView.mj_offsetY);
             [self caseToTop];
         }
     }
@@ -426,10 +426,9 @@ static NSString *identify = @"cell";
 }
 
 - (void)caseToTop{
-    
-    
-//    NSLog(@"-----caseToTop----caseToTop start");
-    
+ 
+    self.tabBarController.tabBar.hidden = NO;
+
     self.isTableOnMoving = YES;
     self.bgView.userInteractionEnabled = NO;
     
@@ -441,29 +440,23 @@ static NSString *identify = @"cell";
         [self.bgView setContentOffset:CGPointZero animated:NO];
         self.tableView.userInteractionEnabled = YES;
         self.isTableOnMoving = NO;
-        
-//        NSLog(@"-----caseToTop----caseToTop   end");
-        
     }];
+    
 }
 
 - (void)caseToBottom{
     
-    
-//    NSLog(@"-----caseToBottom----caseToBottom start");
-    
+    self.tabBarController.tabBar.hidden = YES;
     self.isTableOnMoving = YES;
     self.tableView.userInteractionEnabled = NO;
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.tableView.mj_y = XSCREEN_HEIGHT - MENU_HEIGHT;
+        self.tableView.mj_y = XSCREEN_HEIGHT + 50;
         self.meiqiaBtn.alpha = 0;
     } completion:^(BOOL finished) {
         
         self.bgView.userInteractionEnabled = YES;
         self.isTableOnMoving = NO;
-//        NSLog(@"-----caseToBottom----caseToBottom end");
-        
     }];
 }
 

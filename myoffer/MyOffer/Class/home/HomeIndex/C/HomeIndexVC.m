@@ -137,6 +137,7 @@
     cView.pagingEnabled = YES;
     cView.backgroundColor = XCOLOR_WHITE;
     cView.bounces = NO;
+    cView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:cView];
     self.clView = cView;
     [cView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
@@ -163,7 +164,10 @@
 #pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.MenuBarView menuDidScrollWithScrollView:scrollView];
+    NSInteger index = (NSInteger)((scrollView.mj_offsetX / scrollView.mj_w) + 0.5);
+    [self toSetTabBarHidden:index];
 }
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     //防止 非用户用原因 DidDidEndDeceleratingWithScrollView没被调用
     if (!decelerate) {
@@ -185,9 +189,29 @@
     [self toLoadViewControllerWithPage:index];
 }
 
+
+- (void)toSetTabBarHidden:(NSInteger)index{
+    
+    if (index == 0){
+        self.tabBarController.tabBar.hidden = NO;
+        return;
+    }
+    UIViewController *vc = self.childViewControllersArray[index];
+    if (index == 1) {
+        HomeApplicationVC *application = (HomeApplicationVC *)vc;
+        [application toSetTabBarhidden];
+    }else{
+        HomeFeeVC *other = (HomeFeeVC *)vc;
+        [other toSetTabBarhidden];
+    }
+}
+
 - (void)toLoadViewControllerWithPage:(NSInteger)page{
     
-    if (page == 0) return;
+    if (page == 0){
+        self.tabBarController.tabBar.hidden = NO;
+        return;
+    }
     UIViewController *vc = self.childViewControllersArray[page];
     if (page == 1) {
         HomeApplicationVC *application = (HomeApplicationVC *)vc;

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeFeeCell : UITableViewCell
-
+@property(nonatomic,copy)void(^actionBlock)(NSString *path);
 @end

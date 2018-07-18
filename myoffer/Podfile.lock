@@ -1,5 +1,6 @@
 PODS:
   - DACircularProgress (2.3.1)
+  - FBRetainCycleDetector (0.1.4)
   - IDMPhotoBrowser (1.11.3):
     - DACircularProgress
     - pop
@@ -15,6 +16,8 @@ PODS:
   - Meiqia/MQChatViewController (3.4.5):
     - Meiqia/MeiqiaSDK
   - MJExtension (3.0.13)
+  - MLeaksFinder (1.0.0):
+    - FBRetainCycleDetector
   - pop (1.0.10)
   - SDCycleScrollView (1.73):
     - SDWebImage (~> 4.0.0)
@@ -29,18 +32,21 @@ DEPENDENCIES:
   - JPush
   - Meiqia
   - MJExtension
+  - MLeaksFinder
   - SDCycleScrollView
   - ZFPlayer
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - DACircularProgress
+    - FBRetainCycleDetector
     - IDMPhotoBrowser
     - JCore
     - JPush
     - Masonry
     - Meiqia
     - MJExtension
+    - MLeaksFinder
     - pop
     - SDCycleScrollView
     - SDWebImage
@@ -48,17 +54,19 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   IDMPhotoBrowser: b96159fe4adb991a844068eb17dab9c0b7d7e51a
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   Meiqia: 17055d9abb1269243d82d9d8adb27151a1b6ef40
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   SDCycleScrollView: d0fd5fe40a80918371fd8939214eb3be81033d83
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: dafcd3726e28e8a7f4b2663ba8f5911253896adc
+PODFILE CHECKSUM: 91bfe0f22f78e77d8eb4eb16be2ec81e65e8cdb9
 
 COCOAPODS: 1.5.0

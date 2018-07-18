@@ -131,7 +131,6 @@
     self.tableFooterView = self.tablefooter;
     self.emptyView.center = self.tablefooter.center;
 
-    NSLog(@" emptyY == %lf",self.emptyY);
     if (self.emptyY != DEFAULT_NUMBER) {
         self.emptyView.mj_y = self.emptyY;
         return;
@@ -142,8 +141,6 @@
 - (void)setEmptyY:(CGFloat)emptyY{
     
     _emptyY = emptyY;
-    
-    NSLog(@"bbbbb   emptyY == %lf",emptyY);
 
 }
 

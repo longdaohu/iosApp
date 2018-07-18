@@ -16,6 +16,7 @@
 @property(nonatomic,assign)CGRect last_frame;
 @property(nonatomic,strong)NSArray *projectViews;
 @property(nonatomic,strong)CAShapeLayer *shadowLayer;
+@property (weak, nonatomic) IBOutlet UILabel *contactLab;
 
 @end
 
@@ -24,6 +25,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.projectViews = @[self.home_room_apartment_01,self.home_room_apartment_02,self.home_room_apartment_03,self.home_room_apartment_04];
+    
+    NSString *web = @"www.51room.com访问官网查看更多";
+    NSDictionary *attribtDic = @{ NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithAttributedString:self.contactLab.attributedText];
+    [attribtStr addAttributes:attribtDic range:NSMakeRange(5, web.length)];
+    self.contactLab.attributedText = attribtStr;
+    
 }
 
 - (CAShapeLayer *)shadowLayer{
@@ -58,6 +66,13 @@
         }
         self.shadowLayer.shadowPath = path.CGPath;
  
+}
+- (IBAction)webOnClicked:(id)sender {
+    
+//    NSLog(@"www.51room.com");
+    if (self.actionBlock) {
+        self.actionBlock(@"https://www.51room.com");
+    }
 }
 
 

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIView *home_fee_pay_04;
 @property (weak, nonatomic) IBOutlet UIView *home_fee_pay_05;
 @property (weak, nonatomic) IBOutlet UIView *home_fee_pay_06;
+@property (weak, nonatomic) IBOutlet UILabel *contactLab;
 
 @property(nonatomic,assign)CGRect last_frame;
 @property(nonatomic,strong)NSArray *oneViews;
@@ -27,10 +28,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
     self.oneViews = @[self.home_fee_pay_01,self.home_fee_pay_02,self.home_fee_pay_03];
     self.twoViews = @[self.home_fee_pay_01,self.home_fee_pay_02,self.home_fee_pay_03];
+    
+    
+    NSString *web = @"www.mymoney.net 访问官网查看更多";
+    NSDictionary *attribtDic = @{ NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithAttributedString:self.contactLab.attributedText];
+    [attribtStr addAttributes:attribtDic range:NSMakeRange(5, web.length)];
+    self.contactLab.attributedText = attribtStr;
     
 }
 
@@ -68,6 +74,13 @@
     return _shaper;
 }
 
+- (IBAction)webOnClicked:(UIButton *)sender {
+    
+//    NSLog(@"www.mymoney.net");
+    if (self.actionBlock) {
+        self.actionBlock(@"https://www.mymoney.net/");
+    }
+}
 
 
 - (void)layoutSubviews{

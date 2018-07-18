@@ -260,20 +260,6 @@
 		AE60C20420E25146000867A8 /* home_global_ad_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20120E25144000867A8 /* home_global_ad_02.jpg */; };
 		AE60C20520E25146000867A8 /* home_global_ad_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20220E25144000867A8 /* home_global_ad_03.jpg */; };
 		AE60C20620E25146000867A8 /* home_global_ad_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20320E25145000867A8 /* home_global_ad_01.jpg */; };
-		AE60C21020E47F10000867A8 /* home_uvic_yang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20D20E47F0D000867A8 /* home_uvic_yang.jpg */; };
-		AE60C21120E47F10000867A8 /* home_uvic_dong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20E20E47F0E000867A8 /* home_uvic_dong.jpg */; };
-		AE60C21220E47F10000867A8 /* home_uvic_zhang.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C20F20E47F0F000867A8 /* home_uvic_zhang.jpg */; };
-		AE60C21420E48004000867A8 /* home_uvic_white_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21320E48003000867A8 /* home_uvic_white_icon.jpg */; };
-		AE60C21620E48177000867A8 /* home_uvic_trademark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21520E48176000867A8 /* home_uvic_trademark.jpg */; };
-		AE60C21B20E48721000867A8 /* home_uvice_VisaCenter_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21720E4871F000867A8 /* home_uvice_VisaCenter_c.jpg */; };
-		AE60C21C20E48721000867A8 /* home_uvice_VisaCenter_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21820E4871F000867A8 /* home_uvice_VisaCenter_b.jpg */; };
-		AE60C21D20E48721000867A8 /* home_uvice_VisaCenter_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21920E48720000867A8 /* home_uvice_VisaCenter_d.jpg */; };
-		AE60C21E20E48721000867A8 /* home_uvice_VisaCenter_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21A20E48721000867A8 /* home_uvice_VisaCenter_a.jpg */; };
-		AE60C22420E48976000867A8 /* home_uvic_ukVisa_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C21F20E48975000867A8 /* home_uvic_ukVisa_c.jpg */; };
-		AE60C22520E48976000867A8 /* home_uvic_ukVisa_e.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C22020E48975000867A8 /* home_uvic_ukVisa_e.jpg */; };
-		AE60C22620E48976000867A8 /* home_uvic_ukVisa_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C22120E48976000867A8 /* home_uvic_ukVisa_a.jpg */; };
-		AE60C22720E48976000867A8 /* home_uvic_ukVisa_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C22220E48976000867A8 /* home_uvic_ukVisa_d.jpg */; };
-		AE60C22820E48976000867A8 /* home_uvic_ukVisa_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C22320E48976000867A8 /* home_uvic_ukVisa_b.jpg */; };
 		AE60C22A20E4AC35000867A8 /* home_recomment_active_cash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C22920E4AC34000867A8 /* home_recomment_active_cash.jpg */; };
 		AE60C23620E4C83C000867A8 /* home_application_cell_uni.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C23520E4C83C000867A8 /* home_application_cell_uni.jpg */; };
 		AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178AE2071FE67006B311A /* UniversityDetailRank.m */; };
@@ -653,6 +639,17 @@
 		AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF4211B1BD499BE00CFB45E /* CoreTelephony.framework */; };
 		AEF4211E1BD499C900CFB45E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF4211D1BD499C900CFB45E /* libstdc++.tbd */; };
 		AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF4211F1BD499D100CFB45E /* libz.tbd */; };
+		AEF657A120FD8D4200C0D849 /* home_uvic_law.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A020FD8D4200C0D849 /* home_uvic_law.jpg */; };
+		AEF657A820FDBB2300C0D849 /* home_uvic_service_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A220FDBB2100C0D849 /* home_uvic_service_01.jpg */; };
+		AEF657A920FDBB2300C0D849 /* home_uvic_service_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A320FDBB2200C0D849 /* home_uvic_service_03.jpg */; };
+		AEF657AA20FDBB2300C0D849 /* home_uvic_service_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A420FDBB2200C0D849 /* home_uvic_service_02.jpg */; };
+		AEF657AB20FDBB2300C0D849 /* home_uvic_service_04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A520FDBB2200C0D849 /* home_uvic_service_04.jpg */; };
+		AEF657AC20FDBB2300C0D849 /* home_uvic_service_05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A620FDBB2300C0D849 /* home_uvic_service_05.jpg */; };
+		AEF657AD20FDBB2300C0D849 /* home_uvic_service_06.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657A720FDBB2300C0D849 /* home_uvic_service_06.jpg */; };
+		AEF657AF20FDBEE400C0D849 /* home_uvic_immigration_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657AE20FDBEE400C0D849 /* home_uvic_immigration_a.jpg */; };
+		AEF657B320FDC4B200C0D849 /* home_uvic_hot_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */; };
+		AEF657B420FDC4B200C0D849 /* home_uvic_hot_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */; };
+		AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */; };
 		AEF936D41C314AE30095E0A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D21C314AE30095E0A7 /* Default.png */; };
 		AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D31C314AE30095E0A7 /* Default@2x.png */; };
 		AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */; };
@@ -1070,20 +1067,6 @@
 		AE60C20120E25144000867A8 /* home_global_ad_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_ad_02.jpg; sourceTree = "<group>"; };
 		AE60C20220E25144000867A8 /* home_global_ad_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_ad_03.jpg; sourceTree = "<group>"; };
 		AE60C20320E25145000867A8 /* home_global_ad_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_ad_01.jpg; sourceTree = "<group>"; };
-		AE60C20D20E47F0D000867A8 /* home_uvic_yang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_yang.jpg; sourceTree = "<group>"; };
-		AE60C20E20E47F0E000867A8 /* home_uvic_dong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_dong.jpg; sourceTree = "<group>"; };
-		AE60C20F20E47F0F000867A8 /* home_uvic_zhang.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_zhang.jpg; sourceTree = "<group>"; };
-		AE60C21320E48003000867A8 /* home_uvic_white_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_white_icon.jpg; sourceTree = "<group>"; };
-		AE60C21520E48176000867A8 /* home_uvic_trademark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_trademark.jpg; sourceTree = "<group>"; };
-		AE60C21720E4871F000867A8 /* home_uvice_VisaCenter_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvice_VisaCenter_c.jpg; sourceTree = "<group>"; };
-		AE60C21820E4871F000867A8 /* home_uvice_VisaCenter_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvice_VisaCenter_b.jpg; sourceTree = "<group>"; };
-		AE60C21920E48720000867A8 /* home_uvice_VisaCenter_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvice_VisaCenter_d.jpg; sourceTree = "<group>"; };
-		AE60C21A20E48721000867A8 /* home_uvice_VisaCenter_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvice_VisaCenter_a.jpg; sourceTree = "<group>"; };
-		AE60C21F20E48975000867A8 /* home_uvic_ukVisa_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_ukVisa_c.jpg; sourceTree = "<group>"; };
-		AE60C22020E48975000867A8 /* home_uvic_ukVisa_e.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_ukVisa_e.jpg; sourceTree = "<group>"; };
-		AE60C22120E48976000867A8 /* home_uvic_ukVisa_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_ukVisa_a.jpg; sourceTree = "<group>"; };
-		AE60C22220E48976000867A8 /* home_uvic_ukVisa_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_ukVisa_d.jpg; sourceTree = "<group>"; };
-		AE60C22320E48976000867A8 /* home_uvic_ukVisa_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_ukVisa_b.jpg; sourceTree = "<group>"; };
 		AE60C22920E4AC34000867A8 /* home_recomment_active_cash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_recomment_active_cash.jpg; sourceTree = "<group>"; };
 		AE60C23520E4C83C000867A8 /* home_application_cell_uni.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_application_cell_uni.jpg; sourceTree = "<group>"; };
 		AE6178AD2071FE67006B311A /* UniversityDetailRank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversityDetailRank.h; sourceTree = "<group>"; };
@@ -1714,6 +1697,17 @@
 		AEF4211B1BD499BE00CFB45E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		AEF4211D1BD499C900CFB45E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		AEF4211F1BD499D100CFB45E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AEF657A020FD8D4200C0D849 /* home_uvic_law.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_law.jpg; sourceTree = "<group>"; };
+		AEF657A220FDBB2100C0D849 /* home_uvic_service_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_01.jpg; sourceTree = "<group>"; };
+		AEF657A320FDBB2200C0D849 /* home_uvic_service_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_03.jpg; sourceTree = "<group>"; };
+		AEF657A420FDBB2200C0D849 /* home_uvic_service_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_02.jpg; sourceTree = "<group>"; };
+		AEF657A520FDBB2200C0D849 /* home_uvic_service_04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_04.jpg; sourceTree = "<group>"; };
+		AEF657A620FDBB2300C0D849 /* home_uvic_service_05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_05.jpg; sourceTree = "<group>"; };
+		AEF657A720FDBB2300C0D849 /* home_uvic_service_06.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_service_06.jpg; sourceTree = "<group>"; };
+		AEF657AE20FDBEE400C0D849 /* home_uvic_immigration_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_immigration_a.jpg; sourceTree = "<group>"; };
+		AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_03.jpg; sourceTree = "<group>"; };
+		AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_01.jpg; sourceTree = "<group>"; };
+		AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_02.jpg; sourceTree = "<group>"; };
 		AEF936D21C314AE30095E0A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AEF936D31C314AE30095E0A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
@@ -4008,20 +4002,17 @@
 				AE60C20320E25145000867A8 /* home_global_ad_01.jpg */,
 				AE60C20120E25144000867A8 /* home_global_ad_02.jpg */,
 				AE60C20220E25144000867A8 /* home_global_ad_03.jpg */,
-				AE60C20E20E47F0E000867A8 /* home_uvic_dong.jpg */,
-				AE60C20D20E47F0D000867A8 /* home_uvic_yang.jpg */,
-				AE60C20F20E47F0F000867A8 /* home_uvic_zhang.jpg */,
-				AE60C21320E48003000867A8 /* home_uvic_white_icon.jpg */,
-				AE60C21520E48176000867A8 /* home_uvic_trademark.jpg */,
-				AE60C21A20E48721000867A8 /* home_uvice_VisaCenter_a.jpg */,
-				AE60C21820E4871F000867A8 /* home_uvice_VisaCenter_b.jpg */,
-				AE60C21720E4871F000867A8 /* home_uvice_VisaCenter_c.jpg */,
-				AE60C21920E48720000867A8 /* home_uvice_VisaCenter_d.jpg */,
-				AE60C22120E48976000867A8 /* home_uvic_ukVisa_a.jpg */,
-				AE60C22320E48976000867A8 /* home_uvic_ukVisa_b.jpg */,
-				AE60C21F20E48975000867A8 /* home_uvic_ukVisa_c.jpg */,
-				AE60C22220E48976000867A8 /* home_uvic_ukVisa_d.jpg */,
-				AE60C22020E48975000867A8 /* home_uvic_ukVisa_e.jpg */,
+				AEF657A220FDBB2100C0D849 /* home_uvic_service_01.jpg */,
+				AEF657A420FDBB2200C0D849 /* home_uvic_service_02.jpg */,
+				AEF657A320FDBB2200C0D849 /* home_uvic_service_03.jpg */,
+				AEF657A520FDBB2200C0D849 /* home_uvic_service_04.jpg */,
+				AEF657A620FDBB2300C0D849 /* home_uvic_service_05.jpg */,
+				AEF657A720FDBB2300C0D849 /* home_uvic_service_06.jpg */,
+				AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */,
+				AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */,
+				AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */,
+				AEF657AE20FDBEE400C0D849 /* home_uvic_immigration_a.jpg */,
+				AEF657A020FD8D4200C0D849 /* home_uvic_law.jpg */,
 				AEDDAA5B20E4D36C0069C138 /* home_application_uni_rank.png */,
 				AEDDAA8220E63A930069C138 /* home_global_500_right.jpeg */,
 				AEDDAA6A20E4FEBE0069C138 /* intro_01.jpg */,
@@ -4543,7 +4534,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */,
-				AE60C21C20E48721000867A8 /* home_uvice_VisaCenter_b.jpg in Resources */,
 				AEDDAA7020E4FEC00069C138 /* intro_04.jpg in Resources */,
 				AE91DDD61FBBEFDF00CD06BD /* GuideCell.xib in Resources */,
 				AE9BA47C20B53A2A008B65D4 /* InvitationRecordHeader.xib in Resources */,
@@ -4564,8 +4554,10 @@
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AEDDAA7120E4FEC00069C138 /* intro_05.jpg in Resources */,
 				AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */,
+				AEF657AF20FDBEE400C0D849 /* home_uvic_immigration_a.jpg in Resources */,
 				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
+				AEF657AC20FDBB2300C0D849 /* home_uvic_service_05.jpg in Resources */,
 				AE9BA47720B53794008B65D4 /* InvitationRecordUserFooter.xib in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AE76ACEB20D8E63300C42FA2 /* city_akl.jpg in Resources */,
@@ -4574,24 +4566,22 @@
 				AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */,
 				AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
-				AE60C21420E48004000867A8 /* home_uvic_white_icon.jpg in Resources */,
 				AE60C1B620E1EBC0000867A8 /* home_rent_re_b.jpg in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
+				AEF657B420FDC4B200C0D849 /* home_uvic_hot_01.jpg in Resources */,
 				AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */,
 				AEC85BC320A29F4D0002F19B /* gradeCN.plist in Resources */,
 				AE1FD73B1D5C929500FFD5A8 /* Pre-comp 1_00023.png in Resources */,
 				AE9BA47520B51A5F008B65D4 /* InvitationRecordUserCell.xib in Resources */,
 				AEA24B081D5B24D200DD7939 /* FeedbackViewController.xib in Resources */,
 				AE027EB91C3A53C4007EBD28 /* PushConfig.plist in Resources */,
-				AE60C22520E48976000867A8 /* home_uvic_ukVisa_e.jpg in Resources */,
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
 				AE76ACDA20D8A13C00C42FA2 /* HomeApplyUniCell.xib in Resources */,
 				AE76ACDF20D8A17200C42FA2 /* HomeApplicationDestinationCell.xib in Resources */,
 				AE60C1B520E1EBC0000867A8 /* home_rent_re_a.jpg in Resources */,
-				AE60C22420E48976000867A8 /* home_uvic_ukVisa_c.jpg in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */,
 				AE60C1BD20E1EECC000867A8 /* home_rent_process_a.jpg in Resources */,
@@ -4599,18 +4589,16 @@
 				AEA545CE20D26D8B0095CBDA /* HomeRecommendArtCell.xib in Resources */,
 				AE9BA42F20B3BA8E008B65D4 /* RewardVC.xib in Resources */,
 				AE1A805020DA2A0300CE9E50 /* home_apply_uni_bg.jpg in Resources */,
+				AEF657AB20FDBB2300C0D849 /* home_uvic_service_04.jpg in Resources */,
 				AE60C20420E25146000867A8 /* home_global_ad_02.jpg in Resources */,
-				AE60C22620E48976000867A8 /* home_uvic_ukVisa_a.jpg in Resources */,
 				AE22862F1E7176B800E6E5CD /* WYLXSuccessView.xib in Resources */,
 				AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */,
 				AECC87E11F95F63800FCBBEC /* CatigaryCityCollectionReusableView.xib in Resources */,
 				AE1FD7381D5C929500FFD5A8 /* Pre-comp 1_00020.png in Resources */,
-				AE60C21B20E48721000867A8 /* home_uvice_VisaCenter_c.jpg in Resources */,
-				AE60C21120E47F10000867A8 /* home_uvic_dong.jpg in Resources */,
 				AE60C1F720E247F7000867A8 /* home_global_user_09.jpg in Resources */,
-				AE60C21220E47F10000867A8 /* home_uvic_zhang.jpg in Resources */,
 				AEC4285520E0DA81007B3949 /* HomeUVICCell.xib in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
+				AEF657AD20FDBB2300C0D849 /* home_uvic_service_06.jpg in Resources */,
 				AE76ACEF20D8E63300C42FA2 /* city_xn.jpg in Resources */,
 				AE1FD74B1D5C929500FFD5A8 /* Pre-comp 1_0009.png in Resources */,
 				AE60C1B720E1EBC0000867A8 /* home_rent_re_c.jpg in Resources */,
@@ -4628,6 +4616,7 @@
 				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
 				AEA545D720D274270095CBDA /* HomeRecommendActivityCell.xib in Resources */,
 				AEDDAA7220E4FEC00069C138 /* intro_03.jpg in Resources */,
+				AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
 				AE60C1E520E237C0000867A8 /* home_global_os_01.jpg in Resources */,
 				AE60C1FA20E247F7000867A8 /* home_global_user_04.jpg in Resources */,
@@ -4636,6 +4625,7 @@
 				AEA545D320D26F300095CBDA /* HomeHotVideoCell.xib in Resources */,
 				AEB3533620C7AD11004245D5 /* UMSocialSDKResources.bundle in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
+				AEF657AA20FDBB2300C0D849 /* home_uvic_service_02.jpg in Resources */,
 				AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */,
 				AE1FD7361D5C929500FFD5A8 /* Pre-comp 1_00019.png in Resources */,
 				AE1A806920DA563F00CE9E50 /* HomeYESGlobalCell.xib in Resources */,
@@ -4643,7 +4633,6 @@
 				AEDDAA8320E63A940069C138 /* home_global_500_right.jpeg in Resources */,
 				AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */,
 				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
-				AE60C22720E48976000867A8 /* home_uvic_ukVisa_d.jpg in Resources */,
 				AE1A805C20DA44B800CE9E50 /* home_fee_b.jpg in Resources */,
 				AE60C1FB20E247F7000867A8 /* home_global_user_06.jpg in Resources */,
 				AE9BA46A20B50119008B65D4 /* InvitationRecordsHeader.xib in Resources */,
@@ -4660,12 +4649,10 @@
 				AE60C1E220E237C0000867A8 /* home_global_os_02.jpg in Resources */,
 				AE1FD72C1D5C929500FFD5A8 /* Pre-comp 1_0001.png in Resources */,
 				AE9BA44720B3FA74008B65D4 /* RewardDetailVC.xib in Resources */,
-				AE60C22820E48976000867A8 /* home_uvic_ukVisa_b.jpg in Resources */,
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
-				AE60C21E20E48721000867A8 /* home_uvice_VisaCenter_a.jpg in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
 				AEDDAA8520E642780069C138 /* home_global_plan_right.jpeg in Resources */,
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
@@ -4677,7 +4664,7 @@
 				AE914EDD1F419EB9008A43CD /* ApplyStatusHistoryCell.xib in Resources */,
 				AE60C1B420E1EBC0000867A8 /* home_rent_re_e.jpg in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
-				AE60C21020E47F10000867A8 /* home_uvic_yang.jpg in Resources */,
+				AEF657A820FDBB2300C0D849 /* home_uvic_service_01.jpg in Resources */,
 				AEDDAA6F20E4FEC00069C138 /* intro_01.jpg in Resources */,
 				AE9BA46520B42D63008B65D4 /* InvitationRecordsCell.xib in Resources */,
 				AECC678320EA308200B1904B /* LaunchScreen_logo_a.png in Resources */,
@@ -4696,6 +4683,7 @@
 				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
 				AE60C1FD20E247F7000867A8 /* home_global_user_07.jpg in Resources */,
 				AEC85BC820A2CBB30002F19B /* countriesCN.plist in Resources */,
+				AEF657A120FD8D4200C0D849 /* home_uvic_law.jpg in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
 				AECC677E20E9C6E800B1904B /* HomeRentCell.xib in Resources */,
@@ -4726,6 +4714,7 @@
 				AE76AD0220D914B800C42FA2 /* area_8.jpg in Resources */,
 				AE60C22A20E4AC35000867A8 /* home_recomment_active_cash.jpg in Resources */,
 				AE76ACD520D8A10D00C42FA2 /* HomeApplycationArtCell.xib in Resources */,
+				AEF657A920FDBB2300C0D849 /* home_uvic_service_03.jpg in Resources */,
 				AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */,
 				AE1FD7311D5C929500FFD5A8 /* Pre-comp 1_00014.png in Resources */,
 				AE9BA44120B3F116008B65D4 /* RewardListCell.xib in Resources */,
@@ -4734,13 +4723,12 @@
 				AEDDAA7C20E6078F0069C138 /* home_application_bg.jpg in Resources */,
 				AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */,
 				AE60C20020E247F7000867A8 /* home_global_user_03.jpg in Resources */,
-				AE60C21D20E48721000867A8 /* home_uvice_VisaCenter_d.jpg in Resources */,
 				AE9BA48120B53E68008B65D4 /* InvitationRecordDetailCell.xib in Resources */,
 				AE1FD7551D5C929500FFD5A8 /* MJRefresh.bundle in Resources */,
 				AE60C1FE20E247F7000867A8 /* home_global_user_010.jpg in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
-				AE60C21620E48177000867A8 /* home_uvic_trademark.jpg in Resources */,
+				AEF657B320FDC4B200C0D849 /* home_uvic_hot_03.jpg in Resources */,
 				AE50BED42074B93C0002DCAC /* OrderActionCell.xib in Resources */,
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
 				AE22862B1E715BB500E6E5CD /* PromttViewController.xib in Resources */,

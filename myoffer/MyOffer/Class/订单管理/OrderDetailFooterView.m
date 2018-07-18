@@ -401,8 +401,8 @@
 
 - (void)setContracturls_result:(NSDictionary *)contracturls_result{
     _contracturls_result = contracturls_result;
-    
-    if (contracturls_result) {
+    NSArray *imgUrls = contracturls_result[@"imgUrls"];
+    if (imgUrls.count > 0) {
         self.contactView.hidden = NO;
     }
     
@@ -411,6 +411,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
  
+    
         CGSize content_size  = self.bounds.size;
         CGFloat contact_bg_x  = 0;
         CGFloat contact_bg_w  = content_size.width;

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeUVICCell : UITableViewCell
-
+@property(nonatomic,copy)void(^actionBlock)(NSString *path);
 @end
