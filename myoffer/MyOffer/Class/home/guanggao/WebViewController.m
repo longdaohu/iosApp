@@ -26,7 +26,7 @@
 @property(nonatomic,strong)WKWebView *web_wk;
 @property(nonatomic,assign)NSInteger recommendationsCount;//智能匹配数量
 @property(nonatomic,strong)ShareNViewController *shareVC;
-@property(nonatomic,strong)UIView *progressView;
+@property(nonatomic,strong)UIProgressView *progressView;
 @end
 
 @implementation WebViewController
@@ -146,13 +146,14 @@
     return _shareVC;
 }
 
-- (UIView *)progressView{
+- (UIProgressView *)progressView{
     
     if (!_progressView) {
         
-        _progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 3)];
-        _progressView.layer.cornerRadius = 1.5;
-        _progressView.backgroundColor = XCOLOR_RED;
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 3)];
+        _progressView.progressTintColor =  XCOLOR_RED;
+        _progressView.trackTintColor = XCOLOR(0, 0, 0, 0);
+        _progressView.progressViewStyle = UIProgressViewStyleBar;
         [self.view addSubview:_progressView];
     }
     
@@ -550,20 +551,19 @@
     
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
        
+        CGFloat new_progress =[change[@"new"] floatValue];
+        CGFloat old_progress =[change[@"old"] floatValue];
+
         self.progressView.alpha = 1;
-        self.progressView.mj_w = XSCREEN_WIDTH * [change[@"new"] floatValue];
- 
+        self.progressView.progress = new_progress;
         //不要让进度条倒着走...有时候goback会出现这种情况
-        if ([change[@"new"] floatValue] < [change[@"old"] floatValue])  return;
-        
-        if ([change[@"new"] floatValue] >= 1){
-            
-//            [self.hud setHidden:YES];
+        if (new_progress < old_progress)  return;
+        if (new_progress >= 1){
             self.progressView.mj_w = XSCREEN_WIDTH;
             [UIView animateWithDuration:ANIMATION_DUATION animations:^{
                 self.progressView.alpha = 0;
             } completion:^(BOOL finished) {
-                 self.progressView.mj_w = 0;
+                self.progressView.progress = 0;
             }];
         };
         

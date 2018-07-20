@@ -50,20 +50,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    CGFloat height = (XSCREEN_HEIGHT >=812) ? XSCREEN_HEIGHT : (XSCREEN_WIDTH * 625.0/375);
-    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, height)];
-    bgImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:bgImageView];
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"home_application_bg.jpg" ofType:nil];
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
-    [bgImageView setImage:image];
-    
-    UIImage *icon = XImage(@"home_application_bg_word");
-    UIImageView *word_iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT + 40, XSCREEN_WIDTH, XSCREEN_WIDTH * icon.size.height/icon.size.width)];
-    word_iconView.image = icon;
-    [self.view addSubview:word_iconView];
-    
+   
+    self.view.backgroundColor = XCOLOR(0, 0, 0, 0);
     self.view.clipsToBounds = YES;
 }
 
@@ -102,7 +90,6 @@
         _meiqiaBtn.layer.cornerRadius = width * 0.5;
         [_meiqiaBtn setBackgroundImage:XImage(@"meiqia_call_logo") forState:UIControlStateNormal];
         [_meiqiaBtn addTarget:self action:@selector(meiqiaClick) forControlEvents:UIControlEventTouchUpInside];
-        [self.view insertSubview:_meiqiaBtn aboveSubview:self.tableView];
         _meiqiaBtn.alpha = 0;
         
     }
@@ -206,6 +193,7 @@
     self.upBtn = upBtn;
     
     [self makeTableView];
+    [self.view  addSubview:self.meiqiaBtn];
 }
 
 - (void)upButtonAnimate:(UIButton *)sender{
@@ -247,10 +235,9 @@
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight + 30, 0);
-    self.tableView.backgroundColor = XCOLOR(0, 0, 0, 0);
+    self.tableView.backgroundColor = XCOLOR_WHITE;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.layer.masksToBounds = YES;
-    self.tableView.backgroundColor = XCOLOR_WHITE;
     self.tableView.userInteractionEnabled = NO;
     
     

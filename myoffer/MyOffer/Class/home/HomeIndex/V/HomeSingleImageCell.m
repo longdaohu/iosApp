@@ -30,12 +30,17 @@
         
         UILabel *titleLab = [UILabel new];
         titleLab.textAlignment = NSTextAlignmentCenter;
-        titleLab.font = [UIFont boldSystemFontOfSize:13];
+        titleLab.font = [UIFont fontWithName:@"Arial-BoldMT" size:14];
         titleLab.textColor = XCOLOR_WHITE;
         titleLab.numberOfLines = 2;
         self.titleLab = titleLab;
         [self.contentView addSubview:titleLab];
-        
+        titleLab.shadowOffset = CGSizeMake(1, 1);
+        titleLab.layer.shadowOpacity = 1.0;
+        titleLab.layer.shadowRadius = 1.0;
+        titleLab.layer.shadowColor = XCOLOR_BLACK.CGColor;
+        titleLab.layer.shadowOffset = CGSizeMake(1, 1);
+ 
         
     }
     return self;

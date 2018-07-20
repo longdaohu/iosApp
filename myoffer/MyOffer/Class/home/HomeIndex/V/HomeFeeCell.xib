@@ -269,7 +269,7 @@ myMoney® 通过其技术领先的支付平台为众多身处欧洲的商家及�
                                             <constraint firstAttribute="height" constant="50" id="MGF-op-dDg"/>
                                             <constraint firstAttribute="width" constant="50" id="ioL-yB-bQK"/>
                                         </constraints>
-                                        <state key="normal" image="home_fee_05">
+                                        <state key="normal" image="home_fee_04">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -369,7 +369,7 @@ myMoney® 通过其技术领先的支付平台为众多身处欧洲的商家及�
                                             <constraint firstAttribute="width" constant="50" id="exV-Wi-rfE"/>
                                             <constraint firstAttribute="height" constant="50" id="kEF-2k-e8J"/>
                                         </constraints>
-                                        <state key="normal" image="home_fee_04">
+                                        <state key="normal" image="home_fee_05">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>

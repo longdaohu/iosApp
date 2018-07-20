@@ -41,45 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *icon = @"home_fee_bg.jpg";
-    NSString *image_word = @"home_fee_bg_word";
-    switch (self.type) {
-        case HomeLandingTypeMoney:
-            icon  = @"home_fee_bg.jpg";
-            image_word = @"home_fee_bg_word";
-            break;
-        case HomeLandingTypeRoom:
-            icon  = @"home_room_bg.jpg";
-            image_word = @"home_room_bg_word";
-            break;
-        case HomeLandingTypeUVIC:
-            icon  = @"home_UVIC_bg.jpg";
-            image_word = @"home_UVIC_bg_word";
-            break;
-        case HomeLandingTypeYesGlobal:
-            icon  = @"home_YESGlobal_bg.jpg";
-            image_word = @"home_YESGlobal_bg_word";
-            break;
-        default:
-            icon  = @"home_application_bg.jpg";
-            image_word = @"home_application_bg_word";
-            break;
-    }
-    
-    CGFloat height = (XSCREEN_HEIGHT >=812) ? XSCREEN_HEIGHT : (XSCREEN_WIDTH * 625.0/375);
-    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, height)];
-    bgImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:bgImageView];
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:icon ofType:nil];
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
-    [bgImageView setImage:image];
-    
-    
-    UIImage *icon_word = XImage(image_word);
-    UIImageView *word_iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT + 40, XSCREEN_WIDTH, XSCREEN_WIDTH * icon_word.size.height/icon_word.size.width)];
-    word_iconView.image = icon_word;
-    [self.view addSubview:word_iconView];
-    
     self.view.clipsToBounds = YES;
 }
 
@@ -129,6 +90,8 @@
      self.upBtn = upBtn;
     
     [self makeTableView];
+    [self.view  addSubview:self.meiqiaBtn];
+
 }
 
 - (void)upButtonAnimate:(UIButton *)sender{
@@ -161,7 +124,6 @@
         _meiqiaBtn.layer.cornerRadius = width * 0.5;
         [_meiqiaBtn setBackgroundImage:XImage(@"meiqia_call_logo") forState:UIControlStateNormal];
         [_meiqiaBtn addTarget:self action:@selector(meiqiaClick) forControlEvents:UIControlEventTouchUpInside];
-        [self.view insertSubview:_meiqiaBtn aboveSubview:self.tableView];
         _meiqiaBtn.alpha = 0;
         
     }

@@ -14,17 +14,19 @@
 #import "MyofferUpdateView.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
+#import "CatigaryScrollView.h"
 
 #define  MENU_HEIGHT  XNAV_HEIGHT + 16
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
 #define  ADKEY @"Advertiseseeee"
 
-@interface HomeIndexVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property(nonatomic,strong)UICollectionView *clView;
+@interface HomeIndexVC ()<UIScrollViewDelegate>
+@property(nonatomic,strong)CatigaryScrollView *bgScrollView;
 @property(nonatomic,strong)HomeMenuBarView *MenuBarView;
 @property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
 @property(nonatomic,strong)NSArray *childViewControllersArray;
+@property(nonatomic,strong)NSArray *backgroudImages;
 @property (assign, nonatomic)BOOL  hadShowNeWVersion;
 
 @end
@@ -87,7 +89,15 @@
     }
     
     return _childViewControllersArray;
+}
+
+- (NSArray *)backgroudImages{
     
+    if (!_backgroudImages) {
+        
+        _backgroudImages = @[@"home_application_bg",@"home_fee_bg",@"home_room_bg",@"home_YESGlobal_bg",@"home_UVIC_bg"];
+    }
+    return  _backgroudImages;
 }
 
 - (void)viewDidLoad {
@@ -103,6 +113,7 @@
 - (void)makeUI{
     
     self.currentStatusBarStyle = UIStatusBarStyleDefault;
+    
     [self makeCollectView];
     [self makeMenuView];
 }
@@ -125,44 +136,53 @@
 }
 
 - (void)makeCollectView{
+ 
+    CatigaryScrollView *bgView = [[CatigaryScrollView alloc] initWithFrame:self.view.bounds];
+    bgView.delegate = self;
+    bgView.pagingEnabled = YES;
+    bgView.bounces = NO;
+    bgView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:bgView];
+    self.bgScrollView = bgView;
+    bgView.contentSize = CGSizeMake(self.childViewControllersArray.count * XSCREEN_WIDTH, 0);
     
-    UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
-    flow.itemSize = CGSizeMake(CELL_CL_WIDTH, CELL_CL_HEIGHT);
-    flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flow.minimumLineSpacing = 0;
-    flow.minimumInteritemSpacing = 0;
-    UICollectionView *cView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flow];
-    cView.dataSource = self;
-    cView.delegate = self;
-    cView.pagingEnabled = YES;
-    cView.backgroundColor = XCOLOR_WHITE;
-    cView.bounces = NO;
-    cView.showsHorizontalScrollIndicator = NO;
-    [self.view addSubview:cView];
-    self.clView = cView;
-    [cView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
-    
-}
+    if (self.childViewControllersArray.count > 0) {
+        UIViewController *vc =  self.childViewControllersArray.firstObject;
+        [bgView addSubview:vc.view];
+    }
+    [self makeBackgroupImageView:bgView];
+ }
 
-#pragma mark : UICollectionViewDataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    return self.MenuBarView.titles.count;
-}
-
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-    //            [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    UIViewController *vc  = self.childViewControllersArray[indexPath.row];
-    [cell.contentView addSubview:vc.view];
-    
-    return cell;
+- (void)makeBackgroupImageView:(UIScrollView *)bgView{
+ 
+    for (NSInteger index = 0; index < self.backgroudImages.count; index++) {
+        
+        NSString *icon = [NSString stringWithFormat:@"%@.jpg",self.backgroudImages[index]];
+        NSString *icon_b = [NSString stringWithFormat:@"%@_word",self.backgroudImages[index]];
+        
+        UIView *itemView = [[UIView alloc] initWithFrame:self.view.bounds];
+        itemView.clipsToBounds = YES;
+        itemView.mj_x = (index + 1) * bgView.mj_w;
+        [bgView addSubview:itemView];
+        
+        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:itemView.bounds];
+        bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+        [itemView addSubview:bgImageView];
+        NSString *imagePath = [[NSBundle mainBundle] pathForResource:icon ofType:nil];
+        UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+        [bgImageView setImage:image];
+ 
+        UIImage *icon_word = XImage(icon_b);
+        UIImageView *word_iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT + 40, XSCREEN_WIDTH, XSCREEN_WIDTH * icon_word.size.height/icon_word.size.width)];
+        word_iconView.image = icon_word;
+        [itemView addSubview:word_iconView];
+    }
+ 
 }
 
 #pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     [self.MenuBarView menuDidScrollWithScrollView:scrollView];
     NSInteger index = (NSInteger)((scrollView.mj_offsetX / scrollView.mj_w) + 0.5);
     [self toSetTabBarHidden:index];
@@ -191,7 +211,7 @@
 
 
 - (void)toSetTabBarHidden:(NSInteger)index{
-    
+ 
     if (index == 0){
         self.tabBarController.tabBar.hidden = NO;
         return;
@@ -207,12 +227,15 @@
 }
 
 - (void)toLoadViewControllerWithPage:(NSInteger)page{
-    
+  
     if (page == 0){
         self.tabBarController.tabBar.hidden = NO;
         return;
     }
     UIViewController *vc = self.childViewControllersArray[page];
+    vc.view.frame = CGRectMake(page * XSCREEN_WIDTH, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+    [self.bgScrollView addSubview:vc.view];
+    
     if (page == 1) {
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toLoadView];
@@ -226,11 +249,9 @@
 //菜单栏切换
 - (void)MenuScrollToIndex:(NSInteger)index{
     
-    NSInteger from_index = (NSInteger)((self.clView.mj_offsetX / self.clView.mj_w) + 0.5);
+    NSInteger from_index = (NSInteger)((self.bgScrollView.mj_offsetX / self.bgScrollView.mj_w) + 0.5);
     BOOL ani =  (abs((int)(from_index - index)) == 1);
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.clView selectItemAtIndexPath:indexPath animated:ani scrollPosition:UICollectionViewScrollPositionLeft];
+    [self.bgScrollView setContentOffset:CGPointMake(index * XSCREEN_WIDTH, 0) animated:ani];
     if (!ani) {
         [self toLoadViewControllerWithPage:index];
     }
@@ -325,13 +346,14 @@
     if (self.hadShowNeWVersion) {
         return;
     }
-    //https://itunes.apple.com/cn/app/myoffer/id1016290891
+
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/lookup?id=1016290891"]];
     //    request.timeoutInterval = 15;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // 网络请求完成之后就会执行，NSURLSession自动实现多线程
         if (data && (error == nil)) {
+            self.hadShowNeWVersion = YES;
             // 网络访问成功
             NSError *error;
             id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
@@ -342,20 +364,16 @@
             NSDictionary *appDic = [[NSBundle mainBundle] infoDictionary];
             NSString *ccurrentVersionStr = [appDic objectForKey:@"CFBundleShortVersionString"];
             NSString *currentVersion = [ccurrentVersionStr stringByReplacingOccurrencesOfString:@"." withString:@""];
-            self.hadShowNeWVersion = YES;
             if (storeVersion.integerValue <= currentVersion.integerValue) return ;
             dispatch_async(dispatch_get_main_queue(), ^{
-                //更新UI操作
-                [[MyofferUpdateView updateView] show];
+                [[MyofferUpdateView updateView] show];  //更新UI操作
             });
-            
         }else {
             // 网络访问失败
             self.hadShowNeWVersion = NO;
         }
         
     }];
-    
     [task resume];
 }
 

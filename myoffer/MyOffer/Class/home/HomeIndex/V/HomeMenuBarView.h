@@ -10,7 +10,6 @@
 
 @interface HomeMenuBarView : UIView
 @property(nonatomic,strong)NSArray *titles;
-//+ (instancetype)menuInitWithFrame:(CGRect)frame clickButton:(void(^)(NSInteger index))click;
 + (instancetype)menuInitWithTitles:(NSArray *)titles clickButton:(void(^)(NSInteger index))click;
 
 - (void)initFirstResponse;

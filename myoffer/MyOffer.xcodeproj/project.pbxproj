@@ -214,12 +214,9 @@
 		AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE53E86D1F73C0A600588F0C /* libWeChatSDK.a */; };
 		AE54B6271ECEFA59004AFF7E /* MyOfferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */; };
 		AE56F3401E0280EA00340742 /* WYLXGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE56F33F1E0280E900340742 /* WYLXGroup.m */; };
-		AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */; };
-		AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C291D06B0ED00499B6B /* AlipaySDK.framework */; };
 		AE582C2D1D06B18E00499B6B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2C1D06B18E00499B6B /* CoreText.framework */; };
 		AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2E1D06B1D100499B6B /* CoreMotion.framework */; };
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
-		AE582C341D06B94600499B6B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = AE582C331D06B94600499B6B /* Order.m */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5C824920C13E2F00EB3F82 /* NewRecommedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
@@ -227,11 +224,6 @@
 		AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */; };
 		AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */; };
 		AE60C1A320E1E947000867A8 /* home_rent_advant_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */; };
-		AE60C1B320E1EBC0000867A8 /* home_rent_re_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1AE20E1EBBF000867A8 /* home_rent_re_d.jpg */; };
-		AE60C1B420E1EBC0000867A8 /* home_rent_re_e.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1AF20E1EBBF000867A8 /* home_rent_re_e.jpg */; };
-		AE60C1B520E1EBC0000867A8 /* home_rent_re_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B020E1EBBF000867A8 /* home_rent_re_a.jpg */; };
-		AE60C1B620E1EBC0000867A8 /* home_rent_re_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B120E1EBBF000867A8 /* home_rent_re_b.jpg */; };
-		AE60C1B720E1EBC0000867A8 /* home_rent_re_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B220E1EBC0000867A8 /* home_rent_re_c.jpg */; };
 		AE60C1BC20E1EECC000867A8 /* home_rent_process_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */; };
 		AE60C1BD20E1EECC000867A8 /* home_rent_process_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */; };
 		AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */; };
@@ -306,12 +298,6 @@
 		AE76ACDF20D8A17200C42FA2 /* HomeApplicationDestinationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACDD20D8A17200C42FA2 /* HomeApplicationDestinationCell.xib */; };
 		AE76ACE320D8A1A800C42FA2 /* HomeApplySubjecttCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE76ACE020D8A1A800C42FA2 /* HomeApplySubjecttCell.m */; };
 		AE76ACE420D8A1A800C42FA2 /* HomeApplySubjecttCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE120D8A1A800C42FA2 /* HomeApplySubjecttCell.xib */; };
-		AE76ACEB20D8E63300C42FA2 /* city_akl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE520D8E63100C42FA2 /* city_akl.jpg */; };
-		AE76ACEC20D8E63300C42FA2 /* city_mcst.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE620D8E63200C42FA2 /* city_mcst.jpg */; };
-		AE76ACED20D8E63300C42FA2 /* city_ld.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE720D8E63200C42FA2 /* city_ld.jpg */; };
-		AE76ACEE20D8E63300C42FA2 /* city_mrb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE820D8E63200C42FA2 /* city_mrb.jpg */; };
-		AE76ACEF20D8E63300C42FA2 /* city_xn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACE920D8E63300C42FA2 /* city_xn.jpg */; };
-		AE76ACF020D8E63300C42FA2 /* city_bmh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACEA20D8E63300C42FA2 /* city_bmh.jpg */; };
 		AE76ACFA20D914B800C42FA2 /* area_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACF120D914B500C42FA2 /* area_7.jpg */; };
 		AE76ACFB20D914B800C42FA2 /* area_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACF220D914B600C42FA2 /* area_6.jpg */; };
 		AE76ACFC20D914B800C42FA2 /* area_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE76ACF320D914B600C42FA2 /* area_4.jpg */; };
@@ -366,7 +352,6 @@
 		AE93E4EB1D6DBDB50025FC58 /* UniGroupOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4EA1D6DBDB50025FC58 /* UniGroupOneView.m */; };
 		AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */; };
 		AE9414D6206B966800D636A0 /* PeiperGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9414D5206B966800D636A0 /* PeiperGroup.m */; };
-		AE94D8331F5FD10C00B64B10 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */; };
 		AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */; };
 		AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE96A36B1E8BBF96006E8E35 /* ServiceItemHeaderView.m */; };
 		AE9BA42E20B3BA8E008B65D4 /* RewardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA42C20B3BA8E008B65D4 /* RewardVC.m */; };
@@ -526,16 +511,6 @@
 		AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */; };
 		AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA9399C207B0D1B0035121D /* serviceProtocolVC.m */; };
 		AEAE882C1DC2086400672E57 /* MyOfferUniversityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */; };
-		AEB3532E20C7AD11004245D5 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3531A20C7AD11004245D5 /* libSocialQQ.a */; };
-		AEB3532F20C7AD11004245D5 /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3531D20C7AD11004245D5 /* libSocialSina.a */; };
-		AEB3533020C7AD11004245D5 /* libSocialUniqueId.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532020C7AD11004245D5 /* libSocialUniqueId.a */; };
-		AEB3533120C7AD11004245D5 /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532320C7AD11004245D5 /* libSocialWeChat.a */; };
-		AEB3533220C7AD11004245D5 /* UMSocialCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532620C7AD11004245D5 /* UMSocialCore.framework */; };
-		AEB3533320C7AD11004245D5 /* UMSocialNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532720C7AD11004245D5 /* UMSocialNetwork.framework */; };
-		AEB3533420C7AD11004245D5 /* UMSocialSDKPromptResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEB3532820C7AD11004245D5 /* UMSocialSDKPromptResources.bundle */; };
-		AEB3533520C7AD11004245D5 /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532A20C7AD11004245D5 /* libUMSocialLog.a */; };
-		AEB3533620C7AD11004245D5 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEB3532C20C7AD11004245D5 /* UMSocialSDKResources.bundle */; };
-		AEB3533720C7AD11004245D5 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB3532D20C7AD11004245D5 /* UShareUI.framework */; };
 		AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */; };
 		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
@@ -650,6 +625,26 @@
 		AEF657B320FDC4B200C0D849 /* home_uvic_hot_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */; };
 		AEF657B420FDC4B200C0D849 /* home_uvic_hot_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */; };
 		AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */; };
+		AEF657D421006E9E00C0D849 /* city_mrb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657CE21006E9C00C0D849 /* city_mrb.jpg */; };
+		AEF657D521006E9E00C0D849 /* city_ld.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657CF21006E9C00C0D849 /* city_ld.jpg */; };
+		AEF657D621006E9E00C0D849 /* city_xn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657D021006E9C00C0D849 /* city_xn.jpg */; };
+		AEF657D721006E9E00C0D849 /* city_mcst.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657D121006E9D00C0D849 /* city_mcst.jpg */; };
+		AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657D221006E9D00C0D849 /* city_akl.jpg */; };
+		AEF657D921006E9E00C0D849 /* city_bmh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEF657D321006E9E00C0D849 /* city_bmh.jpg */; };
+		AEF657E22100826900C0D849 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF657E02100826900C0D849 /* AlipaySDK.bundle */; };
+		AEF657E32100826900C0D849 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657E12100826900C0D849 /* AlipaySDK.framework */; };
+		AEF6580221008C2400C0D849 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657E721008C2300C0D849 /* UMAnalytics.framework */; };
+		AEF6580321008C2400C0D849 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657EA21008C2300C0D849 /* UMCommon.framework */; };
+		AEF6580421008C2400C0D849 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657EF21008C2300C0D849 /* libSocialQQ.a */; };
+		AEF6580521008C2400C0D849 /* libSocialSina.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657F221008C2300C0D849 /* libSocialSina.a */; };
+		AEF6580621008C2400C0D849 /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657F521008C2300C0D849 /* libSocialWeChat.a */; };
+		AEF6580721008C2400C0D849 /* UMShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657F721008C2300C0D849 /* UMShare.framework */; };
+		AEF6580821008C2400C0D849 /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF657F921008C2300C0D849 /* UMSocialSDKResources.bundle */; };
+		AEF6580921008C2400C0D849 /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657FA21008C2300C0D849 /* UShareUI.framework */; };
+		AEF6580A21008C2400C0D849 /* SecurityEnvSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF657FC21008C2300C0D849 /* SecurityEnvSDK.framework */; };
+		AEF6580C21008C2400C0D849 /* UMCommonLog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF6580021008C2300C0D849 /* UMCommonLog.bundle */; };
+		AEF6580D21008C2400C0D849 /* UMCommonLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF6580121008C2300C0D849 /* UMCommonLog.framework */; };
+		AEF6580F2100907100C0D849 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF6580E2100907100C0D849 /* Photos.framework */; };
 		AEF936D41C314AE30095E0A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D21C314AE30095E0A7 /* Default.png */; };
 		AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D31C314AE30095E0A7 /* Default@2x.png */; };
 		AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */; };
@@ -1016,13 +1011,9 @@
 		AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferTableView.m; sourceTree = "<group>"; };
 		AE56F33E1E0280E900340742 /* WYLXGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLXGroup.h; sourceTree = "<group>"; };
 		AE56F33F1E0280E900340742 /* WYLXGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLXGroup.m; sourceTree = "<group>"; };
-		AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		AE582C291D06B0ED00499B6B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		AE582C2C1D06B18E00499B6B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AE582C2E1D06B1D100499B6B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		AE582C301D06B22C00499B6B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		AE582C321D06B94600499B6B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
-		AE582C331D06B94600499B6B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE5C824720C13E2F00EB3F82 /* NewRecommedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRecommedView.h; sourceTree = "<group>"; };
@@ -1033,11 +1024,6 @@
 		AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_a.jpg; sourceTree = "<group>"; };
 		AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_d.jpg; sourceTree = "<group>"; };
 		AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_b.jpg; sourceTree = "<group>"; };
-		AE60C1AE20E1EBBF000867A8 /* home_rent_re_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_re_d.jpg; sourceTree = "<group>"; };
-		AE60C1AF20E1EBBF000867A8 /* home_rent_re_e.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_re_e.jpg; sourceTree = "<group>"; };
-		AE60C1B020E1EBBF000867A8 /* home_rent_re_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_re_a.jpg; sourceTree = "<group>"; };
-		AE60C1B120E1EBBF000867A8 /* home_rent_re_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_re_b.jpg; sourceTree = "<group>"; };
-		AE60C1B220E1EBC0000867A8 /* home_rent_re_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_re_c.jpg; sourceTree = "<group>"; };
 		AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_b.jpg; sourceTree = "<group>"; };
 		AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_a.jpg; sourceTree = "<group>"; };
 		AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_c.jpg; sourceTree = "<group>"; };
@@ -1145,12 +1131,6 @@
 		AE76ACE020D8A1A800C42FA2 /* HomeApplySubjecttCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeApplySubjecttCell.m; sourceTree = "<group>"; };
 		AE76ACE120D8A1A800C42FA2 /* HomeApplySubjecttCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeApplySubjecttCell.xib; sourceTree = "<group>"; };
 		AE76ACE220D8A1A800C42FA2 /* HomeApplySubjecttCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeApplySubjecttCell.h; sourceTree = "<group>"; };
-		AE76ACE520D8E63100C42FA2 /* city_akl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_akl.jpg; sourceTree = "<group>"; };
-		AE76ACE620D8E63200C42FA2 /* city_mcst.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_mcst.jpg; sourceTree = "<group>"; };
-		AE76ACE720D8E63200C42FA2 /* city_ld.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_ld.jpg; sourceTree = "<group>"; };
-		AE76ACE820D8E63200C42FA2 /* city_mrb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_mrb.jpg; sourceTree = "<group>"; };
-		AE76ACE920D8E63300C42FA2 /* city_xn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_xn.jpg; sourceTree = "<group>"; };
-		AE76ACEA20D8E63300C42FA2 /* city_bmh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_bmh.jpg; sourceTree = "<group>"; };
 		AE76ACF120D914B500C42FA2 /* area_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = area_7.jpg; sourceTree = "<group>"; };
 		AE76ACF220D914B600C42FA2 /* area_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = area_6.jpg; sourceTree = "<group>"; };
 		AE76ACF320D914B600C42FA2 /* area_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = area_4.jpg; sourceTree = "<group>"; };
@@ -1240,7 +1220,6 @@
 		AE93E4ED1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UniversityOneGroupCollectionCell.m; path = controller/UniversityOneGroupCollectionCell.m; sourceTree = "<group>"; };
 		AE9414D4206B966800D636A0 /* PeiperGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeiperGroup.h; sourceTree = "<group>"; };
 		AE9414D5206B966800D636A0 /* PeiperGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeiperGroup.m; sourceTree = "<group>"; };
-		AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		AE96A3671E8BAD54006E8E35 /* ServiceItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemFrame.h; sourceTree = "<group>"; };
 		AE96A3681E8BAD54006E8E35 /* ServiceItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemFrame.m; sourceTree = "<group>"; };
 		AE96A36A1E8BBF96006E8E35 /* ServiceItemHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemHeaderView.h; sourceTree = "<group>"; };
@@ -1528,20 +1507,6 @@
 		AEA9399C207B0D1B0035121D /* serviceProtocolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = serviceProtocolVC.m; sourceTree = "<group>"; };
 		AEAE882A1DC2086400672E57 /* MyOfferUniversityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferUniversityModel.h; sourceTree = "<group>"; };
 		AEAE882B1DC2086400672E57 /* MyOfferUniversityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferUniversityModel.m; sourceTree = "<group>"; };
-		AEB3531A20C7AD11004245D5 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
-		AEB3531B20C7AD11004245D5 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
-		AEB3531D20C7AD11004245D5 /* libSocialSina.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSina.a; sourceTree = "<group>"; };
-		AEB3531E20C7AD11004245D5 /* UMSocialSinaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaHandler.h; sourceTree = "<group>"; };
-		AEB3532020C7AD11004245D5 /* libSocialUniqueId.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialUniqueId.a; sourceTree = "<group>"; };
-		AEB3532120C7AD11004245D5 /* UMSocialUniqueIdHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialUniqueIdHandler.h; sourceTree = "<group>"; };
-		AEB3532320C7AD11004245D5 /* libSocialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWeChat.a; sourceTree = "<group>"; };
-		AEB3532420C7AD11004245D5 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
-		AEB3532620C7AD11004245D5 /* UMSocialCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialCore.framework; sourceTree = "<group>"; };
-		AEB3532720C7AD11004245D5 /* UMSocialNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMSocialNetwork.framework; sourceTree = "<group>"; };
-		AEB3532820C7AD11004245D5 /* UMSocialSDKPromptResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKPromptResources.bundle; sourceTree = "<group>"; };
-		AEB3532A20C7AD11004245D5 /* libUMSocialLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocialLog.a; sourceTree = "<group>"; };
-		AEB3532C20C7AD11004245D5 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
-		AEB3532D20C7AD11004245D5 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		AEB634A91ED2B996009DFFD4 /* ZhiXunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiXunCell.h; sourceTree = "<group>"; };
 		AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiXunCell.m; sourceTree = "<group>"; };
 		AEB634AC1ED2D778009DFFD4 /* ZixunFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZixunFooterView.h; sourceTree = "<group>"; };
@@ -1708,6 +1673,29 @@
 		AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_03.jpg; sourceTree = "<group>"; };
 		AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_01.jpg; sourceTree = "<group>"; };
 		AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_uvic_hot_02.jpg; sourceTree = "<group>"; };
+		AEF657CE21006E9C00C0D849 /* city_mrb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_mrb.jpg; sourceTree = "<group>"; };
+		AEF657CF21006E9C00C0D849 /* city_ld.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_ld.jpg; sourceTree = "<group>"; };
+		AEF657D021006E9C00C0D849 /* city_xn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_xn.jpg; sourceTree = "<group>"; };
+		AEF657D121006E9D00C0D849 /* city_mcst.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_mcst.jpg; sourceTree = "<group>"; };
+		AEF657D221006E9D00C0D849 /* city_akl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_akl.jpg; sourceTree = "<group>"; };
+		AEF657D321006E9E00C0D849 /* city_bmh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = city_bmh.jpg; sourceTree = "<group>"; };
+		AEF657E02100826900C0D849 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		AEF657E12100826900C0D849 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		AEF657E721008C2300C0D849 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
+		AEF657EA21008C2300C0D849 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		AEF657EF21008C2300C0D849 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		AEF657F021008C2300C0D849 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
+		AEF657F221008C2300C0D849 /* libSocialSina.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSina.a; sourceTree = "<group>"; };
+		AEF657F321008C2300C0D849 /* UMSocialSinaHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSinaHandler.h; sourceTree = "<group>"; };
+		AEF657F521008C2300C0D849 /* libSocialWeChat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWeChat.a; sourceTree = "<group>"; };
+		AEF657F621008C2300C0D849 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		AEF657F721008C2300C0D849 /* UMShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMShare.framework; sourceTree = "<group>"; };
+		AEF657F921008C2300C0D849 /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
+		AEF657FA21008C2300C0D849 /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
+		AEF657FC21008C2300C0D849 /* SecurityEnvSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityEnvSDK.framework; sourceTree = "<group>"; };
+		AEF6580021008C2300C0D849 /* UMCommonLog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMCommonLog.bundle; sourceTree = "<group>"; };
+		AEF6580121008C2300C0D849 /* UMCommonLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommonLog.framework; sourceTree = "<group>"; };
+		AEF6580E2100907100C0D849 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		AEF936D21C314AE30095E0A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AEF936D31C314AE30095E0A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
@@ -1721,48 +1709,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF6580F2100907100C0D849 /* Photos.framework in Frameworks */,
+				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
+				AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */,
+				AEF6580421008C2400C0D849 /* libSocialQQ.a in Frameworks */,
+				AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */,
+				AE027EB11C3A4F16007EBD28 /* CFNetwork.framework in Frameworks */,
+				AE027EB71C3A4F5E007EBD28 /* UIKit.framework in Frameworks */,
+				AEF6580921008C2400C0D849 /* UShareUI.framework in Frameworks */,
+				AEF6580721008C2400C0D849 /* UMShare.framework in Frameworks */,
+				AEF421181BD499AB00CFB45E /* CoreGraphics.framework in Frameworks */,
+				AEF6580D21008C2400C0D849 /* UMCommonLog.framework in Frameworks */,
+				AE582C2D1D06B18E00499B6B /* CoreText.framework in Frameworks */,
+				AEF1274B1BF2D73000FFBCD6 /* QuartzCore.framework in Frameworks */,
+				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
+				AEF6580A21008C2400C0D849 /* SecurityEnvSDK.framework in Frameworks */,
+				AEF6580621008C2400C0D849 /* libSocialWeChat.a in Frameworks */,
+				AEF421161BD499A100CFB45E /* SystemConfiguration.framework in Frameworks */,
+				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
+				AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */,
+				AEF6580321008C2400C0D849 /* UMCommon.framework in Frameworks */,
 				AEB9A3401EA46F340025A72A /* QuickLook.framework in Frameworks */,
 				AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */,
 				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
-				AEF4211A1BD499B400CFB45E /* libsqlite3.tbd in Frameworks */,
 				AEC85BD420A444F20002F19B /* libresolv.tbd in Frameworks */,
-				AEB3532E20C7AD11004245D5 /* libSocialQQ.a in Frameworks */,
 				AEC85BD220A444D50002F19B /* UserNotifications.framework in Frameworks */,
 				AE53E86B1F73919800588F0C /* Social.framework in Frameworks */,
-				AEB3533120C7AD11004245D5 /* libSocialWeChat.a in Frameworks */,
-				AEF421181BD499AB00CFB45E /* CoreGraphics.framework in Frameworks */,
+				AEF6580521008C2400C0D849 /* libSocialSina.a in Frameworks */,
 				AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */,
 				AE79827F1F735ED3008BBAB7 /* libz.1.1.3.tbd in Frameworks */,
-				AEB3533320C7AD11004245D5 /* UMSocialNetwork.framework in Frameworks */,
-				AEB3532F20C7AD11004245D5 /* libSocialSina.a in Frameworks */,
 				AEF4211E1BD499C900CFB45E /* libstdc++.tbd in Frameworks */,
-				AEF421201BD499D100CFB45E /* libz.tbd in Frameworks */,
-				AEF4211C1BD499BE00CFB45E /* CoreTelephony.framework in Frameworks */,
 				AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */,
-				AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */,
 				AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */,
-				AEF421161BD499A100CFB45E /* SystemConfiguration.framework in Frameworks */,
-				AE94D8331F5FD10C00B64B10 /* UMMobClick.framework in Frameworks */,
-				AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */,
-				AEB3533220C7AD11004245D5 /* UMSocialCore.framework in Frameworks */,
-				AE027EB11C3A4F16007EBD28 /* CFNetwork.framework in Frameworks */,
 				AE027EB51C3A4F54007EBD28 /* Foundation.framework in Frameworks */,
-				AE027EB71C3A4F5E007EBD28 /* UIKit.framework in Frameworks */,
-				AE582C2D1D06B18E00499B6B /* CoreText.framework in Frameworks */,
-				AEF1274B1BF2D73000FFBCD6 /* QuartzCore.framework in Frameworks */,
 				5672E8B41CCBAF7C0099FDFC /* WebKit.framework in Frameworks */,
 				AEF421141BD4999400CFB45E /* libiconv.tbd in Frameworks */,
 				AEF421121BD4998A00CFB45E /* Security.framework in Frameworks */,
 				AE027EB31C3A4F29007EBD28 /* CoreFoundation.framework in Frameworks */,
 				AEF0B3441C082BFD004C1155 /* AdSupport.framework in Frameworks */,
-				AEF1FACF1BE38EBE00F48E8B /* ImageIO.framework in Frameworks */,
-				AE582C2B1D06B0ED00499B6B /* AlipaySDK.framework in Frameworks */,
+				AEF657E32100826900C0D849 /* AlipaySDK.framework in Frameworks */,
 				463E3AC61B23122D00E0BAF8 /* Crashlytics.framework in Frameworks */,
 				463E3AC51B23122D00E0BAF8 /* Fabric.framework in Frameworks */,
-				AEB3533720C7AD11004245D5 /* UShareUI.framework in Frameworks */,
 				5C854C0A39E8380FC8EE1290 /* libPods-MyOffer.a in Frameworks */,
-				AEB3533520C7AD11004245D5 /* libUMSocialLog.a in Frameworks */,
-				AEB3533020C7AD11004245D5 /* libSocialUniqueId.a in Frameworks */,
+				AEF6580221008C2400C0D849 /* UMAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1891,6 +1880,7 @@
 		463E3AC21B23121F00E0BAF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEF6580E2100907100C0D849 /* Photos.framework */,
 				AEC85BD320A444F20002F19B /* libresolv.tbd */,
 				AEC85BD120A444D50002F19B /* UserNotifications.framework */,
 				AE53E86A1F73919800588F0C /* Social.framework */,
@@ -2481,17 +2471,6 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
-		AE582C271D06B0ED00499B6B /* AlipaySDK */ = {
-			isa = PBXGroup;
-			children = (
-				AE582C321D06B94600499B6B /* Order.h */,
-				AE582C331D06B94600499B6B /* Order.m */,
-				AE582C281D06B0ED00499B6B /* AlipaySDK.bundle */,
-				AE582C291D06B0ED00499B6B /* AlipaySDK.framework */,
-			);
-			path = AlipaySDK;
-			sourceTree = "<group>";
-		};
 		AE6178B0207237AB006B311A /* discount */ = {
 			isa = PBXGroup;
 			children = (
@@ -2942,14 +2921,6 @@
 				AE9414D5206B966800D636A0 /* PeiperGroup.m */,
 			);
 			path = model;
-			sourceTree = "<group>";
-		};
-		AE94D8311F5FD10C00B64B10 /* UMAnalytics_Sdk_3.6.6 */ = {
-			isa = PBXGroup;
-			children = (
-				AE94D8321F5FD10C00B64B10 /* UMMobClick.framework */,
-			);
-			path = UMAnalytics_Sdk_3.6.6;
 			sourceTree = "<group>";
 		};
 		AE9BA42A20B3BA17008B65D4 /* Reward */ = {
@@ -3944,12 +3915,12 @@
 				AEF2625F1F960864005D0768 /* nzl_more.jpg */,
 				AEA24C1D1D5B283700DD7939 /* PlaceHolderImage.png */,
 				AE401A451F282F6B004A6378 /* sm_vedio_banner.jpg */,
-				AE76ACE520D8E63100C42FA2 /* city_akl.jpg */,
-				AE76ACEA20D8E63300C42FA2 /* city_bmh.jpg */,
-				AE76ACE720D8E63200C42FA2 /* city_ld.jpg */,
-				AE76ACE620D8E63200C42FA2 /* city_mcst.jpg */,
-				AE76ACE820D8E63200C42FA2 /* city_mrb.jpg */,
-				AE76ACE920D8E63300C42FA2 /* city_xn.jpg */,
+				AEF657D221006E9D00C0D849 /* city_akl.jpg */,
+				AEF657D321006E9E00C0D849 /* city_bmh.jpg */,
+				AEF657CF21006E9C00C0D849 /* city_ld.jpg */,
+				AEF657D121006E9D00C0D849 /* city_mcst.jpg */,
+				AEF657CE21006E9C00C0D849 /* city_mrb.jpg */,
+				AEF657D021006E9C00C0D849 /* city_xn.jpg */,
 				AE76ACF720D914B700C42FA2 /* area_0.jpg */,
 				AE76ACF520D914B600C42FA2 /* area_1.jpg */,
 				AE76ACF620D914B700C42FA2 /* area_2.jpg */,
@@ -3970,11 +3941,6 @@
 				AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */,
 				AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */,
 				AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */,
-				AE60C1B020E1EBBF000867A8 /* home_rent_re_a.jpg */,
-				AE60C1B120E1EBBF000867A8 /* home_rent_re_b.jpg */,
-				AE60C1B220E1EBC0000867A8 /* home_rent_re_c.jpg */,
-				AE60C1AE20E1EBBF000867A8 /* home_rent_re_d.jpg */,
-				AE60C1AF20E1EBBF000867A8 /* home_rent_re_e.jpg */,
 				AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */,
 				AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */,
 				AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */,
@@ -4115,91 +4081,6 @@
 				AE1A805620DA304D00CE9E50 /* HomeFeeCell.xib */,
 			);
 			path = V;
-			sourceTree = "<group>";
-		};
-		AEB3531720C7AD11004245D5 /* UMSocial */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3531820C7AD11004245D5 /* SocialLibraries */,
-				AEB3532520C7AD11004245D5 /* UMSocialSDK */,
-				AEB3532920C7AD11004245D5 /* UMSocialSDKPlugin */,
-				AEB3532B20C7AD11004245D5 /* UMSocialUI */,
-			);
-			path = UMSocial;
-			sourceTree = "<group>";
-		};
-		AEB3531820C7AD11004245D5 /* SocialLibraries */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3531920C7AD11004245D5 /* QQ */,
-				AEB3531C20C7AD11004245D5 /* Sina */,
-				AEB3531F20C7AD11004245D5 /* UniqueId */,
-				AEB3532220C7AD11004245D5 /* WeChat */,
-			);
-			path = SocialLibraries;
-			sourceTree = "<group>";
-		};
-		AEB3531920C7AD11004245D5 /* QQ */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3531A20C7AD11004245D5 /* libSocialQQ.a */,
-				AEB3531B20C7AD11004245D5 /* UMSocialQQHandler.h */,
-			);
-			path = QQ;
-			sourceTree = "<group>";
-		};
-		AEB3531C20C7AD11004245D5 /* Sina */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3531D20C7AD11004245D5 /* libSocialSina.a */,
-				AEB3531E20C7AD11004245D5 /* UMSocialSinaHandler.h */,
-			);
-			path = Sina;
-			sourceTree = "<group>";
-		};
-		AEB3531F20C7AD11004245D5 /* UniqueId */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3532020C7AD11004245D5 /* libSocialUniqueId.a */,
-				AEB3532120C7AD11004245D5 /* UMSocialUniqueIdHandler.h */,
-			);
-			path = UniqueId;
-			sourceTree = "<group>";
-		};
-		AEB3532220C7AD11004245D5 /* WeChat */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3532320C7AD11004245D5 /* libSocialWeChat.a */,
-				AEB3532420C7AD11004245D5 /* UMSocialWechatHandler.h */,
-			);
-			path = WeChat;
-			sourceTree = "<group>";
-		};
-		AEB3532520C7AD11004245D5 /* UMSocialSDK */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3532620C7AD11004245D5 /* UMSocialCore.framework */,
-				AEB3532720C7AD11004245D5 /* UMSocialNetwork.framework */,
-				AEB3532820C7AD11004245D5 /* UMSocialSDKPromptResources.bundle */,
-			);
-			path = UMSocialSDK;
-			sourceTree = "<group>";
-		};
-		AEB3532920C7AD11004245D5 /* UMSocialSDKPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3532A20C7AD11004245D5 /* libUMSocialLog.a */,
-			);
-			path = UMSocialSDKPlugin;
-			sourceTree = "<group>";
-		};
-		AEB3532B20C7AD11004245D5 /* UMSocialUI */ = {
-			isa = PBXGroup;
-			children = (
-				AEB3532C20C7AD11004245D5 /* UMSocialSDKResources.bundle */,
-				AEB3532D20C7AD11004245D5 /* UShareUI.framework */,
-			);
-			path = UMSocialUI;
 			sourceTree = "<group>";
 		};
 		AEC85BC020A29F4D0002F19B /* plist_File */ = {
@@ -4390,12 +4271,11 @@
 		AEE73C351BCCBB6400B96006 /* LIB */ = {
 			isa = PBXGroup;
 			children = (
-				AEB3531720C7AD11004245D5 /* UMSocial */,
+				AEF657E421008C2300C0D849 /* UMSocial */,
+				AEF657DF2100826900C0D849 /* AlipaySDK */,
 				AE53E86C1F73C0A600588F0C /* Wechat */,
-				AE94D8311F5FD10C00B64B10 /* UMAnalytics_Sdk_3.6.6 */,
 				AE1FD68E1D5C924200FFD5A8 /* LibFile */,
 				AE1D01131D2FCD2D005E2DEF /* AutoLoop */,
-				AE582C271D06B0ED00499B6B /* AlipaySDK */,
 				565E52461C269D1100B9053B /* Reachability */,
 				AEF127461BF2D6D700FFBCD6 /* PIE */,
 			);
@@ -4443,6 +4323,148 @@
 				AEA24A721D5B23F600DD7939 /* WYLXViewController.m */,
 			);
 			name = C;
+			sourceTree = "<group>";
+		};
+		AEF657DF2100826900C0D849 /* AlipaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657E02100826900C0D849 /* AlipaySDK.bundle */,
+				AEF657E12100826900C0D849 /* AlipaySDK.framework */,
+			);
+			path = AlipaySDK;
+			sourceTree = "<group>";
+		};
+		AEF657E421008C2300C0D849 /* UMSocial */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657E521008C2300C0D849 /* NewUM */,
+			);
+			path = UMSocial;
+			sourceTree = "<group>";
+		};
+		AEF657E521008C2300C0D849 /* NewUM */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657E621008C2300C0D849 /* analytics_ios_5.5.0 */,
+				AEF657E821008C2300C0D849 /* common_ios_1.5.2 */,
+				AEF657EB21008C2300C0D849 /* share */,
+				AEF657FB21008C2300C0D849 /* thirdparties_ios_1.0.5 */,
+				AEF657FE21008C2300C0D849 /* umcommonlog */,
+			);
+			path = NewUM;
+			sourceTree = "<group>";
+		};
+		AEF657E621008C2300C0D849 /* analytics_ios_5.5.0 */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657E721008C2300C0D849 /* UMAnalytics.framework */,
+			);
+			path = analytics_ios_5.5.0;
+			sourceTree = "<group>";
+		};
+		AEF657E821008C2300C0D849 /* common_ios_1.5.2 */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657E921008C2300C0D849 /* normal */,
+			);
+			path = common_ios_1.5.2;
+			sourceTree = "<group>";
+		};
+		AEF657E921008C2300C0D849 /* normal */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657EA21008C2300C0D849 /* UMCommon.framework */,
+			);
+			path = normal;
+			sourceTree = "<group>";
+		};
+		AEF657EB21008C2300C0D849 /* share */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657EC21008C2300C0D849 /* share_ios_6.9.3 */,
+			);
+			path = share;
+			sourceTree = "<group>";
+		};
+		AEF657EC21008C2300C0D849 /* share_ios_6.9.3 */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657ED21008C2300C0D849 /* SocialLibraries */,
+				AEF657F721008C2300C0D849 /* UMShare.framework */,
+				AEF657F821008C2300C0D849 /* UMSocialUI */,
+			);
+			path = share_ios_6.9.3;
+			sourceTree = "<group>";
+		};
+		AEF657ED21008C2300C0D849 /* SocialLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657EE21008C2300C0D849 /* QQ */,
+				AEF657F121008C2300C0D849 /* Sina */,
+				AEF657F421008C2300C0D849 /* WeChat */,
+			);
+			path = SocialLibraries;
+			sourceTree = "<group>";
+		};
+		AEF657EE21008C2300C0D849 /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657EF21008C2300C0D849 /* libSocialQQ.a */,
+				AEF657F021008C2300C0D849 /* UMSocialQQHandler.h */,
+			);
+			path = QQ;
+			sourceTree = "<group>";
+		};
+		AEF657F121008C2300C0D849 /* Sina */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657F221008C2300C0D849 /* libSocialSina.a */,
+				AEF657F321008C2300C0D849 /* UMSocialSinaHandler.h */,
+			);
+			path = Sina;
+			sourceTree = "<group>";
+		};
+		AEF657F421008C2300C0D849 /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657F521008C2300C0D849 /* libSocialWeChat.a */,
+				AEF657F621008C2300C0D849 /* UMSocialWechatHandler.h */,
+			);
+			path = WeChat;
+			sourceTree = "<group>";
+		};
+		AEF657F821008C2300C0D849 /* UMSocialUI */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657F921008C2300C0D849 /* UMSocialSDKResources.bundle */,
+				AEF657FA21008C2300C0D849 /* UShareUI.framework */,
+			);
+			path = UMSocialUI;
+			sourceTree = "<group>";
+		};
+		AEF657FB21008C2300C0D849 /* thirdparties_ios_1.0.5 */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657FC21008C2300C0D849 /* SecurityEnvSDK.framework */,
+			);
+			path = thirdparties_ios_1.0.5;
+			sourceTree = "<group>";
+		};
+		AEF657FE21008C2300C0D849 /* umcommonlog */ = {
+			isa = PBXGroup;
+			children = (
+				AEF657FF21008C2300C0D849 /* umcommonlog_ios_1.0.0 */,
+			);
+			path = umcommonlog;
+			sourceTree = "<group>";
+		};
+		AEF657FF21008C2300C0D849 /* umcommonlog_ios_1.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				AEF6580021008C2300C0D849 /* UMCommonLog.bundle */,
+				AEF6580121008C2300C0D849 /* UMCommonLog.framework */,
+			);
+			path = umcommonlog_ios_1.0.0;
 			sourceTree = "<group>";
 		};
 		AEFA60A11F46F9BD0086BBCE /* M */ = {
@@ -4510,7 +4532,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4545,7 +4567,6 @@
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AE76AD0020D914B800C42FA2 /* area_0.jpg in Resources */,
 				AE76ACFD20D914B800C42FA2 /* area_5.jpg in Resources */,
-				AE76ACEE20D8E63300C42FA2 /* city_mrb.jpg in Resources */,
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
@@ -4560,13 +4581,11 @@
 				AEF657AC20FDBB2300C0D849 /* home_uvic_service_05.jpg in Resources */,
 				AE9BA47720B53794008B65D4 /* InvitationRecordUserFooter.xib in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
-				AE76ACEB20D8E63300C42FA2 /* city_akl.jpg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
 				AE1A805820DA304D00CE9E50 /* HomeFeeCell.xib in Resources */,
 				AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */,
 				AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
-				AE60C1B620E1EBC0000867A8 /* home_rent_re_b.jpg in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */,
@@ -4581,7 +4600,6 @@
 				AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */,
 				AE76ACDA20D8A13C00C42FA2 /* HomeApplyUniCell.xib in Resources */,
 				AE76ACDF20D8A17200C42FA2 /* HomeApplicationDestinationCell.xib in Resources */,
-				AE60C1B520E1EBC0000867A8 /* home_rent_re_a.jpg in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */,
 				AE60C1BD20E1EECC000867A8 /* home_rent_process_a.jpg in Resources */,
@@ -4599,9 +4617,7 @@
 				AEC4285520E0DA81007B3949 /* HomeUVICCell.xib in Resources */,
 				AEF936D41C314AE30095E0A7 /* Default.png in Resources */,
 				AEF657AD20FDBB2300C0D849 /* home_uvic_service_06.jpg in Resources */,
-				AE76ACEF20D8E63300C42FA2 /* city_xn.jpg in Resources */,
 				AE1FD74B1D5C929500FFD5A8 /* Pre-comp 1_0009.png in Resources */,
-				AE60C1B720E1EBC0000867A8 /* home_rent_re_c.jpg in Resources */,
 				AE9BA43C20B3EFEE008B65D4 /* RewardListVC.xib in Resources */,
 				AE76ACE420D8A1A800C42FA2 /* HomeApplySubjecttCell.xib in Resources */,
 				AE1FD73C1D5C929500FFD5A8 /* Pre-comp 1_00024.png in Resources */,
@@ -4610,7 +4626,6 @@
 				46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */,
 				AE60C1C320E21B3D000867A8 /* home_global_smile.jpg in Resources */,
 				AEC85BC620A2A1030002F19B /* subjectsCN.plist in Resources */,
-				AE76ACED20D8E63300C42FA2 /* city_ld.jpg in Resources */,
 				AE60C1FC20E247F7000867A8 /* home_global_user_08.jpg in Resources */,
 				AE60C23620E4C83C000867A8 /* home_application_cell_uni.jpg in Resources */,
 				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
@@ -4619,11 +4634,11 @@
 				AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
 				AE60C1E520E237C0000867A8 /* home_global_os_01.jpg in Resources */,
+				AEF657E22100826900C0D849 /* AlipaySDK.bundle in Resources */,
 				AE60C1FA20E247F7000867A8 /* home_global_user_04.jpg in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
 				AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */,
 				AEA545D320D26F300095CBDA /* HomeHotVideoCell.xib in Resources */,
-				AEB3533620C7AD11004245D5 /* UMSocialSDKResources.bundle in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
 				AEF657AA20FDBB2300C0D849 /* home_uvic_service_02.jpg in Resources */,
 				AE914EE21F419F38008A43CD /* ApplyStatusHistoryViewController.xib in Resources */,
@@ -4653,31 +4668,28 @@
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
+				AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
 				AEDDAA8520E642780069C138 /* home_global_plan_right.jpeg in Resources */,
 				AE7825E31D702AB100AA4EF4 /* UniversityNavView.xib in Resources */,
 				AE1FD74A1D5C929500FFD5A8 /* Pre-comp 1_0008.png in Resources */,
 				AE76ACFB20D914B800C42FA2 /* area_6.jpg in Resources */,
 				AEA24B051D5B24D200DD7939 /* ChangePasswordViewController.xib in Resources */,
-				AE76ACEC20D8E63300C42FA2 /* city_mcst.jpg in Resources */,
 				AE1A805A20DA432500CE9E50 /* home_fee_a.jpg in Resources */,
 				AE914EDD1F419EB9008A43CD /* ApplyStatusHistoryCell.xib in Resources */,
-				AE60C1B420E1EBC0000867A8 /* home_rent_re_e.jpg in Resources */,
 				AE1FD7461D5C929500FFD5A8 /* Pre-comp 1_0004.png in Resources */,
 				AEF657A820FDBB2300C0D849 /* home_uvic_service_01.jpg in Resources */,
 				AEDDAA6F20E4FEC00069C138 /* intro_01.jpg in Resources */,
 				AE9BA46520B42D63008B65D4 /* InvitationRecordsCell.xib in Resources */,
 				AECC678320EA308200B1904B /* LaunchScreen_logo_a.png in Resources */,
-				AE76ACF020D8E63300C42FA2 /* city_bmh.jpg in Resources */,
 				AE9BA45720B40B66008B65D4 /* ExchangeAVC.xib in Resources */,
-				AE60C1B320E1EBC0000867A8 /* home_rent_re_d.jpg in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */,
-				AEB3533420C7AD11004245D5 /* UMSocialSDKPromptResources.bundle in Resources */,
 				AE60C1A020E1E947000867A8 /* home_rent_advant_c.jpg in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE9BA45220B402E3008B65D4 /* ExtractionBVC.xib in Resources */,
 				AECC678420EA308200B1904B /* LaunchScreen_logo_b.png in Resources */,
+				AEF657D721006E9E00C0D849 /* city_mcst.jpg in Resources */,
 				AE76ACFC20D914B800C42FA2 /* area_4.jpg in Resources */,
 				AEDDAA7320E4FEC00069C138 /* intro_02.jpg in Resources */,
 				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
@@ -4690,6 +4702,7 @@
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
 				AE9BA47020B5154E008B65D4 /* InvitationRecordDetailVC.xib in Resources */,
 				AEC4284C20E08D57007B3949 /* HomeUVICserviceAdvantageCell.xib in Resources */,
+				AEF6580821008C2400C0D849 /* UMSocialSDKResources.bundle in Resources */,
 				AE60C1FF20E247F7000867A8 /* home_global_user_05.jpg in Resources */,
 				AE1FD73A1D5C929500FFD5A8 /* Pre-comp 1_00022.png in Resources */,
 				AE1FD7431D5C929500FFD5A8 /* Pre-comp 1_00030.png in Resources */,
@@ -4699,10 +4712,11 @@
 				AEDDAA7A20E6078F0069C138 /* home_UVIC_bg.jpg in Resources */,
 				AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */,
 				AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */,
+				AEF657D521006E9E00C0D849 /* city_ld.jpg in Resources */,
 				AE1FD72F1D5C929500FFD5A8 /* Pre-comp 1_00012.png in Resources */,
-				AE582C2A1D06B0ED00499B6B /* AlipaySDK.bundle in Resources */,
 				AE60C1CD20E21E1C000867A8 /* home_global_job_b.jpg in Resources */,
 				AEDDAA5C20E4D36C0069C138 /* home_application_uni_rank.png in Resources */,
+				AEF657D621006E9E00C0D849 /* city_xn.jpg in Resources */,
 				AE60C1CF20E21E1C000867A8 /* home_global_job_c.jpg in Resources */,
 				46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */,
 				AEC4285120E09ECC007B3949 /* HomeUVICImmigrationProjectCell.xib in Resources */,
@@ -4710,6 +4724,7 @@
 				AE76ACFE20D914B800C42FA2 /* area_1.jpg in Resources */,
 				AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */,
 				AE76AD0120D914B800C42FA2 /* area_3.jpg in Resources */,
+				AEF657D421006E9E00C0D849 /* city_mrb.jpg in Resources */,
 				AE60C20520E25146000867A8 /* home_global_ad_03.jpg in Resources */,
 				AE76AD0220D914B800C42FA2 /* area_8.jpg in Resources */,
 				AE60C22A20E4AC35000867A8 /* home_recomment_active_cash.jpg in Resources */,
@@ -4721,6 +4736,7 @@
 				AE50BECB207481870002DCAC /* OrderActionVC.xib in Resources */,
 				AE91DDE11FBC169F00CD06BD /* GuideItemCell.xib in Resources */,
 				AEDDAA7C20E6078F0069C138 /* home_application_bg.jpg in Resources */,
+				AEF657D921006E9E00C0D849 /* city_bmh.jpg in Resources */,
 				AEA24AFB1D5B24D200DD7939 /* XWGJAaboutHeader.xib in Resources */,
 				AE60C20020E247F7000867A8 /* home_global_user_03.jpg in Resources */,
 				AE9BA48120B53E68008B65D4 /* InvitationRecordDetailCell.xib in Resources */,
@@ -4728,6 +4744,7 @@
 				AE60C1FE20E247F7000867A8 /* home_global_user_010.jpg in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
+				AEF6580C21008C2400C0D849 /* UMCommonLog.bundle in Resources */,
 				AEF657B320FDC4B200C0D849 /* home_uvic_hot_03.jpg in Resources */,
 				AE50BED42074B93C0002DCAC /* OrderActionCell.xib in Resources */,
 				AE1FD72E1D5C929500FFD5A8 /* Pre-comp 1_00011.png in Resources */,
@@ -5018,7 +5035,6 @@
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
-				AE582C341D06B94600499B6B /* Order.m in Sources */,
 				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AEDDAA5F20E4DCDE0069C138 /* IntroCell.m in Sources */,
 				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
@@ -5337,12 +5353,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
-					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/common/common_ios_1.5.1/normal",
+					"$(PROJECT_DIR)/AlipaySDK",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/analytics_ios_5.5.0",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/UMSocialUI",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/umcommonlog/umcommonlog_ios_1.0.0",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
@@ -5356,18 +5374,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyOffer/Wechat",
-					"$(PROJECT_DIR)/MyOffer/SinaSSO",
-					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
-					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
 					"$(PROJECT_DIR)/Pods/JPush",
 					"$(SRCROOT)/Pods/JPush",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/UniqueId",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/WeChat",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -5400,12 +5412,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
 					"$(PROJECT_DIR)/MyOffer/AlipaySDK",
-					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/common/common_ios_1.5.1/normal",
+					"$(PROJECT_DIR)/AlipaySDK",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/analytics_ios_5.5.0",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/UMSocialUI",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/umcommonlog/umcommonlog_ios_1.0.0",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
@@ -5419,18 +5433,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyOffer/Wechat",
-					"$(PROJECT_DIR)/MyOffer/SinaSSO",
-					"$(PROJECT_DIR)/MyOffer/TencentOpenAPI",
-					"$(PROJECT_DIR)/MyOffer/UMAnalytics_Sdk_3.6.6",
 					"$(PROJECT_DIR)/MyOffer",
 					"$(PROJECT_DIR)/Pods/JPush",
 					"$(SRCROOT)/Pods/JPush",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/UniqueId",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/MyOffer/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/SocialLibraries/WeChat",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -5449,7 +5457,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

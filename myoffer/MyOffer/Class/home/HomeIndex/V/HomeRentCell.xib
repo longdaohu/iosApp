@@ -330,7 +330,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlE-Kf-cLW">
                                 <rect key="frame" x="24" y="0.0" width="140" height="132"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_a.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jci-oV-tBk">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_a" translatesAutoresizingMaskIntoConstraints="NO" id="Jci-oV-tBk">
                                         <rect key="frame" x="27.5" y="0.0" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="84" id="Wcg-p4-7fj"/>
@@ -363,7 +363,7 @@ Cg
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_b.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-gW-hFv">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_b" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-gW-hFv">
                                         <rect key="frame" x="28" y="0.0" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="RPP-6P-M2f"/>
@@ -398,7 +398,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DY-iP-5Hj">
                                 <rect key="frame" x="211.5" y="0.0" width="140" height="132"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_d.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Cbs-HU-OPD">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_d" translatesAutoresizingMaskIntoConstraints="NO" id="Cbs-HU-OPD">
                                         <rect key="frame" x="27.5" y="0.0" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="6DX-xD-OHU"/>
@@ -425,7 +425,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuF-Sd-Pih">
                                 <rect key="frame" x="24" y="0.0" width="140" height="132"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_c.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-CN-9v1">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_c" translatesAutoresizingMaskIntoConstraints="NO" id="Qdq-CN-9v1">
                                         <rect key="frame" x="27.5" y="0.0" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="Bwf-Rk-jwx"/>
@@ -466,7 +466,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ER1-XV-YS3">
                                 <rect key="frame" x="24" y="0.0" width="140" height="132"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_e.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KVs-6W-ULN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_re_e" translatesAutoresizingMaskIntoConstraints="NO" id="KVs-6W-ULN">
                                         <rect key="frame" x="27.5" y="0.0" width="84" height="84"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="HXZ-NA-beh"/>
@@ -515,7 +515,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lC-vK-qhu">
                                 <rect key="frame" x="10" y="10" width="335" height="87"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_a.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-LZ-knB">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_c.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="mPO-LZ-knB">
                                         <rect key="frame" x="190" y="0.0" width="145" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="145" id="A9s-TS-rg2"/>
@@ -566,7 +566,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u84-1G-5Sv">
                                 <rect key="frame" x="10" y="107" width="335" height="87"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_b.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9aU-8Z-abS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_a.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9aU-8Z-abS">
                                         <rect key="frame" x="190" y="0.0" width="145" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="145" id="XfJ-GP-VBF"/>
@@ -618,7 +618,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u80-TK-XPs">
                                 <rect key="frame" x="10" y="204" width="335" height="87"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_c.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wVL-IL-Hg6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_d.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wVL-IL-Hg6">
                                         <rect key="frame" x="190" y="0.0" width="145" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="145" id="4Bo-cC-0eH"/>
@@ -670,7 +670,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnc-89-WA2">
                                 <rect key="frame" x="10" y="301" width="335" height="87"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_d.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="i0t-hI-p17">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_rent_process_b.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="i0t-hI-p17">
                                         <rect key="frame" x="190" y="0.0" width="145" height="87"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="145" id="bqe-IT-TAP"/>
@@ -891,11 +891,11 @@ Cg
         <image name="home_rent_process_b.jpg" width="290" height="174"/>
         <image name="home_rent_process_c.jpg" width="290" height="174"/>
         <image name="home_rent_process_d.jpg" width="290" height="174"/>
-        <image name="home_rent_re_a.jpg" width="216" height="170"/>
-        <image name="home_rent_re_b.jpg" width="216" height="170"/>
-        <image name="home_rent_re_c.jpg" width="216" height="170"/>
-        <image name="home_rent_re_d.jpg" width="216" height="170"/>
-        <image name="home_rent_re_e.jpg" width="216" height="170"/>
+        <image name="home_rent_re_a" width="168" height="168"/>
+        <image name="home_rent_re_b" width="168" height="168"/>
+        <image name="home_rent_re_c" width="168" height="168"/>
+        <image name="home_rent_re_d" width="168" height="168"/>
+        <image name="home_rent_re_e" width="84" height="84"/>
         <image name="home_room_w_bg" width="176" height="54"/>
     </resources>
 </document>

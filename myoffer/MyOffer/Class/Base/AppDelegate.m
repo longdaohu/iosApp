@@ -136,57 +136,27 @@ static AppDelegate *__sharedDelegate;
 
 -(void)umeng
 {
-    /* 打开调试日志 */
-    [[UMSocialManager defaultManager] openLog:YES];
-    /* 设置友盟appkey */
-    [[UMSocialManager defaultManager] setUmSocialAppkey:@"5668ea43e0f55af981002131"];
-    [self configUSharePlatforms];
-    //友盟统计
-    [self umengTrack];
+    /*--------------升级--------------*/
+    //开发者需要显式的调用此函数，日志系统才能工作
+    [UMCommonLogManager setUpUMCommonLogManager];
+    [UMConfigure setEncryptEnabled:YES];//打开加密传输
+    [UMConfigure setLogEnabled:YES];//设置打开日志
+    [UMConfigure initWithAppkey:@"5668ea43e0f55af981002131" channel:@"App Store"];
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
+    [self configUSharePlatforms];
+    [MobClick setScenarioType:E_UM_DPLUS];      // 启用DPlus功能
+    /*--------------升级-------------*/
 
 }
-
 - (void)configUSharePlatforms
 {
     
-
-    /*
-     旧版 [UMSocialWechatHandler setWXAppId:@"wx6ef4fb49781fdd34" appSecret:@"" url:@"http://www.myoffer.cn/"];
-     设置微信的appKey和appSecret
-     [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
-     */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx6ef4fb49781fdd34" appSecret:@"776f9dafbfe76ffb6e20ff5a8e4c4177" redirectURL:@"http://www.myoffer.cn/"];
- 
-    /* 旧版  [UMSocialQQHandler setQQWithAppId:@"1104829804" appKey:@"qQUCI87bgI38XUut" url:@"http://www.myoffer.cn/"];
-     设置分享到QQ互联的appID
-     * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
-     100424468.no permission of union id
-     [QQ/QZone平台集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_3
-     */
     
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104829804"/*设置QQ平台的appID*/  appSecret:@"qQUCI87bgI38XUut" redirectURL:@"http://www.myoffer.cn/"];
     
-    /*
-     旧版   [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
-     设置新浪的appKey和appSecret
-     [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
-     */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"1584614386"  appSecret:@"3736ea71b1062eaf980a72e14184cf78" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     
- 
-//     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Email appKey:nil appSecret:nil redirectURL:nil];
-}
-    
-
-
-- (void)umengTrack {
-    // [MobClick setAppVersion:XcodeAppVersion];
-    //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    [MobClick setLogEnabled:YES];
-    UMConfigInstance.appKey = @"5668ea43e0f55af981002131";
-    UMConfigInstance.channelId = @"App Store";
-    [MobClick startWithConfigure:UMConfigInstance];
 }
 
 

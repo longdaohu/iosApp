@@ -39,7 +39,7 @@
         subLab.text = @"合同名称：《留学产品合同》";
         self.subLab = subLab;
         subLab.font = XFONT(12);
-        subLab.textColor = XCOLOR(67, 67, 67, 1);
+        subLab.textColor = XCOLOR(187, 187, 187, 1);
         [self.contentView addSubview:subLab];
         
         UIImageView *iconView = [UIImageView new];
@@ -53,7 +53,7 @@
         [statusBtn setTitle:@"已签署" forState:UIControlStateSelected];
         [statusBtn setImage:XImage(@"UnsignedContract") forState:UIControlStateNormal];
         [statusBtn setImage:XImage(@"check-icons-yes") forState:UIControlStateSelected];
-        [statusBtn setTitleColor:XCOLOR(67, 67, 67, 1) forState:UIControlStateNormal];
+        [statusBtn setTitleColor:XCOLOR(187, 187, 187, 1) forState:UIControlStateNormal];
         self.statusBtn = statusBtn;
         [statusBtn.imageView setContentMode:UIViewContentModeScaleAspectFit];
         [self.contentView addSubview:statusBtn];
@@ -61,18 +61,31 @@
         statusBtn.userInteractionEnabled = NO;
 
         UIButton *lookBtn = [UIButton new];
-        [lookBtn setTitle:@"查看" forState:UIControlStateNormal];
         lookBtn.titleLabel.font = XFONT(12);
         [lookBtn setTitleColor:XCOLOR(51, 51, 51, 1) forState:UIControlStateNormal];
         [lookBtn addTarget:self action:@selector(look) forControlEvents:UIControlEventTouchUpInside];
         lookBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.lookBtn = lookBtn;
         [self.contentView addSubview:lookBtn];
+        NSString *look = @"查看";
+        NSDictionary *attribtDic = @{ NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+        NSMutableAttributedString *attribt_look = [[NSMutableAttributedString alloc] initWithString:look];
+        [attribt_look addAttributes:attribtDic range:NSMakeRange(0, look.length)];
+        [lookBtn setAttributedTitle:attribt_look forState:UIControlStateNormal];
         
         UIButton *downloadBtn = [UIButton new];
-        [downloadBtn setTitle:@"下载" forState:UIControlStateNormal];
-        [downloadBtn setTitle:@"下载中" forState:UIControlStateSelected];
-        [downloadBtn setTitle:@"下载完成" forState:UIControlStateDisabled];
+        NSString *down = @"下载";
+        NSString *downing = @"下载中";
+        NSString *downed = @"下载完成";
+        NSMutableAttributedString *attribt_down = [[NSMutableAttributedString alloc] initWithString:down];
+        [attribt_down addAttributes:attribtDic range:NSMakeRange(0, down.length)];
+        NSMutableAttributedString *attribt_downing = [[NSMutableAttributedString alloc] initWithString:downing];
+        [attribt_downing addAttributes:attribtDic range:NSMakeRange(0, downing.length)];
+        NSMutableAttributedString *attribt_downed = [[NSMutableAttributedString alloc] initWithString:downed];
+        [attribt_downed addAttributes:attribtDic range:NSMakeRange(0, downed.length)];
+        [downloadBtn setAttributedTitle:attribt_down forState:UIControlStateNormal];
+        [downloadBtn setAttributedTitle:attribt_downing forState:UIControlStateSelected];
+        [downloadBtn setAttributedTitle:attribt_downed forState:UIControlStateDisabled];
         downloadBtn.titleLabel.font = XFONT(12);
         [downloadBtn setTitleColor:XCOLOR(51, 51, 51, 1)  forState:UIControlStateNormal];
         [downloadBtn addTarget:self action:@selector(downLoad) forControlEvents:UIControlEventTouchUpInside];

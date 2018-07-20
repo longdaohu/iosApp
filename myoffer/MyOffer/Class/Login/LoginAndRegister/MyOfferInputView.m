@@ -499,9 +499,7 @@
 - (void)dealloc{
     
     [self timerClear];
-    
-    KDClassLog(@"MyOfferInputView  dealloc  %@",self.group.title);
-    
+ 
 }
 
 

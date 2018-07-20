@@ -118,27 +118,24 @@
             break;
         case myOfferShareTypeEmail:
         {
- 
-            //创建分享消息对象
-            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-            //设置文本
-            messageObject.text = [NSString stringWithFormat:@"%@%@",shareURL,shareTitle];
-             //调用分享接口
-            
-//            - (void)shareToPlatform:(UMSocialPlatformType)platformType
-//        messageObject:(UMSocialMessageObject *)messageObject
-//        currentViewController:(id)currentViewController
-//        completion:(UMSocialRequestCompletionHandler)completion;
-            
-            [[UMSocialManager defaultManager] shareToPlatform:UMSocialPlatformType_Email messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-                if (error) {
-                    KDClassLog(@"************Share fail with error %@*********",error);
-                }else{
-                    KDClassLog(@"response data is %@",data);
-                }
-            }];
-            
-
+//            [self shareWebPageToPlatformType:UMSocialPlatformType_Email message:shareObject video:(shareFromPlat.length > 0)];
+            NSMutableString *mailUrl = [[NSMutableString alloc] init];
+            //添加收件人
+            NSArray *toRecipients = [NSArray arrayWithObject: @"first@example.com"];
+            [mailUrl appendFormat:@"mailto:%@", [toRecipients componentsJoinedByString:@","]];
+            //添加抄送
+            NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+            [mailUrl appendFormat:@"?cc=%@", [ccRecipients componentsJoinedByString:@","]];
+            //添加密送
+            NSArray *bccRecipients = [NSArray arrayWithObjects:@"fourth@example.com", nil];
+            [mailUrl appendFormat:@"&bcc=%@", [bccRecipients componentsJoinedByString:@","]];
+            //添加主题
+            [mailUrl appendString:@"&subject=my email"];
+            //添加邮件内容
+            [mailUrl appendString:@"&body=<b>email</b> body!"];
+            NSString* email = [mailUrl toUTF8WithString];
+            [[UIApplication sharedApplication] openURL: [NSURL URLWithString:email]];
+  
         }
             break;
             

@@ -761,7 +761,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
         group.groupType == EditTypeVerificationCode ?  [parameter setValue:@{@"code":group.content} forKey:group.key] :  [parameter setValue:group.content forKey:group.key];
     }
  
-    
+    WeakSelf;
     [self
      startAPIRequestWithSelector:kAPISelectorRegister
      parameters:parameter   success:^(NSInteger statusCode, NSDictionary *response) {
@@ -774,8 +774,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
          
          MBProgressHUD *hud = [MBProgressHUD showSuccessWithMessage:nil ToView:nil];
          hud.completionBlock = ^{
-             
-             [self dismiss];
+             [weakSelf dismiss];
          };
  
      }];
@@ -877,14 +876,12 @@ typedef NS_ENUM(NSInteger,cellViewType){
     
     if (![self checkNetworkState]) return; //网络连接失败提示
   
-    
+    WeakSelf
     [self
      startAPIRequestWithSelector:path
      parameters:parameter
      success:^(NSInteger statusCode, NSDictionary *response) {
-         
-         [self LoginSuccessWithResponse:response];
-         
+         [weakSelf LoginSuccessWithResponse:response];
      }];
     
 }
@@ -895,7 +892,8 @@ typedef NS_ENUM(NSInteger,cellViewType){
 //正常登录成功相关处理  （非第三方）登录
 -(void)LoginSuccessWithResponse:(NSDictionary *)response
 {
-//    NSLog(@">>>>>>>>>>>>> jpush_alias = %@",response[@"jpush_alias"]);
+ 
+    WeakSelf
     [JPUSHService setAlias:response[@"jpush_alias"] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
     } seq:0 ];//Jpush设置登录用户别名
     [[AppDelegate sharedDelegate] loginWithAccessResponse:response];
@@ -904,11 +902,11 @@ typedef NS_ENUM(NSInteger,cellViewType){
     //当用户没有电话时发出通知，让用户填写手机号
     NSString *phone =response[@"phonenumber"];
     if (phone.length == 0) {
-        [self.view endEditing:YES];
+        [weakSelf.view endEditing:YES];
     }else{
         MBProgressHUD *HUD = [MBProgressHUD showSuccessWithMessage:nil ToView:self.view];
         HUD.completionBlock = ^{
-            [self dismiss];
+            [weakSelf dismiss];
         };
     }
     
@@ -916,7 +914,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
 
 
 #pragma mark : 第三方登录点击
-- (void) otherBtnOnClick:(UIButton *)sender{
+- (void)otherBtnOnClick:(UIButton *)sender{
 
  
     UMSocialPlatformType platformType;
@@ -943,56 +941,40 @@ typedef NS_ENUM(NSInteger,cellViewType){
         }
             break;
     }
-
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
-        
+    
+    /*
+     // 第三方登录数据(为空表示平台未提供)
+     // 授权数据  resp.uid    resp.openid   resp.accessToken  resp.refreshToken  resp.expiration
+     // 用户数据 resp.name  resp.iconurl  resp.unionGender
+     // 第三方平台SDK原始数据
+     NSLog(@" originalResponse: %@", resp.originalResponse);
+     */
+    WeakSelf
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
         if (!error) {
-            
             UMSocialUserInfoResponse *resp = result;
-            /*
-            // 第三方登录数据(为空表示平台未提供)
-            // 授权数据
-            NSLog(@" uid: %@", resp.uid);
-            NSLog(@" openid: %@", resp.openid);
-            NSLog(@" accessToken: %@", resp.accessToken);
-            NSLog(@" refreshToken: %@", resp.refreshToken);
-            NSLog(@" expiration: %@", resp.expiration);
-            
-            // 用户数据
-            NSLog(@" name: %@", resp.name);
-            NSLog(@" iconurl: %@", resp.iconurl);
-            NSLog(@" gender: %@", resp.unionGender);
-            
-            // 第三方平台SDK原始数据
-            NSLog(@" originalResponse: %@", resp.originalResponse);
-        
-*/
             NSDictionary  *userInfo = @{ @"user_id" : resp.uid, @"provider" : platformName, @"token" : resp.accessToken };
-            [self  loginWithParameters:userInfo];
-            
+            [weakSelf  loginWithParameters:userInfo];
         }
- 
     }];
  
 }
 // 第三方登录传参并登录
 -(void)loginWithParameters:(NSDictionary *)userInfo
 {
+    
     //存储第三方登录平台信息  用于绑定手机页面使用
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:userInfo[@"provider"]  forKey:@"provider"];
     [ud synchronize];
     
+    WeakSelf
     [self  startAPIRequestWithSelector:kAPISelectorLogin  parameters:userInfo success:^(NSInteger statusCode, NSDictionary *response) {
         
         if (response[@"new"]) {
-            
-            [self caseLoginSelection:userInfo];
-            
+            [weakSelf caseLoginSelection:userInfo];
         }else if([response[@"role"] isEqualToString:@"user"]){
-            
-            [self OtherLoginSuccessWithResponse:response andUserInfo:userInfo];
-            
+            [weakSelf OtherLoginSuccessWithResponse:response andUserInfo:userInfo];
         }
         
     }];
@@ -1013,7 +995,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
     [MobClick event:@"otherUserLogin"];
     
     //当用户没有电话时发出通知，让用户填写手机号
-    !response[@"phonenumber"]? [self caseBangding] :  [self dismiss];
+    !response[@"phonenumber"]? [self caseBangding] :  [self dismiss:nil];
     
 }
 

@@ -35,13 +35,6 @@
 @end
 
 @implementation HomeMenuBarView
-+ (instancetype)menuInitWithFrame:(CGRect)frame clickButton:(void(^)(NSInteger index))click{
-    
-    HomeMenuBarView *menu = [[HomeMenuBarView alloc] initWithFrame:frame];
-    menu.actionBlock = click;
-    
-    return menu;
-}
 
 + (instancetype)menuInitWithTitles:(NSArray *)titles clickButton:(void(^)(NSInteger index))click{
     
@@ -315,6 +308,7 @@
     self.indicator_shaper = indicator_shaper;
     [self.indicator.layer addSublayer:indicator_shaper];
     
+    //在滚动过程中不让点击 Button
     self.bgView.userInteractionEnabled = false;
     
 }
@@ -334,6 +328,10 @@
     if ([anim isEqual:[self.indicator_shaper animationForKey:@"up"]]) {
         CABasicAnimation *ani = [self indicatorAnimationWithPath:self.down_path duration:Ani_Duration * 0.5];
         [self.indicator_shaper addAnimation:ani forKey:@"down"];
+    }else{
+
+        //动画结束后可以点击
+        self.bgView.userInteractionEnabled = true;
     }
     
 }

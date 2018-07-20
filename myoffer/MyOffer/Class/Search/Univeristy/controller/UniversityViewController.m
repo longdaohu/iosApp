@@ -565,7 +565,7 @@ typedef enum {
     NSArray *photosWithURL = [IDMPhoto photosWithURLs:self.UniFrame.uni.m_images];
     NSMutableArray *photos = [NSMutableArray arrayWithArray:photosWithURL];
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotos:photos];
-    browser.delegate = self;
+//    browser.delegate = self;
     [browser setInitialPageIndex:index];
     browser.displayCounterLabel = YES;
     browser.displayActionButton = NO; 
