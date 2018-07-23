@@ -271,6 +271,7 @@
     };
     self.rank_tableView.delegate = self;
     self.rank_tableView.dataSource = self;
+    self.rank_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.rank_tableView.estimatedSectionHeaderHeight = 0;
     self.rank_tableView.estimatedSectionFooterHeight = 0;
     [self.bgView addSubview:self.rank_tableView];

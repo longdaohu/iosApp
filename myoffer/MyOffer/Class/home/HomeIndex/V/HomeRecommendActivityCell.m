@@ -50,8 +50,8 @@
  
             NSDictionary *dic = items[index - 1];
             NSString *icon = [dic[@"thumbnail"] toUTF8WithString];
-            [item sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:nil];
- 
+            [item sd_setImageWithURL:[NSURL URLWithString:icon]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
          }else{
              
             item.userInteractionEnabled = NO;

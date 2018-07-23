@@ -49,7 +49,7 @@
     [attribute addAttributes:dic range:NSMakeRange(0, summary.length)];
     self.subLab.attributedText = attribute;
     NSString *path =  [item[@"images"] toUTF8WithString];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:nil];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 }
 
 - (CAShapeLayer *)shaper{

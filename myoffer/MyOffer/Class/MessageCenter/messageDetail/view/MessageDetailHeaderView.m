@@ -89,6 +89,7 @@
         self.timeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
         self.coverView = [[UIImageView alloc] init];
+        self.coverView.backgroundColor = XCOLOR(224, 224, 224, 1);
         self.coverView.clipsToBounds = YES;
         [self addSubview:self.coverView];
         self.coverView.contentMode = UIViewContentModeScaleAspectFit;

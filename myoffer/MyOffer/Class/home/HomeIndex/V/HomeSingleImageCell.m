@@ -25,7 +25,7 @@
         [self.contentView addSubview:iconView];
         iconView.layer.masksToBounds = YES;
         iconView.layer.cornerRadius = CORNER_RADIUS;
-        iconView.backgroundColor = XCOLOR_line;
+        iconView.backgroundColor = XCOLOR(224, 224, 224, 1);
         self.iconView = iconView;
         
         UILabel *titleLab = [UILabel new];

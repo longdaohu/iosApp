@@ -231,11 +231,12 @@ typedef enum {
 //付款
 -(void)pay{
     
+    WeakSelf
     NSString *path =[NSString stringWithFormat:@"GET api/account/order/create?sku_id=%@",self.payOrderId];//
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order                   = [OrderItem mj_objectWithKeyValues:response[@"order"]];
-        [self.navigationController pushViewController:pay animated:YES];
+        [weakSelf.navigationController pushViewController:pay animated:YES];
     }];
 }
 
@@ -297,11 +298,9 @@ typedef enum {
     
     UpdateCell *cell =[UpdateCell cellWithTableView:tableView selectedIndexPaht:indexPath];
     cell.sku = self.serviceResponse[@"SKUs"][indexPath.section];
-    
+    WeakSelf
     cell.actionBlock = ^(NSIndexPath *Idp,NSString *orderId){
-        
-        [self cellDidSelectRowAtIndexPath:Idp orderId:orderId];
-        
+        [weakSelf cellDidSelectRowAtIndexPath:Idp orderId:orderId];
     };
 
     

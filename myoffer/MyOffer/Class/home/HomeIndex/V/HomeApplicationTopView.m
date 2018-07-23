@@ -7,7 +7,7 @@
 //
 
 #import "HomeApplicationTopView.h"
-#import "AppButton.h"
+#import "MyOfferButton.h"
 
 //typedef NS_ENUM(NSInteger,HomeClickButtonType) {
 //    HomeClickButtonTypeWY = 0,
@@ -80,7 +80,7 @@
     
     for (NSInteger i = 0; i<self.items.count; i++) {
         
-        AppButton *item = [[AppButton alloc] init];
+        MyOfferButton *item = [[MyOfferButton alloc] init];
         item.tag = i;
         item.type = MyofferButtonTypeImageTop;
         item.margin =  7;

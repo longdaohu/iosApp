@@ -25,11 +25,11 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_AU" translatesAutoresizingMaskIntoConstraints="NO" id="G6s-5A-P5n">
                                 <rect key="frame" x="0.0" y="0.0" width="160.5" height="107"/>
-                                <color key="backgroundColor" red="1" green="0.67680293989999996" blue="0.67796183789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="destination_HK" translatesAutoresizingMaskIntoConstraints="NO" id="L0k-21-ebG">
                                 <rect key="frame" x="0.0" y="122" width="160.5" height="106.5"/>
-                                <color key="backgroundColor" red="1" green="0.91019994370000001" blue="0.87255402380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -46,6 +46,7 @@
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_recomment_active_cash.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X1y-Wd-Tod">
                         <rect key="frame" x="20" y="0.0" width="160" height="228.5"/>
+                        <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="X1y-Wd-Tod" secondAttribute="height" multiplier="163:233" id="egK-9G-IdS"/>
                         </constraints>

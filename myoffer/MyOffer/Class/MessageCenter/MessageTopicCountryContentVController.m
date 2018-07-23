@@ -62,7 +62,7 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [UIView new];
-    
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.mj_footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 120 + 64, 0);
 

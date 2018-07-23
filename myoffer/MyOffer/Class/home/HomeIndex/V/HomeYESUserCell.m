@@ -7,7 +7,7 @@
 //
 
 #import "HomeYESUserCell.h"
-#import "AppButton.h"
+#import "MyOfferButton.h"
 @interface HomeYESUserCell ()
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;

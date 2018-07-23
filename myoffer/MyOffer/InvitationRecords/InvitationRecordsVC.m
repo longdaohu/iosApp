@@ -51,7 +51,6 @@
     [self.view addSubview:self.tableView];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(makeMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor greenColor];
     self.tableView.emptyY =  (XSCREEN_HEIGHT - self.tableView.mj_y - NavHeight)* 0.5 - 200;
     
     UINib *cell_nib = [UINib nibWithNibName:@"InvitationRecordsCell" bundle:nil];

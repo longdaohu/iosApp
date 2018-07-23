@@ -216,10 +216,10 @@
 
 
 
-//-(void)dealloc{
-//
-//    KDClassLog(@"我要留学  ZhiXunCell dealloc");
-//}
+-(void)dealloc{
+
+    KDClassLog(@"我要留学  ZhiXunCell dealloc");
+}
 
 
 

@@ -207,7 +207,7 @@
 
 - (void)dealloc{
     
-    KDClassLog(@"智能匹配 学校搜索 dealloc");
+    KDClassLog(@"EvaluateSearchCollegeViewController 学校搜索 dealloc");
 }
 
 @end

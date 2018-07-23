@@ -129,8 +129,5 @@ typedef NS_ENUM(NSInteger,TiJiaoFooterViewButtonType) {
     
 }
 
-
-
-
 @end
 

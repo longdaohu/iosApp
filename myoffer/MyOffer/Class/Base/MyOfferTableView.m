@@ -7,7 +7,7 @@
 //
 
 #import "MyOfferTableView.h"
-#import "AppButton.h"
+#import "MyOfferButton.h"
 
 @interface MyOfferTableView ()
 @property(nonatomic,strong)UIView  *tablefooter;
@@ -60,7 +60,7 @@
         
         CGFloat empty_h = 200;
         CGFloat empty_y = (self.bounds.size.height - empty_h) * 0.5;
-        AppButton *empty = [[AppButton alloc] initWithFrame: CGRectMake(0, empty_y, self.bounds.size.width, empty_h)];
+        MyOfferButton *empty = [[MyOfferButton alloc] initWithFrame: CGRectMake(0, empty_y, self.bounds.size.width, empty_h)];
         [empty setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
         empty.titleLabel.font = XFONT(13);
         empty.type = MyofferButtonTypeImageTop;

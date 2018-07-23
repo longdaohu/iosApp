@@ -7,7 +7,7 @@
 //
 
 #import "HomeApplySubjecttCell.h"
-#import "AppButton.h"
+#import "MyOfferButton.h"
 
 @interface HomeApplySubjecttCell ()
 @property(nonatomic,strong)NSMutableArray *items;
@@ -41,7 +41,7 @@
  
         NSString *bg_icon = [NSString stringWithFormat:@"area_%ld.jpg",index];
         NSString *icon = [NSString stringWithFormat:@"area_icon_%ld",index];
-        AppButton *item = [AppButton new];
+        MyOfferButton *item = [MyOfferButton new];
         item.margin = 6;
         item.type = MyofferButtonTypeImageTop;
         [self.bgView addSubview:item];
