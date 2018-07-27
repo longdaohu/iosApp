@@ -30,7 +30,7 @@
 
 - (void)makeUI{
     
-    self.backgroundColor = XCOLOR_RANDOM;
+    self.backgroundColor = XCOLOR_WHITE;
     
     HomeCommoditieLayout *layout = [[HomeCommoditieLayout alloc] init];
     CGFloat item_h = self.bounds.size.height - 10;
@@ -73,7 +73,7 @@
     
     HomeSingleImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeSingleImageCell" forIndexPath:indexPath];
     ServiceSKU *sku = self.items[indexPath.row];
-    cell.path = [sku.coverUrl toUTF8WithString];
+    cell.path = sku.coverUrl;
     
     return cell;
 }

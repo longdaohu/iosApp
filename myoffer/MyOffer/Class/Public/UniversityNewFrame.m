@@ -154,7 +154,7 @@
         
         NSString *tag = uni.tags[index];
         if (line_str.length != 0) {
-            tag = [NSString stringWithFormat:@" . %@",tag];
+            tag = [NSString stringWithFormat:@" • %@",tag];
         }
         line_str_pre = line_str;
         line_str = [NSString stringWithFormat:@"%@%@",line_str,tag];
@@ -162,7 +162,7 @@
        
         if (tagSize.width > (tg_w - 30)) {
             
-            if ([line_str containsString:@"."]) {
+            if ([line_str containsString:@"•"]) {
                 [lines addObject:line_str_pre];
                 line_str = uni.tags[index];
             }else{

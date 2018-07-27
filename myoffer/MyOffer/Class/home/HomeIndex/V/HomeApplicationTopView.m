@@ -53,7 +53,6 @@
     self.backgroundColor = XCOLOR_WHITE;
  
     CAShapeLayer *shaper = [CAShapeLayer layer];
-//    shaper.lineWidth = 5;
     shaper.shadowColor = XCOLOR_BLACK.CGColor;
     shaper.shadowOffset = CGSizeMake(0, 0);
     shaper.shadowRadius = 5;

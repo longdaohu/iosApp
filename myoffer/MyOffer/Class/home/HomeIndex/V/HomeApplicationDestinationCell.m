@@ -21,9 +21,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
-
+ 
     [self.cView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell"];
     self.cView.dataSource = self;
     self.cView.delegate = self;

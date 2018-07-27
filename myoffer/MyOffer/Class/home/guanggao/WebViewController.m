@@ -47,8 +47,6 @@
 {
     [super viewWillDisappear:animated];
     
-//    [self.hud hideAnimated:YES];
-    
     [MobClick endLogPageView:[self page]];
 }
 
@@ -115,7 +113,6 @@
     if ([self.web_wk canGoBack] ) {
         
         [self.web_wk goBack];
-//        [self.hud hideAnimated:YES];
         
     }else{
         
@@ -211,12 +208,6 @@
 
 
 #pragma mark :  WKWebViewDeleage
-// 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    
-//   self.hud = [MBProgressHUD showMessage:nil toView:self.view];
- 
-}
 
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -225,8 +216,6 @@
     NSString *jumpF = [self.path containsString:@"account/message/"] ?  @"window.app = {jump: function (args,temp) {window.location = 'app:jump/' + args + '/' + temp;}};" : @"window.app = {appJump: function (args,temp) {window.location = 'app:appJump/' + args + '/' + temp;}};  var a_list = document.querySelectorAll('a');for(var index = 0;index<a_list.length;index++){ a_list[index].setAttribute('target','');  } ";
 //    a_list[index].setAttribute('style','display:inline-block; overflow:hidden;');
     [webView evaluateJavaScript:jumpF completionHandler:nil];
-    
-//    [self.hud hideAnimated:YES];
  
 }
 
@@ -234,8 +223,7 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     
     [KDAlertView showMessage:GDLocalizedString(@"NetRequest-connectError") cancelButtonTitle:GDLocalizedString(@"Evaluate-0016")];
-  
-//    [self.hud hideAnimated:YES];
+
 }
 
 

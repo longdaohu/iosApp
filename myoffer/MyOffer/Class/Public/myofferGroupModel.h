@@ -21,10 +21,17 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeHotCommodities,
     SectionGroupTypePopularActivity,
     SectionGroupTypeHotVideo,
+    SectionGroupTypeBannerTheme,
     SectionGroupTypeArticleColumn,
     SectionGroupTypeApplyUniversity,
     SectionGroupTypeApplyDestination,
     SectionGroupTypeApplySubject,
+    SectionGroupTypeRoomHotActivity,
+    SectionGroupTypeRoomHotCity,
+    SectionGroupTypeRoomApartmentRecommendation,
+    SectionGroupTypeRoomHomestay,
+    SectionGroupTypeRoomCustomerPraise,
+    
 };
 
 @interface myofferGroupModel : NSObject

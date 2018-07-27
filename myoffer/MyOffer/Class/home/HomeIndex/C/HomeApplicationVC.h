@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeBaseVC.h"
 
-@interface HomeApplicationVC : BaseViewController
-- (void)toLoadView;
-- (void)toSetTabBarhidden;
+@interface HomeApplicationVC : HomeBaseVC
+
 @end

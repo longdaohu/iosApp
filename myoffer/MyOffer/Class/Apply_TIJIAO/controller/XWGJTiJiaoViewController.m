@@ -43,8 +43,6 @@ typedef enum {
 @property(nonatomic,strong)UIPickerView  *CountryPicker,*TimePicker,*ApplyPicker,*SubjectPicker,*GradePicker,*AVGPicker,*LowPicker;
 //专业数组  //年级数组  //专业数组  //国家数组   //雅思成绩
 @property(nonatomic,strong)NSArray *ApplyTimes,*gradeItems, *ApplyItems,*countryItems,*IELSTScores;
-//国家中文数组 //专业数组  //年级数组
-@property(nonatomic,strong)NSArray *countryItems_CE,*subjectItems_CE, *gradeItems_CE;
 //提交申请按钮
 //@property(nonatomic,strong)UIButton *commitBtn;
 //升级VC
@@ -95,6 +93,7 @@ typedef enum {
     picker.dataSource    = self;
     picker.delegate      = self;
     picker.tag           = type;
+    
     return picker;
 }
 
@@ -200,7 +199,7 @@ typedef enum {
     
     [self makeUI];
     
-//    [self makeBaseSourse];
+    [self makeBaseSourse];
     
 }
 
@@ -226,14 +225,11 @@ typedef enum {
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
     [self addChildViewController:self.upgateVC];
-    
+    WeakSelf
     //加载用户已购买套餐数据
     [self startAPIRequestWithSelector:@"GET /api/account/sp" parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        self.upgateVC.serviceResponse = response;
-        
+        weakSelf.upgateVC.serviceResponse = response;
     }];
 
 }
@@ -413,8 +409,7 @@ typedef enum {
                             }];
 
     if (countryItems_CN.count > 0) {
-        self.countryItems_CE = @[countryItems_CN];
-        self.countryItems = self.countryItems_CE[0];
+        self.countryItems = countryItems_CN;
     }
     
  
@@ -427,8 +422,7 @@ typedef enum {
  
 
     if (subjectItems_CN.count > 0) {
-        self.subjectItems_CE = @[subjectItems_CN];
-        self.ApplyItems = self.subjectItems_CE[0];
+        self.ApplyItems = subjectItems_CN;
     }
     
  
@@ -438,8 +432,7 @@ typedef enum {
                               return item;
                           }];
     if (gradeItems_CN.count > 0) {
-        self.gradeItems_CE = @[gradeItems_CN];
-        self.gradeItems   = self.gradeItems_CE[0];
+        self.gradeItems   = gradeItems_CN;
     }
     
 }
@@ -447,7 +440,7 @@ typedef enum {
 -(NSString *)getCountryLocalString:(NSString *)country{
 
 
-    NSInteger index = [self getIndexWithTextFieldName:country andItems:self.countryItems andGroups:self.countryItems_CE andKeyWord:@"CountryName"];
+    NSInteger index = [self getIndexWithTextFieldName:country andItems:self.countryItems  andKeyWord:@"CountryName"];
 
     [self.CountryPicker selectRow:index inComponent:0 animated:YES];
     CountryItem *cItem = self.countryItems[index];
@@ -460,7 +453,7 @@ typedef enum {
 -(NSString *)getApplySubjectLocalString:(NSString *)subject
 {
     
-    NSInteger index = [self getIndexWithTextFieldName:subject andItems:self.ApplyItems andGroups:self.subjectItems_CE andKeyWord:@"subjectName"];
+    NSInteger index = [self getIndexWithTextFieldName:subject andItems:self.ApplyItems   andKeyWord:@"subjectName"];
     
     [self.ApplyPicker selectRow:index inComponent:0 animated:YES];
     
@@ -473,7 +466,7 @@ typedef enum {
 -(NSString *)getInSubjectLocalString:(NSString *)subject
 {
 
-    NSInteger index = [self getIndexWithTextFieldName:subject andItems:self.ApplyItems andGroups:self.subjectItems_CE andKeyWord:@"subjectName"];
+    NSInteger index = [self getIndexWithTextFieldName:subject andItems:self.ApplyItems   andKeyWord:@"subjectName"];
     
     [self.SubjectPicker selectRow:index inComponent:0 animated:YES];
     
@@ -483,31 +476,21 @@ typedef enum {
 }
 
 
--(NSInteger)getIndexWithTextFieldName:(NSString *)ItemName andItems:(NSArray *)items andGroups:(NSArray *)groupCEs andKeyWord:(NSString *)key
+-(NSInteger)getIndexWithTextFieldName:(NSString *)ItemName andItems:(NSArray *)items  andKeyWord:(NSString *)key
 {
     NSInteger Index = 0;
     
     if ([self validateNumberString:ItemName]) {
         
         NSArray *ItemIDs = [items valueForKeyPath:@"NOid"];
-        
-        Index     = [ItemIDs containsObject:ItemName]?[ItemIDs indexOfObject: ItemName]:0;
+        Index  = [ItemIDs containsObject:ItemName]?[ItemIDs indexOfObject: ItemName]:0;
         
     }else{
         
-        NSArray *IDs_CNs = [groupCEs[0] valueForKeyPath:key];
-        NSArray *IDs_ENs = [groupCEs[1]  valueForKeyPath:key];
-        
+        NSArray *IDs_CNs = [items valueForKeyPath:key];
         if ([IDs_CNs  containsObject:ItemName]) {
-            
             Index   = [IDs_CNs indexOfObject:ItemName];
-            
-        }else if([IDs_ENs containsObject:ItemName])
-        {
-            Index   = [IDs_ENs indexOfObject:ItemName];
-            
-        }else
-        {
+        }else{
             Index   = 0;
         }
     }
@@ -520,7 +503,7 @@ typedef enum {
 -(NSString *)getGradeLocalString:(NSString *)grade
 {
   
-    NSInteger gindex = [self getIndexWithTextFieldName:grade andItems:self.gradeItems andGroups:self.gradeItems_CE andKeyWord:@"gradeName"];
+    NSInteger gindex = [self getIndexWithTextFieldName:grade andItems:self.gradeItems   andKeyWord:@"gradeName"];
 
     [self.GradePicker selectRow:gindex inComponent:0 animated:YES];
     
@@ -1025,28 +1008,27 @@ typedef enum {
 - (void)casePushUniversity:(UITextField *)sender{
     
     
-    EvaluateSearchCollegeViewController *search =[[EvaluateSearchCollegeViewController alloc] init];
-    
-    search.valueBlock = ^(NSString *value){
+    EvaluateSearchCollegeViewController *vc =[[EvaluateSearchCollegeViewController alloc] init];
+    WeakSelf
+    vc.valueBlock = ^(NSString *value){
         
         if ( 0 == value.length) return;
         
-        ZhiXunCell *cell = (ZhiXunCell *)self.editingCell;
+        ZhiXunCell *cell = (ZhiXunCell *)weakSelf.editingCell;
         
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:self.editingCell];
+        NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:weakSelf.editingCell];
         
         cell.inputTF.text = value;
         
-        XWGJTJSectionGroup *sectionGroup = self.editGroups[indexPath.section];
+        XWGJTJSectionGroup *sectionGroup = weakSelf.editGroups[indexPath.section];
         
         WYLXGroup *uni_cell = sectionGroup.celles[indexPath.row];
         
         uni_cell.content = value;
-  
         
     };
     
-    [self.navigationController pushViewController:search animated:YES];
+    PushToViewController(vc);
     
 }
 
@@ -1068,85 +1050,5 @@ typedef enum {
 
 @end
 
-
-/*
- 
- switch (indexPath.section) {
- case 0:{
- 
- cell.inputTF.inputView = nil;
- 
- switch (indexPath.row) {
- case 0:
- cell.inputTF.keyboardType =  UIKeyboardTypeNamePhonePad;
- break;
- case 1:
- cell.inputTF.keyboardType =  UIKeyboardTypeNamePhonePad;
- break;
- case 2:
- cell.inputTF.keyboardType = UIKeyboardTypePhonePad;
- break;
- default:
- break;
- }
- 
- }
- break;
- case 1:{
- 
- switch (indexPath.row) {
- case 0:
- cell.inputTF.inputView = self.CountryPicker;
- break;
- case 1:
- cell.inputTF.inputView = self.TimePicker;
- break;
- case 2:
- cell.inputTF.inputView = self.ApplyPicker;
- break;
- default:
- break;
- }
- 
- 
- }
- break;
- case 2:{
- 
- switch (indexPath.row) {
- case 0:
- break;
- case 1:
- cell.inputTF.inputView = self.SubjectPicker;
- break;
- case 2:{
- 
- cell.inputTF.inputView = nil;
- cell.inputTF.keyboardType = UIKeyboardTypePhonePad;
- 
- }
- break;
- case 3:
- cell.inputTF.inputView = self.GradePicker;
- break;
- case 4:
- cell.inputTF.inputView = self.AVGPicker;
- break;
- case 5:
- cell.inputTF.inputView = self.LowPicker;
- break;
- default:
- break;
- }
- }
- break;
- default:
- break;
- }
- 
- 
- 
- 
- */
 
 

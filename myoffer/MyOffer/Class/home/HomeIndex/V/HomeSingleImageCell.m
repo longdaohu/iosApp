@@ -10,6 +10,8 @@
 @interface HomeSingleImageCell ()
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)CAShapeLayer *shaper;
+
 @end
 
 @implementation HomeSingleImageCell
@@ -20,7 +22,6 @@
     if (self) {
         
         UIImageView *iconView = [UIImageView new];
-        [iconView setImage:XImage(@"alipay")];
         iconView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:iconView];
         iconView.layer.masksToBounds = YES;
@@ -40,15 +41,38 @@
         titleLab.layer.shadowRadius = 1.0;
         titleLab.layer.shadowColor = XCOLOR_BLACK.CGColor;
         titleLab.layer.shadowOffset = CGSizeMake(1, 1);
- 
+        
+        self.clipsToBounds = NO;
+        self.contentView.clipsToBounds = NO;
+        
+
         
     }
     return self;
 }
 
+- (CAShapeLayer *)shaper{
+    
+    if (!_shaper) {
+        
+        CAShapeLayer *shaper = [CAShapeLayer layer];
+        shaper.shadowColor =  XCOLOR_RED.CGColor;
+        shaper.shadowOffset = CGSizeMake(0, 3);
+        shaper.shadowRadius = 5;
+        shaper.shadowOpacity = 0.1;
+        _shaper = shaper;
+        [self.contentView.layer insertSublayer:shaper atIndex:0];
+    }
+    
+    return _shaper;
+}
+
+
 - (void)setPath:(NSString *)path{
     _path = path;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:nil];
+    
+    path = [path toUTF8WithString];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 }
 
 - (void)setItem:(NSDictionary *)item{
@@ -62,11 +86,16 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-//    NSArray *items =  self.contentView.subviews;
-//    if (items.count > 0) {
-        self.iconView.frame = self.contentView.bounds;
-        self.titleLab.frame = self.contentView.bounds;
-//    }
+
+    self.iconView.frame = self.contentView.bounds;
+    self.titleLab.frame = self.contentView.bounds;
+    
+    if (self.shadowEnable) {
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.contentView.bounds];
+        self.shaper.shadowPath = path.CGPath;
+    }
+ 
 }
 
 

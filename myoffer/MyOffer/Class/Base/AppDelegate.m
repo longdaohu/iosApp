@@ -15,7 +15,6 @@
 #import "MyOfferLoginViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-#import "HomeViewContViewController.h"
 #import "MQManager.h"
 
 
@@ -136,7 +135,6 @@ static AppDelegate *__sharedDelegate;
 
 -(void)umeng
 {
-    /*--------------升级--------------*/
     //开发者需要显式的调用此函数，日志系统才能工作
     [UMCommonLogManager setUpUMCommonLogManager];
     [UMConfigure setEncryptEnabled:YES];//打开加密传输
@@ -145,8 +143,7 @@ static AppDelegate *__sharedDelegate;
     [WXApi registerApp:@"wx6ef4fb49781fdd34" withDescription:@"demo 2.0"];
     [self configUSharePlatforms];
     [MobClick setScenarioType:E_UM_DPLUS];      // 启用DPlus功能
-    /*--------------升级-------------*/
-
+ 
 }
 - (void)configUSharePlatforms
 {
@@ -218,9 +215,6 @@ static AppDelegate *__sharedDelegate;
 //处理applicationIconBadgeNumber数据
 -(void)applicationBadgeNumber
 {
-    
-//    NSInteger Value = [UIApplication sharedApplication].applicationIconBadgeNumber - 1;
-//    NSInteger ValueNumber = Value > 0 ? Value : 0;
     [UIApplication sharedApplication].applicationIconBadgeNumber =  0;
     [JPUSHService setBadge:[UIApplication sharedApplication].applicationIconBadgeNumber];
 }
@@ -286,7 +280,7 @@ static AppDelegate *__sharedDelegate;
     }
     else {
         // 判断为本地通知
-        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+        KDLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
@@ -383,7 +377,6 @@ static AppDelegate *__sharedDelegate;
 //保存过期登录时间
 - (void)saveLogOutDate:(NSString *)timeStr
 {
-//    NSLog(@" %@  <<<<<<保存过期登录时间>>>>>",timeStr);
     [[NSUserDefaults standardUserDefaults] setValue:timeStr forKey:@"logout_date"];
     [[NSUserDefaults standardUserDefaults]  synchronize];
 }
@@ -443,7 +436,6 @@ static AppDelegate *__sharedDelegate;
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            NSLog(@"   跳转支付宝钱包进行支付 result = %@",resultDic);
         }];
         
         return YES;
@@ -463,11 +455,11 @@ static AppDelegate *__sharedDelegate;
 
   
 }
-//
-//// NOTE: 9.0以后使用新API接口
+
+// NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
-//    NSLog(@"    NOTE: 9.0以后使用新API接口   ");
+
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {

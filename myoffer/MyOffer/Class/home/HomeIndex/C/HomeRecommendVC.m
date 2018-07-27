@@ -10,6 +10,7 @@
 #import "HomeSecView.h"
 #import "HomeRecommendArtCell.h"
 #import "HomeHotVideoCell.h"
+#import "HomeRoomHorizontalCell.h"
 #import "HomeRecommendActivityCell.h"
 #import "SDCycleScrollView.h"
 #import "myofferGroupModel.h"
@@ -20,6 +21,7 @@
 #import "SuperMasterViewController.h"
 #import "MyOfferServerMallViewController.h"
 #import "HomeRecommendProdoctView.h"
+#import "HomeBannerThemesVC.h"
 
 @interface HomeRecommendVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -29,6 +31,7 @@
 @property(nonatomic,strong)HomeRecommendProdoctView *productView;
 @property(nonatomic,assign)CGFloat commoditie_height;
 @property(nonatomic,assign)NSInteger request_count;
+@property(nonatomic,strong)NSArray *bannerThemes;
 
 @end
 
@@ -51,13 +54,19 @@
         commodity.type = SectionGroupTypeHotCommodities;
         myofferGroupModel *activity  = [myofferGroupModel groupWithItems:nil header:@"热门活动"];
         activity.type = SectionGroupTypePopularActivity;
+        myofferGroupModel *theme  = [myofferGroupModel groupWithItems:nil header:@"专题攻略"];
+        theme.type = SectionGroupTypeBannerTheme;
+        theme.accesory_title= @"查看更多";
+        theme.cell_height_set =( 185 * XSCREEN_WIDTH / 375.0) + 20;
+        
         myofferGroupModel *video  = [myofferGroupModel groupWithItems:nil header:@"热门视频"];
         video.type = SectionGroupTypeHotVideo;
         video.accesory_title= @"查看更多";
         myofferGroupModel *article  = [myofferGroupModel groupWithItems:nil header:@"文章栏目"];
         article.type = SectionGroupTypeArticleColumn;
         article.accesory_title= @"查看更多";
-        _groups = @[commodity,activity,video,article];
+        
+        _groups = @[commodity,activity,theme,video,article];
     }
     
     return _groups;
@@ -78,10 +87,12 @@
 }
 
 - (void)makeData{
+    
     [self makeHotProducts];
     [self makeHotActivity];
     [self makeHotVideo];
     [self makeHotArticle];
+    [self makeBannerTheme];
 }
 /*-----------banner----------*/
 - (void)makeBannerData{
@@ -216,6 +227,7 @@
             vc.service_id = item;
             PushToViewController(vc);
         }
+        
         return;
     }
     //url 包含 app://跳转 WebViewController
@@ -288,6 +300,40 @@
     [self reloadWithItems:items type:SectionGroupTypeArticleColumn];
 }
 /*-----------文章栏目----------*/
+
+/*-----------专题攻略----------*/
+
+- (void)makeBannerTheme{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeBannerThemeWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makeBannerThemeWithResponse:(id)response{
+    if (!ResponseIsOK)  {
+        [self caseEmpty];
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    NSArray *items = result[@"items"];
+    if (items.count == 0)  {
+        [self caseEmpty];
+        return;
+    }
+    [self caseEmpty];
+    self.bannerThemes = items;
+    if (items.count >5) {
+        items = [items subarrayWithRange:NSMakeRange(0, 4)];
+    }
+    [self reloadWithItems:@[items] type:SectionGroupTypeBannerTheme];
+
+}
+/*-----------专题攻略----------*/
+
 - (void)reloadWithItems:(NSArray *)items type:(SectionGroupType)type{
     
     self.request_count = 0 ;
@@ -375,6 +421,7 @@ static NSString *identify = @"cell";
     }
     
     if (group.type ==SectionGroupTypeHotCommodities) {
+        
         UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:self.productView];
@@ -384,6 +431,23 @@ static NSString *identify = @"cell";
         };
         return cell;
     }
+    
+    if (group.type == SectionGroupTypeBannerTheme) {
+        HomeRoomHorizontalCell *cell =[[HomeRoomHorizontalCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
+        cell.sectionType = SectionGroupTypeBannerTheme;
+        [cell bottomLineHiden:YES];
+        cell.items = group.items[indexPath.row];
+        cell.actionBlock = ^(NSInteger index,id item) {
+            
+            NSDictionary *images = item[@"images"];
+            NSDictionary *app = images[@"app"];
+            NSString *path = [app valueForKeyPath:@"target"];
+            [weakSelf caseBannerTheme:path];
+        };
+        
+        return cell;
+    }
+    
     UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
     return cell;
 }
@@ -424,6 +488,10 @@ static NSString *identify = @"cell";
     if (group.type == SectionGroupTypeHotCommodities) {
         return  self.commoditie_height;
     }
+    if (group.cell_height_set > 0) {
+        return  group.cell_height_set;
+    }
+    
     return  UITableViewAutomaticDimension;
 }
 
@@ -470,11 +538,31 @@ static NSString *identify = @"cell";
         case SectionGroupTypeHotCommodities:
             [self caseService];
             break;
+        case SectionGroupTypeBannerTheme:
+            [self caseBannerThemes];
+            break;
         default:
             break;
     }
     
 }
+
+- (void)caseBannerThemes{
+    
+    HomeBannerThemesVC *vc = [[HomeBannerThemesVC alloc] init];
+    vc.items = self.bannerThemes;
+    PushToViewController(vc);
+}
+
+- (void)caseBannerTheme:(NSString *)path{
+    
+    if (!path) {
+        path = @"https://m.myoffer.cn/";
+    }
+    WebViewController *vc = [[WebViewController alloc] initWithPath:path];
+    PushToViewController(vc);
+}
+
 //跳转超级导师
 -(void)caseSuperMaster{
     PushToViewController([[SuperMasterViewController alloc] init] );
