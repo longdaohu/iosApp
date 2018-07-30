@@ -10,7 +10,7 @@
 #import "UpgradeFooterView.h"
 #import "PayOrderViewController.h"
 #import "OrderItem.h"
-#import "SeviceDetailViewController.h"
+#import "MyOfferServerMallViewController.h"
 #import "ApplyStatusViewController.h"
 #import "UpdateCell.h"
 
@@ -220,12 +220,8 @@ typedef enum {
 //服务包详情
 -(void)more{
     
-    SeviceDetailViewController *detail = [[SeviceDetailViewController alloc] init];
-    detail.isBackRootViewController    = YES;
-    detail.path    = [NSString stringWithFormat:@"%@service_dtl?=cset",DOMAINURL];
-//    NSLog(@"more = %@",detail.path);
-    [self.navigationController pushViewController:detail animated:YES];
-    
+    MyOfferServerMallViewController *vc = [[MyOfferServerMallViewController alloc] init];
+    PushToViewController(vc);
 }
 
 //付款
@@ -268,7 +264,7 @@ typedef enum {
 
 
 
-#pragma mark —————— UITableViewDelegate,UITableViewDataSource
+#pragma mark : UITableViewDelegate,UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  HEIGHT_ZERO;
@@ -302,7 +298,6 @@ typedef enum {
     cell.actionBlock = ^(NSIndexPath *Idp,NSString *orderId){
         [weakSelf cellDidSelectRowAtIndexPath:Idp orderId:orderId];
     };
-
     
     return cell;
 }

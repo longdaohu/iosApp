@@ -208,6 +208,10 @@
 		AE4B2E7F1F1E095600E328F7 /* MessageTopicCatigoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E601F1E095600E328F7 /* MessageTopicCatigoryView.m */; };
 		AE4B2E801F1E095600E328F7 /* MessageTopicCountryContentVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E621F1E095600E328F7 /* MessageTopicCountryContentVController.m */; };
 		AE4B2E811F1E095600E328F7 /* myofferAnchorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B2E641F1E095600E328F7 /* myofferAnchorButton.m */; };
+		AE4BBCEE210EE64000209FC8 /* RoomSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCED210EE64000209FC8 /* RoomSearchResultVC.m */; };
+		AE4BBCF2210EE88500209FC8 /* RoomSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCF0210EE88500209FC8 /* RoomSearchCell.m */; };
+		AE4BBCF3210EE88500209FC8 /* RoomSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBCF1210EE88500209FC8 /* RoomSearchCell.xib */; };
+		AE4BBCF6210EF88E00209FC8 /* HomeBannerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCF5210EF88E00209FC8 /* HomeBannerObject.m */; };
 		AE4C71391F4EA3C20069E83E /* myApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71381F4EA3C20069E83E /* myApplyViewController.m */; };
 		AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */; };
 		AE4C71461F4EE6460069E83E /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */; };
@@ -408,8 +412,6 @@
 		AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2493D1D5B215300DD7939 /* PayHeaderView.m */; };
 		AEA249AC1D5B215300DD7939 /* PayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */; };
 		AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249401D5B215300DD7939 /* PayOrderViewController.m */; };
-		AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249441D5B215300DD7939 /* ServiceMallViewController.m */; };
-		AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249461D5B215300DD7939 /* SeviceDetailViewController.m */; };
 		AEA249B21D5B215300DD7939 /* UpgradeFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2494C1D5B215300DD7939 /* UpgradeFooterView.m */; };
 		AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2494E1D5B215300DD7939 /* UpgradeViewController.m */; };
 		AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA249501D5B215300DD7939 /* XWGJTiJiaoViewController.m */; };
@@ -1001,6 +1003,13 @@
 		AE4B2E621F1E095600E328F7 /* MessageTopicCountryContentVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTopicCountryContentVController.m; sourceTree = "<group>"; };
 		AE4B2E631F1E095600E328F7 /* myofferAnchorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferAnchorButton.h; sourceTree = "<group>"; };
 		AE4B2E641F1E095600E328F7 /* myofferAnchorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferAnchorButton.m; sourceTree = "<group>"; };
+		AE4BBCEC210EE64000209FC8 /* RoomSearchResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomSearchResultVC.h; sourceTree = "<group>"; };
+		AE4BBCED210EE64000209FC8 /* RoomSearchResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomSearchResultVC.m; sourceTree = "<group>"; };
+		AE4BBCEF210EE88500209FC8 /* RoomSearchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomSearchCell.h; sourceTree = "<group>"; };
+		AE4BBCF0210EE88500209FC8 /* RoomSearchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomSearchCell.m; sourceTree = "<group>"; };
+		AE4BBCF1210EE88500209FC8 /* RoomSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomSearchCell.xib; sourceTree = "<group>"; };
+		AE4BBCF4210EF88E00209FC8 /* HomeBannerObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBannerObject.h; sourceTree = "<group>"; };
+		AE4BBCF5210EF88E00209FC8 /* HomeBannerObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeBannerObject.m; sourceTree = "<group>"; };
 		AE4C71371F4EA3C20069E83E /* myApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myApplyViewController.h; sourceTree = "<group>"; };
 		AE4C71381F4EA3C20069E83E /* myApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myApplyViewController.m; sourceTree = "<group>"; };
 		AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuHeaderView.h; sourceTree = "<group>"; };
@@ -1315,10 +1324,6 @@
 		AEA2493E1D5B215300DD7939 /* PayHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayHeaderView.xib; sourceTree = "<group>"; };
 		AEA2493F1D5B215300DD7939 /* PayOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayOrderViewController.h; sourceTree = "<group>"; };
 		AEA249401D5B215300DD7939 /* PayOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayOrderViewController.m; sourceTree = "<group>"; };
-		AEA249431D5B215300DD7939 /* ServiceMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMallViewController.h; sourceTree = "<group>"; };
-		AEA249441D5B215300DD7939 /* ServiceMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMallViewController.m; sourceTree = "<group>"; };
-		AEA249451D5B215300DD7939 /* SeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeviceDetailViewController.h; sourceTree = "<group>"; };
-		AEA249461D5B215300DD7939 /* SeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeviceDetailViewController.m; sourceTree = "<group>"; };
 		AEA2494B1D5B215300DD7939 /* UpgradeFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeFooterView.h; path = controller/UpgradeFooterView.h; sourceTree = "<group>"; };
 		AEA2494C1D5B215300DD7939 /* UpgradeFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeFooterView.m; path = controller/UpgradeFooterView.m; sourceTree = "<group>"; };
 		AEA2494D1D5B215300DD7939 /* UpgradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeViewController.h; path = controller/UpgradeViewController.h; sourceTree = "<group>"; };
@@ -1946,6 +1951,7 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBCE8210EE5E800209FC8 /* RoomSearchResult */,
 				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AE07A0D72106C7FA00581073 /* C */,
 				AE07A0D82106C7FA00581073 /* M */,
@@ -2445,6 +2451,42 @@
 			path = superMaster;
 			sourceTree = "<group>";
 		};
+		AE4BBCE8210EE5E800209FC8 /* RoomSearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				AE4BBCEB210EE60900209FC8 /* C */,
+				AE4BBCEA210EE60700209FC8 /* V */,
+				AE4BBCE9210EE60400209FC8 /* M */,
+			);
+			path = RoomSearchResult;
+			sourceTree = "<group>";
+		};
+		AE4BBCE9210EE60400209FC8 /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AE4BBCEA210EE60700209FC8 /* V */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		AE4BBCEB210EE60900209FC8 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AE4BBCEC210EE64000209FC8 /* RoomSearchResultVC.h */,
+				AE4BBCED210EE64000209FC8 /* RoomSearchResultVC.m */,
+				AE4BBCEF210EE88500209FC8 /* RoomSearchCell.h */,
+				AE4BBCF0210EE88500209FC8 /* RoomSearchCell.m */,
+				AE4BBCF1210EE88500209FC8 /* RoomSearchCell.xib */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		AE4C71361F4EA3830069E83E /* myApply */ = {
 			isa = PBXGroup;
 			children = (
@@ -2854,17 +2896,6 @@
 			name = orderPay;
 			sourceTree = "<group>";
 		};
-		AE712FB01D5D6E7200D0F48A /* serviceCenter */ = {
-			isa = PBXGroup;
-			children = (
-				AEA249431D5B215300DD7939 /* ServiceMallViewController.h */,
-				AEA249441D5B215300DD7939 /* ServiceMallViewController.m */,
-				AEA249451D5B215300DD7939 /* SeviceDetailViewController.h */,
-				AEA249461D5B215300DD7939 /* SeviceDetailViewController.m */,
-			);
-			name = serviceCenter;
-			sourceTree = "<group>";
-		};
 		AE8A7670210969450079D239 /* BannerThemes */ = {
 			isa = PBXGroup;
 			children = (
@@ -3184,7 +3215,6 @@
 		AEA249291D5B215300DD7939 /* order_Group */ = {
 			isa = PBXGroup;
 			children = (
-				AE712FB01D5D6E7200D0F48A /* serviceCenter */,
 				AE712FAF1D5D6E5E00D0F48A /* orderPay */,
 				AE712FAD1D5D6E2500D0F48A /* orderList */,
 				AE712FAE1D5D6E3D00D0F48A /* orderDetail */,
@@ -4082,6 +4112,8 @@
 		AEA545BC20D256C20095CBDA /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBCF4210EF88E00209FC8 /* HomeBannerObject.h */,
+				AE4BBCF5210EF88E00209FC8 /* HomeBannerObject.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -4717,6 +4749,7 @@
 				AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */,
 				AE60C1BC20E1EECC000867A8 /* home_rent_process_b.jpg in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
+				AE4BBCF3210EE88500209FC8 /* RoomSearchCell.xib in Resources */,
 				AE76ACFF20D914B800C42FA2 /* area_2.jpg in Resources */,
 				AE60C1F820E247F7000867A8 /* home_global_user_01.jpg in Resources */,
 				AE60C1C920E21D5B000867A8 /* home_global_ban.jpg in Resources */,
@@ -4909,7 +4942,6 @@
 				AE1A806820DA563F00CE9E50 /* HomeYESGlobalCell.m in Sources */,
 				AECC87D01F95F63800FCBBEC /* CatigoryRank.m in Sources */,
 				AE9BA48A20B5598A008B65D4 /* RewardDetailCelltem.m in Sources */,
-				AEA249B01D5B215300DD7939 /* SeviceDetailViewController.m in Sources */,
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				AEA545D820D274270095CBDA /* HomeRecommendActivityCell.m in Sources */,
 				AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */,
@@ -4958,7 +4990,9 @@
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
+				AE4BBCF6210EF88E00209FC8 /* HomeBannerObject.m in Sources */,
 				AE9BA48D20B65CA9008B65D4 /* InvitationRecordItem.m in Sources */,
+				AE4BBCEE210EE64000209FC8 /* RoomSearchResultVC.m in Sources */,
 				AE6FF2981E8912A200C2A013 /* ServiceItemViewController.m in Sources */,
 				AEA24AFA1D5B24D200DD7939 /* XWGJAaboutHeader.m in Sources */,
 				AE6F28771D77CA3C00E9A47A /* UULineChart.m in Sources */,
@@ -5067,6 +5101,7 @@
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1A806320DA493400CE9E50 /* HomeRentCell.m in Sources */,
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
+				AE4BBCF2210EE88500209FC8 /* RoomSearchCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
 				AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */,
@@ -5095,7 +5130,6 @@
 				AEA24C091D5B269A00DD7939 /* BaseViewController.m in Sources */,
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
-				AEA249AF1D5B215300DD7939 /* ServiceMallViewController.m in Sources */,
 				AEDDAA5F20E4DCDE0069C138 /* IntroCell.m in Sources */,
 				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
 				AEA545C920D267FA0095CBDA /* HomeSecView.m in Sources */,

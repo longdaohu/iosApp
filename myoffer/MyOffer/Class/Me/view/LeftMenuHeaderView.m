@@ -33,8 +33,11 @@
     self.iconView.layer.borderColor = [UIColor whiteColor].CGColor;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.iconView addGestureRecognizer:tap];
-    
-     
+ 
+}
+- (IBAction)userNameOnClick:(id)sender {
+    if (LOGIN) return;
+    [self tap];
 }
 
 - (void)tap{

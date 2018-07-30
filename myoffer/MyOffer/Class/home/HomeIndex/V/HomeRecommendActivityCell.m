@@ -7,6 +7,7 @@
 //
 
 #import "HomeRecommendActivityCell.h"
+#import "HomeBannerObject.h"
 
 @interface HomeRecommendActivityCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *oneView;
@@ -48,8 +49,8 @@
         
         if (index < items.count) {
  
-            NSDictionary *dic = items[index - 1];
-            NSString *icon = [dic[@"thumbnail"] toUTF8WithString];
+            HomeBannerObject *dic = items[index - 1];
+            NSString *icon = [dic.image toUTF8WithString];
             [item sd_setImageWithURL:[NSURL URLWithString:icon]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
 
          }else{
@@ -67,8 +68,8 @@
     if (tap.view.tag == 0) {
         path = @"caseInvitation";
     }else{
-         NSDictionary *dic = self.items[tap.view.tag - 1];
-        path = dic[@"url"];
+         HomeBannerObject *dic = self.items[tap.view.tag - 1];
+        path = dic.target;
     }
     if (self.actionBlock) {
         self.actionBlock(path);

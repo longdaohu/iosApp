@@ -244,7 +244,6 @@
         _autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         _autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
         _autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
-            
              [weakSelf  caseBannerWithIndex:index];
         };
     }

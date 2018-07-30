@@ -22,6 +22,7 @@
 #import "MyOfferServerMallViewController.h"
 #import "HomeRecommendProdoctView.h"
 #import "HomeBannerThemesVC.h"
+#import "HomeBannerObject.h"
 
 @interface HomeRecommendVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -97,7 +98,7 @@
 /*-----------banner----------*/
 - (void)makeBannerData{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/banner",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=BANNER",DOMAINURL_API];
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         [weakSelf makBannerViewWithResponse:response];
     }];
@@ -108,48 +109,50 @@
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
         return;
     }
-    NSArray *items = response[@"result"];
-    if (items.count == 0) {
+    
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    
+    NSMutableArray *url_arr = [NSMutableArray array];
+    NSMutableArray *target_arr = [NSMutableArray array];
+    for (HomeBannerObject *banner in banneres) {
+         if (banner.image && banner.target) {
+            [url_arr addObject:[banner.image toUTF8WithString]];
+            [target_arr addObject:banner.target];
+        }
+    }
+    
+    if (url_arr.count == 0) {
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
         return;
     }
     
-    NSArray *cover_url_arr = (NSArray *)[items valueForKeyPath:@"cover_url"];
-    NSMutableArray *cover_arr = [NSMutableArray array];
-    [cover_url_arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *item = (NSString *)obj;
-        item = [item stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [cover_arr addObject:item];
-    }];
     if (!self.bannerView) {
         CGFloat b_x = 20;
         CGFloat b_w = XSCREEN_WIDTH - b_x * 2;
         CGFloat b_h = b_w * 316.0/668;
         CGRect banner_frame = CGRectMake(b_x, 0, b_w,b_h);
-        self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:nil];
+        self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
         [self.header addSubview:self.bannerView];
-        self.bannerView.placeholderImage =   [UIImage imageNamed:@"PlaceHolderImage"];
         self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         self.bannerView.layer.cornerRadius = CORNER_RADIUS;
         self.bannerView.layer.masksToBounds = YES;
         WeakSelf
         self.bannerView.clickItemOperationBlock = ^(NSInteger index) {
-            NSDictionary *item  = items[index];
-            [weakSelf CaseLandingPage:item[@"url"]];
+            NSString *target  = target_arr[index];
+            [weakSelf CaseLandingPage:target];
         };
         self.header.mj_h = (b_h + 20);
         self.tableView.tableHeaderView = self.header;
     }
-    self.bannerView.imageURLStringsGroup = cover_arr;
+    self.bannerView.imageURLStringsGroup = url_arr;
 }
 /*-----------banner----------*/
+
 /*-----------hotProducts----------*/
 - (void)makeHotProducts{
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@svc/app/hotProducts/3",DOMAINURL_API];
-//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//        [weakSelf makHotProductsWithResponse:response];
-//    }];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makHotProductsWithResponse:response];
@@ -182,13 +185,11 @@
     PushToViewController(vc);
 }
 /*-----------hotProducts----------*/
+
 /*-----------hotActivity----------*/
 - (void)makeHotActivity{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/hotActivity/app",DOMAINURL_API];
-//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//        [weakSelf makHotActivityWithResponse:response];
-//    }];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD",DOMAINURL_API];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makHotActivityWithResponse:response];
@@ -201,13 +202,14 @@
         [self caseEmpty];
         return;
     }
-    NSArray *items = response[@"result"];
-    if (items.count == 0) {
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    if (banneres.count == 0) {
         [self caseEmpty];
         return;
     }
     [self caseEmpty];
-    [self reloadWithItems:@[items] type:SectionGroupTypePopularActivity];
+    [self reloadWithItems:@[banneres] type:SectionGroupTypePopularActivity];
 }
 
 - (void)caseActivity:(NSString *)url{
@@ -236,13 +238,11 @@
     
 }
 /*-----------hotActivity----------*/
+
 /*-----------热门视频----------*/
 - (void)makeHotVideo{
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@svc/app/lecture",DOMAINURL_API];
-//    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-//        [weakSelf makHotVideoWithResponse:response];
-//    }];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makHotVideoWithResponse:response];
@@ -270,6 +270,7 @@
     PushToViewController(vc);
 }
 /*-----------热门视频----------*/
+
 /*-----------文章栏目----------*/
 - (void)makeHotArticle{
     WeakSelf;
@@ -302,7 +303,6 @@
 /*-----------文章栏目----------*/
 
 /*-----------专题攻略----------*/
-
 - (void)makeBannerTheme{
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL",DOMAINURL_API];
@@ -318,19 +318,20 @@
         [self caseEmpty];
         return;
     }
+ 
     NSDictionary *result = response[@"result"];
-    NSArray *items = result[@"items"];
-    if (items.count == 0)  {
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+        if (banneres.count == 0)  {
         [self caseEmpty];
         return;
     }
+    
     [self caseEmpty];
-    self.bannerThemes = items;
-    if (items.count >5) {
-        items = [items subarrayWithRange:NSMakeRange(0, 4)];
+    self.bannerThemes = banneres;
+    if (banneres.count >5) {
+        banneres = [banneres subarrayWithRange:NSMakeRange(0, 5)];
     }
-    [self reloadWithItems:@[items] type:SectionGroupTypeBannerTheme];
-
+    [self reloadWithItems:@[banneres] type:SectionGroupTypeBannerTheme];
 }
 /*-----------专题攻略----------*/
 
@@ -434,15 +435,11 @@ static NSString *identify = @"cell";
     
     if (group.type == SectionGroupTypeBannerTheme) {
         HomeRoomHorizontalCell *cell =[[HomeRoomHorizontalCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil];
-        cell.sectionType = SectionGroupTypeBannerTheme;
+        cell.group = group;
         [cell bottomLineHiden:YES];
-        cell.items = group.items[indexPath.row];
         cell.actionBlock = ^(NSInteger index,id item) {
-            
-            NSDictionary *images = item[@"images"];
-            NSDictionary *app = images[@"app"];
-            NSString *path = [app valueForKeyPath:@"target"];
-            [weakSelf caseBannerTheme:path];
+            HomeBannerObject *banner = (HomeBannerObject*)item;
+            [weakSelf caseBannerTheme:banner.target];
         };
         
         return cell;

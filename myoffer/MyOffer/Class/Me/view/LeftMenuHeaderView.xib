@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,12 +44,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cih-hI-5eR">
+                    <rect key="frame" x="43.5" y="130" width="180" height="30"/>
+                    <connections>
+                        <action selector="userNameOnClick:" destination="2oj-aA-Lvh" eventType="touchUpInside" id="02h-IP-o4N"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="duV-6M-Egw" firstAttribute="top" secondItem="19G-dE-ohI" secondAttribute="bottom" constant="10" id="23G-Tz-CY6"/>
+                <constraint firstItem="Cih-hI-5eR" firstAttribute="width" secondItem="duV-6M-Egw" secondAttribute="width" id="FHR-6P-kFk"/>
+                <constraint firstItem="Cih-hI-5eR" firstAttribute="height" secondItem="duV-6M-Egw" secondAttribute="height" id="LjS-lQ-wOW"/>
                 <constraint firstItem="duV-6M-Egw" firstAttribute="centerX" secondItem="2oj-aA-Lvh" secondAttribute="centerX" id="NrE-2g-QX2"/>
+                <constraint firstItem="Cih-hI-5eR" firstAttribute="leading" secondItem="duV-6M-Egw" secondAttribute="leading" id="VEa-7N-V3L"/>
                 <constraint firstItem="19G-dE-ohI" firstAttribute="centerY" secondItem="2oj-aA-Lvh" secondAttribute="centerY" constant="-5" id="cTg-K9-iS6"/>
                 <constraint firstItem="19G-dE-ohI" firstAttribute="centerX" secondItem="2oj-aA-Lvh" secondAttribute="centerX" id="wws-Zm-87n"/>
+                <constraint firstItem="Cih-hI-5eR" firstAttribute="top" secondItem="duV-6M-Egw" secondAttribute="top" id="yCB-K1-x1w"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

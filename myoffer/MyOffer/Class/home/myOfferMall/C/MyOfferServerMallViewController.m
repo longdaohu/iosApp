@@ -137,15 +137,14 @@
     if(!_autoLoopView){
     
         WeakSelf
-        
-        SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, AutoScroll_Height) delegate:nil placeholderImage:nil];
-        
+        CGFloat b_w = XSCREEN_WIDTH;
+        CGFloat b_h = b_w * 350.0/668;
+        SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, b_w,b_h) delegate:nil placeholderImage:XImage(@"PlaceHolderImage")];
         autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
+        autoLoopView.bannerImageViewContentMode =  UIViewContentModeScaleAspectFill;
         autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
-            
             [weakSelf  caseBannerWithIndex:index];
-            
         };
         
         _autoLoopView = autoLoopView;
@@ -165,11 +164,8 @@
     BOOL isService = self.sevice ? NO : YES;
     
     [self startAPIRequestWithSelector:kAPISelectorMyofferMall parameters:nil expectedStatusCodes:nil showHUD:isService showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-        
         [weakSelf updateUIWithResponse:response];
-        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        
         [weakSelf showError];
     }];
     

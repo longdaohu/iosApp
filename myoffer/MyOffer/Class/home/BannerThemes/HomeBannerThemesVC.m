@@ -42,7 +42,7 @@
 - (void)makeUI{
     
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc]init];
-    flow.minimumLineSpacing = 20;
+    flow.minimumLineSpacing = 30;
     CGFloat item_w = XSCREEN_WIDTH - 40;
     CGFloat item_h =  item_w * 239/335.0;
     flow.itemSize = CGSizeMake(item_w, item_h);

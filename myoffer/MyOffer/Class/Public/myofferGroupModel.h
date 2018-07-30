@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeRoomApartmentRecommendation,
     SectionGroupTypeRoomHomestay,
     SectionGroupTypeRoomCustomerPraise,
-    
+    SectionGroupTypeRoomSearchHistory,
+    SectionGroupTypeRoomSearchHot
 };
 
 @interface myofferGroupModel : NSObject

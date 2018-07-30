@@ -11,6 +11,7 @@
 #import "HomeRoomPraiseItemCell.h"
 #import "HomeRoomApartmentItemCell.h"
 #import "HomeSingleImageCell.h"
+#import "HomeBannerObject.h"
 
 @interface HomeRoomHorizontalCell ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *bgView;
@@ -59,6 +60,13 @@
     self.bottom_line.hidden = hiden;
 }
 
+- (void)setGroup:(myofferGroupModel *)group{
+    
+    _group = group;
+    self.sectionType = group.type;
+    self.items = group.items.firstObject;
+}
+
 - (void)setSectionType:(SectionGroupType)sectionType{
     _sectionType = sectionType;
     
@@ -96,6 +104,7 @@
         CGFloat item_w = item_h * 258.2/185;
         self.flow.itemSize = CGSizeMake(item_w, item_h);
         self.flow.minimumInteritemSpacing = 15.8;
+        self.flow.minimumLineSpacing = 15.8;
         [self.bgView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell"];
     }
  
@@ -121,10 +130,8 @@
     if (self.sectionType == SectionGroupTypeBannerTheme) {
         
         HomeSingleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeSingleImageCell" forIndexPath:indexPath];
-        NSDictionary *item =  self.items[indexPath.row];
-        NSDictionary *images = item[@"images"];
-        NSDictionary *app = images[@"app"];
-        cell.path = app[@"url"];
+        HomeBannerObject *item =  self.items[indexPath.row];
+        cell.path = item.image;
         
         return cell;
     }
@@ -157,9 +164,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *item =  self.items[indexPath.row];
+    id item =  self.items[indexPath.row];
     if (self.actionBlock) {
         self.actionBlock(indexPath.row,item);
+    }
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (self.group.type == SectionGroupTypeBannerTheme) {
+         self.group.cell_offset_x = scrollView.mj_offsetX ;
     }
     
 }
@@ -187,6 +202,14 @@
     CGFloat line_y = content_size.height - line_h;
     CGFloat line_w = content_size.width - line_x * 2;
     self.bottom_line.frame = CGRectMake(line_x, line_y, line_w, line_h);
+    
+    if (self.group.type == SectionGroupTypeBannerTheme) {
+        
+        if (self.group.cell_offset_x == 0) {
+            self.group.cell_offset_x = -self.bgView.contentInset.left;
+        }
+        [self.bgView setContentOffset:CGPointMake(self.group.cell_offset_x, 0) animated:NO];
+    }
 }
 
 

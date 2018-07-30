@@ -11,7 +11,6 @@
 #import "OrderDetailFooterView.h"
 #import "OrderItem.h"
 #import "PayOrderViewController.h"
-#import "ServiceMallViewController.h"
 #import "OrderViewController.h"
 #import "IDMPhotoBrowser.h"
 
@@ -265,13 +264,7 @@
         
         UIViewController *child = self.navigationController.childViewControllers[1];
        
-        if ([child isKindOfClass:[ServiceMallViewController class]]) {
-            
-            ServiceMallViewController *mall =(ServiceMallViewController *)child;
-            mall.refresh = YES;
-            [self.navigationController popToViewController:mall animated:YES];
-
-        } else if([child isKindOfClass:[OrderViewController class]]){
+        if([child isKindOfClass:[OrderViewController class]]){
         
             OrderViewController *orderList =(OrderViewController *)child;
             orderList.refresh = YES;
