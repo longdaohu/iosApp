@@ -8,6 +8,7 @@
 
 #import "HomeBannerThemesVC.h"
 #import "HomeImageCell.h"
+#import "HomeBannerObject.h"
 
 @interface HomeBannerThemesVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *bgView;
@@ -74,22 +75,16 @@
     HomeImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeImageCell" forIndexPath:indexPath];
     cell.shadowEnable = true;
  
-    NSDictionary *item =  self.items[indexPath.row];
-    NSDictionary *images = item[@"images"];
-    NSDictionary *app = images[@"app"];
-    cell.path = app[@"url"];
+    HomeBannerObject *item =  self.items[indexPath.row];
+    cell.path = item.image;
 
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
  
-    NSDictionary *item =  self.items[indexPath.row];
-    NSDictionary *images = item[@"images"];
-    NSDictionary *app = images[@"app"];
-    NSString *path = [app valueForKeyPath:@"target"];
-    
-    WebViewController *vc = [[WebViewController alloc] initWithPath:path];
+    HomeBannerObject *item =  self.items[indexPath.row];
+    WebViewController *vc = [[WebViewController alloc] initWithPath:item.target];
     PushToViewController(vc);
 }
 

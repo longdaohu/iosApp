@@ -85,6 +85,7 @@
 #define ITEM_MARGIN   10.0
 #define HEIGHT_ZERO 0.01
 #define LINE_HEIGHT 0.5
+#define BACKGROUNDCOLOR_ALPHA 0.5
 #define XMARGIN       XPERCENT * 8
 #define XFONT(size)   [UIFont systemFontOfSize:size]
 #define NetRequest_ConnectError  @"网络请求失败，请确认网络是否正常连接！"

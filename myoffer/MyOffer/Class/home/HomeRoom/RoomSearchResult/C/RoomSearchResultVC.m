@@ -8,9 +8,14 @@
 
 #import "RoomSearchResultVC.h"
 #import "RoomSearchCell.h"
+#import "RoomSearchFilterView.h"
+#import "RoomSearchFilterVC.h"
+#import "RoomItemBookVC.h"
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)RoomSearchFilterVC *searchFilter;
+
 @end
 
 @implementation RoomSearchResultVC
@@ -21,6 +26,17 @@
     [self makeUI];
 }
 
+- (RoomSearchFilterVC *)searchFilter{
+    
+    if (!_searchFilter) {
+        
+        _searchFilter = [[RoomSearchFilterVC alloc] init];
+        _searchFilter.view.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:_searchFilter.view];
+    }
+    
+    return _searchFilter;
+}
 
 - (void)makeUI{
     
@@ -48,62 +64,63 @@
     searchTF.leftViewMode =  UITextFieldViewModeAlways;
 }
 
-- (void)makeTableView{
-    
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+- (void)makeTableView
+{
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds  style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
+    self.tableView.estimatedRowHeight = 150;//很重要保障滑动流畅性
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
-    self.tableView.estimatedSectionFooterHeight = 0;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+    WeakSelf
+    RoomSearchFilterView *filterView = [[RoomSearchFilterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 40)];
+    filterView.RoomSearchFilterViewBlock = ^{
+        [weakSelf caseFilter];
+    };
+    [self.view addSubview:filterView];
+    self.tableView.contentInset = UIEdgeInsetsMake(filterView.mj_h, 0, XTabBarHeight, 0);
 }
-
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return   10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSString *class_name = @"RoomSearchCell";
+    UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:class_name];
+    if (!cell) {
+        cell = Bundle(class_name);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+ 
+    return cell;
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewAutomaticDimension;
+    return   UITableViewAutomaticDimension;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
- 
-    return 10;
-}
-
-static NSString *identify = @"cell";
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
-    if (!cell) {
-        
-        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld",indexPath.section];
-    
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
+    PushToViewController(vc);
 }
 
 
 #pragma mark : 事件处理
 - (void)caseMeiqia{
     
+}
+- (void)caseFilter{
+    
+    [self.searchFilter show];
 }
 
 - (void)didReceiveMemoryWarning {

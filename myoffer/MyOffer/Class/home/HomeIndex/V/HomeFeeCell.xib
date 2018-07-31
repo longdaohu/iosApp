@@ -641,7 +641,7 @@ IAo
                 <outlet property="home_fee_pay_05" destination="cQH-vc-LZU" id="Th7-qM-u8A"/>
                 <outlet property="home_fee_pay_06" destination="uJj-fF-6ES" id="mZV-Ui-c3X"/>
             </connections>
-            <point key="canvasLocation" x="62.5" y="968.5"/>
+            <point key="canvasLocation" x="63" y="935"/>
         </tableViewCell>
     </objects>
     <resources>
