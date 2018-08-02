@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeRoomIndexCommentsObject.h"
 
 @interface HomeRoomPraiseItemCell : UICollectionViewCell
+@property(nonatomic,strong)HomeRoomIndexCommentsObject *item;
 
 @end

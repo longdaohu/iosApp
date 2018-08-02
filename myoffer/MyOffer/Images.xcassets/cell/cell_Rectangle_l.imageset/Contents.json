@@ -10,17 +10,17 @@
         "center" : {
           "mode" : "tile",
           "width" : 1,
-          "height" : 4
+          "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 23,
-          "top" : 53,
-          "right" : 126,
-          "left" : 102
+          "bottom" : 43,
+          "top" : 151,
+          "right" : 83,
+          "left" : 108
         }
       },
       "idiom" : "universal",
-      "filename" : "cell_Rectangle_l.png",
+      "filename" : "cell_Rectangle_l@2x.png",
       "scale" : "2x"
     },
     {

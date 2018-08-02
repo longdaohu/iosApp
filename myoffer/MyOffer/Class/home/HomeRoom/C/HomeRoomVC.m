@@ -9,9 +9,18 @@
 #import "HomeRoomVC.h"
 #import "HomeRoomTopView.h"
 #import "HomeRoomSearchVC.h"
+#import "HomeRoomIndexObject.h"
+#import "HttpApiClient_API_51ROOM.h"
+#import "HttpsApiClient_API_51ROOM.h"
+#import "HomeRoomIndexFrameObject.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
+@property(nonatomic,strong)HomeRoomIndexObject *UKRoomObj;
+@property(nonatomic,strong)HomeRoomIndexObject *AURoomObj;
+@property(nonatomic,strong)HomeRoomIndexFrameObject *UKRoomFrameObj;
+@property(nonatomic,strong)HomeRoomIndexFrameObject *AURoomFrameObj;
+@property(nonatomic,assign)BOOL isUK;
 
 @end
 
@@ -24,6 +33,7 @@
     //https://blog.csdn.net/zhengang007/article/details/79170558
     //https://github.com/wangzhengang/MapboxExample/
     [self makeUI];
+    [self makeData];
 }
 
 - (void)makeUI{
@@ -33,10 +43,148 @@
     roomHeaderView.actionBlock = ^(UIButton *sender) {
         [weakSelf headerButtonClick:sender];
     };
-    
     self.headerView = roomHeaderView;
     
+    
+    NSString * appKey = @"24964499";
+    NSString * appSecret = @"8ec406d891d9ba9278a3ced8d8b13b39";
+    [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
+    [[HttpsApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
+    
+    BOOL (^pVerifyCerts)(NSURLAuthenticationChallenge *x);
+    pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler)
+    {
+        return YES;
+    };
+    [[[HttpsApiClient_API_51ROOM instance] client] setVerifyHttpsCert:pVerifyCerts];
+    self.isUK = YES;
+}
+
+- (void)makeData{
+    
+    
+    NSInteger  index = self.isUK ? 0 : 4;
+    if (self.isUK && self.UKRoomObj) {
+        self.roomFrameObj = self.UKRoomFrameObj;
+        [self reLoadWithRoomData:self.UKRoomObj];
+        return;
+    }
+    
+    if (!self.isUK && self.AURoomObj) {
+        self.roomFrameObj = self.AURoomFrameObj;
+        [self reLoadWithRoomData:self.AURoomObj];
+        return;
+    }
+
+    WeakSelf
+    [[HttpsApiClient_API_51ROOM instance] homepage:index completionBlock:^(CACommonResponse *response) {
+        
+        NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
+        if (![status isEqualToString:@"200"]) {
+            NSLog(@" 网络请求错误 ");
+            return ;
+        }
+        id result = [response.body KD_JSONObject];
+        [weakSelf updateUIWithResponse:result];
+    }];
+}
+
+- (void)updateUIWithResponse:(id)response{
+ 
+    NSDictionary *dic = (NSDictionary *)response;
+    HomeRoomIndexObject *indexObj = [HomeRoomIndexObject mj_objectWithKeyValues:dic];
+    HomeRoomIndexFrameObject *roomFrameObj = [[HomeRoomIndexFrameObject alloc] init];
+    roomFrameObj.item = indexObj;
+    self.roomFrameObj = roomFrameObj;
+    
+    if (self.isUK) {
+        self.UKRoomObj = indexObj;
+        self.UKRoomFrameObj = roomFrameObj;
+    }else{
+        self.AURoomObj = indexObj;
+        self.AURoomFrameObj = roomFrameObj;
+    }
+    
+        [self reLoadaaaaWithRoomFrameData:roomFrameObj];
+    //    [self reLoadWithRoomData:indexObj];
+}
+
+- (void)reLoadaaaaWithRoomFrameData:(HomeRoomIndexFrameObject *)roomFrameObj{
+    
+    
+    for (myofferGroupModel *group in self.roomGroups) {
+        
+        if (group.type == SectionGroupTypeRoomHomestay) {
+            if (roomFrameObj.item.flats.count == 0) continue;
+            group.items = @[roomFrameObj];
+            group.cell_height_set = roomFrameObj.flat_Section_Height;
+        }
+        
+        if (group.type == SectionGroupTypeRoomApartmentRecommendation) {
+            
+            if (roomFrameObj.item.accommodations.count == 0) continue;
+            group.items = @[roomFrameObj];
+            group.cell_height_set = roomFrameObj.accommodation_Section_Height;
+        }
+        
+        if (group.type == SectionGroupTypeRoomHotCity) {
+
+            if (roomFrameObj.item.hot_city.count == 0)  continue;
+            group.items = @[roomFrameObj];
+            group.cell_height_set = roomFrameObj.hot_city_Section_Height;
+        }
+        
+        if (group.type == SectionGroupTypeRoomCustomerPraise) {
+            
+            if (roomFrameObj.item.comments.count == 0) continue;
+            group.items = @[roomFrameObj];
+            group.cell_height_set = roomFrameObj.comment_Section_Height;
+            
+        }
+        
+        self.groups = self.roomGroups;
+        [self toReLoadTable];
+    }
+}
+
+- (void)reLoadWithRoomData:(HomeRoomIndexObject *)indexObj{
+
+    
+    for (myofferGroupModel *group in self.roomGroups) {
+
+        if (group.type == SectionGroupTypeRoomHotCity) {
+
+            if (indexObj.hot_city.count == 0)  continue;
+            group.items = @[indexObj.hot_city];
+            group.cell_height_set = 185;
+        }
+
+        if (group.type == SectionGroupTypeRoomApartmentRecommendation) {
+
+            if (indexObj.accommodations.count == 0) continue;
+            group.items = @[indexObj.accommodations];
+            group.cell_height_set = 252;
+
+        }
+        
+        if (group.type == SectionGroupTypeRoomHomestay) {
+            if (indexObj.flats.count == 0) continue;
+            group.items = @[indexObj.flats];
+            group.cell_height_set = self.roomFrameObj.flat_Section_Height;
+        }
+        
+        if (group.type == SectionGroupTypeRoomCustomerPraise) {
+
+            if (indexObj.comments.count == 0) continue;
+            group.items = @[indexObj.comments];
+            group.cell_height_set = 228 + 30;
+
+        }
+
+    }
+    
     self.groups = self.roomGroups;
+    [self toReLoadTable];
 }
 
 
@@ -47,34 +195,20 @@
         myofferGroupModel *hot_activity  = [myofferGroupModel groupWithItems:nil header:@"热门活动"];
         hot_activity.type = SectionGroupTypeRoomHotActivity;
         
-        NSArray *cities = @[
-                                @{@"country":@"英国",@"city":@"伦敦",@"name":@"伦敦\nLondon", @"icon":@"city_ld.jpg",},
-                                @{@"country":@"英国",@"city":@"曼彻斯特",@"name":@"曼彻斯特\nManchester", @"icon":@"city_mcst.jpg",},
-                                @{@"country":@"英国",@"city":@"伯明翰",@"name":@"伯明翰\nBirmingham", @"icon":@"city_bmh.jpg",},
-                                @{@"country":@"澳大利亚",@"city":@"悉尼",@"name":@"悉尼\nSydney", @"icon":@"city_xn.jpg",},
-                                @{@"country":@"澳大利亚",@"city":@"墨尔本",@"name":@"墨尔本\nMelbourne", @"icon":@"city_mrb.jpg",},
-                                @{@"country":@"新西兰",@"city":@"奥克兰",@"name":@"奥克兰\nAuckland", @"icon":@"city_akl.jpg"}
-                            ];
-        myofferGroupModel *hot_city  = [myofferGroupModel groupWithItems:@[cities] header:@"热门城市"];
+
+        myofferGroupModel *hot_city  = [myofferGroupModel groupWithItems:nil header:@"热门城市"];
         hot_city.accesory_title= @"查看更多";
         hot_city.type = SectionGroupTypeRoomHotCity;
-        hot_city.cell_height_set = 185;
 
-         myofferGroupModel *apartment  = [myofferGroupModel groupWithItems:@[ cities ] header:@"公寓推荐"];
+         myofferGroupModel *apartment  = [myofferGroupModel groupWithItems:nil header:@"公寓推荐"];
         apartment.type = SectionGroupTypeRoomApartmentRecommendation;
-        apartment.cell_height_set = 252;
         
-        myofferGroupModel *homestay  = [myofferGroupModel groupWithItems:@[cities] header:@"精选民宿"];
+        myofferGroupModel *homestay  = [myofferGroupModel groupWithItems:nil header:@"精选民宿"];
         homestay.type = SectionGroupTypeRoomHomestay;
         homestay.accesory_title= @"查看更多";
-        CGFloat item_w =  (XSCREEN_WIDTH - 50) * 0.5;
-        CGFloat item_h =  item_w + 80;
-        NSInteger row = (NSInteger)(cities.count * 0.5 + 0.5);
-        homestay.cell_height_set = (item_h + 10) * row + 30;
-        
-        myofferGroupModel *praise  = [myofferGroupModel groupWithItems:@[ cities ] header:@"客户好评"];
+ 
+        myofferGroupModel *praise  = [myofferGroupModel groupWithItems:nil header:@"客户好评"];
         praise.type = SectionGroupTypeRoomCustomerPraise;
-        praise.cell_height_set = 228 + 30;
         
         _roomGroups = @[hot_activity,hot_city,apartment,homestay,praise];
 
@@ -87,11 +221,13 @@
     
     switch (sender.tag) {
         case HomeRoomTopViewButtonTypeUK:{
-            
+            self.isUK = YES;
+            [self makeData];
         }
              break;
         case HomeRoomTopViewButtonTypeAU:{
-            
+            self.isUK = NO;
+            [self makeData];
         }
             break;
         case HomeRoomTopViewButtonTypeSearch:{

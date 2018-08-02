@@ -20,15 +20,15 @@
 #import "ServiceOverSeaDestination.h"
 #import "SMListViewController.h"
 #import "MeiqiaServiceCall.h"
+#import "HomeBannerObject.h"
 
 @interface MyOfferServerMallViewController ()<UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet MyOfferTableView *tableView;
 @property(nonatomic,strong) MyOfferService *sevice;
-@property(nonatomic,strong)SDCycleScrollView *autoLoopView;
-@property(nonatomic,strong)NSArray *groups;
-@property(nonatomic,strong)NSArray *overSeaArr;
-@property(nonatomic,strong)ServiceOverseaDestinationView *overseaView;
-@property(nonatomic,strong)UIView *headerView;
+@property(nonatomic,strong) NSArray *groups;
+@property(nonatomic,strong) NSArray *overSeaArr;
+@property(nonatomic,strong) ServiceOverseaDestinationView *overseaView;
+@property(nonatomic,strong) UIView *headerView;
 
 @end
 
@@ -68,6 +68,7 @@
     [self makeUI];
     
     [self makeDataSource];
+    [self makeHotActivity];
 }
 
 - (void)makeUI{
@@ -131,45 +132,84 @@
 /**
  *  创建轮播图头部
  */
-
-- (SDCycleScrollView *)autoLoopView{
-
-    if(!_autoLoopView){
+/*-----------hotActivity----------*/
+- (void)makeHotActivity{
     
-        WeakSelf
-        CGFloat b_w = XSCREEN_WIDTH;
-        CGFloat b_h = b_w * 350.0/668;
-        SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, b_w,b_h) delegate:nil placeholderImage:XImage(@"PlaceHolderImage")];
-        autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-        autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
-        autoLoopView.bannerImageViewContentMode =  UIViewContentModeScaleAspectFill;
-        autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
-            [weakSelf  caseBannerWithIndex:index];
-        };
-        
-        _autoLoopView = autoLoopView;
-
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD&source=app",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makHotActivityWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+//                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makHotActivityWithResponse:(id)response{
+    if (!ResponseIsOK) {
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    if (banneres.count  == 0) {
+        return;
     }
     
-    return _autoLoopView;
-}
+    NSMutableArray *url_arr = [NSMutableArray array];
+    NSMutableArray *target_arr = [NSMutableArray array];
+    for (HomeBannerObject *banner in banneres) {
+        if (banner.image && banner.target) {
+            [url_arr addObject:[banner.image toUTF8WithString]];
+            [target_arr addObject:banner.target];
+        }
+    }
+ 
+    WeakSelf
+    CGFloat b_w = XSCREEN_WIDTH;
+    CGFloat b_h = b_w * 350.0/668;
+    SDCycleScrollView *autoLoopView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, b_w,b_h) delegate:nil placeholderImage:XImage(@"PlaceHolderImage")];
+    autoLoopView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+    autoLoopView.currentPageDotColor = XCOLOR_LIGHTBLUE;
+    autoLoopView.bannerImageViewContentMode =  UIViewContentModeScaleAspectFill;
+    autoLoopView.clickItemOperationBlock = ^(NSInteger index) {
+        NSString *target  = target_arr[index];
+        [weakSelf caseActivity:target];
+    };
+    autoLoopView.imageURLStringsGroup = url_arr;
+    self.tableView.tableHeaderView = autoLoopView;
+ }
 
+- (void)caseActivity:(NSString *)url{
+ 
+    NSString *app_pre = @"app://";
+    //url 包含 app://跳转 ServiceItemViewController
+    if ([url containsString:app_pre]) {
+        
+        NSString *item = [url substringWithRange:NSMakeRange(app_pre.length, url.length - app_pre.length)];
+        if (item.length > 0) {
+            ServiceItemViewController *vc = [[ServiceItemViewController alloc] init];
+            vc.service_id = item;
+            PushToViewController(vc);
+        }
+        return;
+    }
+    //url 包含 app://跳转 WebViewController
+    WebViewController *vc = [[WebViewController alloc] initWithPath:url];
+    PushToViewController(vc);
+    
+}
+/*-----------hotActivity----------*/
 
 
 //网络请求
 - (void)makeDataSource{
     
     WeakSelf
-
     BOOL isService = self.sevice ? NO : YES;
-    
     [self startAPIRequestWithSelector:kAPISelectorMyofferMall parameters:nil expectedStatusCodes:nil showHUD:isService showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateUIWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
         [weakSelf showError];
     }];
-    
-    
 }
 
 //更新UI
@@ -178,13 +218,7 @@
     //1 数据模型
     self.sevice =  [MyOfferService mj_objectWithKeyValues:response];
     self.sevice.login_status  = LOGIN;
-    //5 轮播图匹配数据
-    NSArray *images = [self.sevice.banners valueForKey:@"thumbnail"];
-    if (images.count > 0) {
-        
-        self.tableView.tableHeaderView =  self.autoLoopView;
-        self.autoLoopView.imageURLStringsGroup = images;
-    }
+
  
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];

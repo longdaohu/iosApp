@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeRoomIndexCityObject.h"
 
 @interface HomeSingleImageCell : UICollectionViewCell
 @property(nonatomic,copy)NSString *path;
 @property(nonatomic,strong)NSDictionary *item;
+@property(nonatomic,strong)HomeRoomIndexCityObject *city;
 @property(nonatomic,assign)BOOL shadowEnable;
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeRoomIndexFlatsObject.h"
+#import "HomeRoomIndexFlatFrameObject.h"
 
 @interface HomeRoomApartmentItemCell : UICollectionViewCell
+@property(nonatomic,strong)HomeRoomIndexFlatFrameObject *flatFrameObject;
 @property(nonatomic,assign)BOOL isHomestay;
+@property(nonatomic,strong)HomeRoomIndexFlatsObject  *item;
+
 @end

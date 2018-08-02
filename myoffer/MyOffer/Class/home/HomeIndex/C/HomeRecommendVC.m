@@ -33,7 +33,6 @@
 @property(nonatomic,assign)CGFloat commoditie_height;
 @property(nonatomic,assign)NSInteger request_count;
 @property(nonatomic,strong)NSArray *bannerThemes;
-
 @end
 
 @implementation HomeRecommendVC
@@ -98,7 +97,7 @@
 /*-----------banner----------*/
 - (void)makeBannerData{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=BANNER",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=BANNER&source=app",DOMAINURL_API];
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
         [weakSelf makBannerViewWithResponse:response];
     }];
@@ -189,7 +188,7 @@
 /*-----------hotActivity----------*/
 - (void)makeHotActivity{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD&source=app",DOMAINURL_API];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makHotActivityWithResponse:response];
@@ -305,7 +304,7 @@
 /*-----------专题攻略----------*/
 - (void)makeBannerTheme{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL&source=app",DOMAINURL_API];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makeBannerThemeWithResponse:response];

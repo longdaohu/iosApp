@@ -8,5 +8,6 @@ target 'MyOffer' do
     pod 'MLeaksFinder'
     pod 'JPush'
     pod 'Meiqia'
+    pod 'SocketRocket'
 
 end

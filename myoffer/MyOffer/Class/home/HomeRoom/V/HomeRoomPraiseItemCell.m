@@ -31,16 +31,16 @@
         iconView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:iconView];
         iconView.clipsToBounds = YES;
+        iconView.layer.cornerRadius = 25;
+        iconView.layer.masksToBounds = YES;
  
         UILabel *nameLab = [UILabel new];
         nameLab.textColor = XCOLOR_TITLE;
         nameLab.font = XFONT(14);
-        nameLab.text = @"李同学";
         [self.contentView addSubview:nameLab];
         self.nameLab = nameLab;
         
         UILabel *subLab = [UILabel new];
-        subLab.text = @"来自北京 英国伦敦大学UCL";
         subLab.textColor = XCOLOR_DESC;
         subLab.font = XFONT(10);
         [self.contentView addSubview:subLab];
@@ -50,7 +50,7 @@
         UIImageView *starView = [UIImageView new];
         starView.image = XImage(@"five_star");
         self.starView = starView;
-        starView.contentMode = UIViewContentModeScaleToFill;
+        starView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:starView];
         starView.clipsToBounds = YES;
         
@@ -66,8 +66,7 @@
         summaryLab.textColor = XCOLOR_TITLE;
         summaryLab.font = XFONT(12);
         summaryLab.numberOfLines = 0;
-        summaryLab.text = @"之前實地看過很多美國的公寓，屋內只有電器沒有家具，住進去后，還需要添置很多東西，非常麻煩。這邊推介的公寓，室內家具、電器都非常齊全。客服也會幫我安排看房。入住后的煩惱少了很多。";
-        summaryLab.textAlignment = NSTextAlignmentCenter;
+        summaryLab.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:summaryLab];
         self.summaryLab = summaryLab;
         
@@ -75,6 +74,16 @@
     return self;
 }
 
+- (void)setItem:(HomeRoomIndexCommentsObject *)item{
+    
+    _item = item;
+ 
+    NSString *path = [item.avatar toUTF8WithString];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    self.nameLab.text = item.name;
+    self.subLab.text = item.fromUni;
+    self.summaryLab.text = item.comment;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -101,8 +110,8 @@
  
     CGFloat star_x = name_x;
     CGFloat star_y = CGRectGetMaxY(self.subLab.frame) + 5;
-    CGFloat star_w = 160;
-    CGFloat star_h = 15;
+    CGFloat star_h = 14;
+    CGFloat star_w = star_h*self.starView.image.size.width/self.starView.image.size.height;
     self.starView.frame = CGRectMake(star_x, star_y, star_w, star_h);
  
     CGFloat sum_bg_w = content_size.width;
@@ -111,10 +120,10 @@
     CGFloat sum_bg_y = CGRectGetMaxY(self.starView.frame);
     self.summarybgView.frame = CGRectMake(sum_bg_x, sum_bg_y, sum_bg_w, sum_bg_h);
 
-    CGFloat summary_x = sum_bg_x + 40;
-    CGFloat summary_y = sum_bg_y + 20;
-    CGFloat summary_w = sum_bg_w - summary_x - 20;
-    CGFloat summary_h = content_size.height - summary_y;
+    CGFloat summary_x = sum_bg_x + 50;
+    CGFloat summary_w = sum_bg_w - summary_x - 10;
+    CGFloat summary_h = [self.summaryLab.text sizeWithfontSize:12 maxWidth:summary_w].height;
+    CGFloat summary_y = sum_bg_y + 40;
     self.summaryLab.frame = CGRectMake(summary_x, summary_y, summary_w, summary_h);
     
 }

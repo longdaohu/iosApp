@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeRoomIndexCityObject.h"
+#import "HomeRoomIndexCommentsObject.h"
+#import "HomeRoomIndexEventsObject.h"
+#import "HomeRoomIndexFlatsObject.h"
+#import "HomeRoomIndexFrameObject.h"
 
 @interface HomeBaseVC : BaseViewController
+@property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)UIView *headerView;
 
+- (void)toReLoadTable;
 - (void)toLoadView;
 - (void)toSetTabBarhidden;
 - (void)reloadSection:(NSInteger)section;

@@ -21,6 +21,7 @@
 //#import "HomeRoomApartmentCell.h"
 //#import "HomeRoomPraiseCell.h"
 #import "HomeRoomHorizontalCell.h"
+#import "HomeRoomVerticalCell.h"
 
 
 @interface HomeBaseVC ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
@@ -164,17 +165,43 @@ static NSString *identify = @"cell";
         return cell;
     }
     
-    if ((group.type == SectionGroupTypeRoomHomestay) ||(group.type == SectionGroupTypeRoomHotCity) || (group.type == SectionGroupTypeRoomApartmentRecommendation) || (group.type == SectionGroupTypeRoomCustomerPraise)) {
+    if ((group.type == SectionGroupTypeRoomHotCity) || (group.type == SectionGroupTypeRoomApartmentRecommendation) || (group.type == SectionGroupTypeRoomCustomerPraise)) {
 
         HomeRoomHorizontalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomHorizontalCell"];
         if (!cell) {
             cell = [[HomeRoomHorizontalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomHorizontalCell"];
         }
+        cell.group = group;
+        cell.actionBlock = ^(NSInteger index, id item) {
+             if ([item isKindOfClass:[HomeRoomIndexCityObject class]]){
+                    HomeRoomIndexCityObject *city = (HomeRoomIndexCityObject *)item;
+                    NSLog(@"%@",city.name);
+            }
+             if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
+                HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
+                NSLog(@"%@",flat.name);
+            }
 
-        cell.sectionType = group.type;
-        cell.items = group.items[indexPath.row];
-        
+        };
+
         return  cell;
+    }
+    
+    if (group.type == SectionGroupTypeRoomHomestay){
+        
+        HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomVerticalCell"];
+        if (!cell) {
+            cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomVerticalCell"];
+        }
+        cell.roomFrameObj = group.items.firstObject;
+        cell.actionBlock = ^(NSInteger index, id item) {
+            if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
+                HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
+                NSLog(@"%@",flat.name);
+            }
+        };
+        
+        return cell;
     }
  
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
@@ -415,6 +442,11 @@ static NSString *identify = @"cell";
 - (void)reloadSection:(NSInteger)section{
 
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)toReLoadTable{
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

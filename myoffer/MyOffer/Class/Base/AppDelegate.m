@@ -53,7 +53,6 @@ static AppDelegate *__sharedDelegate;
     [[KDImageCache sharedInstance] setCachedImagePath:[[KDStroageHelper libraryDirectoryPath] stringByAppendingPathComponent:@"Images"]];
     
     [self loadSavedToken];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -67,6 +66,8 @@ static AppDelegate *__sharedDelegate;
     [self JpushWithOptions:launchOptions];
     //美洽
     [self meiqia];
+    
+    [NSThread sleepForTimeInterval:2];
     
     return YES;
 }

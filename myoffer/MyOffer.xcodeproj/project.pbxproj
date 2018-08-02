@@ -221,6 +221,17 @@
 		AE4BBD1521105E1B00209FC8 /* RoomItemBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD1321105E1B00209FC8 /* RoomItemBookCell.m */; };
 		AE4BBD1621105E1B00209FC8 /* RoomItemBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD1421105E1B00209FC8 /* RoomItemBookCell.xib */; };
 		AE4BBD19211071DD00209FC8 /* RoomItemBookSV.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD18211071DD00209FC8 /* RoomItemBookSV.m */; };
+		AE4BBD252111550E00209FC8 /* ApiGatewaySdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4BBD242111550E00209FC8 /* ApiGatewaySdk.framework */; };
+		AE4BBD2A2111557300209FC8 /* HttpApiClient_API_51ROOM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD272111557200209FC8 /* HttpApiClient_API_51ROOM.m */; };
+		AE4BBD2B2111557300209FC8 /* HttpsApiClient_API_51ROOM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD292111557300209FC8 /* HttpsApiClient_API_51ROOM.m */; };
+		AE4BBD2E21115A8B00209FC8 /* HomeRoomIndexObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD2D21115A8B00209FC8 /* HomeRoomIndexObject.m */; };
+		AE4BBD3121115C3200209FC8 /* HomeRoomIndexFlatsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3021115C3200209FC8 /* HomeRoomIndexFlatsObject.m */; };
+		AE4BBD3421115C6700209FC8 /* HomeRoomIndexCommentsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3321115C6700209FC8 /* HomeRoomIndexCommentsObject.m */; };
+		AE4BBD3721115CB100209FC8 /* HomeRoomIndexEventsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3621115CB100209FC8 /* HomeRoomIndexEventsObject.m */; };
+		AE4BBD3A21115CCF00209FC8 /* HomeRoomIndexCityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3921115CCF00209FC8 /* HomeRoomIndexCityObject.m */; };
+		AE4BBD3D2111B9E000209FC8 /* HomeRoomIndexFrameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3C2111B9E000209FC8 /* HomeRoomIndexFrameObject.m */; };
+		AE4BBD402111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD3F2111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m */; };
+		AE4BBD432112B62000209FC8 /* HomeRoomVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD422112B62000209FC8 /* HomeRoomVerticalCell.m */; };
 		AE4C71391F4EA3C20069E83E /* myApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71381F4EA3C20069E83E /* myApplyViewController.m */; };
 		AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */; };
 		AE4C71461F4EE6460069E83E /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */; };
@@ -1032,6 +1043,27 @@
 		AE4BBD1421105E1B00209FC8 /* RoomItemBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomItemBookCell.xib; sourceTree = "<group>"; };
 		AE4BBD17211071DD00209FC8 /* RoomItemBookSV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookSV.h; sourceTree = "<group>"; };
 		AE4BBD18211071DD00209FC8 /* RoomItemBookSV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemBookSV.m; sourceTree = "<group>"; };
+		AE4BBD242111550E00209FC8 /* ApiGatewaySdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ApiGatewaySdk.framework; sourceTree = "<group>"; };
+		AE4BBD262111557100209FC8 /* HttpsApiClient_API_51ROOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpsApiClient_API_51ROOM.h; sourceTree = "<group>"; };
+		AE4BBD272111557200209FC8 /* HttpApiClient_API_51ROOM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpApiClient_API_51ROOM.m; sourceTree = "<group>"; };
+		AE4BBD282111557200209FC8 /* HttpApiClient_API_51ROOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpApiClient_API_51ROOM.h; sourceTree = "<group>"; };
+		AE4BBD292111557300209FC8 /* HttpsApiClient_API_51ROOM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpsApiClient_API_51ROOM.m; sourceTree = "<group>"; };
+		AE4BBD2C21115A8B00209FC8 /* HomeRoomIndexObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexObject.h; sourceTree = "<group>"; };
+		AE4BBD2D21115A8B00209FC8 /* HomeRoomIndexObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexObject.m; sourceTree = "<group>"; };
+		AE4BBD2F21115C3200209FC8 /* HomeRoomIndexFlatsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexFlatsObject.h; sourceTree = "<group>"; };
+		AE4BBD3021115C3200209FC8 /* HomeRoomIndexFlatsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexFlatsObject.m; sourceTree = "<group>"; };
+		AE4BBD3221115C6700209FC8 /* HomeRoomIndexCommentsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexCommentsObject.h; sourceTree = "<group>"; };
+		AE4BBD3321115C6700209FC8 /* HomeRoomIndexCommentsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexCommentsObject.m; sourceTree = "<group>"; };
+		AE4BBD3521115CB100209FC8 /* HomeRoomIndexEventsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexEventsObject.h; sourceTree = "<group>"; };
+		AE4BBD3621115CB100209FC8 /* HomeRoomIndexEventsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexEventsObject.m; sourceTree = "<group>"; };
+		AE4BBD3821115CCF00209FC8 /* HomeRoomIndexCityObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexCityObject.h; sourceTree = "<group>"; };
+		AE4BBD3921115CCF00209FC8 /* HomeRoomIndexCityObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexCityObject.m; sourceTree = "<group>"; };
+		AE4BBD3B2111B9E000209FC8 /* HomeRoomIndexFrameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexFrameObject.h; sourceTree = "<group>"; };
+		AE4BBD3C2111B9E000209FC8 /* HomeRoomIndexFrameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexFrameObject.m; sourceTree = "<group>"; };
+		AE4BBD3E2111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomIndexFlatFrameObject.h; sourceTree = "<group>"; };
+		AE4BBD3F2111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomIndexFlatFrameObject.m; sourceTree = "<group>"; };
+		AE4BBD412112B61F00209FC8 /* HomeRoomVerticalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomVerticalCell.h; sourceTree = "<group>"; };
+		AE4BBD422112B62000209FC8 /* HomeRoomVerticalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomVerticalCell.m; sourceTree = "<group>"; };
 		AE4C71371F4EA3C20069E83E /* myApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myApplyViewController.h; sourceTree = "<group>"; };
 		AE4C71381F4EA3C20069E83E /* myApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myApplyViewController.m; sourceTree = "<group>"; };
 		AE4C713C1F4EE6460069E83E /* LeftMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuHeaderView.h; sourceTree = "<group>"; };
@@ -1757,6 +1789,7 @@
 				AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */,
 				AEC85BD420A444F20002F19B /* libresolv.tbd in Frameworks */,
 				AEC85BD220A444D50002F19B /* UserNotifications.framework in Frameworks */,
+				AE4BBD252111550E00209FC8 /* ApiGatewaySdk.framework in Frameworks */,
 				AE53E86B1F73919800588F0C /* Social.framework in Frameworks */,
 				AEF6580521008C2400C0D849 /* libSocialSina.a in Frameworks */,
 				AE53E8701F73C0A600588F0C /* libWeChatSDK.a in Frameworks */,
@@ -1995,6 +2028,20 @@
 		AE07A0D82106C7FA00581073 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBD2C21115A8B00209FC8 /* HomeRoomIndexObject.h */,
+				AE4BBD2D21115A8B00209FC8 /* HomeRoomIndexObject.m */,
+				AE4BBD2F21115C3200209FC8 /* HomeRoomIndexFlatsObject.h */,
+				AE4BBD3021115C3200209FC8 /* HomeRoomIndexFlatsObject.m */,
+				AE4BBD3221115C6700209FC8 /* HomeRoomIndexCommentsObject.h */,
+				AE4BBD3321115C6700209FC8 /* HomeRoomIndexCommentsObject.m */,
+				AE4BBD3521115CB100209FC8 /* HomeRoomIndexEventsObject.h */,
+				AE4BBD3621115CB100209FC8 /* HomeRoomIndexEventsObject.m */,
+				AE4BBD3821115CCF00209FC8 /* HomeRoomIndexCityObject.h */,
+				AE4BBD3921115CCF00209FC8 /* HomeRoomIndexCityObject.m */,
+				AE4BBD3B2111B9E000209FC8 /* HomeRoomIndexFrameObject.h */,
+				AE4BBD3C2111B9E000209FC8 /* HomeRoomIndexFrameObject.m */,
+				AE4BBD3E2111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.h */,
+				AE4BBD3F2111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -2010,6 +2057,8 @@
 				AE07A0F521082A4700581073 /* HomeRoomPraiseItemCell.m */,
 				AE07A0FA210858CE00581073 /* HomeRoomHorizontalCell.h */,
 				AE07A0FB210858CE00581073 /* HomeRoomHorizontalCell.m */,
+				AE4BBD412112B61F00209FC8 /* HomeRoomVerticalCell.h */,
+				AE4BBD422112B62000209FC8 /* HomeRoomVerticalCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2550,6 +2599,18 @@
 				AE4BBD0D21105C7300209FC8 /* RoomItemBookVC.m */,
 			);
 			path = C;
+			sourceTree = "<group>";
+		};
+		AE4BBD23211154C900209FC8 /* Room51SDK */ = {
+			isa = PBXGroup;
+			children = (
+				AE4BBD282111557200209FC8 /* HttpApiClient_API_51ROOM.h */,
+				AE4BBD272111557200209FC8 /* HttpApiClient_API_51ROOM.m */,
+				AE4BBD262111557100209FC8 /* HttpsApiClient_API_51ROOM.h */,
+				AE4BBD292111557300209FC8 /* HttpsApiClient_API_51ROOM.m */,
+				AE4BBD242111550E00209FC8 /* ApiGatewaySdk.framework */,
+			);
+			path = Room51SDK;
 			sourceTree = "<group>";
 		};
 		AE4C71361F4EA3830069E83E /* myApply */ = {
@@ -4429,6 +4490,7 @@
 		AEE73C351BCCBB6400B96006 /* LIB */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBD23211154C900209FC8 /* Room51SDK */,
 				AEF657E421008C2300C0D849 /* UMSocial */,
 				AEF657DF2100826900C0D849 /* AlipaySDK */,
 				AE53E86C1F73C0A600588F0C /* Wechat */,
@@ -4690,7 +4752,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -5024,6 +5086,7 @@
 				AEA9399D207B0D1B0035121D /* serviceProtocolVC.m in Sources */,
 				AE6178D020732A05006B311A /* CreateOrderOneCell.m in Sources */,
 				AE1FD7521D5C929500FFD5A8 /* MJRefreshGifHeader.m in Sources */,
+				AE4BBD3421115C6700209FC8 /* HomeRoomIndexCommentsObject.m in Sources */,
 				AE1FD7581D5C929500FFD5A8 /* UIScrollView+MJRefresh.m in Sources */,
 				AE2D5E871DD5B64100B4E9F3 /* mergeItemView.m in Sources */,
 				AEA24AA41D5B23F600DD7939 /* XBTopToolView.m in Sources */,
@@ -5036,6 +5099,7 @@
 				AECC87DB1F95F63800FCBBEC /* RankTypeModel.m in Sources */,
 				AE4B2E801F1E095600E328F7 /* MessageTopicCountryContentVController.m in Sources */,
 				AE4B2E721F1E095600E328F7 /* MessageHotTopicMedel.m in Sources */,
+				AE4BBD3D2111B9E000209FC8 /* HomeRoomIndexFrameObject.m in Sources */,
 				AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */,
 				AE4B2E7D1F1E095600E328F7 /* messageCatigroySubModel.m in Sources */,
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
@@ -5054,6 +5118,7 @@
 				AE91DDD51FBBEFDF00CD06BD /* GuideCell.m in Sources */,
 				AE033FD72018535200D1D425 /* myOfferMenuGroup.m in Sources */,
 				AE1FD7511D5C929500FFD5A8 /* MJRefreshBackStateFooter.m in Sources */,
+				AE4BBD3121115C3200209FC8 /* HomeRoomIndexFlatsObject.m in Sources */,
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
@@ -5078,6 +5143,7 @@
 				AE91DDC71FBBDEF100CD06BD /* GuideOverseaViewController.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
 				AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */,
+				AE4BBD432112B62000209FC8 /* HomeRoomVerticalCell.m in Sources */,
 				AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */,
 				AEA249C21D5B215300DD7939 /* ApplyViewController.m in Sources */,
 				AEA24C061D5B269A00DD7939 /* APIClient+Interface.m in Sources */,
@@ -5200,6 +5266,7 @@
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AEDDAA5F20E4DCDE0069C138 /* IntroCell.m in Sources */,
 				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
+				AE4BBD402111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m in Sources */,
 				AEA545C920D267FA0095CBDA /* HomeSecView.m in Sources */,
 				AE851F1D1EA9F337001993D5 /* UniversitySubjectListViewController.m in Sources */,
 				AE4B2E7B1F1E095600E328F7 /* messageCatigroyCountryModel.m in Sources */,
@@ -5264,6 +5331,7 @@
 				AE1FD7541D5C929500FFD5A8 /* MJRefreshStateHeader.m in Sources */,
 				AEA24C0B1D5B269A00DD7939 /* UINavigationController+NavigationHelper.m in Sources */,
 				AE3AB6B01F21A27300A3C7E3 /* SMNewsOnLineView.m in Sources */,
+				AE4BBD3A21115CCF00209FC8 /* HomeRoomIndexCityObject.m in Sources */,
 				AECC87D11F95F63800FCBBEC /* CatigorySubject.m in Sources */,
 				AE1D01211D2FCD2D005E2DEF /* YYToolKit.m in Sources */,
 				AE6F28761D77CA3C00E9A47A /* UUChartLabel.m in Sources */,
@@ -5281,6 +5349,8 @@
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
 				AE4B2E791F1E095600E328F7 /* MyofferMessageFrame.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
+				AE4BBD2A2111557300209FC8 /* HttpApiClient_API_51ROOM.m in Sources */,
+				AE4BBD3721115CB100209FC8 /* HomeRoomIndexEventsObject.m in Sources */,
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,
 				AE07A0EA210724A500581073 /* HomeRoomApartmentItemCell.m in Sources */,
@@ -5290,6 +5360,7 @@
 				AEBA44C61E88B877005E923B /* MyOfferService.m in Sources */,
 				AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */,
 				AE1FD74E1D5C929500FFD5A8 /* MJRefreshAutoStateFooter.m in Sources */,
+				AE4BBD2E21115A8B00209FC8 /* HomeRoomIndexObject.m in Sources */,
 				AEA24BE71D5B266A00DD7939 /* DoneButton.m in Sources */,
 				AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */,
 				AE4B2E7C1F1E095600E328F7 /* messageCatigroyModel.m in Sources */,
@@ -5300,6 +5371,7 @@
 				AE6F28751D77CA3C00E9A47A /* UUChartConst.m in Sources */,
 				AEA249D31D5B215300DD7939 /* LeftBarButtonItemView.m in Sources */,
 				AE1FD7501D5C929500FFD5A8 /* MJRefreshBackNormalFooter.m in Sources */,
+				AE4BBD2B2111557300209FC8 /* HttpsApiClient_API_51ROOM.m in Sources */,
 				AE3600661E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m in Sources */,
 				AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */,
 				AE4B2E741F1E095600E328F7 /* MessageTopicFooterView.m in Sources */,
@@ -5527,6 +5599,7 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/UMSocialUI",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/umcommonlog/umcommonlog_ios_1.0.0",
+					"$(PROJECT_DIR)/MyOffer/Room51SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
@@ -5586,6 +5659,7 @@
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/share/share_ios_6.9.3/UMSocialUI",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/MyOffer/UMSocial/NewUM/umcommonlog/umcommonlog_ios_1.0.0",
+					"$(PROJECT_DIR)/MyOffer/Room51SDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MyOffer/PrefixHeader.pch;
@@ -5623,7 +5697,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

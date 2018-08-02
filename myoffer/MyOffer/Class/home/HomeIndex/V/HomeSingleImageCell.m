@@ -81,8 +81,13 @@
     
     [self.iconView setImage:XImage(item[@"icon"])];
     self.titleLab.text  = item[@"name"];
-
 }
+
+- (void)setCity:(HomeRoomIndexCityObject *)city{
+    _city = city;
+    self.path = city.img;
+    self.titleLab.text  = city.fullName;
+ }
 
 - (void)layoutSubviews{
     [super layoutSubviews];

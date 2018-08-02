@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "myofferGroupModel.h"
+#import "HomeRoomIndexFrameObject.h"
 
 @interface HomeRoomHorizontalCell : UITableViewCell
 @property(nonatomic,strong)myofferGroupModel *group;
