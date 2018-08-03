@@ -12,6 +12,7 @@
 #import "HomeRoomIndexEventsObject.h"
 #import "HomeRoomIndexFlatsObject.h"
 #import "HomeRoomIndexFrameObject.h"
+#import "HomeSecView.h"
 
 @interface HomeBaseVC : BaseViewController
 @property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;

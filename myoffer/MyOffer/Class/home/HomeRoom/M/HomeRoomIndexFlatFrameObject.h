@@ -15,6 +15,7 @@
 @property(nonatomic,assign)CGFloat item_width;
 @property(nonatomic,assign)CGFloat item_height;
 @property(nonatomic,assign)CGFloat margin;
+@property(nonatomic,assign)CGFloat city_font_size;
 @property(nonatomic,assign)CGFloat tag_font_size;
 @property(nonatomic,assign)CGFloat name_font_size;
 @property(nonatomic,assign)CGFloat price_font_size;
@@ -26,3 +27,4 @@
 @property(nonatomic,assign)CGRect price_frame;
 
 @end
+

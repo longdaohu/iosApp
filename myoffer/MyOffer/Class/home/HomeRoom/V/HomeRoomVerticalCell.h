@@ -11,7 +11,7 @@
 #import "HomeRoomIndexFrameObject.h"
 
 @interface HomeRoomVerticalCell : UITableViewCell
-@property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;
+@property(nonatomic,strong)myofferGroupModel *group;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,copy)void(^actionBlock)(NSInteger index,id item);
 - (void)bottomLineHiden:(BOOL)hiden;

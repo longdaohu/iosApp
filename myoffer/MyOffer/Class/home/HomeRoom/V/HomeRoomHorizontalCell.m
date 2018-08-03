@@ -109,36 +109,31 @@
 - (void)setSectionType:(SectionGroupType)sectionType{
     _sectionType = sectionType;
 
+    NSString *cell = @"HomeSingleImageCell";
     if (sectionType == SectionGroupTypeRoomHotCity) {
- 
-         [self.bgView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell"];
+         cell = @"HomeSingleImageCell";
     }
-
     if (sectionType == SectionGroupTypeRoomCustomerPraise) {
-        
-         [self.bgView registerClass:[HomeRoomPraiseItemCell class] forCellWithReuseIdentifier:@"HomeRoomPraiseItemCell"];
-    }
-
+        cell = @"HomeRoomPraiseItemCell";
+     }
     if (sectionType == SectionGroupTypeRoomApartmentRecommendation) {
-        [self.bgView registerClass:[HomeRoomApartmentItemCell class] forCellWithReuseIdentifier:@"HomeRoomApartmentItemCell"];
-    }
-
-    
+        cell = @"HomeRoomApartmentItemCell";
+     }
     if (sectionType == SectionGroupTypeBannerTheme) {
-        
         CGFloat item_h =  185 * XSCREEN_WIDTH / 375.0;
         CGFloat item_w = item_h * 258.2/185;
         self.flow.itemSize = CGSizeMake(item_w, item_h);
         self.flow.minimumInteritemSpacing = 15.8;
         self.flow.minimumLineSpacing = 15.8;
-        [self.bgView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell"];
+         cell = @"HomeSingleImageCell";
     }
- 
+    [self.bgView registerClass:NSClassFromString(cell) forCellWithReuseIdentifier:cell];
 }
 
 - (void)setItems:(NSArray *)items{
     _items = items;
-    [self.bgView reloadData];
+ 
+     [self.bgView reloadData];
 }
 
 #pragma mark : <UICollectionViewDelegate,UICollectionViewDataSource>
@@ -151,15 +146,13 @@
 {
     
     if (self.sectionType == SectionGroupTypeRoomHotCity) {
- 
         HomeSingleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeSingleImageCell" forIndexPath:indexPath];
         cell.city = self.items[indexPath.row];
-        
+      
         return cell;
     }
  
     if (self.sectionType == SectionGroupTypeRoomCustomerPraise) {
- 
         HomeRoomPraiseItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomPraiseItemCell" forIndexPath:indexPath];
         cell.item =  self.items[indexPath.row];
         
@@ -167,7 +160,6 @@
     }
 
     if (self.sectionType == SectionGroupTypeRoomApartmentRecommendation) {
-        
         HomeRoomApartmentItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomApartmentItemCell" forIndexPath:indexPath];
         cell.flatFrameObject = self.items[indexPath.row];
  
@@ -175,7 +167,6 @@
     }
     
     if (self.sectionType == SectionGroupTypeBannerTheme) {
-        
         HomeSingleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeSingleImageCell" forIndexPath:indexPath];
         HomeBannerObject *item =  self.items[indexPath.row];
         cell.path = item.image;
@@ -202,8 +193,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    self.group.cell_offset_x = scrollView.mj_offsetX;
-    
+    if (scrollView == self.bgView) {
+        self.group.cell_offset_x = scrollView.mj_offsetX;
+    }
 }
 
 - (void)layoutSubviews{
@@ -230,12 +222,10 @@
     CGFloat line_w = content_size.width - line_x * 2;
     self.bottom_line.frame = CGRectMake(line_x, line_y, line_w, line_h);
  
-    
     if (self.group.cell_offset_x == 0) {
         self.group.cell_offset_x = -self.bgView.contentInset.left;
     }
     [self.bgView setContentOffset:CGPointMake(self.group.cell_offset_x, 0) animated:NO];
-
 }
 
 

@@ -16,6 +16,7 @@
     if (self) {
         
         self.tag_font_size = 9;
+        self.city_font_size = 9;
         self.name_font_size = 14;
         self.price_font_size = 16;
         self.margin =  10;
@@ -34,14 +35,14 @@
     CGFloat icon_h = 158;
     self.icon_Frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
     
- 
+
+    CGSize city_size = [item.city stringWithfontSize:self.city_font_size];
     CGFloat city_y = 13;
-    CGFloat city_w = 33;
-    CGFloat city_h = 13;
+    CGFloat city_w =  city_size.width + 6;
+    CGFloat city_h = city_size.height;
     CGFloat city_x =self.item_width - city_w - 13;
     self.city_frame = CGRectMake(city_x, city_y, city_w, city_h);
-    
-    
+ 
     
             CGFloat tag_x = 0;
             CGFloat tag_h = 15;

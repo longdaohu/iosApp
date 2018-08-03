@@ -8,21 +8,10 @@
 
 #define  MENU_HEIGHT  XNAV_HEIGHT + 16
 #import "HomeBaseVC.h"
-#import "HomeApplySubjecttCell.h"
-#import "HomeApplycationArtCell.h"
-#import "HomeApplyUniCell.h"
-#import "HomeApplicationDestinationCell.h"
 #import "HomeSecView.h"
 #import "SearchUniversityCenterViewController.h"
 #import "MessageDetaillViewController.h"
 #import "MeiqiaServiceCall.h"
-//
-//#import "HomeRoomHotCityCell.h"
-//#import "HomeRoomApartmentCell.h"
-//#import "HomeRoomPraiseCell.h"
-#import "HomeRoomHorizontalCell.h"
-#import "HomeRoomVerticalCell.h"
-
 
 @interface HomeBaseVC ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property(nonatomic,strong)UIScrollView *bgView;
@@ -110,6 +99,13 @@
     self.tableView.tableHeaderView = self.headerView;
 }
 
+- (void)setGroups:(NSArray *)groups{
+
+    _groups = groups;
+    for (myofferGroupModel *group in groups) {
+        group.cell_offset_x = 0;
+    }
+}
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 
@@ -126,84 +122,7 @@
 
 static NSString *identify = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    myofferGroupModel *group = self.groups[indexPath.section];
-    WeakSelf
-    
-    if (group.type == SectionGroupTypeArticleColumn) {
-        HomeApplycationArtCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeApplycationArtCell"];
-        if (!cell) {
-            cell = Bundle(@"HomeApplycationArtCell");
-        }
-        cell.item = group.items[indexPath.row];
-        
-        return cell;
-    }
-    
-    if (group.type == SectionGroupTypeApplySubject) {
-        HomeApplySubjecttCell *cell = Bundle(@"HomeApplySubjecttCell");
-        cell.actionBlock = ^(NSString *name) {
-            [weakSelf caseArea:name];
-        };
-        
-        return cell;
-    }
- 
-    if (group.type == SectionGroupTypeApplyUniversity) {
-        HomeApplyUniCell *cell = Bundle(@"HomeApplyUniCell");
-        cell.item = group.items[indexPath.row];
-        
-        return cell;
-    }
-    
-    if (group.type == SectionGroupTypeApplyDestination) {
-        HomeApplicationDestinationCell *cell = Bundle(@"HomeApplicationDestinationCell");
-        cell.items = group.items[indexPath.row];
-        cell.actionBlock = ^(NSDictionary *item) {
-            [weakSelf caseApplyDestination:item];
-        };
-        return cell;
-    }
-    
-    if ((group.type == SectionGroupTypeRoomHotCity) || (group.type == SectionGroupTypeRoomApartmentRecommendation) || (group.type == SectionGroupTypeRoomCustomerPraise)) {
-
-        HomeRoomHorizontalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomHorizontalCell"];
-        if (!cell) {
-            cell = [[HomeRoomHorizontalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomHorizontalCell"];
-        }
-        cell.group = group;
-        cell.actionBlock = ^(NSInteger index, id item) {
-             if ([item isKindOfClass:[HomeRoomIndexCityObject class]]){
-                    HomeRoomIndexCityObject *city = (HomeRoomIndexCityObject *)item;
-                    NSLog(@"%@",city.name);
-            }
-             if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
-                HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
-                NSLog(@"%@",flat.name);
-            }
-
-        };
-
-        return  cell;
-    }
-    
-    if (group.type == SectionGroupTypeRoomHomestay){
-        
-        HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomVerticalCell"];
-        if (!cell) {
-            cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomVerticalCell"];
-        }
-        cell.roomFrameObj = group.items.firstObject;
-        cell.actionBlock = ^(NSInteger index, id item) {
-            if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
-                HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
-                NSLog(@"%@",flat.name);
-            }
-        };
-        
-        return cell;
-    }
- 
+  
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
@@ -213,34 +132,9 @@ static NSString *identify = @"cell";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    myofferGroupModel *group = self.groups[indexPath.section];
-    if (group.type == SectionGroupTypeArticleColumn) {
-        NSDictionary *item = group.items[indexPath.row];
-        [self caseArticleMessage:item[@"id"]];
-    }
-    
-    if (group.type == SectionGroupTypeApplyUniversity) {
-        NSDictionary *item = group.items[indexPath.row];
-        [self.navigationController pushUniversityViewControllerWithID:item[@"id"] animated:YES];
-    }
-}
-
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    WeakSelf
-    HomeSecView *header = [[HomeSecView alloc] init];
-    header.leftMargin = 20;
-    header.group = self.groups[section];
-    header.actionBlock = ^(SectionGroupType type) {
-        [weakSelf caseHeaderView:type];
-    };
-    
-    return header;
+ 
+    return [UIView new];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -271,7 +165,6 @@ static NSString *identify = @"cell";
     
     return  HEIGHT_ZERO;
 }
-
 
 #pragma mark : UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -306,56 +199,6 @@ static NSString *identify = @"cell";
 }
 
 #pragma mark : 事件处理
-
-- (void)caseArea:(NSString *)name{
-
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_AREA value:name];
-    PushToViewController(vc);
-}
-
-
-//跳转目的地
-- (void)caseApplyDestination:(NSDictionary *)item{
-    
-    NSString *path = item[@"path"];
-    if (path.length > 0) {
-        WebViewController  *vc =  [[WebViewController alloc] initWithPath:path];
-        PushToViewController(vc);
-        
-        return;
-    }
-    SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:KEY_CITY value:item[@"city"] country:item[@"country"]];
-    PushToViewController(vc);
-}
-
-- (void)caseArticleMessage:(NSString *)articel_id{
-    
-    MessageDetaillViewController *vc = [[MessageDetaillViewController alloc] initWithMessageId:articel_id];
-    PushToViewController(vc);
-}
-
-
-- (void)caseHeaderView:(SectionGroupType)type{
-    
-    switch (type) {
-        case SectionGroupTypeArticleColumn:
-            [self caseMessage];
-            break;
-        case SectionGroupTypeApplyUniversity:
-        {
-            NSString *key = KEY_COUNTRY;
-            SearchUniversityCenterViewController *vc = [[SearchUniversityCenterViewController alloc] initWithKey:key value:@"英国"];
-            PushToViewController(vc);
-        }
-            break;
-        default:
-            break;
-    }
-}
-//跳转资讯宝典
-- (void)caseMessage{
-    [self.tabBarController setSelectedIndex:2];
-}
 
 - (void)meiqiaClick{
     

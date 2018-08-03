@@ -54,12 +54,14 @@
     return self;
 }
 
-- (void)setRoomFrameObj:(HomeRoomIndexFrameObject *)roomFrameObj{
-    _roomFrameObj = roomFrameObj;
+- (void)setGroup:(myofferGroupModel *)group{
     
+    _group = group;
+ 
+    HomeRoomIndexFrameObject *roomFrameObj = group.items.firstObject;
     self.flow.minimumLineSpacing = roomFrameObj.minimumLineSpacing;
-    self.flow.minimumInteritemSpacing = 10;
-    self.items  = roomFrameObj.item.flats;
+    self.flow.minimumInteritemSpacing = roomFrameObj.minimumInteritemSpacing;
+    self.items = roomFrameObj.flatsFrames;
 }
 
 - (void)bottomLineHiden:(BOOL)hiden{
@@ -75,23 +77,22 @@
 #pragma mark : <UICollectionViewDelegate,UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.roomFrameObj.flatsFrames.count;
+    return self.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
  
-        HomeRoomApartmentItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomApartmentItemCell" forIndexPath:indexPath];
-        cell.isHomestay = YES;
-        HomeRoomIndexFlatFrameObject *flatFrameObject = self.roomFrameObj.flatsFrames[indexPath.row];
-        cell.flatFrameObject = flatFrameObject;
+    HomeRoomApartmentItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomApartmentItemCell" forIndexPath:indexPath];
+    cell.isHomestay = YES;
+    cell.flatFrameObject = self.items[indexPath.row];
     
-        return cell;
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
  
-    HomeRoomIndexFlatFrameObject *flatFrameObject = self.roomFrameObj.flatsFrames[indexPath.row];
+    HomeRoomIndexFlatFrameObject *flatFrameObject = self.items[indexPath.row];
     if (self.actionBlock) {
         self.actionBlock(indexPath.row,flatFrameObject.item);
     }
@@ -100,8 +101,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
  
-    HomeRoomIndexFlatFrameObject *FlatFrameObject = self.roomFrameObj.flatsFrames[indexPath.row];
- 
+    HomeRoomIndexFlatFrameObject *FlatFrameObject = self.items[indexPath.row];
     return  CGSizeMake( FlatFrameObject.item_width , FlatFrameObject.item_height);
 }
 

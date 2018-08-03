@@ -17,6 +17,9 @@
 @property(nonatomic,copy)NSAttributedString *priceAttribue;
 @property(nonatomic,strong)NSDictionary *pic;
 @property(nonatomic,copy)NSString *image;
+@property(nonatomic,copy)NSString *city;
+@property(nonatomic,copy)NSString *city_id;
 @property(nonatomic,strong)NSArray *feature;
 
 @end
+
