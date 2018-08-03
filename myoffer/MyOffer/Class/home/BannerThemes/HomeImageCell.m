@@ -39,7 +39,7 @@
         shaper.shadowColor =  XCOLOR_BLACK.CGColor;
         shaper.shadowOffset = CGSizeMake(0, 3);
         shaper.shadowRadius = 5;
-        shaper.shadowOpacity = 0.5;
+        shaper.shadowOpacity = 0.2;
         _shaper = shaper;
         [self.contentView.layer insertSublayer:shaper atIndex:0];
     }

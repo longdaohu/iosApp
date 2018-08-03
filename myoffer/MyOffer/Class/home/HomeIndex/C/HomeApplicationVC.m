@@ -179,7 +179,7 @@ static NSString *identify = @"cell";
     
     if (group.type == SectionGroupTypeApplyDestination) {
         HomeApplicationDestinationCell *cell = Bundle(@"HomeApplicationDestinationCell");
-        cell.items = group.items[indexPath.row];
+        cell.group = group;
         cell.actionBlock = ^(NSDictionary *item) {
             [weakSelf caseApplyDestination:item];
         };

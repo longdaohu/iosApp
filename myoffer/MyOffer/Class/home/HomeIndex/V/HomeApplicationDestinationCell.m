@@ -22,6 +22,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
  
+    CGFloat item_h = 164;
+    CGFloat item_w = 115;
+    self.layout.itemSize = CGSizeMake(item_w, item_h);
+    
     [self.cView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"HomeSingleImageCell"];
     self.cView.dataSource = self;
     self.cView.delegate = self;
@@ -55,21 +59,44 @@
 }
 
 - (void)tap{
+    
     if (self.actionBlock) {
         self.actionBlock(@{@"path":@"https://www.myoffer.cn/ad/landing/8.htm"});
     }
 }
 
-- (void)layoutSubviews{
+
+- (void)setGroup:(myofferGroupModel *)group{
     
-    [super layoutSubviews];
+    _group = group;
+    
+    self.items = group.items.firstObject;
  
-    if (self.layout.itemSize.height < self.cView.mj_h) {
- 
-        CGFloat item_h = self.cView.mj_h;
-        CGFloat item_w = item_h * 115.0/164;
-        self.layout.itemSize = CGSizeMake(item_w, item_h);
+//    if (self.group.cell_offset_x == 0) {
+//         self.group.cell_offset_x = -self.cView.contentInset.left;
+//    }
+//    [self.cView setContentOffset:CGPointMake(self.group.cell_offset_x, 0) animated:NO];
+    
+}
+/*
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+
+    if (scrollView == self.cView) {
+        self.group.cell_offset_x = scrollView.mj_offsetX;
+     }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //防止 非用户用原因 DidDidEndDeceleratingWithScrollView没被调用
+    if (!decelerate) {
+        [self scrollViewDidEndDecelerating:scrollView];
     }
 }
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    
+    [self scrollViewDidEndDecelerating:scrollView];
+}
+
+*/
 
 @end

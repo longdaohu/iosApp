@@ -67,9 +67,10 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    CGSize bg_size = self.bgView.bounds.size;
+    
+    CGSize bg_size = self.contentView.bounds.size;
     CGFloat margin = 20;
-    CGFloat item_w = (bg_size.width - 2*margin)/3;
+    CGFloat item_w = (bg_size.width - 4*margin)/3;
     CGFloat item_h = item_w;
     CGFloat item_x = 0;
     CGFloat item_y = 0;
@@ -78,8 +79,6 @@
         item_x = (item_w + margin) * (index%3);
         item_y = (item_h + margin) * (index/3);
         item.frame = CGRectMake(item_x, item_y, item_w, item_h);
-        
-        
     }
     
 }

@@ -55,6 +55,8 @@
     self.tabBar.tintColor = XCOLOR(51, 51, 51, 1);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushWithNoti:) name:@"push" object:nil];
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+    self.tabBar.backgroundImage = [[UIImage alloc]init];
+    self.tabBar.shadowImage = [[UIImage alloc]init];
 }
 
 -(void)tabbaritem:(NSInteger)index nomalImage:(NSString *)nomalName  selectImage:(NSString *)selectName

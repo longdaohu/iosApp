@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeApplicationDestinationCell : UITableViewCell
+@property(nonatomic,strong)myofferGroupModel *group;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,copy)void(^actionBlock)(NSDictionary *);
 @end
