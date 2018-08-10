@@ -17,18 +17,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="LaunchScreen_logo_f.png" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-vy-t1E">
-                    <rect key="frame" x="87.5" y="126.5" width="200" height="81"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="hHg-vy-t1E" secondAttribute="height" multiplier="248:101" id="j1L-vH-wYg"/>
-                        <constraint firstAttribute="width" constant="200" id="kOu-K2-f4p"/>
-                    </constraints>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen_logo_e.png" translatesAutoresizingMaskIntoConstraints="NO" id="Udj-8q-jZw">
                     <rect key="frame" x="127.5" y="586" width="120" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Udj-8q-jZw" secondAttribute="height" multiplier="120:43" id="Ocv-6u-vBp"/>
                         <constraint firstAttribute="width" constant="120" id="psK-Jz-QwX"/>
+                    </constraints>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="LaunchScreen_logo_f.png" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-vy-t1E">
+                    <rect key="frame" x="87" y="126" width="200" height="81"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="hHg-vy-t1E" secondAttribute="height" multiplier="248:101" id="j1L-vH-wYg"/>
+                        <constraint firstAttribute="width" constant="200" id="kOu-K2-f4p"/>
                     </constraints>
                 </imageView>
             </subviews>

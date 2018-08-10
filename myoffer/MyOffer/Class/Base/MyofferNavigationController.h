@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyOfferWhiteNV.h"
 
-@interface MyofferNavigationController : UINavigationController
+@interface MyofferNavigationController : MyOfferWhiteNV
 
 @end

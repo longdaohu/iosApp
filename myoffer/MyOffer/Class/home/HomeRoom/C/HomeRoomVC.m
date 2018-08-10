@@ -7,6 +7,7 @@
 //
 
 #import "HomeRoomVC.h"
+#import "RoomCityVC.h"
 #import "HomeRoomTopView.h"
 #import "HomeRoomSearchVC.h"
 #import "HomeRoomIndexObject.h"
@@ -15,6 +16,7 @@
 #import "HomeRoomIndexFrameObject.h"
 #import "HomeRoomHorizontalCell.h"
 #import "HomeRoomVerticalCell.h"
+#import "MyOfferWhiteNV.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
@@ -250,6 +252,9 @@ static NSString *identify = @"cell";
             break;
         case HomeRoomTopViewButtonTypeMap:{
             
+            RoomCityVC *vc = [[RoomCityVC alloc] init];
+            PushToViewController(vc);
+            
         }
             break;
         default:
@@ -260,7 +265,7 @@ static NSString *identify = @"cell";
 - (void)caseRoomSearch{
     
     HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
-    MyofferNavigationController *nav = [[MyofferNavigationController alloc] initWithRootViewController:vc];
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
 }
  

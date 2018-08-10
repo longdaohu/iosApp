@@ -52,7 +52,7 @@
     UIView *tagsView = [UIView new];
     self.tagsView = tagsView;
     [self addSubview:tagsView];
-//    tagsView.backgroundColor = XCOLOR_RED;
+    
     //3 活动介绍
     UILabel *intro_Lab = [UILabel new];
     self.intro_Lab = intro_Lab;
@@ -123,8 +123,7 @@
     _header_frame = header_frame;
     
     SMDetailMedol *detail = header_frame.detailModel;
-
-    
+    [self.tagsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for (NSInteger index = 0 ; index < header_frame.tag_frames.count; index++) {
         
         NSValue *tagValue =header_frame.tag_frames[index];
@@ -141,8 +140,7 @@
         tagBtn.layer.masksToBounds =YES;
         
     }
-    
-    
+ 
     self.titleLab.frame = header_frame.title_Frame;
     self.tagsView.frame = header_frame.tagView_Frame;
     self.intro_Lab.frame = header_frame.intro_Frame;

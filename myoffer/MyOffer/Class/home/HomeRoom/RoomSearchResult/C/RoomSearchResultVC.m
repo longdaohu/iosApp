@@ -11,6 +11,8 @@
 #import "RoomSearchFilterView.h"
 #import "RoomSearchFilterVC.h"
 #import "RoomItemBookVC.h"
+#import "RoomAppointmentResultVC.h"
+#import "RoomAppointmentVC.h"
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -46,7 +48,7 @@
 
 - (void)makeNavigationView{
  
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"客服" style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
     
     UITextField *searchTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 26)];
     searchTF.font = XFONT(10);
@@ -117,6 +119,10 @@
 #pragma mark : 事件处理
 - (void)caseMeiqia{
     
+    
+//    RoomAppointmentResultVC  *vc = [[RoomAppointmentResultVC alloc] init];
+    RoomAppointmentVC  *vc = [[RoomAppointmentVC alloc] init];
+    PushToViewController(vc);
 }
 - (void)caseFilter{
     

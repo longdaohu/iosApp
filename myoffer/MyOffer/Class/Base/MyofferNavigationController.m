@@ -15,14 +15,6 @@
 
 @implementation MyofferNavigationController
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
  
@@ -30,7 +22,6 @@
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_WHITE,NSFontAttributeName :[UIFont boldSystemFontOfSize:17] };
     self.interactivePopGestureRecognizer.delegate =  self;
     [self.navigationBar setBackgroundImage:self.navigationBgImage forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.shadowImage = [[UIImage alloc] init];
  
 }
 
@@ -45,8 +36,6 @@
     }
     return _navigationBgImage;
 }
-
-
 
 //得到部分区域图片
 -(UIImage *)makeNewImageWithRect:(CGRect)clipRect andImage:(UIImage *)image
@@ -65,46 +54,6 @@
     return newImage;
     
 }
-
-
-/**   ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
- *  能拦截所有push进来的子控制器
- */
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    
-    if (self.viewControllers.count > 0) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
-        
-        viewController.hidesBottomBarWhenPushed = YES;
-    }
-    
-    [super pushViewController:viewController animated:animated];
-    
-     if (self.viewControllers.count > 1) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
-
-//         [[NewRecommedView defaultView] hidenAnimate:NO];
-
-        // 设置导航栏按钮
-        viewController.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-        viewController.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-    }
-    
-}
-
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if (self.viewControllers.count <= 1 ) {
-        return NO;
-    }
-    return YES;
-}
-
-
-- (void)back{
-    
-    [self popViewControllerAnimated:YES];
-}
-
 
 
 - (void)didReceiveMemoryWarning {

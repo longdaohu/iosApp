@@ -9,10 +9,10 @@
 
 @interface HttpsApiClient_API_51ROOM : NSObject
 {
-
+    
     CAClient* client;
     bool isHttps;
-
+    
 }
 
 @property (nonatomic) CAClient* client;
@@ -22,6 +22,9 @@
 - (instancetype) init;
 -(void) setAppKeyAndAppSecret:(NSString*)appKey appSecret:(NSString*) appSecret;
 
+- (void) Search_Place:(NSInteger) countryId keywords:(NSString *) keywords completionBlock:(void (^)(CACommonResponse *))completionBlock;
+- (void) property:(NSInteger) property_id completionBlock:(void (^)(CACommonResponse *))completionBlock;
+- (void) article:(NSInteger) article_id completionBlock:(void (^)(CACommonResponse *))completionBlock;
 - (void) homepage:(NSInteger) countryId completionBlock:(void (^)(CACommonResponse *))completionBlock;
 - (void) cities:(NSInteger) countryId completionBlock:(void (^)(CACommonResponse *))completionBlock;
 @end

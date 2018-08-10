@@ -53,39 +53,19 @@
     CGFloat  tag_h = tags_h;
     CGFloat  tag_y = 0;
     CGFloat  tag_x = 0;
-    CGFloat  tag_tmp = 0;
     for (NSInteger index = 0; index < detailModel.tags.count; index++) {
     
         NSString *tagStr = detailModel.tags[index];
         CGSize   tagSize = [tagStr KD_sizeWithAttributeFont:[UIFont systemFontOfSize:12]];
-        CGFloat  tag_w = tagSize.width + 10;
-        tag_x += tag_tmp;
-        
-        if (tag_x + tag_w > tags_w){
-            
-            tag_x = 0;
-            //tag_tmp = 0; //Value stored to 'tag_tmp' is never read
-            tag_y = tags_h + Margin;
-         }
-        
+        CGFloat  tag_w = (tagSize.width + 10);
         CGRect tag_Frame = CGRectMake(tag_x,tag_y, tag_w, tag_h);
-        
         [tags_temp addObject:[NSValue valueWithCGRect:tag_Frame]];
+        tag_x += (tag_w + Margin);
         
-        tag_tmp = tag_w + Margin;
-
     }
     
     self.tag_frames = [tags_temp copy];
-    
-    if (tag_y > tags_h) {
-    
-        self.tagView_Frame = CGRectMake(tags_x, tags_y, tags_w, tags_h + tag_y);
-    }
-    
-
-    
-    
+ 
     //4 活动介绍
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.minimumLineHeight = 18;

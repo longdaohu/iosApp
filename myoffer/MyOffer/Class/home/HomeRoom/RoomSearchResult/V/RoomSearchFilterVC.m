@@ -139,7 +139,6 @@
         make.top.mas_equalTo(time_TF_Low.mas_bottom).mas_offset(50);
     }];
     bottomView.layer.cornerRadius = 8;
-    bottomView.layer.masksToBounds = YES;
     self.bottomView = bottomView;
     
     UIButton *restBtn = [UIButton new];
@@ -156,11 +155,12 @@
     }];
     
     UIButton *comitBtn = [UIButton new];
-    comitBtn.backgroundColor = XCOLOR_LIGHTBLUE;
     comitBtn.titleLabel.font = XFONT(14);
     [comitBtn addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
     [comitBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
     [comitBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [comitBtn setBackgroundImage:XImage(@"button_blue_right_nomal") forState:UIControlStateNormal];
+    [comitBtn setBackgroundImage:XImage(@"button_blue_right_highlight") forState:UIControlStateHighlighted];
     [bottomView addSubview:comitBtn];
     [comitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(restBtn.mas_right);
@@ -202,9 +202,9 @@
         
         CAShapeLayer *shaper = [CAShapeLayer layer];
         shaper.shadowColor =  XCOLOR_BLACK.CGColor;
-        shaper.shadowOffset = CGSizeMake(0, 3);
+        shaper.shadowOffset = CGSizeMake(0, 0);
         shaper.shadowRadius = 5;
-        shaper.shadowOpacity = 0.5;
+        shaper.shadowOpacity = 0.3;
         _shaper = shaper;
         [self.bgView.layer insertSublayer:shaper atIndex:0];
     }
@@ -217,7 +217,7 @@
     
     self.view.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.view.backgroundColor = XCOLOR(0, 0, 0, BACKGROUNDCOLOR_ALPHA);
+        self.view.backgroundColor = XCOLOR_COVER;
         self.bgView.transform = CGAffineTransformMakeTranslation(0, -self.bgView.mj_h);
     }];
 }
@@ -341,7 +341,6 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField;           // became first responder
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField;          // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
 - (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason NS_AVAILABLE_IOS(10_0); // if implemented, called in place of textFieldDidEndEditing:
-
 - (BOOL)textFieldShouldClear:(UITextField *)textField;               // called when clear button pressed. return NO to ignore (no notifications)
 */
 

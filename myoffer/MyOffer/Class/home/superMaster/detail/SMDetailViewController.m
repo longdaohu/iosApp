@@ -469,7 +469,7 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SMHomeSectionModel *group = self.groups[indexPath.section];
     
@@ -502,7 +502,7 @@
 }
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  Section_header_Height_nomal;
 }
@@ -537,10 +537,11 @@
                 
             }
             
-            
             self.message_id =  hot_frame.hot.message_id;
             
             [self makeData];
+            
+            [self.tableView setContentOffset:CGPointZero animated:YES];
       
         }
             break;

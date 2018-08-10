@@ -11,11 +11,13 @@
 #import "FilterContentFrame.h"
 #import "FilterTableViewCell.h"
 #import "RoomSearchResultVC.h"
+#import "HomeRoomSearchCountryView.h"
 
-@interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,FilterTableViewCellDelegate>
+@interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,FilterTableViewCellDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)UITableView *search_tb;
+@property(nonatomic,strong)UITextField *search_TF;
+@property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
 
 @end
 
@@ -49,6 +51,17 @@
     return _groups;
 }
 
+- (HomeRoomSearchCountryView *)countryView{
+    
+    if (!_countryView) {
+        
+        _countryView = [[HomeRoomSearchCountryView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:_countryView];
+    }
+    
+    return _countryView;
+}
+
 - (void)makeUI{
  
     [self makeNavigationView];
@@ -64,12 +77,12 @@
     [left_view addSubview:one];
     [one addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView *two = [[UIImageView alloc] initWithFrame:CGRectMake(35, 0, 15, 30)];
+    UIButton *two = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 15, 30)];
     two.contentMode = UIViewContentModeScaleAspectFit;
-    [two setImage:XImage(@"Triangle_Black_Down")];
+    [two setImage:XImage(@"Triangle_Black_Down") forState:UIControlStateNormal];
+    [two addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
     [left_view addSubview:two];
-    
-    
+ 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(pageDismiss)];
     
     UITextField *searchTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 26)];
@@ -80,6 +93,9 @@
     searchTF.placeholder = @"输入关键字搜索城市，大学，公寓";
     self.navigationItem.titleView = searchTF;
     searchTF.clearButtonMode =  UITextFieldViewModeWhileEditing;
+    searchTF.returnKeyType =UIReturnKeySearch;
+    searchTF.delegate = self;
+    self.search_TF = searchTF;
     
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 13)];
     leftView.contentMode = UIViewContentModeScaleAspectFit;
@@ -155,6 +171,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
  
     FilterTableViewCell *cell =[FilterTableViewCell cellInitWithTableView:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.upButton.hidden = YES;
     cell.delegate   = self;
     cell.indexPath   = indexPath;
@@ -180,12 +197,23 @@
 #pragma mark: FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",sender.currentTitle);
-    
+ 
     RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
     PushToViewController(vc);
 }
 
+#pragma mark :  UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@" searhc button");
+    return YES;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    if (!self.countryView.coverIsHiden) {
+        [self.countryView hide];
+    }
+    return YES;
+}
 
 #pragma mark : 事件处理
 -  (void)pageDismiss{
@@ -194,6 +222,14 @@
 }
 
 - (void)countryOnClick{
+    
+    [self.search_TF resignFirstResponder];
+    
+    if (self.countryView.coverIsHiden) {
+        [self.countryView show];
+    }else{
+        [self.countryView hide];
+    }
     
     
 }

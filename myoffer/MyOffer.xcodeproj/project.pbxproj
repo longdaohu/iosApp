@@ -299,6 +299,10 @@
 		AE6178E520738BB6006B311A /* OrderEnjoyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6178E320738BB6006B311A /* OrderEnjoyVC.m */; };
 		AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
+		AE667AE52117F47D00748323 /* HomeRoomSearchCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */; };
+		AE667B5721199FB700748323 /* RoomAppointmentResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */; };
+		AE667B5821199FB700748323 /* RoomAppointmentResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */; };
+		AE667B5B2119AEAB00748323 /* MyOfferWhiteNV.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667B5A2119AEAB00748323 /* MyOfferWhiteNV.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
@@ -421,6 +425,12 @@
 		AE9BA49020B68B62008B65D4 /* MyofferOnColumnFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48F20B68B62008B65D4 /* MyofferOnColumnFilterView.m */; };
 		AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */; };
 		AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */; };
+		AEA03A35211C2327007A791E /* RoomAppointmentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A34211C2327007A791E /* RoomAppointmentVC.m */; };
+		AEA03A3C211C3F7C007A791E /* RoomAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A3A211C3F7C007A791E /* RoomAppointmentCell.m */; };
+		AEA03A3D211C3F7C007A791E /* RoomAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA03A3B211C3F7C007A791E /* RoomAppointmentCell.xib */; };
+		AEA03A40211D699A007A791E /* MyofferTextHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */; };
+		AEA03A47211D7DE2007A791E /* RoomCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A46211D7DE2007A791E /* RoomCityVC.m */; };
+		AEA03A4A211D869B007A791E /* RoomCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A49211D869B007A791E /* RoomCityModel.m */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
 		AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */; };
 		AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2492D1D5B215300DD7939 /* OrderCell.m */; };
@@ -1153,6 +1163,13 @@
 		AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderEnjoyVC.xib; sourceTree = "<group>"; };
 		AE61A9951EAEF44600AC4B43 /* SearchUniversityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUniversityCenterViewController.h; sourceTree = "<group>"; };
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
+		AE667AE32117F47D00748323 /* HomeRoomSearchCountryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomSearchCountryView.h; sourceTree = "<group>"; };
+		AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomSearchCountryView.m; sourceTree = "<group>"; };
+		AE667B5421199FB700748323 /* RoomAppointmentResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentResultVC.h; sourceTree = "<group>"; };
+		AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointmentResultVC.m; sourceTree = "<group>"; };
+		AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAppointmentResultVC.xib; sourceTree = "<group>"; };
+		AE667B592119AEAB00748323 /* MyOfferWhiteNV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOfferWhiteNV.h; sourceTree = "<group>"; };
+		AE667B5A2119AEAB00748323 /* MyOfferWhiteNV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOfferWhiteNV.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
 		AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myofferGroupModel.m; sourceTree = "<group>"; };
 		AE69209E1F259B17008B1AC7 /* SMHotSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMHotSectionFooterView.h; sourceTree = "<group>"; };
@@ -1358,6 +1375,17 @@
 		AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferLoginViewController.m; sourceTree = "<group>"; };
 		AE9CB3CE1ED6BBDF0049E618 /* MyOfferInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferInputView.h; sourceTree = "<group>"; };
 		AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferInputView.m; sourceTree = "<group>"; };
+		AEA03A33211C2327007A791E /* RoomAppointmentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentVC.h; sourceTree = "<group>"; };
+		AEA03A34211C2327007A791E /* RoomAppointmentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointmentVC.m; sourceTree = "<group>"; };
+		AEA03A39211C3F7C007A791E /* RoomAppointmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentCell.h; sourceTree = "<group>"; };
+		AEA03A3A211C3F7C007A791E /* RoomAppointmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointmentCell.m; sourceTree = "<group>"; };
+		AEA03A3B211C3F7C007A791E /* RoomAppointmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAppointmentCell.xib; sourceTree = "<group>"; };
+		AEA03A3E211D699A007A791E /* MyofferTextHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyofferTextHeaderView.h; sourceTree = "<group>"; };
+		AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyofferTextHeaderView.m; sourceTree = "<group>"; };
+		AEA03A45211D7DE2007A791E /* RoomCityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCityVC.h; sourceTree = "<group>"; };
+		AEA03A46211D7DE2007A791E /* RoomCityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityVC.m; sourceTree = "<group>"; };
+		AEA03A48211D869B007A791E /* RoomCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCityModel.h; sourceTree = "<group>"; };
+		AEA03A49211D869B007A791E /* RoomCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityModel.m; sourceTree = "<group>"; };
 		AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiNoResultVeiw.h; sourceTree = "<group>"; };
 		AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiNoResultVeiw.m; sourceTree = "<group>"; };
 		AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
@@ -2006,6 +2034,9 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
+				AEA03A4B211D9E5F007A791E /* New Group */,
+				AEA03A41211D7DA1007A791E /* RoomCity */,
+				AE667B5121199E7800748323 /* RoomAppointment */,
 				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AE4BBCE8210EE5E800209FC8 /* RoomSearchResult */,
 				AE8A76A6210B1C480079D239 /* RoomSearch */,
@@ -2820,6 +2851,35 @@
 			path = V;
 			sourceTree = "<group>";
 		};
+		AE667B5121199E7800748323 /* RoomAppointment */ = {
+			isa = PBXGroup;
+			children = (
+				AE667B5321199EDA00748323 /* RoomAppointmentResult */,
+				AE667B5221199EB600748323 /* RoomAppointmentIndex */,
+			);
+			path = RoomAppointment;
+			sourceTree = "<group>";
+		};
+		AE667B5221199EB600748323 /* RoomAppointmentIndex */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A38211C3F3A007A791E /* C */,
+				AEA03A37211C3F38007A791E /* M */,
+				AEA03A36211C3F36007A791E /* V */,
+			);
+			path = RoomAppointmentIndex;
+			sourceTree = "<group>";
+		};
+		AE667B5321199EDA00748323 /* RoomAppointmentResult */ = {
+			isa = PBXGroup;
+			children = (
+				AE667B5421199FB700748323 /* RoomAppointmentResultVC.h */,
+				AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */,
+				AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */,
+			);
+			path = RoomAppointmentResult;
+			sourceTree = "<group>";
+		};
 		AE6F28651D77CA3C00E9A47A /* UUChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -3053,6 +3113,8 @@
 		AE8A76A8210B1C5B0079D239 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE667AE32117F47D00748323 /* HomeRoomSearchCountryView.h */,
+				AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -3320,6 +3382,77 @@
 				AE7222CA1ED586160000E739 /* ServiceOverseaDestinationView.m */,
 			);
 			path = V;
+			sourceTree = "<group>";
+		};
+		AEA03A36211C3F36007A791E /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A39211C3F7C007A791E /* RoomAppointmentCell.h */,
+				AEA03A3A211C3F7C007A791E /* RoomAppointmentCell.m */,
+				AEA03A3B211C3F7C007A791E /* RoomAppointmentCell.xib */,
+				AEA03A3E211D699A007A791E /* MyofferTextHeaderView.h */,
+				AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		AEA03A37211C3F38007A791E /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AEA03A38211C3F3A007A791E /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A33211C2327007A791E /* RoomAppointmentVC.h */,
+				AEA03A34211C2327007A791E /* RoomAppointmentVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		AEA03A41211D7DA1007A791E /* RoomCity */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A44211D7DB6007A791E /* C */,
+				AEA03A43211D7DB4007A791E /* M */,
+				AEA03A42211D7DB1007A791E /* V */,
+			);
+			path = RoomCity;
+			sourceTree = "<group>";
+		};
+		AEA03A42211D7DB1007A791E /* V */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = V;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		AEA03A43211D7DB4007A791E /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A48211D869B007A791E /* RoomCityModel.h */,
+				AEA03A49211D869B007A791E /* RoomCityModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AEA03A44211D7DB6007A791E /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AEA03A45211D7DE2007A791E /* RoomCityVC.h */,
+				AEA03A46211D7DE2007A791E /* RoomCityVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		AEA03A4B211D9E5F007A791E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		AEA2491E1D5B1FBC00DD7939 /* Class */ = {
@@ -4094,6 +4227,8 @@
 				AEA24C011D5B269A00DD7939 /* UserDefaults.m */,
 				AEA24C021D5B269A00DD7939 /* MyofferNavigationController.h */,
 				AEA24C031D5B269A00DD7939 /* MyofferNavigationController.m */,
+				AE667B592119AEAB00748323 /* MyOfferWhiteNV.h */,
+				AE667B5A2119AEAB00748323 /* MyOfferWhiteNV.m */,
 				AEA24C041D5B269A00DD7939 /* MyofferTabBarController.h */,
 				AEA24C051D5B269A00DD7939 /* MyofferTabBarController.m */,
 				AE5A75D91DEEDA5300F02ABB /* TopNavView.h */,
@@ -4734,7 +4869,7 @@
 		463E3A411B230EDC00E0BAF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = UVIC;
 				TargetAttributes = {
 					463E3A481B230EDC00E0BAF8 = {
@@ -4752,7 +4887,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -4891,6 +5026,7 @@
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
+				AE667B5821199FB700748323 /* RoomAppointmentResultVC.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
@@ -4912,6 +5048,7 @@
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE9BA45220B402E3008B65D4 /* ExtractionBVC.xib in Resources */,
 				AEF657D721006E9E00C0D849 /* city_mcst.jpg in Resources */,
+				AEA03A3D211C3F7C007A791E /* RoomAppointmentCell.xib in Resources */,
 				AE76ACFC20D914B800C42FA2 /* area_4.jpg in Resources */,
 				AEDDAA7320E4FEC00069C138 /* intro_02.jpg in Resources */,
 				AEF262601F9608F9005D0768 /* nzl_more.jpg in Resources */,
@@ -5038,6 +5175,7 @@
 				AEA24BEB1D5B266A00DD7939 /* NSString+MD5.m in Sources */,
 				AE721E361EB308D500A0BA79 /* MyOfferRank.m in Sources */,
 				AECC87E21F95F63800FCBBEC /* CatigaryHotCityCell.m in Sources */,
+				AEA03A47211D7DE2007A791E /* RoomCityVC.m in Sources */,
 				463E3AAF1B23105F00E0BAF8 /* KDLogger.m in Sources */,
 				AEA24B001D5B24D200DD7939 /* BindPhoneViewController.m in Sources */,
 				AEC4284B20E08D57007B3949 /* HomeUVICserviceAdvantageCell.m in Sources */,
@@ -5053,6 +5191,7 @@
 				AE9BA45B20B40DEF008B65D4 /* ExtractionSuccessedVC.m in Sources */,
 				AE1A805320DA2CEF00CE9E50 /* HomeFeeVC.m in Sources */,
 				AE4B2E6B1F1E095600E328F7 /* ShareButton.m in Sources */,
+				AEA03A35211C2327007A791E /* RoomAppointmentVC.m in Sources */,
 				AEF3A48C1F31B797002CB2EA /* myofferTextView.m in Sources */,
 				AE9BA44020B3F116008B65D4 /* RewardListCell.m in Sources */,
 				AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */,
@@ -5110,6 +5249,7 @@
 				AE9BA46F20B5154E008B65D4 /* InvitationRecordDetailVC.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AE07A0DF2106CDE300581073 /* HomeRoomTopView.m in Sources */,
+				AE667B5721199FB700748323 /* RoomAppointmentResultVC.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
@@ -5120,6 +5260,7 @@
 				AE1FD7511D5C929500FFD5A8 /* MJRefreshBackStateFooter.m in Sources */,
 				AE4BBD3121115C3200209FC8 /* HomeRoomIndexFlatsObject.m in Sources */,
 				AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */,
+				AEA03A4A211D869B007A791E /* RoomCityModel.m in Sources */,
 				AE851F231EAA3030001993D5 /* UniversityCourseFooterView.m in Sources */,
 				AE1FD7291D5C929500FFD5A8 /* MJRefreshFooter.m in Sources */,
 				AE4BBCF6210EF88E00209FC8 /* HomeBannerObject.m in Sources */,
@@ -5217,6 +5358,7 @@
 				AE4B2E751F1E095600E328F7 /* MessageTopicHeaderViewController.m in Sources */,
 				AE2F23081EADA6040089084C /* UniversityCourseFilterViewController.m in Sources */,
 				AECC87CA1F95F63800FCBBEC /* RankFilterViewController.m in Sources */,
+				AE667B5B2119AEAB00748323 /* MyOfferWhiteNV.m in Sources */,
 				AE2DE4481E962B51009683B0 /* ServiceItemHeaderCell.m in Sources */,
 				AEA24B781D5B25E000DD7939 /* SearchViewController.m in Sources */,
 				AE3AB6C91F21AC0300A3C7E3 /* SMAudioModel.m in Sources */,
@@ -5294,6 +5436,7 @@
 				AEA24A311D5B231300DD7939 /* ResultTableViewCell.m in Sources */,
 				AE072CD42068F161001641AC /* MessageDetailHeaderView.m in Sources */,
 				AEA24A381D5B231300DD7939 /* GradeItem.m in Sources */,
+				AE667AE52117F47D00748323 /* HomeRoomSearchCountryView.m in Sources */,
 				AE3AB6A81F21A27300A3C7E3 /* SMBannerModel.m in Sources */,
 				463E3AA91B23105F00E0BAF8 /* KDColorHelper.m in Sources */,
 				AE1FD72A1D5C929500FFD5A8 /* MJRefreshHeader.m in Sources */,
@@ -5323,6 +5466,7 @@
 				AE4B2E811F1E095600E328F7 /* myofferAnchorButton.m in Sources */,
 				AEA24A931D5B23F600DD7939 /* HomeThirdTableViewCell.m in Sources */,
 				AEA545E320D276460095CBDA /* HomeSingleImageCell.m in Sources */,
+				AEA03A3C211C3F7C007A791E /* RoomAppointmentCell.m in Sources */,
 				AED10B9520ECBA220083AA85 /* EmallCatigoryViewController.m in Sources */,
 				463E3AB01B23105F00E0BAF8 /* KDLoggerViewController.m in Sources */,
 				AEA24BEE1D5B266A00DD7939 /* XTextField.m in Sources */,
@@ -5382,6 +5526,7 @@
 				AE1A804E20D9EB3E00CE9E50 /* MyOfferButton.m in Sources */,
 				AEA24BE91D5B266A00DD7939 /* Foundation+Log.m in Sources */,
 				AECC87D61F95F63800FCBBEC /* rankFilter.m in Sources */,
+				AEA03A40211D699A007A791E /* MyofferTextHeaderView.m in Sources */,
 				AECC678E20EB791900B1904B /* CreateOrderUserInformationVC.m in Sources */,
 				AE91DDE01FBC169F00CD06BD /* GuideItemCell.m in Sources */,
 				AE4B2E6D1F1E095600E328F7 /* FSBottomTableViewCell.m in Sources */,
@@ -5486,12 +5631,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -5540,12 +5687,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -5697,7 +5846,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

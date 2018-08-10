@@ -11,7 +11,7 @@
 #import "HomeRecommendVC.h"
 #import "HomeApplicationVC.h"
 #import "HomeFeeVC.h"
-//#import "HomeRoomVC.h"
+#import "HomeRoomVC.h"
 #import "MyofferUpdateView.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
@@ -71,8 +71,9 @@
         HomeFeeVC *fee  = [[HomeFeeVC alloc] init];
         fee.type = HomeLandingTypeMoney;
         //海外租房
-        HomeFeeVC *room  = [[HomeFeeVC alloc] init];
-        room.type = HomeLandingTypeRoom;
+//        HomeFeeVC *room  = [[HomeFeeVC alloc] init];
+        HomeRoomVC *room  = [[HomeRoomVC alloc] init];
+//        room.type = HomeLandingTypeRoom;
         //游学职培
         HomeFeeVC *yes  = [[HomeFeeVC alloc] init];
         yes.type = HomeLandingTypeYesGlobal;
@@ -222,8 +223,8 @@
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toSetTabBarhidden];
     }else  if (index == 3) {
-        HomeFeeVC *room = (HomeFeeVC *)vc;
-//        HomeRoomVC *room = (HomeRoomVC *)vc;
+//        HomeFeeVC *room = (HomeFeeVC *)vc;
+        HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toSetTabBarhidden];
     }else{
         HomeFeeVC *other = (HomeFeeVC *)vc;
@@ -245,8 +246,8 @@
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toLoadView];
     } else if (page == 3){
-        HomeFeeVC *room = (HomeFeeVC *)vc;
-        //        HomeRoomVC *room = (HomeRoomVC *)vc;
+//        HomeFeeVC *room = (HomeFeeVC *)vc;
+        HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toLoadView];
     }else{
         HomeFeeVC *other = (HomeFeeVC *)vc;

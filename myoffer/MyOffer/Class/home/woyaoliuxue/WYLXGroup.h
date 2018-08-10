@@ -24,7 +24,13 @@ typedef NS_ENUM(NSInteger,EditType){
     EditTypePasswd,
     EditTypeTime,
     EditTypeYSlower,
-    EditTypeYSavg
+    EditTypeYSavg,
+    EditTypeRoomUserEmail,
+    EditTypeRoomUserWeixin,
+    EditTypeRoomUserQQ,
+    EditTypeRoomUserTime,
+    EditTypeRoomUserName
+
 };
 
 typedef NS_ENUM(NSInteger,CellGroupType){

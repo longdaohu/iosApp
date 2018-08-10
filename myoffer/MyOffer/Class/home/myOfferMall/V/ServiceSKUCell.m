@@ -15,7 +15,7 @@
 @property(nonatomic,strong)UILabel *name;
 @property(nonatomic,strong)UILabel *price;
 @property(nonatomic,strong)UIView *top_line;
-@property(nonatomic,strong)UILabel *line;
+@property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UILabel *display_price;
 @property(nonatomic,strong)UILabel *present_Value;
 @property(nonatomic,strong)UIImageView *present_Key;
@@ -85,9 +85,10 @@
     [self addLable:name fontSize:16 textColor:XCOLOR_TITLE];
 
     // 5 、 分隔线
-    UILabel *line = [[UILabel alloc] init];
+    UIView *line = [[UIView alloc] init];
     self.line = line;
-    [self addLable:line fontSize:18 textColor:XCOLOR_SUBTITLE];
+    [self.contentView addSubview:line];
+//    [self addLable:line fontSize:18 textColor:XCOLOR_SUBTITLE];
     line.backgroundColor = XCOLOR_line;
     
     // 4 、 价格
