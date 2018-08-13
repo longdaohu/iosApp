@@ -8,6 +8,8 @@
 
 #import "HomeRoomVC.h"
 #import "RoomCityVC.h"
+#import "RoomItemDetailVC.h"
+
 #import "HomeRoomTopView.h"
 #import "HomeRoomSearchVC.h"
 #import "HomeRoomIndexObject.h"
@@ -17,6 +19,7 @@
 #import "HomeRoomHorizontalCell.h"
 #import "HomeRoomVerticalCell.h"
 #import "MyOfferWhiteNV.h"
+#import "HomeRoomIndexFlatFrameObject.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
@@ -173,7 +176,7 @@ static NSString *identify = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     myofferGroupModel *group = self.groups[indexPath.section];
-//    WeakSelf
+    WeakSelf
     if ((group.type == SectionGroupTypeRoomHotCity) || (group.type == SectionGroupTypeRoomApartmentRecommendation) || (group.type == SectionGroupTypeRoomCustomerPraise)) {
         HomeRoomHorizontalCell *cell = [[HomeRoomHorizontalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         cell.group = group;
@@ -183,9 +186,10 @@ static NSString *identify = @"cell";
                 HomeRoomIndexCityObject *city = (HomeRoomIndexCityObject *)item;
                 NSLog(@"%@",city.name);
             }
-            if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
-                HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
-                NSLog(@"%@",flat.name);
+ 
+            if ([item isKindOfClass:[HomeRoomIndexFlatFrameObject class]]){
+                HomeRoomIndexFlatFrameObject *flatFrame = (HomeRoomIndexFlatFrameObject *)item;
+                [weakSelf caseRoomWithID:flatFrame.item.no_id];
             }
             
         };
@@ -203,7 +207,7 @@ static NSString *identify = @"cell";
         cell.actionBlock = ^(NSInteger index, id item) {
             if ([item isKindOfClass:[HomeRoomIndexFlatsObject class]]){
                 HomeRoomIndexFlatsObject *flat = (HomeRoomIndexFlatsObject *)item;
-                NSLog(@"%@",flat.name);
+                [weakSelf caseRoomWithID:flat.no_id];
             }
         };
         
@@ -260,8 +264,17 @@ static NSString *identify = @"cell";
         default:
             break;
     }
+}
+
+
+- (void)caseRoomWithID:(NSString *)room_id{
+    
+    RoomItemDetailVC *vc  = [[RoomItemDetailVC alloc] init];
+    vc.room_id = room_id;
+    PushToViewController(vc);
     
 }
+
 - (void)caseRoomSearch{
     
     HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
