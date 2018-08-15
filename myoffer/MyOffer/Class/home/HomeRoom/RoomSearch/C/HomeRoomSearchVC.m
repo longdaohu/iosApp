@@ -12,12 +12,17 @@
 #import "FilterTableViewCell.h"
 #import "RoomSearchResultVC.h"
 #import "HomeRoomSearchCountryView.h"
+#import "HomeRoomSearchResultView.h"
+#import "HttpsApiClient_API_51ROOM.h"
+#import "RoomSearchResultItemModel.h"
 
 @interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,FilterTableViewCellDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UITextField *search_TF;
 @property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
+@property(nonatomic,strong)HomeRoomSearchResultView *resultView;
+@property(nonatomic,strong)UIButton *countyBtn;
 
 @end
 
@@ -36,6 +41,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self makeUI];
     [self makeDara];
@@ -54,12 +60,36 @@
 - (HomeRoomSearchCountryView *)countryView{
     
     if (!_countryView) {
-        
+        WeakSelf
         _countryView = [[HomeRoomSearchCountryView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:_countryView];
+        _countryView.actionBlock = ^(NSDictionary *item) {
+            [weakSelf caseChangeCountry:item];
+        };
+       [self.view addSubview:_countryView];
     }
     
     return _countryView;
+}
+
+- (HomeRoomSearchResultView *)resultView{
+    
+    if (!_resultView) {
+        
+        WeakSelf
+        _resultView  = [HomeRoomSearchResultView viewWithHidenCompletion:^(BOOL finished) {
+            
+             weakSelf.search_TF.text = @"";
+            [weakSelf.search_TF resignFirstResponder];
+            
+        }];
+         _resultView.frame = self.view.bounds;
+        _resultView.actionBlock = ^(NSString *item_id) {
+            [weakSelf caseSearchWithID:item_id];
+        };
+        [self.view addSubview:_resultView];
+    }
+    
+    return _resultView;
 }
 
 - (void)makeUI{
@@ -76,6 +106,7 @@
     [one setImage:XImage(@"home_room_uk") forState:UIControlStateNormal];
     [left_view addSubview:one];
     [one addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.countyBtn = one;
     
     UIButton *two = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 15, 30)];
     two.contentMode = UIViewContentModeScaleAspectFit;
@@ -92,10 +123,11 @@
     searchTF.layer.masksToBounds = YES;
     searchTF.placeholder = @"输入关键字搜索城市，大学，公寓";
     self.navigationItem.titleView = searchTF;
-    searchTF.clearButtonMode =  UITextFieldViewModeWhileEditing;
-    searchTF.returnKeyType =UIReturnKeySearch;
+    searchTF.clearButtonMode =  UITextFieldViewModeAlways;
+    searchTF.returnKeyType = UIReturnKeySearch;
     searchTF.delegate = self;
     self.search_TF = searchTF;
+    [searchTF addTarget:self action:@selector(caseSearchValueChange:) forControlEvents:UIControlEventEditingChanged];
     
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 13)];
     leftView.contentMode = UIViewContentModeScaleAspectFit;
@@ -204,7 +236,14 @@
 
 #pragma mark :  UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    NSLog(@" searhc button");
+   
+    if (textField.text.length < 2) {
+        NSLog(@"提示输入文字太短了");
+    }else{
+        
+        [self caseSearchWithText:textField.text];
+    }
+    
     return YES;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -212,8 +251,12 @@
     if (!self.countryView.coverIsHiden) {
         [self.countryView hide];
     }
+    [self.resultView show];
+    
     return YES;
 }
+
+
 
 #pragma mark : 事件处理
 -  (void)pageDismiss{
@@ -224,13 +267,51 @@
 - (void)countryOnClick{
     
     [self.search_TF resignFirstResponder];
-    
     if (self.countryView.coverIsHiden) {
         [self.countryView show];
     }else{
         [self.countryView hide];
     }
+}
+
+- (void)caseSearchWithID:(NSString *)item_id{
     
+    NSLog(@">>>caseSearchWithID>>>>>%@",item_id);
+}
+
+- (void)caseChangeCountry:(NSDictionary *)item{
+    
+//    NSString *name = item[@"name"];
+    NSString *icon = item[@"icon"];
+//    if ([self.current_country isEqualToString:name]) {
+//        return;
+//    }
+//    self.current_country = name;
+    [self.countyBtn setImage:XImage(icon) forState:UIControlStateNormal];
+    
+}
+- (void)caseSearchValueChange:(UITextField *)sender{
+
+}
+
+- (void)caseSearchWithText:(NSString *)text{
+    
+    WeakSelf
+    [[HttpsApiClient_API_51ROOM instance] Search_Place:0 keywords:[text toUTF8WithString] completionBlock:^(CACommonResponse *response) {
+        NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
+        if (![status isEqualToString:@"200"]) {
+            NSLog(@" 网络请求错误 ");
+            return ;
+        }
+        id result = [response.body KD_JSONObject];
+        [weakSelf updateSearchUIWithResponse:result];
+    }];
+}
+
+- (void)updateSearchUIWithResponse:(id)response{
+
+    NSArray *items = [RoomSearchResultItemModel mj_objectArrayWithKeyValuesArray:response];
+    self.resultView.items = items;
     
 }
 

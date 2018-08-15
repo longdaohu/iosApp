@@ -11,6 +11,7 @@
 #import "HttpApiClient_API_51ROOM.h"
 #import "HttpsApiClient_API_51ROOM.h"
 #import "RoomCityModel.h"
+#import "HomeRoomSearchCountryView.h"
 
 @interface RoomCityVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -19,6 +20,8 @@
 @property(nonatomic,strong)NSArray *groups_au;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)NSArray *index_keys;
+@property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
+@property(nonatomic,strong)UIButton *countyBtn;
 
 @end
 
@@ -41,14 +44,43 @@
     [self makeUI];
 }
 
+- (HomeRoomSearchCountryView *)countryView{
+    
+    if (!_countryView) {
+        
+        WeakSelf
+        _countryView = [[HomeRoomSearchCountryView alloc] initWithFrame:self.view.bounds];
+        _countryView.actionBlock = ^(NSDictionary *item) {
+            [weakSelf caseChangeCountry:item];
+        };
+        [self.view addSubview:_countryView];
+    }
+    
+    return _countryView;
+}
+
+
 - (void)makeUI{
 
     self.title = @"城市";
-    self.current_country = @"澳大利亚";
+    self.current_country = @"英国";
     self.view.backgroundColor = XCOLOR_BG;
     [self makeTableView];
     [self makeData];
     
+    UIView *left_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_view];
+    UIButton *one = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [one setImage:XImage(@"home_room_uk") forState:UIControlStateNormal];
+    [left_view addSubview:one];
+    self.countyBtn = one;
+    [one addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *two = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 15, 30)];
+    two.contentMode = UIViewContentModeScaleAspectFit;
+    [two setImage:XImage(@"Triangle_Black_Down") forState:UIControlStateNormal];
+    [two addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
+    [left_view addSubview:two];
     
 }
 
@@ -129,46 +161,56 @@ static NSString *identify = @"RoomCityModel";
 #pragma mark : 数据处理
 - (void)makeData{
  
+    [self makeAUData];
+    [self makeUKData];
  
-    WeakSelf
-    if ([self.current_country isEqualToString:@"英国"]) {
+}
+
+- (void)makeAUData{
+
+    if (self.groups_au.count > 0) {
         
-        
-        if (self.groups_uk.count > 0) {
-            self.groups = self.groups_uk;
-            return;
-        }
- 
-        [[HttpsApiClient_API_51ROOM instance] cities:0 completionBlock:^(CACommonResponse *response) {
-            
-            NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
-            if (![status isEqualToString:@"200"]) {
-                NSLog(@" 网络请求错误 ");
-                return ;
-            }
-            id result = [response.body KD_JSONObject];
-            [weakSelf updateUIWithResponse:result country:@"英国"];
-        }];
-    }else{
-        
-        if (self.groups_au.count > 0) {
-            self.groups = self.groups_au;
-            return;
-        }
-        
-        [[HttpsApiClient_API_51ROOM instance] cities:4 completionBlock:^(CACommonResponse *response) {
-            
-            NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
-            if (![status isEqualToString:@"200"]) {
-                NSLog(@" 网络请求错误 ");
-                return ;
-            }
-            id result = [response.body KD_JSONObject];
-            
-            [weakSelf updateUIWithResponse:result country:@"澳大利亚"];
-        }];
+        self.groups = self.groups_au;
+        [self makeIndexValue];
+        [self.tableView reloadData];
+        return;
     }
+    
+    WeakSelf
+    [[HttpsApiClient_API_51ROOM instance] cities:4 completionBlock:^(CACommonResponse *response) {
+        
+        NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
+        if (![status isEqualToString:@"200"]) {
+            NSLog(@" 网络请求错误 ");
+            return ;
+        }
+        id result = [response.body KD_JSONObject];
+        [weakSelf updateUIWithResponse:result country:KEY_AU];
+    }];
+}
+
+- (void)makeUKData{
  
+    if (self.groups_uk.count > 0) {
+        self.groups = self.groups_uk;
+        [self makeIndexValue];
+        [self.tableView reloadData];
+        return;
+    }
+    
+    WeakSelf
+    [[HttpsApiClient_API_51ROOM instance] cities:0 completionBlock:^(CACommonResponse *response) {
+        
+        NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
+        if (![status isEqualToString:@"200"]) {
+            NSLog(@" 网络请求错误 ");
+            return ;
+        }
+        id result = [response.body KD_JSONObject];
+        [weakSelf updateUIWithResponse:result country:KEY_UK];
+    }];
+    
+    
 }
 
 - (void)updateUIWithResponse:(id)response country:(NSString *)country{
@@ -189,7 +231,7 @@ static NSString *identify = @"RoomCityModel";
          }
     }
     
-    if ([country isEqualToString:@"uk"]) {
+    if ([country isEqualToString:KEY_UK]) {
         
         self.groups_uk =  [groups_temp mutableCopy];
         self.groups = self.groups_uk;
@@ -199,13 +241,49 @@ static NSString *identify = @"RoomCityModel";
         self.groups_au =  [groups_temp mutableCopy];
         self.groups = self.groups_au;
     }
+ 
     
-     NSArray *index_keys = [self.groups valueForKey:@"header_title"];
-    self.index_keys = index_keys;
     if ([self.current_country  isEqualToString:country]){
+        
+        [self makeIndexValue];
         [self.tableView reloadData];
     }
     
+}
+
+- (void)makeIndexValue{
+    
+    NSArray *index_keys = [self.groups valueForKey:@"header_title"];
+    self.index_keys = index_keys;
+}
+
+
+#pragma mark : 事件处理
+
+- (void)countryOnClick{
+    
+    if (self.countryView.coverIsHiden) {
+        [self.countryView show];
+    }else{
+        [self.countryView hide];
+    }
+}
+
+- (void)caseChangeCountry:(NSDictionary *)item{
+    
+    NSString *name = item[@"name"];
+    NSString *icon = item[@"icon"];
+    if ([self.current_country isEqualToString:name]) {
+        return;
+    }
+    self.current_country = name;
+    [self.countyBtn setImage:XImage(icon) forState:UIControlStateNormal];
+    
+    if ([name isEqualToString:KEY_UK]) {
+        [self makeUKData];
+    }else{
+        [self makeAUData];
+    }
     
 }
 

@@ -52,8 +52,15 @@
 - (IBAction)caseMeiqia:(UIButton *)sender {
 }
 - (IBAction)caseBack:(UIButton *)sender {
+    
+    if (self.actionBlock) {
+        self.actionBlock(YES);
+    }
 }
 - (IBAction)caseKeepLook:(UIButton *)sender {
+    if (self.actionBlock) {
+        self.actionBlock(NO);
+    }
 }
 
 

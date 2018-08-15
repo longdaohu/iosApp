@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RoomAppointmentVC : BaseViewController
+@interface RoomAppointmentVC : UIViewController
+@property(nonatomic,copy)NSString *room_id;
+@property(nonatomic,assign)BOOL isPresent;
+@property(nonatomic,copy)void(^actionBlock)(void);
 
 @end

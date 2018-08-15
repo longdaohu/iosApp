@@ -57,7 +57,7 @@
     searchTF.layer.masksToBounds = YES;
     searchTF.placeholder = @"输入关键字搜索城市，大学，公寓";
     self.navigationItem.titleView = searchTF;
-    searchTF.clearButtonMode =  UITextFieldViewModeWhileEditing;
+    searchTF.clearButtonMode =  UITextFieldViewModeAlways;
     
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 13)];
     leftView.contentMode = UIViewContentModeScaleAspectFit;

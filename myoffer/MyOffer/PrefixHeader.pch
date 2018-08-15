@@ -60,6 +60,8 @@
 #define KEY_PAGE  @"page"
 #define KEY_SIZE  @"size"
 #define KEY_ALL  @"全部"
+#define KEY_UK  @"英国"
+#define KEY_AU  @"澳大利亚"
 #define KEY_EMPTY_STRING  @""
 #define KEY_RECOMMEND @"recommend"
 #define Parameter_Size 10

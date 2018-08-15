@@ -225,13 +225,7 @@ static NSString *identify = @"cell";
         }
         id result = [response.body KD_JSONObject];
         [weakSelf updateUIWithResponse:result];
-
     }];
- 
-//    [[HttpsApiClient_API_51ROOM instance] Search_Place:0 keywords:@"%e4%bc%a6%e6%95%a6" completionBlock:^(CACommonResponse *response) {
-//        NSLog(@"Response aaaaaaabody: %@" , [response description]);
-//    }];
-    
 }
 
 - (void)updateUIWithResponse:(id)response{

@@ -556,6 +556,8 @@
 		AEAFDF2E2122CF6D00067190 /* RoomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF2D2122CF6D00067190 /* RoomNavigationView.m */; };
 		AEAFDF312123C30A00067190 /* RoomTypeBookItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF302123C30A00067190 /* RoomTypeBookItemModel.m */; };
 		AEAFDF342123DCBD00067190 /* RoomItemBookHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF332123DCBD00067190 /* RoomItemBookHeaderView.m */; };
+		AEAFDF372124259400067190 /* HomeRoomSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF362124259400067190 /* HomeRoomSearchResultView.m */; };
+		AEAFDF3A21242FEB00067190 /* RoomSearchResultItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF3921242FEB00067190 /* RoomSearchResultItemModel.m */; };
 		AEB634AB1ED2B996009DFFD4 /* ZhiXunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */; };
 		AEB634AE1ED2D778009DFFD4 /* ZixunFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB634AD1ED2D778009DFFD4 /* ZixunFooterView.m */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
@@ -1634,6 +1636,10 @@
 		AEAFDF302123C30A00067190 /* RoomTypeBookItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomTypeBookItemModel.m; sourceTree = "<group>"; };
 		AEAFDF322123DCBD00067190 /* RoomItemBookHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookHeaderView.h; sourceTree = "<group>"; };
 		AEAFDF332123DCBD00067190 /* RoomItemBookHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemBookHeaderView.m; sourceTree = "<group>"; };
+		AEAFDF352124259400067190 /* HomeRoomSearchResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomSearchResultView.h; sourceTree = "<group>"; };
+		AEAFDF362124259400067190 /* HomeRoomSearchResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomSearchResultView.m; sourceTree = "<group>"; };
+		AEAFDF3821242FEB00067190 /* RoomSearchResultItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomSearchResultItemModel.h; sourceTree = "<group>"; };
+		AEAFDF3921242FEB00067190 /* RoomSearchResultItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomSearchResultItemModel.m; sourceTree = "<group>"; };
 		AEB634A91ED2B996009DFFD4 /* ZhiXunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiXunCell.h; sourceTree = "<group>"; };
 		AEB634AA1ED2B996009DFFD4 /* ZhiXunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiXunCell.m; sourceTree = "<group>"; };
 		AEB634AC1ED2D778009DFFD4 /* ZixunFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZixunFooterView.h; sourceTree = "<group>"; };
@@ -2076,10 +2082,10 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AEA03A4B211D9E5F007A791E /* RoomItemDetail */,
 				AEA03A41211D7DA1007A791E /* RoomCity */,
 				AE667B5121199E7800748323 /* RoomAppointment */,
-				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AE4BBCE8210EE5E800209FC8 /* RoomSearchResult */,
 				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AE07A0D72106C7FA00581073 /* C */,
@@ -3152,6 +3158,8 @@
 		AE8A76A7210B1C570079D239 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				AEAFDF3821242FEB00067190 /* RoomSearchResultItemModel.h */,
+				AEAFDF3921242FEB00067190 /* RoomSearchResultItemModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -3161,6 +3169,8 @@
 			children = (
 				AE667AE32117F47D00748323 /* HomeRoomSearchCountryView.h */,
 				AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */,
+				AEAFDF352124259400067190 /* HomeRoomSearchResultView.h */,
+				AEAFDF362124259400067190 /* HomeRoomSearchResultView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5281,6 +5291,7 @@
 				AE3AB6CF1F21CE0A00A3C7E3 /* SMAudioItemFrame.m in Sources */,
 				AE1FD74C1D5C929500FFD5A8 /* MJRefreshAutoGifFooter.m in Sources */,
 				463E3AAD1B23105F00E0BAF8 /* KDJSONHelper.m in Sources */,
+				AEAFDF3A21242FEB00067190 /* RoomSearchResultItemModel.m in Sources */,
 				AEA24BE61D5B266A00DD7939 /* ActionTableViewController.m in Sources */,
 				AE7107AD1D76C89D00019B1F /* UniversityFooterView.m in Sources */,
 				AE9BA45B20B40DEF008B65D4 /* ExtractionSuccessedVC.m in Sources */,
@@ -5470,6 +5481,7 @@
 				AE3AB6AC1F21A27300A3C7E3 /* SMHotModel.m in Sources */,
 				AEA24B7C1D5B25E000DD7939 /* FiltContent.m in Sources */,
 				AEBA44C21E88B1A3005E923B /* MyOfferServerMallViewController.m in Sources */,
+				AEAFDF372124259400067190 /* HomeRoomSearchResultView.m in Sources */,
 				AE033FDD20185C3B00D1D425 /* myofferMenuCell.m in Sources */,
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */,

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomTypeItemFrameModel.h"
 
 @interface RoomItemBookHeaderView : UIView
+@property(nonatomic,strong)RoomTypeItemFrameModel *itemFrameModel;
 
 @end

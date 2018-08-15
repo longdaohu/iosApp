@@ -7,7 +7,6 @@
 //
 
 #import "HomeRoomSearchCountryView.h"
-#import "Masonry.h"
 
 @interface HomeRoomSearchCountryView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -34,8 +33,8 @@
     if (!_items) {
     
         _items = @[
-                   @{ @"icon": @"uk",@"name": @"英国"},
-                   @{ @"icon": @"au",@"name": @"澳大利亚"}
+                   @{ @"icon": @"home_room_uk",@"name": KEY_UK},
+                   @{ @"icon": @"home_room_au",@"name": KEY_AU}
                    ];
     }
     return _items;
@@ -76,8 +75,7 @@ static NSString *identify = @"cell";
     }
     
     NSDictionary *item = self.items[indexPath.row];
-//    cell.imageView setImage:XImage(item[@"icon"]);
-    [cell.imageView setImage:XImage(@"home_room_uk")];
+    [cell.imageView setImage:XImage(item[@"icon"])];
     cell.textLabel.text = item[@"name"];
  
     return cell;
@@ -86,17 +84,17 @@ static NSString *identify = @"cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSDictionary *item = self.items[indexPath.row];
+    [self hide];
     if (self.actionBlock) {
+        NSDictionary *item = self.items[indexPath.row];
         self.actionBlock(item);
     }
-    [self hide];
     
 }
 
 - (void)show{
     
+    [self.superview bringSubviewToFront:self];
     self.alpha = 1;
     [self coverShow:YES];
 }
@@ -135,14 +133,9 @@ static NSString *identify = @"cell";
     [self hide];
 }
 
-//- (void)layoutSubviews{
-//    [super layoutSubviews];
-//    self.tableView.frame = self.bounds;
-//}
-
 - (void)dealloc{
  
-    NSLog(@"HomeRoomSearchCountryView + dealloc + 选择国家");
+    NSLog(@"选择国家 +  HomeRoomSearchCountryView + dealloc");
 }
 
 

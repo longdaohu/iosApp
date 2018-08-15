@@ -58,8 +58,12 @@
         [self addChildViewController:_resultVC];
         _resultVC.view.alpha = 0;
         _resultVC.view.frame = self.view.bounds;
-        _resultVC.view.transform = CGAffineTransformMakeTranslation(0,XSCREEN_HEIGHT);
-        [self.view insertSubview:_resultVC.view aboveSubview:self.tableView];
+        _resultVC.view.transform = CGAffineTransformMakeTranslation(XSCREEN_WIDTH,0);
+        [self.view insertSubview:_resultVC.view aboveSubview:self.commitBtn];
+        WeakSelf
+        _resultVC.actionBlock = ^(BOOL isBackToHome) {
+            [weakSelf caseSuccesed:isBackToHome];
+        };
     }
     
     return _resultVC;
@@ -91,7 +95,16 @@
         make.size.mas_equalTo(CGSizeMake(com_w, com_h));
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-30);
         make.left.mas_equalTo(com_x);
+        
     }];
+    
+    if (self.isPresent) {
+        
+        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
+        [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    }
 }
 
 
@@ -171,7 +184,10 @@
     self.resultVC.view.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.resultVC.view.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        self.navigationItem.leftBarButtonItem = nil;
     }];
+ 
 }
 
 #pragma mark : 键盘处理
@@ -211,6 +227,33 @@
     
     [self.view layoutSubviews];
     [UIView commitAnimations];
+}
+
+- (void)caseSuccesed:(BOOL)isBackToHome{
+    
+    
+    if (isBackToHome) {
+     
+         if (self.actionBlock) {
+             
+             self.actionBlock();
+             [self casePop];
+         }
+        
+        return;
+    }
+    
+    if (self.isPresent) {
+        [self casePop];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)casePop{
+    
+    [self.navigationController dismissViewControllerAnimated:true completion:^{
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

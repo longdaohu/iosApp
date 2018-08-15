@@ -68,9 +68,9 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDn-FJ-Taf">
-                        <rect key="frame" x="235" y="15" width="70" height="45"/>
+                        <rect key="frame" x="235" y="19.5" width="70" height="36"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="LJz-Ql-G9y"/>
+                            <constraint firstAttribute="height" constant="36" id="LJz-Ql-G9y"/>
                         </constraints>
                         <state key="normal" title="预订" backgroundImage="button_red_nomal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
