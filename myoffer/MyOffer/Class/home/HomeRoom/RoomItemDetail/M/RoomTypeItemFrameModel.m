@@ -17,6 +17,7 @@
         
         self.tag_font_size = 10;
         self.price_font_size = 16;
+        self.unit_font_size = 14;
         self.pin_font_size = 10;
         self.title_font_size = 14;
  
@@ -43,24 +44,26 @@
     CGFloat title_w = XSCREEN_WIDTH - title_x - left_margin;
     CGFloat title_h = [item.name sizeWithfontSize:self.title_font_size maxWidth:title_w].height;
     UIFont *title_font = XFONT(self.title_font_size);
-    NSLog(@"%@   %lf  %lf",item.name,title_h,title_font.lineHeight);
     if (title_h > title_font.lineHeight * 2) {
         title_h = title_font.lineHeight * 2;
     }
     self.title_frame = CGRectMake(title_x, title_y, title_w, title_h);
  
-    //    CGFloat tag_x = title_x;
-    //    CGFloat tag_y = CGRectGetMaxY(self.title_frame) + 5;
-    //    CGFloat tag_w =  [item.ta sizeWithfontSize:self.title_font_size maxWidth:title_w].width;
-    //    CGFloat tag_h = tag_w;
-    //    self.tag_frame = CGRectMake(tag_x, tag_y, tag_w, tag_h);
  
+    NSLog(@"RoomTypeItemFrameModel  =  [%@]",self.item.firstPrice.priceCurrency);
     CGFloat price_x = title_x;
-    CGSize price_size = [self.item.price stringWithfontSize:self.price_font_size];
+    CGSize price_size = [self.item.firstPrice.priceCurrency stringWithfontSize:self.price_font_size];
     CGFloat price_h = price_size.height;
     CGFloat price_w = price_size.width;
     CGFloat price_y = CGRectGetMaxY(self.icon_frame) - price_h;
     self.price_frame = CGRectMake(price_x, price_y, price_w, price_h);
+    
+    CGSize  unit_size = [self.item.firstPrice.priceCurrency stringWithfontSize:self.unit_font_size];
+    CGFloat unit_w = unit_size.width;
+    CGFloat unit_h = unit_size.height;
+    CGFloat unit_x = CGRectGetMaxX(self.price_frame)+5;
+    CGFloat unit_y = CGRectGetMaxY(self.icon_frame) - unit_h;
+    self.unit_frame = CGRectMake(unit_x, unit_y, unit_w,unit_h);
     
     CGFloat pin_w = 55;
     CGFloat pin_h = 18;

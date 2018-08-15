@@ -110,6 +110,10 @@
         }
             break;
     }
+    
+    if (self.group.items.count == 0) {
+        self.mj_h = 0;
+    }
  
 }
 

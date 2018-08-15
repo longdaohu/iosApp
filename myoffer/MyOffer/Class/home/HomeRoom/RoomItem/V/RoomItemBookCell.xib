@@ -67,16 +67,15 @@
                             <constraint firstItem="4r4-Rn-Ga0" firstAttribute="leading" secondItem="itP-3T-ahq" secondAttribute="trailing" id="zhI-oJ-uUc"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDn-FJ-Taf">
-                        <rect key="frame" x="235" y="14.5" width="70" height="45"/>
-                        <color key="backgroundColor" red="0.99607843139999996" green="0.76078431369999999" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDn-FJ-Taf">
+                        <rect key="frame" x="235" y="15" width="70" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="LJz-Ql-G9y"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="预订">
+                        <state key="normal" title="预订" backgroundImage="button_red_nomal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <state key="highlighted" backgroundImage="button_red_highlight"/>
                         <connections>
                             <action selector="book:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lKc-i6-UjG"/>
                         </connections>
@@ -110,7 +109,11 @@
                 <outlet property="subTitleLab" destination="sl9-RW-CYv" id="QPW-Bz-eQf"/>
                 <outlet property="timeLab" destination="4r4-Rn-Ga0" id="9mF-BX-cBm"/>
             </connections>
-            <point key="canvasLocation" x="34" y="88"/>
+            <point key="canvasLocation" x="57" y="88"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="button_red_highlight" width="24" height="23"/>
+        <image name="button_red_nomal" width="18" height="24"/>
+    </resources>
 </document>

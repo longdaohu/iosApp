@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RoomTypeBookItemModel.h"
 
 @interface RoomTypeItemModel : NSObject
 @property(nonatomic,copy)NSString *room_id;
@@ -22,9 +23,8 @@
 @property(nonatomic,strong)NSArray *prices;
 @property(nonatomic,strong)NSArray *pics;
 
-@property(nonatomic,copy)NSString *currency;
-@property(nonatomic,copy)NSString *price;
-@property(nonatomic,copy)NSString *state;
+@property(nonatomic,strong)RoomTypeBookItemModel *firstPrice;
+@property(nonatomic,strong)NSArray *pictures;
 @property(nonatomic,copy)NSString *pic;
 
 

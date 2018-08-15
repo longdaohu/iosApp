@@ -14,11 +14,16 @@
 #import "RoomTextCell.h"
 #import "RootTagsCell.h"
 #import "RoomItemTypeCell.h"
+#import "RoomTextSpodCell.h"
+#import "RoomItemHeaderView.h"
+#import "RoomNavigationView.h"
+#import "RoomItemBookVC.h"
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
+@property(nonatomic,strong)RoomNavigationView *nav;
 
 @end
 
@@ -26,8 +31,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NavigationBarHidden(NO);
+    NavigationBarHidden(YES);
     [MobClick beginLogPageView:@"page51Room房源详情"];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -41,14 +47,23 @@
  
     [self makeUI];
     [self makeData];
-    
 }
 
 - (void)makeUI{
     
     self.view.backgroundColor = XCOLOR_BG;
-    self.title = @"房源详情";
     [self makeTableView];
+    
+    RoomNavigationView *nav = [RoomNavigationView nav];
+    self.nav = nav;
+    [self.view addSubview:nav];
+    nav.title = @"房源详情";
+    WeakSelf
+    nav.acitonBlock = ^(BOOL isBackButton) {
+        if (isBackButton) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+    };
 }
 
 -(void)makeTableView
@@ -61,30 +76,32 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 50;
     self.tableView.sectionFooterHeight = 10;
-//    self.tableView.estimatedSectionHeaderHeight = 0;
-//    self.tableView.estimatedSectionFooterHeight = 0;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
-}
+    self.tableView.backgroundColor = XCOLOR_CLEAR;
+ }
 
 - (NSArray *)groups{
+    
     if (!_groups) {
         
         myofferGroupModel *discount = [myofferGroupModel groupWithItems:nil header:@"优惠活动"];
         discount.type = SectionGroupTypeRoomDetailDiscount;
+        
         myofferGroupModel *type = [myofferGroupModel groupWithItems:nil header:@"房间类型"];
         type.type = SectionGroupTypeRoomDetailRoomType;
+        
         myofferGroupModel *intro = [myofferGroupModel groupWithItems:nil header:@"公寓介绍"];
         intro.type  = SectionGroupTypeRoomDetailTypeIntroduction;
+        
         myofferGroupModel *facilities = [myofferGroupModel groupWithItems:nil header:@"公寓设施"];
         facilities.type = SectionGroupTypeRoomDetailTypeFacility;
+        
         myofferGroupModel *note = [myofferGroupModel groupWithItems:nil header:@"预订须知"];
         note.type = SectionGroupTypeRoomDetailTypeNote;
       
@@ -104,7 +121,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
  
     myofferGroupModel *group = self.groups[section];
-    
+ 
     return group.items.count;
 }
 
@@ -112,9 +129,12 @@ static NSString *identify = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
  
     myofferGroupModel *group = self.groups[indexPath.section];
-    if (group.type == SectionGroupTypeRoomDetailTypeIntroduction) {
-        
-        RoomTextCell *cell =[[RoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    if (group.type == SectionGroupTypeRoomDetailTypeIntroduction || group.type == SectionGroupTypeRoomDetailDiscount) {
+        RoomTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoomTextCell"];
+        if (!cell) {
+            cell =[[RoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RoomTextCell"];
+        }
+        cell.group = group;
         cell.item = group.items[indexPath.row];
         cell.itemFrameModel = self.itemFrameModel;
         
@@ -142,7 +162,14 @@ static NSString *identify = @"cell";
         return cell;
     }
     
-    
+    if (group.type == SectionGroupTypeRoomDetailTypeNote) {
+        
+        RoomTextSpodCell *cell =[[RoomTextSpodCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.item = group.items[indexPath.row];
+        cell.itemFrameModel = self.itemFrameModel;
+        
+        return cell;
+    }
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
@@ -156,15 +183,21 @@ static NSString *identify = @"cell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    myofferGroupModel *group = self.groups[indexPath.section];
+    if(group.type == SectionGroupTypeRoomDetailRoomType){
+     
+        RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
+        vc.itemFrameModel =  group.items[indexPath.row];
+        PushToViewController(vc);
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     HomeSecView *header = [[HomeSecView alloc] init];
     header.leftMargin = 20;
-    header.backgroundColor = XCOLOR_WHITE;
     header.group = self.groups[section];
-    
+ 
     return header;
 }
 
@@ -178,6 +211,8 @@ static NSString *identify = @"cell";
 }
 
 
+
+
 #pragma mark : 数据处理
 - (void)makeData{
  
@@ -188,7 +223,6 @@ static NSString *identify = @"cell";
             NSLog(@" 网络请求错误 ");
             return ;
         }
-
         id result = [response.body KD_JSONObject];
         [weakSelf updateUIWithResponse:result];
 
@@ -207,7 +241,7 @@ static NSString *identify = @"cell";
     RoomItemFrameModel *roomFrameModel = [[RoomItemFrameModel alloc] init];
     roomFrameModel.item = room;
     self.itemFrameModel = roomFrameModel;
-    
+ 
     for (myofferGroupModel *group in self.groups) {
         switch (group.type) {
             case SectionGroupTypeRoomDetailTypeIntroduction:
@@ -216,9 +250,21 @@ static NSString *identify = @"cell";
                 group.cell_height_set = roomFrameModel.intro_cell_hight;
             }
                 break;
+            case SectionGroupTypeRoomDetailDiscount:
+            {
+                group.items = @[room.process];
+                group.cell_height_set = roomFrameModel.process_cell_hight;
+            }
+                break;
+            case SectionGroupTypeRoomDetailTypeNote:
+            {
+                group.items = @[room.promotion];
+                group.cell_height_set = roomFrameModel.promotion_cell_hight;
+            }
+                break;
             case SectionGroupTypeRoomDetailTypeFacility:
             {
-                group.items = @[room.amenities];
+                group.items = @[room.ameniti_arr];
                 group.cell_height_set = roomFrameModel.faciliti_cell_hight;
             }
                 break;
@@ -232,16 +278,19 @@ static NSString *identify = @"cell";
                 break;
         }
     }
-    
-    
     [self.tableView reloadData];
     
-//    discount.type = SectionGroupTypeRoomDetailDiscount;
-//    gift.type = SectionGroupTypeRoomDetailGift;
-//    type.type = SectionGroupTypeRoomDetailRoomType;
-//    facilities.type = SectionGroupTypeRoomDetailTypeFacility;
-//    note.type = SectionGroupTypeRoomDetailTypeNote;
+    RoomItemHeaderView *header = [[RoomItemHeaderView  alloc] initWithFrame:roomFrameModel.header_frame];
+    header.itemFrameModel = roomFrameModel;
+    self.tableView.tableHeaderView = header;
+    
+    self.nav.alpha_height =  roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT;
  
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [self.nav scrollViewDidScroll:scrollView];
 }
 
 - (void)didReceiveMemoryWarning {

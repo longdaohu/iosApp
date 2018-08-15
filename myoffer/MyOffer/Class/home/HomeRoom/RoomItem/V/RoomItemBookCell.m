@@ -23,27 +23,30 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.bgView.layer.cornerRadius = 8;
-    self.bookBtn.layer.cornerRadius = 4;
-    self.bookBtn.backgroundColor = XCOLOR_RED;
-    
+    self.bgView.layer.cornerRadius = CORNER_RADIUS;
+    self.priceLab.textColor = XCOLOR_RED;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
 
 - (IBAction)book:(UIButton *)sender {
     
     if (self.actionBlock) {
-        self.actionBlock();
+        self.actionBlock(self.item.roomtype_id);
     }
 }
 
-- (void)setTitle:(NSString *)title{
-    _title = title;
+
+- (void)setItem:(RoomTypeBookItemModel *)item{
+    _item = item;
     
-    self.subTitleLab.text = title;
+    self.subTitleLab.text = item.note;
+    self.priceLab.text = item.priceCurrency;
+    self.timeLab.text = item.start_date;
+    NSString *unit = item.unit;
+    if ([item.unit containsString:@"每"]) {
+        unit = [item.unit componentsSeparatedByString:@"每"].lastObject;
+    }
+    self.lengthLab.text = [NSString stringWithFormat:@"%@%@",item.weeks,unit];
 }
 
 @end

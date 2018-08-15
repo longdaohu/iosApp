@@ -27,7 +27,6 @@
         [self.contentView addSubview:line];
         
         UIView *boxView = [UIView new];
-        boxView.backgroundColor = XCOLOR_RANDOM;
         self.boxView = boxView;
         [self.contentView addSubview:boxView];
       

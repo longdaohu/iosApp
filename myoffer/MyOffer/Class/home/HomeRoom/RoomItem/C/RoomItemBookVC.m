@@ -10,13 +10,14 @@
 #import "RoomItemBookCell.h"
 #import "RoomItemBookSV.h"
 
+
 @interface RoomItemBookVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @end
 
 @implementation RoomItemBookVC
-
+/*
 - (NSArray *)items{
     if (!_items) {
         
@@ -47,6 +48,7 @@
     
     return _items;
 }
+*/
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -68,7 +70,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -77,34 +79,32 @@
     UINib *xib = [UINib nibWithNibName:@"RoomItemBookCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RoomItemBookCell"];
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedSectionHeaderHeight = 0;
-    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.sectionHeaderHeight = 58;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight, 0);
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+ - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.items.count;
+    return self.itemFrameModel.item.prices.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     RoomItemBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoomItemBookCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.title = self.items[indexPath.row];
-    cell.actionBlock = ^{
+    cell.item = self.itemFrameModel.item.prices[indexPath.row];
+    cell.actionBlock = ^(NSString *item_id){
         
-        NSLog(@" cell ---- ");
-    };
+        NSLog(@" cell ---- %@",item_id);
+    }; 
     return cell;
 }
 
@@ -125,10 +125,10 @@
     return UITableViewAutomaticDimension;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 58;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 58;
+//}
 
 
 - (void)didReceiveMemoryWarning {

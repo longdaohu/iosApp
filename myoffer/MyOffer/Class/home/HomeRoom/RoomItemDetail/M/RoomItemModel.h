@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *country_id;
 @property(nonatomic,strong)NSArray *pics;
 @property(nonatomic,strong)NSArray *amenities;
+@property(nonatomic,strong)NSArray *ameniti_arr;
 @property(nonatomic,strong)NSArray *roomtypes;
 @property(nonatomic,strong)NSArray *feature;
 
@@ -43,15 +44,18 @@
 @property(nonatomic,copy)NSString *postcode;
 @property(nonatomic,copy)NSString *lease;
 @property(nonatomic,copy)NSString *lat;
-@property(nonatomic,copy)NSString *promotion;
+@property(nonatomic,copy)NSString *promotion;//优惠活动
+@property(nonatomic,copy)NSString *process;//预订须知
 @property(nonatomic,copy)NSString *mark_summerlet;
 @property(nonatomic,copy)NSString *mark_new;
 @property(nonatomic,copy)NSString *city_id;
 @property(nonatomic,copy)NSString *avaliable_date;
 @property(nonatomic,copy)NSString *sq;
 @property(nonatomic,copy)NSString *update_date;
-
 @property(nonatomic,copy)NSString *intro;
-
+//自定义
+@property(nonatomic,copy)NSString *price;
+@property(nonatomic,copy)NSString *identifierNumber;
+@property(nonatomic,strong)NSArray *imageURLs;
 @end
 

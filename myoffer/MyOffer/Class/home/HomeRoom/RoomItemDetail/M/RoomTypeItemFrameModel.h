@@ -16,12 +16,14 @@
 @property(nonatomic,assign)CGFloat title_font_size;
 @property(nonatomic,assign)CGFloat tag_font_size;
 @property(nonatomic,assign)CGFloat price_font_size;
+@property(nonatomic,assign)CGFloat unit_font_size;
 @property(nonatomic,assign)CGFloat pin_font_size;
 
 @property(nonatomic,assign)CGRect icon_frame;
 @property(nonatomic,assign)CGRect title_frame;
 @property(nonatomic,assign)CGRect tag_frame;
 @property(nonatomic,assign)CGRect price_frame;
+@property(nonatomic,assign)CGRect unit_frame;
 @property(nonatomic,assign)CGRect pin_frame;
 @property(nonatomic,assign)CGRect line_frame;
 

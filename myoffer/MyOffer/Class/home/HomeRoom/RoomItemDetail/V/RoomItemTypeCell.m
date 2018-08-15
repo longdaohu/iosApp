@@ -12,6 +12,7 @@
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
+@property(nonatomic,strong)UILabel *unitLab;
 @property(nonatomic,strong)UIButton *pinLab;
 @property(nonatomic,strong)UIView *topLine;
 @end
@@ -44,10 +45,17 @@
         priceLab.textColor = XCOLOR_RED;
         [self.contentView addSubview:priceLab];
  
+        UILabel *unitLab = [UILabel new];
+        self.unitLab = unitLab;
+        unitLab.textColor = XCOLOR_TITLE;
+        [self.contentView addSubview:unitLab];
+        
         UIButton *pinLab = [UIButton new];
         self.pinLab = pinLab;
-        [pinLab setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-        pinLab.backgroundColor = XCOLOR_RANDOM;
+        [pinLab setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+        [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR(255, 246, 217, 1)] forState:UIControlStateNormal];
+        [pinLab setTitleColor:XCOLOR_TITLE forState:UIControlStateDisabled];
+        [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateDisabled];
         [self.contentView addSubview:pinLab];
         
         UIView *bottomLine = [UIView new];
@@ -67,18 +75,22 @@
 
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.pic] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.titleLab.text = item.name;
-    self.priceLab.text = item.price;
-    [self.pinLab setTitle:item.state forState:UIControlStateNormal];
+    self.priceLab.text = item.firstPrice.priceCurrency;
+    self.unitLab.text = item.firstPrice.unit;
+    [self.pinLab setTitle:item.firstPrice.currentState forState:UIControlStateNormal];
+    self.pinLab.enabled = !item.firstPrice.state.boolValue;
     
     self.iconView.frame = itemFrameModel.icon_frame;
     self.titleLab.frame = itemFrameModel.title_frame;
     self.priceLab.frame = itemFrameModel.price_frame;
+    self.unitLab.frame = itemFrameModel.unit_frame;
     self.pinLab.frame = itemFrameModel.pin_frame;
     self.topLine.frame = itemFrameModel.line_frame;
     
     self.titleLab.font = XFONT(itemFrameModel.title_font_size);
     self.pinLab.titleLabel.font = XFONT(itemFrameModel.pin_font_size);
     self.priceLab.font = XFONT(itemFrameModel.price_font_size);
+    self.unitLab.font = XFONT(itemFrameModel.unit_font_size);
 }
 
 

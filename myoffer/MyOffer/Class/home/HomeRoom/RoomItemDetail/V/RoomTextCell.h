@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RoomItemFrameModel.h"
+#import "myofferGroupModel.h"
 
 @interface RoomTextCell : UITableViewCell
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)myofferGroupModel *group;
 @property(nonatomic,copy)NSString *item;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 

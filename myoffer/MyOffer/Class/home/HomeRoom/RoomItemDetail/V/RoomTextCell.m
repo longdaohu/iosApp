@@ -9,7 +9,6 @@
 #import "RoomTextCell.h"
 @interface RoomTextCell ()
 @property(nonatomic,strong)UIView *top_line;
-@property(nonatomic,strong)UILabel *titleLab;
 
 @end
 
@@ -34,6 +33,7 @@
         [self.contentView addSubview:titleLab];
         titleLab.textColor = XCOLOR_TITLE;
         titleLab.numberOfLines = 0;
+//        self.titleLab.backgroundColor = XCOLOR_RANDOM;
     }
     
     return  self;
@@ -49,11 +49,16 @@
     [super layoutSubviews];
     
     if (self.itemFrameModel) {
+        
         self.titleLab.font = XFONT(self.itemFrameModel.intro_font_size);
         self.top_line.frame = self.itemFrameModel.top_line_frame;
-        self.titleLab.frame = self.itemFrameModel.intro_frame;
+        if (self.group.type == SectionGroupTypeRoomDetailDiscount) {
+            self.titleLab.frame = self.itemFrameModel.process_frame;
+        }
+        if (self.group.type == SectionGroupTypeRoomDetailTypeIntroduction) {
+            self.titleLab.frame = self.itemFrameModel.intro_frame;
+        }
     }
-
 }
 
 @end
