@@ -33,7 +33,7 @@
     shaper.shadowColor = XCOLOR_BLACK.CGColor;
     shaper.shadowOffset = CGSizeMake(0, 5);
     shaper.shadowRadius = 5;
-    shaper.shadowOpacity = 0.5;
+    shaper.shadowOpacity = 0.3;
     [self.view.layer insertSublayer:shaper below:self.bgView.layer];
     self.shaper = shaper;
     
@@ -50,18 +50,38 @@
 }
 
 - (IBAction)caseMeiqia:(UIButton *)sender {
+    
 }
 - (IBAction)caseBack:(UIButton *)sender {
     
-    if (self.actionBlock) {
-        self.actionBlock(YES);
-    }
+//    if (self.actionBlock) {
+//        self.actionBlock(YES);
+//    }
+    [self.navigationController dismissViewControllerAnimated:true completion:^{
+    }];
 }
 - (IBAction)caseKeepLook:(UIButton *)sender {
-    if (self.actionBlock) {
-        self.actionBlock(NO);
-    }
+//    if (self.actionBlock) {
+//        self.actionBlock(NO);
+//    }
+    [self.navigationController dismissViewControllerAnimated:true completion:^{
+    }];
 }
+
+
+//- (void)caseSuccesed:(BOOL)isBackToHome{
+//
+//    if (isBackToHome) {
+//        [self.navigationController dismissViewControllerAnimated:true completion:^{
+//        }];
+//        return;
+//    }
+//    if (self.isPresent) {
+//        [self casePop];
+//    }else{
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 
 - (void)viewDidLayoutSubviews{

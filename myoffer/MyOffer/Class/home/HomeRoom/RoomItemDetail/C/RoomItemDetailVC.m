@@ -64,6 +64,14 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+    backBtn.backgroundColor = XCOLOR_RANDOM;
+//    [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImage:XImage(@"back_arrow") forState:UIControlStateNormal];
+    [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateSelected];
+    nav.rightView = backBtn;
+    
 }
 
 -(void)makeTableView
@@ -210,9 +218,6 @@ static NSString *identify = @"cell";
     return UITableViewAutomaticDimension;
 }
 
-
-
-
 #pragma mark : 数据处理
 - (void)makeData{
  
@@ -274,17 +279,25 @@ static NSString *identify = @"cell";
     }
     [self.tableView reloadData];
     
+    
     RoomItemHeaderView *header = [[RoomItemHeaderView  alloc] initWithFrame:roomFrameModel.header_frame];
     header.itemFrameModel = roomFrameModel;
     self.tableView.tableHeaderView = header;
+    WeakSelf
+    header.actionBlock = ^{
+        [weakSelf caseMap];
+    };
     
     self.nav.alpha_height =  roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT;
- 
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     [self.nav scrollViewDidScroll:scrollView];
+}
+
+- (void)caseMap{
+ 
 }
 
 - (void)didReceiveMemoryWarning {

@@ -33,8 +33,8 @@
     if (!_items) {
     
         _items = @[
-                   @{ @"icon": @"home_room_uk",@"name": KEY_UK},
-                   @{ @"icon": @"home_room_au",@"name": KEY_AU}
+                   @{ @"icon": @"home_room_uk",@"name": KEY_UK,@"code": @"0"},
+                   @{ @"icon": @"home_room_au",@"name": KEY_AU,@"code": @"4"}
                    ];
     }
     return _items;
@@ -56,7 +56,7 @@
     }
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.mj_y =  -self.items.count * self.tableView.rowHeight;
+
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
@@ -96,7 +96,11 @@ static NSString *identify = @"cell";
     
     [self.superview bringSubviewToFront:self];
     self.alpha = 1;
+    CGFloat top =  -(self.items.count * self.tableView.rowHeight);
+    self.tableView.mj_y = top;
+    
     [self coverShow:YES];
+ 
 }
 
 - (void)hide{
@@ -106,9 +110,10 @@ static NSString *identify = @"cell";
 
 - (void)coverShow:(BOOL)show{
  
+ 
     UIColor *bg_color = show ? XCOLOR_COVER : XCOLOR_CLEAR;
-    CGFloat bg_height = self.items.count * self.tableView.rowHeight;
-    CGFloat toBeY = show ?  0 : -bg_height;
+    CGFloat top_height = self.items.count * self.tableView.rowHeight;
+    CGFloat toBeY = show ?  0 : - top_height;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
  
         self.tableView.mj_y = toBeY;
@@ -135,8 +140,9 @@ static NSString *identify = @"cell";
 
 - (void)dealloc{
  
-    NSLog(@"选择国家 +  HomeRoomSearchCountryView + dealloc");
+    KDClassLog(@"选择国家 +  HomeRoomSearchCountryView + dealloc");
 }
+
 
 
 @end

@@ -246,9 +246,6 @@
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
-        
-    
-    
     
     //通知内在网页跳转
     NSString *pre_str = @"app:jump/openURL/";
@@ -343,11 +340,9 @@
             
             decisionHandler(WKNavigationActionPolicyCancel);
             
-            
         }else{
             
             decisionHandler(WKNavigationActionPolicyAllow);
-            
         }
         
         
@@ -358,7 +353,6 @@
         decisionHandler(WKNavigationActionPolicyCancel);
         
     }else if([absoluteString hasPrefix:@"app:jump/0"]) {
-        
         // 申请状态
         [self caseApplyStatus];
         decisionHandler(WKNavigationActionPolicyCancel);
@@ -563,8 +557,8 @@
 //服务商城
 - (void)caseServiceMall{
     
-    [self.navigationController pushViewController:[[MyOfferServerMallViewController alloc] init] animated:YES];
-    
+    MyOfferServerMallViewController *vc = [[MyOfferServerMallViewController alloc] init];
+    PushToViewController(vc);
 }
 
 //服务状态

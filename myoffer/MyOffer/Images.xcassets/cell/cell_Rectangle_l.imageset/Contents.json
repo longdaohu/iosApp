@@ -13,10 +13,10 @@
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 43,
-          "top" : 151,
-          "right" : 83,
-          "left" : 108
+          "bottom" : 25,
+          "top" : 102,
+          "right" : 35,
+          "left" : 75
         }
       },
       "idiom" : "universal",

@@ -52,7 +52,7 @@ static NSString *identify = @"RoomAppointmentCell";
         _datePicker.datePickerMode = UIDatePickerModeDate;
         _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
         _datePicker.calendar = [NSCalendar currentCalendar];
-        [_datePicker addTarget:self action:@selector(pickerChangeValue:) forControlEvents:UIControlEventValueChanged];
+        [_datePicker addTarget:self action:@selector(pickerChangeValue:) forControlEvents:UIControlEventEditingChanged];
 
     }
     
@@ -62,8 +62,9 @@ static NSString *identify = @"RoomAppointmentCell";
 #pragma mark : UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
  
-    if (self.item.groupType == EditTypeRoomUserTime && [textField.text isEqualToString:@""]) {
+    if (self.item.groupType == EditTypeRoomUserTime && textField.text.length == 0) {
          textField.text = [self dateToString:[NSDate date]];
+         self.item.content = textField.text;
     }
     
     return YES;
@@ -87,12 +88,9 @@ static NSString *identify = @"RoomAppointmentCell";
     return YES;
 }
 
-- (void)titleChageValue:(UITextField *)sender{
-    
-    NSLog(@"titleChageValue  == %@",sender.text);
-    
-    
-    self.item.content = sender.text;
+- (void)titleChageValue:(UITextField *)textField{
+ 
+    self.item.content = textField.text;
 }
 
 - (void)setItem:(WYLXGroup *)item{
@@ -110,7 +108,6 @@ static NSString *identify = @"RoomAppointmentCell";
         case EditTypeRoomUserTime:
         {
             self.titleTF.inputView = self.datePicker;
-
             return;
         }
             break;
@@ -131,12 +128,11 @@ static NSString *identify = @"RoomAppointmentCell";
 
 
 - (void)pickerChangeValue:(UIDatePicker *)picker{
-    
+
     NSDate *date = [picker date];
-    
     self.titleTF.text = [self dateToString:date];
- 
-    self.item.content = self.titleTF.text;
+    [self titleChageValue:self.titleTF];
+
 }
 
 - (NSString *)dateToString:(NSDate *)date{

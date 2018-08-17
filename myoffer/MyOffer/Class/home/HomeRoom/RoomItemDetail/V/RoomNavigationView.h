@@ -6,12 +6,14 @@
 //  Copyright © 2018年 UVIC. All rights reserved.
 //
 
+
+
 #import <UIKit/UIKit.h>
 
 @interface RoomNavigationView : UIView
 
 @property(nonatomic,copy)NSString *title;
-@property(nonatomic,strong)UIButton *rightBtn;
+@property(nonatomic,strong)UIView *rightView;
 @property(nonatomic,assign)CGFloat  alpha_height;
 @property(nonatomic,strong)void(^acitonBlock)(BOOL isBackButton);
 
@@ -19,3 +21,4 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 
 @end
+

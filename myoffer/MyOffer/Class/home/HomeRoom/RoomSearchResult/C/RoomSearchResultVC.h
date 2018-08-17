@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomBaseViewController.h"
 
-@interface RoomSearchResultVC : BaseViewController
+@interface RoomSearchResultVC : RoomBaseViewController
 
 @end

@@ -55,7 +55,8 @@
 @property(nonatomic,copy)NSString *intro;
 //自定义
 @property(nonatomic,copy)NSString *price;
-@property(nonatomic,copy)NSString *identifierNumber;
 @property(nonatomic,strong)NSArray *imageURLs;
+@property(nonatomic,copy)NSString *roomCode;
+
 @end
 

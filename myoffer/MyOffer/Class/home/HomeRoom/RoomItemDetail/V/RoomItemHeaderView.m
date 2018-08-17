@@ -8,12 +8,13 @@
 
 #import "RoomItemHeaderView.h"
 #import "SDCycleScrollView.h"
+#import "UIButton+WebCache.h"
 
 @interface RoomItemHeaderView ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)UIView *crossView;
 @property(nonatomic,strong)UIView *boxView;
 @property(nonatomic,strong)UIView *bgView;
-@property(nonatomic,strong)UIView *mapView;
+@property(nonatomic,strong)UIButton *mapView;
 @property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
@@ -66,8 +67,10 @@
         [box addSubview:line];
         self.line = line;
  
-        UIView *map = [UIView new];
-        map.backgroundColor = XCOLOR_RANDOM;
+        UIButton *map = [UIButton new];
+        map.backgroundColor = XCOLOR_BG;
+        map.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [map addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];
         [box addSubview:map];
         self.mapView = map;
         
@@ -114,7 +117,6 @@
         _bannerView.showPageControl = false;
         _bannerView.clickItemOperationBlock = ^(NSInteger index) {
 //            NSString *target  = target_arr[index];
-//            [weakSelf CaseLandingPage:target];
         };
         [self.crossView addSubview:_bannerView];
     }
@@ -135,6 +137,10 @@
     self.numberLab.frame = itemFrameModel.id_frame;
     self.mapView.frame = itemFrameModel.map_frame;
     self.addressLab.frame = itemFrameModel.address_frame;
+ 
+    NSString *path = itemFrameModel.item.minimap;
+    path = @"http://www.suanning.com/uploadfile/2015/0616/20150616073334844.jpg";
+    [self.mapView sd_setImageWithURL:[NSURL URLWithString:path]  forState:UIControlStateNormal placeholderImage:nil];
     
     self.titleLab.font = XFONT(itemFrameModel.header_title_font_size);
     self.titleLab.text = itemFrameModel.item.name;
@@ -145,7 +151,7 @@
     self.unitLab.text = itemFrameModel.item.unit;
     self.unitLab.font = XFONT(itemFrameModel.header_unit_font_size);
     
-    self.numberLab.text = itemFrameModel.item.identifierNumber;
+    self.numberLab.text = itemFrameModel.item.roomCode;
     self.numberLab.font = XFONT(itemFrameModel.header_id_font_size);
     
     self.addressLab.text = itemFrameModel.item.address;
@@ -183,6 +189,13 @@
     
     NSString *count = [NSString stringWithFormat:@"%ld/%ld",(index+1),self.itemFrameModel.item.imageURLs.count];
     [self.countBtn setTitle:count forState:UIControlStateNormal];
+}
+
+- (void)caseMap{
+    
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
 }
 
 

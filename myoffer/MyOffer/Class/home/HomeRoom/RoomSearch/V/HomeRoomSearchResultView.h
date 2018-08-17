@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeRoomSearchResultView : UIView
-
-+ (instancetype)viewWithHidenCompletion:(void (^)(BOOL finished))completion;
-
 @property(nonatomic,strong)NSArray *items;
+//当前搜索页是否显示
+@property(nonatomic,assign,readonly)BOOL state;
 @property(nonatomic,strong)void(^actionBlock)(NSString *item_id);
++ (instancetype)viewWithHidenCompletion:(void (^)(BOOL finished))completion;
 - (void)show;
 - (void)hide;
+- (void)showError:(NSString *)error;
+- (void)clearAllData;
 
 @end
 

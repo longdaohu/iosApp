@@ -29,6 +29,8 @@
     self = [super initWithFrame:frame];
     if (self) {
  
+        self.clipsToBounds = YES;
+        
         UIView *bgView= [UIView new];
         bgView.backgroundColor = XCOLOR_WHITE;
         self.bgView = bgView;
@@ -52,7 +54,6 @@
         }];
  
         UILabel *title = [UILabel new];
-        title.text =  @"Bronze Studio";
         title.numberOfLines = 0;
         title.textColor = XCOLOR_TITLE;
         self.titleLab = title;
@@ -69,7 +70,6 @@
         self.typeLab = type;
         [bgView addSubview:type];
         type.font = XFONT(12);
-        type.text = @"房型  独立卫浴和厨房";
         [type mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(width_max * 0.5);
             make.left.mas_equalTo(line.mas_left);
@@ -81,7 +81,6 @@
         sizeLab.textColor = XCOLOR_TITLE;
         self.sizeLab = sizeLab;
         sizeLab.font = XFONT(12);
-        sizeLab.text = @"面积  大约18平米";
         [bgView addSubview:sizeLab];
         [sizeLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(type.mas_width);
@@ -96,7 +95,6 @@
         self.bedLab = bedLab;
         [bgView addSubview:bedLab];
         bedLab.font = XFONT(12);
-        bedLab.text = @"床型  135x190(cm)";
         [bedLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(type.mas_width);
             make.height.mas_equalTo(type.mas_height);
@@ -110,7 +108,6 @@
         self.noteLab = noteLab;
         [bgView addSubview:noteLab];
         noteLab.font = XFONT(12);
-        noteLab.text = @"备注  液晶电视";
         [noteLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(type.mas_width);
             make.height.mas_equalTo(type.mas_height);
@@ -147,7 +144,6 @@
         _bannerView.showPageControl = false;
         _bannerView.clickItemOperationBlock = ^(NSInteger index) {
             //            NSString *target  = target_arr[index];
-            //            [weakSelf CaseLandingPage:target];
         };
         [self insertSubview:_bannerView belowSubview:self.countBtn];
     }
@@ -163,8 +159,8 @@
     self.titleLab.text = itemFrameModel.item.name;
     self.typeLab.text  = [NSString stringWithFormat:@"房型  %@",itemFrameModel.item.type];
     self.sizeLab.text  = [NSString stringWithFormat:@"面积  大约%@平米",itemFrameModel.item.size];
-    self.bedLab.text  =  [NSString stringWithFormat:@"床型  135x190(cm)??%@",itemFrameModel.item.bed];
-    self.noteLab.text  = [NSString stringWithFormat:@"备注  %@??",itemFrameModel.item.desc];
+    self.bedLab.text  =  [NSString stringWithFormat:@"床型  %@",itemFrameModel.item.bed];
+    self.noteLab.text  = [NSString stringWithFormat:@"备注  %@",itemFrameModel.item.desc];
  
     if (itemFrameModel.item.pictures > 0) {
         self.bannerView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_WIDTH);

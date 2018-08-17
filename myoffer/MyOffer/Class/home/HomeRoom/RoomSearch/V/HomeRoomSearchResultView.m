@@ -11,7 +11,10 @@
 
 @interface HomeRoomSearchResultView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong) UILabel *alerLab;
 @property(nonatomic,copy)void(^hideBlock)(BOOL);
+@property(nonatomic,assign)BOOL currentTableState;
+@property(nonatomic,copy)NSString *select_value;
 @end
 
 @implementation HomeRoomSearchResultView
@@ -38,7 +41,6 @@
     self.tableView =[[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = XCOLOR_WHITE;
     [self addSubview:self.tableView];
     self.tableView.rowHeight = 60;
@@ -46,11 +48,24 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 80)];
+    UILabel *alerLab = [[UILabel alloc] initWithFrame:footer.bounds];
+    alerLab.textColor = XCOLOR_TITLE;
+    alerLab.font = XFONT(14);
+    alerLab.textAlignment = NSTextAlignmentCenter;
+    alerLab.numberOfLines = 0;
+    [footer addSubview:alerLab];
+    self.alerLab = alerLab;
+    self.tableView.tableFooterView = footer;
+
 }
 
 - (void)setItems:(NSArray *)items{
     _items = items;
+    
     [self.tableView reloadData];
+    self.alerLab.text = @"";
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
@@ -60,7 +75,7 @@
     return self.items.count;
 }
 
-static NSString *identify = @"cell";
+static NSString *identify = @"HomeRoomSearchResultView";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
@@ -76,12 +91,18 @@ static NSString *identify = @"cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self hide];
-    if (self.actionBlock) {
-        RoomSearchResultItemModel *item = self.items[indexPath.row];
-        self.actionBlock(item.item_id);
-    }
+    RoomSearchResultItemModel *item = self.items[indexPath.row];
+    self.select_value = item.item_id;
     
+    [self hide];
+ 
+}
+
+#pragma mark : 事件处理
+
+- (BOOL)state{
+    
+    return self.currentTableState;
 }
 
 - (void)show{
@@ -90,10 +111,13 @@ static NSString *identify = @"cell";
 }
 
 - (void)hide{
+    
     [self coverShow:NO];
 }
 
 - (void)coverShow:(BOOL)show{
+    
+    self.currentTableState = show;
     
     CGFloat alp = show ? 1 : 0;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
@@ -101,17 +125,38 @@ static NSString *identify = @"cell";
     } completion:^(BOOL finished) {
         if (!show) {
             
-            self.items = nil;
-            [self.tableView reloadData];
-            self.alpha = 0;
+            if (self.actionBlock && self.select_value.length > 0) {
+                self.actionBlock(self.select_value);
+            }
             
             if (self.hideBlock) {
                 self.hideBlock(finished);
             }
+            [self clearAllData];
+            self.alpha = 0;
+            self.select_value = @"";
         }
     }];
 }
 
+- (void)showError:(NSString *)error{
+
+    self.alerLab.text = error;
+    
+    if (self.items) {
+        
+        self.items = nil;
+        [self.tableView reloadData];
+        
+    }
+}
+
+- (void)clearAllData{
+    
+    self.alerLab.text = @"";
+    self.items = nil;
+    [self.tableView reloadData];
+}
 
 - (void)layoutSubviews{
     

@@ -139,14 +139,23 @@
 
 - (void)caseBookWithRooomID:(NSString *)room_id{
  
+ 
     WeakSelf
     RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
     vc.actionBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:NO];
     };
-    vc.isPresent = YES;
-    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
+      
+        vc.isPresent = YES;
+        MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
+        PushToViewController(vc);
+    }
+ 
+   
+
     
 }
 

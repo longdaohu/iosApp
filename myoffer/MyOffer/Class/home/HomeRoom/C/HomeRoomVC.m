@@ -9,9 +9,9 @@
 #import "HomeRoomVC.h"
 #import "RoomCityVC.h"
 #import "RoomItemDetailVC.h"
+#import "HomeRoomSearchVC.h"
 
 #import "HomeRoomTopView.h"
-#import "HomeRoomSearchVC.h"
 #import "HomeRoomIndexObject.h"
 #import "HttpApiClient_API_51ROOM.h"
 #import "HttpsApiClient_API_51ROOM.h"
@@ -255,10 +255,7 @@ static NSString *identify = @"cell";
         }
             break;
         case HomeRoomTopViewButtonTypeMap:{
-            
-            RoomCityVC *vc = [[RoomCityVC alloc] init];
-            PushToViewController(vc);
-            
+ 
         }
             break;
         default:

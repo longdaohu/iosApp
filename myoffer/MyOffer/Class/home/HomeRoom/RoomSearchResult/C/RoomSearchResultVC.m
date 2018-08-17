@@ -13,6 +13,9 @@
 #import "RoomItemBookVC.h"
 #import "RoomAppointmentResultVC.h"
 #import "RoomAppointmentVC.h"
+#import "RoomCityVC.h"
+#import "HomeRoomSearchVC.h"
+#import "RoomItemDetailVC.h"
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -48,7 +51,7 @@
 
 - (void)makeNavigationView{
  
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"客服" style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"maiqia_call") style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
     
     UITextField *searchTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 26)];
     searchTF.font = XFONT(10);
@@ -63,7 +66,8 @@
     leftView.contentMode = UIViewContentModeScaleAspectFit;
     [leftView setImage:XImage(@"home_application_search_icon")];
     searchTF.leftView = leftView;
-    searchTF.leftViewMode =  UITextFieldViewModeAlways;
+    searchTF.leftViewMode =  UITextFieldViewModeUnlessEditing;
+    [searchTF addTarget:self action:@selector(caseSearch:) forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)makeTableView
@@ -77,8 +81,8 @@
     
     WeakSelf
     RoomSearchFilterView *filterView = [[RoomSearchFilterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 40)];
-    filterView.RoomSearchFilterViewBlock = ^{
-        [weakSelf caseFilter];
+    filterView.RoomSearchFilterViewBlock = ^(RoomFilterType type){
+        [weakSelf caseParameterType:type];
     };
     [self.view addSubview:filterView];
     self.tableView.contentInset = UIEdgeInsetsMake(filterView.mj_h, 0, XTabBarHeight, 0);
@@ -111,22 +115,50 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
+    RoomItemDetailVC *vc = [[RoomItemDetailVC alloc] init];
     PushToViewController(vc);
 }
 
 
 #pragma mark : 事件处理
 - (void)caseMeiqia{
+
+}
+
+- (void)caseParameterType:(RoomFilterType)type{
     
+    switch (type) {
+        case RoomFilterTypeCity:
+            [self caseCity];
+            break;
+        case RoomFilterTypePrice:
+            [self casePrice];
+            break;
+        default:
+            [self.searchFilter show];
+            break;
+    }
+}
+
+- (void)caseCity{
     
-//    RoomAppointmentResultVC  *vc = [[RoomAppointmentResultVC alloc] init];
-    RoomAppointmentVC  *vc = [[RoomAppointmentVC alloc] init];
+    RoomCityVC *vc = [[RoomCityVC alloc] init];
     PushToViewController(vc);
 }
-- (void)caseFilter{
+
+- (void)casePrice{
+
+}
+
+- (void)caseSearch:(UITextField *)textField{
     
-    [self.searchFilter show];
+    HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
+    vc.actionBlock = ^(NSString *value) {
+        NSLog(@"搜索返回结果，再次网络请求！！！%@",value);
+    };
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:^{
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

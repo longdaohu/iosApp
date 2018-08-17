@@ -120,7 +120,7 @@
     CGFloat sum_bg_y = CGRectGetMaxY(self.starView.frame);
     self.summarybgView.frame = CGRectMake(sum_bg_x, sum_bg_y, sum_bg_w, sum_bg_h);
 
-    CGFloat summary_x = sum_bg_x + 50;
+    CGFloat summary_x = sum_bg_x + 42;
     CGFloat summary_w = sum_bg_w - summary_x - 10;
     CGFloat summary_h = [self.summaryLab.text sizeWithfontSize:12 maxWidth:summary_w].height;
     CGFloat summary_y = sum_bg_y + 40;

@@ -35,20 +35,21 @@
     
     if (!_groups) {
         
-        WYLXGroup *name   =  [WYLXGroup groupWithType:EditTypeCountry title:@"姓名 * （中文" placeHolder:nil content:nil groupKey:@"name" spod:false];
+        WYLXGroup *name   =  [WYLXGroup groupWithType:EditTypeRoomUserName title:@"姓名 * (中文)" placeHolder:nil content:nil groupKey:@"name" spod:false];
         name.groupType = EditTypeRoomUserName;
-        WYLXGroup *email    =  [WYLXGroup groupWithType:EditTypePhone title:@"电子邮箱 *" placeHolder:nil content:nil groupKey:@"email" spod:false];
+        WYLXGroup *email    =  [WYLXGroup groupWithType:EditTypeRoomUserEmail title:@"电子邮箱 *" placeHolder:nil content:nil groupKey:@"email" spod:false];
         email.groupType = EditTypeRoomUserEmail;
-        WYLXGroup *wx    =  [WYLXGroup groupWithType:EditTypeGrade title:@"微信*" placeHolder:nil content:nil groupKey:@"wx" spod:false];
+        WYLXGroup *wx    =  [WYLXGroup groupWithType:EditTypeRoomUserWeixin title:@"微信*" placeHolder:nil content:nil groupKey:@"wx" spod:false];
         wx.groupType = EditTypeRoomUserWeixin;
-        WYLXGroup *time  =  [WYLXGroup groupWithType:EditTypeSuject title:@"入住时间*" placeHolder:nil content:nil groupKey:@"time" spod:false];
+        WYLXGroup *time  =  [WYLXGroup groupWithType:EditTypeRoomUserTime title:@"入住时间*" placeHolder:nil content:nil groupKey:@"time" spod:false];
         time.groupType = EditTypeRoomUserTime;
-        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeSuject title:@"QQ" placeHolder:nil content:nil groupKey:@"qq" spod:false];
+        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeRoomUserQQ title:@"QQ" placeHolder:nil content:nil groupKey:@"qq" spod:false];
         qq.groupType = EditTypeRoomUserQQ;
         _groups = @[name,email,wx,time,qq];
     }
     return _groups;
 }
+
 
 - (RoomAppointmentResultVC *)resultVC{
     
@@ -56,14 +57,15 @@
     
         _resultVC = [[RoomAppointmentResultVC alloc] init];
         [self addChildViewController:_resultVC];
-        _resultVC.view.alpha = 0;
         _resultVC.view.frame = self.view.bounds;
-        _resultVC.view.transform = CGAffineTransformMakeTranslation(XSCREEN_WIDTH,0);
         [self.view insertSubview:_resultVC.view aboveSubview:self.commitBtn];
-        WeakSelf
-        _resultVC.actionBlock = ^(BOOL isBackToHome) {
-            [weakSelf caseSuccesed:isBackToHome];
-        };
+        _resultVC.view.transform = CGAffineTransformMakeTranslation(XSCREEN_WIDTH,0);
+
+//        WeakSelf
+//        _resultVC.actionBlock = ^(BOOL isBackToHome) {
+//            [weakSelf caseSuccesed:isBackToHome];
+//        };
+        
     }
     
     return _resultVC;
@@ -98,9 +100,10 @@
         
     }];
     
+
     if (self.isPresent) {
         
-        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
         [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
         [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
@@ -168,26 +171,73 @@
 #pragma mark : 事件处理
 - (void)caseCommitClick:(UIButton *)sender{
     
-    NSLog(@"caseCommitClick = %@",sender.currentTitle);
-    
-    WYLXGroup *item;
-    NSString  *alter;
+    NSString  *title ;
     for(WYLXGroup *group in self.groups){
-        
-        if ([group.content isEqualToString:@""]) {
-            alter = @"不能为空";
-            item = group;
-            break;
+
+        switch (group.groupType) {
+            case EditTypeRoomUserName:{
+                title = @"姓名";
+                NSString *regex = @"[\u4e00-\u9fa5]{2,8}";
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+                if (![pred evaluateWithObject:group.content]) {
+                    [MBProgressHUD showMessage:@"请输入正确的中文姓名"];
+                    return;
+                }
+            }
+                break;
+            case EditTypeRoomUserEmail:{
+                title = @"邮箱";
+                NSString *regex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+                if (![pred evaluateWithObject:group.content]) {
+                    [MBProgressHUD showMessage:@"请输入正确的邮箱地址"];
+                    return;
+                }
+            }
+                break;
+            case EditTypeRoomUserWeixin:{
+                title = @"微信";
+                NSString *regex = @"^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}+$";
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+                if (![pred evaluateWithObject:group.content]) {
+                    [MBProgressHUD showMessage:@"请输入正确的微信号"];
+                    return;
+                }
+            }
+                break;
+            case EditTypeRoomUserTime:{
+                title = @"入住时间";
+                if(group.content.length == 0 || !group.content){
+                        [MBProgressHUD showMessage:@"入住时间不能为空"];
+                        return;
+                }
+            }
+                break;
+            case EditTypeRoomUserQQ:{
+                title = @"QQ";
+                NSString *regex = @"^[0-9]{5,11}+$";
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+                if (![pred evaluateWithObject:group.content]) {
+                    [MBProgressHUD showMessage:@"请输入正确的QQ"];
+                    return;
+                }
+            }
+                break;
+            default:
+                break;
         }
+ 
     }
     
+ 
     self.resultVC.view.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.resultVC.view.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = true;
     }];
- 
+
 }
 
 #pragma mark : 键盘处理
@@ -229,31 +279,9 @@
     [UIView commitAnimations];
 }
 
-- (void)caseSuccesed:(BOOL)isBackToHome{
-    
-    
-    if (isBackToHome) {
-     
-         if (self.actionBlock) {
-             
-             self.actionBlock();
-             [self casePop];
-         }
-        
-        return;
-    }
-    
-    if (self.isPresent) {
-        [self casePop];
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 
 - (void)casePop{
-    
-    [self.navigationController dismissViewControllerAnimated:true completion:^{
-    }];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

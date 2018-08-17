@@ -13,6 +13,11 @@
 @end
 
 @implementation RoomBaseViewController
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+     NavigationBarHidden(NO);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

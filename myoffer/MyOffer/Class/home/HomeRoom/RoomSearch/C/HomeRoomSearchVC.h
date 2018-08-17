@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeRoomSearchVC : BaseViewController
+@property(nonatomic,copy)void(^actionBlock)(NSString *value);
 
 @end

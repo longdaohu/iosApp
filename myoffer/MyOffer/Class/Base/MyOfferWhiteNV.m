@@ -53,7 +53,7 @@
         
         // 设置导航栏按钮
         viewController.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-        viewController.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+        viewController.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     }
     
 }

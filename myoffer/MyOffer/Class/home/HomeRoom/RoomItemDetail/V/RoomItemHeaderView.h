@@ -11,5 +11,5 @@
 
 @interface RoomItemHeaderView : UIView
 @property(nonatomic,strong)RoomItemFrameModel  *itemFrameModel;
-
+@property(nonatomic,copy)void(^actionBlock)(void);
 @end

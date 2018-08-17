@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,RoomFilterType){
+    RoomFilterTypeCity = 0,
+    RoomFilterTypePrice,
+    RoomFilterTypefilte
+};
+
 @interface RoomSearchFilterView : UIView
-@property(nonatomic,copy)void(^RoomSearchFilterViewBlock)(void);
+@property(nonatomic,copy)void(^RoomSearchFilterViewBlock)(RoomFilterType);
+
 @end

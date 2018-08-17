@@ -12,11 +12,6 @@
 
 @implementation RoomItemModel
 
-//- (NSArray *)feature{
-//
-//    return @[@"新闻",@"土耳其",@"埃氏政权",@"北约",@"维基解密",@"阿桑奇"];
-//}
-
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     
     return @{@"room_id" : @"id"};
@@ -29,13 +24,6 @@
              };
 }
 
-- (void)setRoomtypes:(NSArray *)roomtypes{
-    _roomtypes = roomtypes;
-    
-    NSLog(@"roomtypesroomtypesroomtypesroomtypesroomtypes  %ld",roomtypes.count);
- 
-}
-
 - (void)setUnit:(NSString *)unit{
     
     _unit = unit;
@@ -45,8 +33,7 @@
 - (void)setCurrency:(NSString *)currency{
     
     _currency = currency;
-    NSLog(@"currencycurrencycurrencycurrencycurrencycurrency  %@",currency);
-
+ 
 }
 
 
@@ -74,14 +61,12 @@
     return _price;
 }
 
+- (NSString *)roomCode{
 
-- (NSString *)identifierNumber{
-    
-    if (!_identifierNumber) {
-        _identifierNumber = [NSString stringWithFormat:@"房源编号：GB-00%@",self.room_id];
+    if (!_roomCode) {
+        _roomCode = [NSString stringWithFormat:@"房源编号：%@",self.code];
     }
-    
-    return _identifierNumber;
+    return _roomCode;
 }
 
 - (NSArray *)imageURLs{

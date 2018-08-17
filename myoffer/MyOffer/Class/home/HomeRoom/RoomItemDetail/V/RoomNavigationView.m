@@ -6,6 +6,7 @@
 //  Copyright © 2018年 UVIC. All rights reserved.
 //
 
+
 #import "RoomNavigationView.h"
 #import "Masonry.h"
 
@@ -14,7 +15,6 @@
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIButton *backBtn;
 @property(nonatomic,strong)UIButton *titleBtn;
-@property(nonatomic,strong)UIButton *rightItemBtn;
 
 @end
 
@@ -47,43 +47,23 @@
  
         UIView *bgView = [UIView new];
         [self addSubview:bgView];
-        [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.bottom.right.mas_equalTo(self);
-        }];
         self.bgView = bgView;
  
         UIButton *backBtn = [[UIButton alloc] init];
         self.backBtn = backBtn;
         [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
         [backBtn setImage:XImage(@"back_arrow") forState:UIControlStateNormal];
+        [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateSelected];
         [bgView addSubview:backBtn];
-        [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(40, 40));
-            make.left.mas_equalTo(10);
-            make.bottom.mas_equalTo(-4);
-        }];
-        
-        UIButton *rightItemBtn = [[UIButton alloc] init];
-        self.rightItemBtn = rightItemBtn;
-        [rightItemBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
-        rightItemBtn.backgroundColor = XCOLOR_RANDOM;
-        [bgView addSubview:rightItemBtn];
-        [rightItemBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(40, 40));
-            make.right.mas_equalTo(-10);
-            make.bottom.mas_equalTo(backBtn.mas_bottom);
-        }];
-        
+ 
+ 
         UIButton *titleBtn = [[UIButton alloc] init];
+        titleBtn.titleLabel.font = XFONT(17);
+        [titleBtn setTitleColor:XCOLOR_WHITE  forState:UIControlStateNormal];
+        [titleBtn setTitleColor:XCOLOR_BLACK  forState:UIControlStateSelected];
         self.titleBtn = titleBtn;
         [bgView addSubview:titleBtn];
-        [titleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.backBtn.mas_right);
-            make.right.mas_equalTo(rightItemBtn.mas_left);
-            make.top.mas_equalTo(self.backBtn.mas_top);
-            make.bottom.mas_equalTo(self.backBtn.mas_bottom);
-        }];
-        
+ 
     }
     
     return self;
@@ -109,24 +89,103 @@
     CGFloat alp = scrollView.mj_offsetY/self.alpha_height;
     if (alp < 0) alp  = 0;
     self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:alp];
-    if (alp <= 0) {
-        self.backBtn.alpha = 1;
-        self.titleBtn.alpha = 1;
-        [self.backBtn setImage:XImage(@"back_arrow") forState:UIControlStateNormal];
-        [self.titleBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    }else{
-        [self.backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
-        self.backBtn.alpha = alp;
+    
+    for (UIView *item in self.bgView.subviews) {
         
-        [self.titleBtn setTitleColor:XCOLOR_BLACK forState:UIControlStateNormal];
-        self.titleBtn.alpha = alp;
+        if ([item isKindOfClass:[UIButton class]]) {
+            
+            UIButton *sender =(UIButton *)item;
+            if (alp <= 0) {
+                sender.alpha = 1;
+                sender.alpha = 1;
+                sender.selected = NO;
+                sender.selected = NO;
+            }else{
+                sender.alpha = alp;
+                sender.selected = YES;
+                sender.selected = YES;
+                sender.alpha = alp;
+            }
+        }
+ 
     }
+    
+//    if (alp <= 0) {
+//        self.backBtn.alpha = 1;
+//        self.titleBtn.alpha = 1;
+//        self.backBtn.selected = NO;
+//        self.titleBtn.selected = NO;
+//    }else{
+//        self.backBtn.alpha = alp;
+//        self.backBtn.selected = YES;
+//        self.titleBtn.selected = YES;
+//        self.titleBtn.alpha = alp;
+//    }
+}
+- (void)setRightView:(UIView *)rightView{
+    
+    _rightView = rightView;
+    
+     [self addSubview:rightView];
 }
 
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-     self.gradient.frame = self.bounds;
+    
+    self.bgView.frame = self.bounds;
+    self.gradient.frame = self.bounds;
+
+    CGSize  content_size = self.bounds.size;
+    CGFloat left_margin = 10;
+    CGFloat right_margin = left_margin;
+    CGSize  itemSize  = CGSizeMake(30, 40);
+    
+    CGFloat back_x = left_margin;
+    CGFloat back_w = itemSize.width;
+    CGFloat back_h = itemSize.height;
+    CGFloat back_y = content_size.height - back_h - 4;
+    self.backBtn.frame = CGRectMake(back_x,back_y, back_w, back_h);
+ 
+
+    CGFloat right_w = itemSize.width;
+    CGFloat right_h = itemSize.height;
+    CGFloat right_y = back_y;
+    CGFloat right_x = content_size.width - right_w - right_margin;
+    if (self.rightView) {
+        right_h = self.rightView.mj_h;
+        right_w = self.rightView.mj_w;
+        right_x = content_size.width - right_w - right_margin;
+        self.rightView.frame = CGRectMake(right_x, right_y, right_w, right_h);
+    }
+    
+    CGFloat title_h = back_h;
+    CGFloat title_y = back_y;
+    CGFloat title_x = back_x + back_w;
+    CGFloat title_w = right_x - title_x;
+
+    CGSize title_size = [self.title stringWithfontSize:17];
+    if (title_size.width < title_w) {
+       
+        title_w = title_size.width;
+        CGFloat tmp_right = right_x - content_size.width * 0.5;
+        if (tmp_right < title_w * 0.5) {
+            title_x =  content_size.width * 0.5  - title_w + tmp_right;
+        }else{
+            title_w = tmp_right * 2;
+            title_x = content_size.width * 0.5 - tmp_right;
+        }
+    }
+    
+    self.titleBtn.frame = CGRectMake(title_x, title_y, title_w, title_h);
+ 
 }
 
+
+
+
 @end
+
+ 
+
+

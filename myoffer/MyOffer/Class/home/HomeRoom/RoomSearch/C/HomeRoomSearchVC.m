@@ -23,6 +23,7 @@
 @property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
 @property(nonatomic,strong)HomeRoomSearchResultView *resultView;
 @property(nonatomic,strong)UIButton *countyBtn;
+@property(nonatomic,assign)NSInteger country_code;
 
 @end
 
@@ -110,7 +111,7 @@
     
     UIButton *two = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 15, 30)];
     two.contentMode = UIViewContentModeScaleAspectFit;
-    [two setImage:XImage(@"Triangle_Black_Down") forState:UIControlStateNormal];
+    [two setImage:XImage(@"Trp_Black_Down") forState:UIControlStateNormal];
     [two addTarget:self action:@selector(countryOnClick) forControlEvents:UIControlEventTouchUpInside];
     [left_view addSubview:two];
  
@@ -134,9 +135,15 @@
     [leftView setImage:XImage(@"home_application_search_icon")];
     searchTF.leftView = leftView;
     searchTF.leftViewMode =  UITextFieldViewModeAlways;
+    
+    if (self.actionBlock) {
+        [searchTF becomeFirstResponder];
+    }
 }
 
 -(void)makeDara{
+    
+    if (self.actionBlock) return;
  
     FiltContent  *historyHot = [FiltContent filterWithIcon:nil  title:@"热门搜索" subtitlte:@"" filterOptionItems:nil];
     FilterContentFrame *historyHotFrame = [FilterContentFrame filterFrameWithFilter:historyHot];
@@ -219,49 +226,47 @@
     return fileritem.cellHeigh;
 }
 
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
-
 #pragma mark: FilterTableViewCellDelegate
 -(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
 {
  
-    RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
-    PushToViewController(vc);
+    self.search_TF.text = sender.currentTitle;
+    [self.search_TF becomeFirstResponder];
+    
 }
 
 #pragma mark :  UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-   
-    if (textField.text.length < 2) {
-        NSLog(@"提示输入文字太短了");
-    }else{
-        
-        [self caseSearchWithText:textField.text];
-    }
-    
-    return YES;
-}
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    
-    if (!self.countryView.coverIsHiden) {
-        [self.countryView hide];
-    }
-    [self.resultView show];
+ 
+    [self caseSearchValueChange:textField];
     
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+ 
+    [self.countryView hide];
+    [self.resultView show];
+    if (textField.text.length > 0) {
+        [self caseSearchValueChange:textField];
+    }
+    
+    return YES;
+}
 
 
 #pragma mark : 事件处理
 -  (void)pageDismiss{
     
-    [self dismiss];
+//    if(self.resultView.state){
+//
+//        [self.resultView hide];
+//        self.search_TF.text = @"";
+//        return;
+//    }
+//
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)countryOnClick{
@@ -275,32 +280,61 @@
 }
 
 - (void)caseSearchWithID:(NSString *)item_id{
+ 
+//    NSLog(@">>>caseSearchWithID>>>>>%@",item_id);
+//    self.countryView.alpha = 0;
+    [self.view endEditing:YES];
+ 
+    if (self.actionBlock) {
+        
+        self.actionBlock(item_id);
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
     
-    NSLog(@">>>caseSearchWithID>>>>>%@",item_id);
+    RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
+    PushToViewController(vc);
 }
 
 - (void)caseChangeCountry:(NSDictionary *)item{
     
-//    NSString *name = item[@"name"];
+    NSString *code = item[@"code"];
     NSString *icon = item[@"icon"];
-//    if ([self.current_country isEqualToString:name]) {
-//        return;
-//    }
-//    self.current_country = name;
-    [self.countyBtn setImage:XImage(icon) forState:UIControlStateNormal];
+    //    判断是否是当前与选择国家是否一样
+    if (code.integerValue == self.country_code) return;
     
+    //    添加相关属性
+    [self.countyBtn setImage:XImage(icon) forState:UIControlStateNormal];
+    self.country_code = code.integerValue;
+    
+    //    重新搜索
+    if (self.search_TF.text.length > 0) {
+        [self caseSearchValueChange:self.search_TF];
+    }
 }
-- (void)caseSearchValueChange:(UITextField *)sender{
 
+- (void)caseSearchValueChange:(UITextField *)textField{
+ 
+    [self caseSearchWithText:textField.text];
+    
 }
 
 - (void)caseSearchWithText:(NSString *)text{
-    
+
+    //    输入框为空时,不做网请求操作
+    if (text.length == 0 || !text) {
+        [self.resultView clearAllData];
+        return;
+    }
+    /*
+         self.country_code  =   英国 0 、 澳州  4 ；默认英国
+         keywords 搜索关键字
+     */
     WeakSelf
-    [[HttpsApiClient_API_51ROOM instance] Search_Place:0 keywords:[text toUTF8WithString] completionBlock:^(CACommonResponse *response) {
+    [[HttpsApiClient_API_51ROOM instance] Search_Place:self.country_code keywords:[text toUTF8WithString] completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
         if (![status isEqualToString:@"200"]) {
-            NSLog(@" 网络请求错误 ");
+            [self.resultView showError:@"网络请求错误,请确认网络是否正常"];
             return ;
         }
         id result = [response.body KD_JSONObject];
@@ -309,10 +343,24 @@
 }
 
 - (void)updateSearchUIWithResponse:(id)response{
-
+ 
     NSArray *items = [RoomSearchResultItemModel mj_objectArrayWithKeyValuesArray:response];
+    if (items.count == 0) {
+        [self.resultView showError:@"没有搜到相关信息，请检查关键字是否输入正确。"];
+        return;
+    }
     self.resultView.items = items;
-    
+}
+
+//- (void)viewDidDisappear:(BOOL)animated{
+//
+//    HttpsApiClient_API_51ROOM *item = [HttpsApiClient_API_51ROOM instance];
+//    item = nil;
+//}
+
+- (void)dealloc{
+
+    KDClassLog(@"51ROOM搜索 + HomeRoomSearchVC + dealloc");
 }
 
 - (void)didReceiveMemoryWarning {

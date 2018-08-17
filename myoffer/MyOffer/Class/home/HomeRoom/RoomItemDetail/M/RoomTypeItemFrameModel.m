@@ -49,8 +49,12 @@
     }
     self.title_frame = CGRectMake(title_x, title_y, title_w, title_h);
  
+//    CGFloat tag_x = title_x;
+//    CGFloat tag_y = title_y + title_h + padding;
+//    CGFloat tag_w = [item];
+//    CGFloat tag_h = icon_w;
+//    self.icon_frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
  
-    NSLog(@"RoomTypeItemFrameModel  =  [%@]",self.item.firstPrice.priceCurrency);
     CGFloat price_x = title_x;
     CGSize price_size = [self.item.firstPrice.priceCurrency stringWithfontSize:self.price_font_size];
     CGFloat price_h = price_size.height;

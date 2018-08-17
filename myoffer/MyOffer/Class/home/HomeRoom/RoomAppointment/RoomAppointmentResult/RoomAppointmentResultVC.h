@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RoomAppointmentResultVC : UIViewController
-@property(nonatomic,copy)void(^actionBlock)(BOOL isBackToHome);
+//@property(nonatomic,copy)void(^actionBlock)(BOOL isBackToHome);
 @end
