@@ -94,12 +94,12 @@
 - (void)emptyViewWithHiden:(BOOL)hiden{
     
     self.alpha =1;
-
+    
     //1 隐藏
     if (hiden) {
-    
+
         self.tableFooterView = [UIView new];
-        
+
         return;
     }
   
@@ -130,7 +130,7 @@
     self.tablefooter.mj_h = bg_height;
     self.tableFooterView = self.tablefooter;
     self.emptyView.center = self.tablefooter.center;
-
+    
     if (self.emptyY != DEFAULT_NUMBER) {
         self.emptyView.mj_y = self.emptyY;
         return;

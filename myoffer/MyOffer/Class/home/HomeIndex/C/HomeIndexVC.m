@@ -17,7 +17,6 @@
 #import "NSString+MD5.h"
 #import "CatigaryScrollView.h"
 
-#define  MENU_HEIGHT  XNAV_HEIGHT + 16
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
 #define  ADKEY @"Advertiseseeee"
@@ -51,7 +50,6 @@
     [self userInformation];
     [self checkTheNewVersion];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -127,7 +125,7 @@
     HomeMenuBarView *MenuView = [HomeMenuBarView menuInitWithTitles:titles clickButton:^(NSInteger index) {
         [weakSelf MenuScrollToIndex:index];
     }];
-    MenuView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, MENU_HEIGHT);
+    MenuView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, HOME_MENU_HEIGHT);
     self.MenuBarView = MenuView;
     [self.view addSubview:MenuView];
     
@@ -175,7 +173,7 @@
         [bgImageView setImage:image];
  
         UIImage *icon_word = XImage(icon_b);
-        UIImageView *word_iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, MENU_HEIGHT + 40, XSCREEN_WIDTH, XSCREEN_WIDTH * icon_word.size.height/icon_word.size.width)];
+        UIImageView *word_iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, HOME_MENU_HEIGHT + 40, XSCREEN_WIDTH, XSCREEN_WIDTH * icon_word.size.height/icon_word.size.width)];
         word_iconView.image = icon_word;
         [itemView addSubview:word_iconView];
     }

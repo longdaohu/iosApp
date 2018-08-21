@@ -48,9 +48,6 @@
     [super pushViewController:viewController animated:animated];
     
     if (self.viewControllers.count > 1) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
-        
-        //         [[NewRecommedView defaultView] hidenAnimate:NO];
-        
         // 设置导航栏按钮
         viewController.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
         viewController.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, 6, 0, 0);

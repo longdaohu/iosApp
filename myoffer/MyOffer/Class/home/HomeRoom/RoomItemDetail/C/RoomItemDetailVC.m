@@ -66,10 +66,9 @@
     };
     
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
-    backBtn.backgroundColor = XCOLOR_RANDOM;
 //    [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImage:XImage(@"back_arrow") forState:UIControlStateNormal];
-    [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateSelected];
+    [backBtn setImage:XImage(@"maiqia_call") forState:UIControlStateNormal];
+    [backBtn setImage:XImage(@"maiqia_call") forState:UIControlStateSelected];
     nav.rightView = backBtn;
     
 }

@@ -9,8 +9,6 @@
 #import "BaseViewController.h"
 #import "KDBannerView.h"
 
-@interface IntroViewController : BaseViewController {
-//    IBOutlet KDBannerView *_bannerView;
-}
+@interface IntroViewController : BaseViewController
 
 @end

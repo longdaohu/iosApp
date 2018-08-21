@@ -248,7 +248,6 @@
 		AE582C2F1D06B1D100499B6B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C2E1D06B1D100499B6B /* CoreMotion.framework */; };
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
-		AE5C824920C13E2F00EB3F82 /* NewRecommedView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
 		AE60C1A020E1E947000867A8 /* home_rent_advant_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */; };
 		AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */; };
@@ -308,6 +307,7 @@
 		AE6920A21F259BFE008B1AC7 /* SMHotSectionFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6920A11F259BFE008B1AC7 /* SMHotSectionFooterView.xib */; };
 		AE69A2AD20F5A75400194266 /* BaseTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69A2AC20F5A75300194266 /* BaseTabbar.m */; };
 		AE69A2AF20F5E77C00194266 /* guid_smart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE69A2AE20F5E77C00194266 /* guid_smart.jpg */; };
+		AE6AEDFC212A6C43002430D6 /* HomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6AEDFB212A6C43002430D6 /* HomeGuideView.m */; };
 		AE6BE79B1F4A89C100AD5B3B /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6BE7991F4A89C100AD5B3B /* PersonCell.m */; };
 		AE6DB5D71F43F72C00F7ABA4 /* dot_40x40.gif in Resources */ = {isa = PBXBuildFile; fileRef = AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */; };
 		AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F28671D77CA3C00E9A47A /* UUBar.m */; };
@@ -1116,8 +1116,6 @@
 		AE582C301D06B22C00499B6B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AE5A75D91DEEDA5300F02ABB /* TopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopNavView.h; sourceTree = "<group>"; };
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
-		AE5C824720C13E2F00EB3F82 /* NewRecommedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRecommedView.h; sourceTree = "<group>"; };
-		AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRecommedView.m; sourceTree = "<group>"; };
 		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
 		AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_c.jpg; sourceTree = "<group>"; };
@@ -1194,6 +1192,8 @@
 		AE69A2AB20F5A75300194266 /* BaseTabbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTabbar.h; sourceTree = "<group>"; };
 		AE69A2AC20F5A75300194266 /* BaseTabbar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabbar.m; sourceTree = "<group>"; };
 		AE69A2AE20F5E77C00194266 /* guid_smart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guid_smart.jpg; sourceTree = "<group>"; };
+		AE6AEDFA212A6C43002430D6 /* HomeGuideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeGuideView.h; sourceTree = "<group>"; };
+		AE6AEDFB212A6C43002430D6 /* HomeGuideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeGuideView.m; sourceTree = "<group>"; };
 		AE6BE7981F4A89C100AD5B3B /* PersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonCell.h; path = ../controller/PersonCell.h; sourceTree = "<group>"; };
 		AE6BE7991F4A89C100AD5B3B /* PersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonCell.m; path = ../controller/PersonCell.m; sourceTree = "<group>"; };
 		AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dot_40x40.gif; path = ../dot_40x40.gif; sourceTree = "<group>"; };
@@ -3290,8 +3290,6 @@
 				AE9BA42D20B3BA8E008B65D4 /* RewardVC.xib */,
 				AE9BA43320B3C426008B65D4 /* RewardHeader.h */,
 				AE9BA43420B3C426008B65D4 /* RewardHeader.m */,
-				AE5C824720C13E2F00EB3F82 /* NewRecommedView.h */,
-				AE5C824820C13E2F00EB3F82 /* NewRecommedView.m */,
 			);
 			path = Reward;
 			sourceTree = "<group>";
@@ -4492,6 +4490,8 @@
 				AE1A805620DA304D00CE9E50 /* HomeFeeCell.xib */,
 				AE4BBCFD210FF89A00209FC8 /* HomeBannerThemeLayout.h */,
 				AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */,
+				AE6AEDFA212A6C43002430D6 /* HomeGuideView.h */,
+				AE6AEDFB212A6C43002430D6 /* HomeGuideView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5531,6 +5531,7 @@
 				AECC87D41F95F63800FCBBEC /* MyOfferCountryState.m in Sources */,
 				AE3AB6B61F21A27300A3C7E3 /* SuperMasterViewController.m in Sources */,
 				AECC678720EB5DFE00B1904B /* CreateOrderContractCell.m in Sources */,
+				AE6AEDFC212A6C43002430D6 /* HomeGuideView.m in Sources */,
 				AEC4285020E09ECC007B3949 /* HomeUVICImmigrationProjectCell.m in Sources */,
 				AECC87D21F95F63800FCBBEC /* MyOfferArea.m in Sources */,
 				AECC87D31F95F63800FCBBEC /* MyOfferCountry.m in Sources */,
@@ -5567,7 +5568,6 @@
 				AEA24C071D5B269A00DD7939 /* APIClient.m in Sources */,
 				AE93E4E21D6DAAF80025FC58 /* UniverstyHeaderView.m in Sources */,
 				AEA249B31D5B215300DD7939 /* UpgradeViewController.m in Sources */,
-				AE5C824920C13E2F00EB3F82 /* NewRecommedView.m in Sources */,
 				AE033FD120182EA700D1D425 /* myOfferPageViewController.m in Sources */,
 				AEA5FDB71E0D32C70064B1B5 /* EmptyDataView.m in Sources */,
 				AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */,

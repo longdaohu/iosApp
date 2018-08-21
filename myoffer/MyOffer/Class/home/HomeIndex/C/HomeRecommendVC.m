@@ -23,6 +23,7 @@
 #import "HomeRecommendProdoctView.h"
 #import "HomeBannerThemesVC.h"
 #import "HomeBannerObject.h"
+#import "HomeGuideView.h"
 
 @interface HomeRecommendVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -33,9 +34,32 @@
 @property(nonatomic,assign)CGFloat commoditie_height;
 @property(nonatomic,assign)NSInteger request_count;
 @property(nonatomic,strong)NSArray *bannerThemes;
+@property(nonatomic,strong)HomeGuideView *guideView;
+
 @end
 
 @implementation HomeRecommendVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+ 
+    NSString *value = [USDefault valueForKey:@"HomeGuideView"];
+    if (!value) {
+        [self.guideView show];
+    }
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    if (self.guideView) {
+        [self.guideView hide];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +82,6 @@
         theme.type = SectionGroupTypeBannerTheme;
         theme.accesory_title= @"查看更多";
         theme.cell_height_set =( 185 * XSCREEN_WIDTH / 375.0) + 20;
-        
         myofferGroupModel *video  = [myofferGroupModel groupWithItems:nil header:@"热门视频"];
         video.type = SectionGroupTypeHotVideo;
         video.accesory_title= @"查看更多";
@@ -70,6 +93,24 @@
     }
     
     return _groups;
+}
+
+#pragma mark : UI设置
+
+- (HomeGuideView *)guideView{
+    
+    if (!_guideView) {
+        _guideView = [HomeGuideView guideView];
+        [[UIApplication sharedApplication].keyWindow addSubview: _guideView];
+    }
+    
+    return _guideView;
+}
+
+
+- (BOOL)isCurrentViewControllerVisible
+{
+    return (self.isViewLoaded && self.view.window);
 }
 
 - (UIView *)header{
@@ -84,269 +125,6 @@
     }
     
     return _header;
-}
-
-- (void)makeData{
-    
-    [self makeHotProducts];
-    [self makeHotActivity];
-    [self makeHotVideo];
-    [self makeHotArticle];
-    [self makeBannerTheme];
-}
-/*-----------banner----------*/
-- (void)makeBannerData{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=BANNER&source=app",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-        [weakSelf makBannerViewWithResponse:response];
-    }];
-}
-- (void)makBannerViewWithResponse:(id)response{
-    
-    if (!ResponseIsOK) {
-        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
-        return;
-    }
-    
-    NSDictionary *result = response[@"result"];
-    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
-    
-    NSMutableArray *url_arr = [NSMutableArray array];
-    NSMutableArray *target_arr = [NSMutableArray array];
-    for (HomeBannerObject *banner in banneres) {
-         if (banner.image && banner.target) {
-            [url_arr addObject:[banner.image toUTF8WithString]];
-            [target_arr addObject:banner.target];
-        }
-    }
-    
-    if (url_arr.count == 0) {
-        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
-        return;
-    }
-    
-    if (!self.bannerView) {
-        CGFloat b_x = 20;
-        CGFloat b_w = XSCREEN_WIDTH - b_x * 2;
-        CGFloat b_h = b_w * 316.0/668;
-        CGRect banner_frame = CGRectMake(b_x, 0, b_w,b_h);
-        self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-        [self.header addSubview:self.bannerView];
-        self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-        self.bannerView.layer.cornerRadius = CORNER_RADIUS;
-        self.bannerView.layer.masksToBounds = YES;
-        WeakSelf
-        self.bannerView.clickItemOperationBlock = ^(NSInteger index) {
-            NSString *target  = target_arr[index];
-            [weakSelf CaseLandingPage:target];
-        };
-        self.header.mj_h = (b_h + 20);
-        self.tableView.tableHeaderView = self.header;
-    }
-    self.bannerView.imageURLStringsGroup = url_arr;
-}
-/*-----------banner----------*/
-
-/*-----------hotProducts----------*/
-- (void)makeHotProducts{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/hotProducts/3",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makHotProductsWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [weakSelf caseEmpty];
-                           }];
-    
-}
-- (void)makHotProductsWithResponse:(id)response{
-    
-    if (!ResponseIsOK) {
-        [self caseEmpty];
-        return;
-    }
-    
-    NSArray *items = response[@"result"];
-    if (items.count == 0)  {
-        [self caseEmpty];
-        return;
-    }
-    [self caseEmpty];
-    NSArray *skus = [ServiceSKU mj_objectArrayWithKeyValuesArray:items];
-    [self reloadWithItems:@[skus] type:SectionGroupTypeHotCommodities];
-    
-}
-- (void)caseSKU:(NSString *)sku_id{
-    
-    ServiceItemViewController *vc =[[ServiceItemViewController alloc] init];
-    vc.service_id = sku_id;
-    PushToViewController(vc);
-}
-/*-----------hotProducts----------*/
-
-/*-----------hotActivity----------*/
-- (void)makeHotActivity{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD&source=app",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makHotActivityWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [weakSelf caseEmpty];
-                           }];
-}
-- (void)makHotActivityWithResponse:(id)response{
-    if (!ResponseIsOK) {
-        [self caseEmpty];
-        return;
-    }
-    NSDictionary *result = response[@"result"];
-    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
-    if (banneres.count == 0) {
-        [self caseEmpty];
-        return;
-    }
-    [self caseEmpty];
-    [self reloadWithItems:@[banneres] type:SectionGroupTypePopularActivity];
-}
-
-- (void)caseActivity:(NSString *)url{
-    
-    if ([url isEqualToString:@"caseInvitation"]) {
-        [self caseInvitation];
-        return;
-    }
-    
-    NSString *app_pre = @"app://";
-    //url 包含 app://跳转 ServiceItemViewController
-    if ([url containsString:app_pre]) {
-        
-        NSString *item = [url substringWithRange:NSMakeRange(app_pre.length, url.length - app_pre.length)];
-        if (item.length > 0) {
-            ServiceItemViewController *vc = [[ServiceItemViewController alloc] init];
-            vc.service_id = item;
-            PushToViewController(vc);
-        }
-        
-        return;
-    }
-    //url 包含 app://跳转 WebViewController
-    WebViewController *vc = [[WebViewController alloc] initWithPath:url];
-    PushToViewController(vc);
-    
-}
-/*-----------hotActivity----------*/
-
-/*-----------热门视频----------*/
-- (void)makeHotVideo{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/lecture",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makHotVideoWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [weakSelf caseEmpty];
-                           }];
-}
-- (void)makHotVideoWithResponse:(id)response{
-    
-    if (!ResponseIsOK)  {
-        [self caseEmpty];
-        return;
-    }
-    NSArray *items = response[@"result"];
-    if (items.count == 0)  {
-        [self caseEmpty];
-        return;
-    }
-    [self caseEmpty];
-    [self reloadWithItems:@[items] type:SectionGroupTypeHotVideo];
-}
-- (void)caseHotVideo:(NSString *)video_id{
-    SMDetailViewController *vc = [[SMDetailViewController alloc] init];
-    vc.message_id = video_id;
-    PushToViewController(vc);
-}
-/*-----------热门视频----------*/
-
-/*-----------文章栏目----------*/
-- (void)makeHotArticle{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@svc/article/hotArticle",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makHotArticleWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [weakSelf caseEmpty];
-                           }];
-}
-- (void)makHotArticleWithResponse:(id)response{
-    if (!ResponseIsOK)  {
-        [self caseEmpty];
-        return;
-    }
-    NSArray *items = response[@"result"];
-    if (items.count == 0)  {
-        [self caseEmpty];
-        return;
-    }
-    
-    [self caseEmpty];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:items forKey:@"HotArticle"];
-    [ud synchronize];
-    
-    [self reloadWithItems:items type:SectionGroupTypeArticleColumn];
-}
-/*-----------文章栏目----------*/
-
-/*-----------专题攻略----------*/
-- (void)makeBannerTheme{
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL&source=app",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makeBannerThemeWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [weakSelf caseEmpty];
-                           }];
-}
-- (void)makeBannerThemeWithResponse:(id)response{
-    if (!ResponseIsOK)  {
-        [self caseEmpty];
-        return;
-    }
- 
-    NSDictionary *result = response[@"result"];
-    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
-        if (banneres.count == 0)  {
-        [self caseEmpty];
-        return;
-    }
-    
-    [self caseEmpty];
-    self.bannerThemes = banneres;
-    if (banneres.count >5) {
-        banneres = [banneres subarrayWithRange:NSMakeRange(0, 5)];
-    }
-    [self reloadWithItems:@[banneres] type:SectionGroupTypeBannerTheme];
-}
-/*-----------专题攻略----------*/
-
-- (void)reloadWithItems:(NSArray *)items type:(SectionGroupType)type{
-    
-    self.request_count = 0 ;
-    
-    NSInteger index = 0;
-    for (myofferGroupModel *group in self.groups) {
-        if (group.type == type) {
-            index = [self.groups indexOfObject:group];
-            group.items = items;
-            break;
-        }
-    }
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)makeUI{
@@ -481,6 +259,7 @@ static NSString *identify = @"cell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     myofferGroupModel *group = self.groups[indexPath.section];
+ 
     if (group.type == SectionGroupTypeHotCommodities) {
         return  self.commoditie_height;
     }
@@ -505,21 +284,297 @@ static NSString *identify = @"cell";
 #pragma mark : SDCycleScrollViewDelegate
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
 }
 /** 图片滚动回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
 }
 
+
+#pragma mark : 数据加载
+
+- (void)makeData{
+    
+    [self makeHotProducts];
+    [self makeHotActivity];
+    [self makeHotVideo];
+    [self makeHotArticle];
+    [self makeBannerTheme];
+}
+/*-----------banner----------*/
+- (void)makeBannerData{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=BANNER&source=app",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+        [weakSelf makBannerViewWithResponse:response];
+    }];
+}
+- (void)makBannerViewWithResponse:(id)response{
+    
+    if (!ResponseIsOK) {
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
+        return;
+    }
+    
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    
+    NSMutableArray *url_arr = [NSMutableArray array];
+    NSMutableArray *target_arr = [NSMutableArray array];
+    for (HomeBannerObject *banner in banneres) {
+        if (banner.image && banner.target) {
+            [url_arr addObject:[banner.image toUTF8WithString]];
+            [target_arr addObject:banner.target];
+        }
+    }
+    
+    if (url_arr.count == 0) {
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0.001)];
+        return;
+    }
+    
+    if (!self.bannerView) {
+        CGFloat b_x = 20;
+        CGFloat b_w = XSCREEN_WIDTH - b_x * 2;
+        CGFloat b_h = b_w * 316.0/668;
+        CGRect banner_frame = CGRectMake(b_x, 0, b_w,b_h);
+        self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+        [self.header addSubview:self.bannerView];
+        self.bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        self.bannerView.layer.cornerRadius = CORNER_RADIUS;
+        self.bannerView.layer.masksToBounds = YES;
+        WeakSelf
+        self.bannerView.clickItemOperationBlock = ^(NSInteger index) {
+            NSString *target  = target_arr[index];
+            [weakSelf CaseLandingPage:target];
+        };
+        self.header.mj_h = (b_h + 20);
+        self.tableView.tableHeaderView = self.header;
+    }
+    self.bannerView.imageURLStringsGroup = url_arr;
+}
+/*-----------banner----------*/
+
+/*-----------hotProducts----------*/
+- (void)makeHotProducts{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/hotProducts/3",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makHotProductsWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+    
+}
+- (void)makHotProductsWithResponse:(id)response{
+    
+    if (!ResponseIsOK) {
+        [self caseEmpty];
+        return;
+    }
+    
+    NSArray *items = response[@"result"];
+    if (items.count == 0)  {
+        [self caseEmpty];
+        return;
+    }
+    [self caseEmpty];
+    NSArray *skus = [ServiceSKU mj_objectArrayWithKeyValuesArray:items];
+    [self reloadWithItems:@[skus] type:SectionGroupTypeHotCommodities];
+    
+}
+- (void)caseSKU:(NSString *)sku_id{
+    
+    ServiceItemViewController *vc =[[ServiceItemViewController alloc] init];
+    vc.service_id = sku_id;
+    PushToViewController(vc);
+}
+/*-----------hotProducts----------*/
+
+/*-----------hotActivity----------*/
+- (void)makeHotActivity{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=SPHD&source=app",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makHotActivityWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makHotActivityWithResponse:(id)response{
+    if (!ResponseIsOK) {
+        [self caseEmpty];
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    if (banneres.count == 0) {
+        [self caseEmpty];
+        return;
+    }
+    [self caseEmpty];
+    [self reloadWithItems:@[banneres] type:SectionGroupTypePopularActivity];
+}
+
+- (void)caseActivity:(NSString *)url{
+    
+    if ([url isEqualToString:@"caseInvitation"]) {
+        [self caseInvitation];
+        return;
+    }
+    
+    NSString *app_pre = @"app://";
+    //url 包含 app://跳转 ServiceItemViewController
+    if ([url containsString:app_pre]) {
+        
+        NSString *item = [url substringWithRange:NSMakeRange(app_pre.length, url.length - app_pre.length)];
+        if (item.length > 0) {
+            ServiceItemViewController *vc = [[ServiceItemViewController alloc] init];
+            vc.service_id = item;
+            PushToViewController(vc);
+        }
+        
+        return;
+    }
+    //url 包含 app://跳转 WebViewController
+    WebViewController *vc = [[WebViewController alloc] initWithPath:url];
+    PushToViewController(vc);
+    
+}
+/*-----------hotActivity----------*/
+
+/*-----------热门视频----------*/
+- (void)makeHotVideo{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@svc/app/lecture",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makHotVideoWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makHotVideoWithResponse:(id)response{
+    
+    if (!ResponseIsOK)  {
+        [self caseEmpty];
+        return;
+    }
+    NSArray *items = response[@"result"];
+    if (items.count == 0)  {
+        [self caseEmpty];
+        return;
+    }
+    [self caseEmpty];
+    [self reloadWithItems:@[items] type:SectionGroupTypeHotVideo];
+}
+- (void)caseHotVideo:(NSString *)video_id{
+    SMDetailViewController *vc = [[SMDetailViewController alloc] init];
+    vc.message_id = video_id;
+    PushToViewController(vc);
+}
+/*-----------热门视频----------*/
+
+/*-----------文章栏目----------*/
+- (void)makeHotArticle{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@svc/article/hotArticle",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makHotArticleWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makHotArticleWithResponse:(id)response{
+    if (!ResponseIsOK)  {
+        [self caseEmpty];
+        return;
+    }
+    NSArray *items = response[@"result"];
+    if (items.count == 0)  {
+        [self caseEmpty];
+        return;
+    }
+    
+    [self caseEmpty];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:items forKey:@"HotArticle"];
+    [ud synchronize];
+    
+    [self reloadWithItems:items type:SectionGroupTypeArticleColumn];
+}
+/*-----------文章栏目----------*/
+
+/*-----------专题攻略----------*/
+- (void)makeBannerTheme{
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=ZTGL&source=app",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeBannerThemeWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               [weakSelf caseEmpty];
+                           }];
+}
+- (void)makeBannerThemeWithResponse:(id)response{
+    if (!ResponseIsOK)  {
+        [self caseEmpty];
+        return;
+    }
+    
+    NSDictionary *result = response[@"result"];
+    NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    if (banneres.count == 0)  {
+        [self caseEmpty];
+        return;
+    }
+    
+    [self caseEmpty];
+    
+    self.bannerThemes = banneres;
+    if (banneres.count > 5) {
+        banneres = [banneres subarrayWithRange:NSMakeRange(0, 5)];
+    }
+    [self reloadWithItems:@[banneres] type:SectionGroupTypeBannerTheme];
+}
+/*-----------专题攻略----------*/
+
+- (void)reloadWithItems:(NSArray *)items type:(SectionGroupType)type{
+    
+    self.request_count += 1 ;
+    NSInteger index = 0;
+    for (myofferGroupModel *group in self.groups) {
+        if (group.type == type) {
+            index = [self.groups indexOfObject:group];
+            group.items = items;
+            break;
+        }
+    }
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:UITableViewRowAnimationFade];
+    
+    //判断是否显示导航信息
+    if (self.request_count >= self.groups.count) {
+        WeakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([weakSelf isCurrentViewControllerVisible]) {
+                [weakSelf.guideView show];
+            }else{
+                [weakSelf.guideView hide];
+            }
+        });
+    }
+    
+}
+
 #pragma mark : 事件处理
 - (void)caseEmpty{
-    
-    self.request_count +=1;
-    if (self.request_count >= self.groups.count) {
-        [self.tableView emptyViewWithHiden:NO];
-    }else{
-        [self.tableView emptyViewWithHiden:YES];
-    }
 
+    BOOL toBeHiden = (self.request_count == 0)  ? NO : YES;
+    [self.tableView emptyViewWithHiden: toBeHiden];
+ 
 }
 
 - (void)caseHeaderView:(SectionGroupType)type{
@@ -586,7 +641,7 @@ static NSString *identify = @"cell";
     
     RequireLogin
     WeakSelf
-    [self startAPIRequestWithSelector:kAPISelectorPromotionSummary  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+    [self startAPIRequestWithSelector:kAPISelectorPromotionSummary  parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf caseInvitationActivityWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) { }];
 }

@@ -13,7 +13,6 @@
 #import "HomeUVICCell.h"
 #import "MeiqiaServiceCall.h"
 
-#define  MENU_HEIGHT  XNAV_HEIGHT + 16
 
 @interface HomeFeeVC ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -133,7 +132,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT - MENU_HEIGHT) style:UITableViewStylePlain];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT,XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -248,7 +247,7 @@
     self.bgView.userInteractionEnabled = NO;
     self.tabBarController.tabBar.hidden = NO;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.tableView.mj_y =  MENU_HEIGHT;
+        self.tableView.mj_y =  HOME_MENU_HEIGHT;
         self.meiqiaBtn.alpha = 1;
         
     } completion:^(BOOL finished) {

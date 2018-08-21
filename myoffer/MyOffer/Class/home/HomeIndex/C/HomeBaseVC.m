@@ -6,7 +6,6 @@
 //  Copyright © 2018年 UVIC. All rights reserved.
 //
 
-#define  MENU_HEIGHT  XNAV_HEIGHT + 16
 #import "HomeBaseVC.h"
 #import "HomeSecView.h"
 #import "SearchUniversityCenterViewController.h"
@@ -81,7 +80,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - MENU_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -215,7 +214,7 @@ static NSString *identify = @"cell";
     self.bgView.userInteractionEnabled = NO;
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.tableView.mj_y =  MENU_HEIGHT;
+        self.tableView.mj_y =  HOME_MENU_HEIGHT;
         self.meiqiaBtn.alpha = 1;
     } completion:^(BOOL finished) {
         

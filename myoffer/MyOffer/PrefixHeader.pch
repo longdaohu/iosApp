@@ -28,6 +28,7 @@
 #define XTabBarHeight  (CGFloat)(IsiPhoneBigScreen?(83):(49))
 #define XNAV_HEIGHT  (XSCREEN_HEIGHT > 800.0 ? 88.0 : 64.0)
 #define XStatusBar_Height  (XSCREEN_HEIGHT >= 812.0 ? 44.0 : 20.0)
+#define HOME_MENU_HEIGHT  XNAV_HEIGHT + 16
 #define FLOWLAYOUT_SubW  (XSCREEN_WIDTH - 41) / 3
 #define FLOWLAYOUT_CityW  XSCREEN_WIDTH / 3
 #define MASSAGE_HEADER_HIGHT  XSCREEN_WIDTH * 0.3 + 50
@@ -160,7 +161,6 @@
 #import "myofferBaseTableViewController.h"
 #import "UIAlertController+alert.h"
 #import "NSString+extent.h"
-#import "NewRecommedView.h"
 #import "myofferGroupModel.h"
 
 

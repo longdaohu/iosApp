@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIButton *backBtn;
 @property(nonatomic,strong)UIButton *titleBtn;
+@property(nonatomic,strong)CAShapeLayer *shaper;
 
 @end
 
@@ -44,7 +45,16 @@
         gradient.startPoint = CGPointMake(0, 1.0);
         gradient.endPoint = CGPointMake(0, 0);
         [self.layer addSublayer:gradient];
- 
+        
+        
+        CAShapeLayer *shaper = [CAShapeLayer layer];
+        self.shaper = shaper;
+        [self.layer addSublayer:shaper];
+        shaper.shadowColor = XCOLOR_BLACK.CGColor;
+        shaper.shadowOffset = CGSizeMake(0, 0);
+        shaper.shadowOpacity = 0.5;
+        shaper.opacity = 0;
+        
         UIView *bgView = [UIView new];
         [self addSubview:bgView];
         self.bgView = bgView;
@@ -89,44 +99,23 @@
     CGFloat alp = scrollView.mj_offsetY/self.alpha_height;
     if (alp < 0) alp  = 0;
     self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:alp];
-    
+//    self.bgView.alpha = alp;
     for (UIView *item in self.bgView.subviews) {
-        
-        if ([item isKindOfClass:[UIButton class]]) {
-            
+        if ([item isMemberOfClass:[UIButton class]]) {
             UIButton *sender =(UIButton *)item;
-            if (alp <= 0) {
-                sender.alpha = 1;
-                sender.alpha = 1;
-                sender.selected = NO;
-                sender.selected = NO;
-            }else{
-                sender.alpha = alp;
-                sender.selected = YES;
-                sender.selected = YES;
-                sender.alpha = alp;
-            }
+            sender.selected = (alp > 0);
         }
- 
     }
     
-//    if (alp <= 0) {
-//        self.backBtn.alpha = 1;
-//        self.titleBtn.alpha = 1;
-//        self.backBtn.selected = NO;
-//        self.titleBtn.selected = NO;
-//    }else{
-//        self.backBtn.alpha = alp;
-//        self.backBtn.selected = YES;
-//        self.titleBtn.selected = YES;
-//        self.titleBtn.alpha = alp;
-//    }
+    self.shaper.opacity =  alp ;
+    
 }
+
 - (void)setRightView:(UIView *)rightView{
     
     _rightView = rightView;
     
-     [self addSubview:rightView];
+     [self.bgView addSubview:rightView];
 }
 
 - (void)layoutSubviews{
@@ -178,6 +167,12 @@
     }
     
     self.titleBtn.frame = CGRectMake(title_x, title_y, title_w, title_h);
+    
+    if (!self.shaper.shadowPath) {
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.bgView.frame];
+        self.shaper.shadowPath = path.CGPath;
+    }
  
 }
 

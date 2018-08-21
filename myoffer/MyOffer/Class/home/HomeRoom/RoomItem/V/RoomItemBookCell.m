@@ -25,7 +25,12 @@
     
     self.bgView.layer.cornerRadius = CORNER_RADIUS;
     self.priceLab.textColor = XCOLOR_RED;
-}
+    
+    self.bookBtn.layer.shadowColor = XCOLOR_RED.CGColor;
+    self.bookBtn.layer.shadowOffset = CGSizeMake(0, 3);
+    self.bookBtn.layer.shadowOpacity = 0.3;
+    
+ }
 
 
 - (IBAction)book:(UIButton *)sender {
