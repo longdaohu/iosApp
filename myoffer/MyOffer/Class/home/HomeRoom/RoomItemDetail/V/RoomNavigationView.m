@@ -62,7 +62,7 @@
         UIButton *backBtn = [[UIButton alloc] init];
         self.backBtn = backBtn;
         [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
-        [backBtn setImage:XImage(@"back_arrow") forState:UIControlStateNormal];
+        [backBtn setImage:XImage(@"back_arrow_white") forState:UIControlStateNormal];
         [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateSelected];
         [bgView addSubview:backBtn];
  

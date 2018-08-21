@@ -79,7 +79,7 @@
     
     self.tableView.alpha = 0.2;
     if (self.back_root_vc) {
-        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
+        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
         self.navigationItem.leftBarButtonItem.imageInsets = UIEdgeInsetsMake(0, -5, 0, 0);
     }
     

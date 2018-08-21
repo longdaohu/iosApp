@@ -52,7 +52,6 @@
         self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
 }
- 
 
 - (UIButton *)emptyView{
     

@@ -10,7 +10,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "KDKeychain.h"
-#import "IntroViewController.h"
 #import "UserDefaults.h"
 #import "MyOfferLoginViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -82,16 +81,8 @@ static AppDelegate *__sharedDelegate;
     [self.window makeKeyAndVisible];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
-    //产品引导页面
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
-    
-    if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
-        [self.window.rootViewController presentViewController:[[IntroViewController alloc] initWithNibName:@"IntroViewController" bundle:nil] animated:NO completion:nil];
-        [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
-    }
-
 }
+
 -(void)JpushWithOptions:(NSDictionary *)launchOptions //极光推送
 {
     

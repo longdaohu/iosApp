@@ -125,7 +125,7 @@
     self.cover.alpha = 0;
     [self.view addSubview:self.cover];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(caseBack)];
    
 }
 -(void)makeBindView

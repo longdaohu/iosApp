@@ -149,7 +149,7 @@
     self.rightLab.textAlignment = NSTextAlignmentRight;
     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem  alloc] initWithCustomView:self.rightLab];
     
-    self.backBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
+    self.backBtn =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStylePlain target:self action:@selector(caseBack)];
      self.navigationItem.leftBarButtonItem = self.backBtn;
     
 }

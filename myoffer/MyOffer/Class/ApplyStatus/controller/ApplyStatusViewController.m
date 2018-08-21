@@ -78,7 +78,7 @@
 {
     self.title = @"审核状态";
     if (self.isBackRootViewController) {
-        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
     }
     
 }

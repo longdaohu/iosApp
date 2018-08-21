@@ -44,12 +44,10 @@
     
     [super viewWillAppear:animated];
  
-    NSString *value = [USDefault valueForKey:@"HomeGuideView"];
-    if (!value) {
+    if (self.guideView) {
         [self.guideView show];
     }
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated{
     
@@ -60,13 +58,30 @@
     }
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self makeUI];
     [self makeBannerData];
     [self makeData];
+}
+
+- (void)makeGuideView{
+    
+    //产品引导页面
+    NSString *version = [self checkAPPVersion];
+    NSString *value = [USDefault valueForKey:@"APPVersion"];
+    if (![value isEqualToString:version]) {
+        self.guideView = [HomeGuideView guideView];
+        [[UIApplication sharedApplication].keyWindow addSubview: self.guideView];
+    }
+}
+
+//检查版本更新
+-(NSString *)checkAPPVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    return [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 }
 
 - (NSArray *)groups{
@@ -96,16 +111,6 @@
 }
 
 #pragma mark : UI设置
-
-- (HomeGuideView *)guideView{
-    
-    if (!_guideView) {
-        _guideView = [HomeGuideView guideView];
-        [[UIApplication sharedApplication].keyWindow addSubview: _guideView];
-    }
-    
-    return _guideView;
-}
 
 
 - (BOOL)isCurrentViewControllerVisible
@@ -558,6 +563,7 @@ static NSString *identify = @"cell";
     //判断是否显示导航信息
     if (self.request_count >= self.groups.count) {
         WeakSelf;
+        [self makeGuideView];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([weakSelf isCurrentViewControllerVisible]) {
                 [weakSelf.guideView show];
@@ -566,7 +572,6 @@ static NSString *identify = @"cell";
             }
         });
     }
-    
 }
 
 #pragma mark : 事件处理

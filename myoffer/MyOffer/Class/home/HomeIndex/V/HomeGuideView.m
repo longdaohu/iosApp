@@ -98,15 +98,18 @@
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
-//        if (finished) [self removeFromSuperview];
+        [self removeFromSuperview];
     }];
-    [USDefault setValue:@"HomeGuideView" forKey:@"HomeGuideView"];
-    [USDefault synchronize];
+    [self checkAPPVersion];
 }
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
- 
+//检查版本更新
+-(void)checkAPPVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+     NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    [USDefault setValue:version  forKey:@"APPVersion"];
+    [USDefault synchronize];
 }
 
 @end

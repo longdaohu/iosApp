@@ -21,23 +21,17 @@
     
     [super awakeFromNib];
 
-    self.backgroundColor = XCOLOR_BG;
-    
-     self.ProfileLab.text = GDLocalizedString(@"About_profile");
-    
+     self.backgroundColor = XCOLOR_BG;
+     self.ProfileLab.text = @"myOffer ®是全球留学生的在线“留学+”服务生态圈平台，一个跨境的全球留学生服务生态圈。";
      [self checkAPPVersion];
 }
 
 //检查版本更新
 -(void)checkAPPVersion
 {
-  
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    // app名称
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    
-     self.versionLab.text = [NSString stringWithFormat:@"Version %@",app_Version];
-    
+    self.versionLab.text = [NSString stringWithFormat:@"Version %@",app_Version];
 }
 
 

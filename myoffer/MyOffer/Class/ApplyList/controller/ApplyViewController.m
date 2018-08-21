@@ -263,7 +263,7 @@ typedef NS_ENUM(NSInteger,ApplyTableStatus){
 
 -(void)makeNavigationBarButtonItem{
     
-    UIBarButtonItem  *leftItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
+    UIBarButtonItem  *leftItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStylePlain target:self action:@selector(popBackRootViewController)];
     self.navigationItem.leftBarButtonItem  = leftItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:Button_Title_Edit style:UIBarButtonItemStylePlain target:self action:@selector(EditButtonOnClick:)];
 }

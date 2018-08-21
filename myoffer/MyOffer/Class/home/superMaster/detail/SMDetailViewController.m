@@ -351,7 +351,7 @@
     [self.bgView addSubview:self.playerFatherView];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+    [_backButton setImage:[UIImage imageNamed:@"back_arrow_white"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:_backButton];
     CGFloat top_y = IsiPhoneBigScreen ? 40 : 20;

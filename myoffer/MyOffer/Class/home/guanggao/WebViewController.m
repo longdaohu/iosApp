@@ -100,7 +100,7 @@
         
     }else{
         
-        UIBarButtonItem *pre_item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStyleDone target:self action:@selector(casePre)];
+        UIBarButtonItem *pre_item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_arrow_white"] style:UIBarButtonItemStyleDone target:self action:@selector(casePre)];
         UIBarButtonItem *pop_item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_button"] style:UIBarButtonItemStyleDone target:self action:@selector(casePop)];
         self.navigationItem.leftBarButtonItems = @[pre_item,pop_item];
         
