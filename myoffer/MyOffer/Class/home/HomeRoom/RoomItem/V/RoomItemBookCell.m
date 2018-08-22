@@ -44,6 +44,10 @@
 - (void)setItem:(RoomTypeBookItemModel *)item{
     _item = item;
     
+    self.bookBtn.enabled = !item.state.boolValue;
+    UIColor *shadow_color = item.state.boolValue ?  XCOLOR_BLACK : XCOLOR_RED;
+    self.bookBtn.layer.shadowColor = shadow_color.CGColor;
+    
     self.subTitleLab.text = item.note;
     self.priceLab.text = item.priceCurrency;
     self.timeLab.text = item.start_date;

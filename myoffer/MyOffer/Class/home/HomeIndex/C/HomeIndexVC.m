@@ -109,13 +109,6 @@
         [self addChildViewController:vc];
     }
     [self makeOther];
- 
-    //产品引导页面
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
-    if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
-        [self presentViewController:[[IntroViewController alloc] initWithNibName:@"IntroViewController" bundle:nil] animated:NO completion:nil];
-        [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
-    }
 }
 
 - (void)makeUI{

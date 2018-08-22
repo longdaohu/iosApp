@@ -140,6 +140,15 @@ static NSString *identify = @"RoomCityModel";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    myofferGroupModel *group = self.groups[indexPath.section];
+    NSLog(@"items.count == %ld",group.items.count);
+    RoomCityModel *city = group.items[indexPath.row];
+    if (self.actionBlock) {
+        self.actionBlock(city.item_id);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

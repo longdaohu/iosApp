@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomSearchResultItemModel.h"
 
 @interface HomeRoomSearchResultView : UIView
 @property(nonatomic,strong)NSArray *items;
 //当前搜索页是否显示
 @property(nonatomic,assign,readonly)BOOL state;
-@property(nonatomic,strong)void(^actionBlock)(NSString *item_id);
+@property(nonatomic,strong)void(^actionBlock)(RoomSearchResultItemModel *);
+
 + (instancetype)viewWithHidenCompletion:(void (^)(BOOL finished))completion;
 - (void)show;
 - (void)hide;

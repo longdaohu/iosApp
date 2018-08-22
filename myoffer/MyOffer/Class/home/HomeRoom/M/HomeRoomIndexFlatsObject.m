@@ -43,6 +43,15 @@
     return _priceAttribue;
 }
 
+- (NSString *)thumb{
+    
+    if (!_thumb) {
+        _thumb = [self.thumbnail toUTF8WithString];
+    }
+    
+    return _thumb;
+}
+
 
 
 

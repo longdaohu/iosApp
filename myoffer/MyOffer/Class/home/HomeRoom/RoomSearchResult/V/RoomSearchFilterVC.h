@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RoomSearchFilterVC : UIViewController
-@property(nonatomic,copy)void(^actionBlock)();
+@property(nonatomic,copy)void(^actionBlock)(NSDictionary *parameter);
 - (void)show;
 @end

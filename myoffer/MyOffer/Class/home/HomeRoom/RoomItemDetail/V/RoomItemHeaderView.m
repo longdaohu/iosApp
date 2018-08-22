@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UIView *crossView;
 @property(nonatomic,strong)UIView *boxView;
 @property(nonatomic,strong)UIView *bgView;
-@property(nonatomic,strong)UIButton *mapView;
+@property(nonatomic,strong)UIImageView *mapView;
 @property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
@@ -67,12 +67,15 @@
         [box addSubview:line];
         self.line = line;
  
-        UIButton *map = [UIButton new];
+        UIImageView *map = [UIImageView new];
         map.backgroundColor = XCOLOR_BG;
-        map.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        [map addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];
+        map.clipsToBounds = YES;
+        map.contentMode = UIViewContentModeScaleAspectFill;
         [box addSubview:map];
         self.mapView = map;
+        map.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(caseMap)];
+        [map addGestureRecognizer:tap];
         
         UILabel *title = [UILabel new];
         title.numberOfLines = 0;
@@ -139,8 +142,7 @@
     self.addressLab.frame = itemFrameModel.address_frame;
  
     NSString *path = itemFrameModel.item.minimap;
-    path = @"http://www.suanning.com/uploadfile/2015/0616/20150616073334844.jpg";
-    [self.mapView sd_setImageWithURL:[NSURL URLWithString:path]  forState:UIControlStateNormal placeholderImage:nil];
+    [self.mapView sd_setImageWithURL:[NSURL URLWithString:path]  placeholderImage:nil];
     
     self.titleLab.font = XFONT(itemFrameModel.header_title_font_size);
     self.titleLab.text = itemFrameModel.item.name;

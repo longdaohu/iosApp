@@ -17,7 +17,6 @@
 @property(nonatomic,strong)NSMutableArray *group;
 //请求数据第几页
 @property(nonatomic,assign)int nextPage;
-
 @property(nonatomic,strong)MJRefreshBackNormalFooter *footer_mj;
 
 @end
@@ -174,23 +173,17 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
-
 - (void)updateTableViewStatus{
 
     if (0 == self.group.count) {
-        
         self.tableView.mj_header = nil;
         self.tableView.mj_footer = nil;
     }
     
-    
     //是否提示无数据状态
     if (self.group.count == 0) {
-        
         [self.tableView emptyViewWithError:@"没有通知消息哦！"];
-        
     }else{
-        
         [self.tableView emptyViewWithHiden:YES];
     }
 

@@ -17,6 +17,7 @@
     
     [super viewWillAppear:animated];
      NavigationBarHidden(NO);
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewDidLoad {

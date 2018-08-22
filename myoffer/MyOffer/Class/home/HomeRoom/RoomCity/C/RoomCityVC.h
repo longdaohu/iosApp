@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RoomCityVC : UIViewController
+@property(nonatomic,strong)void(^actionBlock)(NSString *type_id);
 
 @end

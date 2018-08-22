@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomeRoomIndexFlatsObject.h"
 @interface RoomSearchCell : UITableViewCell
+@property(nonatomic,strong)HomeRoomIndexFlatsObject *item;
 
 @end

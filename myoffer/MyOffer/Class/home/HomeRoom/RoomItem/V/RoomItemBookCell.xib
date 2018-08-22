@@ -75,6 +75,7 @@
                         <state key="normal" title="预订" backgroundImage="button_red_nomal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <state key="disabled" backgroundImage="button_light_unable"/>
                         <state key="highlighted" backgroundImage="button_red_highlight"/>
                         <connections>
                             <action selector="book:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lKc-i6-UjG"/>
@@ -113,6 +114,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="button_light_unable" width="21" height="21"/>
         <image name="button_red_highlight" width="24" height="23"/>
         <image name="button_red_nomal" width="18" height="24"/>
     </resources>

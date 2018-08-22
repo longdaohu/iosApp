@@ -84,8 +84,8 @@
             
         }];
          _resultView.frame = self.view.bounds;
-        _resultView.actionBlock = ^(NSString *item_id) {
-            [weakSelf caseSearchWithID:item_id];
+        _resultView.actionBlock = ^(RoomSearchResultItemModel  *item) {
+            [weakSelf caseSearchWithItem:item];
         };
         [self.view addSubview:_resultView];
     }
@@ -279,20 +279,17 @@
     }
 }
 
-- (void)caseSearchWithID:(NSString *)item_id{
+- (void)caseSearchWithItem:(RoomSearchResultItemModel *)item{
  
-//    NSLog(@">>>caseSearchWithID>>>>>%@",item_id);
-//    self.countryView.alpha = 0;
+
     [self.view endEditing:YES];
- 
-    if (self.actionBlock) {
-        
-        self.actionBlock(item_id);
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
-    }
-    
+//    if (self.actionBlock) {
+//        self.actionBlock(item_id);
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//        return;
+//    }
     RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
+    vc.item = item;
     PushToViewController(vc);
 }
 
@@ -302,7 +299,6 @@
     NSString *icon = item[@"icon"];
     //    判断是否是当前与选择国家是否一样
     if (code.integerValue == self.country_code) return;
-    
     //    添加相关属性
     [self.countyBtn setImage:XImage(icon) forState:UIControlStateNormal];
     self.country_code = code.integerValue;
@@ -369,3 +365,4 @@
 
 
 @end
+

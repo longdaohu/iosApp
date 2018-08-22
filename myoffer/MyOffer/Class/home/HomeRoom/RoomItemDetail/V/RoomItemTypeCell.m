@@ -52,11 +52,12 @@
         
         UIButton *pinLab = [UIButton new];
         self.pinLab = pinLab;
-        [pinLab setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+        [pinLab setTitleColor:XCOLOR(255, 159, 0, 1)  forState:UIControlStateNormal];
         [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR(255, 246, 217, 1)] forState:UIControlStateNormal];
         [pinLab setTitleColor:XCOLOR_TITLE forState:UIControlStateDisabled];
         [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateDisabled];
         [self.contentView addSubview:pinLab];
+        pinLab.layer.cornerRadius = 2;
         
         UIView *bottomLine = [UIView new];
         bottomLine.backgroundColor = XCOLOR_line;

@@ -155,8 +155,7 @@
         [MobClick event:@"ALL_Playtime"];
 
     }
-    
-    
+ 
     NSMutableArray *group_temp = [NSMutableArray array];
 
     //1 分段音频

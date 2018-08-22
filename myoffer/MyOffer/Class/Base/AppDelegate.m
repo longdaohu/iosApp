@@ -15,7 +15,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "MQManager.h"
-
+#import "IntroViewController.h"
 
 // 引入JPush功能所需头文件
 //#import "JPUSHService.h"
@@ -81,11 +81,16 @@ static AppDelegate *__sharedDelegate;
     [self.window makeKeyAndVisible];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //产品引导页面
+    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    if (![[UserDefaults sharedDefault].introductionDismissBuildVersion isEqualToString:version]) {
+     [self.window.rootViewController presentViewController:[[IntroViewController alloc] initWithNibName:@"IntroViewController" bundle:nil] animated:NO completion:nil];
+        [UserDefaults sharedDefault].introductionDismissBuildVersion = version;
+    }
 }
 
 -(void)JpushWithOptions:(NSDictionary *)launchOptions //极光推送
 {
-    
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -96,8 +101,6 @@ static AppDelegate *__sharedDelegate;
         // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-    
-    
     
     // Optional
     // 获取IDFA

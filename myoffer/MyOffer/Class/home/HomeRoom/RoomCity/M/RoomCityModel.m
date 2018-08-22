@@ -10,6 +10,12 @@
 
 @implementation RoomCityModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"item_id" : @"id",
+             };
+}
+
 - (NSString *)cityName{
     
     if(!_cityName){

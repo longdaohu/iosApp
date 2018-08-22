@@ -103,4 +103,55 @@ static NSString* HOST = @"api.51room.com";
     
 }
 
+
+- (void) enquiry:(void (^)(CACommonResponse *))completionBlock
+{
+    
+    CACommonRequest* request = [[CACommonRequest alloc] initWithPath: @"/enquiry"
+                                                          withMethod: @"POST"
+                                                            withHost: HOST
+                                                             isHttps: isHttps];
+    
+    
+    [client invokeWithRequest: request withCallback:completionBlock];
+}
+
+- (void) property_list:(NSInteger) page pagesize:(NSInteger) pagesize lease:(NSInteger) lease min:(NSString *) min max:(NSString *) max type:(NSString *) type type_id:(NSInteger) type_id completionBlock:(void (^)(CACommonResponse *))completionBlock
+{
+    
+    CACommonRequest* request = [[CACommonRequest alloc] initWithPath: @"/propertyList/[page]/[pagesize]"
+                                                          withMethod: @"GET"
+                                                            withHost: HOST
+                                                             isHttps: isHttps];
+    
+    [request addPathParameter:[NSString stringWithFormat:@"%ld" , page] forKey:@"page"];
+    [request addPathParameter:[NSString stringWithFormat:@"%ld" , pagesize] forKey:@"pagesize"];
+    [request addQueryParameter:[NSString stringWithFormat:@"%ld" , lease] forKey:@"lease"];
+    [request addQueryParameter:min forKey:@"min"];
+    [request addQueryParameter:max forKey:@"max"];
+    [request addQueryParameter:type forKey:@"type"];
+    [request addQueryParameter:[NSString stringWithFormat:@"%ld" , type_id] forKey:@"type_id"];
+    
+    
+    [client invokeWithRequest: request withCallback:completionBlock];
+    
+}
+
+- (void) property_listWhithParameters:(NSDictionary *)parameter completionBlock:(void (^)(CACommonResponse *))completionBlock{
+    
+    CACommonRequest* request = [[CACommonRequest alloc] initWithPath: @"/propertyList/[page]/[pagesize]"
+                                                          withMethod: @"GET"
+                                                            withHost: HOST
+                                                             isHttps: isHttps];
+    for (NSString *key in parameter.allKeys) {
+        if([key isEqualToString:@"page"] || [key isEqualToString:@"pagesize"] ){
+            [request addPathParameter:parameter[key]  forKey:key];
+        }else{
+            [request addQueryParameter:parameter[key]  forKey:key];
+        }
+    }
+    [client invokeWithRequest: request withCallback:completionBlock];
+}
+
+
 @end

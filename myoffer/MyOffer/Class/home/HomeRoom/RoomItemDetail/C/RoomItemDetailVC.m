@@ -221,7 +221,7 @@ static NSString *identify = @"cell";
 - (void)makeData{
  
     WeakSelf;
-    [[HttpsApiClient_API_51ROOM instance] property:238 completionBlock:^(CACommonResponse *response) {
+    [[HttpsApiClient_API_51ROOM instance] property:self.room_id.integerValue completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
         if (![status isEqualToString:@"200"]) {
             NSLog(@" 网络请求错误 ");
@@ -256,8 +256,10 @@ static NSString *identify = @"cell";
                 break;
             case SectionGroupTypeRoomDetailTypeNote:
             {
-                group.items = @[room.promotion];
-                group.cell_height_set = roomFrameModel.promotion_cell_hight;
+                if(room.promotion.length > 0){
+                    group.items = @[room.promotion];
+                    group.cell_height_set = roomFrameModel.promotion_cell_hight;
+                }
             }
                 break;
             case SectionGroupTypeRoomDetailTypeFacility:

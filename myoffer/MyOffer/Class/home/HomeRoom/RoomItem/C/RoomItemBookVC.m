@@ -24,13 +24,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
     NavigationBarHidden(YES);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self makeUI];
 }
 
@@ -61,7 +59,6 @@
 }
 
 
-
 - (void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -77,8 +74,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
     self.header.itemFrameModel = self.itemFrameModel;
@@ -139,7 +134,6 @@
 
 - (void)caseBookWithRooomID:(NSString *)room_id{
  
- 
     WeakSelf
     RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
     vc.actionBlock = ^{
@@ -154,9 +148,6 @@
         PushToViewController(vc);
     }
  
-   
-
-    
 }
 
 - (void)didReceiveMemoryWarning {

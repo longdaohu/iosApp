@@ -71,6 +71,7 @@
         titleBtn.titleLabel.font = XFONT(17);
         [titleBtn setTitleColor:XCOLOR_WHITE  forState:UIControlStateNormal];
         [titleBtn setTitleColor:XCOLOR_BLACK  forState:UIControlStateSelected];
+        titleBtn.userInteractionEnabled = NO;
         self.titleBtn = titleBtn;
         [bgView addSubview:titleBtn];
  

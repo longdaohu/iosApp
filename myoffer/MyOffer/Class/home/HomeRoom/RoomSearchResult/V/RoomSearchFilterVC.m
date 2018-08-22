@@ -90,14 +90,14 @@
         make.centerY.mas_equalTo(price_TF_Low.mas_centerY);
     }];
     
-    UILabel *timeTitleLab = [self  makeLabelWithText:@"租房周期（月）" textColor:XCOLOR_TITLE font:[UIFont boldSystemFontOfSize:14] superView:bgView];
+    UILabel *timeTitleLab = [self  makeLabelWithText:@"租房周期（周）" textColor:XCOLOR_TITLE font:[UIFont boldSystemFontOfSize:14] superView:bgView];
     [timeTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 20));
         make.left.mas_equalTo(priceTitleLab.mas_left);
         make.top.mas_equalTo(price_TF_Low.mas_bottom).mas_offset(28);
     }];
     
-    UILabel *timeSubLab = [self  makeLabelWithText:@"# 周期最长不超过10周 #" textColor:XCOLOR_SUBTITLE font:XFONT(12) superView:bgView];
+    UILabel *timeSubLab = [self  makeLabelWithText:@"# 周期最长不超过52周 #" textColor:XCOLOR_SUBTITLE font:XFONT(12) superView:bgView];
     [timeSubLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(timeTitleLab.mas_right);
         make.bottom.mas_equalTo(timeTitleLab.mas_bottom);
@@ -192,6 +192,7 @@
     [superView addSubview:TF];
     TF.delegate = self;
     TF.layer.cornerRadius = 4;
+    [TF addTarget:self action:@selector(textFieldValueChangeing:) forControlEvents:UIControlEventEditingChanged];
     
     return TF;
 }
@@ -295,8 +296,21 @@
  
     [self hiden];
 
+    NSMutableDictionary *prm = [NSMutableDictionary dictionary];
+    if (self.price_TF_low.text >= 0 && self.price_TF_Heigh.text.length > 0) {
+    
+        NSString *max = self.price_TF_Heigh.text;
+        NSString *min = self.price_TF_low.text;
+        if (max.integerValue < min.integerValue) {
+            max = min;
+            min = self.price_TF_Heigh.text;
+        }
+        [prm setValue:min forKey:@"min"];
+        [prm setValue:max forKey:@"max"];
+    }
+ 
     if (self.actionBlock) {
-        self.actionBlock();
+        self.actionBlock(prm);
     }
 }
 
@@ -328,23 +342,24 @@
     }
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (void)textFieldValueChangeing:(UITextField *)textField{
     
-    if (textField.text.length + 1  > 4) {
-        return  NO;
+    if (textField == self.price_TF_low) {
+        
     }
-    return YES;
+    if (textField == self.price_TF_Heigh) {
+        
+    }
+    if (textField == self.time_TF_low) {
+        
+    }
+    if (textField == self.time_TF_Heigh) {
+        
+    }
+    
 }
 
-/*
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;        // return NO to disallow editing.
-- (void)textFieldDidBeginEditing:(UITextField *)textField;           // became first responder
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField;          // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
-- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason NS_AVAILABLE_IOS(10_0); // if implemented, called in place of textFieldDidEndEditing:
-- (BOOL)textFieldShouldClear:(UITextField *)textField;               // called when clear button pressed. return NO to ignore (no notifications)
-*/
-
-- (void)didReceiveMemoryWarning {
+ - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

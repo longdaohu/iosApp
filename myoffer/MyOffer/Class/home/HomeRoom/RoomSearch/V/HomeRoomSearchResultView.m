@@ -7,14 +7,14 @@
 //
 
 #import "HomeRoomSearchResultView.h"
-#import "RoomSearchResultItemModel.h"
 
 @interface HomeRoomSearchResultView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong) UILabel *alerLab;
 @property(nonatomic,copy)void(^hideBlock)(BOOL);
 @property(nonatomic,assign)BOOL currentTableState;
-@property(nonatomic,copy)NSString *select_value;
+@property(nonatomic,strong) RoomSearchResultItemModel *item_selected;
+
 @end
 
 @implementation HomeRoomSearchResultView
@@ -91,9 +91,8 @@ static NSString *identify = @"HomeRoomSearchResultView";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    RoomSearchResultItemModel *item = self.items[indexPath.row];
-    self.select_value = item.item_id;
-    
+     self.item_selected = self.items[indexPath.row];
+
     [self hide];
  
 }
@@ -125,8 +124,8 @@ static NSString *identify = @"HomeRoomSearchResultView";
     } completion:^(BOOL finished) {
         if (!show) {
             
-            if (self.actionBlock && self.select_value.length > 0) {
-                self.actionBlock(self.select_value);
+            if (self.actionBlock && self.self.item_selected) {
+                self.actionBlock(self.item_selected);
             }
             
             if (self.hideBlock) {
@@ -134,7 +133,7 @@ static NSString *identify = @"HomeRoomSearchResultView";
             }
             [self clearAllData];
             self.alpha = 0;
-            self.select_value = @"";
+            self.self.item_selected = nil;
         }
     }];
 }

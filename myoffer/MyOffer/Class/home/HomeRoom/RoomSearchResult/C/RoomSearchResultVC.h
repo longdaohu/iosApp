@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RoomBaseViewController.h"
+#import "RoomSearchResultItemModel.h"
 
 @interface RoomSearchResultVC : RoomBaseViewController
-
+@property(nonatomic,strong)RoomSearchResultItemModel *item;
 @end
