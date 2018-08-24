@@ -7,17 +7,18 @@
 //
 
 #import "RoomAppointmentVC.h"
-#import "RoomAppointmentResultVC.h"
 #import "RoomAppointmentCell.h"
 #import "WYLXGroup.h"
 #import "Masonry.h"
 #import "MyofferTextHeaderView.h"
+#import "RoomAppointSuccesView.h"
+#import "HttpsApiClient_API_51ROOM.h"
 
 @interface RoomAppointmentVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)UIButton *commitBtn;
-@property(nonatomic,strong)RoomAppointmentResultVC  *resultVC;
+@property(nonatomic,strong)RoomAppointSuccesView  *succesView;
 
 @end
 
@@ -29,21 +30,23 @@
 
     [self makeUI];
     [self addNotificationCenter];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dis" style:UIBarButtonItemStyleDone target:self action:@selector(caseDis)];
 }
 
 -(NSArray *)groups{
     
     if (!_groups) {
         
-        WYLXGroup *name   =  [WYLXGroup groupWithType:EditTypeRoomUserName title:@"姓名 * (中文)" placeHolder:nil content:nil groupKey:@"name" spod:false];
+        WYLXGroup *name   =  [WYLXGroup groupWithType:EditTypeRoomUserName title:@"姓名* (中文)" placeHolder:nil content:nil groupKey:@"name" spod:false];
         name.groupType = EditTypeRoomUserName;
         WYLXGroup *email    =  [WYLXGroup groupWithType:EditTypeRoomUserEmail title:@"电子邮箱 *" placeHolder:nil content:nil groupKey:@"email" spod:false];
         email.groupType = EditTypeRoomUserEmail;
-        WYLXGroup *wx    =  [WYLXGroup groupWithType:EditTypeRoomUserWeixin title:@"微信*" placeHolder:nil content:nil groupKey:@"wx" spod:false];
+        WYLXGroup *wx    =  [WYLXGroup groupWithType:EditTypeRoomUserWeixin title:@"微信 *" placeHolder:nil content:nil groupKey:@"wx" spod:false];
         wx.groupType = EditTypeRoomUserWeixin;
-        WYLXGroup *time  =  [WYLXGroup groupWithType:EditTypeRoomUserTime title:@"入住时间*" placeHolder:nil content:nil groupKey:@"time" spod:false];
+        WYLXGroup *time  =  [WYLXGroup groupWithType:EditTypeRoomUserTime title:@"入住时间 *" placeHolder:nil content:nil groupKey:@"time" spod:false];
         time.groupType = EditTypeRoomUserTime;
-        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeRoomUserQQ title:@"QQ" placeHolder:nil content:nil groupKey:@"qq" spod:false];
+        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeRoomUserQQ title:@"手机号码 *" placeHolder:nil content:nil groupKey:@"qq" spod:false];
         qq.groupType = EditTypeRoomUserQQ;
         _groups = @[name,email,wx,time,qq];
     }
@@ -51,24 +54,24 @@
 }
 
 
-- (RoomAppointmentResultVC *)resultVC{
+- (RoomAppointSuccesView *)succesView{
     
-    if (!_resultVC) {
+    if (!_succesView) {
     
-        _resultVC = [[RoomAppointmentResultVC alloc] init];
-        [self addChildViewController:_resultVC];
-        _resultVC.view.frame = self.view.bounds;
-        [self.view insertSubview:_resultVC.view aboveSubview:self.commitBtn];
-        _resultVC.view.transform = CGAffineTransformMakeTranslation(XSCREEN_WIDTH,0);
-
-//        WeakSelf
-//        _resultVC.actionBlock = ^(BOOL isBackToHome) {
-//            [weakSelf caseSuccesed:isBackToHome];
-//        };
-        
+        _succesView = Bundle(@"RoomAppointSuccesView");
+        _succesView.frame = self.view.bounds;
+        [self.view insertSubview:_succesView aboveSubview:self.commitBtn];
+        _succesView.transform = CGAffineTransformMakeTranslation(XSCREEN_WIDTH,0);
+        WeakSelf
+        _succesView.actionBlock = ^(UIButton *maiqia, UIButton *home, UIButton *keep) {
+            
+            if (maiqia) [weakSelf caseMeiqia];
+            if (home) [weakSelf caseHome];
+            if (keep) [weakSelf casePop];
+        };
     }
     
-    return _resultVC;
+    return _succesView;
 }
 
 - (void)makeUI{
@@ -170,7 +173,9 @@
 
 #pragma mark : 事件处理
 - (void)caseCommitClick:(UIButton *)sender{
-    
+   
+  /*
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     NSString  *title ;
     for(WYLXGroup *group in self.groups){
 
@@ -182,7 +187,11 @@
                 if (![pred evaluateWithObject:group.content]) {
                     [MBProgressHUD showMessage:@"请输入正确的中文姓名"];
                     return;
+                }else{
+                    
+                    [parameter setValue:group.content forKey:@"name"];
                 }
+                
             }
                 break;
             case EditTypeRoomUserEmail:{
@@ -192,7 +201,11 @@
                 if (![pred evaluateWithObject:group.content]) {
                     [MBProgressHUD showMessage:@"请输入正确的邮箱地址"];
                     return;
+                }else{
+                    
+                    [parameter setValue:group.content forKey:@"email"];
                 }
+                
             }
                 break;
             case EditTypeRoomUserWeixin:{
@@ -202,7 +215,11 @@
                 if (![pred evaluateWithObject:group.content]) {
                     [MBProgressHUD showMessage:@"请输入正确的微信号"];
                     return;
+                }else{
+                    
+                    [parameter setValue:group.content forKey:@"wechat"];
                 }
+                
             }
                 break;
             case EditTypeRoomUserTime:{
@@ -210,29 +227,55 @@
                 if(group.content.length == 0 || !group.content){
                         [MBProgressHUD showMessage:@"入住时间不能为空"];
                         return;
+                }else{
+                    
+                    [parameter setValue:group.content forKey:@"date"];
                 }
+                
             }
                 break;
             case EditTypeRoomUserQQ:{
-                title = @"QQ";
-                NSString *regex = @"^[0-9]{5,11}+$";
+                title = @"手机号";
+                NSString *regex = @"^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
                 NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
                 if (![pred evaluateWithObject:group.content]) {
-                    [MBProgressHUD showMessage:@"请输入正确的QQ"];
+                    [MBProgressHUD showMessage:@"请输入正确的手机号"];
                     return;
+                }else{
+                    
+                    [parameter setValue:group.content forKey:@"mobile"];
                 }
             }
                 break;
             default:
                 break;
         }
- 
     }
     
+    [parameter setValue:self.room_id forKey:@"property_id"];
+*/
  
-    self.resultVC.view.alpha = 1;
+//    NSDictionary *parameter = @{
+//                                @"name":@"xxx",
+//                                @"mobile":@"18688958114",
+//                                @"email":@"767577465@qq.com",
+//                                @"wechat":@"wei-laoxu",
+//                                @"date":@"2018-12-09",
+//                                @"property_id":self.room_id
+//                                };
+//    WeakSelf
+//    [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
+//
+//        NSLog(@"1 >>>>>>>>>> %d  %@",response.statusCode,response.error);
+//        id result = [response.body KD_JSONObject];
+//        NSLog(@"2  >>>>>>>>>> %@",result);
+//        
+//    }];
+ 
+ 
+    self.succesView.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.resultVC.view.transform = CGAffineTransformIdentity;
+        self.succesView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = true;
@@ -280,13 +323,33 @@
 }
 
 
+- (void)caseDis{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 - (void)casePop{
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)caseMeiqia{
+    
+}
+- (void)caseHome{
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc{
+    
+    KDClassLog(@"预约表单 + RoomAppointmentVC + dealloc");
+}
+
 
 @end

@@ -57,7 +57,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                @(systemInfo.machine), [[UIDevice currentDevice] systemVersion]];
         
         
-//        NSLog(@" ystemInfo.machine  %@",@(systemInfo.machine));
 //ENGLISH  设置环境
 //         NSString  *lan = [InternationalControl userLanguage];
 //        if ( [lan containsString:@"en"]) {
@@ -73,8 +72,6 @@ static NSString * const kAPIEndPoint = DOMAINURL;
                                                       };
 //         }
     
-        
-//        NSLog(@"HTTPAdditionalHeaders %@",configuration.HTTPAdditionalHeaders);
         
 //        _URLSession = [NSURLSession sessionWithConfiguration:configuration];
         

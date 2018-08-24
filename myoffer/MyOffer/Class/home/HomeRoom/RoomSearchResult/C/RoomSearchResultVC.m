@@ -11,7 +11,6 @@
 #import "RoomSearchFilterView.h"
 #import "RoomSearchFilterVC.h"
 #import "RoomItemBookVC.h"
-#import "RoomAppointmentResultVC.h"
 #import "RoomAppointmentVC.h"
 #import "RoomCityVC.h"
 #import "HomeRoomSearchVC.h"
@@ -76,8 +75,11 @@
     [self makeDefalutParameter];
     
     if (self.item) {
-        [self.parameter setValue: self.item.type forKey:@"type"];
-        [self.parameter setValue: self.item.item_id forKey:@"type_id"];
+        [self.parameter setValue: self.item.type forKey:KEY_TYPE];
+        [self.parameter setValue: self.item.item_id forKey:KEY_TYPE_ID];
+    }
+    if (self.parameterItem) {
+        [self.parameter addEntriesFromDictionary:self.parameterItem];
     }
     [self makeNavigationView];
     [self makeTableView];
@@ -181,7 +183,7 @@
 - (void)loadMoreData{
     
     [self makeData];
-    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:@"page"];
+    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
 }
 
 - (void)makeData{
@@ -194,18 +196,16 @@
      min    srting    租金区间 最少
      lease    Int     最大租期，租多少周  如：52
      */
-    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:@"page"];
+    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
     WeakSelf;
-    [[HttpsApiClient_API_51ROOM instance] property_listWhithParameters:self.parameter  completionBlock:^(CACommonResponse *response) {
-
-                NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
-                if (![status isEqualToString:@"200"]) {
-                    NSLog(@"property_listWhithParameters 网络请求错误 ");
-                    return ;
-                }
-                id result = [response.body KD_JSONObject];
-                [weakSelf updateUIWithResponse:result];
+    [self property_listWhithParameters:self.parameter additionalSuccessAction:^(id response, int status) {
+        
+        [weakSelf updateUIWithResponse:response];
+        
+    } additionalFailureAction:^(NSError *error, int status) {
+        
     }];
+    
 }
 
 
@@ -216,11 +216,7 @@
     NSString *current_page = result[@"current_page"];
     NSString *unit = result[@"unit"];
     NSArray *properties  = result[@"properties"];
-    
-    if (self.next_page == 1) {
-        self.tableView.tableHeaderView = self.header;
-        [self.tableView setContentOffset:CGPointMake(0, -self.header.mj_h) animated:YES];
-    }
+
     if (self.items.count > 0 && self.next_page == 1) {
         [self.items removeAllObjects];
     }
@@ -237,9 +233,14 @@
     if (total_page.integerValue <= current_page.integerValue) {
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
     }
-    self.next_page += 1;
-    
     [self.tableView reloadData];
+    
+    if (self.next_page == 1 && self.items.count > 0) {
+        
+        self.tableView.tableHeaderView = self.header;
+        [self.tableView  scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    self.next_page += 1;
 }
 
 #pragma mark : 事件处理
@@ -248,7 +249,7 @@
     
     self.next_page = 1;
     [self.parameter removeAllObjects];
-    [self.parameter setValue:@"5" forKey:@"pagesize"];
+    [self.parameter setValue:@"10" forKey:KEY_PAGESIZE];
 }
 
 
@@ -285,8 +286,8 @@
 - (void)caseCity:(NSString *)type_id{
     
     [self makeDefalutParameter];
-    [self.parameter setValue:@"city" forKey:@"type"];
-    [self.parameter setValue:type_id forKey:@"type_id"];
+    [self.parameter setValue:@"city" forKey:KEY_TYPE];
+    [self.parameter setValue:type_id forKey:KEY_TYPE_ID];
     [self makeData];
 }
 

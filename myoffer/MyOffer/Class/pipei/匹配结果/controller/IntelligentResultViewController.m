@@ -95,6 +95,7 @@
 
 - (void)viewDidUnload
 {
+    
     self.PieHeadView = nil;
    
     [super viewDidUnload];

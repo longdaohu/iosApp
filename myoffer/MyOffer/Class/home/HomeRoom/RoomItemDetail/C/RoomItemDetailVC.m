@@ -21,7 +21,7 @@
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *groups;
+@property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 @property(nonatomic,strong)RoomNavigationView *nav;
 
@@ -30,7 +30,7 @@
 @implementation RoomItemDetailVC
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+//    [super viewWillAppear:animated];
     NavigationBarHidden(YES);
     [MobClick beginLogPageView:@"page51Room房源详情"];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
@@ -51,7 +51,6 @@
 
 - (void)makeUI{
     
-    self.view.backgroundColor = XCOLOR_BG;
     [self makeTableView];
     
     RoomNavigationView *nav = [RoomNavigationView nav];
@@ -65,35 +64,36 @@
         }
     };
     
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
-//    [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImage:XImage(@"maiqia_call") forState:UIControlStateNormal];
-    [backBtn setImage:XImage(@"maiqia_call") forState:UIControlStateSelected];
-    nav.rightView = backBtn;
+    UIButton *meiqiaBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+    [meiqiaBtn setImage:XImage(@"maiqia_call") forState:UIControlStateNormal];
+    [meiqiaBtn setImage:XImage(@"maiqia_call") forState:UIControlStateSelected];
+    nav.rightView = meiqiaBtn;
     
 }
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    [self.view addSubview:self.tableView];
+//   UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    self.tableView.tableFooterView = [UIView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
-    [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
+    self.tableView.estimatedSectionHeaderHeight= UITableViewAutomaticDimension;
     self.tableView.sectionHeaderHeight = 50;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.sectionFooterHeight = 10;
+    
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     self.tableView.backgroundColor = XCOLOR_CLEAR;
  }
 
-- (NSArray *)groups{
+- (NSMutableArray *)groups{
     
     if (!_groups) {
         
@@ -112,7 +112,8 @@
         myofferGroupModel *note = [myofferGroupModel groupWithItems:nil header:@"预订须知"];
         note.type = SectionGroupTypeRoomDetailTypeNote;
       
-        _groups = @[discount,type,intro,facilities,note];
+        NSArray *items = @[discount,type,intro,facilities,note];
+        _groups = [NSMutableArray arrayWithArray:items];
     }
     
     return  _groups;
@@ -186,7 +187,7 @@ static NSString *identify = @"cell";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -216,68 +217,97 @@ static NSString *identify = @"cell";
     }
     return UITableViewAutomaticDimension;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    return [UIView new];
+}
 
 #pragma mark : 数据处理
 - (void)makeData{
  
     WeakSelf;
-    [[HttpsApiClient_API_51ROOM instance] property:self.room_id.integerValue completionBlock:^(CACommonResponse *response) {
-        NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
-        if (![status isEqualToString:@"200"]) {
-            NSLog(@" 网络请求错误 ");
-            return ;
-        }
-        id result = [response.body KD_JSONObject];
-        [weakSelf updateUIWithResponse:result];
+    [self propertyWithRoomID:self.room_id.integerValue  additionalSuccessAction:^(id response, int status) {
+        
+        [weakSelf updateUIWithResponse:response];
+
+    } additionalFailureAction:^(NSError *error, int status) {
+        
     }];
+ 
 }
 
 - (void)updateUIWithResponse:(id)response{
-    
     
     RoomItemModel *room = [RoomItemModel mj_objectWithKeyValues:response];
     RoomItemFrameModel *roomFrameModel = [[RoomItemFrameModel alloc] init];
     roomFrameModel.item = room;
     self.itemFrameModel = roomFrameModel;
  
+    NSMutableArray *items = [NSMutableArray array];
     for (myofferGroupModel *group in self.groups) {
         switch (group.type) {
             case SectionGroupTypeRoomDetailTypeIntroduction:
             {
-                group.items = @[room.intro];
-                group.cell_height_set = roomFrameModel.intro_cell_hight;
+                if (room.intro.length > 0) {
+                    group.items = @[room.intro];
+                    group.cell_height_set = roomFrameModel.intro_cell_hight;
+                }else{
+                    [items addObject:group];
+                }
             }
                 break;
             case SectionGroupTypeRoomDetailDiscount:
             {
-                group.items = @[room.process];
-                group.cell_height_set = roomFrameModel.process_cell_hight;
+ 
+                if (room.process.length > 0) {
+                    group.items = @[room.process];
+                    group.cell_height_set = roomFrameModel.process_cell_hight;
+                }else{
+                    [items addObject:group];
+                }
             }
                 break;
             case SectionGroupTypeRoomDetailTypeNote:
             {
-                if(room.promotion.length > 0){
+ 
+                if(room.promotion.length > 0 ){
                     group.items = @[room.promotion];
                     group.cell_height_set = roomFrameModel.promotion_cell_hight;
+                }else{
+                    [items addObject:group];
                 }
             }
                 break;
             case SectionGroupTypeRoomDetailTypeFacility:
             {
-                group.items = @[room.ameniti_arr];
-                group.cell_height_set = roomFrameModel.faciliti_cell_hight;
+ 
+                if(room.ameniti_arr.count > 0 ){
+                    group.items = @[room.ameniti_arr];
+                    group.cell_height_set = roomFrameModel.faciliti_cell_hight;
+                }else{
+                    [items addObject:group];
+                }
+            
             }
                 break;
             case SectionGroupTypeRoomDetailRoomType:
             {
-                group.items = roomFrameModel.typeFrames;
-                group.cell_height_set = roomFrameModel.type_cell_hight;
+                if(roomFrameModel.typeFrames.count > 0 ){
+                    group.items = roomFrameModel.typeFrames;
+                    group.cell_height_set = roomFrameModel.type_cell_hight;
+                }else{
+                    [items addObject:group];
+                }
+                
             }
                 break;
             default:
                 break;
         }
     }
+    
+    [self.groups removeObjectsInArray:items];
+
     [self.tableView reloadData];
     
     
@@ -299,6 +329,11 @@ static NSString *identify = @"cell";
 
 - (void)caseMap{
  
+}
+
+-(void)dealloc
+{
+    KDClassLog(@" 房源详情 + RoomItemDetailVC + dealloc");
 }
 
 - (void)didReceiveMemoryWarning {

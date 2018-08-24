@@ -59,7 +59,11 @@
 #define KEY_AREA  @"area"
 #define KEY_SUBJECT  @"subject"
 #define KEY_PAGE  @"page"
+#define KEY_PAGESIZE  @"pagesize"
 #define KEY_SIZE  @"size"
+#define KEY_TYPE  @"type"
+#define KEY_TYPE_ID  @"type_id"
+#define KEY_NOMAL_STUTAS  200
 #define KEY_ALL  @"全部"
 #define KEY_UK  @"英国"
 #define KEY_AU  @"澳大利亚"

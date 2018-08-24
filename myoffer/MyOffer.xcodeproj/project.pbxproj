@@ -299,8 +299,6 @@
 		AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6178E420738BB6006B311A /* OrderEnjoyVC.xib */; };
 		AE61A9971EAEF44600AC4B43 /* SearchUniversityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */; };
 		AE667AE52117F47D00748323 /* HomeRoomSearchCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */; };
-		AE667B5721199FB700748323 /* RoomAppointmentResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */; };
-		AE667B5821199FB700748323 /* RoomAppointmentResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */; };
 		AE667B5B2119AEAB00748323 /* MyOfferWhiteNV.m in Sources */ = {isa = PBXBuildFile; fileRef = AE667B5A2119AEAB00748323 /* MyOfferWhiteNV.m */; };
 		AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67E75A1F4E77BB00FAC0B3 /* myofferGroupModel.m */; };
 		AE6920A01F259B17008B1AC7 /* SMHotSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE69209F1F259B17008B1AC7 /* SMHotSectionFooterView.m */; };
@@ -552,7 +550,6 @@
 		AEAFDF22212193A400067190 /* RoomItemTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF21212193A400067190 /* RoomItemTypeCell.m */; };
 		AEAFDF2521227C9C00067190 /* RoomTextSpodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF2421227C9C00067190 /* RoomTextSpodCell.m */; };
 		AEAFDF282122ACCA00067190 /* RoomItemHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF272122ACCA00067190 /* RoomItemHeaderView.m */; };
-		AEAFDF2B2122CD7300067190 /* RoomBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF2A2122CD7300067190 /* RoomBaseViewController.m */; };
 		AEAFDF2E2122CF6D00067190 /* RoomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF2D2122CF6D00067190 /* RoomNavigationView.m */; };
 		AEAFDF312123C30A00067190 /* RoomTypeBookItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF302123C30A00067190 /* RoomTypeBookItemModel.m */; };
 		AEAFDF342123DCBD00067190 /* RoomItemBookHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAFDF332123DCBD00067190 /* RoomItemBookHeaderView.m */; };
@@ -622,6 +619,10 @@
 		AECC87E71F95F63800FCBBEC /* RankTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC87C71F95F63800FCBBEC /* RankTypeCell.m */; };
 		AED10B9020EC9F050083AA85 /* CreateOrderWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10B8F20EC9F040083AA85 /* CreateOrderWebVC.m */; };
 		AED10B9520ECBA220083AA85 /* EmallCatigoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED10B9420ECBA220083AA85 /* EmallCatigoryViewController.m */; };
+		AED3C472212D7C8F00A5668C /* RoomCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C471212D7C8F00A5668C /* RoomCountryModel.m */; };
+		AED3C475212E61FB00A5668C /* RoomBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C474212E61FB00A5668C /* RoomBaseVC.m */; };
+		AED3C478212FB1E900A5668C /* RoomAppointSuccesView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C477212FB1E900A5668C /* RoomAppointSuccesView.m */; };
+		AED3C47C212FB21100A5668C /* RoomAppointSuccesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED3C47B212FB21100A5668C /* RoomAppointSuccesView.xib */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
@@ -1179,9 +1180,6 @@
 		AE61A9961EAEF44600AC4B43 /* SearchUniversityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUniversityCenterViewController.m; sourceTree = "<group>"; };
 		AE667AE32117F47D00748323 /* HomeRoomSearchCountryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRoomSearchCountryView.h; sourceTree = "<group>"; };
 		AE667AE42117F47D00748323 /* HomeRoomSearchCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRoomSearchCountryView.m; sourceTree = "<group>"; };
-		AE667B5421199FB700748323 /* RoomAppointmentResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentResultVC.h; sourceTree = "<group>"; };
-		AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointmentResultVC.m; sourceTree = "<group>"; };
-		AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAppointmentResultVC.xib; sourceTree = "<group>"; };
 		AE667B592119AEAB00748323 /* MyOfferWhiteNV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyOfferWhiteNV.h; sourceTree = "<group>"; };
 		AE667B5A2119AEAB00748323 /* MyOfferWhiteNV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOfferWhiteNV.m; sourceTree = "<group>"; };
 		AE67E7591F4E77BB00FAC0B3 /* myofferGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myofferGroupModel.h; sourceTree = "<group>"; };
@@ -1628,8 +1626,6 @@
 		AEAFDF2421227C9C00067190 /* RoomTextSpodCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomTextSpodCell.m; sourceTree = "<group>"; };
 		AEAFDF262122ACCA00067190 /* RoomItemHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemHeaderView.h; sourceTree = "<group>"; };
 		AEAFDF272122ACCA00067190 /* RoomItemHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemHeaderView.m; sourceTree = "<group>"; };
-		AEAFDF292122CD7300067190 /* RoomBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBaseViewController.h; sourceTree = "<group>"; };
-		AEAFDF2A2122CD7300067190 /* RoomBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomBaseViewController.m; sourceTree = "<group>"; };
 		AEAFDF2C2122CF6D00067190 /* RoomNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomNavigationView.h; sourceTree = "<group>"; };
 		AEAFDF2D2122CF6D00067190 /* RoomNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomNavigationView.m; sourceTree = "<group>"; };
 		AEAFDF2F2123C30A00067190 /* RoomTypeBookItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomTypeBookItemModel.h; sourceTree = "<group>"; };
@@ -1748,6 +1744,13 @@
 		AED10B8F20EC9F040083AA85 /* CreateOrderWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderWebVC.m; sourceTree = "<group>"; };
 		AED10B9320ECBA220083AA85 /* EmallCatigoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmallCatigoryViewController.h; sourceTree = "<group>"; };
 		AED10B9420ECBA220083AA85 /* EmallCatigoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmallCatigoryViewController.m; sourceTree = "<group>"; };
+		AED3C470212D7C8F00A5668C /* RoomCountryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCountryModel.h; sourceTree = "<group>"; };
+		AED3C471212D7C8F00A5668C /* RoomCountryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCountryModel.m; sourceTree = "<group>"; };
+		AED3C473212E61FB00A5668C /* RoomBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBaseVC.h; sourceTree = "<group>"; };
+		AED3C474212E61FB00A5668C /* RoomBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomBaseVC.m; sourceTree = "<group>"; };
+		AED3C476212FB1E900A5668C /* RoomAppointSuccesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointSuccesView.h; sourceTree = "<group>"; };
+		AED3C477212FB1E900A5668C /* RoomAppointSuccesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointSuccesView.m; sourceTree = "<group>"; };
+		AED3C47B212FB21100A5668C /* RoomAppointSuccesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAppointSuccesView.xib; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUpdateView.h; sourceTree = "<group>"; };
 		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
@@ -2082,6 +2085,8 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
+				AED3C473212E61FB00A5668C /* RoomBaseVC.h */,
+				AED3C474212E61FB00A5668C /* RoomBaseVC.m */,
 				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AEA03A4B211D9E5F007A791E /* RoomItemDetail */,
 				AEA03A41211D7DA1007A791E /* RoomCity */,
@@ -2091,8 +2096,6 @@
 				AE07A0D72106C7FA00581073 /* C */,
 				AE07A0D82106C7FA00581073 /* M */,
 				AE07A0D92106C7FA00581073 /* V */,
-				AEAFDF292122CD7300067190 /* RoomBaseViewController.h */,
-				AEAFDF2A2122CD7300067190 /* RoomBaseViewController.m */,
 			);
 			path = HomeRoom;
 			sourceTree = "<group>";
@@ -2906,30 +2909,11 @@
 		AE667B5121199E7800748323 /* RoomAppointment */ = {
 			isa = PBXGroup;
 			children = (
-				AE667B5321199EDA00748323 /* RoomAppointmentResult */,
-				AE667B5221199EB600748323 /* RoomAppointmentIndex */,
-			);
-			path = RoomAppointment;
-			sourceTree = "<group>";
-		};
-		AE667B5221199EB600748323 /* RoomAppointmentIndex */ = {
-			isa = PBXGroup;
-			children = (
 				AEA03A38211C3F3A007A791E /* C */,
 				AEA03A37211C3F38007A791E /* M */,
 				AEA03A36211C3F36007A791E /* V */,
 			);
-			path = RoomAppointmentIndex;
-			sourceTree = "<group>";
-		};
-		AE667B5321199EDA00748323 /* RoomAppointmentResult */ = {
-			isa = PBXGroup;
-			children = (
-				AE667B5421199FB700748323 /* RoomAppointmentResultVC.h */,
-				AE667B5521199FB700748323 /* RoomAppointmentResultVC.m */,
-				AE667B5621199FB700748323 /* RoomAppointmentResultVC.xib */,
-			);
-			path = RoomAppointmentResult;
+			path = RoomAppointment;
 			sourceTree = "<group>";
 		};
 		AE6F28651D77CA3C00E9A47A /* UUChart */ = {
@@ -3446,6 +3430,9 @@
 				AEA03A3B211C3F7C007A791E /* RoomAppointmentCell.xib */,
 				AEA03A3E211D699A007A791E /* MyofferTextHeaderView.h */,
 				AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */,
+				AED3C476212FB1E900A5668C /* RoomAppointSuccesView.h */,
+				AED3C477212FB1E900A5668C /* RoomAppointSuccesView.m */,
+				AED3C47B212FB21100A5668C /* RoomAppointSuccesView.xib */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -3489,6 +3476,8 @@
 			children = (
 				AEA03A48211D869B007A791E /* RoomCityModel.h */,
 				AEA03A49211D869B007A791E /* RoomCityModel.m */,
+				AED3C470212D7C8F00A5668C /* RoomCountryModel.h */,
+				AED3C471212D7C8F00A5668C /* RoomCountryModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -4991,7 +4980,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -5046,6 +5035,7 @@
 				AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
+				AED3C47C212FB21100A5668C /* RoomAppointSuccesView.xib in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
@@ -5130,7 +5120,6 @@
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
-				AE667B5821199FB700748323 /* RoomAppointmentResultVC.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
@@ -5357,7 +5346,6 @@
 				AE9BA46F20B5154E008B65D4 /* InvitationRecordDetailVC.m in Sources */,
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AE07A0DF2106CDE300581073 /* HomeRoomTopView.m in Sources */,
-				AE667B5721199FB700748323 /* RoomAppointmentResultVC.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
@@ -5422,7 +5410,6 @@
 				AE1FD7701D5C957C00FFD5A8 /* MBProgressHUD.m in Sources */,
 				AE7825DC1D70295400AA4EF4 /* UniversityRightView.m in Sources */,
 				AE4B2E6C1F1E095600E328F7 /* FSBaseTableView.m in Sources */,
-				AEAFDF2B2122CD7300067190 /* RoomBaseViewController.m in Sources */,
 				AE7825E11D702AA400AA4EF4 /* UniversityNavView.m in Sources */,
 				463E3AB61B23105F00E0BAF8 /* KDUserDefault.m in Sources */,
 				AE4B2E781F1E095600E328F7 /* MyOfferArticle.m in Sources */,
@@ -5447,6 +5434,7 @@
 				AE2B1DAD1F42987300FB953E /* ApplyStatusHistoryItemFrame.m in Sources */,
 				AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */,
 				AE1FD7531D5C929500FFD5A8 /* MJRefreshNormalHeader.m in Sources */,
+				AED3C475212E61FB00A5668C /* RoomBaseVC.m in Sources */,
 				AEC85BB0209B11570002F19B /* NSString+extent.m in Sources */,
 				AE1FD7271D5C929500FFD5A8 /* MJRefreshBackFooter.m in Sources */,
 				AEA24B2B1D5B251800DD7939 /* YourBindView.m in Sources */,
@@ -5665,6 +5653,7 @@
 				AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */,
 				AEA24C0A1D5B269A00DD7939 /* InternationalControl.m in Sources */,
 				AEA24BEC1D5B266A00DD7939 /* UILabel+extention.m in Sources */,
+				AED3C478212FB1E900A5668C /* RoomAppointSuccesView.m in Sources */,
 				AE4B2E651F1E095600E328F7 /* MessageCountryTopicModel.m in Sources */,
 				AEA545C320D259A40095CBDA /* HomeMenuBarView.m in Sources */,
 				AE3AB6D81F21E99100A3C7E3 /* SMDetailHeaderFrame.m in Sources */,
@@ -5704,6 +5693,7 @@
 				AE3AB6AB1F21A27300A3C7E3 /* SMHotFrame.m in Sources */,
 				AEAFDF2E2122CF6D00067190 /* RoomNavigationView.m in Sources */,
 				AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */,
+				AED3C472212D7C8F00A5668C /* RoomCountryModel.m in Sources */,
 				463E3AB51B23105F00E0BAF8 /* KDUIDebugger.m in Sources */,
 				AE851F201EA9FA56001993D5 /* UniversityCourseFrame.m in Sources */,
 				AE9BA48720B55897008B65D4 /* RewardDetailItem.m in Sources */,
@@ -5966,7 +5956,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

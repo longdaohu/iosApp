@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RoomCityVC : UIViewController
+#import "RoomBaseVC.h"
+@interface RoomCityVC : RoomBaseVC
 @property(nonatomic,strong)void(^actionBlock)(NSString *type_id);
 
 @end

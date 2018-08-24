@@ -70,8 +70,8 @@
         HomeFeeVC *fee  = [[HomeFeeVC alloc] init];
         fee.type = HomeLandingTypeMoney;
         //海外租房
-//        HomeFeeVC *room  = [[HomeFeeVC alloc] init];
         HomeRoomVC *room  = [[HomeRoomVC alloc] init];
+//        HomeFeeVC *room  = [[HomeFeeVC alloc] init];
 //        room.type = HomeLandingTypeRoom;
         //游学职培
         HomeFeeVC *yes  = [[HomeFeeVC alloc] init];

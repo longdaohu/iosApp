@@ -20,6 +20,7 @@
 #import "HomeRoomVerticalCell.h"
 #import "MyOfferWhiteNV.h"
 #import "HomeRoomIndexFlatFrameObject.h"
+#import "RoomSearchResultVC.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
@@ -184,7 +185,7 @@ static NSString *identify = @"cell";
             
             if ([item isKindOfClass:[HomeRoomIndexCityObject class]]){
                 HomeRoomIndexCityObject *city = (HomeRoomIndexCityObject *)item;
-                NSLog(@"%@",city.name);
+                [weakSelf caseCityWithID:city.city_id];
             }
  
             if ([item isKindOfClass:[HomeRoomIndexFlatFrameObject class]]){
@@ -270,6 +271,12 @@ static NSString *identify = @"cell";
     vc.room_id = room_id;
     PushToViewController(vc);
     
+}
+- (void)caseCityWithID:(NSString *)city_id{
+    
+    RoomSearchResultVC *vc  = [[RoomSearchResultVC alloc] init];
+    vc.parameterItem = @{ KEY_TYPE:@"city",KEY_TYPE_ID:city_id};
+    PushToViewController(vc);
 }
 
 - (void)caseRoomSearch{

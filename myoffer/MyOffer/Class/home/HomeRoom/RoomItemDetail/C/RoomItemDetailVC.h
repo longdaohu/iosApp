@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomBaseVC.h"
 
-@interface RoomItemDetailVC : UIViewController
+@interface RoomItemDetailVC : RoomBaseVC
 @property(nonatomic,copy)NSString *room_id;
 
 @end

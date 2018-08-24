@@ -90,8 +90,7 @@
                  //特殊处理 用户第三方登录时合并账号，如果有包含字符串
                  if (![error.userInfo[@"message"] containsString:@"phone"]) {
                      [self showAPIErrorAlertView:error clickAction:errorAlertDismissAction];
-                     NSLog(@"服务器错误 =  %@ ",path);
-
+//                     NSLog(@"服务器错误 =  %@ ",path);
                  }
                  
               }
@@ -267,7 +266,6 @@
     self.conn = [Reachability reachabilityWithHostName:@"www.baidu.com"];
     [self.conn startNotifier];
     self.view.backgroundColor = XCOLOR_BG;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
 }
@@ -370,23 +368,18 @@
 - (void)countryWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
-//    [self baseDataSourseWithPath:kAPISelectorCountries  keyWord:@"Country_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
-  
 }
 
 //获取专业
 - (void)subjectWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorSubjects_new  keyWord:@"Subject_CN" parameters:nil  ErrorAlerShow:show];
-//    [self baseDataSourseWithPath:kAPISelectorSubjects  keyWord:@"Subject_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
- 
 }
 
 //获取年级
 - (void)gradeWithAlert:(BOOL)show{
     
     [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_CN" parameters:@{@":lang":@"zh-cn"}  ErrorAlerShow:show];
-//    [self baseDataSourseWithPath:kAPISelectorGrades  keyWord:@"Grade_EN" parameters:@{@":lang":@"en"}  ErrorAlerShow:show];
     
 }
 

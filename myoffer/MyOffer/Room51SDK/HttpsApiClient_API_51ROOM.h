@@ -27,10 +27,12 @@
 - (void) article:(NSInteger) article_id completionBlock:(void (^)(CACommonResponse *))completionBlock;
 - (void) homepage:(NSInteger) countryId completionBlock:(void (^)(CACommonResponse *))completionBlock;
 - (void) cities:(NSInteger) countryId completionBlock:(void (^)(CACommonResponse *))completionBlock;
-- (void) enquiry:(void (^)(CACommonResponse *))completionBlock;
 
 - (void) property_list:(NSInteger) page pagesize:(NSInteger) pagesize lease:(NSInteger) lease min:(NSString *) min max:(NSString *) max type:(NSString *) type type_id:(NSInteger) type_id completionBlock:(void (^)(CACommonResponse *))completionBlock;
 - (void) property_listWhithParameters:(NSDictionary *)parameter completionBlock:(void (^)(CACommonResponse *))completionBlock;
+
+- (void) enquiryWithParameter:(NSDictionary *)parameter  completion:(void (^)(CACommonResponse *))completionBlock;
+- (void) enquiry:(void (^)(CACommonResponse *))completionBlock;
 
 
 @end

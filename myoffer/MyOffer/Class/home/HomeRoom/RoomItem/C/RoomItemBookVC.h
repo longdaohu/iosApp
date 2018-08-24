@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RoomBaseViewController.h"
+#import "RoomBaseVC.h"
 #import "RoomTypeItemFrameModel.h"
 
-@interface RoomItemBookVC : RoomBaseViewController
+@interface RoomItemBookVC : RoomBaseVC
 @property(nonatomic,strong)RoomTypeItemFrameModel *itemFrameModel;
 
 @end

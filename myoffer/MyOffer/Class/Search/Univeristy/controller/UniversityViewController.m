@@ -148,11 +148,9 @@ typedef enum {
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    [self addDataSourse];
-    
     [self makeUI];
- 
+    [self addDataSourse];
+
 }
 
 //根据用户资料测试录取难易程度

@@ -13,7 +13,7 @@
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *name_cn;
 @property(nonatomic,copy)NSString *fullName;
-@property(nonatomic,copy)NSString *no_id;
+@property(nonatomic,copy)NSString *city_id;
 
 @end
 

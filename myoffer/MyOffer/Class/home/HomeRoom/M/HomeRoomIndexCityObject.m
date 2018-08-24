@@ -12,7 +12,7 @@
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{
-             @"no_id" : @"_id"
+             @"city_id" : @"id"
              };
 }
 

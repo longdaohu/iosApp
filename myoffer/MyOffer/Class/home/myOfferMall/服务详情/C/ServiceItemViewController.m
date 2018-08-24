@@ -60,10 +60,10 @@
     
     [super viewDidLoad];
     
-    [self makeDataSource];
-    
     [self makeUI];
     
+    [self makeDataSource];
+
 }
 
 

@@ -1,14 +1,14 @@
 //
-//  RoomAppointmentResultVC.m
+//  RoomAppointSuccesView.m
 //  MyOffer
 //
-//  Created by xuewuguojie on 2018/8/7.
+//  Created by xuewuguojie on 2018/8/24.
 //  Copyright © 2018年 UVIC. All rights reserved.
 //
 
-#import "RoomAppointmentResultVC.h"
+#import "RoomAppointSuccesView.h"
 
-@interface RoomAppointmentResultVC ()
+@interface RoomAppointSuccesView ()
 @property (weak, nonatomic) IBOutlet UIButton *meiqiaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *keepBtn;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -16,16 +16,14 @@
 
 @end
 
-@implementation RoomAppointmentResultVC
+@implementation RoomAppointSuccesView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
- 
-    self.title  = @"预约表单";
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
     
     self.keepBtn.backgroundColor = XCOLOR_RED;
-    self.view.backgroundColor = XCOLOR_BG;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
+    self.backgroundColor = XCOLOR_BG;
     self.bgView.layer.cornerRadius = 8;
     self.bgView.layer.masksToBounds = YES;
     
@@ -34,7 +32,7 @@
     shaper.shadowOffset = CGSizeMake(0, 5);
     shaper.shadowRadius = 5;
     shaper.shadowOpacity = 0.3;
-    [self.view.layer insertSublayer:shaper below:self.bgView.layer];
+    [self.layer insertSublayer:shaper below:self.bgView.layer];
     self.shaper = shaper;
     
     [self.meiqiaBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
@@ -42,8 +40,8 @@
     NSMutableAttributedString *attribt_look = [[NSMutableAttributedString alloc] initWithString:self.meiqiaBtn.currentTitle];
     [attribt_look addAttributes:attribtDic range:NSMakeRange(0, self.meiqiaBtn.currentTitle.length)];
     [ self.meiqiaBtn  setAttributedTitle:attribt_look forState:UIControlStateNormal];
-    
 }
+
 
 - (void)caseMeiqia{
     [self caseMeiqia:nil];
@@ -51,50 +49,32 @@
 
 - (IBAction)caseMeiqia:(UIButton *)sender {
     
+    if (self.actionBlock) {
+        self.actionBlock(sender, nil, nil);
+    }
 }
+
 - (IBAction)caseBack:(UIButton *)sender {
-    
-//    if (self.actionBlock) {
-//        self.actionBlock(YES);
-//    }
-    [self.navigationController dismissViewControllerAnimated:true completion:^{
-    }];
+ 
+    if (self.actionBlock) {
+        self.actionBlock(nil, sender, nil);
+    }
+
 }
 - (IBAction)caseKeepLook:(UIButton *)sender {
-//    if (self.actionBlock) {
-//        self.actionBlock(NO);
-//    }
-    [self.navigationController dismissViewControllerAnimated:true completion:^{
-    }];
+    
+    if (self.actionBlock) {
+        self.actionBlock(nil, nil, sender);
+    }
 }
 
-
-//- (void)caseSuccesed:(BOOL)isBackToHome{
-//
-//    if (isBackToHome) {
-//        [self.navigationController dismissViewControllerAnimated:true completion:^{
-//        }];
-//        return;
-//    }
-//    if (self.isPresent) {
-//        [self casePop];
-//    }else{
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//}
-
-
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
+- (void)layoutSubviews{
+    [super layoutSubviews];
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bgView.frame cornerRadius:8];
     self.shaper.path = path.CGPath;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 
 @end
+

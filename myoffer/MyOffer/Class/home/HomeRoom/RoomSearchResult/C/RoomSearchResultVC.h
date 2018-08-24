@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RoomBaseViewController.h"
+#import "RoomBaseVC.h"
 #import "RoomSearchResultItemModel.h"
 
-@interface RoomSearchResultVC : RoomBaseViewController
+@interface RoomSearchResultVC : RoomBaseVC
 @property(nonatomic,strong)RoomSearchResultItemModel *item;
+@property(nonatomic,strong)NSDictionary *parameterItem;
+
 @end

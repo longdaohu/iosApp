@@ -144,6 +144,4 @@ static NSString *identify = @"RoomAppointmentCell";
     return  [dateFormatter stringFromDate:date];
 }
 
-
-
 @end

@@ -12,6 +12,5 @@
 
 @property (copy) NSNumber *agreementAccepted;
 @property (copy) NSString *introductionDismissBuildVersion;
-@property (copy) NSString *introductionBuildVersion;
 
 @end

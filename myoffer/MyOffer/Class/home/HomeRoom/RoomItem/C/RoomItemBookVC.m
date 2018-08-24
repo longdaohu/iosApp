@@ -23,7 +23,7 @@
 @implementation RoomItemBookVC
 
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
     NavigationBarHidden(YES);
 }
 
@@ -62,20 +62,23 @@
 - (void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView =[[UIView alloc] init];
-    [self.view addSubview:self.tableView];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     
     UINib *xib = [UINib nibWithNibName:@"RoomItemBookCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RoomItemBookCell"];
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
     self.tableView.sectionHeaderHeight = 58;
+    self.tableView.estimatedSectionFooterHeight = 1;
+    self.tableView.sectionFooterHeight = HEIGHT_ZERO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     self.header.itemFrameModel = self.itemFrameModel;
     if (self.itemFrameModel.item.pictures.count > 0) {
         self.header.mj_h += XSCREEN_WIDTH;
@@ -86,11 +89,6 @@
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -122,6 +120,11 @@
     return sv;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    return [UIView new];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
@@ -136,11 +139,11 @@
  
     WeakSelf
     RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
+    vc.room_id = room_id;
     vc.actionBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:NO];
     };
     if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
-      
         vc.isPresent = YES;
         MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
         [self presentViewController:nav animated:YES completion:nil];
