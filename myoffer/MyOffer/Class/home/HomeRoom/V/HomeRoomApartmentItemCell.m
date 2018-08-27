@@ -93,16 +93,20 @@
     self.priceLab.frame = flatFrameObject.price_frame;
     self.cityLab.frame = flatFrameObject.city_frame;
  
-    NSValue *tagValue =  flatFrameObject.tag_frames.firstObject;
-    NSValue *wifiValue = flatFrameObject.tag_frames.lastObject;
-    self.tagLab.frame = tagValue.CGRectValue;
-    self.wifiLab.frame = wifiValue.CGRectValue;
-    self.tagLab.text = flatFrameObject.item.feature.firstObject;
-    self.wifiLab.text = flatFrameObject.item.feature.lastObject;
     
+    if (flatFrameObject.item.feature.count > 0){
+        
+        NSValue *tagValue =  flatFrameObject.tag_frames.firstObject;
+        NSValue *wifiValue = flatFrameObject.tag_frames.lastObject;
+        self.tagLab.frame = tagValue.CGRectValue;
+        self.wifiLab.frame = wifiValue.CGRectValue;
+        self.tagLab.text = flatFrameObject.item.feature.firstObject;
+        self.wifiLab.text = flatFrameObject.item.feature.lastObject;
+    }
 }
 
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
+    
     _item = item;
     
     NSString *path = [item.image toUTF8WithString];
@@ -123,6 +127,15 @@
     }
  
  }
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    if (self.isFromMap) {
+        
+    }
+}
+
 
 
 @end

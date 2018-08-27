@@ -18,6 +18,8 @@
 #import "RoomItemHeaderView.h"
 #import "RoomNavigationView.h"
 #import "RoomItemBookVC.h"
+#import "RoomMapVC.h"
+#import "HomeRoomIndexFlatFrameObject.h"
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;

@@ -255,22 +255,20 @@
     [parameter setValue:self.room_id forKey:@"property_id"];
 */
  
-//    NSDictionary *parameter = @{
-//                                @"name":@"xxx",
-//                                @"mobile":@"18688958114",
-//                                @"email":@"767577465@qq.com",
-//                                @"wechat":@"wei-laoxu",
-//                                @"date":@"2018-12-09",
-//                                @"property_id":self.room_id
-//                                };
-//    WeakSelf
-//    [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
-//
-//        NSLog(@"1 >>>>>>>>>> %d  %@",response.statusCode,response.error);
-//        id result = [response.body KD_JSONObject];
-//        NSLog(@"2  >>>>>>>>>> %@",result);
-//        
-//    }];
+    NSDictionary *parameter = @{
+                                @"name":@"xxx",
+                                @"mobile":@"18688958114",
+                                @"email":@"767577465@qq.com",
+                                @"wechat":@"wei-laoxu",
+                                @"date":@"2018-12-09",
+                                @"property_id":self.room_id
+                                };
+    WeakSelf
+    [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
+        NSLog(@"1 >>>>>>>>>> %d  %@",response.statusCode,response.error);
+        id result = [response.body KD_JSONObject];
+        NSLog(@"2  >>>>>>>>>> %@",result);
+    }];
  
  
     self.succesView.alpha = 1;

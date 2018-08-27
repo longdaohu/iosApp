@@ -623,6 +623,7 @@
 		AED3C475212E61FB00A5668C /* RoomBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C474212E61FB00A5668C /* RoomBaseVC.m */; };
 		AED3C478212FB1E900A5668C /* RoomAppointSuccesView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C477212FB1E900A5668C /* RoomAppointSuccesView.m */; };
 		AED3C47C212FB21100A5668C /* RoomAppointSuccesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED3C47B212FB21100A5668C /* RoomAppointSuccesView.xib */; };
+		AED3C483212FE4C400A5668C /* RoomMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3C482212FE4C400A5668C /* RoomMapVC.m */; };
 		AED5EA511DC3398C00AF4854 /* UniversityFrameNew.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */; };
 		AEDA9A971F09EECF00090735 /* MyofferUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */; };
 		AEDCCE781D810D8C009A13FF /* UpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCCE771D810D8C009A13FF /* UpdateCell.m */; };
@@ -1751,6 +1752,8 @@
 		AED3C476212FB1E900A5668C /* RoomAppointSuccesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointSuccesView.h; sourceTree = "<group>"; };
 		AED3C477212FB1E900A5668C /* RoomAppointSuccesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointSuccesView.m; sourceTree = "<group>"; };
 		AED3C47B212FB21100A5668C /* RoomAppointSuccesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomAppointSuccesView.xib; sourceTree = "<group>"; };
+		AED3C481212FE4C400A5668C /* RoomMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomMapVC.h; sourceTree = "<group>"; };
+		AED3C482212FE4C400A5668C /* RoomMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomMapVC.m; sourceTree = "<group>"; };
 		AED5EA501DC3398C00AF4854 /* UniversityFrameNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversityFrameNew.m; sourceTree = "<group>"; };
 		AEDA9A951F09EECF00090735 /* MyofferUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUpdateView.h; sourceTree = "<group>"; };
 		AEDA9A961F09EECF00090735 /* MyofferUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUpdateView.m; sourceTree = "<group>"; };
@@ -2087,6 +2090,7 @@
 			children = (
 				AED3C473212E61FB00A5668C /* RoomBaseVC.h */,
 				AED3C474212E61FB00A5668C /* RoomBaseVC.m */,
+				AED3C47D212FE47600A5668C /* RoomMap */,
 				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AEA03A4B211D9E5F007A791E /* RoomItemDetail */,
 				AEA03A41211D7DA1007A791E /* RoomCity */,
@@ -4702,6 +4706,39 @@
 			path = C;
 			sourceTree = "<group>";
 		};
+		AED3C47D212FE47600A5668C /* RoomMap */ = {
+			isa = PBXGroup;
+			children = (
+				AED3C480212FE49300A5668C /* M */,
+				AED3C47F212FE49000A5668C /* V */,
+				AED3C47E212FE48B00A5668C /* C */,
+			);
+			path = RoomMap;
+			sourceTree = "<group>";
+		};
+		AED3C47E212FE48B00A5668C /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AED3C481212FE4C400A5668C /* RoomMapVC.h */,
+				AED3C482212FE4C400A5668C /* RoomMapVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		AED3C47F212FE49000A5668C /* V */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		AED3C480212FE49300A5668C /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
 		AEDCCE721D810CDA009A13FF /* Update */ = {
 			isa = PBXGroup;
 			children = (
@@ -5306,6 +5343,7 @@
 				AE1A806820DA563F00CE9E50 /* HomeYESGlobalCell.m in Sources */,
 				AECC87D01F95F63800FCBBEC /* CatigoryRank.m in Sources */,
 				AE9BA48A20B5598A008B65D4 /* RewardDetailCelltem.m in Sources */,
+				AED3C483212FE4C400A5668C /* RoomMapVC.m in Sources */,
 				AEA24B0A1D5B24D200DD7939 /* SetViewController.m in Sources */,
 				AEA545D820D274270095CBDA /* HomeRecommendActivityCell.m in Sources */,
 				AECC87C91F95F63800FCBBEC /* CatigoryViewController.m in Sources */,

@@ -18,4 +18,5 @@ typedef NS_ENUM(NSInteger,HomeRoomTopViewButtonType) {
 @interface HomeRoomTopView : UIView
 @property(nonatomic,assign)CGFloat header_height;
 @property(nonatomic,copy)void(^actionBlock)(UIButton *sender);
+
 @end

@@ -24,6 +24,7 @@
     [self makeCommentFrame];
 }
 
+//客户好评
 - (void)makeCommentFrame{
  
     CGFloat item_width = 255;
@@ -32,7 +33,7 @@
     self.comment_Section_Height = item_height + 30;
 }
 
-
+//热门城市
 - (void)makeHotCityFrame{
     
     CGFloat item_width = 115;
@@ -41,6 +42,7 @@
     self.hot_city_Section_Height = item_height + 30;
 }
 
+//公寓推荐
 - (void)makeAccommodationsFrame{
 
     CGFloat item_width = 235;
@@ -49,7 +51,7 @@
     for (HomeRoomIndexFlatsObject *it in self.item.accommodations) {
         
         HomeRoomIndexFlatFrameObject *flatFrameObj = [[HomeRoomIndexFlatFrameObject alloc] init];
-        flatFrameObj.isHorizontal = YES;
+        flatFrameObj.type = HomeRoomIndexFlatTypeHorizontal;
         flatFrameObj.item_width = item_width;
         flatFrameObj.item_height = item_height;
         flatFrameObj.item = it;
@@ -60,11 +62,11 @@
     
 }
 
+//精选民宿
 - (void)makeFlatsFrame{
  
 
     CGFloat item_width = (XSCREEN_WIDTH - 40 - self.minimumInteritemSpacing) * 0.5;
-    
     NSMutableArray *flat_Arr = [NSMutableArray array];
     for (HomeRoomIndexFlatsObject *it in self.item.flats) {
         HomeRoomIndexFlatFrameObject *flatFrameObj = [[HomeRoomIndexFlatFrameObject alloc] init];

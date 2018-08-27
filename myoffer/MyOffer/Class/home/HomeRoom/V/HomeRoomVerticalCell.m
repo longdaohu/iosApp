@@ -84,7 +84,6 @@
 {
  
     HomeRoomApartmentItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomApartmentItemCell" forIndexPath:indexPath];
-    cell.isHomestay = YES;
     cell.flatFrameObject = self.items[indexPath.row];
     
     return cell;

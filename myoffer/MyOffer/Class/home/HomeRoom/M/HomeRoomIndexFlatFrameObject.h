@@ -9,12 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "HomeRoomIndexFlatsObject.h"
 
+typedef NS_ENUM(NSInteger,HomeRoomIndexFlatType) {
+    HomeRoomIndexFlatTypeDefault,//精选民宿
+    HomeRoomIndexFlatTypeHorizontal, //公寓推荐
+    HomeRoomIndexFlatTypeVertical //地图
+};
 @interface HomeRoomIndexFlatFrameObject : NSObject
 @property(nonatomic,strong)HomeRoomIndexFlatsObject *item;
-@property(nonatomic,assign)BOOL isHorizontal;
+@property(nonatomic,assign)HomeRoomIndexFlatType type;
+
 @property(nonatomic,assign)CGFloat item_width;
 @property(nonatomic,assign)CGFloat item_height;
+
 @property(nonatomic,assign)CGFloat margin;
+
 @property(nonatomic,assign)CGFloat city_font_size;
 @property(nonatomic,assign)CGFloat tag_font_size;
 @property(nonatomic,assign)CGFloat name_font_size;

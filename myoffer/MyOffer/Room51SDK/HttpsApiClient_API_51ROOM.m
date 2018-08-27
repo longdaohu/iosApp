@@ -120,16 +120,19 @@ static NSString* HOST = @"api.51room.com";
 {
     
     CACommonRequest* request = [[CACommonRequest alloc] initWithPath: @"/enquiry"
-                                                          withMethod: @"POST"
+                                                          withMethod: @"GET"
                                                             withHost: HOST
                                                              isHttps: isHttps];
-    
     for (NSString *key in parameter.allKeys) {
        [request addQueryParameter:parameter[key]  forKey:key];
     }
     [client invokeWithRequest: request withCallback:completionBlock];
 }
 
+/*
+ [request setHTTPBody:data];
+ [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+ */
 
 - (void) property_list:(NSInteger) page pagesize:(NSInteger) pagesize lease:(NSInteger) lease min:(NSString *) min max:(NSString *) max type:(NSString *) type type_id:(NSInteger) type_id completionBlock:(void (^)(CACommonResponse *))completionBlock
 {
