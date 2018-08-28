@@ -11,12 +11,14 @@
 #import "HomeRecommendVC.h"
 #import "HomeApplicationVC.h"
 #import "HomeFeeVC.h"
-#import "HomeRoomVC.h"
+//#import "HomeRoomVC.h"
 #import "MyofferUpdateView.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "CatigaryScrollView.h"
 #import "IntroViewController.h"
+#import "HomeIndexModel.h"
+#import "HomeYasiVC.h"
 
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
@@ -27,8 +29,8 @@
 @property(nonatomic,strong)HomeMenuBarView *MenuBarView;
 @property(nonatomic,assign)UIStatusBarStyle currentStatusBarStyle;
 @property(nonatomic,strong)NSArray *childViewControllersArray;
-@property(nonatomic,strong)NSArray *backgroudImages;
 @property (assign, nonatomic)BOOL  hadShowNeWVersion;
+@property(nonatomic,strong)NSArray *groups;
 
 @end
 
@@ -59,70 +61,46 @@
     [MobClick endLogPageView:@"page新版首页"];
 }
 
-- (NSArray<UIViewController *> *)childViewControllersArray {
-    
-    if (!_childViewControllersArray) {
-        //推荐
-        HomeRecommendVC *recomend  = [[HomeRecommendVC alloc] init];
-        //留学申请
-        HomeApplicationVC *application  = [[HomeApplicationVC alloc] init];
-        //学费支付
-        HomeFeeVC *fee  = [[HomeFeeVC alloc] init];
-        fee.type = HomeLandingTypeMoney;
-        //海外租房
-        HomeRoomVC *room  = [[HomeRoomVC alloc] init];
-//        HomeFeeVC *room  = [[HomeFeeVC alloc] init];
-//        room.type = HomeLandingTypeRoom;
-        //游学职培
-        HomeFeeVC *yes  = [[HomeFeeVC alloc] init];
-        yes.type = HomeLandingTypeYesGlobal;
-        //海外移民
-        HomeFeeVC *uvic  = [[HomeFeeVC alloc] init];
-        uvic.type = HomeLandingTypeUVIC;
-        
-        _childViewControllersArray = @[ recomend,
-                                        application,
-                                        fee,
-                                        room,
-                                        yes,
-                                        uvic,
-                                        ];
-    }
-    
-    return _childViewControllersArray;
-}
 
-- (NSArray *)backgroudImages{
-    
-    if (!_backgroudImages) {
-        
-        _backgroudImages = @[@"home_application_bg",@"home_fee_bg",@"home_room_bg",@"home_YESGlobal_bg",@"home_UVIC_bg"];
+- (NSArray *)groups{
+
+    if (!_groups) {
+ 
+        HomeIndexModel *recommend = [[HomeIndexModel alloc] initWithTitle:@"推荐" backgroudImageName:nil destVC:[HomeRecommendVC class] indexType:HomeIndexTypeDefault];
+        HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思嘿客" backgroudImageName:@"home_application_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
+        HomeIndexModel *applicate = [[HomeIndexModel alloc] initWithTitle:@"留学申请" backgroudImageName:@"home_application_bg" destVC:[HomeApplicationVC class] indexType:HomeIndexTypeLXSQ];
+        HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
+        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];
+        HomeIndexModel *yx = [[HomeIndexModel alloc] initWithTitle:@"游学职培" backgroudImageName:@"home_YESGlobal_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeYouXue];
+        HomeIndexModel *ym = [[HomeIndexModel alloc] initWithTitle:@"海外移民" backgroudImageName:@"home_UVIC_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeHYYM];
+
+        _groups = @[recommend,yasi,applicate,fee,room,yx,ym];
     }
-    return  _backgroudImages;
+    
+    return _groups;
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self makeUI];
-    for (UIViewController *vc  in self.childViewControllersArray) {
-        [self addChildViewController:vc];
-    }
+    
     [self makeOther];
 }
 
 - (void)makeUI{
     
     self.currentStatusBarStyle = UIStatusBarStyleDefault;
-    
+    [self makeChildViewController];
     [self makeCollectView];
     [self makeMenuView];
-}
+ }
 
 - (void)makeMenuView{
     
     WeakSelf;
-    NSArray *titles = @[@"推荐",@"留学申请",@"学费支付",@"海外租房",@"游学职培",@"海外移民"];
+    NSArray *titles = [self.groups valueForKeyPath:@"title"];
     HomeMenuBarView *MenuView = [HomeMenuBarView menuInitWithTitles:titles clickButton:^(NSInteger index) {
         [weakSelf MenuScrollToIndex:index];
     }];
@@ -133,6 +111,47 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [MenuView initFirstResponse];
     });
+ 
+}
+
+- (void)makeChildViewController{
+    
+    
+    NSMutableArray *children = [NSMutableArray array];
+    for (HomeIndexModel *itemModel in self.groups) {
+ 
+        UIViewController *vc  = [[itemModel.destVC  alloc] init];
+        [children addObject:vc];
+        [self addChildViewController:vc];
+
+        if (![vc isKindOfClass:[HomeFeeVC class]]) continue;
+        
+        if (itemModel.type == HomeIndexTypeFee) {
+        
+            HomeFeeVC *fee  = (HomeFeeVC *)vc;
+            fee.type = HomeLandingTypeMoney;
+        }
+ 
+        if (itemModel.type == HomeIndexType51Room) {
+            
+            HomeFeeVC *room  = (HomeFeeVC *)vc;
+            room.type = HomeLandingTypeRoom;
+        }
+        
+        if (itemModel.type == HomeIndexTypeYouXue) {
+            
+            HomeFeeVC *yes  =  (HomeFeeVC *)vc;
+            yes.type = HomeLandingTypeYesGlobal;
+        }
+        
+        if (itemModel.type == HomeIndexTypeHYYM) {
+            
+            HomeFeeVC *uvic  =  (HomeFeeVC *)vc;
+            uvic.type = HomeLandingTypeUVIC;
+        }
+    }
+    
+    self.childViewControllersArray = children;
     
 }
 
@@ -156,14 +175,18 @@
 
 - (void)makeBackgroupImageView:(UIScrollView *)bgView{
  
-    for (NSInteger index = 0; index < self.backgroudImages.count; index++) {
+    for (NSInteger index = 0; index < self.groups.count; index++) {
         
-        NSString *icon = [NSString stringWithFormat:@"%@.jpg",self.backgroudImages[index]];
-        NSString *icon_b = [NSString stringWithFormat:@"%@_word",self.backgroudImages[index]];
+        HomeIndexModel *homeItem = self.groups[index];
+       
+        if (!homeItem.backgroudImageName) continue;
+ 
+        NSString *icon = [NSString stringWithFormat:@"%@.jpg",homeItem.backgroudImageName];
+        NSString *icon_b = [NSString stringWithFormat:@"%@_word",homeItem.backgroudImageName];
         
         UIView *itemView = [[UIView alloc] initWithFrame:self.view.bounds];
         itemView.clipsToBounds = YES;
-        itemView.mj_x = (index + 1) * bgView.mj_w;
+        itemView.mj_x = index * bgView.mj_w;
         [bgView addSubview:itemView];
         
         UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:itemView.bounds];
@@ -210,48 +233,65 @@
     [self toLoadViewControllerWithPage:index];
 }
 
-
-- (void)toSetTabBarHidden:(NSInteger)index{
+//隐藏底部导航
+- (void)toSetTabBarHidden:(NSInteger)page{
  
-    if (index == 0){
+    if (page == 0){
         self.tabBarController.tabBar.hidden = NO;
         return;
     }
-    UIViewController *vc = self.childViewControllersArray[index];
-    if (index == 1) {
+    UIViewController *vc = self.childViewControllersArray[page];
+    
+    HomeIndexModel *indexModel = self.groups[page];
+    if (indexModel.type == HomeIndexTypeLXSQ) {
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toSetTabBarhidden];
-    }else  if (index == 3) {
-//        HomeFeeVC *room = (HomeFeeVC *)vc;
-        HomeRoomVC *room = (HomeRoomVC *)vc;
+        
+    }else if (indexModel.type == HomeIndexType51Room){
+        HomeFeeVC *room = (HomeFeeVC *)vc;
+        //        HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toSetTabBarhidden];
+        
+    }else if (indexModel.type == HomeIndexTypeYasi){
+        
+//        HomeFeeVC *room = (HomeFeeVC *)vc;
+//        [room toSetTabBarhidden];
+        
     }else{
+        
         HomeFeeVC *other = (HomeFeeVC *)vc;
         [other toSetTabBarhidden];
     }
 }
 
+//跳转到对应页面
 - (void)toLoadViewControllerWithPage:(NSInteger)page{
   
     if (page == 0){
         self.tabBarController.tabBar.hidden = NO;
         return;
     }
+    
     UIViewController *vc = self.childViewControllersArray[page];
     vc.view.frame = CGRectMake(page * XSCREEN_WIDTH, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT);
     [self.bgScrollView addSubview:vc.view];
     
-    if (page == 1) {
+    HomeIndexModel *indexModel = self.groups[page];
+    if (indexModel.type == HomeIndexTypeLXSQ) {
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toLoadView];
-    } else if (page == 3){
-//        HomeFeeVC *room = (HomeFeeVC *)vc;
-        HomeRoomVC *room = (HomeRoomVC *)vc;
+        
+    }else if (indexModel.type == HomeIndexType51Room){
+        HomeFeeVC *room = (HomeFeeVC *)vc;
+        //        HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toLoadView];
+        
     }else{
+        
         HomeFeeVC *other = (HomeFeeVC *)vc;
         [other toLoadView];
     }
+
 }
 
 #pragma mark : 事件处理

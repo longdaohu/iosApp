@@ -14,7 +14,6 @@
     
     if (!_image) {
     
-//        NSString *url = @"";
         NSDictionary *app = self.images[@"app"];
         _image = app[@"url"];//[url toUTF8WithString];
     }
