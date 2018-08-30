@@ -18,6 +18,8 @@
 @property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)UIView *headerView;
+@property(nonatomic,assign)UITableViewStyle type;
+@property(nonatomic,strong)UITableView *tableView;
 
 - (void)toReLoadTable;
 - (void)toLoadView;

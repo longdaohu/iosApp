@@ -7,6 +7,7 @@
 //
 
 #import "YSScheduleCell.h"
+#import "YSScheduleModel.h"
 
 @interface YSScheduleCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *timeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIView *topLine;
+@property (weak, nonatomic) IBOutlet UIButton *beforeBtn;
 
 
 @end
@@ -33,14 +35,48 @@
     self.playBtn.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
     self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.playBtn.layer.shadowOpacity = 0.5;
+    
+    self.playBtn.userInteractionEnabled = NO;
+    self.timeBtn.userInteractionEnabled = NO;
+
+    self.beforeBtn.hidden = YES;
+    self.beforeBtn.enabled = NO;
+    self.beforeBtn.layer.borderWidth = 1;
+    self.beforeBtn.layer.borderColor = XCOLOR_SUBTITLE.CGColor;
+    self.beforeBtn.layer.cornerRadius = 2;
+    self.beforeBtn.layer.masksToBounds  = YES;
+    [self.beforeBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
    
+}
+
+- (void)setItem:(YSScheduleModel *)item{
+    _item = item;
+    
+    self.nameLab.text = item.teacherName;
+    self.titleLab.text = item.topic;
+    [self.timeBtn setTitle:item.startTime forState:UIControlStateNormal];
+    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
+    [self.playBtn setTitle:item.stateName forState:UIControlStateNormal];
+
+    self.onLivingLab.hidden = item.livelogoState;
+    self.onlivingView.hidden = item.livelogoState;
+    self.playBtn.enabled = item.playButtonState;
+    
+    self.playBtn.hidden = NO;
+    self.beforeBtn.hidden = YES;
+    if (item.type == YSScheduleVideoStateBefore){
+        
+        self.beforeBtn.hidden = NO;
+        self.playBtn.hidden = YES;
+    }
+  
 }
 
 - (IBAction)caseplay:(UIButton *)sender {
     
-    if (self.actionBlock) {
-        self.actionBlock();
-    }
+//    if (self.actionBlock) {
+//        self.actionBlock(self.item);
+//    }
 }
 
 

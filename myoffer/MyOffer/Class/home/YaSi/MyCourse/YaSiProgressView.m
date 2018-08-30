@@ -24,7 +24,7 @@
         self.backgroundColor = XCOLOR_BG;
         
         UILabel *titleLab = [UILabel new];
-        titleLab.font = XFONT(15);
+        titleLab.font = XFONT(10);
         self.titleLab = titleLab;
         titleLab.textColor = XCOLOR_LIGHTBLUE;
         titleLab.backgroundColor = XCOLOR_WHITE;
@@ -52,7 +52,9 @@
 - (void)setProgress:(CGFloat)progress{
     _progress = progress;
  
-//    self.titleLab.text = [NSString stringWithFormat:@"%lf\%",progress * 100];
+    NSInteger count = (NSInteger)progress * 100;
+    self.titleLab.text = [NSString stringWithFormat:@"%ld%%",count];
+    self.progressLayer.strokeEnd =  progress;
 }
 
 - (void)layoutSubviews{

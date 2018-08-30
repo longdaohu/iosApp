@@ -106,7 +106,7 @@
     }
 
     
-    if (totalBtnWidth <= CGRectGetWidth(self.bounds)) {//不能滑动
+    if (totalBtnWidth <= CGRectGetWidth(self.bounds) && !self.title_width_no_equal) {//不能滑动
         
         CGFloat itemBtnWidth = CGRectGetWidth(self.bounds)/self.itemBtnArr.count;
         CGFloat itemBtnHeight = CGRectGetHeight(self.bounds);
@@ -149,7 +149,7 @@
     
     [UIView animateWithDuration:(animated?ANIMATION_DUATION:0) animations:^{
         
-        switch (_indicatorType) {
+        switch (self.indicatorType) {
                 
             case FSIndicatorTypeDefault:
                 
@@ -165,7 +165,7 @@
             case FSIndicatorTypeCustom:
                 
                 self.indicatorView.center = CGPointMake(selectBtn.center.x, CGRectGetHeight(self.scrollView.bounds) - 1);
-                self.indicatorView.bounds = CGRectMake(0, 0, indicatorWidth + _indicatorExtension*2, 2);
+                self.indicatorView.bounds = CGRectMake(0, 0, indicatorWidth + self.indicatorExtension*2, 2);
                 break;
                 
             case FSIndicatorTypeNone:

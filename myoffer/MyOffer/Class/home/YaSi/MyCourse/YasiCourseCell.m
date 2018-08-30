@@ -31,6 +31,7 @@
         dateBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         dateBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
+        
         UIButton  *playBtn = [UIButton new];
         self.playBtn = playBtn;
         playBtn.titleLabel.font = XFONT(12);
@@ -41,8 +42,8 @@
         [playBtn setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateNormal];
         [playBtn setBackgroundImage:XImage(@"button_blue_highlight") forState:UIControlStateHighlighted];
         [playBtn setBackgroundImage:XImage(@"button_light_unable") forState:UIControlStateDisabled];
-        
-        [playBtn addTarget:self action:@selector(casePlay:) forControlEvents:UIControlEventTouchUpInside];
+//        [playBtn addTarget:self action:@selector(casePlay:) forControlEvents:UIControlEventTouchUpInside];
+        playBtn.userInteractionEnabled = NO;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -50,11 +51,16 @@
     return self;
 }
 
-- (void)casePlay:(UIButton *)sender{
-    
-    if (self.actionBlock) {
-        self.actionBlock();
-    }
+//- (void)casePlay:(UIButton *)sender{
+//
+//    if (self.actionBlock) {
+//
+//        self.actionBlock(self.item);
+//    }
+//}
+
+- (void)setItem:(YSCourseModel *)item{
+    _item = item;
     
 }
 
@@ -83,7 +89,6 @@
     CGFloat dt_w = title_w;
     CGFloat dt_h = 20;
     self.dateBtn.frame = CGRectMake(dt_x, dt_y, dt_w, dt_h);
-    
 }
 
 @end

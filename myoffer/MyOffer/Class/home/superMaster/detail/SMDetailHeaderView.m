@@ -190,8 +190,6 @@
     [huodong_attributes setValue:[UIFont systemFontOfSize:12]  forKey:NSFontAttributeName];
     [huodong_attributes setValue:paragraphStyle forKey:NSParagraphStyleAttributeName];
     [huodong_attributes setValue:XCOLOR_SUBTITLE forKey:NSForegroundColorAttributeName];
-    
-    
     self.intro_Lab.attributedText = [[NSAttributedString alloc] initWithString:detail.introduction attributes:huodong_attributes];
   
  

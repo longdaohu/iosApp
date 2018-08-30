@@ -483,7 +483,7 @@
 
 - (void)dealloc{
     
-    NSLog(@"资讯国家专题 dealloc");
+    NSLog(@"MessageCountryTopicVController + 资讯国家专题 + dealloc");
     
 }
 

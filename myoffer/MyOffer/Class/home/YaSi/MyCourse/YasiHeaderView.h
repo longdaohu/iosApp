@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface YasiHeaderView : UIView
+@property(nonatomic,copy)void(^actionBlock)(UIButton *sender);
 
 @end

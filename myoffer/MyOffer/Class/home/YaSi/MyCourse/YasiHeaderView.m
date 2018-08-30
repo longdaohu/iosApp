@@ -28,19 +28,20 @@
         
         UIButton  *onliveBtn = [UIButton new];
         self.onliveBtn = onliveBtn;
-        onliveBtn.titleLabel.font = XFONT(12);
+        onliveBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [onliveBtn setTitle:@"进行中" forState:UIControlStateNormal];
         [onliveBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
-        [onliveBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateSelected];
+        [onliveBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
         [self addSubview:onliveBtn];
         [onliveBtn addTarget:self action:@selector(caseOnliving:) forControlEvents:UIControlEventTouchUpInside];
+        onliveBtn.enabled = NO;
         
         UIButton  *livedBtn = [UIButton new];
         self.livedBtn = livedBtn;
-        livedBtn.titleLabel.font = XFONT(12);
+        livedBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [livedBtn setTitle:@"已结课" forState:UIControlStateNormal];
         [livedBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
-        [livedBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateSelected];
+        [livedBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
         [self addSubview:livedBtn];
        [livedBtn addTarget:self action:@selector(caseLived:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -59,10 +60,20 @@
 
 - (void)caseOnliving:(UIButton *)sender{
     
+    sender.enabled = NO;
+    self.livedBtn.enabled = YES;
+    if (self.actionBlock) {
+        self.actionBlock(sender);
+    }
 }
 
 - (void)caseLived:(UIButton *)sender{
     
+    sender.enabled = NO;
+    self.onliveBtn.enabled = YES;
+    if (self.actionBlock) {
+        self.actionBlock(sender);
+    }
 }
 
 - (void)layoutSubviews{

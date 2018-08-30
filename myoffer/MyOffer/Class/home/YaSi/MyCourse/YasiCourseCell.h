@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YSCourseModel.h"
 
 @interface YasiCourseCell : UITableViewCell
 
+@property(nonatomic,strong) YSCourseModel *item;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UIButton *dateBtn;
 @property(nonatomic,strong)UIButton *playBtn;
 
-@property(nonatomic,copy)void(^actionBlock)();
+//@property(nonatomic,copy)void(^actionBlock)(YSCourseModel *item);
 
 @end

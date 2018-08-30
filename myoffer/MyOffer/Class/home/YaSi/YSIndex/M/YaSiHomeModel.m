@@ -60,20 +60,20 @@
     self.onlineLab_frame = CGRectMake(onlineLab_x, onlineLab_y, onlineLab_w, onlineLab_h);
     
 
-    CGFloat banner_x = self.left_margin;
+    CGFloat banner_x = 0;
     CGFloat banner_y = bg_btn_y + bg_btn_h + 20;
     CGFloat banner_w = XSCREEN_WIDTH - banner_x * 2;
     CGFloat banner_h = banner_w * 189.0/335;
     self.bannerView_frame = CGRectMake(banner_x, banner_y, banner_w, banner_h);
 
-    self.header_banner_size = CGSizeMake(banner_w, banner_h);
+    self.header_banner_size = CGSizeMake(banner_w - 40, banner_h - 5);
 
     CGFloat line_banner_x = self.left_margin;
     CGFloat line_banner_y = banner_y + banner_h + 28;
     CGFloat line_banner_w = XSCREEN_WIDTH - line_banner_x * 2;
     CGFloat line_banner_h = 1;
     self.line_banner_frame = CGRectMake(line_banner_x, line_banner_y, line_banner_w, line_banner_h);
- 
+
     
     CGFloat header_height =  (line_banner_y + line_banner_h);
     self.header_frame = CGRectMake(0, 0, XSCREEN_WIDTH, header_height);

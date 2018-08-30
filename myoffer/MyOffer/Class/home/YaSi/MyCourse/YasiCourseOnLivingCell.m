@@ -24,8 +24,8 @@
     
     if (self) {
         
-        [self.playBtn setTitle:@"进入教室" forState:UIControlStateNormal];
-        
+        [self.playBtn setTitle:@"进入班级" forState:UIControlStateNormal];
+ 
         UILabel *tagLab = [UILabel new];
         tagLab.font = XFONT(10);
         self.tagLab = tagLab;
@@ -53,7 +53,6 @@
     
     return self;
 }
-
 
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -100,10 +99,20 @@
  
     CGFloat pro_w = progress_width;
     CGFloat pro_h = pro_w;
-    CGFloat pro_x = content_size.width  - left_margin - pl_w;
+    CGFloat pro_x = content_size.width  - left_margin - pro_w;
     CGFloat pro_y =  20;
     self.progressView.frame = CGRectMake(pro_x, pro_y , pro_w, pro_h);
 
+}
+
+- (void)setItem:(YSCourseModel *)item{
+ 
+    super.item = item;
+    
+    self.titleLab.text = item.name;
+    self.progressView.progress = item.progress;
+    [self.dateBtn setTitle:item.date_label forState:UIControlStateNormal];
+    
 }
 
  

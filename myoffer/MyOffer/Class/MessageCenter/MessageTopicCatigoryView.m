@@ -276,37 +276,23 @@
     UIButton *sender = self.topView.subviews[index];
     
     CGFloat centerX = sender.center.x;
-    
     CGFloat move = centerX - self.center.x;
-    
     BOOL  isOver = (centerX  + self.center.x - self.topView.contentSize.width) > 0;
-    
     CGPoint  po = CGPointZero;
     
     if (isOver) {
-        
         po = CGPointMake(self.topView.contentSize.width - self.mj_w, 0);
-        
     }else if(sender.center.x < self.center.x){
-        
         po = CGPointZero;
-        
     }else{
-        
         po = CGPointMake(move, 0);
     }
-    
-    
-    [self.topView setContentOffset:po animated:YES];
-    
-    WeakSelf
+ 
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        
-        _indicatorView.center = CGPointMake(sender.center.x,  _indicatorView.center.y);
-        
+        self.indicatorView.center = CGPointMake(sender.center.x,  self.indicatorView.center.y);
     } completion:^(BOOL finished) {
         
-        [weakSelf.topView setContentOffset:po animated:YES];
+        [self.topView setContentOffset:po animated:YES];
         
     }];
     

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YSCourseModel.h"
 
-@interface YaSiScheduleVC : UIViewController
-
+@interface YaSiScheduleVC : BaseViewController
+@property(nonatomic,strong)YSCourseModel *item;
 @end

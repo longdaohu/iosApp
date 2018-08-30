@@ -67,7 +67,7 @@
     if (!_groups) {
  
         HomeIndexModel *recommend = [[HomeIndexModel alloc] initWithTitle:@"推荐" backgroudImageName:nil destVC:[HomeRecommendVC class] indexType:HomeIndexTypeDefault];
-        HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思嘿客" backgroudImageName:@"home_application_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
+        HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思提分" backgroudImageName:@"home_application_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
         HomeIndexModel *applicate = [[HomeIndexModel alloc] initWithTitle:@"留学申请" backgroudImageName:@"home_application_bg" destVC:[HomeApplicationVC class] indexType:HomeIndexTypeLXSQ];
         HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
         HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];

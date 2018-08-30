@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YSScheduleModel;
 
 @interface YSScheduleCell : UITableViewCell
-@property(nonatomic,copy)void(^actionBlock)(void);
+@property(nonatomic,strong)YSScheduleModel *item;
+@property(nonatomic,copy)void(^actionBlock)(YSScheduleModel *item);
+
 @end

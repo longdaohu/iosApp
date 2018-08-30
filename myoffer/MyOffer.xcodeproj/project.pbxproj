@@ -573,6 +573,13 @@
 		AEB75E052135377300C9129C /* YaSiScheduleOnLivingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E032135377300C9129C /* YaSiScheduleOnLivingCell.m */; };
 		AEB75E062135377300C9129C /* YaSiScheduleOnLivingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E042135377300C9129C /* YaSiScheduleOnLivingCell.xib */; };
 		AEB75E0A2135430900C9129C /* YSCalendarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E092135430900C9129C /* YSCalendarVC.m */; };
+		AEB75E0F21366B0B00C9129C /* YSImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E0E21366B0B00C9129C /* YSImagesCell.m */; };
+		AEB75E122136931600C9129C /* YSCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E112136931600C9129C /* YSCourseModel.m */; };
+		AEB75E15213696B900C9129C /* YSCourseGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E14213696B900C9129C /* YSCourseGroupModel.m */; };
+		AEB75E1821378F9A00C9129C /* YSScheduleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1721378F9A00C9129C /* YSScheduleModel.m */; };
+		AEB75E1B2137C05200C9129C /* YasiBannerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */; };
+		AEB75E1E2137CE5600C9129C /* YasiCatigoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */; };
+		AEB75E212137CEB200C9129C /* YasiCatigoryItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
 		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
 		AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */; };
@@ -1687,6 +1694,20 @@
 		AEB75E042135377300C9129C /* YaSiScheduleOnLivingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YaSiScheduleOnLivingCell.xib; sourceTree = "<group>"; };
 		AEB75E082135430900C9129C /* YSCalendarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCalendarVC.h; sourceTree = "<group>"; };
 		AEB75E092135430900C9129C /* YSCalendarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCalendarVC.m; sourceTree = "<group>"; };
+		AEB75E0D21366B0B00C9129C /* YSImagesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSImagesCell.h; sourceTree = "<group>"; };
+		AEB75E0E21366B0B00C9129C /* YSImagesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSImagesCell.m; sourceTree = "<group>"; };
+		AEB75E102136931600C9129C /* YSCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCourseModel.h; sourceTree = "<group>"; };
+		AEB75E112136931600C9129C /* YSCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCourseModel.m; sourceTree = "<group>"; };
+		AEB75E13213696B900C9129C /* YSCourseGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCourseGroupModel.h; sourceTree = "<group>"; };
+		AEB75E14213696B900C9129C /* YSCourseGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCourseGroupModel.m; sourceTree = "<group>"; };
+		AEB75E1621378F9A00C9129C /* YSScheduleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSScheduleModel.h; sourceTree = "<group>"; };
+		AEB75E1721378F9A00C9129C /* YSScheduleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSScheduleModel.m; sourceTree = "<group>"; };
+		AEB75E192137C05200C9129C /* YasiBannerLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YasiBannerLayout.h; sourceTree = "<group>"; };
+		AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiBannerLayout.m; sourceTree = "<group>"; };
+		AEB75E1C2137CE5600C9129C /* YasiCatigoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YasiCatigoryModel.h; sourceTree = "<group>"; };
+		AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryModel.m; sourceTree = "<group>"; };
+		AEB75E1F2137CEB200C9129C /* YasiCatigoryItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YasiCatigoryItemModel.h; sourceTree = "<group>"; };
+		AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryItemModel.m; sourceTree = "<group>"; };
 		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -4608,6 +4629,10 @@
 			children = (
 				AEB75DDD2133E4F700C9129C /* HomeYaSiHeaderView.h */,
 				AEB75DDE2133E4F700C9129C /* HomeYaSiHeaderView.m */,
+				AEB75E0D21366B0B00C9129C /* YSImagesCell.h */,
+				AEB75E0E21366B0B00C9129C /* YSImagesCell.m */,
+				AEB75E192137C05200C9129C /* YasiBannerLayout.h */,
+				AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -4627,6 +4652,12 @@
 			children = (
 				AEB75DE02133EC4600C9129C /* YaSiHomeModel.h */,
 				AEB75DE12133EC4600C9129C /* YaSiHomeModel.m */,
+				AEB75E13213696B900C9129C /* YSCourseGroupModel.h */,
+				AEB75E14213696B900C9129C /* YSCourseGroupModel.m */,
+				AEB75E1C2137CE5600C9129C /* YasiCatigoryModel.h */,
+				AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */,
+				AEB75E1F2137CEB200C9129C /* YasiCatigoryItemModel.h */,
+				AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -4640,12 +4671,14 @@
 				AEB75DF12134F76700C9129C /* YasiHeaderView.m */,
 				AEB75DE72134E61F00C9129C /* YasiCourseCell.h */,
 				AEB75DE82134E61F00C9129C /* YasiCourseCell.m */,
-				AEB75DF321351A9200C9129C /* YasiCourseTextCell.h */,
-				AEB75DF421351A9200C9129C /* YasiCourseTextCell.m */,
 				AEB75DED2134F13200C9129C /* YasiCourseOnLivingCell.h */,
 				AEB75DEE2134F13200C9129C /* YasiCourseOnLivingCell.m */,
+				AEB75DF321351A9200C9129C /* YasiCourseTextCell.h */,
+				AEB75DF421351A9200C9129C /* YasiCourseTextCell.m */,
 				AEB75DF621351E4400C9129C /* YaSiProgressView.h */,
 				AEB75DF721351E4400C9129C /* YaSiProgressView.m */,
+				AEB75E102136931600C9129C /* YSCourseModel.h */,
+				AEB75E112136931600C9129C /* YSCourseModel.m */,
 			);
 			path = MyCourse;
 			sourceTree = "<group>";
@@ -4661,6 +4694,8 @@
 				AEB75E022135377300C9129C /* YaSiScheduleOnLivingCell.h */,
 				AEB75E032135377300C9129C /* YaSiScheduleOnLivingCell.m */,
 				AEB75E042135377300C9129C /* YaSiScheduleOnLivingCell.xib */,
+				AEB75E1621378F9A00C9129C /* YSScheduleModel.h */,
+				AEB75E1721378F9A00C9129C /* YSScheduleModel.m */,
 			);
 			path = YSSchedule;
 			sourceTree = "<group>";
@@ -5473,6 +5508,7 @@
 				AE9BA48020B53E68008B65D4 /* InvitationRecordDetailCell.m in Sources */,
 				AE914ECF1F4184F2008A43CD /* ApplyStatusModelFrame.m in Sources */,
 				AE4B2E7A1F1E095600E328F7 /* MessageCell.m in Sources */,
+				AEB75E0F21366B0B00C9129C /* YSImagesCell.m in Sources */,
 				AEA24A371D5B231300DD7939 /* CountryItem.m in Sources */,
 				AE3AB6C01F21A3C300A3C7E3 /* SMDetailViewController.m in Sources */,
 				AEAFDF22212193A400067190 /* RoomItemTypeCell.m in Sources */,
@@ -5519,6 +5555,7 @@
 				AE4BBD3D2111B9E000209FC8 /* HomeRoomIndexFrameObject.m in Sources */,
 				AEA24A8B1D5B23F600DD7939 /* HotUniversityFrame.m in Sources */,
 				AE4B2E7D1F1E095600E328F7 /* messageCatigroySubModel.m in Sources */,
+				AEB75E1E2137CE5600C9129C /* YasiCatigoryModel.m in Sources */,
 				AEA249B91D5B215300DD7939 /* TiJiaoFooterView.m in Sources */,
 				AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */,
 				AEA24A9B1D5B23F600DD7939 /* WYLXViewController.m in Sources */,
@@ -5583,6 +5620,7 @@
 				AE7222CB1ED586160000E739 /* ServiceOverseaDestinationView.m in Sources */,
 				463E3AB41B23105F00E0BAF8 /* KDStroageHelper.m in Sources */,
 				AE4B2E6E1F1E095600E328F7 /* FSPageContentView.m in Sources */,
+				AEB75E15213696B900C9129C /* YSCourseGroupModel.m in Sources */,
 				AECC87CD1F95F63800FCBBEC /* CountryStateViewController.m in Sources */,
 				AE1FD7281D5C929500FFD5A8 /* MJRefreshComponent.m in Sources */,
 				AE8707031DDEE14700CE7780 /* PipeiEditViewController.m in Sources */,
@@ -5628,10 +5666,12 @@
 				AEA249AD1D5B215300DD7939 /* PayOrderViewController.m in Sources */,
 				AE4B2E661F1E095600E328F7 /* MessageCountryTopicVController.m in Sources */,
 				AEA545C620D264FE0095CBDA /* HomeRecommendVC.m in Sources */,
+				AEB75E1B2137C05200C9129C /* YasiBannerLayout.m in Sources */,
 				AEA249D11D5B215300DD7939 /* CenterSectionItem.m in Sources */,
 				AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */,
 				AE9BA48420B54DC2008B65D4 /* RewardItem.m in Sources */,
 				AE4B2E701F1E095600E328F7 /* FSSScrollContentViewController.m in Sources */,
+				AEB75E122136931600C9129C /* YSCourseModel.m in Sources */,
 				AEA24B0E1D5B24D200DD7939 /* TongzhiCell.m in Sources */,
 				AEF127491BF2D6D700FFBCD6 /* XYPieChart.m in Sources */,
 				AECC87CE1F95F63800FCBBEC /* CatigaryCountry.m in Sources */,
@@ -5710,6 +5750,7 @@
 				AEC4285020E09ECC007B3949 /* HomeUVICImmigrationProjectCell.m in Sources */,
 				AECC87D21F95F63800FCBBEC /* MyOfferArea.m in Sources */,
 				AECC87D31F95F63800FCBBEC /* MyOfferCountry.m in Sources */,
+				AEB75E1821378F9A00C9129C /* YSScheduleModel.m in Sources */,
 				AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */,
 				AECC87D81F95F63800FCBBEC /* RankTypeItemFrame.m in Sources */,
 				AE9BA42E20B3BA8E008B65D4 /* RewardVC.m in Sources */,
@@ -5721,6 +5762,7 @@
 				AE2D5E891DD5B64100B4E9F3 /* PhoneBeenViewController.m in Sources */,
 				AEB75DF821351E4400C9129C /* YaSiProgressView.m in Sources */,
 				AEAFDF13212157CE00067190 /* RoomItemFrameModel.m in Sources */,
+				AEB75E212137CEB200C9129C /* YasiCatigoryItemModel.m in Sources */,
 				AE3AB6CC1F21AC6F00A3C7E3 /* SMAudioItem.m in Sources */,
 				AEA24A921D5B23F600DD7939 /* HomeSectionHeaderView.m in Sources */,
 				AE9BA46420B42D63008B65D4 /* InvitationRecordsCell.m in Sources */,

@@ -42,7 +42,7 @@
 
 - (void)makeUI{
     
-    self.title = @"课程表";
+    self.title = @"课程日历";
     [self makeTableView];
 }
 
@@ -69,7 +69,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     YaSiScheduleOnLivingCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YaSiScheduleOnLivingCell"];
     if (!cell) {

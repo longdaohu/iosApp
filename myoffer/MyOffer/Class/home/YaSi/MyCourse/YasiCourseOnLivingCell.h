@@ -10,4 +10,5 @@
 
 @interface YasiCourseOnLivingCell : YasiCourseCell
 
+
 @end

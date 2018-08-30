@@ -283,8 +283,7 @@
             self.contentCell.cellCanScroll = YES;
             
         }
-        
-        
+ 
     }else{
         
         if (!self.canScroll) {

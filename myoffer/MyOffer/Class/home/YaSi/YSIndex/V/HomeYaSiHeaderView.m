@@ -8,6 +8,7 @@
 
 #import "HomeYaSiHeaderView.h"
 #import "YaSiHomeModel.h"
+#import "YasiBannerLayout.h"
 
 @interface HomeYaSiHeaderView ()<UICollectionViewDataSource>
 
@@ -56,14 +57,17 @@
     [ysBtn addTarget:self action:@selector(caseLogo:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *signedBtn = [UIButton new];
-    [signedBtn setTitle:@"已签到" forState:UIControlStateNormal];
     signedBtn.titleLabel.font = XFONT(12);
     signedBtn.layer.cornerRadius = 2;
     signedBtn.layer.borderWidth = 1;
     signedBtn.layer.borderColor = XCOLOR_SUBTITLE.CGColor;
     [self addSubview:signedBtn];
     self.signedBtn = signedBtn;
-    [signedBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
+    [signedBtn setTitle:@"签到" forState:UIControlStateNormal];
+    [signedBtn setTitle:@"已签到" forState:UIControlStateDisabled];
+    [signedBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+    [signedBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateDisabled];
+    [signedBtn addTarget:self action:@selector(caseSigned:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *signTitleLab = [UILabel new];
     signTitleLab.font = XFONT(12);
@@ -90,24 +94,29 @@
     [self addSubview:onlineLab];
     onlineLab.text = @"直播课 张三老师  雅思听力五步法整体做策略....";
  
-    UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
-    flow.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
-    flow.minimumLineSpacing = 0;
-    flow.minimumInteritemSpacing = 0;
+    YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
     self.flow = flow;
     UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
-    bannerView.backgroundColor = XCOLOR(0, 0, 0, 0.3);
+    bannerView.contentInset =UIEdgeInsetsMake(0, 20, 0, 20);
    [self addSubview:bannerView];
     self.bannerView = bannerView;
     bannerView.dataSource = self;
-    bannerView.pagingEnabled = YES;
-    bannerView.clipsToBounds = NO;
+    [bannerView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+    bannerView.backgroundColor = XCOLOR_WHITE;
+    if (@available(iOS 11.0, *)) {
+        bannerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
     
     UIView *line_banner = [UIView new];
     line_banner.backgroundColor = XCOLOR_line;
     [self addSubview:line_banner];
     self.line_banner = line_banner;
  
+}
+
+- (void)setUserSigned:(BOOL)userSigned{
+    self.signedBtn.enabled = !userSigned;
 }
 
 - (void)setYsModel:(YaSiHomeModel *)ysModel{
@@ -139,14 +148,13 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *taggg =[NSString stringWithFormat:@"%ld",indexPath.row];
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:taggg];
-
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:taggg forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     cell.contentView.backgroundColor =  XCOLOR_RANDOM ;
     
     return cell;
 }
+
+
 
 #pragma mark : 事件处理
 
@@ -157,5 +165,11 @@
     }
 }
 
+- (void)caseSigned:(UIButton *)sender{
+    
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
+}
 
 @end

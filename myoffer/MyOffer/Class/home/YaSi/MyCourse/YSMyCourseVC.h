@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YSMyCourseVC : UIViewController
+@interface YSMyCourseVC : BaseViewController
 
 @end

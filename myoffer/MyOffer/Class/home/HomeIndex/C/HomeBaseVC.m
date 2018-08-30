@@ -16,7 +16,6 @@
 @property(nonatomic,strong)UIScrollView *bgView;
 @property(nonatomic,strong)UIButton *upBtn;
 @property(nonatomic,strong)UIButton *meiqiaBtn;
-@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,assign)BOOL isMeiqiaPush;
 @property(nonatomic,assign)BOOL isTableOnMoving;
 @property(nonatomic,assign)BOOL isloaded;
@@ -30,6 +29,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = XCOLOR(0, 0, 0, 0);
     self.view.clipsToBounds = YES;
+    self.type = UITableViewStyleGrouped;
 }
 
 - (void)makeBaseUI{
@@ -80,7 +80,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:self.type];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

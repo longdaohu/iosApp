@@ -51,6 +51,15 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SSJ-Bj-htc">
+                        <rect key="frame" x="232" y="49" width="68" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="cYO-4U-ohp"/>
+                            <constraint firstAttribute="width" constant="68" id="sHh-1z-ALv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="未直播"/>
+                    </button>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54p-BD-gak">
                         <rect key="frame" x="20" y="89" width="280" height="20"/>
                         <constraints>
@@ -74,9 +83,6 @@
                         </state>
                         <state key="disabled" backgroundImage="button_light_unable"/>
                         <state key="highlighted" backgroundImage="button_blue_highlight"/>
-                        <connections>
-                            <action selector="caseplay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="69H-KT-uSA"/>
-                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLT-3G-7nD">
                         <rect key="frame" x="20" y="0.0" width="280" height="1"/>
@@ -98,10 +104,12 @@
                     <constraint firstAttribute="trailing" secondItem="y1X-W0-qLa" secondAttribute="trailing" constant="20" id="K9s-JO-eIu"/>
                     <constraint firstItem="r2k-Sg-gR0" firstAttribute="leading" secondItem="Q51-4A-f6V" secondAttribute="trailing" constant="5" id="LgL-KG-uTa"/>
                     <constraint firstItem="WLT-3G-7nD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RAC-Va-17e"/>
+                    <constraint firstItem="SSJ-Bj-htc" firstAttribute="top" secondItem="y1X-W0-qLa" secondAttribute="top" id="V8I-Hc-zwL"/>
                     <constraint firstAttribute="trailing" secondItem="54p-BD-gak" secondAttribute="trailing" constant="20" id="VrA-Or-nWn"/>
                     <constraint firstItem="8sy-Fd-vgv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="gSg-Xl-a5p"/>
                     <constraint firstItem="s4w-80-Fe9" firstAttribute="leading" secondItem="0qi-n2-yI7" secondAttribute="trailing" constant="10" id="jrU-MD-hp6"/>
                     <constraint firstItem="Q51-4A-f6V" firstAttribute="leading" secondItem="8sy-Fd-vgv" secondAttribute="trailing" constant="10" id="lmO-ks-mz0"/>
+                    <constraint firstItem="SSJ-Bj-htc" firstAttribute="leading" secondItem="y1X-W0-qLa" secondAttribute="leading" id="qMd-Gf-NAh"/>
                     <constraint firstItem="y1X-W0-qLa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="t0R-c5-AW1"/>
                     <constraint firstItem="WLT-3G-7nD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="u5r-Vs-xeb"/>
                     <constraint firstItem="Q51-4A-f6V" firstAttribute="bottom" secondItem="8sy-Fd-vgv" secondAttribute="bottom" id="upB-iD-9pa"/>
@@ -110,6 +118,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="beforeBtn" destination="SSJ-Bj-htc" id="sEE-2U-KFP"/>
                 <outlet property="logoView" destination="0qi-n2-yI7" id="mo4-FO-jCR"/>
                 <outlet property="nameLab" destination="s4w-80-Fe9" id="m6d-fb-8wN"/>
                 <outlet property="onLivingLab" destination="r2k-Sg-gR0" id="15n-sf-tzd"/>

@@ -81,6 +81,7 @@ typedef enum : NSUInteger {
 //FSSegmentTitleView 的父View
 @property(nonatomic,strong)UIView *contain_View;
 @property(nonatomic,assign)BOOL containView_scroll_enable;
+@property(nonatomic,assign)BOOL title_width_no_equal;
 
 /**
  对象方法创建FSSegmentTitleView

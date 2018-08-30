@@ -10,10 +10,12 @@
 #import "YSScheduleCell.h"
 #import "YaSiScheduleOnLivingCell.h"
 #import "YSCalendarVC.h"
+#import "YSScheduleModel.h"
 
 @interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
-
+@property(nonatomic,strong)NSArray *items;
+@property(nonatomic,strong)UILabel *titleLab;
 @end
 
 @implementation YaSiScheduleVC
@@ -34,6 +36,7 @@
     [super viewDidLoad];
     
     [self makeUI];
+    [self makeCoursesData];
 }
 
 - (void)makeUI{
@@ -70,10 +73,10 @@
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, title_y, XSCREEN_WIDTH, title_h)];
     titleLab.textColor = XCOLOR_TITLE;
     titleLab.font = XFONT(18);
-    titleLab.text = @"共20次课程";
+    self.titleLab = titleLab;
     [header addSubview:titleLab];
     header.mj_h = title_y + title_h;
- 
+
     self.tableView.tableHeaderView = header;
  }
 
@@ -83,17 +86,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
  
-    return 20;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    YaSiScheduleOnLivingCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YaSiScheduleOnLivingCell"];
-    if (!cell) {
-        cell = Bundle(@"YaSiScheduleOnLivingCell");
-    }
  
+    YSScheduleCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YSScheduleCell"];
+    if (!cell) {
+        cell = Bundle(@"YSScheduleCell");
+    }
+    cell.item = self.items[indexPath.row];
+
     return cell;
 }
 
@@ -101,6 +104,47 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YSScheduleModel *item = self.items[indexPath.row];
+    
+    NSLog(@"%@",item.topic);
+}
+
+#pragma mark : 数据加载
+- (void)makeCoursesData{
+    
+    
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/schedule?id=%@",DOMAINURL_API,self.item.classId];
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil
+                              showHUD:YES showErrorAlert:YES
+              errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                  [weakSelf makeUIWithResponse:response];
+              } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                  NSLog(@"%@",error.userInfo);
+              }];
+}
+
+- (void)makeUIWithResponse:(id)response{
+    
+    if (!ResponseIsOK) {
+        [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        return;
+    }
+    
+    NSArray *result = response[@"result"];
+    if (result.count == 0)  {
+        [self.tableView emptyViewWithError:NetRequest_NoDATA];
+        return;
+    }
+    self.items = [YSScheduleModel mj_objectArrayWithKeyValuesArray:result];
+    [self.tableView reloadData];
+    NSString *count = [NSString stringWithFormat:@" %ld ",result.count];
+    self.titleLab.text = [NSString stringWithFormat:@"共%@次课程",count];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.titleLab.text];
+    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (1,count.length)];
+    self.titleLab.attributedText = attr;
     
 }
 

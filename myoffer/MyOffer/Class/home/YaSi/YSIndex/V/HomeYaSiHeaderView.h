@@ -11,6 +11,8 @@
 
 @interface HomeYaSiHeaderView : UIView
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
+@property(nonatomic,assign)BOOL userSigned;
 @property(nonatomic,copy)void(^actionBlock)();
+
 @end
 

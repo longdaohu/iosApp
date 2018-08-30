@@ -63,6 +63,7 @@
 #define KEY_SIZE  @"size"
 #define KEY_TYPE  @"type"
 #define KEY_TYPE_ID  @"type_id"
+#define KEY_SKUID  @"skuId"
 #define KEY_NOMAL_STUTAS  200
 #define KEY_ALL  @"全部"
 #define KEY_UK  @"英国"
@@ -107,10 +108,10 @@
 
 
 
-#define DOMAINURL  @"https://www.myoffer.cn/"
-#define DOMAINURL_API  @"https://api.myoffer.cn/"
-//#define DOMAINURL  @"https://www.myofferdemo.com/"
-//#define DOMAINURL_API  @"http://api.myofferdemo.com/"
+//#define DOMAINURL  @"https://www.myoffer.cn/"
+//#define DOMAINURL_API  @"https://api.myoffer.cn/"
+#define DOMAINURL  @"https://www.myofferdemo.com/"
+#define DOMAINURL_API  @"http://api.myofferdemo.com/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

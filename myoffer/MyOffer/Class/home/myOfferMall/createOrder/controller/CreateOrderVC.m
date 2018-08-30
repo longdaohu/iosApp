@@ -75,6 +75,8 @@
     [super viewDidLoad];
     
     [self makeUI];
+    
+    
     //签署状态
     [self makeContractStatusData];
     //获取账户身份信息
@@ -104,203 +106,13 @@
 }
 
 
-#pragma mark :  获取用户优惠券
-- (void)makeCouponsData{
-    NSString *path  = [NSString stringWithFormat:@"GET %@svc/marketing/coupons/get",DOMAINURL];
-    WeakSelf
-    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
-    } additionalSuccessAction:^(NSInteger statusCode, id response) {
-        [weakSelf updateWithResponse:response];
-    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-    }];
-}
-//活动通道
-- (void)updateWithResponse:(id)response{
-    /*
-     code == 0 网络请求成功
-     code > 0  网络请求不成功 不继续执行
-     */
-    if ([response[@"code"] integerValue] != 0) return;
-    
-    NSArray *result  = response[@"result"];
-    //数据为 0  不继续执行
-    if (result.count == 0) return;
- 
-    CGFloat price = self.itemFrame.item.price.floatValue;
-    NSMutableArray *able_arr = [NSMutableArray array];
-    NSMutableArray *disable_arr = [NSMutableArray array];
-    [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSDictionary *it  = (NSDictionary *)obj;
-        if (obj&& (it.allKeys.count > 0)) {
-            DiscountItem *item = [DiscountItem mj_objectWithKeyValues:it];
-            //1  当优惠券价格>商品价格=此优惠券无效（同时，变为不可使用状态，置灰显示）
-            if (item.rules.floatValue > price) {
-                item.state = @"2";
-            }
-            //2  数据分组
-            item.disabled ? [disable_arr addObject:item] :  [able_arr addObject:item];
-        }
- 
-    }];
- 
-    self.discount_items = [able_arr arrayByAddingObjectsFromArray:disable_arr];
- 
-    //由于是多次刷新，所以要先排除活动通道
-    for (NSInteger index = 0; index < self.groups.count; index++) {
-        myofferGroupModel *group = self.groups[index];
-        if (group.type == SectionGroupTypeCreateOrderActive) {
-            [self.groups removeObject:group];
-        }
-    }
-    
-    if (result.count > 0) {
-        myofferGroupModel *act = [myofferGroupModel groupWithItems:nil header:@"活动通道"];
-        act.type = SectionGroupTypeCreateOrderActive;
-        [self.groups insertObject:act atIndex:1];
-    }
-    
-    [self.tableView reloadData];
-}
-
-#pragma mark :  签署状态【loginRequired】
-- (void)makeContractStatusData{
-    WeakSelf
-    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-status",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:@{@"skuId":self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makeContractStatusWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                           }];
-}
-- (void)makeContractStatusWithResponse:(id)response{
-
-    if (!ResponseIsOK)return;
-    NSDictionary *result  = response[@"result"];
-    NSNumber *signStatus = result[@"signStatus"];
-    NSNumber *contractEnable = result[@"contractEnable"];
-    self.contractStatus = [signStatus boolValue];
-    self.contractEnable = [contractEnable boolValue];
-
-    if ([contractEnable boolValue]) {
-        
-        self.commitBtn.backgroundColor = self.contractStatus ? XCOLOR_RED : XCOLOR(180, 180, 180, 1);
-        
-        BOOL haveOrderContact  = NO;
-        for ( myofferGroupModel *group  in self.groups) {
-            if (group.type == SectionGroupTypeCreateOrderContact) {
-                haveOrderContact = YES;
-                break;
-            }
-        }
-        
-        if (!haveOrderContact) {
-            myofferGroupModel *group = [myofferGroupModel groupWithItems:@[@"合同信息"] header:nil];
-            group.type = SectionGroupTypeCreateOrderContact;
-            [self.groups addObject:group];
-        }
-        
-        [self.tableView reloadData];
-
-        [self makeContracturlsData];
-        
-        self.protocolBtn.enabled = NO;
-        self.protocolBtn.mj_x = self.optionBtn.mj_x;
-        self.optionBtn.hidden = YES;
-      }
-    
-}
-/* ------------------------------------- 签署状态【loginRequired】 -------------------------------------  */
-
-
-#pragma mark :  获取账户身份信息
-- (void)makeAccountData{
-    
-    if(!LOGIN)return;
-    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/accounts/id-card",DOMAINURL_API];
-    WeakSelf
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makeAccountWithResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               NSLog(@"============获取账户身份信息===失败=====  %@",error);
-    }];
-    
-}
-- (void)makeAccountWithResponse:(id)response{
-    
-    if (!ResponseIsOK) return;
-    self.accountInformation = response[@"result"];
-    
-}
-
-/* ------------------------------------- 签署状态【loginRequired】 ------------------------------------- */
-
-#pragma mark : 获取合同表单数据【loginRequired】
-- (void)makeContactFormData{
-    
-    NSString *redirect = [@"http://www.myoffer.cn/aboutus" toUTF8WithString];
-    WeakSelf
-    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-view-form-data",DOMAINURL_API];
-    [self startAPIRequestWithSelector:path
-                           parameters:@{@"skuId":self.itemFrame.item.service_id,@"redirect" : redirect} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makeContactFormResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-    }];
-    
-}
-
-- (void)makeContactFormResponse:(id)response{
- 
-    if (!ResponseIsOK) return;
-    
-    self.fromWebViewRefresh = YES;
-    WeakSelf;
-    NSDictionary *result  = response[@"result"];
-    CreateOrderWebVC *vc = [[CreateOrderWebVC alloc] init];
-    vc.path = @"https://sign.zqsign.com/mobileSignView";
-    vc.item = result;
-    PushToViewController(vc);
-    vc.webSuccesedCallBack = ^{
-        
-        weakSelf.contractStatus = YES;
-        weakSelf.commitBtn.backgroundColor = XCOLOR_RED;
-        [weakSelf.tableView reloadData];
-        [weakSelf makeContracturlsData];
-        
-    };
-
-}
-/* ------------------------------------- 获取合同表单数据  ------------------------------------- */
-
-
-#pragma mark : 合同文件地址【loginRequired】api/v1/contracts/contract-urls
-- (void)makeContracturlsData{
-    
-    self.fromWebViewRefresh = NO;
-    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/contract-urls",DOMAINURL_API];
-
-    WeakSelf
-    [self startAPIRequestWithSelector:path
-                           parameters:@{@"skuId":self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
-                               [weakSelf makeContracturlsDataResponse:response];
-                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-     }];
-}
-- (void)makeContracturlsDataResponse:(id)response{
-    
-    if (!ResponseIsOK) return;
-    self.contracturls_result = response[@"result"];
-}
-/* ------------------------------------- 合同文件地址 ------------------------------------- */
-
-
 - (void)makeUI{
     
+//    self.itemFrame.item.service_id = @"573043088c213602adcb8777";
     self.title  = @"订单确认页";
     [self makeTableView];
     self.priceLab.text = self.itemFrame.item.price_str;
-    [self.parameter setValue:self.itemFrame.item.service_id  forKey:@"skuId"];
-
+    [self.parameter setValue:self.itemFrame.item.service_id  forKey:KEY_SKUID];
 }
 
 - (void)makeTableView
@@ -692,7 +504,7 @@
 }
 
 /*
-     NSDictionary *parameter  = @{ @"skuId": self.item.price};
+     NSDictionary *parameter  = @{ KEY_SKUID: self.item.price};
      pId:@"",//推广码Id
      cId:@"",//优惠券码Id   优惠券id和推广码Id只可选传
  */
@@ -790,7 +602,7 @@
 - (void)clearOtherParameter{
     
     for (NSString *key in self.parameter.allKeys) {
-        if (![key isEqualToString:@"skuId"]) {
+        if (![key isEqualToString:KEY_SKUID]) {
             [self.parameter setValue:@"" forKey:key];
          }
     }
@@ -951,6 +763,199 @@
     [alertCtrl addAction:okAction];
     [self presentViewController:alertCtrl animated:YES completion:nil];
 }
+
+#pragma mark : 网络请求
+
+/*-----------获取用户优惠券--------------------------------------------------*/
+- (void)makeCouponsData{
+    NSString *path  = [NSString stringWithFormat:@"GET %@svc/marketing/coupons/get",DOMAINURL];
+    WeakSelf
+    [self startAPIRequestWithSelector:path parameters:nil expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:^{
+    } additionalSuccessAction:^(NSInteger statusCode, id response) {
+        [weakSelf updateWithResponse:response];
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+    }];
+}
+//活动通道
+- (void)updateWithResponse:(id)response{
+    /*
+     code == 0 网络请求成功
+     code > 0  网络请求不成功 不继续执行
+     */
+    if ([response[@"code"] integerValue] != 0) return;
+    
+    NSArray *result  = response[@"result"];
+    //数据为 0  不继续执行
+    if (result.count == 0) return;
+    
+    CGFloat price = self.itemFrame.item.price.floatValue;
+    NSMutableArray *able_arr = [NSMutableArray array];
+    NSMutableArray *disable_arr = [NSMutableArray array];
+    [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *it  = (NSDictionary *)obj;
+        if (obj&& (it.allKeys.count > 0)) {
+            DiscountItem *item = [DiscountItem mj_objectWithKeyValues:it];
+            //1  当优惠券价格>商品价格=此优惠券无效（同时，变为不可使用状态，置灰显示）
+            if (item.rules.floatValue > price) {
+                item.state = @"2";
+            }
+            //2  数据分组
+            item.disabled ? [disable_arr addObject:item] :  [able_arr addObject:item];
+        }
+        
+    }];
+    
+    self.discount_items = [able_arr arrayByAddingObjectsFromArray:disable_arr];
+    
+    //由于是多次刷新，所以要先排除活动通道
+    for (NSInteger index = 0; index < self.groups.count; index++) {
+        myofferGroupModel *group = self.groups[index];
+        if (group.type == SectionGroupTypeCreateOrderActive) {
+            [self.groups removeObject:group];
+        }
+    }
+    
+    if (result.count > 0) {
+        myofferGroupModel *act = [myofferGroupModel groupWithItems:nil header:@"活动通道"];
+        act.type = SectionGroupTypeCreateOrderActive;
+        [self.groups insertObject:act atIndex:1];
+    }
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark :  签署状态【loginRequired】
+- (void)makeContractStatusData{
+    WeakSelf
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-status",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:@{KEY_SKUID:self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContractStatusWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                           }];
+}
+- (void)makeContractStatusWithResponse:(id)response{
+    
+    if (!ResponseIsOK)return;
+    NSDictionary *result  = response[@"result"];
+    NSNumber *signStatus = result[@"signStatus"];
+    NSNumber *contractEnable = result[@"contractEnable"];
+    self.contractStatus = [signStatus boolValue];
+    self.contractEnable = [contractEnable boolValue];
+    
+    if ([contractEnable boolValue]) {
+        
+        self.commitBtn.backgroundColor = self.contractStatus ? XCOLOR_RED : XCOLOR(180, 180, 180, 1);
+        
+        BOOL haveOrderContact  = NO;
+        for ( myofferGroupModel *group  in self.groups) {
+            if (group.type == SectionGroupTypeCreateOrderContact) {
+                haveOrderContact = YES;
+                break;
+            }
+        }
+        
+        if (!haveOrderContact) {
+            myofferGroupModel *group = [myofferGroupModel groupWithItems:@[@"合同信息"] header:nil];
+            group.type = SectionGroupTypeCreateOrderContact;
+            [self.groups addObject:group];
+        }
+        
+        [self.tableView reloadData];
+        
+        [self makeContracturlsData];
+        
+        self.protocolBtn.enabled = NO;
+        self.protocolBtn.mj_x = self.optionBtn.mj_x;
+        self.optionBtn.hidden = YES;
+    }
+    
+}
+/* ------------------------------------- 签署状态【loginRequired】 -------------------------------------  */
+
+
+#pragma mark :  获取账户身份信息
+- (void)makeAccountData{
+    
+    if(!LOGIN)return;
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/accounts/id-card",DOMAINURL_API];
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeAccountWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               NSLog(@"============获取账户身份信息===失败=====  %@",error);
+                           }];
+    
+}
+- (void)makeAccountWithResponse:(id)response{
+    
+    if (!ResponseIsOK) return;
+    self.accountInformation = response[@"result"];
+    
+}
+
+/* ------------------------------------- 签署状态【loginRequired】 ------------------------------------- */
+
+#pragma mark : 获取合同表单数据【loginRequired】
+- (void)makeContactFormData{
+    
+    NSString *redirect = [@"http://www.myoffer.cn/aboutus" toUTF8WithString];
+    WeakSelf
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-view-form-data",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:@{KEY_SKUID:self.itemFrame.item.service_id,@"redirect" : redirect} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContactFormResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                           }];
+    
+}
+
+- (void)makeContactFormResponse:(id)response{
+    
+    if (!ResponseIsOK) return;
+    
+    self.fromWebViewRefresh = YES;
+    WeakSelf;
+    NSDictionary *result  = response[@"result"];
+    CreateOrderWebVC *vc = [[CreateOrderWebVC alloc] init];
+    vc.path = @"https://sign.zqsign.com/mobileSignView";
+    vc.item = result;
+    PushToViewController(vc);
+    vc.webSuccesedCallBack = ^{
+        
+        weakSelf.contractStatus = YES;
+        weakSelf.commitBtn.backgroundColor = XCOLOR_RED;
+        [weakSelf.tableView reloadData];
+        [weakSelf makeContracturlsData];
+        
+    };
+    
+}
+/* ------------------------------------- 获取合同表单数据  ------------------------------------- */
+
+
+#pragma mark : 合同文件地址【loginRequired】api/v1/contracts/contract-urls
+- (void)makeContracturlsData{
+    
+    self.fromWebViewRefresh = NO;
+    NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/contract-urls",DOMAINURL_API];
+    
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:@{KEY_SKUID:self.itemFrame.item.service_id} expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeContracturlsDataResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                           }];
+}
+- (void)makeContracturlsDataResponse:(id)response{
+    
+    if (!ResponseIsOK) return;
+    self.contracturls_result = response[@"result"];
+}
+/* ------------------------------------- 合同文件地址 ------------------------------------- */
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

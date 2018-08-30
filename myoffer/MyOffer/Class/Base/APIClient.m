@@ -244,7 +244,9 @@ static NSString * const kAPIEndPoint = DOMAINURL;
     }
     
      if (LOGIN) {
-        [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
+         
+         [request addValue:@"e61afcb7-b793-47cc-b8c0-f483093d41d2" forHTTPHeaderField:@"apikey"];
+//         [request addValue:[[AppDelegate sharedDelegate] accessToken] forHTTPHeaderField:@"apikey"];
      }else{
          //cookie中保存了登录信息，可能会引起数据错误
          [request setValue:@"" forHTTPHeaderField:@"Cookie"];
