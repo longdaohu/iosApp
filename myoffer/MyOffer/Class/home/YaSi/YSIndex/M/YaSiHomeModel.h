@@ -7,15 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+@class YSScheduleModel;
+@class YasiCatigoryModel;
+@class YasiCatigoryItemModel;
 
 @interface YaSiHomeModel : NSObject
+@property(nonatomic,assign)BOOL login_state;
+@property(nonatomic,strong)YSScheduleModel *living_item;
+@property(nonatomic,strong)NSArray *banners;
+@property(nonatomic,strong)NSArray *banner_images;
+@property(nonatomic,strong)NSArray *banner_targets;
+@property(nonatomic,strong)NSArray *catigorys;
+@property(nonatomic,strong)NSArray *catigory_titles;
+@property(nonatomic,assign)CGFloat catigory_title_fontSize;
+@property(nonatomic,strong)NSArray *catigory_title_frames;
+@property(nonatomic,assign)NSInteger  catigory_title_selected_index;
+@property(nonatomic,assign)NSInteger  catigoryPackage_item_selected_index;
+@property(nonatomic,strong)YasiCatigoryModel *catigory_current;
+@property(nonatomic,strong)YasiCatigoryItemModel *catigory_Package_current;
+@property(nonatomic,copy)NSString *banner_target;
+
 @property(nonatomic,assign)CGFloat left_margin;
 @property(nonatomic,assign)CGSize header_banner_size;
 @property(nonatomic,assign)CGRect ysBtn_frame;
 @property(nonatomic,assign)CGRect signedBtn_frame;
 @property(nonatomic,assign)CGRect signTitle_frame;
-@property(nonatomic,assign)CGRect clockBtn_frame;
+@property(nonatomic,assign)CGRect banner_box_frame;
+@property(nonatomic,assign)CGRect catigory_box_frame;
+@property(nonatomic,assign)CGRect catigory_collectView_frame;
+@property(nonatomic,assign)CGRect cati_clt_line_frame;
+@property(nonatomic,assign)CGRect price_cell_frame;
+
 @property(nonatomic,assign)CGRect bgBtn_frame;
+@property(nonatomic,assign)CGRect clockBtn_frame;
 @property(nonatomic,assign)CGRect onlineLab_frame;
 @property(nonatomic,assign)CGRect bottomView_frame;
 

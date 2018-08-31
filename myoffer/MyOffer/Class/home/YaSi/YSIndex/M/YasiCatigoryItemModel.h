@@ -18,4 +18,6 @@
 @property(nonatomic,copy)NSString *old_price ;
 @property(nonatomic,copy)NSString *price ;
 
+@property(nonatomic,assign)NSInteger current_selected;
+
 @end

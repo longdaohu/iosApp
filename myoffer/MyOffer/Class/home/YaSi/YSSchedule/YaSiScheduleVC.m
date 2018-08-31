@@ -11,6 +11,7 @@
 #import "YaSiScheduleOnLivingCell.h"
 #import "YSCalendarVC.h"
 #import "YSScheduleModel.h"
+#import "YSUserCommentView.h"
 
 @interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -37,6 +38,9 @@
     
     [self makeUI];
     [self makeCoursesData];
+    
+    YSUserCommentView *commentView = [YSUserCommentView commentView];
+    [self.view addSubview:commentView];
 }
 
 - (void)makeUI{

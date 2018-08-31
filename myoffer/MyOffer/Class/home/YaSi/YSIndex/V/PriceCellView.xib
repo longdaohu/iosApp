@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PriceCellView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="s8R-3F-ENr">
+                    <rect key="frame" x="49.5" y="15" width="277" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="yreadfdsfds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJv-x1-vcP">
+                            <rect key="frame" x="0.0" y="0.0" width="136" height="30"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-ub-fNO">
+                            <rect key="frame" x="146" y="0.0" width="31" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mi0-Sc-ujo">
+                            <rect key="frame" x="187" y="0.0" width="90" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.91019994370000001" blue="0.87255402380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="WXb-4w-oHv"/>
+                                <constraint firstAttribute="width" constant="90" id="fLh-JP-kVi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="立即报名">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tJv-x1-vcP" secondAttribute="bottom" id="Aqq-cv-CGE"/>
+                        <constraint firstItem="tJv-x1-vcP" firstAttribute="leading" secondItem="s8R-3F-ENr" secondAttribute="leading" id="P0N-nO-Az8"/>
+                        <constraint firstItem="tJv-x1-vcP" firstAttribute="top" secondItem="s8R-3F-ENr" secondAttribute="top" id="Vvm-nR-si4"/>
+                        <constraint firstAttribute="trailing" secondItem="mi0-Sc-ujo" secondAttribute="trailing" id="aqU-MN-TEw"/>
+                        <constraint firstItem="mi0-Sc-ujo" firstAttribute="top" secondItem="s8R-3F-ENr" secondAttribute="top" id="fTI-kA-Fl9"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="s8R-3F-ENr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CpZ-8n-e7Y"/>
+                <constraint firstItem="s8R-3F-ENr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="o3u-HG-hA6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="s8R-3F-ENr" secondAttribute="bottom" constant="15" id="slv-im-mZH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="commitBtn" destination="mi0-Sc-ujo" id="1SQ-WW-wUH"/>
+                <outlet property="discountLab" destination="rz5-ub-fNO" id="fbO-Ks-wWu"/>
+                <outlet property="priceLab" destination="tJv-x1-vcP" id="xll-f4-pMp"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="-221"/>
+        </view>
+    </objects>
+</document>

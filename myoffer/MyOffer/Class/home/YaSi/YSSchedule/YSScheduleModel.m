@@ -10,9 +10,27 @@
 
 @implementation YSScheduleModel
 
+/*
+ 过期: 'EXPIRED',
+ 完成: 'FINISHED',
+ 进行中: 'IN_PROGRESS',
+ */
+- (void)setStatus:(NSString *)status{
+    
+    _status = status;
+    
+    if ([status isEqualToString:@"IN_PROGRESS"]) {
+        self.state = @"1";
+    }else if ([status isEqualToString:@"FINISHED"]){
+        self.state = @"3";
+    }else{
+        self.state = @"0";
+    }
+}
+
 // 0 过期  1 直播ing  2 未直播  3 回放
 - (YSScheduleVideoState)type{
-    
+ 
     switch (self.state.integerValue) {
         case 1:
             return YSScheduleVideoStateLiving;
@@ -47,24 +65,6 @@
             break;
     }
 }
-
-//- (NSString *)stateBgImageName{
-//
-//    switch (self.state.integerValue) {
-//        case 1:
-//            return @"button_blue_nomal";
-//            break;
-//        case 2:
-//            return @"";
-//            break;
-//        case 3:
-//            return @"button_blue_nomal";
-//            break;
-//        default:
-//            return @"button_light_unable";
-//            break;
-//    }
-//}
 
 - (BOOL)livelogoState{
     

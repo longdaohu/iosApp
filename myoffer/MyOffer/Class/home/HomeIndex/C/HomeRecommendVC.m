@@ -322,6 +322,8 @@ static NSString *identify = @"cell";
     }
     
     NSDictionary *result = response[@"result"];
+    [USDefault setValue:result forKey:@"BANNERRECOMMENT"];
+    [USDefault synchronize];
     NSArray *banneres = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
     
     NSMutableArray *url_arr = [NSMutableArray array];

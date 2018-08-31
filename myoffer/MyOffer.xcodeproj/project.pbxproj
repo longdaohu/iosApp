@@ -580,6 +580,18 @@
 		AEB75E1B2137C05200C9129C /* YasiBannerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */; };
 		AEB75E1E2137CE5600C9129C /* YasiCatigoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */; };
 		AEB75E212137CEB200C9129C /* YasiCatigoryItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */; };
+		AEB75E242137EDCB00C9129C /* YSCalendarCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */; };
+		AEB75E272139024900C9129C /* PriceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E262139024900C9129C /* PriceCellView.m */; };
+		AEB75E292139025900C9129C /* PriceCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E282139025900C9129C /* PriceCellView.xib */; };
+		AEB75E2D2139125D00C9129C /* YsCatigoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E2B2139125D00C9129C /* YsCatigoryItemCell.m */; };
+		AEB75E2E2139125D00C9129C /* YsCatigoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E2C2139125D00C9129C /* YsCatigoryItemCell.xib */; };
+		AEB75E31213923DD00C9129C /* HomeYSSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E30213923DD00C9129C /* HomeYSSectionView.m */; };
+		AEB75E3421395B1C00C9129C /* YSUserCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E3321395B1C00C9129C /* YSUserCommentView.m */; };
+		AEB75E372139603800C9129C /* YSCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E362139603800C9129C /* YSCommentItem.m */; };
+		AEB75E402139657D00C9129C /* YSUserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */; };
+		AEB75E412139657D00C9129C /* YSUserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */; };
+		AEB75E442139671600C9129C /* YSUserCommentSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E432139671600C9129C /* YSUserCommentSectionView.m */; };
+		AEB75E462139672600C9129C /* YSUserCommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
 		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
 		AEB9A33E1EA46F220025A72A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */; };
@@ -1667,7 +1679,7 @@
 		AEB75DD72133C8F500C9129C /* HomeIndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeIndexModel.h; sourceTree = "<group>"; };
 		AEB75DD82133C8F500C9129C /* HomeIndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeIndexModel.m; sourceTree = "<group>"; };
 		AEB75DDA2133E15300C9129C /* HomeYasiVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeYasiVC.h; sourceTree = "<group>"; };
-		AEB75DDB2133E15300C9129C /* HomeYasiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYasiVC.m; sourceTree = "<group>"; };
+		AEB75DDB2133E15300C9129C /* HomeYasiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYasiVC.m; sourceTree = "<group>"; wrapsLines = 0; };
 		AEB75DDD2133E4F700C9129C /* HomeYaSiHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeYaSiHeaderView.h; sourceTree = "<group>"; };
 		AEB75DDE2133E4F700C9129C /* HomeYaSiHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYaSiHeaderView.m; sourceTree = "<group>"; };
 		AEB75DE02133EC4600C9129C /* YaSiHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YaSiHomeModel.h; sourceTree = "<group>"; };
@@ -1708,6 +1720,26 @@
 		AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryModel.m; sourceTree = "<group>"; };
 		AEB75E1F2137CEB200C9129C /* YasiCatigoryItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YasiCatigoryItemModel.h; sourceTree = "<group>"; };
 		AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryItemModel.m; sourceTree = "<group>"; };
+		AEB75E222137EDCB00C9129C /* YSCalendarCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCalendarCourseModel.h; sourceTree = "<group>"; };
+		AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCalendarCourseModel.m; sourceTree = "<group>"; };
+		AEB75E252139024900C9129C /* PriceCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCellView.h; sourceTree = "<group>"; };
+		AEB75E262139024900C9129C /* PriceCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCellView.m; sourceTree = "<group>"; };
+		AEB75E282139025900C9129C /* PriceCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceCellView.xib; sourceTree = "<group>"; };
+		AEB75E2A2139125D00C9129C /* YsCatigoryItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YsCatigoryItemCell.h; sourceTree = "<group>"; };
+		AEB75E2B2139125D00C9129C /* YsCatigoryItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YsCatigoryItemCell.m; sourceTree = "<group>"; };
+		AEB75E2C2139125D00C9129C /* YsCatigoryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YsCatigoryItemCell.xib; sourceTree = "<group>"; };
+		AEB75E2F213923DD00C9129C /* HomeYSSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeYSSectionView.h; sourceTree = "<group>"; };
+		AEB75E30213923DD00C9129C /* HomeYSSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYSSectionView.m; sourceTree = "<group>"; };
+		AEB75E3221395B1C00C9129C /* YSUserCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentView.h; sourceTree = "<group>"; };
+		AEB75E3321395B1C00C9129C /* YSUserCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentView.m; sourceTree = "<group>"; };
+		AEB75E352139603800C9129C /* YSCommentItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCommentItem.h; sourceTree = "<group>"; };
+		AEB75E362139603800C9129C /* YSCommentItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCommentItem.m; sourceTree = "<group>"; };
+		AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentCell.h; sourceTree = "<group>"; };
+		AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentCell.m; sourceTree = "<group>"; };
+		AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YSUserCommentCell.xib; sourceTree = "<group>"; };
+		AEB75E422139671600C9129C /* YSUserCommentSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentSectionView.h; sourceTree = "<group>"; };
+		AEB75E432139671600C9129C /* YSUserCommentSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentSectionView.m; sourceTree = "<group>"; };
+		AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YSUserCommentSectionView.xib; sourceTree = "<group>"; };
 		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEB9A33D1EA46F220025A72A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -4629,10 +4661,18 @@
 			children = (
 				AEB75DDD2133E4F700C9129C /* HomeYaSiHeaderView.h */,
 				AEB75DDE2133E4F700C9129C /* HomeYaSiHeaderView.m */,
+				AEB75E252139024900C9129C /* PriceCellView.h */,
+				AEB75E262139024900C9129C /* PriceCellView.m */,
+				AEB75E282139025900C9129C /* PriceCellView.xib */,
 				AEB75E0D21366B0B00C9129C /* YSImagesCell.h */,
 				AEB75E0E21366B0B00C9129C /* YSImagesCell.m */,
 				AEB75E192137C05200C9129C /* YasiBannerLayout.h */,
 				AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */,
+				AEB75E2A2139125D00C9129C /* YsCatigoryItemCell.h */,
+				AEB75E2B2139125D00C9129C /* YsCatigoryItemCell.m */,
+				AEB75E2C2139125D00C9129C /* YsCatigoryItemCell.xib */,
+				AEB75E2F213923DD00C9129C /* HomeYSSectionView.h */,
+				AEB75E30213923DD00C9129C /* HomeYSSectionView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -4688,6 +4728,14 @@
 			children = (
 				AEB75DFA21352B2400C9129C /* YaSiScheduleVC.h */,
 				AEB75DFB21352B2400C9129C /* YaSiScheduleVC.m */,
+				AEB75E3221395B1C00C9129C /* YSUserCommentView.h */,
+				AEB75E3321395B1C00C9129C /* YSUserCommentView.m */,
+				AEB75E422139671600C9129C /* YSUserCommentSectionView.h */,
+				AEB75E432139671600C9129C /* YSUserCommentSectionView.m */,
+				AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */,
+				AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */,
+				AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */,
+				AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */,
 				AEB75DFD21352C8800C9129C /* YSScheduleCell.h */,
 				AEB75DFE21352C8800C9129C /* YSScheduleCell.m */,
 				AEB75DFF21352C8800C9129C /* YSScheduleCell.xib */,
@@ -4696,6 +4744,8 @@
 				AEB75E042135377300C9129C /* YaSiScheduleOnLivingCell.xib */,
 				AEB75E1621378F9A00C9129C /* YSScheduleModel.h */,
 				AEB75E1721378F9A00C9129C /* YSScheduleModel.m */,
+				AEB75E352139603800C9129C /* YSCommentItem.h */,
+				AEB75E362139603800C9129C /* YSCommentItem.m */,
 			);
 			path = YSSchedule;
 			sourceTree = "<group>";
@@ -4705,6 +4755,8 @@
 			children = (
 				AEB75E082135430900C9129C /* YSCalendarVC.h */,
 				AEB75E092135430900C9129C /* YSCalendarVC.m */,
+				AEB75E222137EDCB00C9129C /* YSCalendarCourseModel.h */,
+				AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */,
 			);
 			path = YSCalendar;
 			sourceTree = "<group>";
@@ -5192,7 +5244,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -5238,6 +5290,7 @@
 				AEF657AF20FDBEE400C0D849 /* home_uvic_immigration_a.jpg in Resources */,
 				AEB75E0121352C8800C9129C /* YSScheduleCell.xib in Resources */,
 				AEB75E062135377300C9129C /* YaSiScheduleOnLivingCell.xib in Resources */,
+				AEB75E292139025900C9129C /* PriceCellView.xib in Resources */,
 				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
 				AE1FD7421D5C929500FFD5A8 /* Pre-comp 1_0003.png in Resources */,
 				AEF657AC20FDBB2300C0D849 /* home_uvic_service_05.jpg in Resources */,
@@ -5246,12 +5299,14 @@
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
 				AE1A805820DA304D00CE9E50 /* HomeFeeCell.xib in Resources */,
 				AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */,
+				AEB75E412139657D00C9129C /* YSUserCommentCell.xib in Resources */,
 				AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AED3C47C212FB21100A5668C /* RoomAppointSuccesView.xib in Resources */,
 				AE1FD7451D5C929500FFD5A8 /* Pre-comp 1_00032.png in Resources */,
 				AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */,
+				AEB75E462139672600C9129C /* YSUserCommentSectionView.xib in Resources */,
 				AE1FD7301D5C929500FFD5A8 /* Pre-comp 1_00013.png in Resources */,
 				AEF657B420FDC4B200C0D849 /* home_uvic_hot_01.jpg in Resources */,
 				AE6178D120732A05006B311A /* CreateOrderOneCell.xib in Resources */,
@@ -5408,6 +5463,7 @@
 				AE9BA48120B53E68008B65D4 /* InvitationRecordDetailCell.xib in Resources */,
 				AE1FD7551D5C929500FFD5A8 /* MJRefresh.bundle in Resources */,
 				AE60C1FE20E247F7000867A8 /* home_global_user_010.jpg in Resources */,
+				AEB75E2E2139125D00C9129C /* YsCatigoryItemCell.xib in Resources */,
 				AE1FD7471D5C929500FFD5A8 /* Pre-comp 1_0005.png in Resources */,
 				AEA24B011D5B24D200DD7939 /* BindPhoneViewController.xib in Resources */,
 				AEF6580C21008C2400C0D849 /* UMCommonLog.bundle in Resources */,
@@ -5565,6 +5621,7 @@
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AE07A0DF2106CDE300581073 /* HomeRoomTopView.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
+				AEB75E3421395B1C00C9129C /* YSUserCommentView.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
 				AE9BA43520B3C426008B65D4 /* RewardHeader.m in Sources */,
@@ -5588,6 +5645,7 @@
 				AEE0AB3520AD31F600E9AF99 /* MeiqiaServiceCall.m in Sources */,
 				AEA255691EAF5BF700F0208B /* SearchUniCenterFilterVController.m in Sources */,
 				AE7F9B101EB8546F00D30525 /* SearchPromptView.m in Sources */,
+				AEB75E272139024900C9129C /* PriceCellView.m in Sources */,
 				AE22862A1E715BB500E6E5CD /* PromttViewController.m in Sources */,
 				AE93E4DC1D6DA3E70025FC58 /* UniversityViewController.m in Sources */,
 				AE3AB6B71F21A27300A3C7E3 /* SMListViewController.m in Sources */,
@@ -5646,6 +5704,7 @@
 				AE8A76AC210B1CB60079D239 /* HomeRoomSearchVC.m in Sources */,
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
+				AEB75E442139671600C9129C /* YSUserCommentSectionView.m in Sources */,
 				AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
@@ -5699,6 +5758,7 @@
 				AE6F28721D77CA3C00E9A47A /* UUBar.m in Sources */,
 				AE6178AF2071FE67006B311A /* UniversityDetailRank.m in Sources */,
 				AEA24A951D5B23F600DD7939 /* UniCollectionViewCell.m in Sources */,
+				AEB75E372139603800C9129C /* YSCommentItem.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
 				AE1A806320DA493400CE9E50 /* HomeRentCell.m in Sources */,
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
@@ -5733,6 +5793,7 @@
 				AECC87DA1F95F63800FCBBEC /* RankItemFrameModel.m in Sources */,
 				AEA249C81D5B215300DD7939 /* ApplyStatusViewController.m in Sources */,
 				AEDDAA5F20E4DCDE0069C138 /* IntroCell.m in Sources */,
+				AEB75E2D2139125D00C9129C /* YsCatigoryItemCell.m in Sources */,
 				AE3AB6B21F21A27300A3C7E3 /* SMTagCell.m in Sources */,
 				AE4BBD402111BD1200209FC8 /* HomeRoomIndexFlatFrameObject.m in Sources */,
 				AEA545C920D267FA0095CBDA /* HomeSecView.m in Sources */,
@@ -5776,6 +5837,7 @@
 				AE1FD72A1D5C929500FFD5A8 /* MJRefreshHeader.m in Sources */,
 				AEA249AB1D5B215300DD7939 /* PayHeaderView.m in Sources */,
 				AE3AB6D21F21D7AC00A3C7E3 /* SMAudioCell.m in Sources */,
+				AEB75E31213923DD00C9129C /* HomeYSSectionView.m in Sources */,
 				AE2DE44E1E964CA0009683B0 /* ServiceItemAttribute.m in Sources */,
 				AEA249C51D5B215300DD7939 /* ApplySectionHeaderView.m in Sources */,
 				AE6178B62072381D006B311A /* DiscountItem.m in Sources */,
@@ -5836,6 +5898,7 @@
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,
 				AE07A0EA210724A500581073 /* HomeRoomApartmentItemCell.m in Sources */,
 				AEAFDF0D21212B6B00067190 /* RoomItemDetailVC.m in Sources */,
+				AEB75E242137EDCB00C9129C /* YSCalendarCourseModel.m in Sources */,
 				AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */,
 				AE07A0DC2106C8E300581073 /* HomeRoomVC.m in Sources */,
 				AECC87E41F95F63800FCBBEC /* CatigorySubjectCell.m in Sources */,
@@ -5906,6 +5969,7 @@
 				AE3AB6D51F21E96500A3C7E3 /* SMDetailHeaderView.m in Sources */,
 				AE1501C31D8E39AF006751D0 /* WebViewController.m in Sources */,
 				AE93E4E51D6DABA30025FC58 /* UniversityNewFrame.m in Sources */,
+				AEB75E402139657D00C9129C /* YSUserCommentCell.m in Sources */,
 				AE93E4E81D6DBB0E0025FC58 /* UniversityheaderCenterView.m in Sources */,
 				AEA249B41D5B215300DD7939 /* XWGJTiJiaoViewController.m in Sources */,
 				AE4B2E691F1E095600E328F7 /* MessageDetailFrame.m in Sources */,
@@ -6192,7 +6256,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,
