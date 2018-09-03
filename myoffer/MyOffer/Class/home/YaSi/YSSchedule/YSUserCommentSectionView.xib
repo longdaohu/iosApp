@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教学过程中是否有互动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-wL-hDR">
-                    <rect key="frame" x="15" y="13" width="123" height="14.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-wL-hDR">
+                    <rect key="frame" x="15" y="20.5" width="123" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="123" id="gW6-Ee-Owx"/>
                     </constraints>
@@ -26,35 +26,41 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sb-tB-sd5">
-                    <rect key="frame" x="143" y="12.5" width="227" height="16"/>
+                    <rect key="frame" x="143" y="12.5" width="222" height="16"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="不太行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbe-iJ-Z8h">
-                            <rect key="frame" x="0.0" y="0.0" width="116" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不太行" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbe-iJ-Z8h">
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="一般般" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHE-Ji-9NW">
-                            <rect key="frame" x="116" y="0.0" width="37" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一般般" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHE-Ji-9NW">
+                            <rect key="frame" x="56" y="0.0" width="55" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="还可以" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g03-ZS-OIo">
-                            <rect key="frame" x="153" y="0.0" width="37" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还可以" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g03-ZS-OIo">
+                            <rect key="frame" x="111" y="0.0" width="56" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="挺好的" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckb-ny-f4t">
-                            <rect key="frame" x="190" y="0.0" width="37" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="挺好的" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckb-ny-f4t">
+                            <rect key="frame" x="167" y="0.0" width="55" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="AHE-Ji-9NW" firstAttribute="width" secondItem="Pbe-iJ-Z8h" secondAttribute="width" id="7nh-K9-9jv"/>
+                        <constraint firstItem="g03-ZS-OIo" firstAttribute="width" secondItem="Pbe-iJ-Z8h" secondAttribute="width" id="JTG-RJ-tNF"/>
                         <constraint firstAttribute="height" constant="16" id="Prg-CK-or0"/>
+                        <constraint firstItem="g03-ZS-OIo" firstAttribute="height" secondItem="Pbe-iJ-Z8h" secondAttribute="height" id="RDJ-S4-4SO"/>
+                        <constraint firstItem="Ckb-ny-f4t" firstAttribute="height" secondItem="Pbe-iJ-Z8h" secondAttribute="height" id="obK-ym-RZq"/>
+                        <constraint firstItem="AHE-Ji-9NW" firstAttribute="height" secondItem="Pbe-iJ-Z8h" secondAttribute="height" id="wnR-nV-g8L"/>
+                        <constraint firstItem="Ckb-ny-f4t" firstAttribute="width" secondItem="Pbe-iJ-Z8h" secondAttribute="width" id="ySt-Yg-fWi"/>
                     </constraints>
                 </stackView>
             </subviews>
@@ -62,13 +68,13 @@
             <constraints>
                 <constraint firstItem="2cr-wL-hDR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7Wn-6r-qt1"/>
                 <constraint firstItem="2cr-wL-hDR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="Qut-xN-X7c"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7sb-tB-sd5" secondAttribute="trailing" constant="5" id="WWS-za-p9w"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7sb-tB-sd5" secondAttribute="trailing" constant="10" id="WWS-za-p9w"/>
                 <constraint firstItem="7sb-tB-sd5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zsb-al-GMk"/>
                 <constraint firstItem="7sb-tB-sd5" firstAttribute="leading" secondItem="2cr-wL-hDR" secondAttribute="trailing" constant="5" id="f9C-gn-3G2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="33.5" y="-260"/>
+            <point key="canvasLocation" x="25" y="-261"/>
         </view>
     </objects>
 </document>

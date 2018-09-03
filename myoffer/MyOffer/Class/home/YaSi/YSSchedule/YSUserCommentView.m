@@ -10,7 +10,7 @@
 #import "YSCommentItem.h"
 #import "YSUserCommentCell.h"
 
-@interface YSUserCommentView ()<UITableViewDataSource>
+@interface YSUserCommentView ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 
@@ -59,16 +59,41 @@
         new_frame.origin.x = 20;
         new_frame.size.width = frame.size.width - 40;
         
-        self.tableView =[[UITableView alloc] initWithFrame:new_frame style:UITableViewStylePlain];
+        self.tableView =[[UITableView alloc] initWithFrame:new_frame style:UITableViewStyleGrouped];
         self.tableView.dataSource = self;
+        self.tableView.delegate = self;
         self.tableView.tableFooterView =[[UIView alloc] init];
         [self addSubview:self.tableView];
         self.tableView.rowHeight = 40;
-        
-        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.mj_w, 100)];
-        footer.backgroundColor = XCOLOR_RED;
+        self.tableView.sectionHeaderHeight = 20;
+        self.tableView.sectionFooterHeight= HEIGHT_ZERO;
+        self.tableView.backgroundColor = XCOLOR_WHITE;
+        self.tableView.layer.cornerRadius = 8;
+
+
+        CGFloat footer_w = self.tableView.mj_w;
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0,footer_w, 60)];
         self.tableView.tableFooterView = footer;
         
+        CGFloat cm_w =  80;
+        CGFloat cm_x =  footer_w * 0.5 - cm_w - 13;
+        CGFloat cm_y = 10;
+        CGFloat cm_h = 30;
+        UIButton *commitBnt = [[UIButton alloc] initWithFrame:CGRectMake(cm_x, cm_y, cm_w, cm_h)];
+        [commitBnt setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateNormal];
+        [commitBnt setBackgroundImage:XImage(@"button_blue_highlight" ) forState:UIControlStateHighlighted];
+        [footer addSubview:commitBnt];
+        [commitBnt addTarget:self action:@selector(caseCommit) forControlEvents:UIControlEventTouchUpInside];
+        [commitBnt setTitle:@"提交" forState:UIControlStateNormal];
+        commitBnt.titleLabel.font = XFONT(12);
+        
+        UIButton *quitBnt = [[UIButton alloc] initWithFrame:CGRectMake(footer_w * 0.5 + 13, cm_y, cm_w, 30)];
+        [quitBnt setBackgroundImage:XImage(@"button_light_unable") forState:UIControlStateNormal];
+        [footer addSubview:quitBnt];
+        [quitBnt addTarget:self action:@selector(caseQuit) forControlEvents:UIControlEventTouchUpInside];
+        [quitBnt setTitle:@"退出" forState:UIControlStateNormal];
+        quitBnt.titleLabel.font = XFONT(12);
+
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.mj_w, 0)];
         self.tableView.tableHeaderView = header;
         
@@ -86,18 +111,21 @@
         titleLab.frame = CGRectMake(title_x, title_y, title_w, title_h);
         header.mj_h = title_h + title_y + 20;
         self.tableView.tableHeaderView = header;
-        
-        self.tableView.mj_h = self.items.count * 60 + header.mj_h + footer.mj_h;
-        
+        self.tableView.mj_h = (self.items.count  + 0.5) * self.tableView.rowHeight + header.mj_h + footer.mj_h;
         self.tableView.center = CGPointMake(XSCREEN_WIDTH * 0.5, XSCREEN_HEIGHT * 0.5);
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.scrollEnabled = NO;
         
     }
     return self;
 }
-
-
-
+ 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -110,14 +138,57 @@
     if (!cell) {
         cell = Bundle(@"YSUserCommentCell");
     }
+    cell.item = self.items[indexPath.row];
+    
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    return Bundle(@"YSUserCommentSectionView");
 }
 
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    return [UIView new];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (void)caseCommit{
+ 
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
+    
+    for (YSCommentItem *item in self.items) {
+        NSLog(@"  %@, %ld",item.title,item.index_selected);
+    }
+}
+
+- (void)caseQuit{
+    [self hide];
+}
+
+- (void)show{
+    
+    self.alpha = 0;
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        self.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)hide{
+    
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 @end

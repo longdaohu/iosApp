@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YSCommentItem;
 
 @interface YSUserCommentCell : UITableViewCell
+@property(nonatomic,strong)YSCommentItem *item;
 
 @end

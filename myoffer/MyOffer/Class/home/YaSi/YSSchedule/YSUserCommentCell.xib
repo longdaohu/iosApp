@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教学过程中是否有互动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EO-xz-adJ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教学过程中是否有互动" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EO-xz-adJ">
                         <rect key="frame" x="15" y="0.0" width="123" height="43.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="123" id="4oA-z6-O0b"/>
@@ -29,31 +29,31 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSn-p0-M3A">
-                        <rect key="frame" x="143" y="7" width="172" height="30"/>
+                        <rect key="frame" x="143" y="7" width="167" height="30"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBJ-Ry-ukV">
-                                <rect key="frame" x="0.0" y="0.0" width="43" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="IT1-Al-QCo"/>
                                 </constraints>
-                                <state key="normal" image="star"/>
+                                <state key="normal" image="star_selected"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPL-fY-KbG">
-                                <rect key="frame" x="43" y="0.0" width="43" height="30"/>
+                                <rect key="frame" x="42" y="0.0" width="41.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="RzI-LY-NAW"/>
                                 </constraints>
-                                <state key="normal" image="star"/>
+                                <state key="normal" image="star_selected"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ty-sP-ur9">
-                                <rect key="frame" x="86" y="0.0" width="43" height="30"/>
+                                <rect key="frame" x="83.5" y="0.0" width="42" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UYV-d7-AvG"/>
                                 </constraints>
-                                <state key="normal" image="star"/>
+                                <state key="normal" image="star_selected"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rua-q2-f6D">
-                                <rect key="frame" x="129" y="0.0" width="43" height="30"/>
+                                <rect key="frame" x="125.5" y="0.0" width="41.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bp1-pq-jkc"/>
                                 </constraints>
@@ -73,7 +73,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="WSn-p0-M3A" firstAttribute="leading" secondItem="5EO-xz-adJ" secondAttribute="trailing" constant="5" id="0o9-8f-ks5"/>
-                    <constraint firstAttribute="trailing" secondItem="WSn-p0-M3A" secondAttribute="trailing" constant="5" id="3Nn-AJ-q00"/>
+                    <constraint firstAttribute="trailing" secondItem="WSn-p0-M3A" secondAttribute="trailing" constant="10" id="3Nn-AJ-q00"/>
                     <constraint firstItem="5EO-xz-adJ" firstAttribute="leading" secondItem="GGp-iV-2uO" secondAttribute="leading" constant="15" id="63g-lk-JMO"/>
                     <constraint firstAttribute="bottom" secondItem="5EO-xz-adJ" secondAttribute="bottom" id="Ar9-ZF-8wt"/>
                     <constraint firstItem="WSn-p0-M3A" firstAttribute="centerY" secondItem="GGp-iV-2uO" secondAttribute="centerY" id="Ztk-0A-etP"/>
@@ -81,10 +81,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="RBQ-7F-1BF"/>
+            <connections>
+                <outlet property="bgView" destination="WSn-p0-M3A" id="3H0-3L-lp7"/>
+                <outlet property="titleLab" destination="5EO-xz-adJ" id="7bf-fn-KCJ"/>
+            </connections>
             <point key="canvasLocation" x="-85" y="-64"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="star" width="20" height="21"/>
+        <image name="star_selected" width="20" height="20"/>
     </resources>
 </document>

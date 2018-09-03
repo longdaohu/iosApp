@@ -590,7 +590,6 @@
 		AEB75E372139603800C9129C /* YSCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E362139603800C9129C /* YSCommentItem.m */; };
 		AEB75E402139657D00C9129C /* YSUserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */; };
 		AEB75E412139657D00C9129C /* YSUserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */; };
-		AEB75E442139671600C9129C /* YSUserCommentSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E432139671600C9129C /* YSUserCommentSectionView.m */; };
 		AEB75E462139672600C9129C /* YSUserCommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */; };
 		AEB9A33A1EA46EBB0025A72A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A3391EA46EBB0025A72A /* libicucore.tbd */; };
 		AEB9A33C1EA46F130025A72A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9A33B1EA46F130025A72A /* AVFoundation.framework */; };
@@ -1737,8 +1736,6 @@
 		AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentCell.h; sourceTree = "<group>"; };
 		AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentCell.m; sourceTree = "<group>"; };
 		AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YSUserCommentCell.xib; sourceTree = "<group>"; };
-		AEB75E422139671600C9129C /* YSUserCommentSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentSectionView.h; sourceTree = "<group>"; };
-		AEB75E432139671600C9129C /* YSUserCommentSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentSectionView.m; sourceTree = "<group>"; };
 		AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YSUserCommentSectionView.xib; sourceTree = "<group>"; };
 		AEB9A3391EA46EBB0025A72A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AEB9A33B1EA46F130025A72A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -4730,8 +4727,6 @@
 				AEB75DFB21352B2400C9129C /* YaSiScheduleVC.m */,
 				AEB75E3221395B1C00C9129C /* YSUserCommentView.h */,
 				AEB75E3321395B1C00C9129C /* YSUserCommentView.m */,
-				AEB75E422139671600C9129C /* YSUserCommentSectionView.h */,
-				AEB75E432139671600C9129C /* YSUserCommentSectionView.m */,
 				AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */,
 				AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */,
 				AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */,
@@ -5704,7 +5699,6 @@
 				AE8A76AC210B1CB60079D239 /* HomeRoomSearchVC.m in Sources */,
 				AEA249BC1D5B215300DD7939 /* XWGJKeyboardToolar.m in Sources */,
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
-				AEB75E442139671600C9129C /* YSUserCommentSectionView.m in Sources */,
 				AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,

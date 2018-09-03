@@ -7,18 +7,61 @@
 //
 
 #import "YSUserCommentCell.h"
+#import "YSCommentItem.h"
+
+@interface YSUserCommentCell()
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UIStackView *bgView;
+
+@end
 
 @implementation YSUserCommentCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    for (NSInteger index = 0; index < self.bgView.subviews.count; index++) {
+        
+        UIButton *item = self.bgView.subviews[index];
+        item.tag = (index + 1);
+        [item setImage:XImage(@"star_selected") forState:UIControlStateSelected];
+        [item setImage:XImage(@"star_nomal") forState:UIControlStateNormal];
+        item.userInteractionEnabled = NO;
+    }
+
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+- (void)setItem:(YSCommentItem *)item{
+    _item = item;
+    self.titleLab.text = item.title;
 }
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = touches.anyObject;
+    [self starViewWithTouch:touch];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+ 
+    UITouch *touch = touches.anyObject;
+    [self starViewWithTouch:touch];
+}
+
+- (void)starViewWithTouch:(UITouch *)touch{
+    
+    CGPoint pt = [touch locationInView:self.bgView];
+    if (pt.x <= 0 ) return;
+    for (UIButton *item in self.bgView.subviews) {
+        if (pt.x >= item.frame.origin.x) {
+            item.selected = YES;
+            self.item.index_selected = item.tag;
+        }else{
+            item.selected = NO;
+        }
+    }
+}
+
 
 @end

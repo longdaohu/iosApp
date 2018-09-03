@@ -47,7 +47,7 @@
     
     self.title = @"我的课程";
     [self makeTableView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"recommend_history") style:UIBarButtonItemStyleDone target:self action:@selector(caseCalendar)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"YS_calendar") style:UIBarButtonItemStyleDone target:self action:@selector(caseCalendar)];
 }
 
 - (void)makeTableView

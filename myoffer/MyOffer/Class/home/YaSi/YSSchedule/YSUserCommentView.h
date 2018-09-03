@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface YSUserCommentView : UIView
-
 + (instancetype)commentView;
+@property(nonatomic,copy)void(^actionBlock)(void);
 
 @end
