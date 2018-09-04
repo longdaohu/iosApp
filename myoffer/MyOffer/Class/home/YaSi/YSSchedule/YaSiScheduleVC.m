@@ -32,15 +32,11 @@
     [MobClick endLogPageView:@"page课程表"];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self makeUI];
     [self makeCoursesData];
-    
-    YSUserCommentView *commentView = [YSUserCommentView commentView];
-    [self.view addSubview:commentView];
 }
 
 - (void)makeUI{

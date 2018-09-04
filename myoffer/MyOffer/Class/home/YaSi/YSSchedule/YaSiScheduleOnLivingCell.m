@@ -7,6 +7,8 @@
 //
 
 #import "YaSiScheduleOnLivingCell.h"
+#import "YSScheduleModel.h"
+#import "UIImage+GIF.h"
 
 @interface YaSiScheduleOnLivingCell ()
 
@@ -35,8 +37,11 @@
     self.playBtn.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
     self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.playBtn.layer.shadowOpacity = 0.5;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    self.onlivingView.image =  image;
 }
-
 
 - (IBAction)caseplay:(UIButton *)sender {
     
@@ -44,6 +49,30 @@
         self.actionBlock();
     }
 }
+
+- (void)setItem:(YSScheduleModel *)item{
+    _item = item;
+    
+    self.titleLab.text = item.inClassTime;
+    self.nameLab.text = item.teacherName;
+    self.subLab.text = item.topic;
+    [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
+    [self.playBtn setTitle:item.stateName forState:UIControlStateNormal];
+
+    self.onLivingLab.hidden = item.livelogoState;
+    self.onlivingView.hidden = item.livelogoState;
+    self.playBtn.enabled = item.playButtonState;
+    self.playBtn.hidden = NO;
+    if (item.type == YSScheduleVideoStateBefore){
+        self.playBtn.hidden = YES;
+    }
+    
+}
+- (void)ToplineHiden:(BOOL)hide{
+    
+    self.topLine.hidden = hide;
+}
+
 
 @end
 

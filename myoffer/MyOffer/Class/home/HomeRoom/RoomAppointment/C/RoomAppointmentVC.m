@@ -263,7 +263,7 @@
                                 @"date":@"2018-12-09",
                                 @"property_id":self.room_id
                                 };
-    WeakSelf
+    
     [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
         NSLog(@"1 >>>>>>>>>> %d  %@",response.statusCode,response.error);
         id result = [response.body KD_JSONObject];

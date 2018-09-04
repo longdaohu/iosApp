@@ -580,7 +580,6 @@
 		AEB75E1B2137C05200C9129C /* YasiBannerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1A2137C05200C9129C /* YasiBannerLayout.m */; };
 		AEB75E1E2137CE5600C9129C /* YasiCatigoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */; };
 		AEB75E212137CEB200C9129C /* YasiCatigoryItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */; };
-		AEB75E242137EDCB00C9129C /* YSCalendarCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */; };
 		AEB75E272139024900C9129C /* PriceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E262139024900C9129C /* PriceCellView.m */; };
 		AEB75E292139025900C9129C /* PriceCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E282139025900C9129C /* PriceCellView.xib */; };
 		AEB75E2D2139125D00C9129C /* YsCatigoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E2B2139125D00C9129C /* YsCatigoryItemCell.m */; };
@@ -601,6 +600,13 @@
 		AEBA44C91E88BAB3005E923B /* ServiceSKU.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44C81E88BAB3005E923B /* ServiceSKU.m */; };
 		AEBA44CD1E88BDFB005E923B /* ServiceSKUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */; };
 		AEBA44D11E88C38C005E923B /* ServiceSKUFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */; };
+		AEBAAE95213D44FA002FD301 /* YXDateHelpObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAAE94213D44FA002FD301 /* YXDateHelpObject.m */; };
+		AEBAAE9E213E28FF002FD301 /* YXCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAAE99213E28FD002FD301 /* YXCalendarView.m */; };
+		AEBAAE9F213E28FF002FD301 /* YXDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBAAE9A213E28FE002FD301 /* YXDayCell.xib */; };
+		AEBAAEA0213E28FF002FD301 /* YXDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAAE9B213E28FE002FD301 /* YXDayCell.m */; };
+		AEBAAEA1213E28FF002FD301 /* YXMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAAE9D213E28FF002FD301 /* YXMonthView.m */; };
+		AEBAAEA4213E311B002FD301 /* YSCalendarCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBAAEA3213E311B002FD301 /* YSCalendarCourseModel.m */; };
+		AEBAAEA6213E4870002FD301 /* living_icon.gif in Resources */ = {isa = PBXBuildFile; fileRef = AEBAAEA5213E486F002FD301 /* living_icon.gif */; };
 		AEC2B6151E948C5300631F2C /* shareMyOffer.png in Resources */ = {isa = PBXBuildFile; fileRef = AEC2B6141E948C5300631F2C /* shareMyOffer.png */; };
 		AEC4284420E082B7007B3949 /* HomeUVICCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC4284120E082B7007B3949 /* HomeUVICCell.m */; };
 		AEC4284B20E08D57007B3949 /* HomeUVICserviceAdvantageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC4284920E08D57007B3949 /* HomeUVICserviceAdvantageCell.m */; };
@@ -1719,8 +1725,6 @@
 		AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryModel.m; sourceTree = "<group>"; };
 		AEB75E1F2137CEB200C9129C /* YasiCatigoryItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YasiCatigoryItemModel.h; sourceTree = "<group>"; };
 		AEB75E202137CEB200C9129C /* YasiCatigoryItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YasiCatigoryItemModel.m; sourceTree = "<group>"; };
-		AEB75E222137EDCB00C9129C /* YSCalendarCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCalendarCourseModel.h; sourceTree = "<group>"; };
-		AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCalendarCourseModel.m; sourceTree = "<group>"; };
 		AEB75E252139024900C9129C /* PriceCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCellView.h; sourceTree = "<group>"; };
 		AEB75E262139024900C9129C /* PriceCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCellView.m; sourceTree = "<group>"; };
 		AEB75E282139025900C9129C /* PriceCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceCellView.xib; sourceTree = "<group>"; };
@@ -1752,6 +1756,18 @@
 		AEBA44CB1E88BDFB005E923B /* ServiceSKUCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSKUCell.m; sourceTree = "<group>"; };
 		AEBA44CF1E88C38C005E923B /* ServiceSKUFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSKUFrame.h; sourceTree = "<group>"; };
 		AEBA44D01E88C38C005E923B /* ServiceSKUFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSKUFrame.m; sourceTree = "<group>"; };
+		AEBAAE93213D44F8002FD301 /* YXDateHelpObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXDateHelpObject.h; sourceTree = "<group>"; };
+		AEBAAE94213D44FA002FD301 /* YXDateHelpObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXDateHelpObject.m; sourceTree = "<group>"; };
+		AEBAAE97213E28FD002FD301 /* YXMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXMonthView.h; sourceTree = "<group>"; };
+		AEBAAE98213E28FD002FD301 /* YXCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXCalendarView.h; sourceTree = "<group>"; };
+		AEBAAE99213E28FD002FD301 /* YXCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXCalendarView.m; sourceTree = "<group>"; };
+		AEBAAE9A213E28FE002FD301 /* YXDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YXDayCell.xib; sourceTree = "<group>"; };
+		AEBAAE9B213E28FE002FD301 /* YXDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXDayCell.m; sourceTree = "<group>"; };
+		AEBAAE9C213E28FF002FD301 /* YXDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXDayCell.h; sourceTree = "<group>"; };
+		AEBAAE9D213E28FF002FD301 /* YXMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXMonthView.m; sourceTree = "<group>"; };
+		AEBAAEA2213E311B002FD301 /* YSCalendarCourseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCalendarCourseModel.h; sourceTree = "<group>"; };
+		AEBAAEA3213E311B002FD301 /* YSCalendarCourseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCalendarCourseModel.m; sourceTree = "<group>"; };
+		AEBAAEA5213E486F002FD301 /* living_icon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = living_icon.gif; sourceTree = "<group>"; };
 		AEC2B6141E948C5300631F2C /* shareMyOffer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareMyOffer.png; sourceTree = "<group>"; };
 		AEC4284120E082B7007B3949 /* HomeUVICCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeUVICCell.m; sourceTree = "<group>"; };
 		AEC4284320E082B7007B3949 /* HomeUVICCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeUVICCell.h; sourceTree = "<group>"; };
@@ -2109,6 +2125,8 @@
 				463E3AA51B23105F00E0BAF8 /* UIView+KDUtilities.m */,
 				AEC85BAE209B11570002F19B /* NSString+extent.h */,
 				AEC85BAF209B11570002F19B /* NSString+extent.m */,
+				AEBAAE93213D44F8002FD301 /* YXDateHelpObject.h */,
+				AEBAAE94213D44FA002FD301 /* YXDateHelpObject.m */,
 			);
 			path = KDUtilities;
 			sourceTree = "<group>";
@@ -4403,6 +4421,7 @@
 			children = (
 				AEFE2B4A1BD8D8DC00B5AE43 /* TUPIAN */,
 				AE6DB5D61F43F72C00F7ABA4 /* dot_40x40.gif */,
+				AEBAAEA5213E486F002FD301 /* living_icon.gif */,
 				AE69A2AE20F5E77C00194266 /* guid_smart.jpg */,
 				AE1A805B20DA44B800CE9E50 /* home_fee_b.jpg */,
 				AE892A191EBC87890035A31D /* uk_more.jpg */,
@@ -4748,12 +4767,27 @@
 		AEB75E07213542BF00C9129C /* YSCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				AEBAAE96213E28D5002FD301 /* Clendar */,
 				AEB75E082135430900C9129C /* YSCalendarVC.h */,
 				AEB75E092135430900C9129C /* YSCalendarVC.m */,
-				AEB75E222137EDCB00C9129C /* YSCalendarCourseModel.h */,
-				AEB75E232137EDCB00C9129C /* YSCalendarCourseModel.m */,
+				AEBAAEA2213E311B002FD301 /* YSCalendarCourseModel.h */,
+				AEBAAEA3213E311B002FD301 /* YSCalendarCourseModel.m */,
 			);
 			path = YSCalendar;
+			sourceTree = "<group>";
+		};
+		AEBAAE96213E28D5002FD301 /* Clendar */ = {
+			isa = PBXGroup;
+			children = (
+				AEBAAE98213E28FD002FD301 /* YXCalendarView.h */,
+				AEBAAE99213E28FD002FD301 /* YXCalendarView.m */,
+				AEBAAE9C213E28FF002FD301 /* YXDayCell.h */,
+				AEBAAE9B213E28FE002FD301 /* YXDayCell.m */,
+				AEBAAE9A213E28FE002FD301 /* YXDayCell.xib */,
+				AEBAAE97213E28FD002FD301 /* YXMonthView.h */,
+				AEBAAE9D213E28FF002FD301 /* YXMonthView.m */,
+			);
+			path = Clendar;
 			sourceTree = "<group>";
 		};
 		AEC85BC020A29F4D0002F19B /* plist_File */ = {
@@ -5351,6 +5385,7 @@
 				AEF657E22100826900C0D849 /* AlipaySDK.bundle in Resources */,
 				AE60C1FA20E247F7000867A8 /* home_global_user_04.jpg in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
+				AEBAAE9F213E28FF002FD301 /* YXDayCell.xib in Resources */,
 				AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */,
 				AEA545D320D26F300095CBDA /* HomeHotVideoCell.xib in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
@@ -5383,6 +5418,7 @@
 				AE9BA44720B3FA74008B65D4 /* RewardDetailVC.xib in Resources */,
 				AE22862D1E71660500E6E5CD /* PipeiNoResultVeiw.xib in Resources */,
 				AE1FD7331D5C929500FFD5A8 /* Pre-comp 1_00016.png in Resources */,
+				AEBAAEA6213E4870002FD301 /* living_icon.gif in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
 				AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */,
@@ -5653,6 +5689,7 @@
 				AE91DDC71FBBDEF100CD06BD /* GuideOverseaViewController.m in Sources */,
 				463E3AB11B23105F00E0BAF8 /* KDNullSafe.m in Sources */,
 				AEB75E052135377300C9129C /* YaSiScheduleOnLivingCell.m in Sources */,
+				AEBAAEA1213E28FF002FD301 /* YXMonthView.m in Sources */,
 				AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */,
 				AE4BBD432112B62000209FC8 /* HomeRoomVerticalCell.m in Sources */,
 				AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */,
@@ -5883,16 +5920,17 @@
 				AECC87CF1F95F63800FCBBEC /* CatigaryHotCity.m in Sources */,
 				AEA24A991D5B23F600DD7939 /* WYLXSuccessView.m in Sources */,
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
+				AEBAAEA0213E28FF002FD301 /* YXDayCell.m in Sources */,
 				AE4B2E791F1E095600E328F7 /* MyofferMessageFrame.m in Sources */,
 				AEB75E0021352C8800C9129C /* YSScheduleCell.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
+				AEBAAE9E213E28FF002FD301 /* YXCalendarView.m in Sources */,
 				AE4BBD2A2111557300209FC8 /* HttpApiClient_API_51ROOM.m in Sources */,
 				AE4BBD3721115CB100209FC8 /* HomeRoomIndexEventsObject.m in Sources */,
 				AE3AB6C61F21A8FC00A3C7E3 /* SMDetailMedol.m in Sources */,
 				AE67E75B1F4E77BB00FAC0B3 /* myofferGroupModel.m in Sources */,
 				AE07A0EA210724A500581073 /* HomeRoomApartmentItemCell.m in Sources */,
 				AEAFDF0D21212B6B00067190 /* RoomItemDetailVC.m in Sources */,
-				AEB75E242137EDCB00C9129C /* YSCalendarCourseModel.m in Sources */,
 				AE2093881F3970100078DCBB /* myOfferCollectionView.m in Sources */,
 				AE07A0DC2106C8E300581073 /* HomeRoomVC.m in Sources */,
 				AECC87E41F95F63800FCBBEC /* CatigorySubjectCell.m in Sources */,
@@ -5955,8 +5993,10 @@
 				AE76ACD420D8A10D00C42FA2 /* HomeApplycationArtCell.m in Sources */,
 				AE3AB6A91F21A27300A3C7E3 /* SMHomeSectionModel.m in Sources */,
 				AE9BA43B20B3EFEE008B65D4 /* RewardListVC.m in Sources */,
+				AEBAAEA4213E311B002FD301 /* YSCalendarCourseModel.m in Sources */,
 				463E3ABB1B23105F00E0BAF8 /* NSObject+PerformBlockAfterDelay.m in Sources */,
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
+				AEBAAE95213D44FA002FD301 /* YXDateHelpObject.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
 				AE4BBCF9210F1E9400209FC8 /* RoomSearchFilterView.m in Sources */,
 				AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */,

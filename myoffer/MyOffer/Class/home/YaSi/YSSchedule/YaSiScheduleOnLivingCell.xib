@@ -31,7 +31,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnsignedContract" translatesAutoresizingMaskIntoConstraints="NO" id="8yj-KO-NAW">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meger_wb" translatesAutoresizingMaskIntoConstraints="NO" id="8yj-KO-NAW">
                         <rect key="frame" x="145" y="14" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="VzI-jc-15F"/>
@@ -62,6 +62,10 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_cross" translatesAutoresizingMaskIntoConstraints="NO" id="AIY-vi-Xpb">
                         <rect key="frame" x="20" y="69" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="V95-xd-4wQ"/>
+                            <constraint firstAttribute="width" constant="30" id="Xme-K2-bt7"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="雅思阅读答题技巧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugw-aP-YaS">
                         <rect key="frame" x="20" y="37" width="115" height="17"/>
@@ -70,7 +74,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDP-9D-k6Y">
-                        <rect key="frame" x="20" y="0.0" width="280" height="1"/>
+                        <rect key="frame" x="20" y="121.5" width="280" height="1"/>
                         <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="66U-As-U1v"/>
@@ -79,10 +83,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ugw-aP-YaS" firstAttribute="top" secondItem="hEB-ku-RAW" secondAttribute="bottom" constant="5" id="1Vf-uw-me2"/>
+                    <constraint firstAttribute="bottom" secondItem="nDP-9D-k6Y" secondAttribute="bottom" id="3a5-he-dPh"/>
                     <constraint firstItem="hEB-ku-RAW" firstAttribute="leading" secondItem="8yj-KO-NAW" secondAttribute="trailing" constant="5" id="8kt-Gk-02q"/>
                     <constraint firstAttribute="bottom" secondItem="fKH-q7-stY" secondAttribute="bottom" constant="30.5" id="9ir-Bc-O0z"/>
                     <constraint firstItem="fKH-q7-stY" firstAttribute="centerY" secondItem="AIY-vi-Xpb" secondAttribute="centerY" id="BgM-IW-xOE"/>
-                    <constraint firstItem="nDP-9D-k6Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Br9-fZ-F8q"/>
                     <constraint firstItem="Ugw-aP-YaS" firstAttribute="leading" secondItem="qZ3-Mv-j5r" secondAttribute="leading" id="CRR-qR-HCT"/>
                     <constraint firstItem="qZ3-Mv-j5r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Hx6-M9-XDK"/>
                     <constraint firstItem="AIY-vi-Xpb" firstAttribute="top" secondItem="Ugw-aP-YaS" secondAttribute="bottom" constant="15" id="On6-iK-yvo"/>
@@ -109,14 +113,14 @@
                 <outlet property="titleLab" destination="qZ3-Mv-j5r" id="hVX-zB-AS5"/>
                 <outlet property="topLine" destination="nDP-9D-k6Y" id="TSS-L1-CJV"/>
             </connections>
-            <point key="canvasLocation" x="-69" y="53"/>
+            <point key="canvasLocation" x="-14" y="51"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="UnsignedContract" width="22" height="22"/>
         <image name="add_cross" width="30" height="30"/>
         <image name="button_blue_highlight" width="22" height="22"/>
         <image name="button_blue_nomal" width="15" height="20"/>
         <image name="button_light_unable" width="21" height="21"/>
+        <image name="meger_wb" width="40" height="40"/>
     </resources>
 </document>

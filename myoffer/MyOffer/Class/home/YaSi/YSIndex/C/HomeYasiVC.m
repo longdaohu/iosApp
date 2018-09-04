@@ -17,6 +17,8 @@
 #import "YSScheduleModel.h"
 #import "HomeBannerObject.h"
 #import "HomeYSSectionView.h"
+#import "YXDateHelpObject.h"
+
 
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
@@ -144,10 +146,15 @@
     if (!LOGIN) return;
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/calendar-course",DOMAINURL_API];
+    NSDate *today = [NSDate date];
+    NSDate *tomorrow = [NSDate dateTomorrow];
+    YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+//    NSString *startTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+    NSString *endTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:tomorrow];
     [self startAPIRequestWithSelector:path
                            parameters:@{
-                                            @"startTime" : @"2018-08-01",
-                                            @"endTime" : @"2018-09-06"
+                                            @"startTime" : @"2018-02-06",
+                                            @"endTime" : endTime
                                         } expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
               errorAlertDismissAction:nil
               additionalSuccessAction:^(NSInteger statusCode, id response) {
@@ -207,8 +214,9 @@
     self.YSHeader.ysModel = self.ysModel;
     self.YSHeader.frame = self.ysModel.header_frame;
     self.tableView.tableHeaderView = self.YSHeader;
-    
-//    [self makeCatigoryItemDataWithID:cat_son._id];
+ 
+    [self makeCatigoryItemDataWithID:self.YSHeader.ysModel.catigory_Package_current._id];
+
 }
 
 //分类子项

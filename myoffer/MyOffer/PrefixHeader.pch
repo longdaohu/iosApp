@@ -111,7 +111,7 @@
 //#define DOMAINURL  @"https://www.myoffer.cn/"
 //#define DOMAINURL_API  @"https://api.myoffer.cn/"
 #define DOMAINURL  @"https://www.myofferdemo.com/"
-#define DOMAINURL_API  @"http://api.myofferdemo.com/"
+#define DOMAINURL_API  @"https://api.myofferdemo.com/"
 
 #import "MJExtension.h"
 #import "YYToolKit.h"

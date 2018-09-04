@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YSCalendarVC : UIViewController
+@interface YSCalendarVC : BaseViewController
 
 @end
