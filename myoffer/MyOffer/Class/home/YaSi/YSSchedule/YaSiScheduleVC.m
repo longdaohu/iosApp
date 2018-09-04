@@ -17,6 +17,7 @@
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)UILabel *titleLab;
+
 @end
 
 @implementation YaSiScheduleVC
@@ -41,7 +42,7 @@
 
 - (void)makeUI{
     
-    self.title = @"我的课程";
+    self.title = @"课程表";
     [self makeTableView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"YS_calendar") style:UIBarButtonItemStyleDone target:self action:@selector(caseCalendar)];
 }
@@ -67,6 +68,7 @@
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_w, icon_h)];
     iconView.backgroundColor = XCOLOR_RANDOM;
     [header addSubview:iconView];
+    [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg] placeholderImage:nil];
  
     CGFloat title_y =  icon_h;
     CGFloat title_h =  60;
@@ -106,8 +108,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YSScheduleModel *item = self.items[indexPath.row];
-    
-    NSLog(@"%@",item.topic);
+
 }
 
 #pragma mark : 数据加载
@@ -122,7 +123,7 @@
               errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makeUIWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                  NSLog(@"%@",error.userInfo);
+                  [weakSelf.tableView emptyViewWithError:NetRequest_noNetWork];
               }];
 }
 

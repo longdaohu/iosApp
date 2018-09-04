@@ -10,5 +10,5 @@
 
 @interface HomeYSSectionView : UIView
 @property(nonatomic,copy)void(^actionBlock)(NSInteger index);
-
+@property(nonatomic,assign)NSInteger index_selected;
 @end

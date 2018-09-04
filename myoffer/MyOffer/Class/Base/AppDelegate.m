@@ -356,8 +356,8 @@ static AppDelegate *__sharedDelegate;
 }
 
 - (NSString *)accessToken {
-
-    return @"59bbba8b-6813-4892-8c41-1418e6f48426";
+    
+    return @"8fc021bd-a632-4f00-b27e-c168a7f7014e";
 //    return _accessToken;
 }
 

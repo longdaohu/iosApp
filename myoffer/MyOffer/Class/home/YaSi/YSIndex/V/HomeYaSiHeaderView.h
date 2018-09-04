@@ -17,12 +17,13 @@ typedef NS_ENUM(NSInteger,YSHomeHeaderActionType) {
     YSHomeHeaderActionTypeLiving,//直播
     YSHomeHeaderActionTypeTest,  //测评
     YSHomeHeaderActionTypeBanner, //轮播
-    YSHomeHeaderActionTypeBuy //报名
+    YSHomeHeaderActionTypeBuy, //报名
+    YSHomeHeaderActionTypeValueChange //改变分类刷新页面
 };
 
 @interface HomeYaSiHeaderView : UIView
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
-@property(nonatomic,assign)BOOL userSigned;
+@property(nonatomic,copy)NSString *score_signed;
 @property(nonatomic,copy)void(^actionBlock)(YSHomeHeaderActionType type);
 
 - (void)userLoginChange;

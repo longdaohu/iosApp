@@ -14,6 +14,7 @@
 #import "YSCourseModel.h"
 #import "YSCourseGroupModel.h"
 #import "YaSiScheduleVC.h"
+#import "YSCalendarVC.h"
 
 @interface YSMyCourseVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -55,6 +56,7 @@
     
     self.title = @"我的课程";
      [self makeTableView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"YS_calendar") style:UIBarButtonItemStyleDone target:self action:@selector(caseCalendar)];
  }
 
 - (void)makeTableView
@@ -203,6 +205,11 @@
     
 }
 
+- (void)caseCalendar{
+    
+    YSCalendarVC *vc = [[YSCalendarVC alloc] init];
+    PushToViewController(vc);
+}
 
 
 - (void)didReceiveMemoryWarning {

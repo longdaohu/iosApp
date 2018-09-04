@@ -64,6 +64,11 @@
     return self;
 }
 
+- (void)setIndex_selected:(NSInteger)index_selected{
+    _index_selected = index_selected;
+    
+    [self titleClick:self.Btn_items[index_selected]];
+}
 
 - (void)layoutSubviews{
     
@@ -82,9 +87,7 @@
             sender.mj_x = item_x;
             item_x += (sender.mj_w + item_padding);
         }
-        
     }
-    
 }
 
 

@@ -245,7 +245,9 @@
 
 - (YasiCatigoryItemModel *)catigory_Package_current{
  
-     return self.catigory_current.servicePackage[self.catigoryPackage_item_selected_index];
+     YasiCatigoryItemModel  *item  = self.catigory_current.servicePackage[self.catigoryPackage_item_selected_index];
+    
+     return item;
 }
 
 

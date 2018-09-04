@@ -18,6 +18,7 @@
 #import "HomeBannerObject.h"
 #import "HomeYSSectionView.h"
 #import "YXDateHelpObject.h"
+#import "YSImagesCell.h"
 
 
 @interface HomeYasiVC ()
@@ -25,6 +26,7 @@
 @property(nonatomic,strong)NSArray *height_arr;
 @property(nonatomic,assign)NSInteger current_index;
 @property(nonatomic,strong)HomeYaSiHeaderView *YSHeader;
+@property(nonatomic,strong) UIView *YSFooter;
 
 @end
 
@@ -80,9 +82,7 @@
     
     [super toLoadView];
     self.tableView.backgroundColor = XCOLOR_CLEAR;
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 64)];
-    footer.backgroundColor = XCOLOR_WHITE;
-    self.tableView.tableFooterView = footer;
+    self.tableView.tableFooterView = self.YSFooter;
 }
 
 - (void)makeYSHeaderView{
@@ -96,6 +96,19 @@
     header.actionBlock = ^(YSHomeHeaderActionType type) {
         [weakSelf caseHeaderActionType: type];
     };
+}
+
+- (UIView *)YSFooter{
+    if (!_YSFooter) {
+     
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 1)];
+        UIView *clrView = [[UIView alloc] initWithFrame:self.view.bounds];
+        clrView.backgroundColor = XCOLOR_WHITE;
+        [footer addSubview:clrView];
+        
+        _YSFooter = footer;
+    }
+    return _YSFooter;
 }
 
 #pragma mark : UITableViewDatasource
@@ -112,30 +125,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"YSimages"];
+    YSImagesCell *cell =[tableView dequeueReusableCellWithIdentifier:@"YSimages"];
     if (!cell) {
-        cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YSimages"];
+        cell =[[YSImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YSimages"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text = [NSString stringWithFormat:@" aaaaaaa = %@",self.height_arr[self.current_index]];
     cell.contentView.backgroundColor = XCOLOR_RANDOM;
+    if (self.ysModel.catigory_Package_current.items.count > 0) {
+        cell.items = self.ysModel.catigory_Package_current.items[self.current_index];
+    }
  
     return cell;
 }
 
+
+#pragma mark :UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return  XSCREEN_HEIGHT;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return  [self.height_arr[self.current_index] floatValue]   ;
+    return  [self.height_arr[self.current_index] floatValue];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
  
     return 65;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return  XSCREEN_HEIGHT;
 }
 
 
@@ -146,23 +165,22 @@
     if (!LOGIN) return;
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/calendar-course",DOMAINURL_API];
-    NSDate *today = [NSDate date];
-    NSDate *tomorrow = [NSDate dateTomorrow];
-    YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+//    NSDate *today = [NSDate date];
+//    NSDate *tomorrow = [NSDate dateTomorrow];
+//    YXDateHelpObject *helpObj = [YXDateHelpObject manager];
 //    NSString *startTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
-    NSString *endTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:tomorrow];
+//    NSString *endTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:tomorrow];
     [self startAPIRequestWithSelector:path
                            parameters:@{
                                             @"startTime" : @"2018-02-06",
-                                            @"endTime" : endTime
+                                            @"endTime" : @"2018-12-26",
                                         } expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
               errorAlertDismissAction:nil
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makelivingWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-              }];
+        }];
 }
-
 
 - (void)makelivingWithResponse:(id)response{
     
@@ -185,7 +203,6 @@
     }
 }
 
-
 //分类数据
 - (void)makeCategoryData{
     WeakSelf;
@@ -198,7 +215,6 @@
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
               }];
 }
-
 - (void)makeCatigoryWithResponse:(id)response{
     
     if (!ResponseIsOK) {
@@ -208,39 +224,16 @@
     if (result.count == 0) {
         return;
     }
-    
     NSArray *catigorys = [YasiCatigoryModel mj_objectArrayWithKeyValuesArray:result];
     self.ysModel.catigorys = catigorys;
     self.YSHeader.ysModel = self.ysModel;
     self.YSHeader.frame = self.ysModel.header_frame;
     self.tableView.tableHeaderView = self.YSHeader;
+    
+    [self.tableView reloadData];
  
-    [self makeCatigoryItemDataWithID:self.YSHeader.ysModel.catigory_Package_current._id];
+//    [self makeCatigoryItemDataWithID:self.YSHeader.ysModel.catigory_Package_current._id];
 
-}
-
-//分类子项
-- (void)makeCatigoryItemDataWithID:(NSString *)item_id{
-    
-    WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/products/%@",DOMAINURL_API,item_id];
-    [self startAPIRequestWithSelector:path
-                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
-              errorAlertDismissAction:nil
-              additionalSuccessAction:^(NSInteger statusCode, id response) {
-                  [weakSelf makeCatigoryItemWithResponse:response];
-              } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-              }];
-}
-
-- (void)makeCatigoryItemWithResponse:(id)response{
-    
-    if (!ResponseIsOK) {
-        return;
-    }
-    
-    NSLog(@"makeCatigoryItemWithResponse >>>>>>> %@",response);
-    
 }
 
 //签到
@@ -260,20 +253,18 @@
 - (void)makeUserSignedWithResponse:(id)response{
     
     if (!ResponseIsOK) {
-        
-           NSNumber *code = response[@"code"];
-        
+        NSNumber *code = response[@"code"];
          if(code.integerValue == 100){
-          
-             self.YSHeader.userSigned = YES;
+             self.YSHeader.score_signed = nil;
              NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
              [MBProgressHUD showMessage:msg];
          }
         
     }else{
         
-        self.YSHeader.userSigned = YES;
-        [MBProgressHUD showMessage:@"签到成功，获得10个U币！"];
+        NSDictionary *result = response[@"result"];
+        self.YSHeader.score_signed = result[@"score"];
+        [MBProgressHUD showMessage:@"签到成功"];
     }
 
 }
@@ -296,6 +287,12 @@
             break;
         case YSHomeHeaderActionTypeBuy:
             [self caseBuy];
+            break;
+        case YSHomeHeaderActionTypeValueChange:{
+            
+            self.current_index = 0;
+            [self.tableView reloadData];
+        }
             break;
         default:
             break;
@@ -350,3 +347,29 @@
 
 
 @end
+
+
+/*分类子项
+ - (void)makeCatigoryItemDataWithID:(NSString *)item_id{
+ 
+ WeakSelf;
+ NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/products/%@",DOMAINURL_API,item_id];
+ [self startAPIRequestWithSelector:path
+ parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
+ errorAlertDismissAction:nil
+ additionalSuccessAction:^(NSInteger statusCode, id response) {
+ [weakSelf makeCatigoryItemWithResponse:response];
+ } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+ }];
+ }
+ 
+ - (void)makeCatigoryItemWithResponse:(id)response{
+ 
+ if (!ResponseIsOK) {
+ return;
+ }
+ 
+ NSLog(@"makeCatigoryItemWithResponse >>>>>>> %@",response);
+ 
+ }
+ */

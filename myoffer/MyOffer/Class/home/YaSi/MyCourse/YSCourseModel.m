@@ -7,6 +7,8 @@
 //
 
 #import "YSCourseModel.h"
+#import "YXDateHelpObject.h"
+
 
 @implementation YSCourseModel
 
@@ -36,6 +38,19 @@
     }
     
     return _date_label;
+}
+
+- (NSString *)nextCourseTime{
+    
+    if (!_nextCourseTime) {
+        
+        _nextCourseTime = [NSString stringWithFormat:@"%@——%@",self.nextCourseStartTime,self.nextCourseEndTime];
+//        [[YXDateHelpObject manager]  getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+        
+    }
+    
+    return _nextCourseTime;
+    
 }
 
 

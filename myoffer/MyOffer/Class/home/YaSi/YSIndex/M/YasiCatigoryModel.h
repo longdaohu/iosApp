@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface YasiCatigoryModel : NSObject
+@property(nonatomic,strong)NSDictionary *item;
 @property(nonatomic,copy)NSString *_id ;
 @property(nonatomic,copy)NSString *name ;
 @property(nonatomic,copy)NSString *sort ;

@@ -180,13 +180,31 @@
     self.catigory_buttones = btn_tmp;
 }
 
-- (void)setUserSigned:(BOOL)userSigned{
+- (void)setScore_signed:(NSString *)score_signed{
+    _score_signed = score_signed;
     
-    _userSigned = userSigned;
+    if (score_signed.integerValue > 0) {
+        
+        self.signedBtn.backgroundColor = XCOLOR_CLEAR;
+        self.signedBtn.enabled = NO;
+        self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score_signed];
+        
+    }else{
+        
+        self.signedBtn.backgroundColor = XCOLOR_WHITE;
+        self.signTitleLab.text = @"";
+        self.signedBtn.enabled = YES;
+    }
     
-    self.signedBtn.backgroundColor = XCOLOR_CLEAR;
-    self.signedBtn.enabled = !userSigned;
+    
 }
+
+//- (void)setUserSigned:(BOOL)userSigned{
+//
+//    _userSigned = userSigned;
+//
+//
+//}
 
 - (void)setYsModel:(YaSiHomeModel *)ysModel{
     
@@ -273,7 +291,7 @@
         self.ysModel.catigoryPackage_item_selected_index = indexPath.row;
         [collectionView reloadData];
         self.priceCell.item = self.ysModel.catigory_Package_current;
-        
+        [self caseValueChange];
     }else{
         
         NSString *path = self.ysModel.banner_targets[indexPath.row];
@@ -283,6 +301,15 @@
 
 
 #pragma mark : 事件处理
+
+- (void)caseValueChange{
+    
+    if (self.actionBlock) {
+        self.actionBlock(YSHomeHeaderActionTypeValueChange);
+    }
+    
+}
+
 - (void)caseBanner:(NSString *)path{
     
     if (self.actionBlock) {

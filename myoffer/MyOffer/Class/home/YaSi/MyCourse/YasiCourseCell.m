@@ -27,7 +27,7 @@
         [self.contentView addSubview:dateBtn];
         dateBtn.userInteractionEnabled = NO;
         [dateBtn setTitle:@"2018.01.11 — 2018.08.12" forState:UIControlStateNormal];
-        [dateBtn setImage:XImage(@"check-icons-yes") forState:UIControlStateNormal];
+        [dateBtn setImage:XImage(@"ys_clock") forState:UIControlStateNormal];
         dateBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         dateBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         

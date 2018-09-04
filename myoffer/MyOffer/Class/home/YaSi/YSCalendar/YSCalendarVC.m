@@ -163,8 +163,14 @@
 - (void)updateUIWithResponse:(id)response{
     
     if (!ResponseIsOK) {
+        
+        if (self.eventArray.count == 0 ) {
+            [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        }
+        
         return;
     }
+    
     NSArray *result = response[@"result"];
     if (result.count == 0) {
         return;
@@ -174,7 +180,9 @@
     
     NSArray *times = [self.livingArray valueForKeyPath:@"date"];
     self.calendar.eventArray = times;
+    
     if (self.cousesArr.count == 0) {
+        
         NSString *date = [self.helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:[NSDate date]];
         [self makeDataWithSelectedDate:date];
     }
@@ -192,6 +200,7 @@
         }
     }
     self.cousesArr = nil;
+    [self.tableView emptyViewWithError:NetRequest_NoDATA];
     [self.tableView reloadData];
     
 }
