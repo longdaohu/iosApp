@@ -14,8 +14,8 @@ typedef void(^RefreshH)(CGFloat viewH);
 @interface YXCalendarView : UIView
 
 @property (nonatomic, copy) SendSelectDate sendSelectDate;  //回传选择日期
-@property(nonatomic,copy)void(^actionBlock)(BOOL next,NSDate *current_date);
-/**
+@property(nonatomic,copy)void(^actionBlock)(NSInteger year);
+ /**
  实现该block滑动时更新控件高度
  */
 @property (nonatomic, copy) RefreshH refreshH;

@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UIView *headerView;
 @property(nonatomic,assign)UITableViewStyle type;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyofferUser *user;
 
 - (void)toReLoadTable;
 - (void)toLoadView;

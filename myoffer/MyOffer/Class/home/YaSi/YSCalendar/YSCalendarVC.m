@@ -25,6 +25,7 @@
 @property(nonatomic,strong)YXDateHelpObject *helpObj;
 @property(nonatomic,strong)NSArray *cousesArr;
 @property(nonatomic,copy)NSString *current_year;
+@property(nonatomic,strong)NSMutableArray *years;
 
 @end
 
@@ -40,6 +41,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"page课程表日历"];
+}
+- (NSMutableArray *)years{
+    
+    if (!_years) {
+        
+        _years = [NSMutableArray array];
+    }
+    
+    return _years;
 }
 
 - (NSMutableArray *)eventArray{
@@ -91,8 +101,8 @@
         NSString *date_time = [weakSelf.helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:selDate];
         [weakSelf makeDataWithSelectedDate:date_time];
     };
-    _calendar.actionBlock = ^(BOOL next, NSDate *current_date) {
-        [weakSelf caseCurrentDateChange:current_date next:next];
+    _calendar.actionBlock = ^(NSInteger year) {
+        [weakSelf caseYearData:year];
     };
     [self.view addSubview:_calendar];
     self.tableView.contentInset = UIEdgeInsetsMake(self.calendar.mj_h, 0, XNAV_HEIGHT, 0);
@@ -136,6 +146,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YSScheduleModel *item = self.cousesArr[indexPath.row];
+    [self makeRoomDataWithRoomId:item.item_id];
 }
 
 #pragma mark : 数据请求
@@ -156,6 +169,7 @@
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf updateUIWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                  
        }];
     
 }
@@ -163,30 +177,26 @@
 - (void)updateUIWithResponse:(id)response{
     
     if (!ResponseIsOK) {
-        
-        if (self.eventArray.count == 0 ) {
-            [self.tableView emptyViewWithError:NetRequest_noNetWork];
-        }
-        
+ 
         return;
     }
     
+    [self.years addObject:self.current_year];
     NSArray *result = response[@"result"];
     if (result.count == 0) {
         return;
     }
     NSArray *Calendar_arr = [YSCalendarCourseModel mj_objectArrayWithKeyValuesArray:result];
     [self.livingArray addObjectsFromArray:Calendar_arr];
-    
+ 
     NSArray *times = [self.livingArray valueForKeyPath:@"date"];
     self.calendar.eventArray = times;
     
     if (self.cousesArr.count == 0) {
-        
         NSString *date = [self.helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:[NSDate date]];
         [self makeDataWithSelectedDate:date];
     }
-
+    
 }
 
 - (void)makeDataWithSelectedDate:(NSString *)date_string{
@@ -196,26 +206,49 @@
         if ([item.date isEqualToString:date_string]) {
             self.cousesArr = item.courses;
             [self.tableView reloadData];
+            [self.tableView emptyViewWithHiden:YES];
             return;
         }
     }
+    
     self.cousesArr = nil;
-    [self.tableView emptyViewWithError:NetRequest_NoDATA];
     [self.tableView reloadData];
+    [self.tableView emptyViewWithError:@"今日暂无课程"];
     
 }
 
-#pragma mark : 事件处理
-- (void)caseCurrentDateChange:(NSDate *)date   next:(BOOL)next{
+
+- (void)makeRoomDataWithRoomId:(NSString *)item_id{
     
-    if (next) {
-        NSString *current_year = [NSString stringWithFormat:@"%ld",(self.current_year.integerValue +1)];
-        self.current_year = current_year;
-    }else{
-        NSString *current_year = [NSString stringWithFormat:@"%ld",(self.current_year.integerValue -1)];
-        self.current_year = current_year;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-room-password?id=%@",DOMAINURL_API,item_id];
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil
+                              showHUD:YES showErrorAlert:YES
+              errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                  [weakSelf makeVedioWithResponse:response];
+              } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                  [MBProgressHUD showMessage:NetRequest_noNetWork];
+              }];
+}
+
+- (void)makeVedioWithResponse:(id)response{
+    
+    if (!ResponseIsOK) {
+        [MBProgressHUD showMessage:NetRequest_noNetWork];
+        return;
     }
-    
+    NSDictionary *result = response[@"result"];
+    NSLog(@"result == %@",result); //roomId = 856837414 studentPassword = 000;
+}
+
+
+#pragma mark : 事件处理
+- (void)caseYearData:(NSInteger)year{
+
+    NSString *year_text = [NSString stringWithFormat:@"%ld",year];
+    if ([self.years containsObject:year_text]) return;
+    self.current_year = year_text;
     [self makeTodayOnliveData];
 }
 

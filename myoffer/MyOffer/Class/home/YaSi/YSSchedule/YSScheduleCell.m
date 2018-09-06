@@ -53,7 +53,7 @@
     _item = item;
     
     self.nameLab.text = item.teacherName;
-    self.titleLab.text = item.topic;
+    self.titleLab.text = [NSString stringWithFormat:@"%ld %@",(self.row + 1),item.topic];
     [self.timeBtn setTitle:item.startTime forState:UIControlStateNormal];
     [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
     [self.playBtn setTitle:item.stateName forState:UIControlStateNormal];
@@ -65,7 +65,6 @@
     self.playBtn.hidden = NO;
     self.beforeBtn.hidden = YES;
     if (item.type == YSScheduleVideoStateBefore){
-        
         self.beforeBtn.hidden = NO;
         self.playBtn.hidden = YES;
     }

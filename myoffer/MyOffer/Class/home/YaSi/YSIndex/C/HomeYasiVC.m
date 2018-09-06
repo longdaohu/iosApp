@@ -11,7 +11,6 @@
 #import "YaSiHomeModel.h"
 #import "YSMyCourseVC.h"
 #import "YaSiScheduleVC.h"
-//#import "FSSegmentTitleView.h"
 #import "YasiCatigoryModel.h"
 #import "YasiCatigoryItemModel.h"
 #import "YSScheduleModel.h"
@@ -36,19 +35,15 @@
     
     [super viewWillAppear:animated];
     
-    
     if(self.ysModel){
-        
         if (self.ysModel.login_state != LOGIN && !self.ysModel.living_item) {
             //当用户登录时请求今日直播数据
             [self makeTodayOnliveData];
         }
         self.ysModel.login_state = LOGIN;
-        
         if (self.headerView) {
             [self.YSHeader userLoginChange];
         }
-        
     }
 }
 
@@ -56,11 +51,21 @@
     [super viewDidLoad];
  
     [self makeYSData];
-    
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
     self.height_arr = @[@2000,@800,@1000,@700];
 
+}
+
+- (void)setUser:(MyofferUser *)user{
+    super.user = user;
+    
+    if (self.ysModel) {
+         self.ysModel.user_coin = user.coin;
+    }
+    if (self.YSHeader) {
+        self.YSHeader.score_signed = user.coin;
+    }
 }
 
 - (void)makeYSData{
@@ -73,6 +78,9 @@
     NSArray *banners = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
     self.ysModel.banners = banners;
     self.ysModel.login_state = LOGIN;
+    if (self.user) {
+        self.ysModel.user_coin = self.user.coin;
+    }
     
     [self makeCategoryData];
     [self makeTodayOnliveData];
@@ -96,6 +104,7 @@
     header.actionBlock = ^(YSHomeHeaderActionType type) {
         [weakSelf caseHeaderActionType: type];
     };
+ 
 }
 
 - (UIView *)YSFooter{
@@ -233,7 +242,6 @@
     [self.tableView reloadData];
  
 //    [self makeCatigoryItemDataWithID:self.YSHeader.ysModel.catigory_Package_current._id];
-
 }
 
 //签到
@@ -253,18 +261,23 @@
 - (void)makeUserSignedWithResponse:(id)response{
     
     if (!ResponseIsOK) {
+        
         NSNumber *code = response[@"code"];
          if(code.integerValue == 100){
+             
              self.YSHeader.score_signed = nil;
              NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
              [MBProgressHUD showMessage:msg];
          }
         
+        
     }else{
         
         NSDictionary *result = response[@"result"];
-        self.YSHeader.score_signed = result[@"score"];
+        self.YSHeader.score_signed =  result[@"score"];
         [MBProgressHUD showMessage:@"签到成功"];
+        self.ysModel.user_coin = result[@"score"];
+        
     }
 
 }

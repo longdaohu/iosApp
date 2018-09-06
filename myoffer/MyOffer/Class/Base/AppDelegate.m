@@ -357,8 +357,8 @@ static AppDelegate *__sharedDelegate;
 
 - (NSString *)accessToken {
     
-    return @"8fc021bd-a632-4f00-b27e-c168a7f7014e";
-//    return _accessToken;
+
+    return _accessToken;
 }
 
 - (void)loadSavedToken {
@@ -368,7 +368,7 @@ static AppDelegate *__sharedDelegate;
     if (KDUtilIsStringValid(savedToken)) { 
         
           _accessToken = savedToken;
-       }
+    }
 }
 
 //保存过期登录时间

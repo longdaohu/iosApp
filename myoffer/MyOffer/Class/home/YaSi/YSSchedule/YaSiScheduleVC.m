@@ -68,7 +68,7 @@
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_w, icon_h)];
     iconView.backgroundColor = XCOLOR_RANDOM;
     [header addSubview:iconView];
-    [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg] placeholderImage:nil];
+    [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg] placeholderImage:XImage(@"placeholderImage")];
  
     CGFloat title_y =  icon_h;
     CGFloat title_h =  60;
@@ -97,6 +97,7 @@
     if (!cell) {
         cell = Bundle(@"YSScheduleCell");
     }
+    cell.row = indexPath.row;
     cell.item = self.items[indexPath.row];
 
     return cell;
@@ -106,9 +107,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     YSScheduleModel *item = self.items[indexPath.row];
-
+    [self makeRoomDataWithRoomId:item.item_id];
 }
 
 #pragma mark : 数据加载
@@ -123,6 +123,7 @@
               errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makeUIWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                  weakSelf.tableView.tableHeaderView = [UIView new];
                   [weakSelf.tableView emptyViewWithError:NetRequest_noNetWork];
               }];
 }
@@ -130,17 +131,21 @@
 - (void)makeUIWithResponse:(id)response{
     
     if (!ResponseIsOK) {
+        self.tableView.tableHeaderView = [UIView new];
         [self.tableView emptyViewWithError:NetRequest_noNetWork];
         return;
     }
     
     NSArray *result = response[@"result"];
     if (result.count == 0)  {
+        self.tableView.tableHeaderView = [UIView new];
         [self.tableView emptyViewWithError:NetRequest_NoDATA];
         return;
     }
     self.items = [YSScheduleModel mj_objectArrayWithKeyValuesArray:result];
+    
     [self.tableView reloadData];
+ 
     NSString *count = [NSString stringWithFormat:@" %ld ",result.count];
     self.titleLab.text = [NSString stringWithFormat:@"共%@次课程",count];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.titleLab.text];
@@ -149,8 +154,32 @@
     
 }
 
-#pragma mark : 事件处理
+- (void)makeRoomDataWithRoomId:(NSString *)item_id{
+    
+    
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-room-password?id=%@",DOMAINURL_API,item_id];
+    WeakSelf
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil
+                              showHUD:YES showErrorAlert:YES
+              errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                  [weakSelf makeVedioWithResponse:response];
+      } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+          [MBProgressHUD showMessage:NetRequest_noNetWork];
+      }];
+}
 
+- (void)makeVedioWithResponse:(id)response{
+
+    if (!ResponseIsOK) {
+        [MBProgressHUD showMessage:NetRequest_noNetWork];
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    NSLog(@"result == %@",result); //roomId = 856837414 studentPassword = 000;
+}
+
+#pragma mark : 事件处理
 - (void)caseCalendar{
     
     YSCalendarVC *vc = [[YSCalendarVC alloc] init];

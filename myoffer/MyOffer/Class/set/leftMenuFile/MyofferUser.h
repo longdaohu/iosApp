@@ -16,6 +16,7 @@
 @property(nonatomic,copy)NSString *displayname;
 @property(nonatomic,copy)NSString *phonenumber;
 @property(nonatomic,copy)NSString *access_agent;
+@property(nonatomic,copy)NSString *coin;
 @property(nonatomic,assign)BOOL applied;
 @property(nonatomic,assign)BOOL hasPassword;
 @property(nonatomic,assign)BOOL is_phonenumber_verified;

@@ -9,7 +9,13 @@
 #import "YSScheduleModel.h"
 
 @implementation YSScheduleModel
-
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{
+             @"item_id" : @"id"
+             };
+    
+}
 /*
  过期: 'EXPIRED',
  完成: 'FINISHED',
@@ -89,5 +95,24 @@
             break;
     }
 }
+//过期: 'EXPIRED', 完成: 'FINISHED',进行中: 'IN_PROGRESS',   NOT_START 没开始
+//直播课 17:00-18:30 张三 口语精讲   // 正在直播 老师名 课程名称   //录播课 老师名 课程名称
+- (NSString *)living_text{
+ 
+    NSString *text = @"正在直播";
+    if ([self.status isEqualToString:@"IN_PROGRESS"]) {
+        text = [NSString stringWithFormat:@"正在直播 %@ %@",self.teacherName,self.topic];
+    }else if ([self.status isEqualToString:@"FINISHED"]){
+        text = @"今天没有新课程，复习一下学完的课程吧";
+    }else if ([self.status isEqualToString:@"EXPIRED"]){
+        text = @"今天没有新课程，复习一下学完的课程吧";
+    }else{
+        text = [NSString stringWithFormat:@"直播课 %@ %@",self.teacherName,self.topic];
+    }
+ 
+    return  text;
+}
 
 @end
+
+

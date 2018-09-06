@@ -106,36 +106,36 @@
     
 
     
-//        YasiCourseTextCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseTextCell"];
-//        if (!cell) {
-//            cell =[[YasiCourseTextCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseTextCell"];
-//        }
+
     
      YSCourseModel *item = self.groupModel.curent_items[indexPath.row];
  
     if (self.groupModel.type == YSCourseGroupTypeDefault) {
+        
+        if (item.classId.length == 0) {
+            
+            YasiCourseTextCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseTextCell"];
+            if (!cell) {
+                cell =[[YasiCourseTextCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseTextCell"];
+            }
+            
+            return cell;
+        }
         
         YasiCourseOnLivingCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseOnLivingCell"];
         if (!cell) {
             cell =[[YasiCourseOnLivingCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseOnLivingCell"];
         }
         cell.item = item;
-//        cell.actionBlock = ^(YSCourseModel *item) {
-//
-//            [weakSelf caseToClass:item];
-//        };
-        
         return cell;
-
-    }else{
+     }
 
         YasiCourseCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseCell"];
         if (!cell) {
                 cell =[[YasiCourseCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseCell"];
             }
         return cell;
-    }
-    
+ 
 }
 
 
@@ -176,11 +176,9 @@
     
     NSArray *result = response[@"result"];
     if (result.count == 0)  {
-
         [self.tableView emptyViewWithError:NetRequest_NoDATA];
         return;
     }
-    
     self.groupModel.items = [YSCourseModel mj_objectArrayWithKeyValuesArray:result];
     [self.tableView reloadData];
 }
@@ -202,7 +200,7 @@
    }else{
        [self.tableView emptyViewWithHiden:YES];
    }
-    
+ 
 }
 
 - (void)caseCalendar{

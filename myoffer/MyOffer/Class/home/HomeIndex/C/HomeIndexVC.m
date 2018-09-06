@@ -7,18 +7,18 @@
 //
 
 #import "HomeIndexVC.h"
-#import "HomeMenuBarView.h"
 #import "HomeRecommendVC.h"
 #import "HomeApplicationVC.h"
 #import "HomeFeeVC.h"
+#import "IntroViewController.h"
+#import "HomeYasiVC.h"
 //#import "HomeRoomVC.h"
+#import "HomeMenuBarView.h"
 #import "MyofferUpdateView.h"
 #import <AdSupport/AdSupport.h>
 #import "NSString+MD5.h"
 #import "CatigaryScrollView.h"
-#import "IntroViewController.h"
 #import "HomeIndexModel.h"
-#import "HomeYasiVC.h"
 
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
@@ -31,9 +31,10 @@
 @property(nonatomic,strong)NSArray *childViewControllersArray;
 @property (assign, nonatomic)BOOL  hadShowNeWVersion;
 @property(nonatomic,strong)NSArray *groups;
+@property(nonatomic,strong)HomeYasiVC *ysVC;
+@property(nonatomic,strong)MyofferUser *user;
 
 @end
-
 
 @implementation HomeIndexVC
 
@@ -118,12 +119,17 @@
     
     
     NSMutableArray *children = [NSMutableArray array];
+    
     for (HomeIndexModel *itemModel in self.groups) {
  
         UIViewController *vc  = [[itemModel.destVC  alloc] init];
         [children addObject:vc];
         [self addChildViewController:vc];
-
+    
+        if ([vc isKindOfClass:[HomeYasiVC class]]){
+            self.ysVC = (HomeYasiVC *)vc;
+         }
+ 
         if (![vc isKindOfClass:[HomeFeeVC class]]) continue;
         
         if (itemModel.type == HomeIndexTypeFee) {
@@ -254,8 +260,8 @@
         
     }else if (indexModel.type == HomeIndexTypeYasi){
         
-//        HomeFeeVC *room = (HomeFeeVC *)vc;
-//        [room toSetTabBarhidden];
+        HomeYasiVC *ys = (HomeYasiVC *)vc;
+        [ys toSetTabBarhidden];
         
     }else{
         
@@ -320,12 +326,25 @@
 //判断用户是否登录且登录用户手机号码是否为空，如果为空用户退出登录；
 -(void)userInformation
 {
-    if (!LOGIN) return;
+    if (!LOGIN){
+        
+        self.ysVC.user = nil;
+        return;
+    }
+    
     WeakSelf
     [self startAPIRequestWithSelector:kAPISelectorAccountInfo parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+ 
         MyofferUser *user = [MyofferUser mj_objectWithKeyValues:response];
+        self.user = user;
+        if (self.ysVC) {
+            self.ysVC.user = user;
+        }
+        
         if (0 == user.phonenumber.length) [weakSelf caseBackAndLogout];
+        
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        
     }];
 }
 

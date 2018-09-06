@@ -12,6 +12,8 @@
 @class YasiCatigoryItemModel;
 
 @interface YaSiHomeModel : NSObject
+@property(nonatomic,copy)NSString *user_coin;
+@property(nonatomic,assign)NSInteger coin;
 @property(nonatomic,assign)BOOL login_state;
 @property(nonatomic,strong)YSScheduleModel *living_item;
 @property(nonatomic,strong)NSArray *banners;
@@ -36,9 +38,11 @@
 @property(nonatomic,assign)CGRect catigory_box_frame;
 @property(nonatomic,assign)CGRect catigory_collectView_frame;
 @property(nonatomic,assign)CGRect cati_clt_line_frame;
+@property(nonatomic,assign)CGRect cati_clct_bottom_line_frame;
+@property(nonatomic,assign)CGRect cati_active_frame;
 @property(nonatomic,assign)CGRect price_cell_frame;
 
-@property(nonatomic,assign)CGRect bgBtn_frame;
+@property(nonatomic,assign)CGRect livingBtn_frame;
 @property(nonatomic,assign)CGRect clockBtn_frame;
 @property(nonatomic,assign)CGRect onlineLab_frame;
 @property(nonatomic,assign)CGRect bottomView_frame;

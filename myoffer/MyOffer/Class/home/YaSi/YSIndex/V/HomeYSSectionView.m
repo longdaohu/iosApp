@@ -10,6 +10,7 @@
 
 @interface HomeYSSectionView ()
 @property(nonatomic,strong)UIButton *last_button;
+@property(nonatomic,strong)UIView *bottom_line;
 @property(nonatomic,strong)NSArray *Btn_items;
 @property(nonatomic,assign)CGFloat total_width;
 
@@ -59,6 +60,11 @@
         
         self.total_width = total_width;
         
+        
+        UIView *line = [UIView new];
+        self.bottom_line = line;
+        line.backgroundColor = XCOLOR_line;
+        [self addSubview:line];
     }
     
     return self;
@@ -88,6 +94,8 @@
             item_x += (sender.mj_w + item_padding);
         }
     }
+    
+    self.bottom_line.frame = CGRectMake(20, content_size.height - 1, content_size.width - 40, 1);
 }
 
 

@@ -37,6 +37,13 @@
     return self;
 }
 
+- (void)setItem:(YSCourseModel *)item{
+    
+    super.item = item;
+    self.titleLab.text = item.name;
+    self.descLab.text = item.label;
+}
+
 
 - (void)layoutSubviews{
     

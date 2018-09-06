@@ -51,6 +51,10 @@
     return self.accountInfo[@"is_email_verified"];
 }
 
+- (NSString *)coin{
+    
+    return [NSString stringWithFormat:@"%@",self.accountInfo[@"coin"]];
+}
 
 - (void)userLogout{
     
@@ -99,6 +103,7 @@ static id UserSingle = nil;
     
     return UserSingle;
 }
+
 //自定义初始化方法，本例中只有name这一属性
 - (instancetype)init
 {
@@ -121,9 +126,6 @@ static id UserSingle = nil;
     
     return self;
 }
-
-
-
 
 
 

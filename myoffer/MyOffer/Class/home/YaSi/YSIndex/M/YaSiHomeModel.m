@@ -70,22 +70,8 @@
     CGFloat bg_btn_y = clock_btn_y + 6;
     CGFloat bg_btn_h = 31;
     CGFloat bg_btn_w = max_width - bg_btn_x - self.left_margin;
-    self.bgBtn_frame = CGRectMake(bg_btn_x, bg_btn_y, bg_btn_w, bg_btn_h);
-    
-    CGFloat onlineLab_x = bg_btn_x + clock_btn_w;
-    CGFloat onlineLab_h = bg_btn_h;
-    CGFloat onlineLab_y = bg_btn_y;
-    CGFloat onlineLab_w =  max_width - onlineLab_x - self.left_margin;
-    self.onlineLab_frame = CGRectMake(onlineLab_x, onlineLab_y, onlineLab_w, onlineLab_h);
-    
-    if(!self.living_item){
-        self.bgBtn_frame = CGRectZero;
-        self.clockBtn_frame = CGRectZero;
-        self.onlineLab_frame = CGRectZero;
-    }else{
-        max_y = CGRectGetMaxY(self.bgBtn_frame);
-    }
-    
+    self.livingBtn_frame = CGRectMake(bg_btn_x, bg_btn_y, bg_btn_w, bg_btn_h);
+    max_y = CGRectGetMaxY(self.livingBtn_frame);
     //--------------------- 直播
     
     
@@ -105,16 +91,16 @@
     
     CGFloat header_height =  max_y;
     self.header_frame = CGRectMake(0, 0, XSCREEN_WIDTH, header_height);
- 
 
 }
+
 
 - (void)makeCatigoryBoxFrame{
     
     CGFloat box_x = 0;
     CGFloat box_y = CGRectGetMaxY(self.banner_box_frame) + 30;
     if (!self.banners) {
-        box_y = CGRectGetMaxY(self.bgBtn_frame) + 30;
+        box_y = CGRectGetMaxY(self.livingBtn_frame) + 30;
     }
     if (!self.banners && !self.living_item) {
         box_y = CGRectGetMaxY(self.ysBtn_frame) + 30;
@@ -129,10 +115,9 @@
     CGFloat title_h = 25;
     NSMutableArray *titles_temp = [NSMutableArray array];
     for (NSInteger index = 0; index < self.catigory_titles.count; index++) {
-
         NSString *title = self.catigory_titles[index];
         CGSize title_size =[title stringWithfontSize:self.catigory_title_fontSize];
-        title_w = title_size.width + 6;
+        title_w = title_size.width+3;
         CGRect title_frame = CGRectMake(title_x, title_y, title_w, title_h);
         [titles_temp addObject:[NSValue valueWithCGRect:title_frame]];
         title_x += (padding + title_w);
@@ -156,11 +141,29 @@
     CGFloat line_h = 1;
     self.line_banner_frame = CGRectMake(line_x, line_y, line_w, line_h);
     
+    CGFloat active_x = 0;
+    CGFloat active_w = 0;
+    if (titleFrames.count > 0) {
+        NSValue *value = titleFrames.firstObject;
+        active_w =  value.CGRectValue.size.width;
+        active_x =  value.CGRectValue.origin.x;
+    }
+    CGFloat active_h = 2;
+    CGFloat active_y =  line_y - active_h;
+    self.cati_active_frame = CGRectMake(active_x, active_y, active_w, active_h);
+    
+    
     CGFloat ct_cv_x = 0;
     CGFloat ct_cv_y = line_y + line_h;
     CGFloat ct_cv_w = box_w;
     CGFloat ct_cv_h = 91;
     self.catigory_collectView_frame = CGRectMake(ct_cv_x, ct_cv_y, ct_cv_w, ct_cv_h);
+    
+    CGFloat ct_cv_bt_line_x = 0;
+    CGFloat ct_cv_bt_line_y = ct_cv_y + ct_cv_h;
+    CGFloat ct_cv_bt_line_w = box_w;
+    CGFloat ct_cv_bt_line_h = 1;
+    self.cati_clct_bottom_line_frame = CGRectMake(ct_cv_bt_line_x, ct_cv_bt_line_y, ct_cv_bt_line_w, ct_cv_bt_line_h);
     
     CGFloat ct_cv_line_x = 0;
     CGFloat ct_cv_line_y = ct_cv_y + ct_cv_h;
@@ -179,14 +182,11 @@
     
 }
 
-
 - (void)makeBannerBoxFrame{
 
     CGFloat banner_box_x = 0;
-    CGFloat banner_box_y = CGRectGetMaxY(self.bgBtn_frame) + 20;
-    if (!self.living_item) {
-       banner_box_y = CGRectGetMaxY(self.ysBtn_frame) + 20;
-    }
+    CGFloat banner_box_y = CGRectGetMaxY(self.livingBtn_frame) + 20;
+
     CGFloat banner_box_w = XSCREEN_WIDTH;
     CGFloat banner_box_h = 0;
     
@@ -249,6 +249,16 @@
     
      return item;
 }
+
+- (NSInteger)coin{
+    
+    if (LOGIN && self.user_coin.length > 0) {
+        return  self.user_coin.integerValue;
+    }
+    
+    return 0;
+}
+
 
 
 @end

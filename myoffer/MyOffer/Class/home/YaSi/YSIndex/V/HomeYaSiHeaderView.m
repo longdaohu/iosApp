@@ -19,27 +19,23 @@
 
 @interface HomeYaSiHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property(nonatomic,strong)UIButton *yasiBtn;
-@property(nonatomic,strong)UIButton *signedBtn;
-@property(nonatomic,strong)UILabel *signTitleLab;
-@property(nonatomic,strong)UIButton *punchBtn;
-@property(nonatomic,strong)UIButton *punchTitleLab;
-@property(nonatomic,strong)UIImageView *clockBtn;
-@property(nonatomic,strong)UIButton *bgBtn;
-@property(nonatomic,strong)UILabel *onlineLab;
+@property(nonatomic,strong)UIButton *YS_Test_Btn; //雅思测评
+@property(nonatomic,strong)UIButton *signedBtn;//签到
+@property(nonatomic,strong)UILabel *signTitleLab;//签到提示
+@property(nonatomic,strong)UIImageView *clockBtn;//之前是一个闹钟的LOGO
+@property(nonatomic,strong)UIButton *livingBtn; //直播课按钮
 
-@property(nonatomic,strong)UIView *bottomView;
-@property(nonatomic,strong)UIView *banner_box;
-@property(nonatomic,strong)UIView *catigory_box;
-@property(nonatomic,strong)UICollectionView *bannerView;
-@property(nonatomic,strong)UICollectionView *catigoryView;
-@property(nonatomic,strong)UIView *line_banner;
-
-@property(nonatomic,strong)UICollectionViewFlowLayout *flow;
-@property(nonatomic,strong)UICollectionViewFlowLayout *flow_cg;
+@property(nonatomic,strong)UIView *banner_box;//轮播图盒子
+@property(nonatomic,strong)UICollectionViewFlowLayout *flow_banner;
+@property(nonatomic,strong)UICollectionView *bannerView;//轮播图
+@property(nonatomic,strong)UIView *catigory_box;//分类盒子
+@property(nonatomic,strong)UICollectionView *catigoryView;//分类详情
+@property(nonatomic,strong)UIView *activeView;
+@property(nonatomic,strong)UIView *line_catigory; //分割线
+@property(nonatomic,strong)UIView *catigory_box_line; //分割线
 @property(nonatomic,strong)PriceCellView *priceCell;
-@property(nonatomic,strong)NSArray *catigory_buttones;
-@property(nonatomic,strong)UIImageView *bgImageView;
+@property(nonatomic,strong)NSArray *catigory_buttones; //分类按钮数组，预添加，减少临时
+@property(nonatomic,strong)UIImageView *bgImageView; //背景图片
 
 @end
 
@@ -71,7 +67,7 @@
     [ysBtn setTitle:@"雅思\n评测" forState:UIControlStateNormal];
     [ysBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
     [self addSubview:ysBtn];
-    self.yasiBtn = ysBtn;
+    self.YS_Test_Btn = ysBtn;
     [ysBtn addTarget:self action:@selector(caseLogo:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *signedBtn = [UIButton new];
@@ -96,28 +92,26 @@
     
     UIButton *bgBtn = [UIButton new];
     [self addSubview:bgBtn];
-    self.bgBtn = bgBtn;
+    self.livingBtn = bgBtn;
     bgBtn.backgroundColor = XCOLOR(0, 0, 0, 0.3);
     [bgBtn addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
     bgBtn.layer.cornerRadius = 15.5;
-    
+    bgBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 25);
+    bgBtn.titleLabel.font = XFONT(12);
+    bgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    bgBtn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+
     UIImageView *clockBtn = [UIImageView new];
     [self addSubview:clockBtn];
     self.clockBtn = clockBtn;
     clockBtn.image = XImage(@"ys_heike_logo");
-    
-    UILabel *onlineLab = [UILabel new];
-    onlineLab.font = XFONT(12);
-    onlineLab.textColor = XCOLOR_WHITE;
-    self.onlineLab = onlineLab;
-    [self addSubview:onlineLab];
  
     UIView *banner_box = [UIView new];
     [self addSubview:banner_box];
     self.banner_box = banner_box;
  
     YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
-    self.flow = flow;
+    self.flow_banner = flow;
     UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
     bannerView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
     [banner_box addSubview:bannerView];
@@ -134,28 +128,37 @@
     [self addSubview:catigory_box];
     self.catigory_box = catigory_box;
     
-    UIView *line_banner = [UIView new];
-    line_banner.backgroundColor = XCOLOR_line;
-    [catigory_box addSubview:line_banner];
-    self.line_banner = line_banner;
+    UIView *line_catigory = [UIView new];
+    line_catigory.backgroundColor = XCOLOR_line;
+    [catigory_box addSubview:line_catigory];
+    self.line_catigory = line_catigory;
+    
+    UIView *activeView = [UIView new];
+    activeView.backgroundColor = XCOLOR_LIGHTBLUE;
+    [catigory_box addSubview:activeView];
+    self.activeView = activeView;
+    activeView.layer.cornerRadius = 1;
     
     UICollectionViewFlowLayout *flow_cg = [[UICollectionViewFlowLayout alloc] init];
-    self.flow_cg = flow_cg;
-    self.flow_cg.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
-    self.flow_cg.minimumLineSpacing = 10;
-    self.flow_cg.minimumInteritemSpacing = 10;
-    self.flow_cg.itemSize = CGSizeMake(135, 90);
+    flow_cg.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
+    flow_cg.minimumLineSpacing = 10;
+    flow_cg.minimumInteritemSpacing = 10;
+    flow_cg.itemSize = CGSizeMake(135, 90);
     UICollectionView *catigoryView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow_cg];
     [catigoryView registerNib:[UINib nibWithNibName:NSStringFromClass([YsCatigoryItemCell class] ) bundle:nil] forCellWithReuseIdentifier:@"YsCatigoryItemCell"];
     self.catigoryView = catigoryView;
     catigoryView.backgroundColor = XCOLOR_CLEAR;
-
     catigoryView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
     catigoryView.dataSource = self;
     catigoryView.delegate = self;
     [catigory_box addSubview:catigoryView];
     catigory_box.clipsToBounds = YES;
-
+    
+    UIView *catigory_box_line  = [UIView new];
+    catigory_box_line.backgroundColor = XCOLOR_line;
+    [catigory_box addSubview:catigory_box_line];
+    self.catigory_box_line = catigory_box_line;
+ 
     PriceCellView *priceCell = Bundle(@"PriceCellView");
     priceCell.backgroundColor = XCOLOR_CLEAR;
     self.priceCell = priceCell;
@@ -167,6 +170,7 @@
     
     NSMutableArray *btn_tmp = [NSMutableArray array];
     for (NSInteger index = 0; index < 5; index++) {
+        
         UIButton *sender = [UIButton new];
         sender.titleLabel.font = [UIFont boldSystemFontOfSize:18];
         [sender setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
@@ -196,39 +200,40 @@
         self.signedBtn.enabled = YES;
     }
     
-    
 }
-
-//- (void)setUserSigned:(BOOL)userSigned{
-//
-//    _userSigned = userSigned;
-//
-//
-//}
 
 - (void)setYsModel:(YaSiHomeModel *)ysModel{
     
     _ysModel = ysModel;
     
-    self.bottomView.frame = ysModel.bottomView_frame;
     
-    self.yasiBtn.frame = ysModel.ysBtn_frame;
+    self.YS_Test_Btn.frame = ysModel.ysBtn_frame;
     self.signedBtn.frame = ysModel.signedBtn_frame;
     self.signTitleLab.frame = ysModel.signTitle_frame;
     self.clockBtn.frame = ysModel.clockBtn_frame;
-    self.bgBtn.frame = ysModel.bgBtn_frame;
-    self.onlineLab.frame = ysModel.onlineLab_frame;
-    self.line_banner.frame = ysModel.line_banner_frame;
+    self.livingBtn.frame = ysModel.livingBtn_frame;
+    self.line_catigory.frame = ysModel.line_banner_frame;
     self.catigory_box.frame = ysModel.catigory_box_frame;
+    self.activeView.frame = ysModel.cati_active_frame;
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
     self.priceCell.frame = ysModel.price_cell_frame;
-
-    self.bannerView.frame = ysModel.bannerView_frame;
-    self.flow.itemSize = ysModel.header_banner_size;
-    self.banner_box.frame = ysModel.banner_box_frame;
- 
-    self.onlineLab.text = [NSString stringWithFormat:@"直播课 %@ %@ ",ysModel.living_item.teacherName,ysModel.living_item.topic];
+    self.catigory_box_line.frame = ysModel.cati_clct_bottom_line_frame;
     
+    self.bannerView.frame = ysModel.bannerView_frame;
+    self.flow_banner.itemSize = ysModel.header_banner_size;
+    self.banner_box.frame = ysModel.banner_box_frame;
+    
+    if (ysModel.coin > 0) {
+        self.score_signed = [NSString stringWithFormat:@"%ld",ysModel.coin];
+    }else{
+        self.score_signed = nil;
+    }
+    
+    if (!ysModel.living_item) {
+        [self.livingBtn setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
+    }else{
+        [self.livingBtn setTitle:ysModel.living_item.living_text forState:UIControlStateNormal];
+    }
     
     NSInteger celles_count = [self.catigoryView numberOfItemsInSection:0];
     if (celles_count > 0) {
@@ -307,7 +312,6 @@
     if (self.actionBlock) {
         self.actionBlock(YSHomeHeaderActionTypeValueChange);
     }
-    
 }
 
 - (void)caseBanner:(NSString *)path{
@@ -323,7 +327,6 @@
     if (self.actionBlock) {
         self.actionBlock(YSHomeHeaderActionTypeBuy);
     }
-    
 }
 
 - (void)caseLogo:(UIButton *)sender{
@@ -353,6 +356,13 @@
         item.enabled = true;
     }
     sender.enabled = NO;
+    CGRect rect = self.activeView.frame;
+    rect.origin.x = sender.mj_x;
+    rect.size.width = sender.mj_w;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.activeView.frame = rect;
+    }];
+
     self.ysModel.catigory_title_selected_index = sender.tag;
     self.ysModel.catigoryPackage_item_selected_index = 0;
     [self.catigoryView reloadData];
@@ -372,8 +382,10 @@
     
     
     if (!LOGIN){
+        
         self.signedBtn.enabled = YES;
         self.signedBtn.backgroundColor = XCOLOR_WHITE;
+        self.score_signed = nil;
     }
     
 }

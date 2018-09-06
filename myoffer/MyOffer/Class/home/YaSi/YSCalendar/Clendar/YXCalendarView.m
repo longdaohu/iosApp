@@ -335,13 +335,11 @@ static CGFloat const weeksH = 50;       //周高度
 //MARK: - scrollViewMethod
 - (void)scrollToCenter {
     
+    [self goToNextYear:(_scrollV.mj_offsetX > ViewW * 0.5)];
     _scrollV.contentOffset = CGPointMake(ViewW, 0);
-    
     _leftView.eventArray = self.eventArray;
     _rightView.eventArray = self.eventArray;
     _middleView.eventArray = self.eventArray;
-    
-    [self callBack];
 }
 
 - (void)lastWeek{
@@ -354,18 +352,20 @@ static CGFloat const weeksH = 50;       //周高度
     [self.scrollV setContentOffset:CGPointMake(self.scrollV.frame.size.width * 2, 0) animated:YES];
 }
 
-- (void)callBack{
-    
-    
-    if([self.yearMonthL.text containsString:@"01月"]){
+- (void)goToNextYear:(BOOL)next{
+ 
+    if([self.yearMonthL.text containsString:@"01月"] && !next){
+        
         if (self.actionBlock) {
-            self.actionBlock(false,self.currentDate);
+            NSInteger pre = self.currentDate.year - 1;
+            self.actionBlock(pre);
         }
     }
     
-    if([self.yearMonthL.text containsString:@"12月"]){
+    if([self.yearMonthL.text containsString:@"12月"] && next){
         if (self.actionBlock) {
-            self.actionBlock(true,self.currentDate);
+            NSInteger next = self.currentDate.year + 1;
+            self.actionBlock(next);
         }
     }
 }

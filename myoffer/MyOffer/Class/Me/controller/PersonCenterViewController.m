@@ -30,6 +30,7 @@
 #import "MQChatViewManager.h"
 #import "MeiqiaServiceCall.h"
 #import "RewardVC.h"
+#import "YSMyCourseVC.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface PersonCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -110,6 +111,9 @@
         XWGJAbout *wdsq = [XWGJAbout cellWithLogo:@"p_wdsq" title:@"我的申请" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         wdsq.action = NSStringFromSelector(@selector(caseApplyStutasCenter));
         
+        XWGJAbout *mycourse = [XWGJAbout cellWithLogo:@"ys_course" title:@"我的课程" sub_title:nil accessory_title:nil accessory_icon:nil] ;
+        mycourse.action = NSStringFromSelector(@selector(caseMycourse));
+        
         XWGJAbout *znpp = [XWGJAbout cellWithLogo:@"p_mbti" title:@"DIY申请" sub_title:nil accessory_title:nil accessory_icon:nil] ;
         znpp.action = NSStringFromSelector(@selector(caseMyApply));
         
@@ -134,10 +138,11 @@
   
     
         NSMutableArray *z_group = [NSMutableArray arrayWithObjects:wdsq,nil];
+        NSMutableArray *c_group = [NSMutableArray arrayWithObjects:mycourse,nil];
         NSMutableArray *a_group = [NSMutableArray arrayWithObjects:znpp, mbti,nil];
         NSMutableArray *b_group = [NSMutableArray arrayWithObjects:invitation,reward,service, call,question,nil];
         
-        [_groups addObjectsFromArray:@[z_group,a_group,b_group]];
+        [_groups addObjectsFromArray:@[z_group,c_group,a_group,b_group]];
     }
     
     return _groups;
@@ -458,9 +463,8 @@
     }else{
         [self pushWithVC:NSStringFromClass([PipeiEditViewController class])];
     }
-    
-
 }
+
 //跳转收藏
 - (void)caseFave{
     
@@ -771,6 +775,16 @@
     }
     
     self.currentType = CurrentClickTypeDefault;
+}
+
+//我的课程
+- (void)caseMycourse{
+    
+    if (LOGIN) {
+        YSMyCourseVC *vc = [[YSMyCourseVC alloc] init];
+        PushToViewController(vc);
+    }
+    RequireLogin;
 }
 
 

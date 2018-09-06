@@ -52,7 +52,7 @@
 - (void)setProgress:(CGFloat)progress{
     _progress = progress;
  
-    NSInteger count = (NSInteger)progress * 100;
+    NSInteger count = (NSInteger)(progress * 100);
     self.titleLab.text = [NSString stringWithFormat:@"%ld%%",count];
     self.progressLayer.strokeEnd =  progress;
 }
