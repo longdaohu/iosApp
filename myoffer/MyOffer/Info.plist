@@ -153,7 +153,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>myOffer需要您同意访问相机，才能拍照并上传头像</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>myOffer 需要访问您的麦克风！</string>
+	<string>myOffer 需要访问您的麦克风！教室中需要发送语音消息及发言您是否允许打开麦克风</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>myOffer需要您同意访问相册，才能查看照片或保存图片</string>
 	<key>NSPhotoLibraryUsageDescription</key>

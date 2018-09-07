@@ -143,7 +143,7 @@
         up_y = (CGRectGetMaxY(self.current_cell.frame) + keyboardEndFrame.size.height - XSCREEN_HEIGHT);
         if(up_y < - 64)  up_y = - 64;
     }
-    self.view.top = up ?  -up_y : 64;
+    self.view.mj_y = up ?  -up_y : 64;
     
     [self.view layoutSubviews];
     

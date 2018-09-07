@@ -104,9 +104,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-
-    
-
+ 
     
      YSCourseModel *item = self.groupModel.curent_items[indexPath.row];
  
@@ -118,7 +116,8 @@
             if (!cell) {
                 cell =[[YasiCourseTextCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseTextCell"];
             }
-            
+            cell.item = item;
+
             return cell;
         }
         
@@ -134,6 +133,7 @@
         if (!cell) {
                 cell =[[YasiCourseCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseCell"];
             }
+        cell.item = item;
         return cell;
  
 }
@@ -154,7 +154,6 @@
 - (void)makeCoursesData{
     
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses",DOMAINURL_API];
-    
     WeakSelf
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil

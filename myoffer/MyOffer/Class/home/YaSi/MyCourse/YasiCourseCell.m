@@ -42,7 +42,6 @@
         [playBtn setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateNormal];
         [playBtn setBackgroundImage:XImage(@"button_blue_highlight") forState:UIControlStateHighlighted];
         [playBtn setBackgroundImage:XImage(@"button_light_unable") forState:UIControlStateDisabled];
-//        [playBtn addTarget:self action:@selector(casePlay:) forControlEvents:UIControlEventTouchUpInside];
         playBtn.userInteractionEnabled = NO;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -51,13 +50,7 @@
     return self;
 }
 
-//- (void)casePlay:(UIButton *)sender{
-//
-//    if (self.actionBlock) {
-//
-//        self.actionBlock(self.item);
-//    }
-//}
+
 
 - (void)setItem:(YSCourseModel *)item{
     _item = item;

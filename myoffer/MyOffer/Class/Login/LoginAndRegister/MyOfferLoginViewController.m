@@ -811,7 +811,7 @@ typedef NS_ENUM(NSInteger,cellViewType){
     if(up && (XSCREEN_HEIGHT <= 480 )){
         up_y = -64;
     }
-    self.baseView.top = up ?  up_y : 0;
+    self.baseView.mj_y = up ?  up_y : 0;
     [self.view layoutSubviews];
     [UIView commitAnimations];
     

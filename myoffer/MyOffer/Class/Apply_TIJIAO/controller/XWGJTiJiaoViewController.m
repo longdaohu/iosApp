@@ -991,7 +991,7 @@ typedef enum {
 
      [UIView animateWithDuration:ANIMATION_DUATION animations:^{
          
-         self.upgateVC.view.top = 0;
+         self.upgateVC.view.mj_y = 0;
     }];
     
     self.title = @"申请信息";

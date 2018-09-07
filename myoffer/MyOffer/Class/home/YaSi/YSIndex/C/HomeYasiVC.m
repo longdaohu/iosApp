@@ -314,6 +314,10 @@
 - (void)caseBuy{
     
     NSLog(@"caseBuy   %@",self.ysModel.catigory_Package_current.name);
+    
+//    CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
+//    vc.itemFrame =  self.service_Frame;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)caseLive{

@@ -9,5 +9,5 @@ target 'MyOffer' do
     pod 'JPush'
     pod 'Meiqia'
     pod 'SocketRocket'
-
+    pod 'SSZipArchive'
 end

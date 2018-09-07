@@ -137,18 +137,18 @@
  
     if (icon_to_nav_height >= 0) {
         //大于0的时候
-        self.rightView.top =  XNAV_HEIGHT;
+        self.rightView.mj_y =  XNAV_HEIGHT;
         
         return;
     }
  //小于等于 0 的时候  图标起过导航栏底部时
     if (icon_to_nav_height <= - 44) {
         
-        self.rightView.top = XStatusBar_Height;
+        self.rightView.mj_y = XStatusBar_Height;
         
     }else{
         
-        self.rightView.top =   (XNAV_HEIGHT + icon_to_nav_height);
+        self.rightView.mj_y =   (XNAV_HEIGHT + icon_to_nav_height);
         
     }
     

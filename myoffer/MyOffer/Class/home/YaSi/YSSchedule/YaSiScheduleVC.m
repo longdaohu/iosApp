@@ -12,12 +12,13 @@
 #import "YSCalendarVC.h"
 #import "YSScheduleModel.h"
 #import "YSUserCommentView.h"
+#import "TKEduClassRoom.h"
 
-@interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource,TKEduRoomDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)UILabel *titleLab;
-
+@property(nonatomic,strong)YSScheduleModel *vedio_selected;
 @end
 
 @implementation YaSiScheduleVC
@@ -37,7 +38,18 @@
     [super viewDidLoad];
     
     [self makeUI];
+    [self makeTKInitialization];
     [self makeCoursesData];
+}
+
+//初始化拓课
+- (void)makeTKInitialization{
+    
+    [TXSakuraManager registerLocalSakuraWithNames:@[TKDefaultSkin,TKBlackSkin, TKOriginSkin]];
+    //切换到默认主题
+    NSString *name = [TXSakuraManager getSakuraCurrentName];
+    NSInteger type = [TXSakuraManager getSakuraCurrentType];
+    [TXSakuraManager shiftSakuraWithName:name type:type];
 }
 
 - (void)makeUI{
@@ -108,6 +120,15 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YSScheduleModel *item = self.items[indexPath.row];
+    if (item.type == YSScheduleVideoStateBefore) {
+         return;
+    }
+    if (item.type == YSScheduleVideoStateDefault) {
+        
+        [MBProgressHUD showMessage:@"课程已过期"];
+        return;
+    }
+    self.vedio_selected = item;
     [self makeRoomDataWithRoomId:item.item_id];
 }
 
@@ -125,7 +146,7 @@
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
                   weakSelf.tableView.tableHeaderView = [UIView new];
                   [weakSelf.tableView emptyViewWithError:NetRequest_noNetWork];
-              }];
+     }];
 }
 
 - (void)makeUIWithResponse:(id)response{
@@ -175,8 +196,65 @@
         [MBProgressHUD showMessage:NetRequest_noNetWork];
         return;
     }
+    
     NSDictionary *result = response[@"result"];
-    NSLog(@"result == %@",result); //roomId = 856837414 studentPassword = 000;
+    NSString *roomId = result[@"roomId"];
+//    if (self.vedio_selected.type == YSScheduleVideoStateLiving) {
+        NSString *studentPassword = result[@"studentPassword"];
+        roomId = @"429790210";
+        studentPassword = @"9490";
+        //                                @"host"    :sHost,
+        //                                @"port"    :sPort,
+        //                                //@"domain"   :sDomain,
+        //                                @"userrole":@(_role),
+        NSDictionary *tDict = @{
+                                @"serial"  :roomId,
+                                @"host"    :@"global.talk-cloud.net",
+                                @"port"    :@"80",
+                                //@"userid"  : @"1111",//可选
+                                @"password":studentPassword,//可选
+                                @"clientType":@(3),
+                                @"nickname":@"正在测试中徐金辉"
+                                };
+        [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
+        
+//    }
+
+    return;
+    if (self.vedio_selected.type == YSScheduleVideoStateAfter) {
+        [self makeRecordpathWithRoom:roomId];
+    }
+}
+
+- (void)makeRecordpathWithRoom:(NSString *)room{
+ 
+    room = @"856837414";
+    NSString *path = [NSString stringWithFormat:@"GET http://global.talk-cloud.net/WebAPI/getrecordlist/key/VGSeGEq2TOmuht7I/serial/%@",room];
+    WeakSelf
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+        [weakSelf updateRecordpathWithResponse:response room:room];
+    }];
+    
+}
+
+- (void)updateRecordpathWithResponse:(id)response room:(NSString *)room{
+    
+    NSArray *recordlist = [response valueForKey:@"recordlist"];
+    if (recordlist.count > 0) {
+        NSDictionary *record = recordlist.firstObject;
+        NSString *recordpath = record[@"recordpath"];
+        NSString *path = [NSString stringWithFormat:@"global.talk-cloud.net:8081%@",recordpath];
+        NSDictionary *td= @{
+                            @"serial"  : room,
+                            @"path" : path,//@"global.talk-cloud.net:8081/d817d3b7-d0ab-447b-9b0f-37147d280943-856837414/",
+                            @"playback":@(YES),
+                            @"type":@"3",//房间类型 0 1v1 3 1v多 10直播 11伪直播 12 旁路直播
+                            @"clientType" :@(3),
+                            };
+        [TKEduClassRoom joinPlaybackRoomWithParamDic:td ViewController:self Delegate:self isFromWeb:YES];
+        
+        return;
+    }
 }
 
 #pragma mark : 事件处理

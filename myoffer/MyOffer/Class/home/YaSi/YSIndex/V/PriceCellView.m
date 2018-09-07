@@ -35,7 +35,7 @@
     _item = item;
     
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
-    self.discountLab.text = [NSString stringWithFormat:@"￥%@",item.old_price];
+    self.discountLab.text = [NSString stringWithFormat:@"￥%@",item.display_price];
     
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:self.discountLab.text];
     [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, self.discountLab.text.length)];

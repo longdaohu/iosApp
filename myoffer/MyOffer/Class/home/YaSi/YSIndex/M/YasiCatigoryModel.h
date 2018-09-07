@@ -10,10 +10,12 @@
 
 @interface YasiCatigoryModel : NSObject
 @property(nonatomic,strong)NSDictionary *item;
+
 @property(nonatomic,copy)NSString *_id ;
 @property(nonatomic,copy)NSString *name ;
-@property(nonatomic,copy)NSString *sort ;
-@property(nonatomic,strong)NSArray *servicePackage ;
+@property(nonatomic,copy)NSString *rank ;
+@property(nonatomic,strong)NSArray *skus ;
+@property(nonatomic,strong)NSArray *servicePackage;
 
 @end
 

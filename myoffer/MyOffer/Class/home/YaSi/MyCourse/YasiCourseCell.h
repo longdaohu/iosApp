@@ -16,6 +16,4 @@
 @property(nonatomic,strong)UIButton *dateBtn;
 @property(nonatomic,strong)UIButton *playBtn;
 
-//@property(nonatomic,copy)void(^actionBlock)(YSCourseModel *item);
-
 @end

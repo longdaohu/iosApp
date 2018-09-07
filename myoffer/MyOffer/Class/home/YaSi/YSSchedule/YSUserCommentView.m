@@ -21,6 +21,7 @@
 + (instancetype)commentView{
     
     YSUserCommentView *view = [[YSUserCommentView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
     
     return view;
 }
@@ -69,8 +70,7 @@
         self.tableView.sectionFooterHeight= HEIGHT_ZERO;
         self.tableView.backgroundColor = XCOLOR_WHITE;
         self.tableView.layer.cornerRadius = 8;
-
-
+ 
         CGFloat footer_w = self.tableView.mj_w;
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0,footer_w, 60)];
         self.tableView.tableFooterView = footer;
@@ -159,12 +159,9 @@
 
 - (void)caseCommit{
  
+    NSArray *stars = [self.items valueForKey:@"index_selected"];
     if (self.actionBlock) {
-        self.actionBlock();
-    }
-    
-    for (YSCommentItem *item in self.items) {
-        NSLog(@"  %@, %ld",item.title,item.index_selected);
+        self.actionBlock(stars);
     }
 }
 
@@ -175,7 +172,7 @@
 - (void)show{
     
     self.alpha = 0;
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.alpha = 1;
     } completion:^(BOOL finished) {
         
@@ -190,5 +187,11 @@
         
     }];
 }
+
+- (void)dealloc{
+    
+    KDClassLog(@"日历 + YSUserCommentView + dealloc");
+}
+
 
 @end

@@ -151,7 +151,7 @@
         make.width.mas_equalTo(120);
         make.left.mas_equalTo(bottomView.mas_left);
         make.top.mas_equalTo(bottomView.mas_top);
-        make.bottom.mas_equalTo(bottomView.bottom);
+        make.bottom.mas_equalTo(bottomView.mas_bottom);
     }];
     
     UIButton *comitBtn = [UIButton new];
@@ -166,7 +166,7 @@
         make.left.mas_equalTo(restBtn.mas_right);
         make.right.mas_equalTo(bottomView.mas_right);
         make.top.mas_equalTo(bottomView.mas_top);
-        make.bottom.mas_equalTo(bottomView.bottom);
+        make.bottom.mas_equalTo(bottomView.mas_bottom);
     }];
     
 }

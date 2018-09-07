@@ -61,7 +61,9 @@
     self.onLivingLab.hidden = item.livelogoState;
     self.onlivingView.hidden = item.livelogoState;
     self.playBtn.enabled = item.playButtonState;
-    
+    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_BLACK;
+    self.playBtn.layer.shadowColor = clr.CGColor;
+ 
     self.playBtn.hidden = NO;
     self.beforeBtn.hidden = YES;
     if (item.type == YSScheduleVideoStateBefore){

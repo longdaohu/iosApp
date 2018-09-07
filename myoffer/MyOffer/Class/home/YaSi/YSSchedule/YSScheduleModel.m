@@ -113,6 +113,20 @@
     return  text;
 }
 
+- (NSString *)teacherName{
+    if (!_teacherName) {
+        _teacherName = [self.teacher valueForKey:@"name"];
+    }
+    return _teacherName;
+}
+
+- (NSString *)teacherImage{
+    if (!_teacherImage) {
+        _teacherImage = [self.teacher valueForKey:@"avatar"];
+    }
+    return _teacherImage;
+}
+
 @end
 
 

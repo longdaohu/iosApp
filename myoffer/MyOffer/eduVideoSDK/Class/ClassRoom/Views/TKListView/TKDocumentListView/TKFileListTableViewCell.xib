@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TKFileListTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVU-4u-nPi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcd-Tt-0hu">
+                                <rect key="frame" x="288" y="0.0" width="32" height="35"/>
+                                <connections>
+                                    <action selector="deleteClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fYh-xb-oRv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsr-ug-T6w">
+                                <rect key="frame" x="256" y="0.0" width="32" height="35"/>
+                                <connections>
+                                    <action selector="watchClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aeX-cc-aNg"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Usr-i5-9tN">
+                                <rect key="frame" x="5" y="5.5" width="23.5" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Usr-i5-9tN" secondAttribute="height" multiplier="1:1" id="BZb-jc-rYF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mp7-9z-E8g">
+                                <rect key="frame" x="33.5" y="0.0" width="217.5" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Usr-i5-9tN" firstAttribute="leading" secondItem="IVU-4u-nPi" secondAttribute="leading" constant="5" id="5mI-Fk-Z78"/>
+                            <constraint firstItem="jcd-Tt-0hu" firstAttribute="leading" secondItem="tsr-ug-T6w" secondAttribute="trailing" id="6yf-Sz-xsi"/>
+                            <constraint firstAttribute="bottom" secondItem="mp7-9z-E8g" secondAttribute="bottom" id="COU-7B-c6P"/>
+                            <constraint firstItem="jcd-Tt-0hu" firstAttribute="top" secondItem="IVU-4u-nPi" secondAttribute="top" id="I9W-Eh-7ln"/>
+                            <constraint firstItem="mp7-9z-E8g" firstAttribute="top" secondItem="IVU-4u-nPi" secondAttribute="top" id="OpC-j8-eQp"/>
+                            <constraint firstItem="jcd-Tt-0hu" firstAttribute="width" secondItem="tsr-ug-T6w" secondAttribute="width" id="PTL-9X-kqP"/>
+                            <constraint firstItem="mp7-9z-E8g" firstAttribute="leading" secondItem="Usr-i5-9tN" secondAttribute="trailing" constant="5" id="ZuZ-Mf-w2S"/>
+                            <constraint firstItem="tsr-ug-T6w" firstAttribute="top" secondItem="IVU-4u-nPi" secondAttribute="top" id="bCa-GA-O9C"/>
+                            <constraint firstItem="Usr-i5-9tN" firstAttribute="height" secondItem="IVU-4u-nPi" secondAttribute="height" multiplier="2/3" id="cP2-DM-7fW"/>
+                            <constraint firstItem="tsr-ug-T6w" firstAttribute="leading" secondItem="mp7-9z-E8g" secondAttribute="trailing" constant="5" id="drO-q5-6Rm"/>
+                            <constraint firstAttribute="bottom" secondItem="jcd-Tt-0hu" secondAttribute="bottom" id="hCQ-of-6FJ"/>
+                            <constraint firstItem="Usr-i5-9tN" firstAttribute="centerY" secondItem="IVU-4u-nPi" secondAttribute="centerY" id="l6p-Iz-YK3"/>
+                            <constraint firstAttribute="bottom" secondItem="tsr-ug-T6w" secondAttribute="bottom" id="oRc-H3-hg3"/>
+                            <constraint firstItem="jcd-Tt-0hu" firstAttribute="width" secondItem="IVU-4u-nPi" secondAttribute="width" multiplier="1/10" id="tjR-WF-Uro"/>
+                            <constraint firstAttribute="trailing" secondItem="jcd-Tt-0hu" secondAttribute="trailing" id="uKm-Lq-hFr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IVU-4u-nPi" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="8/10" id="0uY-0b-8Ln"/>
+                    <constraint firstAttribute="trailing" secondItem="IVU-4u-nPi" secondAttribute="trailing" id="FTz-Mu-YJG"/>
+                    <constraint firstItem="IVU-4u-nPi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NPf-zU-HGI"/>
+                    <constraint firstItem="IVU-4u-nPi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qi9-J8-J7m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="WatchBtn" destination="tsr-ug-T6w" id="Nun-UX-vHi"/>
+                <outlet property="backView" destination="IVU-4u-nPi" id="kBR-aS-kze"/>
+                <outlet property="deleteBtn" destination="jcd-Tt-0hu" id="4xU-dI-cxu"/>
+                <outlet property="iconImageView" destination="Usr-i5-9tN" id="9bP-Ig-kiR"/>
+                <outlet property="nameLabel" destination="mp7-9z-E8g" id="Th0-oL-MbD"/>
+                <outlet property="watchBtn" destination="tsr-ug-T6w" id="Orn-fL-4L1"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -81,7 +81,7 @@ typedef enum {
     
     self.tableView.tableFooterView = [UIView new];
     self.payBtn.hidden          = YES;
-    self.popBtn.width           = XSCREEN_WIDTH - self.popBtn.left * 2;
+    self.popBtn.width           = XSCREEN_WIDTH - self.popBtn.mj_x * 2;
     self.popBtn.backgroundColor = XCOLOR_RED;
     [self.popBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
 }
@@ -122,10 +122,10 @@ typedef enum {
         
         self.line.hidden  =  YES;
         CGFloat popY      =  XSCREEN_HEIGHT - 50 - 64  ;
-        self.popBtn.top   =  popY;
-        self.payBtn.top   =  popY;
-        self.currentServiceLab.top = CGRectGetMaxY(self.succeseLab.frame) + 10 ;
-        self.tableView.top =CGRectGetMaxY(self.currentServiceLab.frame) + 10;
+        self.popBtn.mj_y   =  popY;
+        self.payBtn.mj_y   =  popY;
+        self.currentServiceLab.mj_y = CGRectGetMaxY(self.succeseLab.frame) + 10 ;
+        self.tableView.mj_y =CGRectGetMaxY(self.currentServiceLab.frame) + 10;
         
     }
     

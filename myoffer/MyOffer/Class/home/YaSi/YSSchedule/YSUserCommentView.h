@@ -10,6 +10,7 @@
 
 @interface YSUserCommentView : UIView
 + (instancetype)commentView;
-@property(nonatomic,copy)void(^actionBlock)(void);
+@property(nonatomic,copy)void(^actionBlock)(NSArray *items);
+- (void)show;
 
 @end

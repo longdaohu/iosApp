@@ -108,7 +108,6 @@
 
 - (void)makeUI{
     
-//    self.itemFrame.item.service_id = @"573043088c213602adcb8777";
     self.title  = @"订单确认页";
     [self makeTableView];
     self.priceLab.text = self.itemFrame.item.price_str;
@@ -884,7 +883,7 @@
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                [weakSelf makeAccountWithResponse:response];
                            } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               NSLog(@"============获取账户身份信息===失败=====  %@",error);
+//                               NSLog(@"============获取账户身份信息===失败=====  %@",error);
                            }];
     
 }

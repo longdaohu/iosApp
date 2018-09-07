@@ -13,11 +13,15 @@
 + (NSDictionary *)mj_objectClassInArray{
     
     return @{
-             @"servicePackage" : @"YasiCatigoryItemModel"
+             @"skus" : @"YasiCatigoryItemModel"
              };
     
 }
 
+- (NSArray *)servicePackage{
+    
+    return self.skus;
+}
 
 
 @end

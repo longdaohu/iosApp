@@ -25,7 +25,7 @@
             make.left.mas_equalTo(self.mas_left).mas_offset(20);
             make.right.mas_equalTo(self.mas_right).mas_offset(-20);
             make.top.mas_equalTo(self.mas_top);
-            make.bottom.mas_equalTo(self.bottom);
+            make.bottom.mas_equalTo(self.mas_bottom);
             
         }];
         

@@ -9,24 +9,28 @@
 #import <Foundation/Foundation.h>
 
 @interface YSCourseModel : NSObject
-@property(nonatomic,copy)NSString *classId;
-@property(nonatomic,copy)NSString *count;
-@property(nonatomic,copy)NSString *label;
-@property(nonatomic,copy)NSString *name;
-@property(nonatomic,copy)NSString *status;
-@property(nonatomic,copy)NSString *total;
-@property(nonatomic,copy)NSString *endTime;
-@property(nonatomic,copy)NSString *startTime;
-@property(nonatomic,copy)NSString *nextCourseStartTime;
-@property(nonatomic,copy)NSString *nextCourseEndTime;
+
+@property(nonatomic,copy)NSString *classId; //班级id，如果为空，则为未分班
+@property(nonatomic,copy)NSString *count;//上过课时
+@property(nonatomic,copy)NSString *label;//时间标签
+@property(nonatomic,copy)NSString *name; //课程名
+@property(nonatomic,copy)NSString *status;//课程状态：
+//NO_COURSE|NOT_START|IN_PROGRESS|FINISHED|EXPIRED
+@property(nonatomic,copy)NSString *total;//总课时
+@property(nonatomic,copy)NSString *endTime;//结束日期
+@property(nonatomic,copy)NSString *startTime;//开始日期
+@property(nonatomic,copy)NSString *nextCourseStartTime;//下一堂课开始时间
+@property(nonatomic,copy)NSString *nextCourseEndTime;//下一堂课结束时间
+@property(nonatomic,assign)BOOL isLiving; //是否正在上课：true|false
+@property(nonatomic,copy)NSString *productImg;//商品图片地址
+
 @property(nonatomic,copy)NSString *nextCourseTime;
 @property(nonatomic,copy)NSString *tips;
-@property(nonatomic,copy)NSString *productImg;
-@property(nonatomic,assign)BOOL isLiving;
-
 @property(nonatomic,copy)NSString *date_label;
 @property(nonatomic,assign)CGFloat progress;
 
 @end
+
+
 
 

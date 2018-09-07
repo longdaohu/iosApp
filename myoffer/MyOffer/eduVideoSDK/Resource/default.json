@@ -1,0 +1,406 @@
+{
+    "Loading":{
+        "LoadingImage":"k_loading_0000",
+        "LoadingImage2":"k_loading_000"
+    },
+    "Login":{
+        
+        "TKLoginInputView提示":"TKLoginInputView字体、颜色、图片设置",
+        "inputViewBackColor":"#FFFFFF",
+        "inputViewBackAlpha":0.2,
+        "inputViewPlaceholderColor":"#8D7BAF",
+        "inputViewTextColor":"#FEFEFF",
+        "inputViewTextFont":14,
+        "rolePromptTextColor":"#FFFFFF",
+        "rolePromptTextFont":13,
+        
+        
+        "TKRoleChoiceView提示":"TKRoleChoiceView字体、颜色、图片设置",
+        "roleChoiceBackColor":"#F8F8FA",
+        "roleChoiceTitleColor":"#795CBF",
+        "roleLineBackColor":"#E9E5EC",
+        "roleChoiceSelectedColor":"#795CBF",
+        "roleChoiceNomalColor":"#FFFFFF",
+        
+        
+        "TKLoginViewController提示":"TKRoleChoiceView字体、颜色、图片设置",
+        "logoImage":"login_logo",
+        "roomNumberImage":"icon_room_number",
+        "nickNameImage":"login_nick_name_icon",
+        "loginRightRrrowImage":"login_right_icon",
+        "joinRoomNomalImage":"bt_join_room_bg",
+        "joinRoomSelectedImage":"bt_join_room_bg_click",
+        "loginButtonTitleColor":"#A34D23",
+        
+        "versionLabelTextColor":"#F7D9FC",
+        "login_bg":"login_bg"
+    },
+    "Alert":{
+        "alertBoardColor":"#913705",
+        "AlertBackImage":"error_dialog_bg",
+        "titleColor" : "#FFFFFF",
+        "btn_close":"close",
+        "userlistTextColor":"#913705",
+        "alert_Error_TextColor":"#FF3535",
+        "ok_button_click":"ok_button_click",
+        "icon_error":"icon_error",
+        "alertInputBackColor":"#FFFDCA",
+        "alertInputAlpha":0.2,
+        "alertInputTextColor":"D2A042"
+    },
+    
+    "TKListView":{
+        "selector_library_default":"selector_library_default",
+        "selector_library_select":"selector_library_select",
+        "selector_media_default":"selector_media_default",
+        "selector_media_select":"selector_media_select",
+        "selector_name_default":"selector_name_default",
+        "selector_name_select":"selector_name_select",
+        "Library_frame":"Library_frame",
+        "titleColor" : "#FFFFFF",
+        "coursewareButtonDefaultColor":"#913706",
+        "coursewareButtonSelectedColor":"#FFFFFF",
+        "btn_close": "close"
+        
+    },
+    
+    "TKDocumentListView":{
+        "choose_photo_button_click":"choose_photo_button_click",
+        "listTypeBorderColor":"#913706",
+        "listFileColor":"#913706",
+        "listFileSelectColor":"#FFFFFF",
+        "icon_play":"icon_play",
+        "icon_pause":"icon_pause",
+        "close_eyes":"close_eyes",
+        "open_eyes":"open_eyes",
+        "arrange_none":"arrange_none",
+        "arrange_up":"arrange_up",
+        "arrange_down":"arrange_down",
+        "file_list_delete_new":"file_list_delete_new",
+
+        "icon_empty":"icon_empty",
+        "icon_h5":"icon_h5",
+        "icon_excel":"icon_excel",
+        "icon_images":"icon_images",
+        "icon_pdf":"icon_pdf_black",
+        "icon_picture":"icon_picture",
+        "icon_ppt":"icon_ppt_black",
+        "icon_text_pad":"icon_text_pad",
+        "icon_word":"icon_word",
+        "icon_mp3":"icon_mp3",
+        "icon_mp4":"icon_mp4",
+
+        "listFileDefaultColor":"#913706",
+        "listBackColor":"#FFE99E",
+        "coursewareButtonDefaultColor":"#913706",
+        "coursewareButtonSelectedColor":"#FFFFFF",
+        
+        "userlistTextColor":"#913705",
+        "listSortColor": "#913706"
+       
+    },
+    "TKUserListView":{
+        "userlist_left_unclickable":"common_userlist_left_unclickable",
+        "userlist_left":"common_userlist_left",
+        "userlist_right_unclickable":"common_userlist_right_unclickable",
+        "userlist_right":"common_userlist_right",
+        "userList_TextColor":"#913705",
+        "userList_currentPageBackColor":"#FFE99E",
+        "userList_toolBackColor":"#F4F4F4"
+        
+    },
+    "TKUserListTableView":{
+        "button_remove":"button_remove",
+        "button_close_speak":"button_close_speak",
+        "button_speak":"button_speak",
+        "icon_handup":"icon_handup",
+        "button_editor":"button_editor",
+        "button_close_editor":"button_close_editor",
+        "button_audio":"button_audio",
+        "button_close_audio":"button_close_audio",
+        
+        "button_close_disabled":"button_close_disabled",
+        "button_video":"button_video",
+        "button_close_video":"button_close_video",
+        "button_shangjiangtai":"button_shangjiangtai",
+        "button_xiajiangtai":"button_xiajiangtai",
+        
+        "button_close_speak_unclickable":"button_close_speak_unclickable",
+        "button_audio_disable":"button_audio_disable",
+        "icon_video_disable":"icon_video_disable",
+        "button_shangjiangtai_unclickable":"button_shangjiangtai_unclickable",
+        
+        "listBackColor":"#FFE99E",
+        "coursewareButtonDefaultColor":"#913706",
+        "coursewareButtonSelectedColor":"#FFFFFF",
+        
+        "speak_unclickable":"button_close_speak_unclickable",
+        "editor_unclickable":"button_close_editor_unclickable",
+        "button_no_audio":"button_no_audio",
+        "icon_no_video":"icon_no_video",
+        
+    },
+    
+    "ClassRoom":{
+        "backgroundImage":"one_to_one_bg",
+        
+        
+        "Trophy": {
+            "btnBackColor":"#FFD548",
+            "btnBorderColor":"#FF9218"
+        },
+        
+        "PlayBack":{
+            
+            "TKPlaybackMaskView提示":"回放",
+            "toolBackgroundColor" : "#1f1e21",
+            "toolBackgroundAlpha" : 0.4,
+            
+            
+            "sliderControlImage":"slider_control",
+            "sliderMinimumTrackTintColor":"#FFFFFF",
+            "sliderMaximumTrackTintColor":"#533F72",
+            "sliderBackGoundColor":"#261044",
+            "sliderAlpha":0.7,
+            
+            "playBtnPauseImage":"btn_pause_normal",
+            "playBtnPlayImage":"btn_play_normal",
+            "voiceBtnSelectedImage":"icon_no_voice",
+            "voiceBtnNormalImage":"icon_voice",
+            
+            
+            "TKPlaySpeedView提示":"调速、背景色、按钮背景色",
+            "playSpeedBackgroundColor":"#57387F",
+            "speedBtnFontColorNormal":"#FFFFFF",
+            "speedBtnFontColorSelected":"#583B74"
+        },
+        
+        "PageView":{
+            "cameraToolToolbarImage":"camera_tool_toolbar",
+            "pageNumSelectColor":"#FF8879",
+            "cameraLineColor":"#CD4837",
+            "titleColor" : "#FFFFFF"
+        },
+        
+        "TKControlView" : {
+            "btn_jingyin":"button_jingyin",
+            "btn_jingyin_unclickable":"button_jingyin_unclickable",
+            "btn_talk_all":"button_talk_all",
+            "btn_talk_all_unclickable":"button_talk all_unclickable",
+            "btn_reward":"button_reward",
+            "btn_reward_unclickable":"button_reward_unclickable",
+            "button_restore":"button_restore",
+            "titleColor": "#FFFFFF",
+            "btnColor":"#913706"
+        },
+        
+        "TKNavView": {
+            "navgationColor": "#503A8F",
+            "navgationBottomColor": "#3C257C",
+            "common_icon_return":"common_icon_return",
+            "commom_btn_xiake_titleColor": "#EB4852",
+            "commom_btn_xiake_font": 18,
+            "common_icon_clock":"common_icon_clock",
+            "click_btn_xiakeImage":"click_btn_xiake",
+            "handing_up_bg":"handing_up_bg",
+            "titleColor" : "#FFFFFF",
+            "camera_btn" :"flipcamera"
+        },
+        
+        "TKTabbarView": {
+            "common_meau_regular":"common_meau_regular",
+            "common_meau_regular_selected":"common_meau_regular_selected",
+            "common_camare_regular":"common_camare_regular",
+            "common_camare_selected":"common_camare_selected",
+            "common_icon_left":"common_icon_left",
+            "common_icon_left_unclickable":"common_icon_left_unclickable",
+            "common_icon_right":"common_icon_right",
+            "common_icon_right_unclickable":"common_icon_right_unclickable",
+            "common_icon_xiala":"common_icon_xiala",
+            "common_icon_up":"common_icon_up",
+            "common_icon_large":"common_icon_large",
+            "common_icon_large_unclickable":"common_icon_large_unclickable",
+            "common_icon_small":"common_icon_small",
+            "common_icon_small_unclickable":"common_icon_small_unclickable",
+            "common_icon_full_screen_large":"common_icon_full_screen_large",
+            "common_icon_full_screen_small":"common_icon_full_screen_small",
+            "common_icon_remark":"common_icon_remark",
+            "common_icon_remark_selected":"common_icon_remark_selected",
+            
+            "button_name_default":"button_name_default",
+            "button_name_selected":"button_name_selected",
+            "button_messagel_default":"button_message_default",
+            "button_message_selected":"button_message_selected",
+            "button_control_default":"button_control_default",
+            "button_contro_selected":"button_contro_selected",
+            "button_tools_default":"button_tools_default",
+            "button_tools_selected":"button_tools_selected",
+            "button_courseware_default":"button_courseware_default",
+            "button_courseware_selected":"button_courseware_selected"
+        },
+        "TKChatViews":{
+            "chatCellBackgoundColor":"0xFFE99E",
+            "chatToolBackgroundColor":"#FFFFFF",
+            "chatToolTextColor":"#D07747",
+            "chatToolPlacehoderColor":"#D07747",
+            "chatMessageColor":"#913706",
+            "chatNameColor":"#795CBF",
+            "chatTimeColor":"#FFAD52",
+            "chatToolBackColor":"#F4F4F4",
+            "chatLineColor":"#FFC88A",
+            "chatMessageNumColor":"#FF3811",
+            "listBackColor":"#FFE99E",
+            "translation_normal":"translation_normal",
+            "translation_selected":"translation_selected",
+            "linkTextColor": "#795cbf",
+            "button_send_default":"button_send_default",
+            "button_send_click":"button_send_click",
+            "icon_expression":"icon_expression",
+            "icon_keyboard":"icon_keyboard",
+            "icon_pic":"icon_pic",
+            
+            "chatUserListBackgroundColor":"#FFCD54",
+            "chatUserListTextColor":"#FF9018",
+            
+            "shutup_default":"all_shutup_default",
+            "shutup_press":"all_shutup_press",
+            "shutup_default_textColor":"#913706",
+            "shutup_press_textColor":"#745FA8"
+        },
+        
+        "TKMediaView": {
+            "mp3Loading":"mp3player_tongyi_0000",
+            "mp3Loading2":"mp3player_tongyi_000",
+            "mp3playerDefaultImage":"mp3player_tongyi_00000",
+            "mp3player_close":"mp3player_close",
+            "loading_00011":"loading_00011",
+            "mp4loadingBackgroundColor":"#000000",
+            "btn_closed_normal":"btn_closed_normal",
+            
+            "mp4Loading":"loading_0000",
+            "mp4Loading2":"loading_000"
+        },
+        
+        "TKUploadImageView": {
+            "camera_tool_toolbar":"camera_tool_toolbar",
+            "choose_camera_pop":"choose_camera_pop",
+            "choose_photo_pop":"choose_photo_pop",
+            "cameraLineColor":"#CD4837",
+            
+            "cameraToolToolbarImage":"camera_tool_toolbar",
+            "pageNumSelectColor":"#FF8879",
+            "titleColor" : "#FFFFFF"
+        },
+        "TKVideoView":  {
+            
+            "videoInBackColor":"#291B4F",
+            "videoInBackTitleColor":"#FFFFFF",
+            "videoInBackAlpha":0.7,
+            "videoBackColor":"#EDEDFB",
+            "giftImage":"icon_gift",
+            "videoToolColor":"#1D093D",
+            "videoToolAlpha":0.5,
+            
+            
+            "videoToolTextColor":"#FFFFFF",
+            "trophyColor":"#F6C945",
+            "trophyImage":"icon_trophy",
+            "videoHandImage":"icon_hand",
+            "videoAudioNomalImage":"icon_audio_available",
+            "videoAudioSelectedImage":"icon_mute",
+            "videoBackTeacherImage":"icon_teacher_one_to_one",
+            "videoBackStuImage":"icon_student_one_to_one",
+            "videoCloseCameraImage":"icon_camera_close",
+            "videoNoCameraImage":"icon_no_camera",
+            "videoTurnOffCameraImage":"turn_off_camera_background",
+            "videoPopBorderColor":"#D04331",
+            "videoPopBackColor":"#FF6B58",
+            "videoPopGraffitiNomalImage":"icon_control_tools_01",
+            "videoPopGraffitiSelectedImage":"icon_control_tools_02",
+            
+            "icon_control_up":"icon_control_up",
+            "icon_control_down":"icon_control_down",
+            "icon_control_camera_01":"icon_control_camera_01",
+            "icon_control_camera_02":"icon_control_camera_02",
+            "icon_open_audio":"icon_open_audio",
+            "icon_close_audio":"icon_close_audio",
+            "icon_control_gift":"icon_control_gift",
+            
+            "复位":"",
+            "icon_screen_normal":"icon_screen_normal",
+            "icon_reply_normal_only":"icon_reply_normal_only",
+            "icon_control_tools_01":"icon_control_tools_01",
+            "icon_control_tools_02":"icon_control_tools_02"
+            
+        },
+        
+        "videoTextColor":"#383839",
+        "videoTextFont":8,
+        "videoToolBoardColor":"#D04331"
+        
+        
+        
+    },
+    
+    "DeviceType": {
+        
+        "Default":{
+            "AndroidPad":"android_hd",
+            "iPad":"ipad_hd",
+            "AndroidPhone":"android",
+            "iPhone":"iphone",
+            "WindowClient":"win_client",
+            "WindowPC":"win_pc",
+            "MacClient" : "mac_client",
+            "MacPC":"mac_pc",
+            "AndroidTV":"icon_tv_white",
+            "DeviceUnknown":"icon_unknown"
+            
+        },
+        "UdpImpassability":{
+            "AndroidPad_udp":"android_hd_red",
+            "iPad_udp":"ipad_hd_red",
+            "AndroidPhone_udp":"android_red",
+            "iPhone_udp":"iphone_red",
+            "WindowClient_udp":"win_client_red",
+            "WindowPC_udp":"win_pc_red",
+            "MacClient_udp" : "mac_client_red",
+            "MacPC_udp":"mac_pc_red",
+            "AndroidTV_udp":"icon_tv_white_red",
+            "DeviceUnknown_udp":"icon_unknown_red"
+        }
+        
+    },
+    "WhiteBoardTools":{
+        
+        "Default":{
+            "tool_pencil":"meau_pen_default",
+            "tool_mouse":"meau_mouse_default",
+            "tool_text":"meau_text_default",
+            "tool_rectangle_empty":"meau_rectangular_hollow_default",
+            "tool_rectangle":"meau_rectangular_solid_default",
+            "tool_ellipse_empty":"meau_round_solid_default",
+            "tool_ellipse":"meau_round_hollow_default",
+            "tool_line":"meau_line_default",
+            "tool_highlighter":"meau_fluorescent_pen_default",
+            "tool_arrow":"meau_arrow_default",
+            "tool_eraser":"meau_rubber_default"
+        },
+        "Selected":{
+            "tool_pencil":"meau_pen_selected",
+            "tool_mouse":"meau_mouse_selected",
+            "tool_text":"meau_text_selected",
+            "tool_rectangle_empty":"meau_rectangular_hollow_selected",
+            "tool_rectangle":"meau_rectangular_solid_selected",
+            "tool_ellipse_empty":"meau_round_solid_selected",
+            "tool_ellipse":"meau_round_hollow_selected",
+            "tool_line":"meau_line_selected",
+            "tool_highlighter":"meau_fluorescent_pen_selected",
+            "tool_arrow":"meau_arrow_selected",
+            "tool_eraser":"meau_rubber_selected"
+        }
+    }
+    
+    
+    
+}

@@ -16,26 +16,26 @@
     if (!_items) {
 
         NSMutableArray *items_tmp = [NSMutableArray array];
-        if (self.course_description.count > 0) {
-            [items_tmp addObject:self.course_description];
+        if (self.courseDescription.count > 0) {
+            [items_tmp addObject:self.courseDescription];
         }else{
             [items_tmp addObject:@[@"test"]];
         }
         
-        if (self.course_outline.count > 0) {
-            [items_tmp addObject:self.course_outline];
+        if (self.courseOutline.count > 0) {
+            [items_tmp addObject:self.courseOutline];
         }else{
             [items_tmp addObject:@[@"test"]];
         }
         
-        if (self.asken_questions.count > 0) {
-            [items_tmp addObject:self.asken_questions];
+        if (self.courseQuestions.count > 0) {
+            [items_tmp addObject:self.courseQuestions];
         }else{
             [items_tmp addObject:@[@"test"]];
         }
         
-        if (self.notes_application.count > 0) {
-            [items_tmp addObject:self.notes_application];
+        if (self.courseCaveats.count > 0) {
+            [items_tmp addObject:self.courseCaveats];
         }else{
             [items_tmp addObject:@[@"test"]];
         }

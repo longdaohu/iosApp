@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger,YSScheduleVideoState) {
 @interface YSScheduleModel : NSObject
 @property(nonatomic,copy) NSString *item_id ;
 @property(nonatomic,copy) NSString *mode ;
+@property(nonatomic,strong)NSDictionary *teacher;
 @property(nonatomic,copy) NSString *startTime ;
 @property(nonatomic,copy) NSString *teacherImage ;
 @property(nonatomic,copy) NSString *teacherName ;
@@ -42,13 +43,18 @@ typedef NS_ENUM(NSInteger,YSScheduleVideoState) {
 @end
 
 /*
- endTime = "2018-09-02 09:00:00";
- id = 5b8f72b09dfc0085c965e20c;
+ date = "2018-09-04";
+ endTime = "2018-09-04T13:00:00.000Z";
+ id = 5b9100839dfc0085c965e20e;
  mode = LIVING;
- startTime = "2018-09-02 07:00:00";
- state = 3;
- teacherImage = "http://myoffer-test.oss-cn-shenzhen.aliyuncs.com/itles/Girls_Day_Expectation002.jpg";
- teacherName = "\U586b\U7a7a";
- topic = "\U82f1\U8bed\U97f3\U6807";
+ startTime = "2018-09-04T09:00:00.000Z";
+ status = FINISHED;
+ teacher =     {
+ "_id" = 5b8384889bf2d90943b7ead2;
+ avatar = "http://myoffer-test.oss-cn-shenzhen.aliyuncs.com/ielts/sheji37.jpg";
+ intro = "\U8d44\U6df1\U8001\U5e08";
+ name = "\U674e\U56db";
+ };
+ topic = "\U82f1\U8bed\U8bcd\U6c47";
  */
 

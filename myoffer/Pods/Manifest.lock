@@ -25,6 +25,7 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SocketRocket (0.5.1)
+  - SSZipArchive (2.1.2)
   - ZFPlayer (2.1.5):
     - Masonry
 
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - MLeaksFinder
   - SDCycleScrollView
   - SocketRocket
+  - SSZipArchive
   - ZFPlayer
 
 SPEC REPOS:
@@ -53,6 +55,7 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
     - SocketRocket
+    - SSZipArchive
     - ZFPlayer
 
 SPEC CHECKSUMS:
@@ -69,8 +72,9 @@ SPEC CHECKSUMS:
   SDCycleScrollView: d0fd5fe40a80918371fd8939214eb3be81033d83
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SSZipArchive: d4009d2ce5520a421f231fd97028cc0e2667eed8
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: ce92b3039a11947cc6896c2ea633563de4299758
+PODFILE CHECKSUM: 140c1287667e22335cca6c0edf2af840dc02486a
 
 COCOAPODS: 1.5.0
