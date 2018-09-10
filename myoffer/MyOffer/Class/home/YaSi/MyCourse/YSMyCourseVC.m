@@ -110,7 +110,7 @@
  
     if (self.groupModel.type == YSCourseGroupTypeDefault) {
         
-        if (item.classId.length == 0) {
+        if ([item.status isEqualToString:@"NO_COURSE"]) {
             
             YasiCourseTextCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseTextCell"];
             if (!cell) {

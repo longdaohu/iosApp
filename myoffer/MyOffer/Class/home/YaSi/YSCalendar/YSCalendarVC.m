@@ -364,7 +364,7 @@
 //请求录播路径
 - (void)makeRecordpathWithRoom:(NSString *)room{
     
-    room = @"856837414";
+//    room = @"856837414";
     NSString *path = [NSString stringWithFormat:@"GET http://global.talk-cloud.net/WebAPI/getrecordlist/key/VGSeGEq2TOmuht7I/serial/%@",room];
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
@@ -397,13 +397,11 @@
     
     self.ClassDismiss = NO;
     MyofferUser *user = [MyofferUser defaultUser];
-    NSString *roomId = @"1463031541";
-    NSString *studentPassword = @"9766";
     NSDictionary *tDict = @{
-                                @"serial"  :roomId,
+                                @"serial"  :room,
                                 @"host"    :sHost,
                                 @"port"    :sPort,
-                                @"password":studentPassword,//可选
+                                @"password":student,//可选
                                 @"clientType":@(3),
                                 @"nickname":user.displayname
                             };

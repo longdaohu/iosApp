@@ -75,14 +75,15 @@
     self.groups = @[ys_group];
     
     self.ysModel = [[YaSiHomeModel alloc] init];
-    NSDictionary *result = [USDefault valueForKey:@"BANNERRECOMMENT"];
-    NSArray *banners = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
-    self.ysModel.banners = banners;
+//    NSDictionary *result = [USDefault valueForKey:@"BANNERRECOMMENT"];
+//    NSArray *banners = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+//    self.ysModel.banners = banners;
     self.ysModel.login_state = LOGIN;
     if (self.user) {
         self.ysModel.user_coin = self.user.coin;
     }
     
+    [self makeIELTSData];
     [self makeCategoryData];
     [self makeTodayOnliveData];
 }
@@ -171,6 +172,41 @@
 
 
 #pragma mark : 数据请求
+
+- (void)makeIELTSData{
+    
+    WeakSelf;
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/banners?type=IELTS&source=app",DOMAINURL_API];
+    [self startAPIRequestWithSelector:path
+                           parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
+                               [weakSelf makeIELTSWithResponse:response];
+                           } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                               //                               [weakSelf caseEmpty];
+                           }];
+    
+}
+- (void)makeIELTSWithResponse:(id)response{
+    
+    if (!ResponseIsOK) {
+        return;
+    }
+    NSDictionary *result = response[@"result"];
+    if (result.count == 0) {
+        return;
+    }
+    NSArray *banners = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
+    if (banners.count > 0) {
+        
+        self.ysModel.banners = banners;
+        self.YSHeader.ysModel = self.ysModel;
+        self.YSHeader.frame = self.ysModel.header_frame;
+        self.tableView.tableHeaderView = self.YSHeader;
+        
+        [self.tableView reloadData];
+    }
+}
+
+
 //今日直播
 - (void)makeTodayOnliveData{
     
@@ -279,8 +315,8 @@
         self.ysModel.user_coin = result[@"score"];
         
     }
-    
 }
+
 
 #pragma mark : 事件处理
 - (void)caseHeaderActionType:(YSHomeHeaderActionType)type{
@@ -328,47 +364,6 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-/*
- 
- self.discount.hidden = !item.reduce_flag;
- 
- [self.iconView sd_setImageWithURL: [item.cover_url mj_url] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
- self.titleLab.text = item.name;
- self.priceLab.text = item.price_str;
- self.forPersonLab.text = item.comment_suit_people[@"value"];
- 
- "_id" = 5b8cd22c0329d7d838eebcb9;
- "contract_enable" = 0;
- =                     (
- );
- courseDescription =                     (
- );
- courseOutline =                     (
- );
- courseQuestions =                     (
- );
- "cover_url" = "www.https://img.myoffer.cn/data/cms/emall/DIYsku_logo.jpg.com";
- "display_price" = 2000;
- name = "\U96c5\U601d5\U5206\U57fa\U7840\U73ed";
- price = 1000;
- 
- "_id" = 5b8cd3050329d7d838eebccb;
- "asken_questions" =             (
- );
- "contract_enable" = 0;
- "course_description" =             (
- );
- "course_outline" =             (
- );
- "cover_url" = "";
- name = "\U96c5\U601d7\U5206\U51b2\U523a\U73ed";
- "notes_application" =             (
- );
- "old_price" = 7000;
- price = 3500;
- 
- */
 
 
 

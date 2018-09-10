@@ -211,20 +211,22 @@
 - (void)setBanners:(NSArray *)banners{
     
     _banners = banners;
-    if (!banners) return;
     
+    if (!banners) return;
     NSMutableArray *url_arr = [NSMutableArray array];
     NSMutableArray *target_arr = [NSMutableArray array];
     for (HomeBannerObject *banner in banners) {
-        if (banner.image && banner.target) {
+        if (banner.image) {
             [url_arr addObject:banner.image];
-            [target_arr addObject:banner.target];
+            NSString *target = banner.target.length == 0 ? @"https://m.myoffer.cn/" :  banner.target;
+            [target_arr addObject:target];
         }
     }
     self.banner_images = url_arr;
     self.banner_targets = target_arr;
-    
-    [self makeSubviewesFrame];
+    if (self.banner_images.count > 0) {
+        [self makeSubviewesFrame];
+    }
 }
 
 - (void)setCatigorys:(NSArray *)catigorys{

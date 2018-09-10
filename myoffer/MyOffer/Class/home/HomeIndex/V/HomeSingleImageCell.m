@@ -8,7 +8,6 @@
 
 #import "HomeSingleImageCell.h"
 @interface HomeSingleImageCell ()
-@property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)CAShapeLayer *shaper;
 

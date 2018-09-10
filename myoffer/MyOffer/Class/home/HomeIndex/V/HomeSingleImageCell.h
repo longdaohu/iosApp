@@ -14,5 +14,7 @@
 @property(nonatomic,strong)NSDictionary *item;
 @property(nonatomic,strong)HomeRoomIndexCityObject *city;
 @property(nonatomic,assign)BOOL shadowEnable;
+@property(nonatomic,strong)UIImageView *iconView;
+
 
 @end

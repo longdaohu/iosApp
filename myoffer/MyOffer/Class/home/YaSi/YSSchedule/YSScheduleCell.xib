@@ -123,7 +123,7 @@
                 <outlet property="nameLab" destination="s4w-80-Fe9" id="m6d-fb-8wN"/>
                 <outlet property="onLivingLab" destination="r2k-Sg-gR0" id="15n-sf-tzd"/>
                 <outlet property="onlivingView" destination="Q51-4A-f6V" id="46E-yu-u8K"/>
-                <outlet property="playBtn" destination="y1X-W0-qLa" id="lnS-Z8-hvD"/>
+                <outlet property="playBtn" destination="y1X-W0-qLa" id="u6g-K4-huL"/>
                 <outlet property="timeBtn" destination="54p-BD-gak" id="JBW-7Z-gFD"/>
                 <outlet property="titleLab" destination="8sy-Fd-vgv" id="tLj-PM-nmF"/>
                 <outlet property="topLine" destination="WLT-3G-7nD" id="87N-ZQ-33l"/>

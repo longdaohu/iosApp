@@ -61,7 +61,7 @@
     self.onLivingLab.hidden = item.livelogoState;
     self.onlivingView.hidden = item.livelogoState;
     self.playBtn.enabled = item.playButtonState;
-    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_BLACK;
+    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
     self.playBtn.layer.shadowColor = clr.CGColor;
  
     self.playBtn.hidden = NO;
@@ -71,24 +71,11 @@
         self.playBtn.hidden = YES;
     }
   
-}
-
-/*
- date = "2018-08-30";
- mode = LIVING;
- startTime = "2018-08-30";
- state = 3;
- teacherImage = "http://myoffer-test.oss-cn-shenzhen.aliyuncs.com/itles/Girls_Day_Expectation002.jpg";
- teacherName = "\U586b\U7a7a";
- topic = "\U82f1\U8bed\U97f3\U6807";
- */
-
-- (IBAction)caseplay:(UIButton *)sender {
     
-//    if (self.actionBlock) {
-//        self.actionBlock(self.item);
-//    }
 }
+
+
+
 
 
 

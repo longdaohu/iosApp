@@ -43,14 +43,14 @@
             [items_tmp addObject:@[@"test"]];
         }
         
-        if (self.courseQuestions.count > 0) {
-            [items_tmp addObject:self.courseQuestions];
+        if (self.courseCaveats.count > 0) {
+            [items_tmp addObject:self.courseCaveats];
         }else{
             [items_tmp addObject:@[@"test"]];
         }
         
-        if (self.courseCaveats.count > 0) {
-            [items_tmp addObject:self.courseCaveats];
+        if (self.courseQuestions.count > 0) {
+            [items_tmp addObject:self.courseQuestions];
         }else{
             [items_tmp addObject:@[@"test"]];
         }
@@ -178,8 +178,8 @@
         _cell_arr = @[
                       @(self.cell_courseDescription_height),
                       @(self.cell_courseOutline_height),
-                      @(self.cell_courseQuestions_height),
-                      @(self.cell_courseCaveat_height)
+                      @(self.cell_courseCaveat_height),
+                      @(self.cell_courseQuestions_height)
                       ];
     }
     
@@ -203,15 +203,15 @@
         }else{
             [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
         }
-        
-        if (self.imageFrame_courseQuestions > 0) {
-            [items_tmp addObject:self.imageFrame_courseQuestions];
+
+        if (self.imageFrame_courseCaveats > 0) {
+            [items_tmp addObject:self.imageFrame_courseCaveats];
         }else{
             [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
         }
         
-        if (self.imageFrame_courseCaveats > 0) {
-            [items_tmp addObject:self.imageFrame_courseCaveats];
+        if (self.imageFrame_courseQuestions > 0) {
+            [items_tmp addObject:self.imageFrame_courseQuestions];
         }else{
             [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
         }

@@ -74,7 +74,7 @@
 - (BOOL)playButtonState{
     
     switch (self.type) {
-        case YSScheduleVideoStateBefore: case YSScheduleVideoStateDefault:
+        case YSScheduleVideoStateBefore: case YSScheduleVideoStateDefault: case YSScheduleVideoStateExpred:
             return NO;
             break;
         default:

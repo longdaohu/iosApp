@@ -113,7 +113,7 @@
     UIView *banner_box = [UIView new];
     [self addSubview:banner_box];
     self.banner_box = banner_box;
-    
+ 
     YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
     self.flow_banner = flow;
     UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
@@ -196,6 +196,9 @@
         self.signedBtn.backgroundColor = XCOLOR_CLEAR;
         self.signedBtn.enabled = NO;
         self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score_signed];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.signTitleLab.text];
+        [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (4,score_signed.length)];
+        self.signTitleLab.attributedText = attr;
         
     }else{
         
@@ -262,6 +265,10 @@
         [self catigoryChange:self.catigory_buttones[0]];
     }
     
+    if (ysModel.banner_images.count > 0) {
+        [self.bannerView reloadData];
+    }
+    
 }
 
 
@@ -279,9 +286,11 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (collectionView == self.bannerView) {
-        HomeSingleImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"bannerCell" forIndexPath:indexPath];
-        cell.path = self.ysModel.banner_images[indexPath.row];
         
+        HomeSingleImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"bannerCell" forIndexPath:indexPath];
+        NSString *path = self.ysModel.banner_images[indexPath.row];
+        [cell.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
         return cell;
     }
     

@@ -21,7 +21,6 @@
     [super awakeFromNib];
     
     for (NSInteger index = 0; index < self.bgView.subviews.count; index++) {
-        
         UIButton *item = self.bgView.subviews[index];
         item.tag = (index + 1);
         [item setImage:XImage(@"star_selected") forState:UIControlStateSelected];
@@ -35,6 +34,11 @@
 - (void)setItem:(YSCommentItem *)item{
     _item = item;
     self.titleLab.text = item.title;
+    item.index_selected = 0;
+    for (NSInteger index = 0; index < self.bgView.subviews.count; index++) {
+        UIButton *sender = self.bgView.subviews[index];
+        sender.selected = NO;
+    }
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

@@ -160,15 +160,11 @@
 - (void)caseCommit{
  
     for (YSCommentItem *item in self.items) {
-       
         if (item.index_selected == 0) {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"%@",item.title]];
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"%@不能为空",item.title]];
             return;
         }
-        
     }
-    
-    
     NSArray *stars = [self.items valueForKey:@"index_selected"];
     if (self.actionBlock) {
         self.actionBlock(stars);
@@ -181,6 +177,7 @@
 
 - (void)show{
     
+    [self.tableView reloadData];
     self.alpha = 0;
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha = 1;
