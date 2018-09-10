@@ -55,6 +55,10 @@
 - (void)setItem:(YSCourseModel *)item{
     _item = item;
     
+    self.titleLab.text = item.name;
+    [self.dateBtn setTitle:item.date_label forState:UIControlStateNormal];
+    self.dateBtn.enabled = ![item.status isEqualToString:@"EXPIRED"];
+ 
 }
 
 - (void)layoutSubviews{
@@ -64,7 +68,6 @@
     CGSize content_size = self.contentView.bounds.size;
     
     CGFloat left_margin = 20;
-    
     CGFloat pl_w = 68;
     CGFloat pl_h = 24;
     CGFloat pl_x = content_size.width  -  left_margin - pl_w;

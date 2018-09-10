@@ -30,6 +30,7 @@
 @property(nonatomic,strong)NSMutableArray *years;
 @property(nonatomic,strong)YSScheduleModel *vedio_selected;
 @property(nonatomic,strong)YSUserCommentView *commentView;
+@property(nonatomic,assign)BOOL ClassDismiss;
 
 @end
 
@@ -182,13 +183,14 @@
     if (item.type == YSScheduleVideoStateBefore) {
         return;
     }
-    if (item.type == YSScheduleVideoStateDefault) {
+    if (item.type == YSScheduleVideoStateExpred) {
         [MBProgressHUD showMessage:@"课程已过期"];
         return;
     }
-    
-    self.vedio_selected = item;
-    [self makeRoomDataWithRoomId:item.item_id];
+    if (item.type == YSScheduleVideoStateLiving || item.type == YSScheduleVideoStateAfter) {
+        self.vedio_selected = item;
+        [self makeRoomDataWithRoomId:item.item_id];
+    }
 }
 
 #pragma mark TKEduEnterClassRoomDelegate
@@ -204,6 +206,8 @@
 }
 
 - (void) leftRoomComplete{
+
+    if (!self.ClassDismiss) return;
     
     if(self.vedio_selected.type == YSScheduleVideoStateLiving){
         [self.commentView show];
@@ -212,8 +216,9 @@
 - (void) onClassBegin{
     TKLog(@"TKEduEnterClassRoomDelegate-----onClassBegin");
 }
+
 - (void) onClassDismiss{
-    TKLog(@"TKEduEnterClassRoomDelegate-----onClassDismiss");
+    self.ClassDismiss = YES;
 }
 - (void) onCameraDidOpenError{
     TKLog(@"TKEduEnterClassRoomDelegate-----onCameraDidOpenError");
@@ -288,7 +293,7 @@
 
 
 #pragma mark : 事件处理
-
+//提交评价
 - (void)caseCommitResult:(NSArray *)values{
     
     NSMutableDictionary *ratings = [NSMutableDictionary dictionary];
@@ -303,12 +308,15 @@
         [weakSelf updateCommentResponse:response];
     }];
 }
-
 - (void)updateCommentResponse:(id)response{
     
-    NSLog(@"updateCommentResponse == %@",response);
-   
+    if (ResponseIsOK) {
+        [MBProgressHUD showMessage:@"感谢您的评价！"];
+        [self.commentView hide];
+    }
 }
+//提交评价
+
  
 - (void)caseYearData:(NSInteger)year{
 
@@ -320,8 +328,7 @@
 
 //请求房间号
 - (void)makeRoomDataWithRoomId:(NSString *)item_id{
-    
-    
+ 
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-room-password?id=%@",DOMAINURL_API,item_id];
     WeakSelf
     [self startAPIRequestWithSelector:path
@@ -388,17 +395,17 @@
 //直播
 - (void)caseLivingWithRoom:(NSString *)room student:(NSString *)student{
     
+    self.ClassDismiss = NO;
     MyofferUser *user = [MyofferUser defaultUser];
- 
     NSString *roomId = @"1463031541";
     NSString *studentPassword = @"9766";
     NSDictionary *tDict = @{
-                            @"serial"  :roomId,
-                            @"host"    :sHost,
-                            @"port"    :sPort,
-                            @"password":studentPassword,//可选
-                            @"clientType":@(3),
-                            @"nickname":@"正在测试中xxxx学生A"
+                                @"serial"  :roomId,
+                                @"host"    :sHost,
+                                @"port"    :sPort,
+                                @"password":studentPassword,//可选
+                                @"clientType":@(3),
+                                @"nickname":user.displayname
                             };
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
 }
@@ -409,45 +416,11 @@
     KDClassLog(@"日历 + YSCalendarVC + dealloc");
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
-
 @end
-
-
-/*
- - (void)makeRoomDataWithRoomId:(NSString *)item_id{
- 
- NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-room-password?id=%@",DOMAINURL_API,item_id];
- WeakSelf
- [self startAPIRequestWithSelector:path
- parameters:nil expectedStatusCodes:nil
- showHUD:YES showErrorAlert:YES
- errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
- [weakSelf makeVedioWithResponse:response];
- } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
- [MBProgressHUD showMessage:NetRequest_noNetWork];
- }];
- }
- 
- - (void)makeVedioWithResponse:(id)response{
- 
- if (!ResponseIsOK) {
- [MBProgressHUD showMessage:NetRequest_noNetWork];
- return;
- }
- NSDictionary *result = response[@"result"];
- NSLog(@"result == %@",result); //roomId = 856837414 studentPassword = 000;
- }
- 
- 
- */
-
-
 
 

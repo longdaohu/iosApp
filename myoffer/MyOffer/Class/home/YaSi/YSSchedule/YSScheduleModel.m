@@ -7,6 +7,7 @@
 //
 
 #import "YSScheduleModel.h"
+#import "YXDateHelpObject.h"
 
 @implementation YSScheduleModel
 + (NSDictionary *)mj_replacedKeyFromPropertyName
@@ -16,54 +17,40 @@
              };
     
 }
-/*
- 过期: 'EXPIRED',
- 完成: 'FINISHED',
- 进行中: 'IN_PROGRESS',
- */
-- (void)setStatus:(NSString *)status{
-    
-    _status = status;
-    
-    if ([status isEqualToString:@"IN_PROGRESS"]) {
-        self.state = @"1";
-    }else if ([status isEqualToString:@"FINISHED"]){
-        self.state = @"3";
-    }else{
-        self.state = @"0";
-    }
-}
 
-// 0 过期  1 直播ing  2 未直播  3 回放
+
 - (YSScheduleVideoState)type{
  
-    switch (self.state.integerValue) {
-        case 1:
-            return YSScheduleVideoStateLiving;
-            break;
-        case 2:
-            return YSScheduleVideoStateBefore;
-            break;
-        case 3:
-            return YSScheduleVideoStateAfter;
-            break;
-        default:
-            return YSScheduleVideoStateDefault;
-            break;
+    if ([self.status isEqualToString:@"IN_PROGRESS"]) {
+        return YSScheduleVideoStateLiving;
     }
+    
+    if ([self.status isEqualToString:@"FINISHED"]) {
+        return YSScheduleVideoStateAfter;
+    }
+    
+    if ([self.status isEqualToString:@"NOT_START"]) {
+        return YSScheduleVideoStateBefore;
+    }
+    
+    if ([self.status isEqualToString:@"EXPIRED"]) {
+        return YSScheduleVideoStateExpred;
+    }else{
+        return YSScheduleVideoStateDefault;
+    }
+ 
 }
-
 
 - (NSString *)stateName{
     
-    switch (self.state.integerValue) {
-        case 1:
+    switch (self.type) {
+        case YSScheduleVideoStateLiving:
             return @"立即听课";
             break;
-        case 2:
+        case YSScheduleVideoStateBefore:
             return @"未直播";
             break;
-        case 3:
+        case YSScheduleVideoStateAfter:
             return @"观看回放";
             break;
         default:
@@ -126,6 +113,57 @@
     }
     return _teacherImage;
 }
+
+
+
+- (NSString *)nextCourseTime{
+    
+    if (!_nextCourseTime) {
+        
+        if (self.startTime.length == 0 || !self.startTime) {
+            
+            return @"";
+        }
+        YXDateHelpObject  *help = [YXDateHelpObject manager];
+        NSDate *nextCourseStartTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.startTime];
+        NSDate *nextCourseEndTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.endTime];
+        NSString *endTime =  [help getStrFromDateFormat:@"HH:mm" Date:nextCourseEndTime];
+ 
+        NSString *month = [NSString stringWithFormat:@"%ld",nextCourseStartTime.month];
+        if (month.length < 2) {
+            month = [NSString stringWithFormat:@"0%ld",nextCourseStartTime.month];
+        }
+        NSString *day = [NSString stringWithFormat:@"%ld",nextCourseStartTime.day];
+        if (day.length < 2) {
+            day = [NSString stringWithFormat:@"0%ld",nextCourseStartTime.day];
+        }
+        NSString *hour = [NSString stringWithFormat:@"%ld",nextCourseStartTime.hour];
+        if (hour.length < 2) {
+            hour = [NSString stringWithFormat:@"0%ld",nextCourseStartTime.hour];
+        }
+        NSString *minute = [NSString stringWithFormat:@"%ld",nextCourseStartTime.minute];
+        if (minute.length < 2) {
+            minute = [NSString stringWithFormat:@"0%ld",nextCourseStartTime.minute];
+        }
+        
+        if (nextCourseStartTime.isToday) {
+            _nextCourseTime = [NSString stringWithFormat:@"今天 %@:%@ - %@", hour, minute,endTime];
+            NSDate *now = [NSDate date];
+            if ((nextCourseStartTime.hour > now.hour) || (nextCourseStartTime.hour == now.hour  && nextCourseStartTime.minute <= now.minute )) {
+                _nextCourseTime = [NSString stringWithFormat:@"%@:%@ - %@", hour, minute,endTime];
+            }
+            
+        }else if (nextCourseStartTime.isTomorrow) {
+            _nextCourseTime = [NSString stringWithFormat:@"明天 %@:%@ - %@", hour,minute,endTime];
+        }else{
+            _nextCourseTime = [NSString stringWithFormat:@"%ld-%@-%@ %@:%@ - %@", nextCourseStartTime.year, month, day,hour,minute,endTime];
+        }
+    }
+    
+    return _nextCourseTime;
+}
+
+
 
 @end
 

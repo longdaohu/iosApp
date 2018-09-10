@@ -9,7 +9,7 @@
 #import "HomeYasiVC.h"
 #import "HomeYaSiHeaderView.h"
 #import "YaSiHomeModel.h"
-#import "YSMyCourseVC.h"
+#import "YSCalendarVC.h"
 #import "YaSiScheduleVC.h"
 #import "YasiCatigoryModel.h"
 #import "YasiCatigoryItemModel.h"
@@ -18,7 +18,8 @@
 #import "HomeYSSectionView.h"
 #import "YXDateHelpObject.h"
 #import "YSImagesCell.h"
-
+#import "ServiceItemFrame.h"
+#import "CreateOrderVC.h"
 
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
@@ -49,19 +50,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
     [self makeYSData];
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
     self.height_arr = @[@2000,@800,@1000,@700];
-
+    
 }
 
 - (void)setUser:(MyofferUser *)user{
     super.user = user;
     
     if (self.ysModel) {
-         self.ysModel.user_coin = user.coin;
+        self.ysModel.user_coin = user.coin;
     }
     if (self.YSHeader) {
         self.YSHeader.score_signed = user.coin;
@@ -104,12 +105,12 @@
     header.actionBlock = ^(YSHomeHeaderActionType type) {
         [weakSelf caseHeaderActionType: type];
     };
- 
+    
 }
 
 - (UIView *)YSFooter{
     if (!_YSFooter) {
-     
+        
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 1)];
         UIView *clrView = [[UIView alloc] initWithFrame:self.view.bounds];
         clrView.backgroundColor = XCOLOR_WHITE;
@@ -129,7 +130,7 @@
     titleView.actionBlock = ^(NSInteger index) {
         [weakSelf   caseSectionTitleChange:index];
     };
-     return titleView;
+    return titleView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -139,12 +140,9 @@
         cell =[[YSImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YSimages"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = [NSString stringWithFormat:@" aaaaaaa = %@",self.height_arr[self.current_index]];
-    cell.contentView.backgroundColor = XCOLOR_RANDOM;
-    if (self.ysModel.catigory_Package_current.items.count > 0) {
-        cell.items = self.ysModel.catigory_Package_current.items[self.current_index];
-    }
- 
+    cell.current_index = self.current_index;
+    cell.item = self.ysModel.catigory_Package_current;
+    
     return cell;
 }
 
@@ -158,11 +156,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return  [self.height_arr[self.current_index] floatValue];
+    if (!self.ysModel.catigory_Package_current) {
+        return  HEIGHT_ZERO;
+    }else{
+        NSNumber *cell_value = self.ysModel.catigory_Package_current.cell_arr[self.current_index];
+        return  [cell_value floatValue];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
- 
+    
     return 65;
 }
 
@@ -170,25 +173,25 @@
 #pragma mark : 数据请求
 //今日直播
 - (void)makeTodayOnliveData{
-
+    
     if (!LOGIN) return;
     WeakSelf;
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/calendar-course",DOMAINURL_API];
-//    NSDate *today = [NSDate date];
-//    NSDate *tomorrow = [NSDate dateTomorrow];
-//    YXDateHelpObject *helpObj = [YXDateHelpObject manager];
-//    NSString *startTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
-//    NSString *endTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:tomorrow];
+    NSDate *today = [NSDate date];
+    NSDate *tomorrow = [NSDate dateTomorrow];
+    YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+    NSString *startTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+    NSString *endTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:tomorrow];
     [self startAPIRequestWithSelector:path
                            parameters:@{
-                                            @"startTime" : @"2018-02-06",
-                                            @"endTime" : @"2018-12-26",
+                                        @"startTime" : startTime,
+                                        @"endTime" : endTime,
                                         } expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
               errorAlertDismissAction:nil
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makelivingWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-        }];
+              }];
 }
 
 - (void)makelivingWithResponse:(id)response{
@@ -240,8 +243,6 @@
     self.tableView.tableHeaderView = self.YSHeader;
     
     [self.tableView reloadData];
- 
-//    [self makeCatigoryItemDataWithID:self.YSHeader.ysModel.catigory_Package_current._id];
 }
 
 //签到
@@ -263,13 +264,12 @@
     if (!ResponseIsOK) {
         
         NSNumber *code = response[@"code"];
-         if(code.integerValue == 100){
-             
-             self.YSHeader.score_signed = nil;
-             NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
-             [MBProgressHUD showMessage:msg];
-         }
-        
+        if(code.integerValue == 100){
+            
+            self.YSHeader.score_signed = nil;
+            NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
+            [MBProgressHUD showMessage:msg];
+        }
         
     }else{
         
@@ -279,7 +279,7 @@
         self.ysModel.user_coin = result[@"score"];
         
     }
-
+    
 }
 
 #pragma mark : 事件处理
@@ -313,21 +313,73 @@
 }
 - (void)caseBuy{
     
-    NSLog(@"caseBuy   %@",self.ysModel.catigory_Package_current.name);
+    ServiceItem *item = [[ServiceItem alloc] init];
+    item.price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.price.floatValue];
+    item.display_price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.display_price.floatValue];
+    item.service_id = self.ysModel.catigory_Package_current._id;
+    item.cover_url = self.ysModel.catigory_Package_current.cover_url;
+    item.name  = self.ysModel.catigory_Package_current.name;
     
-//    CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
-//    vc.itemFrame =  self.service_Frame;
-//    [self.navigationController pushViewController:vc animated:YES];
+    ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
+    itemFrame.item = item;
+    
+    CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
+    vc.itemFrame =  itemFrame;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
+
+/*
+ 
+ self.discount.hidden = !item.reduce_flag;
+ 
+ [self.iconView sd_setImageWithURL: [item.cover_url mj_url] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+ self.titleLab.text = item.name;
+ self.priceLab.text = item.price_str;
+ self.forPersonLab.text = item.comment_suit_people[@"value"];
+ 
+ "_id" = 5b8cd22c0329d7d838eebcb9;
+ "contract_enable" = 0;
+ =                     (
+ );
+ courseDescription =                     (
+ );
+ courseOutline =                     (
+ );
+ courseQuestions =                     (
+ );
+ "cover_url" = "www.https://img.myoffer.cn/data/cms/emall/DIYsku_logo.jpg.com";
+ "display_price" = 2000;
+ name = "\U96c5\U601d5\U5206\U57fa\U7840\U73ed";
+ price = 1000;
+ 
+ "_id" = 5b8cd3050329d7d838eebccb;
+ "asken_questions" =             (
+ );
+ "contract_enable" = 0;
+ "course_description" =             (
+ );
+ "course_outline" =             (
+ );
+ "cover_url" = "";
+ name = "\U96c5\U601d7\U5206\U51b2\U523a\U73ed";
+ "notes_application" =             (
+ );
+ "old_price" = 7000;
+ price = 3500;
+ 
+ */
+
+
 
 - (void)caseLive{
     
-    YSMyCourseVC *vc = [[YSMyCourseVC alloc] init];
+    YSCalendarVC *vc = [[YSCalendarVC alloc] init];
     PushToViewController(vc);
 }
 
 - (void)caseBanner{
-
+    
     WebViewController *vc = [[WebViewController alloc] init];
     vc.path = self.ysModel.banner_target;
     PushToViewController(vc);
@@ -352,7 +404,10 @@
     
     self.current_index = index;
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+    CGFloat top_y = self.tableView.mj_offsetY > CGRectGetMaxY(self.YSHeader.frame) ?  CGRectGetMaxY(self.YSHeader.frame) :  self.tableView.mj_offsetY ;
     [UIView performWithoutAnimation:^{
+        
+        [self.tableView setContentOffset:CGPointMake(0, top_y) animated:false];
         [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationFade];
     }];
 }
@@ -366,27 +421,3 @@
 @end
 
 
-/*分类子项
- - (void)makeCatigoryItemDataWithID:(NSString *)item_id{
- 
- WeakSelf;
- NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/products/%@",DOMAINURL_API,item_id];
- [self startAPIRequestWithSelector:path
- parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
- errorAlertDismissAction:nil
- additionalSuccessAction:^(NSInteger statusCode, id response) {
- [weakSelf makeCatigoryItemWithResponse:response];
- } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
- }];
- }
- 
- - (void)makeCatigoryItemWithResponse:(id)response{
- 
- if (!ResponseIsOK) {
- return;
- }
- 
- NSLog(@"makeCatigoryItemWithResponse >>>>>>> %@",response);
- 
- }
- */

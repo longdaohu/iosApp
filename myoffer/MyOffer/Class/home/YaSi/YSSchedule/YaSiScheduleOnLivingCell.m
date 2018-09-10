@@ -53,7 +53,7 @@
 - (void)setItem:(YSScheduleModel *)item{
     _item = item;
     
-    self.titleLab.text = item.inClassTime;
+    self.titleLab.text = item.nextCourseTime;
     self.nameLab.text = item.teacherName;
     self.subLab.text = item.topic;
     [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
@@ -63,10 +63,10 @@
     self.onlivingView.hidden = item.livelogoState;
     self.playBtn.enabled = item.playButtonState;
   
-    self.playBtn.hidden = NO;
-    if (item.type == YSScheduleVideoStateBefore){
-        self.playBtn.hidden = YES;
-    }
+//    self.playBtn.hidden = NO;
+//    if (item.type == YSScheduleVideoStateBefore){
+//        self.playBtn.hidden = YES;
+//    }
     
 }
 - (void)ToplineHiden:(BOOL)hide{

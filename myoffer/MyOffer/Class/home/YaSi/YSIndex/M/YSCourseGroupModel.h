@@ -25,6 +25,12 @@ typedef NS_ENUM(NSInteger,YSCourseGroupType) {
  过期: 'EXPIRED',
  完成: 'FINISHED',
  进行中: 'IN_PROGRESS',
+ NO_COURSE
+ NOT_START
+ IN_PROGRESS
+ FINISHED
+ EXPIRED
  */
 @end
+
 

@@ -159,6 +159,16 @@
 
 - (void)caseCommit{
  
+    for (YSCommentItem *item in self.items) {
+       
+        if (item.index_selected == 0) {
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"%@",item.title]];
+            return;
+        }
+        
+    }
+    
+    
     NSArray *stars = [self.items valueForKey:@"index_selected"];
     if (self.actionBlock) {
         self.actionBlock(stars);

@@ -17,18 +17,17 @@
     NSMutableArray *IN_PROGRESS_tmp = [NSMutableArray array];
     NSMutableArray *FINISHED_tmp = [NSMutableArray array];
     
+    // NO_COURSE  NOT_START  IN_PROGRESS  FINISHED  EXPIRED
     for (YSCourseModel *item in self.items) {
-        if ([item.status isEqualToString:@"IN_PROGRESS"]) {
-            [IN_PROGRESS_tmp addObject:item];
-        }else{
+        if ([item.status isEqualToString:@"FINISHED"] || [item.status isEqualToString:@"EXPIRED"]) {
             [FINISHED_tmp addObject:item];
+        }else{
+            [IN_PROGRESS_tmp addObject:item];
         }
     }
-    
     self.IN_PROGRESS = [IN_PROGRESS_tmp copy];
     self.FINISHED = [FINISHED_tmp copy];
 }
-
 
 - (NSArray *)curent_items{
     

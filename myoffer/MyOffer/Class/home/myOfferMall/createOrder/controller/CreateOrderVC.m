@@ -825,6 +825,7 @@
 
 #pragma mark :  签署状态【loginRequired】
 - (void)makeContractStatusData{
+  
     WeakSelf
     NSString  *path = [NSString stringWithFormat:@"GET %@api/v1/contracts/sign-status",DOMAINURL_API];
     [self startAPIRequestWithSelector:path

@@ -12,5 +12,6 @@
 + (instancetype)commentView;
 @property(nonatomic,copy)void(^actionBlock)(NSArray *items);
 - (void)show;
+- (void)hide;
 
 @end

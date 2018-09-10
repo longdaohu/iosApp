@@ -19,6 +19,9 @@
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)YSScheduleModel *vedio_selected;
+@property(nonatomic,strong)YSUserCommentView *commentView;
+@property(nonatomic,assign)BOOL ClassDismiss;
+
 @end
 
 @implementation YaSiScheduleVC
@@ -50,6 +53,21 @@
     NSString *name = [TXSakuraManager getSakuraCurrentName];
     NSInteger type = [TXSakuraManager getSakuraCurrentType];
     [TXSakuraManager shiftSakuraWithName:name type:type];
+}
+
+- (YSUserCommentView *)commentView{
+    
+    if (!_commentView) {
+        
+        WeakSelf
+        _commentView =  [YSUserCommentView commentView];
+        _commentView.actionBlock = ^(NSArray *items) {
+            [weakSelf caseCommitResult:items];
+        };
+        
+    }
+    
+    return _commentView;
 }
 
 - (void)makeUI{
@@ -123,18 +141,19 @@
     if (item.type == YSScheduleVideoStateBefore) {
          return;
     }
-    if (item.type == YSScheduleVideoStateDefault) {
-        
+    if (item.type == YSScheduleVideoStateExpred) {
         [MBProgressHUD showMessage:@"课程已过期"];
         return;
     }
-    self.vedio_selected = item;
-    [self makeRoomDataWithRoomId:item.item_id];
-}
+    
+    if (item.type == YSScheduleVideoStateLiving || item.type == YSScheduleVideoStateAfter) {
+        self.vedio_selected = item;
+      [self makeRoomDataWithRoomId:item.item_id];
+    }
+ }
 
 #pragma mark : 数据加载
 - (void)makeCoursesData{
-    
     
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/schedule?id=%@",DOMAINURL_API,self.item.classId];
     WeakSelf
@@ -199,28 +218,11 @@
     
     NSDictionary *result = response[@"result"];
     NSString *roomId = result[@"roomId"];
-//    if (self.vedio_selected.type == YSScheduleVideoStateLiving) {
+    if (self.vedio_selected.type == YSScheduleVideoStateLiving) {
         NSString *studentPassword = result[@"studentPassword"];
-        roomId = @"429790210";
-        studentPassword = @"9490";
-        //                                @"host"    :sHost,
-        //                                @"port"    :sPort,
-        //                                //@"domain"   :sDomain,
-        //                                @"userrole":@(_role),
-        NSDictionary *tDict = @{
-                                @"serial"  :roomId,
-                                @"host"    :@"global.talk-cloud.net",
-                                @"port"    :@"80",
-                                //@"userid"  : @"1111",//可选
-                                @"password":studentPassword,//可选
-                                @"clientType":@(3),
-                                @"nickname":@"正在测试中徐金辉"
-                                };
-        [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
-        
-//    }
+        [self caseLivingWithRoom:roomId student:studentPassword];
+    }
 
-    return;
     if (self.vedio_selected.type == YSScheduleVideoStateAfter) {
         [self makeRecordpathWithRoom:roomId];
     }
@@ -257,17 +259,92 @@
     }
 }
 
+
+
+#pragma mark TKEduEnterClassRoomDelegate
+//error.code  Description:error.description
+- (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
+    TKLog(@"TKEduEnterClassRoomDelegate-----onEnterRoomFailed");
+}
+- (void) onKitout:(EKickOutReason)reason{
+    TKLog(@"TKEduEnterClassRoomDelegate-----onKitout");
+}
+- (void) joinRoomComplete{
+    TKLog(@"TKEduEnterClassRoomDelegate-----joinRoomComplete");
+}
+
+- (void) leftRoomComplete{
+    if (!self.ClassDismiss) return;
+    
+    if(self.vedio_selected.type == YSScheduleVideoStateLiving){
+        [self.commentView show];
+    }
+}
+- (void) onClassBegin{
+    TKLog(@"TKEduEnterClassRoomDelegate-----onClassBegin");
+}
+- (void) onClassDismiss{
+ 
+    self.ClassDismiss = YES;
+}
+- (void) onCameraDidOpenError{
+    TKLog(@"TKEduEnterClassRoomDelegate-----onCameraDidOpenError");
+}
+
+
 #pragma mark : 事件处理
+- (void)caseCommitResult:(NSArray *)values{
+    
+    NSMutableDictionary *ratings = [NSMutableDictionary dictionary];
+    NSArray *keyes = @[@"fluency",@"practicability",@"teachingAbility",@"punctuality",@"interaction"];
+    for (NSInteger index  = 0; index < values.count; index++) {
+        [ratings setValue:values[index] forKey:keyes[index]];
+    }
+    NSDictionary *parameter = @{ @"id":self.vedio_selected.item_id,@"ratings":ratings};
+    NSString *path = [NSString stringWithFormat:@"POST %@api/v1/ielts/calendar-appraise",DOMAINURL_API];
+    WeakSelf
+    [self startAPIRequestWithSelector:path  parameters:parameter success:^(NSInteger statusCode, id response) {
+        [weakSelf updateCommentResponse:response];
+    }];
+}
+
+- (void)updateCommentResponse:(id)response{
+    
+    if (ResponseIsOK) {
+        [MBProgressHUD showMessage:@"感谢您的评价！"];
+        [self.commentView hide];
+    }
+}
+
 - (void)caseCalendar{
     
     YSCalendarVC *vc = [[YSCalendarVC alloc] init];
     PushToViewController(vc);
 }
 
+//直播
+- (void)caseLivingWithRoom:(NSString *)room student:(NSString *)student{
+    
+    self.ClassDismiss = NO;
+    MyofferUser *user = [MyofferUser defaultUser];
+    NSString *roomId = @"1463031541";
+    NSString *studentPassword = @"9766";
+    NSDictionary *tDict = @{
+                            @"serial"  :roomId,
+                            @"host"    :sHost,
+                            @"port"    :sPort,
+                            @"password":studentPassword,//可选
+                            @"clientType":@(3),
+                            @"nickname":user.displayname
+                            };
+    [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
+}
+
 - (void)dealloc{
     
     KDClassLog(@"课程表 + YaSiScheduleVC + dealloc");
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

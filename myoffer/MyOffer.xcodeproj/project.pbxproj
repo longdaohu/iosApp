@@ -429,6 +429,7 @@
 		AEA03A40211D699A007A791E /* MyofferTextHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */; };
 		AEA03A47211D7DE2007A791E /* RoomCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A46211D7DE2007A791E /* RoomCityVC.m */; };
 		AEA03A4A211D869B007A791E /* RoomCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A49211D869B007A791E /* RoomCityModel.m */; };
+		AEA13A7121460E4D004C113B /* home_yasi_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
 		AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */; };
 		AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2492D1D5B215300DD7939 /* OrderCell.m */; };
@@ -1647,6 +1648,7 @@
 		AEA03A46211D7DE2007A791E /* RoomCityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityVC.m; sourceTree = "<group>"; };
 		AEA03A48211D869B007A791E /* RoomCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCityModel.h; sourceTree = "<group>"; };
 		AEA03A49211D869B007A791E /* RoomCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityModel.m; sourceTree = "<group>"; };
+		AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_yasi_bg.jpg; sourceTree = "<group>"; };
 		AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiNoResultVeiw.h; sourceTree = "<group>"; };
 		AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiNoResultVeiw.m; sourceTree = "<group>"; };
 		AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
@@ -2781,6 +2783,7 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
+				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AED3C473212E61FB00A5668C /* RoomBaseVC.h */,
 				AED3C474212E61FB00A5668C /* RoomBaseVC.m */,
 				AED3C47D212FE47600A5668C /* RoomMap */,
@@ -5071,6 +5074,7 @@
 				AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */,
 				AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */,
 				AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */,
+				AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */,
 				AEF657AE20FDBEE400C0D849 /* home_uvic_immigration_a.jpg */,
 				AEF657A020FD8D4200C0D849 /* home_uvic_law.jpg */,
 				AEDDAA5B20E4D36C0069C138 /* home_application_uni_rank.png */,
@@ -5288,7 +5292,6 @@
 				AEB75DE12133EC4600C9129C /* YaSiHomeModel.m */,
 				AEB75E13213696B900C9129C /* YSCourseGroupModel.h */,
 				AEB75E14213696B900C9129C /* YSCourseGroupModel.m */,
-				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AEB75E1C2137CE5600C9129C /* YasiCatigoryModel.h */,
 				AEB75E1D2137CE5600C9129C /* YasiCatigoryModel.m */,
 				AEB75E1F2137CEB200C9129C /* YasiCatigoryItemModel.h */,
@@ -6707,7 +6710,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6776,6 +6779,7 @@
 				AEF657AF20FDBEE400C0D849 /* home_uvic_immigration_a.jpg in Resources */,
 				AEB75E0121352C8800C9129C /* YSScheduleCell.xib in Resources */,
 				AEB75E062135377300C9129C /* YaSiScheduleOnLivingCell.xib in Resources */,
+				AEA13A7121460E4D004C113B /* home_yasi_bg.jpg in Resources */,
 				AED4AF7C2141024300D8B34D /* LTUpdate.strings in Resources */,
 				AEB75E292139025900C9129C /* PriceCellView.xib in Resources */,
 				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
@@ -7959,7 +7963,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

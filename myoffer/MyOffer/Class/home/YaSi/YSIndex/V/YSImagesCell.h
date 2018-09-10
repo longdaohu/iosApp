@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YasiCatigoryItemModel;
 
 @interface YSImagesCell : UITableViewCell
-@property(nonatomic,strong)NSArray *items;
+@property(nonatomic,assign)NSInteger current_index;
+@property(nonatomic,strong)YasiCatigoryItemModel *item;
+
 
 @end

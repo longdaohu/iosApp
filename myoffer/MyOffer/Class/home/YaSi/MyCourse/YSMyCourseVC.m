@@ -172,7 +172,6 @@
         [self.tableView emptyViewWithError:NetRequest_noNetWork];
         return;
     }
-    
     NSArray *result = response[@"result"];
     if (result.count == 0)  {
         [self.tableView emptyViewWithError:NetRequest_NoDATA];

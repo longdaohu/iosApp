@@ -27,6 +27,9 @@
 
 @property(nonatomic,strong)UIView *banner_box;//轮播图盒子
 @property(nonatomic,strong)UICollectionViewFlowLayout *flow_banner;
+@property(nonatomic,assign)CGFloat dragStartX;
+@property(nonatomic,assign)CGFloat dragEndX;
+@property(nonatomic,assign)NSInteger currentIndex;
 @property(nonatomic,strong)UICollectionView *bannerView;//轮播图
 @property(nonatomic,strong)UIView *catigory_box;//分类盒子
 @property(nonatomic,strong)UICollectionView *catigoryView;//分类详情
@@ -36,6 +39,7 @@
 @property(nonatomic,strong)PriceCellView *priceCell;
 @property(nonatomic,strong)NSArray *catigory_buttones; //分类按钮数组，预添加，减少临时
 @property(nonatomic,strong)UIImageView *bgImageView; //背景图片
+
 
 @end
 
@@ -59,7 +63,7 @@
     bgView.image = XImage(@"ys_header_bg");
     [self addSubview:bgView];
     self.bgImageView = bgView;
-
+    
     UIButton *ysBtn = [UIButton new];
     [ysBtn setBackgroundImage:XImage(@"ys_header_test") forState:UIControlStateNormal];
     ysBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -100,16 +104,16 @@
     bgBtn.titleLabel.font = XFONT(12);
     bgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     bgBtn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-
+    
     UIImageView *clockBtn = [UIImageView new];
     [self addSubview:clockBtn];
     self.clockBtn = clockBtn;
     clockBtn.image = XImage(@"ys_heike_logo");
- 
+    
     UIView *banner_box = [UIView new];
     [self addSubview:banner_box];
     self.banner_box = banner_box;
- 
+    
     YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
     self.flow_banner = flow;
     UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
@@ -129,7 +133,7 @@
     self.catigory_box = catigory_box;
     
     UIView *line_catigory = [UIView new];
-    line_catigory.backgroundColor = XCOLOR_line;
+    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.3);
     [catigory_box addSubview:line_catigory];
     self.line_catigory = line_catigory;
     
@@ -155,10 +159,10 @@
     catigory_box.clipsToBounds = YES;
     
     UIView *catigory_box_line  = [UIView new];
-    catigory_box_line.backgroundColor = XCOLOR_line;
+    catigory_box_line.backgroundColor = XCOLOR(239, 242, 245, 0.3);
     [catigory_box addSubview:catigory_box_line];
     self.catigory_box_line = catigory_box_line;
- 
+    
     PriceCellView *priceCell = Bundle(@"PriceCellView");
     priceCell.backgroundColor = XCOLOR_CLEAR;
     self.priceCell = priceCell;
@@ -280,7 +284,7 @@
         
         return cell;
     }
- 
+    
     YsCatigoryItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YsCatigoryItemCell" forIndexPath:indexPath];
     YasiCatigoryItemModel *item = self.ysModel.catigory_current.servicePackage[indexPath.row];
     cell.cell_selected =  (self.ysModel.catigoryPackage_item_selected_index == indexPath.row);
@@ -304,6 +308,42 @@
     }
 }
 
+#pragma mark :
+
+//手指拖动开始
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    self.dragStartX = scrollView.contentOffset.x;
+}
+
+//手指拖动停止
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    self.dragEndX = scrollView.contentOffset.x;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self fixCellToCenter];
+    });
+}
+
+//配置cell居中
+-(void)fixCellToCenter
+{
+    //最小滚动距离
+    float dragMiniDistance = self.bounds.size.width/50.0f;
+    if (self.dragStartX - self.dragEndX >= dragMiniDistance) {
+        self.currentIndex -= 1;//向右
+    }else if(self.dragEndX - self.dragStartX >= dragMiniDistance){
+        self.currentIndex += 1;//向左
+    }
+    NSInteger maxIndex = [self.bannerView numberOfItemsInSection:0] - 1;
+    self.currentIndex = _currentIndex <= 0 ? 0 : self.currentIndex;
+    self.currentIndex = _currentIndex >= maxIndex ? maxIndex : self.currentIndex;
+    
+    [self.bannerView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+}
+
+
+
 
 #pragma mark : 事件处理
 
@@ -323,7 +363,7 @@
 }
 
 - (void)caseBuy{
-
+    
     if (self.actionBlock) {
         self.actionBlock(YSHomeHeaderActionTypeBuy);
     }
@@ -362,12 +402,13 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.activeView.frame = rect;
     }];
-
+    
     self.ysModel.catigory_title_selected_index = sender.tag;
     self.ysModel.catigoryPackage_item_selected_index = 0;
     [self.catigoryView reloadData];
     
     self.priceCell.item = self.ysModel.catigory_Package_current;
+    [self caseValueChange];
 }
 
 - (void)layoutSubviews{

@@ -40,10 +40,9 @@
 - (void)setItem:(YSCourseModel *)item{
     
     super.item = item;
-    self.titleLab.text = item.name;
     self.descLab.text = item.label;
+//    descLab.text = @"您的专属老师正在为您安排班级和课程\n 预计  2018 . 08 . 11  前完成。";
 }
-
 
 - (void)layoutSubviews{
     

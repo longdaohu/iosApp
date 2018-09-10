@@ -29,7 +29,6 @@
         
         NSArray *startTime =  [self.startTime componentsSeparatedByString:@"T"];
         NSArray *endTime =  [self.endTime componentsSeparatedByString:@"T"];
-        
         if (startTime.count > 0 && endTime.count > 0) {
             _date_label = [NSString stringWithFormat:@"%@ —— %@  |  %@课时",startTime.firstObject,endTime.firstObject,self.total];
         }else{
@@ -50,6 +49,9 @@
         }
         YXDateHelpObject  *help = [YXDateHelpObject manager];
         NSDate *nextCourseStartTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.nextCourseStartTime];
+        NSDate *nextCourseEndTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.nextCourseEndTime];
+        NSString *endTime =  [help getStrFromDateFormat:@"HH:mm" Date:nextCourseEndTime];
+        
         
         NSString *month = [NSString stringWithFormat:@"%ld",nextCourseStartTime.month];
         if (month.length < 2) {
@@ -68,11 +70,11 @@
             minute = [NSString stringWithFormat:@"0%ld",nextCourseStartTime.minute];
         }
         if (nextCourseStartTime.isToday) {
-            _nextCourseTime = [NSString stringWithFormat:@"今天 %@:%@", hour, minute];
+            _nextCourseTime = [NSString stringWithFormat:@"今天 %@:%@ - %@", hour, minute,endTime];
         }else if (nextCourseStartTime.isTomorrow) {
-            _nextCourseTime = [NSString stringWithFormat:@"明天 %@:%@", hour,minute];
+            _nextCourseTime = [NSString stringWithFormat:@"明天 %@:%@ - %@", hour,minute,endTime];
         }else{
-            _nextCourseTime = [NSString stringWithFormat:@"%ld-%@-%@ %@:%@", nextCourseStartTime.year, month, day,hour,minute];
+            _nextCourseTime = [NSString stringWithFormat:@"%ld-%@-%@ %@:%@ - %@", nextCourseStartTime.year, month, day,hour,minute,endTime];
         }
     }
     
