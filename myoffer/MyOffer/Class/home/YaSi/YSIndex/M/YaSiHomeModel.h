@@ -35,6 +35,7 @@
 @property(nonatomic,assign)CGRect signedBtn_frame;
 @property(nonatomic,assign)CGRect signTitle_frame;
 @property(nonatomic,assign)CGRect banner_box_frame;
+@property(nonatomic,assign)CGRect banner_pageControl_frame;
 @property(nonatomic,assign)CGRect catigory_box_frame;
 @property(nonatomic,assign)CGRect catigory_collectView_frame;
 @property(nonatomic,assign)CGRect cati_clt_line_frame;

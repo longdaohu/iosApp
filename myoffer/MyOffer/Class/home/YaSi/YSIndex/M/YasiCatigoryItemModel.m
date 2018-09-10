@@ -161,18 +161,18 @@
     
     if (!_cell_arr) {
         
-        
-        if (self.cell_courseDescription_height < XSCREEN_HEIGHT) {
-            self.cell_courseDescription_height = XSCREEN_HEIGHT;
+        CGFloat mini_height = XSCREEN_HEIGHT * 0.8;
+        if (self.cell_courseDescription_height < mini_height) {
+            self.cell_courseDescription_height = mini_height;
         }
-        if (self.cell_courseOutline_height < XSCREEN_HEIGHT) {
-            self.cell_courseOutline_height = XSCREEN_HEIGHT;
+        if (self.cell_courseOutline_height < mini_height) {
+            self.cell_courseOutline_height = mini_height;
         }
-        if (self.cell_courseQuestions_height < XSCREEN_HEIGHT) {
-            self.cell_courseQuestions_height = XSCREEN_HEIGHT;
+        if (self.cell_courseQuestions_height < mini_height) {
+            self.cell_courseQuestions_height = mini_height;
         }
-        if (self.cell_courseCaveat_height < XSCREEN_HEIGHT) {
-            self.cell_courseCaveat_height = XSCREEN_HEIGHT;
+        if (self.cell_courseCaveat_height < mini_height) {
+            self.cell_courseCaveat_height = mini_height;
         }
         
         _cell_arr = @[

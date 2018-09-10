@@ -196,8 +196,14 @@
     self.bannerView_frame = CGRectMake(banner_x, banner_y, banner_w, banner_h);
     self.header_banner_size = CGSizeMake(banner_w - 40, banner_h - 5);
     
-    banner_box_h = banner_h + 10;
+    banner_box_h = banner_h + 20;
     self.banner_box_frame = CGRectMake(banner_box_x, banner_box_y, banner_box_w, banner_box_h);
+    
+    CGFloat page_x  = 20;
+    CGFloat page_h  = 10;
+    CGFloat page_y  = banner_box_h - page_h;
+    CGFloat page_w  = self.banner_images.count * 16;
+    self.banner_pageControl_frame = CGRectMake(page_x, page_y, page_w, page_h);
 }
 
 

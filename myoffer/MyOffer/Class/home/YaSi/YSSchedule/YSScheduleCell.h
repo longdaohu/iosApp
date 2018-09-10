@@ -10,8 +10,6 @@
 @class YSScheduleModel;
 
 @interface YSScheduleCell : UITableViewCell
-@property(nonatomic,assign)NSInteger row;
 @property(nonatomic,strong)YSScheduleModel *item;
-//@property(nonatomic,copy)void(^actionBlock)(YSScheduleModel *item);
 
 @end

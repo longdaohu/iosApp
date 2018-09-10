@@ -31,6 +31,8 @@
 @property(nonatomic,assign)CGFloat dragEndX;
 @property(nonatomic,assign)NSInteger currentIndex;
 @property(nonatomic,strong)UICollectionView *bannerView;//轮播图
+@property(nonatomic,strong)NSTimer *banner_timer;
+@property(nonatomic,strong)UIPageControl *pageControl;
 @property(nonatomic,strong)UIView *catigory_box;//分类盒子
 @property(nonatomic,strong)UICollectionView *catigoryView;//分类详情
 @property(nonatomic,strong)UIView *activeView;
@@ -128,6 +130,11 @@
         bannerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
+    UIPageControl *pageControl = [UIPageControl new];
+    pageControl.currentPageIndicatorTintColor = XCOLOR_LIGHTBLUE;
+    [banner_box addSubview:pageControl];
+    self.pageControl = pageControl;
+    
     UIView *catigory_box = [UIView new];
     [self addSubview:catigory_box];
     self.catigory_box = catigory_box;
@@ -190,7 +197,7 @@
 
 - (void)setScore_signed:(NSString *)score_signed{
     _score_signed = score_signed;
-    
+
     if (score_signed.integerValue > 0) {
         
         self.signedBtn.backgroundColor = XCOLOR_CLEAR;
@@ -221,6 +228,7 @@
     self.livingBtn.frame = ysModel.livingBtn_frame;
     self.line_catigory.frame = ysModel.line_banner_frame;
     self.catigory_box.frame = ysModel.catigory_box_frame;
+    self.pageControl.frame = ysModel.banner_pageControl_frame;
     self.activeView.frame = ysModel.cati_active_frame;
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
     self.priceCell.frame = ysModel.price_cell_frame;
@@ -267,6 +275,7 @@
     
     if (ysModel.banner_images.count > 0) {
         [self.bannerView reloadData];
+         self.pageControl.numberOfPages = ysModel.banner_images.count;
     }
     
 }
@@ -317,11 +326,11 @@
     }
 }
 
-#pragma mark :
-
+#pragma mark : UIScrollViewDelegate
 //手指拖动开始
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [self removeBannerTimer];
     self.dragStartX = scrollView.contentOffset.x;
 }
 
@@ -334,6 +343,12 @@
     });
 }
 
+// 滚动视图减速完成，滚动将停止时，调用该方法。一次有效滑动，只执行一次。
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    [self addBannerTimer];
+}
+
 //配置cell居中
 -(void)fixCellToCenter
 {
@@ -344,17 +359,41 @@
     }else if(self.dragEndX - self.dragStartX >= dragMiniDistance){
         self.currentIndex += 1;//向左
     }
+    
     NSInteger maxIndex = [self.bannerView numberOfItemsInSection:0] - 1;
     self.currentIndex = _currentIndex <= 0 ? 0 : self.currentIndex;
-    self.currentIndex = _currentIndex >= maxIndex ? maxIndex : self.currentIndex;
+//    self.currentIndex = _currentIndex >= maxIndex ? maxIndex : self.currentIndex;
+    if (self.currentIndex > maxIndex) {
+        self.currentIndex = 0;
+    }
     
     [self.bannerView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+    self.pageControl.currentPage = self.currentIndex;
 }
 
 
-
-
 #pragma mark : 事件处理
+- (void)addBannerTimer{
+    [self.banner_timer  invalidate];
+    self.banner_timer  = nil;
+    if (!self.banner_timer && self.ysModel.banner_images.count > 0) {
+        self.banner_timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(caseBannerTimer) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)removeBannerTimer{
+ 
+    [self.banner_timer  invalidate];
+     self.banner_timer  = nil;
+}
+
+- (void)caseBannerTimer{
+    
+    self.dragStartX = self.bannerView.mj_offsetX;
+    self.dragEndX = (self.bannerView.mj_offsetX + 50);
+    [self fixCellToCenter];
+}
 
 - (void)caseValueChange{
     

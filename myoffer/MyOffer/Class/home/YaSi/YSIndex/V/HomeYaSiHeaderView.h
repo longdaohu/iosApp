@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger,YSHomeHeaderActionType) {
 @property(nonatomic,copy)void(^actionBlock)(YSHomeHeaderActionType type);
 
 - (void)userLoginChange;
-
+- (void)removeBannerTimer;
+- (void)addBannerTimer;
 @end
 

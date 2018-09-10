@@ -10,9 +10,7 @@
 @class YSScheduleModel;
 
 @interface YaSiScheduleOnLivingCell : UITableViewCell
-@property(nonatomic,copy)void(^actionBlock)(void);
 @property(nonatomic,strong)YSScheduleModel *item;
-
 - (void)ToplineHiden:(BOOL)hide;
 
 @end

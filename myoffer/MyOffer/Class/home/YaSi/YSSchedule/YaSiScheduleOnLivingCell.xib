@@ -50,9 +50,6 @@
                         </state>
                         <state key="disabled" backgroundImage="button_light_unable"/>
                         <state key="highlighted" backgroundImage="button_blue_highlight"/>
-                        <connections>
-                            <action selector="caseplay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kPx-Pf-YoR"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18：30 - 20：00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZ3-Mv-j5r">
                         <rect key="frame" x="20" y="15" width="115" height="17"/>

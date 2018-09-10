@@ -53,7 +53,7 @@
     _item = item;
     
     self.nameLab.text = item.teacherName;
-    self.titleLab.text = [NSString stringWithFormat:@"%ld %@",(self.row + 1),item.topic];
+    self.titleLab.text = item.topic;
     [self.timeBtn setTitle:item.nextCourseTime forState:UIControlStateNormal];
     [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
     [self.playBtn setTitle:item.stateName forState:UIControlStateNormal];

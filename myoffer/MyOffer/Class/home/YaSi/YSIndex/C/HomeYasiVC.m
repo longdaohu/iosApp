@@ -23,7 +23,6 @@
 
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
-@property(nonatomic,strong)NSArray *height_arr;
 @property(nonatomic,assign)NSInteger current_index;
 @property(nonatomic,strong)HomeYaSiHeaderView *YSHeader;
 @property(nonatomic,strong) UIView *YSFooter;
@@ -54,8 +53,6 @@
     [self makeYSData];
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
-    self.height_arr = @[@2000,@800,@1000,@700];
-    
 }
 
 - (void)setUser:(MyofferUser *)user{
@@ -75,9 +72,6 @@
     self.groups = @[ys_group];
     
     self.ysModel = [[YaSiHomeModel alloc] init];
-//    NSDictionary *result = [USDefault valueForKey:@"BANNERRECOMMENT"];
-//    NSArray *banners = [HomeBannerObject mj_objectArrayWithKeyValuesArray:result[@"items"]];
-//    self.ysModel.banners = banners;
     self.ysModel.login_state = LOGIN;
     if (self.user) {
         self.ysModel.user_coin = self.user.coin;
@@ -364,8 +358,6 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-
 
 - (void)caseLive{
     

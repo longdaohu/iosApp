@@ -144,6 +144,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YSCourseModel *item = self.groupModel.curent_items[indexPath.row];
+    if ([item.status isEqualToString:@"NO_COURSE"]) {
+        return;
+    }
     YaSiScheduleVC *vc = [[YaSiScheduleVC alloc] init];
     vc.item = item;
     PushToViewController(vc);

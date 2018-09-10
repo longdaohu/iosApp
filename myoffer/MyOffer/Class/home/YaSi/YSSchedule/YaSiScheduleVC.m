@@ -127,7 +127,6 @@
     if (!cell) {
         cell = Bundle(@"YSScheduleCell");
     }
-    cell.row = indexPath.row;
     cell.item = self.items[indexPath.row];
 
     return cell;

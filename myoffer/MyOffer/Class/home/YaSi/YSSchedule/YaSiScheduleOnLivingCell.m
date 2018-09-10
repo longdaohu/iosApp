@@ -33,27 +33,23 @@
     self.topLine.backgroundColor = XCOLOR_line;
     self.onLivingLab.textColor = XCOLOR_RED;
     self.subLab.textColor = XCOLOR_SUBTITLE;
-    
-//    self.playBtn.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
-//    self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);
-//    self.playBtn.layer.shadowOpacity = 0.5;
+    self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);
+    self.playBtn.layer.shadowOpacity = 0.5;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     UIImage *image = [UIImage sd_animatedGIFWithData:data];
     self.onlivingView.image =  image;
 }
 
-- (IBAction)caseplay:(UIButton *)sender {
-    
-    if (self.actionBlock) {
-        self.actionBlock();
-    }
-}
+
 
 - (void)setItem:(YSScheduleModel *)item{
     _item = item;
     
-    self.titleLab.text = item.nextCourseTime;
+    self.titleLab.text = @"";
+    if (item.type == YSScheduleVideoStateLiving) {
+        self.titleLab.text =  item.nextCourseTime;
+    }
     self.nameLab.text = item.teacherName;
     self.subLab.text = item.topic;
     [self.logoView sd_setImageWithURL:[NSURL URLWithString:item.teacherImage] placeholderImage:nil];
@@ -62,13 +58,11 @@
     self.onLivingLab.hidden = item.livelogoState;
     self.onlivingView.hidden = item.livelogoState;
     self.playBtn.enabled = item.playButtonState;
-  
-//    self.playBtn.hidden = NO;
-//    if (item.type == YSScheduleVideoStateBefore){
-//        self.playBtn.hidden = YES;
-//    }
-    
+    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
+    self.playBtn.layer.shadowColor = clr.CGColor;
+
 }
+
 - (void)ToplineHiden:(BOOL)hide{
     
     self.topLine.hidden = hide;
