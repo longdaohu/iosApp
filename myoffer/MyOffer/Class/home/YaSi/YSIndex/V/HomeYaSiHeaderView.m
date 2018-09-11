@@ -15,15 +15,15 @@
 #import "YasiCatigoryModel.h"
 #import "HomeSingleImageCell.h"
 #import "YsCatigoryItemCell.h"
+#import "SDCycleScrollView.h"
 
-
-@interface HomeYaSiHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface HomeYaSiHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate,SDCycleScrollViewDelegate>
 
 @property(nonatomic,strong)UIButton *YS_Test_Btn; //雅思测评
 @property(nonatomic,strong)UIButton *signedBtn;//签到
 @property(nonatomic,strong)UILabel *signTitleLab;//签到提示
 @property(nonatomic,strong)UIImageView *clockBtn;//之前是一个闹钟的LOGO
-@property(nonatomic,strong)UIButton *livingBtn; //直播课按钮
+@property(nonatomic,strong)UIView *live_bg; //直播课按钮
 
 @property(nonatomic,strong)UIView *banner_box;//轮播图盒子
 @property(nonatomic,strong)UICollectionViewFlowLayout *flow_banner;
@@ -41,7 +41,7 @@
 @property(nonatomic,strong)PriceCellView *priceCell;
 @property(nonatomic,strong)NSArray *catigory_buttones; //分类按钮数组，预添加，减少临时
 @property(nonatomic,strong)UIImageView *bgImageView; //背景图片
-
+@property(nonatomic,strong) SDCycleScrollView *titleBanner;
 
 @end
 
@@ -96,17 +96,23 @@
     self.signTitleLab = signTitleLab;
     [self addSubview:signTitleLab];
     
-    UIButton *bgBtn = [UIButton new];
-    [self addSubview:bgBtn];
-    self.livingBtn = bgBtn;
-    bgBtn.backgroundColor = XCOLOR(0, 0, 0, 0.3);
-    [bgBtn addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
-    bgBtn.layer.cornerRadius = 15.5;
-    bgBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 25);
-    bgBtn.titleLabel.font = XFONT(12);
-    bgBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    bgBtn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    
+    UIView *live_bg = [UIView new];
+    [self addSubview:live_bg];
+    self.live_bg = live_bg;
+    live_bg.backgroundColor = XCOLOR(0, 0, 0, 0.3);
+    live_bg.layer.cornerRadius = 15.5;
+
+    self.titleBanner = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
+    [self  addSubview:self.titleBanner];
+    self.titleBanner.onlyDisplayText = YES;
+    self.titleBanner.scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.titleBanner.titleLabelTextAlignment =  NSTextAlignmentLeft;
+    self.titleBanner.titleLabelBackgroundColor = XCOLOR_CLEAR;
+    WeakSelf
+    self.titleBanner.clickItemOperationBlock = ^(NSInteger index) {
+        [weakSelf caseToLiving];
+    };
+
     UIImageView *clockBtn = [UIImageView new];
     [self addSubview:clockBtn];
     self.clockBtn = clockBtn;
@@ -140,7 +146,7 @@
     self.catigory_box = catigory_box;
     
     UIView *line_catigory = [UIView new];
-    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.3);
+    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.35);
     [catigory_box addSubview:line_catigory];
     self.line_catigory = line_catigory;
     
@@ -174,7 +180,7 @@
     priceCell.backgroundColor = XCOLOR_CLEAR;
     self.priceCell = priceCell;
     [catigory_box addSubview:priceCell];
-    WeakSelf;
+    
     priceCell.actionBlock = ^{
         [weakSelf caseBuy];
     };
@@ -194,6 +200,7 @@
     
     self.catigory_buttones = btn_tmp;
 }
+
 
 - (void)setScore_signed:(NSString *)score_signed{
     _score_signed = score_signed;
@@ -225,7 +232,7 @@
     self.signedBtn.frame = ysModel.signedBtn_frame;
     self.signTitleLab.frame = ysModel.signTitle_frame;
     self.clockBtn.frame = ysModel.clockBtn_frame;
-    self.livingBtn.frame = ysModel.livingBtn_frame;
+    self.live_bg.frame = ysModel.livingBtn_frame;
     self.line_catigory.frame = ysModel.line_banner_frame;
     self.catigory_box.frame = ysModel.catigory_box_frame;
     self.pageControl.frame = ysModel.banner_pageControl_frame;
@@ -233,7 +240,7 @@
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
     self.priceCell.frame = ysModel.price_cell_frame;
     self.catigory_box_line.frame = ysModel.cati_clct_bottom_line_frame;
-    
+    self.titleBanner.frame = ysModel.living_box_frame;
     self.bannerView.frame = ysModel.bannerView_frame;
     self.flow_banner.itemSize = ysModel.header_banner_size;
     self.banner_box.frame = ysModel.banner_box_frame;
@@ -243,13 +250,9 @@
     }else{
         self.score_signed = nil;
     }
-    
-    if (!ysModel.living_item) {
-        [self.livingBtn setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
-    }else{
-        [self.livingBtn setTitle:ysModel.living_item.living_text forState:UIControlStateNormal];
-    }
-    
+
+     self.titleBanner.titlesGroup = ysModel.living_titles;
+
     NSInteger celles_count = [self.catigoryView numberOfItemsInSection:0];
     if (celles_count > 0) {
         return;

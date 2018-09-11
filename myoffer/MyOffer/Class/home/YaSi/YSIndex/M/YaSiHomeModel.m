@@ -61,7 +61,7 @@
     
     //--------------------- 直播
     CGFloat clock_btn_x = sg_btn_x;
-    CGFloat clock_btn_y =  sg_btn_h + sg_btn_y + 32;
+    CGFloat clock_btn_y =  sg_btn_h + sg_btn_y + 15;
     CGFloat clock_btn_h = 37;
     CGFloat clock_btn_w = clock_btn_h;
     self.clockBtn_frame = CGRectMake(clock_btn_x, clock_btn_y, clock_btn_w, clock_btn_h);
@@ -72,19 +72,31 @@
     CGFloat bg_btn_w = max_width - bg_btn_x - self.left_margin;
     self.livingBtn_frame = CGRectMake(bg_btn_x, bg_btn_y, bg_btn_w, bg_btn_h);
     max_y = CGRectGetMaxY(self.livingBtn_frame);
+    
+    CGFloat live_box_x = CGRectGetMaxX(self.clockBtn_frame) + 5;
+    CGFloat live_box_y = bg_btn_y;
+    CGFloat live_box_w = CGRectGetMaxX(self.livingBtn_frame) - live_box_x - 5;
+    CGFloat live_box_h = bg_btn_h;
+    self.living_box_frame = CGRectMake(live_box_x, live_box_y, live_box_w, live_box_h);
     //--------------------- 直播
     
     
     //--------------------- 轮播图
-    if (self.banners.count > 0) {
+    if (self.banners.count > 0 && CGRectIsEmpty(self.banner_box_frame)) {
         [self makeBannerBoxFrame];
+        max_y = CGRectGetMaxY(self.banner_box_frame);
+    }
+    if (!CGRectIsEmpty(self.banner_box_frame)) {
         max_y = CGRectGetMaxY(self.banner_box_frame);
     }
     //--------------------- 轮播图
     
     //--------------------- 商品
-    if (self.catigorys.count > 0) {
+    if (self.catigorys.count > 0 && CGRectIsEmpty(self.catigory_box_frame)) {
         [self makeCatigoryBoxFrame];
+        max_y = CGRectGetMaxY(self.catigory_box_frame);
+    }
+    if (!CGRectIsEmpty(self.catigory_box_frame)) {
         max_y = CGRectGetMaxY(self.catigory_box_frame);
     }
     //--------------------- 商品
@@ -147,7 +159,7 @@
         active_w =  value.CGRectValue.size.width;
         active_x =  value.CGRectValue.origin.x;
     }
-    CGFloat active_h = 2;
+    CGFloat active_h = 4;
     CGFloat active_y =  line_y - active_h;
     self.cati_active_frame = CGRectMake(active_x, active_y, active_w, active_h);
     
@@ -206,12 +218,23 @@
     self.banner_pageControl_frame = CGRectMake(page_x, page_y, page_w, page_h);
 }
 
-
-- (void)setLiving_item:(YSScheduleModel *)living_item{
+- (void)setLiving_items:(NSArray *)living_items{
+    _living_items = living_items;
     
-    _living_item = living_item;
-    if (!living_item) return;
-    [self makeSubviewesFrame];
+    if (living_items.count > 0) {
+        [self makeSubviewesFrame];
+    }
+}
+
+- (NSArray *)living_titles{
+    
+    NSArray *living_titles = @[@"今天没有新课程，复习一下学完的课程吧"];
+    NSArray *titles = [self.living_items valueForKeyPath:@"living_text"];
+    if (titles.count > 0) {
+        living_titles = titles;
+    }
+    
+    return living_titles;
 }
 
 - (void)setBanners:(NSArray *)banners{

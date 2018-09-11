@@ -429,7 +429,8 @@
 		AEA03A40211D699A007A791E /* MyofferTextHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A3F211D699A007A791E /* MyofferTextHeaderView.m */; };
 		AEA03A47211D7DE2007A791E /* RoomCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A46211D7DE2007A791E /* RoomCityVC.m */; };
 		AEA03A4A211D869B007A791E /* RoomCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A49211D869B007A791E /* RoomCityModel.m */; };
-		AEA13A7121460E4D004C113B /* home_yasi_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */; };
+		AEA13A742147ABB8004C113B /* YSUserCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA13A732147ABB8004C113B /* YSUserCommentVC.m */; };
+		AEA13A762147B582004C113B /* home_yasi_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEA13A752147B581004C113B /* home_yasi_bg.jpg */; };
 		AEA1E39B1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */; };
 		AEA1E39D1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */; };
 		AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA2492D1D5B215300DD7939 /* OrderCell.m */; };
@@ -586,7 +587,6 @@
 		AEB75E2D2139125D00C9129C /* YsCatigoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E2B2139125D00C9129C /* YsCatigoryItemCell.m */; };
 		AEB75E2E2139125D00C9129C /* YsCatigoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E2C2139125D00C9129C /* YsCatigoryItemCell.xib */; };
 		AEB75E31213923DD00C9129C /* HomeYSSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E30213923DD00C9129C /* HomeYSSectionView.m */; };
-		AEB75E3421395B1C00C9129C /* YSUserCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E3321395B1C00C9129C /* YSUserCommentView.m */; };
 		AEB75E372139603800C9129C /* YSCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E362139603800C9129C /* YSCommentItem.m */; };
 		AEB75E402139657D00C9129C /* YSUserCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */; };
 		AEB75E412139657D00C9129C /* YSUserCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB75E3F2139657D00C9129C /* YSUserCommentCell.xib */; };
@@ -1648,7 +1648,9 @@
 		AEA03A46211D7DE2007A791E /* RoomCityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityVC.m; sourceTree = "<group>"; };
 		AEA03A48211D869B007A791E /* RoomCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomCityModel.h; sourceTree = "<group>"; };
 		AEA03A49211D869B007A791E /* RoomCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomCityModel.m; sourceTree = "<group>"; };
-		AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_yasi_bg.jpg; sourceTree = "<group>"; };
+		AEA13A722147ABB8004C113B /* YSUserCommentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentVC.h; sourceTree = "<group>"; };
+		AEA13A732147ABB8004C113B /* YSUserCommentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentVC.m; sourceTree = "<group>"; };
+		AEA13A752147B581004C113B /* home_yasi_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_yasi_bg.jpg; sourceTree = "<group>"; };
 		AEA1E3991DE2C9B70064C2E8 /* PipeiNoResultVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeiNoResultVeiw.h; sourceTree = "<group>"; };
 		AEA1E39A1DE2C9B70064C2E8 /* PipeiNoResultVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeiNoResultVeiw.m; sourceTree = "<group>"; };
 		AEA1E39C1DE2EC0A0064C2E8 /* IntelligentResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntelligentResultViewController.xib; sourceTree = "<group>"; };
@@ -1941,8 +1943,6 @@
 		AEB75E2C2139125D00C9129C /* YsCatigoryItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YsCatigoryItemCell.xib; sourceTree = "<group>"; };
 		AEB75E2F213923DD00C9129C /* HomeYSSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeYSSectionView.h; sourceTree = "<group>"; };
 		AEB75E30213923DD00C9129C /* HomeYSSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYSSectionView.m; sourceTree = "<group>"; };
-		AEB75E3221395B1C00C9129C /* YSUserCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentView.h; sourceTree = "<group>"; };
-		AEB75E3321395B1C00C9129C /* YSUserCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSUserCommentView.m; sourceTree = "<group>"; };
 		AEB75E352139603800C9129C /* YSCommentItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCommentItem.h; sourceTree = "<group>"; };
 		AEB75E362139603800C9129C /* YSCommentItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCommentItem.m; sourceTree = "<group>"; };
 		AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSUserCommentCell.h; sourceTree = "<group>"; };
@@ -5073,8 +5073,8 @@
 				AEF657A720FDBB2300C0D849 /* home_uvic_service_06.jpg */,
 				AEF657B120FDC4B100C0D849 /* home_uvic_hot_01.jpg */,
 				AEF657B220FDC4B200C0D849 /* home_uvic_hot_02.jpg */,
+				AEA13A752147B581004C113B /* home_yasi_bg.jpg */,
 				AEF657B020FDC4B000C0D849 /* home_uvic_hot_03.jpg */,
-				AEA13A7021460E4C004C113B /* home_yasi_bg.jpg */,
 				AEF657AE20FDBEE400C0D849 /* home_uvic_immigration_a.jpg */,
 				AEF657A020FD8D4200C0D849 /* home_uvic_law.jpg */,
 				AEDDAA5B20E4D36C0069C138 /* home_application_uni_rank.png */,
@@ -5326,8 +5326,8 @@
 			children = (
 				AEB75DFA21352B2400C9129C /* YaSiScheduleVC.h */,
 				AEB75DFB21352B2400C9129C /* YaSiScheduleVC.m */,
-				AEB75E3221395B1C00C9129C /* YSUserCommentView.h */,
-				AEB75E3321395B1C00C9129C /* YSUserCommentView.m */,
+				AEA13A722147ABB8004C113B /* YSUserCommentVC.h */,
+				AEA13A732147ABB8004C113B /* YSUserCommentVC.m */,
 				AEB75E452139672600C9129C /* YSUserCommentSectionView.xib */,
 				AEB75E3D2139657D00C9129C /* YSUserCommentCell.h */,
 				AEB75E3E2139657D00C9129C /* YSUserCommentCell.m */,
@@ -6710,7 +6710,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6779,7 +6779,7 @@
 				AEF657AF20FDBEE400C0D849 /* home_uvic_immigration_a.jpg in Resources */,
 				AEB75E0121352C8800C9129C /* YSScheduleCell.xib in Resources */,
 				AEB75E062135377300C9129C /* YaSiScheduleOnLivingCell.xib in Resources */,
-				AEA13A7121460E4D004C113B /* home_yasi_bg.jpg in Resources */,
+				AEA13A762147B582004C113B /* home_yasi_bg.jpg in Resources */,
 				AED4AF7C2141024300D8B34D /* LTUpdate.strings in Resources */,
 				AEB75E292139025900C9129C /* PriceCellView.xib in Resources */,
 				AE6178C020723A17006B311A /* DiscountCell.xib in Resources */,
@@ -7152,7 +7152,6 @@
 				AEA24BED1D5B266A00DD7939 /* UIView+Extension.m in Sources */,
 				AE07A0DF2106CDE300581073 /* HomeRoomTopView.m in Sources */,
 				AEA24B091D5B24D200DD7939 /* ProfileViewController.m in Sources */,
-				AEB75E3421395B1C00C9129C /* YSUserCommentView.m in Sources */,
 				AEA249CC1D5B215300DD7939 /* ApplyStatusCell.m in Sources */,
 				AEA24B0C1D5B24D200DD7939 /* NotificationViewController.m in Sources */,
 				AE9BA43520B3C426008B65D4 /* RewardHeader.m in Sources */,
@@ -7616,6 +7615,7 @@
 				AE2D5E881DD5B64100B4E9F3 /* mergeSuccessViewController.m in Sources */,
 				AED4AF582141024300D8B34D /* TKOldMaskView.m in Sources */,
 				AEBAAE95213D44FA002FD301 /* YXDateHelpObject.m in Sources */,
+				AEA13A742147ABB8004C113B /* YSUserCommentVC.m in Sources */,
 				AE4B2E771F1E095600E328F7 /* MyofferSectionView.m in Sources */,
 				AE4BBCF9210F1E9400209FC8 /* RoomSearchFilterView.m in Sources */,
 				AEE3F4571F540D5500222342 /* TJFooterFrame.m in Sources */,
@@ -7963,7 +7963,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

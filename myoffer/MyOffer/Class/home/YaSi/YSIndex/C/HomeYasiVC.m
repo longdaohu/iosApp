@@ -237,8 +237,7 @@
     NSArray *courses = first[@"courses"];
     NSArray *onLiving_arr = [YSScheduleModel mj_objectArrayWithKeyValuesArray:courses];
     if (onLiving_arr.count > 0) {
-        
-        self.ysModel.living_item = onLiving_arr.firstObject;
+        self.ysModel.living_items = onLiving_arr;
         self.YSHeader.ysModel = self.ysModel;
         self.YSHeader.frame = self.ysModel.header_frame;
         self.tableView.tableHeaderView = self.YSHeader;

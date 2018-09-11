@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+// 过期: 'EXPIRED', 完成: 'FINISHED',进行中: 'IN_PROGRESS',   NOT_START 没开始    NO_COURSE  == YSCourseModelVideoStateDefault
+typedef NS_ENUM(NSInteger,YSCourseModelVideoState) {
+    YSCourseModelVideoStateDefault = 0,
+    YSCourseModelVideoStateINPROGRESS,
+    YSCourseModelVideoStateEXPIRED,
+    YSCourseModelVideoStateNOTSTART,
+    YSCourseModelVideoStateFINISHED
+};
+
 @interface YSCourseModel : NSObject
 
 @property(nonatomic,copy)NSString *classId; //班级id，如果为空，则为未分班
@@ -28,6 +37,7 @@
 @property(nonatomic,copy)NSString *tips;
 @property(nonatomic,copy)NSString *date_label;
 @property(nonatomic,assign)CGFloat progress;
+@property(nonatomic,assign)YSCourseModelVideoState  courseState;
 
 @end
 

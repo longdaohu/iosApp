@@ -16,6 +16,8 @@
 @property(nonatomic,assign)NSInteger coin;
 @property(nonatomic,assign)BOOL login_state;
 @property(nonatomic,strong)YSScheduleModel *living_item;
+@property(nonatomic,strong)NSArray *living_items;
+@property(nonatomic,strong)NSArray *living_titles;
 @property(nonatomic,strong)NSArray *banners;
 @property(nonatomic,strong)NSArray *banner_images;
 @property(nonatomic,strong)NSArray *banner_targets;
@@ -44,10 +46,10 @@
 @property(nonatomic,assign)CGRect price_cell_frame;
 
 @property(nonatomic,assign)CGRect livingBtn_frame;
+@property(nonatomic,assign)CGRect living_box_frame;
 @property(nonatomic,assign)CGRect clockBtn_frame;
 @property(nonatomic,assign)CGRect onlineLab_frame;
-@property(nonatomic,assign)CGRect bottomView_frame;
-
+ 
 @property(nonatomic,assign)CGRect bannerView_frame;
 @property(nonatomic,assign)CGRect line_banner_frame;
 

@@ -81,7 +81,25 @@
     return _nextCourseTime;
 }
 
+- (void)setStatus:(NSString *)status{
+    _status = status;
+ 
+    if ([status isEqualToString:@"IN_PROGRESS"]) {
+        self.courseState = YSCourseModelVideoStateINPROGRESS;
+    }else if ([status isEqualToString:@"FINISHED"]) {
+        self.courseState =  YSCourseModelVideoStateFINISHED;
+    }else if ([status isEqualToString:@"NOT_START"]) {
+       self.courseState =  YSCourseModelVideoStateNOTSTART;
+    }else if ([status isEqualToString:@"EXPIRED"]) {
+        self.courseState =  YSCourseModelVideoStateEXPIRED;
+    }else{
+        self.courseState =  YSCourseModelVideoStateDefault;
+    }
+    
+}
 
 
 @end
+
+
 

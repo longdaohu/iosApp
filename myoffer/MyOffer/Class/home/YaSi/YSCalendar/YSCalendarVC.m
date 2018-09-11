@@ -17,7 +17,7 @@
 #import "YSScheduleModel.h"
 #import "YSCalendarCourseModel.h"
 #import "TKEduClassRoom.h"
-#import "YSUserCommentView.h"
+#import "YSUserCommentVC.h"
 
 @interface YSCalendarVC ()<UITableViewDelegate,UITableViewDataSource,TKEduRoomDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
@@ -29,7 +29,6 @@
 @property(nonatomic,copy)NSString *current_year;
 @property(nonatomic,strong)NSMutableArray *years;
 @property(nonatomic,strong)YSScheduleModel *vedio_selected;
-@property(nonatomic,strong)YSUserCommentView *commentView;
 @property(nonatomic,assign)BOOL ClassDismiss;
 
 @end
@@ -71,21 +70,6 @@
         _livingArray = [NSMutableArray array];
     }
     return _livingArray;
-}
-
-- (YSUserCommentView *)commentView{
-    
-    if (!_commentView) {
-        
-        WeakSelf
-        _commentView =  [YSUserCommentView commentView];
-        _commentView.actionBlock = ^(NSArray *items) {
-            [weakSelf caseCommitResult:items];
-        };
-     
-    }
-    
-    return _commentView;
 }
 
 - (YXDateHelpObject *)helpObj{
@@ -208,9 +192,17 @@
 - (void) leftRoomComplete{
 
     if (!self.ClassDismiss) return;
-    
+
     if(self.vedio_selected.type == YSScheduleVideoStateLiving){
-        [self.commentView show];
+        
+        WeakSelf;
+        YSUserCommentVC *vc = [[YSUserCommentVC alloc] init];
+        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:vc animated:NO completion:nil];
+        [vc show];
+        vc.actionBlock = ^(NSArray *items) {
+            [weakSelf caseCommitResult:items];
+        };
     }
 }
 - (void) onClassBegin{
@@ -312,12 +304,10 @@
     
     if (ResponseIsOK) {
         [MBProgressHUD showMessage:@"感谢您的评价！"];
-        [self.commentView hide];
     }
 }
 //提交评价
 
- 
 - (void)caseYearData:(NSInteger)year{
 
     NSString *year_text = [NSString stringWithFormat:@"%ld",year];

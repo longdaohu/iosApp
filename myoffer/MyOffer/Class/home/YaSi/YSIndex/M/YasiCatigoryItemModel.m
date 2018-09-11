@@ -67,7 +67,7 @@
     
     CGFloat max_y = 0;
     if (images.count > 0) {
-        max_y = 20;
+        max_y = 28;
     }
     
     for (NSString *item in images ) {

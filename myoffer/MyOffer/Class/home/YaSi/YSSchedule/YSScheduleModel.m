@@ -86,19 +86,24 @@
 //直播课 17:00-18:30 张三 口语精讲   // 正在直播 老师名 课程名称   //录播课 老师名 课程名称
 - (NSString *)living_text{
  
-    NSString *text = @"正在直播";
+    NSString *text = @"今天没有新课程，复习一下学完的课程吧";
     if ([self.status isEqualToString:@"IN_PROGRESS"]) {
         text = [NSString stringWithFormat:@"正在直播 %@ %@",self.teacherName,self.topic];
-    }else if ([self.status isEqualToString:@"FINISHED"]){
-        text = @"今天没有新课程，复习一下学完的课程吧";
-    }else if ([self.status isEqualToString:@"EXPIRED"]){
-        text = @"今天没有新课程，复习一下学完的课程吧";
-    }else{
-        text = [NSString stringWithFormat:@"直播课 %@ %@",self.teacherName,self.topic];
+    }else if ([self.status isEqualToString:@"FINISHED"] || [self.status isEqualToString:@"EXPIRED"]){
+        text = [NSString stringWithFormat:@"录播课 %@ %@",self.teacherName,self.topic];
+    }else if ([self.status isEqualToString:@"NOT_START"]){
+        
+        YXDateHelpObject  *help = [YXDateHelpObject manager];
+        NSDate *nextCourseStartTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.startTime];
+        NSDate *nextCourseEndTime = [help getDataFromStrFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ" String:self.endTime];
+        NSString *next_start = [help getStrFromDateFormat:@"HH:mm" Date:nextCourseStartTime];
+        NSString *next_end = [help getStrFromDateFormat:@"HH:mm" Date:nextCourseEndTime];
+        text = [NSString stringWithFormat:@"直播课 %@-%@ %@ %@",next_start,next_end,self.teacherName,self.topic];
     }
  
     return  text;
 }
+
 
 - (NSString *)teacherName{
     if (!_teacherName) {

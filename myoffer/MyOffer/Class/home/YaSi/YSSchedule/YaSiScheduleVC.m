@@ -11,15 +11,14 @@
 #import "YaSiScheduleOnLivingCell.h"
 #import "YSCalendarVC.h"
 #import "YSScheduleModel.h"
-#import "YSUserCommentView.h"
 #import "TKEduClassRoom.h"
+#import "YSUserCommentVC.h"
 
 @interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource,TKEduRoomDelegate>
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)YSScheduleModel *vedio_selected;
-@property(nonatomic,strong)YSUserCommentView *commentView;
 @property(nonatomic,assign)BOOL ClassDismiss;
 
 @end
@@ -55,21 +54,6 @@
     [TXSakuraManager shiftSakuraWithName:name type:type];
 }
 
-- (YSUserCommentView *)commentView{
-    
-    if (!_commentView) {
-        
-        WeakSelf
-        _commentView =  [YSUserCommentView commentView];
-        _commentView.actionBlock = ^(NSArray *items) {
-            [weakSelf caseCommitResult:items];
-        };
-        
-    }
-    
-    return _commentView;
-}
-
 - (void)makeUI{
     
     self.title = @"课程表";
@@ -93,14 +77,15 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 0)];
     header.backgroundColor = XCOLOR_WHITE;
 
-    CGFloat icon_w = XSCREEN_WIDTH;
-    CGFloat icon_h =  icon_w * 190.0/375;
-    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_w, icon_h)];
+    CGFloat icon_x = 10;
+    CGFloat icon_w = XSCREEN_WIDTH - icon_x * 2;
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x, 0, icon_w, 0)];
     iconView.backgroundColor = XCOLOR_RANDOM;
+    iconView.contentMode = UIViewContentModeScaleToFill;
+    iconView.clipsToBounds = YES;
     [header addSubview:iconView];
-    [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg] placeholderImage:XImage(@"placeholderImage")];
- 
-    CGFloat title_y =  icon_h;
+    
+    CGFloat title_y =  0;
     CGFloat title_h =  60;
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, title_y, XSCREEN_WIDTH, title_h)];
     titleLab.textColor = XCOLOR_TITLE;
@@ -110,7 +95,25 @@
     header.mj_h = title_y + title_h;
 
     self.tableView.tableHeaderView = header;
+    
+    WeakSelf;
+    [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg]  completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (!error) {
+          
+            CGFloat height = icon_w * image.size.height /  image.size.width ;
+            iconView.mj_h = height;
+            titleLab.mj_y = height;
+            header.mj_h = height + title_h;
+            weakSelf.tableView.tableHeaderView = header;
+        }
+        
+    }];
+
+    
  }
+
+
+
 
 
 
@@ -275,7 +278,15 @@
     if (!self.ClassDismiss) return;
     
     if(self.vedio_selected.type == YSScheduleVideoStateLiving){
-        [self.commentView show];
+        
+        WeakSelf;
+        YSUserCommentVC *vc = [[YSUserCommentVC alloc] init];
+        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:vc animated:NO completion:nil];
+        [vc show];
+        vc.actionBlock = ^(NSArray *items) {
+            [weakSelf caseCommitResult:items];
+        };
     }
 }
 - (void) onClassBegin{
@@ -310,7 +321,6 @@
     
     if (ResponseIsOK) {
         [MBProgressHUD showMessage:@"感谢您的评价！"];
-        [self.commentView hide];
     }
 }
 

@@ -43,8 +43,11 @@
         [playBtn setBackgroundImage:XImage(@"button_blue_highlight") forState:UIControlStateHighlighted];
         [playBtn setBackgroundImage:XImage(@"button_light_unable") forState:UIControlStateDisabled];
         playBtn.userInteractionEnabled = NO;
+        playBtn.layer.shadowOffset = CGSizeMake(0, 3);
+        playBtn.layer.shadowOpacity = 0.5;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+  
     }
     
     return self;
@@ -57,8 +60,13 @@
     
     self.titleLab.text = item.name;
     [self.dateBtn setTitle:item.date_label forState:UIControlStateNormal];
-    self.dateBtn.enabled = ![item.status isEqualToString:@"EXPIRED"];
- 
+    self.playBtn.enabled = YES;
+    if (item.courseState == YSCourseModelVideoStateEXPIRED) {
+        self.playBtn.enabled = NO;
+    }
+    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
+    self.playBtn.layer.shadowColor = clr.CGColor;
+    
 }
 
 - (void)layoutSubviews{

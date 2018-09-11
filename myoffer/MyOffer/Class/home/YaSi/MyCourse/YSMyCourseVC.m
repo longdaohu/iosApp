@@ -108,33 +108,36 @@
     
      YSCourseModel *item = self.groupModel.curent_items[indexPath.row];
  
-    if (self.groupModel.type == YSCourseGroupTypeDefault) {
+    if (self.groupModel.type == YSCourseGroupTypeFinished) {
         
-        if ([item.status isEqualToString:@"NO_COURSE"]) {
-            
-            YasiCourseTextCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseTextCell"];
-            if (!cell) {
-                cell =[[YasiCourseTextCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseTextCell"];
-            }
-            cell.item = item;
-
-            return cell;
+        YasiCourseCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseCell"];
+        if (!cell) {
+            cell =[[YasiCourseCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseCell"];
         }
-        
+        cell.item = item;
+        return cell;
+     
+     }
+    
+    
+    if (item.courseState == YSCourseModelVideoStateINPROGRESS) {
+ 
         YasiCourseOnLivingCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseOnLivingCell"];
         if (!cell) {
             cell =[[YasiCourseOnLivingCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseOnLivingCell"];
         }
         cell.item = item;
+        
         return cell;
-     }
-
-        YasiCourseCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseCell"];
-        if (!cell) {
-                cell =[[YasiCourseCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseCell"];
-            }
-        cell.item = item;
-        return cell;
+    }
+    
+    YasiCourseTextCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseTextCell"];
+    if (!cell) {
+        cell =[[YasiCourseTextCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"YasiCourseTextCell"];
+    }
+    cell.item = item;
+    
+    return cell;
  
 }
 

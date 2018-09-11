@@ -63,7 +63,7 @@
         
         UIView *line = [UIView new];
         self.bottom_line = line;
-        line.backgroundColor = XCOLOR(239, 242, 245, 0.3);
+        line.backgroundColor = XCOLOR(239, 242, 245, 0.35);
         [self addSubview:line];
 
     }
