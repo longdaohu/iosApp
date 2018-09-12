@@ -116,7 +116,6 @@
         }
         cell.item = item;
         return cell;
-     
      }
     
     
@@ -159,7 +158,7 @@
 #pragma mark : 数据加载
 - (void)makeCoursesData{
     
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/classes",DOMAINURL_API];
     WeakSelf
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil

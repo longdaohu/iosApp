@@ -89,7 +89,7 @@
     CGFloat title_h =  60;
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(20, title_y, XSCREEN_WIDTH, title_h)];
     titleLab.textColor = XCOLOR_TITLE;
-    titleLab.font = XFONT(18);
+    titleLab.font =  [UIFont boldSystemFontOfSize:18];
     self.titleLab = titleLab;
     [header addSubview:titleLab];
     header.mj_h = title_y + title_h;
@@ -157,7 +157,7 @@
 #pragma mark : 数据加载
 - (void)makeCoursesData{
     
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/schedule?id=%@",DOMAINURL_API,self.item.classId];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses?id=%@",DOMAINURL_API,self.item.classId];
     WeakSelf
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil
@@ -310,7 +310,7 @@
         [ratings setValue:values[index] forKey:keyes[index]];
     }
     NSDictionary *parameter = @{ @"id":self.vedio_selected.item_id,@"ratings":ratings};
-    NSString *path = [NSString stringWithFormat:@"POST %@api/v1/ielts/calendar-appraise",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"POST %@api/v1/ielts/ratings",DOMAINURL_API];
     WeakSelf
     [self startAPIRequestWithSelector:path  parameters:parameter success:^(NSInteger statusCode, id response) {
         [weakSelf updateCommentResponse:response];

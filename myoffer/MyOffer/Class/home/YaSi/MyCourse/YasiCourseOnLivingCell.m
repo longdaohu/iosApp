@@ -32,17 +32,17 @@
         self.timeLab = timeLab;
         timeLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:timeLab];
-        timeLab.text = @"今天 19：30 — 21：00";
-        
+ 
         UIImageView *iconView = [UIImageView new];
         self.livingView = iconView;
         [self.contentView addSubview:iconView];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"dot_40x40" ofType:@"gif"];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
         NSData *data = [NSData dataWithContentsOfFile:path];
         UIImage *image = [UIImage sd_animatedGIFWithData:data];
         self.livingView.image =  image;
 
-        
+ 
         UILabel *livingLab = [UILabel new];
         livingLab.font = XFONT(12);
         self.livingLab = livingLab;
@@ -123,7 +123,7 @@
     self.timeLab.text = item.nextCourseTime;
     
     self.livingLab.hidden = !item.isLiving;
-    self.livingView.hidden = !item.isLiving;
+    self.livingView.hidden = self.livingLab.hidden;
 
 }
 

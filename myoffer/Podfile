@@ -5,9 +5,11 @@ target 'MyOffer' do
     pod 'ZFPlayer'
     pod 'MJExtension'
     pod 'SDCycleScrollView'
-#    pod 'MLeaksFinder'
+    pod 'MLeaksFinder'
     pod 'JPush'
+    pod 'SDWebImage/GIF'
     pod 'Meiqia'
     pod 'SocketRocket'
     pod 'SSZipArchive'
+    
 end

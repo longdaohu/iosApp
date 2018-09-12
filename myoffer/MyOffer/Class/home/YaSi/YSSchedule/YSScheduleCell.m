@@ -8,6 +8,7 @@
 
 #import "YSScheduleCell.h"
 #import "YSScheduleModel.h"
+#import "UIImage+GIF.h"
 
 @interface YSScheduleCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -31,6 +32,11 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.topLine.backgroundColor = XCOLOR_line;
     self.onLivingLab.textColor = XCOLOR_RED;
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    self.onlivingView.image =  image;
     
     self.playBtn.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
     self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);

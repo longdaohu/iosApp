@@ -23,7 +23,7 @@
 @property(nonatomic,strong)UIButton *signedBtn;//签到
 @property(nonatomic,strong)UILabel *signTitleLab;//签到提示
 @property(nonatomic,strong)UIImageView *clockBtn;//之前是一个闹钟的LOGO
-@property(nonatomic,strong)UIView *live_bg; //直播课按钮
+@property(nonatomic,strong)UIButton *live_bg; //直播课按钮
 
 @property(nonatomic,strong)UIView *banner_box;//轮播图盒子
 @property(nonatomic,strong)UICollectionViewFlowLayout *flow_banner;
@@ -96,18 +96,25 @@
     self.signTitleLab = signTitleLab;
     [self addSubview:signTitleLab];
     
-    UIView *live_bg = [UIView new];
+    UIButton *live_bg = [UIButton new];
     [self addSubview:live_bg];
     self.live_bg = live_bg;
-    live_bg.backgroundColor = XCOLOR(0, 0, 0, 0.3);
-    live_bg.layer.cornerRadius = 15.5;
-
+    live_bg.titleLabel.font = XFONT(14);
+    live_bg.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
+    live_bg.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [live_bg setBackgroundImage:XImage(@"ys_heike_live_bg") forState:UIControlStateNormal];
+    [live_bg setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
+    [live_bg setTitle:@" " forState:UIControlStateDisabled];
+    [live_bg addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
+    
     self.titleBanner = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
     [self  addSubview:self.titleBanner];
     self.titleBanner.onlyDisplayText = YES;
     self.titleBanner.scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.titleBanner.autoScroll = YES;
     self.titleBanner.titleLabelTextAlignment =  NSTextAlignmentLeft;
     self.titleBanner.titleLabelBackgroundColor = XCOLOR_CLEAR;
+    [self.titleBanner disableScrollGesture];
     WeakSelf
     self.titleBanner.clickItemOperationBlock = ^(NSInteger index) {
         [weakSelf caseToLiving];
@@ -146,7 +153,7 @@
     self.catigory_box = catigory_box;
     
     UIView *line_catigory = [UIView new];
-    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.35);
+    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.15);
     [catigory_box addSubview:line_catigory];
     self.line_catigory = line_catigory;
     
@@ -172,7 +179,7 @@
     catigory_box.clipsToBounds = YES;
     
     UIView *catigory_box_line  = [UIView new];
-    catigory_box_line.backgroundColor = XCOLOR(239, 242, 245, 0.3);
+    catigory_box_line.backgroundColor = XCOLOR(239, 242, 245, 0.15);
     [catigory_box addSubview:catigory_box_line];
     self.catigory_box_line = catigory_box_line;
     
@@ -250,8 +257,14 @@
     }else{
         self.score_signed = nil;
     }
-
-     self.titleBanner.titlesGroup = ysModel.living_titles;
+    if (ysModel.living_items_loaded) {
+        self.titleBanner.hidden = NO;
+        self.live_bg.enabled = NO;
+        self.titleBanner.titlesGroup = ysModel.living_titles;
+    }else{
+        self.live_bg.enabled = YES;
+        self.titleBanner.hidden = YES;
+    }
 
     NSInteger celles_count = [self.catigoryView numberOfItemsInSection:0];
     if (celles_count > 0) {
@@ -279,6 +292,7 @@
     if (ysModel.banner_images.count > 0) {
         [self.bannerView reloadData];
          self.pageControl.numberOfPages = ysModel.banner_images.count;
+        [self addBannerTimer];
     }
     
 }

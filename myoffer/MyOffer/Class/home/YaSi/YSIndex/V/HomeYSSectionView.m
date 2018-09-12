@@ -46,6 +46,9 @@
             [self addSubview:sender];
             [item_arr addObject:sender];
             [sender addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+            sender.layer.shadowOffset = CGSizeMake(0, 3);
+            sender.layer.shadowOpacity = 0.5;
+            sender.layer.shadowColor = XCOLOR_RED.CGColor;
             
             CGSize title_size = [title stringWithfontSize:12];
             title_w = title_size.width + 20;
@@ -54,6 +57,7 @@
             if (index == 0 ) {
                 sender.enabled = NO;
                 self.last_button = sender;
+                self.last_button.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
             }
         }
         self.Btn_items = item_arr;
@@ -63,7 +67,7 @@
         
         UIView *line = [UIView new];
         self.bottom_line = line;
-        line.backgroundColor = XCOLOR(239, 242, 245, 0.35);
+        line.backgroundColor = XCOLOR(239, 242, 245, 0.15);
         [self addSubview:line];
 
     }
@@ -82,7 +86,7 @@
     [super layoutSubviews];
     
     CGSize content_size = self.bounds.size;
-    CGFloat left_margin = 10;
+    CGFloat left_margin = 20;
     
     CGFloat padding = content_size.width - self.total_width - left_margin * 2;
     if (self.Btn_items.count > 0) {
@@ -96,16 +100,18 @@
         }
     }
     
-    self.bottom_line.frame = CGRectMake(20, content_size.height - 1, content_size.width - 40, 1);
+    self.bottom_line.frame = CGRectMake(20, content_size.height - 1, content_size.width - 40, LINE_HEIGHT);
 }
 
 
 - (void)titleClick:(UIButton *)sender{
 
+    self.last_button.layer.shadowColor = XCOLOR_RED.CGColor;
     self.last_button.enabled = YES;
     sender.enabled = NO;
     self.last_button = sender;
-    
+    self.last_button.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
+
     if (self.actionBlock) {
         self.actionBlock(sender.tag);
     }

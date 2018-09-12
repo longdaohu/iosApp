@@ -151,7 +151,7 @@
     
     for (YSCommentItem *item in self.items) {
         if (item.index_selected == 0) {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"%@不能为空",item.title]];
+            [MBProgressHUD showMessage:@"暂未完成评价"];
             return;
         }
     }

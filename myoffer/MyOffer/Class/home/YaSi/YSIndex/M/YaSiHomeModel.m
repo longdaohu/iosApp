@@ -66,20 +66,19 @@
     CGFloat clock_btn_w = clock_btn_h;
     self.clockBtn_frame = CGRectMake(clock_btn_x, clock_btn_y, clock_btn_w, clock_btn_h);
     
-    CGFloat bg_btn_x = clock_btn_x + 10;
+    CGFloat bg_btn_x = clock_btn_x + 17;
     CGFloat bg_btn_y = clock_btn_y + 6;
     CGFloat bg_btn_h = 31;
     CGFloat bg_btn_w = max_width - bg_btn_x - self.left_margin;
     self.livingBtn_frame = CGRectMake(bg_btn_x, bg_btn_y, bg_btn_w, bg_btn_h);
     max_y = CGRectGetMaxY(self.livingBtn_frame);
     
-    CGFloat live_box_x = CGRectGetMaxX(self.clockBtn_frame) + 5;
+    CGFloat live_box_x = CGRectGetMaxX(self.clockBtn_frame);
     CGFloat live_box_y = bg_btn_y;
     CGFloat live_box_w = CGRectGetMaxX(self.livingBtn_frame) - live_box_x - 5;
     CGFloat live_box_h = bg_btn_h;
     self.living_box_frame = CGRectMake(live_box_x, live_box_y, live_box_w, live_box_h);
     //--------------------- 直播
-    
     
     //--------------------- 轮播图
     if (self.banners.count > 0 && CGRectIsEmpty(self.banner_box_frame)) {
@@ -147,9 +146,9 @@
     self.catigory_title_frames = titleFrames;
     
     CGFloat line_x = self.left_margin;
-    CGFloat line_y = title_h;
     CGFloat line_w = box_w - line_x * 2;
-    CGFloat line_h = 1;
+    CGFloat line_h = LINE_HEIGHT;
+    CGFloat line_y = title_h - line_h;
     self.line_banner_frame = CGRectMake(line_x, line_y, line_w, line_h);
     
     CGFloat active_x = 0;
@@ -173,13 +172,13 @@
     CGFloat ct_cv_bt_line_x = 0;
     CGFloat ct_cv_bt_line_y = ct_cv_y + ct_cv_h;
     CGFloat ct_cv_bt_line_w = box_w;
-    CGFloat ct_cv_bt_line_h = 1;
+    CGFloat ct_cv_bt_line_h = LINE_HEIGHT;
     self.cati_clct_bottom_line_frame = CGRectMake(ct_cv_bt_line_x, ct_cv_bt_line_y, ct_cv_bt_line_w, ct_cv_bt_line_h);
     
     CGFloat ct_cv_line_x = 0;
     CGFloat ct_cv_line_y = ct_cv_y + ct_cv_h;
     CGFloat ct_cv_line_w = box_w;
-    CGFloat ct_cv_line_h = 1;
+    CGFloat ct_cv_line_h = LINE_HEIGHT;
     self.cati_clt_line_frame = CGRectMake(ct_cv_line_x, ct_cv_line_y, ct_cv_line_w, ct_cv_line_h);
     
     CGFloat price_cell_x = 0;

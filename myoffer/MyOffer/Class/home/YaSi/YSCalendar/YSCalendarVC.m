@@ -225,7 +225,7 @@
     NSString *startTime =  [NSString stringWithFormat:@"%@-01-01",self.current_year];
     NSString *endTime =  [NSString stringWithFormat:@"%@-12-31",self.current_year];
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/calendar-course",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-group-by-date",DOMAINURL_API];
     [self startAPIRequestWithSelector:path
                            parameters:@{
                                         @"startTime" : startTime,
@@ -294,7 +294,7 @@
         [ratings setValue:values[index] forKey:keyes[index]];
     }
     NSDictionary *parameter = @{ @"id":self.vedio_selected.item_id,@"ratings":ratings};
-    NSString *path = [NSString stringWithFormat:@"POST %@api/v1/ielts/calendar-appraise",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"POST %@api/v1/ielts/ratings",DOMAINURL_API];
     WeakSelf
     [self startAPIRequestWithSelector:path  parameters:parameter success:^(NSInteger statusCode, id response) {
         [weakSelf updateCommentResponse:response];

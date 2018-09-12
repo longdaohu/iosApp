@@ -20,6 +20,7 @@
 #import "YSImagesCell.h"
 #import "ServiceItemFrame.h"
 #import "CreateOrderVC.h"
+#import "YSCalendarCourseModel.h"
 
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
@@ -36,7 +37,7 @@
     [super viewWillAppear:animated];
     
     if(self.ysModel){
-        if (self.ysModel.login_state != LOGIN && !self.ysModel.living_item) {
+        if (self.ysModel.login_state != LOGIN && !self.ysModel.living_items_loaded) {
             //当用户登录时请求今日直播数据
             [self makeTodayOnliveData];
         }
@@ -206,7 +207,7 @@
     
     if (!LOGIN) return;
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/calendar-course",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/courses-group-by-date",DOMAINURL_API];
     NSDate *today = [NSDate date];
     NSDate *tomorrow = [NSDate dateTomorrow];
     YXDateHelpObject *helpObj = [YXDateHelpObject manager];
@@ -233,9 +234,12 @@
     if (result.count == 0) {
         return;
     }
-    NSDictionary *first = result.firstObject;
-    NSArray *courses = first[@"courses"];
-    NSArray *onLiving_arr = [YSScheduleModel mj_objectArrayWithKeyValuesArray:courses];
+    NSMutableArray *onLiving_arr = [NSMutableArray array];
+    NSArray *Calendar_arr = [YSCalendarCourseModel mj_objectArrayWithKeyValuesArray:result];
+    for (YSCalendarCourseModel *item  in Calendar_arr) {
+        [onLiving_arr addObjectsFromArray:item.courses];
+    }
+    self.ysModel.living_items_loaded = YES;
     if (onLiving_arr.count > 0) {
         self.ysModel.living_items = onLiving_arr;
         self.YSHeader.ysModel = self.ysModel;
@@ -247,7 +251,7 @@
 //分类数据
 - (void)makeCategoryData{
     WeakSelf;
-    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/categorys",DOMAINURL_API];
+    NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/products",DOMAINURL_API];
     [self startAPIRequestWithSelector:path
                            parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO
               errorAlertDismissAction:nil
@@ -342,24 +346,31 @@
 }
 - (void)caseBuy{
     
-    ServiceItem *item = [[ServiceItem alloc] init];
-    item.price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.price.floatValue];
-    item.display_price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.display_price.floatValue];
-    item.service_id = self.ysModel.catigory_Package_current._id;
-    item.cover_url = self.ysModel.catigory_Package_current.cover_url;
-    item.name  = self.ysModel.catigory_Package_current.name;
-    
-    ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
-    itemFrame.item = item;
-    
-    CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
-    vc.itemFrame =  itemFrame;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    if (LOGIN){
+        
+        ServiceItem *item = [[ServiceItem alloc] init];
+        item.price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.price.floatValue];
+        item.display_price = [NSNumber numberWithFloat:self.ysModel.catigory_Package_current.display_price.floatValue];
+        item.service_id = self.ysModel.catigory_Package_current._id;
+        item.cover_url = self.ysModel.catigory_Package_current.cover_url;
+        item.name  = self.ysModel.catigory_Package_current.name;
+        item.fitPerson_hiden = true;
+        ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
+        itemFrame.item = item;
+        
+        CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
+        vc.itemFrame =  itemFrame;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        RequireLogin;
+    }
+ 
 }
 
 - (void)caseLive{
     
+    RequireLogin;
+    if (!LOGIN) return;
     YSCalendarVC *vc = [[YSCalendarVC alloc] init];
     PushToViewController(vc);
 }

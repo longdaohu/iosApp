@@ -46,4 +46,7 @@
 @property(nonatomic,assign)BOOL reduce_flag;
 @property(nonatomic,strong)NSArray *comment_attr;
 
+//添加属性
+@property(nonatomic,assign)BOOL fitPerson_hiden;
+
 @end

@@ -47,6 +47,7 @@
     self.titleLab.text = item.name;
     self.priceLab.text = item.price_str;
     self.forPersonLab.text = item.comment_suit_people[@"value"];
+    self.fit_personBtn.hidden = item.fitPerson_hiden;
 }
 
 

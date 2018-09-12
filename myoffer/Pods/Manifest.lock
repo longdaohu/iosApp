@@ -1,10 +1,11 @@
 PODS:
   - DACircularProgress (2.3.1)
   - FBRetainCycleDetector (0.1.4)
-  - IDMPhotoBrowser (1.11.3):
+  - FLAnimatedImage (1.0.12)
+  - IDMPhotoBrowser (1.10.2):
     - DACircularProgress
     - pop
-    - SDWebImage (= 4.0.0)
+    - SDWebImage
   - JCore (1.1.5)
   - JPush (3.0.6):
     - JCore (~> 1.1.1)
@@ -19,11 +20,14 @@ PODS:
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
   - pop (1.0.10)
-  - SDCycleScrollView (1.73):
-    - SDWebImage (~> 4.0.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - SDWebImage/GIF (4.3.3):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
   - SocketRocket (0.5.1)
   - SSZipArchive (2.1.2)
   - ZFPlayer (2.1.5):
@@ -36,6 +40,7 @@ DEPENDENCIES:
   - MJExtension
   - MLeaksFinder
   - SDCycleScrollView
+  - SDWebImage/GIF
   - SocketRocket
   - SSZipArchive
   - ZFPlayer
@@ -44,6 +49,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - DACircularProgress
     - FBRetainCycleDetector
+    - FLAnimatedImage
     - IDMPhotoBrowser
     - JCore
     - JPush
@@ -61,7 +67,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
-  IDMPhotoBrowser: b96159fe4adb991a844068eb17dab9c0b7d7e51a
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  IDMPhotoBrowser: 4bb459b1faffc228e92bccdf7c54ad6d6b7e8c37
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
@@ -69,12 +76,12 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
-  SDCycleScrollView: d0fd5fe40a80918371fd8939214eb3be81033d83
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SSZipArchive: d4009d2ce5520a421f231fd97028cc0e2667eed8
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: 140c1287667e22335cca6c0edf2af840dc02486a
+PODFILE CHECKSUM: e4e2c76e8e3cd40790e48526a111fbed3708e813
 
 COCOAPODS: 1.5.0
