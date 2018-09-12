@@ -193,10 +193,11 @@
     if ([sender.currentTitle isEqualToString:@"进行中"]) {
         self.groupModel.type = YSCourseGroupTypeDefault;
     }else{
-        
         self.groupModel.type = YSCourseGroupTypeFinished;
     }
+    
     [self.tableView reloadData];
+    
     
    if (self.groupModel.curent_items.count == 0) {
        [self.tableView emptyViewWithError:NetRequest_NoDATA];

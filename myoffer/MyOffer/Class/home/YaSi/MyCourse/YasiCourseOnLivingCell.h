@@ -8,7 +8,8 @@
 
 #import "YasiCourseCell.h"
 
-@interface YasiCourseOnLivingCell : YasiCourseCell
+@interface YasiCourseOnLivingCell : UITableViewCell
+@property(nonatomic,strong) YSCourseModel *item;
 
 
 @end

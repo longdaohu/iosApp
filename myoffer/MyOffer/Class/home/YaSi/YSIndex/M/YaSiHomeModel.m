@@ -288,6 +288,11 @@
     return 0;
 }
 
+- (BOOL)living_items_loaded{
+    
+    return    self.living_items.count > 0 ? YES : NO;
+}
+
 
 
 @end

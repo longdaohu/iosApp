@@ -15,6 +15,10 @@
 @property(nonatomic,strong)UILabel *timeLab;
 @property(nonatomic,strong)UILabel *livingLab;
 @property(nonatomic,strong)YaSiProgressView *progressView;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UIButton *dateBtn;
+@property(nonatomic,strong)UIButton *playBtn;
+
 @end
 
 @implementation YasiCourseOnLivingCell
@@ -25,6 +29,43 @@
     
     if (self) {
         
+        
+        UILabel *titleLab = [UILabel new];
+        titleLab.font = [UIFont boldSystemFontOfSize:14];
+        self.titleLab = titleLab;
+        titleLab.textColor = XCOLOR_TITLE;
+        [self.contentView addSubview:titleLab];
+        titleLab.text = @"雅思6分精讲强化班";
+        titleLab.textAlignment = NSTextAlignmentLeft;
+        UIButton  *dateBtn = [UIButton new];
+        self.dateBtn = dateBtn;
+        dateBtn.titleLabel.font = XFONT(12);
+        [dateBtn setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
+        [self.contentView addSubview:dateBtn];
+        dateBtn.userInteractionEnabled = NO;
+        [dateBtn setTitle:@"2018.01.11 — 2018.08.12" forState:UIControlStateNormal];
+        [dateBtn setImage:XImage(@"ys_clock") forState:UIControlStateNormal];
+        dateBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        dateBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        
+        
+        UIButton  *playBtn = [UIButton new];
+        self.playBtn = playBtn;
+        playBtn.titleLabel.font = XFONT(12);
+        [playBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
+        [self.contentView addSubview:playBtn];
+        [playBtn setTitle:@"观看回放" forState:UIControlStateNormal];
+        [playBtn setTitle:@"已过期" forState:UIControlStateDisabled];
+        [playBtn setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateNormal];
+        [playBtn setBackgroundImage:XImage(@"button_blue_highlight") forState:UIControlStateHighlighted];
+        [playBtn setBackgroundImage:XImage(@"button_light_unable") forState:UIControlStateDisabled];
+        playBtn.userInteractionEnabled = NO;
+        playBtn.layer.shadowOffset = CGSizeMake(0, 3);
+        playBtn.layer.shadowOpacity = 0.5;
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
         [self.playBtn setTitle:@"进入班级" forState:UIControlStateNormal];
         
         UILabel *timeLab = [UILabel new];
@@ -33,15 +74,13 @@
         timeLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:timeLab];
  
-        UIImageView *iconView = [UIImageView new];
-        self.livingView = iconView;
-        [self.contentView addSubview:iconView];
-        
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        UIImage *image = [UIImage sd_animatedGIFWithData:data];
-        self.livingView.image =  image;
-
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
+//        NSData *data = [NSData dataWithContentsOfFile:path];
+//        UIImage *image = [UIImage sd_animatedGIFWithData:data];
+        UIImageView *livingView = [UIImageView new];
+        [self.contentView addSubview:livingView];
+        self.livingView = livingView;
+ 
  
         UILabel *livingLab = [UILabel new];
         livingLab.font = XFONT(12);
@@ -102,7 +141,7 @@
     CGFloat live_h = 18;
     CGFloat live_w = live_h;
     CGFloat live_x = time_x + time_w + 8;
-    CGFloat live_y = time_y;
+    CGFloat live_y = time_y - 4;
     self.livingView.frame = CGRectMake(live_x, live_y, live_w, live_h);
  
     CGFloat lvl_h = time_h;
@@ -115,7 +154,17 @@
 
 - (void)setItem:(YSCourseModel *)item{
  
-    super.item = item;
+    _item = item;
+    
+    self.titleLab.text = item.name;
+    [self.dateBtn setTitle:item.date_label forState:UIControlStateNormal];
+    self.playBtn.enabled = YES;
+    if (item.courseState == YSCourseModelVideoStateEXPIRED) {
+        self.playBtn.enabled = NO;
+    }
+    UIColor *clr = self.playBtn.enabled ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
+    self.playBtn.layer.shadowColor = clr.CGColor;
+    
     
     self.titleLab.text = item.name;
     self.progressView.progress = item.progress;
@@ -123,7 +172,14 @@
     self.timeLab.text = item.nextCourseTime;
     
     self.livingLab.hidden = !item.isLiving;
-    self.livingView.hidden = self.livingLab.hidden;
+    self.livingView.hidden = !item.isLiving;
+    if (!self.livingView.hidden) {
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        UIImage *image = [UIImage sd_animatedGIFWithData:data];
+        self.livingView.image = image;
+    }
 
 }
 

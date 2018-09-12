@@ -30,7 +30,7 @@
         NSArray *startTime =  [self.startTime componentsSeparatedByString:@"T"];
         NSArray *endTime =  [self.endTime componentsSeparatedByString:@"T"];
         if (startTime.count > 0 && endTime.count > 0) {
-            _date_label = [NSString stringWithFormat:@"%@ —— %@  |  %@课时",startTime.firstObject,endTime.firstObject,self.total];
+            _date_label = [NSString stringWithFormat:@"%@ — %@  |  %@课时",startTime.firstObject,endTime.firstObject,self.total];
         }else{
             _date_label = [NSString stringWithFormat:@"%@课时",self.total];
         }

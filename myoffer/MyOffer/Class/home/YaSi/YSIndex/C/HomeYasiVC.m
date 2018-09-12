@@ -239,7 +239,7 @@
     for (YSCalendarCourseModel *item  in Calendar_arr) {
         [onLiving_arr addObjectsFromArray:item.courses];
     }
-    self.ysModel.living_items_loaded = YES;
+    
     if (onLiving_arr.count > 0) {
         self.ysModel.living_items = onLiving_arr;
         self.YSHeader.ysModel = self.ysModel;

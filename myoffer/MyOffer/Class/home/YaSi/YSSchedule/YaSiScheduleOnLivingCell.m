@@ -11,7 +11,6 @@
 #import "UIImage+GIF.h"
 
 @interface YaSiScheduleOnLivingCell ()
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIImageView *onlivingView;
 @property (weak, nonatomic) IBOutlet UILabel *onLivingLab;

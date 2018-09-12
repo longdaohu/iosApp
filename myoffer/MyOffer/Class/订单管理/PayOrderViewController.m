@@ -247,18 +247,16 @@ static NSString *identify = @"pay";
 -(void)sendAliPay
 {
     
-        NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
         WeakSelf
+        NSString *path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
         [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
-                    
                     weakSelf.payStyle = @"支付宝";
                     NSString *appScheme = @"My0ffer767577465";
                     NSString *params = [response valueForKey:@"params"];
                     [[AlipaySDK defaultService] payOrder:params fromScheme:appScheme callback:^(NSDictionary *resultDic) {
                          [weakSelf pay:nil];
                     }];
-                    
-                }];
+        }];
     
 }
 
