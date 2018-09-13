@@ -18,9 +18,10 @@
 #import "YSCalendarCourseModel.h"
 #import "TKEduClassRoom.h"
 #import "YSUserCommentVC.h"
+#import "MyoffferAlertTableView.h"
 
 @interface YSCalendarVC ()<UITableViewDelegate,UITableViewDataSource,TKEduRoomDelegate>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property (nonatomic, strong) YXCalendarView *calendar;
 @property(nonatomic,strong)NSMutableArray *eventArray;
 @property(nonatomic,strong)NSMutableArray *livingArray;
@@ -126,7 +127,8 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    WeakSelf;
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -140,6 +142,9 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     header.backgroundColor = XCOLOR_BG;
     self.tableView.tableHeaderView = header;
+    self.tableView.actionBlock = ^{
+        [weakSelf makeTodayOnliveData];
+    };
 }
 
 #pragma mark : UITableViewDataSource
@@ -235,7 +240,9 @@
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf updateUIWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                  
+                  if (weakSelf.cousesArr.count  == 0) {
+                      [weakSelf.tableView  alertWithRoloadMessage:nil];
+                  }
        }];
     
 }
@@ -243,13 +250,16 @@
 - (void)updateUIWithResponse:(id)response{
     
     if (!ResponseIsOK) {
- 
+        if (self.cousesArr.count  == 0) {
+            [self.tableView  alertWithRoloadMessage:nil];
+        }
         return;
     }
     
     [self.years addObject:self.current_year];
     NSArray *result = response[@"result"];
     if (result.count == 0) {
+        [self caseNotDataWithArray:result];
         return;
     }
     NSArray *Calendar_arr = [YSCalendarCourseModel mj_objectArrayWithKeyValuesArray:result];
@@ -267,20 +277,26 @@
 
 - (void)makeDataWithSelectedDate:(NSString *)date_string{
  
+    [self.tableView alertViewHiden];
+    if (self.livingArray.count  == 0) {
+        [self caseNotDataWithArray:self.livingArray];
+        return;
+    }
+    
     for (YSCalendarCourseModel *item in self.livingArray) {
         
         if ([item.date isEqualToString:date_string]) {
             self.cousesArr = item.courses;
             [self.tableView reloadData];
-            [self.tableView emptyViewWithHiden:YES];
+            [self caseNotDataWithArray:self.cousesArr];
+
             return;
         }
     }
     
     self.cousesArr = nil;
     [self.tableView reloadData];
-    [self.tableView emptyViewWithError:@"今日暂无课程"];
-    
+    [self caseNotDataWithArray:self.cousesArr];
 }
 
 
@@ -396,6 +412,13 @@
                                 @"nickname":user.displayname
                             };
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
+}
+
+- (void)caseNotDataWithArray:(NSArray *)items{
+    
+    if (items.count == 0) {
+        [self.tableView  alertWithNotDataMessage:@"今日暂无课程"];
+    }
 }
 
 

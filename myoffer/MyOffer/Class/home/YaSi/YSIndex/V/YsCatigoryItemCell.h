@@ -10,7 +10,6 @@
 @class YasiCatigoryItemModel;
 
 @interface YsCatigoryItemCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 @property(nonatomic,strong)YasiCatigoryItemModel *item;
 @property(nonatomic,assign)BOOL cell_selected;
 

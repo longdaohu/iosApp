@@ -13,9 +13,10 @@
 #import "YSScheduleModel.h"
 #import "TKEduClassRoom.h"
 #import "YSUserCommentVC.h"
+#import "MyoffferAlertTableView.h"
 
 @interface YaSiScheduleVC ()<UITableViewDelegate,UITableViewDataSource,TKEduRoomDelegate>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)YSScheduleModel *vedio_selected;
@@ -63,7 +64,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -108,7 +109,10 @@
         }
         
     }];
-
+    
+    self.tableView.actionBlock = ^{
+        [weakSelf makeCoursesData];
+    };
     
  }
 
@@ -166,7 +170,7 @@
                   [weakSelf makeUIWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
                   weakSelf.tableView.tableHeaderView = [UIView new];
-                  [weakSelf.tableView emptyViewWithError:NetRequest_noNetWork];
+                  [weakSelf.tableView alertWithRoloadMessage:nil];
      }];
 }
 
@@ -174,14 +178,14 @@
     
     if (!ResponseIsOK) {
         self.tableView.tableHeaderView = [UIView new];
-        [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        [self.tableView alertWithRoloadMessage:nil];
         return;
     }
     
     NSArray *result = response[@"result"];
     if (result.count == 0)  {
         self.tableView.tableHeaderView = [UIView new];
-        [self.tableView emptyViewWithError:NetRequest_NoDATA];
+        [self.tableView alertWithNotDataMessage:@"今日暂无课程"];
         return;
     }
     self.items = [YSScheduleModel mj_objectArrayWithKeyValuesArray:result];
@@ -231,8 +235,7 @@
 }
 
 - (void)makeRecordpathWithRoom:(NSString *)room{
- 
-//    room = @"856837414";
+
     NSString *path = [NSString stringWithFormat:@"GET http://global.talk-cloud.net/WebAPI/getrecordlist/key/VGSeGEq2TOmuht7I/serial/%@",room];
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {

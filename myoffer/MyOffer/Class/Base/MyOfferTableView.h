@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "EmptyDataView.h"
 
 @interface MyOfferTableView : UITableView
 @property(nonatomic,assign)CGFloat emptyY;
@@ -19,3 +18,4 @@
 - (void)emptyViewWithError:(NSString *)error;
 
 @end
+//#import "EmptyDataView.h"

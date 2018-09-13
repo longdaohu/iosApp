@@ -215,8 +215,8 @@
 		AE4BBCF9210F1E9400209FC8 /* RoomSearchFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCF8210F1E9400209FC8 /* RoomSearchFilterView.m */; };
 		AE4BBCFC210F257000209FC8 /* RoomSearchFilterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCFB210F257000209FC8 /* RoomSearchFilterVC.m */; };
 		AE4BBCFF210FF89A00209FC8 /* HomeBannerThemeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */; };
-		AE4BBD062110012400209FC8 /* LaunchScreen_logo_e.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */; };
-		AE4BBD072110012400209FC8 /* LaunchScreen_logo_f.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD052110012300209FC8 /* LaunchScreen_logo_f.png */; };
+		AE4BBD062110012400209FC8 /* LaunchScreen_logo_b.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */; };
+		AE4BBD072110012400209FC8 /* LaunchScreen_logo_a.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */; };
 		AE4BBD0E21105C7300209FC8 /* RoomItemBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD0D21105C7300209FC8 /* RoomItemBookVC.m */; };
 		AE4BBD1521105E1B00209FC8 /* RoomItemBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD1321105E1B00209FC8 /* RoomItemBookCell.m */; };
 		AE4BBD1621105E1B00209FC8 /* RoomItemBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD1421105E1B00209FC8 /* RoomItemBookCell.xib */; };
@@ -359,6 +359,7 @@
 		AE8A76A4210AEBEC0079D239 /* HomeImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A76A3210AEBEB0079D239 /* HomeImageCell.m */; };
 		AE8A76AC210B1CB60079D239 /* HomeRoomSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A76AB210B1CB60079D239 /* HomeRoomSearchVC.m */; };
 		AE8C846A1D12A4B300F15718 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */; };
+		AE8FE91121490261009D0453 /* MyoffferAlertTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE91021490261009D0453 /* MyoffferAlertTableView.m */; };
 		AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */; };
 		AE914EC91F4181E1008A43CD /* ApplyStutasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914EC81F4181E1008A43CD /* ApplyStutasModel.m */; };
 		AE914ECC1F418238008A43CD /* ApplyStutasHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE914ECB1F418238008A43CD /* ApplyStutasHistoryModel.m */; };
@@ -1309,8 +1310,8 @@
 		AE4BBCFB210F257000209FC8 /* RoomSearchFilterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomSearchFilterVC.m; sourceTree = "<group>"; };
 		AE4BBCFD210FF89A00209FC8 /* HomeBannerThemeLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBannerThemeLayout.h; sourceTree = "<group>"; };
 		AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeBannerThemeLayout.m; sourceTree = "<group>"; };
-		AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_e.png; path = ../LaunchScreen_logo_e.png; sourceTree = "<group>"; };
-		AE4BBD052110012300209FC8 /* LaunchScreen_logo_f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_f.png; path = ../LaunchScreen_logo_f.png; sourceTree = "<group>"; };
+		AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_b.png; path = ../LaunchScreen_logo_b.png; sourceTree = "<group>"; };
+		AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_a.png; path = ../LaunchScreen_logo_a.png; sourceTree = "<group>"; };
 		AE4BBD0C21105C7300209FC8 /* RoomItemBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookVC.h; sourceTree = "<group>"; };
 		AE4BBD0D21105C7300209FC8 /* RoomItemBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemBookVC.m; sourceTree = "<group>"; };
 		AE4BBD1221105E1B00209FC8 /* RoomItemBookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookCell.h; sourceTree = "<group>"; };
@@ -1528,6 +1529,8 @@
 		AE8AC7D91D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE8AC7DA1D2A5B2B00FF0429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AE8C84691D12A4B300F15718 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		AE8FE90F21490261009D0453 /* MyoffferAlertTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyoffferAlertTableView.h; sourceTree = "<group>"; };
+		AE8FE91021490261009D0453 /* MyoffferAlertTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyoffferAlertTableView.m; sourceTree = "<group>"; };
 		AE914EC21F417F59008A43CD /* ApplyStutasCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasCenterViewController.h; sourceTree = "<group>"; };
 		AE914EC31F417F59008A43CD /* ApplyStutasCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyStutasCenterViewController.m; sourceTree = "<group>"; };
 		AE914EC71F4181E1008A43CD /* ApplyStutasModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyStutasModel.h; sourceTree = "<group>"; };
@@ -2635,8 +2638,8 @@
 				46C6854D1B2AEB3D001EA296 /* Images.xcassets */,
 				AE027EB81C3A53C4007EBD28 /* PushConfig.plist */,
 				463E3A4D1B230EDC00E0BAF8 /* Info.plist */,
-				AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */,
-				AE4BBD052110012300209FC8 /* LaunchScreen_logo_f.png */,
+				AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */,
+				AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */,
 				463E3AC01B2310B000E0BAF8 /* PrefixHeader.pch */,
 				AEF1BAEA1BC61A77008860F6 /* InfoPlist.strings */,
 				AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */,
@@ -4981,6 +4984,8 @@
 				AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */,
 				AE54B6251ECEFA59004AFF7E /* MyOfferTableView.h */,
 				AE54B6261ECEFA59004AFF7E /* MyOfferTableView.m */,
+				AE8FE90F21490261009D0453 /* MyoffferAlertTableView.h */,
+				AE8FE91021490261009D0453 /* MyoffferAlertTableView.m */,
 				AEA5FDB41E0D32C70064B1B5 /* EmptyDataView.h */,
 				AEA5FDB51E0D32C70064B1B5 /* EmptyDataView.m */,
 				AE38BEE91E4AED2700FCF28B /* ShareNViewController.h */,
@@ -6710,7 +6715,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6843,7 +6848,7 @@
 				AE60C23620E4C83C000867A8 /* home_application_cell_uni.jpg in Resources */,
 				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
 				AEA545D720D274270095CBDA /* HomeRecommendActivityCell.xib in Resources */,
-				AE4BBD062110012400209FC8 /* LaunchScreen_logo_e.png in Resources */,
+				AE4BBD062110012400209FC8 /* LaunchScreen_logo_b.png in Resources */,
 				AEDDAA7220E4FEC00069C138 /* intro_03.jpg in Resources */,
 				AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
@@ -6862,7 +6867,7 @@
 				AE1A806920DA563F00CE9E50 /* HomeYESGlobalCell.xib in Resources */,
 				AE6178C520723C21006B311A /* DiscountVC.xib in Resources */,
 				AEDDAA8320E63A940069C138 /* home_global_500_right.jpeg in Resources */,
-				AE4BBD072110012400209FC8 /* LaunchScreen_logo_f.png in Resources */,
+				AE4BBD072110012400209FC8 /* LaunchScreen_logo_a.png in Resources */,
 				AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */,
 				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
 				AE1A805C20DA44B800CE9E50 /* home_fee_b.jpg in Resources */,
@@ -7049,6 +7054,7 @@
 				AEA03A47211D7DE2007A791E /* RoomCityVC.m in Sources */,
 				AEAFDF1921216B1A00067190 /* RootTagsCell.m in Sources */,
 				AED4AF852141024300D8B34D /* TXSakuraImageView.m in Sources */,
+				AE8FE91121490261009D0453 /* MyoffferAlertTableView.m in Sources */,
 				463E3AAF1B23105F00E0BAF8 /* KDLogger.m in Sources */,
 				AEA24B001D5B24D200DD7939 /* BindPhoneViewController.m in Sources */,
 				AED4AF692141024300D8B34D /* UIImageView+TKExtension.m in Sources */,
@@ -7963,7 +7969,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

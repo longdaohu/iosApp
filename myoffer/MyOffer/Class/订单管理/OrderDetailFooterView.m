@@ -116,7 +116,7 @@
     
     UILabel *contact_subLab =[UILabel labelWithFontsize:KDUtilSize(12)  TextColor:XCOLOR(187, 187, 187, 1) TextAlignment:NSTextAlignmentLeft];
     [bgView addSubview:contact_subLab];
-    contact_subLab.text = @"合同名称:《留学产品合同》";
+    contact_subLab.text = @"合同名称:《产品合同》";
     self.contact_subLab = contact_subLab;
     
     UIButton *lookBtn = [[UIButton alloc] init];

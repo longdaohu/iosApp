@@ -1,6 +1,5 @@
 //
 //  EmptyDataView.m
-//  OfferDemo
 //
 //  Created by xuewuguojie on 2016/12/23.
 //  Copyright © 2016年 xuewuguojie. All rights reserved.
@@ -11,8 +10,9 @@
 
 @interface EmptyDataView ()
 @property(nonatomic,strong)UIImageView *logoView;
-@property(nonatomic,strong)UILabel *errorLab;
-@property(nonatomic,strong)UIButton *btn;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UILabel *messageLab;
+@property(nonatomic,strong)UIButton *reloadBtn;
 @end
 
 
@@ -20,8 +20,7 @@
 
 + (instancetype)emptyViewWithBlock:(EmptyDataViewBlock)actionBlock{
     
-    EmptyDataView *empty = [[EmptyDataView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH - 40, 250)];
-    
+    EmptyDataView *empty = [[EmptyDataView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 250)];
     empty.actionBlock = actionBlock;
     
     return empty;
@@ -31,7 +30,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
  
         UIImageView *logoView = [[UIImageView alloc] init];
         logoView.clipsToBounds = YES;
@@ -40,31 +38,35 @@
         [self addSubview:logoView];
         self.logoView = logoView;
         
-        UILabel *errorLab = [[UILabel alloc] init];
-        errorLab.text = NetRequest_NoDATA;
-        errorLab.numberOfLines = 0;
-        errorLab.textColor = XCOLOR_LIGHTGRAY;
-        errorLab.font = [UIFont systemFontOfSize:14];
-        errorLab.textAlignment = NSTextAlignmentCenter;
-        self.errorLab = errorLab;
-        [self addSubview:errorLab];
- 
-        UIButton *btn = [UIButton new];
-        btn.backgroundColor = XCOLOR_RED;
-        btn.layer.masksToBounds = YES;
-        btn.layer.cornerRadius = CORNER_RADIUS;
-        [btn setTitle:@"点击加载" forState:UIControlStateNormal];
-        [btn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        self.btn = btn;
-        [self addSubview:btn];
-        btn.hidden = YES;
-        [btn addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reload)];
-        [self addGestureRecognizer:tap];
-        
-        
+        UILabel *titleLab = [[UILabel alloc] init];
+        titleLab.text = NetRequest_NoDATA;
+        titleLab.textColor = XCOLOR_BLACK;
+        titleLab.font = [UIFont boldSystemFontOfSize:14];
+        titleLab.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:titleLab];
+        self.titleLab = titleLab;
+
+        UILabel *messageLab = [[UILabel alloc] init];
+        messageLab.text = NetRequest_NoDATA;
+        messageLab.numberOfLines = 0;
+        messageLab.textColor = XCOLOR_SUBTITLE;
+        messageLab.font = [UIFont systemFontOfSize:12];
+        messageLab.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:messageLab];
+        self.messageLab = messageLab;
+
+        UIButton *reloadBtn = [UIButton new];
+        [reloadBtn setTitle:@"点击加载" forState:UIControlStateNormal];
+        [reloadBtn setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateNormal];
+        [reloadBtn setBackgroundImage:XImage(@"button_blue_highlight") forState:UIControlStateHighlighted];
+        reloadBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self addSubview:reloadBtn];
+        [reloadBtn addTarget:self action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
+        self.reloadBtn = reloadBtn;
+        reloadBtn.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
+        reloadBtn.layer.shadowOffset = CGSizeMake(0, 3);
+        reloadBtn.layer.shadowOpacity = 0.5;
+     
     }
     return self;
 }
@@ -77,30 +79,42 @@
     
 }
 
-
-- (void)setErrorStr:(NSString *)errorStr{
-
-    _errorStr = errorStr;
+- (void)setAlertMessage:(NSString *)alertMessage{
     
-    self.errorLab.text = errorStr;
-
+    _alertMessage = alertMessage;
+    
+    self.messageLab.text = alertMessage;
 }
 
-- (void)setBtn_title:(NSString *)btn_title{
+
+- (void)setAlertTitle:(NSString *)alertTitle{
+
+    _alertTitle = alertTitle;
     
-    _btn_title = btn_title;
-    
-    self.btn.hidden = NO;
-    
-    [self.btn setTitle:btn_title forState:UIControlStateNormal];
-    
+    self.titleLab.text = alertTitle;
 }
 
-- (void)setIcon:(NSString *)icon {
+- (void)setButtonTitle:(NSString *)buttonTitle{
     
-    _icon = icon;
+    _buttonTitle = buttonTitle;
+    [self.reloadBtn setTitle:buttonTitle forState:UIControlStateNormal];
+}
 
-    [self.logoView setImage:[UIImage imageNamed:icon]];
+- (void)setImageName:(NSString *)imageName{
+    _imageName = imageName;
+    [self.logoView setImage:[UIImage imageNamed:imageName]];
+}
+
+- (void)setAlertType:(TableViewAlertType)alertType{
+    _alertType = alertType;
+    
+    if (alertType == TableViewAlertTypeReload) {
+        self.messageLab.hidden = NO;
+        self.reloadBtn.hidden = NO;
+    }else{
+        self.messageLab.hidden = YES;
+        self.reloadBtn.hidden = YES;
+    }
 }
 
 
@@ -108,24 +122,44 @@
 
     [super layoutSubviews];
     
-    CGFloat logo_X = 0;
+    CGSize content_size = self.bounds.size;
+    
+    CGFloat logo_X = 20;
     CGFloat logo_Y = 0;
-    CGFloat logo_W = self.bounds.size.width;
-    CGFloat logo_H = self.bounds.size.height - 100;
-     self.logoView.frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
+    CGFloat logo_W = content_size.width - logo_X * 2;
+    CGFloat logo_H = 145;
+    self.logoView.frame = CGRectMake(logo_X, logo_Y, logo_W, logo_H);
     
+    CGFloat title_X = logo_X;
+    CGFloat title_Y = CGRectGetMaxY(self.logoView.frame);
+    CGFloat title_W = logo_W;
+    CGFloat title_H = 16;
+    self.titleLab.frame = CGRectMake(title_X, title_Y, title_W, title_H);
     
-    CGFloat error_X = 0;
-    CGFloat error_Y = CGRectGetMaxY(self.logoView.frame) - 10;
-    CGFloat error_W = logo_W;
-    CGFloat error_H = 50;
-    self.errorLab.frame = CGRectMake(error_X, error_Y, error_W, error_H);
+    CGFloat message_X = title_X;
+    CGFloat message_Y = CGRectGetMaxY(self.titleLab.frame) + 5;
+    CGFloat message_W = title_W;
+    CGSize  message_size = [self.messageLab.text sizeWithfontSize:12 maxWidth:message_W];
+    CGFloat message_H = message_size.height;
+    self.messageLab.frame = CGRectMake(message_X, message_Y, message_W, message_H);
+
+    CGFloat btn_W = 120;
+    CGFloat btn_X = (content_size.width - btn_W) * 0.5;
+    CGFloat btn_Y =  CGRectGetMaxY(self.messageLab.frame) + 18;
+    CGFloat btn_H = 35;
+    self.reloadBtn.frame = CGRectMake(btn_X, btn_Y, btn_W, btn_H);
+   
+    if (self.alertType == TableViewAlertTypeReload) {
+        
+        self.messageLab.hidden = NO;
+        self.reloadBtn.hidden = NO;
+        
+    }else{
+        
+        self.messageLab.hidden = YES;
+        self.reloadBtn.hidden = YES;
+    }
     
-    CGFloat btn_W = 300;
-    CGFloat btn_X = (self.bounds.size.width - btn_W) * 0.5;
-    CGFloat btn_Y = CGRectGetMaxY(self.errorLab.frame) + 10;
-    CGFloat btn_H = 40;
-    self.btn.frame = CGRectMake(btn_X, btn_Y, btn_W, btn_H);
 }
 
 

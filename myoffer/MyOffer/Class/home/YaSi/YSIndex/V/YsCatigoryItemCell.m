@@ -9,28 +9,24 @@
 #import "YsCatigoryItemCell.h"
 #import "YasiCatigoryItemModel.h"
 
-@implementation YsCatigoryItemCell
+@interface YsCatigoryItemCell ()
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-    
-    [self.titleBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-    [self.titleBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateDisabled];
-    self.titleBtn.userInteractionEnabled = NO;
-}
+@end
+
+@implementation YsCatigoryItemCell
 
 - (void)setItem:(YasiCatigoryItemModel *)item{
     _item = item;
-    
-    [self.titleBtn setTitle:item.name forState:UIControlStateNormal];
-
+    self.titleLab.text  = item.name;
 }
 
 - (void)setCell_selected:(BOOL)cell_selected{
     _cell_selected = cell_selected;
     
-    self.titleBtn.enabled = !cell_selected;
+    self.titleLab.textColor = cell_selected ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
+    
+
 }
 
 

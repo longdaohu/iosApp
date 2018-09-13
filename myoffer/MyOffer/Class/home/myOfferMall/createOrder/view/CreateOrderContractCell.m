@@ -36,7 +36,7 @@
         [self.contentView addSubview:titleLab];
         
         UILabel *subLab = [UILabel new];
-        subLab.text = @"合同名称：《留学产品合同》";
+        subLab.text = @"合同名称：《产品合同》";
         self.subLab = subLab;
         subLab.font = XFONT(12);
         subLab.textColor = XCOLOR(187, 187, 187, 1);

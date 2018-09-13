@@ -307,13 +307,12 @@
     }else{
         
         NSDictionary *result = response[@"result"];
-        self.YSHeader.score_signed =  result[@"score"];
+        self.YSHeader.score_signed =  [NSString stringWithFormat:@"%@",result[@"score"]];
         [MBProgressHUD showMessage:@"签到成功"];
-        self.ysModel.user_coin = result[@"score"];
+        self.ysModel.user_coin = self.YSHeader.score_signed;//result[@"score"];
         
     }
 }
-
 
 #pragma mark : 事件处理
 - (void)caseHeaderActionType:(YSHomeHeaderActionType)type{

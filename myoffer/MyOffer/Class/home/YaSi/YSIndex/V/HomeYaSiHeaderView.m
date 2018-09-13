@@ -165,8 +165,8 @@
     
     UICollectionViewFlowLayout *flow_cg = [[UICollectionViewFlowLayout alloc] init];
     flow_cg.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
-    flow_cg.minimumLineSpacing = 10;
-    flow_cg.minimumInteritemSpacing = 10;
+    flow_cg.minimumLineSpacing = 15;
+    flow_cg.minimumInteritemSpacing = 15;
     flow_cg.itemSize = CGSizeMake(135, 90);
     UICollectionView *catigoryView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow_cg];
     [catigoryView registerNib:[UINib nibWithNibName:NSStringFromClass([YsCatigoryItemCell class] ) bundle:nil] forCellWithReuseIdentifier:@"YsCatigoryItemCell"];
@@ -291,7 +291,10 @@
     
     if (ysModel.banner_images.count > 0) {
         [self.bannerView reloadData];
-         self.pageControl.numberOfPages = ysModel.banner_images.count;
+        self.pageControl.numberOfPages = ysModel.banner_images.count;
+        if (ysModel.banner_images.count <= 1) {
+            self.pageControl.hidden = YES;
+        }
         [self addBannerTimer];
     }
     

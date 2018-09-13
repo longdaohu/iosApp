@@ -15,9 +15,10 @@
 #import "YSCourseGroupModel.h"
 #import "YaSiScheduleVC.h"
 #import "YSCalendarVC.h"
+#import "MyoffferAlertTableView.h"
 
 @interface YSMyCourseVC ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)YasiHeaderView *toolView;
 @property(nonatomic,strong)YSCourseGroupModel *groupModel;
 
@@ -61,7 +62,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
@@ -76,6 +77,10 @@
     [self makeToolView];
     self.tableView.contentInset = UIEdgeInsetsMake(self.toolView.mj_h, 0, XNAV_HEIGHT, 0);
     [self.tableView setMj_offsetY:-self.toolView.mj_h];
+    WeakSelf;
+    self.tableView.actionBlock = ^{
+        [weakSelf makeCoursesData];
+    };
 }
 
 - (void)makeToolView{
@@ -157,7 +162,7 @@
 
 #pragma mark : 数据加载
 - (void)makeCoursesData{
-    
+ 
     NSString *path = [NSString stringWithFormat:@"GET %@api/v1/ielts/classes",DOMAINURL_API];
     WeakSelf
     [self startAPIRequestWithSelector:path
@@ -166,20 +171,21 @@
               errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
                                 [weakSelf makeUIWithResponse:response];
                            } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                               [self.tableView emptyViewWithError:NetRequest_noNetWork];
+                               [weakSelf.tableView alertWithRoloadMessage:nil];
                            }];
 }
 
 
 - (void)makeUIWithResponse:(id)response{
     
+    [self.tableView alertViewHiden];
     if (!ResponseIsOK) {
-        [self.tableView emptyViewWithError:NetRequest_noNetWork];
+        [self.tableView alertWithRoloadMessage:nil];
         return;
     }
     NSArray *result = response[@"result"];
     if (result.count == 0)  {
-        [self.tableView emptyViewWithError:NetRequest_NoDATA];
+        [self.tableView  alertWithNotDataMessage:@"今日暂无课程"];
         return;
     }
     self.groupModel.items = [YSCourseModel mj_objectArrayWithKeyValuesArray:result];
@@ -200,9 +206,9 @@
     
     
    if (self.groupModel.curent_items.count == 0) {
-       [self.tableView emptyViewWithError:NetRequest_NoDATA];
+       [self.tableView  alertWithNotDataMessage:@"今日暂无课程"];
    }else{
-       [self.tableView emptyViewWithHiden:YES];
+       [self.tableView alertViewHiden];
    }
  
 }
