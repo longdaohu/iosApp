@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdK-hD-m6S">
-                        <rect key="frame" x="0.0" y="35" width="135" height="33.5"/>
+                        <rect key="frame" x="0.0" y="30" width="135" height="33.5"/>
                         <string key="text">雅思6分精讲强化班
 （保5.5冲6.0）</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -31,7 +31,7 @@
             </view>
             <constraints>
                 <constraint firstItem="vdK-hD-m6S" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5SQ-TG-bDd"/>
-                <constraint firstItem="vdK-hD-m6S" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="35" id="FaS-98-wjS"/>
+                <constraint firstItem="vdK-hD-m6S" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="30" id="FaS-98-wjS"/>
                 <constraint firstAttribute="trailing" secondItem="vdK-hD-m6S" secondAttribute="trailing" id="zQU-mK-fBN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>

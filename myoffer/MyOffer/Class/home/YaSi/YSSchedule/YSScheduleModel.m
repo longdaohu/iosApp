@@ -155,7 +155,7 @@
             _nextCourseTime = [NSString stringWithFormat:@"今天 %@:%@ - %@", hour, minute,endTime];
             NSDate *now = [NSDate date];
             if ((nextCourseStartTime.hour > now.hour) || (nextCourseStartTime.hour == now.hour  && nextCourseStartTime.minute <= now.minute )) {
-                _nextCourseTime = [NSString stringWithFormat:@"%@:%@ - %@", hour, minute,endTime];
+                _nextCourseTime = [NSString stringWithFormat:@"今天 %@:%@ - %@", hour, minute,endTime];
             }
             
         }else if (nextCourseStartTime.isTomorrow) {

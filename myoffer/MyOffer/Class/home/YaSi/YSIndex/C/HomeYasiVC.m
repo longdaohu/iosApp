@@ -54,6 +54,13 @@
     [self makeYSData];
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caseUserBuyed:) name:@"cousePayed" object:nil];
+}
+
+- (void)caseUserBuyed:(NSNotification *)noti{
+
+    NSLog(@">>>>>>>>>>caseUserBuyed>>>>>>>>>>>> %@",noti);
 }
 
 - (void)setUser:(MyofferUser *)user{
@@ -87,7 +94,28 @@
     
     [super toLoadView];
     self.tableView.backgroundColor = XCOLOR_CLEAR;
-    self.tableView.tableFooterView = self.YSFooter;
+    self.tableView.footerHeight = XSCREEN_HEIGHT;
+    WeakSelf
+    self.tableView.actionBlock = ^{
+        [weakSelf caseReload];
+    };
+    
+}
+
+- (void)caseReload{
+    
+    if (self.ysModel.banner_images.count == 0) {
+        [self makeIELTSData];
+    }
+    
+    if (self.ysModel.catigorys.count == 0) {
+        [self makeCategoryData];
+    }
+    
+    if (self.ysModel.living_items.count == 0) {
+        [self makeTodayOnliveData];
+    }
+    
 }
 
 - (void)makeYSHeaderView{
@@ -258,17 +286,21 @@
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makeCatigoryWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+                  [weakSelf.tableView alertWithRoloadMessage:nil];
               }];
 }
 - (void)makeCatigoryWithResponse:(id)response{
     
     if (!ResponseIsOK) {
+        [self.tableView alertWithRoloadMessage:nil];
         return;
     }
     NSArray *result = response[@"result"];
     if (result.count == 0) {
+        [self.tableView alertWithNotDataMessage:nil];
         return;
     }
+    self.tableView.tableFooterView = self.YSFooter;
     NSArray *catigorys = [YasiCatigoryModel mj_objectArrayWithKeyValuesArray:result];
     self.ysModel.catigorys = catigorys;
     self.YSHeader.ysModel = self.ysModel;
@@ -354,13 +386,16 @@
         item.cover_url = self.ysModel.catigory_Package_current.cover_url;
         item.name  = self.ysModel.catigory_Package_current.name;
         item.fitPerson_hiden = true;
+        item.isYS = YES;
         ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
         itemFrame.item = item;
         
         CreateOrderVC *vc  = [[CreateOrderVC alloc] initWithNibName:@"CreateOrderVC" bundle:nil];
         vc.itemFrame =  itemFrame;
-        [self.navigationController pushViewController:vc animated:YES];
+        PushToViewController(vc);
+        
     }else{
+        
         RequireLogin;
     }
  
@@ -399,6 +434,8 @@
 - (void)caseSectionTitleChange:(NSInteger)index{
     
     self.current_index = index;
+    if (self.ysModel.catigorys.count == 0) return;
+    
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
     CGFloat top_y = self.tableView.mj_offsetY > CGRectGetMaxY(self.YSHeader.frame) ?  CGRectGetMaxY(self.YSHeader.frame) :  self.tableView.mj_offsetY ;
     [UIView performWithoutAnimation:^{

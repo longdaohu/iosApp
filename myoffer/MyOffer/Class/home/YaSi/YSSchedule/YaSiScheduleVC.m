@@ -110,15 +110,12 @@
         
     }];
     
+    self.tableView.backgroundColor = XCOLOR_WHITE;
     self.tableView.actionBlock = ^{
         [weakSelf makeCoursesData];
     };
     
  }
-
-
-
-
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource

@@ -66,6 +66,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.backgroundColor = XCOLOR_WHITE;
     [self.view addSubview:self.tableView];
     
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
@@ -124,7 +125,7 @@
      }
     
     
-    if (item.courseState == YSCourseModelVideoStateINPROGRESS) {
+    if (item.courseState == YSCourseModelVideoStateINPROGRESS || item.courseState == YSCourseModelVideoStateNOTSTART) {
  
         YasiCourseOnLivingCell  *cell =[tableView dequeueReusableCellWithIdentifier:@"YasiCourseOnLivingCell"];
         if (!cell) {
@@ -178,7 +179,6 @@
 
 - (void)makeUIWithResponse:(id)response{
     
-    [self.tableView alertViewHiden];
     if (!ResponseIsOK) {
         [self.tableView alertWithRoloadMessage:nil];
         return;

@@ -80,7 +80,7 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:self.type];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, XSCREEN_HEIGHT - HOME_MENU_HEIGHT) style:self.type];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

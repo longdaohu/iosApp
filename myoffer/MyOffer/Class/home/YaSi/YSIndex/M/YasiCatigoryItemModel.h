@@ -17,6 +17,7 @@
 @property(nonatomic,copy)NSString *display_price ;
 @property(nonatomic,copy)NSString *price ;
 @property(nonatomic,copy)NSString *cover_url;
+@property(nonatomic,assign)NSInteger  boughtCount;
 @property(nonatomic,strong)NSArray *courseCaveats;
 @property(nonatomic,strong)NSArray *courseQuestions;
 @property(nonatomic,strong)NSArray *courseDescription;

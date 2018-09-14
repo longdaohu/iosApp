@@ -70,7 +70,6 @@
     [ysBtn setBackgroundImage:XImage(@"ys_header_test") forState:UIControlStateNormal];
     ysBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
     ysBtn.titleLabel.numberOfLines = 0;
-    [ysBtn setTitle:@"雅思\n评测" forState:UIControlStateNormal];
     [ysBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
     [self addSubview:ysBtn];
     self.YS_Test_Btn = ysBtn;
@@ -102,6 +101,7 @@
     live_bg.titleLabel.font = XFONT(14);
     live_bg.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
     live_bg.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    live_bg.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [live_bg setBackgroundImage:XImage(@"ys_heike_live_bg") forState:UIControlStateNormal];
     [live_bg setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
     [live_bg setTitle:@" " forState:UIControlStateDisabled];
@@ -319,7 +319,7 @@
         HomeSingleImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"bannerCell" forIndexPath:indexPath];
         NSString *path = self.ysModel.banner_images[indexPath.row];
         [cell.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-
+        
         return cell;
     }
     
@@ -495,6 +495,12 @@
         self.signedBtn.enabled = YES;
         self.signedBtn.backgroundColor = XCOLOR_WHITE;
         self.score_signed = nil;
+        self.titleBanner.hidden = YES;
+        self.live_bg.enabled = YES;
+    }else{
+        
+        self.titleBanner.hidden = NO;
+        self.live_bg.enabled = NO;  
     }
     
 }

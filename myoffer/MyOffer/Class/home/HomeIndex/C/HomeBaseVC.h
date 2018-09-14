@@ -13,13 +13,14 @@
 #import "HomeRoomIndexFlatsObject.h"
 #import "HomeRoomIndexFrameObject.h"
 #import "HomeSecView.h"
+#import "MyoffferAlertTableView.h"
 
 @interface HomeBaseVC : BaseViewController
 @property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)UIView *headerView;
 @property(nonatomic,assign)UITableViewStyle type;
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)MyofferUser *user;
 
 - (void)toReLoadTable;

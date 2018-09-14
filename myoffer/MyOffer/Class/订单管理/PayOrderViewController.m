@@ -281,7 +281,6 @@ static NSString *identify = @"pay";
             [weakSelf showAler:@"支付成功"];
         }
     }];
-  
 
 }
 

@@ -46,7 +46,9 @@
 @property(nonatomic,assign)BOOL reduce_flag;
 @property(nonatomic,strong)NSArray *comment_attr;
 
-//添加属性
+//适合人群
 @property(nonatomic,assign)BOOL fitPerson_hiden;
+//雅思OR留学业务
+@property(nonatomic,assign)BOOL isYS;
 
 @end

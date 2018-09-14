@@ -81,9 +81,10 @@
 - (void)alertWithNotDataMessage:(NSString *)message{
     
     self.alertView.alertType =   TableViewAlertTypeDefault;
-    self.alertView.alertTitle = message;
+    self.alertView.alertTitle =  message ? message : @"数据为空";
     [self fixFooter];
 }
+
 - (void)alertWithRoloadMessage:(NSString *)message{
     
     self.alertView.alertTitle = @"网络加载失败";

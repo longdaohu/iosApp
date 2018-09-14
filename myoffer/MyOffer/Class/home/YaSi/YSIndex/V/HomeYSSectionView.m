@@ -87,6 +87,9 @@
     
     CGSize content_size = self.bounds.size;
     CGFloat left_margin = 20;
+    if (content_size.width<=320) {
+        left_margin = 0;
+    }
     
     CGFloat padding = content_size.width - self.total_width - left_margin * 2;
     if (self.Btn_items.count > 0) {

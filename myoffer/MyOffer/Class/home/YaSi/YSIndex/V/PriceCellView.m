@@ -38,6 +38,7 @@
 
     _item = item;
     
+    self.commitBtn.selected = (item.boughtCount > 0);
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
     self.discountLab.text = [NSString stringWithFormat:@"￥%@",item.display_price];
     

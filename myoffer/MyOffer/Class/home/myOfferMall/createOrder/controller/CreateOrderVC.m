@@ -428,7 +428,7 @@
     result_price = result_price < 0 ? 0 : result_price;
     
     NSString *price = [self fomatterWithPrice:[NSString stringWithFormat:@"%.2f",(result_price * 0.001)]];
-    self.priceLab.text = price;//[NSString stringWithFormat:@"￥%.2f",(result_price * 0.001)];
+    self.priceLab.text = price;
 }
 
 #pragma mark : 查看协议
@@ -437,8 +437,9 @@
     if (!self.protocalVC.itemFrame) {
         self.protocalVC.itemFrame = self.itemFrame;
     }
-    
-    [self.protocalVC pageWithHiden:NO];
+    if (self.protocalVC.itemFrame.item.agreements.count > 0) {
+        [self.protocalVC pageWithHiden:NO];
+    }
 }
 
 #pragma mark : 选择按钮
@@ -529,9 +530,12 @@
         NSString *amount =  [NSString stringWithFormat:@"%@",result[@"amount"] ];
         order.total_fee = [amount toDecimalStyleString];
         order.order_id = result[@"orderId"];
+        if (self.itemFrame.item.isYS) {
+            order.isYS = YES;
+        }
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order = order;
-        [self.navigationController pushViewController:pay animated:YES];
+        PushToViewController(pay);
         
         [self updateOrderContactCell];
     

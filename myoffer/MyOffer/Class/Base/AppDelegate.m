@@ -467,8 +467,9 @@ static AppDelegate *__sharedDelegate;
         
          return YES;
 
-    }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
-        
+//    }else if([url.absoluteString containsString:@"wx3b0cb66502388846://pay"]){
+    }else if([url.absoluteString containsString:@"wx6ef4fb49781fdd34://pay"]){
+
         return [WXApi handleOpenURL:url delegate:self];
      
     }else{

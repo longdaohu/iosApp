@@ -200,12 +200,13 @@
     CGFloat banner_box_w = XSCREEN_WIDTH;
     CGFloat banner_box_h = 0;
     
+    CGFloat banner_w = XSCREEN_WIDTH - 40;
+    CGFloat banner_h = banner_w * 378.0/670;
+    self.header_banner_size = CGSizeMake(banner_w, banner_h);
+    banner_w = XSCREEN_WIDTH;
     CGFloat banner_x = 0;
     CGFloat banner_y = 0;
-    CGFloat banner_w = XSCREEN_WIDTH - banner_x * 2;
-    CGFloat banner_h = banner_w * 189.0/335;
     self.bannerView_frame = CGRectMake(banner_x, banner_y, banner_w, banner_h);
-    self.header_banner_size = CGSizeMake(banner_w - 40, banner_h - 5);
     
     banner_box_h = banner_h + 20;
     self.banner_box_frame = CGRectMake(banner_box_x, banner_box_y, banner_box_w, banner_box_h);

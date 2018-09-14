@@ -369,8 +369,7 @@
 
 //请求录播路径
 - (void)makeRecordpathWithRoom:(NSString *)room{
-    
-//    room = @"856837414";
+
     NSString *path = [NSString stringWithFormat:@"GET http://global.talk-cloud.net/WebAPI/getrecordlist/key/VGSeGEq2TOmuht7I/serial/%@",room];
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
@@ -395,7 +394,9 @@
                             };
         [TKEduClassRoom joinPlaybackRoomWithParamDic:td ViewController:self Delegate:self isFromWeb:YES];
         
-        return;
+    }else{
+        
+        [MBProgressHUD showMessage:@"录播视频正在制作中，请稍后！"];
     }
 }
 //直播
