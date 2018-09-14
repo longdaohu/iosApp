@@ -34,6 +34,7 @@
     self.subLab.textColor = XCOLOR_SUBTITLE;
     self.playBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.playBtn.layer.shadowOpacity = 0.5;
+    self.playBtn.userInteractionEnabled = NO;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"living_icon" ofType:@"gif"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     UIImage *image = [UIImage sd_animatedGIFWithData:data];
@@ -46,7 +47,7 @@
     _item = item;
     
     self.titleLab.text = @"";
-    if (item.type == YSScheduleVideoStateLiving) {
+    if (item.type == YSScheduleVideoStateLiving || item.type == YSScheduleVideoStateBefore) {
         self.titleLab.text =  item.nextCourseTime;
     }
     self.nameLab.text = item.teacherName;

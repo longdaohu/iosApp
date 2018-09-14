@@ -103,9 +103,9 @@
     live_bg.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     live_bg.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [live_bg setBackgroundImage:XImage(@"ys_heike_live_bg") forState:UIControlStateNormal];
-    [live_bg setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
-    [live_bg setTitle:@" " forState:UIControlStateDisabled];
-    [live_bg addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
+//    [live_bg setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
+//    [live_bg setTitle:@" " forState:UIControlStateDisabled];
+//    [live_bg addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleBanner = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
     [self  addSubview:self.titleBanner];
@@ -187,9 +187,8 @@
     priceCell.backgroundColor = XCOLOR_CLEAR;
     self.priceCell = priceCell;
     [catigory_box addSubview:priceCell];
-    
-    priceCell.actionBlock = ^{
-        [weakSelf caseBuy];
+    priceCell.actionBlock = ^(BOOL isPay){
+        isPay ?  [weakSelf caseBuy] :  [weakSelf caseToClass];
     };
     
     NSMutableArray *btn_tmp = [NSMutableArray array];
@@ -257,17 +256,14 @@
     }else{
         self.score_signed = nil;
     }
-    if (ysModel.living_items_loaded) {
-        self.titleBanner.hidden = NO;
-        self.live_bg.enabled = NO;
-        self.titleBanner.titlesGroup = ysModel.living_titles;
-    }else{
-        self.live_bg.enabled = YES;
-        self.titleBanner.hidden = YES;
-    }
-
+     self.titleBanner.autoScroll = YES;
+     self.titleBanner.titlesGroup = ysModel.living_titles;
+ 
     NSInteger celles_count = [self.catigoryView numberOfItemsInSection:0];
     if (celles_count > 0) {
+        if (self.priceCell.item) {
+            self.priceCell.item = self.ysModel.catigory_Package_current;
+        }
         return;
     }
     for (NSInteger index = 0; index < ysModel.catigory_title_frames.count; index++) {
@@ -279,7 +275,7 @@
         [sender setTitle:ysModel.catigory_titles[index] forState:UIControlStateNormal];
         NSValue *itemValue = ysModel.catigory_title_frames[index];
         sender.frame = itemValue.CGRectValue;
-        
+
         if (index == ysModel.catigory_title_selected_index) {
             sender.enabled = NO;
         }
@@ -458,6 +454,13 @@
     }
 }
 
+- (void)caseToClass{
+    
+    if (self.actionBlock) {
+        self.actionBlock(YSHomeHeaderActionTypeClass);
+    }
+}
+
 - (void)catigoryChange:(UIButton *)sender{
     
     for (UIButton *item in self.catigory_buttones) {
@@ -489,20 +492,18 @@
 
 - (void)userLoginChange{
     
+    self.titleBanner.autoScroll = YES;
+    self.titleBanner.titlesGroup = self.ysModel.living_titles;
     
     if (!LOGIN){
-        
         self.signedBtn.enabled = YES;
         self.signedBtn.backgroundColor = XCOLOR_WHITE;
         self.score_signed = nil;
-        self.titleBanner.hidden = YES;
-        self.live_bg.enabled = YES;
-    }else{
+        self.priceCell.item = self.ysModel.catigory_Package_current;
         
-        self.titleBanner.hidden = NO;
-        self.live_bg.enabled = NO;  
+        return;
     }
-    
+
 }
 
 

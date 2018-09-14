@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger,YSHomeHeaderActionType) {
     YSHomeHeaderActionTypeDefault = 0,
     YSHomeHeaderActionTypeSigned,//签到
     YSHomeHeaderActionTypeLiving,//直播
+    YSHomeHeaderActionTypeClass,//教室
     YSHomeHeaderActionTypeTest,  //测评
     YSHomeHeaderActionTypeBanner, //轮播
     YSHomeHeaderActionTypeBuy, //报名

@@ -94,9 +94,7 @@
     self.titleLab = titleLab;
     [header addSubview:titleLab];
     header.mj_h = title_y + title_h;
-
     self.tableView.tableHeaderView = header;
-    
     WeakSelf;
     [iconView sd_setImageWithURL:[NSURL URLWithString:self.item.productImg]  completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (!error) {

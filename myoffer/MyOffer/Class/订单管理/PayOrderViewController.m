@@ -62,10 +62,9 @@
     NSString *BackResult = (NSString *)notification.object;
     BOOL result = ([BackResult isEqualToString:@"0"] ||  [BackResult isEqualToString:@"9000"]);
     self.payEnd = result;
-    NSString *title = result ? @"支付成功" : @"支付失败";
-    
-    [self showAler:title];
-  
+    if (result) {
+        [self showAler:@"支付成功"];
+    }
 }
 
 
@@ -264,10 +263,6 @@ static NSString *identify = @"pay";
 -(void)pay:(NSNotification *)noti
 {
     
-    if (self.payEnd) {
-        return;
-    }
-    
     NSString *path;
     if ([self.payStyle isEqualToString:@"支付宝"]) {
         path =[NSString stringWithFormat:kAPISelectorOrderAlipay,self.order.order_id];
@@ -277,11 +272,19 @@ static NSString *identify = @"pay";
     WeakSelf
     [self startAPIRequestWithSelector:path parameters:nil showHUD:NO success:^(NSInteger statusCode, id response) {
         NSString *endStr =[NSString stringWithFormat:@"%@",response[@"end"]];
+        NSString *title = endStr.boolValue ? @"支付成功" : @"支付失败";
         if (endStr.boolValue) {
-            [weakSelf showAler:@"支付成功"];
+            [weakSelf postMessageToYS];
+        }else{
+            [weakSelf showAler:title];
         }
     }];
+}
 
+
+- (void)postMessageToYS{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"cousePayed" object:@"雅思"];
 }
 
 - (void)didReceiveMemoryWarning {

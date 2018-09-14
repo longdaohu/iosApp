@@ -226,11 +226,13 @@
     }
 }
 
+ 
+
 - (NSArray *)living_titles{
     
     NSArray *living_titles = @[@"今天没有新课程，复习一下学完的课程吧"];
-    NSArray *titles = [self.living_items valueForKeyPath:@"living_text"];
-    if (titles.count > 0) {
+    if (LOGIN && self.living_items) {
+        NSArray *titles = [self.living_items valueForKeyPath:@"living_text"];
         living_titles = titles;
     }
     
@@ -247,7 +249,7 @@
     for (HomeBannerObject *banner in banners) {
         if (banner.image) {
             [url_arr addObject:banner.image];
-            NSString *target = banner.target.length == 0 ? @"https://m.myoffer.cn/" :  banner.target;
+            NSString *target = banner.target.length == 0 ? @"" :  banner.target;
             [target_arr addObject:target];
         }
     }
@@ -290,7 +292,7 @@
 }
 
 - (BOOL)living_items_loaded{
-    
+
     return    self.living_items.count > 0 ? YES : NO;
 }
 

@@ -21,6 +21,7 @@
 #import "ServiceItemFrame.h"
 #import "CreateOrderVC.h"
 #import "YSCalendarCourseModel.h"
+#import "YSMyCourseVC.h"
 
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
@@ -35,42 +36,46 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    if(self.ysModel){
-        if (self.ysModel.login_state != LOGIN && !self.ysModel.living_items_loaded) {
-            //当用户登录时请求今日直播数据
-            [self makeTodayOnliveData];
-        }
-        self.ysModel.login_state = LOGIN;
-        if (self.headerView) {
-            [self.YSHeader userLoginChange];
-        }
-    }
+ 
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self makeYSData];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caseUserBuyed:) name:@"cousePayed" object:nil];
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caseUserBuyed:) name:@"cousePayed" object:nil];
+    [self makeYSData];
 }
 
 - (void)caseUserBuyed:(NSNotification *)noti{
 
-    NSLog(@">>>>>>>>>>caseUserBuyed>>>>>>>>>>>> %@",noti);
+    if (self.ysModel  && self.ysModel.catigorys.count > 0) {
+        [self makeCategoryData];
+    }
 }
 
 - (void)setUser:(MyofferUser *)user{
     super.user = user;
-    
+ 
     if (self.ysModel) {
+ 
+        if (user && ![user.displayname isEqualToString:self.ysModel.displayname]) {
+            [self makeTodayOnliveData];
+            [self makeCategoryData];
+        }
+        self.ysModel.displayname = self.user.displayname;
         self.ysModel.user_coin = user.coin;
     }
+    
     if (self.YSHeader) {
+
         self.YSHeader.score_signed = user.coin;
+        if (self.headerView && ![user.displayname isEqualToString:self.ysModel.displayname]) {
+            [self.YSHeader userLoginChange];
+        }
+        
     }
 }
 
@@ -78,11 +83,10 @@
     
     myofferGroupModel *ys_group  = [myofferGroupModel groupWithItems:@[@"test"] header:@"test"];
     self.groups = @[ys_group];
-    
     self.ysModel = [[YaSiHomeModel alloc] init];
-    self.ysModel.login_state = LOGIN;
     if (self.user) {
         self.ysModel.user_coin = self.user.coin;
+        self.ysModel.displayname = self.user.displayname;
     }
     
     [self makeIELTSData];
@@ -286,7 +290,9 @@
               additionalSuccessAction:^(NSInteger statusCode, id response) {
                   [weakSelf makeCatigoryWithResponse:response];
               } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-                  [weakSelf.tableView alertWithRoloadMessage:nil];
+                  if (weakSelf.ysModel.catigorys.count == 0) {
+                      [weakSelf.tableView alertWithRoloadMessage:nil];
+                  }
               }];
 }
 - (void)makeCatigoryWithResponse:(id)response{
@@ -296,7 +302,7 @@
         return;
     }
     NSArray *result = response[@"result"];
-    if (result.count == 0) {
+    if (result.count == 0 && self.ysModel.catigorys.count == 0) {
         [self.tableView alertWithNotDataMessage:nil];
         return;
     }
@@ -356,6 +362,9 @@
         case YSHomeHeaderActionTypeLiving:
             [self caseLive];
             break;
+        case YSHomeHeaderActionTypeClass:
+            [self caseToClass];
+            break;
         case YSHomeHeaderActionTypeTest:
             [self caseTest];
             break;
@@ -366,7 +375,6 @@
             [self caseBuy];
             break;
         case YSHomeHeaderActionTypeValueChange:{
-            
             self.current_index = 0;
             [self.tableView reloadData];
         }
@@ -409,11 +417,24 @@
     PushToViewController(vc);
 }
 
+- (void)caseToClass{
+    
+    if(LOGIN){
+        YSMyCourseVC *vc = [[YSMyCourseVC alloc] init];
+        PushToViewController(vc);
+    }else{
+        RequireLogin;
+    }
+    
+}
+
 - (void)caseBanner{
     
-    WebViewController *vc = [[WebViewController alloc] init];
-    vc.path = self.ysModel.banner_target;
-    PushToViewController(vc);
+    if(self.ysModel.banner_target.length > 0 ){
+        WebViewController *vc = [[WebViewController alloc] init];
+        vc.path = self.ysModel.banner_target;
+        PushToViewController(vc);
+    }
 }
 
 - (void)caseTest{

@@ -38,7 +38,8 @@
 
     _item = item;
     
-    self.commitBtn.selected = (item.boughtCount > 0);
+    BOOL selected = (item.boughtCount > 0) && LOGIN ? YES : NO;
+    self.commitBtn.selected  = selected;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
     self.discountLab.text = [NSString stringWithFormat:@"￥%@",item.display_price];
     
@@ -51,7 +52,8 @@
 - (void)commitClick:(UIButton *)sender{
     
     if (self.actionBlock) {
-        self.actionBlock();
+        BOOL isPay = (self.commitBtn.selected ? NO : YES);
+        self.actionBlock(isPay);
     }
 }
 

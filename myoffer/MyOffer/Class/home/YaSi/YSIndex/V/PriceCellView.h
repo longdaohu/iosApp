@@ -11,6 +11,6 @@
 
 @interface PriceCellView : UIView
 @property(nonatomic,strong)YasiCatigoryItemModel *item;
-@property(nonatomic,copy)void(^actionBlock)(void);
+@property(nonatomic,copy)void(^actionBlock)(BOOL isPay);
 @end
 

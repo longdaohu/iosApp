@@ -393,9 +393,7 @@
                             @"clientType" :@(3),
                             };
         [TKEduClassRoom joinPlaybackRoomWithParamDic:td ViewController:self Delegate:self isFromWeb:YES];
-        
     }else{
-        
         [MBProgressHUD showMessage:@"录播视频正在制作中，请稍后！"];
     }
 }
