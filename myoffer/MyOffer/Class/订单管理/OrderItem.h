@@ -24,7 +24,4 @@
 @property(nonatomic,assign)BOOL status_finish;
 @property(nonatomic,assign)BOOL status_close;
 
-//自定义 判断雅思、留学业务
-@property(nonatomic,assign)BOOL isYS;
-
 @end

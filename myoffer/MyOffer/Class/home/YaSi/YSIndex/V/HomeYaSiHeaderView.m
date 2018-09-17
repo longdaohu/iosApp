@@ -41,7 +41,7 @@
 @property(nonatomic,strong)PriceCellView *priceCell;
 @property(nonatomic,strong)NSArray *catigory_buttones; //分类按钮数组，预添加，减少临时
 @property(nonatomic,strong)UIImageView *bgImageView; //背景图片
-@property(nonatomic,strong) SDCycleScrollView *titleBanner;
+@property(nonatomic,strong) SDCycleScrollView *titleBanner;//文字轮播
 
 @end
 
@@ -60,12 +60,13 @@
 - (void)makeUI{
     
     self.backgroundColor = XCOLOR(0, 22, 34, 1);
-    
+    //背景图
     UIImageView *bgView = [UIImageView new];
     bgView.image = XImage(@"ys_header_bg");
     [self addSubview:bgView];
     self.bgImageView = bgView;
     
+    //雅思测评
     UIButton *ysBtn = [UIButton new];
     [ysBtn setBackgroundImage:XImage(@"ys_header_test") forState:UIControlStateNormal];
     ysBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -75,6 +76,7 @@
     self.YS_Test_Btn = ysBtn;
     [ysBtn addTarget:self action:@selector(caseLogo:) forControlEvents:UIControlEventTouchUpInside];
     
+    //签到
     UIButton *signedBtn = [UIButton new];
     signedBtn.titleLabel.font = XFONT(12);
     signedBtn.layer.cornerRadius = 2;
@@ -82,53 +84,52 @@
     signedBtn.layer.borderColor = XCOLOR_WHITE.CGColor;
     signedBtn.backgroundColor = XCOLOR_WHITE;
     [self addSubview:signedBtn];
-    self.signedBtn = signedBtn;
     [signedBtn setTitle:@"签到" forState:UIControlStateNormal];
     [signedBtn setTitle:@"已签到" forState:UIControlStateDisabled];
     [signedBtn setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
     [signedBtn setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
     [signedBtn addTarget:self action:@selector(caseSigned:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.signedBtn = signedBtn;
+
+    //签到提示信息
     UILabel *signTitleLab = [UILabel new];
     signTitleLab.font = XFONT(12);
     signTitleLab.textColor = XCOLOR_WHITE;
-    self.signTitleLab = signTitleLab;
     [self addSubview:signTitleLab];
-    
+    self.signTitleLab = signTitleLab;
+
+    //文字直播背景
     UIButton *live_bg = [UIButton new];
     [self addSubview:live_bg];
-    self.live_bg = live_bg;
-    live_bg.titleLabel.font = XFONT(14);
-    live_bg.titleEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
-    live_bg.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    live_bg.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [live_bg setBackgroundImage:XImage(@"ys_heike_live_bg") forState:UIControlStateNormal];
-//    [live_bg setTitle:@"今天没有新课程，复习一下学完的课程吧" forState:UIControlStateNormal];
-//    [live_bg setTitle:@" " forState:UIControlStateDisabled];
-//    [live_bg addTarget:self action:@selector(caseToLiving) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.titleBanner = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
-    [self  addSubview:self.titleBanner];
-    self.titleBanner.onlyDisplayText = YES;
-    self.titleBanner.scrollDirection = UICollectionViewScrollDirectionVertical;
-    self.titleBanner.autoScroll = YES;
-    self.titleBanner.titleLabelTextAlignment =  NSTextAlignmentLeft;
-    self.titleBanner.titleLabelBackgroundColor = XCOLOR_CLEAR;
-    [self.titleBanner disableScrollGesture];
+    self.live_bg = live_bg;
+
+    //文字直播
+    SDCycleScrollView *titleBanner = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
+    [self  addSubview:titleBanner];
+    titleBanner.onlyDisplayText = YES;
+    titleBanner.scrollDirection = UICollectionViewScrollDirectionVertical;
+    titleBanner.titleLabelTextAlignment =  NSTextAlignmentLeft;
+    titleBanner.titleLabelBackgroundColor = XCOLOR_CLEAR;
+    [titleBanner disableScrollGesture];
+    self.titleBanner = titleBanner;
     WeakSelf
-    self.titleBanner.clickItemOperationBlock = ^(NSInteger index) {
+    titleBanner.clickItemOperationBlock = ^(NSInteger index) {
         [weakSelf caseToLiving];
     };
 
+    //嘿客LOGO
     UIImageView *clockBtn = [UIImageView new];
+    clockBtn.image = XImage(@"ys_heike_logo");
     [self addSubview:clockBtn];
     self.clockBtn = clockBtn;
-    clockBtn.image = XImage(@"ys_heike_logo");
     
+    //轮播图盒子
     UIView *banner_box = [UIView new];
     [self addSubview:banner_box];
     self.banner_box = banner_box;
  
+     //轮播图
     YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
     self.flow_banner = flow;
     UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
@@ -143,26 +144,31 @@
         bannerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
+     //轮播图 pageControl
     UIPageControl *pageControl = [UIPageControl new];
     pageControl.currentPageIndicatorTintColor = XCOLOR_LIGHTBLUE;
     [banner_box addSubview:pageControl];
     self.pageControl = pageControl;
     
+    //分类产品盒子
     UIView *catigory_box = [UIView new];
     [self addSubview:catigory_box];
     self.catigory_box = catigory_box;
     
+    //分类分隔线
     UIView *line_catigory = [UIView new];
     line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.15);
     [catigory_box addSubview:line_catigory];
     self.line_catigory = line_catigory;
     
+    
     UIView *activeView = [UIView new];
     activeView.backgroundColor = XCOLOR_LIGHTBLUE;
     [catigory_box addSubview:activeView];
-    self.activeView = activeView;
     activeView.layer.cornerRadius = 1;
-    
+    self.activeView = activeView;
+
+    //分类视图
     UICollectionViewFlowLayout *flow_cg = [[UICollectionViewFlowLayout alloc] init];
     flow_cg.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
     flow_cg.minimumLineSpacing = 15;
@@ -170,30 +176,32 @@
     flow_cg.itemSize = CGSizeMake(135, 90);
     UICollectionView *catigoryView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow_cg];
     [catigoryView registerNib:[UINib nibWithNibName:NSStringFromClass([YsCatigoryItemCell class] ) bundle:nil] forCellWithReuseIdentifier:@"YsCatigoryItemCell"];
-    self.catigoryView = catigoryView;
     catigoryView.backgroundColor = XCOLOR_CLEAR;
     catigoryView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
     catigoryView.dataSource = self;
     catigoryView.delegate = self;
     [catigory_box addSubview:catigoryView];
     catigory_box.clipsToBounds = YES;
-    
+    self.catigoryView = catigoryView;
+
+    //分类分隔线
     UIView *catigory_box_line  = [UIView new];
     catigory_box_line.backgroundColor = XCOLOR(239, 242, 245, 0.15);
     [catigory_box addSubview:catigory_box_line];
     self.catigory_box_line = catigory_box_line;
     
+    //价格信息View
     PriceCellView *priceCell = Bundle(@"PriceCellView");
     priceCell.backgroundColor = XCOLOR_CLEAR;
-    self.priceCell = priceCell;
     [catigory_box addSubview:priceCell];
+    self.priceCell = priceCell;
     priceCell.actionBlock = ^(BOOL isPay){
         isPay ?  [weakSelf caseBuy] :  [weakSelf caseToClass];
     };
     
+    //分类标题
     NSMutableArray *btn_tmp = [NSMutableArray array];
     for (NSInteger index = 0; index < 5; index++) {
-        
         UIButton *sender = [UIButton new];
         sender.titleLabel.font = [UIFont boldSystemFontOfSize:18];
         [sender setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
@@ -203,8 +211,8 @@
         [btn_tmp addObject:sender];
         [catigory_box addSubview:sender];
     }
-    
     self.catigory_buttones = btn_tmp;
+    
 }
 
 
@@ -242,7 +250,6 @@
     self.line_catigory.frame = ysModel.line_banner_frame;
     self.catigory_box.frame = ysModel.catigory_box_frame;
     self.pageControl.frame = ysModel.banner_pageControl_frame;
-    self.activeView.frame = ysModel.cati_active_frame;
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
     self.priceCell.frame = ysModel.price_cell_frame;
     self.catigory_box_line.frame = ysModel.cati_clct_bottom_line_frame;
@@ -250,22 +257,37 @@
     self.bannerView.frame = ysModel.bannerView_frame;
     self.flow_banner.itemSize = ysModel.header_banner_size;
     self.banner_box.frame = ysModel.banner_box_frame;
+    self.activeView.frame = ysModel.cati_active_frame;
+    if (self.ysModel.catigory_title_selected_index > 0) {
+        NSValue *value = self.ysModel.catigory_title_frames[self.ysModel.catigory_title_selected_index];
+        CGRect active_frame = self.activeView.frame;
+        active_frame.size.width =  value.CGRectValue.size.width;
+        active_frame.origin.x =  value.CGRectValue.origin.x;
+        self.activeView.frame = active_frame;
+    }
+    
     
     if (ysModel.coin > 0) {
         self.score_signed = [NSString stringWithFormat:@"%ld",ysModel.coin];
     }else{
         self.score_signed = nil;
     }
+    
+     //文字直播
      self.titleBanner.autoScroll = YES;
      self.titleBanner.titlesGroup = ysModel.living_titles;
  
+    
     NSInteger celles_count = [self.catigoryView numberOfItemsInSection:0];
+    //防止数据多次加载
     if (celles_count > 0) {
         if (self.priceCell.item) {
             self.priceCell.item = self.ysModel.catigory_Package_current;
         }
         return;
     }
+    
+    //商品数据
     for (NSInteger index = 0; index < ysModel.catigory_title_frames.count; index++) {
         
         if (index >= self.catigory_buttones.count) {
@@ -275,16 +297,17 @@
         [sender setTitle:ysModel.catigory_titles[index] forState:UIControlStateNormal];
         NSValue *itemValue = ysModel.catigory_title_frames[index];
         sender.frame = itemValue.CGRectValue;
-
         if (index == ysModel.catigory_title_selected_index) {
             sender.enabled = NO;
         }
     }
     
+    //设置商品子项
     if (self.ysModel.catigory_current) {
         [self catigoryChange:self.catigory_buttones[0]];
     }
     
+    //轮播图片
     if (ysModel.banner_images.count > 0) {
         [self.bannerView reloadData];
         self.pageControl.numberOfPages = ysModel.banner_images.count;
@@ -334,7 +357,7 @@
         self.ysModel.catigoryPackage_item_selected_index = indexPath.row;
         [collectionView reloadData];
         self.priceCell.item = self.ysModel.catigory_Package_current;
-        [self caseValueChange];
+        [self caseCatigoryValueChange];
     }else{
         
         NSString *path = self.ysModel.banner_targets[indexPath.row];
@@ -389,8 +412,11 @@
 }
 
 
+
 #pragma mark : 事件处理
+
 - (void)addBannerTimer{
+    
     [self.banner_timer  invalidate];
     self.banner_timer  = nil;
     if (!self.banner_timer && self.ysModel.banner_images.count > 0) {
@@ -410,14 +436,15 @@
     self.dragEndX = (self.bannerView.mj_offsetX + 50);
     [self fixCellToCenter];
 }
-
-- (void)caseValueChange{
+//商品分类改变时调用
+- (void)caseCatigoryValueChange{
     
     if (self.actionBlock) {
         self.actionBlock(YSHomeHeaderActionTypeValueChange);
     }
 }
 
+//轮播图
 - (void)caseBanner:(NSString *)path{
     
     if (self.actionBlock) {
@@ -425,7 +452,7 @@
         self.actionBlock(YSHomeHeaderActionTypeBanner);
     }
 }
-
+//购买商品
 - (void)caseBuy{
     
     if (self.actionBlock) {
@@ -433,6 +460,7 @@
     }
 }
 
+//雅思测评
 - (void)caseLogo:(UIButton *)sender{
     
     if (self.actionBlock) {
@@ -440,6 +468,7 @@
     }
 }
 
+//签到
 - (void)caseSigned:(UIButton *)sender{
     
     if (self.actionBlock) {
@@ -447,6 +476,7 @@
     }
 }
 
+//文字滚动
 - (void)caseToLiving{
     
     if (self.actionBlock) {
@@ -454,6 +484,7 @@
     }
 }
 
+//去上课
 - (void)caseToClass{
     
     if (self.actionBlock) {
@@ -461,6 +492,7 @@
     }
 }
 
+//分类标题点击
 - (void)catigoryChange:(UIButton *)sender{
     
     for (UIButton *item in self.catigory_buttones) {
@@ -470,26 +502,18 @@
     CGRect rect = self.activeView.frame;
     rect.origin.x = sender.mj_x;
     rect.size.width = sender.mj_w;
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.activeView.frame = rect;
     }];
-    
     self.ysModel.catigory_title_selected_index = sender.tag;
     self.ysModel.catigoryPackage_item_selected_index = 0;
     [self.catigoryView reloadData];
     
     self.priceCell.item = self.ysModel.catigory_Package_current;
-    [self caseValueChange];
+    [self caseCatigoryValueChange];
 }
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    CGFloat item_w =  self.bounds.size.width;
-    CGFloat item_h = item_w  * 229 / 375;
-    self.bgImageView.frame = CGRectMake(0, 0, item_w, item_h);
-}
-
+//改变登录状态
 - (void)userLoginChange{
     
     self.titleBanner.autoScroll = YES;
@@ -503,8 +527,14 @@
         
         return;
     }
-
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    CGFloat item_w =  self.bounds.size.width;
+    CGFloat item_h = item_w  * 229 / 375;
+    self.bgImageView.frame = CGRectMake(0, 0, item_w, item_h);
+}
 
 @end

@@ -101,7 +101,6 @@
     [TXSakuraManager shiftSakuraWithName:name type:type];
 }
 
-
 - (void)makeUI{
     
     self.title = @"课程日历";
@@ -183,7 +182,7 @@
 }
 
 #pragma mark TKEduEnterClassRoomDelegate
-//error.code  Description:error.description
+
 - (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
     TKLog(@"TKEduEnterClassRoomDelegate-----onEnterRoomFailed");
 }
@@ -223,7 +222,6 @@
 
 
 #pragma mark : 数据请求
-//    NSString *startTime = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
 //今日直播
 - (void)makeTodayOnliveData{
  

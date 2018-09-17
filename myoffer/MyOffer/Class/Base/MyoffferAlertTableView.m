@@ -80,8 +80,8 @@
 
 - (void)alertWithNotDataMessage:(NSString *)message{
     
+    self.alertView.alertTitle =  message ? message : @"当前数据为空";
     self.alertView.alertType =   TableViewAlertTypeDefault;
-    self.alertView.alertTitle =  message ? message : @"数据为空";
     [self fixFooter];
 }
 
@@ -90,6 +90,14 @@
     self.alertView.alertTitle = @"网络加载失败";
     self.alertView.alertMessage = message ? message : @"请再次刷新或检查网络";
     self.alertView.alertType =   TableViewAlertTypeReload;
+    [self fixFooter];
+}
+
+- (void)alertWithNetworkFailure{
+    
+    self.alertView.alertTitle = @"网络加载失败";
+    self.alertView.alertMessage = @"请检查网络是否连接";
+    self.alertView.alertType =   TableViewAlertTypeFailure;
     [self fixFooter];
 }
 

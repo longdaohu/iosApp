@@ -15,5 +15,6 @@
 - (void)alertViewHiden;
 - (void)alertWithNotDataMessage:(NSString *)message;
 - (void)alertWithRoloadMessage:(NSString *)message;
+- (void)alertWithNetworkFailure;
 
 @end

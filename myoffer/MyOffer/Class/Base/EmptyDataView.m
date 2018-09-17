@@ -108,13 +108,7 @@
 - (void)setAlertType:(TableViewAlertType)alertType{
     _alertType = alertType;
     
-    if (alertType == TableViewAlertTypeReload) {
-        self.messageLab.hidden = NO;
-        self.reloadBtn.hidden = NO;
-    }else{
-        self.messageLab.hidden = YES;
-        self.reloadBtn.hidden = YES;
-    }
+    [self setNeedsLayout];
 }
 
 
@@ -148,11 +142,17 @@
     CGFloat btn_Y =  CGRectGetMaxY(self.messageLab.frame) + 18;
     CGFloat btn_H = 35;
     self.reloadBtn.frame = CGRectMake(btn_X, btn_Y, btn_W, btn_H);
-   
+ 
+    
     if (self.alertType == TableViewAlertTypeReload) {
         
         self.messageLab.hidden = NO;
         self.reloadBtn.hidden = NO;
+        
+    }else  if (self.alertType == TableViewAlertTypeFailure) {
+        
+        self.messageLab.hidden = NO;
+        self.reloadBtn.hidden = YES;
         
     }else{
         

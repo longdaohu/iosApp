@@ -28,7 +28,6 @@
     [self.commitBtn setBackgroundImage:XImage(@"button_red_highlight") forState:UIControlStateHighlighted];
     self.commitBtn.backgroundColor = XCOLOR_CLEAR;
     [self.commitBtn addTarget:self action:@selector(commitClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     self.commitBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.commitBtn.layer.shadowOpacity = 0.5;
     self.commitBtn.layer.shadowColor = XCOLOR_RED.CGColor;

@@ -530,9 +530,6 @@
         NSString *amount =  [NSString stringWithFormat:@"%@",result[@"amount"] ];
         order.total_fee = [amount toDecimalStyleString];
         order.order_id = result[@"orderId"];
-        if (self.itemFrame.item.isYS) {
-            order.isYS = YES;
-        }
         PayOrderViewController *pay = [[PayOrderViewController alloc] init];
         pay.order = order;
         PushToViewController(pay);

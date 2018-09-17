@@ -103,7 +103,7 @@
         }
     }
     
-    self.bottom_line.frame = CGRectMake(20, content_size.height - 1, content_size.width - 40, LINE_HEIGHT);
+    self.bottom_line.frame = CGRectMake(20, content_size.height - LINE_HEIGHT, content_size.width - 40, LINE_HEIGHT);
 }
 
 

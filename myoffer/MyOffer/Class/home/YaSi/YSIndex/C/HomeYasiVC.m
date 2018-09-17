@@ -36,32 +36,33 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
- 
+    [MobClick beginLogPageView:@"page雅思首页"];
 
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"page雅思首页"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //已购买通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caseUserBuyed:) name:@"cousePayed" object:nil];
     self.type = UITableViewStylePlain;
     [self makeYSHeaderView];
     [self makeYSData];
 }
 
-- (void)caseUserBuyed:(NSNotification *)noti{
-
-    if (self.ysModel  && self.ysModel.catigorys.count > 0) {
-        [self makeCategoryData];
-    }
-}
-
+//用户登录后请求
 - (void)setUser:(MyofferUser *)user{
     super.user = user;
  
+    //sameUser:用户不一样或登出时刷新页面状态
+    BOOL sameUser = [user.displayname isEqualToString:self.ysModel.displayname];
     if (self.ysModel) {
- 
-        if (user && ![user.displayname isEqualToString:self.ysModel.displayname]) {
+        if (user && !sameUser){
             [self makeTodayOnliveData];
             [self makeCategoryData];
         }
@@ -70,12 +71,13 @@
     }
     
     if (self.YSHeader) {
-
+        /*
+         user:用户不存在时要刷新状态
+         */
         self.YSHeader.score_signed = user.coin;
-        if (self.headerView && ![user.displayname isEqualToString:self.ysModel.displayname]) {
+        if (!sameUser || !user) {
             [self.YSHeader userLoginChange];
         }
-        
     }
 }
 
@@ -394,7 +396,6 @@
         item.cover_url = self.ysModel.catigory_Package_current.cover_url;
         item.name  = self.ysModel.catigory_Package_current.name;
         item.fitPerson_hiden = true;
-        item.isYS = YES;
         ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
         itemFrame.item = item;
         
@@ -464,6 +465,14 @@
         [self.tableView setContentOffset:CGPointMake(0, top_y) animated:false];
         [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationFade];
     }];
+}
+
+//用户已购买通知
+- (void)caseUserBuyed:(NSNotification *)noti{
+    
+    if (self.ysModel  && self.ysModel.catigorys.count > 0) {
+        [self makeCategoryData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

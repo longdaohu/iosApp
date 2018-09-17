@@ -11,11 +11,12 @@
 #import "InvitationRecordDetailVC.h"
 #import "InvitationRecordItem.h"
 #import "MyofferOnColumnFilterView.h"
+#import "MyoffferAlertTableView.h"
 
 #define StateKey @"state"
 
 @interface InvitationRecordsVC () <UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)NSMutableDictionary *parameters;
 @property(nonatomic,strong)NSMutableArray *items;
 @property(nonatomic,assign)NSInteger page;
@@ -44,14 +45,13 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:CGRectMake(0, 50, XSCREEN_WIDTH, XSCREEN_HEIGHT - NavHeight - 50) style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:CGRectMake(0, 50, XSCREEN_WIDTH, XSCREEN_HEIGHT - NavHeight - 50) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(makeMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.emptyY =  (XSCREEN_HEIGHT - self.tableView.mj_y - NavHeight)* 0.5 - 200;
     
     UINib *cell_nib = [UINib nibWithNibName:@"InvitationRecordsCell" bundle:nil];
     [self.tableView registerNib:cell_nib forCellReuseIdentifier:@"InvitationRecordsCell"];
@@ -86,9 +86,7 @@
         [self.tableView  scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
     [self makeData];
-    
-    NSLog(@"%@",self.parameters);
-    
+ 
 }
 
 - (NSMutableDictionary *)parameters{
@@ -140,6 +138,7 @@
     [self startAPIRequestWithSelector:kAPISelectorPromotionItems parameters:self.parameters expectedStatusCodes:nil showHUD:YES showErrorAlert:YES errorAlertDismissAction:nil additionalSuccessAction:^(NSInteger statusCode, id response) {
         [weakSelf updateUIWithResponse:response];
     } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        [weakSelf.tableView alertWithNetworkFailure];
     }];
 }
 
@@ -150,7 +149,7 @@
         [MBProgressHUD showMessage:NetRequest_ConnectError];
         if (self.items.count == 0) {
             self.tableView.mj_footer.hidden = YES;
-            [self.tableView emptyViewWithError:NetRequest_noNetWork];
+            [self.tableView alertWithNetworkFailure];
         }
         return;
     }
@@ -176,10 +175,10 @@
     //表格状态变化
     if (self.items.count == 0) {
         self.tableView.mj_footer.hidden = YES;
-        [self.tableView emptyViewWithError:@"当前数据为空"];
+        [self.tableView alertWithNotDataMessage:nil];
     }else{
         self.tableView.mj_footer.hidden = NO;
-        [self.tableView emptyViewWithHiden:YES];
+        [self.tableView alertViewHiden];
     }
     
     [self.tableView reloadData];
