@@ -424,6 +424,7 @@
 		AE9BA49020B68B62008B65D4 /* MyofferOnColumnFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9BA48F20B68B62008B65D4 /* MyofferOnColumnFilterView.m */; };
 		AE9CB3CD1ED6AC0F0049E618 /* MyOfferLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */; };
 		AE9CB3D01ED6BBDF0049E618 /* MyOfferInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */; };
+		AE9DC0602150C85D00043D40 /* home_UVIC_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE9DC05F2150C85C00043D40 /* home_UVIC_bg.jpg */; };
 		AEA03A35211C2327007A791E /* RoomAppointmentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A34211C2327007A791E /* RoomAppointmentVC.m */; };
 		AEA03A3C211C3F7C007A791E /* RoomAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA03A3A211C3F7C007A791E /* RoomAppointmentCell.m */; };
 		AEA03A3D211C3F7C007A791E /* RoomAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA03A3B211C3F7C007A791E /* RoomAppointmentCell.xib */; };
@@ -858,7 +859,6 @@
 		AEDDAA7220E4FEC00069C138 /* intro_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA6D20E4FEC00069C138 /* intro_03.jpg */; };
 		AEDDAA7320E4FEC00069C138 /* intro_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA6E20E4FEC00069C138 /* intro_02.jpg */; };
 		AEDDAA7920E6078F0069C138 /* home_room_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */; };
-		AEDDAA7A20E6078F0069C138 /* home_UVIC_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7520E6078E0069C138 /* home_UVIC_bg.jpg */; };
 		AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */; };
 		AEDDAA7C20E6078F0069C138 /* home_application_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */; };
 		AEDDAA7D20E6078F0069C138 /* home_fee_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */; };
@@ -1640,6 +1640,7 @@
 		AE9CB3CC1ED6AC0F0049E618 /* MyOfferLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferLoginViewController.m; sourceTree = "<group>"; };
 		AE9CB3CE1ED6BBDF0049E618 /* MyOfferInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOfferInputView.h; sourceTree = "<group>"; };
 		AE9CB3CF1ED6BBDF0049E618 /* MyOfferInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOfferInputView.m; sourceTree = "<group>"; };
+		AE9DC05F2150C85C00043D40 /* home_UVIC_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_UVIC_bg.jpg; sourceTree = "<group>"; };
 		AEA03A33211C2327007A791E /* RoomAppointmentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentVC.h; sourceTree = "<group>"; };
 		AEA03A34211C2327007A791E /* RoomAppointmentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomAppointmentVC.m; sourceTree = "<group>"; };
 		AEA03A39211C3F7C007A791E /* RoomAppointmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomAppointmentCell.h; sourceTree = "<group>"; };
@@ -2457,7 +2458,6 @@
 		AEDDAA6D20E4FEC00069C138 /* intro_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intro_03.jpg; sourceTree = "<group>"; };
 		AEDDAA6E20E4FEC00069C138 /* intro_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intro_02.jpg; sourceTree = "<group>"; };
 		AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_room_bg.jpg; sourceTree = "<group>"; };
-		AEDDAA7520E6078E0069C138 /* home_UVIC_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_UVIC_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_YESGlobal_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_application_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_fee_bg.jpg; sourceTree = "<group>"; };
@@ -5035,7 +5035,7 @@
 				AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */,
 				AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */,
 				AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */,
-				AEDDAA7520E6078E0069C138 /* home_UVIC_bg.jpg */,
+				AE9DC05F2150C85C00043D40 /* home_UVIC_bg.jpg */,
 				AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */,
 				AE60C23520E4C83C000867A8 /* home_application_cell_uni.jpg */,
 				AE60C22920E4AC34000867A8 /* home_recomment_active_cash.jpg */,
@@ -6715,7 +6715,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6939,7 +6939,6 @@
 				AECC87DF1F95F63800FCBBEC /* CatigaryCityCollectionCell.xib in Resources */,
 				AE1FD7351D5C929500FFD5A8 /* Pre-comp 1_00018.png in Resources */,
 				AE1FD7401D5C929500FFD5A8 /* Pre-comp 1_00028.png in Resources */,
-				AEDDAA7A20E6078F0069C138 /* home_UVIC_bg.jpg in Resources */,
 				AE914ED41F4188B0008A43CD /* ApplyStatusNewCell.xib in Resources */,
 				AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */,
 				AEF657D521006E9E00C0D849 /* city_ld.jpg in Resources */,
@@ -6948,6 +6947,7 @@
 				AEDDAA5C20E4D36C0069C138 /* home_application_uni_rank.png in Resources */,
 				AEF657D621006E9E00C0D849 /* city_xn.jpg in Resources */,
 				AE60C1CF20E21E1C000867A8 /* home_global_job_c.jpg in Resources */,
+				AE9DC0602150C85D00043D40 /* home_UVIC_bg.jpg in Resources */,
 				46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */,
 				AEC4285120E09ECC007B3949 /* HomeUVICImmigrationProjectCell.xib in Resources */,
 				AEA24B261D5B251800DD7939 /* IntroViewController.xib in Resources */,
@@ -7969,7 +7969,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

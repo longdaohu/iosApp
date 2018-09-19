@@ -346,7 +346,7 @@ static NSString *identify = @"cell";
     if (!self.bannerView) {
         CGFloat b_x = 20;
         CGFloat b_w = XSCREEN_WIDTH - b_x * 2;
-        CGFloat b_h = b_w * 316.0/668;
+        CGFloat b_h = b_w * 347.0/668;
         CGRect banner_frame = CGRectMake(b_x, 0, b_w,b_h);
         self.bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:banner_frame delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
         [self.header addSubview:self.bannerView];

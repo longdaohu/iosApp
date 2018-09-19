@@ -189,6 +189,10 @@
         return;
     }
     self.groupModel.items = [YSCourseModel mj_objectArrayWithKeyValuesArray:result];
+    if (self.groupModel.curent_items.count == 0)  {
+        [self.tableView  alertWithNotDataMessage:@"今日暂无课程"];
+        return;
+    }
     [self.tableView reloadData];
 }
 
@@ -218,7 +222,10 @@
     YSCalendarVC *vc = [[YSCalendarVC alloc] init];
     PushToViewController(vc);
 }
-
+- (void)dealloc{
+    
+    KDClassLog(@"我的课程 + YSMyCourseVC + dealloc");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

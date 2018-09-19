@@ -72,7 +72,6 @@
     [super layoutSubviews];
     CGSize  contentSize = self.bounds.size;
     self.bgView.frame = CGRectMake(0, 0, contentSize.width,contentSize.height);
-    
 }
 
 

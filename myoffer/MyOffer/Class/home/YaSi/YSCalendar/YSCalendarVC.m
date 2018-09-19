@@ -41,6 +41,9 @@
     [super viewWillAppear:animated];
     NavigationBarHidden(NO);
     [MobClick beginLogPageView:@"page课程表日历"];
+    if ([[UIApplication sharedApplication] isStatusBarHidden]) {
+        [self caseStatusBarHidden:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -195,6 +198,7 @@
 
 - (void) leftRoomComplete{
 
+    [self caseStatusBarHidden:NO];
     if (!self.ClassDismiss) return;
 
     if(self.vedio_selected.type == YSScheduleVideoStateLiving){
@@ -390,6 +394,7 @@
                             @"type":@"3",//房间类型 0 1v1 3 1v多 10直播 11伪直播 12 旁路直播
                             @"clientType" :@(3),
                             };
+        [self caseStatusBarHidden:YES];
         [TKEduClassRoom joinPlaybackRoomWithParamDic:td ViewController:self Delegate:self isFromWeb:YES];
     }else{
         [MBProgressHUD showMessage:@"录播视频正在制作中，请稍后！"];
@@ -408,6 +413,7 @@
                                 @"clientType":@(3),
                                 @"nickname":user.displayname
                             };
+    [self caseStatusBarHidden:YES];
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
 }
 
@@ -416,6 +422,11 @@
     if (items.count == 0) {
         [self.tableView  alertWithNotDataMessage:@"今日暂无课程"];
     }
+}
+
+- (void)caseStatusBarHidden:(BOOL)hiden{
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:hiden withAnimation:UIStatusBarAnimationFade];
 }
 
 

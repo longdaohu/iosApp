@@ -303,6 +303,7 @@ static const CGFloat sViewCap             = 10;
     if (!_iCheckPlayVideotimer) {
         [self createTimer];
     }
+
 }
 - (void)viewDidAppear:(BOOL)animated
 {

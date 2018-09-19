@@ -343,6 +343,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     if (!_iCheckPlayVideotimer) {
         [self createTimer];
     }
+
 }
 
 - (void)viewDidAppear:(BOOL)animated

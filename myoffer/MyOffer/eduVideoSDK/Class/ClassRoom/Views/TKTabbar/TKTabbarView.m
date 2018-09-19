@@ -363,7 +363,7 @@
     }
     
     //如果是学生需要隐藏掉全屏按钮
-    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher) {
+    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && [TKEduSessionHandle shareInstance].isClassBegin) {
         self.pageControlView.wbControlView.fullScreenButton.hidden = [TKEduSessionHandle shareInstance].iIsFullState;
         
     }
@@ -419,7 +419,7 @@
     _coursewareButton.hidden =
     _memberButton.hidden     = YES;
     //如果是学生需要隐藏掉全屏按钮
-    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && [TKEduSessionHandle shareInstance].isClassBegin) {
+    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher ) {
         self.pageControlView.wbControlView.fullScreenButton.hidden = [TKEduSessionHandle shareInstance].iIsFullState;
        
     }

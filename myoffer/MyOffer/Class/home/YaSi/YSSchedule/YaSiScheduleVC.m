@@ -30,6 +30,9 @@
     [super viewWillAppear:animated];
     NavigationBarHidden(NO);
     [MobClick beginLogPageView:@"page课程表"];
+    if ([[UIApplication sharedApplication] isStatusBarHidden]) {
+        [self caseStatusBarHidden:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -243,6 +246,7 @@
     
     NSArray *recordlist = [response valueForKey:@"recordlist"];
     if (recordlist.count > 0) {
+        
         NSDictionary *record = recordlist.firstObject;
         NSString *recordpath = record[@"recordpath"];
         NSString *path = [NSString stringWithFormat:@"global.talk-cloud.net:8081%@",recordpath];
@@ -253,9 +257,11 @@
                             @"type":@"3",//房间类型 0 1v1 3 1v多 10直播 11伪直播 12 旁路直播
                             @"clientType" :@(3),
                             };
+        [self caseStatusBarHidden:YES];
         [TKEduClassRoom joinPlaybackRoomWithParamDic:td ViewController:self Delegate:self isFromWeb:YES];
-        
         return;
+    }else{
+        [MBProgressHUD showMessage:@"录播视频正在制作中，请稍后！"];
     }
 }
 
@@ -269,10 +275,12 @@
     TKLog(@"TKEduEnterClassRoomDelegate-----onKitout");
 }
 - (void) joinRoomComplete{
+    
     TKLog(@"TKEduEnterClassRoomDelegate-----joinRoomComplete");
 }
 
 - (void) leftRoomComplete{
+    [self caseStatusBarHidden:NO];
     if (!self.ClassDismiss) return;
     
     if(self.vedio_selected.type == YSScheduleVideoStateLiving){
@@ -341,9 +349,22 @@
                             @"clientType":@(3),
                             @"nickname":user.displayname
                             };
+    [self caseStatusBarHidden:YES];
     [TKEduClassRoom joinRoomWithParamDic:tDict ViewController:self Delegate:self isFromWeb:NO];
 }
 
+- (void)caseStatusBarHidden:(BOOL)hiden{
+  
+    [[UIApplication sharedApplication] setStatusBarHidden:hiden withAnimation:UIStatusBarAnimationFade];
+}
+/*
+- (BOOL)prefersStatusBarHidden{
+这个函数返回了动画效果。动画效果只有在prefersStatusBarHidden
+函数返回值变化的时候才会展示，同时要通过调用
+[self setNeedsStatusBarAppearanceUpdate]函数来重绘状态栏
+    return YES;
+}
+*/
 - (void)dealloc{
     
     KDClassLog(@"课程表 + YaSiScheduleVC + dealloc");
