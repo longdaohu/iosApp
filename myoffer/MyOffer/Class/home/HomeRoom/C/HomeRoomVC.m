@@ -10,7 +10,6 @@
 #import "RoomCityVC.h"
 #import "RoomItemDetailVC.h"
 #import "HomeRoomSearchVC.h"
-
 #import "HomeRoomTopView.h"
 #import "HomeRoomIndexObject.h"
 #import "HttpApiClient_API_51ROOM.h"
@@ -22,13 +21,14 @@
 #import "HomeRoomIndexFlatFrameObject.h"
 #import "RoomSearchResultVC.h"
 #import "RoomMapVC.h"
+#import "RoomBannerView.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
 @property(nonatomic,strong)HomeRoomIndexFrameObject *UKRoomFrameObj;
 @property(nonatomic,strong)HomeRoomIndexFrameObject *AURoomFrameObj;
 @property(nonatomic,assign)BOOL isUK;
-
+@property(nonatomic,strong)RoomBannerView *eventCellView;
 @end
 
 @implementation HomeRoomVC
@@ -41,6 +41,18 @@
     //https://github.com/wangzhengang/MapboxExample/
     [self makeUI];
     [self makeData];
+}
+
+- (RoomBannerView *)eventCellView{
+    
+    if (!_eventCellView) {
+//        WeakSelf
+        _eventCellView = [RoomBannerView new];
+        _eventCellView.actionBlock = ^(NSInteger index) {
+            
+        };
+    }
+    return _eventCellView;
 }
 
 - (void)makeUI{
@@ -71,12 +83,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-//    WeakSelf
+    WeakSelf
     HomeSecView *header = [[HomeSecView alloc] init];
     header.leftMargin = 20;
     header.group = self.groups[section];
     header.actionBlock = ^(SectionGroupType type) {
-//        [weakSelf caseHeaderView:type];
+        [weakSelf caseHeaderView:type];
     };
     
     return header;
@@ -129,7 +141,10 @@ static NSString *identify = @"cell";
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"row = %ld",indexPath.row];
-    
+    if (group.type == SectionGroupTypeRoomHotActivity){
+        [cell.contentView addSubview:self.eventCellView];
+    }
+ 
     return cell;
 }
 
@@ -169,6 +184,15 @@ static NSString *identify = @"cell";
 - (void)reLoadWithRoomData:(HomeRoomIndexFrameObject *)roomFrameObj{
     
     for (myofferGroupModel *group in self.roomGroups) {
+        
+        if (group.type == SectionGroupTypeRoomHotActivity) {
+            if (roomFrameObj.item.events.count == 0) continue;
+            group.items = @[roomFrameObj];
+            group.cell_height_set = roomFrameObj.event_Section_Height;
+            self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, roomFrameObj.event_Section_Height);
+            NSArray *imageGroup = [roomFrameObj.item.events valueForKey:@"img"];
+            [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:roomFrameObj.event_item_size];
+        }
         
         if (group.type == SectionGroupTypeRoomHomestay) {
             if (roomFrameObj.item.flats.count == 0) continue;
@@ -214,7 +238,6 @@ static NSString *identify = @"cell";
         
         myofferGroupModel *homestay  = [myofferGroupModel groupWithItems:nil header:@"精选民宿"];
         homestay.type = SectionGroupTypeRoomHomestay;
-        homestay.accesory_title= @"查看更多";
         
         myofferGroupModel *praise  = [myofferGroupModel groupWithItems:nil header:@"客户好评"];
         praise.type = SectionGroupTypeRoomCustomerPraise;
@@ -258,13 +281,18 @@ static NSString *identify = @"cell";
         }
             break;
         case HomeRoomTopViewButtonTypeMap:{
-            RoomMapVC *vc = [[RoomMapVC alloc] init];
-            PushToViewController(vc);
+            [self caseMap];
         }
             break;
         default:
             break;
     }
+}
+
+- (void)caseMap{
+    
+    RoomMapVC *vc = [[RoomMapVC alloc] init];
+    PushToViewController(vc);
 }
 
 
@@ -287,8 +315,39 @@ static NSString *identify = @"cell";
     HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
     MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
+    WeakSelf
+    vc.actionBlock = ^(RoomSearchResultItemModel *item) {
+        [weakSelf caseResult:item];
+    };
 }
- 
+
+- (void)caseResult:(RoomSearchResultItemModel *)item{
+    
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
+            vc.item = item;
+            PushToViewController(vc);
+        });
+}
+
+- (void)caseHeaderView:(SectionGroupType)type{
+    
+    switch (type) {
+        case SectionGroupTypeRoomHotCity:
+            [self caseMoreCity];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+- (void)caseMoreCity{
+    
+    HomeRoomIndexCityObject *item = self.roomFrameObj.item.hot_city.firstObject;
+    [self caseCity:item];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

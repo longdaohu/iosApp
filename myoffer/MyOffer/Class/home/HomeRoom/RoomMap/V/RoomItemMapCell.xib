@@ -32,40 +32,39 @@
                         <color key="textColor" red="1" green="0.67680293989999996" blue="0.67796183789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxn-ff-WFe">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/周" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxn-ff-WFe">
                         <rect key="frame" x="192.5" y="104.5" width="21.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yUI-KH-IYI">
-                        <rect key="frame" x="129" y="64" width="46" height="30"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-rw-8F0">
-                                <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
-                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Furnished Bedroom Apartment at 2nd Ave &amp; E 1st St New Yo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPW-en-gBG">
                         <rect key="frame" x="129" y="25" width="133" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ci4-cK-hAg">
+                        <rect key="frame" x="129" y="63.5" width="133" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="tCo-Xu-6TZ"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.99607843139999996" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="yUI-KH-IYI" firstAttribute="top" secondItem="IPW-en-gBG" secondAttribute="bottom" constant="5" id="AJn-sy-yLw"/>
+                <constraint firstItem="ci4-cK-hAg" firstAttribute="top" secondItem="IPW-en-gBG" secondAttribute="bottom" constant="5" id="0uH-eu-buy"/>
                 <constraint firstAttribute="trailing" secondItem="IPW-en-gBG" secondAttribute="trailing" constant="20" id="BL4-pR-Fsa"/>
                 <constraint firstItem="8fU-hQ-bhR" firstAttribute="leading" secondItem="IPW-en-gBG" secondAttribute="leading" id="QaR-3l-4zB"/>
                 <constraint firstAttribute="bottom" secondItem="koC-a1-i88" secondAttribute="bottom" constant="25" id="QuG-lN-SN4"/>
                 <constraint firstItem="Nxn-ff-WFe" firstAttribute="leading" secondItem="8fU-hQ-bhR" secondAttribute="trailing" constant="5" id="b56-oq-6g0"/>
+                <constraint firstItem="ci4-cK-hAg" firstAttribute="trailing" secondItem="IPW-en-gBG" secondAttribute="trailing" id="bhM-7U-oXE"/>
                 <constraint firstItem="8fU-hQ-bhR" firstAttribute="leading" secondItem="koC-a1-i88" secondAttribute="trailing" constant="10" id="cJh-33-T1A"/>
                 <constraint firstItem="IPW-en-gBG" firstAttribute="top" secondItem="koC-a1-i88" secondAttribute="top" id="cvu-yi-eZN"/>
                 <constraint firstItem="Nxn-ff-WFe" firstAttribute="bottom" secondItem="8fU-hQ-bhR" secondAttribute="bottom" id="djx-Lo-gOb"/>
-                <constraint firstItem="yUI-KH-IYI" firstAttribute="leading" secondItem="IPW-en-gBG" secondAttribute="leading" id="n8D-hO-bJr"/>
+                <constraint firstItem="ci4-cK-hAg" firstAttribute="leading" secondItem="IPW-en-gBG" secondAttribute="leading" id="dzy-5a-TTM"/>
                 <constraint firstItem="8fU-hQ-bhR" firstAttribute="bottom" secondItem="koC-a1-i88" secondAttribute="bottom" id="nNR-Sc-Zpk"/>
                 <constraint firstItem="koC-a1-i88" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="uR6-vu-S9C"/>
                 <constraint firstItem="koC-a1-i88" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="x7t-40-RpL"/>
@@ -75,8 +74,9 @@
             <connections>
                 <outlet property="iconView" destination="koC-a1-i88" id="4Fh-6M-m2m"/>
                 <outlet property="priceLab" destination="8fU-hQ-bhR" id="kPN-q3-wqT"/>
-                <outlet property="tagsView" destination="yUI-KH-IYI" id="4po-Zg-8K5"/>
+                <outlet property="tagsView" destination="ci4-cK-hAg" id="quv-Tg-zMB"/>
                 <outlet property="titleLab" destination="IPW-en-gBG" id="utX-dO-nPO"/>
+                <outlet property="unitLab" destination="Nxn-ff-WFe" id="LI1-je-rAu"/>
             </connections>
             <point key="canvasLocation" x="-94" y="36.5"/>
         </collectionViewCell>

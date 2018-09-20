@@ -13,6 +13,7 @@
 #import "MyofferTextHeaderView.h"
 #import "RoomAppointSuccesView.h"
 #import "HttpsApiClient_API_51ROOM.h"
+#import "MeiqiaServiceCall.h"
 
 @interface RoomAppointmentVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -30,8 +31,6 @@
 
     [self makeUI];
     [self addNotificationCenter];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dis" style:UIBarButtonItemStyleDone target:self action:@selector(caseDis)];
 }
 
 -(NSArray *)groups{
@@ -174,7 +173,7 @@
 #pragma mark : 事件处理
 - (void)caseCommitClick:(UIButton *)sender{
    
-  /*
+ 
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     NSString  *title ;
     for(WYLXGroup *group in self.groups){
@@ -253,32 +252,36 @@
     }
     
     [parameter setValue:self.room_id forKey:@"property_id"];
-*/
  
-    NSDictionary *parameter = @{
-                                @"name":@"xxx",
-                                @"mobile":@"18688958114",
-                                @"email":@"767577465@qq.com",
-                                @"wechat":@"wei-laoxu",
-                                @"date":@"2018-12-09",
-                                @"property_id":self.room_id
-                                };
-    
+ 
+//    NSDictionary *parameter = @{
+//                                @"name":@"xxx",
+//                                @"mobile":@"18688958114",
+//                                @"email":@"767577465@qq.com",
+//                                @"wechat":@"wei-laoxu",
+//                                @"date":@"2018-12-09",
+//                                @"property_id":self.room_id
+//                                };
+//
+    WeakSelf;
     [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
-        NSLog(@"1 >>>>>>>>>> %d  %@",response.statusCode,response.error);
-        id result = [response.body KD_JSONObject];
-        NSLog(@"2  >>>>>>>>>> %@",result);
+//        id result = [response.body KD_JSONObject];
+        if (!response.error) {
+            [weakSelf caseSuccess];
+        }
     }];
- 
- 
+}
+
+- (void)caseSuccess{
+    
     self.succesView.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
         self.succesView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = true;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"maiqia_call") style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
     }];
-
 }
 
 #pragma mark : 键盘处理
@@ -321,9 +324,9 @@
 }
 
 
-- (void)caseDis{
+- (void)caseMeiqia{
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [MeiqiaServiceCall callWithController:self];
 }
 
 
@@ -332,10 +335,12 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)caseMeiqia{
-    
-}
 - (void)caseHome{
+    
+    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
     
 }
 

@@ -141,8 +141,9 @@
     RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
     vc.room_id = room_id;
     vc.actionBlock = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+        [weakSelf caseHome];
     };
+    
     if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
         vc.isPresent = YES;
         MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
@@ -150,7 +151,13 @@
     }else{
         PushToViewController(vc);
     }
+}
+
+- (void)caseHome{
  
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

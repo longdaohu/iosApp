@@ -14,6 +14,11 @@
 //热门城市
 @property(nonatomic,assign)CGSize  hot_city_item_size;
 @property(nonatomic,assign)CGFloat hot_city_Section_Height;
+
+//热门活动
+@property(nonatomic,assign)CGSize  event_item_size;
+@property(nonatomic,assign)CGFloat event_Section_Height;
+
 //客户好评
 @property(nonatomic,assign)CGFloat comment_Section_Height;
 @property(nonatomic,assign)CGSize  comment_item_size;

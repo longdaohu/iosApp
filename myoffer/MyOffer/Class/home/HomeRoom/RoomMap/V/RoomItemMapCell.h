@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomItemFrameModel.h"
 
 @interface RoomItemMapCell : UICollectionViewCell
-
+@property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 @end

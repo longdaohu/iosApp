@@ -47,9 +47,8 @@
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
     _item = item;
  
-    NSLog(@">>>>>>>>>>>>>>> %@  %@",item.thumb,item.name);
-    
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.thumb] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    NSURL *path = [NSURL URLWithString:[item.thumb toUTF8WithString]];
+    [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.titleLab.text = item.name;
     self.rentLab.text = item.rent;
     self.unitLab.text = item.unit;
@@ -61,7 +60,7 @@
     NSInteger max =  tags.count > self.bgView.subviews.count ? self.bgView.subviews.count : tags.count;
      for (NSInteger i = 0 ; i < max  ;i++) {
         UILabel *sender = self.bgView.subviews[i];
-         sender.text = tags[i];
+        sender.text = tags[i];
     }
 }
 

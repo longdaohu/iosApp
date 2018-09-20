@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomSearchResultItemModel.h"
 
 @interface HomeRoomSearchVC : BaseViewController
-@property(nonatomic,copy)void(^actionBlock)(NSString *value);
+@property(nonatomic,copy)void(^actionBlock)(RoomSearchResultItemModel *item);
 
 @end

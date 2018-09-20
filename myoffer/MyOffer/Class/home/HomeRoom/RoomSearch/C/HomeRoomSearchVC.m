@@ -11,7 +11,6 @@
 #import "HomeRoomSearchCountryView.h"
 #import "HomeRoomSearchResultView.h"
 #import "HttpsApiClient_API_51ROOM.h"
-#import "RoomSearchResultItemModel.h"
 #import "HomeSecView.h"
 
 static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
@@ -258,7 +257,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 //        return;
 //    }
 //
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)countryOnClick{
@@ -273,22 +272,17 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 
 - (void)caseSearchWithItem:(RoomSearchResultItemModel *)item{
  
-
     [self.view endEditing:YES];
-//    if (self.actionBlock) {
-//        self.actionBlock(item_id);
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//        return;
-//    }
-    
-    RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
-    vc.item = item;
-    PushToViewController(vc);
     
     [self.recordList insertObject:item.name atIndex:0];
-    [self.tableView reloadData];
     [USDefault setValue:self.recordList forKey:KEY_RECORD];
     [USDefault synchronize];
+    
+    if (self.actionBlock) {
+        self.actionBlock(item);
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+
 }
 
 - (void)caseChangeCountry:(NSDictionary *)item{

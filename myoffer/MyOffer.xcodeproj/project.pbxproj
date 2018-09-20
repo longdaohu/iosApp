@@ -236,6 +236,7 @@
 		AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C713D1F4EE6460069E83E /* LeftMenuHeaderView.m */; };
 		AE4C71461F4EE6460069E83E /* LeftMenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */; };
 		AE4C71491F4EE6460069E83E /* MyofferUser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4C71441F4EE6460069E83E /* MyofferUser.m */; };
+		AE4F3FFD2153493100D9EA2B /* RoomBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4F3FFC2153493100D9EA2B /* RoomBannerView.m */; };
 		AE50BECA207481870002DCAC /* OrderActionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE50BEC8207481870002DCAC /* OrderActionVC.m */; };
 		AE50BECB207481870002DCAC /* OrderActionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE50BEC9207481870002DCAC /* OrderActionVC.xib */; };
 		AE50BED32074B93C0002DCAC /* OrderActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE50BED12074B93C0002DCAC /* OrderActionCell.m */; };
@@ -1349,6 +1350,8 @@
 		AE4C713E1F4EE6460069E83E /* LeftMenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderView.xib; sourceTree = "<group>"; };
 		AE4C71431F4EE6460069E83E /* MyofferUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyofferUser.h; sourceTree = "<group>"; };
 		AE4C71441F4EE6460069E83E /* MyofferUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyofferUser.m; sourceTree = "<group>"; };
+		AE4F3FFB2153493100D9EA2B /* RoomBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBannerView.h; sourceTree = "<group>"; };
+		AE4F3FFC2153493100D9EA2B /* RoomBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomBannerView.m; sourceTree = "<group>"; };
 		AE50BEC7207481870002DCAC /* OrderActionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderActionVC.h; sourceTree = "<group>"; };
 		AE50BEC8207481870002DCAC /* OrderActionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderActionVC.m; sourceTree = "<group>"; };
 		AE50BEC9207481870002DCAC /* OrderActionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderActionVC.xib; sourceTree = "<group>"; };
@@ -2850,6 +2853,8 @@
 				AE07A0FB210858CE00581073 /* HomeRoomHorizontalCell.m */,
 				AE4BBD412112B61F00209FC8 /* HomeRoomVerticalCell.h */,
 				AE4BBD422112B62000209FC8 /* HomeRoomVerticalCell.m */,
+				AE4F3FFB2153493100D9EA2B /* RoomBannerView.h */,
+				AE4F3FFC2153493100D9EA2B /* RoomBannerView.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -6723,7 +6728,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -7276,6 +7281,7 @@
 				AEA249A31D5B215300DD7939 /* OrderCell.m in Sources */,
 				AED4AF442141024300D8B34D /* TKBackGroundView.m in Sources */,
 				AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */,
+				AE4F3FFD2153493100D9EA2B /* RoomBannerView.m in Sources */,
 				463E3ABD1B23105F00E0BAF8 /* UILabel+ResizeHelper.m in Sources */,
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AED4AF112141024200D8B34D /* TKControlView.m in Sources */,
@@ -7979,7 +7985,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

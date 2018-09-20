@@ -82,7 +82,9 @@
 }
 - (void)setCity:(NSString *)city{
     _city = city;
-    [self.cityBtn setTitle:city forState:UIControlStateNormal];
+    
+    NSString *title = city ? city : @"城市";
+    [self.cityBtn setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)layoutSubviews{

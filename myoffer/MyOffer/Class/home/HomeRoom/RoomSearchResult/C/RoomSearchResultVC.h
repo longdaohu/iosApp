@@ -14,6 +14,5 @@
 @interface RoomSearchResultVC : RoomBaseVC
 @property(nonatomic,strong)RoomSearchResultItemModel *item;
 @property(nonatomic,strong)HomeRoomIndexCityObject *city;
-//@property(nonatomic,strong)NSDictionary *parameterItem;
 
 @end

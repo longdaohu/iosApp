@@ -12,6 +12,7 @@
 #import "RoomCityModel.h"
 #import "HomeRoomSearchCountryView.h"
 #import "RoomCountryModel.h"
+#import "RoomSearchResultVC.h"
 
 static const NSInteger UK_CODE = 0;
 static const NSInteger AU_CODE = 4;
@@ -43,7 +44,6 @@ static const NSInteger AU_CODE = 4;
     [super viewDidLoad];
     [self makeUI];
     [self makeData];
-
 }
 
 - (RoomCountryModel *)countryModel{
@@ -152,7 +152,6 @@ static NSString *identify = @"RoomCityModel";
     if (self.actionBlock) {
         self.actionBlock(city.item_id,city.name_cn);
     }
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -18,10 +18,21 @@
     self.minimumLineSpacing = 12;
     self.minimumInteritemSpacing = 15.8;
     
+    [self makeEventFrame];
     [self makeFlatsFrame];
     [self makeAccommodationsFrame];
     [self makeHotCityFrame];
     [self makeCommentFrame];
+}
+
+//热门活动
+- (void)makeEventFrame{
+    
+    CGFloat item_width = XSCREEN_WIDTH - 40;
+    CGFloat item_height = item_width * 378.0/670;
+    self.event_item_size = CGSizeMake(item_width, item_height);
+    self.event_Section_Height = item_height +  20;
+
 }
 
 //客户好评

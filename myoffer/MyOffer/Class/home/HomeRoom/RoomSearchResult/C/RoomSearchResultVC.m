@@ -75,8 +75,15 @@
 
 - (void)makeUI{
     
-    [self makeDefalutParameter];
+    [self makeParameters];
+    [self makeNavigationView];
+    [self makeTableView];
+}
+
+- (void)makeParameters{
     
+    [self makeDefalutParameter];
+
     if (self.item) {
         [self.parameter setValue: self.item.type forKey:KEY_TYPE];
         [self.parameter setValue: self.item.item_id forKey:KEY_TYPE_ID];
@@ -85,14 +92,11 @@
         NSDictionary *parameterItem = @{ KEY_TYPE:@"city",KEY_TYPE_ID:self.city.city_id};
         [self.parameter addEntriesFromDictionary:parameterItem];
     }
-    [self makeNavigationView];
-    [self makeTableView];
+    
 }
 
 - (void)makeNavigationView{
  
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"maiqia_call") style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
-    
     UITextField *searchTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH , 26)];
     searchTF.font = XFONT(10);
     searchTF.backgroundColor = XCOLOR(243, 246, 249, 1);
@@ -109,6 +113,11 @@
     searchTF.leftViewMode =  UITextFieldViewModeUnlessEditing;
     searchTF.delegate = self;
     
+    
+    UIImage *icon = XImage(@"back_arrow_black");
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:icon style:UIBarButtonItemStyleDone target:self action:@selector(casePop)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:XImage(@"maiqia_call") style:UIBarButtonItemStyleDone target:self action:@selector(caseMeiqia)];
+
 }
 
 - (void)makeTableView
@@ -135,7 +144,7 @@
         filterView.city = self.city.name_cn;
     }
     CGFloat high = filterView.mj_h;
-    self.tableView.contentInset = UIEdgeInsetsMake(high, 0, 2*high, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(high, 0, 1.7*high, 0);
     
     self.tableView.actionBlock = ^{
         [weakSelf makeData];
@@ -293,8 +302,10 @@
     [self makeDefalutParameter];
     [self.parameter setValue:@"city" forKey:KEY_TYPE];
     [self.parameter setValue:type_id forKey:KEY_TYPE_ID];
-    [self makeData];
+    [self.items removeAllObjects];
+    [self.tableView reloadData];
     self.filterView.city = name;
+    [self makeData];
 }
 
 - (void)casePrice{
@@ -302,26 +313,52 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self caseSearch];
     return NO;
 }
-//- (void)caseSearch:(UITextField *)textField{
-//    HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
-//    vc.actionBlock = ^(NSString *value) {
-//        NSLog(@"搜索返回结果，再次网络请求！！！%@",value);
-//    };
-//    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
-//    [self presentViewController:nav animated:YES completion:^{
-//    }];
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
+
+- (void)caseSearch{
+    
+    HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+    WeakSelf
+    vc.actionBlock = ^(RoomSearchResultItemModel *item) {
+        [weakSelf caseSearchResultWithItem:item];
+    };
+    
+}
+
+- (void)caseSearchResultWithItem:(RoomSearchResultItemModel *)item{
+    
+    self.item = item;
+    self.city = nil;
+//    if ([item.type isEqualToString:@"city"]) {
+//        self.filterView.city = item.name;
+//    }else{
+        self.filterView.city = nil;
+//    }
+    self.next_page = 1;
+    [self.items removeAllObjects];
+    [self.tableView reloadData];
+    [self makeParameters];
+    [self makeData];
+}
+
 
 //筛选
 - (void)caseFilter:(NSDictionary *)parameter{
     
     [self.parameter addEntriesFromDictionary:parameter];
     self.next_page = 1;
+    [self.tableView reloadData];
+    [self makeParameters];
     [self makeData];
+}
+
+- (void)casePop{
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)dealloc

@@ -199,38 +199,6 @@
     }
 }
 
-static  NSInteger  CollectionView_Current_Page = 0;
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
- 
-    // 获取collectionView的宽度
-    CGFloat collectionW = scrollView.bounds.size.width;
-    CGFloat item_w = self.flow.itemSize.width;
-    CGFloat item_margin = self.flow.minimumLineSpacing;
-    // 获取当前的内容偏移量
-    CGPoint target = CGPointMake(targetContentOffset -> x, targetContentOffset -> y);
-    
-    NSInteger index = (NSInteger)(0.5 + target.x/(item_w + item_margin));
-
-    if (fabs(target.x) > fabs(scrollView.mj_offsetX)) {
-        index = CollectionView_Current_Page + 1;
-    }else{
-        
-        if (target.x > scrollView.mj_offsetX) {
-//            NSLog(@"到左边了");
-        }else   if ((scrollView.mj_offsetX+scrollView.mj_w) > scrollView.contentSize.width) {
-//            NSLog(@"到右边了");
-        }else{
-            
-            index = CollectionView_Current_Page - 1;
-        }
-
-    }
-
-    CGFloat to_x  = index * (item_w + item_margin) - (collectionW - item_w) * 0.5;
-    CollectionView_Current_Page  = index;
-
-    targetContentOffset->x  = to_x;
-}
 
 - (void)layoutSubviews{
     [super layoutSubviews];

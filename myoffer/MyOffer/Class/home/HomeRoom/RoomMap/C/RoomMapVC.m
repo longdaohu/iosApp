@@ -68,8 +68,7 @@
     searchTF.leftView = leftView;
     searchTF.leftViewMode =  UITextFieldViewModeUnlessEditing;
     searchTF.delegate = self;
-    
-    
+ 
     UICollectionViewFlowLayout  *flow = [[UICollectionViewFlowLayout alloc] init];
     CGFloat bg_x  = 0;
     CGFloat bg_h  = 150;
@@ -89,12 +88,17 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
     return 1;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     RoomItemMapCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RoomItemMapCell" forIndexPath:indexPath];
+    if (self.itemFrameModel) {
+        cell.itemFrameModel = self.itemFrameModel;
+    }
+    
     return cell;
 }
 
