@@ -8,9 +8,13 @@
 
 #import "RoomMapVC.h"
 #import "RoomItemMapCell.h"
+#import "HomeRoomSearchVC.h"
+#import "HomeRoomIndexFlatsObject.h"
 
 @interface RoomMapVC ()<UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
-
+@property(nonatomic,strong)NSArray *items;
+@property(nonatomic,strong) UICollectionView *bgView;
+@property(nonatomic,strong)HomeRoomIndexFlatsObject *current_item;
 @end
 
 @implementation RoomMapVC
@@ -30,9 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self makeUI];
-    [self makeData];
 }
 
 - (void)makeUI{
@@ -71,25 +73,28 @@
  
     UICollectionViewFlowLayout  *flow = [[UICollectionViewFlowLayout alloc] init];
     CGFloat bg_x  = 0;
-    CGFloat bg_h  = 150;
+    CGFloat bg_h  = 149;
     CGFloat bg_y  = self.view.mj_h - bg_h;
     CGFloat bg_w  = XSCREEN_WIDTH;
     flow.itemSize = CGSizeMake(bg_w, bg_h);
     flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flow.minimumLineSpacing = 0;
     UICollectionView *bgView = [[UICollectionView alloc] initWithFrame:CGRectMake(bg_x, bg_y, bg_w, bg_h) collectionViewLayout:flow];
-    bgView.backgroundColor = XCOLOR_RANDOM;
     [self.view addSubview:bgView];
     bgView.dataSource = self;
     bgView.delegate = self;
     bgView.pagingEnabled = YES;
     [bgView registerNib:[UINib nibWithNibName:@"RoomItemMapCell" bundle:nil] forCellWithReuseIdentifier:@"RoomItemMapCell"];
-
+    self.bgView = bgView;
+    [self caseCellDose];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return 1;
+    if (self.itemFrameModel || self.current_item) {
+        return 1;
+    }
+    return 0;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,6 +102,9 @@
     RoomItemMapCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RoomItemMapCell" forIndexPath:indexPath];
     if (self.itemFrameModel) {
         cell.itemFrameModel = self.itemFrameModel;
+    }
+    if (self.current_item) {
+        cell.item = self.current_item;
     }
     
     return cell;
@@ -106,24 +114,95 @@
     
 }
 
-#pragma mark : 数据请求
-
-- (void)makeData{
-    
-}
-
 #pragma mark : UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    [self.navigationController popViewControllerAnimated:YES];
-    
+    [self caseSearch];
     return NO;
 }
 
+
+#pragma mark : 网络请求
+- (void)makeData:(NSDictionary *)parameter{
+    /*
+     page    Int     = 1
+     pagesize    int    =10
+     type    string    City, university
+     type_id    string    19
+     max    string    租金区间 最多
+     min    srting    租金区间 最少
+     lease    Int     最大租期，租多少周  如：52
+     */
+    //    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
+    
+    WeakSelf;
+    [self property_listWhithParameters:parameter additionalSuccessAction:^(id response, int status) {
+        [weakSelf updateUIWithResponse:response];
+    } additionalFailureAction:^(NSError *error, int status) {
+        
+    }];
+}
+
+- (void)updateUIWithResponse:(id)response{
+    
+    NSDictionary *result = (NSDictionary *)response;
+    //    NSString *total_page = result[@"total_page"];
+    //    NSString *current_page = result[@"current_page"];
+    NSString *unit = result[@"unit"];
+    NSArray *properties  = result[@"properties"];
+    
+    NSArray *items  = [HomeRoomIndexFlatsObject  mj_objectArrayWithKeyValuesArray:properties];
+    [items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        HomeRoomIndexFlatsObject *it = (HomeRoomIndexFlatsObject *)obj;
+        it.unit = unit;
+    }];
+    self.items =items;
+    
+    if (items.count > 0) {
+        self.current_item = items.firstObject;
+    }else{
+        self.current_item = nil;
+    }
+    [self caseCellDose];
+    [self.bgView reloadData];
+ 
+}
+
+
 #pragma mark : 事件处理
 - (void)casePop{
-    
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)caseSearch{
+    
+    HomeRoomSearchVC *vc = [[HomeRoomSearchVC alloc] init];
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+    WeakSelf
+    vc.actionBlock = ^(RoomSearchResultItemModel *item) {
+        [weakSelf caseSearchResultWithItem:item];
+    };
+}
+
+- (void)caseSearchResultWithItem:(RoomSearchResultItemModel *)item{
+    
+    NSDictionary *prm = @{
+                           KEY_PAGE: @"1",
+                           KEY_PAGESIZE: @"10",
+                           KEY_TYPE: item.type,
+                           KEY_TYPE_ID:item.item_id
+                           };
+    [self makeData:prm];
+}
+
+- (void)caseCellDose{
+    
+    if (self.itemFrameModel || self.items.count > 0) {
+        self.bgView.hidden = false;
+    }else{
+        self.bgView.hidden = true;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -173,7 +173,7 @@
 #pragma mark : 事件处理
 - (void)caseCommitClick:(UIButton *)sender{
    
- 
+ /*
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     NSString  *title ;
     for(WYLXGroup *group in self.groups){
@@ -252,17 +252,17 @@
     }
     
     [parameter setValue:self.room_id forKey:@"property_id"];
+ */
  
- 
-//    NSDictionary *parameter = @{
-//                                @"name":@"xxx",
-//                                @"mobile":@"18688958114",
-//                                @"email":@"767577465@qq.com",
-//                                @"wechat":@"wei-laoxu",
-//                                @"date":@"2018-12-09",
-//                                @"property_id":self.room_id
-//                                };
-//
+    NSDictionary *parameter = @{
+                                    @"name":@"xxx",
+                                    @"mobile":@"18688958114",
+                                    @"email":@"767577465@qq.com",
+                                    @"wechat":@"wei-laoxu",
+                                    @"date":@"2018-12-09",
+                                    @"property_id":self.room_id //@"245"//
+                                };
+
     WeakSelf;
     [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
 //        id result = [response.body KD_JSONObject];

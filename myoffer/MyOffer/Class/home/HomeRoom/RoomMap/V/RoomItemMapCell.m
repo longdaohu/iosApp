@@ -21,6 +21,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.iconView.layer.cornerRadius = 4;
+    self.iconView.layer.masksToBounds = true;
 }
 
 - (void)setItemFrameModel:(RoomItemFrameModel *)itemFrameModel{
@@ -29,15 +32,35 @@
     self.titleLab.text = itemFrameModel.item.name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",itemFrameModel.item.price];
     self.unitLab.text = itemFrameModel.item.unit;
-    for (NSInteger index = 0; index<itemFrameModel.item.feature.count; index++) {
-       
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:itemFrameModel.item.thumbnail] placeholderImage:nil];
+    [self makeFeatureItemWithArray:itemFrameModel.item.feature];
+}
+
+
+- (void)setItem:(HomeRoomIndexFlatsObject *)item{
+    _item = item;
+    
+    NSURL *path = [NSURL URLWithString:[item.thumb toUTF8WithString]];
+    [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    self.titleLab.text = item.name;
+    self.priceLab.text = item.rent;
+    self.unitLab.text = item.unit;
+    [self makeFeatureItemWithArray:item.feature];
+}
+
+- (void)makeFeatureItemWithArray:(NSArray *)tags{
+    
+    
+    [self.tagsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    for (NSInteger index = 0; index<tags.count; index++) {
         UILabel *sender = [[UILabel alloc] init];
         sender.font = XFONT(12);
         sender.textAlignment = NSTextAlignmentCenter;
         sender.backgroundColor = index % 2 ? XCOLOR_RED : XCOLOR_LIGHTBLUE;
         sender.layer.cornerRadius = 2;
         sender.layer.masksToBounds = YES;
-        sender.text = itemFrameModel.item.feature[index];
+        sender.textColor = XCOLOR_WHITE;
+        sender.text = tags[index];
         [self.tagsView addSubview:sender];
     }
 }

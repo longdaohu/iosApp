@@ -49,7 +49,7 @@
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         
         UIView *line = [UIView new];
-        line.backgroundColor = XCOLOR_RANDOM;
+        line.backgroundColor = XCOLOR_line;
         [self.contentView addSubview:line];
         self.bottom_line = line;
         
@@ -219,7 +219,7 @@
     }
  
     CGFloat line_x = 20;
-    CGFloat line_h = 3;
+    CGFloat line_h = LINE_HEIGHT;
     CGFloat line_y = content_size.height - line_h;
     CGFloat line_w = content_size.width - line_x * 2;
     self.bottom_line.frame = CGRectMake(line_x, line_y, line_w, line_h);

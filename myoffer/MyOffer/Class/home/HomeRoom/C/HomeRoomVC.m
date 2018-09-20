@@ -136,15 +136,22 @@ static NSString *identify = @"cell";
         return cell;
     }
     
+    if (group.type == SectionGroupTypeRoomHotActivity){
+        
+        HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionGroupTypeRoomHotActivity"];
+        if (!cell) {
+            cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"SectionGroupTypeRoomHotActivity"];
+        }
+        [cell.contentView addSubview:self.eventCellView];
+        return cell;
+    }
+    
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"row = %ld",indexPath.row];
-    if (group.type == SectionGroupTypeRoomHotActivity){
-        [cell.contentView addSubview:self.eventCellView];
-    }
- 
+    
     return cell;
 }
 

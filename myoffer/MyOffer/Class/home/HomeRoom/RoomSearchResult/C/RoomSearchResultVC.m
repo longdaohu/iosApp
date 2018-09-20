@@ -326,7 +326,6 @@
     vc.actionBlock = ^(RoomSearchResultItemModel *item) {
         [weakSelf caseSearchResultWithItem:item];
     };
-    
 }
 
 - (void)caseSearchResultWithItem:(RoomSearchResultItemModel *)item{

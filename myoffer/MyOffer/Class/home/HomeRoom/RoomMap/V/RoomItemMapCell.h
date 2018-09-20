@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RoomItemFrameModel.h"
+#import "HomeRoomIndexFlatsObject.h"
 
 @interface RoomItemMapCell : UICollectionViewCell
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
+@property(nonatomic,strong)HomeRoomIndexFlatsObject *item;
+
 @end

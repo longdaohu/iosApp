@@ -31,8 +31,14 @@
     CGFloat item_width = XSCREEN_WIDTH - 40;
     CGFloat item_height = item_width * 378.0/670;
     self.event_item_size = CGSizeMake(item_width, item_height);
-    self.event_Section_Height = item_height +  20;
-
+    self.event_Section_Height = item_height +  30;
+    if (self.item.events.count > 1) {
+        self.event_Section_Height = item_height +  30;
+    }else  if (self.item.events.count > 1) {
+        self.event_Section_Height = item_height;
+    }else{
+        self.event_Section_Height = 0;
+    }
 }
 
 //客户好评
