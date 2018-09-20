@@ -12,7 +12,7 @@
 #import "HomeFeeVC.h"
 #import "IntroViewController.h"
 #import "HomeYasiVC.h"
-//#import "HomeRoomVC.h"
+#import "HomeRoomVC.h"
 #import "HomeMenuBarView.h"
 #import "MyofferUpdateView.h"
 #import <AdSupport/AdSupport.h>
@@ -71,7 +71,8 @@
         HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思提分" backgroudImageName:@"home_yasi_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
         HomeIndexModel *applicate = [[HomeIndexModel alloc] initWithTitle:@"留学申请" backgroudImageName:@"home_application_bg" destVC:[HomeApplicationVC class] indexType:HomeIndexTypeLXSQ];
         HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
-        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];
+//        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];
+        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeRoomVC class] indexType:HomeIndexType51Room];
         HomeIndexModel *yx = [[HomeIndexModel alloc] initWithTitle:@"游学职培" backgroudImageName:@"home_YESGlobal_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeYouXue];
         HomeIndexModel *ym = [[HomeIndexModel alloc] initWithTitle:@"海外移民" backgroudImageName:@"home_UVIC_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeHYYM];
 
@@ -141,7 +142,8 @@
  
         if (itemModel.type == HomeIndexType51Room) {
             
-            HomeFeeVC *room  = (HomeFeeVC *)vc;
+//            HomeFeeVC *room  = (HomeFeeVC *)vc;
+            HomeRoomVC *room  = (HomeRoomVC *)vc;
             room.type = HomeLandingTypeRoom;
         }
         
@@ -255,8 +257,8 @@
         [application toSetTabBarhidden];
         
     }else if (indexModel.type == HomeIndexType51Room){
-        HomeFeeVC *room = (HomeFeeVC *)vc;
-        //        HomeRoomVC *room = (HomeRoomVC *)vc;
+//        HomeFeeVC *room = (HomeFeeVC *)vc;
+                HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toSetTabBarhidden];
         
     }else if (indexModel.type == HomeIndexTypeYasi){
@@ -289,8 +291,8 @@
         [application toLoadView];
         
     }else if (indexModel.type == HomeIndexType51Room){
-        HomeFeeVC *room = (HomeFeeVC *)vc;
-        //        HomeRoomVC *room = (HomeRoomVC *)vc;
+//        HomeFeeVC *room = (HomeFeeVC *)vc;
+          HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toLoadView];
         
     }else{

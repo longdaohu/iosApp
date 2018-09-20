@@ -269,7 +269,7 @@
     CGFloat bg_y  = CGRectGetMaxY(self.bgView.frame);
     CGFloat move = 0;
     if (up && (bg_y + keyboardEndFrame.size.height) > self.view.bounds.size.height) {
-        move =  self.view.bounds.size.height - bg_y - keyboardEndFrame.size.height;
+        move =  20+self.view.bounds.size.height - bg_y - keyboardEndFrame.size.height ;
     }
  
     [UIView beginAnimations:nil context:nil];
@@ -296,21 +296,24 @@
  
     [self hiden];
 
-    NSMutableDictionary *prm = [NSMutableDictionary dictionary];
-    if (self.price_TF_low.text >= 0 && self.price_TF_Heigh.text.length > 0) {
-    
-        NSString *max = self.price_TF_Heigh.text;
-        NSString *min = self.price_TF_low.text;
+    NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+    NSString *max = self.price_TF_Heigh.text;
+    NSString *min = self.price_TF_low.text;
+    if (min.length > 0 && max.length > 0) {
         if (max.integerValue < min.integerValue) {
             max = min;
             min = self.price_TF_Heigh.text;
         }
-        [prm setValue:min forKey:@"min"];
-        [prm setValue:max forKey:@"max"];
+        [parameter setValue:min forKey:@"min"];
+        [parameter setValue:max forKey:@"max"];
+    }
+    
+    if (self.time_TF_Heigh.text.length > 0) {
+        [parameter setValue:self.time_TF_Heigh.text forKey:@"lease"];
     }
  
-    if (self.actionBlock) {
-        self.actionBlock(prm);
+    if (parameter.allKeys.count > 0 && self.actionBlock) {
+        self.actionBlock(parameter);
     }
 }
 

@@ -79,7 +79,10 @@
     if (self.RoomSearchFilterViewBlock) {
         self.RoomSearchFilterViewBlock(sender.tag);
     }
-    
+}
+- (void)setCity:(NSString *)city{
+    _city = city;
+    [self.cityBtn setTitle:city forState:UIControlStateNormal];
 }
 
 - (void)layoutSubviews{

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RoomBaseVC.h"
+#import "RoomItemFrameModel.h"
+
 @interface RoomMapVC : RoomBaseVC
+@property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 
 @end
+

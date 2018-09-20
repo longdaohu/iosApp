@@ -94,7 +94,7 @@ static NSString *identify = @"cell";
             
             if ([item isKindOfClass:[HomeRoomIndexCityObject class]]){
                 HomeRoomIndexCityObject *city = (HomeRoomIndexCityObject *)item;
-                [weakSelf caseCityWithID:city.city_id];
+                [weakSelf caseCity:city];
             }
  
             if ([item isKindOfClass:[HomeRoomIndexFlatFrameObject class]]){
@@ -275,10 +275,10 @@ static NSString *identify = @"cell";
     PushToViewController(vc);
     
 }
-- (void)caseCityWithID:(NSString *)city_id{
+- (void)caseCity:(HomeRoomIndexCityObject *)city{
     
     RoomSearchResultVC *vc  = [[RoomSearchResultVC alloc] init];
-    vc.parameterItem = @{ KEY_TYPE:@"city",KEY_TYPE_ID:city_id};
+    vc.city = city;
     PushToViewController(vc);
 }
 

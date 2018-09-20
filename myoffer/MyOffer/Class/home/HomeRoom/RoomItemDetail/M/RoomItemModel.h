@@ -39,11 +39,11 @@
 @property(nonatomic,copy)NSString *rent;
 @property(nonatomic,copy)NSString *max_rent;
 @property(nonatomic,copy)NSString *code;
-@property(nonatomic,copy)NSString *lng;
 @property(nonatomic,copy)NSString *city;
 @property(nonatomic,copy)NSString *postcode;
 @property(nonatomic,copy)NSString *lease;
-@property(nonatomic,copy)NSString *lat;
+@property(nonatomic,copy)NSString *lat;//纬度
+@property(nonatomic,copy)NSString *lng;//经度
 @property(nonatomic,copy)NSString *promotion;//优惠活动
 @property(nonatomic,copy)NSString *process;//预订须知
 @property(nonatomic,copy)NSString *mark_summerlet;

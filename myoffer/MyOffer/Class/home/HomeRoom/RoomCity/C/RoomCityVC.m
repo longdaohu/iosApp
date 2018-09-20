@@ -150,7 +150,7 @@ static NSString *identify = @"RoomCityModel";
     myofferGroupModel *group = self.countryModel.group[indexPath.section];
     RoomCityModel *city = group.items[indexPath.row];
     if (self.actionBlock) {
-        self.actionBlock(city.item_id);
+        self.actionBlock(city.item_id,city.name_cn);
     }
     
     [self.navigationController popViewControllerAnimated:YES];

@@ -20,9 +20,13 @@
 #import "RoomItemBookVC.h"
 #import "RoomMapVC.h"
 #import "HomeRoomIndexFlatFrameObject.h"
+#import "Masonry.h"
+#import "MeiqiaServiceCall.h"
+#import "MyoffferAlertTableView.h"
+#import "RoomMapVC.h"
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 @property(nonatomic,strong)RoomNavigationView *nav;
@@ -71,13 +75,58 @@
     [meiqiaBtn setImage:XImage(@"maiqia_call") forState:UIControlStateSelected];
     nav.rightView = meiqiaBtn;
     
+    UIView *footer = [[UIView alloc] init];
+    [self.view addSubview:footer];
+    footer.backgroundColor = XCOLOR_WHITE;
+    footer.layer.shadowColor = [UIColor blackColor].CGColor;
+    footer.layer.shadowOffset = CGSizeMake(0,3);
+    footer.layer.shadowOpacity = 0.4;
+    footer.layer.cornerRadius = 8;
+    CGFloat left_margin = 20;
+    CGFloat bottom_margin = 30;
+    CGFloat footer_width = XSCREEN_WIDTH - left_margin * 2;
+    CGFloat footer_height = 45;
+    [footer mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(footer_width, footer_height));
+        make.left.mas_equalTo(left_margin);
+        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-bottom_margin);
+    }];
+    
+    
+    UIButton *meiqia = [UIButton new];
+    [meiqia setTitle:@"在线咨询" forState:UIControlStateNormal];
+    [meiqia setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
+    meiqia.titleLabel.font = XFONT(14);
+    [footer addSubview:meiqia];
+    [meiqia addTarget:self action:@selector(caseMeiqia) forControlEvents:UIControlEventTouchUpInside];
+    CGFloat  meiqia_w = 113;
+    CGFloat  book_w = footer_width - meiqia_w;
+    [meiqia mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(meiqia_w);
+        make.height.mas_equalTo(footer.mas_height);
+        make.left.mas_equalTo(footer.mas_left);
+        make.top.mas_equalTo(footer.mas_top);
+    }];
+    
+    UIButton *book = [UIButton new];
+    [book setTitle:@"预订房间" forState:UIControlStateNormal];
+    [book setBackgroundImage:XImage(@"button_red_right_nomal") forState:UIControlStateNormal];
+    [book setBackgroundImage:XImage(@"button_red_right_highlight") forState:UIControlStateHighlighted];
+    book.titleLabel.font = XFONT(14);
+    [footer addSubview:book];
+    [book addTarget:self action:@selector(caseBook) forControlEvents:UIControlEventTouchUpInside];
+    [book mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(book_w);
+        make.height.mas_equalTo(footer.mas_height);
+        make.left.mas_equalTo(meiqia.mas_right);
+        make.top.mas_equalTo(footer.mas_top);
+    }];
 }
 
 -(void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
-//   UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -88,10 +137,7 @@
     self.tableView.sectionHeaderHeight = 50;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.sectionFooterHeight = 10;
-    
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+ 
     self.tableView.backgroundColor = XCOLOR_CLEAR;
  }
 
@@ -229,16 +275,16 @@ static NSString *identify = @"cell";
  
     WeakSelf;
     [self propertyWithRoomID:self.room_id.integerValue  additionalSuccessAction:^(id response, int status) {
-        
         [weakSelf updateUIWithResponse:response];
-
     } additionalFailureAction:^(NSError *error, int status) {
-        
+        [weakSelf.tableView alertWithNetworkFailure];
     }];
  
 }
 
 - (void)updateUIWithResponse:(id)response{
+    
+    [self.tableView alertViewHiden];
     
     RoomItemModel *room = [RoomItemModel mj_objectWithKeyValues:response];
     RoomItemFrameModel *roomFrameModel = [[RoomItemFrameModel alloc] init];
@@ -322,6 +368,7 @@ static NSString *identify = @"cell";
     };
     
     self.nav.alpha_height =  roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT;
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -331,6 +378,19 @@ static NSString *identify = @"cell";
 
 - (void)caseMap{
  
+    RoomMapVC *vc = [[RoomMapVC alloc] init];
+    vc.itemFrameModel = self.itemFrameModel;
+    
+    PushToViewController(vc);
+}
+
+- (void)caseMeiqia{
+    
+    [MeiqiaServiceCall callWithController:self];
+}
+
+- (void)caseBook{
+    
 }
 
 -(void)dealloc

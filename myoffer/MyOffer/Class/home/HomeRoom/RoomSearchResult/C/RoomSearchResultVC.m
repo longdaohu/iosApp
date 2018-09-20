@@ -17,14 +17,17 @@
 #import "RoomItemDetailVC.h"
 #import "HttpsApiClient_API_51ROOM.h"
 #import "HomeRoomIndexFlatsObject.h"
+#import "MyoffferAlertTableView.h"
+#import "MeiqiaServiceCall.h"
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)RoomSearchFilterVC *searchFilter;
+@property(nonatomic,strong)RoomSearchFilterView *filterView;
 @property(nonatomic,strong)NSMutableArray *items;
 @property(nonatomic,assign)NSInteger next_page;
 @property(nonatomic,strong)NSMutableDictionary *parameter;
-@property(nonatomic,strong)UIView *header;
+
 @end
 
 @implementation RoomSearchResultVC
@@ -78,8 +81,9 @@
         [self.parameter setValue: self.item.type forKey:KEY_TYPE];
         [self.parameter setValue: self.item.item_id forKey:KEY_TYPE_ID];
     }
-    if (self.parameterItem) {
-        [self.parameter addEntriesFromDictionary:self.parameterItem];
+    if (self.city) {
+        NSDictionary *parameterItem = @{ KEY_TYPE:@"city",KEY_TYPE_ID:self.city.city_id};
+        [self.parameter addEntriesFromDictionary:parameterItem];
     }
     [self makeNavigationView];
     [self makeTableView];
@@ -109,12 +113,13 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds  style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds  style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.tableView.estimatedRowHeight = 328;//很重要保障滑动流畅性
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = XCOLOR_WHITE;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
@@ -125,21 +130,18 @@
         [weakSelf caseParameterType:type];
     };
     [self.view addSubview:filterView];
-    CGFloat high = filterView.mj_h;
-    self.tableView.contentInset = UIEdgeInsetsMake(high, 0, 1.5*high, 0);
-
-}
-
-- (UIView *)header{
-    
-    if (!_header) {
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 30)];
-        header.backgroundColor = XCOLOR_WHITE;
-        _header = header;
+    self.filterView = filterView;
+    if (self.city) {
+        filterView.city = self.city.name_cn;
     }
-   return  _header;
-}
+    CGFloat high = filterView.mj_h;
+    self.tableView.contentInset = UIEdgeInsetsMake(high, 0, 2*high, 0);
+    
+    self.tableView.actionBlock = ^{
+        [weakSelf makeData];
+    };
 
+}
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -172,7 +174,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     HomeRoomIndexFlatsObject *room = self.items[indexPath.row];
-    
     RoomItemDetailVC *vc = [[RoomItemDetailVC alloc] init];
     vc.room_id = room.no_id;
     PushToViewController(vc);
@@ -199,11 +200,11 @@
     [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
     WeakSelf;
     [self property_listWhithParameters:self.parameter additionalSuccessAction:^(id response, int status) {
-        
         [weakSelf updateUIWithResponse:response];
-        
     } additionalFailureAction:^(NSError *error, int status) {
-        
+        if (weakSelf.items.count == 0) {
+            [weakSelf.tableView alertWithRoloadMessage:nil];
+        }
     }];
     
 }
@@ -211,12 +212,13 @@
 
 - (void)updateUIWithResponse:(id)response{
     
+    [self.tableView alertViewHiden];
+    
     NSDictionary *result = (NSDictionary *)response;
     NSString *total_page = result[@"total_page"];
     NSString *current_page = result[@"current_page"];
     NSString *unit = result[@"unit"];
     NSArray *properties  = result[@"properties"];
-
     if (self.items.count > 0 && self.next_page == 1) {
         [self.items removeAllObjects];
     }
@@ -226,7 +228,6 @@
         HomeRoomIndexFlatsObject *it = (HomeRoomIndexFlatsObject *)obj;
         it.unit = unit;
     }];
-    
     [self.items addObjectsFromArray:items];
     
     [self.tableView.mj_footer endRefreshing];
@@ -236,11 +237,15 @@
     [self.tableView reloadData];
     
     if (self.next_page == 1 && self.items.count > 0) {
-        
-        self.tableView.tableHeaderView = self.header;
         [self.tableView  scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     self.next_page += 1;
+    
+    if (self.items.count == 0) {
+        [self.tableView alertWithNotDataMessage:nil];
+    }
+    
+    
 }
 
 #pragma mark : 事件处理
@@ -254,8 +259,8 @@
 
 
 - (void)caseMeiqia{
-
     
+    [MeiqiaServiceCall callWithController:self];
 }
 
 - (void)caseParameterType:(RoomFilterType)type{
@@ -277,18 +282,19 @@
     
     WeakSelf
     RoomCityVC *vc = [[RoomCityVC alloc] init];
-    vc.actionBlock = ^(NSString *type_id) {
-        [weakSelf caseCity:type_id];
+    vc.actionBlock = ^(NSString *type_id,NSString *city_name) {
+        [weakSelf caseCity:type_id name:city_name];
     };
     PushToViewController(vc);
 }
 
-- (void)caseCity:(NSString *)type_id{
+- (void)caseCity:(NSString *)type_id name:(NSString *)name{
     
     [self makeDefalutParameter];
     [self.parameter setValue:@"city" forKey:KEY_TYPE];
     [self.parameter setValue:type_id forKey:KEY_TYPE_ID];
     [self makeData];
+    self.filterView.city = name;
 }
 
 - (void)casePrice{
@@ -296,9 +302,7 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    
     [self.navigationController popViewControllerAnimated:YES];
-
     return NO;
 }
 //- (void)caseSearch:(UITextField *)textField{
@@ -312,12 +316,19 @@
 //    [self.navigationController popViewControllerAnimated:YES];
 //}
 
+//筛选
 - (void)caseFilter:(NSDictionary *)parameter{
     
     [self.parameter addEntriesFromDictionary:parameter];
     self.next_page = 1;
     [self makeData];
 }
+
+-(void)dealloc
+{
+    KDClassLog(@" 51ROOM筛选页 + RoomSearchResultVC + dealloc");
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RoomBaseVC.h"
 @interface RoomCityVC : RoomBaseVC
-@property(nonatomic,strong)void(^actionBlock)(NSString *type_id);
+@property(nonatomic,strong)void(^actionBlock)(NSString *type_id,NSString *city_name);
 
 @end

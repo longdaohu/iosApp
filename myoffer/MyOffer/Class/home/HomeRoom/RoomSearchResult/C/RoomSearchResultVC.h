@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RoomBaseVC.h"
 #import "RoomSearchResultItemModel.h"
+#import "HomeRoomIndexCityObject.h"
 
 @interface RoomSearchResultVC : RoomBaseVC
 @property(nonatomic,strong)RoomSearchResultItemModel *item;
-@property(nonatomic,strong)NSDictionary *parameterItem;
+@property(nonatomic,strong)HomeRoomIndexCityObject *city;
+//@property(nonatomic,strong)NSDictionary *parameterItem;
 
 @end

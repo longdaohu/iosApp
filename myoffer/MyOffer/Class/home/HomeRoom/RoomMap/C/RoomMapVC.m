@@ -7,6 +7,7 @@
 //
 
 #import "RoomMapVC.h"
+#import "RoomItemMapCell.h"
 
 @interface RoomMapVC ()<UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -83,20 +84,17 @@
     bgView.dataSource = self;
     bgView.delegate = self;
     bgView.pagingEnabled = YES;
-    [bgView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+    [bgView registerNib:[UINib nibWithNibName:@"RoomItemMapCell" bundle:nil] forCellWithReuseIdentifier:@"RoomItemMapCell"];
 
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
-    return 10;
+    return 1;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-    cell.contentView.backgroundColor = XCOLOR_RANDOM;
-    
+    RoomItemMapCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RoomItemMapCell" forIndexPath:indexPath];
     return cell;
 }
 

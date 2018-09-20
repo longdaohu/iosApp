@@ -16,5 +16,6 @@ typedef NS_ENUM(NSInteger,RoomFilterType){
 
 @interface RoomSearchFilterView : UIView
 @property(nonatomic,copy)void(^RoomSearchFilterViewBlock)(RoomFilterType);
+@property(nonatomic,copy)NSString *city;
 
 @end

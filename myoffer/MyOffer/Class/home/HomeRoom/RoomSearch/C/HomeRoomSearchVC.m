@@ -7,23 +7,25 @@
 //
 
 #import "HomeRoomSearchVC.h"
-#import "FiltContent.h"
-#import "FilterContentFrame.h"
-#import "FilterTableViewCell.h"
 #import "RoomSearchResultVC.h"
 #import "HomeRoomSearchCountryView.h"
 #import "HomeRoomSearchResultView.h"
 #import "HttpsApiClient_API_51ROOM.h"
 #import "RoomSearchResultItemModel.h"
+#import "HomeSecView.h"
 
-@interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,FilterTableViewCellDelegate,UITextFieldDelegate>
-@property(nonatomic,strong)NSMutableArray *groups;
+static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
+
+@interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UITextField *search_TF;
 @property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
 @property(nonatomic,strong)HomeRoomSearchResultView *resultView;
 @property(nonatomic,strong)UIButton *countyBtn;
 @property(nonatomic,assign)NSInteger country_code;
+@property(nonatomic,strong)myofferGroupModel *group;
+@property(nonatomic,strong)NSMutableArray *recordList;
+@property(nonatomic,strong)HomeSecView *sectinHeader;
 
 @end
 
@@ -48,16 +50,6 @@
     [self makeDara];
 }
 
-
-- (NSMutableArray *)groups{
-    
-    if (!_groups) {
-        _groups = [NSMutableArray array];
-    }
-    
-    return _groups;
-}
-
 - (HomeRoomSearchCountryView *)countryView{
     
     if (!_countryView) {
@@ -71,6 +63,29 @@
     
     return _countryView;
 }
+
+- (HomeSecView *)sectinHeader{
+    
+    if (!_sectinHeader) {
+        
+        WeakSelf;
+        HomeSecView *header = [[HomeSecView alloc] init];
+        header.actionBlock = ^(SectionGroupType type) {
+            [weakSelf caseSectionAccessory];
+        };
+        _sectinHeader = header;
+    }
+    
+    return _sectinHeader;
+}
+
+- (NSMutableArray *)recordList{
+    if (!_recordList) {
+        _recordList = [NSMutableArray array];
+    }
+    return _recordList;
+}
+
 
 - (HomeRoomSearchResultView *)resultView{
     
@@ -144,53 +159,22 @@
 -(void)makeDara{
     
     if (self.actionBlock) return;
- 
-    FiltContent  *historyHot = [FiltContent filterWithIcon:nil  title:@"热门搜索" subtitlte:@"" filterOptionItems:nil];
-    FilterContentFrame *historyHotFrame = [FilterContentFrame filterFrameWithFilter:historyHot];
-    WeakSelf
-    //请求推荐数据
-    [self startAPIRequestWithSelector:kAPISelectorSearchRecommand parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        NSArray *items = (NSArray *)response;
-        historyHot.optionItems = items;
-        historyHotFrame.filter = historyHot;
-         [weakSelf.groups addObject:historyHotFrame];
     
-        [weakSelf.tableView reloadData];
-    }];
-    
-    
-    if (!LOGIN)return; //未登录不加载下一步
-    
-    FiltContent  *history = [FiltContent filterWithIcon:nil   title:@"历史搜索" subtitlte:@"" filterOptionItems:nil];
-    FilterContentFrame *historyFrame = [FilterContentFrame filterFrameWithFilter:history];
- 
-    //请求历史数据
-    [self startAPIRequestWithSelector:kAPISelectorhistorySearch parameters:nil success:^(NSInteger statusCode, id response) {
-        
-        NSArray *text_arr =  [response valueForKeyPath:@"text"];
-        history.optionItems = text_arr;
-        historyFrame.filter = history;
- 
-        [weakSelf.groups addObject:historyFrame];
-        [weakSelf.tableView reloadData];
-    }];
- 
+     NSArray *items  = [USDefault valueForKey:KEY_RECORD];
+     [self.recordList addObjectsFromArray:items];
+     self.group = [myofferGroupModel groupWithItems:self.recordList header:@"历史搜索" footer:nil accessory:@"清空"];
+     [self.tableView reloadData];
 }
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
+    self.tableView.sectionHeaderHeight = 50;
     [self.view addSubview:self.tableView];
-    
-    self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
-    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.backgroundColor = XCOLOR_WHITE;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }else {
@@ -201,39 +185,47 @@
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return  self.groups.count;
+    return  self.group.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-    FilterTableViewCell *cell =[FilterTableViewCell cellInitWithTableView:tableView];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.upButton.hidden = YES;
-    cell.delegate   = self;
-    cell.indexPath   = indexPath;
-    cell.filterFrame  = self.groups[indexPath.row];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"history_cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"history_cell"];
+    }
+    cell.textLabel.text = self.group.items[indexPath.row];
     
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    FilterContentFrame *fileritem = self.groups[indexPath.row];
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return fileritem.cellHeigh;
+    return  50;
 }
 
-#pragma mark: FilterTableViewCellDelegate
--(void)FilterTableViewCell:(FilterTableViewCell *)tableViewCell  WithButtonItem:(UIButton *)sender WithIndexPath:(NSIndexPath *)indexPath
-{
- 
-    self.search_TF.text = sender.currentTitle;
-    [self.search_TF becomeFirstResponder];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
+    self.sectinHeader.group = self.group;
+    return self.sectinHeader;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *title = self.group.items[indexPath.row];
+    self.search_TF.text = title;
+    [self.search_TF becomeFirstResponder];
+}
+
 
 #pragma mark :  UITextFieldDelegate
 
@@ -288,9 +280,15 @@
 //        [self dismissViewControllerAnimated:YES completion:nil];
 //        return;
 //    }
+    
     RoomSearchResultVC *vc = [[RoomSearchResultVC alloc] init];
     vc.item = item;
     PushToViewController(vc);
+    
+    [self.recordList insertObject:item.name atIndex:0];
+    [self.tableView reloadData];
+    [USDefault setValue:self.recordList forKey:KEY_RECORD];
+    [USDefault synchronize];
 }
 
 - (void)caseChangeCountry:(NSDictionary *)item{
@@ -346,6 +344,15 @@
         return;
     }
     self.resultView.items = items;
+}
+
+//清空
+- (void)caseSectionAccessory{
+
+    [self.recordList removeAllObjects];
+    [self.tableView reloadData];
+    [USDefault setValue:nil forKey:KEY_RECORD];
+
 }
 
 //- (void)viewDidDisappear:(BOOL)animated{

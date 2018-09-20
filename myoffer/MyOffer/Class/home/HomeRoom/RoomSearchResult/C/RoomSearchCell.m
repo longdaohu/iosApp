@@ -47,6 +47,8 @@
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
     _item = item;
  
+    NSLog(@">>>>>>>>>>>>>>> %@  %@",item.thumb,item.name);
+    
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.thumb] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
     self.titleLab.text = item.name;
     self.rentLab.text = item.rent;

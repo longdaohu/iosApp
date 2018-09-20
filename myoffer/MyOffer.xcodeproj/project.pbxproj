@@ -915,6 +915,8 @@
 		AEF6580C21008C2400C0D849 /* UMCommonLog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEF6580021008C2300C0D849 /* UMCommonLog.bundle */; };
 		AEF6580D21008C2400C0D849 /* UMCommonLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF6580121008C2300C0D849 /* UMCommonLog.framework */; };
 		AEF6580F2100907100C0D849 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF6580E2100907100C0D849 /* Photos.framework */; };
+		AEF713DA2152639800796648 /* RoomItemMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF713D82152639800796648 /* RoomItemMapCell.m */; };
+		AEF713DB2152639800796648 /* RoomItemMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF713D92152639800796648 /* RoomItemMapCell.xib */; };
 		AEF936D41C314AE30095E0A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D21C314AE30095E0A7 /* Default.png */; };
 		AEF936D51C314AE30095E0A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEF936D31C314AE30095E0A7 /* Default@2x.png */; };
 		AEFA60A01F46F6360086BBCE /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA609F1F46F6360086BBCE /* PersonCenterViewController.m */; };
@@ -2522,6 +2524,9 @@
 		AEF6580021008C2300C0D849 /* UMCommonLog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMCommonLog.bundle; sourceTree = "<group>"; };
 		AEF6580121008C2300C0D849 /* UMCommonLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommonLog.framework; sourceTree = "<group>"; };
 		AEF6580E2100907100C0D849 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		AEF713D72152639800796648 /* RoomItemMapCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemMapCell.h; sourceTree = "<group>"; };
+		AEF713D82152639800796648 /* RoomItemMapCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemMapCell.m; sourceTree = "<group>"; };
+		AEF713D92152639800796648 /* RoomItemMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomItemMapCell.xib; sourceTree = "<group>"; };
 		AEF936D21C314AE30095E0A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AEF936D31C314AE30095E0A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AEFA609E1F46F6360086BBCE /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
@@ -5571,6 +5576,9 @@
 		AED3C47F212FE49000A5668C /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AEF713D72152639800796648 /* RoomItemMapCell.h */,
+				AEF713D82152639800796648 /* RoomItemMapCell.m */,
+				AEF713D92152639800796648 /* RoomItemMapCell.xib */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -6715,7 +6723,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6897,6 +6905,7 @@
 				AEBAAEA6213E4870002FD301 /* living_icon.gif in Resources */,
 				AE3AB6B11F21A27300A3C7E3 /* SMNewsOnLineView.xib in Resources */,
 				AEE1ABAC1BCA79A30008EF0C /* Localizable.strings in Resources */,
+				AEF713DB2152639800796648 /* RoomItemMapCell.xib in Resources */,
 				AEF657D821006E9E00C0D849 /* city_akl.jpg in Resources */,
 				AEA249BD1D5B215300DD7939 /* XWGJKeyboardToolar.xib in Resources */,
 				AEDDAA8520E642780069C138 /* home_global_plan_right.jpeg in Resources */,
@@ -7271,6 +7280,7 @@
 				469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */,
 				AED4AF112141024200D8B34D /* TKControlView.m in Sources */,
 				AEAFDF342123DCBD00067190 /* RoomItemBookHeaderView.m in Sources */,
+				AEF713DA2152639800796648 /* RoomItemMapCell.m in Sources */,
 				AED4AF4F2141024300D8B34D /* TKWeakDelegate.m in Sources */,
 				AECC87E01F95F63800FCBBEC /* CatigaryCityCollectionReusableView.m in Sources */,
 				AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */,
@@ -7969,7 +7979,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,
