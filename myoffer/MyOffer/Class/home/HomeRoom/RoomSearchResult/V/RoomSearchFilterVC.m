@@ -11,6 +11,7 @@
 
 @interface RoomSearchFilterVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UIView *bgView;
+@property(nonatomic,strong)UIButton *coverBtn;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)CAShapeLayer *shaper;
 @property(nonatomic,strong)UITextField *price_TF_low;
@@ -45,12 +46,19 @@
     
     self.view.backgroundColor = XCOLOR(0, 0, 0, 0);
 
+    UIButton *cover = [[UIButton alloc] initWithFrame:self.view.bounds];
+    cover.backgroundColor = XCOLOR_COVER;
+    self.coverBtn = cover;
+    [self.view addSubview:cover];
+    [cover addTarget:self action:@selector(caseCover) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, 312)];
     self.bgView = bgView;
     bgView.backgroundColor = XCOLOR_WHITE;
     [self.view addSubview:bgView];
-    bgView.layer.cornerRadius = 10;
-
+    bgView.layer.cornerRadius = 8;
+  
     UILabel *priceTitleLab = [self  makeLabelWithText:@"价格区间" textColor:XCOLOR_TITLE font:[UIFont boldSystemFontOfSize:14] superView:bgView];
     [priceTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 20));
@@ -104,6 +112,8 @@
     }];
     
     UITextField *time_TF_Low = [self makeTextFieldWithPlaceholder:@"最短租期" superView:bgView];
+    time_TF_Low.text = @"0";
+    time_TF_Low.userInteractionEnabled = NO;
     self.time_TF_low = time_TF_Low;
     [time_TF_Low mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(price_TF_Low);
@@ -128,7 +138,8 @@
         make.right.mas_equalTo(price_TF_High.mas_left).mas_offset(-10);
         make.centerY.mas_equalTo(time_TF_High.mas_centerY);
     }];
-    
+ 
+ 
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = XCOLOR_WHITE;
     [bgView addSubview:bottomView];
@@ -218,7 +229,7 @@
     
     self.view.alpha = 1;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.view.backgroundColor = XCOLOR_COVER;
+        self.coverBtn.backgroundColor = XCOLOR_COVER;
         self.bgView.transform = CGAffineTransformMakeTranslation(0, -self.bgView.mj_h);
     }];
 }
@@ -228,24 +239,13 @@
     [self.view endEditing:YES];
     
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.view.backgroundColor = XCOLOR(0, 0, 0, 0);
+        self.coverBtn.backgroundColor = XCOLOR(0, 0, 0, 0);
         self.bgView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         self.view.alpha = 0;
     }];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    
-    [self.view endEditing:YES];
-    
-    UITouch *touch = touches.anyObject;
-    CGPoint pt = [touch locationInView:self.view];
-    if (CGRectContainsPoint(self.bgView.frame, pt)) return;
-    
-    [self hiden];
-}
 
 #pragma mark : 键盘处理
 - (void)keyboardWillShow:(NSNotification *)aNotification {
@@ -317,6 +317,13 @@
     }
 }
 
+- (void)caseCover{
+    
+    [self.view endEditing:YES];
+    [self hiden];
+}
+
+
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
  
@@ -366,6 +373,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 -(void)dealloc

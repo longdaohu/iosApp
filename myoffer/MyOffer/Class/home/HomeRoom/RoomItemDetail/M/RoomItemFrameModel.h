@@ -49,10 +49,15 @@
 @property(nonatomic,assign)CGRect line_frame;
 @property(nonatomic,assign)CGRect address_frame;
 @property(nonatomic,assign)CGRect map_frame;
+@property(nonatomic,assign)CGRect map_anthor_frame;
 @property(nonatomic,strong)NSArray *headerTagFrames;
 @property(nonatomic,assign)CGRect header_box_frame;
 @property(nonatomic,assign)CGRect header_bg_frame;
 @property(nonatomic,assign)CGRect header_frame;
+
+//数据源
+@property(nonatomic,strong)NSMutableArray *groups;
+
 
 @end
 

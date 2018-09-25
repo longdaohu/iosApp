@@ -27,7 +27,6 @@
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyoffferAlertTableView *tableView;
-@property(nonatomic,strong)NSMutableArray *groups;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 @property(nonatomic,strong)RoomNavigationView *nav;
 
@@ -70,11 +69,6 @@
         }
     };
     
-    UIButton *meiqiaBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
-    [meiqiaBtn setImage:XImage(@"maiqia_call") forState:UIControlStateNormal];
-    [meiqiaBtn setImage:XImage(@"maiqia_call") forState:UIControlStateSelected];
-    nav.rightView = meiqiaBtn;
-    
     UIView *footer = [[UIView alloc] init];
     [self.view addSubview:footer];
     footer.backgroundColor = XCOLOR_WHITE;
@@ -91,8 +85,7 @@
         make.left.mas_equalTo(left_margin);
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-bottom_margin);
     }];
-    
-    
+ 
     UIButton *meiqia = [UIButton new];
     [meiqia setTitle:@"在线咨询" forState:UIControlStateNormal];
     [meiqia setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
@@ -125,55 +118,31 @@
 
 -(void)makeTableView
 {
-    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
+    self.tableView.sectionHeaderHeight = Section_header_Height_nomal;
+    self.tableView.sectionFooterHeight = Section_footer_Height_nomal;
     self.tableView.estimatedSectionHeaderHeight= UITableViewAutomaticDimension;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);
     self.tableView.backgroundColor = XCOLOR_WHITE;
- }
-
-- (NSMutableArray *)groups{
     
-    if (!_groups) {
-        
-        myofferGroupModel *discount = [myofferGroupModel groupWithItems:nil header:@"优惠活动"];
-        discount.type = SectionGroupTypeRoomDetailPromotion;
-        
-        myofferGroupModel *type = [myofferGroupModel groupWithItems:nil header:@"房间类型"];
-        type.type = SectionGroupTypeRoomDetailRoomType;
-        
-        myofferGroupModel *intro = [myofferGroupModel groupWithItems:nil header:@"公寓介绍"];
-        intro.type  = SectionGroupTypeRoomDetailTypeIntroduction;
-        
-        myofferGroupModel *facilities = [myofferGroupModel groupWithItems:nil header:@"公寓设施"];
-        facilities.type = SectionGroupTypeRoomDetailTypeFacility;
-        
-        myofferGroupModel *note = [myofferGroupModel groupWithItems:nil header:@"预订须知"];
-        note.type = SectionGroupTypeRoomDetailTypeProcess;
-      
-        NSArray *items = @[discount,type,intro,facilities,note];
-        _groups = [NSMutableArray arrayWithArray:items];
-    }
-    
-    return  _groups;
 }
 
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.groups.count;
+    return self.itemFrameModel.groups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
  
-    myofferGroupModel *group = self.groups[section];
+    myofferGroupModel *group =  self.itemFrameModel.groups[section];
  
     return group.items.count;
 }
@@ -181,7 +150,7 @@
 static NSString *identify = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
  
-    myofferGroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.itemFrameModel.groups[indexPath.section];
     if (group.type == SectionGroupTypeRoomDetailTypeIntroduction || group.type == SectionGroupTypeRoomDetailTypeProcess) {
         RoomTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoomTextCell"];
         if (!cell) {
@@ -193,7 +162,6 @@ static NSString *identify = @"cell";
         
         return cell;
     }
-    
     
     if (group.type == SectionGroupTypeRoomDetailTypeFacility) {
         
@@ -238,7 +206,7 @@ static NSString *identify = @"cell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    myofferGroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.itemFrameModel.groups[indexPath.section];
     if(group.type == SectionGroupTypeRoomDetailRoomType){
      
         RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
@@ -251,32 +219,14 @@ static NSString *identify = @"cell";
     
     HomeSecView *header = [[HomeSecView alloc] init];
     header.leftMargin = 20;
-    header.group = self.groups[section];
+    header.group = self.itemFrameModel.groups[section];
  
     return header;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    myofferGroupModel *group = self.groups[section];
-    if (group.items.count > 0) {
-        return Section_header_Height_nomal;
-    }
-    return HEIGHT_ZERO;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    myofferGroupModel *group = self.groups[section];
-    if (group.items.count > 0) {
-        return Section_footer_Height_nomal;
-    }
-    return HEIGHT_ZERO;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    myofferGroupModel *group = self.groups[indexPath.section];
+    myofferGroupModel *group = self.itemFrameModel.groups[indexPath.section];
     if (group.cell_height_set > 0 ) {
         return group.cell_height_set;
     }
@@ -286,10 +236,9 @@ static NSString *identify = @"cell";
     
     UIView *footer =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     footer.backgroundColor = XCOLOR_BG;
-    if (section == self.groups.count -1) {
+    if (section == self.itemFrameModel.groups.count -1) {
         footer.backgroundColor = XCOLOR_WHITE;
     }
-    
     return footer;
 }
 
@@ -314,73 +263,7 @@ static NSString *identify = @"cell";
     roomFrameModel.item = room;
     self.itemFrameModel = roomFrameModel;
  
-   
-    NSMutableArray *items = [NSMutableArray array];
-    for (myofferGroupModel *group in self.groups) {
-        switch (group.type) {
-            case SectionGroupTypeRoomDetailTypeIntroduction:
-            {
-                if (room.intro.length > 0) {
-                    group.items = @[room.intro];
-                    group.cell_height_set = roomFrameModel.intro_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-            }
-                break;
-            case SectionGroupTypeRoomDetailPromotion:
-            {
-                if (room.process.length > 0) {
-                    group.items = @[room.promotion];
-                    group.cell_height_set = roomFrameModel.promotion_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-            }
-                break;
-            case SectionGroupTypeRoomDetailTypeProcess:
-            {
-
-                if(room.process.length > 0 ){
-                    group.items = @[room.process];
-                    group.cell_height_set = roomFrameModel.process_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-            }
-                break;
-            case SectionGroupTypeRoomDetailTypeFacility:
-            {
-
-                if(room.ameniti_arr.count > 0 ){
-                    group.items = @[room.ameniti_arr];
-                    group.cell_height_set = roomFrameModel.faciliti_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-
-            }
-                break;
-            case SectionGroupTypeRoomDetailRoomType:
-            {
-                if(roomFrameModel.typeFrames.count > 0 ){
-                    group.items = roomFrameModel.typeFrames;
-                    group.cell_height_set = roomFrameModel.type_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-
-            }
-                break;
-            default:
-                break;
-        }
-    }
-    
-    [self.groups removeObjectsInArray:items];
-
     [self.tableView reloadData];
-    
     
     RoomItemHeaderView *header = [[RoomItemHeaderView  alloc] initWithFrame:roomFrameModel.header_frame];
     header.itemFrameModel = roomFrameModel;

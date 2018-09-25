@@ -36,6 +36,58 @@ static const CGFloat Top_Margin = 30;
     return self;
 }
 
+- (NSMutableArray *)groups{
+    
+    if (!_groups) {
+        
+        _groups = [NSMutableArray array];
+        
+        myofferGroupModel *promotion = [myofferGroupModel groupWithItems:nil header:@"优惠活动"];
+        promotion.type = SectionGroupTypeRoomDetailPromotion;
+        if (self.item.process.length > 0) {
+            promotion.items = @[self.item.promotion];
+            promotion.cell_height_set = self.promotion_cell_hight;
+            [_groups addObject:promotion];
+         }
+        
+        myofferGroupModel *type = [myofferGroupModel groupWithItems:nil header:@"房间类型"];
+        type.type = SectionGroupTypeRoomDetailRoomType;
+        if(self.typeFrames.count > 0 ){
+            type.items = self.typeFrames;
+            type.cell_height_set = self.type_cell_hight;
+            [_groups addObject:type];
+        }
+        
+        myofferGroupModel *intro = [myofferGroupModel groupWithItems:nil header:@"公寓介绍"];
+        intro.type  = SectionGroupTypeRoomDetailTypeIntroduction;
+        if (self.item.intro.length > 0) {
+            intro.items = @[self.item.intro];
+            intro.cell_height_set = self.intro_cell_hight;
+            [_groups addObject:intro];
+        }
+ 
+        myofferGroupModel *facilities = [myofferGroupModel groupWithItems:nil header:@"公寓设施"];
+        facilities.type = SectionGroupTypeRoomDetailTypeFacility;
+        if(self.item.ameniti_arr.count > 0 ){
+            facilities.items = @[self.item.ameniti_arr];
+            facilities.cell_height_set = self.faciliti_cell_hight;
+            [_groups addObject:facilities];
+        }
+ 
+        myofferGroupModel *process = [myofferGroupModel groupWithItems:nil header:@"预订须知"];
+        process.type = SectionGroupTypeRoomDetailTypeProcess;
+        if(self.item.process.length > 0 ){
+            process.items = @[self.item.process];
+            process.cell_height_set = self.process_cell_hight;
+            [_groups addObject:process];
+        }
+   
+    }
+    
+    return  _groups;
+}
+
+
 - (void)setItem:(RoomItemModel *)item{
     _item = item;
     
@@ -64,7 +116,6 @@ static const CGFloat Top_Margin = 30;
     [self makeFacilityFrame];
     //需知
     [self makeProcessFrame];
-
 }
 
 - (void)makeIntroductionFrame{
@@ -187,7 +238,6 @@ static const CGFloat Top_Margin = 30;
     CGFloat cross_h = cross_w;
     self.cross_frame = CGRectMake(cross_x, cross_y, cross_w, cross_h);
     
-
     
     CGFloat up = 40;
     CGFloat box_x = Left_Margin;
@@ -207,7 +257,7 @@ static const CGFloat Top_Margin = 30;
     
     CGFloat tag_x = Left_Margin;
     CGFloat tag_y = CGRectGetMaxY(self.title_frame) + 12;
-    CGFloat tag_h = 18;
+    CGFloat tag_h = 0;
     CGFloat tag_w = 0;
     CGFloat padding = 10;
     NSMutableArray *tag_arr = [NSMutableArray array];
@@ -216,6 +266,7 @@ static const CGFloat Top_Margin = 30;
         NSString *tag = self.item.feature[index];
         CGSize tag_size = [tag stringWithfontSize:self.tag_font_size];
         tag_w = tag_size.width + padding;
+        tag_h = tag_size.height + 6;
         if (tag_w + tag_x > title_w) {
             tag_w = 0;
         }
@@ -262,7 +313,7 @@ static const CGFloat Top_Margin = 30;
     CGFloat add_h  = add_size.height;
     CGFloat add_y  =  CGRectGetMaxY(self.line_frame) + 20;
     self.address_frame = CGRectMake(add_x, add_y, add_w, add_h);
-    
+ 
     CGFloat map_x  = title_x;
     CGFloat map_w  = title_w;
     CGFloat map_h  = 80;
@@ -271,6 +322,7 @@ static const CGFloat Top_Margin = 30;
     
     box_h = CGRectGetMaxY(self.map_frame) + 20;
     self.header_box_frame = CGRectMake(box_x, box_y, box_w, box_h);
+ 
     
     CGFloat bg_x = 0;
     CGFloat bg_y = cross_h;
@@ -291,11 +343,6 @@ static const CGFloat Top_Margin = 30;
     self.count_frame = CGRectMake(count_x, count_y, count_w, count_h);
     
 }
-
-
-
-
-
 
 
 @end

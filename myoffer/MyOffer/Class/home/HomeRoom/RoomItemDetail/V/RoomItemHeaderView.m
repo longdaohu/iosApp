@@ -15,6 +15,7 @@
 @property(nonatomic,strong)UIView *boxView;
 @property(nonatomic,strong)UIView *bgView;
 @property(nonatomic,strong)UIImageView *mapView;
+@property(nonatomic,strong)UIButton *anthor;
 @property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
@@ -73,9 +74,13 @@
         map.contentMode = UIViewContentModeScaleAspectFill;
         [box addSubview:map];
         self.mapView = map;
-        map.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(caseMap)];
-        [map addGestureRecognizer:tap];
+        
+        UIButton *anthor = [UIButton new];
+        [box addSubview:anthor];
+        self.anthor = anthor;
+        [anthor setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        [anthor addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];
+ 
         
         UILabel *title = [UILabel new];
         title.numberOfLines = 0;
@@ -139,12 +144,13 @@
     self.unitLab.frame = itemFrameModel.unit_frame;
     self.numberLab.frame = itemFrameModel.id_frame;
     self.mapView.frame = itemFrameModel.map_frame;
+    self.anthor.frame = itemFrameModel.map_frame;
     self.addressLab.frame = itemFrameModel.address_frame;
  
     NSString *path = itemFrameModel.item.minimap;
     [self.mapView sd_setImageWithURL:[NSURL URLWithString:path]  placeholderImage:nil];
     
-    self.titleLab.font = XFONT(itemFrameModel.header_title_font_size);
+    self.titleLab.font =  [UIFont boldSystemFontOfSize:itemFrameModel.header_title_font_size];
     self.titleLab.text = itemFrameModel.item.name;
     
     self.priceLab.font = XFONT(itemFrameModel.header_price_font_size);
