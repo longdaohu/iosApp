@@ -27,9 +27,9 @@
 @property(nonatomic,strong)NSArray *feature;
 
 @property(nonatomic,copy)NSString *mark_student;
-@property(nonatomic,copy)NSString *unit;
+@property(nonatomic,copy)NSString *unit; // 租期单位
 @property(nonatomic,copy)NSString *type;
-@property(nonatomic,copy)NSString *minimap;
+@property(nonatomic,copy)NSString *minimap; //地图图片
 @property(nonatomic,copy)NSString *provider_id;
 @property(nonatomic,copy)NSString *mark_roomtype;
 @property(nonatomic,copy)NSString *bathroom;
@@ -52,7 +52,7 @@
 @property(nonatomic,copy)NSString *avaliable_date;
 @property(nonatomic,copy)NSString *sq;
 @property(nonatomic,copy)NSString *update_date;
-@property(nonatomic,copy)NSString *intro;
+@property(nonatomic,copy)NSString *intro; //介绍
 //自定义
 @property(nonatomic,copy)NSString *price;
 @property(nonatomic,strong)NSArray *imageURLs;

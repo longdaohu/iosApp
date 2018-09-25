@@ -102,6 +102,10 @@
         self.wifiLab.frame = wifiValue.CGRectValue;
         self.tagLab.text = flatFrameObject.item.feature.firstObject;
         self.wifiLab.text = flatFrameObject.item.feature.lastObject;
+        
+    }else{
+        self.tagLab.frame = CGRectZero;
+        self.wifiLab.frame = CGRectZero;
     }
 }
 

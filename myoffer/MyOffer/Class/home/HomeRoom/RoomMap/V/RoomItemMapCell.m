@@ -32,7 +32,13 @@
     self.titleLab.text = itemFrameModel.item.name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",itemFrameModel.item.price];
     self.unitLab.text = itemFrameModel.item.unit;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:itemFrameModel.item.thumbnail] placeholderImage:nil];
+    if ([itemFrameModel.item.thumbnail hasPrefix:@"http"]){
+        NSURL *path = [NSURL URLWithString:[itemFrameModel.item.thumbnail toUTF8WithString]];
+        [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    }else{
+        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
+    }
+    
     [self makeFeatureItemWithArray:itemFrameModel.item.feature];
 }
 
@@ -40,8 +46,12 @@
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
     _item = item;
     
-    NSURL *path = [NSURL URLWithString:[item.thumb toUTF8WithString]];
-    [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    if ([item.thumb hasPrefix:@"http"]){
+        NSURL *path = [NSURL URLWithString:[item.thumb toUTF8WithString]];
+        [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    }else{
+        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
+    }
     self.titleLab.text = item.name;
     self.priceLab.text = item.rent;
     self.unitLab.text = item.unit;
@@ -74,6 +84,9 @@
         UILabel *sender =  self.tagsView.subviews[index];
         CGSize sender_size = [sender.text stringWithfontSize:12];
         CGFloat sender_w  = sender_size.width + 10;
+        if (sender_x + sender_w > self.tagsView.mj_w) {
+            sender_w = 0;
+        }
         sender.frame = CGRectMake(sender_x, 0, sender_w, 20);
         sender_x += (sender_w + 10);
     }

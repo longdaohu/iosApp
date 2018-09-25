@@ -120,7 +120,6 @@ static NSString *identify = @"cell";
     }
     
     if (group.type == SectionGroupTypeRoomHomestay){
-        
         HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomVerticalCell"];
         if (!cell) {
             cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomVerticalCell"];

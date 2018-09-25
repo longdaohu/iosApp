@@ -33,11 +33,11 @@ typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeRoomCustomerPraise,
     SectionGroupTypeRoomSearchHistory,
     SectionGroupTypeRoomSearchHot,
-    SectionGroupTypeRoomDetailDiscount,
-    SectionGroupTypeRoomDetailRoomType,
-    SectionGroupTypeRoomDetailTypeIntroduction,
-    SectionGroupTypeRoomDetailTypeFacility,
-    SectionGroupTypeRoomDetailTypeNote
+    SectionGroupTypeRoomDetailPromotion, //房源详情:优惠活动
+    SectionGroupTypeRoomDetailRoomType,//房源详情:房间类型
+    SectionGroupTypeRoomDetailTypeIntroduction,//房源详情:公寓介绍
+    SectionGroupTypeRoomDetailTypeFacility,//房源详情:公寓设施
+    SectionGroupTypeRoomDetailTypeProcess //房源详情:须知
 
 };
 

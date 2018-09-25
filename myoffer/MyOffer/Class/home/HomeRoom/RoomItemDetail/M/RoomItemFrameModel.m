@@ -52,12 +52,18 @@ static const CGFloat Top_Margin = 30;
     CGFloat line_h = 1;
     self.top_line_frame = CGRectMake(line_x, line_y, line_w, line_h);
  
-    [self makeProcessFrame];
-    [self makePromotionFrame];
-    [self makeIntroductionFrame];
-    [self makeFacilityFrame];
-    [self makeRoomTypeFrame];
+ 
     [self makeRoomHeaderFrame];
+    //优惠
+    [self makePromotionFrame];
+    //房子类型
+    [self makeRoomTypeFrame];
+    //公寓介绍
+    [self makeIntroductionFrame];
+    //公寓设施
+    [self makeFacilityFrame];
+    //需知
+    [self makeProcessFrame];
 
 }
 

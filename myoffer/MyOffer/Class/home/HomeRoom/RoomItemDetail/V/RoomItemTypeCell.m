@@ -28,7 +28,6 @@
         UIImageView *iconView = [UIImageView new];
         iconView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:iconView];
-        iconView.backgroundColor = XCOLOR_RANDOM;
         self.iconView = iconView;
         iconView.layer.cornerRadius = CORNER_RADIUS;
         iconView.layer.masksToBounds = true;
@@ -38,7 +37,6 @@
         titleLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:titleLab];
         titleLab.numberOfLines = 2;
-        titleLab.backgroundColor = XCOLOR_RANDOM;
 
         UILabel *priceLab = [UILabel new];
         self.priceLab = priceLab;

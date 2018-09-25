@@ -134,11 +134,8 @@
     
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
     self.tableView.estimatedSectionHeaderHeight= UITableViewAutomaticDimension;
-    self.tableView.sectionHeaderHeight = 50;
-    self.tableView.estimatedSectionFooterHeight = 0;
-    self.tableView.sectionFooterHeight = 10;
- 
-    self.tableView.backgroundColor = XCOLOR_CLEAR;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);
+    self.tableView.backgroundColor = XCOLOR_WHITE;
  }
 
 - (NSMutableArray *)groups{
@@ -146,7 +143,7 @@
     if (!_groups) {
         
         myofferGroupModel *discount = [myofferGroupModel groupWithItems:nil header:@"优惠活动"];
-        discount.type = SectionGroupTypeRoomDetailDiscount;
+        discount.type = SectionGroupTypeRoomDetailPromotion;
         
         myofferGroupModel *type = [myofferGroupModel groupWithItems:nil header:@"房间类型"];
         type.type = SectionGroupTypeRoomDetailRoomType;
@@ -158,7 +155,7 @@
         facilities.type = SectionGroupTypeRoomDetailTypeFacility;
         
         myofferGroupModel *note = [myofferGroupModel groupWithItems:nil header:@"预订须知"];
-        note.type = SectionGroupTypeRoomDetailTypeNote;
+        note.type = SectionGroupTypeRoomDetailTypeProcess;
       
         NSArray *items = @[discount,type,intro,facilities,note];
         _groups = [NSMutableArray arrayWithArray:items];
@@ -185,7 +182,7 @@ static NSString *identify = @"cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
  
     myofferGroupModel *group = self.groups[indexPath.section];
-    if (group.type == SectionGroupTypeRoomDetailTypeIntroduction || group.type == SectionGroupTypeRoomDetailDiscount) {
+    if (group.type == SectionGroupTypeRoomDetailTypeIntroduction || group.type == SectionGroupTypeRoomDetailTypeProcess) {
         RoomTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoomTextCell"];
         if (!cell) {
             cell =[[RoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RoomTextCell"];
@@ -203,7 +200,7 @@ static NSString *identify = @"cell";
         RootTagsCell *cell =[[RootTagsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.items = group.items[indexPath.row];
         cell.itemFrameModel = self.itemFrameModel;
-        
+
         return cell;
     }
     
@@ -214,18 +211,20 @@ static NSString *identify = @"cell";
             cell =[[RoomItemTypeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RoomItemTypeCell"];
         }
         cell.itemFrameModel = group.items[indexPath.row];
- 
+
         return cell;
     }
     
-    if (group.type == SectionGroupTypeRoomDetailTypeNote) {
+    if (group.type == SectionGroupTypeRoomDetailPromotion) {
         
         RoomTextSpodCell *cell =[[RoomTextSpodCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.item = group.items[indexPath.row];
         cell.itemFrameModel = self.itemFrameModel;
-        
+
         return cell;
     }
+    
+
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell) {
         cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identify];
@@ -257,6 +256,24 @@ static NSString *identify = @"cell";
     return header;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    myofferGroupModel *group = self.groups[section];
+    if (group.items.count > 0) {
+        return Section_header_Height_nomal;
+    }
+    return HEIGHT_ZERO;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    myofferGroupModel *group = self.groups[section];
+    if (group.items.count > 0) {
+        return Section_footer_Height_nomal;
+    }
+    return HEIGHT_ZERO;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     myofferGroupModel *group = self.groups[indexPath.section];
@@ -267,7 +284,13 @@ static NSString *identify = @"cell";
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    return [UIView new];
+    UIView *footer =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    footer.backgroundColor = XCOLOR_BG;
+    if (section == self.groups.count -1) {
+        footer.backgroundColor = XCOLOR_WHITE;
+    }
+    
+    return footer;
 }
 
 #pragma mark : 数据处理
@@ -291,6 +314,7 @@ static NSString *identify = @"cell";
     roomFrameModel.item = room;
     self.itemFrameModel = roomFrameModel;
  
+   
     NSMutableArray *items = [NSMutableArray array];
     for (myofferGroupModel *group in self.groups) {
         switch (group.type) {
@@ -304,21 +328,9 @@ static NSString *identify = @"cell";
                 }
             }
                 break;
-            case SectionGroupTypeRoomDetailDiscount:
+            case SectionGroupTypeRoomDetailPromotion:
             {
- 
                 if (room.process.length > 0) {
-                    group.items = @[room.process];
-                    group.cell_height_set = roomFrameModel.process_cell_hight;
-                }else{
-                    [items addObject:group];
-                }
-            }
-                break;
-            case SectionGroupTypeRoomDetailTypeNote:
-            {
- 
-                if(room.promotion.length > 0 ){
                     group.items = @[room.promotion];
                     group.cell_height_set = roomFrameModel.promotion_cell_hight;
                 }else{
@@ -326,16 +338,27 @@ static NSString *identify = @"cell";
                 }
             }
                 break;
+            case SectionGroupTypeRoomDetailTypeProcess:
+            {
+
+                if(room.process.length > 0 ){
+                    group.items = @[room.process];
+                    group.cell_height_set = roomFrameModel.process_cell_hight;
+                }else{
+                    [items addObject:group];
+                }
+            }
+                break;
             case SectionGroupTypeRoomDetailTypeFacility:
             {
- 
+
                 if(room.ameniti_arr.count > 0 ){
                     group.items = @[room.ameniti_arr];
                     group.cell_height_set = roomFrameModel.faciliti_cell_hight;
                 }else{
                     [items addObject:group];
                 }
-            
+
             }
                 break;
             case SectionGroupTypeRoomDetailRoomType:
@@ -346,7 +369,7 @@ static NSString *identify = @"cell";
                 }else{
                     [items addObject:group];
                 }
-                
+
             }
                 break;
             default:

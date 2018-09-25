@@ -276,13 +276,6 @@
 //        note.index = 0;
 //        note.onSelected = YES;
 //    }
-    
-    
-    
-    
-    
- 
- 
 //    [self mapViewDidFinishLoadingMap:self.mapView];
 }
 
@@ -312,7 +305,7 @@
     JHAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MGLAnnotationView"];
     if (annotationView == nil) {
         annotationView = [[JHAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MGLAnnotationView"];
-        [annotationView setFrame:CGRectMake(0, 0, 120, 50)];
+        [annotationView setFrame:CGRectMake(0, 0, 98, 50)];
         annotationView.actionBlock = ^(id sender) {
             [weakSelf reloadAnnotationViewWithAnnotation:sender];
         };

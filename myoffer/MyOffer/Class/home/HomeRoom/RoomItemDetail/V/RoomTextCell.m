@@ -33,7 +33,6 @@
         [self.contentView addSubview:titleLab];
         titleLab.textColor = XCOLOR_TITLE;
         titleLab.numberOfLines = 0;
-//        self.titleLab.backgroundColor = XCOLOR_RANDOM;
     }
     
     return  self;
@@ -42,6 +41,7 @@
 - (void)setItem:(NSString *)item{
     _item = item;
     self.titleLab.text = item;
+    
 }
 
 
@@ -52,11 +52,12 @@
         
         self.titleLab.font = XFONT(self.itemFrameModel.intro_font_size);
         self.top_line.frame = self.itemFrameModel.top_line_frame;
-        if (self.group.type == SectionGroupTypeRoomDetailDiscount) {
-            self.titleLab.frame = self.itemFrameModel.process_frame;
-        }
+
         if (self.group.type == SectionGroupTypeRoomDetailTypeIntroduction) {
             self.titleLab.frame = self.itemFrameModel.intro_frame;
+        }
+        if (self.group.type == SectionGroupTypeRoomDetailTypeProcess) {
+            self.titleLab.frame = self.itemFrameModel.process_frame;
         }
     }
 }
