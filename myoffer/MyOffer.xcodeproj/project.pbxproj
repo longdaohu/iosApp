@@ -147,6 +147,8 @@
 		AE2F252A1ED989CE005FB478 /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F25291ED989CE005FB478 /* ForgetPWViewController.m */; };
 		AE329BEC1DD2BC9A00DCF433 /* BangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE329BEB1DD2BC9A00DCF433 /* BangViewController.m */; };
 		AE3600661E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */; };
+		AE366D422159D65F00A05EA4 /* JHAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE366D3F2159D65B00A05EA4 /* JHAnnotationView.m */; };
+		AE366D432159D65F00A05EA4 /* JHPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE366D412159D65E00A05EA4 /* JHPointAnnotation.m */; };
 		AE3826731EE69EED0096AC6A /* OrderItemFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3826721EE69EED0096AC6A /* OrderItemFrame.m */; };
 		AE38BEEB1E4AED2700FCF28B /* ShareNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEEA1E4AED2700FCF28B /* ShareNViewController.m */; };
 		AE38BEEE1E4AFE0C00FCF28B /* ShareNView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE38BEED1E4AFE0C00FCF28B /* ShareNView.m */; };
@@ -1180,6 +1182,10 @@
 		AE3600641E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocalSectionHeaderView.h; sourceTree = "<group>"; };
 		AE3600651E8DF69600EE20EB /* ServiceProtocalSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocalSectionHeaderView.m; sourceTree = "<group>"; };
 		AE36595F1DAB9818007CEE3B /* myOffer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myOffer.entitlements; sourceTree = "<group>"; };
+		AE366D3E2159D65B00A05EA4 /* JHPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPointAnnotation.h; sourceTree = "<group>"; };
+		AE366D3F2159D65B00A05EA4 /* JHAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHAnnotationView.m; sourceTree = "<group>"; };
+		AE366D402159D65D00A05EA4 /* JHAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAnnotationView.h; sourceTree = "<group>"; };
+		AE366D412159D65E00A05EA4 /* JHPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPointAnnotation.m; sourceTree = "<group>"; };
 		AE3826711EE69EED0096AC6A /* OrderItemFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemFrame.h; sourceTree = "<group>"; };
 		AE3826721EE69EED0096AC6A /* OrderItemFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemFrame.m; sourceTree = "<group>"; };
 		AE38BEE91E4AED2700FCF28B /* ShareNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareNViewController.h; sourceTree = "<group>"; };
@@ -5581,6 +5587,10 @@
 		AED3C47F212FE49000A5668C /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE366D402159D65D00A05EA4 /* JHAnnotationView.h */,
+				AE366D3F2159D65B00A05EA4 /* JHAnnotationView.m */,
+				AE366D3E2159D65B00A05EA4 /* JHPointAnnotation.h */,
+				AE366D412159D65E00A05EA4 /* JHPointAnnotation.m */,
 				AEF713D72152639800796648 /* RoomItemMapCell.h */,
 				AEF713D82152639800796648 /* RoomItemMapCell.m */,
 				AEF713D92152639800796648 /* RoomItemMapCell.xib */,
@@ -6694,6 +6704,7 @@
 				8AE3B9FBC75CFF4642972ACF /* [CP] Copy Pods Resources */,
 				AED4AFA42141055300D8B34D /* Embed Frameworks */,
 				AED4AFA82141063D00D8B34D /* CopyFiles */,
+				C52FC71BA8B9E4C331185E7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7053,6 +7064,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C52FC71BA8B9E4C331185E7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer-frameworks.sh",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -7329,6 +7360,7 @@
 				AECC87DE1F95F63800FCBBEC /* CatigaryCityCollectionCell.m in Sources */,
 				AED4AF8D2141024300D8B34D /* TXSakuraSlider.m in Sources */,
 				AED4AF6E2141024300D8B34D /* TKImageCache.m in Sources */,
+				AE366D432159D65F00A05EA4 /* JHPointAnnotation.m in Sources */,
 				AE4B2E751F1E095600E328F7 /* MessageTopicHeaderViewController.m in Sources */,
 				AE2F23081EADA6040089084C /* UniversityCourseFilterViewController.m in Sources */,
 				AECC87CA1F95F63800FCBBEC /* RankFilterViewController.m in Sources */,
@@ -7674,6 +7706,7 @@
 				AE96A36C1E8BBF96006E8E35 /* ServiceItemHeaderView.m in Sources */,
 				AE914EE11F419F38008A43CD /* ApplyStatusHistoryViewController.m in Sources */,
 				AED4AF012141024200D8B34D /* TKEmotionGridView.m in Sources */,
+				AE366D422159D65F00A05EA4 /* JHAnnotationView.m in Sources */,
 				AE3AB6AB1F21A27300A3C7E3 /* SMHotFrame.m in Sources */,
 				AEAFDF2E2122CF6D00067190 /* RoomNavigationView.m in Sources */,
 				AE4C71451F4EE6460069E83E /* LeftMenuHeaderView.m in Sources */,

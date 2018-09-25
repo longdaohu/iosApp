@@ -10,11 +10,18 @@
 #import "RoomItemMapCell.h"
 #import "HomeRoomSearchVC.h"
 #import "HomeRoomIndexFlatsObject.h"
+#import "RoomItemDetailVC.h"
+#import <Mapbox/Mapbox.h>
+#import "JHAnnotationView.h"
+#import "JHPointAnnotation.h"
 
-@interface RoomMapVC ()<UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface RoomMapVC ()<UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate,MGLMapViewDelegate>
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong) UICollectionView *bgView;
 @property(nonatomic,strong)HomeRoomIndexFlatsObject *current_item;
+@property(nonatomic,strong)MGLMapView *mapView;
+@property(nonatomic,strong)NSArray *annotationsArray;
+
 @end
 
 @implementation RoomMapVC
@@ -38,6 +45,44 @@
 }
 
 - (void)makeUI{
+ 
+    [self makeMapView];
+    [self makeOtherView];
+}
+
+- (void)makeMapView{
+    
+    NSURL *url = [NSURL URLWithString:@"mapbox://styles/mapbox/streets-v10"];
+    MGLMapView *mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds styleURL:url];
+    mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:mapView];
+    mapView.showsScale = YES;
+    mapView.zoomLevel  = 15;
+    mapView.minimumZoomLevel  = 1;
+    mapView.pitchEnabled  = YES;//是否倾斜地图
+    mapView.rotateEnabled  = NO; //是否旋转地图
+    mapView.delegate  = self;
+    self.mapView = mapView;
+    
+    if (self.itemFrameModel) {
+        
+       RoomItemModel *item = self.itemFrameModel.item;
+        
+        JHPointAnnotation *note = [[JHPointAnnotation alloc] init];
+        note.coordinate  = CLLocationCoordinate2DMake(item.lat.floatValue, item.lng.floatValue);
+        note.title  = [NSString stringWithFormat:@"%@",item.price];
+        note.index = 0;
+        self.annotationsArray = @[note];
+        
+        [mapView setCenterCoordinate:CLLocationCoordinate2DMake(item.lat.floatValue, item.lng.floatValue)
+                           zoomLevel:15
+                            animated:NO];
+    }
+    
+}
+
+- (void)makeOtherView{
+ 
     
     CGFloat left_margin = 20;
     CGFloat item_y = XStatusBar_Height + 20;
@@ -50,7 +95,7 @@
     backBtn.backgroundColor = XCOLOR_WHITE;
     backBtn.layer.cornerRadius = item_size.height * 0.5;
     
-
+    
     CGFloat search_x = left_margin + item_size.width + 10;
     CGFloat search_w = XSCREEN_WIDTH - left_margin - search_x;
     UITextField *searchTF = [[UITextField alloc] initWithFrame:CGRectMake(search_x, item_y, search_w , item_size.height)];
@@ -63,14 +108,14 @@
     searchTF.layer.shadowColor = XCOLOR_BLACK.CGColor;
     searchTF.layer.shadowOffset = CGSizeMake(0, 3);
     searchTF.layer.shadowOpacity = 0.1;
- 
+    
     UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 13)];
     leftView.contentMode = UIViewContentModeScaleAspectFit;
     [leftView setImage:XImage(@"home_application_search_icon")];
     searchTF.leftView = leftView;
     searchTF.leftViewMode =  UITextFieldViewModeUnlessEditing;
     searchTF.delegate = self;
- 
+    
     UICollectionViewFlowLayout  *flow = [[UICollectionViewFlowLayout alloc] init];
     CGFloat bg_x  = 0;
     CGFloat bg_h  = 149;
@@ -111,6 +156,19 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.itemFrameModel) {
+        
+        [self casePop];
+    }
+    
+    if (self.current_item) {
+        
+        RoomItemDetailVC *vc = [[RoomItemDetailVC alloc] init];
+        vc.room_id = self.current_item.no_id;
+        PushToViewController(vc);
+
+    }
     
 }
 
@@ -159,13 +217,14 @@
     self.items =items;
     
     if (items.count > 0) {
+        self.itemFrameModel = nil;
         self.current_item = items.firstObject;
     }else{
         self.current_item = nil;
     }
     [self caseCellDose];
     [self.bgView reloadData];
- 
+    [self toLoLoadWithItems:items];
 }
 
 
@@ -205,9 +264,87 @@
     }
 }
 
+- (void)toLoLoadWithItems:(NSArray *)items{
+    
+//    [self.mapView removeAnnotations:self.annotationsArray];
+//    NSMutableArray *tmp = [NSMutableArray array];
+//    for (NSInteger index = 0; index < items.count; index++) {
+//        HomeRoomIndexFlatsObject *item = items[index];
+//        JHPointAnnotation *note = [[JHPointAnnotation alloc] init];
+//        note.coordinate  = CLLocationCoordinate2DMake(item., 116.356745);
+//        note.title  = @"$ 6666.45";
+//        note.index = 0;
+//        note.onSelected = YES;
+//    }
+    
+    
+    
+    
+    
+ 
+ 
+//    [self mapViewDidFinishLoadingMap:self.mapView];
+}
+
+
+#pragma mark MGLMapViewDelegate
+///是否显示气泡
+-(BOOL)mapView:(MGLMapView *)mapView annotationCanShowCallout:(id<MGLAnnotation>)annotation {
+    
+    return false;
+}
+
+- (void)mapViewDidFinishLoadingMap:(MGLMapView *)mapView {
+    ///地图加载完成时加载大头针
+    
+    [mapView addAnnotations:self.annotationsArray];
+    MGLPointAnnotation *item = self.annotationsArray.firstObject;
+    [self.mapView setCenterCoordinate:item.coordinate zoomLevel: 13 animated:YES];
+}
+
+- (MGLAnnotationView *)mapView:(MGLMapView *)mapView viewForAnnotation:(id<MGLAnnotation>)annotation {
+    if (![annotation isKindOfClass:[MGLPointAnnotation class]]) {
+        return nil;
+    }
+    
+    WeakSelf
+    JHPointAnnotation *anno = (JHPointAnnotation *)annotation;
+    JHAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MGLAnnotationView"];
+    if (annotationView == nil) {
+        annotationView = [[JHAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MGLAnnotationView"];
+        [annotationView setFrame:CGRectMake(0, 0, 120, 50)];
+        annotationView.actionBlock = ^(id sender) {
+            [weakSelf reloadAnnotationViewWithAnnotation:sender];
+        };
+    }
+    annotationView.title = annotation.title;
+    annotationView.annotationViewState = anno.onSelected;
+    
+    
+    return annotationView;
+}
+
+
+// 自定事件
+- (void)reloadAnnotationViewWithAnnotation:(id<MGLAnnotation>)annotation{
+    
+    JHPointAnnotation *anno = (JHPointAnnotation *)annotation;
+    anno.onSelected =   !anno.onSelected;
+    JHAnnotationView *annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:anno];
+    annotationView.annotationViewState = anno.onSelected;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    
+    self.mapView.delegate = nil;
+    self.mapView = nil;
+    KDClassLog(@"房源详情 + 地图RoomMapVC + dealloc");
 }
 
 @end

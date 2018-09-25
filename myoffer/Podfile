@@ -11,5 +11,5 @@ target 'MyOffer' do
     pod 'Meiqia'
     pod 'SocketRocket'
     pod 'SSZipArchive'
-    
+    pod 'Mapbox-iOS-SDK'
 end

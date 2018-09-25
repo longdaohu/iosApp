@@ -161,7 +161,6 @@ static NSString *identify = @"cell";
     NSInteger  index = self.isUK ? 0 : 4;
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] homepage:index completionBlock:^(CACommonResponse *response) {
-        
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
         if (![status isEqualToString:@"200"]) {
             NSLog(@" 网络请求错误 ");

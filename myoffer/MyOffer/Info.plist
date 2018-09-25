@@ -182,5 +182,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiNzY3NTc3NDY1IiwiYSI6ImNqa2RvaGJ5NzFqNngzd21pbzVhcm9vNmcifQ.5AH6g5aiNeTdkr7aaDQE2Q</string>
 </dict>
 </plist>
