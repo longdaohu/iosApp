@@ -78,7 +78,7 @@
         UIButton *anthor = [UIButton new];
         [box addSubview:anthor];
         self.anthor = anthor;
-        [anthor setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        [anthor setImage:[UIImage imageNamed:@"room_detail_map_anchor"] forState:UIControlStateNormal];
         [anthor addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];
  
         

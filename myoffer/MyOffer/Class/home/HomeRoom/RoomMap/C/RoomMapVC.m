@@ -18,9 +18,10 @@
 @interface RoomMapVC ()<UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate,MGLMapViewDelegate>
 @property(nonatomic,strong)NSArray *items;
 @property(nonatomic,strong) UICollectionView *bgView;
-@property(nonatomic,strong)HomeRoomIndexFlatsObject *current_item;
 @property(nonatomic,strong)MGLMapView *mapView;
 @property(nonatomic,strong)NSArray *annotationsArray;
+@property(nonatomic,strong)JHPointAnnotation *current_annotation;
+@property(nonatomic,strong)HomeRoomIndexFlatsObject *current_item;
 
 @end
 
@@ -74,9 +75,13 @@
         note.index = 0;
         self.annotationsArray = @[note];
         
-        [mapView setCenterCoordinate:CLLocationCoordinate2DMake(item.lat.floatValue, item.lng.floatValue)
-                           zoomLevel:15
-                            animated:NO];
+    }else{
+        
+        CLLocationCoordinate2D London = CLLocationCoordinate2DMake(51.516438, -0.115063);
+        CLLocationCoordinate2D Sydney = CLLocationCoordinate2DMake(-33.8875694, 151.2043603);
+        [mapView setCenterCoordinate: (self.isUK ? London : Sydney)
+                                    zoomLevel:11
+                                     animated:YES];
     }
     
 }
@@ -167,7 +172,7 @@
         RoomItemDetailVC *vc = [[RoomItemDetailVC alloc] init];
         vc.room_id = self.current_item.no_id;
         PushToViewController(vc);
-
+        
     }
     
 }
@@ -266,17 +271,24 @@
 
 - (void)toLoLoadWithItems:(NSArray *)items{
     
-//    [self.mapView removeAnnotations:self.annotationsArray];
-//    NSMutableArray *tmp = [NSMutableArray array];
-//    for (NSInteger index = 0; index < items.count; index++) {
-//        HomeRoomIndexFlatsObject *item = items[index];
-//        JHPointAnnotation *note = [[JHPointAnnotation alloc] init];
-//        note.coordinate  = CLLocationCoordinate2DMake(item., 116.356745);
-//        note.title  = @"$ 6666.45";
-//        note.index = 0;
-//        note.onSelected = YES;
-//    }
-//    [self mapViewDidFinishLoadingMap:self.mapView];
+    self.current_annotation = nil;
+    [self.mapView removeAnnotations:self.annotationsArray];
+    
+    NSMutableArray *tmp = [NSMutableArray array];
+    for (NSInteger index = 0; index < items.count; index++) {
+    
+        HomeRoomIndexFlatsObject *item = items[index];
+        JHPointAnnotation *note = [[JHPointAnnotation alloc] init];
+        note.coordinate  = CLLocationCoordinate2DMake(item.lat.floatValue, item.lng.floatValue);
+        note.title  = [NSString stringWithFormat:@"%@",item.rent];
+        note.index = index;
+        [tmp addObject:note];
+    }
+    
+    if (tmp > 0) {
+        self.annotationsArray = [tmp copy];
+        [self mapViewDidFinishLoadingMap:self.mapView];
+    }
 }
 
 
@@ -288,11 +300,22 @@
 }
 
 - (void)mapViewDidFinishLoadingMap:(MGLMapView *)mapView {
+    if (self.annotationsArray.count == 0) {
+        return;
+    }
     ///地图加载完成时加载大头针
+    JHPointAnnotation *item = self.annotationsArray.firstObject;
+    item.onSelected = YES;
+    self.current_annotation = item;
+    
+    NSInteger level = 15;
+    if (self.annotationsArray.count > 1) {
+        level = 12;
+    }
+ 
+    [self.mapView setCenterCoordinate:item.coordinate zoomLevel: level animated:YES];
     
     [mapView addAnnotations:self.annotationsArray];
-    MGLPointAnnotation *item = self.annotationsArray.firstObject;
-    [self.mapView setCenterCoordinate:item.coordinate zoomLevel: 13 animated:YES];
 }
 
 - (MGLAnnotationView *)mapView:(MGLMapView *)mapView viewForAnnotation:(id<MGLAnnotation>)annotation {
@@ -321,10 +344,24 @@
 // 自定事件
 - (void)reloadAnnotationViewWithAnnotation:(id<MGLAnnotation>)annotation{
     
+    if (self.current_annotation == annotation) {
+        
+        return;
+    }
+    
+    self.current_annotation.onSelected = NO;
+    JHAnnotationView *currnt_annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:self.current_annotation];
+    currnt_annotationView.annotationViewState = self.current_annotation.onSelected;
+ 
     JHPointAnnotation *anno = (JHPointAnnotation *)annotation;
-    anno.onSelected =   !anno.onSelected;
+    anno.onSelected =  YES;
     JHAnnotationView *annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:anno];
     annotationView.annotationViewState = anno.onSelected;
+    self.current_annotation = anno;
+ 
+    
+    self.current_item = self.items[self.current_annotation.index];
+    [self.bgView reloadData];
 }
 
 

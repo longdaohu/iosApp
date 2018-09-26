@@ -11,7 +11,6 @@
 
 @interface RoomAppointmentVC : RoomBaseVC
 @property(nonatomic,copy)NSString *room_id;
-@property(nonatomic,assign)BOOL isPresent;
 @property(nonatomic,copy)void(^actionBlock)(void);
 
 @end

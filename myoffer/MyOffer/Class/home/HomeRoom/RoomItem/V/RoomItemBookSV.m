@@ -17,6 +17,14 @@
     if (self) {
         
         self.backgroundColor = XCOLOR_WHITE;
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = XCOLOR_line;
+        [self addSubview:line];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self);
+            make.top.mas_equalTo(self.mas_top);
+            make.height.mas_equalTo(10);
+        }];
         
         UIView *bgView = [[UIView alloc] init];
         [self addSubview:bgView];
@@ -24,9 +32,8 @@
             
             make.left.mas_equalTo(self.mas_left).mas_offset(20);
             make.right.mas_equalTo(self.mas_right).mas_offset(-20);
-            make.top.mas_equalTo(self.mas_top);
+            make.top.mas_equalTo(line.mas_bottom);
             make.bottom.mas_equalTo(self.mas_bottom);
-            
         }];
         
         UILabel *aLab = [self makeLabelWithText:@"租金/周" superView:bgView];

@@ -45,9 +45,9 @@
         wx.groupType = EditTypeRoomUserWeixin;
         WYLXGroup *time  =  [WYLXGroup groupWithType:EditTypeRoomUserTime title:@"入住时间 *" placeHolder:nil content:nil groupKey:@"time" spod:false];
         time.groupType = EditTypeRoomUserTime;
-        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeRoomUserQQ title:@"手机号码 *" placeHolder:nil content:nil groupKey:@"qq" spod:false];
-        qq.groupType = EditTypeRoomUserQQ;
-        _groups = @[name,email,wx,time,qq];
+//        WYLXGroup *qq  =  [WYLXGroup groupWithType:EditTypeRoomUserQQ title:@"手机号码 *" placeHolder:nil content:nil groupKey:@"qq" spod:false];
+//        qq.groupType = EditTypeRoomUserQQ;
+        _groups = @[name,email,wx,time];
     }
     return _groups;
 }
@@ -102,14 +102,11 @@
         
     }];
     
-
-    if (self.isPresent) {
-        
-        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
-        [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
-        [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    }
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+    [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 }
 
 
@@ -173,7 +170,7 @@
 #pragma mark : 事件处理
 - (void)caseCommitClick:(UIButton *)sender{
    
- /*
+ 
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     NSString  *title ;
     for(WYLXGroup *group in self.groups){
@@ -233,36 +230,22 @@
                 
             }
                 break;
-            case EditTypeRoomUserQQ:{
-                title = @"手机号";
-                NSString *regex = @"^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
-                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-                if (![pred evaluateWithObject:group.content]) {
-                    [MBProgressHUD showMessage:@"请输入正确的手机号"];
-                    return;
-                }else{
-                    
-                    [parameter setValue:group.content forKey:@"mobile"];
-                }
-            }
-                break;
             default:
                 break;
         }
     }
     
     [parameter setValue:self.room_id forKey:@"property_id"];
- */
  
-    NSDictionary *parameter = @{
-                                    @"name":@"xxx",
-                                    @"mobile":@"18688958114",
-                                    @"email":@"767577465@qq.com",
-                                    @"wechat":@"wei-laoxu",
-                                    @"date":@"2018-12-09",
-                                    @"property_id":self.room_id //@"245"//
-                                };
-
+ 
+//    NSDictionary *parameter = @{
+//                                    @"name":@"xxx",
+//                                    @"mobile":@"18688958114",
+//                                    @"email":@"767577465@qq.com",
+//                                    @"wechat":@"wei-laoxu",
+//                                    @"date":@"2018-12-09",
+//                                    @"property_id":self.room_id
+//                                };
     WeakSelf;
     [[HttpsApiClient_API_51ROOM instance] enquiryWithParameter:parameter completion:^(CACommonResponse *response) {
 //        id result = [response.body KD_JSONObject];

@@ -223,7 +223,7 @@
     //2 留学目的地
     NSMutableArray *groups_temp = [NSMutableArray array];
     myofferGroupModel *one_group =[myofferGroupModel groupWithItems:@[self.overSeaArr] header:@"留学目的地"];
-    one_group.type = SectionGroupTypeA;
+    one_group.type = SectionGroupTypeMallDestination;
     [groups_temp addObject:one_group];
     
     
@@ -239,7 +239,7 @@
     if (item_frames.count > 0) {
 
         myofferGroupModel *two_group =[myofferGroupModel groupWithItems:item_frames  header:@"热门商品"];
-        two_group.type = SectionGroupTypeB;
+        two_group.type = SectionGroupTypeMallHotProduct;//SectionGroupTypeB;
         [groups_temp addObject:two_group];
  
     }
@@ -253,7 +253,6 @@
         self.tableView.alpha = 1;
 
     }];
-    
  
 }
 
@@ -278,7 +277,7 @@
     
     myofferGroupModel *group = self.groups[indexPath.section];
     
-    if (group.type == SectionGroupTypeA) {
+    if (group.type == SectionGroupTypeMallDestination) {
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
@@ -320,7 +319,7 @@
     CGFloat cell_Height = 0;
     
     switch (group.type) {
-        case SectionGroupTypeA:
+        case SectionGroupTypeMallDestination:
             cell_Height  = self.overseaView.mj_h;
             break;
             
@@ -353,7 +352,7 @@
     
     myofferGroupModel *group = self.groups[indexPath.section];
 
-    if (SectionGroupTypeA == group.type) return;
+    if (SectionGroupTypeMallDestination == group.type) return;
     
     ServiceSKUFrame *itemFrame = group.items[indexPath.row];
     

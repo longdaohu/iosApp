@@ -10,29 +10,27 @@
 
 typedef NS_ENUM(NSInteger,SectionGroupType){
     SectionGroupTypeA = 0,
-    SectionGroupTypeB,
-    SectionGroupTypeC,
-    SectionGroupTypeD,
-    SectionGroupTypeE,
+    SectionGroupTypeArticalRecommendations,//相关文章数组
+    SectionGroupTypeRelativeUniversity,//相关院校
+    SectionGroupTypeMallDestination,//留学购 - 目的地
+    SectionGroupTypeMallHotProduct,//留学购 -  热门商品
     SectionGroupTypeCreateOrderContact,//合同信息
     SectionGroupTypeCreateOrderMassage,
-    SectionGroupTypeCreateOrderActive,
-    SectionGroupTypeCreateOrderEnjoy,
-    SectionGroupTypeHotCommodities,
-    SectionGroupTypePopularActivity,
-    SectionGroupTypeHotVideo,
-    SectionGroupTypeBannerTheme,
-    SectionGroupTypeArticleColumn,
-    SectionGroupTypeApplyUniversity,
-    SectionGroupTypeApplyDestination,
-    SectionGroupTypeApplySubject,
-    SectionGroupTypeRoomHotActivity,
-    SectionGroupTypeRoomHotCity,
-    SectionGroupTypeRoomApartmentRecommendation,
-    SectionGroupTypeRoomHomestay,
-    SectionGroupTypeRoomCustomerPraise,
-    SectionGroupTypeRoomSearchHistory,
-    SectionGroupTypeRoomSearchHot,
+    SectionGroupTypeCreateOrderActive,//创建订单 - 活动通道
+    SectionGroupTypeCreateOrderEnjoy,//创建订单 - 尊享通道
+    SectionGroupTypeHotCommodities,//推荐 - 热门商品
+    SectionGroupTypePopularActivity, //推荐 - 热门活动
+    SectionGroupTypeHotVideo,//推荐 - 热门视频
+    SectionGroupTypeBannerTheme,//推荐 - 专题攻略
+    SectionGroupTypeArticleColumn, //留学申请 - 热门阅读
+    SectionGroupTypeApplyUniversity, //留学申请 - 院校宝典
+    SectionGroupTypeApplyDestination,//留学申请 - 目的地
+    SectionGroupTypeApplySubject,   //留学申请 - 热门专业
+    SectionGroupTypeRoomHotActivity,//推荐 - 热门活动
+    SectionGroupTypeRoomHotCity,//海外租房 - 热门城市
+    SectionGroupTypeRoomApartmentRecommendation, // 海外租房 - 公寓推荐
+    SectionGroupTypeRoomHomestay,  // 海外租房 - 精选民宿
+    SectionGroupTypeRoomCustomerPraise, // 海外租房 - 客户好评
     SectionGroupTypeRoomDetailPromotion, //房源详情:优惠活动
     SectionGroupTypeRoomDetailRoomType,//房源详情:房间类型
     SectionGroupTypeRoomDetailTypeIntroduction,//房源详情:公寓介绍

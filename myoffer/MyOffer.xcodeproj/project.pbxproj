@@ -7946,7 +7946,7 @@
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/** $(inherited)";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -8010,7 +8010,7 @@
 				PRODUCT_NAME = myOffer;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/JPush $(PODS_ROOT)/** $(inherited)";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

@@ -111,7 +111,7 @@
             break;
     }
     
-    if (self.group.items.count == 0) {
+    if (self.group.items.count == 0 && self.group.type != SectionGroupTypeA) {
         self.mj_h = 0;
     }
  

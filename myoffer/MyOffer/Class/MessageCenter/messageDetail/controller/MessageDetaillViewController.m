@@ -239,7 +239,7 @@
     if (news_temps.count > 0) {
 
         myofferGroupModel *article_group = [myofferGroupModel groupWithItems:[news_temps copy]  header:@"相关文章" footer:nil];
-        article_group.type = SectionGroupTypeB;
+        article_group.type = SectionGroupTypeArticalRecommendations;
         [self.groups addObject:article_group];
      }
     
@@ -252,7 +252,7 @@
         NSString *title = (idx == 0) ? @"相关院校" : @"";
                 myofferGroupModel *uni_group = [myofferGroupModel groupWithItems:@[uniFrame] header:title footer:nil];
         uni_group.section_footer_height = Section_footer_Height_nomal;
-        uni_group.type = SectionGroupTypeC;
+        uni_group.type = SectionGroupTypeRelativeUniversity;
         [self.groups addObject:uni_group];
         
     }];
@@ -378,12 +378,12 @@
             cellHeight = self.webView.mj_h;
         }
             break;
-        case SectionGroupTypeB:{
+        case SectionGroupTypeArticalRecommendations:{
             MyofferMessageFrame   *messageFrame =  group.items[indexPath.row];
             cellHeight = messageFrame.cell_Height;
         }
             break;
-        case SectionGroupTypeC:{
+        case SectionGroupTypeRelativeUniversity:{
             UniversityFrameNew  *uniFrame = group.items[indexPath.row];
             cellHeight = uniFrame.cell_Height;
         }
@@ -417,7 +417,7 @@
             break;
             
             
-        case SectionGroupTypeB:{
+        case SectionGroupTypeArticalRecommendations:{
             
             MessageCell *news_cell =[MessageCell cellWithTableView:tableView];
             news_cell.messageFrame =  group.items[indexPath.row];
@@ -452,13 +452,13 @@
     
     UIViewController *VC = [UIViewController new];
     switch (group.type) {
-        case SectionGroupTypeB:
+        case SectionGroupTypeArticalRecommendations:
         {
             MyofferMessageFrame *newsFrame  = group.items[indexPath.row];
             VC = [[MessageDetaillViewController alloc] initWithMessageId:newsFrame.News.message_id];
         }
             break;
-        case SectionGroupTypeC:
+        case SectionGroupTypeRelativeUniversity:
         {
             UniversityFrameNew *uniFrame   = group.items[indexPath.row];
             VC = [[UniversityViewController alloc] initWithUniversityId:uniFrame.universtiy.NO_id] ;

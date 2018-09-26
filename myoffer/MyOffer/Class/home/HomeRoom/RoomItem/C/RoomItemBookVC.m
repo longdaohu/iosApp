@@ -70,7 +70,8 @@
     UINib *xib = [UINib nibWithNibName:@"RoomItemBookCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RoomItemBookCell"];
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = 58;
+//    self.tableView.estimatedSectionHeaderHeight = 58;
+//    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionFooterHeight = 1;
     self.tableView.sectionFooterHeight = HEIGHT_ZERO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -116,7 +117,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    RoomItemBookSV *sv = [RoomItemBookSV new];
+    RoomItemBookSV *sv = [[RoomItemBookSV alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 58)];
+   
     return sv;
 }
 
@@ -128,6 +130,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+ 
+    return 58;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -145,7 +152,6 @@
     };
     
     if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
-        vc.isPresent = YES;
         MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
         [self presentViewController:nav animated:YES completion:nil];
     }else{

@@ -13,7 +13,7 @@
 #import "HttpsApiClient_API_51ROOM.h"
 #import "HomeSecView.h"
 
-static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
+static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
 
 @interface HomeRoomSearchVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -49,6 +49,15 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
     [self makeDara];
 }
 
+
+- (NSMutableArray *)recordList{
+    
+    if (!_recordList) {
+        _recordList = [NSMutableArray array];
+    }
+    
+    return _recordList;
+}
 - (HomeRoomSearchCountryView *)countryView{
     
     if (!_countryView) {
@@ -66,23 +75,14 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 - (HomeSecView *)sectinHeader{
     
     if (!_sectinHeader) {
-        
         WeakSelf;
-        HomeSecView *header = [[HomeSecView alloc] init];
-        header.actionBlock = ^(SectionGroupType type) {
+        _sectinHeader = [[HomeSecView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
+        _sectinHeader.actionBlock = ^(SectionGroupType type) {
             [weakSelf caseSectionAccessory];
         };
-        _sectinHeader = header;
     }
     
     return _sectinHeader;
-}
-
-- (NSMutableArray *)recordList{
-    if (!_recordList) {
-        _recordList = [NSMutableArray array];
-    }
-    return _recordList;
 }
 
 
@@ -156,38 +156,35 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 }
 
 -(void)makeDara{
-    
-    if (self.actionBlock) return;
-    
-     NSArray *items  = [USDefault valueForKey:KEY_RECORD];
-     [self.recordList addObjectsFromArray:items];
-     self.group = [myofferGroupModel groupWithItems:self.recordList header:@"历史搜索" footer:nil accessory:@"清空"];
+ 
+     NSArray *recordList  = [USDefault valueForKey:KEY_RECORD];
+     [self.recordList addObjectsFromArray:recordList];
+     NSArray *items = [RoomSearchResultItemModel mj_objectArrayWithKeyValuesArray:recordList];
+     self.group = [myofferGroupModel groupWithItems:items header:@"历史搜索" footer:nil accessory:@"清空"];
+     self.sectinHeader.group = self.group;
+     self.tableView.tableHeaderView = self.sectinHeader;
+ 
      [self.tableView reloadData];
 }
 
 -(void)makeTableView
 {
-    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.backgroundColor = XCOLOR_WHITE;
+    self.tableView.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.sectionHeaderHeight = 50;
     [self.view addSubview:self.tableView];
-    self.tableView.backgroundColor = XCOLOR_WHITE;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
-
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -199,38 +196,29 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"history_cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"history_cell"];
+        cell.textLabel.font = XFONT(14);
     }
-    cell.textLabel.text = self.group.items[indexPath.row];
+    if (self.group.items.count > 0) {
+        RoomSearchResultItemModel *item = self.group.items[indexPath.row];
+        cell.textLabel.text = item.name;
+    }
     
     return cell;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return  50;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    self.sectinHeader.group = self.group;
-    return self.sectinHeader;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *title = self.group.items[indexPath.row];
-    self.search_TF.text = title;
-    [self.search_TF becomeFirstResponder];
+    RoomSearchResultItemModel *item = self.group.items[indexPath.row];
+    
+    [self caseSearchWithItem:item];
+    
 }
 
 
 #pragma mark :  UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
- 
-    [self caseSearchValueChange:textField];
     
     return YES;
 }
@@ -238,7 +226,6 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
  
     [self.countryView hide];
-    [self.resultView show];
     if (textField.text.length > 0) {
         [self caseSearchValueChange:textField];
     }
@@ -249,14 +236,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 
 #pragma mark : 事件处理
 -  (void)pageDismiss{
-    
-//    if(self.resultView.state){
-//
-//        [self.resultView hide];
-//        self.search_TF.text = @"";
-//        return;
-//    }
-//
+
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -272,12 +252,15 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 
 - (void)caseSearchWithItem:(RoomSearchResultItemModel *)item{
  
+   
+    if (![self.group.items containsObject:item]) {
+        NSDictionary *values = item.mj_keyValues;
+        [self.recordList addObject:values];
+        [USDefault setValue:self.recordList forKey:KEY_RECORD];
+        [USDefault synchronize];
+    }
+   
     [self.view endEditing:YES];
-    
-    [self.recordList insertObject:item.name atIndex:0];
-    [USDefault setValue:self.recordList forKey:KEY_RECORD];
-    [USDefault synchronize];
-    
     if (self.actionBlock) {
         self.actionBlock(item);
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -311,13 +294,16 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 
     //    输入框为空时,不做网请求操作
     if (text.length == 0 || !text) {
+        
         [self.resultView clearAllData];
+        
         return;
     }
     /*
          self.country_code  =   英国 0 、 澳州  4 ；默认英国
          keywords 搜索关键字
      */
+    [self.resultView show];
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] Search_Place:self.country_code keywords:[text toUTF8WithString] completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
@@ -343,17 +329,12 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecord";
 //清空
 - (void)caseSectionAccessory{
 
-    [self.recordList removeAllObjects];
+    self.recordList = nil;
+    self.group.items = nil;
     [self.tableView reloadData];
     [USDefault setValue:nil forKey:KEY_RECORD];
 
 }
-
-//- (void)viewDidDisappear:(BOOL)animated{
-//
-//    HttpsApiClient_API_51ROOM *item = [HttpsApiClient_API_51ROOM instance];
-//    item = nil;
-//}
 
 - (void)dealloc{
 

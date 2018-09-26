@@ -56,7 +56,7 @@
 - (NSString *)price{
     
     if (!_price) {
-        _price = [NSString stringWithFormat:@"%@ %@",self.currency,self.max_rent];
+        _price = [NSString stringWithFormat:@"%@ %@",self.currency,self.rent];
     }
     return _price;
 }

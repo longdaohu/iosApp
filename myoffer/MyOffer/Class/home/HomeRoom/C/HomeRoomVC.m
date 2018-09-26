@@ -297,6 +297,7 @@ static NSString *identify = @"cell";
 - (void)caseMap{
     
     RoomMapVC *vc = [[RoomMapVC alloc] init];
+    vc.isUK = self.isUK;
     PushToViewController(vc);
 }
 

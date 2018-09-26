@@ -12,6 +12,7 @@
 
 @interface RoomMapVC : RoomBaseVC
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
+@property(nonatomic,assign)BOOL isUK;
 
 @end
 

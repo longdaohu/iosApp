@@ -22,6 +22,8 @@
 @property(nonatomic,copy)NSString *thumb;
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *rent;
+@property(nonatomic,copy)NSString *lat;
+@property(nonatomic,copy)NSString *lng;
 @property(nonatomic,copy)NSString *no_id;
 @property(nonatomic,strong)NSArray *feature;
 

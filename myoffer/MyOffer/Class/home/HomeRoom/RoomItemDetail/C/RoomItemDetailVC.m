@@ -24,6 +24,7 @@
 #import "MeiqiaServiceCall.h"
 #import "MyoffferAlertTableView.h"
 #import "RoomMapVC.h"
+#import "RoomAppointmentVC.h"
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyoffferAlertTableView *tableView;
@@ -296,7 +297,27 @@ static NSString *identify = @"cell";
 }
 
 - (void)caseBook{
+ 
+    WeakSelf
+    RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
+    vc.room_id = self.room_id;
+    vc.actionBlock = ^{
+        [weakSelf caseHome];
+    };
     
+    if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
+        MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
+        PushToViewController(vc);
+    }
+}
+
+- (void)caseHome{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    });
 }
 
 -(void)dealloc
