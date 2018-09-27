@@ -46,7 +46,6 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
-    
 }
 
 - (RoomItemBookHeaderView *)header{
@@ -98,21 +97,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    WeakSelf
+    
     RoomItemBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RoomItemBookCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.item = self.itemFrameModel.item.prices[indexPath.row];
-    cell.actionBlock = ^(NSString *item_id){
-        
-         [weakSelf caseBookWithRooomID:item_id];
-    }; 
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    RoomTypeBookItemModel *item = self.itemFrameModel.item.prices[indexPath.row];
+    if (item.state.boolValue) return;
+    [self caseBookWithRooomID:item.roomtype_id];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -161,8 +158,9 @@
 
 - (void)caseHome{
  
+    WeakSelf
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     });
 }
 

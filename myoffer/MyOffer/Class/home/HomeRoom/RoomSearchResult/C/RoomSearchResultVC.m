@@ -15,10 +15,10 @@
 #import "RoomCityVC.h"
 #import "HomeRoomSearchVC.h"
 #import "RoomItemDetailVC.h"
-#import "HttpsApiClient_API_51ROOM.h"
 #import "HomeRoomIndexFlatsObject.h"
 #import "MyoffferAlertTableView.h"
 #import "MeiqiaServiceCall.h"
+
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)MyoffferAlertTableView *tableView;
@@ -224,8 +224,8 @@
     [self.tableView alertViewHiden];
     
     NSDictionary *result = (NSDictionary *)response;
-    NSString *total_page = result[@"total_page"];
-    NSString *current_page = result[@"current_page"];
+//    NSString *total_page = result[@"total_page"];
+//    NSString *current_page = result[@"current_page"];
     NSString *unit = result[@"unit"];
     NSArray *properties  = result[@"properties"];
     if (self.items.count > 0 && self.next_page == 1) {
@@ -240,7 +240,7 @@
     [self.items addObjectsFromArray:items];
     
     [self.tableView.mj_footer endRefreshing];
-    if (total_page.integerValue <= current_page.integerValue) {
+    if (properties.count == 0) {
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
     }
     [self.tableView reloadData];
@@ -348,10 +348,10 @@
 //筛选
 - (void)caseFilter:(NSDictionary *)parameter{
     
+    [self makeParameters];
     [self.parameter addEntriesFromDictionary:parameter];
     self.next_page = 1;
     [self.tableView reloadData];
-    [self makeParameters];
     [self makeData];
 }
 

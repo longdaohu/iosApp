@@ -12,6 +12,6 @@
 //@property(nonatomic,copy)NSString *title;
 @property(nonatomic,strong)RoomTypeBookItemModel *item;
 
-@property(nonatomic,copy)void(^actionBlock)(NSString *item_id);
+//@property(nonatomic,copy)void(^actionBlock)(NSString *item_id);
 
 @end

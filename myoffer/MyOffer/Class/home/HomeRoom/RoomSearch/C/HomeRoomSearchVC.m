@@ -160,6 +160,9 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
      NSArray *recordList  = [USDefault valueForKey:KEY_RECORD];
      [self.recordList addObjectsFromArray:recordList];
      NSArray *items = [RoomSearchResultItemModel mj_objectArrayWithKeyValuesArray:recordList];
+    if (items.count > 10) {
+       items = [items subarrayWithRange:NSMakeRange(0, 10)];
+    }
      self.group = [myofferGroupModel groupWithItems:items header:@"历史搜索" footer:nil accessory:@"清空"];
      self.sectinHeader.group = self.group;
      self.tableView.tableHeaderView = self.sectinHeader;
@@ -176,6 +179,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
     self.tableView.dataSource = self;
     self.tableView.tableFooterView =[[UIView alloc] init];
     self.tableView.sectionHeaderHeight = 50;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:self.tableView];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -255,7 +259,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
    
     if (![self.group.items containsObject:item]) {
         NSDictionary *values = item.mj_keyValues;
-        [self.recordList addObject:values];
+        [self.recordList insertObject:values atIndex:0];
         [USDefault setValue:self.recordList forKey:KEY_RECORD];
         [USDefault synchronize];
     }
@@ -296,7 +300,8 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
     if (text.length == 0 || !text) {
         
         [self.resultView clearAllData];
-        
+        [self.resultView showError:@"没有搜到相关信息，请检查关键字是否输入正确。"];
+
         return;
     }
     /*

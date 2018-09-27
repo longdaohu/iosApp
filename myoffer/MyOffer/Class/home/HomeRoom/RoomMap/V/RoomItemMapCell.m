@@ -24,13 +24,14 @@
     
     self.iconView.layer.cornerRadius = 4;
     self.iconView.layer.masksToBounds = true;
+    self.priceLab.textColor = XCOLOR_RED;
 }
 
 - (void)setItemFrameModel:(RoomItemFrameModel *)itemFrameModel{
     
     _itemFrameModel = itemFrameModel;
     self.titleLab.text = itemFrameModel.item.name;
-    self.priceLab.text = [NSString stringWithFormat:@"￥%@",itemFrameModel.item.price];
+    self.priceLab.text = [NSString stringWithFormat:@"%@",itemFrameModel.item.price];
     self.unitLab.text = itemFrameModel.item.unit;
     if ([itemFrameModel.item.thumbnail hasPrefix:@"http"]){
         NSURL *path = [NSURL URLWithString:[itemFrameModel.item.thumbnail toUTF8WithString]];

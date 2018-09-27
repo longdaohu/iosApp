@@ -155,7 +155,7 @@
     
     self.titleLab.text = itemFrameModel.item.name;
     self.typeLab.text  = [NSString stringWithFormat:@"房型  %@",itemFrameModel.item.type];
-    self.sizeLab.text  = [NSString stringWithFormat:@"面积  大约%@",itemFrameModel.item.size];
+    self.sizeLab.text  = [NSString stringWithFormat:@"面积  %@",itemFrameModel.item.size];
     self.bedLab.text  =  [NSString stringWithFormat:@"床型  %@",itemFrameModel.item.bed];
     self.noteLab.text  = [NSString stringWithFormat:@"备注  %@",itemFrameModel.item.desc];
  

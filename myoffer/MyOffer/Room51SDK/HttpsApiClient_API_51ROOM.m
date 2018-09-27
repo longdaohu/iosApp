@@ -126,6 +126,7 @@ static NSString* HOST = @"api.51room.com";
     for (NSString *key in parameter.allKeys) {
        [request addQueryParameter:parameter[key]  forKey:key];
     }
+
     [client invokeWithRequest: request withCallback:completionBlock];
 }
 

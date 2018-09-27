@@ -60,7 +60,7 @@
         self.boxView = box;
         box.layer.shadowColor = XCOLOR_BLACK.CGColor;
         box.layer.shadowOffset = CGSizeMake(0, 3);
-        box.layer.shadowOpacity = 0.5;
+        box.layer.shadowOpacity = 0.2;
         box.layer.cornerRadius = CORNER_RADIUS;
  
         UIView *line = [UIView new];
@@ -120,11 +120,12 @@
     
     if (!_bannerView) {
  
+        WeakSelf
         _bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
         _bannerView.bannerImageViewContentMode =  UIViewContentModeScaleAspectFill;
         _bannerView.showPageControl = false;
         _bannerView.clickItemOperationBlock = ^(NSInteger index) {
-//            NSString *target  = target_arr[index];
+            [weakSelf caseBannerIndex:index];
         };
         [self.crossView addSubview:_bannerView];
     }
@@ -204,6 +205,11 @@
     if (self.actionBlock) {
         self.actionBlock();
     }
+}
+
+- (void)caseBannerIndex:(NSInteger)index{
+    
+    NSLog(@"%@",self.itemFrameModel.item.pics[index]);
 }
 
 

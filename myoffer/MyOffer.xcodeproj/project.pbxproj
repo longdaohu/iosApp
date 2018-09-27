@@ -2800,9 +2800,9 @@
 		AE07A0D62106C7FA00581073 /* HomeRoom */ = {
 			isa = PBXGroup;
 			children = (
-				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AED3C473212E61FB00A5668C /* RoomBaseVC.h */,
 				AED3C474212E61FB00A5668C /* RoomBaseVC.m */,
+				AE8A76A6210B1C480079D239 /* RoomSearch */,
 				AED3C47D212FE47600A5668C /* RoomMap */,
 				AE4BBD082110597A00209FC8 /* RoomItem */,
 				AEA03A4B211D9E5F007A791E /* RoomItemDetail */,
@@ -6739,7 +6739,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -8018,7 +8018,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

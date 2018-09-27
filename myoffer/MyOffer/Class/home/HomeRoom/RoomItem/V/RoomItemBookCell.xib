@@ -77,9 +77,6 @@
                         </state>
                         <state key="disabled" backgroundImage="button_light_unable"/>
                         <state key="highlighted" backgroundImage="button_red_highlight"/>
-                        <connections>
-                            <action selector="book:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lKc-i6-UjG"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="该价格为原价一次性付清价格；原价分期付款的价格为£280" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl9-RW-CYv">
                         <rect key="frame" x="20" y="79" width="280" height="29"/>

@@ -75,6 +75,11 @@
     self.shaper.path = path.CGPath;
 }
 
+- (void)dealloc{
+    
+    KDClassLog(@"预约表单成功提示 + RoomAppointSuccesView + dealloc");
+}
+
 
 @end
 

@@ -171,6 +171,7 @@
         
         RoomItemDetailVC *vc = [[RoomItemDetailVC alloc] init];
         vc.room_id = self.current_item.no_id;
+        vc.isFromMap = YES;
         PushToViewController(vc);
         
     }
@@ -353,12 +354,13 @@
     JHAnnotationView *currnt_annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:self.current_annotation];
     currnt_annotationView.annotationViewState = self.current_annotation.onSelected;
  
-    JHPointAnnotation *anno = (JHPointAnnotation *)annotation;
-    anno.onSelected =  YES;
-    JHAnnotationView *annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:anno];
-    annotationView.annotationViewState = anno.onSelected;
-    self.current_annotation = anno;
- 
+    
+    JHPointAnnotation *point = (JHPointAnnotation *)annotation;
+    point.onSelected =  YES;
+    JHAnnotationView *annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:point];
+    annotationView.annotationViewState = point.onSelected;
+    self.current_annotation = point;
+    [annotationView.superview  bringSubviewToFront:annotationView];
     
     self.current_item = self.items[self.current_annotation.index];
     [self.bgView reloadData];

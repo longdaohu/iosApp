@@ -11,5 +11,6 @@
 
 @interface RoomItemDetailVC : RoomBaseVC
 @property(nonatomic,copy)NSString *room_id;
+@property(nonatomic,assign)BOOL isFromMap;
 
 @end

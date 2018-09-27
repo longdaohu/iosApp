@@ -58,7 +58,6 @@
     [footer addSubview:alerLab];
     self.alerLab = alerLab;
     self.tableView.tableFooterView = footer;
-
 }
 
 - (void)setItems:(NSArray *)items{

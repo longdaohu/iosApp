@@ -29,23 +29,24 @@
     self.bookBtn.layer.shadowColor = XCOLOR_RED.CGColor;
     self.bookBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.bookBtn.layer.shadowOpacity = 0.3;
+    self.bookBtn.userInteractionEnabled = NO;
     
  }
 
 
-- (IBAction)book:(UIButton *)sender {
-    
-    if (self.actionBlock) {
-        self.actionBlock(self.item.roomtype_id);
-    }
-}
+//- (IBAction)book:(UIButton *)sender {
+//
+//    if (self.actionBlock) {
+//        self.actionBlock(self.item.roomtype_id);
+//    }
+//}
 
 
 - (void)setItem:(RoomTypeBookItemModel *)item{
     _item = item;
     
     self.bookBtn.enabled = !item.state.boolValue;
-    UIColor *shadow_color = item.state.boolValue ?  XCOLOR_BLACK : XCOLOR_RED;
+    UIColor *shadow_color = item.state.boolValue ?  XCOLOR_line : XCOLOR_RED;
     self.bookBtn.layer.shadowColor = shadow_color.CGColor;
     
     self.subTitleLab.text = item.note;

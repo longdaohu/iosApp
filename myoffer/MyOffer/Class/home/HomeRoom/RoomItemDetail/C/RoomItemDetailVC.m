@@ -23,13 +23,13 @@
 #import "Masonry.h"
 #import "MeiqiaServiceCall.h"
 #import "MyoffferAlertTableView.h"
-#import "RoomMapVC.h"
 #import "RoomAppointmentVC.h"
 
 @interface RoomItemDetailVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)MyoffferAlertTableView *tableView;
 @property(nonatomic,strong)RoomItemFrameModel *itemFrameModel;
 @property(nonatomic,strong)RoomNavigationView *nav;
+@property(nonatomic,strong)UIButton *bookBtn;
 
 @end
 
@@ -75,7 +75,7 @@
     footer.backgroundColor = XCOLOR_WHITE;
     footer.layer.shadowColor = [UIColor blackColor].CGColor;
     footer.layer.shadowOffset = CGSizeMake(0,3);
-    footer.layer.shadowOpacity = 0.4;
+    footer.layer.shadowOpacity = 0.2;
     footer.layer.cornerRadius = 8;
     CGFloat left_margin = 20;
     CGFloat bottom_margin = 30;
@@ -106,8 +106,10 @@
     [book setTitle:@"预订房间" forState:UIControlStateNormal];
     [book setBackgroundImage:XImage(@"button_red_right_nomal") forState:UIControlStateNormal];
     [book setBackgroundImage:XImage(@"button_red_right_highlight") forState:UIControlStateHighlighted];
+    [book setBackgroundImage:XImage(@"button_light_right_unable") forState:UIControlStateDisabled];
     book.titleLabel.font = XFONT(14);
     [footer addSubview:book];
+    self.bookBtn = book;
     [book addTarget:self action:@selector(caseBook) forControlEvents:UIControlEventTouchUpInside];
     [book mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(book_w);
@@ -275,7 +277,7 @@ static NSString *identify = @"cell";
     };
     
     self.nav.alpha_height =  roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT;
-    
+    self.bookBtn.enabled = !room.mark_sold.boolValue;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -284,10 +286,14 @@ static NSString *identify = @"cell";
 }
 
 - (void)caseMap{
- 
+
+    if (self.isFromMap) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
     RoomMapVC *vc = [[RoomMapVC alloc] init];
     vc.itemFrameModel = self.itemFrameModel;
-    
     PushToViewController(vc);
 }
 
@@ -314,9 +320,9 @@ static NSString *identify = @"cell";
 }
 
 - (void)caseHome{
-    
+    WeakSelf;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     });
 }
 

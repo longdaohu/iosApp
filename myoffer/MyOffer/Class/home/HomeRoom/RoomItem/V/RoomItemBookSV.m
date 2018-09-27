@@ -18,7 +18,7 @@
         
         self.backgroundColor = XCOLOR_WHITE;
         UIView *line = [[UIView alloc] init];
-        line.backgroundColor = XCOLOR_line;
+        line.backgroundColor = XCOLOR(244,247,250, 1);
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self);

@@ -52,7 +52,15 @@
     [self.view addSubview:cover];
     [cover addTarget:self action:@selector(caseCover) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, 0)];
+    [path addLineToPoint:CGPointMake(XSCREEN_WIDTH, 0)];
+    CAShapeLayer *shaper = [CAShapeLayer layer];
+    shaper.strokeColor = XCOLOR_line.CGColor;
+    shaper.lineWidth = 1;
+    shaper.lineDashPattern = @[@5];
+    shaper.path = path.CGPath;
+  
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, XSCREEN_HEIGHT, XSCREEN_WIDTH, 312)];
     self.bgView = bgView;
     bgView.backgroundColor = XCOLOR_WHITE;
@@ -89,7 +97,7 @@
     }];
     
     UIView *line_one = [UIView new];
-    line_one.backgroundColor = XCOLOR_RANDOM;
+    line_one.backgroundColor = XCOLOR_WHITE;
     [bgView addSubview:line_one];
     [line_one mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
@@ -97,6 +105,9 @@
         make.right.mas_equalTo(price_TF_High.mas_left).mas_offset(-10);
         make.centerY.mas_equalTo(price_TF_Low.mas_centerY);
     }];
+    [line_one.layer addSublayer:shaper];
+    line_one.clipsToBounds = YES;
+
     
     UILabel *timeTitleLab = [self  makeLabelWithText:@"租房周期（周）" textColor:XCOLOR_TITLE font:[UIFont boldSystemFontOfSize:14] superView:bgView];
     [timeTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -130,7 +141,6 @@
     }];
     
     UIView *line_time = [UIView new];
-    line_time.backgroundColor = XCOLOR_RANDOM;
     [bgView addSubview:line_time];
     [line_time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(line_one.mas_height);
@@ -138,6 +148,13 @@
         make.right.mas_equalTo(price_TF_High.mas_left).mas_offset(-10);
         make.centerY.mas_equalTo(time_TF_High.mas_centerY);
     }];
+    CAShapeLayer *shaper_time = [CAShapeLayer layer];
+    shaper_time.strokeColor = XCOLOR_line.CGColor;
+    shaper_time.lineWidth = 1;
+    shaper_time.lineDashPattern = @[@5];
+    shaper_time.path = path.CGPath;
+    [line_time.layer addSublayer:shaper_time];
+    line_time.clipsToBounds = YES;
  
  
     UIView *bottomView = [UIView new];
@@ -214,9 +231,9 @@
         
         CAShapeLayer *shaper = [CAShapeLayer layer];
         shaper.shadowColor =  XCOLOR_BLACK.CGColor;
-        shaper.shadowOffset = CGSizeMake(0, 0);
+        shaper.shadowOffset = CGSizeMake(0, 3);
         shaper.shadowRadius = 5;
-        shaper.shadowOpacity = 0.3;
+        shaper.shadowOpacity = 0.2;
         _shaper = shaper;
         [self.bgView.layer insertSublayer:shaper atIndex:0];
     }
@@ -304,6 +321,9 @@
             max = min;
             min = self.price_TF_Heigh.text;
         }
+        if (min.integerValue == 0) {
+            min = @"1";
+        }
         [parameter setValue:min forKey:@"min"];
         [parameter setValue:max forKey:@"max"];
     }
@@ -336,8 +356,7 @@
 #pragma mark : UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-//    NSInteger number = [textField.text integerValue];
-    
+ 
     if (textField == self.price_TF_low) {
         
     }
@@ -354,17 +373,11 @@
 
 - (void)textFieldValueChangeing:(UITextField *)textField{
     
-    if (textField == self.price_TF_low) {
-        
+    if ((textField == self.price_TF_low || textField == self.price_TF_Heigh) &&  (textField.text.integerValue > 1300) ) {
+            textField.text = @"1300";
     }
-    if (textField == self.price_TF_Heigh) {
-        
-    }
-    if (textField == self.time_TF_low) {
-        
-    }
-    if (textField == self.time_TF_Heigh) {
-        
+    if ((textField == self.time_TF_Heigh) && (textField.text.integerValue > 52)) {
+        textField.text = @"52";
     }
     
 }
