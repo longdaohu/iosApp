@@ -156,34 +156,34 @@
 }
 
 
-- (NSArray *)cell_arr{
+- (NSArray *)cell_heigh_arr{
     
     
-    if (!_cell_arr) {
+    if (!_cell_heigh_arr) {
         
         CGFloat mini_height = XSCREEN_HEIGHT * 0.8;
-        if (self.cell_courseDescription_height < mini_height) {
+        if (self.cell_courseDescription_height < mini_height && self.cell_courseDescription_height > HEIGHT_ZERO) {
             self.cell_courseDescription_height = mini_height;
         }
-        if (self.cell_courseOutline_height < mini_height) {
+        if (self.cell_courseOutline_height < mini_height && self.cell_courseDescription_height > HEIGHT_ZERO) {
             self.cell_courseOutline_height = mini_height;
         }
-        if (self.cell_courseQuestions_height < mini_height) {
+        if (self.cell_courseQuestions_height < mini_height && self.cell_courseDescription_height > HEIGHT_ZERO) {
             self.cell_courseQuestions_height = mini_height;
         }
-        if (self.cell_courseCaveat_height < mini_height) {
+        if (self.cell_courseCaveat_height < mini_height && self.cell_courseDescription_height > HEIGHT_ZERO) {
             self.cell_courseCaveat_height = mini_height;
         }
         
-        _cell_arr = @[
-                      @(self.cell_courseDescription_height),
-                      @(self.cell_courseOutline_height),
-                      @(self.cell_courseCaveat_height),
-                      @(self.cell_courseQuestions_height)
+        _cell_heigh_arr = @[
+                              @(self.cell_courseDescription_height),
+                              @(self.cell_courseOutline_height),
+                              @(self.cell_courseCaveat_height),
+                              @(self.cell_courseQuestions_height)
                       ];
     }
     
-    return _cell_arr;
+    return _cell_heigh_arr;
 }
 
 
@@ -191,29 +191,31 @@
     
     if (!_imagesFrame_arr) {
         
+        NSArray *items = @[[NSValue valueWithCGRect:CGRectZero]];
+        
         NSMutableArray *items_tmp = [NSMutableArray array];
         if (self.imageFrame_courseDescription.count > 0) {
             [items_tmp addObject:self.imageFrame_courseDescription];
         }else{
-            [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
+            [items_tmp addObject:items];
         }
         
         if (self.imageFrame_courseOutline > 0) {
             [items_tmp addObject:self.imageFrame_courseOutline];
         }else{
-            [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
+            [items_tmp addObject:items];
         }
 
         if (self.imageFrame_courseCaveats > 0) {
             [items_tmp addObject:self.imageFrame_courseCaveats];
         }else{
-            [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
+            [items_tmp addObject:items];
         }
         
         if (self.imageFrame_courseQuestions > 0) {
             [items_tmp addObject:self.imageFrame_courseQuestions];
         }else{
-            [items_tmp addObject:[NSValue valueWithCGRect:CGRectZero]];
+            [items_tmp addObject:items];
         }
         
         _imagesFrame_arr = items_tmp;

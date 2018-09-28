@@ -170,8 +170,10 @@
         cell =[[YSImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"YSimages"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.current_index = self.current_index;
-    cell.item = self.ysModel.catigory_Package_current;
+    if (self.ysModel.catigory_Package_current) {
+        cell.current_index = self.current_index;
+        cell.item = self.ysModel.catigory_Package_current;
+    }
     
     return cell;
 }
@@ -179,17 +181,17 @@
 
 #pragma mark :UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return  XSCREEN_HEIGHT;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    return  XSCREEN_HEIGHT;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (!self.ysModel.catigory_Package_current) {
         return  HEIGHT_ZERO;
     }else{
-        NSNumber *cell_value = self.ysModel.catigory_Package_current.cell_arr[self.current_index];
+        NSNumber *cell_value = self.ysModel.catigory_Package_current.cell_heigh_arr[self.current_index];
         return  [cell_value floatValue];
     }
 }

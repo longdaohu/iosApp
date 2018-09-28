@@ -36,7 +36,7 @@
 @property(nonatomic,strong)NSArray *imageFrame_courseDescription;
 @property(nonatomic,strong)NSArray *imageFrame_courseOutline;
 
-@property(nonatomic,strong)NSArray *cell_arr;
+@property(nonatomic,strong)NSArray *cell_heigh_arr;
 @property(nonatomic,strong)NSArray *imagesFrame_arr;
 
 
