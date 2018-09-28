@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *watchBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @property (nonatomic,assign)  FileListType  iFileListType;
 @property (nonatomic, strong) NSString *text;

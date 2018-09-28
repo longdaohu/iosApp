@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSString *iTranslationtext;
 @property (nonatomic, strong) NSString *iNickName;
 @property (nonatomic, strong) NSString *iTime;
-@property (nonatomic, copy)   bTranslationButtonClicked iTranslationButtonClicked;
+
 @property (nonatomic, strong) UIView *translationBorderView;
 
 @property (nonatomic, strong) NSString *cString;
@@ -60,7 +60,7 @@
             tLabel.backgroundColor = [UIColor clearColor];
             tLabel.font = TKFont(12);
 
-            tLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+//            tLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
             
             tLabel;
             
@@ -103,6 +103,8 @@
             tLabel.font = TKFont(15);
             tLabel.numberOfLines = 0;
             
+            tk_weakify(self);
+            
             tLabel.linkTapHandler = ^(TKLinkType linkType, NSString *string, NSRange range) {
                 if (linkType == TKLinkTypeURL) {//打开连接
                     if(![TKHelperUtil isURL:string]){
@@ -113,11 +115,12 @@
                     [[UIApplication sharedApplication] openURL:url];
                 }
             };
+            
             tLabel.linkLongPressHandler = ^(TKLinkType linkType, NSString *string, NSRange range) {
                 
                 if (linkType == TKLinkTypeURL) {//复制链接
-                    self.cString = string;
-                    [self becomeFirstResponder];
+                    weakSelf.cString = string;
+                    [weakSelf becomeFirstResponder];
                     UIMenuItem * item = [[UIMenuItem alloc]initWithTitle:MTLocalized(@"Menu.Copy") action:@selector(newFunc)];
                     [[UIMenuController sharedMenuController] setTargetRect:self.frame inView:self.superview];
                     [UIMenuController sharedMenuController].menuItems = @[item];

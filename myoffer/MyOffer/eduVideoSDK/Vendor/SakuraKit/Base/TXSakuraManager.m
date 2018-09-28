@@ -225,7 +225,7 @@ static NSMutableArray<TXSakuraName *> *_localSakuras;
         return _currentSakuraType;
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    TXSakuraType currentSakuraType = [[userDefaults objectForKey:kTXSakuraCurrentType] integerValue];
+    TXSakuraType currentSakuraType = (TXSakuraType)[[userDefaults objectForKey:kTXSakuraCurrentType] integerValue];
     return currentSakuraType;
 }
 
@@ -404,7 +404,7 @@ SEL getSelectorWithPattern(const char *prefix, const char *key, const char *suff
 + (UIStatusBarStyle)tx_statusBarStyleWithPath:(NSString *)path {
     NSString *stateStr = [self tx_stringWithPath:path];
     if ([stateStr isKindOfClass:[NSNumber class]]) {
-        return [self _enumValueWith:(NSNumber *)stateStr];
+        return (UIStatusBarStyle)[self _enumValueWith:(NSNumber *)stateStr];
     }
     if (![stateStr isKindOfClass:[NSString class]]) return UIStatusBarStyleDefault;
     
@@ -418,7 +418,7 @@ SEL getSelectorWithPattern(const char *prefix, const char *key, const char *suff
 + (UIBarStyle)tx_barStyleWithPath:(NSString *)path {
     NSString *barStyle = [self tx_stringWithPath:path];
     if ([barStyle isKindOfClass:[NSNumber class]]) {
-        return [self _enumValueWith:(NSNumber *)barStyle];
+        return (UIBarStyle)[self _enumValueWith:(NSNumber *)barStyle];
     }
     if (![barStyle isKindOfClass:[NSString class]]) return UIBarStyleDefault;
     
@@ -433,7 +433,7 @@ SEL getSelectorWithPattern(const char *prefix, const char *key, const char *suff
     NSString *kbAppearance = [self tx_stringWithPath:path];
     
     if ([kbAppearance isKindOfClass:[NSNumber class]]) {
-        return [self _enumValueWith:(NSNumber *)kbAppearance];
+        return (UIKeyboardAppearance)[self _enumValueWith:(NSNumber *)kbAppearance];
     }
     if (![kbAppearance isKindOfClass:[NSString class]]) return UIKeyboardAppearanceDefault;
     
@@ -450,7 +450,7 @@ SEL getSelectorWithPattern(const char *prefix, const char *key, const char *suff
     NSString *activityIndicatorStyle = [self tx_stringWithPath:path];
     
     if ([activityIndicatorStyle isKindOfClass:[NSNumber class]]) {
-        return [self _enumValueWith:(NSNumber *)activityIndicatorStyle];
+        return (UIActivityIndicatorViewStyle)[self _enumValueWith:(NSNumber *)activityIndicatorStyle];
     }
     if (![activityIndicatorStyle isKindOfClass:[NSString class]]) return UIActivityIndicatorViewStyleWhite;
     

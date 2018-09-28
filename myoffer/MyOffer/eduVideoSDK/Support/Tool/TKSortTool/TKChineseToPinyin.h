@@ -10,5 +10,5 @@
 @interface TKChineseToPinyin : NSObject
 + (NSString *) pinyinFromChiniseString:(NSString *)string;
 + (char) sortSectionTitle:(NSString *)string;
-char pinyinFirstLetter(unsigned short hanzi);
+char TKpinyinFirstLetter(unsigned short hanzi);
 @end

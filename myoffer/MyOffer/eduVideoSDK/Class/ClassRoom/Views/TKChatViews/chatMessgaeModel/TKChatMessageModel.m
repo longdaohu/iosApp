@@ -21,28 +21,28 @@
         _iMessageType = aMessageType;
         _iMessage     = aMessage;
         _iTime        = aTime;
-        switch (aMessageType) {
-            case MessageType_Teacher:
-            {
-                
-                 _iUserName     = [NSString stringWithFormat:@"%@(%@)",_iUserName,MTLocalized(@"Role.Teacher")];
-                 break;
-            }
-            case MessageType_Me:
-            {
-                _iUserName     = [NSString stringWithFormat:@"%@(%@)",_iUserName,MTLocalized(@"Role.Me")];
-                break;
-            }
-            case MessageType_OtherUer:{
-                _iUserName         = aUserName;
-            }
-            default:{
-                
+//        switch (aMessageType) {
+//            case MessageType_Teacher:
+//            {
+//
+//                 _iUserName     = [NSString stringWithFormat:@"%@(%@)",_iUserName,MTLocalized(@"Role.Teacher")];
+//                 break;
+//            }
+//            case MessageType_Me:
+//            {
+//                _iUserName     = [NSString stringWithFormat:@"%@(%@)",_iUserName,MTLocalized(@"Role.Me")];
+//                break;
+//            }
+//            case MessageType_OtherUer:{
+//                _iUserName         = aUserName;
+//            }
+//            default:{
+        
                 _iUserName     = aUserName;
-                 break;
-            }
-               
-        }
+//                 break;
+//            }
+        
+//        }
     }
     return self;
 }

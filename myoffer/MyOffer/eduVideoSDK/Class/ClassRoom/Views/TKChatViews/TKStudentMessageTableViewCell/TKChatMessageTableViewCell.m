@@ -79,16 +79,16 @@
             // 昵称
             tLabel.frame = CGRectMake(20 * Proportion,
                                       16 * Proportion,
-                                      100 * Proportion,
+                                      90,
                                       tTranslateLabelHeigh);
             
             tLabel.textAlignment = NSTextAlignmentLeft ;
-            tLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+//            tLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
             
             tLabel.sakura.textColor(ThemeKP(@"chatNameColor"));
             //            _iNickNameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
             tLabel.backgroundColor = [UIColor clearColor];
-            tLabel.font = TKFont(15);
+            tLabel.font = TKFont(14);
             tLabel;
             
         });
@@ -100,19 +100,6 @@
         
         // 文字
         _iMessageLabel = ({
-            
-            //            UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectMake(_iNickNameLabel.rightX,
-            //                                                                        _iNickNameLabel.y,
-            //                                                                        tContentWidth - _iNickNameLabel.rightX -tTranslateLabelHeigh - marginSize*2,
-            //                                                                        _iNickNameLabel.height)];
-            //
-            //            tLabel.sakura.textColor(ThemeKP(@"chatMessageColor"));
-            //            tLabel.backgroundColor = [UIColor clearColor];
-            //            tLabel.font = TKFont(15);
-            //            tLabel.numberOfLines = 0;
-            ////            tLabel.backgroundColor = UIColor.yellowColor;
-            //            tLabel;
-            
             TKLinkLabel *tLabel = [[TKLinkLabel alloc] initWithFrame:CGRectMake(_iNickNameLabel.rightX,
                                                                                 _iNickNameLabel.y,
                                                                                 tContentWidth - _iNickNameLabel.rightX -tTranslateLabelHeigh - marginSize*2,
@@ -201,8 +188,6 @@
             view.sakura.backgroundColor(ThemeKP(@"chatLineColor"));
             view;
         });
-        
-        
         _iMessageTranslationLabel = ({
             
             UILabel *tLabel = [[UILabel alloc] init];
@@ -231,17 +216,17 @@
     
     CGFloat tViewCap        =   10 * Proportion;
     CGFloat tContentWidth   =   CGRectGetWidth(self.contentView.frame);
-    CGFloat marginSize      =   16 * Proportion;
+    //    CGFloat marginSize      =   16 * Proportion;
     CGFloat tTranslateButtonWidth = 22 * Proportion;
     
     // 消息
-    _iMessageLabel.width = tContentWidth - _iNickNameLabel.rightX - tTranslateButtonWidth - marginSize*2;
+    _iMessageLabel.width = tContentWidth - _iNickNameLabel.rightX - _iTimeLabel.width ;
     [_iMessageLabel sizeToFit];
-    
     // 时间
-    _iTimeLabel.y = _iMessageLabel.bottomY;
-    _iTimeLabel.centerX = _iTranslationButton.centerX;
-    
+    _iTimeLabel.x = tContentWidth - _iTimeLabel.width;
+    _iTimeLabel.y = _iTranslationButton.bottomY;
+    // 翻译按钮
+    _iTranslationButton.centerX = _iTimeLabel.centerX;
     // 如果 翻译内容
     BOOL hiddenTrans = ([_iTranslationtext isEqualToString:@""] || !_iTranslationtext);
     _iMessageTranslationLabel.hidden = hiddenTrans;
@@ -393,7 +378,7 @@
 }
 - (void)setChatModel:(TKChatMessageModel *)chatModel{
     
-//    NSLog(@"liyanyan:%@",chatModel.iMessage);
+    //    NSLog(@"liyanyan:%@",chatModel.iMessage);
     _chatModel = chatModel;
     
     _iText               = chatModel.iMessage;
@@ -410,29 +395,6 @@
     
     
     [self resetView];
-}
-
-- (void)matchURL:(NSString *)text {
-    //url匹配
-    [self.urlArray removeAllObjects];
-    
-    NSString *urlPattern = @"((((https?|file|ftp|gopher|news|nntp):(?:\\/\\/)?){0,1}(?:[\\-;:&=\\+\\$,\\w]+@)?(([0-9\\.\\-]+:[0-9]+)|(([A-Za-z0-9]+[\\.\\-])+([A-Za-z0-9]+))|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)(([A-Za-z0-9]+[\\.\\-])+([A-Za-z0-9]+))))((?:\\/[\\+~%\\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\\/\\\\w]*))?)";
-    
-    //    NSString *urlPattern = @"(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?";
-    
-    
-    NSError *error;
-    NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:urlPattern options:0 error:&error];
-    if (!error) {
-        NSArray *results = [regular matchesInString:text options:0 range:NSMakeRange(0, text.length)];
-        for (NSTextCheckingResult *result in results) {
-            TKLog(@"%@ %@", NSStringFromRange(result.range), [text substringWithRange:result.range]);
-            [self.urlArray addObject:result];
-        }
-    }
-    else { // 如果有错误，则把错误打印出来
-        TKLog(@"error - %@", error);
-    }
 }
 
 #pragma 长按复制

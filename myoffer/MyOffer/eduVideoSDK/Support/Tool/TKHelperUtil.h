@@ -79,4 +79,8 @@
 + (UIImage *)resizableImageWithImageName:(NSString *)imageName;
 
 
+
++ (float)GetCpuUsage;
++ (CGFloat)GetCurrentTaskUsedMemory;
+
 @end

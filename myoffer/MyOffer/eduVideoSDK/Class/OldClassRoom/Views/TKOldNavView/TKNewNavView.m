@@ -71,7 +71,7 @@
         
         
         _roomType = roomType;
-        brushHeight = [TKUtil isiPhoneX]?self.frame.size.height-17:self.frame.size.height;
+        brushHeight = self.frame.size.height;
         _aParamDic = aParamDic;
         topY = 0;
         beginBtnY = 5;
@@ -637,20 +637,18 @@
             
             TKAlertView *alert = [[TKAlertView alloc]initWithTitle:MTLocalized(@"Prompt.prompt") contentText:MTLocalized(@"Prompt.FinishClass") leftTitle:MTLocalized(@"Prompt.Cancel") rightTitle:MTLocalized(@"Prompt.OK")];
             [alert show];
+            tk_weakify(self);
             alert.rightBlock = ^{
                 
                 
-                _beginAndEndClassButton.selected = NO;
+                weakSelf.beginAndEndClassButton.selected = NO;
 //                _classTimerLabel.text = @"";
 //                _classTimerImageView.hidden = YES;
-                [self setTime:0];
+                [weakSelf setTime:0];
                 
-                if (self.classoverBlock) {
-                    self.classoverBlock();
+                if (weakSelf.classoverBlock) {
+                    weakSelf.classoverBlock();
                 }
-            };
-            alert.lelftBlock = ^{
-                
             };
             
         }
@@ -800,6 +798,12 @@
           
         }
     }
+    // home键 更改状态
+    if([TKEduSessionHandle shareInstance].roomMgr.inBackground) {
+        _picButton.selected = NO;
+        [[TKEduSessionHandle shareInstance].whiteBoardManager choosePen:_picButton.selected];
+        
+    }
 }
 
 - (void)layoutSubviews{
@@ -833,5 +837,13 @@
     }
     
 }
-
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)destoy{
+    
+    [self.uploadView dissMissView];
+    
+}
 @end

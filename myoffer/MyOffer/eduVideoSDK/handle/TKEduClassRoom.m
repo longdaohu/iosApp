@@ -516,6 +516,7 @@ TKNavigationController* _iEduNavigationController = nil;
     _iEduNavigationController = nil;
     _iMoreController = nil;
     _iOneController = nil;
+    _oldRoomController = nil;
     
     _iStatus = EClassStatus_IDLE;
     _iRoomDelegate = nil;
@@ -645,6 +646,13 @@ TKNavigationController* _iEduNavigationController = nil;
             self.errorAlert = [[TKAlertView alloc]initWithTitle:MTLocalized(@"Prompt.prompt") contentText:alertMessage confirmTitle:MTLocalized(@"Prompt.OK")];
             [self.errorAlert show];
            
+            
+            [[TKEduSessionHandle shareInstance].whiteBoardManager resetWhiteBoardAllData];
+            [[TKEduSessionHandle shareInstance].whiteBoardManager clearAllData];
+            [TKEduSessionHandle shareInstance].whiteBoardManager = nil;
+            [[TKEduSessionHandle shareInstance] clearAllClassData];
+            [TKEduSessionHandle destory];
+            
             
             
         }

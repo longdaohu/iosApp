@@ -5605,7 +5605,7 @@ static char firstLetterArray[HANZI_COUNT] =
 "kdzctbyhyzqyyjxzcfbzzmjyxxsdczottbzljwfckscsxfyrlrygmbdthjxsqjccsbxyytswfbjdztnbcnzlcyzzpsacyzzsqqcs"
 "hzqydxlbpjllmqxqydzxsqjtzpxlcglqdcwzfhctdjjsfxjejjtlbgxsxjmyjjqpfzasyjnsydjxkjcdjsznbartcclnjqmwnqnc"
 "lllkbdbzzsyhqcltwlccrshllzntylnewyzyxczxxgdkdmtcedejtsyyssdqdfmxdbjlkrwnqlybglxnlgtgxbqjdznyjsjyjcjm"
-"rnymgrcjczgjmzmgxmmryxkjnymsgmzzymknfxmbdtgfbhcjhkylpfmdxlxjjsmsqgzsjlqdldgjycalcmzcsdjllnxdjffffjcn" //
+"rnymgrcjczgjmzmgxmmryxkjnymsgmzzymknfxmbdtgfbhcjhkylpfmdxlxjjsmsqgzsjlqdldgjycalcmzcsdjllnxdjffffjcn" 
 "fnnffpfkhkgdpqxktacjdhhzdddrrcfqyjkqccwjdxhwjlyllzgcfcqjsmlzpbjjblsbcjggdckkdezsqcckjgcgkdjtjllzycxk"
 "lqccgjcltfpcqczgwbjdqyzjjbyjhsjddwgfsjgzkcjctllfspkjgqjhzzljplgjgjjthjjyjzccmlzlyqbgjwmljkxzdznjqsyz"
 "mljlljkywxmkjlhskjhbmclyymkxjqlbmllkmdxxkwyxwslmlpsjqqjqxyqfjtjdxmxxllcrqbsyjbgwynnggbcnxpjtgpapfgdj"
@@ -5807,7 +5807,7 @@ static char firstLetterArray[HANZI_COUNT] =
 "whxgzxwznnqzjzjjqjccchykxbzszcnjtllcqxynjnckycynccqnxyewyczdcjycchyjlbtzyycqwlpgpyllgktltlgkgqbgychj"
 "xy";
 
-char pinyinFirstLetter(unsigned short hanzi) {
+char TKpinyinFirstLetter(unsigned short hanzi) {
     int index = hanzi - HANZI_START;
     if (index >= 0 && index <= HANZI_COUNT) {
         return firstLetterArray[index];
@@ -5857,7 +5857,7 @@ char pinyinFirstLetter(unsigned short hanzi) {
            ([string characterAtIndex:0] > 96 && [string characterAtIndex:0] < 123) ) {
             cLetter = [string characterAtIndex:0];
         } else
-            cLetter = pinyinFirstLetter((unsigned short)[string characterAtIndex:0]);
+            cLetter = TKpinyinFirstLetter((unsigned short)[string characterAtIndex:0]);
         
         if(cLetter > 95)
             cLetter -= 32;

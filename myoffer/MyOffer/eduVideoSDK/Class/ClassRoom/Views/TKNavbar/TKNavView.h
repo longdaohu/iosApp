@@ -21,6 +21,7 @@
 
 - (void)setTitle:(NSString *)title;
 - (void)setTime:(NSTimeInterval)time;
+- (void)showDeviceInfo;
 
 - (void)refreshUI:(BOOL)add;
 - (void)setHandButtonState:(BOOL)isHandup;

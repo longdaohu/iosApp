@@ -76,7 +76,7 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 /**
  进入房间的函数
 
- @param paramDic NSDictionary类型，键值需要传递serial（课堂号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）、uiserid(用户ID，可选)、password(密码)
+ @param paramDic NSDictionary类型，键值需要传递serial（课堂号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）、uiserid(用户ID，可选)、password(密码)、clientType(客户端类型）
  @param controller 当前页面的控制器，通常与下边delegate相同
  @param delegate 遵循TKEduEnterClassRoomDelegate代理，供给用户进行处理
  @param isFromWeb 是否是从网址链接进入进入
@@ -90,7 +90,7 @@ static NSString*const sTKRoomViewControllerDisappear = @"sTKRoomViewControllerDi
 /**
  进入回放房间的函数
  
- @param paramDic NSDictionary类型，键值需要传递serial（课堂号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）、uiserid(用户ID，可选)、password(密码)
+ @param paramDic NSDictionary类型，键值需要传递serial（课堂号）、host（服务器地址）、port（服务器端口号）、nickname（用户昵称）、uiserid(用户ID，可选)、password(密码)、clientType(客户端类型）
  @param controller 当前页面的控制器，通常与下边delegate相同
  @param delegate 遵循TKEduEnterClassRoomDelegate代理，供给用户进行处理
  @param isFromWeb 是否是从网址链接进入进入

@@ -65,7 +65,7 @@
         _isShow = NO;
         
         [self createUploadPhotosButton];
-        
+   
     }
     return self;
 }
@@ -189,10 +189,11 @@
             
             TKMediaDocModel *tMediaDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
             
-            if (_switchfileType == SystemFileType) {
-                cell.hiddenDeleteBtn = YES;
-            }
+           
             [cell configaration:tMediaDocModel withFileListType:FileListTypeAudioAndVideo isClassBegin:_isClassBegin];
+            if (_switchfileType == SystemFileType) {
+                 cell.deleteBtn.hidden = YES;
+            }
         }
             break;
         case FileListTypeDocument:
@@ -207,8 +208,12 @@
             tString = [NSString stringWithFormat:@"%@(%@)", MTLocalized(@"Title.DocumentList"),@([[TKEduSessionHandle shareInstance].docmentArray count])];
             
             TKDocmentDocModel *tMediaDocModel = [_iFileMutableArray objectAtIndex:indexPath.row];
-            
+          
             [cell configaration:tMediaDocModel withFileListType:FileListTypeDocument isClassBegin:_isClassBegin];
+            if (_switchfileType == SystemFileType) {
+                cell.deleteBtn.hidden = YES;
+            }
+            
         }
             break;
         default:
@@ -545,6 +550,7 @@
     if (self.documentDelegate && [self.documentDelegate respondsToSelector:@selector(deleteFile)]) {
         [self.documentDelegate deleteFile];
         
+        
     }
     
     
@@ -610,10 +616,12 @@
                     
                     TKDocmentDocModel *tDocmentDocNextModel = [[TKEduSessionHandle shareInstance] getNextDocment:[TKEduSessionHandle shareInstance].iCurrentDocmentModel];
                     if (_isClassBegin) {
-                        [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocNextModel To:sTellAllExpectSender aTellLocal:YES];
+                        [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:tDocmentDocNextModel To:sTellAll aTellLocal:YES];
                         
                     }else{
-                        [[TKEduSessionHandle shareInstance].whiteBoardManager changeDocumentWithFileID:tDocmentDocNextModel.fileid isBeginClass:[TKEduSessionHandle shareInstance].isClassBegin isPubMsg:YES];
+                        [[TKEduSessionHandle shareInstance].whiteBoardManager changeDocumentWithFileID:tDocmentDocNextModel.fileid
+                                                                                          isBeginClass:_isClassBegin
+                                                                                              isPubMsg:YES];
                         
                     }
                     

@@ -63,6 +63,70 @@ int expireSeconds;      // 课堂结束时间
     UIView *videoOriginSuperView; // 画中画视频初始父视图
 }
 
+
+@property (nonatomic, strong) NSTimer *iClassCurrentTimer;
+@property (nonatomic, strong) NSTimer *iClassTimetimer;
+@property (nonatomic, assign) BOOL iIsCanRaiseHandUp;//是否可以举手
+//移动
+@property(nonatomic,assign)CGPoint iCrtVideoViewC;
+@property(nonatomic,assign)CGPoint iStrtCrtVideoViewP;
+
+
+@property (nonatomic, strong) UIView *iTKEduWhiteBoardView;//白板视图
+
+@property (nonatomic, assign) RoomType iRoomType;//当前会议室
+@property (nonatomic, assign) UserType iUserType;//当前身份
+
+
+@property (nonatomic, assign) NSDictionary* iParamDic;//加入会议paraDic
+
+@property (nonatomic, strong) TKClassTimeView *iClassTimeView;
+
+@property(nonatomic,retain)UIView   *iRightView;//左视图
+@property(nonatomic,retain)UIView   *iBottomView;//视频视图
+
+//共享桌面
+@property (nonatomic, strong) TKBaseMediaView *iScreenView;
+//共享电影
+@property (nonatomic, strong) TKBaseMediaView *iFileView;
+
+@property (nonatomic, strong) UIButton *iUserButton;
+
+@property (nonatomic, strong) TKEduSessionHandle *iSessionHandle;
+@property (nonatomic, strong) TKEduRoomProperty *iRoomProperty;//课堂数进行
+@property (nonatomic, strong) NSMutableDictionary    *iPlayVideoViewDic;//播放的视频view的字典
+
+//视频相关
+@property (nonatomic, strong) TKOldVideoSmallView *iTeacherVideoView;//老师视频
+@property (nonatomic, strong) NSMutableArray  *iStudentVideoViewArray;//存放学生视频数组
+@property (nonatomic, strong) TKSplitScreenView *splitScreenView;//分屏视图
+@property (nonatomic, strong) NSMutableArray  *iStudentSplitViewArray;//存放学生视频数组
+@property (nonatomic, strong) NSMutableArray  *iStudentSplitScreenArray;//存放学生分屏视频数组
+@property (nonatomic, strong) NSDictionary    *iScaleVideoDict;//记录缩放的视频
+@property (nonatomic, assign) BOOL            addVideoBoard;
+@property (nonatomic, assign) BOOL            isLocalPublish;
+
+
+@property(nonatomic,retain)UIView *iMediaListView;
+
+@property (nonatomic,assign) CGRect inputContainerFrame;
+
+//拖动进来时的状态
+@property (nonatomic, strong) NSMutableDictionary    *iMvVideoDic;
+//媒体流
+@property (nonatomic, strong) TKBaseMediaView  *iMediaView;
+@property (nonatomic, strong) TKTimer   *iCheckPlayVideotimer;
+
+@property (nonatomic, strong) TKImagePickerController * iPickerController;
+
+@property (nonatomic, copy) NSString *currentServer;//当前服务
+
+@property (nonatomic, assign) BOOL isQuiting;//是否退出
+
+// 发生断线重连设置为YES，恢复后设置为NO
+@property (nonatomic, assign) BOOL networkRecovered;
+
+
 @property (nonatomic, assign) BOOL isConnect;
 
 @property (nonatomic, assign) NSInteger tabbarHeight;//tabbar高度
@@ -92,8 +156,6 @@ int expireSeconds;      // 课堂结束时间
 @property (nonatomic, strong) TKOldChatListView *chatView;//聊天视图
 @property (nonatomic, strong) TKControlView *controlView;//控制按钮视图
 
-#pragma mark pad
-@property(nonatomic,retain)TKDocumentListView *iUsertListView;
 //白板
 @property (nonatomic, assign) BOOL iShowBefore;//yes 出现过 no 没出现过
 @property (nonatomic, assign) BOOL iShow;//yes 出现过 no 没出现过
@@ -123,12 +185,14 @@ int expireSeconds;      // 课堂结束时间
 
 
 //iOS8.0以上手机横屏后会自动隐藏电池栏,需要设置一下方法不进行隐藏
--(void)setNeedsStatusBarAppearanceUpdate {
-    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
-}
+//-(void)setNeedsStatusBarAppearanceUpdate {
+//    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
+//}
+//设置是否隐藏
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
+
 
 - (instancetype)initWithDelegate:(id<TKEduRoomDelegate>)aRoomDelegate
                        aParamDic:(NSDictionary *)aParamDic
@@ -214,6 +278,7 @@ int expireSeconds;      // 课堂结束时间
     if (!_iCheckPlayVideotimer) {
         [self createTimer];
     }
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -618,12 +683,7 @@ int expireSeconds;      // 课堂结束时间
                 [[TKEduSessionHandle shareInstance].whiteBoardManager showToolbox:NO];
                 roomVC.titleView.toolsButton.selected = NO;
                 
-                //花名册：宽 7/10  高 9/10
-                //                CGFloat showHeight = roomVC.iTKEduWhiteBoardView.height*(9/10.0);
-                //                CGFloat showWidth = roomVC.iTKEduWhiteBoardView.width * (7/10.0);
-                //                CGFloat x = (roomVC.iTKEduWhiteBoardView.width-showWidth)/2.0;
-                //                CGFloat y = (roomVC.iTKEduWhiteBoardView.height-showHeight)/2.0;
-                
+                //花名册
                 CGFloat showHeight = (ScreenH-_navbarHeight-_sBottomViewHeigh)* (8/10.0);
                 CGFloat showWidth = roomVC.iTKEduWhiteBoardView.width * (8/10.0);
                 CGFloat x = (roomVC.iTKEduWhiteBoardView.width-showWidth)/2.0;
@@ -638,10 +698,6 @@ int expireSeconds;      // 课堂结束时间
                 };
                 [roomVC.userListView show:roomVC.iTKEduWhiteBoardView];
             }
-            
-            //            if ([TKEduSessionHandle shareInstance].iRoomProperties.iUserType == UserType_Patrol) {
-            //                roomVC.userListView.userInteractionEnabled = NO;
-            //            }
             
         }else{
             if (roomVC.userListView) {
@@ -963,7 +1019,8 @@ int expireSeconds;      // 课堂结束时间
     _chatView = [[TKOldChatListView alloc] initWithFrame: CGRectMake(tViewCap,
                                                                      CGRectGetMaxY(_iTeacherVideoView.frame),
                                                                      tViewWidth,
-                                                                     _iRightView.height - _iTeacherVideoView.height) userRole:[_iParamDic[@"userrole"]intValue]];
+                                                                     _iRightView.height - _iTeacherVideoView.height) userRole:[[_iSessionHandle.roomMgr getRoomProperty].roomrole intValue]];
+    
     
     [_iRightView addSubview:_chatView];
     
@@ -1143,6 +1200,7 @@ int expireSeconds;      // 课堂结束时间
     
     CGFloat tCap = VideoSmallViewMargins;
     CGFloat w = (_sBottomViewWidth-7*tCap)/6.0;
+    
     for (NSInteger i = 0; i < _iRoomProperty.iMaxVideo.intValue-1; ++i) {
         TKOldVideoSmallView *tOurVideoBottomView = [[TKOldVideoSmallView alloc]initWithFrame:CGRectMake(tCap*2 + tWidth,tCap + CGRectGetMinY(_iBottomView.frame), tWidth, tHeight) aVideoRole:EVideoRoleOther];
         tOurVideoBottomView.originalWidth = w;
@@ -1163,8 +1221,9 @@ int expireSeconds;      // 课堂结束时间
         };
         
         // 接收到调整大小的信令
+        tk_weakify(self);
         tOurVideoBottomView.onRemoteMsgResizeVideoViewBlock = ^CGRect(CGFloat scale) {
-            CGRect wbRect = self.iTKEduWhiteBoardView.frame;
+            CGRect wbRect = weakSelf.iTKEduWhiteBoardView.frame;
             CGRect videoRect = wtOurVideoBottomView.frame;
             CGFloat height = wtOurVideoBottomView.originalHeight * scale;
             CGFloat width = wtOurVideoBottomView.originalWidth *scale;
@@ -1254,7 +1313,7 @@ int expireSeconds;      // 课堂结束时间
         
         // 当缩放的视频窗口超出白板区域，调整视频窗口大小
         tOurVideoBottomView.resizeVideoViewBlock = ^CGRect{
-            CGRect wbRect = self.iTKEduWhiteBoardView.frame;
+            CGRect wbRect = weakSelf.iTKEduWhiteBoardView.frame;
             CGRect videoRect = wtOurVideoBottomView.frame;
             CGFloat height = 0;
             CGFloat width = 0;
@@ -1296,8 +1355,6 @@ int expireSeconds;      // 课堂结束时间
             
             return CGRectMake(wtOurVideoBottomView.center.x - width / 2.0, wtOurVideoBottomView.center.y - height / 2.0, width, height);
         };
-        
-        __weak typeof(self) weakSelf = self;
         tOurVideoBottomView.finishScaleBlock = ^{
             //缩放之后发布一下位移
             if (_iUserType == UserType_Teacher) {
@@ -1334,7 +1391,7 @@ int expireSeconds;      // 课堂结束时间
     CGFloat tWidth = _sStudentVideoViewWidth;
     CGFloat tHeight = _sStudentVideoViewHeigh;
     CGFloat tCap = VideoSmallViewMargins;
-    CGFloat left    = tCap;
+    CGFloat left    = [TKUtil isiPhoneX]?tCap+30:tCap;
     
     BOOL tStdOutBottom = NO;
     
@@ -1646,7 +1703,7 @@ int expireSeconds;      // 课堂结束时间
     tk_weakify(self);
     alert.rightBlock = ^{
         weakSelf.isQuiting = YES;
-        [self prepareForLeave:YES];
+        [weakSelf prepareForLeave:YES];
     };
     alert.lelftBlock = ^{
         weakSelf.isQuiting = NO;
@@ -1660,6 +1717,14 @@ int expireSeconds;      // 课堂结束时间
 {
     
     [self tapTable:nil];
+    [self.chatView removeFromSuperview];
+    self.chatView = nil;
+//    self.titleView  = nil;
+    [self.titleView destoy];
+    [self.titleView removeFromSuperview];
+    self.titleView = nil;
+    [_controlView dismissAlert];
+    [_listView dismissAlert];
     
     [[TKEduSessionHandle shareInstance]configureHUD:@"" aIsShow:NO];
     [self invalidateTimer];
@@ -1679,9 +1744,9 @@ int expireSeconds;      // 课堂结束时间
     
     if (aQuityourself) {
         [self unPlayVideo:_iSessionHandle.localUser.peerID];         // 进入教室不点击上课就退出，需要关闭自己视频
-        [_iSessionHandle.whiteBoardManager resetWhiteBoardAllData];
+//        [_iSessionHandle.whiteBoardManager resetWhiteBoardAllData];
         [_iSessionHandle sessionHandleLeaveRoom:nil];
-        [TKEduSessionHandle destory];
+//        [TKEduSessionHandle destory];
     }else{
         // 清理数据
         [self quitClearData];
@@ -1795,11 +1860,11 @@ int expireSeconds;      // 课堂结束时间
 //自己进入课堂
 - (void)sessionManagerRoomJoined{
     
-    [TKRoomManager setLogLevel:(TKLog_Info) logPath:@"" debugToConsole:YES];
     //移动端本机时间不对的话，能进入教室但是看不见课件,需退出课堂
     //    [self judgeDeviceTime];
     
     self.isConnect = NO;
+    
     
     [[TKEduSessionHandle shareInstance] sessionHandleSetDeviceOrientation:(UIDeviceOrientationLandscapeLeft)];
     
@@ -1850,9 +1915,9 @@ int expireSeconds;      // 课堂结束时间
     
     
     // 断线重连后主动获取奖杯数目
-    if (self.networkRecovered == NO) {
+//    if (self.networkRecovered == NO) {
         [self getTrophyNumber];
-    }
+//    }
     
     self.networkRecovered = YES;
     
@@ -2517,7 +2582,6 @@ int expireSeconds;      // 课堂结束时间
                             extension:(NSDictionary *)extension{
     
     //当聊天视图存在的时候，显示聊天内容。否则存储在未读列表中
-    
     [_chatView messageReceived:message fromID:peerID extension:extension];
     
     
@@ -2558,10 +2622,14 @@ int expireSeconds;      // 课堂结束时间
     if (!peerID) {
         peerID = _iSessionHandle.localUser.peerID;
     }
+    
+    TKRoomUser *user = [[TKEduSessionHandle shareInstance].roomMgr getRoomUserWithUId:peerID];
+    
     BOOL isMe = [peerID isEqualToString:tMyPeerId];
-    BOOL isTeacher =  [extension[@"role"] intValue] == UserType_Teacher?YES:NO;
+    BOOL isTeacher =  user.role == UserType_Teacher?YES:NO;
+    
     MessageType tMessageType = (isMe)?MessageType_Me:(isTeacher?MessageType_Teacher:MessageType_OtherUer);
-    TKChatMessageModel *tChatMessageModel = [[TKChatMessageModel alloc]initWithFromid:peerID aTouid:tMyPeerId iMessageType:tMessageType aMessage:msg aUserName:extension[@"nickname"] aTime:[TKUtil timestampToFormatString:ts]];
+    TKChatMessageModel *tChatMessageModel = [[TKChatMessageModel alloc]initWithFromid:peerID aTouid:tMyPeerId iMessageType:tMessageType aMessage:msg aUserName:user.nickName aTime:[TKUtil timestampToFormatString:ts]];
     
     [_iSessionHandle addOrReplaceMessage:tChatMessageModel];
     [self.chatView reloadData];
@@ -2981,6 +3049,8 @@ int expireSeconds;      // 课堂结束时间
         [[TKEduSessionHandle shareInstance] delePendingUser:tPeerId];
         
     }else if ([msgName isEqualToString:sVideoDraghandle]){//拖拽回调
+        
+        [self tapTable:nil];
         if(_iStudentSplitScreenArray.count>0){
             return;
         }
@@ -3033,6 +3103,8 @@ int expireSeconds;      // 课堂结束时间
         
         
     } else if ([msgName isEqualToString:sVideoSplitScreen]){//分屏回调
+        
+        [self tapTable:nil];
         
         NSDictionary *tDataDic = @{};
         if ([data isKindOfClass:[NSString class]]) {
@@ -3134,7 +3206,7 @@ int expireSeconds;      // 课堂结束时间
     else if ([msgName isEqualToString: sWBFullScreen]
              &&
              [_iSessionHandle.roomMgr getRoomConfigration].coursewareFullSynchronize
-             ) {
+             ) {//课件全屏
         NSDictionary *dic = nil;
         if ([data isKindOfClass:[NSString class]]) {
             NSString *tDataString = [NSString stringWithFormat:@"%@",data];
@@ -3164,6 +3236,7 @@ int expireSeconds;      // 课堂结束时间
         _iTeacherVideoView.y = ScreenH - self.tabbarHeight - _iTeacherVideoView.height - 5.;
         
         [[UIApplication sharedApplication].keyWindow addSubview: _iTeacherVideoView];
+        [_iSessionHandle.whiteBoardManager fullScreen];
     }
     else{
         [_iTeacherVideoView removeFromSuperview];
@@ -3173,8 +3246,10 @@ int expireSeconds;      // 课堂结束时间
         
         // 播放中 隐藏画中画
         _iTeacherVideoView.hidden = [TKEduSessionHandle shareInstance].isPlayMedia;
+          [_iSessionHandle.whiteBoardManager exitFullScreen];
     }
     
+    [self boardOnFullScreen:isFull];
     [_iTeacherVideoView showMaskView: isFull];
 }
 - (void)sessionManagerIceStatusChanged:(NSString*)state ofUser:(TKRoomUser *)user {
@@ -3608,10 +3683,6 @@ int expireSeconds;      // 课堂结束时间
     return UIStatusBarStyleLightContent;
 }
 
-////设置是否隐藏
-//- (BOOL)prefersStatusBarHidden {
-//    return NO;
-//}
 
 //设置隐藏动画
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
@@ -4597,10 +4668,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
 - (void)quitClearData {
     [[TKEduSessionHandle shareInstance]configureDraw:false isSend:NO to:sTellAll peerID:[TKEduSessionHandle shareInstance].localUser.peerID];
-    //liyanyan
-    //    [[TKEduSessionHandle shareInstance].iBoardHandle disconnectCleanup];
+    
+    [[TKEduSessionHandle shareInstance].whiteBoardManager roomWhiteBoardOnDisconnect:nil];
+    
     [_iSessionHandle clearAllClassData];
-    //    [_iSessionHandle.iBoardHandle clearAllWhiteBoardData];
+    
+    [_iSessionHandle.whiteBoardManager resetWhiteBoardAllData];
+    
     [self clearVideoViewData:_iTeacherVideoView];
     
     for (TKOldVideoSmallView *view in _iStudentVideoViewArray) {
@@ -4626,10 +4700,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
     }
     [_splitScreenView deleteAllVideoSmallView];
     [_iStudentSplitScreenArray removeAllObjects];
-    
+    _iStudentSplitScreenArray = nil;
     
     [_iStudentVideoViewArray removeAllObjects];
-    _iStudentVideoViewArray = nil;
-    
+     _iStudentVideoViewArray = nil;
 }
 @end

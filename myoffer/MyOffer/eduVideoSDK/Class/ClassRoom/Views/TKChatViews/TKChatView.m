@@ -306,7 +306,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 //
 //}
 
-
+#pragma mark - 收到消息
 - (void)messageReceived:(NSString *)message
                  fromID:(NSString *)peerID
               extension:(NSDictionary *)extension{
@@ -358,7 +358,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     [_iChatTableView reloadData];
     
     if (_iMessageList.count>0) {
-        
+        // 滚动到消息列表最下边
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0  inSection:_iMessageList.count - 1];
         [_iChatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
@@ -368,8 +368,6 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 // 翻译
 - (void)reloadDataWithIndexPath: (NSIndexPath *)indexPath {
     
-//    _iMessageList = [[TKEduSessionHandle shareInstance] messageList];
-    
     // 单独计算翻译文本
     [self calculateTranslationHeight:_iMessageList[indexPath.section]];
     // 刷新单行（组）
@@ -377,7 +375,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
     
     if (_iMessageList.count > 0) {
         // 滚动到屏幕中央
-        [_iChatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [_iChatTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
  
     }
 }
@@ -418,6 +416,7 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    
     _toolView.inputField.text = _keyboardView.inputField.realText;
     
     // 1.键盘弹出需要的时间
@@ -636,16 +635,11 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
                                                                                 Font:TKFont(15)].height;
             obj.height = 16 * Proportion +// 消息内容上边距
                          obj.messageHeight +
-                         tTimeLabelHeigh;  // 时间高度
+                         tTimeLabelHeigh ;  // 时间高度
         }
-        
         
         // 翻译高度
-        if (obj.iTranslationMessage.length > 0 && !(obj.translationHeight > 0)) {// 如果未计算过
-            
-            [self calculateTranslationHeight:obj];
-            
-        }
+        [self calculateTranslationHeight:obj];
 
     }];
 }
@@ -653,13 +647,19 @@ static NSString *const sDefaultCellIdentifier           = @"defaultCellIdentifie
 // 计算翻译高度
 - (void)calculateTranslationHeight:(TKChatMessageModel *)obj {
 
-    obj.translationHeight = [TKChatMessageTableViewCell sizeFromAttributedString:obj.iTranslationMessage
-                                                                  withLimitWidth:tTranslateLabelWidth
-                                                                            Font:TKFont(15)].height;
-    
-    obj.height += tViewCap * 2 + // 分割线上下边距
-                  obj.translationHeight +
-                  tViewCap;
+    // 翻译高度
+    if (obj.iTranslationMessage.length > 0 && !(obj.translationHeight > 0)) {// 如果未计算过
+        
+        
+        obj.translationHeight = [TKChatMessageTableViewCell sizeFromAttributedString:obj.iTranslationMessage
+                                                                      withLimitWidth:tTranslateLabelWidth
+                                                                                Font:TKFont(15)].height;
+        
+        obj.height += tViewCap * 2 + // 分割线上下边距
+                      obj.translationHeight +
+                      tViewCap;
+        
+    }
     
 }
 

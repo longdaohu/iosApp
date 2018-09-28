@@ -39,6 +39,11 @@
 @property (nonatomic)BOOL isFrontCamera;
 @property (nonatomic)BOOL isNeedCameraBtn;
 @property (nonatomic, assign) CGFloat whiteBoardDocCurPage;
+
+
+@property (nonatomic, strong) UILabel *cpuLable;
+@property (nonatomic, strong) UILabel *memoryLable;
+
 @end
 
 @implementation TKNavView
@@ -203,6 +208,17 @@
         
         [self setTime:0];// 显示时间为00:00:00
         
+//         _cpuLable = ({
+//             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(_classTimerImageView.frame)-150, 0, 150, self.height)];
+//             [self addSubview:label];
+//             label;
+//         });
+//
+//        _memoryLable = ({
+//            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(_cpuLable.frame)-150, 0, 150, self.height)];
+//            [self addSubview:label];
+//            label;
+//        });
         
         
         //标题
@@ -521,8 +537,15 @@
     _classTimerLabel.hidden = NO;
     
     _classTimerLabel.text = [NSString stringWithFormat:@" %@:%@:%@",H,M,S];
-    
-    
+
+}
+
+- (void)showDeviceInfo{
+//   CGFloat cpu = [TKHelperUtil GetCpuUsage];
+//   CGFloat memory =  [TKHelperUtil GetCurrentTaskUsedMemory];
+//    
+//    _cpuLable.text = [NSString stringWithFormat:@"cpu:%.2f",cpu];
+//    _memoryLable.text = [NSString stringWithFormat:@"memory%.2f",memory];
     
 }
 - (void)layoutSubviews{
@@ -577,6 +600,11 @@
     
    
 }
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

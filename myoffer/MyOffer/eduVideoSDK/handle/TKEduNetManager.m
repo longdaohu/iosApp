@@ -225,15 +225,18 @@ extern int expireSeconds;
     NSString *tFrom = @"en";
     
     if (IS_CH_SYMBOL(ch)) {
-        tFrom = @"zh";
-        tTo = @"en";
+//        tFrom = @"zh";
+//        tTo = @"en";
+        tFrom =@"auto";
+        tTo   =@"en";
+    }else{
+        
     }
     
     NSNumber *tSaltNumber = @(arc4random());
     // APP_ID + query + salt + SECURITY_KEY;
      NSString *tSign =[TKUtil md5HexDigest:[NSString stringWithFormat:@"%@%@%@%@",sAPP_ID_BaiDu,aTranslationString,tSaltNumber,sSECURITY_KEY]];
     NSDictionary *tParamDic = @{@"appid":sAPP_ID_BaiDu,@"q":aTranslationString,@"from":tFrom,@"to":tTo,@"salt":tSaltNumber,@"sign":tSign};
-    
     
     //1。创建管理者对象
     TKAFHTTPSessionManager *manager = [TKAFHTTPSessionManager manager];
@@ -803,7 +806,7 @@ extern int expireSeconds;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
     NSURLSessionDownloadTask *download  =[manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
+      
         return [NSURL fileURLWithPath:filePath];
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {

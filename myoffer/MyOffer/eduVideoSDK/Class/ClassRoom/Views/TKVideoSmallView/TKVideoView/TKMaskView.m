@@ -324,6 +324,7 @@
 }
 - (void)refreshRaiseHandUI:(NSDictionary *)dict{
     
+    
     PublishState tPublishState = (PublishState)[[dict objectForKey:sPublishstate]integerValue];
     
     BOOL tAudioImageShow = !(tPublishState  == PublishState_BOTH || tPublishState == PublishState_AUDIOONLY );
@@ -374,8 +375,9 @@
         _drawDotView.hidden = !tDrawImageShow;
     }
     //    }
-    
-    if ([[dict allKeys] containsObject:sGiftNumber]) {
+//    TKRoomUser *user =  [[TKEduSessionHandle shareInstance].roomMgr localUser].peerID;
+    if ([[dict allKeys] containsObject:sGiftNumber] && [[[TKEduSessionHandle shareInstance].roomMgr localUser].peerID isEqualToString:dict[@"fromid"]]) {
+        
         
         NSString *numStr = [NSString stringWithFormat:@"X%@",dict[sGiftNumber]];
         
@@ -430,7 +432,12 @@
 }
 - (void)setIsSplit:(BOOL)isSplit{
     _isSplit = isSplit;
-    _drawDotView.hidden = isSplit;
+    
+    if (isSplit) {
+        _drawDotView.hidden = YES;
+    }else{
+        [self refreshUI];
+    }
     
 }
 /*

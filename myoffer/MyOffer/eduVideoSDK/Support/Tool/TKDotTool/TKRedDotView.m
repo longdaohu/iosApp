@@ -136,7 +136,10 @@ static NSHashTable *_needSetDefaultViews;
 
 - (void)_refreshFrame {
     self.bounds = CGRectMake(0, 0, self.radius * 2, self.radius * 2);
-    !self.refreshBlock ?: self.refreshBlock(self);
+    if (self.refreshBlock) {
+        self.refreshBlock(self);
+    }
+//    !self.refreshBlock ?: self.refreshBlock(self);
 }
 
 - (void)_refreshView {
@@ -229,7 +232,7 @@ static NSHashTable *_needSetDefaultViews;
                                                                    attribute:NSLayoutAttributeWidth
                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
                                                                       toItem:nil
-                                                                   attribute:0
+                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                   multiplier:1
                                                                     constant:80];
     [self addConstraint:layoutX];

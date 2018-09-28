@@ -20,9 +20,9 @@
 @property (nonatomic, assign) MessageType iMessageType;
 @property (nonatomic, strong) UIColor *  iMessageTypeColor;
 
-@property (nonatomic, assign) CGFloat messageHeight;
-@property (nonatomic, assign) CGFloat translationHeight;
-@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat messageHeight;// 消息高度
+@property (nonatomic, assign) CGFloat translationHeight;// 翻译高度
+@property (nonatomic, assign) CGFloat height;// 行高
 
 - (instancetype)initWithFromid:(NSString *)aFromid aTouid:(NSString *)aTouid iMessageType:(MessageType)aMessageType aMessage:(NSString *) aMessage aUserName:(NSString *)aUserName aTime:(NSString*)aTime;
 

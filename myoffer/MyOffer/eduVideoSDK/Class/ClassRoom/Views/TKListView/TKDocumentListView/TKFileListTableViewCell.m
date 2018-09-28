@@ -12,6 +12,8 @@
 #import "TKMediaDocModel.h"
 #import "TKUtil.h"
 #import "TKEduSessionHandle.h"
+#import "TKEduRoomProperty.h"
+
 
 #define ThemeKP(args) [@"TKDocumentListView." stringByAppendingString:args]
 
@@ -25,7 +27,6 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @end
 
@@ -62,8 +63,6 @@
 }
 
 -(void)configaration:(id)aModel withFileListType:(FileListType)aFileListType isClassBegin:(BOOL)isClassBegin{
-    // 媒体库 公共文件 隐藏删除按钮
-    _deleteBtn.hidden = _hiddenDeleteBtn;
     
     _iFileListType = aFileListType;
     switch (_iFileListType) {
@@ -102,7 +101,9 @@
             NSString *tTypeString = [TKHelperUtil docmentOrMediaImage:tDocModel.filetype?tDocModel.filetype:[tDocModel.filename pathExtension]];
             
             BOOL tIsCurrentDocment = false;
-            if (tDocModel.fileid == [TKEduSessionHandle shareInstance].whiteBoardManager.currentFileId) {
+//            [TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid
+//             [TKEduSessionHandle shareInstance].whiteBoardManager.currentFileId
+            if (tDocModel.fileid == [TKEduSessionHandle shareInstance].iCurrentDocmentModel.fileid) {
                 tIsCurrentDocment = true;
             }
 //            TKDocmentDocModel *tCurrentDocModel = [TKEduSessionHandle shareInstance].iCurrentDocmentModel;
@@ -120,7 +121,6 @@
             }else{
                 _deleteBtn.hidden =  NO;
             }
-            
         }
             break;
         default:

@@ -18,7 +18,7 @@
                              attribute:NSLayoutAttributeWidth
                              relatedBy:NSLayoutRelationEqual
                              toItem:nil
-                             attribute:0
+                             attribute:NSLayoutAttributeNotAnAttribute
                              multiplier:1
                              constant:width]];
     }
@@ -29,7 +29,7 @@
                              attribute:NSLayoutAttributeHeight
                              relatedBy:NSLayoutRelationEqual
                              toItem:nil
-                             attribute:0
+                             attribute:NSLayoutAttributeNotAnAttribute
                              multiplier:1
                              constant:height]];
     }

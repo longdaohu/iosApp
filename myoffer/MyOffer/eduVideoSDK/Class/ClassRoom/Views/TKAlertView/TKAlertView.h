@@ -8,8 +8,7 @@
 
 
 #import <UIKit/UIKit.h>
-
-#import <TKRoomSDK/TKRoomDefines.h>
+#import <TKRoomSDK/TKRoomSDK.h>
 
 @class TKMacro;
 

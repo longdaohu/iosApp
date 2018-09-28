@@ -28,6 +28,11 @@ PubMsg消息
                              inList:(BOOL)inlist
                                  ts:(long)ts;
 
+/**
+ msglist消息
+
+ @param msgList 消息
+ */
 - (void)onWhiteBoardOnRoomConnectedMsglist:(NSDictionary *)msgList;
 
 /**
@@ -40,6 +45,11 @@ PubMsg消息
  */
 - (void)onWhiteBoardExitAnnotation;
 
+/**
+ 白板全屏回调
+
+ @param isFull 是否全屏
+ */
 - (void)onWhiteBoardFullScreen:(BOOL)isFull;
 
 @end

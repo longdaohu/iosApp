@@ -183,7 +183,9 @@
         
         NSDictionary *giftInfo = [NSDictionary dictionaryWithDictionary:[TKUtil getDictionaryFromDic:_iRoomUser.properties Key:sGiftinfo]];
         if ([fromId isEqualToString:_iRoomUser.peerID] == NO) {
+            //123
             [self potStartAnimationForView:self giftinfo:giftInfo];
+            
         }
     }
 }
@@ -384,13 +386,6 @@
                       fromOldPoint:_gifView.layer.position
                         toNewPoint:CGPointMake(frame.origin.x + frame.size.width / 2, frame.origin.y + frame.size.height / 2)];
             
-            // trophy.dure
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-//                                         (int64_t)((_gifView.image.duration+0.5) * NSEC_PER_SEC)),
-//                           dispatch_get_main_queue(), ^{
-//
-//                               [_gifView removeFromSuperview];
-//                           });
         }
         else {
             
@@ -420,13 +415,15 @@
         
         _giftWav = LOADWAV(@"trophy_tones.wav");
         
-        if (!_iGiftAnimationView) {
-            _iGiftAnimationView = [[UIImageView alloc] init];
-            _iGiftAnimationView.frame = CGRectMake(0, 0, 100, 125);
-            
-            _iGiftAnimationView.center = CGPointMake(ScreenW/2, ScreenH/2);
-            [[UIApplication sharedApplication].keyWindow addSubview:_iGiftAnimationView];
+        if (_iGiftAnimationView) {
+            [_iGiftAnimationView removeFromSuperview];
+            _iGiftAnimationView = nil;
         }
+        _iGiftAnimationView = [[UIImageView alloc] init];
+        _iGiftAnimationView.frame = CGRectMake(0, 0, 100, 125);
+        
+        _iGiftAnimationView.center = CGPointMake(ScreenW/2, ScreenH/2);
+        [[UIApplication sharedApplication].keyWindow addSubview:_iGiftAnimationView];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -481,7 +478,7 @@
     animationScale2.fillMode = kCAFillModeForwards;
     // 缩放倍数
     animationScale2.fromValue = [NSNumber numberWithFloat:2.0]; // 开始时的倍率
-    animationScale2.toValue = [NSNumber numberWithFloat:0.1]; // 结束时的倍率
+    animationScale2.toValue = [NSNumber numberWithFloat:0.0]; // 结束时的倍率
     [animationScale2 setBeginTime:imageDuration];
     
     // 缩放动画
@@ -521,11 +518,11 @@
 
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     
-    [_iGiftAnimationView removeFromSuperview];
-    _iGiftAnimationView = nil;
-    
-    [_gifView removeFromSuperview];
-    _gifView = nil;
+//    [_iGiftAnimationView removeFromSuperview];
+//    _iGiftAnimationView = nil;
+//
+//    [_gifView removeFromSuperview];
+//    _gifView = nil;
     
     
     int currentGift = 0;
@@ -762,8 +759,6 @@
 
 
 
-//                [strongSelf potStartAnimationForView:strongSelf giftinfo:message];
-
             }aNetError:nil];
 
         };
@@ -786,7 +781,6 @@
             }
             
             [_iEduClassRoomSessionHandle sessionHandleChangeUserProperty:_iRoomUser.peerID TellWhom:sTellAll Key:sGiftNumber Value:@(currentGift + 1) completion:nil];
-//            [strongSelf potStartAnimationForView:strongSelf giftinfo:giftInfo];
 
 
         }aNetError:nil];

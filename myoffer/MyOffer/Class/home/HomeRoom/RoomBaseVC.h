@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/*
+   RoomBaseVC 用于网络请求及相关信息提示
+ */
 @interface RoomBaseVC : UIViewController
 
 - (void)cities:(NSInteger)countryCode showHUD:(BOOL)showHUD additionalSuccessAction:(void(^)(id response,int status))success additionalFailureAction:(void(^)(NSError *error,int status))failure;

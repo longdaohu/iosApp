@@ -413,13 +413,16 @@
         
         _giftWav = LOADWAV(@"trophy_tones.wav");
         
-        if (!_iGiftAnimationView) {
-            _iGiftAnimationView = [[UIImageView alloc] init];
-            _iGiftAnimationView.frame = CGRectMake(0, 0, 100, 125);
-            
-            _iGiftAnimationView.center = CGPointMake(ScreenW/2, ScreenH/2);
-            [[UIApplication sharedApplication].keyWindow addSubview:_iGiftAnimationView];
+        if (_iGiftAnimationView) {
+            [_iGiftAnimationView removeFromSuperview];
+            _iGiftAnimationView = nil;
         }
+        
+        _iGiftAnimationView = [[UIImageView alloc] init];
+        _iGiftAnimationView.frame = CGRectMake(0, 0, 100, 125);
+        
+        _iGiftAnimationView.center = CGPointMake(ScreenW/2, ScreenH/2);
+        [[UIApplication sharedApplication].keyWindow addSubview:_iGiftAnimationView];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -475,7 +478,7 @@
     animationScale2.fillMode = kCAFillModeForwards;
     // 缩放倍数
     animationScale2.fromValue = [NSNumber numberWithFloat:2.0]; // 开始时的倍率
-    animationScale2.toValue = [NSNumber numberWithFloat:0.1]; // 结束时的倍率
+    animationScale2.toValue = [NSNumber numberWithFloat:0.0]; // 结束时的倍率
     [animationScale2 setBeginTime:imageDuration];
     
     // 缩放动画
@@ -516,12 +519,11 @@
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     _iGiftCount++;
-    [_iGiftAnimationView removeFromSuperview];
-    _iGiftAnimationView = nil;
-    
-    
-    [_gifView removeFromSuperview];
-    _gifView = nil;
+//    [_iGiftAnimationView removeFromSuperview];
+//    _iGiftAnimationView = nil;
+//
+//    [_gifView removeFromSuperview];
+//    _gifView = nil;
     
     int currentGift = 0;
     if(_iRoomUser && _iRoomUser.properties && [_iRoomUser.properties objectForKey:sGiftNumber]){

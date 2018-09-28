@@ -164,9 +164,9 @@ static const CGFloat sStudentVideoViewWidth     = 120;
 @implementation TKOneToMoreRoomController
 
 //iOS8.0以上手机横屏后会自动隐藏电池栏,需要设置一下方法不进行隐藏
--(void)setNeedsStatusBarAppearanceUpdate {
-    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
-}
+//-(void)setNeedsStatusBarAppearanceUpdate {
+//    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
+//}
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -336,6 +336,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
 
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear: animated];
     
     [self addNotification];
@@ -343,7 +344,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     if (!_iCheckPlayVideotimer) {
         [self createTimer];
     }
-
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -400,7 +401,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
             
             NSString *str = params.firstObject;
             BOOL inList =[params.lastObject boolValue];
-            ((void(*)(id,SEL,NSString *,TKPublishState))objc_msgSend)(self, funcSel , str,inList);
+            ((void(*)(id,SEL,NSString *,BOOL))objc_msgSend)(self, funcSel , str,inList);
             
         }else if ([func isEqualToString:NSStringFromSelector(@selector(sessionManagerUserLeft:))]){
             
@@ -626,7 +627,8 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     __weak TKOneToMoreRoomController * roomVC = self;
     
     self.navbarView.leaveButtonBlock = ^{//离开课堂 （返回)
-        
+        //        [roomVC.iSessionHandle.whiteBoardManager webViewreload];
+        //        return;
         [roomVC leftButtonPress];
         
     };
@@ -1283,6 +1285,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         
         
     }];
+    
     _iTKEduWhiteBoardView.backgroundColor = [UIColor blackColor];
     [TKEduSessionHandle shareInstance].whiteboardView = _iTKEduWhiteBoardView;
     
@@ -1848,7 +1851,6 @@ static const CGFloat sStudentVideoViewWidth     = 120;
 }
 -(void)myPlayVideo:(TKRoomUser *)aRoomUser aVideoView:(TKVideoSmallView*)aVideoView completion:(void (^)(NSError *error))completion{
     
-    
     [_iSessionHandle sessionHandlePlayVideo:aRoomUser.peerID renderType:(TKRenderMode_adaptive) window:aVideoView completion:^(NSError *error) {
         
         aVideoView.iPeerId        = aRoomUser.peerID;
@@ -1886,7 +1888,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     tk_weakify(self);
     alert.rightBlock = ^{
         weakSelf.isQuiting = YES;
-        [self prepareForLeave:YES];
+        [weakSelf prepareForLeave:YES];
     };
     alert.lelftBlock = ^{
         weakSelf.isQuiting = NO;
@@ -1898,7 +1900,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
 -(void)prepareForLeave:(BOOL)aQuityourself
 {
     [self tapTable:nil];
-    
+    self.navbarView = nil;
     [self.tabbarView destoy];
     [_chatView dismissAlert];
     [_controlView dismissAlert];
@@ -2056,24 +2058,6 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     
     tk_weakify(self);
     
-    [TKEduNetManager getDefaultAreaWithComplete:^int(id  _Nullable response) {
-        if (response) {
-            NSString *serverName = [response objectForKey:@"name"];
-            if (serverName != nil && [TKUtil isDomain:sHost] == YES) {
-                NSArray *array = [sHost componentsSeparatedByString:@"."];
-                NSString *defaultServer = [NSString stringWithFormat:@"%@", array[0]];
-                if ([weakSelf.currentServer isEqualToString:defaultServer]) {
-                    weakSelf.currentServer = serverName;
-                }
-            }
-            
-            [[TKRoomManager instance] changeCurrentServer:self.currentServer];
-        }
-        return 0;
-    } aNetError:^int(id  _Nullable response) {
-        [[TKRoomManager instance] changeCurrentServer:self.currentServer];
-        return -1;
-    }];
     
     // 主动获取奖杯数目
     [self getTrophyNumber];
@@ -2238,7 +2222,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
             }];
         }else{//显示本地视频不发布
             _isLocalPublish = true;
-            _iSessionHandle.localUser.publishState = PublishState_Local_NONE;
+            _iSessionHandle.localUser.publishState =(TKPublishState) PublishState_Local_NONE;
             [[TKEduSessionHandle shareInstance] addPublishUser:_iSessionHandle.localUser];
             [[TKEduSessionHandle shareInstance] delePendingUser:_iSessionHandle.localUser.peerID];
             //            [_iSessionHandle.roomMgr enableAudio:YES];
@@ -2292,8 +2276,6 @@ static const CGFloat sStudentVideoViewWidth     = 120;
 }
 //观看视频
 - (void)sessionManagerPublishStateWithUserID:(NSString *)peerID publishState:(TKPublishState)state{
-    NSLog(@"%@,%ld",peerID,(long)state);
-    
     TKRoomUser *user = [[TKEduSessionHandle shareInstance].roomMgr getRoomUserWithUId:peerID];
     
     if (!user) {
@@ -2899,7 +2881,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
             
             // 上课之前将自己的音视频关掉
             if (![_iSessionHandle.roomMgr getRoomConfigration].autoOpenAudioAndVideoFlag && _isLocalPublish) {
-                _iSessionHandle.localUser.publishState = PublishState_NONE;
+                _iSessionHandle.localUser.publishState = TKUser_PublishState_NONE;
                 
                 [self sessionManagerPublishStateWithUserID:_iSessionHandle.localUser.peerID publishState:(TKUser_PublishState_NONE)];
             }
@@ -2929,9 +2911,6 @@ static const CGFloat sStudentVideoViewWidth     = 120;
                     _isLocalPublish = false;
                     [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:_iSessionHandle.localUser.peerID Publish:(PublishState_BOTH) completion:nil];
                 }
-//                if ([TKEduSessionHandle shareInstance].iCurrentDocmentModel) {
-//                    [[TKEduSessionHandle shareInstance] publishtDocMentDocModel:[TKEduSessionHandle shareInstance].iCurrentDocmentModel To:sTellAllExpectSender aTellLocal:NO];
-//                }
                 
             }
             
@@ -2970,10 +2949,9 @@ static const CGFloat sStudentVideoViewWidth     = 120;
             
             _iClassStartTime = ts;
             bool tIsTeacherOrAssis  = (_iUserType==UserType_Teacher || _iUserType == UserType_Assistant);
-            //liyanyan
-            //            [_iSessionHandle.iBoardHandle setAddPagePermission:tIsTeacherOrAssis];
+
             //如果是1v1并且是学生角色
-            BOOL isStdAndRoomOne = ([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student || [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher));
+            BOOL isStdAndRoomOne = ([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student));
             
             // 涂鸦权限:1.1v1学生根据配置项设置 2.其他情况，没有涂鸦权限 3 非老师断线重连不可涂鸦。 发送:1 1v1 学生发送 2 学生发送，老师不发送
             [[TKEduSessionHandle shareInstance]configureDraw:isStdAndRoomOne?[TKEduSessionHandle shareInstance].iIsCanDrawInit:tIsTeacherOrAssis isSend:isStdAndRoomOne?YES:!tIsTeacherOrAssis to:sTellAll peerID:tPeerId];
@@ -3162,6 +3140,8 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         [[TKEduSessionHandle shareInstance] delePendingUser:tPeerId];
         
     }else if ([msgName isEqualToString:sVideoDraghandle]){//拖拽回调
+        
+        [self tapTable:nil];
         if(_iStudentSplitScreenArray.count>0 || isFullPIP){
             return;
         }
@@ -3199,6 +3179,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         
     } else if ([msgName isEqualToString:sVideoSplitScreen]){//分屏回调
         
+        [self tapTable:nil];
         NSDictionary *tDataDic = @{};
         if ([data isKindOfClass:[NSString class]]) {
             NSString *tDataString = [NSString stringWithFormat:@"%@",data];
@@ -3272,6 +3253,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         [TKEduSessionHandle shareInstance].bigRoom = YES;
         
     }else if([msgName isEqualToString:sEveryoneBanChat]){//全体禁言
+     
         [TKEduSessionHandle shareInstance].isAllShutUp = add;
         if (add && inlist && _iSessionHandle.localUser.role == UserType_Student) {//如果是全体禁言并且后进入课堂
             
@@ -3297,7 +3279,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     else if ([msgName isEqualToString: sWBFullScreen]
              &&
              [[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].coursewareFullSynchronize// 配置项
-             ) {
+             ) {//白板全屏
         
         // 配置项
         if ([[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].coursewareFullSynchronize) {
@@ -3382,7 +3364,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         
         [[UIApplication sharedApplication].keyWindow addSubview: _iTeacherVideoView];
         // 隐藏按钮
-        [_tabbarView hideAllButton];
+        [_tabbarView hideAllButton:YES];
     }
     else{
         
@@ -3396,13 +3378,13 @@ static const CGFloat sStudentVideoViewWidth     = 120;
         _iTeacherVideoView.hidden = [TKEduSessionHandle shareInstance].isPlayMedia;
         
         // 显示按钮
-        [_tabbarView refreshUI];
+        [_tabbarView hideAllButton:NO];
     }
     
     // 隐藏小视频上的按钮 屏蔽操作
     [_iTeacherVideoView showMaskView:isFullPIP];
     
-   
+    
 }
 
 #pragma mark - media
@@ -4273,6 +4255,7 @@ static const CGFloat sStudentVideoViewWidth     = 120;
     //设置当前时间
     if(!_iSessionHandle.isPlayback){
         [self.navbarView setTime:_iLocalTime];
+        [self.navbarView showDeviceInfo];
     }
     
     //移动端本机时间不对的话，能进入教室但是看不见课件,需退出课堂
@@ -4681,10 +4664,15 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
 - (void)quitClearData {
     [[TKEduSessionHandle shareInstance]configureDraw:false isSend:NO to:sTellAll peerID:[TKEduSessionHandle shareInstance].localUser.peerID];
+    
     [[TKEduSessionHandle shareInstance].whiteBoardManager roomWhiteBoardOnDisconnect:nil];
+    
     [_iSessionHandle clearAllClassData];
+    
     [_iSessionHandle.whiteBoardManager resetWhiteBoardAllData];
+    
     [self clearVideoViewData:_iTeacherVideoView];
+    
     for (TKVideoSmallView *view in _iStudentVideoViewArray) {
         [self clearVideoViewData:view];
     }

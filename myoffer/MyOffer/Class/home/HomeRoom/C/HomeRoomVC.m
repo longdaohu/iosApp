@@ -22,13 +22,13 @@
 #import "RoomSearchResultVC.h"
 #import "RoomMapVC.h"
 #import "RoomBannerView.h"
+#import "HomeRoomIndexModel.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
-@property(nonatomic,strong)HomeRoomIndexFrameObject *UKRoomFrameObj;
-@property(nonatomic,strong)HomeRoomIndexFrameObject *AURoomFrameObj;
-@property(nonatomic,assign)BOOL isUK;
 @property(nonatomic,strong)RoomBannerView *eventCellView;
+@property(nonatomic,strong) HomeRoomIndexModel *roomModel;
+
 @end
 
 @implementation HomeRoomVC
@@ -55,6 +55,14 @@
     return _eventCellView;
 }
 
+- (HomeRoomIndexModel *)roomModel{
+    
+    if (!_roomModel) {
+        _roomModel = [[HomeRoomIndexModel alloc] init];
+    }
+    return _roomModel;
+}
+
 - (void)makeUI{
 
     WeakSelf
@@ -68,14 +76,12 @@
     NSString * appSecret = @"8ec406d891d9ba9278a3ced8d8b13b39";
     [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
     [[HttpsApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
-    
     BOOL (^pVerifyCerts)(NSURLAuthenticationChallenge *x);
     pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler)
     {
         return YES;
     };
     [[[HttpsApiClient_API_51ROOM instance] client] setVerifyHttpsCert:pVerifyCerts];
-    self.isUK = YES;
 }
 
 
@@ -157,9 +163,8 @@ static NSString *identify = @"cell";
 #pragma mark : 数据加载
 - (void)makeData{
     
-    NSInteger  index = self.isUK ? 0 : 4;
     WeakSelf
-    [[HttpsApiClient_API_51ROOM instance] homepage:index completionBlock:^(CACommonResponse *response) {
+    [[HttpsApiClient_API_51ROOM instance] homepage:self.roomModel.country_code completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
         if (![status isEqualToString:@"200"]) {
             NSLog(@" 网络请求错误 ");
@@ -176,49 +181,47 @@ static NSString *identify = @"cell";
     HomeRoomIndexObject *indexObj = [HomeRoomIndexObject mj_objectWithKeyValues:dic];
     HomeRoomIndexFrameObject *roomFrameObj = [[HomeRoomIndexFrameObject alloc] init];
     roomFrameObj.item = indexObj;
-    self.roomFrameObj = roomFrameObj;
-    
-    if (self.isUK) {
-        self.UKRoomFrameObj = roomFrameObj;
+    if (self.roomModel.isUK) {
+        self.roomModel.UKRoomFrameObj = roomFrameObj;
     }else{
-        self.AURoomFrameObj = roomFrameObj;
+        self.roomModel.AURoomFrameObj = roomFrameObj;
     }
-    [self reLoadWithRoomData:roomFrameObj];
+    [self reLoadWithNewRoomData];
 }
 
-- (void)reLoadWithRoomData:(HomeRoomIndexFrameObject *)roomFrameObj{
+- (void)reLoadWithNewRoomData{
     
     for (myofferGroupModel *group in self.roomGroups) {
         
         if (group.type == SectionGroupTypeRoomHotActivity) {
-            if (roomFrameObj.item.events.count == 0) continue;
-            group.items = @[roomFrameObj];
-            group.cell_height_set = roomFrameObj.event_Section_Height;
-            self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, roomFrameObj.event_Section_Height);
-            NSArray *imageGroup = [roomFrameObj.item.events valueForKey:@"img"];
-            [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:roomFrameObj.event_item_size];
+            if (self.roomModel.current_roomFrameObj.item.events.count == 0) continue;
+            group.items = @[self.roomModel.current_roomFrameObj];
+            group.cell_height_set = self.roomModel.current_roomFrameObj.event_Section_Height;
+            self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.roomModel.current_roomFrameObj.event_Section_Height);
+            NSArray *imageGroup = [self.roomModel.current_roomFrameObj.item.events valueForKey:@"img"];
+            [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:self.roomModel.current_roomFrameObj.event_item_size];
         }
         
         if (group.type == SectionGroupTypeRoomHomestay) {
-            if (roomFrameObj.item.flats.count == 0) continue;
-            group.items = @[roomFrameObj];
-            group.cell_height_set = roomFrameObj.flat_Section_Height;
+            if (self.roomModel.current_roomFrameObj.item.flats.count == 0) continue;
+            group.items = @[self.roomModel.current_roomFrameObj];
+            group.cell_height_set = self.roomModel.current_roomFrameObj.flat_Section_Height;
         }
         if (group.type == SectionGroupTypeRoomApartmentRecommendation) {
-            if (roomFrameObj.item.accommodations.count == 0) continue;
-            group.items = @[roomFrameObj];
-            group.cell_height_set = roomFrameObj.accommodation_Section_Height;
+            if (self.roomModel.current_roomFrameObj.item.accommodations.count == 0) continue;
+            group.items = @[self.roomModel.current_roomFrameObj];
+            group.cell_height_set = self.roomModel.current_roomFrameObj.accommodation_Section_Height;
         }
         if (group.type == SectionGroupTypeRoomHotCity) {
             
-            if (roomFrameObj.item.hot_city.count == 0)  continue;
-            group.items = @[roomFrameObj];
-            group.cell_height_set = roomFrameObj.hot_city_Section_Height;
+            if (self.roomModel.current_roomFrameObj.item.hot_city.count == 0)  continue;
+            group.items = @[self.roomModel.current_roomFrameObj];
+            group.cell_height_set = self.roomModel.current_roomFrameObj.hot_city_Section_Height;
         }
         if (group.type == SectionGroupTypeRoomCustomerPraise) {
-            if (roomFrameObj.item.comments.count == 0) continue;
-            group.items = @[roomFrameObj];
-            group.cell_height_set = roomFrameObj.comment_Section_Height;
+            if (self.roomModel.current_roomFrameObj.item.comments.count == 0) continue;
+            group.items = @[self.roomModel.current_roomFrameObj];
+            group.cell_height_set = self.roomModel.current_roomFrameObj.comment_Section_Height;
             
         }
         
@@ -260,24 +263,20 @@ static NSString *identify = @"cell";
     
     switch (sender.tag) {
         case HomeRoomTopViewButtonTypeUK:{
-            self.isUK = YES;
-            
-            if (self.UKRoomFrameObj) {
-                self.roomFrameObj = self.UKRoomFrameObj;
-                [self reLoadWithRoomData:self.UKRoomFrameObj];
+            self.roomModel.isUK = YES;
+            if (self.roomModel.current_roomFrameObj) {
+                [self reLoadWithNewRoomData];
                 return;
             }
             [self makeData];
         }
              break;
         case HomeRoomTopViewButtonTypeAU:{
-            self.isUK = NO;
-            
-                if (self.AURoomFrameObj) {
-                    self.roomFrameObj = self.AURoomFrameObj;
-                    [self reLoadWithRoomData:self.AURoomFrameObj];
-                    return;
-                }
+            self.roomModel.isUK = NO;
+            if (self.roomModel.current_roomFrameObj) {
+                [self reLoadWithNewRoomData];
+                return;
+            }
             [self makeData];
         }
             break;
@@ -297,7 +296,7 @@ static NSString *identify = @"cell";
 - (void)caseMap{
     
     RoomMapVC *vc = [[RoomMapVC alloc] init];
-    vc.isUK = self.isUK;
+    vc.isUK = self.roomModel.isUK;
     PushToViewController(vc);
 }
 
@@ -351,7 +350,7 @@ static NSString *identify = @"cell";
 
 - (void)caseMoreCity{
     
-    HomeRoomIndexCityObject *item = self.roomFrameObj.item.hot_city.firstObject;
+    HomeRoomIndexCityObject *item = self.roomModel.current_roomFrameObj.item.hot_city.firstObject;
     [self caseCity:item];
 }
 

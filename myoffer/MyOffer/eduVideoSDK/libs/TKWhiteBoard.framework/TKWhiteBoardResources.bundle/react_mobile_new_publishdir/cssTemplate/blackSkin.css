@@ -24,18 +24,24 @@
     background: url("../img/new_black/dial/icon_close.png") no-repeat center center;
     background-size: 100% 100%;
     position: absolute;
-    right: -0.36rem;
+    right: -0.6rem;
     top: 0;
     cursor: pointer;
 }
-.skin_black .pad #dialDrag{
+.skin_black .pad #dialDrag.teacher{
     border-radius: 50%;
+    width: 6.4rem;
 }
 
 /*phone端的样式*/
-.skin_black .phone #dialDrag{
+.skin_black .phone #dialDrag.teacher{
     width: 4.3rem;
-    height: 3.89rem;
+    height: 3.69rem;
+    border-radius: 50%;
+}
+.skin_black .phone #dialDrag.student{
+    width: 3.69rem;
+    height: 3.69rem;
     border-radius: 50%;
 }
 .skin_black .phone .dial-teachComponent-turntable {
@@ -60,6 +66,15 @@
 
 /*抢答器的样式--------------------------------start------------------------------------------------------------------------------------------*/
 /*pad端的样式*/
+.skin_black .pad .responder-wrap{
+    width: 3.8rem;
+    height: 3.43rem;
+    margin: auto;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 130;
+}
 .skin_black .pad .nobody-click{
     background: url("../img/new_black/responder/kuang.png") no-repeat center center;
     background-size: 100% 100%;
@@ -129,6 +144,15 @@
 *
 *phone端的样式
 */
+.skin_black .phone .responder-wrap{
+    width: 2.84rem;
+    height: 2.34rem;
+    margin: auto;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 130;
+}
 .skin_black .phone .nobody-click{
     background: url("../img/new_black/responder/kuang.png") no-repeat center center;
     background-size: 100% 100%;
@@ -192,6 +216,18 @@
 /*抢答器的样式-------------------------------------------end-----------------------------------------------------------------------------------------*/
 
 /*计时器的样式-------------------------------------------start-----------------------------------------------------------------------------------------*/
+.skin_black .pad .timer-div.teacher{
+    position: absolute;
+    z-index: 130;
+    width:4.4rem;
+    height: 2.6rem;
+}
+.skin_black .pad .timer-div.student{
+    position: absolute;
+    z-index: 130;
+    width:3.56rem;
+    height:1.91rem;
+}
 .skin_black .pad .timer-teachTool-wrap {
     width:3.56rem;
     height: 2.6rem;
@@ -219,7 +255,7 @@
     background-size: 100% 100%;
     position: absolute;
     top:0;
-    right: -0.9rem;
+    right: -0.85rem;
     cursor: pointer;
 }
 .skin_black .pad .timer-teachTool-startBtn {
@@ -346,6 +382,17 @@
     color: #1A1A1C;
 }
 /*phone端的样式*/
+.skin_black .phone .timer-div.teacher{
+    position: absolute;
+    z-index: 130;
+    width:3.4rem;
+    height:1.93rem;
+}.skin_black .phone .timer-div.student{
+     position: absolute;
+     z-index: 130;
+     width:2.31rem;
+     height:1.31rem;
+ }
 .skin_black .phone .timer-teachTool-wrap {
     width:2.31rem;
     height:1.93rem;
@@ -1826,7 +1873,9 @@
 .skin_black .app-mobile.phone .blackboard-function-btn-container{
     margin-right: 0.2rem;
 }
-
+.skin_black .app-mobile.pad .black-board-container .blackboard-tool-container  .blackboard-function-btn-container .blackboard-send-btn{
+    margin-right: 0.5rem;
+}
 
 
 
@@ -2048,6 +2097,12 @@
     height: 0.72rem;
 }
 .skin_black  .document-toolbar-root .document-toolbar-btn.full-screen-btn.isScreen:after{
+    background: url("../img/new_black/toolbar/common_icon_full_screen_small.png")no-repeat center center;
+    background-size: 100% 100%;
+    width: 0.72rem;
+    height: 0.72rem;
+}
+.skin_black  .big-literally-wrap.yes .document-toolbar-root .document-toolbar-btn.full-screen-btn:after{
     background: url("../img/new_black/toolbar/common_icon_full_screen_small.png")no-repeat center center;
     background-size: 100% 100%;
     width: 0.72rem;
@@ -2459,3 +2514,26 @@
 }
 
 
+.skin_black .limitBtn{
+    background:rgba(255,255,255,0.5);
+}
+.skin_black .limitBtn.active{
+    background:#FFFFFF;
+}
+
+.skin_black .preventBtn{
+    background: url(../img/new_black/holdArr/icon_left_default@2x.png) no-repeat center center ;
+    background-size: 100% 100%;
+}
+.skin_black .preventBtn.disabled{
+    background: url(../img/new_black/holdArr/icon_left_unclickable@2x.png) no-repeat center center ;
+    background-size: 100% 100%;
+}
+.skin_black .nextBtn{
+    background: url(../img/new_black/holdArr/icon_right_default@2x.png) no-repeat center center ;
+    background-size: 100% 100%;
+}
+.skin_black .nextBtn.disabled{
+    background: url(../img/new_black/holdArr/icon_right_unclickable@2x.png) no-repeat center center ;
+    background-size: 100% 100%;
+}

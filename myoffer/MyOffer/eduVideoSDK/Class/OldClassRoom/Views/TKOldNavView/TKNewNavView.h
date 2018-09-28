@@ -53,4 +53,5 @@
 
 - (void)refreshUI;
 - (void)setHandButtonState:(BOOL)isHandup;
+- (void)destoy;
 @end

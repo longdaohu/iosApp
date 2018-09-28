@@ -362,16 +362,12 @@
         }
     }
     
-    //如果是学生需要隐藏掉全屏按钮
-    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && [TKEduSessionHandle shareInstance].isClassBegin) {
-        self.pageControlView.wbControlView.fullScreenButton.hidden = [TKEduSessionHandle shareInstance].iIsFullState;
-        
+    // home键 更改状态
+    if([TKEduSessionHandle shareInstance].roomMgr.inBackground) {
+        _brushButton.selected = NO;
+        [[TKEduSessionHandle shareInstance].whiteBoardManager choosePen:_brushButton.selected];
+
     }
-    
-    //全屏状态按钮设置
-
-    self.pageControlView.wbControlView.fullScreenButton.selected = [TKEduSessionHandle shareInstance].iIsFullState;
-
 }
 
 - (void)updateView:(NSDictionary *)message{
@@ -412,17 +408,24 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)hideAllButton {
-    _toolsButton.hidden      =
-    _controlButton.hidden    =
-    _messageButton.hidden    =
-    _coursewareButton.hidden =
-    _memberButton.hidden     = YES;
+- (void)hideAllButton:(BOOL)hide {
+    
+    if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher) {
+        
+        _toolsButton.hidden      =
+        _controlButton.hidden    =
+        _messageButton.hidden    =
+        _coursewareButton.hidden =
+        _memberButton.hidden     = hide;
+    }
+    
+    self.pageControlView.wbControlView.fullScreenButton.selected = hide;
     //如果是学生需要隐藏掉全屏按钮
-    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher ) {
+    if([TKEduSessionHandle shareInstance].localUser.role != UserType_Teacher && [TKEduSessionHandle shareInstance].isClassBegin && [[TKEduSessionHandle shareInstance].roomMgr getRoomConfigration].coursewareFullSynchronize) {
         self.pageControlView.wbControlView.fullScreenButton.hidden = [TKEduSessionHandle shareInstance].iIsFullState;
        
     }
+    
 }
 
 - (void)destoy{

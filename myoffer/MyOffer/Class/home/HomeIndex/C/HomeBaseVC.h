@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HomeRoomIndexCityObject.h"
-#import "HomeRoomIndexCommentsObject.h"
-#import "HomeRoomIndexEventsObject.h"
-#import "HomeRoomIndexFlatsObject.h"
-#import "HomeRoomIndexFrameObject.h"
 #import "HomeSecView.h"
 #import "MyoffferAlertTableView.h"
 
 @interface HomeBaseVC : BaseViewController
-@property(nonatomic,strong)HomeRoomIndexFrameObject *roomFrameObj;
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,strong)UIView *headerView;
 @property(nonatomic,assign)UITableViewStyle type;

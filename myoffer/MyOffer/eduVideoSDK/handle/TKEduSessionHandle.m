@@ -56,6 +56,8 @@ static TKEduSessionHandle *singleton = nil;
 - (instancetype)init{
     if ([super init]) {
         _roomMgr = [TKRoomManager instance];
+        
+        [TKRoomManager setLogLevel:(TKLog_Info) logPath:@"" debugToConsole:YES];
         self.cacheMsgPool = [NSMutableArray array];
         self.UIDidAppear = NO;
         self.bigRoom = NO;
@@ -101,6 +103,14 @@ static TKEduSessionHandle *singleton = nil;
                              TKWhiteBoardPlayBackKey:@(NO),
                              };
     _whiteBoardManager = [TKWhiteBoardManager shareInstance];
+    tk_weakify(self);
+    _whiteBoardManager.webContentTerminateBlock = ^NSArray * _Nullable{
+        NSMutableArray *userArray = [NSMutableArray array];
+        for (TKRoomUser *user in weakSelf.iUserList) {
+            [userArray addObject:[TKModelToJson getObjectData:user]];
+        }
+        return userArray;
+    };
     [_whiteBoardManager registerDelegate:self configration:config];
     
     [self initClassRoomManager:true];
@@ -175,6 +185,16 @@ static TKEduSessionHandle *singleton = nil;
                              TKWhiteBoardPlayBackKey:@(YES),
                              };
     _whiteBoardManager = [TKWhiteBoardManager shareInstance];
+
+    tk_weakify(self);
+    _whiteBoardManager.webContentTerminateBlock = ^NSArray * _Nullable{
+        NSMutableArray *userArray = [NSMutableArray array];
+        for (TKRoomUser *user in weakSelf.iUserList) {
+            [userArray addObject:[TKModelToJson getObjectData:user]];
+        }
+        return userArray;
+    };
+
     [_whiteBoardManager registerDelegate:self configration:config];
     [self initPlaybackRoomManager:true];
     
@@ -322,7 +342,9 @@ static TKEduSessionHandle *singleton = nil;
 //
 //            break;
 //        case 2:
+//
 //            [_roomMgr publishAudio:nil];
+//
 //
 //            break;
 //        case 3:
@@ -1078,8 +1100,11 @@ static TKEduSessionHandle *singleton = nil;
             tIsCanPage = YES;
         }
     }
-    
-    [self.whiteBoardManager changeDocumentWithFileID:_iCurrentDocmentModel.fileid isBeginClass:self.isClassBegin isPubMsg:NO];
+    if (!tIsCanPage) {
+        
+        [self.whiteBoardManager changeDocumentWithFileID:_iCurrentDocmentModel.fileid isBeginClass:self.isClassBegin isPubMsg:NO];
+    }
+
 }
 
 - (void)onWhiteBroadFileList:(NSArray *)fileList

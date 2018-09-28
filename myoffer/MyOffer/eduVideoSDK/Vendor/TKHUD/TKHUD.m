@@ -10,7 +10,7 @@
 #import "TKHUD.h"
 #import "TKUDAnimationView.h"
 #import "UIView+TKHUD.h"
-#import "UIImage+TKHUD.h"
+//#import "UIImage+TKHUD.h"
 
 #define KLastWindow [[UIApplication sharedApplication].windows lastObject]
 
@@ -150,10 +150,10 @@ static TKHUD * hud;
 
 -(void)setGifImageData:(NSData *)gifImageData
 {
-    _gifImageData = gifImageData;
-
-    UIImage * image = [UIImage jHUDImageWithSmallGIFData:gifImageData scale:1];
-    self.imageView.image = image;
+//    _gifImageData = gifImageData;
+//
+//    UIImage * image = [UIImage jHUDImageWithSmallGIFData:gifImageData scale:1];
+//    self.imageView.image = image;
 }
 
 -(void)setindicatorViewSize:(CGSize)indicatorViewSize

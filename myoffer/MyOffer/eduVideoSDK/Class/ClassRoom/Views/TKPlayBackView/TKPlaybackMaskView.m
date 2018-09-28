@@ -15,7 +15,7 @@
 //#import "PlaybackModel.h"
 #define ThemeKP(args) [@"ClassRoom.PlayBack." stringByAppendingString:args]
 
-@interface TKPlaybackMaskView ()
+@interface TKPlaybackMaskView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, assign) BOOL isSlidering;
 //@property (nonatomic, assign) BOOL isSliderState; // slider 可用状态;
 

@@ -9,8 +9,35 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-
 #define TK_Deprecated(string) __attribute__((deprecated(string)))
+
+#
+#pragma mark - TKRoom 相关定义
+#
+//******调用joinroom 接口进入房间，roomParams字典参数所需 Key值******//
+//房间ID @required
+FOUNDATION_EXTERN NSString * const TKJoinRoomParamsRoomIDKey;
+//密码key值 @required，如果该房间或者该用户角色没有密码，value：@""
+FOUNDATION_EXTERN NSString * const TKJoinRoomParamsPasswordKey;
+
+//用户角色key值 @optional
+FOUNDATION_EXTERN NSString * const TKJoinRoomParamsUserRoleKey;
+//用户ID的key值 @optional，如果不传用户ID，sdk会自动生成用户ID
+FOUNDATION_EXTERN NSString * const TKJoinRoomParamsUserIDKey;
+
+
+//******调用pubMsg以及delMsg 接口发送信令，toID参数相关传值；表示：此信令需要通知的对象******//
+//所有人
+FOUNDATION_EXTERN NSString * const TKRoomPubMsgTellAll;
+//除自己以外的所有人
+FOUNDATION_EXTERN NSString * const TKRoomPubMsgTellAllExceptSender;
+//除旁听用户以外的所有人
+FOUNDATION_EXTERN NSString * const TKRoomPubMsgTellAllExceptAuditor;
+//不通知任何人
+FOUNDATION_EXTERN NSString * const TKRoomPubMsgTellNone;
+
+
+
 typedef void (^completion_block)(NSError *error);
 
 #
@@ -31,6 +58,12 @@ typedef NS_ENUM(NSInteger, TKRoomWarningCode) {
     
     TKRoomWarning_CheckRoom_Success                = 5001,    //CheckRoom 成功
     TKRoomWarning_ReConnectSocket_ServerChanged    = 5002,   //切换了服务器
+    TKRoomWarning_DevicePerformance_Low            = 5003,   //设备性能过低
+    
+    TKRoomWarning_Republishing            = 5004,//正在重新发布视频
+    TKRoomWarning_Resubscribing            = 5005,//正在重新订阅视频
+    
+    
 };
 
 #
@@ -119,6 +152,14 @@ typedef NS_ENUM(NSInteger, TKRenderMode) {
     TKRenderMode_adaptive, //等比拉伸，并占满全屏
 };
 #
+#pragma mark - TKVideoMirrorMode 视频渲染镜像模式
+#
+typedef NS_ENUM(NSUInteger, TKVideoMirrorMode) {
+    TKVideoMirrorModeAuto = 0,      //默认设置，前置摄像头时开启镜像模式，后置摄像头时不开启镜像
+    TKVideoMirrorModeEnabled = 1,   //前置和后置均开启镜像模式
+    TKVideoMirrorModeDisabled = 2,  //前置和后置均不开启镜像模式
+};
+#
 #pragma mark - TKLogLevel 日志等级
 #
 typedef NS_ENUM(NSInteger, TKLogLevel) {
@@ -157,6 +198,26 @@ typedef NS_ENUM(NSInteger, TKNetQuality) {
     TKNetQuality_VeryBad,       //极差
     TKNetQuality_Down,
 };
+
+typedef NS_ENUM(NSInteger, TKSampleFormat) {
+
+    TKSampleFormat_None = -1,
+    TKSampleFormat_U8,          ///< unsigned 8 bits
+    TKSampleFormat_S16,         ///< signed 16 bits
+    TKSampleFormat_S32,         ///< signed 32 bits
+    TKSampleFormat_FLT,         ///< float
+    TKSampleFormat_DBL,         ///< double
+    
+    TKSampleFormat_U8P,         ///< unsigned 8 bits, planar
+    TKSampleFormat_S16P,        ///< signed 16 bits, planar
+    TKSampleFormat_S32P,        ///< signed 32 bits, planar
+    TKSampleFormat_FLTP,        ///< float, planar
+    TKSampleFormat_DBLP,        ///< double, planar
+    TKSampleFormat_S64,         ///< signed 64 bits
+    TKSampleFormat_S64P,        ///< signed 64 bits, planar
+    
+    TKAVSampleFormat_NB           ///< Number of sample formats. DO NOT USE if linking dynamically
+};
 #
 #pragma mark - TKVideoProfile 视频属性
 #
@@ -191,12 +252,12 @@ typedef NS_ENUM(NSInteger, TKNetQuality) {
  */
 @property (assign, nonatomic) NSInteger samplesPerSec;
 
-@property (assign, nonatomic) NSInteger format;
+@property (assign, nonatomic) TKSampleFormat format;
 
 /**
  data buffer
  */
-@property (nonatomic) const void *buffer;
+@property (nonatomic) void *buffer;
 @end
 #
 #pragma mark - TKVideoFrame 视频数据
@@ -231,17 +292,17 @@ typedef NS_ENUM(NSInteger, TKNetQuality) {
 /**
  Y data buffer
  */
-@property (nonatomic) const void *yBuffer;
+@property (nonatomic) void *yBuffer;
 
 /**
  U data buffer
  */
-@property (nonatomic) const void *uBuffer;
+@property (nonatomic) void *uBuffer;
 
 /**
  V data buffer
  */
-@property (nonatomic) const void *vBuffer;
+@property (nonatomic) void *vBuffer;
 
 /**
  rotation of this frame (0, 90, 180, 270)
@@ -404,6 +465,11 @@ typedef NS_ENUM(NSInteger, TKNetQuality) {
  上课前是否发布视频
  */
 @property (nonatomic, assign) BOOL beforeClassPubVideoFlag;
+
+/**
+ 在白板中播放视频
+ */
+@property (nonatomic) BOOL coursewareOpenInWhiteboard;
 
 /**
  下课后不允许离开课堂

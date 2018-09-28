@@ -147,9 +147,9 @@ static const CGFloat sViewCap             = 10;
 @implementation TKOneToOneRoomController
 
 //iOS8.0以上手机横屏后会自动隐藏电池栏,需要设置一下方法不进行隐藏
--(void)setNeedsStatusBarAppearanceUpdate {
-    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
-}
+//-(void)setNeedsStatusBarAppearanceUpdate {
+//    TKLog(@"---self setNeedsStatusBarAppearanceUpdate---");
+//}
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -303,7 +303,7 @@ static const CGFloat sViewCap             = 10;
     if (!_iCheckPlayVideotimer) {
         [self createTimer];
     }
-
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -358,8 +358,8 @@ static const CGFloat sViewCap             = 10;
         }else if([func isEqualToString:NSStringFromSelector(@selector(sessionManagerUserJoined:InList:))]){
             
             NSString *str = params.firstObject;
-            BOOL inList =[params.lastObject boolValue];
-            ((void(*)(id,SEL,NSString *,TKPublishState))objc_msgSend)(self, funcSel , str,inList);
+            BOOL inList = [params.lastObject boolValue];
+            ((void(*)(id,SEL,NSString *,BOOL))objc_msgSend)(self, funcSel , str,inList);
             
         }else if ([func isEqualToString:NSStringFromSelector(@selector(sessionManagerUserLeft:))]){
             
@@ -1230,7 +1230,7 @@ static const CGFloat sViewCap             = 10;
 {
     
     [self tapTable:nil];
-    
+    self.navbarView = nil;
     [self.tabbarView destoy];
     
     [self.chatView dismissAlert];
@@ -1387,25 +1387,7 @@ static const CGFloat sViewCap             = 10;
     if (_iUserType == UserType_Teacher) {
         [[TKEduSessionHandle shareInstance].msgList removeAllObjects];
     }
-    
-    [TKEduNetManager getDefaultAreaWithComplete:^int(id  _Nullable response) {
-        if (response) {
-            NSString *serverName = [response objectForKey:@"name"];
-            if (serverName != nil && [TKUtil isDomain:sHost] == YES) {
-                NSArray *array = [sHost componentsSeparatedByString:@"."];
-                NSString *defaultServer = [NSString stringWithFormat:@"%@", array[0]];
-                if ([self.currentServer isEqualToString:defaultServer]) {
-                    self.currentServer = serverName;
-                }
-            }
-            
-            [[TKRoomManager instance] changeCurrentServer:self.currentServer];
-        }
-        return 0;
-    } aNetError:^int(id  _Nullable response) {
-        [[TKRoomManager instance] changeCurrentServer:self.currentServer];
-        return -1;
-    }];
+
     
     // 主动获取奖杯数目
     [self getTrophyNumber];
@@ -1452,7 +1434,7 @@ static const CGFloat sViewCap             = 10;
     //设置画笔等权限
     //    [[TKEduSessionHandle shareInstance]configureDrawAndPageWithControl:[_iSessionHandle.roomMgr getRoomProperty].chairmancontrol];
     
-    BOOL isStdAndRoomOne = ([[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype == RoomType_OneToOne && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student);
+    BOOL isStdAndRoomOne = ((RoomType)[[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student);
     bool tIsTeacherOrAssis  = ([TKEduSessionHandle shareInstance].localUser.role ==UserType_Teacher || [TKEduSessionHandle shareInstance].localUser.role ==UserType_Assistant);
     //巡课不能翻页
     if ([TKEduSessionHandle shareInstance].localUser.role == UserType_Patrol || [TKEduSessionHandle shareInstance].isPlayback) {
@@ -1629,7 +1611,7 @@ static const CGFloat sViewCap             = 10;
             }];
         }else{//显示本地视频不发布
             _isLocalPublish = true;
-            _iSessionHandle.localUser.publishState = PublishState_Local_NONE;
+            _iSessionHandle.localUser.publishState =(TKPublishState) PublishState_Local_NONE;
             [[TKEduSessionHandle shareInstance] addPublishUser:_iSessionHandle.localUser];
             [[TKEduSessionHandle shareInstance] delePendingUser:_iSessionHandle.localUser.peerID];
 //            [_iSessionHandle.roomMgr enableAudio:YES];
@@ -2236,20 +2218,20 @@ static const CGFloat sViewCap             = 10;
             
             // 上课之前将自己的音视频关掉
             if (![_iSessionHandle.roomMgr getRoomConfigration].autoOpenAudioAndVideoFlag && _isLocalPublish) {
-                _iSessionHandle.localUser.publishState = PublishState_NONE;
+                _iSessionHandle.localUser.publishState = TKUser_PublishState_NONE;
                 [self sessionManagerPublishStateWithUserID:_iSessionHandle.localUser.peerID publishState:(TKUser_PublishState_NONE)];
             }
             
             if (_iUserType == UserType_Student && [_iSessionHandle.roomMgr getRoomConfigration].beforeClassPubVideoFlag &&![_iSessionHandle.roomMgr getRoomConfigration].autoOpenAudioAndVideoFlag) {
                 
-                if (_iSessionHandle.localUser.publishState != PublishState_NONE) {
+                if (_iSessionHandle.localUser.publishState != TKUser_PublishState_NONE) {
                     _isLocalPublish = false;
-                    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:_iSessionHandle.localUser.peerID Publish:(PublishState_NONE) completion:nil];
+                    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:_iSessionHandle.localUser.peerID Publish:(TKUser_PublishState_NONE) completion:nil];
                 }
             }else if(_iUserType == UserType_Student && !_isLocalPublish &&![_iSessionHandle.roomMgr getRoomConfigration].autoOpenAudioAndVideoFlag){
-                if (_iSessionHandle.localUser.publishState != PublishState_NONE) {
+                if (_iSessionHandle.localUser.publishState != TKUser_PublishState_NONE) {
                     _isLocalPublish = false;
-                    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:_iSessionHandle.localUser.peerID Publish:(PublishState_NONE) completion:nil];
+                    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserPublish:_iSessionHandle.localUser.peerID Publish:(TKUser_PublishState_NONE) completion:nil];
                 }
             }
             
@@ -2306,9 +2288,9 @@ static const CGFloat sViewCap             = 10;
             
             _iClassStartTime = ts;
             bool tIsTeacherOrAssis  = (_iUserType==UserType_Teacher || _iUserType == UserType_Assistant);
-            //liyanyan
-            //            [_iSessionHandle.iBoardHandle setAddPagePermission:tIsTeacherOrAssis];
-            BOOL isStdAndRoomOne = ([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student || [TKEduSessionHandle shareInstance].localUser.role == UserType_Teacher));
+            
+            //如果是1v1并且是学生角色
+            BOOL isStdAndRoomOne = ([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && ([TKEduSessionHandle shareInstance].localUser.role == UserType_Student));
             // 涂鸦权限:1.1v1学生根据配置项设置2.其他情况，没有涂鸦权限 3 非老师断线重连不可涂鸦。 发送:1 1v1 学生发送 2 学生发送，老师不发送
             [[TKEduSessionHandle shareInstance] configureDraw:isStdAndRoomOne?[TKEduSessionHandle shareInstance].iIsCanDrawInit:tIsTeacherOrAssis isSend:isStdAndRoomOne?YES:!tIsTeacherOrAssis to:sTellAll peerID:tPeerId];
             
@@ -2370,7 +2352,7 @@ static const CGFloat sViewCap             = 10;
             // 隐藏授权 画笔 相机按钮
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TKTabbarViewHideICON" object:@{sCandraw: @(NO)}];
             
-            BOOL isStdAndRoomOne = ([[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype == RoomType_OneToOne && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student);
+            BOOL isStdAndRoomOne = ((RoomType)[[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue] == RoomType_OneToOne && [TKEduSessionHandle shareInstance].localUser.role == UserType_Student);
             //liyanyan
             //             [_iSessionHandle.iBoardHandle setAddPagePermission:false];
             bool tIsTeacherOrAssis  = ([TKEduSessionHandle shareInstance].localUser.role ==UserType_Teacher || [TKEduSessionHandle shareInstance].localUser.role == UserType_Assistant);
@@ -2594,7 +2576,7 @@ static const CGFloat sViewCap             = 10;
         [[UIApplication sharedApplication].keyWindow addSubview: moveView];
         
         // 隐藏按钮
-        [_tabbarView hideAllButton];
+        [_tabbarView hideAllButton:YES];
         
     }
     else{
@@ -2606,7 +2588,7 @@ static const CGFloat sViewCap             = 10;
         
         [self.view addSubview: moveView];
         // 显示按钮
-        [_tabbarView refreshUI];
+        [_tabbarView hideAllButton:NO];
     }
     
     // 隐藏小视频上的按钮 屏蔽操作
@@ -2662,7 +2644,7 @@ static const CGFloat sViewCap             = 10;
         }
         
         
-        [[TKEduSessionHandle shareInstance] sessionHandlePlayMediaFile:peerId renderType:0 window:tMediaView completion:^(NSError *error) {
+        [[TKEduSessionHandle shareInstance] sessionHandlePlayMediaFile:peerId renderType:TKRenderMode_fit window:tMediaView completion:^(NSError *error) {
             
             [_iMediaView setVideoViewToBack];
             if (hasVideo) {
@@ -2763,7 +2745,7 @@ static const CGFloat sViewCap             = 10;
             [self.view addSubview:_iScreenView];
         }
         
-        [[TKEduSessionHandle shareInstance] sessionHandlePlayScreen:peerId renderType:0 window:_iScreenView completion:nil];
+        [[TKEduSessionHandle shareInstance] sessionHandlePlayScreen:peerId renderType:TKRenderMode_fit window:_iScreenView completion:nil];
         
     }else{
         __weak typeof(self) wself = self;
@@ -2794,7 +2776,7 @@ static const CGFloat sViewCap             = 10;
         } else {
             [self.view addSubview:_iFileView];
         }
-        [[TKEduSessionHandle shareInstance] sessionHandlePlayFile:peerId renderType:0 window:_iFileView completion:^(NSError *error) {
+        [[TKEduSessionHandle shareInstance] sessionHandlePlayFile:peerId renderType:TKRenderMode_fit window:_iFileView completion:^(NSError *error) {
             if( _iSessionHandle.localUser.role != UserType_Teacher){
                 [_iFileView loadWhiteBoard];
             }
@@ -3250,6 +3232,7 @@ static const CGFloat sViewCap             = 10;
     //设置当前时间
     if(!_iSessionHandle.isPlayback){
         [self.navbarView setTime:_iLocalTime];
+        [self.navbarView showDeviceInfo];
     }
     
     [self invalidateClassReadyTime];

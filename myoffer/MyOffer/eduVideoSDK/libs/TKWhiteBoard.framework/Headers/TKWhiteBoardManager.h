@@ -11,8 +11,11 @@
 #import "TKWhiteBoardManagerDelegate.h"
 #import <TKRoomSDK/TKRoomSDK.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^loadFinishedBlock) (void);
+
+typedef NSArray* _Nullable (^WebContentTerminateBlock)(void);
 
 typedef NS_ENUM(NSUInteger, TKWhiteBoardErrorCode) {
     TKError_OK,
@@ -24,19 +27,21 @@ typedef UIView TKWhiteBoardView;
 
 @interface TKWhiteBoardManager : NSObject 
 
-@property (nonatomic, strong) NSDictionary *configration;
+@property (nonatomic, copy) WebContentTerminateBlock _Nullable webContentTerminateBlock;//webview内存过高白屏回调
 
-@property (nonatomic, readonly) NSDictionary *defaultConfig;
+@property (nonatomic, strong) NSDictionary *configration;//配置项
+
+@property (nonatomic, readonly) NSDictionary *defaultConfig;//默认配置
 
 @property (nonatomic, assign) NSNumber *currentFileId;//当前文档id
 
 @property (strong, nonatomic) NSMutableArray *cacheMsgPool;//缓存数据
 
-@property (assign, nonatomic) BOOL UIDidAppear;//
+@property (assign, nonatomic) BOOL UIDidAppear;//页面加载缓存标识
 
 @property (strong, nonatomic) NSMutableArray *preLoadingFileCacheMsgPool;//预加载文档缓存数据
 
-@property (assign, nonatomic) BOOL preloadingFished;
+@property (assign, nonatomic) BOOL preloadingFished;//预加载文档标识
 
 +(instancetype)shareInstance;
 /**
@@ -44,8 +49,14 @@ typedef UIView TKWhiteBoardView;
  */
 + (void)destory;
 
+/**
+ 注册白板
+ */
 - (void)registerDelegate:(id<TKWhiteBoardManagerDelegate>)delegate configration:(NSDictionary *)config;
 
+/**
+ 上下课设置
+ */
 - (void)setClassBegin:(BOOL)isBegin;
 
 //创建白板视图
@@ -189,7 +200,23 @@ typedef UIView TKWhiteBoardView;
  */
 - (void)deleteView:(NSString *)loadComponentName;
 
+/**
+ 房间失去连接
+
+ @param reason 原因
+ */
 - (void)roomWhiteBoardOnDisconnect:(NSString *)reason;
 
+/**
+ 清空所有数据
+ */
 - (void)clearAllData;
+
+
+/**
+ 重新加载白板  @此方法仅供白板测试使用
+ */
+- (void)webViewreload;
+
+NS_ASSUME_NONNULL_END
 @end

@@ -50,7 +50,7 @@
 /**
  隐藏所有控制按钮
  */
-- (void)hideAllButton;
+- (void)hideAllButton:(BOOL)hide;
 
 
 - (void)destoy;

@@ -11,7 +11,6 @@
 #import "TKChatMessageModel.h"
 
 
-typedef void(^bTranslationButtonClicked)(NSString *aTranslationString);
 
 @interface TKOldChatListTableViewCell : UITableViewCell
 

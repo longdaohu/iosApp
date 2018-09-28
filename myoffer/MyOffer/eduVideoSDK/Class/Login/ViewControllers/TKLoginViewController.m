@@ -411,7 +411,7 @@
                             @"host"    :sHost,
                             @"port"    :sPort,
                             @"nickname":_nicknameView.inputView.text,
-                            //@"userid"  : @"1111",
+//                            @"userid"  : @"1111",
                             //@"domain"   :sDomain,
                             @"userrole":@(_role),
                             @"server":self.defaultServer,

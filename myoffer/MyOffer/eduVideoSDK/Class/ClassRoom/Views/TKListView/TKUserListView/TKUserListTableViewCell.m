@@ -386,7 +386,7 @@
     }
     sender.selected = !sender.selected;
     
-    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:_roomUser.peerID TellWhom:_roomUser.peerID Key:sDisablechat Value:@(sender.selected) completion:nil];
+    [[TKEduSessionHandle shareInstance] sessionHandleChangeUserProperty:_roomUser.peerID TellWhom:sTellAll Key:sDisablechat Value:@(sender.selected) completion:nil];
     
     
 }

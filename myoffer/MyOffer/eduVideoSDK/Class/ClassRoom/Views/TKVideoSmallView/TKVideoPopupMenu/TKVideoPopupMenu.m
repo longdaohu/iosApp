@@ -134,7 +134,7 @@
         }else{
             
             //如果是1v1课堂 && 未开始上课 && 是老师
-            if ([[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype != RoomType_OneToOne && ![TKEduSessionHandle shareInstance].isClassBegin && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
+            if ((RoomType)([[[TKEduSessionHandle shareInstance].roomMgr getRoomProperty].roomtype intValue]) != RoomType_OneToOne && ![TKEduSessionHandle shareInstance].isClassBegin && [[TKEduSessionHandle shareInstance] localUser].role == EVideoRoleTeacher) {
                 tPoroFloat = 2.0;
             }else{
                 tPoroFloat = 3.0;

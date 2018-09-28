@@ -382,7 +382,14 @@
     }
     
     
-    
+    if ([[dict allKeys] containsObject:sGiftNumber] && [[[TKEduSessionHandle shareInstance].roomMgr localUser].peerID isEqualToString:dict[@"fromid"]]) {
+        
+        
+        NSString *numStr = [NSString stringWithFormat:@"X%@",dict[sGiftNumber]];
+        
+        [_trophyButton setTitle:numStr forState:(UIControlStateNormal)];
+        
+    }
     
     [self bringSubviewToFront:_toolView];
     
@@ -434,7 +441,13 @@
 - (void)setIsSplit:(BOOL)isSplit{
     _isSplit = isSplit;
     
-    _drawDotView.hidden = isSplit;
+    if (isSplit) {
+        
+        _drawDotView.hidden = YES;
+    }else{
+        [self refreshUI];
+    }
+    
 }
 /*
  // Only override drawRect: if you perform custom drawing.

@@ -12,4 +12,5 @@ target 'MyOffer' do
     pod 'SocketRocket'
     pod 'SSZipArchive'
     pod 'Mapbox-iOS-SDK'
+    pod 'HockeySDK'
 end
