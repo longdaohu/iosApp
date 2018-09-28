@@ -912,7 +912,7 @@
 		AEFDD8B4215E047D00B37194 /* TKProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFDD80A215E047B00B37194 /* TKProgressHUD.m */; };
 		AEFDD8B5215E047D00B37194 /* TKPromptMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFDD80C215E047B00B37194 /* TKPromptMessage.m */; };
 		AEFDD8B6215E047D00B37194 /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFDD80E215E047B00B37194 /* TKRCGlobalConfig.m */; };
-		AEFDD8B7215E076A00B37194 /* TKRoomSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AEFDD762215E047B00B37194 /* TKRoomSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AEFDD8B7215E076A00B37194 /* TKRoomSDK.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = AEFDD762215E047B00B37194 /* TKRoomSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEFDD8BB215E128900B37194 /* TKWhiteBoardResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEFDD8BA215E128900B37194 /* TKWhiteBoardResources.bundle */; };
 /* End PBXBuildFile section */
 
@@ -927,14 +927,15 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AED4AFA82141063D00D8B34D /* CopyFiles */ = {
+		AED4AFA82141063D00D8B34D /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AEFDD8B7215E076A00B37194 /* TKRoomSDK.framework in CopyFiles */,
+				AEFDD8B7215E076A00B37194 /* TKRoomSDK.framework in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -2520,7 +2521,6 @@
 		AEFDD80C215E047B00B37194 /* TKPromptMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPromptMessage.m; sourceTree = "<group>"; };
 		AEFDD80D215E047B00B37194 /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
 		AEFDD80E215E047B00B37194 /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
-		AEFDD8B8215E0C0800B37194 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AEFDD8BA215E128900B37194 /* TKWhiteBoardResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TKWhiteBoardResources.bundle; sourceTree = "<group>"; };
 		DAF97F809FE91DF51B65AFA9 /* libPods-MyOffer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyOffer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02B30ECEAFCB4EF5650AED2 /* Pods-MyOffer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOffer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2596,7 +2596,6 @@
 		463E3A401B230EDC00E0BAF8 = {
 			isa = PBXGroup;
 			children = (
-				AEFDD8B8215E0C0800B37194 /* HockeySDK.framework */,
 				463E3AC21B23121F00E0BAF8 /* Frameworks */,
 				463E3A721B23105E00E0BAF8 /* Vendor */,
 				463E3A4B1B230EDC00E0BAF8 /* MyOffer */,
@@ -6667,7 +6666,7 @@
 				463E3A471B230EDC00E0BAF8 /* Resources */,
 				8AE3B9FBC75CFF4642972ACF /* [CP] Copy Pods Resources */,
 				AED4AFA42141055300D8B34D /* Embed Frameworks */,
-				AED4AFA82141063D00D8B34D /* CopyFiles */,
+				AED4AFA82141063D00D8B34D /* Copy Files */,
 				C52FC71BA8B9E4C331185E7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -7010,7 +7009,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPhotoBrowser.bundle",
 				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPBLocalizations.bundle",
 				"${PODS_ROOT}/Meiqia/Meiqia-SDK-files/MQChatViewController/Assets/MQChatViewAsset.bundle",
@@ -7018,7 +7016,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IDMPhotoBrowser.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IDMPBLocalizations.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MQChatViewAsset.bundle",

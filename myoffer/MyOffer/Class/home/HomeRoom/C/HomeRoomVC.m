@@ -23,6 +23,7 @@
 #import "RoomMapVC.h"
 #import "RoomBannerView.h"
 #import "HomeRoomIndexModel.h"
+#import "HomeRoomIndexEventsObject.h"
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)NSArray *roomGroups;
@@ -46,10 +47,10 @@
 - (RoomBannerView *)eventCellView{
     
     if (!_eventCellView) {
-//        WeakSelf
+        WeakSelf
         _eventCellView = [RoomBannerView new];
         _eventCellView.actionBlock = ^(NSInteger index) {
-            
+            [weakSelf caseBanner:index];
         };
     }
     return _eventCellView;
@@ -344,7 +345,10 @@ static NSString *identify = @"cell";
         default:
             break;
     }
-    
+}
+
+- (void)caseBanner:(NSInteger)index{
+//    HomeRoomIndexEventsObject *item =  self.roomModel.current_roomFrameObj.item.events[index];
 }
 
 

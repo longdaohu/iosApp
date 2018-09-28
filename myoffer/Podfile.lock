@@ -2,9 +2,6 @@ PODS:
   - DACircularProgress (2.3.1)
   - FBRetainCycleDetector (0.1.4)
   - FLAnimatedImage (1.0.12)
-  - HockeySDK (5.1.2):
-    - HockeySDK/DefaultLib (= 5.1.2)
-  - HockeySDK/DefaultLib (5.1.2)
   - IDMPhotoBrowser (1.10.2):
     - DACircularProgress
     - pop
@@ -38,7 +35,6 @@ PODS:
     - Masonry
 
 DEPENDENCIES:
-  - HockeySDK
   - IDMPhotoBrowser
   - JPush
   - Mapbox-iOS-SDK
@@ -56,7 +52,6 @@ SPEC REPOS:
     - DACircularProgress
     - FBRetainCycleDetector
     - FLAnimatedImage
-    - HockeySDK
     - IDMPhotoBrowser
     - JCore
     - JPush
@@ -76,7 +71,6 @@ SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IDMPhotoBrowser: 4bb459b1faffc228e92bccdf7c54ad6d6b7e8c37
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
@@ -92,6 +86,6 @@ SPEC CHECKSUMS:
   SSZipArchive: d4009d2ce5520a421f231fd97028cc0e2667eed8
   ZFPlayer: 8a80bf8eb4638b97fbceaefcd3ca9978e9f17c9d
 
-PODFILE CHECKSUM: ac33b78faa428b7e538338398f1b7a44d5196ea5
+PODFILE CHECKSUM: 08b1135b3d1c46f278c2e5640d55835b6f47e73a
 
 COCOAPODS: 1.5.0

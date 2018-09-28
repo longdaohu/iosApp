@@ -18,7 +18,7 @@
 #import "HomeRoomIndexFlatsObject.h"
 #import "MyoffferAlertTableView.h"
 #import "MeiqiaServiceCall.h"
-
+#import "RoomMapVC.h"
 
 @interface RoomSearchResultVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)MyoffferAlertTableView *tableView;
@@ -27,6 +27,7 @@
 @property(nonatomic,strong)NSMutableArray *items;
 @property(nonatomic,assign)NSInteger next_page;
 @property(nonatomic,strong)NSMutableDictionary *parameter;
+@property(nonatomic,strong)UIButton *mapBtn;
 
 @end
 
@@ -78,6 +79,12 @@
     [self makeParameters];
     [self makeNavigationView];
     [self makeTableView];
+ 
+    UIButton *mapBtn =[[UIButton alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 100, XSCREEN_HEIGHT * 0.7, 70, 70)];
+    [mapBtn setImage:XImage(@"home_room_map_anchor") forState:UIControlStateNormal];
+    [self.view addSubview:mapBtn];
+    [mapBtn addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];
+    self.mapBtn = mapBtn;
 }
 
 - (void)makeParameters{
@@ -254,7 +261,6 @@
         [self.tableView alertWithNotDataMessage:nil];
     }
     
-    
 }
 
 #pragma mark : 事件处理
@@ -312,6 +318,13 @@
 
 }
 
+- (void)caseMap{
+    
+    RoomMapVC *vc = [[RoomMapVC alloc] init];
+    vc.isUK = YES;
+    PushToViewController(vc);
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     [self caseSearch];
     return NO;
@@ -332,11 +345,7 @@
     
     self.item = item;
     self.city = nil;
-//    if ([item.type isEqualToString:@"city"]) {
-//        self.filterView.city = item.name;
-//    }else{
-        self.filterView.city = nil;
-//    }
+    self.filterView.city = nil;
     self.next_page = 1;
     [self.items removeAllObjects];
     [self.tableView reloadData];
