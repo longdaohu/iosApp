@@ -17,5 +17,8 @@
 @property(nonatomic,assign)BOOL isUK;
 @property(nonatomic,copy,readonly)NSString *country;
 @property(nonatomic,assign,readonly)NSInteger country_code;
+@property(nonatomic,strong)NSArray *groups;
+
+- (void)updateGroupData;
 
 @end

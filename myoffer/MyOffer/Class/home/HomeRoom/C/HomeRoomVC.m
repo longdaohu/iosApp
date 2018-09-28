@@ -26,7 +26,7 @@
 #import "HomeRoomIndexEventsObject.h"
 
 @interface HomeRoomVC ()
-@property(nonatomic,strong)NSArray *roomGroups;
+//@property(nonatomic,strong)NSArray *roomGroups;
 @property(nonatomic,strong)RoomBannerView *eventCellView;
 @property(nonatomic,strong) HomeRoomIndexModel *roomModel;
 
@@ -72,17 +72,30 @@
         [weakSelf headerButtonClick:sender];
     };
     self.headerView = roomHeaderView;
- 
+    
+    // 51Room HttpApiClient_API_51ROOM 初始化
     NSString * appKey = @"24964499";
     NSString * appSecret = @"8ec406d891d9ba9278a3ced8d8b13b39";
     [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
     [[HttpsApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
     BOOL (^pVerifyCerts)(NSURLAuthenticationChallenge *x);
-    pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler)
-    {
+    pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler){
         return YES;
     };
     [[[HttpsApiClient_API_51ROOM instance] client] setVerifyHttpsCert:pVerifyCerts];
+
+}
+
+
+- (void)toLoadView{
+    
+    [super toLoadView];
+    self.tableView.footerHeight = 250;
+    WeakSelf
+    self.tableView.actionBlock = ^{
+        [weakSelf makeData];
+    };
+    
 }
 
 
@@ -168,7 +181,13 @@ static NSString *identify = @"cell";
     [[HttpsApiClient_API_51ROOM instance] homepage:self.roomModel.country_code completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
         if (![status isEqualToString:@"200"]) {
-            NSLog(@" 网络请求错误 ");
+            if (!self.roomModel.current_roomFrameObj) {
+                
+                self.groups = nil;
+                [self toReLoadTable];
+                [self.tableView alertWithRoloadMessage:nil];
+                
+            }
             return ;
         }
         id result = [response.body KD_JSONObject];
@@ -188,74 +207,26 @@ static NSString *identify = @"cell";
         self.roomModel.AURoomFrameObj = roomFrameObj;
     }
     [self reLoadWithNewRoomData];
+    
+    [self.tableView alertViewHiden];
 }
 
 - (void)reLoadWithNewRoomData{
     
-    for (myofferGroupModel *group in self.roomGroups) {
-        
+    [self.roomModel updateGroupData];
+    for (myofferGroupModel *group in self.roomModel.groups) {
         if (group.type == SectionGroupTypeRoomHotActivity) {
-            if (self.roomModel.current_roomFrameObj.item.events.count == 0) continue;
-            group.items = @[self.roomModel.current_roomFrameObj];
-            group.cell_height_set = self.roomModel.current_roomFrameObj.event_Section_Height;
+            if (self.roomModel.current_roomFrameObj.item.events.count == 0) break;
             self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.roomModel.current_roomFrameObj.event_Section_Height);
             NSArray *imageGroup = [self.roomModel.current_roomFrameObj.item.events valueForKey:@"img"];
             [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:self.roomModel.current_roomFrameObj.event_item_size];
+            break;
         }
-        
-        if (group.type == SectionGroupTypeRoomHomestay) {
-            if (self.roomModel.current_roomFrameObj.item.flats.count == 0) continue;
-            group.items = @[self.roomModel.current_roomFrameObj];
-            group.cell_height_set = self.roomModel.current_roomFrameObj.flat_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomApartmentRecommendation) {
-            if (self.roomModel.current_roomFrameObj.item.accommodations.count == 0) continue;
-            group.items = @[self.roomModel.current_roomFrameObj];
-            group.cell_height_set = self.roomModel.current_roomFrameObj.accommodation_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomHotCity) {
-            
-            if (self.roomModel.current_roomFrameObj.item.hot_city.count == 0)  continue;
-            group.items = @[self.roomModel.current_roomFrameObj];
-            group.cell_height_set = self.roomModel.current_roomFrameObj.hot_city_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomCustomerPraise) {
-            if (self.roomModel.current_roomFrameObj.item.comments.count == 0) continue;
-            group.items = @[self.roomModel.current_roomFrameObj];
-            group.cell_height_set = self.roomModel.current_roomFrameObj.comment_Section_Height;
-            
-        }
-        
     }
-    self.groups = self.roomGroups;
-    [self toReLoadTable];
-}
 
-- (NSArray *)roomGroups{
+    self.groups = self.roomModel.groups;
     
-    if (!_roomGroups) {
-        
-        myofferGroupModel *hot_activity  = [myofferGroupModel groupWithItems:nil header:@"热门活动"];
-        hot_activity.type = SectionGroupTypeRoomHotActivity;
-        
-        myofferGroupModel *hot_city  = [myofferGroupModel groupWithItems:nil header:@"热门城市"];
-        hot_city.accesory_title= @"查看更多";
-        hot_city.type = SectionGroupTypeRoomHotCity;
-        
-        myofferGroupModel *apartment  = [myofferGroupModel groupWithItems:nil header:@"公寓推荐"];
-        apartment.type = SectionGroupTypeRoomApartmentRecommendation;
-        
-        myofferGroupModel *homestay  = [myofferGroupModel groupWithItems:nil header:@"精选民宿"];
-        homestay.type = SectionGroupTypeRoomHomestay;
-        
-        myofferGroupModel *praise  = [myofferGroupModel groupWithItems:nil header:@"客户好评"];
-        praise.type = SectionGroupTypeRoomCustomerPraise;
-        
-        _roomGroups = @[hot_activity,hot_city,apartment,homestay,praise];
-        
-    }
-    
-    return _roomGroups;
+    [self toReLoadTable];
 }
 
 #pragma mark : 事件处理
