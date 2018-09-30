@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UILabel *priceLab;
 @property(nonatomic,strong)UILabel *tagLab;
 @property(nonatomic,strong)UILabel *wifiLab;
-@property(nonatomic,strong)UILabel *cityLab;
+@property(nonatomic,strong)UIButton *cityLab;
 @property(nonatomic,strong)NSArray *tags;
 @end
 
@@ -33,16 +33,14 @@
         iconView.layer.cornerRadius = 4;
         iconView.layer.masksToBounds = YES;
 
-        UILabel *cityLab = [UILabel new];
-        cityLab.textColor = XCOLOR(179, 179, 179, 1);
-        cityLab.font = XFONT(9);
-        cityLab.text = @"伦敦";
-        cityLab.textAlignment = NSTextAlignmentCenter;
+        UIButton *cityLab = [UIButton new];
+        [cityLab setTitleColor:XCOLOR(179, 179, 179, 1) forState:UIControlStateNormal];
+        cityLab.titleLabel.font = XFONT(10);
         cityLab.backgroundColor = XCOLOR_WHITE;
         [self.contentView addSubview:cityLab];
         self.cityLab = cityLab;
         cityLab.layer.cornerRadius = 2;
-        cityLab.layer.masksToBounds = YES;
+        cityLab.userInteractionEnabled = NO;
         
         UILabel *titleLab = [UILabel new];
         titleLab.textColor = XCOLOR_TITLE;
@@ -118,7 +116,7 @@
     
     self.titleLab.text = item.name;
     self.priceLab.attributedText = item.priceAttribue;
-    self.cityLab.text = item.city;
+    [self.cityLab setTitle:item.city forState:UIControlStateNormal];
     
     if (item.feature.count >= 2){
         self.wifiLab.text = item.feature.firstObject;

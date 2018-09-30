@@ -75,7 +75,7 @@
     footer.backgroundColor = XCOLOR_WHITE;
     footer.layer.shadowColor = [UIColor blackColor].CGColor;
     footer.layer.shadowOffset = CGSizeMake(0,3);
-    footer.layer.shadowOpacity =  0.05;
+    footer.layer.shadowOpacity =  0.15;
     footer.layer.cornerRadius = 8;
     CGFloat left_margin = 20;
     CGFloat bottom_margin = 30;

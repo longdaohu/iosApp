@@ -12,12 +12,6 @@
 
 @interface RoomItemBookHeaderView ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)UIView *bgView;
-//@property(nonatomic,strong)UILabel *titleLab;
-//@property(nonatomic,strong)UILabel *typeLab;
-//@property(nonatomic,strong)UILabel *sizeLab;
-//@property(nonatomic,strong)UILabel *bedLab;
-//@property(nonatomic,strong)UILabel *noteLab;
-//@property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)SDCycleScrollView *bannerView;
 @property (weak, nonatomic) IBOutlet UIButton *countBtn;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

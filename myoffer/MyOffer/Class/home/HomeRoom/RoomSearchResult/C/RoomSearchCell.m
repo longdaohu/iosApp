@@ -34,6 +34,7 @@
         sender.layer.masksToBounds = YES;
         [self.bgView addSubview:sender];
     }
+    self.rentLab.textColor = XCOLOR_RED;
 }
 
 - (CAShapeLayer *)shaper{

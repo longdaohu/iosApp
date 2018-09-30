@@ -36,6 +36,7 @@
     titleLab.textColor =  XCOLOR_BLACK;
     [self addSubview:titleLab];
     self.titleLab = titleLab;
+
     
     UIButton *accesoryBtn = [UIButton new];
     accesoryBtn.titleLabel.font = XFONT(12);
@@ -43,7 +44,13 @@
     [self addSubview:accesoryBtn];
     self.accesoryBtn = accesoryBtn;
     [accesoryBtn addTarget:self action:@selector(caseMore) forControlEvents:UIControlEventTouchUpInside];
-    
+}
+
+- (void)setTitleFontSize:(CGFloat)titleFontSize{
+    _titleFontSize = titleFontSize;
+    if (titleFontSize > 0) {
+        self.titleLab.font = [UIFont boldSystemFontOfSize:titleFontSize];
+    }
 }
 
 - (void)setGroup:(myofferGroupModel *)group{

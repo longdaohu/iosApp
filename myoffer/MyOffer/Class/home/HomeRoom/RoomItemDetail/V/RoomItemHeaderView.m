@@ -37,7 +37,6 @@
         self.backgroundColor = XCOLOR_CLEAR;
         
         UIView *cross = [UIView new];
-        cross.backgroundColor = XCOLOR_RANDOM;
         [self addSubview:cross];
         self.crossView = cross;
         

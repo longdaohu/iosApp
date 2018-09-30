@@ -95,6 +95,7 @@
     CGFloat item_y = XStatusBar_Height + 20;
     CGSize item_size = CGSizeMake(36, 36);
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(left_margin, item_y , item_size.width, item_size.height)];
+    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -2, 0, 0)];
     backBtn.layer.cornerRadius = item_size.height * 0.5;
     [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];

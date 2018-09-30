@@ -76,6 +76,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
     if (!_sectinHeader) {
         WeakSelf;
         _sectinHeader = [[HomeSecView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 50)];
+        _sectinHeader.titleFontSize = 14;
         _sectinHeader.actionBlock = ^(SectionGroupType type) {
             [weakSelf caseSectionAccessory];
         };
@@ -110,12 +111,14 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
  
     [self makeNavigationView];
     [self makeTableView];
+    self.view.backgroundColor = XCOLOR_WHITE;
 }
 
 - (void)makeNavigationView{
     
     UIView *left_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_view];
+    
     UIButton *one = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [one setImage:XImage(@"home_room_uk") forState:UIControlStateNormal];
     [left_view addSubview:one];
@@ -153,6 +156,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
         [searchTF becomeFirstResponder];
     }
 }
+
 
 -(void)makeDara{
  

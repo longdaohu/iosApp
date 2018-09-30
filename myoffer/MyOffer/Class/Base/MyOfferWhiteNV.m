@@ -26,12 +26,13 @@
     [super viewDidLoad];
     
     self.interactivePopGestureRecognizer.delegate =  self;
-    UIImage *icon = XImage(@"nav_bg_white");
+    UIImage *icon = [UIImage KD_imageWithColor:XCOLOR_WHITE];
     self.navigationBar.tintColor = XCOLOR_TITLE;
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:XCOLOR_TITLE,NSFontAttributeName :[UIFont boldSystemFontOfSize:17] };
     [self.navigationBar setBackgroundImage:icon forBarMetrics:UIBarMetricsDefault];
-    self.navigationBar.shadowImage = [[UIImage alloc] init];
-    
+//    self.navigationBar.shadowImage = [[UIImage alloc] init];
+    self.extendedLayoutIncludesOpaqueBars = YES;
+
 }
 
 /**   ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
