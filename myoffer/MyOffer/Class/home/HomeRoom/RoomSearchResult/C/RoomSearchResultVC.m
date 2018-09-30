@@ -80,7 +80,7 @@
     [self makeNavigationView];
     [self makeTableView];
  
-    UIButton *mapBtn =[[UIButton alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 90, XSCREEN_HEIGHT - 200, 70, 70)];
+    UIButton *mapBtn =[[UIButton alloc] initWithFrame:CGRectMake(XSCREEN_WIDTH - 75, XSCREEN_HEIGHT - 160, 70, 70)];
     [mapBtn setImage:XImage(@"home_room_map_anchor") forState:UIControlStateNormal];
     [self.view addSubview:mapBtn];
     [mapBtn addTarget:self action:@selector(caseMap) forControlEvents:UIControlEventTouchUpInside];

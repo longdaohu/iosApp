@@ -291,7 +291,7 @@ static const CGFloat Top_Margin = 30;
     CGSize unit_size = [self.item.unit stringWithfontSize:self.header_unit_font_size];
     CGFloat unit_w  = unit_size.width;
     CGFloat unit_h  = unit_size.height;
-    CGFloat unit_y  = price_y + price_h - unit_h;
+    CGFloat unit_y  = price_y + price_h - unit_h-3;
     self.unit_frame = CGRectMake(unit_x, unit_y, unit_w, unit_h);
     
     CGFloat id_x = title_x;

@@ -34,7 +34,8 @@
         
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:path];
         [att addAttributes:@{
-                             NSForegroundColorAttributeName : XCOLOR_RED
+                             NSForegroundColorAttributeName : XCOLOR_RED,
+                             NSFontAttributeName:[UIFont boldSystemFontOfSize:14]
                              } range:NSMakeRange(0, a.length)];
         
         _priceAttribue = [[NSAttributedString alloc] initWithAttributedString:att];

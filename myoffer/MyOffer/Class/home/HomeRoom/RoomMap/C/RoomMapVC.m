@@ -59,7 +59,7 @@
     mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:mapView];
     mapView.showsScale = YES;
-    mapView.minimumZoomLevel  = 9;
+    mapView.minimumZoomLevel  = 11;
     mapView.pitchEnabled  = YES;//是否倾斜地图
     mapView.rotateEnabled  = YES; //是否旋转地图
     mapView.delegate  = self;
@@ -83,8 +83,6 @@
         [mapView setCenterCoordinate: local
                                     zoomLevel:11
                                      animated:YES];
-
-//        NSLog(@"%lf ================= %lf",self.current_location.latitude,self.current_location.longitude);
     }
     
 }
@@ -141,6 +139,10 @@
     [bgView registerNib:[UINib nibWithNibName:@"RoomItemMapCell" bundle:nil] forCellWithReuseIdentifier:@"RoomItemMapCell"];
     self.bgView = bgView;
     [self caseCellDose];
+    bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
+    bgView.layer.shadowOffset = CGSizeMake(0, 0);
+    bgView.layer.shadowOpacity = 0.3;
+    bgView.clipsToBounds = NO;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -236,7 +238,6 @@
     [self toLoLoadWithItems:items];
 }
 
-
 #pragma mark : 事件处理
 - (void)casePop{
     [self.navigationController popViewControllerAnimated:YES];
@@ -257,7 +258,7 @@
     
     NSDictionary *prm = @{
                            KEY_PAGE: @"1",
-                           KEY_PAGESIZE: @"10",
+                           KEY_PAGESIZE: @"30",
                            KEY_TYPE: item.type,
                            KEY_TYPE_ID:item.item_id
                            };
@@ -277,7 +278,7 @@
     
     self.current_annotation = nil;
     [self.mapView removeAnnotations:self.annotationsArray];
-    
+ 
     NSMutableArray *tmp = [NSMutableArray array];
     for (NSInteger index = 0; index < items.count; index++) {
     
@@ -292,6 +293,7 @@
     if (tmp > 0) {
         self.annotationsArray = [tmp copy];
         [self mapViewDidFinishLoadingMap:self.mapView];
+//        [self reloadAnnotationViewWithAnnotation:self.current_annotation];
     }
 }
 
@@ -311,12 +313,14 @@
     JHPointAnnotation *item = self.annotationsArray.firstObject;
     item.onSelected = YES;
     self.current_annotation = item;
-    if (self.itemFrameModel) {
-        [mapView setCenterCoordinate: self.current_annotation.coordinate zoomLevel: 13 animated:YES];
-    }
     [mapView addAnnotations:self.annotationsArray];
     
-    [self reloadAnnotationViewWithAnnotation:self.current_annotation];
+    if (self.itemFrameModel) {
+        [mapView setCenterCoordinate: self.current_annotation.coordinate zoomLevel: 13 animated:YES];
+    }else{
+        [self.mapView showAnnotations:self.annotationsArray edgePadding:UIEdgeInsetsMake(160, 50, 200, 50) animated:YES];
+     }
+    
 }
 
 - (MGLAnnotationView *)mapView:(MGLMapView *)mapView viewForAnnotation:(id<MGLAnnotation>)annotation {

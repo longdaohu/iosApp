@@ -83,7 +83,7 @@
 - (void)makeFlatsFrame{
  
 
-    CGFloat item_width = (XSCREEN_WIDTH - 40 - self.minimumInteritemSpacing) * 0.5;
+    CGFloat item_width = (XSCREEN_WIDTH - 40 - self.minimumInteritemSpacing - 2) * 0.5;
     NSMutableArray *flat_Arr = [NSMutableArray array];
     for (HomeRoomIndexFlatsObject *it in self.item.flats) {
         HomeRoomIndexFlatFrameObject *flatFrameObj = [[HomeRoomIndexFlatFrameObject alloc] init];

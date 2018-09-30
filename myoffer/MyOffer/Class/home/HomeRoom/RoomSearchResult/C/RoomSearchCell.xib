@@ -33,22 +33,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 10000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXj-xW-EYv">
-                        <rect key="frame" x="20" y="312.5" width="124.5" height="27"/>
+                        <rect key="frame" x="20" y="312.5" width="130.5" height="27"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="27" id="t5y-My-l3w"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                         <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/周" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQx-ia-ovE">
-                        <rect key="frame" x="149.5" y="318.5" width="18" height="16"/>
+                        <rect key="frame" x="155.5" y="318.5" width="18" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lc-ZW-ZVi">
-                        <rect key="frame" x="177.5" y="316.5" width="177.5" height="18"/>
+                        <rect key="frame" x="183.5" y="316.5" width="171.5" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="NBJ-2B-bu5"/>
                         </constraints>

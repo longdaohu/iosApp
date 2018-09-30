@@ -104,6 +104,7 @@
     
     
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 40)];
+    backBtn.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentLeft;
     [backBtn addTarget:self action:@selector(casePop) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImage:XImage(@"back_arrow_black") forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];

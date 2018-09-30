@@ -53,7 +53,6 @@
     if (!_header) {
         _header = Bundle(@"RoomItemBookHeaderView");
         _header.frame =  CGRectMake(0, 0, XSCREEN_WIDTH, 136);
-        //[[RoomItemBookHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 136)];
     }
     
     return _header;
@@ -71,15 +70,12 @@
     UINib *xib = [UINib nibWithNibName:@"RoomItemBookCell" bundle:nil];
     [self.tableView registerNib:xib forCellReuseIdentifier:@"RoomItemBookCell"];
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-//    self.tableView.estimatedSectionHeaderHeight = 58;
-//    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionFooterHeight = 1;
     self.tableView.sectionFooterHeight = HEIGHT_ZERO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.header.itemFrameModel = self.itemFrameModel;
     if (self.itemFrameModel.item.pictures.count > 0) {

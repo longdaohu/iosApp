@@ -41,7 +41,7 @@
     UIButton *UK_BTN = [UIButton new];
     [UK_BTN setTitleColor:XCOLOR(128, 128, 128, 1) forState:UIControlStateNormal];
     [UK_BTN setTitleColor:XCOLOR_TITLE forState:UIControlStateDisabled];
-    UK_BTN.titleLabel.font = XFONT(16);
+    UK_BTN.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     UK_BTN.enabled = NO;
     [UK_BTN addTarget:self action:@selector(toUK:) forControlEvents:UIControlEventTouchUpInside];
     [UK_BTN setTitle:@"英国" forState:UIControlStateNormal];
@@ -114,8 +114,8 @@
     }
     self.AU_BTN.enabled = YES;
     sender.enabled = NO;
-    self.AU_BTN.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    sender.titleLabel.font = XFONT(16);
+    sender.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.AU_BTN.titleLabel.font = XFONT(16);
 }
 
 - (void)toAU:(UIButton *)sender{
@@ -128,8 +128,9 @@
     
     self.UK_BTN.enabled = YES;
     sender.enabled = NO;
-    self.UK_BTN.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    sender.titleLabel.font = XFONT(16);
+    sender.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.UK_BTN.titleLabel.font = XFONT(16);
+
 }
 
 - (void)toMap:(UIButton *)sender{
