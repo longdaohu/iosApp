@@ -12,6 +12,7 @@
 @interface HomeSecView : UIView
 @property(nonatomic,strong)myofferGroupModel  *group;
 @property(nonatomic,assign)CGFloat leftMargin;
+@property(nonatomic,assign)BOOL titleInMiddle;
 @property(nonatomic,copy)void(^actionBlock)(SectionGroupType);
 
 @end

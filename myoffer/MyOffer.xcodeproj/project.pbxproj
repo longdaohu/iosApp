@@ -914,6 +914,7 @@
 		AEFDD8B6215E047D00B37194 /* TKRCGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFDD80E215E047B00B37194 /* TKRCGlobalConfig.m */; };
 		AEFDD8B7215E076A00B37194 /* TKRoomSDK.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = AEFDD762215E047B00B37194 /* TKRoomSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AEFDD8BB215E128900B37194 /* TKWhiteBoardResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEFDD8BA215E128900B37194 /* TKWhiteBoardResources.bundle */; };
+		AEFDD8BD215F891900B37194 /* RoomItemBookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFDD8BC215F891800B37194 /* RoomItemBookHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -2522,6 +2523,7 @@
 		AEFDD80D215E047B00B37194 /* TKRCGlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRCGlobalConfig.h; sourceTree = "<group>"; };
 		AEFDD80E215E047B00B37194 /* TKRCGlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRCGlobalConfig.m; sourceTree = "<group>"; };
 		AEFDD8BA215E128900B37194 /* TKWhiteBoardResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TKWhiteBoardResources.bundle; sourceTree = "<group>"; };
+		AEFDD8BC215F891800B37194 /* RoomItemBookHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomItemBookHeaderView.xib; sourceTree = "<group>"; };
 		DAF97F809FE91DF51B65AFA9 /* libPods-MyOffer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyOffer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02B30ECEAFCB4EF5650AED2 /* Pods-MyOffer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOffer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOffer/Pods-MyOffer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3366,6 +3368,7 @@
 				AE4BBD18211071DD00209FC8 /* RoomItemBookSV.m */,
 				AEAFDF322123DCBD00067190 /* RoomItemBookHeaderView.h */,
 				AEAFDF332123DCBD00067190 /* RoomItemBookHeaderView.m */,
+				AEFDD8BC215F891800B37194 /* RoomItemBookHeaderView.xib */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -6702,7 +6705,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6943,6 +6946,7 @@
 				AEA24B261D5B251800DD7939 /* IntroViewController.xib in Resources */,
 				AE76ACFE20D914B800C42FA2 /* area_1.jpg in Resources */,
 				AEBA44C31E88B1A3005E923B /* MyOfferServerMallViewController.xib in Resources */,
+				AEFDD8BD215F891900B37194 /* RoomItemBookHeaderView.xib in Resources */,
 				AE76AD0120D914B800C42FA2 /* area_3.jpg in Resources */,
 				AEF657D421006E9E00C0D849 /* city_mrb.jpg in Resources */,
 				AE60C20520E25146000867A8 /* home_global_ad_03.jpg in Resources */,
@@ -7977,7 +7981,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

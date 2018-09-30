@@ -75,7 +75,7 @@
     footer.backgroundColor = XCOLOR_WHITE;
     footer.layer.shadowColor = [UIColor blackColor].CGColor;
     footer.layer.shadowOffset = CGSizeMake(0,3);
-    footer.layer.shadowOpacity = 0.2;
+    footer.layer.shadowOpacity =  0.05;
     footer.layer.cornerRadius = 8;
     CGFloat left_margin = 20;
     CGFloat bottom_margin = 30;
@@ -128,7 +128,7 @@
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
-    self.tableView.sectionHeaderHeight = Section_header_Height_nomal;
+    self.tableView.sectionHeaderHeight = 52;
     self.tableView.sectionFooterHeight = Section_footer_Height_nomal;
     self.tableView.estimatedSectionHeaderHeight= UITableViewAutomaticDimension;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);
@@ -222,9 +222,14 @@ static NSString *identify = @"cell";
     
     HomeSecView *header = [[HomeSecView alloc] init];
     header.leftMargin = 20;
+    header.titleInMiddle = YES;
     header.group = self.itemFrameModel.groups[section];
  
     return header;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 52;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -235,11 +240,12 @@ static NSString *identify = @"cell";
     }
     return UITableViewAutomaticDimension;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     UIView *footer =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     footer.backgroundColor = XCOLOR_BG;
-    if (section == self.itemFrameModel.groups.count -1) {
+    if (section == self.itemFrameModel.groups.count - 1) {
         footer.backgroundColor = XCOLOR_WHITE;
     }
     return footer;
@@ -304,6 +310,8 @@ static NSString *identify = @"cell";
 
 - (void)caseBook{
  
+    if (!self.itemFrameModel) return;
+    
     WeakSelf
     RoomAppointmentVC *vc = [[RoomAppointmentVC alloc] init];
     vc.room_id = self.room_id;

@@ -101,7 +101,7 @@ static const CGFloat Top_Margin = 30;
     CGFloat line_x = Left_Margin;
     CGFloat line_y = 0;
     CGFloat line_w = XSCREEN_WIDTH - line_x * 2;
-    CGFloat line_h = 1;
+    CGFloat line_h = LINE_HEIGHT;
     self.top_line_frame = CGRectMake(line_x, line_y, line_w, line_h);
  
  
@@ -283,7 +283,7 @@ static const CGFloat Top_Margin = 30;
         price_y = tag_y ;
     }
     CGSize price_size = [self.item.price stringWithfontSize:self.header_price_font_size];
-    CGFloat price_w = price_size.width;
+    CGFloat price_w = price_size.width + 6;
     CGFloat price_h = price_size.height;
     self.price_frame = CGRectMake(price_x, price_y, price_w, price_h);
     
@@ -303,7 +303,7 @@ static const CGFloat Top_Margin = 30;
     CGFloat line_x = title_x;
     CGFloat line_y = CGRectGetMaxY(self.price_frame) + 20;
     CGFloat line_w = title_w;
-    CGFloat line_h = 1;
+    CGFloat line_h = LINE_HEIGHT;
     self.line_frame = CGRectMake(line_x, line_y, line_w, line_h);
  
     

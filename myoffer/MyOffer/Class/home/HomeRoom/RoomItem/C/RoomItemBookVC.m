@@ -51,7 +51,9 @@
 - (RoomItemBookHeaderView *)header{
     
     if (!_header) {
-         _header = [[RoomItemBookHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 136)];
+        _header = Bundle(@"RoomItemBookHeaderView");
+        _header.frame =  CGRectMake(0, 0, XSCREEN_WIDTH, 136);
+        //[[RoomItemBookHeaderView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 136)];
     }
     
     return _header;

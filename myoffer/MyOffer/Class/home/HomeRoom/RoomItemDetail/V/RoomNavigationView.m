@@ -52,7 +52,7 @@
         [self.layer addSublayer:shaper];
         shaper.shadowColor = XCOLOR_BLACK.CGColor;
         shaper.shadowOffset = CGSizeMake(0, 0);
-        shaper.shadowOpacity = 0.5;
+        shaper.shadowOpacity = 0.3;
         shaper.opacity = 0;
         
         UIView *bgView = [UIView new];

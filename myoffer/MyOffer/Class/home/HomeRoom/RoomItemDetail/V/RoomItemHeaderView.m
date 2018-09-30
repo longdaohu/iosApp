@@ -60,7 +60,7 @@
         self.boxView = box;
         box.layer.shadowColor = XCOLOR_BLACK.CGColor;
         box.layer.shadowOffset = CGSizeMake(0, 3);
-        box.layer.shadowOpacity = 0.2;
+        box.layer.shadowOpacity = 0.05;
         box.layer.cornerRadius = CORNER_RADIUS;
  
         UIView *line = [UIView new];
@@ -154,7 +154,7 @@
     self.titleLab.font =  [UIFont boldSystemFontOfSize:itemFrameModel.header_title_font_size];
     self.titleLab.text = itemFrameModel.item.name;
     
-    self.priceLab.font = XFONT(itemFrameModel.header_price_font_size);
+    self.priceLab.font = [UIFont boldSystemFontOfSize:itemFrameModel.header_price_font_size];
     self.priceLab.text = itemFrameModel.item.price;
     
     self.unitLab.text = itemFrameModel.item.unit;
@@ -209,7 +209,7 @@
 
 - (void)caseBannerIndex:(NSInteger)index{
     
-    NSLog(@"%@",self.itemFrameModel.item.pics[index]);
+//    NSLog(@"%@",self.itemFrameModel.item.pics[index]);
 }
 
 

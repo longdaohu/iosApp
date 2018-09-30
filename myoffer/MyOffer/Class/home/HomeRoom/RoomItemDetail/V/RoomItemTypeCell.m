@@ -52,7 +52,7 @@
         self.pinLab = pinLab;
         [pinLab setTitleColor:XCOLOR(255, 159, 0, 1)  forState:UIControlStateNormal];
         [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR(255, 246, 217, 1)] forState:UIControlStateNormal];
-        [pinLab setTitleColor:XCOLOR_TITLE forState:UIControlStateDisabled];
+        [pinLab setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateDisabled];
         [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateDisabled];
         [self.contentView addSubview:pinLab];
         pinLab.layer.cornerRadius = 2;
@@ -88,7 +88,7 @@
     
     self.titleLab.font = XFONT(itemFrameModel.title_font_size);
     self.pinLab.titleLabel.font = XFONT(itemFrameModel.pin_font_size);
-    self.priceLab.font = XFONT(itemFrameModel.price_font_size);
+    self.priceLab.font = [UIFont boldSystemFontOfSize:itemFrameModel.price_font_size];
     self.unitLab.font = XFONT(itemFrameModel.unit_font_size);
 }
 

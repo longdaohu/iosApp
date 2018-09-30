@@ -53,7 +53,7 @@
         
         UILabel *priceLab = [UILabel new];
         priceLab.textColor = XCOLOR(50, 50, 50, 1);
-        priceLab.font = XFONT(14);
+        priceLab.font = [UIFont boldSystemFontOfSize:14];
         [self.contentView addSubview:priceLab];
         priceLab.textAlignment = NSTextAlignmentLeft;
         self.priceLab = priceLab;

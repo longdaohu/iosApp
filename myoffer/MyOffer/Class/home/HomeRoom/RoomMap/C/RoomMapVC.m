@@ -22,6 +22,7 @@
 @property(nonatomic,strong)NSArray *annotationsArray;
 @property(nonatomic,strong)JHPointAnnotation *current_annotation;
 @property(nonatomic,strong)HomeRoomIndexFlatsObject *current_item;
+@property(nonatomic,assign) BOOL isMapCanLoding;
 
 @end
 
@@ -58,10 +59,9 @@
     mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:mapView];
     mapView.showsScale = YES;
-    mapView.zoomLevel  = 15;
-    mapView.minimumZoomLevel  = 1;
+    mapView.minimumZoomLevel  = 9;
     mapView.pitchEnabled  = YES;//是否倾斜地图
-    mapView.rotateEnabled  = NO; //是否旋转地图
+    mapView.rotateEnabled  = YES; //是否旋转地图
     mapView.delegate  = self;
     self.mapView = mapView;
     
@@ -79,12 +79,16 @@
         
         CLLocationCoordinate2D London = CLLocationCoordinate2DMake(51.516438, -0.115063);
         CLLocationCoordinate2D Sydney = CLLocationCoordinate2DMake(-33.8875694, 151.2043603);
-        [mapView setCenterCoordinate: (self.isUK ? London : Sydney)
+        CLLocationCoordinate2D local = self.isUK ? London : Sydney;
+        [mapView setCenterCoordinate: local
                                     zoomLevel:11
                                      animated:YES];
+
+//        NSLog(@"%lf ================= %lf",self.current_location.latitude,self.current_location.longitude);
     }
     
 }
+
 
 - (void)makeOtherView{
  
@@ -185,20 +189,21 @@
     return NO;
 }
 
-
 #pragma mark : 网络请求
-- (void)makeData:(NSDictionary *)parameter{
-    /*
-     page    Int     = 1
-     pagesize    int    =10
-     type    string    City, university
-     type_id    string    19
-     max    string    租金区间 最多
-     min    srting    租金区间 最少
-     lease    Int     最大租期，租多少周  如：52
-     */
-    //    [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
+- (void)makeDataWithMapCoordinate:(CLLocationCoordinate2D)coordinate{
     
+    NSString *value = [NSString stringWithFormat:@"%lf,%lf",coordinate.latitude,coordinate.longitude];
+    NSDictionary *prm = @{
+                              KEY_PAGE: @"1",
+                              KEY_PAGESIZE: @"10",
+                              KEY_TYPE: @"location",
+                              KEY_TYPE_ID:value
+                          };
+    [self makeData:prm];
+}
+
+- (void)makeData:(NSDictionary *)parameter{
+
     WeakSelf;
     [self property_listWhithParameters:parameter additionalSuccessAction:^(id response, int status) {
         [weakSelf updateUIWithResponse:response];
@@ -208,10 +213,8 @@
 }
 
 - (void)updateUIWithResponse:(id)response{
-    
+ 
     NSDictionary *result = (NSDictionary *)response;
-    //    NSString *total_page = result[@"total_page"];
-    //    NSString *current_page = result[@"current_page"];
     NSString *unit = result[@"unit"];
     NSArray *properties  = result[@"properties"];
     
@@ -308,15 +311,12 @@
     JHPointAnnotation *item = self.annotationsArray.firstObject;
     item.onSelected = YES;
     self.current_annotation = item;
-    
-    NSInteger level = 15;
-    if (self.annotationsArray.count > 1) {
-        level = 12;
+    if (self.itemFrameModel) {
+        [mapView setCenterCoordinate: self.current_annotation.coordinate zoomLevel: 13 animated:YES];
     }
- 
-    [self.mapView setCenterCoordinate:item.coordinate zoomLevel: level animated:YES];
-    
     [mapView addAnnotations:self.annotationsArray];
+    
+    [self reloadAnnotationViewWithAnnotation:self.current_annotation];
 }
 
 - (MGLAnnotationView *)mapView:(MGLMapView *)mapView viewForAnnotation:(id<MGLAnnotation>)annotation {
@@ -337,7 +337,6 @@
     annotationView.title = annotation.title;
     annotationView.annotationViewState = anno.onSelected;
     
-    
     return annotationView;
 }
 
@@ -346,6 +345,10 @@
 - (void)reloadAnnotationViewWithAnnotation:(id<MGLAnnotation>)annotation{
     
     if (self.current_annotation == annotation) {
+        
+        JHPointAnnotation *point = (JHPointAnnotation *)annotation;
+        JHAnnotationView *annotationView  = (JHAnnotationView *)[self.mapView viewForAnnotation:point];
+        [annotationView.superview  bringSubviewToFront:annotationView];
         
         return;
     }
@@ -364,6 +367,15 @@
     
     self.current_item = self.items[self.current_annotation.index];
     [self.bgView reloadData];
+}
+
+- (void)mapView:(MGLMapView *)mapView regionDidChangeWithReason:(MGLCameraChangeReason)reason animated:(BOOL)animated{
+ 
+//    CLLocation *orig = [[CLLocation alloc] initWithLatitude:self.current_annotation.coordinate.latitude  longitude:self.current_annotation.coordinate.longitude];
+//
+//    CLLocation *target = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude  longitude:mapView.centerCoordinate.longitude];
+//    CLLocationDistance kilometers = [orig distanceFromLocation:target];
+    
 }
 
 

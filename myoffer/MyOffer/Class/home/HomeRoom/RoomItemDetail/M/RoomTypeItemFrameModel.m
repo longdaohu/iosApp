@@ -49,16 +49,10 @@
     }
     self.title_frame = CGRectMake(title_x, title_y, title_w, title_h);
  
-//    CGFloat tag_x = title_x;
-//    CGFloat tag_y = title_y + title_h + padding;
-//    CGFloat tag_w = [item];
-//    CGFloat tag_h = icon_w;
-//    self.icon_frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
- 
     CGFloat price_x = title_x;
     CGSize price_size = [self.item.firstPrice.priceCurrency stringWithfontSize:self.price_font_size];
     CGFloat price_h = price_size.height;
-    CGFloat price_w = price_size.width;
+    CGFloat price_w = price_size.width + 6;
     CGFloat price_y = CGRectGetMaxY(self.icon_frame) - price_h;
     self.price_frame = CGRectMake(price_x, price_y, price_w, price_h);
     
@@ -77,7 +71,7 @@
     
     CGFloat line_x = left_margin;
     CGFloat line_y = 0;
-    CGFloat line_h = 1;
+    CGFloat line_h = LINE_HEIGHT;
     CGFloat line_w = width_max;
     self.line_frame = CGRectMake(line_x, line_y, line_w, line_h);
 }

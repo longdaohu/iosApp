@@ -112,8 +112,10 @@
     if (self.actionBlock) {
         self.actionBlock(sender);
     }
-    self.AU_BTN .enabled = YES;
+    self.AU_BTN.enabled = YES;
     sender.enabled = NO;
+    self.AU_BTN.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    sender.titleLabel.font = XFONT(16);
 }
 
 - (void)toAU:(UIButton *)sender{
@@ -124,8 +126,10 @@
         self.actionBlock(sender);
     }
     
-    self.UK_BTN .enabled = YES;
+    self.UK_BTN.enabled = YES;
     sender.enabled = NO;
+    self.UK_BTN.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    sender.titleLabel.font = XFONT(16);
 }
 
 - (void)toMap:(UIButton *)sender{
@@ -173,7 +177,7 @@
     self.AU_BTN.frame = CGRectMake(au_x, au_y, au_w, au_h);
     
  
-    CGFloat search_x = 40;
+    CGFloat search_x = 20;
     CGFloat search_y = au_y + au_h + 20;
     CGFloat search_w = content_size.width - search_x * 2;
     CGFloat search_h = 37;

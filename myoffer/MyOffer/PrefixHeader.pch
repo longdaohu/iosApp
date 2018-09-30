@@ -40,9 +40,9 @@
 #define XCOLOR(r,g,b,alp) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:alp]
 #define XCOLOR_COVER XCOLOR(0,0,0,0.5)
 #define XCOLOR_ZERO XCOLOR(0,0,0,0)
-#define XCOLOR_line  XCOLOR(223,223,223,1)
+#define XCOLOR_line  XCOLOR(239,242,245,1)
 #define XCOLOR_Disable  XCOLOR(230,230,230,1)
-#define XCOLOR_BG    XCOLOR(242,242,242,1)
+#define XCOLOR_BG    XCOLOR(244,247,250,1) //244,247,250 //242,242,242
 #define XCOLOR_RED   XCOLOR(242,35,123,1)
 #define XCOLOR_TITLE  XCOLOR(51,51,51,1)
 #define XCOLOR_DESC   XCOLOR(128,128,128,1)

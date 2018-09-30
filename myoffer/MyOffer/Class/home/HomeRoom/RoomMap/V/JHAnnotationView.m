@@ -52,6 +52,7 @@
     [self.titleBtn setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
     [self.titleBtn setBackgroundImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
     [self.titleBtn setTitleColor:title_color  forState:UIControlStateNormal];
+ 
 }
 
 - (void)setTitle:(NSString *)title{

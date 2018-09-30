@@ -94,7 +94,7 @@
                 CGFloat title_x = self.leftMargin > 0 ? self.leftMargin:14;
                 CGFloat title_w = contentSize.width;
                 CGFloat title_h = self.titleLab.font.lineHeight;
-                CGFloat title_y = contentSize.height - title_h - 10;
+                CGFloat title_y = self.titleInMiddle?   (contentSize.height - title_h) * 0.5 : (contentSize.height - title_h - 10);
                 self.titleLab.frame = CGRectMake(title_x, title_y, title_w, title_h);
                 
                 if (self.accesoryBtn.currentTitle.length > 0 ) {
