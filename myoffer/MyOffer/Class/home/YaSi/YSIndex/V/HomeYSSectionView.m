@@ -23,7 +23,11 @@
     self = [super initWithFrame:frame];
     if (self) {
 
-        self.backgroundColor = XCOLOR(0, 22, 34, 1);
+        self.backgroundColor = XCOLOR_WHITE;
+        self.layer.shadowOpacity = 0.15;
+        self.layer.shadowOffset = CGSizeMake(0, 0);
+        self.layer.shadowColor = XCOLOR_BLACK.CGColor;
+        self.clipsToBounds = NO;
 
         NSArray *titles = @[@"嘿客课程介绍",@"嘿客课程大纲",@"报名须知",@"常见问题"];
         CGFloat title_x  = 0;
@@ -39,16 +43,14 @@
             NSString *title = titles[index];
             [sender setTitle:title forState:UIControlStateNormal];
             sender.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-            [sender setTitleColor:XCOLOR_WHITE forState:UIControlStateNormal];
-            [sender setTitleColor:XCOLOR_BLACK forState:UIControlStateDisabled];
+            [sender setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
+            [sender setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
             [sender setBackgroundImage:nil forState:UIControlStateNormal];
-            [sender setBackgroundImage:XImage(@"button_blue_nomal") forState:UIControlStateDisabled];
+            [sender setBackgroundImage:XImage(@"blue_spod_home") forState:UIControlStateDisabled];
             [self addSubview:sender];
             [item_arr addObject:sender];
             [sender addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
-            sender.layer.shadowOffset = CGSizeMake(0, 3);
-            sender.layer.shadowOpacity = 0.5;
-            sender.layer.shadowColor = XCOLOR_RED.CGColor;
+ 
             
             CGSize title_size = [title stringWithfontSize:12];
             title_w = title_size.width + 20;
@@ -57,7 +59,6 @@
             if (index == 0 ) {
                 sender.enabled = NO;
                 self.last_button = sender;
-                self.last_button.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
             }
         }
         self.Btn_items = item_arr;
@@ -67,7 +68,7 @@
         
         UIView *line = [UIView new];
         self.bottom_line = line;
-        line.backgroundColor = XCOLOR(239, 242, 245, 0.15);
+        line.backgroundColor = XCOLOR(232, 232, 232, 1);
         [self addSubview:line];
 
     }
@@ -109,12 +110,9 @@
 
 - (void)titleClick:(UIButton *)sender{
 
-    self.last_button.layer.shadowColor = XCOLOR_RED.CGColor;
     self.last_button.enabled = YES;
     sender.enabled = NO;
     self.last_button = sender;
-    self.last_button.layer.shadowColor = XCOLOR_LIGHTBLUE.CGColor;
-
     if (self.actionBlock) {
         self.actionBlock(sender.tag);
     }

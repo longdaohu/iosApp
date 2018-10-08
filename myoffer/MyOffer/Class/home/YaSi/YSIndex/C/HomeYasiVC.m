@@ -23,6 +23,8 @@
 #import "YSCalendarCourseModel.h"
 #import "YSMyCourseVC.h"
 
+static  NSString *const Key_Sign = @"signDate";
+
 @interface HomeYasiVC ()
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
 @property(nonatomic,assign)NSInteger current_index;
@@ -68,13 +70,14 @@
         }
         self.ysModel.displayname = self.user.displayname;
         self.ysModel.user_coin = user.coin;
+        [self caseUserSigned];
     }
     
     if (self.YSHeader) {
         /*
          user:用户不存在时要刷新状态
          */
-        self.YSHeader.score_signed = user.coin;
+        [self.YSHeader userScore:user.coin];
         if (!sameUser || !user) {
             [self.YSHeader userLoginChange];
         }
@@ -90,10 +93,32 @@
         self.ysModel.user_coin = self.user.coin;
         self.ysModel.displayname = self.user.displayname;
     }
-    
+    [self caseUserSigned];
     [self makeIELTSData];
     [self makeCategoryData];
     [self makeTodayOnliveData];
+}
+
+//判断用户是否已签到
+- (void)caseUserSigned{
+    
+    NSString *sign_value = [USDefault valueForKey:Key_Sign];
+    if (sign_value && LOGIN) {
+        NSDate *today = [NSDate date];
+        YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+        NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+        if ([sign_day isEqualToString:sign_value]) {
+            self.ysModel.user_signed = YES;
+        }
+    }else{
+        
+        self.ysModel.user_signed = NO;
+    }
+    
+    if (self.YSHeader) {
+        self.YSHeader.score_signed = self.ysModel.user_coin;
+    }
+    
 }
 
 - (void)toLoadView{
@@ -181,10 +206,10 @@
 
 #pragma mark :UITableViewDelegate
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    return  XSCREEN_HEIGHT;
-//}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return  XSCREEN_HEIGHT;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -342,6 +367,9 @@
         if(code.integerValue == 100){
             
             self.YSHeader.score_signed = nil;
+            if (self.ysModel.coin > 0) {
+                self.YSHeader.score_signed = self.ysModel.user_coin;
+            }
             NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
             [MBProgressHUD showMessage:msg];
         }
@@ -351,8 +379,12 @@
         NSDictionary *result = response[@"result"];
         self.YSHeader.score_signed =  [NSString stringWithFormat:@"%@",result[@"score"]];
         [MBProgressHUD showMessage:@"签到成功"];
-        self.ysModel.user_coin = self.YSHeader.score_signed;//result[@"score"];
-        
+        self.ysModel.user_coin = self.YSHeader.score_signed;
+ 
+        NSDate *today = [NSDate date];
+        YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+        NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+        [USDefault setValue:sign_day forKey:Key_Sign];
     }
 }
 
@@ -462,11 +494,8 @@
     
     NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
     CGFloat top_y = self.tableView.mj_offsetY > CGRectGetMaxY(self.YSHeader.frame) ?  CGRectGetMaxY(self.YSHeader.frame) :  self.tableView.mj_offsetY ;
-    [UIView performWithoutAnimation:^{
-        
-        [self.tableView setContentOffset:CGPointMake(0, top_y) animated:false];
-        [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationFade];
-    }];
+    [self.tableView setContentOffset:CGPointMake(0, top_y) animated:false];
+    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 //用户已购买通知

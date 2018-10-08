@@ -24,7 +24,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£251.18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxL-F8-pnO">
                                 <rect key="frame" x="0.0" y="29.5" width="70" height="15"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -107,7 +107,7 @@
                 <outlet property="subTitleLab" destination="sl9-RW-CYv" id="QPW-Bz-eQf"/>
                 <outlet property="timeLab" destination="4r4-Rn-Ga0" id="9mF-BX-cBm"/>
             </connections>
-            <point key="canvasLocation" x="57" y="88"/>
+            <point key="canvasLocation" x="53" y="61"/>
         </tableViewCell>
     </objects>
     <resources>

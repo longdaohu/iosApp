@@ -56,7 +56,7 @@
     [path moveToPoint:CGPointMake(0, 0)];
     [path addLineToPoint:CGPointMake(XSCREEN_WIDTH, 0)];
     CAShapeLayer *shaper = [CAShapeLayer layer];
-    shaper.strokeColor = XCOLOR_line.CGColor;
+    shaper.strokeColor = XCOLOR_SUBTITLE.CGColor;
     shaper.lineWidth = 1;
     shaper.lineDashPattern = @[@5];
     shaper.path = path.CGPath;
@@ -149,7 +149,7 @@
         make.centerY.mas_equalTo(time_TF_High.mas_centerY);
     }];
     CAShapeLayer *shaper_time = [CAShapeLayer layer];
-    shaper_time.strokeColor = XCOLOR_line.CGColor;
+    shaper_time.strokeColor = XCOLOR_SUBTITLE.CGColor;
     shaper_time.lineWidth = 1;
     shaper_time.lineDashPattern = @[@5];
     shaper_time.path = path.CGPath;

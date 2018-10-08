@@ -15,6 +15,7 @@
 @property(nonatomic,copy)NSString *displayname;
 @property(nonatomic,copy)NSString *user_coin;
 @property(nonatomic,assign)NSInteger coin;
+@property(nonatomic,assign)BOOL user_signed;
 
 @property(nonatomic,strong)NSArray *living_items;
 @property(nonatomic,strong)NSArray *living_titles;
@@ -42,7 +43,6 @@
 @property(nonatomic,assign)CGRect catigory_collectView_frame;
 @property(nonatomic,assign)CGRect cati_clt_line_frame;
 @property(nonatomic,assign)CGRect cati_clct_bottom_line_frame;
-@property(nonatomic,assign)CGRect cati_active_frame;
 @property(nonatomic,assign)CGRect price_cell_frame;
 
 @property(nonatomic,assign)CGRect livingBtn_frame;

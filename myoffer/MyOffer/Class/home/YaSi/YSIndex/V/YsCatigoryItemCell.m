@@ -24,7 +24,7 @@
 - (void)setCell_selected:(BOOL)cell_selected{
     _cell_selected = cell_selected;
     
-    self.titleLab.textColor = cell_selected ? XCOLOR_LIGHTBLUE : XCOLOR_WHITE;
+    self.titleLab.textColor = cell_selected ? XCOLOR_TITLE : XCOLOR_SUBTITLE;
     
 
 }

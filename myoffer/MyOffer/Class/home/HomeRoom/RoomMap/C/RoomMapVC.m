@@ -59,7 +59,6 @@
     mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:mapView];
     mapView.showsScale = YES;
-    mapView.minimumZoomLevel  = 11;
     mapView.pitchEnabled  = YES;//是否倾斜地图
     mapView.rotateEnabled  = YES; //是否旋转地图
     mapView.delegate  = self;
@@ -140,6 +139,7 @@
     [bgView registerNib:[UINib nibWithNibName:@"RoomItemMapCell" bundle:nil] forCellWithReuseIdentifier:@"RoomItemMapCell"];
     self.bgView = bgView;
     [self caseCellDose];
+    bgView.backgroundColor = XCOLOR_CLEAR;
     bgView.layer.shadowColor = XCOLOR_BLACK.CGColor;
     bgView.layer.shadowOffset = CGSizeMake(0, 0);
     bgView.layer.shadowOpacity = 0.3;
@@ -294,7 +294,6 @@
     if (tmp > 0) {
         self.annotationsArray = [tmp copy];
         [self mapViewDidFinishLoadingMap:self.mapView];
-//        [self reloadAnnotationViewWithAnnotation:self.current_annotation];
     }
 }
 
@@ -319,7 +318,7 @@
     if (self.itemFrameModel) {
         [mapView setCenterCoordinate: self.current_annotation.coordinate zoomLevel: 13 animated:YES];
     }else{
-        [self.mapView showAnnotations:self.annotationsArray edgePadding:UIEdgeInsetsMake(160, 50, 200, 50) animated:YES];
+        [self.mapView showAnnotations:self.annotationsArray edgePadding:UIEdgeInsetsMake(160, 45, 200, 45) animated:YES];
      }
     
 }
@@ -372,15 +371,6 @@
     
     self.current_item = self.items[self.current_annotation.index];
     [self.bgView reloadData];
-}
-
-- (void)mapView:(MGLMapView *)mapView regionDidChangeWithReason:(MGLCameraChangeReason)reason animated:(BOOL)animated{
- 
-//    CLLocation *orig = [[CLLocation alloc] initWithLatitude:self.current_annotation.coordinate.latitude  longitude:self.current_annotation.coordinate.longitude];
-//
-//    CLLocation *target = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude  longitude:mapView.centerCoordinate.longitude];
-//    CLLocationDistance kilometers = [orig distanceFromLocation:target];
-    
 }
 
 

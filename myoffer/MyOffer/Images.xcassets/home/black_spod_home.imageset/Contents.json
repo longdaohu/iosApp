@@ -9,6 +9,20 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 3,
+          "top" : 4,
+          "right" : 4,
+          "left" : 3
+        }
+      },
       "idiom" : "universal",
       "filename" : "black_spod_home.png",
       "scale" : "3x"

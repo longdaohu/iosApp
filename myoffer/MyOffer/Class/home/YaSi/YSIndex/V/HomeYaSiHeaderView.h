@@ -27,8 +27,11 @@ typedef NS_ENUM(NSInteger,YSHomeHeaderActionType) {
 @property(nonatomic,copy)NSString *score_signed;
 @property(nonatomic,copy)void(^actionBlock)(YSHomeHeaderActionType type);
 
+//用户资料中得到U币
+- (void)userScore:(NSString *)score;
 - (void)userLoginChange;
 - (void)removeBannerTimer;
 - (void)addBannerTimer;
+
 @end
 

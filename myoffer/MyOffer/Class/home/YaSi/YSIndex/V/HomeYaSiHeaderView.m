@@ -35,9 +35,10 @@
 @property(nonatomic,strong)UIPageControl *pageControl;
 @property(nonatomic,strong)UIView *catigory_box;//分类盒子
 @property(nonatomic,strong)UICollectionView *catigoryView;//分类详情
-@property(nonatomic,strong)UIView *activeView;
 @property(nonatomic,strong)UIView *line_catigory; //分割线
+@property(nonatomic,strong)UIView *cover_shadow; //分割线
 @property(nonatomic,strong)UIView *catigory_box_line; //分割线
+@property(nonatomic,strong)CAShapeLayer *shaper;
 @property(nonatomic,strong)PriceCellView *priceCell;
 @property(nonatomic,strong)NSArray *catigory_buttones; //分类按钮数组，预添加，减少临时
 @property(nonatomic,strong)UIImageView *bgImageView; //背景图片
@@ -59,7 +60,7 @@
 
 - (void)makeUI{
     
-    self.backgroundColor = XCOLOR(0, 22, 34, 1);
+    self.backgroundColor = XCOLOR_WHITE;
     //背景图
     UIImageView *bgView = [UIImageView new];
     bgView.image = XImage(@"ys_header_bg");
@@ -154,19 +155,6 @@
     UIView *catigory_box = [UIView new];
     [self addSubview:catigory_box];
     self.catigory_box = catigory_box;
-    
-    //分类分隔线
-    UIView *line_catigory = [UIView new];
-    line_catigory.backgroundColor = XCOLOR(239, 242, 245, 0.15);
-    [catigory_box addSubview:line_catigory];
-    self.line_catigory = line_catigory;
-    
-    
-    UIView *activeView = [UIView new];
-    activeView.backgroundColor = XCOLOR_LIGHTBLUE;
-    [catigory_box addSubview:activeView];
-    activeView.layer.cornerRadius = 1;
-    self.activeView = activeView;
 
     //分类视图
     UICollectionViewFlowLayout *flow_cg = [[UICollectionViewFlowLayout alloc] init];
@@ -176,28 +164,48 @@
     flow_cg.itemSize = CGSizeMake(135, 90);
     UICollectionView *catigoryView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow_cg];
     [catigoryView registerNib:[UINib nibWithNibName:NSStringFromClass([YsCatigoryItemCell class] ) bundle:nil] forCellWithReuseIdentifier:@"YsCatigoryItemCell"];
-    catigoryView.backgroundColor = XCOLOR_CLEAR;
-    catigoryView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    catigoryView.backgroundColor = XCOLOR(246, 246, 246, 1);
+    catigoryView.contentInset = UIEdgeInsetsMake(15, 20, 0, 20);
     catigoryView.dataSource = self;
     catigoryView.delegate = self;
     [catigory_box addSubview:catigoryView];
     catigory_box.clipsToBounds = YES;
     self.catigoryView = catigoryView;
-
+    
     //分类分隔线
-    UIView *catigory_box_line  = [UIView new];
-    catigory_box_line.backgroundColor = XCOLOR(239, 242, 245, 0.15);
-    [catigory_box addSubview:catigory_box_line];
-    self.catigory_box_line = catigory_box_line;
+    UIView *line_catigory = [UIView new];
+    [catigory_box addSubview:line_catigory];
+    self.line_catigory = line_catigory;
+    
+    CAShapeLayer *shaper = [CAShapeLayer layer];
+    shaper.fillColor = XCOLOR_WHITE.CGColor;
+    shaper.lineWidth = 3;
+    shaper.lineJoin = @"round";
+    shaper.lineCap = @"round";
+    shaper.shadowOffset = CGSizeMake(0, 0);
+    shaper.shadowColor = XCOLOR_BLACK.CGColor;
+    shaper.shadowOpacity = 0.15;
+    [line_catigory.layer addSublayer:shaper];
+    self.shaper = shaper;
+    
+    UIView *cover_shadow = [UIView new];
+    cover_shadow.backgroundColor = XCOLOR_WHITE;
+    [line_catigory addSubview:cover_shadow];
+    self.cover_shadow = cover_shadow;
     
     //价格信息View
     PriceCellView *priceCell = Bundle(@"PriceCellView");
-    priceCell.backgroundColor = XCOLOR_CLEAR;
     [catigory_box addSubview:priceCell];
     self.priceCell = priceCell;
     priceCell.actionBlock = ^(BOOL isPay){
         isPay ?  [weakSelf caseBuy] :  [weakSelf caseToClass];
     };
+    
+    //分类分隔线
+    UIView *catigory_box_line  = [UIView new];
+    catigory_box_line.backgroundColor = XCOLOR(232, 232, 232, 1);
+    [catigory_box addSubview:catigory_box_line];
+    self.catigory_box_line = catigory_box_line;
     
     //分类标题
     NSMutableArray *btn_tmp = [NSMutableArray array];
@@ -205,7 +213,7 @@
         UIButton *sender = [UIButton new];
         sender.titleLabel.font = [UIFont boldSystemFontOfSize:18];
         [sender setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateNormal];
-        [sender setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
+        [sender setTitleColor:XCOLOR_BLACK forState:UIControlStateDisabled];
         [sender addTarget:self action:@selector(catigoryChange:) forControlEvents:UIControlEventTouchUpInside];
         sender.tag = index;
         [btn_tmp addObject:sender];
@@ -215,6 +223,14 @@
     
 }
 
+//用户资料中得到U币
+- (void)userScore:(NSString *)score{
+    
+    self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.signTitleLab.text];
+    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (4,score.length)];
+    self.signTitleLab.attributedText = attr;
+}
 
 - (void)setScore_signed:(NSString *)score_signed{
     _score_signed = score_signed;
@@ -223,10 +239,7 @@
         
         self.signedBtn.backgroundColor = XCOLOR_CLEAR;
         self.signedBtn.enabled = NO;
-        self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score_signed];
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.signTitleLab.text];
-        [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (4,score_signed.length)];
-        self.signTitleLab.attributedText = attr;
+        [self userScore:score_signed];
         
     }else{
         
@@ -247,7 +260,7 @@
     self.signTitleLab.frame = ysModel.signTitle_frame;
     self.clockBtn.frame = ysModel.clockBtn_frame;
     self.live_bg.frame = ysModel.livingBtn_frame;
-    self.line_catigory.frame = ysModel.line_banner_frame;
+    
     self.catigory_box.frame = ysModel.catigory_box_frame;
     self.pageControl.frame = ysModel.banner_pageControl_frame;
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
@@ -257,18 +270,11 @@
     self.bannerView.frame = ysModel.bannerView_frame;
     self.flow_banner.itemSize = ysModel.header_banner_size;
     self.banner_box.frame = ysModel.banner_box_frame;
-    self.activeView.frame = ysModel.cati_active_frame;
-    if (self.ysModel.catigory_title_selected_index > 0) {
-        NSValue *value = self.ysModel.catigory_title_frames[self.ysModel.catigory_title_selected_index];
-        CGRect active_frame = self.activeView.frame;
-        active_frame.size.width =  value.CGRectValue.size.width;
-        active_frame.origin.x =  value.CGRectValue.origin.x;
-        self.activeView.frame = active_frame;
-    }
-    
+ 
     
     if (ysModel.coin > 0) {
-        self.score_signed = [NSString stringWithFormat:@"%ld",ysModel.coin];
+         NSString *coin = [NSString stringWithFormat:@"%ld",ysModel.coin];
+        [self userScore:coin];
     }else{
         self.score_signed = nil;
     }
@@ -301,10 +307,30 @@
             sender.enabled = NO;
         }
     }
-    
+ 
+    self.line_catigory.frame = ysModel.line_banner_frame;
+    self.cover_shadow.frame = self.line_catigory.bounds;
+    self.cover_shadow.mj_y = -self.cover_shadow.mj_h;
     //设置商品子项
     if (self.ysModel.catigory_current) {
         [self catigoryChange:self.catigory_buttones[0]];
+    }
+    
+    
+    if (!CGRectIsEmpty(self.line_catigory.frame)) {
+        
+        CGFloat x = 0;
+        CGFloat y = 0;
+        CGFloat w = ysModel.line_banner_frame.size.width;
+        CGFloat h = ysModel.line_banner_frame.size.height;
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(x, y, w, h)];
+        UIBezierPath *path_a = [UIBezierPath bezierPath];
+        CGFloat a_x = w * 0.5;
+        [path_a moveToPoint:CGPointMake(a_x - 15, h)];
+        [path_a addLineToPoint:CGPointMake(a_x, h - 15)];
+        [path_a addLineToPoint:CGPointMake(a_x + 15, h)];
+        [path appendPath:[path_a bezierPathByReversingPath]];
+        self.shaper.path = path.CGPath;
     }
     
     //轮播图片
@@ -499,18 +525,21 @@
         item.enabled = true;
     }
     sender.enabled = NO;
-    CGRect rect = self.activeView.frame;
-    rect.origin.x = sender.mj_x;
-    rect.size.width = sender.mj_w;
-    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.activeView.frame = rect;
-    }];
+ 
     self.ysModel.catigory_title_selected_index = sender.tag;
     self.ysModel.catigoryPackage_item_selected_index = 0;
     [self.catigoryView reloadData];
     
     self.priceCell.item = self.ysModel.catigory_Package_current;
     [self caseCatigoryValueChange];
+    
+    
+    CGPoint action_center = self.line_catigory.center;
+    action_center.x = sender.center.x;
+    [UIView animateWithDuration:ANIMATION_DUATION animations:^{
+        self.line_catigory.center = action_center;
+    }];
+    
 }
 
 //改变登录状态
@@ -520,6 +549,7 @@
     self.titleBanner.titlesGroup = self.ysModel.living_titles;
     
     if (!LOGIN){
+        
         self.signedBtn.enabled = YES;
         self.signedBtn.backgroundColor = XCOLOR_WHITE;
         self.score_signed = nil;

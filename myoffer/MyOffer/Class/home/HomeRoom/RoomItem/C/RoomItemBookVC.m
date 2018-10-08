@@ -145,13 +145,9 @@
     vc.actionBlock = ^{
         [weakSelf caseHome];
     };
-    
-    if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
-        MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:nil];
-    }else{
-        PushToViewController(vc);
-    }
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+
 }
 
 - (void)caseHome{

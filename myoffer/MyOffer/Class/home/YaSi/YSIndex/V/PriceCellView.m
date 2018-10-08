@@ -22,7 +22,8 @@
     
     [super awakeFromNib];
     
-    self.discountLab.textColor = XCOLOR_RED;
+    self.backgroundColor = XCOLOR(246, 246, 246, 1);
+    self.discountLab.textColor = XCOLOR(205, 0, 87, 1);
     self.priceLab.textColor = XCOLOR_RED;
     [self.commitBtn setBackgroundImage:XImage(@"button_red_nomal") forState:UIControlStateNormal];
     [self.commitBtn setBackgroundImage:XImage(@"button_red_highlight") forState:UIControlStateHighlighted];

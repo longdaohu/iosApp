@@ -91,8 +91,11 @@
         sender.frame = CGRectMake(sender_x, 0, sender_w, 20);
         sender_x += (sender_w + 10);
     }
-    
-    
+
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10, 10)];
+    CAShapeLayer *shaper = [CAShapeLayer layer];
+    shaper.path = path.CGPath;
+    self.layer.mask = shaper;
 }
 
 @end
