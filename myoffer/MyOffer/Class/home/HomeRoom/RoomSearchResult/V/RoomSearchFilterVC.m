@@ -16,7 +16,6 @@
 @property(nonatomic,strong)CAShapeLayer *shaper;
 @property(nonatomic,strong)UITextField *price_TF_low;
 @property(nonatomic,strong)UITextField *price_TF_Heigh;
-@property(nonatomic,strong)UITextField *time_TF_low;
 @property(nonatomic,strong)UITextField *time_TF_Heigh;
 @end
 
@@ -125,7 +124,6 @@
     UITextField *time_TF_Low = [self makeTextFieldWithPlaceholder:@"最短租期" superView:bgView];
     time_TF_Low.text = @"0";
     time_TF_Low.userInteractionEnabled = NO;
-    self.time_TF_low = time_TF_Low;
     [time_TF_Low mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(price_TF_Low);
         make.left.mas_equalTo(priceTitleLab.mas_left);
@@ -301,7 +299,6 @@
 - (void)rest:(UIButton *)sender{
 
      self.time_TF_Heigh.text = @"";
-     self.time_TF_low.text = @"";
      self.price_TF_Heigh.text = @"";
      self.price_TF_low.text = @"";
     
@@ -361,9 +358,6 @@
         
     }
     if (textField == self.price_TF_Heigh) {
-        
-    }
-    if (textField == self.time_TF_low) {
         
     }
     if (textField == self.time_TF_Heigh) {

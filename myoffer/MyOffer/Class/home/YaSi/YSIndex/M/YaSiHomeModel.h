@@ -13,9 +13,9 @@
 
 @interface YaSiHomeModel : NSObject
 @property(nonatomic,copy)NSString *displayname;
-@property(nonatomic,copy)NSString *user_coin;
-@property(nonatomic,assign)NSInteger coin;
 @property(nonatomic,assign)BOOL user_signed;
+@property(nonatomic,assign)NSInteger coin;
+@property(nonatomic,copy)NSString *user_coin;
 
 @property(nonatomic,strong)NSArray *living_items;
 @property(nonatomic,strong)NSArray *living_titles;
@@ -51,7 +51,7 @@
 @property(nonatomic,assign)CGRect onlineLab_frame;
  
 @property(nonatomic,assign)CGRect bannerView_frame;
-@property(nonatomic,assign)CGRect line_banner_frame;
+@property(nonatomic,assign)CGRect shadow_box_frame;
 
 @property(nonatomic,assign)CGRect header_frame;
 

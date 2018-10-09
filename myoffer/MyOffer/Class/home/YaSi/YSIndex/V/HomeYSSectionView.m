@@ -33,7 +33,7 @@
         CGFloat title_x  = 0;
         CGFloat title_y  = 15;
         CGFloat title_w  = 0;
-        CGFloat title_h  = 35;
+        CGFloat title_h  = 34;
         CGFloat total_width  = 0;
         NSMutableArray *item_arr = [NSMutableArray array];
         for (NSInteger index = 0; index < titles.count; index ++ ) {
@@ -46,11 +46,12 @@
             [sender setTitleColor:XCOLOR_TITLE forState:UIControlStateNormal];
             [sender setTitleColor:XCOLOR_WHITE forState:UIControlStateDisabled];
             [sender setBackgroundImage:nil forState:UIControlStateNormal];
-            [sender setBackgroundImage:XImage(@"blue_spod_home") forState:UIControlStateDisabled];
+            [sender setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_TITLE] forState:UIControlStateDisabled];
+            sender.layer.cornerRadius = title_h * 0.5;
+            sender.layer.masksToBounds = YES;
             [self addSubview:sender];
             [item_arr addObject:sender];
             [sender addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
- 
             
             CGSize title_size = [title stringWithfontSize:12];
             title_w = title_size.width + 20;

@@ -35,7 +35,7 @@
 @property(nonatomic,strong)UIPageControl *pageControl;
 @property(nonatomic,strong)UIView *catigory_box;//分类盒子
 @property(nonatomic,strong)UICollectionView *catigoryView;//分类详情
-@property(nonatomic,strong)UIView *line_catigory; //分割线
+@property(nonatomic,strong)UIView *shadow_box; //阴影盒子
 @property(nonatomic,strong)UIView *cover_shadow; //分割线
 @property(nonatomic,strong)UIView *catigory_box_line; //分割线
 @property(nonatomic,strong)CAShapeLayer *shaper;
@@ -72,7 +72,6 @@
     [ysBtn setBackgroundImage:XImage(@"ys_header_test") forState:UIControlStateNormal];
     ysBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
     ysBtn.titleLabel.numberOfLines = 0;
-    [ysBtn setTitleColor:XCOLOR_LIGHTBLUE forState:UIControlStateNormal];
     [self addSubview:ysBtn];
     self.YS_Test_Btn = ysBtn;
     [ysBtn addTarget:self action:@selector(caseLogo:) forControlEvents:UIControlEventTouchUpInside];
@@ -172,10 +171,10 @@
     catigory_box.clipsToBounds = YES;
     self.catigoryView = catigoryView;
     
-    //分类分隔线
-    UIView *line_catigory = [UIView new];
-    [catigory_box addSubview:line_catigory];
-    self.line_catigory = line_catigory;
+    //分类阴影
+    UIView *shadow_box = [UIView new];
+    [catigory_box addSubview:shadow_box];
+    self.shadow_box = shadow_box;
     
     CAShapeLayer *shaper = [CAShapeLayer layer];
     shaper.fillColor = XCOLOR_WHITE.CGColor;
@@ -185,12 +184,12 @@
     shaper.shadowOffset = CGSizeMake(0, 0);
     shaper.shadowColor = XCOLOR_BLACK.CGColor;
     shaper.shadowOpacity = 0.15;
-    [line_catigory.layer addSublayer:shaper];
+    [shadow_box.layer addSublayer:shaper];
     self.shaper = shaper;
     
     UIView *cover_shadow = [UIView new];
     cover_shadow.backgroundColor = XCOLOR_WHITE;
-    [line_catigory addSubview:cover_shadow];
+    [shadow_box addSubview:cover_shadow];
     self.cover_shadow = cover_shadow;
     
     //价格信息View
@@ -260,7 +259,6 @@
     self.signTitleLab.frame = ysModel.signTitle_frame;
     self.clockBtn.frame = ysModel.clockBtn_frame;
     self.live_bg.frame = ysModel.livingBtn_frame;
-    
     self.catigory_box.frame = ysModel.catigory_box_frame;
     self.pageControl.frame = ysModel.banner_pageControl_frame;
     self.catigoryView.frame = ysModel.catigory_collectView_frame;
@@ -308,8 +306,8 @@
         }
     }
  
-    self.line_catigory.frame = ysModel.line_banner_frame;
-    self.cover_shadow.frame = self.line_catigory.bounds;
+    self.shadow_box.frame = ysModel.shadow_box_frame;
+    self.cover_shadow.frame = self.shadow_box.bounds;
     self.cover_shadow.mj_y = -self.cover_shadow.mj_h;
     //设置商品子项
     if (self.ysModel.catigory_current) {
@@ -317,12 +315,12 @@
     }
     
     
-    if (!CGRectIsEmpty(self.line_catigory.frame)) {
+    if (!CGRectIsEmpty(self.shadow_box.frame)) {
         
         CGFloat x = 0;
         CGFloat y = 0;
-        CGFloat w = ysModel.line_banner_frame.size.width;
-        CGFloat h = ysModel.line_banner_frame.size.height;
+        CGFloat w = ysModel.shadow_box_frame.size.width;
+        CGFloat h = ysModel.shadow_box_frame.size.height;
         UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(x, y, w, h)];
         UIBezierPath *path_a = [UIBezierPath bezierPath];
         CGFloat a_x = w * 0.5;
@@ -534,10 +532,10 @@
     [self caseCatigoryValueChange];
     
     
-    CGPoint action_center = self.line_catigory.center;
+    CGPoint action_center = self.shadow_box.center;
     action_center.x = sender.center.x;
     [UIView animateWithDuration:ANIMATION_DUATION animations:^{
-        self.line_catigory.center = action_center;
+        self.shadow_box.center = action_center;
     }];
     
 }

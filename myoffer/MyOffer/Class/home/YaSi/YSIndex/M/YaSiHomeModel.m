@@ -41,7 +41,7 @@
     CGFloat ys_y = 0;
     CGFloat ys_w = 90;
     CGFloat ys_h = ys_w;
-    CGFloat ys_x = max_width - ys_w;
+    CGFloat ys_x = max_width - ys_w - 5;
     self.ysBtn_frame = CGRectMake(ys_x, ys_y, ys_w, ys_h);
     max_y = CGRectGetMaxY(self.ysBtn_frame);
     
@@ -145,14 +145,14 @@
     }
     self.catigory_title_frames = titleFrames;
     
-    CGFloat line_x = -box_w;
-    CGFloat line_w = box_w * 3;
-    CGFloat line_h = 40;
-    CGFloat line_y = title_h - line_h;
-    self.line_banner_frame = CGRectMake(line_x, line_y, line_w, line_h);
+    CGFloat shadow_box_x = -box_w;
+    CGFloat shadow_box_w = box_w * 3;
+    CGFloat shadow_box_h = 40;
+    CGFloat shadow_box_y = title_h - shadow_box_h;
+    self.shadow_box_frame = CGRectMake(shadow_box_x, shadow_box_y, shadow_box_w, shadow_box_h);
     
     CGFloat ct_cv_x = 0;
-    CGFloat ct_cv_y = line_y + line_h - 15;
+    CGFloat ct_cv_y = shadow_box_y + shadow_box_h - 15;
     CGFloat ct_cv_w = box_w;
     CGFloat ct_cv_h = 91 + 15;
     self.catigory_collectView_frame = CGRectMake(ct_cv_x, ct_cv_y, ct_cv_w, ct_cv_h);
@@ -172,7 +172,7 @@
     CGFloat price_cell_x = 0;
     CGFloat price_cell_y = ct_cv_line_y;
     CGFloat price_cell_w = box_w;
-    CGFloat price_cell_h = 60;
+    CGFloat price_cell_h = 76;
     self.price_cell_frame = CGRectMake(price_cell_x, price_cell_y, price_cell_w, price_cell_h);
     
     box_h =  price_cell_h + price_cell_y;
