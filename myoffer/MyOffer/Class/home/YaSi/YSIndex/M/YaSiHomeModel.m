@@ -270,13 +270,14 @@
     return item;
 }
 
-- (NSInteger)coin{
-    
+- (NSString *)coin{
+
     if (LOGIN && self.user_coin.length > 0) {
-        return  self.user_coin.integerValue;
-    }
     
-    return 0;
+        return  self.user_coin;
+        }
+    
+        return @"0";
 }
 
 - (BOOL)living_items_loaded{

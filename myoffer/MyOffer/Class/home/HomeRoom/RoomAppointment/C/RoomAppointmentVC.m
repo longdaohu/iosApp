@@ -221,10 +221,16 @@
                 break;
             case EditTypeRoomUserTime:{
                 title = @"入住时间";
+                NSString *regex = @"^[2]{1}[-0-9]{9}$";
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
                 if(group.content.length == 0 || !group.content){
                         [MBProgressHUD showMessage:@"入住时间不能为空"];
                         return;
-                }else{
+                } else if (![pred evaluateWithObject:group.content]) {
+                    [MBProgressHUD showMessage:@"请选择正确的时间"];
+                    return;
+                }
+                else{
                     
                     [parameter setValue:group.content forKey:@"date"];
                 }

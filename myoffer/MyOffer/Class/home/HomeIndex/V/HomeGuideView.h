@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeGuideView : UIView
+@property(nonatomic,assign)BOOL isYsPage;
 + (instancetype)guideView;
 - (void)show;
 - (void)hide;

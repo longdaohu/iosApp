@@ -24,11 +24,12 @@ typedef NS_ENUM(NSInteger,YSHomeHeaderActionType) {
 
 @interface HomeYaSiHeaderView : UIView
 @property(nonatomic,strong)YaSiHomeModel *ysModel;
-@property(nonatomic,copy)NSString *score_signed;
 @property(nonatomic,copy)void(^actionBlock)(YSHomeHeaderActionType type);
 
 //用户资料中得到U币
 - (void)userScore:(NSString *)score;
+//用户签到
+- (void)userScoreSingned;
 - (void)userLoginChange;
 - (void)removeBannerTimer;
 - (void)addBannerTimer;

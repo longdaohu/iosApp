@@ -23,7 +23,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
  
-    for (NSInteger i = 0 ; i < 5  ;i++) {
+    for (NSInteger i = 0 ; i < 2  ;i++) {
         
         UILabel *sender = [[UILabel alloc] init];
         sender.backgroundColor = i%2 ?  XCOLOR_LIGHTBLUE :  XCOLOR_RED;

@@ -70,13 +70,13 @@
         HomeIndexModel *recommend = [[HomeIndexModel alloc] initWithTitle:@"推荐" backgroudImageName:nil destVC:[HomeRecommendVC class] indexType:HomeIndexTypeDefault];
         HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思提分" backgroudImageName:@"home_yasi_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
         HomeIndexModel *applicate = [[HomeIndexModel alloc] initWithTitle:@"留学申请" backgroudImageName:@"home_application_bg" destVC:[HomeApplicationVC class] indexType:HomeIndexTypeLXSQ];
-        HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
+        HomeIndexModel *sx = [[HomeIndexModel alloc] initWithTitle:@"名企实习" backgroudImageName:@"home_YESGlobal_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeYouXue];
+//        HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
 //        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];
-        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeRoomVC class] indexType:HomeIndexType51Room];
-        HomeIndexModel *yx = [[HomeIndexModel alloc] initWithTitle:@"游学职培" backgroudImageName:@"home_YESGlobal_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeYouXue];
+        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"公寓预定" backgroudImageName:@"home_room_bg" destVC:[HomeRoomVC class] indexType:HomeIndexType51Room];
         HomeIndexModel *ym = [[HomeIndexModel alloc] initWithTitle:@"海外移民" backgroudImageName:@"home_UVIC_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeHYYM];
 
-        _groups = @[recommend,yasi,applicate,fee,room,yx,ym];
+        _groups = @[recommend,yasi,applicate,sx,room,ym];
     }
     
     return _groups;
@@ -289,6 +289,12 @@
     if (indexModel.type == HomeIndexTypeLXSQ) {
         HomeApplicationVC *application = (HomeApplicationVC *)vc;
         [application toLoadView];
+
+    }else if (indexModel.type == HomeIndexTypeYasi){
+        
+        HomeYasiVC *ys = (HomeYasiVC *)vc;
+        [ys toLoadGuideView];
+        [ys toLoadView];
         
     }else if (indexModel.type == HomeIndexType51Room){
 //        HomeFeeVC *room = (HomeFeeVC *)vc;

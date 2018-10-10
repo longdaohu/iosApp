@@ -9,5 +9,5 @@
 #import "HomeBaseVC.h"
 
 @interface HomeYasiVC : HomeBaseVC
-
+- (void)toLoadGuideView;
 @end

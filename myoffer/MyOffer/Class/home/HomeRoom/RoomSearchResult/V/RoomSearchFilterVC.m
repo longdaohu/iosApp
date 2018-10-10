@@ -313,12 +313,12 @@
     NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
     NSString *max = self.price_TF_Heigh.text;
     NSString *min = self.price_TF_low.text;
-    if (min.length > 0 && max.length > 0) {
+    if (max.length > 0) {
         if (max.integerValue < min.integerValue) {
             max = min;
             min = self.price_TF_Heigh.text;
         }
-        if (min.integerValue == 0) {
+        if (min.integerValue == 0 || !min) {
             min = @"1";
         }
         [parameter setValue:min forKey:@"min"];

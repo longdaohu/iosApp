@@ -12,10 +12,10 @@
 @class YasiCatigoryItemModel;
 
 @interface YaSiHomeModel : NSObject
-@property(nonatomic,copy)NSString *displayname;
 @property(nonatomic,assign)BOOL user_signed;
-@property(nonatomic,assign)NSInteger coin;
+@property(nonatomic,copy)NSString *displayname;
 @property(nonatomic,copy)NSString *user_coin;
+@property(nonatomic,copy,readonly)NSString *coin;
 
 @property(nonatomic,strong)NSArray *living_items;
 @property(nonatomic,strong)NSArray *living_titles;

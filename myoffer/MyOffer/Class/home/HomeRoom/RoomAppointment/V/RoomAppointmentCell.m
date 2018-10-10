@@ -42,6 +42,7 @@ static NSString *identify = @"RoomAppointmentCell";
     self.titleTF.delegate = self;
     [self.titleTF addTarget:self action:@selector(titleChageValue:) forControlEvents:UIControlEventEditingChanged];
     self.titleTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 1)];
+    self.titleTF.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (UIDatePicker *)datePicker{
@@ -52,7 +53,8 @@ static NSString *identify = @"RoomAppointmentCell";
         _datePicker.datePickerMode = UIDatePickerModeDate;
         _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
         _datePicker.calendar = [NSCalendar currentCalendar];
-        [_datePicker addTarget:self action:@selector(pickerChangeValue:) forControlEvents:UIControlEventEditingChanged];
+        _datePicker.minimumDate = [NSDate date];
+        [_datePicker addTarget:self action:@selector(pickerChangeValue:) forControlEvents:UIControlEventValueChanged];
 
     }
     

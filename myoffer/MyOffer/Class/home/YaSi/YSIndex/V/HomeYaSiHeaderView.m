@@ -222,33 +222,6 @@
     
 }
 
-//用户资料中得到U币
-- (void)userScore:(NSString *)score{
-    
-    self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score];
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.signTitleLab.text];
-    [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (4,score.length)];
-    self.signTitleLab.attributedText = attr;
-}
-
-- (void)setScore_signed:(NSString *)score_signed{
-    _score_signed = score_signed;
-
-    if (score_signed.integerValue > 0) {
-        
-        self.signedBtn.backgroundColor = XCOLOR_CLEAR;
-        self.signedBtn.enabled = NO;
-        [self userScore:score_signed];
-        
-    }else{
-        
-        self.signedBtn.backgroundColor = XCOLOR_WHITE;
-        self.signTitleLab.text = @"";
-        self.signedBtn.enabled = YES;
-    }
-    
-}
-
 - (void)setYsModel:(YaSiHomeModel *)ysModel{
     
     _ysModel = ysModel;
@@ -269,13 +242,9 @@
     self.flow_banner.itemSize = ysModel.header_banner_size;
     self.banner_box.frame = ysModel.banner_box_frame;
  
-    
-    if (ysModel.coin > 0) {
-         NSString *coin = [NSString stringWithFormat:@"%ld",ysModel.coin];
-        [self userScore:coin];
-    }else{
-        self.score_signed = nil;
-    }
+
+    //设置用户U币
+    [self userScore:ysModel.coin];
     
      //文字直播
      self.titleBanner.autoScroll = YES;
@@ -548,14 +517,40 @@
     
     if (!LOGIN){
         
-        self.signedBtn.enabled = YES;
-        self.signedBtn.backgroundColor = XCOLOR_WHITE;
-        self.score_signed = nil;
+        [self userScoreSingned];
         self.priceCell.item = self.ysModel.catigory_Package_current;
-        
+
         return;
     }
 }
+
+//用户资料中得到U币
+- (void)userScore:(NSString *)score{
+    
+    if (score && score.integerValue > 0) {
+        self.signTitleLab.text = [NSString stringWithFormat:@"签到获得%@个U币",score];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.signTitleLab.text];
+        [attr addAttribute:NSForegroundColorAttributeName value:XCOLOR_LIGHTBLUE  range: NSMakeRange (4,score.length)];
+        self.signTitleLab.attributedText = attr;
+    }else{
+        self.signTitleLab.text = @"";
+    }
+    
+    [self userScoreSingned];
+}
+
+//标识用户签到情况
+- (void)userScoreSingned{
+    
+    if (self.ysModel.user_signed) {
+        self.signedBtn.backgroundColor = XCOLOR_CLEAR;
+        self.signedBtn.enabled = NO;
+    }else{
+        self.signedBtn.backgroundColor = XCOLOR_WHITE;
+        self.signedBtn.enabled = YES;
+    }
+}
+
 
 - (void)layoutSubviews{
     [super layoutSubviews];

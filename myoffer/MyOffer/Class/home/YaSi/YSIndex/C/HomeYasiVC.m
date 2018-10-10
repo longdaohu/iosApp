@@ -7,22 +7,22 @@
 //
 
 #import "HomeYasiVC.h"
-#import "HomeYaSiHeaderView.h"
-#import "YaSiHomeModel.h"
+#import "CreateOrderVC.h"
+#import "YSMyCourseVC.h"
 #import "YSCalendarVC.h"
 #import "YaSiScheduleVC.h"
+#import "ServiceItemFrame.h"
+#import "YSCalendarCourseModel.h"
+#import "YaSiHomeModel.h"
 #import "YasiCatigoryModel.h"
 #import "YasiCatigoryItemModel.h"
 #import "YSScheduleModel.h"
 #import "HomeBannerObject.h"
-#import "HomeYSSectionView.h"
 #import "YXDateHelpObject.h"
 #import "YSImagesCell.h"
-#import "ServiceItemFrame.h"
-#import "CreateOrderVC.h"
-#import "YSCalendarCourseModel.h"
-#import "YSMyCourseVC.h"
-
+#import "HomeYSSectionView.h"
+#import "HomeGuideView.h"
+#import "HomeYaSiHeaderView.h"
 static  NSString *const Key_Sign = @"signDate";
 
 @interface HomeYasiVC ()
@@ -39,7 +39,6 @@ static  NSString *const Key_Sign = @"signDate";
     
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"page雅思首页"];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -102,21 +101,27 @@ static  NSString *const Key_Sign = @"signDate";
 //判断用户是否已签到
 - (void)caseUserSigned{
     
-    NSString *sign_value = [USDefault valueForKey:Key_Sign];
-    if (sign_value && LOGIN) {
+    if (LOGIN) {
+        
+        NSString *key = [NSString stringWithFormat:@"%@-%@",self.user.user_id,Key_Sign];
+        NSString *value = [USDefault valueForKey:key];
+        if (!value) {
+            self.ysModel.user_signed = NO;
+            return;
+        }
         NSDate *today = [NSDate date];
         YXDateHelpObject *helpObj = [YXDateHelpObject manager];
         NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
-        if ([sign_day isEqualToString:sign_value]) {
+        NSString *current = [NSString stringWithFormat:@"%@-%@",self.user.user_id,sign_day];
+        if ([current isEqualToString:value]) {
             self.ysModel.user_signed = YES;
         }
     }else{
-        
         self.ysModel.user_signed = NO;
     }
     
     if (self.YSHeader) {
-        self.YSHeader.score_signed = self.ysModel.user_coin;
+        [self.YSHeader userScore:self.ysModel.coin];
     }
     
 }
@@ -174,6 +179,31 @@ static  NSString *const Key_Sign = @"signDate";
         _YSFooter = footer;
     }
     return _YSFooter;
+}
+
+//产品引导页面
+- (void)makeGuideView{
+    
+    NSString *version = [self checkAPPVersion];
+    NSString *value = [USDefault valueForKey:@"APPVersionys"];
+    if (![value hasPrefix:version]) {
+        HomeGuideView *guideView = [HomeGuideView guideView];
+        guideView.isYsPage = YES;
+        [[UIApplication sharedApplication].keyWindow addSubview:guideView];
+        [guideView show];
+    }
+}
+
+//检查版本更新
+-(NSString *)checkAPPVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    return [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+}
+
+- (BOOL)isCurrentViewControllerVisible
+{
+    return (self.isViewLoaded && self.view.window);
 }
 
 #pragma mark : UITableViewDatasource
@@ -365,30 +395,34 @@ static  NSString *const Key_Sign = @"signDate";
         
         NSNumber *code = response[@"code"];
         if(code.integerValue == 100){
-            
-            self.YSHeader.score_signed = nil;
-            if (self.ysModel.coin > 0) {
-                self.YSHeader.score_signed = self.ysModel.user_coin;
-            }
+
             NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
+            if (!msg) msg = @"今天已签到";
             [MBProgressHUD showMessage:msg];
+            self.ysModel.user_signed = YES;
+            [self.YSHeader userScore:self.ysModel.coin];
         }
         
     }else{
         
-        NSDictionary *result = response[@"result"];
-        self.YSHeader.score_signed =  [NSString stringWithFormat:@"%@",result[@"score"]];
         [MBProgressHUD showMessage:@"签到成功"];
-        self.ysModel.user_coin = self.YSHeader.score_signed;
- 
+
+        NSDictionary *result = response[@"result"];
+        self.ysModel.user_coin = [NSString stringWithFormat:@"%ld",([result[@"score"] integerValue] + self.ysModel.coin.integerValue)];
+        self.ysModel.user_signed = YES;
+        [self.YSHeader userScore:self.ysModel.coin];
+        
         NSDate *today = [NSDate date];
         YXDateHelpObject *helpObj = [YXDateHelpObject manager];
         NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
-        [USDefault setValue:sign_day forKey:Key_Sign];
+        NSString *value = [NSString stringWithFormat:@"%@-%@",self.user.user_id,sign_day];
+        NSString *key = [NSString stringWithFormat:@"%@-%@",self.user.user_id,Key_Sign];
+        [USDefault setValue:value forKey:key];
     }
 }
 
 #pragma mark : 事件处理
+
 - (void)caseHeaderActionType:(YSHomeHeaderActionType)type{
     
     switch (type) {
@@ -419,6 +453,7 @@ static  NSString *const Key_Sign = @"signDate";
             break;
     }
 }
+
 - (void)caseBuy{
     
     if (LOGIN){
@@ -503,6 +538,13 @@ static  NSString *const Key_Sign = @"signDate";
     
     if (self.ysModel  && self.ysModel.catigorys.count > 0) {
         [self makeCategoryData];
+    }
+}
+
+- (void)toLoadGuideView{
+    
+    if ([self isCurrentViewControllerVisible]) {
+        [self makeGuideView];
     }
 }
 

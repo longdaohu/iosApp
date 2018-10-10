@@ -25,7 +25,7 @@ static const CGFloat Top_Margin = 30;
         self.intro_font_size = 13;
         self.promotion_font_size = 13;
         self.process_font_size = 13;
-        self.tag_font_size = 14;
+        self.tag_font_size = 10;
         self.header_title_font_size = 18;
         self.header_price_font_size = 22;
         self.header_unit_font_size = 11;
@@ -44,7 +44,7 @@ static const CGFloat Top_Margin = 30;
         
         myofferGroupModel *promotion = [myofferGroupModel groupWithItems:nil header:@"优惠活动"];
         promotion.type = SectionGroupTypeRoomDetailPromotion;
-        if (self.item.process.length > 0) {
+        if (self.item.promotion.length > 0) {
             promotion.items = @[self.item.promotion];
             promotion.cell_height_set = self.promotion_cell_hight;
             [_groups addObject:promotion];
@@ -149,7 +149,7 @@ static const CGFloat Top_Margin = 30;
 - (void)makePromotionFrame{
  
     CGFloat sp_x = Left_Margin;
-    CGFloat sp_y = Top_Margin;
+    CGFloat sp_y = Top_Margin - 2;
     CGFloat sp_w = 6;
     CGFloat sp_h = 20;
     self.promotion_spod_frame = CGRectMake(sp_x, sp_y, sp_w, sp_h);
@@ -266,7 +266,7 @@ static const CGFloat Top_Margin = 30;
         NSString *tag = self.item.feature[index];
         CGSize tag_size = [tag stringWithfontSize:self.tag_font_size];
         tag_w = tag_size.width + padding;
-        tag_h = tag_size.height + 6;
+        tag_h = 18;
         if (tag_w + tag_x > title_w) {
             tag_w = 0;
         }
