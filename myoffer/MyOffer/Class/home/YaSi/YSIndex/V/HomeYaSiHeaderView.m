@@ -61,6 +61,7 @@
 - (void)makeUI{
     
     self.backgroundColor = XCOLOR_WHITE;
+    self.clipsToBounds = YES;
     //背景图
     UIImageView *bgView = [UIImageView new];
     bgView.image = XImage(@"ys_header_bg");
@@ -124,32 +125,6 @@
     [self addSubview:clockBtn];
     self.clockBtn = clockBtn;
     
-    //轮播图盒子
-    UIView *banner_box = [UIView new];
-    [self addSubview:banner_box];
-    self.banner_box = banner_box;
- 
-     //轮播图
-    YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
-    self.flow_banner = flow;
-    UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
-    bannerView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
-    [banner_box addSubview:bannerView];
-    self.bannerView = bannerView;
-    bannerView.backgroundColor = XCOLOR_CLEAR;
-    bannerView.delegate = self;
-    bannerView.dataSource = self;
-    [bannerView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"bannerCell"];
-    if (@available(iOS 11.0, *)) {
-        bannerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    
-     //轮播图 pageControl
-    UIPageControl *pageControl = [UIPageControl new];
-    pageControl.currentPageIndicatorTintColor = XCOLOR_LIGHTBLUE;
-    [banner_box addSubview:pageControl];
-    self.pageControl = pageControl;
-    
     //分类产品盒子
     UIView *catigory_box = [UIView new];
     [self addSubview:catigory_box];
@@ -168,7 +143,6 @@
     catigoryView.dataSource = self;
     catigoryView.delegate = self;
     [catigory_box addSubview:catigoryView];
-    catigory_box.clipsToBounds = YES;
     self.catigoryView = catigoryView;
     
     //分类阴影
@@ -219,6 +193,35 @@
         [catigory_box addSubview:sender];
     }
     self.catigory_buttones = btn_tmp;
+    
+    
+    //轮播图盒子
+    UIView *banner_box = [UIView new];
+    [self addSubview:banner_box];
+    self.banner_box = banner_box;
+    
+    //轮播图
+    YasiBannerLayout *flow = [[YasiBannerLayout alloc] init];
+    self.flow_banner = flow;
+    UICollectionView *bannerView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
+    bannerView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    [banner_box addSubview:bannerView];
+    self.bannerView = bannerView;
+    bannerView.backgroundColor = XCOLOR_CLEAR;
+    bannerView.delegate = self;
+    bannerView.dataSource = self;
+    [bannerView registerClass:[HomeSingleImageCell class] forCellWithReuseIdentifier:@"bannerCell"];
+    bannerView.clipsToBounds = NO;
+    if (@available(iOS 11.0, *)) {
+        bannerView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    
+    //轮播图 pageControl
+    UIPageControl *pageControl = [UIPageControl new];
+    pageControl.currentPageIndicatorTintColor = XCOLOR_LIGHTBLUE;
+    [banner_box addSubview:pageControl];
+    self.pageControl = pageControl;
     
 }
 
@@ -330,6 +333,7 @@
         
         HomeSingleImageCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"bannerCell" forIndexPath:indexPath];
         NSString *path = self.ysModel.banner_images[indexPath.row];
+        cell.shadowEnable = YES;
         [cell.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
         
         return cell;

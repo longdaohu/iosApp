@@ -44,8 +44,6 @@
         self.clipsToBounds = NO;
         self.contentView.clipsToBounds = NO;
         
-
-        
     }
     return self;
 }
@@ -55,10 +53,10 @@
     if (!_shaper) {
         
         CAShapeLayer *shaper = [CAShapeLayer layer];
-        shaper.shadowColor =  XCOLOR_RED.CGColor;
+        shaper.shadowColor =  XCOLOR_BLACK.CGColor;
         shaper.shadowOffset = CGSizeMake(0, 3);
         shaper.shadowRadius = 5;
-        shaper.shadowOpacity = 0.1;
+        shaper.shadowOpacity = 0.15;
         _shaper = shaper;
         [self.contentView.layer insertSublayer:shaper atIndex:0];
     }
