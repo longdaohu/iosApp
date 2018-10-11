@@ -12,6 +12,7 @@
 
 @property(nonatomic,copy)NSString *_id ;
 @property(nonatomic,assign)BOOL contract_enable;
+@property(nonatomic,assign)BOOL reduce_flag;
 @property(nonatomic,copy)NSString *name ;
 @property(nonatomic,copy)NSString *category_id ;
 @property(nonatomic,copy)NSString *display_price ;

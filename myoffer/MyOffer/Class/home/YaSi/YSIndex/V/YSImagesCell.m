@@ -20,7 +20,7 @@
     
     if (self) {
         
-        self.contentView.backgroundColor = XCOLOR(0, 19, 30, 1);
+        self.contentView.backgroundColor = XCOLOR_WHITE;
         for (NSInteger index = 0; index < 5; index++) {
             
             UIImageView *iconView = [[UIImageView alloc] init];
@@ -50,15 +50,18 @@
     if (!item) return;
     
     NSArray *imageFrames = item.imagesFrame_arr[self.current_index];
-    
     NSArray *images = item.items[self.current_index];
     NSArray *array = (self.iconView_arr.count > images.count) ?  images : self.iconView_arr;
     for (NSInteger index = 0; index < array.count; index++) {
         UIImageView *iconView = self.iconView_arr[index];
-        NSURL *path = [NSURL URLWithString: images[index]];
-        [iconView sd_setImageWithURL: path placeholderImage:nil];
-        NSValue *value = imageFrames[index];
-        iconView.frame = value.CGRectValue;
+        if (index < images.count) {
+            NSURL *path = [NSURL URLWithString: images[index]];
+            [iconView sd_setImageWithURL: path placeholderImage:nil];
+        }
+        if (index < imageFrames.count) {
+            NSValue *value = imageFrames[index];
+            iconView.frame = value.CGRectValue;
+        }
     }
     
 }

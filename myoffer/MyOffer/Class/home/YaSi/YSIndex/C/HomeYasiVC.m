@@ -107,15 +107,19 @@ static  NSString *const Key_Sign = @"signDate";
         NSString *value = [USDefault valueForKey:key];
         if (!value) {
             self.ysModel.user_signed = NO;
-            return;
+            
+        }else{
+            
+            NSDate *today = [NSDate date];
+            YXDateHelpObject *helpObj = [YXDateHelpObject manager];
+            NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
+            NSString *current = [NSString stringWithFormat:@"%@-%@",self.user.user_id,sign_day];
+            if ([current isEqualToString:value]) {
+                self.ysModel.user_signed = YES;
+            }
         }
-        NSDate *today = [NSDate date];
-        YXDateHelpObject *helpObj = [YXDateHelpObject manager];
-        NSString *sign_day = [helpObj getStrFromDateFormat:@"yyyy-MM-dd" Date:today];
-        NSString *current = [NSString stringWithFormat:@"%@-%@",self.user.user_id,sign_day];
-        if ([current isEqualToString:value]) {
-            self.ysModel.user_signed = YES;
-        }
+            
+        
     }else{
         self.ysModel.user_signed = NO;
     }
@@ -395,7 +399,6 @@ static  NSString *const Key_Sign = @"signDate";
         
         NSNumber *code = response[@"code"];
         if(code.integerValue == 100){
-
             NSString *msg =[NSString stringWithFormat:@"%@",response[@"msg"]];
             if (!msg) msg = @"今天已签到";
             [MBProgressHUD showMessage:msg];
@@ -411,6 +414,9 @@ static  NSString *const Key_Sign = @"signDate";
         self.ysModel.user_coin = [NSString stringWithFormat:@"%ld",([result[@"score"] integerValue] + self.ysModel.coin.integerValue)];
         self.ysModel.user_signed = YES;
         [self.YSHeader userScore:self.ysModel.coin];
+    }
+    
+    if (self.ysModel.user_signed) {
         
         NSDate *today = [NSDate date];
         YXDateHelpObject *helpObj = [YXDateHelpObject manager];
@@ -419,6 +425,7 @@ static  NSString *const Key_Sign = @"signDate";
         NSString *key = [NSString stringWithFormat:@"%@-%@",self.user.user_id,Key_Sign];
         [USDefault setValue:value forKey:key];
     }
+    
 }
 
 #pragma mark : 事件处理
@@ -464,6 +471,7 @@ static  NSString *const Key_Sign = @"signDate";
         item.service_id = self.ysModel.catigory_Package_current._id;
         item.cover_url = self.ysModel.catigory_Package_current.cover_url;
         item.name  = self.ysModel.catigory_Package_current.name;
+        item.reduce_flag = self.ysModel.catigory_Package_current.reduce_flag;
         item.fitPerson_hiden = true;
         ServiceItemFrame  *itemFrame = [[ServiceItemFrame alloc] init];
         itemFrame.item = item;

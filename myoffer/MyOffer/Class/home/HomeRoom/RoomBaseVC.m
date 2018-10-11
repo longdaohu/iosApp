@@ -67,9 +67,11 @@
 
 
 
-- (void)property_listWhithParameters:(NSDictionary *)parameter additionalSuccessAction:(void (^)(id, int ))success additionalFailureAction:(void (^)(NSError *, int ))failure{
+- (void)property_listWhithParameters:(NSDictionary *)parameter progressHub:(BOOL)showHub additionalSuccessAction:(void (^)(id, int ))success additionalFailureAction:(void (^)(NSError *, int ))failure{
     
-    [self makeHUD];
+    if (showHub) {
+        [self makeHUD];
+    }
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] property_listWhithParameters:parameter  completionBlock:^(CACommonResponse *response) {
  

@@ -57,11 +57,21 @@
                         <constraint firstItem="mi0-Sc-ujo" firstAttribute="top" secondItem="s8R-3F-ENr" secondAttribute="top" id="fTI-kA-Fl9"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZT-Ld-Vdb">
+                    <rect key="frame" x="0.0" y="76" width="375" height="5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="LnV-xB-3XB"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="HZT-Ld-Vdb" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="796-Z8-4yF"/>
                 <constraint firstItem="s8R-3F-ENr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CpZ-8n-e7Y"/>
                 <constraint firstItem="s8R-3F-ENr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="21" id="o3u-HG-hA6"/>
+                <constraint firstItem="HZT-Ld-Vdb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tvg-Mj-pdW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HZT-Ld-Vdb" secondAttribute="bottom" constant="-5" id="vtb-My-hjl"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -69,8 +79,9 @@
                 <outlet property="commitBtn" destination="mi0-Sc-ujo" id="1SQ-WW-wUH"/>
                 <outlet property="discountLab" destination="rz5-ub-fNO" id="fbO-Ks-wWu"/>
                 <outlet property="priceLab" destination="tJv-x1-vcP" id="xll-f4-pMp"/>
+                <outlet property="shadowView" destination="HZT-Ld-Vdb" id="xW5-Lh-QYK"/>
             </connections>
-            <point key="canvasLocation" x="33" y="-221"/>
+            <point key="canvasLocation" x="32.5" y="-221"/>
         </view>
     </objects>
 </document>

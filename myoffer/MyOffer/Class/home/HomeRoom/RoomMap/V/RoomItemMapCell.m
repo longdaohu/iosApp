@@ -27,22 +27,6 @@
     self.priceLab.textColor = XCOLOR_RED;
 }
 
-- (void)setItemFrameModel:(RoomItemFrameModel *)itemFrameModel{
-    
-    _itemFrameModel = itemFrameModel;
-    self.titleLab.text = itemFrameModel.item.name;
-    self.priceLab.text = [NSString stringWithFormat:@"%@",itemFrameModel.item.price];
-    self.unitLab.text = itemFrameModel.item.unit;
-    if ([itemFrameModel.item.thumbnail hasPrefix:@"http"]){
-        NSURL *path = [NSURL URLWithString:[itemFrameModel.item.thumbnail toUTF8WithString]];
-        [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    }else{
-        self.iconView.image = [UIImage imageNamed:@"PlaceHolderImage"];
-    }
-    
-    [self makeFeatureItemWithArray:itemFrameModel.item.feature];
-}
-
 
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
     _item = item;

@@ -24,10 +24,6 @@
     if (self) {
 
         self.backgroundColor = XCOLOR_WHITE;
-        self.layer.shadowOpacity = 0.15;
-        self.layer.shadowOffset = CGSizeMake(0, 0);
-        self.layer.shadowColor = XCOLOR_BLACK.CGColor;
-        self.clipsToBounds = NO;
 
         NSArray *titles = @[@"嘿客课程介绍",@"嘿客课程大纲",@"报名须知",@"常见问题"];
         CGFloat title_x  = 0;

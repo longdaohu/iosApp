@@ -129,7 +129,19 @@
 
 - (void)makeTableView
 {
-    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds  style:UITableViewStylePlain];
+    WeakSelf
+    CGFloat high_filter = 40;
+    RoomSearchFilterView *filterView = [[RoomSearchFilterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, high_filter)];
+    filterView.RoomSearchFilterViewBlock = ^(RoomFilterType type){
+        [weakSelf caseParameterType:type];
+    };
+    [self.view addSubview:filterView];
+    self.filterView = filterView;
+    if (self.city) {
+        filterView.city = self.city.name_cn;
+    }
+ 
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:CGRectMake(0,high_filter+1, self.view.mj_w, self.view.mj_h - high_filter - XNAV_HEIGHT)  style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -140,19 +152,6 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    WeakSelf
-    RoomSearchFilterView *filterView = [[RoomSearchFilterView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 40)];
-    filterView.RoomSearchFilterViewBlock = ^(RoomFilterType type){
-        [weakSelf caseParameterType:type];
-    };
-    [self.view addSubview:filterView];
-    self.filterView = filterView;
-    if (self.city) {
-        filterView.city = self.city.name_cn;
-    }
-    CGFloat high = filterView.mj_h;
-    self.tableView.contentInset = UIEdgeInsetsMake(high, 0, 1.7*high, 0);
-    
     self.tableView.actionBlock = ^{
         [weakSelf makeData];
     };
@@ -215,13 +214,14 @@
      */
     [self.parameter setValue:[NSString stringWithFormat:@"%ld",self.next_page] forKey:KEY_PAGE];
     WeakSelf;
-    [self property_listWhithParameters:self.parameter additionalSuccessAction:^(id response, int status) {
+    [self property_listWhithParameters:self.parameter progressHub:(self.next_page == 1) additionalSuccessAction:^(id response, int status) {
         [weakSelf updateUIWithResponse:response];
     } additionalFailureAction:^(NSError *error, int status) {
         if (weakSelf.items.count == 0) {
             [weakSelf.tableView alertWithRoloadMessage:nil];
         }
     }];
+ 
     
 }
 
@@ -321,7 +321,11 @@
 - (void)caseMap{
     
     RoomMapVC *vc = [[RoomMapVC alloc] init];
-    vc.isUK = YES;
+    if (self.items.count > 0) {
+        vc.items = self.items;
+    }else{
+        vc.isUK = YES;
+    }
     PushToViewController(vc);
 }
 

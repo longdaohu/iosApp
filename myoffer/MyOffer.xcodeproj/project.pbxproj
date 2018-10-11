@@ -217,8 +217,8 @@
 		AE4BBCF9210F1E9400209FC8 /* RoomSearchFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCF8210F1E9400209FC8 /* RoomSearchFilterView.m */; };
 		AE4BBCFC210F257000209FC8 /* RoomSearchFilterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCFB210F257000209FC8 /* RoomSearchFilterVC.m */; };
 		AE4BBCFF210FF89A00209FC8 /* HomeBannerThemeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */; };
-		AE4BBD062110012400209FC8 /* LaunchScreen_logo_b.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */; };
-		AE4BBD072110012400209FC8 /* LaunchScreen_logo_a.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */; };
+		AE4BBD062110012400209FC8 /* LaunchScreen_logo_e.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */; };
+		AE4BBD072110012400209FC8 /* LaunchScreen_logo_d.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD052110012300209FC8 /* LaunchScreen_logo_d.png */; };
 		AE4BBD0E21105C7300209FC8 /* RoomItemBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD0D21105C7300209FC8 /* RoomItemBookVC.m */; };
 		AE4BBD1521105E1B00209FC8 /* RoomItemBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4BBD1321105E1B00209FC8 /* RoomItemBookCell.m */; };
 		AE4BBD1621105E1B00209FC8 /* RoomItemBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4BBD1421105E1B00209FC8 /* RoomItemBookCell.xib */; };
@@ -1310,8 +1310,8 @@
 		AE4BBCFB210F257000209FC8 /* RoomSearchFilterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomSearchFilterVC.m; sourceTree = "<group>"; };
 		AE4BBCFD210FF89A00209FC8 /* HomeBannerThemeLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBannerThemeLayout.h; sourceTree = "<group>"; };
 		AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeBannerThemeLayout.m; sourceTree = "<group>"; };
-		AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_b.png; path = ../LaunchScreen_logo_b.png; sourceTree = "<group>"; };
-		AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_a.png; path = ../LaunchScreen_logo_a.png; sourceTree = "<group>"; };
+		AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_e.png; path = ../LaunchScreen_logo_e.png; sourceTree = "<group>"; };
+		AE4BBD052110012300209FC8 /* LaunchScreen_logo_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen_logo_d.png; path = ../LaunchScreen_logo_d.png; sourceTree = "<group>"; };
 		AE4BBD0C21105C7300209FC8 /* RoomItemBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookVC.h; sourceTree = "<group>"; };
 		AE4BBD0D21105C7300209FC8 /* RoomItemBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomItemBookVC.m; sourceTree = "<group>"; };
 		AE4BBD1221105E1B00209FC8 /* RoomItemBookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomItemBookCell.h; sourceTree = "<group>"; };
@@ -2633,8 +2633,8 @@
 				46C6854D1B2AEB3D001EA296 /* Images.xcassets */,
 				AE027EB81C3A53C4007EBD28 /* PushConfig.plist */,
 				463E3A4D1B230EDC00E0BAF8 /* Info.plist */,
-				AE4BBD042110012300209FC8 /* LaunchScreen_logo_b.png */,
-				AE4BBD052110012300209FC8 /* LaunchScreen_logo_a.png */,
+				AE4BBD042110012300209FC8 /* LaunchScreen_logo_e.png */,
+				AE4BBD052110012300209FC8 /* LaunchScreen_logo_d.png */,
 				463E3AC01B2310B000E0BAF8 /* PrefixHeader.pch */,
 				AEF1BAEA1BC61A77008860F6 /* InfoPlist.strings */,
 				AEE1ABAE1BCA79A30008EF0C /* Localizable.strings */,
@@ -6837,7 +6837,7 @@
 				AE60C23620E4C83C000867A8 /* home_application_cell_uni.jpg in Resources */,
 				AE6178D920734797006B311A /* CreateOrderItemCell.xib in Resources */,
 				AEA545D720D274270095CBDA /* HomeRecommendActivityCell.xib in Resources */,
-				AE4BBD062110012400209FC8 /* LaunchScreen_logo_b.png in Resources */,
+				AE4BBD062110012400209FC8 /* LaunchScreen_logo_e.png in Resources */,
 				AEDDAA7220E4FEC00069C138 /* intro_03.jpg in Resources */,
 				AEF657B520FDC4B200C0D849 /* home_uvic_hot_02.jpg in Resources */,
 				AE3A5AF71F98A08400DFB47A /* RankDetailViewController.xib in Resources */,
@@ -6857,7 +6857,7 @@
 				AE6178C520723C21006B311A /* DiscountVC.xib in Resources */,
 				AEDDAA8320E63A940069C138 /* home_global_500_right.jpeg in Resources */,
 				AEFDD87C215E047C00B37194 /* Resources.bundle in Resources */,
-				AE4BBD072110012400209FC8 /* LaunchScreen_logo_a.png in Resources */,
+				AE4BBD072110012400209FC8 /* LaunchScreen_logo_d.png in Resources */,
 				AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */,
 				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
 				AE1A805C20DA44B800CE9E50 /* home_fee_b.jpg in Resources */,

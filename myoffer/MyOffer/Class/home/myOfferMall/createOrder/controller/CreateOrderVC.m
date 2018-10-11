@@ -108,7 +108,7 @@
 
 - (void)makeUI{
     
-    self.title  = @"订单确认页";
+    self.title  = @"订单确认";
     [self makeTableView];
     self.priceLab.text = self.itemFrame.item.price_str;
     [self.parameter setValue:self.itemFrame.item.service_id  forKey:KEY_SKUID];

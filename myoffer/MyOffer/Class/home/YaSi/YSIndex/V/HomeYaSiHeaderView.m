@@ -347,6 +347,8 @@
     
     if (collectionView == self.catigoryView) {
         
+        if (self.ysModel.catigoryPackage_item_selected_index == indexPath.row) return;
+        
         self.ysModel.catigoryPackage_item_selected_index = indexPath.row;
         [collectionView reloadData];
         self.priceCell.item = self.ysModel.catigory_Package_current;

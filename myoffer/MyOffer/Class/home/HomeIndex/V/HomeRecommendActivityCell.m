@@ -27,7 +27,7 @@
     self.twoView.layer.masksToBounds = YES;
     self.threeView.layer.cornerRadius = 4;
     self.threeView.layer.masksToBounds = YES;
-    self.iconViews = @[self.oneView,self.twoView,self.threeView];
+    self.iconViews = @[self.twoView,self.threeView,self.oneView];
     for (NSInteger index = 0; index < self.iconViews.count; index++) {
         UIImageView *item = self.iconViews[index];
         item.userInteractionEnabled = YES;
@@ -42,34 +42,31 @@
  
     if (items.count == 0) return;
     
+    NSArray *subviews =  [self.iconViews subarrayWithRange:NSMakeRange(0, self.iconViews.count-1)];
     
-    for (NSInteger index = 1; index < self.iconViews.count; index++) {
-    
-        UIImageView *item = self.iconViews[index];
+    for (NSInteger index = 0; index < subviews.count; index++) {
+        UIImageView *itemView = subviews[index];
         
         if (index < items.count) {
- 
-            HomeBannerObject *dic = items[index - 1];
+            HomeBannerObject *dic = items[index];
             NSString *icon = [dic.image toUTF8WithString];
-            [item sd_setImageWithURL:[NSURL URLWithString:icon]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-
-         }else{
-             
-            item.userInteractionEnabled = NO;
-            item.alpha = 0;
+            [itemView sd_setImageWithURL:[NSURL URLWithString:icon]  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+        }else{
+            itemView.userInteractionEnabled = NO;
+            itemView.alpha = 0;
         }
+
     }
 }
 
 - (void)actionClick:(UITapGestureRecognizer *)tap{
     
     NSString *path = @"";
-    
-    if (tap.view.tag == 0) {
+    if (tap.view.tag == (self.iconViews.count - 1)) {
         path = @"caseInvitation";
     }else{
-         HomeBannerObject *dic = self.items[tap.view.tag - 1];
-        path = dic.target;
+         HomeBannerObject *dic = self.items[tap.view.tag];
+         path = dic.target;
     }
     if (self.actionBlock) {
         self.actionBlock(path);

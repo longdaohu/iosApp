@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *discountLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
+@property (weak, nonatomic) IBOutlet UIView *shadowView;
 
 @end
 
@@ -32,6 +33,10 @@
     self.commitBtn.layer.shadowOffset = CGSizeMake(0, 3);
     self.commitBtn.layer.shadowOpacity = 0.5;
     self.commitBtn.layer.shadowColor = XCOLOR_RED.CGColor;
+    
+    self.shadowView.layer.shadowOpacity = 0.15;
+    self.shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+    self.shadowView.layer.shadowColor = XCOLOR_BLACK.CGColor;
 }
 
 - (void)setItem:(YasiCatigoryItemModel *)item{
