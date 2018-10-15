@@ -325,8 +325,7 @@ static NSString *identify = @"cell";
         PushToViewController(vc);
         NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
         NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
-        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
-        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
+
     }
     
 }
