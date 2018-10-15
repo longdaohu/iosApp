@@ -326,12 +326,6 @@ static NSString *identify = @"cell";
         NSLog(@">>>>>>>>>>>>> a %@",path);
         NSLog(@">>>>>>>>>>>>> b %@",path);
         NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
         NSLog(@">>>>>>>>>>>>> d %@",path);
         NSLog(@">>>>>>>>>>>>> e %@",path);
 
