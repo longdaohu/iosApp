@@ -323,7 +323,7 @@ static NSString *identify = @"cell";
         NSString *path = [NSString stringWithFormat:@"https://www.51room.com/article/index/%@",item.no_id];
         WebViewController *vc = [[WebViewController alloc] initWithPath:path];
         PushToViewController(vc);
-        NSLog(@">>>>>>>>>>>>> test %@",path);
+        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
     }
     
 }
