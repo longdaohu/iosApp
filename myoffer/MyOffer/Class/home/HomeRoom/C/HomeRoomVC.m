@@ -323,17 +323,11 @@ static NSString *identify = @"cell";
         NSString *path = [NSString stringWithFormat:@"https://www.51room.com/article/index/%@",item.no_id];
         WebViewController *vc = [[WebViewController alloc] initWithPath:path];
         PushToViewController(vc);
-        NSLog(@">>>>>>>>>>>>> a %@",path);
-        NSLog(@">>>>>>>>>>>>> b %@",path);
-        NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> c %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> d %@",path);
-        NSLog(@">>>>>>>>>>>>> e %@",path);
+        NSLog(@">>>>>>>>>>>>> 2 %@",path);
+        NSLog(@">>>>>>>>>>>>> 2 %@",path);
+        NSLog(@">>>>>>>>>>>>> 2 %@",path);
+        NSLog(@">>>>>>>>>>>>> 2 %@",path);
+        NSLog(@">>>>>>>>>>>>> 2 %@",path);
 
     }
     
