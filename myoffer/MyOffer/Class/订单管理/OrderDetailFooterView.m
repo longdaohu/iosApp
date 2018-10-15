@@ -24,6 +24,7 @@
 @property(nonatomic,strong)UILabel *contact_subLab;
 @property(nonatomic,strong)UIButton *lookBtn;
 @property(nonatomic,strong)UIButton *downloadBtn;
+@property(nonatomic,strong)UIButton *orderServiceBtn;//售后服务按钮hdr
 
 @end
 
@@ -92,6 +93,19 @@
         self.payBtn.tag = 10;
         [self.payBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView addSubview:self.payBtn];
+        
+        //售后服务按钮hdr
+        UIButton *orderServiceBtn = [[UIButton alloc]init];
+        orderServiceBtn.titleLabel.font = XFONT(12);
+        NSMutableAttributedString *serviceStr = [[NSMutableAttributedString alloc]initWithString:@"售后服务"];
+        NSRange strRange = NSMakeRange(0, [serviceStr length]);
+        [serviceStr addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:strRange];
+        [serviceStr addAttribute:NSForegroundColorAttributeName value:XCOLOR(5, 203, 249, 1) range:strRange];
+        [orderServiceBtn setAttributedTitle:serviceStr forState:UIControlStateNormal];
+        orderServiceBtn.tag = 100;
+        [orderServiceBtn addTarget:self action:@selector(onclick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:orderServiceBtn];
+        self.orderServiceBtn = orderServiceBtn;
         
         [self makeContactView];
     }
@@ -323,9 +337,21 @@
           NSString *operator = [log1[@"operator"] isEqualToString:@"BUYER"] ? @"手动取消订单。": @"支付超时，订单关闭。";
           self.NoTwoRecordLab.text = [NSString stringWithFormat:@"%@ %@",[self makeTime:log1[@"create_at"]],operator];
     }
+    //售后服务hdr
+    //    if([orderDict[@"sign"]isEqualToString:@"0"])
+    //    {
+    //        self.orderServiceBtn.hidden = YES;
+    //    }else
+    //    {
+    //        self.orderRecordLab.hidden = NO;
+    //    }
     
 }
-
+-(void)setAfterServiceDict:(NSDictionary *)afterServiceDict
+{
+    
+    
+}
 -(NSDate *)localDate:(NSDate *)date
 {
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
@@ -446,7 +472,12 @@
         CGFloat look_y = down_y;
         self.lookBtn.frame = CGRectMake(look_x, look_y, look_w, look_h);
     
-    
+        //售后服务按钮hdr
+        CGFloat service_x = kScreenWidth - 80;
+        CGFloat service_y = CGRectGetMaxY(self.contactView.frame)+13.5;
+        CGFloat service_w = 80;
+        CGFloat service_h = 27;
+        self.orderServiceBtn.frame = CGRectMake(service_x, service_y, service_w, service_h);
 }
 
 @end

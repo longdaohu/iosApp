@@ -13,6 +13,7 @@
 #import "PayOrderViewController.h"
 #import "OrderViewController.h"
 #import "IDMPhotoBrowser.h"
+#import "OrderServicePopView.h"//售后服务弹出视图hdr
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -26,6 +27,7 @@
 @property(nonatomic,assign)OrderDetailDownloadStyle  downloadStyle;
 @property(nonatomic,copy)NSString *skuID;
 @property(nonatomic,strong) OrderDetailFooterView *footer;
+@property(nonatomic,strong)OrderServicePopView *popView;//售后服务弹出视图hdr
 
 @end
 
@@ -59,8 +61,22 @@
   
     [self makeDataSourse];
     [self makeUI];
+    [self makeAfterServiceData];//售后服务hdr
 }
-
+//售后服务hdr
+-(void)makeAfterServiceData{
+    WeakSelf
+    
+    NSString *path = [NSString stringWithFormat:kAPISelectorAfterService];
+    
+    [self startAPIRequestWithSelector:path parameters:nil success:^(NSInteger statusCode, id response) {
+        [weakSelf makeAfterService:response];
+    }];
+}
+-(void)makeAfterService:(NSDictionary*)respose{
+    NSLog(@"makeAfterService:%@",respose);
+    
+}
 -(void)makeDataSourse{
     
     WeakSelf
@@ -177,14 +193,20 @@
             PayOrderViewController *pay =[[PayOrderViewController alloc] init];
             pay.order = weakSelf.order;
             [weakSelf.navigationController pushViewController:pay animated:YES];
-        }else{
+        }
+        //售后按钮hdr
+        else if (100 == sender.tag){
+            [weakSelf popViews];//hdr
+        }
+        else{
             [weakSelf cancelOrder];
         }
     };
     footer.orderDetailActionBlock = ^(BOOL isDownLoadButtonClick) {
         [weakSelf orderContactCellOnClick:isDownLoadButtonClick];
     };
-    
+    //售后服务视图数据hdr
+    //  self.popView.orderServiceDict = respose;
 }
 
 -(void)makeTableView
@@ -394,6 +416,53 @@
     [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
     KDClassLog(@"订单详情 + OrderDetailViewController + dealloc");
 }
+#pragma mark : 生成、弹出和隐藏视图hdr
 
+- (UIView *)popView {
+    if(!_popView)
+    {
+        __weak typeof(self) weakSelf = self;
+        OrderServicePopView *popView = [[OrderServicePopView alloc]initWithFrame:ContentViewInitFrame];
+        popView.actionBlock = ^(UIButton * _Nonnull sender){
+            [weakSelf popDismiss];
+            
+        };
+        _popView = popView;
+        
+    }
+    return _popView;
+}
+-(void)popViews{
+    UIView * bgVIew = [[UIView alloc]init];
+    bgVIew.frame = PopViewBounds;
+    bgVIew.backgroundColor = [UIColor clearColor];
+    [BaseWindow addSubview:bgVIew];
+    
+    self.popView.frame = ContentViewInitFrame;
+    [bgVIew addSubview:self.popView];
+    
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.popView.frame = ContentViewPopFrame;
+    }];
+    //[bgVIew addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popDismiss)]];
+}
 
+-(void)popDismiss
+{
+    if(self.popView)
+    {
+        UIView *view = self.popView.superview;
+        if(view)
+        {
+            [UIView animateWithDuration:0.25f animations:^{
+                //  popBackView.backgroundColor = PopViewInitBackColor;
+                // self.popContentView.frame = ContentViewInitFrame;
+            } completion:^(BOOL finished) {
+                [self.popView removeFromSuperview];
+                [view removeFromSuperview];
+            }];
+        }
+    }
+}
 @end

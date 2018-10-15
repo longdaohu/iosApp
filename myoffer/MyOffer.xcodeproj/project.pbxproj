@@ -35,6 +35,8 @@
 		469CBE371B2FCD3500EEE235 /* KDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 469CBE361B2FCD3500EEE235 /* KDKeychain.m */; };
 		46B8E8791B2C667A00A11170 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B8E8781B2C667A00A11170 /* LaunchScreen.xib */; };
 		46C6854E1B2AEB3D001EA296 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C6854D1B2AEB3D001EA296 /* Images.xcassets */; };
+		4EC905EF2174317200999220 /* OrderServicePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC905EE2174317200999220 /* OrderServicePopView.m */; };
+		4EC905F32174319800999220 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC905F22174319800999220 /* TTTAttributedLabel.m */; };
 		5672E8B41CCBAF7C0099FDFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5672E8B31CCBAF7B0099FDFC /* WebKit.framework */; };
 		56DB630B1C397FF7004DA145 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 56DB630A1C397FF7004DA145 /* Reachability.m */; };
 		5C854C0A39E8380FC8EE1290 /* libPods-MyOffer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF97F809FE91DF51B65AFA9 /* libPods-MyOffer.a */; };
@@ -997,6 +999,10 @@
 		469CBE361B2FCD3500EEE235 /* KDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDKeychain.m; sourceTree = "<group>"; };
 		46B8E8781B2C667A00A11170 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		46C6854D1B2AEB3D001EA296 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4EC905ED2174317200999220 /* OrderServicePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServicePopView.h; sourceTree = "<group>"; };
+		4EC905EE2174317200999220 /* OrderServicePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServicePopView.m; sourceTree = "<group>"; };
+		4EC905F12174319800999220 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		4EC905F22174319800999220 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		5672E8B31CCBAF7B0099FDFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/PrivateFrameworks/WebKit.framework; sourceTree = SDKROOT; };
 		56DB63091C397FF7004DA145 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		56DB630A1C397FF7004DA145 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -2751,6 +2757,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4EC905F02174319800999220 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				4EC905F12174319800999220 /* TTTAttributedLabel.h */,
+				4EC905F22174319800999220 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		565E52461C269D1100B9053B /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -3798,6 +3813,8 @@
 		AE712FAE1D5D6E3D00D0F48A /* orderDetail */ = {
 			isa = PBXGroup;
 			children = (
+				4EC905ED2174317200999220 /* OrderServicePopView.h */,
+				4EC905EE2174317200999220 /* OrderServicePopView.m */,
 				AEA249301D5B215300DD7939 /* OrderDetailFooterView.h */,
 				AEA249311D5B215300DD7939 /* OrderDetailFooterView.m */,
 				AEA249321D5B215300DD7939 /* OrderDetailHeaderView.h */,
@@ -5605,6 +5622,7 @@
 		AEE73C351BCCBB6400B96006 /* LIB */ = {
 			isa = PBXGroup;
 			children = (
+				4EC905F02174319800999220 /* TTTAttributedLabel */,
 				AEFDD66D215E047B00B37194 /* eduVideoSDK */,
 				AE4BBD23211154C900209FC8 /* Room51SDK */,
 				AEF657E421008C2300C0D849 /* UMSocial */,
@@ -6705,7 +6723,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -7370,6 +7388,7 @@
 				AE4BBCF2210EE88500209FC8 /* RoomSearchCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
 				AEFDD833215E047C00B37194 /* TKListView.m in Sources */,
+				4EC905EF2174317200999220 /* OrderServicePopView.m in Sources */,
 				AE96A3691E8BAD54006E8E35 /* ServiceItemFrame.m in Sources */,
 				AE3AB6AA1F21A27300A3C7E3 /* SMHotCell.m in Sources */,
 				AEFDD843215E047C00B37194 /* TKPlaybackMaskView.m in Sources */,
@@ -7544,6 +7563,7 @@
 				AE6FF2A51E892A2800C2A013 /* ServiceItem.m in Sources */,
 				AEBAAEA0213E28FF002FD301 /* YXDayCell.m in Sources */,
 				AE4B2E791F1E095600E328F7 /* MyofferMessageFrame.m in Sources */,
+				4EC905F32174319800999220 /* TTTAttributedLabel.m in Sources */,
 				AEB75E0021352C8800C9129C /* YSScheduleCell.m in Sources */,
 				AE1FD7261D5C929500FFD5A8 /* MJRefreshAutoFooter.m in Sources */,
 				AEFDD895215E047D00B37194 /* TXSakura.m in Sources */,
@@ -7981,7 +8001,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

@@ -24,6 +24,8 @@ typedef void(^OrderDetailFooterViewBlock)(UIButton *sender);
 @property(nonatomic,assign)OrderDetailDownloadStyle  type;
 @property(nonatomic,copy)void(^orderDetailActionBlock)(BOOL isDownLoadButtonClick);
 
+@property(nonatomic,strong)NSDictionary *afterServiceDict;//售后服务hdr
+
 @end
 
 
