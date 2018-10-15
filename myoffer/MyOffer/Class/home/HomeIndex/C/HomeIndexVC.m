@@ -22,7 +22,7 @@
 
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
-#define  ADKEY @"Advertiseseeee"
+#define  ADKEY @"Advertise"
 
 @interface HomeIndexVC ()<UIScrollViewDelegate>
 @property(nonatomic,strong)CatigaryScrollView *bgScrollView;
@@ -382,7 +382,7 @@
     [self baseDataSourse]; //加载基础数据
 }
 
-//---推广接口，用户是否在使用myoffer---
+#pragma mark : ---推广接口，用户是否在使用myoffer---
 -(void)advanceSupportWithDuration:(int)durationTime
 {
     
@@ -395,16 +395,25 @@
     NSString  *path = [NSString stringWithFormat:@"GET /api/youqian/finish?idfa=%@&signature=%@",adId,signature];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(durationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       
+        
         [self startAPIRequestWithSelector:path  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
+            
         } additionalSuccessAction:^(NSInteger statusCode, id response) {
+            
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ADKEY];
+            
         } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+            
             [self advanceSupportWithDuration:20];
+            
         }];
+        
+        
     });
     
 }
-//--应用监听，用户登录立即发送提醒给服务器--
+#pragma mark : --应用监听，用户登录立即发送提醒给服务器--
 -(void)getAppReport
 {
     NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
@@ -416,7 +425,7 @@
 }
 
 
-//检查版本更新
+#pragma mark : 检查版本更新
 - (void)checkTheNewVersion
 {
     //如果提示过就不再重新请求网络更新提示

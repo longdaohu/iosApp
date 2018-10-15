@@ -26,7 +26,6 @@
 #import "HomeRoomIndexEventsObject.h"
 
 @interface HomeRoomVC ()
-//@property(nonatomic,strong)NSArray *roomGroups;
 @property(nonatomic,strong)RoomBannerView *eventCellView;
 @property(nonatomic,strong) HomeRoomIndexModel *roomModel;
 
@@ -319,7 +318,13 @@ static NSString *identify = @"cell";
 }
 
 - (void)caseBanner:(NSInteger)index{
-//    HomeRoomIndexEventsObject *item =  self.roomModel.current_roomFrameObj.item.events[index];
+    HomeRoomIndexEventsObject *item =  self.roomModel.current_roomFrameObj.item.events[index];
+    if (item.no_id) {
+        NSString *path = [NSString stringWithFormat:@"https://www.51room.com/article/index/%@",item.no_id];
+        WebViewController *vc = [[WebViewController alloc] initWithPath:path];
+        PushToViewController(vc);
+    }
+  
 }
 
 
