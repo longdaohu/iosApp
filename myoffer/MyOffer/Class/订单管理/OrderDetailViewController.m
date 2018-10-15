@@ -13,7 +13,12 @@
 #import "PayOrderViewController.h"
 #import "OrderViewController.h"
 #import "IDMPhotoBrowser.h"
-#import "OrderServicePopView.h"//售后服务弹出视图hdr
+#import "OrderServicePopView.h"//售后服务弹出视图
+
+#define PopViewSize   ([UIApplication sharedApplication].keyWindow.bounds.size)
+#define PopViewBounds ([UIApplication sharedApplication].keyWindow.bounds)
+#define ContentViewInitFrame (CGRectMake(0, PopViewSize.height, PopViewSize.width, PopViewSize.height*0.5))
+#define ContentViewPopFrame  (CGRectMake(0, PopViewSize.height*0.5, PopViewSize.width, PopViewSize.height*0.5))
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -27,7 +32,7 @@
 @property(nonatomic,assign)OrderDetailDownloadStyle  downloadStyle;
 @property(nonatomic,copy)NSString *skuID;
 @property(nonatomic,strong) OrderDetailFooterView *footer;
-@property(nonatomic,strong)OrderServicePopView *popView;//售后服务弹出视图hdr
+@property(nonatomic,strong)OrderServicePopView *popView;//售后服务弹出视图
 
 @end
 

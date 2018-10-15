@@ -35,7 +35,6 @@
 - (void)makeUI{
     
     self.title = @"房源详情";
-    [self makeTableView];
     RoomNavigationView *nav = [RoomNavigationView nav];
     self.nav = nav;
     [self.view addSubview:nav];
@@ -46,6 +45,7 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
+    [self makeTableView];
 }
 
 - (RoomItemBookHeaderView *)header{
@@ -62,7 +62,7 @@
 - (void)makeTableView
 {
     self.tableView =[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    [self.view addSubview:self.tableView];
+    [self.view insertSubview:self.tableView atIndex:0];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
@@ -80,9 +80,13 @@
     self.header.itemFrameModel = self.itemFrameModel;
     if (self.itemFrameModel.item.pictures.count > 0) {
         self.header.mj_h += XSCREEN_WIDTH;
+        self.nav.alpha_height = (XSCREEN_WIDTH -  XNAV_HEIGHT);
     }
+//    else{
+//        self.tableView.contentInset = UIEdgeInsetsMake(XNAV_HEIGHT, 0, 0, 0);
+//        self.nav.alpha_height = -XNAV_HEIGHT;
+//    }
     self.tableView.tableHeaderView = self.header;
-    self.nav.alpha_height = XSCREEN_WIDTH;
 }
 
 

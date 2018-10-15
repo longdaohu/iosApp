@@ -97,10 +97,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
+//    NSLog(@"-->>> %lf   %lf",scrollView.mj_offsetY,(scrollView.mj_offsetY - self.alpha_height));
     CGFloat alp = scrollView.mj_offsetY/self.alpha_height;
     if (alp < 0) alp  = 0;
     self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:alp];
-//    self.bgView.alpha = alp;
     for (UIView *item in self.bgView.subviews) {
         if ([item isMemberOfClass:[UIButton class]]) {
             UIButton *sender =(UIButton *)item;

@@ -38,13 +38,14 @@
     self.typeLab.textColor = XCOLOR_TITLE;
     self.sizeLab.textColor = XCOLOR_TITLE;
     self.line.backgroundColor = XCOLOR_line;
+    self.clipsToBounds = YES;
 }
 
 - (SDCycleScrollView *)bannerView{
     
     if (!_bannerView) {
         
-        _bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+        _bannerView = [SDCycleScrollView  cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:PLACE_HOLDER_IMAGE];
         _bannerView.bannerImageViewContentMode =  UIViewContentModeScaleAspectFill;
         _bannerView.showPageControl = false;
         [self insertSubview:_bannerView belowSubview:self.countBtn];

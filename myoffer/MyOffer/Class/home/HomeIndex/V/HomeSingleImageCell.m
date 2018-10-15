@@ -67,9 +67,15 @@
 
 - (void)setPath:(NSString *)path{
     _path = path;
-    
-    path = [path toUTF8WithString];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
+    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:path];
+    if (thumbnailImage) {
+        self.iconView.image = thumbnailImage;
+    }else{
+        path = [path toUTF8WithString];
+        NSURL *url = [NSURL URLWithString:path];
+        [self.iconView sd_setImageWithURL:url placeholderImage:PLACE_HOLDER_IMAGE options:SDWebImageRetryFailed];
+    }
 }
 
 - (void)setItem:(NSDictionary *)item{

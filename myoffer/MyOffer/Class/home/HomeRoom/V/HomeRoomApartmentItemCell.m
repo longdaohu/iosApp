@@ -111,9 +111,14 @@
     
     _item = item;
     
-    NSString *path = [item.image toUTF8WithString];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    
+    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:item.image];
+    if (thumbnailImage) {
+        self.iconView.image = thumbnailImage;
+    }else{
+        NSString *path = [item.image toUTF8WithString];
+        NSURL *url = [NSURL URLWithString:path];
+        [self.iconView sd_setImageWithURL:url placeholderImage:PLACE_HOLDER_IMAGE options:SDWebImageRetryFailed];
+    }
     self.titleLab.text = item.name;
     self.priceLab.attributedText = item.priceAttribue;
     [self.cityLab setTitle:item.city forState:UIControlStateNormal];

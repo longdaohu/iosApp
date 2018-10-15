@@ -77,9 +77,16 @@
 - (void)setItem:(HomeRoomIndexCommentsObject *)item{
     
     _item = item;
- 
-    NSString *path = [item.avatar toUTF8WithString];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+
+    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:item.avatar];
+    if (thumbnailImage) {
+        self.iconView.image = thumbnailImage;
+    }else{
+        NSString *path = [item.avatar toUTF8WithString];
+        NSURL *url = [NSURL URLWithString:path];
+        [self.iconView sd_setImageWithURL:url placeholderImage:PLACE_HOLDER_IMAGE options:SDWebImageRetryFailed];
+    }
+    
     self.nameLab.text = item.name;
     self.subLab.text = item.fromUni;
     self.summaryLab.text = item.comment;

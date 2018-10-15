@@ -284,7 +284,7 @@ static NSString *identify = @"cell";
         [weakSelf caseMap];
     };
     
-    self.nav.alpha_height =  roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT;
+    self.nav.alpha_height =  (roomFrameModel.header_box_frame.origin.y - XNAV_HEIGHT);
     self.bookBtn.enabled = !room.mark_sold.boolValue;
 }
 

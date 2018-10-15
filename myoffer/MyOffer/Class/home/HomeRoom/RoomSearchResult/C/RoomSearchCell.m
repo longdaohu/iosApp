@@ -48,8 +48,13 @@
 - (void)setItem:(HomeRoomIndexFlatsObject *)item{
     _item = item;
  
-    NSURL *path = [NSURL URLWithString:[item.thumbnail toUTF8WithString]];
-    [self.iconView sd_setImageWithURL:path  placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
+    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:item.thumbnail];
+    if (thumbnailImage) {
+        self.iconView.image = thumbnailImage;
+    }else{
+        NSURL *path = [NSURL URLWithString:[item.thumbnail toUTF8WithString]];
+        [self.iconView sd_setImageWithURL:path placeholderImage:PLACE_HOLDER_IMAGE options:SDWebImageRetryFailed];
+    }
     self.titleLab.text = item.name;
     self.rentLab.text = item.rent;
     self.unitLab.text = item.unit;
