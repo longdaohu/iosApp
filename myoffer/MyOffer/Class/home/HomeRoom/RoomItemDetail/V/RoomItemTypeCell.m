@@ -76,9 +76,11 @@
     self.titleLab.text = item.name;
     self.priceLab.text = item.firstPrice.priceCurrency;
     self.unitLab.text = item.firstPrice.unit;
+    NSString *title = item.firstPrice.currentState;
     [self.pinLab setTitle:item.firstPrice.currentState forState:UIControlStateNormal];
     self.pinLab.enabled = !item.firstPrice.state.boolValue;
-    
+    self.pinLab.hidden = !title ? YES : NO;
+
     self.iconView.frame = itemFrameModel.icon_frame;
     self.titleLab.frame = itemFrameModel.title_frame;
     self.priceLab.frame = itemFrameModel.price_frame;

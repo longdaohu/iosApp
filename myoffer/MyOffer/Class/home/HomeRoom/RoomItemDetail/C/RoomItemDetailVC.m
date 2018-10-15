@@ -211,10 +211,12 @@ static NSString *identify = @"cell";
     
     myofferGroupModel *group = self.itemFrameModel.groups[indexPath.section];
     if(group.type == SectionGroupTypeRoomDetailRoomType){
-     
-        RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
-        vc.itemFrameModel =  group.items[indexPath.row];
-        PushToViewController(vc);
+        RoomTypeItemFrameModel  *itemFrameModel =  group.items[indexPath.row];
+        if (itemFrameModel.item.prices.count > 0) {
+            RoomItemBookVC *vc = [[RoomItemBookVC alloc] init];
+            vc.itemFrameModel =  itemFrameModel;
+            PushToViewController(vc);
+        }
     }
 }
 

@@ -220,6 +220,7 @@
         if (weakSelf.items.count == 0) {
             [weakSelf.tableView alertWithRoloadMessage:nil];
         }
+        [weakSelf.tableView.mj_footer endRefreshing];
     }];
  
     
