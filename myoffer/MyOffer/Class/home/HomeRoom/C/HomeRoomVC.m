@@ -324,6 +324,9 @@ static NSString *identify = @"cell";
         WebViewController *vc = [[WebViewController alloc] initWithPath:path];
         PushToViewController(vc);
         NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
+        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
+        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
+        NSLog(@">>>>>>>>>>>>>。。。。。hhhhjj %@",path);
     }
     
 }

@@ -168,7 +168,7 @@
 #define kAPISelectorPromotionCashApply @"POST /svc/promotion/cash-apply"
 //推广统计摘要
 #define kAPISelectorPromotionSummary @"GET svc/promotion/summary"
-//售后服务前台
+//售后服务前台hdr
 #define kAPISelectorAfterService @"GET /api/v1/sku/after-service-state"
 
 
