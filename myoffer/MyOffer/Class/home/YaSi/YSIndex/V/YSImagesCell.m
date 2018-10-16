@@ -55,8 +55,15 @@
     for (NSInteger index = 0; index < array.count; index++) {
         UIImageView *iconView = self.iconView_arr[index];
         if (index < images.count) {
-            NSURL *path = [NSURL URLWithString: images[index]];
-            [iconView sd_setImageWithURL: path placeholderImage:nil];
+            
+            NSString *imageName = images[index];
+            UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageName];
+            if (thumbnailImage) {
+                iconView.image = thumbnailImage;
+            }else{
+                NSURL *path = [NSURL URLWithString:[imageName toUTF8WithString]];
+                [iconView sd_setImageWithURL:path placeholderImage:PLACE_HOLDER_IMAGE];
+            }
         }
         if (index < imageFrames.count) {
             NSValue *value = imageFrames[index];

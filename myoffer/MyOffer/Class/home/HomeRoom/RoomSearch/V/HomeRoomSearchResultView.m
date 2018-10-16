@@ -19,11 +19,10 @@
 
 @implementation HomeRoomSearchResultView
 
-+ (instancetype)viewWithHidenCompletion:(void (^)(BOOL))completion{
++ (instancetype)resultView{
     
     HomeRoomSearchResultView *item = [[HomeRoomSearchResultView alloc] init];
-    item.hideBlock = completion;
-    
+ 
     return item;
 }
 
@@ -49,7 +48,7 @@
     }
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 80)];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, 90)];
     UILabel *alerLab = [[UILabel alloc] initWithFrame:footer.bounds];
     alerLab.textColor = XCOLOR_TITLE;
     alerLab.font = XFONT(14);
@@ -64,7 +63,10 @@
     _items = items;
     
     [self.tableView reloadData];
-    self.alerLab.text = @"";
+    if (items.count > 0) {
+        self.alerLab.text = @"";
+    }
+    
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
@@ -126,10 +128,6 @@ static NSString *identify = @"HomeRoomSearchResultView";
             if (self.actionBlock && self.self.item_selected) {
                 self.actionBlock(self.item_selected);
             }
-            
-            if (self.hideBlock) {
-                self.hideBlock(finished);
-            }
             [self clearAllData];
             self.alpha = 0;
             self.self.item_selected = nil;
@@ -140,12 +138,8 @@ static NSString *identify = @"HomeRoomSearchResultView";
 - (void)showError:(NSString *)error{
 
     self.alerLab.text = error;
-    
     if (self.items) {
-        
         self.items = nil;
-        [self.tableView reloadData];
-        
     }
 }
 

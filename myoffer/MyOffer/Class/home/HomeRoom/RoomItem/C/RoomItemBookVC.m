@@ -81,8 +81,7 @@
     if (self.itemFrameModel.item.pictures.count > 0) {
         self.header.mj_h += XSCREEN_WIDTH;
         self.nav.alpha_height = (XSCREEN_WIDTH -  XNAV_HEIGHT);
-    }
-    else{
+    }else{
         self.tableView.contentInset = UIEdgeInsetsMake(XNAV_HEIGHT, 0, 0, 0);
         self.nav.alpha_height = 0;
     }

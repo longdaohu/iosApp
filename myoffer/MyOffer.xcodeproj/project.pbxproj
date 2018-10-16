@@ -3343,6 +3343,9 @@
 		AE4BBCEA210EE60700209FC8 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				AE4BBCEF210EE88500209FC8 /* RoomSearchCell.h */,
+				AE4BBCF0210EE88500209FC8 /* RoomSearchCell.m */,
+				AE4BBCF1210EE88500209FC8 /* RoomSearchCell.xib */,
 				AE4BBCF7210F1E9400209FC8 /* RoomSearchFilterView.h */,
 				AE4BBCF8210F1E9400209FC8 /* RoomSearchFilterView.m */,
 				AE4BBCFA210F257000209FC8 /* RoomSearchFilterVC.h */,
@@ -3356,9 +3359,6 @@
 			children = (
 				AE4BBCEC210EE64000209FC8 /* RoomSearchResultVC.h */,
 				AE4BBCED210EE64000209FC8 /* RoomSearchResultVC.m */,
-				AE4BBCEF210EE88500209FC8 /* RoomSearchCell.h */,
-				AE4BBCF0210EE88500209FC8 /* RoomSearchCell.m */,
-				AE4BBCF1210EE88500209FC8 /* RoomSearchCell.xib */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -6723,7 +6723,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */;
+			buildConfigurationList = 463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -8001,7 +8001,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "MyOffer" */ = {
+		463E3A441B230EDC00E0BAF8 /* Build configuration list for PBXProject "myOffer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				463E3A6A1B230EDC00E0BAF8 /* Debug */,

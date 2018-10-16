@@ -91,12 +91,7 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
     if (!_resultView) {
         
         WeakSelf
-        _resultView  = [HomeRoomSearchResultView viewWithHidenCompletion:^(BOOL finished) {
-            
-             weakSelf.search_TF.text = @"";
-            [weakSelf.search_TF resignFirstResponder];
-            
-        }];
+        _resultView  = [HomeRoomSearchResultView resultView];
          _resultView.frame = self.view.bounds;
         _resultView.actionBlock = ^(RoomSearchResultItemModel  *item) {
             [weakSelf caseSearchWithItem:item];
@@ -299,12 +294,9 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
 
 - (void)caseSearchWithText:(NSString *)text{
 
-    //    输入框为空时,不做网请求操作
+    //    输入框为空时,隐藏结果列表
     if (text.length == 0 || !text) {
-        
-        [self.resultView clearAllData];
-        [self.resultView showError:@"没有搜到相关信息，请检查关键字是否输入正确。"];
-
+        [self.resultView hide];
         return;
     }
     /*
