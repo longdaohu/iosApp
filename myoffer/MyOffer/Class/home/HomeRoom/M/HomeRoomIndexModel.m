@@ -71,10 +71,6 @@
             if (self.current_roomFrameObj.item.events.count == 0) continue;
             group.items = @[self.current_roomFrameObj];
             group.cell_height_set = self.current_roomFrameObj.event_Section_Height;
-          
-//            self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.current_roomFrameObj.event_Section_Height);
-//            NSArray *imageGroup = [self.current_roomFrameObj.item.events valueForKey:@"img"];
-//            [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:self.current_roomFrameObj.event_item_size];
         }
         
         if (group.type == SectionGroupTypeRoomHomestay) {

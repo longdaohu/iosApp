@@ -85,42 +85,44 @@
 
     CGFloat item_width = (XSCREEN_WIDTH - 40 - self.minimumInteritemSpacing - 2) * 0.5;
     NSMutableArray *flat_Arr = [NSMutableArray array];
-    for (HomeRoomIndexFlatsObject *it in self.item.flats) {
+    
+    HomeRoomIndexFlatFrameObject *last = nil;
+    CGFloat row_height = 0;
+    CGFloat all_item_height = 0;
+    
+    for (NSInteger index = 0; index < self.item.flats.count; index++) {
+        HomeRoomIndexFlatsObject *it = self.item.flats[index];
         HomeRoomIndexFlatFrameObject *flatFrameObj = [[HomeRoomIndexFlatFrameObject alloc] init];
         flatFrameObj.item_width = item_width;
         flatFrameObj.item = it;
         [flat_Arr addObject:flatFrameObj];
-    }
-    HomeRoomIndexFlatFrameObject *last = nil;
-    CGFloat row_height = 0;
-    CGFloat cell_height = 0;
-    for (NSInteger index = 0; index < flat_Arr.count; index++) {
-    
-        HomeRoomIndexFlatFrameObject *item = flat_Arr[index];
+        
+        
+        
         if (index%2 == 0) {
-            last = item;
-            row_height = (item.item_height + self.minimumInteritemSpacing);
-        }
-        
-        if (last.item_height != item.item_height ) {
+            last = flatFrameObj;
+            row_height = flatFrameObj.item_height;
+            all_item_height +=  (row_height + self.minimumInteritemSpacing);
+        }else{
+            all_item_height -=  (row_height + self.minimumInteritemSpacing);
+            CGFloat current_height = flatFrameObj.item_height;
+            if (current_height > row_height) {
+                row_height = current_height;
+            }
             
-            CGFloat height = (last.item_height >  item.item_height) ?  last.item_height : item.item_height;
-            last.item_height = height;
-            item.item_height = height;
-            
-            row_height = (item.item_height + self.minimumInteritemSpacing);
+            last.item_height = row_height;
+            flatFrameObj.item_height = row_height;
+            all_item_height += 2*(row_height + self.minimumInteritemSpacing);
         }
-        
-        cell_height += row_height;
+
     }
     
     if (flat_Arr.count%2 == 0) {
-        self.flat_Section_Height = cell_height * 0.5 + 30;
+        self.flat_Section_Height = (all_item_height * 0.5 - self.minimumInteritemSpacing) + 30;
     }else{
-        self.flat_Section_Height = (cell_height - row_height) * 0.5 + row_height - self.minimumInteritemSpacing + 30;
+        self.flat_Section_Height = (all_item_height - row_height) * 0.5 + (row_height - self.minimumInteritemSpacing) + 30;
     }
     self.flatsFrames = [flat_Arr mutableCopy];
- 
 }
 
 @end

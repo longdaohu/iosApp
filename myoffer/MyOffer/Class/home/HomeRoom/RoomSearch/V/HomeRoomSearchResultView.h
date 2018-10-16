@@ -15,7 +15,7 @@
 @property(nonatomic,assign,readonly)BOOL state;
 @property(nonatomic,strong)void(^actionBlock)(RoomSearchResultItemModel *);
 
-+ (instancetype)viewWithHidenCompletion:(void (^)(BOOL finished))completion;
++ (instancetype)resultView;
 - (void)show;
 - (void)hide;
 - (void)showError:(NSString *)error;

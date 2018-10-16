@@ -21,9 +21,9 @@
 
 + (instancetype)resultView{
     
-    HomeRoomSearchResultView *item = [[HomeRoomSearchResultView alloc] init];
+    HomeRoomSearchResultView *itemView = [[HomeRoomSearchResultView alloc] initWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH, XSCREEN_HEIGHT)];
  
-    return item;
+    return itemView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

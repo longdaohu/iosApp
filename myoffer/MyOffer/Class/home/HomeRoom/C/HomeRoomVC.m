@@ -232,36 +232,30 @@ static NSString *identify = @"cell";
 
 - (void)headerButtonClick:(UIButton *)sender{
     
-    switch (sender.tag) {
-        case HomeRoomTopViewButtonTypeUK:{
-            self.roomModel.isUK = YES;
-            if (self.roomModel.current_roomFrameObj) {
-                [self reLoadWithNewRoomData];
-                return;
-            }
-            [self makeData];
-        }
-             break;
-        case HomeRoomTopViewButtonTypeAU:{
-            self.roomModel.isUK = NO;
-            if (self.roomModel.current_roomFrameObj) {
-                [self reLoadWithNewRoomData];
-                return;
-            }
-            [self makeData];
-        }
-            break;
-        case HomeRoomTopViewButtonTypeSearch:{
+    switch ( sender.tag ) {
+        case  HomeRoomTopViewButtonTypeSearch:
             [self caseRoomSearch];
-        }
             break;
-        case HomeRoomTopViewButtonTypeMap:{
+        case  HomeRoomTopViewButtonTypeMap:
             [self caseMap];
-        }
+            break;
+        case  HomeRoomTopViewButtonTypeUK:
+            self.roomModel.isUK = YES;
+            break;
+        case  HomeRoomTopViewButtonTypeAU:
+            self.roomModel.isUK = NO;
             break;
         default:
             break;
     }
+    if ((sender.tag == HomeRoomTopViewButtonTypeUK )||  (sender.tag == HomeRoomTopViewButtonTypeAU)) {
+        if (self.roomModel.current_roomFrameObj) {
+            [self reLoadWithNewRoomData];
+            return;
+        }
+        [self makeData];
+    }
+ 
 }
 
 - (void)caseMap{

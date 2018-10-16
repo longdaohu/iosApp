@@ -85,7 +85,6 @@
  
     HomeRoomApartmentItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeRoomApartmentItemCell" forIndexPath:indexPath];
     cell.flatFrameObject = self.items[indexPath.row];
-    
     return cell;
 }
 
@@ -108,18 +107,18 @@
     [super layoutSubviews];
     
     CGSize content_size = self.contentView.bounds.size;
- 
-    CGRect bg_frame = self.contentView.bounds;
-    bg_frame.size.height = self.contentView.bounds.size.height - 10;
-    self.bgView.frame = bg_frame;
- 
+    self.bgView.frame = self.contentView.bounds;
+    if (self.group.type == SectionGroupTypeRoomHomestay) {
+        UIEdgeInsets inset = self.bgView.contentInset;
+        inset.bottom = 30;
+        self.bgView.contentInset = inset;
+    }
     
     CGFloat line_x = 20;
     CGFloat line_h = LINE_HEIGHT;
     CGFloat line_y = content_size.height - line_h;
     CGFloat line_w = content_size.width - line_x * 2;
     self.bottom_line.frame = CGRectMake(line_x, line_y, line_w, line_h);
- 
 }
 
 @end

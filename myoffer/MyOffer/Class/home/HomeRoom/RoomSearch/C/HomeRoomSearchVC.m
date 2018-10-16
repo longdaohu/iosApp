@@ -92,7 +92,6 @@ static NSString *const KEY_RECORD = @"roomSearchHistoryRecorded";
         
         WeakSelf
         _resultView  = [HomeRoomSearchResultView resultView];
-         _resultView.frame = self.view.bounds;
         _resultView.actionBlock = ^(RoomSearchResultItemModel  *item) {
             [weakSelf caseSearchWithItem:item];
         };
