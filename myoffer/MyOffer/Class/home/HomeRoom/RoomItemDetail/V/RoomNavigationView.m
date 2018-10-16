@@ -95,11 +95,25 @@
     }
 }
 
+- (void)setAlpha_height:(CGFloat)alpha_height{
+    _alpha_height = alpha_height;
+    if (alpha_height <= 0) {
+        [self makeSubviewWithAlpha:1];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-//    NSLog(@"-->>> %lf   %lf",scrollView.mj_offsetY,(scrollView.mj_offsetY - self.alpha_height));
-    CGFloat alp = scrollView.mj_offsetY/self.alpha_height;
+    if (self.alpha_height <= 0) {
+        return;
+    }
+    CGFloat alp = (scrollView.mj_offsetY + scrollView.contentInset.top)/self.alpha_height;
     if (alp < 0) alp  = 0;
+    [self makeSubviewWithAlpha:alp];
+}
+
+- (void)makeSubviewWithAlpha:(CGFloat)alp{
+    
     self.bgView.backgroundColor = [UIColor colorWithWhite:1 alpha:alp];
     for (UIView *item in self.bgView.subviews) {
         if ([item isMemberOfClass:[UIButton class]]) {
@@ -107,9 +121,7 @@
             sender.selected = (alp > 0);
         }
     }
-    
     self.shaper.opacity =  alp ;
-    
 }
 
 - (void)setRightView:(UIView *)rightView{
