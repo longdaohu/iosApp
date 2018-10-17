@@ -161,7 +161,7 @@
     [shadow_box.layer addSublayer:shaper];
     self.shaper = shaper;
     
-    UIView *cover_shadow = [UIView new];
+    UIView *cover_shadow = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1000, 15)];
     cover_shadow.backgroundColor = XCOLOR_WHITE;
     [shadow_box addSubview:cover_shadow];
     self.cover_shadow = cover_shadow;
@@ -279,7 +279,6 @@
     }
  
     self.shadow_box.frame = ysModel.shadow_box_frame;
-    self.cover_shadow.frame = self.shadow_box.bounds;
     self.cover_shadow.mj_y = -self.cover_shadow.mj_h;
     //设置商品子项
     if (self.ysModel.catigory_current) {

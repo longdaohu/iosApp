@@ -22,7 +22,7 @@
 
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
-#define  ADKEY @"Advertise"
+#define  ADKEY @"Advertiseaaa"
 
 @interface HomeIndexVC ()<UIScrollViewDelegate>
 @property(nonatomic,strong)CatigaryScrollView *bgScrollView;
@@ -71,8 +71,6 @@
         HomeIndexModel *yasi = [[HomeIndexModel alloc] initWithTitle:@"雅思提分" backgroudImageName:@"home_yasi_bg" destVC:[HomeYasiVC class] indexType:HomeIndexTypeYasi];
         HomeIndexModel *applicate = [[HomeIndexModel alloc] initWithTitle:@"名校申请" backgroudImageName:@"home_application_bg" destVC:[HomeApplicationVC class] indexType:HomeIndexTypeLXSQ];
         HomeIndexModel *sx = [[HomeIndexModel alloc] initWithTitle:@"名企实习" backgroudImageName:@"home_YESGlobal_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeYouXue];
-//        HomeIndexModel *fee = [[HomeIndexModel alloc] initWithTitle:@"学费支付" backgroudImageName:@"home_fee_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeFee];
-//        HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"海外租房" backgroudImageName:@"home_room_bg" destVC:[HomeFeeVC class] indexType:HomeIndexType51Room];
         HomeIndexModel *room = [[HomeIndexModel alloc] initWithTitle:@"公寓预定" backgroudImageName:@"home_room_bg" destVC:[HomeRoomVC class] indexType:HomeIndexType51Room];
         HomeIndexModel *ym = [[HomeIndexModel alloc] initWithTitle:@"海外移民" backgroudImageName:@"home_UVIC_bg" destVC:[HomeFeeVC class] indexType:HomeIndexTypeHYYM];
 
@@ -141,8 +139,6 @@
         }
  
         if (itemModel.type == HomeIndexType51Room) {
-            
-//            HomeFeeVC *room  = (HomeFeeVC *)vc;
             HomeRoomVC *room  = (HomeRoomVC *)vc;
             room.type = HomeLandingTypeRoom;
         }
@@ -385,34 +381,28 @@
 #pragma mark : ---推广接口，用户是否在使用myoffer---
 -(void)advanceSupportWithDuration:(int)durationTime
 {
-    
-    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    
-    NSString *secret = @"s9xyfjwilruwefnxdkjvhxck3sxceikrbzbde";
-    
-    NSString *signature = [NSString stringWithFormat:@"idfa=%@%@",adId,secret];
-    signature = [signature KD_MD5];
-    NSString  *path = [NSString stringWithFormat:@"GET /api/youqian/finish?idfa=%@&signature=%@",adId,signature];
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(durationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-       
-        
-        [self startAPIRequestWithSelector:path  parameters:nil expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
-            
-        } additionalSuccessAction:^(NSInteger statusCode, id response) {
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ADKEY];
-            
-        } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
-            
-            [self advanceSupportWithDuration:20];
-            
-        }];
-        
-        
+        [self makeIDFA];
     });
     
 }
+
+- (void)makeIDFA{
+    
+    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    NSString  *path = @"POST  https://api.myofferdemo.com/api/v1/idfa";
+    [self startAPIRequestWithSelector:path  parameters:@{@"idfa":adId} expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
+    } additionalSuccessAction:^(NSInteger statusCode, id response) {
+        if (ResponseIsOK) {
+             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:ADKEY];
+        }else{
+            [self advanceSupportWithDuration:20];
+        }
+    } additionalFailureAction:^(NSInteger statusCode, NSError *error) {
+        [self advanceSupportWithDuration:20];
+    }];
+}
+
 #pragma mark : --应用监听，用户登录立即发送提醒给服务器--
 -(void)getAppReport
 {

@@ -65,11 +65,8 @@
 		AE1A804E20D9EB3E00CE9E50 /* MyOfferButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A804D20D9EB3E00CE9E50 /* MyOfferButton.m */; };
 		AE1A805020DA2A0300CE9E50 /* home_apply_uni_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE1A804F20DA2A0300CE9E50 /* home_apply_uni_bg.jpg */; };
 		AE1A805320DA2CEF00CE9E50 /* HomeFeeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A805220DA2CEF00CE9E50 /* HomeFeeVC.m */; };
-		AE1A805720DA304D00CE9E50 /* HomeFeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A805520DA304D00CE9E50 /* HomeFeeCell.m */; };
-		AE1A805820DA304D00CE9E50 /* HomeFeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A805620DA304D00CE9E50 /* HomeFeeCell.xib */; };
 		AE1A805A20DA432500CE9E50 /* home_fee_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE1A805920DA432500CE9E50 /* home_fee_a.jpg */; };
 		AE1A805C20DA44B800CE9E50 /* home_fee_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE1A805B20DA44B800CE9E50 /* home_fee_b.jpg */; };
-		AE1A806320DA493400CE9E50 /* HomeRentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A806120DA493400CE9E50 /* HomeRentCell.m */; };
 		AE1A806820DA563F00CE9E50 /* HomeYESGlobalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1A806620DA563F00CE9E50 /* HomeYESGlobalCell.m */; };
 		AE1A806920DA563F00CE9E50 /* HomeYESGlobalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1A806720DA563F00CE9E50 /* HomeYESGlobalCell.xib */; };
 		AE1CEF072092D787001D24F0 /* UIAlertController+alert.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1CEF062092D786001D24F0 /* UIAlertController+alert.m */; };
@@ -254,14 +251,6 @@
 		AE582C311D06B22C00499B6B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AE582C301D06B22C00499B6B /* libc++.tbd */; };
 		AE5A75DB1DEEDA5300F02ABB /* TopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */; };
 		AE5D8E161F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */; };
-		AE60C1A020E1E947000867A8 /* home_rent_advant_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */; };
-		AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */; };
-		AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */; };
-		AE60C1A320E1E947000867A8 /* home_rent_advant_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */; };
-		AE60C1BC20E1EECC000867A8 /* home_rent_process_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */; };
-		AE60C1BD20E1EECC000867A8 /* home_rent_process_a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */; };
-		AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */; };
-		AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */; };
 		AE60C1C320E21B3D000867A8 /* home_global_smile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */; };
 		AE60C1C920E21D5B000867A8 /* home_global_ban.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */; };
 		AE60C1CD20E21E1C000867A8 /* home_global_job_b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE60C1CA20E21E1B000867A8 /* home_global_job_b.jpg */; };
@@ -632,7 +621,6 @@
 		AECBD4871F7BAAAA002AD88A /* ServiceProductDescriptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECBD4851F7BAAAA002AD88A /* ServiceProductDescriptCell.m */; };
 		AECBD4881F7BAAAA002AD88A /* ServiceProductDescriptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */; };
 		AECC677C20E9C49C00B1904B /* HomeRecommendProdoctView.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC677B20E9C49B00B1904B /* HomeRecommendProdoctView.m */; };
-		AECC677E20E9C6E800B1904B /* HomeRentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC677D20E9C6E800B1904B /* HomeRentCell.xib */; };
 		AECC678720EB5DFE00B1904B /* CreateOrderContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */; };
 		AECC678E20EB791900B1904B /* CreateOrderUserInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AECC678C20EB791900B1904B /* CreateOrderUserInformationVC.m */; };
 		AECC678F20EB791900B1904B /* CreateOrderUserInformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC678D20EB791900B1904B /* CreateOrderUserInformationVC.xib */; };
@@ -686,7 +674,6 @@
 		AEDDAA7920E6078F0069C138 /* home_room_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */; };
 		AEDDAA7B20E6078F0069C138 /* home_YESGlobal_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */; };
 		AEDDAA7C20E6078F0069C138 /* home_application_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */; };
-		AEDDAA7D20E6078F0069C138 /* home_fee_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */; };
 		AEDDAA8320E63A940069C138 /* home_global_500_right.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA8220E63A930069C138 /* home_global_500_right.jpeg */; };
 		AEDDAA8520E642780069C138 /* home_global_plan_right.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AEDDAA8420E642770069C138 /* home_global_plan_right.jpeg */; };
 		AEE0AAC620A95CCA00E9AF99 /* MyofferWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0AAC520A95CCA00E9AF99 /* MyofferWeakTimer.m */; };
@@ -1051,13 +1038,8 @@
 		AE1A804F20DA2A0300CE9E50 /* home_apply_uni_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_apply_uni_bg.jpg; sourceTree = "<group>"; };
 		AE1A805120DA2CEF00CE9E50 /* HomeFeeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeeVC.h; sourceTree = "<group>"; };
 		AE1A805220DA2CEF00CE9E50 /* HomeFeeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeeVC.m; sourceTree = "<group>"; };
-		AE1A805420DA304D00CE9E50 /* HomeFeeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeeCell.h; sourceTree = "<group>"; };
-		AE1A805520DA304D00CE9E50 /* HomeFeeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeeCell.m; sourceTree = "<group>"; };
-		AE1A805620DA304D00CE9E50 /* HomeFeeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFeeCell.xib; sourceTree = "<group>"; };
 		AE1A805920DA432500CE9E50 /* home_fee_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_fee_a.jpg; sourceTree = "<group>"; };
 		AE1A805B20DA44B800CE9E50 /* home_fee_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_fee_b.jpg; sourceTree = "<group>"; };
-		AE1A806020DA493400CE9E50 /* HomeRentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeRentCell.h; sourceTree = "<group>"; };
-		AE1A806120DA493400CE9E50 /* HomeRentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeRentCell.m; sourceTree = "<group>"; };
 		AE1A806520DA563F00CE9E50 /* HomeYESGlobalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeYESGlobalCell.h; sourceTree = "<group>"; };
 		AE1A806620DA563F00CE9E50 /* HomeYESGlobalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeYESGlobalCell.m; sourceTree = "<group>"; };
 		AE1A806720DA563F00CE9E50 /* HomeYESGlobalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeYESGlobalCell.xib; sourceTree = "<group>"; };
@@ -1376,14 +1358,6 @@
 		AE5A75DA1DEEDA5300F02ABB /* TopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopNavView.m; sourceTree = "<group>"; };
 		AE5D8E141F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonServiceStatusHistoryViewController.h; sourceTree = "<group>"; };
 		AE5D8E151F4BDA6D008EB2A4 /* PersonServiceStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonServiceStatusHistoryViewController.m; sourceTree = "<group>"; };
-		AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_c.jpg; sourceTree = "<group>"; };
-		AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_a.jpg; sourceTree = "<group>"; };
-		AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_d.jpg; sourceTree = "<group>"; };
-		AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_advant_b.jpg; sourceTree = "<group>"; };
-		AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_b.jpg; sourceTree = "<group>"; };
-		AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_a.jpg; sourceTree = "<group>"; };
-		AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_c.jpg; sourceTree = "<group>"; };
-		AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_rent_process_d.jpg; sourceTree = "<group>"; };
 		AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_smile.jpg; sourceTree = "<group>"; };
 		AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_ban.jpg; sourceTree = "<group>"; };
 		AE60C1CA20E21E1B000867A8 /* home_global_job_b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_job_b.jpg; sourceTree = "<group>"; };
@@ -2012,7 +1986,6 @@
 		AECBD4861F7BAAAA002AD88A /* ServiceProductDescriptCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceProductDescriptCell.xib; sourceTree = "<group>"; };
 		AECC677A20E9C49B00B1904B /* HomeRecommendProdoctView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRecommendProdoctView.h; sourceTree = "<group>"; };
 		AECC677B20E9C49B00B1904B /* HomeRecommendProdoctView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeRecommendProdoctView.m; sourceTree = "<group>"; };
-		AECC677D20E9C6E800B1904B /* HomeRentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeRentCell.xib; sourceTree = "<group>"; };
 		AECC678520EB5DFE00B1904B /* CreateOrderContractCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderContractCell.h; sourceTree = "<group>"; };
 		AECC678620EB5DFE00B1904B /* CreateOrderContractCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateOrderContractCell.m; sourceTree = "<group>"; };
 		AECC678B20EB791900B1904B /* CreateOrderUserInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateOrderUserInformationVC.h; sourceTree = "<group>"; };
@@ -2103,7 +2076,6 @@
 		AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_room_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_YESGlobal_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_application_bg.jpg; sourceTree = "<group>"; };
-		AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_fee_bg.jpg; sourceTree = "<group>"; };
 		AEDDAA8220E63A930069C138 /* home_global_500_right.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_500_right.jpeg; sourceTree = "<group>"; };
 		AEDDAA8420E642770069C138 /* home_global_plan_right.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_global_plan_right.jpeg; sourceTree = "<group>"; };
 		AEE0AAC420A95CCA00E9AF99 /* MyofferWeakTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyofferWeakTimer.h; sourceTree = "<group>"; };
@@ -5050,20 +5022,11 @@
 				AE76ACF120D914B500C42FA2 /* area_7.jpg */,
 				AE76ACF920D914B800C42FA2 /* area_8.jpg */,
 				AEDDAA7720E6078E0069C138 /* home_application_bg.jpg */,
-				AEDDAA7820E6078F0069C138 /* home_fee_bg.jpg */,
 				AEDDAA7420E6078D0069C138 /* home_room_bg.jpg */,
 				AE9DC05F2150C85C00043D40 /* home_UVIC_bg.jpg */,
 				AEDDAA7620E6078E0069C138 /* home_YESGlobal_bg.jpg */,
 				AE60C23520E4C83C000867A8 /* home_application_cell_uni.jpg */,
 				AE60C22920E4AC34000867A8 /* home_recomment_active_cash.jpg */,
-				AE60C19D20E1E945000867A8 /* home_rent_advant_a.jpg */,
-				AE60C19F20E1E946000867A8 /* home_rent_advant_b.jpg */,
-				AE60C19C20E1E944000867A8 /* home_rent_advant_c.jpg */,
-				AE60C19E20E1E946000867A8 /* home_rent_advant_d.jpg */,
-				AE60C1B920E1EECA000867A8 /* home_rent_process_a.jpg */,
-				AE60C1B820E1EEC9000867A8 /* home_rent_process_b.jpg */,
-				AE60C1BA20E1EECA000867A8 /* home_rent_process_c.jpg */,
-				AE60C1BB20E1EECB000867A8 /* home_rent_process_d.jpg */,
 				AE60C1C220E21B3C000867A8 /* home_global_smile.jpg */,
 				AE60C1C820E21D5A000867A8 /* home_global_ban.jpg */,
 				AE60C1CB20E21E1B000867A8 /* home_global_job_a.jpg */,
@@ -5197,12 +5160,6 @@
 				AEC4284D20E09ECC007B3949 /* HomeUVICImmigrationProjectCell.h */,
 				AEC4284E20E09ECC007B3949 /* HomeUVICImmigrationProjectCell.m */,
 				AEC4284F20E09ECC007B3949 /* HomeUVICImmigrationProjectCell.xib */,
-				AE1A806020DA493400CE9E50 /* HomeRentCell.h */,
-				AE1A806120DA493400CE9E50 /* HomeRentCell.m */,
-				AECC677D20E9C6E800B1904B /* HomeRentCell.xib */,
-				AE1A805420DA304D00CE9E50 /* HomeFeeCell.h */,
-				AE1A805520DA304D00CE9E50 /* HomeFeeCell.m */,
-				AE1A805620DA304D00CE9E50 /* HomeFeeCell.xib */,
 				AE4BBCFD210FF89A00209FC8 /* HomeBannerThemeLayout.h */,
 				AE4BBCFE210FF89A00209FC8 /* HomeBannerThemeLayout.m */,
 				AE6AEDFA212A6C43002430D6 /* HomeGuideView.h */,
@@ -6777,7 +6734,6 @@
 				AE60C1E320E237C0000867A8 /* home_global_os_04.jpg in Resources */,
 				AEEA71631BE1D1830015C42B /* Visualbg.jpg in Resources */,
 				AEFDD841215E047C00B37194 /* TKPageTableViewCell.xib in Resources */,
-				AEDDAA7D20E6078F0069C138 /* home_fee_bg.jpg in Resources */,
 				AE69A2AF20F5E77C00194266 /* guid_smart.jpg in Resources */,
 				AE1FD7441D5C929500FFD5A8 /* Pre-comp 1_00031.png in Resources */,
 				AE76AD0020D914B800C42FA2 /* area_0.jpg in Resources */,
@@ -6785,7 +6741,6 @@
 				AE1FD7491D5C929500FFD5A8 /* Pre-comp 1_0007.png in Resources */,
 				AE401A461F282F6B004A6378 /* sm_vedio_banner.jpg in Resources */,
 				AE1FD73D1D5C929500FFD5A8 /* Pre-comp 1_00025.png in Resources */,
-				AE60C1A320E1E947000867A8 /* home_rent_advant_b.jpg in Resources */,
 				AE9BA45C20B40DEF008B65D4 /* ExtractionSuccessedVC.xib in Resources */,
 				AE1FD7321D5C929500FFD5A8 /* Pre-comp 1_00015.png in Resources */,
 				AEDDAA7120E4FEC00069C138 /* intro_05.jpg in Resources */,
@@ -6803,11 +6758,8 @@
 				AE9BA47720B53794008B65D4 /* InvitationRecordUserFooter.xib in Resources */,
 				AE892A1C1EBC87890035A31D /* uk_more.jpg in Resources */,
 				AEA24B791D5B25E000DD7939 /* SearchViewController.xib in Resources */,
-				AE1A805820DA304D00CE9E50 /* HomeFeeCell.xib in Resources */,
-				AE60C1BF20E1EECC000867A8 /* home_rent_process_d.jpg in Resources */,
 				AEB75E412139657D00C9129C /* YSUserCommentCell.xib in Resources */,
 				AEFDD8BB215E128900B37194 /* TKWhiteBoardResources.bundle in Resources */,
-				AE60C1A220E1E947000867A8 /* home_rent_advant_d.jpg in Resources */,
 				AE1FD7481D5C929500FFD5A8 /* Pre-comp 1_0006.png in Resources */,
 				AE1FD7341D5C929500FFD5A8 /* Pre-comp 1_00017.png in Resources */,
 				AED3C47C212FB21100A5668C /* RoomAppointSuccesView.xib in Resources */,
@@ -6827,7 +6779,6 @@
 				AE76ACDF20D8A17200C42FA2 /* HomeApplicationDestinationCell.xib in Resources */,
 				AE1FD72D1D5C929500FFD5A8 /* Pre-comp 1_00010.png in Resources */,
 				AE892A1E1EBC87890035A31D /* ao_more.jpg in Resources */,
-				AE60C1BD20E1EECC000867A8 /* home_rent_process_a.jpg in Resources */,
 				AE1FD72B1D5C929500FFD5A8 /* Pre-comp 1_0000.png in Resources */,
 				AEA545CE20D26D8B0095CBDA /* HomeRecommendArtCell.xib in Resources */,
 				AE9BA42F20B3BA8E008B65D4 /* RewardVC.xib in Resources */,
@@ -6864,7 +6815,6 @@
 				AE60C1FA20E247F7000867A8 /* home_global_user_04.jpg in Resources */,
 				AE2B1DB21F429CA300FB953E /* ApplyStatusHistoryHeaderView.xib in Resources */,
 				AEBAAE9F213E28FF002FD301 /* YXDayCell.xib in Resources */,
-				AE60C1BE20E1EECC000867A8 /* home_rent_process_c.jpg in Resources */,
 				AEFDD893215E047D00B37194 /* LTUpdate.strings in Resources */,
 				AEA545D320D26F300095CBDA /* HomeHotVideoCell.xib in Resources */,
 				AEA24A321D5B231300DD7939 /* ResultTableViewCell.xib in Resources */,
@@ -6876,7 +6826,6 @@
 				AEDDAA8320E63A940069C138 /* home_global_500_right.jpeg in Resources */,
 				AEFDD87C215E047C00B37194 /* Resources.bundle in Resources */,
 				AE4BBD072110012400209FC8 /* LaunchScreen_logo_d.png in Resources */,
-				AE60C1A120E1E947000867A8 /* home_rent_advant_a.jpg in Resources */,
 				AE6178E020737ED6006B311A /* CreateOrderVC.xib in Resources */,
 				AE1A805C20DA44B800CE9E50 /* home_fee_b.jpg in Resources */,
 				AE60C1FB20E247F7000867A8 /* home_global_user_06.jpg in Resources */,
@@ -6885,7 +6834,6 @@
 				AECC678F20EB791900B1904B /* CreateOrderUserInformationVC.xib in Resources */,
 				AEFDD82B215E047C00B37194 /* TKChatMessageTableViewCell.xib in Resources */,
 				AE6178E620738BB6006B311A /* OrderEnjoyVC.xib in Resources */,
-				AE60C1BC20E1EECC000867A8 /* home_rent_process_b.jpg in Resources */,
 				AEA24AFF1D5B24D200DD7939 /* BindEmailViewController.xib in Resources */,
 				AE4BBCF3210EE88500209FC8 /* RoomSearchCell.xib in Resources */,
 				AE76ACFF20D914B800C42FA2 /* area_2.jpg in Resources */,
@@ -6921,7 +6869,6 @@
 				AE9BA45720B40B66008B65D4 /* ExchangeAVC.xib in Resources */,
 				AEF1BAE81BC61A77008860F6 /* InfoPlist.strings in Resources */,
 				AECC87E51F95F63800FCBBEC /* CatigorySubjectCell.xib in Resources */,
-				AE60C1A020E1E947000867A8 /* home_rent_advant_c.jpg in Resources */,
 				AE1FD7371D5C929500FFD5A8 /* Pre-comp 1_0002.png in Resources */,
 				AE9BA45220B402E3008B65D4 /* ExtractionBVC.xib in Resources */,
 				AEF657D721006E9E00C0D849 /* city_mcst.jpg in Resources */,
@@ -6936,7 +6883,6 @@
 				AEF657A120FD8D4200C0D849 /* home_uvic_law.jpg in Resources */,
 				AE892A1D1EBC87890035A31D /* usa_more.jpg in Resources */,
 				AE1FD7411D5C929500FFD5A8 /* Pre-comp 1_00029.png in Resources */,
-				AECC677E20E9C6E800B1904B /* HomeRentCell.xib in Resources */,
 				AEA249C31D5B215300DD7939 /* ApplyViewController.xib in Resources */,
 				AE9BA47020B5154E008B65D4 /* InvitationRecordDetailVC.xib in Resources */,
 				AEC4284C20E08D57007B3949 /* HomeUVICserviceAdvantageCell.xib in Resources */,
@@ -7383,7 +7329,6 @@
 				AEB75E372139603800C9129C /* YSCommentItem.m in Sources */,
 				AEFDD88E215E047D00B37194 /* TKSortTool.m in Sources */,
 				AE93E4EE1D6DBE030025FC58 /* UniversityOneGroupCollectionCell.m in Sources */,
-				AE1A806320DA493400CE9E50 /* HomeRentCell.m in Sources */,
 				AE3AB6AE1F21A27300A3C7E3 /* SMNewsColViewCell.m in Sources */,
 				AE4BBCF2210EE88500209FC8 /* RoomSearchCell.m in Sources */,
 				AE7222D61ED593560000E739 /* ServiceOverSeaDestination.m in Sources */,
@@ -7631,7 +7576,6 @@
 				AEA24B971D5B25E000DD7939 /* UniversityCourseCell.m in Sources */,
 				AE2B1DB01F429C2900FB953E /* ApplyStatusHistoryHeaderView.m in Sources */,
 				AECC677C20E9C49C00B1904B /* HomeRecommendProdoctView.m in Sources */,
-				AE1A805720DA304D00CE9E50 /* HomeFeeCell.m in Sources */,
 				AE914EC41F417F59008A43CD /* ApplyStutasCenterViewController.m in Sources */,
 				AED10B9020EC9F050083AA85 /* CreateOrderWebVC.m in Sources */,
 				AEA24C081D5B269A00DD7939 /* AppDelegate.m in Sources */,

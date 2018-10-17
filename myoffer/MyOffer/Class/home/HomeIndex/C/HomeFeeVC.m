@@ -7,8 +7,6 @@
 //
 
 #import "HomeFeeVC.h"
-#import "HomeFeeCell.h"
-#import "HomeRentCell.h"
 #import "HomeYESGlobalCell.h"
 #import "HomeUVICCell.h"
 #import "MeiqiaServiceCall.h"
@@ -156,12 +154,6 @@
     
     NSString *class_name;
     switch (self.type) {
-        case HomeLandingTypeMoney:
-            class_name = @"HomeFeeCell";
-            break;
-        case HomeLandingTypeRoom:
-            class_name = @"HomeRentCell";
-            break;
         case HomeLandingTypeYesGlobal:
             class_name = @"HomeYESGlobalCell";
             break;
@@ -172,20 +164,6 @@
     UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:class_name];
     if (!cell) {
         cell = Bundle(class_name);
-    }
-
-    if ([class_name isEqualToString:@"HomeFeeCell"]) {
-        HomeFeeCell *cell_fee = (HomeFeeCell *)cell;
-        cell_fee.actionBlock = ^(NSString *path) {
-            [self web:path];
-        };
-    }
-    
-    if ([class_name isEqualToString:@"HomeRentCell"]) {
-        HomeRentCell *cell_fee = (HomeRentCell *)cell;
-        cell_fee.actionBlock = ^(NSString *path) {
-            [self web:path];
-        };
     }
     
     if ([class_name isEqualToString:@"HomeYESGlobalCell"]) {
