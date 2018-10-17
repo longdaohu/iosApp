@@ -39,11 +39,9 @@
     self.requestHUD  = [MBProgressHUD showMessage:@"" toView:self.view];
  }
 
-- (void)cities:(NSInteger)countryCode showHUD:(BOOL)showHUD additionalSuccessAction:(void (^)(id, int))success additionalFailureAction:(void (^)(NSError *, int))failure{
+- (void)cities:(NSInteger)countryCode showHUD:(BOOL)showHub additionalSuccessAction:(void (^)(id, int))success additionalFailureAction:(void (^)(NSError *, int))failure{
     
-    if(showHUD){
-        [self makeHUD];
-    }
+    if(showHub) [self makeHUD];
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] cities:countryCode completionBlock:^(CACommonResponse *response) {
         [weakSelf.requestHUD hideAnimated:YES];
@@ -55,9 +53,7 @@
 
 - (void)property_listWhithParameters:(NSDictionary *)parameter progressHub:(BOOL)showHub additionalSuccessAction:(void (^)(id, int ))success additionalFailureAction:(void (^)(NSError *, int ))failure{
     
-    if (showHub) {
-        [self makeHUD];
-    }
+    if (showHub)  [self makeHUD];
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] property_listWhithParameters:parameter  completionBlock:^(CACommonResponse *response) {
         [weakSelf resultWithResponse:response additionalSuccessAction:success additionalFailureAction:failure];

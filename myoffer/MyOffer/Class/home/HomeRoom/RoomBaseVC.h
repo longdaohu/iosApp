@@ -12,7 +12,7 @@
  */
 @interface RoomBaseVC : UIViewController
 
-- (void)cities:(NSInteger)countryCode showHUD:(BOOL)showHUD additionalSuccessAction:(void(^)(id response,int status))success additionalFailureAction:(void(^)(NSError *error,int status))failure;
+- (void)cities:(NSInteger)countryCode showHUD:(BOOL)showHub additionalSuccessAction:(void(^)(id response,int status))success additionalFailureAction:(void(^)(NSError *error,int status))failure;
 
 - (void)property_listWhithParameters:(NSDictionary *)parameter  progressHub:(BOOL)showHub  additionalSuccessAction:(void(^)(id response,int status))success additionalFailureAction:(void(^)(NSError *error,int status))failure;
 

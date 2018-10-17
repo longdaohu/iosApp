@@ -10,9 +10,8 @@
 #import "HomeRoomIndexFlatsObject.h"
 
 typedef NS_ENUM(NSInteger,HomeRoomIndexFlatType) {
-    HomeRoomIndexFlatTypeDefault,//精选民宿
+    HomeRoomIndexFlatTypeDefault,//精选民宿 Vertical
     HomeRoomIndexFlatTypeHorizontal, //公寓推荐
-    HomeRoomIndexFlatTypeVertical //地图
 };
 @interface HomeRoomIndexFlatFrameObject : NSObject
 @property(nonatomic,strong)HomeRoomIndexFlatsObject *item;

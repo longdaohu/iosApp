@@ -64,11 +64,6 @@
     self.items = roomFrameObj.flatsFrames;
 }
 
-- (void)bottomLineHiden:(BOOL)hiden{
-    
-    self.bottom_line.hidden = hiden;
-}
-
 - (void)setItems:(NSArray *)items{
     _items = items;
     [self.bgView reloadData];
@@ -103,11 +98,18 @@
     return  CGSizeMake( FlatFrameObject.item_width , FlatFrameObject.item_height);
 }
 
+#pragma mark : 事件处理
+- (void)bottomLineHiden:(BOOL)hiden{
+    
+    self.bottom_line.hidden = hiden;
+}
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     
     CGSize content_size = self.contentView.bounds.size;
     self.bgView.frame = self.contentView.bounds;
+    
     if (self.group.type == SectionGroupTypeRoomHomestay) {
         UIEdgeInsets inset = self.bgView.contentInset;
         inset.bottom = 30;

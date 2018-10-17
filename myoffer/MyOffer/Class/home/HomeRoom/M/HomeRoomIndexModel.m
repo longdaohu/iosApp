@@ -67,33 +67,45 @@
     
     for (myofferGroupModel *group in self.groups) {
         
-        if (group.type == SectionGroupTypeRoomHotActivity) {
-            if (self.current_roomFrameObj.item.events.count == 0) continue;
-            group.items = @[self.current_roomFrameObj];
-            group.cell_height_set = self.current_roomFrameObj.event_Section_Height;
+        NSArray *items = nil;
+        CGFloat cell_height = 0;
+        switch (group.type) {
+            case SectionGroupTypeRoomHotActivity:
+            {
+                items = @[self.current_roomFrameObj];
+                cell_height = self.current_roomFrameObj.event_Section_Height;
+            }
+                break;
+            case SectionGroupTypeRoomHomestay:
+            {
+                items = @[self.current_roomFrameObj];
+                cell_height = self.current_roomFrameObj.flat_Section_Height;
+            }
+                break;
+            case SectionGroupTypeRoomApartmentRecommendation:
+            {
+                items = @[self.current_roomFrameObj];
+                cell_height = self.current_roomFrameObj.accommodation_Section_Height;
+            }
+                break;
+            case SectionGroupTypeRoomHotCity:
+            {
+                items = @[self.current_roomFrameObj];
+                cell_height = self.current_roomFrameObj.hot_city_Section_Height;
+            }
+                break;
+            case SectionGroupTypeRoomCustomerPraise:
+            {
+                items = @[self.current_roomFrameObj];
+                cell_height = self.current_roomFrameObj.comment_Section_Height;
+            }
+                break;
+            default:
+                break;
         }
-        
-        if (group.type == SectionGroupTypeRoomHomestay) {
-            if (self.current_roomFrameObj.item.flats.count == 0) continue;
-            group.items = @[self.current_roomFrameObj];
-            group.cell_height_set = self.current_roomFrameObj.flat_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomApartmentRecommendation) {
-            if (self.current_roomFrameObj.item.accommodations.count == 0) continue;
-            group.items = @[self.current_roomFrameObj];
-            group.cell_height_set = self.current_roomFrameObj.accommodation_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomHotCity) {
-            
-            if (self.current_roomFrameObj.item.hot_city.count == 0)  continue;
-            group.items = @[self.current_roomFrameObj];
-            group.cell_height_set = self.current_roomFrameObj.hot_city_Section_Height;
-        }
-        if (group.type == SectionGroupTypeRoomCustomerPraise) {
-            if (self.current_roomFrameObj.item.comments.count == 0) continue;
-            group.items = @[self.current_roomFrameObj];
-            group.cell_height_set = self.current_roomFrameObj.comment_Section_Height;
-            
+        if (items.count > 0 && cell_height > 0) {
+            group.items = items;
+            group.cell_height_set = cell_height;
         }
     }
     

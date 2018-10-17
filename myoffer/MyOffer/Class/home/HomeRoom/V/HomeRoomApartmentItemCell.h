@@ -12,7 +12,5 @@
 
 @interface HomeRoomApartmentItemCell : UICollectionViewCell
 @property(nonatomic,strong)HomeRoomIndexFlatFrameObject *flatFrameObject;
-@property(nonatomic,assign)BOOL isFromMap;
-@property(nonatomic,strong)HomeRoomIndexFlatsObject  *item;
 
 @end

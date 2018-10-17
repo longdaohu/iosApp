@@ -33,17 +33,6 @@
     CGFloat icon_y = 0;
     CGFloat icon_w = self.item_width;
     CGFloat icon_h = 158;
-    switch (self.type) {
-        case HomeRoomIndexFlatTypeVertical:
-        {
-            icon_x = 20;
-            icon_h = self.item_height;
-            icon_w = icon_h;
-        }
-            break;
-        default:
-            break;
-    }
     self.icon_Frame = CGRectMake(icon_x, icon_y, icon_w, icon_h);
 
     //城市
@@ -69,12 +58,6 @@
             title_y = CGRectGetMaxY(self.icon_Frame)+ 2;
         }
             break;
-        case HomeRoomIndexFlatTypeVertical:{
-            title_x = CGRectGetMaxX(self.icon_Frame) + 10;
-            title_w = self.item_width - title_x - icon_x;
-            title_h = [item.name sizeWithfontSize:self.name_font_size maxWidth:title_w].height;
-        }
-            break;
         default:
             break;
     }
@@ -88,12 +71,7 @@
         case HomeRoomIndexFlatTypeHorizontal:
         { //公寓推荐
             tag_x = self.item_width;
-            tag_y = self.item_height - tag_h;
-        }
-            break;
-        case HomeRoomIndexFlatTypeVertical:
-        {//地图
-            
+            tag_y = self.item_height - tag_h - 3;
         }
             break;
         default:
@@ -102,47 +80,23 @@
 
     CGFloat tag_w = 0;
     NSMutableArray *tag_temp = [NSMutableArray array];
-    for (NSInteger index  = 0; index < 2 ; index++) {
+    for (NSInteger index  = 0; index < item.feature.count ; index++) {
         
-        if (index >= item.feature.count) {
-            [tag_temp addObject:[NSValue valueWithCGRect:CGRectZero]];
-            continue;
-        }
+
         NSString *tag = item.feature[index];
         CGSize tag_size = [tag stringWithfontSize:self.tag_font_size];
         tag_w = (tag_size.width + 10);
-        switch (self.type) {
-            case HomeRoomIndexFlatTypeHorizontal:
-            {
-                tag_x -= tag_w;
-            }
-                break;
-            case HomeRoomIndexFlatTypeVertical:
-            {
-                
-            }
-                break;
-            default:
-                break;
+        if (self.type == HomeRoomIndexFlatTypeHorizontal) {
+            tag_x -= tag_w;
         }
-                
+        
         CGRect tag_f = CGRectMake(tag_x, tag_y, tag_w, tag_h);
         [tag_temp addObject:[NSValue valueWithCGRect:tag_f]];
-        switch (self.type) {
-            case HomeRoomIndexFlatTypeHorizontal:
-            {
-                tag_x -= 10;
-            }
-                break;
-            case HomeRoomIndexFlatTypeVertical:
-            {
-                
-            }
-                break;
-            default:{
-                tag_x += (tag_w + 10);
-            }
-                break;
+        
+        if (self.type == HomeRoomIndexFlatTypeHorizontal) {
+            tag_x -= 10;
+        }else{
+            tag_x += (tag_w + 10);
         }
         
     }
@@ -166,11 +120,6 @@
                 case HomeRoomIndexFlatTypeHorizontal:
                 {
                     price_y = self.item_height - price_h;
-                }
-                    break;
-                case HomeRoomIndexFlatTypeVertical:
-                {
-                    
                 }
                     break;
                 default:

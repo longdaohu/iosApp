@@ -27,7 +27,7 @@
 
 @interface HomeRoomVC ()
 @property(nonatomic,strong)RoomBannerView *eventCellView;
-@property(nonatomic,strong) HomeRoomIndexModel *roomModel;
+@property(nonatomic,strong)HomeRoomIndexModel *roomModel;
 
 @end
 
@@ -68,23 +68,22 @@
     };
     self.headerView = roomHeaderView;
     
-    // 51Room HttpApiClient_API_51ROOM 初始化
+    // HttpApiClient_API_51ROOM 初始化
     NSString * appKey = @"24964499";
     NSString * appSecret = @"8ec406d891d9ba9278a3ced8d8b13b39";
-//    [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
-    [[HttpsApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
+    HttpsApiClient_API_51ROOM *instance = [HttpsApiClient_API_51ROOM instance];
+    [instance setAppKeyAndAppSecret:appKey appSecret:appSecret];
     BOOL (^pVerifyCerts)(NSURLAuthenticationChallenge *x);
     pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler){
         return YES;
     };
-    [[[HttpsApiClient_API_51ROOM instance] client] setVerifyHttpsCert:pVerifyCerts];
-
+    [[instance client] setVerifyHttpsCert:pVerifyCerts];
 }
-
 
 - (void)toLoadView{
     
     [super toLoadView];
+    
     self.tableView.footerHeight = 250;
     WeakSelf
     self.tableView.actionBlock = ^{
@@ -92,7 +91,6 @@
     };
     
 }
-
 
 #pragma mark : UITableView
 
@@ -135,9 +133,10 @@ static NSString *identify = @"cell";
     }
     
     if (group.type == SectionGroupTypeRoomHomestay){
-        HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeRoomVerticalCell"];
+        
+        HomeRoomVerticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SectionGroupTypeRoomHomestay"];
         if (!cell) {
-            cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HomeRoomVerticalCell"];
+            cell = [[HomeRoomVerticalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"SectionGroupTypeRoomHomestay"];
         }
         cell.group = group;
         cell.actionBlock = ^(NSInteger index, id item) {
@@ -175,15 +174,16 @@ static NSString *identify = @"cell";
     WeakSelf
     [[HttpsApiClient_API_51ROOM instance] homepage:self.roomModel.country_code completionBlock:^(CACommonResponse *response) {
         NSString *status = [NSString stringWithFormat:@"%d",response.statusCode];
+        
         if (![status isEqualToString:@"200"]) {
-            if (!self.roomModel.current_roomFrameObj) {
-                
-                self.groups = nil;
-                [self toReLoadTable];
-                [self.tableView alertWithRoloadMessage:nil];
-                
+           
+            if (!weakSelf.roomModel.current_roomFrameObj) {
+                 weakSelf.groups = nil;
+                [weakSelf toReLoadTable];
+                [weakSelf.tableView alertWithRoloadMessage:nil];
             }
             return ;
+            
         }
         id result = [response.body KD_JSONObject];
         [weakSelf updateUIWithResponse:result];
@@ -209,16 +209,25 @@ static NSString *identify = @"cell";
 - (void)reLoadWithNewRoomData{
     
     [self.roomModel updateGroupData];
+    
     for (myofferGroupModel *group in self.roomModel.groups) {
-        if (group.type == SectionGroupTypeRoomHotActivity) {
-            if (self.roomModel.current_roomFrameObj.item.events.count == 0) break;
-            self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.roomModel.current_roomFrameObj.event_Section_Height);
-            NSArray *imageGroup = [self.roomModel.current_roomFrameObj.item.events valueForKey:@"img"];
-            [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:self.roomModel.current_roomFrameObj.event_item_size];
-            break;
+        
+        switch (group.type) {
+            case SectionGroupTypeRoomHotActivity:
+            {
+                if (self.roomModel.current_roomFrameObj.item.events.count > 0) {
+                    
+                    self.eventCellView.frame = CGRectMake(0, 0, XSCREEN_WIDTH, self.roomModel.current_roomFrameObj.event_Section_Height);
+                    NSArray *imageGroup = [self.roomModel.current_roomFrameObj.item.events valueForKey:@"img"];
+                    [self.eventCellView makeBannerWithImages:imageGroup   bannerSize:self.roomModel.current_roomFrameObj.event_item_size];
+                }
+            }
+                break;
+                
+            default:
+                break;
         }
     }
-
     self.groups = self.roomModel.groups;
     
     [self toReLoadTable];
@@ -316,7 +325,6 @@ static NSString *identify = @"cell";
     }
     
 }
-
 
 - (void)caseMoreCity{
     

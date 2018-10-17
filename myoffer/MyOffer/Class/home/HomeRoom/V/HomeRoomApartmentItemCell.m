@@ -12,10 +12,8 @@
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
-@property(nonatomic,strong)UILabel *tagLab;
-@property(nonatomic,strong)UILabel *wifiLab;
 @property(nonatomic,strong)UIButton *cityLab;
-@property(nonatomic,strong)NSArray *tags;
+@property(nonatomic,strong)NSMutableArray *tags;
 @end
 
 @implementation HomeRoomApartmentItemCell
@@ -56,61 +54,61 @@
         priceLab.textAlignment = NSTextAlignmentLeft;
         self.priceLab = priceLab;
         
-        UILabel *tagLab = [UILabel new];
-        tagLab.textColor = XCOLOR_WHITE;
-        tagLab.font = XFONT(9);
-        tagLab.backgroundColor = XCOLOR_LIGHTBLUE;
-        [self.contentView addSubview:tagLab];
-        self.tagLab = tagLab;
-        tagLab.textAlignment = NSTextAlignmentCenter;
-        tagLab.layer.cornerRadius = 2;
-        tagLab.layer.masksToBounds = YES;
-        
-        UILabel *wifiLab = [UILabel new];
-        wifiLab.textColor = XCOLOR_WHITE;
-        wifiLab.font = XFONT(9);
-        wifiLab.textAlignment = NSTextAlignmentCenter;
-        wifiLab.backgroundColor = XCOLOR_RED;
-        [self.contentView addSubview:wifiLab];
-        wifiLab.layer.cornerRadius = 2;
-        wifiLab.layer.masksToBounds = YES;
-        self.wifiLab = wifiLab;
-        
-        self.tags = @[tagLab,wifiLab];
-
+        for (NSInteger index = 0; index < 2; index++) {
+ 
+            UILabel *sender = [UILabel new];
+            sender.textColor = XCOLOR_WHITE;
+            sender.font = XFONT(9);
+            sender.textAlignment = NSTextAlignmentCenter;
+            sender.backgroundColor = index % 2 ? XCOLOR_RED :  XCOLOR_LIGHTBLUE;
+            sender.layer.cornerRadius = 2;
+            sender.layer.masksToBounds = YES;
+            
+            [self.contentView addSubview:sender];
+            [self.tags addObject:sender];
+        }
     }
     return self;
 }
 
+- (NSMutableArray *)tags{
+    if(!_tags){
+        _tags = [NSMutableArray array];
+    }
+    
+    return _tags;
+}
+
+- (void)makeTagViewWithFeature{
+ 
+    
+    for (NSInteger index  = 0;  index < self.tags.count ; index++) {
+        
+        UILabel *sender = self.tags[index];
+        if (index >= self.flatFrameObject.tag_frames.count) {
+            sender.hidden = YES;
+        }else{
+            sender.hidden = NO;
+            NSValue *value =  self.flatFrameObject.tag_frames[index];
+            NSString *title = self.flatFrameObject.item.feature[index];
+            sender.frame = value.CGRectValue;
+            sender.text = title;
+        }
+    }
+    
+}
+
 - (void)setFlatFrameObject:(HomeRoomIndexFlatFrameObject *)flatFrameObject{
     _flatFrameObject = flatFrameObject;
-    self.item = flatFrameObject.item;
     
     self.iconView.frame = flatFrameObject.icon_Frame;
     self.titleLab.frame = flatFrameObject.name_frame;
     self.priceLab.frame = flatFrameObject.price_frame;
     self.cityLab.frame = flatFrameObject.city_frame;
  
+    [self makeTagViewWithFeature];
     
-    if (flatFrameObject.item.feature.count > 0){
-        
-        NSValue *tagValue =  flatFrameObject.tag_frames.firstObject;
-        NSValue *wifiValue = flatFrameObject.tag_frames.lastObject;
-        self.tagLab.frame = tagValue.CGRectValue;
-        self.wifiLab.frame = wifiValue.CGRectValue;
-        self.tagLab.text = flatFrameObject.item.feature.firstObject;
-        self.wifiLab.text = flatFrameObject.item.feature.lastObject;
-        
-    }else{
-        self.tagLab.frame = CGRectZero;
-        self.wifiLab.frame = CGRectZero;
-    }
-}
-
-- (void)setItem:(HomeRoomIndexFlatsObject *)item{
-    
-    _item = item;
-    
+    HomeRoomIndexFlatsObject *item = flatFrameObject.item;
     UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:item.image];
     if (thumbnailImage) {
         self.iconView.image = thumbnailImage;
@@ -122,20 +120,8 @@
     self.titleLab.text = item.name;
     self.priceLab.attributedText = item.priceAttribue;
     [self.cityLab setTitle:item.city forState:UIControlStateNormal];
-    
-    if (item.feature.count >= 2){
-        self.wifiLab.text = item.feature.firstObject;
-        self.tagLab.text = item.feature.lastObject;
-    }
-    
-    if (item.feature.count == 1) {
-        self.tagLab.text = item.feature.firstObject;
-        self.wifiLab.text = @"";
-    }
- 
- }
 
-
+}
 
 
 @end
