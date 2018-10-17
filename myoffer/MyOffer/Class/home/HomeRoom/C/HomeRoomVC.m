@@ -35,10 +35,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //关于地图方面
-    //https://www.mapbox.com/ios-sdk/maps/overview/
-    //https://blog.csdn.net/zhengang007/article/details/79170558
-    //https://github.com/wangzhengang/MapboxExample/
     [self makeUI];
     [self makeData];
 }
@@ -75,7 +71,7 @@
     // 51Room HttpApiClient_API_51ROOM 初始化
     NSString * appKey = @"24964499";
     NSString * appSecret = @"8ec406d891d9ba9278a3ced8d8b13b39";
-    [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
+//    [[HttpApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
     [[HttpsApiClient_API_51ROOM instance] setAppKeyAndAppSecret:appKey appSecret:appSecret];
     BOOL (^pVerifyCerts)(NSURLAuthenticationChallenge *x);
     pVerifyCerts = ^(NSURLAuthenticationChallenge* certHandler){

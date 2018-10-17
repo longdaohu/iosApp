@@ -266,7 +266,7 @@
 }
 
 
-#pragma mark TKEduEnterClassRoomDelegate
+#pragma mark ================ TKEduEnterClassRoomDelegate ================
 //error.code  Description:error.description
 - (void) onEnterRoomFailed:(int)result Description:(NSString*)desc{
     TKLog(@"TKEduEnterClassRoomDelegate-----onEnterRoomFailed");

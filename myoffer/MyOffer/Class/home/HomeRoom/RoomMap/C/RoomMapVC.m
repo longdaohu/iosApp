@@ -50,7 +50,12 @@
     [self makeMapView];
     [self makeOtherView];
 }
-
+/**
+ 关于地图方面
+ https://www.mapbox.com/ios-sdk/maps/overview/
+ https://blog.csdn.net/zhengang007/article/details/79170558
+ https://github.com/wangzhengang/MapboxExample/
+ */
 - (void)makeMapView{
     
     NSURL *url = [NSURL URLWithString:@"mapbox://styles/mapbox/streets-v10"];
