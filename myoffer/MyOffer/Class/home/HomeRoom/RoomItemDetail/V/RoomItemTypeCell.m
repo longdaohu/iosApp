@@ -9,11 +9,11 @@
 #import "RoomItemTypeCell.h"
 
 @interface RoomItemTypeCell ()
-@property(nonatomic,strong)UIImageView *iconView;
-@property(nonatomic,strong)UILabel *titleLab;
+//@property(nonatomic,strong)UIImageView *iconView;
+//@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *priceLab;
 @property(nonatomic,strong)UILabel *unitLab;
-@property(nonatomic,strong)UIButton *pinLab;
+@property(nonatomic,strong)UIButton *tagLab;
 @property(nonatomic,strong)UIView *topLine;
 @end
 
@@ -25,18 +25,12 @@
     
     if (self) {
         
-        UIImageView *iconView = [UIImageView new];
-        iconView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.contentView addSubview:iconView];
-        self.iconView = iconView;
-        iconView.layer.cornerRadius = CORNER_RADIUS;
-        iconView.layer.masksToBounds = true;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.layer.cornerRadius = CORNER_RADIUS;
+        self.imageView.layer.masksToBounds = true;
         
-        UILabel *titleLab = [UILabel new];
-        self.titleLab = titleLab;
-        titleLab.textColor = XCOLOR_TITLE;
-        [self.contentView addSubview:titleLab];
-        titleLab.numberOfLines = 2;
+        self.textLabel.textColor = XCOLOR_TITLE;
+        self.textLabel.numberOfLines = 2;
 
         UILabel *priceLab = [UILabel new];
         self.priceLab = priceLab;
@@ -48,14 +42,14 @@
         unitLab.textColor = XCOLOR_TITLE;
         [self.contentView addSubview:unitLab];
         
-        UIButton *pinLab = [UIButton new];
-        self.pinLab = pinLab;
-        [pinLab setTitleColor:XCOLOR(255, 159, 0, 1)  forState:UIControlStateNormal];
-        [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR(255, 246, 217, 1)] forState:UIControlStateNormal];
-        [pinLab setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateDisabled];
-        [pinLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateDisabled];
-        [self.contentView addSubview:pinLab];
-        pinLab.layer.cornerRadius = 2;
+        UIButton *tagLab = [UIButton new];
+        self.tagLab = tagLab;
+        [tagLab setTitleColor:XCOLOR(255, 159, 0, 1)  forState:UIControlStateNormal];
+        [tagLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR(255, 246, 217, 1)] forState:UIControlStateNormal];
+        [tagLab setTitleColor:XCOLOR_SUBTITLE forState:UIControlStateDisabled];
+        [tagLab setBackgroundImage:[UIImage KD_imageWithColor:XCOLOR_BG] forState:UIControlStateDisabled];
+        [self.contentView addSubview:tagLab];
+        tagLab.layer.cornerRadius = 2;
         
         UIView *bottomLine = [UIView new];
         bottomLine.backgroundColor = XCOLOR_line;
@@ -71,27 +65,34 @@
     _itemFrameModel = itemFrameModel;
     
     RoomTypeItemModel *item = itemFrameModel.item;
-
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.pic] placeholderImage:[UIImage imageNamed:@"PlaceHolderImage"]];
-    self.titleLab.text = item.name;
+    
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:item.pic] placeholderImage:PLACE_HOLDER_IMAGE];
+    self.textLabel.text = item.name;
     self.priceLab.text = item.firstPrice.priceCurrency;
     self.unitLab.text = item.firstPrice.unit;
     NSString *title = item.firstPrice.currentState;
-    [self.pinLab setTitle:item.firstPrice.currentState forState:UIControlStateNormal];
-    self.pinLab.enabled = !item.firstPrice.state.boolValue;
-    self.pinLab.hidden = !title ? YES : NO;
-
-    self.iconView.frame = itemFrameModel.icon_frame;
-    self.titleLab.frame = itemFrameModel.title_frame;
-    self.priceLab.frame = itemFrameModel.price_frame;
-    self.unitLab.frame = itemFrameModel.unit_frame;
-    self.pinLab.frame = itemFrameModel.pin_frame;
-    self.topLine.frame = itemFrameModel.line_frame;
+    [self.tagLab setTitle:item.firstPrice.currentState forState:UIControlStateNormal];
+    self.tagLab.enabled = !item.firstPrice.state.boolValue;
+    self.tagLab.hidden = !title ? YES : NO;
     
-    self.titleLab.font = XFONT(itemFrameModel.title_font_size);
-    self.pinLab.titleLabel.font = XFONT(itemFrameModel.pin_font_size);
+    self.textLabel.font = XFONT(itemFrameModel.title_font_size);
+    self.tagLab.titleLabel.font = XFONT(itemFrameModel.pin_font_size);
     self.priceLab.font = [UIFont boldSystemFontOfSize:itemFrameModel.price_font_size];
     self.unitLab.font = XFONT(itemFrameModel.unit_font_size);
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    if (self.itemFrameModel) {
+        self.imageView.frame = self.itemFrameModel.icon_frame;
+        self.textLabel.frame = self.itemFrameModel.title_frame;
+        self.priceLab.frame = self.itemFrameModel.price_frame;
+        self.unitLab.frame = self.itemFrameModel.unit_frame;
+        self.tagLab.frame = self.itemFrameModel.pin_frame;
+        self.topLine.frame = self.itemFrameModel.line_frame;
+    }
+    
 }
 
 

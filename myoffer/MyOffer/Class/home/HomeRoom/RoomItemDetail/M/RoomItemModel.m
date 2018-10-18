@@ -41,12 +41,12 @@
     
     if (!_ameniti_arr) {
     
-        if (self.amenities.count > 0) {
+        if (self.amenities.count == 1) {
             NSString *tmp = self.amenities.firstObject;
             NSArray *items = [tmp componentsSeparatedByString:@"\r\n"];
             _ameniti_arr = items;
         }else{
-            _ameniti_arr = @[];
+            _ameniti_arr = self.amenities;
         }
     }
     

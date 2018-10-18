@@ -233,16 +233,24 @@
 //    app:jump/1/35
 //    app:jump/0/undefined
     
+    //邀请有礼
     NSString *absoluteString = navigationAction.request.URL.absoluteString;
     if ([absoluteString isEqualToString:@"myoffer://jump-from-share"]) {
         
-        [self caseShare];
+        [self caseShare]; //立即分享
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
     if ([absoluteString isEqualToString:@"myoffer://view-all"]) {
 
-        [self caseViewAll];
+        [self caseViewAll]; //查看全部
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+   
+    if ([absoluteString isEqualToString:@"myoffer://jump-from-recommend"]) {
+        
+        [self caseViewRecommend]; //我要推荐
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
@@ -587,17 +595,24 @@
     return [article_pre evaluateWithObject:path];
 }
 
-//分享
+//推荐有礼分享
 - (void)caseShare{
     
     [self.shareVC show];
 }
 
-//查看全部
+//推荐有礼：查看全部
 - (void)caseViewAll{
     
     InvitationRecordsVC *vc = [[InvitationRecordsVC alloc] init];
     PushToViewController(vc);
+}
+//推荐有礼：马上推荐
+- (void)caseViewRecommend{
+
+    NSString *path = [NSString stringWithFormat:@"https://www.myoffer.cn/ad/landing/38.html?accountId=%@",[MyofferUser defaultUser].user_id];
+    NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
+    [self.web_wk loadRequest:request];
 }
 
 -(void)dealloc

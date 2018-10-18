@@ -109,6 +109,7 @@
     [book setBackgroundImage:XImage(@"button_light_right_unable") forState:UIControlStateDisabled];
     book.titleLabel.font = XFONT(14);
     [footer addSubview:book];
+    book.enabled = NO;
     self.bookBtn = book;
     [book addTarget:self action:@selector(caseBook) forControlEvents:UIControlEventTouchUpInside];
     [book mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -320,13 +321,9 @@ static NSString *identify = @"cell";
     vc.actionBlock = ^{
         [weakSelf caseHome];
     };
-    
-    if ([self.navigationController isKindOfClass:[MyofferNavigationController class]]) {
-        MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:nil];
-    }else{
-        PushToViewController(vc);
-    }
+    MyOfferWhiteNV *nav = [[MyOfferWhiteNV alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+   
 }
 
 - (void)caseHome{

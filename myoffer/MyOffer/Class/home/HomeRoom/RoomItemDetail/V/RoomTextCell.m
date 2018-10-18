@@ -27,12 +27,8 @@
         self.top_line = line;
         [self.contentView addSubview:line];
         
-  
-        UILabel *titleLab = [UILabel new];
-        self.titleLab = titleLab;
-        [self.contentView addSubview:titleLab];
-        titleLab.textColor = XCOLOR_TITLE;
-        titleLab.numberOfLines = 0;
+        self.textLabel.textColor = XCOLOR_TITLE;
+        self.textLabel.numberOfLines = 0;
     }
     
     return  self;
@@ -40,7 +36,7 @@
 
 - (void)setItem:(NSString *)item{
     _item = item;
-    self.titleLab.text = item;
+    self.textLabel.text = item;
     
 }
 
@@ -50,16 +46,17 @@
     
     if (self.itemFrameModel) {
         
-        self.titleLab.font = XFONT(self.itemFrameModel.intro_font_size);
+        self.textLabel.font = XFONT(self.itemFrameModel.intro_font_size);
         self.top_line.frame = self.itemFrameModel.top_line_frame;
 
         if (self.group.type == SectionGroupTypeRoomDetailTypeIntroduction) {
-            self.titleLab.frame = self.itemFrameModel.intro_frame;
+            self.textLabel.frame = self.itemFrameModel.intro_frame;
         }
         if (self.group.type == SectionGroupTypeRoomDetailTypeProcess) {
-            self.titleLab.frame = self.itemFrameModel.process_frame;
+            self.textLabel.frame = self.itemFrameModel.process_frame;
         }
     }
 }
 
 @end
+

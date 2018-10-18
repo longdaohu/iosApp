@@ -37,9 +37,8 @@
     [super layoutSubviews];
     
     if (self.itemFrameModel) {
-        
          self.spodView.frame = self.itemFrameModel.promotion_spod_frame;
-         self.titleLab.frame = self.itemFrameModel.promotion_frame;
+         self.textLabel.frame = self.itemFrameModel.promotion_frame;
     }
 }
 

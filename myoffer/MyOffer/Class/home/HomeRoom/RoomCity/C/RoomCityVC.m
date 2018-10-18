@@ -13,6 +13,7 @@
 #import "HomeRoomSearchCountryView.h"
 #import "RoomCountryModel.h"
 #import "RoomSearchResultVC.h"
+#import "MyoffferAlertTableView.h"
 
 static const NSInteger UK_CODE = 0;
 static const NSInteger AU_CODE = 4;
@@ -21,7 +22,7 @@ static const NSInteger AU_CODE = 4;
 @property(nonatomic,strong)HomeRoomSearchCountryView *countryView;
 @property(nonatomic,strong)UIButton *countyBtn;
 @property(nonatomic,strong)RoomCountryModel *countryModel;
-@property(nonatomic,strong)MyOfferTableView *tableView;
+@property(nonatomic,strong)MyoffferAlertTableView *tableView;
 
 @end
 
@@ -92,14 +93,11 @@ static const NSInteger AU_CODE = 4;
 - (void)makeTableView
 {
     
-    self.tableView =[[MyOfferTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView =[[MyoffferAlertTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.tableFooterView =[[UIView alloc] init];
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
     self.tableView.estimatedRowHeight = 200;//很重要保障滑动流畅性
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight= UITableViewAutomaticDimension;
@@ -109,7 +107,8 @@ static const NSInteger AU_CODE = 4;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, XTabBarHeight, 0);
     [self.tableView setSectionIndexBackgroundColor: XCOLOR_CLEAR];
     [self.tableView setSectionIndexColor:XCOLOR_TITLE];
- 
+    self.tableView.backgroundColor = XCOLOR_BG;
+
 }
 
 #pragma mark :  UITableViewDelegate,UITableViewDataSource
@@ -182,11 +181,9 @@ static NSString *identify = @"RoomCityModel";
     NSString *country = (code == 0) ? KEY_UK : KEY_AU;
     WeakSelf
     [self cities:code showHUD:hub additionalSuccessAction:^(id response, int status) {
-        
         [weakSelf updateUIWithResponse:response country:country];
-        
     } additionalFailureAction:^(NSError *error, int status) {
-        
+        [weakSelf.tableView alertWithNetworkFailure];
     }];
 }
 
@@ -214,9 +211,9 @@ static NSString *identify = @"RoomCityModel";
     if ([self.countryModel.current  isEqualToString:country]){
         
         if (self.countryModel.group.count == 0) {
-            [self.tableView emptyViewWithError:NetRequest_NoDATA];
+            [self.tableView  alertWithNotDataMessage:nil];
         }else{
-            [self.tableView emptyViewWithHiden:YES];
+            [self.tableView alertViewHiden];
         }
         [self.tableView reloadData];
     }

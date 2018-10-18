@@ -32,16 +32,6 @@
     self.bookBtn.userInteractionEnabled = NO;
     
  }
-
-
-//- (IBAction)book:(UIButton *)sender {
-//
-//    if (self.actionBlock) {
-//        self.actionBlock(self.item.roomtype_id);
-//    }
-//}
-
-
 - (void)setItem:(RoomTypeBookItemModel *)item{
     _item = item;
     

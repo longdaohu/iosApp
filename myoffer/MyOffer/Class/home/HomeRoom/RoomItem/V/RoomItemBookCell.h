@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RoomTypeBookItemModel.h"
 @interface RoomItemBookCell : UITableViewCell
-//@property(nonatomic,copy)NSString *title;
 @property(nonatomic,strong)RoomTypeBookItemModel *item;
-
-//@property(nonatomic,copy)void(^actionBlock)(NSString *item_id);
 
 @end

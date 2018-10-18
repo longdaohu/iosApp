@@ -46,7 +46,7 @@
         self.bgView = collectionView;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"item"];
         collectionView.showsHorizontalScrollIndicator = NO;
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+//        collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         
         UIView *line = [UIView new];
         line.backgroundColor = XCOLOR_line;
