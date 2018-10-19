@@ -8,6 +8,7 @@
 
 #import "BangViewController.h"
 #import "PhoneBeenViewController.h"
+#import "MyOfferNotMenuTextField.h"
 #define  Bang_FontSize 16
 #define  Time_Count 60
 
@@ -116,7 +117,7 @@
     areaBgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     
     
-    XTextField *areaFT = [[XTextField alloc] initWithFrame:CGRectMake(0, 10, areaW, 30)];
+    MyOfferNotMenuTextField *areaFT = [[MyOfferNotMenuTextField alloc] initWithFrame:CGRectMake(0, 10, areaW, 30)];
     [areaBgView addSubview:areaFT];
     areaFT.text = @"中国(+86)";
     [self leftViewWithView:areaFT];

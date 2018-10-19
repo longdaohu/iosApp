@@ -7,7 +7,7 @@
 //
 
 #import "SMDetailHeaderView.h"
-#import "myofferTextView.h"
+#import "MyOfferNotMenuTextView.h"
 #import <CoreText/CoreText.h>
 
 @interface SMDetailHeaderView ()<UITextViewDelegate>
@@ -20,7 +20,7 @@
 @property(nonatomic,strong)UIImageView *headView;
 @property(nonatomic,strong)UILabel *nameLab;
 @property(nonatomic,strong)UILabel *uni_Lab;
-@property(nonatomic,strong)myofferTextView *gest_Lab;
+@property(nonatomic,strong)MyOfferNotMenuTextView *gest_Lab;
 @property(nonatomic,strong)UIView *bottomView;
 
 @end
@@ -100,11 +100,10 @@
     uni_Lab.textColor = XCOLOR_SUBTITLE;
 
     //9 用户介绍
-    myofferTextView *gest_Lab = [myofferTextView new];
+    MyOfferNotMenuTextView *gest_Lab = [MyOfferNotMenuTextView new];
     self.gest_Lab = gest_Lab;
     gest_Lab.editable = NO;//不可编辑
     gest_Lab.scrollEnabled = NO;//不可滚动
-//    gest_Lab.userInteractionEnabled = NO;
     gest_Lab.textContainerInset = UIEdgeInsetsMake(0, -5, 0, 0);//设置页边距
     gest_Lab.font = [UIFont systemFontOfSize:12];
     [self addSubview:gest_Lab];

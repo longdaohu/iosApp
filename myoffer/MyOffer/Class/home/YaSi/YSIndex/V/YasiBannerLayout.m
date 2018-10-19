@@ -15,8 +15,8 @@
     self = [super init];
     if (self) {
         self.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
-        self.minimumLineSpacing = 10;
-        self.minimumInteritemSpacing = 10;
+        self.minimumLineSpacing = 0;
+        self.zoom_mini = 0.2;
     }
     return self;
 }
@@ -30,39 +30,47 @@
     [super prepareLayout];
     
 }
+
+- (void)setZoom_mini:(CGFloat)zoom_mini{
+    _zoom_mini = zoom_mini;
+    
+    if (zoom_mini >= 1) {
+        self.zoom_mini = 0.2;
+    }
+}
+
 //设置放大动画
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *items = [self deepCopyWithArray:[super layoutAttributesForElementsInRect:rect]];
-    //屏幕中线
-    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.bounds.size.width/2.0f;
-    //刷新cell缩放
-    for (UICollectionViewLayoutAttributes *item in items) {
-        CGFloat distance = fabs(item.center.x - centerX);
-        //移动的距离和屏幕宽度的的比例
-        CGFloat apartScale = distance/self.collectionView.bounds.size.width;
-        //把卡片移动范围固定到 -π/4到 +π/4这一个范围内
-        CGFloat scale = fabs(cos(apartScale * M_PI/4));
-        //设置cell的缩放 按照余弦函数曲线 越居中越趋近于1
-        CGAffineTransform scale_tr = CGAffineTransformMakeScale(1, scale);
-        //        CGAffineTransform tran_tr = CGAffineTransformMakeTranslation(0, item.size.height * (1-scale) * 0.5);
-        item.transform =  scale_tr;//CGAffineTransformConcat(scale_tr, tran_tr);
+    NSArray *array = [super layoutAttributesForElementsInRect:rect];
+    //当前显示的视图位置
+    CGRect visibleRect;
+    visibleRect.origin = self.collectionView.contentOffset;
+    visibleRect.size = self.collectionView.bounds.size;
+    
+    NSMutableArray *attArray = [[NSMutableArray alloc] init];
+    
+    for (UICollectionViewLayoutAttributes *attributes in array) {
         
+        UICollectionViewLayoutAttributes *att = [attributes copy];
+        if ( CGRectIntersectsRect(attributes.frame, rect)) {
+            //cell中心距屏幕中心距离
+            CGFloat distance = CGRectGetMidX(visibleRect)-att.center.x;
+            distance = ABS(distance);
+            //判断,cell是否居中
+            CGFloat zoom  = 1 - (self.zoom_mini) * (distance / XSCREEN_WIDTH * 0.5);
+//            NSLog(@" zoom == %lf   distance = %lf ",zoom,distance);
+            if (distance < (XSCREEN_WIDTH * 0.5 + self.itemSize.width)) {
+                //居中就放大 zoom比例
+                att.transform3D = CATransform3DMakeScale(zoom, zoom, 1.0);
+                
+            }
+        }
+        [attArray addObject:att];
     }
     
-    return items;
-}
-- (NSArray *)deepCopyWithArray:(NSArray *)arr {
+    return attArray;
     
-    NSMutableArray *arrM = [NSMutableArray array];
-    
-    for (UICollectionViewLayoutAttributes *attr in arr) {
-        
-        [arrM addObject:[attr copy]];
-        
-    }
-    
-    return arrM;
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {

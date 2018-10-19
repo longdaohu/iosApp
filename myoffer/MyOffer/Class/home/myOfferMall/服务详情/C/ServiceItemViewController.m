@@ -12,7 +12,7 @@
 #import "ServiceItemHeaderView.h"
 #import "UniversityNavView.h"
 #import "ServiceItemBottomView.h"
-#import "myofferFlexibleView.h"
+#import "MyOfferFlexibleView.h"
 #import "HomeSectionHeaderView.h"
 #import "CreateOrderVC.h"
 #import "serviceProtocolVC.h"
@@ -22,7 +22,7 @@
 @property(nonatomic,strong)WKWebView *web_wk;//显示内容信息 webView
 @property(nonatomic,strong)MyOfferTableView *tableView;
 @property(nonatomic,strong) ServiceItemHeaderView *headerView;
-@property(nonatomic,strong)myofferFlexibleView *flexView;//顶部下拉图片
+@property(nonatomic,strong)MyOfferFlexibleView *flexView;//顶部下拉图片
 @property(nonatomic,strong)UniversityNavView *topNavigationView;//顶部导航View
 @property(nonatomic,strong)ServiceItemBottomView *bottomView;//底部View
 @property(nonatomic,strong)serviceProtocolVC *protocalVC;//显示协议
@@ -101,7 +101,7 @@
     
     UIImage *FlexibleImg = XImage(@"service-info-bg");
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
+    MyOfferFlexibleView *flexView = [MyOfferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
     flexView.image_name = @"service-info-bg";

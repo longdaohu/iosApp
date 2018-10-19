@@ -22,7 +22,7 @@
 
 #define  CELL_CL_HEIGHT  XSCREEN_HEIGHT
 #define  CELL_CL_WIDTH  XSCREEN_WIDTH
-#define  ADKEY @"Advertiseaaa"
+#define  ADKEY @"Advertiseeeeeeeeeeeeeee"
 
 @interface HomeIndexVC ()<UIScrollViewDelegate>
 @property(nonatomic,strong)CatigaryScrollView *bgScrollView;
@@ -87,7 +87,7 @@
     [self makeUI];
     
     [self makeOther];
- 
+    
 }
 
 - (void)makeUI{
@@ -253,8 +253,8 @@
         [application toSetTabBarhidden];
         
     }else if (indexModel.type == HomeIndexType51Room){
-//        HomeFeeVC *room = (HomeFeeVC *)vc;
-                HomeRoomVC *room = (HomeRoomVC *)vc;
+
+        HomeRoomVC *room = (HomeRoomVC *)vc;
         [room toSetTabBarhidden];
         
     }else if (indexModel.type == HomeIndexTypeYasi){
@@ -390,7 +390,7 @@
 - (void)makeIDFA{
     
     NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    NSString  *path = @"POST  https://api.myofferdemo.com/api/v1/idfa";
+    NSString  *path = [NSString stringWithFormat:@"POST %@api/v1/idfa",DOMAINURL_API];
     [self startAPIRequestWithSelector:path  parameters:@{@"idfa":adId} expectedStatusCodes:nil showHUD:NO showErrorAlert:NO errorAlertDismissAction:^{
     } additionalSuccessAction:^(NSInteger statusCode, id response) {
         if (ResponseIsOK) {

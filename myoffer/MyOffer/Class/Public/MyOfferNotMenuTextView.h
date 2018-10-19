@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface myofferTextView : UITextView
+@interface MyOfferNotMenuTextView : UITextView
 
 @end

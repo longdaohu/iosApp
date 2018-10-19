@@ -15,7 +15,7 @@
 #import "EmallCatigroyHeaderView.h"
 #import "EmallCatigoryGroup.h"
 #import "EmallCatigroySectionView.h"
-#import "myofferFlexibleView.h"
+#import "MyOfferFlexibleView.h"
 #import "MeiqiaServiceCall.h"
 
 @interface EmallCatigoryViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -24,7 +24,7 @@
 @property(nonatomic,strong)NSArray *groups;
 @property(nonatomic,copy)NSString *current_Service;
 @property(nonatomic,strong)NSArray *current_frames;
-@property(nonatomic,strong)myofferFlexibleView *flexView;
+@property(nonatomic,strong)MyOfferFlexibleView *flexView;
 @property(nonatomic,strong)EmallCatigroySectionView *banView;
 @property(nonatomic,assign)CGRect banViewFrame;
 @property(nonatomic,assign)BOOL login_status;
@@ -142,7 +142,7 @@
     
     UIImage *FlexibleImg = XImage(contry_img);
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
+    MyOfferFlexibleView *flexView = [MyOfferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
     flexView.image_name = contry_img;

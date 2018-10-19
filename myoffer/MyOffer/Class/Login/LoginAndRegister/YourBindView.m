@@ -7,6 +7,8 @@
 //
 
 #import "YourBindView.h"
+#import "MyOfferNotMenuTextField.h"
+
 @interface  YourBindView ()
 @property (strong, nonatomic)  UIView *LineOne;
 @property (strong, nonatomic)  UIView *LineTwo;
@@ -62,7 +64,7 @@
 
 -(UITextField *)makeTextFieldWithPlaceholder:(NSString *)placeholder
 {
-    XTextField *TextF =[[XTextField alloc] init];
+    MyOfferNotMenuTextField *TextF =[[MyOfferNotMenuTextField alloc] init];
     TextF.borderStyle = UITextBorderStyleNone;
     TextF.placeholder = placeholder;
     [self.bgView addSubview:TextF];

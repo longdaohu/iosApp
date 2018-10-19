@@ -9,6 +9,7 @@
 #import "HomeRecommendProdoctView.h"
 #import "HomeSingleImageCell.h"
 #import "ServiceSKU.h"
+//#import "YasiBannerLayout.h"
 
 @interface  HomeRecommendProdoctView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *bgView;
@@ -31,13 +32,11 @@
 - (void)makeUI{
     
     self.backgroundColor = XCOLOR_WHITE;
-    
+
     HomeCommoditieLayout *layout = [[HomeCommoditieLayout alloc] init];
     CGFloat item_h = self.bounds.size.height - 10;
     CGFloat item_w =  224 * item_h/150;
     layout.itemSize = CGSizeMake(item_w, item_h);
-    layout.minimumLineSpacing = 10;
-    layout.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
     self.bgView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     self.bgView.dataSource = self;
     self.bgView.delegate = self;
@@ -96,6 +95,16 @@
 
 @implementation HomeCommoditieLayout
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.scrollDirection =  UICollectionViewScrollDirectionHorizontal;
+        self.minimumLineSpacing = 0;
+    }
+    return self;
+}
+
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds{
     
     return YES;
@@ -117,12 +126,13 @@
         //移动的距离和屏幕宽度的的比例
         CGFloat apartScale = distance/self.collectionView.bounds.size.width;
         //把卡片移动范围固定到 -π/4到 +π/4这一个范围内
-        CGFloat scale = fabs(cos(apartScale * M_PI/3));
+        CGFloat zoom = fabs(cos(apartScale * M_PI/3));
         //设置cell的缩放 按照余弦函数曲线 越居中越趋近于1
-        CGAffineTransform scale_tr = CGAffineTransformMakeScale(1, scale);
-        CGAffineTransform tran_tr = CGAffineTransformMakeTranslation(0, item.size.height * (1-scale) * 0.5);
-        item.transform =  CGAffineTransformConcat(scale_tr, tran_tr);
-        
+//        CGAffineTransform scale_tr = CGAffineTransformMakeScale(1, scale);
+//        CGAffineTransform tran_tr = CGAffineTransformMakeTranslation(0, item.size.height * (1-scale) * 0.5);
+//        item.transform =  CGAffineTransformConcat(scale_tr, tran_tr);
+        item.transform3D = CATransform3DMakeScale(zoom, zoom, 1.0);
+
     }
     
     return items;

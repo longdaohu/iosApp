@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface YasiBannerLayout : UICollectionViewFlowLayout
+@property(nonatomic,assign)CGFloat zoom_mini;
 
 @end

@@ -153,7 +153,6 @@
 #import <UMShare/UMShare.h>
 
 #import "JPUSHService.h"
-#import "XTextField.h"
 #import "UILabel+extention.h"
 #import "UIView+Extension.h"
 #import "LeftBarButtonItemView.h"

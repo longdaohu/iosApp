@@ -7,6 +7,8 @@
 //
 #import "BindPhoneViewController.h"
 #import "ChangePasswordViewController.h"
+#import "MyOfferNotMenuTextField.h"
+
 @interface BindPhoneViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate> {
     NSArray *_cells;
     UITextField *_AreaCodeTextField, *_PhoneTextField, *_VertificationTextField, *_PasswordTextField;
@@ -91,7 +93,7 @@
         UITableViewCell *cell = [self cellDefault];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        _AreaCodeTextField = [[XTextField alloc] init];
+        _AreaCodeTextField = [[MyOfferNotMenuTextField alloc] init];
         _AreaCodeTextField.text = @"中国(+86)";
         _AreaCodeTextField.inputView = self.piker;
         [cell addSubview:_AreaCodeTextField];

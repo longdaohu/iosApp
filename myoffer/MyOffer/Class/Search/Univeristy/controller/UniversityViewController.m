@@ -28,7 +28,7 @@
 #import "UniversityheaderCenterView.h"
 #import "IntelligentResultViewController.h"
 #import "WYLXViewController.h"
-#import "myofferFlexibleView.h"
+#import "MyOfferFlexibleView.h"
 
 typedef enum {
     UniversityItemTyDeFault,
@@ -52,7 +52,7 @@ typedef enum {
 @property(nonatomic,strong)UniversityFooterView *footer;//底部按钮
 @property(nonatomic,strong)NSNumber *user_level;//用于记录用户入学难易程度
 @property(nonatomic,assign)BOOL FromPipei;//是否来自匹配页面
-@property(nonatomic,strong)myofferFlexibleView *flexView;//头部图片
+@property(nonatomic,strong)MyOfferFlexibleView *flexView;//头部图片
 
 @end
 
@@ -349,7 +349,7 @@ typedef enum {
    
     UIImage *FlexibleImg = XImage(@"Uni-au");
     CGFloat iconHeight =  XSCREEN_WIDTH * FlexibleImg.size.height / FlexibleImg.size.width;
-    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
+    MyOfferFlexibleView *flexView = [MyOfferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,iconHeight)];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
     

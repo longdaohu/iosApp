@@ -6,9 +6,9 @@
 //  Copyright © 2017年 UVIC. All rights reserved.
 //
 
-#import "myofferTextView.h"
+#import "MyOfferNotMenuTextView.h"
 
-@implementation myofferTextView
+@implementation MyOfferNotMenuTextView
 
 -(BOOL)canPerformAction:(SEL)action withSender:(id)sender {
    

@@ -12,13 +12,13 @@
 #import "MessageCell.h"
 #import "MessageDetaillViewController.h"
 #import "UniversityNavView.h"
-#import "myofferFlexibleView.h"
+#import "MyOfferFlexibleView.h"
 
 
 @interface MessageTopicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UniversityNavView *topNavigationView;
-@property(nonatomic,strong)myofferFlexibleView *flexView;
+@property(nonatomic,strong)MyOfferFlexibleView *flexView;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)NSMutableArray *messageFrames;
 
@@ -158,7 +158,7 @@
 //头部下拉图片
 - (void)makeFlexiableView{
     
-    myofferFlexibleView *flexView = [myofferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f))];
+    MyOfferFlexibleView *flexView = [MyOfferFlexibleView flexibleViewWithFrame:CGRectMake(0, 0, XSCREEN_WIDTH,AdjustF(200.f))];
     [self.view insertSubview:flexView belowSubview:self.tableView];
     self.flexView = flexView;
     flexView.alpha = 0.1;

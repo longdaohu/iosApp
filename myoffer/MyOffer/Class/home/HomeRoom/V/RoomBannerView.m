@@ -134,11 +134,7 @@
     
     NSInteger maxIndex = [self.bannerView numberOfItemsInSection:0] - 1;
     self.currentIndex = _currentIndex <= 0 ? 0 : self.currentIndex;
-    //    self.currentIndex = _currentIndex >= maxIndex ? maxIndex : self.currentIndex;
-    if (self.currentIndex > maxIndex) {
-        self.currentIndex = 0;
-    }
-    
+    self.currentIndex = _currentIndex >= maxIndex ? maxIndex : self.currentIndex;
     [self.bannerView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
     self.pageControl.currentPage = self.currentIndex;
@@ -165,7 +161,10 @@
 - (void)caseBannerTimer{
     
     self.dragStartX = self.bannerView.mj_offsetX;
-    self.dragEndX = (self.bannerView.mj_offsetX + 50);
+    self.dragEndX = (self.bannerView.mj_offsetX + 10);
+    if ((self.dragEndX + self.bannerView.mj_w) > self.bannerView.contentSize.width) {
+        self.dragEndX = 0;
+    }
     [self fixCellToCenter];
 }
 

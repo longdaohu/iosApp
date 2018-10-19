@@ -247,13 +247,6 @@
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
-   
-    if ([absoluteString isEqualToString:@"myoffer://jump-from-recommend"]) {
-        
-        [self caseViewRecommend]; //我要推荐
-        decisionHandler(WKNavigationActionPolicyCancel);
-        return;
-    }
     
     //通知内在网页跳转
     NSString *pre_str = @"app:jump/openURL/";
@@ -606,13 +599,6 @@
     
     InvitationRecordsVC *vc = [[InvitationRecordsVC alloc] init];
     PushToViewController(vc);
-}
-//推荐有礼：马上推荐
-- (void)caseViewRecommend{
-
-    NSString *path = [NSString stringWithFormat:@"https://www.myoffer.cn/ad/landing/38.html?accountId=%@",[MyofferUser defaultUser].user_id];
-    NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
-    [self.web_wk loadRequest:request];
 }
 
 -(void)dealloc

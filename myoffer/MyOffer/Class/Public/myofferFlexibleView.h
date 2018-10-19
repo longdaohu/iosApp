@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^flexViewBlock)(CGFloat image_hight);
-@interface myofferFlexibleView : UIView
-
+@interface MyOfferFlexibleView : UIView
 @property(nonatomic,copy)NSString *image_url;
 @property(nonatomic,copy)NSString *image_name;
 @property(nonatomic,strong)UIImageView *coverView;
-
 
 + (instancetype)flexibleViewWithFrame:(CGRect)frame;
 
